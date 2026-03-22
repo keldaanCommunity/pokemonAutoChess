@@ -9729,7 +9729,7 @@ export class Seel extends Pokemon {
   speed = 47
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true
@@ -9744,7 +9744,7 @@ export class Dewgong extends Pokemon {
   speed = 47
   def = 8
   speDef = 8
-  maxPP = 90
+  maxPP = 100
   range = 1
   skill = Ability.AURORA_BEAM
   additional = true

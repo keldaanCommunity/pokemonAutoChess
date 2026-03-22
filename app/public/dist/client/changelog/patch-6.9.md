@@ -62,6 +62,7 @@
 - Buff Mawile: Attack 16 → 18
 - Buff Alcremie line: PP 80 → 70
 - Revert Horsea buff from 6.3: Attack 6/12/24 → 6/11/21
+- Nerf Seel line: PP 90 → 100
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
@@ -93,7 +94,7 @@
 
 ## Scarves
 
-> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. Individual items winrate also evolved a lot during the patch, with players finding out new strong interactions and counterplays. This instability makes balancing difficult, so for now we're focusing on the nerfing the most popular scarves to increase variety. Big Eater Belt change was very popular but also brought many quirks we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
+> We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. Individual items winrate also evolved a lot during the patch, with players finding out new strong interactions and counterplays. This instability makes balancing difficult, so for now we're focusing on nerfing the most popular scarves to increase variety. Big Eater Belt change was very popular but also brought many quirks we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
 
 - Nerf Mach Ribbon: 20 → 15 speed every 3 seconds
 - Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
@@ -137,6 +138,7 @@
 
 - Abilities that do not require a target can now be casted even when the caster is not currently targeting an enemy. Here are the affected abilities: Agility, Anchor Shot, Aqua Ring, Astral Barrage, Attract, Aurora Veil, Axe Kick, Baneful Bunker, Beat Up, Bone Armor, Bounce, Bulk Up, Chain Crazed, Chatter, Column Crush, Cosmic Power (Moon), Cosmic Power (Sun), Curse, Dark Harvest, Decorate, Defense Curl, Dive, Echo, Electric Surge, Electrify, Eruption, Expanding Force, Fairy Wind, Fly, Flying Press, Forecast, Future Sight, Geomancy, Grassy Surge, Gravity, Growth, Happy Hour, Harden, Helping Hand, Hidden Power (all), Hypnosis, Icicle Missile, Lunar Blessing, Lunge, Magic Bounce, Magnet Pull, Meditate, Misty Surge, Mud Bubble, Nasty Plot, Natural Gift, Nightmare, Nutrients, Pastel Veil, Petal Dance, Pollen Puff, Psychic Surge, Purify, Quiver Dance, Recover, Relic Song, Roar of Time, Rock Artillery, Roost, Shadow Force, Shadow Punch, Shed Tail, Shields Down, Shields Up, Shore Up, Sing, Sky Attack, Slack Off, Smokescreen, Soft Boiled, Song of Desire, Spicy Extract, Splash, Stone Edge, Sunsteel Strike, Supercell Slam, Syrup Bomb, Tailwind, Take Heart, Teatime, Teeter Dance, Teleport, Terrain Pulse, Thousand Arrows, Thrash, Thunder, Time Travel, Torch Song, Torment, Triple Dive, Unbound, Victory Dance, Volt Surge, Waterfall, Wise Yawn, Wish, Yawn.
 - Stage 19 Pve Rewards changed to 2 components instead of a fully craftable item
+- Hard CC cooldown raised from 1 to 1.5 seconds (FREEZE, SLEEP, LOCKED)
 
 # Misc
 
