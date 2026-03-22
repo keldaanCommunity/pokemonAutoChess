@@ -67,7 +67,7 @@ export abstract class EvolutionRule {
         pokemonEvolved.passive !== Passive.COSMOG &&
         pokemonEvolved.passive !== Passive.COSMOEM
       ) {
-        pokemon.addMaxHP(10, player)
+        pokemon.addMaxHP(10)
         pokemon.stacks++
         pokemon.evolutionRule.tryEvolve(pokemon, player, stageLevel)
       }

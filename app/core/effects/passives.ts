@@ -1439,11 +1439,11 @@ export const PassiveEffects: Partial<
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
-        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15, player)
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15)
         removeInArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {
-        pokemon.addMaxHP(30, player)
+        pokemon.addMaxHP(30)
         player.items.push(Item.TRASH)
         removeInArray(player.items, item)
         return false
