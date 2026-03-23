@@ -563,7 +563,10 @@
 		"FEATHER_DANCE": "羽毛舞",
 		"GLACIAL_LANCE": "雪矛",
 		"ORDER_UP": "上菜",
-		"ICE_SPINNER": "冰旋"
+		"ICE_SPINNER": "冰旋",
+		"CEASELESS_EDGE": "秘剑・千重涛",
+		"MOUNTAIN_GALE": "冰山风",
+		"TWINEEDLE": "双针"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1081,6 +1084,7 @@
 		"OSHAWOTT": "水水獭",
 		"DEWOTT": "双刃丸",
 		"SAMUROTT": "大剑鬼",
+		"HISUI_SAMUROTT": "洗翠大剑鬼",
 		"SNOM": "雪吞虫",
 		"FROSMOTH": "雪绒蛾",
 		"WAILMER": "吼吼鲸",
@@ -1734,7 +1738,12 @@
 		"TATSUGIRI_DROOPY": "米立龙（下垂姿势）",
 		"TATSUGIRI_STRETCHY": "米立龙（平挺姿势）",
 		"CETODDLE": "走鲸",
-		"CETITAN": "浩大鲸"
+		"CETITAN": "浩大鲸",
+		"BERGMITE": "冰宝",
+		"AVALUGG": "冰岩怪",
+		"HISUI_AVALUGG": "洗翠冰岩怪",
+		"KARRABLAST": "盖盖虫",
+		"ESCAVALIER": "骑士蜗牛"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2277,7 +2286,10 @@
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
 		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
 		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。",
-		"ICE_SPINNER": "脚上覆盖薄冰，旋转着撞击ADJACENT敌方宝可梦，对他们造成[15,30,60,SP]点SPECIAL并将它们击退。清除ADJACENT格子上的BOARD_EFFECT。"
+		"ICE_SPINNER": "脚上覆盖薄冰，旋转着撞击ADJACENT敌方宝可梦，对他们造成[15,30,60,SP]点SPECIAL并将它们击退。清除ADJACENT格子上的BOARD_EFFECT。",
+		"CEASELESS_EDGE": "攻击使用者前方的3只敌方宝可梦，造成[20,40,80,SP]点SPECIAL，并在他们的脚下留下菱刺。该招式可以暴击。BOARD_EFFECT：菱刺对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
+		"MOUNTAIN_GALE": "将[1,3]块冰山般巨大的冰块随机砸向目标或ADJACENT敌方宝可梦，每块冰块使其陷入FLINCH 3秒，随后对其造成[40,SP]点SPECIAL。若使用者背上有冰宝，这些冰宝也会一起砸向敌方宝可梦并造成等量伤害。",
+		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2630,6 +2642,7 @@
 		"COMET_SHARD": "彗星碎片",
 		"REPEAT_BALL": "重复球",
 		"GOLD_BOW": "金色蝴蝶结",
+		"RED_SCALE": "红色鳞片",
 		"DAMP_ROCK": "潮湿岩石",
 		"ICY_ROCK": "冰冷岩石",
 		"SUN_STONE": "日之石",
@@ -2933,6 +2946,7 @@
 		"COMET_SHARD": "战斗开始时获得PROTECT 2秒，并像陨石一般撞到场地对面的一只敌方宝可梦的位置，对其造成SPECIAL，数值相当于300%的ATK，同时对ADJACENT敌方宝可梦造成SPECIAL，数值相当于100%的ATK。",
 		"REPEAT_BALL": "每刷新2次商店，提升1点SPEED并获得2点SHIELD。此外，每次花费GOLD刷新商店后，获得1次免费刷新次数。大量刷新商店后，可能会刷出强大的宝可梦。",
 		"GOLD_BOW": "携带者不计入出战区宝可梦数量上限。",
+		"RED_SCALE": "每轮额外获得5 GOLD",
 		"DAMP_ROCK": "计为3只生成RAIN所需的宝可梦。在RAIN中，我方所有宝可梦每秒还会额外恢复2点PP。",
 		"ICY_ROCK": "计为3只生成SNOW所需的宝可梦。在SNOW中，我方所有宝可梦解除FREEZE耗时减少20%，且攻击使敌方宝可梦陷入FREEZE的概率提升[5,LK]%。",
 		"SUN_STONE": "计为3只生成ZENITH所需的宝可梦。在ZENITH中, 我方所有宝可梦每2秒恢复5点HP，且攻击使敌方宝可梦陷入BURN的概率提升5%。",
@@ -3303,7 +3317,8 @@
 		"SPEWPA": "孵化宝可梦每5轮自动进化一次。此宝可梦会根据下列共鸣中等级最高者决定进化形态： SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
 		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。",
-		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED"
+		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED",
+		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -4649,6 +4664,7 @@
 	"rewards": "奖励",
 	"shiny_chance": "闪光概率",
 	"shiny_magikarp_description": "闪光鲤鱼王被击倒时会掉落10 GOLD",
+	"shiny_gyarados_description": "闪光暴鲤龙被击倒时会掉落RED_SCALE",
 	"shiny_pve_description": "通过闪光野生宝可梦轮次时可以从3个随机闪光道具中选择一个作为奖励",
 	"carousel_description": "在道具轮盘回合，你可以为你的队伍选择道具。轮盘中的道具从可用道具池中随机选择。",
 	"item_pool": "道具池",
