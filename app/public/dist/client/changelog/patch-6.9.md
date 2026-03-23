@@ -118,6 +118,9 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 > Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
 
 - Buff NUTRITIOUS_EGG: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
+- Nerf Tiny Mushroom: Speed 40 → 30, HP decrease 20% → 30%
+- Nerf Balm Mushroom: Speed 40 → 30
+- Nerf Lechonk Mushrooms odds: Big Mushroom 25% → 20%, Balm Mushroom 5% → 3%
 
 ## Town Items
 

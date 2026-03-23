@@ -100,7 +100,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BALM_MUSHROOM: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(30000, entity, entity)
-      entity.addSpeed(40, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
       entity.effects.add(EffectEnum.BALM_MUSHROOM)
       entity.effectsSet.add(
         new PeriodicEffect(
@@ -382,8 +382,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   TINY_MUSHROOM: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(-0.2 * entity.baseHP, entity, 0, false)
-      entity.addSpeed(40, entity, 0, false)
+      entity.addMaxHP(-0.3 * entity.baseHP, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     })
   ],
   WHIPPED_DREAM: [

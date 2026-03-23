@@ -369,9 +369,9 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
         { length: nbDishes },
         () =>
           randomWeighted({
-            [Item.TINY_MUSHROOM]: 70,
-            [Item.BIG_MUSHROOM]: 25,
-            [Item.BALM_MUSHROOM]: 5
+            [Item.TINY_MUSHROOM]: 77,
+            [Item.BIG_MUSHROOM]: 20,
+            [Item.BALM_MUSHROOM]: 3
           }) ?? Item.TINY_MUSHROOM
       )
     }
