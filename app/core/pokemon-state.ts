@@ -159,7 +159,7 @@ export default abstract class PokemonState {
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [15, 30, 60][pokemon.stars - 1] *
+          [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? pokemon.critPower : 1)
         )
