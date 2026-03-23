@@ -27,6 +27,8 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Avalugg
 - Karrablast
 - Escavalier
+- Eiscue (Ice Face Form)
+- Eiscue (Noice Form)
 
 # Changes to Synergies
 
