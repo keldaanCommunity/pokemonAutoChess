@@ -57,6 +57,8 @@ export function NotificationModal({
         return t("notification.elo_rank_change_title")
       case "victory_road_finished":
         return t("notification.victory_road_finished_title")
+      case "expedition_completed":
+        return t("notification.expedition_completed_title")
       case "tournament_finished":
         if (notification.message === "1") {
           return t("notification.tournament_win_title")
@@ -89,6 +91,14 @@ export function NotificationModal({
         return t("notification.victory_road_finished_message", {
           place: getRankLabel(Number(notification.message))
         })
+      case "expedition_completed": {
+        const [expeditionType, rank, points] = notification.message.split("|")
+        return t("notification.expedition_completed_message", {
+          expedition: t(`expeditions.${expeditionType}`),
+          rank,
+          points
+        })
+      }
       case "tournament_finished":
         if (notification.message === "1") {
           return t("notification.tournament_win_message")
@@ -113,6 +123,10 @@ export function NotificationModal({
         return `/assets/ranks/${notification.message}.svg`
       case "victory_road_finished":
         return `/assets/notifications/victory-road.png`
+      case "expedition_completed": {
+        const [expeditionType, rank] = notification.message.split("|")
+        return `/assets/notifications/${expeditionType}_${rank}.jpg`
+      }
       case "tournament_finished":
         if (notification.message === "1") {
           return `/assets/notifications/tournament_win.svg`

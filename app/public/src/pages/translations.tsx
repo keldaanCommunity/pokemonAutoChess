@@ -15,7 +15,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
-import { localStore, LocalStoreKeys } from "./utils/store"
+import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
 function storageKey(lang: Language) {

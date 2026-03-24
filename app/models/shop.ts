@@ -578,7 +578,7 @@ export default class Shop {
     }
 
     if (shopIndex === 5 && !noSpecial) {
-      const totalRerolls = player.rerollCount + state.stageLevel
+      const totalRerolls = player.gameStats.rerollCount + state.stageLevel
       if (
         (player.effects.has(EffectEnum.PRECOGNITION) &&
           totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
@@ -652,7 +652,7 @@ export default class Shop {
     const repeatBallHolders = values(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
-    const totalRerolls = player.rerollCount + state.stageLevel
+    const totalRerolls = player.gameStats.rerollCount + state.stageLevel
 
     if (
       repeatBallHolders.length > 0 &&

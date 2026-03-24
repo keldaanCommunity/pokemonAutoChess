@@ -14,7 +14,6 @@ import {
   SpecialItems,
   SynergyGems,
   SynergyGemsBuried,
-  TMs,
   TMsBronze,
   TMsGold,
   TMsSilver,

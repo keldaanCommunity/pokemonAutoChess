@@ -892,6 +892,7 @@ export const AbilitiesAnimations: {
   [Ability.PSYSHOCK]: onTargetScale2,
   [Ability.SHEER_COLD]: onTargetScale2,
   [Ability.COTTON_SPORE]: onTargetScale2,
+  [Ability.CEASELESS_EDGE]: onTargetScale2,
   [Ability.RETALIATE]: onTargetScale2,
   [Ability.THUNDER_CAGE]: onTargetScale2,
   ["FIGHTING_KNOCKBACK"]: onTargetScale2,
@@ -1452,6 +1453,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.STONE_AXE]: onTargetScale2,
   [Ability.CRUSH_CLAW]: onTargetScale2,
+  [Ability.ICE_SPINNER]: onTarget({ scale: 1 }),
   [Ability.METAL_CLAW]: onTarget({ ability: Ability.CRUSH_CLAW, scale: 2 }),
   [Ability.DRAGON_CLAW]: onTargetScale1,
   [Ability.PRECIPICE_BLADES]: [onCasterScale3, shakeCamera({ duration: 350 })],
@@ -2850,6 +2852,84 @@ export const AbilitiesAnimations: {
     scale: 0.75,
     hitAnim: onTarget({ ability: "ROCK_ARTILLERY", scale: 0.75 })
   }),
+  [Ability.MOUNTAIN_GALE]: onSprite(({ casterSprite, ...args }) => {
+    const {
+      scene,
+      ability,
+      ap,
+      delay,
+      positionX,
+      positionY,
+      targetX,
+      targetY,
+      flip
+    } = args
+    const coordinates = transformEntityCoordinates(positionX, positionY, flip)
+    const coordinatesTarget = transformEntityCoordinates(targetX, targetY, flip)
+    const isBergmite = delay !== undefined && delay >= 0
+    const topCoords = transformEntityCoordinates(
+      (positionX + targetX) / 2,
+      targetY + 2,
+      false
+    )
+    const angle1 = angleBetween(coordinates, topCoords) - Math.PI / 2
+    const angle2 = angleBetween(topCoords, coordinatesTarget) - Math.PI / 2
+    const midAngle = angleBetween(coordinates, coordinatesTarget) - Math.PI / 2
+
+    const tint = casterSprite?.pokemon?.shiny
+      ? PokemonTint.SHINY
+      : PokemonTint.NORMAL
+    const orientation = casterSprite?.orientation ?? Orientation.DOWN
+    const animKey = isBergmite
+      ? `${PkmIndex.BERGMITE}/${tint}/${AnimationType.Idle}/${SpriteType.ANIM}/${orientation}`
+      : ability
+    const frame = isBergmite
+      ? `${tint}/${AnimationType.Idle}/${SpriteType.ANIM}/${orientation}/0000`
+      : undefined
+
+    const missile = addAbilitySprite(scene, animKey, ap, coordinates, {
+      scale: isBergmite ? 2 : 1.5,
+      flipY: isBergmite,
+      textureKey: isBergmite ? PkmIndex.BERGMITE : undefined,
+      frame,
+      rotation: angle1
+    })
+
+    scene.tweens.chain({
+      targets: missile,
+      tweens: [
+        {
+          x: topCoords[0],
+          y: topCoords[1],
+          rotation: midAngle,
+          duration: isBergmite ? 250 : 150,
+          ease: Phaser.Math.Easing.Quadratic.Out
+        },
+        {
+          x: coordinatesTarget[0],
+          y: coordinatesTarget[1],
+          rotation: angle2,
+          duration: isBergmite ? 150 : 250,
+          ease: Phaser.Math.Easing.Quadratic.In
+        }
+      ],
+      onComplete: () => {
+        missile?.destroy()
+        onTarget({ ability: Ability.ICE_BALL, scale: 2 })({
+          ...args,
+          positionX: targetX,
+          positionY: targetY
+        })
+      }
+    })
+
+    if (!casterSprite) return
+    casterSprite.troopers?.forEach((trooper, i) => {
+      setTimeout(() => trooper.destroy(), (i + 3) * 200)
+    })
+    casterSprite.troopers = []
+  }),
+
   [Ability.ZING_ZAP]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE

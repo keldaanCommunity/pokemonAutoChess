@@ -1,5 +1,4 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
 import chatV2 from "../../models/mongo-models/chat-v2"
@@ -72,7 +71,7 @@ export default class PreparationState
     author?: string | undefined
     avatar?: string | undefined
   }) {
-    const id = nanoid()
+    const id = crypto.randomUUID()
     const time = Date.now()
     const message = new Message(
       id,

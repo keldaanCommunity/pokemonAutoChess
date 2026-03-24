@@ -40,7 +40,7 @@ import {
   PkmIndex,
   Unowns
 } from "../../types/enum/Pokemon"
-import { StarterAvatars } from "../../types/enum/Starters"
+import { StarterAvatars, Starters } from "../../types/enum/Starters"
 import {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
@@ -93,8 +93,9 @@ export class OnJoinCommand extends Command<
       } else {
         // create new user account
         const starterBoosters = 3
-        const starterAvatar = pickRandomIn(StarterAvatars)
-        const randomName = generateRandomName()
+        const starterPokemon = pickRandomIn(Starters)
+        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
+        const randomName = generateRandomName(starterPokemon)
         await UserMetadata.create({
           uid: client.auth.uid,
           displayName: randomName,

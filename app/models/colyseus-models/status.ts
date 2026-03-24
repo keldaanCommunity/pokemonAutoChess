@@ -1,12 +1,14 @@
 import { Schema, type } from "@colyseus/schema"
-import { FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
+import { transformToIceFace } from "../../core/effects/passives"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
@@ -165,7 +167,7 @@ export default class Status extends Schema implements IStatus {
     if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to)
     if (this.poisonStacks > 0)
       to.status.triggerPoison(this.poisonCooldown, to, from)
-    if (this.freeze) to.status.triggerFreeze(this.freezeCooldown, to)
+    if (this.freeze) to.status.triggerFreeze(this.freezeCooldown, to, from)
     if (this.sleep) to.status.triggerSleep(this.sleepCooldown, to)
     if (this.confusion)
       to.status.triggerConfusion(this.confusionCooldown, to, from)
@@ -668,7 +670,11 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerFreeze(duration: number, pkm: PokemonEntity) {
+  triggerFreeze(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined
+  ) {
     if (
       !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
@@ -699,13 +705,20 @@ export default class Status extends Schema implements IStatus {
       if (pkm.items.has(Item.ASPEAR_BERRY)) {
         pkm.eatBerry(Item.ASPEAR_BERRY)
       }
+
+      if (pkm.passive === Passive.EISCUE_NOICE) {
+        transformToIceFace(pkm, false)
+      }
+      if (origin?.passive === Passive.EISCUE_NOICE) {
+        transformToIceFace(origin, false)
+      }
     }
   }
 
   updateFreeze(dt: number) {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
     }
@@ -758,7 +771,7 @@ export default class Status extends Schema implements IStatus {
   updateSleep(dt: number, pkm: PokemonEntity) {
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
       if (pkm.passive === Passive.SLAKING) {
         this.triggerRage(3000, pkm)
       }
@@ -1111,7 +1124,7 @@ export default class Status extends Schema implements IStatus {
       !this.locked && // lock cannot be stacked
       !this.skydiving &&
       !this.runeProtect &&
-      !pkm.effects.has(EffectEnum.IMMUNITY_LOCKED) && 
+      !pkm.effects.has(EffectEnum.IMMUNITY_LOCKED) &&
       this.ccCooldown <= 0
     ) {
       if (pkm.status.enraged) {
@@ -1137,7 +1150,7 @@ export default class Status extends Schema implements IStatus {
         (pokemon.items.has(Item.WIDE_LENS)
           ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
           : 0)
-      this.ccCooldown = Math.max(this.ccCooldown, 1000)
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.lockedCooldown -= dt
     }

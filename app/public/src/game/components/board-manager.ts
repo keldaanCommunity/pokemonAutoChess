@@ -871,7 +871,7 @@ export default class BoardManager {
     let coordinates: number[]
     if (pokemonSprite) {
       switch (field) {
-        case "positionX":          
+        case "positionX":
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
             pokemon.positionY
@@ -1083,7 +1083,7 @@ export default class BoardManager {
         shiny: this.state.shinyEncounter
       })
       for (const stat in pveStage.statBoosts) {
-        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat], undefined)
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
       }
       if (
         this.state.townEncounter === TownEncounters.MAROWAK &&

@@ -3,6 +3,7 @@ export const NotificationTypes = [
   "new_title",
   "elo_rank_change",
   "victory_road_finished",
+  "expedition_completed",
   "tournament_finished"
 ] as const
 

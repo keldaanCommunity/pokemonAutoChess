@@ -114,6 +114,7 @@ export enum Item {
   SUPER_ROD = "SUPER_ROD",
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
+  RED_SCALE = "RED_SCALE",
   WHITE_FLUTE = "WHITE_FLUTE",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
@@ -619,8 +620,11 @@ export const ShinyItems = [
   Item.SACRED_ASH,
   Item.COMET_SHARD,
   Item.REPEAT_BALL,
-  Item.GOLD_BOW
+  Item.GOLD_BOW,
+  Item.RED_SCALE
 ] satisfies Item[]
+
+export type ShinyItem = (typeof ShinyItems)[number]
 
 export const WeatherRocks = [
   Item.SUN_STONE,
@@ -735,7 +739,7 @@ export const ToolsBuried: Tool[] = [
   Item.DRAGON_SCALE
 ]
 
-export const SynergyItems = [
+export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,
@@ -764,7 +768,11 @@ export const SynergyItems = [
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.INCENSE,
-  Item.FRIEND_BOW,
+  Item.FRIEND_BOW
+] satisfies Item[]
+
+export const SynergyItems = [
+  ...SynergyItemsNoSpecial,
   ...MemoryDiscs
 ] satisfies Item[]
 
@@ -1075,7 +1083,8 @@ export const UnholdableItems = [
   Item.BIG_NUGGET,
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
-  Item.LAPRAS_PASSPORT
+  Item.LAPRAS_PASSPORT,
+  Item.RED_SCALE
 ] satisfies Item[]
 
 export const ConsumableItems = [
