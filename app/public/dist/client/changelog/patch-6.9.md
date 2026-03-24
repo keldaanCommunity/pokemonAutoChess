@@ -92,6 +92,7 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Change Skrelp synergies: now POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Change Dragalge synergies: now DRAGON/POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Metronome now displays the name of the copied ability
+- Nerf Heart Swap: Spe def and AP are now stolen **after** the 100 special damage are inflicted
 
 # Changes to Items
 

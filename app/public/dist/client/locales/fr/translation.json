@@ -1785,7 +1785,7 @@
 		"TELEPORT": "Téléporte le lanceur sur un bord du champ de bataille. La prochaine attaque inflige [15,30,60,SP] SPECIAL supplémentaires.",
 		"NASTY_PLOT": "Augmente l'ATK du lanceur de [10,SP].",
 		"TAKE_HEART": "Le lanceur fait preuve de bravoure pour soigner ses altérations de statut et augmenter son ATK de [8,SP] et sa SPE_DEF de [8,SP].",
-		"HEART_SWAP": "Le lanceur vole les bonus de AP et de SPE_DEF de sa cible, puis inflige [100,SP] SPECIAL. Les conditions de statut du lanceur sont transférées à la cible et soignées pour le lanceur.",
+		"HEART_SWAP": "Inflige [100,SP] SPECIAL à la cible puis vole ses bonus de AP et de SPE_DEF. Les conditions de statut du lanceur sont transférées à la cible et soignées pour le lanceur.",
 		"THIEF": "Inflige [15,30,60,SP] SPECIAL et retire tous les objets tenus de sa cible. La lanceur lui vole autant d'objets qu'il peut tenir (maximum 3).",
 		"STUN_SPORE": "Inflige [15,30,60,SP] SPECIAL et PARALYSIS pendant 5 secondes à la cible et à tous les ennemis ADJACENT.",
 		"METEOR_MASH": "Inflige 3 fois [100,SP]% de l'ATK en tant que SPECIAL à la cible (4 fois si le lanceur est dans un PSYCHIC_FIELD) et augmente l'ATK du lanceur de 2 à chaque coup porté.",

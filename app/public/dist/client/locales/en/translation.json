@@ -1826,7 +1826,7 @@
 		"TELEPORT": "Teleport the user to a corner of the battlefield. The user's next attack deals [15,30,60,SP] extra SPECIAL.",
 		"NASTY_PLOT": "Increase the user's ATK by [10,SP].",
 		"TAKE_HEART": "The user harnesses bravery to cure their status conditions and increase their ATK by [8,SP] and SPE_DEF by [8,SP].",
-		"HEART_SWAP": "The user steals AP and SPE_DEF buffs from their target then inflicts [100,SP] SPECIAL. The user's status conditions are passed on to the target and healed for the user.",
+		"HEART_SWAP": "Deal [100,SP] SPECIAL to the target then steals all its AP and SPE_DEF buffs. The user's status conditions are passed on to the target and healed for the user.",
 		"THIEF": "Deal [15,30,60,SP] SPECIAL and remove all items from the target, stealing as many as the user can carry.",
 		"STUN_SPORE": "Deal [15,30,60,SP] SPECIAL to the target and all enemy Pokémon ADJACENT to it and inflict PARALYSIS for 5 seconds.",
 		"METEOR_MASH": "Deal 3 times [100,SP]% of ATK as SPECIAL to the target (4 times if user is in PSYCHIC_FIELD) then increase the user's ATK by 2 on each hit.",
