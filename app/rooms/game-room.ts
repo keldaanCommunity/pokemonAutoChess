@@ -2,7 +2,6 @@ import { Dispatcher } from "@colyseus/command"
 import { MapSchema } from "@colyseus/schema"
 import { Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
-import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,

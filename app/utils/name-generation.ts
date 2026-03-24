@@ -60,12 +60,12 @@ function formatPkmName(pkm: Pkm): string {
 }
 
 function randomDigits(): string {
-  return String(Math.floor(10000 + Math.random() * 90000))
+  return String(Math.floor(1000000 + Math.random() * 9000000))
 }
 
-export function generateRandomName(): string {
+export function generateRandomName(starter: Pkm): string {
   const adjective = pickRandomIn(Adjectives)
-  const pokemon = formatPkmName(pickRandomIn(Starters))
+  const pokemon = formatPkmName(starter)
   const digits = randomDigits()
   return `${adjective}-${pokemon}-${digits}`
 }

@@ -1,5 +1,4 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
@@ -159,7 +158,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count = new Count()
     this.simulation = simulation
 
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.rarity = pokemon.rarity
     this.positionX = positionX
     this.positionY = positionY

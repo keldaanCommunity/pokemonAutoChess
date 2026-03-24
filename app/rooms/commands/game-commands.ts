@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
 import { SetSchema, StateView } from "@colyseus/schema"
 import { Client, updateLobby } from "colyseus"
-import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   BOARD_SIDE_HEIGHT,
@@ -1792,7 +1791,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(
-            nanoid(),
+            crypto.randomUUID(),
             this.room,
             player,
             { id: "pve", board: pveBoard },
@@ -1816,7 +1815,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           redPlayer.board,
           ghost
         )
-        const simulationId = nanoid()
+        const simulationId = crypto.randomUUID()
 
         bluePlayer.simulationId = simulationId
         bluePlayer.team = Team.BLUE_TEAM

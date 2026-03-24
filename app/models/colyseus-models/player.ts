@@ -1,5 +1,4 @@
 import { ArraySchema, MapSchema, Schema, type, view } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   BOARD_HEIGHT,
@@ -910,7 +909,7 @@ export default class Player extends Schema implements IPlayer {
     delay?: number
     shiny?: boolean
   }): Wanderer {
-    const id = nanoid()
+    const id = crypto.randomUUID()
     const wanderer = new Wanderer({
       id,
       pkm,
