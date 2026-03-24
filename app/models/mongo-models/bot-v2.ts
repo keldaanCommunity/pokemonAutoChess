@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose"
-import { nanoid } from "nanoid"
 import { Emotion, PkmWithCustom } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
@@ -78,7 +77,7 @@ const bot = new Schema(
     id: {
       type: String,
       required: true,
-      default: nanoid()
+      default: crypto.randomUUID()
     },
     approved: {
       type: Boolean,

@@ -1,5 +1,4 @@
 import { entity, Schema, SetSchema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
@@ -108,7 +107,7 @@ export class Pokemon extends Schema implements IPokemon {
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.name = name
     this.index = PkmIndex[name]
     this.shiny = shiny

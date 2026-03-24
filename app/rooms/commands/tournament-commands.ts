@@ -1,6 +1,5 @@
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
-import { nanoid } from "nanoid"
 import {
   getRemainingPlayers,
   getTournamentStage,
@@ -226,7 +225,7 @@ export class CreateTournamentLobbiesCommand extends Command<
       tournament.brackets.clear()
 
       for (const bracket of brackets) {
-        const bracketId = nanoid()
+        const bracketId = crypto.randomUUID()
         logger.info(`Creating tournament game ${bracket.name} id: ${bracketId}`)
         tournament.brackets.set(
           bracketId,

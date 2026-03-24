@@ -1,5 +1,4 @@
 import { Schema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import { IFloatingItem } from "../../types"
 import { Item } from "../../types/enum/Item"
 
@@ -13,7 +12,7 @@ export class FloatingItem extends Schema implements IFloatingItem {
 
   constructor(name: Item, x: number, y: number, index: number) {
     super()
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.name = name
     this.x = x
     this.y = y
