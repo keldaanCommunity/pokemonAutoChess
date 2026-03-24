@@ -1743,7 +1743,9 @@
 		"AVALUGG": "冰岩怪",
 		"HISUI_AVALUGG": "洗翠冰岩怪",
 		"KARRABLAST": "盖盖虫",
-		"ESCAVALIER": "骑士蜗牛"
+		"ESCAVALIER": "骑士蜗牛",
+		"EISCUE": "冰砌鹅（结冻头）",
+		"EISCUE_NOICE": "冰砌鹅"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -3318,7 +3320,9 @@
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
 		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。",
 		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED",
-		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。"
+		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。",
+		"EISCUE_NOICE": "在SNOW中，开始战斗时变为结冻头，并获得100点SHIELD。陷入或使其他宝可梦陷入FREEZE时，变为结冻头并获得50点SHIELD。",
+		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。"
 	},
 	"stat": {
 		"ATK": "攻击",
