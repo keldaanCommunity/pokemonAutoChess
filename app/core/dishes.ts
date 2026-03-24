@@ -147,7 +147,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     }),
     new OnHitEffect(({ attacker, target }) => {
       if (attacker.effects.has(EffectEnum.CASTELIACONE)) {
-        target.status.triggerFreeze(5000, target)
+        target.status.triggerFreeze(5000, target, attacker)
         attacker.effects.delete(EffectEnum.CASTELIACONE)
       }
     })

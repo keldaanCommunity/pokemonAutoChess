@@ -1204,6 +1204,26 @@ const superchargeTadbulb = (
     })
 }
 
+export function transformToIceFace(
+  entity: PokemonEntity,
+  isBattleStart: boolean
+) {
+  entity.index = PkmIndex[Pkm.EISCUE]
+  entity.name = Pkm.EISCUE
+  entity.changePassive(Passive.EISCUE_ICE_FACE)
+  entity.addShield(isBattleStart ? 100 : 50, entity, 0, false)
+  if (entity.player) {
+    entity.player.pokemonsPlayed.add(Pkm.EISCUE)
+  }
+}
+
+export function transformToNoice(entity: PokemonEntity) {
+  entity.index = PkmIndex[Pkm.EISCUE_NOICE]
+  entity.name = Pkm.EISCUE_NOICE
+  entity.changePassive(Passive.EISCUE_NOICE)
+  entity.shield = 0
+}
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1570,6 +1590,18 @@ export const PassiveEffects: Partial<
       if (nbAllies === 0) {
         transformToHero()
       }
+    })
+  ],
+  [Passive.EISCUE_NOICE]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      if (simulation.weather === Weather.SNOW) {
+        transformToIceFace(entity, true)
+      }
+    }, Passive.EISCUE_NOICE)
+  ],
+  [Passive.EISCUE_ICE_FACE]: [
+    new OnShieldDepletedEffect(({ pokemon }) => {
+      transformToNoice(pokemon)
     })
   ]
 }

@@ -1481,7 +1481,7 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         )
         const freezeChance = 0.5
         if (chance(freezeChance, pokemon)) {
-          cell.value.status.triggerFreeze(2000, target)
+          cell.value.status.triggerFreeze(2000, target, pokemon)
         }
       }
     })
@@ -1646,7 +1646,7 @@ export class TriAttackStrategy extends AbilityStrategy {
     const effect = randomBetween(1, 3)
     switch (effect) {
       case 1:
-        target.status.triggerFreeze(3000, target)
+        target.status.triggerFreeze(3000, target, pokemon)
         break
       case 2:
         target.status.triggerBurn(5000, target, pokemon)
@@ -2233,7 +2233,7 @@ export class BlizzardStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          enemy.status.triggerFreeze(freezeDuration, enemy)
+          enemy.status.triggerFreeze(freezeDuration, enemy, pokemon)
         }
       })
   }
@@ -2350,7 +2350,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
               entityHit.hp > 0 &&
               entityHit.team !== pokemon.team
             ) {
-              entityHit.status.triggerFreeze(2000, tg)
+              entityHit.status.triggerFreeze(2000, tg, pokemon)
               entityHit.handleSpecialDamage(
                 damage,
                 board,
@@ -3283,7 +3283,7 @@ export class DiveStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerFreeze(freezeDuration, cell.value)
+          cell.value.status.triggerFreeze(freezeDuration, cell.value, pokemon)
         }
       })
     }
@@ -4580,7 +4580,7 @@ export class BleakwindStormStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerFreeze(2000, cell.value)
+        cell.value.status.triggerFreeze(2000, cell.value, pokemon)
       }
     })
   }
@@ -5105,6 +5105,10 @@ export class HeadbuttStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     let damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    if (pokemon.passive === Passive.EISCUE_ICE_FACE) {
+      damage += pokemon.shield
+      pokemon.addShield(-pokemon.shield, pokemon, 0, false)
+    }
     if (target.shield > 0) {
       damage *= 2
     }
@@ -5600,7 +5604,7 @@ export class PowderSnowStrategy extends AbilityStrategy {
         )
 
         if (chance(freezeChance, pokemon)) {
-          cell.value.status.triggerFreeze(2000, cell.value)
+          cell.value.status.triggerFreeze(2000, cell.value, pokemon)
         }
       }
     })
@@ -5944,7 +5948,7 @@ export class HailStrategy extends AbilityStrategy {
           crit
         )
         enemyHit.effects.add(EffectEnum.HAIL)
-        enemyHit.status.triggerFreeze(1000, enemyHit)
+        enemyHit.status.triggerFreeze(1000, enemyHit, pokemon)
       }
       pokemon.broadcastAbility({
         skill: "HAIL_PROJECTILE",
@@ -8895,7 +8899,7 @@ export class IceHammerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    target.status.triggerFreeze(3000, target)
+    target.status.triggerFreeze(3000, target, pokemon)
     pokemon.status.triggerParalysis(3000, pokemon, pokemon)
     const damage = [50, 100][pokemon.stars - 1] ?? 100
     target.handleSpecialDamage(
@@ -9279,7 +9283,7 @@ export class IceFangStrategy extends AbilityStrategy {
       crit,
       true
     )
-    target.status.triggerFreeze(freezeDuration, target)
+    target.status.triggerFreeze(freezeDuration, target, pokemon)
   }
 }
 
@@ -10825,7 +10829,7 @@ export class FreezingGlareStrategy extends AbilityStrategy {
           crit
         )
         if (chance(0.5, pokemon)) {
-          cell.value.status.triggerFreeze(3000, pokemon)
+          cell.value.status.triggerFreeze(3000, cell.value, pokemon)
         }
       }
     })
@@ -12106,7 +12110,7 @@ export class FrostBreathStrategy extends AbilityStrategy {
           crit
         )
         if (chance(0.5, pokemon)) {
-          value.status.triggerFreeze(2000, value)
+          value.status.triggerFreeze(2000, value, pokemon)
         }
       }
     })

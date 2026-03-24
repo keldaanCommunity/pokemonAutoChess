@@ -7991,5 +7991,17 @@ export const PokemonAnimations: {
     ability: AnimationType.Jab,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.EISCUE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ICE_MELEE
+  },
+  [Pkm.EISCUE_NOICE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.ICE_MELEE
   }
 }

@@ -374,6 +374,16 @@ export default abstract class PokemonState {
           })
         }
         caster.shieldDone += shield
+      } else if (shield < 0 && pokemon.shield <= 0) {
+        const entity = pokemon as PokemonEntity
+        entity.getEffects(OnShieldDepletedEffect).forEach((effect) => {
+          effect.apply({
+            pokemon: entity,
+            board: pokemon.simulation.board,
+            attacker: caster as PokemonEntity,
+            damage: -shield
+          })
+        })
       }
     }
   }
@@ -1056,7 +1066,7 @@ export default abstract class PokemonState {
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon)
+      pokemon.status.triggerFreeze(1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 

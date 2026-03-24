@@ -437,7 +437,7 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerFreeze(2000, enemy)
+        enemy.status.triggerFreeze(2000, enemy, unown)
       }
     })
   }

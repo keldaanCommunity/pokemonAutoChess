@@ -20604,6 +20604,36 @@ export class Escavalier extends Pokemon {
   additional = true
 }
 
+export class Eiscue extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 12
+  speed = 32
+  def = 12
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.EISCUE_ICE_FACE
+}
+
+export class EiscueNoice extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD, Synergy.AQUATIC])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 12
+  speed = 83
+  def = 6
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.HEADBUTT
+  passive = Passive.EISCUE_NOICE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21786,7 +21816,9 @@ export const PokemonClasses: Record<
   [Pkm.AVALUGG]: Avalugg,
   [Pkm.HISUI_AVALUGG]: HisuiAvalugg,
   [Pkm.KARRABLAST]: Karrablast,
-  [Pkm.ESCAVALIER]: Escavalier
+  [Pkm.ESCAVALIER]: Escavalier,
+  [Pkm.EISCUE]: Eiscue,
+  [Pkm.EISCUE_NOICE]: EiscueNoice
 }
 
 // declare all the classes in colyseus schema TypeRegistry

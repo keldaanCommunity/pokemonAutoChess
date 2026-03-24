@@ -1743,7 +1743,9 @@
 		"AVALUGG": "Avalugg",
 		"HISUI_AVALUGG": "Hisuian Avalugg",
 		"KARRABLAST": "Karrablast",
-		"ESCAVALIER": "Escavalier"
+		"ESCAVALIER": "Escavalier",
+		"EISCUE": "Eiscue (Ice Face)",
+		"EISCUE_NOICE": "Eiscue"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -3317,8 +3319,10 @@
 		"SPEWPA": "Hatched Pokémon evolve automatically after 5 stages. The evolution depends on your dominant synergy on board between SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
 		"GALE_WINGS": "Drops embers on the ground when flying away. BOARD_EFFECT: embers deal 10 SPECIAL per second and BURN non FLYING or FIRE Pokémon that walk on it.",
 		"FINIZEN": "Transforms into Palafin Hero Form after 5 allies are KO'd (not counting spawns), or if this Pokémon is the last one standing. Regain all HP when that happens.",
-		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED"		,
-		"AVALUGG": "Can hold up to 4 $t(pkm.BERGMITE) on their back, taken from the bench at the start of a fight."
+		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED",
+		"AVALUGG": "Can hold up to 4 $t(pkm.BERGMITE) on their back, taken from the bench at the start of a fight.",
+		"EISCUE_NOICE": "When starting a fight under SNOW, gain its Ice Face form and 100 SHIELD. When inflicting or being inflicted FREEZE, go back to Ice Face form and gain 50 SHIELD.",
+		"EISCUE_ICE_FACE": "When casting its ability, its current SHIELD is converted to additional SPECIAL. When SHIELD is depleted or after casting its ability, Eiscue breaks into its Noice form."
 	},
 	"stat": {
 		"ATK": "Attack",

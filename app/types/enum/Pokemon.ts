@@ -291,6 +291,8 @@ export enum Pkm {
   EELEKTROSS = "EELEKTROSS",
   EEVEE = "EEVEE",
   EGG = "EGG",
+  EISCUE = "EISCUE",
+  EISCUE_NOICE = "EISCUE_NOICE",
   EKANS = "EKANS",
   ELDEGOSS = "ELDEGOSS",
   ELECTABUZZ = "ELECTABUZZ",
@@ -2286,7 +2288,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SNOM]: "0872",
   [Pkm.FROSMOTH]: "0873",
   [Pkm.STONJOURNER]: "0874",
-  //[Pkm.EISCUE]: "0875",
+  [Pkm.EISCUE]: "0875",
+  [Pkm.EISCUE_NOICE]: "0875-0001",
   [Pkm.INDEEDEE_MALE]: "0876",
   [Pkm.INDEEDEE_FEMALE]: "0876-0000-0000-0002",
   [Pkm.MORPEKO]: "0877",
@@ -3633,7 +3636,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.AVALUGG]: Pkm.BERGMITE,
   [Pkm.HISUI_AVALUGG]: Pkm.BERGMITE,
   [Pkm.KARRABLAST]: Pkm.KARRABLAST,
-  [Pkm.ESCAVALIER]: Pkm.KARRABLAST
+  [Pkm.ESCAVALIER]: Pkm.KARRABLAST,
+  [Pkm.EISCUE]: Pkm.EISCUE,
+  [Pkm.EISCUE_NOICE]: Pkm.EISCUE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
