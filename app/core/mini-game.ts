@@ -530,7 +530,7 @@ export class MiniGame {
       )
       itemsSet = SynergyItems.filter(
         (i) =>
-          !isIn(MemoryDiscs, i) && isIn(topSynergies, SynergyGivenByItem[i])
+          !isIn(MemoryDiscs, i) && (i !== Item.SHINY_STONE) && isIn(topSynergies, SynergyGivenByItem[i])
       )
       maxCopiesPerItem = 2
     }
