@@ -2,7 +2,7 @@
   "type": "module",
   "devDependencies": {
     "@assetpack/cli": "file:./assetpack-cli-fork",
-    "@assetpack/core": "^0.8.0",
+    "@assetpack/core": "^1.0.0",
     "@assetpack/plugin-compress": "^0.8.0",
     "@assetpack/plugin-ffmpeg": "^0.8.0",
     "@assetpack/plugin-json": "^0.8.0",
