@@ -26,6 +26,28 @@
   margin-bottom: 2px;
 }
 
+.history-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-bottom: 4px;
+}
+
+.history-chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #ccc;
+}
+
+.history-chart-legend-color {
+  display: inline-block;
+  width: 10px;
+  height: 3px;
+  border-radius: 1px;
+}
+
 .sparkline-tooltip {
   background: rgba(0, 0, 0, 0.85);
   color: white;
