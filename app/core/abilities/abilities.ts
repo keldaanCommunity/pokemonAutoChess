@@ -4270,14 +4270,14 @@ export class HeartSwapStrategy extends AbilityStrategy {
     const speDefLost = target.speDef - target.baseSpeDef
     const apLost = target.ap
 
+    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
+
     if (target.items.has(Item.TWIST_BAND) === false) {
       target.addSpecialDefense(-speDefLost, pokemon, 0, false)
       target.addAbilityPower(-apLost, pokemon, 0, false)
       pokemon.addSpecialDefense(boostSpeDef, pokemon, 0, false)
       pokemon.addAbilityPower(boostAP, pokemon, 0, false)
     }
-
-    target.handleSpecialDamage(100, board, AttackType.SPECIAL, pokemon, crit)
 
     pokemon.status.transferNegativeStatus(pokemon, target)
     pokemon.status.clearNegativeStatus(pokemon, pokemon)

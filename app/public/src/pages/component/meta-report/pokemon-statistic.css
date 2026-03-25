@@ -3,9 +3,14 @@
   margin-bottom: 0.5em;
   color: white;
   display: flex;
-  gap: 1em;
+  flex-direction: column;
   padding: 0.5em;
   overflow-x: auto;
+}
+
+.pokemon-family-stat-top {
+  display: flex;
+  gap: 1em;
   align-items: flex-start;
 }
 
@@ -94,9 +99,29 @@
 
 .pokemon-history-charts {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 8px;
   width: 100%;
+}
+
+.pokemon-member-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pokemon-member-charts-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.pokemon-member-charts-row {
+  display: flex;
+  gap: 12px;
 }
 
 #meta-report .rank {
