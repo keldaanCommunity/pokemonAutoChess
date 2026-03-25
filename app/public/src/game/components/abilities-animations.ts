@@ -415,7 +415,7 @@ export function addAbilitySprite(
     return null
   }
 
-  if (!scene.anims.exists(ability)) {
+  if (ability && !scene.anims.exists(ability)) {
     logger.warn(`Missing animation: ${ability}`)
     return null
   }
@@ -465,7 +465,7 @@ export function addAbilitySprite(
     })
   }
 
-  sprite.play({ key: ability, ...animOptions })
+  if (ability) sprite.play({ key: ability, ...animOptions })
   return sprite
 }
 
@@ -910,6 +910,14 @@ export const AbilitiesAnimations: {
     ability: Ability.DRACO_ENERGY,
     tint: 0xcbc3e3
   }),
+  [Ability.ROCK_WRECKER]: onSprite(({ casterSprite, ...args }) =>
+    projectile({
+      duration: 200,
+      ability: "",
+      frame: `ROCK_WRECKER/${(casterSprite?.pokemon?.stars ?? 0) > 1 ? "001" : "000"}.png`,
+      hitAnim: onTarget({ ability: "SMOKE_BALL", scale: 2 })
+    })(args)
+  ),
   [Ability.DYNAMAX_CANNON]: onCaster({
     origin: [0.5, 0],
     oriented: true,

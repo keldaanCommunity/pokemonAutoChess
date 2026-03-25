@@ -16478,6 +16478,22 @@ export class TwineedleStrategy extends AbilityStrategy {
   }
 }
 
+export class RockWreckerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // inflict FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds
+    const damage = [80, 160][pokemon.stars - 1] ?? 160
+    target.status.triggerFlinch(2000, pokemon)
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    pokemon.status.triggerFatigue(4000, pokemon)
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -17025,7 +17041,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICE_SPINNER]: new IceSpinnerStrategy(),
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
   [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy(),
-  [Ability.TWINEEDLE]: new TwineedleStrategy()
+  [Ability.TWINEEDLE]: new TwineedleStrategy(),
+  [Ability.ROCK_WRECKER]: new RockWreckerStrategy()
 }
 
 export function castAbility(

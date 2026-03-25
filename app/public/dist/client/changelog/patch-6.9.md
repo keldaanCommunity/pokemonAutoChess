@@ -29,6 +29,8 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Escavalier
 - Eiscue (Ice Face Form)
 - Eiscue (Noice Form)
+- Dwebble
+- Crustle
 
 # Changes to Synergies
 

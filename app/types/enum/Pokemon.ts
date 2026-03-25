@@ -212,6 +212,7 @@ export enum Pkm {
   CROBAT = "CROBAT",
   CROCALOR = "CROCALOR",
   CROCONAW = "CROCONAW",
+  CRUSTLE = "CRUSTLE",
   CRYOGONAL = "CRYOGONAL",
   CUBCHOO = "CUBCHOO",
   CUBONE = "CUBONE",
@@ -287,6 +288,7 @@ export enum Pkm {
   DUSKNOIR = "DUSKNOIR",
   DUSKULL = "DUSKULL",
   DUSTOX = "DUSTOX",
+  DWEBBLE = "DWEBBLE",
   EELEKTRIK = "EELEKTRIK",
   EELEKTROSS = "EELEKTROSS",
   EEVEE = "EEVEE",
@@ -1883,8 +1885,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.GALARIAN_DARMANITAN]: "0555-0002",
   [Pkm.GALARIAN_DARMANITAN_ZEN]: "0555-0003",
   [Pkm.MARACTUS]: "0556",
-  //[Pkm.DWEBBLE]: "0557",
-  //[Pkm.CRUSTLE]: "0558",
+  [Pkm.DWEBBLE]: "0557",
+  [Pkm.CRUSTLE]: "0558",
   [Pkm.SCRAGGY]: "0559",
   [Pkm.SCRAFTY]: "0560",
   [Pkm.SIGILYPH]: "0561",
@@ -3638,7 +3640,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KARRABLAST]: Pkm.KARRABLAST,
   [Pkm.ESCAVALIER]: Pkm.KARRABLAST,
   [Pkm.EISCUE]: Pkm.EISCUE,
-  [Pkm.EISCUE_NOICE]: Pkm.EISCUE
+  [Pkm.EISCUE_NOICE]: Pkm.EISCUE,
+  [Pkm.DWEBBLE]: Pkm.DWEBBLE,
+  [Pkm.CRUSTLE]: Pkm.DWEBBLE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
