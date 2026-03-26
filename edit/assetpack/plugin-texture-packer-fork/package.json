@@ -29,11 +29,11 @@
     "test:types": "tsc --noEmit"
   },
   "dependencies": {
-    "free-tex-packer-core": "0.3.4",
+    "free-tex-packer-core": "0.3.5",
     "fs-extra": "^11.1.0",
     "glob": "^8.0.3",
     "glob-promise": "^6.0.0",
-    "sharp": "^0.32.0"
+    "sharp": "^0.34.0"
   },
   "devDependencies": {
     "@assetpack/core": "0.8.0"

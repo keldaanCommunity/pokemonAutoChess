@@ -1,7 +1,7 @@
 services:
 
   mongo:
-    image: mongo:8.0.0-noble
+    image: mongo:8.2.6-noble
     restart: always
     ports:
       - 27017:27017
