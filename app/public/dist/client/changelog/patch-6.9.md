@@ -1,6 +1,6 @@
 # New event: Expeditions
 
-We're introducing a new monthly event that will alternate on a monthly basis with the Victory road event. This event is called "Expeditions" and is meant to propose small quests for extra experience points, encouraging players to try new Pokémon, synergies and strategies. This is a first iteration, and we will likely add more quests and variety in the future based on your feedback.
+We're introducing a new monthly event that will alternate on a monthly basis with the Victory road event. This event is called "Expeditions" and is meant to encourage players to try new Pokémon, synergies and strategies. This is a first iteration, and we will likely add more quests and variety in the future based on your feedback.
 
 # New Pokémon
 
@@ -70,31 +70,31 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Shadow Lugia is now a regional variant of Lugia in Dark regions
 - Rework Giratina: Teleport into the largest group of enemy Pokémon, dealing [60,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form
 - Rework Origin Giratina: Slash all enemies in front of the user, dealing [20,40,60,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [40,80,120,SP] SPECIAL.
-- Nerf Lapras: Speed 44 → 38, Def 10 → 7, Spe def 12 → 9
+- Nerf Lapras: SPEED 44 → 38, DEF 10 → 7, SPE_DEF 12 → 9
 - Nerf Palkia: PP 110 → 120
-- Buff Mawile: Attack 16 → 18
+- Buff Mawile: ATK 16 → 18
 - Buff Alcremie line: PP 80 → 70
-- Revert Horsea buff from 6.3: Attack 6/12/24 → 6/11/21
+- Revert Horsea buff from 6.3: ATK 6/12/24 → 6/11/21
 - Nerf Seel line: PP 90 → 100
 
 > We continue to reduce the amount of abilities that can hit the whole enemy team, in order to make positionning and movement more important in the game.
 
-- Change Blizzard (Articuno): freeze all enemies **in a 4-cell radius around user** ; damage: 10/20/30 → 10/20/40
+- Change Blizzard (Articuno): freeze all enemies **in a 4-cell radius around user** ; SPECIAL: 10/20/30 → 10/20/40
 - Rework Dark Void: now deals damage on all enemies **in a 4-cell radius around target**, with 80% chance to put them to sleep for 2 seconds.
-- Rework Draco Meteor: now deals damage to the target and adjacent enemies, instead of all enemies. Damage 50 → 30/60/120/150, and user loses 20 AP after the cast. PP: 100 → 120
-- Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 special damage. All FREEZE Pokémon in the zone are unfrozen.
-- Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 special damage.
+- Rework Draco Meteor: now deals damage to the target and adjacent enemies, instead of all enemies. SPECIAL 50 → 30/60/120/150, and user loses 20 AP after the cast. PP: 100 → 120
+- Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 SPECIAL. All FREEZE Pokémon in the zone are unfrozen.
+- Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 SPECIAL.
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
-- Adjust Bounce Damage (Spoink, Mantyke): 10/20/30 → 15/20/25
+- Adjust Bounce (Spoink, Mantyke): SPECIAL 10/20/30 → 15/20/25
 - Scale Shot (Roaring Moon) can now be cancelled if Roaring Moon is asleep, frozen or resurrecting during the cast. Roaring Moon PP 140 → 130
 - Change passive of Solrock: now changes the weather to DROUGHT or ZENITH based on your dominant synergy between FIRE and LIGHT
 - Buff Salt Cure (Nacli): now affects allies and enemies in a 2-cell radius around the user instead of just adjacent
-- Guzzlord passive now gains double the stacks when Gourmet 4 or more is active
+- Guzzlord passive now gains double the stacks when GOURMET 4 or more is active
 - Change Skrelp synergies: now POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Change Dragalge synergies: now DRAGON/POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Metronome now displays the name of the copied ability
-- Nerf Heart Swap: Spe def and AP are now stolen **after** the 100 special damage are inflicted
+- Nerf Heart Swap: SPE_DEF and AP are now stolen **after** the 100 SPECIAL are inflicted
 
 # Changes to Items
 
@@ -102,30 +102,30 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 
 > Statuses are not all equal in how much they frustrate players, so we provide additional hard counter itemization options for those that prevent movement or action.
 
-- New effect for Flame Orb: holder is immune to FREEZE
-- New effect for Heavy-Duty Boots: holder is immune to LOCKED
-- New effect for X-Ray vision: holder is immune to SLEEP
+- New effect for FLAME_ORB: holder is immune to FREEZE
+- New effect for HEAVY_DUTY_BOOTS: holder is immune to LOCKED
+- New effect for XRAY_VISION: holder is immune to SLEEP
 
 ## Scarves
 
 > We looked carefully at Scarves items winrate and pushed some balance adjustements mid patch. They have been optimized much faster at high elo, so there's a gap between average winrate and top player perception. Individual items winrate also evolved a lot during the patch, with players finding out new strong interactions and counterplays. This instability makes balancing difficult, so for now we're focusing on nerfing the most popular scarves to increase variety. Big Eater Belt change was very popular but also brought many quirks we aim to remove. It should now only work with impactful one-time buffs, instead of stacks like Fire attacks, Sound cries, Muscle band... Also PP buffs were not intuitive and could lead to perma casting too easily, so we decided to remove them.
 
-- Nerf Mach Ribbon: 20 → 15 speed every 3 seconds
-- Change Big Eater Belt: stat buffs are now rounded down, and do not apply to PP anymore
+- Nerf MACH_RIBBON: 20 → 15 SPEED every 3 seconds
+- Change BIG_EATER_BELT: stat buffs are now rounded down, and do not apply to PP anymore
 
 ## Tools
 
 - Partial revert of ELECTIRIZER: base SPEED: 0 → 10
-- Removed 30 base SPEED from Surfboard
+- Removed 30 base SPEED from SURFBOARD
 
 ## Dishes
 
 > Nutritious egg requires an Ultra tier 2 so we thought it deserved to be a bit stronger.
 
 - Buff NUTRITIOUS_EGG: ~~30%~~ → 50% bonus ATK, DEF and SPE_DEF
-- Nerf Tiny Mushroom: Speed 40 → 30, HP decrease 20% → 30%
-- Nerf Balm Mushroom: Speed 40 → 30
-- Nerf Lechonk Mushrooms odds: Big Mushroom 25% → 20%, Balm Mushroom 5% → 3%
+- Nerf TINY_MUSHROOM: SPEED 40 → 30, HP decrease 20% → 30%
+- Nerf BALM_MUSHROOM: SPEED 40 → 30
+- Nerf MUSHROOMS odds: BIG_MUSHROOM 25% → 20%, BALM_MUSHROOM 5% → 3%
 
 ## Town Items
 
@@ -140,14 +140,14 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 
 ## Shiny Items
 
-- New Shiny item: Red Scale, obtained exclusively from shiny encounter at stage 9.
+- New Shiny item: RED_SCALE, obtained exclusively from shiny encounter at stage 9.
 
 > Similarly to Golden Magikarps at stage 1, Red Scale will be a pure economic item given to all players. All the other shiny items are now obtained at stage 15 or from a golden egg, which makes their value more consistent for items with scalable effects or economic value. We continue to work on shiny items so that they add that extra spice and increase the pace of the game, but in a more even way between players.
 
 ## Misc
 
-- Added visual effects for support items on adjacent positions
-- Added visual effect for Loaded dice second hit
+- Added visual effects for support items on ADJACENT_IN_THE_SAME_ROW positions
+- Added visual effect for LOADED_DICE second hit
 
 # Changes to Gameplay
 
@@ -175,5 +175,5 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 
 # Bug Fixes
 
-- Temporary stat buffs on big eater belt holder when lost are now fully removed, so the 25% bonus is not kept forever
-- Shell Bell and Human synergy no longer heals on self-inflicted damage (e.g. Flame Orb)
+- Temporary stat buffs on BIG_EATER_BELT holder when lost are now fully removed, so the 25% bonus is not kept forever
+- SHELL_BELL and HUMAN synergy no longer heals on self-inflicted damage (e.g. FLAME_ORB)
