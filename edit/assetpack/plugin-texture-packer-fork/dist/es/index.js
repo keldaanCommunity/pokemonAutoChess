@@ -2,7 +2,7 @@ import { hasTag, path, SavableAssetCache } from "@assetpack/core"
 import { packAsync } from "free-tex-packer-core"
 import { readFileSync } from "fs"
 import fs from "fs-extra"
-import glob from "glob-promise"
+import { glob } from "glob"
 
 function texturePacker(options) {
   const defaultOptions = {
