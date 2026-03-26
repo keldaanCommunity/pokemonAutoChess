@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "gitAuthor": "Renovate Bot <renovate@whitesourcesoftware.com>",
   "labels": ["dependencies"],
   "schedule": ["before 6am on monday"],
   "packageRules": [
