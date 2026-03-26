@@ -95,6 +95,7 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Change Dragalge synergies: now DRAGON/POISON/WATER instead of DRAGON/POISON/AQUATIC
 - Metronome now displays the name of the copied ability
 - Nerf Heart Swap: SPE_DEF and AP are now stolen **after** the 100 SPECIAL are inflicted
+- New passive for Stakataka: Wall of Stone ; at the start of the fight, user and all Rock allies on the same row get 50 shield and are locked until their shield is depleted
 
 # Changes to Items
 

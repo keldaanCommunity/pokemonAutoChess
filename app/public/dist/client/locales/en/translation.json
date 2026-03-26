@@ -3326,7 +3326,8 @@
 		"COMMANDER": "Tatsugiri cannot hold items. At the start of the fight, an ADJACENT Dondozo with a free item slot swallows Tatsugiri. Tatsugiri provides stats based on its form: \nCurly Form: +8 ATK\nDroopy Form: +8 DEF\nStretchy Form: +25 SPEED",
 		"AVALUGG": "Can hold up to 4 $t(pkm.BERGMITE) on their back, taken from the bench at the start of a fight.",
 		"EISCUE_NOICE": "When starting a fight under SNOW, gain its Ice Face form and 100 SHIELD. When inflicting or being inflicted FREEZE, go back to Ice Face form and gain 50 SHIELD.",
-		"EISCUE_ICE_FACE": "When casting its ability, its current SHIELD is converted to additional SPECIAL. When SHIELD is depleted or after casting its ability, Eiscue breaks into its Noice form."
+		"EISCUE_ICE_FACE": "When casting its ability, its current SHIELD is converted to additional SPECIAL. When SHIELD is depleted or after casting its ability, Eiscue breaks into its Noice form.",
+		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted."
 	},
 	"stat": {
 		"ATK": "Attack",

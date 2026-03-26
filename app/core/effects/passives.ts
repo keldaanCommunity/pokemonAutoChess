@@ -1,4 +1,4 @@
-import { BOARD_WIDTH, SynergyTriggers } from "../../config"
+import { BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
   Pokemon,
@@ -1602,6 +1602,28 @@ export const PassiveEffects: Partial<
   [Passive.EISCUE_ICE_FACE]: [
     new OnShieldDepletedEffect(({ pokemon }) => {
       transformToNoice(pokemon)
+    })
+  ],
+  [Passive.WALL_OF_STONE]: [
+    new OnSimulationStartEffect(({ simulation }) => {
+      // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked until their shield is depleted
+      simulation.board.forEach((x, y, entity) => {
+        if (
+          entity &&
+          entity.team === entity.team &&
+          y === entity.positionY &&
+          entity.types.has(Synergy.ROCK)
+        ) {
+          entity.addShield(50, entity, 0, false)
+          entity.status.triggerLocked(60000, entity)
+          entity.effectsSet.add(
+            new OnShieldDepletedEffect(({ pokemon }) => {
+              pokemon.status.lockedCooldown = 0
+              pokemon.status.updateLocked(0, pokemon)
+            })
+          )
+        }
+      })
     })
   ]
 }
