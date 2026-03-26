@@ -34,7 +34,7 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^14.0.0",
-    "find-up": "^5.0.0"
+    "find-up": "^8.0.0"
   },
   "peerDependencies": {
     "@assetpack/core": ">=0"
