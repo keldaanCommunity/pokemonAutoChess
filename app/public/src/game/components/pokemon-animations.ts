@@ -8003,5 +8003,18 @@ export const PokemonAnimations: {
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ICE_MELEE
+  },
+  [Pkm.DWEBBLE]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.CRUSTLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE,
+    shinyUnavailable: true
   }
 }

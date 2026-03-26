@@ -648,9 +648,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemRemovedEffect((pokemon) => {
       pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
     }),
-    new OnKillEffect(({ attacker, board }) => {
+    new OnKillEffect(({ attacker, target, board }) => {
       if (attacker.player) {
-        const isLastEnemy =
+        const isLastEnemy = target.team !== attacker.team &&
           board.cells.some(
             (p) =>
               p &&

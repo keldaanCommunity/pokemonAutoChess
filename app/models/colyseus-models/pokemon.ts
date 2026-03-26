@@ -20633,6 +20633,37 @@ export class EiscueNoice extends Pokemon {
   passive = Passive.EISCUE_NOICE
 }
 
+export class Dwebble extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 1
+  evolution = Pkm.CRUSTLE
+  hp = 90
+  atk = 12
+  speed = 30
+  def = 15
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_WRECKER
+  additional = true
+}
+
+export class Crustle extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.ROCK])
+  rarity = Rarity.EPIC
+  stars = 2
+  hp = 170
+  atk = 26
+  speed = 30
+  def = 25
+  speDef = 15
+  maxPP = 100
+  range = 1
+  skill = Ability.ROCK_WRECKER
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21817,7 +21848,9 @@ export const PokemonClasses: Record<
   [Pkm.KARRABLAST]: Karrablast,
   [Pkm.ESCAVALIER]: Escavalier,
   [Pkm.EISCUE]: Eiscue,
-  [Pkm.EISCUE_NOICE]: EiscueNoice
+  [Pkm.EISCUE_NOICE]: EiscueNoice,
+  [Pkm.DWEBBLE]: Dwebble,
+  [Pkm.CRUSTLE]: Crustle
 }
 
 // declare all the classes in colyseus schema TypeRegistry
