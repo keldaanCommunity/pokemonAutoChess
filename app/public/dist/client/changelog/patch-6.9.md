@@ -178,3 +178,4 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 
 - Temporary stat buffs on BIG_EATER_BELT holder when lost are now fully removed, so the 25% bonus is not kept forever
 - SHELL_BELL and HUMAN synergy no longer heals on self-inflicted damage (e.g. FLAME_ORB)
+- Rage status duration is no longer reduced by Aquatic and Odd stones

@@ -355,7 +355,6 @@ export default class Status extends Schema implements IStatus {
   }
 
   triggerRage(duration: number, pokemon: PokemonEntity) {
-    duration = this.applyStatusDurationReductions(duration, pokemon)
     if (!this.enraged) {
       this.enraged = true
       this.protect = false
