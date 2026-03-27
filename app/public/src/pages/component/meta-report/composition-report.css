@@ -12,6 +12,16 @@
   min-height: 0;
 }
 
+#meta-report-compo .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#meta-report-compo .filters select {
+  min-width: 180px;
+}
+
 #meta-report-compo-list {
   flex: 1;
   min-width: 0;
