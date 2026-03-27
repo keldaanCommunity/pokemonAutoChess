@@ -566,7 +566,8 @@
 		"ICE_SPINNER": "冰旋",
 		"CEASELESS_EDGE": "秘剑・千重涛",
 		"MOUNTAIN_GALE": "冰山风",
-		"TWINEEDLE": "双针"
+		"TWINEEDLE": "双针",
+		"ROCK_WRECKER": "岩石炮"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1745,7 +1746,9 @@
 		"KARRABLAST": "盖盖虫",
 		"ESCAVALIER": "骑士蜗牛",
 		"EISCUE": "冰砌鹅（结冻头）",
-		"EISCUE_NOICE": "冰砌鹅"
+		"EISCUE_NOICE": "冰砌鹅",
+		"DWEBBLE": "石居蟹",
+		"CRUSTLE": "岩殿居蟹"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -1826,7 +1829,7 @@
 		"TELEPORT": "将使用者传送至战场的一个角落。使用者下一次攻击额外造成[15,30,60,SP]点SPECIAL。",
 		"NASTY_PLOT": "提升使用者[10,SP]点ATK。",
 		"TAKE_HEART": "使用者以勇气治疗自身的异常状态，并提升[8,SP]点ATK以及[8,SP]点SPE_DEF。",
-		"HEART_SWAP": "使用者从目标处偷取其AP和SPE_DEF增幅，随后对其造成[100,SP]点SPECIAL。使用者将自身所受的异常状态转移至目标身上。",
+		"HEART_SWAP": "对目标造成[100,SP]点SPECIAL，随后偷取其AP和SPE_DEF增幅。使用者将自身所受的异常状态转移至目标身上。",
 		"THIEF": "尽可能多的偷取目标的道具（至使用者拿不下为止），并对其造成[15,30,60,SP]点SPECIAL。",
 		"STUN_SPORE": "对目标和其ADJACENT敌方宝可梦造成[15,30,60,SP]点SPECIAL，并使他们陷入PARALYSIS 5秒。",
 		"METEOR_MASH": "对目标造成3次（若使用者处于PSYCHIC_FIELD则改为4次）SPECIAL，每次的数值相当于[100,SP]%的ATK，且每次命中还会提升使用者2点ATK。",
@@ -1933,7 +1936,7 @@
 		"SILVER_WIND": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，然后提升1点ATK、1点DEF、1点SPE_DEF、10点AP以及10点SPEED。",
 		"POISON_POWDER": "突进至最远的可触及敌方宝可梦的邻位，对击中的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL，并使他们陷入POISONNED 3秒。",
 		"ICY_WIND": "对目标身后的一条直线上的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并降低他们[10,20,40]点SPEED。",
-		"GIGATON_HAMMER": "对目标造成[100,200,400,SP]点SPECIAL，但使用者陷入FATIGUE 6秒。",
+		"GIGATON_HAMMER": "对目标造成[100,200,400,SP]点SPECIAL，但使用者自身陷入FATIGUE 6秒。",
 		"ACROBATICS": "对目标造成[20,40,80,SP]点SPECIAL，并移动至与目标有一定距离的单元格。若使用者没有携带任何道具，与目标的距离会进一步提升。",
 		"ABSORB": "对目标造成[30,60,120,SP]点SPECIAL，并为ADJACENT我方宝可梦恢复[3,6,12,SP]点HP。",
 		"ROLLOUT": "提升[2,5,10,SP]点DEF，随后对目标造成SPECIAL，数值相当于DEF乘以2。",
@@ -2291,7 +2294,8 @@
 		"ICE_SPINNER": "脚上覆盖薄冰，旋转着撞击ADJACENT敌方宝可梦，对他们造成[15,30,60,SP]点SPECIAL并将它们击退。清除ADJACENT格子上的BOARD_EFFECT。",
 		"CEASELESS_EDGE": "攻击使用者前方的3只敌方宝可梦，造成[20,40,80,SP]点SPECIAL，并在他们的脚下留下菱刺。该招式可以暴击。BOARD_EFFECT：菱刺对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"MOUNTAIN_GALE": "将[1,3]块冰山般巨大的冰块随机砸向目标或ADJACENT敌方宝可梦，每块冰块使其陷入FLINCH 3秒，随后对其造成[40,SP]点SPECIAL。若使用者背上有冰宝，这些冰宝也会一起砸向敌方宝可梦并造成等量伤害。",
-		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。"
+		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。",
+		"ROCK_WRECKER": "对目标发射巨大的岩石，使其陷入FLINCH 2秒，随后对其造成[80,160,SP]点SPECIAL。然后，使用者自身陷入FATIGUE 4秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3322,7 +3326,8 @@
 		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED",
 		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。",
 		"EISCUE_NOICE": "在SNOW中，开始战斗时变为结冻头，并获得100点SHIELD。陷入或使其他宝可梦陷入FREEZE时，变为结冻头并获得50点SHIELD。",
-		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。"
+		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。",
+		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，并陷入LOCKED直到失去所有SHIELD。"
 	},
 	"stat": {
 		"ATK": "攻击",
