@@ -173,6 +173,7 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - New titles: Rescue Team Member, Explorer, Postman, Survey Corps, Guildmaster
 - Added more game statistics in the post-match screen
 - Added an ingame translations management page: https://pokemon-auto-chess.com/translations
+- Add a Pokemon selector in composition report filters
 
 # Bug Fixes
 
