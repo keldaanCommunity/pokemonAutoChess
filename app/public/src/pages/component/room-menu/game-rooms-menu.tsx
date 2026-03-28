@@ -12,7 +12,7 @@ import { client, leaveRoom, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
-import { joinGame as newJoinGame } from "../../../network"
+import { joinGame as networkJoinGame } from "../../../network"
 
 export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const { t } = useTranslation()
