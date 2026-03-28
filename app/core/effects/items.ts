@@ -313,15 +313,15 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         Pkm.SUBSTITUTE,
         player
       )
-      substitute.id = pokemon.id
-      substitute.evolution = pokemon.name
-      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
-      substitute.positionX = pokemon.positionX
-      substitute.positionY = pokemon.positionY
       pokemon.items.forEach((item) => substitute.items.add(item))
       pokemon.removeItems(values(pokemon.items), player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
+      substitute.id = pokemonLeaving.id
+      substitute.evolution = pokemonLeaving.name
+      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
+      substitute.positionX = pokemonLeaving.positionX
+      substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
       player.board.set(substitute.id, substitute)
       player.pokemonsTrainingInDojo.push({
@@ -650,7 +650,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     }),
     new OnKillEffect(({ attacker, target, board }) => {
       if (attacker.player) {
-        const isLastEnemy = target.team !== attacker.team &&
+        const isLastEnemy =
+          target.team !== attacker.team &&
           board.cells.some(
             (p) =>
               p &&
