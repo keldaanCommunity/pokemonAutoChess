@@ -1665,17 +1665,20 @@ export class EchoStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = [3, 6, 9][pokemon.stars - 1] ?? 9
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(
-          pokemon.count.ult * damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
-    })
+    const range = 2 + pokemon.count.ult
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, range, false)
+      .forEach((cell) => {
+        if (cell.value && pokemon.team != cell.value.team) {
+          cell.value.handleSpecialDamage(
+            pokemon.count.ult * damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+        }
+      })
   }
 }
 

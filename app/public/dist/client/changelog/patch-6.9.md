@@ -84,6 +84,8 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Rework Draco Meteor: now deals damage to the target and adjacent enemies, instead of all enemies. SPECIAL 50 → 30/60/120/150, and user loses 20 AP after the cast. PP: 100 → 120
 - Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 SPECIAL. All FREEZE Pokémon in the zone are unfrozen.
 - Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 SPECIAL.
+- New ability for Whismur line: Uproar - deal 5/10/20 special damage every second for 3 seconds to all enemies at attack range ; during this time, allies in the area are immune to Sleep.
+- Change Echo (Chimecho): now hits all enemies in a 3 tile radius around the target, with the range increasing by 1 for every cast of the ability
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
 - Adjust Bounce (Spoink, Mantyke): SPECIAL 10/20/30 → 15/20/25
@@ -96,7 +98,6 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Metronome now displays the name of the copied ability
 - Nerf Heart Swap: SPE_DEF and AP are now stolen **after** the 100 SPECIAL are inflicted
 - New passive for Stakataka: Wall of Stone ; at the start of the fight, user and all Rock allies on the same row get 50 shield and are locked until their shield is depleted
-- New ability for Whismur line: Uproar - deal 5/10/20 special damage every second for 3 seconds to all enemies at attack range ; during this time, allies in the area are immune to Sleep.
 
 # Changes to Items
 
