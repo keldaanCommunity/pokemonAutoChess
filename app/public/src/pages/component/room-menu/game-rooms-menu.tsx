@@ -98,10 +98,11 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
         30
       )
-      await Promise.allSettled([
-        leaveRoom("lobby", true),
-        leaveRoom("game", true)
-      ])
+      // await Promise.allSettled([
+      //   leaveRoom("lobby", true),
+      //   leaveRoom("game", true)
+      // ])
+      leaveRoom("lobby", true)
       dispatch(resetLobby())
       navigate("/game")
     }
