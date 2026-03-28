@@ -1287,6 +1287,11 @@ export const AbilitiesAnimations: {
   [Ability.SLASH]: onTargetScale2,
   [Ability.SHADOW_CLONE]: onCasterScale2,
   [Ability.ECHO]: onCaster({ origin: [0.5, 0.7] }),
+  [Ability.UPROAR]: onCaster({
+    ability: Ability.ECHO,
+    origin: [0.5, 0.7],
+    scale: 2
+  }),
   [Ability.EXPLOSION]: [
     onCasterScale2,
     shakeCamera({ duration: 400, intensity: 0.01 })

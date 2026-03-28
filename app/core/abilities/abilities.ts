@@ -1679,6 +1679,63 @@ export class EchoStrategy extends AbilityStrategy {
   }
 }
 
+export class UproarStrategy extends AbilityStrategy {
+  requiresTarget = false
+  process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
+    super.process(pokemon, board, target, crit)
+    // Deal [5,10,20,SP] SPECIAL every second for 3 seconds to all enemies at attack range; during this time, allies in the area are immune to SLEEP.
+
+    board
+      .getCellsInRange(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.range,
+        true
+      )
+      .forEach((cell) => {
+        if (
+          cell.value &&
+          pokemon.team === cell.value.team &&
+          !cell.value.effects.has(EffectEnum.IMMUNITY_SLEEP)
+        ) {
+          cell.value.effects.add(EffectEnum.IMMUNITY_SLEEP)
+          cell.value.commands.push(
+            new DelayedCommand(() => {
+              cell.value?.effects.delete(EffectEnum.IMMUNITY_SLEEP)
+            }, 3000)
+          )
+        }
+      })
+
+    for (let i = 1; i < 3; i++) {
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
+          pokemon.broadcastAbility()
+          board
+            .getCellsInRange(
+              pokemon.positionX,
+              pokemon.positionY,
+              pokemon.range,
+              false
+            )
+            .forEach((cell) => {
+              if (cell.value && pokemon.team != cell.value.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+              }
+            })
+        }, i * 1000)
+      )
+    }
+  }
+}
+
 export class FutureSightStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
@@ -8573,7 +8630,7 @@ export class DetectStrategy extends AbilityStrategy {
       )
       .map((cell) => cell.value)
     const nbEnemiesDetected = board
-      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2)
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2, false)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team).length
 
     const protectDuration = Math.round(
@@ -15226,7 +15283,7 @@ export class TrimmingMowerStrategy extends AbilityStrategy {
 
     // Identify potential dash locations within a 2-hex radius
     const dashDestinations = board
-      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2)
+      .getCellsInRange(pokemon.positionX, pokemon.positionY, 2, false)
       .filter((cell) => !cell.value)
 
     // Determine optimal dash location based on maximum enemy coverage
@@ -15829,7 +15886,12 @@ export class PowderStrategy extends AbilityStrategy {
 
     // Find the enemy with the highest SPEED
     const enemies = board
-      .getCellsInRange(pokemon.positionX, pokemon.positionY, pokemon.range)
+      .getCellsInRange(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.range,
+        false
+      )
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map((cell) => cell.value as PokemonEntity)
       .sort((a, b) => b.speed - a.speed)
@@ -16519,6 +16581,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GRASS_WHISTLE]: new GrassWhistleStrategy(),
   [Ability.TRI_ATTACK]: new TriAttackStrategy(),
   [Ability.ECHO]: new EchoStrategy(),
+  [Ability.UPROAR]: new UproarStrategy(),
   [Ability.PETAL_DANCE]: new PetalDanceStrategy(),
   [Ability.HYPER_VOICE]: new HyperVoiceStrategy(),
   [Ability.SHADOW_CLONE]: new ShadowCloneStrategy(),

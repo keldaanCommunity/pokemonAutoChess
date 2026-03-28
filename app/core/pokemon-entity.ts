@@ -1682,7 +1682,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetX?: number
     targetY?: number
     delay?: number
-  }) {
+  } = {}) {
     if (!this.simulation || !this.simulation.room) {
       return
     }

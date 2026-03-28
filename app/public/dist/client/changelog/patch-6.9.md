@@ -96,6 +96,7 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Metronome now displays the name of the copied ability
 - Nerf Heart Swap: SPE_DEF and AP are now stolen **after** the 100 SPECIAL are inflicted
 - New passive for Stakataka: Wall of Stone ; at the start of the fight, user and all Rock allies on the same row get 50 shield and are locked until their shield is depleted
+- New ability for Whismur line: Uproar - deal 5/10/20 special damage every second for 3 seconds to all enemies at attack range ; during this time, allies in the area are immune to Sleep.
 
 # Changes to Items
 

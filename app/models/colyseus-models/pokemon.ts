@@ -2905,7 +2905,7 @@ export class Whismur extends Pokemon {
   speDef = 2
   maxPP = 90
   range = 2
-  skill = Ability.ECHO
+  skill = Ability.UPROAR
 }
 export class Loudred extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND])
@@ -2919,7 +2919,7 @@ export class Loudred extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 2
-  skill = Ability.ECHO
+  skill = Ability.UPROAR
 }
 
 export class Exploud extends Pokemon {
@@ -2933,7 +2933,7 @@ export class Exploud extends Pokemon {
   speDef = 6
   maxPP = 90
   range = 2
-  skill = Ability.ECHO
+  skill = Ability.UPROAR
 }
 
 export class Swinub extends Pokemon {
