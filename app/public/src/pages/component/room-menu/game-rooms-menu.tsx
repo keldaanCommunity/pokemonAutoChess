@@ -12,6 +12,7 @@ import { client, leaveRoom, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
+import { joinGame as newJoinGame } from "../../../network"
 
 export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const { t } = useTranslation()
@@ -91,6 +92,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
       const game = await client.joinById<GameState>(selectedRoom.roomId, {
         idToken: token
       })
+      networkJoinGame(game)
       localStore.set(
         LocalStoreKeys.RECONNECTION_GAME,
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
