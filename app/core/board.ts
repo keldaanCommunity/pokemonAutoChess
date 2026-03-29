@@ -233,7 +233,12 @@ export class Board {
     return cells
   }
 
-  getCellsInRange(cellX: number, cellY: number, range: number, includesCenter: boolean) {
+  getCellsInRange(
+    cellX: number,
+    cellY: number,
+    range: number,
+    includesCenter: boolean
+  ) {
     const cells = new Array<Cell>()
     range = Math.floor(Math.abs(range))
     for (let y = 0; y < this.rows; y++) {

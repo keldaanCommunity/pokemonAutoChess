@@ -1605,18 +1605,18 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.WALL_OF_STONE]: [
-    new OnSimulationStartEffect(({ simulation }) => {
+    new OnSimulationStartEffect(({ simulation, entity }) => {
       // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked until their shield is depleted
-      simulation.board.forEach((x, y, entity) => {
+      simulation.board.forEach((x, y, ally) => {
         if (
-          entity &&
-          entity.team === entity.team &&
+          ally &&
+          ally.team === entity.team &&
           y === entity.positionY &&
-          entity.types.has(Synergy.ROCK)
+          ally.types.has(Synergy.ROCK)
         ) {
-          entity.addShield(50, entity, 0, false)
-          entity.status.triggerLocked(60000, entity)
-          entity.effectsSet.add(
+          ally.addShield(50, entity, 0, false)
+          ally.status.triggerLocked(60000, ally)
+          ally.effectsSet.add(
             new OnShieldDepletedEffect(({ pokemon }) => {
               pokemon.status.lockedCooldown = 0
               pokemon.status.updateLocked(0, pokemon)
