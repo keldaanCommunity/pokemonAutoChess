@@ -485,9 +485,10 @@ export default class CustomLobbyRoom extends Room {
     try {
       // allow reconnection for 30 seconds
       await this.allowReconnection(client, 30)
-    } catch (error) {
-      logger.error("custom lobby room onDrop error", error)
-      throw error
+    } catch (e) {
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left lobby room`)
+      }*/
     }
   }
 
