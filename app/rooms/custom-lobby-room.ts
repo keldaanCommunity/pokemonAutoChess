@@ -427,6 +427,10 @@ export default class CustomLobbyRoom extends Room {
       this.state.addAnnouncement(message)
     })
 
+    this.presence.subscribe("notification-added", (notif) =>
+      notificationsService.onNotificationAdded(notif)
+    )
+
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()

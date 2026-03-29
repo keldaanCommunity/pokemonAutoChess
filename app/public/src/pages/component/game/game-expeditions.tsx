@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import {
   getExpeditionLabel,
   getPlayerExpeditions
-} from "../../../../../models/expeditions"
+} from "../../../../../core/expeditions"
 import { useAppSelector } from "../../../hooks"
 import { usePreference } from "../../../preferences"
 import { addIconsToDescription } from "../../utils/descriptions"
