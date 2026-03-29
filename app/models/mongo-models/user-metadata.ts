@@ -108,6 +108,11 @@ const userMetadataSchema = new Schema({
   }
 })
 
+userMetadataSchema.index(
+  { displayName: 1 },
+  { collation: { locale: "en", strength: 2 } }
+)
+
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 
 export function toUserMetadataJSON(user): IUserMetadataJSON {
