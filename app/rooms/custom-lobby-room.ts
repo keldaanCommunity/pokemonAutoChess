@@ -279,11 +279,6 @@ export default class CustomLobbyRoom extends Room {
       }
     )
 
-    // This feature has been deactivated for security reasons. Only enable it when investigating memory leaks.
-    /*this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand())
-    })*/
-
     this.onMessage(
       Transfer.GIVE_TITLE,
       (client, { uid, title }: { uid: string; title: Title }) => {
@@ -293,6 +288,10 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(Transfer.DELETE_ACCOUNT, (client) => {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
+    })
+
+    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
+      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
     })
 
     this.onMessage(
