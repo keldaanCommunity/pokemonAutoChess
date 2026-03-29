@@ -20564,7 +20564,8 @@ export class HisuiAvalugg extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT // sprites not ready yet
-  passive = Passive.AVALUGG
+  passive = Passive.NONE // sprites not ready yet
+  //passive = Passive.AVALUGG
   additional = true
   regional: boolean = true
   isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {
