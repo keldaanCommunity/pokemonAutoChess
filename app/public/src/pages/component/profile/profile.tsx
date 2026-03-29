@@ -11,7 +11,6 @@ import {
   giveBooster,
   giveRole,
   giveTitle,
-  heapSnapshot,
   searchById,
   unban
 } from "../../../network"
@@ -195,13 +194,6 @@ function OtherProfileActions(props: {
       </button>
     ) : null
 
-  const heapSnapshotButton =
-    user && role && role === Role.ADMIN ? (
-      <button className="bubbly red" onClick={() => heapSnapshot()}>
-        {t("heap_snapshot")}
-      </button>
-    ) : null
-
   const banButton =
     user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
       <button
@@ -309,7 +301,6 @@ function OtherProfileActions(props: {
   return role === Role.ADMIN || role === Role.MODERATOR ? (
     <>
       {giveButton}
-      {heapSnapshotButton}
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}
