@@ -5416,7 +5416,7 @@ export class ShadowLugia extends Pokemon {
     Synergy.DARK
   ])
   rarity = Rarity.LEGENDARY
-  stars = 4
+  stars = 3
   hp = 300
   atk = 26
   speed = 60
