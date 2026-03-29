@@ -666,9 +666,14 @@ export default class GameRoom extends Room<{ state: GameState }> {
     /*if (client && client.auth && client.auth.displayName) {
       logger.info(`${client.auth.displayName} has been disconnected`)
     }*/
-    // allow disconnected client to reconnect into this room until 5 minutes
-    setPendingGame(this.presence, client.auth.uid, this.roomId)
-    await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+    try {
+      // allow disconnected client to reconnect into this room until 5 minutes
+      setPendingGame(this.presence, client.auth.uid, this.roomId)
+      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+    } catch (error) {
+      logger.error("game room onDrop error", error)
+      throw error
+    }
   }
 
   async onReconnect(client: Client) {
