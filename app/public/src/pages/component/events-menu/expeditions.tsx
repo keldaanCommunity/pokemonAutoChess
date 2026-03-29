@@ -4,7 +4,7 @@ import { ExpPerExpeditionRank } from "../../../../../config/game/expeditions"
 import {
   getExpeditionLabel,
   getPlayerExpeditions
-} from "../../../../../models/expeditions"
+} from "../../../../../core/expeditions"
 import { Expedition } from "../../../../../types/enum/Expedition"
 import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
