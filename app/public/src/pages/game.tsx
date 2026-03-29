@@ -408,15 +408,12 @@ export default function Game() {
     }
 
     if (!connected.current) {
-      if (room) {
-        connected.current = true
-        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-      } else {
-        connect()
-      }
-    }
-
-    if (!initialized.current && room != undefined && container?.current) {
+      connect()
+    } else if (
+      !initialized.current &&
+      room != undefined &&
+      container?.current
+    ) {
       logger.debug("initializing game")
       initialized.current = true
 
