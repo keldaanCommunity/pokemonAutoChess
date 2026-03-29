@@ -482,8 +482,13 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onDrop(client: Client, code: number) {
-    // allow reconnection for 30 seconds
-    await this.allowReconnection(client, 30)
+    try {
+      // allow reconnection for 30 seconds
+      await this.allowReconnection(client, 30)
+    } catch (error) {
+      logger.error("custom lobby room onDrop error", error)
+      throw error
+    }
   }
 
   async onReconnect(client: Client) {

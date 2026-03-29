@@ -74,8 +74,13 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
   }
 
   async onDrop(client: Client, code: number) {
-    // allow disconnected client to reconnect into this room until 20 seconds
-    await this.allowReconnection(client, 20)
+    try {
+      // allow disconnected client to reconnect into this room until 20 seconds
+      await this.allowReconnection(client, 20)
+    } catch (error) {
+      logger.error("after game room onDrop error", error)
+      throw error
+    }
   }
 
   async onLeave(client: Client, code: number) {
