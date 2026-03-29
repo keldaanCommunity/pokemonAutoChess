@@ -8,7 +8,7 @@ import { IGameMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { client, leaveRoom, rooms } from "../../../network"
+import { client, joinGame as networkJoinGame, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
@@ -91,15 +91,12 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
       const game = await client.joinById<GameState>(selectedRoom.roomId, {
         idToken: token
       })
+      networkJoinGame(game)
       localStore.set(
         LocalStoreKeys.RECONNECTION_GAME,
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
         30
       )
-      await Promise.allSettled([
-        leaveRoom("lobby", true),
-        leaveRoom("game", true)
-      ])
       dispatch(resetLobby())
       navigate("/game")
     }

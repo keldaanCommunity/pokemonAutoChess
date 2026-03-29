@@ -8,7 +8,12 @@ import { Transfer } from "../../../types"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { client, leaveRoom, rooms } from "../network"
+import {
+  client,
+  joinGame as networkJoinGame,
+  leaveRoom,
+  rooms
+} from "../network"
 import { resetLobby } from "../stores/LobbyStore"
 import {
   clearNotification,
@@ -69,15 +74,12 @@ export default function Lobby() {
       const game = await client.joinById<GameState>(pendingGameId, {
         idToken
       })
+      networkJoinGame(game)
       localStore.set(
         LocalStoreKeys.RECONNECTION_GAME,
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
         30
       )
-      await Promise.allSettled([
-        leaveRoom("lobby", true),
-        leaveRoom("game", true)
-      ])
       dispatch(resetLobby())
       navigate("/game")
     }
