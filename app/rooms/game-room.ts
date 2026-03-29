@@ -999,10 +999,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
       })
 
       if (
-        getCurrentGameEvent() === GameEvent.EXPEDITIONS /*&&
+        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
         eligibleToXP &&
-        this.state.gameMode !== GameMode.CUSTOM_LOBBY */
-        // TODO: remove this condition after testing, we want to allow expeditions points gain in custom lobby for testing purposes
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY
       ) {
         const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
           player,
