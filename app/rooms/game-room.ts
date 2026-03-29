@@ -16,7 +16,6 @@ import {
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
-import { giveUserExp } from "../core/collection"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -30,11 +29,10 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Wanderer } from "../models/colyseus-models/wanderer"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, { giveUserExp } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
@@ -669,7 +667,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       // allow disconnected client to reconnect into this room until 5 minutes
       setPendingGame(this.presence, client.auth.uid, this.roomId)
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
-    }  catch (e) {
+    } catch (e) {
       /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} left game room`)
       }*/

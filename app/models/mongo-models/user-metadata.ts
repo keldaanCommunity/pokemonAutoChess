@@ -1,5 +1,7 @@
 import { model, Schema } from "mongoose"
+import { ExpThreshold } from "../../config"
 import { CollectionUtils } from "../../core/collection"
+import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
 import {
   IUserMetadataJSON,
@@ -126,4 +128,22 @@ export function toUserMetadataJSON(user): IUserMetadataJSON {
     ...user.toObject(),
     pokemonCollection
   }
+}
+
+export function giveUserExp(user: IUserMetadataMongo, exp: number) {
+  if (user.exp + exp >= ExpThreshold) {
+    user.level += 1
+    user.booster += 1
+    user.exp = user.exp + exp - ExpThreshold
+
+    // Add level up notification
+    notificationsService.addNotification(
+      user.uid,
+      "level_up",
+      user.level.toString()
+    )
+  } else {
+    user.exp = user.exp + exp
+  }
+  user.exp = !isNaN(user.exp) ? user.exp : 0
 }
