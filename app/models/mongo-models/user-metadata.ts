@@ -5,6 +5,7 @@ import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
 import {
   IUserMetadataJSON,
+  IUserMetadataLean,
   IUserMetadataMongo
 } from "../../types/interfaces/UserMetadata"
 
@@ -116,6 +117,15 @@ userMetadataSchema.index(
 )
 
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
+
+export function toLeanUserMetadata(
+  user: IUserMetadataLean
+): IUserMetadataMongo {
+  return {
+    ...user,
+    pokemonCollection: new Map(Object.entries(user.pokemonCollection ?? {}))
+  } as IUserMetadataMongo
+}
 
 export function toUserMetadataJSON(user): IUserMetadataJSON {
   const pokemonCollection: {

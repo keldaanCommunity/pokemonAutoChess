@@ -13,7 +13,9 @@ import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  toLeanUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { notificationsService } from "../services/notifications"
 import { Emotion, Role, Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
@@ -461,7 +463,8 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onJoin(client: Client) {
-    const user = await UserMetadata.findOne({ uid: client.auth.uid })
+    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
+    const user = leanUser ? toLeanUserMetadata(leanUser) : null
     try {
       if (user?.banned) {
         throw new Error("Account banned")

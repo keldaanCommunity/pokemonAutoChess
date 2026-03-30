@@ -32,7 +32,10 @@ import { Pokemon } from "../models/colyseus-models/pokemon"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import UserMetadata, { giveUserExp } from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  giveUserExp,
+  toLeanUserMetadata
+} from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
@@ -281,7 +284,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
         } else {
-          const user = await UserMetadata.findOne({ uid: id })
+          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
+          const user = leanUser ? toLeanUserMetadata(leanUser) : null
           if (user) {
             // init player
             const player = new Player(
