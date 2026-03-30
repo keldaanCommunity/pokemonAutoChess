@@ -1,6 +1,6 @@
-import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
+import { getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { MAX_LOADING_TIME } from "../../../config"
@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "../hooks"
 import {
   authenticateUser,
   client,
+  joinGame,
   joinPreparation,
   rooms,
   toggleReady
@@ -60,62 +61,58 @@ export default function Preparation() {
   const dispatch = useAppDispatch()
   const room: Room<PreparationState> | undefined = rooms.preparation
   const user = useAppSelector((state) => state.preparation.user)
+  const uid: string = useAppSelector((state) => state.network.uid)
   const initialized = useRef<boolean>(false)
+  const [connecting, setConnecting] = useState<boolean>(false)
+  const connected = useRef<boolean>(
+    rooms.preparation ? rooms.preparation.connection.isOpen : false
+  )
   const connectingToGame = useRef<boolean>(false)
 
-  useEffect(() => {
-    const reconnect = async () => {
-      authenticateUser()
-        .then(async (user) => {
-          try {
-            if (!initialized.current) {
-              initialized.current = true
-              const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_PREPARATION
-              )?.reconnectionToken
-              if (cachedReconnectionToken) {
-                let r: Room<PreparationState>
-                try {
-                  r = await client.reconnect<PreparationState>(
-                    cachedReconnectionToken
-                  )
-                  if (r.name !== "preparation") {
-                    throw new Error(
-                      `Expected to join a preparation room but joined ${r.name} instead`
-                    )
-                  }
-                  dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-                } catch (error) {
-                  logger.error(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-                  dispatch(resetPreparation())
-                  navigate("/lobby")
-                  return
-                }
-                localStore.set(
-                  LocalStoreKeys.RECONNECTION_PREPARATION,
-                  { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
-                  30
-                )
-                await initialize(r, user.uid)
-                joinPreparation(r)
-              } else {
-                navigate("/lobby")
-              }
-            }
-          } catch (error) {
-            logger.error(error)
-            dispatch(setErrorAlertMessage(t("errors.UNKNOWN_ERROR", { error })))
-            navigate("/")
+  const connectToPreparation = useCallback(() => {
+    setConnecting(true)
+    const cachedReconnectionToken = localStore.get(
+      LocalStoreKeys.RECONNECTION_PREPARATION
+    )?.reconnectionToken
+    if (cachedReconnectionToken) {
+      client
+        .reconnect<PreparationState>(cachedReconnectionToken)
+        .then((room: Room) => {
+          if (room.name !== "preparation") {
+            throw new Error(
+              `Expected to join a preparation room but joined ${room.name} instead`
+            )
           }
+          joinPreparation(room, 30)
+          connected.current = true
+          setConnecting(false)
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
         })
-        .catch((err) => {
-          dispatch(setErrorAlertMessage(t("errors.USER_NOT_AUTHENTICATED")))
-          navigate("/")
+        .catch((error) => {
+          logger.error(error)
+          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+          dispatch(resetPreparation())
+          navigate("/lobby")
+          return
         })
+    } else {
+      dispatch(setErrorAlertMessage(t("errors.USER_NOT_AUTHENTICATED")))
+      navigate("/lobby")
     }
+  }, [client, dispatch])
 
-    const initialize = async (room: Room<PreparationState>, uid: string) => {
+  const connect = useCallback(() => {
+    logger.debug("connecting to preparation room")
+    authenticateUser().then(async (user) => {
+      if (user && !connecting) {
+        connectToPreparation()
+      }
+    })
+  }, [authenticateUser, connectToPreparation])
+
+  const initialize = useCallback(
+    (room: Room<PreparationState>) => {
+      initialized.current = true
       const $ = getStateCallbacks(room)
       const $state = $(room.state)
 
@@ -272,25 +269,23 @@ export default function Preparation() {
           const game: Room<GameState> = await client.joinById(roomId, {
             idToken: token
           })
-          localStore.set(
-            LocalStoreKeys.RECONNECTION_GAME,
-            { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
-            MAX_LOADING_TIME / 1000
-          ) // 3 minutes allowed to start game
-          await Promise.allSettled([
-            room.connection.isOpen && room.leave(),
-            game.connection.isOpen && game.leave(false)
-          ])
+          joinGame(game, MAX_LOADING_TIME / 1000)
+          room.connection.isOpen && room.leave()
           dispatch(resetPreparation())
           navigate("/game")
         }
       })
-    }
+    },
+    [dispatch]
+  )
 
-    if (!initialized.current) {
-      reconnect()
+  useEffect(() => {
+    if (!connected.current) {
+      connect()
+    } else if (!initialized.current && room != undefined) {
+      initialize(room)
     }
-  }, [initialized])
+  }, [room])
 
   const leavePreparationRoom = useCallback(async () => {
     if (room?.connection.isOpen) {
@@ -310,7 +305,13 @@ export default function Preparation() {
         leave={leavePreparationRoom}
       />
       <main>
-        <PreparationMenu />
+        {connecting ? (
+          <div className="preparation-menu my-container is-centered custom-bg">
+            <h2>{t("connecting")}</h2>
+          </div>
+        ) : (
+          <PreparationMenu />
+        )}
         <div className="my-container custom-bg chat-container">
           <h2>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h2>
           <Chat
