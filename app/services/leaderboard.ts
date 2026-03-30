@@ -26,7 +26,7 @@ export async function fetchUserLeaderboard() {
     {},
     ["displayName", "avatar", "elo", "uid"],
     { limit: 100, sort: { elo: -1 } }
-  )
+  ).lean()
 
   if (users) {
     leaderboard = users.map((user, i) => ({
@@ -45,7 +45,7 @@ export async function fetchLevelLeaderboard() {
     {},
     ["displayName", "avatar", "level", "uid"],
     { limit: 100, sort: { level: -1 } }
-  )
+  ).lean()
 
   if (levelUsers) {
     levelLeaderboard = levelUsers.map((user, i) => ({
@@ -82,7 +82,7 @@ export async function fetchEventLeaderboard() {
     { eventPoints: { $gt: 0 } },
     ["displayName", "avatar", "eventPoints", "eventFinishTime", "uid"],
     { limit: 100, sort: { eventPoints: -1, eventFinishTime: 1 } }
-  )
+  ).lean()
 
   if (users) {
     eventLeaderboard = users.map((user, i) => ({
