@@ -146,12 +146,14 @@ export function giveUserExp(user: IUserMetadataMongo, exp: number) {
     user.booster += 1
     user.exp = user.exp + exp - ExpThreshold
 
-    // Add level up notification
-    notificationsService.addNotification(
-      user.uid,
-      "level_up",
-      user.level.toString()
-    )
+    if (user.level <= 2) {
+      // Add level up notification
+      notificationsService.addNotification(
+        user.uid,
+        "level_up",
+        user.level.toString()
+      )
+    }
   } else {
     user.exp = user.exp + exp
   }
