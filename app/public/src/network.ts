@@ -259,7 +259,9 @@ export function kick(playerId: string) {
   rooms.preparation?.send(Transfer.KICK, playerId)
 }
 
-export async function searchMessages(query: string): Promise<import("../../types").IChatV2[]> {
+export async function searchMessages(
+  query: string
+): Promise<import("../../types").IChatV2[]> {
   const token = await firebase.auth().currentUser?.getIdToken()
   const res = await fetch(
     `/moderation/chat-search?query=${encodeURIComponent(query)}`,
