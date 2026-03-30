@@ -1,5 +1,4 @@
 import { Schema, SetSchema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import {
   ARMOR_FACTOR,
   DEFAULT_CRIT_CHANCE,
@@ -159,7 +158,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count = new Count()
     this.simulation = simulation
 
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.rarity = pokemon.rarity
     this.positionX = positionX
     this.positionY = positionY
@@ -557,7 +556,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
-      boardPokemon.addMaxHP(value, this.player)
+      boardPokemon.addMaxHP(value)
     }
   }
 
@@ -981,7 +980,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
       const freezeChance = 0.2 + nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
-        target.status.triggerFreeze(2000, target)
+        target.status.triggerFreeze(2000, target, this)
       }
     }
 
@@ -1683,7 +1682,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetX?: number
     targetY?: number
     delay?: number
-  }) {
+  } = {}) {
     if (!this.simulation || !this.simulation.room) {
       return
     }

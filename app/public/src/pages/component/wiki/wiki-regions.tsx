@@ -15,7 +15,7 @@ import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 
-const MIN_COL_WIDTH = 320
+const MIN_COL_WIDTH = 360
 const ROW_HEIGHT = 340
 
 export default function WikiRegions() {

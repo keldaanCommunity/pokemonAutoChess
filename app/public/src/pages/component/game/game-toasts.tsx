@@ -1,6 +1,5 @@
 import { memo } from "react"
 import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
 
 function GameToasts() {
   return (
@@ -10,7 +9,7 @@ function GameToasts() {
           key={i.toString()}
           className={`toast toast-${i}`}
           containerId={`${i}`}
-          position="bottom-right"
+          position="top-right"
           autoClose={500}
           hideProgressBar
           newestOnTop
@@ -21,7 +20,9 @@ function GameToasts() {
           pauseOnHover
           limit={1}
           closeButton={false}
-          style={{ top: `${0.5 + (i - 1) * 12.5}%` }}
+          style={{
+            top: `${2 + (i - 1) * 12.5}%`
+          }}
         />
       ))}
     </div>

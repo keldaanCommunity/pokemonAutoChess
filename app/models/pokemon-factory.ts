@@ -25,7 +25,7 @@ export default class PokemonFactory {
       pokemon.positionX = x
       pokemon.positionY = y
       for (const stat in pveStage.statBoosts) {
-        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat], undefined)
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
       }
       if (
         townEncounter === TownEncounters.MAROWAK &&

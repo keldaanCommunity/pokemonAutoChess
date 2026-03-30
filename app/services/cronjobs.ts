@@ -8,7 +8,8 @@ import {
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
   ELO_DECAY_LOST_PER_DAY,
-  EloRankThreshold
+  EloRankThreshold,
+  getCurrentGameEvent
 } from "../config"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import TitleStatistic from "../models/mongo-models/title-statistic"
@@ -16,6 +17,7 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Title } from "../types"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
+import { GameEvent } from "../types/events"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 import { notificationsService } from "./notifications"
@@ -198,10 +200,23 @@ async function resetEventScores() {
       `Event reset completed! Reset event data for ${result.modifiedCount} users`
     )
 
-    matchMaker.presence.publish(
-      "announcement",
-      "Victory Road has started! Be the first to reach the finish line!"
-    )
+    setTimeout(() => {
+      const newEvent = getCurrentGameEvent()
+      switch (newEvent) {
+        case GameEvent.VICTORY_ROAD:
+          matchMaker.presence.publish(
+            "announcement",
+            "Victory Road has started! Be the first to reach the finish line!"
+          )
+          break
+        case GameEvent.EXPEDITIONS:
+          matchMaker.presence.publish(
+            "announcement",
+            "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
+          )
+          break
+      }
+    }, 60 * 1000) // wait 1 minute to ensure the clock has ticked to the next month for all servers
   } catch (e) {
     logger.error("Error during event reset scores:", e)
   }

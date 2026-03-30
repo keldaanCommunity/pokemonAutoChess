@@ -27,6 +27,7 @@ import {
 } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
 import { cc } from "../../utils/jsx"
+import { LocalStoreKeys, localStore } from "../../utils/store"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
@@ -56,7 +57,14 @@ export default function PokemonPicker(props: {
   )
 
   return (
-    <Tabs className="my-box" id="pokemon-picker">
+    <Tabs
+      className="my-box"
+      id="pokemon-picker"
+      defaultIndex={localStore.get(LocalStoreKeys.LAST_TAB_OPENED_PICKER) ?? 0}
+      onSelect={(index) =>
+        localStore.set(LocalStoreKeys.LAST_TAB_OPENED_PICKER, index)
+      }
+    >
       <TabList>
         {tabs.map((t) => {
           return (

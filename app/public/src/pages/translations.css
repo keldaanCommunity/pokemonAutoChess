@@ -1,0 +1,62 @@
+/* ── Page layout ──────────────────────────────────────────────────────────── */
+
+.translations-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.translations-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px 12px calc(var(--sidebar-width) + 12px);
+  overflow: hidden;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* ── Column headers ──────────────────────────────────────────────────────── */
+
+.translations-column-headers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  flex-shrink: 0;
+  font-weight: bold;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-fg-secondary);
+  text-align: center;
+}
+
+/* ── Scrollable list ─────────────────────────────────────────────────────── */
+
+.translations-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 6px;
+}
+
+.translations-loading {
+  padding: 24px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+.translations-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  flex-shrink: 0;
+}
+
+.edited-count {
+  font-size: 0.9em;
+  color: var(--color-fg-secondary);
+}

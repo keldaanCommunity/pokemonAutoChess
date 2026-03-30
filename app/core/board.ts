@@ -233,12 +233,17 @@ export class Board {
     return cells
   }
 
-  getCellsInRange(cellX: number, cellY: number, range: number) {
+  getCellsInRange(
+    cellX: number,
+    cellY: number,
+    range: number,
+    includesCenter: boolean
+  ) {
     const cells = new Array<Cell>()
     range = Math.floor(Math.abs(range))
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
-        if (x == cellX && y == cellY) continue
+        if (x == cellX && y == cellY && !includesCenter) continue
         const distance = distanceC(cellX, cellY, x, y)
         if (this.isOnBoard(x, y) && distance <= range) {
           cells.push({ x, y, value: this.cells[this.columns * y + x] })

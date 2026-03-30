@@ -1,5 +1,4 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
@@ -17,7 +16,7 @@ export default class LobbyState extends Schema {
     author: string,
     avatar: string
   ) {
-    const id = nanoid()
+    const id = crypto.randomUUID()
     const time = Date.now()
     const message = new Message(id, payload, authorId, author, avatar, time)
     this.messages.push(message)
@@ -58,7 +57,7 @@ export default class LobbyState extends Schema {
   }
 
   async createTournament(name: string, startDate: string) {
-    const id = nanoid()
+    const id = crypto.randomUUID()
     logger.debug(`creating tournament id ${id}`)
     return tournament.create({
       id,

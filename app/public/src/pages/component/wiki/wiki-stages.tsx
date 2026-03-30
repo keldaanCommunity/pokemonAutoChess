@@ -332,6 +332,8 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
               </h4>
               {stageInfo.level === 1 ? (
                 <p>{addIconsToDescription(t("shiny_magikarp_description"))}</p>
+              ) : stageInfo.level === 9 ? (
+                <p>{addIconsToDescription(t("shiny_gyarados_description"))}</p>
               ) : (
                 <p>{addIconsToDescription(t("shiny_pve_description"))}</p>
               )}

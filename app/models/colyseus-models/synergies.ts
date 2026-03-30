@@ -22,6 +22,10 @@ export default class Synergies extends MapSchema<number, Synergy> {
     return (this.get(type) ?? 0) >= SynergyTriggers[type][0]
   }
 
+  hasSynergyTriggerOrMore(type: Synergy, level: number): boolean {
+    return (this.get(type) ?? 0) >= SynergyTriggers[type][level - 1]
+  }
+
   countActiveSynergies() {
     let count = 0
     this.forEach((value, synergy) => {

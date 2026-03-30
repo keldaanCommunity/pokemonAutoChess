@@ -1,5 +1,4 @@
 import { ArraySchema, MapSchema, Schema, type, view } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import {
   AdditionalPicksStages,
   BOARD_HEIGHT,
@@ -54,11 +53,12 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { GameStats, initialGameStats } from "../../types/interfaces/GameStats"
 import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
-import { max, min } from "../../utils/number"
+import { min } from "../../utils/number"
 import {
   chance,
   pickNRandomIn,
@@ -73,6 +73,7 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../precomputed/precomputed-pokemon-data"
 import ExperienceManager from "./experience-manager"
+import { GameStatsSchema } from "./game-stats"
 import HistoryItem from "./history-item"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
@@ -130,9 +131,6 @@ export default class Player extends Schema implements IPlayer {
   @type("string") map: DungeonPMDO | "town"
   @type({ set: "string" }) effects: Effects = new Effects()
   @type(["string"]) regionalPokemons = new ArraySchema<Pkm>()
-  @type("uint16") rerollCount: number = 0
-  @type("uint16") totalMoneyEarned: number = 0
-  @type("uint16") totalPlayerDamageDealt: number = 0
   @type("float32") eggChance: number = 0
   @type("float32") goldenEggChance: number = 0
   @type("uint8") cellBattery: number = 0
@@ -140,6 +138,9 @@ export default class Player extends Schema implements IPlayer {
     string,
     Wanderer
   >()
+  @type(GameStatsSchema) gameStats: GameStats = new GameStatsSchema({
+    ...initialGameStats
+  })
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
@@ -257,14 +258,14 @@ export default class Player extends Schema implements IPlayer {
       return // do not count money earned by pokemons from a ghost player
     }
     this.money += value
-    if (countTotalEarned && value > 0) this.totalMoneyEarned += value
+    if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
       if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
         pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
       }
     })
     if (
-      this.totalMoneyEarned >= 200 &&
+      this.gameStats.totalMoneyEarned >= 200 &&
       this.items.includes(Item.MISSION_ORDER_GOLD)
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GOLD)
@@ -812,18 +813,12 @@ export default class Player extends Schema implements IPlayer {
 
   completeMissionOrder(missionOrder: MissionOrder) {
     removeInArray<Item>(this.items, missionOrder)
-    const id = nanoid()
-    this.wanderers.set(
-      id,
-      new Wanderer({
-        id,
-        shiny: false,
-        pkm: Pkm.CHATOT,
-        type: WandererType.DIALOG,
-        behavior: WandererBehavior.SPECTATE
-      })
-    )
-
+    this.spawnWanderingPokemon({
+      shiny: false,
+      pkm: Pkm.CHATOT,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE
+    })
     setTimeout(() => {
       this.addMoney(30, true, null)
     }, 7000)
@@ -835,6 +830,98 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.CELL_BATTERY)
       this.cellBattery %= 100
     }
+  }
+
+  updateGameStats(state: GameState) {
+    const simulation = state.simulations.get(this.simulationId)
+    if (!simulation) return
+
+    this.gameStats.maxAP = Math.max(
+      this.gameStats.maxAP,
+      ...simulation.entities.flatMap((e) => e.ap)
+    )
+    this.gameStats.maxAttack = Math.max(
+      this.gameStats.maxAttack,
+      ...simulation.entities.flatMap((e) => e.atk)
+    )
+    this.gameStats.maxDefense = Math.max(
+      this.gameStats.maxDefense,
+      ...simulation.entities.flatMap((e) => e.def)
+    )
+    this.gameStats.maxSpecialDefense = Math.max(
+      this.gameStats.maxSpecialDefense,
+      ...simulation.entities.flatMap((e) => e.speDef)
+    )
+    this.gameStats.maxHP = Math.max(
+      this.gameStats.maxHP,
+      ...simulation.entities.flatMap((e) => e.hp)
+    )
+    this.gameStats.maxSpeed = Math.max(
+      this.gameStats.maxSpeed,
+      ...simulation.entities.flatMap((e) => e.speed)
+    )
+
+    const dps = simulation.getDpsMeter(this.id)
+    if (dps) {
+      const dpsList = values(dps)
+      this.gameStats.maxHeal = Math.max(
+        this.gameStats.maxHeal,
+        ...dpsList.map((d) => d.heal)
+      )
+      this.gameStats.maxShield = Math.max(
+        this.gameStats.maxShield,
+        ...dpsList.map((d) => d.shield)
+      )
+      this.gameStats.maxPhysicalDamage = Math.max(
+        this.gameStats.maxPhysicalDamage,
+        ...dpsList.map((d) => d.physicalDamage)
+      )
+      this.gameStats.maxSpecialDamage = Math.max(
+        this.gameStats.maxSpecialDamage,
+        ...dpsList.map((d) => d.specialDamage)
+      )
+      this.gameStats.maxTrueDamage = Math.max(
+        this.gameStats.maxTrueDamage,
+        ...dpsList.map((d) => d.trueDamage)
+      )
+    }
+
+    if (this.history.at(-1)?.result === BattleResult.WIN) {
+      this.gameStats.maxWinStreak = Math.max(
+        this.gameStats.maxWinStreak,
+        this.streak
+      )
+    }
+  }
+
+  spawnWanderingPokemon({
+    pkm,
+    type,
+    behavior,
+    data,
+    delay = 0,
+    shiny = chance(0.01)
+  }: {
+    pkm: Pkm
+    type: WandererType
+    behavior: WandererBehavior
+    data?: string
+    delay?: number
+    shiny?: boolean
+  }): Wanderer {
+    const id = crypto.randomUUID()
+    const wanderer = new Wanderer({
+      id,
+      pkm,
+      type,
+      behavior,
+      data,
+      shiny
+    })
+    setTimeout(() => {
+      this.wanderers.set(id, wanderer)
+    }, delay)
+    return wanderer
   }
 }
 

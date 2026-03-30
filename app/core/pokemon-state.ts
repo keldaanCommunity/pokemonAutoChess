@@ -159,7 +159,7 @@ export default abstract class PokemonState {
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [15, 30, 60][pokemon.stars - 1] *
+          [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? pokemon.critPower : 1)
         )
@@ -374,6 +374,16 @@ export default abstract class PokemonState {
           })
         }
         caster.shieldDone += shield
+      } else if (shield < 0 && pokemon.shield <= 0) {
+        const entity = pokemon as PokemonEntity
+        entity.getEffects(OnShieldDepletedEffect).forEach((effect) => {
+          effect.apply({
+            pokemon: entity,
+            board: pokemon.simulation.board,
+            attacker: caster as PokemonEntity,
+            damage: -shield
+          })
+        })
       }
     }
   }
@@ -1056,7 +1066,7 @@ export default abstract class PokemonState {
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon)
+      pokemon.status.triggerFreeze(1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 

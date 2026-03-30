@@ -412,6 +412,10 @@ export class MiniGame {
         prev.life > current.life ? prev : current
       )
       highestLifePlayer.items.push(Item.LEADERS_CREST)
+    } else if (state.townEncounter === TownEncounters.LAPRAS) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.LAPRAS_PASSPORT)
+      })
     }
   }
 
@@ -526,7 +530,9 @@ export class MiniGame {
       )
       itemsSet = SynergyItems.filter(
         (i) =>
-          !isIn(MemoryDiscs, i) && isIn(topSynergies, SynergyGivenByItem[i])
+          !isIn(MemoryDiscs, i) &&
+          i !== Item.SHINY_STONE &&
+          isIn(topSynergies, SynergyGivenByItem[i])
       )
       maxCopiesPerItem = 2
     }

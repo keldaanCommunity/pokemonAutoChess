@@ -174,7 +174,7 @@ export function PokemonReport() {
               >
                 {t("popularity_over_time")}
                 <span className="view-limit-hint">
-                  {t("top_n", { count: 200 })}
+                  {t("top_n", { count: 50 })}
                 </span>
               </button>
               <button
@@ -183,7 +183,7 @@ export function PokemonReport() {
               >
                 {t("placement_over_time")}
                 <span className="view-limit-hint">
-                  {t("top_n", { count: 200 })}
+                  {t("top_n", { count: 50 })}
                 </span>
               </button>
             </div>

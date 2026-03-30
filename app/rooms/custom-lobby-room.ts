@@ -433,7 +433,11 @@ export default class CustomLobbyRoom extends Room {
     this.fetchTournaments()
   }
 
-  async onAuth(client: Client, options, context): Promise<admin.auth.UserRecord> {
+  async onAuth(
+    client: Client,
+    options,
+    context
+  ): Promise<admin.auth.UserRecord> {
     try {
       super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)

@@ -719,6 +719,20 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   }
 }
 
+export class BergmiteOnBackEffect extends OnSpawnEffect {
+  stacks = 0
+
+  constructor() {
+    super((pkm) => {
+      if (!pkm.player) return
+      const bergmites = values(pkm.player.board).filter(
+        (p) => p.name === Pkm.BERGMITE && p.positionY === 0 && p.id !== pkm.id
+      )
+      this.stacks = bergmites.length
+    }, Passive.AVALUGG)
+  }
+}
+
 const ogerponMaskDropEffect = (
   mask: (typeof OgerponMasks)[number],
   from: Pkm,
@@ -1190,6 +1204,26 @@ const superchargeTadbulb = (
     })
 }
 
+export function transformToIceFace(
+  entity: PokemonEntity,
+  isBattleStart: boolean
+) {
+  entity.index = PkmIndex[Pkm.EISCUE]
+  entity.name = Pkm.EISCUE
+  entity.changePassive(Passive.EISCUE_ICE_FACE)
+  entity.addShield(isBattleStart ? 100 : 50, entity, 0, false)
+  if (entity.player) {
+    entity.player.pokemonsPlayed.add(Pkm.EISCUE)
+  }
+}
+
+export function transformToNoice(entity: PokemonEntity) {
+  entity.index = PkmIndex[Pkm.EISCUE_NOICE]
+  entity.name = Pkm.EISCUE_NOICE
+  entity.changePassive(Passive.EISCUE_NOICE)
+  entity.shield = 0
+}
+
 export const PassiveEffects: Partial<
   Record<Passive, (Effect | (() => Effect))[]>
 > = {
@@ -1241,6 +1275,9 @@ export const PassiveEffects: Partial<
   ],
   [Passive.FALINKS]: [
     () => new FalinksFormationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.AVALUGG]: [
+    () => new BergmiteOnBackEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ],
   [Passive.OGERPON_CORNERSTONE]: [
     ogerponMaskDropEffect(
@@ -1300,8 +1337,14 @@ export const PassiveEffects: Partial<
   [Passive.GUZZLORD]: [
     new OnKillEffect(({ attacker }) => {
       if (attacker.items.has(Item.CHEF_HAT)) {
-        attacker.addAbilityPower(5, attacker, 0, false, true)
-        attacker.addMaxHP(10, attacker, 0, false, true)
+        const isDoubled = attacker.player
+          ? attacker.player.synergies.hasSynergyTriggerOrMore(
+              Synergy.GOURMET,
+              2
+            )
+          : false
+        attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
+        attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
       }
     })
   ],
@@ -1416,11 +1459,11 @@ export const PassiveEffects: Partial<
   [Passive.RECYCLE]: [
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
-        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15, player)
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15)
         removeInArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {
-        pokemon.addMaxHP(30, player)
+        pokemon.addMaxHP(30)
         player.items.push(Item.TRASH)
         removeInArray(player.items, item)
         return false
@@ -1520,7 +1563,7 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player) {
+        if (entity.player && !entity.isGhostOpponent) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
           entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,
@@ -1547,6 +1590,40 @@ export const PassiveEffects: Partial<
       if (nbAllies === 0) {
         transformToHero()
       }
+    })
+  ],
+  [Passive.EISCUE_NOICE]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      if (simulation.weather === Weather.SNOW) {
+        transformToIceFace(entity, true)
+      }
+    }, Passive.EISCUE_NOICE)
+  ],
+  [Passive.EISCUE_ICE_FACE]: [
+    new OnShieldDepletedEffect(({ pokemon }) => {
+      transformToNoice(pokemon)
+    })
+  ],
+  [Passive.WALL_OF_STONE]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked until their shield is depleted
+      simulation.board.forEach((x, y, ally) => {
+        if (
+          ally &&
+          ally.team === entity.team &&
+          y === entity.positionY &&
+          ally.types.has(Synergy.ROCK)
+        ) {
+          ally.addShield(50, entity, 0, false)
+          ally.status.triggerLocked(60000, ally)
+          ally.effectsSet.add(
+            new OnShieldDepletedEffect(({ pokemon }) => {
+              pokemon.status.lockedCooldown = 0
+              pokemon.status.updateLocked(0, pokemon)
+            })
+          )
+        }
+      })
     })
   ]
 }

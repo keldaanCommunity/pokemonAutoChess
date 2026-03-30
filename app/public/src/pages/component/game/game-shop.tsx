@@ -36,6 +36,7 @@ export default function GameShop() {
       </div>
       <ToastContainer
         className="toast"
+        toastClassName="toast-shop"
         containerId="toast-money"
         position="bottom-center"
         autoClose={2000}
@@ -48,6 +49,7 @@ export default function GameShop() {
       />
       <ToastContainer
         className="toast"
+        toastClassName="toast-shop"
         containerId="toast-life"
         position="bottom-center"
         autoClose={2000}

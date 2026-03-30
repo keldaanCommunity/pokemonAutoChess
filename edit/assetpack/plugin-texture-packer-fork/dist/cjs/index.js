@@ -4,7 +4,7 @@ var core = require('@assetpack/core');
 var freeTexPackerCore = require('free-tex-packer-core');
 var fs = require('fs');
 var fs$1 = require('fs-extra');
-var glob = require('glob-promise');
+var { glob } = require('glob');
 
 function texturePacker(options) {
     const defaultOptions = {
