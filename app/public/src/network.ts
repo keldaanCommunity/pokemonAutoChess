@@ -16,6 +16,7 @@ import { PkmProposition } from "../../types/enum/Pokemon.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
+import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
 import { logIn, setProfile } from "./stores/NetworkStore"
 
@@ -98,14 +99,36 @@ export function joinLobby(room: Room<{ state: LobbyState }>) {
   rooms.lobby = room
 }
 
-export function joinPreparation(room: Room<PreparationState>) {
+export function joinPreparation(
+  room: Room<PreparationState>,
+  reconnectionTokenExpirationTimeInSeconds?: number
+) {
   leaveAllRooms()
   rooms.preparation = room
+  localStore.set(
+    LocalStoreKeys.RECONNECTION_PREPARATION,
+    {
+      reconnectionToken: room.reconnectionToken,
+      roomId: room.roomId
+    },
+    reconnectionTokenExpirationTimeInSeconds
+  )
 }
 
-export function joinGame(room: Room<GameState>) {
+export function joinGame(
+  room: Room<GameState>,
+  reconnectionTokenExpirationTimeInSeconds?: number
+) {
   leaveAllRooms()
   rooms.game = room
+  localStore.set(
+    LocalStoreKeys.RECONNECTION_GAME,
+    {
+      reconnectionToken: room.reconnectionToken,
+      roomId: room.roomId
+    },
+    reconnectionTokenExpirationTimeInSeconds
+  )
 }
 
 export function joinAfter(room: Room<AfterGameState>) {
