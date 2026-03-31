@@ -4195,7 +4195,8 @@
 		"MAGNEZONE": "Magnezone sucht einen Gesetzlosen und bietet eine Belohnung für dessen Gefangennahme an.",
 		"CINCCINO": "Chillabell bietet elegante SILK_SCARF an",
 		"WIGGLYTUFF": "Schließe Missionen für die Knuddeluff-Gilde ab, um Belohnungen zu erhalten",
-		"MAKUHITA": "Makuhita trainiert eines deiner Pokémon über mehrere Runden, um dessen Statuswerte zu verbessern."
+		"MAKUHITA": "Makuhita trainiert eines deiner Pokémon über mehrere Runden, um dessen Statuswerte zu verbessern.",
+		"CROAGUNK": "Glibunkel lässt dich ein unbenutztes Item gegen ein Zufälliges der selben Kategorie tauschen"
 	},
 	"loading_hints": {
 		"tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
