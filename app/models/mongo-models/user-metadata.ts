@@ -4,6 +4,7 @@ import { CollectionUtils } from "../../core/collection"
 import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
 import {
+  IPokemonCollectionItemMongo,
   IUserMetadataJSON,
   IUserMetadataLean,
   IUserMetadataMongo
@@ -121,9 +122,18 @@ export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 export function toLeanUserMetadata(
   user: IUserMetadataLean
 ): IUserMetadataMongo {
+  const pokemonCollection = new Map<string, IPokemonCollectionItemMongo>()
+  for (const [key, item] of Object.entries(user.pokemonCollection ?? {})) {
+    pokemonCollection.set(key, {
+      ...item,
+      unlocked: Buffer.isBuffer(item.unlocked)
+        ? item.unlocked
+        : Buffer.from(item.unlocked.buffer)
+    })
+  }
   return {
     ...user,
-    pokemonCollection: new Map(Object.entries(user.pokemonCollection ?? {}))
+    pokemonCollection
   } as IUserMetadataMongo
 }
 
