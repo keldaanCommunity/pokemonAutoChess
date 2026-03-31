@@ -4189,7 +4189,13 @@
 		"REGIROCK": "Regirock gibt allen Spielern 15 zusätzliche HP",
 		"MUNCHLAX": "Mampfaxo gibt allen Spielern PICNIC_SET",
 		"SABLEYE": "Zobiris bietet Juwelen and die die Synergie Stufe erhöhen.",
-		"CELEBI": "Celebi sagt vorher das der nächte PvE Kampf gegen Schillernde Pokémon sein wird"
+		"CELEBI": "Celebi sagt vorher das der nächte PvE Kampf gegen Schillernde Pokémon sein wird",
+		"LAPRAS": "Lapras bietet einen Ritt in eine andere Region an.",
+		"KINGAMBIT": "Kingambit hat dem Spieler auf dem ersten Platz das LEADERS_CREST verliehen. Besiege ihn im Kampf, um zusätzliches GOLD zu erhalten!",
+		"MAGNEZONE": "Magnezone sucht einen Gesetzlosen und bietet eine Belohnung für dessen Gefangennahme an.",
+		"CINCCINO": "Chillabell bietet elegante SILK_SCARF an",
+		"WIGGLYTUFF": "Schließe Missionen für die Knuddeluff-Gilde ab, um Belohnungen zu erhalten",
+		"MAKUHITA": "Makuhita trainiert eines deiner Pokémon über mehrere Runden, um dessen Statuswerte zu verbessern."
 	},
 	"loading_hints": {
 		"tab_out": "Nicht ausblenden! Der Ladevorgang wird angehalten, wenn dieses Browserfenster inaktiv ist.",
