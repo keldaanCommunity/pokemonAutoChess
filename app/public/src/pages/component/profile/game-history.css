@@ -1,6 +1,7 @@
 .game-history-list {
   display: flex;
   flex-direction: column;
+  min-height: 320px;
 }
 
 .game-history-list h2 {
