@@ -85,7 +85,7 @@ We're introducing a new monthly event that will alternate on a monthly basis wit
 - Rework Overheat: now deals damage to all enemies **in a 4-cell radius around user**. 40 → 50 SPECIAL. All FREEZE Pokémon in the zone are unfrozen.
 - Rework Fiery Wrath: now deals damage to all enemies **in a 4-cell radius around user**. 30 → 50 SPECIAL.
 - New ability for Whismur line: Uproar - deal 5/10/20 special damage every second for 3 seconds to all enemies at attack range ; during this time, allies in the area are immune to Sleep.
-- Change Echo (Chimecho): now hits all enemies in a 3 tile radius around the target, with the range increasing by 1 for every cast of the ability
+- Change Echo (Chimecho): now hits all enemies in a 3 tile radius around the user, with the range increasing by 1 for every cast of the ability
 
 - Change Astral Barrage: now rush into backline while shooting. PP 80 → 100
 - Adjust Bounce (Spoink, Mantyke): SPECIAL 10/20/30 → 15/20/25

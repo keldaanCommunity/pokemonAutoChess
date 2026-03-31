@@ -138,6 +138,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
         ].map((emotion) => {
           return (
             <div
+              key={`${type}-${index}${emotion}`}
               className={cc("my-box clickable pokemon-emotion unlocked", {
                 selected:
                   getAvatarString(index, type === "shiny", emotion) ===
@@ -154,7 +155,6 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
               }}
             >
               <PokemonPortrait
-                key={`${type}-${index}${emotion}`}
                 portrait={{
                   index,
                   shiny: type === "shiny",

@@ -23,7 +23,7 @@ export interface IPokemonStatV2 {
 
 export interface IPokemonsStatisticV2 {
   tier: EloRank
-  pokemons: Map<EloRank, IPokemonStatV2>
+  pokemons: Record<string, IPokemonStatV2>
 }
 
 const historyEntrySchema = new Schema(

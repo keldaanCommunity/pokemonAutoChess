@@ -1,3 +1,4 @@
+import { matchMaker } from "colyseus"
 import { INotification, NotificationType } from "../types/notifications"
 import { logger } from "../utils/logger"
 
@@ -28,12 +29,16 @@ class NotificationsService {
       timestamp: Date.now()
     }
 
-    if (!this.notifications.has(userId)) {
-      this.notifications.set(userId, [])
+    matchMaker.presence.publish("notification-added", notification)
+  }
+
+  onNotificationAdded(notification: INotification) {
+    if (!this.notifications.has(notification.userId)) {
+      this.notifications.set(notification.userId, [])
     }
 
-    this.notifications.get(userId)!.push(notification)
-    //logger.debug(`Notification added for user ${userId}: ${type}`)
+    this.notifications.get(notification.userId)!.push(notification)
+    //logger.debug(`Notification added for user ${notification.userId}: ${notification.type}`)
   }
 
   /**
