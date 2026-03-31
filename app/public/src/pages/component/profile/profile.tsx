@@ -112,15 +112,15 @@ export default function Profile() {
           <div className="loading">{t("loading")}</div>
         ) : error ? (
           <div className="error">{error}</div>
-        ) : suggestions.length > 0 ? (
-          <SearchResults
-            suggestions={suggestions}
-            onSelect={(suggestion) => searchById(suggestion.id)}
-          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
             setRightPanel={setRightPanel}
+          />
+        ) : suggestions.length > 0 ? (
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => searchById(suggestion.id)}
           />
         ) : (
           <MyProfileMenu />
