@@ -412,14 +412,14 @@ export interface IPokemonEntity {
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addLuck(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
@@ -432,14 +432,14 @@ export interface IPokemonEntity {
   ): void
   addAttack(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addSpeed(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
@@ -459,33 +459,33 @@ export interface IPokemonEntity {
   ): void
   addDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addSpecialDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addCritChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
   addCritPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
   addDodgeChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
