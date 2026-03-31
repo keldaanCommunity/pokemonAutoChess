@@ -1,8 +1,12 @@
 import { model, Schema } from "mongoose"
+import { ExpThreshold } from "../../config"
 import { CollectionUtils } from "../../core/collection"
+import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
 import {
+  IPokemonCollectionItemMongo,
   IUserMetadataJSON,
+  IUserMetadataLean,
   IUserMetadataMongo
 } from "../../types/interfaces/UserMetadata"
 
@@ -108,7 +112,32 @@ const userMetadataSchema = new Schema({
   }
 })
 
+userMetadataSchema.index(
+  { displayName: 1 },
+  { collation: { locale: "en", strength: 2 } }
+)
+
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
+
+export function toLeanUserMetadata(
+  user: IUserMetadataLean
+): IUserMetadataMongo {
+  const pokemonCollection = new Map<string, IPokemonCollectionItemMongo>()
+  for (const [key, item] of Object.entries(user.pokemonCollection ?? {})) {
+    pokemonCollection.set(key, {
+      ...item,
+      unlocked: Buffer.isBuffer(item.unlocked)
+        ? item.unlocked
+        : item.unlocked?.buffer
+          ? Buffer.from(item.unlocked.buffer)
+          : Buffer.alloc(5, 0)
+    })
+  }
+  return {
+    ...user,
+    pokemonCollection
+  } as IUserMetadataMongo
+}
 
 export function toUserMetadataJSON(user): IUserMetadataJSON {
   const pokemonCollection: {
@@ -121,4 +150,24 @@ export function toUserMetadataJSON(user): IUserMetadataJSON {
     ...user.toObject(),
     pokemonCollection
   }
+}
+
+export function giveUserExp(user: IUserMetadataMongo, exp: number) {
+  if (user.exp + exp >= ExpThreshold) {
+    user.level += 1
+    user.booster += 1
+    user.exp = user.exp + exp - ExpThreshold
+
+    if (user.level <= 2) {
+      // Add level up notification
+      notificationsService.addNotification(
+        user.uid,
+        "level_up",
+        user.level.toString()
+      )
+    }
+  } else {
+    user.exp = user.exp + exp
+  }
+  user.exp = !isNaN(user.exp) ? user.exp : 0
 }

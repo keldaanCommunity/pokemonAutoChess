@@ -91,7 +91,7 @@ export function MainSidebar(props: MainSidebarProps) {
     const handleKeydown = (e: KeyboardEvent) => {
       //if event occures in an input, textarea or select, ignore it
       if (
-        ["INPUT", "TEXTAREA", "SELECT"].includes(
+        ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
           (e.target as HTMLElement).tagName
         )
       ) {

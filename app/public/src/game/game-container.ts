@@ -554,6 +554,16 @@ class GameContainer {
       }
     })
 
+    $player.scarvesItems.onChange((value, key) => {
+      store.dispatch(
+        changePlayer({
+          id: player.id,
+          field: "scarvesItems",
+          value: player.scarvesItems
+        })
+      )
+    })
+
     $player.synergies.onChange(() => {
       if (
         player.id === this.playerIdSpectated &&

@@ -197,10 +197,16 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
   }
 }
 
-export class HeapSnapshotCommand extends Command<CustomLobbyRoom> {
-  execute() {
-    logger.info("writing heap snapshot")
-    writeHeapSnapshot()
+export class HeapSnapshotCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client }
+> {
+  execute({ client }: { client: Client }) {
+    const u = this.room.users.get(client.auth.uid)
+    if (u && u.role === Role.ADMIN) {
+      logger.info("writing heap snapshot")
+      writeHeapSnapshot()
+    }
   }
 }
 

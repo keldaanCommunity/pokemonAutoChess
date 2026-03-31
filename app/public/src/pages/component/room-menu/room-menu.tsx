@@ -162,7 +162,6 @@ export function RoomList({
   gameMode?: GameMode
   onRoomAction: (room: RoomAvailable, action: string) => void
 }) {
-  const { t } = useTranslation()
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )
