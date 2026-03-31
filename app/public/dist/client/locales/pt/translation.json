@@ -1524,7 +1524,18 @@
 		"TEETER_DANCE": "Ganhe [20,SP] SPEED. Todos os outros Pokémon ficam com CONFUSION por 3 segundos, tanto aliados quanto inimigos.",
 		"CLOSE_COMBAT": "Causa [130,SP] SPECIAL e reduz a DEF e SPE_DEF do lançador em 2",
 		"AQUA_RING": "Mergulha no meio da equipe aliada, criando um anel aquático que limpa os status negativos e cura [20,40,80,SP] HP",
-		"AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,100,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos"
+		"AURASPHERE": "Exala uma aura e projecta energia numa linha, causando [25,50,100,SP] de SPECIAL e SILENCE a cada oponente atingido durante 3 segundos",
+		"U_TURN": "Ganhe [15,30,50,SP] DE SHIELD, troque de posição com o alvo e inflija-o com CHARM por 1 segundo.",
+		"CHLOROBLAST": "Cause [50,100,200,SP] DE SPECIAL a todos os Pokémon inimigos ADJACENT. O usuário perde 50% do seu HP máximo.",
+		"SHADOW_BONE": "Jogue um osso que contém um espírito, causando [30,60,120,SP] SPECIAL a todo Pokémon inimigo em seu caminho com [50,LK]% de chance de reduzir DEF em [6,SP].",
+		"TROP_KICK": "\"Cause [50,100,200,SP] SPECIAL e reduza o ATK do alvo em [3,5,7,SP].\"",
+		"UPROAR": "\"Cause [5,10,20,SP] de SPECIAL a cada segundo durante 3 segundos a todos os inimigos no RANGE; durante esse tempo, aliados na área ficam imunes a SLEEP.\"",
+		"OBSTRUCT": "PROTECT o usuário, tornando-o invulnerável por [2,SP=0.5] segundos. Qualquer ataque recebido durante esse período reduzirá a DEF do atacante em 2.",
+		"FIRE_BLAST": "Dispare uma Fire Blast em uma área de efeito em forma de estrela, causando [30,60,110,SP] SPECIAL a todos os Pokémon inimigos atingidos.",
+		"FLAMETHROWER": "\"Causa [30,60,120,SP] SPECIAL e BURN por 4 segundos a todos os Pokémon inimigos numa direção em raio de 3 tiles.\"",
+		"THUNDER": "\"Um raio atinge até 3 inimigos aleatórios, infligindo [25,50,100,SP] SPECIAL com [30,LK]% de chance de causar PARALYSIS por 3 segundos\"",
+		"WISH": "Concede [30,60,120,SP] SHIELD e 1,5 segundos de PROTECT ao aliado com menor % de HP.",
+		"IRON_HEAD": "\"Aumente a DEF e a SPE_DEF do usuário em [5,10,15,SP] e então acerte o alvo com uma cabeçada poderosa, causando [100,SP]% de (DEF + SPE_DEF) como SPECIAL\""
 	},
 	"effect": {
 		"STAMINA": "Energia",
