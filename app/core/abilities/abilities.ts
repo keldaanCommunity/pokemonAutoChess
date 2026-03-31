@@ -1710,7 +1710,7 @@ export class UproarStrategy extends AbilityStrategy {
         }
       })
 
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       pokemon.commands.push(
         new DelayedCommand(() => {
           const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
