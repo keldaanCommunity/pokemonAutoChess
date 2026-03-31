@@ -3451,7 +3451,8 @@
 		"GOURMET": "Gourmet"
 	},
 	"synergy_description": {
-		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts, and can craft various scarves.",
+		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts, and can craft various scarves.{{additionalInfo}}",
+		"NORMAL_SCARVES": "\nScarves made: {{scarves}}",
 		"GRASS": "GRASS Pokémon heal and produce berries over time. 40% of overheal is gained as max HP.",
 		"FIRE": "FIRE Pokémon have a chance to BURN their enemies, and gain ATK after every attack.",
 		"WATER": "WATER Pokémon generate more PP and can be fished with a rod.",
