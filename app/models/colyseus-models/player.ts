@@ -560,7 +560,9 @@ export default class Player extends Schema implements IPlayer {
         )
         if (pokemonWithThisTm) {
           pokemonWithThisTm.tm = Ability.DEFAULT
-          pokemonWithThisTm.skill = getPokemonData(pokemonWithThisTm.name).skill
+          const baseData = getPokemonData(pokemonWithThisTm.name)
+          pokemonWithThisTm.skill = baseData.skill
+          pokemonWithThisTm.maxPP = baseData.pp
         }
       })
     }
