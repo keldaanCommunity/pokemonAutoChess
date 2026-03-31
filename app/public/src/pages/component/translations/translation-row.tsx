@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./translation-row.css"
 
@@ -22,6 +22,18 @@ export const TranslationRow = React.memo(function TranslationRow({
   onRevert
 }: TranslationRowProps) {
   const [focused, setFocused] = useState<"en" | "target" | null>(null)
+  const [previewBelow, setPreviewBelow] = useState(false)
+  const enWrapRef = useRef<HTMLDivElement>(null)
+  const targetWrapRef = useRef<HTMLDivElement>(null)
+
+  function handleFocus(field: "en" | "target") {
+    const ref = field === "en" ? enWrapRef : targetWrapRef
+    if (ref.current) {
+      const top = ref.current.getBoundingClientRect().top
+      setPreviewBelow(top < window.innerHeight / 4)
+    }
+    setFocused(field)
+  }
 
   return (
     <div className={`translation-row${isEdited ? " edited" : ""}`}>
@@ -29,7 +41,10 @@ export const TranslationRow = React.memo(function TranslationRow({
         {leafKey}
       </span>
 
-      <div className="translation-field-wrap">
+      <div
+        className={`translation-field-wrap${previewBelow && focused === "en" ? " preview-below" : ""}`}
+        ref={enWrapRef}
+      >
         {focused === "en" && enValue && (
           <div className="translation-preview">
             {addIconsToDescription(enValue)}
@@ -41,12 +56,15 @@ export const TranslationRow = React.memo(function TranslationRow({
           readOnly
           tabIndex={-1}
           rows={1}
-          onFocus={() => setFocused("en")}
+          onFocus={() => handleFocus("en")}
           onBlur={() => setFocused(null)}
         />
       </div>
 
-      <div className="translation-field-wrap">
+      <div
+        className={`translation-field-wrap${previewBelow && focused === "target" ? " preview-below" : ""}`}
+        ref={targetWrapRef}
+      >
         {focused === "target" && targetValue && (
           <div className="translation-preview">
             {addIconsToDescription(targetValue)}
@@ -57,7 +75,7 @@ export const TranslationRow = React.memo(function TranslationRow({
           value={targetValue}
           rows={1}
           onChange={(e) => onEdit(path, e.currentTarget.value)}
-          onFocus={() => setFocused("target")}
+          onFocus={() => handleFocus("target")}
           onBlur={() => setFocused(null)}
         />
       </div>
