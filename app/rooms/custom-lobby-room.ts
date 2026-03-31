@@ -13,7 +13,9 @@ import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  toLeanUserMetadata
+} from "../models/mongo-models/user-metadata"
 import { notificationsService } from "../services/notifications"
 import { Emotion, Role, Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
@@ -279,11 +281,6 @@ export default class CustomLobbyRoom extends Room {
       }
     )
 
-    // This feature has been deactivated for security reasons. Only enable it when investigating memory leaks.
-    /*this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand())
-    })*/
-
     this.onMessage(
       Transfer.GIVE_TITLE,
       (client, { uid, title }: { uid: string; title: Title }) => {
@@ -293,6 +290,10 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(Transfer.DELETE_ACCOUNT, (client) => {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
+    })
+
+    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
+      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
     })
 
     this.onMessage(
@@ -428,6 +429,10 @@ export default class CustomLobbyRoom extends Room {
       this.state.addAnnouncement(message)
     })
 
+    this.presence.subscribe("notification-added", (notif) =>
+      notificationsService.onNotificationAdded(notif)
+    )
+
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
@@ -458,7 +463,8 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onJoin(client: Client) {
-    const user = await UserMetadata.findOne({ uid: client.auth.uid })
+    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
+    const user = leanUser ? toLeanUserMetadata(leanUser) : null
     try {
       if (user?.banned) {
         throw new Error("Account banned")
@@ -482,8 +488,14 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onDrop(client: Client, code: number) {
-    // allow reconnection for 30 seconds
-    await this.allowReconnection(client, 30)
+    try {
+      // allow reconnection for 30 seconds
+      await this.allowReconnection(client, 30)
+    } catch (e) {
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left lobby room`)
+      }*/
+    }
   }
 
   async onReconnect(client: Client) {

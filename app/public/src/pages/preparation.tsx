@@ -70,38 +70,40 @@ export default function Preparation() {
           try {
             if (!initialized.current) {
               initialized.current = true
-              const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_PREPARATION
-              )?.reconnectionToken
-              if (cachedReconnectionToken) {
-                let r: Room<PreparationState>
-                try {
-                  r = await client.reconnect<PreparationState>(
-                    cachedReconnectionToken
-                  )
-                  if (r.name !== "preparation") {
-                    throw new Error(
-                      `Expected to join a preparation room but joined ${r.name} instead`
+              let r: Room<PreparationState>
+
+              if (rooms.preparation?.connection.isOpen) {
+                r = rooms.preparation
+              } else {
+                const cachedReconnectionToken = localStore.get(
+                  LocalStoreKeys.RECONNECTION_PREPARATION
+                )?.reconnectionToken
+                if (cachedReconnectionToken) {
+                  try {
+                    r = await client.reconnect<PreparationState>(
+                      cachedReconnectionToken
                     )
+                    if (r.name !== "preparation") {
+                      throw new Error(
+                        `Expected to join a preparation room but joined ${r.name} instead`
+                      )
+                    }
+                    dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+                  } catch (error) {
+                    logger.error(error)
+                    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+                    dispatch(resetPreparation())
+                    navigate("/lobby")
+                    return
                   }
-                  dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-                } catch (error) {
-                  logger.error(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-                  dispatch(resetPreparation())
+                  joinPreparation(r)
+                } else {
                   navigate("/lobby")
                   return
                 }
-                localStore.set(
-                  LocalStoreKeys.RECONNECTION_PREPARATION,
-                  { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
-                  30
-                )
-                await initialize(r, user.uid)
-                joinPreparation(r)
-              } else {
-                navigate("/lobby")
               }
+
+              await initialize(r, user.uid)
             }
           } catch (error) {
             logger.error(error)

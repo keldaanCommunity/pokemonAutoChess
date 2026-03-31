@@ -104,6 +104,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
+  @type(["string"]) scarvesItems = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -150,7 +151,6 @@ export default class Player extends Schema implements IPlayer {
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
-  scarvesItems: Item[] = []
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: Item[] = pickRandomTMs()
   weatherRocks: Item[] = []
@@ -172,6 +172,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  extraScarves: number = 0
 
   constructor(
     id: string,
@@ -476,15 +477,11 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies,
       Synergy.NORMAL
     )
-    const previousNbScarves = this.items
-      .concat(values(this.board).flatMap((p) => Array.from(p.items)))
-      .filter((i) => isIn(Scarves, i) || i === Item.SILK_SCARF)
-      .reduce((total, i) => total + (i === Item.NULLIFY_BANDANNA ? 2 : 1), 0) // count scarves already held by player and pokemons, with nullify bandanna counting as 2
-    const extraScarves = previousNbScarves - previousNbNormalScarves // if > 0 it means player got a scarf from another source (encounter, passive...)
+    const previousNbScarves = previousNbNormalScarves + this.extraScarves
     const previousScarves = this.getScarvesItemsWithNbScarves(previousNbScarves)
 
     const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
-    const newNbScarves = newNbNormalScarves + extraScarves
+    const newNbScarves = newNbNormalScarves + this.extraScarves
     const newScarves = this.getScarvesItemsWithNbScarves(newNbScarves)
 
     if (newScarves.length > previousScarves.length) {
@@ -498,11 +495,8 @@ export default class Player extends Schema implements IPlayer {
       })
     } else if (newScarves.length < previousScarves.length) {
       // some scarves are lost
-      const lostScarves = previousScarves.slice(
-        newScarves.length,
-        previousScarves.length
-      )
-
+      const lostScarves = [...previousScarves]
+      newScarves.forEach((s) => removeInArray(lostScarves, s))
       const removeScarf = (item: ScarfItem) => {
         // first check held items
         const pokemons = values(this.board)

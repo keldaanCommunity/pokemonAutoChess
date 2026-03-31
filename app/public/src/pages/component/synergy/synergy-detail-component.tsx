@@ -131,6 +131,12 @@ export default function SynergyDetailComponent(props: {
     })
   }
 
+  if (props.type === Synergy.NORMAL && spectatedPlayer) {
+    additionalInfo = t("synergy_description.NORMAL_SCARVES", {
+      scarves: spectatedPlayer.scarvesItems.join(" ")
+    })
+  }
+
   return (
     <div style={{ maxWidth: "560px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>

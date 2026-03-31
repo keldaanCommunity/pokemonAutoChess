@@ -34,7 +34,7 @@ export async function fetchBotsList(
         queryFilter, // Apply filter in the database query
         { steps: 0 }, // Exclude the 'steps' field
         { sort: { elo: -1, id: 1 }, limit: pageSize, skip: page * pageSize } // Add secondary sort by id for stable pagination
-      )
+      ).lean()
 
       if (!botsData || botsData.length === 0) {
         hasMoreData = false

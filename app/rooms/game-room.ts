@@ -16,7 +16,6 @@ import {
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
-import { giveUserExp } from "../core/collection"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -30,11 +29,13 @@ import {
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
-import { Wanderer } from "../models/colyseus-models/wanderer"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  giveUserExp,
+  toLeanUserMetadata
+} from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
   getPokemonData,
@@ -73,7 +74,6 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import { removeInArray } from "../utils/array"
@@ -86,7 +86,7 @@ import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
-import { chance, shuffleArray } from "../utils/random"
+import { shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
@@ -284,7 +284,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
         } else {
-          const user = await UserMetadata.findOne({ uid: id })
+          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
+          const user = leanUser ? toLeanUserMetadata(leanUser) : null
           if (user) {
             // init player
             const player = new Player(
@@ -666,9 +667,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
     /*if (client && client.auth && client.auth.displayName) {
       logger.info(`${client.auth.displayName} has been disconnected`)
     }*/
-    // allow disconnected client to reconnect into this room until 5 minutes
-    setPendingGame(this.presence, client.auth.uid, this.roomId)
-    await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+    try {
+      // allow disconnected client to reconnect into this room until 5 minutes
+      setPendingGame(this.presence, client.auth.uid, this.roomId)
+      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+    } catch (e) {
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left game room`)
+      }*/
+    }
   }
 
   async onReconnect(client: Client) {
@@ -751,6 +758,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
+    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
     const players = values(this.state.players)
     players.forEach((player) => {
       clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
@@ -999,10 +1007,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
       })
 
       if (
-        getCurrentGameEvent() === GameEvent.EXPEDITIONS /*&&
+        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
         eligibleToXP &&
-        this.state.gameMode !== GameMode.CUSTOM_LOBBY */
-        // TODO: remove this condition after testing, we want to allow expeditions points gain in custom lobby for testing purposes
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY
       ) {
         const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
           player,
