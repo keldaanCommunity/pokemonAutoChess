@@ -10508,7 +10508,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
       pokemon.addAttack(6 * nbAdjacentEnemies, pokemon, 1, crit)
     } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
       board
-        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
             cell.value.addPP(25, pokemon, 1, crit)
