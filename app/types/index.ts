@@ -264,6 +264,7 @@ export interface IPlayer {
   opponentTitle: string
   boardSize: number
   items: ArraySchema<Item>
+  scarvesItems: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean

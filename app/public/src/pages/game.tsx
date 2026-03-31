@@ -211,16 +211,7 @@ export default function Game() {
         client
           .reconnect<GameState>(cachedReconnectionToken)
           .then((room: Room) => {
-            // store game token for 1 hour
-            localStore.set(
-              LocalStoreKeys.RECONNECTION_GAME,
-              {
-                reconnectionToken: room.reconnectionToken,
-                roomId: room.roomId
-              },
-              60 * 60
-            )
-            joinGame(room)
+            joinGame(room, 60 * 60) // once in game, reconnection token is valid for 1 hour
             connected.current = true
             connecting.current = false
             dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
@@ -405,6 +396,11 @@ export default function Game() {
           await connectToGame()
         }
       })
+    }
+
+    if (rooms.game?.connection.isOpen) {
+      connected.current = true
+      dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
     }
 
     if (!connected.current) {

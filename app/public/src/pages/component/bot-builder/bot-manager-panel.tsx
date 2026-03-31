@@ -17,6 +17,8 @@ const ROW_HEIGHT = 50
 export function BotManagerPanel() {
   const [filterApproved, setFilterApproved] = useState<boolean | undefined>()
   const [filteredPokemon, setFilteredPokemon] = useState<Pkm | "">("")
+  const [filteredAuthor, setFilteredAuthor] = useState<string>("")
+  const [authors, setAuthors] = useState<string[]>([])
   const navigate = useNavigate()
   const { t } = useTranslation()
   return (
@@ -61,13 +63,40 @@ export function BotManagerPanel() {
             onChange={setFilteredPokemon}
           />
         </div>
+        <div>
+          Filter by author:&nbsp;
+          <select
+            value={filteredAuthor}
+            onChange={(e) => setFilteredAuthor(e.target.value)}
+            className="author-filter-input"
+          >
+            <option value="">All authors</option>
+            {authors.map((author) => (
+              <option key={author} value={author}>
+                {author}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <BotsList approved={filterApproved} filteredPokemon={filteredPokemon} />
+      <BotsList
+        approved={filterApproved}
+        filteredPokemon={filteredPokemon}
+        filteredAuthor={filteredAuthor}
+        onBotsLoaded={(bots) =>
+          setAuthors([...new Set(bots.map((b) => b.author))].sort())
+        }
+      />
     </div>
   )
 }
 
-function BotsList(props: { approved?: boolean; filteredPokemon: Pkm | "" }) {
+function BotsList(props: {
+  approved?: boolean
+  filteredPokemon: Pkm | ""
+  filteredAuthor: string
+  onBotsLoaded: (bots: IBotLight[]) => void
+}) {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [bots, setBots] = useState<IBotLight[] | null>(null)
@@ -82,6 +111,7 @@ function BotsList(props: { approved?: boolean; filteredPokemon: Pkm | "" }) {
       .then((res) => res.json())
       .then((data) => {
         setBots(data)
+        props.onBotsLoaded(data)
       })
   }, [props.filteredPokemon])
 
@@ -138,6 +168,7 @@ function BotsList(props: { approved?: boolean; filteredPokemon: Pkm | "" }) {
       .filter(
         (b) => props.approved === undefined || b.approved === props.approved
       )
+      .filter((b) => !props.filteredAuthor || b.author === props.filteredAuthor)
       .sort((a, b) => {
         if (!sortColumn) return 0
         let aValue = a[sortColumn as keyof IBotLight]

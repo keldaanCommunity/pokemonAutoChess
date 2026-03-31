@@ -61,7 +61,10 @@ export default function TranslationsPage() {
 
   // Load English once
   useEffect(() => {
-    fetch("locales/en/translation.json")
+    const githubUrl =
+      "https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/dist/client/locales/en/translation.json"
+    fetch(githubUrl)
+      .catch(() => fetch("locales/en/translation.json"))
       .then((r) => r.json())
       .then((data: TranslationMap) => {
         setEnData(data)
@@ -76,7 +79,9 @@ export default function TranslationsPage() {
   useEffect(() => {
     setLoading(true)
     setEdits(loadEdits(targetLang))
-    fetch(`locales/${targetLang}/translation.json`)
+    const githubUrl = `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/dist/client/locales/${targetLang}/translation.json`
+    fetch(githubUrl)
+      .catch(() => fetch(`locales/${targetLang}/translation.json`))
       .then((r) => r.json())
       .then((data: TranslationMap) => {
         setTargetData(data)
