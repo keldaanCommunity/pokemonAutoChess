@@ -45,7 +45,7 @@ export type IPokemonCollectionItemLean = Omit<
   IPokemonCollectionItemMongo,
   "unlocked"
 > & {
-  unlocked: Buffer | { buffer: ArrayBuffer }
+  unlocked: Buffer | { buffer: ArrayBuffer } | undefined
 }
 
 export type IUserMetadataLean = Omit<

@@ -128,7 +128,9 @@ export function toLeanUserMetadata(
       ...item,
       unlocked: Buffer.isBuffer(item.unlocked)
         ? item.unlocked
-        : Buffer.from(item.unlocked.buffer)
+        : item.unlocked?.buffer
+          ? Buffer.from(item.unlocked.buffer)
+          : Buffer.alloc(5, 0)
     })
   }
   return {
