@@ -9450,28 +9450,30 @@ export class TorchSongStrategy extends AbilityStrategy {
     )
     for (let i = 0; i < nbFlames; i++) {
       const randomTarget = pickRandomIn(enemies)
-      pokemon.commands.push(
-        new DelayedCommand(() => {
-          pokemon.broadcastAbility({
-            targetX: randomTarget.positionX,
-            targetY: randomTarget.positionY
-          })
-          pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
-          if (randomTarget?.hp > 0) {
-            randomTarget.handleSpecialDamage(
-              damagePerFlame,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              false,
-              false
-            )
-            if (chance(0.3, pokemon)) {
-              randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+      if (randomTarget) {
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.broadcastAbility({
+              targetX: randomTarget.positionX,
+              targetY: randomTarget.positionY
+            })
+            pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
+            if (randomTarget.hp > 0) {
+              randomTarget.handleSpecialDamage(
+                damagePerFlame,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                false,
+                false
+              )
+              if (chance(0.3, pokemon)) {
+                randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+              }
             }
-          }
-        }, 100 * i)
-      )
+          }, 100 * i)
+        )
+      }
     }
   }
 }
