@@ -2886,4 +2886,6 @@
 	"cancel_tournament_participation": "トーナメントを退出しる",
 	"register_tournament_participation": "トーナメントに登録する",
 	"starts_at": "開始時間は"
+	"stats": "能力値",
+	"bench": "ベンチ"
 }
