@@ -29,7 +29,7 @@
 .bots-table-header,
 .bots-table-row {
   display: grid;
-  grid-template-columns: 50px 120px 150px 60px 1fr 80px 400px;
+  grid-template-columns: 50px 250px 250px 60px 1fr 80px 400px;
   align-items: center;
   gap: 0 0.5em;
   padding: 0 0.5em;
@@ -46,6 +46,12 @@
 .bots-table-row > span:first-child {
   text-align: left;
   padding: 0;
+}
+
+.bots-table-row > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bots-table-row.even {

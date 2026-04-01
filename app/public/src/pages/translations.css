@@ -37,7 +37,6 @@
 .translations-list {
   flex: 1;
   overflow-y: auto;
-  padding: 4px 6px;
 }
 
 .translations-loading {

@@ -159,7 +159,7 @@ async function titleStats() {
   logger.info(`${count} users found`)
   for (const title of Object.values(Title)) {
     const titleCount = await UserMetadata.countDocuments({
-      titles: { $in: title }
+      titles: title
     })
     await TitleStatistic.deleteMany({ name: title })
     await TitleStatistic.create({ name: title, rarity: titleCount / count })

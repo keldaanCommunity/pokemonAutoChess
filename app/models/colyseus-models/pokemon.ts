@@ -5416,7 +5416,7 @@ export class ShadowLugia extends Pokemon {
     Synergy.DARK
   ])
   rarity = Rarity.LEGENDARY
-  stars = 4
+  stars = 3
   hp = 300
   atk = 26
   speed = 60
@@ -20564,7 +20564,8 @@ export class HisuiAvalugg extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT // sprites not ready yet
-  passive = Passive.AVALUGG
+  passive = Passive.NONE // sprites not ready yet
+  //passive = Passive.AVALUGG
   additional = true
   regional: boolean = true
   isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {

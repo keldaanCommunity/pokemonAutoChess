@@ -1710,7 +1710,7 @@ export class UproarStrategy extends AbilityStrategy {
         }
       })
 
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       pokemon.commands.push(
         new DelayedCommand(() => {
           const damage = [5, 10, 20][pokemon.stars - 1] ?? 20
@@ -9450,28 +9450,30 @@ export class TorchSongStrategy extends AbilityStrategy {
     )
     for (let i = 0; i < nbFlames; i++) {
       const randomTarget = pickRandomIn(enemies)
-      pokemon.commands.push(
-        new DelayedCommand(() => {
-          pokemon.broadcastAbility({
-            targetX: randomTarget.positionX,
-            targetY: randomTarget.positionY
-          })
-          pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
-          if (randomTarget?.hp > 0) {
-            randomTarget.handleSpecialDamage(
-              damagePerFlame,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              false,
-              false
-            )
-            if (chance(0.3, pokemon)) {
-              randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+      if (randomTarget) {
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            pokemon.broadcastAbility({
+              targetX: randomTarget.positionX,
+              targetY: randomTarget.positionY
+            })
+            pokemon.addAbilityPower(apGainPerFlame, pokemon, 0, false)
+            if (randomTarget.hp > 0) {
+              randomTarget.handleSpecialDamage(
+                damagePerFlame,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                false,
+                false
+              )
+              if (chance(0.3, pokemon)) {
+                randomTarget.status.triggerBurn(2000, randomTarget, pokemon)
+              }
             }
-          }
-        }, 100 * i)
-      )
+          }, 100 * i)
+        )
+      }
     }
   }
 }
@@ -10506,7 +10508,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
       pokemon.addAttack(6 * nbAdjacentEnemies, pokemon, 1, crit)
     } else if (pokemon.passive === Passive.OGERPON_WELLSPRING) {
       board
-        .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
         .forEach((cell) => {
           if (cell.value && cell.value.team === pokemon.team) {
             cell.value.addPP(25, pokemon, 1, crit)

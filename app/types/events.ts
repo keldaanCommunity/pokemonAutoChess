@@ -4,7 +4,6 @@ export enum GameEvent {
 }
 
 export const GameEvents: GameEvent[] = [
-  // TODO: switch order so that Expeditions start on April
-  GameEvent.EXPEDITIONS,
-  GameEvent.VICTORY_ROAD
+  GameEvent.VICTORY_ROAD,
+  GameEvent.EXPEDITIONS
 ]

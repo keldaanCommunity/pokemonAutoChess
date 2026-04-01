@@ -11,7 +11,6 @@ import {
   giveBooster,
   giveRole,
   giveTitle,
-  heapSnapshot,
   searchById,
   unban
 } from "../../../network"
@@ -113,15 +112,15 @@ export default function Profile() {
           <div className="loading">{t("loading")}</div>
         ) : error ? (
           <div className="error">{error}</div>
-        ) : suggestions.length > 0 ? (
-          <SearchResults
-            suggestions={suggestions}
-            onSelect={(suggestion) => searchById(suggestion.id)}
-          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
             setRightPanel={setRightPanel}
+          />
+        ) : suggestions.length > 0 ? (
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => searchById(suggestion.id)}
           />
         ) : (
           <MyProfileMenu />
@@ -192,13 +191,6 @@ function OtherProfileActions(props: {
         }}
       >
         {t("give_boosters")}
-      </button>
-    ) : null
-
-  const heapSnapshotButton =
-    user && role && role === Role.ADMIN ? (
-      <button className="bubbly red" onClick={() => heapSnapshot()}>
-        {t("heap_snapshot")}
       </button>
     ) : null
 
@@ -309,7 +301,6 @@ function OtherProfileActions(props: {
   return role === Role.ADMIN || role === Role.MODERATOR ? (
     <>
       {giveButton}
-      {heapSnapshotButton}
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}
