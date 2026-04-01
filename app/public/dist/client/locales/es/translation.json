@@ -549,17 +549,10 @@
 		"GLACIAL_LANCE": "Lanza Glacial",
 		"ORDER_UP": "Oído Cocina",
 		"ICE_SPINNER": "Pirueta Helada",
-		"CEASELESS_EDGE": "Tajo Metralla",
 		"TWINEEDLE": "Doble Ataque",
 		"MOUNTAIN_GALE": "Viento Carámbano",
 		"ROCK_WRECKER": "Romperrocas",
-		"SHOCKWAVE": "Onda Voltio",
-		"ACID_ARMOR": "Armadura Ácida",
-		"SUPER_HEAT": "Supercalentar",
-		"RETURN": "Retribución",
-		"DRILL_PECK": "Pico Taladro",
-		"CEASELESS_EDGE": "Tajo Metralla",
-		"TWISTER": "Ciclón"
+		"CEASELESS_EDGE": "Tajo Metralla"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
