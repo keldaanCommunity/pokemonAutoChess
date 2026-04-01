@@ -450,12 +450,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   toMovingState() {
-    if (this.passive === Passive.INANIMATE) return
+    if (this.passive === Passive.INANIMATE || this.status.tree) return
     this.changeState(new MovingState())
   }
 
   toAttackingState() {
-    if (this.passive === Passive.INANIMATE) return
+    if (this.passive === Passive.INANIMATE || this.status.tree) return
     this.changeState(new AttackingState())
   }
 
