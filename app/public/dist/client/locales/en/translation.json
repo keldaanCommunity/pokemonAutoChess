@@ -2420,7 +2420,7 @@
 		"STAMINA": "Gain 15 SHIELD. Get a SILK_SCARF.",
 		"STRENGTH": "Gain 20 SHIELD. Get a second SILK_SCARF.",
 		"ENDURE": "Gain 25 SHIELD. Get a third SILK_SCARF.",
-		"PURE_POWER": "Gain 30 SHIELD. Get a fourth SILK_SCARF. All SILK_SCARF-made item holders gain 30% base ATK and 30 AP.",
+		"PURE_POWER": "Gain 30 SHIELD. Get a fourth SILK_SCARF. All NORMAL SILK_SCARF-made item holders gain 30% base ATK and 30 AP.",
 		"INGRAIN": "Restore 5 HP every 2 seconds. Get a berry tree.",
 		"GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
 		"SPORE": "Restore 25 HP every 2 seconds. Get a third berry tree.",
