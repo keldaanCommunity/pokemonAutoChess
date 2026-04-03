@@ -54,7 +54,7 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
-  showAltForms: false,
+  showAltForms: true,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
