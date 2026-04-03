@@ -1,3 +1,4 @@
+import { getBaseAltForm } from "../config"
 import { ExpPerExpeditionRank } from "../config/game/expeditions"
 import { getExpeditionData, getPlayerExpeditions } from "../core/expeditions"
 import { notificationsService } from "../services/notifications"
@@ -63,7 +64,10 @@ export function checkExpeditionCompletion(
   switch (expedition.type) {
     case ExpeditionType.RESCUE: {
       const expeditionData = getExpeditionData(expedition) as RescueMissionData
-      return values(player.board).some((p) => p.name === expeditionData.pokemon)
+      const pokemonToRescue = getBaseAltForm(expeditionData.pokemon)
+      return values(player.board).some(
+        (p) => getBaseAltForm(p.name) === pokemonToRescue
+      )
     }
 
     case ExpeditionType.EXPLORATION: {
