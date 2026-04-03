@@ -94,7 +94,7 @@ export default function SynergyDetailComponent(props: {
   let additionalInfo = ""
 
   if (props.type === Synergy.WILD && spectatedPlayer) {
-    const wildChance = getWildChance(spectatedPlayer, stageLevel)
+    const wildChance = getWildChance(spectatedPlayer)
     additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
       wildChance: roundToNDigits(wildChance * 100, 1)
     })
