@@ -83,3 +83,10 @@ UW POC es un servidor apuntado para la comunidad latina de PokemonAutoChess, el 
 - location: Australia
 
 Australian Community Server for Pokemon Auto Chess
+
+# John Auto Chess
+- url: https://www.john-auto-chess.com/
+- creator: tegberen
+- location: Germany
+
+It runs the official version as base with some light changes on the meta. Near the end of each patch, it switches to pre-release mode for playtesting.
