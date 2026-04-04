@@ -413,10 +413,10 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   async onDrop(client: Client, code: number) {
     try {
       /*if (client.auth && client.auth.displayName) {
-      logger.info(
-        `${client.auth.displayName} ${client.id} is leaving preparation room`
-      )
-    }*/
+        logger.info(
+          `${client.auth.displayName} ${client.id} is leaving preparation room`
+        )
+      }*/
       this.state.abortOnPlayerLeave?.abort()
       // allow disconnected client to reconnect into this room until 10 seconds
       await this.allowReconnection(client, 10)
@@ -434,6 +434,9 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
           `${client.auth.displayName} ${client.id} leave preparation room`
         )
       }*/
+    if (this.state.gameStartedAt === null) {
+      this.state.abortOnPlayerLeave?.abort()
+    }
     this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
   }
 
