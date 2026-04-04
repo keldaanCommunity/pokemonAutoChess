@@ -3274,7 +3274,7 @@
 		"BABY_CHANCE_STACKED": "\n\nProbabilidad acumulada: {{eggChance}}%",
 		"DRAGON_STARS": "\nBonus actual: {{totalStars}} STAR",
 		"LIGHT": "La LIGHT revela un foco en el campo de batalla. La unidad que se encuentra en el foco de luz al comienzo del combate obtiene bonificaciones únicas.",
-		"WILD": "Los Pokémon WILD solo se encuentran durante las rondas JcE cuando la sinergia no está activa (8% de probabilidad base). Sus ataques tienen un [25,LK]% de probabilidad de infligir WOUND durante 3 segundos.{{additionalInfo}}",
+		"WILD": "Los Pokémon WILD solo se encuentran durante las rondas JcE cuando la sinergia no está activa (6% de probabilidad base). Sus ataques tienen un [25,LK]% de probabilidad de infligir WOUND durante 3 segundos.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nPosibilidades actuales de encontrar un Pokémon WILD : {{wildChance}}%",
 		"AMORPHOUS": "Los Pokémon AMOPRHOUS son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y SPEED al activar una gran variedad de sinergias.",
 		"GOURMET": "Los Pokémon GOURMET pueden llevar un CHEF_HAT. Los cocineros prepararán sus platos insignia después de cada batalla y se los darán a sus aliados ADJACENT, otorgándoles mejoras y efectos variados.",

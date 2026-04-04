@@ -2458,7 +2458,7 @@
 		"LIGHT_PULSE": "추가로 초당 PP 8증가",
 		"ETERNAL_LIGHT": "추가로 DEF, SPE_DEF 50% 증가 및 8초간 RUNE_PROTECT 부여",
 		"MAX_ILLUMINATION": "추가로 100 SHIELD 및 RESURRECTION 부여",
-		"QUICK_FEET": "WILD 포켓몬은 +20 SPEED를 받으며 이제 모든 스테이지의 상점에서 찾을 수 있습니다. (8%의 기본 확률 + WILD STAR 1개당 +0.5% 확률)",
+		"QUICK_FEET": "WILD 포켓몬은 +20 SPEED를 받으며 이제 모든 스테이지의 상점에서 찾을 수 있습니다. (6%의 기본 확률 + WILD STAR 1개당 +0.5% 확률)",
 		"RUN_AWAY": "SPEED +40.",
 		"HUSTLE": "ATK +40%, SPEED +40",
 		"BERSERK": "HP가 30% 미만이 되면 SHIELD가 30 증가하고 ATK 및 SPEED 버프가 3초 동안 두 배로 늘어납니다.",
@@ -3353,7 +3353,7 @@
 		"BABY": "BABY 포켓몬은 패배 이후 위로의 표시로 포켓몬의 알을 가져옵니다. 연패에 따라 확률이 증가합니다.{{additionalInfo}}",
 		"BABY_CHANCE_STACKED": "\n확률 증가: {{eggChance}}%",
 		"LIGHT": "LIGHT 포켓몬은 전장에 스포트라이트를 비춥니다. 스포트라이트 위에 서 있는 포켓몬은 전투 시작 시, 특수한 효과를 얻습니다.",
-		"WILD": "WILD 포켓몬은 시너지가 활성화되지 않은 PvE 조우 단계에서만 발견됩니다(기본 확률 8%). 이들의 공격은 [25,LK]%의 확률로 3초 동안 WOUND를 입힙니다.{{additionalInfo}}",
+		"WILD": "WILD 포켓몬은 시너지가 활성화되지 않은 PvE 조우 단계에서만 발견됩니다(기본 확률 6%). 이들의 공격은 [25,LK]%의 확률로 3초 동안 WOUND를 입힙니다.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\n현재 WILD 포켓몬이 등장할 확률: {{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS 포켓몬은 극도로 유연하며 고정된 형태가 없습니다. 모든 아군이 활성화된 시너지에 따라 추가적인 HP와 SPEED를 얻습니다.",
 		"GOURMET": "GOURMET 포켓몬은 CHEF_HAT 를 장착할 수 있다. 셰프는 스테이지마다 시그니처 디쉬를 요리하여 인접한 아군에게 먹여 다양한 효과를 적용한다."

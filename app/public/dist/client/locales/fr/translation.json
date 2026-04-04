@@ -3467,7 +3467,7 @@
 		"DRAGON_STARS": "\n\nBonus actuel : {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\n\nCharge de la CELL_BATTERY : {{charge}}%",
 		"LIGHT": "Les Pokémon LIGHT révèlent un projecteur sur le champ de bataille. L’unité sous les projecteurs au début du combat bénéficie de bonus uniques.",
-		"WILD": "Les Pokémon WILD sont trouvables seulement lors des tours JcE quand la synergie n'est pas active (8% de chance de base). Leurs attaques ont [25,LK]% de chance d'infliger WOUND à leurs cibles pendant 3 secondes.{{additionalInfo}}.",
+		"WILD": "Les Pokémon WILD sont trouvables seulement lors des tours JcE quand la synergie n'est pas active (6% de chance de base). Leurs attaques ont [25,LK]% de chance d'infliger WOUND à leurs cibles pendant 3 secondes.{{additionalInfo}}.",
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
 		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets.",
