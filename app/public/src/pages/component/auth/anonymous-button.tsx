@@ -1,6 +1,8 @@
 import { getAuth, signInAnonymously, updateProfile } from "firebase/auth"
 import { useTranslation } from "react-i18next"
+import { Starters } from "../../../../../types/enum/Starters"
 import { generateRandomName } from "../../../../../utils/name-generation"
+import { pickRandomIn } from "../../../../../utils/random"
 
 export default function AnonymousButton() {
   const { t } = useTranslation()
@@ -9,7 +11,8 @@ export default function AnonymousButton() {
     try {
       await signInAnonymously(auth)
       if (auth.currentUser) {
-        const randomName = generateRandomName()
+        const starterPokemon = pickRandomIn(Starters)
+        const randomName = generateRandomName(starterPokemon)
         await updateProfile(auth.currentUser, { displayName: randomName })
         window.location.href = window.location.href + "lobby"
       }
