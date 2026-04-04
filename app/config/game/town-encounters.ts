@@ -44,7 +44,8 @@ export const TownEncountersByStage: {
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
-    [Pkm.MAKUHITA]: 1 / 20
+    [Pkm.MAKUHITA]: 1 / 20,
+    [Pkm.LAPRAS]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,
