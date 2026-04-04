@@ -2521,7 +2521,7 @@
 		"LIGHT_PULSE": "Also give +8 PP per second",
 		"ETERNAL_LIGHT": "Also increase base DEF and SPE_DEF by 50% and give RUNE_PROTECT for 8 seconds",
 		"MAX_ILLUMINATION": "Also give 100 SHIELD and RESURRECTION",
-		"QUICK_FEET": "WILD Pokémon get +20 SPEED, and can now be found in shops at every stage (8% base chance + +0.5% for each WILD STAR on board).",
+		"QUICK_FEET": "WILD Pokémon get +20 SPEED, and can now be found in shops at every stage (6% base chance + 0.5% for each WILD STAR on board).",
 		"RUN_AWAY": "+40 SPEED.",
 		"HUSTLE": "+40 SPEED and +40% base ATK",
 		"BERSERK": "Once below 30% HP, gain 30 SHIELD and double these ATK and SPEED buffs for 3 seconds.",
@@ -3483,7 +3483,7 @@
 		"DRAGON_STARS": "\nCurrent bonus: {{totalStars}} STAR",
 		"ELECTRIC_CHARGE": "\nCELL_BATTERY charge: {{charge}}%",
 		"LIGHT": "LIGHT Pokémon reveal a spotlight on the battlefield. The Pokémon standing in the spotlight at the start of combat gains unique bonuses.",
-		"WILD": "WILD Pokémon are only found during PvE encounters stages when synergy is not active (8% base chance). Their attacks have [25,LK]% chance to inflict WOUND for 3 seconds.{{additionalInfo}}",
+		"WILD": "WILD Pokémon are only found during PvE encounters stages when synergy is not active (6% base chance). Their attacks have [25,LK]% chance to inflict WOUND for 3 seconds.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nCurrent chance to find a WILD Pokémon: {{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and SPEED by activating a wide variety of synergies.",
 		"GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed ADJACENT allies, giving them various buffs and effects."

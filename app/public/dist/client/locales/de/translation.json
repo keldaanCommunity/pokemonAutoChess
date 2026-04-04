@@ -2933,7 +2933,7 @@
 		"BABY": "BABY können dir Pokémon-Eier bringen, um dich nach einer Niederlage zu trösten. Der Zufall steigert sich mit Pechsträhnen.{{additionalInfo}}",
 		"BABY_CHANCE_STACKED": "Gestapelte Chance: {{eggChance}}%",
 		"LIGHT": "LIGHT bringt einen Scheinwerfer auf das Schlachtfeld. Die Einheit, die zu Beginn des Kampfes im Rampenlicht steht, erhält einzigartige Boni.",
-		"WILD": "WILD Pokémon werden nur in PvE-Begegnungsphasen gefunden, wenn die Synergie nicht aktiv ist (8 % Basischance). Ihre Angriffe haben eine Chance von [25,LK] %, 3 Sekunden lang WOUND zu verursachen.{{additionalInfo}}",
+		"WILD": "WILD Pokémon werden nur in PvE-Begegnungsphasen gefunden, wenn die Synergie nicht aktiv ist (6 % Basischance). Ihre Angriffe haben eine Chance von [25,LK] %, 3 Sekunden lang WOUND zu verursachen.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nAktuelle Chance, ein WILD Pokémon zu finden: {{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS Pokémon sind extrem flexibel und haben keine eigene Form. Dein Team gewinnt HP und SPEED, indem es eine Vielzahl von Synergien aktiviert.",
 		"GOURMET": "GOURMET Pokémon können mit einem CHEF_HAT ausgerüstet werden. Köche werden ihr Signatur-Gericht zwischen den Runden kochen und füttern benachbarte Verbündete, was ihnen unterschiedliche Buffs und Effekte gibt."
