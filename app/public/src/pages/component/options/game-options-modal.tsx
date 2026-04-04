@@ -115,7 +115,7 @@ export default function GameOptionsModal(props: {
               <p className="info">
                 {t("options.community_translations")}{" "}
                 <a
-                  href="https://discord.com/channels/737230355039387749/1134014553529790464"
+                  href="https://discord.com/channels/737230355039387749/1488242758232834282"
                   target="_blank"
                 >
                   Discord
