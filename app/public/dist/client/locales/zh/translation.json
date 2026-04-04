@@ -4643,7 +4643,7 @@
 		"EXPLORATION": "探索任务",
 		"BATTLE": "战斗任务",
 		"RESCUE_DESCRIPTION": "在游戏结束时，你的队伍中有一只$t(pkm.{{pokemon}})",
-		"EXPLORATION_DESCRIPTION": "在一局游戏中前往$t(map.{{region}})，且在游戏结束时{{synergy}}共鸣的等级至少达到了{{level}}",
+		"EXPLORATION_DESCRIPTION": "在一局游戏中前往$t(map.{{region}}) ({{regionSynergies}})，且在游戏结束时{{synergy}}共鸣的等级至少达到了{{level}}",
 		"BATTLE_DESCRIPTION": "在一轮战斗中，使一只宝可梦{{gameStat}}达到至少{{amount}}",
 		"BATTLE_WIN_STREAK_DESCRIPTION": "在一局游戏中，达成至少{{amount}}连胜",
 		"DELIVERY_DESCRIPTION": "在游戏结束时，有至少{{quantity}}个{{item}}在你的物品栏或我方宝可梦的装备区内",

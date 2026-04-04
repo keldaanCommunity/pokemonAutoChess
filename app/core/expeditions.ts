@@ -92,6 +92,15 @@ export function getExpeditionLabel(expedition: Expedition): string {
       })
     }
   }
+
+  if (expedition.type === ExpeditionType.EXPLORATION) {
+    const data = getExpeditionData(expedition) as ExplorationMissionData
+    return t(`expeditions.EXPLORATION_DESCRIPTION`, {
+      ...data,
+      regionSynergies: RegionDetails[data.region].synergies.join(" ")
+    })
+  }
+
   return t(
     `expeditions.${expedition.type}_DESCRIPTION`,
     getExpeditionData(expedition)
