@@ -504,7 +504,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.RockPathRB]: {
-    synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.FOSSIL],
+    synergies: [Synergy.ROCK, Synergy.FIELD, Synergy.FIRE],
     music: DungeonMusic.RISING_FEAR,
     regionalSpeciality: Item.RIBBON_SWEET
   },
