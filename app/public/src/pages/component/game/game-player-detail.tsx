@@ -116,7 +116,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
       </div>
       <div style={{ display: "flex", justifyContent: "space-evenly" }}>
         <span>{t("total")}</span>
-        <span title={t("total_money_earned")}>
+        <span title={t("game_stats.total_money_earned")}>
           <img
             src="assets/icons/money_total.svg"
             alt="$"
@@ -124,7 +124,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
           />{" "}
           {props.player.gameStats.totalMoneyEarned}
         </span>
-        <span title={t("total_player_damage_dealt")}>
+        <span title={t("game_stats.total_player_damage_dealt")}>
           <img
             src="assets/icons/ATK.png"
             alt="✊"
@@ -132,7 +132,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
           />
           {props.player.gameStats.totalPlayerDamageDealt}
         </span>
-        <span title={t("total_reroll_count")}>
+        <span title={t("game_stats.total_reroll_count")}>
           <img
             src="assets/ui/refresh.svg"
             alt="↻"
