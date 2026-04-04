@@ -20511,14 +20511,13 @@ export class Bergmite extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.AVALUGG
-  // evolutions = [Pkm.AVALUGG, Pkm.HISUI_AVALUGG]
+  evolutions = [Pkm.AVALUGG, Pkm.HISUI_AVALUGG]
   evolutionRule = new CountEvolutionRule(
     3,
     (_pokemon: Pokemon, player: IPlayer) => {
-      /*if (player.regionalPokemons.includes(Pkm.HISUI_AVALUGG))
-        return Pkm.HISUI_AVALUGG
-      */
-      return Pkm.AVALUGG
+      return player.regionalPokemons.includes(Pkm.HISUI_AVALUGG)
+        ? Pkm.HISUI_AVALUGG
+        : Pkm.AVALUGG
     }
   )
   hp = 90
@@ -20556,19 +20555,18 @@ export class HisuiAvalugg extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.MONSTER, Synergy.ROCK])
   rarity = Rarity.RARE
   stars = 2
-  hp = 190
-  atk = 15
+  hp = 170
+  atk = 17
   speed = 38
   def = 20
   speDef = 5
   maxPP = 100
   range = 1
-  skill = Ability.DEFAULT // sprites not ready yet
-  passive = Passive.NONE // sprites not ready yet
-  //passive = Passive.AVALUGG
+  skill = Ability.MOUNTAIN_GALE
+  passive = Passive.AVALUGG
   additional = true
   regional: boolean = true
-  isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {
+  isInRegion(map: DungeonPMDO | "town"): boolean {
     const regionSynergies = RegionDetails[map]?.synergies
     return regionSynergies.includes(Synergy.ROCK)
   }
