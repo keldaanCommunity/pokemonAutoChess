@@ -118,6 +118,7 @@ export async function joinLobbyRoom(
               if (errorMessage) {
                 dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
               }
+              dispatch(resetLobby())
               navigate("/")
             }
           })
@@ -316,7 +317,7 @@ export async function joinExistingPreparationRoom(
           `Expected to join a preparation room but joined ${room.name} instead`
         )
       }
-      joinPreparation(room, 30)      
+      joinPreparation(room, 30)
       leaveRoom("lobby")
       dispatch(resetLobby())
       navigate("/preparation")
