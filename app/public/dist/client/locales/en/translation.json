@@ -4794,5 +4794,15 @@
 		"next": "Next",
 		"close": "Close",
 		"dismiss_all": "Dismiss All"
-	}	
+	},
+	"profile_menu": {
+		"elo_tab": {
+			"title": "Elo",
+			"current_elo": "Current Elo",
+			"max_elo_reached": "Highest Elo reached",
+			"elo_decay_info": "If you don't play at least 3 games within the last 20 days (Ranked games if Ultra Ball rank or above), your elo will start to decay (-{{eloLoss}} elo/day).",
+			"elo_decay_active": "Your elo is currently decaying",
+			"elo_decay_inactive": "Your elo will start to decay on {{time}}"
+		}
+	}
 }

@@ -17,6 +17,7 @@ import {
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
+import { EloTab } from "./elo-tab"
 import { GadgetsTab } from "./gadgets-tab"
 import GameHistory from "./game-history"
 import PlayerBox from "./player-box"
@@ -146,6 +147,7 @@ function MyProfileMenu() {
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
+        <Tab>{t("profile_menu.elo_tab.title")}</Tab>
         <Tab>{t("account")}</Tab>
       </TabList>
 
@@ -160,6 +162,9 @@ function MyProfileMenu() {
       </TabPanel>
       <TabPanel>
         <GadgetsTab />
+      </TabPanel>
+      <TabPanel>
+        <EloTab />
       </TabPanel>
       <TabPanel>
         <AccountTab />

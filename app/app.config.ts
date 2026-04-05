@@ -370,12 +370,16 @@ export const server = defineServer({
         res.set("Cache-Control", "no-cache")
       }
       const { playerUid } = req.params
-      const { page = 1 } = req.query
+      const { page = 1, gameMode } = req.query
       const limit = 10
       const skip = (Number(page) - 1) * limit
+      const params: any = { playerId: playerUid }
+      if (gameMode) {
+        params.gameMode = gameMode
+      }
 
       const stats = await DetailledStatistic.find(
-        { playerId: playerUid },
+        params,
         ["pokemons", "time", "rank", "elo", "gameMode"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )

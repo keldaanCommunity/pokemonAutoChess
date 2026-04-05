@@ -12,6 +12,8 @@
 
 # UI
 
+- Added elo tab on profile menu with information about elo decay and max elo reached.
+
 # Bugfix
 
 # Misc

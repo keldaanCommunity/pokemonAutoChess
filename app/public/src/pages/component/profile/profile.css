@@ -261,3 +261,11 @@ ul.titles > li.selected .title-name {
   gap: 0.25em;
   flex-wrap: wrap;
 }
+
+.profile-modal .elo-tab {
+  text-align: center;
+}
+
+.profile-modal .elo-tab p {
+  margin: 1em 0;
+}
