@@ -1433,17 +1433,6 @@
 		"AP": "Sức mạnh kĩ năng",
 		"SHIELD": "Khiên"
 	},
-	"stat_description": {
-		"ATK": "Sát thương gây ra bởi các đòn đánh thường",
-		"SPEED": "Tần suất tấn công, tốc độ di chuyển và thời gian hồi chiêu. Tối đa 300.",
-		"CRIT_CHANCE": "Đòn đánh chí mạng gây 2x sát thương. Kĩ năng không thể gây chí mạng. Tỉ lệ chí mạng quá 100% sẽ được chuyển thành Sát thương chí mạng",
-		"CRIT_POWER": "Hệ số nhân sát thương cho đòn đánh chí mạng, hồi máu và tăng sức mạnh",
-		"DEF": "Giảm PHYSICAL nhận vào",
-		"SPE_DEF": "Giảm SPECIAL nhận vào",
-		"HP": "Pokémon sẽ bị hạ gục nếu không còn máu",
-		"RANGE": "Pokémon có tầm đánh trong bán kính 1 ô sẽ là cận chiến",
-		"MAX_PP": "Lượng thời gian cần thiết để vận chiêu. Pokemon hồi chiêu qua thời gian (10 mỗi giây), khi tấn công (5 mỗi lần tấn công) và khi nhận sát thương (10% của sát thương nhận vào)"
-	},
 	"cancel": "Hủy bỏ",
 	"elo": "Elo",
 	"shiny_hunter": "Thợ Săn Shiny",
@@ -1464,8 +1453,6 @@
 	},
 	"total": "Tổng ",
 	"lvl": "Lvl",
-	"xp": "XP",
-	"experience": "Kinh nghiệm",
 	"lose_game_hint": "Bạn sẽ thua khi HP của bạn bị chuyển về 0",
 	"unlock": "Mở khóa",
 	"lock": "Khóa",
@@ -1484,7 +1471,6 @@
 	"show_damage_numbers": "HIển thị damage",
 	"disable_animated_tilemap": "Tắt background animations",
 	"save": "Lưu",
-	"passive": "Bị động",
 	"pick_additional_pokemon_hint": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
 	"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos",
 	"tier": "Bậc",
@@ -1502,12 +1488,6 @@
 	"pokemons_on_your_board": "Pokémons trên sân của bạn",
 	"team_size_hint": "Tăng số lượng Pokemon của đội bạn bằng cách tăng cấp độ của bạn",
 	"level": "Cấp độ",
-	"craftable_items_description": "Kết hợp 2 items để hợp thành items mạnh hơn",
-	"berries_description": "Khi bộ GRASS có hiệu lực, bạn có thể thu thập berries bằng cách chọn vào cây berry ở gần Avatar của bạn",
-	"tools_description": "bộ ARTIFICIAL sẽ cho bạn exclusive items  khi được kích hoạt. Ba trong số các items đó sẽ được họn ngẫu nhiên cho các Player vào đầu game",
-	"weather_rocks_description": "Các Weather rock có thể tìm thấy sau khi chiến đấu dưới một loại thời tiết nhất định với bộ ROCK đang được kích hoạt, và cung cấp các hiệu ứng tăng cường cho đội của bạn khi loại thời tiết này đang hoạt động. Các hiệu ứng của chúng có thể được cộng dồn.",
-	"special_items_description": "Những vật phẩm này là độc quyền cho một số Pokémon và không thể thu được bằng cách khác.",
-	"shiny_items_description": "Nếu bạn đủ may mắn để chiến đấu với một đội shiny trong các vòng PvE hoặc tìm thấy một quả trứng vàng, bạn sẽ nhận được một vật phẩm shiny làm phần thưởng.",
 	"community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
 	"no_emotions_available": "Không có cảm xúc",
 	"loading_asset": "Đang tải tài nguyên",
@@ -1516,11 +1496,11 @@
 	"search_player": "Tìm người chơi",
 	"team_builder": "Lên đồ",
 	"profile": {
-		"progress":{
+		"progress": {
 			"titles_unlocked": "{{count}}/{{total}} Thành tích đạt được",
 			"gadgets_unlocked": "{{count}}/{{total}} Công cụ đã mở khoá"
 		}
-	},	
+	},
 	"game-reconnect-modal-title": "Kết nối lại",
 	"game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
 	"key": "Chìa khoá",
@@ -1532,7 +1512,7 @@
 		"avatar_emotes": "Chuyển đổi menu biểu cảm",
 		"avatar_show_emote": "Kích hoạt biểu cảm "
 	},
-	"gadgets": "Dụng cụ",	
+	"gadgets": "Dụng cụ",
 	"gadget": {
 		"trainer_card": "Thẻ người chơi",
 		"trainer_card_desc": "Thay đổi tên, ava và danh hiệu",
@@ -1700,18 +1680,56 @@
 		"additional": "Lựa Chọn Thêm",
 		"battle": "Trận Đấu Người Chơi"
 	},
-	"enemy_team": "Đội Địch",
-	"stat_boosts": "Tăng Cường Chỉ Số",
-	"rewards": "Phần Thưởng",
-	"shiny_chance": "Tỷ Lệ Shiny",
-	"shiny_magikarp_description": "Magikarp shiny cho 10 VÀNG mỗi con khi bị đánh bại",
-	"shiny_pve_description": "Vòng PvE shiny cho bạn lựa chọn giữa 3 vật phẩm shiny ngẫu nhiên làm phần thưởng khi bị đánh bại",
-	"carousel_description": "Vòng băng chuyền vật phẩm nơi bạn có thể chọn vật phẩm cho đội của mình. Vật phẩm được chọn ngẫu nhiên từ kho vật phẩm có sẵn.",
-	"item_pool": "Kho Vật Phẩm",
-	"town_encounters": "Cuộc Gặp Trong Thành Phố",
-	"portal_description_1": "Sử dụng cổng để đi đến một vùng mới. Sau đó bạn sẽ phải chọn một Pokémon Khởi Đầu, Độc Nhất hoặc Huyền Thoại.",
-	"portal_description_2": "Mỗi cổng có các biểu tượng synergy được lấy ngẫu nhiên từ các synergy thống trị của tất cả người chơi. Biểu tượng ảnh hưởng đến cả vùng bạn sẽ đến và Pokémon được đề xuất.",
-	"portal_description_3": "Nếu bạn quyết định không sử dụng cổng nào, bạn sẽ ở lại vùng hiện tại và Pokémon được đề xuất sẽ hoàn toàn ngẫu nhiên.",
-	"additional_description": "Chọn một lựa chọn thêm và một thành phần vật phẩm từ 3 đề xuất. Lựa chọn thêm là Pokémon tiến hóa 2 giai đoạn có thể tìm thấy trong tất cả cửa hàng của người chơi sau khi được chọn.",
-	"battle_description": "Giai đoạn chiến đấu thông thường nơi bạn chiến đấu với người chơi khác hoặc bot."
+	"wiki": {
+		"nav": {},
+		"tutorials": {},
+		"credits": {},
+		"pokemons": {
+			"passive": "Bị động"
+		},
+		"items": {
+			"craftable_items_description": "Kết hợp 2 items để hợp thành items mạnh hơn",
+			"shiny_items_description": "Nếu bạn đủ may mắn để chiến đấu với một đội shiny trong các vòng PvE hoặc tìm thấy một quả trứng vàng, bạn sẽ nhận được một vật phẩm shiny làm phần thưởng.",
+			"special_items_description": "Những vật phẩm này là độc quyền cho một số Pokémon và không thể thu được bằng cách khác.",
+			"tools_description": "bộ ARTIFICIAL sẽ cho bạn exclusive items  khi được kích hoạt. Ba trong số các items đó sẽ được họn ngẫu nhiên cho các Player vào đầu game",
+			"weather_rocks_description": "Các Weather rock có thể tìm thấy sau khi chiến đấu dưới một loại thời tiết nhất định với bộ ROCK đang được kích hoạt, và cung cấp các hiệu ứng tăng cường cho đội của bạn khi loại thời tiết này đang hoạt động. Các hiệu ứng của chúng có thể được cộng dồn.",
+			"berries_description": "Khi bộ GRASS có hiệu lực, bạn có thể thu thập berries bằng cách chọn vào cây berry ở gần Avatar của bạn"
+		},
+		"statistics": {
+			"stat_description": {
+				"ATK": "Sát thương gây ra bởi các đòn đánh thường",
+				"SPEED": "Tần suất tấn công, tốc độ di chuyển và thời gian hồi chiêu. Tối đa 300.",
+				"CRIT_CHANCE": "Đòn đánh chí mạng gây 2x sát thương. Kĩ năng không thể gây chí mạng. Tỉ lệ chí mạng quá 100% sẽ được chuyển thành Sát thương chí mạng",
+				"CRIT_POWER": "Hệ số nhân sát thương cho đòn đánh chí mạng, hồi máu và tăng sức mạnh",
+				"DEF": "Giảm PHYSICAL nhận vào",
+				"SPE_DEF": "Giảm SPECIAL nhận vào",
+				"HP": "Pokémon sẽ bị hạ gục nếu không còn máu",
+				"RANGE": "Pokémon có tầm đánh trong bán kính 1 ô sẽ là cận chiến",
+				"MAX_PP": "Lượng thời gian cần thiết để vận chiêu. Pokemon hồi chiêu qua thời gian (10 mỗi giây), khi tấn công (5 mỗi lần tấn công) và khi nhận sát thương (10% của sát thương nhận vào)"
+			}
+		},
+		"weather": {},
+		"stages": {
+			"enemy_team": "Đội Địch",
+			"stat_boosts": "Tăng Cường Chỉ Số",
+			"rewards": "Phần Thưởng",
+			"shiny_chance": "Tỷ Lệ Shiny",
+			"shiny_magikarp_description": "Magikarp shiny cho 10 VÀNG mỗi con khi bị đánh bại",
+			"shiny_pve_description": "Vòng PvE shiny cho bạn lựa chọn giữa 3 vật phẩm shiny ngẫu nhiên làm phần thưởng khi bị đánh bại",
+			"carousel_description": "Vòng băng chuyền vật phẩm nơi bạn có thể chọn vật phẩm cho đội của mình. Vật phẩm được chọn ngẫu nhiên từ kho vật phẩm có sẵn.",
+			"item_pool": "Kho Vật Phẩm",
+			"town_encounters": "Cuộc Gặp Trong Thành Phố",
+			"portal_description_1": "Sử dụng cổng để đi đến một vùng mới. Sau đó bạn sẽ phải chọn một Pokémon Khởi Đầu, Độc Nhất hoặc Huyền Thoại.",
+			"portal_description_2": "Mỗi cổng có các biểu tượng synergy được lấy ngẫu nhiên từ các synergy thống trị của tất cả người chơi. Biểu tượng ảnh hưởng đến cả vùng bạn sẽ đến và Pokémon được đề xuất.",
+			"portal_description_3": "Nếu bạn quyết định không sử dụng cổng nào, bạn sẽ ở lại vùng hiện tại và Pokémon được đề xuất sẽ hoàn toàn ngẫu nhiên.",
+			"additional_description": "Chọn một lựa chọn thêm và một thành phần vật phẩm từ 3 đề xuất. Lựa chọn thêm là Pokémon tiến hóa 2 giai đoạn có thể tìm thấy trong tất cả cửa hàng của người chơi sau khi được chọn.",
+			"battle_description": "Giai đoạn chiến đấu thông thường nơi bạn chiến đấu với người chơi khác hoặc bot."
+		},
+		"town": {},
+		"regions": {},
+		"data": {
+			"xp": "XP",
+			"experience": "Kinh nghiệm"
+		}
+	}
 }

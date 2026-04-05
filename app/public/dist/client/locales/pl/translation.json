@@ -835,8 +835,34 @@
 	"leave_game": "Wyjdź z gry",
 	"options": "Opcje",
 	"wiki": {
-		"luck_title": "Jak działa Szczęście?",
-		"luck_formula": "Szczęście wpływa na prawdopodobieństwo według następującego wzoru: P = podstawaP^ (1 - szczęście/100); na przykład Pokémon z 10% szansą na trafienie krytyczne i 50 szczęściem będzie miał w rzeczywistości 0,1^(1-50/100) = ~31,62% szansy na trafienie krytyczne"
+		"nav": {},
+		"tutorials": {},
+		"credits": {},
+		"pokemons": {},
+		"items": {},
+		"weather": {},
+		"stages": {
+			"enemy_team": "Drużyna Przeciwników",
+			"stat_boosts": "Wzmocnienia Statystyk",
+			"rewards": "Nagrody",
+			"shiny_chance": "Szansa na Shiny",
+			"shiny_magikarp_description": "Shiny Magikarp dają po 10 ZŁOTA każdy gdy zostają pokonani",
+			"shiny_pve_description": "Shiny rundy PvE dają wybór między 3 losowymi shiny przedmiotami jako nagrodę gdy zostają pokonane",
+			"carousel_description": "Runda karuzeli przedmiotów gdzie możesz wybrać przedmioty dla swojej drużyny. Przedmioty są losowo wybierane z dostępnej puli przedmiotów.",
+			"item_pool": "Pula Przedmiotów",
+			"town_encounters": "Miejskie Spotkania",
+			"portal_description_1": "Weź portal aby podróżować do nowego regionu. Następnie będziesz musiał wybrać Startowego, Unikalnego lub Legendarnego Pokémona.",
+			"portal_description_2": "Każdy portal ma symbole synergii losowo wybrane z dominujących synergii wszystkich graczy. Symbole wpływają zarówno na region do którego podróżujesz jak i na proponowanych Pokémonów.",
+			"portal_description_3": "Jeśli zdecydujesz się nie brać żadnego portalu, zostaniesz w swoim obecnym regionie, a proponowani Pokémoni będą całkowicie losowi.",
+			"additional_description": "Wybierz dodatkowy wybór i komponent przedmiotu spośród 3 propozycji. Dodatkowe wybory to 2-stopniowe ewolucyjne Pokémony które można znaleźć we wszystkich sklepach graczy po wybraniu.",
+			"battle_description": "Regularny etap walki gdzie walczysz przeciwko innym graczom lub botom."
+		},
+		"town": {},
+		"regions": {},
+		"data": {
+			"luck_title": "Jak działa Szczęście?",
+			"luck_formula": "Szczęście wpływa na prawdopodobieństwo według następującego wzoru: P = podstawaP^ (1 - szczęście/100); na przykład Pokémon z 10% szansą na trafienie krytyczne i 50 szczęściem będzie miał w rzeczywistości 0,1^(1-50/100) = ~31,62% szansy na trafienie krytyczne"
+		}
 	},
 	"errors": {
 		"USER_BANNED": "Twoje konto zostało zablokowane",
@@ -877,20 +903,6 @@
 		"additional": "Dodatkowy Wybór",
 		"battle": "Walka Graczy"
 	},
-	"enemy_team": "Drużyna Przeciwników",
-	"stat_boosts": "Wzmocnienia Statystyk",
-	"rewards": "Nagrody",
-	"shiny_chance": "Szansa na Shiny",
-	"shiny_magikarp_description": "Shiny Magikarp dają po 10 ZŁOTA każdy gdy zostają pokonani",
-	"shiny_pve_description": "Shiny rundy PvE dają wybór między 3 losowymi shiny przedmiotami jako nagrodę gdy zostają pokonane",
-	"carousel_description": "Runda karuzeli przedmiotów gdzie możesz wybrać przedmioty dla swojej drużyny. Przedmioty są losowo wybierane z dostępnej puli przedmiotów.",
-	"item_pool": "Pula Przedmiotów",
-	"town_encounters": "Miejskie Spotkania",
-	"portal_description_1": "Weź portal aby podróżować do nowego regionu. Następnie będziesz musiał wybrać Startowego, Unikalnego lub Legendarnego Pokémona.",
-	"portal_description_2": "Każdy portal ma symbole synergii losowo wybrane z dominujących synergii wszystkich graczy. Symbole wpływają zarówno na region do którego podróżujesz jak i na proponowanych Pokémonów.",
-	"portal_description_3": "Jeśli zdecydujesz się nie brać żadnego portalu, zostaniesz w swoim obecnym regionie, a proponowani Pokémoni będą całkowicie losowi.",
-	"additional_description": "Wybierz dodatkowy wybór i komponent przedmiotu spośród 3 propozycji. Dodatkowe wybory to 2-stopniowe ewolucyjne Pokémony które można znaleźć we wszystkich sklepach graczy po wybraniu.",
-	"battle_description": "Regularny etap walki gdzie walczysz przeciwko innym graczom lub botom.",
 	"tier_list": {
 		"add_row": "Dodaj wiersz",
 		"move_row_up": "Przesuń wiersz w góre",
