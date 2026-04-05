@@ -2322,7 +2322,6 @@
 		"APPETIZER": "Vorspeise",
 		"LUNCH_BREAK": "Mittagspause",
 		"BANQUET": "Bankett",
-		"DROUGHT": "Dürre",
 		"OVERGROW": "Notdünger",
 		"FLAME_BODY": "Flammkörper",
 		"FLOWER_POWER": "Florakraft",
@@ -4295,11 +4294,11 @@
 		"your_points": "Deine Punkte: {{points}}",
 		"instructions": "Rase zum Ende der Siegesstraße",
 		"help1": "Ranglistenspiele gewährt dir Punkte basierend auf deiner Platzierung.",
-		"help2": "Sei der Erste der 500 Punkte erreicht um das Rennen zu gewinnen und einen exclusiven Titel zu erhalten!",
-		"reset_info": "Alle Punkte werden am ersten Tag des Monats um Mitternacht zurückgesetzt, das ist in {{resetCountdown}}. Die Ereignis-Rangliste wird alle 10 Minuten aktualisiert.",
+		"help2": "Sei der Erste der 500 Punkte erreicht um das Rennen zu gewinnen und einen exclusiven Titel zu erhalten!",		
 		"runners": "Teilnehmer",
 		"finishers": "Finisher"
 	},
+	"events_reset_info": "Alle Punkte werden am ersten Tag des Monats um Mitternacht zurückgesetzt, das ist in {{resetCountdown}}. Die Ereignis-Rangliste wird alle 10 Minuten aktualisiert.",
 	"stage_type": {
 		"pve": "PvE Begegnung",
 		"carousel": "Gegenstandskarussell",

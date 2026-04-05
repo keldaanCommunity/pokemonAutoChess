@@ -3908,7 +3908,7 @@
 			"play_more_games_hint": "게임을 더 플레이하여 부스터를 얻고 새로운 아바타를 해금하세요!"
 		},
 		"account": {
-			"account": "계정",
+			"title": "계정",
 			"delete_account": "계정 삭제",
 			"delete_account_hint": "영구적으로 계정을 삭제하기 원하시면 아래를 클릭하고 다음 문구를 작성하십시오. \"$t(profile.account.delete_account_passphrase)\"",
 			"delete_account_confirmation": "$t(profile.account.delete_account_passphrase) 입력하여 확인",

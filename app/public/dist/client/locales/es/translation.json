@@ -4384,11 +4384,11 @@
 		"your_points": "Tus puntos: {{points}}",
 		"instructions": "¡Alcanza la meta de la Calle Victoria!",
 		"help1": "Obtendrás puntos al alcanzar una buena posición en partidas clasificatorias",
-		"help2": "¡Sé el primero en llegar a 500 puntos para ganar la carrera y obtener un título exclusivo!",
-		"reset_info": "Todos los puntos se actualizarán las 00:00 UTC el primer día de cada mes, faltan {{resetCountdown}}. El marcador se actualiza cada 10 minutos.",
+		"help2": "¡Sé el primero en llegar a 500 puntos para ganar la carrera y obtener un título exclusivo!",		
 		"runners": "Participantes",
 		"finishers": "Campeones"
 	},
+	"events_reset_info": "Todos los puntos se actualizarán las 00:00 UTC el primer día de cada mes, faltan {{resetCountdown}}. El marcador se actualiza cada 10 minutos.",
 	"stage_type": {
 		"pve": "Encuentro PvE",
 		"carousel": "Carrusel de objetos",

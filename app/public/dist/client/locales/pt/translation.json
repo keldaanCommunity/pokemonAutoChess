@@ -2224,7 +2224,6 @@
 		"RUN_AWAY": "Fugir",
 		"HUSTLE": "Apressar",
 		"BERSERK": "Berserk",
-		"DROUGHT": "Seca",
 		"OVERGROW": "Supercrescimento",
 		"SUPERCHARGED": "Sobrecarregado",
 		"POWER_SURGE": "Surto de Energia",
@@ -3107,6 +3106,7 @@
 		},
 		"account": {
 			"user_id": "ID do usuário",
+			"user_id_hint1": "Seu ID do usuário é:",
 			"anonymous_users_name_hint": "Usuários anônimos não podem alterar seu nome.",
 			"change_name": "Mude o nome"
 		}
@@ -3450,11 +3450,11 @@
 		"your_points": "Seus pontos: {{points}}",
 		"instructions": "Corrida até a chegada da Victory Road!",
 		"help1": "Jogar partidas ranqueadas lhe concede pontos com base na sua classificação final.",
-		"help2": "Seja o primeiro a atingir 500 pontos para vencer a corrida e ganhar um título exclusivo!",
-		"reset_info": "Todas as pontuações serão zeradas à meia-noite (UTC) do primeiro dia de cada mês, ou seja, no {{resetCountdown}}. A tabela de classificação do evento é atualizada a cada 10 minutos.",
+		"help2": "Seja o primeiro a atingir 500 pontos para vencer a corrida e ganhar um título exclusivo!",		
 		"runners": "Corredores",
 		"finishers": "Finalistas"
 	},
+	"events_reset_info": "Todas as pontuações serão zeradas à meia-noite (UTC) do primeiro dia de cada mês, ou seja, no {{resetCountdown}}. A tabela de classificação do evento é atualizada a cada 10 minutos.",
 	"stage_type": {
 		"pve": "Encontro PvE",
 		"carousel": "Carrossel de itens",
@@ -3636,6 +3636,5 @@
 	"waiting_final_rank": "Aguardando os resultados de outras batalhas...",
 	"stay_till_the_end": "Fique até o fim",
 	"chat_history": "Histórico",
-	"no_results_found": "Nenhum resultado encontrado",
-	"user_id_hint1": "Seu ID do usuário é:"
+	"no_results_found": "Nenhum resultado encontrado"	
 }

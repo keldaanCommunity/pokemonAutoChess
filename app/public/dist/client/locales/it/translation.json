@@ -2346,9 +2346,8 @@
 		"APPETIZER": "Antipastino",
 		"LUNCH_BREAK": "Pausa Pranzo",
 		"BANQUET": "Banchetto",
-		"DROUGHT": "Siccità",
-		"PRECOGNIZIONE": "Precognizione",
-		"TRANSCENDENZA": "Trascendenza"
+		"PRECOGNITION": "Precognizione",
+		"TRANSCENDENCE": "Trascendenza"
 	},
 	"effect_description": {
 		"STAMINA": "Ottieni 15 SHIELD. Ottieni una SILK_SCARF.",
@@ -4533,11 +4532,11 @@
 		"your_points": "I tuoi punti: {{points}}",
 		"instructions": "Gareggia fino al traguardo della Via Vittoria !",
 		"help1": "Giocare partite classificate ti dà punti in base al tuo rango finale.",
-		"help2": "Sii il primo a raggiungere 500 punti per vincere la corsa e ottenere un titolo esclusivo !",
-		"reset_info": "Tutti i punteggi vengono resettati a mezzanote UTC del primo giorno di ogni mese, ossia tra {{resetCountdown}}. La classifica dell'evento si aggiorna ogni 10 minuti.",
+		"help2": "Sii il primo a raggiungere 500 punti per vincere la corsa e ottenere un titolo esclusivo !",		
 		"runners": "Corridori",
 		"finishers": "Arrivati"
 	},
+	"events_reset_info": "Tutti i punteggi vengono resettati a mezzanote UTC del primo giorno di ogni mese, ossia tra {{resetCountdown}}. La classifica dell'evento si aggiorna ogni 10 minuti.",
 	"stage_type": {
 		"pve": "Scontro PvE",
 		"carousel": "Carosello oggetti",
@@ -4588,7 +4587,6 @@
 		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
 		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
 	},
-	"cluster_map": "Cluster Map",
 	"profile": {
 		"title": "Profilo",
 		"progress": {

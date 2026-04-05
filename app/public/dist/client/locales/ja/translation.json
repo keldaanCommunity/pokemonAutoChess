@@ -1804,8 +1804,7 @@
 		"QUICK_FEET": "はやあし",
 		"RUN_AWAY": "にげあし",
 		"HUSTLE": "はりきり",
-		"BERSERK": "ぎゃくじょう",
-		"DROUGHT": "ひでり"
+		"BERSERK": "ぎゃくじょう"
 	},
 	"effect_description": {
 		"STAMINA": "シールドを15獲得",

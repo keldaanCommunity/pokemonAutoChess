@@ -4648,11 +4648,10 @@
 		"your_points": "Vos points : {{points}}",
 		"instructions": "Course vers la ligne d'arrivée de la Route Victoire !",
 		"help1": "Jouer à des Parties Classées vous rapporte des points en fonction de votre rang final.",
-		"help2": "Soyez le premier à atteindre 500 points pour remporter la course et obtenir un titre exclusif !",
-		"reset_info": "Tous les scores seront réinitialisés à minuit UTC le premier jour de chaque mois, c'est à dire dans {{resetCountdown}}. Le classement est actualisé toutes les 10 minutes.",
+		"help2": "Soyez le premier à atteindre 500 points pour remporter la course et obtenir un titre exclusif !",		
 		"runners": "Coureurs",
 		"finishers": "Finisseurs"
-	},
+	},	
 	"stage_type": {
 		"pve": "Rencontre PvE",
 		"carousel": "Carrousel d'objets",
