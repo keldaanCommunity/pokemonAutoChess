@@ -38,6 +38,7 @@
     "postinstall": "npm run download-music && cd edit/assetpack && npm install",
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "csv-export": "cd gen && ts-node csv-export.ts",
+    "check-labels": "cd gen && ts-node check-labels.ts",
     "add-pokemon": "cd edit && ts-node add-pokemon.ts",
     "colyseus-post-deploy": "npx colyseus-post-deploy",
     "deploy-live": "pm2 deploy production update",
