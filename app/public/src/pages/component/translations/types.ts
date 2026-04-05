@@ -23,6 +23,9 @@ export function applyEditsToObject(
     const parts = path.split(".")
     let obj = result as TranslationNode
     for (let i = 0; i < parts.length - 1; i++) {
+      if (typeof obj[parts[i]] !== "object" || obj[parts[i]] === null) {
+        obj[parts[i]] = {}
+      }
       obj = obj[parts[i]] as TranslationNode
     }
     obj[parts[parts.length - 1]] = value
