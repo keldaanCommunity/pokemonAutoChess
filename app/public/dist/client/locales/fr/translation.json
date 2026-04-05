@@ -2279,7 +2279,25 @@
 		"RAGING_BULL": "Détruit les barrières comme PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) tout en infligeant ARMOR_BREAK pendant 3 secondes, ensuite inflige [20,40,80,SP] SPECIAL à la cible",
 		"ELECTRIFY": "Donne un ELECTRIC_FIELD à votre allié non-ELECTRIC STRONGEST et tous les effets de la synergie ELECTRIC active + [15,30,60,SP] SHIELD. Si aucun allié n'est trouvé, lance la capacité sur soit-même.",
 		"HEADLONDING_RUSH": "Fonce sur l'ennemi le plus éloigné et lui inflige [20,40,80,SP] de SPECIAL. Tous les ennemis sur le passage sont repoussés et subissent [10,20,30,SP] de SPECIAL. Le lanceur perd 1 point de DEF et de SPE_DEF pour chaque ennemi bousculé.",
-		"WAVE_SPLASH": "Le lanceur s'enveloppe d'eau, gagnant [20,SP]% de ses HP max en tant que SHIELD, puis percute la cible avec tout son corps pour infliger [20,SP]% de ses HP max en tant que SPECIAL."
+		"WAVE_SPLASH": "Le lanceur s'enveloppe d'eau, gagnant [20,SP]% de ses HP max en tant que SHIELD, puis percute la cible avec tout son corps pour infliger [20,SP]% de ses HP max en tant que SPECIAL.",
+		"UPROAR": "Inflige [5,10,20,SP] SPECIAL chaque seconde pendant 3 secondes à tous les ennemis à RANGE ; pendant ce délai, les alliés dans la zone sont immunisés au SLEEP",
+		"ACID_ARMOR": "Gagne [3,6,12,SP] DEF. Les 4 prochaines attaques reçues au corps à corps réduisent la DEF de l'attaquant de 1.",
+		"TWISTER": "Déchaîne un tourbillon infligeant [25,50,100,SP] SPECIAL aux ennemis ADJACENT et les repoussant à une distance de [1, 2, 3] cases. Les alliés FLYING ADJACENT décollent et s'envolent, déclenchant leur effet de synergie.",
+		"FOCUS_PUNCH": "Concentre son énergie dans un unique coup de poing, puis fonce vers la cible après 1 seconde et inflige [500,SP]% de son ATK en SPECIAL, la projetant au loin. La cible est éjectée du terrain si elle ne rentre pas en collision avec un autre Pokémon.",
+		"HYPER_BEAM": "Concentre son énergie pendant 1 seconde puis déclenche un laser surpuissant infligeant [50,100,150,SP] SPECIAL aux ennemis dans la ligne de mire. Puis le lanceur subit FATIGUE pendant 5 secondes.",
+		"SKILL_SWAP": "Copie la capacité et les PP max de la cible, puis la déclenche immédiatement. La capacité copiée persiste entre les combats et peut être oubliée en plaçant le lanceur sur le banc.",
+		"JET_PUNCH": "Inflige [100,SP]% de la SPEED du lanceur en SPECIAL à la cible",
+		"BANEFUL_BUNKER": "Provoque tous les ennemis ADJACENT et active PROTECT sur soi pendant 2 secondes. Pendant ce délai, les ennemis qui attaquent au corps à corps le lanceur subissent [10,20,30,SP] SPECIAL et POISON pendant 3 secondes.",
+		"SHADOW_FORCE": "Se téléporte dans le plus gros groupe d'ennemis, infligeant [60,SP] SPECIAL aux ennemis ADJACENT, cassant les barrières comme PROTECT. Puis le lanceur se transforme pour prendre sa forme Originelle.",
+		"SHADOW_CLAW": "Tranche les 3 ennemis devant le lanceur, infligeant [20,40,60,SP] SPECIAL et se soignant d'un montant de HP égal à 25% des dégâts infligés. Si un seul ennemi est à portée, il subit [60,100,140,SP] SPECIAL à la place.",
+		"GLACIAL_LANCE": "Fonce vers une zone sûre dans la ligne arrière puis projette une lance de glace vers la cible la plus éloignée. Le premier ennemi touché subit [300,SP]% de l'ATK du lanceur en SPECIAL, et les ennemis ADJACENT subissent la moitié de ces dégâts.",
+		"FEATHER_DANCE": "Vole vers l'allié le plus éloigné en répandant 10 plumes le long du chemin. Chaque plume octroie un bonus de statistiques aléatoire aux alliés ou un malus aux ennemis: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, ou [10,SP] LUCK.",
+		"ORDER_UP": "Inflige [100,SP] SPECIAL à la cible. Si un Nigirigon est aux commandes, regagne à nouveau les statistiques bonus qu'il octroie. Sinon, un Nigirigon apparaît sur votre banc, d'une forme différente selon la manche en cours.",
+		"ICE_SPINNER": "Recouvre ses pieds de glace et tournoie sur les ennemis ADJACENT, leur infligeant [15,30,60,SP] SPECIAL, les repoussant et supprimant tout BOARD_EFFECT sur les cases ADJACENT.",
+		"CEASELESS_EDGE": "Frappe les 3 ennemis devant le lanceur, leur infligeant [20,40,80,SP] SPECIAL et laissant des Piques sous eux. Peut infliger un coup critique par défaut. BOARD_EFFECT: les Piques infligent 10 TRUE par seconde et ARMOR_BREAK à tout Pokémon marchant dessus et n'étant pas de type FLYING ou STEEL.",
+		"MOUNTAIN_GALE": "Projette [1,3] gros blocs de glace aléatoirement sur la cible et les ennemis ADJACENT, infligeant FLINCH pendant 3 secondes puis [40,SP] SPECIAL par projectile. Si l'utilisateur porte des Grelaçon sur son dos, ceux-ci sont également projetés et infligent les mêmes dégâts.",
+		"TWINEEDLE": "Inflige [25,50,80,SP] SPECIAL à la cible deux fois. Le premier coup peut être un coup critique par défaut, tandis que le second coup a [40,LK]% de chance d'appliquer POISON pendant 4 secondes.",
+		"ROCK_WRECKER": "Lance un énorme rocher sur la cible, infligeant FLINCH pendant 2 secondes puis [80,160,SP] SPECIAL. Puis le lanceur subit FATIGUE pendant 4 secondes."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2811,7 +2829,12 @@
 		"COVER_BAND": "Bandana Protège",
 		"EFFICIENT_BANDANNA": "Bandana Économe",
 		"NULLIFY_BANDANNA": "Écharpe Anti-Talent",
-		"WANTED_NOTICE": "Avis de recherche"
+		"WANTED_NOTICE": "Avis de recherche",
+		"RED_SCALE": "Écaille Rouge",
+		"RICE": "Riz",
+		"TATSUGIRI_CURLY": "Commandant Nigirigon (Courbé)",
+		"TATSUGIRI_DROOPY": "Commandant Nigirigon (Affalé)",
+		"TATSUGIRI_STRETCHY": "Commandant Nigirigon (Raide)"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -3111,7 +3134,12 @@
 		"COVER_BAND": "Si un allié ADJACENT est sur le point d'être mis KO par des dégâts entrants, le porteur encaisse les dégâts à sa place.",
 		"EFFICIENT_BANDANNA": "Le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW voient leur PP max réduit de 15%.",
 		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
-		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD"
+		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD",
+		"RED_SCALE": "Augmente votre revenu passif de 5 GOLD par manche",
+		"RICE": "Octroie 50 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
+		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
+		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
+		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata"
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -3293,7 +3321,15 @@
 		"PINCURCHIN": "Lorsqu'il est touché par des SPECIAL, il gagne un ELECTRIC_FIELD. Sous l'effet d'un ELECTRIC_FIELD, les attaques reçues au corps à corps infligent PARALYSIS à l'attaquant pendant 2 secondes.",
 		"STAMINA": "Tous les 10 coups reçus, gagnez [20,SP] SHIELD",
 		"SPEWPA": "Les Pokémon éclos évoluent automatiquement après 5 tours. L'évolution dépend de la synergie dominante sur votre plateau entre SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
-		"GALE_WINGS": "Laisse tomber des braises au sol lorsqu'il s'envole. BOARD_EFFECT : Les braises infligent 10 SPECIAL par seconde et BURN aux Pokémon qui marchent dessus, excepté les Pokémon de type FLYING ou FIRE."
+		"GALE_WINGS": "Laisse tomber des braises au sol lorsqu'il s'envole. BOARD_EFFECT : Les braises infligent 10 SPECIAL par seconde et BURN aux Pokémon qui marchent dessus, excepté les Pokémon de type FLYING ou FIRE.",
+		"GALARIAN_DARMANITAN": "Une fois sous les 30% de HP max, perd le focus des adversaires et se transforme en Mode Transe.",
+		"GALARIAN_DARMANITAN_ZEN": "En Mode Transe, ne peut plus bouger ou attaquer, mais chaque seconde se soigne de [10,SP] HP et inflige [25,SP]% de son ATK en SPECIAL et BURN aux ennemis ADJACENT.",
+		"FINIZEN": "Se transforme en forme Super une fois que 5 alliés ont été mis KO (sans compter les clônes ou invocations), ou si ce Pokémon est le dernier à combattre. Regagne tous ses HP lorsque cela survient.",
+		"COMMANDER": "Nigirigon ne peut pas porter d'objets. Au début du combat, un Oyacata avec un emplacement libre d'objets avale Nigirigon. Nigirigon prend alors les commandes et lui fournit alors un bonus de statistiques en fonction de sa forme:\\nForme Courbée: +8 ATK\\nForme Affalée: +8 DEF\\nForme Raide: +25 SPEED",
+		"AVALUGG": "Peut porter jusqu'à 4 $t(pkm.BERGMITE) sur son dos, récupérés depuis votre banc au début du combat.",
+		"EISCUE_NOICE": "Lorsqu'il démarre un combat sous la SNOW, il gagne sa forme Tête de Gel et 100 SHIELD. Lorsqu'il subit ou inflige FREEZE, il regagne sa forme Tête de Gel et gagne 50 SHIELD.",
+		"EISCUE_ICE_FACE": "Lorsqu'il déclenche sa capacité, son SHIELD actuel est converti en SPECIAL supplémentaires. Lorsque le SHIELD est brisé ou après avoir lancé sa capacité, il retrouve sa forme Tête Dégel.",
+		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -3449,7 +3485,8 @@
 		"WILD": "Les Pokémon WILD sont trouvables seulement lors des tours JcE quand la synergie n'est pas active (8% de chance de base). Leurs attaques ont [25,LK]% de chance d'infliger WOUND à leurs cibles pendant 3 secondes.{{additionalInfo}}.",
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
-		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets."
+		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets.",
+		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}"
 	},
 	"title": {
 		"no_title": "Aucun Titre",
@@ -3542,7 +3579,12 @@
 		"AQUARIOPHILE": "Aquariophile",
 		"POFFIN_MASTER": "Maître Poffin",
 		"TOP_GUN": "Top Gun",
-		"SCOUT": "Scout"
+		"SCOUT": "Scout",
+		"RESCUE_TEAM_MEMBER": "Sauveteur",
+		"EXPLORER": "Explorateur",
+		"POSTMAN": "Facteur",
+		"SURVEY_CORPS": "Corps d'exploration",
+		"GUILDMASTER": "Maître de Guilde"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3633,7 +3675,12 @@
 		"AQUARIOPHILE": "Ayez $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) et $t(pkm.BASCULIN_WHITE) dans la même équipe",
 		"POFFIN_MASTER": "Cuisinez un POFFIN avec 3 baies dorées différentes.",
 		"TOP_GUN": "Atteignez Mach 10 avec un MACH_RIBBON",
-		"SCOUT": "Équipez votre équipe d'au moins 5 objets fabriqués à partir de SILK_SCARF"
+		"SCOUT": "Équipez votre équipe d'au moins 5 objets fabriqués à partir de SILK_SCARF",
+		"RESCUE_TEAM_MEMBER": "Compléter une expédition de sauvetage",
+		"EXPLORER": "Compléter une expédition d'exploration",
+		"POSTMAN": "Compléter une expédition de livraison",
+		"SURVEY_CORPS": "Compléter une expédition d'exploit de bataille",
+		"GUILDMASTER": "Compléter une expédition de rang S"
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
@@ -4202,7 +4249,9 @@
 		"next_player": "Plateau du joueur suivant",
 		"board_return": "Retour vers votre plateau",
 		"avatar_emotes": "Voir le menu des emotes",
-		"avatar_show_emote": "Lancer l'emote"
+		"avatar_show_emote": "Lancer l'emote",
+		"wiki": "Ouvrir/fermer le wiki",
+		"team_planner": "Ouvrir/fermer le planificateur d'équipe"
 	},
 	"click_on_keybind_to_change_it": "Cliquez sur un raccourci clavier si vous souhaitez le réaffecter",
 	"gadgets": "Gadgets",
@@ -4628,7 +4677,20 @@
 		"special_damage_reduced": "Dégâts spéciaux bloqués",
 		"shield_damage_taken": "Dégâts encaissés par le bouclier",
 		"hp_healed": "PV soignés",
-		"shield_given": "Bouclier donné"
+		"shield_given": "Bouclier donné",
+		"maxHP": "HP max d'un Pokémon",
+		"maxAttack": "ATK max d'un Pokémon",
+		"maxDefense": "DEF max d'un Pokémon",
+		"maxSpecialDefense": "SPE_DEF max d'un Pokémon",
+		"maxAP": "AP max d'un Pokémon",
+		"maxSpeed": "SPEED max d'un Pokémon",
+		"maxPhysicalDamage": "PHYSICAL max infligés lors d'un combat",
+		"maxSpecialDamage": "SPECIAL max infligés lors d'un combat",
+		"maxTrueDamage": "TRUE max infligés lors d'un combat",
+		"maxShield": "SHIELD max octroyé lors d'un combat",
+		"maxHeal": "HP max soignés lors d'un combat",
+		"maxWinStreak": "Plus longue chaîne de victoires de la partie",
+		"dittosUsed": "Nombre de Métamorph utilisés lors de cette partie"
 	},
 	"tier_list": {
 		"title": "Ma nouvelle tier lists",
@@ -4684,5 +4746,54 @@
 		"winrate": "Taux de victoire",
 		"popularity": "Popularité",
 		"count": "Compte"
+	},
+	"no_results_found": "Aucun résultat trouvé",
+	"overview": "Aperçu",
+	"popularity_over_time": "Popularité dans le temps",
+	"placement_over_time": "Placement dans le temps",
+	"top_n": "Top {{count}}",
+	"expeditions": {
+		"title": "Expéditions",
+		"points": "{{points}} points",
+		"your_points": "Vos points: {{points}}",
+		"leaderboard": "Classement",
+		"instructions": "Instructions",
+		"help1": "Compléter les objectifs des expéditions pour gagner des points d'expérience supplémentaires !",
+		"help2": "Chaque expédition a un rang de difficulté allant de E à S. Compléter des expéditions plus difficiles octroie plus de points d'expérience et débloque des expéditions encore plus difficiles.",
+		"help3": "Les expéditions peuvent être faites dans n'importe quel mode de jeu à l'exception des parties privées personnalisées, et requièrent de jouer la partie jusqu'à la fin afin d'éviter les abus.",
+		"help4": "Vous pouvez compléter autant d'expéditions que vous le souhaitez pendant la même partie, mais toutes les expéditions proposées seront renouvelées si l'une d'entre elles est complétée.",
+		"RESCUE": "Mission de sauvetage",
+		"DELIVERY": "Livraison",
+		"EXPLORATION": "Exploration",
+		"BATTLE": "Exploit de bataille",
+		"RESCUE_DESCRIPTION": "Ayez $t(pkm.{{pokemon}}) dans votre équipe finale",
+		"EXPLORATION_DESCRIPTION": "Voyagez vers $t(map.{{region}}) ({{regionSynergies}}) au cours de la partie et ayez la synergie {{synergy}} niveau {{level}} ou plus d'activée dans votre équipe finale.",
+		"BATTLE_DESCRIPTION": "Un de vos Pokémon doit atteindre {{amount}} {{gameStat}} ou plus lors d'un combat",
+		"BATTLE_WIN_STREAK_DESCRIPTION": "Enchaînez {{amount}} manches victorieuses ou plus",
+		"DELIVERY_DESCRIPTION": "Ayez {{quantity}} {{item}} dans votre inventaire ou équippé sur un de vos Pokémon à la fin de la partie.",
+		"reward": "Récompense: {{points}} XP"
+	},
+	"events_reset_info": "Tous les scores seront réinitialisés à minuit UTC au premier jour de chaque mois, c'est à dire dans {{resetCountdown}}. Le classement d'événement est actualisé toutes les dix minutes.",
+	"shiny_gyarados_description": "Un Léviator shiny donne une RED_SCALE lorsqu'il est vaincu.",
+	"notification": {
+		"level_up_title": "Niveau supérieur !",
+		"level_up_message": "Félicitations !\\nVous avez atteint le niveau {{level}} et gagné un booster de cartes !",
+		"new_title_title": "Nouveau Titre débloqué !",
+		"new_title_message": "Vous avez débloqué ce titre:\\n{{title}}: {{description}}",
+		"elo_rank_change_title": "Nouveau Rang !",
+		"elo_rank_change_message": "Votre nouveau rang d'Elo est:\\n{{rank}}",
+		"victory_road_finished_title": "Route Victoire terminée !",
+		"victory_road_finished_message": "Félicitations!\\nVous avez terminé la Route Victoire à la position {{place}} !",
+		"expedition_completed_title": "Expédition terminée !",
+		"expedition_completed_message": "Bon travail !\\nVous avez complété la mission {{expedition}} de rang {{rank}} et gagné {{points}} XP !",
+		"tournament_win_title": "Victoire !",
+		"tournament_win_message": "Félicitations !\\nVous avez gagné le tournoi !",
+		"tournament_finalist_title": "Félicitations !",
+		"tournament_finalist_message": "Félicitations ! Vous avez été jusqu'en finale du tournoi.\\nVotre position finale: {{place}}",
+		"tournament_finished_title": "Elimination du tournoi",
+		"tournament_finished_message": "Vous avez été éliminé du tournoi !\\nVotre position finale: {{place}}",
+		"next": "Suivant",
+		"close": "Fermer",
+		"dismiss_all": "Tout fermer"
 	}
 }
