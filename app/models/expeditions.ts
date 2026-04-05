@@ -96,17 +96,6 @@ export function checkExpeditionCompletion(
         ...player.items,
         ...values(player.board).flatMap((p) => values(p.items))
       ]
-      console.log(
-        "Checking delivery expedition completion with items:",
-        "item to look for",
-        expeditionData.item,
-        "quantity",
-        expeditionData.quantity,
-        "counted",
-        items.filter((item) => item === expeditionData.item).length,
-        "available items",
-        items
-      )
       return (
         items.filter((item) => item === expeditionData.item).length >=
         expeditionData.quantity

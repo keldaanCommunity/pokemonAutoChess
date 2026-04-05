@@ -138,13 +138,20 @@ export function getExpeditionData(
         Rarity.EPIC,
         Rarity.LEGENDARY
       ][rankIndex]
-      const pokemonsOfCategory = precomputedPokemons.filter(
-        (p) =>
-          p.stars === (expedition.rank === "E" ? 2 : 3) && p.rarity === rarity
-      )
-      const pokemonToRescue = getBaseAltForm(
+      const pokemonsOfCategory = precomputedPokemons
+        .filter(
+          (p) =>
+            p.stars === (expedition.rank === "E" ? 2 : 3) && p.rarity === rarity
+        )
+        .filter(
+          (p, index, arr) =>
+            arr.findIndex(
+              (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
+            ) === index
+        ) // get only base alt forms
+      console.log({ pokemonsOfCategory: pokemonsOfCategory.map((p) => p.name) })
+      const pokemonToRescue =
         pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
-      )
       return { pokemon: pokemonToRescue }
     }
 
