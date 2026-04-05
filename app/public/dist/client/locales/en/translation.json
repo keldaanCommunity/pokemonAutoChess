@@ -4025,19 +4025,8 @@
 	"top": "Top",
 	"level": "Level",
 	"wins": "Wins",
-	"favorites": "Favorites",
-	"user_id": "User ID",
-	"user_id_hint1": "Your user ID is:",
-	"user_id_hint2": "Use it to communicate with moderators or admins. Contrary to names, each user ID is unique and cannot be changed.",
-	"name": "Name",
-	"progress": "Progress",
-	"account": "Account",
-	"delete_account": "Delete Account",
-	"delete_account_hint": "If you want your account to be permanently removed, click below and type \"$t(delete_account_passphrase)\"",
-	"delete_account_confirmation": "Type $t(delete_account_passphrase) to confirm",
-	"delete_account_confirmation_failed": "The confirmmation passphrase was invalid. The account deletion has not been confirmed.",
-	"delete_account_passphrase": "DELETE ACCOUNT PERMANENTLY",
-	"anonymous_users_name_hint": "Anonymous users cannot change their name.",
+	"favorites": "Favorites",	
+	"name": "Name",			
 	"give_boosters": "Give boosters",
 	"heap_snapshot": "Write heap snapshot",
 	"banned": "Banned",
@@ -4051,7 +4040,6 @@
 	"give_role": "Give Role",
 	"back_to_my_profile": "Back to my profile",
 	"bots": "Bots",
-	"profile": "Profile",
 	"search": "Search",
 	"average_place": "Top",
 	"overview": "Overview",
@@ -4183,13 +4171,8 @@
 	"evolves_from": "Evolves from",
 	"portrait_credit": "Portrait Credit",
 	"sprite_credit": "Sprite Credit",
-	"bot_admin": "Bot Admin",
-	"change_name": "Change Name",
-	"invalid_username": "Invalid username. Username must be between 3 and 24 characters, start with a letter, only contain letters or numbers or \".-_\" , no whitespaces.",
-	"username_disclaimer": "Inappropriate usernames will lead to a ban of your account. This includes:\n- illegal: hate speech, threats, references to illegal material\n- explicit: things you can't say it in front of your mother or lil bro\n- offensive: some players may legitimately be pissed off when reading the name\n- impersonating: pretend to be a staff member or another well-known player\n- harassing: targeting another specific user (e.g., \"User123_is_a_Loser\")\n- advertising: promoting external content unrelated to the game (e.g. \"JoinMySiteDOTcom\")\n- unicode/character abuse: invisible characters, excessive Zalgo text, or characters that can break the UI.",
-	"change": "Change",
-	"change_avatar": "Change Avatar",
-	"play_more_games_hint": "Play more games to earn boosters and unlock new avatars !",
+	"bot_admin": "Bot Admin",		
+	"change": "Change",	
 	"berry_gained": "+1 BERRY !",
 	"berry_unripe": "NOT YET !",
 	"full": "FULL",
@@ -4225,10 +4208,7 @@
 	"loading_complete": "Loading complete, waiting for other players...",
 	"search_pokemon": "Search for a Pokémon",
 	"search_player": "Search by Player Name...",
-	"team_builder": "Team Planner",
-	"titles_unlocked": "{{count}}/{{total}} titles unlocked",
-	"avatars_unlocked": "{{count}}/{{total}} avatars unlocked",
-	"pokemons_played": "{{count}}/{{total}} Pokémon played",
+	"team_builder": "Team Planner",	
 	"overlaps": "Overlaps",
 	"game-reconnect-modal-title": "Reconnect to game",
 	"game-reconnect-modal-body": "You left a game in progress. Do you want to reconnect to your previous game ?",
@@ -4259,8 +4239,7 @@
 		"avatar_show_emote": "Trigger emote"
 	},
 	"click_on_keybind_to_change_it": "Click on a keybinding if you want to reassign it",
-	"gadgets": "Gadgets",
-	"gadgets_unlocked": "{{count}}/{{total}} gadgets unlocked",
+	"gadgets": "Gadgets",	
 	"gadget": {
 		"trainer_card": "Trainer Card",
 		"trainer_card_desc": "Lets you change your name, avatar, and title",
@@ -4795,7 +4774,19 @@
 		"close": "Close",
 		"dismiss_all": "Dismiss All"
 	},
-	"profile_menu": {
+	"profile": {
+		"title": "Profile",
+		"progress":{
+			"title": "Progress",
+			"titles_unlocked": "{{count}}/{{total}} titles unlocked",
+			"avatars_unlocked": "{{count}}/{{total}} avatars unlocked",
+			"gadgets_unlocked": "{{count}}/{{total}} gadgets unlocked",
+			"pokemons_played": "{{count}}/{{total}} Pokémon played"	
+		},
+		"avatar": {
+			"change_avatar": "Change Avatar",
+			"play_more_games_hint": "Play more games to earn boosters and unlock new avatars !"
+		},
 		"elo_tab": {
 			"title": "Elo",
 			"current_elo": "Current Elo",
@@ -4803,6 +4794,21 @@
 			"elo_decay_info": "If you don't play at least 3 games within the last 20 days (Ranked games if Ultra Ball rank or above), your elo will start to decay (-{{eloLoss}} elo/day).",
 			"elo_decay_active": "Your elo is currently decaying",
 			"elo_decay_inactive": "Your elo will start to decay on {{time}}"
+		},
+		"account": {
+			"title": "Account",
+			"delete_account": "Delete Account",
+			"delete_account_hint": "If you want your account to be permanently removed, click below and type \"$t(profile.account.delete_account_passphrase)\"",
+			"delete_account_confirmation": "Type $t(profile.account.delete_account_passphrase) to confirm",
+			"delete_account_confirmation_failed": "The confirmmation passphrase was invalid. The account deletion has not been confirmed.",
+			"delete_account_passphrase": "DELETE ACCOUNT PERMANENTLY",
+			"user_id": "User ID",
+			"user_id_hint1": "Your user ID is:",
+			"user_id_hint2": "Use it to communicate with moderators or admins. Contrary to names, each user ID is unique and cannot be changed.",
+			"anonymous_users_name_hint": "Anonymous users cannot change their name.",
+			"change_name": "Change Name",
+			"username_disclaimer": "Inappropriate usernames will lead to a ban of your account. This includes:\n- illegal: hate speech, threats, references to illegal material\n- explicit: things you can't say it in front of your mother or lil bro\n- offensive: some players may legitimately be pissed off when reading the name\n- impersonating: pretend to be a staff member or another well-known player\n- harassing: targeting another specific user (e.g., \"User123_is_a_Loser\")\n- advertising: promoting external content unrelated to the game (e.g. \"JoinMySiteDOTcom\")\n- unicode/character abuse: invisible characters, excessive Zalgo text, or characters that can break the UI.",
+			"invalid_username": "Invalid username. Username must be between 3 and 24 characters, start with a letter, only contain letters or numbers or \".-_\" , no whitespaces."
 		}
 	}
 }

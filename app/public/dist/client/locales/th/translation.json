@@ -1255,8 +1255,7 @@
 	"top": "อันดับ",
 	"level": "เลเวล",
 	"wins": "ชนะ",
-	"favorites": "ชื่นชอบ",
-	"user_id": "ID ผู้เล่น",
+	"favorites": "ชื่นชอบ",	
 	"name": "ชื่อ",
 	"give_boosters": "มอบบูสเตอร์",
 	"ban_user": "แบนผู้เล่น",
@@ -1267,7 +1266,6 @@
 	"give_role": "มอบตำแหน่ง",
 	"back_to_my_profile": "กลับไปยังโปรไฟล์",
 	"bots": "Bots",
-	"profile": "โปรไฟล์",
 	"search": "ค้นหา",
 	"average_place": "อันดับ",
 	"count": "จำนวน",
@@ -1349,11 +1347,8 @@
 	"evolution": "การพัฒนาร่าง",
 	"portrait_credit": "Portrait Credit",
 	"sprite_credit": "Sprite Credit",
-	"bot_admin": "Bot Admin",
-	"change_name": "เปลี่ยนชื่อ",
-	"change": "เปลี่ยน",
-	"change_avatar": "เปลี่ยนโปรไฟล์",
-	"play_more_games_hint": "เล่นเพื่ออัพเลเวลรับบูสเตอร์แพคไปเปิดโปรไฟล์ได้เลย !",
+	"bot_admin": "Bot Admin",	
+	"change": "เปลี่ยน",	
 	"berry_gained": "+1 เบอร์รี่ !",
 	"berry_unripe": "ยังก่อน !",
 	"full": "เต็ม",
@@ -1382,7 +1377,21 @@
 	"search_pokemon": "ค้นหาสำหรับโปเกมอน",
 	"search_player": "ค้นหาโดยชื่อผู้เล่น...",
 	"team_builder": "จัดการแผน",
-	"titles_unlocked": "{{count}}/{{total}} ปลดล็อคฉายา",
+	"profile": {
+		"title": "โปรไฟล์",
+		"progress":{
+			"titles_unlocked": "{{count}}/{{total}} ปลดล็อคฉายา",
+			"gadgets_unlocked": "{{count}}/{{total}} ปลดล็อค : อุปกรณ์เสริม"
+		},
+		"avatar": {
+			"change_avatar": "เปลี่ยนโปรไฟล์",
+			"play_more_games_hint": "เล่นเพื่ออัพเลเวลรับบูสเตอร์แพคไปเปิดโปรไฟล์ได้เลย !"
+		},
+		"account": {
+			"user_id": "ID ผู้เล่น",
+			"change_name": "เปลี่ยนชื่อ"
+		}
+	},
 	"game-reconnect-modal-title": "เชื่อมต่ออีกครั้ง",
 	"game-reconnect-modal-body": "คุณได้ออกจากเกมล่าสุดมา ต้องการเชื่อมต่ออีกครั้งหรือไม่ ?",
 	"toggle_locked": "สลับการล็อค",
@@ -1396,8 +1405,7 @@
 		"avatar_emotes": "เปิดดูอีโมท",
 		"avatar_show_emote": "ใช้งานอีโมท"
 	},
-	"gadgets": "อุปกรณ์เสริม",
-	"gadgets_unlocked": "{{count}}/{{total}} ปลดล็อค : อุปกรณ์เสริม",
+	"gadgets": "อุปกรณ์เสริม",	
 	"gadget": {
 		"trainer_card": "บัตรประจำตัวเทรนเนอร์",
 		"trainer_card_desc": "อนุญาตให้เปลี่ยนชื่อและอวาตาร์ของคุณในเซิฟเวอร์ได้",

@@ -16,7 +16,7 @@ export function GadgetsTab() {
   return user ? (
     <div>
       <p style={{ textAlign: "right" }}>
-        {t("gadgets_unlocked", {
+        {t("profile.progress.gadgets_unlocked", {
           count: nbGadgetsUnlocked,
           total: gadgets.length
         })}

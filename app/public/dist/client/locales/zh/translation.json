@@ -4025,18 +4025,7 @@
 	"level": "等级",
 	"wins": "胜场",
 	"favorites": "偏好共鸣/宝可梦",
-	"user_id": "用户ID",
-	"user_id_hint1": "你的用户ID是：",
-	"user_id_hint2": "与名字不同，用户ID不会重复或变动。与管理员沟通时，推荐使用ID。",
-	"name": "名字",
-	"progress": "进度",
-	"account": "账号",
-	"delete_account": "删除账号",
-	"delete_account_hint": "若希望永久删除此账号，在下方的输入框中输入“$t(delete_account_passphrase)”（不含引号）。",
-	"delete_account_confirmation": "输入“$t(delete_account_passphrase)”以确认删除。",
-	"delete_account_confirmation_failed": "确认信息错误或无效，账号删除失败。",
-	"delete_account_passphrase": "我确认永久删除账号",
-	"anonymous_users_name_hint": "匿名用户无权改名。",
+	"name": "名字",	
 	"give_boosters": "赠送补充包",
 	"heap_snapshot": "写入快照堆",
 	"banned": "已封禁",
@@ -4050,7 +4039,6 @@
 	"give_role": "授予职位",
 	"back_to_my_profile": "返回我的个人资料",
 	"bots": "机器人",
-	"profile": "个人资料",
 	"search": "搜索",
 	"average_place": "平均名次",
 	"overview": "总览",
@@ -4182,13 +4170,8 @@
 	"evolves_from": "进化前为",
 	"portrait_credit": "头像画师",
 	"sprite_credit": "精灵图画师",
-	"bot_admin": "机器人管理员",
-	"change_name": "更改名字",
-	"invalid_username": "无效的用户名。用户名长度必须为3到24个字符，第一个字符必须为字母，且只能包含字母、数字和 . - _ 三种特殊符号，还不能含有空格。",
-	"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于——\n1.违法内容：仇恨言论，威胁性内容，和对非法材料的影射\n2.黄色内容：少儿不宜的内容\n3.攻击性言论：可能激怒其他玩家的用户名\n4.仿冒用户名：试图高仿管理员或知名玩家的用户名\n5.骚扰言论：针对某特定玩家的内容（例：“某甲彩笔”）\n6.广告：宣传与游戏无关的内容（例：“关注永雏塔菲谢谢喵”）\n7.滥用unicode或字符：不可见文字，过量的附加符号，或是其他妨碍UI显示的字符",
-	"change": "更改",
-	"change_avatar": "更改形象",
-	"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！",
+	"bot_admin": "机器人管理员",		
+	"change": "更改",	
 	"berry_gained": "收获树果！",
 	"berry_unripe": "树果尚未成熟！",
 	"full": "已满",
@@ -4225,9 +4208,6 @@
 	"search_pokemon": "搜索宝可梦",
 	"search_player": "搜索玩家名……",
 	"team_builder": "队伍设计器",
-	"titles_unlocked": "{{count}}/{{total}}个头衔已解锁",
-	"avatars_unlocked": "{{count}}/{{total}}个头像已解锁",
-	"pokemons_played": "{{count}}/{{total}}种宝可梦已使用",
 	"overlaps": "共鸣重叠",
 	"game-reconnect-modal-title": "重新连接",
 	"game-reconnect-modal-body": "你离开了一个仍在进行中的游戏。是否要重新连接至那场游戏？",
@@ -4258,8 +4238,7 @@
 		"avatar_show_emote": "发送表情"
 	},
 	"click_on_keybind_to_change_it": "点击一个快捷键以对其进行修改",
-	"gadgets": "功能",
-	"gadgets_unlocked": "{{count}}/{{total}}项功能已解锁",
+	"gadgets": "功能",	
 	"gadget": {
 		"trainer_card": "训练师卡片",
 		"trainer_card_desc": "允许你更换名字，形象和头衔",
@@ -4793,5 +4772,34 @@
 		"next": "下一条",
 		"close": "关闭",
 		"dismiss_all": "全部关闭"
+	},
+	"profile": {
+		"title": "个人资料",
+		"progress":{
+			"title": "进度",	
+			"titles_unlocked": "{{count}}/{{total}}个头衔已解锁",
+			"avatars_unlocked": "{{count}}/{{total}}个头像已解锁",
+			"gadgets_unlocked": "{{count}}/{{total}}项功能已解锁",
+			"pokemons_played": "{{count}}/{{total}}种宝可梦已使用"
+		},
+		"avatar": {
+			"change_avatar": "更改形象",
+			"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！"
+		},
+		"account": {
+			"title": "账号",
+			"delete_account": "删除账号",
+			"delete_account_hint": "若希望永久删除此账号，在下方的输入框中输入“$t(profile.account.delete_account_passphrase)”（不含引号）。",
+			"delete_account_confirmation": "输入“$t(profile.account.delete_account_passphrase)”以确认删除。",
+			"delete_account_confirmation_failed": "确认信息错误或无效，账号删除失败。",
+			"delete_account_passphrase": "我确认永久删除账号",
+			"user_id": "用户ID",
+			"user_id_hint1": "你的用户ID是：",
+			"user_id_hint2": "与名字不同，用户ID不会重复或变动。与管理员沟通时，推荐使用ID。",
+			"anonymous_users_name_hint": "匿名用户无权改名。",
+			"change_name": "更改名字",
+			"username_disclaimer": "管理员有权因不当用户名将你的账户封禁。“不当”包括但不限于——\n1.违法内容：仇恨言论，威胁性内容，和对非法材料的影射\n2.黄色内容：少儿不宜的内容\n3.攻击性言论：可能激怒其他玩家的用户名\n4.仿冒用户名：试图高仿管理员或知名玩家的用户名\n5.骚扰言论：针对某特定玩家的内容（例：“某甲彩笔”）\n6.广告：宣传与游戏无关的内容（例：“关注永雏塔菲谢谢喵”）\n7.滥用unicode或字符：不可见文字，过量的附加符号，或是其他妨碍UI显示的字符",
+			"invalid_username": "无效的用户名。用户名长度必须为3到24个字符，第一个字符必须为字母，且只能包含字母、数字和 . - _ 三种特殊符号，还不能含有空格。"
+		}
 	}
 }

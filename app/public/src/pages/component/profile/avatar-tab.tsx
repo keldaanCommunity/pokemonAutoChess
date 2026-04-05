@@ -41,8 +41,11 @@ export function AvatarTab() {
   return (
     <div>
       <h3 style={{ display: "flex" }}>
-        {t("change_avatar")} <div className="spacer"></div>{" "}
-        {t("avatars_unlocked", { count: nbUnlocked, total: nbTotal })}
+        {t("profile.avatar.change_avatar")} <div className="spacer"></div>{" "}
+        {t("profile.progress.avatars_unlocked", {
+          count: nbUnlocked,
+          total: nbTotal
+        })}
       </h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
         <PokemonTypeahead value={selectedPkm} onChange={setSelectedPkm} />
@@ -68,7 +71,9 @@ export function AvatarTab() {
         )}
       </div>
       <div>
-        {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
+        {pokemonCollection.length === 0 && (
+          <p>{t("profile.avatar.play_more_games_hint")}</p>
+        )}
         {selectedPkm ? (
           <SelectedPokemonAvatars pokemon={selectedPkm} />
         ) : (
@@ -128,7 +133,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
     (pokemonCollectionItem.emotions.length === 0 &&
       pokemonCollectionItem.shinyEmotions.length === 0)
   )
-    return <p>{t("play_more_games_hint")}</p>
+    return <p>{t("profile.avatar.play_more_games_hint")}</p>
 
   return (
     <div className="emotions-grid">

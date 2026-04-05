@@ -173,7 +173,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page === "main_lobby" && (
           <NavLink location="profile" svg="profile" handleClick={changeModal}>
-            {t("profile")}
+            {t("profile.title")}
           </NavLink>
         )}
 
@@ -502,7 +502,7 @@ function Modals({
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
-        header={t("profile")}
+        header={t("profile.title")}
       >
         <Profile />
       </Modal>

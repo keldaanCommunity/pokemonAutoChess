@@ -101,7 +101,7 @@ export default function Profile() {
     <div className="profile-modal">
       <div className="profile-box">
         <h2>
-          {profile?.displayName ?? ""} {t("profile")}
+          {profile?.displayName ?? ""} {t("profile.title")}
         </h2>
         {profile && <PlayerBox user={profile} history={gameHistory} />}
       </div>
@@ -143,12 +143,12 @@ function MyProfileMenu() {
   return (
     <Tabs>
       <TabList>
-        <Tab>{t("progress")}</Tab>
+        <Tab>{t("profile.progress.title")}</Tab>
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
-        <Tab>{t("profile_menu.elo_tab.title")}</Tab>
-        <Tab>{t("account")}</Tab>
+        <Tab>{t("profile.elo_tab.title")}</Tab>
+        <Tab>{t("profile.account.title")}</Tab>
       </TabList>
 
       <TabPanel>

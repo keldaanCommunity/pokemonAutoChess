@@ -82,20 +82,20 @@ export function EloTab() {
         {t("elorank." + rank)}
       </p>
       <p>
-        {t("profile_menu.elo_tab.current_elo")}: {user.elo}
+        {t("profile.elo_tab.current_elo")}: {user.elo}
       </p>
       <p>
-        {t("profile_menu.elo_tab.max_elo_reached")}: {user.maxElo}
+        {t("profile.elo_tab.max_elo_reached")}: {user.maxElo}
       </p>
       <p>
-        {t("profile_menu.elo_tab.elo_decay_info", {
+        {t("profile.elo_tab.elo_decay_info", {
           eloLoss: ELO_DECAY_LOST_PER_DAY
         })}
       </p>
       <p style={{ whiteSpace: "pre-line" }}>
         {isDecaying
-          ? t("profile_menu.elo_tab.elo_decay_active")
-          : t("profile_menu.elo_tab.elo_decay_inactive", {
+          ? t("profile.elo_tab.elo_decay_active")
+          : t("profile.elo_tab.elo_decay_inactive", {
               time: new Date(
                 Date.now() + (eloDecayTime ?? 0)
               ).toLocaleDateString()

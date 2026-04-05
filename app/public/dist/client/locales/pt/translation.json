@@ -3058,10 +3058,8 @@
 	"top": "Principal",
 	"level": "Nível",
 	"wins": "Vitórias",
-	"favorites": "Favoritos",
-	"user_id": "ID do usuário",
-	"name": "Nome",
-	"anonymous_users_name_hint": "Usuários anônimos não podem alterar seu nome.",
+	"favorites": "Favoritos",	
+	"name": "Nome",	
 	"give_boosters": "Dê reforços",
 	"ban_user": "Banir usuário",
 	"unban_user": "Desbanir usuário",
@@ -3071,7 +3069,6 @@
 	"give_role": "Dar cargo",
 	"back_to_my_profile": "Voltar ao meu perfil",
 	"bots": "robôs",
-	"profile": "Perfil",
 	"search": "Procurar",
 	"average_place": "Lugar Médio",
 	"count": "Contar",
@@ -3145,11 +3142,8 @@
 	"evolution": "Evolução",
 	"portrait_credit": "Crédito do retrato",
 	"sprite_credit": "Crédito Sprite",
-	"bot_admin": "Admin BOT",
-	"change_name": "Mude o nome",
-	"change": "Mudar",
-	"change_avatar": "Mudar Avatar",
-	"play_more_games_hint": "Jogue mais jogos para ganhar reforços e desbloquear novos avatares!",
+	"bot_admin": "Admin BOT",	
+	"change": "Mudar",	
 	"berry_gained": "+1 FRUTA !",
 	"berry_unripe": "AINDA NÃO !",
 	"full": "CHEIO",
@@ -3176,8 +3170,23 @@
 	"loading_complete": "Carregamento completo, aguardando outros jogadores...",
 	"search_pokemon": "Selecione um pokémon",
 	"search_player": "Pesquisar por nome do jogador...",
-	"team_builder": "Planificador de Times",
-	"titles_unlocked": "{{count}}/{{total}} Títulos Disponíveis",
+	"team_builder": "Planificador de Times",	
+	"profile": {
+		"title": "Perfil",
+		"progress":{
+			"titles_unlocked": "{{count}}/{{total}} Títulos Disponíveis",
+			"gadgets_unlocked": "{{count}}/{{total}} Engenhocas disponíveis"
+		},
+		"avatar": {
+			"change_avatar": "Mudar Avatar",
+			"play_more_games_hint": "Jogue mais jogos para ganhar reforços e desbloquear novos avatares!"
+		},
+		"account": {
+			"user_id": "ID do usuário",
+			"anonymous_users_name_hint": "Usuários anônimos não podem alterar seu nome.",
+			"change_name": "Mude o nome"
+		}
+	},
 	"game-reconnect-modal-title": "Reconecte-se ao jogo",
 	"game-reconnect-modal-body": "Você saiu de um jogo em andamento. Deseja se reconectar ao jogo anterior?",
 	"key": "Chave",
@@ -3189,8 +3198,7 @@
 		"avatar_anim": "Mostrar a animação do avatar",
 		"avatar_emotes": "Ativar o menú de emotes"
 	},
-	"gadgets": "Engenhocas",
-	"gadgets_unlocked": "{{count}}/{{total}} Engenhocas disponíveis",
+	"gadgets": "Engenhocas",	
 	"gadget": {
 		"trainer_card": "Cartão do Treinador",
 		"trainer_card_desc": "Permite que modifiques teu nome, título e avatar",

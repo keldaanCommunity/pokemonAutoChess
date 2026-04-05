@@ -1887,10 +1887,8 @@
 	"no_history_found": "Geen geschiedenis gevonden",
 	"top": "Bovenkant",
 	"level": "Niveau",
-	"wins": "wint",
-	"user_id": "gebruikersnaam",
-	"name": "Naam",
-	"anonymous_users_name_hint": "Anonieme gebruikers kunnen hun naam niet wijzigen.",
+	"wins": "wint",	
+	"name": "Naam",	
 	"give_boosters": "Boosters geven",
 	"ban_user": "Verban gebruiker",
 	"unban_user": "Ban gebruiker ongedaan maken",
@@ -1899,7 +1897,18 @@
 	"give_title": "Geef titel",
 	"back_to_my_profile": "Terug naar mijn profiel",
 	"bots": "bots",
-	"profile": "Profiel",
+	"profile": {
+		"title": "Profiel",
+		"avatar": {
+			"change_avatar": "Avatar wijzigen",
+			"play_more_games_hint": "Speel meer games om boosters te verdienen en nieuwe avatars te ontgrendelen!"
+		},
+		"account": {
+			"user_id": "gebruikersnaam",
+			"anonymous_users_name_hint": "Anonieme gebruikers kunnen hun naam niet wijzigen.",
+			"change_name": "Naam veranderen"
+		}
+	},
 	"search": "Zoekopdracht",
 	"average_place": "Gemiddelde plaats",
 	"count": "Graaf",
@@ -1962,11 +1971,8 @@
 	"evolution": "Evolutie",
 	"portrait_credit": "Portret tegoed",
 	"sprite_credit": "Sprite-tegoed",
-	"bot_admin": "BOT-beheerder",
-	"change_name": "Naam veranderen",
-	"change": "Wijziging",
-	"change_avatar": "Avatar wijzigen",
-	"play_more_games_hint": "Speel meer games om boosters te verdienen en nieuwe avatars te ontgrendelen!",
+	"bot_admin": "BOT-beheerder",	
+	"change": "Wijziging",	
 	"buy_xp": "XP kopen {{cost}}",
 	"buy_xp_tooltip": "Koop 4 XP voor {{cost}} goud (snelkoppeling: F)",
 	"streak": "Streep",

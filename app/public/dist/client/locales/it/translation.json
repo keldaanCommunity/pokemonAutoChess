@@ -3922,18 +3922,7 @@
 	"level": "Livello",
 	"wins": "Vittorie",
 	"favorites": "Favoriti",
-	"user_id": "ID utente",
-	"user_id_hint1": "Il tuo ID utente è:",
-	"user_id_hint2": "Usalo per comunicare con moderatori o admin. Al contrario del nome, ogni ID è unico e non può essere cambiato.",
-	"name": "Nome",
-	"progress": "Progresso",
-	"account": "Account",
-	"delete_account": "Elimina Account",
-	"delete_account_hint": "Se vuoi davvero eliminare permanentement eil tuo account, clicca qui e digita \"$t(delete_account_passphrase)\"",
-	"delete_account_confirmation": "Digita $t(delete_account_passphrase) per confermare",
-	"delete_account_confirmation_failed": "La passphrase di conferma è invalida. L'eliminazione dell'account non è andata a buon fine.",
-	"delete_account_passphrase": "ELIMINA ACCOUNT PERMANENTEMENTE",
-	"anonymous_users_name_hint": "Gli utenti anonimi non possono modificare il proprio nome.",
+	"name": "Nome",	
 	"give_boosters": "Dai booster",
 	"heap_snapshot": "Scrivo un heap snapshot",
 	"banned": "Bannato",
@@ -3947,7 +3936,6 @@
 	"give_role": "Dai ruolo",
 	"back_to_my_profile": "Torna al mio profilo",
 	"bots": "Bots",
-	"profile": "Profilo",
 	"search": "Ricerca",
 	"average_place": "Posizione in media",
 	"carousel_priority": "Priorità Carosello",
@@ -4075,13 +4063,8 @@
 	"evolves_from": "Si evolve da",
 	"portrait_credit": "Credito ritratto",
 	"sprite_credit": "Credito Sprite",
-	"bot_admin": "Ammin BOT",
-	"change_name": "Cambia nome",
-	"invalid_username": "Username invalido. L'username deve contenere tra i 3 e i 24 caratteri, iniziare con una lettera, contenere solo lettere, numeri o or \".-_\" ed essere privo di spazi.",
-	"username_disclaimer": "Username inappropriati possono portare ad un ban del duo account. Questo include volgarità, allusioni sessuali o altresì inadatte ad un pubblico minorile, minacce dirette e indirette, provocazioni politiche e pubblicità.",
-	"change": "Modifica",
-	"change_avatar": "Cambia avatar",
-	"play_more_games_hint": "Gioca a più giochi per guadagnare booster e sbloccare nuovi avatar!",
+	"bot_admin": "Ammin BOT",	
+	"change": "Modifica",	
 	"berry_gained": "+1 BACCA!",
 	"berry_unripe": "NON ANCORA!",
 	"full": "PIENO",
@@ -4118,9 +4101,6 @@
 	"search_pokemon": "Cerca per un Pokèmon",
 	"search_player": "Cerca per nome giocatore...",
 	"team_builder": "Team Planner",
-	"titles_unlocked": "{{count}}/{{total}} Titoli sbloccati",
-	"avatars_unlocked": "{{count}}/{{total}} avatar sbloccati",
-	"pokemons_played": "{{count}}/{{total}} Pokémon utilizzati",
 	"overlaps": "Sovrapposizioni",
 	"game-reconnect-modal-title": "Riconnettiti al gioco",
 	"game-reconnect-modal-body": "Hai lasciato una partita in corso. Vuoi riconnetterti alla partita precedente?",
@@ -4150,7 +4130,6 @@
 	},
 	"click_on_keybind_to_change_it": "Clicca su un keybind se vuoi riassegnarlo",
 	"gadgets": "Gadget",
-	"gadgets_unlocked": "{{count}}/{{total}} Gadget sbloccati",
 	"gadget": {
 		"trainer_card": "Carta Allenatore",
 		"trainer_card_desc": "Ti dà la possibilità di cambiare il tuo nome, l'avatar ed il titolo",
@@ -4587,5 +4566,34 @@
 		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
 		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
 	},
-	"cluster_map": "Cluster Map"
+	"cluster_map": "Cluster Map",
+	"profile": {
+		"title": "Profilo",
+		"progress":{
+			"title": "Progresso",	
+			"titles_unlocked": "{{count}}/{{total}} Titoli sbloccati",
+			"avatars_unlocked": "{{count}}/{{total}} avatar sbloccati",
+			"gadgets_unlocked": "{{count}}/{{total}} Gadget sbloccati",
+			"pokemons_played": "{{count}}/{{total}} Pokémon utilizzati"
+		},
+		"avatar": {
+			"change_avatar": "Cambia avatar",
+			"play_more_games_hint": "Gioca a più giochi per guadagnare booster e sbloccare nuovi avatar!"
+		},
+		"account": {
+			"title": "Account",
+			"delete_account": "Elimina Account",
+			"delete_account_hint": "Se vuoi davvero eliminare permanentement eil tuo account, clicca qui e digita \"$t(profile.account.delete_account_passphrase)\"",
+			"delete_account_confirmation": "Digita $t(profile.account.delete_account_passphrase) per confermare",
+			"delete_account_confirmation_failed": "La passphrase di conferma è invalida. L'eliminazione dell'account non è andata a buon fine.",
+			"delete_account_passphrase": "ELIMINA ACCOUNT PERMANENTEMENTE",
+			"user_id": "ID utente",
+			"user_id_hint1": "Il tuo ID utente è:",
+			"user_id_hint2": "Usalo per comunicare con moderatori o admin. Al contrario del nome, ogni ID è unico e non può essere cambiato.",
+			"anonymous_users_name_hint": "Gli utenti anonimi non possono modificare il proprio nome.",
+			"change_name": "Cambia nome",
+			"username_disclaimer": "Username inappropriati possono portare ad un ban del duo account. Questo include volgarità, allusioni sessuali o altresì inadatte ad un pubblico minorile, minacce dirette e indirette, provocazioni politiche e pubblicità.",
+			"invalid_username": "Username invalido. L'username deve contenere tra i 3 e i 24 caratteri, iniziare con una lettera, contenere solo lettere, numeri o or \".-_\" ed essere privo di spazi."
+		}
+	}
 }

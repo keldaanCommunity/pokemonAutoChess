@@ -2630,10 +2630,8 @@
 	"no_history_found": "履歴が見つかりません",
 	"top": "上",
 	"level": "レベル",
-	"wins": "勝利",
-	"user_id": "ユーザーID",
-	"name": "名前",
-	"anonymous_users_name_hint": "匿名ユーザーは自分の名前を変更できません。",
+	"wins": "勝利",	
+	"name": "名前",	
 	"give_boosters": "ブースターを与える",
 	"ban_user": "ユーザーを禁止する",
 	"unban_user": "ユーザーの禁止を解除する",
@@ -2642,7 +2640,18 @@
 	"give_title": "タイトルを付ける",
 	"back_to_my_profile": "私のプロフィールに戻る",
 	"bots": "ボット",
-	"profile": "プロフィール",
+	"profile": {
+		"title": "プロフィール",
+		"avatar": {
+			"change_avatar": "アバターの変更",
+			"play_more_games_hint": "もっとゲームをプレイしてブースターを獲得し、新しいアバターのロックを解除しましょう!"
+		},
+		"account": {
+			"user_id": "ユーザーID",
+			"anonymous_users_name_hint": "匿名ユーザーは自分の名前を変更できません。",
+			"change_name": "名前の変更"
+		}
+	},
 	"search": "検索",
 	"average_place": "平均的な場所",
 	"count": "カウント",
@@ -2705,11 +2714,8 @@
 	"evolution": "進化",
 	"portrait_credit": "ポートレートクレジット",
 	"sprite_credit": "スプライトクレジット",
-	"bot_admin": "ボット管理者",
-	"change_name": "名前の変更",
-	"change": "変化",
-	"change_avatar": "アバターの変更",
-	"play_more_games_hint": "もっとゲームをプレイしてブースターを獲得し、新しいアバターのロックを解除しましょう!",
+	"bot_admin": "ボット管理者",	
+	"change": "変化",	
 	"buy_xp": "XP を購入する {{cost}}",
 	"buy_xp_tooltip": "4 XP を {{cost}} ゴールドで購入 (ショートカット: F)",
 	"streak": "ストリーク",
@@ -2885,7 +2891,7 @@
 	"players_remaining": "残りプレーヤー",
 	"cancel_tournament_participation": "トーナメントを退出しる",
 	"register_tournament_participation": "トーナメントに登録する",
-	"starts_at": "開始時間は"
+	"starts_at": "開始時間は",
 	"stats": "能力値",
 	"bench": "ベンチ"
 }
