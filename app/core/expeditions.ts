@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import { precomputedPokemons } from "../../gen/precomputed-pokemons"
 import { RegionDetails, SynergyTriggers } from "../config"
+import { precomputedPokemons } from "../models/precomputed/precomputed-pokemons"
 import {
   CraftableItemsNoScarves,
   Item,

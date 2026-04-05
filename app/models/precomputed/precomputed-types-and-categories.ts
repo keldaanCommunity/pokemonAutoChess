@@ -1,7 +1,7 @@
-import { precomputedPokemonsImplemented } from "../../../gen/precomputed-pokemons"
 import { Rarity } from "../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-types-and-categories")
 

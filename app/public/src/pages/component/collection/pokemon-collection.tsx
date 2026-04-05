@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { Grid } from "react-window"
-import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import {
   BoosterPriceByRarity,
   getAllAltForms,
@@ -19,6 +18,7 @@ import {
 } from "../../../../../config"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Passive } from "../../../../../types/enum/Passive"
