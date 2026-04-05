@@ -318,6 +318,15 @@ export default function TranslationsPage() {
                     />
                   )
                 }
+
+                const translatedCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) !== ""
+                ).length
+                const missingCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) === ""
+                ).length
+                const totalCount = Object.keys(value).length
+
                 return (
                   <TranslationSection
                     key={key}
@@ -331,6 +340,9 @@ export default function TranslationsPage() {
                     onEdit={onEdit}
                     onRevert={onRevert}
                     depth={0}
+                    translatedCount={translatedCount}
+                    missingCount={missingCount}
+                    totalCount={totalCount}
                   />
                 )
               })
