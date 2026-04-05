@@ -833,7 +833,9 @@
 	"delete": "Usuń",
 	"new": "NOWE !",
 	"leave_game": "Wyjdź z gry",
-	"options": "Opcje",
+	"options": {
+		"title": "Opcje"
+	},
 	"wiki": {
 		"nav": {},
 		"tutorials": {},

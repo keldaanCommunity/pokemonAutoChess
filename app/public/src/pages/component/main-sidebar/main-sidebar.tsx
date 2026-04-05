@@ -324,7 +324,7 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         <NavLink svg="options" location="options" handleClick={changeModal}>
-          {t("options")}
+          {t("options.title")}
         </NavLink>
 
         {page === "game" && document.fullscreenEnabled && (

@@ -1462,14 +1462,6 @@
 	"passive_income_hint": "Mỗi lượt, tăng 5 GOLD + thêm 1 GOLD nếu bạn thắng vòng đấu",
 	"victory_income_hint": "Tăng thêm 1 GOLD cho mỗi chuỗi thắng hoặc thua liên tiếp, nhiều nhất là thêm 5 GOLD",
 	"additional_income_hint": "Tăng thêm 1 GOLD mỗi 10 GOLD bạn hiện có, nhiều nhất là {{maxInterest}} GOLD với {{maxInterestGolds}} GOLD bạn hiện có",
-	"sound": "Âm Thanh",
-	"hotkeys": "Phím tắt",
-	"game_files": "Thư mục Game",
-	"game_version": "Phiên bản Game",
-	"language": "Ngôn ngữ",
-	"show_details_on_hover": "HIển thị chi tiết khi di chuyển chuột thay vì nhấp giữ chuột phải",
-	"show_damage_numbers": "HIển thị damage",
-	"disable_animated_tilemap": "Tắt background animations",
 	"save": "Lưu",
 	"pick_additional_pokemon_hint": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
 	"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos",
@@ -1488,7 +1480,6 @@
 	"pokemons_on_your_board": "Pokémons trên sân của bạn",
 	"team_size_hint": "Tăng số lượng Pokemon của đội bạn bằng cách tăng cấp độ của bạn",
 	"level": "Cấp độ",
-	"community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
 	"no_emotions_available": "Không có cảm xúc",
 	"loading_asset": "Đang tải tài nguyên",
 	"loading_complete": "Tải xong",
@@ -1505,13 +1496,6 @@
 	"game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
 	"key": "Chìa khoá",
 	"action": "Hành động",
-	"key_description": {
-		"buy_xp": "Mua kinh nghiệm",
-		"refresh": "Làm mới shop",
-		"avatar_anim": "Chạy biểu cảm nhân vật",
-		"avatar_emotes": "Chuyển đổi menu biểu cảm",
-		"avatar_show_emote": "Kích hoạt biểu cảm "
-	},
 	"gadgets": "Dụng cụ",
 	"gadget": {
 		"trainer_card": "Thẻ người chơi",
@@ -1730,6 +1714,25 @@
 		"data": {
 			"xp": "XP",
 			"experience": "Kinh nghiệm"
+		}
+	},
+	"options": {
+		"title": "Options",
+		"sound": "Âm Thanh",
+		"hotkeys": "Phím tắt",
+		"game_files": "Thư mục Game",
+		"language": "Ngôn ngữ",
+		"community_translations": "Bản dịch được thực hiện bởi cộng đồng Pokemon Autochess. Nếu bạn muốn đóng góp hoặc chỉnh sửa bản dịch, hãy đến",
+		"show_details_on_hover": "HIển thị chi tiết khi di chuyển chuột thay vì nhấp giữ chuột phải",
+		"show_damage_numbers": "HIển thị damage",
+		"disable_animated_tilemap": "Tắt background animations",
+		"game_version": "Phiên bản Game",
+		"key_description": {
+			"buy_xp": "Mua kinh nghiệm",
+			"refresh": "Làm mới shop",
+			"avatar_anim": "Chạy biểu cảm nhân vật",
+			"avatar_emotes": "Chuyển đổi menu biểu cảm",
+			"avatar_show_emote": "Kích hoạt biểu cảm "
 		}
 	}
 }
