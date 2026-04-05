@@ -4325,7 +4325,7 @@
 			"anonymous_users_name_hint": "Anonyme Benutzer können ihren Namen nicht ändern.",
 			"change_name": "Namen ändern",
 			"username_disclaimer": "Unangemessene Benutzernamen führen zur Sperrung deines Kontos. Dazu gehören Schimpfwörter, nicht jugendfreie/sexuelle Themen, direkte und indirekte Drohungen, politische Aussagen und Werbung für Dinge, die nichts mit dem Spiel zu tun haben.",
-			"invalid_username": "Invalider Nutzername. Nutzernamen müssen zwischen 3 und 24 Zeichen sein, mit einem Buchstaben beginnen, nur aus Zahlen, Buchstaben oder \".-_\" bestehen und darf keine Leerzeichen enthalten.",	
+			"invalid_username": "Invalider Nutzername. Nutzernamen müssen zwischen 3 und 24 Zeichen sein, mit einem Buchstaben beginnen, nur aus Zahlen, Buchstaben oder \".-_\" bestehen und darf keine Leerzeichen enthalten."	
 		}
 	}
 }
