@@ -117,7 +117,7 @@ kbd {
 }
 
 .custom-bg {
-  background-image: url("assets/ui/back1.jpg");
+  background-image: url("assets/theme/default/custombg.jpg");
   background-size: cover;
   background-position-y: bottom;
   background-attachment: fixed;

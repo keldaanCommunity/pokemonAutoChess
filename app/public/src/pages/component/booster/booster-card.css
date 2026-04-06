@@ -141,7 +141,7 @@
 
 .booster-card .name {
   text-align: center;
-  background-color: #4f5160;
+  background-color: var(--color-bg-tertiary);
   font-weight: bold;
   margin: 0px -5px 4px -5px;
   font-size: 1em;

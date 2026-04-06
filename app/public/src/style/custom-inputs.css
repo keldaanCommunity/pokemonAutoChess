@@ -32,7 +32,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 16px;
   cursor: var(--cursor-hover);
   box-shadow: 0px 0px 0px #000000;
-  background: #4f5160;
+  background: var(--color-bg-tertiary);
   border-radius: 0px;
   border: 2px solid #000000;
 }
@@ -50,7 +50,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: #4f5160;
+  background: var(--color-bg-tertiary);
 }
 
 input[type="range"]::-moz-range-track {
@@ -58,7 +58,7 @@ input[type="range"]::-moz-range-track {
   height: 16px;
   cursor: var(--cursor-hover);
   box-shadow: 0px 0px 0px #000000;
-  background: #4f5160;
+  background: var(--color-bg-tertiary);
   border-radius: 0px;
   border: 2px solid #000000;
 }
@@ -90,7 +90,7 @@ input[type="range"]::-ms-fill-lower {
 }
 
 input[type="range"]::-ms-fill-upper {
-  background: #4f5160;
+  background: var(--color-bg-tertiary);
   border: 2px solid #000000;
   border-radius: 0px;
   box-shadow: 0px 0px 0px #000000;
@@ -112,7 +112,7 @@ input[type="range"]:focus::-ms-fill-lower {
 }
 
 input[type="range"]:focus::-ms-fill-upper {
-  background: #4f5160;
+  background: var(--color-bg-tertiary);
 }
 
 select {

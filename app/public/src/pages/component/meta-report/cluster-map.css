@@ -7,7 +7,6 @@
   gap: 16px;
   padding: 16px;
   box-sizing: border-box;
-  background-color: rgb(84, 89, 107);
   border-radius: 8px;
 }
 
@@ -85,7 +84,7 @@
 
 .cluster-detail-panel {
   padding: 12px;
-  background: rgb(64, 69, 87);
+  background: var(--color-bg-tertiary);
   border-radius: 6px;
   border-left: 3px solid #4a9eff;
 }

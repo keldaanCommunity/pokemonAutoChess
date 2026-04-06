@@ -2,7 +2,7 @@
 
 .react-tabs__tab {
   cursor: var(--cursor-hover);
-  background-color: #40404080;
+  background-color: var(--color-bg-tertiary);
   margin: 0 2px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -19,7 +19,7 @@
 }
 
 .react-tabs__tab--selected {
-  background-color: rgb(84, 89, 107);
+  background-color: var(--color-bg-primary);
 }
 
 .react-tabs__tab--selected:after {

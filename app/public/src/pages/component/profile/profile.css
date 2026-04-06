@@ -76,7 +76,7 @@
 .profile-actions .react-tabs__tab-panel {
   flex: 1;
   overflow-y: auto;
-  background-color: rgb(84, 89, 107);
+  background-color: var(--color-bg-secondary);
   border-radius: 0 0 12px 12px;
   border: var(--border-thin);
   border-top: 0;

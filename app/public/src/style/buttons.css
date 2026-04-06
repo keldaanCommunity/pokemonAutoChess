@@ -5,7 +5,8 @@ button {
 .bubbly {
   position: relative;
   padding: 0.15em calc(0.5em + 3px) calc(0.15em + 3px) 0.5em;
-  background: #e7e7e7;
+  background: var(--color-bg-secondary);
+  color: white;
   display: inline-block;
   text-align: center;
   border-radius: 12px;
@@ -13,18 +14,37 @@ button {
   border: var(--border-thin);
   text-shadow: 2px 2px 2px #00000040;
   box-shadow:
-    inset -6px -6px 0px 0px #cfcfcf,
+    inset -6px -6px 0px 0px var(--color-bg-tertiary),
     var(--shadow-clickable);
   text-decoration: none;
   user-select: none;
 }
 
 .bubbly:not([disabled]):hover {
-  background: #ffffff;
+  background: var(--color-bg-primary);
   cursor: var(--cursor-hover);
 }
 
 .bubbly:not([disabled]):active {
+  background: var(--color-bg-secondary);
+  box-shadow:
+    inset 6px 6px 0px 0px var(--color-bg-tertiary),
+    var(--shadow-clickable);
+}
+
+.bubbly.white {
+  box-shadow:
+    inset -6px -6px 0px 0px #cfcfcf,
+    var(--shadow-clickable);
+  background: #e7e7e7;
+  color: black;
+}
+
+.bubbly.white:not([disabled]):hover {
+  background: #ffffff;
+}
+
+.bubbly.white:not([disabled]):active {
   background: #e7e7e7;
   box-shadow:
     inset 6px 6px 0px 0px #cfcfcf,

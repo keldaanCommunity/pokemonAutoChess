@@ -1,5 +1,5 @@
 .history-expand-btn {
-  background: rgb(84, 89, 107);
+  background: var(--color-bg-tertiary);
   border: var(--border-thin);
   border-radius: 4px;
   color: #ccc;
@@ -10,7 +10,7 @@
 }
 
 .history-expand-btn:hover {
-  background: rgb(100, 106, 128);
+  background: var(--color-bg-primary);
   color: white;
 }
 

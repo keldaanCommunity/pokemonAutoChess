@@ -34,7 +34,7 @@
 }
 
 #bot-builder .step-control button {
-  background-color: #4f5160;
+  background-color: var(--color-bg-tertiary);
 }
 
 #bot-builder button[disabled] {

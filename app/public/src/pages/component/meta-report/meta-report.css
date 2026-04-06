@@ -40,7 +40,6 @@
 }
 
 #meta-report .team-comp {
-  background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
   display: flex;
@@ -51,7 +50,6 @@
 }
 
 #meta-report .item-stat {
-  background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
   display: flex;

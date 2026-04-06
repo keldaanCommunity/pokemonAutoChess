@@ -1,5 +1,4 @@
 .preparation-menu {
-  background-image: url("assets/ui/back1.png");
   background-size: cover;
   background-position-x: left;
   display: flex;
@@ -49,7 +48,7 @@
   margin: 2px;
 }
 
-.preparation-menu .actions {
+.preparation-menu .actions > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

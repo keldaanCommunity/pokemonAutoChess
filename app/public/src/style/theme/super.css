@@ -1,0 +1,48 @@
+:root {
+  --color-bg-primary: #2f5986;
+  --color-bg-secondary: #183d6a;
+  --color-bg-tertiary: #334167;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--color-bg-secondary) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
+    ),
+    linear-gradient(
+      45deg,
+      var(--color-bg-secondary) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
+    );
+}
+
+.custom-bg {
+  background-image: url("assets/theme/super/custombg.jpg");
+  background-position-x: center;
+}
+
+.react-tabs__tab {
+  backdrop-filter: blur(10px);
+}
+
+.preparation-menu,
+.preparation-page .chat-container {
+  padding: 0;
+}
+
+.preparation-menu > *,
+.preparation-page .chat-container > *,
+.room-menu .controls {
+  backdrop-filter: brightness(0.5) blur(3px);
+  padding: 0.5em;
+  margin: 0;
+}

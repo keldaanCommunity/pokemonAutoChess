@@ -54,7 +54,7 @@
   border-radius: 8px;
   font-size: 1.25rem;
   border: var(--border-thin);
-  background: rgba(97, 115, 138, 0.815);
+  background: var(--color-bg-secondary);
   color: white;
   cursor: var(--cursor-hover);
 }
