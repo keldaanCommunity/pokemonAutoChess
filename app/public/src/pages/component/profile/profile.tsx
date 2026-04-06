@@ -11,13 +11,13 @@ import {
   giveBooster,
   giveRole,
   giveTitle,
-  heapSnapshot,
   searchById,
   unban
 } from "../../../network"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
+import { EloTab } from "./elo-tab"
 import { GadgetsTab } from "./gadgets-tab"
 import GameHistory from "./game-history"
 import PlayerBox from "./player-box"
@@ -101,7 +101,7 @@ export default function Profile() {
     <div className="profile-modal">
       <div className="profile-box">
         <h2>
-          {profile?.displayName ?? ""} {t("profile")}
+          {profile?.displayName ?? ""} {t("profile.title")}
         </h2>
         {profile && <PlayerBox user={profile} history={gameHistory} />}
       </div>
@@ -113,15 +113,15 @@ export default function Profile() {
           <div className="loading">{t("loading")}</div>
         ) : error ? (
           <div className="error">{error}</div>
-        ) : suggestions.length > 0 ? (
-          <SearchResults
-            suggestions={suggestions}
-            onSelect={(suggestion) => searchById(suggestion.id)}
-          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
             setRightPanel={setRightPanel}
+          />
+        ) : suggestions.length > 0 ? (
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => searchById(suggestion.id)}
           />
         ) : (
           <MyProfileMenu />
@@ -143,11 +143,12 @@ function MyProfileMenu() {
   return (
     <Tabs>
       <TabList>
-        <Tab>{t("progress")}</Tab>
+        <Tab>{t("profile.progress.title")}</Tab>
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
-        <Tab>{t("account")}</Tab>
+        <Tab>{t("profile.elo_tab.title")}</Tab>
+        <Tab>{t("profile.account.title")}</Tab>
       </TabList>
 
       <TabPanel>
@@ -161,6 +162,9 @@ function MyProfileMenu() {
       </TabPanel>
       <TabPanel>
         <GadgetsTab />
+      </TabPanel>
+      <TabPanel>
+        <EloTab />
       </TabPanel>
       <TabPanel>
         <AccountTab />
@@ -192,13 +196,6 @@ function OtherProfileActions(props: {
         }}
       >
         {t("give_boosters")}
-      </button>
-    ) : null
-
-  const heapSnapshotButton =
-    user && role && role === Role.ADMIN ? (
-      <button className="bubbly red" onClick={() => heapSnapshot()}>
-        {t("heap_snapshot")}
       </button>
     ) : null
 
@@ -309,7 +306,6 @@ function OtherProfileActions(props: {
   return role === Role.ADMIN || role === Role.MODERATOR ? (
     <>
       {giveButton}
-      {heapSnapshotButton}
       {roleButton}
       {titleButton}
       {user?.banned ? unbanButton : banButton}

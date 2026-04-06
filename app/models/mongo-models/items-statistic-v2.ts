@@ -9,7 +9,7 @@ export interface IHistoryEntry {
 
 export interface IItemsStatisticV2 {
   tier: string
-  items: Map<string, IItemV2>
+  items: Record<string, IItemV2>
 }
 
 export interface IItemV2 {

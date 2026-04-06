@@ -61,7 +61,10 @@ export default function TranslationsPage() {
 
   // Load English once
   useEffect(() => {
-    fetch("locales/en/translation.json")
+    const githubUrl =
+      "https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/dist/client/locales/en/translation.json"
+    fetch(githubUrl)
+      .catch(() => fetch("locales/en/translation.json"))
       .then((r) => r.json())
       .then((data: TranslationMap) => {
         setEnData(data)
@@ -76,7 +79,9 @@ export default function TranslationsPage() {
   useEffect(() => {
     setLoading(true)
     setEdits(loadEdits(targetLang))
-    fetch(`locales/${targetLang}/translation.json`)
+    const githubUrl = `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChess/refs/heads/master/app/public/dist/client/locales/${targetLang}/translation.json`
+    fetch(githubUrl)
+      .catch(() => fetch(`locales/${targetLang}/translation.json`))
       .then((r) => r.json())
       .then((data: TranslationMap) => {
         setTargetData(data)
@@ -313,6 +318,15 @@ export default function TranslationsPage() {
                     />
                   )
                 }
+
+                const translatedCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) !== ""
+                ).length
+                const missingCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) === ""
+                ).length
+                const totalCount = Object.keys(value).length
+
                 return (
                   <TranslationSection
                     key={key}
@@ -326,6 +340,9 @@ export default function TranslationsPage() {
                     onEdit={onEdit}
                     onRevert={onRevert}
                     depth={0}
+                    translatedCount={translatedCount}
+                    missingCount={missingCount}
+                    totalCount={totalCount}
                   />
                 )
               })

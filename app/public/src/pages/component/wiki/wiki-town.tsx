@@ -16,8 +16,8 @@ export default function WikiTown() {
   return (
     <div id="wiki-town">
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
-        <p>{t("town_encounters_hint")}</p>
-        <p>{t("town_encounters_hint2")}</p>
+        <p>{t("wiki.town.town_encounters_hint")}</p>
+        <p>{t("wiki.town.town_encounters_hint2")}</p>
       </div>
       <ul>
         {Object.values(TownEncounters).map((encounter: TownEncounter) => (

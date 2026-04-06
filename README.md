@@ -4,8 +4,6 @@ Non profit game. For fans, by fans.
 
 ## All rights to the Pokemon Company. Pokemon Auto Chess can stop at any time, whenever The Pokemon Company wants.
 
-[![translation badge](https://inlang.com/badge?url=github.com/keldaanCommunity/pokemonAutoChess)](https://inlang.com/editor/github.com/keldaanCommunity/pokemonAutoChess?ref=badge)
-
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
@@ -137,17 +135,8 @@ You might want to have full access rights on your local version. To do so, you c
 
 - Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
 - The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
-- We recommend VSCode and these extensions: Biome for formatting and linting and Inlang for translations management.
+- We recommend VSCode and the extension Biome for formatting and linting
 
 ## How to deploy your own Pokemon Auto Chess
 
 See this [README](https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/deployment/README.md)
-
-## Internationalisation
-
-- In VSCode, use the inlang (i18n) extension
-- Bind the Inlang: Extract Message on a keyboard touch, for example (²)
-- Select the string you want to translate. Press ², a prompt will ask the id you want for this string. It'll add the corresponding entry in the english translation file.
-- Once you are finished, you can run npm run translate to machine translate the missing translations
-
-Please note that we only support the english language. Other languages are managed by the community.

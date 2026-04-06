@@ -6,89 +6,89 @@ export default function WikiFaq() {
   return (
     <div className="wiki-faq">
       <details className="my-box">
-        <summary>{t("faq.official_game")}</summary>
-        <p>{t("faq.official_game_answer")}</p>
+        <summary>{t("wiki.faq.official_game")}</summary>
+        <p>{t("wiki.faq.official_game_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.how_pokemon_evolve")}</summary>
-        <p>{t("faq.how_pokemon_evolve_answer")}</p>
+        <summary>{t("wiki.faq.how_pokemon_evolve")}</summary>
+        <p>{t("wiki.faq.how_pokemon_evolve_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.income")}</summary>
-        <p>{t("faq.income_answer")}</p>
+        <summary>{t("wiki.faq.income")}</summary>
+        <p>{t("wiki.faq.income_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.collection")}</summary>
-        <p>{t("faq.collection_answer")}</p>
+        <summary>{t("wiki.faq.collection")}</summary>
+        <p>{t("wiki.faq.collection_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.avatars")}</summary>
-        <p>{t("faq.avatars_answer")}</p>
+        <summary>{t("wiki.faq.avatars")}</summary>
+        <p>{t("wiki.faq.avatars_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.boosters")}</summary>
-        <p>{t("faq.boosters_answer")}</p>
+        <summary>{t("wiki.faq.boosters")}</summary>
+        <p>{t("wiki.faq.boosters_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.level")}</summary>
-        <p>{t("faq.level_answer")}</p>
+        <summary>{t("wiki.faq.level")}</summary>
+        <p>{t("wiki.faq.level_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.mythical")}</summary>
-        <p>{t("faq.mythical_answer")}</p>
+        <summary>{t("wiki.faq.mythical")}</summary>
+        <p>{t("wiki.faq.mythical_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.ditto")}</summary>
-        <p>{t("faq.ditto_answer")}</p>
+        <summary>{t("wiki.faq.ditto")}</summary>
+        <p>{t("wiki.faq.ditto_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.items")}</summary>
-        <p>{t("faq.items_answer")}</p>
+        <summary>{t("wiki.faq.items")}</summary>
+        <p>{t("wiki.faq.items_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.bots")}</summary>
-        <p>{t("faq.bots_answer")}</p>
+        <summary>{t("wiki.faq.bots")}</summary>
+        <p>{t("wiki.faq.bots_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.create_bot")}</summary>
-        <p>{t("faq.create_bot_answer")}</p>
+        <summary>{t("wiki.faq.create_bot")}</summary>
+        <p>{t("wiki.faq.create_bot_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.elo")}</summary>
-        <p>{t("faq.elo_answer")}</p>
+        <summary>{t("wiki.faq.elo")}</summary>
+        <p>{t("wiki.faq.elo_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.missing_points")}</summary>
-        <p>{t("faq.missing_points_answer")}</p>
+        <summary>{t("wiki.faq.missing_points")}</summary>
+        <p>{t("wiki.faq.missing_points_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.damage")}</summary>
-        <p>{t("faq.damage_answer")}</p>
+        <summary>{t("wiki.faq.damage")}</summary>
+        <p>{t("wiki.faq.damage_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.shiny")}</summary>
-        <p>{t("faq.shiny_answer")}</p>
+        <summary>{t("wiki.faq.shiny")}</summary>
+        <p>{t("wiki.faq.shiny_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.support")}</summary>
+        <summary>{t("wiki.faq.support")}</summary>
         <p>
-          {t("faq.support_answer")}
+          {t("wiki.faq.support_answer")}
           &nbsp;<a href="https://en.tipeee.com/keldaan">Tipee</a>.
         </p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.mobile")}</summary>
-        <p>{t("faq.mobile_answer")}</p>
+        <summary>{t("wiki.faq.mobile")}</summary>
+        <p>{t("wiki.faq.mobile_answer")}</p>
       </details>
       <details className="my-box">
-        <summary>{t("faq.code")}</summary>
+        <summary>{t("wiki.faq.code")}</summary>
         <p>
-          {t("faq.code_answer")},&nbsp;
+          {t("wiki.faq.code_answer")},&nbsp;
           <a
             href="https://github.com/keldaanCommunity/pokemonAutoChess"
             target="_blank"
           >
-            {t("faq.pull_requests")}
+            {t("wiki.faq.pull_requests")}
           </a>{" "}
           !
         </p>

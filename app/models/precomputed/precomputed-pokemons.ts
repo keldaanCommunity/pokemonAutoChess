@@ -1,8 +1,8 @@
-import { RarityCost } from "../app/config"
-import PokemonFactory from "../app/models/pokemon-factory"
-import { Ability } from "../app/types/enum/Ability"
-import { Passive } from "../app/types/enum/Passive"
-import { Pkm } from "../app/types/enum/Pokemon"
+import { RarityCost } from "../../config"
+import { Ability } from "../../types/enum/Ability"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm } from "../../types/enum/Pokemon"
+import PokemonFactory from "../pokemon-factory"
 
 const sortByRarityAndTier = (a, b) =>
   RarityCost[a.rarity] === RarityCost[b.rarity]

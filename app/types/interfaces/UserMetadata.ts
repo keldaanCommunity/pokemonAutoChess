@@ -40,6 +40,21 @@ export interface IPokemonCollectionItemMongo extends IPokemonCollectionItem {
   unlocked: Buffer
 }
 
+// When using .lean(), Mongoose returns BSON Binary objects instead of Buffer
+export type IPokemonCollectionItemLean = Omit<
+  IPokemonCollectionItemMongo,
+  "unlocked"
+> & {
+  unlocked: Buffer | { buffer: ArrayBuffer } | undefined
+}
+
+export type IUserMetadataLean = Omit<
+  IUserMetadataMongo,
+  "pokemonCollection"
+> & {
+  pokemonCollection: Record<string, IPokemonCollectionItemLean>
+}
+
 // used in JSON responses and client-side before unpacking
 export interface IUserMetadataClient extends IUserMetadata {
   pokemonCollection: Map<string, IPokemonCollectionItemClient>

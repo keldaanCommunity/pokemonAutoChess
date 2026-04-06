@@ -1312,7 +1312,7 @@ export default class Simulation extends Schema implements ISimulation {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         pokemon.addSpeed(
           (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
-          pokemon,
+          "environment",
           0,
           false
         )
@@ -1321,7 +1321,7 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.SNOW:
         if (pokemon.types.has(Synergy.ICE) === false) {
-          pokemon.addSpeed(-10, pokemon, 0, false)
+          pokemon.addSpeed(-10, "environment", 0, false)
         }
         break
 
@@ -1331,7 +1331,7 @@ export default class Simulation extends Schema implements ISimulation {
         const nbSmellyClays = opponentPlayer
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
-        pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, pokemon, 0, false)
+        pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, "environment", 0, false)
         break
       }
 
@@ -1340,14 +1340,14 @@ export default class Simulation extends Schema implements ISimulation {
           ? count(player.items, Item.BLACK_AUGURITE)
           : 0
 
-        pokemon.addCritChance(10 + 5 * nbBlackAugurite, pokemon, 0, false)
+        pokemon.addCritChance(10 + 5 * nbBlackAugurite, "environment", 0, false)
         break
       }
 
       case EffectEnum.DROUGHT: {
         const nbHeatStones = player ? count(player.items, Item.HEAT_ROCK) : 0
 
-        pokemon.addAttack(3 * nbHeatStones, pokemon, 0, false)
+        pokemon.addAttack(3 * nbHeatStones, "environment", 0, false)
         break
       }
 
@@ -1356,7 +1356,7 @@ export default class Simulation extends Schema implements ISimulation {
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
         const luckDebuff =
           10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
-        pokemon.addLuck(luckDebuff, pokemon, 0, false)
+        pokemon.addLuck(luckDebuff, "environment", 0, false)
         break
       }
 
@@ -1364,7 +1364,7 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
         if (nbMistStones > 0) {
-          pokemon.addSpecialDefense(3 * nbMistStones, pokemon, 0, false)
+          pokemon.addSpecialDefense(3 * nbMistStones, "environment", 0, false)
         }
         break
       }

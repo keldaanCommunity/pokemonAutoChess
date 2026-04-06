@@ -6,13 +6,13 @@ import React, {
   useState
 } from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import {
   getBaseAltForm,
   PkmAltForms,
   PkmAltFormsByPkm
 } from "../../../../../config"
 import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Stat } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"

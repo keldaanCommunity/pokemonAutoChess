@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { USERNAME_REGEXP } from "../../../../../config"
+import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { deleteAccount } from "../../../network"
+import { deleteAccount, heapSnapshot } from "../../../network"
 import { changeName, setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export function AccountTab() {
@@ -10,27 +11,38 @@ export function AccountTab() {
   const user = useAppSelector((state) => state.network.profile)
 
   const promptDeleteAccount = () => {
-    const confirmation = prompt(t("delete_account_confirmation"))
-    if (confirmation === t("delete_account_passphrase")) {
+    const confirmation = prompt(
+      t("profile.account.delete_account_confirmation")
+    )
+    if (confirmation === t("profile.account.delete_account_passphrase")) {
       deleteAccount()
     } else if (confirmation != null) {
-      alert(t("delete_account_confirmation_failed"))
+      alert(t("profile.account.delete_account_confirmation_failed"))
     }
   }
 
   return user ? (
     <div>
       <ChangeNameForm />
-      <h3>{t("user_id")}</h3>
+      <h3>{t("profile.account.user_id")}</h3>
       <p>
-        {t("user_id_hint1")} <span style={{ color: "red" }}>{user.uid}</span>
+        {t("profile.account.user_id_hint1")}{" "}
+        <span style={{ color: "red" }}>{user.uid}</span>
       </p>
-      <p>{t("user_id_hint2")}</p>
-      <h3>{t("delete_account")}</h3>
-      <p>{t("delete_account_hint")}</p>
+      <p>{t("profile.account.user_id_hint2")}</p>
+      <h3>{t("profile.account.delete_account")}</h3>
+      <p>{t("profile.account.delete_account_hint")}</p>
       <button className="bubbly red" onClick={() => promptDeleteAccount()}>
-        {t("delete_account")}
+        {t("profile.account.delete_account")}
       </button>
+      {user.role === Role.ADMIN && (
+        <>
+          <h3>{t("heap_snapshot")}</h3>
+          <button className="bubbly red" onClick={() => heapSnapshot()}>
+            {t("heap_snapshot")}
+          </button>
+        </>
+      )}
     </div>
   ) : null
 }
@@ -48,21 +60,21 @@ function ChangeNameForm() {
     if (USERNAME_REGEXP.test(newName)) {
       dispatch(changeName(newName))
     } else {
-      dispatch(setErrorAlertMessage(t("invalid_username")))
+      dispatch(setErrorAlertMessage(t("profile.account.invalid_username")))
     }
   }
 
   if (user && isAnonymous) {
     return (
       <div className="my-container">
-        <p>{t("anonymous_users_name_hint")}</p>
+        <p>{t("profile.account.anonymous_users_name_hint")}</p>
       </div>
     )
   }
 
   return user ? (
     <div>
-      <h3>{t("change_name")}</h3>
+      <h3>{t("profile.account.change_name")}</h3>
       <div style={{ display: "flex", gap: "0.5em" }}>
         <input
           type="text"
@@ -78,7 +90,7 @@ function ChangeNameForm() {
           {t("change")}
         </button>
       </div>
-      <p className="disclaimer">{t("username_disclaimer")}</p>
+      <p className="disclaimer">{t("profile.account.username_disclaimer")}</p>
     </div>
   ) : null
 }

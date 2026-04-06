@@ -67,7 +67,7 @@ export default function WikiPokemonDetail(props: {
       <dl>
         <dt>{t("name")}</dt>
         <dd className="pokemon-name">{t(`pkm.${props.pokemon}`)}</dd>
-        <dt>{t("index")}</dt>
+        <dt>{t("wiki.pokemons.index")}</dt>
         <dd className="pokemon-index">{pokemonData.index}</dd>
         <dt>{t("rarity_label")}</dt>
         <dd style={{ color: RarityColor[pokemonData.rarity] }}>
@@ -93,7 +93,7 @@ export default function WikiPokemonDetail(props: {
         </dd>
         {prevolution && (
           <>
-            <dt>{t("evolves_from")}</dt>
+            <dt>{t("wiki.pokemons.evolves_from")}</dt>
             <dd>
               <div
                 onClick={() => props.selectPkm(prevolution)}
@@ -108,7 +108,7 @@ export default function WikiPokemonDetail(props: {
             </dd>
           </>
         )}
-        <dt>{t("evolution")}</dt>
+        <dt>{t("wiki.pokemons.evolution")}</dt>
         <dd>
           {evolutions.length === 0
             ? "No evolution"
@@ -126,10 +126,10 @@ export default function WikiPokemonDetail(props: {
                 </div>
               ))}
         </dd>
-        <dt>{t("portrait_credit")}</dt>
+        <dt>{t("wiki.pokemons.portrait_credit")}</dt>
         <Credits for="portrait" index={pokemonData.index} />
 
-        <dt>{t("sprite_credit")}</dt>
+        <dt>{t("wiki.pokemons.sprite_credit")}</dt>
         <Credits for="sprite" index={pokemonData.index} />
       </dl>
       <dl>
@@ -154,7 +154,7 @@ export default function WikiPokemonDetail(props: {
       <dl>
         {pokemonData.skill !== Ability.DEFAULT && (
           <>
-            <dt>{t("ability_label")}</dt>
+            <dt>{t("wiki.pokemons.ability_label")}</dt>
             <dd>
               {t(`ability.${pokemon.skill}`)}
               <AbilityTooltip
@@ -166,7 +166,7 @@ export default function WikiPokemonDetail(props: {
         )}
         {pokemonData.passive !== Passive.NONE && (
           <>
-            <dt>{t("passive")}</dt>
+            <dt>{t("wiki.pokemons.passive")}</dt>
             <dd>
               <p>
                 {addIconsToDescription(

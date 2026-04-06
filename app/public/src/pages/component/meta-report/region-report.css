@@ -1,17 +1,9 @@
-#region-report {
-  padding: 1em;
-}
-
 #region-report header {
   display: flex;
   gap: 1em;
   align-items: center;
   margin-bottom: 1em;
   flex-wrap: wrap;
-}
-
-#region-report header > .pokemon-typeahead {
-  margin-left: auto;
 }
 
 #region-report h2 {

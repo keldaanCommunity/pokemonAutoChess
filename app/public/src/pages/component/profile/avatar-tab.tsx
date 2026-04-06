@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Pkm, PkmByIndex, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -41,8 +41,11 @@ export function AvatarTab() {
   return (
     <div>
       <h3 style={{ display: "flex" }}>
-        {t("change_avatar")} <div className="spacer"></div>{" "}
-        {t("avatars_unlocked", { count: nbUnlocked, total: nbTotal })}
+        {t("profile.avatar.change_avatar")} <div className="spacer"></div>{" "}
+        {t("profile.progress.avatars_unlocked", {
+          count: nbUnlocked,
+          total: nbTotal
+        })}
       </h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
         <PokemonTypeahead value={selectedPkm} onChange={setSelectedPkm} />
@@ -68,7 +71,9 @@ export function AvatarTab() {
         )}
       </div>
       <div>
-        {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
+        {pokemonCollection.length === 0 && (
+          <p>{t("profile.avatar.play_more_games_hint")}</p>
+        )}
         {selectedPkm ? (
           <SelectedPokemonAvatars pokemon={selectedPkm} />
         ) : (
@@ -128,7 +133,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
     (pokemonCollectionItem.emotions.length === 0 &&
       pokemonCollectionItem.shinyEmotions.length === 0)
   )
-    return <p>{t("play_more_games_hint")}</p>
+    return <p>{t("profile.avatar.play_more_games_hint")}</p>
 
   return (
     <div className="emotions-grid">
@@ -138,6 +143,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
         ].map((emotion) => {
           return (
             <div
+              key={`${type}-${index}${emotion}`}
               className={cc("my-box clickable pokemon-emotion unlocked", {
                 selected:
                   getAvatarString(index, type === "shiny", emotion) ===
@@ -154,7 +160,6 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
               }}
             >
               <PokemonPortrait
-                key={`${type}-${index}${emotion}`}
                 portrait={{
                   index,
                   shiny: type === "shiny",

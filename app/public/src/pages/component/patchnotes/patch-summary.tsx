@@ -1,17 +1,12 @@
 import { marked } from "marked"
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import { Item } from "../../../../../types/enum/Item"
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToHtml } from "../../utils/descriptions"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import "./patch-summary.css"
 
 interface PatchSummaryProps {
@@ -85,7 +80,7 @@ export function PatchSummary({ version }: PatchSummaryProps) {
       .finally(() => {
         setIsLoading(false)
       })
-  }, [version])
+  }, [])
 
   return (
     <div className="patch-summary">
