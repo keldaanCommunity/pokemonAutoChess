@@ -1,5 +1,9 @@
 import { Dispatch, SetStateAction } from "react"
-import { BoosterPriceByRarity, getEmotionCost } from "../../../../../config"
+import {
+  BoosterPriceByRarity,
+  getAllAltForms,
+  getEmotionCost
+} from "../../../../../config"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types/enum/Emotion"
@@ -46,8 +50,9 @@ export default function PokemonCollectionItem(props: {
         ? shinyEmotions?.length > 0
         : emotions?.length > 0 || shinyEmotions?.length > 0
 
+  const allForms = getAllAltForms(props.name)
   const isNew = lastBoostersOpened.some((booster) =>
-    booster.some((card) => card.name === props.name && card.new)
+    booster.some((card) => allForms.includes(card.name) && card.new)
   )
 
   const availableEmotions = getAvailableEmotions(props.index, false)
