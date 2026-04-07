@@ -85,12 +85,14 @@ We use “cookies” to collect information about you and your activity across o
 # Limits of Our Policy
 
 Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.
-Changes to This Policy
+
+# Changes to This Policy
 
 At our discretion, we may change our privacy policy to reflect updates to our business processes, current acceptable practices, or legislative or regulatory changes. If we decide to change this privacy policy, we will post the changes here at the same link by which you are accessing this privacy policy.
 
 If required by law, we will get your permission or give you the opportunity to opt in to or opt out of, as applicable, any new uses of your personal information.
-Contact Us
+
+# Contact Us
 
 For any questions or concerns regarding your privacy, you may contact us using the following details:
 

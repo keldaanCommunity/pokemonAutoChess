@@ -80,7 +80,7 @@ export default function WikiTutorials() {
         </li>
       </ul>
       <p>
-        {t("thanks_to")}&nbsp;
+        {t("wiki.tutorials.thanks_to")}&nbsp;
         <a href="https://www.youtube.com/@PokePlagued" target="_blank">
           Plagued
         </a>
@@ -100,7 +100,7 @@ export default function WikiTutorials() {
         <a href="https://www.youtube.com/@biggerweff" target="_blank">
           Bigweff
         </a>{" "}
-        {t("tutorial_work")}
+        {t("wiki.tutorials.tutorial_work")}
       </p>
     </div>
   )

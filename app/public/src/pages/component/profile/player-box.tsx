@@ -119,7 +119,7 @@ export default function PlayerBox(props: {
       </div>
       {(role === Role.ADMIN || role === Role.MODERATOR) && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
-          {t("user_id")}: {props.user.uid}
+          {t("profile.account.user_id")}: {props.user.uid}
         </p>
       )}
     </div>

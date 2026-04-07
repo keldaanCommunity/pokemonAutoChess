@@ -43,7 +43,7 @@ export function TitleTab() {
           isDark
         />
         <p>
-          {t("titles_unlocked", {
+          {t("profile.progress.titles_unlocked", {
             count: nbTitlesUnlocked,
             total: Object.keys(Title).length
           })}

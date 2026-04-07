@@ -10,7 +10,7 @@ export default function GameFiles() {
   const askingSW = useRef<boolean>(false)
   const preloadingScene = useRef<PreloadingScene | undefined>(undefined)
   const [preloadingMessage, setPreloadingMessage] = useState<string>(
-    t("preloading_start")
+    t("options.preloading_start")
   )
   const [preloading, setPreloading] = useState<boolean>(false)
   const [preloadingPc, setPreloadingPc] = useState(0)
@@ -54,7 +54,7 @@ export default function GameFiles() {
           )
         },
         () => {
-          setPreloadingMessage(t("finished_preloading"))
+          setPreloadingMessage(t("options.finished_preloading"))
           gameRef.current?.destroy(true)
           gameRef.current = null
           setCached(true)
@@ -72,22 +72,22 @@ export default function GameFiles() {
   return (
     <div id="game-files-tab">
       <p>
-        {t("game_version")}: {version}
+        {t("options.game_version")}: {version}
       </p>
       <p>
-        {t("game_cached")}:{" "}
+        {t("options.game_cached")}:{" "}
         <span style={{ color: cached ? "lime" : "red" }}>
           {cached ? t("yes") : t("no")}
         </span>
       </p>
       {!cached && !preloading && (
         <button className="bubbly blue" onClick={preloadFiles}>
-          {t("download_game_files")}
+          {t("options.download_game_files")}
         </button>
       )}
       {cached && !preloading && (
         <button className="bubbly red" onClick={deleteCache}>
-          {t("delete_cache")}
+          {t("options.delete_cache")}
         </button>
       )}
       {preloading && (

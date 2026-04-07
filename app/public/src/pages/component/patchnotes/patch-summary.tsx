@@ -1,17 +1,12 @@
 import { marked } from "marked"
-import React, { useEffect, useState } from "react"
+import { memo, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import { Item } from "../../../../../types/enum/Item"
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToHtml } from "../../utils/descriptions"
-import {
-  GamePokemonDetail,
-  GamePokemonDetailTooltip
-} from "../game/game-pokemon-detail"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import "./patch-summary.css"
 
 interface PatchSummaryProps {
@@ -55,62 +50,74 @@ function fetchMarkdown(
     })
 }
 
-export function PatchSummary({ version }: PatchSummaryProps) {
-  const { t } = useTranslation()
-  const [patchContent, setPatchContent] = useState<string>()
-  const [fullPatchNotes, setFullPatchNotes] = useState<string>()
-  const [isLoading, setIsLoading] = useState(true)
+export const PatchSummary = memo(
+  ({ version }: PatchSummaryProps) => {
+    const { t } = useTranslation()
+    const [patchContent, setPatchContent] = useState<string>()
+    const [fullPatchNotes, setFullPatchNotes] = useState<string>()
+    const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    setIsLoading(true)
+    useEffect(() => {
+      setIsLoading(true)
 
-    // Fetch both summary and full patch notes
-    const fetchSummary = fetchMarkdown(
-      `/changelog/summary/summary-${version}.md`
+      // Fetch both summary and full patch notes
+      const fetchSummary = fetchMarkdown(
+        `/changelog/summary/summary-${version}.md`
+      )
+      const fetchFullNotes = fetchMarkdown(`/changelog/patch-${version}.md`, 2)
+
+      Promise.all([fetchSummary, fetchFullNotes])
+        .then(([summaryParsed, fullNotesParsed]) => {
+          setPatchContent(addIconsToHtml(summaryParsed))
+          setFullPatchNotes(addIconsToHtml(fullNotesParsed))
+        })
+        .catch(() => {
+          const fallbackContent = `<h2>Patch ${version}</h2><p>Changelog not available</p>`
+          const fallbackNotes = "<p>Patch notes not available</p>"
+
+          setPatchContent(addIconsToHtml(fallbackContent))
+          setFullPatchNotes(addIconsToHtml(fallbackNotes))
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }, [version])
+
+    const patchContentHtml = useMemo(
+      () => ({ __html: patchContent || "" }),
+      [patchContent]
     )
-    const fetchFullNotes = fetchMarkdown(`/changelog/patch-${version}.md`, 2)
+    const fullPatchNotesHtml = useMemo(
+      () => ({ __html: fullPatchNotes || "" }),
+      [fullPatchNotes]
+    )
 
-    Promise.all([fetchSummary, fetchFullNotes])
-      .then(([summaryParsed, fullNotesParsed]) => {
-        setPatchContent(addIconsToHtml(summaryParsed))
-        setFullPatchNotes(addIconsToHtml(fullNotesParsed))
-      })
-      .catch(() => {
-        const fallbackContent = `<h2>Patch ${version}</h2><p>Changelog not available</p>`
-        const fallbackNotes = "<p>Patch notes not available</p>"
-
-        setPatchContent(addIconsToHtml(fallbackContent))
-        setFullPatchNotes(addIconsToHtml(fallbackNotes))
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, [version])
-
-  return (
-    <div className="patch-summary">
-      {isLoading ? (
-        <p>{t("loading")}...</p>
-      ) : (
-        <>
-          <div
-            className="patch-content"
-            dangerouslySetInnerHTML={{ __html: patchContent || "" }}
-          ></div>
-          <hr />
-          {fullPatchNotes && (
-            <>
-              <h2>{t("full_patch_notes")}</h2>
-              <div
-                className="full-patch-notes"
-                dangerouslySetInnerHTML={{ __html: fullPatchNotes }}
-              ></div>
-            </>
-          )}
-        </>
-      )}
-      <GamePokemonDetailTooltip origin="patchnotes" />
-      <ItemDetailTooltip />
-    </div>
-  )
-}
+    return (
+      <div className="patch-summary">
+        {isLoading ? (
+          <p>{t("loading")}...</p>
+        ) : (
+          <>
+            <div
+              className="patch-content"
+              dangerouslySetInnerHTML={patchContentHtml}
+            ></div>
+            <hr />
+            {fullPatchNotes && (
+              <>
+                <h2>{t("full_patch_notes")}</h2>
+                <div
+                  className="full-patch-notes"
+                  dangerouslySetInnerHTML={fullPatchNotesHtml}
+                ></div>
+              </>
+            )}
+          </>
+        )}
+        <GamePokemonDetailTooltip origin="patchnotes" />
+        <ItemDetailTooltip />
+      </div>
+    )
+  },
+  (prevProps, nextProps) => prevProps.version === nextProps.version
+)

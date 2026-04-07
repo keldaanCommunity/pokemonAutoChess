@@ -23,6 +23,7 @@ import {
   authenticateUser,
   client,
   joinLobby,
+  joinPreparation,
   leaveRoom,
   removeMessage,
   rooms
@@ -117,6 +118,7 @@ export async function joinLobbyRoom(
               if (errorMessage) {
                 dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
               }
+              dispatch(resetLobby())
               navigate("/")
             }
           })
@@ -315,18 +317,8 @@ export async function joinExistingPreparationRoom(
           `Expected to join a preparation room but joined ${room.name} instead`
         )
       }
-      localStore.set(
-        LocalStoreKeys.RECONNECTION_PREPARATION,
-        {
-          reconnectionToken: room.reconnectionToken,
-          roomId: room.roomId
-        },
-        30
-      )
-      await Promise.allSettled([
-        leaveRoom("lobby"),
-        room.connection.isOpen && room.leave(false)
-      ])
+      joinPreparation(room, 30)
+      leaveRoom("lobby")
       dispatch(resetLobby())
       navigate("/preparation")
     }

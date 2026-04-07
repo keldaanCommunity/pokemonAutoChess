@@ -1886,14 +1886,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               player.team,
               simulation
             )
-            castAbility(
-              caster.skill,
-              caster,
-              simulation.board,
-              caster,
-              false,
-              true
-            )
+            castAbility(caster.skill, caster, simulation.board, null, false)
           }, 10000)
         })
       })

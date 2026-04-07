@@ -1,7 +1,7 @@
-import { precomputedPokemonsImplemented } from "../../../gen/precomputed-pokemons"
 import { Rarity } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Pokemon } from "../colyseus-models/pokemon"
+import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-rarity")
 

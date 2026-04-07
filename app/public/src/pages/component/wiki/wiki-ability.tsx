@@ -188,7 +188,7 @@ function AbilityRow({
                     data-tooltip-content={tmPerAbility[ability]}
                   >
                     <img
-                      src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]!) ? "TM_Bronze" : TMsSilver.includes(tmPerAbility[ability]!) ? "TM_Silver" : "TM_Gold"}.png`}
+                      src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]!) ? "TM_BRONZE" : TMsSilver.includes(tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
                       className="item"
                     />
                   </li>

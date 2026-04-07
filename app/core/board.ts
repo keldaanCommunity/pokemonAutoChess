@@ -461,14 +461,16 @@ export class Board {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: IPokemonEntity,
     targetAlly: boolean = false
-  ):
-    | { x: number; y: number; distance: number; target: PokemonEntity }
-    | undefined {
+  ): { x: number; y: number; distance: number; target: PokemonEntity } | null {
     let maxTargetDistance = 0
     let maxCellDistance = 0
-    let selectedCell:
-      | { x: number; y: number; distance: number; target: PokemonEntity }
-      | undefined
+    let selectedCell: {
+      x: number
+      y: number
+      distance: number
+      target: PokemonEntity
+    } | null = null
+    let farthestTarget: PokemonEntity | undefined
 
     this.forEach((x: number, y: number, entity: PokemonEntity | undefined) => {
       if (entity && entity.isTargettableBy(pokemon, !targetAlly, targetAlly)) {
@@ -479,6 +481,8 @@ export class Board {
           entity.positionY
         )
         if (targetDistance > maxTargetDistance) {
+          maxTargetDistance = targetDistance
+          farthestTarget = entity
           maxCellDistance = 0
           const freeCells = this.getAdjacentCells(x, y).filter(
             (cell) => this.getEntityOnCell(cell.x, cell.y) === undefined
@@ -500,12 +504,21 @@ export class Board {
               }
             }
           }
-          if (selectedCell?.target === entity) {
-            maxTargetDistance = targetDistance
-          }
         }
       }
     })
+
+    if (selectedCell === null && farthestTarget) {
+      // no adjacent free cells around farthest targets, fallback to closest free cell of farthest target
+      const freeCell = this.getClosestAvailablePlace(
+        farthestTarget.positionX,
+        farthestTarget.positionY
+      )
+      if (freeCell) {
+        selectedCell = { ...freeCell, target: farthestTarget }
+      }
+    }
+
     return selectedCell
   }
 

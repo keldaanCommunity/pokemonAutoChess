@@ -91,7 +91,7 @@ export function MainSidebar(props: MainSidebarProps) {
     const handleKeydown = (e: KeyboardEvent) => {
       //if event occures in an input, textarea or select, ignore it
       if (
-        ["INPUT", "TEXTAREA", "SELECT"].includes(
+        ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
           (e.target as HTMLElement).tagName
         )
       ) {
@@ -173,7 +173,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page === "main_lobby" && (
           <NavLink location="profile" svg="profile" handleClick={changeModal}>
-            {t("profile")}
+            {t("profile.title")}
           </NavLink>
         )}
 
@@ -324,7 +324,7 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         <NavLink svg="options" location="options" handleClick={changeModal}>
-          {t("options")}
+          {t("options.title")}
         </NavLink>
 
         {page === "game" && document.fullscreenEnabled && (
@@ -502,7 +502,7 @@ function Modals({
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
-        header={t("profile")}
+        header={t("profile.title")}
       >
         <Profile />
       </Modal>

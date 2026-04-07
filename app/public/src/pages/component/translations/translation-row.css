@@ -61,6 +61,18 @@
   border-top-color: black;
 }
 
+.preview-below .translation-preview {
+  bottom: auto;
+  top: calc(100% + 6px);
+}
+
+.preview-below .translation-preview::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: black;
+}
+
 /* ── Rows ─────────────────────────────────────────────────────────────────── */
 
 .translation-row {

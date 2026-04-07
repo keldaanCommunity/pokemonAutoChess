@@ -163,7 +163,8 @@ export const server = defineServer({
               "https://pokechess.com.br",
               "https://uruwhy.online",
               "https://koala-pac.com",
-              "https://pokev9.52kx.net"
+              "https://pokev9.52kx.net",
+              "https://www.john-auto-chess.com/"
             ],
             scriptSrc: [
               "'self'",
@@ -369,12 +370,16 @@ export const server = defineServer({
         res.set("Cache-Control", "no-cache")
       }
       const { playerUid } = req.params
-      const { page = 1 } = req.query
+      const { page = 1, gameMode } = req.query
       const limit = 10
       const skip = (Number(page) - 1) * limit
+      const params: any = { playerId: playerUid }
+      if (gameMode) {
+        params.gameMode = gameMode
+      }
 
       const stats = await DetailledStatistic.find(
-        { playerId: playerUid },
+        params,
         ["pokemons", "time", "rank", "elo", "gameMode"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
@@ -416,8 +421,10 @@ export const server = defineServer({
 
     app.get("/players", async (req, res) => {
       try {
-        const searchTerm =
-          req.query?.name?.toString().trim().toLowerCase() || ""
+        const searchTerm = req.query?.name?.toString().trim() || ""
+        // Escape regex special chars to prevent injection/ReDoS
+        const escapedTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
         const userAuth = await authUser(req, res)
         if (!userAuth) return
         const user = await UserMetadata.findOne({ uid: userAuth.uid })
@@ -426,7 +433,7 @@ export const server = defineServer({
 
         const users = await UserMetadata.find(
           {
-            displayName: { $regex: searchTerm, $options: "i" },
+            displayName: { $regex: `^${escapedTerm}` }, // ^ makes it a prefix match, enabling index use
             ...(showBanned ? {} : { banned: false })
           },
           [
@@ -439,7 +446,8 @@ export const server = defineServer({
           ],
           {
             limit: 100,
-            sort: { level: -1 }
+            sort: { level: -1 },
+            collation: { locale: "en", strength: 2 } // must match the index collation
           }
         )
 
@@ -590,9 +598,11 @@ export const server = defineServer({
           .status(400)
           .json({ error: "Query must be at least 2 characters" })
       }
+      // Escape regex special chars to prevent injection/ReDoS
+      const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
       try {
         const messages = await chatV2
-          .find({ payload: { $regex: query, $options: "i" } }, undefined, {
+          .find({ payload: { $regex: escapedQuery } }, undefined, {
             limit: 50,
             sort: { time: -1 }
           })

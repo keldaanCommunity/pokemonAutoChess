@@ -83,12 +83,12 @@ export function CompositionReport() {
               {t("rank")} {t("by_winrate")}
             </option>
           </select>
-          <PokemonTypeahead
-            value={selectedPkm}
-            options={popularPokemonOptions}
-            onChange={(pkm) => setSelectedPkm(pkm)}
-          />
         </div>
+        <PokemonTypeahead
+          value={selectedPkm}
+          options={popularPokemonOptions}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
       </header>
 
       <article>

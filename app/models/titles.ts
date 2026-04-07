@@ -164,10 +164,12 @@ export function updatePlayerTitlesAfterGame(
   }
   if (usr.level >= 20) {
     player.titles.add(Title.AMATEUR)
-    player.titles.add(Title.BOT_BUILDER)
   }
   if (usr.level >= 30) {
     player.titles.add(Title.VETERAN)
+  }
+  if (usr.level >= 40) {
+    player.titles.add(Title.BOT_BUILDER)
   }
   if (usr.level >= 50) {
     player.titles.add(Title.PRO)

@@ -19,8 +19,8 @@ export default function WikiWeather() {
   return (
     <div id="wiki-weather">
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
-        <p>{t("weather_dominant_hint")}</p>
-        <p>{t("weather_dominant_hint2")}</p>
+        <p>{t("wiki.weather.weather_dominant_hint")}</p>
+        <p>{t("wiki.weather.weather_dominant_hint2")}</p>
       </div>
       <ul>
         {Object.values(Weather).map((weather: Weather) => (

@@ -7975,9 +7975,10 @@ export const PokemonAnimations: {
   },
   [Pkm.HISUI_AVALUGG]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
-    emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_MELEE
+    ability: AnimationType.Emit,
+    emote: AnimationType.Emit,
+    attackSprite: AttackSprite.ROCK_MELEE,
+    shinyUnavailable: true
   },
   [Pkm.KARRABLAST]: {
     attack: AnimationType.Attack,

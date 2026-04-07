@@ -450,12 +450,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   toMovingState() {
-    if (this.passive === Passive.INANIMATE) return
+    if (this.passive === Passive.INANIMATE || this.status.tree) return
     this.changeState(new MovingState())
   }
 
   toAttackingState() {
-    if (this.passive === Passive.INANIMATE) return
+    if (this.passive === Passive.INANIMATE || this.status.tree) return
     this.changeState(new AttackingState())
   }
 
@@ -500,12 +500,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addCritChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    if (caster !== "environment") {
+      value =
+        value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -521,14 +525,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addCritPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      (value / 100) *
-      (1 + (apBoost * caster.ap) / 100) *
-      (crit ? caster.critPower : 1)
+    if (caster !== "environment") {
+      value =
+        (value / 100) *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster, 2)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -604,13 +610,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addLuck(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    if (caster !== "environment") {
+      value =
+        value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -625,14 +635,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    if (caster !== "environment") {
+      value = Math.round(
+        value *
+          (1 + (apBoost * caster.ap) / 100) *
+          (crit ? caster.critPower : 1)
+      )
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -647,14 +661,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addSpecialDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    if (caster !== "environment") {
+      value = Math.round(
+        value *
+          (1 + (apBoost * caster.ap) / 100) *
+          (crit ? caster.critPower : 1)
+      )
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -669,14 +687,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAttack(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
   ) {
-    value = Math.round(
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    )
+    if (caster !== "environment") {
+      value = Math.round(
+        value *
+          (1 + (apBoost * caster.ap) / 100) *
+          (crit ? caster.critPower : 1)
+      )
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -691,7 +713,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addSpeed(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -702,10 +724,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.passive === Passive.MELMETAL) {
       this.addAttack(value * 0.5, caster, apBoost, crit, permanent)
     } else {
-      value =
-        value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1)
+      if (caster !== "environment") {
+        value =
+          value *
+          (1 + (apBoost * caster.ap) / 100) *
+          (crit ? caster.critPower : 1)
+      }
 
       const update = (target: { speed: number }) => {
         target.speed = clamp(target.speed + value, 0, MAX_SPEED)
@@ -1801,11 +1825,12 @@ export function getMoveSpeed(pokemon: IPokemonEntity): number {
 function applyBigEaterBeltStatBuff(
   pokemon: PokemonEntity,
   value: number,
-  caster: IPokemonEntity,
+  caster: IPokemonEntity | "environment",
   nbDigits: number = 0
 ) {
   const isBuffOrBuffLost =
-    value > 0 || (value < 0 && caster.team === pokemon.team)
+    value > 0 ||
+    (value < 0 && caster !== "environment" && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
     value = roundToNDigits(value * 1.25, nbDigits, "down")
   }
@@ -1815,12 +1840,12 @@ function applyBigEaterBeltStatBuff(
 function applyTwistBandBuff(
   pokemon: PokemonEntity,
   value: number,
-  caster: IPokemonEntity
+  caster: IPokemonEntity | "environment"
 ) {
   if (
     value < 0 &&
     pokemon.items.has(Item.TWIST_BAND) &&
-    caster.team !== pokemon.team
+    (caster === "environment" || caster.team !== pokemon.team)
   ) {
     value *= -1 // twist band turn debuffs into buffs
   }
