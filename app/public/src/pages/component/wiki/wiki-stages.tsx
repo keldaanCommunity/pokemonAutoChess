@@ -331,11 +331,23 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
                 </span>
               </h4>
               {stageInfo.level === 1 ? (
-                <p>{addIconsToDescription(t("wiki.stages.shiny_magikarp_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_magikarp_description")
+                  )}
+                </p>
               ) : stageInfo.level === 9 ? (
-                <p>{addIconsToDescription(t("wiki.stages.shiny_gyarados_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_gyarados_description")
+                  )}
+                </p>
               ) : (
-                <p>{addIconsToDescription(t("wiki.stages.shiny_pve_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_pve_description")
+                  )}
+                </p>
               )}
             </div>
           )}

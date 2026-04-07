@@ -67,7 +67,9 @@ export default function WikiItems() {
     <div id="wiki-items">
       <article className="craftable">
         <h2>{t("wiki.items.item_recipes")}</h2>
-        <p>{addIconsToDescription(t("wiki.items.craftable_items_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.craftable_items_description"))}
+        </p>
         <table>
           <tbody>
             <tr>
@@ -254,7 +256,9 @@ export default function WikiItems() {
         <ul>
           <ItemList items={SynergyGemsBuried} />
         </ul>
-        <p>{addIconsToDescription(t("wiki.items.gems_not_buried_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.gems_not_buried_description"))}
+        </p>
         <ul>
           <ItemList
             items={SynergyGems.filter(
@@ -262,7 +266,11 @@ export default function WikiItems() {
             )}
           />
         </ul>
-        <p>{addIconsToDescription(t("wiki.items.you_may_also_find_in_the_ground"))}</p>
+        <p>
+          {addIconsToDescription(
+            t("wiki.items.you_may_also_find_in_the_ground")
+          )}
+        </p>
         <ul>
           <ItemList items={otherBuriedItems} />
         </ul>
@@ -270,7 +278,9 @@ export default function WikiItems() {
         <h3>
           <SynergyIcon type={Synergy.ROCK} /> {t("wiki.items.weather_rocks")}
         </h3>
-        <p>{addIconsToDescription(t("wiki.items.weather_rocks_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.weather_rocks_description"))}
+        </p>
         <ul>
           <ItemList items={WeatherRocks} />
         </ul>

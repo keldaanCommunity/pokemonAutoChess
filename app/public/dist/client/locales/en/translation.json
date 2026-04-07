@@ -3809,6 +3809,11 @@
 	"open_booster": "Open a Booster",
 	"lobby": "Lobby",
 	"announcements": "Announcements",
+	"twitch_streams": {
+		"title": "Streams",
+		"language": "Language: {{language}}",
+		"unavailable": "Twitch streams are temporarily unavailable"
+	},
 	"chat": "Chat",
 	"edit": "View/Edit",
 	"delete": "Delete",

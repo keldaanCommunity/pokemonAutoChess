@@ -10,6 +10,7 @@
 @import "./react-tooltip.css";
 @import "./scrollbar.css";
 @import "./toastify.css";
+@import "../pages/component/events-menu/twitch-streams.css";
 
 :root {
   --sidebar-width: 60px;
