@@ -3319,7 +3319,8 @@
 		"RUNNER": "Sprinter",
 		"FINISHER": "Finisher",
 		"VICTORIOUS": "Siegreich",
-		"MOLE": "Maulwurf"
+		"MOLE": "Maulwurf",
+		"GUILDMASTER": "Gildenmeister"
 	},
 	"title_description": {
 		"NOVICE": "Spielen Sie Ihr erstes Spiel",
@@ -3405,7 +3406,8 @@
 		"RUNNER": "Erreiche 100 Punkte auf der Siegesstraße",
 		"FINISHER": "Schließe eine Siegesstraßen Rennen ab",
 		"VICTORIOUS": "Schließe ein Siegesstraßen Rennen als Erster ab",
-		"MOLE": "Grabe dein gesamtes Feld komplett aus."
+		"MOLE": "Grabe dein gesamtes Feld komplett aus.",
+		"POFFIN_MASTER": "Koche eine POFFIN aus drei verschiedenen goldenen Beeren"
 	},
 	"weather": {
 		"NEUTRAL": "Bewölkt",
@@ -3482,7 +3484,7 @@
 	"synergies": "Synergien",
 	"join_as_guest": "Treten Sie als Gast bei",
 	"welcome": "Willkommen",
-	"join_lobby": "Treten Sie der Lobby bei",
+	"join_lobby": "Lobby beitreten",
 	"authenticated_as": "Authentifiziert als",
 	"hover_to_reveal": "(zum Anzeigen mit der Maus darüberfahren)",
 	"made_for_fans": "Von 2 Fans für Fans gemacht",
@@ -4362,5 +4364,16 @@
 			"username_disclaimer": "Unangemessene Benutzernamen führen zur Sperrung deines Kontos. Dazu gehören Schimpfwörter, nicht jugendfreie/sexuelle Themen, direkte und indirekte Drohungen, politische Aussagen und Werbung für Dinge, die nichts mit dem Spiel zu tun haben.",
 			"invalid_username": "Invalider Nutzername. Nutzernamen müssen zwischen 3 und 24 Zeichen sein, mit einem Buchstaben beginnen, nur aus Zahlen, Buchstaben oder \".-_\" bestehen und darf keine Leerzeichen enthalten."
 		}
-	}
+	},
+	"notification": {
+		"next": "Weiter",
+		"close": "Schließen",
+		"level_up_title": "Levelaufstieg!"
+	},
+	"bench": "Bank",
+	"alt_forms": "Alternative Formen",
+	"chosen_as_avatar": "✓ Als Spieleravatar ausgewählt",
+	"add_to_favorites": "Zu den Favoriten hinzugefügt",
+	"remove_from_favorites": "Aus den Favoriten entfernt",
+	"gold_needed_to_level_up": "Gold benötigt zum Levelaufstieg:"
 }
