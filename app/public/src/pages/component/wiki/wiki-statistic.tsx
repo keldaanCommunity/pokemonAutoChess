@@ -16,7 +16,9 @@ export default function WikiStatistic() {
       <li className="my-box">
         <img src="assets/icons/SHIELD.png" />
         <h2>{t("stat.SHIELD")}</h2>
-        <p className="description">{t("wiki.statistics.stat_description.SHIELD")}</p>
+        <p className="description">
+          {t("wiki.statistics.stat_description.SHIELD")}
+        </p>
       </li>
       <li className="my-box">
         <img src="assets/icons/DEF.png" />
@@ -63,20 +65,26 @@ export default function WikiStatistic() {
       <li className="my-box">
         <img src="assets/icons/SPEED.png" />
         <h2>{t("stat.SPEED")}</h2>
-        <p className="description">{t("wiki.statistics.stat_description.SPEED")}</p>
+        <p className="description">
+          {t("wiki.statistics.stat_description.SPEED")}
+        </p>
       </li>
       <li className="my-box">
         <img src="assets/icons/CRIT_CHANCE.png" />
         <h2>{t("stat.CRIT_CHANCE")}</h2>
         <p className="description">
-          {addIconsToDescription(t("wiki.statistics.stat_description.CRIT_CHANCE"))}
+          {addIconsToDescription(
+            t("wiki.statistics.stat_description.CRIT_CHANCE")
+          )}
         </p>
       </li>
       <li className="my-box">
         <img src="assets/icons/CRIT_POWER.png" />
         <h2>{t("stat.CRIT_POWER")}</h2>
         <p className="description">
-          {addIconsToDescription(t("wiki.statistics.stat_description.CRIT_POWER"))}
+          {addIconsToDescription(
+            t("wiki.statistics.stat_description.CRIT_POWER")
+          )}
         </p>
       </li>
       <li className="my-box">

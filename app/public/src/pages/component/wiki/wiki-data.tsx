@@ -206,7 +206,9 @@ export default function WikiData() {
       </table>
 
       <h2>{t("wiki.data.defense_calculation")}</h2>
-      <p>{addIconsToDescription(t("wiki.data.defense_calculation_description"))}</p>
+      <p>
+        {addIconsToDescription(t("wiki.data.defense_calculation_description"))}
+      </p>
 
       <h2>{t("wiki.data.round_damage_calculation")}</h2>
       <p>{t("wiki.data.round_damage_calculation_description")}</p>

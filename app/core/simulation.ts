@@ -1331,7 +1331,12 @@ export default class Simulation extends Schema implements ISimulation {
         const nbSmellyClays = opponentPlayer
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
-        pokemon.addDodgeChance(0.15 - 0.05 * nbSmellyClays, "environment", 0, false)
+        pokemon.addDodgeChance(
+          0.15 - 0.05 * nbSmellyClays,
+          "environment",
+          0,
+          false
+        )
         break
       }
 

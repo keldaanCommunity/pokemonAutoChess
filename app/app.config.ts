@@ -52,6 +52,7 @@ import {
   getMetaRegions,
   getMetaV2
 } from "./services/meta"
+import { getTwitchStreamsPayload } from "./services/twitch"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
@@ -179,7 +180,8 @@ export const server = defineServer({
               "data:",
               "blob:",
               "https://www.gstatic.com",
-              "http://raw.githubusercontent.com"
+              "http://raw.githubusercontent.com",
+              "https://static-cdn.jtvnw.net"
             ]
           }
         }
@@ -363,6 +365,11 @@ export const server = defineServer({
         res.set("Cache-Control", "no-cache")
       }
       res.send(getLeaderboard()?.eventLeaderboard)
+    })
+
+    app.get("/twitch/streams", async (req, res) => {
+      setCacheControl(res, 120)
+      res.send(getTwitchStreamsPayload())
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
