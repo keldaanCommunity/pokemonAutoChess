@@ -1,4 +1,7 @@
 import { logger } from "../utils/logger"
+import TwitchBlacklistedStreamer, {
+  ITwitchBlacklistedStreamer
+} from "../models/mongo-models/twitch-blacklisted-streamer"
 
 const TWITCH_OAUTH_URL = "https://id.twitch.tv/oauth2/token"
 const TWITCH_HELIX_URL = "https://api.twitch.tv/helix"
@@ -19,6 +22,9 @@ export type TwitchStream = {
   language: string
   thumbnailUrl: string
   url: string
+  viewerCount: number
+  startedAt: string
+  tags: string[]
 }
 
 export type TwitchStreamsPayload = {
@@ -32,6 +38,83 @@ let tokenCache: TwitchToken | null = null
 let cachedStreams: TwitchStream[] = []
 let lastRefreshAt: Date | null = null
 let lastError: string | null = null
+let blacklistedLogins = new Set<string>()
+
+function normalizeStreamerLogin(value: string) {
+  return value.trim().toLowerCase().replace(/^@/, "")
+}
+
+export async function refreshTwitchBlacklist() {
+  try {
+    const entries = await TwitchBlacklistedStreamer.find({}, [
+      "streamerLogin"
+    ]).lean()
+    blacklistedLogins = new Set(
+      entries
+        .map((entry) => normalizeStreamerLogin(entry.streamerLogin))
+        .filter((login) => login.length > 0)
+    )
+  } catch (error) {
+    logger.error("Unable to refresh Twitch blacklist", { error })
+  }
+}
+
+export async function listTwitchBlacklist(): Promise<
+  ITwitchBlacklistedStreamer[]
+> {
+  return TwitchBlacklistedStreamer.find({}, [
+    "streamerLogin",
+    "reason",
+    "createdBy",
+    "createdAt",
+    "updatedAt"
+  ])
+    .sort({ createdAt: -1 })
+    .lean()
+}
+
+export async function addTwitchBlacklistEntry(
+  streamerLogin: string,
+  createdBy: string,
+  reason?: string
+) {
+  const normalizedLogin = normalizeStreamerLogin(streamerLogin)
+  if (!normalizedLogin) {
+    throw new Error("Invalid streamerLogin")
+  }
+
+  const existing = await TwitchBlacklistedStreamer.findOne({
+    streamerLogin: normalizedLogin
+  })
+  if (existing) {
+    throw new Error("Streamer is already blacklisted")
+  }
+
+  await TwitchBlacklistedStreamer.create({
+    streamerLogin: normalizedLogin,
+    reason: reason?.trim() ?? "",
+    createdBy: createdBy.trim()
+  })
+
+  await refreshTwitchBlacklist()
+  await refreshTwitchStreams()
+}
+
+export async function removeTwitchBlacklistEntry(streamerLogin: string) {
+  const normalizedLogin = normalizeStreamerLogin(streamerLogin)
+  if (!normalizedLogin) {
+    throw new Error("Invalid streamerLogin")
+  }
+
+  const deleteResult = await TwitchBlacklistedStreamer.deleteOne({
+    streamerLogin: normalizedLogin
+  })
+
+  await refreshTwitchBlacklist()
+  await refreshTwitchStreams()
+
+  return deleteResult.deletedCount > 0
+}
 
 function getClientId() {
   return process.env.TWITCH_CLIENT_ID
@@ -133,6 +216,9 @@ function mapStream(stream: {
   title: string
   language: string
   thumbnail_url: string
+  viewer_count: number
+  started_at: string
+  tags: string[]
 }): TwitchStream {
   return {
     id: stream.id,
@@ -143,7 +229,10 @@ function mapStream(stream: {
     thumbnailUrl: stream.thumbnail_url
       .replace("{width}", THUMBNAIL_WIDTH)
       .replace("{height}", THUMBNAIL_HEIGHT),
-    url: `https://www.twitch.tv/${stream.user_login}`
+    url: `https://www.twitch.tv/${stream.user_login}`,
+    viewerCount: stream.viewer_count,
+    startedAt: stream.started_at,
+    tags: stream.tags ?? []
   }
 }
 
@@ -185,10 +274,18 @@ export async function refreshTwitchStreams() {
         title: string
         language: string
         thumbnail_url: string
+        viewer_count: number
+        started_at: string
+        tags: string[]
       }>
     }
 
-    cachedStreams = json.data.map(mapStream)
+    cachedStreams = json.data
+      .map(mapStream)
+      .filter(
+        (stream) =>
+          !blacklistedLogins.has(normalizeStreamerLogin(stream.userLogin))
+      )
     lastRefreshAt = new Date()
     lastError = null
 

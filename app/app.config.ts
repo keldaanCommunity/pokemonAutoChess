@@ -52,7 +52,12 @@ import {
   getMetaRegions,
   getMetaV2
 } from "./services/meta"
-import { getTwitchStreamsPayload } from "./services/twitch"
+import {
+  addTwitchBlacklistEntry,
+  getTwitchStreamsPayload,
+  listTwitchBlacklist,
+  removeTwitchBlacklistEntry
+} from "./services/twitch"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
@@ -620,6 +625,113 @@ export const server = defineServer({
         res.status(500).json({ error: "Error searching messages" })
       }
     })
+
+    app.get("/moderation/twitch-blacklist", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (!user || (user.role !== Role.ADMIN && user.role !== Role.MODERATOR)) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+
+      try {
+        const blacklist = await listTwitchBlacklist()
+        res.status(200).json(blacklist)
+      } catch (error) {
+        logger.error("Error listing twitch blacklist", error)
+        res.status(500).json({ error: "Error listing twitch blacklist" })
+      }
+    })
+
+    app.post("/moderation/twitch-blacklist", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (!user || (user.role !== Role.ADMIN && user.role !== Role.MODERATOR)) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+
+      const streamerLogin = req.body?.streamerLogin
+      const reason = req.body?.reason
+
+      if (!streamerLogin || typeof streamerLogin !== "string") {
+        res.status(400).json({ error: "streamerLogin is required" })
+        return
+      }
+
+      if (reason !== undefined && typeof reason !== "string") {
+        res.status(400).json({ error: "reason must be a string" })
+        return
+      }
+
+      if (typeof reason === "string" && reason.length > 300) {
+        res.status(400).json({ error: "reason is too long" })
+        return
+      }
+
+      try {
+        await addTwitchBlacklistEntry(streamerLogin, user.displayName, reason)
+        logger.info(
+          `${user.displayName} added twitch blacklist entry for ${streamerLogin}`
+        )
+        res.status(201).send()
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        if (message === "Streamer is already blacklisted") {
+          res.status(409).json({ error: message })
+          return
+        }
+        if (message === "Invalid streamerLogin") {
+          res.status(400).json({ error: message })
+          return
+        }
+        logger.error("Error adding twitch blacklist entry", error)
+        res.status(500).json({ error: "Error adding twitch blacklist entry" })
+      }
+    })
+
+    app.delete(
+      "/moderation/twitch-blacklist/:streamerLogin",
+      async (req, res) => {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        if (
+          !user ||
+          (user.role !== Role.ADMIN && user.role !== Role.MODERATOR)
+        ) {
+          res.status(403).send("Unauthorized")
+          return
+        }
+
+        try {
+          const wasDeleted = await removeTwitchBlacklistEntry(
+            req.params.streamerLogin
+          )
+          if (!wasDeleted) {
+            res.status(404).json({ error: "Streamer is not blacklisted" })
+            return
+          }
+          logger.info(
+            `${user.displayName} removed twitch blacklist entry for ${req.params.streamerLogin}`
+          )
+          res.status(200).send()
+        } catch (error) {
+          const message =
+            error instanceof Error ? error.message : "Unknown error"
+          if (message === "Invalid streamerLogin") {
+            res.status(400).json({ error: message })
+            return
+          }
+          logger.error("Error removing twitch blacklist entry", error)
+          res
+            .status(500)
+            .json({ error: "Error removing twitch blacklist entry" })
+        }
+      }
+    )
 
     app.post("/moderation/rename-account", async (req, res) => {
       const userAuth = await authUser(req, res)
