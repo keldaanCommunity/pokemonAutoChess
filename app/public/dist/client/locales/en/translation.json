@@ -3947,6 +3947,7 @@
 		"default": "Classic",
 		"super": "Super",
 		"forest": "Forest",
+		"north": "Northern Lights",
 		"origin": "Origin"
 	},
 	"music_volume": "Music Volume",

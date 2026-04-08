@@ -1,5 +1,4 @@
 const fs = require("fs")
-const path = require("path")
 const { context } = require("esbuild")
 const dotenv = require("dotenv")
 
@@ -27,7 +26,6 @@ let hashIndexPlugin = {
       if (result.errors.length > 0) {
         console.log(`build ended with ${result.errors.length} errors`)
       }
-      copyThemeFiles()
       updateHashedFilesInIndex()
     })
   }
@@ -78,19 +76,6 @@ context({
     console.error(error)
     process.exit(1)
   })
-
-function copyThemeFiles() {
-  const srcDir = path.join(__dirname, "app/public/src/style/theme")
-  const outDir = path.join(__dirname, "app/public/dist/client/themes")
-
-  fs.mkdirSync(outDir, { recursive: true })
-
-  fs.readdirSync(srcDir)
-    .filter((file) => file.endsWith(".css"))
-    .forEach((file) => {
-      fs.copyFileSync(path.join(srcDir, file), path.join(outDir, file))
-    })
-}
 
 function updateHashedFilesInIndex() {
   //update hash in index.html
