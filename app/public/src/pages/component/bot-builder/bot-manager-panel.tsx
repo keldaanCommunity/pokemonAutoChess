@@ -328,9 +328,9 @@ function BotRow({
       <span style={{ color: "#999", fontSize: "80%" }}>{b.id}</span>
       <span>
         {b.approved ? (
-          <span style={{ color: "lime" }}>{t("yes")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>{t("yes")}</span>
         ) : (
-          <span style={{ color: "red" }}>{t("no")}</span>
+          <span style={{ color: "var(--color-fg-negative)" }}>{t("no")}</span>
         )}
       </span>
       <span>

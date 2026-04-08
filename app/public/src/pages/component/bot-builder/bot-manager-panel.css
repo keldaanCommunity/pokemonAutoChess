@@ -1,5 +1,5 @@
 #bot-manager-panel {
-  color: white;
+  color: var(--color-fg-primary);
   width: max-content;
   margin: 0 auto;
   display: flex;

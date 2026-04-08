@@ -1,5 +1,5 @@
 .game-pokemon-detail {
-  color: #fff;
+  color: var(--color-fg-primary);
   font-size: 16px;
   display: grid;
   position: relative;

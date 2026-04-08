@@ -1,6 +1,6 @@
 #meta-report .pokemon-family-stat {
   margin-bottom: 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   padding: 0.5em;
@@ -59,7 +59,7 @@
 }
 
 .pokemon-stat-item > div {
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 .pokemon-stat-value {
@@ -115,23 +115,12 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 .pokemon-member-charts-row {
   display: flex;
   gap: 12px;
-}
-
-#meta-report .rank {
-  min-width: 2ch;
-  text-align: center;
-  font-size: 150%;
-}
-
-#meta-report label {
-  color: #ccc;
-  margin: 0;
 }
 
 .pokemon-name-container {

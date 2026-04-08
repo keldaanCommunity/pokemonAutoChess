@@ -30,23 +30,23 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: rgb(104, 130, 158);
+  background-color: var(--color-bg-primary);
   background-image:
     linear-gradient(
       45deg,
-      rgb(80, 81, 96) 25%,
+      var(--color-bg-secondary) 25%,
       transparent 25%,
       transparent 74.9%,
-      rgb(80, 81, 96) 75%,
-      rgb(80, 81, 96)
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
     ),
     linear-gradient(
       45deg,
-      rgb(80, 81, 96) 25%,
+      var(--color-bg-secondary) 25%,
       transparent 25%,
       transparent 74.9%,
-      rgb(80, 81, 96) 75%,
-      rgb(80, 81, 96)
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
     );
   background-size: 240px 240px;
   background-position:
@@ -56,7 +56,7 @@ body {
 
 a {
   /* better contrast on dark background for accessibility */
-  color: #7bbbff;
+  color: var(--color-fg-accent);
 }
 
 h1,
@@ -95,8 +95,8 @@ ul {
 kbd {
   padding: 0.2rem 0.4rem;
   font-size: 87.5%;
-  color: #fff;
-  background-color: #212529;
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-secondary);
   border-radius: 0.2rem;
 }
 
@@ -112,7 +112,7 @@ kbd {
   border-width: 4px !important;
   border-radius: 12px !important;
   background-color: var(--color-bg-primary) !important;
-  color: #fff !important;
+  color: var(--color-fg-primary) !important;
   z-index: 1060; /* 1050 comes from react-modal library */
 }
 
@@ -218,7 +218,7 @@ p:last-child {
 }
 
 .game-dialog {
-  color: white;
+  color: var(--color-fg-primary);
   font-size: 1rem;
   max-width: 300px;
 }

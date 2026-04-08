@@ -16,7 +16,7 @@ import { SpriteDebug } from "./pages/sprite-viewer"
 import TranslationsPage from "./pages/translations"
 import store from "./stores/index"
 import "./style/index.css"
-import "./style/theme/super.css"
+import "./style/theme/origin.css"
 
 // Redirect top window if running in an iframe
 if (window.top && window !== window.top) {

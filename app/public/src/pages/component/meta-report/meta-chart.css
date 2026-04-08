@@ -25,7 +25,7 @@
   width: 280px;
   max-height: calc(100% - 2em);
   overflow-y: auto;
-  color: white;
+  color: var(--color-fg-primary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 10;
   display: flex;
@@ -65,6 +65,6 @@
 
 .info-stat span {
   font-size: 0.9em;
-  color: white;
+  color: var(--color-fg-primary);
   font-weight: 600;
 }

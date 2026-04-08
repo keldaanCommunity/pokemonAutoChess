@@ -3,18 +3,34 @@
   --color-bg-secondary: #54596b;
   --color-bg-tertiary: #464c5c;
   --color-bg-accent: #1195ec;
-  --color-bg-green: #34a00c;
-  --color-bg-red: #742424;
+  --color-bg-positive: #34a00c;
+  --color-bg-negative: #742424;
+  --color-bg-gold: #c9a000;
+  --color-bg-input: #262626;
+
   --color-fg-primary: #ffffff;
   --color-fg-secondary: #c3cddf;
   --color-fg-accent: #69b7eb;
   --color-fg-green: #8ede1d;
   --color-fg-red: #e81212;
   --color-fg-gold: #ffc107;
+  --color-fg-invert: #000000;
+  --color-fg-positive: #a9f5ad;
+  --color-fg-negative: #f5a9a9;
   --color-shadow: #2d334b;
 
   --color-physical: #e76e55;
   --color-special: #5f9ff9;
   --color-true: #f7d51d;
   --color-shield: #8d8d8d;
+
+  --color-rarity-common: #a0a0a0;
+  --color-rarity-uncommon: #3bc95e;
+  --color-rarity-rare: #41bfcc;
+  --color-rarity-epic: #927fff;
+  --color-rarity-ultra: #e53b3b;
+  --color-rarity-unique: #ffffff;
+  --color-rarity-legendary: #e6cb49;
+  --color-rarity-special: #e58ee5;
+  --color-rarity-hatch: #b9915a;
 }

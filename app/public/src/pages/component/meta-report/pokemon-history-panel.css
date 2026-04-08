@@ -58,7 +58,7 @@
 .pokemon-history-legend-item:hover,
 .pokemon-history-legend-item.highlighted {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .pokemon-history-legend-color {
@@ -80,7 +80,7 @@
   padding: 0.5em;
   border: 1px solid black;
   border-radius: 12px;
-  color: #fff;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   gap: 4px;

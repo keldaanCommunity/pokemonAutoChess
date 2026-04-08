@@ -156,12 +156,12 @@ export default function SynergyDetailComponent(props: {
             style={{
               color:
                 levelReached === SynergyTriggers[props.type][i]
-                  ? "#fff"
-                  : "#e8e8e8",
+                  ? "var(--color-fg-primary)"
+                  : "var(--color-fg-secondary)",
               backgroundColor:
                 levelReached === SynergyTriggers[props.type][i]
                   ? "var(--color-bg-secondary)"
-                  : "rgba(84, 89, 107,0)",
+                  : "transparent",
               border:
                 levelReached === SynergyTriggers[props.type][i]
                   ? "var(--border-thick)"

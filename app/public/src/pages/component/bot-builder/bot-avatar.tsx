@@ -49,11 +49,16 @@ export default function BotAvatar(props: {
       <p>ELO: {props.bot.elo}</p>
       <p>
         {errors.length > 0 ? (
-          <span style={{ color: "red" }} title={errors.join("\n")}>
+          <span
+            style={{ color: "var(--color-fg-negative)" }}
+            title={errors.join("\n")}
+          >
             {t("invalid")}
           </span>
         ) : (
-          <span style={{ color: "lime" }}>{t("valid")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>
+            {t("valid")}
+          </span>
         )}
       </p>
     </div>

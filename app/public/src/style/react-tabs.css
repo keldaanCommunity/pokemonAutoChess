@@ -7,7 +7,7 @@
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   outline: none;
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 2px 2px 2px #00000040;
   font-size: 1.2rem;
 }

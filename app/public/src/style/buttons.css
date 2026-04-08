@@ -117,7 +117,7 @@ button {
 }
 
 .bubbly.blue:not([disabled]):hover {
-  background: var(--color-bg-accent);
+  background: #1195ec;
 }
 
 .bubbly.blue:not([disabled]):active {

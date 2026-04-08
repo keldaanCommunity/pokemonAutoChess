@@ -1,8 +1,7 @@
 .synergies-container .draggable-window-content {
   display: flex;
   flex-flow: column;
-  color: #fff;
-  background-color: var(--color-bg-primary);
+  color: var(--color-fg-primary);
   font-size: 1em;
   overflow-y: auto;
   padding: 0;
@@ -14,7 +13,6 @@
   top: 9%;
   padding: 0;
   max-height: 70%;
-  background-color: var(--color-bg-primary);
 }
 
 @media (aspect-ratio < 4 / 3) {

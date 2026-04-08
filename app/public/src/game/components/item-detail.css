@@ -1,7 +1,7 @@
 .game-item-detail {
   min-width: 200px;
   max-width: 440px;
-  color: white;
+  color: var(--color-fg-primary);
   display: grid;
   font-size: 1.2rem;
   grid-template-columns: 55px 1fr;

@@ -279,7 +279,7 @@ export function GamePokemonDetail(props: {
       {dish && (
         <div className="game-pokemon-detail-dish">
           <div className="game-pokemon-detail-dish-name">
-            <img src="assets/ui/dish.svg" />
+            <img src="assets/ui/dish.svg" className="dish-icon" />
             <i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
           </div>
           <img

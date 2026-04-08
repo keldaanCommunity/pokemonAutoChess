@@ -25,7 +25,6 @@
   width: 400px;
   display: flex;
   align-items: center;
-  background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.5rem;
@@ -78,16 +77,12 @@
   display: inline-flex;
   align-items: center;
   border-radius: 8px;
-  background-color: var(--color-bg-red);
+  background-color: var(--color-bg-negative);
   padding: 5px;
 }
 
 .game-pokeguesser-modal .pokemon-attempt span.valid {
-  background-color: var(--color-bg-green);
-}
-
-.game-pokeguesser-modal h2 {
-  margin: -1em 0 0.5em;
+  background-color: var(--color-bg-positive);
 }
 
 .game-pokeguesser-modal h2 + .pokemon-portrait {

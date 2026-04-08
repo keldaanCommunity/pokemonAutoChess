@@ -1,5 +1,5 @@
 #bot-builder {
-  color: white;
+  color: var(--color-fg-primary);
   padding: 1em;
   display: flex;
   flex-direction: column;

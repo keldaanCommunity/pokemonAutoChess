@@ -49,7 +49,7 @@ dialog::backdrop {
 .modal > header {
   border-bottom: var(--border-thin);
   background-color: var(--color-bg-secondary);
-  color: white;
+  color: var(--color-fg-primary);
   padding: 0.5em;
   text-align: center;
 }
@@ -62,13 +62,13 @@ dialog::backdrop {
   appearance: none;
   background: transparent;
   border: none;
-  color: white;
+  color: var(--color-fg-primary);
   font-size: 1em;
 }
 
 .modal-body {
   padding: 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -79,7 +79,7 @@ dialog::backdrop {
   flex-direction: row-reverse;
   border-top: var(--border-thin);
   background-color: var(--color-bg-secondary);
-  color: white;
+  color: var(--color-fg-primary);
   padding: 0.5em 1em;
   gap: 1em;
 }

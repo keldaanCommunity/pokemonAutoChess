@@ -33,8 +33,8 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  background-color: gold;
-  color: black;
+  background-color: var(--color-bg-gold);
+  color: var(--color-fg-invert);
   font-weight: bold;
   padding: 0px 4px;
   border-radius: 8px;
@@ -66,7 +66,6 @@
 
 .pokemon-emotion p > * {
   vertical-align: middle;
-  color: white;
 }
 
 .pokemon-emotion .dust {

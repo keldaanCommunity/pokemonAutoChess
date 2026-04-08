@@ -76,7 +76,13 @@ export default function GameFiles() {
       </p>
       <p>
         {t("options.game_cached")}:{" "}
-        <span style={{ color: cached ? "lime" : "red" }}>
+        <span
+          style={{
+            color: cached
+              ? "var(--color-fg-positive)"
+              : "var(--color-fg-negative)"
+          }}
+        >
           {cached ? t("yes") : t("no")}
         </span>
       </p>

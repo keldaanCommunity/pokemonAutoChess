@@ -30,15 +30,15 @@ export const RarityCost: { [key in Rarity]: number } = Object.freeze({
 })
 
 export const RarityColor: { [key in Rarity]: string } = {
-  [Rarity.COMMON]: "#a0a0a0",
-  [Rarity.UNCOMMON]: "#3bc95e",
-  [Rarity.RARE]: "#41bfcc",
-  [Rarity.EPIC]: "#927FFF",
-  [Rarity.ULTRA]: "#E53B3B",
-  [Rarity.UNIQUE]: "#ffffff",
-  [Rarity.LEGENDARY]: "#e6cb49",
-  [Rarity.SPECIAL]: "#E58EE5",
-  [Rarity.HATCH]: "#b9915a"
+  [Rarity.COMMON]: "var(--color-rarity-common)",
+  [Rarity.UNCOMMON]: "var(--color-rarity-uncommon)",
+  [Rarity.RARE]: "var(--color-rarity-rare)",
+  [Rarity.EPIC]: "var(--color-rarity-epic)",
+  [Rarity.ULTRA]: "var(--color-rarity-ultra)",
+  [Rarity.UNIQUE]: "var(--color-rarity-unique)",
+  [Rarity.LEGENDARY]: "var(--color-rarity-legendary)",
+  [Rarity.SPECIAL]: "var(--color-rarity-special)",
+  [Rarity.HATCH]: "var(--color-rarity-hatch)"
 }
 
 export const BoosterRarityProbability: { [key in Rarity]: number } = {

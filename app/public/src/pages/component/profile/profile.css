@@ -1,5 +1,4 @@
 .profile-modal {
-  color: white;
   display: grid;
   grid-template-areas:
     "card     history"
@@ -140,7 +139,7 @@
   margin: 0;
   line-height: 1em;
   font-size: 0.75em;
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 @media (width <= 1280px) {
@@ -164,7 +163,7 @@
   flex-basis: 30%;
   height: 90vh;
   overflow-y: scroll;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .user-menu .player-rank {
@@ -223,7 +222,7 @@ ul.titles > li.unlocked .title-rarity {
 }
 
 ul.titles > li.unlocked .title-description {
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 ul.titles > li.selected .title-name {
