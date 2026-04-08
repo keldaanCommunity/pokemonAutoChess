@@ -1,0 +1,14 @@
+:root {
+  --color-bg-primary: #705670;
+  --color-bg-secondary: #8d6b8c;
+  --color-bg-tertiary: #574662;
+  --color-bg-accent: #c8a2c8;
+}
+
+.custom-bg {
+  background-image: url("/assets/theme/lilac/custombg.jpg");
+}
+
+.lobby h2 {
+  text-shadow: 0px 3px 6px black;
+}
