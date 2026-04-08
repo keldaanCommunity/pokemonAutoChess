@@ -4,8 +4,16 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { USERNAME_REGEXP } from "../../../../../config"
 import { IChatV2, ISuggestionUser } from "../../../../../types"
 import { debounce } from "../../../../../utils/function"
-import { renameAccount, searchById, searchMessages } from "../../../network"
+import {
+  getTwitchBlacklist,
+  removeTwitchBlacklist,
+  renameAccount,
+  searchById,
+  searchMessages,
+  TwitchBlacklistEntry
+} from "../../../network"
 import ChatHistory from "../chat/chat-history"
+import { RemoveButton } from "../buttons/remove-button"
 import SearchResults from "../profile/search-results"
 import "./moderation-panel.css"
 
@@ -17,6 +25,7 @@ export default function ModerationPanel() {
           <Tab>Search by user ID</Tab>
           <Tab>Search by message content</Tab>
           <Tab>Rename accounts</Tab>
+          <Tab>Twitch blacklist</Tab>
         </TabList>
 
         <TabPanel>
@@ -28,7 +37,93 @@ export default function ModerationPanel() {
         <TabPanel>
           <RenameAccounts />
         </TabPanel>
+        <TabPanel>
+          <TwitchBlacklistManager />
+        </TabPanel>
       </Tabs>
+    </div>
+  )
+}
+
+function TwitchBlacklistManager() {
+  const [entries, setEntries] = useState<TwitchBlacklistEntry[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+
+  const [removingLogin, setRemovingLogin] = useState<string | null>(null)
+
+  const loadBlacklist = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await getTwitchBlacklist()
+      setEntries(data)
+    } catch (e: any) {
+      setError(e?.message ?? "Unable to load blacklist")
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    loadBlacklist()
+  }, [loadBlacklist])
+
+  async function handleRemove(login: string) {
+    setRemovingLogin(login)
+    setError(null)
+    setSuccess(null)
+    try {
+      await removeTwitchBlacklist(login)
+      setSuccess(`Removed @${login} from Twitch blacklist`)
+      await loadBlacklist()
+    } catch (e: any) {
+      setError(e?.message ?? "Failed to remove blacklist entry")
+    } finally {
+      setRemovingLogin(null)
+    }
+  }
+
+  return (
+    <div className="moderation-search moderation-twitch-blacklist">
+      {error && <p className="moderation-error">{error}</p>}
+      {success && <p className="moderation-success">{success}</p>}
+
+      <div className="moderation-results my-box moderation-blacklist-results">
+        {loading ? (
+          <p className="moderation-no-results">Loading...</p>
+        ) : entries.length === 0 ? (
+          <p className="moderation-no-results">No streamers blacklisted.</p>
+        ) : (
+          entries.map((entry) => (
+            <div className="moderation-blacklist-row" key={entry.streamerLogin}>
+              <div className="moderation-blacklist-info">
+                <p className="moderation-blacklist-login">
+                  @{entry.streamerLogin}
+                </p>
+                {entry.reason && (
+                  <p className="moderation-blacklist-reason">{entry.reason}</p>
+                )}
+                <p className="moderation-hint">
+                  Added by {entry.createdBy}
+                  {entry.createdAt
+                    ? ` on ${new Date(entry.createdAt).toLocaleString()}`
+                    : ""}
+                </p>
+              </div>
+              {removingLogin === entry.streamerLogin ? (
+                <span className="moderation-hint">Removing...</span>
+              ) : (
+                <RemoveButton
+                  title={`Remove @${entry.streamerLogin} from blacklist`}
+                  onClick={() => handleRemove(entry.streamerLogin)}
+                />
+              )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   )
 }

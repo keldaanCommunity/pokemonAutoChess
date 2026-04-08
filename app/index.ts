@@ -17,7 +17,7 @@ import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
-import { refreshTwitchStreams } from "./services/twitch"
+import { refreshTwitchBlacklist, refreshTwitchStreams } from "./services/twitch"
 
 /*
 Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
@@ -50,6 +50,8 @@ async function main() {
   fetchMetaReports()
   setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
   logger.info("Fetching Twitch streams...")
+  refreshTwitchBlacklist()
+  setInterval(() => refreshTwitchBlacklist(), 1000 * 60)
   refreshTwitchStreams()
   setInterval(() => refreshTwitchStreams(), 1000 * 60 * 5) // refresh every 5 minutes
 }

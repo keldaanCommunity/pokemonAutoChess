@@ -314,6 +314,62 @@ export async function renameAccount(
   return res.json()
 }
 
+export type TwitchBlacklistEntry = {
+  streamerLogin: string
+  reason?: string
+  createdBy: string
+  createdAt?: string
+  updatedAt?: string
+}
+
+export async function getTwitchBlacklist(): Promise<TwitchBlacklistEntry[]> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/moderation/twitch-blacklist", {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+  return res.json()
+}
+
+export async function addTwitchBlacklist(
+  streamerLogin: string,
+  reason?: string
+): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/moderation/twitch-blacklist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ streamerLogin, reason })
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
+export async function removeTwitchBlacklist(
+  streamerLogin: string
+): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch(
+    `/moderation/twitch-blacklist/${encodeURIComponent(streamerLogin)}`,
+    {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  )
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
 export function ban(params: { uid: string; reason: string }) {
   rooms.lobby?.send(Transfer.BAN, params)
 }

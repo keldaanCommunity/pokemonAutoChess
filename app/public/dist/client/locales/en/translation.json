@@ -3812,7 +3812,9 @@
 	"twitch_streams": {
 		"title": "Streams",
 		"language": "Language: {{language}}",
-		"unavailable": "Twitch streams are temporarily unavailable"
+		"unavailable": "Twitch streams are temporarily unavailable",
+		"viewers": "{{count}} viewers",
+		"live_duration": "Live {{duration}}"
 	},
 	"chat": "Chat",
 	"edit": "View/Edit",
