@@ -146,6 +146,10 @@ img[src="assets/ui/save.svg"],
   font-size: 1em;
 }
 
+.game-options-modal {
+  width: 560px;
+}
+
 /* Preparation */
 
 .preparation-menu h1,

@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { THEMES } from "../../../../../config"
+import { GADGETS } from "../../../../../core/gadgets"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -26,6 +27,8 @@ export default function GameOptionsModal(props: {
   const language = useAppSelector(
     (state) => state.network.profile?.language ?? i18n.language
   )
+  const profile = useAppSelector((state) => state.network.profile)
+  const profileLevel = profile?.level ?? 0
 
   const renderers = {
     [Phaser.AUTO]: "Auto",
@@ -125,22 +128,24 @@ export default function GameOptionsModal(props: {
             </>
           )}
 
-          <p>
-            <label>
-              {t("options.theme")}:&nbsp;
-              <select
-                className="is-light"
-                value={preferences.theme}
-                onChange={(e) => setPreferences({ theme: e.target.value })}
-              >
-                {THEMES.map((theme) => (
-                  <option key={theme} value={theme}>
-                    {t(`theme.${theme}`)}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </p>
+          {profileLevel >= GADGETS.PALETTE.levelRequired && (
+            <p>
+              <label>
+                {t("options.theme")}:&nbsp;
+                <select
+                  className="is-light"
+                  value={preferences.theme}
+                  onChange={(e) => setPreferences({ theme: e.target.value })}
+                >
+                  {THEMES.map((theme) => (
+                    <option key={theme} value={theme}>
+                      {t(`theme.${theme}`)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </p>
+          )}
 
           <p>
             <Checkbox

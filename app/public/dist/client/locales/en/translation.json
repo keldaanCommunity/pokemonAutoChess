@@ -4147,6 +4147,8 @@
 		"bot_builder_desc": "Create your own bots and submit them to have a chance to be included in the game",
 		"jukebox": "Jukebox",
 		"jukebox_desc": "Choose your music ingame",
+		"palette": "Smeargle's Palette",
+		"palette_desc": "Customize the theme and colors of the game",
 		"gameboy": "Gameboy",
 		"gameboy_desc": "Play the Gameboy prototype of the game",
 		"pokeguesser": "PokéGuessr",

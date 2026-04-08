@@ -36,11 +36,18 @@ const JUKEBOX: Gadget = {
   levelRequired: 5
 }
 
+const PALETTE: Gadget = {
+  name: "gadget.palette",
+  description: "gadget.palette_desc",
+  icon: "palette",
+  levelRequired: 10
+}
+
 const SYNERGY_WHEEL: Gadget = {
   name: "gadget.synergy_wheel",
   description: "gadget.synergy_wheel_desc",
   icon: "synergy-wheel",
-  levelRequired: 10
+  levelRequired: 15
 }
 
 const GAMEBOY: Gadget = {
@@ -77,6 +84,7 @@ export const GADGETS = {
   BAG,
   TEAM_PLANNER,
   JUKEBOX,
+  PALETTE,
   SYNERGY_WHEEL,
   BOT_BUILDER,
   GAMEBOY,
