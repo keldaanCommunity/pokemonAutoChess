@@ -3917,6 +3917,7 @@
 		"colorblind_mode": "Colorblind mode",
 		"renderer": "Renderer",
 		"renderer_info": "WebGL is faster but may cause visual glitches on some devices. Canvas is slower but more compatible.",
+		"theme": "Theme",
 		"preloading_start": "Preloading game...",
 		"finished_preloading": "Finished preloading",
 		"game_version": "Game Version",
@@ -3941,6 +3942,12 @@
 			"avatar_emotes": "Toggle emote menu",
 			"avatar_show_emote": "Trigger emote"
 		}
+	},
+	"theme": {
+		"default": "Classic",
+		"super": "Super",
+		"forest": "Forest",
+		"origin": "Origin"
 	},
 	"music_volume": "Music Volume",
 	"previous_music": "Previous music",
