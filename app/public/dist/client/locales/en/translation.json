@@ -4826,7 +4826,8 @@
 			"titles_unlocked": "{{count}}/{{total}} titles unlocked",
 			"avatars_unlocked": "{{count}}/{{total}} avatars unlocked",
 			"gadgets_unlocked": "{{count}}/{{total}} gadgets unlocked",
-			"pokemons_played": "{{count}}/{{total}} Pokémon played"
+			"pokemons_played": "{{count}}/{{total}} Pokémon played",
+			"unlocks_theme": "Unlocks Theme: {{theme}}"
 		},
 		"avatar": {
 			"change_avatar": "Change Avatar",

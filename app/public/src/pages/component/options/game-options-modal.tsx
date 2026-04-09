@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { THEMES } from "../../../../../config"
+import { isThemeUnlocked, THEMES } from "../../../../../config"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
@@ -128,7 +128,7 @@ export default function GameOptionsModal(props: {
             </>
           )}
 
-          {profileLevel >= GADGETS.PALETTE.levelRequired && (
+          {profile && profileLevel >= GADGETS.PALETTE.levelRequired && (
             <p>
               <label>
                 {t("options.theme")}:&nbsp;
@@ -137,7 +137,7 @@ export default function GameOptionsModal(props: {
                   value={preferences.theme}
                   onChange={(e) => setPreferences({ theme: e.target.value })}
                 >
-                  {THEMES.map((theme) => (
+                  {THEMES.filter((theme) => isThemeUnlocked(theme, profile)).map((theme) => (
                     <option key={theme} value={theme}>
                       {t(`theme.${theme}`)}
                     </option>
