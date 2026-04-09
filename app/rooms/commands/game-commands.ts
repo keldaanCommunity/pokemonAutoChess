@@ -45,7 +45,6 @@ import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
-import { IDetailledPokemon } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
   getPokemonBaseline
@@ -53,6 +52,7 @@ import PokemonFactory, {
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
+import type { IDetailledPokemon } from "../../types/models/bot-v2"
 import {
   Emotion,
   IClient,

@@ -134,6 +134,14 @@ export function pickRandomPokemonBooster(
 export class CollectionUtils {
   private static readonly EMOTION_VALUES = CollectionEmotions
 
+  private static hasNodeBuffer(): boolean {
+    return typeof Buffer !== "undefined"
+  }
+
+  private static allocMask(size: number): Uint8Array {
+    return this.hasNodeBuffer() ? Buffer.alloc(size) : new Uint8Array(size)
+  }
+
   static hasUnlockedCustom(
     collection: Map<string, IPokemonCollectionItemMongo>,
     card: PkmWithCustom
@@ -193,8 +201,8 @@ export class CollectionUtils {
   static getEmotionMask(
     emotions: Emotion[] = [],
     shinyEmotions: Emotion[] = []
-  ): Buffer {
-    const buffer = Buffer.alloc(5) // 5 bytes = 40 bits total
+  ): Uint8Array {
+    const buffer = this.allocMask(5) // 5 bytes = 40 bits total
 
     // Set normal emotions (using bits 0-19)
     emotions.forEach((emotion) => {
@@ -215,12 +223,30 @@ export class CollectionUtils {
     return buffer
   }
 
-  static encodeBase64(buffer: Buffer): string {
-    return buffer.toString("base64")
+  static encodeBase64(buffer: Uint8Array): string {
+    if (this.hasNodeBuffer()) {
+      return Buffer.from(buffer).toString("base64")
+    }
+
+    let binary = ""
+    for (let i = 0; i < buffer.length; i++) {
+      binary += String.fromCharCode(buffer[i])
+    }
+    return btoa(binary)
   }
 
   static decodeBase64(base64: string): Buffer {
-    return Buffer.from(base64, "base64")
+    if (this.hasNodeBuffer()) {
+      return Buffer.from(base64, "base64")
+    }
+
+    const binary = atob(base64)
+    const bytes = new Uint8Array(binary.length)
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i)
+    }
+
+    return bytes as unknown as Buffer
   }
 
   /**
@@ -266,7 +292,7 @@ export class CollectionUtils {
    * Check if emotion is unlocked
    */
   static hasUnlocked(
-    mask: Buffer,
+    mask: Uint8Array,
     emotion: Emotion,
     shiny: boolean = false
   ): boolean {
@@ -281,7 +307,7 @@ export class CollectionUtils {
    * Add emotion to the mask
    */
   static unlockEmotion(
-    mask: Buffer,
+    mask: Uint8Array,
     emotion: Emotion,
     shiny: boolean = false
   ): void {
@@ -292,7 +318,11 @@ export class CollectionUtils {
     this.setBit(mask, bitIndex, true)
   }
 
-  private static setBit(mask: Buffer, bitIndex: number, value: boolean): void {
+  private static setBit(
+    mask: Uint8Array,
+    bitIndex: number,
+    value: boolean
+  ): void {
     const byteIndex = Math.floor(bitIndex / 8)
     const bitPosition = bitIndex % 8
 
@@ -305,7 +335,7 @@ export class CollectionUtils {
     }
   }
 
-  private static getBit(mask: Buffer, bitIndex: number): boolean {
+  private static getBit(mask: Uint8Array, bitIndex: number): boolean {
     const byteIndex = Math.floor(bitIndex / 8)
     const bitPosition = bitIndex % 8
 

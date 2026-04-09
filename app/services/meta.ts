@@ -1,17 +1,15 @@
-import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
-import ItemsStatistic, {
-  IItemsStatisticV2
-} from "../models/mongo-models/items-statistic-v2"
-import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
-import PokemonsStatistics, {
-  IPokemonsStatisticV2
-} from "../models/mongo-models/pokemons-statistic-v2"
-import RegionStatistic, {
-  IRegionStatistic
-} from "../models/mongo-models/regions-statistic"
-import ReportMetadata, {
-  IReportMetadata
-} from "../models/mongo-models/report-metadata"
+import Dendrogram from "../models/mongo-models/dendrogram"
+import ItemsStatistic from "../models/mongo-models/items-statistic-v2"
+import MetaV2 from "../models/mongo-models/meta-v2"
+import PokemonsStatistics from "../models/mongo-models/pokemons-statistic-v2"
+import RegionStatistic from "../models/mongo-models/regions-statistic"
+import ReportMetadata from "../models/mongo-models/report-metadata"
+import type { IDendrogram } from "../types/models/dendrogram"
+import type { IItemsStatisticV2 } from "../types/models/items-statistic-v2"
+import type { IMetaV2 } from "../types/models/meta-v2"
+import type { IPokemonsStatisticV2 } from "../types/models/pokemons-statistic-v2"
+import type { IRegionStatistic } from "../types/models/regions-statistic"
+import type { IReportMetadata } from "../types/models/report-metadata"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { EloRank } from "../types/enum/EloRank"
 import { Synergy } from "../types/enum/Synergy"

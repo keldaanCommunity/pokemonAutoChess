@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold } from "../../../../../config"
-import { fetchMetaTypes } from "../../../../../models/mongo-models/pokemons-statistic-v2"
+import { fetchMetaTypes } from "../../../models/pokemons-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { ITypeStatistics } from "../../../../../types/meta"

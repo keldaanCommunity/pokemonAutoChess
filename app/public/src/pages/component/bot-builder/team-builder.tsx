@@ -2,10 +2,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
-import {
-  IBot,
-  IDetailledPokemon
-} from "../../../../../models/mongo-models/bot-v2"
+import { IBot, IDetailledPokemon } from "../../../models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { Emotion, PkmWithCustom, Role, Transfer } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"

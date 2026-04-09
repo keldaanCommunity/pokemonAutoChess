@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IItemV2 } from "../../../../../models/mongo-models/items-statistic-v2"
+import { IItemV2 } from "../../../models/items-statistic-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import PokemonPortrait from "../pokemon-portrait"
 import { HistoryChart } from "./history-chart"
