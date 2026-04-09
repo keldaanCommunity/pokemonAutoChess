@@ -1,7 +1,7 @@
 import { getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
-import { NavigateFunction } from "react-router-dom"
+import { NavigateFunction } from "react-router"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema,

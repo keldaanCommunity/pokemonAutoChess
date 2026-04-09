@@ -1,5 +1,5 @@
 ﻿import React, { useCallback, useEffect, useMemo, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { Language } from "../../../types/enum/Language"
 import { LanguageNames } from "../../dist/client/locales"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"

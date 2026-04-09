@@ -1,6 +1,6 @@
 import { t } from "i18next"
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { Orientation } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
