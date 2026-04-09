@@ -4,6 +4,7 @@ export const THEMES = [
   "forest",
   "lilac",
   "north",
+  "unown",
   "origin"
 ] as const
 

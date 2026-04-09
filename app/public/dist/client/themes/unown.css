@@ -1,0 +1,50 @@
+:root {
+  --color-bg-primary: #111111;
+  --color-bg-secondary: #2f2f2f;
+  --color-bg-tertiary: #4b4b4b;
+  --color-bg-accent: #808080;
+
+  --border-thick: 3px solid #333;
+  --border-thin: 2px solid #333;
+  --border-extra-thin: 1px solid #333;
+}
+
+body {
+  background-image: url("/assets/theme/unown/custombg.jpg");
+  background-size: auto;
+  background-repeat: repeat;
+}
+
+.custom-bg {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: none;
+}
+
+/* Game */
+
+.draggable-window.my-container,
+.game-shop .information > div,
+#game-stage-info,
+.game-spectate-player-info.my-container {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.game-shop.my-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.team-builder-modal.my-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.synergies-container .draggable-window-content,
+.team-builder-modal .modal-body {
+  background-color: transparent;
+}
+
+.game-final-rank .rank {
+  text-shadow: none;
+}
