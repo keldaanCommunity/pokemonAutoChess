@@ -152,6 +152,22 @@ export function subscribeToPreferences(fn: Subscription, runInitially = false) {
   return unsubscribeToPreferences.bind(undefined, fn)
 }
 
+export function subscribeToPreference<T extends keyof IPreferencesState>(
+  key: T,
+  fn: (newValue: IPreferencesState[T]) => void,
+  runInitially = false
+) {
+  let previousValue = preferences[key]
+  const subscription: Subscription = (newPreferences) => {
+    if (newPreferences[key] === previousValue) return
+    previousValue = newPreferences[key]
+    fn(newPreferences[key])
+  }
+  subscriptions.push(subscription)
+  if (runInitially) fn(preferences[key])
+  return unsubscribeToPreferences.bind(undefined, subscription)
+}
+
 export function unsubscribeToPreferences(fn: Subscription) {
   removeInArray(subscriptions, fn)
 }
