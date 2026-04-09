@@ -15,7 +15,7 @@
   display: flex;
   gap: 1vw;
   justify-content: center;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .game-items-proposition .show-hide-action {

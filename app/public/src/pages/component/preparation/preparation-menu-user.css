@@ -10,6 +10,7 @@
 .preparation-menu-user .inline-avatar {
   flex: 1;
   min-width: 0;
+  flex-wrap: wrap;
 }
 
 .preparation-menu-user.ready {

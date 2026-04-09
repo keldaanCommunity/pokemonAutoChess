@@ -1,5 +1,5 @@
 .pokemon-typeahead .form-control {
-  color: #fff;
+  color: var(--color-fg-primary);
   background-color: #40404080;
   font-size: 1em;
   border-radius: 12px;

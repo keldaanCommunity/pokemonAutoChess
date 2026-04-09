@@ -360,27 +360,27 @@ export default function PreparationMenu() {
       </div>
 
       <div className="actions">
-        {roomNameInput}
-        <div className="spacer" />
-        {scribbleRule}
-      </div>
+        <div>
+          {roomNameInput}
+          <div className="spacer" />
+          {scribbleRule}
+        </div>
 
-      {(BOTS_ENABLED || isAdmin) && (
-        <div className="actions">{botControls}</div>
-      )}
+        {(BOTS_ENABLED || isAdmin) && <div>{botControls}</div>}
 
-      <div className="actions">
-        {roomEloButton}
-        {minMaxRanks}
-        <div className="spacer" />
-      </div>
+        <div>
+          {roomEloButton}
+          {minMaxRanks}
+          <div className="spacer" />
+        </div>
 
-      <div className="actions">
-        {roomPrivateButton}
-        {roomInfo}
-        <div className="spacer" />
-        {readyButton}
-        {startGameButton}
+        <div>
+          {roomPrivateButton}
+          {roomInfo}
+          <div className="spacer" />
+          {readyButton}
+          {startGameButton}
+        </div>
       </div>
 
       {isOwner && showBotSelectModal && (

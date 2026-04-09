@@ -131,16 +131,16 @@ export default function TierListMaker() {
     <div id="tier-list-maker">
       <div className="actions">
         <button
-          className="bubbly dark tier-list-add-row"
+          className="bubbly tier-list-add-row"
           onClick={addRow}
           type="button"
         >
           ＋{t("tier_list.add_row")}
         </button>
-        <button className="bubbly dark" onClick={loadFile}>
+        <button className="bubbly" onClick={loadFile}>
           <img src="assets/ui/load.svg" /> {t("load")}
         </button>
-        <button className="bubbly dark" onClick={saveFile}>
+        <button className="bubbly" onClick={saveFile}>
           <img src="assets/ui/save.svg" /> {t("save")}
         </button>
         <button className="bubbly blue" onClick={downloadImage}>

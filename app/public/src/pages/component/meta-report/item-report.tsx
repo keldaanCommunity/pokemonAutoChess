@@ -20,6 +20,7 @@ import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
 import "./item-report.css"
+import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
 
@@ -107,7 +108,9 @@ export function ItemReport() {
             <div className="item-distribution-chart">
               <div className="view-switcher">
                 <button
-                  className={viewMode === "distribution" ? "active" : ""}
+                  className={cc("bubbly", {
+                    active: viewMode === "distribution"
+                  })}
                   onClick={() => setViewMode("distribution")}
                 >
                   {t("overview")}
@@ -116,7 +119,9 @@ export function ItemReport() {
                   </span>
                 </button>
                 <button
-                  className={viewMode === "count-history" ? "active" : ""}
+                  className={cc("bubbly", {
+                    active: viewMode === "count-history"
+                  })}
                   onClick={() => setViewMode("count-history")}
                 >
                   {t("popularity_over_time")}
@@ -125,7 +130,9 @@ export function ItemReport() {
                   </span>
                 </button>
                 <button
-                  className={viewMode === "rank-history" ? "active" : ""}
+                  className={cc("bubbly", {
+                    active: viewMode === "rank-history"
+                  })}
                   onClick={() => setViewMode("rank-history")}
                 >
                   {t("placement_over_time")}

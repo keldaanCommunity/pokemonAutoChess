@@ -306,7 +306,7 @@ export function PokemonHistoryPanel({
         {TOP_N_OPTIONS.map((n) => (
           <button
             key={n}
-            className={`pokemon-history-topn-btn${topN === n ? " active" : ""}`}
+            className={`bubbly pokemon-history-topn-btn${topN === n ? " active" : ""}`}
             onClick={() => setTopN(n)}
           >
             {n}

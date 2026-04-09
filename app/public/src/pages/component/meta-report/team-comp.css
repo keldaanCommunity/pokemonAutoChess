@@ -48,7 +48,7 @@
 .popular-pokemons-header {
   font-weight: bold;
   font-size: 0.95em;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   width: 100%;
   text-align: left;
   margin-top: 0.2em;
@@ -112,7 +112,7 @@
 .items-header {
   font-weight: bold;
   font-size: 0.95em;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   width: 100%;
   text-align: left;
   padding-left: 0.5em;
@@ -144,7 +144,7 @@
 }
 
 .item-frequency {
-  color: #aaa;
+  color: var(--color-fg-secondary);
   font-weight: 500;
 }
 
@@ -162,7 +162,7 @@
 .carousel-header {
   font-weight: bold;
   font-size: 0.95em;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   width: 100%;
   text-align: left;
   padding-left: 0.5em;
@@ -189,7 +189,7 @@
 }
 
 .carousel-item-frequency {
-  color: #aaa;
+  color: var(--color-fg-secondary);
   font-weight: 500;
   font-size: 0.9em;
 }
@@ -205,7 +205,7 @@
 .teams-header {
   font-weight: bold;
   font-size: 0.95em;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   width: 100%;
   text-align: left;
   margin-bottom: 0.1em;
@@ -222,7 +222,7 @@
 
 .team-rank {
   min-width: auto;
-  color: #aaa;
+  color: var(--color-fg-secondary);
   display: flex;
   flex-direction: row;
   align-items: center;

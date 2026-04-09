@@ -23,7 +23,7 @@
 .toast-new-pokemon,
 .toast-level-up {
   right: 76px;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .toast-new-pokemon img {

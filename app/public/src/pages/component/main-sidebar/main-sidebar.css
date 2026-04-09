@@ -8,7 +8,7 @@ aside.sidebar {
 .sidebar-logo {
   display: flex;
   align-items: center;
-  color: white;
+  color: var(--color-fg-primary);
   width: 100%;
   background-color: var(--color-bg-primary);
 }
@@ -65,7 +65,6 @@ aside.sidebar {
 
 .ps-menu-root {
   height: 100%;
-  background-color: var(--color-bg-primary);
 }
 
 .ps-menu-root ul {
@@ -80,7 +79,7 @@ aside.sidebar {
 }
 
 .ps-menu-label {
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 #root .ps-menu-button {
@@ -195,7 +194,7 @@ aside.sidebar {
 }
 
 .lobby .additional-links a:hover {
-  color: #fff;
+  color: var(--color-fg-primary);
   text-decoration: underline;
 }
 

@@ -7,7 +7,6 @@
   gap: 16px;
   padding: 16px;
   box-sizing: border-box;
-  background-color: rgb(84, 89, 107);
   border-radius: 8px;
 }
 
@@ -17,7 +16,7 @@
   align-items: center;
   width: 100%;
   height: 400px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
   font-size: 18px;
 }
 
@@ -47,14 +46,14 @@
 
 .cluster-map-info-panel h3 {
   margin: 0;
-  color: #fff;
+  color: var(--color-fg-primary);
   font-size: 18px;
   border-bottom: 1px solid #444;
   padding-bottom: 8px;
 }
 
 .cluster-map-info-text {
-  color: #aaa;
+  color: var(--color-fg-secondary);
   font-size: 12px;
   line-height: 1.4;
   margin: 0;
@@ -80,12 +79,12 @@
 }
 
 .cluster-map-stats .stat-item span {
-  color: #fff;
+  color: var(--color-fg-primary);
 }
 
 .cluster-detail-panel {
   padding: 12px;
-  background: rgb(64, 69, 87);
+  background: var(--color-bg-tertiary);
   border-radius: 6px;
   border-left: 3px solid #4a9eff;
 }
@@ -110,11 +109,11 @@
 }
 
 .cluster-stats .stat-item label {
-  color: #888;
+  color: var(--color-fg-secondary);
 }
 
 .cluster-stats .stat-item span {
-  color: #fff;
+  color: var(--color-fg-primary);
 }
 
 .cluster-map-container .synergies-container {
@@ -135,7 +134,7 @@
 }
 
 .cluster-map-container .synergy-item-display span {
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 .cluster-map-container .pokemon-grid {
@@ -160,6 +159,6 @@
 }
 
 .cluster-map-container .pokemon-frequency {
-  color: #ccc;
+  color: var(--color-fg-secondary);
   font-size: 10px;
 }

@@ -41,6 +41,7 @@ export interface IPreferencesState {
   renderer: number
   antialiasing: boolean
   colorblindMode: boolean
+  theme: string
 }
 
 const defaultPreferences: IPreferencesState = {
@@ -66,6 +67,7 @@ const defaultPreferences: IPreferencesState = {
   renderer: Phaser.AUTO,
   antialiasing: true,
   colorblindMode: false,
+  theme: "default",
   keybindings: {
     sell: "E",
     buy_xp: "F",

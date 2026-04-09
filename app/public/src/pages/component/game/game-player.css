@@ -51,7 +51,7 @@
   margin: -0.2em auto;
   z-index: -1;
   text-align: center;
-  color: white;
+  color: var(--color-fg-primary);
   padding: 0;
   line-height: 1em;
   transition: margin 100ms ease-out;

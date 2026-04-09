@@ -1,5 +1,5 @@
 #wiki-page {
-  color: white;
+  color: var(--color-fg-primary);
   width: min(95vw, 1800px);
   max-width: 100%;
 }

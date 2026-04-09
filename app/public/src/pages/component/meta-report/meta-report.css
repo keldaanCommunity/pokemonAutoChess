@@ -1,6 +1,6 @@
 #meta-report {
   height: calc(95vh - 6rem);
-  color: white;
+  color: var(--color-fg-primary);
   width: 90vw;
 }
 
@@ -35,14 +35,13 @@
 }
 
 #meta-report label {
-  color: #ccc;
+  color: var(--color-fg-secondary);
   margin: 0;
 }
 
 #meta-report .team-comp {
-  background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -51,9 +50,8 @@
 }
 
 #meta-report .item-stat {
-  background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   gap: 0.5em;

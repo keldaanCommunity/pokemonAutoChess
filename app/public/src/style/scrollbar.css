@@ -1,7 +1,7 @@
 /* scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #4f5160 transparent;
+  scrollbar-color: var(--color-bg-tertiary) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -14,7 +14,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #4f5160;
+  background-color: var(--color-bg-tertiary);
   border-radius: 4px;
   border: 1px solid #000000;
 }

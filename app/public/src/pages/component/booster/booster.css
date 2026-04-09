@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 #boosters-page p.help {
@@ -20,7 +20,7 @@
   text-align: center;
   position: relative;
   bottom: 1em;
-  color: white;
+  color: var(--color-fg-primary);
   display: flex;
   align-items: center;
   gap: 1em;

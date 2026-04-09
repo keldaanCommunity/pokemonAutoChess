@@ -1,13 +1,13 @@
 .damage-physical {
-  color: #ff6e55;
+  color: var(--color-physical);
 }
 
 .damage-special {
-  color: #7fc9ff;
+  color: var(--color-special);
 }
 
 .damage-true {
-  color: #ffd800;
+  color: var(--color-true);
 }
 
 .description-icon {
@@ -44,12 +44,12 @@ h2 .description-icon > img {
 }
 
 .ability-value {
-  color: rgb(171, 171, 171);
+  color: var(--color-fg-secondary);
   font-weight: 500;
 }
 
 .ability-value .active {
-  color: rgb(255, 255, 255);
+  color: var(--color-fg-primary);
 }
 
 .scales-ap .ability-value {
@@ -69,21 +69,21 @@ h2 .description-icon > img {
 }
 
 .stat-label {
-  color: rgb(171, 171, 171);
+  color: var(--color-fg-secondary);
   white-space: normal;
   font-weight: 500;
 }
 
 .status-label {
-  color: #f5a9a9;
+  color: var(--color-fg-negative);
   font-weight: 500;
 }
 
 .status-label.positive {
-  color: #a9f5ad;
+  color: var(--color-fg-positive);
 }
 
 .item-label {
-  color: rgb(190, 190, 190);
+  color: var(--color-fg-secondary);
   font-weight: 500;
 }

@@ -15,6 +15,7 @@ import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
+import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
 
@@ -160,7 +161,9 @@ export function PokemonReport() {
           <div className="pokemon-distribution-chart">
             <div className="view-switcher">
               <button
-                className={viewMode === "distribution" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "distribution"
+                })}
                 onClick={() => setViewMode("distribution")}
               >
                 {t("overview")}
@@ -169,7 +172,9 @@ export function PokemonReport() {
                 </span>
               </button>
               <button
-                className={viewMode === "count-history" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "count-history"
+                })}
                 onClick={() => setViewMode("count-history")}
               >
                 {t("popularity_over_time")}
@@ -178,7 +183,9 @@ export function PokemonReport() {
                 </span>
               </button>
               <button
-                className={viewMode === "rank-history" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "rank-history"
+                })}
                 onClick={() => setViewMode("rank-history")}
               >
                 {t("placement_over_time")}

@@ -12,7 +12,7 @@
     -1px 1px 0 #000,
     1px 1px 0 #000;
   filter: drop-shadow(0 0 2px black);
-  color: #fff;
+  color: white;
 }
 
 .game-tooltip-bar-outer {

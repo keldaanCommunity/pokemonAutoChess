@@ -20,7 +20,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: white;
+  color: var(--color-fg-primary);
   background-color: black;
   z-index: 2;
 }
@@ -30,7 +30,7 @@
   top: 1em;
   right: 1em;
   background-color: black;
-  color: white;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: row-reverse;
   align-items: start;

@@ -1,0 +1,10 @@
+:root {
+  --color-bg-primary: #405b89;
+  --color-bg-secondary: #222f54;
+  --color-bg-tertiary: #19273f;
+  --color-bg-accent: #a6639a;
+}
+
+.custom-bg {
+  background-image: url("/assets/theme/north/custombg.jpg");
+}

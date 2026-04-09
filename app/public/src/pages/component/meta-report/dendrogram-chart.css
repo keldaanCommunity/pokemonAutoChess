@@ -7,7 +7,6 @@
   gap: 16px;
   padding: 16px;
   box-sizing: border-box;
-  background-color: rgb(84, 89, 107);
   border-radius: 8px;
 }
 
@@ -18,7 +17,7 @@
   align-items: center;
   width: 100%;
   height: 400px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
   font-size: 18px;
 }
 
@@ -37,7 +36,7 @@
 }
 
 .dendrogram-chart-wrapper .y-axis text {
-  fill: #ccc;
+  fill: var(--color-fg-secondary);
   font-size: 10px;
 }
 
@@ -61,7 +60,7 @@
 
 .dendrogram-info-panel h3 {
   margin: 0;
-  color: #fff;
+  color: var(--color-fg-primary);
   font-size: 18px;
   border-bottom: 1px solid #444;
   padding-bottom: 8px;
@@ -69,12 +68,12 @@
 
 .dendrogram-info-panel h4 {
   margin: 8px 0 4px 0;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   font-size: 14px;
 }
 
 .dendrogram-info-text {
-  color: #aaa;
+  color: var(--color-fg-secondary);
   font-size: 12px;
   line-height: 1.4;
   margin: 0;
@@ -91,7 +90,7 @@
 
 .dendrogram-container .branch-detail-panel {
   padding: 12px;
-  background: rgb(84, 89, 107);
+  background: var(--color-bg-tertiary);
   border-radius: 6px;
   border-left: 3px solid #ffa500;
 }
@@ -115,16 +114,16 @@
 }
 
 .dendrogram-container .branch-stats .stat-item label {
-  color: #888;
+  color: var(--color-fg-secondary);
 }
 
 .dendrogram-container .branch-stats .stat-item span {
-  color: #fff;
+  color: var(--color-fg-primary);
 }
 
 .dendrogram-container .branch-synergies label {
   display: block;
-  color: #888;
+  color: var(--color-fg-secondary);
   font-size: 12px;
   margin-bottom: 4px;
 }
@@ -144,17 +143,17 @@
 }
 
 .dendrogram-container .dendrogram-stats .stat-item label {
-  color: #888;
+  color: var(--color-fg-secondary);
 }
 
 .dendrogram-container .dendrogram-stats .stat-item span {
-  color: #fff;
+  color: var(--color-fg-primary);
   font-weight: 500;
 }
 
 .dendrogram-container .cluster-detail-panel {
   padding: 12px;
-  background: rgb(84, 89, 107);
+  background: var(--color-bg-tertiary);
   border-radius: 6px;
   border-left: 3px solid #4a9eff;
 }
@@ -172,16 +171,16 @@
 }
 
 .dendrogram-container .cluster-size label {
-  color: #888;
+  color: var(--color-fg-secondary);
 }
 
 .dendrogram-container .cluster-size span {
-  color: #fff;
+  color: var(--color-fg-primary);
 }
 
 .dendrogram-container .cluster-synergies label {
   display: block;
-  color: #888;
+  color: var(--color-fg-secondary);
   font-size: 12px;
   margin-bottom: 4px;
 }
@@ -200,7 +199,7 @@
 
 .dendrogram-container .synergy-item .synergy-name {
   flex: 1;
-  color: #ddd;
+  color: var(--color-fg-secondary);
   font-size: 12px;
   text-transform: capitalize;
 }
@@ -226,7 +225,7 @@
 }
 
 .dendrogram-container .synergy-item-display span {
-  color: #fff;
+  color: var(--color-fg-primary);
   font-size: 14px;
   font-weight: 500;
 }
@@ -252,7 +251,7 @@
 
 .dendrogram-container .pokemon-frequency {
   font-size: 10px;
-  color: #aaa;
+  color: var(--color-fg-secondary);
   text-align: center;
 }
 
