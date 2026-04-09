@@ -235,7 +235,7 @@ export class CollectionUtils {
     return btoa(binary)
   }
 
-  static decodeBase64(base64: string): Buffer {
+  static decodeBase64(base64: string): Uint8Array {
     if (this.hasNodeBuffer()) {
       return Buffer.from(base64, "base64")
     }
@@ -246,7 +246,7 @@ export class CollectionUtils {
       bytes[i] = binary.charCodeAt(i)
     }
 
-    return bytes as unknown as Buffer
+    return bytes
   }
 
   /**
