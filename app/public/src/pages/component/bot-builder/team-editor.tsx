@@ -1,6 +1,6 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
+import { IDetailledPokemon } from "../../../models/bot-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import PokemonPortrait from "../pokemon-portrait"
 

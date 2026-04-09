@@ -3,6 +3,7 @@ import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
+import { ITournament } from "../../types/interfaces/Tournament"
 import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {
@@ -66,7 +67,7 @@ export default class LobbyState extends Schema {
       brackets: new Map(),
       players: new Map(),
       finished: false
-    })
+    } as unknown as Partial<ITournament>)
   }
 
   removeTournament(id: string) {

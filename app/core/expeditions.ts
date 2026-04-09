@@ -149,7 +149,7 @@ export function getExpeditionData(
               (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
             ) === index
         ) // get only base alt forms
-      console.log({ pokemonsOfCategory: pokemonsOfCategory.map((p) => p.name) })
+      // console.log({ pokemonsOfCategory: pokemonsOfCategory.map((p) => p.name) })
       const pokemonToRescue =
         pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
       return { pokemon: pokemonToRescue }

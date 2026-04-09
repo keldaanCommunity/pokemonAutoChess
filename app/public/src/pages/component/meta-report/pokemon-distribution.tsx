@@ -10,7 +10,7 @@ import {
   YAxis
 } from "recharts"
 
-import { IPokemonsStatisticV2 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
+import { IPokemonsStatisticV2 } from "../../../models/pokemons-statistic-v2"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"

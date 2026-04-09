@@ -5,7 +5,7 @@ import {
   fetchMetaPokemons,
   IPokemonStatV2,
   IPokemonsStatisticV2
-} from "../../../../../models/mongo-models/pokemons-statistic-v2"
+} from "../../../models/pokemons-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"

@@ -2,10 +2,7 @@ import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import {
-  fetchMetaV2,
-  IMetaV2
-} from "../../../../../models/mongo-models/meta-v2"
+import { fetchMetaV2, IMetaV2 } from "../../../models/meta-v2"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import TeamComp from "./team-comp"
