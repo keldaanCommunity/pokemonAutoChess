@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import {
   IBot,

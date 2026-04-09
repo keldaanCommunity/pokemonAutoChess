@@ -1,8 +1,7 @@
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router"
 import {
   DEFAULT_BOT_STATE,
   estimateElo,

@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List } from "react-window"
 import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
