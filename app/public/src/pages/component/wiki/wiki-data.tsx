@@ -134,6 +134,44 @@ export default function WikiData() {
         </tbody>
       </table>
 
+      <h2>{t("wiki.data.fishing_rarity_rate")}</h2>
+      <p>{t("wiki.data.fishing_rarity_rate_description")}</p>
+      <table id="wiki-data-fishing-rarity-rate">
+        <thead>
+          <tr>
+            <th></th>
+            {rarities_with_special.map((r, i) => (
+              <th style={{ color: RarityColor[rarities_with_special[i]] }}>
+                {t("rarity." + r)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[...FishingRods].reverse().map((rod, i) => (
+            <tr>
+              <td>{t("item." + rod)}</td>
+              {rarities_with_special.map((r, i) => (
+                <td style={{ color: RarityColor[rarities_with_special[i]] }}>
+                  {percentage.format(FishRarityProbability[rod][r] ?? 0)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>{t("wiki.data.special_pokemons_rate")}</h2>
+      <p>
+        {t("wiki.data.ditto_rate")}: {percentage.format(DITTO_RATE)}
+      </p>
+      <p>
+        {t("wiki.data.kecleon_rate")}: {percentage.format(KECLEON_RATE)}
+      </p>
+      <p>
+        {t("wiki.data.arceus_rate")}: {percentage.format(ARCEUS_RATE)}
+      </p>
+
       <h2>{t("wiki.data.experience_by_rank")}</h2>
       <p>{t("wiki.data.experience_by_rank_description")}</p>
       <table id="wiki-data-experience-by-rank">
@@ -178,55 +216,22 @@ export default function WikiData() {
         </tbody>
       </table>
 
-      <h2>{t("wiki.data.fishing_rarity_rate")}</h2>
-      <p>{t("wiki.data.fishing_rarity_rate_description")}</p>
-      <table id="wiki-data-fishing-rarity-rate">
-        <thead>
-          <tr>
-            <th></th>
-            {rarities_with_special.map((r, i) => (
-              <th style={{ color: RarityColor[rarities_with_special[i]] }}>
-                {t("rarity." + r)}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {[...FishingRods].reverse().map((rod, i) => (
-            <tr>
-              <td>{t("item." + rod)}</td>
-              {rarities_with_special.map((r, i) => (
-                <td style={{ color: RarityColor[rarities_with_special[i]] }}>
-                  {percentage.format(FishRarityProbability[rod][r] ?? 0)}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <h2>{t("wiki.data.defense_calculation")}</h2>
+      <h2>{addIconsToDescription(t("wiki.data.defense_calculation"))}</h2>
       <p>
         {addIconsToDescription(t("wiki.data.defense_calculation_description"))}
       </p>
 
-      <h2>{t("wiki.data.round_damage_calculation")}</h2>
-      <p>{t("wiki.data.round_damage_calculation_description")}</p>
-
-      <h2>{t("wiki.data.special_pokemons_rate")}</h2>
+      <h2>{addIconsToDescription(t("wiki.data.speed_calculation"))}</h2>
       <p>
-        {t("wiki.data.ditto_rate")}: {percentage.format(DITTO_RATE)}
-      </p>
-      <p>
-        {t("wiki.data.kecleon_rate")}: {percentage.format(KECLEON_RATE)}
-      </p>
-      <p>
-        {t("wiki.data.arceus_rate")}: {percentage.format(ARCEUS_RATE)}
+        {addIconsToDescription(t("wiki.data.speed_calculation_description"))}
       </p>
 
-      <h2>{t("wiki.data.luck_title")}</h2>
+      <h2>{addIconsToDescription(t("wiki.data.luck_title"))}</h2>
       <p>{addIconsToDescription(t("wiki.data.luck_description"))}</p>
       <p>{addIconsToDescription(t("wiki.data.luck_formula"))}</p>
+
+      <h2>{t("wiki.data.round_damage_calculation")}</h2>
+      <p>{t("wiki.data.round_damage_calculation_description")}</p>
     </div>
   )
 }
