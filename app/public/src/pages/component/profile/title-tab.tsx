@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { THEME_BY_TITLE, TITLES_UNLOCKING_THEMES } from "../../../../../config"
-import {
-  fetchTitles,
-  ITitleStatistic
-} from "../../../../../models/mongo-models/title-statistic"
+import { fetchTitles, ITitleStatistic } from "../../../models/title-statistic"
 import { Title } from "../../../../../types"
 import { isIn } from "../../../../../utils/array"
 import { useAppDispatch, useAppSelector } from "../../../hooks"

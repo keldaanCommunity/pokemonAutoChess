@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { IMetaV2 } from "../../../../../models/mongo-models/meta-v2"
+import { IMetaV2 } from "../../../models/meta-v2"
 import {
   Item,
   ItemComponents,

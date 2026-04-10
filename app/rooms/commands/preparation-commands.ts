@@ -3,7 +3,7 @@ import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { FilterQuery } from "mongoose"
+import { QueryFilter } from "mongoose"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -15,9 +15,10 @@ import {
   setPendingGame
 } from "../../core/pending-game-manager"
 import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
-import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
+import { BotV2 } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
+import type { IBot } from "../../types/models/bot-v2"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
@@ -736,7 +737,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       } else {
         // pick a random bot per difficulty
         const difficulty = type
-        let elo: FilterQuery<IBot> | undefined
+        let elo: QueryFilter<IBot>["elo"] | undefined
 
         switch (difficulty) {
           case BotDifficulty.EASY:
