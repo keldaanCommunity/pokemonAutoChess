@@ -1,6 +1,6 @@
 :root {
-  --color-bg-primary: white;
-  --color-bg-secondary: #f0f0f0;
+  --color-bg-primary: #f0f0f0;
+  --color-bg-secondary: white;
   --color-bg-tertiary: #e0e0e0;
   --color-bg-accent: #f1db21;
   --color-bg-positive: #95ff52;
@@ -31,6 +31,8 @@
   --color-role-bot: #9caab6;
   --color-role-bot-manager: #dc3545;
   --color-role-banned: red;
+
+  --border-thin: 4px solid black;
 }
 
 @font-face {
@@ -53,6 +55,28 @@ body {
   background-image: none;
 }
 
+.my-container,
+.my-box,
+.bubbly,
+input[type="text"],
+input[type="search"],
+select {
+  border-radius: 0;
+}
+
+.modal.my-container {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.bubbly {
+  padding: 0.5em 2em;
+}
+
+.pokemon-portrait {
+  border: 4px solid transparent;
+  box-shadow: none;
+}
+
 aside.sidebar {
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -68,9 +92,15 @@ aside.sidebar .ps-sidebar-container {
 
 .react-tabs__tab {
   color: var(--color-fg-primary);
-  backdrop-filter: blur(10px);
+  background: white;
   text-shadow: none;
   font-size: 0.8em;
+  border-radius: 0;
+  border: var(--border-thin);
+}
+
+.react-tabs__tab.icon-tab {
+  background-color: transparent;
 }
 
 .bubbly,

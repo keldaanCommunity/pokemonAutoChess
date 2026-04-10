@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../config"
-import { IDetailledPokemon } from "../../../../../models/mongo-models/bot-v2"
+import { IDetailledPokemon } from "../../../models/bot-v2"
 import { ShinyItems } from "../../../../../types/enum/Item"
 import {
   Pkm,

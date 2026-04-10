@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import {
   fetchMetaRegions,
   IRegionStatistic
-} from "../../../../../models/mongo-models/regions-statistic"
+} from "../../../models/regions-statistic"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import RegionStatistic from "./region-statistic"

@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate, useSearchParams } from "react-router"
 import {
@@ -19,10 +19,7 @@ import {
   computeSynergies,
   getSynergyStep
 } from "../../../../../models/colyseus-models/synergies"
-import {
-  IBot,
-  IDetailledPokemon
-} from "../../../../../models/mongo-models/bot-v2"
+import { IBot, IDetailledPokemon } from "../../../models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"

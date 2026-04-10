@@ -1,30 +1,7 @@
-import firebase from "firebase/compat/app"
 import { model, Schema } from "mongoose"
-import { EloRank } from "../../types/enum/EloRank"
+import type { IPokemonsStatisticV2 } from "../../types/models/pokemons-statistic-v2"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
-import { ITypeStatistics } from "../../types/meta"
-
-export interface IHistoryEntry {
-  date: string
-  value: number
-}
-
-export interface IPokemonStatV2 {
-  rank: number
-  count: number
-  name: Pkm
-  items: Item[]
-  item_count: number
-  rank_history?: IHistoryEntry[]
-  count_history?: IHistoryEntry[]
-  item_count_history?: IHistoryEntry[]
-}
-
-export interface IPokemonsStatisticV2 {
-  tier: EloRank
-  pokemons: Record<string, IPokemonStatV2>
-}
 
 const historyEntrySchema = new Schema(
   {
@@ -87,16 +64,3 @@ export default model<IPokemonsStatisticV2>(
   pokemonsStatistic,
   "pokemons-statistic-v2"
 )
-
-export async function fetchMetaPokemons(): Promise<IPokemonsStatisticV2[]> {
-  return fetch("/meta/pokemons").then((res) => res.json())
-}
-
-export async function fetchMetaTypes(): Promise<ITypeStatistics> {
-  const token = await firebase.auth().currentUser?.getIdToken()
-  return fetch("/meta/types", {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }).then((res) => res.json())
-}

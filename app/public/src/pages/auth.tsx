@@ -76,7 +76,9 @@ export default function Auth() {
       </Modal>
       <Modal
         show={networkError != null}
-        onClose={() => dispatch(setErrorAlertMessage(null))}
+        onClose={() => {
+          dispatch(setErrorAlertMessage(null))
+        }}
         className="is-dark basic-modal-body"
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
       />

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import {
-  fetchMetaV2,
-  IMetaV2
-} from "../../../../../models/mongo-models/meta-v2"
+import { fetchMetaV2, IMetaV2 } from "../../../models/meta-v2"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"

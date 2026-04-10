@@ -12,10 +12,13 @@ import {
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
+  THEME_BY_TITLE,
+  TITLES_UNLOCKING_THEMES,
   UniquePool,
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
+import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -30,13 +33,14 @@ import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
-import { BotV2, IDetailledPokemon } from "../models/mongo-models/bot-v2"
+import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
   giveUserExp,
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
+import type { IDetailledPokemon } from "../types/models/bot-v2"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -930,7 +934,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
         DetailledStatistic.create({
           time: Date.now(),
           name: dbrecord.name,
-          pokemons: dbrecord.pokemons,
+          pokemons: dbrecord.pokemons.map((pokemon) => ({
+            ...pokemon,
+            items: Array.from(pokemon.items ?? []).map((item) =>
+              item.toString()
+            )
+          })),
           rank: dbrecord.rank,
           nbplayers: humans.length + bots.length,
           avatar: dbrecord.avatar,
@@ -1024,7 +1033,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         usr.titles = []
       }
 
-      const newTitlesEarned: string[] = []
+      const newTitlesEarned: Title[] = []
       player.titles.forEach((t) => {
         if (!usr.titles.includes(t)) {
           //logger.info("title added ", t)
@@ -1037,6 +1046,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (newTitlesEarned.length > 0) {
         newTitlesEarned.forEach((title) => {
           notificationsService.addNotification(player.id, "new_title", title)
+          if (
+            TITLES_UNLOCKING_THEMES.includes(title) &&
+            usr.level >= GADGETS.palette.levelRequired
+          ) {
+            notificationsService.addNotification(
+              player.id,
+              "new_theme",
+              THEME_BY_TITLE[title]!
+            )
+          }
         })
       }
 
