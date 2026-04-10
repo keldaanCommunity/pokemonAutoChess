@@ -14,7 +14,8 @@ import {
   CraftableItems,
   Item,
   ShinyItems,
-  Tools
+  Tools,
+  UnholdableItems
 } from "../../../../../types/enum/Item"
 import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
@@ -51,7 +52,11 @@ export function ItemReport() {
   const tabs: { label: string; key: string; items?: readonly Item[] }[] = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("tools"), key: "tools", items: Tools },
-    { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
+    {
+      label: t("shiny_items"),
+      key: "shiny_items",
+      items: ShinyItems.filter((i) => !UnholdableItems.includes(i))
+    }
   ]
 
   return (
