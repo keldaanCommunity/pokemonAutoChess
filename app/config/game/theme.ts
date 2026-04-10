@@ -1,6 +1,6 @@
-import { GADGETS } from "../../core/gadgets"
 import { Title } from "../../types"
 import { IUserMetadataUnpacked } from "../../types/interfaces/UserMetadata"
+import { GADGETS } from "./gadgets"
 
 export const THEMES = [
   "default",
@@ -38,7 +38,7 @@ export function isThemeUnlocked(
   theme: Theme,
   profile: IUserMetadataUnpacked
 ): boolean {
-  if (profile.level < GADGETS.PALETTE.levelRequired) return false
+  if (profile.level < GADGETS.palette.levelRequired) return false
   const requiredTitle = TITLE_BY_THEME[theme]
   if (!requiredTitle) return true
   return profile.titles.includes(requiredTitle)
