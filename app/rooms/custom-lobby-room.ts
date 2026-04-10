@@ -13,7 +13,10 @@ import Message from "../models/colyseus-models/message"
 import { TournamentSchema } from "../models/colyseus-models/tournament"
 import ChatV2 from "../models/mongo-models/chat-v2"
 import Tournament from "../models/mongo-models/tournament"
-import UserMetadata from "../models/mongo-models/user-metadata"
+import UserMetadata, {
+  toLeanUserMetadata
+} from "../models/mongo-models/user-metadata"
+import { notificationsService } from "../services/notifications"
 import { Emotion, Role, Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import { GameMode } from "../types/enum/Game"
@@ -29,33 +32,35 @@ import {
   ChangeNameCommand,
   ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
-  CreateTournamentLobbiesCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
-  DeleteTournamentCommand,
-  EndTournamentMatchCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
   HeapSnapshotCommand,
   JoinOrOpenRoomCommand,
-  NextTournamentStageCommand,
-  OnCreateTournamentCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
-  OnSearchCommand,
   OpenBoosterCommand,
-  ParticipateInTournamentCommand,
-  RemakeTournamentLobbyCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
 } from "./commands/lobby-commands"
+import {
+  CreateTournamentLobbiesCommand,
+  DeleteTournamentCommand,
+  EndTournamentMatchCommand,
+  NextTournamentStageCommand,
+  OnCreateTournamentCommand,
+  ParticipateInTournamentCommand,
+  RemakeTournamentLobbyCommand
+} from "./commands/tournament-commands"
 import LobbyState from "./states/lobby-state"
 
-export default class CustomLobbyRoom extends Room<LobbyState> {
+export default class CustomLobbyRoom extends Room {
+  state = new LobbyState()
   unsubscribeLobby: (() => void) | undefined
   rooms: IRoomCache[] | undefined
   dispatcher: Dispatcher<this>
@@ -107,9 +112,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
   async onCreate(): Promise<void> {
     logger.info("create lobby", this.roomId)
-    this.state = new LobbyState()
     this.autoDispose = false
-    this.listing.unlisted = true
+    this["_listing"].unlisted = true
 
     this.clock.setInterval(async () => {
       const ccu = await matchMaker.stats.getGlobalCCU()
@@ -165,8 +169,12 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(
       Transfer.UNBAN,
-      (client, { uid, name }: { uid: string; name: string }) => {
-        this.dispatcher.dispatch(new UnbanUserCommand(), { client, uid, name })
+      (client, { uid, reason }: { uid: string; reason: string }) => {
+        this.dispatcher.dispatch(new UnbanUserCommand(), {
+          client,
+          uid,
+          reason
+        })
       }
     )
 
@@ -273,10 +281,6 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       }
     )
 
-    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand())
-    })
-
     this.onMessage(
       Transfer.GIVE_TITLE,
       (client, { uid, title }: { uid: string; title: Title }) => {
@@ -286,6 +290,10 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
 
     this.onMessage(Transfer.DELETE_ACCOUNT, (client) => {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
+    })
+
+    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
+      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
     })
 
     this.onMessage(
@@ -362,9 +370,18 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
     })
 
-    this.onMessage(Transfer.SEARCH, (client, { name }: { name: string }) => {
-      this.dispatcher.dispatch(new OnSearchCommand(), { client, name })
-    })
+    // Handle notification acknowledgment from client
+    this.onMessage(
+      Transfer.NOTIFICATION_SEEN,
+      (client, notificationId: string) => {
+        if (client.auth) {
+          notificationsService.clearNotification(
+            client.auth.uid,
+            notificationId
+          )
+        }
+      }
+    )
 
     this.onMessage(
       Transfer.CHANGE_AVATAR,
@@ -412,12 +429,20 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
       this.state.addAnnouncement(message)
     })
 
+    this.presence.subscribe("notification-added", (notif) =>
+      notificationsService.onNotificationAdded(notif)
+    )
+
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
   }
 
-  async onAuth(client: Client, options, context) {
+  async onAuth(
+    client: Client,
+    options,
+    context
+  ): Promise<admin.auth.UserRecord> {
     try {
       super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)
@@ -438,7 +463,8 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
   }
 
   async onJoin(client: Client) {
-    const user = await UserMetadata.findOne({ uid: client.auth.uid })
+    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
+    const user = leanUser ? toLeanUserMetadata(leanUser) : null
     try {
       if (user?.banned) {
         throw new Error("Account banned")
@@ -461,17 +487,24 @@ export default class CustomLobbyRoom extends Room<LobbyState> {
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onDrop(client: Client, code: number) {
     try {
-      if (consented) {
-        throw new Error("consented leave")
-      }
+      // allow reconnection for 30 seconds
       await this.allowReconnection(client, 30)
-      // if reconnected, trigger the onJoin logic again to send them the initial data
-      this.onJoin(client)
-    } catch (error) {
-      this.dispatcher.dispatch(new OnLeaveCommand(), { client })
+    } catch (e) {
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left lobby room`)
+      }*/
     }
+  }
+
+  async onReconnect(client: Client) {
+    // if reconnected, trigger the onJoin logic again to send them the initial data
+    this.onJoin(client)
+  }
+
+  async onLeave(client: Client, code: number) {
+    this.dispatcher.dispatch(new OnLeaveCommand(), { client })
   }
 
   onDispose() {

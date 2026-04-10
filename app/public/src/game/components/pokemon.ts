@@ -45,7 +45,11 @@ import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayAbility } from "./abilities-animations"
+import {
+  addAbilitySprite,
+  displayAbility,
+  displayBoost
+} from "./abilities-animations"
 import DraggableObject from "./draggable-object"
 import { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
@@ -72,8 +76,6 @@ export default class PokemonSprite extends DraggableObject {
   id: string
   targetX: number | null
   targetY: number | null
-  positionX: number
-  positionY: number
   attackSprite: AttackSprite
   itemsContainer: ItemsContainer
   orientation: Orientation
@@ -154,8 +156,6 @@ export default class PokemonSprite extends DraggableObject {
     this.id = pokemon.id
     this.targetX = null
     this.targetY = null
-    this.positionX = pokemon.positionX
-    this.positionY = pokemon.positionY
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
@@ -279,6 +279,14 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
+  get positionX(): number {
+    return this.pokemon.positionX
+  }
+
+  get positionY(): number {
+    return this.pokemon.positionY
+  }
+
   lazyloadAnimations(scene: GameScene | DebugScene): Promise<void> {
     return new Promise((resolve) => {
       const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
@@ -388,10 +396,12 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   openDetail() {
-    const s = <GameScene>this.scene
-    s.closeTooltips()
-    if (s.lastPokemonDetail && s.lastPokemonDetail !== this) {
-      s.lastPokemonDetail = null
+    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
+      "lastPokemonDetail" in scene
+    if (!isGameScene(this.scene)) return
+    this.scene.closeTooltips()
+    if (this.scene.lastPokemonDetail && this.scene.lastPokemonDetail !== this) {
+      this.scene.lastPokemonDetail = null
     }
 
     this.detail = new GamePokemonDetailDOMWrapper(
@@ -400,13 +410,13 @@ export default class PokemonSprite extends DraggableObject {
       0,
       this.pokemon,
       this.inBattle ? "battle" : "team",
-      this.playerId === s.uid
+      this.playerId === this.scene.uid
     )
     this.detail.setDepth(DEPTH.TOOLTIP).setOrigin(0, 0)
     this.updateTooltipPosition()
     this.detail.removeInteractive()
     this.add(this.detail)
-    s.lastPokemonDetail = this
+    this.scene.lastPokemonDetail = this
   }
 
   onPointerDown(
@@ -852,7 +862,7 @@ export default class PokemonSprite extends DraggableObject {
         scene,
         0,
         25,
-        pokemon.hp,
+        pokemon.maxHP,
         pokemon.hp,
         pokemon.shield,
         pokemon.team as Team,
@@ -1588,35 +1598,7 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   displayBoost(stat: Stat, debug?: boolean) {
-    const tint =
-      {
-        [Stat.AP]: 0xff00aa,
-        [Stat.SPEED]: 0xffaa44,
-        [Stat.ATK]: 0xff6633,
-        [Stat.DEF]: 0xffaa66,
-        [Stat.SPE_DEF]: 0xff99cc,
-        [Stat.SHIELD]: 0xffcc99
-      }[stat] ?? 0xffffff
-
-    const boost = new GameObjects.Sprite(
-      this.scene,
-      0,
-      -20,
-      "abilities",
-      `BOOST/000.png`
-    )
-      .setDepth(DEPTH.BOOST_BACK)
-      .setScale(2)
-      .setTint(tint)
-
-    this.add(boost)
-    boost.anims.play({
-      key: "BOOST",
-      repeat: debug ? 5 : 0
-    })
-    boost.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-      boost.destroy()
-    })
+    displayBoost(this, stat, 0, 0, debug)
   }
 }
 

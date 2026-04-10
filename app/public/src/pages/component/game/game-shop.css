@@ -221,6 +221,14 @@
   font-weight: bold;
 }
 
+#toast-life .toast-shop,
+#toast-money .toast-shop {
+  width: var(--toastify-toast-width);
+  min-height: var(--toastify-toast-min-height);
+  max-height: var(--toastify-toast-max-height);
+  padding: var(--toastify-toast-padding);
+}
+
 #toast-money .toast-player-income {
   color: white;
   font-weight: bold;

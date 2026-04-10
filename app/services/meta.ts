@@ -1,14 +1,14 @@
+import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ItemsStatistic, {
   IItemsStatisticV2
 } from "../models/mongo-models/items-statistic-v2"
+import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
 import PokemonsStatistics, {
   IPokemonsStatisticV2
 } from "../models/mongo-models/pokemons-statistic-v2"
 import RegionStatistic, {
   IRegionStatistic
 } from "../models/mongo-models/regions-statistic"
-import MetaV2, { IMetaV2 } from "../models/mongo-models/meta-v2"
-import Dendrogram, { IDendrogram } from "../models/mongo-models/dendrogram"
 import ReportMetadata, {
   IReportMetadata
 } from "../models/mongo-models/report-metadata"
@@ -41,27 +41,27 @@ let metaV2 = new Array<IMetaV2>()
 let dendrogram: IDendrogram | null = null
 
 async function fetchMetaItems() {
-  metaItems = await ItemsStatistic.find().exec()
+  metaItems = await ItemsStatistic.find().lean().exec()
   return metaItems
 }
 
 async function fetchMetaPokemons() {
-  metaPokemons = await PokemonsStatistics.find().exec()
+  metaPokemons = await PokemonsStatistics.find().lean().exec()
   return metaPokemons
 }
 
 async function fetchMetadata() {
-  metadata = await ReportMetadata.find().exec()
+  metadata = await ReportMetadata.find().lean().exec()
   return metadata
 }
 
 async function fetchMetaRegions() {
-  metaRegions = await RegionStatistic.find().exec()
+  metaRegions = await RegionStatistic.find().lean().exec()
   return metaRegions
 }
 
 async function fetchMetaV2() {
-  metaV2 = await MetaV2.find().exec()
+  metaV2 = await MetaV2.find().lean().exec()
   return metaV2
 }
 
@@ -86,7 +86,7 @@ export function getMetaV2() {
 }
 
 async function fetchDendrogramData() {
-  dendrogram = await Dendrogram.findOne().exec()
+  dendrogram = await Dendrogram.findOne().lean().exec()
   return dendrogram
 }
 
@@ -98,7 +98,7 @@ export function computeSynergyAverages() {
   const rankPerTierAndSynergy: Map<EloRank, Map<Synergy, number>> = new Map()
   const countPerTierAndSynergy: Map<EloRank, Map<Synergy, number>> = new Map()
   metaPokemons.forEach((pokemonStat) => {
-    pokemonStat.pokemons.forEach((pkm) => {
+    Object.values(pokemonStat.pokemons).forEach((pkm) => {
       const tier = pokemonStat.tier
       if (!rankPerTierAndSynergy.has(tier)) {
         rankPerTierAndSynergy.set(tier, new Map())

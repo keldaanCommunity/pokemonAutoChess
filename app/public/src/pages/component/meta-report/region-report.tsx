@@ -4,6 +4,8 @@ import {
   fetchMetaRegions,
   IRegionStatistic
 } from "../../../../../models/mongo-models/regions-statistic"
+import { Pkm } from "../../../../../types/enum/Pokemon"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import RegionStatistic from "./region-statistic"
 import "./region-report.css"
 
@@ -13,6 +15,7 @@ export function RegionReport() {
   const [regionRankingBy, setRegionRanking] = useState<"count" | "rank">(
     "count"
   )
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
 
   useEffect(() => {
     fetchMetaRegions().then((res) => {
@@ -21,10 +24,12 @@ export function RegionReport() {
     })
   }, [])
 
-  const sortedMetaRegions = [...metaRegions].sort((a, b) => {
-    const order = regionRankingBy === "count" ? -1 : 1
-    return (a[regionRankingBy] - b[regionRankingBy]) * order
-  })
+  const sortedMetaRegions = [...metaRegions]
+    .filter((r) => selectedPkm === "" || r.pokemons.includes(selectedPkm))
+    .sort((a, b) => {
+      const order = regionRankingBy === "count" ? -1 : 1
+      return (a[regionRankingBy] - b[regionRankingBy]) * order
+    })
 
   return (
     <div id="region-report">
@@ -45,6 +50,10 @@ export function RegionReport() {
             </option>
           </select>
         </div>
+        <PokemonTypeahead
+          value={selectedPkm ?? ""}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
       </header>
 
       <div style={{ height: "calc(90vh - 12em)", overflowY: "scroll" }}>

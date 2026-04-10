@@ -1,4 +1,4 @@
-import { Client, getStateCallbacks, Room } from "colyseus.js"
+import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
@@ -14,12 +14,16 @@ import { GameMode } from "../../../types/enum/Game"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { authenticateUser } from "../network"
 import {
+  authenticateUser,
+  client,
   joinPreparation,
-  setConnectionStatus,
-  setErrorAlertMessage,
+  rooms,
   toggleReady
+} from "../network"
+import {
+  setConnectionStatus,
+  setErrorAlertMessage
 } from "../stores/NetworkStore"
 import {
   addUser,
@@ -54,10 +58,7 @@ export default function Preparation() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const client: Client = useAppSelector((state) => state.network.client)
-  const room: Room<PreparationState> | undefined = useAppSelector(
-    (state) => state.network.preparation
-  )
+  const room: Room<PreparationState> | undefined = rooms.preparation
   const user = useAppSelector((state) => state.preparation.user)
   const initialized = useRef<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
@@ -69,36 +70,40 @@ export default function Preparation() {
           try {
             if (!initialized.current) {
               initialized.current = true
-              const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_PREPARATION
-              )?.reconnectionToken
-              if (cachedReconnectionToken) {
-                let r: Room<PreparationState>
-                try {
-                  r = await client.reconnect(cachedReconnectionToken)
-                  if (r.name !== "preparation") {
-                    throw new Error(
-                      `Expected to join a preparation room but joined ${r.name} instead`
+              let r: Room<PreparationState>
+
+              if (rooms.preparation?.connection.isOpen) {
+                r = rooms.preparation
+              } else {
+                const cachedReconnectionToken = localStore.get(
+                  LocalStoreKeys.RECONNECTION_PREPARATION
+                )?.reconnectionToken
+                if (cachedReconnectionToken) {
+                  try {
+                    r = await client.reconnect<PreparationState>(
+                      cachedReconnectionToken
                     )
+                    if (r.name !== "preparation") {
+                      throw new Error(
+                        `Expected to join a preparation room but joined ${r.name} instead`
+                      )
+                    }
+                    dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+                  } catch (error) {
+                    logger.error(error)
+                    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+                    dispatch(resetPreparation())
+                    navigate("/lobby")
+                    return
                   }
-                  dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-                } catch (error) {
-                  logger.error(error)
-                  localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-                  dispatch(resetPreparation())
+                  joinPreparation(r)
+                } else {
                   navigate("/lobby")
                   return
                 }
-                localStore.set(
-                  LocalStoreKeys.RECONNECTION_PREPARATION,
-                  { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
-                  30
-                )
-                await initialize(r, user.uid)
-                dispatch(joinPreparation(r))
-              } else {
-                navigate("/lobby")
               }
+
+              await initialize(r, user.uid)
             }
           } catch (error) {
             logger.error(error)
@@ -170,7 +175,7 @@ export default function Preparation() {
         if (user.uid === uid) {
           dispatch(setUser(user))
           if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
-            dispatch(toggleReady(true)) // automatically set users ready in non-classic game mode
+            toggleReady(true) // automatically set users ready in non-classic game mode
           }
         } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
@@ -178,7 +183,7 @@ export default function Preparation() {
 
         const $user = $(user)
 
-        const fields: NonFunctionPropNames<GameUser>[] = [
+        const fields = [
           "anonymous",
           "avatar",
           "elo",
@@ -188,7 +193,7 @@ export default function Preparation() {
           "role",
           "title",
           "ready"
-        ]
+        ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {
           $user.listen(field, (value, previousValue) => {
@@ -213,24 +218,9 @@ export default function Preparation() {
         dispatch(removeMessage(m))
       })
 
-      room.onLeave((code) => {
-        const shouldGoToLobby = [
-          CloseCodes.USER_KICKED,
-          CloseCodes.ROOM_DELETED,
-          CloseCodes.ROOM_FULL,
-          CloseCodes.ROOM_EMPTY,
-          CloseCodes.USER_BANNED,
-          CloseCodes.USER_RANK_TOO_LOW,
-          CloseCodes.USER_TIMEOUT
-        ].includes(code)
-
+      room.onDrop((code) => {
         const shouldReconnect =
           code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
-        logger.info(`left preparation room with code ${code}`, {
-          shouldGoToLobby,
-          shouldReconnect
-        })
-
         if (shouldReconnect) {
           dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
           logger.log(
@@ -242,22 +232,37 @@ export default function Preparation() {
             { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
             30
           )
-          // clearing state variables to re-initialize
-          dispatch(resetPreparation())
-          initialized.current = false
-          reconnect()
-        } else {
-          localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
-          dispatch(resetPreparation())
-          if (shouldGoToLobby) {
-            const errorMessage =
-              CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
-            if (errorMessage) {
-              dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
-            }
-            navigate("/lobby")
-            playSound(SOUNDS.LEAVE_ROOM)
+        }
+      })
+
+      room.onReconnect(() => {
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+      })
+
+      room.onLeave((code) => {
+        const shouldGoToLobby = [
+          CloseCodes.USER_KICKED,
+          CloseCodes.ROOM_DELETED,
+          CloseCodes.ROOM_FULL,
+          CloseCodes.ROOM_EMPTY,
+          CloseCodes.USER_BANNED,
+          CloseCodes.USER_RANK_TOO_LOW,
+          CloseCodes.USER_TIMEOUT
+        ].includes(code)
+
+        logger.info(`left preparation room with code ${code}`)
+        localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+        dispatch(resetPreparation())
+        if (shouldGoToLobby) {
+          const errorMessage =
+            CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
+          if (errorMessage) {
+            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
           }
+          navigate("/lobby")
+          playSound(SOUNDS.LEAVE_ROOM)
+        } else {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
         }
       })
 

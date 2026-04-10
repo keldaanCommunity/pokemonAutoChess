@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -10,7 +10,7 @@ import {
   IPlayer,
   ISimulation
 } from "../../../types"
-import { GamePhaseState, Team } from "../../../types/enum/Game"
+import { GameMode, GamePhaseState, Team } from "../../../types/enum/Game"
 import { Item } from "../../../types/enum/Item"
 import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
@@ -22,6 +22,7 @@ import { getGameScene } from "../pages/game"
 
 export interface GameStateStore {
   afterGameId: string
+  gameMode: GameMode
   phaseDuration: number
   roundTime: number
   phase: GamePhaseState
@@ -54,6 +55,7 @@ export interface GameStateStore {
 
 const initialState: GameStateStore = {
   afterGameId: "",
+  gameMode: GameMode.CUSTOM_LOBBY,
   phaseDuration: StageDuration[1],
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
@@ -84,7 +86,7 @@ const initialState: GameStateStore = {
   podium: new Array<ILeaderboardInfo>()
 }
 
-const gameSlice = createSlice({
+export const gameSlice: Slice<GameStateStore> = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
@@ -209,6 +211,9 @@ const gameSlice = createSlice({
         player.loadingProgress = action.payload.value
       }
     },
+    setGameMode: (state, action: PayloadAction<GameMode>) => {
+      state.gameMode = action.payload
+    },
     setWeather: (
       state,
       action: PayloadAction<{ value: Weather; id: string }>
@@ -318,6 +323,7 @@ export const {
   setPlayer,
   setLife,
   setSynergies,
+  setGameMode,
   setRoundTime,
   setAfterGameId,
   setPhase,

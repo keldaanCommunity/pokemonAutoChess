@@ -86,9 +86,9 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
     EffectEnum.JUSTIFIED
   ],
   [Synergy.PSYCHIC]: [
-    EffectEnum.AMNESIA,
-    EffectEnum.LIGHT_SCREEN,
-    EffectEnum.EERIE_SPELL
+    EffectEnum.PRECOGNITION,
+    EffectEnum.AURA,
+    EffectEnum.TRANSCENDENCE
   ],
   [Synergy.DARK]: [
     EffectEnum.HONE_CLAWS,

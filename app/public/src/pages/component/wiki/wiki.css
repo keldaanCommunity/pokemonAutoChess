@@ -36,9 +36,8 @@
 
 #wiki-page > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
-  padding: 0.5em 0 40px 0;
+  padding: 0.5em 0 0 0;
   overflow-y: auto;
-  scrollbar-gutter: stable;
 }
 
 #wiki-page .pokemon-name {
@@ -179,11 +178,10 @@
   font-size: 2rem;
 }
 
-#wiki-ability > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  gap: 0.5em;
-  margin: 0;
+#wiki-ability {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 #wiki-ability > ul > .my-box {
@@ -192,10 +190,10 @@
   gap: 5px;
 }
 
-#wiki-regions > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  gap: 0.5em;
+#wiki-regions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 #wiki-regions > ul > .my-box {

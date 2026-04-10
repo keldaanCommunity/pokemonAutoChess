@@ -1,5 +1,5 @@
 import { Rarity } from "../../types/enum/Game"
-import { FishingRod, Item } from "../../types/enum/Item"
+import { FishingRod, Item, ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
@@ -81,6 +81,20 @@ export const GOLDEN_BERRY_TREE_TYPES = [
   Item.GOLDEN_NANAB_BERRY,
   Item.GOLDEN_PINAP_BERRY
 ]
+
+export const GoldenEggItems = [
+  Item.DYNAMAX_BAND,
+  Item.SHINY_STONE,
+  Item.RARE_CANDY,
+  Item.EVIOLITE,
+  Item.WHITE_FLUTE,
+  Item.GOLD_BOTTLE_CAP,
+  Item.ABSORB_BULB,
+  Item.SACRED_ASH,
+  Item.COMET_SHARD,
+  Item.REPEAT_BALL,
+  Item.GOLD_BOW
+] satisfies ShinyItem[]
 
 // Synergy color mapping extracted from SVG fill colors
 export const SYNERGY_COLORS: Record<Synergy, `#${string}`> = {

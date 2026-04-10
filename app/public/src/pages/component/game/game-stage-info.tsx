@@ -31,7 +31,7 @@ export default function GameStageInfo() {
 
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const gameMode = useAppSelector((state) => state.network.game?.state.gameMode)
+  const gameMode = useAppSelector((state) => state.game.gameMode)
 
   if (!spectatedPlayer) return null
 

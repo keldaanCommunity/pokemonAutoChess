@@ -31,4 +31,42 @@
 #pokemon-report .pokemon-distribution-chart {
   flex: 1;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-switcher {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0;
+  flex-shrink: 0;
+}
+
+.view-switcher button {
+  background: rgb(84, 89, 107);
+  border: var(--border-thin);
+  border-radius: 12px;
+  color: #ccc;
+  cursor: var(--cursor-hover);
+  font-size: 11px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.view-switcher button:hover {
+  background: rgb(100, 106, 128);
+  color: white;
+}
+
+.view-switcher button.active {
+  background: rgb(110, 118, 148);
+  color: white;
+  box-shadow: var(--shadow-clickable);
+}
+
+.view-limit-hint {
+  display: inline;
+  font-size: 9px;
+  opacity: 0.6;
+  margin-left: 4px;
 }

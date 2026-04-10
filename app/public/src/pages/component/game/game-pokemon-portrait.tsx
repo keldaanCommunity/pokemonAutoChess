@@ -10,10 +10,13 @@ import {
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { values } from "../../../../../utils/schemas"
-import { selectConnectedPlayer, selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
@@ -59,7 +62,7 @@ export default function GamePokemonPortrait(props: {
   const connectedPlayer = useAppSelector(selectConnectedPlayer)
 
   const board = connectedPlayer?.board ?? null
-  
+
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
 
@@ -134,15 +137,7 @@ export default function GamePokemonPortrait(props: {
   const pokemonInPortrait =
     willEvolve && pokemonEvolution ? pokemonEvolution : pokemon
 
-  let cost = getBuyPrice(pokemon.name, specialGameRule)
-
-  if (
-    willEvolve &&
-    pokemonEvolution &&
-    specialGameRule === SpecialGameRule.BUYER_FEVER
-  ) {
-    cost = 0
-  }
+  const cost = getBuyPrice(pokemon.name, specialGameRule)
 
   const gainedSynergies =
     pokemonEvolution && willEvolve

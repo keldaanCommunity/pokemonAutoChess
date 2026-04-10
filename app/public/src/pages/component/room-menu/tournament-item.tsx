@@ -10,7 +10,7 @@ import {
 import { average } from "../../../../../utils/number"
 import { entries, values } from "../../../../../utils/schemas"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { participateInTournament } from "../../../stores/NetworkStore"
+import { participateInTournament } from "../../../network"
 import { formatDate } from "../../utils/date"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -86,12 +86,10 @@ export default function TournamentItem(props: {
               title={t("cancel_tournament_participation")}
               disabled={!registrationsOpen}
               onClick={() => {
-                dispatch(
-                  participateInTournament({
-                    tournamentId: props.tournament.id,
-                    participate: false
-                  })
-                )
+                participateInTournament({
+                  tournamentId: props.tournament.id,
+                  participate: false
+                })
               }}
             >
               {t("participating")}
@@ -101,12 +99,10 @@ export default function TournamentItem(props: {
               className="participate-btn bubbly blue"
               title={t("register_tournament_participation")}
               onClick={() => {
-                dispatch(
-                  participateInTournament({
-                    tournamentId: props.tournament.id,
-                    participate: true
-                  })
-                )
+                participateInTournament({
+                  tournamentId: props.tournament.id,
+                  participate: true
+                })
               }}
             >
               {t("participate")}

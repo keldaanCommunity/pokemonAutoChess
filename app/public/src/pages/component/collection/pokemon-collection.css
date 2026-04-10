@@ -6,12 +6,8 @@
 }
 
 #pokemon-collection .pokemon-collection-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  justify-content: center;
-  overflow-y: scroll;
-  max-height: calc(90vh - 200px);
+  height: calc(90vh - 200px);
+  width: 100%;
 }
 
 #pokemon-collection header {

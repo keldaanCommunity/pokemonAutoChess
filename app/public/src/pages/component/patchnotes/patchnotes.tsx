@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useState } from "react"
 import { flushSync } from "react-dom"
 import { useTranslation } from "react-i18next"
 import { PatchSummary } from "./patch-summary"
@@ -8,6 +8,7 @@ import "./patchnotes.css"
 export default function PatchNotes() {
   const { t } = useTranslation()
   const PATCHES = [
+    "6.9",
     "6.8",
     "6.7",
     "6.6",

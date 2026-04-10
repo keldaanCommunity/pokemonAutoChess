@@ -5,6 +5,7 @@ import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import { distanceC } from "../utils/distance"
 import { findPath } from "../utils/pathfind"
+import { AbilityStrategies, castAbility } from "./abilities/abilities"
 import type { Board } from "./board"
 import { OnMoveEffect } from "./effects/effect"
 import { drumBeat, partingShot, stenchJump } from "./effects/passives"
@@ -34,6 +35,12 @@ export default class MovingState extends PokemonState {
             y: pokemon.status.charmOrigin.positionY
           })
         }
+      } else if (
+        pokemon.pp >= pokemon.maxPP &&
+        pokemon.canCast &&
+        AbilityStrategies[pokemon.skill]?.requiresTarget === false
+      ) {
+        castAbility(pokemon.skill, pokemon, board, null)
       } else if (targetAtRange) {
         pokemon.toAttackingState()
       } else if (
@@ -89,7 +96,11 @@ export default class MovingState extends PokemonState {
           stenchJump(pokemon, board, x, y)
         }
 
-        if (pokemon.passive === Passive.PARTING_SHOT &&  farthestCoordinate.target.effects.has(EffectEnum.PARTING_SHOT) === false) {
+        if (
+          pokemon.passive === Passive.PARTING_SHOT &&
+          farthestCoordinate.target.effects.has(EffectEnum.PARTING_SHOT) ===
+            false
+        ) {
           partingShot(pokemon, farthestCoordinate.target, x, y)
         }
 

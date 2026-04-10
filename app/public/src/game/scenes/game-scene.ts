@@ -1,4 +1,4 @@
-import { Room } from "colyseus.js"
+import { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"

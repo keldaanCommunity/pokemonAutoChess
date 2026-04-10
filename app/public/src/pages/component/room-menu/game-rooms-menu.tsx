@@ -1,20 +1,16 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import { MAX_LOADING_TIME } from "../../../../../config"
 import GameState from "../../../../../rooms/states/game-state"
-import {
-  ICustomLobbyState,
-  IGameMetadata,
-  Role,
-  Transfer
-} from "../../../../../types"
+import { IGameMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { client, joinGame, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
-import { LocalStoreKeys, localStore } from "../../utils/store"
 import GameRoomItem from "./game-room-item"
 
 export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
@@ -24,13 +20,9 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     (state) => state.lobby.gameRooms
   ).filter((r) => !gameMode || r.metadata.gameMode === gameMode)
   const navigate = useNavigate()
-  const client: Client = useAppSelector((state) => state.network.client)
   const [isJoining, setJoining] = useState<boolean>(false)
   const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const lobby: Room<ICustomLobbyState> | undefined = useAppSelector(
-    (state) => state.network.lobby
-  )
   const user = useAppSelector((state) => state.network.profile)
 
   // Function to extract elo from playersInfo strings like "PlayerName [1450]"
@@ -90,24 +82,16 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   // Apply filtering and sorting to game rooms
   const filteredGameRooms = sortRooms(filterRooms(gameRooms))
 
-  const joinGame = throttle(async function joinGame(
+  const connectToGame = throttle(async function connectToGame(
     selectedRoom: RoomAvailable<IGameMetadata>
   ) {
     const token = await firebase.auth().currentUser?.getIdToken()
-    if (lobby && !isJoining && token) {
+    if (rooms.lobby && !isJoining && token) {
       setJoining(true)
-      const game: Room<GameState> = await client.joinById(selectedRoom.roomId, {
+      const game = await client.joinById<GameState>(selectedRoom.roomId, {
         idToken: token
       })
-      localStore.set(
-        LocalStoreKeys.RECONNECTION_GAME,
-        { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
-        30
-      )
-      await Promise.allSettled([
-        lobby.connection.isOpen && lobby.leave(false),
-        game.connection.isOpen && game.leave(false)
-      ])
+      joinGame(game, MAX_LOADING_TIME / 1000)
       dispatch(resetLobby())
       navigate("/game")
     }
@@ -115,9 +99,10 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
 
   const onRoomAction = (room: RoomAvailable<IGameMetadata>, action: string) => {
     if (action === "join" || action === "spectate") {
-      joinGame(room)
+      connectToGame(room)
     } else if (action === "delete" && user?.role === Role.ADMIN) {
-      confirm("Delete room ?") && lobby?.send(Transfer.DELETE_ROOM, room.roomId)
+      confirm("Delete room ?") &&
+        rooms.lobby?.send(Transfer.DELETE_ROOM, room.roomId)
     }
   }
 

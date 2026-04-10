@@ -114,6 +114,7 @@ export enum Item {
   SUPER_ROD = "SUPER_ROD",
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
+  RED_SCALE = "RED_SCALE",
   WHITE_FLUTE = "WHITE_FLUTE",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
@@ -171,20 +172,16 @@ export enum Item {
   ZYGARDE_CUBE = "ZYGARDE_CUBE",
   TM_RAGE = "TM_RAGE",
   TM_RETURN = "TM_RETURN",
-  TM_TAUNT = "TM_TAUNT",
-  TM_BULK_UP = "TM_BULK_UP",
-  TM_REFLECT = "TM_REFLECT",
-  TM_DISABLE = "TM_DISABLE",
   TM_COUNTER = "TM_COUNTER",
+  TM_DISABLE = "TM_DISABLE",
+  TM_BULK_UP = "TM_BULK_UP",
+  TM_CHARGE = "TM_CHARGE",
+  TM_REFLECT = "TM_REFLECT",
   TM_PAYDAY = "TM_PAYDAY",
-  HM_CUT = "HM_CUT",
-  HM_FLY = "HM_FLY",
-  HM_SURF = "HM_SURF",
-  HM_STRENGTH = "HM_STRENGTH",
-  HM_FLASH = "HM_FLASH",
-  HM_ROCK_SMASH = "HM_ROCK_SMASH",
-  HM_DIVE = "HM_DIVE",
-  HM_WATERFALL = "HM_WATERFALL",
+  TM_FOCUS_PUNCH = "TM_FOCUS_PUNCH",
+  TM_HYPER_BEAM = "TM_HYPER_BEAM",
+  TM_PROTECT = "TM_PROTECT",
+  TM_SKILL_SWAP = "TM_SKILL_SWAP",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
   SANDWICH = "SANDWICH",
@@ -212,6 +209,7 @@ export enum Item {
   TINY_MUSHROOM = "TINY_MUSHROOM",
   BIG_MUSHROOM = "BIG_MUSHROOM",
   BALM_MUSHROOM = "BALM_MUSHROOM",
+  RICE = "RICE",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -291,6 +289,8 @@ export enum Item {
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
+  LEADERS_CREST = "LEADERS_CREST",
+  LAPRAS_PASSPORT = "LAPRAS_PASSPORT",
   CELL_BATTERY = "CELL_BATTERY",
   SILK_SCARF = "SILK_SCARF",
   FRIEND_BOW = "FRIEND_BOW",
@@ -302,7 +302,10 @@ export enum Item {
   LUCKY_RIBBON = "LUCKY_RIBBON",
   COVER_BAND = "COVER_BAND",
   EFFICIENT_BANDANNA = "EFFICIENT_BANDANNA",
-  NULLIFY_BANDANNA = "NULLIFY_BANDANNA"
+  NULLIFY_BANDANNA = "NULLIFY_BANDANNA",
+  TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
+  TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
+  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY"
 }
 
 export const MemoryDiscs = [
@@ -389,7 +392,9 @@ export const TownItems = [
   ...MissionOrders,
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
-  Item.WANTED_NOTICE
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT
 ] satisfies Item[]
 
 // should be excluded from carousels
@@ -416,14 +421,13 @@ export const SpecialItems: Item[] = [
   Item.RAINBOW_SWIRL_FLAVOR,
   Item.RICH_MULCH,
   Item.AMAZE_MULCH,
-  Item.COMFEY,
-  Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
   Item.CORNERSTONE_MASK,
   Item.HEARTHFLAME_MASK,
   Item.ZYGARDE_CUBE,
+  Item.METEORITE,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
   Item.MYSTERY_BOX,
@@ -431,7 +435,11 @@ export const SpecialItems: Item[] = [
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS,
   Item.MEMORY_DISCS,
-  ...MemoryDiscs
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -612,8 +620,11 @@ export const ShinyItems = [
   Item.SACRED_ASH,
   Item.COMET_SHARD,
   Item.REPEAT_BALL,
-  Item.GOLD_BOW
+  Item.GOLD_BOW,
+  Item.RED_SCALE
 ] satisfies Item[]
+
+export type ShinyItem = (typeof ShinyItems)[number]
 
 export const WeatherRocks = [
   Item.SUN_STONE,
@@ -728,7 +739,7 @@ export const ToolsBuried: Tool[] = [
   Item.DRAGON_SCALE
 ]
 
-export const SynergyItems = [
+export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,
@@ -757,7 +768,11 @@ export const SynergyItems = [
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.INCENSE,
-  Item.FRIEND_BOW,
+  Item.FRIEND_BOW
+] satisfies Item[]
+
+export const SynergyItems = [
+  ...SynergyItemsNoSpecial,
   ...MemoryDiscs
 ] satisfies Item[]
 
@@ -864,45 +879,42 @@ export const OgerponMasks: Item[] = [
   Item.HEARTHFLAME_MASK
 ]
 
-export const TMs = [
+export const TMsBronze = [
   Item.TM_RAGE,
   Item.TM_RETURN,
-  Item.TM_TAUNT,
-  Item.TM_BULK_UP,
-  Item.TM_REFLECT,
-  Item.TM_DISABLE,
   Item.TM_COUNTER,
+  Item.TM_DISABLE
+]
+
+export const TMsSilver = [
+  Item.TM_BULK_UP,
+  Item.TM_CHARGE,
+  Item.TM_REFLECT,
   Item.TM_PAYDAY
 ]
 
-export const HMs = [
-  Item.HM_CUT,
-  Item.HM_FLY,
-  Item.HM_SURF,
-  Item.HM_STRENGTH,
-  Item.HM_FLASH,
-  Item.HM_ROCK_SMASH,
-  Item.HM_WATERFALL,
-  Item.HM_DIVE
+export const TMsGold = [
+  Item.TM_FOCUS_PUNCH,
+  Item.TM_HYPER_BEAM,
+  Item.TM_PROTECT,
+  Item.TM_SKILL_SWAP
 ]
+
+export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
   [Item.TM_RETURN]: Ability.RETURN,
-  [Item.TM_TAUNT]: Ability.TAUNT,
-  [Item.TM_BULK_UP]: Ability.BULK_UP,
-  [Item.TM_REFLECT]: Ability.REFLECT,
-  [Item.TM_DISABLE]: Ability.DISABLE,
   [Item.TM_COUNTER]: Ability.COUNTER,
+  [Item.TM_DISABLE]: Ability.DISABLE,
+  [Item.TM_BULK_UP]: Ability.BULK_UP,
+  [Item.TM_CHARGE]: Ability.CHARGE,
+  [Item.TM_REFLECT]: Ability.REFLECT,
   [Item.TM_PAYDAY]: Ability.PAYDAY,
-  [Item.HM_CUT]: Ability.CUT,
-  [Item.HM_FLY]: Ability.FLY,
-  [Item.HM_SURF]: Ability.SURF,
-  [Item.HM_STRENGTH]: Ability.STRENGTH,
-  [Item.HM_FLASH]: Ability.FLASH,
-  [Item.HM_ROCK_SMASH]: Ability.ROCK_SMASH,
-  [Item.HM_WATERFALL]: Ability.WATERFALL,
-  [Item.HM_DIVE]: Ability.DIVE
+  [Item.TM_FOCUS_PUNCH]: Ability.FOCUS_PUNCH,
+  [Item.TM_HYPER_BEAM]: Ability.HYPER_BEAM,
+  [Item.TM_PROTECT]: Ability.PROTECT,
+  [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
 export const Dishes = [
@@ -949,7 +961,8 @@ export const Dishes = [
   Item.MUSHROOMS,
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
-  Item.BALM_MUSHROOM
+  Item.BALM_MUSHROOM,
+  Item.RICE
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
@@ -1046,7 +1059,6 @@ export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
   ...TMs,
-  ...HMs,
   ...Flavors,
   ...Dishes,
   ...SynergyGems,
@@ -1069,12 +1081,14 @@ export const UnholdableItems = [
   Item.COIN,
   Item.NUGGET,
   Item.BIG_NUGGET,
-  Item.WANTED_NOTICE
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT,
+  Item.RED_SCALE
 ] satisfies Item[]
 
 export const ConsumableItems = [
   ...TMs,
-  ...HMs,
   ...Dishes,
   ...Mulches,
   ...Flavors,

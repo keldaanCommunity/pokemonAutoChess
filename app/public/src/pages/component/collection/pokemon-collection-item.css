@@ -2,6 +2,8 @@
   cursor: var(--cursor-hover);
   padding: 0;
   background-color: var(--color-bg-secondary);
+  width: 80px;
+  box-sizing: content-box;
 }
 
 .pokemon-collection-item > img {

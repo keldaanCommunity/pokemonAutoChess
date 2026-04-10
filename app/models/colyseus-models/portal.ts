@@ -1,5 +1,4 @@
 import { Schema, type } from "@colyseus/schema"
-import { nanoid } from "nanoid"
 import { IPortal, ISynergySymbol } from "../../types"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -14,7 +13,7 @@ export class Portal extends Schema implements IPortal {
 
   constructor(x: number, y: number, index: number) {
     super()
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.x = x
     this.y = y
     this.index = index
@@ -31,7 +30,7 @@ export class SynergySymbol extends Schema implements ISynergySymbol {
 
   constructor(x: number, y: number, synergy: Synergy, index: number) {
     super()
-    this.id = nanoid()
+    this.id = crypto.randomUUID()
     this.x = x
     this.y = y
     this.synergy = synergy

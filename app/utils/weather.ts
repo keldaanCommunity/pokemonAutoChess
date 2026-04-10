@@ -4,12 +4,14 @@ import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { WeatherByWeatherRocks } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
+import { Synergy } from "../types/enum/Synergy"
 import {
   PassivesAssociatedToWeather,
   Weather,
   WeatherAssociatedToSynergy
 } from "../types/enum/Weather"
 import { hasKey } from "./map"
+import { values } from "./schemas"
 
 export function getWeather(
   bluePlayer: Player,
@@ -210,6 +212,18 @@ export function getWeather(
               Weather.DROUGHT,
               Weather.SANDSTORM
             ]) ?? Weather.DROUGHT
+          boardWeatherScore.set(
+            dominant,
+            (boardWeatherScore.get(dominant) ?? 0) + 100
+          )
+        }
+
+        if (pkm.passive === Passive.DROUGHT_OR_ZENITH) {
+          const nbLight = values(board).filter((p) =>
+            p.types.has(Synergy.LIGHT)
+          )
+          const nbFire = values(board).filter((p) => p.types.has(Synergy.FIRE))
+          const dominant = nbLight >= nbFire ? Weather.ZENITH : Weather.DROUGHT
           boardWeatherScore.set(
             dominant,
             (boardWeatherScore.get(dominant) ?? 0) + 100

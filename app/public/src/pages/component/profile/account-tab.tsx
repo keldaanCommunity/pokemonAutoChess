@@ -1,22 +1,19 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { USERNAME_REGEXP } from "../../../../../config"
+import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import {
-  changeName,
-  deleteAccount,
-  setErrorAlertMessage
-} from "../../../stores/NetworkStore"
+import { deleteAccount, heapSnapshot } from "../../../network"
+import { changeName, setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export function AccountTab() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
 
   const promptDeleteAccount = () => {
     const confirmation = prompt(t("delete_account_confirmation"))
     if (confirmation === t("delete_account_passphrase")) {
-      dispatch(deleteAccount())
+      deleteAccount()
     } else if (confirmation != null) {
       alert(t("delete_account_confirmation_failed"))
     }
@@ -35,6 +32,14 @@ export function AccountTab() {
       <button className="bubbly red" onClick={() => promptDeleteAccount()}>
         {t("delete_account")}
       </button>
+      {user.role === Role.ADMIN && (
+        <>
+          <h3>{t("heap_snapshot")}</h3>
+          <button className="bubbly red" onClick={() => heapSnapshot()}>
+            {t("heap_snapshot")}
+          </button>
+        </>
+      )}
     </div>
   ) : null
 }

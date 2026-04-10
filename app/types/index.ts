@@ -1,4 +1,4 @@
-import { ArraySchema, MapSchema, Schema, SetSchema } from "@colyseus/schema"
+import { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
@@ -8,16 +8,13 @@ import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
-import Message from "../models/colyseus-models/message"
 import Player from "../models/colyseus-models/player"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import Status from "../models/colyseus-models/status"
 import Synergies from "../models/colyseus-models/synergies"
-import { TournamentSchema } from "../models/colyseus-models/tournament"
 import { Effects } from "../models/effects"
 import GameRoom from "../rooms/game-room"
-import { ILeaderboardInfo } from "../types/interfaces/LeaderboardInfo"
 import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
@@ -36,6 +33,7 @@ import { Passive } from "./enum/Passive"
 import { Pkm, PkmProposition } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
+import { GameStats } from "./interfaces/GameStats"
 
 export * from "./enum/Emotion"
 export * from "./enum/Item"
@@ -65,10 +63,8 @@ export enum Transfer {
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   CHANGE_SELECTED_EMOTION = "CHANGE_SELECTED_EMOTION",
   NEW_MESSAGE = "NEW_MESSAGE",
-  SEARCH = "SEARCH",
   CHANGE_NAME = "CHANGE_NAME",
   CHANGE_AVATAR = "CHANGE_AVATAR",
-  REQUEST_BOT_MONITOR = "REQUEST_BOT_MONITOR",
   OPEN_BOOSTER = "OPEN_BOOSTER",
   BUY_BOOSTER = "BUY_BOOSTER",
   ADD_BOT = "ADD_BOT",
@@ -97,7 +93,6 @@ export enum Transfer {
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
   SEARCH_BY_ID = "SEARCH_BY_ID",
-  SUGGESTIONS = "SUGGESTIONS",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   NEW_TOURNAMENT = "NEW_TOURNAMENT",
@@ -111,9 +106,10 @@ export enum Transfer {
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
-  BANNED = "BANNED",
+  ALERT = "ALERT",
   POKEMON_DAMAGE = "POKEMON_DAMAGE",
   POKEMON_HEAL = "POKEMON_HEAL",
+  DISPLAY_TEXT = "DISPLAY_TEXT",
   WANDERER = "WANDERER",
   WANDERER_CLICKED = "WANDERER_CLICKED",
   VECTOR = "VECTOR",
@@ -127,6 +123,7 @@ export enum Transfer {
   REMOVE_ROOM = "REMOVE_ROOM",
   UNBAN = "UNBAN",
   BOARD_EVENT = "BOARD_EVENT",
+  CLEAR_BOARD_EVENT = "CLEAR_BOARD_EVENT",
   CLEAR_BOARD = "CLEAR_BOARD",
   SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
@@ -138,7 +135,9 @@ export enum Transfer {
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
   HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
   RECONNECT_PROMPT = "RECONNECT_PROMPT",
-  OVERWRITE_BOARD = "OVERWRITE_BOARD"
+  OVERWRITE_BOARD = "OVERWRITE_BOARD",
+  NOTIFICATIONS = "NOTIFICATIONS",
+  NOTIFICATION_SEEN = "NOTIFICATION_SEEN"
 }
 
 export enum ReadWriteMode {
@@ -184,24 +183,6 @@ export interface IDragDropCombineMessage {
   itemB: Item
 }
 
-export interface ICustomLobbyState extends Schema {
-  ccu: number
-  messages: ArraySchema<Message>
-  leaderboard: ILeaderboardInfo[]
-  botLeaderboard: ILeaderboardInfo[]
-  levelLeaderboard: ILeaderboardInfo[]
-  tournaments: ArraySchema<TournamentSchema>
-  clients: number
-}
-
-export interface IGameState extends Schema {
-  afterGameId: string
-  roundTime: number
-  phase: string
-  players: MapSchema<IPlayer>
-  stageLevel: number
-}
-
 export interface ISimplePlayer {
   elo: number
   games: number
@@ -218,9 +199,7 @@ export interface ISimplePlayer {
 }
 
 export interface IAfterGamePlayer extends ISimplePlayer {
-  moneyEarned: number
-  playerDamageDealt: number
-  rerollCount: number
+  gameStats: GameStats
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {
@@ -285,6 +264,7 @@ export interface IPlayer {
   opponentTitle: string
   boardSize: number
   items: ArraySchema<Item>
+  scarvesItems: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean
@@ -311,15 +291,14 @@ export interface IPlayer {
   ultraRegionalPool: Pkm[]
   opponents: Map<string, number>
   ghost: boolean
-  rerollCount: number
-  totalMoneyEarned: number
-  totalPlayerDamageDealt: number
-  wildChance: number
   eggChance: number
   goldenEggChance: number
   cellBattery: number
   lightX: number
   lightY: number
+  titles: Set<Title>
+  regions: DungeonPMDO[]
+  gameStats: GameStats
 }
 
 export interface IPokemon {
@@ -351,10 +330,10 @@ export interface IPokemon {
   stacks: number
   stacksRequired: number
   skill: Ability
+  tm: Ability
   passive: Passive
   items: SetSchema<Item>
   dishes: SetSchema<Item>
-  tm: Ability | null
   shiny: boolean
   emotion: Emotion
   additional: boolean
@@ -392,6 +371,7 @@ export interface ISimulation {
   redDpsMeter: MapSchema<Dps>
   bluePlayerId: string
   redPlayerId: string
+  broadcastToSpectators(transfer: Transfer, data: any): void
 }
 
 export interface ISimulationCommand {
@@ -432,14 +412,14 @@ export interface IPokemonEntity {
   applyStat(stat: Stat, value: number): void
   addAbilityPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addLuck(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
@@ -452,14 +432,14 @@ export interface IPokemonEntity {
   ): void
   addAttack(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addSpeed(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
@@ -479,33 +459,33 @@ export interface IPokemonEntity {
   ): void
   addDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addSpecialDefense(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent?: boolean
   ): void
   addCritChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
   addCritPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
   addDodgeChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ): void
@@ -561,6 +541,7 @@ export interface IPokemonEntity {
   types: SetSchema<Synergy>
   stars: number
   skill: Ability
+  tm: Ability
   passive: Passive
   status: Status
   count: Count
@@ -747,7 +728,12 @@ export enum Title {
   AQUARIOPHILE = "AQUARIOPHILE",
   POFFIN_MASTER = "POFFIN_MASTER",
   TOP_GUN = "TOP_GUN",
-  SCOUT = "SCOUT"
+  SCOUT = "SCOUT",
+  RESCUE_TEAM_MEMBER = "RESCUE_TEAM_MEMBER",
+  EXPLORER = "EXPLORER",
+  POSTMAN = "POSTMAN",
+  SURVEY_CORPS = "SURVEY_CORPS",
+  GUILDMASTER = "GUILDMASTER"
 }
 
 export interface IBoardEvent {

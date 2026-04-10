@@ -1,6 +1,12 @@
 import { monitor } from "@colyseus/monitor"
-import config from "@colyseus/tools"
-import { matchMaker, RedisDriver, RedisPresence, ServerOptions } from "colyseus"
+import {
+  defineRoom,
+  defineServer,
+  matchMaker,
+  RedisDriver,
+  RedisPresence,
+  ServerOptions
+} from "colyseus"
 import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
@@ -10,7 +16,11 @@ import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
-import { MAX_CONCURRENT_PLAYERS_ON_SERVER, SynergyTriggers } from "./config"
+import {
+  MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  SynergyTriggers,
+  USERNAME_REGEXP
+} from "./config"
 import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
@@ -42,7 +52,7 @@ import {
   getMetaRegions,
   getMetaV2
 } from "./services/meta"
-import { Role } from "./types"
+import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
@@ -104,8 +114,8 @@ if (process.env.NODE_APP_INSTANCE) {
   gameOptions.devMode = true
 }*/
 
-export default config({
-  options: gameOptions,
+export const server = defineServer({
+  ...gameOptions,
 
   /* uWebSockets turned out to be unstable in production, so we are using the default transport
   2025-06-29T16:50:08: Error: Invalid access of closed uWS.WebSocket/SSLWebSocket.
@@ -117,17 +127,14 @@ export default config({
     })
   },*/
 
-  initializeGameServer: (gameServer) => {
-    /**
-     * Define your room handlers:
-     */
-    gameServer.define("after-game", AfterGameRoom)
-    gameServer.define("lobby", CustomLobbyRoom)
-    gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-    gameServer.define("game", GameRoom).enableRealtimeListing()
+  rooms: {
+    "after-game": defineRoom(AfterGameRoom),
+    lobby: defineRoom(CustomLobbyRoom),
+    preparation: defineRoom(PreparationRoom).enableRealtimeListing(),
+    game: defineRoom(GameRoom).enableRealtimeListing()
   },
 
-  initializeExpress: (app) => {
+  express: (app) => {
     /**
      * Bind your custom express routes here:
      * Read more: https://expressjs.com/en/starter/basic-routing.html
@@ -148,6 +155,7 @@ export default config({
               "https://*.doubleclick.net", // google ads, required for youtube embedded
               "https://*.githubusercontent.com",
               "http://raw.githubusercontent.com",
+              "https://api.github.com",
               "https://*.youtube.com",
               "https://pokemon.darkatek7.com",
               "https://eternara.site",
@@ -226,6 +234,10 @@ export default config({
     })
 
     app.get("/gameboy", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
+    app.get("/translations", (req, res) => {
       res.sendFile(viewsSrc)
     })
 
@@ -402,6 +414,57 @@ export default config({
       return res.status(200).json(messages ?? [])
     })
 
+    app.get("/players", async (req, res) => {
+      try {
+        const searchTerm = req.query?.name?.toString().trim() || ""
+        // Escape regex special chars to prevent injection/ReDoS
+        const escapedTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+        const user = await UserMetadata.findOne({ uid: userAuth.uid })
+        const showBanned =
+          user?.role === Role.ADMIN || user?.role === Role.MODERATOR
+
+        const users = await UserMetadata.find(
+          {
+            displayName: { $regex: `^${escapedTerm}` }, // ^ makes it a prefix match, enabling index use
+            ...(showBanned ? {} : { banned: false })
+          },
+          [
+            "uid",
+            "elo",
+            "displayName",
+            "level",
+            "avatar",
+            ...(showBanned ? ["banned"] : [])
+          ],
+          {
+            limit: 100,
+            sort: { level: -1 },
+            collation: { locale: "en", strength: 2 } // must match the index collation
+          }
+        )
+
+        if (users) {
+          const suggestions: Array<ISuggestionUser> = users.map((u) => {
+            return {
+              id: u.uid,
+              elo: u.elo,
+              name: u.displayName,
+              level: u.level,
+              avatar: u.avatar,
+              banned: u.banned
+            }
+          })
+          res.status(200).json(suggestions)
+        }
+      } catch (error) {
+        logger.error(error)
+        res.status(500).json({ error: "Error fetching players" })
+      }
+    })
+
     app.get("/bots", async (req, res) => {
       const approved =
         req.query.approved === "true"
@@ -513,6 +576,72 @@ export default config({
       } catch (error) {
         logger.error("Error approving bot", error)
         res.status(500).send("Error approving bot")
+      }
+    })
+
+    app.get("/moderation/chat-search", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const user = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (!user || (user.role !== Role.ADMIN && user.role !== Role.MODERATOR)) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+      const query = req.query.query?.toString().trim()
+      if (!query || query.length < 2) {
+        return res
+          .status(400)
+          .json({ error: "Query must be at least 2 characters" })
+      }
+      // Escape regex special chars to prevent injection/ReDoS
+      const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      try {
+        const messages = await chatV2
+          .find({ payload: { $regex: escapedQuery } }, undefined, {
+            limit: 50,
+            sort: { time: -1 }
+          })
+          .lean()
+        res.status(200).json(messages)
+      } catch (error) {
+        logger.error("Error searching chat messages", error)
+        res.status(500).json({ error: "Error searching messages" })
+      }
+    })
+
+    app.post("/moderation/rename-account", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+      const caller = await UserMetadata.findOne({ uid: userAuth.uid })
+      if (
+        !caller ||
+        (caller.role !== Role.ADMIN && caller.role !== Role.MODERATOR)
+      ) {
+        res.status(403).send("Unauthorized")
+        return
+      }
+      const { uid, newName } = req.body
+      if (!uid || typeof uid !== "string") {
+        return res.status(400).json({ error: "uid is required" })
+      }
+      if (!newName || typeof newName !== "string") {
+        return res.status(400).json({ error: "newName is required" })
+      }
+      if (!USERNAME_REGEXP.test(newName)) {
+        return res.status(400).json({ error: "Invalid name format" })
+      }
+      try {
+        const target = await UserMetadata.findOne({ uid })
+        if (!target) return res.status(404).json({ error: "User not found" })
+        target.displayName = newName
+        await target.save()
+        logger.info(
+          `${userAuth.displayName} renamed account ${uid} to ${newName}`
+        )
+        res.status(200).json({ displayName: newName })
+      } catch (error) {
+        logger.error("Error renaming account", error)
+        res.status(500).json({ error: "Error renaming account" })
       }
     })
 

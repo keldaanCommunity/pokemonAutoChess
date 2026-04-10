@@ -11,6 +11,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from "../../../hooks"
+import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
@@ -20,6 +21,7 @@ import PokemonCollection from "../collection/pokemon-collection"
 import Jukebox from "../jukebox/jukebox"
 import MetaReport from "../meta-report/meta-report"
 import { Modal } from "../modal/modal"
+import ModerationPanel from "../moderation/moderation-panel"
 import GameOptionsModal from "../options/game-options-modal"
 import Patchnotes from "../patchnotes/patchnotes"
 import { usePatchVersion } from "../patchnotes/usePatchVersion"
@@ -56,6 +58,7 @@ export function MainSidebar(props: MainSidebarProps) {
   const { t } = useTranslation()
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
+  const [preferences] = usePreferences()
 
   const { isNewPatch, updateVersionChecked } = usePatchVersion()
 
@@ -83,6 +86,39 @@ export function MainSidebar(props: MainSidebarProps) {
       }
     }
   }, [])
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      //if event occures in an input, textarea or select, ignore it
+      if (
+        ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
+          (e.target as HTMLElement).tagName
+        )
+      ) {
+        return
+      }
+      const key = e.key.toUpperCase()
+      const keybindings = preferences.keybindings
+
+      if (key === keybindings.wiki) {
+        e.preventDefault()
+        setModal((current) => (current === "wiki" ? undefined : "wiki"))
+      } else if (
+        key === keybindings.team_planner &&
+        profileLevel >= GADGETS.TEAM_PLANNER.levelRequired
+      ) {
+        e.preventDefault()
+        setModal((current) =>
+          current === "team-builder" ? undefined : "team-builder"
+        )
+      }
+    }
+
+    window.addEventListener("keydown", handleKeydown)
+    return () => {
+      window.removeEventListener("keydown", handleKeydown)
+    }
+  }, [preferences.keybindings, profileLevel])
 
   const player = useAppSelector(selectConnectedPlayer)
   const playersAlive = useAppSelector(
@@ -244,6 +280,18 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
+        {page !== "game" &&
+          (profile?.role === Role.MODERATOR ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink
+              svg="hammer"
+              location="moderation"
+              handleClick={changeModal}
+            >
+              Moderation
+            </NavLink>
+          )}
+
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
             <NavLink
@@ -399,6 +447,7 @@ function NavLink(props: NavLinkProps) {
 export type Modals =
   | "announcement"
   | "booster"
+  | "moderation"
   | "collection"
   | "jukebox"
   | "keybinds"
@@ -449,6 +498,7 @@ function Modals({
       <Modal
         onClose={() => {
           closeModal()
+          console.log("Resetting searched user on close modal profile")
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
@@ -513,6 +563,13 @@ function Modals({
         header="Tournaments"
       >
         <TournamentsAdmin />
+      </Modal>
+      <Modal
+        onClose={closeModal}
+        show={modal === "moderation"}
+        header="Moderation"
+      >
+        <ModerationPanel />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />

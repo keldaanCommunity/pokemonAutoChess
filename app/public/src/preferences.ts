@@ -14,6 +14,8 @@ export type Keybindings = {
   prev_player: string
   next_player: string
   board_return: string
+  wiki: string
+  team_planner: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -22,6 +24,7 @@ export interface IPreferencesState {
   showDpsMeter: boolean
   dpsMeterPosition: { x: number; y: number }
   synergiesPosition: { x: number; y: number }
+  expeditionsPosition: { x: number; y: number }
   showDetailsOnHover: boolean
   showDamageNumbers: boolean
   showEvolutions: boolean
@@ -47,10 +50,11 @@ const defaultPreferences: IPreferencesState = {
   showDpsMeter: false,
   dpsMeterPosition: { x: 0, y: 0 },
   synergiesPosition: { x: 0, y: 0 },
+  expeditionsPosition: { x: 0, y: 0 },
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
-  showAltForms: false,
+  showAltForms: true,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
@@ -72,7 +76,9 @@ const defaultPreferences: IPreferencesState = {
     emote: "A",
     prev_player: "PAGE_UP",
     next_player: "PAGE_DOWN",
-    board_return: "HOME"
+    board_return: "HOME",
+    wiki: "W",
+    team_planner: "T"
   }
 }
 

@@ -1,0 +1,89 @@
+.pr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-modal {
+  width: min(520px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 24px;
+  border: var(--border-thin);
+  border-radius: 8px;
+}
+
+.pr-modal h3 {
+  margin: 0 0 4px;
+  font-size: 1.1em;
+}
+
+.pr-modal p {
+  margin: 0;
+  font-size: 0.875em;
+  color: var(--color-fg-secondary);
+  line-height: 1.5;
+}
+
+.pr-modal label {
+  font-size: 0.875em;
+  font-weight: bold;
+}
+
+.pr-modal-hint {
+  font-size: 0.78em !important;
+  opacity: 0.7;
+}
+
+.pr-modal-token-input {
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: var(--border-extra-thin);
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-fg-primary);
+  font-size: 0.875em;
+  font-family: monospace;
+}
+
+.pr-modal-token-input:focus {
+  outline: none;
+  border-color: var(--color-bg-accent);
+}
+
+.pr-modal-progress {
+  font-size: 0.85em !important;
+  color: var(--color-fg-accent) !important;
+}
+
+.pr-modal-error {
+  font-size: 0.85em !important;
+  color: var(--color-fg-red) !important;
+}
+
+.pr-modal-success {
+  color: var(--color-fg-green) !important;
+  font-weight: bold;
+}
+
+.pr-modal-link {
+  font-size: 0.8em;
+  word-break: break-all;
+}
+
+.pr-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* green bubbly variant */
+.bubbly.green {
+  background-color: var(--color-bg-green);
+}

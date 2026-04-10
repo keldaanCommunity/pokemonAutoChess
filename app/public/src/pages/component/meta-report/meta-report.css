@@ -54,9 +54,21 @@
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
   color: white;
-  display: grid;
-  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
   padding: 0.5em;
   overflow-x: auto;
-  grid-template-columns: 2ch 48px 16ch 16ch 10ch 1fr;
+}
+
+.item-stat-main {
+  display: grid;
+  gap: 1em;
+  align-items: center;
+  grid-template-columns: auto 48px 16ch 10ch 10ch 1fr;
+}
+
+.item-stat-metric {
+  display: flex;
+  flex-direction: column;
 }

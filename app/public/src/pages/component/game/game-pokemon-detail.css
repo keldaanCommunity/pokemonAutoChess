@@ -160,6 +160,7 @@
 
 .game-pokemon-detail-ult {
   grid-column: span 3;
+  text-align: left;
 }
 
 .game-pokemon-detail-ult .ability-name {
@@ -170,6 +171,13 @@
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-pokemon-detail-ult .ability-name img {
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+  vertical-align: bottom;
 }
 
 .game-pokemon-detail-ult .custom-description {

@@ -54,7 +54,9 @@ export class Board {
         const effectsOnNewCell = this.boardEffects[index]
         effectsOnNewCell.forEach((effectOnNewCell) => {
           if (!entity.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
-            //logger.debug(`${value.name} gained effect ${effectOnNewCell} by moving into board effect`)
+            // logger.debug(
+            //   `${entity.name} gained effect ${effectOnNewCell} by moving into board effect`
+            // )
             entity.effects.add(effectOnNewCell)
           }
         })
@@ -231,12 +233,17 @@ export class Board {
     return cells
   }
 
-  getCellsInRange(cellX: number, cellY: number, range: number) {
+  getCellsInRange(
+    cellX: number,
+    cellY: number,
+    range: number,
+    includesCenter: boolean
+  ) {
     const cells = new Array<Cell>()
     range = Math.floor(Math.abs(range))
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
-        if (x == cellX && y == cellY) continue
+        if (x == cellX && y == cellY && !includesCenter) continue
         const distance = distanceC(cellX, cellY, x, y)
         if (this.isOnBoard(x, y) && distance <= range) {
           cells.push({ x, y, value: this.cells[this.columns * y + x] })
@@ -260,7 +267,7 @@ export class Board {
     cellX: number,
     cellY: number,
     radius: number,
-    includesCenter = false
+    includesCenter: boolean
   ) {
     // see https://i.imgur.com/jPzf35e.png
     const cells = new Array<Cell>()
@@ -382,7 +389,7 @@ export class Board {
     while (candidates[0].value !== undefined && radius < 5) {
       candidates.shift()
       if (candidates.length === 0) {
-        candidates.push(...this.getCellsInRadius(cx, cy, radius))
+        candidates.push(...this.getCellsInRadius(cx, cy, radius, false))
         radius++
       }
     }
@@ -454,14 +461,16 @@ export class Board {
   getFarthestTargetCoordinateAvailablePlace(
     pokemon: IPokemonEntity,
     targetAlly: boolean = false
-  ):
-    | { x: number; y: number; distance: number; target: PokemonEntity }
-    | undefined {
+  ): { x: number; y: number; distance: number; target: PokemonEntity } | null {
     let maxTargetDistance = 0
     let maxCellDistance = 0
-    let selectedCell:
-      | { x: number; y: number; distance: number; target: PokemonEntity }
-      | undefined
+    let selectedCell: {
+      x: number
+      y: number
+      distance: number
+      target: PokemonEntity
+    } | null = null
+    let farthestTarget: PokemonEntity | undefined
 
     this.forEach((x: number, y: number, entity: PokemonEntity | undefined) => {
       if (entity && entity.isTargettableBy(pokemon, !targetAlly, targetAlly)) {
@@ -472,6 +481,8 @@ export class Board {
           entity.positionY
         )
         if (targetDistance > maxTargetDistance) {
+          maxTargetDistance = targetDistance
+          farthestTarget = entity
           maxCellDistance = 0
           const freeCells = this.getAdjacentCells(x, y).filter(
             (cell) => this.getEntityOnCell(cell.x, cell.y) === undefined
@@ -493,12 +504,21 @@ export class Board {
               }
             }
           }
-          if (selectedCell?.target === entity) {
-            maxTargetDistance = targetDistance
-          }
         }
       }
     })
+
+    if (selectedCell === null && farthestTarget) {
+      // no adjacent free cells around farthest targets, fallback to closest free cell of farthest target
+      const freeCell = this.getClosestAvailablePlace(
+        farthestTarget.positionX,
+        farthestTarget.positionY
+      )
+      if (freeCell) {
+        selectedCell = { ...freeCell, target: farthestTarget }
+      }
+    }
+
     return selectedCell
   }
 
@@ -513,6 +533,7 @@ export class Board {
     if (entityOnCell) {
       entityOnCell.effects.add(effect)
     }
+
     if (!previousEffects.has(effect)) {
       this.boardEffects[y * this.columns + x].add(effect)
       // show anim effect client side
@@ -525,18 +546,36 @@ export class Board {
     }
   }
 
-  clearBoardEffect(x: number, y: number, simulation: Simulation) {
+  clearBoardEffect(
+    x: number,
+    y: number,
+    simulation: Simulation,
+    effectToClear?: BoardEffect
+  ) {
     const index = y * this.columns + x
     const existingEffects = this.boardEffects[index]
     const entityOnCell = this.getEntityOnCell(x, y)
 
-    this.boardEffects[index].clear()
-    if (entityOnCell) {
-      existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
-    }
-    if (existingEffects.size > 0) {
-      // clean effect anim client side
-      simulation.room.broadcast(Transfer.BOARD_EVENT, {
+    if (effectToClear) {
+      // Clear specific effect
+      existingEffects.delete(effectToClear)
+      if (entityOnCell) {
+        entityOnCell.effects.delete(effectToClear)
+      }
+      logger.debug(`Clearing board effect ${effectToClear} at (${x}, ${y})`)
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
+        simulationId: simulation.id,
+        effect: effectToClear,
+        x,
+        y
+      })
+    } else {
+      // Clear all effects
+      existingEffects.clear()
+      if (entityOnCell) {
+        existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
+      }
+      simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,
         x,

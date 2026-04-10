@@ -1,4 +1,4 @@
-import { FIGHTING_PHASE_DURATION } from "../config"
+import { FIGHTING_PHASE_DURATION, getBaseAltForm } from "../config"
 import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Berries, Dishes, Item } from "../types/enum/Item"
@@ -15,7 +15,7 @@ import {
   PeriodicEffect
 } from "./effects/effect"
 
-export const DishByPkm: { [pkm in Pkm]?: Item } = {
+export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.LICKITUNG]: Item.RAGE_CANDY_BAR,
   [Pkm.LICKILICKY]: Item.RAGE_CANDY_BAR,
   [Pkm.SINISTEA]: Item.TEA,
@@ -75,8 +75,13 @@ export const DishByPkm: { [pkm in Pkm]?: Item } = {
   [Pkm.DEERLING_SUMMER]: Item.TEA,
   [Pkm.SAWSBUCK_SUMMER]: Item.TEA,
   [Pkm.LECHONK]: Item.MUSHROOMS,
-  [Pkm.OINKOLOGNE_MALE]: Item.MUSHROOMS
+  [Pkm.OINKOLOGNE_MALE]: Item.MUSHROOMS,
   //[Pkm.OINKOLOGNE_FEMALE]: Item.MUSHROOMS
+  [Pkm.DONDOZO]: Item.RICE,
+  [Pkm.TATSUGIRI_CURLY]: null,
+  [Pkm.TATSUGIRI_DROOPY]: null,
+  [Pkm.TATSUGIRI_STRETCHY]: null,
+  [Pkm.GUZZLORD]: null
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -95,7 +100,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   BALM_MUSHROOM: [
     new OnSpawnEffect((entity) => {
       entity.status.triggerRuneProtect(30000, entity, entity)
-      entity.addSpeed(40, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
       entity.effects.add(EffectEnum.BALM_MUSHROOM)
       entity.effectsSet.add(
         new PeriodicEffect(
@@ -142,7 +147,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     }),
     new OnHitEffect(({ attacker, target }) => {
       if (attacker.effects.has(EffectEnum.CASTELIACONE)) {
-        target.status.triggerFreeze(5000, target)
+        target.status.triggerFreeze(5000, target, attacker)
         attacker.effects.delete(EffectEnum.CASTELIACONE)
       }
     })
@@ -219,10 +224,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   MUSHROOMS: [],
   NUTRITIOUS_EGG: [
     new OnSpawnEffect((entity) => {
-      // Start the next fight with +30% base ATK, DEF, SPE_DEF and AP
-      entity.addAttack(0.3 * entity.baseAtk, entity, 0, false)
-      entity.addDefense(0.3 * entity.baseDef, entity, 0, false)
-      entity.addSpecialDefense(0.3 * entity.baseSpeDef, entity, 0, false)
+      // Start the next fight with +50% base ATK, DEF, SPE_DEF and AP
+      entity.addAttack(0.5 * entity.baseAtk, entity, 0, false)
+      entity.addDefense(0.5 * entity.baseDef, entity, 0, false)
+      entity.addSpecialDefense(0.5 * entity.baseSpeDef, entity, 0, false)
     })
   ],
   OLIVE_OIL: [
@@ -377,8 +382,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   TINY_MUSHROOM: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(-0.2 * entity.baseHP, entity, 0, false)
-      entity.addSpeed(40, entity, 0, false)
+      entity.addMaxHP(-0.3 * entity.baseHP, entity, 0, false)
+      entity.addSpeed(30, entity, 0, false)
     })
   ],
   WHIPPED_DREAM: [
@@ -426,6 +431,21 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   RIBBON_SWEET: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
       entity?.addSpecialDefense(3, entity, 0, false, true)
+    })
+  ],
+  RICE: [
+    new OnDishConsumedEffect(({ pokemon, entity, player }) => {
+      entity?.addShield(50, entity, 0, false)
+      const tatsugiriOnBoard = values(player.board).find(
+        (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
+      )
+      if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_CURLY) {
+        entity?.addAttack(8, entity, 0, false)
+      } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_DROOPY) {
+        entity?.addDefense(8, entity, 0, false)
+      } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_STRETCHY) {
+        entity?.addSpeed(25, entity, 0, false)
+      }
     })
   ]
 }

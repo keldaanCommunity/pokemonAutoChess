@@ -37,9 +37,7 @@ export function Checkbox({
         onChange={handleChange}
         disabled={disabled}
       />
-      <span>
-        {label}
-      </span>
+      <span>{label}</span>
     </label>
   )
 }

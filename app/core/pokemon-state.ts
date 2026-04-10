@@ -66,7 +66,9 @@ export default abstract class PokemonState {
           const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
 
           damage = min(0)(
-            Math.round(damageWithoutCrit + critPartOfTheDamage * reductionFactor)
+            Math.round(
+              damageWithoutCrit + critPartOfTheDamage * reductionFactor
+            )
           )
           target.count.crit++
         }
@@ -157,7 +159,7 @@ export default abstract class PokemonState {
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [15, 30, 60][pokemon.stars - 1] *
+          [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? pokemon.critPower : 1)
         )
@@ -325,7 +327,7 @@ export default abstract class PokemonState {
 
       if (caster && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.HEAL,
             amount: Math.round(healReceived),
@@ -362,7 +364,7 @@ export default abstract class PokemonState {
       pokemon.shield = min(0)(pokemon.shield + shield)
       if (caster && shield > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_HEAL, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
             index: caster.index,
             type: HealType.SHIELD,
             amount: Math.round(shield),
@@ -372,6 +374,16 @@ export default abstract class PokemonState {
           })
         }
         caster.shieldDone += shield
+      } else if (shield < 0 && pokemon.shield <= 0) {
+        const entity = pokemon as PokemonEntity
+        entity.getEffects(OnShieldDepletedEffect).forEach((effect) => {
+          effect.apply({
+            pokemon: entity,
+            board: pokemon.simulation.board,
+            attacker: caster as PokemonEntity,
+            damage: -shield
+          })
+        })
       }
     }
   }
@@ -723,7 +735,7 @@ export default abstract class PokemonState {
             }
           }
 
-          pokemon.simulation.room.broadcast(Transfer.POKEMON_DAMAGE, {
+          pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
             index: attacker.index,
             type: attackType,
             amount: Math.round(takenDamage),
@@ -1054,7 +1066,7 @@ export default abstract class PokemonState {
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon)
+      pokemon.status.triggerFreeze(1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 
@@ -1213,19 +1225,18 @@ export default abstract class PokemonState {
   }
 
   getMostSurroundedCoordinateAvailablePlace(
-    pokemon: PokemonEntity,
+    team: Team,
     board: Board
   ): { x: number; y: number } | undefined {
     let x: number | undefined = undefined
     let y: number | undefined = undefined
-    const team = pokemon.team
     const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
         const cells = board.getAdjacentCells(x, y)
         let n = 0
         cells.forEach((cell) => {
-          if (cell.value && cell.value.team !== team) {
+          if (cell.value && cell.value.team === team) {
             n++
           }
         })

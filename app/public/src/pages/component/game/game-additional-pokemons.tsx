@@ -4,7 +4,11 @@ import { Tooltip } from "react-tooltip"
 import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { selectConnectedPlayer, selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
 

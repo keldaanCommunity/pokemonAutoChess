@@ -23,6 +23,7 @@
   font-size: 1rem;
   margin: 0.5em 0;
   font-style: italic;
+  white-space: pre-wrap;
 }
 
 .profile-modal .profile-box {
@@ -147,6 +148,7 @@
     display: block;
     overflow-y: auto;
     padding: 0 0.5em;
+    width: 100%;
   }
 
   .profile-modal article {

@@ -7,6 +7,12 @@
   grid-template-columns: 1fr;
 }
 
+.bot-select-modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .bot-select-modal header {
   display: flex;
   align-items: center;
@@ -23,6 +29,13 @@
   width: 1500px;
   max-width: 100%;
   gap: 8px;
+}
+
+.bot-select-grid {
+  width: 1500px;
+  max-width: 100%;
+  flex: 1;
+  min-height: 0;
 }
 
 .bot-select-modal li:hover {

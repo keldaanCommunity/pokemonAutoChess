@@ -1,4 +1,4 @@
-import { RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../config"

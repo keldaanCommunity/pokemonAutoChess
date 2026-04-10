@@ -1,4 +1,4 @@
-import { RoomAvailable } from "colyseus.js"
+import { RoomAvailable } from "@colyseus/sdk"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { IGameMetadata, Role } from "../../../../../types"

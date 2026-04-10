@@ -33,7 +33,7 @@ import PreparationRoom from "../preparation-room"
 export class OnJoinCommand extends Command<
   PreparationRoom,
   {
-    client: Client<undefined, UserRecord>
+    client: Client<{ auth: UserRecord }>
     options: any
     auth: UserRecord
   }
@@ -269,6 +269,7 @@ export class OnGameStartRequestCommand extends Command<
       } else {
         this.state.gameStartedAt = new Date().toISOString()
         this.room.lock()
+        this.room.autoDispose = true // re-enable auto dispose for tournament games
         const gameRoom = await matchMaker.createRoom("game", {
           users: Object.fromEntries(entries(this.state.users)),
           name: this.state.name,

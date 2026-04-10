@@ -1,0 +1,172 @@
+import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { INotification } from "../../../../../types/notifications"
+import { getRankLabel } from "../../../../../types/strings/Strings"
+import { Modal } from "../modal/modal"
+import "./notification-modal.css"
+
+interface NotificationModalProps {
+  notifications: INotification[]
+  onClose: (notificationId: string) => void
+}
+
+export function NotificationModal({
+  notifications,
+  onClose
+}: NotificationModalProps) {
+  const { t } = useTranslation()
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  // Reset index when notifications change
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [notifications])
+
+  const currentNotification =
+    notifications.length > 0 ? notifications[currentIndex] : null
+
+  const handleClose = () => {
+    if (!currentNotification) return
+
+    // Send acknowledgment
+    onClose(currentNotification.id)
+
+    // Show next notification if available
+    if (currentIndex < notifications.length - 1) {
+      setCurrentIndex(currentIndex + 1)
+      return false // Prevent modal from closing until all notifications are shown
+    }
+  }
+
+  const closeAll = () => {
+    // Acknowledge all remaining notifications
+    for (let i = currentIndex; i < notifications.length; i++) {
+      onClose(notifications[i].id)
+    }
+  }
+
+  if (!currentNotification) {
+    return null
+  }
+
+  const getNotificationTitle = (notification: INotification) => {
+    switch (notification.type) {
+      case "new_title":
+        return t("notification.new_title_title")
+      case "elo_rank_change":
+        return t("notification.elo_rank_change_title")
+      case "victory_road_finished":
+        return t("notification.victory_road_finished_title")
+      case "expedition_completed":
+        return t("notification.expedition_completed_title")
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return t("notification.tournament_win_title")
+        } else if (+notification.message <= 8) {
+          return t("notification.tournament_finalist_title")
+        }
+        return t("notification.tournament_finished_title")
+      case "level_up":
+      default:
+        return t("notification.level_up_title")
+    }
+  }
+
+  const getNotificationMessage = (notification: INotification) => {
+    switch (notification.type) {
+      case "level_up":
+        return t("notification.level_up_message", {
+          level: notification.message
+        })
+      case "new_title":
+        return t("notification.new_title_message", {
+          title: t(`title.${notification.message}`),
+          description: t(`title_description.${notification.message}`)
+        })
+      case "elo_rank_change":
+        return t("notification.elo_rank_change_message", {
+          rank: t(`elorank.${notification.message}`)
+        })
+      case "victory_road_finished":
+        return t("notification.victory_road_finished_message", {
+          place: getRankLabel(Number(notification.message))
+        })
+      case "expedition_completed": {
+        const [expeditionType, rank, points] = notification.message.split("|")
+        return t("notification.expedition_completed_message", {
+          expedition: t(`expeditions.${expeditionType}`),
+          rank,
+          points
+        })
+      }
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return t("notification.tournament_win_message")
+        } else if (+notification.message <= 8) {
+          return t("notification.tournament_finalist_message", {
+            place: getRankLabel(Number(notification.message))
+          })
+        }
+        return t("notification.tournament_finished_message", {
+          place: getRankLabel(Number(notification.message))
+        })
+      default:
+        return notification.message
+    }
+  }
+
+  const getIllustrationSrc = (notification: INotification) => {
+    switch (notification.type) {
+      case "new_title":
+        return `/assets/titles/${notification.message}.svg`
+      case "elo_rank_change":
+        return `/assets/ranks/${notification.message}.svg`
+      case "victory_road_finished":
+        return `/assets/notifications/victory-road.png`
+      case "expedition_completed": {
+        const [expeditionType, rank] = notification.message.split("|")
+        return `/assets/notifications/${expeditionType}_${rank}.jpg`
+      }
+      case "tournament_finished":
+        if (notification.message === "1") {
+          return `/assets/notifications/tournament_win.svg`
+        } else if (+notification.message <= 8) {
+          return `/assets/notifications/tournament_finalist.svg`
+        }
+        return `/assets/notifications/tournament_finish.svg`
+      case "level_up":
+      default:
+        return "/assets/ui/booster.png"
+    }
+  }
+
+  return (
+    <Modal
+      className="notification-modal"
+      show={true}
+      onClose={handleClose}
+      header={getNotificationTitle(currentNotification)}
+      body={
+        <>
+          <img src={getIllustrationSrc(currentNotification)} alt="" />
+          <p>{getNotificationMessage(currentNotification)}</p>
+        </>
+      }
+      footer={
+        <>
+          <button className="bubbly blue" onClick={handleClose}>
+            {currentIndex < notifications.length - 1
+              ? t("notification.next")
+              : t("notification.close")}
+          </button>
+          {notifications.length > 2 &&
+            currentIndex < notifications.length - 1 && (
+              <button className="bubbly red" onClick={closeAll}>
+                {t("notification.dismiss_all")}
+              </button>
+            )}
+        </>
+      }
+    />
+  )
+}

@@ -2,11 +2,10 @@ import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router-dom"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PkmAltForms, RarityColor } from "../../../../../config"
+import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Emotion, PkmWithCustom } from "../../../../../types"
-import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Item } from "../../../../../types/enum/Item"
 import {
@@ -28,10 +27,14 @@ import {
 } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
 import { cc } from "../../utils/jsx"
+import { LocalStoreKeys, localStore } from "../../utils/store"
 import { Checkbox } from "../checkbox/checkbox"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
-import { PokemonFilters } from "../pokemon-filters/pokemon-filters"
+import {
+  filterPokemonsAccordingToPreferences,
+  PokemonFilters
+} from "../pokemon-filters/pokemon-filters"
 import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
 export default function PokemonPicker(props: {
@@ -40,21 +43,28 @@ export default function PokemonPicker(props: {
   addEntity?: (e: PkmWithCustom) => void
 }) {
   const tabs = [...Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE), "none"]
-  const pokemonsPerTab: IPokemonData[][] = tabs.map((t) =>
-    (t === "none"
+  const pokemonsPerTab: Pkm[][] = tabs.map((t) =>
+    t === "none"
       ? [
           Pkm.KECLEON,
           Pkm.ARCEUS,
           Pkm.PILLAR_WOOD,
           Pkm.PILLAR_IRON,
-          Pkm.PILLAR_CONCRETE
+          Pkm.PILLAR_CONCRETE,
+          Pkm.EGG
         ]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
-    ).map((p) => getPokemonData(p))
   )
 
   return (
-    <Tabs className="my-box" id="pokemon-picker">
+    <Tabs
+      className="my-box"
+      id="pokemon-picker"
+      defaultIndex={localStore.get(LocalStoreKeys.LAST_TAB_OPENED_PICKER) ?? 0}
+      onSelect={(index) =>
+        localStore.set(LocalStoreKeys.LAST_TAB_OPENED_PICKER, index)
+      }
+    >
       <TabList>
         {tabs.map((t) => {
           return (
@@ -109,7 +119,7 @@ export default function PokemonPicker(props: {
 }
 
 function PokemonPickerTab(props: {
-  pokemons: IPokemonData[]
+  pokemons: Pkm[]
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom>>
   addEntity?: (e: PkmWithCustom) => void
@@ -140,35 +150,16 @@ function PokemonPickerTab(props: {
   const player = currentPlayer ?? spectatedPlayer // when spectating another lobby, use that spectated player's data for team planner
   const regionalPokemons: Pkm[] = player?.regionalPokemons?.slice() ?? []
 
+  const shouldIncludeNonPkm = props.type === "none"
   const filteredPokemons = useMemo(
     () =>
-      props.pokemons
+      filterPokemonsAccordingToPreferences(
+        props.pokemons,
+        preferences,
+        shouldIncludeNonPkm
+      )
+        .map((p) => getPokemonData(p))
         .filter((p) => (overlap ? p.types.includes(overlap) : true))
-        .filter((p) => {
-          if (p.rarity === Rarity.SPECIAL)
-            return preferences.showSpecialPool === true // show all summons & specials, even in the same family
-          if (p.skill === Ability.DEFAULT) return false // pokemons with no ability are not ready for the show
-          if (preferences.showAdditionalPool === false && p.additional)
-            return false
-          if (preferences.showRegionalPool === false && p.regional) return false
-          if (
-            preferences.showAltForms === false &&
-            PkmAltForms.includes(p.name)
-          )
-            return false
-          if (
-            preferences.showRegularPool === false &&
-            !p.additional &&
-            !p.regional
-          )
-            return false
-
-          if (preferences.showEvolutions) return true
-          return (
-            getPokemonData(p.name).stars ===
-            getPokemonData(PkmFamily[p.name]).stars
-          )
-        })
         .filter((p) => {
           const family = PkmFamily[p.name]
           const baseVariantName = PkmRegionalBaseVariants[family] ?? family
@@ -240,7 +231,7 @@ function PokemonPickerTab(props: {
         {props.type !== "none" && (
           <SynergyOverlaps
             type={props.type}
-            pokemons={props.pokemons}
+            pokemons={filteredPokemons}
             overlap={overlap}
             setOverlap={setOverlap}
           />

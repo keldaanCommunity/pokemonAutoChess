@@ -1,13 +1,13 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
+import { PkmAltForms } from "../../../../../config"
 import { GADGETS } from "../../../../../core/gadgets"
 import { Title } from "../../../../../types"
 import { NonPkm } from "../../../../../types/enum/Pokemon"
 import { isIn } from "../../../../../utils/array"
 import { useAppSelector } from "../../../hooks"
 import "./progress-tab.css"
-import { PkmAltForms } from "../../../../../config"
 
 export function ProgressTab() {
   const { t } = useTranslation()

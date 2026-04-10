@@ -1,24 +1,33 @@
 .Toastify__toast-container {
-  width: auto !important;
+  width: auto;
   --toastify-z-index: 1040;
   pointer-events: none; /* allow to click through to select a player */
 }
 
-.Toastify__toast {
-  border-radius: 12px !important;
-  padding: 0px !important;
-  margin: 0px !important;
+.toast {
+  --toastify-toast-width: fit-content;
+  --toastify-toast-min-height: 0;
+  --toastify-toast-max-height: 800px;
+  --toastify-toast-padding: 4px;
+  --toastify-toast-bd-radius: 12px;
+  --toastify-toast-shadow: none;
+  --toastify-font-family: inherit;
+}
+
+.toast .Toastify__toast {
+  margin: 0;
   border: var(--border-thin);
-  background-color: var(--color-bg-primary) !important;
+  background-color: var(--color-bg-primary);
 }
 
 .toast-new-pokemon,
 .toast-level-up {
-  right: 76px !important;
-  color: white !important;
+  right: 76px;
+  color: white;
 }
 
 .toast-new-pokemon img {
+  display: block;
   width: 40px;
   height: 40px;
   image-rendering: pixelated;

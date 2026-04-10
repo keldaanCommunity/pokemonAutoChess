@@ -13,6 +13,7 @@ import { Gameboy } from "./pages/gameboy"
 import Lobby from "./pages/lobby"
 import Preparation from "./pages/preparation"
 import { SpriteDebug } from "./pages/sprite-viewer"
+import TranslationsPage from "./pages/translations"
 import store from "./stores/index"
 import "./style/index.css"
 
@@ -51,6 +52,7 @@ i18n.on("initialized", () => {
               <Route path="/sprite-viewer" element={<SpriteDebug />} />
               <Route path="/map-viewer" element={<MapViewer />} />
               <Route path="/gameboy" element={<Gameboy />} />
+              <Route path="/translations" element={<TranslationsPage />} />
             </Routes>
           </BrowserRouter>
         </Suspense>

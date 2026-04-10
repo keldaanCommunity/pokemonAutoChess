@@ -2,8 +2,8 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { kick, removeBot } from "../../../stores/NetworkStore"
+import { useAppSelector } from "../../../hooks"
+import { kick, removeBot } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
@@ -17,23 +17,20 @@ export default function PreparationMenuUser(props: {
   ownerId: string
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.preparation.user)
   const canKick =
     props.isOwner || (user && [Role.MODERATOR, Role.ADMIN].includes(user.role))
 
   const removeButton = props.user.isBot ? (
     <RemoveButton
-      onClick={() => {
-        dispatch(removeBot(props.user.uid))
-      }}
+      onClick={() => removeBot(props.user.uid)}
       title={t("remove_bot")}
     />
   ) : canKick && props.user.uid !== user?.uid ? (
     <RemoveButton
       onClick={() => {
         if (confirm(`Kick ${props.user.name} ?`)) {
-          dispatch(kick(props.user.uid))
+          kick(props.user.uid)
         }
       }}
       title={t("kick_user")}

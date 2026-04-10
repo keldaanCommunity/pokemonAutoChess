@@ -4,9 +4,9 @@ import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
   {
+    [Pkm.CHANSEY]: 7,
     [Pkm.KECLEON]: 10,
     [Pkm.KANGASKHAN]: 10,
-    [Pkm.CHANSEY]: 10,
     [Pkm.ELECTIVIRE]: 10
   }
 
@@ -22,7 +22,8 @@ export const TownEncountersByStage: {
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.CELEBI]: 1 / 40,
     [Pkm.MAKUHITA]: 1 / 20,
-    [Pkm.MAGNEZONE]: 1 / 20
+    [Pkm.MAGNEZONE]: 1 / 20,
+    [Pkm.LAPRAS]: 1 / 20
   },
   12: {
     [Pkm.KANGASKHAN]: 1 / 20,
@@ -39,7 +40,6 @@ export const TownEncountersByStage: {
   17: {
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.CROAGUNK]: 1 / 20,
-    [Pkm.KANGASKHAN]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
     [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
@@ -53,7 +53,8 @@ export const TownEncountersByStage: {
     [Pkm.SPINDA]: 1 / 20,
     [Pkm.REGIROCK]: 1 / 20,
     [Pkm.MUNCHLAX]: 1 / 20,
-    [Pkm.WOBBUFFET]: 1 / 20
+    [Pkm.WOBBUFFET]: 1 / 20,
+    [Pkm.KINGAMBIT]: 1 / 20
   },
   27: {
     [Pkm.ELECTIVIRE]: 1 / 20,

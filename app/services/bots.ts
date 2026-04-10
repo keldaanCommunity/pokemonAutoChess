@@ -1,6 +1,5 @@
 import { logger } from "colyseus"
 import { mongo } from "mongoose"
-import { nanoid } from "nanoid"
 import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { discordService } from "./discord"
@@ -35,7 +34,7 @@ export async function fetchBotsList(
         queryFilter, // Apply filter in the database query
         { steps: 0 }, // Exclude the 'steps' field
         { sort: { elo: -1, id: 1 }, limit: pageSize, skip: page * pageSize } // Add secondary sort by id for stable pagination
-      )
+      ).lean()
 
       if (!botsData || botsData.length === 0) {
         hasMoreData = false
@@ -104,7 +103,7 @@ export async function addBotToDatabase(bot: {
     elo: bot.elo ?? 1200,
     author: bot.author,
     steps: bot.steps,
-    id: nanoid()
+    id: crypto.randomUUID()
   })
 
   logger.info(`Bot with id ${resultCreate.id} created`)

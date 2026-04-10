@@ -20,16 +20,21 @@ import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
+import { getSynergyStep } from "../models/colyseus-models/synergies"
 import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
-import { Transfer } from "../types"
+import {
+  MemoryDiscs,
+  SynergyGivenByItem,
+  SynergyItems,
+  Transfer
+} from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Item,
-  ItemComponents,
   ItemComponentsNoFossilOrScarf,
   MissionOrders,
   NonSpecialBerries,
@@ -328,7 +333,18 @@ export class MiniGame {
         encounter = null // prevent getting the same encounter twice in a gamme
       }
       state.townEncounter = encounter ?? null
-      if (encounter) state.townEncounters.add(encounter)
+      if (encounter) {
+        state.townEncounters.add(encounter)
+        // add a fixed blocked circle collision body around encounter
+        const body = Bodies.circle(this.centerX, this.centerY, 20, {
+          isStatic: true,
+          collisionFilter: {
+            mask: 1
+          }
+        })
+        Composite.add(this.engine.world, body)
+        this.bodies.set("encounter", body)
+      }
     } else {
       state.townEncounter = null
     }
@@ -390,6 +406,15 @@ export class MiniGame {
       state.outlawStage = randomBetween(5, 15)
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.WANTED_NOTICE)
+      })
+    } else if (state.townEncounter === TownEncounters.KINGAMBIT) {
+      const highestLifePlayer = this.alivePlayers.reduce((prev, current) =>
+        prev.life > current.life ? prev : current
+      )
+      highestLifePlayer.items.push(Item.LEADERS_CREST)
+    } else if (state.townEncounter === TownEncounters.LAPRAS) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.LAPRAS_PASSPORT)
       })
     }
   }
@@ -500,7 +525,15 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KECLEON) {
-      itemsSet = SynergyStones
+      const topSynergies = values(state.players).flatMap((p) =>
+        p.synergies.getTopSynergies(3)
+      )
+      itemsSet = SynergyItems.filter(
+        (i) =>
+          !isIn(MemoryDiscs, i) &&
+          i !== Item.SHINY_STONE &&
+          isIn(topSynergies, SynergyGivenByItem[i])
+      )
       maxCopiesPerItem = 2
     }
 
@@ -600,7 +633,7 @@ export class MiniGame {
         )
           .filter(([type, value]) => synergiesUsable.includes(type))
           .map(([type, value]) => {
-            let levelReached = player.synergies.getSynergyStep(type)
+            let levelReached = getSynergyStep(player.synergies, type)
             // lowering down low triggers synergies
             if (type === Synergy.LIGHT) {
               levelReached = [0, 1, 1, 2, 3][levelReached]
@@ -825,7 +858,7 @@ export class MiniGame {
             giveRandomEgg(player, false)
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
-            player.addMoney(3, true, null)
+            player.addMoney(5, true, null)
           } else if (isIn(SynergyGems, item.name)) {
             const type = SynergyGivenByGem[item.name]
             player.bonusSynergies.set(
@@ -836,6 +869,9 @@ export class MiniGame {
             player.updateSynergies()
           } else {
             player.items.push(item.name)
+            if (item.name === Item.SILK_SCARF) {
+              player.extraScarves += 1
+            }
           }
         }
       }

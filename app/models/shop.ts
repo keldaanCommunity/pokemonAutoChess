@@ -12,7 +12,6 @@ import {
   INCENSE_CHANCE,
   KECLEON_RATE,
   LegendaryPool,
-  MAGNET_PULL_RATE_PER_RARITY,
   MIN_STAGE_FOR_DITTO,
   NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
@@ -20,7 +19,6 @@ import {
   PkmsWithAltForms,
   PoolSize,
   PortalCarouselStages,
-  PVE_WILD_CHANCE,
   RarityCost,
   RarityProbabilityPerLevel,
   REMORAID_RATE,
@@ -29,9 +27,9 @@ import {
   REPEAT_BALL_UNIQUE_INTERVAL,
   SellPrices,
   SHOP_SIZE,
-  UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL,
-  UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL,
-  UNOWN_RATE_AMNESIA,
+  UNOWN_PSY3_NB_SHOPS_INTERVAL,
+  UNOWN_PSY5_NB_SHOPS_INTERVAL,
+  UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
 import { pickFirstPartners } from "../core/scribbles"
@@ -63,15 +61,16 @@ import {
   chance,
   pickNRandomIn,
   pickRandomIn,
+  randomWeighted,
   shuffleArray
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { getWildChance } from "./colyseus-models/synergies"
 import { getPokemonBaseline } from "./pokemon-factory"
 import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
-import { PVEStages } from "./pve-stages"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
@@ -335,16 +334,15 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    const hasEerieSpell = player.effects.has(EffectEnum.EERIE_SPELL)
-    if (hasEerieSpell) {
+    const hasTranscendence = player.effects.has(EffectEnum.TRANSCENDENCE)
+    if (hasTranscendence) {
       player.shopsSinceLastUnownShop += 1
     }
     const shouldBeUnownShop =
-      hasEerieSpell &&
+      hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop ===
-            UNOWN_EERIE_SPELL_NB_SHOPS_INTERVAL))
+          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
 
     if (shouldBeUnownShop) {
       // Unown shop
@@ -579,17 +577,17 @@ export default class Shop {
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
-    if (
-      shopIndex === 5 &&
-      !noSpecial &&
-      ((player.effects.has(EffectEnum.LIGHT_SCREEN) &&
-        (player.rerollCount + state.stageLevel) %
-          UNOWN_LIGHT_SCREEN_NB_SHOPS_INTERVAL ===
-          0) ||
-        (player.effects.has(EffectEnum.AMNESIA) && chance(UNOWN_RATE_AMNESIA)))
-    ) {
-      const unowns = getUnownsPoolPerStage(state.stageLevel)
-      return pickRandomIn(unowns)
+    if (shopIndex === 5 && !noSpecial) {
+      const totalRerolls = player.gameStats.rerollCount + state.stageLevel
+      if (
+        (player.effects.has(EffectEnum.PRECOGNITION) &&
+          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+        (player.effects.has(EffectEnum.AURA) &&
+          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+      ) {
+        const unowns = getUnownsPoolPerStage(state.stageLevel)
+        return pickRandomIn(unowns)
+      }
     }
 
     if (
@@ -599,11 +597,7 @@ export default class Shop {
       return Pkm.FALINKS_TROOPER
     }
 
-    const isPVE = state.stageLevel in PVEStages
-    const wildChance =
-      player.wildChance +
-      (isPVE || state.stageLevel === 0 ? PVE_WILD_CHANCE : 0)
-
+    const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
@@ -658,7 +652,7 @@ export default class Shop {
     const repeatBallHolders = values(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
-    const totalRerolls = player.rerollCount + state.stageLevel
+    const totalRerolls = player.gameStats.rerollCount + state.stageLevel
 
     if (
       repeatBallHolders.length > 0 &&
@@ -714,7 +708,7 @@ export default class Shop {
     return Pkm.MAGIKARP
   }
 
-  pickFish(player: Player, rod: FishingRod): Pkm {
+  pickFish(player: Player, rod: FishingRod, state: GameState): Pkm {
     const mantine = values(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
@@ -723,10 +717,11 @@ export default class Shop {
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
+    const wildChance = getWildChance(player, state.stageLevel)
 
     if (
       finals.has(Pkm.REMORAID) === false &&
-      ((mantine && chance(REMORAID_RATE, mantine)) || chance(player.wildChance))
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(wildChance))
     )
       return Pkm.REMORAID
 
@@ -752,19 +747,26 @@ export default class Shop {
   }
 
   magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
-    const rarity_seed =
-      Math.random() * (1 + meltan.ap / 200) * (1 + meltan.luck / 100)
-    let threshold = 0
     const finals = player.getFinalizedLines()
 
-    let rarity = Rarity.SPECIAL
-    for (const r in MAGNET_PULL_RATE_PER_RARITY) {
-      threshold += MAGNET_PULL_RATE_PER_RARITY[r]
-      rarity = r as Rarity
-      if (rarity_seed < threshold) {
-        break
-      }
+    const rarityProbabilies =
+      RarityProbabilityPerLevel[player.experienceManager.level]
+    const magnetPullRatePerRarity = {
+      [Rarity.COMMON]: rarityProbabilies[0],
+      [Rarity.UNCOMMON]: rarityProbabilies[1],
+      [Rarity.RARE]: rarityProbabilies[2],
+      [Rarity.EPIC]: rarityProbabilies[3],
+      [Rarity.ULTRA]: rarityProbabilies[4],
+      [Rarity.SPECIAL]: 0.35
     }
+    const rarity =
+      randomWeighted(
+        magnetPullRatePerRarity,
+        1.35,
+        meltan.ap,
+        0.5,
+        meltan.luck
+      ) ?? Rarity.SPECIAL
 
     if (rarity !== Rarity.SPECIAL) {
       const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
