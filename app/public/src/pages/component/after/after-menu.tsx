@@ -96,17 +96,31 @@ export default function AfterMenu() {
                       role={player.role}
                     />
                   </td>
-                  <td>
-                    <img
-                      src="assets/ui/battle.svg"
-                      alt={t("stats")}
-                      style={{
-                        width: "28px",
-                        height: "28px",
-                        cursor: "var(--cursor-hover)"
-                      }}
-                      data-tooltip-id={`stats-tooltip-${player.id}`}
-                    />
+                  <td data-tooltip-id={`stats-tooltip-${player.id}`}>
+                    <p title={t("total_money_earned")}>
+                      <img
+                        src="assets/icons/money_total.svg"
+                        alt="$"
+                        style={{ width: "24px", height: "24px" }}
+                      />{" "}
+                      {player.gameStats.totalMoneyEarned}
+                    </p>
+                    <p title={t("total_player_damage_dealt")}>
+                      <img
+                        src="assets/icons/ATK.png"
+                        alt="✊"
+                        style={{ width: "24px", height: "24px" }}
+                      />
+                      {player.gameStats.totalPlayerDamageDealt}
+                    </p>
+                    <p title={t("total_reroll_count")}>
+                      <img
+                        src="assets/ui/refresh.svg"
+                        alt="↻"
+                        style={{ width: "24px", height: "24px" }}
+                      />{" "}
+                      {player.gameStats.rerollCount}
+                    </p>
                     <Tooltip
                       id={`stats-tooltip-${player.id}`}
                       className="custom-theme-tooltip"
