@@ -4,6 +4,7 @@ import { subscribeToPreference } from "./preferences"
 const THEME_LINK_ID = "pac-theme"
 
 export function applyTheme(theme: string) {
+  document.getElementById("videobg")?.remove()
   let link = document.getElementById(THEME_LINK_ID) as HTMLLinkElement | null
   if (!theme || theme === "default") {
     link?.remove()
@@ -17,7 +18,6 @@ export function applyTheme(theme: string) {
   }
   link.href = `themes/${theme}.css`
 
-  document.getElementById("videobg")?.remove()
   if (VIDEO_BG_THEMES.includes(theme as any)) {
     const videoElement = document.createElement("video")
     videoElement.id = "videobg"
