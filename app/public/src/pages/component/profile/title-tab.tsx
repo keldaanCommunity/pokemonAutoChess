@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { THEME_BY_TITLE, TITLES_UNLOCKING_THEMES } from "../../../../../config"
 import { fetchTitles, ITitleStatistic } from "../../../models/title-statistic"
 import { Title } from "../../../../../types"
 import { isIn } from "../../../../../utils/array"
@@ -60,31 +61,45 @@ export function TitleTab() {
         {titles
           .filter((title) => showUnlocked || user.titles.includes(title.name))
           .sort((a, b) => b.rarity - a.rarity)
-          .map((k) => (
+          .map((title) => (
             <li
-              key={k.name}
+              key={title.name}
               style={{
                 background: `linear-gradient(to right, var(--color-bg-primary) 0% ${
-                  k.rarity * 100
-                }%, var(--color-bg-secondary) ${k.rarity * 100}% 100%)`
+                  title.rarity * 100
+                }%, var(--color-bg-secondary) ${title.rarity * 100}% 100%)`
               }}
               className={cc("clickable", "my-box", {
-                unlocked: user.titles.includes(k.name),
-                selected: user.title === k.name
+                unlocked: user.titles.includes(title.name),
+                selected: user.title === title.name
               })}
               onClick={() => {
-                if (user.titles.includes(k.name)) {
-                  dispatch(setTitle(k.name))
+                if (user.titles.includes(title.name)) {
+                  dispatch(setTitle(title.name))
                 }
               }}
             >
-              <span className="title-name">{t(`title.${k.name}`)}</span>
-              <p className="title-description">
-                {addIconsToDescription(t(`title_description.${k.name}`))}
-              </p>
+              <span className="title-name">{t(`title.${title.name}`)}</span>
+              <div className="title-description">
+                <p>
+                  {addIconsToDescription(t(`title_description.${title.name}`))}
+                </p>
+                {TITLES_UNLOCKING_THEMES.includes(title.name) && (
+                  <p>
+                    <img
+                      src={`/assets/ui/palette.svg`}
+                      height="24"
+                      width="24"
+                    />{" "}
+                    {t("profile.progress.unlocks_theme", {
+                      theme: t(`theme.${THEME_BY_TITLE[title.name as Title]}`)
+                    })}
+                  </p>
+                )}
+              </div>
 
               <span className="title-rarity">
-                {(k.rarity * 100).toFixed(3)}%
+                {(title.rarity * 100).toFixed(3)}%
               </span>
             </li>
           ))}

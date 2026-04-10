@@ -1,0 +1,54 @@
+:root {
+  --color-bg-primary: #1e1e2e;
+  --color-bg-secondary: #313244;
+  --color-bg-tertiary: #36345b;
+  --color-bg-accent: #8350ad;
+
+  --border-thick: 2px solid #2f3044;
+  --border-thin: 1px solid #2f3044;
+  --border-extra-thin: 1px solid #2f3044;
+}
+
+.custom-bg {
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Game */
+
+.draggable-window.my-container,
+.game-shop .information > div,
+#game-stage-info,
+.game-spectate-player-info.my-container {
+  background-color: rgba(30, 30, 46, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.game-shop.my-container {
+  background-color: rgba(30, 30, 46, 0.75);
+  backdrop-filter: blur(5px);
+}
+
+.team-builder-modal.my-container {
+  background-color: rgba(30, 30, 46, 0.75);
+  backdrop-filter: blur(5px);
+}
+
+.synergies-container .draggable-window-content,
+.team-builder-modal .modal-body {
+  background-color: transparent;
+}
+
+.game-final-rank .rank {
+  text-shadow: none;
+}
+
+#videobg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
