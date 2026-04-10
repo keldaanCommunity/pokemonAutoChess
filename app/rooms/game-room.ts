@@ -18,6 +18,7 @@ import {
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
+import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -1039,7 +1040,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (newTitlesEarned.length > 0) {
         newTitlesEarned.forEach((title) => {
           notificationsService.addNotification(player.id, "new_title", title)
-          if (TITLES_UNLOCKING_THEMES.includes(title)) {
+          if (
+            TITLES_UNLOCKING_THEMES.includes(title) &&
+            usr.level >= GADGETS.palette.levelRequired
+          ) {
             notificationsService.addNotification(
               player.id,
               "new_theme",
