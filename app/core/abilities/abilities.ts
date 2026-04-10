@@ -14031,16 +14031,16 @@ export class TerrainPulseStrategy extends AbilityStrategy {
       const field = pickRandomIn([...fields])
       switch (field) {
         case "fairyField":
-          pkm.status.fairyField = true
+          pkm.status.addFairyField(pkm)
           break
         case "electricField":
-          pkm.status.electricField = true
+          pkm.status.addElectricField(pkm)
           break
         case "grassField":
-          pkm.status.grassField = true
+          pkm.status.addGrassField(pkm)
           break
         case "psychicField":
-          pkm.status.psychicField = true
+          pkm.status.addPsychicField(pkm)
           break
       }
       pokemonsWithField.set(pkm, getFieldEffect(pkm)!)
@@ -14126,7 +14126,7 @@ export class ExpandingForceStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     // User gains PSYCHIC_FIELD, or spreads it to a nearby ally.
     if (!pokemon.status.psychicField) {
-      pokemon.status.psychicField = true
+      pokemon.status.addPsychicField(pokemon)
     } else {
       // Find nearby ally without PSYCHIC_FIELD and give it to them
       const nearbyAllies = board.cells
@@ -14152,7 +14152,7 @@ export class ExpandingForceStrategy extends AbilityStrategy {
 
       if (nearbyAllies.length > 0) {
         const chosen = nearbyAllies[0]
-        chosen.status.psychicField = true
+        chosen.status.addPsychicField(chosen)
       }
     }
 
