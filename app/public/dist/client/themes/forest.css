@@ -26,3 +26,7 @@
   background-color: rgba(71, 58, 53, 0.75);
   backdrop-filter: blur(5px);
 }
+
+.auth-page .logo {
+  width: 30%;
+}
