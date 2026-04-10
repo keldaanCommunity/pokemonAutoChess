@@ -396,6 +396,11 @@ export default class GameScene extends Scene {
         getRegionTint(this.mapName, preference("colorblindMode"))
       )
     })
+    this.battle?.pokemonSprites.forEach((p) => {
+      p.sprite.setTint(
+        getRegionTint(this.mapName, preference("colorblindMode"))
+      )
+    })
   }
 
   resetDragState() {
