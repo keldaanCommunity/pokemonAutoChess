@@ -1,7 +1,8 @@
 import { logger } from "colyseus"
 import { mongo } from "mongoose"
-import { BotV2, IBot, IStep } from "../models/mongo-models/bot-v2"
+import { BotV2 } from "../models/mongo-models/bot-v2"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { IBot, IStep } from "../types/models/bot-v2"
 import { discordService } from "./discord"
 
 export type IBotListItem = Omit<IBot, "steps">

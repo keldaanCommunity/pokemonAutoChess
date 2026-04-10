@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-import { IHistoryEntry } from "../../../../../models/mongo-models/pokemons-statistic-v2"
+import { IHistoryEntry } from "../../../models/pokemons-statistic-v2"
 import { formatDateShort } from "./history-utils"
 import "./history-chart.css"
 

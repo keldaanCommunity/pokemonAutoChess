@@ -3,8 +3,8 @@ import {
   computeSynergies,
   getSynergyStep
 } from "../models/colyseus-models/synergies"
-import { IBot, IDetailledPokemon, IStep } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
+import type { IBot, IDetailledPokemon, IStep } from "../types/models/bot-v2"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { Rarity } from "../types/enum/Game"
 import {

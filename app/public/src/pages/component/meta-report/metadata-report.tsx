@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { fetchMetadata } from "../../../../../models/mongo-models/report-metadata"
+import { fetchMetadata } from "../../../models/report-metadata"
 import { formatDate } from "../../utils/date"
 import "./metadata-report.css"
 
