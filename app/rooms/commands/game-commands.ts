@@ -1371,8 +1371,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.board.forEach((pokemon, pokemonId) => {
         if (
           pokemon.types.has(Synergy.GROUND) &&
-          !isOnBench(pokemon) &&
-          pokemon.items.has(Item.CHEF_HAT) === false
+          !isOnBench(pokemon)
         ) {
           const index =
             (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
