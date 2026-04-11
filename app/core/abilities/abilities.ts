@@ -3156,12 +3156,7 @@ export class TwisterStrategy extends AbilityStrategy {
         pokemon.id !== cell.value.id &&
         cell.value.hasSynergyEffect(Synergy.FLYING)
       ) {
-        const flyingProtectionEffect = [...cell.value.effectsSet].find(
-          (e) => e instanceof FlyingProtectionEffect
-        )
-        if (flyingProtectionEffect) {
-          flyingProtectionEffect.trigger(cell.value, board)
-        }
+        cell.value.flyAway(board)
       }
     })
   }
@@ -11255,7 +11250,7 @@ export class FirestarterStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const speedBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
-    const flyAwayCell = pokemon.flyAway(board, false)    
+    const flyAwayCell = pokemon.flyAway(board, false)
     const targetsHit: Set<PokemonEntity> = new Set()
 
     if (flyAwayCell) {
@@ -11266,10 +11261,7 @@ export class FirestarterStrategy extends AbilityStrategy {
         flyAwayCell.y
       )
       cells.forEach((cell, i) => {
-        if (
-          cell.x === flyAwayCell.x &&
-          cell.y === flyAwayCell.y
-        ) {
+        if (cell.x === flyAwayCell.x && cell.y === flyAwayCell.y) {
           pokemon.commands.push(
             new DelayedCommand(() => {
               pokemon.addSpeed(speedBuff, pokemon, 1, crit)
@@ -11312,7 +11304,7 @@ export class FirestarterStrategy extends AbilityStrategy {
             )
           )
         }
-      })      
+      })
     }
 
     if (targetsHit.size === 0) {
