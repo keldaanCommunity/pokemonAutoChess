@@ -2204,7 +2204,7 @@
 		"ARMOR_CANNON": "发射熊熊燃烧的炮弹，对目标造成[50,SP]点SPECIAL，随后弹射至最近的[2,SP]名敌方宝可梦，对他们也各造成[50,SP]点SPECIAL，最后弹射回到初始目标再造成[25,SP]点SPECIAL。",
 		"BITTER_BLADE": "将对世间的留恋聚集于剑尖，并斩击所有ADJACENT敌方宝可梦，造成[70,SP]点SPECIAL。每击中一只敌方宝可梦，使用者自身恢复10%的HP。",
 		"SUCTION_HEAL": "从目标处吸取能量，对2格半径的CONE内的敌方宝可梦造成[15,30,60,SP]点SPECIAL，使用者自身恢复造成伤害的50%。",
-		"ROOST": "飞离对手，移动到我方后排，陷入SLEEP 1秒，并获得[20,40,80,SP]点SHIELD。",
+		"ROOST": "飞离对手，在到达终点后陷入SLEEP 1秒，并获得[20,40,80,SP]点SHIELD。",
 		"BEHEMOTH_BLADE": "突进至目标后方，进行强力的斩击，对目标造成SPECIAL，数值相当于[100,SP]%的ATK加[100,SP]。",
 		"HEAT_CRASH": "撞向目标，将其击退，并对其造成[40,60,80,SP]点SPECIAL。使用者的ATK比目标的越高，造成的伤害越高。",
 		"LASER_BLADE": "每次使用招式时依次循环执行以下行为之一：\n1.旋转激光刃，移动至目标背后，获得[30,SP]点SHIELD，并对目标和经过的ADJACENT宝可梦造成[25,SP]点SPECIAL；\n2.向前方旋转激光刃，造成两次SPECIAL，数值相当于ATK加[25,SP]。",
@@ -3924,7 +3924,7 @@
 		"colorblind_mode": "色盲友好模式",
 		"renderer": "渲染器",
 		"renderer_info": "WebGL渲染速度更快，但有可能导致部分设备出现显示问题。Canvas渲染较慢，但适配性更好。",
-		"theme": "Theme",
+		"theme": "主题",
 		"preloading_start": "预加载游戏中……",
 		"finished_preloading": "预加载完毕",
 		"game_version": "游戏版本",
@@ -3951,15 +3951,15 @@
 		}
 	},
 	"theme": {
-		"default": "Classic",
-		"super": "Super",
-		"forest": "Forest",
-		"lilac": "Lilac",
-		"north": "Northern Lights",
-		"umbra": "Umbra",
-		"unown": "Unown Black",
-		"redocean": "Red Ocean",
-		"origin": "Origin"
+		"default": "经典",
+		"super": "超级",
+		"forest": "森林",
+		"lilac": "丁香",
+		"north": "极光",
+		"umbra": "暗影",
+		"unown": "黑色未知图腾",
+		"redocean": "红色海洋",
+		"origin": "起源"
 	},
 	"music_volume": "音乐音量",
 	"previous_music": "上一曲",
@@ -4158,6 +4158,8 @@
 		"bot_builder_desc": "制造自己的机器人，提交之后还有可能被吸纳进游戏中",
 		"jukebox": "八音盒",
 		"jukebox_desc": "选择游戏内播放的音乐",
+		"palette": "图图犬的调色盘",
+		"palette_desc": "修改游戏的主题色",
 		"gameboy": "Gameboy游戏机",
 		"gameboy_desc": "玩这个游戏的GB移植版（实验性版本）",
 		"pokeguesser": "宝可梦猜一猜",
@@ -4803,10 +4805,10 @@
 		"level_up_message": "恭喜！\n你升到了{{level}}级，获得了一包补充包！",
 		"new_title_title": "新头衔解锁！",
 		"new_title_message": "你解锁了一个新的头衔：\n{{title}}——{{description}}",
-		"new_gadget_title": "New Gadget Unlocked!",
-		"new_gadget_message": "You've unlocked a new gadget:\n{{gadget}}: {{description}}",
-		"new_theme_title": "New Theme Unlocked!",
-		"new_theme_message": "You've unlocked a new theme: {{theme}}.\nGo to game options to select it !",
+		"new_gadget_title": "新功能解锁！",
+		"new_gadget_message": "你解锁了一项新功能：\n{{gadget}}：{{description}}",
+		"new_theme_title": "新主题解锁！",
+		"new_theme_message": "你解锁了一个新主题：{{theme}}.\n去选项界面更改吧！",
 		"elo_rank_change_title": "段位变更！",
 		"elo_rank_change_message": "你的段位现在是：\n{{rank}}",
 		"victory_road_finished_title": "胜利之路已完成！",
@@ -4823,16 +4825,6 @@
 		"close": "关闭",
 		"dismiss_all": "全部关闭"
 	},
-	"profile_menu": {
-		"elo_tab": {
-			"title": "Elo分数",
-			"current_elo": "当前Elo分数",
-			"max_elo_reached": "历史最高Elo分数",
-			"elo_decay_info": "若你在最近20天内没有进行过至少3场游戏（对于高级球及以上段位的玩家，上述游戏必须是排位模式），你的Elo分数会以每天{{eloLoss}}点的速度衰减。",
-			"elo_decay_active": "Elo分数衰减中",
-			"elo_decay_inactive": "距离Elo衰减开始还有{{time}}"
-		}
-	},
 	"profile": {
 		"title": "个人资料",
 		"progress": {
@@ -4841,11 +4833,19 @@
 			"avatars_unlocked": "{{count}}/{{total}}个头像已解锁",
 			"gadgets_unlocked": "{{count}}/{{total}}项功能已解锁",
 			"pokemons_played": "{{count}}/{{total}}种宝可梦已使用",
-			"unlocks_theme": "Unlocks Theme: {{theme}}"
+			"unlocks_theme": "解锁主题：{{theme}}"
 		},
 		"avatar": {
 			"change_avatar": "更改形象",
 			"play_more_games_hint": "玩更多游戏，赚取补充包，解锁新的形象！"
+		},
+		"elo_tab": {
+			"title": "Elo分数",
+			"current_elo": "当前Elo分数",
+			"max_elo_reached": "历史最高Elo分数",
+			"elo_decay_info": "若你在最近20天内没有进行过至少3场游戏（对于高级球及以上段位的玩家，上述游戏必须是排位模式），你的Elo分数会以每天{{eloLoss}}点的速度衰减。",
+			"elo_decay_active": "Elo分数衰减中",
+			"elo_decay_inactive": "距离Elo衰减开始还有{{time}}"
 		},
 		"account": {
 			"title": "账号",
