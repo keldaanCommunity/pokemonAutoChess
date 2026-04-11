@@ -2,8 +2,8 @@ import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import { fetchMetaV2, IMetaV2 } from "../../../models/meta-v2"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { fetchMetaV2, IMetaV2 } from "../../../models/meta-v2"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import TeamComp from "./team-comp"
 import "./composition-report.css"
@@ -36,9 +36,7 @@ export function CompositionReport() {
       )
     })
 
-    return Array.from(pokemonPopularity.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([pokemon]) => pokemon)
+    return [...pokemonPopularity.keys()].sort((a, b) => a.localeCompare(b))
   }, [meta])
 
   const sortedMeta = useMemo(() => {
