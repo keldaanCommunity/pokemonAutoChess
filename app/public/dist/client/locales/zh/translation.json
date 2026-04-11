@@ -4602,8 +4602,8 @@
 			"fishing_rarity_rate_description": "所用鱼竿的品质决定了你能钓起的宝可梦的稀有度",
 			"defense_calculation": "DEF的减伤计算",
 			"defense_calculation_description": "和英雄联盟一致，最终伤害等于减免前伤害值除以(1+0.05×DEF或SPE_DEF)，向上取整。DEF对PHYSICAL生效，SPE_DEF对SPECIAL生效。",
-			"speed_calculation": "How SPEED works?",
-			"speed_calculation_description": "SPEED influences the delay between every action of your Pokémon: movement, attack, casting ability. The delay is computed like this: Delay = 1000 / (0.4 + 0.007 * Speed). So at 0 SPEED a Pokémon does 0.4 attacks per second, and at the maximum SPEED of 300, it does 2.5 attacks per second. Some abilities or effects have a lower delay or a fixed delay.",
+			"speed_calculation": "SPEED的加速原理",
+			"speed_calculation_description": "SPEED影响宝可梦的动作与动作之间的延迟时间：移动，攻击和释放招式。动作之间的延迟时间（毫秒）为1000除以(0.4+0.007×SPEED)，所以SPEED为0的宝可梦每秒攻击0.4次，SPEED为最大值300时每秒2.5次。部分招式或效果的延迟时间可能低于默认值或是无法被影响的固定值。",
 			"luck_title": "LUCK的机制",
 			"luck_description": "LUCK能提升任何概率触发事件的触发成功率，包括暴击、闪避、攻击时触发效果或是有[LK]标志的数字",
 			"luck_formula": "实际的触发概率等于基础概率的(1-幸运÷100)次方。例如，若某只宝可梦具有10%的暴击率和50点幸运，其实际暴击率为0.1^(1-50/100)≈0.3162，即约为31.62%。",
@@ -4825,12 +4825,12 @@
 	},
 	"profile_menu": {
 		"elo_tab": {
-			"title": "Elo",
-			"current_elo": "Current Elo",
-			"max_elo_reached": "Highest Elo reached",
-			"elo_decay_info": "If you don't play at least 3 games within the last 20 days (Ranked games if Ultra Ball rank or above), your elo will start to decay (-{{eloLoss}} elo/day).",
-			"elo_decay_active": "Your elo is currently decaying",
-			"elo_decay_inactive": "Your elo will start to decay on {{time}}"
+			"title": "Elo分数",
+			"current_elo": "当前Elo分数",
+			"max_elo_reached": "历史最高Elo分数",
+			"elo_decay_info": "若你在最近20天内没有进行过至少3场游戏（对于高级球及以上段位的玩家，上述游戏必须是排位模式），你的Elo分数会以每天{{eloLoss}}点的速度衰减。",
+			"elo_decay_active": "Elo分数衰减中",
+			"elo_decay_inactive": "距离Elo衰减开始还有{{time}}"
 		}
 	},
 	"profile": {
