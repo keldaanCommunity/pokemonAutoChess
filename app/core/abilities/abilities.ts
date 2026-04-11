@@ -45,6 +45,7 @@ import {
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnDamageReceivedEffect,
+  OnShieldDepletedEffect,
   PeriodicEffect
 } from "../effects/effect"
 import {
@@ -52,7 +53,6 @@ import {
   BergmiteOnBackEffect,
   FalinksFormationEffect
 } from "../effects/passives"
-import { FlyingProtectionEffect } from "../effects/synergies"
 import {
   getMoveSpeed,
   getStrongestUnit,
@@ -5361,6 +5361,14 @@ export class ShellTrapStrategy extends AbilityStrategy {
           }
         })
       pokemon.shield = 0
+      pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
+        effect.apply({
+          pokemon,
+          board: pokemon.simulation.board,
+          attacker: pokemon as PokemonEntity,
+          damage
+        })
+      })
     } else {
       const shield = 75
       pokemon.addShield(shield, pokemon, 1, crit)
