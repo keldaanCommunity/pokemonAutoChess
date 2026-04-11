@@ -12629,15 +12629,7 @@ export class RoostStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
-    // move to backline
-    const corner = board.getTeleportationCell(
-      pokemon.positionX,
-      pokemon.positionY,
-      pokemon.team
-    )
-    if (corner) {
-      pokemon.moveTo(corner.x, corner.y, board, false)
-    }
+    pokemon.flyAway(board, undefined, false)
     pokemon.status.triggerSleep(1000, pokemon)
     pokemon.addShield(shield, pokemon, 1, crit)
   }

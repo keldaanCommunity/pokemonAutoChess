@@ -2,11 +2,13 @@
 
 - Hisui Avalugg
 
-# Changes to Pokemon & Abilities
-
 # Changes to Synergies
 
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
+
+# Changes to Pokemon & Abilities
+
+- Roost (Pidove) now uses the new smarter flying away logic, instead of just flying to the backline.
 
 # Changes to Items
 

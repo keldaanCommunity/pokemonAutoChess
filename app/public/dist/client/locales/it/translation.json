@@ -2154,7 +2154,7 @@
 		"ARMOR_CANNON": "Spara un proiettile incendiario, infliggendo [50,SP] SPECIAL al bersaglio prima di rimbalzare sui 2 nemici più vicini, infliggendo [50,SP] SPECIAL a ciascuno. I proiettili ritornano poi sul bersaglio originale, infliggendo [25,SP] SPECIAL extra cisascuno.",
 		"BITTER_BLADE": "Concentra i suoi demoni interiori in una sferzata, infliggendo [70,SP] SPECIAL a tutti i nemici ADJACENT. L'utilizzatore si cura del 10% dei suoi HP massimi per ogni nemico colpito.",
 		"SUCTION_HEAL": "Succhia via la vita dai bersagli, infliggendo [15,30,60,SP] SPECIAL in un cono dal raggio di 2 caselle e curandosi del 50% dei danni inflitti.",
-		"ROOST": "Vola via e atterra nelle retrovie, rimanendo SLEEP per 1 secondo e guadagnando [20,40,80,SP] di SHIELD.",
+		"ROOST": "Vola via, rimanendo SLEEP per 1 secondo e guadagnando [20,40,80,SP] di SHIELD.",
 		"BEHEMOTH_BLADE": "Salta dietro al bersaglio e lo colpisce con un taglio potente, infliggendogli, [100,SP] + [100,SP]% ATK come SPECIAL",
 		"HEAT_CRASH": "Si schianta contro il bersaglio, spingendolo all'indietro e infliggendogli [40,60,80,SP] SPECIAL. Più l' ATK dell'utilizzatore è maggiore rispetto a quello del bersaglio, più potente è l'attacco.",
 		"LASER_BLADE": "Alterna tra:\n1. Roteare la propria lama intorno a sé, muovendosi dietro al bersaglio e guadgnando[25,SP] di SHIELD, infliggendo [25,SP] SPECIAL ai nemici ADJACENT nel cammino.\n2. Effettua un colpo roteante di fronte a sé, infliggendo 2 volte [25,SP] + ATK come SPECIAL.",

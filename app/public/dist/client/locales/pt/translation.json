@@ -2204,7 +2204,7 @@
 		"ARMOR_CANNON": "Dispara um projétil flamejante, causando [50,SP] de SPECIAL ao alvo antes de ricochetear nos 2 inimigos mais próximos, causando [50,SP] de SPECIAL a cada um. Os projéteis então retornam ao alvo original, causando [25,SP] de SPECIAL adicional a cada um.",
 		"BITTER_BLADE": "Concentra seus sentimentos amargos em um ataque cortante, causando [70,SP] de SPECIAL a cada inimigo ADJACENT. O usuário cura 10% de seu HP máximo para cada inimigo atingido.",
 		"SUCTION_HEAL": "Drena a energia de seus alvos, causando [15,30,60,SP] de SPECIAL em um CONE de alcance de 2 espaços e cura o seu HP em 50% do dano causado.",
-		"ROOST": "Voa para longe e pousa na linha de trás, recebendo SLEEP por 1 segundo e ganhando [20,40,80,SP] de SHIELD.",
+		"ROOST": "Voa para longe, recebendo SLEEP por 1 segundo e ganhando [20,40,80,SP] de SHIELD.",
 		"BEHEMOTH_BLADE": "Avance rapidamente para trás do alvo e desfere um golpe poderoso, causando [100,SP] + [100,SP]% de ATK como SPECIAL.",
 		"HEAT_CRASH": "Investe contra o alvo, arremessando-o para trás e causando [40, 60, 80, SP] de SPECIAL. Causa mais dano quanto maior for o ATK do usuário em comparação com o alvo.",
 		"LASER_BLADE": "Alterna entre:\n1. Gira a lâmina laser, movendo-se para trás do alvo, ganhando [25,SP] de SHIELD e causando [25,SP] de SPECIAL ao alvo e aos inimigos ADJACENT no caminho.\n2. Gira a lâmina laser em frente ao alvo, causando 2 vezes [25,SP] + ATK como SPECIAL.",
