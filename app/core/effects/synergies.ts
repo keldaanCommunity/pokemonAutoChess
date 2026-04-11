@@ -274,48 +274,9 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
       pokemon.effects.has(EffectEnum.MAX_AIRSTREAM)
     const shouldSkydive = pokemon.effects.has(EffectEnum.SKYDIVE)
 
-    if (shouldProtect) pokemon.status.triggerProtect(2000)
-    if (shouldSkydive) {
-      const destination =
-        board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-      if (destination) {
-        pokemon.status.triggerProtect(2000)
-        pokemon.broadcastAbility({
-          skill: "FLYING_TAKEOFF",
-          targetX: destination.target.positionX,
-          targetY: destination.target.positionY
-        })
-        pokemon.skydiveTo(destination.x, destination.y, board)
-        pokemon.setTarget(destination.target)
-        pokemon.commands.push(
-          new DelayedCommand(() => {
-            pokemon.broadcastAbility({
-              skill: "FLYING_SKYDIVE",
-              positionX: destination.x,
-              positionY: destination.y,
-              targetX: destination.target.positionX,
-              targetY: destination.target.positionY
-            })
-          }, 500)
-        )
-        pokemon.commands.push(
-          new DelayedCommand(() => {
-            if (destination.target?.maxHP > 0) {
-              destination.target.handleSpecialDamage(
-                1.5 * pokemon.atk,
-                board,
-                AttackType.PHYSICAL,
-                pokemon,
-                chance(pokemon.critChance / 100, pokemon),
-                false
-              )
-            }
-          }, 1000)
-        )
-      }
-    } else {
-      pokemon.flyAway(board)
-    }
+    pokemon.flyAway(board, shouldProtect, shouldSkydive)
+
+   
   }
 }
 

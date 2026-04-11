@@ -13,6 +13,7 @@ export type Cell = {
   y: number
   value: PokemonEntity | undefined
 }
+
 export class Board {
   rows: number
   columns: number
@@ -379,22 +380,120 @@ export class Board {
     }
   }
 
-  getFlyAwayCell(x: number, y: number): Cell | null {
-    const cx = Math.round((x + this.columns * 0.5) % this.columns)
-    const cy = Math.round((y + this.rows * 0.5) % this.rows)
-    let radius = 1
-    const candidates: Cell[] = [
-      { x: cx, y: cy, value: this.getEntityOnCell(cx, cy) }
-    ]
-    while (candidates[0].value !== undefined && radius < 5) {
-      candidates.shift()
-      if (candidates.length === 0) {
-        candidates.push(...this.getCellsInRadius(cx, cy, radius, false))
-        radius++
+  getFlyAwayCell(
+    entity: PokemonEntity
+  ): { x: number; y: number; target: PokemonEntity } | null {
+    // if no cells matching the conditions can be found, fallback to getSafePlaceAwayFrom algorithm
+    const fallback = () => {
+      const safeCell = this.getSafePlaceAwayFrom(
+        entity.positionX,
+        entity.positionY
+      )
+      if (!safeCell) return null
+      const target = this.getClosestEnemy(safeCell.x, safeCell.y, entity.team)
+      if (!target) return null
+      return {
+        x: safeCell.x,
+        y: safeCell.y,
+        target: target
       }
     }
 
-    return candidates[0].value === undefined ? candidates[0] : null
+    const enemies = this.cells.filter(
+      (e): e is PokemonEntity =>
+        e instanceof PokemonEntity && e.hp > 0 && e.team !== entity.team
+    )
+
+    if (enemies.length === 0) {
+      return null
+    }
+
+    // Step 1: take an array of all unoccupied board cells
+    const availableCells: Cell[] = []
+    this.forEach((cellX, cellY, value) => {
+      if (value === undefined) {
+        availableCells.push({ x: cellX, y: cellY, value })
+      }
+    })
+
+    // Step 2: filter out the cells in entity's attack range
+    const cellsBeyondEntityRange = availableCells.filter(
+      (cell) =>
+        distanceC(cell.x, cell.y, entity.positionX, entity.positionY) >
+        entity.range
+    )
+
+    // Step 3: filter the cells that are in attack_range of at least one enemy.
+    const cellsWithTarget = cellsBeyondEntityRange
+      .map((cell) => {
+        const enemiesAtRange = enemies.filter(
+          (enemy) =>
+            enemy.hp > 0 &&
+            enemy.isTargettableBy(entity) &&
+            distanceC(cell.x, cell.y, enemy.positionX, enemy.positionY) <=
+              entity.range
+        )
+        if (enemiesAtRange.length === 0) {
+          return null
+        }
+        // keep a reference to the lowest HP% enemy between those.
+        const target = enemiesAtRange.reduce((lowest, enemy) => {
+          const enemyHpPercent = enemy.hp / enemy.maxHP
+          const lowestHpPercent = lowest.hp / lowest.maxHP
+          return enemyHpPercent < lowestHpPercent ? enemy : lowest
+        })
+
+        // compute the number of enemies that are in enemy attack range of this cell
+        const enemyThreatCount = enemies.filter(
+          (enemy) =>
+            distanceC(cell.x, cell.y, enemy.positionX, enemy.positionY) <=
+            enemy.range
+        ).length
+
+        return {
+          cell,
+          target,
+          enemyThreatCount,
+          distance: distanceM(
+            cell.x,
+            cell.y,
+            entity.positionX,
+            entity.positionY
+          ) //  compute the distance to current position
+        }
+      })
+      .filter((candidate) => candidate != null)
+
+    if (cellsWithTarget.length === 0) {
+      return fallback()
+    }
+
+    // Step 4: filter the cells with the lowest amount of enemies that can attack them
+    const minThreatCount = Math.min(
+      ...cellsWithTarget.map((candidate) => candidate.enemyThreatCount)
+    )
+
+    const safestCells = cellsWithTarget.filter(
+      (candidate) => candidate.enemyThreatCount === minThreatCount
+    )
+
+    // Step 5: filter the cells with the highest distance to current position
+    const maxDistance = Math.max(
+      ...safestCells.map((candidate) => candidate.distance)
+    )
+
+    const farthestSafestCells = safestCells.filter(
+      (candidate) => candidate.distance === maxDistance
+    )
+
+    // Step 6: pick one of the remaining cells at random as destination
+    const selectedDestination = pickRandomIn(farthestSafestCells)
+
+    return {
+      x: selectedDestination.cell.x,
+      y: selectedDestination.cell.y,
+      target: selectedDestination.target
+    }
   }
 
   getSafePlaceAwayFrom(

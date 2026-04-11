@@ -6,6 +6,8 @@
 
 # Changes to Synergies
 
+- Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
+
 # Changes to Items
 
 # Gameplay

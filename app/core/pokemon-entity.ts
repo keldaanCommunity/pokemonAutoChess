@@ -1354,28 +1354,78 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       .forEach((p) => p?.addPP(p.maxPP - p.pp, p, 0, false))
   }
 
-  flyAway(board: Board) {
-    const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
-    if (flyAwayCell) {
-      if (this.passive === Passive.GALE_WINGS) {
-        board
-          .getCellsBetween(
-            this.positionX,
-            this.positionY,
-            flyAwayCell.x,
-            flyAwayCell.y
+  flyAway(
+    board: Board,
+    shouldProtect = this.effects.has(EffectEnum.FEATHER_DANCE) ||
+      this.effects.has(EffectEnum.SKYDIVE) ||
+      this.effects.has(EffectEnum.MAX_AIRSTREAM),
+    shouldSkydive = this.effects.has(EffectEnum.SKYDIVE)
+  ) {
+    const flyAwayCell = board.getFlyAwayCell(this)
+
+    if (flyAwayCell && this.passive === Passive.GALE_WINGS) {
+      board
+        .getCellsBetween(
+          this.positionX,
+          this.positionY,
+          flyAwayCell.x,
+          flyAwayCell.y
+        )
+        .forEach((cell) => {
+          board.addBoardEffect(
+            cell.x,
+            cell.y,
+            EffectEnum.EMBER,
+            this.simulation
           )
-          .forEach((cell) => {
-            board.addBoardEffect(
-              cell.x,
-              cell.y,
-              EffectEnum.EMBER,
-              this.simulation
-            )
+        })
+    }
+
+    if (shouldProtect) this.status.triggerProtect(2000)
+    if (shouldSkydive && flyAwayCell?.target) {
+      this.broadcastAbility({
+        skill: "FLYING_TAKEOFF",
+        targetX: flyAwayCell.target.positionX,
+        targetY: flyAwayCell.target.positionY
+      })
+      this.skydiveTo(flyAwayCell.x, flyAwayCell.y, board)
+      this.setTarget(flyAwayCell.target)
+      this.commands.push(
+        new DelayedCommand(() => {
+          this.broadcastAbility({
+            skill: "FLYING_SKYDIVE",
+            positionX: flyAwayCell.x,
+            positionY: flyAwayCell.y,
+            targetX: flyAwayCell.target.positionX,
+            targetY: flyAwayCell.target.positionY
           })
-      }
+        }, 500)
+      )
+      this.commands.push(
+        new DelayedCommand(() => {
+          if (flyAwayCell.target?.hp > 0) {
+            flyAwayCell.target.handleSpecialDamage(
+              1.5 * this.atk,
+              board,
+              AttackType.PHYSICAL,
+              this,
+              chance(this.critChance / 100, this),
+              false
+            )
+          }
+        }, 1000)
+      )
+    } else if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
     }
+
+    // make enemies lose aggro after target flies away
+    board.cells
+      .filter(
+        (e): e is PokemonEntity =>
+          e instanceof PokemonEntity && e.hp > 0 && e.targetEntityId === this.id
+      )
+      .forEach((e) => e.setTarget(null))
   }
 
   applyStat(stat: Stat, value: number, permanent = false) {

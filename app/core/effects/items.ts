@@ -263,7 +263,7 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
     pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
     pokemon.removeItem(Item.SMOKE_BALL)
     pokemon.addShield(50, pokemon, 0, false)
-    pokemon.flyAway(board)
+    pokemon.flyAway(board, false, false)
   }
 })
 

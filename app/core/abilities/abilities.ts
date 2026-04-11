@@ -7488,7 +7488,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
     const x = target.positionX
     const y = target.positionY
     const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
-    target.flyAway(board)
+    target.flyAway(board, false, false)
     pokemon.broadcastAbility({
       positionX: x,
       positionY: y,
@@ -15195,7 +15195,7 @@ export class PlasmaTempestStrategy extends AbilityStrategy {
     const damage = 40
 
     // Make the Pokemon fly away
-    pokemon.flyAway(board)
+    pokemon.flyAway(board, undefined, false)
 
     pokemon.commands.push(
       new DelayedCommand(() => {
