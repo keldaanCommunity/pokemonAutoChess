@@ -257,26 +257,14 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
         pokemon.effects.has(EffectEnum.MAX_AIRSTREAM) ||
         pokemon.effects.has(EffectEnum.SKYDIVE)
 
-      if (this.flyingProtection === 1 && pcHp < 0.2) {
+      if (
+        (this.flyingProtection === 1 && pcHp < 0.2) ||
+        (shouldProcAt50 && this.flyingProtection === 2 && pcHp < 0.5)
+      ) {
         this.flyingProtection--
-        this.trigger(pokemon, board)
-      } else if (shouldProcAt50 && this.flyingProtection === 2 && pcHp < 0.5) {
-        this.flyingProtection--
-        this.trigger(pokemon, board)
+        pokemon.flyAway(board)
       }
     }
-  }
-
-  trigger(pokemon: PokemonEntity, board: Board) {
-    const shouldProtect =
-      pokemon.effects.has(EffectEnum.FEATHER_DANCE) ||
-      pokemon.effects.has(EffectEnum.SKYDIVE) ||
-      pokemon.effects.has(EffectEnum.MAX_AIRSTREAM)
-    const shouldSkydive = pokemon.effects.has(EffectEnum.SKYDIVE)
-
-    pokemon.flyAway(board, shouldProtect, shouldSkydive)
-
-   
   }
 }
 

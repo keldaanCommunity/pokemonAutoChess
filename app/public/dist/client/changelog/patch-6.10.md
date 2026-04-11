@@ -8,7 +8,7 @@
 
 # Changes to Pokemon & Abilities
 
-- Roost (Pidove) now uses the new smarter flying away logic, instead of just flying to the backline.
+- Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 
 # Changes to Items
 

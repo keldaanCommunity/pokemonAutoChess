@@ -1356,11 +1356,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   flyAway(
     board: Board,
+    shouldSkydive = this.effects.has(EffectEnum.SKYDIVE),
     shouldProtect = this.effects.has(EffectEnum.FEATHER_DANCE) ||
       this.effects.has(EffectEnum.SKYDIVE) ||
-      this.effects.has(EffectEnum.MAX_AIRSTREAM),
-    shouldSkydive = this.effects.has(EffectEnum.SKYDIVE)
-  ) {
+      this.effects.has(EffectEnum.MAX_AIRSTREAM)
+  ): { x: number; y: number; target: PokemonEntity } | null {
     const flyAwayCell = board.getFlyAwayCell(this)
 
     if (flyAwayCell && this.passive === Passive.GALE_WINGS) {
@@ -1426,6 +1426,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           e instanceof PokemonEntity && e.hp > 0 && e.targetEntityId === this.id
       )
       .forEach((e) => e.setTarget(null))
+
+    return flyAwayCell
   }
 
   applyStat(stat: Stat, value: number, permanent = false) {

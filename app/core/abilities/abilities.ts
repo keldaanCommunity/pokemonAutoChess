@@ -11255,21 +11255,20 @@ export class FirestarterStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const speedBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
-    const farthestCoordinate =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const flyAwayCell = pokemon.flyAway(board, false)    
     const targetsHit: Set<PokemonEntity> = new Set()
 
-    if (farthestCoordinate) {
+    if (flyAwayCell) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
         pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
+        flyAwayCell.x,
+        flyAwayCell.y
       )
       cells.forEach((cell, i) => {
         if (
-          cell.x === farthestCoordinate.x &&
-          cell.y === farthestCoordinate.y
+          cell.x === flyAwayCell.x &&
+          cell.y === flyAwayCell.y
         ) {
           pokemon.commands.push(
             new DelayedCommand(() => {
@@ -11313,8 +11312,7 @@ export class FirestarterStrategy extends AbilityStrategy {
             )
           )
         }
-      })
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
+      })      
     }
 
     if (targetsHit.size === 0) {
@@ -12629,7 +12627,7 @@ export class RoostStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
-    pokemon.flyAway(board, undefined, false)
+    pokemon.flyAway(board, false)
     pokemon.status.triggerSleep(1000, pokemon)
     pokemon.addShield(shield, pokemon, 1, crit)
   }
@@ -15187,7 +15185,7 @@ export class PlasmaTempestStrategy extends AbilityStrategy {
     const damage = 40
 
     // Make the Pokemon fly away
-    pokemon.flyAway(board, undefined, false)
+    pokemon.flyAway(board, false)
 
     pokemon.commands.push(
       new DelayedCommand(() => {
