@@ -386,8 +386,10 @@ export class Board {
     // if no cells matching the conditions can be found, fallback to getSafePlaceAwayFrom algorithm
     const fallback = () => {
       const safeCell = this.getSafePlaceAwayFrom(
-        entity.positionX,
-        entity.positionY
+        entity.targetX ?? entity.positionX,
+        entity.targetY ?? entity.positionY,
+        null,
+        entity.range
       )
       if (!safeCell) return null
       const target = this.getClosestEnemy(safeCell.x, safeCell.y, entity.team)
@@ -499,9 +501,10 @@ export class Board {
   getSafePlaceAwayFrom(
     originX: number,
     originY: number,
-    specificSide: Team | null = null
+    specificSide: Team | null = null,
+    maxDistance?: number
   ): { x: number; y: number; distance: number } | null {
-    const candidateCells = new Array<{
+    let candidateCells = new Array<{
       distance: number
       x: number
       y: number
@@ -529,7 +532,13 @@ export class Board {
       }
     })
 
-    candidateCells.sort((a, b) => b.distance - a.distance)
+    candidateCells = candidateCells
+      .filter(
+        (cell) =>
+          maxDistance === undefined ||
+          distanceC(cell.x, cell.y, originX, originY) <= maxDistance
+      )
+      .sort((a, b) => b.distance - a.distance)
     return candidateCells[0] ?? null
   }
 
