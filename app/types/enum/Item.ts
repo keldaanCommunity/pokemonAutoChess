@@ -284,6 +284,7 @@ export enum Item {
   MONSTER_MEMORY = "MONSTER_MEMORY",
   AQUATIC_MEMORY = "AQUATIC_MEMORY",
   DRAGON_MEMORY = "DRAGON_MEMORY",
+  FLORA_MEMORY = "FLORA_MEMORY",
   MISSION_ORDER_PINK = "MISSION_ORDER_PINK",
   MISSION_ORDER_RED = "MISSION_ORDER_RED",
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
@@ -333,7 +334,8 @@ export const MemoryDiscs = [
   Item.GOURMET_MEMORY,
   Item.MONSTER_MEMORY,
   Item.AQUATIC_MEMORY,
-  Item.DRAGON_MEMORY
+  Item.DRAGON_MEMORY,
+  Item.FLORA_MEMORY
 ] satisfies Item[]
 
 export const MemoryDiscsBySynergy: {
@@ -363,7 +365,8 @@ export const MemoryDiscsBySynergy: {
   [Synergy.GOURMET]: Item.GOURMET_MEMORY,
   [Synergy.MONSTER]: Item.MONSTER_MEMORY,
   [Synergy.AQUATIC]: Item.AQUATIC_MEMORY,
-  [Synergy.DRAGON]: Item.DRAGON_MEMORY
+  [Synergy.DRAGON]: Item.DRAGON_MEMORY,
+  [Synergy.FLORA]: Item.FLORA_MEMORY
 }
 
 export const MissionOrders = [
@@ -830,7 +833,8 @@ export const SynergyGivenByItem = {
   [Item.GOURMET_MEMORY]: Synergy.GOURMET,
   [Item.MONSTER_MEMORY]: Synergy.MONSTER,
   [Item.AQUATIC_MEMORY]: Synergy.AQUATIC,
-  [Item.DRAGON_MEMORY]: Synergy.DRAGON
+  [Item.DRAGON_MEMORY]: Synergy.DRAGON,
+  [Item.FLORA_MEMORY]: Synergy.FLORA
 } satisfies Record<(typeof SynergyItems)[number], Synergy>
 
 export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
