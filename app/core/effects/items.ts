@@ -17,7 +17,6 @@ import {
   Item,
   ItemRecipe,
   MemoryDiscs,
-  NonSpecialBerries,
   OgerponMasks,
   Scarves,
   Sweets,
@@ -29,7 +28,7 @@ import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -64,7 +63,6 @@ import {
   OnResurrectEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
-  OnSpawnEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -361,9 +359,6 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
 
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
-    if (dish === Item.BERRIES) {
-      dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
-    }
     if (dish === Item.MUSHROOMS) {
       dishes = Array.from(
         { length: nbDishes },
@@ -385,7 +380,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       })
       room.clock.setTimeout(() => {
         dishes.forEach((dish, i) => {
-          if (DishesGoingToInventory.includes(dish)) {
+          if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
           } else {
             let candidates = values(player.board).filter(

@@ -9,6 +9,7 @@
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
+- Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
 
 # Changes to Items
 

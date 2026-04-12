@@ -300,7 +300,7 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("wiki.items.berries_description"))}</p>
         <ul>
-          {Berries.map((berry) => (
+          {Berries.filter((b) => b !== Item.NANAB_BERRY).map((berry) => (
             <li
               key={berry}
               data-tooltip-id="item-detail-tooltip"
@@ -321,7 +321,9 @@ export default function WikiItems() {
         </h3>
         <p>{addIconsToDescription(t("wiki.items.dishes_description"))}</p>
         <ul>
-          <ItemList items={[Item.CHEF_HAT, ...Dishes] as Item[]} />
+          <ItemList
+            items={[Item.CHEF_HAT, ...Dishes, Item.NANAB_BERRY] as Item[]}
+          />
         </ul>
 
         <h3>

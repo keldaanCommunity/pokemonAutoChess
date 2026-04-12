@@ -1705,10 +1705,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(50)
         this.status.triggerProtect(2000)
         break
+      case Item.NANAB_BERRY:
+        heal(50)
+        if (this.player && !this.simulation.isGhostBattle) {
+          this.player.addMoney(1, true, this)
+          this.count.moneyCount += 1
+        }
+        break
       case Item.GOLDEN_NANAB_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player && !this.simulation.isGhostBattle)
+        if (this.player && !this.simulation.isGhostBattle) {
           this.player.addMoney(5, true, this)
+          this.count.moneyCount += 5
+        }
         break
       case Item.GOLDEN_RAZZ_BERRY:
         heal(min(50)(0.5 * this.maxHP))
