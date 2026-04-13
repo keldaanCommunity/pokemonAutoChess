@@ -244,7 +244,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
       pokemon.player.board.forEach((p: IPokemon) => {
         if (p.canEat) {
           let randomDish = pickRandomIn(
-            Dishes.filter((d) => d !== Item.BERRIES && d !== Item.HERBA_MYSTICA)
+            Dishes.filter((d) => d !== Item.HERBA_MYSTICA)
           )
           if (randomDish === Item.SWEETS) {
             randomDish = pickRandomIn(Sweets)

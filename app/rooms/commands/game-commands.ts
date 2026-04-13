@@ -52,7 +52,6 @@ import PokemonFactory, {
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
-import type { IDetailledPokemon } from "../../types/models/bot-v2"
 import {
   Emotion,
   IClient,
@@ -105,6 +104,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
+import type { IDetailledPokemon } from "../../types/models/bot-v2"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
