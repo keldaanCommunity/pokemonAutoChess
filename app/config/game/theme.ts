@@ -10,19 +10,19 @@ export const THEMES = [
   "unown",
   "umbra",
   "forest",
-  "redocean",
+  "redsea",
   "origin"
 ] as const
 
 export type Theme = (typeof THEMES)[number]
 
-export const VIDEO_BG_THEMES: Theme[] = ["umbra", "forest", "redocean"]
+export const VIDEO_BG_THEMES: Theme[] = ["umbra", "forest", "redsea"]
 
 export const TITLE_BY_THEME: Partial<Record<Theme, Title>> = {
   unown: Title.ARCHEOLOGIST,
   forest: Title.POKEMON_RANGER,
   umbra: Title.DELINQUENT,
-  redocean: Title.FISHERMAN,
+  redsea: Title.FISHERMAN,
   origin: Title.MUSEUM_DIRECTOR
 }
 
