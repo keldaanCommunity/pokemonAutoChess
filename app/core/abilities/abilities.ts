@@ -17092,7 +17092,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
   [Ability.RAGING_BULL]: new RagingBullStrategy(),
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
-  [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
+  [Ability.HEADLONG_RUSH]: new HeadlongRushStrategy(),
   [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
   [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
