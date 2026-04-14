@@ -1407,7 +1407,7 @@
 		"AURORA_VEIL": "Todos os aliados recebem [5,10,15,SP] SHIELD e RUNE_PROTECT por 1 segundos",
 		"AQUA_JET": "Corra para a retaguarda inimiga, causando [20,40,80,SP] SPECIAL",
 		"JUDGEMENT": "Inflige [10,SP] SPECiAL ao alvo, multiplicado pela soma dos níveis de sinergia de Arceus",
-		"CHATTER": "Distribua [20,SP] SPECIAL a todos os inimigos. Todo inimigo tem [40,LK]% de chance de ficar CONFUSION por 1 segundo",
+		"CHATTER": "Distribua [30,SP] SPECIAL para todos os Pokémon inimigos em um raio de 3 blocos ao redor do usuário. Todo inimigo tem [50,LK]% de chance de ficar CONFUSION por 1 segundo",
 		"STEAM_ERUPTION": "Inflige [80,SP] SPECIAL ao alvo e a todos os inimigos adjacentes e BURN-OS por 3 segundos",
 		"APPLE_ACID": "Distribui [15,30,60,SP] SPECIAL aos alvos à frente e reduz a sua DEF e SPE_DEF em [5,SP] pontos",
 		"PSYCHIC": "Oferece [40,80,160,SP] SPECIAL e queima 15 de PP para o alvo e inimigos adjacentes",

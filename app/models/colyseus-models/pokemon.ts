@@ -6302,7 +6302,7 @@ export class Chatot extends Pokemon {
   def = 4
   speDef = 4
   maxPP = 80
-  range = 3
+  range = 2
   skill = Ability.CHATTER
 }
 
