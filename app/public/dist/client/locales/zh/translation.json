@@ -1869,7 +1869,7 @@
 		"AURORA_VEIL": "所有我方宝可梦获得[5,10,15,SP]点SHIELD并获得RUNE_PROTECT 1秒。",
 		"AQUA_JET": "突进至最远的可触及敌方宝可梦的邻位，对经过的所有敌方宝可梦造成[20,40,80,SP]点SPECIAL。",
 		"JUDGEMENT": "对目标造成SPECIAL，数值相当于[10,SP]乘以阿尔宙斯所处的共鸣等级之和。",
-		"CHATTER": "对所有敌方宝可梦造成[20,SP]点SPECIAL。每只敌方宝可梦各有[40,LK]%的概率陷入CONFUSION 1秒。",
+		"CHATTER": "对所有敌方宝可梦造成[30,SP]点SPECIAL。每只敌方宝可梦各有[50,LK]%的概率陷入CONFUSION 1秒。",
 		"STEAM_ERUPTION": "对目标和所有ADJACENT敌方宝可梦造成[80,SP]点SPECIAL，并使他们陷入BURN 3秒。",
 		"APPLE_ACID": "对前方的3只敌方宝可梦造成[50,SP]点SPECIAL。若目标的SPE_DEF为0，改为造成[100,SP]点SPECIAL。",
 		"NUTRIENTS": "朝HP最低的我方宝可梦投掷一个苹果，为其恢复[40,SP]点HP，并提升其[2,SP]点DEF和SPE_DEF。",

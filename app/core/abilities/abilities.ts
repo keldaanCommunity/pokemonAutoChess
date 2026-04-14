@@ -719,16 +719,25 @@ export class ChatterStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const damage = 20
-    const confusionChance = 0.4
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (chance(confusionChance, pokemon)) {
-          tg.status.triggerConfusion(1000, tg, pokemon)
+    const damage = 30
+    const confusionChance = 0.5
+
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3, false)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(confusionChance, pokemon)) {
+            cell.value.status.triggerConfusion(1000, cell.value, pokemon)
+          }
         }
-      }
-    })
+      })
   }
 }
 

@@ -1820,7 +1820,7 @@
 		"AURORA_VEIL": "Tutti i Pokèmon alleati ricevono [5,10,15,SP] SHIELD e RUNE_PROTECT per 1 secondi.",
 		"AQUA_JET": "Scatta nelle retrovie nemiche, infliggendo [20,40,80,SP] SPECIAL a tutti i Pokèmon nemici colpiti nel tragitto.",
 		"JUDGEMENT": "Infliggi [10,SP] danni speciali al bersaglio, moltiplicati per la somma dei livelli di sinergia di Arceus.",
-		"CHATTER": "Infliggi [20,SP] SPECIAL a tutti i nemici. Ogni nemico ha il [40,LK]% di possibilità di essere CONFUSION per 1 secondo",
+		"CHATTER": "Infliggi [30,SP] SPECIAL a tutti i Pokémon nemici in un raggio di 3 tessere attorno all'utente. Ogni nemico ha il [50,LK]% di possibilità di essere CONFUSION per 1 secondo.",
 		"STEAM_ERUPTION": "Infliggi [80,SP] SPECIAL al bersaglio e a tutti i Pokèmon nemici adiacenti, causando BURN per 3 secondi.",
 		"APPLE_ACID": "Infliggi [15,30,60,SP] SPECIAL ai 3 Pokèmon in fronte all'utilizzatore e abbassa la loro DEF e SPE_DEF di [5,SP].",
 		"NUTRIENTS": "Lancia una mela all'alleato con gli HP più bassi, curando per [40,SP] HP e incrementando la sua DEF e SPE_DEF di [2,SP].",

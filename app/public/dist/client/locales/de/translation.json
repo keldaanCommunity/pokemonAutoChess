@@ -1855,7 +1855,7 @@
 		"AURORA_VEIL": "Alle Verbündeten erhalten [5,10,15,SP] SHIELD und RUNE_PROTECT für 1 Sekunden",
 		"AQUA_JET": "Stürme in die gegnerische Hinterlinie und verursache [20,40,80,SP] SPECIAL",
 		"JUDGEMENT": "Fügt dem Ziel [10,SP] Spezialschaden zu, multipliziert mit der Summe der Arceus-Synergiestufen",
-		"CHATTER": "Füge allen Feinden [20,SP] SPECIAL zu. Jeder Feind hat eine Chance von [40,LK] %, 1 Sekunde lang CONFUSION zu erleiden",
+		"CHATTER": "Füge allen gegnerischen Pokémon in einem Umkreis von 3 Feldern um den Benutzer [30,SP] SPECIAL zu. Jeder Feind hat eine Chance von [50,LK] %, 1 Sekunde lang CONFUSION zu erleiden",
 		"STEAM_ERUPTION": "Fügt dem Ziel und allen angrenzenden Feinden [80,SP] SPECIAL zu und BURN sie 3 Sekunden lang",
 		"APPLE_ACID": "Fügt dem Ziel [15,30,60,SP] SPECIAL an den Zielen vor dir und senkt seine DEF und SPE_DEF um [5,SP] Punkte",
 		"NUTRIENTS": "Werfe einen Apfel zum Verbündeten mit den wenigsten HP, heilt für [40,SP]",

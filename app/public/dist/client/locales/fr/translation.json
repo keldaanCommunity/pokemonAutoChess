@@ -1868,7 +1868,7 @@
 		"AURORA_VEIL": "Tous les alliés reçoivent [5,10,15,SP] SHIELD et RUNE_PROTECT pendant 1 seconde.",
 		"AQUA_JET": "Fonce vers l'ennemi le plus éloigné, infligeant [20,40,80,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"JUDGEMENT": "Inflige [10,SP] SPECIAL à la cible, multipliés par la somme des niveaux de synergies d'Arceus.",
-		"CHATTER": "Inflige [20,SP] SPECIAL à toute l'équipe adverse. Chaque ennemi a [40,LK]% de chance de subir CONFUSION pendant 1 seconde.",
+		"CHATTER": "Inflige [30,SP] SPECIAL à tous les ennemis dans un rayon de 3 cases autour du lanceur. Chaque ennemi a [50,LK]% de chance de subir CONFUSION pendant 1 seconde.",
 		"STEAM_ERUPTION": "Inflige [80,SP] SPECIAL à la cible et à tous les ennemis ADJACENT, et leur inflige BURN pendant 3 secondes.",
 		"APPLE_ACID": "Inflige [50,SP] SPECIAL aux 3 ennemis qui font face au lanceur. Inflige [100,SP] SPECIAL si la SPE_DEF de la cible est à 0.",
 		"NUTRIENTS": "Lance une pomme sur l'allié avec le moins de HP, soignant de [40,SP] HP et augmentant sa DEF et SPE_DEF de [2,SP].",
