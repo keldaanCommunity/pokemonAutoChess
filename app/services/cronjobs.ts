@@ -155,7 +155,7 @@ async function eloDecay() {
 
 async function titleStats() {
   logger.info("[CRON] Recomputing title statistics...")
-  const count = await UserMetadata.countDocuments()
+  const count = await UserMetadata.estimatedDocumentCount()
   logger.info(`${count} users found`)
   for (const title of Object.values(Title)) {
     const titleCount = await UserMetadata.countDocuments({

@@ -116,6 +116,7 @@ userMetadataSchema.index(
   { displayName: 1 },
   { collation: { locale: "en", strength: 2 } }
 )
+userMetadataSchema.index({ titles: 1 })
 
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 
