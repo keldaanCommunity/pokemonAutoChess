@@ -49,7 +49,7 @@ export function CompositionReport() {
       : meta
 
     return [...filteredMeta].sort((a, b) => {
-      const order = rankingBy == "count" || rankingBy == "winrate" ? -1 : 1
+      const order = rankingBy === "count" || rankingBy === "winrate" ? -1 : 1
       return (a[rankingBy] - b[rankingBy]) * order
     })
   }, [meta, rankingBy, selectedPkm])
@@ -69,7 +69,7 @@ export function CompositionReport() {
             onChange={(e) => setRanking(e.target.value)}
           >
             <option value="count">
-              {t("rank")} {t("by_poularity")}
+              {t("rank")} {t("by_popularity")}
             </option>
             <option value="mean_rank">
               {t("rank")} {t("by_average_place")}
@@ -92,16 +92,19 @@ export function CompositionReport() {
         )}
         <div id="meta-report-compo-list">
           <AutoSizer
-            renderProp={({ height, width }) => {
+            children={({ height, width }) => {
               if (height === undefined || width === undefined) return null
               return (
-                <List<CompoRowData>
+                <List
                   style={{ height, width }}
-                  rowCount={sortedMeta.length}
-                  rowHeight={dynamicRowHeight}
-                  rowComponent={CompositionRow}
-                  rowProps={{ sortedMeta }}
-                />
+                  itemCount={sortedMeta.length}
+                  itemSize={dynamicRowHeight}
+                  itemData={sortedMeta}
+                >
+                  {({ index, style, data }) => (
+                    <CompositionRow index={index} style={style} data={data} />
+                  )}
+                </List>
               )
             }}
           />
@@ -118,16 +121,16 @@ type CompoRowData = {
 function CompositionRow({
   index,
   style,
-  sortedMeta
+  data
 }: {
-  ariaAttributes: object
   index: number
   style: React.CSSProperties
-} & CompoRowData): React.ReactElement | null {
+  data: IMetaV2[]
+}): React.ReactElement | null {
   return (
     <div style={{ ...style, paddingBottom: "0.5em" }}>
       <div>
-        <TeamComp team={sortedMeta[index]} rank={index + 1} />
+        <TeamComp team={data[index]} rank={index + 1} />
       </div>
     </div>
   )
