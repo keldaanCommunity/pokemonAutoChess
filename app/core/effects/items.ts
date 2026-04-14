@@ -164,7 +164,7 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
               : secondHitTarget.speDef
             const damageAfterReduction =
               secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)
-            const damageBlocked = min(0)(
+            const damageBlocked = max(0)(
               secondHitSpecialDamage - damageAfterReduction
             )
             pokemon.broadcastAbility({ skill: "POWER_LENS" })
@@ -666,34 +666,38 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
+      )
       pokemon.addShield(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ) * 2,
+        repeatBallValue * 2,
         pokemon,
         0,
         false
       )
       pokemon.addSpeed(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
+        repeatBallValue,
         pokemon,
         0,
         false
       )
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAbilityPower(
-        -Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
+      )
+      pokemon.addShield(
+        -repeatBallValue * 2,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.addSpeed(
+        -repeatBallValue,
         pokemon,
         0,
         false
@@ -1320,9 +1324,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           : pokemon.simulation.redDpsMeter
       const shieldGained = dps.get(pokemon.id)?.shield ?? 0
       const explosionDamage = Math.round(0.5 * shieldGained)
-
-      pokemon.broadcastAbility({ skill: "EXPLOSION" })
-      pokemon.removeItem(Item.EXPLOSIVE_BAND)
 
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
