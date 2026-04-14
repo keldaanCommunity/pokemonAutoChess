@@ -475,7 +475,8 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-                board.columns * pokemon.positionY + y + pokemon.positionX + x
+                board.columns * (pokemon.positionY + y) +
+                (pokemon.positionX + x)
               ]
           })
         }
@@ -929,7 +930,7 @@ const conversionEffect = new OnSimulationStartEffect(
       player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
     }
 
-    // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
     if (synergyCopied === Synergy.FLORA) {
       const floraLevel = getSynergyStep(opponent.synergies, Synergy.FLORA)
       entity.effectsSet.add(
