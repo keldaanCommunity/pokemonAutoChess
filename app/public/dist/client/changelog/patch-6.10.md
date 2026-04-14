@@ -11,6 +11,7 @@
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
 - Changed Chatot. Range 3 → 2. Chatter now hits in a 3 cell radius around Chatot. Damage 20 → 30, chance to inflict confusion 40 → 50%.
+- Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
 
 # Changes to Items
 
