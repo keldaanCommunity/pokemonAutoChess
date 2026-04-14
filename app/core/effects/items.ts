@@ -164,7 +164,7 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
               : secondHitTarget.speDef
             const damageAfterReduction =
               secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)
-            const damageBlocked = max(0)(
+            const damageBlocked = min(0)(
               secondHitSpecialDamage - damageAfterReduction
             )
             pokemon.broadcastAbility({ skill: "POWER_LENS" })
