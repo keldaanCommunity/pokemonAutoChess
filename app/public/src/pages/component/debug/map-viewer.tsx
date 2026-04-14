@@ -1,6 +1,6 @@
-import Phaser from "phaser"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import * as Phaser from "phaser"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Weather } from "../../../../../types/enum/Weather"
@@ -8,8 +8,8 @@ import { DebugScene } from "../../../game/scenes/debug-scene"
 import "./debug-scene.css"
 
 export default function MapViewerContainer() {
-  const gameRef = useRef<Phaser.Game>()
-  const debugScene = useRef<DebugScene>()
+  const gameRef = useRef<Phaser.Game>(null)
+  const debugScene = useRef<DebugScene>(null)
   const { t } = useTranslation()
 
   const width = 1950

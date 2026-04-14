@@ -1,7 +1,6 @@
 import { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { GameObjects, Scene } from "phaser"
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
@@ -863,19 +862,27 @@ export default class GameScene extends Scene {
   }
 
   setHovered(sprite: Phaser.GameObjects.Sprite, thickness = 2) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
+    if (this.game.renderer.type !== Phaser.WEBGL) return // outline plugin doesnt work with canvas renderer
 
-    outline.add(sprite, {
+    sprite.enableFilters()
+    const existingOutline = sprite.getData(
+      "rexOutlineController"
+    ) as Phaser.Filters.Controller | undefined
+    existingOutline?.destroy()
+
+    const outline = sprite.filters!.internal.addRexOutline({
       thickness,
       outlineColor: 0xffffff
     })
+    sprite.setData("rexOutlineController", outline)
   }
 
   clearHovered(sprite: Phaser.GameObjects.Sprite) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
-    outline.remove(sprite)
+    const outline = sprite.getData(
+      "rexOutlineController"
+    ) as Phaser.Filters.Controller | undefined
+    outline?.destroy()
+    sprite.setData("rexOutlineController", null)
   }
 
   closeTooltips() {

@@ -1,7 +1,8 @@
 import { SetSchema } from "@colyseus/schema"
-import Phaser, { GameObjects, Geom } from "phaser"
-import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
-import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import * as Phaser from "phaser"
+import { GameObjects, Geom } from "phaser"
+import type MoveTo from "phaser4-rex-plugins/plugins/moveto"
+import type MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
@@ -215,7 +216,7 @@ export default class PokemonSprite extends DraggableObject {
         isGameScene(scene) &&
         scene.spectate === false
       ) {
-        this.shadow.setTintFill(0xff0000)
+        this.shadow.setTint(0xff0000).setTintMode(Phaser.TintModes.FILL)
       }
       this.add(this.shadow)
     }
@@ -811,7 +812,8 @@ export default class PokemonSprite extends DraggableObject {
     onEntity: boolean
   ) {
     this.addElectricField()
-    this.sprite.postFX.addGlow(0xffff00, 4, 0, false, 0.1, 8)
+    this.sprite.enableFilters()
+    this.sprite.filters?.internal.addGlow(0xffff00, 4, 0, 0.1)
     this.emoteAnimation()
     if (!alreadyActive) {
       if (!preference("disableCameraShake")) scene.cameras.main.flash(250)

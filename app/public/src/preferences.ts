@@ -1,4 +1,4 @@
-import Phaser from "phaser"
+import * as Phaser from "phaser"
 import { useCallback, useEffect, useState } from "react"
 import { removeInArray } from "../../utils/array"
 import { LocalStoreKeys, localStore } from "./pages/utils/store"

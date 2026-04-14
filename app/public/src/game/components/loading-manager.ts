@@ -1,6 +1,5 @@
 import { t } from "i18next"
 import { GameObjects } from "phaser"
-import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import type Player from "../../../../models/colyseus-models/player"
@@ -11,6 +10,7 @@ import { getPortraitSrc } from "../../../../utils/avatar"
 import { values } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
+import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
 
@@ -110,7 +110,7 @@ export default class LoadingManager {
 
     scene.load.scenePlugin(
       "animatedTiles",
-      AnimatedTiles,
+      AnimatedTilesPlugin,
       "animatedTiles",
       "animatedTiles"
     )

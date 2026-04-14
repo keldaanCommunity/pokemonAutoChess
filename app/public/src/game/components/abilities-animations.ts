@@ -1,4 +1,5 @@
-import Phaser, { GameObjects } from "phaser"
+import * as Phaser from "phaser"
+import { GameObjects } from "phaser"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -453,7 +454,9 @@ export function addAbilitySprite(
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
-  if (tintFill) sprite.setTintFill(tintFill)
+  if (tintFill) {
+    sprite.setTint(tintFill).setTintMode(Phaser.TintModes.FILL)
+  }
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
