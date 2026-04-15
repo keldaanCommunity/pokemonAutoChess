@@ -671,18 +671,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.simulation.stageLevel) /
           2
       )
-      pokemon.addShield(
-        repeatBallValue * 2,
-        pokemon,
-        0,
-        false
-      )
-      pokemon.addSpeed(
-        repeatBallValue,
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addShield(repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(repeatBallValue, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
       const repeatBallValue = Math.floor(
@@ -690,18 +680,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.simulation.stageLevel) /
           2
       )
-      pokemon.addShield(
-        -repeatBallValue * 2,
-        pokemon,
-        0,
-        false
-      )
-      pokemon.addSpeed(
-        -repeatBallValue,
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addShield(-repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(-repeatBallValue, pokemon, 0, false)
     })
   ],
 

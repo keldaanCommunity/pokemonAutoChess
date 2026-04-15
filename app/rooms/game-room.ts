@@ -40,7 +40,6 @@ import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -80,6 +79,7 @@ import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type { IDetailledPokemon } from "../types/models/bot-v2"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {

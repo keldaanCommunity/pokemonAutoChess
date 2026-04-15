@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../config"
-import { IDetailledPokemon } from "../../../models/bot-v2"
 import { ShinyItems } from "../../../../../types/enum/Item"
 import {
   Pkm,
@@ -13,6 +12,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
+import { IDetailledPokemon } from "../../../models/bot-v2"
 import { pickPokemonProposition } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
