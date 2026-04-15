@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import { getWildChance } from "../../../../../models/colyseus-models/synergies"

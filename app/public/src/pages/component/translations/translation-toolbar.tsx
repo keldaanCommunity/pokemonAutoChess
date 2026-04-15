@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef } from "react"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import "./translation-toolbar.css"

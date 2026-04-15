@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { usePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"

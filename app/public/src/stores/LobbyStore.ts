@@ -5,12 +5,7 @@ import {
   TournamentBracketSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import {
-  IChatV2,
-  IGameMetadata,
-  IPreparationMetadata,
-  ISuggestionUser
-} from "../../../types"
+import { IChatV2, IGameMetadata, IPreparationMetadata } from "../../../types"
 import type { Booster } from "../../../types/Booster"
 import { Language } from "../../../types/enum/Language"
 import {

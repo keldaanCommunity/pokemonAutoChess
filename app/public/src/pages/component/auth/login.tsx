@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { FIREBASE_CONFIG } from "../../../../../config"

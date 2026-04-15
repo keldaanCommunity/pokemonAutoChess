@@ -1,5 +1,5 @@
 import * as d3 from "d3"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SYNERGY_COLORS } from "../../../../../config"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"

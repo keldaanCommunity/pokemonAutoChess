@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   fetchMetaRegions,

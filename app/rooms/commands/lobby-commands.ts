@@ -40,7 +40,7 @@ import {
   PkmIndex,
   Unowns
 } from "../../types/enum/Pokemon"
-import { StarterAvatars, Starters } from "../../types/enum/Starters"
+import { Starters } from "../../types/enum/Starters"
 import {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
