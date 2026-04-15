@@ -57,7 +57,7 @@ export async function getPendingGame(
       reconnectionDeadline,
       isExpired:
         !isValidDate(reconnectionDeadline) ||
-        reconnectionDeadline.getTime() > Date.now()
+        reconnectionDeadline.getTime() < Date.now()
     }
   }
   //logger.debug(`No pending game found for player ${playerId}`);
