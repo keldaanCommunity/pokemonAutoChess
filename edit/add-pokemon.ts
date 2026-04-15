@@ -53,6 +53,21 @@ interface IDuration {
 
 type AnimationDurationsMap = Record<string, number[]>
 type AnimationDelaysMap = Record<string, { d: number; t: number }>
+type BitmapLike = {
+  width: number
+  height: number
+  data: Uint8Array
+}
+type ScannableImage = {
+  bitmap: BitmapLike
+  scan: (
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    cb: (x: number, y: number, idx: number) => void
+  ) => unknown
+}
 
 function toDurationArray(duration: IDuration["Duration"]): number[] {
   return Array.isArray(duration) ? duration : [duration]
@@ -210,7 +225,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeBlue(cropImg: InstanceType<typeof Jimp>) {
+  private removeBlue(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
@@ -231,7 +246,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeRed(cropImg: InstanceType<typeof Jimp>) {
+  private removeRed(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
