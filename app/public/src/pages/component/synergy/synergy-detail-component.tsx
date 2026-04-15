@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import { getWildChance } from "../../../../../models/colyseus-models/synergies"
@@ -94,7 +93,7 @@ export default function SynergyDetailComponent(props: {
   let additionalInfo = ""
 
   if (props.type === Synergy.WILD && spectatedPlayer) {
-    const wildChance = getWildChance(spectatedPlayer, stageLevel)
+    const wildChance = getWildChance(spectatedPlayer)
     additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
       wildChance: roundToNDigits(wildChance * 100, 1)
     })
@@ -156,12 +155,12 @@ export default function SynergyDetailComponent(props: {
             style={{
               color:
                 levelReached === SynergyTriggers[props.type][i]
-                  ? "#fff"
-                  : "#e8e8e8",
+                  ? "var(--color-fg-primary)"
+                  : "var(--color-fg-secondary)",
               backgroundColor:
                 levelReached === SynergyTriggers[props.type][i]
                   ? "var(--color-bg-secondary)"
-                  : "rgba(84, 89, 107,0)",
+                  : "transparent",
               border:
                 levelReached === SynergyTriggers[props.type][i]
                   ? "var(--border-thick)"

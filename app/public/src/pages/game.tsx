@@ -2,7 +2,7 @@ import { getStateCallbacks, Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import {
   getCurrentGameEvent,
@@ -356,7 +356,21 @@ export default function Game() {
     }
     // when pressing back button, properly leave game
     window.addEventListener("popstate", confirmLeave)
+
+    // pause video background for performance
+    const videoBg = document.getElementById(
+      "videobg"
+    ) as HTMLVideoElement | null
+    if (videoBg) {
+      videoBg.pause()
+      videoBg.style.display = "none"
+    }
+
     return () => {
+      if (videoBg) {
+        videoBg.play()
+        videoBg.style.display = "block"
+      }
       window.removeEventListener("popstate", confirmLeave)
     }
   }, [])

@@ -1,10 +1,10 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 import { validateBot } from "../../../../../core/bot-logic"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
 import { Emotion, PkmWithCustom } from "../../../../../types"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
+import { IBot } from "../../../models/bot-v2"
 
 export default function BotAvatar(props: {
   bot: IBot
@@ -49,11 +49,16 @@ export default function BotAvatar(props: {
       <p>ELO: {props.bot.elo}</p>
       <p>
         {errors.length > 0 ? (
-          <span style={{ color: "red" }} title={errors.join("\n")}>
+          <span
+            style={{ color: "var(--color-fg-negative)" }}
+            title={errors.join("\n")}
+          >
             {t("invalid")}
           </span>
         ) : (
-          <span style={{ color: "lime" }}>{t("valid")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>
+            {t("valid")}
+          </span>
         )}
       </p>
     </div>

@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import React, { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
 import { Modal } from "../modal/modal"
 import TierListMaker from "./tier-list-maker"
 

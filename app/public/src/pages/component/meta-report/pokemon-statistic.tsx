@@ -2,10 +2,6 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import {
-  IHistoryEntry,
-  IPokemonStatV2
-} from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
@@ -13,6 +9,10 @@ import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import {
+  IHistoryEntry,
+  IPokemonStatV2
+} from "../../../models/pokemons-statistic-v2"
 import PokemonPortrait from "../pokemon-portrait"
 import { HistoryChart } from "./history-chart"
 import { HistoryDelta } from "./history-delta"

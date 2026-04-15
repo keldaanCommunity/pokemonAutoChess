@@ -1,5 +1,4 @@
 .preparation-menu {
-  background-image: url("assets/ui/back1.png");
   background-size: cover;
   background-position-x: left;
   display: flex;
@@ -10,13 +9,13 @@
 
 .preparation-menu h1 {
   text-align: center;
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 2px 2px 2px black;
 }
 
 .preparation-menu p,
 .preparation-menu label {
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 2px 2px 2px black;
 }
 
@@ -49,7 +48,7 @@
   margin: 2px;
 }
 
-.preparation-menu .actions {
+.preparation-menu .actions > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -59,7 +58,7 @@
 }
 
 .preparation-menu .actions span {
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 1px 1px 2px black;
 }
 

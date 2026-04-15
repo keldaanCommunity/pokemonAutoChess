@@ -1,8 +1,8 @@
 .history-expand-btn {
-  background: rgb(84, 89, 107);
+  background: var(--color-bg-tertiary);
   border: var(--border-thin);
   border-radius: 4px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
   cursor: var(--cursor-hover);
   font-size: 14px;
   padding: 2px 6px;
@@ -10,8 +10,8 @@
 }
 
 .history-expand-btn:hover {
-  background: rgb(100, 106, 128);
-  color: white;
+  background: var(--color-bg-primary);
+  color: var(--color-fg-primary);
 }
 
 .history-chart {
@@ -21,7 +21,7 @@
 
 .history-chart-label {
   font-size: 10px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
   display: block;
   margin-bottom: 2px;
 }
@@ -38,7 +38,7 @@
   align-items: center;
   gap: 4px;
   font-size: 10px;
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 .history-chart-legend-color {
@@ -50,7 +50,7 @@
 
 .sparkline-tooltip {
   background: rgba(0, 0, 0, 0.85);
-  color: white;
+  color: var(--color-fg-primary);
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 10px;

@@ -1,5 +1,4 @@
 .profile-modal {
-  color: white;
   display: grid;
   grid-template-areas:
     "card     history"
@@ -76,7 +75,7 @@
 .profile-actions .react-tabs__tab-panel {
   flex: 1;
   overflow-y: auto;
-  background-color: rgb(84, 89, 107);
+  background-color: var(--color-bg-secondary);
   border-radius: 0 0 12px 12px;
   border: var(--border-thin);
   border-top: 0;
@@ -140,7 +139,7 @@
   margin: 0;
   line-height: 1em;
   font-size: 0.75em;
-  color: #ccc;
+  color: var(--color-fg-secondary);
 }
 
 @media (width <= 1280px) {
@@ -164,7 +163,7 @@
   flex-basis: 30%;
   height: 90vh;
   overflow-y: scroll;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .user-menu .player-rank {
@@ -223,7 +222,7 @@ ul.titles > li.unlocked .title-rarity {
 }
 
 ul.titles > li.unlocked .title-description {
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 ul.titles > li.selected .title-name {
@@ -260,4 +259,12 @@ ul.titles > li.selected .title-name {
   display: flex;
   gap: 0.25em;
   flex-wrap: wrap;
+}
+
+.profile-modal .elo-tab {
+  text-align: center;
+}
+
+.profile-modal .elo-tab p {
+  margin: 1em 0;
 }

@@ -45,6 +45,7 @@ import {
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnDamageReceivedEffect,
+  OnShieldDepletedEffect,
   PeriodicEffect
 } from "../effects/effect"
 import {
@@ -52,7 +53,6 @@ import {
   BergmiteOnBackEffect,
   FalinksFormationEffect
 } from "../effects/passives"
-import { FlyingProtectionEffect } from "../effects/synergies"
 import {
   getMoveSpeed,
   getStrongestUnit,
@@ -719,16 +719,25 @@ export class ChatterStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const damage = 20
-    const confusionChance = 0.4
-    board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (tg && pokemon.team != tg.team) {
-        tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-        if (chance(confusionChance, pokemon)) {
-          tg.status.triggerConfusion(1000, tg, pokemon)
+    const damage = 30
+    const confusionChance = 0.5
+
+    board
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3, false)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team !== pokemon.team) {
+          cell.value.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          if (chance(confusionChance, pokemon)) {
+            cell.value.status.triggerConfusion(1000, cell.value, pokemon)
+          }
         }
-      }
-    })
+      })
   }
 }
 
@@ -3156,12 +3165,7 @@ export class TwisterStrategy extends AbilityStrategy {
         pokemon.id !== cell.value.id &&
         cell.value.hasSynergyEffect(Synergy.FLYING)
       ) {
-        const flyingProtectionEffect = [...cell.value.effectsSet].find(
-          (e) => e instanceof FlyingProtectionEffect
-        )
-        if (flyingProtectionEffect) {
-          flyingProtectionEffect.trigger(cell.value, board)
-        }
+        cell.value.flyAway(board)
       }
     })
   }
@@ -5366,6 +5370,14 @@ export class ShellTrapStrategy extends AbilityStrategy {
           }
         })
       pokemon.shield = 0
+      pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
+        effect.apply({
+          pokemon,
+          board: pokemon.simulation.board,
+          attacker: pokemon as PokemonEntity,
+          damage
+        })
+      })
     } else {
       const shield = 75
       pokemon.addShield(shield, pokemon, 1, crit)
@@ -7488,7 +7500,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
     const x = target.positionX
     const y = target.positionY
     const damage = [40, 80, 120][pokemon.stars - 1] ?? 120
-    target.flyAway(board)
+    target.flyAway(board, false, false)
     pokemon.broadcastAbility({
       positionX: x,
       positionY: y,
@@ -11255,22 +11267,18 @@ export class FirestarterStrategy extends AbilityStrategy {
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const speedBuff = [10, 20, 40][pokemon.stars - 1] ?? 40
 
-    const farthestCoordinate =
-      board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    const flyAwayCell = pokemon.flyAway(board, false)
     const targetsHit: Set<PokemonEntity> = new Set()
 
-    if (farthestCoordinate) {
+    if (flyAwayCell) {
       const cells = board.getCellsBetween(
         pokemon.positionX,
         pokemon.positionY,
-        farthestCoordinate.x,
-        farthestCoordinate.y
+        flyAwayCell.x,
+        flyAwayCell.y
       )
       cells.forEach((cell, i) => {
-        if (
-          cell.x === farthestCoordinate.x &&
-          cell.y === farthestCoordinate.y
-        ) {
+        if (cell.x === flyAwayCell.x && cell.y === flyAwayCell.y) {
           pokemon.commands.push(
             new DelayedCommand(() => {
               pokemon.addSpeed(speedBuff, pokemon, 1, crit)
@@ -11314,7 +11322,6 @@ export class FirestarterStrategy extends AbilityStrategy {
           )
         }
       })
-      pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
     }
 
     if (targetsHit.size === 0) {
@@ -12629,15 +12636,7 @@ export class RoostStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const shield = [20, 40, 80][pokemon.stars - 1] ?? 80
-    // move to backline
-    const corner = board.getTeleportationCell(
-      pokemon.positionX,
-      pokemon.positionY,
-      pokemon.team
-    )
-    if (corner) {
-      pokemon.moveTo(corner.x, corner.y, board, false)
-    }
+    pokemon.flyAway(board, false)
     pokemon.status.triggerSleep(1000, pokemon)
     pokemon.addShield(shield, pokemon, 1, crit)
   }
@@ -14031,16 +14030,16 @@ export class TerrainPulseStrategy extends AbilityStrategy {
       const field = pickRandomIn([...fields])
       switch (field) {
         case "fairyField":
-          pkm.status.fairyField = true
+          pkm.status.addFairyField(pkm)
           break
         case "electricField":
-          pkm.status.electricField = true
+          pkm.status.addElectricField(pkm)
           break
         case "grassField":
-          pkm.status.grassField = true
+          pkm.status.addGrassField(pkm)
           break
         case "psychicField":
-          pkm.status.psychicField = true
+          pkm.status.addPsychicField(pkm)
           break
       }
       pokemonsWithField.set(pkm, getFieldEffect(pkm)!)
@@ -14126,7 +14125,7 @@ export class ExpandingForceStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     // User gains PSYCHIC_FIELD, or spreads it to a nearby ally.
     if (!pokemon.status.psychicField) {
-      pokemon.status.psychicField = true
+      pokemon.status.addPsychicField(pokemon)
     } else {
       // Find nearby ally without PSYCHIC_FIELD and give it to them
       const nearbyAllies = board.cells
@@ -14152,7 +14151,7 @@ export class ExpandingForceStrategy extends AbilityStrategy {
 
       if (nearbyAllies.length > 0) {
         const chosen = nearbyAllies[0]
-        chosen.status.psychicField = true
+        chosen.status.addPsychicField(chosen)
       }
     }
 
@@ -15195,7 +15194,7 @@ export class PlasmaTempestStrategy extends AbilityStrategy {
     const damage = 40
 
     // Make the Pokemon fly away
-    pokemon.flyAway(board)
+    pokemon.flyAway(board, false)
 
     pokemon.commands.push(
       new DelayedCommand(() => {
@@ -17093,7 +17092,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
   [Ability.RAGING_BULL]: new RagingBullStrategy(),
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
-  [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
+  [Ability.HEADLONG_RUSH]: new HeadlongRushStrategy(),
   [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
   [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),

@@ -1,0 +1,252 @@
+:root {
+  --color-bg-primary: #f0f0f0;
+  --color-bg-secondary: white;
+  --color-bg-tertiary: #e0e0e0;
+  --color-bg-accent: #f1db21;
+  --color-bg-positive: #95ff52;
+  --color-bg-negative: #cf4141;
+  --color-bg-gold: #e3c449;
+  --color-bg-input: #d0d0d0;
+
+  --color-fg-primary: black;
+  --color-fg-secondary: #555;
+  --color-fg-invert: white;
+  --color-fg-accent: #437697;
+  --color-fg-green: #6dad15;
+  --color-fg-red: #c21010;
+  --color-fg-gold: #c9a000;
+  --color-fg-positive: #009000;
+  --color-fg-negative: #aa0000;
+
+  --color-rarity-unique: var(--color-fg-accent);
+  --color-rarity-legendary: var(--color-fg-gold);
+
+  --color-checkbox-light: #fff;
+  --color-checkbox-focus: #adafbc;
+  --color-checkbox-dark: #212529;
+
+  --color-role-admin: #42ff6e;
+  --color-role-moderator: #5facff;
+  --color-role-basic: #bfbfbf;
+  --color-role-bot: #9caab6;
+  --color-role-bot-manager: #dc3545;
+  --color-role-banned: red;
+
+  --border-thin: 4px solid black;
+}
+
+@font-face {
+  font-family: PokemonClassic;
+  src: url("/assets/ui/PokemonClassic.ttf") format("truetype");
+}
+
+html {
+  font-family: PokemonClassic, sans-serif;
+}
+
+body {
+  background-image: url("/assets/theme/origin/custombg.jpg");
+  background-size: cover;
+  font-size: 16px;
+}
+
+.custom-bg {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: none;
+}
+
+.my-container,
+.my-box,
+.bubbly,
+input[type="text"],
+input[type="search"],
+select {
+  border-radius: 0;
+}
+
+.modal.my-container {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.bubbly {
+  padding: 0.5em 2em;
+}
+
+.pokemon-portrait {
+  border: 4px solid transparent;
+  box-shadow: none;
+}
+
+aside.sidebar {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+aside.sidebar .ps-sidebar-container {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar .sidebar-logo h1 {
+  white-space: normal;
+  width: 200px;
+}
+
+.react-tabs__tab {
+  color: var(--color-fg-primary);
+  background: white;
+  text-shadow: none;
+  font-size: 0.8em;
+  border-radius: 0;
+  border: var(--border-thin);
+}
+
+.react-tabs__tab.icon-tab {
+  background-color: transparent;
+}
+
+.bubbly,
+.bubbly:not([disabled]):active {
+  background-color: #eee;
+  color: var(--color-fg-primary);
+}
+
+.badge {
+  padding: 0.4em;
+}
+
+#wiki-page h2,
+#wiki-page .wiki-status h2,
+#wiki-ability h2,
+#wiki-weather .my-box h2,
+#wiki-town .my-box h2,
+#wiki-regions .my-box h2,
+.profile-modal h2 {
+  font-size: 1em;
+}
+
+.wiki-status li .status-label {
+  font-size: 0.8em;
+}
+
+.pokemon-emotion > p {
+  font-size: 12px;
+}
+
+p.dust > span {
+  font-size: 0.8em;
+  letter-spacing: -2px;
+}
+
+.game-pokemon-detail {
+  font-size: 12px;
+}
+
+.game-pokemon-detail-stats img + span {
+  letter-spacing: -2px;
+}
+
+.ps-menu-icon img,
+.dish-icon,
+.weather-icon,
+.gadget > img,
+img[src="/assets/ui/additional-pick.svg"],
+img[src="/assets/ui/battle.svg"],
+img[src="/assets/ui/carousel.svg"],
+img[src="/assets/ui/mythical.svg"],
+img[src="assets/ui/load.svg"],
+img[src="assets/ui/save.svg"],
+.connection-status-notification img,
+.map-information > img,
+.weather-information > img {
+  filter: invert() opacity(0.8);
+}
+
+.synergies-list .synergy-icon + span {
+  margin: -0.2em 0.1em 0.1em 0.1em;
+}
+
+#selected-entity fieldset {
+  font-size: 0.75em;
+}
+
+#bot-builder .step-control {
+  font-size: 1em;
+}
+
+.profile-modal .gadget span {
+  font-size: 1em;
+}
+
+.game-options-modal {
+  width: 560px;
+}
+
+/* Preparation */
+
+.preparation-menu h1,
+.preparation-menu p,
+.preparation-menu label {
+  text-shadow: none;
+}
+
+.preparation-menu .actions,
+.preparation-menu .elo {
+  letter-spacing: -2px;
+}
+
+.preparation-page .preparation-menu {
+  flex: 0 1 75em;
+}
+
+/* Game */
+
+.game-player .life-text {
+  width: 5em;
+  padding: 0.25em 0 0.5em;
+}
+
+.draggable-window.my-container,
+.game-shop .information > div,
+#game-stage-info,
+.game-spectate-player-info.my-container {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.game-shop.my-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.team-builder-modal.my-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.synergies-container .draggable-window-content,
+.team-builder-modal .modal-body {
+  background-color: transparent;
+}
+
+.game-final-rank .rank {
+  text-shadow: none;
+}
+
+.game-pokemon-portrait.empty {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.game-experience .progress-bar {
+  height: 3em;
+}
+
+.game-rarity-percentage > div:first-of-type,
+.game-rarity-percentage > div:last-of-type {
+  border-radius: 0;
+}
+
+/* After game */
+
+.after-menu .player-rank,
+.after-menu table td:first-child {
+  text-shadow: none;
+}

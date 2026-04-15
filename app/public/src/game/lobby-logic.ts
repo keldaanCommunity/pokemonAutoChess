@@ -1,7 +1,7 @@
 import { getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
-import { NavigateFunction } from "react-router-dom"
+import { NavigateFunction } from "react-router"
 import {
   TournamentBracketSchema,
   TournamentPlayerSchema,
@@ -118,6 +118,7 @@ export async function joinLobbyRoom(
               if (errorMessage) {
                 dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
               }
+              dispatch(resetLobby())
               navigate("/")
             }
           })
@@ -316,7 +317,7 @@ export async function joinExistingPreparationRoom(
           `Expected to join a preparation room but joined ${room.name} instead`
         )
       }
-      joinPreparation(room, 30)      
+      joinPreparation(room, 30)
       leaveRoom("lobby")
       dispatch(resetLobby())
       navigate("/preparation")

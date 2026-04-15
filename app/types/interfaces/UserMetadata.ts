@@ -37,7 +37,22 @@ export interface IUserMetadataMongo extends IUserMetadata {
 
 export interface IPokemonCollectionItemMongo extends IPokemonCollectionItem {
   // OPTIMIZED: Single field to store all unlocked emotions data in 5 bytes (40 bits used)
-  unlocked: Buffer
+  unlocked: Uint8Array
+}
+
+// When using .lean(), Mongoose returns BSON Binary objects instead of Buffer
+export type IPokemonCollectionItemLean = Omit<
+  IPokemonCollectionItemMongo,
+  "unlocked"
+> & {
+  unlocked: Uint8Array | { buffer: ArrayBuffer } | undefined
+}
+
+export type IUserMetadataLean = Omit<
+  IUserMetadataMongo,
+  "pokemonCollection"
+> & {
+  pokemonCollection: Record<string, IPokemonCollectionItemLean>
 }
 
 // When using .lean(), Mongoose returns BSON Binary objects instead of Buffer

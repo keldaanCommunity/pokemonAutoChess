@@ -40,7 +40,7 @@ import {
   PkmIndex,
   Unowns
 } from "../../types/enum/Pokemon"
-import { StarterAvatars, Starters } from "../../types/enum/Starters"
+import { Starters } from "../../types/enum/Starters"
 import {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
@@ -338,7 +338,7 @@ export class OpenBoosterCommand extends Command<
         {
           $inc: { booster: -1 }
         },
-        { new: true }
+        { returnDocument: "after" }
       )
 
       if (!userDoc) return // No boosters available or user not found
@@ -794,7 +794,7 @@ export class BuyBoosterCommand extends Command<
             [`pokemonCollection.${shardIndex}.dust`]: -boosterCost
           }
         },
-        { new: true }
+        { returnDocument: "after" }
       )
       if (!mongoUser) return
 

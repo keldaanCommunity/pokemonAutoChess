@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
 import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
-import { GADGETS } from "../../../../../core/gadgets"
+import { GADGETS } from "../../../../../config/game/gadgets"
 import { Role } from "../../../../../types"
 import {
   selectConnectedPlayer,
@@ -105,7 +105,7 @@ export function MainSidebar(props: MainSidebarProps) {
         setModal((current) => (current === "wiki" ? undefined : "wiki"))
       } else if (
         key === keybindings.team_planner &&
-        profileLevel >= GADGETS.TEAM_PLANNER.levelRequired
+        profileLevel >= GADGETS.team_planner.levelRequired
       ) {
         e.preventDefault()
         setModal((current) =>
@@ -135,7 +135,12 @@ export function MainSidebar(props: MainSidebarProps) {
   }
 
   return (
-    <Sidebar collapsed={collapsed} className="sidebar" ref={sidebarRef}>
+    <Sidebar
+      collapsed={collapsed}
+      className="sidebar"
+      ref={sidebarRef}
+      backgroundColor="transparent"
+    >
       <Menu>
         <div className="sidebar-logo" onClick={() => setCollapsed(!collapsed)}>
           <img src={`assets/ui/colyseus-icon.png`} />
@@ -173,11 +178,11 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page === "main_lobby" && (
           <NavLink location="profile" svg="profile" handleClick={changeModal}>
-            {t("profile")}
+            {t("profile.title")}
           </NavLink>
         )}
 
-        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
+        {page === "main_lobby" && profileLevel >= GADGETS.bag.levelRequired && (
           <NavLink
             location="collection"
             svg="collection"
@@ -187,7 +192,7 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page === "main_lobby" && profileLevel >= GADGETS.BAG.levelRequired && (
+        {page === "main_lobby" && profileLevel >= GADGETS.bag.levelRequired && (
           <NavLink
             location="booster"
             svg="booster"
@@ -215,7 +220,7 @@ export function MainSidebar(props: MainSidebarProps) {
           {t("meta")}
         </NavLink>
 
-        {profileLevel >= GADGETS.TEAM_PLANNER.levelRequired && (
+        {profileLevel >= GADGETS.team_planner.levelRequired && (
           <NavLink
             svg="team-builder"
             location="team-builder"
@@ -226,8 +231,8 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         {page !== "game" &&
-          ((!GADGETS.POKEGUESSER.disabled &&
-            profileLevel >= GADGETS.POKEGUESSER.levelRequired) ||
+          ((!GADGETS.pokeguesser.disabled &&
+            profileLevel >= GADGETS.pokeguesser.levelRequired) ||
             profile?.role === Role.ADMIN) && (
             <NavLink
               svg="pokeguesser"
@@ -238,8 +243,8 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
           )}
 
-        {((!GADGETS.SYNERGY_WHEEL.disabled &&
-          profileLevel >= GADGETS.SYNERGY_WHEEL.levelRequired) ||
+        {((!GADGETS.synergy_wheel.disabled &&
+          profileLevel >= GADGETS.synergy_wheel.levelRequired) ||
           profile?.role === Role.ADMIN) && (
           <NavLink
             svg="synergy-wheel"
@@ -251,8 +256,8 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         {page !== "game" &&
-          ((!GADGETS.BOT_BUILDER.disabled &&
-            profileLevel >= GADGETS.BOT_BUILDER.levelRequired) ||
+          ((!GADGETS.bot_builder.disabled &&
+            profileLevel >= GADGETS.bot_builder.levelRequired) ||
             profile?.role === Role.ADMIN) && (
             <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
               {t("bot_builder")}
@@ -260,16 +265,16 @@ export function MainSidebar(props: MainSidebarProps) {
           )}
 
         {page !== "game" &&
-          ((!GADGETS.GAMEBOY.disabled &&
-            profileLevel >= GADGETS.GAMEBOY.levelRequired) ||
+          ((!GADGETS.gameboy.disabled &&
+            profileLevel >= GADGETS.gameboy.levelRequired) ||
             profile?.role === Role.ADMIN) && (
             <NavLink svg="gameboy" onClick={() => navigate("/gameboy")}>
               {t("gadget.gameboy")}
             </NavLink>
           )}
 
-        {((!GADGETS.TIER_LIST_MAKER.disabled &&
-          profileLevel >= GADGETS.TIER_LIST_MAKER.levelRequired) ||
+        {((!GADGETS.tier_list_maker.disabled &&
+          profileLevel >= GADGETS.tier_list_maker.levelRequired) ||
           profile?.role === Role.ADMIN) && (
           <NavLink
             svg="tier-list"
@@ -313,7 +318,7 @@ export function MainSidebar(props: MainSidebarProps) {
           </>
         )}
 
-        {page === "game" && profileLevel >= GADGETS.JUKEBOX.levelRequired && (
+        {page === "game" && profileLevel >= GADGETS.jukebox.levelRequired && (
           <NavLink
             svg="compact-disc"
             location="jukebox"
@@ -324,7 +329,7 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         <NavLink svg="options" location="options" handleClick={changeModal}>
-          {t("options")}
+          {t("options.title")}
         </NavLink>
 
         {page === "game" && document.fullscreenEnabled && (
@@ -502,7 +507,7 @@ function Modals({
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
-        header={t("profile")}
+        header={t("profile.title")}
       >
         <Profile />
       </Modal>

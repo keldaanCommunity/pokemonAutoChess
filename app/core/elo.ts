@@ -1,6 +1,5 @@
 import { ISimplePlayer } from "../types"
 import { GameMode } from "../types/enum/Game"
-import { logger } from "../utils/logger"
 import { average, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"
 

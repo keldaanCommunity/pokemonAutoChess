@@ -8,6 +8,7 @@ import {
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
   ELO_DECAY_LOST_PER_DAY,
+  ELO_DECAY_NB_GAMES_REQUIRED,
   EloRankThreshold,
   getCurrentGameEvent
 } from "../config"
@@ -135,7 +136,8 @@ async function eloDecay() {
       )
 
       const shouldDecay =
-        stats.length < 3 || Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
+        stats.length < ELO_DECAY_NB_GAMES_REQUIRED ||
+        Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
 
       if (shouldDecay) {
         const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(

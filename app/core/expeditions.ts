@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import { precomputedPokemons } from "../../gen/precomputed-pokemons"
 import { getBaseAltForm, RegionDetails, SynergyTriggers } from "../config"
+import { precomputedPokemons } from "../models/precomputed/precomputed-pokemons"
 import {
   CraftableItemsNoScarves,
   Item,
@@ -92,6 +92,16 @@ export function getExpeditionLabel(expedition: Expedition): string {
       })
     }
   }
+
+  if (expedition.type === ExpeditionType.EXPLORATION) {
+    const data = getExpeditionData(expedition) as ExplorationMissionData
+    return t(`expeditions.EXPLORATION_DESCRIPTION`, {
+      ...data,
+      regionSynergies: RegionDetails[data.region].synergies.join(" ")
+    })
+  }
+
+
   return t(
     `expeditions.${expedition.type}_DESCRIPTION`,
     getExpeditionData(expedition)
@@ -140,7 +150,7 @@ export function getExpeditionData(
               (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
             ) === index
         ) // get only base alt forms
-      console.log({ pokemonsOfCategory: pokemonsOfCategory.map((p) => p.name) })
+
       const pokemonToRescue =
         pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
       return { pokemon: pokemonToRescue }

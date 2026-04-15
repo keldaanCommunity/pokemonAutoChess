@@ -9,10 +9,9 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-
-import { IItemsStatisticV2 } from "../../../../../models/mongo-models/items-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Item } from "../../../../../types/enum/Item"
+import { IItemsStatisticV2 } from "../../../models/items-statistic-v2"
 import { formatDateShort } from "./history-utils"
 import "./item-history-panel.css"
 

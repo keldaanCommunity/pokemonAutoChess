@@ -3,7 +3,6 @@ import { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
 import type { server } from "../../app.config.ts"
 import { FIREBASE_CONFIG } from "../../config"
-import { IBot } from "../../models/mongo-models/bot-v2.js"
 import AfterGameState from "../../rooms/states/after-game-state"
 import GameState from "../../rooms/states/game-state"
 import LobbyState from "../../rooms/states/lobby-state"
@@ -16,6 +15,7 @@ import { PkmProposition } from "../../types/enum/Pokemon.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
+import { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
 import { logIn, setProfile } from "./stores/NetworkStore"
@@ -312,6 +312,62 @@ export async function renameAccount(
     throw new Error(body.error ?? res.statusText)
   }
   return res.json()
+}
+
+export type TwitchBlacklistEntry = {
+  streamerLogin: string
+  reason?: string
+  createdBy: string
+  createdAt?: string
+  updatedAt?: string
+}
+
+export async function getTwitchBlacklist(): Promise<TwitchBlacklistEntry[]> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/moderation/twitch-blacklist", {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+  return res.json()
+}
+
+export async function addTwitchBlacklist(
+  streamerLogin: string,
+  reason?: string
+): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/moderation/twitch-blacklist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ streamerLogin, reason })
+  })
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
+export async function removeTwitchBlacklist(
+  streamerLogin: string
+): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch(
+    `/moderation/twitch-blacklist/${encodeURIComponent(streamerLogin)}`,
+    {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    }
+  )
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
 }
 
 export function ban(params: { uid: string; reason: string }) {

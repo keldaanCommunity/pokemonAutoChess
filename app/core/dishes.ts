@@ -35,7 +35,7 @@ export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.CHERUBI]: Item.HERBA_MYSTICA,
   [Pkm.CHERRIM]: Item.HERBA_MYSTICA,
   [Pkm.CHERRIM_SUNLIGHT]: Item.HERBA_MYSTICA,
-  [Pkm.TROPIUS]: Item.BERRIES,
+  [Pkm.TROPIUS]: Item.NANAB_BERRY,
   [Pkm.SHUCKLE]: Item.BERRY_JUICE,
   [Pkm.COMBEE]: Item.HONEY,
   [Pkm.VESPIQUEEN]: Item.HONEY,
@@ -85,7 +85,6 @@ export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
-  BERRIES: [],
   BERRY_JUICE: [
     new OnSpawnEffect((entity) => {
       entity.addShield(100, entity, 0, false)
@@ -173,22 +172,22 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   HERBA_MYSTICA: [],
   HERBA_MYSTICA_SWEET: [
     new OnSpawnEffect((entity) => {
-      entity.status.fairyField = true
+      entity.status.addFairyField(entity)
     })
   ],
   HERBA_MYSTICA_SPICY: [
     new OnSpawnEffect((entity) => {
-      entity.status.psychicField = true
+      entity.status.addPsychicField(entity)
     })
   ],
   HERBA_MYSTICA_SOUR: [
     new OnSpawnEffect((entity) => {
-      entity.status.electricField = true
+      entity.status.addElectricField(entity)
     })
   ],
   HERBA_MYSTICA_BITTER: [
     new OnSpawnEffect((entity) => {
-      entity.status.grassField = true
+      entity.status.addGrassField(entity)
     })
   ],
   HERBA_MYSTICA_SALTY: [

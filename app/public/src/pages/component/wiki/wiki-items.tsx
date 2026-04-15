@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ArtificialItems,
@@ -66,8 +66,10 @@ export default function WikiItems() {
   return (
     <div id="wiki-items">
       <article className="craftable">
-        <h2>{t("item_recipes")}</h2>
-        <p>{addIconsToDescription(t("craftable_items_description"))}</p>
+        <h2>{t("wiki.items.item_recipes")}</h2>
+        <p>
+          {addIconsToDescription(t("wiki.items.craftable_items_description"))}
+        </p>
         <table>
           <tbody>
             <tr>
@@ -141,31 +143,31 @@ export default function WikiItems() {
       </article>
       <article>
         <h2>{t("shiny_items")}</h2>
-        <p>{addIconsToDescription(t("shiny_items_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.shiny_items_description"))}</p>
         <ul className="shiny">
           <ItemList items={ShinyItems} />
         </ul>
 
-        <h2>{t("town_items")}</h2>
-        <p>{t("town_items_description")}</p>
+        <h2>{t("wiki.items.town_items")}</h2>
+        <p>{t("wiki.items.town_items_description")}</p>
         <ul className="town">
           <ItemList items={TownItems} />
         </ul>
 
         <h2>{t("special_items")}</h2>
-        <p>{t("special_items_description")}</p>
+        <p>{t("wiki.items.special_items_description")}</p>
         <ul className="special">
           <ItemList items={specialItems} />
         </ul>
       </article>
 
       <article className="synergy-items">
-        <h2>{t("items_from_synergies")}</h2>
+        <h2>{t("wiki.items.items_from_synergies")}</h2>
 
         <h3>
           <SynergyIcon type={Synergy.NORMAL} /> {t("scarves")}
         </h3>
-        <p>{addIconsToDescription(t("scarves_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.scarves_description"))}</p>
         <table>
           <tbody>
             <tr>
@@ -236,11 +238,11 @@ export default function WikiItems() {
         <h3>
           <SynergyIcon type={Synergy.ARTIFICIAL} /> {t("tools")}
         </h3>
-        <p>{addIconsToDescription(t("tools_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.tools_description"))}</p>
         <ul>
           <ItemList items={ArtificialItems} />
         </ul>
-        <p>{addIconsToDescription(t("other_tools_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.other_tools_description"))}</p>
         <ul>
           <ItemList
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
@@ -248,13 +250,15 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.GROUND} /> {t("gems")}
+          <SynergyIcon type={Synergy.GROUND} /> {t("wiki.items.gems")}
         </h3>
-        <p>{addIconsToDescription(t("gems_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.gems_description"))}</p>
         <ul>
           <ItemList items={SynergyGemsBuried} />
         </ul>
-        <p>{addIconsToDescription(t("gems_not_buried_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.gems_not_buried_description"))}
+        </p>
         <ul>
           <ItemList
             items={SynergyGems.filter(
@@ -262,15 +266,21 @@ export default function WikiItems() {
             )}
           />
         </ul>
-        <p>{addIconsToDescription(t("you_may_also_find_in_the_ground"))}</p>
+        <p>
+          {addIconsToDescription(
+            t("wiki.items.you_may_also_find_in_the_ground")
+          )}
+        </p>
         <ul>
           <ItemList items={otherBuriedItems} />
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.ROCK} /> {t("weather_rocks")}
+          <SynergyIcon type={Synergy.ROCK} /> {t("wiki.items.weather_rocks")}
         </h3>
-        <p>{addIconsToDescription(t("weather_rocks_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.weather_rocks_description"))}
+        </p>
         <ul>
           <ItemList items={WeatherRocks} />
         </ul>
@@ -278,7 +288,7 @@ export default function WikiItems() {
         <h3>
           <SynergyIcon type={Synergy.HUMAN} /> {t("tm")}
         </h3>
-        <p>{addIconsToDescription(t("tm_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.tm_description"))}</p>
         <ul>
           <ItemList items={TMsBronze} />
           <ItemList items={TMsSilver} />
@@ -286,11 +296,11 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.GRASS} /> {t("berries")}
+          <SynergyIcon type={Synergy.GRASS} /> {t("wiki.items.berries")}
         </h3>
-        <p>{addIconsToDescription(t("berries_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.berries_description"))}</p>
         <ul>
-          {Berries.map((berry) => (
+          {Berries.filter((b) => b !== Item.NANAB_BERRY).map((berry) => (
             <li
               key={berry}
               data-tooltip-id="item-detail-tooltip"
@@ -307,25 +317,27 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.GOURMET} /> {t("dishes")}
+          <SynergyIcon type={Synergy.GOURMET} /> {t("wiki.items.dishes")}
         </h3>
-        <p>{addIconsToDescription(t("dishes_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.dishes_description"))}</p>
         <ul>
-          <ItemList items={[Item.CHEF_HAT, ...Dishes] as Item[]} />
+          <ItemList
+            items={[Item.CHEF_HAT, ...Dishes, Item.NANAB_BERRY] as Item[]}
+          />
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.WATER} /> {t("fishing_rods")}
+          <SynergyIcon type={Synergy.WATER} /> {t("wiki.items.fishing_rods")}
         </h3>
-        <p>{addIconsToDescription(t("fishing_rods_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.fishing_rods_description"))}</p>
         <ul>
           <ItemList items={[...FishingRods].reverse()} />
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.FLORA} /> {t("mulch")}
+          <SynergyIcon type={Synergy.FLORA} /> {t("wiki.items.mulch")}
         </h3>
-        <p>{addIconsToDescription(t("mulch_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.mulch_description"))}</p>
         <ul>
           <ItemList items={Mulches} />
         </ul>
@@ -333,7 +345,7 @@ export default function WikiItems() {
         <h3>
           <SynergyIcon type={Synergy.ELECTRIC} /> {t("item.CELL_BATTERY")}
         </h3>
-        <p>{addIconsToDescription(t("cell_battery_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.cell_battery_description"))}</p>
         <ul>
           <ItemList items={[Item.CELL_BATTERY]} />
         </ul>
@@ -341,7 +353,7 @@ export default function WikiItems() {
         <h3>
           <SynergyIcon type={Synergy.FIRE} /> {t("item.FIRE_SHARD")}
         </h3>
-        <p>{addIconsToDescription(t("fire_shard_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} />
         </ul>

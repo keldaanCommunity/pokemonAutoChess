@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: white;
+  color: var(--color-fg-primary);
   font-weight: bold;
 }
 

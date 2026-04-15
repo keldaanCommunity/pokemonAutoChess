@@ -1,7 +1,7 @@
 import React, { Suspense } from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router"
 import i18n from "./i18n"
 import AfterGame from "./pages/after-game"
 import Auth from "./pages/auth"
@@ -16,6 +16,7 @@ import { SpriteDebug } from "./pages/sprite-viewer"
 import TranslationsPage from "./pages/translations"
 import store from "./stores/index"
 import "./style/index.css"
+import "./theme"
 
 // Redirect top window if running in an iframe
 if (window.top && window !== window.top) {
@@ -35,12 +36,7 @@ i18n.on("initialized", () => {
     <Provider store={store}>
       <React.StrictMode>
         <Suspense fallback="loading">
-          <BrowserRouter
-            future={{
-              v7_startTransition: true,
-              v7_relativeSplatPath: true
-            }}
-          >
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<Auth />} />
               <Route path="/lobby" element={<Lobby />} />

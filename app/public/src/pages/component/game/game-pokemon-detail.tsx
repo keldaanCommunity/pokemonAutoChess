@@ -1,5 +1,5 @@
 import { GameObjects } from "phaser"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -283,7 +283,7 @@ export function GamePokemonDetail(props: {
       {dish && (
         <div className="game-pokemon-detail-dish">
           <div className="game-pokemon-detail-dish-name">
-            <img src="assets/ui/dish.svg" />
+            <img src="assets/ui/dish.svg" className="dish-icon" />
             <i>{t("signature_dish")}:</i> {t(`item.${dish}`)}
           </div>
           <img

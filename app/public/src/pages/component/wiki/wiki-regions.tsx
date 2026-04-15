@@ -89,8 +89,8 @@ export default function WikiRegions() {
         />
       </div>
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
-        <p>{t("region_hint1")}</p>
-        <p>{t("region_hint2")}</p>
+        <p>{t("wiki.regions.region_hint1")}</p>
+        <p>{t("wiki.regions.region_hint2")}</p>
       </div>
       <div style={{ flex: 1, minHeight: 0 }}>
         <AutoSizer

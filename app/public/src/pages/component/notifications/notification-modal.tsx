@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { GADGETS } from "../../../../../config/game/gadgets"
 import { INotification } from "../../../../../types/notifications"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"
@@ -53,6 +54,10 @@ export function NotificationModal({
     switch (notification.type) {
       case "new_title":
         return t("notification.new_title_title")
+      case "new_gadget":
+        return t("notification.new_gadget_title")
+      case "new_theme":
+        return t("notification.new_theme_title")
       case "elo_rank_change":
         return t("notification.elo_rank_change_title")
       case "victory_road_finished":
@@ -82,6 +87,15 @@ export function NotificationModal({
         return t("notification.new_title_message", {
           title: t(`title.${notification.message}`),
           description: t(`title_description.${notification.message}`)
+        })
+      case "new_gadget":
+        return t("notification.new_gadget_message", {
+          gadget: t(`gadget.${notification.message}`),
+          description: t(`gadget.${notification.message}_desc`)
+        })
+      case "new_theme":
+        return t("notification.new_theme_message", {
+          theme: t(`theme.${notification.message}`)
         })
       case "elo_rank_change":
         return t("notification.elo_rank_change_message", {
@@ -119,6 +133,10 @@ export function NotificationModal({
     switch (notification.type) {
       case "new_title":
         return `/assets/titles/${notification.message}.svg`
+      case "new_gadget":
+        return `/assets/ui/${GADGETS[notification.message as keyof typeof GADGETS].icon}.svg`
+      case "new_theme":
+        return `/assets/ui/palette.svg`
       case "elo_rank_change":
         return `/assets/ranks/${notification.message}.svg`
       case "victory_road_finished":

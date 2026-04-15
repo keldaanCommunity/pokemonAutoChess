@@ -192,6 +192,7 @@ export enum Item {
   CASTELIACONE = "CASTELIACONE",
   WHIPPED_DREAM = "WHIPPED_DREAM",
   BERRY_JUICE = "BERRY_JUICE",
+  NANAB_BERRY = "NANAB_BERRY",
   OLIVE_OIL = "OLIVE_OIL",
   TART_APPLE = "TART_APPLE",
   SWEET_APPLE = "SWEET_APPLE",
@@ -203,7 +204,6 @@ export enum Item {
   HERBA_MYSTICA_BITTER = "HERBA_MYSTICA_BITTER",
   HERBA_MYSTICA_SALTY = "HERBA_MYSTICA_SALTY",
   MOOMOO_MILK = "MOOMOO_MILK",
-  BERRIES = "BERRIES",
   HONEY = "HONEY",
   MUSHROOMS = "MUSHROOMS",
   TINY_MUSHROOM = "TINY_MUSHROOM",
@@ -284,6 +284,7 @@ export enum Item {
   MONSTER_MEMORY = "MONSTER_MEMORY",
   AQUATIC_MEMORY = "AQUATIC_MEMORY",
   DRAGON_MEMORY = "DRAGON_MEMORY",
+  FLORA_MEMORY = "FLORA_MEMORY",
   MISSION_ORDER_PINK = "MISSION_ORDER_PINK",
   MISSION_ORDER_RED = "MISSION_ORDER_RED",
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
@@ -333,7 +334,8 @@ export const MemoryDiscs = [
   Item.GOURMET_MEMORY,
   Item.MONSTER_MEMORY,
   Item.AQUATIC_MEMORY,
-  Item.DRAGON_MEMORY
+  Item.DRAGON_MEMORY,
+  Item.FLORA_MEMORY
 ] satisfies Item[]
 
 export const MemoryDiscsBySynergy: {
@@ -363,7 +365,8 @@ export const MemoryDiscsBySynergy: {
   [Synergy.GOURMET]: Item.GOURMET_MEMORY,
   [Synergy.MONSTER]: Item.MONSTER_MEMORY,
   [Synergy.AQUATIC]: Item.AQUATIC_MEMORY,
-  [Synergy.DRAGON]: Item.DRAGON_MEMORY
+  [Synergy.DRAGON]: Item.DRAGON_MEMORY,
+  [Synergy.FLORA]: Item.FLORA_MEMORY
 }
 
 export const MissionOrders = [
@@ -560,6 +563,7 @@ export const NonSpecialBerries: Item[] = [
 ]
 
 export const SpecialBerries: Item[] = [
+  Item.NANAB_BERRY,
   Item.GOLDEN_RAZZ_BERRY,
   Item.GOLDEN_NANAB_BERRY,
   Item.GOLDEN_PINAP_BERRY
@@ -830,7 +834,8 @@ export const SynergyGivenByItem = {
   [Item.GOURMET_MEMORY]: Synergy.GOURMET,
   [Item.MONSTER_MEMORY]: Synergy.MONSTER,
   [Item.AQUATIC_MEMORY]: Synergy.AQUATIC,
-  [Item.DRAGON_MEMORY]: Synergy.DRAGON
+  [Item.DRAGON_MEMORY]: Synergy.DRAGON,
+  [Item.FLORA_MEMORY]: Synergy.FLORA
 } satisfies Record<(typeof SynergyItems)[number], Synergy>
 
 export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
@@ -946,7 +951,6 @@ export const Dishes = [
   Item.SMOKED_FILET,
   Item.SPINDA_COCKTAIL,
   Item.BERRY_JUICE,
-  Item.BERRIES,
   Item.BINDING_MOCHI,
   Item.STRAWBERRY_SWEET,
   Item.LOVE_SWEET,
@@ -980,7 +984,7 @@ export const DishesGoingToInventory = [
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
   Item.BALM_MUSHROOM,
-  ...Berries
+  Item.NANAB_BERRY
 ] satisfies (Dish | Berry)[]
 
 export const ItemsSoldAtTown = [...Mushrooms] satisfies Item[]

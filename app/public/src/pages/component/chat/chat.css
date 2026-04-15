@@ -34,7 +34,7 @@
 }
 
 .chat-history .date {
-  color: white;
+  color: var(--color-fg-primary);
   width: 100%;
   text-align: center;
 }
@@ -54,8 +54,8 @@
   border-radius: 8px;
   font-size: 1.25rem;
   border: var(--border-thin);
-  background: rgba(97, 115, 138, 0.815);
-  color: white;
+  background: var(--color-bg-secondary);
+  color: var(--color-fg-primary);
   cursor: var(--cursor-hover);
 }
 
@@ -103,7 +103,7 @@
 }
 
 .same-user {
-  background-color: rgba(17, 148, 236, 0.604);
+  background-color: var(--color-bg-accent);
 }
 
 .server-message {

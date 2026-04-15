@@ -13,7 +13,7 @@
 
 .game-pokemons-proposition > .my-container > h2,
 .game-pokemons-proposition > .my-container > p {
-  color: white;
+  color: var(--color-fg-primary);
   text-align: center;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .game-pokemons-proposition .additional-pick-item {
-  color: white;
+  color: var(--color-fg-primary);
   text-align: center;
 }
 

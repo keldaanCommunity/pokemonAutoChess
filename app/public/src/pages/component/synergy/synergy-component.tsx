@@ -1,5 +1,4 @@
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
-import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -104,7 +103,7 @@ export default function SynergyComponent(props: {
       <span
         style={{
           fontSize: "32px",
-          textShadow: "2px 2px 2px #00000080",
+          textShadow: "2px 2px 2px #000000c0",
           textAlign: "center",
           marginRight: "4px",
           color: levelReached ? "#ffffff" : "#b8b8b8"
@@ -132,10 +131,10 @@ export default function SynergyComponent(props: {
                 style={{
                   color:
                     levelReached === t
-                      ? "#f7d51d"
+                      ? "var(--color-fg-gold)"
                       : props.value >= t
-                        ? "#ffffff"
-                        : "#b8b8b8"
+                        ? "var(--color-fg-primary)"
+                        : "var(--color-fg-secondary)"
                 }}
               >
                 {t}

@@ -31,7 +31,6 @@ import {
   MissionOrder,
   NonSpecialBerries,
   ScarfItem,
-  Scarves,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMsBronze,
@@ -831,30 +830,31 @@ export default class Player extends Schema implements IPlayer {
   updateGameStats(state: GameState) {
     const simulation = state.simulations.get(this.simulationId)
     if (!simulation) return
+    const team = simulation.entities.filter((e) => e.team === this.team)
 
     this.gameStats.maxAP = Math.max(
       this.gameStats.maxAP,
-      ...simulation.entities.flatMap((e) => e.ap)
+      ...team.flatMap((e) => e.ap)
     )
     this.gameStats.maxAttack = Math.max(
       this.gameStats.maxAttack,
-      ...simulation.entities.flatMap((e) => e.atk)
+      ...team.flatMap((e) => e.atk)
     )
     this.gameStats.maxDefense = Math.max(
       this.gameStats.maxDefense,
-      ...simulation.entities.flatMap((e) => e.def)
+      ...team.flatMap((e) => e.def)
     )
     this.gameStats.maxSpecialDefense = Math.max(
       this.gameStats.maxSpecialDefense,
-      ...simulation.entities.flatMap((e) => e.speDef)
+      ...team.flatMap((e) => e.speDef)
     )
     this.gameStats.maxHP = Math.max(
       this.gameStats.maxHP,
-      ...simulation.entities.flatMap((e) => e.hp)
+      ...team.flatMap((e) => e.hp)
     )
     this.gameStats.maxSpeed = Math.max(
       this.gameStats.maxSpeed,
-      ...simulation.entities.flatMap((e) => e.speed)
+      ...team.flatMap((e) => e.speed)
     )
 
     const dps = simulation.getDpsMeter(this.id)

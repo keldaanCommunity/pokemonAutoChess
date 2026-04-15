@@ -234,7 +234,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canCast(): boolean {
-    return !this.status.silence && !this.items.has(Item.NULLIFY_BANDANNA)
+    return (
+      !this.status.silence &&
+      !this.items.has(Item.NULLIFY_BANDANNA) &&
+      !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
+    )
   }
 
   get canBeMoved(): boolean {
@@ -1354,28 +1358,80 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       .forEach((p) => p?.addPP(p.maxPP - p.pp, p, 0, false))
   }
 
-  flyAway(board: Board) {
-    const flyAwayCell = board.getFlyAwayCell(this.positionX, this.positionY)
-    if (flyAwayCell) {
-      if (this.passive === Passive.GALE_WINGS) {
-        board
-          .getCellsBetween(
-            this.positionX,
-            this.positionY,
-            flyAwayCell.x,
-            flyAwayCell.y
+  flyAway(
+    board: Board,
+    shouldSkydive = this.effects.has(EffectEnum.SKYDIVE),
+    shouldProtect = this.effects.has(EffectEnum.FEATHER_DANCE) ||
+      this.effects.has(EffectEnum.SKYDIVE) ||
+      this.effects.has(EffectEnum.MAX_AIRSTREAM)
+  ): { x: number; y: number; target: PokemonEntity } | null {
+    const flyAwayCell = board.getFlyAwayCell(this)
+
+    if (flyAwayCell && this.passive === Passive.GALE_WINGS) {
+      board
+        .getCellsBetween(
+          this.positionX,
+          this.positionY,
+          flyAwayCell.x,
+          flyAwayCell.y
+        )
+        .forEach((cell) => {
+          board.addBoardEffect(
+            cell.x,
+            cell.y,
+            EffectEnum.EMBER,
+            this.simulation
           )
-          .forEach((cell) => {
-            board.addBoardEffect(
-              cell.x,
-              cell.y,
-              EffectEnum.EMBER,
-              this.simulation
-            )
+        })
+    }
+
+    if (shouldProtect) this.status.triggerProtect(2000)
+    if (shouldSkydive && flyAwayCell?.target) {
+      this.broadcastAbility({
+        skill: "FLYING_TAKEOFF",
+        targetX: flyAwayCell.target.positionX,
+        targetY: flyAwayCell.target.positionY
+      })
+      this.skydiveTo(flyAwayCell.x, flyAwayCell.y, board)
+      this.setTarget(flyAwayCell.target)
+      this.commands.push(
+        new DelayedCommand(() => {
+          this.broadcastAbility({
+            skill: "FLYING_SKYDIVE",
+            positionX: flyAwayCell.x,
+            positionY: flyAwayCell.y,
+            targetX: flyAwayCell.target.positionX,
+            targetY: flyAwayCell.target.positionY
           })
-      }
+        }, 500)
+      )
+      this.commands.push(
+        new DelayedCommand(() => {
+          if (flyAwayCell.target?.hp > 0) {
+            flyAwayCell.target.handleSpecialDamage(
+              1.5 * this.atk,
+              board,
+              AttackType.PHYSICAL,
+              this,
+              chance(this.critChance / 100, this),
+              false
+            )
+          }
+        }, 1000)
+      )
+    } else if (flyAwayCell) {
       this.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
     }
+
+    // make enemies lose aggro after target flies away
+    board.cells
+      .filter(
+        (e): e is PokemonEntity =>
+          e instanceof PokemonEntity && e.hp > 0 && e.targetEntityId === this.id
+      )
+      .forEach((e) => e.setTarget(null))
+
+    return flyAwayCell
   }
 
   applyStat(stat: Stat, value: number, permanent = false) {
@@ -1653,10 +1709,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         heal(50)
         this.status.triggerProtect(2000)
         break
+      case Item.NANAB_BERRY:
+        heal(50)
+        if (this.player && !this.simulation.isGhostBattle) {
+          this.player.addMoney(1, true, this)
+          this.count.moneyCount += 1
+        }
+        break
       case Item.GOLDEN_NANAB_BERRY:
         heal(min(50)(0.5 * this.maxHP))
-        if (this.player && !this.simulation.isGhostBattle)
+        if (this.player && !this.simulation.isGhostBattle) {
           this.player.addMoney(5, true, this)
+          this.count.moneyCount += 5
+        }
         break
       case Item.GOLDEN_RAZZ_BERRY:
         heal(min(50)(0.5 * this.maxHP))

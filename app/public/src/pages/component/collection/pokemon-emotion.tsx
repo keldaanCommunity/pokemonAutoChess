@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { getEmotionCost } from "../../../../../config"
 import { AvatarEmotions, Emotion } from "../../../../../types"

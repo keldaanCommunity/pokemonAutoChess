@@ -1,10 +1,6 @@
 import { model, Schema } from "mongoose"
 import { Title } from "../../types"
-
-export interface ITitleStatistic {
-  name: Title
-  rarity: number
-}
+import type { ITitleStatistic } from "../../types/models/title-statistic"
 
 const titleSchema = new Schema({
   name: {
@@ -17,7 +13,3 @@ const titleSchema = new Schema({
 })
 
 export default model<ITitleStatistic>("TitleStatistic", titleSchema)
-
-export async function fetchTitles(): Promise<ITitleStatistic[]> {
-  return fetch("/titles").then((res) => res.json())
-}

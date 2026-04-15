@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -119,7 +119,7 @@ export default function PlayerBox(props: {
       </div>
       {(role === Role.ADMIN || role === Role.MODERATOR) && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
-          {t("user_id")}: {props.user.uid}
+          {t("profile.account.user_id")}: {props.user.uid}
         </p>
       )}
     </div>

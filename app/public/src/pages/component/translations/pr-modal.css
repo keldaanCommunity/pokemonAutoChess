@@ -85,5 +85,5 @@
 
 /* green bubbly variant */
 .bubbly.green {
-  background-color: var(--color-bg-green);
+  background-color: var(--color-bg-positive);
 }

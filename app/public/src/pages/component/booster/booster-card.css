@@ -141,7 +141,7 @@
 
 .booster-card .name {
   text-align: center;
-  background-color: #4f5160;
+  background-color: var(--color-bg-tertiary);
   font-weight: bold;
   margin: 0px -5px 4px -5px;
   font-size: 1em;
@@ -150,7 +150,7 @@
 }
 
 .booster-card.shiny .name {
-  color: gold;
+  color: var(--color-fg-gold);
 }
 
 .booster-card img.dust {
@@ -163,7 +163,13 @@
 }
 
 .booster-card .new {
-  background: linear-gradient(45deg, #fff 20%, gold 40%, gold 60%, #fff 80%);
+  background: linear-gradient(
+    45deg,
+    var(--color-fg-primary) 20%,
+    var(--color-fg-gold) 40%,
+    var(--color-fg-gold) 60%,
+    var(--color-fg-primary) 80%
+  );
   background-size: 200% auto;
 
   color: #000;

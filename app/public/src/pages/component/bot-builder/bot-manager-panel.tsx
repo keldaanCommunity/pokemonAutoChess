@@ -1,11 +1,11 @@
 import firebase from "firebase/compat/app"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List } from "react-window"
-import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { IBotLight } from "../../../models/bot-v2"
 import { authenticateUser } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -328,9 +328,9 @@ function BotRow({
       <span style={{ color: "#999", fontSize: "80%" }}>{b.id}</span>
       <span>
         {b.approved ? (
-          <span style={{ color: "lime" }}>{t("yes")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>{t("yes")}</span>
         ) : (
-          <span style={{ color: "red" }}>{t("no")}</span>
+          <span style={{ color: "var(--color-fg-negative)" }}>{t("no")}</span>
         )}
       </span>
       <span>

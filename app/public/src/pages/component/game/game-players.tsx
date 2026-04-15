@@ -1,5 +1,4 @@
 import CSS from "csstype"
-import React from "react"
 import { useAppSelector } from "../../../hooks"
 import GamePlayer from "./game-player"
 

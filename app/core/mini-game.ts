@@ -1,5 +1,4 @@
 import { MapSchema } from "@colyseus/schema"
-import { logger } from "colyseus"
 import {
   Bodies,
   Body,
@@ -330,7 +329,7 @@ export class MiniGame {
         state.townEncounters.has(encounter) &&
         state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
       ) {
-        encounter = null // prevent getting the same encounter twice in a gamme
+        encounter = null // prevent getting the same encounter twice in a game
       }
       state.townEncounter = encounter ?? null
       if (encounter) {
@@ -833,20 +832,20 @@ export class MiniGame {
       ) {
         // give a random item if none was taken
         const remainingItems = [...this.items.entries()].filter(
-          ([_itemId, item]) => item.avatarId == ""
+          ([_itemId, item]) => item.avatarId === ""
         )
         if (remainingItems.length > 0) {
           avatar.itemId = pickRandomIn(remainingItems)[0]
         }
       }
 
-      if (avatar.portalId == "") {
+      if (avatar.portalId === "") {
         // random propositions if no portal was taken
         avatar.portalId = "random"
-        if (state.stageLevel == 0 && this.portals) {
+        if (state.stageLevel === 0 && this.portals) {
           // for initial portal, force to pick one of the portals not taken
           avatar.portalId = pickRandomIn(
-            values(this.portals).filter((p) => p.avatarId == "")
+            values(this.portals).filter((p) => p.avatarId === "")
           ).id
         }
       }

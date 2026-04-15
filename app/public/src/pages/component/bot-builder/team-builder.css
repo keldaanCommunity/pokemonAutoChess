@@ -90,12 +90,11 @@
   padding: 5px;
   overflow-y: auto;
   max-height: 100%;
-  max-width: 320px;
   margin: 0 auto;
 }
 
 #selected-entity fieldset {
-  color: white;
+  color: var(--color-fg-primary);
   font-size: 1rem;
   display: flex;
   justify-content: space-between;

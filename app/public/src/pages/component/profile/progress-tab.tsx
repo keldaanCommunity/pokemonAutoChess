@@ -1,8 +1,8 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
 import { PkmAltForms } from "../../../../../config"
-import { GADGETS } from "../../../../../core/gadgets"
+import { GADGETS } from "../../../../../config/game/gadgets"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Title } from "../../../../../types"
 import { NonPkm } from "../../../../../types/enum/Pokemon"
 import { isIn } from "../../../../../utils/array"
@@ -45,7 +45,7 @@ export function ProgressTab() {
     <div>
       <div className="progress-grid">
         <ProgressBox
-          label={t("avatars_unlocked", {
+          label={t("profile.progress.avatars_unlocked", {
             count: nbAvatarsUnlocked,
             total: nbPokemonsTotal
           })}
@@ -53,7 +53,7 @@ export function ProgressTab() {
           total={nbPokemonsTotal}
         />
         <ProgressBox
-          label={t("pokemons_played", {
+          label={t("profile.progress.pokemons_played", {
             count: nbPokemonsPlayed,
             total: nbPokemonsTotal
           })}
@@ -61,7 +61,7 @@ export function ProgressTab() {
           total={nbPokemonsTotal}
         />
         <ProgressBox
-          label={t("titles_unlocked", {
+          label={t("profile.progress.titles_unlocked", {
             count: nbTitlesUnlocked,
             total: nbTitlesTotal
           })}
@@ -69,7 +69,7 @@ export function ProgressTab() {
           total={nbTitlesTotal}
         />
         <ProgressBox
-          label={t("gadgets_unlocked", {
+          label={t("profile.progress.gadgets_unlocked", {
             count: nbGadgetsUnlocked,
             total: gadgets.length
           })}

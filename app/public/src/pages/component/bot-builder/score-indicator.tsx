@@ -1,4 +1,3 @@
-import React from "react"
 import { BOT_SCORES, getBotScore } from "../../../../../core/bot-logic"
 import "./score-indicator.css"
 

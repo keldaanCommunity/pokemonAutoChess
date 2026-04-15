@@ -48,7 +48,29 @@ interface IAnim {
 }
 
 interface IDuration {
-  Duration: any
+  Duration: number | number[]
+}
+
+type AnimationDurationsMap = Record<string, number[]>
+type AnimationDelaysMap = Record<string, { d: number; t: number }>
+type BitmapLike = {
+  width: number
+  height: number
+  data: Uint8Array
+}
+type ScannableImage = {
+  bitmap: BitmapLike
+  scan: (
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    cb: (x: number, y: number, idx: number) => void
+  ) => unknown
+}
+
+function toDurationArray(duration: IDuration["Duration"]): number[] {
+  return Array.isArray(duration) ? duration : [duration]
 }
 
 function formatPokemonName(index: string): string {
@@ -130,8 +152,8 @@ function getAvailablePokemonIndices(): string[] {
  * Spritesheet processor splitting the frames and saving durations/delays
  */
 class SpriteSheetProcessor {
-  private durations: any = {}
-  private delays: any = {}
+  private durations: AnimationDurationsMap = {}
+  private delays: AnimationDelaysMap = {}
   private missing = ""
   private mapName = new Map<string, string>()
   private pkmaIndexes = ["0000"]
@@ -203,7 +225,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeBlue(cropImg: any) {
+  private removeBlue(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
@@ -211,9 +233,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] == 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] != 0
+          cropImg.bitmap.data[idx] === 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] !== 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
@@ -224,7 +246,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeRed(cropImg: any) {
+  private removeRed(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
@@ -232,9 +254,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] != 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] == 0
+          cropImg.bitmap.data[idx] !== 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] === 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
@@ -278,10 +300,10 @@ class SpriteSheetProcessor {
           (m) => m.Name === conf.attack
         )
         if (attackMetadata) {
-          if (attackMetadata && attackMetadata.CopyOf) {
+          if (attackMetadata.CopyOf) {
             attackMetadata =
               xmlData.AnimData.Anims.Anim.find(
-                (m) => m.Name == attackMetadata?.CopyOf
+                (m) => m.Name === attackMetadata?.CopyOf
               ) ?? attackMetadata
           }
 
@@ -291,10 +313,9 @@ class SpriteSheetProcessor {
               attackMetadata
             )
           } else {
-            const attackDurations: number[] =
-              attackMetadata.Durations.Duration.length !== undefined
-                ? [...attackMetadata.Durations.Duration]
-                : [attackMetadata.Durations.Duration]
+            const attackDurations = toDurationArray(
+              attackMetadata.Durations.Duration
+            )
             this.delays[index] = {
               d: attackDurations
                 .slice(0, attackMetadata.HitFrame)
@@ -328,7 +349,7 @@ class SpriteSheetProcessor {
 
           for (const action of actions) {
             let metadata = xmlData.AnimData.Anims.Anim.find(
-              (m) => m.Name == action
+              (m) => m.Name === action
             )
             const imgPath = expandHomeDir(
               `${spriteCollabPath}/sprite/${pad}/${metadata?.CopyOf || action}-${anim}.png`
@@ -338,7 +359,7 @@ class SpriteSheetProcessor {
 
               if (metadata?.CopyOf) {
                 metadata = xmlData.AnimData.Anims.Anim.find(
-                  (m) => m.Name == metadata?.CopyOf
+                  (m) => m.Name === metadata?.CopyOf
                 )
               }
 
@@ -346,9 +367,7 @@ class SpriteSheetProcessor {
                 logger.error("no duration found for metadata", metadata)
               } else {
                 this.durations[`${index}/${shiny}/${action}/${anim}`] =
-                  metadata?.Durations.Duration.length !== undefined
-                    ? [...metadata.Durations.Duration]
-                    : [metadata.Durations.Duration]
+                  toDurationArray(metadata.Durations.Duration)
                 const frameHeight = metadata?.FrameHeight
                 const frameWidth = metadata?.FrameWidth
 
@@ -359,12 +378,12 @@ class SpriteSheetProcessor {
                     for (let y = 0; y < height; y++) {
                       const cropImg = img.clone()
 
-                      if (anim == SpriteType.SHADOW) {
-                        const shadow = xmlData.AnimData.ShadowSize
-                        if (shadow == 0) {
+                      if (anim === SpriteType.SHADOW) {
+                        const shadow = Number(xmlData.AnimData.ShadowSize)
+                        if (shadow === 0) {
                           this.removeRed(cropImg)
                           this.removeBlue(cropImg)
-                        } else if (shadow == 1) {
+                        } else if (shadow === 1) {
                           this.removeBlue(cropImg)
                         }
                         // transform to black

@@ -1,4 +1,3 @@
-import React from "react"
 import { useAppSelector } from "../../../hooks"
 import "./game-timer-bar.css"
 

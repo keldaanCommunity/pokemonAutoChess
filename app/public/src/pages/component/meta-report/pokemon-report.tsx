@@ -1,20 +1,21 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
-import {
-  fetchMetaPokemons,
-  IPokemonStatV2,
-  IPokemonsStatisticV2
-} from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import {
+  fetchMetaPokemons,
+  IPokemonStatV2,
+  IPokemonsStatisticV2
+} from "../../../models/pokemons-statistic-v2"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
+import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
 
@@ -160,7 +161,9 @@ export function PokemonReport() {
           <div className="pokemon-distribution-chart">
             <div className="view-switcher">
               <button
-                className={viewMode === "distribution" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "distribution"
+                })}
                 onClick={() => setViewMode("distribution")}
               >
                 {t("overview")}
@@ -169,7 +172,9 @@ export function PokemonReport() {
                 </span>
               </button>
               <button
-                className={viewMode === "count-history" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "count-history"
+                })}
                 onClick={() => setViewMode("count-history")}
               >
                 {t("popularity_over_time")}
@@ -178,7 +183,9 @@ export function PokemonReport() {
                 </span>
               </button>
               <button
-                className={viewMode === "rank-history" ? "active" : ""}
+                className={cc("bubbly", {
+                  active: viewMode === "rank-history"
+                })}
                 onClick={() => setViewMode("rank-history")}
               >
                 {t("placement_over_time")}

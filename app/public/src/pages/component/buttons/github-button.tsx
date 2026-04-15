@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function GithubButton() {
   return (
     <a
@@ -7,7 +5,7 @@ export default function GithubButton() {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <button type="button" className="bubbly">
+      <button type="button" className="bubbly white">
         <img
           width={32}
           src={`assets/ui/github.svg`}

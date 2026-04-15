@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose"
 import { ExpThreshold } from "../../config"
+import { GADGETS_UNLOCKED_BY_LEVEL } from "../../config/game/gadgets"
 import { CollectionUtils } from "../../core/collection"
 import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
@@ -121,15 +122,20 @@ userMetadataSchema.index({ titles: 1 })
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 
 export function toLeanUserMetadata(
-  user: IUserMetadataLean
+  user: IUserMetadataLean | IUserMetadataMongo
 ): IUserMetadataMongo {
   const pokemonCollection = new Map<string, IPokemonCollectionItemMongo>()
-  for (const [key, item] of Object.entries(user.pokemonCollection ?? {})) {
+  const collectionEntries =
+    user.pokemonCollection instanceof Map
+      ? user.pokemonCollection.entries()
+      : Object.entries(user.pokemonCollection ?? {})
+
+  for (const [key, item] of collectionEntries) {
     pokemonCollection.set(key, {
       ...item,
-      unlocked: Buffer.isBuffer(item.unlocked)
+      unlocked: Buffer.isBuffer(item?.unlocked)
         ? item.unlocked
-        : item.unlocked?.buffer
+        : item?.unlocked?.buffer
           ? Buffer.from(item.unlocked.buffer)
           : Buffer.alloc(5, 0)
     })
@@ -167,6 +173,15 @@ export function giveUserExp(user: IUserMetadataMongo, exp: number) {
         user.level.toString()
       )
     }
+
+    if (user.level in GADGETS_UNLOCKED_BY_LEVEL) {
+      notificationsService.addNotification(
+        user.uid,
+        "new_gadget",
+        GADGETS_UNLOCKED_BY_LEVEL[user.level].name
+      )
+    }
+
   } else {
     user.exp = user.exp + exp
   }
