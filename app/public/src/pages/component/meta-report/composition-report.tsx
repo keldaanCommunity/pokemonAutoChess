@@ -49,7 +49,7 @@ export function CompositionReport() {
       : meta
 
     return [...filteredMeta].sort((a, b) => {
-      const order = rankingBy == "count" || rankingBy == "winrate" ? -1 : 1
+      const order = rankingBy === "count" || rankingBy === "winrate" ? -1 : 1
       return (a[rankingBy] - b[rankingBy]) * order
     })
   }, [meta, rankingBy, selectedPkm])
@@ -69,7 +69,7 @@ export function CompositionReport() {
             onChange={(e) => setRanking(e.target.value)}
           >
             <option value="count">
-              {t("rank")} {t("by_poularity")}
+              {t("rank")} {t("by_popularity")}
             </option>
             <option value="mean_rank">
               {t("rank")} {t("by_average_place")}
