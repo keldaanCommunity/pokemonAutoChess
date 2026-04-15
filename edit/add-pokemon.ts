@@ -303,7 +303,7 @@ class SpriteSheetProcessor {
           if (attackMetadata.CopyOf) {
             attackMetadata =
               xmlData.AnimData.Anims.Anim.find(
-                (m) => m.Name == attackMetadata?.CopyOf
+                (m) => m.Name === attackMetadata?.CopyOf
               ) ?? attackMetadata
           }
 
@@ -349,7 +349,7 @@ class SpriteSheetProcessor {
 
           for (const action of actions) {
             let metadata = xmlData.AnimData.Anims.Anim.find(
-              (m) => m.Name == action
+              (m) => m.Name === action
             )
             const imgPath = expandHomeDir(
               `${spriteCollabPath}/sprite/${pad}/${metadata?.CopyOf || action}-${anim}.png`
@@ -359,7 +359,7 @@ class SpriteSheetProcessor {
 
               if (metadata?.CopyOf) {
                 metadata = xmlData.AnimData.Anims.Anim.find(
-                  (m) => m.Name == metadata?.CopyOf
+                  (m) => m.Name === metadata?.CopyOf
                 )
               }
 
@@ -378,12 +378,12 @@ class SpriteSheetProcessor {
                     for (let y = 0; y < height; y++) {
                       const cropImg = img.clone()
 
-                      if (anim == SpriteType.SHADOW) {
-                        const shadow = xmlData.AnimData.ShadowSize
-                        if (shadow == 0) {
+                      if (anim === SpriteType.SHADOW) {
+                        const shadow = Number(xmlData.AnimData.ShadowSize)
+                        if (shadow === 0) {
                           this.removeRed(cropImg)
                           this.removeBlue(cropImg)
-                        } else if (shadow == 1) {
+                        } else if (shadow === 1) {
                           this.removeBlue(cropImg)
                         }
                         // transform to black
