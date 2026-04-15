@@ -51,7 +51,12 @@ interface IDuration {
   Duration: number | number[]
 }
 
-type AnimationTimingMap = Record<string, Record<string, number>>
+type AnimationDurationsMap = Record<string, number[]>
+type AnimationDelaysMap = Record<string, { d: number; t: number }>
+
+function toDurationArray(duration: IDuration["Duration"]): number[] {
+  return Array.isArray(duration) ? [...duration] : [duration]
+}
 
 function formatPokemonName(index: string): string {
   let shiny = false
@@ -132,8 +137,8 @@ function getAvailablePokemonIndices(): string[] {
  * Spritesheet processor splitting the frames and saving durations/delays
  */
 class SpriteSheetProcessor {
-  private durations: AnimationTimingMap = {}
-  private delays: AnimationTimingMap = {}
+  private durations: AnimationDurationsMap = {}
+  private delays: AnimationDelaysMap = {}
   private missing = ""
   private mapName = new Map<string, string>()
   private pkmaIndexes = ["0000"]
@@ -205,7 +210,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeBlue(cropImg: Jimp) {
+  private removeBlue(cropImg: InstanceType<typeof Jimp>) {
     cropImg.scan(
       0,
       0,
@@ -226,7 +231,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeRed(cropImg: Jimp) {
+  private removeRed(cropImg: InstanceType<typeof Jimp>) {
     cropImg.scan(
       0,
       0,
@@ -293,10 +298,9 @@ class SpriteSheetProcessor {
               attackMetadata
             )
           } else {
-            const attackDurations: number[] =
-              attackMetadata.Durations.Duration.length !== undefined
-                ? [...attackMetadata.Durations.Duration]
-                : [attackMetadata.Durations.Duration]
+            const attackDurations = toDurationArray(
+              attackMetadata.Durations.Duration
+            )
             this.delays[index] = {
               d: attackDurations
                 .slice(0, attackMetadata.HitFrame)
@@ -348,9 +352,7 @@ class SpriteSheetProcessor {
                 logger.error("no duration found for metadata", metadata)
               } else {
                 this.durations[`${index}/${shiny}/${action}/${anim}`] =
-                  metadata?.Durations.Duration.length !== undefined
-                    ? [...metadata.Durations.Duration]
-                    : [metadata.Durations.Duration]
+                  toDurationArray(metadata.Durations.Duration)
                 const frameHeight = metadata?.FrameHeight
                 const frameWidth = metadata?.FrameWidth
 
