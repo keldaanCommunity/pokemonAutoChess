@@ -73,7 +73,7 @@
     "graceful-fs": "^4.2.10",
     "helmet": "^8.0.0",
     "html2canvas": "^1.4.1",
-    "i18next": "^25.0.0",
+    "i18next": "^26.0.4",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^3.0.0",
     "immer": "^11.0.1",
