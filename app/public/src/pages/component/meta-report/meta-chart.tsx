@@ -1,10 +1,10 @@
 import * as d3 from "d3"
 import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import { SYNERGY_COLORS } from "../../../../../config"
-import { IMetaV2 } from "../../../models/meta-v2"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { IMetaV2 } from "../../../models/meta-v2"
 import { rankType } from "./team-comp"
 import "./meta-chart.css"
 

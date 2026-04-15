@@ -476,7 +476,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             value:
               board.cells[
                 board.columns * (pokemon.positionY + y) +
-                (pokemon.positionX + x)
+                  (pokemon.positionX + x)
               ]
           })
         }

@@ -1,15 +1,15 @@
 import { t } from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
+import { EloRank } from "../../../../../types/enum/EloRank"
+import { Rarity } from "../../../../../types/enum/Game"
+import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import {
   fetchMetaPokemons,
   IPokemonStatV2,
   IPokemonsStatisticV2
 } from "../../../models/pokemons-statistic-v2"
-import { EloRank } from "../../../../../types/enum/EloRank"
-import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"

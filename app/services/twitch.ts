@@ -1,7 +1,7 @@
-import { logger } from "../utils/logger"
 import TwitchBlacklistedStreamer, {
   ITwitchBlacklistedStreamer
 } from "../models/mongo-models/twitch-blacklisted-streamer"
+import { logger } from "../utils/logger"
 
 const TWITCH_OAUTH_URL = "https://id.twitch.tv/oauth2/token"
 const TWITCH_HELIX_URL = "https://api.twitch.tv/helix"
