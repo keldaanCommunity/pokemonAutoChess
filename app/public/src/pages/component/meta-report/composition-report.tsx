@@ -92,19 +92,16 @@ export function CompositionReport() {
         )}
         <div id="meta-report-compo-list">
           <AutoSizer
-            children={({ height, width }) => {
+            renderProp={({ height, width }) => {
               if (height === undefined || width === undefined) return null
               return (
-                <List
+                <List<CompoRowData>
                   style={{ height, width }}
-                  itemCount={sortedMeta.length}
-                  itemSize={dynamicRowHeight}
-                  itemData={sortedMeta}
-                >
-                  {({ index, style, data }) => (
-                    <CompositionRow index={index} style={style} data={data} />
-                  )}
-                </List>
+                  rowCount={sortedMeta.length}
+                  rowHeight={dynamicRowHeight}
+                  rowComponent={CompositionRow}
+                  rowProps={{ sortedMeta }}
+                />
               )
             }}
           />
@@ -114,19 +111,23 @@ export function CompositionReport() {
   )
 }
 
+type CompoRowData = {
+  sortedMeta: IMetaV2[]
+}
+
 function CompositionRow({
   index,
   style,
-  data
+  sortedMeta
 }: {
+  ariaAttributes: object
   index: number
   style: React.CSSProperties
-  data: IMetaV2[]
-}): React.ReactElement | null {
+} & CompoRowData): React.ReactElement | null {
   return (
     <div style={{ ...style, paddingBottom: "0.5em" }}>
       <div>
-        <TeamComp team={data[index]} rank={index + 1} />
+        <TeamComp team={sortedMeta[index]} rank={index + 1} />
       </div>
     </div>
   )
