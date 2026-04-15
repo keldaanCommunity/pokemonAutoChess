@@ -48,8 +48,10 @@ interface IAnim {
 }
 
 interface IDuration {
-  Duration: any
+  Duration: number | number[]
 }
+
+type AnimationTimingMap = Record<string, Record<string, number>>
 
 function formatPokemonName(index: string): string {
   let shiny = false
@@ -130,8 +132,8 @@ function getAvailablePokemonIndices(): string[] {
  * Spritesheet processor splitting the frames and saving durations/delays
  */
 class SpriteSheetProcessor {
-  private durations: any = {}
-  private delays: any = {}
+  private durations: AnimationTimingMap = {}
+  private delays: AnimationTimingMap = {}
   private missing = ""
   private mapName = new Map<string, string>()
   private pkmaIndexes = ["0000"]
@@ -203,7 +205,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeBlue(cropImg: any) {
+  private removeBlue(cropImg: Jimp) {
     cropImg.scan(
       0,
       0,
@@ -211,9 +213,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] == 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] != 0
+          cropImg.bitmap.data[idx] === 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] !== 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
@@ -224,7 +226,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeRed(cropImg: any) {
+  private removeRed(cropImg: Jimp) {
     cropImg.scan(
       0,
       0,
@@ -232,9 +234,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] != 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] == 0
+          cropImg.bitmap.data[idx] !== 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] === 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
