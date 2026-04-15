@@ -278,7 +278,7 @@ class SpriteSheetProcessor {
           (m) => m.Name === conf.attack
         )
         if (attackMetadata) {
-          if (attackMetadata && attackMetadata.CopyOf) {
+          if (attackMetadata.CopyOf) {
             attackMetadata =
               xmlData.AnimData.Anims.Anim.find(
                 (m) => m.Name == attackMetadata?.CopyOf
