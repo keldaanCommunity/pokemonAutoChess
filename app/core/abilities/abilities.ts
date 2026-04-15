@@ -11429,7 +11429,7 @@ export class RageStrategy extends AbilityStrategy {
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
-    pokemon.resetCooldown(200)
+    pokemon.resetCooldown(1000)
   }
 }
 
@@ -11543,6 +11543,7 @@ export class BulkUpStrategy extends AbilityStrategy {
     const defBoost = Math.ceil(0.5 * pokemon.baseDef)
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.addDefense(defBoost, pokemon, 1, crit)
+    pokemon.resetCooldown(300)
   }
 }
 
