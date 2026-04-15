@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { isSameFamily } from "../../../../../models/pokemon-factory"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { useAppSelector } from "../../../hooks"

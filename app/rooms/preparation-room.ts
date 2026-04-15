@@ -1,5 +1,5 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, ClientArray, CloseCode, Room, updateLobby } from "colyseus"
+import { Client, ClientArray, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { MAX_PLAYERS_PER_GAME } from "../config"

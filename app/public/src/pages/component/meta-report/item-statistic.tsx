@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { IItemV2 } from "../../../models/items-statistic-v2"

@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   BOTS_ENABLED,

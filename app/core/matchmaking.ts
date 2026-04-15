@@ -2,7 +2,6 @@ import Player from "../models/colyseus-models/player"
 import GameState from "../rooms/states/game-state"
 import { IPlayer } from "../types"
 import { sum } from "../utils/array"
-import { logger } from "../utils/logger"
 import { pickRandomIn, shuffleArray } from "../utils/random"
 import { values } from "../utils/schemas"
 

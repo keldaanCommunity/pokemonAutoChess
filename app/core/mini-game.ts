@@ -1,5 +1,4 @@
 import { MapSchema } from "@colyseus/schema"
-import { logger } from "colyseus"
 import {
   Bodies,
   Body,

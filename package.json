@@ -30,6 +30,7 @@
     "lint": "npx @biomejs/biome lint app/",
     "format": "npx @biomejs/biome format app/ --write",
     "check": "npx @biomejs/biome check app/ --write",
+    "check:unsafe": "npx @biomejs/biome check app/ --write --unsafe",
     "build-client": "node esbuild.js --build",
     "build-server": "tsc",
     "download-music": "degit --force https://github.com/keldaanCommunity/pokemonAutoChessMusic ./app/public/src/assets/musics",

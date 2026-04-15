@@ -1,4 +1,3 @@
-import React from "react"
 import "./money.css"
 
 export function Money(props: { value?: number | string; className?: string }) {

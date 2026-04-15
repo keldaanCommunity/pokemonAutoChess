@@ -31,7 +31,6 @@ import {
   MissionOrder,
   NonSpecialBerries,
   ScarfItem,
-  Scarves,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMsBronze,

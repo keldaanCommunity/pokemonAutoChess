@@ -1,7 +1,6 @@
 import { type Presence } from "@colyseus/core"
 import { ALLOWED_GAME_RECONNECTION_TIME } from "../config"
 import { isValidDate } from "../utils/date"
-import { logger } from "../utils/logger"
 
 interface PendingGame {
   gameId: string

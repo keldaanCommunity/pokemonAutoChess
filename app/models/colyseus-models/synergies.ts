@@ -8,7 +8,6 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { isOnBench } from "../../utils/board"
 import { values } from "../../utils/schemas"
-import { PVEStages } from "../pve-stages"
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {

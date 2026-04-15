@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"

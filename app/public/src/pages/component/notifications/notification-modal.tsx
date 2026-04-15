@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { GADGETS, Gadget } from "../../../../../config/game/gadgets"
+import { GADGETS } from "../../../../../config/game/gadgets"
 import { INotification } from "../../../../../types/notifications"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"

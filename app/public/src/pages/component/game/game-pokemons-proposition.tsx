@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AdditionalPicksStages } from "../../../../../config"
 import { ShinyItems } from "../../../../../types/enum/Item"

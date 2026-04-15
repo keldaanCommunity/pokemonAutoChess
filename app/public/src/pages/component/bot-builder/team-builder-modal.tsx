@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { IDetailledPokemon } from "../../../models/bot-v2"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import { Modal } from "../modal/modal"

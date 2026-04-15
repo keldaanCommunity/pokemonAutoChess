@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"

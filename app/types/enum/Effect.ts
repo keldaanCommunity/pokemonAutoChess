@@ -1,6 +1,3 @@
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { Stat, Team } from "./Game"
-
 export enum EffectEnum {
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",

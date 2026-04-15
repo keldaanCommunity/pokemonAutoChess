@@ -1,4 +1,3 @@
-import React from "react"
 import { ISuggestionUser } from "../../../../../types"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"

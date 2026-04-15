@@ -17,15 +17,12 @@ import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { distanceC } from "../../utils/distance"
-import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { Board } from "../board"
 import {
   FlowerMonByPot,
   FlowerPot,
   getFlowerPotsUnlocked
 } from "../flower-pots"
-import { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
   OnAbilityCastEffect,
