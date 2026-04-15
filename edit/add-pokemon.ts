@@ -55,7 +55,7 @@ type AnimationDurationsMap = Record<string, number[]>
 type AnimationDelaysMap = Record<string, { d: number; t: number }>
 
 function toDurationArray(duration: IDuration["Duration"]): number[] {
-  return Array.isArray(duration) ? [...duration] : [duration]
+  return Array.isArray(duration) ? duration : [duration]
 }
 
 function formatPokemonName(index: string): string {
