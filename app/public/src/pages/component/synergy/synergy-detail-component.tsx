@@ -23,6 +23,9 @@ import { getCachedPortrait } from "../game/game-pokemon-portrait"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 
+const isFirstOfFamily = (p: Pkm, i: number, arr: Pkm[]) =>
+  arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i
+
 export default function SynergyDetailComponent(props: {
   type: Synergy
   value: number
@@ -42,9 +45,7 @@ export default function SynergyDetailComponent(props: {
   const regulars = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].pokemons
-    .filter(
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
-    )
+    .filter(isFirstOfFamily) // remove duplicates of same family
     .map((p) => getPokemonData(p as Pkm))
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
 
@@ -61,33 +62,25 @@ export default function SynergyDetailComponent(props: {
         additionalPokemons.includes(baseVariant(PkmFamily[p])) ||
         specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
     )
-    .filter(
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
-    )
+    .filter(isFirstOfFamily) // remove duplicates of same family
     .map((p) => getPokemonData(p as Pkm))
 
   const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].uniquePokemons
-    .filter(
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
-    )
+    .filter(isFirstOfFamily) // remove duplicates of same family
     .map((p) => getPokemonData(p as Pkm))
 
   const legendaries = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].legendaryPokemons
-    .filter(
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
-    )
+    .filter(isFirstOfFamily) // remove duplicates of same family
     .map((p) => getPokemonData(p as Pkm))
 
   const specials = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
     props.type
   ].specialPokemons
-    .filter(
-      (p, i, arr) => arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i // remove duplicates of same family
-    )
+    .filter(isFirstOfFamily) // remove duplicates of same family
     .map((p) => getPokemonData(p as Pkm))
 
   let additionalInfo = ""
@@ -255,6 +248,7 @@ function PokemonPortrait(props: {
     >
       <img
         src={getCachedPortrait(props.p.index, props.player?.pokemonCustoms)}
+        alt={`${props.p.name} portrait`}
       />
     </div>
   )
