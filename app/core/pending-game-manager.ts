@@ -55,9 +55,7 @@ export async function getPendingGame(
     return {
       gameId: pendingGameId,
       reconnectionDeadline,
-      isExpired:
-        !isValidDate(reconnectionDeadline) ||
-        reconnectionDeadline.getTime() < Date.now()
+      isExpired: reconnectionDeadline.getTime() < Date.now()
     }
   }
   //logger.debug(`No pending game found for player ${playerId}`);
@@ -96,6 +94,6 @@ export async function clearPendingGamesOnRoomDispose(
   const pendingGame = await presence.hget(playerId, PENDING_GAME)
   if (pendingGame && pendingGame.split(",")[0] === roomId) {
     // clear pending game if it was set for this room
-    clearPendingGame(presence, playerId)
+    await clearPendingGame(presence, playerId)
   }
 }
