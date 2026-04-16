@@ -169,56 +169,56 @@ export default function SynergyDetailComponent(props: {
           </div>
         )
       })}
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {regulars.map((p) => (
-          <PokemonPortrait
-            p={p}
-            key={p.name}
-            type={props.type}
-            player={spectatedPlayer}
-          />
-        ))}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
-        {additionals.map((p) => (
-          <PokemonPortrait
-            p={p}
-            key={p.name}
-            type={props.type}
-            player={spectatedPlayer}
-          />
-        ))}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
-        {uniques.map((p) => (
-          <PokemonPortrait
-            p={p}
-            key={p.name}
-            type={props.type}
-            player={spectatedPlayer}
-          />
-        ))}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
-        {legendaries.map((p) => (
-          <PokemonPortrait
-            p={p}
-            key={p.name}
-            type={props.type}
-            player={spectatedPlayer}
-          />
-        ))}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "0.5em" }}>
-        {specials.map((p) => (
-          <PokemonPortrait
-            p={p}
-            key={p.name}
-            type={props.type}
-            player={spectatedPlayer}
-          />
-        ))}
-      </div>
+      <PokemonPortraitList
+        pokemons={regulars}
+        type={props.type}
+        player={spectatedPlayer}
+      />
+      <PokemonPortraitList
+        pokemons={additionals}
+        type={props.type}
+        player={spectatedPlayer}
+        marginTop="0.5em"
+      />
+      <PokemonPortraitList
+        pokemons={uniques}
+        type={props.type}
+        player={spectatedPlayer}
+        marginTop="0.5em"
+      />
+      <PokemonPortraitList
+        pokemons={legendaries}
+        type={props.type}
+        player={spectatedPlayer}
+        marginTop="0.5em"
+      />
+      <PokemonPortraitList
+        pokemons={specials}
+        type={props.type}
+        player={spectatedPlayer}
+        marginTop="0.5em"
+      />
+    </div>
+  )
+}
+
+function PokemonPortraitList(props: {
+  pokemons: IPokemonData[]
+  type: Synergy
+  player?: IPlayer
+  marginTop?: string
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        ...(props.marginTop ? { marginTop: props.marginTop } : {})
+      }}
+    >
+      {props.pokemons.map((p) => (
+        <PokemonPortrait p={p} key={p.name} type={props.type} player={props.player} />
+      ))}
     </div>
   )
 }
