@@ -280,7 +280,7 @@ class SpriteSheetProcessor {
         ? `${pathIndex}/0000/0001`
         : split.length === 2
           ? `${pathIndex}/0001`
-          : pathIndex.split("/").with(2, "0001").join("/")
+          : [...split.slice(0, 2), "0001", ...split.slice(3)].join("/")
     const conf =
       PokemonAnimations[this.mapName.get(index) as Pkm] ??
       DEFAULT_POKEMON_ANIMATION_CONFIG
@@ -290,7 +290,7 @@ class SpriteSheetProcessor {
     for (let j = 0; j < allPads.length; j++) {
       const pad = allPads[j]
       try {
-        const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
+        const shiny = pathIndex === pad ? PokemonTint.NORMAL : PokemonTint.SHINY
         const xmlFile = fs.readFileSync(
           expandHomeDir(`${spriteCollabPath}/sprite/${pad}/AnimData.xml`)
         )
@@ -331,13 +331,6 @@ class SpriteSheetProcessor {
             AnimationType.Idle,
             AnimationType.Walk
           ])
-
-          if (!conf) {
-            logger.warn(
-              `Animation config not found for ${formatPokemonName(index)}`
-            )
-            continue
-          }
 
           actions.add(conf.sleep ?? AnimationType.Sleep)
           actions.add(conf.eat ?? AnimationType.Eat)
@@ -545,6 +538,22 @@ function movePortrait(spriteCollabPath: string, pkmIndex: string) {
   }
 }
 
+type TrackerCredits = {
+  primary: string
+  secondary: string[]
+  total: number
+}
+
+type TrackerEntry = {
+  subgroups?: Record<string, TrackerEntry>
+  portrait_files?: unknown[]
+  portrait_credit: TrackerCredits
+  sprite_credit: TrackerCredits
+  [key: string]: unknown
+}
+
+type Tracker = Record<string, TrackerEntry>
+
 /**
  * Track portraits available
  */
@@ -555,11 +564,11 @@ function updateEmotionsAndCredits(
     return [indexToAdd, `${indexToAdd}${shinyPad}`]
   })
 ) {
-  let tracker: Record<string, any> = {}
+  let tracker: Tracker = {}
   try {
     const filePath = expandHomeDir(`${spriteCollabPath}/tracker.json`)
     const content = fs.readFileSync(filePath, "utf8")
-    tracker = JSON.parse(content)
+    tracker = JSON.parse(content) as Tracker
   } catch (err) {
     logger.error(
       `Failed to read or parse tracker.json at ${spriteCollabPath}:`,
@@ -592,7 +601,7 @@ function updateEmotionsAndCredits(
   const emotions = Object.values(Emotion)
   for (const pkmIndex of indexesToUpdate) {
     const pathIndex = pkmIndex.split("-")
-    let metadata = tracker[pathIndex[0]]
+    let metadata: TrackerEntry | undefined = tracker[pathIndex[0]]
     for (let i = 1; i < pathIndex.length; i++) {
       metadata = metadata?.subgroups?.[pathIndex[i]]
     }
@@ -602,7 +611,7 @@ function updateEmotionsAndCredits(
         emotion in (metadata?.portrait_files ?? {}) ? 1 : 0
       )
       emotionsPerIndex.set(pkmIndex, emotionsAvailable)
-      logger.log(
+      logger.info(
         `${emotionsAvailable.filter((available) => available === 1).length} portraits found for ${formatPokemonName(pkmIndex)}`
       )
 
