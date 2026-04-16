@@ -597,7 +597,7 @@ export default class Shop {
       return Pkm.FALINKS_TROOPER
     }
 
-    const wildChance = getWildChance(player)
+    const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
@@ -717,7 +717,7 @@ export default class Shop {
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
-    const wildChance = getWildChance(player)
+    const wildChance = getWildChance(player, state.stageLevel)
 
     if (
       finals.has(Pkm.REMORAID) === false &&

@@ -181,6 +181,7 @@ export function giveUserExp(user: IUserMetadataMongo, exp: number) {
         GADGETS_UNLOCKED_BY_LEVEL[user.level].name
       )
     }
+
   } else {
     user.exp = user.exp + exp
   }

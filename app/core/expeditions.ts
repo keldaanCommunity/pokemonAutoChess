@@ -101,6 +101,7 @@ export function getExpeditionLabel(expedition: Expedition): string {
     })
   }
 
+
   return t(
     `expeditions.${expedition.type}_DESCRIPTION`,
     getExpeditionData(expedition)
@@ -149,6 +150,7 @@ export function getExpeditionData(
               (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
             ) === index
         ) // get only base alt forms
+
       const pokemonToRescue =
         pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
       return { pokemon: pokemonToRescue }
