@@ -751,7 +751,7 @@ function moveAllFiles(spriteCollabPath: string) {
   })
 
   logger.debug(
-    `All sheets and portraits moved for ${Object.values(PkmIndex).length} Pokémon.`
+    `All sheets and portraits moved for ${Object.values(PkmIndex).length} Pokemon.`
   )
 }
 
