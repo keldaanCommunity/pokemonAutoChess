@@ -393,7 +393,7 @@ class SpriteSheetProcessor {
                           cropImg.bitmap.width,
                           cropImg.bitmap.height,
                           (x: number, y: number, idx: number) => {
-                            if (cropImg.bitmap.data[idx + 3] != 0) {
+                            if (cropImg.bitmap.data[idx + 3] !== 0) {
                               cropImg.bitmap.data[idx] = 0
                               cropImg.bitmap.data[idx + 1] = 0
                               cropImg.bitmap.data[idx + 2] = 0
@@ -603,7 +603,7 @@ function updateEmotionsAndCredits(
       )
       emotionsPerIndex.set(pkmIndex, emotionsAvailable)
       logger.log(
-        `${emotionsAvailable.filter((e) => e === 1).length} portraits found for ${formatPokemonName(pkmIndex)}`
+        `${emotionsAvailable.filter((available) => available === 1).length} portraits found for ${formatPokemonName(pkmIndex)}`
       )
 
       creditsData.set(pkmIndex, {
