@@ -156,15 +156,15 @@ class SpriteSheetProcessor {
   private delays: AnimationDelaysMap = {}
   private missing = ""
   private mapName = new Map<string, string>()
-  private pkmaIndexes = ["0000"]
+  private pkmIndexes = ["0000"]
 
   constructor() {
     this.mapName.set("0000", "missingno")
 
     Object.values(Pkm).forEach((pkm) => {
       const index = PkmIndex[pkm]
-      if (!this.pkmaIndexes.includes(index)) {
-        this.pkmaIndexes.push(index)
+      if (!this.pkmIndexes.includes(index)) {
+        this.pkmIndexes.push(index)
         this.mapName.set(index, pkm)
       }
     })
@@ -443,12 +443,12 @@ class SpriteSheetProcessor {
   }
 
   async splitAll(spriteCollabPath: string) {
-    for (let i = 0; i < this.pkmaIndexes.length; i++) {
-      const index = this.pkmaIndexes[i]
+    for (let i = 0; i < this.pkmIndexes.length; i++) {
+      const index = this.pkmIndexes[i]
 
       logger.debug(
-        `${i}/${this.pkmaIndexes.length - 1} (${(
-          (i * 100) / (this.pkmaIndexes.length - 1)
+        `${i}/${this.pkmIndexes.length - 1} (${(
+          (i * 100) / (this.pkmIndexes.length - 1)
         ).toFixed(2)}%) ${formatPokemonName(index)}`
       )
 
@@ -850,7 +850,7 @@ async function main() {
       logger.info("Step 4/5: Moving all files to assets...")
       moveAllFiles(spriteCollabPath)
 
-      // Step 5:Updating emotions available and credits for all Pokemon
+      // Step 5: Updating emotions available and credits for all Pokemon
       logger.info("Step 5/5: Updating emotions and credits for all Pokemon...")
       updateEmotionsAndCredits(spriteCollabPath)
 
