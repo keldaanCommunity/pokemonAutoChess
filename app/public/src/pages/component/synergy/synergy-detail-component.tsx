@@ -23,8 +23,20 @@ import { getCachedPortrait } from "../game/game-pokemon-portrait"
 import SynergyIcon from "../icons/synergy-icon"
 import { EffectDescriptionComponent } from "./effect-description"
 
-const isFirstOfFamily = (p: Pkm, i: number, arr: Pkm[]) =>
-  arr.findIndex((x) => PkmFamily[x] === PkmFamily[p]) === i
+const keepFirstOfFamily = (arr: Pkm[]): Pkm[] => {
+  const seenFamilies = new Set<Pkm>()
+  return arr.filter((p) => {
+    const family = PkmFamily[p]
+    if (seenFamilies.has(family)) return false
+    seenFamilies.add(family)
+    return true
+  })
+}
+
+const baseVariant = (pkm: Pkm): Pkm =>
+  (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
+    PkmRegionalVariants[p]!.includes(pkm)
+  ) ?? pkm
 
 export default function SynergyDetailComponent(props: {
   type: Synergy
@@ -42,45 +54,34 @@ export default function SynergyDetailComponent(props: {
     .filter((n) => n <= props.value)
     .at(-1)
 
-  const regulars = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-    props.type
-  ].pokemons
-    .filter(isFirstOfFamily) // remove duplicates of same family
+  const regulars = keepFirstOfFamily(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].pokemons
+  )
     .map((p) => getPokemonData(p as Pkm))
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
 
-  const baseVariant = (pkm: Pkm): Pkm =>
-    (Object.keys(PkmRegionalVariants) as Pkm[]).find((p) =>
-      PkmRegionalVariants[p]!.includes(pkm)
-    ) ?? pkm
-
-  const additionals = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-    props.type
-  ].additionalPokemons
-    .filter(
+  const additionals = keepFirstOfFamily(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].additionalPokemons.filter(
       (p) =>
         additionalPokemons.includes(baseVariant(PkmFamily[p])) ||
         specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
     )
-    .filter(isFirstOfFamily) // remove duplicates of same family
+  )
     .map((p) => getPokemonData(p as Pkm))
 
-  const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-    props.type
-  ].uniquePokemons
-    .filter(isFirstOfFamily) // remove duplicates of same family
+  const uniques = keepFirstOfFamily(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].uniquePokemons
+  )
     .map((p) => getPokemonData(p as Pkm))
 
-  const legendaries = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-    props.type
-  ].legendaryPokemons
-    .filter(isFirstOfFamily) // remove duplicates of same family
+  const legendaries = keepFirstOfFamily(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].legendaryPokemons
+  )
     .map((p) => getPokemonData(p as Pkm))
 
-  const specials = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-    props.type
-  ].specialPokemons
-    .filter(isFirstOfFamily) // remove duplicates of same family
+  const specials = keepFirstOfFamily(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].specialPokemons
+  )
     .map((p) => getPokemonData(p as Pkm))
 
   let additionalInfo = ""
@@ -208,6 +209,14 @@ function PokemonPortraitList(props: {
   player?: IPlayer
   marginTop?: string
 }) {
+  const teamFamilies = new Set(
+    props.player == null
+      ? []
+      : values(props.player.board)
+          .filter((x) => x.types.has(props.type))
+          .map((x) => PkmFamily[x.name])
+  )
+
   return (
     <div
       style={{
@@ -217,7 +226,13 @@ function PokemonPortraitList(props: {
       }}
     >
       {props.pokemons.map((p) => (
-        <PokemonPortrait p={p} key={p.name} type={props.type} player={props.player} />
+        <PokemonPortrait
+          p={p}
+          key={p.name}
+          type={props.type}
+          player={props.player}
+          teamFamilies={teamFamilies}
+        />
       ))}
     </div>
   )
@@ -227,18 +242,14 @@ function PokemonPortrait(props: {
   p: IPokemonData
   type: Synergy
   player?: IPlayer
+  teamFamilies: Set<Pkm>
 }) {
-  const isOnTeam = (p: Pkm) =>
-    props.player != null &&
-    values(props.player.board).some(
-      (x) => PkmFamily[x.name] === PkmFamily[p] && x.types.has(props.type)
-    )
   return (
     <div
       className={cc("pokemon-portrait", {
         additional: props.p.additional,
         regional: props.p.regional,
-        acquired: isOnTeam(props.p.name)
+        acquired: props.teamFamilies.has(PkmFamily[props.p.name])
       })}
       key={props.p.name}
       style={{
