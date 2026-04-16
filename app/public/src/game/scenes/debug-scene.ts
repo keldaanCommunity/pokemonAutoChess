@@ -1,3 +1,4 @@
+import Phaser from "phaser"
 import { getRegionTint, RegionDetails } from "../../../../config"
 import { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"

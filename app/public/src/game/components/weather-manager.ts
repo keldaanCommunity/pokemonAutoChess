@@ -1,4 +1,4 @@
-import * as Phaser from "phaser"
+import Phaser from "phaser"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"

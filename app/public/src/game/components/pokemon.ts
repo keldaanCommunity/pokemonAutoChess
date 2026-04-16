@@ -1,6 +1,5 @@
 import { SetSchema } from "@colyseus/schema"
-import * as Phaser from "phaser"
-import { GameObjects, Geom } from "phaser"
+import Phaser, { GameObjects, Geom } from "phaser"
 import type MoveTo from "phaser4-rex-plugins/plugins/moveto"
 import type MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"

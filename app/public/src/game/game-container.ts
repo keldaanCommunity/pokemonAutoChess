@@ -1,7 +1,7 @@
 import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getStateCallbacks, Room } from "@colyseus/sdk"
 import { t } from "i18next"
-import * as Phaser from "phaser"
+import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin.js"
 import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin.js"
 import React from "react"

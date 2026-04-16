@@ -1,4 +1,4 @@
-import * as Phaser from "phaser"
+import Phaser from "phaser"
 
 type LayerTiles = Phaser.Tilemaps.Tile[]
 
@@ -71,7 +71,11 @@ export default class AnimatedTilesPlugin extends Phaser.Plugins.ScenePlugin {
     }
   }
 
-  setRate(rate: number, gid: number | null = null, mapIndex: number | null = null) {
+  setRate(
+    rate: number,
+    gid: number | null = null,
+    mapIndex: number | null = null
+  ) {
     if (gid == null) {
       if (mapIndex == null) {
         this.rate = rate
@@ -246,14 +250,19 @@ export default class AnimatedTilesPlugin extends Phaser.Plugins.ScenePlugin {
         const index = Number.parseInt(key, 10)
         const entry = tileData[key]
 
-        if (!entry || !Object.prototype.hasOwnProperty.call(entry, "animation")) {
+        if (
+          !entry ||
+          !Object.prototype.hasOwnProperty.call(entry, "animation")
+        ) {
           return
         }
 
-        const frames: AnimatedFrame[] = entry.animation.map((frameData: any) => ({
-          duration: frameData.duration,
-          tileid: frameData.tileid + tileset.firstgid
-        }))
+        const frames: AnimatedFrame[] = entry.animation.map(
+          (frameData: any) => ({
+            duration: frameData.duration,
+            tileid: frameData.tileid + tileset.firstgid
+          })
+        )
 
         const startGid = index + tileset.firstgid
         const currentFrame = Math.max(
@@ -311,7 +320,8 @@ export default class AnimatedTilesPlugin extends Phaser.Plugins.ScenePlugin {
                 if (tiles.indexOf(tile) === -1) {
                   tiles.push(tile)
                 }
-                tile.index = tileAnimData.frames[tileAnimData.currentFrame].tileid
+                tile.index =
+                  tileAnimData.frames[tileAnimData.currentFrame].tileid
               }
             }
           }
