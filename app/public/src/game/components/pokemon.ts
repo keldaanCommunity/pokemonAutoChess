@@ -186,9 +186,9 @@ export default class PokemonSprite extends DraggableObject {
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
-    const sizeBuff = (maxHP - baseHP) / baseHP
+    const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
     this.sprite
-      .setScale(2 + sizeBuff)
+      .setScale(scale)
       .setDepth(DEPTH.POKEMON)
       .setTint(getRegionTint(scene.mapName, preference("colorblindMode")))
 
