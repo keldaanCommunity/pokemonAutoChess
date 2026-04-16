@@ -13,6 +13,7 @@ export enum DungeonMusic {
   BOULDER_QUARRY = "Boulder Quarry",
   BRINE_CAVE = "Brine Cave",
   BURIED_RELIC = "Buried Relic",
+  CARNIVAL_LUDICOLO = "Carnival Ludicolo",
   CAVE_AND_SIDE_PATH = "Cave and Side Path",
   CHASM_CAVE = "Chasm Cave",
   CONCEALED_RUINS = "Concealed Ruins",
@@ -64,7 +65,6 @@ export enum DungeonMusic {
   LIMESTONE_CAVERN = "Limestone Cavern",
   LIVING_SPIRIT = "Living Spirit",
   LOWER_BRINE_CAVE = "Lower Brine Cave",
-  LUDICOLO_DANCE = "Ludicolo Dance", // UNUSED
   MAGMA_CAVERN = "Magma Cavern",
   MAGMA_CAVERN_PIT = "Magma Cavern Pit",
   MAKUHITA_DOJO = "Makuhita Dojo",
