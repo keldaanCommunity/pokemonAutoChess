@@ -1003,7 +1003,7 @@ export default class BoardManager {
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
               pokemonSprite.attackSprite
             // load the new ones
-            pokemonSprite.lazyloadAnimations(this.scene).then(() => {
+            pokemonSprite.lazyLoadAnimations(this.scene).then(() => {
               pokemonSprite.animationLocked = false
               pokemonSprite.evolutionAnimation()
             })

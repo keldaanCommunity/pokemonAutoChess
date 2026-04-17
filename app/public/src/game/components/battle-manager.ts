@@ -676,7 +676,7 @@ export default class BattleManager {
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
               pkmSprite.attackSprite
             // load the new ones
-            pkmSprite.lazyloadAnimations(this.scene).then(() => {
+            pkmSprite.lazyLoadAnimations(this.scene).then(() => {
               pkmSprite.animationLocked = false
               if (previousValue !== undefined) {
                 pkmSprite.evolutionAnimation()

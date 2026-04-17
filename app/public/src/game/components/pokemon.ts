@@ -258,7 +258,7 @@ export default class PokemonSprite extends DraggableObject {
       this.scene.lastPokemonDetail = null
     }
 
-    this.lazyloadAnimations(scene).then(() => {
+    this.lazyLoadAnimations(scene).then(() => {
       if (!this.sprite.scene) return
       this.sprite.setTexture(
         scene.textures.exists(this.pokemon.index) ? this.pokemon.index : "0000"
@@ -287,7 +287,7 @@ export default class PokemonSprite extends DraggableObject {
     return this.pokemon.positionY
   }
 
-  lazyloadAnimations(scene: GameScene | DebugScene): Promise<void> {
+  lazyLoadAnimations(scene: GameScene | DebugScene): Promise<void> {
     return new Promise((resolve) => {
       const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
       const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
@@ -1298,7 +1298,7 @@ export default class PokemonSprite extends DraggableObject {
         .setScale(2)
       this.poison.anims.play(poisonTexture)
       this.add(this.poison)
-    } else if (this.poison.texture.key !== poisonTexture) {
+    } else if (this.poison.anims.currentAnim?.key !== poisonTexture) {
       this.poison.setTexture("status", `${poisonTexture}/000.png`)
       this.poison.anims.play(poisonTexture)
     }
