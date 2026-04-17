@@ -3173,7 +3173,7 @@
 		"WARP_WAND": "Fairy attacks deal 20% additional SPECIAL and have [2,LK]% chance to teleport target on a cell far away",
 		"SWITCHER_WAND": "Fairy attacks deal 20% additional SPECIAL and have [2,LK]% chance to swap target position with farthest enemy",
 		"WHIRLWIND_WAND": "Fairy attacks deal 20% additional SPECIAL and have [2,LK]% chance to throw a whirlwind that makes all the units in its path to fly away.",
-		"TUNNEL_WAND": "Fairy attacks deal 20% additional SPECIAL and have [10,LK]% chance to pass through the target to hit enemies in a line behind it."
+		"TUNNEL_WAND": "Fairy attacks deal 20% additional SPECIAL. Wands SPECIAL has [10,LK]% chance to pass through the target to hit enemies in a line behind it."
 	},
 	"passive_description": {
 		"NONE": "No passive",
