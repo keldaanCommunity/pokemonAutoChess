@@ -44,7 +44,6 @@ import {
   Pkm,
   PkmFamily,
   PkmIndex,
-  type PkmProposition,
   PkmRegionalBaseVariants,
   PkmRegionalVariants
 } from "../../types/enum/Pokemon"
@@ -74,6 +73,7 @@ import {
 import ExperienceManager from "./experience-manager"
 import { GameStatsSchema } from "./game-stats"
 import HistoryItem from "./history-item"
+import { PlayerChoice } from "./player-choice"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
@@ -114,9 +114,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") emotesUnlocked = ""
   @type("string") title: Title | ""
   @type("string") role: Role
-  @view() @type(["string"]) itemsProposition = new ArraySchema<Item>()
-  @view() @type(["string"]) pokemonsProposition =
-    new ArraySchema<PkmProposition>()
+  @view() @type([PlayerChoice]) choices = new ArraySchema<PlayerChoice>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0

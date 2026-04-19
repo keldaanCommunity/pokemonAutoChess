@@ -1463,8 +1463,10 @@
 	"victory_income_hint": "Tăng thêm 1 GOLD cho mỗi chuỗi thắng hoặc thua liên tiếp, nhiều nhất là thêm 5 GOLD",
 	"additional_income_hint": "Tăng thêm 1 GOLD mỗi 10 GOLD bạn hiện có, nhiều nhất là {{maxInterest}} GOLD với {{maxInterestGolds}} GOLD bạn hiện có",
 	"save": "Lưu",
-	"pick_additional_pokemon_hint": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
-	"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos",
+	"player_choices": {
+		"choose_add_pick": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
+		"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos"
+	},
 	"tier": "Bậc",
 	"rate": "Tỉ lệ",
 	"increase_level_hint": "Tăng cấp độ của bạn để tăng tỉ lệ nhận được Pokemon với bậc cao hơn.",

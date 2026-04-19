@@ -9,6 +9,7 @@ import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
 import HistoryItem from "../models/colyseus-models/history-item"
 import Player from "../models/colyseus-models/player"
+import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import Status from "../models/colyseus-models/status"
@@ -30,7 +31,7 @@ import {
 } from "./enum/Game"
 import { Item } from "./enum/Item"
 import { Passive } from "./enum/Passive"
-import { Pkm, PkmProposition } from "./enum/Pokemon"
+import { Pkm } from "./enum/Pokemon"
 import { Synergy } from "./enum/Synergy"
 import { Weather } from "./enum/Weather"
 import { GameStats } from "./interfaces/GameStats"
@@ -76,7 +77,6 @@ export enum Transfer {
   LOCK = "LOCK",
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
-  ITEM = "ITEM",
   COOK = "COOK",
   DIG = "DIG",
   GAME_START = "GAME_START",
@@ -102,7 +102,7 @@ export enum Transfer {
   GIVE_BOOSTER = "GIVE_BOOSTER",
   SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
-  POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
+  CHOICE = "CHOICE",
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
@@ -272,8 +272,7 @@ export interface IPlayer {
   pokemonCustoms: PokemonCustoms
   title: Title | ""
   role: Role
-  itemsProposition: ArraySchema<Item>
-  pokemonsProposition: ArraySchema<PkmProposition>
+  choices: ArraySchema<PlayerChoice>
   loadingProgress: number
   berryTreesStages: number[]
   flowerPots: Pokemon[]

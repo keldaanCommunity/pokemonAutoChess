@@ -61,7 +61,6 @@ import {
   setEmotesUnlocked,
   setGameMode,
   setInterest,
-  setItemsProposition,
   setLife,
   setLoadingProgress,
   setMaxInterest,
@@ -69,7 +68,6 @@ import {
   setNoELO,
   setPhase,
   setPodium,
-  setPokemonProposition,
   setRoundTime,
   setShopFreeRolls,
   setShopLocked,
@@ -84,13 +82,12 @@ import {
   setConnectionStatus,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
+import GameChoice from "./component/game/game-choice"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameExpeditions from "./component/game/game-expeditions"
 import GameFinalRank from "./component/game/game-final-rank"
-import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
 import GamePlayers from "./component/game/game-players"
-import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
 import GameShop from "./component/game/game-shop"
 import GameSpectatePlayerInfo from "./component/game/game-spectate-player-info"
 import GameStageInfo from "./component/game/game-stage-info"
@@ -775,6 +772,15 @@ export default function Game() {
           $player.listen("streak", (value) => {
             dispatch(setStreak(value))
           })
+          $player.choices.onChange(() => {
+            dispatch(
+              changePlayer({
+                id: player.id,
+                field: "choices",
+                value: values(player.choices)
+              })
+            )
+          })
         }
         $player.listen("life", (value, previousValue) => {
           dispatch(setLife({ id: player.id, value: value }))
@@ -883,7 +889,8 @@ export default function Game() {
           "title",
           "eggChance",
           "goldenEggChance",
-          "cellBattery"
+          "cellBattery",
+          "gameStats"
         ] satisfies NonFunctionPropNames<IPlayer>[]
 
         fields.forEach((field) => {
@@ -894,30 +901,8 @@ export default function Game() {
           })
         })
 
-        $player.gameStats.onChange(() => {
-          dispatch(
-            changePlayer({
-              id: player.id,
-              field: "gameStats",
-              value: player.gameStats
-            })
-          )
-        })
-
         $player.synergies.onChange(() => {
           dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        })
-
-        $player.itemsProposition.onChange((value, index) => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(values(player.itemsProposition)))
-          }
-        })
-
-        $player.pokemonsProposition.onChange((value, index) => {
-          if (player.id == uid) {
-            dispatch(setPokemonProposition(values(player.pokemonsProposition)))
-          }
         })
 
         $player.groundHoles.onChange((value) => {
@@ -988,8 +973,7 @@ export default function Game() {
           <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
-          <GameItemsProposition />
-          <GamePokemonsProposition />
+          <GameChoice />
           <GameDpsMeter />
           <GameToasts />
           {currentGameEvent === GameEvent.EXPEDITIONS && <GameExpeditions />}

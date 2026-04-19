@@ -17,6 +17,7 @@ import {
 } from "../config"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
 import Player from "../models/colyseus-models/player"
+import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
@@ -810,7 +811,8 @@ export class MiniGame {
     }
   }
 
-  stop(state: GameState) {
+  stop(room: GameRoom) {
+    const state = room.state
     const players: MapSchema<Player> = state.players
     const encounter = state.townEncounter
     this.bodies.forEach((body, key) => {
@@ -901,7 +903,7 @@ export class MiniGame {
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
         } else {
-          state.shop.assignUniquePropositions(player, state, portalSynergies)
+          state.shop.assignUniquePropositions(player, room, portalSynergies)
         }
       }
 
@@ -928,7 +930,13 @@ export class MiniGame {
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
       this.alivePlayers.forEach((player) => {
-        player.itemsProposition.push(...pickNRandomIn(MissionOrders, 3))
+        room.askChoice(
+          player,
+          new PlayerChoice({
+            type: "mission_order",
+            items: pickNRandomIn(MissionOrders, 3)
+          })
+        )
       })
     }
   }

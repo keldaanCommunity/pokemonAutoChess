@@ -1809,8 +1809,10 @@
 	},
 	"music_volume": "Muziekvolume",
 	"save": "Redden",
-	"pick_additional_pokemon_hint": "Kies een extra Pokemon. Het zal voor iedereen beschikbaar zijn.",
-	"free_slot_hint": "Je moet één vrije plek op de bank hebben, of twee voor Duo's",
+	"player_choices": {
+		"choose_add_pick": "Kies een extra Pokemon. Het zal voor iedereen beschikbaar zijn.",
+		"free_slot_hint": "Je moet één vrije plek op de bank hebben, of twee voor Duo's"
+	},
 	"hide": "Verbergen",
 	"show": "Show",
 	"encounter_rates": "Ontmoetingstarieven",

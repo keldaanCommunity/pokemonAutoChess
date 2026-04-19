@@ -3764,9 +3764,11 @@
 	"save": "저장",
 	"reset": "리셋",
 	"snapshot": "스냅샷",
-	"pick_additional_pokemon_hint": "추가되는 기물을 고릅니다. 모두에게 해금됩니다.",
-	"pick_first_partner_scribble": "스타터를 고릅니다. 10 스테이지까지 매스테이지에 해당 스타터를 획득합니다.",
-	"free_slot_hint": "대기석에 한자리(두마리 세트의 경우 두자리)가 비어있어야 합니다.",
+	"player_choices": {
+		"choose_add_pick": "추가되는 기물을 고릅니다. 모두에게 해금됩니다.",
+		"choose_first_partner": "스타터를 고릅니다. 10 스테이지까지 매스테이지에 해당 스타터를 획득합니다.",
+		"free_slot_hint": "대기석에 한자리(두마리 세트의 경우 두자리)가 비어있어야 합니다."
+	},
 	"hide": "숨기기",
 	"show": "보기",
 	"encounter_rates": "조우 확률",

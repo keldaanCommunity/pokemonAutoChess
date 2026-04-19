@@ -2551,8 +2551,10 @@
 	},
 	"music_volume": "音楽の音量",
 	"save": "保存",
-	"pick_additional_pokemon_hint": "追加のポケモンを選択します。誰でも利用できるようになります。",
-	"free_slot_hint": "ベンチに 1 つの空きスロット、またはデュオの場合は 2 つの空きスロットが必要です",
+	"player_choices": {
+		"choose_add_pick": "追加のポケモンを選択します。誰でも利用できるようになります。",
+		"free_slot_hint": "ベンチに 1 つの空きスロット、またはデュオの場合は 2 つの空きスロットが必要です"
+	},
 	"hide": "隠れる",
 	"show": "見せる",
 	"encounter_rates": "遭遇率",

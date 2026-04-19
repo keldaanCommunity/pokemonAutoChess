@@ -7,11 +7,10 @@ import AfterGameState from "../../rooms/states/after-game-state"
 import GameState from "../../rooms/states/game-state"
 import LobbyState from "../../rooms/states/lobby-state"
 import PreparationState from "../../rooms/states/preparation-state"
-import { Emotion, Item, Role, Title, Transfer } from "../../types"
+import { Emotion, Role, Title, Transfer } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank.js"
 import { BotDifficulty } from "../../types/enum/Game.js"
-import { PkmProposition } from "../../types/enum/Pokemon.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
@@ -185,12 +184,8 @@ export function buyInShop(id: number) {
   rooms.game?.send(Transfer.SHOP, { id })
 }
 
-export function pickPokemonProposition(proposition: PkmProposition) {
-  rooms.game?.send(Transfer.POKEMON_PROPOSITION, proposition)
-}
-
-export function pickItem(item: Item) {
-  rooms.game?.send(Transfer.ITEM, item)
+export function pickChoice(choiceId: string, choiceIndex: number) {
+  rooms.game?.send(Transfer.CHOICE, { choiceId, choiceIndex })
 }
 
 export function gameStartRequest(token: string) {

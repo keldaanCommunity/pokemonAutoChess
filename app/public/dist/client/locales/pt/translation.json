@@ -3898,8 +3898,10 @@
 	},
 	"music_volume": "Volume da Música",
 	"save": "Salvar",
-	"pick_additional_pokemon_hint": "Escolha um Pokémon adicional. Ele estará disponível para todos.",
-	"free_slot_hint": "Você deve ter um espaço livre no banco, ou dois para Duplas",
+	"player_choices": {
+		"choose_add_pick": "Escolha um Pokémon adicional. Ele estará disponível para todos.",
+		"free_slot_hint": "Você deve ter um espaço livre no banco, ou dois para Duplas"
+	},
 	"hide": "Esconder",
 	"show": "Mostrar",
 	"encounter_rates": "Taxas de encontro",
