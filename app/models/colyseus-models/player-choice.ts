@@ -9,6 +9,7 @@ export type PlayerChoiceType =
   | "unique"
   | "legendary"
   | "mission_order"
+  | "wand"
 
 export class PlayerChoice extends Schema {
   @type("string") id: string

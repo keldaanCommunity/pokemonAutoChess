@@ -129,6 +129,12 @@ export default function SynergyDetailComponent(props: {
     })
   }
 
+  if (props.type === Synergy.FAIRY && spectatedPlayer) {
+    additionalInfo = t("synergy_description.FAIRY_WANDS", {
+      wands: spectatedPlayer.fairyWands.join(" ")
+    })
+  }
+
   return (
     <div style={{ maxWidth: "560px" }}>
       <div style={{ display: "flex", alignItems: "center" }}>

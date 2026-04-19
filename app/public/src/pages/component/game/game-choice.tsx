@@ -84,6 +84,8 @@ export default function GameChoice() {
     message = t("player_choices.choose_legendary")
   } else if (choice.type === "item") {
     message = t("player_choices.choose_item")
+  } else if (choice.type === "wand") {
+    message = t("player_choices.choose_wand")
   }
 
   return (

@@ -265,6 +265,7 @@ export interface IPlayer {
   boardSize: number
   items: ArraySchema<Item>
   scarvesItems: ArraySchema<Item>
+  fairyWands: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean

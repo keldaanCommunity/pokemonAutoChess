@@ -514,8 +514,7 @@ export default class Shop {
       pokemonsProposed.push(selected)
     }
 
-    room.askChoice(
-      player,
+    player.choices.push(
       new PlayerChoice({
         type,
         pokemons: pokemonsProposed,

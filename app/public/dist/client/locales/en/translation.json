@@ -3492,7 +3492,8 @@
 		"FLORA": "When a FLORA Pokémon is KO'd, a Flower Pot blossoms and you collect RICH_MULCH. Higher STAR units give more mulch, which can be used to evolve your Flower Pots.",
 		"ROCK": "ROCK Pokémon gain DEF, better resist to critical attacks, and can adapt to weather.",
 		"GHOST": "GHOST applies various curses on opposing Pokémon. GHOST Pokémon have a [15,LK]% chance to dodge attacks and apply SILENCE on hit when synergy active.",
-		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.",
+		"FAIRY": "FAIRY Pokémon deal additional SPECIAL with their attacks and trigger shocks when critically hit, retaliating for 30% of incoming damage.{{additionalInfo}}",
+		"FAIRY_WANDS": "\nWands equipped: {{wands}}",
 		"ICE": "ICE Pokémon have [20,LK]% chance to FREEZE the enemy for 2 seconds after a hit and give SPE_DEF to your whole team.",
 		"FOSSIL": "At 30% HP, FOSSIL Pokemon awaken their primordial power, gaining SHIELD and ATK.",
 		"SOUND": "SOUND Pokémon emit a cry when they use their abilities, waking up sleeping allies and giving them bonus stats.",
@@ -4012,6 +4013,7 @@
 		"choose_mission_order": "Choose your mission",
 		"choose_unique": "Choose one Unique for your team. You only get to choose once, make it count!",
 		"choose_legendary": "Choose one Legendary for your team. You only get to choose once, make it count!",
+		"choose_wand": "Choose one Wand to give additional effects to your Fairy Pokémon attacks",
 		"free_slot_hint": "You must have one free slot on the bench, or two for Duos"
 	},
 	"hide": "Hide",

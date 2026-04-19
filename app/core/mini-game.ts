@@ -930,8 +930,7 @@ export class MiniGame {
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
       this.alivePlayers.forEach((player) => {
-        room.askChoice(
-          player,
+        player.choices.push(
           new PlayerChoice({
             type: "mission_order",
             items: pickNRandomIn(MissionOrders, 3)

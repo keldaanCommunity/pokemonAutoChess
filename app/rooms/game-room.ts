@@ -27,7 +27,6 @@ import {
 } from "../core/pending-game-manager"
 import { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { Pokemon } from "../models/colyseus-models/pokemon"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
@@ -63,7 +62,7 @@ import {
 import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
+import { Item, Wands } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
@@ -76,7 +75,7 @@ import { Synergy } from "../types/enum/Synergy"
 import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
-import { removeInArray } from "../utils/array"
+import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -1193,12 +1192,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  askChoice(player: Player, choice: PlayerChoice) {
-    player.choices.push(choice)
-    const client = this.clients.find((c) => c.auth?.uid === player.id)
-    client?.view?.add(choice) // required to sync choices because they are in private state view
-  }
-
   pickChoice(
     playerId: string,
     choiceId: string,
@@ -1305,6 +1298,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
       player.items.push(item)
+      if (isIn(Wands, item)) {
+        player.fairyWands.push(item)
+      }
     }
 
     removeInArray(player.choices, choice)

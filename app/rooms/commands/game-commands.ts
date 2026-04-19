@@ -1221,8 +1221,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const itemsSet = Tools.filter(
           (item) => player.artificialItems.includes(item) === false
         )
-        this.room.askChoice(
-          player,
+        player.choices.push(
           new PlayerChoice({
             type: "item",
             items: pickNRandomIn(itemsSet, 3)
@@ -1262,8 +1261,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
             }
           }
-          this.room.askChoice(
-            player,
+          player.choices.push(
             new PlayerChoice({
               type: "addPick",
               pokemons,
@@ -1665,8 +1663,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
 
             if (player.pveRewardsPropositions.length > 0) {
-              this.room.askChoice(
-                player,
+              player.choices.push(
                 new PlayerChoice({
                   type: "item",
                   items: values(player.pveRewardsPropositions)

@@ -890,7 +890,9 @@ export default function Game() {
           "eggChance",
           "goldenEggChance",
           "cellBattery",
-          "gameStats"
+          "gameStats",
+          "scarvesItems",
+          "fairyWands"
         ] satisfies NonFunctionPropNames<IPlayer>[]
 
         fields.forEach((field) => {
