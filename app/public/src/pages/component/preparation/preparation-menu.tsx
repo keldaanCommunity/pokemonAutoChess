@@ -288,7 +288,7 @@ export default function PreparationMenu() {
         </button>
 
         <select
-          defaultValue={botDifficulty}
+          value={botDifficulty}
           onChange={(e) => {
             setBotDifficulty(parseInt(e.target.value, 10))
           }}
