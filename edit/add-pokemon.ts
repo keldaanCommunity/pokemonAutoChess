@@ -52,7 +52,10 @@ interface IDuration {
 }
 
 type AnimationDurationsMap = Record<string, number[]>
-type AnimationDelaysMap = Record<string, { d: number; t: number }>
+type AnimationDelaysMap = Record<
+  string,
+  { d: number; t: number; delayUntilHit?: number; totalDuration?: number }
+>
 type BitmapLike = {
   width: number
   height: number
@@ -154,7 +157,7 @@ function getAvailablePokemonIndices(): string[] {
 class SpriteSheetProcessor {
   private durations: AnimationDurationsMap = {}
   private delays: AnimationDelaysMap = {}
-  private missing = ""
+  private missingPokemonLog = ""
   private mapName = new Map<string, string>()
   private pkmIndexes = ["0000"]
 
@@ -202,27 +205,30 @@ class SpriteSheetProcessor {
   }
 
   saveDurationsFile() {
-    const fileA = fs.createWriteStream("./sheets/durations.json")
-    fileA.on("error", function (err) {
+    try {
+      fs.writeFileSync(
+        "./sheets/durations.json",
+        JSON.stringify(this.durations)
+      )
+      logger.debug(
+        `Saved durations file, ${Object.keys(this.durations).length} durations entries`
+      )
+    } catch (err) {
       logger.error(err)
-    })
-    fileA.write(JSON.stringify(this.durations))
-    fileA.end()
-    logger.debug(
-      `Saved durations file, ${Object.keys(this.durations).length} durations entries`
-    )
+      throw err
+    }
   }
 
   saveDelaysFile() {
-    const fileA = fs.createWriteStream("./sheets/delays.json")
-    fileA.on("error", function (err) {
+    try {
+      fs.writeFileSync("./sheets/delays.json", JSON.stringify(this.delays))
+      logger.debug(
+        `Saved delays file, ${Object.keys(this.delays).length} delays entries`
+      )
+    } catch (err) {
       logger.error(err)
-    })
-    fileA.write(JSON.stringify(this.delays))
-    fileA.end()
-    logger.debug(
-      `Saved delays file, ${Object.keys(this.delays).length} delays entries`
-    )
+      throw err
+    }
   }
 
   private removeBlue(cropImg: ScannableImage) {
@@ -267,7 +273,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private zeroPad(num: number) {
+  private zeroPadToFour(num: number) {
     return ("0000" + num).slice(-4)
   }
 
@@ -316,11 +322,18 @@ class SpriteSheetProcessor {
             const attackDurations = toDurationArray(
               attackMetadata.Durations.Duration
             )
+            const delayUntilHit = attackDurations
+              .slice(0, attackMetadata.HitFrame)
+              .reduce((prev, curr) => prev + curr, 0)
+            const totalDuration = attackDurations.reduce(
+              (prev, curr) => prev + curr,
+              0
+            )
             this.delays[index] = {
-              d: attackDurations
-                .slice(0, attackMetadata.HitFrame)
-                .reduce((prev, curr) => prev + curr, 0),
-              t: attackDurations.reduce((prev, curr) => prev + curr, 0)
+              d: delayUntilHit,
+              t: totalDuration,
+              delayUntilHit,
+              totalDuration
             }
           }
         }
@@ -406,7 +419,7 @@ class SpriteSheetProcessor {
                         `split/${index}/${shiny}/${action}/${anim}/${y}`
                       )
                       await cropImg.write(
-                        `split/${index}/${shiny}/${action}/${anim}/${y}/${this.zeroPad(
+                        `split/${index}/${shiny}/${action}/${anim}/${y}/${this.zeroPadToFour(
                           x
                         )}.png`
                       )
@@ -430,7 +443,7 @@ class SpriteSheetProcessor {
           `Pokemon ${formatPokemonName(index)} not found at path: ${spriteCollabPath}/sprite/${pad}/AnimData.xml`,
           error
         )
-        this.missing += `${this.mapName.get(index)},${pad}/AnimData.xml\n`
+        this.missingPokemonLog += `${this.mapName.get(index)},${pad}/AnimData.xml\n`
       }
     }
   }
@@ -454,7 +467,7 @@ class SpriteSheetProcessor {
     fileB.on("error", function (err) {
       logger.error(err)
     })
-    fileB.write(this.missing)
+    fileB.write(this.missingPokemonLog)
     fileB.end()
   }
 }
