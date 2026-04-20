@@ -649,9 +649,9 @@ export default class GameScene extends Scene {
           // Item -> POKEMON(board zone) = EQUIP
           else if (
             dropZone.name === "board-zone" &&
-            !(
-              this.room?.state.phase == GamePhaseState.FIGHT &&
-              dropZone.getData("y") != 0
+            (
+              this.room?.state.phase == GamePhaseState.PICK ||
+              dropZone.getData("y") == 0
             )
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
