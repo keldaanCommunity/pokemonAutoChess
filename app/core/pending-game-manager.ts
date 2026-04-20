@@ -8,9 +8,46 @@ interface PendingGame {
   isExpired: boolean
 }
 
+interface PendingGameStoredData {
+  gameId: string
+  reconnectionDeadline: string
+}
+
 const PENDING_GAME = "pending_game"
 const USER_TIMEOUT = "user_timeout"
-const TIMEOUT_IN_SECONDS = 60 * 5 // 5 minutes
+const SECONDS_PER_MINUTE = 60
+const TIMEOUT_IN_MINUTES = 5
+const TIMEOUT_IN_SECONDS = SECONDS_PER_MINUTE * TIMEOUT_IN_MINUTES
+
+function parsePendingGameData(
+  pendingGame: string
+): PendingGameStoredData | null {
+  try {
+    const parsed: unknown = JSON.parse(pendingGame)
+    if (
+      typeof parsed === "object" &&
+      parsed !== null &&
+      "gameId" in parsed &&
+      "reconnectionDeadline" in parsed &&
+      typeof parsed.gameId === "string" &&
+      typeof parsed.reconnectionDeadline === "string"
+    ) {
+      return {
+        gameId: parsed.gameId,
+        reconnectionDeadline: parsed.reconnectionDeadline
+      }
+    }
+  } catch {
+    // Fallback to legacy comma-separated format
+  }
+
+  const [gameId, reconnectionDeadline] = pendingGame.split(",")
+  if (!gameId || !reconnectionDeadline) {
+    return null
+  }
+
+  return { gameId, reconnectionDeadline }
+}
 
 export async function isPlayerTimeout(
   presence: Presence,
@@ -43,7 +80,15 @@ export async function getPendingGame(
 ): Promise<PendingGame | null> {
   const pendingGame = await presence.hget(playerId, PENDING_GAME)
   if (pendingGame) {
-    const [pendingGameId, reconnectionDeadlineStr] = pendingGame.split(",")
+    const parsedPendingGame = parsePendingGameData(pendingGame)
+    if (!parsedPendingGame) {
+      return null
+    }
+
+    const {
+      gameId: pendingGameId,
+      reconnectionDeadline: reconnectionDeadlineStr
+    } = parsedPendingGame
     const reconnectionDeadline = new Date(reconnectionDeadlineStr)
     // check if date is valid
     if (!isValidDate(reconnectionDeadline)) {
@@ -71,10 +116,12 @@ export async function setPendingGame(
   return presence.hset(
     playerId,
     PENDING_GAME,
-    [
+    JSON.stringify({
       gameId,
-      new Date(Date.now() + 1000 * ALLOWED_GAME_RECONNECTION_TIME).toISOString()
-    ].join(",")
+      reconnectionDeadline: new Date(
+        Date.now() + 1000 * ALLOWED_GAME_RECONNECTION_TIME
+      ).toISOString()
+    })
   )
 }
 
@@ -92,8 +139,11 @@ export async function clearPendingGamesOnRoomDispose(
   roomId: string
 ): Promise<void> {
   const pendingGame = await presence.hget(playerId, PENDING_GAME)
-  if (pendingGame && pendingGame.split(",")[0] === roomId) {
-    // clear pending game if it was set for this room
-    await clearPendingGame(presence, playerId)
+  if (pendingGame) {
+    const parsedPendingGame = parsePendingGameData(pendingGame)
+    if (parsedPendingGame?.gameId === roomId) {
+      // clear pending game if it was set for this room
+      await clearPendingGame(presence, playerId)
+    }
   }
 }
