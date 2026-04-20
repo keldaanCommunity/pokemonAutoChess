@@ -86,48 +86,52 @@ export default function SynergyDetailComponent(props: {
 
   let additionalInfo = ""
 
-  if (props.type === Synergy.WILD && spectatedPlayer) {
-    const wildChance = getWildChance(spectatedPlayer, stageLevel)
-    additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
-      wildChance: roundToNDigits(wildChance * 100, 1)
-    })
-  }
-
-  if (props.type === Synergy.BABY && spectatedPlayer) {
-    additionalInfo = t("synergy_description.BABY_CHANCE_STACKED", {
-      eggChance: roundToNDigits(
-        (levelReached === 7
-          ? spectatedPlayer.goldenEggChance
-          : spectatedPlayer.eggChance) * 100,
-        1
-      )
-    })
-  }
-
-  if (props.type === Synergy.DRAGON && spectatedPlayer) {
-    const dragonLevel = values(spectatedPlayer.board).reduce(
-      (acc, pokemon) =>
-        acc +
-        (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
-          ? pokemon.stars
-          : 0),
-      0
-    )
-    additionalInfo = t("synergy_description.DRAGON_STARS", {
-      totalStars: dragonLevel
-    })
-  }
-
-  if (props.type === Synergy.ELECTRIC && spectatedPlayer) {
-    additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
-      charge: spectatedPlayer.cellBattery
-    })
-  }
-
-  if (props.type === Synergy.NORMAL && spectatedPlayer) {
-    additionalInfo = t("synergy_description.NORMAL_SCARVES", {
-      scarves: spectatedPlayer.scarvesItems.join(" ")
-    })
+  if (spectatedPlayer) {
+    switch (props.type) {
+      case Synergy.WILD: {
+        const wildChance = getWildChance(spectatedPlayer, stageLevel)
+        additionalInfo = t("synergy_description.WILD_ADDITIONAL", {
+          wildChance: roundToNDigits(wildChance * 100, 1)
+        })
+        break
+      }
+      case Synergy.BABY:
+        additionalInfo = t("synergy_description.BABY_CHANCE_STACKED", {
+          eggChance: roundToNDigits(
+            (levelReached === 7
+              ? spectatedPlayer.goldenEggChance
+              : spectatedPlayer.eggChance) * 100,
+            1
+          )
+        })
+        break
+      case Synergy.DRAGON: {
+        const totalDragonStars = values(spectatedPlayer.board).reduce(
+          (acc, pokemon) =>
+            acc +
+            (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
+              ? pokemon.stars
+              : 0),
+          0
+        )
+        additionalInfo = t("synergy_description.DRAGON_STARS", {
+          totalStars: totalDragonStars
+        })
+        break
+      }
+      case Synergy.ELECTRIC:
+        additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
+          charge: spectatedPlayer.cellBattery
+        })
+        break
+      case Synergy.NORMAL:
+        additionalInfo = t("synergy_description.NORMAL_SCARVES", {
+          scarves: spectatedPlayer.scarvesItems.join(" ")
+        })
+        break
+      default:
+        break
+    }
   }
 
   return (
