@@ -95,7 +95,7 @@ export default function SynergyDetailComponent(props: {
         })
         break
       }
-      case Synergy.BABY:
+      case Synergy.BABY: {
         additionalInfo = t("synergy_description.BABY_CHANCE_STACKED", {
           eggChance: roundToNDigits(
             (levelReached === 7
@@ -105,6 +105,7 @@ export default function SynergyDetailComponent(props: {
           )
         })
         break
+      }
       case Synergy.DRAGON: {
         const totalDragonStars = values(spectatedPlayer.board).reduce(
           (acc, pokemon) =>
@@ -119,16 +120,18 @@ export default function SynergyDetailComponent(props: {
         })
         break
       }
-      case Synergy.ELECTRIC:
+      case Synergy.ELECTRIC: {
         additionalInfo = t("synergy_description.ELECTRIC_CHARGE", {
           charge: spectatedPlayer.cellBattery
         })
         break
-      case Synergy.NORMAL:
+      }
+      case Synergy.NORMAL: {
         additionalInfo = t("synergy_description.NORMAL_SCARVES", {
           scarves: spectatedPlayer.scarvesItems.join(" ")
         })
         break
+      }
       default:
         break
     }
