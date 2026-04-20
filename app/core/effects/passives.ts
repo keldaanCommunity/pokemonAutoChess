@@ -216,7 +216,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
       })
       if (pokemon.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
-          if (v && v.value && v.value.team === pokemon.team) {
+          if (v.value && v.value.team === pokemon.team) {
             v.value.handleHeal(physicalDamage, pokemon, 1, false)
           }
         })
@@ -1558,6 +1558,7 @@ export const PassiveEffects: Partial<
 
       const transformToHero = () => {
         transformed = true
+        const wasFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
         entity.addAttack(18, entity, 0, false)
@@ -1565,7 +1566,7 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player && !entity.isGhostOpponent && entity.refToBoardPokemon.name === Pkm.FINIZEN) {
+        if (entity.player && !entity.isGhostOpponent && wasFinizenOnBoard) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
           entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,
