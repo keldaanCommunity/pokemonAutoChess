@@ -52,10 +52,7 @@ interface IDuration {
 }
 
 type AnimationDurationsMap = Record<string, number[]>
-type AnimationDelaysMap = Record<
-  string,
-  { d: number; t: number; delayUntilHit?: number; totalDuration?: number }
->
+type AnimationDelaysMap = Record<string, { d: number; t: number }>
 type BitmapLike = {
   width: number
   height: number
@@ -329,12 +326,9 @@ class SpriteSheetProcessor {
               (prev, curr) => prev + curr,
               0
             )
-            // Keep d/t for existing consumers and add descriptive aliases for readability.
             this.delays[index] = {
               d: delayUntilHit,
-              t: totalDuration,
-              delayUntilHit,
-              totalDuration
+              t: totalDuration
             }
           }
         }
