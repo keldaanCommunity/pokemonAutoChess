@@ -95,10 +95,10 @@ export default function PreparationMenu() {
   function togglePrivate() {
     if (password === null || password === undefined) {
       // generate a random password made of 4 characters
-      const newPassword = Math.random()
-        .toString(36)
-        .substring(2, 6)
-        .toUpperCase()
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      const randomBytes = new Uint8Array(4)
+      crypto.getRandomValues(randomBytes)
+      const newPassword = Array.from(randomBytes, (b) => chars[b % chars.length]).join("")
       changeRoomPassword(newPassword)
     } else {
       changeRoomPassword(null)
