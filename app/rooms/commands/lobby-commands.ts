@@ -1,5 +1,6 @@
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
+import { randomBytes } from "crypto"
 import { writeHeapSnapshot } from "v8"
 import {
   BoosterPriceByRarity,
@@ -1090,7 +1091,12 @@ export class OpenGameCommand extends Command<
       roomName = "Smeargle's Scribble"
     } else if (gameMode === GameMode.CUSTOM_LOBBY) {
       ownerId = user.uid
-      password = Math.random().toString(36).substring(2, 6).toUpperCase()
+      const secureCode = randomBytes(4)
+        .toString("base64url")
+        .replace(/[^a-zA-Z0-9]/g, "")
+      password = (secureCode + randomBytes(4).toString("hex"))
+        .substring(0, 4)
+        .toUpperCase()
     } else if (gameMode === GameMode.CLASSIC) {
       roomName = "Classic"
     }
