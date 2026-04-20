@@ -329,6 +329,7 @@ class SpriteSheetProcessor {
               (prev, curr) => prev + curr,
               0
             )
+            // Keep d/t for existing consumers and add descriptive aliases for readability.
             this.delays[index] = {
               d: delayUntilHit,
               t: totalDuration,
