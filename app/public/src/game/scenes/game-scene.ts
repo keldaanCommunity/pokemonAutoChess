@@ -248,12 +248,10 @@ export default class GameScene extends Scene {
         this.shopIndexHovered = null
       } else if (
         this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
+        this.pokemonHovered.getBounds().contains(
+          this.input.activePointer.worldX,
+          this.input.activePointer.worldY
+        )
       ) {
         this.sellPokemon(this.pokemonHovered)
         this.pokemonHovered = null
@@ -825,12 +823,10 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const flowerPot =
-              this.board?.flowerPokemonsInPots[dropZone.getData("index")]
-            if (flowerPot) {
-              this.clearHovered(flowerPot.sprite)
-            }
+          const flowerPot =
+            this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+          if (flowerPot) {
+            this.clearHovered(flowerPot.sprite)
           }
         }
 
@@ -839,11 +835,9 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const berryTree = this.board?.berryTrees[dropZone.getData("index")]
-            if (berryTree) {
-              this.clearHovered(berryTree.sprite)
-            }
+          const berryTree = this.board?.berryTrees[dropZone.getData("index")]
+          if (berryTree) {
+            this.clearHovered(berryTree.sprite)
           }
         }
       },
