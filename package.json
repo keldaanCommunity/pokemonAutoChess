@@ -81,7 +81,7 @@
     "jimp": "^1.6.0",
     "loglevel": "^1.8.1",
     "markdown-to-config": "^0.4.0",
-    "marked": "^17.0.0",
+    "marked": "^18.0.2",
     "matter-js": "^0.20.0",
     "mongoose": "^9.4.1",
     "phaser": "^3.90.0",
