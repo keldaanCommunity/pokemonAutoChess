@@ -393,8 +393,6 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   openDetail() {
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
     if (!isGameScene(this.scene)) return
     this.scene.closeTooltips()
     if (this.scene.lastPokemonDetail && this.scene.lastPokemonDetail !== this) {
@@ -455,7 +453,7 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  onPointerOver(pointer) {
+  onPointerOver(pointer: Phaser.Input.Pointer) {
     super.onPointerOver(pointer)
 
     if (
@@ -1287,7 +1285,7 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addPoison(stacks) {
+  addPoison(stacks: number) {
     const poisonTexture = stacks >= 3 ? "POISON_BADLY" : "POISON"
     if (!this.poison) {
       this.poison = this.scene.add
