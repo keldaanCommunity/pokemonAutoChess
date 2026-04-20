@@ -637,13 +637,13 @@ function updateEmotionsAndCredits(
     "../app/models/precomputed/emotions-per-pokemon-index.json",
     JSON.stringify(mapToObj(emotionsPerIndex))
   )
-  logger.log("Updated emotions-per-pokemon-index.json")
+  logger.info("Updated emotions-per-pokemon-index.json")
 
   fs.writeFileSync(
     "../app/models/precomputed/credits.json",
     JSON.stringify(mapToObj(creditsData))
   )
-  logger.log("Updated credits.json")
+  logger.info("Updated credits.json")
 }
 
 /**
