@@ -86,11 +86,12 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length, allUsersReady])
 
   const humans = users.filter((u) => !u.isBot)
-  const iseligibleForELO =
-    gameMode === GameMode.CLASSIC || users.filter((u) => !u.isBot).length >= 2
-  const averageElo = Math.round(
-    humans.reduce((acc, u) => acc + u.elo, 0) / humans.length
-  )
+  const isEligibleForELO =
+    gameMode === GameMode.CLASSIC || humans.length >= 2
+  const averageElo =
+    humans.length > 0
+      ? Math.round(humans.reduce((acc, u) => acc + u.elo, 0) / humans.length)
+      : 0
 
   function togglePrivate() {
     if (password === null || password === undefined) {
@@ -169,7 +170,7 @@ export default function PreparationMenu() {
           />
           {t("no_elo_hint")}
         </p>
-      ) : iseligibleForELO ? (
+      ) : isEligibleForELO ? (
         <p>
           {t("eligible_elo_hint")} {t("average_elo")}: {averageElo} ;{" "}
           {t("GLHF")}
@@ -289,7 +290,7 @@ export default function PreparationMenu() {
         <select
           defaultValue={botDifficulty}
           onChange={(e) => {
-            setBotDifficulty(parseInt(e.target.value))
+            setBotDifficulty(parseInt(e.target.value, 10))
           }}
         >
           <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
