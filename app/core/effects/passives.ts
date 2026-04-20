@@ -1558,7 +1558,7 @@ export const PassiveEffects: Partial<
 
       const transformToHero = () => {
         transformed = true
-        const wasFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
+        const isFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
         entity.addAttack(18, entity, 0, false)
@@ -1566,7 +1566,7 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player && !entity.isGhostOpponent && wasFinizenOnBoard) {
+        if (entity.player && !entity.isGhostOpponent && isFinizenOnBoard) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
           entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,
