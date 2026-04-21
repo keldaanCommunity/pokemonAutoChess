@@ -2918,7 +2918,7 @@
 		"PROTECTIVE_PADS": "O portador causa dano dobrado contra unidades com SHIELD e está protegido contra dano de recuo e efeitos de retaliação.",
 		"LOADED_DICE": "Os ataques têm [50,LK]% de chance de também atingir o inimigo com a menor vida ADJACENT ao alvo, causando 75% do dano, o que também ativa efeitos de acerto.",
 		"PUNCHING_GLOVE": "Os ataques causam PHYSICAL adicional equivalente a 8% da vida máxima do alvo ao acertar.",
-		"STICKY_BARB": "Quando atingido por um ataque em alcance corpo a corpo, cause 3 + 15% de DEF como retaliação TRUE ao atacante, com [30,LK]% de chance de infligir WOUND por 3 segundos.",
+		"STICKY_BARB": "Quando atingido por um ataque em alcance corpo a corpo, cause 3 + 15% de DEF como retaliação TRUE ao atacante, e infligir WOUND por 3 segundos.",
 		"CHESTO_BERRY": "Consumido quando abaixo de 50% de HP ou após recebe SLEEP, cura 50 HP e recebe +50 AP e imunidade a SLEEP pelo resto da luta",
 		"GANLON_BERRY": "Consumido quando abaixo de 50% de HP, cura 50 HP e recebe +20 DEF",
 		"JABOCA_BERRY": "Consumido quando abaixo de 50% de HP, cura 50 HP e lança $t(ability.SPIKY_SHIELD) por 10 segundos",
@@ -3894,7 +3894,7 @@
 			"wiki": "Abrir/fechar Wiki",
 			"team_planner": "Abrir/fechar Planejador de Times",
 			"avatar_show_emote": "Acionar emote"
-		}	
+		}
 	},
 	"music_volume": "Volume da Música",
 	"save": "Salvar",
@@ -4030,14 +4030,14 @@
 			"play_more_games_hint": "Jogue mais jogos para ganhar reforços e desbloquear novos avatares!"
 		},
 		"account": {
-			"title": "Conta",			
+			"title": "Conta",
 			"delete_account": "Excluir Conta",
 			"delete_account_hint": "Se você deseja que sua conta seja removida permanentemente, clique abaixo e digite \"$t(delete_account_passphrase)\"",
 			"delete_account_confirmation": "Digite $t(delete_account_passphrase) para confirmar",
 			"delete_account_confirmation_failed": "A senha de confirmação era inválida. A exclusão da conta não foi confirmada.",
 			"delete_account_passphrase": "EXCLUIR CONTA PERMANENTEMENTE",
 			"user_id": "ID do usuário",
-			"user_id_hint1": "Seu ID do usuário é:",				
+			"user_id_hint1": "Seu ID do usuário é:",
 			"user_id_hint2": "Usado para se comunicar com moderadores ou administradores. Ao contrário dos nomes, cada ID de usuário é único e não pode ser alterado.",
 			"anonymous_users_name_hint": "Usuários anônimos não podem alterar seu nome.",
 			"change_name": "Mude o nome",
@@ -4351,7 +4351,7 @@
 			"dungeon_label": "Regiões",
 			"data_label": "Dados"
 		},
-		"faq": {				
+		"faq": {
 			"official_game": "Isso é um jogo oficial?",
 			"official_game_answer": "Não, este é um jogo de fãs; feito por fãs, para fãs. Todos os direitos/créditos à Pokémon Company.",
 			"how_pokemon_evolve": "Como os pokémons evoluem?",
@@ -4440,11 +4440,11 @@
 		"statistics": {
 			"stat_description": {
 				"ATK": "Dano infligido em cada ataque básico",
-				"SPEED": "Frequência de ataques, velocidade de movimento e tempos de recarga. Máximo 300.",				
+				"SPEED": "Frequência de ataques, velocidade de movimento e tempos de recarga. Máximo 300.",
 				"CRIT_CHANCE": "Acertos críticos causam 2x mais dano. As habilidades não podem ser causar acertos críticos por padrão. Chance de acerto crítico acima de 100% é convertida em dano crítico.",
 				"CRIT_POWER": "Multiplicador para dano adicional de acertos críticos, cura e buffs.",
 				"DEF": "Reduz PHYSICAL recebido",
-				"SPE_DEF": "Reduz SPECIAL recebido",								
+				"SPE_DEF": "Reduz SPECIAL recebido",
 				"HP": "Pontos de vida",
 				"RANGE": "Pokémons de RANGE=1 são corpo a corpo",
 				"PP": "Pontos de Poder",
@@ -4463,10 +4463,10 @@
 			"pokemon": "Pokémon",
 			"marowak_items": "Itens (Encontro com Marowak)",
 			"stat_boosts": "Bônus de Atributos",
-			"rewards": "Recompensas",	
+			"rewards": "Recompensas",
 			"shiny_chance": "Chance de Shiny",
 			"shiny_magikarp_description": "Magikarp shiny concedem 10 GOLD cada um quando derrotados",
-			"shiny_gyarados_description": "Shiny Gyarados concede uma RED_SCALE ao ser derrotados",					
+			"shiny_gyarados_description": "Shiny Gyarados concede uma RED_SCALE ao ser derrotados",
 			"shiny_pve_description": "Rodadas PvE shiny dão a escolha entre 3 itens shiny aleatórios como recompensa quando derrotadas",
 			"carousel_description": "Rodada de carrossel de itens onde você pode escolher itens para sua equipe. Os itens são selecionados aleatoriamente do pool de itens disponíveis.",
 			"item_pool": "Pool de itens",
@@ -4479,7 +4479,7 @@
 			"starter_pick": "Escolha do Inicial",
 			"legendary_pick": "Escolha do Lendário"
 		},
-		"town": {	
+		"town": {
 			"town_encounters_hint": "Você pode encontrar moradores da cidade nos estágios de carrossel na Cidade do Tesouro. Eles podem vender itens especiais ou ativar eventos especiais.",
 			"town_encounters_hint2": "Os encontros na cidade geralmente envolvem uma troca, então não se sinta obrigado a aceitar o que eles têm a oferecer!"
 		},
@@ -4757,12 +4757,12 @@
 	"unholdable_item": "Inequipável",
 	"removable_item": "Removível",
 	"food": "Comida",
-	"signature_dish": "Prato de Assinatura",	
+	"signature_dish": "Prato de Assinatura",
 	"scarves": "Lenços",
 	"tm": "Máquinas Técnicas (TM)",
 	"tm_short": "TM",
 	"special_items": "Itens Especiais",
-	"shiny_items": "Itens Brilhantes",	
+	"shiny_items": "Itens Brilhantes",
 	"banned": "Banido",
 	"see_game_history": "Ver histórico de partidas",
 	"see_chat_history": "Ver histórico do chat",
@@ -4776,7 +4776,7 @@
 	"make_room_private_hint": "Adicionar senha para esta sala",
 	"make_room_public_hint": "Remover senha desta sala",
 	"for_price_gold": "por {{price}} GOLD",
-	"max_interest": "Juros máximo em {{maxInterest}} GOLD",	
+	"max_interest": "Juros máximo em {{maxInterest}} GOLD",
 	"game-surrender-modal-title": "Desistir",
 	"game-surrender-modal-body": "O jogo não terminou. Deseja desistir?",
 	"creator": "Criador",
@@ -4785,16 +4785,16 @@
 	"location": "Localização",
 	"ping": "Ping",
 	"overlaps": "Sobreposições",
-	"toggle_locked": "Mostrar bloqueados",	
-	"blacklisted": "Você foi expulso desta partida.",	
+	"toggle_locked": "Mostrar bloqueados",
+	"blacklisted": "Você foi expulso desta partida.",
 	"belly_full": "BARRIGA CHEIA",
 	"not_hungry": "SEM FOME",
 	"fully_grown": "TOTALMENTE CRESCIDO",
 	"caught": "CAPTURADO",
-	"already_held": "JÁ SEGURANDO",	
+	"already_held": "JÁ SEGURANDO",
 	"rounds_since_last_fight": "Rodadas desde o último combate: {{count}}",
 	"minimize": "Minimizar",
-	"maximize": "Maximizar",	
+	"maximize": "Maximizar",
 	"type_fluid": "Type-Fluid",
 	"full_patch_notes": "Informações Completas do Patch",
 	"thanks_for_playing": "Obrigado por jogar nosso jogo!",
@@ -4825,5 +4825,5 @@
 		"BATTLE_WIN_STREAK_DESCRIPTION": "Consiga uma sequência de {{amount}} vitórias ou mais",
 		"DELIVERY_DESCRIPTION": "Obtenha {{quantity}} {{item}} no seu inventário ou equipado em um Pokémon ao final da partida",
 		"reward": "Recompensa: {{points}} XP"
-	}	
+	}
 }

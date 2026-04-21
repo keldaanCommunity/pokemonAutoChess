@@ -912,9 +912,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           attacker: pokemon,
           shouldTargetGainMana: true
         })
-        if (chance(0.3, pokemon)) {
-          attacker.status.triggerWound(3000, attacker, pokemon)
-        }
+        attacker.status.triggerWound(3000, attacker, pokemon)
       }
     })
   ],

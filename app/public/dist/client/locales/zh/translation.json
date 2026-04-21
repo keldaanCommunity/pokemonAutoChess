@@ -2878,7 +2878,7 @@
 		"MUSCLE_BAND": "携带者受到伤害时，获得1层“借力”（最多叠加20层）。每两层“借力”提升携带者2点DEF，1点ATK以及5点SPEED",
 		"WONDER_BOX": "每场战斗开始时，将WONDER_BOX替换为2件临时的随机合成道具（携带道具总数不会超过3）",
 		"ABILITY_SHIELD": "战斗开始时，携带者和ADJACENT_IN_THE_SAME_ROW的我方宝可梦获得RUNE_PROTECT 5秒，并获得SHIELD，数值相当于各自20%的HP",
-		"STICKY_BARB": "受到近战攻击时，对攻击者发起反击，造成TRUE，数值相当于15%的DEF加3，并有[30,LK]%的概率使其陷入WOUND 3秒。",
+		"STICKY_BARB": "受到近战攻击时，对攻击者发起反击，造成TRUE，数值相当于15%的DEF加3，并使攻击者进入 WOUND 3秒。",
 		"WIDE_LENS": "携带者提升2点RANGE",
 		"RAZOR_CLAW": "携带者提升50%的CRIT_CHANCE",
 		"SAFETY_GOGGLES": "携带者免疫所有状态效果和沙暴伤害",

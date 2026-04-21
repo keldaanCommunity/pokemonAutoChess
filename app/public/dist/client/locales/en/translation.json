@@ -2879,7 +2879,7 @@
 		"MUSCLE_BAND": "When the holder takes damage, gain 1 stack. Every 2 stacks, the holder gains +2 DEF, +1 ATK and +5 SPEED (max 20 stacks)",
 		"WONDER_BOX": "At the beginning of each battle, WONDER_BOX is replaced by 2 temporary random craftable items (max 3 items held)",
 		"ABILITY_SHIELD": "When combat begins, the holder and allies ADJACENT_IN_THE_SAME_ROW receive 20% of their max HP as SHIELD and RUNE_PROTECT for 5 seconds",
-		"STICKY_BARB": "When struck by an attack at melee range, deal 3 + 15% of DEF as retaliation TRUE to the attacker, with [30,LK]% chance to inflict WOUND for 3 seconds.",
+		"STICKY_BARB": "When struck by an attack at melee range, deal 3 + 15% of DEF as retaliation TRUE and inflict WOUND for 3 seconds to the attacker.",
 		"WIDE_LENS": "The holder gains +2 RANGE",
 		"RAZOR_CLAW": "The holder gains +50% CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Holder is immune to all negative status effects and to sandstorm damage",
@@ -4614,7 +4614,7 @@
 			"round_damage_calculation": "Round damage calculation",
 			"round_damage_calculation_description": "The damage inflicted to player after losing a round is computed like this: Round damage = (stage level / 2) + (number of opponent's Pokémon alive) ; rounded up, clones/spawns do not count",
 			"pool_size_per_category": "Pool size per category",
-			"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",			
+			"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
 			"xp": "XP",
 			"experience": "Experience"
 		}

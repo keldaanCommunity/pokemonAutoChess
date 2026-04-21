@@ -2782,7 +2782,7 @@
 		"MUSCLE_BAND": "Wenn der Träger Schaden erleidet, erhältst du 1 Steigerung. Alle 2 Steigerungen erhält der Besitzer +2 DEF, +1 ATK und +5 SPEED (maximal 20 Steigerungen).",
 		"WONDER_BOX": "Zu Beginn jedes Kampfes wird die WONDER_BOX durch 2 zufällige temporäre Items ersetzt (max. 3 Items tragbar).",
 		"ABILITY_SHIELD": "Zu Kampfbeginn, erhalten der Träger und alle Verbündeten ADJACENT_IN_THE_SAME_ROW 20% der max. HP als SHIELD und 5 Sekunden lang RUNE_PROTECT.",
-		"STICKY_BARB": "Wird der Träger von einem ADJACENT Gegner angegriffen, erleidet dieser 3 + 15% der DEF TRUE, hat eine [30%,LK] Chance WOUND für 3 Sekunden zu verursachen.",
+		"STICKY_BARB": "Wird der Träger von einem ADJACENT Gegner angegriffen, erleidet dieser 3 + 15% der DEF TRUE und WOUND für 3 Sekunden.",
 		"WIDE_LENS": "Der Träger erhält +2 RANGE.",
 		"RAZOR_CLAW": "Der Träger erhält +50% CRIT_CHANCE.",
 		"SAFETY_GOGGLES": "Der Träger ist gegen alle Statusänderungen immun und gegen Schäden durch Sandstürme geschützt.",
