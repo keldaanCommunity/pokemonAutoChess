@@ -4,3 +4,7 @@
 - Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
 - Increased base cooldown of Rage (TM): 200ms → 1000ms
 - Reduced base cooldown of Bulk Up: 1000ms → 300ms
+
+# Bugfixes
+
+- Fixed a case of scarf item duplication
