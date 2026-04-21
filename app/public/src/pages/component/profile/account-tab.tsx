@@ -57,9 +57,9 @@ export function AccountTab() {
 function TwitchLinkSection() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
-  const [loadingAction, setLoadingAction] = useState<"connect" | "unlink" | null>(
-    null
-  )
+  const [loadingAction, setLoadingAction] = useState<
+    "connect" | "unlink" | null
+  >(null)
 
   async function handleConnect() {
     setLoadingAction("connect")
@@ -69,7 +69,9 @@ function TwitchLinkSection() {
     } catch (error) {
       dispatch(
         setErrorAlertMessage(
-          error instanceof Error ? error.message : "Unable to start Twitch verification"
+          error instanceof Error
+            ? error.message
+            : "Unable to start Twitch verification"
         )
       )
       setLoadingAction(null)
@@ -91,7 +93,9 @@ function TwitchLinkSection() {
     } catch (error) {
       dispatch(
         setErrorAlertMessage(
-          error instanceof Error ? error.message : "Unable to unlink Twitch account"
+          error instanceof Error
+            ? error.message
+            : "Unable to unlink Twitch account"
         )
       )
     } finally {
@@ -116,8 +120,9 @@ function TwitchLinkSection() {
       {user.twitchUserId && user.twitchLogin ? (
         <>
           <p>
-            Linked as <strong>{user.twitchDisplayName || user.twitchLogin}</strong>
-            {" "}(@{user.twitchLogin})
+            Linked as{" "}
+            <strong>{user.twitchDisplayName || user.twitchLogin}</strong> (@
+            {user.twitchLogin})
           </p>
           {verifiedAt && <p>Verified on {verifiedAt}</p>}
           {twitchProfileUrl && (
@@ -138,11 +143,11 @@ function TwitchLinkSection() {
       ) : (
         <>
           <p>
-            Link your Twitch account to verify streamer identity and connect your PAC
-            profile to your Twitch login.
+            Link your Twitch account to verify streamer identity and connect
+            your PAC profile to your Twitch login.
           </p>
           <button
-            className="bubbly purple"
+            className="bubbly blue"
             disabled={loadingAction != null}
             onClick={() => handleConnect()}
           >

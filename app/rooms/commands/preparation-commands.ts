@@ -117,7 +117,9 @@ export class OnJoinCommand extends Command<
             false,
             u.title,
             u.role,
-            auth.email === undefined && auth.photoURL === undefined
+            auth.email === undefined && auth.photoURL === undefined,
+            u.twitchLogin ?? "",
+            u.twitchDisplayName ?? ""
           )
         )
         this.room.updatePlayersInfo()
