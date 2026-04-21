@@ -755,6 +755,10 @@ const poppingIcon: AbilityAnimationMaker<
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
+  ["PUFF_RED"]: onTargetScale2,
+  ["PUFF_PINK"]: onTargetScale2,
+  ["PUFF_GREEN"]: onTargetScale2,
+  ["PUFF_BROWN"]: onTargetScale2,
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
@@ -816,6 +820,16 @@ export const AbilitiesAnimations: {
   }),
   ["FIELD_DEATH"]: onCasterScale2,
   ["FAIRY_CRIT"]: onCasterScale2,
+  ["FAIRY_HIT"]: onTarget({
+    ability: "FAIRY/hit",
+    textureKey: "attacks"
+  }),
+  ["FAIRY_TUNNEL"]: projectile({
+    distance: 8,
+    duration: 1000,
+    oriented: true,
+    rotation: +Math.PI / 2
+  }),
   ["POWER_LENS"]: onCasterScale2,
   ["STAR_DUST"]: onCasterScale2,
   ["HEAL_ORDER"]: onCasterScale2,

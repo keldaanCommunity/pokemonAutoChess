@@ -488,8 +488,10 @@ export function applyWandEffects(
         break
       }
       case Item.BLAST_WAND: {
-        if (crit) specialDamageFactor += 0.2
-        //TODO: broadcast visual effect for crit, puff pink ?
+        if (crit) {
+          specialDamageFactor += 0.2
+          pokemon.broadcastAbility({ skill: "PUFF_PINK" })
+        }
         break
       }
       case Item.SPIRIT_WAND: {
@@ -511,7 +513,13 @@ export function applyWandEffects(
                 : lowest
             )
           target = lowestHpAdjacentEnemy || target
-          //TODO: broadcast visual effect for the redirect from target to lowestHpAdjacentEnemy
+          if (lowestHpAdjacentEnemy) {
+            pokemon.broadcastAbility({
+              skill: "FAIRY_HIT",
+              targetX: lowestHpAdjacentEnemy.positionX,
+              targetY: lowestHpAdjacentEnemy.positionY
+            })
+          }
         }
         break
       }
@@ -553,7 +561,7 @@ export function applyWandEffects(
             .getAdjacentCells(pokemon.positionX, pokemon.positionY)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
             .map((cell) => cell.value as PokemonEntity)
-          // TODO: broadcast visual effect for the chain damage to adjacent enemies, puff pink ?
+          pokemon.broadcastAbility({ skill: "FAIRY_CRIT" })
           adjacentEnemies
             .filter((e) => e.id !== target.id)
             .forEach((enemy) => {
@@ -613,7 +621,16 @@ export function applyWandEffects(
               board,
               true
             )
-            //TODO: visual effect on both cells
+            pokemon.broadcastAbility({
+              skill: Ability.TELEPORT,
+              positionX: target.positionX,
+              positionY: target.positionY
+            })
+            pokemon.broadcastAbility({
+              skill: Ability.TELEPORT,
+              positionX: farthestTarget.positionX,
+              positionY: farthestTarget.positionY
+            })
           }
         }
         break
@@ -629,7 +646,7 @@ export function applyWandEffects(
       }
       case Item.TUNNEL_WAND: {
         if (chance(0.1, pokemon)) {
-          //TODO: visual effect for the tunnel
+          pokemon.broadcastAbility({ skill: "FAIRY_TUNNEL" })
           effectInLine(board, pokemon, target, (cell) => {
             if (
               cell.value != null &&
