@@ -291,7 +291,7 @@ export class OnNewMessageCommand extends Command<
       if (
         user &&
         [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
-        message != ""
+        message !== ""
       ) {
         this.state.addMessage(message, user.uid, user.displayName, user.avatar)
       }
@@ -592,7 +592,7 @@ export class ChangeAvatarCommand extends Command<
         .replace(".png", "")
       user.avatar = portrait
       mongoUser.avatar = portrait
-      mongoUser.save()
+      await mongoUser.save()
     } catch (error) {
       logger.error(error)
     }
@@ -1079,7 +1079,7 @@ export class OpenGameCommand extends Command<
   }) {
     const user = this.room.users.get(client.auth.uid)
     if (!user) return
-    let roomName = `${user.displayName}'${user.displayName.endsWith("s") ? "" : "s"} room`
+    let roomName = `${user.displayName}'s room`
     let noElo: boolean = true
     let password: string | null = null
     let ownerId: string | null = null
