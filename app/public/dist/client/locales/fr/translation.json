@@ -1826,7 +1826,7 @@
 		"STRING_SHOT": "Inflige [10,20,50,SP] SPECIAL et PARALYSIS pendant 5 secondes à la cible.",
 		"VENOSHOCK": "Inflige [30,60,120,SP] SPECIAL à la cible. Dégâts doublés si la cible a le statut POISONNED.",
 		"LEECH_LIFE": "Inflige [20,40,80,SP] SPECIAL à la cible et soigne le lanceur à hauteur de 100% des dégâts infligés.",
-		"HAPPY_HOUR": "Augmente l'ATK de tous les alliés de [2,5,8,SP].",
+		"HAPPY_HOUR": "Augmente l'ATK de tous les alliés de [2,4,7,SP].",
 		"TELEPORT": "Téléporte le lanceur sur un bord du champ de bataille. La prochaine attaque inflige [15,30,60,SP] SPECIAL supplémentaires.",
 		"NASTY_PLOT": "Augmente l'ATK du lanceur de [10,SP].",
 		"TAKE_HEART": "Le lanceur fait preuve de bravoure pour soigner ses altérations de statut et augmenter son ATK de [8,SP] et sa SPE_DEF de [8,SP].",

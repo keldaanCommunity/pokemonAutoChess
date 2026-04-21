@@ -1816,7 +1816,7 @@
 		"STRING_SHOT": "Attacke, die [10,20,50,SP] SPECIAL am Ziel verursacht und 5 Sekunden lang PARALYSIS beim getroffnen Pokemon bewirkt",
 		"VENOSHOCK": "Attacke, die [30,60,120,SP] SPECIAL am Ziel verursacht. Verdoppelt den Schaden, wenn das Ziel POISONNED ist",
 		"LEECH_LIFE": "Lebensraubangriff der [20,40,80,SP] SPECIAL verursacht",
-		"HAPPY_HOUR": "Verstärkt den ATK aller Verbündeten um [2,5,8,SP] Punkte.",
+		"HAPPY_HOUR": "Verstärkt den ATK aller Verbündeten um [2,4,7,SP] Punkte.",
 		"TELEPORT": "Teleportiere das Pokémon an eine Ecke des Felds. Der nächste Angriff verursacht [15,30,60,SP] SPECIAL",
 		"NASTY_PLOT": "Verstärke die ATK des Pokémon um [10,SP] Punkte",
 		"TAKE_HEART": "Der Anwender verwendet Tapferkeit, um seine Statusbeschwerden zu heilen und seine ATK um [8,SP] wie auch SPE_DEF um [8,SP] zu erhöhen.",

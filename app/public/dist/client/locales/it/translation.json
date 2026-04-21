@@ -1778,7 +1778,7 @@
 		"STRING_SHOT": "Infliggi [10,20,50,SP] SPECIAL e infliggi PARALYSIS al bersaglio per 5 secondi.",
 		"VENOSHOCK": "Infliggi [30,60,120,SP] SPECIAL. Il danno raddoppia se il bersaglio ha lo status POISONNED.",
 		"LEECH_LIFE": "Infligge [20,40,80,SP] SPECIAL e cura l'utilizzatore per la stessa cifra dei danni inflitti.",
-		"HAPPY_HOUR": "Potenzia l'ATK di tutti i Pokèmon alleati di [2,5,8,SP].",
+		"HAPPY_HOUR": "Potenzia l'ATK di tutti i Pokèmon alleati di [2,4,7,SP].",
 		"TELEPORT": "Teletrasporta l'utilizzatore su un bordo del campo. Il suo prossimo attacco infligge [15,30,60,SP] SPECIAL extra.",
 		"NASTY_PLOT": "Potenzia l'ATK dell'utilizzatore di [10,SP].",
 		"TAKE_HEART": "L'utilizzatore incanala il suo coraggio per curare i suoi status negativi e potenziare il suo ATK di [8,SP] e la sua SPE_DEF di [8,SP]",

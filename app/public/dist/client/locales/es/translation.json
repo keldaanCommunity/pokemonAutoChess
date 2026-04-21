@@ -1804,7 +1804,7 @@
 		"STRING_SHOT": "Inflige [10,20,50,SP] de SPECIAL al objetivo y lo deja PARALYSIS por 5 segundos",
 		"VENOSHOCK": "Inflige [30,60,120,SP] de SPECIAL al objetivo. Si este está POISONNED, recibe el doble de daño",
 		"LEECH_LIFE": "Inflige [20,40,80,SP] de SPECIAL y cura al usuario la misma cantidad",
-		"HAPPY_HOUR": "Mejora el ATK de todos los aliados en [2,5,8,SP]",
+		"HAPPY_HOUR": "Mejora el ATK de todos los aliados en [2,4,7,SP]",
 		"TELEPORT": "Teletransporta al usuario a una esquina del mapa. Su siguiente ataque hace [15,30,60,SP] de SPECIAL adicional.",
 		"NASTY_PLOT": "Mejora el ATK del Pokémon en [10,SP]",
 		"TAKE_HEART": "El usuario usa su valentía para curar sus efectos de estado y aumenta su ATK en [8,SP] y su SPE_DEF en [8,SP]",
