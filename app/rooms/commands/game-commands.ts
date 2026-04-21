@@ -1120,31 +1120,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     return false
   }
 
-  computeStreak(isPVE: boolean) {
-    if (isPVE) return // PVE rounds do not change the current streak
-    this.state.players.forEach((player) => {
-      if (!player.alive) {
-        return
-      }
-
-      const [previousBattleResult, lastBattleResult] = player.history
-        .filter(
-          (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
-        )
-        .map((stage) => stage.result)
-        .slice(-2)
-
-      if (lastBattleResult === BattleResult.DRAW) {
-        // preserve existing streak but lose HP
-      } else if (lastBattleResult !== previousBattleResult) {
-        // reset streak
-        player.streak = 0
-      } else {
-        player.streak += 1
-      }
-    })
-  }
-
   computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule | null) {
     this.state.players.forEach((player) => {
       let income = 0
@@ -1625,7 +1600,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
 
     this.computeAchievements()
-    this.computeStreak(isPVE)
     this.checkDeath()
     const isGameFinished = this.checkEndGame()
 
@@ -1864,31 +1838,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (this.state.specialGameRule === SpecialGameRule.UNOWN_SPELL) {
       this.state.simulations.forEach((simulation) => {
         const unown = pickRandomIn(UnownsForScribble)
-        ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
-          if (
-            !player ||
-            (simulation.isGhostBattle && player === simulation.redPlayer)
-          )
-            return
-          const wanderer = player.spawnWanderingPokemon({
-            pkm: unown,
-            shiny: false,
-            type: WandererType.UNOWN_SPELL,
-            behavior: WandererBehavior.SPECTATE
-          })
-          this.clock.setTimeout(() => {
-            player.wanderers.delete(wanderer.id)
-            if (simulation.finished) return
-            const caster = new PokemonEntity(
-              PokemonFactory.createPokemonFromName(unown),
-              9,
-              2,
-              player.team,
-              simulation
+          ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
+            if (
+              !player ||
+              (simulation.isGhostBattle && player === simulation.redPlayer)
             )
-            castAbility(caster.skill, caster, simulation.board, null, false)
-          }, 10000)
-        })
+              return
+            const wanderer = player.spawnWanderingPokemon({
+              pkm: unown,
+              shiny: false,
+              type: WandererType.UNOWN_SPELL,
+              behavior: WandererBehavior.SPECTATE
+            })
+            this.clock.setTimeout(() => {
+              player.wanderers.delete(wanderer.id)
+              if (simulation.finished) return
+              const caster = new PokemonEntity(
+                PokemonFactory.createPokemonFromName(unown),
+                9,
+                2,
+                player.team,
+                simulation
+              )
+              castAbility(caster.skill, caster, simulation.board, null, false)
+            }, 10000)
+          })
       })
     }
   }
