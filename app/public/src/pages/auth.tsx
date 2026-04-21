@@ -2,6 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import pkg from "../../../../package.json"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { fetchProfile } from "../network"
 import { setErrorAlertMessage } from "../stores/NetworkStore"
 import Login from "./component/auth/login"
 import DiscordButton from "./component/buttons/discord-button"
@@ -18,9 +19,57 @@ export default function Auth() {
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
   const [modal, setModal] = React.useState<string | null>(null)
+  const [twitchCallbackMessage, setTwitchCallbackMessage] = React.useState<{
+    kind: "success" | "error"
+    body: string
+  } | null>(null)
+  const [shouldRefreshProfile, setShouldRefreshProfile] = React.useState(false)
   const dispatch = useAppDispatch()
   const networkError = useAppSelector((state) => state.network.error)
+  const uid = useAppSelector((state) => state.network.uid)
   const discordUrl = process.env.DISCORD_SERVER
+
+  React.useEffect(() => {
+    const url = new URL(window.location.href)
+    const twitchVerify = url.searchParams.get("twitchVerify")
+    if (!twitchVerify) {
+      return
+    }
+
+    if (twitchVerify === "success") {
+      setTwitchCallbackMessage({
+        kind: "success",
+        body: "Your Twitch account has been linked successfully."
+      })
+      setShouldRefreshProfile(true)
+    } else {
+      setTwitchCallbackMessage({
+        kind: "error",
+        body: twitchVerify.replace(/\+/g, " ")
+      })
+    }
+
+    url.searchParams.delete("twitchVerify")
+    window.history.replaceState({}, "", url.toString())
+  }, [])
+
+  React.useEffect(() => {
+    if (!shouldRefreshProfile || !uid) {
+      return
+    }
+
+    fetchProfile(true)
+      .catch((error) => {
+        dispatch(
+          setErrorAlertMessage(
+            error instanceof Error ? error.message : "Unable to refresh profile"
+          )
+        )
+      })
+      .finally(() => {
+        setShouldRefreshProfile(false)
+      })
+  }, [dispatch, shouldRefreshProfile, uid])
 
   return (
     <div className="auth-page">
@@ -81,6 +130,19 @@ export default function Auth() {
         }}
         className="is-dark basic-modal-body"
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
+      <Modal
+        show={twitchCallbackMessage != null}
+        onClose={() => {
+          setTwitchCallbackMessage(null)
+        }}
+        className="is-dark basic-modal-body"
+        header={
+          twitchCallbackMessage?.kind === "success"
+            ? "Twitch Linked"
+            : "Twitch Verification Error"
+        }
+        body={<p style={{ padding: "1em" }}>{twitchCallbackMessage?.body}</p>}
       />
     </div>
   )

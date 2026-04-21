@@ -192,7 +192,9 @@ export default function Preparation() {
           "name",
           "role",
           "title",
-          "ready"
+          "ready",
+          "twitchLogin",
+          "twitchDisplayName"
         ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {

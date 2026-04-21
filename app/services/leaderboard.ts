@@ -24,7 +24,7 @@ export function fetchLeaderboards() {
 export async function fetchUserLeaderboard() {
   const users = await UserMetadata.find(
     {},
-    ["displayName", "avatar", "elo", "uid"],
+    ["displayName", "avatar", "elo", "uid", "twitchLogin", "twitchDisplayName"],
     { limit: 100, sort: { elo: -1 } }
   ).lean()
 
@@ -34,7 +34,9 @@ export async function fetchUserLeaderboard() {
       rank: i + 1,
       avatar: user.avatar,
       value: user.elo,
-      id: user.uid
+      id: user.uid,
+      twitchLogin: user.twitchLogin,
+      twitchDisplayName: user.twitchDisplayName
     }))
   }
   return leaderboard
@@ -43,7 +45,14 @@ export async function fetchUserLeaderboard() {
 export async function fetchLevelLeaderboard() {
   const levelUsers = await UserMetadata.find(
     {},
-    ["displayName", "avatar", "level", "uid"],
+    [
+      "displayName",
+      "avatar",
+      "level",
+      "uid",
+      "twitchLogin",
+      "twitchDisplayName"
+    ],
     { limit: 100, sort: { level: -1 } }
   ).lean()
 
@@ -53,7 +62,9 @@ export async function fetchLevelLeaderboard() {
       rank: i + 1,
       avatar: user.avatar,
       value: user.level,
-      id: user.uid
+      id: user.uid,
+      twitchLogin: user.twitchLogin,
+      twitchDisplayName: user.twitchDisplayName
     }))
   }
 
@@ -80,7 +91,15 @@ export async function fetchBotsLeaderboard() {
 export async function fetchEventLeaderboard() {
   const users = await UserMetadata.find(
     { eventPoints: { $gt: 0 } },
-    ["displayName", "avatar", "eventPoints", "eventFinishTime", "uid"],
+    [
+      "displayName",
+      "avatar",
+      "eventPoints",
+      "eventFinishTime",
+      "uid",
+      "twitchLogin",
+      "twitchDisplayName"
+    ],
     { limit: 100, sort: { eventPoints: -1, eventFinishTime: 1 } }
   ).lean()
 
@@ -91,7 +110,9 @@ export async function fetchEventLeaderboard() {
       avatar: user.avatar,
       value: user.eventPoints,
       eventFinishTime: user.eventFinishTime,
-      id: user.uid
+      id: user.uid,
+      twitchLogin: user.twitchLogin,
+      twitchDisplayName: user.twitchDisplayName
     }))
   }
   return eventLeaderboard

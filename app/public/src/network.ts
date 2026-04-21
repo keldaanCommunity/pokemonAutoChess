@@ -59,6 +59,43 @@ export async function fetchProfile(forceRefresh: boolean = false) {
     })
 }
 
+export type TwitchVerificationStartResponse = {
+  authorizeUrl: string
+  expiresAt: string
+}
+
+export async function startTwitchVerification(): Promise<TwitchVerificationStartResponse> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/twitch/verify/start", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  return res.json()
+}
+
+export async function unlinkTwitchVerification(): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/twitch/verify/unlink", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
 export const rooms: {
   lobby: Room<{ state: LobbyState }> | undefined
   preparation: Room<PreparationState> | undefined
