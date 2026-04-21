@@ -11610,7 +11610,7 @@ export class SurfStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: null,
+    target: null | PokemonEntity,
     crit: boolean,
     preventDefaultAnim?: boolean,
     tierLevel = pokemon.stars
