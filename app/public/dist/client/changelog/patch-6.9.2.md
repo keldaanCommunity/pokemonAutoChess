@@ -10,6 +10,7 @@
 - Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
 - Increased base cooldown of Rage (TM): 200ms → 1000ms
 - Reduced base cooldown of Bulk Up: 1000ms → 300ms
+- Buff Litten: HP 90/170/280 → 95/180/300 ; Attack 8/14/24 → 8/15/30 ; Spe def: 6/10/14 → 8/12/16 ; Dark Lariat base number of hits: 3 → 4
 
 # Bugfixes
 
