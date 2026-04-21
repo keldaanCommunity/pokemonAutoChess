@@ -29,11 +29,7 @@ export function getPkmFromPortraitSrc(src: string): PkmWithCustom | null {
 }
 
 export function getAvatarSrc(avatar: string) {
-  const defaultAvatar = `${PkmIndex[Pkm.MAGIKARP]}/${Emotion.NORMAL}`
-  const normalizedAvatar = avatar.replace(/(\d+)\-/g, "$1/")
-  const isValidAvatarPath = /^\d+(?:\/\d+)*(?:\/[A-Z_]+)?$/.test(normalizedAvatar)
-  const safeAvatar = isValidAvatarPath ? normalizedAvatar : defaultAvatar
-  return `/assets/portraits/${safeAvatar}.png`
+  return `/assets/portraits/${avatar.replace(/(\d+)\-/g, "$1/")}.png`
 }
 
 export function getAvatarString(
