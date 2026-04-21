@@ -648,8 +648,8 @@ export default class GameScene extends Scene {
           else if (
             dropZone.name === "board-zone" &&
             (
-              this.room?.state.phase == GamePhaseState.PICK ||
-              dropZone.getData("y") == 0
+              this.room?.state.phase === GamePhaseState.PICK ||
+              dropZone.getData("y") === 0
             )
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
@@ -729,8 +729,8 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           dropZone.name === "board-zone" &&
           !(
-            this.room?.state.phase == GamePhaseState.FIGHT &&
-            dropZone.getData("y") != 0
+            this.room?.state.phase === GamePhaseState.FIGHT &&
+            dropZone.getData("y") !== 0
           ) &&
           this.board?.pokemons
         ) {
