@@ -3,7 +3,13 @@ import { useTranslation } from "react-i18next"
 import { USERNAME_REGEXP } from "../../../../../config"
 import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { deleteAccount, heapSnapshot } from "../../../network"
+import {
+  deleteAccount,
+  fetchProfile,
+  heapSnapshot,
+  startTwitchVerification,
+  unlinkTwitchVerification
+} from "../../../network"
 import { changeName, setErrorAlertMessage } from "../../../stores/NetworkStore"
 
 export function AccountTab() {
@@ -24,6 +30,7 @@ export function AccountTab() {
   return user ? (
     <div>
       <ChangeNameForm />
+      <TwitchLinkSection />
       <h3>{t("profile.account.user_id")}</h3>
       <p>
         {t("profile.account.user_id_hint1")}{" "}
@@ -45,6 +52,106 @@ export function AccountTab() {
       )}
     </div>
   ) : null
+}
+
+function TwitchLinkSection() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.network.profile)
+  const [loadingAction, setLoadingAction] = useState<"connect" | "unlink" | null>(
+    null
+  )
+
+  async function handleConnect() {
+    setLoadingAction("connect")
+    try {
+      const payload = await startTwitchVerification()
+      window.location.assign(payload.authorizeUrl)
+    } catch (error) {
+      dispatch(
+        setErrorAlertMessage(
+          error instanceof Error ? error.message : "Unable to start Twitch verification"
+        )
+      )
+      setLoadingAction(null)
+    }
+  }
+
+  async function handleUnlink() {
+    const confirmed = window.confirm(
+      "Are you sure you want to unlink your Twitch account?"
+    )
+    if (!confirmed) {
+      return
+    }
+
+    setLoadingAction("unlink")
+    try {
+      await unlinkTwitchVerification()
+      await fetchProfile(true)
+    } catch (error) {
+      dispatch(
+        setErrorAlertMessage(
+          error instanceof Error ? error.message : "Unable to unlink Twitch account"
+        )
+      )
+    } finally {
+      setLoadingAction(null)
+    }
+  }
+
+  if (!user) {
+    return null
+  }
+
+  const verifiedAt = user.twitchVerifiedAt
+    ? new Date(user.twitchVerifiedAt).toLocaleString()
+    : null
+  const twitchProfileUrl = user.twitchLogin
+    ? `https://www.twitch.tv/${user.twitchLogin}`
+    : null
+
+  return (
+    <div>
+      <h3>Twitch</h3>
+      {user.twitchUserId && user.twitchLogin ? (
+        <>
+          <p>
+            Linked as <strong>{user.twitchDisplayName || user.twitchLogin}</strong>
+            {" "}(@{user.twitchLogin})
+          </p>
+          {verifiedAt && <p>Verified on {verifiedAt}</p>}
+          {twitchProfileUrl && (
+            <p>
+              <a href={twitchProfileUrl} target="_blank" rel="noreferrer">
+                Open Twitch profile
+              </a>
+            </p>
+          )}
+          <button
+            className="bubbly red"
+            disabled={loadingAction != null}
+            onClick={() => handleUnlink()}
+          >
+            {loadingAction === "unlink" ? "Unlinking..." : "Unlink Twitch"}
+          </button>
+        </>
+      ) : (
+        <>
+          <p>
+            Link your Twitch account to verify streamer identity and connect your PAC
+            profile to your Twitch login.
+          </p>
+          <button
+            className="bubbly purple"
+            disabled={loadingAction != null}
+            onClick={() => handleConnect()}
+          >
+            {loadingAction === "connect" ? "Connecting..." : "Connect Twitch"}
+          </button>
+        </>
+      )}
+    </div>
+  )
 }
 
 function ChangeNameForm() {
