@@ -11606,10 +11606,11 @@ export class FlyStrategy extends AbilityStrategy {
 }
 
 export class SurfStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean,
     preventDefaultAnim?: boolean,
     tierLevel = pokemon.stars
@@ -11668,9 +11669,9 @@ export class SurfStrategy extends AbilityStrategy {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
     }
 
-    if (targetsHit.size === 0) {
-      // ensure to at least hit the target
-      target.handleSpecialDamage(
+    if (targetsHit.size === 0 && farthestCoordinate?.target) {
+      // ensure to at least hit the farthest target
+      farthestCoordinate.target.handleSpecialDamage(
         damage,
         board,
         AttackType.SPECIAL,
