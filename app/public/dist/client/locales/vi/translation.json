@@ -1261,7 +1261,7 @@
 		"STRING_SHOT": "Gây [10,20,50,SP] SPECIAL lên mục tiêu và khiến chúng PARALYSIS trong 5 giây",
 		"VENOSHOCK": "Gây [30,60,120,SP] SPECIAL lên mục tiêu. Nếu mục tiêu đang POISONED, gấp đôi sát thương",
 		"LEECH_LIFE": "Gây [20,40,80,SP] SPECIAL và hồi phục cho bản thân một lượng tương đương",
-		"HAPPY_HOUR": "Tăng [2,5,8,SP] ATK cho toàn bộ Pokémon đồng minh",
+		"HAPPY_HOUR": "Tăng [2,4,7,SP] ATK cho toàn bộ Pokémon đồng minh",
 		"TELEPORT": "Dịch chuyển bản thân đến góc chiến trường. Đòn tấn công tiếp theo của bản thân gây thêm [15,30,60,SP] SPECIAL",
 		"NASTY_PLOT": "Tăng [10,SP] ATK cho bản thân",
 		"TAKE_HEART": "Pokemon vận chiêu sử dụng sức mạnh tinh thần để thoát khỏi khống chế, tăng [8,SP] ATK và [8,SP] SPE_DEF",

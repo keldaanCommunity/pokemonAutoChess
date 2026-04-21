@@ -1811,7 +1811,7 @@
 		"STRING_SHOT": "Inflige [10,20,50,SP] de SPECIAL ao alvo e aplica PARALYSIS por 5 segundos",
 		"VENOSHOCK": "Inflige [30,60,120,SP] de SPECIAL ao alvo. Dano dobrado se o alvo sofrer de POISONNED.",
 		"LEECH_LIFE": "Inflige [20,40,80,SP] de SPECIAL ao alvo e cura o usuário em 100% do dano causado.",
-		"HAPPY_HOUR": "Aumente o ATK de todos os aliados em [2,5,8,SP]",
+		"HAPPY_HOUR": "Aumente o ATK de todos os aliados em [2,4,7,SP]",
 		"TELEPORT": "Teletransporte o usuário para um canto do tabuleiro. O próximo ataque do usuário recebe [15,30,60,SP] de SPECIAL bônus.",
 		"NASTY_PLOT": "Aumenta o ATK do usuário em [10,SP]",
 		"TAKE_HEART": "O usuário usa bravura para curar seus status negativos e aumentar seu ATK em [8,SP] e SPE_DEF em [8,SP]",

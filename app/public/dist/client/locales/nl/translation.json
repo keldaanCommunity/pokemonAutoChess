@@ -975,7 +975,7 @@
 		"STRING_SHOT": "Breng [10,20,50,SP] SPECIAL toe aan het doelwit en pas de PARALYSIS status toe voor 5 seconden",
 		"VENOSHOCK": "Breng [30,60,120,SP] SPECIAL toe aan het doelwit. De schade verdubbelt als het doelwit de POISONNED status heeft",
 		"LEECH_LIFE": "Breng [20,40,80,SP] SPECIAL en genees de gebruiker voor hetzelfde bedrag",
-		"HAPPY_HOUR": "Verbeter de ATK van alle vriendelijke Pokémon met [2,5,8,SP]",
+		"HAPPY_HOUR": "Verbeter de ATK van alle vriendelijke Pokémon met [2,4,7,SP]",
 		"TELEPORT": "Teleporteer de gebruiker naar een hoek van het slagveld. De gebruiker's volgende aanval richt [15,30,60,SP] extra SPECIAL aan",
 		"NASTY_PLOT": "Verbeter de ATK van de gebruiker met [10,SP]",
 		"THIEF": "Steel zo veel mogelijk items van het doelwit die de gebruiker in bezit kan hebben en richt [15,30,60,SP] SPECIAL aan",
