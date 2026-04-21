@@ -54,9 +54,12 @@ import {
 } from "./services/meta"
 import {
   addTwitchBlacklistEntry,
+  completeTwitchAccountVerification,
   getTwitchStreamsPayload,
   listTwitchBlacklist,
-  removeTwitchBlacklistEntry
+  removeTwitchBlacklistEntry,
+  startTwitchAccountVerification,
+  unlinkTwitchAccount
 } from "./services/twitch"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
@@ -375,6 +378,70 @@ export const server = defineServer({
     app.get("/twitch/streams", async (req, res) => {
       setCacheControl(res, 120)
       res.send(getTwitchStreamsPayload())
+    })
+
+    app.post("/twitch/verify/start", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        const payload = await startTwitchAccountVerification(userAuth.uid)
+        res.status(200).json(payload)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        logger.error("Error starting Twitch verification", { error: message })
+        if (
+          message.includes("not configured") ||
+          message.includes("REDIRECT") ||
+          message.includes("STATE_SECRET")
+        ) {
+          res.status(503).json({ error: message })
+          return
+        }
+        res.status(400).json({ error: message })
+      }
+    })
+
+    app.get("/auth/twitch/callback", async (req, res) => {
+      const state = req.query.state?.toString()
+      const code = req.query.code?.toString()
+      const successRedirect =
+        process.env.TWITCH_VERIFY_SUCCESS_REDIRECT || "/auth"
+      const errorRedirect = process.env.TWITCH_VERIFY_ERROR_REDIRECT || "/auth"
+
+      if (!state || !code) {
+        return res.redirect(`${errorRedirect}?twitchVerify=missing_params`)
+      }
+
+      try {
+        await completeTwitchAccountVerification(code, state)
+        return res.redirect(`${successRedirect}?twitchVerify=success`)
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? encodeURIComponent(error.message)
+            : "verification_failed"
+        logger.error("Error completing Twitch verification", { error: message })
+        return res.redirect(`${errorRedirect}?twitchVerify=${message}`)
+      }
+    })
+
+    app.post("/twitch/verify/unlink", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        await unlinkTwitchAccount(userAuth.uid)
+        res.status(200).send()
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        if (message === "User not found") {
+          res.status(404).json({ error: message })
+          return
+        }
+        logger.error("Error unlinking Twitch verification", { error: message })
+        res.status(500).json({ error: "Error unlinking Twitch account" })
+      }
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
