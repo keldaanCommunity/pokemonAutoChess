@@ -2805,7 +2805,7 @@
 		"MUSCLE_BAND": "Quando il possessore subisce danni, guadagna 1 stack. Ad ogni 2 stack,  guadagni +2 DEF, +1 ATK e +5 SPEED (massimo 20 stack)",
 		"WONDER_BOX": "All'inizio di ogni battaglia, il WONDER_BOX viene sostituito da 2 oggetti temporanei (max 3 oggetti equipaggiati)",
 		"ABILITY_SHIELD": "All'inizio del combattimento, il possessore e tutti gli alleati adiacenti sulla stessa fila ricevono il 20% di HP come SHIELD e RUNE_PROTECT per 5 secondi",
-		"STICKY_BARB": "Quando colpito da un attacco da un nemico in una casella ADJACENT, infliggi 3 + 15% della DEF come TRUE restituiti all'attaccante, con un [30,LK]% di chance di infliggergli WOUND per 3 secondi.",
+		"STICKY_BARB": "Quando colpito da un attacco da un nemico in una casella ADJACENT, infliggi 3 + 15% della DEF come TRUE restituiti all'attaccante e infliggergli WOUND per 3 secondi.",
 		"WIDE_LENS": "Il possessore guadagna +2 RANGE",
 		"RAZOR_CLAW": "Il possessore guadagna +50% di CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Il possessore è immune a tutti gli status alterati e ai danni della tempesta di sabbia",
@@ -3947,7 +3947,6 @@
 	"give_role": "Dai ruolo",
 	"back_to_my_profile": "Torna al mio profilo",
 	"bots": "Bots",
-	"profile": "Profilo",
 	"search": "Ricerca",
 	"average_place": "Posizione in media",
 	"carousel_priority": "Priorità Carosello",
@@ -4587,5 +4586,33 @@
 		"CUSTOM_LOBBY": "Crea una lobby privata con le tue regole",
 		"TOURNAMENT": "Questa partita fa parte di un torneo. Controlla Discord per i prossimi eventi."
 	},
-	"cluster_map": "Cluster Map"
+	"profile": {
+		"title": "Profilo",
+		"progress": {
+			"title": "Progresso",
+			"titles_unlocked": "{{count}}/{{total}} Titoli sbloccati",
+			"avatars_unlocked": "{{count}}/{{total}} avatar sbloccati",
+			"gadgets_unlocked": "{{count}}/{{total}} Gadget sbloccati",
+			"pokemons_played": "{{count}}/{{total}} Pokémon utilizzati"
+		},
+		"avatar": {
+			"change_avatar": "Cambia avatar",
+			"play_more_games_hint": "Gioca a più giochi per guadagnare booster e sbloccare nuovi avatar!"
+		},
+		"account": {
+			"title": "Account",
+			"delete_account": "Elimina Account",
+			"delete_account_hint": "Se vuoi davvero eliminare permanentement eil tuo account, clicca qui e digita \"$t(profile.account.delete_account_passphrase)\"",
+			"delete_account_confirmation": "Digita $t(profile.account.delete_account_passphrase) per confermare",
+			"delete_account_confirmation_failed": "La passphrase di conferma è invalida. L'eliminazione dell'account non è andata a buon fine.",
+			"delete_account_passphrase": "ELIMINA ACCOUNT PERMANENTEMENTE",
+			"user_id": "ID utente",
+			"user_id_hint1": "Il tuo ID utente è:",
+			"user_id_hint2": "Usalo per comunicare con moderatori o admin. Al contrario del nome, ogni ID è unico e non può essere cambiato.",
+			"anonymous_users_name_hint": "Gli utenti anonimi non possono modificare il proprio nome.",
+			"change_name": "Cambia nome",
+			"username_disclaimer": "Username inappropriati possono portare ad un ban del duo account. Questo include volgarità, allusioni sessuali o altresì inadatte ad un pubblico minorile, minacce dirette e indirette, provocazioni politiche e pubblicità.",
+			"invalid_username": "Username invalido. L'username deve contenere tra i 3 e i 24 caratteri, iniziare con una lettera, contenere solo lettere, numeri o or \".-_\" ed essere privo di spazi."
+		}
+	}
 }

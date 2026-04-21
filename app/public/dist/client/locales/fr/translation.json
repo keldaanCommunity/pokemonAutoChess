@@ -2810,7 +2810,7 @@
 		"MUSCLE_BAND": "Lorsque le porteur subit des dégâts, accumule 1 charge. Toutes les 2 charges, le détenteur gagne +2 DEF, +1 ATK et +5 SPEED (max 20 charges)",
 		"WONDER_BOX": "Au début de chaque combat, la WONDER_BOX est remplacée par 2 objets temporaires (maximum 3 objets tenus)",
 		"ABILITY_SHIELD": "Lorsque le combat commence, le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW reçoivent 20% de leurs HP max en SHIELD et RUNE_PROTECT pendant 5 secondes",
-		"STICKY_BARB": "Lorsque le porteur est touché par une attaque au corps à corps, inflige 3 + 15% de sa DEF en tant que TRUE à l'attaquant comme riposte, avec [30,LK]% de chances d'infliger WOUND pendant 3 secondes.",
+		"STICKY_BARB": "Lorsque le porteur est touché par une attaque au corps à corps, inflige 3 + 15% de sa DEF en tant que TRUE de riposte à l'attaquant, et lui inflige WOUND pendant 3 secondes.",
 		"WIDE_LENS": "Le porteur gagne +2 RANGE",
 		"RAZOR_CLAW": "Le porteur gagne +50% CRIT_CHANCE",
 		"SAFETY_GOGGLES": "Le porteur est immunisé contre toutes les altérations de statut et aux dégâts de tempête de sable",
