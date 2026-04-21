@@ -3277,7 +3277,7 @@
 		"GLIMMORA": "Quando a vida máxima do Pokémon estiver abaixo de 50%, ele lança espinhos tóxicos em um retângulo de 2x3 à sua frente, causando 20 de SPECIAL. Os espinhos tóxicos aplicam POISONNED aos Pokémons, a menos que eles já sejam do tipo POISON.",
 		"PILLAR": "Constrói [1,1,2] pilares móveis que bloqueiam o caminho dos inimigos, com aumento de HP, DEF e SPE_DEF baseados nas STAR do usuário.",
 		"INANIMATE": "Objetos inanimados não podem ser copiados, colocados em bancada ou vendidos. Eles não podem se mover ou atacar e são imunes a efeitos de status.",
-		"BERSERK": "Ganha 5 AP cada vez que um Pokémon é afetado por sua habilidade.",
+		"DRAMPA": "Ganha 5 AP cada vez que um Pokémon é afetado por sua habilidade.",
 		"APPLIN": "Applin evoluirá ao receber uma maçã:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"CONVERSION": "Conversão: Obtenha a maior sinergia do oponente e seus efeitos no início do combate.",
 		"CREAM": "$t(pkm.MILCERY) está procurando um sabor delicioso...",

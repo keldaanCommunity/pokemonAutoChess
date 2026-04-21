@@ -71,6 +71,7 @@ import {
   OnFieldDeathEffect,
   onFlowerMonDeath,
   overgrowEffect,
+  pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
 } from "./effects/synergies"
@@ -1050,6 +1051,12 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
+          if (pokemon.player?.items.includes(Item.LONG_WAND)) {
+            pokemon.range += 1
+          }
+          if(pokemon.player?.items.includes(Item.POUNCE_WAND)) {
+            pokemon.effectsSet.add(pounceWandEffect)
+          }
         }
         break
 

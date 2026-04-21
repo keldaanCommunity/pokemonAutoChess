@@ -3185,7 +3185,7 @@
 		"GLIMMORA": "Una volta sotto il 50% di HP massimi, questa unità lancia davanti a sè delle Fielepunte in un rettangolo 2x3, infliggendo 20 danni. Le Fielepunte causano POISONNED a tutti i Pokèmon che ci camminano sopra, tranne ai tipi POISON.",
 		"PILLAR": "Costruisce [1,1,2] pilastri che bloccano il percorso dei nemici, con HP, DEF e SPE_DEF basati sulle STAR di questa unità.",
 		"INANIMATE": "Gli oggetti inanimati non possono essere copiati, messi in panchina o venduti. Non possono muoversi, attaccare o essere afflitti da condizioni di stato.",
-		"BERSERK": "Guadagna 5 AP ogni volta che un Pokémon è afflitto dalla sua abilità",
+		"DRAMPA": "Guadagna 5 AP ogni volta che un Pokémon è afflitto dalla sua abilità",
 		"APPLIN": "Applin si evolve quando gli viene dato un pomo:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"DIPPLIN": "Dipplin vuole un SYRUPY_APPLE.",
 		"WELL_BAKED": "Il Pokémon non è affetto dai danni da BURN. Invece, guadagna 20 DEF mentre brucia.",

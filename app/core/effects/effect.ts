@@ -219,7 +219,7 @@ export class OnHitEffect extends Effect {
 
 interface OnAttackEffectArgs {
   pokemon: PokemonEntity
-  target: PokemonEntity | null
+  target: PokemonEntity
   board: Board
   physicalDamage: number
   specialDamage: number
@@ -228,6 +228,16 @@ interface OnAttackEffectArgs {
   crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
+}
+
+export class BeforeAttackEffect extends Effect {
+  override apply(args: OnAttackEffectArgs) {}
+  constructor(
+    effect?: (args: OnAttackEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
 }
 
 export class OnAttackEffect extends Effect {

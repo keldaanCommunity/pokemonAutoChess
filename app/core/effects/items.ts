@@ -46,6 +46,7 @@ import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
+  BeforeAttackEffect,
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -928,6 +929,25 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.SCOPE_LENS]: [
+    new OnAttackEffect(({ pokemon, target, crit }) => {
+      if (crit) {
+        const ppStolen = max(target.pp)(10)
+        pokemon.addPP(ppStolen, pokemon, 0, false)
+        target.addPP(-ppStolen, pokemon, 0, false)
+        target.count.manaBurnCount++
+      }
+    })
+  ],
+
+  [Item.RAZOR_FANG]: [
+    new BeforeAttackEffect(({ target, crit }) => {
+      if (crit) {
+        target.status.triggerArmorReduction(2000, target)
+      }
+    })
+  ],
+
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -938,6 +958,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LEPPA_BERRY]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.eatBerry(Item.LEPPA_BERRY)
+    })
+  ],
+
+  [Item.BABIRI_BERRY]: [
+    new OnAttackReceivedEffect(({ pokemon, crit }) => {
+      if (crit) {
+        pokemon.eatBerry(Item.BABIRI_BERRY)
+      }
     })
   ],
 

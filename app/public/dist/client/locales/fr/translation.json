@@ -3271,7 +3271,7 @@
 		"GLIMMORA": "Une fois sous les 50% de ses HP max, lance des piques toxiques dans une zone de 2x3 devant elle, infligeant 20 SPECIAL. Les piques toxiques appliquent le statut POISONNED aux Pokémon, sauf s'ils sont de type POISON.",
 		"PILLAR": "Construit [1,1,2] piliers pouvant être placés sur le plateau et qui bloquent le chemin des ennemis, avec des HP, DEF et SPE_DEF augmentés en fonction des STAR de l'unité.",
 		"INANIMATE": "Les objets inanimés ne peuvent pas être copiés, mis sur le banc ou vendus. Ils ne peuvent pas se déplacer ni attaquer, et sont immunisés contre les effets de statut.",
-		"BERSERK": "Gagne 5 AP à chaque fois qu'un Pokémon est affecté par sa capacité.",
+		"DRAMPA": "Gagne 5 AP à chaque fois qu'un Pokémon est affecté par sa capacité.",
 		"APPLIN": "$t(pkm.APPLIN) évoluera lorsqu'on lui donne une pomme :\nTART_APPLE : $t(pkm.FLAPPLE)\nSWEET_APPLE : $t(pkm.APPLETUN)\nSIRUPY_APPLE : $t(pkm.DIPPLIN)",
 		"DIPPLIN": "$t(pkm.DIPPLIN) cherche une SIRUPY_APPLE.",
 		"WELL_BAKED": "Le Pokémon ne souffre pas de BURN. Au contraire, il gagne 20 DEF lorsqu'il est affecté par BURN.",

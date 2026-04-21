@@ -12080,6 +12080,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+
+          pokemon.addAbilityPower(5, pokemon, 0, false, false)
           board
             .getAdjacentCells(target.positionX, target.positionY, false)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
@@ -12098,6 +12100,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
                   pokemon,
                   crit
                 )
+                pokemon.addAbilityPower(5, pokemon, 0, false, false)
+
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (pokemon && cell.value) {
@@ -12122,6 +12126,7 @@ export class DragonPulseStrategy extends AbilityStrategy {
                             pokemon,
                             crit
                           )
+                          pokemon.addAbilityPower(5, pokemon, 0, false, false)
                         })
                     }
                   }, 400)
