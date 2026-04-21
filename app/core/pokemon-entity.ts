@@ -16,6 +16,12 @@ import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { getSellPrice } from "../models/shop"
 import { Emotion, IPokemon, IPokemonEntity, Title, Transfer } from "../types"
+import {
+  BANEFUL_BUNKER_ABILITY_PARAMS,
+  MAGIC_BOUNCE_ABILITY_PARAMS,
+  SPIKY_SHIELD_ABILITY_PARAMS,
+  STRANGE_STEAM_ABILITY_PARAMS
+} from "../types/ability-params"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
@@ -351,8 +357,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               crit ||
               (this.effects.has(EffectEnum.ABILITY_CRIT) &&
                 chance(this.critChance / 100, this))
+            const bounceMultiplier: number =
+              MAGIC_BOUNCE_ABILITY_PARAMS.reflectMultiplierByStar[
+                this.stars - 1
+              ] ?? MAGIC_BOUNCE_ABILITY_PARAMS.reflectMultiplierByStar.at(-1)!
             const bounceDamage = Math.round(
-              ([0.5, 1][this.stars - 1] ?? 1) *
+              bounceMultiplier *
                 damage *
                 (1 + this.ap / 100) *
                 (bounceCrit ? this.critPower : 1)
@@ -388,7 +398,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (attacker &&
           attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
       ) {
-        specialDamage *= 1.2
+        specialDamage *=
+          STRANGE_STEAM_ABILITY_PARAMS.boardEffectSpecialDamageMultiplier
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         specialDamage *= attacker.critPower
@@ -905,9 +916,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         target.positionY
       ) === 1
     ) {
-      const damage = [10, 20, 30][target.stars - 1] ?? 30
+      const damage =
+        BANEFUL_BUNKER_ABILITY_PARAMS.retaliationDamageByStar[
+          target.stars - 1
+        ] ?? BANEFUL_BUNKER_ABILITY_PARAMS.retaliationDamageByStar.at(-1)!
       this.handleSpecialDamage(damage, board, AttackType.SPECIAL, target, false)
-      this.status.triggerPoison(3000, this, target)
+      this.status.triggerPoison(
+        BANEFUL_BUNKER_ABILITY_PARAMS.poisonDurationMs,
+        this,
+        target
+      )
     }
 
     this.getEffects(OnAttackEffect).forEach((effect) => {
@@ -1082,14 +1100,22 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(target.critChance / 100, this)
-      const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
+      const defFactor =
+        (SPIKY_SHIELD_ABILITY_PARAMS.thornDamagePercentDefByStar[
+          target.stars - 1
+        ] ?? SPIKY_SHIELD_ABILITY_PARAMS.thornDamagePercentDefByStar.at(-1)!) /
+        100
       const damage = Math.round(
         target.def *
           defFactor *
           (1 + target.ap / 100) *
           (crit ? target.critPower : 1)
       )
-      this.status.triggerWound(2000, this, target)
+      this.status.triggerWound(
+        SPIKY_SHIELD_ABILITY_PARAMS.meleeWoundDurationMs,
+        this,
+        target
+      )
       this.handleDamage({
         damage,
         board,

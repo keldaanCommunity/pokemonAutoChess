@@ -4,6 +4,7 @@ import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { getAbilityDescriptionParams } from "../../../../../types/ability-params"
 import { Ability } from "../../../../../types/enum/Ability"
 import {
   AbilityPerTM,
@@ -67,7 +68,10 @@ export default function WikiAbility() {
       (a) =>
         a !== Ability.DEFAULT &&
         (!searchQuery.trim() ||
-          `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+          `${t(`ability.${a}`)} ${t(
+            `ability_description.${a}`,
+            getAbilityDescriptionParams(a)
+          )}`
             .toLowerCase()
             .includes(searchQuery.trim().toLowerCase()))
     )
@@ -126,7 +130,7 @@ type AbilityRowData = {
   columnCount: number
   pokemonsPerAbility: Record<string, any[]>
   tmPerAbility: Partial<Record<Ability, Item>>
-  t: (key: string) => string
+  t: (key: string, options?: Record<string, unknown>) => string
 }
 
 function AbilityRow({
@@ -163,7 +167,12 @@ function AbilityRow({
             <div>
               <h2>{t(`ability.${ability}`)}</h2>
               <p>
-                {addIconsToDescription(t(`ability_description.${ability}`))}
+                {addIconsToDescription(
+                  t(
+                    `ability_description.${ability}`,
+                    getAbilityDescriptionParams(ability)
+                  )
+                )}
               </p>
             </div>
             <div>

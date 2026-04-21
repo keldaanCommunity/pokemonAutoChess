@@ -4,6 +4,23 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import { IPokemon } from "../../types"
+import {
+  HIDDEN_POWER_A_ABILITY_PARAMS,
+  HIDDEN_POWER_B_ABILITY_PARAMS,
+  HIDDEN_POWER_EM_ABILITY_PARAMS,
+  HIDDEN_POWER_F_ABILITY_PARAMS,
+  HIDDEN_POWER_G_ABILITY_PARAMS,
+  HIDDEN_POWER_J_ABILITY_PARAMS,
+  HIDDEN_POWER_L_ABILITY_PARAMS,
+  HIDDEN_POWER_N_ABILITY_PARAMS,
+  HIDDEN_POWER_P_ABILITY_PARAMS,
+  HIDDEN_POWER_QM_ABILITY_PARAMS,
+  HIDDEN_POWER_R_ABILITY_PARAMS,
+  HIDDEN_POWER_S_ABILITY_PARAMS,
+  HIDDEN_POWER_T_ABILITY_PARAMS,
+  HIDDEN_POWER_W_ABILITY_PARAMS,
+  HIDDEN_POWER_Z_ABILITY_PARAMS
+} from "../../types/ability-params"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import {
@@ -41,13 +58,14 @@ export class HiddenPowerStrategy extends AbilityStrategy {
 export class HiddenPowerAStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
+    const summonedCount = HIDDEN_POWER_A_ABILITY_PARAMS.summonedCount
     const corners = [
       [0, 0],
       [board.columns - 1, 0],
       [0, board.rows - 1],
       [board.columns - 1, board.rows - 1]
     ]
-    corners.forEach(([x, y]) => {
+    corners.slice(0, summonedCount).forEach(([x, y]) => {
       const coord = unown.simulation.getClosestFreeCellTo(x, y, unown.team)
       if (!coord) return
       const abra = PokemonFactory.createPokemonFromName(Pkm.ABRA, unown.player)
@@ -61,7 +79,11 @@ export class HiddenPowerBStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerBurn(30000, enemy, unown)
+        enemy.status.triggerBurn(
+          HIDDEN_POWER_B_ABILITY_PARAMS.burnDurationMs,
+          enemy,
+          unown
+        )
       }
     })
   }
@@ -110,7 +132,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
 export class HiddenPowerFStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    const nbFishes = 2
+    const nbFishes = HIDDEN_POWER_F_ABILITY_PARAMS.fishCount
     const player = unown.player
 
     if (player && !unown.isGhostOpponent && !player.isBot) {
@@ -130,7 +152,11 @@ export class HiddenPowerGStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
-      unown.player.addMoney(5, true, unown)
+      unown.player.addMoney(
+        HIDDEN_POWER_G_ABILITY_PARAMS.goldAmount,
+        true,
+        unown
+      )
     }
   }
 }
@@ -160,7 +186,7 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
 export class HiddenPowerJStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    const numberToSpawn = 2
+    const numberToSpawn = HIDDEN_POWER_J_ABILITY_PARAMS.sharpedoCount
     for (let i = 0; i < numberToSpawn; i++) {
       const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
       if (coord) {
@@ -200,7 +226,10 @@ export class HiddenPowerLStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team !== pokemon.team) {
-          pokemon.status.triggerLocked(5000, pokemon)
+          pokemon.status.triggerLocked(
+            HIDDEN_POWER_L_ABILITY_PARAMS.lockDurationMs,
+            pokemon
+          )
         }
       }
     )
@@ -228,7 +257,12 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
         if (pokemon && unown.team === pokemon.team) {
           const target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
           if (target) {
-            pokemon.addShield(50, unown, 1, false)
+            pokemon.addShield(
+              HIDDEN_POWER_N_ABILITY_PARAMS.shield,
+              unown,
+              1,
+              false
+            )
             castAbility(Ability.EXPLOSION, pokemon, board, target, false)
           }
         }
@@ -267,7 +301,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
 export class HiddenPowerPStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    const numberToSpawn = 5
+    const numberToSpawn = HIDDEN_POWER_P_ABILITY_PARAMS.bugCount
     const bugs = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.BUG]
     const candidates = [...bugs.pokemons, ...bugs.additionalPokemons].filter(
       (p) => getPokemonData(p).stars === 1
@@ -322,7 +356,7 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
-      unown.player.shopFreeRolls += 6
+      unown.player.shopFreeRolls += HIDDEN_POWER_R_ABILITY_PARAMS.freeRerolls
     }
   }
 }
@@ -330,7 +364,11 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
 export class HiddenPowerSStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    unown.simulation.triggerTidalWave(unown.team, 2, true)
+    unown.simulation.triggerTidalWave(
+      unown.team,
+      HIDDEN_POWER_S_ABILITY_PARAMS.tidalWaveStrength,
+      true
+    )
   }
 }
 
@@ -339,9 +377,11 @@ export class HiddenPowerTStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
       const player = unown.player
-      pickNRandomIn(Berries, 3).forEach((item) => {
-        player.items.push(item)
-      })
+      pickNRandomIn(Berries, HIDDEN_POWER_T_ABILITY_PARAMS.berryCount).forEach(
+        (item) => {
+          player.items.push(item)
+        }
+      )
     }
   }
 }
@@ -381,7 +421,11 @@ export class HiddenPowerWStrategy extends HiddenPowerStrategy {
     if (player && !unown.isGhostOpponent) {
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== null) {
-        const topSynergy = pickRandomIn(player.synergies.getTopSynergies(2))
+        const topSynergy = pickRandomIn(
+          player.synergies.getTopSynergies(
+            HIDDEN_POWER_W_ABILITY_PARAMS.topSynergyCount
+          )
+        )
         const monsOfThatSynergy =
           PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[topSynergy]
         const candidates = [
@@ -457,7 +501,11 @@ export class HiddenPowerZStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team != enemy.team) {
-        enemy.status.triggerFreeze(2000, enemy, unown)
+        enemy.status.triggerFreeze(
+          HIDDEN_POWER_Z_ABILITY_PARAMS.freezeDurationMs,
+          enemy,
+          unown
+        )
       }
     })
   }
@@ -472,7 +520,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
       const candidates = getUnownsPoolPerStage(stageLevel).filter(
         (u) => u !== Pkm.UNOWN_QUESTION
       )
-      const nbUnownsObtained = 4
+      const nbUnownsObtained = HIDDEN_POWER_QM_ABILITY_PARAMS.unownCount
       for (let i = 0; i < nbUnownsObtained; i++) {
         const pkm = pickRandomIn(candidates)
         const x = getFirstAvailablePositionInBench(player.board)
@@ -490,6 +538,7 @@ export class HiddenPowerQMStrategy extends HiddenPowerStrategy {
 export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
+    const summonedCount = HIDDEN_POWER_EM_ABILITY_PARAMS.summonedCount
     const corners = [
       [0, 0],
       [board.columns - 1, 0],
@@ -500,7 +549,7 @@ export class HiddenPowerEMStrategy extends HiddenPowerStrategy {
     const candidates = getUnownsPoolPerStage(stageLevel).filter(
       (u) => u !== Pkm.UNOWN_EXCLAMATION
     )
-    corners.forEach(([x, y]) => {
+    corners.slice(0, summonedCount).forEach(([x, y]) => {
       const coord = pokemon.simulation.getClosestFreeCellTo(x, y, pokemon.team)
       if (!coord) return
       const unownName = pickRandomIn(candidates)

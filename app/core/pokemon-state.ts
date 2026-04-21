@@ -2,6 +2,13 @@ import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import Player from "../models/colyseus-models/player"
 import { SynergyEffects } from "../models/effects"
 import { IPokemonEntity, Transfer } from "../types"
+import {
+  LOCK_ON_ABILITY_PARAMS,
+  SHADOW_PUNCH_ABILITY_PARAMS,
+  STEALTH_ROCKS_ABILITY_PARAMS,
+  STONE_EDGE_ABILITY_PARAMS,
+  TELEPORT_ABILITY_PARAMS
+} from "../types/ability-params"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
@@ -152,14 +159,16 @@ export default abstract class PokemonState {
         trueDamagePart += 0.25
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON)) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        trueDamagePart +=
+          LOCK_ON_ABILITY_PARAMS.trueDamageMultiplier * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
 
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [15, 30, 60, 120][pokemon.stars - 1] *
+          (TELEPORT_ABILITY_PARAMS.bonusDamageByStar[pokemon.stars - 1] ??
+            TELEPORT_ABILITY_PARAMS.bonusDamageByStar[3]) *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? pokemon.critPower : 1)
         )
@@ -169,7 +178,11 @@ export default abstract class PokemonState {
       if (pokemon.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [30, 60, 120][pokemon.stars - 1] *
+          (SHADOW_PUNCH_ABILITY_PARAMS.nextAttackDamageByStar[
+            pokemon.stars - 1
+          ] ??
+            SHADOW_PUNCH_ABILITY_PARAMS.nextAttackDamageByStar.at(-1) ??
+            120) *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? pokemon.critPower : 1)
         )
@@ -199,7 +212,11 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        physicalDamage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+        physicalDamage += Math.round(
+          pokemon.def *
+            STONE_EDGE_ABILITY_PARAMS.defenseScalingMultiplier *
+            (1 + pokemon.ap / 100)
+        )
       }
 
       if (physicalDamage > 0) {
@@ -1021,13 +1038,17 @@ export default abstract class PokemonState {
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
-        damage: 10,
+        damage: STEALTH_ROCKS_ABILITY_PARAMS.boardEffectPhysicalDamagePerSecond,
         board,
         attackType: AttackType.PHYSICAL,
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerWound(1000, pokemon, undefined)
+      pokemon.status.triggerWound(
+        STEALTH_ROCKS_ABILITY_PARAMS.boardEffectWoundDurationMs,
+        pokemon,
+        undefined
+      )
     }
 
     if (

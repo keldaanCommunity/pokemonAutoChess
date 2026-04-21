@@ -4,6 +4,10 @@ import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import { PokemonEntity } from "../../core/pokemon-entity"
 import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import {
+  COTTON_BALL_BOARD_EFFECT_SLEEP_DURATION_MS,
+  STICKY_WEB_ABILITY_PARAMS
+} from "../../types/ability-params"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -206,7 +210,11 @@ export default class Status extends Schema implements IStatus {
       !this.paralysis &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerParalysis(2000, pokemon, null)
+      this.triggerParalysis(
+        STICKY_WEB_ABILITY_PARAMS.boardEffectParalysisDurationMs,
+        pokemon,
+        null
+      )
     }
 
     if (
@@ -214,7 +222,7 @@ export default class Status extends Schema implements IStatus {
       !this.sleep &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerSleep(1000, pokemon)
+      this.triggerSleep(COTTON_BALL_BOARD_EFFECT_SLEEP_DURATION_MS, pokemon)
       pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
