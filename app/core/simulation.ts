@@ -1824,7 +1824,7 @@ export default class Simulation extends Schema implements ISimulation {
             surf.process(
               pokemonHit,
               this.board,
-              pokemonHit,
+              null,
               false,
               false,
               tidalWaveLevel
