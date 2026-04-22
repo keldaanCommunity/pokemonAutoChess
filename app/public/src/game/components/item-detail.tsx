@@ -18,9 +18,6 @@ import { isIn } from "../../../../utils/array"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
-const isValidItem = (value: unknown): value is Item =>
-  Object.values(Item).includes(value as Item)
-
 export function ItemDetailTooltipContent({
   item,
   showItemCombinationsTooltip = true
@@ -29,17 +26,16 @@ export function ItemDetailTooltipContent({
   showItemCombinationsTooltip?: boolean
 }) {
   const { t } = useTranslation()
-  const safeItem = isValidItem(item) ? item : ItemComponents[0]
   const recipes = useMemo(
     () =>
       ItemComponents.map((c) =>
         Object.entries(ItemRecipe).find(
           ([, recipe]) =>
-            (recipe[0] === safeItem && recipe[1] === c) ||
-            (recipe[1] === safeItem && recipe[0] === c)
+            (recipe[0] === item && recipe[1] === c) ||
+            (recipe[1] === item && recipe[0] === c)
         )
       ).filter((r) => r != null),
-    [safeItem]
+    [item]
   )
 
   const formatStat = (stat: Stat, value: number) => {
@@ -62,17 +58,15 @@ export function ItemDetailTooltipContent({
     return null
   }, [item, t])
 
+  if (isIn(Object.values(Item), item) === false) return null
+
   return (
     <div className="game-item-detail">
-      <img
-        className="game-item-detail-icon"
-        src={`assets/item/${safeItem}.png`}
-        alt={t(`item.${safeItem}`)}
-      />
+      <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
       <div className="game-item-detail-name">
-        {ItemRecipe[safeItem] && (
+        {ItemRecipe[item] && (
           <div className="game-item-recipe">
-            {ItemRecipe[safeItem]?.map((item, i) => (
+            {ItemRecipe[item]?.map((item, i) => (
               <React.Fragment key={`component_${i}_${item}`}>
                 <img
                   className="game-item-detail-icon"
@@ -85,7 +79,7 @@ export function ItemDetailTooltipContent({
             ))}
           </div>
         )}
-        {t(`item.${safeItem}`)}
+        {t(`item.${item}`)}
       </div>
       <div className="game-item-detail-stats">
         {itemCategoryLabel && <i>{itemCategoryLabel}</i>}
@@ -101,13 +95,12 @@ export function ItemDetailTooltipContent({
         ))}
       </div>
       <p className="game-item-detail-description">
-        {addIconsToDescription(t(`item_description.${safeItem}`))}
+        {addIconsToDescription(t(`item_description.${item}`))}
       </p>
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">
           {recipes.map(([result, recipe]) => {
-            const otherComponent =
-              recipe[0] === safeItem ? recipe[1] : recipe[0]
+            const otherComponent = recipe[0] == item ? recipe[1] : recipe[0]
             return (
               <div className="game-item-detail-combination" key={result}>
                 <p>+</p>
