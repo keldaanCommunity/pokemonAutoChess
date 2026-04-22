@@ -4,17 +4,12 @@ import { randomBytes } from "crypto"
 import { writeHeapSnapshot } from "v8"
 import {
   EloRankThreshold,
-  getBaseAltForm,
-  getEmotionCost,
   MAX_PLAYERS_PER_GAME,
   USERNAME_REGEXP
 } from "../../config"
 import { CollectionUtils } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
-import UserMetadata, {
-  toUserMetadataJSON
-} from "../../models/mongo-models/user-metadata"
-import { checkTitlesAfterEmotionUnlocked } from "../../services/booster"
+import UserMetadata from "../../models/mongo-models/user-metadata"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
 import {
@@ -27,7 +22,7 @@ import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
-import { PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
+import { PkmIndex } from "../../types/enum/Pokemon"
 import { Starters } from "../../types/enum/Starters"
 import {
   IPokemonCollectionItemMongo,
@@ -355,57 +350,6 @@ export class ChangeTitleCommand extends Command<
   }
 }
 
-export class ChangeSelectedEmotionCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string; emotion: Emotion | null; shiny: boolean }
-> {
-  async execute({
-    client,
-    emotion,
-    index,
-    shiny
-  }: {
-    client: Client
-    index: string
-    emotion: Emotion | null
-    shiny: boolean
-  }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      if (!user) return
-      const pokemonCollectionItem = user.pokemonCollection.get(index)
-      if (!pokemonCollectionItem) return
-      if (
-        emotion === pokemonCollectionItem.selectedEmotion &&
-        shiny === pokemonCollectionItem.selectedShiny
-      ) {
-        return // No change needed
-      }
-
-      if (
-        emotion === null ||
-        CollectionUtils.hasUnlocked(
-          pokemonCollectionItem.unlocked,
-          emotion,
-          shiny
-        )
-      ) {
-        pokemonCollectionItem.selectedEmotion = emotion
-        pokemonCollectionItem.selectedShiny = shiny
-        await UserMetadata.findOneAndUpdate(
-          { uid: client.auth.uid },
-          {
-            [`pokemonCollection.${index}.selectedEmotion`]: emotion,
-            [`pokemonCollection.${index}.selectedShiny`]: shiny
-          }
-        )
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class ChangeAvatarCommand extends Command<
   CustomLobbyRoom,
   { client: Client; index: string; emotion: Emotion; shiny: boolean }
@@ -438,83 +382,6 @@ export class ChangeAvatarCommand extends Command<
       user.avatar = portrait
       mongoUser.avatar = portrait
       mongoUser.save()
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class BuyEmotionCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string; emotion: Emotion; shiny: boolean }
-> {
-  async execute({
-    client,
-    emotion,
-    index,
-    shiny
-  }: {
-    client: Client
-    index: string
-    emotion: Emotion
-    shiny: boolean
-  }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      const cost = getEmotionCost(emotion, shiny)
-      if (!user || !PkmByIndex.hasOwnProperty(index)) return
-
-      // If an alt form is bought, shards must be taken from the base form
-      const shardIndex = PkmIndex[getBaseAltForm(PkmByIndex[index])]
-      const pokemonCollectionItem = user.pokemonCollection.get(index)
-      const shardCollectionItem = user.pokemonCollection.get(shardIndex)
-      if (!pokemonCollectionItem || !shardCollectionItem) return
-
-      // Check if emotion is already unlocked
-      if (
-        CollectionUtils.hasUnlocked(
-          pokemonCollectionItem.unlocked,
-          emotion,
-          shiny
-        )
-      ) {
-        return // Already unlocked
-      }
-
-      // Update MongoDB with optimized format
-      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
-      if (!mongoUser) return
-
-      const mongoItem = mongoUser.pokemonCollection.get(index)
-      const mongoShardItem = mongoUser.pokemonCollection.get(shardIndex)
-      if (!mongoItem || !mongoShardItem) return
-
-      if (mongoShardItem.dust < cost) return
-
-      // Add the emotion using optimized storage
-      CollectionUtils.unlockEmotion(mongoItem.unlocked, emotion, shiny)
-      mongoItem.selectedEmotion = emotion
-      mongoItem.selectedShiny = shiny
-      mongoUser.markModified(`pokemonCollection.${index}`) // mongoose does not track changes to Buffers automatically
-
-      // Deduct cost
-      mongoShardItem.dust -= cost
-
-      // Update in-memory user data
-      CollectionUtils.unlockEmotion(
-        pokemonCollectionItem.unlocked,
-        emotion,
-        shiny
-      )
-      shardCollectionItem.dust = mongoShardItem.dust
-      pokemonCollectionItem.selectedEmotion = emotion
-      pokemonCollectionItem.selectedShiny = shiny
-
-      checkTitlesAfterEmotionUnlocked(mongoUser, [
-        { name: PkmByIndex[index], emotion, shiny }
-      ])
-      await mongoUser.save()
-      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)
     }

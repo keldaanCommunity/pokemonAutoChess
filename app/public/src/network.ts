@@ -255,40 +255,81 @@ export function setSpecialRule(rule: SpecialGameRule | null) {
   rooms.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, rule)
 }
 
-export function buyEmotion(params: {
+export async function buyEmotion(params: {
   index: string
   emotion: Emotion
   shiny: boolean
 }) {
-  rooms.lobby?.send(Transfer.BUY_EMOTION, params)
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/collection/buy-emotion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
 }
 
-export function buyBooster(params: { index: string }) {
-  return firebase
-    .auth()
-    .currentUser?.getIdToken()
-    .then((token) =>
-      fetch("/boosters/buy", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(params)
-      })
-    )
-    .then(async (res) => {
-      if (!res) throw new Error("User not authenticated")
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        throw new Error(body.error ?? res.statusText)
-      }
-      return res.json() as Promise<{ user: IUserMetadataJSON }>
-    })
-    .then((payload) => {
-      store.dispatch(setProfile(payload.user))
-      return payload
-    })
+export async function changeSelectedEmotion(params: {
+  index: string
+  emotion: Emotion | null
+  shiny: boolean
+}) {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/collection/change-selected-emotion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
+}
+
+export async function buyBooster(params: { index: string }) {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/boosters/buy", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
 }
 
 export async function openBooster() {

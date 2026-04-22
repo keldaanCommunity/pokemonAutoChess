@@ -42,6 +42,10 @@ import {
   fetchBot,
   fetchBotsList
 } from "./services/bots"
+import {
+  buyEmotionForUser,
+  changeSelectedEmotionForUser
+} from "./services/collection"
 import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import { getLeaderboard } from "./services/leaderboard"
 import {
@@ -64,6 +68,7 @@ import {
 } from "./services/twitch"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
+import { Emotion } from "./types/enum/Emotion"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
@@ -645,6 +650,82 @@ export const server = defineServer({
       } catch (error) {
         logger.error("Error buying booster", error)
         res.status(500).json({ error: "Error buying booster" })
+      }
+    })
+
+    app.post("/collection/change-selected-emotion", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        const emotion = req.body?.emotion as Emotion | null
+        const shiny = req.body?.shiny
+
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+        if (emotion !== null && !Object.values(Emotion).includes(emotion)) {
+          res.status(400).json({ error: "emotion is invalid" })
+          return
+        }
+        if (typeof shiny !== "boolean") {
+          res.status(400).json({ error: "shiny must be a boolean" })
+          return
+        }
+
+        const result = await changeSelectedEmotionForUser(
+          userAuth.uid,
+          index,
+          emotion,
+          shiny
+        )
+
+        if (!result) {
+          res.status(409).json({ error: "Emotion is not unlocked" })
+          return
+        }
+
+        res.status(200).json({ user: toUserMetadataJSON(result.userDoc) })
+      } catch (error) {
+        logger.error("Error changing selected emotion", error)
+        res.status(500).json({ error: "Error changing selected emotion" })
+      }
+    })
+
+    app.post("/collection/buy-emotion", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        const emotion = req.body?.emotion as Emotion
+        const shiny = req.body?.shiny
+
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+        if (!emotion || !Object.values(Emotion).includes(emotion)) {
+          res.status(400).json({ error: "emotion is invalid" })
+          return
+        }
+        if (typeof shiny !== "boolean") {
+          res.status(400).json({ error: "shiny must be a boolean" })
+          return
+        }
+
+        const result = await buyEmotionForUser(userAuth.uid, index, emotion, shiny)
+        if (!result) {
+          res.status(409).json({ error: "Not enough dust or invalid state" })
+          return
+        }
+
+        res.status(200).json({ user: toUserMetadataJSON(result.userDoc) })
+      } catch (error) {
+        logger.error("Error buying emotion", error)
+        res.status(500).json({ error: "Error buying emotion" })
       }
     })
 
