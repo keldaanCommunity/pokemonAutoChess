@@ -4,6 +4,9 @@
 
 # Changes to Synergies
 
+> This fairy rework is minor, the base effect of special damage on fairy attacks is unchanged, but the added random effects are fun and thematic for fairy. This is also a first attempt of a "build your own synergy" with 256 different combinations of wands.
+
+- Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
 
 # Changes to Pokemon & Abilities

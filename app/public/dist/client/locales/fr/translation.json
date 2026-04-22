@@ -2495,7 +2495,7 @@
 		"AROMATIC_MIST": "Choisissez une baguette parmi 3 dans cet ensemble: BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
 		"FAIRY_WIND": "Choisissez une baguette parmi 3 dans cet ensemble: CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
 		"STRANGE_STEAM": "Choisissez une baguette parmi 3 dans cet ensemble: GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
-		"MOON_FORCE": "Choisissez une baguette parmi 3 dans cet ensemble: WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND",
+		"MOON_FORCE": "Choisissez une baguette parmi 3 dans cet ensemble: WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Vos Pokémon FAIRY gagnent 20 LUCK.",
 		"CHILLY": "+4 SPE_DEF",
 		"FROSTY": "+12 SPE_DEF",
 		"FREEZING": "+25 SPE_DEF",

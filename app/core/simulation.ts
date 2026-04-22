@@ -1054,8 +1054,11 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemon.player?.items.includes(Item.LONG_WAND)) {
             pokemon.range += 1
           }
-          if(pokemon.player?.items.includes(Item.POUNCE_WAND)) {
+          if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
             pokemon.effectsSet.add(pounceWandEffect)
+          }
+          if (effect === EffectEnum.MOON_FORCE) {
+            pokemon.addLuck(20, pokemon, 0, false)
           }
         }
         break
