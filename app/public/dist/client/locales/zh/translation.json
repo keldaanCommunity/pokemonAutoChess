@@ -3128,7 +3128,6 @@
 		"EXPLOSIVE_BAND": "每轮对战中首次失去所有SHIELD时，该道具爆炸并对ADJACENT敌方宝可梦造成SPECIAL，数值相当于获得的SHIELD之和的50%。",
 		"TWIST_BAND": "来自敌方宝可梦的属性下降改为上升。携带者的属性增幅无法被偷取。",
 		"BIG_EATER_BELT": "所有提升属性的效果（PP除外）额外提升25%的属性（向下取整）。携带者可以在同一轮食用2份料理。",
-		"LUCKY_RIBBON": "携带者提升30点LUCK",
 		"COVER_BAND": "ADJACENT我方宝可梦即将受到致命伤害时，改为由携带者承受此伤害。",
 		"EFFICIENT_BANDANNA": "携带者与ADJACENT_IN_THE_SAME_ROW我方宝可梦的PP上限降低15%。",
 		"NULLIFY_BANDANNA": "携带者无法释放招式。携带者的AP转化为等量SHIELD，PP转化为在下次攻击时额外造成的SPECIAL。",

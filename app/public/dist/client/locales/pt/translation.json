@@ -3128,7 +3128,6 @@
 		"EXPLOSIVE_BAND": "Na primeira vez que o escudo do usuário se esgotar, este item explode, causando SPECIAL equivalente a 50% de todo o SHIELD acumulado até o momento aos inimigos ADJACENT.",
 		"TWIST_BAND": "As penalidades de atributos infligidas pelos inimigos se transformam em bônus. Os bônus de atributos do portador não podem ser roubados.",
 		"BIG_EATER_BELT": "Aumenta todos os bônus de atributos recebidos em 25% (arredondado para baixo, não afetando PP). Permite ao usuário consumir 2 pratos diferentes por rodada.",
-		"LUCKY_RIBBON": "Aumenta a LUCK do portador em 30%",
 		"COVER_BAND": "Se um aliado ADJACENT estiver prestes a ser nocauteado por algum dano recebido, o portador recebe o dano em seu lugar.",
 		"EFFICIENT_BANDANNA": "O portador e seus aliados ADJACENT_IN_THE_SAME_ROW têm seu PP máximo reduzido em 15%.",
 		"NULLIFY_BANDANNA": "O portador não pode mais usar sua habilidade. O AP é convertido em SHIELD e os PP são convertidos em bônus de SPECIAL no próximo ataque.",
