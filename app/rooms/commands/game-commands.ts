@@ -1717,7 +1717,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   stopTownPhase() {
-    this.room.miniGame.stop(this.room)
+    this.room.miniGame.stop(this.room.state)
     this.state.players.forEach((player: Player) => {
       player.wanderers.clear()
     })
