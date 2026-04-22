@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useAppSelector } from "../../../hooks"
 import GameItem from "./game-item"
 import "./game-items-proposition.css"

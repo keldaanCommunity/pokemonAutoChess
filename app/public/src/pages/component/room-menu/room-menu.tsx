@@ -1,5 +1,5 @@
 import { RoomAvailable } from "@colyseus/sdk"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"

@@ -18,11 +18,11 @@ import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
-import type { IBot } from "../../types/models/bot-v2"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { IBot } from "../../types/models/bot-v2"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
@@ -117,7 +117,9 @@ export class OnJoinCommand extends Command<
             false,
             u.title,
             u.role,
-            auth.email === undefined && auth.photoURL === undefined
+            auth.email === undefined && auth.photoURL === undefined,
+            u.twitchLogin ?? "",
+            u.twitchDisplayName ?? ""
           )
         )
         this.room.updatePlayersInfo()

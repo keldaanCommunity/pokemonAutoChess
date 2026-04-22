@@ -2,9 +2,9 @@ import Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
 import { AbilityPerTM, Emotion, TMs } from "../types"
-import type { IBot } from "../types/models/bot-v2"
 import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
+import type { IBot } from "../types/models/bot-v2"
 import { logger } from "../utils/logger"
 
 export default class Bot {

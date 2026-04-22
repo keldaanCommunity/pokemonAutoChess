@@ -12,10 +12,13 @@ import {
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PortalCarouselStages,
+  THEME_BY_TITLE,
+  TITLES_UNLOCKING_THEMES,
   UniquePool,
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
+import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
 import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
 import { MiniGame } from "../core/mini-game"
@@ -37,7 +40,6 @@ import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -77,6 +79,7 @@ import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type { IDetailledPokemon } from "../types/models/bot-v2"
 import { removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -1030,7 +1033,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         usr.titles = []
       }
 
-      const newTitlesEarned: string[] = []
+      const newTitlesEarned: Title[] = []
       player.titles.forEach((t) => {
         if (!usr.titles.includes(t)) {
           //logger.info("title added ", t)
@@ -1043,6 +1046,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (newTitlesEarned.length > 0) {
         newTitlesEarned.forEach((title) => {
           notificationsService.addNotification(player.id, "new_title", title)
+          if (
+            TITLES_UNLOCKING_THEMES.includes(title) &&
+            usr.level >= GADGETS.palette.levelRequired
+          ) {
+            notificationsService.addNotification(
+              player.id,
+              "new_theme",
+              THEME_BY_TITLE[title]!
+            )
+          }
         })
       }
 

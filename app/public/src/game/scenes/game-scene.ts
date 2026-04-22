@@ -248,12 +248,10 @@ export default class GameScene extends Scene {
         this.shopIndexHovered = null
       } else if (
         this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
+        this.pokemonHovered.getBounds().contains(
+          this.input.activePointer.worldX,
+          this.input.activePointer.worldY
+        )
       ) {
         this.sellPokemon(this.pokemonHovered)
         this.pokemonHovered = null
@@ -392,6 +390,11 @@ export default class GameScene extends Scene {
 
     // update region tint on pokemons
     this.board?.pokemons.forEach((p) => {
+      p.sprite.setTint(
+        getRegionTint(this.mapName, preference("colorblindMode"))
+      )
+    })
+    this.battle?.pokemonSprites.forEach((p) => {
       p.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
       )
@@ -644,9 +647,9 @@ export default class GameScene extends Scene {
           // Item -> POKEMON(board zone) = EQUIP
           else if (
             dropZone.name === "board-zone" &&
-            !(
-              this.room?.state.phase == GamePhaseState.FIGHT &&
-              dropZone.getData("y") != 0
+            (
+              this.room?.state.phase == GamePhaseState.PICK ||
+              dropZone.getData("y") == 0
             )
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
@@ -820,12 +823,10 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const flowerPot =
-              this.board?.flowerPokemonsInPots[dropZone.getData("index")]
-            if (flowerPot) {
-              this.clearHovered(flowerPot.sprite)
-            }
+          const flowerPot =
+            this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+          if (flowerPot) {
+            this.clearHovered(flowerPot.sprite)
           }
         }
 
@@ -834,11 +835,9 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const berryTree = this.board?.berryTrees[dropZone.getData("index")]
-            if (berryTree) {
-              this.clearHovered(berryTree.sprite)
-            }
+          const berryTree = this.board?.berryTrees[dropZone.getData("index")]
+          if (berryTree) {
+            this.clearHovered(berryTree.sprite)
           }
         }
       },

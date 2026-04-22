@@ -48,7 +48,29 @@ interface IAnim {
 }
 
 interface IDuration {
-  Duration: any
+  Duration: number | number[]
+}
+
+type AnimationDurationsMap = Record<string, number[]>
+type AnimationDelaysMap = Record<string, { d: number; t: number }>
+type BitmapLike = {
+  width: number
+  height: number
+  data: Uint8Array
+}
+type ScannableImage = {
+  bitmap: BitmapLike
+  scan: (
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    cb: (x: number, y: number, idx: number) => void
+  ) => unknown
+}
+
+function toDurationArray(duration: IDuration["Duration"]): number[] {
+  return Array.isArray(duration) ? duration : [duration]
 }
 
 function formatPokemonName(index: string): string {
@@ -130,19 +152,19 @@ function getAvailablePokemonIndices(): string[] {
  * Spritesheet processor splitting the frames and saving durations/delays
  */
 class SpriteSheetProcessor {
-  private durations: any = {}
-  private delays: any = {}
-  private missing = ""
+  private durations: AnimationDurationsMap = {}
+  private delays: AnimationDelaysMap = {}
+  private missingPokemonLog = ""
   private mapName = new Map<string, string>()
-  private pkmaIndexes = ["0000"]
+  private pkmIndexes = ["0000"]
 
   constructor() {
     this.mapName.set("0000", "missingno")
 
     Object.values(Pkm).forEach((pkm) => {
       const index = PkmIndex[pkm]
-      if (!this.pkmaIndexes.includes(index)) {
-        this.pkmaIndexes.push(index)
+      if (!this.pkmIndexes.includes(index)) {
+        this.pkmIndexes.push(index)
         this.mapName.set(index, pkm)
       }
     })
@@ -180,30 +202,33 @@ class SpriteSheetProcessor {
   }
 
   saveDurationsFile() {
-    const fileA = fs.createWriteStream("./sheets/durations.json")
-    fileA.on("error", function (err) {
+    try {
+      fs.writeFileSync(
+        "./sheets/durations.json",
+        JSON.stringify(this.durations)
+      )
+      logger.debug(
+        `Saved durations file, ${Object.keys(this.durations).length} durations entries`
+      )
+    } catch (err) {
       logger.error(err)
-    })
-    fileA.write(JSON.stringify(this.durations))
-    fileA.end()
-    logger.debug(
-      `Saved durations file, ${Object.keys(this.durations).length} durations entries`
-    )
+      throw err
+    }
   }
 
   saveDelaysFile() {
-    const fileA = fs.createWriteStream("./sheets/delays.json")
-    fileA.on("error", function (err) {
+    try {
+      fs.writeFileSync("./sheets/delays.json", JSON.stringify(this.delays))
+      logger.debug(
+        `Saved delays file, ${Object.keys(this.delays).length} delays entries`
+      )
+    } catch (err) {
       logger.error(err)
-    })
-    fileA.write(JSON.stringify(this.delays))
-    fileA.end()
-    logger.debug(
-      `Saved delays file, ${Object.keys(this.delays).length} delays entries`
-    )
+      throw err
+    }
   }
 
-  private removeBlue(cropImg: any) {
+  private removeBlue(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
@@ -211,9 +236,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] == 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] != 0
+          cropImg.bitmap.data[idx] === 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] !== 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
@@ -224,7 +249,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private removeRed(cropImg: any) {
+  private removeRed(cropImg: ScannableImage) {
     cropImg.scan(
       0,
       0,
@@ -232,9 +257,9 @@ class SpriteSheetProcessor {
       cropImg.bitmap.height,
       (x: number, y: number, idx: number) => {
         if (
-          cropImg.bitmap.data[idx] != 0 &&
-          cropImg.bitmap.data[idx + 1] == 0 &&
-          cropImg.bitmap.data[idx + 2] == 0
+          cropImg.bitmap.data[idx] !== 0 &&
+          cropImg.bitmap.data[idx + 1] === 0 &&
+          cropImg.bitmap.data[idx + 2] === 0
         ) {
           cropImg.bitmap.data[idx] = 0
           cropImg.bitmap.data[idx + 1] = 0
@@ -245,7 +270,7 @@ class SpriteSheetProcessor {
     )
   }
 
-  private zeroPad(num: number) {
+  private zeroPadToFour(num: number) {
     return ("0000" + num).slice(-4)
   }
 
@@ -258,7 +283,7 @@ class SpriteSheetProcessor {
         ? `${pathIndex}/0000/0001`
         : split.length === 2
           ? `${pathIndex}/0001`
-          : pathIndex.split("/").with(2, "0001").join("/")
+          : [...split.slice(0, 2), "0001", ...split.slice(3)].join("/")
     const conf =
       PokemonAnimations[this.mapName.get(index) as Pkm] ??
       DEFAULT_POKEMON_ANIMATION_CONFIG
@@ -268,7 +293,7 @@ class SpriteSheetProcessor {
     for (let j = 0; j < allPads.length; j++) {
       const pad = allPads[j]
       try {
-        const shiny = pathIndex == pad ? PokemonTint.NORMAL : PokemonTint.SHINY
+        const shiny = pathIndex === pad ? PokemonTint.NORMAL : PokemonTint.SHINY
         const xmlFile = fs.readFileSync(
           expandHomeDir(`${spriteCollabPath}/sprite/${pad}/AnimData.xml`)
         )
@@ -278,10 +303,10 @@ class SpriteSheetProcessor {
           (m) => m.Name === conf.attack
         )
         if (attackMetadata) {
-          if (attackMetadata && attackMetadata.CopyOf) {
+          if (attackMetadata.CopyOf) {
             attackMetadata =
               xmlData.AnimData.Anims.Anim.find(
-                (m) => m.Name == attackMetadata?.CopyOf
+                (m) => m.Name === attackMetadata?.CopyOf
               ) ?? attackMetadata
           }
 
@@ -291,15 +316,19 @@ class SpriteSheetProcessor {
               attackMetadata
             )
           } else {
-            const attackDurations: number[] =
-              attackMetadata.Durations.Duration.length !== undefined
-                ? [...attackMetadata.Durations.Duration]
-                : [attackMetadata.Durations.Duration]
+            const attackDurations = toDurationArray(
+              attackMetadata.Durations.Duration
+            )
+            const delayUntilHit = attackDurations
+              .slice(0, attackMetadata.HitFrame)
+              .reduce((prev, curr) => prev + curr, 0)
+            const totalDuration = attackDurations.reduce(
+              (prev, curr) => prev + curr,
+              0
+            )
             this.delays[index] = {
-              d: attackDurations
-                .slice(0, attackMetadata.HitFrame)
-                .reduce((prev, curr) => prev + curr, 0),
-              t: attackDurations.reduce((prev, curr) => prev + curr, 0)
+              d: delayUntilHit,
+              t: totalDuration
             }
           }
         }
@@ -311,13 +340,6 @@ class SpriteSheetProcessor {
             AnimationType.Walk
           ])
 
-          if (!conf) {
-            logger.warn(
-              `Animation config not found for ${formatPokemonName(index)}`
-            )
-            continue
-          }
-
           actions.add(conf.sleep ?? AnimationType.Sleep)
           actions.add(conf.eat ?? AnimationType.Eat)
           actions.add(conf.hop ?? AnimationType.Hop)
@@ -328,7 +350,7 @@ class SpriteSheetProcessor {
 
           for (const action of actions) {
             let metadata = xmlData.AnimData.Anims.Anim.find(
-              (m) => m.Name == action
+              (m) => m.Name === action
             )
             const imgPath = expandHomeDir(
               `${spriteCollabPath}/sprite/${pad}/${metadata?.CopyOf || action}-${anim}.png`
@@ -338,7 +360,7 @@ class SpriteSheetProcessor {
 
               if (metadata?.CopyOf) {
                 metadata = xmlData.AnimData.Anims.Anim.find(
-                  (m) => m.Name == metadata?.CopyOf
+                  (m) => m.Name === metadata?.CopyOf
                 )
               }
 
@@ -346,9 +368,7 @@ class SpriteSheetProcessor {
                 logger.error("no duration found for metadata", metadata)
               } else {
                 this.durations[`${index}/${shiny}/${action}/${anim}`] =
-                  metadata?.Durations.Duration.length !== undefined
-                    ? [...metadata.Durations.Duration]
-                    : [metadata.Durations.Duration]
+                  toDurationArray(metadata.Durations.Duration)
                 const frameHeight = metadata?.FrameHeight
                 const frameWidth = metadata?.FrameWidth
 
@@ -359,12 +379,12 @@ class SpriteSheetProcessor {
                     for (let y = 0; y < height; y++) {
                       const cropImg = img.clone()
 
-                      if (anim == SpriteType.SHADOW) {
-                        const shadow = xmlData.AnimData.ShadowSize
-                        if (shadow == 0) {
+                      if (anim === SpriteType.SHADOW) {
+                        const shadow = Number(xmlData.AnimData.ShadowSize)
+                        if (shadow === 0) {
                           this.removeRed(cropImg)
                           this.removeBlue(cropImg)
-                        } else if (shadow == 1) {
+                        } else if (shadow === 1) {
                           this.removeBlue(cropImg)
                         }
                         // transform to black
@@ -374,7 +394,7 @@ class SpriteSheetProcessor {
                           cropImg.bitmap.width,
                           cropImg.bitmap.height,
                           (x: number, y: number, idx: number) => {
-                            if (cropImg.bitmap.data[idx + 3] != 0) {
+                            if (cropImg.bitmap.data[idx + 3] !== 0) {
                               cropImg.bitmap.data[idx] = 0
                               cropImg.bitmap.data[idx + 1] = 0
                               cropImg.bitmap.data[idx + 2] = 0
@@ -394,7 +414,7 @@ class SpriteSheetProcessor {
                         `split/${index}/${shiny}/${action}/${anim}/${y}`
                       )
                       await cropImg.write(
-                        `split/${index}/${shiny}/${action}/${anim}/${y}/${this.zeroPad(
+                        `split/${index}/${shiny}/${action}/${anim}/${y}/${this.zeroPadToFour(
                           x
                         )}.png`
                       )
@@ -418,18 +438,18 @@ class SpriteSheetProcessor {
           `Pokemon ${formatPokemonName(index)} not found at path: ${spriteCollabPath}/sprite/${pad}/AnimData.xml`,
           error
         )
-        this.missing += `${this.mapName.get(index)},${pad}/AnimData.xml\n`
+        this.missingPokemonLog += `${this.mapName.get(index)},${pad}/AnimData.xml\n`
       }
     }
   }
 
   async splitAll(spriteCollabPath: string) {
-    for (let i = 0; i < this.pkmaIndexes.length; i++) {
-      const index = this.pkmaIndexes[i]
+    for (let i = 0; i < this.pkmIndexes.length; i++) {
+      const index = this.pkmIndexes[i]
 
       logger.debug(
-        `${i}/${this.pkmaIndexes.length - 1} (${(
-          (i * 100) / (this.pkmaIndexes.length - 1)
+        `${i}/${this.pkmIndexes.length - 1} (${(
+          (i * 100) / (this.pkmIndexes.length - 1)
         ).toFixed(2)}%) ${formatPokemonName(index)}`
       )
 
@@ -442,7 +462,7 @@ class SpriteSheetProcessor {
     fileB.on("error", function (err) {
       logger.error(err)
     })
-    fileB.write(this.missing)
+    fileB.write(this.missingPokemonLog)
     fileB.end()
   }
 }
@@ -526,6 +546,22 @@ function movePortrait(spriteCollabPath: string, pkmIndex: string) {
   }
 }
 
+type TrackerCredits = {
+  primary: string
+  secondary: string[]
+  total: number
+}
+
+type TrackerEntry = {
+  subgroups?: Record<string, TrackerEntry>
+  portrait_files?: unknown[]
+  portrait_credit: TrackerCredits
+  sprite_credit: TrackerCredits
+  [key: string]: unknown
+}
+
+type Tracker = Record<string, TrackerEntry>
+
 /**
  * Track portraits available
  */
@@ -536,11 +572,11 @@ function updateEmotionsAndCredits(
     return [indexToAdd, `${indexToAdd}${shinyPad}`]
   })
 ) {
-  let tracker: Record<string, any> = {}
+  let tracker: Tracker = {}
   try {
     const filePath = expandHomeDir(`${spriteCollabPath}/tracker.json`)
     const content = fs.readFileSync(filePath, "utf8")
-    tracker = JSON.parse(content)
+    tracker = JSON.parse(content) as Tracker
   } catch (err) {
     logger.error(
       `Failed to read or parse tracker.json at ${spriteCollabPath}:`,
@@ -573,7 +609,7 @@ function updateEmotionsAndCredits(
   const emotions = Object.values(Emotion)
   for (const pkmIndex of indexesToUpdate) {
     const pathIndex = pkmIndex.split("-")
-    let metadata = tracker[pathIndex[0]]
+    let metadata: TrackerEntry | undefined = tracker[pathIndex[0]]
     for (let i = 1; i < pathIndex.length; i++) {
       metadata = metadata?.subgroups?.[pathIndex[i]]
     }
@@ -583,8 +619,8 @@ function updateEmotionsAndCredits(
         emotion in (metadata?.portrait_files ?? {}) ? 1 : 0
       )
       emotionsPerIndex.set(pkmIndex, emotionsAvailable)
-      logger.log(
-        `${emotionsAvailable.filter((e) => e === 1).length} portraits found for ${formatPokemonName(pkmIndex)}`
+      logger.info(
+        `${emotionsAvailable.filter((available) => available === 1).length} portraits found for ${formatPokemonName(pkmIndex)}`
       )
 
       creditsData.set(pkmIndex, {
@@ -601,13 +637,13 @@ function updateEmotionsAndCredits(
     "../app/models/precomputed/emotions-per-pokemon-index.json",
     JSON.stringify(mapToObj(emotionsPerIndex))
   )
-  logger.log("Updated emotions-per-pokemon-index.json")
+  logger.info("Updated emotions-per-pokemon-index.json")
 
   fs.writeFileSync(
     "../app/models/precomputed/credits.json",
     JSON.stringify(mapToObj(creditsData))
   )
-  logger.log("Updated credits.json")
+  logger.info("Updated credits.json")
 }
 
 /**
@@ -732,7 +768,7 @@ function moveAllFiles(spriteCollabPath: string) {
   })
 
   logger.debug(
-    `All sheets and portraits moved for ${Object.values(PkmIndex).length} Pokémon.`
+    `All sheets and portraits moved for ${Object.values(PkmIndex).length} Pokemon.`
   )
 }
 
@@ -831,7 +867,7 @@ async function main() {
       logger.info("Step 4/5: Moving all files to assets...")
       moveAllFiles(spriteCollabPath)
 
-      // Step 5:Updating emotions available and credits for all Pokemon
+      // Step 5: Updating emotions available and credits for all Pokemon
       logger.info("Step 5/5: Updating emotions and credits for all Pokemon...")
       updateEmotionsAndCredits(spriteCollabPath)
 

@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose"
 import { Emotion } from "../../types"
-import type { IBot } from "../../types/models/bot-v2"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import type { IBot } from "../../types/models/bot-v2"
 
 const pkm = new Schema({
   name: {

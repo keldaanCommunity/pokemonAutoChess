@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"

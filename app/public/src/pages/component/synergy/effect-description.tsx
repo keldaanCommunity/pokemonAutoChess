@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { EffectEnum } from "../../../../../types/enum/Effect"
 import { addIconsToDescription } from "../../utils/descriptions"

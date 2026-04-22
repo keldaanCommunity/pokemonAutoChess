@@ -3,6 +3,10 @@
   max-width: 95vw;
 }
 
+.react-tooltip > .react-tooltip-content-wrapper {
+  padding: 0;
+}
+
 .react-tooltip output {
   color: var(--color-fg-primary);
 }

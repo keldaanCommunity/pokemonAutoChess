@@ -1,5 +1,4 @@
 import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
-import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"

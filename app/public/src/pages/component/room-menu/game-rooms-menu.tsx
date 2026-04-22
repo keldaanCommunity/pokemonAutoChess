@@ -1,6 +1,6 @@
 import { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { MAX_LOADING_TIME } from "../../../../../config"

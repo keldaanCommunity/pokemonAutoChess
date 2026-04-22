@@ -1,4 +1,3 @@
-import React from "react"
 import { IChatV2, Role } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { ChatRoom, removeMessage, searchById } from "../../../network"

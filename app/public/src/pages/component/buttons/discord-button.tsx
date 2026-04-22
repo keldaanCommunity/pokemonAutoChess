@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function DiscordButton(props: { url?: string }) {
   return (
     <a

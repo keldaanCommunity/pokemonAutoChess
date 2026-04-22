@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import { t } from "i18next"
+import { useEffect, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { getCurrentGameEvent } from "../../../../../config"
 import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"

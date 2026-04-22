@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose"
 import { ExpThreshold } from "../../config"
+import { GADGETS_UNLOCKED_BY_LEVEL } from "../../config/game/gadgets"
 import { CollectionUtils } from "../../core/collection"
 import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
@@ -16,6 +17,23 @@ const userMetadataSchema = new Schema({
   },
   displayName: {
     type: String
+  },
+  twitchUserId: {
+    type: String
+  },
+  twitchLogin: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
+  twitchDisplayName: {
+    type: String
+  },
+  twitchVerifiedAt: {
+    type: Date
+  },
+  twitchVerificationRevokedAt: {
+    type: Date
   },
   language: {
     type: String,
@@ -116,6 +134,9 @@ userMetadataSchema.index(
   { displayName: 1 },
   { collation: { locale: "en", strength: 2 } }
 )
+userMetadataSchema.index({ titles: 1 })
+userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
+userMetadataSchema.index({ twitchLogin: 1 }, { unique: true, sparse: true })
 
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 
@@ -169,6 +190,14 @@ export function giveUserExp(user: IUserMetadataMongo, exp: number) {
         user.uid,
         "level_up",
         user.level.toString()
+      )
+    }
+
+    if (user.level in GADGETS_UNLOCKED_BY_LEVEL) {
+      notificationsService.addNotification(
+        user.uid,
+        "new_gadget",
+        GADGETS_UNLOCKED_BY_LEVEL[user.level].name
       )
     }
   } else {

@@ -1,5 +1,5 @@
-import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
-import React, { useEffect, useRef, useState } from "react"
+import { getStateCallbacks, Room } from "@colyseus/sdk"
+import { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router"
 import AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"

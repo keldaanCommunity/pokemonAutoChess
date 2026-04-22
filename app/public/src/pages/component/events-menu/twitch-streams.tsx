@@ -140,7 +140,7 @@ export function TwitchStreams() {
               />
               <div className="twitch-stream-content">
                 <h3>{stream.userName}</h3>
-                <p>{stream.title}</p>
+                <p title={stream.title}>{stream.title}</p>
                 <div className="twitch-stream-meta">
                   <span className="twitch-stream-viewers">
                     {t("twitch_streams.viewers", {

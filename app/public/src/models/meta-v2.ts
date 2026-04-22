@@ -1,8 +1,8 @@
 import type { IMetaV2 } from "../../../types/models/meta-v2"
 
 export type {
-  IMetaV2,
   IMeanTeam,
+  IMetaV2,
   ITopTeam
 } from "../../../types/models/meta-v2"
 

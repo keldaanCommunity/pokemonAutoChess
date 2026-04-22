@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { getRank } from "../../../../../utils/elo"
 import "./elo-badge.css"

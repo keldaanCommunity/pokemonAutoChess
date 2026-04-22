@@ -4,6 +4,8 @@ export interface ILeaderboardInfo {
   avatar: string
   rank: number
   value: number
+  twitchLogin?: string
+  twitchDisplayName?: string
 }
 
 export interface ILeaderboardBotInfo {

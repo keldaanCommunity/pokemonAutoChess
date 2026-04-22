@@ -268,3 +268,27 @@ ul.titles > li.selected .title-name {
 .profile-modal .elo-tab p {
   margin: 1em 0;
 }
+
+.profile-modal .player-display-name {
+  margin: 0;
+}
+
+.profile-modal .twitch-badge-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9146ff;
+  text-decoration: none;
+  cursor: var(--cursor-hover);
+}
+
+.profile-modal .twitch-badge-link img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.profile-modal .twitch-badge-link:hover,
+.profile-modal .twitch-badge-link:focus {
+  color: #772ce8;
+}

@@ -8,7 +8,6 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
@@ -456,7 +455,10 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.7
         } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
           burnDamage *= 0.5
-        } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+        } else if (
+          pkm.effects.has(EffectEnum.WATER_VEIL) ||
+          pkm.effects.has(EffectEnum.SURGE_SURFER)
+        ) {
           burnDamage *= 0.3
         }
 
@@ -625,7 +627,10 @@ export default class Status extends Schema implements IStatus {
         poisonDamage *= 0.7
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
         poisonDamage *= 0.5
-      } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
+      ) {
         poisonDamage *= 0.3
       }
       poisonDamage = Math.round(poisonDamage)

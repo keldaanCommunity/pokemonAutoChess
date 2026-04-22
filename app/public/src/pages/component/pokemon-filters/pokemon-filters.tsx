@@ -8,7 +8,6 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
 import { NonPkm, Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 
 export function PokemonFilters() {
   const { t } = useTranslation()

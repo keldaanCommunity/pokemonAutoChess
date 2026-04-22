@@ -1,4 +1,3 @@
-import React from "react"
 import "./life.css"
 
 export function Life(props: { value?: number | string }) {

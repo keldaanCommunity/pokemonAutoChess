@@ -4,7 +4,6 @@ import {
   getSynergyStep
 } from "../models/colyseus-models/synergies"
 import PokemonFactory from "../models/pokemon-factory"
-import type { IBot, IDetailledPokemon, IStep } from "../types/models/bot-v2"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -23,6 +22,7 @@ import {
   PkmIndex
 } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
+import type { IBot, IDetailledPokemon, IStep } from "../types/models/bot-v2"
 import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"

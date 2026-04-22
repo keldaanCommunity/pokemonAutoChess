@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from "react"
+import { CSSProperties, ReactElement } from "react"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List } from "react-window"
 import {

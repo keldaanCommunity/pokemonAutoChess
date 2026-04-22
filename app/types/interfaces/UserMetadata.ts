@@ -4,6 +4,11 @@ import { Language } from "../enum/Language"
 interface IUserMetadata {
   uid: string
   displayName: string
+  twitchUserId?: string
+  twitchLogin?: string
+  twitchDisplayName?: string
+  twitchVerifiedAt?: Date | null
+  twitchVerificationRevokedAt?: Date | null
   language: Language | ""
   avatar: string
   games: number

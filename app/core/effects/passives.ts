@@ -216,7 +216,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
       })
       if (pokemon.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
-          if (v && v.value && v.value.team === pokemon.team) {
+          if (v.value && v.value.team === pokemon.team) {
             v.value.handleHeal(physicalDamage, pokemon, 1, false)
           }
         })
@@ -475,7 +475,8 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-                board.columns * pokemon.positionY + y + pokemon.positionX + x
+              board.columns * (pokemon.positionY + y) +
+              (pokemon.positionX + x)
               ]
           })
         }
@@ -520,7 +521,6 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
     if (pokemon.stacks >= pokemon.stacksRequired && player) {
       pokemon.stacks = 0
       player.items.push(Item.SILK_SCARF)
-      player.extraScarves += 1
     }
     pokemon.stacks = 0
   } else if (pokemon.stacks < pokemon.stacksRequired) {
@@ -929,7 +929,7 @@ const conversionEffect = new OnSimulationStartEffect(
       player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
     }
 
-    // when convertig to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
     if (synergyCopied === Synergy.FLORA) {
       const floraLevel = getSynergyStep(opponent.synergies, Synergy.FLORA)
       entity.effectsSet.add(
@@ -1340,9 +1340,9 @@ export const PassiveEffects: Partial<
       if (attacker.items.has(Item.CHEF_HAT)) {
         const isDoubled = attacker.player
           ? attacker.player.synergies.hasSynergyTriggerOrMore(
-              Synergy.GOURMET,
-              2
-            )
+            Synergy.GOURMET,
+            2
+          )
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
@@ -1557,6 +1557,7 @@ export const PassiveEffects: Partial<
 
       const transformToHero = () => {
         transformed = true
+        const isFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
         entity.addAttack(18, entity, 0, false)
@@ -1564,7 +1565,7 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player && !entity.isGhostOpponent) {
+        if (entity.player && !entity.isGhostOpponent && isFinizenOnBoard) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
           entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,

@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose"
-import type { IPokemonsStatisticV2 } from "../../types/models/pokemons-statistic-v2"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import type { IPokemonsStatisticV2 } from "../../types/models/pokemons-statistic-v2"
 
 const historyEntrySchema = new Schema(
   {

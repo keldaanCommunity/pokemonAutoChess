@@ -39,6 +39,7 @@ i18n.on("initialized", () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Auth />} />
+              <Route path="/auth" element={<Auth />} />
               <Route path="/lobby" element={<Lobby />} />
               <Route path="/preparation" element={<Preparation />} />
               <Route path="/game" element={<Game />} />

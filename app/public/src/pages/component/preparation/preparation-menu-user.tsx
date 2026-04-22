@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
@@ -49,6 +48,8 @@ export default function PreparationMenuUser(props: {
         name={props.user?.name}
         title={props.user?.title}
         role={props.user?.role}
+        twitchLogin={props.user?.twitchLogin || undefined}
+        twitchDisplayName={props.user?.twitchDisplayName || undefined}
       />
       {preference("colorblindMode") && props.user.ready && t("ready")}
       {removeButton}

@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-import { preference, usePreferences } from "../../preferences"
+import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 

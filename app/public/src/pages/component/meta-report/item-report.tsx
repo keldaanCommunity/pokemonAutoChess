@@ -4,18 +4,19 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
 import { EloRankThreshold } from "../../../../../config"
-import {
-  fetchMetaItems,
-  IItemsStatisticV2,
-  IItemV2
-} from "../../../models/items-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   CraftableItems,
   Item,
   ShinyItems,
-  Tools
+  Tools,
+  UnholdableItems
 } from "../../../../../types/enum/Item"
+import {
+  fetchMetaItems,
+  IItemsStatisticV2,
+  IItemV2
+} from "../../../models/items-statistic-v2"
 import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
@@ -51,7 +52,11 @@ export function ItemReport() {
   const tabs: { label: string; key: string; items?: readonly Item[] }[] = [
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("tools"), key: "tools", items: Tools },
-    { label: t("shiny_items"), key: "shiny_items", items: ShinyItems }
+    {
+      label: t("shiny_items"),
+      key: "shiny_items",
+      items: ShinyItems.filter((i) => !UnholdableItems.includes(i))
+    }
   ]
 
   return (

@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose"
-import type { IRegionStatistic } from "../../types/models/regions-statistic"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
+import type { IRegionStatistic } from "../../types/models/regions-statistic"
 
 const regionStatisticSchema = new Schema({
   name: {

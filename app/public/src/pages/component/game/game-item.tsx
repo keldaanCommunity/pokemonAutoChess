@@ -1,5 +1,4 @@
 import CSS from "csstype"
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Item } from "../../../../../types/enum/Item"
 import { pickItem } from "../../../network"
