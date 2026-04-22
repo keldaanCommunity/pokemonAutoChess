@@ -13,11 +13,13 @@ import { EloRank } from "../../types/enum/EloRank.js"
 import { BotDifficulty } from "../../types/enum/Game.js"
 import { PkmProposition } from "../../types/enum/Pokemon.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
+import type { Booster } from "../../types/Booster"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
 import { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
+import { setBoosterContent } from "./stores/BoostersStore"
 import { logIn, setProfile } from "./stores/NetworkStore"
 
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
@@ -262,11 +264,56 @@ export function buyEmotion(params: {
 }
 
 export function buyBooster(params: { index: string }) {
-  rooms.lobby?.send(Transfer.BUY_BOOSTER, params)
+  return firebase
+    .auth()
+    .currentUser?.getIdToken()
+    .then((token) =>
+      fetch("/boosters/buy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(params)
+      })
+    )
+    .then(async (res) => {
+      if (!res) throw new Error("User not authenticated")
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body.error ?? res.statusText)
+      }
+      return res.json() as Promise<{ user: IUserMetadataJSON }>
+    })
+    .then((payload) => {
+      store.dispatch(setProfile(payload.user))
+      return payload
+    })
 }
 
-export function openBooster() {
-  rooms.lobby?.send(Transfer.OPEN_BOOSTER)
+export async function openBooster() {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/boosters/open", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as {
+    boosterContent: Booster
+    user: IUserMetadataJSON
+  }
+
+  store.dispatch(setBoosterContent(payload.boosterContent))
+  store.dispatch(setProfile(payload.user))
+
+  return payload
 }
 
 export function showEmote(emote?: string) {

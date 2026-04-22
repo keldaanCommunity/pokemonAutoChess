@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { openBooster } from "../../../network"
-import { setBoosterContent } from "../../../stores/LobbyStore"
+import { setBoosterContent } from "../../../stores/BoostersStore"
 import { cc } from "../../utils/jsx"
 import { BoosterCard } from "./booster-card"
 import "./booster.css"
@@ -12,7 +12,7 @@ export default function Booster() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
-  const boosterContent = useAppSelector((state) => state.lobby.boosterContent)
+  const boosterContent = useAppSelector((state) => state.boosters.boosterContent)
   const numberOfBooster = user ? user.booster : 0
 
   const [flippedStates, setFlippedStates] = useState<boolean[]>([])
@@ -40,10 +40,16 @@ export default function Booster() {
   }, [boosterContent])
 
   const throttledBoosterOpen = useRef(
-    throttle(() => {
+    throttle(async () => {
       dispatch(setBoosterContent([]))
-      openBooster()
       setLoading(true)
+      try {
+        await openBooster()
+      } catch (error) {
+        console.error("Error opening booster:", error)
+      } finally {
+        setLoading(false)
+      }
     }, THROTTLE_DURATION)
   ).current
 

@@ -26,7 +26,6 @@ import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,
-  BuyBoosterCommand,
   BuyEmotionCommand,
   ChangeAvatarCommand,
   ChangeNameCommand,
@@ -43,7 +42,6 @@ import {
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
-  OpenBoosterCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -303,10 +301,6 @@ export default class CustomLobbyRoom extends Room {
       }
     )
 
-    this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
-      this.dispatcher.dispatch(new OpenBoosterCommand(), { client })
-    })
-
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       this.dispatcher.dispatch(new ChangeNameCommand(), {
         client,
@@ -352,16 +346,6 @@ export default class CustomLobbyRoom extends Room {
           index,
           emotion,
           shiny
-        })
-      }
-    )
-
-    this.onMessage(
-      Transfer.BUY_BOOSTER,
-      (client, message: { index: string }) => {
-        this.dispatcher.dispatch(new BuyBoosterCommand(), {
-          client,
-          index: message.index
         })
       }
     )

@@ -3,29 +3,22 @@ import { Client, matchMaker } from "colyseus"
 import { randomBytes } from "crypto"
 import { writeHeapSnapshot } from "v8"
 import {
-  BoosterPriceByRarity,
-  DUST_PER_BOOSTER,
-  DUST_PER_SHINY,
   EloRankThreshold,
   getBaseAltForm,
   getEmotionCost,
   MAX_PLAYERS_PER_GAME,
-  PkmAltForms,
-  PkmAltFormsByPkm,
   USERNAME_REGEXP
 } from "../../config"
-import { CollectionUtils, createBooster } from "../../core/collection"
+import { CollectionUtils } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata, {
   toUserMetadataJSON
 } from "../../models/mongo-models/user-metadata"
-import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { checkTitlesAfterEmotionUnlocked } from "../../services/booster"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
 import {
-  CollectionEmotions,
   Emotion,
-  PkmWithCustom,
   Role,
   Title,
   Transfer
@@ -34,13 +27,7 @@ import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import { Language } from "../../types/enum/Language"
-import {
-  NonPkm,
-  Pkm,
-  PkmByIndex,
-  PkmIndex,
-  Unowns
-} from "../../types/enum/Pokemon"
+import { PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Starters } from "../../types/enum/Starters"
 import {
   IPokemonCollectionItemMongo,
@@ -321,148 +308,6 @@ export class RemoveMessageCommand extends Command<
   }
 }
 
-export class OpenBoosterCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  async execute({ client }: { client: Client }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      if (!user) return
-
-      // Immediately find and decrement booster count to avoid any possible race condition
-      let userDoc = await UserMetadata.findOneAndUpdate(
-        {
-          uid: client.auth.uid,
-          booster: { $gt: 0 }
-        },
-        {
-          $inc: { booster: -1 }
-        },
-        { returnDocument: "after" }
-      )
-
-      if (!userDoc) return // No boosters available or user not found
-
-      // Build update operations for all booster cards
-      const updateOperations: any = {}
-      const boosterContent = createBooster(userDoc)
-      boosterContent.forEach((card) => {
-        const index = PkmIndex[card.name]
-        const existingItem = userDoc!.pokemonCollection.get(index)
-
-        if (!existingItem) {
-          if (`pokemonCollection.${index}` in updateOperations) {
-            // If the item already exists in the update operations, we need to merge
-            // the new emotions with the existing ones.
-            const unlocked =
-              updateOperations[`pokemonCollection.${index}`].unlocked
-            CollectionUtils.unlockEmotion(unlocked, card.emotion, card.shiny)
-          } else {
-            // Create new collection item
-            const newCollectionItem: IPokemonCollectionItemMongo = {
-              id: index,
-              unlocked: Buffer.alloc(5, 0),
-              dust: 0,
-              selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false,
-              played: 0
-            }
-            CollectionUtils.unlockEmotion(
-              newCollectionItem.unlocked,
-              card.emotion,
-              card.shiny
-            )
-            updateOperations[`pokemonCollection.${index}`] = newCollectionItem
-          }
-        } else {
-          // Check if already unlocked
-          const hasUnlocked = CollectionUtils.hasUnlocked(
-            existingItem.unlocked,
-            card.emotion,
-            card.shiny
-          )
-
-          if (hasUnlocked) {
-            // Add dust
-            const dustGain = card.shiny ? DUST_PER_SHINY : DUST_PER_BOOSTER
-            const shardIndex = PkmIndex[getBaseAltForm(card.name)]
-            updateOperations.$inc = updateOperations.$inc || {}
-            updateOperations.$inc[`pokemonCollection.${shardIndex}.dust`] =
-              dustGain
-          } else {
-            // Add new emotion
-            CollectionUtils.unlockEmotion(
-              existingItem.unlocked,
-              card.emotion,
-              card.shiny
-            )
-            updateOperations[`pokemonCollection.${index}.unlocked`] =
-              Buffer.copyBytesFrom(existingItem.unlocked, 0, 5)
-          }
-        }
-      })
-
-      // Perform atomic update
-      await userDoc.updateOne(updateOperations)
-
-      // Reload updated user
-      userDoc = await UserMetadata.findOne({ uid: client.auth.uid })
-      if (!userDoc) {
-        logger.error(
-          `User document not found after opening booster: ${client.auth.uid}`
-        )
-        return
-      }
-
-      // resync, db-authoritative
-      user.booster = userDoc.booster
-      boosterContent.forEach((pkmWithCustom) => {
-        const index = PkmIndex[pkmWithCustom.name]
-        const pokemonCollectionItem = user.pokemonCollection.get(index)
-        const mongoPokemonCollectionItem = userDoc.pokemonCollection.get(index)
-        if (!mongoPokemonCollectionItem) {
-          logger.error(`Missing mongo collection item after booster open`, {
-            index,
-            pkmWithCustom,
-            clientUid: client.auth.uid
-          })
-          return
-        }
-        if (pokemonCollectionItem) {
-          pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust
-          pokemonCollectionItem.unlocked = Buffer.copyBytesFrom(
-            mongoPokemonCollectionItem.unlocked,
-            0,
-            5
-          )
-        } else {
-          const newConfig: IPokemonCollectionItemMongo = {
-            dust: mongoPokemonCollectionItem.dust,
-            id: mongoPokemonCollectionItem.id,
-            selectedEmotion: mongoPokemonCollectionItem.selectedEmotion,
-            selectedShiny: mongoPokemonCollectionItem.selectedShiny,
-            played: mongoPokemonCollectionItem.played,
-            unlocked: Buffer.copyBytesFrom(
-              mongoPokemonCollectionItem.unlocked,
-              0,
-              5
-            )
-          }
-          user.pokemonCollection.set(index, newConfig)
-        }
-      })
-
-      checkTitlesAfterEmotionUnlocked(userDoc, boosterContent)
-      await userDoc.save()
-      client.send(Transfer.BOOSTER_CONTENT, boosterContent)
-      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(userDoc))
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class ChangeNameCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string }
@@ -669,145 +514,6 @@ export class BuyEmotionCommand extends Command<
         { name: PkmByIndex[index], emotion, shiny }
       ])
       await mongoUser.save()
-      client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-async function checkTitlesAfterEmotionUnlocked(
-  mongoUser: IUserMetadataMongo,
-  unlocked: PkmWithCustom[]
-) {
-  const newTitles: Title[] = []
-  if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
-    // update titles
-    let numberOfShinies = 0
-    mongoUser.pokemonCollection.forEach((c) => {
-      const { shinyEmotions } = CollectionUtils.getEmotionsUnlocked(c)
-      numberOfShinies += shinyEmotions.length
-    })
-    if (numberOfShinies >= 30) {
-      newTitles.push(Title.SHINY_SEEKER)
-    }
-  }
-
-  if (!mongoUser.titles.includes(Title.DUKE)) {
-    if (
-      Object.values(Pkm)
-        .filter(
-          (p) =>
-            NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
-        )
-        .every((pkm) => {
-          const baseForm = getBaseAltForm(pkm)
-          const accepted: Pkm[] =
-            baseForm in PkmAltFormsByPkm
-              ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
-              : [baseForm]
-          return accepted.some((form) => {
-            const item = mongoUser.pokemonCollection.get(PkmIndex[form])
-            if (!item) return false
-            const { emotions, shinyEmotions } =
-              CollectionUtils.getEmotionsUnlocked(item)
-            return emotions.length > 0 || shinyEmotions.length > 0
-          })
-        })
-    ) {
-      newTitles.push(Title.DUKE)
-    }
-  }
-
-  if (
-    unlocked.some((p) => p.emotion === Emotion.ANGRY && p.name === Pkm.ARBOK) &&
-    !mongoUser.titles.includes(Title.DENTIST)
-  ) {
-    newTitles.push(Title.DENTIST)
-  }
-
-  if (
-    !mongoUser.titles.includes(Title.ARCHEOLOGIST) &&
-    Unowns.some((unown) => unlocked.map((p) => p.name).includes(unown)) &&
-    Unowns.every((name) => {
-      const unownIndex = PkmIndex[name]
-      const item = mongoUser.pokemonCollection.get(unownIndex)
-      const isBeingUnlockedRightNow = unlocked.some((p) => p.name === name)
-      let isAlreadyUnlocked = false
-      if (item) {
-        const { emotions, shinyEmotions } =
-          CollectionUtils.getEmotionsUnlocked(item)
-        isAlreadyUnlocked = emotions.length > 0 || shinyEmotions.length > 0
-      }
-      return isAlreadyUnlocked || isBeingUnlockedRightNow
-    })
-  ) {
-    newTitles.push(Title.ARCHEOLOGIST)
-  }
-
-  if (!mongoUser.titles.includes(Title.DUCHESS)) {
-    if (
-      unlocked.some((p) => {
-        const item = mongoUser.pokemonCollection.get(PkmIndex[p.name])
-        if (!item) return false
-        const { emotions, shinyEmotions } =
-          CollectionUtils.getEmotionsUnlocked(item)
-        return (
-          shinyEmotions.length >= CollectionEmotions.length &&
-          emotions.length >= CollectionEmotions.length
-        )
-      })
-    ) {
-      newTitles.push(Title.DUCHESS)
-    }
-  }
-
-  if (newTitles.length > 0) {
-    mongoUser.titles.push(...newTitles) // NOTE: document needs to be saved after those modifications
-  }
-}
-
-export class BuyBoosterCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string }
-> {
-  async execute({ client, index }: { client: Client; index: string }) {
-    try {
-      const user = this.room.users.get(client.auth.uid)
-      if (!user) return
-
-      const pkm = PkmByIndex[index]
-      if (!pkm) return
-
-      const rarity = getPokemonData(pkm).rarity
-      const boosterCost = BoosterPriceByRarity[rarity]
-
-      const shardIndex = PkmIndex[getBaseAltForm(pkm)]
-
-      const mongoUser = await UserMetadata.findOneAndUpdate(
-        {
-          uid: client.auth.uid,
-          [`pokemonCollection.${shardIndex}.dust`]: { $gte: boosterCost }
-        },
-        {
-          $inc: {
-            booster: 1,
-            [`pokemonCollection.${shardIndex}.dust`]: -boosterCost
-          }
-        },
-        { returnDocument: "after" }
-      )
-      if (!mongoUser) return
-
-      const pokemonCollectionItem = user.pokemonCollection.get(shardIndex)
-      if (!pokemonCollectionItem) return
-
-      const mongoPokemonCollectionItem =
-        mongoUser.pokemonCollection.get(shardIndex)
-      if (!mongoPokemonCollectionItem) return
-
-      user.booster = mongoUser.booster
-      pokemonCollectionItem.dust = mongoPokemonCollectionItem.dust // resync shards to database value, db authoritative
       client.send(Transfer.USER_PROFILE, toUserMetadataJSON(mongoUser))
     } catch (error) {
       logger.error(error)

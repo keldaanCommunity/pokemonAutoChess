@@ -11,7 +11,7 @@ import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
 import { connect } from "mongoose"
 import path from "path"
@@ -42,6 +42,7 @@ import {
   fetchBot,
   fetchBotsList
 } from "./services/bots"
+import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
@@ -597,6 +598,53 @@ export const server = defineServer({
       } catch (error) {
         logger.error("Error fetching profile", error)
         res.status(500).send("Error fetching profile")
+      }
+    })
+
+    app.post("/boosters/open", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const result = await openBoosterForUser(userAuth.uid)
+        if (!result) {
+          res.status(409).json({ error: "No boosters available" })
+          return
+        }
+
+        res.status(200).json({
+          boosterContent: result.boosterContent,
+          user: toUserMetadataJSON(result.userDoc)
+        })
+      } catch (error) {
+        logger.error("Error opening booster", error)
+        res.status(500).json({ error: "Error opening booster" })
+      }
+    })
+
+    app.post("/boosters/buy", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+
+        const result = await buyBoosterForUser(userAuth.uid, index)
+        if (!result) {
+          res.status(409).json({ error: "Not enough dust or invalid pokemon" })
+          return
+        }
+
+        res.status(200).json({
+          user: toUserMetadataJSON(result.userDoc)
+        })
+      } catch (error) {
+        logger.error("Error buying booster", error)
+        res.status(500).json({ error: "Error buying booster" })
       }
     })
 
