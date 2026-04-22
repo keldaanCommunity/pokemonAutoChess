@@ -219,7 +219,7 @@ export class OnHitEffect extends Effect {
 
 interface OnAttackEffectArgs {
   pokemon: PokemonEntity
-  target: PokemonEntity
+  target: PokemonEntity | null
   board: Board
   physicalDamage: number
   specialDamage: number

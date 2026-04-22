@@ -33,7 +33,6 @@ import {
   UniquePool
 } from "../config"
 import { pickFirstPartners } from "../core/scribbles"
-import GameRoom from "../rooms/game-room"
 import GameState from "../rooms/states/game-state"
 import { IPokemon, IPokemonEntity } from "../types"
 import { Ability } from "../types/enum/Ability"
@@ -368,10 +367,9 @@ export default class Shop {
 
   assignUniquePropositions(
     player: Player,
-    room: GameRoom,
+    state: GameState,
     portalSynergies: Synergy[]
   ) {
-    const state = room.state
     const stageLevel = state.stageLevel
     const typeByStage: { [stage: number]: PlayerChoiceType } = {
       [PortalCarouselStages[0]]: "starter",

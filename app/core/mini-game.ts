@@ -811,8 +811,7 @@ export class MiniGame {
     }
   }
 
-  stop(room: GameRoom) {
-    const state = room.state
+  stop(state: GameState) {
     const players: MapSchema<Player> = state.players
     const encounter = state.townEncounter
     this.bodies.forEach((body, key) => {
@@ -903,7 +902,7 @@ export class MiniGame {
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
         } else {
-          state.shop.assignUniquePropositions(player, room, portalSynergies)
+          state.shop.assignUniquePropositions(player, state, portalSynergies)
         }
       }
 

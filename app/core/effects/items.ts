@@ -931,7 +931,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SCOPE_LENS]: [
     new OnAttackEffect(({ pokemon, target, crit }) => {
-      if (crit) {
+      if (crit && target) {
         const ppStolen = max(target.pp)(10)
         pokemon.addPP(ppStolen, pokemon, 0, false)
         target.addPP(-ppStolen, pokemon, 0, false)
@@ -942,7 +942,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RAZOR_FANG]: [
     new BeforeAttackEffect(({ target, crit }) => {
-      if (crit) {
+      if (crit && target) {
         target.status.triggerArmorReduction(2000, target)
       }
     })
