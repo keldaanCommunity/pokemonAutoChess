@@ -1638,7 +1638,7 @@
 		"X_SCISSOR": "お得 [10,20,40,60,SP] TRUE 2回",
 		"PLASMA_FIST": "お得な情報 [120,SP] 30% ライフスティールの SPECIAL",
 		"SPECTRAL_THIEF": "[50,SP] SPECIALを与えて消えて再び現れ、ターゲットの統計ブーストをすべて盗みます",
-		"GEOMANCY": "攻撃力が[15,SP]、SPE_DEFが[10,SP]、SPEEDが20%増加します",
+		"GEOMANCY": "攻撃力が[15,SP]、SPE_DEFが[10,SP]、SPEEDが15増加します",
 		"DEATH_WING": "[150,SP] SPECIALを与え、対象が受けたダメージの75%を回復",
 		"SLACK_OFF": "すべてのマイナスステータスをクリアし、最大HPの[30,SP]%回復し、術者を3秒間睡眠状態にします",
 		"DARK_VOID": "半径4タイル内のすべての敵ポケモンに[30,SP] SPECIALを与え、[80,LK]%の確率で2秒間SLEEPを引き起こす。",

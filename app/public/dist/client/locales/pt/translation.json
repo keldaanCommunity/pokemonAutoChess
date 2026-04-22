@@ -1881,7 +1881,7 @@
 		"MANTIS_BLADES": "Lança um trio de lâminas sobre o alvo, cada uma infligindo [10,20,40,SP] com um tipo de dano diferente: FÍSICO, SPECIAL e VERDADEIRO",
 		"PLASMA_FIST": "Inflige [120,SP] SPECIAL com 30% de roubo de vida",
 		"SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [50,SP] SPECIAL, roubando todo o boost estatístico do alvo",
-		"GEOMANCY": "Ganhe [15,SP] ATK, [10,SP] SPE_DEF e 20 SPEED",
+		"GEOMANCY": "Ganhe [15,SP] ATK, [10,SP] SPE_DEF e 15 SPEED",
 		"DEATH_WING": "Inflige [150,SP] SPECIAL e cura 75% do dano sofrido pelo alvo",
 		"SLACK_OFF": "Limpe todos os status negativos, cure [30,SP]% do HP máximo e coloque o lançador SLEEP por 3 segundos",
 		"DARK_VOID": "Inflige [30,SP] SPECIAL a todos os Pokémon inimigos em um raio de 4 blocos, com [80,LK]% de chance de causar SLEEP por 2 segundos.",

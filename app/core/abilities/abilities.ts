@@ -5234,7 +5234,7 @@ export class GeomancyStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(15, pokemon, 1, crit)
     pokemon.addSpecialDefense(10, pokemon, 1, crit)
-    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addSpeed(15, pokemon, 0, false)
   }
 }
 

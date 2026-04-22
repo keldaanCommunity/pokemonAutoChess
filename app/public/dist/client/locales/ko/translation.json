@@ -1881,7 +1881,7 @@
 		"MANTIS_BLADES": "대상을 향해 [10,20,40,SP] 의 피해를 각각 PHYSICAL, SPECIAL, TRUE 로 가하는 세개의 날을 휘두른다.",
 		"PLASMA_FIST": "대상에 [120,SP] SPECIAL를 가하며 30% 만큼 흡혈한다.",
 		"SPECTRAL_THIEF": "잠시 사라진 후 재등장하며 대상에 [50,SP] SPECIAL를 가한다. 또한 기술로 인한 능력치 증가량을 훔친다.",
-		"GEOMANCY": "시전자의 [15,SP] ATK, [10,SP] SPE_DEF, SPEED 20가 증가한다.",
+		"GEOMANCY": "시전자의 [15,SP] ATK, [10,SP] SPE_DEF, SPEED 15가 증가한다.",
 		"DEATH_WING": "대상에 [150,SP] SPECIAL를 가한다. 대상이 받은 피해량의 75%만큼 회복한다.",
 		"SLACK_OFF": "시전자의 모든 부정적 상태를 제거되고 최대 HP의 [30,SP]%만큼 회복하지만 3초간 SLEEP상태가 된다.",
 		"DARK_VOID": "4타일 반경 내의 모든 적 포켓몬에게 [30,SP] SPECIAL을 처리하고 [80,LK]% 확률로 2초 동안 SLEEP을 발생시킵니다.",

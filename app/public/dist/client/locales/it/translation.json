@@ -1865,7 +1865,7 @@
 		"MANTIS_BLADES": "Sfodera tre lame, ognuna infligge [10,20,40,SP] con un tipo di danno diverso: PHYSICAL, SPECIAL e TRUE.",
 		"PLASMA_FIST": "Infligge [120,SP] SPECIAL e cura l'utilizzatore del 30% del danno inflitto.",
 		"SPECTRAL_THIEF": "Scompare e riappare infliggendo [50,SP] SPECIAL, rubando tutti i potenziamenti alle statistiche del bersaglio.",
-		"GEOMANCY": "Aumenta l' ATT di [15,SP], la SPE_DEF di [10,SP] e la SPEED del 20.",
+		"GEOMANCY": "Aumenta l' ATT di [15,SP], la SPE_DEF di [10,SP] e la SPEED del 15.",
 		"DEATH_WING": "Infligge [150 SP] SPECIAL e cura il 75% dei danni subiti dal bersaglio",
 		"SLACK_OFF": "Cura l'utilizzatore di tutti gli status negativi, guarisci il [30,SP]% dei HP massimi e subisci lo status SLEEP per 3 secondi.",
 		"DARK_VOID": "Infliggi [30,SP] SPECIAL a tutti i Pokémon nemici in un raggio di 4 tessere, con una probabilità del [80,LK]% di causare SLEEP per 2 secondi.",

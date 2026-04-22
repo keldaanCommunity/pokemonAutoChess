@@ -1915,7 +1915,7 @@
 		"MANTIS_BLADES": "对目标连斩三刀，每刀均造成[10,20,40,SP]点伤害。三刀的伤害类型分别为PHYSICAL，SPECIAL和TRUE。",
 		"PLASMA_FIST": "对目标造成[120,SP]点SPECIAL。使用者自身恢复造成伤害的30%。",
 		"SPECTRAL_THIEF": "从战场上消失，随后再次出现，造成[50,SP]点SPECIAL，并偷取目标的所有属性加成。",
-		"GEOMANCY": "提升[15,SP]点ATK，[10,SP]点SPE_DEF和20点SPEED。",
+		"GEOMANCY": "提升[15,SP]点ATK，[10,SP]点SPE_DEF和15点SPEED。",
 		"DEATH_WING": "对目标造成[150,SP]点SPECIAL。使用者自身恢复造成伤害的75%。",
 		"SLACK_OFF": "清除自身所有负面状态，恢复[30,SP]%的最大HP，并陷入SLEEP 3秒。",
 		"DARK_VOID": "对目标周围4格半径内的所有敌方宝可梦造成[30,SP]点SPECIAL，并有[80,LK]%的概率使他们陷入SLEEP 2秒。",

@@ -18,6 +18,11 @@
 - Increased base cooldown of Rage (TM): 200ms → 1000ms
 - Reduced base cooldown of Bulk Up: 1000ms → 300ms
 
+> Required preemptive nerf due to some interactions with wands that love high speed backline attackers
+
+- Nerf Geomancy (Xerneas): Speed 20 → 15
+
+
 # Changes to Items
 
 # Gameplay

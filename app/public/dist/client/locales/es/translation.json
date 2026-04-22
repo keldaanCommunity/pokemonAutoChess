@@ -1889,7 +1889,7 @@
 		"MANTIS_BLADES": "Desata un trío de espadas sobre el objetivo, cada espada inflige [10,20,40,SP] con un tipo de daño distinto: PHYSICAL, SPECIAL y TRUE.",
 		"PLASMA_FIST": "Inflige [120,SP] de SPECIAL, recupera el 30% del daño infligido",
 		"SPECTRAL_THIEF": "Desaparece y reaparece infligiendo [50,SP] de SPECIAL y roba todos los aumentos de estadísticas del objetivo",
-		"GEOMANCY": "Gana [15,SP] de ATK, [10,SP] de SPE_DEF y 20 de SPEED",
+		"GEOMANCY": "Gana [15,SP] de ATK, [10,SP] de SPE_DEF y 15 de SPEED",
 		"DEATH_WING": "Inflige [150,SP] de SPECIAL y cura el 75 % del daño causado al objetivo",
 		"SLACK_OFF": "Cura todos los estados negativos, [30,SP] % del HP máximo y deja al usuario SLEEP por 3 segundos",
 		"DARK_VOID": "Inflige [30,SP] SPECIAL a todos los Pokémon enemigos en un radio de 4 casillas, con un [80,LK]% de probabilidad de provocar xSLEEP durante 2 segundos.",

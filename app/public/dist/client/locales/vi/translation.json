@@ -1326,7 +1326,7 @@
 		"FORECAST": "Tặng [10,SP] SHIELD cho đồng đội, thêm các chỉ số khác phụ thuộc thời tiết:\n SNOW: nhận thêm [2,SP] DEF / SPE_DEF\n DROUGHT: nhận thêm [4,SP] ATK \n RAIN: nhận thêm [8,SP] PP",
 		"X_SCISSOR": "Gây [10,20,40,60,SP] TRUE 2 lần",
 		"MANTIS_BLADES": "Phóng ra ba lưỡi kiếm vào mục tiêu, mỗi lưỡi kiếm gây ra [10,20,40,SP] một loại sát thương riêng biệt: PHYSICAL, SPECIAL and TRUE",
-		"GEOMANCY": "Tăng [15,SP] ATK, [5,SP] SPE_DEF và 20 SPEED",
+		"GEOMANCY": "Tăng [15,SP] ATK, [5,SP] SPE_DEF và 15 SPEED",
 		"DEATH_WING": "Gây [150,SP] SPECIAL và hồi phục một lượng bằng 75% lượng sát thương lên mục tiêu",
 		"SLACK_OFF": "Giải trừ toàn bộ hiệu ứng xấu, hồi phục [30,SP] % tương đương với chỉ số HP cao nhất và khiến Pokémon thi triển SLEEP trong 3 giây",
 		"DARK_VOID": "Gây [30,SP] SPECIAL cho tất cả Pokémon địch trong bán kính 4 ô, với [80,LK]% cơ hội gây SLEEP trong 2 giây.",
