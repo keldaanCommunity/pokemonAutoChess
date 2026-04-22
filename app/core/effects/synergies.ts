@@ -22,7 +22,6 @@ import { min } from "../../utils/number"
 import { effectInLine } from "../../utils/orientation"
 import { chance } from "../../utils/random"
 import { values } from "../../utils/schemas"
-import { AbilityStrategies, WhirlwindStrategy } from "../abilities/abilities"
 import {
   FlowerMonByPot,
   FlowerPot,
@@ -460,28 +459,28 @@ export function applyWandEffects(
     specialDamageFactor += 0.2
     switch (wand) {
       case Item.CONFUSE_WAND: {
-        if (chance(0.02, pokemon)) {
+        if (chance(0.05, pokemon)) {
           target.status.triggerConfusion(2000, target, pokemon)
           target.addSpecialDefense(-3, pokemon, 0, false)
         }
         break
       }
       case Item.PETRIFY_WAND: {
-        if (chance(0.02, pokemon)) {
+        if (chance(0.05, pokemon)) {
           target.status.triggerLocked(2000, target)
           target.addDefense(-3, pokemon, 0, false)
         }
         break
       }
       case Item.SLOW_WAND: {
-        if (chance(0.02, pokemon)) {
+        if (chance(0.05, pokemon)) {
           target.status.triggerParalysis(2000, target, pokemon)
           target.addSpeed(-10, pokemon, 0, false)
         }
         break
       }
       case Item.SLUMBER_WAND: {
-        if (chance(0.02, pokemon)) {
+        if (chance(0.05, pokemon)) {
           target.status.triggerSleep(2000, target)
           target.addAttack(-3, pokemon, 0, false)
         }
@@ -496,21 +495,23 @@ export function applyWandEffects(
       }
       case Item.SPIRIT_WAND: {
         specialDamageFactor += pokemon.count.ult * 0.05
-        if (chance(0.1, pokemon)) {
+        if (chance(0.2, pokemon)) {
           pokemon.addPP(5, pokemon, 0, false)
         }
         break
       }
       case Item.GUIDING_WAND: {
-        if (chance(0.6, pokemon)) {
+        if (chance(0.5, pokemon)) {
           const lowestHpAdjacentEnemy = board
             .getAdjacentCells(target.positionX, target.positionY)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
             .map((cell) => cell.value as PokemonEntity)
-            .reduce((lowest, current) =>
-              current.hp / current.maxHP < lowest.hp / lowest.maxHP
-                ? current
-                : lowest
+            .reduce(
+              (lowest, current) =>
+                current.hp / current.maxHP < lowest.hp / lowest.maxHP
+                  ? current
+                  : lowest,
+              target
             )
           target = lowestHpAdjacentEnemy || target
           if (lowestHpAdjacentEnemy) {
@@ -551,15 +552,22 @@ export function applyWandEffects(
   for (const wand of wands) {
     switch (wand) {
       case Item.HP_SWAP_WAND: {
-        target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
-        pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+        if (chance(0.2, pokemon)) {
+          target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
+          pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+        }
         break
       }
       case Item.SURROUND_WAND: {
-        if (chance(0.05, pokemon)) {
+        if (chance(0.1, pokemon)) {
           const adjacentEnemies = board
             .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-            .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+            .filter(
+              (cell) =>
+                cell.value &&
+                cell.value.team !== pokemon.team &&
+                cell.value.id !== target.id
+            )
             .map((cell) => cell.value as PokemonEntity)
           pokemon.broadcastAbility({ skill: "FAIRY_CRIT" })
           adjacentEnemies
@@ -599,53 +607,78 @@ export function applyWandEffects(
         break
       }
       case Item.WARP_WAND: {
-        if (chance(0.02, pokemon) && target.hp > 0) {
+        if (chance(0.05, pokemon) && target.hp > 0) {
           const teleportationCell = board.getTeleportationCell(
             target.positionX,
             target.positionY,
             target.team
           )
           if (teleportationCell) {
+            pokemon.broadcastAbility({
+              skill: "WARP_WAND",
+              targetX: target.positionX,
+              targetY: target.positionY
+            })
+            pokemon.broadcastAbility({
+              skill: "WARP_WAND",
+              targetX: target.positionX,
+              targetY: target.positionY
+            })
             target.moveTo(teleportationCell.x, teleportationCell.y, board, true)
           }
         }
         break
       }
       case Item.SWITCHER_WAND: {
-        if (chance(0.02, pokemon) && target.hp > 0) {
+        if (chance(0.05, pokemon) && target.hp > 0) {
           const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
           if (farthestTarget) {
+            pokemon.broadcastAbility({
+              skill: "WARP_WAND",
+              targetX: target.positionX,
+              targetY: target.positionY
+            })
+            pokemon.broadcastAbility({
+              skill: "WARP_WAND",
+              targetX: farthestTarget.positionX,
+              targetY: farthestTarget.positionY
+            })
             target.moveTo(
               farthestTarget.positionX,
               farthestTarget.positionY,
               board,
               true
             )
-            pokemon.broadcastAbility({
-              skill: Ability.TELEPORT,
-              positionX: target.positionX,
-              positionY: target.positionY
-            })
-            pokemon.broadcastAbility({
-              skill: Ability.TELEPORT,
-              positionX: farthestTarget.positionX,
-              positionY: farthestTarget.positionY
-            })
           }
         }
         break
       }
       case Item.WHIRLWIND_WAND: {
-        if (chance(0.02, pokemon)) {
-          const whirlwind = AbilityStrategies[
-            Ability.WHIRLWIND
-          ] as WhirlwindStrategy
-          whirlwind.process(pokemon, board, target, false)
+        if (chance(0.05, pokemon)) {
+          pokemon.broadcastAbility({ skill: "WHIRLWIND_WAND" })
+          effectInLine(board, pokemon, target, (cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              const freeCellInTheBack = board.getSafePlaceAwayFrom(
+                cell.value.positionX,
+                cell.value.positionY,
+                cell.value.team,
+                3
+              )
+              if (freeCellInTheBack) {
+                cell.value.moveTo(
+                  freeCellInTheBack.x,
+                  freeCellInTheBack.y,
+                  board,
+                  true
+                )
+              }
+            }
+          })
         }
         break
       }
       case Item.TUNNEL_WAND: {
-        if (chance(0.1, pokemon)) {
+        if (chance(0.05, pokemon)) {
           pokemon.broadcastAbility({ skill: "FAIRY_TUNNEL" })
           effectInLine(board, pokemon, target, (cell) => {
             if (

@@ -894,14 +894,14 @@ export const CraftableNoStonesOrScarves: Item[] =
   )
 
 export const Wands: Item[] = [
-  Item.CONFUSE_WAND,
-  Item.PETRIFY_WAND,
-  Item.SLOW_WAND,
-  Item.SLUMBER_WAND,
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
   Item.SPIRIT_WAND,
   Item.LONG_WAND,
+  Item.CONFUSE_WAND,
+  Item.PETRIFY_WAND,
+  Item.SLOW_WAND,
+  Item.SLUMBER_WAND,
   Item.GUIDING_WAND,
   Item.SURROUND_WAND,
   Item.POUNCE_WAND,

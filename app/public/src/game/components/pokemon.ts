@@ -125,6 +125,7 @@ export default class PokemonSprite extends DraggableObject {
   inBattle: boolean = false
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
+  isTeleporting: boolean = false
 
   constructor(
     scene: GameScene | DebugScene,

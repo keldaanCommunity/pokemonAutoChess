@@ -825,6 +825,7 @@ export const AbilitiesAnimations: {
     textureKey: "attacks"
   }),
   ["FAIRY_TUNNEL"]: projectile({
+    ability: Ability.PSYCHO_CUT,
     distance: 8,
     duration: 1000,
     oriented: true,
@@ -3034,6 +3035,20 @@ export const AbilitiesAnimations: {
     ability: "INFERNO",
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 2
+  }),
+  ["WARP_WAND"]: onSprite(({ targetSprite, ...args }) => {
+    onTarget({ ability: Ability.FUTURE_SIGHT, scale: 1.5 })(args)
+    if (targetSprite) {
+      targetSprite.isTeleporting = true
+      setTimeout(() => {
+        targetSprite.isTeleporting = false
+      }, 1000)
+    }
+  }),
+  ["WHIRLWIND_WAND"]: projectile({
+    ability: Ability.WHIRLWIND,
+    duration: 1500,
+    distance: 8
   })
 }
 
