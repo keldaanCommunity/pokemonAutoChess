@@ -62,7 +62,11 @@ export function ItemDetailTooltipContent({
 
   return (
     <div className="game-item-detail">
-      <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
+      <img
+        className="game-item-detail-icon"
+        src={`assets/item/${item}.png`}
+        alt={t(`item.${item}`)}
+      />
       <div className="game-item-detail-name">
         {ItemRecipe[item] && (
           <div className="game-item-recipe">
@@ -100,7 +104,7 @@ export function ItemDetailTooltipContent({
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">
           {recipes.map(([result, recipe]) => {
-            const otherComponent = recipe[0] == item ? recipe[1] : recipe[0]
+            const otherComponent = recipe[0] === item ? recipe[1] : recipe[0]
             return (
               <div className="game-item-detail-combination" key={result}>
                 <p>+</p>
