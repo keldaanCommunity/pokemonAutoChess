@@ -1,0 +1,66 @@
+#activity-report {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  height: 100%;
+  padding: 0.25em 0;
+  box-sizing: border-box;
+}
+
+#activity-report header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+#activity-report h2 {
+  margin: 0;
+}
+
+#activity-report .meta {
+  color: var(--color-fg-secondary);
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  font-size: 0.95em;
+}
+
+#activity-report .chart-shell {
+  flex: 1;
+  min-height: 450px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1em;
+}
+
+#activity-report .error {
+  color: #ff8b8b;
+}
+
+.activity-report-tooltip {
+  background: #1e1f29;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 0.5em 0.75em;
+  min-width: 200px;
+}
+
+.activity-report-tooltip h3 {
+  margin: 0 0 0.4em;
+  font-size: 0.95em;
+  color: #eee;
+}
+
+.activity-report-tooltip p {
+  margin: 0.15em 0;
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  #activity-report .chart-shell {
+    min-height: 240px;
+  }
+}

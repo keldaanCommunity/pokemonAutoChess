@@ -1,4 +1,5 @@
 @import "./player-report.css";
+@import "./activity-report.css";
 
 #meta-report {
   height: calc(95vh - 6rem);

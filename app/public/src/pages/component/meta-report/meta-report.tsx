@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Role } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
+import { ActivityReport } from "./activity-report"
 import { ClusterMap } from "./cluster-map"
 import { CompositionReport } from "./composition-report"
 import { DendrogramChart } from "./dendrogram-chart"
@@ -32,8 +33,10 @@ export default function MetaReport() {
           <Tab key="player-report">
             {t("player_report", { defaultValue: "Player Report" })}
           </Tab>
+          <Tab key="activity-report">
+            {t("game_activity", { defaultValue: "Game Activity" })}
+          </Tab>
           {isAdmin && <Tab key="types">{t("synergies")}</Tab>}
-          <MetadataReport />
         </TabList>
 
         <TabPanel key="team-comps-panel">
@@ -57,11 +60,15 @@ export default function MetaReport() {
         <TabPanel>
           <PlayerReport />
         </TabPanel>
+        <TabPanel>
+          <ActivityReport />
+        </TabPanel>
         {isAdmin && (
           <TabPanel>
             <SynergyReport />
           </TabPanel>
         )}
+        <MetadataReport />
       </Tabs>
     </div>
   )

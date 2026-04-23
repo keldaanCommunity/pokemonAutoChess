@@ -1,4 +1,5 @@
 import Dendrogram from "../models/mongo-models/dendrogram"
+import DetailledStatisticV2 from "../models/mongo-models/detailled-statistic-v2"
 import ItemsStatistic from "../models/mongo-models/items-statistic-v2"
 import MetaV2 from "../models/mongo-models/meta-v2"
 import PokemonsStatistics from "../models/mongo-models/pokemons-statistic-v2"
@@ -10,6 +11,10 @@ import { EloRank } from "../types/enum/EloRank"
 import { Synergy } from "../types/enum/Synergy"
 import { ITypeStatistics } from "../types/meta"
 import type { IDendrogram } from "../types/models/dendrogram"
+import type {
+  IGameActivity,
+  IGameActivityDay
+} from "../types/models/game-activity"
 import type { IItemsStatisticV2 } from "../types/models/items-statistic-v2"
 import type { IMetaV2 } from "../types/models/meta-v2"
 import type {
@@ -35,7 +40,8 @@ export async function fetchMetaReports() {
     fetchMetaRegions(),
     fetchMetaV2(),
     fetchDendrogramData(),
-    fetchPlayerRankDistribution()
+    fetchPlayerRankDistribution(),
+    fetchGameActivity()
   ])
   logger.info("Meta reports refreshed")
   return data
@@ -47,6 +53,10 @@ let metaPokemons = new Array<IPokemonsStatisticV2>()
 let metaRegions = new Array<IRegionStatistic>()
 let metaV2 = new Array<IMetaV2>()
 let dendrogram: IDendrogram | null = null
+let gameActivity: IGameActivity = {
+  updatedAt: new Date(0).toISOString(),
+  days: []
+}
 let playerRankDistribution: IPlayerRankDistribution = {
   updatedAt: new Date(0).toISOString(),
   totalPlayers: 0,
@@ -228,6 +238,47 @@ export function getMetaV2() {
 
 export function getPlayerRankDistribution() {
   return playerRankDistribution
+}
+
+export function getGameActivity() {
+  return gameActivity
+}
+
+async function fetchGameActivity() {
+  const DAYS = 30
+  const since = Date.now() - DAYS * 24 * 60 * 60 * 1000
+
+  try {
+    const rows: { _id: string; gameCount: number }[] =
+      await DetailledStatisticV2.aggregate([
+        { $match: { time: { $gte: since } } },
+        {
+          $group: {
+            _id: {
+              $dateToString: { format: "%Y-%m-%d", date: { $toDate: "$time" } }
+            },
+            gameCount: { $sum: 1 }
+          }
+        },
+        { $sort: { _id: 1 } }
+      ]).exec()
+
+    const days: IGameActivityDay[] = rows
+      .map((row) => ({
+        date: row._id,
+        gameCount: row.gameCount
+      }))
+      .slice(1, -1) // Remove first and last day (incomplete data at edges)
+
+    gameActivity = { updatedAt: new Date().toISOString(), days }
+  } catch (error) {
+    logger.error(
+      "Failed to refresh game activity; keeping previous snapshot",
+      error
+    )
+  }
+
+  return gameActivity
 }
 
 async function fetchDendrogramData() {
