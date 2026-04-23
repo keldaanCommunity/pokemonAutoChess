@@ -1,17 +1,13 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
 
-export default function PolicyButton() {
+export default function TermsButton() {
   const { t } = useTranslation()
   return (
-    <a
-      href="/privacy-policy"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a href="/terms-of-service" target="_blank" rel="noopener noreferrer">
       <button type="button" className="bubbly dark">
         <img width={32} height={32} src={`assets/ui/meta.svg`} />
-        {t("policy")}
+        {t("terms_of_service", "Terms of Service")}
       </button>
     </a>
   )

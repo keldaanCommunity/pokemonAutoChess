@@ -1,98 +1,138 @@
 # Privacy Policy
 
-Your privacy is important to us. It is Keldaan's policy to respect your privacy and comply with any applicable law and regulation regarding any personal information we may collect about you, including across our website, https://pokemon-auto-chess.com, and other sites we own and operate.
+Effective date: April 23, 2026
+Last updated: April 23, 2026
 
-This policy is effective as of 5 October 2021 and was last updated on 5 October 2021.
+This Privacy Policy describes how Pokemon Auto Chess ("we", "us", "our") processes information when you use https://pokemon-auto-chess.com and related game services.
 
-# How to request the deletion of your data?
+## Who We Are
 
-You can delete all your data via the in game profile "Account" tab, accessible from the main lobby.
+Service: Pokemon Auto Chess  
+Website: https://pokemon-auto-chess.com  
+Contact: keldaan.ag@gmail.com
 
-# Information We Collect
+Pokemon Auto Chess is an open-source, non-profit fan project: Non profit game. For fans, by fans. All rights to The Pokemon Company.
 
-Information we collect includes both information you knowingly and actively provide us when using or participating in any of our services and promotions, and any information automatically sent by your devices in the course of accessing our products and services.
+## Information We Process
 
-# Log Data
+We process the following categories of data.
 
-When you visit our website, our servers may automatically log the standard data provided by your web browser. It may include your device’s Internet Protocol (IP) address, your browser type and version, the pages you visit, the time and date of your visit, the time spent on each page, other details about your visit, and technical details that occur in conjunction with any errors you may encounter.
+### 1) Authentication and account identifiers
 
-Please be aware that while this information may not be personally identifying by itself, it may be possible to combine it with other data to personally identify individual persons.
+Authentication is handled through Firebase Authentication. Current sign-in methods are:
 
-# Personal Information
+- Google
+- Email/password
+- Twitter/X
 
-We may ask for personal information which may include one or more of the following:
+To operate your account, we process identifiers and profile fields such as user ID, display name, and, when available, email.
 
-Email
+### 2) In-game profile and progression data
 
-# Legitimate Reasons for Processing Your Personal Information
+We store gameplay profile data linked to user ID, including:
 
-We only collect and use your personal information when we have a legitimate reason for doing so. In which instance, we only collect personal information that is reasonably necessary to provide our services to you.
+- language and avatar selection
+- wins, games played, XP/level, ELO and max ELO
+- event points and event finish time
+- titles, role, and ban status
+- Pokemon collection and progression fields (for example owned entries, shards/dust, selected emotion or shiny state, and played counters)
 
-# Collection and Use of Information
+### 3) Game history and statistics
 
-We may collect personal information from you when you do any of the following on our website:
+We store detailed game records for history/profile views, ranking features, and statistics. Records may include player ID, display name, avatar, rank, ELO, game mode, timestamp, Pokemon used, and synergy or region data.
 
-    Use a mobile device or web browser to access our content
-    Contact us via email, social media, or on any similar technologies
-    When you mention us on social media
+### 4) Chat data
 
-We may collect, hold, use, and disclose information for the following purposes, and personal information will not be further processed in a manner that is incompatible with these purposes:
+When chat is used, messages include fields such as message ID, payload, author ID, author name, avatar, and timestamp.
 
-    to enable you to customise or personalise your experience of our website
-    to enable you to access and use our website, associated applications, and associated social media platforms
-    for internal record keeping and administrative purposes
+### 5) Bot builder submissions
 
-Please be aware that we may combine information we collect about you with general information or research data we receive from other trusted sources.
+If you submit a bot build, we store bot fields such as bot ID, author name, avatar, ELO, approval status, and step/board configuration data.
 
-# Security of Your Personal Information
+### 6) Local browser storage
 
-When we collect and process personal information, and while we retain this information, we will protect it within commercially acceptable means to prevent loss and theft, as well as unauthorized access, disclosure, copying, use, or modification.
+The web client uses local storage for client-side features such as preferences, quality-of-life settings, favorites/team-planner data, and reconnection/session-related values.
 
-Although we will do our best to protect the personal information you provide to us, we advise that no method of electronic transmission or storage is 100% secure, and no one can guarantee absolute data security. We will comply with laws applicable to us in respect of any data breach.
+### 7) Technical and security data
 
-You are responsible for selecting any password and its overall security strength, ensuring the security of your own information within the bounds of our services
+We process technical request and service data necessary to operate and protect the service, including authentication checks, moderation actions, error logging, and anti-abuse/security operations.
 
-# How Long We Keep Your Personal Information
+## How We Use Information
 
-We keep your personal information only for as long as we need to. This time period may depend on what we are using your information for, in accordance with this privacy policy. If your personal information is no longer required, we will delete it or make it anonymous by removing all details that identify you.
+We use data to:
 
-However, if necessary, we may retain your personal information for our compliance with a legal, accounting, or reporting obligation or for archiving purposes in the public interest, scientific, or historical research purposes or statistical purposes.
+1. Authenticate users and secure account access.
+2. Provide game functionality, matchmaking/lobbies, and progression features.
+3. Show profile, leaderboard, and history-related features.
+4. Run moderation and trust/safety actions (for example searching chat for moderation, renaming accounts, or applying bans/unbans by authorized roles).
+5. Process and moderate community bot submissions.
+6. Maintain, debug, monitor, and protect service reliability.
+7. Comply with legal obligations and enforce these terms.
 
-# Children’s Privacy
+## Legal Bases (Where Applicable)
 
-We do not aim any of our products or services directly at children under the age of 13, and we do not knowingly collect personal information about children under 13.
+Depending on your location, legal bases may include:
 
-# International Transfers of Personal Information
+1. Performance of a contract (providing the game/service).
+2. Legitimate interests (security, moderation, abuse prevention, and service operation/improvement).
+3. Consent (where required by law).
+4. Legal obligation.
 
-The personal information we collect is stored and/or processed where we or our partners, affiliates, and third-party providers maintain facilities. Please be aware that the locations to which we store, process, or transfer your personal information may not have the same data protection laws as the country in which you initially provided the information. If we transfer your personal information to third parties in other countries: (i) we will perform those transfers in accordance with the requirements of applicable law; and (ii) we will protect the transferred personal information in accordance with this privacy policy.
+## Sharing and Third Parties
 
-# Your Rights and Controlling Your Personal Information
+We do not sell personal information.
 
-You always retain the right to withhold personal information from us, with the understanding that your experience of our website may be affected. We will not discriminate against you for exercising any of your rights over your personal information. If you do provide us with personal information you understand that we will collect, hold, use and disclose it in accordance with this privacy policy. You retain the right to request details of any personal information we hold about you.
+We use third-party providers to operate the service, including:
 
-If we receive personal information about you from a third party, we will protect it as set out in this privacy policy. If you are a third party providing personal information about somebody else, you represent and warrant that you have such person’s consent to provide the personal information to us.
+- Firebase/Google services for authentication and related infrastructure.
+- Hosting/network infrastructure providers.
+- Optional Discord webhooks (if configured by operators) for operational/moderation notifications.
 
-If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time. We will provide you with the ability to unsubscribe from our email-database or opt out of communications. Please be aware we may need to request specific information from you to help us confirm your identity.
+We may also disclose information when required by law or to protect users and the service.
 
-If you believe that any information we hold about you is inaccurate, out of date, incomplete, irrelevant, or misleading, please contact us using the details provided in this privacy policy. We will take reasonable steps to correct any information found to be inaccurate, incomplete, misleading, or out of date.
+## Data Retention
 
-If you believe that we have breached a relevant data protection law and wish to make a complaint, please contact us using the details below and provide us with full details of the alleged breach. We will promptly investigate your complaint and respond to you, in writing, setting out the outcome of our investigation and the steps we will take to deal with your complaint. You also have the right to contact a regulatory body or data protection authority in relation to your complaint.
+Retention depends on data type and operational need. Current implementation examples include:
 
-# Use of Cookies
+- Chat messages are configured with a 7-day TTL in the chat model.
+- Detailed game history records are periodically cleaned up (configured at about 30 days).
 
-We use “cookies” to collect information about you and your activity across our site. A cookie is a small piece of data that our website stores on your computer, and accesses each time you visit, so we can understand how you use our site. This helps us serve you content based on preferences you have specified.
+Other account/profile records are retained while needed to operate the service, enforce rules, resolve disputes, and comply with legal obligations.
 
-# Limits of Our Policy
+## Account Deletion and Effect
 
-Our website may link to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices.
-Changes to This Policy
+The app includes an in-product account deletion action. Under current server logic, this deletes the UserMetadata record and disconnects the session.
 
-At our discretion, we may change our privacy policy to reflect updates to our business processes, current acceptable practices, or legislative or regulatory changes. If we decide to change this privacy policy, we will post the changes here at the same link by which you are accessing this privacy policy.
+Deleting that record does not automatically guarantee immediate deletion of every related record across all systems (for example authentication-provider records or previously created history/chat records), unless removed by separate processes.
 
-If required by law, we will get your permission or give you the opportunity to opt in to or opt out of, as applicable, any new uses of your personal information.
-Contact Us
+For additional deletion requests, contact: keldaan.ag@gmail.com
 
-For any questions or concerns regarding your privacy, you may contact us using the following details:
+## Your Rights
 
-Keldaan
+Depending on your location, you may have rights to request access, correction, deletion, restriction, objection, or portability.
+
+To submit a request, contact: keldaan.ag@gmail.com
+
+## Security
+
+We apply reasonable technical and organizational safeguards. No system can be guaranteed fully secure.
+
+## International Transfers
+
+Your data may be processed outside your country. Where required, we apply appropriate transfer safeguards.
+
+## Children
+
+The service is not intended for children under 13 (or the minimum digital age in your jurisdiction). If you believe a child provided data in violation of this policy, contact us.
+
+## Changes To This Policy
+
+We may update this Privacy Policy. Updates are posted at:
+
+https://pokemon-auto-chess.com/privacy-policy
+
+## Contact
+
+Privacy questions and requests:
+
 keldaan.ag@gmail.com

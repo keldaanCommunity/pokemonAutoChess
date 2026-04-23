@@ -7,6 +7,7 @@ import Login from "./component/auth/login"
 import DiscordButton from "./component/buttons/discord-button"
 import GithubButton from "./component/buttons/github-button"
 import PolicyButton from "./component/buttons/policy-button"
+import TermsButton from "./component/buttons/terms-button"
 import { Modal } from "./component/modal/modal"
 import ServersList from "./component/servers/servers-list"
 import Wiki from "./component/wiki/wiki"
@@ -41,6 +42,7 @@ export default function Auth() {
         <DiscordButton url={discordUrl} />
         <GithubButton />
         <PolicyButton />
+        <TermsButton />
         <button className="bubbly blue" onClick={() => setModal("wiki")}>
           <img width={32} height={32} src={`assets/ui/wiki.svg`} />
           {t("wiki_label")}

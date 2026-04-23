@@ -147,14 +147,16 @@ export function MainSidebar(props: MainSidebarProps) {
 
         <NavLink
           svg="meta"
-          onClick={() =>
-            window.open(
-              "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
-              "_blank"
-            )
-          }
+          onClick={() => window.open("/privacy-policy", "_blank")}
         >
           {t("policy")}
+        </NavLink>
+
+        <NavLink
+          svg="meta"
+          onClick={() => window.open("/terms-of-service", "_blank")}
+        >
+          {t("terms_of_service", "Terms of Service")}
         </NavLink>
 
         <NavLink
