@@ -3165,7 +3165,7 @@
 		"BLAST_WAND": "FAIRY的攻击额外造成20%的SPECIAL。若本次攻击暴击，改为造成40%的SPECIAL。",
 		"HP_SWAP_WAND": "FAIRY的攻击额外造成20%的SPECIAL。魔杖造成的SPECIAL有[20,LK]%的概率改为偷取目标的最大HP，赋予给攻击者。",
 		"SPIRIT_WAND": "FAIRY的攻击额外造成20%的SPECIAL。本轮对战中攻击者每释放过一次招式，倍率的百分点增加5。此外，还有[20,LK]%的概率额外恢复5点PP。",
-		"LONG_WAND": "FAIRY的攻击额外造成20%的SPECIAL。我方FAIRY宝可梦提升1点RANGE和[1,LK]%乘以目标与攻击者之间距离的CRIT_CHANCE。",
+		"LONG_WAND": "FAIRY的攻击额外造成20%的SPECIAL。我方FAIRY宝可梦提升1点RANGE，同时提升CRIT_CHANCE，百分点相当于[1,LK]乘以目标与攻击者之间的距离。",
 		"GUIDING_WAND": "FAIRY的攻击额外造成20%的SPECIAL。魔杖造成的SPECIAL有[50,LK]%的概率改为攻击RANGE之内HP百分比最低的敌方宝可梦。",
 		"SURROUND_WAND": "FAIRY的攻击额外造成20%的SPECIAL。每有一个相邻敌方宝可梦，倍率的百分点增加10。魔杖造成的SPECIAL有[10,LK]%的概率同时额外攻击所有ADJACENT敌方宝可梦。",
 		"POUNCE_WAND": "FAIRY的攻击额外造成20%的SPECIAL。受到近战攻击时，我方FAIRY宝可梦有[10,LK]%的概率进行反击，对ADJACENT敌方宝可梦造成30%的所受伤害。若受到暴击，必定触发此反击。",
