@@ -13,7 +13,9 @@ import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
 import { UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
+import { marked } from "marked"
 import { connect } from "mongoose"
+import { readFile } from "node:fs/promises"
 import path from "path"
 import pkg from "../package.json"
 import {
@@ -83,6 +85,65 @@ const setCacheControl = (res: any, maxAge: number = 86400) => {
     res.set("Cache-Control", `max-age=${maxAge}`)
   } else {
     res.set("Cache-Control", "no-cache")
+  }
+}
+
+const legalPageStyle = `
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #f7f7f7;
+        color: #1b1b1b;
+      }
+      main {
+        box-sizing: border-box;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        background: #fff;
+        min-height: 100vh;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.25;
+      }
+      p,
+      li {
+        line-height: 1.6;
+      }
+`
+
+async function renderLegalPage(
+  res: express.Response,
+  markdownFile: string,
+  pageTitle: string,
+  unavailableMessage: string
+) {
+  try {
+    const markdown = await readFile(path.resolve(process.cwd(), markdownFile), "utf8")
+    const html = await marked.parse(markdown)
+
+    res.type("html").send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${pageTitle} | Pokemon Auto Chess</title>
+    <style>${legalPageStyle}</style>
+  </head>
+  <body>
+    <main>
+      ${html}
+    </main>
+  </body>
+</html>`)
+  } catch (error) {
+    logger.error(`Failed to load ${markdownFile}`, error)
+    res.status(500).send(unavailableMessage)
   }
 }
 
@@ -256,6 +317,32 @@ export const server = defineServer({
 
     app.get("/translations", (req, res) => {
       res.sendFile(viewsSrc)
+    })
+
+    app.get("/privacy-policy", async (req, res) => {
+      await renderLegalPage(
+        res,
+        "policy.md",
+        "Privacy Policy",
+        "Privacy policy is temporarily unavailable"
+      )
+    })
+
+    app.get("/policy", (req, res) => {
+      res.redirect(301, "/privacy-policy")
+    })
+
+    app.get("/terms-of-service", async (req, res) => {
+      await renderLegalPage(
+        res,
+        "terms-of-service.md",
+        "Terms of Service",
+        "Terms of service are temporarily unavailable"
+      )
+    })
+
+    app.get("/terms", (req, res) => {
+      res.redirect(301, "/terms-of-service")
     })
 
     app.get("/pokemons", (req, res) => {
