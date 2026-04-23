@@ -43,3 +43,4 @@
 
 - Added Twitch account verification and linking in Profile > Account, with secure OAuth flow.
 - Added a Twitch stream panel in the main lobby to surface live PAC creators, including stream title, viewers, uptime, language/tags, and direct channel links.
+- Added a new Player Report tab in Meta Report with a player rank distribution chart by Elo buckets.

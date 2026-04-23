@@ -29,6 +29,7 @@ import {
 } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
 import { AppDispatch } from "../stores"
+import { resetBoosters } from "../stores/BoostersStore"
 import {
   addRoom,
   addTournament,
@@ -45,7 +46,6 @@ import {
   setSearchedUser,
   updateTournament
 } from "../stores/LobbyStore"
-import { resetBoosters } from "../stores/BoostersStore"
 import {
   setConnectionStatus,
   setErrorAlertMessage,

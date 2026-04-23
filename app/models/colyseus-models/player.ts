@@ -482,9 +482,11 @@ export default class Player extends Schema implements IPlayer {
     const previousNbNormalScarves = getSynergyStep(
       previousSynergies,
       Synergy.NORMAL
-    )    
-    const previousScarves = this.getScarvesItemsWithNbScarves(previousNbNormalScarves)
-    const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)    
+    )
+    const previousScarves = this.getScarvesItemsWithNbScarves(
+      previousNbNormalScarves
+    )
+    const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
     const newScarves = this.getScarvesItemsWithNbScarves(newNbNormalScarves)
 
     if (newScarves.length > previousScarves.length) {

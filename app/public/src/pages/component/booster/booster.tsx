@@ -12,7 +12,9 @@ export default function Booster() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
-  const boosterContent = useAppSelector((state) => state.boosters.boosterContent)
+  const boosterContent = useAppSelector(
+    (state) => state.boosters.boosterContent
+  )
   const numberOfBooster = user ? user.booster : 0
 
   const [flippedStates, setFlippedStates] = useState<boolean[]>([])

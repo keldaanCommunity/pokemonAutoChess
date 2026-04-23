@@ -135,9 +135,9 @@ export default class Simulation extends Schema implements ISimulation {
       Set<EffectEnum>,
       Set<EffectEnum>
     ][] = [
-        [this.bluePlayer, this.blueEffects, this.redEffects],
-        [this.redPlayer, this.redEffects, this.blueEffects]
-      ]
+      [this.bluePlayer, this.blueEffects, this.redEffects],
+      [this.redPlayer, this.redEffects, this.blueEffects]
+    ]
     for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
@@ -1577,11 +1577,12 @@ export default class Simulation extends Schema implements ISimulation {
       const isGhostOpponent =
         playerId === this.bluePlayerId && this.isGhostBattle
       const isPvE = opponentPlayerId === "pve"
-      const battleResult = this.winnerId === playerId
-        ? BattleResult.WIN
-        : this.winnerId === opponentPlayerId
-          ? BattleResult.DEFEAT
-          : BattleResult.DRAW
+      const battleResult =
+        this.winnerId === playerId
+          ? BattleResult.WIN
+          : this.winnerId === opponentPlayerId
+            ? BattleResult.DEFEAT
+            : BattleResult.DRAW
 
       // Add battle result
       if (!isGhostPlayer) {
