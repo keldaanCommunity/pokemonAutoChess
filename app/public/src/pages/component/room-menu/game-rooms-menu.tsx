@@ -11,6 +11,7 @@ import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { client, joinGame, rooms } from "../../../network"
 import { resetLobby } from "../../../stores/LobbyStore"
+import { resetBoosters } from "../../../stores/BoostersStore"
 import GameRoomItem from "./game-room-item"
 
 export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
@@ -93,6 +94,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
       })
       joinGame(game, MAX_LOADING_TIME / 1000)
       dispatch(resetLobby())
+      dispatch(resetBoosters())
       navigate("/game")
     }
   }, 1000)
