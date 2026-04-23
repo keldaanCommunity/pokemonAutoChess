@@ -11,6 +11,7 @@
 - Increased base cooldown of Rage (TM): 200ms → 1000ms
 - Reduced base cooldown of Bulk Up: 1000ms → 300ms
 - Buff Litten: HP 90/170/280 → 95/180/300 ; Attack 8/14/24 → 8/15/30 ; Spe def: 6/10/14 → 8/12/16 ; Dark Lariat base number of hits: 3 → 4
+- Nerf Chingling line: Def: 7/10 → 5/8, Spe def: 8/12 → 6/9
 
 # Bugfixes
 
