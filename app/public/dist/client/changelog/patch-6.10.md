@@ -30,6 +30,8 @@
 
 # Gameplay
 
+- Expeditions mission selection has been tweaked based on player feedback
+
 # UI
 
 - New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 8 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
