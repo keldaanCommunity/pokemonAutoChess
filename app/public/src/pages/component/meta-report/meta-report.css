@@ -1,3 +1,5 @@
+@import "./player-report.css";
+
 #meta-report {
   height: calc(95vh - 6rem);
   color: var(--color-fg-primary);

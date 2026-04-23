@@ -13,11 +13,7 @@ import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import {
-  buyBooster,
-  buyEmotion,
-  changeSelectedEmotion
-} from "../../../network"
+import { buyBooster, buyEmotion, changeSelectedEmotion } from "../../../network"
 import { changeAvatar } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { LocalStoreKeys, useLocalStore } from "../../utils/store"
@@ -39,10 +35,14 @@ export default function PokemonEmotionsModal(props: {
   )
   const user = useAppSelector((state) => state.network.profile)
   const [requestError, setRequestError] = useState<string | null>(null)
-  const onError = useCallback((error: unknown) => {
-    const message = error instanceof Error ? error.message : t("errors.unknown_error")
-    setRequestError(message)
-  }, [t])
+  const onError = useCallback(
+    (error: unknown) => {
+      const message =
+        error instanceof Error ? error.message : t("errors.unknown_error")
+      setRequestError(message)
+    },
+    [t]
+  )
 
   const [selectedVariant, setSelectedVariant] = useState<Pkm>(props.pokemon)
   useEffect(() => {
@@ -101,11 +101,11 @@ export default function PokemonEmotionsModal(props: {
   const isCurrentAvatar =
     user &&
     getAvatarSrc(user?.avatar) ===
-    getPortraitSrc(
-      index,
-      item.selectedShiny,
-      item.selectedEmotion ?? Emotion.NORMAL
-    )
+      getPortraitSrc(
+        index,
+        item.selectedShiny,
+        item.selectedEmotion ?? Emotion.NORMAL
+      )
 
   const [favorites, updateFavorites] = useLocalStore<Pkm[]>(
     LocalStoreKeys.FAVORITES,
@@ -186,7 +186,9 @@ export default function PokemonEmotionsModal(props: {
                       index={index}
                       shiny={false}
                       unlocked={item && item.emotions.includes(e)}
-                      selected={item.selectedEmotion === e && !item.selectedShiny}
+                      selected={
+                        item.selectedEmotion === e && !item.selectedShiny
+                      }
                       path={index.replace("-", "/")}
                       emotion={e}
                       dust={shards}
@@ -237,7 +239,8 @@ export default function PokemonEmotionsModal(props: {
             <button
               className="bubbly blue"
               disabled={
-                (item.emotions.length === 0 && item.shinyEmotions.length === 0) ||
+                (item.emotions.length === 0 &&
+                  item.shinyEmotions.length === 0) ||
                 isCurrentAvatar
               }
               onClick={() =>

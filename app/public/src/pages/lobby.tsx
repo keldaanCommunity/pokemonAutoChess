@@ -9,8 +9,8 @@ import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { client, leaveRoom, rooms } from "../network"
-import { resetLobby } from "../stores/LobbyStore"
 import { resetBoosters } from "../stores/BoostersStore"
+import { resetLobby } from "../stores/LobbyStore"
 import {
   clearNotification,
   logOut,

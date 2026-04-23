@@ -248,10 +248,12 @@ export default class GameScene extends Scene {
         this.shopIndexHovered = null
       } else if (
         this.pokemonHovered &&
-        this.pokemonHovered.getBounds().contains(
-          this.input.activePointer.worldX,
-          this.input.activePointer.worldY
-        )
+        this.pokemonHovered
+          .getBounds()
+          .contains(
+            this.input.activePointer.worldX,
+            this.input.activePointer.worldY
+          )
       ) {
         this.sellPokemon(this.pokemonHovered)
         this.pokemonHovered = null
@@ -647,10 +649,8 @@ export default class GameScene extends Scene {
           // Item -> POKEMON(board zone) = EQUIP
           else if (
             dropZone.name === "board-zone" &&
-            (
-              this.room?.state.phase == GamePhaseState.PICK ||
-              dropZone.getData("y") == 0
-            )
+            (this.room?.state.phase == GamePhaseState.PICK ||
+              dropZone.getData("y") == 0)
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,

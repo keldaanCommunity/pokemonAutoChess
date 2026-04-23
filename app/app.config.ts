@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises"
 import { monitor } from "@colyseus/monitor"
 import {
   defineRoom,
@@ -15,7 +16,6 @@ import { UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
 import { marked } from "marked"
 import { connect } from "mongoose"
-import { readFile } from "node:fs/promises"
 import path from "path"
 import pkg from "../package.json"
 import {
@@ -37,6 +37,7 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import {
   addBotToDatabase,
   approveBot,
@@ -48,7 +49,6 @@ import {
   buyEmotionForUser,
   changeSelectedEmotionForUser
 } from "./services/collection"
-import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
@@ -57,7 +57,8 @@ import {
   getMetaItems,
   getMetaPokemons,
   getMetaRegions,
-  getMetaV2
+  getMetaV2,
+  getPlayerRankDistribution
 } from "./services/meta"
 import {
   addTwitchBlacklistEntry,
@@ -124,7 +125,10 @@ async function renderLegalPage(
   unavailableMessage: string
 ) {
   try {
-    const markdown = await readFile(path.resolve(process.cwd(), markdownFile), "utf8")
+    const markdown = await readFile(
+      path.resolve(process.cwd(), markdownFile),
+      "utf8"
+    )
     const html = await marked.parse(markdown)
 
     res.type("html").send(`<!DOCTYPE html>
@@ -397,6 +401,12 @@ export const server = defineServer({
       // Set Cache-Control header for 24 hours (86400 seconds)
       setCacheControl(res, 86400)
       res.send(getMetaV2())
+    })
+
+    app.get("/meta/player-rank-distribution", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getPlayerRankDistribution())
     })
 
     app.get("/dendrogram", async (req, res) => {
@@ -803,7 +813,12 @@ export const server = defineServer({
           return
         }
 
-        const result = await buyEmotionForUser(userAuth.uid, index, emotion, shiny)
+        const result = await buyEmotionForUser(
+          userAuth.uid,
+          index,
+          emotion,
+          shiny
+        )
         if (!result) {
           res.status(409).json({ error: "Not enough dust or invalid state" })
           return

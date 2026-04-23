@@ -7,6 +7,7 @@ import { CompositionReport } from "./composition-report"
 import { DendrogramChart } from "./dendrogram-chart"
 import { ItemReport } from "./item-report"
 import MetadataReport from "./metadata-report"
+import { PlayerReport } from "./player-report"
 import { PokemonReport } from "./pokemon-report"
 import { RegionReport } from "./region-report"
 import { SynergyReport } from "./synergy-report"
@@ -28,6 +29,9 @@ export default function MetaReport() {
           <Tab key="pokemons">{t("pokemon_report")}</Tab>
           <Tab key="items">{t("item_report")}</Tab>
           <Tab key="regions">{t("region_report")}</Tab>
+          <Tab key="player-report">
+            {t("player_report", { defaultValue: "Player Report" })}
+          </Tab>
           {isAdmin && <Tab key="types">{t("synergies")}</Tab>}
           <MetadataReport />
         </TabList>
@@ -49,6 +53,9 @@ export default function MetaReport() {
         </TabPanel>
         <TabPanel>
           <RegionReport />
+        </TabPanel>
+        <TabPanel>
+          <PlayerReport />
         </TabPanel>
         {isAdmin && (
           <TabPanel>

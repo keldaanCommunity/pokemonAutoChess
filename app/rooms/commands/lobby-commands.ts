@@ -12,12 +12,7 @@ import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
-import {
-  Emotion,
-  Role,
-  Title,
-  Transfer
-} from "../../types"
+import { Emotion, Role, Title, Transfer } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"

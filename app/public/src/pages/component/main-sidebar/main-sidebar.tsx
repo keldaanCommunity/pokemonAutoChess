@@ -194,17 +194,18 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {(page === "main_lobby" || page === "preparation") && profileLevel >= GADGETS.bag.levelRequired && (
-          <NavLink
-            location="booster"
-            svg="booster"
-            className="blue"
-            handleClick={changeModal}
-            shimmer={numberOfBooster > 0}
-          >
-            {t("boosters")}
-          </NavLink>
-        )}
+        {(page === "main_lobby" || page === "preparation") &&
+          profileLevel >= GADGETS.bag.levelRequired && (
+            <NavLink
+              location="booster"
+              svg="booster"
+              className="blue"
+              handleClick={changeModal}
+              shimmer={numberOfBooster > 0}
+            >
+              {t("boosters")}
+            </NavLink>
+          )}
         <NavLink
           location="wiki"
           svg="wiki"
@@ -248,14 +249,14 @@ export function MainSidebar(props: MainSidebarProps) {
         {((!GADGETS.synergy_wheel.disabled &&
           profileLevel >= GADGETS.synergy_wheel.levelRequired) ||
           profile?.role === Role.ADMIN) && (
-            <NavLink
-              svg="synergy-wheel"
-              location="synergy-wheel"
-              handleClick={changeModal}
-            >
-              {t("gadget.synergy_wheel")}
-            </NavLink>
-          )}
+          <NavLink
+            svg="synergy-wheel"
+            location="synergy-wheel"
+            handleClick={changeModal}
+          >
+            {t("gadget.synergy_wheel")}
+          </NavLink>
+        )}
 
         {page !== "game" &&
           ((!GADGETS.bot_builder.disabled &&
@@ -278,14 +279,14 @@ export function MainSidebar(props: MainSidebarProps) {
         {((!GADGETS.tier_list_maker.disabled &&
           profileLevel >= GADGETS.tier_list_maker.levelRequired) ||
           profile?.role === Role.ADMIN) && (
-            <NavLink
-              svg="tier-list"
-              location="tier-list"
-              handleClick={changeModal}
-            >
-              {t("gadget.tier_list_maker")}
-            </NavLink>
-          )}
+          <NavLink
+            svg="tier-list"
+            location="tier-list"
+            handleClick={changeModal}
+          >
+            {t("gadget.tier_list_maker")}
+          </NavLink>
+        )}
 
         {page !== "game" &&
           (profile?.role === Role.MODERATOR ||
