@@ -1,0 +1,68 @@
+.game-choice {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.game-choice .active {
+  cursor: var(--cursor-hover);
+  pointer-events: initial;
+}
+
+.game-choice > .my-container > h2,
+.game-choice > .my-container > p {
+  color: var(--color-fg-primary);
+  text-align: center;
+}
+
+.game-choice-pokemons-list,
+.game-choice-items-list {
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+  padding: 10px;
+  color: var(--color-fg-primary);
+}
+
+.game-choice .show-hide-action {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
+.game-choice-pokemons-list > .my-box,
+.game-choice-items-list > .my-box {
+  padding: 5px;
+}
+
+.game-choice-pokemons-list > .my-box:hover,
+.game-choice-items-list > .my-box:hover {
+  cursor: var(--cursor-hover);
+  background-color: var(--color-bg-accent);
+}
+
+.game-choice-items-list > .my-box {
+  width: 320px;
+  max-width: 20vw;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: start;
+  text-align: center;
+}
+
+.game-choice-pokemons-list .game-pokemon-portrait {
+  margin: 0 auto;
+}
+
+.game-choice .choice-additional-item {
+  color: var(--color-fg-primary);
+  text-align: center;
+}
+
+.game-choice .choice-additional-item p {
+  font-size: 80%;
+  max-width: 240px;
+}

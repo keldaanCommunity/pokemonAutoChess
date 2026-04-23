@@ -42,7 +42,7 @@ import { count, isIn } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, max, min, roundToNDigits } from "../utils/number"
+import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { values } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -400,9 +400,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       ) {
         this.status.triggerBurn(3000, this, attacker)
         this.addSpecialDefense(-1, attacker, 0, false)
-      }
-      if (attacker?.passive === Passive.BERSERK) {
-        attacker.addAbilityPower(5, attacker, 0, false, false)
       }
 
       const damageResult = this.state.handleDamage({
@@ -1204,71 +1201,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         isRetaliation
       })
     })
-  }
-
-  onCriticalAttack({
-    target,
-    board,
-    damage
-  }: {
-    target: PokemonEntity
-    board: Board
-    damage: number
-  }) {
-    // proc fairy splash damage for both the attacker and the target
-    if (
-      target.fairySplashCooldown === 0 &&
-      target.hasSynergyEffect(Synergy.FAIRY)
-    ) {
-      let shockDamageFactor = 0.3
-      if (target.effects.has(EffectEnum.AROMATIC_MIST)) {
-        shockDamageFactor *= 1.2
-      } else if (target.effects.has(EffectEnum.FAIRY_WIND)) {
-        shockDamageFactor *= 1.4
-      } else if (target.effects.has(EffectEnum.STRANGE_STEAM)) {
-        shockDamageFactor *= 1.6
-      } else if (target.effects.has(EffectEnum.MOON_FORCE)) {
-        shockDamageFactor *= 1.8
-      }
-
-      const shockDamage = shockDamageFactor * damage
-      target.count.fairyCritCount++
-      target.fairySplashCooldown = 250
-
-      const distance = distanceC(
-        this.positionX,
-        this.positionY,
-        target.positionX,
-        target.positionY
-      )
-
-      if (distance <= 1 && this.items.has(Item.PROTECTIVE_PADS) === false) {
-        // melee range
-        this.handleDamage({
-          damage: shockDamage,
-          board,
-          attackType: AttackType.SPECIAL,
-          attacker: target,
-          isRetaliation: true,
-          shouldTargetGainMana: true
-        })
-      }
-    }
-
-    if (this.items.has(Item.SCOPE_LENS)) {
-      const ppStolen = max(target.pp)(10)
-      this.addPP(ppStolen, this, 0, false)
-      target.addPP(-ppStolen, this, 0, false)
-      target.count.manaBurnCount++
-    }
-
-    if (this.items.has(Item.RAZOR_FANG)) {
-      target.status.triggerArmorReduction(2000, target)
-    }
-
-    if (target.items.has(Item.BABIRI_BERRY)) {
-      target.eatBerry(Item.BABIRI_BERRY)
-    }
   }
 
   // called after killing an opponent (does not proc if resurrection)
