@@ -53,6 +53,7 @@ import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
   getDendrogram,
+  getGameActivity,
   getMetadata,
   getMetaItems,
   getMetaPokemons,
@@ -407,6 +408,12 @@ export const server = defineServer({
       // Set Cache-Control header for 24 hours (86400 seconds)
       setCacheControl(res, 86400)
       res.send(getPlayerRankDistribution())
+    })
+
+    app.get("/meta/game-activity", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getGameActivity())
     })
 
     app.get("/dendrogram", async (req, res) => {
