@@ -14,6 +14,7 @@
 - Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
 - Increased base cooldown of Rage (TM): 200ms → 1000ms
 - Reduced base cooldown of Bulk Up: 1000ms → 300ms
+- Nerf Chingling line: Def: 7/10 → 5/8, Spe def: 8/12 → 6/9
 
 # Changes to Items
 
