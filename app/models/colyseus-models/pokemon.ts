@@ -7470,7 +7470,7 @@ export class Drampa extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.DRAGON_PULSE
-  passive = Passive.BERSERK
+  passive = Passive.DRAMPA
 }
 
 export class PrimalGroudon extends Pokemon {

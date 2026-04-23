@@ -45,14 +45,16 @@ export default function SynergyComponent(props: {
     if (!scene) return
     const outline = scene.plugins.get("rexOutline") as OutlinePlugin
     if (!outline) return // outline plugin doesnt work with canvas renderer
-    spectatedPlayer?.board.forEach((p) => {
-      if (p.types.has(type)) {
-        const sprite = scene.board?.pokemons.get(p.id)?.sprite
-        if (sprite) {
-          outline.remove(sprite)
+    if (spectatedPlayer?.board) {
+      spectatedPlayer.board.forEach((p) => {
+        if (p.types.has(type)) {
+          const sprite = scene.board?.pokemons.get(p.id)?.sprite
+          if (sprite) {
+            outline.remove(sprite)
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   const tooltip = (

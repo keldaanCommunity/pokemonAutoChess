@@ -43,6 +43,7 @@ import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
+import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
@@ -1195,7 +1196,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const itemsSet = Tools.filter(
           (item) => player.artificialItems.includes(item) === false
         )
-        resetArraySchema(player.itemsProposition, pickNRandomIn(itemsSet, 3))
+        player.choices.push(
+          new PlayerChoice({
+            type: "item",
+            items: pickNRandomIn(itemsSet, 3)
+          })
+        )
       })
     }
 
@@ -1211,6 +1217,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
           const items = pickNRandomIn(ItemComponentsNoScarf, 3)
+          const pokemons: Pkm[] = []
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {
@@ -1223,13 +1230,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   )
               )
               if (regionalVariants.length > 0) {
-                player.pokemonsProposition.push(pickRandomIn(regionalVariants))
+                pokemons.push(pickRandomIn(regionalVariants))
               } else {
-                player.pokemonsProposition.push(p)
+                pokemons.push(p)
               }
-              player.itemsProposition.push(items[i])
             }
           }
+          player.choices.push(
+            new PlayerChoice({
+              type: "addPick",
+              pokemons,
+              items
+            })
+          )
           remainingAddPicks--
         }
       })
@@ -1568,24 +1581,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopPickingPhase() {
     this.state.players.forEach((player) => {
-      const pokemonsProposition = values(player.pokemonsProposition)
-
-      if (pokemonsProposition.length > 0) {
-        // auto pick if not chosen
-        this.room.pickPokemonProposition(
-          player.id,
-          pickRandomIn(pokemonsProposition),
-          true
+      // auto pick choices if player did not choose in time
+      player.choices
+        .filter(
+          (choice) =>
+            choice.type === "addPick" ||
+            choice.type === "item" ||
+            choice.type === "unique"
         )
-        player.pokemonsProposition.clear()
-      }
-
-      const itemsProposition = values(player.itemsProposition)
-      if (player.itemsProposition.length > 0) {
-        // auto pick if not chosen
-        this.room.pickItemProposition(player.id, pickRandomIn(itemsProposition))
-        player.itemsProposition.clear()
-      }
+        .forEach((choice) => {
+          const randomPick = randomBetween(
+            0,
+            choice.pokemons
+              ? choice.pokemons.length - 1
+              : choice.items.length - 1
+          )
+          this.room.pickChoice(player.id, choice.id, randomPick, true)
+        })
     })
   }
 
@@ -1625,9 +1637,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
 
             if (player.pveRewardsPropositions.length > 0) {
-              resetArraySchema(
-                player.itemsProposition,
-                player.pveRewardsPropositions
+              player.choices.push(
+                new PlayerChoice({
+                  type: "item",
+                  items: values(player.pveRewardsPropositions)
+                })
               )
               player.pveRewardsPropositions.clear()
             }

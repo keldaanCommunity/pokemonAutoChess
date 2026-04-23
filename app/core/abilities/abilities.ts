@@ -5234,7 +5234,7 @@ export class GeomancyStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(15, pokemon, 1, crit)
     pokemon.addSpecialDefense(10, pokemon, 1, crit)
-    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addSpeed(15, pokemon, 0, false)
   }
 }
 
@@ -12081,6 +12081,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+
+          pokemon.addAbilityPower(5, pokemon, 0, false, false)
           board
             .getAdjacentCells(target.positionX, target.positionY, false)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
@@ -12099,6 +12101,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
                   pokemon,
                   crit
                 )
+                pokemon.addAbilityPower(5, pokemon, 0, false, false)
+
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (pokemon && cell.value) {
@@ -12123,6 +12127,7 @@ export class DragonPulseStrategy extends AbilityStrategy {
                             pokemon,
                             crit
                           )
+                          pokemon.addAbilityPower(5, pokemon, 0, false, false)
                         })
                     }
                   }, 400)

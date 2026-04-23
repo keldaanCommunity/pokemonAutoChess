@@ -3,6 +3,7 @@ import {
   AdditionalPicksStages,
   BOARD_HEIGHT,
   BOARD_WIDTH,
+  FAIRY_WANDS_BY_SYNERGY_LEVEL,
   RegionDetails,
   SynergyTriggers
 } from "../../config"
@@ -37,6 +38,7 @@ import {
   TMsGold,
   TMsSilver,
   ToolsBuried,
+  Wands,
   WeatherRocks
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
@@ -44,7 +46,6 @@ import {
   Pkm,
   PkmFamily,
   PkmIndex,
-  type PkmProposition,
   PkmRegionalBaseVariants,
   PkmRegionalVariants
 } from "../../types/enum/Pokemon"
@@ -74,6 +75,7 @@ import {
 import ExperienceManager from "./experience-manager"
 import { GameStatsSchema } from "./game-stats"
 import HistoryItem from "./history-item"
+import { PlayerChoice } from "./player-choice"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
@@ -104,6 +106,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
   @type(["string"]) scarvesItems = new ArraySchema<Item>()
+  @type(["string"]) fairyWands = new ArraySchema<Item>()
   @type("uint8") rank: number
   @type("uint16") elo: number
   @type("uint16") games: number // number of games played on this account
@@ -114,9 +117,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") emotesUnlocked = ""
   @type("string") title: Title | ""
   @type("string") role: Role
-  @view() @type(["string"]) itemsProposition = new ArraySchema<Item>()
-  @view() @type(["string"]) pokemonsProposition =
-    new ArraySchema<PkmProposition>()
+  @type([PlayerChoice]) choices = new ArraySchema<PlayerChoice>()
   @type(["string"]) pveRewards = new ArraySchema<Item>()
   @type(["string"]) pveRewardsPropositions = new ArraySchema<Item>()
   @type("float32") loadingProgress: number = 0
@@ -382,6 +383,13 @@ export default class Player extends Schema implements IPlayer {
       this.updateChefsHats()
     }
 
+    if (
+      previousSynergies.get(Synergy.FAIRY) !==
+      updatedSynergies.get(Synergy.FAIRY)
+    ) {
+      this.updateFairyWands(previousSynergies, updatedSynergies)
+    }
+
     this.effects.update(this.synergies, this.board)
 
     if (
@@ -606,6 +614,46 @@ export default class Player extends Schema implements IPlayer {
         }
       }
     } while (newNbHats !== currentNbHats)
+  }
+
+  updateFairyWands(
+    previousSynergies: Map<Synergy, number>,
+    updatedSynergies: Map<Synergy, number>
+  ) {
+    const previousFairyLevel = getSynergyStep(previousSynergies, Synergy.FAIRY)
+    const newFairyLevel = getSynergyStep(updatedSynergies, Synergy.FAIRY)
+    const nbWandsByLevel = [0, 1, 2, 3, 4]
+    const previousNbWands = nbWandsByLevel[previousFairyLevel] ?? 0
+    const newNbWands = nbWandsByLevel[newFairyLevel] ?? 0
+    const currentNbWands = this.items.filter((item) => isIn(Wands, item)).length
+
+    if (currentNbWands < newNbWands) {
+      // some wands are gained
+      const gainedWands = this.fairyWands.slice(previousNbWands, newNbWands)
+      if (
+        gainedWands.length < newNbWands - currentNbWands &&
+        newFairyLevel - 1 in FAIRY_WANDS_BY_SYNERGY_LEVEL &&
+        this.choices.filter((c) => c.type === "wand").length === 0
+      ) {
+        // player has to choose between wands
+        this.choices.push(
+          new PlayerChoice({
+            type: "wand",
+            items: pickNRandomIn(
+              FAIRY_WANDS_BY_SYNERGY_LEVEL[newFairyLevel - 1],
+              3
+            )
+          })
+        )
+      }
+      this.items.push(...gainedWands)
+    } else if (newNbWands < previousNbWands) {
+      // some wands are lost, we need to remove them from the inventory
+      const lostWands = this.fairyWands.slice(newNbWands, previousNbWands)
+      lostWands.forEach((wand) => {
+        removeInArray(this.items, wand)
+      })
+    }
   }
 
   updateRegionalPool(
