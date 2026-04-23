@@ -37,6 +37,7 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import {
   addBotToDatabase,
   approveBot,
@@ -48,7 +49,6 @@ import {
   buyEmotionForUser,
   changeSelectedEmotionForUser
 } from "./services/collection"
-import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
@@ -68,6 +68,11 @@ import {
   startTwitchAccountVerification,
   unlinkTwitchAccount
 } from "./services/twitch"
+import {
+  completeYouTubeAccountVerification,
+  startYouTubeAccountVerification,
+  unlinkYouTubeAccount
+} from "./services/youtube"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
@@ -537,6 +542,72 @@ export const server = defineServer({
       }
     })
 
+    app.post("/youtube/verify/start", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        const payload = await startYouTubeAccountVerification(userAuth.uid)
+        res.status(200).json(payload)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        logger.error("Error starting YouTube verification", { error: message })
+        if (
+          message.includes("not configured") ||
+          message.includes("REDIRECT") ||
+          message.includes("STATE_SECRET")
+        ) {
+          res.status(503).json({ error: message })
+          return
+        }
+        res.status(400).json({ error: message })
+      }
+    })
+
+    app.get("/auth/youtube/callback", async (req, res) => {
+      const state = req.query.state?.toString()
+      const code = req.query.code?.toString()
+      const successRedirect =
+        process.env.YOUTUBE_VERIFY_SUCCESS_REDIRECT || "/auth"
+      const errorRedirect = process.env.YOUTUBE_VERIFY_ERROR_REDIRECT || "/auth"
+
+      if (!state || !code) {
+        return res.redirect(`${errorRedirect}?youtubeVerify=missing_params`)
+      }
+
+      try {
+        await completeYouTubeAccountVerification(code, state)
+        return res.redirect(`${successRedirect}?youtubeVerify=success`)
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? encodeURIComponent(error.message)
+            : "verification_failed"
+        logger.error("Error completing YouTube verification", {
+          error: message
+        })
+        return res.redirect(`${errorRedirect}?youtubeVerify=${message}`)
+      }
+    })
+
+    app.post("/youtube/verify/unlink", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        await unlinkYouTubeAccount(userAuth.uid)
+        res.status(200).send()
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        if (message === "User not found") {
+          res.status(404).json({ error: message })
+          return
+        }
+        logger.error("Error unlinking YouTube verification", { error: message })
+        res.status(500).json({ error: "Error unlinking YouTube account" })
+      }
+    })
+
     app.get("/game-history/:playerUid", async (req, res) => {
       if (!isDevelopment) {
         res.set("Cache-Control", "no-cache")
@@ -803,7 +874,12 @@ export const server = defineServer({
           return
         }
 
-        const result = await buyEmotionForUser(userAuth.uid, index, emotion, shiny)
+        const result = await buyEmotionForUser(
+          userAuth.uid,
+          index,
+          emotion,
+          shiny
+        )
         if (!result) {
           res.status(409).json({ error: "Not enough dust or invalid state" })
           return

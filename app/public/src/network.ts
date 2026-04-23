@@ -8,11 +8,11 @@ import GameState from "../../rooms/states/game-state"
 import LobbyState from "../../rooms/states/lobby-state"
 import PreparationState from "../../rooms/states/preparation-state"
 import { Emotion, Role, Title, Transfer } from "../../types"
+import type { Booster } from "../../types/Booster"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank.js"
 import { BotDifficulty } from "../../types/enum/Game.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
-import type { Booster } from "../../types/Booster"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
 import { IBot } from "./models/bot-v2"
@@ -65,6 +65,11 @@ export type TwitchVerificationStartResponse = {
   expiresAt: string
 }
 
+export type YouTubeVerificationStartResponse = {
+  authorizeUrl: string
+  expiresAt: string
+}
+
 export async function startTwitchVerification(): Promise<TwitchVerificationStartResponse> {
   const token = await firebase.auth().currentUser?.getIdToken()
   const res = await fetch("/twitch/verify/start", {
@@ -85,6 +90,38 @@ export async function startTwitchVerification(): Promise<TwitchVerificationStart
 export async function unlinkTwitchVerification(): Promise<void> {
   const token = await firebase.auth().currentUser?.getIdToken()
   const res = await fetch("/twitch/verify/unlink", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
+export async function startYouTubeVerification(): Promise<YouTubeVerificationStartResponse> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/youtube/verify/start", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  return res.json()
+}
+
+export async function unlinkYouTubeVerification(): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/youtube/verify/unlink", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`

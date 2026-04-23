@@ -10,11 +10,19 @@ export function InlineAvatar(props: {
   role?: Role
   twitchLogin?: string
   twitchDisplayName?: string
+  youtubeChannelId?: string
+  youtubeHandle?: string
+  youtubeChannelTitle?: string
 }) {
   const { t } = useTranslation()
   const twitchUrl = props.twitchLogin
     ? `https://www.twitch.tv/${props.twitchLogin}`
     : null
+  const youtubeUrl = props.youtubeHandle
+    ? `https://www.youtube.com/${props.youtubeHandle}`
+    : props.youtubeChannelId
+      ? `https://www.youtube.com/channel/${props.youtubeChannelId}`
+      : null
   return (
     <div
       className="inline-avatar"
@@ -47,6 +55,24 @@ export function InlineAvatar(props: {
         >
           <img
             src="/assets/ui/twitch.png"
+            width={16}
+            height={16}
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
+      )}
+      {youtubeUrl && (
+        <a
+          className="twitch-badge-link"
+          href={youtubeUrl}
+          target="_blank"
+          rel="noreferrer"
+          title={`Watch ${props.youtubeChannelTitle ?? props.name} on YouTube`}
+          aria-label={`Watch ${props.youtubeChannelTitle ?? props.name} on YouTube`}
+        >
+          <img
+            src="/assets/ui/youtube.png"
             width={16}
             height={16}
             alt=""

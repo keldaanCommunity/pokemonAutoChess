@@ -17,6 +17,11 @@ export default function LeaderboardItem(props: {
   const twitchUrl = player.twitchLogin
     ? `https://www.twitch.tv/${player.twitchLogin}`
     : null
+  const youtubeUrl = player.youtubeHandle
+    ? `https://www.youtube.com/${player.youtubeHandle}`
+    : player.youtubeChannelId
+      ? `https://www.youtube.com/channel/${player.youtubeChannelId}`
+      : null
 
   return (
     <div
@@ -78,6 +83,33 @@ export default function LeaderboardItem(props: {
               >
                 <img
                   src="/assets/ui/twitch.png"
+                  width={16}
+                  height={16}
+                  alt=""
+                  aria-hidden="true"
+                />
+              </a>
+            )}
+            {youtubeUrl && (
+              <a
+                className="twitch-badge-link"
+                href={youtubeUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(event) => {
+                  event.stopPropagation()
+                }}
+                title={`Watch ${player.youtubeChannelTitle ?? player.name} on YouTube`}
+                aria-label={`Watch ${player.youtubeChannelTitle ?? player.name} on YouTube`}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "var(--cursor-hover)"
+                }}
+              >
+                <img
+                  src="/assets/ui/youtube.png"
                   width={16}
                   height={16}
                   alt=""

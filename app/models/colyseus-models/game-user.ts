@@ -14,6 +14,9 @@ export interface IGameUser {
   anonymous: boolean
   twitchLogin: string
   twitchDisplayName: string
+  youtubeChannelId: string
+  youtubeHandle: string
+  youtubeChannelTitle: string
 }
 export class GameUser extends Schema implements IGameUser {
   @type("string") uid: string
@@ -28,6 +31,9 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") anonymous: boolean
   @type("string") twitchLogin: string
   @type("string") twitchDisplayName: string
+  @type("string") youtubeChannelId: string
+  @type("string") youtubeHandle: string
+  @type("string") youtubeChannelTitle: string
 
   constructor(
     uid: string,
@@ -41,7 +47,10 @@ export class GameUser extends Schema implements IGameUser {
     role: Role,
     anonymous: boolean,
     twitchLogin = "",
-    twitchDisplayName = ""
+    twitchDisplayName = "",
+    youtubeChannelId = "",
+    youtubeHandle = "",
+    youtubeChannelTitle = ""
   ) {
     super()
     this.uid = uid
@@ -56,5 +65,8 @@ export class GameUser extends Schema implements IGameUser {
     this.anonymous = anonymous
     this.twitchLogin = twitchLogin
     this.twitchDisplayName = twitchDisplayName
+    this.youtubeChannelId = youtubeChannelId
+    this.youtubeHandle = youtubeHandle
+    this.youtubeChannelTitle = youtubeChannelTitle
   }
 }
