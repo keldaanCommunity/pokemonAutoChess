@@ -152,14 +152,16 @@ export function MainSidebar(props: MainSidebarProps) {
 
         <NavLink
           svg="meta"
-          onClick={() =>
-            window.open(
-              "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
-              "_blank"
-            )
-          }
+          onClick={() => window.open("/privacy-policy", "_blank")}
         >
           {t("policy")}
+        </NavLink>
+
+        <NavLink
+          svg="meta"
+          onClick={() => window.open("/terms-of-service", "_blank")}
+        >
+          {t("terms_of_service", "Terms of Service")}
         </NavLink>
 
         <NavLink
@@ -192,17 +194,18 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page === "main_lobby" && profileLevel >= GADGETS.bag.levelRequired && (
-          <NavLink
-            location="booster"
-            svg="booster"
-            className="blue"
-            handleClick={changeModal}
-            shimmer={numberOfBooster > 0}
-          >
-            {t("boosters")}
-          </NavLink>
-        )}
+        {(page === "main_lobby" || page === "preparation") &&
+          profileLevel >= GADGETS.bag.levelRequired && (
+            <NavLink
+              location="booster"
+              svg="booster"
+              className="blue"
+              handleClick={changeModal}
+              shimmer={numberOfBooster > 0}
+            >
+              {t("boosters")}
+            </NavLink>
+          )}
         <NavLink
           location="wiki"
           svg="wiki"

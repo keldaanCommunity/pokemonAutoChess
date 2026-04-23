@@ -3706,7 +3706,7 @@ export enum PkmDuo {
 
 export type PkmProposition = Pkm | PkmDuo
 
-export const PkmDuos = {
+export const PkmDuos: Record<PkmDuo, Pkm[]> = {
   [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
   [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT],

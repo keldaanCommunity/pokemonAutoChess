@@ -20,7 +20,7 @@ export default function PokemonEmotion(props: {
 }) {
   const { t } = useTranslation()
   const lastBoostersOpened = useAppSelector(
-    (state) => state.lobby.lastBoostersOpened
+    (state) => state.boosters.lastBoostersOpened
   )
   const cost = getEmotionCost(props.emotion, props.shiny)
   const canUnlock = !props.unlocked && cost <= props.dust

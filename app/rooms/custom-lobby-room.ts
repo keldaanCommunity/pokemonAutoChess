@@ -26,11 +26,8 @@ import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,
-  BuyBoosterCommand,
-  BuyEmotionCommand,
   ChangeAvatarCommand,
   ChangeNameCommand,
-  ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
@@ -43,7 +40,6 @@ import {
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
-  OpenBoosterCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -303,10 +299,6 @@ export default class CustomLobbyRoom extends Room {
       }
     )
 
-    this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
-      this.dispatcher.dispatch(new OpenBoosterCommand(), { client })
-    })
-
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       this.dispatcher.dispatch(new ChangeNameCommand(), {
         client,
@@ -317,54 +309,6 @@ export default class CustomLobbyRoom extends Room {
     this.onMessage(Transfer.SET_TITLE, (client, title: Title | "") => {
       this.dispatcher.dispatch(new ChangeTitleCommand(), { client, title })
     })
-
-    this.onMessage(
-      Transfer.CHANGE_SELECTED_EMOTION,
-      (
-        client,
-        {
-          index,
-          emotion,
-          shiny
-        }: { index: string; emotion: Emotion | null; shiny: boolean }
-      ) => {
-        this.dispatcher.dispatch(new ChangeSelectedEmotionCommand(), {
-          client,
-          index,
-          emotion,
-          shiny
-        })
-      }
-    )
-
-    this.onMessage(
-      Transfer.BUY_EMOTION,
-      (
-        client,
-        {
-          index,
-          emotion,
-          shiny
-        }: { index: string; emotion: Emotion; shiny: boolean }
-      ) => {
-        this.dispatcher.dispatch(new BuyEmotionCommand(), {
-          client,
-          index,
-          emotion,
-          shiny
-        })
-      }
-    )
-
-    this.onMessage(
-      Transfer.BUY_BOOSTER,
-      (client, message: { index: string }) => {
-        this.dispatcher.dispatch(new BuyBoosterCommand(), {
-          client,
-          index: message.index
-        })
-      }
-    )
 
     this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
       this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })

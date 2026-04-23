@@ -306,7 +306,23 @@ export enum Item {
   NULLIFY_BANDANNA = "NULLIFY_BANDANNA",
   TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
   TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
-  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY"
+  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY",
+  CONFUSE_WAND = "CONFUSE_WAND",
+  PETRIFY_WAND = "PETRIFY_WAND",
+  SLOW_WAND = "SLOW_WAND",
+  SLUMBER_WAND = "SLUMBER_WAND",
+  BLAST_WAND = "BLAST_WAND",
+  HP_SWAP_WAND = "HP_SWAP_WAND",
+  SPIRIT_WAND = "SPIRIT_WAND",
+  LONG_WAND = "LONG_WAND",
+  GUIDING_WAND = "GUIDING_WAND",
+  SURROUND_WAND = "SURROUND_WAND",
+  POUNCE_WAND = "POUNCE_WAND",
+  TWO_EDGED_WAND = "TWO_EDGED_WAND",
+  WARP_WAND = "WARP_WAND",
+  SWITCHER_WAND = "SWITCHER_WAND",
+  WHIRLWIND_WAND = "WHIRLWIND_WAND",
+  TUNNEL_WAND = "TUNNEL_WAND"
 }
 
 export const MemoryDiscs = [
@@ -877,6 +893,25 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
+export const Wands: Item[] = [
+  Item.BLAST_WAND,
+  Item.HP_SWAP_WAND,
+  Item.SPIRIT_WAND,
+  Item.LONG_WAND,
+  Item.CONFUSE_WAND,
+  Item.PETRIFY_WAND,
+  Item.SLOW_WAND,
+  Item.SLUMBER_WAND,
+  Item.GUIDING_WAND,
+  Item.SURROUND_WAND,
+  Item.POUNCE_WAND,
+  Item.TWO_EDGED_WAND,
+  Item.WARP_WAND,
+  Item.SWITCHER_WAND,
+  Item.WHIRLWIND_WAND,
+  Item.TUNNEL_WAND
+]
+
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
   Item.WELLSPRING_MASK,
@@ -1062,6 +1097,7 @@ export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
+  ...Wands,
   ...TMs,
   ...Flavors,
   ...Dishes,

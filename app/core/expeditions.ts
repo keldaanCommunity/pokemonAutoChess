@@ -101,7 +101,6 @@ export function getExpeditionLabel(expedition: Expedition): string {
     })
   }
 
-
   return t(
     `expeditions.${expedition.type}_DESCRIPTION`,
     getExpeditionData(expedition)

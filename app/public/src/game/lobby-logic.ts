@@ -10,7 +10,6 @@ import {
 import LobbyState from "../../../rooms/states/lobby-state"
 import PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
-import type { Booster } from "../../../types/Booster"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
@@ -30,6 +29,7 @@ import {
 } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
 import { AppDispatch } from "../stores"
+import { resetBoosters } from "../stores/BoostersStore"
 import {
   addRoom,
   addTournament,
@@ -42,7 +42,6 @@ import {
   removeTournament,
   removeTournamentBracket,
   resetLobby,
-  setBoosterContent,
   setCcu,
   setSearchedUser,
   updateTournament
@@ -119,6 +118,7 @@ export async function joinLobbyRoom(
                 dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
               }
               dispatch(resetLobby())
+              dispatch(resetBoosters())
               navigate("/")
             }
           })
@@ -270,13 +270,6 @@ export async function joinLobbyRoom(
             dispatch(setSearchedUser(user))
           )
 
-          room.onMessage(
-            Transfer.BOOSTER_CONTENT,
-            (boosterContent: Booster) => {
-              dispatch(setBoosterContent(boosterContent))
-            }
-          )
-
           joinLobby(room) // lobby room is now fully initialized and accessible
           resolve(room)
         } catch (error) {
@@ -320,6 +313,7 @@ export async function joinExistingPreparationRoom(
       joinPreparation(room, 30)
       leaveRoom("lobby")
       dispatch(resetLobby())
+      dispatch(resetBoosters())
       navigate("/preparation")
     }
   } catch (error: any) {
