@@ -285,7 +285,7 @@ export function PokemonCollectionList(props: {
     (state) => state.network.profile?.pokemonCollection
   )
   const lastBoostersOpened = useAppSelector(
-    (state) => state.lobby.lastBoostersOpened
+    (state) => state.boosters.lastBoostersOpened
   )
   const [favorites] = useLocalStore<Pkm[]>(
     LocalStoreKeys.FAVORITES,

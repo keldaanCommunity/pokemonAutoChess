@@ -475,8 +475,8 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
             y: pokemon.positionY + y,
             value:
               board.cells[
-              board.columns * (pokemon.positionY + y) +
-              (pokemon.positionX + x)
+                board.columns * (pokemon.positionY + y) +
+                  (pokemon.positionX + x)
               ]
           })
         }
@@ -1340,9 +1340,9 @@ export const PassiveEffects: Partial<
       if (attacker.items.has(Item.CHEF_HAT)) {
         const isDoubled = attacker.player
           ? attacker.player.synergies.hasSynergyTriggerOrMore(
-            Synergy.GOURMET,
-            2
-          )
+              Synergy.GOURMET,
+              2
+            )
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)

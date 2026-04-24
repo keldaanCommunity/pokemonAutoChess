@@ -9,6 +9,7 @@ import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { client, leaveRoom, rooms } from "../network"
+import { resetBoosters } from "../stores/BoostersStore"
 import { resetLobby } from "../stores/LobbyStore"
 import {
   clearNotification,
@@ -52,6 +53,7 @@ export default function Lobby() {
     leaveRoom("lobby")
     await firebase.auth().signOut()
     dispatch(resetLobby())
+    dispatch(resetBoosters())
     dispatch(logOut())
     navigate("/")
   }, [dispatch])
@@ -76,6 +78,7 @@ export default function Lobby() {
       )
       leaveRoom("lobby", true)
       dispatch(resetLobby())
+      dispatch(resetBoosters())
       navigate("/game")
     }
   }, 1000)

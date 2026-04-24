@@ -3556,7 +3556,7 @@ export class Florges extends Pokemon {
 }
 
 export class Chikorita extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.BAYLEEF
@@ -3571,7 +3571,7 @@ export class Chikorita extends Pokemon {
 }
 
 export class Bayleef extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.MEGANIUM
@@ -3586,7 +3586,7 @@ export class Bayleef extends Pokemon {
 }
 
 export class Meganium extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 220
@@ -4421,7 +4421,7 @@ export class Blastoise extends Pokemon {
 }
 
 export class Bellsprout extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WEEPINBELL
@@ -4436,7 +4436,7 @@ export class Bellsprout extends Pokemon {
 }
 
 export class Weepinbell extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
@@ -4451,7 +4451,7 @@ export class Weepinbell extends Pokemon {
 }
 
 export class Victreebel extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 200
@@ -4993,12 +4993,12 @@ export class Pidgeot extends Pokemon {
 }
 
 export class Hoppip extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.SKIPLOOM
   hp = 50
-  atk = 4
+  atk = 5
   speed = 60
   def = 2
   speDef = 2
@@ -5008,12 +5008,12 @@ export class Hoppip extends Pokemon {
 }
 
 export class Skiploom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.JUMPLUFF
   hp = 100
-  atk = 8
+  atk = 10
   speed = 60
   def = 3
   speDef = 4
@@ -5023,11 +5023,11 @@ export class Skiploom extends Pokemon {
 }
 
 export class Jumpluff extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.FLORA])
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 150
-  atk = 12
+  atk = 15
   speed = 60
   def = 4
   speDef = 6
@@ -7470,7 +7470,7 @@ export class Drampa extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.DRAGON_PULSE
-  passive = Passive.BERSERK
+  passive = Passive.DRAMPA
 }
 
 export class PrimalGroudon extends Pokemon {
@@ -7536,7 +7536,7 @@ export class MegaRayquaza extends Pokemon {
 }
 
 export class Oddish extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.GLOOM
@@ -7551,7 +7551,7 @@ export class Oddish extends Pokemon {
 }
 
 export class Gloom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VILEPLUME
@@ -7566,10 +7566,10 @@ export class Gloom extends Pokemon {
 }
 
 export class Vileplume extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON, Synergy.GRASS])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 230
+  hp = 250
   atk = 24
   speed = 41
   def = 8
@@ -7580,10 +7580,10 @@ export class Vileplume extends Pokemon {
 }
 
 export class Bellossom extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.SOUND])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND])
   rarity = Rarity.SPECIAL
   stars = 4
-  hp = 250
+  hp = 300
   atk = 30
   speed = 41
   def = 10
@@ -11871,8 +11871,8 @@ export class Chingling extends Pokemon {
   hp = 150
   atk = 10
   speed = 46
-  def = 7
-  speDef = 8
+  def = 5
+  speDef = 6
   maxPP = 80
   range = 3
   skill = Ability.ECHO
@@ -11886,8 +11886,8 @@ export class Chimecho extends Pokemon {
   hp = 200
   atk = 15
   speed = 46
-  def = 10
-  speDef = 12
+  def = 8
+  speDef = 9
   maxPP = 80
   range = 3
   skill = Ability.ECHO
@@ -17118,36 +17118,36 @@ const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
 
 const pillarEvolve =
   (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-    (params: {
-      pokemonEvolved: Pokemon
-      pokemonsBeforeEvolution: Pokemon[]
-      player: Player
-    }) => {
-      const pkmOnBoard = values(params.player.board).filter(
-        (p) =>
-          p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-      )
-      const pillars = values(params.player.board).filter(
-        (p) => p.name === pillarToRemove
-      )
-      for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-        params.player.board.delete(pillars[i].id)
-      }
-      const coords =
-        pillars.length > 0
-          ? [pillars[0].positionX, pillars[0].positionY]
-          : getFirstAvailablePositionOnBoard(params.player.board, 1)
-      if (coords && params.pokemonEvolved.positionY > 0) {
-        const pillar = PokemonFactory.createPokemonFromName(
-          pillarEvolution,
-          params.player
-        )
-        pillar.positionX = coords[0]
-        pillar.positionY = coords[1]
-        params.player.board.set(pillar.id, pillar)
-      }
-      updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  (params: {
+    pokemonEvolved: Pokemon
+    pokemonsBeforeEvolution: Pokemon[]
+    player: Player
+  }) => {
+    const pkmOnBoard = values(params.player.board).filter(
+      (p) =>
+        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
+    )
+    const pillars = values(params.player.board).filter(
+      (p) => p.name === pillarToRemove
+    )
+    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
+      params.player.board.delete(pillars[i].id)
     }
+    const coords =
+      pillars.length > 0
+        ? [pillars[0].positionX, pillars[0].positionY]
+        : getFirstAvailablePositionOnBoard(params.player.board, 1)
+    if (coords && params.pokemonEvolved.positionY > 0) {
+      const pillar = PokemonFactory.createPokemonFromName(
+        pillarEvolution,
+        params.player
+      )
+      pillar.positionX = coords[0]
+      pillar.positionY = coords[1]
+      params.player.board.set(pillar.id, pillar)
+    }
+    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
+  }
 
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])

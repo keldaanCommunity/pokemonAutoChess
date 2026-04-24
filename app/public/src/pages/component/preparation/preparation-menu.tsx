@@ -86,8 +86,7 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length, allUsersReady])
 
   const humans = users.filter((u) => !u.isBot)
-  const isEligibleForELO =
-    gameMode === GameMode.CLASSIC || humans.length >= 2
+  const isEligibleForELO = gameMode === GameMode.CLASSIC || humans.length >= 2
   const averageElo =
     humans.length > 0
       ? Math.round(humans.reduce((acc, u) => acc + u.elo, 0) / humans.length)
@@ -99,7 +98,10 @@ export default function PreparationMenu() {
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       const randomBytes = new Uint8Array(4)
       crypto.getRandomValues(randomBytes)
-      const newPassword = Array.from(randomBytes, (b) => chars[b % chars.length]).join("")
+      const newPassword = Array.from(
+        randomBytes,
+        (b) => chars[b % chars.length]
+      ).join("")
       changeRoomPassword(newPassword)
     } else {
       changeRoomPassword(null)

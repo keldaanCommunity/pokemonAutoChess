@@ -61,28 +61,26 @@ export default function SynergyDetailComponent(props: {
     .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
 
   const additionals = keepFirstOfFamily(
-    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].additionalPokemons.filter(
+    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+      props.type
+    ].additionalPokemons.filter(
       (p) =>
         additionalPokemons.includes(baseVariant(PkmFamily[p])) ||
         specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
     )
-  )
-    .map((p) => getPokemonData(p as Pkm))
+  ).map((p) => getPokemonData(p as Pkm))
 
   const uniques = keepFirstOfFamily(
     PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].uniquePokemons
-  )
-    .map((p) => getPokemonData(p as Pkm))
+  ).map((p) => getPokemonData(p as Pkm))
 
   const legendaries = keepFirstOfFamily(
     PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].legendaryPokemons
-  )
-    .map((p) => getPokemonData(p as Pkm))
+  ).map((p) => getPokemonData(p as Pkm))
 
   const specials = keepFirstOfFamily(
     PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].specialPokemons
-  )
-    .map((p) => getPokemonData(p as Pkm))
+  ).map((p) => getPokemonData(p as Pkm))
 
   let additionalInfo = ""
 
@@ -135,6 +133,12 @@ export default function SynergyDetailComponent(props: {
       default:
         break
     }
+  }
+
+  if (props.type === Synergy.FAIRY && spectatedPlayer) {
+    additionalInfo = t("synergy_description.FAIRY_WANDS", {
+      wands: spectatedPlayer.fairyWands.join(" ")
+    })
   }
 
   return (

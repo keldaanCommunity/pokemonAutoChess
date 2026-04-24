@@ -230,6 +230,16 @@ interface OnAttackEffectArgs {
   hasAttackKilled?: boolean
 }
 
+export class BeforeAttackEffect extends Effect {
+  override apply(args: OnAttackEffectArgs) {}
+  constructor(
+    effect?: (args: OnAttackEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class OnAttackEffect extends Effect {
   override apply(args: OnAttackEffectArgs) {}
   constructor(

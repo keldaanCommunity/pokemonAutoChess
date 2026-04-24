@@ -71,6 +71,7 @@ import {
   OnFieldDeathEffect,
   onFlowerMonDeath,
   overgrowEffect,
+  pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
 } from "./effects/synergies"
@@ -134,9 +135,9 @@ export default class Simulation extends Schema implements ISimulation {
       Set<EffectEnum>,
       Set<EffectEnum>
     ][] = [
-        [this.bluePlayer, this.blueEffects, this.redEffects],
-        [this.redPlayer, this.redEffects, this.blueEffects]
-      ]
+      [this.bluePlayer, this.blueEffects, this.redEffects],
+      [this.redPlayer, this.redEffects, this.blueEffects]
+    ]
     for (const [player, teamEffects, opponentEffects] of playerEffects) {
       if (player) {
         player.board.forEach((pokemon, id) => {
@@ -1050,6 +1051,15 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
+          if (pokemon.player?.items.includes(Item.LONG_WAND)) {
+            pokemon.range += 1
+          }
+          if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
+            pokemon.effectsSet.add(pounceWandEffect)
+          }
+          if (effect === EffectEnum.MOON_FORCE) {
+            pokemon.addLuck(20, pokemon, 0, false)
+          }
         }
         break
 
@@ -1567,11 +1577,12 @@ export default class Simulation extends Schema implements ISimulation {
       const isGhostOpponent =
         playerId === this.bluePlayerId && this.isGhostBattle
       const isPvE = opponentPlayerId === "pve"
-      const battleResult = this.winnerId === playerId
-        ? BattleResult.WIN
-        : this.winnerId === opponentPlayerId
-          ? BattleResult.DEFEAT
-          : BattleResult.DRAW
+      const battleResult =
+        this.winnerId === playerId
+          ? BattleResult.WIN
+          : this.winnerId === opponentPlayerId
+            ? BattleResult.DEFEAT
+            : BattleResult.DRAW
 
       // Add battle result
       if (!isGhostPlayer) {

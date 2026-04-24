@@ -22,6 +22,7 @@ import { GameEvent } from "../types/events"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 import { notificationsService } from "./notifications"
+import { refreshSpriteGapData } from "./sprite-gap-scanner"
 
 export function initCronJobs() {
   logger.debug("init cron jobs")
@@ -60,6 +61,12 @@ export function initCronJobs() {
     cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
     timeZone: "UTC",
     onTick: () => resetEventScores(),
+    start: true
+  })
+  CronJob.from({
+    cronTime: "0 9 * * *", // every day at 9:00 AM UTC
+    timeZone: "UTC",
+    onTick: () => refreshSpriteGapData(),
     start: true
   })
 }

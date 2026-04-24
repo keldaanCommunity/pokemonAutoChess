@@ -84,25 +84,6 @@ export const networkSlice = createSlice({
         )
       rooms.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
     },
-    changeSelectedEmotion: (
-      state,
-      action: PayloadAction<{
-        index: string
-        emotion: Emotion | null
-        shiny: boolean
-      }>
-    ) => {
-      if (state.profile) {
-        const pokemonCollectionItem = state.profile.pokemonCollection.get(
-          action.payload.index
-        )
-        if (pokemonCollectionItem) {
-          pokemonCollectionItem.selectedEmotion = action.payload.emotion
-          pokemonCollectionItem.selectedShiny = action.payload.shiny
-        }
-      }
-      rooms.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION, action.payload)
-    },
     setTitle: (state, action: PayloadAction<Title | "">) => {
       if (state.profile) state.profile.title = action.payload
       rooms.lobby?.send(Transfer.SET_TITLE, action.payload)
@@ -139,7 +120,6 @@ export const {
   clearNotification,
   changeName,
   changeAvatar,
-  changeSelectedEmotion,
   setTitle,
   selectLanguage,
   setConnectionStatus,

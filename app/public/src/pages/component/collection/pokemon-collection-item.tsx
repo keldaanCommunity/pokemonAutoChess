@@ -26,7 +26,7 @@ export default function PokemonCollectionItem(props: {
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
   const lastBoostersOpened = useAppSelector(
-    (state) => state.lobby.lastBoostersOpened
+    (state) => state.boosters.lastBoostersOpened
   )
   const [favorites] = useLocalStore<Pkm[]>(
     LocalStoreKeys.FAVORITES,
