@@ -1,0 +1,165 @@
+.sprite-gap-scanner {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.sprite-gap-scanner .loading,
+.sprite-gap-scanner .error {
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.sprite-gap-scanner .loading {
+  background: rgba(100, 150, 255, 0.1);
+  color: #6496ff;
+}
+
+.sprite-gap-scanner .error {
+  background: rgba(255, 100, 100, 0.1);
+  color: #ff6464;
+}
+
+/* Refresh Info */
+.sprite-gap-scanner .refresh-info {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.6;
+  padding: 8px 0;
+}
+
+.sprite-gap-scanner .criteria-info {
+  font-size: 14px;
+  opacity: 0.85;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.sprite-gap-scanner .criteria-info strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.sprite-gap-scanner .criteria-info p {
+  margin: 0 0 4px 0;
+  line-height: 1.45;
+}
+
+.sprite-gap-scanner .criteria-info p:last-child {
+  margin-bottom: 0;
+}
+
+/* Content */
+.sprite-gap-scanner .content {
+  flex: 1;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+.sprite-gap-scanner .entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sprite-gap-scanner .entry {
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid rgba(100, 150, 255, 0.3);
+  transition: all 0.2s;
+}
+
+.sprite-gap-scanner .entry:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-left-color: rgba(100, 150, 255, 0.6);
+}
+
+.sprite-gap-scanner .entry-name-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sprite-gap-scanner .entry-name-link:hover {
+  text-decoration: underline;
+}
+
+.sprite-gap-scanner .entry-name-link:focus-visible {
+  outline: 1px solid rgba(100, 150, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.sprite-gap-scanner .entry.sprite-only-entry {
+  border-left-color: rgba(255, 150, 100, 0.5);
+}
+
+.sprite-gap-scanner .entry.sprite-only-entry:hover {
+  border-left-color: rgba(255, 150, 100, 0.8);
+}
+
+.sprite-gap-scanner .entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.sprite-gap-scanner .entry-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sprite-gap-scanner .entry-info strong {
+  font-family: monospace;
+  font-size: 12px;
+  color: #6496ff;
+  white-space: nowrap;
+}
+
+.sprite-gap-scanner .pokemon-name {
+  font-size: 13px;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sprite-gap-scanner .empty-state {
+  padding: 32px 16px;
+  text-align: center;
+  opacity: 0.6;
+}
+
+/* Scrollbar styling */
+.sprite-gap-scanner::-webkit-scrollbar,
+.sprite-gap-scanner .content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sprite-gap-scanner::-webkit-scrollbar-track,
+.sprite-gap-scanner .content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.sprite-gap-scanner::-webkit-scrollbar-thumb,
+.sprite-gap-scanner .content::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 255, 0.3);
+  border-radius: 4px;
+}
+
+.sprite-gap-scanner::-webkit-scrollbar-thumb:hover,
+.sprite-gap-scanner .content::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 255, 0.5);
+}

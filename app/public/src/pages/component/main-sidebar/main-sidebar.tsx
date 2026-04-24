@@ -28,6 +28,7 @@ import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
 import ServersList from "../servers/servers-list"
+import SpriteTrackerModal from "../sprite-tracker/sprite-tracker-modal"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import TierListMakerModal from "../tier-list/tier-list-maker-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
@@ -288,6 +289,18 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
+        {((!GADGETS.sprite_tracker.disabled &&
+          profileLevel >= GADGETS.sprite_tracker.levelRequired) ||
+          profile?.role === Role.ADMIN) && (
+          <NavLink
+            svg="pokemon-sprite"
+            location="sprite-tracker"
+            handleClick={changeModal}
+          >
+            {t("gadget.sprite_tracker")}
+          </NavLink>
+        )}
+
         {page !== "game" &&
           (profile?.role === Role.MODERATOR ||
             profile?.role === Role.ADMIN) && (
@@ -465,6 +478,7 @@ export type Modals =
   | "pokeguesser"
   | "profile"
   | "servers"
+  | "sprite-tracker"
   | "synergy-wheel"
   | "team-builder"
   | "tier-list"
@@ -558,6 +572,10 @@ function Modals({
       />
       <TierListMakerModal
         show={modal === "tier-list"}
+        handleClose={closeModal}
+      />
+      <SpriteTrackerModal
+        show={modal === "sprite-tracker"}
         handleClose={closeModal}
       />
       <GameOptionsModal
