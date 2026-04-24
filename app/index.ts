@@ -17,6 +17,10 @@ import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
+import {
+  refreshSpriteGapData,
+  warmupSpriteGapScanner
+} from "./services/sprite-gap-scanner"
 import { refreshTwitchBlacklist, refreshTwitchStreams } from "./services/twitch"
 
 /*
@@ -36,11 +40,13 @@ async function main() {
       await matchMaker.createRoom("lobby", {})
       checkLobby()
       initCronJobs()
+      await warmupSpriteGapScanner()
     }
   } else {
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
     initCronJobs()
+    await warmupSpriteGapScanner()
   }
 
   logger.info("Fetching leaderboards...")
@@ -49,6 +55,8 @@ async function main() {
   logger.info("Fetching meta reports...")
   fetchMetaReports()
   setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
+  logger.info("Refreshing sprite gap scanner...")
+  setInterval(() => refreshSpriteGapData(), 1000 * 60 * 60 * 24) // refresh every 24 hours
   logger.info("Fetching Twitch streams...")
   refreshTwitchBlacklist()
   setInterval(() => refreshTwitchBlacklist(), 1000 * 60)

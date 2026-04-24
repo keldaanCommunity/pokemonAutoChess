@@ -4044,6 +4044,22 @@
 	"load_more": "Load More",
 	"no_history_found": "No history found",
 	"no_results_found": "No results found",
+	"sprite_tracker": {
+		"failed_to_fetch_data": "Failed to fetch data",
+		"error_label": "Error",
+		"summary_line": "SpriteCollab: {{totalSpriteCollab}} | Missing in PAC: {{missingInPac}} — Last updated: {{lastUpdated}} ({{refreshDurationMs}} ms)",
+		"criteria_title": "How entries are selected",
+		"criteria_line_1": "This list only includes SpriteCollab entries that Pokemon Auto Chess can actually use.",
+		"criteria_line_2": "To count, an entry must have at least one portrait and the required sprite animations, such as idle, walk, sleep, hurt, attack, and hop.",
+		"criteria_line_3": "Shiny forms follow PAC rules, and the final list only shows entries that are available on SpriteCollab but still missing in PAC.",
+		"filter_alternate": "Alternate ({{count}})",
+		"filter_altcolor": "Altcolor ({{count}})",
+		"filter_female": "Female ({{count}})",
+		"filter_cutscene": "Cutscene ({{count}})",
+		"filter_alcremie": "Alcremie ({{count}})",
+		"normal": "Normal",
+		"shiny": "Shiny"
+	},
 	"top": "Top",
 	"level": "Level",
 	"wins": "Wins",
@@ -4212,7 +4228,9 @@
 		"synergy_wheel": "Synergy Wheel",
 		"synergy_wheel_desc": "Randomly draws synergies when looking for inspiration",
 		"tier_list_maker": "Tier List Maker",
-		"tier_list_maker_desc": "Create and share your own tier lists"
+		"tier_list_maker_desc": "Create and share your own tier lists",
+		"sprite_tracker": "Sprite Tracker",
+		"sprite_tracker_desc": "Track Pokémon available in SpriteCollab and compare with Pokémon Auto Chess"
 	},
 	"level_required": "Level required",
 	"map": {

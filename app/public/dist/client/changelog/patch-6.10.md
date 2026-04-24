@@ -48,6 +48,7 @@
 - Added pokemon auto chess streams to the main lobby
 - Sprite scaling based on max HP now decreases quadratically instead of linearly, to avoid huge sprites at high HP values.
 - Added Game Activity tab in Meta Report showing game count trends over the last 30 days.
+- New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
 
 # Bugfix
 

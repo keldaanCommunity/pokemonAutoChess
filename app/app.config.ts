@@ -61,6 +61,7 @@ import {
   getMetaV2,
   getPlayerRankDistribution
 } from "./services/meta"
+import { getCachedSpriteGapData } from "./services/sprite-gap-scanner"
 import {
   addTwitchBlacklistEntry,
   completeTwitchAccountVerification,
@@ -420,6 +421,12 @@ export const server = defineServer({
       // Set Cache-Control header for 24 hours (86400 seconds)
       setCacheControl(res, 86400)
       res.send(getDendrogram())
+    })
+
+    app.get("/sprite-gap-scanner", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getCachedSpriteGapData())
     })
 
     app.get("/meta/types", async (req, res) => {
