@@ -15,7 +15,7 @@ import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { cc } from "../../utils/jsx"
+import jsxTextContent, { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 
 const MIN_COL_WIDTH = 320
@@ -67,7 +67,7 @@ export default function WikiAbility() {
       (a) =>
         a !== Ability.DEFAULT &&
         (!searchQuery.trim() ||
-          `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+          jsxTextContent(addIconsToDescription(`${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`))
             .toLowerCase()
             .includes(searchQuery.trim().toLowerCase()))
     )
