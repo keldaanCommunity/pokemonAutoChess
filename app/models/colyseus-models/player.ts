@@ -844,6 +844,11 @@ export default class Player extends Schema implements IPlayer {
         .filter((pokemon) => pokemon.final)
         .map((pokemon) => getPokemonBaseline(pokemon.name))
     )
+    this.pokemonsTrainingInDojo.forEach((pokemonInDojo) => {
+      if (pokemonInDojo.pokemon.final) {
+        finals.add(getPokemonBaseline(pokemonInDojo.pokemon.name))
+      }
+    })
     // special case for burmy line because of the exclusive convergent evolution rule
     if (finals.has(Pkm.BURMY_PLANT)) {
       finals.add(Pkm.BURMY_TRASH)
