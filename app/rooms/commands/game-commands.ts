@@ -1312,7 +1312,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           ]
           break
         case "craftableItems":
-          rewards = pickNRandomIn(CraftableItems, 2)
+          rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
           break
         case "mushrooms":
           rewardsIcons = [Item.MUSHROOMS]
@@ -1852,31 +1852,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (this.state.specialGameRule === SpecialGameRule.UNOWN_SPELL) {
       this.state.simulations.forEach((simulation) => {
         const unown = pickRandomIn(UnownsForScribble)
-        ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
-          if (
-            !player ||
-            (simulation.isGhostBattle && player === simulation.redPlayer)
-          )
-            return
-          const wanderer = player.spawnWanderingPokemon({
-            pkm: unown,
-            shiny: false,
-            type: WandererType.UNOWN_SPELL,
-            behavior: WandererBehavior.SPECTATE
-          })
-          this.clock.setTimeout(() => {
-            player.wanderers.delete(wanderer.id)
-            if (simulation.finished) return
-            const caster = new PokemonEntity(
-              PokemonFactory.createPokemonFromName(unown),
-              9,
-              2,
-              player.team,
-              simulation
+          ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
+            if (
+              !player ||
+              (simulation.isGhostBattle && player === simulation.redPlayer)
             )
-            castAbility(caster.skill, caster, simulation.board, null, false)
-          }, 10000)
-        })
+              return
+            const wanderer = player.spawnWanderingPokemon({
+              pkm: unown,
+              shiny: false,
+              type: WandererType.UNOWN_SPELL,
+              behavior: WandererBehavior.SPECTATE
+            })
+            this.clock.setTimeout(() => {
+              player.wanderers.delete(wanderer.id)
+              if (simulation.finished) return
+              const caster = new PokemonEntity(
+                PokemonFactory.createPokemonFromName(unown),
+                9,
+                2,
+                player.team,
+                simulation
+              )
+              castAbility(caster.skill, caster, simulation.board, null, false)
+            }, 10000)
+          })
       })
     }
   }
