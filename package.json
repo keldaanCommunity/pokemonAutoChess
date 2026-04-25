@@ -104,7 +104,7 @@
     "recharts": "^3.6.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.12",
+    "@biomejs/biome": "^2.4.13",
     "@types/cors": "^2.8.17",
     "@types/d3": "^7.4.3",
     "@types/fs-extra": "^11.0.4",
