@@ -38,6 +38,10 @@
 
 # Gameplay
 
+- Locked status now also prevents forced displacement (like Aquatic tidal wave or Fighting knockback)
+
+# Events
+
 - Expeditions mission selection has been tweaked based on player feedback
 
 # UI
