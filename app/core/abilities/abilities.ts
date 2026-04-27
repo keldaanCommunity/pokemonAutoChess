@@ -16566,6 +16566,46 @@ export class RockWreckerStrategy extends AbilityStrategy {
   }
 }
 
+export class AquaStepStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const speedGain = [10, 15, 20][pokemon.stars - 1] ?? 20
+
+    const dx = target.positionX - pokemon.positionX
+    const dy = target.positionY - pokemon.positionY
+    const stepCell = board.getClosestAvailablePlace(
+      pokemon.positionX + Math.sign(dx),
+      pokemon.positionY + Math.sign(dy)
+    )
+    if (stepCell) {
+      pokemon.moveTo(stepCell.x, stepCell.y, board, false)
+    }
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.broadcastAbility({
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.addSpeed(speedGain, pokemon, 1, true)
+      }, 300)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -17115,7 +17155,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
   [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy(),
   [Ability.TWINEEDLE]: new TwineedleStrategy(),
-  [Ability.ROCK_WRECKER]: new RockWreckerStrategy()
+  [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
+  [Ability.AQUA_STEP]: new AquaStepStrategy(),
 }
 
 export function castAbility(

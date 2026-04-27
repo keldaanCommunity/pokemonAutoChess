@@ -1178,7 +1178,10 @@
 		"EISCUE": "Eiscue (Ice Face)",
 		"EISCUE_NOICE": "Eiscue",
 		"DWEBBLE": "Dwebble",
-		"CRUSTLE": "Crustle"
+		"CRUSTLE": "Crustle",
+		"QUAXLY": "Quaxly",
+    	"QUAXWELL": "Quaxwell",
+    	"QUAQUAVAL": "Quaquaval"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1749,7 +1752,8 @@
 		"CEASELESS_EDGE": "Ceaseless Edge",
 		"MOUNTAIN_GALE": "Mountain Gale",
 		"TWINEEDLE": "Twineedle",
-		"ROCK_WRECKER": "Rock Wrecker"
+		"ROCK_WRECKER": "Rock Wrecker",
+		"AQUA_STEP": "Aqua Step"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2297,7 +2301,8 @@
 		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it.",
 		"MOUNTAIN_GALE": "Hurls [1,3] giant chunks of ice randomly at target and ADJACENT enemies, inflicting FLINCH for 3 seconds then [40,SP] SPECIAL per projectile. If user has Bergmite on their back, they are thrown as well for the same damage.",
 		"TWINEEDLE": "Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [40,LK]% chance to apply POISONNED for 4 seconds.",
-		"ROCK_WRECKER": "Launches a huge boulder at the target, inflicting FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds."
+		"ROCK_WRECKER": "Launches a huge boulder at the target, inflicting FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds.",
+		"AQUA_STEP": "Shift to an ADJACENT unoccupied tile with fluid dance steps before dealing [25,50,100,SP] SPECIAL to the target and increasing user SPEED by [10,15,20,SP]."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

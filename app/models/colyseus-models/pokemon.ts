@@ -1318,6 +1318,7 @@ export class Bagon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_CLAW
+  regional = true
 }
 
 export class Shelgon extends Pokemon {
@@ -1333,6 +1334,7 @@ export class Shelgon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_CLAW
+  regional = true
 }
 
 export class Salamence extends Pokemon {
@@ -1351,6 +1353,7 @@ export class Salamence extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_CLAW
+  regional = true
 }
 
 export class Ralts extends Pokemon {
@@ -2135,7 +2138,6 @@ export class Deino extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DARK_HARVEST
-  regional = true
 }
 
 export class Zweilous extends Pokemon {
@@ -2151,7 +2153,6 @@ export class Zweilous extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DARK_HARVEST
-  regional = true
 }
 
 export class Hydreigon extends Pokemon {
@@ -2166,7 +2167,6 @@ export class Hydreigon extends Pokemon {
   maxPP = 100
   range = 2
   skill = Ability.DARK_HARVEST
-  regional = true
 }
 
 export class Poliwag extends Pokemon {
@@ -20664,6 +20664,62 @@ export class Crustle extends Pokemon {
   additional = true
 }
 
+export class Quaxly extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.QUAXWELL
+  hp = 60
+  atk = 6
+  speed = 55
+  def = 5
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.AQUA_STEP
+}
+
+export class Quaxwell extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  evolution = Pkm.QUAQUAVAL
+  hp = 120
+  atk = 12
+  speed = 55
+  def = 6
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.AQUA_STEP
+}
+
+export class Quaquaval extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.AQUATIC,
+    Synergy.FIGHTING,
+    Synergy.FLYING
+  ])
+  rarity = Rarity.UNCOMMON
+  stars = 3
+  hp = 200
+  atk = 24
+  speed = 55
+  def = 8
+  speDef = 7
+  maxPP = 100
+  range = 1
+  skill = Ability.AQUA_STEP
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21850,7 +21906,10 @@ export const PokemonClasses: Record<
   [Pkm.EISCUE]: Eiscue,
   [Pkm.EISCUE_NOICE]: EiscueNoice,
   [Pkm.DWEBBLE]: Dwebble,
-  [Pkm.CRUSTLE]: Crustle
+  [Pkm.CRUSTLE]: Crustle,
+  [Pkm.QUAXLY]: Quaxly,
+  [Pkm.QUAXWELL]: Quaxwell,
+  [Pkm.QUAQUAVAL]: Quaquaval
 }
 
 // declare all the classes in colyseus schema TypeRegistry

@@ -1,6 +1,10 @@
 # New Pokemons:
 
+- Quaxly
+- Quaxwell
+- Quaquaval
 - Hisui Avalugg
+
 
 # Changes to Synergies
 
@@ -30,6 +34,9 @@
 - Chikorita: Flora/Grass → Flora/Fairy
 - Oddish: remove Grass type; HP 80/150/230 → 80/150/250
 - Bellossom: remove Grass type ; HP: 250 → 300
+
+- Bagon line is now regional in Dragon/Monster regions
+- Deino line is no longer regional
 
 
 # Changes to Items

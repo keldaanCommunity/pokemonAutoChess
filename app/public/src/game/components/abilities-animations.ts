@@ -2962,6 +2962,11 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
   }),
+  [Ability.AQUA_STEP]: onCaster({
+    ability: Ability.AQUA_STEP,
+    scale: 1,
+    positionOffset: [+5, -15]
+  }),
   [Ability.STATIC_SHOCK]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
