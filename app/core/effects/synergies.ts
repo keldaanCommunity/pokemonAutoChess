@@ -184,7 +184,11 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 
     board.cells.forEach((ally) => {
       if (ally?.team === pokemon.team) {
-        ally.status.sleepCooldown = 0
+        if (ally.passive === Passive.COMATOSE && ally.status.sleep) {
+          ally.addAbilityPower(5, pokemon, 0, false)
+        } else {
+          ally.status.sleepCooldown = 0
+        }
         ally.addAttack(attackBoost * scale, pokemon, 0, false)
         ally.addSpeed(speedBoost * scale, pokemon, 0, false)
         ally.addPP(manaBoost * scale, pokemon, 0, false)

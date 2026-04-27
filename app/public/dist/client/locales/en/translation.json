@@ -1181,7 +1181,8 @@
 		"CRUSTLE": "Crustle",
 		"QUAXLY": "Quaxly",
     	"QUAXWELL": "Quaxwell",
-    	"QUAQUAVAL": "Quaquaval"
+    	"QUAQUAVAL": "Quaquaval",
+		"KOMALA": "Komala"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1753,7 +1754,8 @@
 		"MOUNTAIN_GALE": "Mountain Gale",
 		"TWINEEDLE": "Twineedle",
 		"ROCK_WRECKER": "Rock Wrecker",
-		"AQUA_STEP": "Aqua Step"
+		"AQUA_STEP": "Aqua Step",
+		"SNORE": "Snore"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2302,7 +2304,8 @@
 		"MOUNTAIN_GALE": "Hurls [1,3] giant chunks of ice randomly at target and ADJACENT enemies, inflicting FLINCH for 3 seconds then [40,SP] SPECIAL per projectile. If user has Bergmite on their back, they are thrown as well for the same damage.",
 		"TWINEEDLE": "Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [40,LK]% chance to apply POISONNED for 4 seconds.",
 		"ROCK_WRECKER": "Launches a huge boulder at the target, inflicting FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds.",
-		"AQUA_STEP": "Shift to an ADJACENT unoccupied tile with fluid dance steps before dealing [25,50,100,SP] SPECIAL to the target and increasing user SPEED by [10,15,20,SP]."
+		"AQUA_STEP": "Shift to an ADJACENT unoccupied tile with fluid dance steps before dealing [25,50,100,SP] SPECIAL to the target and increasing user SPEED by [10,15,20,SP].",
+		"SNORE": "Deal [20,40,60,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3368,6 +3371,7 @@
 		"AVALUGG": "Can hold up to 4 $t(pkm.BERGMITE) on their back, taken from the bench at the start of a fight.",
 		"EISCUE_NOICE": "When starting a fight under SNOW, gain its Ice Face form and 100 SHIELD. When inflicting or being inflicted FREEZE, go back to Ice Face form and gain 50 SHIELD.",
 		"EISCUE_ICE_FACE": "When casting its ability, its current SHIELD is converted to additional SPECIAL. When SHIELD is depleted or after casting its ability, Eiscue breaks into its Noice form.",
+		"COMATOSE": "Always under SLEEP. Immune to BURN, POISONNED, FREEZE and PARALYSIS. When a SOUND try to wake this Pokémon up, it sinks deeper into its dream, gaining 5 AP.",
 		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted."
 	},
 	"stat": {

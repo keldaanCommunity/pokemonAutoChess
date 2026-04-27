@@ -20720,6 +20720,21 @@ export class Quaquaval extends Pokemon {
   skill = Ability.AQUA_STEP
 }
 
+export class Komala extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND, Synergy.GRASS])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 170
+  atk = 20
+  speed = 45
+  def = 7
+  speDef = 13
+  maxPP = 90
+  range = 1
+  skill = Ability.SNORE
+  passive = Passive.COMATOSE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21909,7 +21924,8 @@ export const PokemonClasses: Record<
   [Pkm.CRUSTLE]: Crustle,
   [Pkm.QUAXLY]: Quaxly,
   [Pkm.QUAXWELL]: Quaxwell,
-  [Pkm.QUAQUAVAL]: Quaquaval
+  [Pkm.QUAQUAVAL]: Quaquaval,
+  [Pkm.KOMALA]: Komala
 }
 
 // declare all the classes in colyseus schema TypeRegistry

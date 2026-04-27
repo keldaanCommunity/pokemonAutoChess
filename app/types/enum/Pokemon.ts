@@ -535,6 +535,7 @@ export enum Pkm {
   KLINK = "KLINK",
   KLINKLANG = "KLINKLANG",
   KOFFING = "KOFFING",
+  KOMALA = "KOMALA",
   KOMMO_O = "KOMMO_O",
   KRABBY = "KRABBY",
   KRICKETOT = "KRICKETOT",
@@ -2180,7 +2181,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MINIOR_KERNEL_BLUE]: "0774-0005",
   [Pkm.MINIOR_KERNEL_ORANGE]: "0774-0002",
   [Pkm.MINIOR_KERNEL_GREEN]: "0774-0004",
-  //[Pkm.KOMALA]: "0775",
+  [Pkm.KOMALA]: "0775",
   [Pkm.TURTONATOR]: "0776",
   [Pkm.TOGEDEMARU]: "0777",
   [Pkm.MIMIKYU]: "0778",
@@ -3648,7 +3649,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.CRUSTLE]: Pkm.DWEBBLE,
   [Pkm.QUAXLY]: Pkm.QUAXLY,
   [Pkm.QUAXWELL]: Pkm.QUAXLY,
-  [Pkm.QUAQUAVAL]: Pkm.QUAXLY
+  [Pkm.QUAQUAVAL]: Pkm.QUAXLY,
+  [Pkm.KOMALA]: Pkm.KOMALA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

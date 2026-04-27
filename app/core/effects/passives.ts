@@ -1248,6 +1248,16 @@ export const PassiveEffects: Partial<
   [Passive.VIGOROTH]: [
     new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
   ],
+  [Passive.COMATOSE]: [
+    new OnSpawnEffect((pkm) => {
+      pkm.status.sleep = true
+      pkm.status.sleepCooldown = 1000
+      pkm.effects.add(EffectEnum.IMMUNITY_BURN)
+      pkm.effects.add(EffectEnum.IMMUNITY_POISON)
+      pkm.effects.add(EffectEnum.IMMUNITY_FREEZE)
+      pkm.effects.add(EffectEnum.IMMUNITY_PARALYSIS)
+    })
+  ],
   [Passive.MEGA_SABLEYE]: [
     new OnSpawnEffect((entity) =>
       entity.status.triggerRuneProtect(60000, entity, entity)

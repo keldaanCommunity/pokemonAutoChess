@@ -4,6 +4,7 @@
 - Quaxwell
 - Quaquaval
 - Hisui Avalugg
+- Komala
 
 
 # Changes to Synergies
