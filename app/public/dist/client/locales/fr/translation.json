@@ -1947,7 +1947,7 @@
 		"DIRE_CLAW": "Inflige [15,30,60,SP] SPECIAL à la cible, ainsi qu'une condition de statut aléatoire parmi POISONNED, SLEEP et PARALYSIS pendant 3 secondes.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] et WOUND pendant 5 secondes à la cible. Si elle subit déjà WOUND, inflige 30 % de bonus SPECIAL.",
 		"ERUPTION": "Tire [20,30,45] projectiles en l'air. Chaque projectile inflige [30,50,70,SP] SPECIAL et BURN pendant 5 secondes.",
-		"HAIL": "Une tempête de grêle frappe [10,20,30] cases aléatoires du côté du plateau de la cible. Les grêlons infligent [50,SP] SPECIAL à l'impact et restent au sol. BOARD_EFFECT : Les grêlons inflige 10 SPECIAL par seconde et FREEZE pendant 1 seconde aux Pokémon qui marchent dessus, excepté les Pokémon de type ICE.",
+		"HAIL": "Une tempête de grêle frappe [8,15,30] cases aléatoires du côté du plateau de la cible. Les grêlons infligent [50,SP] SPECIAL à l'impact et restent au sol. BOARD_EFFECT : Les grêlons inflige 10 SPECIAL par seconde et FREEZE pendant 1 seconde aux Pokémon qui marchent dessus, excepté les Pokémon de type ICE.",
 		"LUSTER_PURGE": "Lance une boule de lumière en ligne droite, qui rebondit après avoir parcouru 4 cases, infligeant [25,SP] SPECIAL et réduisant leur SPE_DEF de 5 à chaque fois qu'elle traverse un ennemi.",
 		"MIST_BALL": "Lancez une bulle de brume en ligne droite, qui rebondit après avoir parcouru 4 cases, infligeant [25,SP] SPECIAL et réduisant leur AP de 30 à chaque fois qu'elle traverse un ennemi.",
 		"MUD_BUBBLE": "Soigne le lanceur de [10,20,40,SP] HP.",

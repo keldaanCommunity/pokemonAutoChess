@@ -1922,7 +1922,7 @@
 		"DIRE_CLAW": "Hace [15,30,60,SP] al objetivo. Inflige aleatoriamente POISONNED, SLEEP o PARALYSIS por 3 segundos.",
 		"SLASHING_CLAW": "Inflige [15,30,60,SP] al objetivo y lo deja WOUND por 5 segundos. Si el objetivo ya está WOUND, otorga un 30% de bonificación de SPECIAL",
 		"ERUPTION": "Dispara [20,30,45] proyectiles en el aire. Cada proyectil inflige [30,50,70,SP] de SPECIAL y causa BURN por 5 segundos",
-		"HAIL": "Una tormenta de granizo golpea [10,20,30] celdas aleatorias en el tablero, causando [50,SP] de SPECIAL. El granizo permanece en el suelo causando 10 SPECIAL y FREEZE por 1 segundo a los Pokémon que no son ICE que caminan sobre él.",
+		"HAIL": "Una tormenta de granizo golpea [8,15,30] celdas aleatorias en el tablero, causando [50,SP] de SPECIAL. El granizo permanece en el suelo causando 10 SPECIAL y FREEZE por 1 segundo a los Pokémon que no son ICE que caminan sobre él.",
 		"LUSTER_PURGE": "Lanza una bola de luz en línea recta que inflige [25,SP] de SPECIAL dos veces y reduce dos veces la SPE_DEF de todos los enemigos alcanzados en 5",
 		"MIST_BALL": "Lanza una burbuja de niebla en línea recta que inflige [25,SP] SPECIAL dos veces y reduce el AP de todos los enemigos golpeados en un 30",
 		"MUD_BUBBLE": "Cura al usuario por [10,20,40,SP] HP",

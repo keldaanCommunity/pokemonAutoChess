@@ -6002,7 +6002,7 @@ export class HailStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 50
-    const numberOfProjectiles = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const numberOfProjectiles = [8, 15, 30][pokemon.stars - 1] ?? 30
 
     for (let i = 0; i < numberOfProjectiles; i++) {
       const x = randomBetween(0, BOARD_WIDTH - 1)
