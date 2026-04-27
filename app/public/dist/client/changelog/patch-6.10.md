@@ -1,6 +1,7 @@
 # New Pokemons:
 
 - Hisui Avalugg
+- Komala
 
 # Changes to Synergies
 

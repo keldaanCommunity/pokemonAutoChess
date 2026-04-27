@@ -8005,5 +8005,11 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE,
     shinyUnavailable: true
+  },
+  [Pkm.KOMALA]: {
+    attack: AnimationType.Strike,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Sleep,
+    attackSprite: AttackSprite.NORMAL_MELEE
   }
 }

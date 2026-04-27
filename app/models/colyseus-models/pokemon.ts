@@ -20664,6 +20664,21 @@ export class Crustle extends Pokemon {
   additional = true
 }
 
+export class Komala extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.SOUND, Synergy.GRASS])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 170
+  atk = 20
+  speed = 45
+  def = 7
+  speDef = 13
+  maxPP = 90
+  range = 1
+  skill = Ability.SNORE
+  passive = Passive.COMATOSE
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21850,7 +21865,8 @@ export const PokemonClasses: Record<
   [Pkm.EISCUE]: Eiscue,
   [Pkm.EISCUE_NOICE]: EiscueNoice,
   [Pkm.DWEBBLE]: Dwebble,
-  [Pkm.CRUSTLE]: Crustle
+  [Pkm.CRUSTLE]: Crustle,
+  [Pkm.KOMALA]: Komala
 }
 
 // declare all the classes in colyseus schema TypeRegistry

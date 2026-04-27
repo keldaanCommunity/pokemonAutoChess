@@ -773,6 +773,12 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSleep(dt: number, pkm: PokemonEntity) {
+    if (pkm.passive === Passive.COMATOSE) {
+      this.sleep = true
+      this.sleepCooldown = 1000
+      return
+    }
+
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
