@@ -40,13 +40,13 @@ async function main() {
       await matchMaker.createRoom("lobby", {})
       checkLobby()
       initCronJobs()
-      await warmupSpriteGapScanner()
+      void warmupSpriteGapScanner()
     }
   } else {
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
     initCronJobs()
-    await warmupSpriteGapScanner()
+    void warmupSpriteGapScanner()
   }
 
   logger.info("Fetching leaderboards...")
