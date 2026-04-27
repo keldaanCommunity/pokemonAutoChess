@@ -84,7 +84,7 @@
     "marked": "^18.0.2",
     "matter-js": "^0.20.0",
     "mongoose": "^9.5.0",
-    "phaser": "^3.90.0",
+    "phaser": "^4.0.0",
     "phaser-animated-tiles-phaser3.5": "^2.0.5",
     "phaser3-rex-plugins": "^1.80.6",
     "pm2-prom-module-client": "^1.0.3",
