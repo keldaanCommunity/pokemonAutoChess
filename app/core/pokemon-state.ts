@@ -879,7 +879,7 @@ export default abstract class PokemonState {
     if (
       (pokemon.status.resurrecting ||
         pokemon.status.freeze ||
-        pokemon.status.sleep) &&
+        (pokemon.status.sleep && pokemon.passive !== Passive.COMATOSE)) &&
       pokemon.state.name !== "idle"
     ) {
       pokemon.toIdleState()
