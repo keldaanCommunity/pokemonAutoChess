@@ -791,6 +791,9 @@ export enum Pkm {
   PURUGLY = "PURUGLY",
   PYUKUMUKU = "PYUKUMUKU",
   QUAGSIRE = "QUAGSIRE",
+  QUAQUAVAL = "QUAQUAVAL",
+  QUAXLY = "QUAXLY",
+  QUAXWELL = "QUAXWELL",
   QUILAVA = "QUILAVA",
   QUILLADIN = "QUILLADIN",
   QWILFISH = "QWILFISH",
@@ -2340,9 +2343,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FUECOCO]: "0909",
   [Pkm.CROCALOR]: "0910",
   [Pkm.SKELEDIRGE]: "0911",
-  //[Pkm.QUAXLY]: "0912",
-  //[Pkm.QUAXWELL]: "0913",
-  //[Pkm.QUAQUAVAL]: "0914",
+  [Pkm.QUAXLY]: "0912",
+  [Pkm.QUAXWELL]: "0913",
+  [Pkm.QUAQUAVAL]: "0914",
   [Pkm.LECHONK]: "0915",
   [Pkm.OINKOLOGNE_MALE]: "0916",
   //[Pkm.OINKOLOGNE_FEMALE]: "0916-0003",
@@ -3644,6 +3647,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EISCUE_NOICE]: Pkm.EISCUE,
   [Pkm.DWEBBLE]: Pkm.DWEBBLE,
   [Pkm.CRUSTLE]: Pkm.DWEBBLE,
+  [Pkm.QUAXLY]: Pkm.QUAXLY,
+  [Pkm.QUAXWELL]: Pkm.QUAXLY,
+  [Pkm.QUAQUAVAL]: Pkm.QUAXLY,
   [Pkm.KOMALA]: Pkm.KOMALA
 }
 
