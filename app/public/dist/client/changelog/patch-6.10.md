@@ -31,8 +31,7 @@
 > Trying to tone down the grass/flora composition by making most flower pots Pokémon not benefitting from the grass healing. We hope it will make you consider new Flora comps where Grass is no longer mandatory.
 
 - Hoppip line: remove Grass type ; Attack: 4/8/12 → 5/10/15
-- Bellsprout: remove Poison type
-- Chikorita: Flora/Grass → Flora/Fairy
+- Chikorita: Flora/Grass → Flora/Grass/Fairy ; PP 90 → 100
 - Oddish: remove Grass type; HP 80/150/230 → 80/150/250
 - Bellossom: remove Grass type ; HP: 250 → 300
 

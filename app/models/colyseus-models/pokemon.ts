@@ -3556,7 +3556,7 @@ export class Florges extends Pokemon {
 }
 
 export class Chikorita extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.BAYLEEF
@@ -3565,13 +3565,13 @@ export class Chikorita extends Pokemon {
   speed = 51
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SWEET_SCENT
 }
 
 export class Bayleef extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.MEGANIUM
@@ -3580,13 +3580,13 @@ export class Bayleef extends Pokemon {
   speed = 51
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SWEET_SCENT
 }
 
 export class Meganium extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.FAIRY])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.FAIRY])
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 220
@@ -3594,7 +3594,7 @@ export class Meganium extends Pokemon {
   speed = 51
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SWEET_SCENT
 }
@@ -4421,7 +4421,7 @@ export class Blastoise extends Pokemon {
 }
 
 export class Bellsprout extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 1
   evolution = Pkm.WEEPINBELL
@@ -4436,7 +4436,7 @@ export class Bellsprout extends Pokemon {
 }
 
 export class Weepinbell extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 2
   evolution = Pkm.VICTREEBEL
@@ -4451,7 +4451,7 @@ export class Weepinbell extends Pokemon {
 }
 
 export class Victreebel extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.GRASS, Synergy.POISON])
   rarity = Rarity.SPECIAL
   stars = 3
   hp = 200
