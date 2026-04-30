@@ -14395,6 +14395,9 @@ export class BurningJealousyStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
+    const burnDuration = 5000
+
+    // Get target and adjacent enemies
     const targets = board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
