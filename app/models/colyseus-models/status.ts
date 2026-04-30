@@ -455,7 +455,10 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 0.7
         } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
           burnDamage *= 0.5
-        } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+        } else if (
+          pkm.effects.has(EffectEnum.WATER_VEIL) ||
+          pkm.effects.has(EffectEnum.SURGE_SURFER)
+        ) {
           burnDamage *= 0.3
         }
 
@@ -624,7 +627,10 @@ export default class Status extends Schema implements IStatus {
         poisonDamage *= 0.7
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
         poisonDamage *= 0.5
-      } else if (pkm.effects.has(EffectEnum.WATER_VEIL)) {
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
+      ) {
         poisonDamage *= 0.3
       }
       poisonDamage = Math.round(poisonDamage)
@@ -767,6 +773,12 @@ export default class Status extends Schema implements IStatus {
   }
 
   updateSleep(dt: number, pkm: PokemonEntity) {
+    if (pkm.passive === Passive.COMATOSE) {
+      this.sleep = true
+      this.sleepCooldown = 1000
+      return
+    }
+
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)

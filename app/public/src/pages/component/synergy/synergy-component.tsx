@@ -43,8 +43,8 @@ export default function SynergyComponent(props: {
         if (sprite) {
           scene.clearHovered(sprite)
         }
-      }
-    })
+      })
+    }
   }
 
   const tooltip = (

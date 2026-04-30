@@ -648,10 +648,8 @@ export default class GameScene extends Scene {
           // Item -> POKEMON(board zone) = EQUIP
           else if (
             dropZone.name === "board-zone" &&
-            !(
-              this.room?.state.phase == GamePhaseState.FIGHT &&
-              dropZone.getData("y") != 0
-            )
+            (this.room?.state.phase == GamePhaseState.PICK ||
+              dropZone.getData("y") == 0)
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,
@@ -824,12 +822,10 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const flowerPot =
-              this.board?.flowerPokemonsInPots[dropZone.getData("index")]
-            if (flowerPot) {
-              this.clearHovered(flowerPot.sprite)
-            }
+          const flowerPot =
+            this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+          if (flowerPot) {
+            this.clearHovered(flowerPot.sprite)
           }
         }
 
@@ -838,11 +834,9 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const berryTree = this.board?.berryTrees[dropZone.getData("index")]
-            if (berryTree) {
-              this.clearHovered(berryTree.sprite)
-            }
+          const berryTree = this.board?.berryTrees[dropZone.getData("index")]
+          if (berryTree) {
+            this.clearHovered(berryTree.sprite)
           }
         }
       },

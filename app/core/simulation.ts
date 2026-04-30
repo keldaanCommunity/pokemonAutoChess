@@ -71,6 +71,7 @@ import {
   OnFieldDeathEffect,
   onFlowerMonDeath,
   overgrowEffect,
+  pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
 } from "./effects/synergies"
@@ -1050,6 +1051,15 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
+          if (pokemon.player?.items.includes(Item.LONG_WAND)) {
+            pokemon.range += 1
+          }
+          if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
+            pokemon.effectsSet.add(pounceWandEffect)
+          }
+          if (effect === EffectEnum.MOON_FORCE) {
+            pokemon.addLuck(20, pokemon, 0, false)
+          }
         }
         break
 
@@ -1566,20 +1576,39 @@ export default class Simulation extends Schema implements ISimulation {
       const isGhostPlayer = this.id !== player.simulationId
       const isGhostOpponent =
         playerId === this.bluePlayerId && this.isGhostBattle
+      const isPvE = opponentPlayerId === "pve"
+      const battleResult =
+        this.winnerId === playerId
+          ? BattleResult.WIN
+          : this.winnerId === opponentPlayerId
+            ? BattleResult.DEFEAT
+            : BattleResult.DRAW
 
       // Add battle result
       if (!isGhostPlayer) {
         player.addBattleResult(
           player.opponentId,
           player.opponentName,
-          this.winnerId === playerId
-            ? BattleResult.WIN
-            : this.winnerId === opponentPlayerId
-              ? BattleResult.DEFEAT
-              : BattleResult.DRAW,
+          battleResult,
           player.opponentAvatar,
           this.weather
         )
+
+        // Compute streak
+        const previousBattleResult = player.history
+          .filter(
+            (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
+          )
+          .map((stage) => stage.result)
+          .at(-2)
+        if (battleResult === BattleResult.DRAW) {
+          // preserve existing streak but lose HP
+        } else if (battleResult !== previousBattleResult) {
+          // reset streak
+          player.streak = 0
+        } else {
+          player.streak += 1
+        }
       }
 
       const client = this.room.clients.find((cli) => cli.auth.uid === playerId)
@@ -1587,7 +1616,7 @@ export default class Simulation extends Schema implements ISimulation {
       // Handle win/loss outcomes
       if (this.winnerId === playerId) {
         // WIN
-        if (this.redPlayerId !== "pve" && !isGhostPlayer) {
+        if (!isPvE && !isGhostPlayer) {
           // no extra gold from PvE wins
           const hasLeadersCrest =
             opponentPlayer?.items.includes(Item.LEADERS_CREST) ?? false
@@ -1627,7 +1656,7 @@ export default class Simulation extends Schema implements ISimulation {
         this.weather !== Weather.NEUTRAL &&
         getSynergyStep(player.synergies, Synergy.ROCK) > 0 &&
         !isGhostPlayer &&
-        this.redPlayerId !== "pve" // No weather rocks collected for PvE rounds
+        !isPvE // No weather rocks collected for PvE rounds
       ) {
         const rockCollected = WeatherRocksByWeather.get(this.weather)
         if (rockCollected) {
@@ -1824,7 +1853,7 @@ export default class Simulation extends Schema implements ISimulation {
             surf.process(
               pokemonHit,
               this.board,
-              pokemonHit,
+              null,
               false,
               false,
               tidalWaveLevel

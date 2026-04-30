@@ -66,6 +66,7 @@ import {
 } from "../utils/random"
 import { values } from "../utils/schemas"
 import Player from "./colyseus-models/player"
+import { PlayerChoice, PlayerChoiceType } from "./colyseus-models/player-choice"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getWildChance } from "./colyseus-models/synergies"
 import { getPokemonBaseline } from "./pokemon-factory"
@@ -370,12 +371,22 @@ export default class Shop {
     portalSynergies: Synergy[]
   ) {
     const stageLevel = state.stageLevel
-    let allCandidates =
-      {
-        [PortalCarouselStages[0]]: [...this.commonPool],
-        [PortalCarouselStages[1]]: [...UniquePool],
-        [PortalCarouselStages[2]]: [...LegendaryPool]
-      }[stageLevel] ?? []
+    const typeByStage: { [stage: number]: PlayerChoiceType } = {
+      [PortalCarouselStages[0]]: "starter",
+      [PortalCarouselStages[1]]: "unique",
+      [PortalCarouselStages[2]]: "legendary"
+    }
+    const type = typeByStage[stageLevel]
+
+    const poolByType: {
+      [type in "starter" | "unique" | "legendary"]: PkmProposition[]
+    } = {
+      starter: [...this.commonPool],
+      unique: [...UniquePool],
+      legendary: [...LegendaryPool]
+    }
+
+    let allCandidates: PkmProposition[] = poolByType[type] || []
 
     if (stageLevel === 0) {
       if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
@@ -394,6 +405,8 @@ export default class Shop {
       stageLevel === PortalCarouselStages[0]
         ? NB_STARTERS
         : NB_UNIQUE_PROPOSITIONS
+    const pokemonsProposed: PkmProposition[] = []
+    const itemsProposed: Item[] = []
 
     for (let i = 0; i < nbPropositions; i++) {
       let synergyWanted: Synergy | undefined = portalSynergies[i]
@@ -417,7 +430,7 @@ export default class Shop {
         }
 
         if (
-          player.pokemonsProposition.some((prop) => {
+          pokemonsProposed.some((prop) => {
             const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
             return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
           })
@@ -465,39 +478,47 @@ export default class Shop {
       }
 
       if (stageLevel === PortalCarouselStages[0]) {
-        player.itemsProposition[i] = pickRandomIn(
+        itemsProposed[i] = pickRandomIn(
           ItemComponentsNoFossilOrScarf.filter(
-            (c) => player.itemsProposition.includes(c) === false
+            (c) => itemsProposed.includes(c) === false
           )
         )
       }
 
       if (
         stageLevel === PortalCarouselStages[0] &&
-        player.pokemonsProposition.includes(Pkm.EEVEE) === false &&
+        pokemonsProposed.includes(Pkm.EEVEE) === false &&
         (chance(EEVEE_RATE) || initialCandidatesEmpty) &&
         state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
         state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
       ) {
         selected = Pkm.EEVEE
-        player.itemsProposition[i] = Item.FOSSIL_STONE
+        itemsProposed[i] = Item.FOSSIL_STONE
       } else if (
         stageLevel === PortalCarouselStages[1] &&
-        player.pokemonsProposition.includes(Pkm.KECLEON) === false &&
+        pokemonsProposed.includes(Pkm.KECLEON) === false &&
         chance(KECLEON_RATE)
       ) {
         selected = Pkm.KECLEON
       } else if (
         stageLevel === PortalCarouselStages[2] &&
-        player.pokemonsProposition.includes(Pkm.ARCEUS) === false &&
+        pokemonsProposed.includes(Pkm.ARCEUS) === false &&
         chance(ARCEUS_RATE)
       ) {
         selected = Pkm.ARCEUS
       }
 
       removeInArray(allCandidates, selected)
-      player.pokemonsProposition.push(selected)
+      pokemonsProposed.push(selected)
     }
+
+    player.choices.push(
+      new PlayerChoice({
+        type,
+        pokemons: pokemonsProposed,
+        items: itemsProposed
+      })
+    )
   }
 
   getRandomPokemonFromPool(
@@ -597,7 +618,7 @@ export default class Shop {
       return Pkm.FALINKS_TROOPER
     }
 
-    const wildChance = getWildChance(player)
+    const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
@@ -717,7 +738,7 @@ export default class Shop {
     const rarity_seed = Math.random()
     let threshold = 0
     const finals = player.getFinalizedLines()
-    const wildChance = getWildChance(player)
+    const wildChance = getWildChance(player, state.stageLevel)
 
     if (
       finals.has(Pkm.REMORAID) === false &&

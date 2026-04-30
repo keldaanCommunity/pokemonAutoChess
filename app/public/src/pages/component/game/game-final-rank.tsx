@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import "./game-final-rank.css"

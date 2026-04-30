@@ -942,8 +942,8 @@ export default class BoardManager {
             (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
             pokemon.hp
           )
-          const sizeBuff = (hp - baseHP) / baseHP
-          pokemonSprite.sprite.setScale(2 + sizeBuff)
+          const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
+          pokemonSprite.sprite.setScale(scale)
           if (previousValue != null && value && value > previousValue)
             pokemonSprite.displayBoost(Stat.HP)
           break
@@ -1003,7 +1003,7 @@ export default class BoardManager {
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
               pokemonSprite.attackSprite
             // load the new ones
-            pokemonSprite.lazyloadAnimations(this.scene).then(() => {
+            pokemonSprite.lazyLoadAnimations(this.scene).then(() => {
               pokemonSprite.animationLocked = false
               pokemonSprite.evolutionAnimation()
             })

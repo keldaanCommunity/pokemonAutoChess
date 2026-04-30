@@ -43,6 +43,7 @@ import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import Player from "../../models/colyseus-models/player"
+import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
@@ -1120,31 +1121,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     return false
   }
 
-  computeStreak(isPVE: boolean) {
-    if (isPVE) return // PVE rounds do not change the current streak
-    this.state.players.forEach((player) => {
-      if (!player.alive) {
-        return
-      }
-
-      const [previousBattleResult, lastBattleResult] = player.history
-        .filter(
-          (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
-        )
-        .map((stage) => stage.result)
-        .slice(-2)
-
-      if (lastBattleResult === BattleResult.DRAW) {
-        // preserve existing streak but lose HP
-      } else if (lastBattleResult !== previousBattleResult) {
-        // reset streak
-        player.streak = 0
-      } else {
-        player.streak += 1
-      }
-    })
-  }
-
   computeIncome(isPVE: boolean, specialGameRule: SpecialGameRule | null) {
     this.state.players.forEach((player) => {
       let income = 0
@@ -1220,7 +1196,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const itemsSet = Tools.filter(
           (item) => player.artificialItems.includes(item) === false
         )
-        resetArraySchema(player.itemsProposition, pickNRandomIn(itemsSet, 3))
+        player.choices.push(
+          new PlayerChoice({
+            type: "item",
+            items: pickNRandomIn(itemsSet, 3)
+          })
+        )
       })
     }
 
@@ -1236,6 +1217,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
           const items = pickNRandomIn(ItemComponentsNoScarf, 3)
+          const pokemons: Pkm[] = []
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
             if (p) {
@@ -1248,13 +1230,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                   )
               )
               if (regionalVariants.length > 0) {
-                player.pokemonsProposition.push(pickRandomIn(regionalVariants))
+                pokemons.push(pickRandomIn(regionalVariants))
               } else {
-                player.pokemonsProposition.push(p)
+                pokemons.push(p)
               }
-              player.itemsProposition.push(items[i])
             }
           }
+          player.choices.push(
+            new PlayerChoice({
+              type: "addPick",
+              pokemons,
+              items
+            })
+          )
           remainingAddPicks--
         }
       })
@@ -1324,7 +1312,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           ]
           break
         case "craftableItems":
-          rewards = pickNRandomIn(CraftableItems, 2)
+          rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
           break
         case "mushrooms":
           rewardsIcons = [Item.MUSHROOMS]
@@ -1593,24 +1581,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   stopPickingPhase() {
     this.state.players.forEach((player) => {
-      const pokemonsProposition = values(player.pokemonsProposition)
-
-      if (pokemonsProposition.length > 0) {
-        // auto pick if not chosen
-        this.room.pickPokemonProposition(
-          player.id,
-          pickRandomIn(pokemonsProposition),
-          true
+      // auto pick choices if player did not choose in time
+      player.choices
+        .filter(
+          (choice) =>
+            choice.type === "addPick" ||
+            choice.type === "item" ||
+            choice.type === "unique"
         )
-        player.pokemonsProposition.clear()
-      }
-
-      const itemsProposition = values(player.itemsProposition)
-      if (player.itemsProposition.length > 0) {
-        // auto pick if not chosen
-        this.room.pickItemProposition(player.id, pickRandomIn(itemsProposition))
-        player.itemsProposition.clear()
-      }
+        .forEach((choice) => {
+          const randomPick = randomBetween(
+            0,
+            choice.pokemons
+              ? choice.pokemons.length - 1
+              : choice.items.length - 1
+          )
+          this.room.pickChoice(player.id, choice.id, randomPick, true)
+        })
     })
   }
 
@@ -1625,7 +1612,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     })
 
     this.computeAchievements()
-    this.computeStreak(isPVE)
     this.checkDeath()
     const isGameFinished = this.checkEndGame()
 
@@ -1651,9 +1637,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
 
             if (player.pveRewardsPropositions.length > 0) {
-              resetArraySchema(
-                player.itemsProposition,
-                player.pveRewardsPropositions
+              player.choices.push(
+                new PlayerChoice({
+                  type: "item",
+                  items: values(player.pveRewardsPropositions)
+                })
               )
               player.pveRewardsPropositions.clear()
             }
@@ -1864,31 +1852,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (this.state.specialGameRule === SpecialGameRule.UNOWN_SPELL) {
       this.state.simulations.forEach((simulation) => {
         const unown = pickRandomIn(UnownsForScribble)
-        ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
-          if (
-            !player ||
-            (simulation.isGhostBattle && player === simulation.redPlayer)
-          )
-            return
-          const wanderer = player.spawnWanderingPokemon({
-            pkm: unown,
-            shiny: false,
-            type: WandererType.UNOWN_SPELL,
-            behavior: WandererBehavior.SPECTATE
-          })
-          this.clock.setTimeout(() => {
-            player.wanderers.delete(wanderer.id)
-            if (simulation.finished) return
-            const caster = new PokemonEntity(
-              PokemonFactory.createPokemonFromName(unown),
-              9,
-              2,
-              player.team,
-              simulation
+          ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
+            if (
+              !player ||
+              (simulation.isGhostBattle && player === simulation.redPlayer)
             )
-            castAbility(caster.skill, caster, simulation.board, null, false)
-          }, 10000)
-        })
+              return
+            const wanderer = player.spawnWanderingPokemon({
+              pkm: unown,
+              shiny: false,
+              type: WandererType.UNOWN_SPELL,
+              behavior: WandererBehavior.SPECTATE
+            })
+            this.clock.setTimeout(() => {
+              player.wanderers.delete(wanderer.id)
+              if (simulation.finished) return
+              const caster = new PokemonEntity(
+                PokemonFactory.createPokemonFromName(unown),
+                9,
+                2,
+                player.team,
+                simulation
+              )
+              castAbility(caster.skill, caster, simulation.board, null, false)
+            }, 10000)
+          })
       })
     }
   }

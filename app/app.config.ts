@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises"
 import { monitor } from "@colyseus/monitor"
 import {
   defineRoom,
@@ -11,8 +12,9 @@ import cors from "cors"
 import express, { ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
+import { marked } from "marked"
 import { connect } from "mongoose"
 import path from "path"
 import pkg from "../package.json"
@@ -35,6 +37,7 @@ import AfterGameRoom from "./rooms/after-game-room"
 import CustomLobbyRoom from "./rooms/custom-lobby-room"
 import GameRoom from "./rooms/game-room"
 import PreparationRoom from "./rooms/preparation-room"
+import { buyBoosterForUser, openBoosterForUser } from "./services/booster"
 import {
   addBotToDatabase,
   approveBot,
@@ -42,24 +45,35 @@ import {
   fetchBot,
   fetchBotsList
 } from "./services/bots"
+import {
+  buyEmotionForUser,
+  changeSelectedEmotionForUser
+} from "./services/collection"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
   getDendrogram,
+  getGameActivity,
   getMetadata,
   getMetaItems,
   getMetaPokemons,
   getMetaRegions,
-  getMetaV2
+  getMetaV2,
+  getPlayerRankDistribution
 } from "./services/meta"
+import { getCachedSpriteGapData } from "./services/sprite-gap-scanner"
 import {
   addTwitchBlacklistEntry,
+  completeTwitchAccountVerification,
   getTwitchStreamsPayload,
   listTwitchBlacklist,
-  removeTwitchBlacklistEntry
+  removeTwitchBlacklistEntry,
+  startTwitchAccountVerification,
+  unlinkTwitchAccount
 } from "./services/twitch"
 import { ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
+import { Emotion } from "./types/enum/Emotion"
 import { Item } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
@@ -74,6 +88,68 @@ const setCacheControl = (res: any, maxAge: number = 86400) => {
     res.set("Cache-Control", `max-age=${maxAge}`)
   } else {
     res.set("Cache-Control", "no-cache")
+  }
+}
+
+const legalPageStyle = `
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #f7f7f7;
+        color: #1b1b1b;
+      }
+      main {
+        box-sizing: border-box;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px 16px 48px;
+        background: #fff;
+        min-height: 100vh;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.25;
+      }
+      p,
+      li {
+        line-height: 1.6;
+      }
+`
+
+async function renderLegalPage(
+  res: express.Response,
+  markdownFile: string,
+  pageTitle: string,
+  unavailableMessage: string
+) {
+  try {
+    const markdown = await readFile(
+      path.resolve(process.cwd(), markdownFile),
+      "utf8"
+    )
+    const html = await marked.parse(markdown)
+
+    res.type("html").send(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${pageTitle} | Pokemon Auto Chess</title>
+    <style>${legalPageStyle}</style>
+  </head>
+  <body>
+    <main>
+      ${html}
+    </main>
+  </body>
+</html>`)
+  } catch (error) {
+    logger.error(`Failed to load ${markdownFile}`, error)
+    res.status(500).send(unavailableMessage)
   }
 }
 
@@ -249,6 +325,32 @@ export const server = defineServer({
       res.sendFile(viewsSrc)
     })
 
+    app.get("/privacy-policy", async (req, res) => {
+      await renderLegalPage(
+        res,
+        "policy.md",
+        "Privacy Policy",
+        "Privacy policy is temporarily unavailable"
+      )
+    })
+
+    app.get("/policy", (req, res) => {
+      res.redirect(301, "/privacy-policy")
+    })
+
+    app.get("/terms-of-service", async (req, res) => {
+      await renderLegalPage(
+        res,
+        "terms-of-service.md",
+        "Terms of Service",
+        "Terms of service are temporarily unavailable"
+      )
+    })
+
+    app.get("/terms", (req, res) => {
+      res.redirect(301, "/terms-of-service")
+    })
+
     app.get("/pokemons", (req, res) => {
       res.send(Pkm)
     })
@@ -303,10 +405,28 @@ export const server = defineServer({
       res.send(getMetaV2())
     })
 
+    app.get("/meta/player-rank-distribution", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getPlayerRankDistribution())
+    })
+
+    app.get("/meta/game-activity", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getGameActivity())
+    })
+
     app.get("/dendrogram", async (req, res) => {
       // Set Cache-Control header for 24 hours (86400 seconds)
       setCacheControl(res, 86400)
       res.send(getDendrogram())
+    })
+
+    app.get("/sprite-gap-scanner", async (req, res) => {
+      // Set Cache-Control header for 24 hours (86400 seconds)
+      setCacheControl(res, 86400)
+      res.send(getCachedSpriteGapData())
     })
 
     app.get("/meta/types", async (req, res) => {
@@ -375,6 +495,70 @@ export const server = defineServer({
     app.get("/twitch/streams", async (req, res) => {
       setCacheControl(res, 120)
       res.send(getTwitchStreamsPayload())
+    })
+
+    app.post("/twitch/verify/start", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        const payload = await startTwitchAccountVerification(userAuth.uid)
+        res.status(200).json(payload)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        logger.error("Error starting Twitch verification", { error: message })
+        if (
+          message.includes("not configured") ||
+          message.includes("REDIRECT") ||
+          message.includes("STATE_SECRET")
+        ) {
+          res.status(503).json({ error: message })
+          return
+        }
+        res.status(400).json({ error: message })
+      }
+    })
+
+    app.get("/auth/twitch/callback", async (req, res) => {
+      const state = req.query.state?.toString()
+      const code = req.query.code?.toString()
+      const successRedirect =
+        process.env.TWITCH_VERIFY_SUCCESS_REDIRECT || "/auth"
+      const errorRedirect = process.env.TWITCH_VERIFY_ERROR_REDIRECT || "/auth"
+
+      if (!state || !code) {
+        return res.redirect(`${errorRedirect}?twitchVerify=missing_params`)
+      }
+
+      try {
+        await completeTwitchAccountVerification(code, state)
+        return res.redirect(`${successRedirect}?twitchVerify=success`)
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? encodeURIComponent(error.message)
+            : "verification_failed"
+        logger.error("Error completing Twitch verification", { error: message })
+        return res.redirect(`${errorRedirect}?twitchVerify=${message}`)
+      }
+    })
+
+    app.post("/twitch/verify/unlink", async (req, res) => {
+      const userAuth = await authUser(req, res)
+      if (!userAuth) return
+
+      try {
+        await unlinkTwitchAccount(userAuth.uid)
+        res.status(200).send()
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error"
+        if (message === "User not found") {
+          res.status(404).json({ error: message })
+          return
+        }
+        logger.error("Error unlinking Twitch verification", { error: message })
+        res.status(500).json({ error: "Error unlinking Twitch account" })
+      }
     })
 
     app.get("/game-history/:playerUid", async (req, res) => {
@@ -530,6 +714,134 @@ export const server = defineServer({
       } catch (error) {
         logger.error("Error fetching profile", error)
         res.status(500).send("Error fetching profile")
+      }
+    })
+
+    app.post("/boosters/open", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const result = await openBoosterForUser(userAuth.uid)
+        if (!result) {
+          res.status(409).json({ error: "No boosters available" })
+          return
+        }
+
+        res.status(200).json({
+          boosterContent: result.boosterContent,
+          user: toUserMetadataJSON(result.userDoc)
+        })
+      } catch (error) {
+        logger.error("Error opening booster", error)
+        res.status(500).json({ error: "Error opening booster" })
+      }
+    })
+
+    app.post("/boosters/buy", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+
+        const result = await buyBoosterForUser(userAuth.uid, index)
+        if (!result) {
+          res.status(409).json({ error: "Not enough dust or invalid pokemon" })
+          return
+        }
+
+        res.status(200).json({
+          user: toUserMetadataJSON(result.userDoc)
+        })
+      } catch (error) {
+        logger.error("Error buying booster", error)
+        res.status(500).json({ error: "Error buying booster" })
+      }
+    })
+
+    app.post("/collection/change-selected-emotion", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        const emotion = req.body?.emotion as Emotion | null
+        const shiny = req.body?.shiny
+
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+        if (emotion !== null && !Object.values(Emotion).includes(emotion)) {
+          res.status(400).json({ error: "emotion is invalid" })
+          return
+        }
+        if (typeof shiny !== "boolean") {
+          res.status(400).json({ error: "shiny must be a boolean" })
+          return
+        }
+
+        const result = await changeSelectedEmotionForUser(
+          userAuth.uid,
+          index,
+          emotion,
+          shiny
+        )
+
+        if (!result) {
+          res.status(409).json({ error: "Emotion is not unlocked" })
+          return
+        }
+
+        res.status(200).json({ user: toUserMetadataJSON(result.userDoc) })
+      } catch (error) {
+        logger.error("Error changing selected emotion", error)
+        res.status(500).json({ error: "Error changing selected emotion" })
+      }
+    })
+
+    app.post("/collection/buy-emotion", async (req, res) => {
+      try {
+        const userAuth = await authUser(req, res)
+        if (!userAuth) return
+
+        const index = req.body?.index
+        const emotion = req.body?.emotion as Emotion
+        const shiny = req.body?.shiny
+
+        if (!index || typeof index !== "string") {
+          res.status(400).json({ error: "index is required" })
+          return
+        }
+        if (!emotion || !Object.values(Emotion).includes(emotion)) {
+          res.status(400).json({ error: "emotion is invalid" })
+          return
+        }
+        if (typeof shiny !== "boolean") {
+          res.status(400).json({ error: "shiny must be a boolean" })
+          return
+        }
+
+        const result = await buyEmotionForUser(
+          userAuth.uid,
+          index,
+          emotion,
+          shiny
+        )
+        if (!result) {
+          res.status(409).json({ error: "Not enough dust or invalid state" })
+          return
+        }
+
+        res.status(200).json({ user: toUserMetadataJSON(result.userDoc) })
+      } catch (error) {
+        logger.error("Error buying emotion", error)
+        res.status(500).json({ error: "Error buying emotion" })
       }
     })
 

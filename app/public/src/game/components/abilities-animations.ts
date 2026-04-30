@@ -757,6 +757,10 @@ const poppingIcon: AbilityAnimationMaker<
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
+  ["PUFF_RED"]: onTargetScale2,
+  ["PUFF_PINK"]: onTargetScale2,
+  ["PUFF_GREEN"]: onTargetScale2,
+  ["PUFF_BROWN"]: onTargetScale2,
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
@@ -818,6 +822,17 @@ export const AbilitiesAnimations: {
   }),
   ["FIELD_DEATH"]: onCasterScale2,
   ["FAIRY_CRIT"]: onCasterScale2,
+  ["FAIRY_HIT"]: onTarget({
+    ability: "FAIRY/hit",
+    textureKey: "attacks"
+  }),
+  ["FAIRY_TUNNEL"]: projectile({
+    ability: Ability.PSYCHO_CUT,
+    distance: 8,
+    duration: 1000,
+    oriented: true,
+    rotation: +Math.PI / 2
+  }),
   ["POWER_LENS"]: onCasterScale2,
   ["STAR_DUST"]: onCasterScale2,
   ["HEAL_ORDER"]: onCasterScale2,
@@ -2949,6 +2964,11 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
   }),
+  [Ability.AQUA_STEP]: onCaster({
+    ability: Ability.AQUA_STEP,
+    scale: 1,
+    positionOffset: [+5, -15]
+  }),
   [Ability.STATIC_SHOCK]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
@@ -3022,6 +3042,20 @@ export const AbilitiesAnimations: {
     ability: "INFERNO",
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 2
+  }),
+  ["WARP_WAND"]: onSprite(({ targetSprite, ...args }) => {
+    onTarget({ ability: Ability.FUTURE_SIGHT, scale: 1.5 })(args)
+    if (targetSprite) {
+      targetSprite.isTeleporting = true
+      setTimeout(() => {
+        targetSprite.isTeleporting = false
+      }, 1000)
+    }
+  }),
+  ["WHIRLWIND_WAND"]: projectile({
+    ability: Ability.WHIRLWIND,
+    duration: 1500,
+    distance: 8
   })
 }
 

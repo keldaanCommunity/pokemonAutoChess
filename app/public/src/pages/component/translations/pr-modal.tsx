@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Language } from "../../../../../types/enum/Language"
 import "./pr-modal.css"
 

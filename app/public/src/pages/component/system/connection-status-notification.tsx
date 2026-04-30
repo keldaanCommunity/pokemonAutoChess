@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { ConnectionStatus } from "../../../../../types/enum/ConnectionStatus"
 import { useAppSelector } from "../../../hooks"

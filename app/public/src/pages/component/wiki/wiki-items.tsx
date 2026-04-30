@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ArtificialItems,
@@ -19,6 +19,7 @@ import {
   TMsSilver,
   Tools,
   TownItems,
+  Wands,
   WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
@@ -283,6 +284,14 @@ export default function WikiItems() {
         </p>
         <ul>
           <ItemList items={WeatherRocks} />
+        </ul>
+
+        <h3>
+          <SynergyIcon type={Synergy.FAIRY} /> {t("wiki.items.wands")}
+        </h3>
+        <p>{addIconsToDescription(t("wiki.items.wands_description"))}</p>
+        <ul>
+          <ItemList items={Wands} />
         </ul>
 
         <h3>

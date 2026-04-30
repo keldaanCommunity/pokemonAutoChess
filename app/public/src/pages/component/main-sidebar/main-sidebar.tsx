@@ -28,6 +28,7 @@ import { usePatchVersion } from "../patchnotes/usePatchVersion"
 import PokeGuesser from "../pokeguesser/pokeguesser"
 import Profile from "../profile/profile"
 import ServersList from "../servers/servers-list"
+import SpriteTrackerModal from "../sprite-tracker/sprite-tracker-modal"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import TierListMakerModal from "../tier-list/tier-list-maker-modal"
 import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
@@ -152,14 +153,16 @@ export function MainSidebar(props: MainSidebarProps) {
 
         <NavLink
           svg="meta"
-          onClick={() =>
-            window.open(
-              "https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/policy.md",
-              "_blank"
-            )
-          }
+          onClick={() => window.open("/privacy-policy", "_blank")}
         >
           {t("policy")}
+        </NavLink>
+
+        <NavLink
+          svg="meta"
+          onClick={() => window.open("/terms-of-service", "_blank")}
+        >
+          {t("terms_of_service", "Terms of Service")}
         </NavLink>
 
         <NavLink
@@ -192,17 +195,18 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("collection")}
           </NavLink>
         )}
-        {page === "main_lobby" && profileLevel >= GADGETS.bag.levelRequired && (
-          <NavLink
-            location="booster"
-            svg="booster"
-            className="blue"
-            handleClick={changeModal}
-            shimmer={numberOfBooster > 0}
-          >
-            {t("boosters")}
-          </NavLink>
-        )}
+        {(page === "main_lobby" || page === "preparation") &&
+          profileLevel >= GADGETS.bag.levelRequired && (
+            <NavLink
+              location="booster"
+              svg="booster"
+              className="blue"
+              handleClick={changeModal}
+              shimmer={numberOfBooster > 0}
+            >
+              {t("boosters")}
+            </NavLink>
+          )}
         <NavLink
           location="wiki"
           svg="wiki"
@@ -282,6 +286,18 @@ export function MainSidebar(props: MainSidebarProps) {
             handleClick={changeModal}
           >
             {t("gadget.tier_list_maker")}
+          </NavLink>
+        )}
+
+        {((!GADGETS.sprite_tracker.disabled &&
+          profileLevel >= GADGETS.sprite_tracker.levelRequired) ||
+          profile?.role === Role.ADMIN) && (
+          <NavLink
+            svg="pokemon-sprite"
+            location="sprite-tracker"
+            handleClick={changeModal}
+          >
+            {t("gadget.sprite_tracker")}
           </NavLink>
         )}
 
@@ -462,6 +478,7 @@ export type Modals =
   | "pokeguesser"
   | "profile"
   | "servers"
+  | "sprite-tracker"
   | "synergy-wheel"
   | "team-builder"
   | "tier-list"
@@ -555,6 +572,10 @@ function Modals({
       />
       <TierListMakerModal
         show={modal === "tier-list"}
+        handleClose={closeModal}
+      />
+      <SpriteTrackerModal
+        show={modal === "sprite-tracker"}
         handleClose={closeModal}
       />
       <GameOptionsModal

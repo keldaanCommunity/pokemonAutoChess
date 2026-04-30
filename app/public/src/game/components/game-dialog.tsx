@@ -1,5 +1,4 @@
 import { GameObjects } from "phaser"
-import React from "react"
 import ReactDOM from "react-dom/client"
 import PokemonPortrait, {
   PortraitOptions

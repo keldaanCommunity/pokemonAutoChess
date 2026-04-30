@@ -58,9 +58,15 @@ export function ItemDetailTooltipContent({
     return null
   }, [item, t])
 
+  if (isIn(Object.values(Item), item) === false) return null
+
   return (
     <div className="game-item-detail">
-      <img className="game-item-detail-icon" src={`assets/item/${item}.png`} />
+      <img
+        className="game-item-detail-icon"
+        src={`assets/item/${item}.png`}
+        alt={t(`item.${item}`)}
+      />
       <div className="game-item-detail-name">
         {ItemRecipe[item] && (
           <div className="game-item-recipe">
@@ -69,6 +75,7 @@ export function ItemDetailTooltipContent({
                 <img
                   className="game-item-detail-icon"
                   src={`assets/item/${item}.png`}
+                  alt={t(`item.${item}`)}
                   key={item}
                 />
                 {i === 0 && " + "}
@@ -97,12 +104,13 @@ export function ItemDetailTooltipContent({
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">
           {recipes.map(([result, recipe]) => {
-            const otherComponent = recipe[0] == item ? recipe[1] : recipe[0]
+            const otherComponent = recipe[0] === item ? recipe[1] : recipe[0]
             return (
               <div className="game-item-detail-combination" key={result}>
                 <p>+</p>
                 <img
                   src={`assets/item/${otherComponent}.png`}
+                  alt={t(`item.${otherComponent}`)}
                   data-tooltip-id="item-detail-recipes-tooltip"
                   data-tooltip-content={otherComponent}
                   data-tooltip-place="right"
@@ -110,6 +118,7 @@ export function ItemDetailTooltipContent({
                 <p>=</p>
                 <img
                   src={`assets/item/${result}.png`}
+                  alt={t(`item.${result}`)}
                   data-tooltip-id="item-detail-recipes-tooltip"
                   data-tooltip-content={result}
                 />

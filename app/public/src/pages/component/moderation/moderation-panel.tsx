@@ -12,8 +12,8 @@ import {
   searchMessages,
   TwitchBlacklistEntry
 } from "../../../network"
-import ChatHistory from "../chat/chat-history"
 import { RemoveButton } from "../buttons/remove-button"
+import ChatHistory from "../chat/chat-history"
 import SearchResults from "../profile/search-results"
 import "./moderation-panel.css"
 

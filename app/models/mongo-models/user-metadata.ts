@@ -18,6 +18,23 @@ const userMetadataSchema = new Schema({
   displayName: {
     type: String
   },
+  twitchUserId: {
+    type: String
+  },
+  twitchLogin: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
+  twitchDisplayName: {
+    type: String
+  },
+  twitchVerifiedAt: {
+    type: Date
+  },
+  twitchVerificationRevokedAt: {
+    type: Date
+  },
   language: {
     type: String,
     default: "en"
@@ -117,7 +134,10 @@ userMetadataSchema.index(
   { displayName: 1 },
   { collation: { locale: "en", strength: 2 } }
 )
+userMetadataSchema.index({ elo: 1 })
 userMetadataSchema.index({ titles: 1 })
+userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
+userMetadataSchema.index({ twitchLogin: 1 }, { unique: true, sparse: true })
 
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 

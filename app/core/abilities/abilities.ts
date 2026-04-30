@@ -5234,7 +5234,7 @@ export class GeomancyStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack(15, pokemon, 1, crit)
     pokemon.addSpecialDefense(10, pokemon, 1, crit)
-    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addSpeed(15, pokemon, 0, false)
   }
 }
 
@@ -6002,7 +6002,7 @@ export class HailStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = 50
-    const numberOfProjectiles = [10, 20, 30][pokemon.stars - 1] ?? 30
+    const numberOfProjectiles = [8, 15, 30][pokemon.stars - 1] ?? 30
 
     for (let i = 0; i < numberOfProjectiles; i++) {
       const x = randomBetween(0, BOARD_WIDTH - 1)
@@ -11429,7 +11429,7 @@ export class RageStrategy extends AbilityStrategy {
     const atkBoost =
       pokemon.baseAtk * 0.1 * Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
-    pokemon.resetCooldown(200)
+    pokemon.resetCooldown(1000)
   }
 }
 
@@ -11543,6 +11543,7 @@ export class BulkUpStrategy extends AbilityStrategy {
     const defBoost = Math.ceil(0.5 * pokemon.baseDef)
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.addDefense(defBoost, pokemon, 1, crit)
+    pokemon.resetCooldown(300)
   }
 }
 
@@ -11605,10 +11606,11 @@ export class FlyStrategy extends AbilityStrategy {
 }
 
 export class SurfStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: null,
     crit: boolean,
     preventDefaultAnim?: boolean,
     tierLevel = pokemon.stars
@@ -11667,9 +11669,9 @@ export class SurfStrategy extends AbilityStrategy {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
     }
 
-    if (targetsHit.size === 0) {
-      // ensure to at least hit the target
-      target.handleSpecialDamage(
+    if (targetsHit.size === 0 && farthestCoordinate?.target) {
+      // ensure to at least hit the farthest target
+      farthestCoordinate.target.handleSpecialDamage(
         damage,
         board,
         AttackType.SPECIAL,
@@ -11939,7 +11941,7 @@ export class DarkLariatStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     //The user swings both arms and hits the target several times while moving behind them. Each hit deals [100,SP]% ATK as SPECIAL. Number of hits increase with SPEED. Target is FLINCH during the attack.
-    const hits = Math.round((0.5 + 0.01 * pokemon.speed) * 3)
+    const hits = Math.round((1 + 0.01 * pokemon.speed) * 3)
     target.status.triggerFlinch(1000, target, pokemon)
     for (let i = 0; i < hits; i++) {
       pokemon.commands.push(
@@ -12079,6 +12081,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+
+          pokemon.addAbilityPower(5, pokemon, 0, false, false)
           board
             .getAdjacentCells(target.positionX, target.positionY, false)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
@@ -12097,6 +12101,8 @@ export class DragonPulseStrategy extends AbilityStrategy {
                   pokemon,
                   crit
                 )
+                pokemon.addAbilityPower(5, pokemon, 0, false, false)
+
                 pokemon.commands.push(
                   new DelayedCommand(() => {
                     if (pokemon && cell.value) {
@@ -12121,6 +12127,7 @@ export class DragonPulseStrategy extends AbilityStrategy {
                             pokemon,
                             crit
                           )
+                          pokemon.addAbilityPower(5, pokemon, 0, false, false)
                         })
                     }
                   }, 400)
@@ -16133,7 +16140,6 @@ export class HyperBeamStrategy extends AbilityStrategy {
 
     pokemon.commands.push(
       new DelayedCommand(() => {
-        pokemon.broadcastAbility({ skill: "HYPER_BEAM" })
         const damage = [50, 100, 150][pokemon.stars - 1] ?? 150
         pokemon.broadcastAbility({
           skill: Ability.HYPER_BEAM,
@@ -16557,6 +16563,74 @@ export class RockWreckerStrategy extends AbilityStrategy {
     target.status.triggerFlinch(2000, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     pokemon.status.triggerFatigue(4000, pokemon)
+  }
+}
+
+export class SnoreStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Deal [20,40,60,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds.
+    const damage = [20, 40, 60][pokemon.stars - 1] ?? 70
+    const targets = board
+      .getCellsInFront(pokemon, target)
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+
+    for (const cell of targets) {
+      if (cell.value) {
+        cell.value.status.triggerFlinch(3000, pokemon)
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }
+    }
+  }
+}
+export class AquaStepStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+    const speedGain = [10, 15, 20][pokemon.stars - 1] ?? 20
+
+    const dx = target.positionX - pokemon.positionX
+    const dy = target.positionY - pokemon.positionY
+    const stepCell = board.getClosestAvailablePlace(
+      pokemon.positionX + Math.sign(dx),
+      pokemon.positionY + Math.sign(dy)
+    )
+    if (stepCell) {
+      pokemon.moveTo(stepCell.x, stepCell.y, board, false)
+    }
+
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.broadcastAbility({
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+        pokemon.addSpeed(speedGain, pokemon, 1, true)
+      }, 300)
+    )
   }
 }
 
@@ -17092,7 +17166,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
   [Ability.RAGING_BULL]: new RagingBullStrategy(),
   [Ability.ELECTRIFY]: new ElectrifyStrategy(),
-  [Ability.HEADLONDING_RUSH]: new HeadlongRushStrategy(),
+  [Ability.HEADLONG_RUSH]: new HeadlongRushStrategy(),
   [Ability.WAVE_SPLASH]: new WaveSplashStrategy(),
   [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
@@ -17109,7 +17183,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
   [Ability.MOUNTAIN_GALE]: new MountainGaleStrategy(),
   [Ability.TWINEEDLE]: new TwineedleStrategy(),
-  [Ability.ROCK_WRECKER]: new RockWreckerStrategy()
+  [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
+  [Ability.AQUA_STEP]: new AquaStepStrategy(),
+  [Ability.SNORE]: new SnoreStrategy()
 }
 
 export function castAbility(

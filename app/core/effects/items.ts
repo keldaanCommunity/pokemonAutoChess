@@ -46,6 +46,7 @@ import { FlowerPotMons } from "../flower-pots"
 import { getUnitScore, PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
+  BeforeAttackEffect,
   Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -666,38 +667,22 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ) * 2,
-        pokemon,
-        0,
-        false
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
       )
-      pokemon.addSpeed(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addShield(repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(repeatBallValue, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAbilityPower(
-        -Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
-        pokemon,
-        0,
-        false
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
       )
+      pokemon.addShield(-repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(-repeatBallValue, pokemon, 0, false)
     })
   ],
 
@@ -928,9 +913,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           attacker: pokemon,
           shouldTargetGainMana: true
         })
-        if (chance(0.3, pokemon)) {
-          attacker.status.triggerWound(3000, attacker, pokemon)
-        }
+        attacker.status.triggerWound(3000, attacker, pokemon)
       }
     })
   ],
@@ -944,6 +927,25 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.SCOPE_LENS]: [
+    new OnAttackEffect(({ pokemon, target, crit }) => {
+      if (crit && target) {
+        const ppStolen = max(target.pp)(10)
+        pokemon.addPP(ppStolen, pokemon, 0, false)
+        target.addPP(-ppStolen, pokemon, 0, false)
+        target.count.manaBurnCount++
+      }
+    })
+  ],
+
+  [Item.RAZOR_FANG]: [
+    new BeforeAttackEffect(({ target, crit }) => {
+      if (crit && target) {
+        target.status.triggerArmorReduction(2000, target)
+      }
+    })
+  ],
+
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -954,6 +956,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LEPPA_BERRY]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.eatBerry(Item.LEPPA_BERRY)
+    })
+  ],
+
+  [Item.BABIRI_BERRY]: [
+    new OnAttackReceivedEffect(({ pokemon, crit }) => {
+      if (crit) {
+        pokemon.eatBerry(Item.BABIRI_BERRY)
+      }
     })
   ],
 
@@ -1324,9 +1334,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
 
-      pokemon.broadcastAbility({ skill: "EXPLOSION" })
-      pokemon.removeItem(Item.EXPLOSIVE_BAND)
-
       adjacentCells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -1354,5 +1361,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       })
     }, Item.EFFICIENT_BANDANNA)
+  ],
+
+  [Item.LUCKY_RIBBON]: [
+    new OnSimulationStartEffect(({ entity }) => {
+      entity.addDodgeChance(0.15, entity, 0, false)
+    })
   ]
 }

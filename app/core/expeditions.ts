@@ -22,6 +22,7 @@ import {
   RescueMissionData
 } from "../types/enum/Expedition"
 import { Rarity } from "../types/enum/Game"
+import { Synergy } from "../types/enum/Synergy"
 import {
   IUserMetadataClient,
   IUserMetadataMongo,
@@ -42,7 +43,7 @@ export function getPlayerExpeditions(
   const expeditions: Expedition[] = [...expeditionsTypes, ...expeditionsTypes]
     .slice(hash % expeditionsTypes.length, (hash % expeditionsTypes.length) + 3)
     .map((type, i) => ({
-      rank: getExpeditionTier(user.eventPoints - i),
+      rank: getExpeditionTier(user.eventPoints, i),
       type,
       hash
     }))
@@ -50,19 +51,57 @@ export function getPlayerExpeditions(
   return expeditions
 }
 
-export function getExpeditionTier(level: number): ExpeditionRank {
-  if (level < 3) {
-    return ExpeditionRank.E
-  } else if (level < 6) {
-    return ExpeditionRank.D
-  } else if (level < 10) {
-    return ExpeditionRank.C
-  } else if (level < 15) {
-    return ExpeditionRank.B
-  } else if (level < 20) {
-    return ExpeditionRank.A
-  } else {
-    return ExpeditionRank.S
+export function getExpeditionTier(
+  level: number,
+  index: number
+): ExpeditionRank {
+  switch (index) {
+    case 0: {
+      if (level < 3) {
+        return ExpeditionRank.E
+      } else if (level < 6) {
+        return ExpeditionRank.D
+      } else if (level < 10) {
+        return ExpeditionRank.C
+      } else if (level < 15) {
+        return ExpeditionRank.B
+      } else if (level < 20) {
+        return ExpeditionRank.A
+      } else {
+        return ExpeditionRank.S
+      }
+    }
+
+    case 1: {
+      if (level < 5) {
+        return ExpeditionRank.E
+      } else if (level < 10) {
+        return ExpeditionRank.D
+      } else if (level < 15) {
+        return ExpeditionRank.C
+      } else if (level < 20) {
+        return ExpeditionRank.B
+      } else if (level < 30) {
+        return ExpeditionRank.A
+      } else {
+        return ExpeditionRank.S
+      }
+    }
+
+    case 2:
+    default: {
+      if (level < 6) {
+        return ExpeditionRank.E
+      } else if (level < 12) {
+        return ExpeditionRank.D
+      } else if (level < 18) {
+        return ExpeditionRank.C
+      } else if (level < 25) {
+        return ExpeditionRank.B
+      } else {
+        return ExpeditionRank.A
+      }
+    }
   }
 }
 
@@ -149,6 +188,7 @@ export function getExpeditionData(
               (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
             ) === index
         ) // get only base alt forms
+
       const pokemonToRescue =
         pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
       return { pokemon: pokemonToRescue }
@@ -157,7 +197,9 @@ export function getExpeditionData(
     case ExpeditionType.EXPLORATION: {
       const regions = Object.values(DungeonPMDO)
       const region = regions[expedition.hash % regions.length]
-      const regionSynergies = RegionDetails[region].synergies
+      const regionSynergies = RegionDetails[region].synergies.filter(
+        (s) => s !== Synergy.BABY
+      )
       const synergy = regionSynergies[expedition.hash % regionSynergies.length]
       const synergyTriggers = SynergyTriggers[synergy]
       const level = synergyTriggers[max(synergyTriggers.length - 1)(rankIndex)]

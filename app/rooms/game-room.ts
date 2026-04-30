@@ -3,18 +3,14 @@ import { MapSchema } from "@colyseus/schema"
 import { Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import {
-  AdditionalPicksStages,
   ALLOWED_GAME_RECONNECTION_TIME,
   ExpPlace,
   getCurrentGameEvent,
-  LegendaryPool,
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
-  PortalCarouselStages,
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
-  UniquePool,
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
@@ -40,7 +36,6 @@ import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
 import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
@@ -67,20 +62,20 @@ import {
 import { CloseCodes } from "../types/enum/CloseCodes"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
+import { Item, Wands } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
   PkmDuos,
   PkmIndex,
-  PkmProposition,
   PkmRegionalVariants
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { GameEvent } from "../types/events"
 import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
-import { removeInArray } from "../utils/array"
+import type { IDetailledPokemon } from "../types/models/bot-v2"
+import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -332,16 +327,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.startGame()
     }, MAX_LOADING_TIME) // maximum 3 minutes of loading game, game will start no matter what after that
 
-    this.onMessage(Transfer.ITEM, (client, item: Item) => {
-      if (!this.state.gameFinished && client.auth) {
-        try {
-          this.pickItemProposition(client.auth.uid, item)
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    })
-
     this.onMessage(Transfer.SHOP, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -369,15 +354,22 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
 
-    this.onMessage(Transfer.POKEMON_PROPOSITION, (client, pkm: Pkm) => {
-      if (!this.state.gameFinished && client.auth) {
-        try {
-          this.pickPokemonProposition(client.auth.uid, pkm)
-        } catch (error) {
-          logger.error(error)
+    this.onMessage(
+      Transfer.CHOICE,
+      (client, message: { choiceId: string; choiceIndex: number }) => {
+        if (!this.state.gameFinished && client.auth) {
+          try {
+            this.pickChoice(
+              client.auth.uid,
+              message.choiceId,
+              message.choiceIndex
+            )
+          } catch (error) {
+            logger.error(error)
+          }
         }
       }
-    })
+    )
 
     this.onMessage(Transfer.DRAG_DROP, (client, message: IDragDropMessage) => {
       if (!this.state.gameFinished) {
@@ -1200,133 +1192,118 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  pickPokemonProposition(
+  pickChoice(
     playerId: string,
-    pkm: PkmProposition,
+    choiceId: string,
+    choiceIndex: number,
     bypassLackOfSpace = false
   ) {
     const player = this.state.players.get(playerId)
-    if (!player || player.pokemonsProposition.length === 0) return
+    if (!player) return
+    const choice = player.choices.find((c) => c.id === choiceId)
     if (
-      this.state.additionalPokemons.includes(pkm as Pkm) &&
-      this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE
+      !choice ||
+      choiceIndex < 0 ||
+      choiceIndex >= (choice.pokemons?.length || choice.items?.length)
     )
-      return // already picked, probably a double click
-    if (
-      UniquePool.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[1] &&
-      !(
-        this.state.specialGameRule === SpecialGameRule.UNIQUE_STARTER &&
-        this.state.stageLevel <= 1
+      return
+
+    if (choice.pokemons.length > 0) {
+      const pkm = choice.pokemons[choiceIndex]
+      let pokemonsObtained: Pokemon[] = (
+        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
+      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
+
+      const pokemon = pokemonsObtained[0]
+      const isEvolution =
+        pokemon.evolutionRule &&
+        pokemon.evolutionRule instanceof CountEvolutionRule &&
+        pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+
+      const freeSpace = getFreeSpaceOnBench(player.board)
+
+      if (
+        freeSpace < pokemonsObtained.length &&
+        !bypassLackOfSpace &&
+        !isEvolution
       )
-    )
-      return // should not be pickable at this stage
-    if (
-      LegendaryPool.includes(pkm) &&
-      this.state.stageLevel !== PortalCarouselStages[2]
-    )
-      return // should not be pickable at this stage
+        return false // prevent picking if not enough space on bench
 
-    let pokemonsObtained: Pokemon[] = (
-      pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-    ).map((p) => PokemonFactory.createPokemonFromName(p, player))
+      if (choice.type === "addPick") {
+        if (pokemonsObtained[0]?.regional) {
+          // If player picked their regional variant, we need to add the base pokemon to the shop pool
+          const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
+            PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
+          ) ?? pokemonsObtained[0].name) as Pkm
+          this.state.shop.addAdditionalPokemon(basePkm, this.state)
+          player.regionalPokemons.push(pkm as Pkm)
+        } else {
+          this.state.shop.addAdditionalPokemon(pkm, this.state)
+        }
 
-    const pokemon = pokemonsObtained[0]
-    const isEvolution =
-      pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof CountEvolutionRule &&
-      pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+        if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
+          pokemonsObtained = pokemonsObtained.map((pkm) => {
+            const evolution = pkm.hasEvolution
+              ? pkm.evolutionRule.getEvolution(
+                  pkm,
+                  player,
+                  this.state.stageLevel
+                )
+              : pkm.name
+            const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
+              pkm.rarity
+            )
+            const replacement = PokemonFactory.createPokemonFromName(
+              evolution,
+              player
+            )
+            replacement.addMaxHP([50, 100, 150][rank] ?? 50)
+            replacement.addAttack([5, 10, 15][rank] ?? 5)
+            replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
+            return replacement
+          })
+        }
 
-    const freeSpace = getFreeSpaceOnBench(player.board)
-
-    if (
-      freeSpace < pokemonsObtained.length &&
-      !bypassLackOfSpace &&
-      !isEvolution
-    )
-      return // prevent picking if not enough space on bench
-
-    // at this point, the player is allowed to pick a proposition
-    const selectedIndex = player.pokemonsProposition.indexOf(pkm)
-    player.pokemonsProposition.clear()
-
-    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      // If player picked their regional variant, we need to add the base pokemon to the shop pool
-      if (pokemonsObtained[0]?.regional) {
-        const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
-          PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
-        ) ?? pokemonsObtained[0].name) as Pkm
-        this.state.shop.addAdditionalPokemon(basePkm, this.state)
-        player.regionalPokemons.push(pkm as Pkm)
-      } else {
-        this.state.shop.addAdditionalPokemon(pkm, this.state)
+        // update regional pokemons in case some regional variants of add picks are now available
+        this.state.players.forEach((p) =>
+          p.updateRegionalPool(this.state, false)
+        )
       }
 
-      if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
-        pokemonsObtained = pokemonsObtained.map((pkm) => {
-          const evolution = pkm.hasEvolution
-            ? pkm.evolutionRule.getEvolution(pkm, player, this.state.stageLevel)
-            : pkm.name
-          const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
-            pkm.rarity
-          )
-          const replacement = PokemonFactory.createPokemonFromName(
-            evolution,
-            player
-          )
-          replacement.addMaxHP([50, 100, 150][rank] ?? 50)
-          replacement.addAttack([5, 10, 15][rank] ?? 5)
-          replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
-          return replacement
-        })
+      if (choice.type === "starter") {
+        player.firstPartner = pokemonsObtained[0].name
       }
 
-      // update regional pokemons in case some regional variants of add picks are now available
-      this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
+      pokemonsObtained.forEach((pokemon) => {
+        const freeCellX = getFirstAvailablePositionInBench(player.board)
+        if (isEvolution) {
+          pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+          pokemon.onAcquired(player)
+          this.checkEvolutionsAfterPokemonAcquired(playerId)
+        } else if (freeCellX !== null) {
+          pokemon.positionX = freeCellX
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+          pokemon.onAcquired(player)
+        } else {
+          // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
+          const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+          player.addMoney(sellPrice, true, null)
+        }
+      })
     }
 
-    if (
-      AdditionalPicksStages.includes(this.state.stageLevel) ||
-      this.state.stageLevel <= 1
-    ) {
-      const selectedItem = player.itemsProposition[selectedIndex]
-      if (player.itemsProposition.length > 0 && selectedItem != null) {
-        player.items.push(selectedItem)
-        player.itemsProposition.clear()
-      }
-    }
-
-    if (this.state.stageLevel <= 1) {
-      player.firstPartner = pokemonsObtained[0].name
-    }
-
-    pokemonsObtained.forEach((pokemon) => {
-      const freeCellX = getFirstAvailablePositionInBench(player.board)
-      if (isEvolution) {
-        pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
-        pokemon.onAcquired(player)
-        this.checkEvolutionsAfterPokemonAcquired(playerId)
-      } else if (freeCellX !== null) {
-        pokemon.positionX = freeCellX
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
-        pokemon.onAcquired(player)
-      } else {
-        // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
-        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-        player.addMoney(sellPrice, true, null)
-      }
-    })
-  }
-
-  pickItemProposition(playerId: string, item: Item) {
-    const player = this.state.players.get(playerId)
-    if (player && player.itemsProposition.includes(item)) {
+    if (choice.items.length > 0) {
+      const item = choice.items[choiceIndex]
       player.items.push(item)
-      player.itemsProposition.clear()
+      if (isIn(Wands, item)) {
+        player.fairyWands.push(item)
+      }
     }
+
+    removeInArray(player.choices, choice)
   }
 
   computeRoundDamage(

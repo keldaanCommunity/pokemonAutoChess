@@ -3,21 +3,22 @@ import { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
 import type { server } from "../../app.config.ts"
 import { FIREBASE_CONFIG } from "../../config"
-import { IBot } from "./models/bot-v2"
 import AfterGameState from "../../rooms/states/after-game-state"
 import GameState from "../../rooms/states/game-state"
 import LobbyState from "../../rooms/states/lobby-state"
 import PreparationState from "../../rooms/states/preparation-state"
-import { Emotion, Item, Role, Title, Transfer } from "../../types"
+import { Emotion, Role, Title, Transfer } from "../../types"
+import type { Booster } from "../../types/Booster"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank.js"
 import { BotDifficulty } from "../../types/enum/Game.js"
-import { PkmProposition } from "../../types/enum/Pokemon.js"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
 import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
+import { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
+import { setBoosterContent } from "./stores/BoostersStore"
 import { logIn, setProfile } from "./stores/NetworkStore"
 
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
@@ -57,6 +58,43 @@ export async function fetchProfile(forceRefresh: boolean = false) {
     .then((profile: IUserMetadataJSON) => {
       store.dispatch(setProfile(profile))
     })
+}
+
+export type TwitchVerificationStartResponse = {
+  authorizeUrl: string
+  expiresAt: string
+}
+
+export async function startTwitchVerification(): Promise<TwitchVerificationStartResponse> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/twitch/verify/start", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  return res.json()
+}
+
+export async function unlinkTwitchVerification(): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/twitch/verify/unlink", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
 }
 
 export const rooms: {
@@ -185,12 +223,8 @@ export function buyInShop(id: number) {
   rooms.game?.send(Transfer.SHOP, { id })
 }
 
-export function pickPokemonProposition(proposition: PkmProposition) {
-  rooms.game?.send(Transfer.POKEMON_PROPOSITION, proposition)
-}
-
-export function pickItem(item: Item) {
-  rooms.game?.send(Transfer.ITEM, item)
+export function pickChoice(choiceId: string, choiceIndex: number) {
+  rooms.game?.send(Transfer.CHOICE, { choiceId, choiceIndex })
 }
 
 export function gameStartRequest(token: string) {
@@ -216,20 +250,106 @@ export function setSpecialRule(rule: SpecialGameRule | null) {
   rooms.preparation?.send(Transfer.CHANGE_SPECIAL_RULE, rule)
 }
 
-export function buyEmotion(params: {
+export async function buyEmotion(params: {
   index: string
   emotion: Emotion
   shiny: boolean
 }) {
-  rooms.lobby?.send(Transfer.BUY_EMOTION, params)
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/collection/buy-emotion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
 }
 
-export function buyBooster(params: { index: string }) {
-  rooms.lobby?.send(Transfer.BUY_BOOSTER, params)
+export async function changeSelectedEmotion(params: {
+  index: string
+  emotion: Emotion | null
+  shiny: boolean
+}) {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/collection/change-selected-emotion", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
 }
 
-export function openBooster() {
-  rooms.lobby?.send(Transfer.OPEN_BOOSTER)
+export async function buyBooster(params: { index: string }) {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  if (!token) throw new Error("User not authenticated")
+
+  const res = await fetch("/boosters/buy", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(params)
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as { user: IUserMetadataJSON }
+  store.dispatch(setProfile(payload.user))
+  return payload
+}
+
+export async function openBooster() {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/boosters/open", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  const payload = (await res.json()) as {
+    boosterContent: Booster
+    user: IUserMetadataJSON
+  }
+
+  store.dispatch(setBoosterContent(payload.boosterContent))
+  store.dispatch(setProfile(payload.user))
+
+  return payload
 }
 
 export function showEmote(emote?: string) {

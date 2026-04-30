@@ -118,13 +118,15 @@ export default class PokemonSprite extends DraggableObject {
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
-  animationLocked: boolean /* will prevent another anim to play before current one is completed */ = false
+  /** Will prevent another anim to play before current one is completed. */
+  animationLocked: boolean = false
   skydiving: boolean = false
   dishes: Item[] = []
   dishesSprites: GameObjects.Sprite[] = []
   inBattle: boolean = false
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
+  isTeleporting: boolean = false
 
   constructor(
     scene: GameScene | DebugScene,
@@ -186,9 +188,9 @@ export default class PokemonSprite extends DraggableObject {
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
-    const sizeBuff = (maxHP - baseHP) / baseHP
+    const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
     this.sprite
-      .setScale(2 + sizeBuff)
+      .setScale(scale)
       .setDepth(DEPTH.POKEMON)
       .setTint(getRegionTint(scene.mapName, preference("colorblindMode")))
 
@@ -238,7 +240,6 @@ export default class PokemonSprite extends DraggableObject {
 
     if (isEntity(pokemon)) {
       this.setLifeBar(pokemon, scene)
-      //this.setEffects(p, scene);
     } else {
       if (pokemon.dishes.size > 0) {
         this.updateDishes(values(pokemon.dishes))
@@ -258,7 +259,7 @@ export default class PokemonSprite extends DraggableObject {
       this.scene.lastPokemonDetail = null
     }
 
-    this.lazyloadAnimations(scene).then(() => {
+    this.lazyLoadAnimations(scene).then(() => {
       if (!this.sprite.scene) return
       this.sprite.setTexture(
         scene.textures.exists(this.pokemon.index) ? this.pokemon.index : "0000"
@@ -287,7 +288,7 @@ export default class PokemonSprite extends DraggableObject {
     return this.pokemon.positionY
   }
 
-  lazyloadAnimations(scene: GameScene | DebugScene): Promise<void> {
+  lazyLoadAnimations(scene: GameScene | DebugScene): Promise<void> {
     return new Promise((resolve) => {
       const tint = this.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL
       const pokemonSpriteKey = `${this.pokemon.index}/${tint}`
@@ -301,7 +302,6 @@ export default class PokemonSprite extends DraggableObject {
 
       let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
       if (spriteCount === 0 && scene?.animationManager) {
-        //logger.debug("loading anims for", this.pokemon.index)
         if (scene.textures.exists(this.pokemon.index) === false) {
           // needs to load the atlas & textures first
           loadCompressedAtlas(scene, this.pokemon.index).then(loadAnimations)
@@ -317,7 +317,6 @@ export default class PokemonSprite extends DraggableObject {
       }
       spriteCount++
 
-      //logger.debug("sprite count for", this.index, spriteCount)
       spriteCountPerPokemon.set(pokemonSpriteKey, spriteCount)
     })
   }
@@ -331,7 +330,6 @@ export default class PokemonSprite extends DraggableObject {
     let spriteCount = spriteCountPerPokemon.get(pokemonSpriteKey) ?? 0
     spriteCount = min(0)(spriteCount - 1)
     if (spriteCount === 0 && scene?.animationManager) {
-      //logger.debug("unloading anims for", indexToUnload, tintToUnload)
       scene.animationManager?.unloadPokemonAnimations(
         indexToUnload,
         tintToUnload
@@ -396,8 +394,6 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   openDetail() {
-    const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
-      "lastPokemonDetail" in scene
     if (!isGameScene(this.scene)) return
     this.scene.closeTooltips()
     if (this.scene.lastPokemonDetail && this.scene.lastPokemonDetail !== this) {
@@ -458,7 +454,7 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  onPointerOver(pointer) {
+  onPointerOver(pointer: Phaser.Input.Pointer) {
     super.onPointerOver(pointer)
 
     if (
@@ -1291,7 +1287,7 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  addPoison(stacks) {
+  addPoison(stacks: number) {
     const poisonTexture = stacks >= 3 ? "POISON_BADLY" : "POISON"
     if (!this.poison) {
       this.poison = this.scene.add
@@ -1299,7 +1295,7 @@ export default class PokemonSprite extends DraggableObject {
         .setScale(2)
       this.poison.anims.play(poisonTexture)
       this.add(this.poison)
-    } else if (this.poison.texture.key !== poisonTexture) {
+    } else if (this.poison.anims.currentAnim?.key !== poisonTexture) {
       this.poison.setTexture("status", `${poisonTexture}/000.png`)
       this.poison.anims.play(poisonTexture)
     }

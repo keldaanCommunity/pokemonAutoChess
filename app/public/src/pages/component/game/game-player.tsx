@@ -1,4 +1,3 @@
-import React from "react"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import { Tooltip } from "react-tooltip"
 
@@ -23,7 +22,9 @@ export default function GamePlayer(props: {
   const connectedPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
-    props.click(props.player.id)
+    if (spectatedPlayerId !== props.player.id) {
+      props.click(props.player.id)
+    }
   }
 
   return (

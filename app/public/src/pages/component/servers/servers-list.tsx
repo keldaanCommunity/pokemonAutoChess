@@ -1,5 +1,5 @@
 import { CONTENT_AS_HTML, markdownToConfig } from "markdown-to-config"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { cc } from "../../utils/jsx"
 import DiscordButton from "../buttons/discord-button"

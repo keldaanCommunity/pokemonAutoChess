@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react"
+import { MouseEventHandler } from "react"
 
 export function RemoveButton(props: {
   onClick: MouseEventHandler

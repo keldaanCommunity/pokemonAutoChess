@@ -1,6 +1,6 @@
 import { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { MAX_LOADING_TIME } from "../../../../../config"
@@ -10,6 +10,7 @@ import { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { client, joinGame, rooms } from "../../../network"
+import { resetBoosters } from "../../../stores/BoostersStore"
 import { resetLobby } from "../../../stores/LobbyStore"
 import GameRoomItem from "./game-room-item"
 
@@ -93,6 +94,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
       })
       joinGame(game, MAX_LOADING_TIME / 1000)
       dispatch(resetLobby())
+      dispatch(resetBoosters())
       navigate("/game")
     }
   }, 1000)

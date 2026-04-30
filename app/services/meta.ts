@@ -1,21 +1,35 @@
 import Dendrogram from "../models/mongo-models/dendrogram"
+import DetailledStatisticV2 from "../models/mongo-models/detailled-statistic-v2"
 import ItemsStatistic from "../models/mongo-models/items-statistic-v2"
 import MetaV2 from "../models/mongo-models/meta-v2"
 import PokemonsStatistics from "../models/mongo-models/pokemons-statistic-v2"
 import RegionStatistic from "../models/mongo-models/regions-statistic"
 import ReportMetadata from "../models/mongo-models/report-metadata"
-import type { IDendrogram } from "../types/models/dendrogram"
-import type { IItemsStatisticV2 } from "../types/models/items-statistic-v2"
-import type { IMetaV2 } from "../types/models/meta-v2"
-import type { IPokemonsStatisticV2 } from "../types/models/pokemons-statistic-v2"
-import type { IRegionStatistic } from "../types/models/regions-statistic"
-import type { IReportMetadata } from "../types/models/report-metadata"
+import UserMetadata from "../models/mongo-models/user-metadata"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { EloRank } from "../types/enum/EloRank"
 import { Synergy } from "../types/enum/Synergy"
 import { ITypeStatistics } from "../types/meta"
+import type { IDendrogram } from "../types/models/dendrogram"
+import type {
+  IGameActivity,
+  IGameActivityDay
+} from "../types/models/game-activity"
+import type { IItemsStatisticV2 } from "../types/models/items-statistic-v2"
+import type { IMetaV2 } from "../types/models/meta-v2"
+import type {
+  IPlayerRankDistribution,
+  IPlayerRankDistributionBucket
+} from "../types/models/player-rank-distribution"
+import type { IPokemonsStatisticV2 } from "../types/models/pokemons-statistic-v2"
+import type { IRegionStatistic } from "../types/models/regions-statistic"
+import type { IReportMetadata } from "../types/models/report-metadata"
 import { logger } from "../utils/logger"
 import { mapToObj } from "../utils/map"
+
+const PLAYER_RANK_BUCKET_START = 600
+const PLAYER_RANK_BUCKET_SIZE = 25
+const PLAYER_RANK_COUNTING_SLOW_MS = 5000
 
 export async function fetchMetaReports() {
   logger.info("Refreshing meta reports...")
@@ -25,7 +39,9 @@ export async function fetchMetaReports() {
     fetchMetaPokemons(),
     fetchMetaRegions(),
     fetchMetaV2(),
-    fetchDendrogramData()
+    fetchDendrogramData(),
+    fetchPlayerRankDistribution(),
+    fetchGameActivity()
   ])
   logger.info("Meta reports refreshed")
   return data
@@ -37,6 +53,143 @@ let metaPokemons = new Array<IPokemonsStatisticV2>()
 let metaRegions = new Array<IRegionStatistic>()
 let metaV2 = new Array<IMetaV2>()
 let dendrogram: IDendrogram | null = null
+let gameActivity: IGameActivity = {
+  updatedAt: new Date(0).toISOString(),
+  days: []
+}
+let playerRankDistribution: IPlayerRankDistribution = {
+  updatedAt: new Date(0).toISOString(),
+  totalPlayers: 0,
+  bucketSize: PLAYER_RANK_BUCKET_SIZE,
+  bucketStart: PLAYER_RANK_BUCKET_START,
+  buckets: []
+}
+
+function makeBucketLabel(minElo: number, maxElo: number) {
+  return `${minElo}-${maxElo}`
+}
+
+async function fetchPlayerRankDistribution() {
+  const countingStartedAt = Date.now()
+
+  const hasEloFilter = {
+    elo: { $ne: null }
+  } as const
+
+  let totalPlayers = 0
+  const bucketStart = PLAYER_RANK_BUCKET_START
+  let highestBucketIndex = -1
+
+  try {
+    totalPlayers = await UserMetadata.countDocuments(hasEloFilter).exec()
+
+    const highestEloPlayer = await UserMetadata.findOne(hasEloFilter)
+      .sort({ elo: -1 })
+      .select({ elo: 1 })
+      .lean()
+      .exec()
+
+    const highestElo =
+      typeof highestEloPlayer?.elo === "number" ? highestEloPlayer.elo : null
+
+    if (highestElo !== null && highestElo >= bucketStart) {
+      highestBucketIndex = Math.floor(
+        (highestElo - bucketStart) / PLAYER_RANK_BUCKET_SIZE
+      )
+    }
+  } catch (error) {
+    logger.error(
+      "Failed to refresh player rank distribution counts; keeping previous snapshot",
+      error
+    )
+    return playerRankDistribution
+  }
+
+  const buckets: IPlayerRankDistributionBucket[] = []
+
+  let rangeBucketQueryCount = 0
+
+  try {
+    // Underflow bucket: all players below bucketStart (600)
+    const underflowCount = await UserMetadata.countDocuments({
+      elo: { $ne: null, $lt: bucketStart }
+    }).exec()
+
+    rangeBucketQueryCount += 1
+
+    buckets.push({
+      bucketLabel: `<${bucketStart}`,
+      count: underflowCount,
+      percentage: totalPlayers > 0 ? (underflowCount / totalPlayers) * 100 : 0,
+      topPercent: 0,
+      minElo: null,
+      maxElo: bucketStart - 1,
+      isUnderflow: true
+    })
+
+    for (let i = 0; i <= highestBucketIndex; i += 1) {
+      const minElo = bucketStart + i * PLAYER_RANK_BUCKET_SIZE
+      const maxElo = minElo + PLAYER_RANK_BUCKET_SIZE - 1
+
+      const count = await UserMetadata.countDocuments({
+        elo: {
+          $gte: minElo,
+          $lte: maxElo
+        }
+      }).exec()
+
+      rangeBucketQueryCount += 1
+
+      buckets.push({
+        bucketLabel: makeBucketLabel(minElo, maxElo),
+        count,
+        percentage: totalPlayers > 0 ? (count / totalPlayers) * 100 : 0,
+        topPercent: 0,
+        minElo,
+        maxElo,
+        isUnderflow: false
+      })
+    }
+  } catch (error) {
+    logger.error(
+      "Failed to refresh player rank distribution bucket counts; keeping previous snapshot",
+      error
+    )
+    return playerRankDistribution
+  }
+
+  const countingDurationMs = Date.now() - countingStartedAt
+
+  if (countingDurationMs >= PLAYER_RANK_COUNTING_SLOW_MS) {
+    logger.warn("Player rank distribution per-bucket counting is slow", {
+      countingDurationMs,
+      rangeBucketQueryCount,
+      slowThresholdMs: PLAYER_RANK_COUNTING_SLOW_MS
+    })
+  } else {
+    logger.info("Player rank distribution per-bucket counting runtime", {
+      countingDurationMs,
+      rangeBucketQueryCount
+    })
+  }
+
+  let cumulativeFromTop = 0
+  for (let i = buckets.length - 1; i >= 0; i -= 1) {
+    cumulativeFromTop += buckets[i].count
+    buckets[i].topPercent =
+      totalPlayers > 0 ? (cumulativeFromTop / totalPlayers) * 100 : 0
+  }
+
+  playerRankDistribution = {
+    updatedAt: new Date().toISOString(),
+    totalPlayers,
+    bucketSize: PLAYER_RANK_BUCKET_SIZE,
+    bucketStart,
+    buckets
+  }
+
+  return playerRankDistribution
+}
 
 async function fetchMetaItems() {
   metaItems = await ItemsStatistic.find().lean().exec()
@@ -81,6 +234,51 @@ export function getMetaRegions() {
 
 export function getMetaV2() {
   return metaV2
+}
+
+export function getPlayerRankDistribution() {
+  return playerRankDistribution
+}
+
+export function getGameActivity() {
+  return gameActivity
+}
+
+async function fetchGameActivity() {
+  const DAYS = 30
+  const since = Date.now() - DAYS * 24 * 60 * 60 * 1000
+
+  try {
+    const rows: { _id: string; gameCount: number }[] =
+      await DetailledStatisticV2.aggregate([
+        { $match: { time: { $gte: since } } },
+        {
+          $group: {
+            _id: {
+              $dateToString: { format: "%Y-%m-%d", date: { $toDate: "$time" } }
+            },
+            gameCount: { $sum: 1 }
+          }
+        },
+        { $sort: { _id: 1 } }
+      ]).exec()
+
+    const days: IGameActivityDay[] = rows
+      .map((row) => ({
+        date: row._id,
+        gameCount: row.gameCount
+      }))
+      .slice(1, -1) // Remove first and last day (incomplete data at edges)
+
+    gameActivity = { updatedAt: new Date().toISOString(), days }
+  } catch (error) {
+    logger.error(
+      "Failed to refresh game activity; keeping previous snapshot",
+      error
+    )
+  }
+
+  return gameActivity
 }
 
 async function fetchDendrogramData() {

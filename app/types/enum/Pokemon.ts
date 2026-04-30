@@ -535,6 +535,7 @@ export enum Pkm {
   KLINK = "KLINK",
   KLINKLANG = "KLINKLANG",
   KOFFING = "KOFFING",
+  KOMALA = "KOMALA",
   KOMMO_O = "KOMMO_O",
   KRABBY = "KRABBY",
   KRICKETOT = "KRICKETOT",
@@ -790,6 +791,9 @@ export enum Pkm {
   PURUGLY = "PURUGLY",
   PYUKUMUKU = "PYUKUMUKU",
   QUAGSIRE = "QUAGSIRE",
+  QUAQUAVAL = "QUAQUAVAL",
+  QUAXLY = "QUAXLY",
+  QUAXWELL = "QUAXWELL",
   QUILAVA = "QUILAVA",
   QUILLADIN = "QUILLADIN",
   QWILFISH = "QWILFISH",
@@ -2177,7 +2181,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MINIOR_KERNEL_BLUE]: "0774-0005",
   [Pkm.MINIOR_KERNEL_ORANGE]: "0774-0002",
   [Pkm.MINIOR_KERNEL_GREEN]: "0774-0004",
-  //[Pkm.KOMALA]: "0775",
+  [Pkm.KOMALA]: "0775",
   [Pkm.TURTONATOR]: "0776",
   [Pkm.TOGEDEMARU]: "0777",
   [Pkm.MIMIKYU]: "0778",
@@ -2339,9 +2343,9 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.FUECOCO]: "0909",
   [Pkm.CROCALOR]: "0910",
   [Pkm.SKELEDIRGE]: "0911",
-  //[Pkm.QUAXLY]: "0912",
-  //[Pkm.QUAXWELL]: "0913",
-  //[Pkm.QUAQUAVAL]: "0914",
+  [Pkm.QUAXLY]: "0912",
+  [Pkm.QUAXWELL]: "0913",
+  [Pkm.QUAQUAVAL]: "0914",
   [Pkm.LECHONK]: "0915",
   [Pkm.OINKOLOGNE_MALE]: "0916",
   //[Pkm.OINKOLOGNE_FEMALE]: "0916-0003",
@@ -3642,7 +3646,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.EISCUE]: Pkm.EISCUE,
   [Pkm.EISCUE_NOICE]: Pkm.EISCUE,
   [Pkm.DWEBBLE]: Pkm.DWEBBLE,
-  [Pkm.CRUSTLE]: Pkm.DWEBBLE
+  [Pkm.CRUSTLE]: Pkm.DWEBBLE,
+  [Pkm.QUAXLY]: Pkm.QUAXLY,
+  [Pkm.QUAXWELL]: Pkm.QUAXLY,
+  [Pkm.QUAQUAVAL]: Pkm.QUAXLY,
+  [Pkm.KOMALA]: Pkm.KOMALA
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3706,7 +3714,7 @@ export enum PkmDuo {
 
 export type PkmProposition = Pkm | PkmDuo
 
-export const PkmDuos = {
+export const PkmDuos: Record<PkmDuo, Pkm[]> = {
   [PkmDuo.LATIOS_LATIAS]: [Pkm.LATIOS, Pkm.LATIAS],
   [PkmDuo.PLUSLE_MINUN]: [Pkm.PLUSLE, Pkm.MINUN],
   [PkmDuo.ILLUMISE_VOLBEAT]: [Pkm.ILLUMISE, Pkm.VOLBEAT],
