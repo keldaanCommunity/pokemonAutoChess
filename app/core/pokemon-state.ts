@@ -994,27 +994,6 @@ export default abstract class PokemonState {
       pokemon.addPP(5, pokemon, 0, false)
     }
 
-    if (pokemon.items.has(Item.GREEN_ORB)) {
-      const adjacentCells = board.getAdjacentCells(
-        pokemon.positionX,
-        pokemon.positionY,
-        true
-      )
-      for (const cell of adjacentCells) {
-        if (cell.value && cell.value.team === pokemon.team) {
-          const { overheal } = cell.value.handleHeal(
-            0.03 * cell.value.maxHP,
-            pokemon,
-            0,
-            false
-          )
-          if (overheal > 0) {
-            cell.value.addPP(0.3 * overheal, pokemon, 0, false)
-          }
-        }
-      }
-    }
-
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
       !pokemon.types.has(Synergy.ROCK) &&

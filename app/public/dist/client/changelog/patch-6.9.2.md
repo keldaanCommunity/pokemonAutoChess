@@ -2,6 +2,7 @@
 
 - Buff Heavy Duty Boots: 40 → 50 AP
 - Buff Sticky Barb: 30% → 100% chance to inflict Wound on contact
+- Nerf Green Orb: 3% of their max HP every second → 5% of their max HP every 2 seconds
 - Buff Pokemonnomicon: When the holder deals special damage, they burn the target for 3 seconds **and reduce its special defense by 1**
 
 # Changes to Pokemon & Abilities

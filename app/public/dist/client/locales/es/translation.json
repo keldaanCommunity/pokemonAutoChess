@@ -2624,7 +2624,7 @@
 		"BLUE_ORB": "Cada 3 ataques del poseedor, desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 10 SPECIAL y quemando 15 PP.",
 		"SCOPE_LENS": "Los golpes críticos roban 10 PP del objetivo.",
 		"STAR_DUST": "Después de lanzar la habilidad, gana el 50 % del PP máximo como SHIELD",
-		"GREEN_ORB": "El poseedor y los aliados en una casilla ADJACENT recuperan 3% de sus HP máximos cada segundo. Un 30% de la curación sobrante se convierte en PP.",
+		"GREEN_ORB": "El poseedor y los aliados en una casilla ADJACENT recuperan 5% de sus HP máximos cada 2 segundos. Un 30% de la curación sobrante se convierte en PP.",
 		"DEEP_SEA_TOOTH": "Los ataques del titular restauran 5 PP adicionales. Si el usuario derrota al objetivo con un ataque, recupera 15 PP adicionales.",
 		"SMOKE_BALL": "Una vez que esté por debajo del 40% de HP máximo, suelta la bola de humo, gana 70 SHIELD y salta a una celda lejana. Cada enemigo ADJACENT queda PARALYSIS y BLINDED durante 4 segundos.",
 		"XRAY_VISION": "+50 SPEED. Los ataques del poseedor ya no pueden fallar.",
