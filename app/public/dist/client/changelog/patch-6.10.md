@@ -43,7 +43,6 @@
 - Fix Disarming Voice (Jigglypuff): charm duration now scales with SP
 - Fix Toxic (Nidoran line): star-scaling and AP/crit scaling now apply correctly
 - Fix Attract (Chansey): charm duration now scales with SP
-- Fix Dark Harvest (Phantump): silence duration 3200ms → 3000ms
 - Fix Freezing Glare (Galarian Slowpoke): base damage now star-scales 20/40/80 instead of always 80
 - Fix Last Respects (Houndour): ★3 curse cast delay 5000ms → 6000ms
 - Fix Burning Jealousy (Magby line): base damage now star-scales 30/50/70 instead of always 70
