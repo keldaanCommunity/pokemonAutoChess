@@ -1571,9 +1571,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
       radius,
       false
     )
-    const charmDuration = Math.round(
-      1000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
+    const charmDuration = 1000
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.status.triggerCharm(charmDuration, target, pokemon, true)
@@ -6664,9 +6662,7 @@ export class AttractStrategy extends AbilityStrategy {
       board.cells.filter((v) => v && v.team !== pokemon.team),
       pokemon.stars
     )
-    const charmDuration = Math.round(
-      1000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
+    const charmDuration = 1000
     targets?.forEach((t) => {
       if (t) {
         pokemon.broadcastAbility({
