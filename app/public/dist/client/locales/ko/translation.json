@@ -2789,7 +2789,7 @@
 		"BLUE_ORB": "장착한 포켓몬의 3번째 공격마다 10 SPECIAL 와 15 PP 를 소멸시키는 체인 라이트닝을 공격대상 주위의 적 두마리를 향해 방출",
 		"SCOPE_LENS": "장착 후 치명타가 나올 경우 대상에게서 10 PP 를 탈취",
 		"STAR_DUST": "장착 후 기술 시전 시 최대 PP 의 50%만큼의 SHIELD 획득",
-		"GREEN_ORB": "장착자 및 인접한 아군은 매 초마다 최대 HP 의 3% 회복",
+		"GREEN_ORB": "장착자 및 인접한 아군은 매 2초마다 최대 HP 의 5% 회복",
 		"DEEP_SEA_TOOTH": "장착 시 매 공격 당 PP +5 회복",
 		"SMOKE_BALL": "HP가 40% 이하가 되면 연막탄을 떨어뜨려 70의 SHIELD를 얻고 한 칸 떨어진 위치로 도약한다. 모든 ADJACENT 적은 4초 간 PARALYSIS와 BLINDED의 효과를 얻는다.",
 		"XRAY_VISION": "장착 시 SPEED +50, 공격 무조건 명중 ",

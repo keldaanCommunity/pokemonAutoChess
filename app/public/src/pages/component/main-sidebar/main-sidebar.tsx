@@ -162,7 +162,7 @@ export function MainSidebar(props: MainSidebarProps) {
           svg="meta"
           onClick={() => window.open("/terms-of-service", "_blank")}
         >
-          {t("terms_of_service", "Terms of Service")}
+          {t("terms_of_service")}
         </NavLink>
 
         <NavLink

@@ -2861,7 +2861,7 @@
 		"BLUE_ORB": "A cada 3 ataques, desencadeia uma corrente de raios que ricocheteia nos 2 inimigos mais próximos, causando 10 de SPECIAL e queimando 15 PP",
 		"SCOPE_LENS": "Acertos críticos roubam 10 PP do alvo",
 		"STAR_DUST": "Após lançar a habilidade, ganhe 50% do PP máxima como SHIELD",
-		"GREEN_ORB": "O portador e aliados ADJACENT recuperam 3% do HP máximo por segundo. 30% da cura excedida é convertida em PP",
+		"GREEN_ORB": "O portador e aliados ADJACENT recuperam 5% do HP máximo a cada 2 segundos. 30% da cura excedida é convertida em PP",
 		"DEEP_SEA_TOOTH": "Os ataques do portador restauram 5 PP adicionais. Se o ataque nocautear o alvo, restaure mais 15 PP adicionais",
 		"SMOKE_BALL": "Quando estiver abaixo de 40% do HP máximo, solte a Bola de Fumaça, ganhe 70 SHIELD e pule para um espaço de distância. Cada inimigo ADJACENT recebe PARALYSIS e BLINDED por 4 segundos.",
 		"XRAY_VISION": "O portador é imune a SLEEP e seus ataques não podem mais errar.",

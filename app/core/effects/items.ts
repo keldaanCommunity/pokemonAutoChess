@@ -239,6 +239,36 @@ export class MachRibbonEffect extends PeriodicEffect {
   }
 }
 
+export class GreenOrbEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon, board) => {
+        const adjacentCells = board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY,
+          true
+        )
+        for (const cell of adjacentCells) {
+          if (cell.value && cell.value.team === pokemon.team) {
+            const { overheal } = cell.value.handleHeal(
+              0.05 * cell.value.maxHP,
+              pokemon,
+              0,
+              false
+            )
+            if (overheal > 0) {
+              cell.value.addPP(0.3 * overheal, pokemon, 0, false)
+            }
+          }
+        }
+        pokemon.broadcastAbility({ skill: "GREEN_ORB" })
+      },
+      Item.GREEN_ORB,
+      2000
+    )
+  }
+}
+
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
   stacks = 0
 
@@ -515,6 +545,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     })
   ],
+
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new SoulDewEffect())
@@ -736,6 +767,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.machRibbonCount = 0
+          break
+        }
+      }
+    })
+  ],
+
+  [Item.GREEN_ORB]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new GreenOrbEffect())
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof GreenOrbEffect) {
+          pokemon.effectsSet.delete(effect)
           break
         }
       }
