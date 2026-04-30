@@ -507,9 +507,7 @@ export class ConfusingMindStrategy extends AbilityStrategy {
       }
     })
 
-    const duration = Math.round(
-      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
-    )
+    const duration = 3000
     const count = 2
     for (let i = 0; i < count; i++) {
       const targetConfused = rank[i]
