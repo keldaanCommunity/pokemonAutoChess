@@ -9587,6 +9587,8 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         opponentTeam,
         board
       )
+    const effectDuration = 3000
+    const marginDuration = 200 // to ensure the effect ticks 3 times exactly, 200ms is a good margin for 3 event loops
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -9595,8 +9597,14 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         board,
         false
       )
-      pokemon.effectsSet.add(new DarkHarvestEffect(3000, pokemon))
-      pokemon.status.triggerSilence(3000, pokemon, pokemon)
+      pokemon.effectsSet.add(
+        new DarkHarvestEffect(effectDuration + marginDuration, pokemon)
+      )
+      pokemon.status.triggerSilence(
+        effectDuration + marginDuration,
+        pokemon,
+        pokemon
+      )
     }
   }
 }

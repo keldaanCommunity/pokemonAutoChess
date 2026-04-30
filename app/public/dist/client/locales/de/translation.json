@@ -1905,7 +1905,7 @@
 		"SLACK_OFF": "Lösche alle negativen Status, heile [30,SP] % der maximalen HP und versetze den Zauberer für 3 Sekunden in den SLEEP",
 		"DARK_VOID": "Füge allen gegnerischen Pokémon in einem Radius von 4 Feldern [30,SP] SPECIAL zu, mit einer Chance von [80,LK] %, SLEEP für 2 Sekunden zu verursachen.",
 		"OVERHEAT": "Fügt allen gegnerischen Pokémon in einem Radius von 4 Feldern um den Benutzer herum [50,SP] SPECIAL zu, +30 %, wenn sie an BURN leiden. Entfroste alle FREEZE-Pokémon.",
-		"HYPNOSIS": "Platziere SLEEP 1 Feind für [2,3,5,6,SP=0,5] Sekunden in den hinteren Reihen",
+		"HYPNOSIS": "Platziere SLEEP 1 Feind für [2,3.5,6,SP=0,5] Sekunden in den hinteren Reihen",
 		"MIMIC": "Kopiert die Fähigkeit des aktuellen Ziels",
 		"HEX": "Fügt dem Ziel [20,40,80,SP] SPECIAL zu. Doppelter Schaden, wenn das Ziel unter einem negativen Status leidet.",
 		"GROWTH": "Erhöhe die maximalen HP um [10,20,40,SP] und ATK um [3,5,7,SP]. Wächst bei ZENITH Wetter um 30 % schneller",

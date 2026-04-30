@@ -1886,7 +1886,7 @@
 		"SLACK_OFF": "Limpe todos os status negativos, cure [30,SP]% do HP máximo e coloque o lançador SLEEP por 3 segundos",
 		"DARK_VOID": "Inflige [30,SP] SPECIAL a todos os Pokémon inimigos em um raio de 4 blocos, com [80,LK]% de chance de causar SLEEP por 2 segundos.",
 		"OVERHEAT": "Zadaje [50,SP] SPECIAL wszystkim wrogim Pokémonom w promieniu 4 pól wokół użytkownika, +30%, jeśli cierpią na BURN. Odmroź wszystkie Pokémon FREEZE.",
-		"HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,4,6,SP=0.5] segundos",
+		"HYPNOSIS": "Coloque SLEEP 1 inimigo nas linhas de trás por [2,3.5,6,SP=0.5] segundos",
 		"MIMIC": "Copia a habilidade do alvo atual",
 		"HEX": "Causa [20,40,80,SP] SPECIAL ao alvo. Dano dobrado se o alvo sofrer de um status negativo.",
 		"GROWTH": "Aumente o HP máximo em [10,20,40,SP] e o ATK em [3,5,7,SP]. Cresce 30% se o clima for ZENITH",

@@ -1894,7 +1894,7 @@
 		"SLACK_OFF": "Cura todos los estados negativos, [30,SP] % del HP máximo y deja al usuario SLEEP por 3 segundos",
 		"DARK_VOID": "Inflige [30,SP] SPECIAL a todos los Pokémon enemigos en un radio de 4 casillas, con un [80,LK]% de probabilidad de provocar xSLEEP durante 2 segundos.",
 		"OVERHEAT": "Inflige [50,SP] de SPECIAL a todos los Pokémon enemigos en un radio de 4 casillas alrededor del usuario, +30 % si sufren de BURN. Descongela todos los Pokémon FREEZE.",
-		"HYPNOSIS": "Deja SLEEP a 1 enemigo en la retaguardia por [2,3,5,6,SP=0,5] segundos",
+		"HYPNOSIS": "Deja SLEEP a 1 enemigo en la retaguardia por [2,3.5,6,SP=0,5] segundos",
 		"MIMIC": "Copia la habilidad del objetivo actual",
 		"HEX": "Inflige [20,40,80,SP] SPECIAL al objetivo. Daño doble si el objetivo sufre un estado negativo.",
 		"GROWTH": "Aumenta el HP máximo en [10,20,40,SP] y el ATK en [3,5,7,SP]. Aumentado en un 30% si el clima es ZENITH",
