@@ -1735,8 +1735,8 @@ export class Larvitar extends Pokemon {
   evolution = Pkm.PUPITAR
   hp = 75
   atk = 7
-  speed = 45
-  def = 8
+  speed = 39
+  def = 5
   speDef = 4
   maxPP = 90
   range = 1
@@ -1750,8 +1750,8 @@ export class Pupitar extends Pokemon {
   evolution = Pkm.TYRANITAR
   hp = 130
   atk = 14
-  speed = 45
-  def = 12
+  speed = 39
+  def = 9
   speDef = 8
   maxPP = 90
   range = 1
@@ -1764,8 +1764,8 @@ export class Tyranitar extends Pokemon {
   stars = 3
   hp = 210
   atk = 28
-  speed = 45
-  def = 16
+  speed = 39
+  def = 12
   speDef = 10
   maxPP = 90
   range = 1

@@ -14,6 +14,7 @@
 - Buff Litten: HP 90/170/280 → 95/180/300 ; Attack 8/14/24 → 8/15/30 ; Spe def: 6/10/14 → 8/12/16 ; Dark Lariat base number of hits: 3 → 4
 - Nerf Chingling line: Def: 7/10 → 5/8, Spe def: 8/12 → 6/9
 - Nerf Hail (Amaura, Regice): hailstorm hits 10/20/30 → 8/15/30 random tiles on the target's side of the board.
+- Nerf Larvitar line: Speed 45 → 39; Def: 8/12/16 → 5/9/12
 
 # Bugfixes
 
