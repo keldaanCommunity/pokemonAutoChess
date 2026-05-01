@@ -1178,7 +1178,11 @@
 		"EISCUE": "冰砌鹅（结冻头）",
 		"EISCUE_NOICE": "冰砌鹅",
 		"DWEBBLE": "石居蟹",
-		"CRUSTLE": "岩殿居蟹"
+		"CRUSTLE": "岩殿居蟹",
+		"QUAXLY": "润水鸭",
+    	"QUAXWELL": "涌跃鸭",
+    	"QUAQUAVAL": "狂欢浪舞鸭",
+		"KOMALA": "树枕尾熊"
 	},
 	"rarity": {
 		"COMMON": "常见",
@@ -1749,7 +1753,9 @@
 		"CEASELESS_EDGE": "秘剑・千重涛",
 		"MOUNTAIN_GALE": "冰山风",
 		"TWINEEDLE": "双针",
-		"ROCK_WRECKER": "岩石炮"
+		"ROCK_WRECKER": "岩石炮",
+		"AQUA_STEP": "流水旋舞",
+		"SNORE": "打鼾"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
@@ -2297,7 +2303,9 @@
 		"CEASELESS_EDGE": "攻击使用者前方的3只敌方宝可梦，造成[20,40,80,SP]点SPECIAL，并在他们的脚下留下菱刺。该招式可以暴击。BOARD_EFFECT：菱刺对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"MOUNTAIN_GALE": "将[1,3]块冰山般巨大的冰块随机砸向目标或ADJACENT敌方宝可梦，每块冰块使其陷入FLINCH 3秒，随后对其造成[40,SP]点SPECIAL。若使用者背上有冰宝，这些冰宝也会一起砸向敌方宝可梦并造成等量伤害。",
 		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。",
-		"ROCK_WRECKER": "对目标发射巨大的岩石，使其陷入FLINCH 2秒，随后对其造成[80,160,SP]点SPECIAL。然后，使用者自身陷入FATIGUE 4秒。"
+		"ROCK_WRECKER": "对目标发射巨大的岩石，使其陷入FLINCH 2秒，随后对其造成[80,160,SP]点SPECIAL。然后，使用者自身陷入FATIGUE 4秒。",
+		"AQUA_STEP": "以盈盈欲滴的步伐移动至没有宝可梦的一个ADJACENT格子，随后对原先的目标造成[25,50,100,SP]点SPECIAL，并提升使用者[10,15,20,SP]点SPEED。",
+		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,SP]点SPECIAL，并使他们陷入FLINCH 3秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3363,6 +3371,7 @@
 		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。",
 		"EISCUE_NOICE": "在SNOW中，开始战斗时变为结冻头，并获得100点SHIELD。陷入或使其他宝可梦陷入FREEZE时，变为结冻头并获得50点SHIELD。",
 		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。",
+		"COMATOSE": "始终处于SLEEP。免疫BURN，POISONNED，FREEZE或是PARALYSIS。SOUND宝可梦的叫声无法唤醒此宝可梦，反而会使之陷入更深的梦境，提升5点AP。",
 		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，并陷入LOCKED直到失去所有SHIELD。"
 	},
 	"stat": {
@@ -3888,6 +3897,7 @@
 	"slower": "减慢",
 	"donate": "赞助",
 	"policy": "政策",
+	"terms_of_service": "服务条款",
 	"community_servers": "社区服务器",
 	"send": "发送",
 	"chat_disabled_anonymous": "匿名用户不允许聊天",
@@ -4006,12 +4016,12 @@
 	"reset": "重置",
 	"snapshot": "快照",
 	"player_choices": {
-    "choose_item": "从以下道具中选择一项",
+	"choose_item": "从以下道具中选择一项",
 		"choose_add_pick": "选择一只附加宝可梦。所有玩家均将能从商店中刷出此宝可梦。",
 		"choose_starter": "选择你的起始宝可梦",
 		"choose_first_partner": "选择你的起始宝可梦。接下来每轮（直到第10轮）开始时，你将获得一只此宝可梦。",
-    "choose_mission_order": "选择要接受的任务",
-    "choose_unique": "选择一只独特宝可梦加入队伍。这是唯一的选择机会，务必慎重！",
+		"choose_mission_order": "选择要接受的任务",
+		"choose_unique": "选择一只独特宝可梦加入队伍。这是唯一的选择机会，务必慎重！",
 		"choose_legendary": "选择一只传说宝可梦加入队伍。这是唯一的选择机会，务必慎重！",
 		"choose_wand": "选择一根魔杖，为我方FAIRY宝可梦的攻击附加额外效果",
 		"free_slot_hint": "需要至少有一个空余的备战位才能选择并获取宝可梦。若选择了一对，需要两个空位。"
@@ -4047,7 +4057,7 @@
 	"sprite_tracker": {
 		"failed_to_fetch_data": "数据获取失败",
 		"error_label": "错误",
-		"summary_line": "SpriteCollab：{{totalSpriteCollab}} | 宝可梦自走棋内暂无：{{missingInPac}} — 最近更新：{{lastUpdated}} ({{refreshDurationMs}} ms)",
+		"summary_line": "SpriteCollab：{{totalSpriteCollab}} | 宝可梦自走棋内暂无：{{missingInPac}} — 最近更新：{{lastUpdated}}（{{refreshDurationMs}} ms）",
 		"criteria_title": "列表筛选规则",
 		"criteria_line_1": "此列表仅考虑SpriteCollab网站上存在的宝可梦自走棋已经可以使用的精灵图系列。",
 		"criteria_line_2": "“已经可以使用”指：此系列至少包含一张精灵头像和最低限度（例：待机，行走，睡眠，受伤，攻击，跳跃等）的精灵图动画。",
@@ -4228,7 +4238,9 @@
 		"synergy_wheel": "共鸣轮盘",
 		"synergy_wheel_desc": "缺乏灵感的时候随机抽取几个共鸣",
 		"tier_list_maker": "强度表制作器",
-		"tier_list_maker_desc": "制作以及分享你自己的强度表"
+		"tier_list_maker_desc": "制作以及分享你自己的强度表",
+		"sprite_tracker": "精灵图检索",
+		"sprite_tracker_desc": "寻找SpriteCollab网站上已有的素材，并和宝可梦自走棋的当前阵容对比"
 	},
 	"level_required": "等级需求",
 	"map": {
