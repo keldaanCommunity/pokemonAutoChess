@@ -2868,7 +2868,7 @@
 		"BLUE_ORB": "Toutes les 3 attaques, libère une chaîne d'éclairs qui rebondit sur les 2 ennemis les plus proches, infligeant 10 SPECIAL et leur retirant 15 PP",
 		"SCOPE_LENS": "Les coups critiques volent 10 PP à la cible.",
 		"STAR_DUST": "Après avoir lancé sa capacité, gagne 50% des PP max en SHIELD",
-		"GREEN_ORB": "Le porteur et les alliés ADJACENT regagnent 3% de leurs HP max chaque seconde. 30% des soins en surplus sont convertis en PP.",
+		"GREEN_ORB": "Le porteur et les alliés ADJACENT regagnent 5% de leurs HP max toutes les 2 secondes. 30% des soins en surplus sont convertis en PP.",
 		"DEEP_SEA_TOOTH": "Les attaques du porteur restaurent 5 PP supplémentaires. Si une attaque met KO la cible, le porteur regagne 15 PP.",
 		"SMOKE_BALL": "Une fois sous les 40% de ses HP max, lâche la boule de fumée, gagne 70 SHIELD et saute vers une case plus loin. Tous les ennemis ADJACENT subissent PARALYSIS et sont BLINDED pendant 4 secondes",
 		"XRAY_VISION": "Le porteur est immunisé contre le SLEEP et ses attaques ne peuvent plus manquer",

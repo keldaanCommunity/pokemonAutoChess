@@ -8,7 +8,7 @@ import {
   PokemonTint,
   SpriteType
 } from "../../../types/enum/Game"
-import { Berries } from "../../../types/enum/Item"
+import { Berries, Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
@@ -255,7 +255,7 @@ export default class AnimationManager {
   }
 
   createEnvironmentAnimations() {
-    Berries.forEach((berryName) => {
+    Berries.filter((b) => b !== Item.NANAB_BERRY).forEach((berryName) => {
       for (let step = 1; step <= 3; step++) {
         this.game.anims.create({
           key: `${berryName}_TREE_STEP_${step}`,

@@ -1196,7 +1196,7 @@ export class HypnosisStrategy extends AbilityStrategy {
     if (farthestTarget) {
       const factor = 0.5
       const duration = Math.round(
-        ([2000, 4000, 6000][pokemon.stars - 1] ?? 2000) *
+        ([2000, 3500, 6000][pokemon.stars - 1] ?? 2000) *
           (1 + (pokemon.ap / 100) * factor) *
           (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
       )
@@ -1571,9 +1571,10 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
       radius,
       false
     )
+    const charmDuration = 1000
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerCharm(1000, target, pokemon, true)
+        cell.value.status.triggerCharm(charmDuration, target, pokemon, true)
       }
     })
   }
@@ -2257,11 +2258,11 @@ export class ToxicStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const factor = 0.5
+    const baseDuration = [3000, 6000, 9000][pokemon.stars - 1] ?? 9000
     const duration = Math.round(
-      [3000, 6000, 9000][pokemon.stars] ??
-        9000 *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      baseDuration *
+        (1 + (pokemon.ap / 100) * factor) *
+        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )
     const count = pokemon.stars
 
@@ -6661,13 +6662,14 @@ export class AttractStrategy extends AbilityStrategy {
       board.cells.filter((v) => v && v.team !== pokemon.team),
       pokemon.stars
     )
+    const charmDuration = 1000
     targets?.forEach((t) => {
       if (t) {
         pokemon.broadcastAbility({
           targetX: t.positionX,
           targetY: t.positionY
         })
-        t?.status.triggerCharm(1000, t, pokemon, true)
+        t?.status.triggerCharm(charmDuration, t, pokemon, true)
       }
     })
   }
@@ -9585,6 +9587,8 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         opponentTeam,
         board
       )
+    const effectDuration = 3000
+    const marginDuration = 200 // to ensure the effect ticks 3 times exactly, 200ms is a good margin for 3 event loops
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -9593,8 +9597,14 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         board,
         false
       )
-      pokemon.effectsSet.add(new DarkHarvestEffect(3200, pokemon))
-      pokemon.status.triggerSilence(3200, pokemon, pokemon)
+      pokemon.effectsSet.add(
+        new DarkHarvestEffect(effectDuration + marginDuration, pokemon)
+      )
+      pokemon.status.triggerSilence(
+        effectDuration + marginDuration,
+        pokemon,
+        pokemon
+      )
     }
   }
 }
@@ -10893,10 +10903,11 @@ export class FreezingGlareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
-          80,
+          damage,
           board,
           AttackType.SPECIAL,
           pokemon,
@@ -14338,9 +14349,9 @@ export class LastRespectsStrategy extends AbilityStrategy {
     const damage = [30, 60, 90][pokemon.stars - 1] ?? 90
 
     // Calculate curse delay with AP and crit scaling
-    // Base delays: 1★=8s, 2★=5s, 3★=3s, reduced by AP and crit power
+    // Base delays: 1★=10s, 2★=8s, 3★=6s, reduced by AP and crit power
     const curseDelay = min(0)(
-      ([10000, 8000, 5000][pokemon.stars - 1] ?? 5000) *
+      ([10000, 8000, 6000][pokemon.stars - 1] ?? 6000) *
         (1 - (factor * pokemon.ap) / 100) *
         (crit ? 1 - (pokemon.critPower - 1) * factor : 1)
     )
@@ -14385,7 +14396,7 @@ export class BurningJealousyStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = 70
+    const damage = [30, 50, 70][pokemon.stars - 1] ?? 70
     const burnDuration = 5000
 
     // Get target and adjacent enemies
@@ -16271,6 +16282,7 @@ export class ShadowClawStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const baseDamage = [20, 40, 60][pokemon.stars - 1] ?? 60
+    const singleTargetDamage = [60, 100, 140][pokemon.stars - 1] ?? 140
     const enemies = board
       .getCellsInFront(pokemon, target)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
@@ -16288,7 +16300,7 @@ export class ShadowClawStrategy extends AbilityStrategy {
       positionY: pokemon.positionY,
       orientation: orientation
     })
-    const damage = enemies.length === 1 ? baseDamage * 2 : baseDamage
+    const damage = enemies.length === 1 ? singleTargetDamage : baseDamage
     let damageDone = 0
     for (const enemy of enemies) {
       const report = enemy.handleSpecialDamage(
