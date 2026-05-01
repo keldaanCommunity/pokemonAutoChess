@@ -18,11 +18,7 @@
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
-- Changed Chatot. Range 3 → 2. Chatter now hits in a 3 cell radius around Chatot. Damage 20 → 30, chance to inflict confusion 40 → 50%.
-- Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
-- Increased base cooldown of Rage (TM): 200ms → 1000ms
-- Reduced base cooldown of Bulk Up: 1000ms → 300ms
-- Nerf Chingling line: Def: 7/10 → 5/8, Spe def: 8/12 → 6/9
+
 
 > Required preemptive nerf due to some interactions with wands that love high speed backline attackers
 
@@ -56,10 +52,10 @@
 - New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 8 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
 - Items on item bench are now sorted by category, and categories are sorted by importance (e.g. special and shiny items first, berries at the end).
 - Added elo tab on profile menu with information about elo decay and max elo reached.
-- Added pokemon auto chess streams to the main lobby
-- Sprite scaling based on max HP now decreases quadratically instead of linearly, to avoid huge sprites at high HP values.
+- Added Pokemon Auto Chess Twitch streams to the main lobby
+- Pokemon sprites size scaling based on max HP now decreases quadratically instead of linearly, to avoid sprites being too big at high HP values.
 - Added Game Activity tab in Meta Report showing game count trends over the last 30 days.
-- New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
+
 
 # Bugfix
 
@@ -68,3 +64,4 @@
 - Added Twitch account verification and linking in Profile > Account, with secure OAuth flow.
 - Added a Twitch stream panel in the main lobby to surface live PAC creators, including stream title, viewers, uptime, language/tags, and direct channel links.
 - Added a new Player Report tab in Meta Report with a player rank distribution chart by Elo buckets.
+- New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
