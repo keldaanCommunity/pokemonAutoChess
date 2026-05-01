@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -585,9 +586,12 @@ export class IllusionStrategy extends AbilityStrategy {
     if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
-      pokemon.range = target.range
       pokemon.def = Math.max(pokemon.def, target.def)
       pokemon.speDef = Math.max(pokemon.speDef, target.speDef)
+      if (pokemon.range > target.range) {
+        pokemon.toMovingState() // might need to readjust target if range is reduced
+      }
+      pokemon.range = target.range
     }
   }
 }
