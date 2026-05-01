@@ -1,10 +1,10 @@
 import Phaser from "phaser"
-import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Weather } from "../../../../../types/enum/Weather"
 import { DebugScene } from "../../../game/scenes/debug-scene"
+import { loadMoveToPlugin } from "../../../rex-plugins"
 import "./debug-scene.css"
 
 export default function MapViewerContainer() {
@@ -40,31 +40,40 @@ export default function MapViewerContainer() {
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true
-      debugScene.current = new DebugScene(height, width, onProgress, onComplete)
 
-      gameRef.current = new Phaser.Game({
-        type: Phaser.AUTO,
-        parent: "debug-scene",
-        pixelArt: true,
-        width,
-        height,
-        scale: { mode: Phaser.Scale.FIT },
-        dom: {
-          createContainer: true
-        },
-        disableContextMenu: true,
-        scene: [debugScene.current],
-        backgroundColor: "var(--color-bg-primary)",
-        plugins: {
-          global: [
-            {
-              key: "rexMoveTo",
-              plugin: MoveToPlugin,
-              start: true
-            }
-          ]
-        }
-      })
+      void (async () => {
+        const MoveToPlugin = await loadMoveToPlugin()
+        debugScene.current = new DebugScene(
+          height,
+          width,
+          onProgress,
+          onComplete
+        )
+
+        gameRef.current = new Phaser.Game({
+          type: Phaser.AUTO,
+          parent: "debug-scene",
+          pixelArt: true,
+          width,
+          height,
+          scale: { mode: Phaser.Scale.FIT },
+          dom: {
+            createContainer: true
+          },
+          disableContextMenu: true,
+          scene: [debugScene.current],
+          backgroundColor: "var(--color-bg-primary)",
+          plugins: {
+            global: [
+              {
+                key: "rexMoveTo",
+                plugin: MoveToPlugin,
+                start: true
+              }
+            ]
+          }
+        })
+      })()
     }
   }, [height, initialized, onComplete, width])
 
