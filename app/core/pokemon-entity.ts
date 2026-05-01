@@ -199,7 +199,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
-    this.resetCooldown(500)
+    if (this.types.has(Synergy.DARK) && this.range === 1) {
+      this.cooldown = 300 // ensure dark assassins move first
+    } else {
+      this.resetCooldown(500)
+    }
 
     pokemon.types.forEach((type) => {
       this.types.add(type)
