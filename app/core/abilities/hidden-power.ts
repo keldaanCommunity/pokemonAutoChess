@@ -6,7 +6,13 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomp
 import { IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
+import {
+  Berries,
+  Dishes,
+  Item,
+  ItemComponents,
+  Sweets
+} from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
@@ -237,7 +243,21 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     if (pokemon.player) {
       pokemon.player.board.forEach((p: IPokemon) => {
         if (p.canEat) {
-          p.dishes = new SetSchema([pickRandomIn(Dishes as unknown as Item[])])
+          let randomDish = pickRandomIn(
+            Dishes.filter((d) => d !== Item.BERRIES && d !== Item.HERBA_MYSTICA)
+          )
+          if (randomDish === Item.SWEETS) {
+            randomDish = pickRandomIn(Sweets)
+          } else if (randomDish === Item.MUSHROOMS) {
+            randomDish =
+              randomWeighted({
+                [Item.TINY_MUSHROOM]: 77,
+                [Item.BIG_MUSHROOM]: 20,
+                [Item.BALM_MUSHROOM]: 3
+              }) ?? Item.TINY_MUSHROOM
+          }
+
+          p.dishes = new SetSchema([randomDish])
         }
       })
     }

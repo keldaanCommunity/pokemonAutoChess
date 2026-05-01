@@ -869,9 +869,6 @@ export class MiniGame {
             player.updateSynergies()
           } else {
             player.items.push(item.name)
-            if (item.name === Item.SILK_SCARF) {
-              player.extraScarves += 1
-            }
           }
         }
       }

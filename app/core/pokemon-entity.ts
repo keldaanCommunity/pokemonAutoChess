@@ -234,7 +234,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canCast(): boolean {
-    return !this.status.silence && !this.items.has(Item.NULLIFY_BANDANNA)
+    return (
+      !this.status.silence &&
+      !this.items.has(Item.NULLIFY_BANDANNA) &&
+      !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
+    )
   }
 
   get canBeMoved(): boolean {
@@ -395,6 +399,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
+        this.addSpecialDefense(-1, attacker, 0, false)
       }
       if (attacker?.passive === Passive.BERSERK) {
         attacker.addAbilityPower(5, attacker, 0, false, false)
