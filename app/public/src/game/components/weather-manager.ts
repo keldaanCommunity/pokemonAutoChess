@@ -10,7 +10,7 @@ export default class WeatherManager {
   particlesEmitters: Phaser.GameObjects.Particles.ParticleEmitter[]
   image: Phaser.GameObjects.Image | undefined
   tweens: Phaser.Tweens.Tween[]
-  fxs: Phaser.FX.Controller[]
+  fxs: Phaser.Filters.Controller[]
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
@@ -18,9 +18,6 @@ export default class WeatherManager {
     this.particlesEmitters = []
     this.tweens = []
     this.fxs = []
-    if (scene.renderer.type === Phaser.WEBGL) {
-      this.scene.cameras.main.initPostPipeline()
-    }
   }
 
   addRain() {
@@ -227,13 +224,17 @@ export default class WeatherManager {
       this.scene.renderer.type === Phaser.WEBGL &&
       !preference("disableAnimatedTilemap")
     ) {
-      //const camera = this.scene.cameras.main
       this.fxs =
-        (this.scene as GameScene).map?.layers.map((layer) =>
-          layer.tilemapLayer.postFX.addDisplacement("distort", -0.001, 0)
-        ) ?? []
+        (this.scene as GameScene).map?.layers.map((layer) => {
+          const tilemapLayer = layer.tilemapLayer
+          tilemapLayer.enableFilters()
+          return tilemapLayer.filters!.external.addDisplacement(
+            "distort",
+            -0.001,
+            0
+          )
+        }) ?? []
 
-      //camera.postFX.addDisplacement("distort", -0.001, 0)
       this.tweens = [
         this.scene.tweens.add({
           targets: this.fxs,
@@ -642,7 +643,10 @@ export default class WeatherManager {
       this.fxs.forEach((effect) => effect.destroy())
       this.fxs = []
       const scene = this.scene as GameScene
-      scene.map?.layers.forEach((layer) => layer.tilemapLayer.clearFX())
+      scene.map?.layers.forEach((layer) => {
+        layer.tilemapLayer.filters?.internal.clear()
+        layer.tilemapLayer.filters?.external.clear()
+      })
     }
   }
 }
