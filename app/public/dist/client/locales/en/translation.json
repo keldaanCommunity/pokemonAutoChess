@@ -1182,7 +1182,8 @@
 		"QUAXLY": "Quaxly",
     	"QUAXWELL": "Quaxwell",
     	"QUAQUAVAL": "Quaquaval",
-		"KOMALA": "Komala"
+		"KOMALA": "Komala",
+		"SLITHER_WING": "Slither Wing"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1755,7 +1756,8 @@
 		"TWINEEDLE": "Twineedle",
 		"ROCK_WRECKER": "Rock Wrecker",
 		"AQUA_STEP": "Aqua Step",
-		"SNORE": "Snore"
+		"SNORE": "Snore",
+		"SKITTER_SMACK": "Skitter Smack"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
@@ -2305,7 +2307,8 @@
 		"TWINEEDLE": "Deals [25,50,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [40,LK]% chance to apply POISONNED for 4 seconds.",
 		"ROCK_WRECKER": "Launches a huge boulder at the target, inflicting FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds.",
 		"AQUA_STEP": "Shift to an ADJACENT unoccupied tile with fluid dance steps before dealing [25,50,100,SP] SPECIAL to the target and increasing user SPEED by [10,15,20,SP].",
-		"SNORE": "Deal [20,40,60,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds."
+		"SNORE": "Deal [20,40,60,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds.",
+		"SKITTER_SMACK": "Skitters behind the target to attack, dealing [15,30,60,SP] SPECIAL. This also lowers the target's AP by [20,SP]."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

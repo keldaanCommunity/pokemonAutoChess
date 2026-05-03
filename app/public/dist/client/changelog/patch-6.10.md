@@ -5,6 +5,7 @@
 - Quaquaval
 - Hisui Avalugg
 - Komala
+- Slither Wing
 
 
 # Changes to Synergies

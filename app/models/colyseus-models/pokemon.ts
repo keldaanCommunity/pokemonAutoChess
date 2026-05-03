@@ -20735,6 +20735,24 @@ export class Komala extends Pokemon {
   passive = Passive.COMATOSE
 }
 
+export class SlitherWing extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.BUG,
+    Synergy.FIGHTING,
+    Synergy.FOSSIL
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 180
+  atk = 20
+  speed = 45
+  def = 6
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.SKITTER_SMACK
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21925,7 +21943,8 @@ export const PokemonClasses: Record<
   [Pkm.QUAXLY]: Quaxly,
   [Pkm.QUAXWELL]: Quaxwell,
   [Pkm.QUAQUAVAL]: Quaquaval,
-  [Pkm.KOMALA]: Komala
+  [Pkm.KOMALA]: Komala,
+  [Pkm.SLITHER_WING]: SlitherWing
 }
 
 // declare all the classes in colyseus schema TypeRegistry

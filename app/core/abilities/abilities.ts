@@ -1,4 +1,3 @@
-import { t } from "i18next"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -16650,6 +16649,51 @@ export class AquaStepStrategy extends AbilityStrategy {
   }
 }
 
+export class SkitterSmackStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit, true)
+    // Skitters behind the target to attack, dealing [15,30,60,SP] SPECIAL. This also lowers the target's AP by 20.
+    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
+
+    pokemon.orientation = board.orientation(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.positionX,
+      target.positionY,
+      pokemon,
+      target
+    )
+    const [dx, dy] = OrientationVector[pokemon.orientation]
+
+    const nextX = target.positionX + dx
+    const nextY = target.positionY + dy
+
+    const behindCell = board.getClosestAvailablePlace(nextX, nextY)
+    if (behindCell) {
+      pokemon.moveTo(behindCell.x, behindCell.y, board, true)
+    }
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target.hp > 0) {
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+          target.addAbilityPower(-20, pokemon, 0, false)
+        }
+      }, 300)
+    )
+  }
+}
+
 export * from "./hidden-power"
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
@@ -17201,7 +17245,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TWINEEDLE]: new TwineedleStrategy(),
   [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
   [Ability.AQUA_STEP]: new AquaStepStrategy(),
-  [Ability.SNORE]: new SnoreStrategy()
+  [Ability.SNORE]: new SnoreStrategy(),
+  [Ability.SKITTER_SMACK]: new SkitterSmackStrategy()
 }
 
 export function castAbility(
