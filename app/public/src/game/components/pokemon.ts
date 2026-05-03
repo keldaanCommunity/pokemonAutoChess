@@ -1668,7 +1668,7 @@ export function loadCompressedAtlas(
         const multiatlas = {
           textures: [
             {
-              image: `${image}?v=${pkg.version}`,
+              image: `${image}?v=${pkg.assetsVersion}`,
               format: "RGBA8888",
               size: {
                 w: data.s[0],
@@ -1694,7 +1694,7 @@ export function loadCompressedAtlas(
     scene.load
       .json(
         `pokemon-atlas-${index}`,
-        `/assets/pokemons/${index}.json?v=${pkg.version}`
+        `/assets/pokemons/${index}.json?v=${pkg.assetsVersion}`
       )
       .start()
   })
