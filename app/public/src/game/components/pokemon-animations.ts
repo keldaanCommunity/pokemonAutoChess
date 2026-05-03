@@ -8029,5 +8029,11 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Sleep,
     attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.SLITHER_WING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE
   }
 }
