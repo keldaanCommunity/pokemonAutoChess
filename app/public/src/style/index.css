@@ -32,27 +32,7 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: var(--color-bg-primary);
-  background-image:
-    linear-gradient(
-      45deg,
-      var(--color-bg-secondary) 25%,
-      transparent 25%,
-      transparent 74.9%,
-      var(--color-bg-secondary) 75%,
-      var(--color-bg-secondary)
-    ),
-    linear-gradient(
-      45deg,
-      var(--color-bg-secondary) 25%,
-      transparent 25%,
-      transparent 74.9%,
-      var(--color-bg-secondary) 75%,
-      var(--color-bg-secondary)
-    );
-  background-size: 240px 240px;
-  background-position:
-    0 0,
-    120px 120px;
+  background-image: url("assets/ui/checkerboard.svg");
 }
 
 a {
