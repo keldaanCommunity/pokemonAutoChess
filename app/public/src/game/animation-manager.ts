@@ -1,3 +1,4 @@
+import type Phaser from "phaser"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { AnimationOriented, AnimationType } from "../../../types/Animation"
 import delays from "../../../types/delays.json"

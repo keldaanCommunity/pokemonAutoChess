@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,

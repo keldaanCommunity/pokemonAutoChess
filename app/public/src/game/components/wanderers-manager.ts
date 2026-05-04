@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import {
   OUTLAW_GOLD_REWARD,
   SHARDS_PER_SHINY_UNOWN_WANDERER,

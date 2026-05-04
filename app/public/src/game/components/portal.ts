@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import { ISynergySymbol } from "../../../../types"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { DEPTH } from "../depths"

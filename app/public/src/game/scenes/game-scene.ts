@@ -1,6 +1,6 @@
 import { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import { GameObjects, Scene } from "phaser"
+import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
@@ -859,9 +859,9 @@ export default class GameScene extends Scene {
     if (this.game.renderer.type !== Phaser.WEBGL) return // outline plugin doesnt work with canvas renderer
 
     sprite.enableFilters()
-    const existingOutline = sprite.getData(
-      "rexOutlineController"
-    ) as Phaser.Filters.Controller | undefined
+    const existingOutline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
     existingOutline?.destroy()
 
     const outline = sprite.filters!.internal.addRexOutline({
@@ -872,9 +872,9 @@ export default class GameScene extends Scene {
   }
 
   clearHovered(sprite: Phaser.GameObjects.Sprite) {
-    const outline = sprite.getData(
-      "rexOutlineController"
-    ) as Phaser.Filters.Controller | undefined
+    const outline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
     outline?.destroy()
     sprite.setData("rexOutlineController", null)
   }
