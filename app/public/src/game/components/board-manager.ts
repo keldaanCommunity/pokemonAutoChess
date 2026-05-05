@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_HEIGHT,

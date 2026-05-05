@@ -1,3 +1,4 @@
+import Phaser from "phaser"
 import LoadingManager from "../components/loading-manager"
 
 export class PreloadingScene extends Phaser.Scene {

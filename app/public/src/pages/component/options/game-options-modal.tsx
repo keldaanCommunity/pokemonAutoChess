@@ -1,3 +1,4 @@
+import Phaser from "phaser"
 import { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"

@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"

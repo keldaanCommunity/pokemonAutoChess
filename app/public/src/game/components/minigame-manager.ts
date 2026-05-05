@@ -1,5 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
+import Phaser from "phaser"
 import { TownEncounterSellPrice } from "../../../../config"
 import GameState from "../../../../rooms/states/game-state"
 import {

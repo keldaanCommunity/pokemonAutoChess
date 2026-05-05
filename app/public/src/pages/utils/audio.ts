@@ -1,4 +1,4 @@
-import { type Scene } from "phaser"
+import Phaser, { type Scene } from "phaser"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import { logger } from "../../../../utils/logger"
 import { preference, subscribeToPreferences } from "../../preferences"
