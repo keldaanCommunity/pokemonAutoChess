@@ -60,6 +60,8 @@
 
 # Bugfix
 
+- Fix Protect status not making units untargetable
+
 # Misc
 
 - Added Twitch account verification and linking in Profile > Account, with secure OAuth flow.

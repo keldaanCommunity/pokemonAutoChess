@@ -1,4 +1,5 @@
 export enum EffectEnum {
+  UNTARGETABLE = "UNTARGETABLE",
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",
   SPORE = "SPORE",
