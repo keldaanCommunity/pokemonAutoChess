@@ -33,6 +33,7 @@ body {
   overflow: hidden;
   background-color: var(--color-bg-primary);
   background-image: url("assets/ui/checkerboard.svg");
+  background-size: 50%;
 }
 
 a {

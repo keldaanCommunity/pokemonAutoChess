@@ -5,6 +5,10 @@
   --color-bg-accent: #a6639a;
 }
 
+body {
+  background-image: url("/assets/theme/north/checkerboard.svg");
+}
+
 .custom-bg {
   background-image: url("/assets/theme/north/custombg.jpg");
 }

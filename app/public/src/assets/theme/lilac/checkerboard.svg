@@ -4,8 +4,8 @@
 	<namedview id="namedview32" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:zoom="0.733255" inkscape:cx="1191.2636" inkscape:cy="385.26843" inkscape:window-width="2560" inkscape:window-height="1377" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="checkerboard" />
 	<style id="style1">
 		#checkerboard {
-		--color-bg-primary: #61738a;
-		--color-bg-secondary: #54596b;
+		--color-bg-primary: #705670;
+		--color-bg-secondary: #8d6b8c;
 		}
 	</style>
 	<g id="g32" inkscape:label="CHECKERBOARD" style="display:inline">
