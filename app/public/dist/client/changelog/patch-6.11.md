@@ -6,6 +6,8 @@
 - Oricorio (Pom Pom Style)
 - Oricorio (Pa'U Style)
 - Oricorio (Sensu Style)
+- Galarian Meowth
+- Perrserker
 - Pikachu Libre
 
 # Changes to Pokemon & Abilities
