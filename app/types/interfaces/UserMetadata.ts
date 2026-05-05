@@ -9,6 +9,11 @@ interface IUserMetadata {
   twitchDisplayName?: string
   twitchVerifiedAt?: Date | null
   twitchVerificationRevokedAt?: Date | null
+  youtubeChannelId?: string
+  youtubeHandle?: string
+  youtubeChannelTitle?: string
+  youtubeVerifiedAt?: Date | null
+  youtubeVerificationRevokedAt?: Date | null
   language: Language | ""
   avatar: string
   games: number

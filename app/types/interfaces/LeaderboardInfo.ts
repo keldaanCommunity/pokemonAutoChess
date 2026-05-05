@@ -6,6 +6,9 @@ export interface ILeaderboardInfo {
   value: number
   twitchLogin?: string
   twitchDisplayName?: string
+  youtubeChannelId?: string
+  youtubeHandle?: string
+  youtubeChannelTitle?: string
 }
 
 export interface ILeaderboardBotInfo {

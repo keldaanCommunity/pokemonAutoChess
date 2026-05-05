@@ -50,6 +50,9 @@ export default function PreparationMenuUser(props: {
         role={props.user?.role}
         twitchLogin={props.user?.twitchLogin || undefined}
         twitchDisplayName={props.user?.twitchDisplayName || undefined}
+        youtubeChannelId={props.user?.youtubeChannelId || undefined}
+        youtubeHandle={props.user?.youtubeHandle || undefined}
+        youtubeChannelTitle={props.user?.youtubeChannelTitle || undefined}
       />
       {preference("colorblindMode") && props.user.ready && t("ready")}
       {removeButton}
