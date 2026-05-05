@@ -90,7 +90,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
-      //if event occures in an input, textarea or select, ignore it
+      //if event occurs in an input, textarea or select, ignore it
       if (
         ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
           (e.target as HTMLElement).tagName
@@ -562,10 +562,6 @@ function Modals({
       >
         <ServersList />
       </Modal>
-      <TeamBuilderModal
-        show={modal === "team-builder"}
-        handleClose={closeModal}
-      />
       <TeamBuilderModal
         show={modal === "team-builder"}
         handleClose={closeModal}
