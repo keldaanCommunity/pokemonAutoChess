@@ -38,6 +38,7 @@
 - Dive (Wailmer, Lapras) no longer inflicts Freeze
 - Lapras PP: 120 → 110
 - Fuecoco PP: 60/60/60 → 100/80/60
+- Revert Popplio buff from 5.7 ; PP 70 → 80
 
 # Changes to Items
 

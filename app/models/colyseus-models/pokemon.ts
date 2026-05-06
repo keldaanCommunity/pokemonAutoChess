@@ -10725,7 +10725,7 @@ export class Popplio extends Pokemon {
   speed = 44
   def = 4
   speDef = 4
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -10742,7 +10742,7 @@ export class Brionne extends Pokemon {
   speed = 44
   def = 4
   speDef = 6
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
   passive = Passive.HATCH
@@ -10757,7 +10757,7 @@ export class Primarina extends Pokemon {
   speed = 44
   def = 4
   speDef = 8
-  maxPP = 70
+  maxPP = 80
   range = 3
   skill = Ability.SPARKLING_ARIA
 }
