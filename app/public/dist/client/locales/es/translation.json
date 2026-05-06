@@ -3686,7 +3686,7 @@
 	"leave_game": "Salir de la partida",
 	"leave_room": "Salir de la sala",
 	"passive_income_hint": "Cada etapa, gana 5 de GOLD + 1 de GOLD extra si ganaste la batalla anterior.",
-	"victory_income_hint": "Consigue 1 de GOLD adicional por cada racha de victorias o derrotas, hasta 5 de GOLD extra.",
+	"streak_income_hint": "Consigue 1 de GOLD adicional por cada racha de victorias o derrotas, hasta 5 de GOLD extra.",
 	"additional_income_hint": "Obtenga 1 GOLD extra por 10 de GOLD ahorrado, hasta un máximo de {{maxInterest}} GOLD con {{maxInterestGolds}} de GOLD ahorrado.",
 	"victory_count_one": "{{count}} victoria",
 	"victory_count_other": "{{count}} victorias",

@@ -1137,7 +1137,7 @@
 	"leave_game": "ออกจากเกม",
 	"leave_room": "ออกจากห้อง",
 	"passive_income_hint": "ในแต่ละรอบคุณจะได้รับ 5 + 1 GOLD เพิ่มเติมหากคุณชนะในรอบที่แล้ว.",
-	"victory_income_hint": "รับ 1 GOLD เพิ่มเติมต่อการชนะต่อเนื่อง หรือ แพ้ต่อเนื่อง, สูงสุด 5 GOLD.",
+	"streak_income_hint": "รับ 1 GOLD เพิ่มเติมต่อการชนะต่อเนื่อง หรือ แพ้ต่อเนื่อง, สูงสุด 5 GOLD.",
 	"additional_income_hint": "รับ 1 GOLD เพิ่มเติมต่อ 10 GOLD ที่เก็บไว้โดยไม่ใช้, สูงสุด {{maxInterest}} GOLD เมื่อเก็บได้ถึง {{maxInterestGolds}} GOLD.",
 	"victory_count_one": "{{count}} ชัยชนะ",
 	"victory_count_other": "{{count}} ชัยชนะ",

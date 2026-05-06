@@ -2760,7 +2760,7 @@
 	"leave_game": "ゲームを離れる",
 	"leave_room": "部屋を出る",
 	"passive_income_hint": "各ステージでは、5 ゴールド + 前の戦闘で勝利した場合は 1 ゴールドを追加します。",
-	"victory_income_hint": "連勝または連敗ごとに 1 ボーナス ゴールドを獲得し、最大 5 ボーナス ゴールドを獲得します。",
+	"streak_income_hint": "連勝または連敗ごとに 1 ボーナス ゴールドを獲得し、最大 5 ボーナス ゴールドを獲得します。",
 	"additional_income_hint": "10 ゴールドを節約するごとに 1 ボーナス ゴールドを獲得し、{{maxInterestGolds}} ゴールドを節約すると最大 {{maxInterest}} ボーナス収入を獲得します。",
 	"options": {
 		"title": "オプション",

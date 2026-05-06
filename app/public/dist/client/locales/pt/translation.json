@@ -3845,7 +3845,7 @@
 	"leave_game": "Deixar a partida",
 	"leave_room": "Sair da sala",
 	"passive_income_hint": "A cada estágio, ganhe 5 OURO + 1 OURO extra se você vencer a batalha anterior.",
-	"victory_income_hint": "Ganhe 1 bônus de OURO para cada vitória ou derrota consecutiva, até 5 bônus de OURO.",
+	"streak_income_hint": "Ganhe 1 bônus de OURO para cada vitória ou derrota consecutiva, até 5 bônus de OURO.",
 	"additional_income_hint": "Ganhe 1 GOLD bônus a cada 10 GOLD economizados, até {{maxInterest}} bônus de renda por {{maxInterestGolds}} GOLD economizados.",
 	"options": {
 		"title": "Opções",

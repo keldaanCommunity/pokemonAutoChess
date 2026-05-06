@@ -3783,7 +3783,7 @@
 	"leave_game": "Lascia la partita",
 	"leave_room": "Lascia la stanza",
 	"passive_income_hint": "In ogni livello, ottieni 5 monete d'oro + 1 oro extra se hai vinto la battaglia precedente.",
-	"victory_income_hint": "Ottieni 1 oro bonus per ogni serie di vittorie o sconfitte, fino a un massimo di 5 monete d'oro bonus.",
+	"streak_income_hint": "Ottieni 1 oro bonus per ogni serie di vittorie o sconfitte, fino a un massimo di 5 monete d'oro bonus.",
 	"additional_income_hint": "Ottieni 1 oro bonus ogni 10 monete d'oro risparmiate, fino a {{maxInterest}} entrate bonus a {{maxInterestGolds}} monete d'oro risparmiate.",
 	"victory_count_one": "{{count}} vinta",
 	"victory_count_other": "{{count}} vinte",
