@@ -383,10 +383,10 @@ const GalarianDarmanitanZenTransformEffect = new OnDamageReceivedEffect(
       pokemon.skill = Ability.TRANSE
       pokemon.pp = 0
       pokemon.status.tree = true
-      pokemon.effects.add(EffectEnum.UNTARGETABLE)
+      pokemon.status.untargettable = true
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.effects.delete(EffectEnum.UNTARGETABLE)
+          pokemon.status.untargettable = false
         }, 1500)
       )
 

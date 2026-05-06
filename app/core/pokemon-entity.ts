@@ -267,9 +267,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetAllies = false
   ): boolean {
     return (
-      !this.status.protect &&
-      !this.status.resurrecting &&
-      !this.effects.has(EffectEnum.UNTARGETABLE) &&
+      !this.status.untargettable &&
       ((targetAllies && this.team === attacker.team) ||
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&

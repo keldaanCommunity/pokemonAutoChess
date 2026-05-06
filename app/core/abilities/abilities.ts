@@ -7987,7 +7987,7 @@ export class TranseStrategy extends AbilityStrategy {
       pokemon.name = Pkm.GALARIAN_DARMANITAN
       pokemon.changePassive(Passive.GALARIAN_DARMANITAN)
       pokemon.status.tree = false
-      pokemon.effects.delete(EffectEnum.UNTARGETABLE)
+      pokemon.status.untargettable = false
       pokemon.addAttack(-6, pokemon, 0, false)
       pokemon.addSpeed(60, pokemon, 0, false)
     } else {
