@@ -1446,7 +1446,7 @@ export class Fuecoco extends Pokemon {
   speed = 46
   def = 4
   speDef = 2
-  maxPP = 60
+  maxPP = 100
   range = 3
   skill = Ability.TORCH_SONG
 }
@@ -1461,7 +1461,7 @@ export class Crocalor extends Pokemon {
   speed = 46
   def = 6
   speDef = 4
-  maxPP = 60
+  maxPP = 80
   range = 3
   skill = Ability.TORCH_SONG
 }

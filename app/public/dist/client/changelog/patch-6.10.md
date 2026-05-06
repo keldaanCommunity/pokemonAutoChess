@@ -34,8 +34,10 @@
 
 - Bagon line is now regional in Dragon/Monster regions
 - Deino line is no longer regional
+
 - Dive (Wailmer, Lapras) no longer inflicts Freeze
 - Lapras PP: 120 → 110
+- Fuecoco PP: 60/60/60 → 100/80/60
 
 # Changes to Items
 
