@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import { getWildChance } from "../../../../../models/colyseus-models/synergies"
-import { SynergyEffects } from "../../../../../models/effects"
+import { SynergyEffect, SynergyEffects } from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import { IPlayer } from "../../../../../types"
@@ -15,7 +15,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { isOnBench } from "../../../../../utils/board"
 import { roundToNDigits } from "../../../../../utils/number"
-import { values } from "../../../../../utils/schemas"
+import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -105,7 +105,7 @@ export default function SynergyDetailComponent(props: {
         break
       }
       case Synergy.DRAGON: {
-        const totalDragonStars = values(spectatedPlayer.board).reduce(
+        const totalDragonStars = schemaValues(spectatedPlayer.board).reduce(
           (acc, pokemon) =>
             acc +
             (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
@@ -153,10 +153,10 @@ export default function SynergyDetailComponent(props: {
         )}
       </p>
 
-      {SynergyEffects[props.type].map((d, i) => {
+      {SynergyEffects[props.type].map((effect: SynergyEffect, i: number) => {
         return (
           <div
-            key={d}
+            key={effect}
             style={{
               color:
                 levelReached === SynergyTriggers[props.type][i]
@@ -175,9 +175,9 @@ export default function SynergyDetailComponent(props: {
             }}
           >
             <h4 style={{ fontSize: "1.2em", marginBottom: 0 }}>
-              ({SynergyTriggers[props.type][i]}) {t(`effect.${d}`)}
+              ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
             </h4>
-            <EffectDescriptionComponent effect={d} />
+            <EffectDescriptionComponent effect={effect} />
           </div>
         )
       })}
@@ -223,7 +223,7 @@ function PokemonPortraitList(props: {
   const teamFamilies = new Set(
     props.player == null
       ? []
-      : values(props.player.board)
+      : schemaValues(props.player.board)
           .filter((x) => x.types.has(props.type))
           .map((x) => PkmFamily[x.name])
   )

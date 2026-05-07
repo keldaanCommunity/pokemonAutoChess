@@ -33,7 +33,7 @@ export function SpriteDebug() {
           <PokemonTypeahead
             value={pkm}
             options={Object.values(Pkm).sort((a, b) =>
-              t("pkm." + a).localeCompare(t("pkm." + b))
+              t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
             )}
             onChange={(pkm) => {
               if (pkm) {

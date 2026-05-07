@@ -86,7 +86,7 @@ import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
   OnDragDropCombineCommand,
@@ -578,7 +578,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
           // already started, presumably a user refreshed page and wants to reconnect to game
           client.send(Transfer.LOADING_COMPLETE)
         } else if (
-          values(this.state.players).every((p) => p.loadingProgress === 100)
+          schemaValues(this.state.players).every(
+            (p) => p.loadingProgress === 100
+          )
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
@@ -702,7 +704,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const player = this.state.players.get(client.auth.uid)
       const hasLeftGameBeforeTheEnd =
         player && player.life > 0 && !this.state.gameFinished
-      const otherHumans = values(this.state.players).filter(
+      const otherHumans = schemaValues(this.state.players).filter(
         (p) => !p.isBot && p.id !== client.auth.uid
       )
       if (
@@ -745,7 +747,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
     if (
       !this.state.gameLoaded &&
-      values(this.state.players).every((p) => p.loadingProgress === 100)
+      schemaValues(this.state.players).every((p) => p.loadingProgress === 100)
     ) {
       this.broadcast(Transfer.LOADING_COMPLETE)
       this.startGame()
@@ -755,7 +757,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
     this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
-    const players = values(this.state.players)
+    const players = schemaValues(this.state.players)
     players.forEach((player) => {
       clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
     })
@@ -880,7 +882,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.gameMode === GameMode.RANKED) {
           player.titles.add(Title.VANQUISHER)
           const minElo = Math.min(
-            ...values(this.state.players).map((p) => p.elo)
+            ...schemaValues(this.state.players).map((p) => p.elo)
           )
           if (usr.elo === minElo && humans.length >= 8) {
             player.titles.add(Title.OUTSIDER)
@@ -1039,7 +1041,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         newTitlesEarned.forEach((title) => {
           notificationsService.addNotification(player.id, "new_title", title)
           if (
-            TITLES_UNLOCKING_THEMES.includes(title) &&
+            isIn(TITLES_UNLOCKING_THEMES, title) &&
             usr.level >= GADGETS.palette.levelRequired
           ) {
             notificationsService.addNotification(

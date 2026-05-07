@@ -16,7 +16,7 @@ import { IPlayer, Role, Title, Transfer } from "../../types"
 import { GameMode } from "../../types/enum/Game"
 import { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { logger } from "../../utils/logger"
-import { convertSchemaToRawObject, values } from "../../utils/schemas"
+import { convertSchemaToRawObject, schemaValues } from "../../utils/schemas"
 import CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnCreateTournamentCommand extends Command<
@@ -149,7 +149,7 @@ export class NextTournamentStageCommand extends Command<
       const newlyEliminated: { id: string; sortKey: number }[] = []
       tournament.players.forEach((player, playerId) => {
         if (player.eliminated && playersInLastRound.has(playerId)) {
-          const ranks = values(player.ranks)
+          const ranks = schemaValues(player.ranks)
           const sortKey = isFinalRound
             ? (ranks[ranks.length - 1] ?? 8) // finalists (final round) sorted by last rank
             : ranks.length > 0 // others by average rank
@@ -373,7 +373,7 @@ export class EndTournamentMatchCommand extends Command<
 
       if (
         !tournament.pendingLobbiesCreation &&
-        values(tournament.brackets).every((b) => b.finished)
+        schemaValues(tournament.brackets).every((b) => b.finished)
       ) {
         tournament.pendingLobbiesCreation = true // prevent executing command multiple times
         //save brackets and player ranks to db before moving to next stage

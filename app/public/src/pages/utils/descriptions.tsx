@@ -2,32 +2,31 @@ import { t } from "i18next"
 import React, { ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
-import { PositiveStatuses, Status } from "../../../../types/enum/Status"
+import {
+  DocumentedStatuses,
+  PositiveStatuses,
+  Status
+} from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
+import { TechnicalTerms } from "../../../../types/strings/TechnicalTerm"
+import { isIn } from "../../../../utils/array"
 import { max, roundToNDigits } from "../../../../utils/number"
+import { keys } from "../../../../utils/object"
 import SynergyIcon from "../component/icons/synergy-icon"
 import { cc } from "./jsx"
 
-const DamageTypes = Object.keys(Damage)
-const Stats = Object.keys(Stat)
-const Statuses = Object.keys(Status)
-const Weathers = Object.keys(Weather)
-const Synergies = Object.keys(Synergy)
-const Items = Object.keys(Item)
-const TechnicalTerms = [
-  "STRONGEST",
-  "ADJACENT",
-  "ADJACENT_IN_THE_SAME_ROW",
-  "CONE",
-  "BOARD_EFFECT"
-]
+const DamageTypes = keys(Damage)
+const Stats = keys(Stat)
+const Weathers = keys(Weather)
+const Synergies = keys(Synergy)
+const Items = keys(Item)
 
 export const iconRegExp = new RegExp(
   `(?<=\\W|^)(?:${[
     ...DamageTypes,
     ...Stats,
-    ...Statuses,
+    ...DocumentedStatuses,
     ...Weathers,
     ...Synergies,
     ...Items,
@@ -70,7 +69,7 @@ export function addIconsToDescription(
             alt="⭐"
           />
         )
-      } else if (DamageTypes.includes(token)) {
+      } else if (isIn(DamageTypes, token)) {
         d = (
           <span
             className={
@@ -84,14 +83,14 @@ export function addIconsToDescription(
             {t(`damage.${token}`)}
           </span>
         )
-      } else if (Stats.includes(token as Stat)) {
+      } else if (isIn(Stats, token)) {
         d = (
           <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
         )
-      } else if (Statuses.includes(token as Status)) {
+      } else if (isIn(DocumentedStatuses, token)) {
         d = (
           <span
             className="description-icon status"
@@ -107,7 +106,7 @@ export function addIconsToDescription(
             </span>
           </span>
         )
-      } else if (Weathers.includes(token as Weather)) {
+      } else if (isIn(Weathers, token)) {
         d = (
           <span
             className="description-icon weather"
@@ -117,7 +116,7 @@ export function addIconsToDescription(
             <span className="weather-label">{t(`weather.${token}`)}</span>
           </span>
         )
-      } else if (Items.includes(token as Item)) {
+      } else if (isIn(Items, token)) {
         d = (
           <span
             className="description-icon item"
@@ -127,14 +126,14 @@ export function addIconsToDescription(
             <span className="item-label">{t(`item.${token}`)}</span>
           </span>
         )
-      } else if (Synergies.includes(token as Synergy)) {
+      } else if (isIn(Synergies, token)) {
         d = (
           <span className="description-icon synergy">
             <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
-      } else if (TechnicalTerms.includes(token)) {
+      } else if (isIn(TechnicalTerms, token)) {
         d = (
           <span
             className="description-icon technical-term"
@@ -262,7 +261,7 @@ export function addIconsToHtml(
         } else if (token === "STAR") {
           iconHTML =
             '<img class="description-icon icon-star" src="/assets/ui/star.svg" alt="⭐" />'
-        } else if (DamageTypes.includes(token)) {
+        } else if (isIn(DamageTypes, token)) {
           const className =
             token === Damage.PHYSICAL
               ? "damage-physical"
@@ -270,33 +269,33 @@ export function addIconsToHtml(
                 ? "damage-special"
                 : "damage-true"
           iconHTML = `<span class="${className}">${t(`damage.${token}`)}</span>`
-        } else if (Stats.includes(token as Stat)) {
+        } else if (isIn(Stats, token)) {
           iconHTML = `<span class="description-icon stat">
             <img src="assets/icons/${token}.png" />
             <span class="stat-label">${t(`stat.${token}`)}</span>
           </span>`
-        } else if (Statuses.includes(token as Status)) {
+        } else if (isIn(DocumentedStatuses, token)) {
           const isPositive = PositiveStatuses.includes(token as Status)
           iconHTML = `<span class="description-icon status" title="${t(`status_description.${token}`)}">
             <img src="assets/icons/${token}.svg" />
             <span class="status-label${isPositive ? " positive" : ""}">${t(`status.${token}`)}</span>
           </span>`
-        } else if (Weathers.includes(token as Weather)) {
+        } else if (isIn(Weathers, token)) {
           iconHTML = `<span class="description-icon weather" title="${t(`weather_description.${token}`)}">
             <img src="assets/icons/weather/${token.toLowerCase()}.svg" />
             <span class="weather-label">${t(`weather.${token}`)}</span>
           </span>`
-        } else if (Items.includes(token as Item)) {
+        } else if (isIn(Items, token)) {
           iconHTML = `<span class="description-icon item" title="${t(`item_description.${token}`)}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
             <img src="assets/item/${token}.png" />
             <span class="item-label">${t(`item.${token}`)}</span>
           </span>`
-        } else if (Synergies.includes(token as Synergy)) {
+        } else if (isIn(Synergies, token)) {
           iconHTML = `<span class="description-icon synergy">
             <img src="assets/types/${token}.svg" style="width: 1.5em; height: 1.5em;" />
             <span class="synergy-label">${t(`synergy.${token}`)}</span>
           </span>`
-        } else if (TechnicalTerms.includes(token)) {
+        } else if (isIn(TechnicalTerms, token)) {
           iconHTML = `<span class="description-icon technical-term" title="${t(`technical_terms_definitions.${token}`)}">
             <img src="assets/ui/${token.toLowerCase()}.svg" />
             <i class="technical-term-label">${t(`technical_terms.${token}`)}</i>

@@ -73,7 +73,6 @@ import {
 } from "../../types/enum/Game"
 import {
   ConsumableItems,
-  CraftableItems,
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
@@ -106,6 +105,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import type { IDetailledPokemon } from "../../types/models/bot-v2"
+import { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
@@ -125,7 +125,7 @@ import {
   pickRandomIn,
   randomBetween
 } from "../../utils/random"
-import { resetArraySchema, values } from "../../utils/schemas"
+import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
 
@@ -660,7 +660,7 @@ export class OnDragDropItemCommand extends Command<
         if (pokemon.evolution === Pkm.DEFAULT) {
           client.send(Transfer.DRAG_DROP_CANCEL, {
             ...message,
-            text: "fully_grown",
+            text: "fully_grown" satisfies DisplayText,
             pokemonId: pokemon.id
           })
           return
@@ -744,7 +744,9 @@ export class OnDragDropItemCommand extends Command<
       } else {
         client.send(Transfer.DRAG_DROP_CANCEL, {
           ...message,
-          text: pokemon.dishes.size > 0 ? "belly_full" : "not_hungry",
+          text: (pokemon.dishes.size > 0
+            ? "belly_full"
+            : "not_hungry") satisfies DisplayText,
           pokemonId: pokemon.id
         })
         return
@@ -766,7 +768,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     const isBasicItem = ItemComponents.includes(item)
-    const existingBasicItemToCombine = values(pokemon.items).find((i) =>
+    const existingBasicItemToCombine = schemaValues(pokemon.items).find((i) =>
       ItemComponents.includes(i)
     )
 
@@ -778,7 +780,7 @@ export class OnDragDropItemCommand extends Command<
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, {
         ...message,
-        text: "full",
+        text: "full" satisfies DisplayText,
         pokemonId: pokemon.id
       })
       return
@@ -788,7 +790,7 @@ export class OnDragDropItemCommand extends Command<
       // prevent adding twice the same item
       client.send(Transfer.DRAG_DROP_CANCEL, {
         ...message,
-        text: "already_held",
+        text: "already_held" satisfies DisplayText,
         pokemonId: pokemon.id
       })
       return
@@ -917,7 +919,7 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
       } else {
-        const repeatBallHolders = values(player.board).filter((p) =>
+        const repeatBallHolders = schemaValues(player.board).filter((p) =>
           p.items.has(Item.REPEAT_BALL)
         )
         if (repeatBallHolders.length > 0)
@@ -996,7 +998,7 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
       if (!client.userData) client.userData = {}
       client.userData.spectatedPlayerId = client.auth.uid
       client.view = new StateView()
-      const players = values(this.state.players)
+      const players = schemaValues(this.state.players)
       const connectedPlayer = players.find((p) => p.id === client.auth.uid)
       if (connectedPlayer) {
         /*logger.info(
@@ -1093,7 +1095,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame(): boolean {
-    const playersAlive = values(this.state.players).filter((p) => p.alive)
+    const playersAlive = schemaValues(this.state.players).filter((p) => p.alive)
 
     if (playersAlive.length <= 1) {
       this.state.gameFinished = true
@@ -1130,7 +1132,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         ).length
         const nbAmuletCoins =
           player.items.filter((item) => item === Item.AMULET_COIN).length +
-          values(player.board).filter((pokemon) =>
+          schemaValues(player.board).filter((pokemon) =>
             pokemon.items.has(Item.AMULET_COIN)
           ).length
         const nbRedScales = player.items.filter(
@@ -1278,7 +1280,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   updatePlayerBetweenStages(player: Player) {
-    const board = values(player.board)
+    const board = schemaValues(player.board)
 
     if (
       getSynergyStep(player.synergies, Synergy.FIRE) === 4 &&
@@ -1477,7 +1479,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         (p) => p.returnStage === this.state.stageLevel
       )
       returningPokemons.forEach((p) => {
-        const substitute = values(player.board).find(
+        const substitute = schemaValues(player.board).find(
           (s) => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id
         )
         if (!substitute) return
@@ -1490,9 +1492,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         player.board.delete(substitute.id)
         player.board.set(p.pokemon.id, p.pokemon)
         /* Set schemas needs to be reset to fix reactivity issues ; bug on Colyseus Schema ? */
-        p.pokemon.types = new SetSchema<Synergy>(values(p.pokemon.types))
+        p.pokemon.types = new SetSchema<Synergy>(schemaValues(p.pokemon.types))
         p.pokemon.items = new SetSchema<Item>()
-        p.pokemon.addItems(values(substitute.items), player)
+        p.pokemon.addItems(schemaValues(substitute.items), player)
         substitute.items.clear()
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(
@@ -1514,7 +1516,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       // Held item effects on stage start
       const itemEffects =
-        values(pokemon.items)
+        schemaValues(pokemon.items)
           .flatMap((item) => ItemEffects[item])
           ?.filter((p) => p instanceof OnStageStartEffect) ?? []
       itemEffects.forEach((effect) =>
@@ -1548,7 +1550,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (teamSize < maxTeamSize) {
         const numberOfPokemonsToMove = maxTeamSize - teamSize
         for (let i = 0; i < numberOfPokemonsToMove; i++) {
-          const pokemon = values(player.board)
+          const pokemon = schemaValues(player.board)
             .filter((p) => isOnBench(p) && p.canBePlaced)
             .sort((a, b) => a.positionX - b.positionX)[0]
           if (pokemon) {
@@ -1640,7 +1642,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               player.choices.push(
                 new PlayerChoice({
                   type: "item",
-                  items: values(player.pveRewardsPropositions)
+                  items: schemaValues(player.pveRewardsPropositions)
                 })
               )
               player.pveRewardsPropositions.clear()
@@ -1699,7 +1701,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   initializeTownPhase() {
     this.state.phase = GamePhaseState.TOWN
-    const nbPlayersAlive = values(this.state.players).filter(
+    const nbPlayersAlive = schemaValues(this.state.players).filter(
       (p) => p.alive
     ).length
 
@@ -1852,31 +1854,31 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (this.state.specialGameRule === SpecialGameRule.UNOWN_SPELL) {
       this.state.simulations.forEach((simulation) => {
         const unown = pickRandomIn(UnownsForScribble)
-          ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
-            if (
-              !player ||
-              (simulation.isGhostBattle && player === simulation.redPlayer)
-            )
-              return
-            const wanderer = player.spawnWanderingPokemon({
-              pkm: unown,
-              shiny: false,
-              type: WandererType.UNOWN_SPELL,
-              behavior: WandererBehavior.SPECTATE
-            })
-            this.clock.setTimeout(() => {
-              player.wanderers.delete(wanderer.id)
-              if (simulation.finished) return
-              const caster = new PokemonEntity(
-                PokemonFactory.createPokemonFromName(unown),
-                9,
-                2,
-                player.team,
-                simulation
-              )
-              castAbility(caster.skill, caster, simulation.board, null, false)
-            }, 10000)
+        ;[simulation.bluePlayer, simulation.redPlayer].forEach((player) => {
+          if (
+            !player ||
+            (simulation.isGhostBattle && player === simulation.redPlayer)
+          )
+            return
+          const wanderer = player.spawnWanderingPokemon({
+            pkm: unown,
+            shiny: false,
+            type: WandererType.UNOWN_SPELL,
+            behavior: WandererBehavior.SPECTATE
           })
+          this.clock.setTimeout(() => {
+            player.wanderers.delete(wanderer.id)
+            if (simulation.finished) return
+            const caster = new PokemonEntity(
+              PokemonFactory.createPokemonFromName(unown),
+              9,
+              2,
+              player.team,
+              simulation
+            )
+            castAbility(caster.skill, caster, simulation.board, null, false)
+          }, 10000)
+        })
       })
     }
   }
@@ -1967,7 +1969,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.effects.has(EffectEnum.GOLDEN_EGGS)
     const hasLostLastBattle =
       player.history.at(-1)?.result === BattleResult.DEFEAT
-    const eggsOnBench = values(player.board).filter((p) => p.name === Pkm.EGG)
+    const eggsOnBench = schemaValues(player.board).filter(
+      (p) => p.name === Pkm.EGG
+    )
     const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
     let nbEggsFound = 0
     let goldenEggFound = false
@@ -1977,7 +1981,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const GOLDEN_EGG_CHANCE = 0.05
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
-      const babies = values(player.board).filter(
+      const babies = schemaValues(player.board).filter(
         (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
       )
 

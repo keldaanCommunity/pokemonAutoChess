@@ -27,7 +27,7 @@ import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
@@ -120,7 +120,7 @@ export default class GameScene extends Scene {
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = values(this.room.state.players).map((p) => p.id)
+      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
         this.spectate ? playerUids[0] : this.uid
       ) as Player

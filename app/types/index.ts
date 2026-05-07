@@ -20,6 +20,7 @@ import { AttackSprite } from "./Animation"
 import { Ability } from "./enum/Ability"
 import { DungeonPMDO } from "./enum/Dungeon"
 import { BoardEffect, EffectEnum } from "./enum/Effect"
+import { EloRank } from "./enum/EloRank"
 import { Emotion } from "./enum/Emotion"
 import {
   GameMode,
@@ -185,7 +186,7 @@ export interface ISimplePlayer {
   id: string
   rank: number
   avatar: string
-  title: string
+  title: Title | ""
   role: Role
   pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
   synergies:
@@ -256,7 +257,7 @@ export interface IPlayer {
   opponentId: string
   opponentName: string
   opponentAvatar: string
-  opponentTitle: string
+  opponentTitle: Title | "WILD" | ""
   boardSize: number
   items: ArraySchema<Item>
   scarvesItems: ArraySchema<Item>
@@ -603,8 +604,8 @@ export interface IPreparationMetadata {
   noElo: boolean
   type: "preparation"
   gameStartedAt: string | null
-  minRank: string | null
-  maxRank: string | null
+  minRank: EloRank | null
+  maxRank: EloRank | null
   gameMode: GameMode
   whitelist: string[]
   blacklist: string[]

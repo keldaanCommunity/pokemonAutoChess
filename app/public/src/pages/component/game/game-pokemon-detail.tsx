@@ -21,7 +21,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
-import { values } from "../../../../../utils/schemas"
+import { schemaValues } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -99,7 +99,7 @@ export function GamePokemonDetail(props: {
     return stats.map((s) => {
       if (props.origin === "team") {
         // count item stats as well
-        s.value = values(pokemon.items).reduce((acc, item) => {
+        s.value = schemaValues(pokemon.items).reduce((acc, item) => {
           let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
           if (
             pokemon.items.has(Item.BIG_EATER_BELT) &&
@@ -148,7 +148,7 @@ export function GamePokemonDetail(props: {
     if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.hp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
         pokemon.hp
       )
@@ -161,7 +161,7 @@ export function GamePokemonDetail(props: {
     if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.pp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.PP] ?? 0),
         pokemon.pp
       )
@@ -173,7 +173,7 @@ export function GamePokemonDetail(props: {
     if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.shield
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.SHIELD] ?? 0),
         0
       )

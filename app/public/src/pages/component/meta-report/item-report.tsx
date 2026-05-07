@@ -21,6 +21,7 @@ import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
 import "./item-report.css"
+import { keys } from "../../../../../utils/object"
 import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
@@ -80,7 +81,7 @@ export function ItemReport() {
           value={eloThreshold}
           onChange={(e) => setEloTreshold(e.target.value as EloRank)}
         >
-          {Object.keys(EloRank).map((r) => (
+          {keys(EloRank).map((r) => (
             <option value={r} key={r}>
               {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
             </option>

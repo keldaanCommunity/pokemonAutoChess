@@ -30,7 +30,7 @@ export default function GameExpeditions() {
         {expeditions.map((expedition) => (
           <li key={expedition.type + expedition.rank}>
             <span className="expedition-type">
-              {t("expeditions." + expedition.type)}
+              {t(`expeditions.${expedition.type}`)}
             </span>
             <p>{addIconsToDescription(getExpeditionLabel(expedition))}</p>
           </li>
