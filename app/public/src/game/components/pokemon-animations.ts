@@ -8029,5 +8029,19 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Sleep,
     attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAROUNTULA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Attack,
+    attackSprite: AttackSprite.BUG_RANGE,
+    hitSprite: HitSprite.BUG_HIT
+  },
+  [Pkm.SPIDOPS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_RANGE,
+    hitSprite: HitSprite.BUG_HIT
   }
 }

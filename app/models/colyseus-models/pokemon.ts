@@ -20735,6 +20735,37 @@ export class Komala extends Pokemon {
   passive = Passive.COMATOSE
 }
 
+export class Tarountula extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 1
+  evolution = Pkm.SPIDOPS
+  hp = 65
+  atk = 6
+  speed = 30
+  def = 5
+  speDef = 4
+  maxPP = 100
+  range = 2
+  skill = Ability.SILK_TRAP
+  additional = true
+}
+
+export class Spidops extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
+  rarity = Rarity.UNCOMMON
+  stars = 2
+  hp = 135
+  atk = 12
+  speed = 30
+  def = 9
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.SILK_TRAP
+  additional = true
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21925,7 +21956,9 @@ export const PokemonClasses: Record<
   [Pkm.QUAXLY]: Quaxly,
   [Pkm.QUAXWELL]: Quaxwell,
   [Pkm.QUAQUAVAL]: Quaquaval,
-  [Pkm.KOMALA]: Komala
+  [Pkm.KOMALA]: Komala,
+  [Pkm.TAROUNTULA]: Tarountula,
+  [Pkm.SPIDOPS]: Spidops
 }
 
 // declare all the classes in colyseus schema TypeRegistry

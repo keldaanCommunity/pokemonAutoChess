@@ -5,7 +5,8 @@
 - Quaquaval
 - Hisui Avalugg
 - Komala
-
+- Tarountula
+- Spidops
 
 # Changes to Synergies
 
@@ -64,6 +65,8 @@
 
 
 # Bugfix
+
+- Lingering Aroma damage on hit now only applies to attackers at melee range as intended
 
 # Misc
 

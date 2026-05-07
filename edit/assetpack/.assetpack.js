@@ -133,7 +133,7 @@ function texturePackAtlas() {
       const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
       fs.writeFileSync(
         "../../app/public/dist/client/sw.js",
-        sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
+        sw.replace(/CACHE v[\d\.\-]+/, `CACHE v${newVersion}`)
       )
 
       // Copy items individual sprites as we need them unpacked as well
