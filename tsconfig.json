@@ -20,11 +20,5 @@
     "jsx": "react-jsx",
     "skipLibCheck": true
   },
-  "include": [
-    "./app/**/*",
-    "./scheduled/**/*",
-    "./edit/**/*",
-    "./db-commands/**/*"
-  ],
-  "exclude": ["node_modules", "app/public/dist/client/pokechess/assets/**/*"]
+  "include": ["./app/*", "./scheduled/*", "./edit/*", "./db-commands/*"]
 }
