@@ -10,7 +10,7 @@ import { EloRank } from "../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../types/enum/Game"
 import type { IBot } from "../types/models/bot-v2"
 import { logger } from "../utils/logger"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import {
   OnAddBotCommand,
   OnChangeNoEloCommand,
@@ -135,7 +135,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
             this.presence.publish("tournament-match-end", {
               tournamentId: this.metadata?.tournamentId,
               bracketId: this.metadata?.bracketId,
-              players: values(this.state.users).map((p) => ({
+              players: schemaValues(this.state.users).map((p) => ({
                 id: p.uid,
                 rank: 1
               }))
@@ -358,7 +358,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
       }
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
-      const numberOfHumanPlayers = values(this.state.users).filter(
+      const numberOfHumanPlayers = schemaValues(this.state.users).filter(
         (u) => !u.isBot
       ).length
 

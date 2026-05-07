@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   ILeaderboardBotInfo,
   ILeaderboardInfo
@@ -46,7 +47,7 @@ export default function LeaderboardItem(props: {
       >
         {props.isBot ? (
           <>
-            {t(`pkm.${props.item.name}`)} {t("by")} @
+            {t(`pkm.${props.item.name as Pkm}`)} {t("by")} @
             {(props.item as ILeaderboardBotInfo).author}
           </>
         ) : (

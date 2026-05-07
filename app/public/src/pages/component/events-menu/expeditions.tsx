@@ -162,7 +162,7 @@ export function ExpeditionBox(props: { expedition: Expedition }) {
       </p>
       <div className="expedition-objective">
         <span className="expedition-type">
-          {t("expeditions." + props.expedition.type)}
+          {t(`expeditions.${props.expedition.type}`)}
         </span>
         <p>{addIconsToDescription(getExpeditionLabel(props.expedition))}</p>
         <p className="expedition-rewards">

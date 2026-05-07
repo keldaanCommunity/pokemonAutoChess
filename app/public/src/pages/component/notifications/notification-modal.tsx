@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { GADGETS } from "../../../../../config/game/gadgets"
+import { GADGETS, GadgetName } from "../../../../../config/game/gadgets"
 import { INotification } from "../../../../../types/notifications"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"
 import "./notification-modal.css"
+import { Theme } from "../../../../../config/game/theme"
+import { Title } from "../../../../../types"
+import { EloRank } from "../../../../../types/enum/EloRank"
+import { ExpeditionType } from "../../../../../types/enum/Expedition"
 
 interface NotificationModalProps {
   notifications: INotification[]
@@ -85,21 +89,21 @@ export function NotificationModal({
         })
       case "new_title":
         return t("notification.new_title_message", {
-          title: t(`title.${notification.message}`),
-          description: t(`title_description.${notification.message}`)
+          title: t(`title.${notification.message as Title}`),
+          description: t(`title_description.${notification.message as Title}`)
         })
       case "new_gadget":
         return t("notification.new_gadget_message", {
-          gadget: t(`gadget.${notification.message}`),
-          description: t(`gadget.${notification.message}_desc`)
+          gadget: t(`gadget.${notification.message as GadgetName}`),
+          description: t(`gadget.${notification.message as GadgetName}_desc`)
         })
       case "new_theme":
         return t("notification.new_theme_message", {
-          theme: t(`theme.${notification.message}`)
+          theme: t(`theme.${notification.message as Theme}`)
         })
       case "elo_rank_change":
         return t("notification.elo_rank_change_message", {
-          rank: t(`elorank.${notification.message}`)
+          rank: t(`elorank.${notification.message as EloRank}`)
         })
       case "victory_road_finished":
         return t("notification.victory_road_finished_message", {
@@ -108,7 +112,7 @@ export function NotificationModal({
       case "expedition_completed": {
         const [expeditionType, rank, points] = notification.message.split("|")
         return t("notification.expedition_completed_message", {
-          expedition: t(`expeditions.${expeditionType}`),
+          expedition: t(`expeditions.${expeditionType as ExpeditionType}`),
           rank,
           points
         })

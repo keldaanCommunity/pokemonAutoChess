@@ -54,7 +54,7 @@ import {
 } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
 import Player from "./player"
@@ -167,7 +167,7 @@ export class Pokemon extends Schema implements IPokemon {
   ) {
     // called after manually changing position of the pokemon on board
     if (y === 0 && !doNotRemoveItems) {
-      const itemsToRemove = values(this.items).filter((item) => {
+      const itemsToRemove = schemaValues(this.items).filter((item) => {
         return (
           isIn(RemovableItems, item) ||
           (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
@@ -249,7 +249,7 @@ export class Pokemon extends Schema implements IPokemon {
     }
 
     if (originalVariant) {
-      const commonTypes = values(originalVariant.types).filter((t) =>
+      const commonTypes = schemaValues(originalVariant.types).filter((t) =>
         this.types.has(t)
       )
       if (commonTypes.some((t) => regionSynergies.includes(t))) {
@@ -291,7 +291,7 @@ export class Pokemon extends Schema implements IPokemon {
     const nativeTypes = new PokemonClasses[this.name](this.name).types
     for (const item of items) {
       const synergyRemoved = SynergyGivenByItem[item]
-      const otherSynergyItemsHeld = values(this.items).filter(
+      const otherSynergyItemsHeld = schemaValues(this.items).filter(
         (i) => SynergyGivenByItem[i] === synergyRemoved
       )
 
@@ -2212,7 +2212,7 @@ export class Poliwhirl extends Pokemon {
     (pokemon: Pokemon, player: IPlayer) => {
       if (
         Math.max(
-          ...values(player.board)
+          ...schemaValues(player.board)
             .filter((pkm) => pkm.index === this.index)
             .map((v) => v.positionY)
         ) === 3
@@ -10137,7 +10137,7 @@ export class Silvally extends Pokemon {
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state, true)
     if (y === 0) {
-      const itemsToRemove = values(this.items).filter((item) => {
+      const itemsToRemove = schemaValues(this.items).filter((item) => {
         return (
           isIn(RemovableItems, item) ||
           (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
@@ -15063,7 +15063,7 @@ export const burmyDivergentEvolutionRule = (
 ) =>
   new ConditionBasedEvolutionRule(
     (pokemon: Pokemon, player: Player, stageLevel: number) => {
-      const copies = values(player.board).filter(
+      const copies = schemaValues(player.board).filter(
         (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
       )
       if (copies.length >= 3) return true
@@ -15073,7 +15073,7 @@ export const burmyDivergentEvolutionRule = (
       )
     },
     (pokemon, player) => {
-      const copies = values(player.board).filter(
+      const copies = schemaValues(player.board).filter(
         (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
       )
       if (copies.length >= 3) return wormadam
@@ -17094,10 +17094,10 @@ export class Malamar extends Pokemon {
 }
 
 const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
-  const pkmOnBoard = values(player.board).filter(
+  const pkmOnBoard = schemaValues(player.board).filter(
     (p) => p.name === pkm && p.positionY > 0
   )
-  const pillars = values(player.board).filter((p) => p.name === pillarPkm)
+  const pillars = schemaValues(player.board).filter((p) => p.name === pillarPkm)
   const nbPillars = pkmOnBoard.length * (pkm === Pkm.CONKELDURR ? 2 : 1)
   if (pillars.length < nbPillars) {
     for (let i = 0; i < nbPillars - pillars.length; i++) {
@@ -17123,11 +17123,11 @@ const pillarEvolve =
     pokemonsBeforeEvolution: Pokemon[]
     player: Player
   }) => {
-    const pkmOnBoard = values(params.player.board).filter(
+    const pkmOnBoard = schemaValues(params.player.board).filter(
       (p) =>
         p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
     )
-    const pillars = values(params.player.board).filter(
+    const pillars = schemaValues(params.player.board).filter(
       (p) => p.name === pillarToRemove
     )
     for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
@@ -19425,7 +19425,7 @@ export class Golisopod extends Pokemon {
 
 const basculinOnAcquired = (player: Player) => {
   ;[Pkm.BASCULIN_BLUE, Pkm.BASCULIN_RED, Pkm.BASCULIN_WHITE].every((basculin) =>
-    values(player.board).find((e) => e.name === basculin)
+    schemaValues(player.board).find((e) => e.name === basculin)
   ) && player.titles.add(Title.AQUARIOPHILE)
 }
 

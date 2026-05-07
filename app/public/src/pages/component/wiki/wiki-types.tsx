@@ -56,6 +56,7 @@ export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
   const [preferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
+  const effects = SynergyEffects[props.type]
 
   const pokemons = filterPokemonsAccordingToPreferences(
     PRECOMPUTED_POKEMONS_PER_TYPE[props.type],
@@ -99,7 +100,7 @@ export function WikiType(props: { type: Synergy }) {
           t(`synergy_description.${props.type}`, { additionalInfo: "" })
         )}
       </p>
-      {SynergyEffects[props.type].map((effect, i) => {
+      {effects.map((effect: (typeof effects)[number], i) => {
         return (
           <div
             key={t(`effect.${effect}`)}

@@ -44,6 +44,8 @@ export interface IPreferencesState {
   theme: string
 }
 
+export type PreferenceKey = keyof IPreferencesState
+
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,

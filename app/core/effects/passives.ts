@@ -29,7 +29,7 @@ import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { castAbility } from "../abilities/abilities"
 import { Board, Cell } from "../board"
 import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
@@ -537,7 +537,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   SynergyArray.forEach((synergy) => {
     surroundingSynergies.set(synergy, 0)
   })
-  const adjacentAllies = values(player.board).filter(
+  const adjacentAllies = schemaValues(player.board).filter(
     (p) =>
       isOnBench(p) === false &&
       distanceC(
@@ -706,7 +706,7 @@ export class FalinksFormationEffect extends OnSpawnEffect {
   constructor() {
     super((pkm) => {
       if (!pkm.player) return
-      const troopers = values(pkm.player.board).filter(
+      const troopers = schemaValues(pkm.player.board).filter(
         (p) =>
           p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
       )
@@ -726,7 +726,7 @@ export class BergmiteOnBackEffect extends OnSpawnEffect {
   constructor() {
     super((pkm) => {
       if (!pkm.player) return
-      const bergmites = values(pkm.player.board).filter(
+      const bergmites = schemaValues(pkm.player.board).filter(
         (p) => p.name === Pkm.BERGMITE && p.positionY === 0 && p.id !== pkm.id
       )
       this.stacks = bergmites.length
@@ -775,7 +775,7 @@ const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
 
 const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
   ({ simulation, team, entity }) => {
-    const alliesWithFreeSlots = values(team).filter(
+    const alliesWithFreeSlots = schemaValues(team).filter(
       (p) =>
         p.name !== Pkm.COMFEY &&
         p.items.size < 3 &&
@@ -898,7 +898,7 @@ const conversionEffect = new OnSimulationStartEffect(
     // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
     if (synergyCopied === Synergy.DRAGON) {
       const opponentTeam = simulation.getOpponentTeam(player.id)!
-      const dragonLevel = values(opponentTeam).reduce(
+      const dragonLevel = schemaValues(opponentTeam).reduce(
         (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
         0
       )

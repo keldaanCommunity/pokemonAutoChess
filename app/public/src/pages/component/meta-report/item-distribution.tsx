@@ -18,13 +18,18 @@ function getItemImagePath(itemName: string): string {
   return `assets/item/${itemName}.png`
 }
 
-function CustomTooltip({
-  active,
-  payload
-}: {
+type ValueType = {
+  avgPlace: number
+  count: number
+  name: Item
+}
+
+interface CustomTooltipProps {
   active?: boolean
-  payload?: any[]
-}) {
+  payload?: Array<{ payload: ValueType }>
+}
+
+function CustomTooltip({ active, payload }: CustomTooltipProps) {
   if (active && payload && payload.length) {
     const data = payload[0].payload
     return (
@@ -91,7 +96,7 @@ export function ItemDistribution({
     if (!tierData) return []
 
     // Map every item to scatter plot coordinates
-    let items = Object.values(tierData.items).map((item) => ({
+    let items: ValueType[] = Object.values(tierData.items).map((item) => ({
       avgPlace: item.rank,
       count: item.count,
       name: item.name

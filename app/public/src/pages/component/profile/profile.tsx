@@ -27,6 +27,7 @@ import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
 import { TitleTab } from "./title-tab"
 import "./profile.css"
+import { keys } from "../../../../../utils/object";
 
 export default function Profile() {
   const { t } = useTranslation()
@@ -267,9 +268,9 @@ function OtherProfileActions(props: {
             setProfileRole(e.target.value as Role)
           }}
         >
-          {Object.keys(Role).map((r) => (
+          {keys(Role).map((r) => (
             <option key={r} value={r}>
-              {t("role." + r).toUpperCase()}
+              {t(`role.${r}`).toUpperCase()}
             </option>
           ))}
         </select>

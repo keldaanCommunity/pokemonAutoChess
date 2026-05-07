@@ -55,7 +55,7 @@ const PortraitEndDot = React.memo(function PortraitEndDot(props: {
 /** Full-width chart with label, for use inside expanded accordion sections */
 export function HistoryChart(props: {
   entries: IHistoryEntry[]
-  label?: string
+  label?: "count" | "average_place"
   color?: string
   invertY?: boolean
   portraitSrc?: string

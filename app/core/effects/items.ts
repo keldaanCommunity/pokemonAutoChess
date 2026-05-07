@@ -38,7 +38,7 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
 import { ConditionBasedEvolutionRule } from "../evolution-rules"
@@ -304,7 +304,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
       pokemon.passive === Passive.OGERPON_CORNERSTONE
     ) {
-      const currentMask = values(pokemon.items).find((i) =>
+      const currentMask = schemaValues(pokemon.items).find((i) =>
         OgerponMasks.includes(i)
       )
       if (currentMask) {
@@ -343,7 +343,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player
       )
       pokemon.items.forEach((item) => substitute.items.add(item))
-      pokemon.removeItems(values(pokemon.items), player)
+      pokemon.removeItems(schemaValues(pokemon.items), player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
@@ -414,7 +414,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
           if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
           } else {
-            let candidates = values(player.board).filter(
+            let candidates = schemaValues(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
@@ -854,7 +854,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         Synergy.PSYCHIC,
         Synergy.FAIRY
       ]
-      const fieldEffect = values(entity.types).find((type) =>
+      const fieldEffect = schemaValues(entity.types).find((type) =>
         terrainTypes.includes(type)
       )
       switch (fieldEffect) {
@@ -1180,7 +1180,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.canEat) {
         let nbSandwiches = 0
-        values(player.board).forEach((pkm) => {
+        schemaValues(player.board).forEach((pkm) => {
           if (
             pkm.canEat &&
             pokemon &&
@@ -1209,7 +1209,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LAPRAS_PASSPORT]: [
     new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
       const previousMap = player.map
-      const chosenSynergies = values(pokemon.types)
+      const chosenSynergies = schemaValues(pokemon.types)
       const maps = Object.values(DungeonPMDO).filter(
         (map) => map !== previousMap
       )
@@ -1257,12 +1257,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       ]
     ])
   ),
-
-  [Item.BLACK_AUGURITE]: [
-    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
-      return pokemon.passive === Passive.SCYTHER // is then consummed by ItemEvolutionRule
-    })
-  ],
 
   [Item.MALICIOUS_ARMOR]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {

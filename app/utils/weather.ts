@@ -11,7 +11,7 @@ import {
   WeatherAssociatedToSynergy
 } from "../types/enum/Weather"
 import { hasKey } from "./map"
-import { values } from "./schemas"
+import { schemaValues } from "./schemas"
 
 export function getWeather(
   bluePlayer: Player,
@@ -219,10 +219,12 @@ export function getWeather(
         }
 
         if (pkm.passive === Passive.DROUGHT_OR_ZENITH) {
-          const nbLight = values(board).filter((p) =>
+          const nbLight = schemaValues(board).filter((p) =>
             p.types.has(Synergy.LIGHT)
           )
-          const nbFire = values(board).filter((p) => p.types.has(Synergy.FIRE))
+          const nbFire = schemaValues(board).filter((p) =>
+            p.types.has(Synergy.FIRE)
+          )
           const dominant = nbLight >= nbFire ? Weather.ZENITH : Weather.DROUGHT
           boardWeatherScore.set(
             dominant,

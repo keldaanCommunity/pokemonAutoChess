@@ -116,7 +116,7 @@ export default function BotBuilder() {
   }
 
   function changeAvatar(pkm: PkmWithCustom) {
-    bot.name = pkm.name.toUpperCase()
+    bot.name = pkm.name
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
     completeBotInfo()
   }

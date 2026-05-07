@@ -12,7 +12,7 @@ export default function SynergyIcon(props: {
     <img
       src={"assets/types/" + props.type + ".svg"}
       alt={props.type}
-      title={t("synergy." + props.type)}
+      title={t(`synergy.${props.type}`)}
       className={`synergy-icon${props.className ? " " + props.className : ""}`}
       style={{
         width: props.size,

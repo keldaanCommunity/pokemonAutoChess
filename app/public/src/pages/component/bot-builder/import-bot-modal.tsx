@@ -31,7 +31,7 @@ export default function ImportBotModal(props: {
     setJsonError("")
     try {
       setTextArea(JSON.stringify(JSON.parse(newValue), null, 2))
-    } catch (e) {
+    } catch (e: any) {
       setJsonError(e.message)
     }
   }

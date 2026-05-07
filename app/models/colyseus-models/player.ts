@@ -65,7 +65,7 @@ import {
   pickRandomIn,
   shuffleArray
 } from "../../utils/random"
-import { resetArraySchema, values } from "../../utils/schemas"
+import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { Effects } from "../effects"
 import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
 import {
@@ -101,7 +101,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentId: string = ""
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
-  @type("string") opponentTitle: string = ""
+  @type("string") opponentTitle: Title | "WILD" | "" = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
@@ -291,7 +291,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getPokemonAt(x: number, y: number): Pokemon | undefined {
-    return values(this.board).find(
+    return schemaValues(this.board).find(
       (pokemon) => pokemon.positionX == x && pokemon.positionY == y
     )
   }
@@ -317,7 +317,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateSynergies() {
-    const pokemons: Pokemon[] = values(this.board)
+    const pokemons: Pokemon[] = schemaValues(this.board)
     const previousSynergies = this.synergies.toMap()
     let updatedSynergies = computeSynergies(
       pokemons,
@@ -401,7 +401,7 @@ export default class Player extends Schema implements IPlayer {
 
     if (
       this.items.includes(Item.MISSION_ORDER_PINK) &&
-      values(this.board).filter((p) => p.stars >= 3).length >= 5
+      schemaValues(this.board).filter((p) => p.stars >= 3).length >= 5
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_PINK)
     }
@@ -438,7 +438,7 @@ export default class Player extends Schema implements IPlayer {
 
       const removeArtificialItem = (item: Item) => {
         // first check held items
-        const pokemons = values(this.board)
+        const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
             pokemon.removeItem(item, this)
@@ -504,7 +504,7 @@ export default class Player extends Schema implements IPlayer {
       newScarves.forEach((s) => removeInArray(lostScarves, s))
       const removeScarf = (item: ScarfItem) => {
         // first check held items
-        const pokemons = values(this.board)
+        const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
             pokemon.removeItem(item, this)
@@ -560,7 +560,7 @@ export default class Player extends Schema implements IPlayer {
       const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
       lostTMs.forEach((tm) => {
         removeInArray(this.items, tm)
-        const pokemonWithThisTm = values(this.board).find(
+        const pokemonWithThisTm = schemaValues(this.board).find(
           (p) => p.tm === AbilityPerTM[tm]
         )
         if (pokemonWithThisTm) {
@@ -594,7 +594,7 @@ export default class Player extends Schema implements IPlayer {
   updateChefsHats() {
     const gourmetLevel = getSynergyStep(this.synergies, Synergy.GOURMET)
     const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
-    const hatHolders = values(this.board).filter((p) =>
+    const hatHolders = schemaValues(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
     )
     let currentNbHats =
@@ -712,7 +712,7 @@ export default class Player extends Schema implements IPlayer {
       }
 
       // Cannot be a ConditionBasedEvolutionRule because it has another CountEvolutionRule for Wormadam
-      const burmys = values(this.board).filter(
+      const burmys = schemaValues(this.board).filter(
         (p) => p.passive === Passive.BURMY
       )
       if (burmys.length > 0 && state.stageLevel >= 20) {
@@ -840,7 +840,7 @@ export default class Player extends Schema implements IPlayer {
   getFinalizedLines(): Set<Pkm> {
     if (this.specialGameRule === SpecialGameRule.FAMILY_OUTING) return new Set() // in family outing mode, do not remove finished lines from shop
     const finals = new Set(
-      values(this.board)
+      schemaValues(this.board)
         .filter((pokemon) => pokemon.final)
         .map((pokemon) => getPokemonBaseline(pokemon.name))
     )
@@ -910,7 +910,7 @@ export default class Player extends Schema implements IPlayer {
 
     const dps = simulation.getDpsMeter(this.id)
     if (dps) {
-      const dpsList = values(dps)
+      const dpsList = schemaValues(dps)
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,
         ...dpsList.map((d) => d.heal)
