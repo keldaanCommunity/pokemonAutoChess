@@ -1,0 +1,23 @@
+:root {
+  --color-bg-primary: #3b6438;
+  --color-bg-secondary: #547a54;
+  --color-bg-tertiary: #304529;
+  --color-bg-accent: #aea95a;
+}
+
+.custom-bg {
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Game */
+
+#videobg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
