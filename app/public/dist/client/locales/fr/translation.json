@@ -3895,7 +3895,7 @@
 	"leave_game": "Quitter la partie",
 	"leave_room": "Quitter ce salon",
 	"passive_income_hint": "À chaque manche, gagnez 5 GOLD + 1 GOLD supplémentaire si vous avez gagné le combat précédent.",
-	"victory_income_hint": "Gagnez 1 GOLD bonus pour chaque série de victoires ou de défaites, jusqu'à 5 GOLD bonus.",
+	"streak_income_hint": "Gagnez 1 GOLD bonus pour chaque série de victoires ou de défaites, jusqu'à 5 GOLD bonus.",
 	"additional_income_hint": "Gagnez 1 GOLD bonus pour 10 GOLD économisées, jusqu'à {{maxInterest}} GOLD bonus pour {{maxInterestGolds}} GOLD économisées.",
 	"victory_count_one": "{{count}} victoire",
 	"victory_count_other": "{{count}} victoires",

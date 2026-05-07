@@ -3945,7 +3945,7 @@
 	"leave_game": "Leave game",
 	"leave_room": "Leave room",
 	"passive_income_hint": "Each stage, gain 5 GOLD + 1 extra GOLD if you won the previous battle.",
-	"victory_income_hint": "Gain 1 bonus GOLD for every victory or defeat streak, up to 5 bonus GOLD.",
+	"streak_income_hint": "Gain 1 bonus GOLD for every victory or defeat streak, up to 5 bonus GOLD.",
 	"additional_income_hint": "Gain 1 bonus GOLD per 10 GOLD saved, up to {{maxInterest}} bonus income at {{maxInterestGolds}} saved GOLD.",
 	"victory_count_one": "{{count}} victory",
 	"victory_count_other": "{{count}} victories",

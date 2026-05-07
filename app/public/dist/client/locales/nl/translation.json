@@ -1791,7 +1791,7 @@
 	"leave_game": "Spel verlaten",
 	"leave_room": "Verlaat Kamer",
 	"passive_income_hint": "Verdien in elke fase 5 goud + 1 extra goud als je het vorige gevecht hebt gewonnen.",
-	"victory_income_hint": "Ontvang 1 bonusgoud voor elke overwinning of nederlaagreeks, tot 5 bonusgoud.",
+	"streak_income_hint": "Ontvang 1 bonusgoud voor elke overwinning of nederlaagreeks, tot 5 bonusgoud.",
 	"additional_income_hint": "Ontvang 1 bonusgoud per 10 gespaarde goud, tot {{maxInterest}} bonusinkomsten bij {{maxInterestGolds}} gespaarde goud.",
 	"options": {
 		"title": "Opties",
