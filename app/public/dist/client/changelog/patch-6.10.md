@@ -69,6 +69,7 @@
 # Bugfix
 
 - Lingering Aroma damage on hit now only applies to attackers at melee range as intended
+- Fix Smeargle losing Sketch forever when copying and using Skill Swap
 
 # Misc
 

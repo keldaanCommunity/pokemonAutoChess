@@ -6596,7 +6596,8 @@ export class AcidArmorStrategy extends AbilityStrategy {
     let count = 4
     const acidHitEffect = new OnDamageReceivedEffect(
       ({ pokemon, attacker }) => {
-        if (attacker && 
+        if (
+          attacker &&
           distanceC(
             pokemon.positionX,
             pokemon.positionY,
@@ -16230,7 +16231,13 @@ export class SkillSwapStrategy extends AbilityStrategy {
       pokemon.maxPP = target.refToBoardPokemon
         ? target.refToBoardPokemon.maxPP
         : target.maxPP
-      if (pokemon.refToBoardPokemon) {
+      if (
+        pokemon.refToBoardPokemon &&
+        !(
+          pokemon.refToBoardPokemon.skill === Ability.SKETCH &&
+          pokemon.refToBoardPokemon.tm === Ability.DEFAULT
+        )
+      ) {
         pokemon.refToBoardPokemon.skill = target.skill
       }
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
@@ -16688,7 +16695,6 @@ export class AquaStepStrategy extends AbilityStrategy {
   }
 }
 
-
 export class SkitterSmackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16763,7 +16769,7 @@ export class SilkTrapStrategy extends AbilityStrategy {
       new DelayedCommand(() => {
         pokemon.effectsSet.delete(trapEffect)
       }, 1500)
-    ) 
+    )
   }
 }
 
