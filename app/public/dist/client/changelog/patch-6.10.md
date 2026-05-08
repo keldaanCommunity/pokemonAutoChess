@@ -75,5 +75,5 @@
 
 - Added Twitch account verification and linking in Profile > Account, with secure OAuth flow.
 - Added a Twitch stream panel in the main lobby to surface live PAC creators, including stream title, viewers, uptime, language/tags, and direct channel links.
-- Added a new Player Report tab in Meta Report with a player rank distribution chart by Elo buckets.
+- Added a new player Elo distribution report tab in Meta Report that shows the player rank distribution chart by Elo ranks.
 - New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
