@@ -926,6 +926,7 @@ export enum Pkm {
   SLAKING = "SLAKING",
   SLAKOTH = "SLAKOTH",
   SLIGOO = "SLIGOO",
+  SLITHER_WING = "SLITHER_WING",
   SLOWBRO = "SLOWBRO",
   SLOWKING = "SLOWKING",
   SLOWPOKE = "SLOWPOKE",
@@ -2424,7 +2425,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.SCREAM_TAIL]: "0985",
   //[Pkm.BRUTE_BONNET]: "0986",
   [Pkm.FLUTTER_MANE]: "0987",
-  //[Pkm.SLITHER_WING]: "0988",
+  [Pkm.SLITHER_WING]: "0988",
   //[Pkm.SANDY_SHOCKS]: "0989",
   //[Pkm.IRON_THREADS]: "0990",
   [Pkm.IRON_BUNDLE]: "0991",
@@ -3650,7 +3651,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.QUAXLY]: Pkm.QUAXLY,
   [Pkm.QUAXWELL]: Pkm.QUAXLY,
   [Pkm.QUAQUAVAL]: Pkm.QUAXLY,
-  [Pkm.KOMALA]: Pkm.KOMALA
+  [Pkm.KOMALA]: Pkm.KOMALA,
+  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
