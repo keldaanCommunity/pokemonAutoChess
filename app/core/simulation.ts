@@ -48,7 +48,7 @@ import {
   randomBetween,
   shuffleArray
 } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
 import { DishEffects } from "./dishes"
@@ -219,7 +219,7 @@ export default class Simulation extends Schema implements ISimulation {
     ]) {
       if (player) {
         player.board.forEach((pokemon) => {
-          const entity = values(team).find(
+          const entity = schemaValues(team).find(
             (p) => p.refToBoardPokemon === pokemon
           ) as PokemonEntity | undefined
           if (pokemon.dishes.size > 0) {
@@ -482,7 +482,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (pokemon.types.has(Synergy.ELECTRIC) && pokemon.player) {
-      const nbCellBatteries = values(pokemon.player.items).filter(
+      const nbCellBatteries = schemaValues(pokemon.player.items).filter(
         (item) => item === Item.CELL_BATTERY
       ).length
       if (nbCellBatteries > 0) {
@@ -593,7 +593,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (pokemonCloned.items.has(Item.SHED_SHELL)) {
               const team =
                 teamIndex === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
-              const clonedEntity = values(team).find(
+              const clonedEntity = schemaValues(team).find(
                 (p) => p.refToBoardPokemon.id === pokemonCloned.id
               )
               if (clonedEntity) {
@@ -1069,7 +1069,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (types.has(Synergy.DRAGON)) {
           pokemon.effects.add(effect)
           if (player) {
-            const dragonLevel = values(player.board).reduce(
+            const dragonLevel = schemaValues(player.board).reduce(
               (acc, p) =>
                 acc +
                 (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
@@ -1680,7 +1680,7 @@ export default class Simulation extends Schema implements ISimulation {
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
       (p) => p.hp > 0
     ) as PokemonEntity[]
-    const curser = values(team).find((e) => e.types.has(Synergy.GHOST))
+    const curser = schemaValues(team).find((e) => e.types.has(Synergy.GHOST))
     // the curser is not important, we just need a reference to an opponent for stat debuffs
     if (!curser) return
 

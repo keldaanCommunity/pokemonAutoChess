@@ -4,6 +4,8 @@ import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import { Pkm } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
 
+type PkmFromOlderVersion = Pkm
+
 async function main() {
   dotenv.config()
 
@@ -14,14 +16,14 @@ async function main() {
     for (let i = 0; i < bots.length; i++) {
       let modified = false
       const bot = bots[i]
-      if (bot.name === "MEGA_SCIZOR") {
+      if (bot.name === ("MEGA_SCIZOR" as PkmFromOlderVersion)) {
         bot.name = Pkm.SCIZOR
         modified = true
         console.log(bot.name)
       }
       bot.steps.forEach((step) => {
         step.board.forEach((p) => {
-          if (p.name === ("MEGA_SCIZOR" as Pkm)) {
+          if (p.name === ("MEGA_SCIZOR" as PkmFromOlderVersion)) {
             p.name = Pkm.SCIZOR
             modified = true
             console.log(p.name, "in BOT", bot.name, "by ", bot.author)

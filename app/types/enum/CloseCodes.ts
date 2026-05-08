@@ -1,3 +1,5 @@
+import { ErrorMessage } from "../strings/ErrorMessage";
+
 // see https://github.com/Luka967/websocket-close-codes#websocket-close-codes
 export enum CloseCodes {
   NORMAL_CLOSURE = 1000,
@@ -29,7 +31,7 @@ export enum CloseCodes {
   GAME_ALREADY_STARTED = 4130
 }
 
-export const CloseCodesMessages: { [code in CloseCodes]?: string } = {
+export const CloseCodesMessages: { [code in CloseCodes]?: ErrorMessage } = {
   [CloseCodes.SERVER_SHUTDOWN]: "SERVER_SHUTDOWN",
   [CloseCodes.FAILED_TO_RECONNECT]: "FAILED_TO_RECONNECT",
   [CloseCodes.USER_INACTIVE]: "USER_INACTIVE",

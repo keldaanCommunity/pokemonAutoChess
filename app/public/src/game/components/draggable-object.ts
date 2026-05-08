@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 
 export default class DraggableObject extends GameObjects.Container {
   dragDisabled: boolean

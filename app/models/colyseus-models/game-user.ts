@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { Role } from "../../types"
+import { Role, Title } from "../../types"
 
 export interface IGameUser {
   uid: string
@@ -9,7 +9,7 @@ export interface IGameUser {
   isBot: boolean
   elo: number
   games: number
-  title: string
+  title: Title | ""
   role: Role
   anonymous: boolean
   twitchLogin: string
@@ -23,7 +23,7 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") isBot: boolean
   @type("uint16") elo: number
   @type("uint16") games: number
-  @type("string") title: string
+  @type("string") title: Title | ""
   @type("string") role: Role
   @type("boolean") anonymous: boolean
   @type("string") twitchLogin: string
@@ -37,7 +37,7 @@ export class GameUser extends Schema implements IGameUser {
     avatar: string,
     isBot: boolean,
     ready: boolean,
-    title: string,
+    title: Title | "",
     role: Role,
     anonymous: boolean,
     twitchLogin = "",

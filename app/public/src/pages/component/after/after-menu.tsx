@@ -97,7 +97,7 @@ export default function AfterMenu() {
                     />
                   </td>
                   <td data-tooltip-id={`stats-tooltip-${player.id}`}>
-                    <p title={t("total_money_earned")}>
+                    <p title={t("game_stats.total_money_earned")}>
                       <img
                         src="assets/icons/money_total.svg"
                         alt="$"
@@ -105,7 +105,7 @@ export default function AfterMenu() {
                       />{" "}
                       {player.gameStats.totalMoneyEarned}
                     </p>
-                    <p title={t("total_player_damage_dealt")}>
+                    <p title={t("game_stats.total_player_damage_dealt")}>
                       <img
                         src="assets/icons/ATK.png"
                         alt="✊"
@@ -113,7 +113,7 @@ export default function AfterMenu() {
                       />
                       {player.gameStats.totalPlayerDamageDealt}
                     </p>
-                    <p title={t("total_reroll_count")}>
+                    <p title={t("game_stats.total_reroll_count")}>
                       <img
                         src="assets/ui/refresh.svg"
                         alt="↻"

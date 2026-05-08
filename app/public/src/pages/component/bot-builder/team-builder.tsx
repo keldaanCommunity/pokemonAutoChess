@@ -8,7 +8,7 @@ import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../../utils/board"
-import { values } from "../../../../../utils/schemas"
+import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { IBot, IDetailledPokemon } from "../../../models/bot-v2"
 import { rooms } from "../../../network"
@@ -205,14 +205,14 @@ export default function TeamBuilder(props: {
     try {
       if (!spectatedPlayer) return
       updateBoard(
-        values(spectatedPlayer.board)
+        schemaValues(spectatedPlayer.board)
           .filter((pokemon) => !isOnBench(pokemon))
           .map((p) => {
             return {
               name: p.name,
               emotion: p.emotion,
               shiny: p.shiny,
-              items: values(p.items),
+              items: schemaValues(p.items),
               x: p.positionX,
               y: p.positionY
             }

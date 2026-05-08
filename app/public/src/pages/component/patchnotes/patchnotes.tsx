@@ -1,50 +1,12 @@
 import { useState } from "react"
 import { flushSync } from "react-dom"
-import { useTranslation } from "react-i18next"
+import { PATCHES, PatchInfo } from "../../../../../config/game/patches"
 import { PatchSummary } from "./patch-summary"
 import { Poster } from "./poster"
 import "./patchnotes.css"
 
 export default function PatchNotes() {
-  const { t } = useTranslation()
-  const PATCHES = [
-    "6.9",
-    "6.8",
-    "6.7",
-    "6.6",
-    "6.5",
-    "6.4",
-    "6.3",
-    "6.2",
-    "6.1",
-    "6.0",
-    "5.10",
-    "5.9",
-    "5.8",
-    "5.7",
-    "5.6",
-    "5.5",
-    "5.4",
-    "5.3",
-    "5.2",
-    "5.1",
-    "5.0",
-    "4.9",
-    "4.8",
-    "4.7",
-    "4.6",
-    "4.5",
-    "4.4",
-    "4.3",
-    "4.2",
-    "4.1",
-    "4.0",
-    "3.10",
-    "3.9",
-    "3.8"
-  ]
-
-  const [selectedPatch, setSelectedPatch] = useState<string | null>(null)
+  const [selectedPatch, setSelectedPatch] = useState<PatchInfo | null>(null)
 
   const viewTransition = (transition: () => void) => {
     // Use View Transition API if available
@@ -62,9 +24,9 @@ export default function PatchNotes() {
     }
   }
 
-  const handlePosterClick = (version: string) =>
+  const handlePosterClick = (patch: PatchInfo) =>
     viewTransition(() => {
-      setSelectedPatch(selectedPatch === version ? null : version)
+      setSelectedPatch(selectedPatch?.v === patch.v ? null : patch)
     })
 
   const handleBackClick = () =>
@@ -77,7 +39,7 @@ export default function PatchNotes() {
       <div className="patchnotes-detail-view">
         <div className="detail-content">
           <div className="detail-poster">
-            <Poster version={selectedPatch} isDetailed />
+            <Poster version={selectedPatch.v} isDetailed />
           </div>
           <div className="detail-notes">
             <button
@@ -87,7 +49,7 @@ export default function PatchNotes() {
             >
               🗙
             </button>
-            <PatchSummary version={selectedPatch} />
+            <PatchSummary patch={selectedPatch} />
           </div>
         </div>
       </div>
@@ -96,13 +58,13 @@ export default function PatchNotes() {
 
   return (
     <ul className="patchnotes-grid" role="list">
-      {PATCHES.map((v) => (
+      {PATCHES.map((patch) => (
         <li
-          key={v}
-          style={{ viewTransitionName: `poster-${v}` }}
+          key={patch.v}
+          style={{ viewTransitionName: `poster-${patch.v}` }}
           role="listitem"
         >
-          <Poster version={v} onClick={() => handlePosterClick(v)} />
+          <Poster version={patch.v} onClick={() => handlePosterClick(patch)} />
         </li>
       ))}
     </ul>

@@ -44,7 +44,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
 import { clamp, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import type { Board } from "./board"
 import {
@@ -1182,7 +1182,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count.damageReceivedCount++
 
     // Berries trigger
-    const berry = values(this.items).find((item) => Berries.includes(item))
+    const berry = schemaValues(this.items).find((item) =>
+      Berries.includes(item)
+    )
     if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
       this.eatBerry(berry)
     }
@@ -1455,12 +1457,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? this.simulation.blueTeam
           : this.simulation.redTeam
       if (!team) return
-      const alliesAlive: IPokemonEntity[] = values(team).filter(
+      const alliesAlive: IPokemonEntity[] = schemaValues(team).filter(
         (e) => e.hp > 0 || e.status.resurrecting
       )
       let koAllies: Pokemon[] = []
       if (this.player) {
-        koAllies = values(this.player.board).filter(
+        koAllies = schemaValues(this.player.board).filter(
           (p) =>
             p.id !== this.refToBoardPokemon.id &&
             !isOnBench(p) &&

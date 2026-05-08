@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import {
   GOLDEN_BERRY_TREE_TYPES,
   getRegionTint,

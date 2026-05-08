@@ -20,6 +20,7 @@ import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { DisplayText } from "../../types/strings/DisplayText"
 import { isIn } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
@@ -38,7 +39,7 @@ import {
   randomBetween,
   shuffleArray
 } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import type { Board, Cell } from "../board"
 import {
   OnAbilityCastEffect,
@@ -407,7 +408,9 @@ export class TeaTimeStrategy extends AbilityStrategy {
       if (tg && pokemon.team == tg.team) {
         pokemon.broadcastAbility({ positionX: x, positionY: y })
         tg.handleHeal(heal, pokemon, 1, crit)
-        const berry = values(tg.items).find((item) => Berries.includes(item))
+        const berry = schemaValues(tg.items).find((item) =>
+          Berries.includes(item)
+        )
         if (berry) {
           tg.eatBerry(berry)
         }
@@ -1876,7 +1879,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       })
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
-        itemStolen = pickRandomIn(values(target.items))
+        itemStolen = pickRandomIn(schemaValues(target.items))
         target.removeItem(itemStolen)
       }
 
@@ -3321,7 +3324,6 @@ export class DiveStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [10, 20, 40][pokemon.stars - 1] ?? 40
     const shield = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const freezeDuration = 1000
     const opponentTeam =
       pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const mostSurroundedCoordinate =
@@ -3351,7 +3353,6 @@ export class DiveStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          cell.value.status.triggerFreeze(freezeDuration, cell.value, pokemon)
         }
       })
     }
@@ -4810,7 +4811,7 @@ export class MetronomeStrategy extends AbilityStrategy {
 
     pokemon.simulation.broadcastToSpectators(Transfer.DISPLAY_TEXT, {
       id: pokemon.simulation.id,
-      text: `ability.${skill}`,
+      text: `ability.${skill}` as DisplayText,
       x: pokemon.positionX,
       y: pokemon.positionY
     })
@@ -10093,7 +10094,7 @@ export class InfestationStrategy extends AbilityStrategy {
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     if (pokemon.player && pokemon.count.ult === 1) {
-      const bugsOnBench = values(pokemon.player?.board).filter(
+      const bugsOnBench = schemaValues(pokemon.player?.board).filter(
         (p) => p && p.types.has(Synergy.BUG) && isOnBench(p)
       )
       const mostPowerfulBug = getStrongestUnit(bugsOnBench)
@@ -10867,7 +10868,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     if (target.items.size > 0) {
-      const item = values(target.items)[0]!
+      const item = schemaValues(target.items)[0]!
       target.removeItem(item)
       pokemon.addItem(item)
     } else {
@@ -16042,7 +16043,7 @@ export class ElectrifyStrategy extends AbilityStrategy {
       buffedUnit.types.add(Synergy.ELECTRIC)
       pokemon.simulation.applySynergyEffects(buffedUnit, Synergy.ELECTRIC)
       if (pokemon.player) {
-        const nbCellBatteries = values(pokemon.player.items).filter(
+        const nbCellBatteries = schemaValues(pokemon.player.items).filter(
           (item) => item === Item.CELL_BATTERY
         ).length
         if (nbCellBatteries > 0) {
@@ -16404,7 +16405,7 @@ export class OrderUpStrategy extends AbilityStrategy {
     const damage = 100
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
     if (pokemon.player) {
-      const tatsugiriOnBoard = values(pokemon.player.board).find(
+      const tatsugiriOnBoard = schemaValues(pokemon.player.board).find(
         (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
       )
       if (!tatsugiriOnBoard) {

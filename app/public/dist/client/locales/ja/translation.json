@@ -1842,7 +1842,7 @@
 		"STEAM_ERUPTION": "ターゲットと隣接する敵全員に[80,SP]のSPECIALを与え、3秒間炎上させる",
 		"APPLE_ACID": "前方の対象に[15,30,60,SP]のSPECIALを与え、DEFとSPE_DEFを[5,SP]ポイント下げる。",
 		"PSYCHIC": "[40,80,160,SP] SPECIAL を与え、ターゲットと隣接する敵に 15 PP を燃焼します",
-		"DIVE": "水中に潜って[15,30,60] SHIELDを獲得し、敵チームの中央に再出現し、隣接するすべてのユニットに[10,20,40,SP] SPECIALとFREEZEを1秒間与える",
+		"DIVE": "水中に潜って[15,30,60] SHIELDを獲得し、敵チームの中央に再出現し、隣接するすべてのユニットに[10,20,40,SP] SPECIAL秒間与える",
 		"SPIKY_SHIELD": "[3,5,10]秒間、このポケモンを近接攻撃したターゲットは傷を受け、現在のDEFの[100,SP]%に等しいSPECIALを受ける。",
 		"FUTURE_SIGHT": "敵5体に[15,30,60,SP]SPECIALを与える",
 		"FAKE_TEARS": "敵チーム全体に[5,10,15,SP] SPECIALを与え、3秒間ARMOR_BREAKをトリガーします",
@@ -2760,7 +2760,7 @@
 	"leave_game": "ゲームを離れる",
 	"leave_room": "部屋を出る",
 	"passive_income_hint": "各ステージでは、5 ゴールド + 前の戦闘で勝利した場合は 1 ゴールドを追加します。",
-	"victory_income_hint": "連勝または連敗ごとに 1 ボーナス ゴールドを獲得し、最大 5 ボーナス ゴールドを獲得します。",
+	"streak_income_hint": "連勝または連敗ごとに 1 ボーナス ゴールドを獲得し、最大 5 ボーナス ゴールドを獲得します。",
 	"additional_income_hint": "10 ゴールドを節約するごとに 1 ボーナス ゴールドを獲得し、{{maxInterestGolds}} ゴールドを節約すると最大 {{maxInterest}} ボーナス収入を獲得します。",
 	"options": {
 		"title": "オプション",

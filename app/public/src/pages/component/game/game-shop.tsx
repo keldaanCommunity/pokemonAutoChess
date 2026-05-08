@@ -8,6 +8,7 @@ import GameRarityPercentage from "./game-rarity-percentage"
 import GameRefresh from "./game-refresh"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
 import GameStore from "./game-store"
+import { GameStreakInfo } from "./game-streak-info"
 import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
 
@@ -18,6 +19,7 @@ export default function GameShop() {
         <div id="game-shop-info">
           <GameLifeInfo />
           <GameMoneyInfo />
+          <GameStreakInfo />
           <div className="spacer"></div>
           <GameTeamInfo />
         </div>

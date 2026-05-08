@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import type Player from "../../../../models/colyseus-models/player"
@@ -7,7 +7,7 @@ import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-cus
 import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
@@ -86,7 +86,7 @@ export default class LoadingManager {
     for (const pack in atlas.packs) {
       scene.load.multiatlas(
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}-${pkg.version}.json`,
+        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
         `/assets/${pack}/`
       )
     }
@@ -94,7 +94,7 @@ export default class LoadingManager {
     loadEnvironmentMultiAtlas(this.scene)
 
     if (scene instanceof GameScene) {
-      const players = values(scene.room?.state.players!)
+      const players = schemaValues(scene.room?.state.players!)
       const player = players.find((p) => p.id === scene.uid) ?? players[0]
       await scene.preloadMaps(
         players

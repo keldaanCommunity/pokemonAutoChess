@@ -46,6 +46,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
+import { NpcDialog } from "../types/strings/NpcDialog"
 import { isIn } from "../utils/array"
 import { clamp, max } from "../utils/number"
 import { getOrientation } from "../utils/orientation"
@@ -57,7 +58,7 @@ import {
   randomWeighted,
   shuffleArray
 } from "../utils/random"
-import { keys, values } from "../utils/schemas"
+import { schemaKeys, schemaValues } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
 import { spawnDIAYAvatar } from "./scribbles"
 
@@ -185,14 +186,14 @@ export class MiniGame {
                 // too poor to buy one item from kecleon's shop
                 client?.send(Transfer.NPC_DIALOG, {
                   npc: encounter,
-                  dialog: "npc_dialog.tell_price",
+                  dialog: "tell_price" satisfies NpcDialog,
                   price: price
                 })
                 return
               } else {
                 client?.send(Transfer.NPC_DIALOG, {
                   npc: encounter,
-                  dialog: "npc_dialog.thank_you"
+                  dialog: "thank_you" satisfies NpcDialog
                 })
                 if (player) {
                   player.money -= price
@@ -353,7 +354,7 @@ export class MiniGame {
       this.initializePortalCarousel(stageLevel, room)
       room.broadcast(
         Transfer.PRELOAD_MAPS,
-        values(this.portals!).map((p) => p.map)
+        schemaValues(this.portals!).map((p) => p.map)
       )
     } else if (ItemCarouselStages.includes(stageLevel)) {
       this.initializeItemsCarousel(state)
@@ -525,7 +526,7 @@ export class MiniGame {
     }
 
     if (encounter === TownEncounters.KECLEON) {
-      const topSynergies = values(state.players).flatMap((p) =>
+      const topSynergies = schemaValues(state.players).flatMap((p) =>
         p.synergies.getTopSynergies(3)
       )
       itemsSet = SynergyItems.filter(
@@ -726,8 +727,8 @@ export class MiniGame {
     }
 
     // randomly distribute symbols across portals
-    const portalIds = shuffleArray(keys(this.portals!))
-    const symbols = shuffleArray(values(this.symbols!))
+    const portalIds = shuffleArray(schemaKeys(this.portals!))
+    const symbols = shuffleArray(schemaValues(this.symbols!))
     this.symbolsByPortal = new Map()
 
     symbols.forEach((symbol, i) => {
@@ -846,7 +847,7 @@ export class MiniGame {
         if (state.stageLevel === 0 && this.portals) {
           // for initial portal, force to pick one of the portals not taken
           avatar.portalId = pickRandomIn(
-            values(this.portals).filter((p) => p.avatarId === "")
+            schemaValues(this.portals).filter((p) => p.avatarId === "")
           ).id
         }
       }

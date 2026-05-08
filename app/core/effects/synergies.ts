@@ -7,7 +7,7 @@ import {
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
-import { SynergyEffects } from "../../models/effects"
+import { SynergyEffect, SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -21,7 +21,7 @@ import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
 import { effectInLine } from "../../utils/orientation"
 import { chance } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import {
   FlowerMonByPot,
   FlowerPot,
@@ -49,7 +49,7 @@ export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0
   synergyLevel: number
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.MONSTER>) {
     super(undefined, effect)
     this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
   }
@@ -77,7 +77,7 @@ export class MonsterKillEffect extends OnKillEffect {
 }
 
 export class GroundHoleEffect extends OnSpawnEffect {
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.GROUND>) {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
     super((pokemon, player) => {
       const y =
@@ -111,7 +111,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
   synergyLevel: number
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.FIRE>) {
     super(undefined, effect)
     this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
   }
@@ -162,7 +162,7 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
   synergyLevel: number = -1
-  constructor(effect?: EffectEnum) {
+  constructor(effect?: SynergyEffect<Synergy.SOUND>) {
     super(undefined, effect)
     if (effect) {
       this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
@@ -216,7 +216,7 @@ export const humanHealEffect = new OnDamageDealtEffect(
 )
 
 export class OnFieldDeathEffect extends OnDeathEffect {
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.FIELD>) {
     super(({ pokemon, board }) => {
       const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
       const heal = FIELD_HEAL_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
@@ -427,7 +427,7 @@ export const normalShieldEffect = new OnSimulationStartEffect(
     }
     if (entity.effects.has(EffectEnum.PURE_POWER)) {
       shieldBonus += 30
-      if (values(entity.items).some((item) => Scarves.includes(item))) {
+      if (schemaValues(entity.items).some((item) => Scarves.includes(item))) {
         // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
         entity.addAttack(Math.round(0.3 * entity.baseAtk), entity, 0, false)
         entity.addAbilityPower(30, entity, 0, false)

@@ -13,7 +13,7 @@ import {
   WeatherRocks
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { DEPTH } from "../depths"
 import GameScene from "../scenes/game-scene"
 import ItemContainer from "./item-container"
@@ -46,7 +46,7 @@ export default class ItemsContainer extends GameObjects.Container {
 
     const itemSize = this.pokemonId === null ? 70 : 25
     const ITEMS_PER_COLUMN = 6
-    const items = values(inventory)
+    const items = schemaValues(inventory)
 
     this.items = []
     items

@@ -1209,6 +1209,7 @@
 		"TRUE": "true damage"
 	},
 	"ability": {
+		"DEFAULT": "No ability",
 		"SOFT_BOILED": "Soft-Boiled",
 		"PRECIPICE_BLADES": "Precipice Blades",
 		"SONG_OF_DESIRE": "Song of Desire",
@@ -1760,6 +1761,7 @@
 		"SKITTER_SMACK": "Skitter Smack"
 	},
 	"ability_description": {
+		"DEFAULT": "",
 		"SOFT_BOILED": "Cure all status conditions and grant [20,40,80,SP] SHIELD to all allied Pokémon.",
 		"PRECIPICE_BLADES": "Deal [100,SP] SPECIAL to all enemy Pokémon in the same row or column as the user.",
 		"SONG_OF_DESIRE": "Inflict 2 targets on the back line with CHARM for 3 seconds and reduce their ATK by [3,SP].",
@@ -1891,7 +1893,7 @@
 		"METAL_BURST": "Deal [30, SP] TRUE to the target. Damage is increased by 10% for each attack blocked by the user's FIGHTING synergy.",
 		"PSYCHIC": "Deal [40,80,160,SP] SPECIAL to the target and ADJACENT enemy Pokémon and burn 15 PP.",
 		"PSYBEAM": "Deal [25,50,100,SP] SPECIAL to the target and all enemy Pokémon behind in a line with a [50,LK]% chance to inflict them with CONFUSION for 4 seconds.",
-		"DIVE": "Dive underwater and gain [15,30,60] SHIELD, then reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL and FREEZE all ADJACENT enemy Pokémon for 1 second.",
+		"DIVE": "Dive underwater and gain [15,30,60] SHIELD, then reappear in the middle of the enemy team, dealing [10,20,40,SP] SPECIAL to all ADJACENT enemy Pokémon.",
 		"SPIKY_SHIELD": "For [3,5,10] seconds, units that melee attack the user get WOUND for 2 seconds and take SPECIAL equal to [60,80,100,SP]% of the user's DEF. When casting again before the end of the effect, throw spikes in all directions, dealing [30,SP] SPECIAL to all enemies hit.",
 		"FUTURE_SIGHT": "Deal [15,30,60,SP] SPECIAL to 5 enemy Pokémon after 2 seconds.",
 		"FAKE_TEARS": "Deal [5,10,15,SP] SPECIAL to all enemy Pokémon and inflict them with ARMOR_BREAK for 3 seconds.",
@@ -3427,7 +3429,7 @@
 		"FATIGUE": "Reduce PP gain from all sources by 50%",
 		"POISONNED": "Deals 5% of max HP per stack as TRUE every second. Can stack up to 3 times by default.",
 		"FREEZE": "Prevents moving, dodging or attacking",
-		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain. Enemies will avoid targeting a protected unit.",
+		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain.",
 		"SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
 		"CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
 		"WOUND": "Prevents healing from any source",
@@ -3446,7 +3448,7 @@
 		"ELECTRIC_FIELD": "Increase damage dealt by ELECTRIC Pokémon by 20%",
 		"PSYCHIC_FIELD": "Increase damage dealt by PSYCHIC Pokémon by 20%",
 		"GRASS_FIELD": "Increase damage dealt by GRASS Pokémon by 20%",
-		"FAIRY_FIELD": "Increase damage dealt by FAIRY Pokémon by 20%"
+		"FAIRY_FIELD": "Increase damage dealt by FAIRY Pokémon by 20%"		
 	},
 	"synergy": {
 		"NORMAL": "Normal",
@@ -3909,6 +3911,7 @@
 	"shiny_hunter": "Shiny Hunter",
 	"pokedex": "Pokédex",
 	"alt_forms": "Alternative Forms",
+	"unlocked": "Unlocked",
 	"show_all": "Show all",
 	"show_locked": "Show locked",
 	"show_unlockable": "Show unlockable",
@@ -3948,7 +3951,7 @@
 	"leave_game": "Leave game",
 	"leave_room": "Leave room",
 	"passive_income_hint": "Each stage, gain 5 GOLD + 1 extra GOLD if you won the previous battle.",
-	"victory_income_hint": "Gain 1 bonus GOLD for every victory or defeat streak, up to 5 bonus GOLD.",
+	"streak_income_hint": "Gain 1 bonus GOLD for every victory or defeat streak, up to 5 bonus GOLD.",
 	"additional_income_hint": "Gain 1 bonus GOLD per 10 GOLD saved, up to {{maxInterest}} bonus income at {{maxInterestGolds}} saved GOLD.",
 	"victory_count_one": "{{count}} victory",
 	"victory_count_other": "{{count}} victories",
@@ -4052,6 +4055,7 @@
 	"place_up_to": "Place up to",
 	"pokemons_on_your_board": "Pokémon on your board.",
 	"team_size_hint": "Increase your team size by leveling up",
+	"history": "History",
 	"game_history": "Game History",
 	"chat_history": "Chat History",
 	"load_more": "Load More",
@@ -4696,6 +4700,7 @@
 		}
 	},
 	"errors": {
+		"title": "Error",
 		"USER_INACTIVE": "You have been kicked for inactivity to save server resources",
 		"USER_KICKED": "You have been kicked from this lobby",
 		"USER_BANNED": "Your account has been banned",

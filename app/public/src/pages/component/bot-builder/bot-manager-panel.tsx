@@ -276,7 +276,6 @@ function BotsList(props: {
                     rowComponent={BotRow}
                     rowProps={{
                       filteredBots,
-                      t,
                       navigate,
                       onApprove: approveBot,
                       onDelete: deleteBot
@@ -294,7 +293,6 @@ function BotsList(props: {
 
 type BotRowData = {
   filteredBots: IBotLight[]
-  t: (key: string) => string
   navigate: (path: string) => void
   onApprove: (botId: string, approved: boolean) => Promise<void>
   onDelete: (bot: IBotLight) => Promise<void>
@@ -304,7 +302,6 @@ function BotRow({
   index,
   style,
   filteredBots,
-  t,
   navigate,
   onApprove,
   onDelete
@@ -313,6 +310,7 @@ function BotRow({
   index: number
   style: React.CSSProperties
 } & BotRowData): React.ReactElement | null {
+  const { t } = useTranslation()
   const b = filteredBots[index]
   return (
     <div

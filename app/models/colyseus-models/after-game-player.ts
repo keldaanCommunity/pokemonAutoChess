@@ -1,5 +1,5 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
-import { IAfterGamePlayer, Role } from "../../types"
+import { IAfterGamePlayer, Role, Title } from "../../types"
 import { Synergy } from "../../types/enum/Synergy"
 import { GameStats } from "../../types/interfaces/GameStats"
 import { IPokemonRecord, PokemonRecord } from "./game-record"
@@ -27,7 +27,7 @@ export default class AfterGamePlayer
   @type([PokemonRecord]) pokemons = new ArraySchema<IPokemonRecord>()
   @type("uint16") elo: number
   @type("uint16") games: number
-  @type("string") title: string
+  @type("string") title: Title | ""
   @type("string") role: Role
   @type([SampleSynergy]) synergies = new ArraySchema<{
     name: Synergy
@@ -41,7 +41,7 @@ export default class AfterGamePlayer
     avatar: string,
     rank: number,
     pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>,
-    title: string,
+    title: Title | "",
     role: Role,
     synergies:
       | Array<{ name: Synergy; value: number }>

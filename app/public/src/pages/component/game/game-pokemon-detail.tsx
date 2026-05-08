@@ -21,7 +21,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
-import { values } from "../../../../../utils/schemas"
+import { schemaValues } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -38,7 +38,7 @@ interface StatInfo {
 }
 
 export function GamePokemonDetail(props: {
-  pokemon: Pkm | IPokemon | IPokemonEntity
+  pokemon: Pkm | IPokemon | IPokemonEntity | null | undefined
   origin:
     | "shop"
     | "proposition"
@@ -53,7 +53,10 @@ export function GamePokemonDetail(props: {
   isAlly?: boolean
 }) {
   const { t } = useTranslation()
-  const pokemon: IPokemon | IPokemonEntity = useMemo(() => {
+  const pokemon = useMemo<IPokemon | IPokemonEntity | null>(() => {
+    if (!props.pokemon) {
+      return null
+    }
     if (typeof props.pokemon === "string") {
       const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
       pokemon.pp = pokemon.maxPP
@@ -63,6 +66,10 @@ export function GamePokemonDetail(props: {
   }, [props.pokemon])
 
   const pokemonStats = useMemo(() => {
+    if (!pokemon) {
+      return []
+    }
+
     const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
     const stats: StatInfo[] = [
       { stat: Stat.DEF, value: pokemon.def, baseValue: baseStats.def },
@@ -92,7 +99,7 @@ export function GamePokemonDetail(props: {
     return stats.map((s) => {
       if (props.origin === "team") {
         // count item stats as well
-        s.value = values(pokemon.items).reduce((acc, item) => {
+        s.value = schemaValues(pokemon.items).reduce((acc, item) => {
           let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
           if (
             pokemon.items.has(Item.BIG_EATER_BELT) &&
@@ -110,17 +117,17 @@ export function GamePokemonDetail(props: {
       return s
     })
   }, [
-    pokemon.name,
-    pokemon.items,
-    pokemon.def,
-    pokemon.atk,
-    pokemon.critChance,
-    pokemon.ap,
-    pokemon.range,
-    pokemon.speDef,
-    pokemon.speed,
-    pokemon.critPower,
-    pokemon.luck,
+    pokemon?.name,
+    pokemon?.items,
+    pokemon?.def,
+    pokemon?.atk,
+    pokemon?.critChance,
+    pokemon?.ap,
+    pokemon?.range,
+    pokemon?.speDef,
+    pokemon?.speed,
+    pokemon?.critPower,
+    pokemon?.luck,
     props.origin
   ])
 
@@ -128,8 +135,8 @@ export function GamePokemonDetail(props: {
     return pokemonStats.find((s) => s.stat === stat)?.value
   }
 
-  let dish = DishByPkm[pokemon.name]
-  if (!dish && pokemon.types.has(Synergy.GOURMET)) {
+  let dish = pokemon ? DishByPkm[pokemon.name] : undefined
+  if (pokemon && !dish && pokemon.types.has(Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
       dish = Item.HEARTY_STEW
     } else if (dish !== null) {
@@ -138,41 +145,45 @@ export function GamePokemonDetail(props: {
   }
 
   const hp = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.hp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
         pokemon.hp
       )
     }
 
     return undefined // only show max HP in shop/planner/wiki
-  }, [pokemon.hp, pokemon.items, props.origin])
+  }, [pokemon?.hp, pokemon?.items, props.origin])
 
   const pp = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.pp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.PP] ?? 0),
         pokemon.pp
       )
     }
     return undefined // only show max PP in shop/planner/wiki
-  }, [pokemon.pp, pokemon.items, props.origin])
+  }, [pokemon?.pp, pokemon?.items, props.origin])
 
   const shield = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.shield
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.SHIELD] ?? 0),
         0
       )
     }
     return undefined
-  }, [pokemon.items, props.origin, pokemon.shield])
+  }, [pokemon?.items, props.origin, pokemon?.shield])
 
-  let name = t(`pkm.${pokemon.name}`)
+  let name = pokemon ? t(`pkm.${pokemon.name}`) : ""
   if (
+    pokemon &&
     pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
     "evolution" in pokemon &&
     pokemon.evolution != null &&
@@ -182,7 +193,7 @@ export function GamePokemonDetail(props: {
   }
 
   const tmIcon = useMemo(() => {
-    if (pokemon.tm === Ability.DEFAULT) return null
+    if (!pokemon || pokemon.tm === Ability.DEFAULT) return null
     let icon = "assets/item/TM.png"
     console.log("TM", pokemon.tm, pokemon.skill)
     if (
@@ -202,7 +213,11 @@ export function GamePokemonDetail(props: {
         alt={t("tm")}
       />
     )
-  }, [pokemon.tm, pokemon.skill])
+  }, [pokemon?.tm, pokemon?.skill])
+
+  if (!pokemon) {
+    return null
+  }
 
   return (
     <div className="game-pokemon-detail">

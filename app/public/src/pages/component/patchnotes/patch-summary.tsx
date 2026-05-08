@@ -1,6 +1,7 @@
 import { marked } from "marked"
 import { memo, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { PatchInfo } from "../../../../../config/game/patches"
 import { Item } from "../../../../../types/enum/Item"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
@@ -10,8 +11,13 @@ import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import "./patch-summary.css"
 
 interface PatchSummaryProps {
-  version: string
+  patch: PatchInfo
   showHeader?: boolean
+}
+
+interface MidpatchNote {
+  version: string
+  html: string
 }
 
 function fetchMarkdown(
@@ -51,10 +57,11 @@ function fetchMarkdown(
 }
 
 export const PatchSummary = memo(
-  ({ version }: PatchSummaryProps) => {
+  ({ patch }: PatchSummaryProps) => {
     const { t } = useTranslation()
     const [patchContent, setPatchContent] = useState<string>()
     const [fullPatchNotes, setFullPatchNotes] = useState<string>()
+    const [midpatchNotes, setMidpatchNotes] = useState<MidpatchNote[]>([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -62,26 +69,39 @@ export const PatchSummary = memo(
 
       // Fetch both summary and full patch notes
       const fetchSummary = fetchMarkdown(
-        `/changelog/summary/summary-${version}.md`
+        `/changelog/summary/summary-${patch.v}.md`
       )
-      const fetchFullNotes = fetchMarkdown(`/changelog/patch-${version}.md`, 2)
+      const fetchFullNotes = fetchMarkdown(`/changelog/patch-${patch.v}.md`, 2)
+      const midpatches = patch.midpatches ?? []
+      const fetchMidpatchNotes = Promise.all(
+        midpatches.map((version) =>
+          fetchMarkdown(`/changelog/patch-${version}.md`, 3)
+            .then((parsed) => ({
+              version,
+              html: addIconsToHtml(parsed)
+            }))
+            .catch(() => null)
+        )
+      )
 
-      Promise.all([fetchSummary, fetchFullNotes])
-        .then(([summaryParsed, fullNotesParsed]) => {
+      Promise.all([fetchSummary, fetchFullNotes, fetchMidpatchNotes])
+        .then(([summaryParsed, fullNotesParsed, midpatchesParsed]) => {
           setPatchContent(addIconsToHtml(summaryParsed))
           setFullPatchNotes(addIconsToHtml(fullNotesParsed))
+          setMidpatchNotes(midpatchesParsed.filter(Boolean) as MidpatchNote[])
         })
         .catch(() => {
-          const fallbackContent = `<h2>Patch ${version}</h2><p>Changelog not available</p>`
+          const fallbackContent = `<h2>Patch ${patch.v}</h2><p>Changelog not available</p>`
           const fallbackNotes = "<p>Patch notes not available</p>"
 
           setPatchContent(addIconsToHtml(fallbackContent))
           setFullPatchNotes(addIconsToHtml(fallbackNotes))
+          setMidpatchNotes([])
         })
         .finally(() => {
           setIsLoading(false)
         })
-    }, [version])
+    }, [patch.v, patch.midpatches])
 
     const patchContentHtml = useMemo(
       () => ({ __html: patchContent || "" }),
@@ -92,12 +112,30 @@ export const PatchSummary = memo(
       [fullPatchNotes]
     )
 
+    const hasMidpatches = midpatchNotes.length > 0
+
     return (
       <div className="patch-summary">
         {isLoading ? (
           <p>{t("loading")}...</p>
         ) : (
           <>
+            {hasMidpatches && (
+              <nav
+                className="midpatch-shortcuts"
+                aria-label="Midpatch shortcuts"
+              >
+                <span>Jump to midpatch notes:</span>
+                {midpatchNotes.map(({ version }) => (
+                  <a
+                    key={version}
+                    href={`#midpatch-${version.replace(/\./g, "-")}`}
+                  >
+                    {version}
+                  </a>
+                ))}
+              </nav>
+            )}
             <div
               className="patch-content"
               dangerouslySetInnerHTML={patchContentHtml}
@@ -112,6 +150,24 @@ export const PatchSummary = memo(
                 ></div>
               </>
             )}
+            {hasMidpatches && (
+              <>
+                <h2>Midpatch notes</h2>
+                {midpatchNotes.map(({ version, html }) => (
+                  <section
+                    key={version}
+                    id={`midpatch-${version.replace(/\./g, "-")}`}
+                    className="midpatch-section"
+                  >
+                    <h3>Patch {version}</h3>
+                    <div
+                      className="full-patch-notes"
+                      dangerouslySetInnerHTML={{ __html: html }}
+                    ></div>
+                  </section>
+                ))}
+              </>
+            )}
           </>
         )}
         <GamePokemonDetailTooltip origin="patchnotes" />
@@ -119,5 +175,5 @@ export const PatchSummary = memo(
       </div>
     )
   },
-  (prevProps, nextProps) => prevProps.version === nextProps.version
+  (prevProps, nextProps) => prevProps.patch.v === nextProps.patch.v
 )
