@@ -2150,7 +2150,7 @@ export class HealBlockStrategy extends AbilityStrategy {
   }
 }
 
-export class SpikeArmorStrategy extends AbilityStrategy {
+export class SpikyShieldStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -6596,7 +6596,14 @@ export class AcidArmorStrategy extends AbilityStrategy {
     let count = 4
     const acidHitEffect = new OnDamageReceivedEffect(
       ({ pokemon, attacker }) => {
-        if (attacker?.range === 1) {
+        if (attacker && 
+          distanceC(
+            pokemon.positionX,
+            pokemon.positionY,
+            attacker.positionX,
+            attacker.positionY
+          ) === 1
+        ) {
           attacker.addDefense(-1, pokemon, 0, false)
         }
         count--
@@ -11527,10 +11534,32 @@ export class BanefulBunkerStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const duration = 2000
     pokemon.status.triggerProtect(duration)
-    pokemon.effects.add(EffectEnum.BANEFUL_BUNKER)
+
+    const bunkerEffect = new OnAttackReceivedEffect(({ attacker }) => {
+      if (
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) === 1
+      ) {
+        const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
+        attacker.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+        pokemon.status.triggerPoison(3000, attacker, pokemon)
+      }
+    })
+
+    pokemon.effectsSet.add(bunkerEffect)
     pokemon.commands.push(
       new DelayedCommand(
-        () => pokemon.effects.delete(EffectEnum.BANEFUL_BUNKER),
+        () => pokemon.effectsSet.delete(bunkerEffect),
         duration
       )
     )
@@ -15976,17 +16005,26 @@ export class LingeringAromaStrategy extends AbilityStrategy {
     const damage = [10, 20, 30][pokemon.stars - 1] ?? 30
     const lingeringAromaEffect = new OnAttackReceivedEffect(
       ({ attacker, pokemon }) => {
-        // Deal special damage to the attacker
-        attacker.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit,
-          true
-        )
-        // Reduce attacker's PP by 5
-        attacker.addPP(-5, pokemon, 0, false)
+        if (
+          distanceC(
+            attacker.positionX,
+            attacker.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) === 1
+        ) {
+          // Deal special damage to the attacker
+          attacker.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit,
+            true
+          )
+          // Reduce attacker's PP by 5
+          attacker.addPP(-5, pokemon, 0, false)
+        }
       }
     )
 
@@ -16650,6 +16688,7 @@ export class AquaStepStrategy extends AbilityStrategy {
   }
 }
 
+
 export class SkitterSmackStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -16692,6 +16731,39 @@ export class SkitterSmackStrategy extends AbilityStrategy {
         }
       }, 300)
     )
+  }
+}
+
+export class SilkTrapStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // The user spins a silken trap, gaining PROTECT for 1.5 seconds. Any melee attack received during that time will lower the SPEED of the attacker by [5,10,15,SP] and inflict PARALYSIS for [1.5,SP,ND=1] seconds
+    const speedNerf = [5, 10, 15][pokemon.stars - 1] ?? 15
+    const trapEffect = new OnAttackReceivedEffect(({ attacker, pokemon }) => {
+      if (
+        distanceC(
+          attacker.positionX,
+          attacker.positionY,
+          pokemon.positionX,
+          pokemon.positionY
+        ) === 1
+      ) {
+        attacker.addSpeed(-speedNerf, pokemon, 1, crit)
+        attacker.status.triggerParalysis(1500, attacker, pokemon)
+      }
+    })
+    pokemon.status.triggerProtect(1500)
+    pokemon.effectsSet.add(trapEffect)
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        pokemon.effectsSet.delete(trapEffect)
+      }, 1500)
+    ) 
   }
 }
 
@@ -16818,7 +16890,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
   [Ability.SHADOW_BALL]: new ShadowBallStrategy(),
   [Ability.DIVE]: new DiveStrategy(),
-  [Ability.SPIKY_SHIELD]: new SpikeArmorStrategy(),
+  [Ability.SPIKY_SHIELD]: new SpikyShieldStrategy(),
   [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
   [Ability.FAKE_TEARS]: new FakeTearsStrategy(),
   [Ability.SPARKLING_ARIA]: new SparklingAriaStrategy(),
@@ -17247,6 +17319,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
   [Ability.AQUA_STEP]: new AquaStepStrategy(),
   [Ability.SNORE]: new SnoreStrategy(),
+  [Ability.SILK_TRAP]: new SilkTrapStrategy(),
   [Ability.SKITTER_SMACK]: new SkitterSmackStrategy()
 }
 

@@ -5,6 +5,8 @@
 - Quaquaval
 - Hisui Avalugg
 - Komala
+- Tarountula
+- Spidops
 - Slither Wing
 
 
@@ -65,6 +67,8 @@
 
 
 # Bugfix
+
+- Lingering Aroma damage on hit now only applies to attackers at melee range as intended
 
 # Misc
 

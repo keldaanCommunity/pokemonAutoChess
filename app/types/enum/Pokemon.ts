@@ -951,6 +951,7 @@ export enum Pkm {
   SPECTRIER = "SPECTRIER",
   SPEWPA = "SPEWPA",
   SPHEAL = "SPHEAL",
+  SPIDOPS = "SPIDOPS",
   SPINARAK = "SPINARAK",
   SPINDA = "SPINDA",
   SPIRITOMB = "SPIRITOMB",
@@ -995,6 +996,7 @@ export enum Pkm {
   TAPU_FINI = "TAPU_FINI",
   TAPU_KOKO = "TAPU_KOKO",
   TAPU_LELE = "TAPU_LELE",
+  TAROUNTULA = "TAROUNTULA",
   TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
   TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
   TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY",
@@ -2350,8 +2352,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.LECHONK]: "0915",
   [Pkm.OINKOLOGNE_MALE]: "0916",
   //[Pkm.OINKOLOGNE_FEMALE]: "0916-0003",
-  //[Pkm.TAROUNTULA]: "0917",
-  //[Pkm.SPIDOPS]: "0918",
+  [Pkm.TAROUNTULA]: "0917",
+  [Pkm.SPIDOPS]: "0918",
   [Pkm.NYMBLE]: "0919",
   [Pkm.LOKIX]: "0920",
   [Pkm.PAWMI]: "0921",
@@ -3652,6 +3654,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.QUAXWELL]: Pkm.QUAXLY,
   [Pkm.QUAQUAVAL]: Pkm.QUAXLY,
   [Pkm.KOMALA]: Pkm.KOMALA,
+  [Pkm.TAROUNTULA]: Pkm.TAROUNTULA,
+  [Pkm.SPIDOPS]: Pkm.TAROUNTULA,
   [Pkm.SLITHER_WING]: Pkm.SLITHER_WING
 }
 

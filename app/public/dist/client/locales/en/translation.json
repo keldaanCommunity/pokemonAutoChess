@@ -1183,6 +1183,8 @@
     	"QUAXWELL": "Quaxwell",
     	"QUAQUAVAL": "Quaquaval",
 		"KOMALA": "Komala",
+		"TAROUNTULA": "Tarountula",
+		"SPIDOPS": "Spidops",
 		"SLITHER_WING": "Slither Wing"
 	},
 	"rarity": {
@@ -1758,6 +1760,7 @@
 		"ROCK_WRECKER": "Rock Wrecker",
 		"AQUA_STEP": "Aqua Step",
 		"SNORE": "Snore",
+		"SILK_TRAP": "Silk Trap",
 		"SKITTER_SMACK": "Skitter Smack"
 	},
 	"ability_description": {
@@ -2310,6 +2313,7 @@
 		"ROCK_WRECKER": "Launches a huge boulder at the target, inflicting FLINCH for 2 seconds then [80,160,SP] SPECIAL. Then user gets FATIGUE for 4 seconds.",
 		"AQUA_STEP": "Shift to an ADJACENT unoccupied tile with fluid dance steps before dealing [25,50,100,SP] SPECIAL to the target and increasing user SPEED by [10,15,20,SP].",
 		"SNORE": "Deal [20,40,60,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds.",
+		"SILK_TRAP": "The user spins a silken trap, gaining PROTECT for 1.5 seconds. Any attack at melee range received during that time will lower the SPEED of the attacker by [5,10,15,SP] and inflict PARALYSIS for [1.5,SP,ND=1] seconds.",
 		"SKITTER_SMACK": "Skitters behind the target to attack, dealing [15,30,60,SP] SPECIAL. This also lowers the target's AP by [20,SP]."
 	},
 	"effect": {
