@@ -38,7 +38,7 @@ export default function PokemonEmotionsModal(props: {
   const onError = useCallback(
     (error: unknown) => {
       const message =
-        error instanceof Error ? error.message : t("errors.unknown_error")
+        error instanceof Error ? error.message : t("errors.UNKNOWN_ERROR")
       setRequestError(message)
     },
     [t]
@@ -128,7 +128,7 @@ export default function PokemonEmotionsModal(props: {
 
   const isAltForm =
     PkmAltForms.includes(props.pokemon) || props.pokemon in PkmAltFormsByPkm
-  const altForms = isAltForm
+  const altForms: Pkm[] = isAltForm
     ? [props.pokemon, ...(PkmAltFormsByPkm[props.pokemon] || [])]
     : []
 
@@ -308,7 +308,7 @@ export default function PokemonEmotionsModal(props: {
         show={requestError != null}
         onClose={() => setRequestError(null)}
         className="is-dark basic-modal-body"
-        header={t("error")}
+        header={t("errors.title")}
         body={<p style={{ padding: "1em" }}>{requestError}</p>}
       />
     </>

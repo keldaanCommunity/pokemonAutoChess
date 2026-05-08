@@ -11,7 +11,7 @@ import { Passive } from "../../types/enum/Passive"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -1176,7 +1176,11 @@ export default class Status extends Schema implements IStatus {
         pkm.team === Team.RED_TEAM
           ? pkm.simulation.redTeam
           : pkm.simulation.blueTeam
-      if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
+      if (
+        schemaValues(pkmTeam).some(
+          (p) => p.id !== pkm.id && !p.status.possessed
+        )
+      ) {
         if (!this.possessed) {
           pkm.team =
             pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
@@ -1201,7 +1205,7 @@ export default class Status extends Schema implements IStatus {
       pkm.team === Team.RED_TEAM
         ? pkm.simulation.blueTeam
         : pkm.simulation.redTeam
-    const possessedCount = values(otherTeam).filter(
+    const possessedCount = schemaValues(otherTeam).filter(
       (pokemon) => pokemon.status.possessed
     ).length
     const lastAliveArePossessed = possessedCount === otherTeam.size

@@ -5,7 +5,7 @@ import { Berries, Dishes, Item } from "../types/enum/Item"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { chance } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
 import {
   Effect,
@@ -247,7 +247,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         entity.player.titles.add(Title.POFFIN_MASTER)
       }
 
-      values(entity.items)
+      schemaValues(entity.items)
         .filter((item) => Berries.includes(item))
         .forEach((item) => {
           entity.eatBerry(item, undefined, true)
@@ -435,7 +435,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   RICE: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
       entity?.addShield(50, entity, 0, false)
-      const tatsugiriOnBoard = values(player.board).find(
+      const tatsugiriOnBoard = schemaValues(player.board).find(
         (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
       )
       if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_CURLY) {

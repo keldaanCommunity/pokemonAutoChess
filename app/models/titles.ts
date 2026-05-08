@@ -5,7 +5,7 @@ import { EffectEnum } from "../types/enum/Effect"
 import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 
 export function updatePlayerTitlesAfterFight(
   player: IPlayer,
@@ -146,7 +146,9 @@ export function updatePlayerTitlesAfterFight(
       player.titles.add(Title.ETERNAL)
     }
 
-    const equippedItems = values(player.board).flatMap((p) => values(p.items))
+    const equippedItems = schemaValues(player.board).flatMap((p) =>
+      schemaValues(p.items)
+    )
     if (equippedItems.filter((i) => isIn(Scarves, i)).length >= 5) {
       player.titles.add(Title.SCOUT)
     }

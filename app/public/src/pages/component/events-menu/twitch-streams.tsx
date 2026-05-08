@@ -64,7 +64,7 @@ export function TwitchStreams() {
       setStreams(data.streams ?? [])
       setError(data.error)
     } catch {
-      setError(t("stream.unavailable"))
+      setError(t("twitch_streams.unavailable"))
     } finally {
       setIsLoading(false)
     }

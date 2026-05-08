@@ -13,7 +13,7 @@ import { sum } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
 import { pickRandomIn, shuffleArray } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 
 type DivergentEvolution<Param = any> = (
   pokemon: Pokemon,
@@ -98,14 +98,14 @@ export class CountEvolutionRule extends EvolutionRule {
     // special case for Avalugg passive, didnt find a better way to do it
     if (
       pokemon.name === Pkm.BERGMITE &&
-      values(player.board).find(
+      schemaValues(player.board).find(
         (p) => p.name === Pkm.AVALUGG || p.name === Pkm.HISUI_AVALUGG
       )
     ) {
       return false
     }
 
-    const copies = values(player.board).filter(
+    const copies = schemaValues(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
     return copies.length >= this.numberRequired
@@ -117,14 +117,14 @@ export class CountEvolutionRule extends EvolutionRule {
     // special case for Avalugg passive, didnt find a better way to do it
     if (
       pokemon.name === Pkm.BERGMITE &&
-      values(player.board).find(
+      schemaValues(player.board).find(
         (p) => p.name === Pkm.AVALUGG || p.name === Pkm.HISUI_AVALUGG
       )
     ) {
       return false
     }
 
-    const copies = values(player.board).filter(
+    const copies = schemaValues(player.board).filter(
       (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
     )
     return copies.length === this.numberRequired - 1
@@ -192,7 +192,7 @@ export class CountEvolutionRule extends EvolutionRule {
     if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)
-        .flatMap((p) => values(p.dishes))
+        .flatMap((p) => schemaValues(p.dishes))
       while (pokemonEvolved.canEat && dishes.length > 0) {
         const dish = dishes.pop()
         if (dish && !pokemonEvolved.dishes.has(dish)) {
@@ -228,7 +228,9 @@ export class CountEvolutionRule extends EvolutionRule {
     ]
     for (const itemComponent of itemComponentsToAdd) {
       if (
-        values(pokemonEvolved.items).some((i) => ItemComponents.includes(i)) ||
+        schemaValues(pokemonEvolved.items).some((i) =>
+          ItemComponents.includes(i)
+        ) ||
         pokemonEvolved.items.size >= 3
       ) {
         player.items.push(itemComponent)
@@ -268,7 +270,9 @@ export class ItemEvolutionRule extends EvolutionRule {
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
-    const itemsAndDishes = values(pokemon.items).concat(values(pokemon.dishes))
+    const itemsAndDishes = schemaValues(pokemon.items).concat(
+      schemaValues(pokemon.dishes)
+    )
     const itemEvolution = itemsAndDishes.find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
@@ -282,7 +286,7 @@ export class ItemEvolutionRule extends EvolutionRule {
   }
 
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    const itemEvolution = values(pokemon.items).find((item) =>
+    const itemEvolution = schemaValues(pokemon.items).find((item) =>
       this.itemsTriggeringEvolution.includes(item)
     )
     const pokemonEvolutionName = this.getEvolution(

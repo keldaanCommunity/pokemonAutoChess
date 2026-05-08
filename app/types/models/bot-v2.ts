@@ -21,7 +21,7 @@ export interface IBot {
   author: string
   elo: number
   steps: IStep[]
-  name: string
+  name: Pkm
   id: string
   approved: boolean
 }

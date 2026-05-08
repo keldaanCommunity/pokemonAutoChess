@@ -5,6 +5,7 @@ import { Money } from "../icons/money"
 import PokemonPortrait from "../pokemon-portrait"
 import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
+import { GameStreakInfo } from "./game-streak-info"
 import "./game-spectate-player-info.css"
 
 export default function GameSpectatePlayerInfo() {
@@ -44,6 +45,7 @@ export default function GameSpectatePlayerInfo() {
             <span>
               <Money value={spectatedPlayer.money} />
             </span>
+            <GameStreakInfo />
           </div>
           <div
             style={{

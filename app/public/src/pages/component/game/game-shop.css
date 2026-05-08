@@ -266,6 +266,27 @@
   height: 1em;
 }
 
+#game-streak-info > div {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  place-content: center;
+  text-shadow: 1px 1px 1px black;
+  pointer-events: initial;
+}
+
+#game-streak-info .streak-win {
+  background-image: url("assets/ui/streak_win.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#game-streak-info .streak-defeat {
+  background-image: url("assets/ui/streak_defeat.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 @media (aspect-ratio < 4 / 3) {
   .game-shop.my-container {
     flex-wrap: wrap;

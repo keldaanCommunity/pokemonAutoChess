@@ -398,7 +398,9 @@ export function DendrogramChart() {
                         size="32px"
                       />
                       <span>
-                        {t(`synergy.${hoveredBranch.synergy.toUpperCase()}`)}
+                        {t(
+                          `synergy.${hoveredBranch.synergy.toUpperCase() as Synergy}`
+                        )}
                       </span>
                     </div>
                   </div>

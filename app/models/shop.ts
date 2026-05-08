@@ -64,7 +64,7 @@ import {
   randomWeighted,
   shuffleArray
 } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 import { PlayerChoice, PlayerChoiceType } from "./colyseus-models/player-choice"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
@@ -622,7 +622,7 @@ export default class Shop {
     const finals = player.getFinalizedLines()
     let specificTypesWanted: Synergy[] | undefined = undefined
 
-    const attractors = values(player.board).filter(
+    const attractors = schemaValues(player.board).filter(
       (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)
     )
     let attractor: Pokemon | null = null
@@ -632,7 +632,7 @@ export default class Shop {
     }
 
     if (attractor) {
-      specificTypesWanted = values(attractor.types)
+      specificTypesWanted = schemaValues(attractor.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]
     }
@@ -670,7 +670,7 @@ export default class Shop {
       return Pkm.MAGIKARP
     }
 
-    const repeatBallHolders = values(player.board).filter((p) =>
+    const repeatBallHolders = schemaValues(player.board).filter((p) =>
       p.items.has(Item.REPEAT_BALL)
     )
     const totalRerolls = player.gameStats.rerollCount + state.stageLevel
@@ -730,7 +730,7 @@ export default class Shop {
   }
 
   pickFish(player: Player, rod: FishingRod, state: GameState): Pkm {
-    const mantine = values(player.board).find(
+    const mantine = schemaValues(player.board).find(
       (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
 

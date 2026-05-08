@@ -53,7 +53,7 @@ export default function WikiPokemons() {
         {tabs.map((r) => {
           return (
             <Tab key={"title-" + r} style={{ color: RarityColor[Rarity[r]] }}>
-              {t("rarity." + r).toUpperCase()}
+              {t(`rarity.${r}`).toUpperCase()}
             </Tab>
           )
         })}

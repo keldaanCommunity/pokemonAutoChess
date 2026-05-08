@@ -1,6 +1,7 @@
 import { logger } from "colyseus"
 import { mongo } from "mongoose"
 import { BotV2 } from "../models/mongo-models/bot-v2"
+import { Pkm } from "../types/enum/Pokemon"
 import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import type { IBot, IStep } from "../types/models/bot-v2"
 import { discordService } from "./discord"
@@ -86,7 +87,7 @@ export async function fetchBot(id: string): Promise<IBot | null> {
 }
 
 export async function addBotToDatabase(bot: {
-  name: string
+  name: Pkm
   avatar: string
   elo: number
   author: string

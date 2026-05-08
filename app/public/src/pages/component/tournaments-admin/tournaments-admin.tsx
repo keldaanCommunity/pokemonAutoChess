@@ -3,7 +3,7 @@ import {
   ITournament,
   ITournamentBracket
 } from "../../../../../types/interfaces/Tournament"
-import { entries } from "../../../../../utils/schemas"
+import { schemaEntries } from "../../../../../utils/schemas"
 import { useAppSelector } from "../../../hooks"
 import {
   createTournament,
@@ -81,7 +81,7 @@ export function TournamentsAdmin() {
 }
 
 function TournamentAdminItem(props: { tournament: ITournament }) {
-  const brackets = entries(props.tournament.brackets)
+  const brackets = schemaEntries(props.tournament.brackets)
 
   return (
     <div className="my-box tournament-admin-item">

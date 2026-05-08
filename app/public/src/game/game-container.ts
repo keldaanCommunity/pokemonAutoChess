@@ -40,9 +40,10 @@ import {
 } from "../../../types/enum/Game"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
-import { values } from "../../../utils/schemas"
+import { schemaValues } from "../../../utils/schemas"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -509,7 +510,7 @@ class GameContainer {
           this.gameScene?.board?.updatePokemonDishes(
             player.id,
             pokemon,
-            values(pokemon.dishes)
+            schemaValues(pokemon.dishes)
           )
         }
       })
@@ -733,7 +734,7 @@ class GameContainer {
   handleDragDropCancel(message: {
     updateBoard: boolean
     updateItems: boolean
-    text?: string
+    text?: DisplayText
     pokemonId?: string
   }) {
     const gameScene = this.gameScene

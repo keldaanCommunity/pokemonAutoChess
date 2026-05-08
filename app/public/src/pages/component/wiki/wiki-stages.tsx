@@ -7,7 +7,7 @@ import {
   TownEncountersByStage
 } from "../../../../../config"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
-import { PVEStages } from "../../../../../models/pve-stages"
+import { PVEStage, PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
 import {
@@ -17,6 +17,7 @@ import {
 } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { entries } from "../../../../../utils/object"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -29,7 +30,7 @@ type StageInfo = {
   icon: string
   title?: string
   type: "pve" | "carousel" | "additional" | "portal" | "battle"
-  stageData?: any
+  stageData?: PVEStage
 }
 
 export default function WikiStages() {
@@ -275,9 +276,9 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
                       {pokemonDetail(pkm)}
                       <span>{t(`pkm.${pkm}`)}</span>
                     </td>
-                    {stageInfo.stageData.marowakItems && (
+                    {stageInfo.stageData!.marowakItems && (
                       <td className="items-cell">
-                        {stageInfo.stageData.marowakItems[index]?.map(
+                        {stageInfo.stageData!.marowakItems[index]?.map(
                           (item) => (
                             <React.Fragment key={item}>
                               {itemDetail(item)}
@@ -286,9 +287,9 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
                         )}
                       </td>
                     )}
-                    {stageInfo.stageData.statBoosts && (
+                    {stageInfo.stageData!.statBoosts && (
                       <td className="boosts-cell">
-                        {Object.entries(stageInfo.stageData.statBoosts).map(
+                        {entries(stageInfo.stageData!.statBoosts).map(
                           ([stat, boost]) => (
                             <div
                               key={stat}

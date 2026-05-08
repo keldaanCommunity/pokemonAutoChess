@@ -113,8 +113,7 @@ export default function GameHistory(props: {
                   rowHeight={dynamicRowHeight}
                   rowComponent={GameHistoryRow}
                   rowProps={{
-                    gameHistory,
-                    t
+                    gameHistory
                   }}
                   onRowsRendered={handleRowsRendered}
                 />
@@ -129,20 +128,19 @@ export default function GameHistory(props: {
 
 type HistoryRowData = {
   gameHistory: IGameRecord[]
-  t: (key: string) => string
 }
 
 function GameHistoryRow({
   index,
   style,
-  gameHistory,
-  t
+  gameHistory
 }: {
   ariaAttributes: object
   index: number
   style: React.CSSProperties
 } & HistoryRowData): React.ReactElement | null {
   const r = gameHistory[index]
+  const { t } = useTranslation()
 
   return (
     <div style={style}>

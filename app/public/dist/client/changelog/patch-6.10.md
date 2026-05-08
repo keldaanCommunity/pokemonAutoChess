@@ -5,6 +5,7 @@
 - Quaquaval
 - Hisui Avalugg
 - Komala
+- Slither Wing
 
 
 # Changes to Synergies
@@ -35,6 +36,10 @@
 - Bagon line is now regional in Dragon/Monster regions
 - Deino line is no longer regional
 
+- Dive (Wailmer, Lapras) no longer inflicts Freeze
+- Lapras PP: 120 → 110
+- Fuecoco PP: 60/60/60 → 100/80/60
+- Revert Popplio buff from 5.7 ; PP 70 → 80
 
 # Changes to Items
 
@@ -52,6 +57,7 @@
 
 - New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 8 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
 - Items on item bench are now sorted by category, and categories are sorted by importance (e.g. special and shiny items first, berries at the end).
+- Added a streak counter in the game UI next to life and money, showing the current win/loss streak.
 - Added elo tab on profile menu with information about elo decay and max elo reached.
 - Added Pokemon Auto Chess Twitch streams to the main lobby
 - Pokemon sprites size scaling based on max HP now decreases quadratically instead of linearly, to avoid sprites being too big at high HP values.

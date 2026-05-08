@@ -9,8 +9,8 @@ export function EloBadge(props: { elo: number }) {
     <div className="elo badge">
       <img
         src={"assets/ranks/" + rank + ".svg"}
-        alt={t("elorank." + rank)}
-        title={t("elorank." + rank)}
+        alt={t(`elorank.${rank}`)}
+        title={t(`elorank.${rank}`)}
       />
       <p style={{ margin: 0 }}>{props.elo}</p>
     </div>

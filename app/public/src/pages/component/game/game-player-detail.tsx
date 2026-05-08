@@ -4,6 +4,7 @@ import { SynergyTriggers } from "../../../../../config"
 import { getDistance } from "../../../../../core/matchmaking"
 import { IPlayer } from "../../../../../types"
 import { BattleResult } from "../../../../../types/enum/Game"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
@@ -72,10 +73,10 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
                 src={getAvatarSrc(record.avatar)}
               />
               <p style={{ fontSize: "80%" }}>
-                {(record.id === "pve" ? t(record.name) : record.name).slice(
-                  0,
-                  5
-                )}
+                {(record.id === "pve"
+                  ? t(record.name as `pkm.${Pkm}`)
+                  : record.name
+                ).slice(0, 5)}
               </p>
             </div>
           )
