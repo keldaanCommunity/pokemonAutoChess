@@ -8043,5 +8043,11 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_RANGE,
     hitSprite: HitSprite.BUG_HIT
+  },
+  [Pkm.SLITHER_WING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE
   }
 }

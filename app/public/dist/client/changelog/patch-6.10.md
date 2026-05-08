@@ -7,6 +7,8 @@
 - Komala
 - Tarountula
 - Spidops
+- Slither Wing
+
 
 # Changes to Synergies
 
