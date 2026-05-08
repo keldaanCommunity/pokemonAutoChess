@@ -29,6 +29,7 @@ import {
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
 import { LocalStoreKeys, localStore, useLocalStore } from "../../utils/store"
@@ -57,6 +58,7 @@ export type CollectionFilterState = {
 
 type CollectionItem = {
   pkm: Pkm
+  item: IPokemonCollectionItemUnpacked
   isNew: boolean
   isFavorite: boolean
   isUnlocked: boolean
@@ -416,6 +418,7 @@ export function PokemonCollectionList(props: {
 
         return {
           pkm,
+          item,
           isNew,
           isFavorite,
           isUnlocked,
@@ -489,7 +492,8 @@ function PokemonCell({
 } & PokemonCellData): React.ReactElement | null {
   const index = rowIndex * columnCount + columnIndex
   if (index >= filteredItems.length) return null
-  const { pkm, isNew, isFavorite, isUnlocked, isUnlockable } = filteredItems[index]
+  const { pkm, isNew, isFavorite, isUnlocked, isUnlockable } =
+    filteredItems[index]
   const pokemonData = getPokemonData(pkm)
   return (
     <div style={style}>
