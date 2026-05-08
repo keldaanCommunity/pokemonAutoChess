@@ -1,4 +1,4 @@
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
