@@ -2667,8 +2667,16 @@
 	"title_label": "タイトル",
 	"mobile_warning": "This game is not adapted for mobile, play it on desktop",
 	"nintendo_warning": "Non profit, open source. All rights to The Pokemon Company®",
-	"collection": "コレクション",
-	"wiki_label": "ウィキ",
+	"collection": {
+		"title": "コレクション",
+		"show_all": "すべて表示する",
+		"show_locked": "ロックされた状態を表示",
+		"show_unlockable": "ロック解除可能を表示",
+		"show_unlocked": "ロック解除された状態を表示",
+		"normal_emotions": "通常の感情",
+		"shiny_emotions": "輝く感情",
+		"buy_booster": "新しいブースターを{{cost}}で購入する"
+	},
 	"bot_builder": "ボットビルダー",
 	"meta": "メタ",
 	"sign_out": "サインアウト",
@@ -2737,14 +2745,7 @@
 	"chat_disabled_anonymous": "匿名ユーザーに対してチャットが無効になっています",
 	"type_here": "ここに入力 ...",
 	"send_message": "メッセージを送る",
-	"shiny_hunter": "シャイニーハンター",
-	"show_all": "すべて表示する",
-	"show_locked": "ロックされた状態を表示",
-	"show_unlockable": "ロック解除可能を表示",
-	"show_unlocked": "ロック解除された状態を表示",
-	"normal_emotions": "通常の感情",
-	"shiny_emotions": "輝く感情",
-	"buy_booster": "新しいブースターを{{cost}}で購入する",
+	"shiny_hunter": "シャイニーハンター",	
 	"close": "近い",
 	"additional_pokemon_hint": "各プレイヤーは、このゲームのすべてのプレイヤーのショップで入手できる追加のポケモンを 3 匹選びました。",
 	"game_stats": {
@@ -3032,6 +3033,7 @@
 	"stats": "能力値",
 	"bench": "ベンチ",
 	"wiki": {
+		"title": "ウィキ",
 		"nav": {
 			"how_to_play": "遊び方 ？",
 			"pokemons_label": "ポケモン",

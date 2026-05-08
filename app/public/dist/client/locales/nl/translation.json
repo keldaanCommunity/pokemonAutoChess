@@ -1698,8 +1698,16 @@
 	"title_label": "Titel",
 	"mobile_warning": "Dit spel is niet aangepast voor mobiel, speel het op desktop",
 	"nintendo_warning": "Non-profit, open source. Alle rechten op The Pokemon Company®",
-	"collection": "Verzameling",
-	"wiki_label": "Wiki",
+	"collection": {
+		"title": "Verzameling",
+		"show_all": "Toon alles",
+		"show_locked": "Toon vergrendeld",
+		"show_unlockable": "Toon ontgrendelbaar",
+		"show_unlocked": "Toon ontgrendeld",
+		"normal_emotions": "Normale emoties",
+		"shiny_emotions": "Glanzende emoties",
+		"buy_booster": "Koop een nieuwe booster voor {{cost}}"
+	},
 	"bot_builder": "BOT-bouwer",
 	"meta": "Meta",
 	"sign_out": "Afmelden",
@@ -1769,13 +1777,6 @@
 	"type_here": "Typ hier ...",
 	"send_message": "Bericht versturen",
 	"shiny_hunter": "Glanzende jager",
-	"show_all": "Toon alles",
-	"show_locked": "Toon vergrendeld",
-	"show_unlockable": "Toon ontgrendelbaar",
-	"show_unlocked": "Toon ontgrendeld",
-	"normal_emotions": "Normale emoties",
-	"shiny_emotions": "Glanzende emoties",
-	"buy_booster": "Koop een nieuwe booster voor {{cost}}",
 	"close": "Dichtbij",
 	"additional_pokemon_hint": "Elke speler koos extra Pokemon om beschikbaar te zijn in de winkel van alle spelers voor dit spel.",
 	"game_stats": {
@@ -1924,6 +1925,7 @@
 		"battle": "Speler Gevecht"
 	},
 	"wiki": {
+		"title": "Wiki",
 		"nav": {
 			"how_to_play": "HOE TE SPELEN ?",
 			"pokemons_label": "POKEMONS",

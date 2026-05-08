@@ -192,7 +192,7 @@ export function MainSidebar(props: MainSidebarProps) {
             className="blue"
             handleClick={changeModal}
           >
-            {t("collection")}
+            {t("collection.title")}
           </NavLink>
         )}
         {(page === "main_lobby" || page === "preparation") &&
@@ -213,7 +213,7 @@ export function MainSidebar(props: MainSidebarProps) {
           className="green"
           handleClick={changeModal}
         >
-          {t("wiki_label")}
+          {t("wiki.title")}
         </NavLink>
         <NavLink
           svg="meta"
@@ -531,7 +531,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "collection"}
-        header={t("collection")}
+        header={t("collection.title")}
         className="anchor-top"
       >
         <PokemonCollection />
@@ -547,7 +547,7 @@ function Modals({
         onClose={closeModal}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki_label")}
+        header={t("wiki.title")}
       >
         <Wiki inGame={page === "game"} />
       </Modal>

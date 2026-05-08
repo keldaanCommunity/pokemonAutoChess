@@ -177,7 +177,7 @@ export default function PokemonEmotionsModal(props: {
         body={
           <>
             <section>
-              <p>{t("normal_emotions")}</p>
+              <p>{t("collection.normal_emotions")}</p>
               <div>
                 {availableEmotions.map((e) => {
                   return (
@@ -205,7 +205,7 @@ export default function PokemonEmotionsModal(props: {
             </section>
             {shinyAvailable && (
               <section>
-                <p>{t("shiny_emotions")}</p>
+                <p>{t("collection.shiny_emotions")}</p>
                 <div>
                   {shinyAvailableEmotions.map((e) => {
                     return (
@@ -253,7 +253,7 @@ export default function PokemonEmotionsModal(props: {
                 )
               }
             >
-              {isCurrentAvatar ? t("chosen_as_avatar") : t("choose_as_avatar")}
+              {isCurrentAvatar ? t("collection.chosen_as_avatar") : t("collection.choose_as_avatar")}
               &nbsp;
               <PokemonPortrait
                 portrait={{
@@ -273,14 +273,14 @@ export default function PokemonEmotionsModal(props: {
                 buyBooster({ index }).catch(onError)
               }}
             >
-              {t("buy_booster", { cost: boosterCost })}
+              {t("collection.buy_booster", { cost: boosterCost })}
               <img src={getPortraitSrc(index)} className="dust" alt="dust" />
             </button>
 
             {item.selectedEmotion != null &&
               item.selectedEmotion != Emotion.NORMAL && (
                 <button className="bubbly blue" onClick={resetEmotion}>
-                  {t("reset_emotion")}
+                  {t("collection.reset_emotion")}
                   &nbsp;
                   <PokemonPortrait
                     portrait={{
@@ -298,7 +298,7 @@ export default function PokemonEmotionsModal(props: {
               onClick={toggleFavorite}
             >
               ❤️&nbsp;
-              {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
+              {isFavorite ? t("collection.remove_from_favorites") : t("collection.add_to_favorites")}
             </button>
           </>
         }

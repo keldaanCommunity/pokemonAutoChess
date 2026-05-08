@@ -1630,8 +1630,16 @@
 	"title_label": "Заглавие",
 	"mobile_warning": "Тази игра не е адаптирана за мобилни устройства, играйте я на настолен компютър",
 	"nintendo_warning": "Нестопанска цел, с отворен код. Всички права върху The Pokemon Company®",
-	"collection": "колекция",
-	"wiki_label": "Wiki",
+	"collection": {
+		"title": "колекция",
+		"show_all": "Покажи всички",
+		"show_locked": "Показване заключено",
+		"show_unlockable": "Показване за отключване",
+		"show_unlocked": "Покажи отключено",
+		"normal_emotions": "Нормални емоции",
+		"shiny_emotions": "Блестящи емоции",
+		"buy_booster": "Купете нов бустер за {{cost}}"
+	},
 	"bot_builder": "BOT Builder",
 	"meta": "Мета",
 	"sign_out": "Отписване",
@@ -1700,14 +1708,7 @@
 	"chat_disabled_anonymous": "Чатът е деактивиран за анонимни потребители",
 	"type_here": "Пиши тук ...",
 	"send_message": "Изпрати съобщение",
-	"shiny_hunter": "Блестящ ловец",
-	"show_all": "Покажи всички",
-	"show_locked": "Показване заключено",
-	"show_unlockable": "Показване за отключване",
-	"show_unlocked": "Покажи отключено",
-	"normal_emotions": "Нормални емоции",
-	"shiny_emotions": "Блестящи емоции",
-	"buy_booster": "Купете нов бустер за {{cost}}",
+	"shiny_hunter": "Блестящ ловец",		
 	"close": "Близо",
 	"additional_pokemon_hint": "Всеки играч избра допълнителни покемона, които да бъдат налични в магазина на всички играчи за тази игра.",
 	"game_stats": {
@@ -1856,6 +1857,7 @@
 		}
 	},
 	"wiki": {
+		"title": "Wiki",
 		"nav": {
 			"how_to_play": "КАК ДА ИГРАЯ ?",
 			"pokemons_label": "ПОКЕМОНИ",

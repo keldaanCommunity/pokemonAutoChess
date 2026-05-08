@@ -65,7 +65,9 @@ export function AvatarTab() {
               }}
             >
               ❤️&nbsp;
-              {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
             </button>
           </>
         )}

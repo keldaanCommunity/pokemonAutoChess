@@ -94,7 +94,7 @@ export default function Auth() {
         <TermsButton />
         <button className="bubbly blue" onClick={() => setModal("wiki")}>
           <img width={32} height={32} src={`assets/ui/wiki.svg`} />
-          {t("wiki_label")}
+          {t("wiki.title")}
         </button>
         <button className="bubbly pink" onClick={() => setModal("servers")}>
           <img width={32} height={32} src={`assets/ui/players.svg`} />
@@ -113,7 +113,7 @@ export default function Auth() {
         onClose={() => setModal(null)}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki_label")}
+        header={t("wiki.title")}
       >
         <Wiki inGame={false} />
       </Modal>

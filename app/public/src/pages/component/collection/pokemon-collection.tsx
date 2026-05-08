@@ -174,7 +174,7 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"collection"}>{t("collection")}</option>
+          <option value={"collection"}>{t("collection.title")}</option>
           <option value={"shiny"}>{t("shiny_hunter")}</option>
           <option value={"pokedex"}>{t("pokedex")}</option>
         </select>
@@ -204,17 +204,17 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"all"}>{t("show_all")}</option>
-          <option value={"favorite"}>{t("show_favorites")}</option>
+          <option value={"all"}>{t("collection.show_all")}</option>
+          <option value={"favorite"}>{t("collection.show_favorites")}</option>
           {filterState.mode !== "pokedex" && (
-            <option value={"unlockable"}>{t("show_unlockable")}</option>
+            <option value={"unlockable"}>{t("collection.show_unlockable")}</option>
           )}
-          <option value={"locked"}>{t("show_locked")}</option>
-          <option value={"unlocked"}>{t("show_unlocked")}</option>
+          <option value={"locked"}>{t("collection.show_locked")}</option>
+          <option value={"unlocked"}>{t("collection.show_unlocked")}</option>
           {filterState.mode !== "pokedex" && (
             <>
-              <option value={"refundable"}>{t("show_refundable")}</option>
-              <option value={"new"}>{t("show_newly_obtained")}</option>
+              <option value={"refundable"}>{t("collection.show_refundable")}</option>
+              <option value={"new"}>{t("collection.show_newly_obtained")}</option>
             </>
           )}
         </select>
@@ -228,10 +228,10 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"index"}>{t("sort_by_index")}</option>
-          <option value={"shards"}>{t("sort_by_shards")}</option>
-          <option value={"unlocked"}>{t("sort_by_emotes_unlocked")}</option>
-          <option value={"played"}>{t("sort_by_played")}</option>
+          <option value={"index"}>{t("collection.sort_by_index")}</option>
+          <option value={"shards"}>{t("collection.sort_by_shards")}</option>
+          <option value={"unlocked"}>{t("collection.sort_by_emotes_unlocked")}</option>
+          <option value={"played"}>{t("collection.sort_by_played")}</option>
         </select>
 
         <PokemonTypeahead
