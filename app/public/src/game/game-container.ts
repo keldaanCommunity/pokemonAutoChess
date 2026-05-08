@@ -2,6 +2,8 @@ import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getStateCallbacks, Room } from "@colyseus/sdk"
 import { t } from "i18next"
 import Phaser from "phaser"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin"
 import React from "react"
 import { toast } from "react-toastify"
 import { ItemStats } from "../../../config"
@@ -46,7 +48,6 @@ import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
 import { preference, subscribeToPreferences } from "../preferences"
-import { loadMoveToPlugin, loadOutlinePlugin } from "../rex-plugins"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
@@ -276,12 +277,8 @@ class GameContainer {
     })
   }
 
-  async initializeGame() {
+  initializeGame() {
     if (this.game != null) return // prevent initializing twice
-    const [MoveToPlugin, OutlinePlugin] = await Promise.all([
-      loadMoveToPlugin(),
-      loadOutlinePlugin()
-    ])
 
     // Create Phaser game
     const renderer = Number(preference("renderer") ?? Phaser.AUTO)
