@@ -2966,7 +2966,7 @@
 		"POKERUS_VIAL": "Gives POISON synergy. Infects the holder with POKERUS, gaining 1 ATK and 10 AP every 3 seconds and transmitting to ADJACENT allies.",
 		"SPELL_TAG": "Gives GHOST synergy. When the holder is KO, CURSE its attacker to be KO'd after 10 seconds",
 		"SHED_SHELL": "Gives BUG synergy but reduce the holder's max HP by 50% when cloned.",
-		"BERSERK_GENE": "Gives MONSTER synergy. The holder gets CONFUSION for 3 seconds if gaining MONSTER stacks.",
+		"BERSERK_GENE": "Gives MONSTER synergy. The holder gets CONFUSION for 1 second if gaining MONSTER stacks.",
 		"SURFBOARD": "Gives AQUATIC synergy. The holder casts $t(ability.SURF) at every tidal wave, with the ability level matching current AQUATIC synergy level.",
 		"COOKING_POT": "Gives GOURMET synergy. When BURN, the COOKING_POT is heated little by little which gives 10 SPEED per second.",
 		"RUNNING_SHOES": "Gives FIELD synergy. The holder gains 5 SPEED every tile they move (jumps and dashes count for one tile).",

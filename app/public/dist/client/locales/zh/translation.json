@@ -2957,7 +2957,7 @@
 		"POKERUS_VIAL": "携带者也被视作POISON宝可梦。携带者受到POKERUS，每3秒提升1点ATK和10点AP，且会将病毒传播给ADJACENT我方宝可梦。",
 		"SPELL_TAG": "携带者也被视作GHOST宝可梦。携带者倒下时，使攻击者陷入CURSE，其将在10秒后直接倒下。",
 		"SHED_SHELL": "携带者也被视作BUG宝可梦。若携带者被复制，携带者降低50%的最大HP。",
-		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 3秒。",
+		"BERSERK_GENE": "携带者也被视作MONSTER宝可梦。若携带者获得一层MONSTER增幅，则陷入CONFUSION 1秒。",
 		"SURFBOARD": "携带者也被视作AQUATIC宝可梦。每当海浪冲刷战场时，携带者会释放$t(ability.SURF)，招式等级为当前AQUATIC的共鸣等级。",
 		"COOKING_POT": "携带者也被视作GOURMET宝可梦。处于BURN时，COOKING_POT会缓慢加热，每秒提升携带者10点SPEED。",
 		"RUNNING_SHOES": "携带者也被视作FIELD宝可梦。携带者每移动1格，提升5点SPEED（跳跃或冲刺等位移行为仅算作1格）。",

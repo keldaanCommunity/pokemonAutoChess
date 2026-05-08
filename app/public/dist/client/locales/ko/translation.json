@@ -2848,7 +2848,7 @@
 		"EXP_SHARE": "같은 열 근접한 포켓몬의 가장 높은 ATK, AP, DEF, 그리고 SPE_DEF를 획득 ",
 		"POKERUS_VIAL": "POISON 시너지를 부여. POKERUS 소지자를 감염, ATK 1 과 매 3초 마다 AP 10% 획득, 그리고 동료에게 전송 ",
 		"SPELL_TAG": "GHOST 시너지를 부여. 소지자가 KO될 시, 공격자를 10초 후 KO되도록 CURSE 상태로 만듦",
-		"BERSERK_GENE": "MONSTER 시너지를 부여. 소지자는 MONSTER 스택을 얻을 시 3초간 CONFUSION 상태가 됨",
+		"BERSERK_GENE": "MONSTER 시너지를 부여. 소지자는 MONSTER 스택을 얻을 시 1초간 CONFUSION 상태가 됨",
 		"SURFBOARD": "AQUATIC 시너지를 부여. 소지자는 해일이 몰아칠 때마다 $t(ability.SURF)를 시전하며, 기술 레벨은 현재 AQUATIC 시너지 레벨과 일치",
 		"COOKING_POT": "GOURMET 시너지 부여, BURN 시 COOKING_POT 을 가열하여 초당 10 SPEED 획득",
 		"RUNNING_SHOES": "FIELD 시너지를 부여. 소지자는 이동하는 타일마다 5 SPEED를 얻음 (점프와 대시는 1 타일로 계산)",

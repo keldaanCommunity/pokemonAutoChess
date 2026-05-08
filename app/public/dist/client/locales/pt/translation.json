@@ -2941,7 +2941,7 @@
 		"TERRAIN_EXTENDER": "No início da luta, o portador recebe ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD ou FAIRY_FIELD, baseado em suas sinergias. Ao lançar sua habilidade, espalhe o efeito para todos os aliados que compartilham a sinergia do campo.",
 		"SPELL_TAG": "Recebe o tipo GHOST. Quando o portador é nocauteado, o atacante recebe CURSE e é nocauteado automaticamente após 10 segundos",
 		"SHED_SHELL": "Recebe o tipo BUG, mas reduz o HP máximo do portador em 50% quando clonado.",
-		"BERSERK_GENE": "Recebe o tipo MONSTER. O portador recebe CONFUSION por 3 segundos ao acumular cargas de MONSTER.",
+		"BERSERK_GENE": "Recebe o tipo MONSTER. O portador recebe CONFUSION por 1 segundo ao acumular cargas de MONSTER.",
 		"SURFBOARD": "Recebe o tipo AQUATIC. O portador lança $t(ability.SURF) a cada onda lançada, com o nível da habilidade igual ao nível atual de sinergia AQUATIC.",
 		"COOKING_POT": "Recebe o tipo GOURMET. Quando for afetado por BURN, o COOKING_POT aquece gradualmente, concedendo +10 SPEED por segundo.",
 		"RUNNING_SHOES": "Recebe o tipo FIELD. O portador recebe +5 SPEED a cada espaço que se move (saltos e investidas contam como um espaço)",

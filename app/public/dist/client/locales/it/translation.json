@@ -2854,7 +2854,7 @@
 		"POKERUS_VIAL": "Il possessore riceve la sinergia POISON. Infetta il possessore con il POKERUS, guadagnando ogni 3 secondi 1 ATK e 10 AP e può trasmetterlo agli alleati",
 		"SPELL_TAG": "Dà la sinergia GHOST. Quando il possessore è messo KO, infligge CURSE all'aggressore, uccidendolo dopo 10 secondi.",
 		"SHED_SHELL": "Dà la sinergia BUG ma riduce i HP massimi del possessore del 50% se clonato.",
-		"BERSERK_GENE": "Dà la sinergia MONSTER. Il possessore viene affetto da CONFUSION per 3 secondi se guadagna stack di MONSTER.",
+		"BERSERK_GENE": "Dà la sinergia MONSTER. Il possessore viene affetto da CONFUSION per 1 secondo se guadagna stack di MONSTER.",
 		"SURFBOARD": "Dà la sinergia AQUATIC. Il possessore usa $t(ability.SURF) ad ogni ondata di marea, con un livello di abilità pari al livello di sinergia AQUATIC.",
 		"COOKING_POT": "Dà la sinergia GOURMET. Se affetto da BURN, la COOKING_POT è scaldata a poco a poco, dando 10 SPEED al secondo.",
 		"RUNNING_SHOES": "Dà la sinergia FIELD. Il possessore guadagna 5 SPEED per ogni casella attraversata (i salti e gli scatti contano come una casella).",
