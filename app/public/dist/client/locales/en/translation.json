@@ -4008,11 +4008,11 @@
 	"theme": {
 		"default": "Classic",
 		"super": "Super",
-		"forest": "Forest",
+		"autumn": "Autumn",
 		"lilac": "Lilac",
-		"north": "Northern Lights",
 		"umbra": "Umbra",
 		"unown": "Unown Black",
+		"sunday": "Sunday",
 		"redsea": "Red Sea",
 		"origin": "Origin"
 	},
