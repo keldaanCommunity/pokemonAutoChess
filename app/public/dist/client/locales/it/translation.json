@@ -3619,8 +3619,7 @@
 		"show_all": "Mostra tutto",
 		"show_locked": "Mostra bloccato",
 		"show_unlockable": "Mostra sbloccabile",
-		"show_unlocked": "Mostra sbloccato",		
-		"show_alt_forms": "Mostra forme alternative",
+		"show_unlocked": "Mostra sbloccato",				
 		"show_refundable": "Mostra rimborsabili",
 		"show_newly_obtained": "Mostra recentemente ottenuti",
 		"show_favorites": "Mostra preferiti",
@@ -3638,6 +3637,7 @@
 		"remove_from_favorites": "Rimuovi dai preferiti"
 	},
 	"show_evolutions": "Mostra evoluzioni",
+	"show_alt_forms": "Mostra forme alternative",
 	"bot_builder": "Costruttore BOT",
 	"meta": "Meta",
 	"meta_report_info": "Generato a{{report_date}} da {{time_limit}} - Dati ottenuti analizzando {{count}} partite",

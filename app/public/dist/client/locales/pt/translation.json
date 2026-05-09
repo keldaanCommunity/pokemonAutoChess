@@ -3905,7 +3905,8 @@
 	"save": "Salvar",
 	"player_choices": {
 		"choose_add_pick": "Escolha um Pokémon adicional. Ele estará disponível para todos.",
-		"free_slot_hint": "Você deve ter um espaço livre no banco, ou dois para Duplas"
+		"free_slot_hint": "Você deve ter um espaço livre no banco, ou dois para Duplas",
+		"choose_first_partner": "Escolha seu Pokémon inicial. Você receberá uma cópia dele a cada estágio até o estágio 10."
 	},
 	"hide": "Esconder",
 	"show": "Mostrar",
@@ -4738,8 +4739,6 @@
 	"filters": "Filtros",
 	"reset": "Redefinir",
 	"snapshot": "Snapshot",
-	"pick_first_partner": "Escolha seu Pokémon inicial",
-	"pick_first_partner_scribble": "Escolha seu inicial. Você receberá uma cópia dele a cada estágio até o estágio 10.",
 	"pool_label": "Reservatório",
 	"next_level": "Próximo nível",
 	"regional_pokemons": "Pokémons Regionais",

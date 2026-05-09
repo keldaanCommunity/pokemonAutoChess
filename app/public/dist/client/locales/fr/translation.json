@@ -3731,8 +3731,7 @@
 		"show_all": "Afficher tout",
 		"show_locked": "Afficher les bloqués",
 		"show_unlockable": "Afficher les débloquables",
-		"show_unlocked": "Afficher les débloqués",		
-		"show_alt_forms": "Afficher les formes alternatives",
+		"show_unlocked": "Afficher les débloqués",				
 		"show_refundable": "Afficher les remboursables",
 		"show_newly_obtained": "Afficher les nouveaux obtenus",
 		"show_favorites": "Afficher les favoris",
@@ -3750,6 +3749,7 @@
 		"remove_from_favorites": "Retirer des favoris"
 	},
 	"show_evolutions": "Afficher les évolutions",
+	"show_alt_forms": "Afficher les formes alternatives",
 	"bot_builder": "Bot Builder",
 	"meta": "Méta",
 	"meta_report_info": "Généré le {{report_date}} à partir de {{time_limit}} - Données récupérées à partir de {{count}} parties",
