@@ -3124,7 +3124,7 @@
 		"SILK_SCARF": "Combine-o com outros componentes de itens para criar todos os tipos de lenços, faixas e laços. Esses itens serão removidos se você diminuir o nível de sinergia NORMAL.",
 		"FRIEND_BOW": "O portador adquire o tipo NORMAL.",
 		"BLACK_BELT": "Ataques críticos concedem 33% do dano causado como SHIELD.",
-		"MACH_RIBBON": "A cada 3 segundos, receba +15 SPEED.",
+		"MACH_RIBBON": "A cada 3 segundos, receba +20 SPEED.",
 		"EXPLOSIVE_BAND": "Na primeira vez que o escudo do usuário se esgotar, este item explode, causando SPECIAL equivalente a 50% de todo o SHIELD acumulado até o momento aos inimigos ADJACENT.",
 		"TWIST_BAND": "As penalidades de atributos infligidas pelos inimigos se transformam em bônus. Os bônus de atributos do portador não podem ser roubados.",
 		"BIG_EATER_BELT": "Aumenta todos os bônus de atributos recebidos em 25% (arredondado para baixo, não afetando PP). Permite ao usuário consumir 2 pratos diferentes por rodada.",

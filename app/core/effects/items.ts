@@ -227,7 +227,7 @@ export class MachRibbonEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(15, pokemon, 0, false)
+        pokemon.addSpeed(20, pokemon, 0, false)
         pokemon.count.machRibbonCount++
         if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
           pokemon.player.titles.add(Title.TOP_GUN)
