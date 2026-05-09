@@ -8,7 +8,8 @@
 - Tarountula
 - Spidops
 - Slither Wing
-
+- Skwovet
+- Greedent
 
 # Changes to Synergies
 

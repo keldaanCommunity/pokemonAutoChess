@@ -14,7 +14,7 @@ import { IStatus, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"
-import { Berries, Item, Tools } from "../../types/enum/Item"
+import { Berries, Item, NonSpecialBerries, Tools } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -16655,6 +16655,27 @@ export class SnoreStrategy extends AbilityStrategy {
     }
   }
 }
+
+export class StuffCheeksStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    //If the user is holding any berries, eat one of them immediately and gain [100,SP]% of the HP healed by it as SHIELD instead. Otherwise, forage and equip a random berry.
+    const heldBerry = pickRandomIn(
+      schemaValues(pokemon.items).filter((item) => isIn(Berries, item))
+    )
+    if (heldBerry) {
+      pokemon.eatBerry(heldBerry, undefined, true, pokemon.ap / 100, crit)
+    } else {
+      const berry = pickRandomIn(NonSpecialBerries)
+      pokemon.addItem(berry, true)
+    }
+  }
+}
 export class AquaStepStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
@@ -17325,6 +17346,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
   [Ability.AQUA_STEP]: new AquaStepStrategy(),
   [Ability.SNORE]: new SnoreStrategy(),
+  [Ability.STUFF_CHEEKS]: new StuffCheeksStrategy(),
   [Ability.SILK_TRAP]: new SilkTrapStrategy(),
   [Ability.SKITTER_SMACK]: new SkitterSmackStrategy()
 }
