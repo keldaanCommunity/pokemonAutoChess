@@ -767,7 +767,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.items.add(item)
       this.applyItemEffect(item)
     }
-    if (permanent && !this.isGhostOpponent) {
+    if (
+      permanent &&
+      !this.isGhostOpponent &&
+      this.refToBoardPokemon.items.has(item) == false &&
+      this.refToBoardPokemon.items.size < 3
+    ) {
       this.refToBoardPokemon.items.add(item)
     }
 
@@ -1532,11 +1537,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shield = 0
   }
 
-  eatBerry(berry: Item, stealedFrom?: PokemonEntity, inPuffin = false) {
+  eatBerry(
+    berry: Item,
+    stealedFrom?: PokemonEntity,
+    healToShield = false,
+    apScaling = 0,
+    crit = false
+  ) {
     const heal = (val) =>
-      inPuffin
-        ? this.addShield(val, this, 0, false)
-        : this.handleHeal(val, this, 0, false)
+      healToShield
+        ? this.addShield(val, this, apScaling, crit)
+        : this.handleHeal(val, this, apScaling, crit)
 
     switch (berry) {
       case Item.AGUAV_BERRY:

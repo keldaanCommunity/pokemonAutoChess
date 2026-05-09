@@ -81,7 +81,9 @@ export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.TATSUGIRI_CURLY]: null,
   [Pkm.TATSUGIRI_DROOPY]: null,
   [Pkm.TATSUGIRI_STRETCHY]: null,
-  [Pkm.GUZZLORD]: null
+  [Pkm.GUZZLORD]: null,
+  [Pkm.SKWOVET]: Item.BERRIES,
+  [Pkm.GREEDENT]: Item.BERRIES
 }
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
@@ -112,6 +114,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       )
     })
   ],
+  BERRIES: [],
   BINDING_MOCHI: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.BINDING_MOCHI)
@@ -250,7 +253,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       schemaValues(entity.items)
         .filter((item) => Berries.includes(item))
         .forEach((item) => {
-          entity.eatBerry(item, undefined, true)
+          entity.eatBerry(item, undefined, true, 0, false)
         })
     })
   ],

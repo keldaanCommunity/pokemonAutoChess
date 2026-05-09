@@ -8006,6 +8006,21 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.BUG_MELEE,
     shinyUnavailable: true
   },
+  [Pkm.SKWOVET]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    eat: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.GREEDENT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot,
+    eat: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
   [Pkm.QUAXLY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,

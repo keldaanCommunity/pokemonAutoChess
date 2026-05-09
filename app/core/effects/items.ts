@@ -17,6 +17,7 @@ import {
   Item,
   ItemRecipe,
   MemoryDiscs,
+  NonSpecialBerries,
   OgerponMasks,
   Scarves,
   Sweets,
@@ -390,6 +391,12 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
 
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
+    if (dish === Item.BERRIES) {
+      dishes = pickNRandomIn(
+        NonSpecialBerries.filter((i) => pokemon.items.has(i) === false),
+        nbDishes
+      )
+    }
     if (dish === Item.MUSHROOMS) {
       dishes = Array.from(
         { length: nbDishes },
@@ -411,7 +418,13 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       })
       room.clock.setTimeout(() => {
         dishes.forEach((dish, i) => {
-          if (isIn(DishesGoingToInventory, dish)) {
+          if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
+            if (pokemon.items.size < 3) {
+              pokemon.addItem(dish, player)
+            } else {
+              player.items.push(dish)
+            }
+          } else if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
           } else {
             let candidates = schemaValues(player.board).filter(

@@ -20664,6 +20664,36 @@ export class Crustle extends Pokemon {
   additional = true
 }
 
+export class Skwovet extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.GREEDENT
+  hp = 90
+  atk = 7
+  speed = 28
+  def = 5
+  speDef = 4
+  maxPP = 100
+  range = 1
+  skill = Ability.STUFF_CHEEKS
+  additional = true
+}
+
+export class Greedent extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GOURMET])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 200
+  atk = 16
+  speed = 28
+  def = 10
+  speDef = 8
+  maxPP = 100
+  range = 1
+  skill = Ability.STUFF_CHEEKS
+  additional = true
+}
 export class Quaxly extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.AQUATIC,
@@ -21971,6 +22001,8 @@ export const PokemonClasses: Record<
   [Pkm.EISCUE_NOICE]: EiscueNoice,
   [Pkm.DWEBBLE]: Dwebble,
   [Pkm.CRUSTLE]: Crustle,
+  [Pkm.SKWOVET]: Skwovet,
+  [Pkm.GREEDENT]: Greedent,
   [Pkm.QUAXLY]: Quaxly,
   [Pkm.QUAXWELL]: Quaxwell,
   [Pkm.QUAQUAVAL]: Quaquaval,
