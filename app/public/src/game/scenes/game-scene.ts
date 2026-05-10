@@ -224,46 +224,53 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
-    this.input.keyboard!.on(
-      "keydown-" + keybindings.refresh,
-      throttle(() => {
-        playSound(SOUNDS.REFRESH, 0.5)
-        this.refreshShop()
-      }, 300)
-    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
-      this.room?.send(Transfer.LOCK)
-    })
+    if (!this.spectate) {
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.refresh,
+        throttle(() => {
+          playSound(SOUNDS.REFRESH, 0.5)
+          this.refreshShop()
+        }, 300)
+      )
 
-    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
-      this.buyExperience()
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+        this.room?.send(Transfer.LOCK)
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
-      if (this.pokemonDragged != null) return
-      if (this.shopIndexHovered !== null) {
-        this.removeFromShop(this.shopIndexHovered)
-        this.shopIndexHovered = null
-      } else if (
-        this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
-      ) {
-        this.sellPokemon(this.pokemonHovered)
-        this.pokemonHovered = null
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+        this.buyExperience()
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
-      if (this.pokemonHovered) {
-        this.switchBetweenBenchAndBoard(this.pokemonHovered)
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+        if (this.pokemonDragged != null) return
+        if (this.shopIndexHovered !== null) {
+          this.removeFromShop(this.shopIndexHovered)
+          this.shopIndexHovered = null
+        } else if (
+          this.pokemonHovered &&
+          this.pokemonHovered
+            .getBounds()
+            .contains(
+              this.input.activePointer.worldX,
+              this.input.activePointer.worldY
+            )
+        ) {
+          this.sellPokemon(this.pokemonHovered)
+          this.pokemonHovered = null
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+        if (this.pokemonHovered) {
+          this.switchBetweenBenchAndBoard(this.pokemonHovered)
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+        playerClick(this.uid!)
+      })
+    }
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       savePreferences({ cameraLocked: !preference("cameraLocked") })
@@ -275,10 +282,6 @@ export default class GameScene extends Scene {
 
     this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
       cyclePlayers(1)
-    })
-
-    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-      playerClick(this.uid!)
     })
   }
 
