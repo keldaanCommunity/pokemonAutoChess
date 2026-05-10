@@ -27,6 +27,11 @@ export class IdleState extends PokemonState {
       pokemon.cooldown = 500
     } else {
       pokemon.cooldown -= dt
+      if (pokemon.status.skydiving && pokemon.cooldown <= 500) {
+        // just landed, 500ms remaining cooldown to reposition
+        // only used by special cases like Sudowoodo + Comet Shard
+        pokemon.status.skydiving = false
+      }
     }
   }
 
