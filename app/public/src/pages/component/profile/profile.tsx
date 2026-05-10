@@ -5,6 +5,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { ISuggestionUser, Role, Title } from "../../../../../types"
 import { debounce } from "../../../../../utils/function"
+import { keys } from "../../../../../utils/object"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   ban,
@@ -27,7 +28,6 @@ import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
 import { TitleTab } from "./title-tab"
 import "./profile.css"
-import { keys } from "../../../../../utils/object";
 
 export default function Profile() {
   const { t } = useTranslation()
@@ -114,15 +114,18 @@ export default function Profile() {
           <div className="loading">{t("loading")}</div>
         ) : error ? (
           <div className="error">{error}</div>
+        ) : suggestions.length > 0 ? (
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => {
+              resetSearch()
+              searchById(suggestion.id)
+            }}
+          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
             setRightPanel={setRightPanel}
-          />
-        ) : suggestions.length > 0 ? (
-          <SearchResults
-            suggestions={suggestions}
-            onSelect={(suggestion) => searchById(suggestion.id)}
           />
         ) : (
           <MyProfileMenu />
