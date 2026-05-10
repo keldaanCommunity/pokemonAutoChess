@@ -52,6 +52,7 @@
 
 # Gameplay
 
+- New town encounter: Ludicolo
 - Locked status now also prevents forced displacement (like Aquatic tidal wave or Fighting knockback)
 
 # Events
