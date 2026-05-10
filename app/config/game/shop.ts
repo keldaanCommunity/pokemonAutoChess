@@ -85,6 +85,14 @@ export const REPEAT_BALL_LEGENDARY_CAP = 120
 export const REPEAT_BALL_UNIQUE_CAP = 80
 export const REPEAT_BALL_UNIQUE_INTERVAL = 10
 
+export const AQUA_MONICA_CHANCE = 5 / 100
+export const FIERY_DRUM_CHANCE = 5 / 100
+export const GRASS_CORNET_CHANCE = 5 / 100
+export const ICY_FLUTE_CHANCE = 5 / 100
+export const ROCK_HORN_CHANCE = 5 / 100
+export const SKY_MELODICA_CHANCE = 5 / 100
+export const TERRA_CYMBAL_CHANCE = 5 / 100
+
 export const HIGH_ROLLER_CHANCE = 2 / 100
 
 /* sell prices */
