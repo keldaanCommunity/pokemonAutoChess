@@ -581,6 +581,19 @@ export class MiniGame {
       )
     }
 
+    if(encounter === TownEncounters.LUDICOLO) {
+      items.push(
+        Item.AQUA_MONICA,
+        Item.FIERY_DRUM,
+        Item.GRASS_CORNET,
+        Item.ICY_FLUTE,
+        Item.ROCK_HORN,
+        Item.SKY_MELODICA,
+        Item.TERRA_CYMBAL
+      )
+      nbItemsToPick -= 3
+    }
+
     if (encounter === TownEncounters.SABLEYE) {
       items.push(...pickNRandomIn(SynergyGems, 4))
     }

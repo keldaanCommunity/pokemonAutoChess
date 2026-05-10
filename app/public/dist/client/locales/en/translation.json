@@ -2873,7 +2873,14 @@
 		"WARP_WAND": "Warp Wand",
 		"SWITCHER_WAND": "Switcher Wand",
 		"WHIRLWIND_WAND": "Whirlwind Wand",
-		"TUNNEL_WAND": "Tunnel Wand"
+		"TUNNEL_WAND": "Tunnel Wand",
+		"AQUA_MONICA": "Aqua Monica",
+		"FIERY_DRUM": "Fiery Drum",
+		"GRASS_CORNET": "Grass Cornet",
+		"ICY_FLUTE": "Icy Flute",
+		"ROCK_HORN": "Rock Horn",
+		"SKY_MELODICA": "Sky Melodica",
+		"TERRA_CYMBAL": "Terra Cymbal"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3196,7 +3203,14 @@
 		"WARP_WAND": "Fairy attacks deal 20% additional SPECIAL and have [5,LK]% chance to teleport target on a cell far away",
 		"SWITCHER_WAND": "Fairy attacks deal 20% additional SPECIAL and have [5,LK]% chance to swap target position with farthest enemy",
 		"WHIRLWIND_WAND": "Fairy attacks deal 20% additional SPECIAL and have [5,LK]% chance to throw a whirlwind that makes all the units in its path to fly away.",
-		"TUNNEL_WAND": "Fairy attacks deal 20% additional SPECIAL. Wands SPECIAL has [5,LK]% chance to pass through the target to hit enemies in a line behind it."
+		"TUNNEL_WAND": "Fairy attacks deal 20% additional SPECIAL. Wands SPECIAL has [5,LK]% chance to pass through the target to hit enemies in a line behind it.",
+		"AQUA_MONICA": "Pokémon in shop have 5% additional chance to have the WATER type.",
+		"FIERY_DRUM": "Pokémon in shop have 5% additional chance to have the FIRE type.",
+		"GRASS_CORNET": "Pokémon in shop have 5% additional chance to have the GRASS type.",
+		"ICY_FLUTE": "Pokémon in shop have 5% additional chance to have the ICE type.",
+		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
+		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
+		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -4514,7 +4528,8 @@
 		"CINCCINO": "Cinccino offers elegant SILK_SCARF",
 		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them",
 		"KINGAMBIT": "Kingambit has given the player in first place the LEADERS_CREST. Beat them in battle to earn extra GOLD!",
-		"LAPRAS": "Lapras offers a ride to go to a different region."
+		"LAPRAS": "Lapras offers a ride to go to a different region.",
+		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities."
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",

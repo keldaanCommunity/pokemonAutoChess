@@ -547,6 +547,15 @@ export default class MinigameManager {
       name: Pkm.CINCCINO
     })
 
+    const ludicolo = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.LUDICOLO ? cx : 13.5 * 48,
+      y: encounter === TownEncounters.LUDICOLO ? cy : 25.5 * 48,
+      orientation: Orientation.DOWN,
+      name: Pkm.LUDICOLO,
+      animation: PokemonActionState.ABILITY
+    })
+
     const magnezone = new PokemonSpecial({
       scene: this.scene,
       x: encounter === TownEncounters.MAGNEZONE ? cx : 41 * 48,
@@ -617,6 +626,7 @@ export default class MinigameManager {
       croagunk,
       wigglytuff,
       cincinno,
+      ludicolo,
       magnezone,
       kingambit,
       lapras,

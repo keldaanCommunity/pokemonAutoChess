@@ -320,6 +320,8 @@ export default class AnimationManager {
         return config.attack
       case PokemonActionState.EMOTE:
         return config.emote
+      case PokemonActionState.ABILITY:
+        return config.ability
       case PokemonActionState.IDLE:
       default:
         return config.idle

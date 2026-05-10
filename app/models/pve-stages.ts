@@ -99,7 +99,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
-    shinyChance: 1 / 50,
+    shinyChance: 1 / 40,
     rewards: [...ItemComponentsNoFossilOrScarf, Item.RED_SCALE],
     getRewards(_player: Player, shinyEncounter: boolean) {
       if (shinyEncounter) return [Item.RED_SCALE]
