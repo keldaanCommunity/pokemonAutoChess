@@ -363,7 +363,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="servers"
             handleClick={changeModal}
           >
-            {t("community_servers")}
+            {t("servers_list.title")}
           </NavLink>
         )}
 
@@ -558,7 +558,7 @@ function Modals({
         onClose={closeModal}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}
+        header={t("servers_list.title")}
       >
         <ServersList />
       </Modal>
