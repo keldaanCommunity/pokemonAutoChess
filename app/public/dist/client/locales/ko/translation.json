@@ -3757,7 +3757,9 @@
 			"avatar_show_emote": "감정표현하기"
 		}
 	},
-	"music_volume": "소리 볼륨",
+	"jukebox": {
+		"music_volume": "소리 볼륨"
+	},
 	"toggle_fullscreen": "전체 화면",
 	"save": "저장",
 	"reset": "리셋",

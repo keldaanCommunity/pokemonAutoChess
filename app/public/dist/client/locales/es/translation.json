@@ -3736,10 +3736,12 @@
 			"avatar_show_emote": "Usar emote"
 		}
 	},
-	"music_volume": "Volumen de la música",
-	"previous_music": "Anterior pista",
-	"next_music": "Siguiente pista",
-	"random_music": "Pista aleatoria",
+	"jukebox": {
+		"music_volume": "Volumen de la música",
+		"previous_music": "Anterior pista",
+		"next_music": "Siguiente pista",
+		"random_music": "Pista aleatoria"
+	},
 	"toggle_fullscreen": "Activar pantalla completa",
 	"save": "Guardar",
 	"reset": "Reiniciar",

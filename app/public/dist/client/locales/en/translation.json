@@ -4042,10 +4042,12 @@
 		"redsea": "Red Sea",
 		"origin": "Origin"
 	},
-	"music_volume": "Music Volume",
-	"previous_music": "Previous music",
-	"next_music": "Next music",
-	"random_music": "Random music",
+	"jukebox": {
+		"music_volume": "Music Volume",
+		"previous_music": "Previous music",
+		"next_music": "Next music",
+		"random_music": "Random music"
+	},
 	"toggle_fullscreen": "Toggle fullscreen",
 	"filters": "Filters",
 	"save": "Save",

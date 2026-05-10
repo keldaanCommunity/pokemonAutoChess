@@ -3675,7 +3675,9 @@
 			"avatar_show_emote": "Emote auslösen"
 		}
 	},
-	"music_volume": "Musiklautstärke",
+	"jukebox": {
+		"music_volume": "Musiklautstärke"
+	},
 	"toggle_fullscreen": "Vollbild ein-/ausblenden",
 	"save": "Speichern",
 	"reset": "Zurücksetzen",

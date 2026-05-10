@@ -3906,7 +3906,12 @@
 			"avatar_show_emote": "Acionar emote"
 		}
 	},
-	"music_volume": "Volume da Música",
+	"jukebox": {
+		"music_volume": "Volume da Música",
+		"previous_music": "Música anterior",
+		"next_music": "Próxima música",
+		"random_music": "Música aleatória"
+	},
 	"save": "Salvar",
 	"player_choices": {
 		"choose_add_pick": "Escolha um Pokémon adicional. Ele estará disponível para todos.",
@@ -4734,9 +4739,6 @@
 	"victory_count_other": "{{count}} vitórias",
 	"defeat_count_one": "{{count}} derrota",
 	"defeat_count_other": "{{count}} derrotas",
-	"previous_music": "Música anterior",
-	"next_music": "Próxima música",
-	"random_music": "Música aleatória",
 	"toggle_fullscreen": "Ativar tela cheia",
 	"filters": "Filtros",
 	"reset": "Redefinir",

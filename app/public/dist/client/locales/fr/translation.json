@@ -3950,10 +3950,12 @@
 			"team_planner": "Ouvrir/fermer le planificateur d'équipe"
 		}
 	},
-	"music_volume": "Volume de la musique",
-	"previous_music": "Musique précédente",
-	"next_music": "Musique suivante",
-	"random_music": "Musique aléatoire",
+	"jukebox": {
+		"music_volume": "Volume de la musique",
+		"previous_music": "Musique précédente",
+		"next_music": "Musique suivante",
+		"random_music": "Musique aléatoire"
+	},
 	"toggle_fullscreen": "Plein écran",
 	"filters": "Filtres",
 	"save": "Sauvegarder",

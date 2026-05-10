@@ -4009,10 +4009,12 @@
 		"redsea": "红色海洋",
 		"origin": "起源"
 	},
-	"music_volume": "音乐音量",
-	"previous_music": "上一曲",
-	"next_music": "下一曲",
-	"random_music": "随机播放",
+	"jukebox": {
+		"music_volume": "音乐音量",
+		"previous_music": "上一曲",
+		"next_music": "下一曲",
+		"random_music": "随机播放"
+	},
 	"toggle_fullscreen": "全屏",
 	"filters": "筛选",
 	"save": "保存",

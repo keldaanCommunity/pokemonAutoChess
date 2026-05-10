@@ -3833,10 +3833,12 @@
 			"avatar_show_emote": "Usa emote"
 		}
 	},
-	"music_volume": "Volume della musica",
-	"previous_music": "Traccia precedente",
-	"next_music": "Traccia successiva",
-	"random_music": "Traccia casuale",
+	"jukebox": {
+		"music_volume": "Volume della musica",
+		"previous_music": "Traccia precedente",
+		"next_music": "Traccia successiva",
+		"random_music": "Traccia casuale"
+	},
 	"toggle_fullscreen": "Attiva schermo intero",
 	"filters": "Filtri",
 	"save": "Salva",

@@ -2771,7 +2771,9 @@
 		"preloading_start": "ゲームをプリロード中...",
 		"finished_preloading": "プリロードが完了しました"
 	},
-	"music_volume": "音楽の音量",
+	"jukebox": {
+		"music_volume": "音楽の音量"
+	},
 	"save": "保存",
 	"player_choices": {
 		"choose_add_pick": "追加のポケモンを選択します。誰でも利用できるようになります。",

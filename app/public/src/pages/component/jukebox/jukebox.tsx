@@ -1,14 +1,13 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { DungeonMusic } from "../../../../../types/enum/Dungeon"
+import { pickRandomIn } from "../../../../../utils/random"
 import { usePreference } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
 import { Modal } from "../modal/modal"
-
 import "./jukebox.css"
-import { pickRandomIn } from "../../../../../utils/random"
 
 export default function Jukebox(props: {
   show: boolean
@@ -76,7 +75,7 @@ export default function Jukebox(props: {
         <button
           className="bubbly blue"
           onClick={() => nextMusic(-1)}
-          title={t("previous_music")}
+          title={t("jukebox.previous_music")}
         >
           ◄
         </button>
@@ -87,7 +86,7 @@ export default function Jukebox(props: {
         <button
           className="bubbly blue"
           onClick={() => nextMusic(+1)}
-          title={t("next_music")}
+          title={t("jukebox.next_music")}
         >
           ►
         </button>
@@ -115,7 +114,7 @@ export default function Jukebox(props: {
         <button
           className="bubbly blue"
           onClick={() => randomizeMusic()}
-          title={t("random_music")}
+          title={t("jukebox.random_music")}
         >
           <img src="/assets/ui/randomize.svg" style={{ marginRight: 0 }} />
         </button>
@@ -123,7 +122,7 @@ export default function Jukebox(props: {
 
       <p>
         <label className="full-width">
-          {t("music_volume")}: {volume} %
+          {t("jukebox.music_volume")}: {volume} %
           <input
             type="range"
             min="0"
