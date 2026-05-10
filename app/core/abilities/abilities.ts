@@ -16,7 +16,7 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Rarity, Team } from "../../types/enum/Game"
 import { Berries, Item, Tools } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
+import { Pillars, Pkm, PkmByIndex, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
@@ -11844,12 +11844,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
 
     const pillar = board.cells.find(
-      (entity) =>
-        entity &&
-        entity.team === pokemon.team &&
-        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE].includes(
-          entity.name
-        )
+      (e) => e && e.team === pokemon.team && isIn(Pillars, e.name)
     )
     if (pillar) {
       // If a pillar is already on the board, jumps to it and throw the pillar at the closest target, dealing [50,100,150,SP] + the remaining HP of the pillar as SPECIAL
@@ -11933,10 +11928,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
       const coord =
         pokemon.simulation.getClosestFreeCellToPokemonEntity(pokemon)
       if (!coord) return
-      const pillarType =
-        [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
-          pokemon.stars - 1
-        ] ?? Pkm.PILLAR_CONCRETE
+      const pillarType = Pillars[pokemon.stars - 1] ?? Pkm.PILLAR_CONCRETE
       const pillar = PokemonFactory.createPokemonFromName(
         pillarType,
         pokemon.player

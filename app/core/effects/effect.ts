@@ -87,6 +87,23 @@ export class OnStageStartEffect extends Effect {
   apply(args: OnStageStartEffectArgs) {}
 }
 
+// applied when a pokemon is benched during a fight
+interface OnBenchedDuringFightEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  simulation: Simulation
+}
+
+export class OnBenchedDuringFightEffect extends Effect {
+  constructor(
+    effect?: (args: OnBenchedDuringFightEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: OnBenchedDuringFightEffectArgs) {}
+}
+
 interface OnSimulationStartEffectArgs {
   simulation: Simulation
   player: Player

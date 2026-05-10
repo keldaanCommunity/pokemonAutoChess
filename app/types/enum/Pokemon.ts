@@ -3782,14 +3782,13 @@ export const UnownsForScribble: Pkm[] = [
   Pkm.UNOWN_QUESTION
 ]
 
-export const NonPkm: Pkm[] = [
-  Pkm.SUBSTITUTE,
-  Pkm.EGG,
+export const Pillars = [
   Pkm.PILLAR_WOOD,
   Pkm.PILLAR_IRON,
-  Pkm.PILLAR_CONCRETE,
-  Pkm.DEFAULT
-]
+  Pkm.PILLAR_CONCRETE
+] satisfies readonly Pkm[]
+
+export const NonPkm: Pkm[] = [Pkm.SUBSTITUTE, Pkm.EGG, ...Pillars, Pkm.DEFAULT]
 
 export const NON_PMD_PKM_INDEXES: string[] = [
   "0532-0002", // Pillar Wood

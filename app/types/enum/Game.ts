@@ -34,7 +34,8 @@ export enum PokemonActionState {
   EMOTE = "Emote",
   EAT = "Eat",
   FISH = "Fish",
-  BLOSSOM = "Blossom"
+  BLOSSOM = "Blossom",
+  TRAINING = "Training"
 }
 
 export enum Orientation {

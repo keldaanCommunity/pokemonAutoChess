@@ -50,6 +50,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
   getPokemonBaseline
 } from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
@@ -379,7 +380,11 @@ export class OnDragDropPokemonCommand extends Command<
             if (
               pokemon.canBeBenched &&
               (!target || target.canBePlaced) &&
-              !(isBoardFull && pokemon?.doesCountForTeamSize === false)
+              !(
+                isBoardFull &&
+                target &&
+                pokemon?.doesCountForTeamSize === false
+              )
             ) {
               // From board to bench (bench to bench is already handled)
               this.swapPokemonPositions(player, pokemon, x, y)
@@ -1651,7 +1656,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           this.spawnBabyEggs(player, isPVE)
 
-          // Update automatic evolutions and remove Unowns
+          // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
             if (pokemon.evolutionRule) {
               if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
@@ -1665,6 +1670,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (pokemon.passive === Passive.UNOWN && !isOnBench(pokemon)) {
               // remove after one fight
               player.board.delete(key)
+            }
+
+            if (pokemon.action === PokemonActionState.TRAINING) {
+              pokemon.addAttack(4)
+              pokemon.addMaxHP(Math.ceil(0.1 * getPokemonData(pokemon.name).hp))
+              pokemon.action = PokemonActionState.IDLE
             }
           })
 

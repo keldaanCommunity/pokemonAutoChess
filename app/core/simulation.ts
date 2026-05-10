@@ -64,6 +64,7 @@ import {
   FightingKnockbackEffect,
   FireHitEffect,
   FlyingProtectionEffect,
+  fightingTrainingEffect,
   GroundHoleEffect,
   humanHealEffect,
   MonsterKillEffect,
@@ -129,6 +130,9 @@ export default class Simulation extends Schema implements ISimulation {
     this.board = new Board(BOARD_HEIGHT, BOARD_WIDTH)
     this.started = false
 
+    this.bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
+    this.redPlayer?.effects.forEach((e) => this.redEffects.add(e))
+
     // beforeSimulationStart hooks
     const playerEffects: [
       Player | undefined,
@@ -149,6 +153,19 @@ export default class Simulation extends Schema implements ISimulation {
             teamEffects,
             opponentEffects
           })
+          if (isOnBench(pokemon)) {
+            // OnBenchedDuringFightEffect should be applied here
+            if (
+              teamEffects.has(EffectEnum.SHEER_FORCE) &&
+              pokemon.types.has(Synergy.FIGHTING)
+            ) {
+              fightingTrainingEffect.apply({
+                pokemon,
+                player,
+                simulation: this
+              })
+            }
+          }
         })
       }
     }
@@ -158,9 +175,6 @@ export default class Simulation extends Schema implements ISimulation {
       this.blueEffects.add(weatherEffect)
       this.redEffects.add(weatherEffect)
     }
-
-    this.bluePlayer.effects.forEach((e) => this.blueEffects.add(e))
-    this.redPlayer?.effects.forEach((e) => this.redEffects.add(e))
 
     this.finished = false
     this.winnerId = ""
@@ -932,7 +946,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.GUTS:
       case EffectEnum.STURDY:
       case EffectEnum.DEFIANT:
-      case EffectEnum.JUSTIFIED:
+      case EffectEnum.SHEER_FORCE:
         if (types.has(Synergy.FIGHTING)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new FightingKnockbackEffect(effect))

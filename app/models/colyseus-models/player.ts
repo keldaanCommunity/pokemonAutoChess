@@ -43,6 +43,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
+  Pillars,
   Pkm,
   PkmFamily,
   PkmIndex,
@@ -57,7 +58,11 @@ import { GameStats, initialGameStats } from "../../types/interfaces/GameStats"
 import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
-import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
+import {
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  isOnBench
+} from "../../utils/board"
 import { min } from "../../utils/number"
 import {
   chance,
@@ -390,6 +395,13 @@ export default class Player extends Schema implements IPlayer {
       this.updateFairyWands(previousSynergies, updatedSynergies)
     }
 
+    if (
+      previousSynergies.get(Synergy.FIGHTING) !==
+      updatedSynergies.get(Synergy.FIGHTING)
+    ) {
+      this.updatePillars()
+    }
+
     this.effects.update(this.synergies, this.board)
 
     if (
@@ -655,6 +667,47 @@ export default class Player extends Schema implements IPlayer {
       lostWands.forEach((wand) => {
         removeInArray(this.items, wand)
       })
+    }
+  }
+
+  updatePillars() {
+    const expectedNbPillarsByRank = [0, 0, 0]
+    if (this.synergies.hasSynergyTriggerOrMore(Synergy.FIGHTING, 4)) {
+      expectedNbPillarsByRank[0] += 1
+    }
+    schemaValues(this.board)
+      .filter(
+        (p) => getPokemonBaseline(p.name) === Pkm.TIMBURR && !isOnBench(p)
+      )
+      .forEach((p) => {
+        expectedNbPillarsByRank[p.stars - 1] +=
+          p.name === Pkm.CONKELDURR ? 2 : 1
+      })
+
+    for (let rank = 0; rank < 3; rank++) {
+      const currentPillars = schemaValues(this.board).filter(
+        (p) => p.name === Pillars[rank]
+      )
+      const nbExpectedPillars = expectedNbPillarsByRank[rank]
+      if (currentPillars.length < nbExpectedPillars) {
+        const nbPillarsToAdd = nbExpectedPillars - currentPillars.length
+        for (let i = 0; i < nbPillarsToAdd; i++) {
+          const freeSpace = getFirstAvailablePositionOnBoard(this.board, 1)
+          if (freeSpace) {
+            const pillar = PokemonFactory.createPokemonFromName(
+              Pillars[rank],
+              this
+            )
+            pillar.positionX = freeSpace[0]
+            pillar.positionY = freeSpace[1]
+            this.board.set(pillar.id, pillar)
+          }
+        }
+      } else if (nbExpectedPillars < currentPillars.length) {
+        for (let i = 0; i < currentPillars.length - nbExpectedPillars; i++) {
+          this.board.delete(currentPillars[i].id)
+        }
+      }
     }
   }
 
