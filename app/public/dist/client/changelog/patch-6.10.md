@@ -73,6 +73,7 @@
 
 - Lingering Aroma damage on hit now only applies to attackers at melee range as intended
 - Fix Smeargle losing Sketch forever when copying and using Skill Swap
+- Fix second dish lost when holding big eater belt and evolving
 
 # Misc
 

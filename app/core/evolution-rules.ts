@@ -189,18 +189,6 @@ export class CountEvolutionRule extends EvolutionRule {
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
-    if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
-      const dishes = pokemonsBeforeEvolution
-        .filter((p) => p.dishes.size > 0)
-        .flatMap((p) => schemaValues(p.dishes))
-      while (pokemonEvolved.canEat && dishes.length > 0) {
-        const dish = dishes.pop()
-        if (dish && !pokemonEvolved.dishes.has(dish)) {
-          pokemonEvolved.dishes.add(dish)
-        }
-      }
-    }
-
     shuffleArray(itemsCompleteOnBench)
     shuffleArray(itemsCompleteOnBoard)
 
@@ -236,6 +224,18 @@ export class CountEvolutionRule extends EvolutionRule {
         player.items.push(itemComponent)
       } else {
         pokemonEvolved.items.add(itemComponent)
+      }
+    }
+
+    if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
+      const dishes = pokemonsBeforeEvolution
+        .filter((p) => p.dishes.size > 0)
+        .flatMap((p) => schemaValues(p.dishes))
+      while (pokemonEvolved.canEat && dishes.length > 0) {
+        const dish = dishes.pop()
+        if (dish && !pokemonEvolved.dishes.has(dish)) {
+          pokemonEvolved.dishes.add(dish)
+        }
       }
     }
 
