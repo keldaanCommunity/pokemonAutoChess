@@ -14,9 +14,10 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import { Item, Scarves, Wands } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pillars, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"
+import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
 import { effectInLine } from "../../utils/orientation"
@@ -34,6 +35,7 @@ import {
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnAttackReceivedEffectArgs,
+  OnBenchedDuringFightEffect,
   OnDamageDealtEffect,
   OnDamageDealtEffectArgs,
   OnDamageReceivedEffect,
@@ -284,9 +286,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount %
-        (this.origin === EffectEnum.JUSTIFIED ? 8 : 10) ===
-        0 &&
+      pokemon.count.fightingBlockCount % 10 === 0 &&
       !isRetaliation &&
       distanceC(
         pokemon.positionX,
@@ -336,6 +336,22 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     }
   }
 }
+
+export const fightingTrainingEffect = new OnBenchedDuringFightEffect(
+  ({ pokemon, player }) => {
+    const pillar = schemaValues(player.board).find((p) => {
+      return (
+        isIn(Pillars, p.name) &&
+        isOnBench(p) &&
+        p.positionX === pokemon.positionX - 1
+      )
+    })
+
+    if (pillar) {
+      pokemon.action = PokemonActionState.TRAINING
+    }
+  }
+)
 
 export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
   if (!pokemon.player) return

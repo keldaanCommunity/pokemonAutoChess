@@ -317,6 +317,7 @@ export default class AnimationManager {
       case PokemonActionState.WALK:
         return config.walk
       case PokemonActionState.ATTACK:
+      case PokemonActionState.TRAINING:
         return config.attack
       case PokemonActionState.EMOTE:
         return config.emote
@@ -374,6 +375,10 @@ export default class AnimationManager {
         PokemonActionState.SLEEP,
         pokemonSprite
       )
+    }
+
+    if (action === PokemonActionState.TRAINING) {
+      pokemonSprite.orientation = Orientation.LEFT
     }
 
     try {

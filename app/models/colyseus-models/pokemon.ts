@@ -47,11 +47,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
-import {
-  getFirstAvailablePositionInBench,
-  getFirstAvailablePositionOnBoard,
-  isOnBench
-} from "../../utils/board"
+import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
@@ -17093,62 +17089,6 @@ export class Malamar extends Pokemon {
   additional = true
 }
 
-const updatePillars = (player: Player, pkm: Pkm, pillarPkm: Pkm) => {
-  const pkmOnBoard = schemaValues(player.board).filter(
-    (p) => p.name === pkm && p.positionY > 0
-  )
-  const pillars = schemaValues(player.board).filter((p) => p.name === pillarPkm)
-  const nbPillars = pkmOnBoard.length * (pkm === Pkm.CONKELDURR ? 2 : 1)
-  if (pillars.length < nbPillars) {
-    for (let i = 0; i < nbPillars - pillars.length; i++) {
-      const freeSpace = getFirstAvailablePositionOnBoard(player.board, 1)
-      if (freeSpace) {
-        const pillar = PokemonFactory.createPokemonFromName(pillarPkm, player)
-        pillar.positionX = freeSpace[0]
-        pillar.positionY = freeSpace[1]
-        player.board.set(pillar.id, pillar)
-      }
-    }
-  } else if (nbPillars < pillars.length) {
-    for (let i = 0; i < pillars.length - nbPillars; i++) {
-      player.board.delete(pillars[i].id)
-    }
-  }
-}
-
-const pillarEvolve =
-  (pillarToRemove: Pkm, pillarEvolution: Pkm) =>
-  (params: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-    player: Player
-  }) => {
-    const pkmOnBoard = schemaValues(params.player.board).filter(
-      (p) =>
-        p.name === params.pokemonsBeforeEvolution[0].name && p.positionY > 0
-    )
-    const pillars = schemaValues(params.player.board).filter(
-      (p) => p.name === pillarToRemove
-    )
-    for (let i = 0; i < pillars.length - pkmOnBoard.length; i++) {
-      params.player.board.delete(pillars[i].id)
-    }
-    const coords =
-      pillars.length > 0
-        ? [pillars[0].positionX, pillars[0].positionY]
-        : getFirstAvailablePositionOnBoard(params.player.board, 1)
-    if (coords && params.pokemonEvolved.positionY > 0) {
-      const pillar = PokemonFactory.createPokemonFromName(
-        pillarEvolution,
-        params.player
-      )
-      pillar.positionX = coords[0]
-      pillar.positionY = coords[1]
-      params.player.board.set(pillar.id, pillar)
-    }
-    updatePillars(params.player, params.pokemonEvolved.name, pillarEvolution)
-  }
-
 export class Timburr extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIGHTING, Synergy.HUMAN])
   rarity = Rarity.ULTRA
@@ -17165,12 +17105,14 @@ export class Timburr extends Pokemon {
   passive = Passive.PILLAR
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
-    updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
+    player.updatePillars()
   }
   afterSell(player) {
-    updatePillars(player, Pkm.TIMBURR, Pkm.PILLAR_WOOD)
+    player.updatePillars()
   }
-  afterEvolve = pillarEvolve(Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON)
+  afterEvolve(player) {
+    player.updatePillars()
+  }
 }
 
 export class Gurdurr extends Pokemon {
@@ -17189,12 +17131,14 @@ export class Gurdurr extends Pokemon {
   passive = Passive.PILLAR
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
-    updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
+    player.updatePillars()
   }
   afterSell(player) {
-    updatePillars(player, Pkm.GURDURR, Pkm.PILLAR_IRON)
+    player.updatePillars()
   }
-  afterEvolve = pillarEvolve(Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE)
+  afterEvolve(player) {
+    player.updatePillars()
+  }
 }
 
 export class Conkeldurr extends Pokemon {
@@ -17212,10 +17156,10 @@ export class Conkeldurr extends Pokemon {
   passive = Passive.PILLAR
   onChangePosition(x: number, y: number, player: Player, state: GameState) {
     super.onChangePosition(x, y, player, state)
-    updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
+    player.updatePillars()
   }
   afterSell(player) {
-    updatePillars(player, Pkm.CONKELDURR, Pkm.PILLAR_CONCRETE)
+    player.updatePillars()
   }
 }
 
@@ -17233,7 +17177,6 @@ export class PillarWood extends Pokemon {
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
   canHoldItems = false
-  canBeBenched = false
   canBeSold = false
 }
 
@@ -17251,7 +17194,6 @@ export class PillarIron extends Pokemon {
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
   canHoldItems = false
-  canBeBenched = false
   canBeSold = false
 }
 
@@ -17269,7 +17211,6 @@ export class PillarConcrete extends Pokemon {
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
   canHoldItems = false
-  canBeBenched = false
   canBeSold = false
 }
 

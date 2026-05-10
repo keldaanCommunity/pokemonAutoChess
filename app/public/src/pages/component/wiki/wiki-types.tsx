@@ -104,9 +104,9 @@ export function WikiType(props: { type: Synergy }) {
         return (
           <div
             key={t(`effect.${effect}`)}
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: "flex", alignItems: "flex-start" }}
           >
-            <span>
+            <span style={{ whiteSpace: "nowrap" }}>
               ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
               :&nbsp;
             </span>

@@ -26,7 +26,7 @@ import {
   Stat
 } from "../../../../types/enum/Game"
 import { Sweets } from "../../../../types/enum/Item"
-import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { Pillars, Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import { logger } from "../../../../utils/logger"
@@ -2701,10 +2701,7 @@ export const AbilitiesAnimations: {
       distanceE(args.positionX, args.positionY, args.targetX, args.targetY)
     )
     // orientation field is used to pass the type of the pillar
-    const pillarType =
-      [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
-        args.orientation
-      ] ?? Pkm.PILLAR_WOOD
+    const pillarType = Pillars[args.orientation] ?? Pkm.PILLAR_WOOD
     const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
     const frame = `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     return projectile({
