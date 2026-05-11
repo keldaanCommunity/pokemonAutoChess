@@ -88,7 +88,7 @@ export default function Lobby() {
       <MainSidebar
         page="main_lobby"
         leave={signOut}
-        leaveLabel={t("sign_out")}
+        leaveLabel={t("auth.sign_out")}
       />
       <div className="lobby-container">
         <MainLobby />

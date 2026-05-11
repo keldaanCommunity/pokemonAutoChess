@@ -54,7 +54,7 @@ export default function GameOptionsModal(props: {
 
         <TabPanel>
           <label style={{ width: "100%" }}>
-            {t("music_volume")}: {preferences.musicVolume} %
+            {t("jukebox.music_volume")}: {preferences.musicVolume} %
             <input
               type="range"
               min="0"
