@@ -1179,10 +1179,15 @@
 		"EISCUE_NOICE": "冰砌鹅",
 		"DWEBBLE": "石居蟹",
 		"CRUSTLE": "岩殿居蟹",
+		"SKWOVET": "贪心栗鼠",
+		"GREEDENT": "藏饱栗鼠",
 		"QUAXLY": "润水鸭",
     	"QUAXWELL": "涌跃鸭",
     	"QUAQUAVAL": "狂欢浪舞鸭",
-		"KOMALA": "树枕尾熊"
+		"KOMALA": "树枕尾熊",
+		"TAROUNTULA": "团珠蛛",
+		"SPIDOPS": "操陷蛛",
+		"SLITHER_WING": "爬地翅"
 	},
 	"rarity": {
 		"COMMON": "常见",
@@ -1208,6 +1213,7 @@
 		"TRUE": "真实伤害"
 	},
 	"ability": {
+		"DEFAULT": "无招式",
 		"SOFT_BOILED": "生蛋",
 		"PRECIPICE_BLADES": "断崖之剑",
 		"SONG_OF_DESIRE": "渴求之歌",
@@ -1755,9 +1761,13 @@
 		"TWINEEDLE": "双针",
 		"ROCK_WRECKER": "岩石炮",
 		"AQUA_STEP": "流水旋舞",
-		"SNORE": "打鼾"
+		"SNORE": "打鼾",
+		"STUFF_CHEEKS": "大快朵颐",
+		"SILK_TRAP": "线阱",
+		"SKITTER_SMACK": "爬击"
 	},
 	"ability_description": {
+		"DEFAULT": "",
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
 		"PRECIPICE_BLADES": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[100,SP]点SPECIAL。",
 		"SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入CHARM 3秒，并降低其[3,SP]点ATK。",
@@ -2293,7 +2303,7 @@
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
 		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
 		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。",
-		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
+		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并获得PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
@@ -2305,7 +2315,10 @@
 		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。",
 		"ROCK_WRECKER": "对目标发射巨大的岩石，使其陷入FLINCH 2秒，随后对其造成[80,160,SP]点SPECIAL。然后，使用者自身陷入FATIGUE 4秒。",
 		"AQUA_STEP": "以盈盈欲滴的步伐移动至没有宝可梦的一个ADJACENT格子，随后对原先的目标造成[25,50,100,SP]点SPECIAL，并提升使用者[10,15,20,SP]点SPEED。",
-		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,SP]点SPECIAL，并使他们陷入FLINCH 3秒。"
+		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,SP]点SPECIAL，并使他们陷入FLINCH 3秒。",
+		"STUFF_CHEEKS": "若使用者携带至少一枚树果，则立即食用其中一枚，获得SHIELD，数值相当于其应当恢复的HP的[100,SP]%。若没有，则获取并携带一枚随机树果，该树果在战斗结束后可以保留。",
+		"SILK_TRAP": "用丝设置陷阱，获得PROTECT 1.5秒。在此期间，近战攻击使用者的宝可梦会降低[5,10,15,SP]点SPEED，并陷入PARALYSIS [1.5,SP,ND=1]秒。",
+		"SKITTER_SMACK": "从目标背后爬近，对其造成[15,30,60,SP]点SPECIAL，并降低其[20,SP]点AP。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2745,6 +2758,7 @@
 		"BALM_MUSHROOM": "芳香蘑菇",
 		"RICE": "米饭",
 		"MOOMOO_MILK": "哞哞鲜奶",
+		"BERRIES": "树果",
 		"HONEY": "甜甜蜜",
 		"POFFIN": "宝芬",
 		"ROCK_SALT": "岩盐",
@@ -3062,6 +3076,7 @@
 		"HERBA_MYSTICA_SOUR": "仅在下一轮战斗中，获得ELECTRIC_FIELD",
 		"OLIVE_OIL": "仅在下一轮战斗中，提升20%的闪避率。",
 		"MOOMOO_MILK": "永久提升15点最大HP。",
+		"BERRIES": "厨师自身获取一枚随机树果。若其装备区已满，则该树果进入玩家的物品栏。",
 		"POFFIN": "在下一轮战斗开始时，获得100点SHIELD。所有持有的树果作为宝芬的材料被立即食用并生效，其治疗效果改为获得等量SHIELD。",
 		"HONEY": "本轮之内接下来的商店刷新中，所有商店中宝可梦与食用HONEY的宝可梦至少一项共鸣相同的概率均提升5%。",
 		"MUSHROOMS": "一些能在镇上换取GOLD的什锦蘑菇",
