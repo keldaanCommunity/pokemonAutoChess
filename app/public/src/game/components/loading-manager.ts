@@ -153,6 +153,11 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
     "/assets/environment/loading_pokeball.json",
     "/assets/environment/"
   )
+  scene.load.multiatlas(
+    "training_bag",
+    "/assets/environment/training_bag.json",
+    "/assets/environment/"
+  )
 }
 
 export function preloadPortraits(scene: Phaser.Scene, player: Player) {

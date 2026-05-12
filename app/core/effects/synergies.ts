@@ -347,7 +347,7 @@ export const fightingTrainingEffect = new OnBenchedDuringFightEffect(
       )
     })
 
-    if (pillar) {
+    if (pillar || (isOnBench(pokemon) && pokemon.positionX === 0)) {
       pokemon.action = PokemonActionState.TRAINING
     }
   }

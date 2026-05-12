@@ -38,6 +38,7 @@ import {
   Rarity,
   Stat
 } from "../../../types/enum/Game"
+import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { DisplayText } from "../../../types/strings/DisplayText"
@@ -556,14 +557,16 @@ class GameContainer {
       }
     })
 
-    $player.synergies.onChange(() => {
+    $player.synergies.onChange((level, synergy) => {
       if (
         player.id === this.playerIdSpectated &&
         this.gameScene?.board?.mode === BoardMode.PICK
       ) {
-        this.gameScene?.board?.showLightCell()
-        this.gameScene?.board?.renderBerryTrees()
-        this.gameScene?.board?.renderFlowerPots()
+        if (synergy === Synergy.LIGHT) this.gameScene?.board?.showLightCell()
+        if (synergy === Synergy.GRASS) this.gameScene?.board?.renderBerryTrees()
+        if (synergy === Synergy.FLORA) this.gameScene?.board?.renderFlowerPots()
+        if (synergy === Synergy.FIGHTING)
+          this.gameScene?.board?.renderTrainingBag()
       }
     })
 

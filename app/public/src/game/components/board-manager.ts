@@ -94,6 +94,8 @@ export default class BoardManager {
   mulchAmountText: Phaser.GameObjects.Text | null = null
   mulchIcon: Phaser.GameObjects.Image | null = null
   groundHoles: Phaser.GameObjects.Sprite[]
+  trainingBag: Phaser.GameObjects.Sprite | null = null
+  trainingRack: Phaser.GameObjects.Sprite | null = null
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -235,6 +237,7 @@ export default class BoardManager {
       this.renderBerryTrees()
       this.renderFlowerPots()
       this.renderGroundHoles()
+      this.renderTrainingBag()
     }
 
     if (this.mode === BoardMode.PICK) {
@@ -476,6 +479,44 @@ export default class BoardManager {
   hideGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
+  }
+
+  hideTrainingBag() {
+    this.trainingRack?.destroy()
+    this.trainingBag?.destroy()
+    this.trainingRack = null
+    this.trainingBag = null
+  }
+
+  renderTrainingBag() {
+    this.hideTrainingBag()
+    const fightingLevel = this.player.synergies.get(Synergy.FIGHTING) ?? 0
+    if (fightingLevel >= SynergyTriggers[Synergy.FIGHTING][3]) {
+      this.trainingRack = this.scene.add
+        .sprite(605, 775, "training_bag", "rack.png")
+        .setScale(1.5)
+        .setDepth(DEPTH.INANIMATE_OBJECTS)
+      this.trainingBag = this.scene.add
+        .sprite(621, 750, "training_bag", "bag.png")
+        .setScale(1.5)
+        .setOrigin(35 / 48, 19 / 72)
+        .setDepth(DEPTH.INANIMATE_OBJECTS + 0.1)
+    }
+  }
+
+  animateTrainingBag() {
+    if (!this.trainingBag) return
+    this.scene.tweens.add({
+      targets: this.trainingBag,
+      angle: {
+        getStart: () => -10,
+        getEnd: () => 10
+      },
+      ease: "Sine.easeInOut",
+      duration: 200,
+      yoyo: true,
+      repeat: -1
+    })
   }
 
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
@@ -787,6 +828,7 @@ export default class BoardManager {
     this.hideBerryTrees()
     this.hideFlowerPots()
     this.hideGroundHoles()
+    this.hideTrainingBag()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -937,6 +979,12 @@ export default class BoardManager {
             value as IPokemon["action"],
             false
           )
+          if (
+            value === PokemonActionState.TRAINING &&
+            pokemon.positionX === 0
+          ) {
+            this.animateTrainingBag()
+          }
           break
 
         case "hp":

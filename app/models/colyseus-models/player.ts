@@ -395,13 +395,6 @@ export default class Player extends Schema implements IPlayer {
       this.updateFairyWands(previousSynergies, updatedSynergies)
     }
 
-    if (
-      previousSynergies.get(Synergy.FIGHTING) !==
-      updatedSynergies.get(Synergy.FIGHTING)
-    ) {
-      this.updatePillars()
-    }
-
     this.effects.update(this.synergies, this.board)
 
     if (
@@ -672,9 +665,6 @@ export default class Player extends Schema implements IPlayer {
 
   updatePillars() {
     const expectedNbPillarsByRank = [0, 0, 0]
-    if (this.synergies.hasSynergyTriggerOrMore(Synergy.FIGHTING, 4)) {
-      expectedNbPillarsByRank[0] += 1
-    }
     schemaValues(this.board)
       .filter(
         (p) => getPokemonBaseline(p.name) === Pkm.TIMBURR && !isOnBench(p)
