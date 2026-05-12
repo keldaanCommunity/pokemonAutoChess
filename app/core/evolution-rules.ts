@@ -421,7 +421,14 @@ export function carryOverPermanentStats(
     .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
   if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
-    pokemonEvolved.skill = pokemonEvolved.tm
+    if (pokemonEvolved.tm === Ability.SKILL_SWAP) {
+      // keep the ability learnt with skill swap if there is one
+      pokemonEvolved.skill =
+        pokemonsBeforeEvolution.find((p) => p.tm === Ability.SKILL_SWAP)
+          ?.skill ?? Ability.SKILL_SWAP
+    } else {
+      pokemonEvolved.skill = pokemonEvolved.tm
+    }
     pokemonEvolved.maxPP = 100
   }
 }
