@@ -16,7 +16,7 @@ const initialState: IUserAfterState = {
   gameMode: GameMode.CUSTOM_LOBBY
 }
 
-export const afterSlice = createSlice({
+const afterSlice = createSlice({
   name: "after",
   initialState: initialState,
   reducers: {
