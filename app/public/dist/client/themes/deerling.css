@@ -1,0 +1,34 @@
+:root {
+  --color-bg-primary: #40513b;
+  --color-bg-secondary: #628141;
+  --color-bg-tertiary: #012b2a;
+  --color-bg-accent: #bc972f;
+
+  --color-fg-primary: #f2eac5;
+}
+
+.custom-bg {
+  /*  background-image: url("/assets/theme/autumn/custombg.jpg");
+  background-position-x: center;*/
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#videobg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.game-shop.my-container {
+  background-color: rgba(71, 58, 53, 0.75);
+  backdrop-filter: blur(5px);
+}
+
+.auth-page .logo {
+  width: 30%;
+}
