@@ -104,6 +104,9 @@ export function MainSidebar(props: MainSidebarProps) {
       if (key === keybindings.wiki) {
         e.preventDefault()
         setModal((current) => (current === "wiki" ? undefined : "wiki"))
+      } else if (key === keybindings.meta_report) {
+        e.preventDefault()
+        setModal((current) => (current === "meta" ? undefined : "meta"))
       } else if (
         key === keybindings.team_planner &&
         profileLevel >= GADGETS.team_planner.levelRequired

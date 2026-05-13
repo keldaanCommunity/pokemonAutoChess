@@ -85,3 +85,4 @@
 - Added a Twitch stream panel in the main lobby to surface live PAC creators, including stream title, viewers, uptime, language/tags, and direct channel links.
 - Added a new player Elo distribution report tab in Meta Report that shows the player rank distribution chart by Elo ranks.
 - New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
+- Added a key shortcut to open the Meta Report (default M, can be changed in options)

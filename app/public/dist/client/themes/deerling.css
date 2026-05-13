@@ -5,6 +5,7 @@
   --color-bg-accent: #bc972f;
 
   --color-fg-primary: #f2eac5;
+  --color-fg-secondary: #ffef91;
 }
 
 .custom-bg {
@@ -22,6 +23,11 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+.leaderboard .my-box {
+  background-color: rgba(64, 81, 59, 0.5);
+  backdrop-filter: blur(5px);
 }
 
 .game-shop.my-container {
