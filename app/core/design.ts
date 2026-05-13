@@ -152,6 +152,9 @@ export default class Design {
     // flower pots slots
     this.drawGroundRect(5, 11, 5, 4, false)
 
+    // training bag slot
+    this.drawGroundRect(11, 16, 2, 2, false)
+
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND
   }

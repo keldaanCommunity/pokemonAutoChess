@@ -18,7 +18,7 @@
 - Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
 - Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
-- Fighing 8 "Justified" reworked to "Sheer Force": no longer reduce hits taken before throwing, but instead gives a wood pillar. Each round, FIGHTING Pokémon on the bench with a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
+- Fighing 8 "Justified" reworked to "Sheer Force": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
 
 # Changes to Pokemon & Abilities
 
@@ -55,6 +55,7 @@
 
 - New town encounter: Ludicolo
 - Locked status now also prevents forced displacement (like Aquatic tidal wave or Fighting knockback)
+- Storm weather: lighting falls more often and Electric Pokémon are supercharged when hit by lightning
 
 # Events
 
@@ -62,7 +63,7 @@
 
 # UI
 
-- New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 8 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
+- New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 9 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
 - Items on item bench are now sorted by category, and categories are sorted by importance (e.g. special and shiny items first, berries at the end).
 - Added a streak counter in the game UI next to life and money, showing the current win/loss streak.
 - Added elo tab on profile menu with information about elo decay and max elo reached.
@@ -76,6 +77,7 @@
 - Lingering Aroma damage on hit now only applies to attackers at melee range as intended
 - Fix Smeargle losing Sketch forever when copying and using Skill Swap
 - Fix second dish lost when holding big eater belt and evolving
+- Fix losing skill learned with Skill Swap TM when evolving
 
 # Misc
 

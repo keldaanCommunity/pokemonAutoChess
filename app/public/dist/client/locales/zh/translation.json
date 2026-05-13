@@ -3341,7 +3341,7 @@
 		"ZYGARDE": "每个最大深度的坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
 		"GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。",
 		"PILLAR": "建造[1,1,2]根能够阻挡敌方宝可梦的立柱。立柱可以被移动，并会根据此宝可梦的STAR数量而具有对应的HP，DEF和SPE_DEF。",
-		"INANIMATE": "非生物单位无法被复制，下阵或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。",
+		"INANIMATE": "无生命的物体不能被复制或出售。他们无法移动或攻击，并且不受状态影响。",
 		"DRAMPA": "每当有宝可梦被此宝可梦的招式命中时，获得5点AP。",
 		"APPLIN": "啃果虫会根据所吃下的苹果决定进化型——\nSWEET_APPLE：$t(pkm.APPLETUN)\nTART_APPLE：$t(pkm.FLAPPLE)\nSIRUPY_APPLE：$t(pkm.DIPPLIN)",
 		"DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……",

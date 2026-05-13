@@ -12,12 +12,19 @@ export const THEMES = [
   "autumn",
   "redsea",
   "zengarden",
+  "deerling",
   "origin"
 ] as const
 
 export type Theme = (typeof THEMES)[number]
 
-export const VIDEO_BG_THEMES: Theme[] = ["umbra", "autumn", "redsea", "zengarden"]
+export const VIDEO_BG_THEMES: Theme[] = [
+  "umbra",
+  "autumn",
+  "redsea",
+  "zengarden",
+  "deerling"
+]
 
 export const TITLE_BY_THEME = {
   unown: Title.ARCHEOLOGIST,
@@ -25,7 +32,8 @@ export const TITLE_BY_THEME = {
   umbra: Title.DELINQUENT,
   redsea: Title.FISHERMAN,
   origin: Title.MUSEUM_DIRECTOR,
-  zengarden: Title.NATURAL
+  zengarden: Title.NATURAL,
+  deerling: Title.AMATEUR
 } satisfies Partial<Record<Theme, Title>>
 
 export const THEME_BY_TITLE = invertKeysValues(TITLE_BY_THEME)

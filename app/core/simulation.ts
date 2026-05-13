@@ -1445,7 +1445,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (this.weather === Weather.STORM) {
       this.stormLightningTimer -= dt
       if (this.stormLightningTimer <= 0 && !this.finished) {
-        this.stormLightningTimer = randomBetween(3000, 6000)
+        this.stormLightningTimer = randomBetween(2000, 6000)
         // trigger lightning
         const x = randomBetween(0, this.board.columns - 1)
         const y = randomBetween(0, this.board.rows - 1)
@@ -1463,7 +1463,11 @@ export default class Simulation extends Schema implements ISimulation {
               false
             )
           }
-          if (pokemonOnCell.types.has(Synergy.ELECTRIC) === false) {
+          if (pokemonOnCell.types.has(Synergy.ELECTRIC)){
+            pokemonOnCell.status.addElectricField(pokemonOnCell)
+            pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
+            pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
+          } else {
             pokemonOnCell.handleDamage({
               damage: 100,
               board: this.board,
