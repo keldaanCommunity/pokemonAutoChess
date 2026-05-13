@@ -1179,10 +1179,15 @@
 		"EISCUE_NOICE": "冰砌鹅",
 		"DWEBBLE": "石居蟹",
 		"CRUSTLE": "岩殿居蟹",
+		"SKWOVET": "贪心栗鼠",
+		"GREEDENT": "藏饱栗鼠",
 		"QUAXLY": "润水鸭",
     	"QUAXWELL": "涌跃鸭",
     	"QUAQUAVAL": "狂欢浪舞鸭",
-		"KOMALA": "树枕尾熊"
+		"KOMALA": "树枕尾熊",
+		"TAROUNTULA": "团珠蛛",
+		"SPIDOPS": "操陷蛛",
+		"SLITHER_WING": "爬地翅"
 	},
 	"rarity": {
 		"COMMON": "常见",
@@ -1208,6 +1213,7 @@
 		"TRUE": "真实伤害"
 	},
 	"ability": {
+		"DEFAULT": "无招式",
 		"SOFT_BOILED": "生蛋",
 		"PRECIPICE_BLADES": "断崖之剑",
 		"SONG_OF_DESIRE": "渴求之歌",
@@ -1755,9 +1761,13 @@
 		"TWINEEDLE": "双针",
 		"ROCK_WRECKER": "岩石炮",
 		"AQUA_STEP": "流水旋舞",
-		"SNORE": "打鼾"
+		"SNORE": "打鼾",
+		"STUFF_CHEEKS": "大快朵颐",
+		"SILK_TRAP": "线阱",
+		"SKITTER_SMACK": "爬击"
 	},
 	"ability_description": {
+		"DEFAULT": "",
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,SP]点SHIELD。",
 		"PRECIPICE_BLADES": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[100,SP]点SPECIAL。",
 		"SONG_OF_DESIRE": "使敌方后排的两只宝可梦陷入CHARM 3秒，并降低其[3,SP]点ATK。",
@@ -1889,7 +1899,7 @@
 		"METAL_BURST": "对目标造成[30,SP]点TRUE。使用者每通过FIGHTING共鸣格挡一次伤害，此招式造成的伤害提升10%。",
 		"PSYCHIC": "对目标和ADJACENT敌方宝可梦造成[40,80,160,SP]点SPECIAL，并移除他们15点PP。",
 		"PSYBEAM": "对目标身后的所有敌方宝可梦造成[25,50,100,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入CONFUSION 4秒。",
-		"DIVE": "潜入水下，获得[15,30,60]点SHIELD，然后在敌方阵型中间现身，对所有ADJACENT宝可梦造成[10,20,40,SP]点SPECIAL并使他们陷。",
+		"DIVE": "潜入水下，获得[15,30,60]点SHIELD，然后在敌方阵型中间现身，对所有ADJACENT宝可梦造成[10,20,40,SP]点SPECIAL。",
 		"SPIKY_SHIELD": "在接下来的[3,5,10]秒内，近战攻击使用者的宝可梦会陷入WOUND 2秒，并受到SPECIAL，数值相当于使用者[60,80,100,SP]%的DEF。若效果结束前再次释放该招式，则朝周围发射尖刺，对击中的敌方宝可梦造成[30,SP]点SPECIAL。",
 		"FUTURE_SIGHT": "2秒后，对5只敌方宝可梦造成[15,30,60,SP]点SPECIAL。",
 		"FAKE_TEARS": "对所有敌方宝可梦造成[5,10,15,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
@@ -2293,19 +2303,22 @@
 		"HYPER_BEAM": "用1秒集中能量，随后发射一道对一条直线上的敌方宝可梦造成[50,100,150,SP]点SPECIAL的强大射线。使用者陷入FATIGUE 5秒。",
 		"SKILL_SWAP": "复制目标的招式和最大PP，随后立即释放之。被复制的招式在战斗轮次结束后保留，在此宝可梦返回备战区后重置。",
 		"JET_PUNCH": "对目标造成SPECIAL，数值相当于使用者[100,SP]%的SPEED。",
-		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并进入PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
+		"BANEFUL_BUNKER": "强迫所有ADJACENT敌方宝可梦以使用者为目标，并获得PROTECT 2秒。在此期间，近战攻击使用者的宝可梦会受到[10,20,30,SP]点SPECIAL并陷入POISONNED 3秒。",
 		"SHADOW_FORCE": "传送至敌方宝可梦最密集的位置，然后对ADJACENT敌方宝可梦造成[60,SP]点SPECIAL，并移除目标的PROTECT和$t(ability.REFLECT)等防护类状态。变形为起源形态。",
 		"SHADOW_CLAW": "劈开使用者前方的敌方宝可梦，对他们造成[20,40,60,SP]点SPECIAL，使用者自身恢复造成伤害的25%。若只击中了一只敌方宝可梦，改为造成[60,100,140,SP]点SPECIAL。",
 		"FEATHER_DANCE": "飞至最远我方宝可梦的位置，沿途撒出[8,10,12]片羽毛。每片羽毛随机为我方宝可梦提升一项数值，或降低敌方宝可梦的对应数值：[20,SP]点HP，[4,SP]点ATK，[4,SP]点DEF，[4,SP]点SPE_DEF，[10,SP]点SPEED或[10,SP]点LUCK。",
 		"GLACIAL_LANCE": "突进至我方后排的安全位置，随后向最远的目标投掷一支冰矛。被击中的第一只敌方宝可梦受到SPECIAL，数值相当于使用者[300,SP]%的ATK，ADJACENT敌方宝可梦受到一半的伤害。",
-		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战席上将出现一只，其形态每轮均有不同。",
+		"ORDER_UP": "对目标造成[100,SP]点SPECIAL。若口中有米立龙，再次提升其被动能力对应的属性值。若场上没有米立龙，备战区上将出现一只，其形态每轮均有不同。",
 		"ICE_SPINNER": "脚上覆盖薄冰，旋转着撞击ADJACENT敌方宝可梦，对他们造成[15,30,60,SP]点SPECIAL并将它们击退。清除ADJACENT格子上的BOARD_EFFECT。",
 		"CEASELESS_EDGE": "攻击使用者前方的3只敌方宝可梦，造成[20,40,80,SP]点SPECIAL，并在他们的脚下留下菱刺。该招式可以暴击。BOARD_EFFECT：菱刺对走到此处的非FLYING、非STEEL宝可梦每秒造成10点TRUE，并使其陷入ARMOR_BREAK。",
 		"MOUNTAIN_GALE": "将[1,3]块冰山般巨大的冰块随机砸向目标或ADJACENT敌方宝可梦，每块冰块使其陷入FLINCH 3秒，随后对其造成[40,SP]点SPECIAL。若使用者背上有冰宝，这些冰宝也会一起砸向敌方宝可梦并造成等量伤害。",
 		"TWINEEDLE": "对目标造成两次[25,50,80,SP]点SPECIAL。第一次伤害可以暴击，第二次有[40,LK]%的概率使目标陷入POISONNED 4秒。",
 		"ROCK_WRECKER": "对目标发射巨大的岩石，使其陷入FLINCH 2秒，随后对其造成[80,160,SP]点SPECIAL。然后，使用者自身陷入FATIGUE 4秒。",
 		"AQUA_STEP": "以盈盈欲滴的步伐移动至没有宝可梦的一个ADJACENT格子，随后对原先的目标造成[25,50,100,SP]点SPECIAL，并提升使用者[10,15,20,SP]点SPEED。",
-		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,SP]点SPECIAL，并使他们陷入FLINCH 3秒。"
+		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,SP]点SPECIAL，并使他们陷入FLINCH 3秒。",
+		"STUFF_CHEEKS": "若使用者携带至少一枚树果，则立即食用其中一枚，获得SHIELD，数值相当于其应当恢复的HP的[100,SP]%。若没有，则获取并携带一枚随机树果，该树果在战斗结束后可以保留。",
+		"SILK_TRAP": "用丝设置陷阱，获得PROTECT 1.5秒。在此期间，近战攻击使用者的宝可梦会降低[5,10,15,SP]点SPEED，并陷入PARALYSIS [1.5,SP,ND=1]秒。",
+		"SKITTER_SMACK": "从目标背后爬近，对其造成[15,30,60,SP]点SPECIAL，并降低其[20,SP]点AP。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2329,6 +2342,7 @@
 		"GUTS": "毅力",
 		"STURDY": "结实",
 		"DEFIANT": "不服输",
+		"SHEER_FORCE": "强行",
 		"PRECOGNITION": "预知",
 		"AURA": "气场",
 		"TRANSCENDENCE": "超越",
@@ -2445,6 +2459,7 @@
 		"GUTS": "格挡减免3点伤害。",
 		"STURDY": "格挡减免6点伤害。",
 		"DEFIANT": "格挡减免9点伤害。",
+		"SHEER_FORCE": "格挡减免12点伤害。获得一个训练沙袋。备战区上的位于沙袋或立柱右侧的FIGHTING宝可梦会进行训练，每轮永久提升4点ATK和10%的基础最大HP。",
 		"PRECOGNITION": "提升50点AP。每刷新5次商店必然刷出一只未知图腾。",
 		"AURA": "提升100点AP。每刷新3次商店必然刷出一只未知图腾。",
 		"TRANSCENDENCE": "提升150点AP。每场战斗结束后以及每刷新10次商店后，进入一次未知图腾商店并获得1次免费刷新次数。",
@@ -2745,6 +2760,7 @@
 		"BALM_MUSHROOM": "芳香蘑菇",
 		"RICE": "米饭",
 		"MOOMOO_MILK": "哞哞鲜奶",
+		"BERRIES": "树果",
 		"HONEY": "甜甜蜜",
 		"POFFIN": "宝芬",
 		"ROCK_SALT": "岩盐",
@@ -2857,7 +2873,14 @@
 		"WARP_WAND": "瞬移魔杖",
 		"SWITCHER_WAND": "换位魔杖",
 		"WHIRLWIND_WAND": "吹飞魔杖",
-		"TUNNEL_WAND": "隧道魔杖"
+		"TUNNEL_WAND": "隧道魔杖",
+		"AQUA_MONICA": "水之口琴",
+		"FIERY_DRUM": "烈焰皮鼓",
+		"GRASS_CORNET": "蔓草喇叭",
+		"ICY_FLUTE": "冷冰笛子",
+		"ROCK_HORN": "岩石号角",
+		"SKY_MELODICA": "飞空笛琴",
+		"TERRA_CYMBAL": "大地铙钹"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -3062,6 +3085,7 @@
 		"HERBA_MYSTICA_SOUR": "仅在下一轮战斗中，获得ELECTRIC_FIELD",
 		"OLIVE_OIL": "仅在下一轮战斗中，提升20%的闪避率。",
 		"MOOMOO_MILK": "永久提升15点最大HP。",
+		"BERRIES": "厨师自身获取一枚随机树果。若其装备区已满，则该树果进入玩家的物品栏。",
 		"POFFIN": "在下一轮战斗开始时，获得100点SHIELD。所有持有的树果作为宝芬的材料被立即食用并生效，其治疗效果改为获得等量SHIELD。",
 		"HONEY": "本轮之内接下来的商店刷新中，所有商店中宝可梦与食用HONEY的宝可梦至少一项共鸣相同的概率均提升5%。",
 		"MUSHROOMS": "一些能在镇上换取GOLD的什锦蘑菇",
@@ -3179,7 +3203,14 @@
 		"WARP_WAND": "FAIRY的攻击额外造成20%的SPECIAL，并有[5,LK]%的概率将目标传送至远处的一个格子。",
 		"SWITCHER_WAND": "FAIRY的攻击额外造成20%的SPECIAL，并有[5,LK]%的概率与最远的敌方宝可梦交换位置。",
 		"WHIRLWIND_WAND": "FAIRY的攻击额外造成20%的SPECIAL，并有[5,LK]%的概率产生旋风，吹飞路径上的所有宝可梦。",
-		"TUNNEL_WAND": "FAIRY的攻击额外造成20%的SPECIAL。魔杖造成的SPECIAL有[5,LK]%的概率穿透目标，对其身后的一条直线上的所有敌方宝可梦造成伤害。"
+		"TUNNEL_WAND": "FAIRY的攻击额外造成20%的SPECIAL。魔杖造成的SPECIAL有[5,LK]%的概率穿透目标，对其身后的一条直线上的所有敌方宝可梦造成伤害。",
+		"AQUA_MONICA": "商店中刷出WATER宝可梦的概率提升5%。",
+		"FIERY_DRUM": "商店中刷出FIRE宝可梦的概率提升5%。",
+		"GRASS_CORNET": "商店中刷出GRASS宝可梦的概率提升5%。",
+		"ICY_FLUTE": "商店中刷出ICE宝可梦的概率提升5%。",
+		"ROCK_HORN": "商店中刷出ROCK宝可梦的概率提升5%。",
+		"SKY_MELODICA": "商店中刷出FLYING宝可梦的概率提升5%。",
+		"TERRA_CYMBAL": "商店中刷出GROUND宝可梦的概率提升5%。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3310,7 +3341,7 @@
 		"ZYGARDE": "每个最大深度的坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
 		"GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。",
 		"PILLAR": "建造[1,1,2]根能够阻挡敌方宝可梦的立柱。立柱可以被移动，并会根据此宝可梦的STAR数量而具有对应的HP，DEF和SPE_DEF。",
-		"INANIMATE": "无生命的物体不能被复制或出售。他们无法移动或攻击，并且不受状态影响。",
+		"INANIMATE": "非生物单位无法被复制或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。",
 		"DRAMPA": "每当有宝可梦被此宝可梦的招式命中时，获得5点AP。",
 		"APPLIN": "啃果虫会根据所吃下的苹果决定进化型——\nSWEET_APPLE：$t(pkm.APPLETUN)\nTART_APPLE：$t(pkm.FLAPPLE)\nSIRUPY_APPLE：$t(pkm.DIPPLIN)",
 		"DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……",
@@ -3338,10 +3369,10 @@
 		"STANTLER": "在第20轮更换地区后进化为$t(pkm.WYRDEER)。",
 		"PIKACHU_SURFER": "$t(pkm.PIKACHU_SURFER)的能力随着海浪增强而提升，每级激活的AQUATIC共鸣使之获得50点SHIELD和3点ATK。此外，海浪逼近时，$t(pkm.PIKACHU_SURFER)会回复PP。",
 		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
-		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战席停留一轮以进行修剪，重置DEF和SPEED修正。若修剪前修正层数达到了上限，还会获得一条SILK_SCARF。",
+		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战区停留一轮以进行修剪，重置DEF和SPEED修正。若修剪前修正层数达到了上限，还会获得一条SILK_SCARF。",
 		"ACCELERATION": "加速：每移动1格，提升15点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
-		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为3 GOLD，至多拥有6只。每轮战斗开始时，备战席上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
+		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为3 GOLD，至多拥有6只。每轮战斗开始时，备战区上的所有跟班会加入头头的战斗，每只跟班为头头提供30点SHIELD，1点ATK和1点DEF。",
 		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的FLORA花朵有关……",
 		"DUNSPARCE": "土龙弟弟会在我方半场至少挖出了10个最大深度的坑洞后进化。",
 		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。",
@@ -3366,7 +3397,7 @@
 		"GALE_WINGS": "触发飞离时，沿途洒下烟灰。BOARD_EFFECT：烟灰对位于此位置的非FLYING，非FIRE宝可梦每秒造成10点SPECIAL，并使之陷入BURN。",
 		"FINIZEN": "在5只我方宝可梦（不计召唤物）倒下后或此宝可梦是唯一存活的我方宝可梦时，变形为全能形态。变形时恢复所有HP。",
 		"COMMANDER": "米立龙无法携带道具。对战开始时，一只携带道具未满的ADJACENT吃吼霸会将其吞入口中。米立龙会根据形态提供属性值——\n上弓姿势：8点ATK\n下垂姿势：8点DEF\n平挺姿势：25点SPEED",
-		"AVALUGG": "战斗开始时，备战席上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。",
+		"AVALUGG": "战斗开始时，备战区上的至多4只$t(pkm.BERGMITE)会爬到此宝可梦背上参与战斗。",
 		"EISCUE_NOICE": "在SNOW中，开始战斗时变为结冻头，并获得100点SHIELD。陷入或使其他宝可梦陷入FREEZE时，变为结冻头并获得50点SHIELD。",
 		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。",
 		"COMATOSE": "始终处于SLEEP。免疫BURN，POISONNED，FREEZE或是PARALYSIS。SOUND宝可梦的叫声无法唤醒此宝可梦，反而会使之陷入更深的梦境，提升5点AP。",
@@ -3929,8 +3960,9 @@
 	"shiny_hunter": "显示闪光",
 	"pokedex": "图鉴",
 	"alt_forms": "其他形态",
-	"show_alt_forms": "显示不同形态",
+	"unlocked": "已解锁",	
 	"show_evolutions": "显示进化型",
+	"show_alt_forms": "显示不同形态",
 	"show_only_available_picks": "隐藏不可用的附加或地区限定宝可梦",
 	"close": "关闭",
 	"additional_pokemon_hint": "每个玩家所选的附加宝可梦在本局中能被所有玩家在商店中刷出。",
@@ -4006,7 +4038,9 @@
 		"lilac": "丁香",
 		"umbra": "暗影",
 		"unown": "黑色未知图腾",
+		"zengarden": "禅境花园",
 		"redsea": "红色海洋",
+		"deerling": "四季鹿",
 		"origin": "起源"
 	},
 	"jukebox": {
@@ -4054,6 +4088,7 @@
 	"place_up_to": "在你的出战区放置不超过",
 	"pokemons_on_your_board": "只宝可梦。",
 	"team_size_hint": "升级以增加出战队伍容量",
+	"history": "历史记录",
 	"game_history": "游戏记录",
 	"chat_history": "聊天记录",
 	"load_more": "加载更多",
@@ -4500,7 +4535,8 @@
 		"CINCCINO": "奇诺栗鼠提供优雅的SILK_SCARF。",
 		"MAGNEZONE": "自爆磁怪正在寻找一名通缉犯，并会为抓获者支付报酬。",
 		"KINGAMBIT": "仆刀将军将一枚LEADERS_CREST交给了第一名的玩家。在战斗中击败他就能获得额外的GOLD！",
-		"LAPRAS": "拉普拉斯能将你带到一个不同的地区。"
+		"LAPRAS": "拉普拉斯能将你带到一个不同的地区。",
+		"LUDICOLO": "乐天河童正在欢庆节日，他提供乐器与大家同乐。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
@@ -4698,6 +4734,7 @@
 		}
 	},
 	"errors": {
+		"title": "错误",
 		"USER_INACTIVE": "由于你长时间挂机，系统已将你踢出来节约服务器资源。",
 		"USER_KICKED": "你已被踢出此房间。",
 		"USER_BANNED": "你的账号已被封禁。",
