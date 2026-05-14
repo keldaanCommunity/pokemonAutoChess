@@ -9213,15 +9213,31 @@ export class DreamEaterStrategy extends AbilityStrategy {
       )
       pokemon.handleHeal(takenDamage, pokemon, 0, false)
     } else {
-      const duration = Math.round(
-        ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
+      const targetThatCanSleep = [
+        target,
+        ...(board.cells.filter(
+          (e) => e && e.team !== pokemon.team
+        ) as PokemonEntity[])
+      ].find(
+        (e) =>
+          !e.status.runeProtect &&
+          !e.status.skydiving &&
+          !e.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+          e.status.ccCooldown <= 0
       )
-      target.status.triggerSleep(duration, target)
-      pokemon.broadcastAbility({
-        targetX: target.positionX,
-        targetY: target.positionY
-      })
-      pokemon.pp = pokemon.maxPP
+
+      if (targetThatCanSleep) {
+        const duration = Math.round(
+          ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) *
+            (1 + pokemon.ap / 100)
+        )
+        target.status.triggerSleep(duration, target)
+        pokemon.broadcastAbility({
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        pokemon.pp = pokemon.maxPP
+      }
     }
   }
 }
