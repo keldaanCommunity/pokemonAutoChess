@@ -3105,7 +3105,7 @@
 		"BEAST_BOOST_ATK": "Ad ogni KO fatto, il Pokèmon guadagna 5 di ATK",
 		"BEAST_BOOST_AP": "Ad ogni KO fatto, il Pokèmon guadagna 10 AP",
 		"CHINGLING": "$t(pkm.CHINGLING) si evolve in $t(pkm.CHIMECHO) dopo che ha assistito all'utilizzo di 30 abilità da parte del tuo team",
-		"CHIMECHO": "Risuona ai diversi rumori degli alleati adiacenti, raddoppiando i loro versi finchè Chimecho è vivo",
+		"CHIMECHO": "Risuona ai diversi rumori degli alleati adiacenti",
 		"SURGE_SURFER": "Ottieni +30 di SPEED sotto ELECTRIC_FIELD o PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "L'abilità di questo Pokèmon emette versi che contano per 3 SOUND invece che 1.",
 		"CLEAR_WING": "Ottieni il 1 in più di SPEED ogni secondo",

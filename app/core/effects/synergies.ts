@@ -23,6 +23,7 @@ import { min } from "../../utils/number"
 import { effectInLine } from "../../utils/orientation"
 import { chance } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
+import { Board } from "../board"
 import {
   FlowerMonByPot,
   FlowerPot,
@@ -171,7 +172,7 @@ export class SoundCryEffect extends OnAbilityCastEffect {
     }
   }
 
-  apply(pokemon, board, target, crit) {
+  apply(pokemon: PokemonEntity, board: Board) {
     pokemon.broadcastAbility({ skill: Ability.ECHO })
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
     const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
@@ -179,10 +180,15 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 
     const chimecho = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .some((cell) => cell.value?.passive === Passive.CHIMECHO)
+      .map((cell) => cell.value)
+      .filter<PokemonEntity>((value): value is PokemonEntity => !!value)
+      .find((entity) => entity.passive === Passive.CHIMECHO)
 
-    const scale =
-      (chimecho ? 2 : 1) * (pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1)
+    if (chimecho) {
+      chimecho.addPP(3, pokemon, 0, false)
+    }
+
+    const scale = pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1
 
     board.cells.forEach((ally) => {
       if (ally?.team === pokemon.team) {

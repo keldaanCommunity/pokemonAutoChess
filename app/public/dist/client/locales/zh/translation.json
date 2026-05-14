@@ -3267,7 +3267,6 @@
 		"BEAST_BOOST_ATK": "击倒敌方宝可梦时，提升此宝可梦5点ATK。",
 		"BEAST_BOOST_AP": "击倒敌方宝可梦时，提升此宝可梦10点AP。",
 		"CHINGLING": "在$t(pkm.CHINGLING)出战期间，我方全队总计释放30次招式后，其会进化为$t(pkm.CHIMECHO)。",
-		"CHIMECHO": "只要风铃铃仍然存活，它就能和ADJACENT我方宝可梦的叫声共鸣，使其效果翻倍。",
 		"SURGE_SURFER": "电泳冲浪者在处于ELECTRIC_FIELD或PSYCHIC_FIELD下时提升30%的SPEED。",
 		"MEGA_LAUNCHER": "此宝可梦发出SOUND共鸣的叫声时，连续发出3次。",
 		"CLEAR_WING": "每秒提升1点SPEED。",

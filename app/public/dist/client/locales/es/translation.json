@@ -3011,7 +3011,7 @@
 		"BEAST_BOOST_ATK": "Al derrotar a un enemigo, el pokémon gana 5 ATK.",
 		"BEAST_BOOST_AP": "Al derrotar a un enemigo, el pokémon gana 10 de AP",
 		"CHINGLING": "$t(pkm.CHINGLING) evolucionará a $t(pkm.CHIMECO) cuando se hayan lanzado 30 habilidades mientras con $t(pkm.CHINGLING) en el tablero",
-		"CHIMECHO": "Resuena con los sonidos de los aliados ADJACENT, lo que duplica su grito mientras $t(pkm.CHIMECHO) está vivo.",
+		"CHIMECHO": "Resuena con los sonidos de los aliados ADJACENT.",
 		"SURGE_SURFER": "El surfista gana +30 SPEED cuando está en ELECTRIC_FIELD o PSYCHIC_FIELD",
 		"MEGA_LAUNCHER": "Esta habilidad pokémon emite 3 gritos SOUND en lugar de uno.",
 		"CLEAR_WING": "Obtiene una bonificación de 1 SPEED cada segundo",

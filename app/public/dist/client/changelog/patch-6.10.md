@@ -45,6 +45,10 @@
 - Fuecoco PP: 60/60/60 → 100/80/60
 - Revert Popplio buff from 5.7 ; PP 70 → 80
 
+> Chimecho was performing badly at low elo and very well at high elo. The passive is the main culprit, giving incredible value when played in sound 6 and fully surrounded with sound allies. These specific conditions were not often met at low elo, but highly optimized at high elo, creating a huge power gap for this Pokémon. We change the range and passive to both reduce its power ceiling and make it more intuitive and less conditional.
+
+- Nerf Chimecho ; range 3 → 2 ; passive reworked: Resonates to the sounds of adjacent allies, which gives 3 PP to Chimecho when they cast their ability.
+
 # Changes to Items
 
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.
