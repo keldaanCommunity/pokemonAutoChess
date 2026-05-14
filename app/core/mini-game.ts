@@ -266,6 +266,36 @@ export class MiniGame {
     const { players, stageLevel } = state
     this.timeElapsed = 0
     this.rotationDirection = 1
+
+    if (stageLevel in TownEncountersByStage) {
+      let encounter = randomWeighted(
+        TownEncountersByStage[stageLevel],
+        state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL ? undefined : 1
+      ) as TownEncounter | null
+      if (
+        encounter != null &&
+        state.townEncounters.has(encounter) &&
+        state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
+      ) {
+        encounter = null // prevent getting the same encounter twice in a game
+      }
+      state.townEncounter = encounter ?? null
+      if (encounter) {
+        state.townEncounters.add(encounter)
+        // add a fixed blocked circle collision body around encounter
+        const body = Bodies.circle(this.centerX, this.centerY, 20, {
+          isStatic: true,
+          collisionFilter: {
+            mask: 1
+          }
+        })
+        Composite.add(this.engine.world, body)
+        this.bodies.set("encounter", body)
+      }
+    } else {
+      state.townEncounter = null
+    }
+
     this.alivePlayers = new Array<Player>()
     players.forEach((p) => {
       if (p.alive) {
@@ -280,14 +310,15 @@ export class MiniGame {
         this.centerY +
         Math.sin((2 * Math.PI * i) / this.alivePlayers.length) * 250
       let retentionDelay =
-        5000 + (this.alivePlayers.length - player.rank) * 2000
+        (state.townEncounter ? 10000 : 5000) +
+        (this.alivePlayers.length - player.rank) * 2000
 
       if (stageLevel === 0) {
         retentionDelay = 12000
       } else if (PortalCarouselStages.includes(stageLevel)) {
         retentionDelay = 8000
       } else if (stageLevel < 5) {
-        retentionDelay = 5000
+        retentionDelay = state.townEncounter ? 10000 : 5000
       }
 
       if (player.isBot) {
@@ -320,35 +351,6 @@ export class MiniGame {
       this.bodies.set(avatar.id, body)
       Composite.add(this.engine.world, body)
     })
-
-    if (stageLevel in TownEncountersByStage) {
-      let encounter = randomWeighted(
-        TownEncountersByStage[stageLevel],
-        state.specialGameRule === SpecialGameRule.TOWN_FESTIVAL ? undefined : 1
-      ) as TownEncounter | null
-      if (
-        encounter != null &&
-        state.townEncounters.has(encounter) &&
-        state.specialGameRule !== SpecialGameRule.TOWN_FESTIVAL
-      ) {
-        encounter = null // prevent getting the same encounter twice in a game
-      }
-      state.townEncounter = encounter ?? null
-      if (encounter) {
-        state.townEncounters.add(encounter)
-        // add a fixed blocked circle collision body around encounter
-        const body = Bodies.circle(this.centerX, this.centerY, 20, {
-          isStatic: true,
-          collisionFilter: {
-            mask: 1
-          }
-        })
-        Composite.add(this.engine.world, body)
-        this.bodies.set("encounter", body)
-      }
-    } else {
-      state.townEncounter = null
-    }
 
     if (PortalCarouselStages.includes(stageLevel)) {
       this.initializePortalCarousel(stageLevel, room)
@@ -581,7 +583,7 @@ export class MiniGame {
       )
     }
 
-    if(encounter === TownEncounters.LUDICOLO) {
+    if (encounter === TownEncounters.LUDICOLO) {
       items.push(
         Item.AQUA_MONICA,
         Item.FIERY_DRUM,

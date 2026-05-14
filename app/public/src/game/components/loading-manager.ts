@@ -43,6 +43,7 @@ export default class LoadingManager {
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
     preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
     scene.load.image("sand", "/assets/environment/sand.png")

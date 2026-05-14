@@ -63,6 +63,7 @@
 - New town encounter: Ludicolo
 - Locked status now also prevents forced displacement (like Aquatic tidal wave or Fighting knockback)
 - Storm weather: lighting falls more often and Electric Pokémon are supercharged when hit by lightning
+- Item carousel phases in town have 5 seconds increased duration when there is a town encounter, to give more time to read and react
 
 # Events
 
