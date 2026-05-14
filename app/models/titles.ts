@@ -33,7 +33,7 @@ export function updatePlayerTitlesAfterFight(
         case EffectEnum.POWER_SURGE:
           player.titles.add(Title.ELECTRICIAN)
           break
-        case EffectEnum.SHEER_FORCE:
+        case EffectEnum.COACHING:
           player.titles.add(Title.BLACK_BELT)
           break
         case EffectEnum.TRANSCENDENCE:

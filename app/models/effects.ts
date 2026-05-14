@@ -83,7 +83,7 @@ export const SynergyEffects = {
     EffectEnum.GUTS,
     EffectEnum.STURDY,
     EffectEnum.DEFIANT,
-    EffectEnum.SHEER_FORCE
+    EffectEnum.COACHING
   ],
   [Synergy.PSYCHIC]: [
     EffectEnum.PRECOGNITION,

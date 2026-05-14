@@ -550,9 +550,9 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.GUTS) ||
           pokemon.effects.has(EffectEnum.STURDY) ||
           pokemon.effects.has(EffectEnum.DEFIANT) ||
-          pokemon.effects.has(EffectEnum.SHEER_FORCE)
+          pokemon.effects.has(EffectEnum.COACHING)
         ) {
-          const damageBlocked = pokemon.effects.has(EffectEnum.SHEER_FORCE)
+          const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
             ? 12
             : pokemon.effects.has(EffectEnum.DEFIANT)
               ? 9

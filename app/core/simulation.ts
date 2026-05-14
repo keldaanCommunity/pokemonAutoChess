@@ -156,7 +156,7 @@ export default class Simulation extends Schema implements ISimulation {
           if (isOnBench(pokemon)) {
             // OnBenchedDuringFightEffect should be applied here
             if (
-              teamEffects.has(EffectEnum.SHEER_FORCE) &&
+              teamEffects.has(EffectEnum.COACHING) &&
               pokemon.types.has(Synergy.FIGHTING)
             ) {
               fightingTrainingEffect.apply({
@@ -946,7 +946,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.GUTS:
       case EffectEnum.STURDY:
       case EffectEnum.DEFIANT:
-      case EffectEnum.SHEER_FORCE:
+      case EffectEnum.COACHING:
         if (types.has(Synergy.FIGHTING)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new FightingKnockbackEffect(effect))
