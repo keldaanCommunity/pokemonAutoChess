@@ -20,10 +20,10 @@ export const TownEncountersByStage: {
     [Pkm.DUSKULL]: 1 / 20,
     [Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.CELEBI]: 1 / 40,
     [Pkm.MAKUHITA]: 1 / 20,
     [Pkm.MAGNEZONE]: 1 / 20,
-    [Pkm.LAPRAS]: 1 / 20
+    [Pkm.LAPRAS]: 1 / 20,
+    [Pkm.LUDICOLO]: 1 / 20
   },
   12: {
     [Pkm.KANGASKHAN]: 1 / 20,

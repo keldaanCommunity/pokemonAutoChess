@@ -1,6 +1,15 @@
 # New Pokemons:
 
+- Quaxly
+- Quaxwell
+- Quaquaval
 - Hisui Avalugg
+- Komala
+- Tarountula
+- Spidops
+- Slither Wing
+- Skwovet
+- Greedent
 
 # Changes to Synergies
 
@@ -8,16 +17,14 @@
 
 - Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
+- Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
+- Fighing 8 "Justified" reworked to "Sheer Force": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
 
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
-- Changed Chatot. Range 3 → 2. Chatter now hits in a 3 cell radius around Chatot. Damage 20 → 30, chance to inflict confusion 40 → 50%.
-- Teleport (Abra) now cannot be casted again if no attack has been made since the last cast.
-- Increased base cooldown of Rage (TM): 200ms → 1000ms
-- Reduced base cooldown of Bulk Up: 1000ms → 300ms
-- Nerf Chingling line: Def: 7/10 → 5/8, Spe def: 8/12 → 6/9
+
 
 > Required preemptive nerf due to some interactions with wands that love high speed backline attackers
 
@@ -26,34 +33,63 @@
 > Trying to tone down the grass/flora composition by making most flower pots Pokémon not benefitting from the grass healing. We hope it will make you consider new Flora comps where Grass is no longer mandatory.
 
 - Hoppip line: remove Grass type ; Attack: 4/8/12 → 5/10/15
-- Bellsprout: remove Poison type
-- Chikorita: Flora/Grass → Flora/Fairy
+- Chikorita: Flora/Grass → Flora/Grass/Fairy ; PP 90 → 100
 - Oddish: remove Grass type; HP 80/150/230 → 80/150/250
 - Bellossom: remove Grass type ; HP: 250 → 300
 
+- Bagon line is now regional in Dragon/Monster regions
+- Deino line is no longer regional
+
+- Dive (Wailmer, Lapras) no longer inflicts Freeze
+- Lapras PP: 120 → 110
+- Fuecoco PP: 60/60/60 → 100/80/60
+- Revert Popplio buff from 5.7 ; PP 70 → 80
+
+> Chimecho was performing badly at low elo and very well at high elo. The passive is the main culprit, giving incredible value when played in sound 6 and fully surrounded with sound allies. These specific conditions were not often met at low elo, but highly optimized at high elo, creating a huge power gap for this Pokémon. We change the range and passive to both reduce its power ceiling and make it more intuitive and less conditional.
+
+- Nerf Chimecho ; range 3 → 2 ; passive reworked: Resonates to the sounds of adjacent allies, which gives 3 PP to Chimecho when they cast their ability.
+
+- Ralts line: PP 95 → 100 ; buff Future Sight: now deals 20% of damage to adjacent targets as well. New visual animation.
+- New visual animation for Doom Desire
 
 # Changes to Items
 
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.
+- Buff Berserk Gene: Confusion duration 3 → 1 second
+- Revert MACH_RIBBON nerf from 6.9: 15 → 20 SPEED every 3 seconds
 
 # Gameplay
+
+- New town encounter: Ludicolo
+- Locked status now also prevents forced displacement (like Aquatic tidal wave or Fighting knockback)
+- Storm weather: lighting falls more often and Electric Pokémon are supercharged when hit by lightning
+
+# Events
 
 - Expeditions mission selection has been tweaked based on player feedback
 
 # UI
 
-- New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 8 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
+- New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 9 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.
 - Items on item bench are now sorted by category, and categories are sorted by importance (e.g. special and shiny items first, berries at the end).
+- Added a streak counter in the game UI next to life and money, showing the current win/loss streak.
 - Added elo tab on profile menu with information about elo decay and max elo reached.
-- Added pokemon auto chess streams to the main lobby
-- Sprite scaling based on max HP now decreases quadratically instead of linearly, to avoid huge sprites at high HP values.
+- Added Pokemon Auto Chess Twitch streams to the main lobby
+- Pokemon sprites size scaling based on max HP now decreases quadratically instead of linearly, to avoid sprites being too big at high HP values.
 - Added Game Activity tab in Meta Report showing game count trends over the last 30 days.
-- New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
+
 
 # Bugfix
+
+- Lingering Aroma damage on hit now only applies to attackers at melee range as intended
+- Fix Smeargle losing Sketch forever when copying and using Skill Swap
+- Fix second dish lost when holding big eater belt and evolving
+- Fix losing skill learned with Skill Swap TM when evolving
 
 # Misc
 
 - Added Twitch account verification and linking in Profile > Account, with secure OAuth flow.
 - Added a Twitch stream panel in the main lobby to surface live PAC creators, including stream title, viewers, uptime, language/tags, and direct channel links.
-- Added a new Player Report tab in Meta Report with a player rank distribution chart by Elo buckets.
+- Added a new player Elo distribution report tab in Meta Report that shows the player rank distribution chart by Elo ranks.
+- New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
+- Added a key shortcut to open the Meta Report (default M, can be changed in options)

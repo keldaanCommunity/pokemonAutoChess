@@ -50,7 +50,7 @@ export default function WikiData() {
             <th>{t("wiki.data.xp")}</th>
             {rarities.map((r, i) => (
               <th style={{ color: RarityColor[rarities[i]] }}>
-                {t("rarity." + r)}
+                {t(`rarity.${r}`)}
               </th>
             ))}
           </tr>
@@ -77,7 +77,7 @@ export default function WikiData() {
           <tr>
             {rarities.map((r, i) => (
               <th style={{ color: RarityColor[rarities[i]] }} colSpan={2}>
-                {t("rarity." + r)}
+                {t(`rarity.${r}`)}
               </th>
             ))}
           </tr>
@@ -141,7 +141,7 @@ export default function WikiData() {
             <th></th>
             {rarities_with_special.map((r, i) => (
               <th style={{ color: RarityColor[rarities_with_special[i]] }}>
-                {t("rarity." + r)}
+                {t(`rarity.${r}`)}
               </th>
             ))}
           </tr>
@@ -149,7 +149,7 @@ export default function WikiData() {
         <tbody>
           {[...FishingRods].reverse().map((rod, i) => (
             <tr>
-              <td>{t("item." + rod)}</td>
+              <td>{t(`item.${rod}`)}</td>
               {rarities_with_special.map((r, i) => (
                 <td style={{ color: RarityColor[rarities_with_special[i]] }}>
                   {percentage.format(FishRarityProbability[rod][r] ?? 0)}
@@ -199,7 +199,7 @@ export default function WikiData() {
           <tr>
             {rarities_all.map((r, i) => (
               <th style={{ color: RarityColor[rarities_all[i]] }}>
-                {t("rarity." + r)}
+                {t(`rarity.${r}`)}
               </th>
             ))}
           </tr>

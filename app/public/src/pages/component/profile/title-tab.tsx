@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { THEME_BY_TITLE, TITLES_UNLOCKING_THEMES } from "../../../../../config"
+import {
+  THEME_BY_TITLE,
+  TITLES_UNLOCKING_THEMES,
+  TitleUnlockingTheme
+} from "../../../../../config"
 import { Title } from "../../../../../types"
 import { isIn } from "../../../../../utils/array"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -84,7 +88,7 @@ export function TitleTab() {
                 <p>
                   {addIconsToDescription(t(`title_description.${title.name}`))}
                 </p>
-                {TITLES_UNLOCKING_THEMES.includes(title.name) && (
+                {isIn(TITLES_UNLOCKING_THEMES, title.name) && (
                   <p>
                     <img
                       src={`/assets/ui/palette.svg`}
@@ -92,7 +96,9 @@ export function TitleTab() {
                       width="24"
                     />{" "}
                     {t("profile.progress.unlocks_theme", {
-                      theme: t(`theme.${THEME_BY_TITLE[title.name as Title]}`)
+                      theme: t(
+                        `theme.${THEME_BY_TITLE[title.name as TitleUnlockingTheme]}`
+                      )
                     })}
                   </p>
                 )}

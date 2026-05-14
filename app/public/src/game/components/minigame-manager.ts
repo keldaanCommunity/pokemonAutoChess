@@ -1,5 +1,6 @@
 import { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
+import Phaser from "phaser"
 import { TownEncounterSellPrice } from "../../../../config"
 import GameState from "../../../../rooms/states/game-state"
 import {
@@ -18,6 +19,7 @@ import {
   TownEncounters
 } from "../../../../types/enum/TownEncounter"
 import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
+import { NpcDialog } from "../../../../types/strings/NpcDialog"
 import { getRankLabel } from "../../../../types/strings/Strings"
 import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
 import { logger } from "../../../../utils/logger"
@@ -71,7 +73,7 @@ export default class MinigameManager {
 
     this.scene.room?.onMessage(
       Transfer.NPC_DIALOG,
-      (message: { npc: Pkm; dialog: string }) => this.onNpcDialog(message)
+      (message: { npc: Pkm; dialog: NpcDialog }) => this.onNpcDialog(message)
     )
   }
 
@@ -545,6 +547,15 @@ export default class MinigameManager {
       name: Pkm.CINCCINO
     })
 
+    const ludicolo = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.LUDICOLO ? cx : 13.5 * 48,
+      y: encounter === TownEncounters.LUDICOLO ? cy : 25.5 * 48,
+      orientation: Orientation.DOWN,
+      name: Pkm.LUDICOLO,
+      animation: PokemonActionState.ABILITY
+    })
+
     const magnezone = new PokemonSpecial({
       scene: this.scene,
       x: encounter === TownEncounters.MAGNEZONE ? cx : 41 * 48,
@@ -615,6 +626,7 @@ export default class MinigameManager {
       croagunk,
       wigglytuff,
       cincinno,
+      ludicolo,
       magnezone,
       kingambit,
       lapras,
@@ -660,14 +672,14 @@ export default class MinigameManager {
     }
   }
 
-  onNpcDialog({ npc, dialog, ...otherArgs }: { npc: Pkm; dialog: string }) {
+  onNpcDialog({ npc, dialog, ...otherArgs }: { npc: Pkm; dialog: NpcDialog }) {
     const villager = this.villagers.find((pkm) => pkm.name === npc)
     if (villager) {
       if (dialog) {
         this.scene.board?.displayText(
           villager.x,
           villager.y - 10,
-          t(dialog, otherArgs),
+          t(`npc_dialog.${dialog}`, otherArgs),
           true
         )
       } else {

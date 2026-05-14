@@ -15,11 +15,19 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import Player from "./colyseus-models/player"
 
+export type PVEStagesNames =
+  | `pkm.${Pkm}`
+  | "tower_duo"
+  | "legendary_birds"
+  | "legendary_beasts"
+  | "super_ancients"
+  | "legendary_giants"
+
 export type PVEStage = {
-  name: string
+  name: PVEStagesNames
   avatar: Pkm
   emotion?: Emotion
   shinyChance?: number
@@ -91,7 +99,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     avatar: Pkm.GYARADOS,
     board: [[Pkm.GYARADOS, 4, 2]],
     marowakItems: [[Item.KINGS_ROCK]],
-    shinyChance: 1 / 50,
+    shinyChance: 1 / 40,
     rewards: [...ItemComponentsNoFossilOrScarf, Item.RED_SCALE],
     getRewards(_player: Player, shinyEncounter: boolean) {
       if (shinyEncounter) return [Item.RED_SCALE]
@@ -113,7 +121,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     getRewards(player: Player) {
       const rewards: Item[] = []
       if (
-        values(player.board).some((p) => p.name === Pkm.CHARCADET) ||
+        schemaValues(player.board).some((p) => p.name === Pkm.CHARCADET) ||
         player.pokemonsTrainingInDojo.some(
           (p) => p.pokemon.name === Pkm.CHARCADET
         )
@@ -197,7 +205,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     rewards: CraftableItemsNoScarves,
     getRewards(player: Player) {
-      for (const p of values(player.board)) {
+      for (const p of schemaValues(player.board)) {
         if (p.name === Pkm.ZACIAN) {
           return [Item.RUSTED_SWORD]
         }

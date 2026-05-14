@@ -7,21 +7,23 @@ import {
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
-import { SynergyEffects } from "../../models/effects"
+import { SynergyEffect, SynergyEffects } from "../../models/effects"
 import { Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import { Item, Scarves, Wands } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pillars, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"
+import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
 import { effectInLine } from "../../utils/orientation"
 import { chance } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
+import { Board } from "../board"
 import {
   FlowerMonByPot,
   FlowerPot,
@@ -34,6 +36,7 @@ import {
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnAttackReceivedEffectArgs,
+  OnBenchedDuringFightEffect,
   OnDamageDealtEffect,
   OnDamageDealtEffectArgs,
   OnDamageReceivedEffect,
@@ -49,7 +52,7 @@ export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0
   synergyLevel: number
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.MONSTER>) {
     super(undefined, effect)
     this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
   }
@@ -71,13 +74,13 @@ export class MonsterKillEffect extends OnKillEffect {
     this.hpBoosted += lifeBoost
     this.count += 1
     if (attacker.items.has(Item.BERSERK_GENE)) {
-      attacker.status.triggerConfusion(3000, attacker, attacker)
+      attacker.status.triggerConfusion(1000, attacker, attacker)
     }
   }
 }
 
 export class GroundHoleEffect extends OnSpawnEffect {
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.GROUND>) {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
     super((pokemon, player) => {
       const y =
@@ -111,7 +114,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
   synergyLevel: number
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.FIRE>) {
     super(undefined, effect)
     this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
   }
@@ -162,14 +165,14 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
   synergyLevel: number = -1
-  constructor(effect?: EffectEnum) {
+  constructor(effect?: SynergyEffect<Synergy.SOUND>) {
     super(undefined, effect)
     if (effect) {
       this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
     }
   }
 
-  apply(pokemon, board, target, crit) {
+  apply(pokemon: PokemonEntity, board: Board) {
     pokemon.broadcastAbility({ skill: Ability.ECHO })
     const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
     const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
@@ -177,14 +180,23 @@ export class SoundCryEffect extends OnAbilityCastEffect {
 
     const chimecho = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .some((cell) => cell.value?.passive === Passive.CHIMECHO)
+      .map((cell) => cell.value)
+      .filter<PokemonEntity>((value): value is PokemonEntity => !!value)
+      .find((entity) => entity.passive === Passive.CHIMECHO)
 
-    const scale =
-      (chimecho ? 2 : 1) * (pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1)
+    if (chimecho) {
+      chimecho.addPP(3, pokemon, 0, false)
+    }
+
+    const scale = pokemon.passive === Passive.MEGA_LAUNCHER ? 3 : 1
 
     board.cells.forEach((ally) => {
       if (ally?.team === pokemon.team) {
-        ally.status.sleepCooldown = 0
+        if (ally.passive === Passive.COMATOSE && ally.status.sleep) {
+          ally.addAbilityPower(5, pokemon, 0, false)
+        } else {
+          ally.status.sleepCooldown = 0
+        }
         ally.addAttack(attackBoost * scale, pokemon, 0, false)
         ally.addSpeed(speedBoost * scale, pokemon, 0, false)
         ally.addPP(manaBoost * scale, pokemon, 0, false)
@@ -212,7 +224,7 @@ export const humanHealEffect = new OnDamageDealtEffect(
 )
 
 export class OnFieldDeathEffect extends OnDeathEffect {
-  constructor(effect: EffectEnum) {
+  constructor(effect: SynergyEffect<Synergy.FIELD>) {
     super(({ pokemon, board }) => {
       const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
       const heal = FIELD_HEAL_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
@@ -280,9 +292,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount %
-        (this.origin === EffectEnum.JUSTIFIED ? 8 : 10) ===
-        0 &&
+      pokemon.count.fightingBlockCount % 10 === 0 &&
       !isRetaliation &&
       distanceC(
         pokemon.positionX,
@@ -332,6 +342,22 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     }
   }
 }
+
+export const fightingTrainingEffect = new OnBenchedDuringFightEffect(
+  ({ pokemon, player }) => {
+    const pillar = schemaValues(player.board).find((p) => {
+      return (
+        isIn(Pillars, p.name) &&
+        isOnBench(p) &&
+        p.positionX === pokemon.positionX - 1
+      )
+    })
+
+    if (pillar || (isOnBench(pokemon) && pokemon.positionX === 0)) {
+      pokemon.action = PokemonActionState.TRAINING
+    }
+  }
+)
 
 export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
   if (!pokemon.player) return
@@ -423,7 +449,7 @@ export const normalShieldEffect = new OnSimulationStartEffect(
     }
     if (entity.effects.has(EffectEnum.PURE_POWER)) {
       shieldBonus += 30
-      if (values(entity.items).some((item) => Scarves.includes(item))) {
+      if (schemaValues(entity.items).some((item) => Scarves.includes(item))) {
         // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
         entity.addAttack(Math.round(0.3 * entity.baseAtk), entity, 0, false)
         entity.addAbilityPower(30, entity, 0, false)

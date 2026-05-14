@@ -109,8 +109,7 @@ export default function WikiRegions() {
                 rowProps={{
                   regions: sortedRegions,
                   columnCount,
-                  pokemonsPerRegion,
-                  t
+                  pokemonsPerRegion
                 }}
               />
             )
@@ -126,7 +125,6 @@ type RegionRowData = {
   regions: DungeonPMDO[]
   columnCount: number
   pokemonsPerRegion: { [key in DungeonPMDO]?: Pkm[] }
-  t: (key: string) => string
 }
 
 function RegionRow({
@@ -134,8 +132,7 @@ function RegionRow({
   style,
   regions,
   columnCount,
-  pokemonsPerRegion,
-  t
+  pokemonsPerRegion
 }: {
   ariaAttributes: object
   index: number
@@ -143,6 +140,7 @@ function RegionRow({
 } & RegionRowData): React.ReactElement | null {
   const startIdx = index * columnCount
   const rowRegions = regions.slice(startIdx, startIdx + columnCount)
+  const { t } = useTranslation()
 
   return (
     <div style={{ ...style, paddingBottom: "0.5em" }}>

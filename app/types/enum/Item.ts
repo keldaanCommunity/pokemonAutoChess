@@ -210,6 +210,7 @@ export enum Item {
   BIG_MUSHROOM = "BIG_MUSHROOM",
   BALM_MUSHROOM = "BALM_MUSHROOM",
   RICE = "RICE",
+  BERRIES = "BERRIES",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -322,7 +323,14 @@ export enum Item {
   WARP_WAND = "WARP_WAND",
   SWITCHER_WAND = "SWITCHER_WAND",
   WHIRLWIND_WAND = "WHIRLWIND_WAND",
-  TUNNEL_WAND = "TUNNEL_WAND"
+  TUNNEL_WAND = "TUNNEL_WAND",
+  AQUA_MONICA = "AQUA_MONICA",
+  FIERY_DRUM = "FIERY_DRUM",
+  GRASS_CORNET = "GRASS_CORNET",
+  ICY_FLUTE = "ICY_FLUTE",
+  ROCK_HORN = "ROCK_HORN",
+  SKY_MELODICA = "SKY_MELODICA",
+  TERRA_CYMBAL = "TERRA_CYMBAL"
 }
 
 export const MemoryDiscs = [
@@ -401,6 +409,16 @@ export const DojoTickets = [
   Item.GOLD_DOJO_TICKET
 ] satisfies Item[]
 
+export const SevenTreasures = [
+  Item.AQUA_MONICA,
+  Item.FIERY_DRUM,
+  Item.GRASS_CORNET,
+  Item.ICY_FLUTE,
+  Item.ROCK_HORN,
+  Item.SKY_MELODICA,
+  Item.TERRA_CYMBAL
+] satisfies Item[]
+
 export const TownItems = [
   Item.TREASURE_BOX,
   Item.AMULET_COIN,
@@ -409,6 +427,7 @@ export const TownItems = [
   Item.RECYCLE_TICKET,
   ...DojoTickets,
   ...MissionOrders,
+  ...SevenTreasures,
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
@@ -1001,7 +1020,8 @@ export const Dishes = [
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
   Item.BALM_MUSHROOM,
-  Item.RICE
+  Item.RICE,
+  Item.BERRIES
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
@@ -1104,6 +1124,7 @@ export const UnholdableItems = [
   ...SynergyGems,
   ...Mulches,
   ...MissionOrders,
+  ...SevenTreasures,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,

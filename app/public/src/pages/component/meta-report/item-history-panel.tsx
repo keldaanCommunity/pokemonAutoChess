@@ -60,25 +60,37 @@ interface ItemHistoryPanelProps {
   itemFilter?: readonly Item[]
 }
 
-function CustomTooltip({
-  active,
-  payload,
-  label,
-  metric
-}: {
+type ChartValue = string | number | undefined
+
+type ChartDataPoint = {
+  date: string
+  dateLabel: string
+} & Partial<Record<Item, number>>
+
+type TooltipPayloadEntry = {
+  name: Item
+  value?: number
+  color?: string
+}
+
+type CustomTooltipProps = {
   active?: boolean
-  payload?: any[]
+  payload?: TooltipPayloadEntry[]
   label?: string
   metric: "count" | "rank"
-}) {
+}
+
+function CustomTooltip({ active, payload, label, metric }: CustomTooltipProps) {
   if (!active || !payload?.length) return null
   const sorted = [...payload].sort((a, b) =>
-    metric === "count" ? b.value - a.value : a.value - b.value
+    metric === "count"
+      ? (b.value ?? 0) - (a.value ?? 0)
+      : (a.value ?? 0) - (b.value ?? 0)
   )
   return (
     <div className="item-history-tooltip">
       <div className="item-history-tooltip-date">{label}</div>
-      {sorted.slice(0, 10).map((entry: any) => (
+      {sorted.slice(0, 10).map((entry) => (
         <div key={entry.name} className="item-history-tooltip-row">
           <img src={getItemImagePath(entry.name)} width={20} height={20} />
           <span style={{ color: entry.color }}>{t(`item.${entry.name}`)}</span>
@@ -119,7 +131,7 @@ export function ItemHistoryPanel({
 
     const allDates = new Set<string>()
     const validItems: {
-      name: string
+      name: Item
       history: { date: string; value: number }[]
     }[] = []
 
@@ -151,7 +163,7 @@ export function ItemHistoryPanel({
     )
 
     const chartData = sortedDates.map((date) => {
-      const point: Record<string, any> = {
+      const point: ChartDataPoint = {
         date,
         dateLabel: formatDateShort(date)
       }
@@ -170,12 +182,13 @@ export function ItemHistoryPanel({
     const allValues: number[] = []
     for (const point of data) {
       for (const key of Object.keys(point)) {
+        const value = point[key as keyof ChartDataPoint] as ChartValue
         if (
           key !== "date" &&
           key !== "dateLabel" &&
-          typeof point[key] === "number"
+          typeof value === "number"
         ) {
-          allValues.push(point[key])
+          allValues.push(value)
         }
       }
     }

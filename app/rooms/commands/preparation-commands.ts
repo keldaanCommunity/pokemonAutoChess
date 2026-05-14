@@ -28,7 +28,7 @@ import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
-import { entries, values } from "../../utils/schemas"
+import { schemaEntries, schemaValues } from "../../utils/schemas"
 import PreparationRoom from "../preparation-room"
 
 export class OnJoinCommand extends Command<
@@ -76,7 +76,7 @@ export class OnJoinCommand extends Command<
           avatar: user.avatar
         })
       } else {
-        const nbHumanPlayers = values(this.state.users).filter(
+        const nbHumanPlayers = schemaValues(this.state.users).filter(
           (u) => !u.isBot
         ).length
         const isAdmin = u.role === Role.ADMIN
@@ -153,7 +153,7 @@ export class OnJoinCommand extends Command<
 
       while (this.state.users.size > MAX_PLAYERS_PER_GAME) {
         // delete a random bot to make room
-        const users = entries(this.state.users)
+        const users = schemaEntries(this.state.users)
         const entryToDelete = users.find(([key, user]) => user.isBot)
         if (entryToDelete) {
           const [key, bot] = entryToDelete
@@ -274,7 +274,7 @@ export class OnGameStartRequestCommand extends Command<
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
         const gameRoom = await matchMaker.createRoom("game", {
-          users: Object.fromEntries(entries(this.state.users)),
+          users: Object.fromEntries(schemaEntries(this.state.users)),
           name: this.state.name,
           ownerName: this.state.ownerName,
           preparationId: this.room.roomId,
@@ -566,7 +566,7 @@ export class OnLeaveCommand extends Command<
           this.state.users.delete(client.auth.uid)
 
           if (client.auth.uid === this.state.ownerId) {
-            const newOwner = values(this.state.users).find(
+            const newOwner = schemaValues(this.state.users).find(
               (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
@@ -621,7 +621,7 @@ export class OnToggleReadyCommand extends Command<
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
         this.state.users.size === nbExpectedPlayers &&
-        values(this.state.users).every((user) => user.ready)
+        schemaValues(this.state.users).every((user) => user.ready)
       ) {
         // auto start when ranked lobby is full and all ready
         this.room.state.addMessage({

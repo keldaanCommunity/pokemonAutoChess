@@ -550,9 +550,9 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.GUTS) ||
           pokemon.effects.has(EffectEnum.STURDY) ||
           pokemon.effects.has(EffectEnum.DEFIANT) ||
-          pokemon.effects.has(EffectEnum.JUSTIFIED)
+          pokemon.effects.has(EffectEnum.COACHING)
         ) {
-          const damageBlocked = pokemon.effects.has(EffectEnum.JUSTIFIED)
+          const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
             ? 12
             : pokemon.effects.has(EffectEnum.DEFIANT)
               ? 9
@@ -879,7 +879,7 @@ export default abstract class PokemonState {
     if (
       (pokemon.status.resurrecting ||
         pokemon.status.freeze ||
-        pokemon.status.sleep) &&
+        (pokemon.status.sleep && pokemon.passive !== Passive.COMATOSE)) &&
       pokemon.state.name !== "idle"
     ) {
       pokemon.toIdleState()
@@ -999,27 +999,6 @@ export default abstract class PokemonState {
 
     if (pokemon.items.has(Item.METRONOME)) {
       pokemon.addPP(5, pokemon, 0, false)
-    }
-
-    if (pokemon.items.has(Item.GREEN_ORB)) {
-      const adjacentCells = board.getAdjacentCells(
-        pokemon.positionX,
-        pokemon.positionY,
-        true
-      )
-      for (const cell of adjacentCells) {
-        if (cell.value && cell.value.team === pokemon.team) {
-          const { overheal } = cell.value.handleHeal(
-            0.03 * cell.value.maxHP,
-            pokemon,
-            0,
-            false
-          )
-          if (overheal > 0) {
-            cell.value.addPP(0.3 * overheal, pokemon, 0, false)
-          }
-        }
-      }
     }
 
     if (

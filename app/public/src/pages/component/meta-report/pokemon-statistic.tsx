@@ -95,8 +95,7 @@ export default function PokemonStatistic(props: {
             rowHeight={dynamicRowHeight}
             rowComponent={PokemonFamilyRow}
             rowProps={{
-              familiesArray,
-              t
+              familiesArray
             }}
           />
         )
@@ -107,14 +106,12 @@ export default function PokemonStatistic(props: {
 
 type PkmnStatRowData = {
   familiesArray: [Pkm, any][]
-  t: (key: string) => string
 }
 
 function PokemonFamilyRow({
   index,
   style,
-  familiesArray,
-  t
+  familiesArray
 }: {
   ariaAttributes: object
   index: number
@@ -125,7 +122,7 @@ function PokemonFamilyRow({
   return (
     <div style={style}>
       <div>
-        <PokemonFamilyCard pkm={pkm} family={family} rank={index + 1} t={t} />
+        <PokemonFamilyCard pkm={pkm} family={family} rank={index + 1} />
       </div>
     </div>
   )
@@ -140,10 +137,10 @@ function PokemonFamilyCard(props: {
     averageItemHeld?: number | null
   }
   rank: number
-  t: (key: string) => string
 }) {
-  const { pkm, family, rank, t } = props
+  const { family, rank } = props
   const [expanded, setExpanded] = React.useState(false)
+  const { t } = useTranslation()
 
   // Aggregated history for delta badges
   const familyRankHistory = aggregateHistory(

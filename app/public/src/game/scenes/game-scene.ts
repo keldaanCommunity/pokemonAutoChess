@@ -1,7 +1,6 @@
 import { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import { GameObjects, Scene } from "phaser"
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
+import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
@@ -28,7 +27,7 @@ import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
@@ -121,7 +120,7 @@ export default class GameScene extends Scene {
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = values(this.room.state.players).map((p) => p.id)
+      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
         this.spectate ? playerUids[0] : this.uid
       ) as Player
@@ -225,46 +224,53 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
-    this.input.keyboard!.on(
-      "keydown-" + keybindings.refresh,
-      throttle(() => {
-        playSound(SOUNDS.REFRESH, 0.5)
-        this.refreshShop()
-      }, 300)
-    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
-      this.room?.send(Transfer.LOCK)
-    })
+    if (!this.spectate) {
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.refresh,
+        throttle(() => {
+          playSound(SOUNDS.REFRESH, 0.5)
+          this.refreshShop()
+        }, 300)
+      )
 
-    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
-      this.buyExperience()
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+        this.room?.send(Transfer.LOCK)
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
-      if (this.pokemonDragged != null) return
-      if (this.shopIndexHovered !== null) {
-        this.removeFromShop(this.shopIndexHovered)
-        this.shopIndexHovered = null
-      } else if (
-        this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
-      ) {
-        this.sellPokemon(this.pokemonHovered)
-        this.pokemonHovered = null
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+        this.buyExperience()
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
-      if (this.pokemonHovered) {
-        this.switchBetweenBenchAndBoard(this.pokemonHovered)
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+        if (this.pokemonDragged != null) return
+        if (this.shopIndexHovered !== null) {
+          this.removeFromShop(this.shopIndexHovered)
+          this.shopIndexHovered = null
+        } else if (
+          this.pokemonHovered &&
+          this.pokemonHovered
+            .getBounds()
+            .contains(
+              this.input.activePointer.worldX,
+              this.input.activePointer.worldY
+            )
+        ) {
+          this.sellPokemon(this.pokemonHovered)
+          this.pokemonHovered = null
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+        if (this.pokemonHovered) {
+          this.switchBetweenBenchAndBoard(this.pokemonHovered)
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+        playerClick(this.uid!)
+      })
+    }
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       savePreferences({ cameraLocked: !preference("cameraLocked") })
@@ -276,10 +282,6 @@ export default class GameScene extends Scene {
 
     this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
       cyclePlayers(1)
-    })
-
-    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-      playerClick(this.uid!)
     })
   }
 
@@ -857,19 +859,27 @@ export default class GameScene extends Scene {
   }
 
   setHovered(sprite: Phaser.GameObjects.Sprite, thickness = 2) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
+    if (this.game.renderer.type !== Phaser.WEBGL) return // outline plugin doesnt work with canvas renderer
 
-    outline.add(sprite, {
+    sprite.enableFilters()
+    const existingOutline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
+    existingOutline?.destroy()
+
+    const outline = sprite.filters!.internal.addRexOutline({
       thickness,
       outlineColor: 0xffffff
     })
+    sprite.setData("rexOutlineController", outline)
   }
 
   clearHovered(sprite: Phaser.GameObjects.Sprite) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
-    outline.remove(sprite)
+    const outline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
+    outline?.destroy()
+    sprite.setData("rexOutlineController", null)
   }
 
   closeTooltips() {

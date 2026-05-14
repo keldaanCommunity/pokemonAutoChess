@@ -1,7 +1,7 @@
 import { SetSchema } from "@colyseus/schema"
 import Phaser, { GameObjects, Geom } from "phaser"
-import type MoveTo from "phaser3-rex-plugins/plugins/moveto"
-import type MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
+import type MoveTo from "phaser4-rex-plugins/plugins/moveto"
+import type MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import pkg from "../../../../../package.json"
 import {
   CELL_VISUAL_HEIGHT,
@@ -38,7 +38,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -184,7 +184,7 @@ export default class PokemonSprite extends DraggableObject {
     const baseHP = getPokemonData(pokemon.name).hp
     const maxHP = inBattle
       ? pokemon.maxHP
-      : values(pokemon.items).reduce(
+      : schemaValues(pokemon.items).reduce(
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
@@ -217,7 +217,7 @@ export default class PokemonSprite extends DraggableObject {
         isGameScene(scene) &&
         scene.spectate === false
       ) {
-        this.shadow.setTintFill(0xff0000)
+        this.shadow.setTint(0xff0000).setTintMode(Phaser.TintModes.FILL)
       }
       this.add(this.shadow)
     }
@@ -242,7 +242,7 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(pokemon, scene)
     } else {
       if (pokemon.dishes.size > 0) {
-        this.updateDishes(values(pokemon.dishes))
+        this.updateDishes(schemaValues(pokemon.dishes))
       }
     }
 
@@ -807,7 +807,8 @@ export default class PokemonSprite extends DraggableObject {
     onEntity: boolean
   ) {
     this.addElectricField()
-    this.sprite.postFX.addGlow(0xffff00, 4, 0, false, 0.1, 8)
+    this.sprite.enableFilters()
+    this.sprite.filters?.internal.addGlow(0xffff00, 4, 0, 0.1)
     this.emoteAnimation()
     if (!alreadyActive) {
       if (!preference("disableCameraShake")) scene.cameras.main.flash(250)
@@ -1667,7 +1668,7 @@ export function loadCompressedAtlas(
         const multiatlas = {
           textures: [
             {
-              image: `${image}?v=${pkg.version}`,
+              image: `${image}?v=${pkg.assetsVersion}`,
               format: "RGBA8888",
               size: {
                 w: data.s[0],
@@ -1693,7 +1694,7 @@ export function loadCompressedAtlas(
     scene.load
       .json(
         `pokemon-atlas-${index}`,
-        `/assets/pokemons/${index}.json?v=${pkg.version}`
+        `/assets/pokemons/${index}.json?v=${pkg.assetsVersion}`
       )
       .start()
   })

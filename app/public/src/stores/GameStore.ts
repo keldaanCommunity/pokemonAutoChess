@@ -17,7 +17,7 @@ import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
-import { entries } from "../../../utils/schemas"
+import { schemaEntries } from "../../../utils/schemas"
 import { getGameScene } from "../pages/game"
 
 export interface GameStateStore {
@@ -192,7 +192,7 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
 
       if (playerToUpdate !== -1) {
         state.players.at(playerToUpdate)!.synergies = new Synergies(
-          new Map(entries(action.payload.value))
+          new Map(schemaEntries(action.payload.value))
         )
       }
     },

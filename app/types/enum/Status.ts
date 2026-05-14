@@ -44,3 +44,32 @@ export const PositiveStatuses = [
   Status.REFLECT,
   Status.RAGE
 ]
+
+// some statuses are technically implemented as such but not documented in wiki or mentionned in abilities descriptions
+export const DocumentedStatuses = [
+  Status.BURN,
+  Status.POISONNED,
+  Status.PARALYSIS,
+  Status.FREEZE,
+  Status.SLEEP,
+  Status.CONFUSION,
+  Status.ARMOR_BREAK,
+  Status.FATIGUE,
+  Status.SILENCE,
+  Status.CURSE,
+  Status.WOUND,
+  Status.FLINCH,
+  Status.BLINDED,
+  Status.LOCKED,
+  Status.CHARM,
+  Status.POSSESSED,
+  Status.PROTECT,
+  Status.RESURRECTION,
+  Status.RUNE_PROTECT,
+  Status.RAGE,
+  Status.POKERUS,
+  Status.ELECTRIC_FIELD,
+  Status.FAIRY_FIELD,
+  Status.GRASS_FIELD,
+  Status.PSYCHIC_FIELD
+] satisfies Status[]

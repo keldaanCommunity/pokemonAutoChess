@@ -27,6 +27,7 @@ export enum GamePhaseState {
 export enum PokemonActionState {
   IDLE = "Idle",
   ATTACK = "Attack",
+  ABILITY = "Ability",
   WALK = "Walk",
   SLEEP = "Sleep",
   HOP = "Hop",
@@ -34,7 +35,8 @@ export enum PokemonActionState {
   EMOTE = "Emote",
   EAT = "Eat",
   FISH = "Fish",
-  BLOSSOM = "Blossom"
+  BLOSSOM = "Blossom",
+  TRAINING = "Training"
 }
 
 export enum Orientation {

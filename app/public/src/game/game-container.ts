@@ -2,8 +2,8 @@ import { SchemaCallbackProxy } from "@colyseus/schema"
 import { getStateCallbacks, Room } from "@colyseus/sdk"
 import { t } from "i18next"
 import Phaser from "phaser"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin.js"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin"
 import React from "react"
 import { toast } from "react-toastify"
 import { ItemStats } from "../../../config"
@@ -38,11 +38,13 @@ import {
   Rarity,
   Stat
 } from "../../../types/enum/Game"
+import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
-import { values } from "../../../utils/schemas"
+import { schemaValues } from "../../../utils/schemas"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -278,6 +280,7 @@ class GameContainer {
 
   initializeGame() {
     if (this.game != null) return // prevent initializing twice
+
     // Create Phaser game
     const renderer = Number(preference("renderer") ?? Phaser.AUTO)
     const config = {
@@ -508,7 +511,7 @@ class GameContainer {
           this.gameScene?.board?.updatePokemonDishes(
             player.id,
             pokemon,
-            values(pokemon.dishes)
+            schemaValues(pokemon.dishes)
           )
         }
       })
@@ -554,14 +557,16 @@ class GameContainer {
       }
     })
 
-    $player.synergies.onChange(() => {
+    $player.synergies.onChange((level, synergy) => {
       if (
         player.id === this.playerIdSpectated &&
         this.gameScene?.board?.mode === BoardMode.PICK
       ) {
-        this.gameScene?.board?.showLightCell()
-        this.gameScene?.board?.renderBerryTrees()
-        this.gameScene?.board?.renderFlowerPots()
+        if (synergy === Synergy.LIGHT) this.gameScene?.board?.showLightCell()
+        if (synergy === Synergy.GRASS) this.gameScene?.board?.renderBerryTrees()
+        if (synergy === Synergy.FLORA) this.gameScene?.board?.renderFlowerPots()
+        if (synergy === Synergy.FIGHTING)
+          this.gameScene?.board?.renderTrainingBag()
       }
     })
 
@@ -732,7 +737,7 @@ class GameContainer {
   handleDragDropCancel(message: {
     updateBoard: boolean
     updateItems: boolean
-    text?: string
+    text?: DisplayText
     pokemonId?: string
   }) {
     const gameScene = this.gameScene

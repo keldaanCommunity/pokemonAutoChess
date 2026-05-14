@@ -90,7 +90,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
-      //if event occures in an input, textarea or select, ignore it
+      //if event occurs in an input, textarea or select, ignore it
       if (
         ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
           (e.target as HTMLElement).tagName
@@ -104,6 +104,9 @@ export function MainSidebar(props: MainSidebarProps) {
       if (key === keybindings.wiki) {
         e.preventDefault()
         setModal((current) => (current === "wiki" ? undefined : "wiki"))
+      } else if (key === keybindings.meta_report) {
+        e.preventDefault()
+        setModal((current) => (current === "meta" ? undefined : "meta"))
       } else if (
         key === keybindings.team_planner &&
         profileLevel >= GADGETS.team_planner.levelRequired
@@ -162,7 +165,7 @@ export function MainSidebar(props: MainSidebarProps) {
           svg="meta"
           onClick={() => window.open("/terms-of-service", "_blank")}
         >
-          {t("terms_of_service", "Terms of Service")}
+          {t("terms_of_service")}
         </NavLink>
 
         <NavLink
@@ -192,7 +195,7 @@ export function MainSidebar(props: MainSidebarProps) {
             className="blue"
             handleClick={changeModal}
           >
-            {t("collection")}
+            {t("collection.title")}
           </NavLink>
         )}
         {(page === "main_lobby" || page === "preparation") &&
@@ -213,7 +216,7 @@ export function MainSidebar(props: MainSidebarProps) {
           className="green"
           handleClick={changeModal}
         >
-          {t("wiki_label")}
+          {t("wiki.title")}
         </NavLink>
         <NavLink
           svg="meta"
@@ -363,7 +366,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="servers"
             handleClick={changeModal}
           >
-            {t("community_servers")}
+            {t("servers_list.title")}
           </NavLink>
         )}
 
@@ -531,7 +534,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "collection"}
-        header={t("collection")}
+        header={t("collection.title")}
         className="anchor-top"
       >
         <PokemonCollection />
@@ -547,7 +550,7 @@ function Modals({
         onClose={closeModal}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki_label")}
+        header={t("wiki.title")}
       >
         <Wiki inGame={page === "game"} />
       </Modal>
@@ -558,14 +561,10 @@ function Modals({
         onClose={closeModal}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}
+        header={t("servers_list.title")}
       >
         <ServersList />
       </Modal>
-      <TeamBuilderModal
-        show={modal === "team-builder"}
-        handleClose={closeModal}
-      />
       <TeamBuilderModal
         show={modal === "team-builder"}
         handleClose={closeModal}

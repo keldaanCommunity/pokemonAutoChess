@@ -1,3 +1,4 @@
+import Phaser from "phaser"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PreloadingScene } from "../../../game/scenes/preloading-scene"

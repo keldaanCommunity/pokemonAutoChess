@@ -35,9 +35,11 @@ import { Pkm } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { GameEvent } from "../../../types/events"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import { DisplayText } from "../../../types/strings/DisplayText"
+import { ErrorMessage } from "../../../types/strings/ErrorMessage"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
-import { values } from "../../../utils/schemas"
+import { schemaValues } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
 import GameScene from "../game/scenes/game-scene"
 import {
@@ -112,7 +114,7 @@ export function getGameContainer(): GameContainer {
 }
 
 export function cyclePlayers(amt: number) {
-  const players = values(gameContainer.room?.state.players)
+  const players = schemaValues(gameContainer.room?.state.players)
   playerClick(
     players[
       (players.findIndex((p) => p === gameContainer.player) +
@@ -581,7 +583,7 @@ export default function Game() {
 
       room.onMessage(
         Transfer.DISPLAY_TEXT,
-        (message: { text: string; id: string; x: number; y: number }) => {
+        (message: { text: DisplayText; id: string; x: number; y: number }) => {
           const g = getGameScene()
           if (g?.battle?.simulation?.id === message.id && message.text) {
             const coordinates = transformEntityCoordinates(
@@ -618,7 +620,9 @@ export default function Game() {
           CloseCodes.USER_BANNED
         ].includes(code)
         if (shouldGoToLobby) {
-          const errorMessage = CloseCodesMessages[code]
+          const errorMessage = CloseCodesMessages[code] as
+            | ErrorMessage
+            | undefined
           if (errorMessage) {
             dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
           }
@@ -675,7 +679,9 @@ export default function Game() {
       })
 
       $state.additionalPokemons.onChange(() => {
-        dispatch(setAdditionalPokemons(values(room.state.additionalPokemons)))
+        dispatch(
+          setAdditionalPokemons(schemaValues(room.state.additionalPokemons))
+        )
       })
 
       $state.simulations.onRemove(() => {
@@ -777,7 +783,7 @@ export default function Game() {
               changePlayer({
                 id: player.id,
                 field: "choices",
-                value: values(player.choices)
+                value: schemaValues(player.choices)
               })
             )
           })

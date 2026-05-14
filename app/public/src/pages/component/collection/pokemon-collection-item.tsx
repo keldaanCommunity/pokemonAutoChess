@@ -1,19 +1,10 @@
 import { Dispatch, SetStateAction } from "react"
-import {
-  BoosterPriceByRarity,
-  getAllAltForms,
-  getEmotionCost
-} from "../../../../../config"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
-import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types/enum/Emotion"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { PokemonAnimations } from "../../../game/components/pokemon-animations"
-import { useAppSelector } from "../../../hooks"
 import { cc } from "../../utils/jsx"
-import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import PokemonPortrait from "../pokemon-portrait"
 import { CollectionFilterState } from "./pokemon-collection"
 import "./pokemon-collection-item.css"
@@ -22,78 +13,25 @@ export default function PokemonCollectionItem(props: {
   name: Pkm
   index: string
   item: IPokemonCollectionItemUnpacked | undefined
+  isNew: boolean
+  isFavorite: boolean
+  isUnlocked: boolean
+  isUnlockable: boolean
   filterState: CollectionFilterState
   setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
-  const lastBoostersOpened = useAppSelector(
-    (state) => state.boosters.lastBoostersOpened
-  )
-  const [favorites] = useLocalStore<Pkm[]>(
-    LocalStoreKeys.FAVORITES,
-    [],
-    Infinity
-  )
-
   if (getAvailableEmotions(props.index, false).length === 0) {
     return null
   }
 
-  const { dust, emotions, shinyEmotions } = props.item ?? {
-    dust: 0,
-    emotions: [] as Emotion[],
-    shinyEmotions: [] as Emotion[]
-  }
-  const isUnlocked =
-    props.filterState.mode === "pokedex"
-      ? (props.item?.played ?? 0) > 0
-      : props.filterState.mode === "shiny"
-        ? shinyEmotions?.length > 0
-        : emotions?.length > 0 || shinyEmotions?.length > 0
-
-  const allForms = getAllAltForms(props.name)
-  const isNew = lastBoostersOpened.some((booster) =>
-    booster.some((card) => allForms.includes(card.name) && card.new)
-  )
-
-  const availableEmotions = getAvailableEmotions(props.index, false)
-  const shinyAvailableEmotions = getAvailableEmotions(props.index, true)
-
-  const isFavorite = favorites.includes(props.name)
-  const rarity = getPokemonData(props.name).rarity
-  const boosterCost = BoosterPriceByRarity[rarity]
-  if (props.filterState.filter === "refundable" && dust < boosterCost)
-    return null
-
-  if (props.filterState.filter === "new" && !isNew) return null
-
-  const canUnlock =
-    props.filterState.mode !== "pokedex" &&
-    (availableEmotions.some(
-      (e) =>
-        emotions.includes(e) === false &&
-        dust >= getEmotionCost(e, false) &&
-        props.filterState.mode !== "shiny"
-    ) ||
-      shinyAvailableEmotions.some(
-        (e) =>
-          shinyEmotions.includes(e) === false &&
-          dust >= getEmotionCost(e, true) &&
-          !PokemonAnimations[props.name]?.shinyUnavailable
-      ))
-
-  if (props.filterState.filter === "unlocked" && !isUnlocked) return null
-  if (props.filterState.filter === "unlockable" && !canUnlock) return null
-  if (props.filterState.filter === "locked" && isUnlocked) return null
-  if (props.filterState.filter === "favorite" && !isFavorite) return null
-
   return (
     <div
       className={cc("my-box", "clickable", "pokemon-collection-item", {
-        unlocked: isUnlocked,
-        unlockable: canUnlock,
-        new: isNew,
-        favorite: isFavorite,
-        shimmer: isNew
+        unlocked: props.isUnlocked,
+        unlockable: props.isUnlockable,
+        new: props.isNew,
+        favorite: props.isFavorite,
+        shimmer: props.isNew
       })}
       onClick={() => {
         props.setPokemon(props.name)
@@ -110,7 +48,7 @@ export default function PokemonCollectionItem(props: {
         <p>{props.item?.played ?? 0}</p>
       ) : (
         <p className="dust">
-          <span>{props.item ? props.item.dust : 0}</span>
+          <span>{props.item?.dust ?? 0}</span>
           <img src={getPortraitSrc(props.index)} />
         </p>
       )}

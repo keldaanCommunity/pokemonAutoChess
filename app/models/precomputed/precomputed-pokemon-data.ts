@@ -5,7 +5,7 @@ import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { IPokemonData } from "../../types/interfaces/PokemonData"
 import { mapToObj } from "../../utils/map"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { precomputedPokemons } from "./precomputed-pokemons"
 
 console.time("precompute-pokemon-data")
@@ -23,7 +23,7 @@ precomputedPokemons.forEach((pokemon) => {
     hp: pokemon.hp,
     pp: pokemon.maxPP,
     range: pokemon.range,
-    types: values(pokemon.types) as Synergy[],
+    types: schemaValues(pokemon.types) as Synergy[],
     evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
     evolutions: pokemon.evolutions,
     stages: Math.max(

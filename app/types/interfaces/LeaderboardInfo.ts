@@ -1,3 +1,5 @@
+import { Pkm } from "../enum/Pokemon"
+
 export interface ILeaderboardInfo {
   id: string
   name: string
@@ -9,7 +11,7 @@ export interface ILeaderboardInfo {
 }
 
 export interface ILeaderboardBotInfo {
-  name: string
+  name: Pkm
   avatar: string
   rank: number
   value: number

@@ -13,7 +13,7 @@ export default function SpriteGapScannerModal(props: {
     <Modal
       show={props.show}
       onClose={props.handleClose}
-      header={t("gadget.sprite_gap_scanner")}
+      header={t("gadget.sprite_tracker")}
       className="sprite-gap-scanner-modal"
     >
       <SpriteGapScanner />

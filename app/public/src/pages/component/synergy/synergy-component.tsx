@@ -1,4 +1,3 @@
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -24,17 +23,12 @@ export default function SynergyComponent(props: {
   const highlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
-    const outline = scene.plugins.get("rexOutline") as OutlinePlugin
-    if (!outline) return // outline plugin doesnt work with canvas renderer
     if (!spectatedPlayer?.board) return
     spectatedPlayer.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
-          outline.add(sprite, {
-            thickness: 4,
-            outlineColor: 0xffffff
-          })
+          scene.setHovered(sprite, 4)
         }
       }
     })
@@ -43,18 +37,14 @@ export default function SynergyComponent(props: {
   const removeHighlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
-    const outline = scene.plugins.get("rexOutline") as OutlinePlugin
-    if (!outline) return // outline plugin doesnt work with canvas renderer
-    if (spectatedPlayer?.board) {
-      spectatedPlayer.board.forEach((p) => {
-        if (p.types.has(type)) {
-          const sprite = scene.board?.pokemons.get(p.id)?.sprite
-          if (sprite) {
-            outline.remove(sprite)
-          }
+    spectatedPlayer?.board.forEach((p) => {
+      if (p.types.has(type)) {
+        const sprite = scene.board?.pokemons.get(p.id)?.sprite
+        if (sprite) {
+          scene.clearHovered(sprite)
         }
-      })
-    }
+      }
+    })
   }
 
   const tooltip = (

@@ -75,13 +75,13 @@ export default function Auth() {
   return (
     <div className="auth-page">
       {isSupposedlyMobile && (
-        <p className="mobile-warning">{t("mobile_warning")}</p>
+        <p className="mobile-warning">{t("auth.mobile_warning")}</p>
       )}
       <img className="logo" src="assets/ui/pokemon_autochess_final.svg" />
       <header>
-        <h1>{t("pokemon_auto_chess")}</h1>
+        <h1>{t("auth.pokemon_auto_chess")}</h1>
         <div className="disclaimer">
-          <p>{t("nintendo_warning")}</p>
+          <p>{t("auth.nintendo_warning")}</p>
         </div>
       </header>
       <main>
@@ -94,26 +94,26 @@ export default function Auth() {
         <TermsButton />
         <button className="bubbly blue" onClick={() => setModal("wiki")}>
           <img width={32} height={32} src={`assets/ui/wiki.svg`} />
-          {t("wiki_label")}
+          {t("wiki.title")}
         </button>
         <button className="bubbly pink" onClick={() => setModal("servers")}>
           <img width={32} height={32} src={`assets/ui/players.svg`} />
-          {t("community_servers")}
+          {t("servers_list.title")}
         </button>
         <span>V{pkg.version}</span>
         <p>
-          {t("made_for_fans")}
+          {t("auth.made_for_fans")}
           <br />
-          {t("non_profit")} / {t("open_source")}
+          {t("auth.non_profit")} / {t("auth.open_source")}
           <br />
-          {t("copyright")}
+          {t("auth.copyright")}
         </p>
       </div>
       <Modal
         onClose={() => setModal(null)}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki_label")}
+        header={t("wiki.title")}
       >
         <Wiki inGame={false} />
       </Modal>
@@ -121,7 +121,7 @@ export default function Auth() {
         onClose={() => setModal(null)}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}
+        header={t("servers_list.title")}
       >
         <ServersList />
       </Modal>

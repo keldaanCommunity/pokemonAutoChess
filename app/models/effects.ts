@@ -6,7 +6,7 @@ import { EffectEnum } from "../types/enum/Effect"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { isOnBench } from "../utils/board"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import Synergies from "./colyseus-models/synergies"
 
 export class Effects extends SetSchema<EffectEnum> {
@@ -40,7 +40,7 @@ export class Effects extends SetSchema<EffectEnum> {
       }
 
       if (p.name === Pkm.FALINKS_BRASS) {
-        const nbTroopers = values(board).filter(
+        const nbTroopers = schemaValues(board).filter(
           (p) => p.name === Pkm.FALINKS_TROOPER
         ).length
         if (nbTroopers < 6) this.add(EffectEnum.FALINKS_BRASS)
@@ -50,7 +50,7 @@ export class Effects extends SetSchema<EffectEnum> {
   }
 }
 
-export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
+export const SynergyEffects = {
   [Synergy.NORMAL]: [
     EffectEnum.STAMINA,
     EffectEnum.STRENGTH,
@@ -83,7 +83,7 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
     EffectEnum.GUTS,
     EffectEnum.STURDY,
     EffectEnum.DEFIANT,
-    EffectEnum.JUSTIFIED
+    EffectEnum.COACHING
   ],
   [Synergy.PSYCHIC]: [
     EffectEnum.PRECOGNITION,
@@ -218,4 +218,7 @@ export const SynergyEffects: { [key in Synergy]: readonly EffectEnum[] } = {
     EffectEnum.LUNCH_BREAK,
     EffectEnum.BANQUET
   ]
-} as const
+} satisfies { [key in Synergy]: readonly EffectEnum[] }
+
+export type SynergyEffect<T extends Synergy = Synergy> =
+  (typeof SynergyEffects)[T][number]

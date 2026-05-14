@@ -812,8 +812,7 @@
 	"rank": "Ranga",
 	"player": "Gracz",
 	"team": "Zespół",
-	"welcome": "Witaj",
-	"made_for_fans": "Zrobiona przez fanów dla fanów",
+	"welcome": "Witaj",	
 	"join": "Dołącz",
 	"starts_at": "Zaczyna się o",
 	"no_elo": "Brak Elo",
@@ -827,7 +826,9 @@
 	"new_game": "Nowa gra",
 	"in_game": "W grze",
 	"loading": "Ładowanie...",
-	"connecting": "Łączenie...",
+	"auth": {
+		"connecting": "Łączenie..."
+	},
 	"rooms": "Pokoje",
 	"players": "Gracze",
 	"delete": "Usuń",
