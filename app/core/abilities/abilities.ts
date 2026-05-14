@@ -7179,9 +7179,10 @@ export class StickyWebStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInFront(pokemon, target, 2)
     const damage = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 35 : 20
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
+    const cells = board.getCellsInFront(pokemon, target, 1)
     cells.forEach((cell) => {
       board.addBoardEffect(
         cell.x,
@@ -7190,15 +7191,6 @@ export class StickyWebStrategy extends AbilityStrategy {
         pokemon.simulation
       )
       pokemon.broadcastAbility({ positionX: cell.x, positionY: cell.y })
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
     })
   }
 }

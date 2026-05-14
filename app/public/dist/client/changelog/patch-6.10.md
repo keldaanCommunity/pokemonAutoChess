@@ -25,7 +25,6 @@
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
 
-
 > Required preemptive nerf due to some interactions with wands that love high speed backline attackers
 
 - Nerf Geomancy (Xerneas): Speed 20 → 15
@@ -51,6 +50,8 @@
 
 - Ralts line: PP 95 → 100 ; buff Future Sight: now deals 20% of damage to adjacent targets as well. New visual animation.
 - New visual animation for Doom Desire
+- Nerf Sticky Web (Dewpider): fix damage applied to all targets hit instead of just the main target, and reduce the range of the web from a 2-tile cone in front of the user to a 1-tile cone.
+
 
 # Changes to Items
 
