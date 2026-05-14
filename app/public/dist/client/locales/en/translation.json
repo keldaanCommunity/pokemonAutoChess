@@ -4265,6 +4265,8 @@
 		"bag_desc": "Used to store your collection and boosters cards",
 		"team_planner": "Team Planner",
 		"team_planner_desc": "Prepare your composition in advance",
+		"certificate": "Certificate",
+		"certificate_desc": "Unlocks Ranked mode and participating in Tournaments",
 		"bot_builder": "Bot Builder",
 		"bot_builder_desc": "Create your own bots and submit them to have a chance to be included in the game",
 		"jukebox": "Jukebox",
@@ -4454,12 +4456,18 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
-	"room_is_private": "This room is private. Enter password",
-	"game_full": "This group is full",
-	"game_already_started": "Game has already started",
-	"min_rank_not_reached": "Your rank is not high enough to play this ranked match",
-	"max_rank_not_reached": "Your rank is too high to play this ranked match",
-	"blacklisted": "You have been kicked from this match",
+	"room_menu": {
+		"game_full": "This group is full",
+		"game_already_started": "Game has already started",
+		"room_is_private": "This room is private. Enter password",
+		"blacklisted": "You have been kicked from this match",
+		"min_rank_not_reached": "Your rank is not high enough to play this ranked match",
+		"max_rank_not_reached": "Your rank is too high to play this ranked match",
+		"ranked_mode_locked": "Ranked mode is locked. You need to reach level {{requiredLevel}} to unlock it."
+	},
+	"tournament": {
+		"tournament_mode_locked": "You need to reach level {{requiredLevel}} to participate in tournaments."
+	},
 	"npc_dialog": {
 		"welcome": "Welcome !",
 		"tell_price": "{{price}} GOLD each !",

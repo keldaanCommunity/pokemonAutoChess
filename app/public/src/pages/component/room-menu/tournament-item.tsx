@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
+import { GADGETS } from "../../../../../config/game/gadgets"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
 import {
   TournamentPlayerSchema,
@@ -21,6 +22,7 @@ export default function TournamentItem(props: {
 }) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.network.profile)
   const uid: string = useAppSelector((state) => state.network.uid)
   const participating = props.tournament.players.has(uid)
   const startTime = new Date(props.tournament.startDate).getTime()
@@ -80,36 +82,48 @@ export default function TournamentItem(props: {
         </p>
       )}
       {!tournamentStarted && !tournamentFinished && (
-        <div className="actions">
-          {participating ? (
-            <button
-              className="participate-btn bubbly green"
-              title={t("cancel_tournament_participation")}
-              disabled={!registrationsOpen}
-              onClick={() => {
-                participateInTournament({
-                  tournamentId: props.tournament.id,
-                  participate: false
-                })
-              }}
-            >
-              {t("participating")}
-            </button>
-          ) : registrationsOpen ? (
-            <button
-              className="participate-btn bubbly blue"
-              title={t("register_tournament_participation")}
-              onClick={() => {
-                participateInTournament({
-                  tournamentId: props.tournament.id,
-                  participate: true
-                })
-              }}
-            >
-              {t("participate")}
-            </button>
-          ) : null}
-        </div>
+        <>
+          {user && user.level < GADGETS.certificate.levelRequired && (
+            <p>{t("level_required")}</p>
+          )}
+          <div className="actions">
+            {participating ? (
+              <button
+                className="participate-btn bubbly green"
+                title={t("cancel_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: false
+                  })
+                }}
+              >
+                {t("participating")}
+              </button>
+            ) : registrationsOpen ? (
+              <button
+                className="participate-btn bubbly blue"
+                title={t("register_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: true
+                  })
+                }}
+              >
+                {t("participate")}
+              </button>
+            ) : null}
+          </div>
+        </>
       )}
       <Tabs>
         <TabList>

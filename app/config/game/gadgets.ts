@@ -5,6 +5,7 @@ export const GADGETS_NAMES = [
   "bag",
   "team_planner",
   "jukebox",
+  "certificate",
   "palette",
   "synergy_wheel",
   "gameboy",
@@ -42,6 +43,11 @@ export const GADGETS: Record<GadgetName, Gadget> = {
   jukebox: {
     name: "jukebox",
     icon: "compact-disc",
+    levelRequired: 3
+  },
+  certificate: {
+    name: "certificate",
+    icon: "certificate",
     levelRequired: 5
   },
   palette: {

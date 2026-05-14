@@ -1358,9 +1358,11 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
-	"game_full": "ห้องนี้เต็มแล้ว",
-	"game_already_started": "เกมนี้ได้เริ่มขึ้นแล้ว",
-	"min_rank_not_reached": "แรงค์ของคุณไม่สูงพอที่จะเล่นห้องนี้ได้",
+	"room_menu": {
+		"game_full": "ห้องนี้เต็มแล้ว",
+		"game_already_started": "เกมนี้ได้เริ่มขึ้นแล้ว",
+		"min_rank_not_reached": "แรงค์ของคุณไม่สูงพอที่จะเล่นห้องนี้ได้"
+	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "ทุกคนมาพร้อมหน้าแล้ว",
 		"UNIQUE_STARTER": "ตัวเริ่มต้นระดับจำเพาะ",

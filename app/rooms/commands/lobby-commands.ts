@@ -7,6 +7,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   USERNAME_REGEXP
 } from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
 import { CollectionUtils } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata from "../../models/mongo-models/user-metadata"
@@ -546,6 +547,13 @@ export class JoinOrOpenRoomCommand extends Command<
       }
 
       case GameMode.RANKED: {
+        if (user.level < GADGETS.certificate.levelRequired) {
+          client.send(
+            Transfer.ALERT,
+            `You need to reach level ${GADGETS.certificate.levelRequired} to unlock ranked mode.`
+          )
+          return
+        }
         const userRank = getRank(user.elo)
         let minRank = EloRank.LEVEL_BALL
         let maxRank = EloRank.BEAST_BALL

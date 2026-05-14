@@ -1,5 +1,8 @@
 import { useTranslation } from "react-i18next"
+import { GADGETS } from "../../../../../config/game/gadgets"
+import { Role } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
+import { useAppSelector } from "../../../hooks"
 import { Modal } from "../modal/modal"
 import "./room-selection-menu.css"
 
@@ -9,6 +12,9 @@ export function RoomSelectionMenu(props: {
   onSelectMode: (mode: GameMode) => void
 }) {
   const { t } = useTranslation()
+  const profile = useAppSelector((state) => state.network.profile)
+  const profileLevel = profile?.level ?? 0
+
   return (
     <Modal
       show={props.show}
@@ -29,18 +35,21 @@ export function RoomSelectionMenu(props: {
             <h2>{t(`game_modes.${GameMode.CLASSIC}`)}</h2>
             <p>{t(`game_modes_descriptions.${GameMode.CLASSIC}`)}</p>
           </li>
-          <li
-            className="my-box"
-            onClick={() => props.onSelectMode(GameMode.RANKED)}
-          >
-            <img
-              src="assets/ui/game_modes/ranked.png"
-              alt={t(`game_modes.${GameMode.RANKED}`)}
-              draggable="false"
-            />
-            <h2>{t(`game_modes.${GameMode.RANKED}`)}</h2>
-            <p>{t(`game_modes_descriptions.${GameMode.RANKED}`)}</p>
-          </li>
+          {(profileLevel >= GADGETS.certificate.levelRequired ||
+            profile?.role === Role.ADMIN) && (
+            <li
+              className="my-box"
+              onClick={() => props.onSelectMode(GameMode.RANKED)}
+            >
+              <img
+                src="assets/ui/game_modes/ranked.png"
+                alt={t(`game_modes.${GameMode.RANKED}`)}
+                draggable="false"
+              />
+              <h2>{t(`game_modes.${GameMode.RANKED}`)}</h2>
+              <p>{t(`game_modes_descriptions.${GameMode.RANKED}`)}</p>
+            </li>
+          )}
           <li
             className="my-box"
             onClick={() => props.onSelectMode(GameMode.SCRIBBLE)}

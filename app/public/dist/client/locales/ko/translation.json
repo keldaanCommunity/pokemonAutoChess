@@ -4136,12 +4136,14 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
-	"room_is_private": "이 방은 사설입니다. 비밀번호를 입력하십시오.",
-	"game_full": "방이 가득 찼습니다.",
-	"game_already_started": "게임이 이미 시작했습니다.",
-	"min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
-	"max_rank_not_reached": "이 랭크매치 방은 보다 더 낮은 레이팅의 사람들을 위한 방입니다.",
-	"blacklisted": "현재 경기에서 강제 퇴장 당했습니다.",
+	"room_menu": {
+		"game_full": "방이 가득 찼습니다.",
+		"game_already_started": "게임이 이미 시작했습니다.",
+		"room_is_private": "이 방은 사설입니다. 비밀번호를 입력하십시오.",
+		"blacklisted": "현재 경기에서 강제 퇴장 당했습니다.",
+		"min_rank_not_reached": "이 랭크매치를 하기 위해선 랭크가 더 높아야 합니다.",
+		"max_rank_not_reached": "이 랭크매치 방은 보다 더 낮은 레이팅의 사람들을 위한 방입니다."
+	},
 	"npc_dialog": {
 		"welcome": "어서와요!",
 		"tell_price": "각각 {{price}}골드입니다!",

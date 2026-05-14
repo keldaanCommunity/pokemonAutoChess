@@ -4213,11 +4213,13 @@
 		"BEAST_BALL": "Beast Ball"
 	},
 	"room_is_private": "Questa stanza è privata. Inserire la password",
-	"game_full": "Questo gruppo è pieno",
 	"game_already_started": "La partita è già iniziata",
-	"min_rank_not_reached": "Il tuo rango non è alto abbastanza per giocare a questa partita classificata",
-	"max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata",
-	"blacklisted": "Sei stato kickato dal match",
+	"room_menu": {
+		"game_full": "Questo gruppo è pieno",
+		"blacklisted": "Sei stato kickato dal match",
+		"min_rank_not_reached": "Il tuo rango non è alto abbastanza per giocare a questa partita classificata",
+		"max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata"
+	},
 	"npc_dialog": {
 		"welcome": "Benvenuto!",
 		"tell_price": "{{price}} GOLD ad ognuno!",

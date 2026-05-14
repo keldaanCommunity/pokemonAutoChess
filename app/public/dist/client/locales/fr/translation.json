@@ -4330,12 +4330,14 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Ultra Ball"
 	},
-	"room_is_private": "Ce salon est privé. Saisissez le mot de passe",
-	"game_full": "Ce groupe est complet",
-	"game_already_started": "La partie a déjà commencé",
-	"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
-	"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé",
-	"blacklisted": "Vous avez été exclu(e) de ce match.",
+	"room_menu": {
+		"game_full": "Ce groupe est complet",
+		"game_already_started": "La partie a déjà commencé",
+		"room_is_private": "Ce salon est privé. Saisissez le mot de passe",
+		"blacklisted": "Vous avez été exclu(e) de ce match.",
+		"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
+		"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé"
+	},
 	"npc_dialog": {
 		"welcome": "Bienvenue !",
 		"tell_price": "C'est {{price}} GOLD !",

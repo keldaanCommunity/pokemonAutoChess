@@ -4031,12 +4031,14 @@
 		"MASTER_BALL": "Meisterball",
 		"BEAST_BALL": "Ultraball"
 	},
-	"room_is_private": "Dieser Raum ist privat. Gib Passwort ein",
-	"game_full": "Raum ist voll",
-	"game_already_started": "Spiel hat bereits begonnen",
-	"min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
-	"max_rank_not_reached": "Dein Rang ist zu hoch, um an diesem Ranglistenspiel teilzunehmen",
-	"blacklisted": "Du wurdest von diesem match gekickt",
+	"room_menu": {
+		"game_full": "Raum ist voll",
+		"game_already_started": "Spiel hat bereits begonnen",
+		"room_is_private": "Dieser Raum ist privat. Gib Passwort ein",
+		"blacklisted": "Du wurdest von diesem match gekickt",
+		"min_rank_not_reached": "Dein Rang ist nicht hoch genug, um an diesen Rangmatch teilzunehmen",
+		"max_rank_not_reached": "Dein Rang ist zu hoch, um an diesem Ranglistenspiel teilzunehmen"
+	},
 	"npc_dialog": {
 		"welcome": "Willkommen!",
 		"tell_price": "{{price}} GOLD pro!",

@@ -4097,11 +4097,13 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
-	"room_is_private": "Esta sala es privada. Introduce la contraseña",
-	"game_full": "El grupo esta completo",
-	"game_already_started": "La partida ya ha comenzado",
-	"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
-	"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria",
+	"room_menu": {
+		"game_full": "El grupo esta completo",
+		"game_already_started": "La partida ya ha comenzado",
+		"room_is_private": "Esta sala es privada. Introduce la contraseña",
+		"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
+		"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria"
+	},
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
 		"tell_price": "¡{{price}} GOLD cada uno!",

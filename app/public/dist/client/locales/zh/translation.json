@@ -4453,12 +4453,14 @@
 		"MASTER_BALL": "大师球",
 		"BEAST_BALL": "究极球"
 	},
-	"room_is_private": "此房间为私人房间，请输入密码：",
-	"game_full": "本房间已满员",
-	"game_already_started": "游戏已经开始",
-	"min_rank_not_reached": "你的段位过低，无法参与这场排位赛",
-	"max_rank_not_reached": "你的段位过高，无法参与这场排位赛",
-	"blacklisted": "你已被踢出本局游戏",
+	"room_menu": {
+		"game_full": "本房间已满员",
+		"game_already_started": "游戏已经开始",
+		"room_is_private": "此房间为私人房间，请输入密码：",
+		"blacklisted": "你已被踢出本局游戏",
+		"min_rank_not_reached": "你的段位过低，无法参与这场排位赛",
+		"max_rank_not_reached": "你的段位过高，无法参与这场排位赛"
+	},
 	"npc_dialog": {
 		"welcome": "欢迎！",
 		"tell_price": "每件{{price}} GOLD！",
