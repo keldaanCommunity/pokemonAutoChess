@@ -1366,7 +1366,7 @@ export class Ralts extends Pokemon {
   speed = 51
   def = 4
   speDef = 8
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
 }
@@ -1390,7 +1390,7 @@ export class Kirlia extends Pokemon {
   speed = 51
   def = 6
   speDef = 10
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
   passive = Passive.KIRLIA
@@ -1409,7 +1409,7 @@ export class Gardevoir extends Pokemon {
   speed = 51
   def = 8
   speDef = 16
-  maxPP = 95
+  maxPP = 100
   range = 3
   skill = Ability.FUTURE_SIGHT
 }

@@ -803,7 +803,24 @@ export const AbilitiesAnimations: {
   [Ability.SOFT_BOILED]: onCasterScale2,
   [Ability.FAKE_TEARS]: onCasterScale2,
   [Ability.TEA_TIME]: onCasterScale2,
-  [Ability.FUTURE_SIGHT]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.FUTURE_SIGHT]: onTarget({
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    animOptions: { repeat: 2 }
+  }),
+  ["FUTURE_SIGHT_HIT"]: onTarget({
+    scale: 2,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
+  [Ability.DOOM_DESIRE]: onTarget({
+    depth: DEPTH.ABILITY_MAJOR,
+    scale: 1,
+    positionOffset: [0, -20]
+  }),
+  ["DOOM_DESIRE_HIT"]: onTarget({
+    depth: DEPTH.ABILITY_MAJOR,
+    scale: 1,
+    positionOffset: [0, -20]
+  }),
   [Ability.PETAL_DANCE]: onCasterScale2,
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,

@@ -1761,22 +1761,27 @@ export class FutureSightStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
     const count = 5
-    const targets: PokemonEntity[] = board.cells
-      .filter<PokemonEntity>(
-        (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
-      )
-      .slice(0, count)
+    const enemies = board.cells.filter<PokemonEntity>(
+      (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
+    )
+    const targets: PokemonEntity[] = pickNRandomIn(enemies, count)
 
     for (const tg of targets) {
       pokemon.broadcastAbility({
-        positionX: tg.positionX,
-        positionY: tg.positionY
+        skill: "FUTURE_SIGHT",
+        targetX: tg.positionX,
+        targetY: tg.positionY
       })
     }
 
     pokemon.commands.push(
       new DelayedCommand(() => {
         for (const tg of targets) {
+          pokemon.broadcastAbility({
+            targetX: tg.positionX,
+            targetY: tg.positionY,
+            skill: "FUTURE_SIGHT_HIT"
+          })
           if (tg.hp > 0) {
             tg.handleSpecialDamage(
               damage,
@@ -1786,6 +1791,17 @@ export class FutureSightStrategy extends AbilityStrategy {
               crit
             )
           }
+          board.getAdjacentCells(tg.positionX, tg.positionY).forEach((cell) => {
+            if (cell.value && cell.value.team !== pokemon.team) {
+              cell.value.handleSpecialDamage(
+                Math.round(damage * 0.2),
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
         }
       }, 2000)
     )
@@ -8045,11 +8061,12 @@ export class DoomDesireStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     pokemon.commands.push(
       new DelayedCommand(() => {
         if (target && target.hp > 0) {
           pokemon.broadcastAbility({
+            skill: "DOOM_DESIRE_HIT",
             targetX: target.positionX,
             targetY: target.positionY
           })

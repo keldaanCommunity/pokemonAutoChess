@@ -49,6 +49,9 @@
 
 - Nerf Chimecho ; range 3 → 2 ; passive reworked: Resonates to the sounds of adjacent allies, which gives 3 PP to Chimecho when they cast their ability.
 
+- Ralts line: PP 95 → 100 ; buff Future Sight: now deals 20% of damage to adjacent targets as well. New visual animation.
+- New visual animation for Doom Desire
+
 # Changes to Items
 
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.
