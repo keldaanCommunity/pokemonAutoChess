@@ -13,9 +13,9 @@
 
 # Changes to Game modes
 
-> We are trying a new approach to discourage some people from creating multiple accounts and playing ranked games at a level that is not theirs, or from polluting the leaderboard with multiple accounts (a.k.a. smurfing). This rule will inevitably impact new players ; no approach is perfect, since we cannot prove multiple accounts without being invasive of your personal data. We hope it's an acceptable compromise.
+> We are trying a new approach to discourage some people from creating multiple accounts and playing ranked games at a level that is not theirs, or from polluting the leaderboard with multiple accounts (a.k.a. smurfing). This rule will inevitably impact new players ; no approach is perfect, we hope it's an acceptable compromise.
 
-- Ranked gamemode and participating in Tournaments now require to have an account of level 5 or higher
+- Ranked gamemode and participating in Tournaments now require to have an account of level 10 or higher
 
 # Changes to Synergies
 

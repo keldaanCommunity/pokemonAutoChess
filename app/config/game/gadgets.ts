@@ -45,14 +45,14 @@ export const GADGETS: Record<GadgetName, Gadget> = {
     icon: "compact-disc",
     levelRequired: 3
   },
-  certificate: {
-    name: "certificate",
-    icon: "certificate",
-    levelRequired: 5
-  },
   palette: {
     name: "palette",
     icon: "palette",
+    levelRequired: 5
+  },
+  certificate: {
+    name: "certificate",
+    icon: "certificate",
     levelRequired: 10
   },
   synergy_wheel: {
@@ -76,7 +76,6 @@ export const GADGETS: Record<GadgetName, Gadget> = {
     levelRequired: 40,
     disabled: !BOTS_ENABLED
   },
-
   tier_list_maker: {
     name: "tier_list_maker",
     icon: "tier-list",

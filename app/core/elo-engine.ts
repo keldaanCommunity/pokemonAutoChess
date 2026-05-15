@@ -18,7 +18,7 @@ export class EloEngine {
     */
     const dynamicK =
       actual > expected
-        ? min(this.K)(110 - 50 * Math.log(nbGamesPlayed))
+        ? min(this.K)(170 - 80 * Math.log(nbGamesPlayed))
         : this.K
     return Math.round(current + dynamicK * (actual - expected))
   }
