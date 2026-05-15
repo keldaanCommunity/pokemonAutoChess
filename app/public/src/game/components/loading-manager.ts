@@ -2,6 +2,7 @@ import { t } from "i18next"
 import Phaser, { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
@@ -13,7 +14,6 @@ import { preloadMusic } from "../../pages/utils/audio"
 import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
-import { getMusicAlt } from "../../../../config/game/music"
 
 export default class LoadingManager {
   scene: Phaser.Scene

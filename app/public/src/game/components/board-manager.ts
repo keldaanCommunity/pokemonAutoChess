@@ -10,6 +10,7 @@ import {
   RegionDetails,
   SynergyTriggers
 } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons,
@@ -64,7 +65,6 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
-import { getMusicAlt } from "../../../../config/game/music"
 
 export enum BoardMode {
   PICK = "pick",

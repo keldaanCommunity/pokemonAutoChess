@@ -125,10 +125,12 @@ export default function Jukebox(props: {
         </button>
       </div>
 
-      {credits && (
+      {credits ? (
         <p className="credits">
           {t("jukebox.music_credits")}: {credits}
         </p>
+      ) : (
+        <></>
       )}
 
       <p>
