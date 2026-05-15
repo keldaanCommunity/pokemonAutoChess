@@ -1848,7 +1848,7 @@
 		"DYNAMIC_PUNCH": "Inflige [40,80,160,SP] SPECIAL à la cible et la rend CONFUSION pendant [2,4,6] secondes.",
 		"ELECTRO_BOOST": "Tous les alliés ELECTRIC reçoivent RUNE_PROTECT pendant 5 secondes.",
 		"ELECTRO_WEB": "Vole [15,30,60,SP]% de la SPEED de tous les ennemis ADJACENT et leur inflige [15,30,60,SP] SPECIAL.",
-		"MYSTICAL_FIRE": "Inflige [20,40,80,SP] SPECIAL et réduit la AP de la cible de [10,SP].",
+		"MYSTICAL_FIRE": "Inflige [20,40,80,SP] SPECIAL et réduit la AP de la cible de [20,SP].",
 		"FLAME_CHARGE": "Fonce dans la rangée arrière de l'équipe adverse, infligeant [30,60,120,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"PASTEL_VEIL": "Fonce jusqu'à l'allié le plus éloigné. Le lanceur et ses alliés sur son chemin gagnent [20,40,80,SP] SHIELD et ont leurs altérations de statut guéries.",
 		"LEECH_SEED": "Inflige POISONNED à la cible pendant [3,6,12] secondes et se soigne le lanceur de [20,40,80,SP] HP.",

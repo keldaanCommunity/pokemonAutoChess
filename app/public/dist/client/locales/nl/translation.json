@@ -993,7 +993,6 @@
 		"DYNAMIC_PUNCH": "Brengt [40,80,160,SP] SPECIAL toe aan het doelwit en pas de CONFUSION status op hun toe voor [2,4,6] seconden",
 		"ELECTRO_BOOST": "Alle geallieerde ELECTRIC Pokémon ontvangen RUNE_PROTECT gedurende 5 seconden",
 		"ELECTRO_WEB": "Steel [15,30,60,SP] SPEED van alle aangrenzende vijandelijke Pokémon en breng [15,30,60,SP]",
-		"MYSTICAL_FIRE": "Breng [20,40,80,SP] SPECIAL",
 		"FLAME_CHARGE": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
 		"LEECH_SEED": "Pas de POISONNED status toe op het doelwit voor [3,6,12] seconden, en herstel de gebruiker's HP met [20,40,80,SP]",
 		"LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen en deel [200,SP]% TRUE",

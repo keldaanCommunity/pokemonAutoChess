@@ -52,7 +52,7 @@
 - New visual animation for Doom Desire
 - Nerf Sticky Web (Dewpider): fix damage applied to all targets hit instead of just the main target, and reduce the range of the web from a 2-tile cone in front of the user to a 1-tile cone.
 - Improve Dream Eater: will no longer be stuck in a cast loop if the target has immunity to sleep, and will target an enemy that can be put to sleep if the main target is immune.
-
+- Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 
 # Changes to Items
 
