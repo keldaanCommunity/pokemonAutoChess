@@ -140,6 +140,7 @@ export enum DungeonMusic {
   TREASURE_TOWN_STAGE_10 = "Treasure Town Stage 10",
   TREASURE_TOWN_STAGE_20 = "Treasure Town Stage 20",
   TREESHROUD_FOREST = "Treeshroud Forest",
+  TROUBLE_IN_TOWN = "Trouble in Town",
   UPPER_STEAM_CAVE = "Upper Steam Cave",
   VAST_ICE_MOUNTAIN = "Vast Ice Mountain",
   VAST_ICE_MOUNTAIN_PEAK = "Vast Ice Mountain Peak",

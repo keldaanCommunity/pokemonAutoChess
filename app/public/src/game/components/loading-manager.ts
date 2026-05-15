@@ -37,12 +37,12 @@ export default class LoadingManager {
   async preload() {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
-
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    const alt = new Date().getHours() % 2 ? " alt" : ""
+    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0, alt)
+    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10, alt)
+    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20, alt)
     preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
