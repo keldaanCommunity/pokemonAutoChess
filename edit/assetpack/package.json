@@ -6,9 +6,11 @@
     "@assetpack/plugin-compress": "^0.8.0",
     "@assetpack/plugin-ffmpeg": "^0.8.0",
     "@assetpack/plugin-json": "^0.8.0",
-    "@assetpack/plugin-texture-packer": "file:./plugin-texture-packer-fork"
+    "@assetpack/plugin-texture-packer": "file:./plugin-texture-packer-fork",
+    "patch-package": "^8.0.1"
   },
   "scripts": {
-    "assetpack": "assetpack -c .assetpack.js"
+    "assetpack": "assetpack -c .assetpack.js",
+    "postinstall": "patch-package"
   }
 }
