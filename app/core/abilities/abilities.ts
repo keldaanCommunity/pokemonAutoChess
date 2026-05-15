@@ -7697,7 +7697,11 @@ export class EggBombStrategy extends AbilityStrategy {
             pokemon.player &&
             chance(0.25, pokemon)
           ) {
-            giveRandomEgg(pokemon.player, false)
+            const egg = giveRandomEgg(pokemon.player, false)
+            if (egg) {
+              egg.stacks =
+                egg.evolutionRule.getHatchTime(egg, pokemon.player) - 1
+            }
           }
           v.status.triggerArmorReduction(4000, v)
         }
