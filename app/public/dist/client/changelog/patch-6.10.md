@@ -41,8 +41,9 @@
 
 - Dive (Wailmer, Lapras) no longer inflicts Freeze
 - Lapras PP: 120 → 110
-- Fuecoco PP: 60/60/60 → 100/80/60
+- Fuecoco PP: 60/60/60 → 80/70/60
 - Revert Popplio buff from 5.7 ; PP 70 → 80
+- Buff Scream Tail: Attack 14 → 16, Defense: 8 → 12
 
 > Chimecho was performing badly at low elo and very well at high elo. The passive is the main culprit, giving incredible value when played in sound 6 and fully surrounded with sound allies. These specific conditions were not often met at low elo, but highly optimized at high elo, creating a huge power gap for this Pokémon. We change the range and passive to both reduce its power ceiling and make it more intuitive and less conditional.
 
