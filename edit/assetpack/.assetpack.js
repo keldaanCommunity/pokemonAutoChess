@@ -10,6 +10,7 @@ const pkg = fs.readJSONSync("../../package.json")
 export default {
   entry: "../../app/public/src/assets",
   output: "../../app/public/dist/client/assets",
+  cache: true,
   plugins: {
     compressPng: compressPng(),
     compressJpg: compressJpg(),

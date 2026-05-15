@@ -809,7 +809,8 @@ export const AbilitiesAnimations: {
   }),
   ["FUTURE_SIGHT_HIT"]: onTarget({
     scale: 2,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    tint: 0xbb90ff
   }),
   [Ability.DOOM_DESIRE]: onTarget({
     depth: DEPTH.ABILITY_MAJOR,
@@ -968,7 +969,7 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: +Math.PI / 2
   }),
-  [Ability.MYSTICAL_FIRE]: onTarget({ positionOffset: [0, -50] }),
+  [Ability.MYSTICAL_FIRE]: onTarget({ scale: 1.5 }),
   [Ability.FLAME_CHARGE]: onCaster({
     oriented: true,
     rotation: +Math.PI / 2,
@@ -1202,9 +1203,8 @@ export const AbilitiesAnimations: {
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: onTargetScale1,
-  [Ability.STEAM_ERUPTION]: onTargetScale3,
+  [Ability.STEAM_ERUPTION]: onTargetScale2,
   [Ability.SEARING_SHOT]: onCaster({
-    ability: Ability.STEAM_ERUPTION,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 3
   }),
@@ -3064,7 +3064,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   ["WARP_WAND"]: onSprite(({ targetSprite, ...args }) => {
-    onTarget({ ability: Ability.FUTURE_SIGHT, scale: 1.5 })(args)
+    onTarget({ ability: "WARP", scale: 1.5 })(args)
     if (targetSprite) {
       targetSprite.isTeleporting = true
       setTimeout(() => {

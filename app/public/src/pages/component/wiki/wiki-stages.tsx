@@ -100,7 +100,7 @@ export default function WikiStages() {
           type: "pve",
           stageData: pveStage
         })
-      } else {
+      } else if (level > 0) {
         // Regular battle stage
         stages.push({
           level,

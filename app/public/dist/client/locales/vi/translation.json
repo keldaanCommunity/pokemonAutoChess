@@ -1281,7 +1281,6 @@
 		"DYNAMIC_PUNCH": "Gây [40,80,160,SP] SPECIAL lên mục tiêu và khiến chúng CONFUSION trong [2,4,6] giây",
 		"ELECTRO_BOOST": "Pokémon đồng minh hệ ELECTRIC nhận RUNE_PROTECT trong 5 giây",
 		"ELECTRO_WEB": "Đánh cắp [15,30,60,SP] SPEED từ các Pokémon đối thủ ở gần và gây [15,30,60,SP] SPECIAL",
-		"MYSTICAL_FIRE": "Gây [20,40,80,SP] SPECIAL",
 		"FLAME_CHARGE": "Tốc biến đến hậu tuyến đối thủ, gây [30,60,120,SP] SPECIAL tới toàn bộ Pokémon đối thủ trúng phải",
 		"LEECH_SEED": "POISONNED mục tiêu trong [3,6,12] giây và hồi [20,40,80,SP] HP cho bản thân",
 		"LOCK_ON": "Khóa mục tiêu. Đòn tấn công tiếp theo không thể trượt và gây thêm [200,SP]% TRUE",

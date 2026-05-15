@@ -1016,7 +1016,7 @@ export class MysticalFireStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAbilityPower(-10, pokemon, 1, crit)
+    target.addAbilityPower(-20, pokemon, 1, crit)
   }
 }
 
@@ -7179,9 +7179,10 @@ export class StickyWebStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const cells = board.getCellsInFront(pokemon, target, 2)
     const damage = pokemon.stars === 3 ? 70 : pokemon.stars === 2 ? 35 : 20
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
+    const cells = board.getCellsInFront(pokemon, target, 1)
     cells.forEach((cell) => {
       board.addBoardEffect(
         cell.x,
@@ -7190,15 +7191,6 @@ export class StickyWebStrategy extends AbilityStrategy {
         pokemon.simulation
       )
       pokemon.broadcastAbility({ positionX: cell.x, positionY: cell.y })
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.handleSpecialDamage(
-          damage,
-          board,
-          AttackType.SPECIAL,
-          pokemon,
-          crit
-        )
-      }
     })
   }
 }
@@ -7705,7 +7697,11 @@ export class EggBombStrategy extends AbilityStrategy {
             pokemon.player &&
             chance(0.25, pokemon)
           ) {
-            giveRandomEgg(pokemon.player, false)
+            const egg = giveRandomEgg(pokemon.player, false)
+            if (egg) {
+              egg.stacks =
+                egg.evolutionRule.getHatchTime(egg, pokemon.player) - 1
+            }
           }
           v.status.triggerArmorReduction(4000, v)
         }
@@ -9221,15 +9217,31 @@ export class DreamEaterStrategy extends AbilityStrategy {
       )
       pokemon.handleHeal(takenDamage, pokemon, 0, false)
     } else {
-      const duration = Math.round(
-        ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100)
+      const targetThatCanSleep = [
+        target,
+        ...(board.cells.filter(
+          (e) => e && e.team !== pokemon.team
+        ) as PokemonEntity[])
+      ].find(
+        (e) =>
+          !e.status.runeProtect &&
+          !e.status.skydiving &&
+          !e.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+          e.status.ccCooldown <= 0
       )
-      target.status.triggerSleep(duration, target)
-      pokemon.broadcastAbility({
-        targetX: target.positionX,
-        targetY: target.positionY
-      })
-      pokemon.pp = pokemon.maxPP
+
+      if (targetThatCanSleep) {
+        const duration = Math.round(
+          ([3000, 4000, 5000][pokemon.stars - 1] ?? 5000) *
+            (1 + pokemon.ap / 100)
+        )
+        target.status.triggerSleep(duration, target)
+        pokemon.broadcastAbility({
+          targetX: target.positionX,
+          targetY: target.positionY
+        })
+        pokemon.pp = pokemon.maxPP
+      }
     }
   }
 }

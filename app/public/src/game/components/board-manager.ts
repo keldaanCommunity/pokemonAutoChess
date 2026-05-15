@@ -818,12 +818,21 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (this.state.stageLevel === PortalCarouselStages[0])
+    if (this.state.townEncounter === TownEncounters.LUDICOLO) {
+      playMusic(this.scene, DungeonMusic.CARNIVAL_LUDICOLO)
+      this.scene.music?.once("looped", () => {
+        playMusic(
+          this.scene,
+          RegionDetails[this.player.map].music ?? DungeonMusic.TREASURE_TOWN
+        )
+      })
+    } else if (this.state.stageLevel === PortalCarouselStages[0]) {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
-    if (this.state.stageLevel === PortalCarouselStages[1])
+    } else if (this.state.stageLevel === PortalCarouselStages[1]) {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
-    if (this.state.stageLevel === PortalCarouselStages[2])
+    } else if (this.state.stageLevel === PortalCarouselStages[2]) {
       playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    }
     this.hideLightCell()
     this.hideBerryTrees()
     this.hideFlowerPots()

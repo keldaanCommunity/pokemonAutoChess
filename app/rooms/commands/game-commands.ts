@@ -1712,6 +1712,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
   initializeTownPhase() {
     this.state.phase = GamePhaseState.TOWN
+    this.room.miniGame.initialize(this.state, this.room)
+
     const nbPlayersAlive = schemaValues(this.state.players).filter(
       (p) => p.alive
     ).length
@@ -1722,8 +1724,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     } else if (this.state.stageLevel !== ItemCarouselStages[0]) {
       minigamePhaseDuration += nbPlayersAlive * 2000
     }
+    if (this.state.townEncounter != null) {
+      minigamePhaseDuration += 5000
+    }
     this.state.time = minigamePhaseDuration
-    this.room.miniGame.initialize(this.state, this.room)
 
     this.state.players.forEach((player: Player) => {
       if (player.alive) {

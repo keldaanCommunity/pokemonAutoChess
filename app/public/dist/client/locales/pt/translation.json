@@ -1831,7 +1831,6 @@
 		"DYNAMIC_PUNCH": "Distribui [40,80,160,SP] SPECIAL e deixa o alvo CONFUSION por [2,4,6] segundos",
 		"ELECTRO_BOOST": "Todos os aliados ELECTRIC recebem RUNE_PROTECT por 5s",
 		"ELECTRO_WEB": "Rouba [15,30,60,SP] dos inimigos adjacentes SPEED e inflige [15,30,60,SP] SPECIAL",
-		"MYSTICAL_FIRE": "Inflige [20,40,80,SP] SPECIAL",
 		"FLAME_CHARGE": "Corra para a retaguarda inimiga, causando [30,60,120,SP] SPECIAL",
 		"LEECH_SEED": "POISONNED o alvo por [3,6,12] segundos, curando [20,40,80,SP] HP",
 		"LOCK_ON": "Bloqueie o alvo. O próximo ataque não pode errar e aplique [200,SP]% TRUE.",
