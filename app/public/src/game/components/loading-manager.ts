@@ -13,6 +13,7 @@ import { preloadMusic } from "../../pages/utils/audio"
 import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
+import { getMusicAlt } from "../../../../config/game/music"
 
 export default class LoadingManager {
   scene: Phaser.Scene
@@ -39,10 +40,9 @@ export default class LoadingManager {
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
-    const alt = new Date().getHours() % 2 ? " alt" : ""
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0, alt)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10, alt)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20, alt)
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
     preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
