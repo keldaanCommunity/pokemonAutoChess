@@ -3642,7 +3642,8 @@
 		"EXPLORER": "Explorer",
 		"POSTMAN": "Postman",
 		"SURVEY_CORPS": "Survey Corps",
-		"GUILDMASTER": "Guildmaster"
+		"GUILDMASTER": "Guildmaster",
+		"LEGIONNAIRE": "Legionnaire"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3738,7 +3739,8 @@
 		"EXPLORER": "Complete a Exploration mission expedition",
 		"POSTMAN": "Complete a Delivery mission expedition",
 		"SURVEY_CORPS": "Complete a Battle mission expedition",
-		"GUILDMASTER": "Complete a rank S expedition"
+		"GUILDMASTER": "Complete a rank S expedition",
+		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
