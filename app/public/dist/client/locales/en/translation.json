@@ -4587,6 +4587,8 @@
 			"ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each Pokémon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy unique and hatch Pokémon.",
 			"items": "How do the items work ?",
 			"items_answer": "You can gain item components by winning PvE rounds or picking one in an item carousel. You can combine two item components to create a powerful tier 2 item. Every Pokémon can hold up to 3 items. The crafting list of all items is available in the wiki, in the items section.",
+			"reconnect": "I got disconnected from an ongoing game/room, how do I reconnect?",
+			"reconnect_answer": "Try reloading (F5 key). If that doesn't work, go back to <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reauthenticate if needed and go back to main lobby, and try looking for your game under the \"In Game\" tab or in the corresponding gamemode. There should be a green \"Reconnect\" button next to your game room.",
 			"bots": "How do bots work ?",
 			"bots_answer": "Bots are created by other players. Bots are theme-based, a Mewtwo bot will always have an Mewtwo in its team at a certain time in the game. Bots have a list of predefined teams at each stage.",
 			"create_bot": "Can i create my own bot ?",
