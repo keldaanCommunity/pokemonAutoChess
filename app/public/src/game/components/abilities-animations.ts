@@ -809,7 +809,8 @@ export const AbilitiesAnimations: {
   }),
   ["FUTURE_SIGHT_HIT"]: onTarget({
     scale: 2,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    tint: 0xbb90ff
   }),
   [Ability.DOOM_DESIRE]: onTarget({
     depth: DEPTH.ABILITY_MAJOR,
@@ -3064,7 +3065,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   ["WARP_WAND"]: onSprite(({ targetSprite, ...args }) => {
-    onTarget({ ability: Ability.FUTURE_SIGHT, scale: 1.5 })(args)
+    onTarget({ ability: "WARP", scale: 1.5 })(args)
     if (targetSprite) {
       targetSprite.isTeleporting = true
       setTimeout(() => {
