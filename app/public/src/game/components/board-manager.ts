@@ -10,6 +10,7 @@ import {
   RegionDetails,
   SynergyTriggers
 } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons,
@@ -827,11 +828,11 @@ export default class BoardManager {
         )
       })
     } else if (this.state.stageLevel === PortalCarouselStages[0]) {
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
     } else if (this.state.stageLevel === PortalCarouselStages[1]) {
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
     } else if (this.state.stageLevel === PortalCarouselStages[2]) {
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
     }
     this.hideLightCell()
     this.hideBerryTrees()

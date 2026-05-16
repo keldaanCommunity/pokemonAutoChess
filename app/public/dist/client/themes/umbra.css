@@ -13,6 +13,10 @@
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
 }
 
+dialog {
+  box-shadow: 0 0 16px black;
+}
+
 .custom-bg {
   position: relative;
   background: rgba(0, 0, 0, 0.25);

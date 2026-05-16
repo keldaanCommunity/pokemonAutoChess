@@ -1,6 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { DungeonMusic } from "../../../../../types/enum/Dungeon"
+import {
+  DungeonMusic,
+  DungeonMusicCredits
+} from "../../../../../types/enum/Dungeon"
 import { pickRandomIn } from "../../../../../utils/random"
 import { usePreference } from "../../../preferences"
 import { getGameScene } from "../../game"
@@ -30,6 +33,8 @@ export default function Jukebox(props: {
       setMusic(musicPlaying)
     }
   }, [music, musicPlaying, loading])
+
+  const credits = DungeonMusicCredits[musicPlaying] ?? null
 
   function changeMusic(name: DungeonMusic) {
     setMusic(name)
@@ -119,6 +124,14 @@ export default function Jukebox(props: {
           <img src="/assets/ui/randomize.svg" style={{ marginRight: 0 }} />
         </button>
       </div>
+
+      {credits ? (
+        <p className="credits">
+          {t("jukebox.music_credits")}: {credits}
+        </p>
+      ) : (
+        <></>
+      )}
 
       <p>
         <label className="full-width">

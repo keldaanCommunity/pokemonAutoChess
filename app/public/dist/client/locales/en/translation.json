@@ -4050,7 +4050,8 @@
 		"music_volume": "Music Volume",
 		"previous_music": "Previous music",
 		"next_music": "Next music",
-		"random_music": "Random music"
+		"random_music": "Random music",
+		"music_credits": "Music credits"
 	},
 	"toggle_fullscreen": "Toggle fullscreen",
 	"filters": "Filters",
