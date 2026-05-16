@@ -26,6 +26,11 @@
 - Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
 - Fighing 8 "Justified" is now "Coaching": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
 
+> We simplify the rules and oddities around Unown management to make Psychic easier to play, especially for beginners
+
+- Unowns no longer disappear after one fight if they did not cast their ability
+- Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
+
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.

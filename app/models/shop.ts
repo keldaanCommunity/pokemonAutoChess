@@ -33,6 +33,7 @@ import {
   SellPrices,
   SHOP_SIZE,
   SKY_MELODICA_CHANCE,
+  SynergyTriggers,
   TERRA_CYMBAL_CHANCE,
   UNOWN_PSY3_NB_SHOPS_INTERVAL,
   UNOWN_PSY5_NB_SHOPS_INTERVAL,
@@ -342,7 +343,15 @@ export default class Shop {
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
     player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    const hasTranscendence = player.effects.has(EffectEnum.TRANSCENDENCE)
+    let psychicLevel = player.synergies.get(Synergy.PSYCHIC) ?? 0
+
+    if (!manualRefresh && player.unownReminiscences > 0) {
+      // consume unown reminescenses for next automatic shopm
+      psychicLevel += player.unownReminiscences
+      player.unownReminiscences = 0
+    }
+
+    const hasTranscendence = psychicLevel >= SynergyTriggers[Synergy.PSYCHIC][2]
     if (hasTranscendence) {
       player.shopsSinceLastUnownShop += 1
     }

@@ -3004,7 +3004,7 @@
 		"FEEBAS": "6 $t(pkm.FEEBAS) evolucionan en $t(pkm.MILOTIC)",
 		"WISHIWASHI": "3 Wishiwashi evolucionan a la forma Banco",
 		"MELOETTA": "Meloetta cambia entre su Forma Danza y Forma Lírica dependiendo de su posición en el tablero",
-		"UNOWN": "Unown no puede contener objetos y desaparece después de una pelea o después de lanzar su habilidad.",
+		"UNOWN": "Unown no puede contener objetos y desaparece después de lanzar su habilidad.",
 		"GLISCOR": "La primera acumulación de POISONNED cura a $t(pkm.GLISCOR) en lugar de recibir daño.",
 		"GRIM_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un aterrador relincho que aumenta su AP en 30",
 		"SHAYMIN": "Shaymin está buscando una GRACIDEA_FLOWER",

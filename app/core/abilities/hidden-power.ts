@@ -34,6 +34,10 @@ export class HiddenPowerStrategy extends AbilityStrategy {
     crit: boolean
   ): void {
     super.process(unown, board, target, crit)
+    if (unown.player) {
+      unown.player.unownReminiscences++
+      unown.player.board.delete(unown.refToBoardPokemon.id)
+    }
     unown.state.triggerDeath(unown, null, board, AttackType.TRUE)
   }
 }

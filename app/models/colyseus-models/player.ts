@@ -177,6 +177,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  unownReminiscences: number = 0
 
   constructor(
     id: string,
