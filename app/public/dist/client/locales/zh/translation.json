@@ -2013,7 +2013,7 @@
 		"ANCHOR_SHOT": "抓取最远的宝可梦，对其造成[20,40,80,SP]点SPECIAL。",
 		"MAGNET_RISE": "使使用者和[2,4,6]只生命值最低的ADJACENT我方宝可梦获得PROTECT 2秒，并提升[10,SP]%的闪避率。",
 		"ATTRACT": "使[1,2,3]只随机选择的敌方宝可梦陷入CHARM [1,SP]秒。",
-		"WATER_PULSE": "对目标和ADJACENT敌方宝可梦造成[75,150,SP]点SPECIAL，并使他们陷入CONFUSION 2秒。",
+		"WATER_PULSE": "对目标和ADJACENT敌方宝可梦造成[70,140,SP]点SPECIAL，[30,LK]% 并使他们陷入CONFUSION 2秒。",
 		"PLAY_ROUGH": "对目标造成[30,60,120,SP]点SPECIAL，并使其陷入CHARM 2.5秒。",
 		"AERIAL_ACE": "对目标造成[25,50,100,SP]点TRUE。",
 		"PARABOLIC_CHARGE": "恢复[25,50]点HP，并对目标造成[25,50,100,SP]点SPECIAL。溢出的HP改为增加造成的SPECIAL。",

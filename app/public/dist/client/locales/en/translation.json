@@ -2013,7 +2013,7 @@
 		"ANCHOR_SHOT": "Grab the farthest enemy Pokémon and deal [20,40,80,SP] SPECIAL.",
 		"MAGNET_RISE": "Grant PROTECT for 2 seconds and [10,SP]% dodge chance to the user and to the [2,4,6] ADJACENT allied Pokémon with the lowest health.",
 		"ATTRACT": "Inflict [1,2,3] random enemy Pokémon with CHARM for [1,SP] seconds.",
-		"WATER_PULSE": "Deal [75,150,SP] SPECIAL to the target and ADJACENT enemy Pokémon and inflict them with CONFUSION for 2 seconds.",
+		"WATER_PULSE": "Deal [70,140,SP] SPECIAL to the target and ADJACENT enemy Pokémon with [30,LK]% chance to inflict them with CONFUSION for 2 seconds.",
 		"PLAY_ROUGH": "Deal [30,60,120,SP] SPECIAL to the target and inflict it with CHARM for 2.5 seconds.",
 		"AERIAL_ACE": "Deal [25,50,100,SP] TRUE to the target.",
 		"PARABOLIC_CHARGE": "Heal the user for [25,50] HP and deal [25,50,100,SP] SPECIAL to the target. Excess HP is converted into SPECIAL.",

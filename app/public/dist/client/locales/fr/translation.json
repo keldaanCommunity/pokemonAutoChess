@@ -1995,7 +1995,7 @@
 		"ANCHOR_SHOT": "Attrape le Pokémon adverse le plus éloigné et lui inflige [20,40,80,SP] SPECIAL.",
 		"MAGNET_RISE": "Donne PROTECT pendant 2 secondes et [10,SP]% de chances d'esquive au lanceur et à [2,4,6] Pokémon alliés ADJACENT qui ont les HP les plus bas.",
 		"ATTRACT": "Rend CHARM [1,2,3] Pokémon adverses choisis au hasard pendant [1,SP] secondes.",
-		"WATER_PULSE": "Inflige [75,150,SP] SPECIAL à la cible et aux ennemis ADJACENT et les rend CONFUSION pendant 2 secondes.",
+		"WATER_PULSE": "Inflige [70,140,SP] SPECIAL à la cible et aux ennemis ADJACENT avec [30,LK]% de chances de les rendre CONFUSION pendant 2 secondes.",
 		"PLAY_ROUGH": "Inflige [30,60,120,SP] SPECIAL à la cible et la rend CHARM pendant 2.5 secondes.",
 		"AERIAL_ACE": "Inflige [25,50,100,SP] TRUE à la cible.",
 		"PARABOLIC_CHARGE": "Soigne [25,50] HP et inflige [25,50,100,SP] SPECIAL à la cible. Les HP en trop sont convertis en SPECIAL.",

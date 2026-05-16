@@ -1963,7 +1963,7 @@
 		"ANCHOR_SHOT": "가장 멀리 있는 포켓몬을 붙잡아오며 [20,40,80,SP] SPECIAL 을 준다.",
 		"MAGNET_RISE": "인접한 [2,4,6]마리의 아군에게 2초 동안 PROTECT 와 [10,SP]% 회피율을 부여한다.",
 		"ATTRACT": "무작위로 선택된 [1,2,3]마리의 포켓몬을 [1,SP]초 동안 CHARM 상태로 만든다.",
-		"WATER_PULSE": "인접한 적에게 [75,150,SP]의 SPECIAL 를 입히고 2초 동안 CONFUSION 로 만든다.",
+		"WATER_PULSE": "인접한 적에게 [70,140,SP]의 SPECIAL 를 입히고 [30,LK]% 2초 동안 CONFUSION 로 만든다.",
 		"PLAY_ROUGH": "대상에게 [30,60,120,SP]의 SPECIAL 를 가하고 2.5초 동안 CHARM 으로 만든다.",
 		"AERIAL_ACE": "대상에 [25,50,100,SP] TRUE를 가한다.",
 		"PARABOLIC_CHARGE": "[25,50]의 HP를 회복하고 적에게 [25,50,100,SP]의 SPECIAL 을 입힌다. 초과 HP는 SPECIAL로 전환된다.",

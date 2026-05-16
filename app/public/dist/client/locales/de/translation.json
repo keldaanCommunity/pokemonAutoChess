@@ -1981,7 +1981,7 @@
 		"ANCHOR_SHOT": "Schnapp dir das am weitesten entfernte Pokémon und teile [20,40,80,SP] SPECIAL aus",
 		"MAGNET_RISE": "Gewährt dem Anwender und [2,4,6] benachbarten verbündeten Pokémon 2 Sekunden lang SCHUTZ und [10,SP]% Ausweichchance",
 		"ATTRACT": "CHARM [1,2,3] zufällige Pokémon für [1,SP] Sekunden",
-		"WATER_PULSE": "Fügt dem Ziel und benachbarten Gegnern [75,150,SP] SPECIAL zu und versetzt sie 2 Sekunden lang in CONFUSION",
+		"WATER_PULSE": "Fügt dem Ziel und benachbarten Gegnern [70,140,SP] SPECIAL zu und [30,LK]% versetzt sie 2 Sekunden lang in CONFUSION",
 		"PLAY_ROUGH": "Fügt dem Ziel [30,60,120,SP] SPECIAL zu und lässt es für 2,5 Sekunden CHARM",
 		"AERIAL_ACE": "Verursacht [25,50,100,SP] TRUE.",
 		"PARABOLIC_CHARGE": "Heilt [25,50] HP und fügt dem Ziel [25,50,100,SP] SPECIAL Schaden zu. Überschüssige HP werden in SPECIAL umgewandelt.",

@@ -1947,7 +1947,7 @@
 		"ANCHOR_SHOT": "Agguanta il Pokèmon nemico più lontano e infliggigli [20,40,80,SP] SPECIAL.",
 		"MAGNET_RISE": "Ottieni, per l'utilizzatore e [2,4,6] Pokèmon alleati adiacenti, una PROTECT per 2 secondi e il [10,SP]% in più di evadere i colpi.",
 		"ATTRACT": "Infliggi CHARM a [1,2,3] Pokèmon scelti casualmente per [1,SP] secondi",
-		"WATER_PULSE": "Infliggi [75,150,SP] SPECIAL al bersaglio ed a nemici adiacenti e causa CONFUSION per 2 secondi.",
+		"WATER_PULSE": "Infliggi [70,140,SP] SPECIAL al bersaglio ed a nemici adiacenti e [30,LK]% causa CONFUSION per 2 secondi.",
 		"PLAY_ROUGH": "Infliggi [30,60,120,SP] SPECIAL e CHARM per 2.5 secondi.",
 		"AERIAL_ACE": "Infliggi [25,50,100,SP] TRUE.",
 		"PARABOLIC_CHARGE": "Cura [25,50] HP ed infliggi [25,50,100,SP] SPECIAL. HP curati in eccesso si convertono in SPECIAL.",

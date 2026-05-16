@@ -6711,23 +6711,16 @@ export class WaterPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [75, 150][pokemon.stars - 1] ?? 150
+    const damage = [70, 140][pokemon.stars - 1] ?? 140
     board
-      .getAdjacentCells(target.positionX, target.positionY)
-      .map((v) => v.value)
-      .filter((v) => v?.team === target.team)
-      .concat(target)
+      .getAdjacentCells(target.positionX, target.positionY, true)
+      .map((cell) => cell.value)
+      .filter((value): value is PokemonEntity => value?.team === target.team)      
       .forEach((v) => {
-        if (v) {
+        if (chance(0.3, pokemon)) {
           v.status.triggerConfusion(2000, v, pokemon)
-          v.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
         }
+        v.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
       })
   }
 }
