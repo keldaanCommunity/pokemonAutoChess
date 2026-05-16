@@ -1016,7 +1016,7 @@ export class MysticalFireStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.addAbilityPower(-10, pokemon, 1, crit)
+    target.addAbilityPower(-20, pokemon, 1, crit)
   }
 }
 
@@ -7697,7 +7697,11 @@ export class EggBombStrategy extends AbilityStrategy {
             pokemon.player &&
             chance(0.25, pokemon)
           ) {
-            giveRandomEgg(pokemon.player, false)
+            const egg = giveRandomEgg(pokemon.player, false)
+            if (egg) {
+              egg.stacks =
+                egg.evolutionRule.getHatchTime(egg, pokemon.player) - 1
+            }
           }
           v.status.triggerArmorReduction(4000, v)
         }

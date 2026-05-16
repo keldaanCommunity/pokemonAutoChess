@@ -1865,7 +1865,7 @@
 		"DYNAMIC_PUNCH": "Deal [40,80,160,SP] SPECIAL to the target and inflict them with CONFUSION for [2,4,6] seconds.",
 		"ELECTRO_BOOST": "All allied ELECTRIC Pokémon receive RUNE_PROTECT for 5 seconds.",
 		"ELECTRO_WEB": "Deal [15,30,60,SP] SPECIAL to all ADJACENT enemy Pokémon and steal [15,30,60,SP] SPEED.",
-		"MYSTICAL_FIRE": "Deal [20,40,80,SP] SPECIAL to the target and reduce their AP by [10,SP].",
+		"MYSTICAL_FIRE": "Deal [20,40,80,SP] SPECIAL to the target and reduce their AP by [20,SP].",
 		"FLAME_CHARGE": "Dash into the enemy team's back line and deal [30,60,120,SP] SPECIAL to all enemy Pokémon in the path.",
 		"PASTEL_VEIL": "Dash to the farthest ally. Grant [20,40,80,SP] SHIELD to the user and all allied Pokémon on the way and cure their negative status conditions.",
 		"LEECH_SEED": "POISONNED the target for [3,6,12] seconds and heal the user for [20,40,80,SP] HP.",
@@ -3310,7 +3310,7 @@
 		"BURMY": "Burmy evolves into Wormadam if you get 3 Burmy with the same cloak, or into Mothim at stage 20 after moving to a region that doesn't have its cloak type",
 		"PSYDUCK": "Has [10,LK]% chance to get CONFUSION when taking a hit. Every time it gets CONFUSION, gain 100 AP",
 		"BLOODMOON": "Changes form during BLOODMOON",
-		"RECYCLE": "Feed it with a berry to gain 15 permanent max HP, or with another consumable item to gain 30 permanent max HP and get TRASH in return",
+		"RECYCLE": "This Pokémon lets you throw away your useless consumables. Drag a berry on it to make it gain 15 permanent max HP, or any another consumable item to gain 30 permanent max HP and get TRASH in return.",
 		"DREAM_CATCHER": "If its target is SLEEP, its attacks give 10 SHIELD to the 3 closest allies",
 		"SLOW_START": "Starts with -30 SPEED. When PP bar is full, gains 30 SPEED and 10 ATK.",
 		"STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all ADJACENT allies at the start of the fight",
@@ -3642,7 +3642,8 @@
 		"EXPLORER": "Explorer",
 		"POSTMAN": "Postman",
 		"SURVEY_CORPS": "Survey Corps",
-		"GUILDMASTER": "Guildmaster"
+		"GUILDMASTER": "Guildmaster",
+		"LEGIONNAIRE": "Legionnaire"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3738,7 +3739,8 @@
 		"EXPLORER": "Complete a Exploration mission expedition",
 		"POSTMAN": "Complete a Delivery mission expedition",
 		"SURVEY_CORPS": "Complete a Battle mission expedition",
-		"GUILDMASTER": "Complete a rank S expedition"
+		"GUILDMASTER": "Complete a rank S expedition",
+		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",
@@ -4588,6 +4590,8 @@
 			"ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each Pokémon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy unique and hatch Pokémon.",
 			"items": "How do the items work ?",
 			"items_answer": "You can gain item components by winning PvE rounds or picking one in an item carousel. You can combine two item components to create a powerful tier 2 item. Every Pokémon can hold up to 3 items. The crafting list of all items is available in the wiki, in the items section.",
+			"reconnect": "I got disconnected from an ongoing game/room, how do I reconnect?",
+			"reconnect_answer": "Try reloading (F5 key). If that doesn't work, go back to <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reauthenticate if needed and go back to main lobby, and try looking for your game under the \"In Game\" tab or in the corresponding gamemode. There should be a green \"Reconnect\" button next to your game room.",
 			"bots": "How do bots work ?",
 			"bots_answer": "Bots are created by other players. Bots are theme-based, a Mewtwo bot will always have an Mewtwo in its team at a certain time in the game. Bots have a list of predefined teams at each stage.",
 			"create_bot": "Can i create my own bot ?",

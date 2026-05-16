@@ -7,7 +7,7 @@ import {
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
-import { Transfer } from "../../types"
+import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -715,6 +715,9 @@ export class FalinksFormationEffect extends OnSpawnEffect {
         pkm.addAttack(this.stacks * 1, pkm, 0, false)
         pkm.addDefense(this.stacks * 1, pkm, 0, false)
         pkm.addShield(this.stacks * 30, pkm, 0, false)
+      }
+      if (this.stacks >= 8 && pkm.player) {
+        pkm.player.titles.add(Title.LEGIONNAIRE)
       }
     }, Passive.FALINKS)
   }

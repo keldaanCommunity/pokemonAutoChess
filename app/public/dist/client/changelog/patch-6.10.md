@@ -18,7 +18,7 @@
 - Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
 - Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
-- Fighing 8 "Justified" reworked to "Sheer Force": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
+- Fighing 8 "Justified" is now "Coaching": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
 
 # Changes to Pokemon & Abilities
 
@@ -41,8 +41,9 @@
 
 - Dive (Wailmer, Lapras) no longer inflicts Freeze
 - Lapras PP: 120 → 110
-- Fuecoco PP: 60/60/60 → 100/80/60
+- Fuecoco PP: 60/60/60 → 80/70/60
 - Revert Popplio buff from 5.7 ; PP 70 → 80
+- Buff Scream Tail: Attack 14 → 16, Defense: 8 → 12
 
 > Chimecho was performing badly at low elo and very well at high elo. The passive is the main culprit, giving incredible value when played in sound 6 and fully surrounded with sound allies. These specific conditions were not often met at low elo, but highly optimized at high elo, creating a huge power gap for this Pokémon. We change the range and passive to both reduce its power ceiling and make it more intuitive and less conditional.
 
@@ -52,7 +53,8 @@
 - New visual animation for Doom Desire
 - Nerf Sticky Web (Dewpider): fix damage applied to all targets hit instead of just the main target, and reduce the range of the web from a 2-tile cone in front of the user to a 1-tile cone.
 - Improve Dream Eater: will no longer be stuck in a cast loop if the target has immunity to sleep, and will target an enemy that can be put to sleep if the main target is immune.
-
+- Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
+- Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
 
 # Changes to Items
 
@@ -97,3 +99,4 @@
 - New gadget: Sprite Tracker, showing SpriteCollab entries missing in PAC with smart form filters, grouped normal/shiny previews, and direct links to SpriteCollab.
 - Added a key shortcut to open the Meta Report (default M, can be changed in options)
 - Thanks to John Rei, we have a new music in the jukebox and 3 alternate versions of the Treasure Town musics
+- New title: Legionnaire, obtained by making a Falinks formation with 8 troopers or more.
