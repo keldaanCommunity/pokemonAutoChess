@@ -34,7 +34,7 @@ export class HiddenPowerStrategy extends AbilityStrategy {
     crit: boolean
   ): void {
     super.process(unown, board, target, crit)
-    if (unown.player) {
+    if (unown.player && !unown.isSpawn) {
       unown.player.unownReminiscences++
       unown.player.board.delete(unown.refToBoardPokemon.id)
     }
