@@ -123,12 +123,16 @@ export default abstract class PokemonState {
         damage = 0
       }
 
-      const { takenDamage, death } = pokemon.types.has(Synergy.FAIRY) 
-        ? applyWandEffects(pokemon, target, damage, crit)
-        : { takenDamage: 0, death: false }
-
-      totalTakenDamage += takenDamage
-      if (death) hasAttackKilled = true
+      if (pokemon.types.has(Synergy.FAIRY)) {
+        const { takenDamage, death } = applyWandEffects(
+          pokemon,
+          target,
+          damage,
+          crit
+        )
+        totalTakenDamage += takenDamage
+        if (death) hasAttackKilled = true
+      }
 
       if (pokemon.effects.has(EffectEnum.CHARGE)) {
         const chargeDamage = damage * pokemon.count.ult * (1 + pokemon.ap / 100)
