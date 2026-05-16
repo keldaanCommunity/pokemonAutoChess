@@ -103,6 +103,7 @@
 - Fix Smeargle losing Sketch forever when copying and using Skill Swap
 - Fix second dish lost when holding big eater belt and evolving
 - Fix losing skill learned with Skill Swap TM when evolving
+- A Gourmet Pokémon with a Chef Hat on the bench will now only distribute dishes to adjacent Pokémon on the bench as well
 
 # Misc
 

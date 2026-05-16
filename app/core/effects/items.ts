@@ -431,7 +431,7 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
-                !isOnBench(p) &&
+                isOnBench(chef) === isOnBench(p) &&
                 distanceC(
                   chef.positionX,
                   chef.positionY,
