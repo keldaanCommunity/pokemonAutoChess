@@ -2106,7 +2106,7 @@
 		"FAKE_OUT": "Fügt dem Ziel [40,80,150,SP] SPECIAL zu, dann verliert der Anwender 30 AP. Das Ziel ist für 3 Sekunden FLINCH, es sei denn, die AP des Anwenders waren negativ.",
 		"FELL_STINGER": "Fügt dem Ziel [400,SP]% ATK SPECIAL zu. Wenn es das Ziel besiegt, erhält 30 % des Basis ATK.",
 		"GULP_MISSILE": "Schießt ein $t(pkm.ARROKUDA) mit vollen PP auf das Ziel, [50,SP] SPECIAL zufügt. Es besteht eine [20,LK]% Chance, dass stattdessen ein $t(pkm.PIKACHU) abgefeuert wird.",
-		"SCHOOLING": "Fügt dem Ziel und benachbarten Feinden [10,SP]% seiner maximalen HP als SPECIAL zu. Wenn ein Lusardin auf der Bank liegt, tritt er dem Schwarm bei und verleiht dem Benutzer 50 permanente HP.",
+		"SCHOOLING": "Fügt dem Ziel und benachbarten Feinden [15,SP]% seiner maximalen HP als SPECIAL zu. Wenn ein Lusardin auf der Bank liegt, tritt er dem Schwarm bei und verleiht dem Benutzer 50 permanente HP.",
 		"DOUBLE_SHOCK": "Der Benutzer gibt einen starken Elektroschock ab, der [50,100,200,SP] SPECIAL verursacht. Der Benutzer ist 3 Sekunden lang gelähmt.",
 		"PURIFY": "Behebt negativen Status und heilt den Benutzer um [15,30,60,SP] HP.",
 		"CHARM": "Fügt dem Ziel 3 Sekunden lang CHARM zu und reduziert seinen ATK um [2,3,4,SP] (min 1)",

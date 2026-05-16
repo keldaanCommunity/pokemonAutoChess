@@ -62,6 +62,7 @@
 - Improve Dream Eater: will no longer be stuck in a cast loop if the target has immunity to sleep, and will target an enemy that can be put to sleep if the main target is immune.
 - Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 - Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
+- Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
 
 # Changes to Items
 

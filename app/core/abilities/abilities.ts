@@ -950,7 +950,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 0.1 * pokemon.maxHP
+    const damage = 0.15 * pokemon.maxHP
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
@@ -6715,7 +6715,7 @@ export class WaterPulseStrategy extends AbilityStrategy {
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .map((cell) => cell.value)
-      .filter((value): value is PokemonEntity => value?.team === target.team)      
+      .filter((value): value is PokemonEntity => value?.team === target.team)
       .forEach((v) => {
         if (chance(0.3, pokemon)) {
           v.status.triggerConfusion(2000, v, pokemon)

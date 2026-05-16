@@ -2124,7 +2124,7 @@
 		"FAKE_OUT": "Cause [40,80,150,SP] SPECIAL ao alvo e reduza o AP do usuário em 30. Inflija FLINCH ao alvo por 3 segundos, a menos que o AP do usuário fosse negativo.",
 		"FELL_STINGER": "Cause [400,SP]% de ATK como SPECIAL ao alvo. Se derrotar o alvo, ganhe 30% de ATK base.",
 		"GULP_MISSILE": "Dispare um $t(pkm.ARROKUDA) com PP cheio no alvo, causando [50,SP] SPECIAL ao alvo. Há uma chance de [20,LK]% de que um $t(pkm.PIKACHU) seja disparado em vez disso.",
-		"SCHOOLING": "Inflige [10,SP]% do HP máximo do usuário como SPECIAL ao alvo e aos inimigos ADJACENT. Se houver um Wishiwashi no banco, ele se junta ao cardume e concede 50 HP máximo permanente ao usuário.",
+		"SCHOOLING": "Inflige [15,SP]% do HP máximo do usuário como SPECIAL ao alvo e aos inimigos ADJACENT. Se houver um Wishiwashi no banco, ele se junta ao cardume e concede 50 HP máximo permanente ao usuário.",
 		"DOUBLE_SHOCK": "Emite um poderoso choque elétrico, causando [50,100,200,SP] SPECIAL ao alvo e aplicando PARALYSIS ao usuário por 3 segundos.",
 		"PURIFY": "Cura status negativos e cura o usuário em [15,30,60,SP] HP.",
 		"CHARM": "Aplica CHARM no alvo por 3 segundos e reduz seu ATK em [2,3,4,SP] (mínimo 1).",
