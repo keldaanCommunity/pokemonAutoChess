@@ -11,6 +11,12 @@
 - Skwovet
 - Greedent
 
+# Changes to Game modes
+
+> We are trying a new approach to discourage some people from creating multiple accounts and playing ranked games at a level that is not theirs, or from polluting the leaderboard with multiple accounts (a.k.a. smurfing). This rule will inevitably impact new players ; no approach is perfect, we hope it's an acceptable compromise.
+
+- Ranked gamemode and participating in Tournaments now require to have an account of level 10 or higher
+
 # Changes to Synergies
 
 > This fairy rework is minor, the base effect of special damage on fairy attacks is unchanged, but the added random effects are fun and thematic for fairy. This is also a first attempt of a "build your own synergy" with 256 different combinations of wands.

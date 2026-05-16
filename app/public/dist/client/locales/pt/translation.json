@@ -4257,11 +4257,14 @@
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
 	},
-	"room_is_private": "Esta sala é privada. Digite a senha.",
-	"game_full": "Esta sala está completa",
-	"game_already_started": "O jogo já foi iniciado",
-	"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
-	"max_rank_not_reached": "Sua classificação é muito alta para jogar esta partida ranqueada",
+	"room_menu": {
+		"game_full": "Esta sala está completa",
+		"game_already_started": "O jogo já foi iniciado",
+		"room_is_private": "Esta sala é privada. Digite a senha.",
+		"blacklisted": "Você foi expulso desta partida.",
+		"min_rank_not_reached": "Seu rank não é alto o suficiente para participar neste jogo rankeado",
+		"max_rank_not_reached": "Sua classificação é muito alta para jogar esta partida ranqueada"
+	},
 	"npc_dialog": {
 		"welcome": "Bem-vindo!",
 		"tell_price": "{{price}} de OURO para cada!",
@@ -4784,8 +4787,7 @@
 	"location": "Localização",
 	"ping": "Ping",
 	"overlaps": "Sobreposições",
-	"toggle_locked": "Mostrar bloqueados",
-	"blacklisted": "Você foi expulso desta partida.",
+	"toggle_locked": "Mostrar bloqueados",	
 	"belly_full": "BARRIGA CHEIA",
 	"not_hungry": "SEM FOME",
 	"fully_grown": "TOTALMENTE CRESCIDO",

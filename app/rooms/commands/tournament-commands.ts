@@ -1,5 +1,6 @@
 import { Command } from "@colyseus/command"
 import { Client, matchMaker } from "colyseus"
+import { GADGETS } from "../../config/game/gadgets"
 import {
   getRemainingPlayers,
   getTournamentStage,
@@ -95,6 +96,13 @@ export class ParticipateInTournamentCommand extends Command<
       if (!user) return
 
       if (participate) {
+        if (user.level < GADGETS.certificate.levelRequired) {
+          client.send(
+            Transfer.ALERT,
+            `You need to reach level ${GADGETS.certificate.levelRequired} to participate in tournaments.`
+          )
+          return
+        }
         //logger.debug(`${user.uid} participates in tournament ${tournamentId}`)
         const tournamentPlayer = new TournamentPlayerSchema(
           user.displayName,

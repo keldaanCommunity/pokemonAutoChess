@@ -49,7 +49,7 @@ export default function RoomMenu() {
         user?.role !== Role.ADMIN &&
         user?.role !== Role.MODERATOR
       ) {
-        const inputPassword = prompt(t("room_is_private"))
+        const inputPassword = prompt(t("room_menu.room_is_private"))
         if (!inputPassword) return
         password = inputPassword
       }

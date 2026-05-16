@@ -5,7 +5,7 @@
   --color-bg-accent: #bc972f;
 
   --color-fg-primary: #f2eac5;
-  --color-fg-secondary: #ffef91;
+  --color-fg-secondary: #ffd791;
 }
 
 .custom-bg {
@@ -37,4 +37,8 @@
 
 .auth-page .logo {
   width: 30%;
+}
+
+#wiki-page .wiki-faq summary {
+  color: var(--color-fg-secondary);
 }
