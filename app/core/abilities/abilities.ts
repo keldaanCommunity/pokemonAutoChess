@@ -2319,7 +2319,7 @@ export class BlizzardStrategy extends AbilityStrategy {
         if (cell.value && pokemon.team != cell.value.team) {
           const enemy = cell.value
           enemy.handleSpecialDamage(
-            enemy.status.freeze ? damage * 2 : damage,
+            enemy.status.freeze ? Math.round(damage * 1.3) : damage,
             board,
             AttackType.SPECIAL,
             pokemon,

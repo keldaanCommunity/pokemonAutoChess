@@ -68,6 +68,7 @@
 - Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 - Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
 - Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
+- Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
 
 # Changes to Items
 
