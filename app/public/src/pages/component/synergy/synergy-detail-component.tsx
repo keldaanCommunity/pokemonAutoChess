@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
-import { getWildChance } from "../../../../../models/colyseus-models/synergies"
 import {
   type SynergyEffect,
   SynergyEffects
-} from "../../../../../models/effects"
+} from "../../../../../config/game/synergies"
+import { getWildChance } from "../../../../../models/colyseus-models/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import type { IPlayer } from "../../../../../types"

@@ -7,7 +7,7 @@ import {
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
-import { type SynergyEffect, SynergyEffects } from "../../models/effects"
+import { type SynergyEffect, SynergyEffects } from "../../config/game/synergies"
 import { type FlowerPot, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"

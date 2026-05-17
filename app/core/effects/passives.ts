@@ -1,11 +1,11 @@
 import { BOARD_WIDTH } from "../../config"
+import { SynergyEffects } from "../../config/game/synergies"
 import {
   BasculinWhite,
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
-import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"

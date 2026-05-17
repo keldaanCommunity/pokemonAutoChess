@@ -45,7 +45,7 @@
     "colyseus-post-deploy": "npx colyseus-post-deploy",
     "deploy-live": "pm2 deploy production update",
     "setup-live": "pm2 deploy production setup",
-    "check-circular-refs": "npx dpdm ./app -T",
+    "check-circular-refs": "npx dpdm ./app -T --no-warning --no-tree",
     "knip": "knip --max-show-issues 5"
   },
   "dependencies": {

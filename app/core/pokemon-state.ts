@@ -1,6 +1,6 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
+import { SynergyEffects } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
-import { SynergyEffects } from "../models/effects"
 import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import {
