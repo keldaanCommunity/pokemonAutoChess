@@ -44,8 +44,9 @@ import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
 import { ConditionBasedEvolutionRule } from "../evolution-rules"
 import { FlowerPotMons } from "../flower-pots"
-import { getUnitScore, type PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getUnitScore } from "../unit-score";
 import {
   BeforeAttackEffect,
   type Effect,

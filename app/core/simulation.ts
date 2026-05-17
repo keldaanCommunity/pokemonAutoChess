@@ -76,8 +76,9 @@ import {
   SoundCryEffect,
   wildBerserkEffect
 } from "./effects/synergies"
-import { getStrongestUnit, getUnitScore, PokemonEntity } from "./pokemon-entity"
+import { PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
+import { getStrongestUnit, getUnitScore } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL

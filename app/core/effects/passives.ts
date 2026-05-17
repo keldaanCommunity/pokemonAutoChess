@@ -32,8 +32,9 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { castAbility } from "../abilities/abilities"
 import type { Board, Cell } from "../board"
-import { getStrongestUnit, type PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getStrongestUnit } from "../unit-score"
 import {
   type Effect,
   OnAbilityCastEffect,

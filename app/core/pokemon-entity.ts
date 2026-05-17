@@ -79,6 +79,7 @@ import MovingState from "./moving-state"
 import type PokemonState from "./pokemon-state"
 import type Simulation from "./simulation"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
+import { getUnitScore } from "./unit-score";
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -1790,28 +1791,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
     return
   }
-}
-
-export function getStrongestUnit<T extends Pokemon | IPokemonEntity>(
-  pokemons: T[]
-): T {
-  /*
-    strongest is defined as:
-    1) number of items
-    2) stars level
-    3) rarity cost
-    */
-  const pokemonScores = pokemons.map((pokemon) => getUnitScore(pokemon))
-  const bestScore = Math.max(...pokemonScores)
-  return pickRandomIn(pokemons.filter((p, i) => pokemonScores[i] === bestScore))
-}
-
-export function getUnitScore(pokemon: IPokemonEntity | IPokemon) {
-  let score = 0
-  score += 100 * pokemon.items.size
-  score += 10 * pokemon.stars
-  score += getSellPrice(pokemon, null, true)
-  return score
 }
 
 export function canSell(

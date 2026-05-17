@@ -54,12 +54,10 @@ import {
   BergmiteOnBackEffect,
   FalinksFormationEffect
 } from "../effects/passives"
-import { getMoveSpeed } from "../move-speed";
-import {
-  getStrongestUnit,
-  PokemonEntity
-} from "../pokemon-entity"
+import { getMoveSpeed } from "../move-speed"
+import { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getStrongestUnit } from "../unit-score"
 import { AbilityStrategy } from "./ability-strategy"
 import {
   HiddenPowerAStrategy,
