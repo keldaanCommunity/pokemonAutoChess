@@ -62,8 +62,10 @@ import {
   IDragDropMessage,
   Role,
   Title,
+  TMPerAbility,
   Transfer
 } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import {
@@ -129,6 +131,7 @@ import {
 import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import GameRoom from "../game-room"
+import GameState from "../states/game-state"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -434,7 +437,8 @@ export class OnDragDropPokemonCommand extends Command<
     if (pokemonToSwap) {
       pokemonToSwap.positionX = pokemon.positionX
       pokemonToSwap.positionY = pokemon.positionY
-      pokemonToSwap.onChangePosition(
+      changePokemonPosition(
+        pokemonToSwap,
         pokemon.positionX,
         pokemon.positionY,
         player,
@@ -443,7 +447,7 @@ export class OnDragDropPokemonCommand extends Command<
     }
     pokemon.positionX = x
     pokemon.positionY = y
-    pokemon.onChangePosition(x, y, player, this.state)
+    changePokemonPosition(pokemon, x, y, player, this.state)
   }
 }
 
@@ -1569,7 +1573,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             if (coordinates) {
               pokemon.positionX = coordinates[0]
               pokemon.positionY = coordinates[1]
-              pokemon.onChangePosition(
+              changePokemonPosition(
+                pokemon,
                 coordinates[0],
                 coordinates[1],
                 player,
@@ -2086,5 +2091,22 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
     })
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
+  }
+}
+
+function changePokemonPosition(
+  pokemon: Pokemon,
+  x: number,
+  y: number,
+  player: Player,
+  state: GameState
+) {
+  pokemon.onChangePosition(x, y, player, state)
+  if (y === 0 && pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+    player.items.push(TMPerAbility.get(pokemon.tm)!)
+    pokemon.tm = Ability.DEFAULT
+    const { skill: baseSkill, pp: baseMaxPP } = getPokemonData(pokemon.name)
+    pokemon.skill = baseSkill
+    pokemon.maxPP = baseMaxPP
   }
 }

@@ -22,9 +22,11 @@
 > This fairy rework is minor, the base effect of special damage on fairy attacks is unchanged, but the added random effects are fun and thematic for fairy. This is also a first attempt of a "build your own synergy" with 256 different combinations of wands.
 
 - Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
+
 - Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
 - Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
 - Fighing 8 "Justified" is now "Coaching": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
+- Human TM are now removable simply by benching the Pokémon
 
 > We simplify the rules and oddities around Unown management to make Psychic easier to play, especially for beginners
 

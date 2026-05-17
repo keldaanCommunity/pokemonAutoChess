@@ -173,10 +173,6 @@ export class Pokemon extends Schema implements IPokemon {
       player.items.push(...itemsToRemove)
       this.removeItems(itemsToRemove, player)
     }
-    if (y === 0 && this.tm === Ability.SKILL_SWAP) {
-      this.skill = Ability.SKILL_SWAP
-      this.maxPP = 100
-    }
   }
 
   onItemGiven(item: Item, player: Player) {

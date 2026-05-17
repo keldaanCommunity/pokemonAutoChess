@@ -1,4 +1,4 @@
-import { reverseMap } from "../../utils/map"
+import { objToMap, reverseMap } from "../../utils/map"
 import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
@@ -975,6 +975,10 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_PROTECT]: Ability.PROTECT,
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
+
+export const TMPerAbility = reverseMap(
+  objToMap(AbilityPerTM as Record<Item, Ability>)
+)
 
 export const Dishes = [
   Item.OLIVE_OIL,
