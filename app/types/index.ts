@@ -3,7 +3,6 @@ import type { Board } from "../core/board"
 import Dps from "../core/dps"
 import { Effect as EffectClass } from "../core/effects/effect"
 import { EvolutionRule } from "../core/evolution-rules"
-import { FlowerPot } from "../core/flower-pots"
 import Count from "../models/colyseus-models/count"
 import ExperienceManager from "../models/colyseus-models/experience-manager"
 import { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -22,6 +21,7 @@ import { DungeonPMDO } from "./enum/Dungeon"
 import { BoardEffect, EffectEnum } from "./enum/Effect"
 import { EloRank } from "./enum/EloRank"
 import { Emotion } from "./enum/Emotion"
+import { FlowerPot } from "./enum/FlowerPot"
 import {
   GameMode,
   Orientation,
@@ -38,6 +38,7 @@ import { Weather } from "./enum/Weather"
 import { GameStats } from "./interfaces/GameStats"
 
 export * from "./enum/Emotion"
+export * from "./enum/FlowerPot"
 export * from "./enum/Item"
 
 export const CDN_URL =
