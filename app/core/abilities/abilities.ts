@@ -26,12 +26,7 @@ import { isOnBench } from "../../utils/board"
 import { distanceC, distanceE, distanceM } from "../../utils/distance"
 import { logger } from "../../utils/logger"
 import { calcAngleDegrees, clamp, max, min } from "../../utils/number"
-import {
-  effectInLine,
-  effectInOrientation,
-  OrientationArray,
-  OrientationVector
-} from "../../utils/orientation"
+import { OrientationArray, OrientationVector } from "../../utils/orientation"
 import {
   chance,
   pickNRandomIn,
@@ -40,7 +35,12 @@ import {
   shuffleArray
 } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import type { Board, Cell } from "../board"
+import {
+  type Board,
+  type Cell,
+  effectInLine,
+  effectInOrientation
+} from "../board"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,

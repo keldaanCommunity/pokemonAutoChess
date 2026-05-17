@@ -13,8 +13,7 @@ import {
 import { getMusicAlt } from "../../../../config/game/music"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
-  FlowerPotMons,
-  FlowerPots
+  FlowerPotMons
 } from "../../../../core/flower-pots"
 import Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
@@ -22,7 +21,7 @@ import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { PVEStage, PVEStages } from "../../../../models/pve-stages"
 import GameState from "../../../../rooms/states/game-state"
-import { IPokemon, IPokemonEntity } from "../../../../types"
+import { FlowerPots, IPokemon, IPokemonEntity } from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,

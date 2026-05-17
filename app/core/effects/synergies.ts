@@ -8,7 +8,7 @@ import {
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
 import { SynergyEffect, SynergyEffects } from "../../models/effects"
-import { Title } from "../../types"
+import { FlowerPot, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -20,13 +20,11 @@ import { isIn } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
-import { effectInLine } from "../../utils/orientation"
 import { chance } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { Board } from "../board"
+import { Board, effectInLine } from "../board"
 import {
   FlowerMonByPot,
-  FlowerPot,
   getFlowerPotsUnlocked
 } from "../flower-pots"
 import { PokemonEntity } from "../pokemon-entity"

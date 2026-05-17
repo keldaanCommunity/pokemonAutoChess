@@ -12,11 +12,14 @@ import {
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
-  FlowerMonByPot,
-  FlowerPots
+  FlowerMonByPot
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { type IPokemon, type IPokemonEntity } from "../../../../types"
+import {
+  FlowerPots,
+  type IPokemon,
+  type IPokemonEntity
+} from "../../../../types"
 import {
   AbilityAnimationArgs,
   AttackSprite,
