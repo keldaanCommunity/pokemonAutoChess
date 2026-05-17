@@ -9,7 +9,8 @@ import { AbilityStrategies, castAbility } from "./abilities/abilities"
 import type { Board } from "./board"
 import { OnMoveEffect } from "./effects/effect"
 import { drumBeat, partingShot, stenchJump } from "./effects/passives"
-import { getMoveSpeed, type PokemonEntity } from "./pokemon-entity"
+import { getMoveSpeed } from "./move-speed"
+import type { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export default class MovingState extends PokemonState {

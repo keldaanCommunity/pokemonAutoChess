@@ -54,8 +54,8 @@ import {
   BergmiteOnBackEffect,
   FalinksFormationEffect
 } from "../effects/passives"
+import { getMoveSpeed } from "../move-speed";
 import {
-  getMoveSpeed,
   getStrongestUnit,
   PokemonEntity
 } from "../pokemon-entity"

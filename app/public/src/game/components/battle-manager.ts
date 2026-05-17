@@ -5,7 +5,7 @@ import {
   MaxTroopersPerPkm
 } from "../../../../config"
 import { getAttackTimings } from "../../../../core/attacking-state"
-import { getMoveSpeed } from "../../../../core/pokemon-entity"
+import { getMoveSpeed } from "../../../../core/move-speed"
 import type Simulation from "../../../../core/simulation"
 import type Count from "../../../../models/colyseus-models/count"
 import type Player from "../../../../models/colyseus-models/player"
