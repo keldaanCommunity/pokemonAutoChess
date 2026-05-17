@@ -123,7 +123,7 @@ export default class MovingState extends PokemonState {
       cells.forEach((cell) => {
         if (cell.value === undefined) {
           const candidateDistance = findPath(
-            board,
+            board.getAllPokemonCoordinates(),
             [pokemon.positionX, pokemon.positionY],
             [cell.x, cell.y]
           )
