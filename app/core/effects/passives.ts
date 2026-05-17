@@ -30,7 +30,8 @@ import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { castAbility } from "../abilities/abilities"
+import { AbilityStrategies } from "../abilities/abilities"
+import { castAbility } from "../abilities/cast"
 import type { Board, Cell } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -61,7 +62,7 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
     // CAST ABILITY
     const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
     if (target) {
-      castAbility(pokemon.skill, pokemon, board, target)
+      castAbility(AbilityStrategies[pokemon.skill], pokemon, board, target)
     }
     return
   }

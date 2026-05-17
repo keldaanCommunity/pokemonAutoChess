@@ -24,7 +24,8 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
-import { castAbility } from "../../core/abilities/abilities"
+import { AbilityStrategies } from "../../core/abilities/abilities"
+import { castAbility } from "../../core/abilities/cast"
 import {
   OnItemDroppedEffect,
   OnStageStartEffect
@@ -1895,7 +1896,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               player.team,
               simulation
             )
-            castAbility(caster.skill, caster, simulation.board, null, false)
+            castAbility(
+              AbilityStrategies[caster.skill],
+              caster,
+              simulation.board,
+              null,
+              false
+            )
           }, 10000)
         })
       })
