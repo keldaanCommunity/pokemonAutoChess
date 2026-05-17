@@ -54,7 +54,7 @@ import {
   FalinksFormationEffect
 } from "../effects/passives"
 import { getMoveSpeed } from "../move-speed"
-import { PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { getStrongestUnit } from "../unit-score"
 import { AbilityStrategy } from "./ability-strategy"
@@ -14631,8 +14631,7 @@ export class EerieSpellStrategy extends AbilityStrategy {
 
       // Find next target with lowest HP
       currentTarget = board.cells
-        .filter((c) => c instanceof PokemonEntity)
-        .filter((c) => !visited.has(c.id))
+        .filter((c): c is PokemonEntity => c != null && !visited.has(c.id))
         .sort((a, b) => a.hp - b.hp)[0]
     }
   }
@@ -14688,8 +14687,7 @@ export class ShellSideArmStrategy extends AbilityStrategy {
 
       // Find next target with highest HP
       currentTarget = board.cells
-        .filter((c) => c instanceof PokemonEntity)
-        .filter((c) => !visited.has(c.id))
+        .filter((c): c is PokemonEntity => c != null && !visited.has(c.id))
         .sort((a, b) => b.hp - a.hp)[0]
     }
   }
@@ -14706,7 +14704,7 @@ export class TripleDiveStrategy extends AbilityStrategy {
     const enemies = board.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity && entity.team !== pokemon.team
+          entity != null && entity.team !== pokemon.team
       )
       .sort((a, b) => a.hp - b.hp)
       .slice(0, 3)
