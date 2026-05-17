@@ -1,6 +1,6 @@
 import { EmbedBuilder, WebhookClient } from "discord.js"
 import { BASE_URL } from "../config"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import type { IBot } from "../types/models/bot-v2"
 import { getAvatarSrc } from "../utils/avatar"
 import { logger } from "../utils/logger"

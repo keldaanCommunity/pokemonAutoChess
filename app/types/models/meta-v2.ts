@@ -1,5 +1,5 @@
-import { Pkm } from "../enum/Pokemon"
-import { Synergy } from "../enum/Synergy"
+import type { Pkm } from "../enum/Pokemon"
+import type { Synergy } from "../enum/Synergy"
 
 export interface IMeanTeam {
   cluster_id: string

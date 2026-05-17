@@ -1,10 +1,11 @@
 import { t } from "i18next"
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
 import { getSellPrice } from "../../../../models/shop"
 import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon"
+import type GameScene from "../scenes/game-scene"
+import type PokemonSprite from "./pokemon"
 
 export class SellZone extends GameObjects.Container {
   scene: GameScene

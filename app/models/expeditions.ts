@@ -2,17 +2,17 @@ import { getBaseAltForm } from "../config"
 import { ExpPerExpeditionRank } from "../config/game/expeditions"
 import { getExpeditionData, getPlayerExpeditions } from "../core/expeditions"
 import { notificationsService } from "../services/notifications"
-import { IPlayer, Title } from "../types"
+import { type IPlayer, Title } from "../types"
 import {
-  BattleMissionData,
-  DeliveryMissionData,
-  Expedition,
+  type BattleMissionData,
+  type DeliveryMissionData,
+  type Expedition,
   ExpeditionRank,
   ExpeditionType,
-  ExplorationMissionData,
-  RescueMissionData
+  type ExplorationMissionData,
+  type RescueMissionData
 } from "../types/enum/Expedition"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { schemaValues } from "../utils/schemas"
 import { giveUserExp } from "./mongo-models/user-metadata"
 

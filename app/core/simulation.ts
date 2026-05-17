@@ -1,17 +1,17 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
-import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import type Player from "../models/colyseus-models/player"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
 import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
-import GameRoom from "../rooms/game-room"
+import type GameRoom from "../rooms/game-room"
 import {
-  IPokemon,
-  IPokemonEntity,
-  ISimulation,
+  type IPokemon,
+  type IPokemonEntity,
+  type ISimulation,
   Title,
   Transfer
 } from "../types"
@@ -36,7 +36,7 @@ import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
-import { IPokemonData } from "../types/interfaces/PokemonData"
+import type { IPokemonData } from "../types/interfaces/PokemonData"
 import { count, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
@@ -49,7 +49,7 @@ import {
   shuffleArray
 } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
-import { AbilityStrategies, SurfStrategy } from "./abilities/abilities"
+import { AbilityStrategies, type SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
 import { DishEffects } from "./dishes"
 import Dps from "./dps"
@@ -1463,7 +1463,7 @@ export default class Simulation extends Schema implements ISimulation {
               false
             )
           }
-          if (pokemonOnCell.types.has(Synergy.ELECTRIC)){
+          if (pokemonOnCell.types.has(Synergy.ELECTRIC)) {
             pokemonOnCell.status.addElectricField(pokemonOnCell)
             pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)

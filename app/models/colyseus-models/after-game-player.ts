@@ -1,8 +1,8 @@
 import { ArraySchema, Schema, type } from "@colyseus/schema"
-import { IAfterGamePlayer, Role, Title } from "../../types"
-import { Synergy } from "../../types/enum/Synergy"
-import { GameStats } from "../../types/interfaces/GameStats"
-import { IPokemonRecord, PokemonRecord } from "./game-record"
+import type { IAfterGamePlayer, Role, Title } from "../../types"
+import type { Synergy } from "../../types/enum/Synergy"
+import type { GameStats } from "../../types/interfaces/GameStats"
+import { type IPokemonRecord, PokemonRecord } from "./game-record"
 import { GameStatsSchema } from "./game-stats"
 
 export class SampleSynergy extends Schema {

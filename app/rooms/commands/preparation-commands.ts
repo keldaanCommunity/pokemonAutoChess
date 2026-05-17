@@ -1,9 +1,9 @@
 import { memoryUsage } from "node:process"
 import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { QueryFilter } from "mongoose"
+import { type Client, matchMaker } from "colyseus"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { QueryFilter } from "mongoose"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -14,14 +14,17 @@ import {
   isPlayerTimeout,
   setPendingGame
 } from "../../core/pending-game-manager"
-import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
+import {
+  GameUser,
+  type IGameUser
+} from "../../models/colyseus-models/game-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
-import { EloRank } from "../../types/enum/EloRank"
+import type { EloRank } from "../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IBot } from "../../types/models/bot-v2"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
@@ -29,7 +32,7 @@ import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { schemaEntries, schemaValues } from "../../utils/schemas"
-import PreparationRoom from "../preparation-room"
+import type PreparationRoom from "../preparation-room"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,

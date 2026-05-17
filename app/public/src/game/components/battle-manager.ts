@@ -6,19 +6,19 @@ import {
 } from "../../../../config"
 import { getAttackTimings } from "../../../../core/attacking-state"
 import { getMoveSpeed } from "../../../../core/pokemon-entity"
-import Simulation from "../../../../core/simulation"
-import Count from "../../../../models/colyseus-models/count"
-import Player from "../../../../models/colyseus-models/player"
+import type Simulation from "../../../../core/simulation"
+import type Count from "../../../../models/colyseus-models/count"
+import type Player from "../../../../models/colyseus-models/player"
 import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
-import Status from "../../../../models/colyseus-models/status"
+import type Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { IBoardEvent, IPokemonEntity } from "../../../../types"
+import type { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
 import { EffectEnum } from "../../../../types/enum/Effect"
 import {
   AttackType,
   HealType,
-  Orientation,
+  type Orientation,
   PokemonActionState,
   PokemonTint,
   Stat
@@ -33,9 +33,9 @@ import { OrientationVector } from "../../../../utils/orientation"
 import { pickRandomIn } from "../../../../utils/random"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
-import AnimationManager from "../animation-manager"
+import type AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import { displayAbility, displayHit } from "./abilities-animations"
 import PokemonSprite from "./pokemon"
 import {

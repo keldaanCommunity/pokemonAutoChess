@@ -1,4 +1,4 @@
-import { IPlayer, Title } from "../types"
+import { type IPlayer, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { FlowerPot } from "../types/enum/FlowerPot"
 import { Pkm } from "../types/enum/Pokemon"

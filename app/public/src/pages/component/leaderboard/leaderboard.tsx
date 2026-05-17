@@ -1,7 +1,7 @@
-import { CSSProperties, ReactElement } from "react"
+import type { CSSProperties, ReactElement } from "react"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List } from "react-window"
-import {
+import type {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../../../types/interfaces/LeaderboardInfo"

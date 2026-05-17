@@ -1,5 +1,5 @@
-import Player from "../models/colyseus-models/player"
-import { Egg } from "../models/colyseus-models/pokemon"
+import type Player from "../models/colyseus-models/player"
+import type { Egg } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"

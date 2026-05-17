@@ -1,7 +1,7 @@
 import { t } from "i18next"
-import React from "react"
+import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PkmWithCustom } from "../../../../../types"
+import type { PkmWithCustom } from "../../../../../types"
 import {
   Berries,
   CraftableItems,

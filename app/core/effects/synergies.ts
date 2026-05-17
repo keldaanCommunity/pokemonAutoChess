@@ -7,8 +7,8 @@ import {
   MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
-import { SynergyEffect, SynergyEffects } from "../../models/effects"
-import { FlowerPot, Title } from "../../types"
+import { type SynergyEffect, SynergyEffects } from "../../models/effects"
+import { type FlowerPot, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -22,26 +22,23 @@ import { distanceC } from "../../utils/distance"
 import { min } from "../../utils/number"
 import { chance } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { Board, effectInLine } from "../board"
-import {
-  FlowerMonByPot,
-  getFlowerPotsUnlocked
-} from "../flower-pots"
-import { PokemonEntity } from "../pokemon-entity"
+import { type Board, effectInLine } from "../board"
+import { FlowerMonByPot, getFlowerPotsUnlocked } from "../flower-pots"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,
   OnAttackReceivedEffect,
-  OnAttackReceivedEffectArgs,
+  type OnAttackReceivedEffectArgs,
   OnBenchedDuringFightEffect,
   OnDamageDealtEffect,
-  OnDamageDealtEffectArgs,
+  type OnDamageDealtEffectArgs,
   OnDamageReceivedEffect,
-  OnDamageReceivedEffectArgs,
+  type OnDamageReceivedEffectArgs,
   OnDeathEffect,
   OnKillEffect,
-  OnKillEffectArgs,
+  type OnKillEffectArgs,
   OnSimulationStartEffect,
   OnSpawnEffect
 } from "./effect"

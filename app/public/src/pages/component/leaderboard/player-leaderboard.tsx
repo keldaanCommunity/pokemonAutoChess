@@ -1,4 +1,4 @@
-import { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
+import type { ILeaderboardInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppSelector } from "../../../hooks"
 import Leaderboard from "./leaderboard"
 

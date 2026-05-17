@@ -10,14 +10,20 @@ import {
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
-  EvolutionRule,
+  type EvolutionRule,
   HatchEvolutionRule,
   ItemEvolutionRule,
   StackBasedEvolutionRule
 } from "../../core/evolution-rules"
-import Simulation from "../../core/simulation"
-import GameState from "../../rooms/states/game-state"
-import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
+import type Simulation from "../../core/simulation"
+import type GameState from "../../rooms/states/game-state"
+import {
+  Emotion,
+  type IPlayer,
+  type IPokemon,
+  type IPokemonEntity,
+  Title
+} from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -53,7 +59,7 @@ import { clamp, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
 import { SynergyEffects } from "../effects"
 import PokemonFactory from "../pokemon-factory"
-import Player from "./player"
+import type Player from "./player"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string

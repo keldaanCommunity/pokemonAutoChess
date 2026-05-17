@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { flushSync } from "react-dom"
-import { PATCHES, PatchInfo } from "../../../../../config/game/patches"
+import { PATCHES, type PatchInfo } from "../../../../../config/game/patches"
 import { PatchSummary } from "./patch-summary"
 import { Poster } from "./poster"
 import "./patchnotes.css"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { CDN_URL, ICreditName } from "../types"
+import { CDN_URL, type ICreditName } from "../types"
 
 export interface PokemonCredits {
   portrait_credit: Credit

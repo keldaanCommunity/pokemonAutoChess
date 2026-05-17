@@ -2,7 +2,7 @@
   AnimationType,
   AttackSprite,
   HitSprite,
-  PokemonAnimationConfig
+  type PokemonAnimationConfig
 } from "../../../../types/Animation"
 import { Pkm } from "../../../../types/enum/Pokemon"
 

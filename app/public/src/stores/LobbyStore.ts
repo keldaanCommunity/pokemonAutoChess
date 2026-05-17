@@ -1,18 +1,22 @@
-import { RoomAvailable } from "@colyseus/sdk"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import Message from "../../../models/colyseus-models/message"
-import {
+import type { RoomAvailable } from "@colyseus/sdk"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type Message from "../../../models/colyseus-models/message"
+import type {
   TournamentBracketSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import { IChatV2, IGameMetadata, IPreparationMetadata } from "../../../types"
+import type {
+  IChatV2,
+  IGameMetadata,
+  IPreparationMetadata
+} from "../../../types"
 import { Language } from "../../../types/enum/Language"
-import {
+import type {
   ILeaderboardBotInfo,
   ILeaderboardEventInfo,
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
-import { IUserMetadataClient } from "../../../types/interfaces/UserMetadata"
+import type { IUserMetadataClient } from "../../../types/interfaces/UserMetadata"
 
 export interface IUserLobbyState {
   messages: IChatV2[]

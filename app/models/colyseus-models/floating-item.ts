@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
-import { IFloatingItem } from "../../types"
-import { Item } from "../../types/enum/Item"
+import type { IFloatingItem } from "../../types"
+import type { Item } from "../../types/enum/Item"
 
 export class FloatingItem extends Schema implements IFloatingItem {
   @type("string") id: string

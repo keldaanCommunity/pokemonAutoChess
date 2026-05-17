@@ -1,7 +1,7 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
-import Player from "../models/colyseus-models/player"
+import type Player from "../models/colyseus-models/player"
 import { SynergyEffects } from "../models/effects"
-import { IPokemonEntity, Transfer } from "../types"
+import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
@@ -26,7 +26,7 @@ import {
   PeriodicEffect
 } from "./effects/effect"
 import { applyWandEffects, humanHealEffect } from "./effects/synergies"
-import { PokemonEntity } from "./pokemon-entity"
+import type { PokemonEntity } from "./pokemon-entity"
 
 export default abstract class PokemonState {
   name: string = ""

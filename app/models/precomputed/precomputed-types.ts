@@ -1,6 +1,6 @@
-import { Pkm } from "../../types/enum/Pokemon"
+import type { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { Pokemon } from "../colyseus-models/pokemon"
+import type { Pokemon } from "../colyseus-models/pokemon"
 import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-types")

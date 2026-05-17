@@ -3,19 +3,19 @@ import { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import {
   fetchMetaPokemons,
-  IPokemonStatV2,
-  IPokemonsStatisticV2
+  type IPokemonStatV2,
+  type IPokemonsStatisticV2
 } from "../../../models/pokemons-statistic-v2"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
-import { PoolType } from "../../../../../types/enum/PoolType"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 import { keys } from "../../../../../utils/object"
 import { cc } from "../../utils/jsx"
 

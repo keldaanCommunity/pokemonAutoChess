@@ -1,7 +1,7 @@
 import { marked } from "marked"
 import { memo, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { PatchInfo } from "../../../../../config/game/patches"
+import type { PatchInfo } from "../../../../../config/game/patches"
 import { Item } from "../../../../../types/enum/Item"
 import { getPkmFromPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"

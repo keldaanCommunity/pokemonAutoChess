@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types/enum/Emotion"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
-import { CollectionFilterState } from "./pokemon-collection"
+import type { CollectionFilterState } from "./pokemon-collection"
 import "./pokemon-collection-item.css"
 
 export default function PokemonCollectionItem(props: {

@@ -1,5 +1,5 @@
 import { Title } from "../../types"
-import { IUserMetadataUnpacked } from "../../types/interfaces/UserMetadata"
+import type { IUserMetadataUnpacked } from "../../types/interfaces/UserMetadata"
 import { invertKeysValues, values } from "../../utils/object"
 import { GADGETS } from "./gadgets"
 

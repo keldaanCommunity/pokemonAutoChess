@@ -1,7 +1,7 @@
 import { BOARD_WIDTH } from "../../config"
 import {
   BasculinWhite,
-  Pokemon,
+  type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
@@ -16,7 +16,7 @@ import {
   ConsumableItems,
   Flavors,
   Item,
-  OgerponMasks,
+  type OgerponMasks,
   SpecialBerries,
   SynergyFlavors
 } from "../../types/enum/Item"
@@ -31,16 +31,16 @@ import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { castAbility } from "../abilities/abilities"
-import { Board, Cell } from "../board"
-import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
+import type { Board, Cell } from "../board"
+import { getStrongestUnit, type PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import {
-  Effect,
+  type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
-  OnDeathEffectArgs,
+  type OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,

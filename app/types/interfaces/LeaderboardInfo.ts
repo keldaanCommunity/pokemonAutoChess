@@ -1,4 +1,4 @@
-import { Pkm } from "../enum/Pokemon"
+import type { Pkm } from "../enum/Pokemon"
 
 export interface ILeaderboardInfo {
   id: string

@@ -1,5 +1,5 @@
 import { Rarity } from "../../types/enum/Game"
-import { Pkm, PkmDuo, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuo, type PkmProposition } from "../../types/enum/Pokemon"
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 27],

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useAppSelector } from "../../../hooks"
-import { ChatRoom, sendMessage } from "../../../network"
+import { type ChatRoom, sendMessage } from "../../../network"
 import ChatHistory from "./chat-history"
 import "./chat.css"
 

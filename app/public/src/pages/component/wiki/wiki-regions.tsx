@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
@@ -9,7 +10,11 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  type Pkm,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"

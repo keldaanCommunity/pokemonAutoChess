@@ -1,13 +1,13 @@
-import { MapSchema, SetSchema } from "@colyseus/schema"
+import { type MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTriggers } from "../config"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
 import { isOnBench } from "../utils/board"
 import { schemaValues } from "../utils/schemas"
-import Synergies from "./colyseus-models/synergies"
+import type Synergies from "./colyseus-models/synergies"
 
 export class Effects extends SetSchema<EffectEnum> {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {

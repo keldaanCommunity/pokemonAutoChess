@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
 
 interface SynergyData {

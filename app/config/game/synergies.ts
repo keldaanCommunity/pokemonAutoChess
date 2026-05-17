@@ -1,5 +1,5 @@
 import { Rarity } from "../../types/enum/Game"
-import { FishingRod, Item, ShinyItem } from "../../types/enum/Item"
+import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {

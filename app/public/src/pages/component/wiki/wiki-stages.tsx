@@ -7,12 +7,12 @@ import {
   TownEncountersByStage
 } from "../../../../../config"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
-import { PVEStage, PVEStages } from "../../../../../models/pve-stages"
+import { type PVEStage, PVEStages } from "../../../../../models/pve-stages"
 import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
 import {
   CraftableItemsNoScarves,
-  Item,
+  type Item,
   ItemComponentsNoScarf
 } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"

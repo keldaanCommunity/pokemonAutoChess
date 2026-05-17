@@ -1,13 +1,19 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, ClientArray, CloseCode, Delayed, Room } from "colyseus"
+import {
+  type Client,
+  type ClientArray,
+  CloseCode,
+  type Delayed,
+  Room
+} from "colyseus"
 import admin from "firebase-admin"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
 import { MAX_PLAYERS_PER_GAME } from "../config"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { IPreparationMetadata, Role, Transfer } from "../types"
+import { type IPreparationMetadata, Role, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { EloRank } from "../types/enum/EloRank"
-import { BotDifficulty, GameMode } from "../types/enum/Game"
+import type { EloRank } from "../types/enum/EloRank"
+import { type BotDifficulty, GameMode } from "../types/enum/Game"
 import type { IBot } from "../types/models/bot-v2"
 import { logger } from "../utils/logger"
 import { schemaValues } from "../utils/schemas"

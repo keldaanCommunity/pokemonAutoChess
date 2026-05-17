@@ -6,7 +6,7 @@ import {
   ELO_DECAY_NB_GAMES_REQUIRED,
   EloRankThreshold
 } from "../../../../../config"
-import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { getRank } from "../../../../../utils/elo"

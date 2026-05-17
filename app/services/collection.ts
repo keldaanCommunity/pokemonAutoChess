@@ -1,7 +1,7 @@
 import { getBaseAltForm, getEmotionCost } from "../config"
 import { CollectionUtils } from "../core/collection"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { Emotion } from "../types"
+import type { Emotion } from "../types"
 import { PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { checkTitlesAfterEmotionUnlocked } from "./booster"

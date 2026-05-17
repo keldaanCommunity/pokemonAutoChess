@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Modal } from "../modal/modal"
 import SpriteGapScanner from "./sprite-gap-scanner"

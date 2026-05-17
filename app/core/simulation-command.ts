@@ -1,6 +1,6 @@
-import { ISimulationCommand } from "../types"
+import type { ISimulationCommand } from "../types"
 import type { Board } from "./board"
-import { PokemonEntity } from "./pokemon-entity"
+import type { PokemonEntity } from "./pokemon-entity"
 
 export abstract class SimulationCommand implements ISimulationCommand {
   delay: number

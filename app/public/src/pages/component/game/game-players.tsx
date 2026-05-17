@@ -1,4 +1,4 @@
-import CSS from "csstype"
+import type CSS from "csstype"
 import { useAppSelector } from "../../../hooks"
 import GamePlayer from "./game-player"
 

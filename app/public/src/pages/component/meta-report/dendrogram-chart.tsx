@@ -2,13 +2,13 @@ import * as d3 from "d3"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SYNERGY_COLORS } from "../../../../../config"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import {
   fetchDendrogram,
-  IBranchProfile,
-  IClusterProfile,
-  IDendrogram
+  type IBranchProfile,
+  type IClusterProfile,
+  type IDendrogram
 } from "../../../models/dendrogram"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"

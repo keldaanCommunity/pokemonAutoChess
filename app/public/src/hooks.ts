@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import {
+  type TypedUseSelectorHook,
+  useDispatch,
+  useSelector
+} from "react-redux"
 import { getGameEventResetDate } from "../../config"
 import type { AppDispatch, RootState } from "./stores"
 

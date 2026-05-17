@@ -13,11 +13,17 @@ import {
   carryOverPermanentStats
 } from "../../core/evolution-rules"
 import { MulchStockCaps } from "../../core/flower-pots"
-import { PokemonEntity } from "../../core/pokemon-entity"
+import type { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
-import { FlowerPot, FlowerPots, IPlayer, Role, Title } from "../../types"
+import {
+  type FlowerPot,
+  FlowerPots,
+  type IPlayer,
+  type Role,
+  Title
+} from "../../types"
 import { Ability } from "../../types/enum/Ability"
-import { DungeonPMDO } from "../../types/enum/Dungeon"
+import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
   PokemonActionState,
@@ -29,9 +35,9 @@ import {
   ArtificialItems,
   Item,
   ItemComponentsNoFossilOrScarf,
-  MissionOrder,
+  type MissionOrder,
   NonSpecialBerries,
-  ScarfItem,
+  type ScarfItem,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMsBronze,
@@ -54,8 +60,11 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
-import { GameStats, initialGameStats } from "../../types/interfaces/GameStats"
-import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
+import {
+  type GameStats,
+  initialGameStats
+} from "../../types/interfaces/GameStats"
+import type { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import {

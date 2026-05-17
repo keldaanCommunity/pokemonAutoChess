@@ -1,12 +1,12 @@
-import { IPokemonEntity, Transfer } from "../types"
-import { BoardEffect, EffectEnum } from "../types/enum/Effect"
+import { type IPokemonEntity, Transfer } from "../types"
+import { type BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
 import { PokemonEntity } from "./pokemon-entity"
-import Simulation from "./simulation"
+import type Simulation from "./simulation"
 
 export type Cell = {
   x: number

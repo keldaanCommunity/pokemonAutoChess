@@ -1,5 +1,11 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
+import {
+  type Client,
+  type IRoomCache,
+  matchMaker,
+  Room,
+  subscribeLobby
+} from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import {
@@ -17,12 +23,12 @@ import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import { notificationsService } from "../services/notifications"
-import { Emotion, Role, Title, Transfer } from "../types"
+import { type Emotion, Role, type Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { GameMode } from "../types/enum/Game"
-import { Language } from "../types/enum/Language"
-import { ITournament } from "../types/interfaces/Tournament"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { GameMode } from "../types/enum/Game"
+import type { Language } from "../types/enum/Language"
+import type { ITournament } from "../types/interfaces/Tournament"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,

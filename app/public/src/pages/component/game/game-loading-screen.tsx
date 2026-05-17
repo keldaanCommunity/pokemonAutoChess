@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
-import { LoadingHint } from "../../../../../types/strings/LoadingHint"
+import type { LoadingHint } from "../../../../../types/strings/LoadingHint"
 import { shuffleArray } from "../../../../../utils/random"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"

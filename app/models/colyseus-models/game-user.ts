@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { Role, Title } from "../../types"
+import type { Role, Title } from "../../types"
 
 export interface IGameUser {
   uid: string

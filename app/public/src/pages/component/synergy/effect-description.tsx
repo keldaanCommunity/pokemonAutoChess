@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { SynergyEffect } from "../../../../../models/effects"
+import type { SynergyEffect } from "../../../../../models/effects"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 export function EffectDescriptionComponent(props: { effect: SynergyEffect }) {

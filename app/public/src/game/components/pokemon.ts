@@ -21,7 +21,7 @@ import {
   type IPokemonEntity
 } from "../../../../types"
 import {
-  AbilityAnimationArgs,
+  type AbilityAnimationArgs,
   AttackSprite,
   AttackSpriteScale
 } from "../../../../types/Animation"
@@ -54,7 +54,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
-import { GameDialog } from "./game-dialog"
+import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import {

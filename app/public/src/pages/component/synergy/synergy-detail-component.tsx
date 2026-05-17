@@ -1,18 +1,21 @@
 import { useTranslation } from "react-i18next"
 import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import { getWildChance } from "../../../../../models/colyseus-models/synergies"
-import { SynergyEffect, SynergyEffects } from "../../../../../models/effects"
+import {
+  type SynergyEffect,
+  SynergyEffects
+} from "../../../../../models/effects"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
-import { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../../../types"
 import {
-  Pkm,
+  type Pkm,
   PkmFamily,
   PkmRegionalVariants
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { isOnBench } from "../../../../../utils/board"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"

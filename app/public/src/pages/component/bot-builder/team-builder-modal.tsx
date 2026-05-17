@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { IDetailledPokemon } from "../../../models/bot-v2"
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react"
+import type { IDetailledPokemon } from "../../../models/bot-v2"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import { Modal } from "../modal/modal"
 import TeamBuilder from "./team-builder"

@@ -1,5 +1,5 @@
-import { SchemaCallbackProxy } from "@colyseus/schema"
-import { getStateCallbacks, Room } from "@colyseus/sdk"
+import type { SchemaCallbackProxy } from "@colyseus/schema"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import { t } from "i18next"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
@@ -8,32 +8,35 @@ import React from "react"
 import { toast } from "react-toastify"
 import { ItemStats } from "../../../config"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../core/flower-pots"
-import { PokemonEntity } from "../../../core/pokemon-entity"
-import Simulation from "../../../core/simulation"
-import Count from "../../../models/colyseus-models/count"
-import { FloatingItem } from "../../../models/colyseus-models/floating-item"
-import Player from "../../../models/colyseus-models/player"
-import { Pokemon } from "../../../models/colyseus-models/pokemon"
-import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
-import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
-import Status from "../../../models/colyseus-models/status"
-import GameState from "../../../rooms/states/game-state"
+import type { PokemonEntity } from "../../../core/pokemon-entity"
+import type Simulation from "../../../core/simulation"
+import type Count from "../../../models/colyseus-models/count"
+import type { FloatingItem } from "../../../models/colyseus-models/floating-item"
+import type Player from "../../../models/colyseus-models/player"
+import type { Pokemon } from "../../../models/colyseus-models/pokemon"
+import type { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
+import type {
+  Portal,
+  SynergySymbol
+} from "../../../models/colyseus-models/portal"
+import type Status from "../../../models/colyseus-models/status"
+import type GameState from "../../../rooms/states/game-state"
 import {
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IPlayer,
-  IPokemon,
-  IPokemonEntity,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IPlayer,
+  type IPokemon,
+  type IPokemonEntity,
   Transfer
 } from "../../../types"
-import { Ability } from "../../../types/enum/Ability"
+import type { Ability } from "../../../types/enum/Ability"
 import { EffectEnum } from "../../../types/enum/Effect"
 import {
-  AttackType,
+  type AttackType,
   GamePhaseState,
-  HealType,
-  Orientation,
+  type HealType,
+  type Orientation,
   PokemonActionState,
   Rarity,
   Stat
@@ -41,7 +44,7 @@ import {
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
-import { DisplayText } from "../../../types/strings/DisplayText"
+import type { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { schemaValues } from "../../../utils/schemas"

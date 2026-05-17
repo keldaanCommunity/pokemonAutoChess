@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { GameStats } from "../../types/interfaces/GameStats"
+import type { GameStats } from "../../types/interfaces/GameStats"
 
 export class GameStatsSchema extends Schema implements GameStats {
   @type("uint16") maxHP = 0

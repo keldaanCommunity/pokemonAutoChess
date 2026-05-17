@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IBot } from "../../../models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 import { Modal } from "../modal/modal"
 
 export default function ImportBotModal(props: {

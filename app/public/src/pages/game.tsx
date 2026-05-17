@@ -1,4 +1,4 @@
-import { getStateCallbacks, Room } from "@colyseus/sdk"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -9,39 +9,39 @@ import {
   MinStageForGameToCount,
   RegionDetails
 } from "../../../config"
-import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import { Wanderer } from "../../../models/colyseus-models/wanderer"
+import type { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import type { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
-import AfterGameState from "../../../rooms/states/after-game-state"
-import GameState from "../../../rooms/states/game-state"
+import type AfterGameState from "../../../rooms/states/after-game-state"
+import type GameState from "../../../rooms/states/game-state"
 import {
-  IAfterGamePlayer,
-  IBoardEvent,
-  IDps,
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IExperienceManager,
-  IPlayer,
+  type IAfterGamePlayer,
+  type IBoardEvent,
+  type IDps,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IExperienceManager,
+  type IPlayer,
   Role,
   Transfer
 } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
-import { Item } from "../../../types/enum/Item"
+import type { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
-import { Pkm } from "../../../types/enum/Pokemon"
-import { Synergy } from "../../../types/enum/Synergy"
+import type { Pkm } from "../../../types/enum/Pokemon"
+import type { Synergy } from "../../../types/enum/Synergy"
 import { GameEvent } from "../../../types/events"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
-import { DisplayText } from "../../../types/strings/DisplayText"
-import { ErrorMessage } from "../../../types/strings/ErrorMessage"
+import type { DisplayText } from "../../../types/strings/DisplayText"
+import type { ErrorMessage } from "../../../types/strings/ErrorMessage"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
 import { schemaValues } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
-import GameScene from "../game/scenes/game-scene"
+import type GameScene from "../game/scenes/game-scene"
 import {
   selectConnectedPlayer,
   selectSpectatedPlayer,

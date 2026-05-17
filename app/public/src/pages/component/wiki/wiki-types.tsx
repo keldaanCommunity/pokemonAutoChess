@@ -8,7 +8,7 @@ import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
