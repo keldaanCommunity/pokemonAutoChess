@@ -391,6 +391,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
     return pokemonEvolved
   }
 }
+
 export function carryOverPermanentStats(
   pokemonEvolved: Pokemon,
   pokemonsBeforeEvolution: Pokemon[]
