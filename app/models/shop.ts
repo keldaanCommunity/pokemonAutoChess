@@ -43,7 +43,6 @@ import {
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"
-import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -81,35 +80,14 @@ import {
 import { type Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getWildChance } from "./colyseus-models/synergies"
 import { getPokemonBaseline } from "./pokemon-factory"
-import { getPokemonData } from "./precomputed/precomputed-pokemon-data"
+import {
+  getPokemonData,
+  getRegularsTier1
+} from "./precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
-}
-
-export function getRegularsTier1(pokemons: Pkm[]) {
-  return pokemons.filter((p) => {
-    const pokemonData = getPokemonData(p)
-    return (
-      pokemonData.stars === 1 &&
-      pokemonData.skill !== Ability.DEFAULT &&
-      !pokemonData.additional &&
-      !pokemonData.regional
-    )
-  })
-}
-
-export function getAdditionalsTier1(pokemons: Pkm[]) {
-  return pokemons.filter((p) => {
-    const pokemonData = getPokemonData(p)
-    return (
-      pokemonData.stars === 1 &&
-      pokemonData.skill !== Ability.DEFAULT &&
-      pokemonData.additional &&
-      !pokemonData.regional
-    )
-  })
 }
 
 export function getSellPrice(

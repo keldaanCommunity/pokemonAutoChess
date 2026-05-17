@@ -73,3 +73,27 @@ export function getPokemonData(name: Pkm): IPokemonData {
     evolutions: []
   }
 }
+
+export function getRegularsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemonData = getPokemonData(p)
+    return (
+      pokemonData.stars === 1 &&
+      pokemonData.skill !== Ability.DEFAULT &&
+      !pokemonData.additional &&
+      !pokemonData.regional
+    )
+  })
+}
+
+export function getAdditionalsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemonData = getPokemonData(p)
+    return (
+      pokemonData.stars === 1 &&
+      pokemonData.skill !== Ability.DEFAULT &&
+      pokemonData.additional &&
+      !pokemonData.regional
+    )
+  })
+}

@@ -6,9 +6,9 @@ import {
   PortalCarouselStages,
   TownEncountersByStage
 } from "../../../../../config"
+import { getAdditionalsTier1 } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { type PVEStage, PVEStages } from "../../../../../models/pve-stages"
-import { getAdditionalsTier1 } from "../../../../../models/shop"
 import { Emotion } from "../../../../../types"
 import {
   CraftableItemsNoScarves,
