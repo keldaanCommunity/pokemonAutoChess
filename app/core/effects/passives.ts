@@ -54,6 +54,9 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { AccelerationEffect } from "./passives/acceleration"
+import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
+import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
@@ -312,17 +315,6 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
     }
   })
 }, Passive.WATER_SPRING)
-
-export class AccelerationEffect extends OnMoveEffect {
-  accelerationStacks = 0
-
-  constructor() {
-    super((pkm) => {
-      pkm.addSpeed(15, pkm, 0, false)
-      this.accelerationStacks += 1
-    }, Passive.ACCELERATION)
-  }
-}
 
 const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon }) => {
@@ -699,43 +691,6 @@ class SynchroEffect extends PeriodicEffect {
       Passive.SYNCHRO,
       3000
     )
-  }
-}
-
-export class FalinksFormationEffect extends OnSpawnEffect {
-  stacks = 0
-
-  constructor() {
-    super((pkm) => {
-      if (!pkm.player) return
-      const troopers = schemaValues(pkm.player.board).filter(
-        (p) =>
-          p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
-      )
-      this.stacks = troopers.length
-      if (this.stacks > 0) {
-        pkm.addAttack(this.stacks * 1, pkm, 0, false)
-        pkm.addDefense(this.stacks * 1, pkm, 0, false)
-        pkm.addShield(this.stacks * 30, pkm, 0, false)
-      }
-      if (this.stacks >= 8 && pkm.player) {
-        pkm.player.titles.add(Title.LEGIONNAIRE)
-      }
-    }, Passive.FALINKS)
-  }
-}
-
-export class BergmiteOnBackEffect extends OnSpawnEffect {
-  stacks = 0
-
-  constructor() {
-    super((pkm) => {
-      if (!pkm.player) return
-      const bergmites = schemaValues(pkm.player.board).filter(
-        (p) => p.name === Pkm.BERGMITE && p.positionY === 0 && p.id !== pkm.id
-      )
-      this.stacks = bergmites.length
-    }, Passive.AVALUGG)
   }
 }
 

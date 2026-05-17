@@ -48,11 +48,9 @@ import {
   OnShieldDepletedEffect,
   PeriodicEffect
 } from "../effects/effect"
-import {
-  AccelerationEffect,
-  BergmiteOnBackEffect,
-  FalinksFormationEffect
-} from "../effects/passives"
+import { AccelerationEffect } from "../effects/passives/acceleration"
+import { BergmiteOnBackEffect } from "../effects/passives/bergmite-on-back"
+import { FalinksFormationEffect } from "../effects/passives/falinks-formation"
 import { getMoveSpeed } from "../move-speed"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
