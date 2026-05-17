@@ -5,7 +5,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
-import { PokemonEntity } from "./pokemon-entity"
+import type { PokemonEntity } from "./pokemon-entity"
 import type Simulation from "./simulation"
 
 export type Cell = {
@@ -402,8 +402,7 @@ export class Board {
     }
 
     const enemies = this.cells.filter(
-      (e): e is PokemonEntity =>
-        e instanceof PokemonEntity && e.hp > 0 && e.team !== entity.team
+      (e): e is PokemonEntity => e != null && e.hp > 0 && e.team !== entity.team
     )
 
     if (enemies.length === 0) {
@@ -742,9 +741,7 @@ export class Board {
     const closestEnemy = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
-          entity.team === enemyTeam &&
-          entity.hp > 0
+          entity != null && entity.team === enemyTeam && entity.hp > 0
       )
       .sort(
         (a, b) =>
@@ -771,7 +768,7 @@ export class Board {
     const closestAlly = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
+          entity != null &&
           entity.team === allyTeam &&
           entity.hp > 0 &&
           (!excludeId || entity.id !== excludeId)
@@ -800,9 +797,7 @@ export class Board {
     return this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
-          entity.team === enemyTeam &&
-          entity.hp > 0
+          entity != null && entity.team === enemyTeam && entity.hp > 0
       )
       .sort(
         (a, b) =>
@@ -820,8 +815,9 @@ export function effectInOrientation(
   maxRange?: number
 ) {
   const orientation: Orientation =
-    target instanceof PokemonEntity
-      ? board.orientation(
+    typeof target === "string"
+      ? target
+      : board.orientation(
           pokemon.positionX,
           pokemon.positionY,
           target.positionX,
@@ -829,7 +825,6 @@ export function effectInOrientation(
           pokemon,
           target
         )
-      : target
 
   const targetsHit = new Set()
 
