@@ -427,7 +427,7 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
         (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
@@ -1174,7 +1174,7 @@ export class OverheatStrategy extends AbilityStrategy {
       .forEach((cell) => {
         const unit = cell.value
         if (unit && pokemon.team !== unit.team) {
-          let damage = 50
+          let damage = [12, 25, 50][pokemon.stars - 1] ?? 50
           if (unit.status.burn) {
             damage = Math.round(damage * 1.3)
           }
@@ -2205,7 +2205,7 @@ export class OriginPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = 100
+    const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && target.positionY == y) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
@@ -9137,6 +9137,7 @@ export class PsystrikeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const furthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     const targetsHit: Set<PokemonEntity> = new Set()
@@ -9160,7 +9161,13 @@ export class PsystrikeStrategy extends AbilityStrategy {
       targetsHit.add(furthestTarget) // guarantee at least the furthest target is hit
     }
     targetsHit.forEach((enemy) => {
-      enemy.handleSpecialDamage(80, board, AttackType.SPECIAL, pokemon, crit)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
 
       const teleportationCell = board.getTeleportationCell(
         enemy.positionX,

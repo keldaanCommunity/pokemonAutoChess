@@ -37,9 +37,6 @@
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
-
-> Required preemptive nerf due to some interactions with wands that love high speed backline attackers
-
 - Nerf Geomancy (Xerneas): Speed 20 → 15
 
 > Trying to tone down the grass/flora composition by making most flower pots Pokémon not benefitting from the grass healing. We hope it will make you consider new Flora comps where Grass is no longer mandatory.
@@ -70,6 +67,14 @@
 - Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 - Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
 - Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
+
+> We adjust damage per rank for PvE legendary abilities now that Skill Swap TM exists
+
+- Psystrike (Mewtwo): 80 damage at all tiers → 20/40/80
+- Origin Pulse (Kyogre): 100 damage at all tiers → 25/50/100
+- Precipice Blades (Groudon): 100 damage at all tiers → 25/50/100
+- Sky Attack (Lugia): 120 damage at all tiers → 30/60/120
+- Overheat (Moltres): 50 damage at all tiers → 12/25/50
 - Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
 
 # Changes to Items
