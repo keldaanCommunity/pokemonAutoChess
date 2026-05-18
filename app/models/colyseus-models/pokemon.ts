@@ -7,6 +7,7 @@ import {
   RegionDetails,
   SynergyTriggers
 } from "../../config"
+import { SynergyEffects } from "../../config/game/synergies"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
@@ -57,7 +58,6 @@ import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
-import { SynergyEffects } from "../effects"
 import type Player from "./player"
 import { getPkmWithCustom } from "./pokemon-customs"
 
