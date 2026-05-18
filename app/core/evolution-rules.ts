@@ -412,7 +412,7 @@ export function carryOverPermanentStats(
     const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
-    pokemonEvolved[stat] += sumOfPermaStatsModifier // can be negative or positive
+    pokemonEvolved.applyStat(stat, sumOfPermaStatsModifier) // can be negative or positive
   }
 
   // carry over TM
