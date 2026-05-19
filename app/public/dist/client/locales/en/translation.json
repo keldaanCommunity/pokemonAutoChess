@@ -2137,7 +2137,7 @@
 		"FIRE_LASH": "Apply ARMOR_BREAK for 4 seconds and deal [30,60,120,SP] SPECIAL to the target.",
 		"FAIRY_LOCK": "Spread [90,SP] SPECIAL evenly across the target and ADJACENT enemy Pokémon. The target is LOCKED for 5 seconds.",
 		"DRAIN_PUNCH": " Deal [200,SP]% of ATK as SPECIAL and heal for 200% of the damage dealt.",
-		"GRAVITY": "All enemy Pokémon are LOCKED for [2,SP] seconds.",
+		"GRAVITY": "All enemy Pokémon are LOCKED for [3,SP] seconds.",
 		"FAKE_OUT": "Deal [40,80,150,SP] SPECIAL to the target and reduce the user's AP by 30. Inflict the target with FLINCH for 3 seconds unless the user's AP was negative.",
 		"FELL_STINGER": "Deal [400,SP]% of ATK as SPECIAL to the target. If it knocks out the target, gain 30% of base ATK.",
 		"GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [50,SP] SPECIAL to the target. There is a [20,LK]% chance a $t(pkm.PIKACHU) will be fired instead.",

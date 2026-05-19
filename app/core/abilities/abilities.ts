@@ -10105,7 +10105,7 @@ export class GravityStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const lockDuration = Math.round(
-      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
     board.forEach((x, y, unitOnCell) => {
       if (unitOnCell && unitOnCell.team !== pokemon.team) {
