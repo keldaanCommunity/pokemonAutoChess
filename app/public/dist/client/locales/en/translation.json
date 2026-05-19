@@ -4101,10 +4101,10 @@
 	"sprite_tracker": {
 		"failed_to_fetch_data": "Failed to fetch data",
 		"error_label": "Error",
-		"summary_line": "SpriteCollab: {{totalSpriteCollab}} | Missing in PAC: {{missingInPac}} — Last updated: {{lastUpdated}} ({{refreshDurationMs}} ms)",
+		"summary_line": "SpriteCollab: {{totalSpriteCollab}} sprites | Not in PAC: {{missingInPac}} sprites — Last updated: {{lastUpdated}} (took {{refreshDurationMs}} ms)",
 		"criteria_title": "How entries are selected",
 		"criteria_line_1": "This list only includes SpriteCollab entries that Pokemon Auto Chess can actually use.",
-		"criteria_line_2": "To count, an entry must have at least one portrait and the required sprite animations, such as idle, walk, sleep, hurt, attack, and hop.",
+		"criteria_line_2": "To count, an entry must have at least one portrait and the required sprite animations, such as Idle, Walk, Sleep, Hurt, Attack and Hop.",
 		"criteria_line_3": "Shiny forms follow PAC rules, and the final list only shows entries that are available on SpriteCollab but still missing in PAC.",
 		"filter_alternate": "Alternate ({{count}})",
 		"filter_altcolor": "Altcolor ({{count}})",
