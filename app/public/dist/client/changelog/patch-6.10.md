@@ -34,6 +34,7 @@
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
 - Nerf Rock: Def 10/30/60 → 10/25/50
+- Shuckle: PP 90 → 50 ; Shuckle no longer gains PP during Bide effect
 
 # Changes to Pokemon & Abilities
 

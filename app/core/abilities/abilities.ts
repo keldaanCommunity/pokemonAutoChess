@@ -10702,6 +10702,7 @@ class BideEffect extends PeriodicEffect {
           this.procDamage(pokemon, board, crit)
           pokemon.effectsSet.delete(this)
           pokemon.effectsSet.delete(damageMonitor)
+          pokemon.effects.delete(EffectEnum.NO_PP_GAIN)
         } else {
           this.duration -= this.intervalMs
         }
@@ -10714,6 +10715,7 @@ class BideEffect extends PeriodicEffect {
       this.damageReceived += damage
     }, Ability.BIDE)
     pokemon.effectsSet.add(damageMonitor)
+    pokemon.effects.add(EffectEnum.NO_PP_GAIN)
   }
   procDamage(pokemon: PokemonEntity, board: Board, crit: boolean) {
     pokemon.broadcastAbility({ skill: Ability.BIDE })
