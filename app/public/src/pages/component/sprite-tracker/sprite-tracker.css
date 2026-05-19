@@ -7,14 +7,8 @@
   overflow: hidden;
 }
 
-.modal.sprite-tracker-modal {
-  width: min(1280px, 94vw);
-}
-
 .sprite-tracker-modal .modal-body {
-  width: min(1260px, 92vw);
-  height: min(90vh, 860px);
-  max-height: 90vh;
+  height: min(90vh, 960px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -29,31 +23,17 @@
 }
 
 .sprite-tracker .loading {
-  background: rgba(100, 150, 255, 0.1);
   color: var(--color-fg-secondary);
 }
 
 .sprite-tracker .error {
-  background: rgba(255, 100, 100, 0.1);
   color: var(--color-fg-red);
 }
 
 /* Refresh Info */
 .sprite-tracker .refresh-info {
   text-align: center;
-  font-size: 13px;
-  opacity: 0.6;
-  padding: 4px 0;
-}
-
-.sprite-tracker .criteria-info {
-  font-size: 14px;
-  opacity: 0.85;
-  padding: 8px 10px;
-}
-
-.sprite-tracker .criteria-info p:last-child {
-  margin-bottom: 0;
+  color: var(--color-fg-secondary);
 }
 
 /* Filters */
@@ -63,7 +43,6 @@
   gap: 16px;
   align-items: center;
   justify-content: flex-end;
-  padding: 4px 2px;
 }
 
 .sprite-tracker .filter-container details {
@@ -171,7 +150,7 @@
 }
 
 .sprite-tracker .entry-kind {
-  text-transform: uppercase;
+  color: var(--color-fg-secondary);
 }
 
 .sprite-tracker .entry-name-link {
@@ -183,13 +162,7 @@
   text-decoration: underline;
 }
 
-.sprite-tracker .entry-name-link:focus-visible {
-  outline: 1px solid rgba(100, 150, 255, 0.7);
-  outline-offset: 2px;
-}
-
 .sprite-tracker .empty-state {
   padding: 32px 16px;
   text-align: center;
-  opacity: 0.6;
 }
