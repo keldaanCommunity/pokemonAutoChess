@@ -112,7 +112,7 @@ function SpriteOnlyRow({
                 {normalIndex && (
                   <>
                     <span className="entry-kind">{normalLabel}</span>
-                    <strong>{normalIndex}</strong>
+                    <span className="entry-index">{normalIndex}</span>
                   </>
                 )}
                 {normalIndex && shinyIndex && (
@@ -121,7 +121,7 @@ function SpriteOnlyRow({
                 {shinyIndex && (
                   <>
                     <span className="entry-kind">{shinyLabel}</span>
-                    <strong>{shinyIndex}</strong>
+                    <span className="entry-index">{shinyIndex}</span>
                   </>
                 )}
               </div>
@@ -322,14 +322,12 @@ export default function SpriteTracker() {
   return (
     <div className="sprite-tracker">
       <div className="refresh-info">
-        <small>
-          {t("sprite_tracker.summary_line", {
-            totalSpriteCollab: data.stats.totalSpriteCollab,
-            missingInPac: data.spriteOnly.length,
-            lastUpdated: lastRefreshStr,
-            refreshDurationMs: data.stats.refreshDurationMs
-          })}
-        </small>
+        {t("sprite_tracker.summary_line", {
+          totalSpriteCollab: data.stats.totalSpriteCollab,
+          missingInPac: data.spriteOnly.length,
+          lastUpdated: lastRefreshStr,
+          refreshDurationMs: data.stats.refreshDurationMs
+        })}
       </div>
 
       <div className="criteria-info my-box">

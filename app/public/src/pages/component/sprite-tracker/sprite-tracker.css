@@ -1,8 +1,7 @@
 .sprite-tracker {
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.5em;
   height: 100%;
   max-height: none;
   overflow: hidden;
@@ -31,12 +30,12 @@
 
 .sprite-tracker .loading {
   background: rgba(100, 150, 255, 0.1);
-  color: #6496ff;
+  color: var(--color-fg-secondary);
 }
 
 .sprite-tracker .error {
   background: rgba(255, 100, 100, 0.1);
-  color: #ff6464;
+  color: var(--color-fg-red);
 }
 
 /* Refresh Info */
@@ -51,17 +50,6 @@
   font-size: 14px;
   opacity: 0.85;
   padding: 8px 10px;
-}
-
-.sprite-tracker .criteria-info strong {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-.sprite-tracker .criteria-info p {
-  margin: 0 0 4px 0;
-  line-height: 1.45;
 }
 
 .sprite-tracker .criteria-info p:last-child {
@@ -141,16 +129,12 @@
   flex-shrink: 0;
 }
 
-.sprite-tracker .entry-info strong {
-  font-family: monospace;
-  font-size: 12px;
-  color: #6496ff;
+.sprite-tracker .entry-index {
+  color: var(--color-fg-secondary);
   white-space: nowrap;
 }
 
 .sprite-tracker .pokemon-name {
-  font-size: 13px;
-  opacity: 0.8;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,21 +142,10 @@
 
 .sprite-tracker .entry-title {
   font-weight: 600;
-  opacity: 0.9;
-}
-
-.sprite-tracker .entry-summary {
-  gap: 6px;
 }
 
 .sprite-tracker .entry-kind {
-  font-size: 11px;
-  opacity: 0.65;
   text-transform: uppercase;
-}
-
-.sprite-tracker .entry-separator {
-  opacity: 0.45;
 }
 
 .sprite-tracker .entry-name-link {
@@ -193,28 +166,4 @@
   padding: 32px 16px;
   text-align: center;
   opacity: 0.6;
-}
-
-/* Scrollbar styling */
-.sprite-tracker::-webkit-scrollbar,
-.sprite-tracker .content::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.sprite-tracker::-webkit-scrollbar-track,
-.sprite-tracker .content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-.sprite-tracker::-webkit-scrollbar-thumb,
-.sprite-tracker .content::-webkit-scrollbar-thumb {
-  background: rgba(100, 150, 255, 0.3);
-  border-radius: 4px;
-}
-
-.sprite-tracker::-webkit-scrollbar-thumb:hover,
-.sprite-tracker .content::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 150, 255, 0.5);
 }
