@@ -1047,14 +1047,14 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.MOUTAIN_RESISTANCE:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(30, pokemon, 0, false)
+          pokemon.addDefense(25, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.MOUTAIN_RESISTANCE)
         }
         break
 
       case EffectEnum.DIAMOND_STORM:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(60, pokemon, 0, false)
+          pokemon.addDefense(50, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.DIAMOND_STORM)
         }
         break

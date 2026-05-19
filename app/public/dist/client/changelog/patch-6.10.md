@@ -33,6 +33,8 @@
 - Unowns no longer disappear after one fight if they did not cast their ability
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
+- Nerf Rock: Def 10/30/60 → 10/25/50
+
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
