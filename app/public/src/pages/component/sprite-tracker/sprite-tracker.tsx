@@ -8,7 +8,7 @@ import "./sprite-tracker.css"
 
 interface SpriteGapEntry {
   index: string
-  monsterName: string
+  pkm: string
   formName: string
   displayName: string
   formPath: string
@@ -189,6 +189,8 @@ export default function SpriteTracker() {
   const [filterFemale, setFilterFemale] = useState(false)
   const [filterCutscene, setFilterCutscene] = useState(false)
   const [filterAlcremie, setFilterAlcremie] = useState(false)
+  const [filterBeta, setFilterBeta] = useState(false)
+  const [filterMega, setFilterMega] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -219,13 +221,16 @@ export default function SpriteTracker() {
   const filteredSpriteOnly = useMemo(() => {
     const entries = data?.spriteOnly ?? []
     return entries.filter((entry) => {
-      const name = entry.formName.toLowerCase()
-      const monsterName = entry.monsterName.toLowerCase()
-      if (name.includes("alternate") && !filterAlternate) return false
-      if (name.includes("altcolor") && !filterAltcolor) return false
-      if (name.includes("female") && !filterFemale) return false
-      if (name.includes("cutscene") && !filterCutscene) return false
-      if (monsterName.includes("alcremie") && !filterAlcremie) return false
+      const form = entry.formName.toLowerCase()
+      const pkm = entry.pkm.toLowerCase()
+      if (form.includes("alternate") && !filterAlternate) return false
+      if (form.includes("altcolor") && !filterAltcolor) return false
+      if (form.includes("female") && !filterFemale) return false
+      if (form.includes("cutscene") && !filterCutscene) return false
+      if (pkm.includes("alcremie") && !filterAlcremie) return false
+      if ((form.includes("beta") || pkm.includes("missingno")) && !filterBeta)
+        return false
+      if (form.includes("mega") && !filterMega) return false
       return true
     })
   }, [
@@ -234,7 +239,9 @@ export default function SpriteTracker() {
     filterAltcolor,
     filterFemale,
     filterCutscene,
-    filterAlcremie
+    filterAlcremie,
+    filterBeta,
+    filterMega
   ])
 
   const filterCounts = useMemo(() => {
@@ -244,19 +251,23 @@ export default function SpriteTracker() {
     let female = 0
     let cutscene = 0
     let alcremie = 0
+    let beta = 0
+    let mega = 0
 
     for (const entry of entries) {
       const formName = entry.formName.toLowerCase()
-      const monsterName = entry.monsterName.toLowerCase()
+      const pkm = entry.pkm.toLowerCase()
 
       if (formName.includes("alternate")) alternate += 1
       if (formName.includes("altcolor")) altcolor += 1
       if (formName.includes("female")) female += 1
       if (formName.includes("cutscene")) cutscene += 1
-      if (monsterName.includes("alcremie")) alcremie += 1
+      if (pkm.includes("alcremie")) alcremie += 1
+      if (formName.includes("beta")) beta += 1
+      if (formName.includes("mega")) mega += 1
     }
 
-    return { alternate, altcolor, female, cutscene, alcremie }
+    return { alternate, altcolor, female, cutscene, alcremie, beta, mega }
   }, [data?.spriteOnly])
 
   const groupedSpriteOnly = useMemo(
@@ -339,6 +350,14 @@ export default function SpriteTracker() {
 
       <div className="filter-container">
         <Checkbox
+          label={t("sprite_tracker.filter_mega", {
+            count: filterCounts.mega
+          })}
+          checked={filterMega}
+          onToggle={setFilterMega}
+          isDark
+        />
+        <Checkbox
           label={t("sprite_tracker.filter_alternate", {
             count: filterCounts.alternate
           })}
@@ -376,6 +395,14 @@ export default function SpriteTracker() {
           })}
           checked={filterAlcremie}
           onToggle={setFilterAlcremie}
+          isDark
+        />
+        <Checkbox
+          label={t("sprite_tracker.filter_beta", {
+            count: filterCounts.beta
+          })}
+          checked={filterBeta}
+          onToggle={setFilterBeta}
           isDark
         />
       </div>

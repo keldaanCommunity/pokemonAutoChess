@@ -5,7 +5,7 @@ import "./sprite-gap-scanner.css"
 
 interface SpriteGapEntry {
   index: string
-  monsterName: string
+  pkm: string
   formName: string
   formPath: string
   isShiny: boolean
@@ -63,13 +63,13 @@ export default function SpriteGapScanner() {
   const filteredSpriteOnly = useMemo(() => {
     const entries = data?.spriteOnly ?? []
     return entries.filter((entry) => {
-      const name = entry.formName.toLowerCase()
-      const monsterName = entry.monsterName.toLowerCase()
-      if (name.includes("alternate") && !filterAlternate) return false
-      if (name.includes("altcolor") && !filterAltcolor) return false
-      if (name.includes("female") && !filterFemale) return false
-      if (name.includes("cutscene") && !filterCutscene) return false
-      if (monsterName.includes("alcremie") && !filterAlcremie) return false
+      const form = entry.formName.toLowerCase()
+      const pkm = entry.pkm.toLowerCase()
+      if (form.includes("alternate") && !filterAlternate) return false
+      if (form.includes("altcolor") && !filterAltcolor) return false
+      if (form.includes("female") && !filterFemale) return false
+      if (form.includes("cutscene") && !filterCutscene) return false
+      if (pkm.includes("alcremie") && !filterAlcremie) return false
       return true
     })
   }, [
@@ -91,13 +91,13 @@ export default function SpriteGapScanner() {
 
     for (const entry of entries) {
       const formName = entry.formName.toLowerCase()
-      const monsterName = entry.monsterName.toLowerCase()
+      const pkm = entry.pkm.toLowerCase()
 
       if (formName.includes("alternate")) alternate += 1
       if (formName.includes("altcolor")) altcolor += 1
       if (formName.includes("female")) female += 1
       if (formName.includes("cutscene")) cutscene += 1
-      if (monsterName.includes("alcremie")) alcremie += 1
+      if (pkm.includes("alcremie")) alcremie += 1
     }
 
     return { alternate, altcolor, female, cutscene, alcremie }
@@ -225,7 +225,7 @@ export default function SpriteGapScanner() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {entry.monsterName}
+                      {entry.pkm}
                     </a>
                   </div>
                 </div>

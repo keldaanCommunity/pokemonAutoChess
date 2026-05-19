@@ -74,7 +74,7 @@ interface SpriteCollabForm {
   }
 }
 
-interface SpriteCollabMonster {
+interface SpriteCollabMon {
   id: number
   rawId: string
   name: string
@@ -83,7 +83,7 @@ interface SpriteCollabMonster {
 
 interface SpriteCollabResponse {
   data: {
-    monster: SpriteCollabMonster[]
+    monster: SpriteCollabMon[]
   }
 }
 
@@ -92,7 +92,7 @@ interface SpriteCollabResponse {
  */
 interface SpriteGapEntry {
   index: string
-  monsterName: string
+  pkm: string
   formName: string
   displayName: string
   formPath: string
@@ -226,7 +226,7 @@ function satisfiesPacCriteria(form: SpriteCollabForm, index: string): boolean {
 /**
  * Fetch all monsters from SpriteCollab GraphQL endpoint
  */
-async function fetchSpriteCollabMonsters(): Promise<SpriteCollabMonster[]> {
+async function fetchSpriteCollabMons(): Promise<SpriteCollabMon[]> {
   try {
     const response = await fetch("https://spriteserver.pmdcollab.org/graphql", {
       method: "POST",
@@ -261,8 +261,8 @@ async function fetchSpriteCollabMonsters(): Promise<SpriteCollabMonster[]> {
 /**
  * Parse SpriteCollab response and build normalized index set
  */
-function parseMonsterForms(
-  monsters: SpriteCollabMonster[]
+function parseMonsForms(
+  monsters: SpriteCollabMon[]
 ): Map<string, SpriteGapEntry> {
   const spriteIndexMap = new Map<string, SpriteGapEntry>()
 
@@ -285,7 +285,7 @@ function parseMonsterForms(
 
       spriteIndexMap.set(index, {
         index,
-        monsterName: monster.name,
+        pkm: monster.name,
         formName: form.fullName,
         displayName: `${monster.name} - ${form.fullName}`,
         formPath: form.fullPath,
@@ -337,12 +337,12 @@ async function refreshSpriteGapDataInternal(): Promise<SpriteGapScannerResult> {
   try {
     logger.info("[SPRITE_GAP_SCANNER] Starting data refresh...")
 
-    const monsters = await fetchSpriteCollabMonsters()
+    const mons = await fetchSpriteCollabMons()
     logger.info(
-      `[SPRITE_GAP_SCANNER] Fetched ${monsters.length} monsters from SpriteCollab`
+      `[SPRITE_GAP_SCANNER] Fetched ${mons.length} monsters from SpriteCollab`
     )
 
-    const spriteIndexMap = parseMonsterForms(monsters)
+    const spriteIndexMap = parseMonsForms(mons)
     const result = compareIndexes(spriteIndexMap)
 
     result.stats.refreshDurationMs = Date.now() - startTime

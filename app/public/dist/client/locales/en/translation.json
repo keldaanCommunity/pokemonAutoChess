@@ -4111,6 +4111,8 @@
 		"filter_female": "Female ({{count}})",
 		"filter_cutscene": "Cutscene ({{count}})",
 		"filter_alcremie": "Alcremie ({{count}})",
+		"filter_beta": "Beta ({{count}})",
+		"filter_mega": "Mega ({{count}})",
 		"normal": "Normal",
 		"shiny": "Shiny"
 	},
