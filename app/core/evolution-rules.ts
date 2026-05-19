@@ -5,7 +5,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
-import { PokemonActionState } from "../types/enum/Game"
+import { PokemonActionState, Stat } from "../types/enum/Game"
 import { Item, ItemComponents } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
@@ -412,7 +412,17 @@ export function carryOverPermanentStats(
     const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
-    pokemonEvolved.applyStat(stat, sumOfPermaStatsModifier) // can be negative or positive
+    const statMapping: Record<typeof stat, Stat> = {
+      hp: Stat.HP,
+      maxHP: Stat.HP,
+      atk: Stat.ATK,
+      def: Stat.DEF,
+      speDef: Stat.SPE_DEF,
+      speed: Stat.SPEED,
+      ap: Stat.AP,
+      luck: Stat.LUCK
+    }
+    pokemonEvolved.applyStat(statMapping[stat], sumOfPermaStatsModifier) // can be negative or positive
   }
 
   // carry over TM
