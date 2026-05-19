@@ -6876,10 +6876,10 @@ export class Spiritomb extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 15
+  atk = 18
   speed = 36
-  def = 8
-  speDef = 8
+  def = 12
+  speDef = 12
   maxPP = 108
   range = 1
   skill = Ability.SOUL_TRAP

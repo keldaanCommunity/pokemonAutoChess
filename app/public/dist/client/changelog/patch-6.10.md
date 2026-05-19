@@ -34,7 +34,6 @@
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
 - Nerf Rock: Def 10/30/60 → 10/25/50
-- Shuckle: PP 90 → 50 ; Shuckle no longer gains PP during Bide effect
 
 # Changes to Pokemon & Abilities
 
@@ -70,6 +69,8 @@
 - Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 - Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
 - Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
+- Shuckle: PP 90 → 50 ; Shuckle no longer gains PP during Bide effect
+- Buff Spiritomb: Attack 15 → 18, Def 8 → 12, SpeDef 8 → 12
 
 > We adjust damage per rank for PvE legendary abilities now that Skill Swap TM exists
 
