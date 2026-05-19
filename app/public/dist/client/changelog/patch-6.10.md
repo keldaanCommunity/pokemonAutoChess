@@ -77,6 +77,8 @@
 - Overheat (Moltres): 50 damage at all tiers → 12/25/50
 - Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
 
+- Nerf Swinub line: Def 6/10/16 → 5/8/16, Spe Def: 4/8/12 → 3/6/12
+
 # Changes to Items
 
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.

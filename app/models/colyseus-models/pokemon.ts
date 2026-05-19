@@ -2936,8 +2936,8 @@ export class Swinub extends Pokemon {
   hp = 65
   atk = 4
   speed = 51
-  def = 6
-  speDef = 4
+  def = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
@@ -2951,8 +2951,8 @@ export class Piloswine extends Pokemon {
   hp = 120
   atk = 8
   speed = 51
-  def = 10
-  speDef = 8
+  def = 8
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
