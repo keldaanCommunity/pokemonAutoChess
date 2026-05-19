@@ -6625,7 +6625,7 @@ export class Mawile extends Pokemon {
   stars = 3
   hp = 180
   atk = 18
-  speed = 41
+  speed = 47
   def = 12
   speDef = 12
   maxPP = 80
