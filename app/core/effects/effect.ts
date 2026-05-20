@@ -45,7 +45,7 @@ export class OnSpawnEffect extends Effect {
 interface OnDishConsumedEffectArgs {
   pokemon: Pokemon
   dish: Item
-  player: Player
+  player?: Player
   entity?: PokemonEntity
 }
 export class OnDishConsumedEffect extends Effect {
@@ -106,7 +106,7 @@ export class OnBenchedDuringFightEffect extends Effect {
 
 interface OnSimulationStartEffectArgs {
   simulation: Simulation
-  player: Player
+  player?: Player
   team: MapSchema<IPokemonEntity>
   entity: PokemonEntity
 }

@@ -82,8 +82,8 @@ import { DelayedCommand } from "./simulation-command"
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
   @type("string") winnerId = ""
-  @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
-  @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
+  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
+  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("string") id: string
@@ -231,25 +231,25 @@ export default class Simulation extends Schema implements ISimulation {
       [this.bluePlayer, this.blueTeam] as const,
       [this.redPlayer, this.redTeam] as const
     ]) {
-      if (player) {
-        player.board.forEach((pokemon) => {
-          const entity = schemaValues(team).find(
-            (p) => p.refToBoardPokemon === pokemon
-          ) as PokemonEntity | undefined
-          if (pokemon.dishes.size > 0) {
-            pokemon.dishes.forEach((dish) => {
-              this.applyDishEffects(dish, pokemon, entity, player)
-            })
-            pokemon.action = PokemonActionState.IDLE
-            pokemon.dishes.clear() // consume all dishes
-          }
-          if (entity) {
-            entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
-              effect.apply({ simulation: this, player, team, entity })
-            })
-          }
+      team.forEach((entity: PokemonEntity) => {
+        const boardPokemon = entity.refToBoardPokemon as Pokemon
+        if (boardPokemon && boardPokemon.dishes.size > 0) {
+          boardPokemon.dishes.forEach((dish) => {
+            this.applyDishEffects(dish, boardPokemon, entity, player)
+          })
+          boardPokemon.action = PokemonActionState.IDLE
+          boardPokemon.dishes.clear() // consume all dishes
+        }
+
+        entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
+          effect.apply({
+            simulation: this,
+            player: entity.player,
+            team,
+            entity
+          })
         })
-      }
+      })
     }
   }
 
@@ -515,7 +515,7 @@ export default class Simulation extends Schema implements ISimulation {
     dish: Item,
     pokemon: Pokemon,
     entity: PokemonEntity | undefined,
-    player: Player
+    player: Player | undefined
   ) {
     const dishEffects = DishEffects[dish]
     if (!dishEffects) return
@@ -530,7 +530,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.passive === Passive.GLUTTON) {
       pokemon.addMaxHP(20)
       entity?.addMaxHP(20, entity, 0, false)
-      if (pokemon.maxHP > 750) {
+      if (player && pokemon.maxHP > 750) {
         player.titles.add(Title.GLUTTON)
       }
     }
@@ -953,7 +953,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
-      case EffectEnum.STEEL_SURGE:        
+      case EffectEnum.STEEL_SURGE:
       case EffectEnum.STEEL_SPIKE:
       case EffectEnum.CORKSCREW_CRASH:
       case EffectEnum.MAX_MELTDOWN:
@@ -1464,7 +1464,7 @@ export default class Simulation extends Schema implements ISimulation {
               false
             )
           }
-          if (pokemonOnCell.types.has(Synergy.ELECTRIC)){
+          if (pokemonOnCell.types.has(Synergy.ELECTRIC)) {
             pokemonOnCell.status.addElectricField(pokemonOnCell)
             pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
