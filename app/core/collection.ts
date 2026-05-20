@@ -10,6 +10,7 @@ import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
+import { recordBoosterCreation } from "../services/booster-monitor"
 import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
 import { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
@@ -49,6 +50,9 @@ export function createBooster(user: IUserMetadataMongo): Booster {
     boosterContent.push(card)
     alreadyTaken.add(`${card.name}-${card.shiny}-${card.emotion}`)
   }
+
+  recordBoosterCreation(boosterContent)
+
   return boosterContent
 }
 
