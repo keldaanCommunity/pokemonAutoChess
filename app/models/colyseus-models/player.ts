@@ -8,10 +8,8 @@ import {
   SynergyTriggers
 } from "../../config"
 import { CollectionUtils } from "../../core/collection"
-import {
-  ConditionBasedEvolutionRule,
-  carryOverPermanentStats
-} from "../../core/evolution-rules"
+import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
+import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
@@ -275,8 +273,8 @@ export default class Player extends Schema implements IPlayer {
     this.money += value
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
-      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
-        pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
+      if (pokemon.evolutionRule.type === "condition") {
+        EvolutionManager.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
       }
     })
     if (
@@ -786,16 +784,12 @@ export default class Player extends Schema implements IPlayer {
           const burmyEvolving = burmys[0]
           burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
 
-          const mothim = burmyEvolving.evolutionRule.evolve(
+          const mothim = EvolutionManager.evolve(
             burmyEvolving,
             this,
             state.stageLevel
           )
-          burmyEvolving.evolutionRule.afterEvolve(
-            mothim,
-            this,
-            state.stageLevel
-          )
+          EvolutionManager.afterEvolve(mothim, this, state.stageLevel)
         }
       }
     }
