@@ -9,7 +9,7 @@ import { Rarity } from "../types/enum/Game"
 import {
   CraftableItems,
   Item,
-  ItemComponents,
+  ItemComponentsNoScarf,
   Scarves,
   Tools
 } from "../types/enum/Item"
@@ -172,7 +172,7 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
       if (Scarves.includes(item))
         nbComponents = item === Item.NULLIFY_BANDANNA ? 0 : 1
       else if (CraftableItems.includes(item)) nbComponents = 2
-      else if (ItemComponents.includes(item)) nbComponents = 1
+      else if (ItemComponentsNoScarf.includes(item)) nbComponents = 1
       return total + nbComponents
     }, 0)
 }
