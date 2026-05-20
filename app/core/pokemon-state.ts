@@ -156,7 +156,7 @@ export default abstract class PokemonState {
       } else if (pokemon.effects.has(EffectEnum.CORKSCREW_CRASH)) {
         trueDamagePart += 1.0
       } else if (pokemon.effects.has(EffectEnum.MAX_MELTDOWN)) {
-        trueDamagePart += 1.2
+        trueDamagePart += 1.25
       }
       if (pokemon.items.has(Item.RED_ORB)) {
         trueDamagePart += 0.25

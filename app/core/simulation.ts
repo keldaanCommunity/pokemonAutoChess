@@ -953,10 +953,11 @@ export default class Simulation extends Schema implements ISimulation {
         }
         break
 
-      case EffectEnum.STEEL_SURGE:
+      case EffectEnum.STEEL_SURGE:        
       case EffectEnum.STEEL_SPIKE:
       case EffectEnum.CORKSCREW_CRASH:
       case EffectEnum.MAX_MELTDOWN:
+        pokemon.addDefense(3, pokemon, 0, false)
         if (types.has(Synergy.STEEL)) {
           pokemon.effects.add(effect)
         }

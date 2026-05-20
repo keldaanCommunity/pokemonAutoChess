@@ -35,6 +35,10 @@
 
 - Nerf Rock: Def 10/30/60 → 10/25/50
 
+> Mostly adressing the lack of power of Steel 2 in early game, and the lack of incentive to enter Steel 2 in late game when you don't have a Steel AD carry.
+
+- Buff Steel: now gives +3 DEF to the whole team when activated ; Steel 8 Max Meltdown: 120 → 125% of ATK as TRUE
+
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
