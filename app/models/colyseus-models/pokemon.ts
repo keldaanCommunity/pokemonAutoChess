@@ -5389,7 +5389,6 @@ export class Lugia extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.LEGENDARY
-  evolution = Pkm.SHADOW_LUGIA
   stars = 3
   hp = 300
   atk = 26
