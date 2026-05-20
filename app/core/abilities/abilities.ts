@@ -10261,8 +10261,15 @@ export class PurifyStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
+    board
+      .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team === pokemon.team) {
+          cell.value.status.clearNegativeStatus(cell.value, pokemon)
+        }
+      })
+
     const heal = [15, 30, 60][pokemon.stars - 1] ?? 60
-    pokemon.status.clearNegativeStatus(pokemon, pokemon)
     pokemon.handleHeal(heal, pokemon, 1, crit)
   }
 }

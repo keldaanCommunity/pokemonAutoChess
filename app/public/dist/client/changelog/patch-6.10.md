@@ -78,6 +78,7 @@
 - Buff Spiritomb: Attack 15 → 18, Def 8 → 12, SpeDef 8 → 12
 - Buff Gravity (Stonjourner): locked duration 2 → 3 seconds
 - Buff Mawile: Speed 41 → 47
+- Buff Purify (Pyukumuku): now also cures negative status conditions of adjacent allies, in addition to the user
 
 > We adjust damage per rank for PvE legendary abilities now that Skill Swap TM exists
 

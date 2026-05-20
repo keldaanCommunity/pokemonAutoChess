@@ -2125,7 +2125,7 @@
 		"GULP_MISSILE": "Recrache un $t(pkm.ARROKUDA) avec ses PP au max sur la cible, infligeant [50,SP] SPECIAL à la cible. Il y a [20,LK]% de chance qu'un $t(pkm.PIKACHU) soit recraché à la place.",
 		"SCHOOLING": "Inflige [15,SP]% des HP max du lanceur en SPECIAL à la cible et aux ennemis ADJACENT. Si un Froussardine est seul sur le banc, il rejoint le $t(pkm.WISHIWASHI_SCHOOL) et lui fait gagner 50 HP permanents.",
 		"DOUBLE_SHOCK": "Emet un choc électrique puissant infligeant [50,100,200,SP] SPECIAL à la cible. Inflige PARALYSIS au lanceur pendant 3 secondes.",
-		"PURIFY": "Guérit les altérations de statut et soigne le lanceur de [15,30,60,SP] HP.",
+		"PURIFY": "Guérit les altérations de statut du lanceur et de ses alliés ADJACENT et soigne le lanceur de [15,30,60,SP] HP.",
 		"CHARM": "Rend la cible CHARM pendant 3 secondes et réduit son ATK de [2,3,4,SP] (minimum 1).",
 		"ENTRAINMENT": "Dance sur un rythme étrange, regagnant [10,SP] PP et forçant sa cible à l'imiter, ce qui remplace sa capacité par Ten-Danse. Si la cible danse déjà, cible un autre ennemi proche.",
 		"OCTAZOOKA": "Lance un projectile infligeant [300,SP]% de l'ATK du lanceur en SPECIAL, et laisse un nuage d'encre à l'impact qui réduit la précision de la cible en la rendant BLINDED pendant 4 secondes.",

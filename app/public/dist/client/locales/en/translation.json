@@ -2143,7 +2143,7 @@
 		"GULP_MISSILE": "Shoot an $t(pkm.ARROKUDA) with full PP at the target, dealing [50,SP] SPECIAL to the target. There is a [20,LK]% chance a $t(pkm.PIKACHU) will be fired instead.",
 		"SCHOOLING": "Deal [15,SP]% of the user's max HP as SPECIAL to the target and ADJACENT enemy Pokémon. If a Wishiwashi is on the bench, it joins the school and gives 50 permanent max HP to the user.",
 		"DOUBLE_SHOCK": "Emit a powerful electric shock, dealing [50,100,200,SP] SPECIAL to the target and inflict the user with PARALYSIS for 3 seconds.",
-		"PURIFY": "Cure negative status conditions and heal the user for [15,30,60,SP] HP.",
+		"PURIFY": "Cure negative status conditions of the user and ADJACENT allies and heal the user for [15,30,60,SP] HP.",
 		"CHARM": "Inflict the target with CHARM for 3 seconds and reduce their ATK by [2,3,4,SP] (min 1).",
 		"ENTRAINMENT": "Dance to a strange rhythm, restoring [10,SP] PP and forcing the target to imitate them, which replaces their ability with Entrainment. If target is already entrained, pick another enemy Pokémon nearby.",
 		"OCTAZOOKA": "Shoot a projectile that deals [300,SP]% of the user's ATK as SPECIAL and leave an ink cloud that makes the target BLINDED for 4 seconds.",
