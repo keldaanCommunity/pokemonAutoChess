@@ -130,3 +130,4 @@
 - Added a key shortcut to open the Meta Report (default M, can be changed in options)
 - Thanks to John Rei, we have a new music in the jukebox and 3 alternate versions of the Treasure Town musics
 - New title: Legionnaire, obtained by making a Falinks formation with 8 troopers or more.
+- New accounts have their random starter Pokémon normal emotion already unlocked in their collection
