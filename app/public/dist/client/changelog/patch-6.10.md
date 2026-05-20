@@ -90,6 +90,7 @@
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.
 - Buff Berserk Gene: Confusion duration 3 → 1 second
 - Revert MACH_RIBBON nerf from 6.9: 15 → 20 SPEED every 3 seconds
+- Friend bow can now be held by already Normal Pokémon
 
 # Gameplay
 
