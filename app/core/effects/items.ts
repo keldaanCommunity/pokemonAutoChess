@@ -360,6 +360,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
       removeInArray(player.items, item)
+      player.updateSynergies()
       return false // prevent item from being equipped
     })
   }
