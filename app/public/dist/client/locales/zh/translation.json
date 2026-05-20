@@ -2548,7 +2548,7 @@
 		"BERSERK": "每轮对战中HP首次低于最大值的30%时，获得30点SHIELD，且上述ATK和SPEED增幅翻倍，持续3秒。",
 		"FLUID": "每有一种不同的激活共鸣，所有我方宝可梦提升1点SPEED和3点HP。",
 		"SHAPELESS": "每有一种不同的激活共鸣，所有我方宝可梦提升3点SPEED和6点HP。",
-		"ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升6点SPEED和12点HP。",
+		"ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升5点SPEED和10点HP。",
 		"APPETIZER": "获得一顶CHEF_HAT。厨师会在每轮结束后制作一份专属料理，并喂给STRONGEST ADJACENT我方宝可梦。",
 		"LUNCH_BREAK": "厨师能制作两份料理，并会投喂两个STRONGEST ADJACENT我方宝可梦。",
 		"BANQUET": "获得第二顶CHEF_HAT。"

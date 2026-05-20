@@ -2454,7 +2454,7 @@
 		"BERSERK": "Una vez que esté por debajo del 30% de HP, gana 30 SHIELD y duplica estas mejoras ATK y SPEED durante 3 segundos.",
 		"FLUID": "El equipo gana 1 SPEED and 3 HP por cada sinergia activa.",
 		"SHAPELESS": "El equipo gana 3 SPEED y 6 HP por cada sinergia activa.",
-		"ETHEREAL": "El equipo gana 6 SPEED y 12 HP por cada sinergia activa.",
+		"ETHEREAL": "El equipo gana 5 SPEED y 10 HP por cada sinergia activa.",
 		"APPETIZER": "Consigue un CHEF_HAT. Cocina un plato insignia después de cada ronda y se lo da al aliado ADJACENT STRONGEST.",
 		"LUNCH_BREAK": "El cocinero prepara dos platos y se los da a los dos aliados ADJACENT STRONGEST después de cada ronda.",
 		"BANQUET": "Consigue un segundo CHEF_HAT.",

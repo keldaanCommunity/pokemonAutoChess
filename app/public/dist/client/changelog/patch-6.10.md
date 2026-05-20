@@ -34,6 +34,7 @@
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
 - Nerf Rock: Def 10/30/60 → 10/25/50
+- Nerf Amorphous 7 Ethereal: 6 → 5 speed, 12 → 10 HP per active synergy
 
 > Mostly adressing the lack of power of Steel 2 in early game, and the lack of incentive to enter Steel 2 in late game when you don't have a Steel AD carry.
 

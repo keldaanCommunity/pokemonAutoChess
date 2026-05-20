@@ -2458,7 +2458,7 @@
 		"BERSERK": "HP가 30% 미만이 되면 SHIELD가 30 증가하고 ATK 및 SPEED 버프가 3초 동안 두 배로 늘어납니다.",
 		"FLUID": "활성화된 시너지 한가지당 아군 전체의 SPEED 1 및 HP 3 증가",
 		"SHAPELESS": "활성화된 시너지 한가지당 아군 전체의 SPEED 3 및 HP 6 증가",
-		"ETHEREAL": "활성화된 시너지 한가지당 아군 전체의 SPEED 6 및 HP 12 증가",
+		"ETHEREAL": "활성화된 시너지 한가지당 아군 전체의 SPEED 5 및 HP 10 증가",
 		"APPETIZER": "CHEF_HAT 를 획득한다. 매 스테이지 이후 시그니처 디쉬를 요리하여 인접한 아군 하나에게 먹인다.",
 		"LUNCH_BREAK": "셰프가 매 스테이지 이후 2개의 시그니처 디쉬를 요리하여 인접한 아군 둘에게 먹인다.",
 		"BANQUET": "두 번째 CHEF_HAT 를 획득한다."

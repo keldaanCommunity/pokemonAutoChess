@@ -2548,7 +2548,7 @@
 		"BERSERK": "Once below 30% HP, gain 30 SHIELD and double these ATK and SPEED buffs for 3 seconds.",
 		"FLUID": "Ally team gains 1 SPEED and 3 HP per unique active synergy",
 		"SHAPELESS": "Ally team gains 3 SPEED and 6 HP per unique active synergy",
-		"ETHEREAL": "Ally team gains 6 SPEED and 12 HP per unique active synergy",
+		"ETHEREAL": "Ally team gains 5 SPEED and 10 HP per unique active synergy",
 		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the STRONGEST ADJACENT ally.",
 		"LUNCH_BREAK": "The Chef cook two dishes and feed the two STRONGEST ADJACENT allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT."

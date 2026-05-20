@@ -2424,7 +2424,7 @@
 		"BERSERK": "Sobald deine HP unter 30 % liegen, erhältst du 30 SHIELD und verdoppelst diese ATK- und SPEED-Buffs für 3 Sekunden.",
 		"FLUID": "Verbündetes Team erhält 1 SPEED und 3 HP pro einzigartiger aktiver Synergie",
 		"SHAPELESS": "Verbündetes Team erhält 3 SPEED und 6 HP pro einzigartiger aktiver Synergie",
-		"ETHEREAL": "Verbündetes Team erhält 6 SPEED und 12 HP pro einzigartiger aktiver Synergie",
+		"ETHEREAL": "Verbündetes Team erhält 5 SPEED und 10 HP pro einzigartiger aktiver Synergie",
 		"APPETIZER": "Erhalte einen CHEF_HAT. Koche ein Signaturgericht nach jeder Runde und füttere einen benachbarten Verbündeten.",
 		"LUNCH_BREAK": "Der Koch kocht zwei Gerichte und füttert zwei benachbarte Verbündete nach jeder Runde.",
 		"BANQUET": "Erhalte einen zweiten CHEF_HAT.",
