@@ -73,14 +73,30 @@ export class OnJoinCommand extends Command<
         // create new user account
         const starterBoosters = 3
         const starterPokemon = pickRandomIn(Starters)
-        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
         const randomName = generateRandomName(starterPokemon)
+        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
+        const starterCollection = new Map<string, IPokemonCollectionItemMongo>()
+        const starterCollectionItem: IPokemonCollectionItemMongo = {
+          id: PkmIndex[starterPokemon],
+          unlocked: Buffer.alloc(5, 0),
+          dust: 0,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        CollectionUtils.unlockEmotion(
+          starterCollectionItem.unlocked,
+          Emotion.NORMAL,
+          false
+        )
+        starterCollection.set(PkmIndex[starterPokemon], starterCollectionItem)
+
         await UserMetadata.create({
           uid: client.auth.uid,
           displayName: randomName,
           avatar: starterAvatar,
           booster: starterBoosters,
-          pokemonCollection: new Map<string, IPokemonCollectionItemMongo>()
+          pokemonCollection: starterCollection
         })
         const newUser: IUserMetadataMongo = {
           uid: client.auth.uid,
@@ -96,7 +112,7 @@ export class OnJoinCommand extends Command<
           eventPoints: 0,
           maxEventPoints: 0,
           eventFinishTime: null,
-          pokemonCollection: new Map<string, IPokemonCollectionItemMongo>(),
+          pokemonCollection: starterCollection,
           booster: starterBoosters,
           titles: [],
           title: "",

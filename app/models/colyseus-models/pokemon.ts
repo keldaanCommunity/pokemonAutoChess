@@ -2928,8 +2928,8 @@ export class Swinub extends Pokemon {
   hp = 65
   atk = 4
   speed = 51
-  def = 6
-  speDef = 4
+  def = 5
+  speDef = 3
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
@@ -2943,8 +2943,8 @@ export class Piloswine extends Pokemon {
   hp = 120
   atk = 8
   speed = 51
-  def = 10
-  speDef = 8
+  def = 8
+  speDef = 6
   maxPP = 100
   range = 1
   skill = Ability.ICICLE_CRASH
@@ -5376,7 +5376,6 @@ export class Lugia extends Pokemon {
     Synergy.PSYCHIC
   ])
   rarity = Rarity.LEGENDARY
-  evolution = Pkm.SHADOW_LUGIA
   stars = 3
   hp = 300
   atk = 26
@@ -6625,7 +6624,7 @@ export class Mawile extends Pokemon {
   stars = 3
   hp = 180
   atk = 18
-  speed = 41
+  speed = 47
   def = 12
   speDef = 12
   maxPP = 80
@@ -6876,10 +6875,10 @@ export class Spiritomb extends Pokemon {
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 150
-  atk = 15
+  atk = 18
   speed = 36
-  def = 8
-  speDef = 8
+  def = 12
+  speDef = 12
   maxPP = 108
   range = 1
   skill = Ability.SOUL_TRAP
@@ -12089,7 +12088,7 @@ export class Shuckle extends Pokemon {
   speed = 27
   def = 40
   speDef = 40
-  maxPP = 90
+  maxPP = 50
   range = 1
   skill = Ability.BIDE
 }

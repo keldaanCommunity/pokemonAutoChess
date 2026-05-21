@@ -83,8 +83,8 @@ import { getStrongestUnit, getUnitScore } from "./unit-score"
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
   @type("string") winnerId = ""
-  @type({ map: PokemonEntity }) blueTeam = new MapSchema<IPokemonEntity>()
-  @type({ map: PokemonEntity }) redTeam = new MapSchema<IPokemonEntity>()
+  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
+  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
   @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
   @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("string") id: string
@@ -232,25 +232,25 @@ export default class Simulation extends Schema implements ISimulation {
       [this.bluePlayer, this.blueTeam] as const,
       [this.redPlayer, this.redTeam] as const
     ]) {
-      if (player) {
-        player.board.forEach((pokemon) => {
-          const entity = schemaValues(team).find(
-            (p) => p.refToBoardPokemon === pokemon
-          ) as PokemonEntity | undefined
-          if (pokemon.dishes.size > 0) {
-            pokemon.dishes.forEach((dish) => {
-              this.applyDishEffects(dish, pokemon, entity, player)
-            })
-            pokemon.action = PokemonActionState.IDLE
-            pokemon.dishes.clear() // consume all dishes
-          }
-          if (entity) {
-            entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
-              effect.apply({ simulation: this, player, team, entity })
-            })
-          }
+      team.forEach((entity: PokemonEntity) => {
+        const boardPokemon = entity.refToBoardPokemon as Pokemon
+        if (boardPokemon && boardPokemon.dishes.size > 0) {
+          boardPokemon.dishes.forEach((dish) => {
+            this.applyDishEffects(dish, boardPokemon, entity, player)
+          })
+          boardPokemon.action = PokemonActionState.IDLE
+          boardPokemon.dishes.clear() // consume all dishes
+        }
+
+        entity.getEffects(OnSimulationStartEffect).forEach((effect) => {
+          effect.apply({
+            simulation: this,
+            player: entity.player,
+            team,
+            entity
+          })
         })
-      }
+      })
     }
   }
 
@@ -516,7 +516,7 @@ export default class Simulation extends Schema implements ISimulation {
     dish: Item,
     pokemon: Pokemon,
     entity: PokemonEntity | undefined,
-    player: Player
+    player: Player | undefined
   ) {
     const dishEffects = DishEffects[dish]
     if (!dishEffects) return
@@ -531,7 +531,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (pokemon.passive === Passive.GLUTTON) {
       pokemon.addMaxHP(20)
       entity?.addMaxHP(20, entity, 0, false)
-      if (pokemon.maxHP > 750) {
+      if (player && pokemon.maxHP > 750) {
         player.titles.add(Title.GLUTTON)
       }
     }
@@ -958,6 +958,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.STEEL_SPIKE:
       case EffectEnum.CORKSCREW_CRASH:
       case EffectEnum.MAX_MELTDOWN:
+        pokemon.addDefense(3, pokemon, 0, false)
         if (types.has(Synergy.STEEL)) {
           pokemon.effects.add(effect)
         }
@@ -1048,14 +1049,14 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.MOUTAIN_RESISTANCE:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(30, pokemon, 0, false)
+          pokemon.addDefense(25, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.MOUTAIN_RESISTANCE)
         }
         break
 
       case EffectEnum.DIAMOND_STORM:
         if (types.has(Synergy.ROCK)) {
-          pokemon.addDefense(60, pokemon, 0, false)
+          pokemon.addDefense(50, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.DIAMOND_STORM)
         }
         break
@@ -1297,9 +1298,9 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.ETHEREAL: {
         const activeSynergies = player?.synergies.countActiveSynergies() || 0
         const speedFactor =
-          [1, 3, 6][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
+          [1, 3, 5][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
         const hpFactor =
-          [3, 6, 12][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
+          [3, 6, 10][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
         pokemon.effects.add(effect)
         pokemon.addSpeed(speedFactor * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(hpFactor * activeSynergies, pokemon, 0, false)

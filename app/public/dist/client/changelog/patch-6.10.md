@@ -33,13 +33,17 @@
 - Unowns no longer disappear after one fight if they did not cast their ability
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
+- Nerf Rock: Def 10/30/60 → 10/25/50
+- Nerf Amorphous 7 Ethereal: 6 → 5 speed, 12 → 10 HP per active synergy
+
+> Mostly adressing the lack of power of Steel 2 in early game, and the lack of incentive to enter Steel 2 in late game when you don't have a Steel AD carry.
+
+- Buff Steel: now gives +3 DEF to the whole team when activated ; Steel 8 Max Meltdown: 120 → 125% of ATK as TRUE
+
 # Changes to Pokemon & Abilities
 
 - Roost (Pidove), Firestarter (Fletchling) and Plasma Tempest (Rotom Fan) now uses the new smarter flying away logic. These abilities also proc the protection and aggro reset effect from Flying synergy if active when doing so.
 - Changed Tropius Dish to Nanab berry: once below 50%HP, heal 50HP and give 1 gold
-
-> Required preemptive nerf due to some interactions with wands that love high speed backline attackers
-
 - Nerf Geomancy (Xerneas): Speed 20 → 15
 
 > Trying to tone down the grass/flora composition by making most flower pots Pokémon not benefitting from the grass healing. We hope it will make you consider new Flora comps where Grass is no longer mandatory.
@@ -70,13 +74,29 @@
 - Buff Mystical Fire (Fennekin): AP reduction increased from 10 to 20, and new visual animation.
 - Buff Egg Bomb (Exeggcute): Eggs brought by the ability now hatch the next round immediately
 - Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
+- Shuckle: PP 90 → 50 ; Shuckle no longer gains PP during Bide effect
+- Buff Spiritomb: Attack 15 → 18, Def 8 → 12, SpeDef 8 → 12
+- Buff Gravity (Stonjourner): locked duration 2 → 3 seconds
+- Buff Mawile: Speed 41 → 47
+- Buff Purify (Pyukumuku): now also cures negative status conditions of adjacent allies, in addition to the user
+
+> We adjust damage per rank for PvE legendary abilities now that Skill Swap TM exists
+
+- Psystrike (Mewtwo): 80 damage at all tiers → 20/40/80
+- Origin Pulse (Kyogre): 100 damage at all tiers → 25/50/100
+- Precipice Blades (Groudon): 100 damage at all tiers → 25/50/100
+- Sky Attack (Lugia): 120 damage at all tiers → 30/60/120
+- Overheat (Moltres): 50 damage at all tiers → 12/25/50
 - Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
+
+- Nerf Swinub line: Def 6/10/16 → 5/8/16, Spe Def: 4/8/12 → 3/6/12
 
 # Changes to Items
 
 - Lucky Ribbon: Remove 10 DEF, added 15 SHIELD. New effect: Holder now has 15% additional chance to dodge incoming attacks.
 - Buff Berserk Gene: Confusion duration 3 → 1 second
 - Revert MACH_RIBBON nerf from 6.9: 15 → 20 SPEED every 3 seconds
+- Friend bow can now be held by already Normal Pokémon
 
 # Gameplay
 
@@ -117,3 +137,4 @@
 - Added a key shortcut to open the Meta Report (default M, can be changed in options)
 - Thanks to John Rei, we have a new music in the jukebox and 3 alternate versions of the Treasure Town musics
 - New title: Legionnaire, obtained by making a Falinks formation with 8 troopers or more.
+- New accounts have their random starter Pokémon normal emotion already unlocked in their collection

@@ -169,7 +169,8 @@ export enum EffectEnum {
   SPECIAL_ATTACKS = "SPECIAL_ATTACKS",
   JAW_LOCK = "JAW_LOCK",
   BALM_MUSHROOM = "BALM_MUSHROOM",
-  PARTING_SHOT = "PARTING_SHOT"
+  PARTING_SHOT = "PARTING_SHOT",
+  NO_PP_GAIN = "NO_PP_GAIN"
 }
 
 export const BoardEffects = [

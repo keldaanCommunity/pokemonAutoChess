@@ -7915,8 +7915,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp,
-    attackSprite: AttackSprite.WATER_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.WATER_MELEE
   },
   [Pkm.TATSUGIRI_CURLY]: {
     attack: AnimationType.Attack,

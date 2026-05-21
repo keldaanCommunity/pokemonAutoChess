@@ -833,6 +833,7 @@ const commanderPassive = new OnSimulationStartEffect(
 
 const conversionEffect = new OnSimulationStartEffect(
   ({ simulation, player, entity }) => {
+    if(!player) return
     const opponent =
       simulation.bluePlayerId === player.id
         ? simulation.redPlayer
@@ -944,7 +945,9 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
       )
       if (coord) {
         const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
-        player.pokemonsPlayed.add(Pkm.PHIONE)
+        if(player){
+          player.pokemonsPlayed.add(Pkm.PHIONE)
+        }
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
       }
     }

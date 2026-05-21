@@ -884,7 +884,7 @@ export class OnDragDropItemCommand extends Command<
       }
     } else {
       if (
-        (isIn(SynergyStones, item) || item === Item.FRIEND_BOW) &&
+        isIn(SynergyStones, item) &&
         pokemon.types.has(SynergyGivenByItem[item])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
