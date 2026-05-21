@@ -9,11 +9,16 @@ import type {
   ItemEvolutionRule,
   StackEvolutionRule
 } from "../../types/EvolutionRules"
-import type { Pkm } from "../../types/enum/Pokemon"
+import { PokemonActionState } from "../../types/enum/Game"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm } from "../../types/enum/Pokemon"
+import { OnEvolutionEffect } from "../effects/effect"
+import { PassiveEffects } from "../effects/passives"
 import { ConditionEvolutionHandler } from "./condition-evolution-handler"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
 import { HatchEvolutionHandler } from "./hatch-evolution-handler"
+import { getHatchTime } from "./hatch-time";
 import { ItemEvolutionHandler } from "./item-evolution-handler"
 import { StackEvolutionHandler } from "./stack-evolution-handler"
 
@@ -44,10 +49,49 @@ export const EvolutionManager = {
     const handler = this.getHandler(pokemon.evolutionRule)
     if (handler.canEvolve(pokemon, player, stageLevel)) {
       const pokemonEvolved = handler.evolve(pokemon, player, stageLevel)
-      if (pokemon.supercharged) pokemonEvolved.supercharged = true
-      handler.afterEvolve(pokemonEvolved, player, stageLevel)
       return pokemonEvolved
     }
+  },
+
+  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+    const handler = this.getHandler(pokemon.evolutionRule)
+    const pokemonEvolved = handler.evolve(pokemon, player, stageLevel)
+    this.afterEvolve(pokemonEvolved, pokemon, player, stageLevel)
+    return pokemonEvolved
+  },
+
+  afterEvolve(
+    pokemonEvolved: Pokemon,
+    pokemonBeforeEvolution: Pokemon,
+    player: Player,
+    stageLevel: number
+  ) {
+    player.updateSynergies()
+    if (pokemonBeforeEvolution.supercharged) pokemonEvolved.supercharged = true // preserve supercharged state on evolution
+
+    if (pokemonEvolved.passive in PassiveEffects) {
+      PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
+        if (effect instanceof OnEvolutionEffect) {
+          effect.apply({ pokemonEvolved, player })
+        }
+      })
+    }
+
+    player.board.forEach((pokemon) => {
+      if (
+        (pokemon.passive === Passive.COSMOG ||
+          pokemon.passive === Passive.COSMOEM) &&
+        pokemonEvolved.passive !== Passive.COSMOG &&
+        pokemonEvolved.passive !== Passive.COSMOEM
+      ) {
+        pokemon.addMaxHP(10)
+        pokemon.stacks++
+        this.tryEvolve(pokemon, player, stageLevel)
+      }
+    })
+
+    // check evolutions again if it can evolve twice in a row
+    this.tryEvolve(pokemonEvolved, player, stageLevel)
   },
 
   getEvolution(
@@ -78,19 +122,27 @@ export const EvolutionManager = {
     return handler.canEvolveIfGettingOne(pokemon, player)
   },
 
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    const handler = this.getHandler(pokemon.evolutionRule)
-    return handler.evolve(pokemon, player, stageLevel)
-  },
-
-  afterEvolve(pokemon: Pokemon, player: Player, stageLevel: number) {
-    const handler = this.getHandler(pokemon.evolutionRule)
-    return handler.afterEvolve(pokemon, player, stageLevel)
-  },
-
   updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
     if (pokemon.evolutionRule.type !== "hatch") return
-    const handler = this.getHandler(pokemon.evolutionRule) as HatchEvolutionHandler
-    return handler.updateHatch(pokemon, player, stageLevel)
+    const handler = this.getHandler(
+      pokemon.evolutionRule
+    ) as HatchEvolutionHandler
+    pokemon.stacks++
+    const willHatch = this.canEvolve(pokemon, player, stageLevel)
+    if (willHatch) {
+      pokemon.action = PokemonActionState.HOP
+      setTimeout(() => {
+        this.tryEvolve(pokemon, player, stageLevel)
+      }, 2000)
+    } else if (pokemon.name === Pkm.EGG) {
+      const hatchTime = getHatchTime(pokemon, player)
+      if (pokemon.stacks >= hatchTime) {
+        pokemon.action = PokemonActionState.HOP
+      } else if (pokemon.stacks >= hatchTime - 1) {
+        pokemon.action = PokemonActionState.EMOTE
+      } else {
+        pokemon.action = PokemonActionState.IDLE
+      }
+    }
   }
 }

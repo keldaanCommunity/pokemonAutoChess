@@ -19,8 +19,7 @@ import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
-import { EvolutionManager } from "../evolution-logic/evolution-manager"
-import type { HatchEvolutionHandler } from "../evolution-logic/hatch-evolution-handler"
+import { getHatchTime } from "../evolution-logic/hatch-time"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 import { castAbility } from "./cast"
@@ -110,10 +109,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      const hatchEvolutionHandler = EvolutionManager.getHandler(
-        egg.evolutionRule
-      ) as HatchEvolutionHandler
-      egg.stacks = hatchEvolutionHandler.getHatchTime(egg, unown.player) - 1
+      egg.stacks = getHatchTime(egg, unown.player) - 1
     }
   }
 }

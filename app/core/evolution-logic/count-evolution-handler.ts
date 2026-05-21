@@ -174,10 +174,6 @@ export class CountEvolutionHandler extends EvolutionHandler {
       logger.error("no coordinate found for new evolution")
     }
 
-    if (pokemon.afterEvolve) {
-      pokemon.afterEvolve({ pokemonEvolved, pokemonsBeforeEvolution, player })
-    }
-
     pokemonEvolved.onAcquired(player)
     return pokemonEvolved
   }

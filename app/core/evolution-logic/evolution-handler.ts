@@ -2,19 +2,14 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import type { IPlayer } from "../../types"
-import type { EvolutionRule } from "../../types/EvolutionRules"
+import type {
+  DivergentEvolution,
+  EvolutionRule
+} from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
-import { Passive } from "../../types/enum/Passive"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
-import { EvolutionManager } from "./evolution-manager"
-
-type DivergentEvolution<Param = any> = (
-  pokemon: Pokemon,
-  player: IPlayer,
-  ...additionalArgs: Param[]
-) => Pkm
 
 export abstract class EvolutionHandler {
   abstract canEvolve(
@@ -39,37 +34,6 @@ export abstract class EvolutionHandler {
       return this.divergentEvolution(pokemon, player, ...additionalArgs)
     }
     return pokemon.evolution
-  }
-
-  tryEvolve(
-    pokemon: Pokemon,
-    player: Player,
-    stageLevel: number
-  ): void | Pokemon {
-    if (this.canEvolve(pokemon, player, stageLevel)) {
-      const pokemonEvolved = this.evolve(pokemon, player, stageLevel)
-      if (pokemon.supercharged) pokemonEvolved.supercharged = true
-      this.afterEvolve(pokemonEvolved, player, stageLevel)
-      return pokemonEvolved
-    }
-  }
-
-  afterEvolve(pokemonEvolved: Pokemon, player: Player, stageLevel: number) {
-    player.updateSynergies()
-    player.board.forEach((pokemon) => {
-      if (
-        (pokemon.passive === Passive.COSMOG ||
-          pokemon.passive === Passive.COSMOEM) &&
-        pokemonEvolved.passive !== Passive.COSMOG &&
-        pokemonEvolved.passive !== Passive.COSMOEM
-      ) {
-        pokemon.addMaxHP(10)
-        pokemon.stacks++
-        EvolutionManager.tryEvolve(pokemon, player, stageLevel)
-      }
-    })
-    // check evolutions again if it can evolve twice in a row
-    EvolutionManager.tryEvolve(pokemonEvolved, player, stageLevel)
   }
 }
 

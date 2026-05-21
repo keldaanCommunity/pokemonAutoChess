@@ -42,11 +42,11 @@ import {
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
-import { EvolutionManager } from "../evolution-logic/evolution-manager";
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
-import { getUnitScore } from "../unit-score";
+import { getUnitScore } from "../unit-score"
 import {
   BeforeAttackEffect,
   type Effect,
@@ -1308,11 +1308,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      pokemon.afterEvolve({
+      EvolutionManager.afterEvolve(
         pokemonEvolved,
-        pokemonsBeforeEvolution: [pokemon],
-        player
-      })
+        pokemon,
+        player,
+        room.state.stageLevel
+      )
+      if (pokemon.supercharged) pokemonEvolved.supercharged = true // preserve supercharged state on evolution
 
       pokemonEvolved.items.add(item)
       removeInArray(player.items, item)

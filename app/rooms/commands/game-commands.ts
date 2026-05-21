@@ -27,7 +27,9 @@ import {
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import {
+  OnChangePositionEffect,
   OnItemDroppedEffect,
+  OnSpotlightChangeEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
 import { ItemEffects } from "../../core/effects/items"
@@ -60,6 +62,7 @@ import {
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
   type IDragDropMessage,
+  RemovableItems,
   Role,
   Title,
   TMPerAbility,
@@ -435,19 +438,33 @@ export class OnDragDropPokemonCommand extends Command<
   swapPokemonPositions(player: Player, pokemon: Pokemon, x: number, y: number) {
     const pokemonToSwap = player.getPokemonAt(x, y)
     if (pokemonToSwap) {
+      const oldX = pokemonToSwap.positionX
+      const oldY = pokemonToSwap.positionY
       pokemonToSwap.positionX = pokemon.positionX
       pokemonToSwap.positionY = pokemon.positionY
-      changePokemonPosition(
-        pokemonToSwap,
-        pokemon.positionX,
-        pokemon.positionY,
+      onPokemonChangePosition({
+        pokemon: pokemonToSwap,
+        newX: pokemon.positionX,
+        newY: pokemon.positionY,
+        oldX,
+        oldY,
         player,
-        this.state
-      )
+        state: this.state
+      })
     }
+    const oldX = pokemon.positionX
+    const oldY = pokemon.positionY
     pokemon.positionX = x
     pokemon.positionY = y
-    changePokemonPosition(pokemon, x, y, player, this.state)
+    onPokemonChangePosition({
+      pokemon,
+      newX: x,
+      newY: y,
+      oldX,
+      oldY,
+      player,
+      state: this.state
+    })
   }
 }
 
@@ -487,17 +504,37 @@ export class OnSwitchBenchAndBoardCommand extends Command<
         !(isBoardFull && pokemon.doesCountForTeamSize)
       ) {
         const [x, y] = destination
+        const oldX = pokemon.positionX
+        const oldY = pokemon.positionY
         pokemon.positionX = x
         pokemon.positionY = y
-        pokemon.onChangePosition(x, y, player, this.state)
+        onPokemonChangePosition({
+          pokemon,
+          newX: x,
+          newY: y,
+          oldX,
+          oldY,
+          player,
+          state: this.state
+        })
       }
     } else {
       // pokemon is on board, switch to bench
       const x = getFirstAvailablePositionInBench(player.board)
       if (x !== null) {
+        const oldX = pokemon.positionX
+        const oldY = pokemon.positionY
         pokemon.positionX = x
         pokemon.positionY = 0
-        pokemon.onChangePosition(x, 0, player, this.state)
+        onPokemonChangePosition({
+          pokemon,
+          newX: x,
+          newY: 0,
+          oldX: oldX,
+          oldY: oldY,
+          player,
+          state: this.state
+        })
       }
     }
 
@@ -1569,15 +1606,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             )
 
             if (coordinates) {
+              const oldX = pokemon.positionX
+              const oldY = pokemon.positionY
               pokemon.positionX = coordinates[0]
               pokemon.positionY = coordinates[1]
-              changePokemonPosition(
+              onPokemonChangePosition({
                 pokemon,
-                coordinates[0],
-                coordinates[1],
+                newX: coordinates[0],
+                newY: coordinates[1],
+                oldX,
+                oldY,
                 player,
-                this.state
-              )
+                state: this.state
+              })
             }
           }
         }
@@ -1661,14 +1702,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
-            if (pokemon.evolutionRule) {
-              if (pokemon.evolutionRule.type === "hatch") {
-                EvolutionManager.updateHatch(
-                  pokemon,
-                  player,
-                  this.state.stageLevel
-                )
-              }
+            if (pokemon.evolutionRule?.type === "hatch") {
+              EvolutionManager.updateHatch(
+                pokemon,
+                player,
+                this.state.stageLevel
+              )
             }
 
             if (pokemon.action === PokemonActionState.TRAINING) {
@@ -2098,19 +2137,84 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
   }
 }
 
-function changePokemonPosition(
-  pokemon: Pokemon,
-  x: number,
-  y: number,
-  player: Player,
+export function onPokemonChangePosition({
+  pokemon,
+  newX,
+  newY,
+  player,
+  oldX,
+  oldY,
+  state,
+  doNotRemoveItems = false
+}: {
+  pokemon: Pokemon
+  newX: number
+  newY: number
+  player: Player
+  oldX: number
+  oldY: number
   state: GameState
-) {
-  pokemon.onChangePosition(x, y, player, state)
-  if (y === 0 && pokemon.tm && TMPerAbility.has(pokemon.tm)) {
-    player.items.push(TMPerAbility.get(pokemon.tm)!)
-    pokemon.tm = Ability.DEFAULT
-    const { skill: baseSkill, pp: baseMaxPP } = getPokemonData(pokemon.name)
-    pokemon.skill = baseSkill
-    pokemon.maxPP = baseMaxPP
+  doNotRemoveItems?: boolean
+}) {
+  // called after manually changing position of the pokemon on board
+
+  if (pokemon.passive !== Passive.NONE) {
+    const hasLight =
+      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
+      SynergyTriggers[Synergy.LIGHT][0]
+    const inSpotlight =
+      hasLight &&
+      ((newX === player.lightX && newY === player.lightY) ||
+        pokemon.items.has(Item.SHINY_STONE))
+
+    PassiveEffects[pokemon.passive]?.forEach((effect) => {
+      if (effect instanceof OnChangePositionEffect) {
+        effect.apply({
+          pokemon,
+          player,
+          state,
+          oldX,
+          oldY,
+          newX,
+          newY
+        })
+      }
+
+      if (effect instanceof OnSpotlightChangeEffect) {
+        effect.apply({
+          pokemon,
+          player,
+          inSpotlight
+        })
+      }
+    })
+  }
+
+  if (pokemon.name === Pkm.MANTYKE || pokemon.name === Pkm.REMORAID) {
+    // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
+    for (const pokemon of player.board.values()) {
+      if (pokemon.name === Pkm.MANTYKE) {
+        EvolutionManager.tryEvolve(pokemon, player, 0)
+      }
+    }
+  }
+
+  if (newY === 0 && !doNotRemoveItems) {
+    const itemsToRemove = schemaValues(pokemon.items).filter((item) => {
+      return (
+        isIn(RemovableItems, item) ||
+        (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+          item !== Item.RARE_CANDY)
+      )
+    })
+    player.items.push(...itemsToRemove)
+    pokemon.removeItems(itemsToRemove, player)
+
+    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+      player.items.push(TMPerAbility.get(pokemon.tm)!)
+      pokemon.tm = Ability.DEFAULT
+      pokemon.skill = pokemon.baseSkill
+      pokemon.maxPP = pokemon.baseMaxPP
+    }
   }
 }

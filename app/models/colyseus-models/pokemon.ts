@@ -8,7 +8,6 @@ import {
   SynergyTriggers
 } from "../../config"
 import { SynergyEffects } from "../../config/game/synergies"
-import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import type Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
 import {
@@ -38,7 +37,6 @@ import {
   ItemRecipe,
   MemoryDiscsBySynergy,
   OgerponMasks,
-  RemovableItems,
   SynergyGivenByItem,
   SynergyItems,
   Tools
@@ -51,10 +49,9 @@ import {
   PkmRegionalVariants,
   Unowns
 } from "../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { isIn, removeInArray } from "../../utils/array"
+import { removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
@@ -107,6 +104,8 @@ export class Pokemon extends Schema implements IPokemon {
   canHoldItems = true
   canBeBenched = true
   canBeSold = true
+  baseSkill: Ability = Ability.DEFAULT
+  baseMaxPP: number = 100
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
@@ -115,6 +114,13 @@ export class Pokemon extends Schema implements IPokemon {
     this.index = PkmIndex[name]
     this.shiny = shiny
     this.emotion = emotion
+  }
+
+  postConstructor() {
+    // called after subclass constructor called, used to set properties that depend on subclass values
+    this.maxHP = this.hp
+    this.baseMaxPP = this.maxPP
+    this.baseSkill = this.skill
   }
 
   get final(): boolean {
@@ -161,27 +167,6 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  onChangePosition(
-    x: number,
-    y: number,
-    player: Player,
-    state?: GameState,
-    doNotRemoveItems: boolean = false
-  ) {
-    // called after manually changing position of the pokemon on board
-    if (y === 0 && !doNotRemoveItems) {
-      const itemsToRemove = schemaValues(this.items).filter((item) => {
-        return (
-          isIn(RemovableItems, item) ||
-          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
-            item !== Item.RARE_CANDY)
-        )
-      })
-      player.items.push(...itemsToRemove)
-      this.removeItems(itemsToRemove, player)
-    }
-  }
-
   onItemGiven(item: Item, player: Player) {
     // called after giving an item to the mon
   }
@@ -196,14 +181,6 @@ export class Pokemon extends Schema implements IPokemon {
 
   afterSell(player: Player) {
     // called after selling the mon
-  }
-
-  afterEvolve(params: {
-    pokemonEvolved: Pokemon
-    pokemonsBeforeEvolution: Pokemon[]
-    player: Player
-  }) {
-    // called after evolving
   }
 
   beforeSimulationStart(params: {
@@ -5371,13 +5348,6 @@ export class Meloetta extends Pokemon {
   range = 4
   skill = Ability.RELIC_SONG
   passive = Passive.MELOETTA
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    if (y === 3) {
-      player.transformPokemon(this, Pkm.PIROUETTE_MELOETTA)
-    }
-  }
 }
 
 export class PirouetteMeloetta extends Pokemon {
@@ -5397,13 +5367,6 @@ export class PirouetteMeloetta extends Pokemon {
   range = 1
   skill = Ability.U_TURN
   passive = Passive.MELOETTA
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    if (y !== 3) {
-      player.transformPokemon(this, Pkm.MELOETTA)
-    }
-  }
 }
 
 export class Lugia extends Pokemon {
@@ -8509,7 +8472,7 @@ export class Ninjask extends Pokemon {
       const shiny = pkmWithCustom.shiny ?? false
       const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
       const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
-      pokemon.maxHP = pokemon.hp
+      pokemon.postConstructor()
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
@@ -10178,21 +10141,6 @@ export class Silvally extends Pokemon {
   range = 1
   skill = Ability.MULTI_ATTACK
   passive = Passive.RKS_SYSTEM
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state, true)
-    if (y === 0) {
-      const itemsToRemove = schemaValues(this.items).filter((item) => {
-        return (
-          isIn(RemovableItems, item) ||
-          (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
-            item !== Item.RARE_CANDY) ||
-          isIn(SynergyItems, item)
-        )
-      })
-      player.items.push(...itemsToRemove)
-      this.removeItems(itemsToRemove, player)
-    }
-  }
 }
 
 export class Applin extends Pokemon {
@@ -13070,19 +13018,6 @@ export class Necrozma extends Pokemon {
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
 
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    const hasLight =
-      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-      SynergyTriggers[Synergy.LIGHT][0]
-    if (
-      (x === player.lightX && y === player.lightY && hasLight) ||
-      this.items.has(Item.SHINY_STONE)
-    ) {
-      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
-    }
-  }
-
   onItemGiven(item: Item, player: Player) {
     if (item === Item.SHINY_STONE) {
       player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
@@ -13107,19 +13042,6 @@ export class UltraNecrozma extends Pokemon {
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    const hasLight =
-      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-      SynergyTriggers[Synergy.LIGHT][0]
-    if (
-      (x !== player.lightX || y !== player.lightY || !hasLight) &&
-      !this.items.has(Item.SHINY_STONE)
-    ) {
-      player.transformPokemon(this, Pkm.NECROZMA)
-    }
-  }
 }
 
 export class Cherubi extends Pokemon {
@@ -13177,18 +13099,6 @@ export class Cherrim extends Pokemon {
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
   regional = true
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    const hasLight =
-      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-      SynergyTriggers[Synergy.LIGHT][0]
-    if (
-      (x === player.lightX && y === player.lightY && hasLight) ||
-      this.items.has(Item.SHINY_STONE)
-    ) {
-      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
-    }
-  }
 
   onItemGiven(item: Item, player: Player) {
     if (item === Item.SHINY_STONE) {
@@ -13215,18 +13125,6 @@ export class CherrimSunlight extends Pokemon {
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
   regional = true
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    const hasLight =
-      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-      SynergyTriggers[Synergy.LIGHT][0]
-    if (
-      (x !== player.lightX || y !== player.lightY || !hasLight) &&
-      !this.items.has(Item.SHINY_STONE)
-    ) {
-      player.transformPokemon(this, Pkm.CHERRIM)
-    }
-  }
 }
 
 export class Misdreavus extends Pokemon {
@@ -16193,11 +16091,6 @@ export class Mantyke extends Pokemon {
   range = 2
   skill = Ability.BOUNCE
   passive = Passive.MANTYKE
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    EvolutionManager.tryEvolve(this, player, 0)
-  }
 }
 
 export class Mantine extends Pokemon {
@@ -16228,15 +16121,6 @@ export class Remoraid extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.AQUA_JET
-
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    for (const pokemon of player.board.values()) {
-      if (pokemon.name === Pkm.MANTYKE) {
-        EvolutionManager.tryEvolve(pokemon, player, 0)
-      }
-    }
-  }
 }
 
 export class Octillery extends Pokemon {
@@ -17193,14 +17077,7 @@ export class Timburr extends Pokemon {
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    player.updatePillars()
-  }
   afterSell(player) {
-    player.updatePillars()
-  }
-  afterEvolve(player) {
     player.updatePillars()
   }
 }
@@ -17219,14 +17096,7 @@ export class Gurdurr extends Pokemon {
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    player.updatePillars()
-  }
   afterSell(player) {
-    player.updatePillars()
-  }
-  afterEvolve(player) {
     player.updatePillars()
   }
 }
@@ -17244,10 +17114,6 @@ export class Conkeldurr extends Pokemon {
   range = 1
   skill = Ability.COLUMN_CRUSH
   passive = Passive.PILLAR
-  onChangePosition(x: number, y: number, player: Player, state: GameState) {
-    super.onChangePosition(x, y, player, state)
-    player.updatePillars()
-  }
   afterSell(player) {
     player.updatePillars()
   }

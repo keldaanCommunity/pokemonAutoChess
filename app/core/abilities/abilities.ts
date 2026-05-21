@@ -51,8 +51,7 @@ import {
 import { AccelerationEffect } from "../effects/passives/acceleration"
 import { BergmiteOnBackEffect } from "../effects/passives/bergmite-on-back"
 import { FalinksFormationEffect } from "../effects/passives/falinks-formation"
-import { EvolutionManager } from "../evolution-logic/evolution-manager";
-import type { HatchEvolutionHandler } from "../evolution-logic/hatch-evolution-handler";
+import { getHatchTime } from "../evolution-logic/hatch-time";
 import { getMoveSpeed } from "../move-speed"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -7635,8 +7634,7 @@ export class EggBombStrategy extends AbilityStrategy {
           ) {
             const egg = giveRandomEgg(pokemon.player, false)
             if (egg) {
-              const hatchEvolutionHandler = EvolutionManager.getHandler(egg.evolutionRule) as HatchEvolutionHandler
-              egg.stacks = hatchEvolutionHandler.getHatchTime(egg, pokemon.player) - 1
+              egg.stacks = getHatchTime(egg, pokemon.player) - 1
             }
           }
           v.status.triggerArmorReduction(4000, v)
