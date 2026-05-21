@@ -1,4 +1,4 @@
-import { Emotion, PkmWithCustom } from "../types"
+import { Emotion, type PkmWithCustom } from "../types"
 import { Pkm, PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
 
 const PORTRAITS_FALLBACKS = {

@@ -1,5 +1,6 @@
 import { t } from "i18next"
-import React, { ReactNode, useEffect, useState } from "react"
+import type React from "react"
+import { type ReactNode, useEffect, useState } from "react"
 import { useDraggable } from "../../utils/draggable"
 import "./draggable-window.css"
 

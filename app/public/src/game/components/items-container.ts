@@ -1,10 +1,10 @@
-import { ArraySchema, SetSchema } from "@colyseus/schema"
+import type { ArraySchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
-import Player from "../../../../models/colyseus-models/player"
+import type Player from "../../../../models/colyseus-models/player"
 import {
   Berries,
   Dishes,
-  Item,
+  type Item,
   ShinyItems,
   SpecialItems,
   TMs,
@@ -15,7 +15,7 @@ import {
 import { isIn } from "../../../../utils/array"
 import { schemaValues } from "../../../../utils/schemas"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {

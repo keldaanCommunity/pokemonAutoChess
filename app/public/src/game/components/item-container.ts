@@ -1,8 +1,9 @@
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
 import {
   Berries,
   Dishes,
-  Item,
+  type Item,
   ShinyItems,
   SpecialItems,
   TMs,

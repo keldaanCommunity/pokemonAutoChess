@@ -2,7 +2,7 @@ import firebase from "firebase/compat/app"
 import React, { useCallback, useRef, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { USERNAME_REGEXP } from "../../../../../config"
-import { IChatV2, ISuggestionUser } from "../../../../../types"
+import type { IChatV2, ISuggestionUser } from "../../../../../types"
 import { debounce } from "../../../../../utils/function"
 import {
   getTwitchBlacklist,
@@ -10,7 +10,7 @@ import {
   renameAccount,
   searchById,
   searchMessages,
-  TwitchBlacklistEntry
+  type TwitchBlacklistEntry
 } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import ChatHistory from "../chat/chat-history"

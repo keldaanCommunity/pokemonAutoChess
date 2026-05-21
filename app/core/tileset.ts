@@ -1,16 +1,16 @@
 import { readJsonSync } from "fs-extra"
 import {
   DTEF_TILESET_WIDTH,
-  DtefTileset,
-  Mask,
+  type DtefTileset,
+  type Mask,
   MaskCoordinate,
-  TerrainType,
-  TilesetExchangeFile
+  type TerrainType,
+  type TilesetExchangeFile
 } from "../config"
-import { DungeonPMDO } from "../types/enum/Dungeon"
+import type { DungeonPMDO } from "../types/enum/Dungeon"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
-import { TileMapping } from "./design"
+import type { TileMapping } from "./design"
 
 export type TilesetTiled = {
   image: string

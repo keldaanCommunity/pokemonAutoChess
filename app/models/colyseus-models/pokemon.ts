@@ -7,17 +7,24 @@ import {
   RegionDetails,
   SynergyTriggers
 } from "../../config"
+import { SynergyEffects } from "../../config/game/synergies"
 import {
   ConditionBasedEvolutionRule,
   CountEvolutionRule,
-  EvolutionRule,
+  type EvolutionRule,
   HatchEvolutionRule,
   ItemEvolutionRule,
   StackBasedEvolutionRule
 } from "../../core/evolution-rules"
-import Simulation from "../../core/simulation"
-import GameState from "../../rooms/states/game-state"
-import { Emotion, IPlayer, IPokemon, IPokemonEntity, Title } from "../../types"
+import type Simulation from "../../core/simulation"
+import type GameState from "../../rooms/states/game-state"
+import {
+  Emotion,
+  type IPlayer,
+  type IPokemon,
+  type IPokemonEntity,
+  Title
+} from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -51,9 +58,8 @@ import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
-import { SynergyEffects } from "../effects"
-import PokemonFactory from "../pokemon-factory"
-import Player from "./player"
+import type Player from "./player"
+import { getPkmWithCustom } from "./pokemon-customs"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -8457,7 +8463,14 @@ export class Ninjask extends Pokemon {
     // also gain sheninja if free space on bench
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
-      const pokemon = PokemonFactory.createPokemonFromName(Pkm.SHEDINJA, player)
+      const pkmWithCustom = getPkmWithCustom(
+        PkmIndex[Pkm.SHEDINJA],
+        player.pokemonCustoms
+      )
+      const shiny = pkmWithCustom.shiny ?? false
+      const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
+      const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
+      pokemon.maxHP = pokemon.hp
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)

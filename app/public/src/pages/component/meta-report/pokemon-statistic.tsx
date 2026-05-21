@@ -6,10 +6,14 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import {
+  type Pkm,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import { getPortraitSrc } from "../../../../../utils/avatar"
+import type {
   IHistoryEntry,
   IPokemonStatV2
 } from "../../../models/pokemons-statistic-v2"

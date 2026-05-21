@@ -1,5 +1,5 @@
 import { Pkm } from "../../types/enum/Pokemon"
-import { TownEncounter } from "../../types/enum/TownEncounter"
+import type { TownEncounter } from "../../types/enum/TownEncounter"
 import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =

@@ -1,4 +1,4 @@
-import { MapSchema } from "@colyseus/schema"
+import type { MapSchema } from "@colyseus/schema"
 import {
   Bodies,
   Body,
@@ -16,13 +16,13 @@ import {
   TownEncountersByStage
 } from "../config"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
-import Player from "../models/colyseus-models/player"
+import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
-import GameRoom from "../rooms/game-room"
-import GameState from "../rooms/states/game-state"
+import type GameRoom from "../rooms/game-room"
+import type GameState from "../rooms/states/game-state"
 import {
   MemoryDiscs,
   SynergyGivenByItem,
@@ -45,8 +45,8 @@ import {
 } from "../types/enum/Item"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../types/enum/Synergy"
-import { TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
-import { NpcDialog } from "../types/strings/NpcDialog"
+import { type TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
+import type { NpcDialog } from "../types/strings/NpcDialog"
 import { isIn } from "../utils/array"
 import { clamp, max } from "../utils/number"
 import { getOrientation } from "../utils/orientation"

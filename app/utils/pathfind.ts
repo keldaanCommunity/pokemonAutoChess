@@ -1,5 +1,3 @@
-import type { Board } from "../core/board"
-
 const defaultGrid: number[][] = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -60,12 +58,11 @@ export const getNeighbors = (node: Node, grid: number[][]): Node[] => {
 }
 
 export const findPath = (
-  board: Board,
+  pokemonCoordinates: { x: number; y: number }[],
   start: [number, number],
   goal: [number, number]
 ): [number, number][] => {
   const gridCopy = defaultGrid.map((row) => row.slice())
-  const pokemonCoordinates = board.getAllPokemonCoordinates()
   pokemonCoordinates.forEach(({ x, y }) => {
     if (
       gridCopy[y] &&

@@ -1,11 +1,11 @@
 import { t } from "i18next"
-import React, { ReactElement } from "react"
+import React, { type ReactElement } from "react"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import {
   DocumentedStatuses,
   PositiveStatuses,
-  Status
+  type Status
 } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"

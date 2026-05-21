@@ -3,7 +3,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import {
+import type {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"

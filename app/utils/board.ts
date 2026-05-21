@@ -1,7 +1,7 @@
-import { MapSchema } from "@colyseus/schema"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import PokemonSprite from "../public/src/game/components/pokemon"
-import { IPokemon } from "../types"
+import type { MapSchema } from "@colyseus/schema"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
+import type PokemonSprite from "../public/src/game/components/pokemon"
+import type { IPokemon } from "../types"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { schemaValues } from "./schemas"
 

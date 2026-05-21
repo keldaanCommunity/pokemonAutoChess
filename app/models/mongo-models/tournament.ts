@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose"
-import { ITournament } from "../../types/interfaces/Tournament"
+import type { ITournament } from "../../types/interfaces/Tournament"
 
 const tournamentPlayerSchema = new Schema({
   name: String,

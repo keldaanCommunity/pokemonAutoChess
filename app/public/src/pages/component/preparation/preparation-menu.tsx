@@ -6,7 +6,7 @@ import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME
 } from "../../../../../config"
-import { IGameUser } from "../../../../../models/colyseus-models/game-user"
+import type { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../../../../types/enum/Game"

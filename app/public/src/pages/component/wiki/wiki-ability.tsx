@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react"
+import type React from "react"
+import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
@@ -7,7 +8,7 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { Ability } from "../../../../../types/enum/Ability"
 import {
   AbilityPerTM,
-  Item,
+  type Item,
   TMsBronze,
   TMsSilver
 } from "../../../../../types/enum/Item"

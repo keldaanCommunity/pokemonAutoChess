@@ -1,6 +1,6 @@
-import { Item } from "../enum/Item"
-import { Pkm } from "../enum/Pokemon"
-import { IHistoryEntry } from "./history"
+import type { Item } from "../enum/Item"
+import type { Pkm } from "../enum/Pokemon"
+import type { IHistoryEntry } from "./history"
 
 export type { IHistoryEntry } from "./history"
 

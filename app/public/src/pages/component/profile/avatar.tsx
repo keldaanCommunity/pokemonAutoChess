@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { Role, Title } from "../../../../../types"
+import type { Role, Title } from "../../../../../types"
 import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"

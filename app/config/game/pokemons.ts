@@ -1,5 +1,4 @@
-import { FlowerPot } from "../../core/flower-pots"
-import { IPlayer } from "../../types"
+import { FlowerPot, type IPlayer } from "../../types"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"

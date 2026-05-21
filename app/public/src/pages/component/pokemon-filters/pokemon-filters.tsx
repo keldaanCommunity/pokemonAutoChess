@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import {
-  IPreferencesState,
-  PreferenceKey,
+  type IPreferencesState,
+  type PreferenceKey,
   usePreferences
 } from "../../../preferences"
 import { closeSiblingDetails } from "../../utils/toggle"
@@ -11,8 +11,8 @@ import { PkmAltForms } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
-import { NonPkm, Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { PoolType } from "../../../../../types/enum/PoolType"
+import { NonPkm, type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 
 export function PokemonFilters() {
   const { t } = useTranslation()

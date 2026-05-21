@@ -1,4 +1,4 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
 import { PkmAltForms } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"

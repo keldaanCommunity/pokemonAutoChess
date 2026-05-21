@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose"
-import { Pkm } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import type { Pkm } from "../../types/enum/Pokemon"
+import type { Synergy } from "../../types/enum/Synergy"
 
 export interface ITeam {
   cluster_id: string

@@ -1,4 +1,4 @@
-import { BOTS_ENABLED } from ".."
+import { BOTS_ENABLED } from "./game"
 
 export const GADGETS_NAMES = [
   "trainer_card",

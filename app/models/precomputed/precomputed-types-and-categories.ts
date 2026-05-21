@@ -1,6 +1,6 @@
 import { Rarity } from "../../types/enum/Game"
-import { Pkm, PkmFamily } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { type Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import type { Synergy } from "../../types/enum/Synergy"
 import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-types-and-categories")

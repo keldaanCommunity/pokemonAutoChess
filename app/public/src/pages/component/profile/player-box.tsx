@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import {
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import type {
   IUserMetadataClient,
   IUserMetadataUnpacked
 } from "../../../../../types/interfaces/UserMetadata"

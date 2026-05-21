@@ -1,5 +1,5 @@
 import { matchMaker } from "colyseus"
-import { INotification, NotificationType } from "../types/notifications"
+import type { INotification, NotificationType } from "../types/notifications"
 import { logger } from "../utils/logger"
 
 /**

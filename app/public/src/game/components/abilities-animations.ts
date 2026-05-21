@@ -7,14 +7,14 @@ import {
 } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
-  AbilityAnimation,
-  AbilityAnimationArgs,
-  AbilityAnimationMaker,
-  AbilityAnimationOptions,
+  type AbilityAnimation,
+  type AbilityAnimationArgs,
+  type AbilityAnimationMaker,
+  type AbilityAnimationOptions,
   AnimationType,
   AttackSprite,
   AttackSpriteScale,
-  HitSprite
+  type HitSprite
 } from "../../../../types/Animation"
 import { Ability } from "../../../../types/enum/Ability"
 import {
@@ -40,8 +40,8 @@ import {
 import { pickRandomIn, randomBetween } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
-import { DebugScene } from "../scenes/debug-scene"
-import GameScene from "../scenes/game-scene"
+import type { DebugScene } from "../scenes/debug-scene"
+import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */

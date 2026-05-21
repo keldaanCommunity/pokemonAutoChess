@@ -1,8 +1,8 @@
 import { EvolutionTime, GoldenEggItems } from "../config"
-import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import type Player from "../models/colyseus-models/player"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
-import { IPlayer } from "../types"
+import type { IPlayer } from "../types"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState, Stat } from "../types/enum/Game"
@@ -391,6 +391,7 @@ export class ConditionBasedEvolutionRule extends EvolutionRule {
     return pokemonEvolved
   }
 }
+
 export function carryOverPermanentStats(
   pokemonEvolved: Pokemon,
   pokemonsBeforeEvolution: Pokemon[]

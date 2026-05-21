@@ -1,11 +1,11 @@
 import { BOARD_WIDTH } from "../../config"
+import { SynergyEffects } from "../../config/game/synergies"
 import {
   BasculinWhite,
-  Pokemon,
+  type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
-import { SynergyEffects } from "../../models/effects"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Title, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -16,7 +16,7 @@ import {
   ConsumableItems,
   Flavors,
   Item,
-  OgerponMasks,
+  type OgerponMasks,
   SpecialBerries,
   SynergyFlavors
 } from "../../types/enum/Item"
@@ -30,17 +30,19 @@ import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { castAbility } from "../abilities/abilities"
-import { Board, Cell } from "../board"
-import { getStrongestUnit, PokemonEntity } from "../pokemon-entity"
+import { AbilityStrategies } from "../abilities/abilities"
+import { castAbility } from "../abilities/cast"
+import type { Board, Cell } from "../board"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getStrongestUnit } from "../unit-score"
 import {
-  Effect,
+  type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
-  OnDeathEffectArgs,
+  type OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -52,6 +54,9 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { AccelerationEffect } from "./passives/acceleration"
+import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
+import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
@@ -60,7 +65,7 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
     // CAST ABILITY
     const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
     if (target) {
-      castAbility(pokemon.skill, pokemon, board, target)
+      castAbility(AbilityStrategies[pokemon.skill], pokemon, board, target)
     }
     return
   }
@@ -310,17 +315,6 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
     }
   })
 }, Passive.WATER_SPRING)
-
-export class AccelerationEffect extends OnMoveEffect {
-  accelerationStacks = 0
-
-  constructor() {
-    super((pkm) => {
-      pkm.addSpeed(15, pkm, 0, false)
-      this.accelerationStacks += 1
-    }, Passive.ACCELERATION)
-  }
-}
 
 const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
   ({ pokemon }) => {
@@ -697,43 +691,6 @@ class SynchroEffect extends PeriodicEffect {
       Passive.SYNCHRO,
       3000
     )
-  }
-}
-
-export class FalinksFormationEffect extends OnSpawnEffect {
-  stacks = 0
-
-  constructor() {
-    super((pkm) => {
-      if (!pkm.player) return
-      const troopers = schemaValues(pkm.player.board).filter(
-        (p) =>
-          p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
-      )
-      this.stacks = troopers.length
-      if (this.stacks > 0) {
-        pkm.addAttack(this.stacks * 1, pkm, 0, false)
-        pkm.addDefense(this.stacks * 1, pkm, 0, false)
-        pkm.addShield(this.stacks * 30, pkm, 0, false)
-      }
-      if (this.stacks >= 8 && pkm.player) {
-        pkm.player.titles.add(Title.LEGIONNAIRE)
-      }
-    }, Passive.FALINKS)
-  }
-}
-
-export class BergmiteOnBackEffect extends OnSpawnEffect {
-  stacks = 0
-
-  constructor() {
-    super((pkm) => {
-      if (!pkm.player) return
-      const bergmites = schemaValues(pkm.player.board).filter(
-        (p) => p.name === Pkm.BERGMITE && p.positionY === 0 && p.id !== pkm.id
-      )
-      this.stacks = bergmites.length
-    }, Passive.AVALUGG)
   }
 }
 

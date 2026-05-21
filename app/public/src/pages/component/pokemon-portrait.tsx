@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { Emotion } from "../../../../types"
+import type React from "react"
+import { useEffect, useState } from "react"
+import type { Emotion } from "../../../../types"
 import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
 

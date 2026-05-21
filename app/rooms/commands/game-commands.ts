@@ -1,6 +1,6 @@
 import { Command } from "@colyseus/command"
 import { SetSchema, StateView } from "@colyseus/schema"
-import { Client, updateLobby } from "colyseus"
+import { type Client, updateLobby } from "colyseus"
 import {
   AdditionalPicksStages,
   BOARD_SIDE_HEIGHT,
@@ -24,7 +24,8 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
-import { castAbility } from "../../core/abilities/abilities"
+import { AbilityStrategies } from "../../core/abilities/abilities"
+import { castAbility } from "../../core/abilities/cast"
 import {
   OnItemDroppedEffect,
   OnStageStartEffect
@@ -42,9 +43,12 @@ import { selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
-import Player from "../../models/colyseus-models/player"
+import type Player from "../../models/colyseus-models/player"
 import { PlayerChoice } from "../../models/colyseus-models/player-choice"
-import { Pokemon, PokemonClasses } from "../../models/colyseus-models/pokemon"
+import {
+  type Pokemon,
+  PokemonClasses
+} from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
@@ -56,10 +60,10 @@ import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import {
   Emotion,
-  IClient,
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
+  type IClient,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
   Role,
   Title,
   TMPerAbility,
@@ -108,7 +112,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import type { IDetailledPokemon } from "../../types/models/bot-v2"
-import { DisplayText } from "../../types/strings/DisplayText"
+import type { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
@@ -130,8 +134,8 @@ import {
 } from "../../utils/random"
 import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
-import GameRoom from "../game-room"
-import GameState from "../states/game-state"
+import type GameRoom from "../game-room"
+import type GameState from "../states/game-state"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -1892,7 +1896,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               player.team,
               simulation
             )
-            castAbility(caster.skill, caster, simulation.board, null, false)
+            castAbility(
+              AbilityStrategies[caster.skill],
+              caster,
+              simulation.board,
+              null,
+              false
+            )
           }, 10000)
         })
       })

@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react"
+import { type RefObject, useEffect, useRef, useState } from "react"
 import { clamp } from "../../../../utils/number"
 
 const SIDEBAR_WIDTH = 60

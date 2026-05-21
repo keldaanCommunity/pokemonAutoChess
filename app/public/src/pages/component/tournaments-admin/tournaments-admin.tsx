@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {
+import type {
   ITournament,
   ITournamentBracket
 } from "../../../../../types/interfaces/Tournament"

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import {
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import type {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../../../../../types/interfaces/LeaderboardInfo"

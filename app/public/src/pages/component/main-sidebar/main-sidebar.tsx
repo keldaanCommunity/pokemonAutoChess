@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
+import { Menu, MenuItem, type MenuItemProps, Sidebar } from "react-pro-sidebar"
 import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../config/game/gadgets"

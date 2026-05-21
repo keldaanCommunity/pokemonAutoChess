@@ -1,4 +1,4 @@
-import { HydratedDocument } from "mongoose"
+import type { HydratedDocument } from "mongoose"
 import {
   BoosterRarityProbability,
   EmotionCost,
@@ -10,12 +10,12 @@ import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
-import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
-import { Booster, BoosterCard } from "../types/Booster"
+import { CollectionEmotions, Emotion, type PkmWithCustom } from "../types"
+import type { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
 import { Rarity } from "../types/enum/Game"
 import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../types/enum/Pokemon"
-import {
+import type {
   IPokemonCollectionItemClient,
   IPokemonCollectionItemMongo,
   IPokemonCollectionItemUnpacked,

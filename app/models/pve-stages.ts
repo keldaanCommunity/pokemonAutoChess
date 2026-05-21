@@ -16,7 +16,7 @@ import {
   randomWeighted
 } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
-import Player from "./colyseus-models/player"
+import type Player from "./colyseus-models/player"
 
 export type PVEStagesNames =
   | `pkm.${Pkm}`

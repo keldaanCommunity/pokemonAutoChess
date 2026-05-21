@@ -1,4 +1,4 @@
-import { IHistoryEntry } from "../../../models/pokemons-statistic-v2"
+import type { IHistoryEntry } from "../../../models/pokemons-statistic-v2"
 import "./history-delta.css"
 
 function computeDelta(

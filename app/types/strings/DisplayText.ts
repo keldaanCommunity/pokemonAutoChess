@@ -1,6 +1,6 @@
 // texts displayed through Transfer.DISPLAY_TEXT
 
-import { Ability } from "../enum/Ability"
+import type { Ability } from "../enum/Ability"
 
 export type DisplayText =
   | `ability.${Ability}`

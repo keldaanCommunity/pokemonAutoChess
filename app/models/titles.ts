@@ -1,9 +1,9 @@
 import { getBaseAltForm, PkmAltFormsByPkm } from "../config"
-import GameState from "../rooms/states/game-state"
-import { IPlayer, Scarves, Title } from "../types"
+import type GameState from "../rooms/states/game-state"
+import { type IPlayer, Scarves, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
 import { schemaValues } from "../utils/schemas"
 

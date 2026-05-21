@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { ICount } from "../../types"
+import type { ICount } from "../../types"
 
 export default class Count extends Schema implements ICount {
   @type("uint8") crit = 0

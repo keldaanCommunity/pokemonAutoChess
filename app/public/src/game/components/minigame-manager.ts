@@ -1,25 +1,25 @@
-import { MapSchema } from "@colyseus/schema"
+import type { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
 import Phaser from "phaser"
 import { TownEncounterSellPrice } from "../../../../config"
-import GameState from "../../../../rooms/states/game-state"
+import type GameState from "../../../../rooms/states/game-state"
 import {
   Emotion,
-  IFloatingItem,
-  IPokemonAvatar,
-  IPortal,
-  ISynergySymbol,
+  type IFloatingItem,
+  type IPokemonAvatar,
+  type IPortal,
+  type ISynergySymbol,
   Transfer
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import {
-  TownEncounter,
+  type TownEncounter,
   TownEncounters
 } from "../../../../types/enum/TownEncounter"
-import { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
-import { NpcDialog } from "../../../../types/strings/NpcDialog"
+import type { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
+import type { NpcDialog } from "../../../../types/strings/NpcDialog"
 import { getRankLabel } from "../../../../types/strings/Strings"
 import { getPokemonCustomFromAvatar } from "../../../../utils/avatar"
 import { logger } from "../../../../utils/logger"
@@ -28,9 +28,9 @@ import {
   transformMiniGameXCoordinate,
   transformMiniGameYCoordinate
 } from "../../pages/utils/utils"
-import AnimationManager from "../animation-manager"
+import type AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import { FloatingItemContainer } from "./floating-item-container"
 import { GameDialog } from "./game-dialog"
 import PokemonAvatar from "./pokemon-avatar"

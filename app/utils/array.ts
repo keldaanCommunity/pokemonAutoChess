@@ -1,4 +1,4 @@
-import { ArraySchema } from "@colyseus/schema"
+import type { ArraySchema } from "@colyseus/schema"
 
 // see https://stackoverflow.com/questions/56565528/typescript-const-assertions-how-to-use-array-prototype-includes
 export function isIn<T>(values: readonly T[], x: any): x is T {

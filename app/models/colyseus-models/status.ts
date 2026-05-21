@@ -2,8 +2,13 @@ import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import type { PokemonEntity } from "../../core/pokemon-entity"
+import {
+  type IPokemonEntity,
+  type ISimulation,
+  type IStatus,
+  Transfer
+} from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"

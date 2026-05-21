@@ -1,5 +1,5 @@
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
-import { Dish, Item } from "../../types/enum/Item"
+import { type Dish, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 import { getMusicAlt } from "../game/music"
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
-import { Emotion, PkmWithCustom } from "../../../../../types"
+import type { Emotion, PkmWithCustom } from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"

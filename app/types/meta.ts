@@ -1,4 +1,4 @@
-import { EloRank } from "./enum/EloRank"
+import type { EloRank } from "./enum/EloRank"
 
 export type ITypeStatistics = {
   [tier in EloRank]: {

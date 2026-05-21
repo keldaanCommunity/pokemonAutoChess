@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { GADGETS, GadgetName } from "../../../../../config/game/gadgets"
-import { INotification } from "../../../../../types/notifications"
+import { GADGETS, type GadgetName } from "../../../../../config/game/gadgets"
+import type { INotification } from "../../../../../types/notifications"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"
 import "./notification-modal.css"
-import { Theme } from "../../../../../config/game/theme"
-import { Title } from "../../../../../types"
-import { EloRank } from "../../../../../types/enum/EloRank"
-import { ExpeditionType } from "../../../../../types/enum/Expedition"
+import type { Theme } from "../../../../../config/game/theme"
+import type { Title } from "../../../../../types"
+import type { EloRank } from "../../../../../types/enum/EloRank"
+import type { ExpeditionType } from "../../../../../types/enum/Expedition"
 
 interface NotificationModalProps {
   notifications: INotification[]

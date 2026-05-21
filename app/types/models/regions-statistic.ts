@@ -1,4 +1,4 @@
-import { DungeonPMDO } from "../enum/Dungeon"
+import type { DungeonPMDO } from "../enum/Dungeon"
 
 export interface IRegionStatistic {
   name: DungeonPMDO
