@@ -20,7 +20,8 @@ export default function Auth() {
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
   const [modal, setModal] = React.useState<string | null>(null)
-  const [twitchCallbackMessage, setTwitchCallbackMessage] = React.useState<{
+  const [oauthCallbackMessage, setOauthCallbackMessage] = React.useState<{
+    platform: "Twitch" | "YouTube"
     kind: "success" | "error"
     body: string
   } | null>(null)
@@ -33,24 +34,44 @@ export default function Auth() {
   React.useEffect(() => {
     const url = new URL(window.location.href)
     const twitchVerify = url.searchParams.get("twitchVerify")
-    if (!twitchVerify) {
-      return
-    }
+    const youtubeVerify = url.searchParams.get("youtubeVerify")
 
     if (twitchVerify === "success") {
-      setTwitchCallbackMessage({
+      setOauthCallbackMessage({
+        platform: "Twitch",
         kind: "success",
         body: "Your Twitch account has been linked successfully."
       })
       setShouldRefreshProfile(true)
-    } else {
-      setTwitchCallbackMessage({
+    } else if (twitchVerify) {
+      setOauthCallbackMessage({
+        platform: "Twitch",
         kind: "error",
         body: twitchVerify.replace(/\+/g, " ")
       })
     }
 
+    if (youtubeVerify === "success") {
+      setOauthCallbackMessage({
+        platform: "YouTube",
+        kind: "success",
+        body: "Your YouTube account has been linked successfully."
+      })
+      setShouldRefreshProfile(true)
+    } else if (youtubeVerify) {
+      setOauthCallbackMessage({
+        platform: "YouTube",
+        kind: "error",
+        body: youtubeVerify.replace(/\+/g, " ")
+      })
+    }
+
+    if (!twitchVerify && !youtubeVerify) {
+      return
+    }
+
     url.searchParams.delete("twitchVerify")
+    url.searchParams.delete("youtubeVerify")
     window.history.replaceState({}, "", url.toString())
   }, [])
 
@@ -134,17 +155,17 @@ export default function Auth() {
         body={<p style={{ padding: "1em" }}>{networkError}</p>}
       />
       <Modal
-        show={twitchCallbackMessage != null}
+        show={oauthCallbackMessage != null}
         onClose={() => {
-          setTwitchCallbackMessage(null)
+          setOauthCallbackMessage(null)
         }}
         className="is-dark basic-modal-body"
         header={
-          twitchCallbackMessage?.kind === "success"
-            ? "Twitch Linked"
-            : "Twitch Verification Error"
+          oauthCallbackMessage?.kind === "success"
+            ? `${oauthCallbackMessage?.platform} Linked`
+            : `${oauthCallbackMessage?.platform} Verification Error`
         }
-        body={<p style={{ padding: "1em" }}>{twitchCallbackMessage?.body}</p>}
+        body={<p style={{ padding: "1em" }}>{oauthCallbackMessage?.body}</p>}
       />
     </div>
   )

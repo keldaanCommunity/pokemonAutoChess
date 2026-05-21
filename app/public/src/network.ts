@@ -65,6 +65,11 @@ export type TwitchVerificationStartResponse = {
   expiresAt: string
 }
 
+export type YouTubeVerificationStartResponse = {
+  authorizeUrl: string
+  expiresAt: string
+}
+
 export async function startTwitchVerification(): Promise<TwitchVerificationStartResponse> {
   const token = await firebase.auth().currentUser?.getIdToken()
   const res = await fetch("/twitch/verify/start", {
@@ -85,6 +90,38 @@ export async function startTwitchVerification(): Promise<TwitchVerificationStart
 export async function unlinkTwitchVerification(): Promise<void> {
   const token = await firebase.auth().currentUser?.getIdToken()
   const res = await fetch("/twitch/verify/unlink", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+}
+
+export async function startYouTubeVerification(): Promise<YouTubeVerificationStartResponse> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/youtube/verify/start", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error ?? res.statusText)
+  }
+
+  return res.json()
+}
+
+export async function unlinkYouTubeVerification(): Promise<void> {
+  const token = await firebase.auth().currentUser?.getIdToken()
+  const res = await fetch("/youtube/verify/unlink", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`

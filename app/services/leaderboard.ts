@@ -24,7 +24,17 @@ export function fetchLeaderboards() {
 export async function fetchUserLeaderboard() {
   const users = await UserMetadata.find(
     {},
-    ["displayName", "avatar", "elo", "uid", "twitchLogin", "twitchDisplayName"],
+    [
+      "displayName",
+      "avatar",
+      "elo",
+      "uid",
+      "twitchLogin",
+      "twitchDisplayName",
+      "youtubeChannelId",
+      "youtubeHandle",
+      "youtubeChannelTitle"
+    ],
     { limit: 100, sort: { elo: -1 } }
   ).lean()
 
@@ -36,7 +46,10 @@ export async function fetchUserLeaderboard() {
       value: user.elo,
       id: user.uid,
       twitchLogin: user.twitchLogin,
-      twitchDisplayName: user.twitchDisplayName
+      twitchDisplayName: user.twitchDisplayName,
+      youtubeChannelId: user.youtubeChannelId,
+      youtubeHandle: user.youtubeHandle,
+      youtubeChannelTitle: user.youtubeChannelTitle
     }))
   }
   return leaderboard
@@ -51,7 +64,10 @@ export async function fetchLevelLeaderboard() {
       "level",
       "uid",
       "twitchLogin",
-      "twitchDisplayName"
+      "twitchDisplayName",
+      "youtubeChannelId",
+      "youtubeHandle",
+      "youtubeChannelTitle"
     ],
     { limit: 100, sort: { level: -1 } }
   ).lean()
@@ -64,7 +80,10 @@ export async function fetchLevelLeaderboard() {
       value: user.level,
       id: user.uid,
       twitchLogin: user.twitchLogin,
-      twitchDisplayName: user.twitchDisplayName
+      twitchDisplayName: user.twitchDisplayName,
+      youtubeChannelId: user.youtubeChannelId,
+      youtubeHandle: user.youtubeHandle,
+      youtubeChannelTitle: user.youtubeChannelTitle
     }))
   }
 
@@ -98,7 +117,10 @@ export async function fetchEventLeaderboard() {
       "eventFinishTime",
       "uid",
       "twitchLogin",
-      "twitchDisplayName"
+      "twitchDisplayName",
+      "youtubeChannelId",
+      "youtubeHandle",
+      "youtubeChannelTitle"
     ],
     { limit: 100, sort: { eventPoints: -1, eventFinishTime: 1 } }
   ).lean()
@@ -112,7 +134,10 @@ export async function fetchEventLeaderboard() {
       eventFinishTime: user.eventFinishTime,
       id: user.uid,
       twitchLogin: user.twitchLogin,
-      twitchDisplayName: user.twitchDisplayName
+      twitchDisplayName: user.twitchDisplayName,
+      youtubeChannelId: user.youtubeChannelId,
+      youtubeHandle: user.youtubeHandle,
+      youtubeChannelTitle: user.youtubeChannelTitle
     }))
   }
   return eventLeaderboard

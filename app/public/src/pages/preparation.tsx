@@ -194,7 +194,10 @@ export default function Preparation() {
           "title",
           "ready",
           "twitchLogin",
-          "twitchDisplayName"
+          "twitchDisplayName",
+          "youtubeChannelId",
+          "youtubeHandle",
+          "youtubeChannelTitle"
         ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {

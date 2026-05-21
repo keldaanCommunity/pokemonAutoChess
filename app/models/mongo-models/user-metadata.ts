@@ -35,6 +35,22 @@ const userMetadataSchema = new Schema({
   twitchVerificationRevokedAt: {
     type: Date
   },
+  youtubeChannelId: {
+    type: String
+  },
+  youtubeHandle: {
+    type: String,
+    trim: true
+  },
+  youtubeChannelTitle: {
+    type: String
+  },
+  youtubeVerifiedAt: {
+    type: Date
+  },
+  youtubeVerificationRevokedAt: {
+    type: Date
+  },
   language: {
     type: String,
     default: "en"
@@ -138,6 +154,10 @@ userMetadataSchema.index({ elo: 1 })
 userMetadataSchema.index({ titles: 1 })
 userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
 userMetadataSchema.index({ twitchLogin: 1 }, { unique: true, sparse: true })
+userMetadataSchema.index(
+  { youtubeChannelId: 1 },
+  { unique: true, sparse: true }
+)
 
 export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
 

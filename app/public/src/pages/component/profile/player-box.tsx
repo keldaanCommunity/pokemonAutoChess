@@ -28,6 +28,11 @@ export default function PlayerBox(props: {
   const twitchUrl = props.user.twitchLogin
     ? `https://www.twitch.tv/${props.user.twitchLogin}`
     : null
+  const youtubeUrl = props.user.youtubeHandle
+    ? `https://www.youtube.com/${props.user.youtubeHandle}`
+    : props.user.youtubeChannelId
+      ? `https://www.youtube.com/channel/${props.user.youtubeChannelId}`
+      : null
 
   useEffect(() => {
     if (!props.history) return
@@ -93,6 +98,18 @@ export default function PlayerBox(props: {
               aria-label={`Watch ${props.user.twitchDisplayName ?? props.user.twitchLogin} on Twitch`}
             >
               <img src="/assets/ui/twitch.png" alt="" aria-hidden="true" />
+            </a>
+          )}
+          {youtubeUrl && (
+            <a
+              className="twitch-badge-link"
+              href={youtubeUrl}
+              target="_blank"
+              rel="noreferrer"
+              title={`Watch ${props.user.youtubeChannelTitle ?? props.user.displayName} on YouTube`}
+              aria-label={`Watch ${props.user.youtubeChannelTitle ?? props.user.displayName} on YouTube`}
+            >
+              <img src="/assets/ui/youtube.png" alt="" aria-hidden="true" />
             </a>
           )}
         </div>

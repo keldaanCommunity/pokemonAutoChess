@@ -8,7 +8,9 @@ import {
   fetchProfile,
   heapSnapshot,
   startTwitchVerification,
-  unlinkTwitchVerification
+  startYouTubeVerification,
+  unlinkTwitchVerification,
+  unlinkYouTubeVerification
 } from "../../../network"
 import { changeName, setErrorAlertMessage } from "../../../stores/NetworkStore"
 
@@ -31,6 +33,7 @@ export function AccountTab() {
     <div>
       <ChangeNameForm />
       <TwitchLinkSection />
+      <YouTubeLinkSection />
       <h3>{t("profile.account.user_id")}</h3>
       <p>
         {t("profile.account.user_id_hint1")}{" "}
@@ -152,6 +155,113 @@ function TwitchLinkSection() {
             onClick={() => handleConnect()}
           >
             {loadingAction === "connect" ? "Connecting..." : "Connect Twitch"}
+          </button>
+        </>
+      )}
+    </div>
+  )
+}
+
+function YouTubeLinkSection() {
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.network.profile)
+  const [loadingAction, setLoadingAction] = useState<
+    "connect" | "unlink" | null
+  >(null)
+
+  async function handleConnect() {
+    setLoadingAction("connect")
+    try {
+      const payload = await startYouTubeVerification()
+      window.location.assign(payload.authorizeUrl)
+    } catch (error) {
+      dispatch(
+        setErrorAlertMessage(
+          error instanceof Error
+            ? error.message
+            : "Unable to start YouTube verification"
+        )
+      )
+      setLoadingAction(null)
+    }
+  }
+
+  async function handleUnlink() {
+    const confirmed = window.confirm(
+      "Are you sure you want to unlink your YouTube account?"
+    )
+    if (!confirmed) {
+      return
+    }
+
+    setLoadingAction("unlink")
+    try {
+      await unlinkYouTubeVerification()
+      await fetchProfile(true)
+    } catch (error) {
+      dispatch(
+        setErrorAlertMessage(
+          error instanceof Error
+            ? error.message
+            : "Unable to unlink YouTube account"
+        )
+      )
+    } finally {
+      setLoadingAction(null)
+    }
+  }
+
+  if (!user) {
+    return null
+  }
+
+  const verifiedAt = user.youtubeVerifiedAt
+    ? new Date(user.youtubeVerifiedAt).toLocaleString()
+    : null
+  const youtubeProfileUrl = user.youtubeHandle
+    ? `https://www.youtube.com/${user.youtubeHandle}`
+    : user.youtubeChannelId
+      ? `https://www.youtube.com/channel/${user.youtubeChannelId}`
+      : null
+
+  return (
+    <div>
+      <h3>YouTube</h3>
+      {user.youtubeChannelId ? (
+        <>
+          <p>
+            Linked as{" "}
+            <strong>{user.youtubeChannelTitle || "YouTube Channel"}</strong>
+            {user.youtubeHandle ? ` (${user.youtubeHandle})` : ""}
+          </p>
+          {verifiedAt && <p>Verified on {verifiedAt}</p>}
+          {youtubeProfileUrl && (
+            <p>
+              <a href={youtubeProfileUrl} target="_blank" rel="noreferrer">
+                Open YouTube channel
+              </a>
+            </p>
+          )}
+          <button
+            className="bubbly red"
+            disabled={loadingAction != null}
+            onClick={() => handleUnlink()}
+          >
+            {loadingAction === "unlink" ? "Unlinking..." : "Unlink YouTube"}
+          </button>
+        </>
+      ) : (
+        <>
+          <p>
+            Link your YouTube account to verify channel ownership and connect
+            your PAC profile to your YouTube identity.
+          </p>
+          <button
+            className="bubbly blue"
+            disabled={loadingAction != null}
+            onClick={() => handleConnect()}
+          >
+            {loadingAction === "connect" ? "Connecting..." : "Connect YouTube"}
           </button>
         </>
       )}
