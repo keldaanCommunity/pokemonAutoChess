@@ -13,7 +13,7 @@ type EvolutionCondition = (
 export class ConditionEvolutionHandler extends EvolutionHandler {
   condition: EvolutionCondition
   constructor(evolutionRule: ConditionEvolutionRule) {
-    super(evolutionRule.divergentEvolution)
+    super(evolutionRule)
     this.condition = evolutionRule.condition
   }
 

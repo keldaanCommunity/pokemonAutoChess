@@ -16,7 +16,7 @@ import {
 } from "../config"
 import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
@@ -1134,11 +1134,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     let hasEvolved = false
 
     player.board.forEach((pokemon) => {
-      if (
-        pokemon.hasEvolution &&
-        pokemon.evolutionRule instanceof CountEvolutionRule
-      ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+      if (pokemon.hasEvolution && pokemon.evolutionRule.type === "count") {
+        const pokemonEvolved = EvolutionManager.tryEvolve(
           pokemon,
           player,
           this.state.stageLevel
@@ -1160,11 +1157,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     const player = this.state.players.get(playerId)
     if (!player) return
 
-    if (
-      pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof ItemEvolutionRule
-    ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+    if (pokemon.evolutionRule && pokemon.evolutionRule.type === "item") {
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
         this.state.stageLevel
@@ -1220,8 +1214,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const pokemon = pokemonsObtained[0]
       const isEvolution =
         pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+        pokemon.evolutionRule.type === "count" &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
       const freeSpace = getFreeSpaceOnBench(player.board)
 
@@ -1247,7 +1241,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
-              ? pkm.evolutionRule.getEvolution(
+              ? EvolutionManager.getEvolution(
                   pkm,
                   player,
                   this.state.stageLevel

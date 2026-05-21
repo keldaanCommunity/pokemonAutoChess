@@ -42,7 +42,7 @@ import {
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { DishByPkm } from "../dishes"
-import { ConditionBasedEvolutionRule } from "../evolution-rules"
+import { EvolutionManager } from "../evolution-logic/evolution-manager";
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -350,7 +350,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
+      substitute.evolutionRule = { type: "condition", condition: () => false } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
@@ -1298,7 +1298,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
+      const evolution = EvolutionManager.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||

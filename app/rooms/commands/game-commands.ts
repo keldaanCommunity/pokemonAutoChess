@@ -33,11 +33,7 @@ import {
 import { ItemEffects } from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
 import { giveRandomEgg } from "../../core/eggs"
-import {
-  ConditionBasedEvolutionRule,
-  CountEvolutionRule,
-  HatchEvolutionRule
-} from "../../core/evolution-rules"
+import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
@@ -158,8 +154,8 @@ export class OnBuyPokemonCommand extends Command<
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
       pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof CountEvolutionRule &&
-      pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+      pokemon.evolutionRule.type === "count" &&
+      EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
     const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
@@ -267,8 +263,8 @@ export class OnPokemonCatchCommand extends Command<
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
         (pokemon.evolutionRule &&
-          pokemon.evolutionRule instanceof CountEvolutionRule &&
-          pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player))
+          pokemon.evolutionRule.type === "count" &&
+          EvolutionManager.canEvolveIfGettingOne(pokemon, player))
 
       if (hasSpaceOnBench) {
         const x = getFirstAvailablePositionInBench(player.board)
@@ -1409,10 +1405,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
               player.board.forEach((pokemon) => {
                 // Condition based evolutions on ground hole dig
-                if (
-                  pokemon.evolutionRule instanceof ConditionBasedEvolutionRule
-                ) {
-                  pokemon.evolutionRule.tryEvolve(
+                if (pokemon.evolutionRule.type === "condition") {
+                  EvolutionManager.tryEvolve(
                     pokemon,
                     player,
                     this.state.stageLevel
@@ -1537,8 +1531,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
-        pokemon.evolutionRule.tryEvolve(pokemon, player, this.state.stageLevel)
+      if (pokemon.evolutionRule.type === "condition") {
+        EvolutionManager.tryEvolve(pokemon, player, this.state.stageLevel)
       }
     })
 
@@ -1668,8 +1662,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
             if (pokemon.evolutionRule) {
-              if (pokemon.evolutionRule instanceof HatchEvolutionRule) {
-                pokemon.evolutionRule.updateHatch(
+              if (pokemon.evolutionRule.type === "hatch") {
+                EvolutionManager.updateHatch(
                   pokemon,
                   player,
                   this.state.stageLevel

@@ -2,10 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { Item, ItemComponents } from "../../types"
-import type {
-  CountEvolutionRule,
-  DivergentEvolution
-} from "../../types/EvolutionRules"
+import type { CountEvolutionRule } from "../../types/EvolutionRules"
 import { Pkm } from "../../types/enum/Pokemon"
 import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
@@ -17,7 +14,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
   numberRequired: number
 
   constructor(evolutionRule: CountEvolutionRule) {
-    super(evolutionRule.divergentEvolution as DivergentEvolution<[number]>)
+    super(evolutionRule)
     this.numberRequired = evolutionRule.numberRequired
   }
 

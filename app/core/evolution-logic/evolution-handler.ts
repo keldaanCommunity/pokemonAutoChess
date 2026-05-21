@@ -2,6 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import type { IPlayer } from "../../types"
+import type { EvolutionRule } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Passive } from "../../types/enum/Passive"
 import type { Pkm } from "../../types/enum/Pokemon"
@@ -24,8 +25,9 @@ export abstract class EvolutionHandler {
   abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
   divergentEvolution?: DivergentEvolution
 
-  constructor(divergentEvolution?: DivergentEvolution) {
-    if (divergentEvolution) this.divergentEvolution = divergentEvolution
+  constructor(evolutionRule: EvolutionRule) {
+    if (evolutionRule.divergentEvolution)
+      this.divergentEvolution = evolutionRule.divergentEvolution
   }
 
   getEvolution(

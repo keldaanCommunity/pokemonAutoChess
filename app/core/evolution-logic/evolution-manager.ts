@@ -51,13 +51,12 @@ export const EvolutionManager = {
   },
 
   getEvolution(
-    evolutionRule: EvolutionRule,
     pokemon: Pokemon,
     player: IPlayer,
     ...additionalArgs: unknown[]
   ): Pkm {
-    if (evolutionRule.divergentEvolution) {
-      return evolutionRule.divergentEvolution(
+    if (pokemon.evolutionRule.divergentEvolution) {
+      return pokemon.evolutionRule.divergentEvolution(
         pokemon,
         player,
         ...additionalArgs
@@ -71,6 +70,14 @@ export const EvolutionManager = {
     return handler.canEvolve(pokemon, player, stageLevel)
   },
 
+  canEvolveIfGettingOne(pokemon: Pokemon, player: Player): boolean {
+    if (pokemon.evolutionRule.type !== "count") return false
+    const handler = this.getHandler(
+      pokemon.evolutionRule
+    ) as CountEvolutionHandler
+    return handler.canEvolveIfGettingOne(pokemon, player)
+  },
+
   evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
     const handler = this.getHandler(pokemon.evolutionRule)
     return handler.evolve(pokemon, player, stageLevel)
@@ -79,5 +86,11 @@ export const EvolutionManager = {
   afterEvolve(pokemon: Pokemon, player: Player, stageLevel: number) {
     const handler = this.getHandler(pokemon.evolutionRule)
     return handler.afterEvolve(pokemon, player, stageLevel)
+  },
+
+  updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
+    if (pokemon.evolutionRule.type !== "hatch") return
+    const handler = this.getHandler(pokemon.evolutionRule) as HatchEvolutionHandler
+    return handler.updateHatch(pokemon, player, stageLevel)
   }
 }

@@ -1,10 +1,7 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Item } from "../../types"
-import type {
-  DivergentEvolution,
-  ItemEvolutionRule
-} from "../../types/EvolutionRules"
+import type { ItemEvolutionRule } from "../../types/EvolutionRules"
 import { schemaValues } from "../../utils/schemas"
 import { EvolutionHandler } from "./evolution-handler"
 
@@ -12,7 +9,7 @@ export class ItemEvolutionHandler extends EvolutionHandler {
   itemsTriggeringEvolution: Item[]
 
   constructor(evolutionRule: ItemEvolutionRule) {
-    super(evolutionRule.divergentEvolution as DivergentEvolution<[Item]>)
+    super(evolutionRule)
     this.itemsTriggeringEvolution = evolutionRule.itemsTriggeringEvolution
   }
 

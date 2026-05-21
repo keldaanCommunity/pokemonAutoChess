@@ -2,17 +2,14 @@ import { EvolutionTime, GoldenEggItems } from "../../config"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Item } from "../../types"
-import type { HatchEvolutionRule } from "../../types/EvolutionRules"
 import { EffectEnum } from "../../types/enum/Effect"
 import { PokemonActionState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 import { EvolutionHandler } from "./evolution-handler"
+import { EvolutionManager } from "./evolution-manager";
 
 export class HatchEvolutionHandler extends EvolutionHandler {
-  constructor(evolutionRule: HatchEvolutionRule) {
-    super(evolutionRule.divergentEvolution)
-  }
 
   getHatchTime(pokemon: Pokemon, player: Player): number {
     if (pokemon.name === Pkm.EGG) {
@@ -33,7 +30,8 @@ export class HatchEvolutionHandler extends EvolutionHandler {
         this.tryEvolve(pokemon, player, stageLevel)
       }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
-      const hatchTime = this.getHatchTime(pokemon, player)
+      const hatchEvolutionHandler = EvolutionManager.getHandler(pokemon.evolutionRule) as HatchEvolutionHandler
+      const hatchTime = hatchEvolutionHandler.getHatchTime(pokemon, player)
       if (pokemon.stacks >= hatchTime) {
         pokemon.action = PokemonActionState.HOP
       } else if (pokemon.stacks >= hatchTime - 1) {
