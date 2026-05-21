@@ -7,6 +7,7 @@ import type {
   EvolutionRule
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
+import { Stat } from "../../types/enum/Game"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
@@ -58,7 +59,17 @@ export function carryOverPermanentStats(
     const sumOfPermaStatsModifier = sum(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
-    pokemonEvolved[stat] += sumOfPermaStatsModifier // can be negative or positive
+    const statMapping: Record<typeof stat, Stat> = {
+      hp: Stat.HP,
+      maxHP: Stat.HP,
+      atk: Stat.ATK,
+      def: Stat.DEF,
+      speDef: Stat.SPE_DEF,
+      speed: Stat.SPEED,
+      ap: Stat.AP,
+      luck: Stat.LUCK
+    }
+    pokemonEvolved.applyStat(statMapping[stat], sumOfPermaStatsModifier) // can be negative or positive
   }
 
   // carry over TM
