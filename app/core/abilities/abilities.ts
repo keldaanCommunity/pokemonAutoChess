@@ -51,7 +51,7 @@ import {
 import { AccelerationEffect } from "../effects/passives/acceleration"
 import { BergmiteOnBackEffect } from "../effects/passives/bergmite-on-back"
 import { FalinksFormationEffect } from "../effects/passives/falinks-formation"
-import { getHatchTime } from "../evolution-logic/hatch-time";
+import { getHatchTime } from "../evolution-logic/hatch-time"
 import { getMoveSpeed } from "../move-speed"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"

@@ -126,7 +126,11 @@ export class OnEvolutionEffect extends Effect {
 
 export class OnSpotlightChangeEffect extends Effect {
   constructor(
-    effect?: (args: { pokemon: Pokemon; player: Player; inSpotlight: boolean }) => void,
+    effect?: (args: {
+      pokemon: Pokemon
+      player: Player
+      inSpotlight: boolean
+    }) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
