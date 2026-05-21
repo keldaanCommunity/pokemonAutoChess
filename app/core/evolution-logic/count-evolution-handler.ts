@@ -165,6 +165,10 @@ export class CountEvolutionHandler extends EvolutionHandler {
       }
     }
 
+    if(pokemonsBeforeEvolution.some(p => p.supercharged)) {
+      pokemonEvolved.supercharged = true // preserve supercharged state on evolution
+    }
+
     if (coord) {
       // logger.debug(coord, pokemonEvolved.name)
       pokemonEvolved.positionX = coord.x

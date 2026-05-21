@@ -18,7 +18,7 @@ import { ConditionEvolutionHandler } from "./condition-evolution-handler"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
 import { HatchEvolutionHandler } from "./hatch-evolution-handler"
-import { getHatchTime } from "./hatch-time";
+import { getHatchTime } from "./hatch-time"
 import { ItemEvolutionHandler } from "./item-evolution-handler"
 import { StackEvolutionHandler } from "./stack-evolution-handler"
 

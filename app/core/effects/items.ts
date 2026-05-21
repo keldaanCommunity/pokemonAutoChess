@@ -1315,7 +1315,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         player,
         room.state.stageLevel
       )
-      if (pokemon.supercharged) pokemonEvolved.supercharged = true // preserve supercharged state on evolution
 
       pokemonEvolved.items.add(item)
       removeInArray(player.items, item)
