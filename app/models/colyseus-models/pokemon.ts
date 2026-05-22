@@ -18886,7 +18886,7 @@ export class Dunsparce extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
     Synergy.GROUND,
-    Synergy.FLYING
+    Synergy.BUG
   ])
   rarity = Rarity.UNIQUE
   evolution = Pkm.DUDUNSPARCE
@@ -18914,7 +18914,7 @@ export class Dudunsparse extends Pokemon {
   types = new SetSchema<Synergy>([
     Synergy.NORMAL,
     Synergy.GROUND,
-    Synergy.FLYING
+    Synergy.BUG
   ])
   rarity = Rarity.UNIQUE
   stars = 4

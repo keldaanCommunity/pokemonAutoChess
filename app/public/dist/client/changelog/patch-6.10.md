@@ -90,6 +90,7 @@
 - Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
 
 - Nerf Swinub line: Def 6/10/16 → 5/8/16, Spe Def: 4/8/12 → 3/6/12
+- Dunsparce and Dudunsparce are now Normal/Ground/Bug instead of Normmal/Ground/Flying
 
 # Changes to Items
 
