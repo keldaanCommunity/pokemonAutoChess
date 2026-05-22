@@ -1824,7 +1824,7 @@
 		"RAZOR_WIND": "대상에게 [20,40,80,SP] SPECIAL 를 가한다. 기본적으로 치명타를 가할 수 있다.",
 		"WONDER_GUARD": "인접한 적 포켓몬들에게 [30,60,120,SP] SPECIAL 와 3초간의 PARALYSIS 상태를 가한다.",
 		"ELECTRIC_SURGE": "모든 ELECTRIC 포켓몬의 SPEED 를 [10,SP] 증가시킨다.",
-		"PSYCHIC_SURGE": "시전자 주변의 모든 PSYCHIC 아군에게 [40,SP]의 SHIELD를 부여한다.",
+		"PSYCHIC_SURGE": "시전자 주변의 모든 PSYCHIC 아군에게 [30,SP]의 SHIELD를 부여한다.",
 		"MIND_BLOWN": "시전자는 머리를 하늘로 던지고, [5,SP]개의 폭죽을 터뜨린다. 시전자는 이 과정에서 50%의 체력을 잃는다. 폭죽은 무작위 적의 반경 2칸 반경에 떨어지며, 색상에 따라 효과가 다르게 적용된다.\n- 분홍색: 20의 PHYSICAL와 5초의 BURN을 적용한다.\n- 파란색: 20의 SPECIAL과 5초의 FATIGUE를 적용한다.\n- 노란색: 20의 TRUE를 입힌다.\n- 하얀색: 아군에게 20의 SHIELD를 부여하며 상태이상을 회복한다.",
 		"PAYDAY": "대상에 [30,60,90,SP=0.5] SPECIAL 를 가한다. 대상이 기절할 경우, 플레이어는 [1,2,3] GOLD 를 획득한다.",
 		"PICKUP": "[30,60,120,SP] SPECIAL 를 가하고 대상으로부터 도구 하나를 훔친다. 도구가 없다면, 플레이어로부터 [1,2,3] GOLD 를 훔친다.",

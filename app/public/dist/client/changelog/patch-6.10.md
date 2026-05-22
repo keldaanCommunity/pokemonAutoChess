@@ -93,6 +93,7 @@
 - Dunsparce and Dudunsparce are now NORMAL/GROUND/BUG instead of NORMAL/GROUND/FLYING
 - Archen is now 2-range ; ATK: 4/10 -> 6/13, DEF: 4/8 → 3/6, SPE_DEF: 4/8 → 3/6
 - Buneary line is now Rare instead of Uncommon. Adjusted stats.
+- Nerf Psychic Surge (Tapu Lele): 40 → 30 SHIELD given to allies
 
 # Changes to Items
 
