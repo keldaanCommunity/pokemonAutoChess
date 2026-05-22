@@ -7853,12 +7853,12 @@ export class Archen extends Pokemon {
   stars = 1
   evolution = Pkm.ARCHEOPS
   hp = 70
-  atk = 4
+  atk = 6
   speed = 60
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 90
-  range = 1
+  range = 2
   skill = Ability.ROCK_SMASH
   additional = true
 }
@@ -7868,10 +7868,10 @@ export class Archeops extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 130
-  atk = 10
+  atk = 13
   speed = 60
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.ROCK_SMASH

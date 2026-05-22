@@ -89,8 +89,9 @@
 - Overheat (Moltres): 50 damage at all tiers → 12/25/50
 - Nerf Blizzard (Articuno): +100% → +30% damage if target already has freeze
 
-- Nerf Swinub line: Def 6/10/16 → 5/8/16, Spe Def: 4/8/12 → 3/6/12
-- Dunsparce and Dudunsparce are now Normal/Ground/Bug instead of Normmal/Ground/Flying
+- Nerf Swinub line: DEF 6/10/16 → 5/8/16, SPE_DEF: 4/8/12 → 3/6/12
+- Dunsparce and Dudunsparce are now NORMAL/GROUND/BUG instead of NORMAL/GROUND/FLYING
+- Archen is now 2-range ; ATK: 4/10 -> 6/13, DEF: 4/8 → 3/6, SPE_DEF: 4/8 → 3/6
 
 # Changes to Items
 
