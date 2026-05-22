@@ -22,6 +22,7 @@ import {
   type Role,
   Title
 } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {

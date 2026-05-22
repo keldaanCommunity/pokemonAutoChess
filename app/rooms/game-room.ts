@@ -60,6 +60,7 @@ import {
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
@@ -1157,7 +1158,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     const player = this.state.players.get(playerId)
     if (!player) return
 
-    if (pokemon.evolutionRule && pokemon.evolutionRule.type === EvolutionRuleType.ITEM) {
+    if (
+      pokemon.evolutionRule &&
+      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
+    ) {
       const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,

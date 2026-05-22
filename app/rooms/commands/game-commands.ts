@@ -1700,12 +1700,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
-            if (pokemon.evolutionRule?.type === "hatch") {
-              EvolutionManager.updateHatch(
-                pokemon,
-                player,
-                this.state.stageLevel
-              )
+            if (pokemon.evolutionRule?.type === EvolutionRuleType.HATCH) {
+              EvolutionManager.updateHatch(pokemon, player)
             }
 
             if (pokemon.action === PokemonActionState.TRAINING) {

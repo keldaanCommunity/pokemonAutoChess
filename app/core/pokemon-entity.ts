@@ -21,6 +21,7 @@ import {
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
