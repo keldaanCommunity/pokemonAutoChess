@@ -3,6 +3,7 @@ import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -350,7 +351,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = { type: "condition", condition: () => false } // used only to store the original pokemon
+      substitute.evolutionRule = { type: EvolutionRuleType.STATE, condition: () => false } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
@@ -1309,11 +1310,32 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
+      const additionalArgs: any[] = []
+      if (pokemonEvolved.evolutionRule.type === EvolutionRuleType.ITEM) {
+        additionalArgs.push(item)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.MONEY
+      ) {
+        additionalArgs.push(player.money)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.PLACEMENT
+      ) {
+        additionalArgs.push(player.board)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STACK
+      ) {
+        additionalArgs.push(pokemonEvolved.stacks)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STATE
+      ) {
+        additionalArgs.push(room.state)
+      }
+
       EvolutionManager.afterEvolve(
         pokemonEvolved,
         pokemon,
         player,
-        room.state.stageLevel
+        ...additionalArgs
       )
 
       pokemonEvolved.items.add(item)
@@ -1322,7 +1344,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon)
+      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
     })

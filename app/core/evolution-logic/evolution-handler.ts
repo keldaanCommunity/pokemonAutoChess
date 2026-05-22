@@ -12,14 +12,18 @@ import type { Pkm } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 
-export abstract class EvolutionHandler {
+export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
   abstract canEvolve(
     pokemon: Pokemon,
     player: Player,
-    stageLevel: number
+    ...additionalArgs: AdditionalArgs
   ): boolean
-  abstract evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon
-  divergentEvolution?: DivergentEvolution
+  abstract evolve(
+    pokemon: Pokemon,
+    player: Player,
+    ...additionalArgs: AdditionalArgs
+  ): Pokemon
+  divergentEvolution?: DivergentEvolution<AdditionalArgs>
 
   constructor(evolutionRule: EvolutionRule) {
     if (evolutionRule.divergentEvolution)
@@ -29,7 +33,7 @@ export abstract class EvolutionHandler {
   getEvolution(
     pokemon: Pokemon,
     player: IPlayer,
-    ...additionalArgs: unknown[]
+    ...additionalArgs: AdditionalArgs
   ): Pkm {
     if (this.divergentEvolution) {
       return this.divergentEvolution(pokemon, player, ...additionalArgs)

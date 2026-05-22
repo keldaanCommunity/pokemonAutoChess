@@ -68,6 +68,7 @@ import {
   TMPerAbility,
   Transfer
 } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -157,7 +158,7 @@ export class OnBuyPokemonCommand extends Command<
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
       pokemon.evolutionRule &&
-      pokemon.evolutionRule.type === "count" &&
+      pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
       EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
@@ -266,7 +267,7 @@ export class OnPokemonCatchCommand extends Command<
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
         (pokemon.evolutionRule &&
-          pokemon.evolutionRule.type === "count" &&
+          pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
           EvolutionManager.canEvolveIfGettingOne(pokemon, player))
 
       if (hasSpaceOnBench) {
@@ -782,7 +783,8 @@ export class OnDragDropItemCommand extends Command<
         pokemon.items.add(item) // add the item just in time for the evolution
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
           playerId,
-          pokemon
+          pokemon,
+          item
         )
         if (pokemonEvolved) pokemonEvolved.items.delete(item)
         else pokemon.items.delete(item)
@@ -899,7 +901,7 @@ export class OnDragDropItemCommand extends Command<
       pokemon.shiny = true
     }
 
-    this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon)
+    this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon, item)
 
     if (pokemon.items.has(item) && isIn(UnholdableItems, item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
@@ -1442,12 +1444,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
               player.board.forEach((pokemon) => {
                 // Condition based evolutions on ground hole dig
-                if (pokemon.evolutionRule.type === "condition") {
-                  EvolutionManager.tryEvolve(
-                    pokemon,
-                    player,
-                    this.state.stageLevel
-                  )
+                if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+                  EvolutionManager.tryEvolve(pokemon, player, this.state)
                 }
               })
             }, 1000)
@@ -1568,8 +1566,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (pokemon.evolutionRule.type === "condition") {
-        EvolutionManager.tryEvolve(pokemon, player, this.state.stageLevel)
+      if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+        EvolutionManager.tryEvolve(pokemon, player, this.state)
       }
     })
 
@@ -2194,7 +2192,7 @@ export function onPokemonChangePosition({
     // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
     for (const pokemon of player.board.values()) {
       if (pokemon.name === Pkm.MANTYKE) {
-        EvolutionManager.tryEvolve(pokemon, player, 0)
+        EvolutionManager.tryEvolve(pokemon, player, player.board)
       }
     }
   }

@@ -18,7 +18,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
     this.numberRequired = evolutionRule.numberRequired
   }
 
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+  canEvolve(pokemon: Pokemon, player: Player): boolean {
     if (!pokemon.hasEvolution) return false
 
     // special case for Avalugg passive, didnt find a better way to do it
@@ -56,8 +56,8 @@ export class CountEvolutionHandler extends EvolutionHandler {
     return copies.length === this.numberRequired - 1
   }
 
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
+  evolve(pokemon: Pokemon, player: Player): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player)
     let coord: { x: number; y: number } | undefined
     const itemsComponentsOnBench: Item[] = []
     const itemsCompleteOnBench: Item[] = []

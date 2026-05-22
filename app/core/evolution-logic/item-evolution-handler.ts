@@ -5,7 +5,7 @@ import type { ItemEvolutionRule } from "../../types/EvolutionRules"
 import { schemaValues } from "../../utils/schemas"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class ItemEvolutionHandler extends EvolutionHandler {
+export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
   itemsTriggeringEvolution: Item[]
 
   constructor(evolutionRule: ItemEvolutionRule) {
@@ -13,7 +13,7 @@ export class ItemEvolutionHandler extends EvolutionHandler {
     this.itemsTriggeringEvolution = evolutionRule.itemsTriggeringEvolution
   }
 
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+  canEvolve(pokemon: Pokemon, player: Player, itemGiven: Item): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
     const itemsAndDishes = schemaValues(pokemon.items).concat(
       schemaValues(pokemon.dishes)
@@ -25,15 +25,15 @@ export class ItemEvolutionHandler extends EvolutionHandler {
     const pokemonEvolutionName = this.getEvolution(
       pokemon,
       player,
-      itemEvolution
+      itemGiven
     )
     return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, itemGiven: Item): Pokemon {
     const itemEvolution = schemaValues(pokemon.items).find((item) =>
       this.itemsTriggeringEvolution.includes(item)
-    )
+    ) ?? itemGiven
     const pokemonEvolutionName = this.getEvolution(
       pokemon,
       player,

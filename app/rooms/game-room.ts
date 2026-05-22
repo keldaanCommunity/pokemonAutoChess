@@ -1134,12 +1134,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
     let hasEvolved = false
 
     player.board.forEach((pokemon) => {
-      if (pokemon.hasEvolution && pokemon.evolutionRule.type === "count") {
-        const pokemonEvolved = EvolutionManager.tryEvolve(
-          pokemon,
-          player,
-          this.state.stageLevel
-        )
+      if (
+        pokemon.hasEvolution &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
+      ) {
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player)
         if (pokemonEvolved) {
           hasEvolved = true
         }
@@ -1152,16 +1151,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   checkEvolutionsAfterItemAcquired(
     playerId: string,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    itemAcquired: Item
   ): Pokemon | void {
     const player = this.state.players.get(playerId)
     if (!player) return
 
-    if (pokemon.evolutionRule && pokemon.evolutionRule.type === "item") {
+    if (pokemon.evolutionRule && pokemon.evolutionRule.type === EvolutionRuleType.ITEM) {
       const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
-        this.state.stageLevel
+        itemAcquired
       )
       return pokemonEvolved
     }
@@ -1214,7 +1214,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const pokemon = pokemonsObtained[0]
       const isEvolution =
         pokemon.evolutionRule &&
-        pokemon.evolutionRule.type === "count" &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
         EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
       const freeSpace = getFreeSpaceOnBench(player.board)

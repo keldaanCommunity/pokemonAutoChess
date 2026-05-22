@@ -8,16 +8,16 @@ import { EvolutionHandler } from "./evolution-handler"
 import { getHatchTime } from "./hatch-time"
 
 export class HatchEvolutionHandler extends EvolutionHandler {
-  canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
+  canEvolve(pokemon: Pokemon, player: Player): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
     if (!player.board.has(pokemon.id)) return false // egg has been sold in the meantime
     pokemon.stacksRequired = getHatchTime(pokemon, player)
     return pokemon.stacks >= pokemon.stacksRequired
   }
 
-  evolve(pokemon: Pokemon, player: Player, stageLevel: number): Pokemon {
+  evolve(pokemon: Pokemon, player: Player): Pokemon {
     pokemon.stacks = 0 // prevent trying to evolve twice in a row
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, stageLevel)
+    const pokemonEvolutionName = this.getEvolution(pokemon, player)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

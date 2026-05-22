@@ -1776,11 +1776,15 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.stacks += amount
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
-    if (this.stacksRequired > 0 && this.stacks === this.stacksRequired) {
+    if (
+      this.refToBoardPokemon.evolutionRule.type === EvolutionRuleType.STACK &&
+      this.stacksRequired > 0 &&
+      this.stacks === this.stacksRequired
+    ) {
       const pokemonEvolved = EvolutionManager.tryEvolve(
         this.refToBoardPokemon as Pokemon,
         this.player,
-        this.simulation.stageLevel
+        this.stacks
       )
       if (pokemonEvolved) {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight

@@ -10,6 +10,7 @@ import {
 } from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
+import { EvolutionRuleType } from "../../../../../types/EvolutionRules"
 import { type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { schemaValues } from "../../../../../utils/schemas"
@@ -111,16 +112,16 @@ export default function GamePokemonPortrait(props: {
   let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
-    pokemon.evolutionRule.type === "count" &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     count === pokemon.evolutionRule.numberRequired - 1
 
   const shouldShimmer =
-    pokemon.evolutionRule.type === "count" &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     ((count > 0 && pokemon.hasEvolution) ||
       (countEvol > 0 && pokemonEvolution.hasEvolution))
 
   if (
-    pokemon.evolutionRule.type === "count" &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     count === pokemon.evolutionRule.numberRequired - 1 &&
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
     pokemonEvolution.hasEvolution

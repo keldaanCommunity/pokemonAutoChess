@@ -275,8 +275,8 @@ export default class Player extends Schema implements IPlayer {
     this.money += value
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
-      if (pokemon.evolutionRule.type === "condition") {
-        EvolutionManager.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
+      if (pokemon.evolutionRule.type === EvolutionRuleType.MONEY) {
+        EvolutionManager.tryEvolve(pokemon, this, this.money)
       }
     })
     if (
@@ -786,7 +786,7 @@ export default class Player extends Schema implements IPlayer {
         ) {
           const burmyEvolving = burmys[0]
           burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
-          EvolutionManager.evolve(burmyEvolving, this, state.stageLevel)
+          EvolutionManager.evolve(burmyEvolving, this)
         }
       }
     }
