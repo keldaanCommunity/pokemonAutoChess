@@ -99,14 +99,8 @@ export const EvolutionManager = {
     player: IPlayer,
     ...additionalArgs: unknown[]
   ): Pkm {
-    if (pokemon.evolutionRule.divergentEvolution) {
-      return pokemon.evolutionRule.divergentEvolution(
-        pokemon,
-        player,
-        ...additionalArgs
-      )
-    }
-    return pokemon.evolution
+    const handler = this.getHandler(pokemon.evolutionRule)
+    return handler.getEvolution(pokemon, player, ...additionalArgs)
   },
 
   canEvolve(pokemon: Pokemon, player: Player, stageLevel: number): boolean {
@@ -124,9 +118,6 @@ export const EvolutionManager = {
 
   updateHatch(pokemon: Pokemon, player: Player, stageLevel: number) {
     if (pokemon.evolutionRule.type !== "hatch") return
-    const handler = this.getHandler(
-      pokemon.evolutionRule
-    ) as HatchEvolutionHandler
     pokemon.stacks++
     const willHatch = this.canEvolve(pokemon, player, stageLevel)
     if (willHatch) {
