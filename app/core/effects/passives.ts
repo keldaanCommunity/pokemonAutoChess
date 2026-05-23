@@ -247,25 +247,27 @@ const KubfuOnKillEffect = new OnKillEffect(
       if (nbBuffsSpeed < MAX_BUFFS) {
         pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsSpeed++
-        if (
-          nbBuffsSpeed === MAX_BUFFS &&
-          pokemon.player &&
-          pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
-        ) {
-          pokemon.player.items.push(Item.SCROLL_OF_WATERS)
-        }
+      }
+      if (
+        nbBuffsSpeed >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_WATERS)
       }
     } else {
       if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsAP++
-        if (
-          nbBuffsAP === MAX_BUFFS &&
-          pokemon.player &&
-          pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
-        ) {
-          pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
-        }
+      }
+      if (
+        nbBuffsAP >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
       }
     }
 
@@ -828,7 +830,7 @@ const commanderPassive = new OnSimulationStartEffect(
 
 const conversionEffect = new OnSimulationStartEffect(
   ({ simulation, player, entity }) => {
-    if(!player) return
+    if (!player) return
     const opponent =
       simulation.bluePlayerId === player.id
         ? simulation.redPlayer
@@ -940,7 +942,7 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
       )
       if (coord) {
         const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
-        if(player){
+        if (player) {
           player.pokemonsPlayed.add(Pkm.PHIONE)
         }
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
