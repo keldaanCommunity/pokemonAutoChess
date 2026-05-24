@@ -21,24 +21,25 @@
 
 > This fairy rework is minor, the base effect of special damage on fairy attacks is unchanged, but the added random effects are fun and thematic for fairy. This is also a first attempt of a "build your own synergy" with 256 different combinations of wands.
 
-- Fairy rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
+- FAIRY rework: Fairy Pokémon use wands to deal additional special damage and various effects with their attacks. Pick one of 3 wands at each stage of Fairy. 12 wands have been added, each with their own unique effect conditionned by luck. Fairy 8 now also gives 20 Luck to all fairy.
 
-- Change to Flying: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
-- Dark melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
-- Fighing 8 "Justified" is now "Coaching": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
-- Human TM are now removable simply by benching the Pokémon
+- Change to FLYING: the selection of the destination cell when flying away is now smarter: it now considers the farthest free cells with at least one enemy at attack range, and the minimum of threats around.
+- DARK melee Pokémon have increased priority movement for their first jump. That means they land their first attack slightly faster (-200ms on average), but this also prevents the opponent backline to move and leave a gap for assassins to infiltrate.
+- FIGHTING 8 "Justified" is now "Coaching": no longer reduce hits taken before throwing, but instead gives a Training Bag. Each round, FIGHTING Pokémon on the bench with a training bag or a pillar on their left will train, gaining 4 ATK and 10% base max HP permanently. Pillars can now be put on bench.
+- HUMAN TM are now removable simply by benching the Pokémon
 
 > We simplify the rules and oddities around Unown management to make Psychic easier to play, especially for beginners
 
 - Unowns no longer disappear after one fight if they did not cast their ability
 - Unowns, when disappearing after casting their ability, leave a reminescence that gives 1 point in Psychic synergy but only for the next automatic shop assignment. This allows to chain Unown shops when playing Psychic 7 with a Unown on board.
 
-- Nerf Rock: Def 10/30/60 → 10/25/50
-- Nerf Amorphous 7 Ethereal: 6 → 5 speed, 12 → 10 HP per active synergy
+- Nerf ROCK: Def 10/30/60 → 10/25/50
+- Nerf AMORPHOUS 7 Ethereal: 6 → 5 speed, 12 → 10 HP per active synergy
 
 > Mostly adressing the lack of power of Steel 2 in early game, and the lack of incentive to enter Steel 2 in late game when you don't have a Steel AD carry.
 
-- Buff Steel: now gives +3 DEF to the whole team when activated ; Steel 8 Max Meltdown: 120 → 125% of ATK as TRUE
+- Buff STEEL: now gives +3 DEF to the whole team when activated ; STEEL 8 Max Meltdown: 120 → 125% of ATK as TRUE
+- FIELD_GEM, GROUND_GEM and AMORPHOUS_GEM can now be found buried in the ground
 
 # Changes to Pokemon & Abilities
 
