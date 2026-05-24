@@ -114,6 +114,12 @@
 
 - Expeditions mission selection has been tweaked based on player feedback
 
+> Increasing the difficulty of the Diversify mission was not the way to go. Instead, we're looking at reducing the value and the accessibility of the best synergy fillers.
+
+- Revert MISSION_ORDER_GREEN change from 6.9: reach 9 → 8 different active synergies
+- Change MISSION_ORDER_PINK : reach 4 STAR STAR STAR Pokémon on board instead of 5
+- MISSION_ORDER_GOLD is no longer proposed if stage 1 was a shiny PvE round
+
 # UI
 
 - New gadget: Smeargle's Palette, allowing you to customize the theme and colors of the game. 9 new themes are available at launch, with more to come in the future. Some themes are unlocked by getting specific titles.

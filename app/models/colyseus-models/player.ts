@@ -409,14 +409,14 @@ export default class Player extends Schema implements IPlayer {
 
     if (
       this.items.includes(Item.MISSION_ORDER_GREEN) &&
-      this.synergies.countActiveSynergies() >= 9
+      this.synergies.countActiveSynergies() >= 8
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GREEN)
     }
 
     if (
       this.items.includes(Item.MISSION_ORDER_PINK) &&
-      schemaValues(this.board).filter((p) => p.stars >= 3).length >= 5
+      schemaValues(this.board).filter((p) => p.stars >= 3).length >= 4
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_PINK)
     }
