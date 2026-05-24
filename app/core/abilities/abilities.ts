@@ -645,7 +645,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
-        ally.addShield(40, pokemon, 1, crit)
+        ally.addShield(30, pokemon, 1, crit)
       }
     })
   }

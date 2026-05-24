@@ -850,14 +850,14 @@ export class Tsareena extends Pokemon {
 
 export class Buneary extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.LOPUNNY
-  hp = 60
-  atk = 6
+  hp = 65
+  atk = 7
   speed = 59
   def = 6
-  speDef = 6
+  speDef = 7
   maxPP = 80
   range = 1
   skill = Ability.HIGH_JUMP_KICK
@@ -866,14 +866,14 @@ export class Buneary extends Pokemon {
 
 export class Lopunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 2
   //evolution = Pkm.MEGA_LOPUNNY
-  hp = 120
-  atk = 13
+  hp = 125
+  atk = 15
   speed = 59
   def = 8
-  speDef = 8
+  speDef = 10
   maxPP = 80
   range = 1
   skill = Ability.HIGH_JUMP_KICK
@@ -882,7 +882,7 @@ export class Lopunny extends Pokemon {
 
 export class MegaLopunny extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.FIGHTING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.RARE
   stars = 3
   hp = 250
   atk = 26
@@ -7853,12 +7853,12 @@ export class Archen extends Pokemon {
   stars = 1
   evolution = Pkm.ARCHEOPS
   hp = 70
-  atk = 4
+  atk = 6
   speed = 60
-  def = 4
-  speDef = 4
+  def = 3
+  speDef = 3
   maxPP = 90
-  range = 1
+  range = 2
   skill = Ability.ROCK_SMASH
   additional = true
 }
@@ -7868,10 +7868,10 @@ export class Archeops extends Pokemon {
   rarity = Rarity.UNCOMMON
   stars = 2
   hp = 130
-  atk = 10
+  atk = 13
   speed = 60
-  def = 8
-  speDef = 8
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 2
   skill = Ability.ROCK_SMASH
@@ -18883,11 +18883,7 @@ export class Sandaconda extends Pokemon {
 }
 
 export class Dunsparce extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.GROUND,
-    Synergy.FLYING
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.BUG])
   rarity = Rarity.UNIQUE
   evolution = Pkm.DUDUNSPARCE
   evolutionRule = new ConditionBasedEvolutionRule(
@@ -18911,11 +18907,7 @@ export class Dunsparce extends Pokemon {
 }
 
 export class Dudunsparse extends Pokemon {
-  types = new SetSchema<Synergy>([
-    Synergy.NORMAL,
-    Synergy.GROUND,
-    Synergy.FLYING
-  ])
+  types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.BUG])
   rarity = Rarity.UNIQUE
   stars = 4
   hp = 260
@@ -19069,7 +19061,7 @@ export class Blipbug extends Pokemon {
   speed = 58
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.EXPANDING_FORCE
   regional = true
@@ -19085,7 +19077,7 @@ export class Dottler extends Pokemon {
   speed = 58
   def = 7
   speDef = 7
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.EXPANDING_FORCE
   regional = true
@@ -19100,7 +19092,7 @@ export class Orbeetle extends Pokemon {
   speed = 58
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 85
   range = 1
   skill = Ability.EXPANDING_FORCE
   regional = true
