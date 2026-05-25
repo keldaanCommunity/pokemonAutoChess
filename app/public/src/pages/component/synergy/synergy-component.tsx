@@ -91,10 +91,10 @@ export default function SynergyComponent(props: {
         ? ReactDOM.createPortal(tooltip, document.body)
         : tooltip}
 
-      <SynergyIcon type={props.type} size="40px" />
+      <SynergyIcon type={props.type} />
       <span
         style={{
-          fontSize: "32px",
+          fontSize: "2em",
           textShadow: "2px 2px 2px #000000c0",
           textAlign: "center",
           marginRight: "4px",
