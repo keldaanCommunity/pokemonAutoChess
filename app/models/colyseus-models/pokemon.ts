@@ -13128,7 +13128,7 @@ export class CherrimSunlight extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   hp = 250
-  atk = 30
+  atk = 25
   speed = 52
   def = 6
   speDef = 9

@@ -2014,7 +2014,7 @@
 		"TAIL_GLOW": "Inflige [30,SP] SPECIAL aux ennemis ADJACENT et augmente la AP du lanceur de 50.",
 		"STRUGGLE_BUG": "Inflige [30,SP] SPECIAL aux ennemis ADJACENT et réduit leur AP de 50.",
 		"PRISMATIC_LASER": "Envoie un laser prismatique dans une large ligne droite, infligeant [60,SP] SPECIAL et déplaçant tous les ennemis touchés.",
-		"NATURAL_GIFT": "Soigne [30,60,120,SP] HP de l'allié le plus blessé et lui donne RUNE_PROTECT pendant [1,2,3] secondes.",
+		"NATURAL_GIFT": "Soigne [30,60,90,SP] HP de l'allié le plus blessé et lui donne RUNE_PROTECT pendant [1,2,3] secondes.",
 		"NIGHT_SHADE": "Inflige [25,33,50,SP=0.5]% des HP max de la cible en TRUE.",
 		"CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 ennemis ADJACENT, infligeant [15,30,60,SP] SPECIAL à chacun.",
 		"POPULATION_BOMB": "Inflige [4,8,12,16,SP] fois 10 SPECIAL à la cible.",

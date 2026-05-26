@@ -2912,7 +2912,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
-    const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const heal = [30, 60, 90][pokemon.stars - 1] ?? 90
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)

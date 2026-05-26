@@ -1988,7 +1988,7 @@
 		"TAIL_GLOW": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y aumenta el AP del usuario en 50",
 		"STRUGGLE_BUG": "Inflige [30,SP] de SPECIAL a enemigos adyacentes y reduce sus AP en 50",
 		"PRISMATIC_LASER": "El usuario lanza verticalmente un láser prismático de 3 casillas de ancho, causando [60,SP] de SPECIAL y desplazando a los enemigos que golpea.",
-		"NATURAL_GIFT": "Cura [30,60,120,SP] de HP al aliado mas dañado y le otorga RUNE_PROTECT por [1,2,3] segundos",
+		"NATURAL_GIFT": "Cura [30,60,90,SP] de HP al aliado mas dañado y le otorga RUNE_PROTECT por [1,2,3] segundos",
 		"NIGHT_SHADE": "Inflige [25,33,50,SP=0.5]% del HP máximo del objetivo como TRUE",
 		"CHARGE_BEAM": "Dispara electricidad concentrada que se propaga hasta un máximo de 3 Pokémon enemigos en una casilla ADJACENT entre sí, causando [15,30,60,SP] de SPECIAL a cada uno.",
 		"POPULATION_BOMB": "Inflige 10 de SPECIAL [4,8,12,16,SP] veces al objetivo.",

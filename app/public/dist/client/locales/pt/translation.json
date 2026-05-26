@@ -2016,7 +2016,7 @@
 		"TAIL_GLOW": "Causa [30,SP] SPECIAL a Pokémon inimigos ADJACENT e aumenta o AP do usuário em 50.",
 		"STRUGGLE_BUG": "Causa [30,SP] SPECIAL a Pokémon inimigos ADJACENT e reduz o AP deles em 50.",
 		"PRISMATIC_LASER": "O usuário dispara um laser prismático de 3 quadrados de largura em uma linha reta vertical, causando [60,SP] SPECIAL e empurrando qualquer inimigo em seu caminho.",
-		"NATURAL_GIFT": "Cura o Pokémon aliado mais danificado em [30,60,120,SP] HP e concede a eles RUNE_PROTECT por [1,2,3] segundos.",
+		"NATURAL_GIFT": "Cura o Pokémon aliado mais danificado em [30,60,90,SP] HP e concede a eles RUNE_PROTECT por [1,2,3] segundos.",
 		"NIGHT_SHADE": "Causa [25,33,50,SP=0.5]% do HP máximo do alvo como TRUE.",
 		"CHARGE_BEAM": "Dispara um feixe concentrado de eletricidade que se propaga para no máximo 3 Pokémon inimigos ADJACENT, causando [15,30,60,SP] SPECIAL a cada um.",
 		"POPULATION_BOMB": "Causa 10 SPECIAL [4,8,12,16,SP] vezes ao alvo.",

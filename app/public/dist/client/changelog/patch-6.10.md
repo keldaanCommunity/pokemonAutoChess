@@ -96,6 +96,7 @@
 - Buneary line is now Rare instead of Uncommon. Adjusted stats.
 - Nerf Psychic Surge (Tapu Lele): 40 → 30 SHIELD given to allies
 - Buff Blipbug line: PP 100 → 85
+- Nerf Cherrim Sunlight form: Attack 30 → 25 ; Natural Gift heal 120 → 90 HP
 
 # Changes to Items
 
