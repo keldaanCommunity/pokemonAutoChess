@@ -2,6 +2,7 @@ import type { MapSchema } from "@colyseus/schema"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameRoom from "../../rooms/game-room"
+import type GameState from "../../rooms/states/game-state"
 import type { IPokemonEntity } from "../../types"
 import type { Ability } from "../../types/enum/Ability"
 import type { EffectEnum } from "../../types/enum/Effect"
@@ -85,6 +86,56 @@ export class OnStageStartEffect extends Effect {
     super(effect, origin)
   }
   apply(args: OnStageStartEffectArgs) {}
+}
+
+// applied when pokemon is moved to another position on the board during pick phases
+
+interface OnChangePositionEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  state: GameState
+  oldX: number
+  oldY: number
+  newX: number
+  newY: number
+}
+
+export class OnChangePositionEffect extends Effect {
+  constructor(
+    effect?: (args: OnChangePositionEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: OnChangePositionEffectArgs) {}
+}
+
+// applied after evolution
+
+export class OnEvolutionEffect extends Effect {
+  constructor(
+    effect?: (args: { pokemonEvolved: Pokemon; player: Player }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemonEvolved: Pokemon; player: Player }) {}
+}
+
+// applied when a pokemon enters or leaves the spotlight
+
+export class OnSpotlightChangeEffect extends Effect {
+  constructor(
+    effect?: (args: {
+      pokemon: Pokemon
+      player: Player
+      inSpotlight: boolean
+    }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemon: Pokemon; player: Player; inSpotlight: boolean }) {}
 }
 
 // applied when a pokemon is benched during a fight

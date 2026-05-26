@@ -8,10 +8,10 @@ import {
   SynergyTriggers
 } from "../../config"
 import { CollectionUtils } from "../../core/collection"
-import {
-  ConditionBasedEvolutionRule,
-  carryOverPermanentStats
-} from "../../core/evolution-rules"
+import { OnSpotlightChangeEffect } from "../../core/effects/effect"
+import { PassiveEffects } from "../../core/effects/passives"
+import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
+import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
@@ -22,6 +22,7 @@ import {
   type Role,
   Title
 } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
@@ -275,8 +276,8 @@ export default class Player extends Schema implements IPlayer {
     this.money += value
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
-      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
-        pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
+      if (pokemon.evolutionRule.type === EvolutionRuleType.MONEY) {
+        EvolutionManager.tryEvolve(pokemon, this, this.money)
       }
     })
     if (
@@ -361,15 +362,16 @@ export default class Player extends Schema implements IPlayer {
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
     const minimumToGetLight = SynergyTriggers[Synergy.LIGHT][0]
-    const lightChanged =
-      (previousLight >= minimumToGetLight && newLight < minimumToGetLight) || // light lost
-      (previousLight < minimumToGetLight && newLight >= minimumToGetLight) // light gained
+    const lightGained =
+      previousLight < minimumToGetLight && newLight >= minimumToGetLight
+    const lightLost =
+      previousLight >= minimumToGetLight && newLight < minimumToGetLight
 
     updatedSynergies.forEach((value, synergy) =>
       this.synergies.set(synergy, value)
     )
 
-    if (lightChanged) this.onLightChange()
+    if (lightGained || lightLost) this.onLightChange(lightGained)
 
     if (
       previousSynergies.get(Synergy.WATER) !==
@@ -785,17 +787,7 @@ export default class Player extends Schema implements IPlayer {
         ) {
           const burmyEvolving = burmys[0]
           burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
-
-          const mothim = burmyEvolving.evolutionRule.evolve(
-            burmyEvolving,
-            this,
-            state.stageLevel
-          )
-          burmyEvolving.evolutionRule.afterEvolve(
-            mothim,
-            this,
-            state.stageLevel
-          )
+          EvolutionManager.evolve(burmyEvolving, this)
         }
       }
     }
@@ -842,17 +834,19 @@ export default class Player extends Schema implements IPlayer {
     )
   }
 
-  onLightChange() {
-    const pokemonsReactingToLight = [
-      Pkm.NECROZMA,
-      Pkm.ULTRA_NECROZMA,
-      Pkm.CHERRIM_SUNLIGHT,
-      Pkm.CHERRIM
-    ]
+  onLightChange(hasLightActive: boolean) {
     this.board.forEach((pokemon) => {
-      if (pokemonsReactingToLight.includes(pokemon.name)) {
-        pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, this)
-      }
+      const inSpotlight =
+        hasLightActive &&
+        ((pokemon.positionX === this.lightX &&
+          pokemon.positionY === this.lightY) ||
+          pokemon.items.has(Item.SHINY_STONE))
+
+      PassiveEffects[pokemon.passive]?.forEach((effect) => {
+        if (effect instanceof OnSpotlightChangeEffect) {
+          effect.apply({ pokemon, player: this, inSpotlight })
+        }
+      })
     })
   }
 

@@ -2,7 +2,6 @@ import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
 import type Dps from "../core/dps"
 import type { Effect as EffectClass } from "../core/effects/effect"
-import type { EvolutionRule } from "../core/evolution-rules"
 import type Count from "../models/colyseus-models/count"
 import type ExperienceManager from "../models/colyseus-models/experience-manager"
 import type { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -16,6 +15,7 @@ import type Synergies from "../models/colyseus-models/synergies"
 import type { Effects } from "../models/effects"
 import type GameRoom from "../rooms/game-room"
 import type { AttackSprite } from "./Animation"
+import type { EvolutionRule } from "./EvolutionRules"
 import type { Ability } from "./enum/Ability"
 import type { DungeonPMDO } from "./enum/Dungeon"
 import type { BoardEffect, EffectEnum } from "./enum/Effect"
@@ -296,6 +296,7 @@ export interface IPlayer {
   titles: Set<Title>
   regions: DungeonPMDO[]
   gameStats: GameStats
+  groundHoles: number[]
 }
 
 export interface IPokemon {
