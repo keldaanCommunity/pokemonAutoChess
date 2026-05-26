@@ -1,3 +1,4 @@
+import type { MapSchema } from "@colyseus/schema"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -8,7 +9,9 @@ import {
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
 import { type SynergyEffect, SynergyEffects } from "../../config/game/synergies"
-import { type FlowerPot, Title } from "../../types"
+import type Player from "../../models/colyseus-models/player"
+import PokemonFactory from "../../models/pokemon-factory"
+import { type FlowerPot, type IPokemon, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -25,7 +28,9 @@ import { schemaValues } from "../../utils/schemas"
 import { type Board, effectInLine } from "../board"
 import { FlowerMonByPot, getFlowerPotsUnlocked } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
+import type Simulation from "../simulation"
 import { DelayedCommand } from "../simulation-command"
+import { getUnitScore } from "../unit-score"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -779,3 +784,79 @@ export const pounceWandEffect = new OnAttackReceivedEffect(
     }
   }
 )
+
+export const cloneBugs = ({
+  board,
+  teamIndex,
+  player,
+  effects,
+  simulation
+}: {
+  board: MapSchema<IPokemon, string>
+  teamIndex: number
+  player: Player | undefined
+  effects: Set<EffectEnum>
+  simulation: Simulation
+}) => {
+  const bugTeam = new Array<IPokemon>()
+  board.forEach((pkm) => {
+    if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+      bugTeam.push(pkm)
+    }
+  })
+  bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+
+  let numberToSpawn = 0
+  if (effects.has(EffectEnum.COCOON)) {
+    numberToSpawn = 1
+  }
+  if (effects.has(EffectEnum.INFESTATION)) {
+    numberToSpawn = 2
+  }
+  if (effects.has(EffectEnum.HORDE)) {
+    numberToSpawn = 3
+  }
+  if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
+    numberToSpawn = 5
+  }
+  numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
+
+  for (let i = 0; i < numberToSpawn; i++) {
+    const pokemonCloned = bugTeam[i]
+    const bug = PokemonFactory.createPokemonFromName(pokemonCloned.name, player)
+    bug.stacks = pokemonCloned.stacks
+
+    const coord = simulation.getClosestFreeCellToPokemon(
+      pokemonCloned,
+      teamIndex
+    )
+    if (coord) {
+      const cloneEntity = simulation.addPokemon(
+        bug,
+        coord.x,
+        coord.y,
+        teamIndex,
+        true
+      )
+      if (pokemonCloned.items.has(Item.SHED_SHELL)) {
+        const team =
+          teamIndex === Team.BLUE_TEAM
+            ? simulation.blueTeam
+            : simulation.redTeam
+        const clonedEntity = schemaValues(team).find(
+          (p) => p.refToBoardPokemon.id === pokemonCloned.id
+        )
+        if (clonedEntity) {
+          clonedEntity.addMaxHP(
+            -0.5 * pokemonCloned.maxHP,
+            clonedEntity,
+            0,
+            false
+          )
+        }
+
+        cloneEntity.addMaxHP(-0.5 * bug.maxHP, cloneEntity, 0, false)
+      }
+    }
+  }
+}

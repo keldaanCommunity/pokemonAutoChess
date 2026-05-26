@@ -643,7 +643,7 @@
 		"SUDOWOODO": "Sudowoodo",
 		"PHIONE": "Phione",
 		"COMBEE": "Combee",
-		"VESPIQUEEN": "Vespiquen",
+		"VESPIQUEN": "Vespiquen",
 		"SHUCKLE": "Shuckle",
 		"TEPIG": "Tepig",
 		"PIGNITE": "Pignite",
@@ -3401,7 +3401,8 @@
 		"EISCUE_NOICE": "When starting a fight under SNOW, gain its Ice Face form and 100 SHIELD. When inflicting or being inflicted FREEZE, go back to Ice Face form and gain 50 SHIELD.",
 		"EISCUE_ICE_FACE": "When casting its ability, its current SHIELD is converted to additional SPECIAL. When SHIELD is depleted or after casting its ability, Eiscue breaks into its Noice form.",
 		"COMATOSE": "Always under SLEEP. Immune to BURN, POISONNED, FREEZE and PARALYSIS. When a SOUND try to wake this Pokémon up, it sinks deeper into its dream, gaining 5 AP.",
-		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted."
+		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted.",
+		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in. BUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead."
 	},
 	"stat": {
 		"ATK": "Attack",

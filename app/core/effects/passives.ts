@@ -7,7 +7,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title, Transfer } from "../../types"
+import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"

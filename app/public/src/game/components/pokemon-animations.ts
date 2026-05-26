@@ -4293,7 +4293,7 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.BUG_MELEE,
     hitSprite: HitSprite.BUG_HIT
   },
-  [Pkm.VESPIQUEEN]: {
+  [Pkm.VESPIQUEN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot,

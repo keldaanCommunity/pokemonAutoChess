@@ -12058,32 +12058,32 @@ export class Sudowoodo extends Pokemon {
 
 export class Combee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
-  rarity = Rarity.EPIC
+  rarity = Rarity.SPECIAL
   stars = 1
-  evolution = Pkm.VESPIQUEEN
-  hp = 80
-  atk = 10
-  speed = 38
-  def = 5
-  speDef = 5
-  maxPP = 90
+  hp = 50
+  atk = 5
+  speed = 50
+  def = 3
+  speDef = 3
+  maxPP = 80
   range = 1
-  skill = Ability.HEAL_ORDER
+  skill = Ability.BUG_BITE
   additional = true
 }
 
-export class Vespiqueen extends Pokemon {
+export class Vespiquen extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
-  rarity = Rarity.EPIC
-  stars = 2
+  rarity = Rarity.UNIQUE
+  stars = 3
   hp = 190
-  atk = 20
+  atk = 16
   speed = 38
   def = 8
   speDef = 8
   maxPP = 90
-  range = 1
+  range = 3
   skill = Ability.HEAL_ORDER
+  passive = Passive.VESPIQUEN
   additional = true
 }
 
@@ -21373,7 +21373,7 @@ export const PokemonClasses: Record<
   [Pkm.BONSLEY]: Bonsley,
   [Pkm.SUDOWOODO]: Sudowoodo,
   [Pkm.COMBEE]: Combee,
-  [Pkm.VESPIQUEEN]: Vespiqueen,
+  [Pkm.VESPIQUEN]: Vespiquen,
   [Pkm.SHUCKLE]: Shuckle,
   [Pkm.TEPIG]: Tepig,
   [Pkm.PIGNITE]: Pignite,
