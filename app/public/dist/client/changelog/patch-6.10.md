@@ -97,6 +97,8 @@
 - Nerf Psychic Surge (Tapu Lele): 40 → 30 SHIELD given to allies
 - Buff Blipbug line: PP 100 → 85
 - Nerf Cherrim Sunlight form: Attack 30 → 25 ; Natural Gift heal 120 → 90 HP
+- Buff Necrozma line: PP 110 → 100
+- Buff Solgaleo: PP 110 → 100
 
 # Changes to Items
 

@@ -13025,7 +13025,7 @@ export class Necrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -13050,7 +13050,7 @@ export class UltraNecrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -14853,7 +14853,7 @@ export class Solgaleo extends Pokemon {
   speed = 56
   def = 12
   speDef = 8
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
