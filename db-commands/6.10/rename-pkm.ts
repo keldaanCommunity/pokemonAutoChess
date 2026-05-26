@@ -9,62 +9,10 @@ import { logger } from "../../app/utils/logger"
 async function main() {
   dotenv.config()
 
-  await removePokemonFromGame("SILVALLY_FIRE", "0773-0009", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_FOSSIL",
-    "0773-0015",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame(
-    "SILVALLY_PSYCHIC",
-    "0773-0013",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_WATER", "0773-0010", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_ELECTRIC",
-    "0773-0012",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_FAIRY", "0773-0017", "SILVALLY", "0773")
-  await removePokemonFromGame("SILVALLY_DARK", "0773-0016", "SILVALLY", "0773")
-  await removePokemonFromGame("SILVALLY_GRASS", "0773-0011", "SILVALLY", "0773")
-  await removePokemonFromGame("SILVALLY_ICE", "0773-0014", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_FIGHTING",
-    "0773-0001",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_LIGHT", "0773-0006", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_POISON",
-    "0773-0003",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_SOUND", "0773", "SILVALLY", "0773")
-  await removePokemonFromGame("SILVALLY_STEEL", "0773-0008", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_FLYING",
-    "0773-0002",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_ROCK", "0773-0005", "SILVALLY", "0773")
-  await removePokemonFromGame(
-    "SILVALLY_GROUND",
-    "0773-0004",
-    "SILVALLY",
-    "0773"
-  )
-  await removePokemonFromGame("SILVALLY_GHOST", "0773-0007", "SILVALLY", "0773")
+  await replacePokemonInGame("VESPIQUEEN", "0416", "VESPIQUEN", "0416")
 }
 
-async function removePokemonFromGame(
+async function replacePokemonInGame(
   pokemonNameToRemove: string,
   pokemonIndexToRemove: string,
   pokemonNameToReplace: string,

@@ -12065,7 +12065,7 @@ export class Combee extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.FLORA, Synergy.GOURMET])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 50
+  hp = 75
   atk = 5
   speed = 50
   def = 3
@@ -12073,7 +12073,6 @@ export class Combee extends Pokemon {
   maxPP = 80
   range = 1
   skill = Ability.BUG_BITE
-  additional = true
 }
 
 export class Vespiquen extends Pokemon {
@@ -12089,7 +12088,6 @@ export class Vespiquen extends Pokemon {
   range = 3
   skill = Ability.HEAL_ORDER
   passive = Passive.VESPIQUEN
-  additional = true
 }
 
 export class Shuckle extends Pokemon {

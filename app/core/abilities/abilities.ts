@@ -5321,7 +5321,7 @@ export class HealOrderStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    // Spawn a Combee nearby then user and every Combee heals adjacent allies for [10,20,30] HP.
+    // Spawn a Combee nearby then user and every Combee heals adjacent allies for [10,20,30] HP and clear their negative statuses.
     super.process(pokemon, board, target, crit, true)
 
     const combee = PokemonFactory.createPokemonFromName(
@@ -5355,12 +5355,12 @@ export class HealOrderStrategy extends AbilityStrategy {
           if (cell.value && cell.value.team === pokemon.team) {
             cell.value.handleHeal(heal, pokemon, 1, crit)
             cell.value.status.clearNegativeStatus(cell.value, pokemon)
-            pokemon.broadcastAbility({
-              skill: "HEAL_ORDER",
-              positionX: cell.x,
-              positionY: cell.y
-            })
           }
+        })
+        pokemon.broadcastAbility({
+          skill: "HEAL_ORDER",
+          positionX: x,
+          positionY: y
         })
       }
     })
@@ -5374,7 +5374,8 @@ export class DefendOrderStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    // Spawn a Combee nearby then gives [10,20,30] SHIELD to user and all Combee on board. User gets [10,20,30] additional SHIELD per Combee ally on the board.
+    // Spawn a Combee nearby then gives [10,20,30] SHIELD to user and all Combee on board.
+    // User gets [10,20,30] additional SHIELD per Combee ally on the board.
     super.process(pokemon, board, target, crit, true)
 
     const combee = PokemonFactory.createPokemonFromName(
@@ -5397,20 +5398,15 @@ export class DefendOrderStrategy extends AbilityStrategy {
     }
 
     const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     let nbCombeeAllies = 0
-    cells.forEach((cell) => {
-      if (
-        cell.value &&
-        cell.value.team === pokemon.team &&
-        cell.value.name === Pkm.COMBEE
-      ) {
-        cell.value.addShield(shield, pokemon, 1, crit)
+    board.forEach((x, y, p) => {
+      if (p && p.team === pokemon.team && p.name === Pkm.COMBEE) {
+        p.addShield(shield, pokemon, 1, crit)
         nbCombeeAllies++
         pokemon.broadcastAbility({
           skill: "DEFEND_ORDER",
-          positionX: cell.x,
-          positionY: cell.y
+          positionX: x,
+          positionY: y
         })
       }
     })

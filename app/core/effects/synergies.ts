@@ -806,56 +806,70 @@ export const cloneBugs = ({
   })
   bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
-  let numberToSpawn = 0
+  let numberOfClones = 1
+  let numberOfBugsToClone = 0
   if (effects.has(EffectEnum.COCOON)) {
-    numberToSpawn = 1
+    numberOfBugsToClone = 1
   }
   if (effects.has(EffectEnum.INFESTATION)) {
-    numberToSpawn = 2
+    numberOfBugsToClone = 2
   }
   if (effects.has(EffectEnum.HORDE)) {
-    numberToSpawn = 3
+    numberOfBugsToClone = 3
   }
   if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
-    numberToSpawn = 5
+    numberOfBugsToClone = 5
   }
-  numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
+  numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
-  for (let i = 0; i < numberToSpawn; i++) {
+  for (let i = 0; i < numberOfBugsToClone; i++) {
     const pokemonCloned = bugTeam[i]
-    const bug = PokemonFactory.createPokemonFromName(pokemonCloned.name, player)
-    bug.stacks = pokemonCloned.stacks
+    let clonePkm = pokemonCloned.name
 
-    const coord = simulation.getClosestFreeCellToPokemon(
-      pokemonCloned,
-      teamIndex
-    )
-    if (coord) {
-      const cloneEntity = simulation.addPokemon(
-        bug,
-        coord.x,
-        coord.y,
-        teamIndex,
-        true
+    if (pokemonCloned.passive === Passive.VESPIQUEN) {
+      numberOfClones = 2
+      clonePkm = Pkm.COMBEE
+    }
+
+    for (
+      let numberOfClone = 0;
+      numberOfClone < numberOfClones;
+      numberOfClone++
+    ) {
+      const clone = PokemonFactory.createPokemonFromName(clonePkm, player)
+      clone.stacks = pokemonCloned.stacks
+
+      const coord = simulation.getClosestFreeCellToPokemon(
+        pokemonCloned,
+        teamIndex
       )
-      if (pokemonCloned.items.has(Item.SHED_SHELL)) {
-        const team =
-          teamIndex === Team.BLUE_TEAM
-            ? simulation.blueTeam
-            : simulation.redTeam
-        const clonedEntity = schemaValues(team).find(
-          (p) => p.refToBoardPokemon.id === pokemonCloned.id
+      if (coord) {
+        const cloneEntity = simulation.addPokemon(
+          clone,
+          coord.x,
+          coord.y,
+          teamIndex,
+          true
         )
-        if (clonedEntity) {
-          clonedEntity.addMaxHP(
-            -0.5 * pokemonCloned.maxHP,
-            clonedEntity,
-            0,
-            false
+        if (pokemonCloned.items.has(Item.SHED_SHELL)) {
+          const team =
+            teamIndex === Team.BLUE_TEAM
+              ? simulation.blueTeam
+              : simulation.redTeam
+          const clonedEntity = schemaValues(team).find(
+            (p) => p.refToBoardPokemon.id === pokemonCloned.id
           )
-        }
+          if (clonedEntity) {
+            clonedEntity.addMaxHP(
+              -0.5 * pokemonCloned.maxHP,
+              clonedEntity,
+              0,
+              false
+            )
+          }
 
-        cloneEntity.addMaxHP(-0.5 * bug.maxHP, cloneEntity, 0, false)
+          cloneEntity.addMaxHP(-0.5 * clone.maxHP, cloneEntity, 0, false)
+        }
       }
     }
   }
