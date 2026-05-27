@@ -42,6 +42,7 @@ China Community Server for Pokemon Auto Chess
 - logo: /assets/community-servers/AutoSpire.png
 - creator: Fish
 - discord: https://discord.gg/cfytB2kA
+- location: Australia
 
 Pokemon Auto Spire is a Slay the Spire inspired mod of PAC - its a single player game!
 
