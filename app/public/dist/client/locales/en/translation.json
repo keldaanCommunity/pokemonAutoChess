@@ -3319,7 +3319,7 @@
 		"RECYCLE": "This Pokémon lets you throw away your useless consumables. Drag a berry on it to make it gain 15 permanent max HP, or any another consumable item to gain 30 permanent max HP and get TRASH in return.",
 		"DREAM_CATCHER": "If its target is SLEEP, its attacks give 10 SHIELD to the 3 closest allies",
 		"SLOW_START": "Starts with -30 SPEED. When PP bar is full, gains 30 SPEED and 10 ATK.",
-		"STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP to all ADJACENT allies at the start of the fight",
+		"STONJOURNER": "Does not move or attack until PP bar is full. Its power spot gives 50 AP (doubled if Stonjourner is in the spotlight) to all ADJACENT allies at the start of the fight",
 		"POIPOLE": "When user or another unit of the same family gets a KO, gain 1 stack. Every 2 stacks, gain 1 ATK permanently. Evolves at 20 stacks.",
 		"NAGANADEL": "When user or another unit of the same family gets a KO, gain 1 stack. Every 2 stacks, gain 1 ATK permanently.",
 		"PYUKUMUKU": "When this Pokémon is KO, it explodes dealing [50,SP]% max HP as SPECIAL to ADJACENT enemies.",

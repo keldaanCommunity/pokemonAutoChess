@@ -78,6 +78,7 @@ BLAST_WAND HP_SWAP_WAND SPIRIT_WAND LONG_WAND CONFUSE_WAND PETRIFY_WAND SLOW_WAN
 - Buff Blipbug line: PP 100 → 85
 - Buff Necrozma line: PP 110 → 100
 - Buff Solgaleo: PP 110 → 100
+- Changed passive of Stonjourner: the 50 AP given to adjacent allies at the start of the fight is now **doubled to 100 AP if Stonjourner is in the spotlight**
 
 ## Nerfs
 

@@ -961,7 +961,12 @@ const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
       .getAdjacentCells(entity.positionX, entity.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === entity.team) {
-          cell.value.addAbilityPower(50, cell.value, 0, false)
+          cell.value.addAbilityPower(
+            entity.inSpotlight ? 100 : 50,
+            cell.value,
+            0,
+            false
+          )
         }
       })
   },
