@@ -54,7 +54,6 @@ async function main() {
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
   logger.info("Fetching meta reports...")
   fetchMetaReports()
-  setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
   logger.info("Refreshing sprite gap scanner...")
   setInterval(() => refreshSpriteGapData(), 1000 * 60 * 60 * 24) // refresh every 24 hours
   logger.info("Fetching Twitch streams...")
