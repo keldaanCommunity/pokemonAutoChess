@@ -4799,7 +4799,9 @@
 	"type_fluid": "Type-Fluid",
 	"full_patch_notes": "Informações Completas do Patch",
 	"thanks_for_playing": "Obrigado por jogar nosso jogo!",
-	"heap_snapshot": "Gravar Heap Snapshot",
+	"admin_panel": {
+		"heap_snapshot": "Gravar Heap Snapshot"
+	},
 	"synergy_wheel": {
 		"results": "Resultados",
 		"spin": "Giro",

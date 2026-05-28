@@ -15,6 +15,7 @@ import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
+import AdminPanel from "../admin/admin-panel"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
@@ -31,7 +32,6 @@ import ServersList from "../servers/servers-list"
 import SpriteTrackerModal from "../sprite-tracker/sprite-tracker-modal"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import TierListMakerModal from "../tier-list/tier-list-maker-modal"
-import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
@@ -318,6 +318,9 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
+            <NavLink svg="admin" location="admin" handleClick={changeModal}>
+              {t("admin_panel.title")}
+            </NavLink>
             <NavLink
               svg="pokemon-sprite"
               onClick={() => navigate("/sprite-viewer")}
@@ -326,13 +329,6 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
             <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
               Map Viewer
-            </NavLink>
-            <NavLink
-              svg="tournament"
-              location="tournaments"
-              handleClick={changeModal}
-            >
-              Tournaments
             </NavLink>
           </>
         )}
@@ -343,7 +339,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="jukebox"
             handleClick={changeModal}
           >
-            Jukebox
+            {t("gadget.jukebox")}
           </NavLink>
         )}
 
@@ -472,6 +468,7 @@ export type Modals =
   | "announcement"
   | "booster"
   | "moderation"
+  | "admin"
   | "collection"
   | "jukebox"
   | "keybinds"
@@ -485,7 +482,6 @@ export type Modals =
   | "synergy-wheel"
   | "team-builder"
   | "tier-list"
-  | "tournaments"
   | "wiki"
 
 function Modals({
@@ -584,17 +580,13 @@ function Modals({
       />
       <Modal
         onClose={closeModal}
-        show={modal === "tournaments"}
-        header="Tournaments"
-      >
-        <TournamentsAdmin />
-      </Modal>
-      <Modal
-        onClose={closeModal}
         show={modal === "moderation"}
         header="Moderation"
       >
         <ModerationPanel />
+      </Modal>
+      <Modal onClose={closeModal} show={modal === "admin"} header="Admin">
+        <AdminPanel />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />

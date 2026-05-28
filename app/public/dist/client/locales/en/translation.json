@@ -4129,7 +4129,15 @@
 	"favorites": "Favorites",
 	"name": "Name",
 	"give_boosters": "Give boosters",
-	"heap_snapshot": "Write heap snapshot",
+	"admin_panel": {
+		"title": "Admin",
+		"heap_snapshot": "Write heap snapshot",
+		"refresh_leaderboards": "Refresh leaderboards",
+		"refresh_meta_reports": "Refresh meta report",
+		"refresh_sprite_gap_data": "Refresh sprite gap data",
+		"refresh_twitch_streams": "Refresh Twitch streams",
+		"refresh_twitch_blacklist": "Refresh Twitch blacklist"
+	},
 	"banned": "Banned",
 	"ban_user": "Ban User",
 	"unban_user": "Unban User",
@@ -4941,6 +4949,7 @@
 		"count": "Count"
 	},
 	"notification": {
+		"info_title": "Information",		
 		"level_up_title": "Level Up!",
 		"level_up_message": "Congratulations!\nYou've reached level {{level}} and earned a booster pack!",
 		"new_title_title": "New Title Unlocked!",

@@ -4122,7 +4122,9 @@
 	"favorites": "偏好共鸣/宝可梦",
 	"name": "名字",
 	"give_boosters": "赠送补充包",
-	"heap_snapshot": "写入快照堆",
+	"admin_panel": {
+		"heap_snapshot": "写入快照堆"
+	},
 	"banned": "已封禁",
 	"ban_user": "封禁用户",
 	"unban_user": "解禁用户",

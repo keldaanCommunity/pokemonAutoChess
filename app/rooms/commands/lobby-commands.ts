@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
 import { type Client, matchMaker } from "colyseus"
 import { randomBytes } from "crypto"
-import { writeHeapSnapshot } from "v8"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -188,19 +187,6 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-}
-
-export class HeapSnapshotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  execute({ client }: { client: Client }) {
-    const u = this.room.users.get(client.auth.uid)
-    if (u && u.role === Role.ADMIN) {
-      logger.info("writing heap snapshot")
-      writeHeapSnapshot()
     }
   }
 }
