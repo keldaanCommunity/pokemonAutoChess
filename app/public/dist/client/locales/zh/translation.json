@@ -3859,16 +3859,6 @@
 	"spectating": "正在观战：{{ name }}",
 	"join": "加入",
 	"reconnect": "重新连接",
-	"participate": "参与",
-	"participating": "参加中",
-	"participants": "参与者",
-	"brackets": "分组",
-	"ranking": "名次",
-	"players_remaining": "存活玩家数",
-	"cancel_tournament_participation": "退出本次锦标赛，不再参加",
-	"register_tournament_participation": "注册为本场锦标赛的参赛者",
-	"registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
-	"starts_at": "开始时间：",
 	"no_elo": "无Elo",
 	"enable_elo": "开启Elo",
 	"disable_elo": "关闭Elo",
@@ -4475,7 +4465,17 @@
 		"ranked_mode_locked": "排位模式尚未解锁。请先玩其他模式，升级到{{requiredLevel}}级。"
 	},
 	"tournament": {
-		"tournament_mode_locked": "你需要升级到{{requiredLevel}}级，才能参与锦标赛。"
+		"tournament_mode_locked": "你需要升级到{{requiredLevel}}级，才能参与锦标赛。",
+		"participate": "参与",
+		"participating": "参加中",
+		"participants": "参与者",
+		"brackets": "分组",
+		"ranking": "名次",
+		"players_remaining": "存活玩家数",
+		"cancel_tournament_participation": "退出本次锦标赛，不再参加",
+		"register_tournament_participation": "注册为本场锦标赛的参赛者",
+		"registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
+		"starts_at": "开始时间："
 	},
 	"npc_dialog": {
 		"welcome": "欢迎！",

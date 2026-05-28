@@ -3866,16 +3866,6 @@
 	"spectating": "Spectating {{ name }}",
 	"join": "Join",
 	"reconnect": "Reconnect",
-	"participate": "Participate",
-	"participating": "Participating",
-	"participants": "Participants",
-	"brackets": "Brackets",
-	"ranking": "Ranking",
-	"players_remaining": "Players remaining",
-	"cancel_tournament_participation": "Cancel your participation in the tournament",
-	"register_tournament_participation": "Register to this tournament",
-	"registrations_open_info": "Registrations will be open one hour before the start of the tournament",
-	"starts_at": "Starts at",
 	"no_elo": "No Elo",
 	"enable_elo": "Enable Elo",
 	"disable_elo": "Disable Elo",
@@ -4489,7 +4479,17 @@
 		"ranked_mode_locked": "Ranked mode is locked. You need to reach level {{requiredLevel}} to unlock it."
 	},
 	"tournament": {
-		"tournament_mode_locked": "You need to reach level {{requiredLevel}} to participate in tournaments."
+		"tournament_mode_locked": "You need to reach level {{requiredLevel}} to participate in tournaments.",
+		"participate": "Participate",
+		"participating": "Participating",
+		"participants": "Participants",
+		"brackets": "Brackets",
+		"ranking": "Ranking",
+		"players_remaining": "Players remaining",
+		"cancel_tournament_participation": "Cancel your participation in the tournament",
+		"register_tournament_participation": "Register to this tournament",
+		"registrations_open_info": "Registrations will be open one hour before the start of the tournament",
+		"starts_at": "Starts at"
 	},
 	"npc_dialog": {
 		"welcome": "Welcome !",
