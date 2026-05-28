@@ -2912,7 +2912,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
-    const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const heal = [30, 60, 90][pokemon.stars - 1] ?? 90
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
@@ -10172,7 +10172,7 @@ export class GravityStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const lockDuration = Math.round(
-      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
     board.forEach((x, y, unitOnCell) => {
       if (unitOnCell && unitOnCell.team !== pokemon.team) {

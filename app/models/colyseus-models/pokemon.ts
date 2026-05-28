@@ -13023,7 +13023,7 @@ export class Necrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -13048,7 +13048,7 @@ export class UltraNecrozma extends Pokemon {
   speed = 50
   def = 10
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 3
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
@@ -13126,7 +13126,7 @@ export class CherrimSunlight extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   hp = 250
-  atk = 30
+  atk = 25
   speed = 52
   def = 6
   speDef = 9
@@ -14851,7 +14851,7 @@ export class Solgaleo extends Pokemon {
   speed = 56
   def = 12
   speDef = 8
-  maxPP = 110
+  maxPP = 100
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
