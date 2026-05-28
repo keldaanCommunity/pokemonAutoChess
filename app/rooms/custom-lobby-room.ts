@@ -8,6 +8,7 @@ import {
 } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
+import { writeHeapSnapshot } from "v8"
 import {
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
@@ -22,11 +23,19 @@ import Tournament from "../models/mongo-models/tournament"
 import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
+import { fetchLeaderboards } from "../services/leaderboard"
+import { fetchMetaReports } from "../services/meta"
 import { notificationsService } from "../services/notifications"
+import { refreshSpriteGapData } from "../services/sprite-gap-scanner"
+import {
+  refreshTwitchBlacklist,
+  refreshTwitchStreams
+} from "../services/twitch"
 import { type Emotion, Role, type Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { GameMode } from "../types/enum/Game"
 import type { Language } from "../types/enum/Language"
+import { MaintenanceOrder } from "../types/enum/MaintenanceOrder"
 import type { ITournament } from "../types/interfaces/Tournament"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
@@ -40,7 +49,6 @@ import {
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
-  HeapSnapshotCommand,
   JoinOrOpenRoomCommand,
   OnJoinCommand,
   OnLeaveCommand,
@@ -294,8 +302,11 @@ export default class CustomLobbyRoom extends Room {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
     })
 
-    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
+    this.onMessage(Transfer.MAINTENANCE, (client, order: MaintenanceOrder) => {
+      const u = this.users.get(client.auth.uid)
+      if (u && u.role === Role.ADMIN) {
+        this.presence.publish("maintenance", { userId: client.auth.uid, order })
+      }
     })
 
     this.onMessage(
@@ -381,6 +392,36 @@ export default class CustomLobbyRoom extends Room {
 
     this.presence.subscribe("notification-added", (notif) =>
       notificationsService.onNotificationAdded(notif)
+    )
+
+    this.presence.subscribe(
+      "maintenance",
+      ({ userId, order }: { userId: string; order: MaintenanceOrder }) => {
+        const client = this.clients.find((c) => c.auth && c.auth.uid === userId)
+        const notify = (msg: string) =>
+          notificationsService.addNotification(userId, "info", msg, client)
+
+        if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+          logger.info("writing heap snapshot")
+          writeHeapSnapshot()
+          notify("Heap snapshot written")
+        } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+          fetchLeaderboards()
+          notify("Leaderboards refreshed")
+        } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+          fetchMetaReports()
+          notify("Meta reports refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+          refreshSpriteGapData()
+          notify("Sprite gap data refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+          refreshTwitchStreams()
+          notify("Twitch streams refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+          refreshTwitchBlacklist()
+          notify("Twitch streams blacklist refreshed")
+        }
+      }
     )
 
     this.initCronJobs()

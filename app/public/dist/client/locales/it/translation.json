@@ -3886,7 +3886,9 @@
 	"favorites": "Favoriti",
 	"name": "Nome",
 	"give_boosters": "Dai booster",
-	"heap_snapshot": "Scrivo un heap snapshot",
+	"admin_panel": {
+		"heap_snapshot": "Scrivo un heap snapshot"
+	},
 	"banned": "Bannato",
 	"ban_user": "Escludi utente",
 	"unban_user": "Sblocca utente",

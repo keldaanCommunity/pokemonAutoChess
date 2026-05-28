@@ -3719,7 +3719,9 @@
 	"favorites": "Favoriten",
 	"name": "Name",
 	"give_boosters": "Gebe Booster",
-	"heap_snapshot": "Heap-Snapshot schreiben",
+	"admin_panel": {
+		"heap_snapshot": "Heap-Snapshot schreiben"
+	},
 	"banned": "Gebannt",
 	"ban_user": "Benutzer blockieren",
 	"unban_user": "Benutzer entsperren",

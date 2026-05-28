@@ -3784,7 +3784,9 @@
 	"favorites": "Favoritos",
 	"name": "Nombre",
 	"give_boosters": "Dar sobres",
-	"heap_snapshot": "Escribir instantánea de memoria",
+	"admin_panel": {
+		"heap_snapshot": "Escribir instantánea de memoria"
+	},
 	"banned": "Baneado",
 	"ban_user": "Banear usuario",
 	"unban_user": "Desbanear usuario",

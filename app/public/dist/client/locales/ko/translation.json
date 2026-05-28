@@ -3974,7 +3974,9 @@
 	"favorites": "자주 사용하는 조합",
 	"name": "이름",
 	"give_boosters": "부스터 제공",
-	"heap_snapshot": "힙 스냅샷 작성",
+	"admin_panel": {
+		"heap_snapshot": "힙 스냅샷 작성"
+	},
 	"banned": "입장금지됨",
 	"ban_user": "입장금지",
 	"unban_user": "입장금지 해제",

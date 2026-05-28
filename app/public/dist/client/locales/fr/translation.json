@@ -4004,7 +4004,9 @@
 	"favorites": "Favoris",
 	"name": "Nom",
 	"give_boosters": "Donner des boosters",
-	"heap_snapshot": "Write heap snapshot",
+	"admin_panel": {
+		"title": "Administration"
+	},
 	"banned": "Banni",
 	"ban_user": "Bannir le joueur",
 	"unban_user": "Débannir le joueur",
