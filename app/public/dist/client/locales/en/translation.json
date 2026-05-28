@@ -3847,10 +3847,12 @@
 	"best_regions": "Best regions",
 	"back_to_lobby": "Back to Lobby",
 	"boosters": "Boosters",
-	"first_place": "First Place",
-	"second_place": "Second Place",
-	"third_place": "Third Place",
-	"th_place": "th Place",
+	"rank_labels": {
+		"first_place": "First Place",
+		"second_place": "Second Place",
+		"third_place": "Third Place",
+		"th_place": "th Place"
+	},
 	"rank": "Rank",
 	"player": "Player",
 	"stats": "Stats",

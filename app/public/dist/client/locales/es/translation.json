@@ -3549,10 +3549,12 @@
 	"meta_report_info": "Generado el {{report_date}} desde el {{time_limit}} - Datos de {{count}} partidas",
 	"back_to_lobby": "Volver al vestíbulo",
 	"boosters": "Sobres Pokémon",
-	"first_place": "Primer lugar",
-	"second_place": "Segundo lugar",
-	"third_place": "Tercer lugar",
-	"th_place": "º lugar",
+	"rank_labels": {
+		"first_place": "Primer lugar",
+		"second_place": "Segundo lugar",
+		"third_place": "Tercer lugar",
+		"th_place": "º lugar"
+	},
 	"rank": "Rango",
 	"player": "Jugador",
 	"stats": "Estadísticas",

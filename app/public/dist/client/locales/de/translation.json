@@ -3493,10 +3493,12 @@
 	"meta_report_info": "Am {{report_date}} von {{time_limit}} generiert. Daten von {{count}} Partien",
 	"back_to_lobby": "Zurück zur Lobby",
 	"boosters": "Booster",
-	"first_place": "Erster Platz",
-	"second_place": "Zweiter Platz",
-	"third_place": "Dritter Platz",
-	"th_place": "Platz",
+	"rank_labels": {
+		"first_place": "Erster Platz",
+		"second_place": "Zweiter Platz",
+		"third_place": "Dritter Platz",
+		"th_place": "Platz"
+	},
 	"rank": "Rang",
 	"player": "Spieler",
 	"stats": "Stats",

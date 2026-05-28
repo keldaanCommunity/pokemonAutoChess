@@ -1718,10 +1718,12 @@
 	"meta": "Meta",	
 	"back_to_lobby": "Terug naar Lobby",
 	"boosters": "Boosters",
-	"first_place": "Eerste plaats",
-	"second_place": "Tweede plaats",
-	"third_place": "Derde plaats",
-	"th_place": "e Plaats",
+	"rank_labels": {
+		"first_place": "Eerste plaats",
+		"second_place": "Tweede plaats",
+		"third_place": "Derde plaats",
+		"th_place": "e Plaats"
+	},
 	"rank": "Rang",
 	"player": "speler",
 	"team": "Team",

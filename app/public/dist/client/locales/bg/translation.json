@@ -1651,10 +1651,12 @@
 	"meta": "Мета",	
 	"back_to_lobby": "Обратно към лобито",
 	"boosters": "Бустери",
-	"first_place": "Първо място",
-	"second_place": "Второ място",
-	"third_place": "Трето място",
-	"th_place": "място",
+	"rank_labels": {
+		"first_place": "Първо място",
+		"second_place": "Второ място",
+		"third_place": "Трето място",
+		"th_place": "място"
+	},
 	"rank": "Ранг",
 	"player": "играч",
 	"team": "Екип",

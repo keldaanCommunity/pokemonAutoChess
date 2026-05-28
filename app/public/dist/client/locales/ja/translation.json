@@ -2685,10 +2685,12 @@
 	"meta": "メタ",	
 	"back_to_lobby": "ロビーに戻る",
 	"boosters": "ブースター",
-	"first_place": "第一位",
-	"second_place": "第二位",
-	"third_place": "第三位",
-	"th_place": "位",
+	"rank_labels": {
+		"first_place": "第一位",
+		"second_place": "第二位",
+		"third_place": "第三位",
+		"th_place": "位"
+	},
 	"rank": "ランク",
 	"player": "プレーヤー",
 	"team": "チーム",

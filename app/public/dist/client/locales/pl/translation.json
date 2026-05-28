@@ -806,9 +806,11 @@
 		"GROWL": "FLINCH sąsiadujących wrogów na 3 sekundy i zmniejsza ich ATK o [3,5,7,SP]",
 		"FAIRY_WIND": "Daj [5,10,20,SP=0.5] PP wszystkim sojuszniczym Pokémonom, z wyjątkiem użytkownika"
 	},
-	"first_place": "Pierwsze miejsce",
-	"second_place": "Drugie miejsce",
-	"third_place": "Trzecie miejsce",
+	"rank_labels": {
+		"first_place": "Pierwsze miejsce",
+		"second_place": "Drugie miejsce",
+		"third_place": "Trzecie miejsce"
+	},
 	"rank": "Ranga",
 	"player": "Gracz",
 	"team": "Zespół",

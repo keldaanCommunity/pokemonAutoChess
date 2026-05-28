@@ -3769,10 +3769,12 @@
 	"best_regions": "Meilleures régions",	
 	"back_to_lobby": "Retour au lobby",
 	"boosters": "Boosters",
-	"first_place": "Première place",
-	"second_place": "Deuxième place",
-	"third_place": "Troisième place",
-	"th_place": "ème place",
+	"rank_labels": {
+		"first_place": "Première place",
+		"second_place": "Deuxième place",
+		"third_place": "Troisième place",
+		"th_place": "ème place"
+	},
 	"rank": "Rang",
 	"player": "joueur",
 	"stats": "Stats",

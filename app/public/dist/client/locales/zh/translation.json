@@ -3840,10 +3840,12 @@
 	"best_regions": "最优地区",	
 	"back_to_lobby": "返回大厅",
 	"boosters": "补充包",
-	"first_place": "冠军",
-	"second_place": "亚军",
-	"third_place": "季军",
-	"th_place": "th 的名次",
+	"rank_labels": {
+		"first_place": "冠军",
+		"second_place": "亚军",
+		"third_place": "季军",
+		"th_place": "th 的名次"
+	},
 	"rank": "名次",
 	"player": "玩家",
 	"stats": "数据",

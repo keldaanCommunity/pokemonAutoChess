@@ -3763,10 +3763,12 @@
 	"meta": "메타",
 	"back_to_lobby": "대기실로 돌아가기",
 	"boosters": "부스터팩",
-	"first_place": "1등",
-	"second_place": "2등",
-	"third_place": "3등",
-	"th_place": "등",
+	"rank_labels": {
+		"first_place": "1등",
+		"second_place": "2등",
+		"third_place": "3등",
+		"th_place": "등"
+	},
 	"rank": "랭킹",
 	"player": "플레이어",
 	"stats": "스탯",

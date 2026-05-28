@@ -1029,10 +1029,12 @@
 	"meta": "META",	
 	"back_to_lobby": "กลับล็อบบี้",
 	"boosters": "เปิดแพ็ค",
-	"first_place": "ชนะเลิศ",
-	"second_place": "รองชนะเลิศ",
-	"third_place": "อันดับ 3",
-	"th_place": " อันดับ",
+	"rank_labels": {
+		"first_place": "ชนะเลิศ",
+		"second_place": "รองชนะเลิศ",
+		"third_place": "อันดับ 3",
+		"th_place": " อันดับ"
+	},
 	"rank": "ลำดับ",
 	"player": "ผู้เล่น",
 	"team": "ทีม",
