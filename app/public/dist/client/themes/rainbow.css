@@ -1,0 +1,110 @@
+:root {
+  --color-bg-primary: #84477d;
+  --color-bg-secondary: #a8566c;
+  --color-bg-tertiary: #78589f;
+  --color-bg-accent: #d1a700;
+
+  --color-fg-green: #c1ff69;
+
+  --rainbow-luminosity: 50%;
+  --rainbow-saturation: 50%;
+  --color-rainbow1: hsl(
+    0,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow2: hsl(
+    30,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow3: hsl(
+    60,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow4: hsl(
+    120,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow5: hsl(
+    180,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow6: hsl(
+    240,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow7: hsl(
+    270,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+  --color-rainbow8: hsl(
+    300,
+    var(--rainbow-saturation),
+    var(--rainbow-luminosity)
+  );
+}
+
+body {
+  background-image: url("/assets/theme/rainbow/custombg.jpg");
+  background-size: cover;
+}
+
+.custom-bg {
+  background-color: rgba(0, 0, 0, 0.15);
+  background-image: none;
+}
+
+.lobby h2 {
+  text-shadow: 0px 3px 6px black;
+}
+
+.boosters-modal {
+  background: color-mix(in hsl, var(--color-bg-primary) 80%, transparent 20%);
+}
+
+[data-react-window-index],
+.ps-sidebar-root .menu-item,
+.react-tabs__tab {
+  &:nth-child(8n + 1) {
+    --rainbow-color: var(--color-rainbow1);
+  }
+  &:nth-child(8n + 2) {
+    --rainbow-color: var(--color-rainbow2);
+  }
+  &:nth-child(8n + 3) {
+    --rainbow-color: var(--color-rainbow3);
+  }
+  &:nth-child(8n + 4) {
+    --rainbow-color: var(--color-rainbow4);
+  }
+  &:nth-child(8n + 5) {
+    --rainbow-color: var(--color-rainbow5);
+  }
+  &:nth-child(8n + 6) {
+    --rainbow-color: var(--color-rainbow6);
+  }
+  &:nth-child(8n + 7) {
+    --rainbow-color: var(--color-rainbow7);
+  }
+  &:nth-child(8n + 0) {
+    --rainbow-color: var(--color-rainbow8);
+  }
+}
+
+.user-menu .my-box {
+  background: color-mix(in hsl, var(--rainbow-color) 40%, transparent 60%);
+}
+
+.menu-item a.ps-menu-button:hover {
+  background: var(--rainbow-color);
+}
+
+.react-tabs__tab--selected {
+  background: var(--rainbow-color);
+}

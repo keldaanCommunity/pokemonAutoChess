@@ -538,7 +538,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "booster"}
-        className="custom-bg"
+        className="custom-bg boosters-modal"
       >
         <Booster />
       </Modal>

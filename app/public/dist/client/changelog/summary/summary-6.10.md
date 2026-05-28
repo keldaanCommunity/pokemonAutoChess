@@ -21,7 +21,7 @@ Choose fairy wands with various magic effects for your Fairy Pokémon, and train
 
 ## Wear your colors
 
-Use Smeargle's palette to change the theme and colors of the game. 9 themes are available at launch, with more to come in the future!
+Use Smeargle's palette to change the theme and colors of the game. 10 themes are available at launch, with more to come in the future!
 
 ## Join the party
 
