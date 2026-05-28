@@ -2135,7 +2135,7 @@
 		"FIRE_LASH": "타겟에게 [30,60,120,SP] SPECIAL을 입히고 4초 동안 ARMOR_BREAK을 부여한다.",
 		"FAIRY_LOCK": "대상 및 인접한 적에게 총합 [90,SP] SPECIAL을 인원수만큼 나눠서 가한다. 대상은 5초 동안 LOCKED을 부여받는다.",
 		"DRAIN_PUNCH": "다음 공격은 [100,SP]% 만큼의 추가 SPECIAL을 입히고, 부여한 피해의 200%만큼 HP를 회복한다.",
-		"GRAVITY": "적팀을 [3,SP]초간 LOCKED상태로 만든다.",
+		"GRAVITY": "적팀을 [2,SP]초간 LOCKED상태로 만든다.",
 		"FAKE_OUT": "대상에게 [40,80,150,SP] SPECIAL을 입히고, 자신은 AP를 30 잃는다. 시전자의 AP가 음수가 아니라면 대상은 3초 동안 FLINCH 에 빠진다.",
 		"FELL_STINGER": "대상에게 [400,SP]% ATK 의 SPECIAL 를 입힌다. 타겟을 쓰러뜨리면 기본 ATK의 30%를 얻습니다.",
 		"GULP_MISSILE": "PP가 가득찬 $t(pkm.ARROKUDA)를 대상에게 발사하며, [50,SP] SPECIAL 를 가한다. $t(pkm.PIKACHU)가 대신 발사될 확률 [20,LK]%이 존재한다.",

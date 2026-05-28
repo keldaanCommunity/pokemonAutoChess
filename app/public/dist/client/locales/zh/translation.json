@@ -2137,7 +2137,7 @@
 		"FIRE_LASH": "使目标陷入ARMOR_BREAK 4秒，并对其造成[30,60,120,SP]点SPECIAL。",
 		"FAIRY_LOCK": "使目标陷入LOCKED 5秒，其和ADJACENT敌方宝可梦分摊[90,SP]点SPECIAL。",
 		"DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于[200,SP]%的ATK，使用者自身恢复造成伤害的200%。",
-		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [3,SP]秒。",
+		"GRAVITY": "使所有敌方宝可梦陷入LOCKED [2,SP]秒。",
 		"FAKE_OUT": "对目标造成[40,80,150,SP]点SPECIAL，随后使用者降低30点AP。除非使用者的AP为负，否则使目标陷入FLINCH 3秒。",
 		"FELL_STINGER": "对目标造成SPECIAL，数值相当于[400,SP]%的ATK。若目标因此倒下，提升30%的基础ATK。",
 		"GULP_MISSILE": "朝目标发射一只PP已满的$t(pkm.ARROKUDA)，造成[55,SP]点SPECIAL。有[20,LK]%的概率改为发射$t(pkm.PIKACHU)。",

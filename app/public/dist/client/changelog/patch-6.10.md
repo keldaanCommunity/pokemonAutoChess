@@ -77,7 +77,6 @@
 - Buff Schooling (Wishiwashi): 10% → 15% max HP special damage
 - Shuckle: PP 90 → 50 ; Shuckle no longer gains PP during Bide effect
 - Buff Spiritomb: Attack 15 → 18, Def 8 → 12, SpeDef 8 → 12
-- Buff Gravity (Stonjourner): locked duration 2 → 3 seconds
 - Buff Mawile: Speed 41 → 47
 - Buff Purify (Pyukumuku): now also cures negative status conditions of adjacent allies, in addition to the user
 

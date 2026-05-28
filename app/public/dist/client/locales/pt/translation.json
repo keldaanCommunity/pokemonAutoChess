@@ -2120,7 +2120,7 @@
 		"FIRE_LASH": "Aplique ARMOR_BREAK por 4 segundos e cause [30,60,120,SP] SPECIAL ao alvo.",
 		"FAIRY_LOCK": "Espalhe [90,SP] SPECIAL uniformemente entre o alvo e os Pokémon inimigos ADJACENT. O alvo fica LOCKED por 5 segundos.",
 		"DRAIN_PUNCH": "Cause [200,SP]% de ATK como SPECIAL e cure por 200% do dano causado.",
-		"GRAVITY": "Todos os Pokémon inimigos ficam LOCKED por [3,SP] segundos.",
+		"GRAVITY": "Todos os Pokémon inimigos ficam LOCKED por [2,SP] segundos.",
 		"FAKE_OUT": "Cause [40,80,150,SP] SPECIAL ao alvo e reduza o AP do usuário em 30. Inflija FLINCH ao alvo por 3 segundos, a menos que o AP do usuário fosse negativo.",
 		"FELL_STINGER": "Cause [400,SP]% de ATK como SPECIAL ao alvo. Se derrotar o alvo, ganhe 30% de ATK base.",
 		"GULP_MISSILE": "Dispare um $t(pkm.ARROKUDA) com PP cheio no alvo, causando [50,SP] SPECIAL ao alvo. Há uma chance de [20,LK]% de que um $t(pkm.PIKACHU) seja disparado em vez disso.",

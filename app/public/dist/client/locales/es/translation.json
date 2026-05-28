@@ -2092,7 +2092,7 @@
 		"FIRE_LASH": "Hace [30,60,120,SP] SPECIAL y aplica ARMOR_BREAK por 4 segundos",
 		"FAIRY_LOCK": "Esparce [90,SP] SPECIAL equitativamente entre el objetivo y los enemigos adyacentes. El objetivo es LOCKED por 5 segundos",
 		"DRAIN_PUNCH": "El próximo ataque inflige [100,SP]% de SPECIAL adicional y restaura 200% HP del daño infligido.",
-		"GRAVITY": "El equipo enemigo es LOCKED por [3,SP] segundos",
+		"GRAVITY": "El equipo enemigo es LOCKED por [2,SP] segundos",
 		"FAKE_OUT": "Inflige [40,80,150,SP] SPECIAL al objetivo, después el usuario pierde el 30% de AP. El objetivo es FLINCH por 3 segundos a menos que el usuario tenga AP negativo",
 		"FELL_STINGER": "Realiza [400,SP]% de ATK como SPECIAL al objetivo. Si lo mata, obtiene 30% de su ATK base.",
 		"GULP_MISSILE": "Dispara un $t(pkm.ARROKUDA) con PP llenos al objetivo, realizando [50,SP] SPECIAL. Hay una [20,LK]% posibilidad de que se dispare a $t(pkm.PIKACHU) en su lugar.",
