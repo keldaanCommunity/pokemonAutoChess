@@ -1661,5 +1661,20 @@ export const PassiveEffects: Partial<
     new OnEvolutionEffect(({ player }) => {
       player.updatePillars()
     })
+  ],
+
+  [Passive.VESPIQUEN]: [
+    new OnChangePositionEffect(({ newY, pokemon }) => {
+      if (newY === 1) {
+        pokemon.range = 3
+        pokemon.skill = Ability.ATTACK_ORDER
+      } else if (newY === 2) {
+        pokemon.range = 2
+        pokemon.skill = Ability.HEAL_ORDER
+      } else if (newY === 3) {
+        pokemon.range = 1
+        pokemon.skill = Ability.DEFEND_ORDER
+      }
+    })
   ]
 }

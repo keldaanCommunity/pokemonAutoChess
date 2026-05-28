@@ -95,6 +95,7 @@
 - Buneary line is now Rare instead of Uncommon. Adjusted stats.
 - Nerf Psychic Surge (Tapu Lele): 40 → 30 SHIELD given to allies
 - Buff Blipbug line: PP 100 → 85
+- Vespiquen is now Unique with a new passive that let you choose between 3 different abilities. Comfey is now Special category. Adjusted stats for both Pokémon.
 - Nerf Cherrim Sunlight form: Attack 30 → 25 ; Natural Gift heal 120 → 90 HP
 - Buff Necrozma line: PP 110 → 100
 - Buff Solgaleo: PP 110 → 100
