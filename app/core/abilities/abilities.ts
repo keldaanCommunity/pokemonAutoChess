@@ -5271,6 +5271,7 @@ export class GrowthStrategy extends AbilityStrategy {
 }
 
 export class AttackOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -5315,6 +5316,7 @@ export class AttackOrderStrategy extends AbilityStrategy {
 }
 
 export class HealOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -5368,6 +5370,7 @@ export class HealOrderStrategy extends AbilityStrategy {
 }
 
 export class DefendOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
