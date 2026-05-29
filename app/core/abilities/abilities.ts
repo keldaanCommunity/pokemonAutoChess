@@ -14158,6 +14158,7 @@ export class TerrainPulseStrategy extends AbilityStrategy {
     // 1. collect adjacent fields
     board.forEach((x, y, entity) => {
       if (!entity) return
+      if (entity.team !== pokemon.team) return
       const activeField = getFieldEffect(entity)
       if (activeField) {
         pokemonsWithField.set(entity, activeField)
