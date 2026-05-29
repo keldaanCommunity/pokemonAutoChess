@@ -78,7 +78,6 @@ export class MonsterKillEffect extends OnKillEffect {
     }
   }
 }
-
 export class GroundHoleEffect extends OnSpawnEffect {
   constructor(effect: SynergyEffect<Synergy.GROUND>) {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1

@@ -61,7 +61,7 @@ BLAST_WAND HP_SWAP_WAND SPIRIT_WAND LONG_WAND CONFUSE_WAND PETRIFY_WAND SLOW_WAN
 - Deino line is no longer regional
 - Buneary line is now Rare instead of Uncommon. Adjusted stats.
 - Vespiquen is now Unique with a new passive that let you choose between 3 different abilities. Combee is now Special category. Adjusted stats for both Pokémon.
-- Dunsparce and Dudunsparce are now NORMAL/GROUND/BUG instead of NORMAL/GROUND/FLYING
+- Dunsparce and Dudunsparce are now NORMAL/GROUND/BUG instead of NORMAL/GROUND/FLYING. New evolution condition for Dunsparce: dig 20 times the ground, either with ability or with GROUND synergy effect
 
 ## Buffs
 
