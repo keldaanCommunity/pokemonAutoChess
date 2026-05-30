@@ -47,6 +47,7 @@ import {
   OnDeathEffect,
   type OnDeathEffectArgs,
   OnEvolutionEffect,
+  OnGroundDiggingEffect,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -1680,6 +1681,30 @@ export const PassiveEffects: Partial<
         pokemon.range = 1
         pokemon.skill = Ability.DEFEND_ORDER
       }
+    })
+  ],
+
+  [Passive.DUNSPARCE]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
+        (entity): entity is PokemonEntity =>
+          entity != null &&
+          entity.team === pokemon.team &&
+          PkmFamily[entity.name] === PkmFamily[pokemon.name]
+      )
+      familyMembers.forEach((entity) => {
+        if (!pokemon.player) return
+        entity.addStack()
+      })
+    }),
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.stacks += 1
+    })
+  ],
+
+  [Passive.ORTHWORM]: [
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.addMaxHP(5)
     })
   ]
 }

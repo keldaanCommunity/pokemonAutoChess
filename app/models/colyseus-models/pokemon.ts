@@ -18858,15 +18858,8 @@ export class Dunsparce extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.NORMAL, Synergy.GROUND, Synergy.BUG])
   rarity = Rarity.UNIQUE
   evolution = Pkm.DUDUNSPARCE
-  evolutionRule = {
-    type: EvolutionRuleType.STATE,
-    condition: (pokemon: IPokemon, player: IPlayer) => {
-      const nbHoles = player.groundHoles.filter((hole) => hole === 5).length
-      pokemon.stacks = nbHoles
-      return nbHoles >= 10
-    }
-  } satisfies StateEvolutionRule
-  stacksRequired: number = 10
+  evolutionRule = { type: EvolutionRuleType.STACK } satisfies StackEvolutionRule
+  stacksRequired: number = 20
   stars = 3
   hp = 220
   atk = 15

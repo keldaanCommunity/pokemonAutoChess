@@ -3210,7 +3210,6 @@
 		"MELTAN": "Se usato su $t(pkm.MELMETAL), si fonde con esso e gli dà 50 HP massimi permanenti. Se Meltan aveva degli strumenti, vengono messi in panchina.",
 		"FALINKS": "La Truppa di Falinks può apparire nel negozio con un [4,LK]% per un massimo di 6 soldati, ciascuno dal costo di 3 GOLD. All'inizio del combattimento, tutte le truppe nella tua panchina si uniscono all'Ottone in formazione, dandogli 30 di SHIELD, 1 ATK e 1 DEF",
 		"FLABEBE_COLOR": "Il colore indica il primo germoglio FLORA che sboccerà",
-		"DUNSPARCE": "Dunsparce si evolve dopo aver scavato 10 buche fino a fondo",
 		"PACHIRISU": "Ha un [30,LK]% di chance di trovare una SITRUS_BERRY sotterrata dopo ogni combattimento",
 		"QWILFISH": "Quando colpito da un attacco da un nemico in una casella ADJACENT, infliggi 5 TRUE all'aggressore, con un [30,LK]% di chance di infliggere POISONNED per 3 secondi",
 		"HISUIAN_QWILFISH": "Dopo aver utilizzato la sua abilità 20 volte, Qwilfish di Hisui si trasforma in Overqwil.",

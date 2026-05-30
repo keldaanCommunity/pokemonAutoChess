@@ -28,6 +28,7 @@ import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import {
   OnChangePositionEffect,
+  OnGroundDiggingEffect,
   OnItemDroppedEffect,
   OnSpotlightChangeEffect,
   OnStageStartEffect
@@ -1410,7 +1411,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (
           pokemon.types.has(Synergy.GROUND) &&
           !isOnBench(pokemon) &&
-          pokemon.items.has(Item.CHEF_HAT) === false
+          !(
+            pokemon.items.has(Item.CHEF_HAT) &&
+            player.synergies.hasSynergyActive(Synergy.GOURMET)
+          )
         ) {
           const index =
             (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
@@ -1439,13 +1443,19 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             })
             this.room.clock.setTimeout(() => {
               player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
-              if (pokemon.passive === Passive.ORTHWORM) {
-                pokemon.addMaxHP(5)
-              }
+              PassiveEffects[pokemon.passive]?.forEach((effect) => {
+                if (effect instanceof OnGroundDiggingEffect) {
+                  effect.apply({ pokemon, player })
+                }
+              })              
               player.board.forEach((pokemon) => {
                 // Condition based evolutions on ground hole dig
                 if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
                   EvolutionManager.tryEvolve(pokemon, player, this.state)
+                } else if (
+                  pokemon.evolutionRule.type === EvolutionRuleType.STACK
+                ) {
+                  EvolutionManager.tryEvolve(pokemon, player, pokemon.stacks)
                 }
               })
             }, 1000)

@@ -445,3 +445,15 @@ export class OnShieldDepletedEffect extends Effect {
     super(effect, origin)
   }
 }
+
+// applied after a Ground Pokémon digs the ground between rounds
+
+export class OnGroundDiggingEffect extends Effect {
+  override apply(args: { pokemon: Pokemon; player: Player }) {}
+  constructor(
+    effect?: (args: { pokemon: Pokemon; player: Player }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
