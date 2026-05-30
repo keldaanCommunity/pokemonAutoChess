@@ -23,6 +23,7 @@ German Community for Pokemon Auto Chess
 - url: https://www.john-auto-chess.com/
 - logo: /assets/community-servers/john-auto-chess.png
 - creator: tegberen
+- discord: https://discord.gg/rujUfyB6aq
 - location: Germany
 
 It runs the official version as base with some light changes on the meta. Near the end of each patch, it switches to pre-release mode for playtesting.
