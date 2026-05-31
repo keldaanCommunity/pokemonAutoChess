@@ -1301,6 +1301,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
+      } else {
+        player.items.push(item)
       }
     }
 
