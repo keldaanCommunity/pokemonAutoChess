@@ -404,7 +404,7 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies.get(Synergy.FAIRY) !==
       updatedSynergies.get(Synergy.FAIRY)
     ) {
-      this.updateFairyWands(previousSynergies, updatedSynergies)
+      this.updateFairyWands()
     }
 
     this.effects.update(this.synergies, this.board)
@@ -635,20 +635,15 @@ export default class Player extends Schema implements IPlayer {
     } while (newNbHats !== currentNbHats)
   }
 
-  updateFairyWands(
-    previousSynergies: Map<Synergy, number>,
-    updatedSynergies: Map<Synergy, number>
-  ) {
-    const previousFairyLevel = getSynergyStep(previousSynergies, Synergy.FAIRY)
-    const newFairyLevel = getSynergyStep(updatedSynergies, Synergy.FAIRY)
+  updateFairyWands() {
+    const newFairyLevel = getSynergyStep(this.synergies, Synergy.FAIRY)
     const nbWandsByLevel = [0, 1, 2, 3, 4]
-    const previousNbWands = nbWandsByLevel[previousFairyLevel] ?? 0
     const newNbWands = nbWandsByLevel[newFairyLevel] ?? 0
     const currentNbWands = this.items.filter((item) => isIn(Wands, item)).length
 
     if (currentNbWands < newNbWands) {
       // some wands are gained
-      const gainedWands = this.fairyWands.slice(previousNbWands, newNbWands)
+      const gainedWands = this.fairyWands.slice(currentNbWands, newNbWands)
       if (
         gainedWands.length < newNbWands - currentNbWands &&
         newFairyLevel - 1 in FAIRY_WANDS_BY_SYNERGY_LEVEL &&
@@ -666,9 +661,9 @@ export default class Player extends Schema implements IPlayer {
         )
       }
       this.items.push(...gainedWands)
-    } else if (newNbWands < previousNbWands) {
+    } else if (newNbWands < currentNbWands) {
       // some wands are lost, we need to remove them from the inventory
-      const lostWands = this.fairyWands.slice(newNbWands, previousNbWands)
+      const lostWands = this.fairyWands.slice(newNbWands, currentNbWands)
       lostWands.forEach((wand) => {
         removeInArray(this.items, wand)
       })
