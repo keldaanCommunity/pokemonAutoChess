@@ -478,6 +478,10 @@ export function applyWandEffects(
 ): { takenDamage: number; death: boolean } {
   const board = pokemon.simulation.board
   const wands = pokemon.player?.items.filter((item) => isIn(Wands, item)) ?? []
+  if (wands.length === 0) {
+    return { takenDamage: 0, death: false }
+  }
+
   let specialDamageFactor = 0
 
   for (const wand of wands) {
