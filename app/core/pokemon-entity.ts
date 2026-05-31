@@ -48,7 +48,7 @@ import { count, isIn } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, min, roundToNDigits } from "../utils/number"
+import { clamp, max, min, roundToNDigits } from "../utils/number"
 import { chance, pickNRandomIn } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import AttackingState from "./attacking-state"
@@ -595,7 +595,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = applyBigEaterBeltStatBuff(this, value, caster)
     value = applyTwistBandBuff(this, value, caster)
 
-    this.dodge = clamp(this.dodge + value, 0, 0.9)
+    this.dodge = max(0.9)(this.dodge + value)
   }
 
   addAbilityPower(
