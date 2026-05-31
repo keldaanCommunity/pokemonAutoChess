@@ -51,6 +51,10 @@ dialog {
   text-shadow: none;
 }
 
+.boosters-modal {
+  background: color-mix(in hsl, var(--color-bg-primary) 90%, transparent 10%);
+}
+
 #videobg {
   position: fixed;
   top: 0;
