@@ -48,7 +48,6 @@ export function carryOverPermanentStats(
 ) {
   // carry over the permanent stat buffs
   const permanentBuffStats = [
-    "hp",
     "maxHP",
     "atk",
     "def",
@@ -64,7 +63,6 @@ export function carryOverPermanentStats(
       pokemonsBeforeEvolution.map((p) => p[stat] - baseData[stat])
     )
     const statMapping: Record<typeof stat, Stat> = {
-      hp: Stat.HP,
       maxHP: Stat.HP,
       atk: Stat.ATK,
       def: Stat.DEF,
