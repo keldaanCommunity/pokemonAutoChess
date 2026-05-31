@@ -90,8 +90,6 @@ export const EvolutionManager = {
       })
     }
 
-    console.log("After evolve")
-
     player.board.forEach((pokemon) => {
       if (
         (pokemon.passive === Passive.COSMOG ||
