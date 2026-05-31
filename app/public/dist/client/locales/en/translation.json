@@ -1943,7 +1943,7 @@
 		"MIMIC": "Copy the target's ability.",
 		"HEX": "Deal [20,40,80,SP] SPECIAL to the target. The damage is doubled if the target suffers from a negative status condition.",
 		"GROWTH": "Increase max HP by [10,20,40,SP] and ATK by [3,5,7,SP]. The buff is increased by 30% if the weather is ZENITH.",
-		"HEAL_ORDER": "Spawn a Combee nearby then user and every Combee ally heals adjacent allied Pokémon for [10,20,30] HP and clear their negative status conditions.",
+		"HEAL_ORDER": "Spawn a Combee nearby then user and every Combee ally heals adjacent allied Pokémon for [10,20,30,SP] HP and clear their negative status conditions.",
 		"DEFEND_ORDER": "Spawn a Combee nearby then gives [10,20,30,SP] SHIELD to user and all Combee allies. User gets [10,20,30,SP] additional SHIELD per Combee ally on the board.",
 		"ATTACK_ORDER": "Spawn a Combee nearby then all Combee allies get RAGE for 3 seconds. The next attack of the user deals [20,40,60,SP] additional SPECIAL + [10,20,30,SP] per Combee ally on the board.",
 		"BUG_BITE": " Deal [20,40,80] SPECIAL to the target and steal and eat one of their berries if it holds one.",
