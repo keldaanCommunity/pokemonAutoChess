@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import type Phaser from "phaser"
 import type { GameObjects } from "phaser"
+import Phaser from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
@@ -12,7 +12,6 @@ import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
-import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
 
@@ -110,12 +109,21 @@ export default class LoadingManager {
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
 
-    scene.load.scenePlugin(
-      "animatedTiles",
-      AnimatedTilesPlugin,
-      "animatedTiles",
-      "animatedTiles"
-    )
+    //TEMP: waiting for https://github.com/phaserjs/phaser/pull/7311
+    const __getAnimatedTileId =
+      Phaser.Tilemaps.Tileset.prototype.getAnimatedTileId
+    Phaser.Tilemaps.Tileset.prototype.getAnimatedTileId = function (
+      tileId: number,
+      time: number
+    ) {
+      return __getAnimatedTileId.call(
+        this,
+        tileId,
+        (this as Phaser.Tilemaps.Tileset & { animating: boolean }).animating
+          ? time
+          : 0
+      )
+    }
   }
 }
 
