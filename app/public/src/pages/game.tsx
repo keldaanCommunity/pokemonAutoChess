@@ -984,7 +984,7 @@ export default function Game() {
           <GameChoice />
           <GameDpsMeter />
           <GameToasts />
-          {currentGameEvent === GameEvent.EXPEDITIONS && <GameExpeditions />}
+          {currentGameEvent === GameEvent.EXPEDITIONS && !spectate && <GameExpeditions />}
         </>
       ) : (
         <GameLoadingScreen connectError={connectError} />
