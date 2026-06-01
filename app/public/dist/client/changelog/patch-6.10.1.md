@@ -3,6 +3,7 @@
 - Fairy 8 Moon Force: 20 → 5 LUCK
 - Loaded Dice: LUCK 30 → 20
 - Lucky Ribbon: LUCK 30 → 20
+- SURROUND_WAND: +10 → +5% SPECIAL per adjacent enemy
 
 # Bugfixes
 

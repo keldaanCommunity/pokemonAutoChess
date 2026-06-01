@@ -557,7 +557,7 @@ export function applyWandEffects(
         const adjacentEnemies = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
           .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-        specialDamageFactor += 0.1 * adjacentEnemies.length
+        specialDamageFactor += 0.05 * adjacentEnemies.length
         break
       }
       case Item.TWO_EDGED_WAND: {
