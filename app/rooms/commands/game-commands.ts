@@ -2211,13 +2211,13 @@ export function onPokemonChangePosition({
         })
       }
     })
+  }
 
-    if (pokemon.name === Pkm.MANTYKE || pokemon.name === Pkm.REMORAID) {
-      // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
-      for (const pokemon of player.board.values()) {
-        if (pokemon.name === Pkm.MANTYKE) {
-          EvolutionManager.tryEvolve(pokemon, player, player.board)
-        }
+  if (pokemon.name === Pkm.MANTYKE || pokemon.name === Pkm.REMORAID) {
+    // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
+    for (const pokemon of player.board.values()) {
+      if (pokemon.name === Pkm.MANTYKE) {
+        EvolutionManager.tryEvolve(pokemon, player, player.board)
       }
     }
   }
