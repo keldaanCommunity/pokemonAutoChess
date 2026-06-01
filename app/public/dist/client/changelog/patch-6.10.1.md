@@ -3,7 +3,8 @@
 - Fairy 8 Moon Force: 20 → 5 LUCK
 - Loaded Dice: LUCK 30 → 20
 - Lucky Ribbon: LUCK 30 → 20
-- SURROUND_WAND: +10 → +5% SPECIAL per adjacent enemy
+- Nerf SURROUND_WAND: +10 → +5% SPECIAL per adjacent enemy
+- Nerf WHIRLWIND_WAND: max fly away distance 3 → 2 cells
 
 # Bugfixes
 

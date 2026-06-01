@@ -691,7 +691,7 @@ export function applyWandEffects(
                 cell.value.positionX,
                 cell.value.positionY,
                 cell.value.team,
-                3
+                2
               )
               if (freeCellInTheBack) {
                 cell.value.moveTo(
