@@ -809,7 +809,6 @@ export const cloneBugs = ({
   })
   bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
-  let numberOfClones = 1
   let numberOfBugsToClone = 0
   if (effects.has(EffectEnum.COCOON)) {
     numberOfBugsToClone = 1
@@ -826,6 +825,7 @@ export const cloneBugs = ({
   numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
   for (let i = 0; i < numberOfBugsToClone; i++) {
+    let numberOfClones = 1
     const pokemonCloned = bugTeam[i]
     let clonePkm = pokemonCloned.name
 
