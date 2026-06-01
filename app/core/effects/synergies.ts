@@ -583,7 +583,9 @@ export function applyWandEffects(
       case Item.HP_SWAP_WAND: {
         if (chance(0.2, pokemon)) {
           target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
-          pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+          if (target.items.has(Item.TWIST_BAND) === false) {
+            pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+          }
         }
         break
       }

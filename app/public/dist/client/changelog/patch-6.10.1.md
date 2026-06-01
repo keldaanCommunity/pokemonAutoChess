@@ -8,5 +8,7 @@
 
 # Bugfixes
 
-- Fix a bug on HP_SWAP_WAND: max HP stolen were removed as actual HP as well after damage was already applied, effectively doubling the HP loss
-- Fix a bug on HP_SWAP_WAND: stolen max HP were based on wands damage **before** reduction (SPE_DEF, flat reduction...) instead of **after**
+Fixed 3 bugs on HP_SWAP_WAND (sorry I really messed up with that one):
+- Max HP stolen by HP_SWAP_WAND were removed as actual HP as well after damage was already applied, effectively doubling the HP loss
+- Max HP stolen by HP_SWAP_WAND were based on wands damage **before** reduction (SPE_DEF, flat reduction...) instead of **after**
+- HP_SWAP_WAND effect on an enemy wearing TWIST_BAND now correctly prevents the attacker to steal max HP
