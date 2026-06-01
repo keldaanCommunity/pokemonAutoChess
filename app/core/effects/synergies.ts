@@ -582,8 +582,8 @@ export function applyWandEffects(
     switch (wand) {
       case Item.HP_SWAP_WAND: {
         if (chance(0.2, pokemon)) {
-          target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
-          pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+          target.addMaxHP(-Math.floor(takenDamage), pokemon, 0, false)
+          pokemon.addMaxHP(Math.floor(takenDamage), pokemon, 0, false)
         }
         break
       }
