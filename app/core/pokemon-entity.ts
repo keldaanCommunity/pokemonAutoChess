@@ -575,7 +575,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
       // careful to not heal a KO pokemon
-      this.hp = clamp(this.hp + value, 1, this.maxHP)
+      if (value > 0) {
+        this.hp = clamp(this.hp + value, 1, this.maxHP)
+      } else {
+        // if maxHP is reduced under current HP, current HP is also reduced to avoid being above maxHP
+        this.hp = max(this.maxHP)(this.hp)
+      }
     }
 
     if (permanent && !this.isGhostOpponent) {
