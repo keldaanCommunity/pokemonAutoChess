@@ -64,3 +64,7 @@ dialog {
   object-fit: cover;
   z-index: -1;
 }
+
+.scales-ap .ability-value {
+  color: #861eff;
+}
