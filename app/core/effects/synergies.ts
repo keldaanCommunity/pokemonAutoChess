@@ -582,9 +582,9 @@ export function applyWandEffects(
     switch (wand) {
       case Item.HP_SWAP_WAND: {
         if (chance(0.2, pokemon)) {
-          target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
+          target.addMaxHP(-Math.floor(takenDamage), pokemon, 0, false)
           if (target.items.has(Item.TWIST_BAND) === false) {
-            pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+            pokemon.addMaxHP(Math.floor(takenDamage), pokemon, 0, false)
           }
         }
         break
@@ -811,7 +811,6 @@ export const cloneBugs = ({
   })
   bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
-  let numberOfClones = 1
   let numberOfBugsToClone = 0
   if (effects.has(EffectEnum.COCOON)) {
     numberOfBugsToClone = 1
@@ -828,6 +827,7 @@ export const cloneBugs = ({
   numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
   for (let i = 0; i < numberOfBugsToClone; i++) {
+    let numberOfClones = 1
     const pokemonCloned = bugTeam[i]
     let clonePkm = pokemonCloned.name
 

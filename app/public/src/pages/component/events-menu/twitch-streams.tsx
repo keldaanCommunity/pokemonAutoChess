@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../hooks"
 import { addTwitchBlacklist } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import { Modal } from "../modal/modal"
+import "./twitch-streams.css";
 
 type TwitchStream = {
   id: string

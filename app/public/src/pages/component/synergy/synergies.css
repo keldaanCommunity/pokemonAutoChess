@@ -13,6 +13,7 @@
   top: 9%;
   padding: 0;
   max-height: 70%;
+  z-index: var(--z-synergies-container);
 }
 
 @media (aspect-ratio < 4 / 3) {
