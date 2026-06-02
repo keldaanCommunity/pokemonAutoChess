@@ -91,6 +91,10 @@ export default abstract class PokemonState {
         }
       }
 
+      if (target.items.has(Item.ROCKY_HELMET) === true) {
+        reductionFactor = 0
+      }
+
       if (target.effects.has(EffectEnum.WONDER_ROOM)) {
         attackType = AttackType.SPECIAL
       }
