@@ -16809,7 +16809,7 @@ export class AquaStepStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        pokemon.addSpeed(speedGain, pokemon, 1, true)
+        pokemon.addSpeed(speedGain, pokemon, 1, crit)
       }, 300)
     )
   }
