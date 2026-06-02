@@ -176,8 +176,8 @@ export default class GameScene extends Scene {
 
   toggleTilesetAnimation(paused: boolean) {
     if (!this.map) return
-    this.map.tilesets.forEach((tileset) => {
-      ;(tileset as any).animating = !paused
+    this.map.layers.forEach((layer) => {
+      layer.tilemapLayer.setTimerPaused(paused)
     })
   }
 

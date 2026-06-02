@@ -1,6 +1,6 @@
 import { t } from "i18next"
+import type Phaser from "phaser"
 import type { GameObjects } from "phaser"
-import Phaser from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
@@ -108,22 +108,6 @@ export default class LoadingManager {
 
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
-
-    //TEMP: waiting for https://github.com/phaserjs/phaser/pull/7311
-    const __getAnimatedTileId =
-      Phaser.Tilemaps.Tileset.prototype.getAnimatedTileId
-    Phaser.Tilemaps.Tileset.prototype.getAnimatedTileId = function (
-      tileId: number,
-      time: number
-    ) {
-      return __getAnimatedTileId.call(
-        this,
-        tileId,
-        (this as Phaser.Tilemaps.Tileset & { animating: boolean }).animating
-          ? time
-          : 0
-      )
-    }
   }
 }
 
