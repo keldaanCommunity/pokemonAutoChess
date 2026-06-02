@@ -62,10 +62,11 @@ export default abstract class PokemonState {
         critChance += 0.01 * distance
       }
       const crit = chance(critChance, pokemon)
+      //declare reduction factor outside for use in spell crit reduction later
+      let reductionFactor = 1.0
 
       if (crit) {
         if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let reductionFactor = 1.0
           if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
             reductionFactor -= 0.3
           } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
@@ -169,11 +170,12 @@ export default abstract class PokemonState {
 
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        specialDamage += Math.ceil(
+         specialDamage += Math.ceil(
           [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? pokemon.critPower : 1)
+            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor): 1)
         )
+        
         pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
       }
 
@@ -182,7 +184,7 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(
           [30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? pokemon.critPower : 1)
+            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor): 1)
         )
         pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
       }
@@ -200,7 +202,7 @@ export default abstract class PokemonState {
           (([20, 40, 60][pokemon.stars - 1] ?? 60) +
             nbComfeeAllies * ([10, 20, 30][pokemon.stars - 1] ?? 60)) *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? pokemon.critPower : 1)
+            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
         )
         pokemon.effects.delete(EffectEnum.ATTACK_ORDER_NEXT_ATTACK)
       }
