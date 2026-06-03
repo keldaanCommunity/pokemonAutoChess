@@ -93,7 +93,7 @@ export class OnStageStartEffect extends Effect {
 interface OnChangePositionEffectArgs {
   pokemon: Pokemon
   player: Player
-  state: GameState
+  state?: GameState // can be undefined for bots updatePlayerTeam method
   oldX: number
   oldY: number
   newX: number

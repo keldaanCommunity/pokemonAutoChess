@@ -12086,7 +12086,7 @@ export class Vespiquen extends Pokemon {
   speDef = 8
   maxPP = 90
   range = 3
-  skill = Ability.HEAL_ORDER
+  skill = Ability.VESPIQUEN_ORDERS
   passive = Passive.VESPIQUEN
 }
 
