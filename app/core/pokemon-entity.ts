@@ -407,10 +407,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         const nbBlackAugurite = this.player
-          ? count(target.player.items, Item.BLACK_AUGURITE)
+          ? count(this.player.items, Item.BLACK_AUGURITE)
           : 0
-        let reductionFactor = 1 - 0.1 * nbBlackAugurite
-        specialDamage *= (attacker.critPower * reductionFactor)
+        const reductionFactor = 1 - 0.1 * nbBlackAugurite
+        specialDamage *= attacker.critPower * reductionFactor
       }
       if (
         attacker &&
