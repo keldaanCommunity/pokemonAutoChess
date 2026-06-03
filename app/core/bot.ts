@@ -1,3 +1,4 @@
+import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
 import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
@@ -6,6 +7,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
 import type { IBot } from "../types/models/bot-v2"
 import { logger } from "../utils/logger"
+import { pickRandomIn } from "../utils/random"
 
 export default class Bot {
   player: Player
@@ -25,6 +27,13 @@ export default class Bot {
       const data = await BotV2.findOne({ id: this.player.id }, ["steps"])
       if (data) {
         this.scenario = data
+        //TODO: allow to choose your wands in bot builder
+        this.player.fairyWands.push(
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3])
+        )
         this.updatePlayerTeam()
       }
     } catch (error) {
