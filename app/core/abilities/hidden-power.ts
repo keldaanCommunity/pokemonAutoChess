@@ -14,6 +14,7 @@ import {
 } from "../../types/enum/Item"
 import { Pkm, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { isIn } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
@@ -26,7 +27,6 @@ import { castAbility } from "./cast"
 import { explosionStrategy } from "./explosion"
 import { meditateStrategy } from "./meditate"
 import { thunderShockStrategy } from "./thunder-shock"
-import { isIn } from "../../utils/array"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   requiresTarget = false
