@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { DEPTH } from "../../../game/depths"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
@@ -18,7 +19,8 @@ export default function GameSpectatePlayerInfo() {
         style={{
           display: "flex",
           gap: "1em",
-          alignItems: "center"
+          alignItems: "center",
+          zIndex: DEPTH.SPECTATE_PLAYER_INFO
         }}
       >
         <GameAdditionalPokemonsIcon />

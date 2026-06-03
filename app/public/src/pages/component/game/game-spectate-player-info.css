@@ -8,7 +8,6 @@
   align-items: center;
   gap: 1em;
   font-size: 1em;
-  z-index: var(--z-spectate-player-info);
 }
 
 .game-spectate-player-info .player-name {

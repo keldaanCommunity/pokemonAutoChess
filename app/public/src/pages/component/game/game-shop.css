@@ -7,7 +7,6 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  z-index: var(--z-game-shop);
 }
 
 .game-shop-actions {

@@ -1,3 +1,4 @@
+import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
 import GamePlayer from "./game-player"
 import "./game-players.css"
@@ -6,7 +7,7 @@ export default function GamePlayers(props: { click: (id: string) => void }) {
   const players = useAppSelector((state) => state.game.players)
   const sortedPlayers = [...players]
   return (
-    <div id="game-players">
+    <div id="game-players" style={{ zIndex: DEPTH.PLAYER_ICON }}>
       {sortedPlayers
         .sort((a, b) => {
           return a.rank - b.rank

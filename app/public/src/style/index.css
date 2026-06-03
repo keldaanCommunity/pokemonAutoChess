@@ -10,7 +10,6 @@
 @import "./react-tooltip.css";
 @import "./scrollbar.css";
 @import "./toastify.css";
-@import "./z-indexes.css";
 
 :root {
   --sidebar-width: 60px;
