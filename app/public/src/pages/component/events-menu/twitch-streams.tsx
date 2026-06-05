@@ -60,7 +60,9 @@ export function TwitchStreams() {
 
   const fetchStreams = useCallback(async () => {
     try {
-      const response = await fetch("/twitch/streams")
+      const response = await fetch(
+        `/twitch/streams?t=${Math.floor(Date.now() / 300000)}`
+      )
       const data = (await response.json()) as TwitchStreamsResponse
       setStreams(data.streams ?? [])
       setError(data.error)
