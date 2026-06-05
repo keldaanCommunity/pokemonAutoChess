@@ -51,6 +51,7 @@ import {
 import { AccelerationEffect } from "../effects/passives/acceleration"
 import { BergmiteOnBackEffect } from "../effects/passives/bergmite-on-back"
 import { FalinksFormationEffect } from "../effects/passives/falinks-formation"
+import { getHatchTime } from "../evolution-logic/hatch-time"
 import { getMoveSpeed } from "../move-speed"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -645,7 +646,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
-        ally.addShield(40, pokemon, 1, crit)
+        ally.addShield(30, pokemon, 1, crit)
       }
     })
   }
@@ -2911,7 +2912,7 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
-    const heal = [30, 60, 120][pokemon.stars - 1] ?? 120
+    const heal = [30, 60, 90][pokemon.stars - 1] ?? 90
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
@@ -5269,42 +5270,171 @@ export class GrowthStrategy extends AbilityStrategy {
   }
 }
 
-export class HealOrderStrategy extends AbilityStrategy {
+export class AttackOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
+    // Spawn a Combee nearby then all Combee allies get enraged for 3 seconds
+    // The next attack of the user deals [20,40,60,SP] additional special damage + [10,20,30,SP] per Combee ally on the board.
     super.process(pokemon, board, target, crit, true)
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    const damage = pokemon.stars === 3 ? 65 : pokemon.stars === 2 ? 45 : 25
 
-    cells.forEach((cell) => {
-      if (cell.value) {
-        if (cell.value.team !== pokemon.team) {
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-          pokemon.broadcastAbility({
-            skill: "ATTACK_ORDER",
-            positionX: cell.x,
-            positionY: cell.y
-          })
-        } else {
-          cell.value.handleHeal(damage, pokemon, 1, crit)
-          pokemon.broadcastAbility({
-            skill: "HEAL_ORDER",
-            positionX: cell.x,
-            positionY: cell.y
-          })
-        }
+    const combee = PokemonFactory.createPokemonFromName(
+      Pkm.COMBEE,
+      pokemon.player
+    )
+    const coord = pokemon.state.getNearestAvailablePlaceCoordinates(
+      pokemon,
+      board
+    )
+    if (coord) {
+      if (pokemon.player) pokemon.player.pokemonsPlayed.add(Pkm.COMBEE)
+      pokemon.simulation.addPokemon(
+        combee,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        true
+      )
+    }
+
+    pokemon.effects.add(EffectEnum.ATTACK_ORDER_NEXT_ATTACK)
+    board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
+      if (p && p.name === Pkm.COMBEE && p.team === pokemon.team) {
+        p.status.triggerRage(3000, p)
+        pokemon.broadcastAbility({
+          skill: "ATTACK_ORDER",
+          positionX: x,
+          positionY: y
+        })
       }
     })
+  }
+}
+
+export class HealOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Spawn a Combee nearby then user and every Combee heals adjacent allies for [10,20,30] HP and clear their negative statuses.
+    super.process(pokemon, board, target, crit, true)
+
+    const combee = PokemonFactory.createPokemonFromName(
+      Pkm.COMBEE,
+      pokemon.player
+    )
+    const coord = pokemon.state.getNearestAvailablePlaceCoordinates(
+      pokemon,
+      board
+    )
+    if (coord) {
+      if (pokemon.player) pokemon.player.pokemonsPlayed.add(Pkm.COMBEE)
+      pokemon.simulation.addPokemon(
+        combee,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        true
+      )
+    }
+
+    const heal = [10, 20, 30][pokemon.stars - 1] ?? 30
+    board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
+      if (
+        p &&
+        (p.name === Pkm.COMBEE || p.id === pokemon.id) &&
+        p.team === pokemon.team
+      ) {
+        const cells = board.getAdjacentCells(p.positionX, p.positionY)
+        cells.forEach((cell) => {
+          if (cell.value && cell.value.team === pokemon.team) {
+            cell.value.handleHeal(heal, pokemon, 1, crit)
+            cell.value.status.clearNegativeStatus(cell.value, pokemon)
+          }
+        })
+        pokemon.broadcastAbility({
+          skill: "HEAL_ORDER",
+          positionX: x,
+          positionY: y
+        })
+      }
+    })
+  }
+}
+
+export class DefendOrderStrategy extends AbilityStrategy {
+  requiresTarget = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    // Spawn a Combee nearby then gives [10,20,30] SHIELD to user and all Combee on board.
+    // User gets [10,20,30] additional SHIELD per Combee ally on the board.
+    super.process(pokemon, board, target, crit, true)
+
+    const combee = PokemonFactory.createPokemonFromName(
+      Pkm.COMBEE,
+      pokemon.player
+    )
+    const coord = pokemon.state.getNearestAvailablePlaceCoordinates(
+      pokemon,
+      board
+    )
+    if (coord) {
+      if (pokemon.player) pokemon.player.pokemonsPlayed.add(Pkm.COMBEE)
+      pokemon.simulation.addPokemon(
+        combee,
+        coord.x,
+        coord.y,
+        pokemon.team,
+        true
+      )
+    }
+
+    const shield = [10, 20, 30][pokemon.stars - 1] ?? 30
+    let nbCombeeAllies = 0
+    board.forEach((x, y, p) => {
+      if (p && p.team === pokemon.team && p.name === Pkm.COMBEE) {
+        p.addShield(shield, pokemon, 1, crit)
+        nbCombeeAllies++
+        pokemon.broadcastAbility({
+          skill: "DEFEND_ORDER",
+          positionX: x,
+          positionY: y
+        })
+      }
+    })
+
+    pokemon.addShield(shield + nbCombeeAllies * shield, pokemon, 1, crit)
+  }
+}
+
+export class BugBiteStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    // Deal [20,40,80] special damage to the target and steal and eat its berry if it helds one.
+    const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
+    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const berryStolen = schemaValues(target.items).find((item) =>
+      isIn(Berries, item)
+    )
+    if (berryStolen) {
+      pokemon.eatBerry(berryStolen, target)
+    }
   }
 }
 
@@ -7633,8 +7763,7 @@ export class EggBombStrategy extends AbilityStrategy {
           ) {
             const egg = giveRandomEgg(pokemon.player, false)
             if (egg) {
-              egg.stacks =
-                egg.evolutionRule.getHatchTime(egg, pokemon.player) - 1
+              egg.stacks = getHatchTime(egg, pokemon.player) - 1
             }
           }
           v.status.triggerArmorReduction(4000, v)
@@ -10046,7 +10175,7 @@ export class GravityStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const lockDuration = Math.round(
-      3000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      2000 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
     board.forEach((x, y, unitOnCell) => {
       if (unitOnCell && unitOnCell.team !== pokemon.team) {
@@ -14029,6 +14158,7 @@ export class TerrainPulseStrategy extends AbilityStrategy {
     // 1. collect adjacent fields
     board.forEach((x, y, entity) => {
       if (!entity) return
+      if (entity.team !== pokemon.team) return
       const activeField = getFieldEffect(entity)
       if (activeField) {
         pokemonsWithField.set(entity, activeField)
@@ -16925,6 +17055,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HEX]: new HexStrategy(),
   [Ability.GROWTH]: new GrowthStrategy(),
   [Ability.HEAL_ORDER]: new HealOrderStrategy(),
+  [Ability.DEFEND_ORDER]: new DefendOrderStrategy(),
+  [Ability.ATTACK_ORDER]: new AttackOrderStrategy(),
+  [Ability.BUG_BITE]: new BugBiteStrategy(),
   [Ability.SHELL_TRAP]: new ShellTrapStrategy(),
   [Ability.DIG]: new DigStrategy(),
   [Ability.FIRE_SPIN]: new FireSpinStrategy(),

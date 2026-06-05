@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
 import { type Client, matchMaker } from "colyseus"
 import { randomBytes } from "crypto"
-import { writeHeapSnapshot } from "v8"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -13,7 +12,7 @@ import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
-import { type Emotion, Role, type Title, Transfer } from "../../types"
+import { Emotion, Role, type Title, Transfer } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
@@ -188,19 +187,6 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-}
-
-export class HeapSnapshotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  execute({ client }: { client: Client }) {
-    const u = this.room.users.get(client.auth.uid)
-    if (u && u.role === Role.ADMIN) {
-      logger.info("writing heap snapshot")
-      writeHeapSnapshot()
     }
   }
 }

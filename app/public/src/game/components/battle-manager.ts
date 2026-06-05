@@ -1368,7 +1368,7 @@ export default class BattleManager {
         trooperChief.shiny,
         trooperChief.emotion
       )
-      trooperInBattle.maxHP = trooperInBattle.hp
+      trooperInBattle.postConstructor()
 
       const { dx, dy } = TroopersDeltaPositions[trooperName]?.(
         i,

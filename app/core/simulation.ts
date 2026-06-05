@@ -60,6 +60,7 @@ import {
 } from "./effects/effect"
 import { WaterSpringEffect } from "./effects/passives"
 import {
+  cloneBugs,
   electricTripleAttackEffect,
   FightingKnockbackEffect,
   FireHitEffect,
@@ -78,7 +79,7 @@ import {
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand } from "./simulation-command"
-import { getStrongestUnit, getUnitScore } from "./unit-score"
+import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -562,68 +563,7 @@ export default class Simulation extends Schema implements ISimulation {
           EffectEnum.HEART_OF_THE_SWARM
         ].some((e) => effects.has(e))
       ) {
-        const bugTeam = new Array<IPokemon>()
-        board.forEach((pkm) => {
-          if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
-            bugTeam.push(pkm)
-          }
-        })
-        bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-
-        let numberToSpawn = 0
-        if (effects.has(EffectEnum.COCOON)) {
-          numberToSpawn = 1
-        }
-        if (effects.has(EffectEnum.INFESTATION)) {
-          numberToSpawn = 2
-        }
-        if (effects.has(EffectEnum.HORDE)) {
-          numberToSpawn = 3
-        }
-        if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
-          numberToSpawn = 5
-        }
-        numberToSpawn = Math.min(numberToSpawn, bugTeam.length)
-
-        for (let i = 0; i < numberToSpawn; i++) {
-          const pokemonCloned = bugTeam[i]
-          const bug = PokemonFactory.createPokemonFromName(
-            pokemonCloned.name,
-            player
-          )
-          bug.stacks = pokemonCloned.stacks
-
-          const coord = this.getClosestFreeCellToPokemon(
-            pokemonCloned,
-            teamIndex
-          )
-          if (coord) {
-            const cloneEntity = this.addPokemon(
-              bug,
-              coord.x,
-              coord.y,
-              teamIndex,
-              true
-            )
-            if (pokemonCloned.items.has(Item.SHED_SHELL)) {
-              const team =
-                teamIndex === Team.BLUE_TEAM ? this.blueTeam : this.redTeam
-              const clonedEntity = schemaValues(team).find(
-                (p) => p.refToBoardPokemon.id === pokemonCloned.id
-              )
-              if (clonedEntity) {
-                clonedEntity.addMaxHP(
-                  -0.5 * pokemonCloned.maxHP,
-                  clonedEntity,
-                  0,
-                  false
-                )
-              }
-
-              cloneEntity.addMaxHP(-0.5 * bug.maxHP, cloneEntity, 0, false)
-            }
-          }
-        }
+        cloneBugs({ board, effects, teamIndex, player, simulation: this })
       }
 
       board.forEach((pokemon) => {

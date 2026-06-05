@@ -30,3 +30,7 @@
 .auth-page .logo {
   width: 30%;
 }
+
+.boosters-modal {
+  background: var(--color-bg-primary);
+}

@@ -38,7 +38,7 @@ export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.TROPIUS]: Item.NANAB_BERRY,
   [Pkm.SHUCKLE]: Item.BERRY_JUICE,
   [Pkm.COMBEE]: Item.HONEY,
-  [Pkm.VESPIQUEEN]: Item.HONEY,
+  [Pkm.VESPIQUEN]: Item.HONEY,
   [Pkm.CHANSEY]: Item.NUTRITIOUS_EGG,
   [Pkm.BLISSEY]: Item.NUTRITIOUS_EGG,
   [Pkm.NACLI]: Item.ROCK_SALT,
