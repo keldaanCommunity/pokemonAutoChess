@@ -2909,7 +2909,7 @@
 		"ICE_STONE": "The holder gains the ICE type",
 		"CHOICE_SPECS": "The holder gains 100 bonus AP",
 		"SOUL_DEW": "During combat, the holder gains 5 AP and 5 PP every second",
-		"UPGRADE": "Attacks grant +5 SPEED ON_HIT (stackable)",
+		"UPGRADE": "Holder gains +5 SPEED ON_ATTACK (stackable)",
 		"REAPER_CLOTH": "The holder's ability can now critically strike based on CRIT_CHANCE. If the ability can already critically strike by default, increase CRIT_POWER by 50% instead.",
 		"POKEMONOMICON": "When the holder deals SPECIAL, they BURN the target for 3 seconds and reduce its SPE_DEF by 1.",
 		"POWER_LENS": "The amount of SPECIAL blocked by SPE_DEF is inflicted back to the attacker",
@@ -2920,7 +2920,7 @@
 		"SCOPE_LENS": "Critical attacks steal 10 PP from the target ON_HIT.",
 		"STAR_DUST": "After casting ability, gain 50% of max PP as SHIELD",
 		"GREEN_ORB": "Holder and ADJACENT allies regain 5% of their max HP every 2 seconds. 30% of overheal is converted to PP.",
-		"DEEP_SEA_TOOTH": "ON_ATTACK, the holder restore 5 additional PP. If the attack knocks out the target, restore 15 additional PP.",
+		"DEEP_SEA_TOOTH": "Holder restore 5 additional PP ON_ATTACK. If the attack knocks out the target, restore 15 additional PP.",
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 70 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds.",
 		"XRAY_VISION": "Holder is immune to SLEEP and their attacks can no longer miss.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds ON_HIT.",
@@ -4838,8 +4838,8 @@
 		"ADJACENT_IN_THE_SAME_ROW": "the tiles directly to the left and right of a unit",
 		"CONE": "shooting at a 90 degrees angle in front of the unit, centered on the target",
 		"BOARD_EFFECT": "A Board Effect is an effect on a cell of the board that influences all units standing on it, no matter the team, until the end of the fight. Board effects can be cleared by certain abilities.",
-		"ON_HIT": "On Hit effects are triggered when a unit is hit by an attack or an ability. They are triggered even if target has SHIELD, but not if the target dodges or has PROTECT.",
-		"ON_ATTACK": "On Attack effects are triggered when a unit performs a basic attack, regardless of whether the attack is successful or not."
+		"ON_HIT": "On Hit effects trigger when a unit is hit by an attack or an ability. They are triggered even if target has SHIELD, but not if the target dodges or has PROTECT.",
+		"ON_ATTACK": "On Attack effects trigger when a unit makes a basic attack on another unit that is still alive, at the time the attack is supposed to hit, whether the attack actually hits or not."
 	},
 	"expeditions": {
 		"title": "Expeditions",
