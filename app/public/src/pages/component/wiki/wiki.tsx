@@ -3,6 +3,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
 import WikiData from "./wiki-data"
 import WikiFaq from "./wiki-faq"
+import WikiGlossary from "./wiki-glossary"
 import WikiItems from "./wiki-items"
 import WikiPokemons from "./wiki-pokemons"
 import WikiRegions from "./wiki-regions"
@@ -37,6 +38,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
           <Tab key="title-stages">{t("stages")}</Tab>
           <Tab key="title-town">{t("wiki.nav.town_label")}</Tab>
           <Tab key="title-dungeon">{t("wiki.nav.dungeon_label")}</Tab>
+          <Tab key="title-glossary">{t("wiki.nav.glossary_label")}</Tab>
           <Tab key="title-data">{t("wiki.nav.data_label")}</Tab>
         </TabList>
 
@@ -79,6 +81,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
         </TabPanel>
         <TabPanel key="dungeon">
           <WikiRegions />
+        </TabPanel>
+        <TabPanel key="glossary">
+          <WikiGlossary />
         </TabPanel>
         <TabPanel key="data">
           <WikiData />

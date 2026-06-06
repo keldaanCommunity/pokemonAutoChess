@@ -124,7 +124,7 @@ export default abstract class PokemonState {
         damage = 0
       }
 
-      if (pokemon.types.has(Synergy.FAIRY)) {
+      if (isAttackSuccessful && pokemon.types.has(Synergy.FAIRY)) {
         const { takenDamage, death } = applyWandEffects(
           pokemon,
           target,
