@@ -2835,7 +2835,10 @@
 		"RICE": "Riz",
 		"TATSUGIRI_CURLY": "Commandant Nigirigon (Courbé)",
 		"TATSUGIRI_DROOPY": "Commandant Nigirigon (Affalé)",
-		"TATSUGIRI_STRETCHY": "Commandant Nigirigon (Raide)"
+		"TATSUGIRI_STRETCHY": "Commandant Nigirigon (Raide)",
+		"ROCK_HORN": "Corne de Brume Rocheuse",
+		"SKY_MELODICA": "Clavecin Aérien",
+		"TERRA_CYMBAL": "Cymbales Terrestres"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -3141,7 +3144,31 @@
 		"RICE": "Octroie 50 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
 		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
 		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
-		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata"
+		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata",
+		"BERRIES": "Le chef s'équipe d'une nouvelle baie. Si aucun emplacement d'équipement n'est disponible, la baie s'ajoute à votre inventaire à la place. ",
+		"CONFUSE_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer CONFUSION pendant 2 secondes à la cible, tout en réduisant leur SPE_DEF de 3.",
+		"PETRIFY_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer LOCKED pendant 2 secondes à la cible, tout en réduisant leur DEF de 3.",
+		"SLOW_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer PARALYSIS pendant 2 secondes à la cible, tout en réduisant leur SPEED de 10.",
+		"SLUMBER_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer SLEEP pendant 2 secondes à la cible, tout en réduisant leur ATK de 3.",
+		"BLAST_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels, ou 40% si un coup critique est infligé. ",
+		"HP_SWAP_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [20,LK]% chance d'être volés des HP max de la cible pour être donnés à l'attaquant. ",
+		"SPIRIT_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels + 5% pour chaque capacité utilisé par l'attaquant pendant le combat, et ont [20,LK]% de chance de donner 5 PP supplémentaires. ",
+		"LONG_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les Pokémon FAIRY alliés gagnent +1 RANGE et ont [1,LK]% de CRIT_CHANCE de plus, multipliés par le nombre de case de distance entre la cible et l'attaquant.",
+		"GUIDING_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [50,LK]% de chance d'être redirigés vers la cible avec le moins de HP à portée. ",
+		"SURROUND_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels + 10% par ennemis ADJACENT à l'attaquant. Les SPECIAL des baguettes ont [10,LK]% de chance d'être infligés aux ennemis ADJACENT à l'attaquant en addition à la cible. ",
+		"POUNCE_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Après avoir subit des dégâts au corps-à-corps, les Pokémon FAIRY alliés ont [10,LK]% de chance de riposter à hauteur de 30% des dégâts reçus, aux ennemis adjacents, la riposte est garantie si le coup subit est un coup critique. ",
+		"TWO_EDGED_WAND": "Les attaques des Pokémon FAIRY infligent 40% SPECIAL additionnels. Les SPECIAL des baguettes peuvent aussi être infligés en tant que dégâts de recul à l'attaquant (l'attaquant a [80,LK]% de chance d'éviter ces dégâts de recul). ",
+		"WARP_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance de téléporter la cible sur une case loin de l'attaquant. ",
+		"SWITCHER_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'intervertir la position de la cible et de l'ennemi le plus loin de l'attaquant.",
+		"WHIRLWIND_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance de lancer une bourrasque qui souffle les ennemis pris dedans au loin.",
+		"TUNNEL_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [5,LK]% de chance de traverser la cible et atteindre un ennemi sur une ligne derrière lui.",
+		"AQUA_MONICA": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie WATER. ",
+		"FIERY_DRUM": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie FIRE.",
+		"GRASS_CORNET": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie GRASS.",
+		"ICY_FLUTE": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie ICE.",
+		"ROCK_HORN": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie ROCK.",
+		"SKY_MELODICA": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie FLYING.",
+		"TERRA_CYMBAL": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie GROUND."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -3331,7 +3358,9 @@
 		"AVALUGG": "Peut porter jusqu'à 4 $t(pkm.BERGMITE) sur son dos, récupérés depuis votre banc au début du combat.",
 		"EISCUE_NOICE": "Lorsqu'il démarre un combat sous la SNOW, il gagne sa forme Tête de Gel et 100 SHIELD. Lorsqu'il subit ou inflige FREEZE, il regagne sa forme Tête de Gel et gagne 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Lorsqu'il déclenche sa capacité, son SHIELD actuel est converti en SPECIAL supplémentaires. Lorsque le SHIELD est brisé ou après avoir lancé sa capacité, il retrouve sa forme Tête Dégel.",
-		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé."
+		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé.",
+		"COMATOSE": "Subit toujours l'altération SLEEP. Est immunisé à la BURN, l'altération POISONNED, FREEZE ou PARALYSIS. Quand un Pokémon partageant la synergie SOUND essaie de le réveiller par ses cris, il plonge encore plus profondément dans ses rêves, et gagne 5 AP.  ",
+		"VESPIQUEN": "La portée d' $t(pkm.VESPIQUEEN) et sa capacité diffèrent en fonction de la rangée sur la laquelle est le Pokémon. La synergie BUG ne copie plus $t(pkm.VESPIQUEEN), mais 2 $t(pkm.COMBEE) à la place."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -3473,7 +3502,8 @@
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
 		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets.",
-		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}"
+		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}",
+		"FAIRY_WANDS": "Baguettes équipées: {{wands}}"
 	},
 	"title": {
 		"no_title": "Aucun Titre",
@@ -3571,7 +3601,8 @@
 		"EXPLORER": "Explorateur",
 		"POSTMAN": "Facteur",
 		"SURVEY_CORPS": "Corps d'exploration",
-		"GUILDMASTER": "Maître de Guilde"
+		"GUILDMASTER": "Maître de Guilde",
+		"LEGIONNAIRE": "Légionnaire"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3667,7 +3698,8 @@
 		"EXPLORER": "Compléter une expédition d'exploration",
 		"POSTMAN": "Compléter une expédition de livraison",
 		"SURVEY_CORPS": "Compléter une expédition d'exploit de bataille",
-		"GUILDMASTER": "Compléter une expédition de rang S"
+		"GUILDMASTER": "Compléter une expédition de rang S",
+		"LEGIONNAIRE": "Réaliser une formation composée d'un Hexadron et de 8 troupes ou plus."
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
@@ -3744,7 +3776,7 @@
 		"show_all": "Afficher tout",
 		"show_locked": "Afficher les bloqués",
 		"show_unlockable": "Afficher les débloquables",
-		"show_unlocked": "Afficher les débloqués",				
+		"show_unlocked": "Afficher les débloqués",
 		"show_refundable": "Afficher les remboursables",
 		"show_newly_obtained": "Afficher les nouveaux obtenus",
 		"show_favorites": "Afficher les favoris",
@@ -3766,7 +3798,7 @@
 	"bot_builder": "Bot Builder",
 	"meta": "Méta",
 	"meta_report_info": "Généré le {{report_date}} à partir de {{time_limit}} - Données récupérées à partir de {{count}} parties",
-	"best_regions": "Meilleures régions",	
+	"best_regions": "Meilleures régions",
 	"back_to_lobby": "Retour au lobby",
 	"boosters": "Boosters",
 	"rank_labels": {
@@ -3782,7 +3814,7 @@
 	"bench": "Banc",
 	"synergies": "Synergies",
 	"join_as_guest": "Rejoindre en tant qu'invité",
-	"welcome": "Bienvenue",	
+	"welcome": "Bienvenue",
 	"stage": "Tour",
 	"spectate": "Regarder",
 	"spectating": "Vous observez {{ name }}",
@@ -3822,7 +3854,7 @@
 	"games_in_progress_other": "{{count}} parties en cours",
 	"events": "Événements",
 	"custom_room_short": "Personnalisé",
-	"loading": "Connexion....",	
+	"loading": "Connexion....",
 	"no_data_available": "Aucune donnée disponible",
 	"no_bots_found": "Aucun bot trouvé !",
 	"leaderboard": "Classement",
@@ -3886,7 +3918,7 @@
 	"send_message": "Envoyer le message",
 	"shiny_hunter": "Chasseur de Shiny",
 	"pokedex": "Pokédex",
-	"alt_forms": "Formes Alternatives",	
+	"alt_forms": "Formes Alternatives",
 	"show_only_available_picks": "Afficher uniquement les choix additionnels et régionaux disponibles",
 	"close": "Fermer",
 	"additional_pokemon_hint": "Chaque joueur choisit des Pokémon additionnels qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",
@@ -3951,14 +3983,17 @@
 			"avatar_emotes": "Voir le menu des emotes",
 			"avatar_show_emote": "Lancer l'emote",
 			"wiki": "Ouvrir/fermer le wiki",
-			"team_planner": "Ouvrir/fermer le planificateur d'équipe"
-		}
+			"team_planner": "Ouvrir/fermer le planificateur d'équipe",
+			"meta_report": "Ouvrir/Fermer les rapports de la méta"
+		},
+		"theme": "Thème"
 	},
 	"jukebox": {
 		"music_volume": "Volume de la musique",
 		"previous_music": "Musique précédente",
 		"next_music": "Musique suivante",
-		"random_music": "Musique aléatoire"
+		"random_music": "Musique aléatoire",
+		"music_credits": "crédits musicaux"
 	},
 	"toggle_fullscreen": "Plein écran",
 	"filters": "Filtres",
@@ -3973,7 +4008,8 @@
 		"choose_mission_order": "Choisissez votre mission",
 		"choose_unique": "Choisissez un Pokémon Unique pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
 		"choose_legendary": "Choisissez un Pokémon Légendaire pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
-		"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos"
+		"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos",
+		"choose_wand": "Choisissez une baguette afin de permettre à vos Pokémon FAIRY d'infliger des SPECIAL supplémentaire à chaque attaque."
 	},
 	"hide": "Cacher",
 	"show": "Montrer",
@@ -4095,7 +4131,7 @@
 	"valid": "Valide",
 	"invalid": "Invalide",
 	"all": "Tous",
-	"status_label": "Statuts",	
+	"status_label": "Statuts",
 	"help": "Aider",
 	"bot_admin": "Bot Admin",
 	"change": "Changer",
@@ -4850,5 +4886,36 @@
 			"username_disclaimer": "Les noms d'utilisateur inappropriés entraîneront le bannissement de votre compte. Cela inclut les propos grossiers, à caractère adulte ou sexuel, les menaces directes et indirectes, les déclarations politiques et la publicité pour des contenus sans rapport avec le jeu.",
 			"invalid_username": "Nom d'utilisateur invalide. Le nom d'utilisateur doit comporter entre 3 et 24 caractères, commencer par une lettre, contenir uniquement des lettres ou des chiffres ou \".-_\", pas d'espaces."
 		}
+	},
+	"twitch_streams": {
+		"title": "En train de diffuser du contenu.",
+		"language": "Langage: {{Language}}",
+		"unavailable": "Les diffusions faites sur Twitch ne sont actuellement pas disponibles.",
+		"viewers": "{{count}} spectateurs.",
+		"live_duration": "en Live depuis {{duration}}"
+	},
+	"terms_of_service": "Conditions générales d'utilisation",
+	"unlocked": "Débloqué",
+	"theme": {
+		"default": "Classique",
+		"super": "Pokémon Méga Donjon Mystères",
+		"autumn": "Automnal",
+		"rainbow": "Arc-en-ciel",
+		"umbra": "Nuit étoilée",
+		"redsea": "Mer Rouge",
+		"zengarden": "Jardin Zen",
+		"unown": "Zarbi Noir",
+		"origin": "Origine",
+		"deerling": ""
+	},
+	"history": "Histoire",
+	"sprite_tracker": {
+		"failed_to_fetch_data": "Données introuvables",
+		"error_label": "Erreur",
+		"summary_line": "Collaboration à l'égard des visuels : {{totalSpriteCollab}} visuels en tout | Non disponible sur PAC: {{missingInPac}} visuels - Dernière mise à jour : {{lastUpdated}} (a pris {{refreshDurationMs}} ms)",
+		"criteria_title": "Comment les entrées sont sélectionnées",
+		"criteria_line_1": "Cette liste ne comprend que les entrées que Pokémon Auto Chess peut utiliser.",
+		"criteria_line_2": "Pour compter, une entrée doit avoir au moins un portrait and les visuels d'animation requis, comme le position Statique, Marche, Subissant une attaque ou Saut.",
+		"criteria_line_3": "Les formes visuels des Pokémon chromatiques suivent les règles de PAC, et la liste finale montre seulement les entrées qui sont disponibles sur SpriteCollab mais manquantes sur PAC. "
 	}
 }
