@@ -2396,7 +2396,7 @@
 		"PURSUIT": "[30,LK]% de posibilidades de causar FLINCH. Al derrotar a su objetivo, gana 3 ATK, 10 AP y un 20% de sus HP máximos.",
 		"BRUTAL_SWING": "Al derrotar a su objetivo, gana 6 ATK, 20 AP y un 40% de sus HP máximos.",
 		"POWER_TRIP": "Al derrotar a su objetivo, gana 10 ATK, 30 AP y un 60% de sus HP máximos.",
-		"MERCILESS": "MONSTER pueden tener de objetivo a aliados con menos del 10% de sus HP máximos.",
+		"MERCILESS": "MONSTER pueden tener de objetivo a aliados con menos del 10 HP.",
 		"MEDITATE": "Recupera el 25% del daño inflingido como HP. Consigue una MT aleatoria.",
 		"FOCUS_ENERGY": "Recupera el 35% del daño inflingido como HP. Consigue otra MT aleatoria.",
 		"CALM_MIND": "Recupera el 50% del daño inflingido como HP. Consigue una MT aleatoria.",

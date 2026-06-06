@@ -2396,7 +2396,7 @@
 		"PURSUIT": "[30,LK]% di possibilità di causare FLINCH. Quando tentenni il bersaglio, guadagna 3 di ATK, 10 AP e 20% dei loro HP massimi.",
 		"BRUTAL_SWING": "Quando tentenni il bersaglio, guadagna 6 di ATK, 20 AP e 40% dei loro HP massimi",
 		"POWER_TRIP": "Quando tentenni il bersaglio, guadagna 10 di ATK, 30 AP e 60% dei loro HP massimi",
-		"MERCILESS": "I MONSTER possono bersagliare gli alleati con il 10% in meno dei HP massimi.",
+		"MERCILESS": "I MONSTER possono bersagliare gli alleati con il 10 HP.",
 		"MEDITATE": "Cura HP pari al 25% del danno inflitto.",
 		"FOCUS_ENERGY": "Cura HP pari al 35% del danno inflitto.",
 		"CALM_MIND": "Cura HP pari al 50% del danno inflitto.",
