@@ -2,11 +2,17 @@
 
 # Changes to Pokemon & Abilities
 
+- Nerf Alcremie Rainbow Swirl: 60 → 50 PP
+- Buff Alcremie Matcha: 40 → 60 max HP
+
 # Changes to Synergies
 
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
 
 # Changes to Items
+
+- Nerf Tea: 80 → 60 PP
+- Nerf Smoked Fillet: 5 → 3 ATK gained
 
 # Gameplay
 

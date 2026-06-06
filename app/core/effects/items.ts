@@ -1,4 +1,5 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -42,7 +43,6 @@ import {
 } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { DishByPkm } from "../dishes"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -351,7 +351,10 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = { type: EvolutionRuleType.STATE, condition: () => false } // used only to store the original pokemon
+      substitute.evolutionRule = {
+        type: EvolutionRuleType.STATE,
+        condition: () => false
+      } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
