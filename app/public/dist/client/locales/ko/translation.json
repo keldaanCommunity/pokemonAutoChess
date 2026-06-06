@@ -3096,7 +3096,7 @@
 		"SWEETS": "영구적인 스탯 버프를 주는 사탕",
 		"RIBBON_SWEET": "영구적으로 SPE_DEF 3 증가",
 		"STAR_SWEET": "영구적으로 AP 10 증가",
-		"FLOWER_SWEET": "영구적으로 SPEED 5 증가",
+		"FLOWER_SWEET": "영구적으로 SPEED 10 증가",
 		"CLOVER_SWEET": "영구적으로 LUCK 10 증가",
 		"BERRY_SWEET": "영구적으로 HP 15 증가",
 		"LOVE_SWEET": "영구적으로 DEF 3 증가",

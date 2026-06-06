@@ -3058,7 +3058,7 @@
 		"SWEETS": "Un bonbon aléatoire accordant un bonus de statistiques permanent",
 		"RIBBON_SWEET": "Gagne 3 SPE_DEF de façon permanente",
 		"STAR_SWEET": "Gagne 10 AP de façon permanente",
-		"FLOWER_SWEET": "Gagne 5 SPEED de façon permanente",
+		"FLOWER_SWEET": "Gagne 10 SPEED de façon permanente",
 		"CLOVER_SWEET": "Gagne 10 de LUCK de façon permanente",
 		"BERRY_SWEET": "Gagne 15 HP max permanents",
 		"LOVE_SWEET": "Gagne 3 DEF de façon permanente",
@@ -3138,7 +3138,7 @@
 		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
 		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD",
 		"RED_SCALE": "Augmente votre revenu passif de 5 GOLD par manche",
-		"RICE": "Octroie 50 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
+		"RICE": "Octroie 80 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
 		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
 		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
 		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata"
