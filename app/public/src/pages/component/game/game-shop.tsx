@@ -11,11 +11,15 @@ import GameStore from "./game-store"
 import { GameStreakInfo } from "./game-streak-info"
 import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
+import { DEPTH } from "../../../game/depths"
 
 export default function GameShop() {
   return (
     <>
-      <div className="game-shop my-container">
+      <div
+        className="game-shop my-container"
+        style={{ zIndex: DEPTH.GAME_SHOP }}
+      >
         <div id="game-shop-info">
           <GameLifeInfo />
           <GameMoneyInfo />

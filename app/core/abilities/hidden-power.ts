@@ -12,13 +12,15 @@ import {
   ItemComponents,
   Sweets
 } from "../../types/enum/Item"
-import { Pkm } from "../../types/enum/Pokemon"
+import { Pkm, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { isIn } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
+import { getHatchTime } from "../evolution-logic/hatch-time"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 import { castAbility } from "./cast"
@@ -30,17 +32,17 @@ export class HiddenPowerStrategy extends AbilityStrategy {
   requiresTarget = false
   copyable = false
   process(
-    unown: PokemonEntity,
+    pokemon: PokemonEntity,
     board: Board,
     target: null,
     crit: boolean
   ): void {
-    super.process(unown, board, target, crit)
-    if (unown.player && !unown.isSpawn) {
-      unown.player.unownReminiscences++
-      unown.player.board.delete(unown.refToBoardPokemon.id)
+    super.process(pokemon, board, target, crit)
+    if (pokemon.player && !pokemon.isSpawn && isIn(Unowns, pokemon.name)) {
+      pokemon.player.unownReminiscences++
+      pokemon.player.board.delete(pokemon.refToBoardPokemon.id)
     }
-    unown.state.triggerDeath(unown, null, board, AttackType.TRUE)
+    pokemon.state.triggerDeath(pokemon, null, board, AttackType.TRUE)
   }
 }
 
@@ -108,7 +110,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      egg.stacks = egg.evolutionRule.getHatchTime(egg, unown.player) - 1
+      egg.stacks = getHatchTime(egg, unown.player) - 1
     }
   }
 }

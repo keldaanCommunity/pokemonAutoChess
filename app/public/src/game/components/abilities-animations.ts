@@ -855,6 +855,7 @@ export const AbilitiesAnimations: {
   ["STAR_DUST"]: onCasterScale2,
   ["HEAL_ORDER"]: onCasterScale2,
   ["ATTACK_ORDER"]: onCasterScale2,
+  ["DEFEND_ORDER"]: onCasterScale2,
   ["FOSSIL_RESURRECT"]: onCasterScale2,
   ["LANDS_WRATH/hit"]: onCasterScale2,
   [Ability.BUG_BUZZ]: onTargetScale2,

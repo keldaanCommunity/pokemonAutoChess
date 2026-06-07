@@ -9,6 +9,7 @@ import type { Theme } from "../../../../../config/game/theme"
 import type { Title } from "../../../../../types"
 import type { EloRank } from "../../../../../types/enum/EloRank"
 import type { ExpeditionType } from "../../../../../types/enum/Expedition"
+import { cc } from "../../utils/jsx"
 
 interface NotificationModalProps {
   notifications: INotification[]
@@ -76,8 +77,10 @@ export function NotificationModal({
         }
         return t("notification.tournament_finished_title")
       case "level_up":
-      default:
         return t("notification.level_up_title")
+      case "info":
+      default:
+        return t("notification.info_title")
     }
   }
 
@@ -128,12 +131,13 @@ export function NotificationModal({
         return t("notification.tournament_finished_message", {
           place: getRankLabel(Number(notification.message))
         })
+      case "info":
       default:
         return notification.message
     }
   }
 
-  const getIllustrationSrc = (notification: INotification) => {
+  const getIllustrationSrc = (notification: INotification): string | null => {
     switch (notification.type) {
       case "new_title":
         return `/assets/titles/${notification.message}.svg`
@@ -157,20 +161,24 @@ export function NotificationModal({
         }
         return `/assets/notifications/tournament_finish.svg`
       case "level_up":
-      default:
         return "/assets/ui/booster.png"
+      case "info":
+      default:
+        return null
     }
   }
 
+  const illustration = getIllustrationSrc(currentNotification)
+
   return (
     <Modal
-      className="notification-modal"
+      className={cc("notification-modal", currentNotification.type)}
       show={true}
       onClose={handleClose}
       header={getNotificationTitle(currentNotification)}
       body={
         <>
-          <img src={getIllustrationSrc(currentNotification)} alt="" />
+          {illustration != null && <img src={illustration} alt="" />}
           <p>{getNotificationMessage(currentNotification)}</p>
         </>
       }

@@ -16,7 +16,7 @@ import {
 } from "../config"
 import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
@@ -60,6 +60,7 @@ import {
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
@@ -1136,13 +1137,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     player.board.forEach((pokemon) => {
       if (
         pokemon.hasEvolution &&
-        pokemon.evolutionRule instanceof CountEvolutionRule
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
-          pokemon,
-          player,
-          this.state.stageLevel
-        )
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player)
         if (pokemonEvolved) {
           hasEvolved = true
         }
@@ -1155,19 +1152,20 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   checkEvolutionsAfterItemAcquired(
     playerId: string,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    itemAcquired: Item
   ): Pokemon | void {
     const player = this.state.players.get(playerId)
     if (!player) return
 
     if (
       pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof ItemEvolutionRule
+      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
     ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
-        this.state.stageLevel
+        itemAcquired
       )
       return pokemonEvolved
     }
@@ -1220,8 +1218,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const pokemon = pokemonsObtained[0]
       const isEvolution =
         pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
       const freeSpace = getFreeSpaceOnBench(player.board)
 
@@ -1247,7 +1245,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
-              ? pkm.evolutionRule.getEvolution(
+              ? EvolutionManager.getEvolution(
                   pkm,
                   player,
                   this.state.stageLevel
@@ -1300,9 +1298,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      player.items.push(item)
       if (isIn(Wands, item)) {
         player.fairyWands.push(item)
+        player.updateFairyWands()
+      } else {
+        player.items.push(item)
       }
     }
 

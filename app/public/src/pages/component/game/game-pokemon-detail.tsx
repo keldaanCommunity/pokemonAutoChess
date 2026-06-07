@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
-import { DishByPkm } from "../../../../../core/dishes"
+import { DishByPkm } from "../../../../../config/game/dishes"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import type { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
@@ -196,7 +196,6 @@ export function GamePokemonDetail(props: {
   const tmIcon = useMemo(() => {
     if (!pokemon || pokemon.tm === Ability.DEFAULT) return null
     let icon = "assets/item/TM.png"
-    console.log("TM", pokemon.tm, pokemon.skill)
     if (
       pokemon.tm === Ability.SKILL_SWAP &&
       pokemon.skill !== Ability.SKILL_SWAP
