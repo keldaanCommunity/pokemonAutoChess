@@ -3,5 +3,5 @@ import type { IRegionStatistic } from "../../../types/models/regions-statistic"
 export type { IRegionStatistic } from "../../../types/models/regions-statistic"
 
 export async function fetchMetaRegions(): Promise<IRegionStatistic[]> {
-  return fetch("/meta/regions").then((res) => res.json())
+  return fetch(`/meta/regions?t=${new Date().getUTCDate()}`).then((res) => res.json())
 }

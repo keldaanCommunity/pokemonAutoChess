@@ -10,14 +10,18 @@ import {
   MemoryDiscs,
   ShinyItems,
   TMs,
-  Tools
+  Tools,
+  UnholdableItems,
+  Wands
 } from "../../../../../types/enum/Item"
+import { isIn } from "../../../../../utils/array"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
 
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
+  showUnholdableItems?: boolean
 }) {
   function handleOnDragStart(e: React.DragEvent, item: Item) {
     e.stopPropagation()
@@ -50,6 +54,15 @@ export default function ItemPicker(props: {
       key: "shiny_items",
       items: ShinyItems
     },
+    ...(props.showUnholdableItems
+      ? [
+          {
+            label: t("wands"),
+            key: "wands",
+            items: Wands
+          }
+        ]
+      : []),
     {
       label: t("special_items"),
       key: "special_items",
@@ -63,6 +76,12 @@ export default function ItemPicker(props: {
       ]
     }
   ]
+
+  if (props.showUnholdableItems === false) {
+    tabs.forEach((tab) => {
+      tab.items = tab.items.filter((item) => !isIn(UnholdableItems, item))
+    })
+  }
 
   return (
     <Tabs className="my-box" id="item-picker">

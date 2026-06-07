@@ -196,7 +196,6 @@ export function GamePokemonDetail(props: {
   const tmIcon = useMemo(() => {
     if (!pokemon || pokemon.tm === Ability.DEFAULT) return null
     let icon = "assets/item/TM.png"
-    console.log("TM", pokemon.tm, pokemon.skill)
     if (
       pokemon.tm === Ability.SKILL_SWAP &&
       pokemon.skill !== Ability.SKILL_SWAP

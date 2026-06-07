@@ -12086,7 +12086,7 @@ export class Vespiquen extends Pokemon {
   speDef = 8
   maxPP = 90
   range = 3
-  skill = Ability.HEAL_ORDER
+  skill = Ability.VESPIQUEN_ORDERS
   passive = Passive.VESPIQUEN
 }
 
@@ -20480,7 +20480,11 @@ export class HisuiAvalugg extends Pokemon {
   passive = Passive.AVALUGG
   additional = true
   regional: boolean = true
-  isInRegion(map: DungeonPMDO | "town"): boolean {
+  isInRegion(map: DungeonPMDO | "town", state?: GameState): boolean {
+    if (state && state.additionalPokemons.includes(Pkm.BERGMITE) === false) {
+      return false
+    }
+
     const regionSynergies = RegionDetails[map]?.synergies
     return regionSynergies.includes(Synergy.ROCK)
   }

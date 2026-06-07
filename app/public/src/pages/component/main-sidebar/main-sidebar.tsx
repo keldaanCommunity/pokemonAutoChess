@@ -519,7 +519,6 @@ function Modals({
       <Modal
         onClose={() => {
           closeModal()
-          console.log("Resetting searched user on close modal profile")
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}

@@ -1121,6 +1121,19 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
       entity.addAttack(1, entity, 0, false, true)
     }
   })
+
+  if (!attacker.player) return
+  if (familyMembers.every((p) => p.isSpawn)) {
+    const originalPoipole = schemaValues(attacker.player.board).find(
+      (p) => PkmFamily[p.name] === Pkm.POIPOLE
+    )
+    if (originalPoipole) {
+      originalPoipole.stacks++
+      if (originalPoipole.stacks % 2 === 0) {
+        originalPoipole.addAttack(1)
+      }
+    }
+  }
 }, Passive.POIPOLE)
 
 const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
@@ -1686,16 +1699,25 @@ export const PassiveEffects: Partial<
 
   [Passive.DUNSPARCE]: [
     new OnAbilityCastEffect((pokemon, board) => {
-      const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
-        (entity): entity is PokemonEntity =>
-          entity != null &&
-          entity.team === pokemon.team &&
-          PkmFamily[entity.name] === PkmFamily[pokemon.name]
-      )
-      familyMembers.forEach((entity) => {
-        if (!pokemon.player) return
+      if (!pokemon.player) return
+
+      const dunsparcesAlive: PokemonEntity[] =
+        board.cells.filter<PokemonEntity>(
+          (entity): entity is PokemonEntity =>
+            entity != null &&
+            entity.team === pokemon.team &&
+            PkmFamily[entity.name] === PkmFamily[pokemon.name]
+        )
+      dunsparcesAlive.forEach((entity) => {
         entity.addStack()
       })
+
+      if (dunsparcesAlive.every((p) => p.isSpawn)) {
+        const originalDunsparce = schemaValues(pokemon.player.board).find(
+          (p) => p.name === Pkm.DUNSPARCE
+        )
+        if (originalDunsparce) originalDunsparce.stacks++
+      }
     }),
     new OnGroundDiggingEffect(({ pokemon }) => {
       pokemon.stacks += 1
