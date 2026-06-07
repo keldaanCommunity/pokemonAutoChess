@@ -5,6 +5,9 @@
 - Nerf Alcremie Rainbow Swirl: 60 → 50 PP
 - Buff Alcremie Matcha: 40 → 60 max HP
 
+- Added a fourth tier to all abilities
+- Accelerock: 100% attack as SPECIAL → 100/125/250% attack as SPECIAL
+
 # Changes to Synergies
 
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
