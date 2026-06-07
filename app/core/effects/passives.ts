@@ -547,7 +547,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
         milcery.positionY,
         p.positionX,
         p.positionY
-      ) <= 1
+      ) == 1
   )
   adjacentAllies.forEach((ally) => {
     ally.types.forEach((synergy) => {
