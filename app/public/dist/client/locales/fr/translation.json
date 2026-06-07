@@ -2495,7 +2495,7 @@
 		"AROMATIC_MIST": "Choisissez une baguette parmi 3 dans cet ensemble: BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
 		"FAIRY_WIND": "Choisissez une baguette parmi 3 dans cet ensemble: CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
 		"STRANGE_STEAM": "Choisissez une baguette parmi 3 dans cet ensemble: GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
-		"MOON_FORCE": "Choisissez une baguette parmi 3 dans cet ensemble: WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Vos Pokémon FAIRY gagnent 20 LUCK.",
+		"MOON_FORCE": "Choisissez une baguette parmi 3 dans cet ensemble: WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Vos Pokémon FAIRY gagnent 5 LUCK.",
 		"CHILLY": "+4 SPE_DEF",
 		"FROSTY": "+12 SPE_DEF",
 		"FREEZING": "+25 SPE_DEF",
@@ -3058,7 +3058,7 @@
 		"SWEETS": "Un bonbon aléatoire accordant un bonus de statistiques permanent",
 		"RIBBON_SWEET": "Gagne 3 SPE_DEF de façon permanente",
 		"STAR_SWEET": "Gagne 10 AP de façon permanente",
-		"FLOWER_SWEET": "Gagne 5 SPEED de façon permanente",
+		"FLOWER_SWEET": "Gagne 10 SPEED de façon permanente",
 		"CLOVER_SWEET": "Gagne 10 de LUCK de façon permanente",
 		"BERRY_SWEET": "Gagne 15 HP max permanents",
 		"LOVE_SWEET": "Gagne 3 DEF de façon permanente",
@@ -3132,13 +3132,13 @@
 		"EXPLOSIVE_BAND": "La première fois que le bouclier du porteur est épuisé, cet objet explose, infligeant 50% de tout le SHIELD gagné jusqu'à présent comme SPECIAL aux ennemis ADJACENT.",
 		"TWIST_BAND": "Les malus de statistiques infligés par les ennemis se transforment en bonus. Les statistiques du porteur ne peuvent plus être volées.",
 		"BIG_EATER_BELT": "Augmente de 25% tous les bonus de statistiques reçus (arrondis à l'unité inférieure, ne s'applique pas aux PP). Permet au porteur de manger 2 plats différents chaque tour.",
-		"LUCKY_RIBBON": "Le porteur a 30% plus de LUCK et a [15,LK]% de chance d'esquiver les attaques.",
+		"LUCKY_RIBBON": "Le porteur gagne 20 de LUCK et a [15,LK]% de chance d'esquiver les attaques.",
 		"COVER_BAND": "Si un allié ADJACENT est sur le point d'être mis KO par des dégâts entrants, le porteur encaisse les dégâts à sa place.",
 		"EFFICIENT_BANDANNA": "Le porteur et ses alliés ADJACENT_IN_THE_SAME_ROW voient leur PP max réduit de 15%.",
 		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en SHIELD, et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
 		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD",
 		"RED_SCALE": "Augmente votre revenu passif de 5 GOLD par manche",
-		"RICE": "Octroie 50 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
+		"RICE": "Octroie 80 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
 		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
 		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
 		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata"
@@ -3744,7 +3744,7 @@
 		"show_all": "Afficher tout",
 		"show_locked": "Afficher les bloqués",
 		"show_unlockable": "Afficher les débloquables",
-		"show_unlocked": "Afficher les débloqués",				
+		"show_unlocked": "Afficher les débloqués",
 		"show_refundable": "Afficher les remboursables",
 		"show_newly_obtained": "Afficher les nouveaux obtenus",
 		"show_favorites": "Afficher les favoris",
@@ -3766,7 +3766,7 @@
 	"bot_builder": "Bot Builder",
 	"meta": "Méta",
 	"meta_report_info": "Généré le {{report_date}} à partir de {{time_limit}} - Données récupérées à partir de {{count}} parties",
-	"best_regions": "Meilleures régions",	
+	"best_regions": "Meilleures régions",
 	"back_to_lobby": "Retour au lobby",
 	"boosters": "Boosters",
 	"rank_labels": {
@@ -3782,7 +3782,7 @@
 	"bench": "Banc",
 	"synergies": "Synergies",
 	"join_as_guest": "Rejoindre en tant qu'invité",
-	"welcome": "Bienvenue",	
+	"welcome": "Bienvenue",
 	"stage": "Tour",
 	"spectate": "Regarder",
 	"spectating": "Vous observez {{ name }}",
@@ -3798,7 +3798,8 @@
 		"cancel_tournament_participation": "Annuler votre participation au tournoi",
 		"register_tournament_participation": "S'inscrire au tournoi",
 		"registrations_open_info": "Les inscriptions sont ouvertes une heure avant le début du tournoi",
-		"starts_at": "Démarre à"
+		"starts_at": "Démarre à",
+		"tournament_mode_locked": "Vous devez atteindre le niveau {{requiredLevel}} pour participer aux tournois."
 	},
 	"no_elo": "Juste pour le fun",
 	"enable_elo": "Activer Elo",
@@ -3822,7 +3823,7 @@
 	"games_in_progress_other": "{{count}} parties en cours",
 	"events": "Événements",
 	"custom_room_short": "Personnalisé",
-	"loading": "Connexion....",	
+	"loading": "Connexion....",
 	"no_data_available": "Aucune donnée disponible",
 	"no_bots_found": "Aucun bot trouvé !",
 	"leaderboard": "Classement",
@@ -3886,7 +3887,7 @@
 	"send_message": "Envoyer le message",
 	"shiny_hunter": "Chasseur de Shiny",
 	"pokedex": "Pokédex",
-	"alt_forms": "Formes Alternatives",	
+	"alt_forms": "Formes Alternatives",
 	"show_only_available_picks": "Afficher uniquement les choix additionnels et régionaux disponibles",
 	"close": "Fermer",
 	"additional_pokemon_hint": "Chaque joueur choisit des Pokémon additionnels qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",
@@ -4009,7 +4010,12 @@
 	"name": "Nom",
 	"give_boosters": "Donner des boosters",
 	"admin_panel": {
-		"title": "Administration"
+		"title": "Administration",
+		"refresh_meta_reports": "Recharger les rapports de la méta",
+		"refresh_leaderboards": "Recharger le classement des leaders",
+		"refresh_sprite_gap_data": "Recharger les données relatives aux différences des visuels",
+		"refresh_twitch_streams": "Recharger les flux Twitch",
+		"refresh_twitch_blacklist": "Recharger les listes noires de Twitch"
 	},
 	"banned": "Banni",
 	"ban_user": "Bannir le joueur",
@@ -4095,7 +4101,7 @@
 	"valid": "Valide",
 	"invalid": "Invalide",
 	"all": "Tous",
-	"status_label": "Statuts",	
+	"status_label": "Statuts",
 	"help": "Aider",
 	"bot_admin": "Bot Admin",
 	"change": "Changer",
@@ -4162,7 +4168,13 @@
 		"synergy_wheel": "Roue des Synergies",
 		"synergy_wheel_desc": "Tire au hasard des synergies quand on cherche de l'inspiration",
 		"tier_list_maker": "Créateur de Tier List",
-		"tier_list_maker_desc": "Créez et partagez vos propres tier lists"
+		"tier_list_maker_desc": "Créez et partagez vos propres tier lists",
+		"certificate": "Certificat",
+		"certificate_desc": "Débloque le mode classé et la participation aux tournois",
+		"palette": "Palette de Queulorior ",
+		"palette_desc": "Pour ajuster le thème et les couleurs de l'interface, sélectionnez Options → Interface ",
+		"sprite_tracker": "Traqueur de visuels",
+		"sprite_tracker_desc": "Recherche les Pokémon disponibles sur SpriteCollab et les compare avec les Pokémon de Pokémon Auto Chess."
 	},
 	"level_required": "Niveau requis",
 	"map": {
@@ -4342,7 +4354,8 @@
 		"room_is_private": "Ce salon est privé. Saisissez le mot de passe",
 		"blacklisted": "Vous avez été exclu(e) de ce match.",
 		"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
-		"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé"
+		"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé",
+		"ranked_mode_locked": "Le mode classé est bloqué. Il vous faut atteindre le niveau {{requiredLevel}} pour le débloquer."
 	},
 	"npc_dialog": {
 		"welcome": "Bienvenue !",
@@ -4420,7 +4433,8 @@
 		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF",
 		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver.",
 		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !",
-		"LAPRAS": "Lapras vous offre un voyage vers une autre région."
+		"LAPRAS": "Lapras vous offre un voyage vers une autre région.",
+		"LUDICOLO": "Ludicolo célèbre l'arrivée du carnaval et offre des instruments aux joueurs pour qu'ils puissent également participer aux festivités."
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -4447,7 +4461,8 @@
 			"weather_label": "Météo",
 			"town_label": "Village",
 			"dungeon_label": "Régions",
-			"data_label": "Données"
+			"data_label": "Données",
+			"glossary_label": "Glossaire"
 		},
 		"faq": {
 			"official_game": "Est-ce un jeu officiel ?",
@@ -4489,7 +4504,9 @@
 			"code": "Quel langage/bibliothèque est utilisé pour coder le jeu ?",
 			"code_answer": "TypeScript, Phaser, Colyseus. Si vous souhaitez contribuer",
 			"pull_requests": "les pull requests sont ouvertes",
-			"faq": "FAQ."
+			"faq": "FAQ.",
+			"reconnect": "J'ai été déconnecté d'une partie/salon, comment permettre la reconnexion? ",
+			"reconnect_answer": "Essayez de relancer la connexion (Touche F5). Si cela ne marche pas, entrez à nouveau <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a> en tant qu'URL pour votre navigateur, réauthentifiez-vous si besoin et retournez dans le salon principal, puis essayez de retrouver votre partie sous le menu \"En jeu\" ou à l'endroit approprié au mode de votre partie. Vous devriez retrouver un bouton vert sur lequel il est écrit \"Reconnexion\", à côté du salon de votre précédente partie."
 		},
 		"tutorials": {
 			"thanks_to": "Merci à",
@@ -4534,7 +4551,9 @@
 			"mulch": "Engrais",
 			"mulch_description": "De l'engrais est collecté à chaque fois qu'un Pokémon FLORA est mis K.O. Utilisez-le pour faire évoluer vos Pots de Fleurs.",
 			"cell_battery_description": "Une fois le niveau maximum de synergie ELECTRIC atteint, vos Pokémon chargent une CELL_BATTERY avec leurs attaques. Vous pouvez l'utiliser pour surcharger un Pokémon ELECTRIC pendant le prochain combat.",
-			"fire_shard_description": "Une fois le niveau maximum de synergie FIRE atteint, à chaque tour vous pouvez utiliser un FIRE_SHARD pour renforcer un Pokémon FIRE en sacrifiant les PV de votre joueur."
+			"fire_shard_description": "Une fois le niveau maximum de synergie FIRE atteint, à chaque tour vous pouvez utiliser un FIRE_SHARD pour renforcer un Pokémon FIRE en sacrifiant les PV de votre joueur.",
+			"wands": "Baguettes",
+			"wands_description": "Les baguettes ajoutent des effets aux attaques des Pokémon FAIRY. "
 		},
 		"statistics": {
 			"stat_description": {
@@ -4610,7 +4629,21 @@
 			"luck_description": "La Chance augmente vos probabilités dans tous les tirages, que ce soit pour les coups critiques, les esquives, l'activation d'effets de statut après une attaque ou tout autre effet mentionné avec le symbole [LK].",
 			"luck_formula": "La Chance affecte les probabilités avec cette formule : P = baseP ^ (1 - chance/100) ; par exemple, un Pokémon avec 10% de chance de coup critique et 50 de chance aura en réalité 0,1^(1-50/100) = ~31,62% de chance d'exécuter un coup critique.",
 			"xp": "EXP",
-			"experience": "Expérience"
+			"experience": "Expérience",
+			"speed_calculation": "Comment la SPEED fonctionne?",
+			"speed_calculation_description": "La SPEED influence le délai entre deux actions réalisées par votre Pokémon. Ces actions peuvent être le déplacement, l'attaque ou l'utilisation d'une capacité. Le délai ce calcule comme suivant: Délai = 1000 / (0.4 + 0.007 * Vitesse). Ainsi un Pokémon doté de 0 de SPEED, réalisera 4 attaques toutes les 10 secondes. N. B. : le maximum de SPEED est de 300, un Pokémon doté d'une telle vitesse peut réaliser 25 attaques toutes les 10 secondes. Certaines capacités ou effets peuvent admettre un délai plus court ou un délai fixé."
+		},
+		"glossary": {
+			"damage_types": "Types de dégâts",
+			"SPECIAL": "Les capacités infligent la plupart du temps des SPECIAL. Quelque capacités peuvent toutefois infliger des TRUE.  Ce type de dégâts est diminué relativement à la SPE_DEF de la cible.",
+			"PHYSICAL": "Sauf indication contraire, les attaques infligent des PHYSICAL. Ce type de dégâts est diminué relativement à la DEF de la cible.",
+			"TRUE": "Les TRUE ne sont ni diminués par la DEF ni par la SPE_DEF ou même tout effet visant à la réduction de dégâts. Il est possible d'infliger des TRUE à l'aide de talents particuliers, d'objets ou d'effets de synergie.",
+			"item_categories": "Catégorie d'objet",
+			"components": "Deux composants peuvent être combinés en un objet fabricable. ",
+			"craftable_items": "Les objets fabricables sont créés par la combinaison de deux composants.",
+			"consumable_item": "Les objets consommables sont des objets à usage unique qui peuvent être retirés quand leurs effets sont appliqués.",
+			"unholdable_item": "Objet ne pouvant pas être porté par un Pokémon. Les effets de tels objets s'appliquent par défaut à l'intégralité de votre équipe.",
+			"removable_item": "Les Objets retirables sont des objets qui peuvent être retirés d'un Pokémon par le simple fait de le poser sur le banc."
 		}
 	},
 	"errors": {
@@ -4631,7 +4664,8 @@
 		"INVALID_PASSWORD": "Mot de passe incorrect",
 		"UNKNOWN_ERROR": "Une erreur inconnue est survenue: {{error}}",
 		"SERVER_SHUTDOWN": "Le serveur est en cours d'arrêt pour maintenance.",
-		"FAILED_TO_RECONNECT": "Impossible de se reconnecter au jeu. Veuillez actualiser la page et réessayer."
+		"FAILED_TO_RECONNECT": "Impossible de se reconnecter au jeu. Veuillez actualiser la page et réessayer.",
+		"title": "Erreur"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Connexion perdue. Tentative de reconnexion…",
@@ -4659,14 +4693,19 @@
 		"ADJACENT": "adjacents",
 		"ADJACENT_IN_THE_SAME_ROW": "adjacents sur la même rangée",
 		"CONE": "cône",
-		"BOARD_EFFECT": "Effet de Plateau"
+		"BOARD_EFFECT": "Effet de Plateau",
+		"title": "Termes techniques",
+		"ON_ATTACK": "d'attaque",
+		"ON_HIT": "de coup"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Le plus fort est défini comme suit, par ordre de priorité : 1. Nombre d'objets tenus, 2. Tier de l'unité, 3. Rareté de l'unité",
 		"ADJACENT": "les 8 cases entourant une unité",
 		"ADJACENT_IN_THE_SAME_ROW": "les cases directement à gauche et à droite d'une unité",
 		"CONE": "tir dans un angle de 90 degrés devant l'unité, centré sur la cible",
-		"BOARD_EFFECT": "Un Effet de Plateau est un effet posé sur une case du plateau qui affecte toutes les unités qui se tiennent dessus, quelle que soit leur équipe, et qui reste jusqu'à la fin du combat. Les effets de plateau peuvent être dissipés par certaines capacités."
+		"BOARD_EFFECT": "Un Effet de Plateau est un effet posé sur une case du plateau qui affecte toutes les unités qui se tiennent dessus, quelle que soit leur équipe, et qui reste jusqu'à la fin du combat. Les effets de plateau peuvent être dissipés par certaines capacités.",
+		"ON_ATTACK": "Les effets d'attaque s'appliquent après qu'une unité a réalisé une attaque classique (et non une capacité consommant des PP) sur une unité encore en vie, à condition que l'attaque soit considérée comme ayant touché sa cible, que celle-ci ait esquivé ou non.",
+		"ON_HIT": "Les effets de coup sont appliqués quand une unité est touchée par une attaque ou une capacité. Ils sont appliqués même si la cible est dotée de SHIELD, mais toutefois pas si cette dernière esquive l'attaque ou la capacité, ou bien si la cible a le statut PROTECT."
 	},
 	"victory_road": {
 		"title": "Route Victoire",
@@ -4820,7 +4859,12 @@
 		"tournament_finished_message": "Vous avez été éliminé du tournoi !\\nVotre position finale: {{place}}",
 		"next": "Suivant",
 		"close": "Fermer",
-		"dismiss_all": "Tout fermer"
+		"dismiss_all": "Tout fermer",
+		"info_title": "Information",
+		"new_gadget_title": "Nouveau Gadget débloqué!",
+		"new_gadget_message": "Vous avez débloqué un nouveau gadget: {{gadget}}: {{description}}",
+		"new_theme_title": "Nouveau Thème débloqué!",
+		"new_theme_message": "Vous avez débloqué un nouveau thème: {{theme}}. Allez au niveau des Options et sélectionnez le!"
 	},
 	"profile": {
 		"title": "Profil",
@@ -4829,7 +4873,8 @@
 			"titles_unlocked": "{{count}} / {{total}} titres débloqués",
 			"avatars_unlocked": "{{count}} / {{total}} avatars déverrouillés",
 			"gadgets_unlocked": "{{count}} / {{total}} gadgets débloqués",
-			"pokemons_played": "{{count}} / {{total}} Pokémon joués"
+			"pokemons_played": "{{count}} / {{total}} Pokémon joués",
+			"unlocks_theme": "Thèmes débloqués: {{theme}}"
 		},
 		"avatar": {
 			"change_avatar": "Changer d'avatar",
@@ -4849,6 +4894,29 @@
 			"change_name": "Changer de nom",
 			"username_disclaimer": "Les noms d'utilisateur inappropriés entraîneront le bannissement de votre compte. Cela inclut les propos grossiers, à caractère adulte ou sexuel, les menaces directes et indirectes, les déclarations politiques et la publicité pour des contenus sans rapport avec le jeu.",
 			"invalid_username": "Nom d'utilisateur invalide. Le nom d'utilisateur doit comporter entre 3 et 24 caractères, commencer par une lettre, contenir uniquement des lettres ou des chiffres ou \".-_\", pas d'espaces."
+		},
+		"elo_tab": {
+			"title": "Elo",
+			"current_elo": "Elo actuel",
+			"max_elo_reached": "Plus grand Elo atteint",
+			"elo_decay_info": "Si vous n'avez pas participé à au moins 3 parties depuis les 20 derniers jours (des Parties Classées et ce si vous être classé au rang Hyper Ball ou tout rang supérieur), alors votre Elo décroîtra progressivement (à raison de {{eloLoss}} Elo par jour).",
+			"elo_decay_active": "Votre Elo est actuellement en train de décroître.",
+			"elo_decay_inactive": "Votre Elo commencera à décroître dans {{time}}."
 		}
-	}
+	},
+	"sprite_tracker": {
+		"normal": "Normal",
+		"shiny": "Chromatique",
+		"filter_mega": "Méga ({{count}})",
+		"filter_alternate": "Formes alternatives ({{count}})",
+		"filter_altcolor": "Couleurs alternatives ({{count}})",
+		"filter_female": "Femelles ({{count}})",
+		"filter_alcremie": "Charmilly ({{count}})",
+		"filter_beta": "Bétas ({{count}})",
+		"filter_cutscene": "Cinématiques ({{count}})"
+	},
+	"game_count": "Parties",
+	"total_games_30d": "Parties (sur les 30 derniers jours)",
+	"wands": "Baguettes",
+	"game_activity": "Activité"
 }
