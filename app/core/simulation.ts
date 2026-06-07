@@ -37,13 +37,12 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
-import { count, isIn, removeInArray } from "../utils/array"
+import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
 import {
-  chance,
   pickRandomIn,
   randomBetween,
   shuffleArray
@@ -78,7 +77,6 @@ import {
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
-import { DelayedCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -567,54 +565,56 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       board.forEach((pokemon) => {
-        if (pokemon.items.has(Item.WHITE_FLUTE) && !isOnBench(pokemon)) {
-          const wilds = PRECOMPUTED_POKEMONS_PER_TYPE[Synergy.WILD].map((p) =>
-            getPokemonData(p)
-          )
-          const spawns: IPokemonData[] = []
-          const pickWild = (rarity: Rarity, tier: number) => {
-            const randomWild = pickRandomIn(
-              wilds.filter((p) => p.rarity === rarity && p.stars === tier)
+        if (pokemon.items.has(Item.GOLD_MASK) && !isOnBench(pokemon)) {
+          const candidates = deduplicateArray(
+            schemaValues(pokemon.types).flatMap(
+              (type) => PRECOMPUTED_POKEMONS_PER_TYPE[type] ?? []
             )
-            if (randomWild) {
-              spawns.push(randomWild)
+          ).map((p) => getPokemonData(p))
+          const spawns: IPokemonData[] = []
+          const pickSpawn = (rarity: Rarity, tier: number) => {
+            const randomSpawn = pickRandomIn(
+              candidates.filter((p) => p.rarity === rarity && p.stars === tier)
+            )
+            if (randomSpawn) {
+              spawns.push(randomSpawn)
             } else {
               logger.info("no pokemon found for white flute call", rarity, tier)
             }
           }
 
           if (this.stageLevel <= 5) {
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.COMMON, 1)
+            pickSpawn(Rarity.COMMON, 1)
+            pickSpawn(Rarity.COMMON, 1)
+            pickSpawn(Rarity.COMMON, 1)
           } else if (this.stageLevel <= 10) {
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.COMMON, 1)
-            pickWild(Rarity.UNCOMMON, 1)
+            pickSpawn(Rarity.COMMON, 1)
+            pickSpawn(Rarity.COMMON, 1)
+            pickSpawn(Rarity.UNCOMMON, 1)
           } else if (this.stageLevel <= 15) {
-            pickWild(Rarity.UNCOMMON, 1)
-            pickWild(Rarity.UNCOMMON, 1)
-            pickWild(Rarity.RARE, 1)
+            pickSpawn(Rarity.UNCOMMON, 1)
+            pickSpawn(Rarity.UNCOMMON, 1)
+            pickSpawn(Rarity.RARE, 1)
           } else if (this.stageLevel <= 20) {
-            pickWild(Rarity.UNCOMMON, 1)
-            pickWild(Rarity.RARE, 1)
-            pickWild(Rarity.EPIC, 1)
+            pickSpawn(Rarity.UNCOMMON, 1)
+            pickSpawn(Rarity.RARE, 1)
+            pickSpawn(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 25) {
-            pickWild(Rarity.UNCOMMON, 2)
-            pickWild(Rarity.RARE, 1)
-            pickWild(Rarity.EPIC, 1)
+            pickSpawn(Rarity.UNCOMMON, 3)
+            pickSpawn(Rarity.RARE, 2)
+            pickSpawn(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 30) {
-            pickWild(Rarity.RARE, 2)
-            pickWild(Rarity.EPIC, 1)
-            pickWild(Rarity.EPIC, 1)
+            pickSpawn(Rarity.UNCOMMON, 3)
+            pickSpawn(Rarity.RARE, 3)
+            pickSpawn(Rarity.EPIC, 2)
           } else if (this.stageLevel <= 35) {
-            pickWild(Rarity.RARE, 2)
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 3)
+            pickSpawn(Rarity.UNCOMMON, 3)
+            pickSpawn(Rarity.RARE, 3)
+            pickSpawn(Rarity.EPIC, 3)
           } else {
-            pickWild(Rarity.EPIC, 2)
-            pickWild(Rarity.UNIQUE, 3)
-            pickWild(Rarity.ULTRA, 2)
+            pickSpawn(Rarity.UNIQUE, 3)
+            pickSpawn(Rarity.ULTRA, 3)
+            pickSpawn(Rarity.LEGENDARY, 3)
           }
 
           spawns.forEach((spawn) => {
@@ -699,71 +699,8 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    // TARGET SELECTION EFFECTS (ghost curse, comet shard etc)
+    // TARGET SELECTION EFFECTS (ghost curse)
     for (const team of [this.blueTeam, this.redTeam]) {
-      team.forEach((pokemon) => {
-        if (pokemon.items.has(Item.COMET_SHARD)) {
-          pokemon.commands.push(
-            new DelayedCommand(() => {
-              const farthestCoordinate =
-                this.board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-              if (farthestCoordinate) {
-                const target = farthestCoordinate.target as PokemonEntity
-                pokemon.skydiveTo(
-                  farthestCoordinate.x,
-                  farthestCoordinate.y,
-                  this.board
-                )
-                pokemon.setTarget(target)
-                pokemon.status.triggerProtect(2000)
-                pokemon.commands.push(
-                  new DelayedCommand(() => {
-                    pokemon.simulation.room.broadcast(Transfer.ABILITY, {
-                      id: pokemon.simulation.id,
-                      skill: "COMET_CRASH",
-                      positionX: farthestCoordinate.x,
-                      positionY: farthestCoordinate.y,
-                      targetX: target.positionX,
-                      targetY: target.positionY
-                    })
-                  }, 500)
-                )
-
-                pokemon.commands.push(
-                  new DelayedCommand(() => {
-                    if (target?.hp > 0) {
-                      const crit = chance(pokemon.critChance / 100, pokemon)
-                      target.handleSpecialDamage(
-                        3 * pokemon.atk,
-                        this.board,
-                        AttackType.SPECIAL,
-                        pokemon as PokemonEntity,
-                        crit,
-                        false
-                      )
-                      this.board
-                        .getAdjacentCells(target.positionX, target.positionY)
-                        .forEach((cell) => {
-                          if (cell.value && cell.value.team !== pokemon.team) {
-                            cell.value.handleSpecialDamage(
-                              pokemon.atk,
-                              this.board,
-                              AttackType.SPECIAL,
-                              pokemon as PokemonEntity,
-                              crit,
-                              false
-                            )
-                          }
-                        })
-                    }
-                  }, 1000)
-                )
-              }
-            }, 100)
-          )
-        }
-      })
-
       const teamEffects =
         team === this.blueTeam ? this.blueEffects : this.redEffects
       const opponentTeam =

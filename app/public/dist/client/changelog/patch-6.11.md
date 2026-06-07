@@ -11,6 +11,9 @@
 
 # Changes to Items
 
+- New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
+- New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
+
 - Nerf Tea: 80 → 60 PP
 - Nerf Smoked Fillet: 5 → 3 ATK gained
 - Buff Flower Sweet: 5 → 10 SPEED gained
