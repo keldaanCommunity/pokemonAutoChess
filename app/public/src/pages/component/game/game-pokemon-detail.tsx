@@ -132,6 +132,11 @@ export function GamePokemonDetail(props: {
     props.origin
   ])
 
+  const isEntity = (
+    obj: IPokemonEntity | IPokemon | Pkm | null | undefined
+  ): obj is IPokemonEntity => obj != null && obj.hasOwnProperty("simulation")
+  const isInFight = isEntity(props.pokemon)
+
   const getStatWithItemBonus = (stat: Stat): number | undefined => {
     return pokemonStats.find((s) => s.stat === stat)?.value
   }
@@ -219,6 +224,9 @@ export function GamePokemonDetail(props: {
     return null
   }
 
+  const stars =
+    pokemon.stars + (pokemon.items.has(Item.STAR_PIECE) && !isInFight ? 1 : 0)
+
   return (
     <div className="game-pokemon-detail">
       <PokemonPortrait
@@ -247,11 +255,11 @@ export function GamePokemonDetail(props: {
           {t(`rarity.${pokemon.rarity}`)}
         </p>
         <p className="game-pokemon-detail-entry-tier">
-          {Array.from({ length: pokemon.stars }, (_, index) => (
+          {Array.from({ length: stars }, (_, index) => (
             <img key={index} src="assets/ui/star.svg" height="16"></img>
           ))}
           {Array.from(
-            { length: getPokemonData(pokemon.name).stages - pokemon.stars },
+            { length: getPokemonData(pokemon.name).stages - stars },
             (_, index) => (
               <img key={index} src="assets/ui/star_empty.svg" height="16"></img>
             )
@@ -318,8 +326,9 @@ export function GamePokemonDetail(props: {
               {
                 ap: pokemon.ap,
                 luck: pokemon.luck,
-                stars: pokemon.stars,
-                stages: getPokemonData(pokemon.name).stages
+                stars,
+                stages: getPokemonData(pokemon.name).stages,
+                showAbilityTiers: props.origin === "wiki"
               }
             )}
           </p>
@@ -348,8 +357,9 @@ export function GamePokemonDetail(props: {
               stats={{
                 ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
-                stars: pokemon.stars,
-                stages: getPokemonData(pokemon.name).stages
+                stars,
+                stages: getPokemonData(pokemon.name).stages,
+                showAbilityTiers: props.origin === "wiki"
               }}
               key={pokemon.id}
             />

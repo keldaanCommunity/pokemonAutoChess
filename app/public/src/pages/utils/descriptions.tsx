@@ -39,7 +39,13 @@ export const iconRegExp = new RegExp(
 
 export function addIconsToDescription(
   description: string,
-  stats?: { ap: number; luck: number; stars: number; stages?: number }
+  params?: {
+    ap: number
+    luck: number
+    stars: number
+    stages?: number
+    showAbilityTiers?: boolean
+  }
 ) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
@@ -161,6 +167,13 @@ export function addIconsToDescription(
           scaleFactor = Number(array.pop()?.replace("LK=", "")) || 1
         }
 
+        const tier = params?.stars
+        const maxTier = params?.stages ? params.stages + 1 : 5
+        const tierValues =
+          params?.stars && !params?.showAbilityTiers
+            ? [array[params.stars - 1]] // only show relevant tier
+            : array.slice(0, maxTier) // show tier scaling
+
         d = (
           <span
             className={cc("description-icon", {
@@ -182,34 +195,32 @@ export function addIconsToDescription(
                 title="Scales with Luck"
               ></img>
             )}
-            {array.slice(0, stats?.stages).map((v, j) => {
-              const separator =
-                j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
+            {tierValues.map((v, j) => {
+              const separator = j < tierValues.length - 1 ? "/" : ""
               let value: number | string = roundToNDigits(Number(v), nbDigits)
               if (Number.isNaN(value)) {
                 // In case of non-numeric value, just return as is
                 value = v
               } else if (scaleType === "AP") {
                 value = roundToNDigits(
-                  Number(v) * (1 + ((stats?.ap ?? 0) * scaleFactor) / 100),
+                  Number(v) * (1 + ((params?.ap ?? 0) * scaleFactor) / 100),
                   nbDigits
                 )
               } else if (scaleType === "LUCK") {
                 value = roundToNDigits(
                   max(100)(
-                    Math.pow(Number(v) / 100, 1 - (stats?.luck ?? 0) / 100) *
+                    Math.pow(Number(v) / 100, 1 - (params?.luck ?? 0) / 100) *
                       100
                   ),
                   nbDigits
                 )
               }
 
-              const tier = stats?.stars
               const active =
                 tier === undefined ||
                 array.length === 1 ||
                 j === tier - 1 ||
-                (tier > array.length && j === array.length - 1)
+                (tier > tierValues.length && j === tierValues.length - 1)
               return (
                 <span key={j} className="ability-value">
                   <span className={cc({ active })}>{value}</span>

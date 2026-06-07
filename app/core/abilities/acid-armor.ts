@@ -1,8 +1,8 @@
-import { distanceC } from "../../utils/distance";
-import type { Board } from "../board";
-import { OnDamageReceivedEffect } from "../effects/effect";
-import type { PokemonEntity } from "../pokemon-entity";
-import { AbilityStrategy } from "./ability-strategy";
+import { distanceC } from "../../utils/distance"
+import type { Board } from "../board"
+import { OnDamageReceivedEffect } from "../effects/effect"
+import type { PokemonEntity } from "../pokemon-entity"
+import { AbilityStrategy } from "./ability-strategy"
 
 export class AcidArmorStrategy extends AbilityStrategy {
   process(

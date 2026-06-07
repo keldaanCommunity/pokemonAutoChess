@@ -191,6 +191,8 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
         .map((cell) => cell.value!)
         .concat(target)
+      const multiplier = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+
       targets.forEach((t) => {
         pokemon.broadcastAbility({
           skill: Ability.SHIELDS_DOWN,
@@ -199,7 +201,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         })
         if (pokemon.name === Pkm.MINIOR_KERNEL_BLUE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.SPECIAL,
             attacker: pokemon,
@@ -208,7 +212,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         }
         if (pokemon.name === Pkm.MINIOR_KERNEL_RED) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 1.5 * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * 1.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.PHYSICAL,
             attacker: pokemon,
@@ -217,7 +223,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         }
         if (pokemon.name === Pkm.MINIOR_KERNEL_ORANGE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.5 * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * 0.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.TRUE,
             attacker: pokemon,
@@ -228,7 +236,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
       if (pokemon.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v.value && v.value.team === pokemon.team) {
-            v.value.handleHeal(physicalDamage, pokemon, 1, false)
+            v.value.handleHeal(physicalDamage * multiplier, pokemon, 1, false)
           }
         })
       }

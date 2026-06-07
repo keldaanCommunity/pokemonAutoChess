@@ -1,3 +1,4 @@
+
 # New Pokemons:
 
 # Changes to Pokemon & Abilities
@@ -5,8 +6,26 @@
 - Nerf Alcremie Rainbow Swirl: 60 → 50 PP
 - Buff Alcremie Matcha: 40 → 60 max HP
 
-- Added a fourth tier to all abilities
-- Accelerock: 100% attack as SPECIAL → 100/125/250% attack as SPECIAL
+Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.
+- Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
+- After You (Indeedee): SPEED buff: 10 → 5/10/15/20
+- Behemoth Blade (Zacian): 100 SPECIAL at all tiers → 30/60/90/120/240 SPECIAL
+- Crunch (Totodile, Guzzlord): 40/80/150 → 40/80/160/320 SPECIAL
+- Flame Wheel (Cyndaquil): 10/20/30 → 10/20/40/80 SPECIAL
+- Jet Punch (Palafin): 100% of SPEED as SPECIAL → 100/100/100/150/300%
+- Leaf's blade (Trecko, Galarian Farfetched, Kartana): 100% → 100/125/150/250% of ATK as TRUE
+- Meteor Mash (Beldum): 100% → 100/120/140/200% of ATK 3 times
+- Mortal Spin (Glimmet): 20/30 → 20/40/80/160 SPECIAL ; Poison duration: 4 → 4/4/8/16 seconds
+- Mystical Fire (Fennekin): AP reduction 20 → 15/20/25/50
+- Nutrients: healing 40 → 20/30/40/80 ; DEF/SPE_DEF buff: 2 → 1/2/3/6
+- Origin Pulse (Kyogre): 100 SPECIAL → 50/75/100/120/150 ; Primal Kyogre PP 90 → 100
+- Prismatic Laser (Necrozma): 60 SPECIAL → 30/40/50/60/120 SPECIAL
+- Quiver Dance (Burmy): ATK & SPE_DEF buff 5 → 3/4/5/10, SPEED buff 10 → 10/10/10/15
+- Struggle Bug (Illumise): AP reduction 50 → 30
+- Super Fang (Bidoof): 25% → 20/30/50/70% max HP as TRUE
+- Sweet Scent (Chikorita, Swirlix): SPE_DEF debuff: 6 → 4/6/8/10 ; SPEED debuff: 12 → 10/12/15/20
+- Tail Glow (Volbeat): AP buff 50 → 30
+
 
 # Changes to Synergies
 
@@ -27,6 +46,7 @@
 # UI
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
+- Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
 
 # Bugfix
 

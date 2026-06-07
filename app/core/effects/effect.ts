@@ -64,6 +64,7 @@ export class OnItemGainedEffect extends Effect {
   override apply(pokemon: PokemonEntity, item: Item) {}
 }
 
+// item effect applied when item is removed during a fight (stolen, destroyed, consummed...)
 export class OnItemRemovedEffect extends Effect {
   constructor(effect?: (pokemon: PokemonEntity, item: Item) => void) {
     super(effect)
