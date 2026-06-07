@@ -478,6 +478,10 @@ export function applyWandEffects(
 ): { takenDamage: number; death: boolean } {
   const board = pokemon.simulation.board
   const wands = pokemon.player?.items.filter((item) => isIn(Wands, item)) ?? []
+  if (wands.length === 0) {
+    return { takenDamage: 0, death: false }
+  }
+
   let specialDamageFactor = 0
 
   for (const wand of wands) {
@@ -553,7 +557,7 @@ export function applyWandEffects(
         const adjacentEnemies = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
           .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-        specialDamageFactor += 0.1 * adjacentEnemies.length
+        specialDamageFactor += 0.05 * adjacentEnemies.length
         break
       }
       case Item.TWO_EDGED_WAND: {
@@ -578,8 +582,10 @@ export function applyWandEffects(
     switch (wand) {
       case Item.HP_SWAP_WAND: {
         if (chance(0.2, pokemon)) {
-          target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
-          pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+          target.addMaxHP(-Math.floor(takenDamage), pokemon, 0, false)
+          if (target.items.has(Item.TWIST_BAND) === false) {
+            pokemon.addMaxHP(Math.floor(takenDamage), pokemon, 0, false)
+          }
         }
         break
       }
@@ -687,7 +693,7 @@ export function applyWandEffects(
                 cell.value.positionX,
                 cell.value.positionY,
                 cell.value.team,
-                3
+                2
               )
               if (freeCellInTheBack) {
                 cell.value.moveTo(
@@ -805,7 +811,6 @@ export const cloneBugs = ({
   })
   bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
-  let numberOfClones = 1
   let numberOfBugsToClone = 0
   if (effects.has(EffectEnum.COCOON)) {
     numberOfBugsToClone = 1
@@ -822,6 +827,7 @@ export const cloneBugs = ({
   numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
   for (let i = 0; i < numberOfBugsToClone; i++) {
+    let numberOfClones = 1
     const pokemonCloned = bugTeam[i]
     let clonePkm = pokemonCloned.name
 

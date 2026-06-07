@@ -1014,7 +1014,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.effectsSet.add(pounceWandEffect)
           }
           if (effect === EffectEnum.MOON_FORCE) {
-            pokemon.addLuck(20, pokemon, 0, false)
+            pokemon.addLuck(5, pokemon, 0, false)
           }
         }
         break
@@ -1555,19 +1555,22 @@ export default class Simulation extends Schema implements ISimulation {
         )
 
         // Compute streak
-        const previousBattleResult = player.history
-          .filter(
-            (stage) => stage.id !== "pve" && stage.result !== BattleResult.DRAW
-          )
-          .map((stage) => stage.result)
-          .at(-2)
-        if (battleResult === BattleResult.DRAW) {
-          // preserve existing streak but lose HP
-        } else if (battleResult !== previousBattleResult) {
-          // reset streak
-          player.streak = 0
-        } else {
-          player.streak += 1
+        if (!isPvE) {
+          const previousBattleResult = player.history
+            .filter(
+              (stage) =>
+                stage.id !== "pve" && stage.result !== BattleResult.DRAW
+            )
+            .map((stage) => stage.result)
+            .at(-2)
+          if (battleResult === BattleResult.DRAW) {
+            // preserve existing streak but lose HP
+          } else if (battleResult !== previousBattleResult) {
+            // reset streak
+            player.streak = 0
+          } else {
+            player.streak += 1
+          }
         }
       }
 

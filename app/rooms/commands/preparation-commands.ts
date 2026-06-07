@@ -33,6 +33,7 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { schemaEntries, schemaValues } from "../../utils/schemas"
 import type PreparationRoom from "../preparation-room"
+import { GADGETS } from "../../config/game/gadgets"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -105,6 +106,11 @@ export class OnJoinCommand extends Command<
           !isAdmin
         ) {
           client.leave(CloseCodes.USER_RANK_TOO_HIGH)
+          return
+        }
+
+        if (this.state.gameMode === GameMode.RANKED && u.level < GADGETS.certificate.levelRequired) {
+          client.leave(CloseCodes.USER_RANK_TOO_LOW)
           return
         }
 

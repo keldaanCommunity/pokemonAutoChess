@@ -181,10 +181,6 @@ export class DebugScene extends Phaser.Scene {
         this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-        const sys = this.sys as any
-        if (sys.animatedTiles) {
-          sys.animatedTiles.pause()
-        }
         playMusic(this as any, RegionDetails[mapName].music)
         resolve()
       })
@@ -219,7 +215,6 @@ export class DebugScene extends Phaser.Scene {
           )!
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
-        ;(this.sys as any).animatedTiles.init(map)
         playMusic(this as any, RegionDetails[mapName].music)
       })
       .then(() => {
