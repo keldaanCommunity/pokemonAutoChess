@@ -51,8 +51,8 @@ import {
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies, type SurfStrategy } from "./abilities/abilities"
 import { Board } from "./board"
-import { DishEffects } from "./dishes"
 import Dps from "./dps"
+import { DishEffects } from "./effects/dishes"
 import {
   OnDishConsumedEffect,
   OnSimulationStartEffect,
