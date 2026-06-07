@@ -568,7 +568,17 @@
 		"CEASELESS_EDGE": "Vagues à Lames",
 		"MOUNTAIN_GALE": "Bise Glaciaire",
 		"TWINEEDLE": "Double Dard",
-		"ROCK_WRECKER": "Roc-Boulet"
+		"ROCK_WRECKER": "Roc-Boulet",
+		"DEFAULT": "Sans capacité",
+		"DEFEND_ORDER": "Appel Défense",
+		"ATTACK_ORDER": "Appel Attaque",
+		"BUG_BITE": "Piqûre",
+		"AQUA_STEP": "Danse Aquatique",
+		"SNORE": "Ronflement",
+		"STUFF_CHEEKS": "Garde-à-Joues",
+		"SILK_TRAP": "Piège de Fil",
+		"SKITTER_SMACK": "Ravage Rampant",
+		"VESPIQUEN_ORDERS": "Ordres d'Apireine"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1749,7 +1759,16 @@
 		"EISCUE": "Bekaglaçon (Tête de Gel)",
 		"EISCUE_NOICE": "Bekaglaçon",
 		"DWEBBLE": "Crabicoque",
-		"CRUSTLE": "Crabaraque"
+		"CRUSTLE": "Crabaraque",
+		"SKWOVET": "Rongourmand",
+		"GREEDENT": "Rongrigou",
+		"QUAXLY": "Coiffeton",
+		"QUAXWELL": "Canarbello",
+		"QUAQUAVAL": "Palmaval",
+		"KOMALA": "Dodoala",
+		"TAROUNTULA": "Tissemboule",
+		"SPIDOPS": "Filentrappe",
+		"SLITHER_WING": "Rampe-Ailes"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,SP] SHIELD à tous les alliés.",
@@ -2297,7 +2316,17 @@
 		"CEASELESS_EDGE": "Frappe les 3 ennemis devant le lanceur, leur infligeant [20,40,80,SP] SPECIAL et laissant des Piques sous eux. Peut infliger un coup critique par défaut. BOARD_EFFECT: les Piques infligent 10 TRUE par seconde et ARMOR_BREAK à tout Pokémon marchant dessus et n'étant pas de type FLYING ou STEEL.",
 		"MOUNTAIN_GALE": "Projette [1,3] gros blocs de glace aléatoirement sur la cible et les ennemis ADJACENT, infligeant FLINCH pendant 3 secondes puis [40,SP] SPECIAL par projectile. Si l'utilisateur porte des Grelaçon sur son dos, ceux-ci sont également projetés et infligent les mêmes dégâts.",
 		"TWINEEDLE": "Inflige [25,50,80,SP] SPECIAL à la cible deux fois. Le premier coup peut être un coup critique par défaut, tandis que le second coup a [40,LK]% de chance d'appliquer POISON pendant 4 secondes.",
-		"ROCK_WRECKER": "Lance un énorme rocher sur la cible, infligeant FLINCH pendant 2 secondes puis [80,160,SP] SPECIAL. Puis le lanceur subit FATIGUE pendant 4 secondes."
+		"ROCK_WRECKER": "Lance un énorme rocher sur la cible, infligeant FLINCH pendant 2 secondes puis [80,160,SP] SPECIAL. Puis le lanceur subit FATIGUE pendant 4 secondes.",
+		"DEFAULT": " ",
+		"VESPIQUEN_ORDERS": "$t(pkm.VESPIQUEEN) aura une capacité dépendant de la rangée occupée par l'unité au début du combat:\n- Rangée avant: $t(ability.DEFEND_ORDER)\n- Rangée du milieu: $t(ability.HEAL_ORDER)\n- Rangée arrière: $t(ability.ATTACK_ORDER)",
+		"DEFEND_ORDER": "Invoque un $t(pkm.COMBEE) à proximité, puis l'utilisateur et tous les $t(pkm.COMBEE) alliés soignent les Pokémon alliés ADJACENT de [10, 20, 30] PV et suppriment leurs conditions de statut négatives.",
+		"ATTACK_ORDER": "Invoque un $t(pkm.COMBEE) à proximité, puis tous les $t(pkm.COMBEE) alliés subissent RAGE pendant 3 secondes. La prochaine attaque de l'utilisateur infligera [20,40,60,SP] + [10,20,30,SP] pour chaque $t(pkm.COMBEE) allié sur le terrain.",
+		"BUG_BITE": "Inflige [20,40,80] SPECIAL à la cible et mange une de ses baies si la cible en tient une.",
+		"AQUA_STEP": "Se déplace vers une case ADJACENT inoccupée avec de fluides pas de danse puis inflige [25,50,100,SP] SPECIAL tout en augmentant la SPEED du lanceur de [10,15,20,SP].",
+		"SNORE": "Inflige [20,40,60,SP] SPECIAL à trois cibles en face du lanceur, leur infligeant FLINCH pendant 3 secondes.",
+		"STUFF_CHEEKS": "Si l'utilisateur tient une baie, il en mange une et gagne instantanément [100,SP]% des HP soignés par cette dernière en SHIELD à la place. Sinon, ramasse et s'équipe d'une nouvelle baie qu'il gardera pour de futurs combats si possible.",
+		"SILK_TRAP": "L'utilisateur tisse un piège de fil permettant à l'utilisateur de gagner PROTECT pendant 1.5 secondes. Toute attaque reçue au corps-à-corps pendant ce temps diminuera la vitesse de l'attaquant de [5,10,15,SP] et lui infligera PARALYSIS pendant [1.5,SP,ND=1] secondes.",
+		"SKITTER_SMACK": "Rampe derrière la cible et la frappe, infligeant [15,30,60,SP]. Cela diminue également la AP de la cible de [20, SP]."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2835,7 +2864,31 @@
 		"RICE": "Riz",
 		"TATSUGIRI_CURLY": "Commandant Nigirigon (Courbé)",
 		"TATSUGIRI_DROOPY": "Commandant Nigirigon (Affalé)",
-		"TATSUGIRI_STRETCHY": "Commandant Nigirigon (Raide)"
+		"TATSUGIRI_STRETCHY": "Commandant Nigirigon (Raide)",
+		"BERRIES": "Baies",
+		"CONFUSE_WAND": "Branche Confusion",
+		"PETRIFY_WAND": "Branche Pétrifiante",
+		"SLOW_WAND": "Branche Lenteur",
+		"SLUMBER_WAND": "Branche Sommeil",
+		"HP_SWAP_WAND": "Branche Permu-PV",
+		"GUIDING_WAND": "Branche Guide",
+		"TUNNEL_WAND": "Branche Tunnel",
+		"WHIRLWIND_WAND": "Branche Cyclone",
+		"SURROUND_WAND": "Branche Encercle",
+		"BLAST_WAND": "Branche Détonation",
+		"SPIRIT_WAND": "Branche envoûte",
+		"TWO_EDGED_WAND": "Branche Fracasse",
+		"POUNCE_WAND": "Branche Bond",
+		"SWITCHER_WAND": "Branche Permute",
+		"WARP_WAND": "Branche Téléport",
+		"LONG_WAND": "Longue Branche",
+		"AQUA_MONICA": "Aquarmonica",
+		"FIERY_DRUM": "Tamtam Ardent",
+		"GRASS_CORNET": "Phytocorne",
+		"ICY_FLUTE": "Flûte Glacée",
+		"ROCK_HORN": "Cor de Roche",
+		"SKY_MELODICA": "Aéromélodica",
+		"TERRA_CYMBAL": "Terracymbale"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -3141,7 +3194,31 @@
 		"RICE": "Octroie 80 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
 		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
 		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
-		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata"
+		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata",
+		"BERRIES": "Le chef s'équipe d'une nouvelle baie. Si aucun emplacement d'équipement n'est disponible, la baie s'ajoute à votre inventaire à la place.",
+		"CONFUSE_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer CONFUSION pendant 2 secondes à la cible, tout en réduisant leur SPE_DEF de 3.",
+		"PETRIFY_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer LOCKED pendant 2 secondes à la cible, tout en réduisant leur DEF de 3.",
+		"SLOW_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer PARALYSIS pendant 2 secondes à la cible, tout en réduisant leur SPEED de 10.",
+		"SLUMBER_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'appliquer SLEEP pendant 2 secondes à la cible, tout en réduisant leur ATK de 3.",
+		"BLAST_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels, ou 40% si un coup critique est infligé.",
+		"HP_SWAP_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [20,LK]% chance d'être volés des HP max de la cible pour être donnés à l'attaquant.",
+		"SPIRIT_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels + 5% pour chaque capacité utilisé par l'attaquant pendant le combat, et ont [20,LK]% de chance de donner 5 PP supplémentaires.",
+		"LONG_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les Pokémon FAIRY alliés gagnent +1 RANGE et ont [1,LK]% de CRIT_CHANCE de plus, multipliés par le nombre de case de distance entre la cible et l'attaquant.",
+		"GUIDING_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [50,LK]% de chance d'être redirigés vers la cible avec le moins de HP à portée.",
+		"SURROUND_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels + 10% par ennemis ADJACENT à l'attaquant. Les SPECIAL des baguettes ont [10,LK]% de chance d'être infligés aux ennemis ADJACENT à l'attaquant en addition à la cible.",
+		"POUNCE_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Après avoir subit des dégâts au corps-à-corps, les Pokémon FAIRY alliés ont [10,LK]% de chance de riposter à hauteur de 30% des dégâts reçus, aux ennemis adjacents, la riposte est garantie si le coup subit est un coup critique.",
+		"TWO_EDGED_WAND": "Les attaques des Pokémon FAIRY infligent 40% SPECIAL additionnels. Les SPECIAL des baguettes peuvent aussi être infligés en tant que dégâts de recul à l'attaquant (l'attaquant a [80,LK]% de chance d'éviter ces dégâts de recul).",
+		"WARP_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance de téléporter la cible sur une case loin de l'attaquant.",
+		"SWITCHER_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance d'intervertir la position de la cible et de l'ennemi le plus loin de l'attaquant.",
+		"WHIRLWIND_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels et ont [5,LK]% de chance de lancer une bourrasque qui souffle les ennemis pris dedans, au loin.",
+		"TUNNEL_WAND": "Les attaques des Pokémon FAIRY infligent 20% SPECIAL additionnels. Les SPECIAL des baguettes ont [5,LK]% de chance de traverser la cible et atteindre un ennemi sur une ligne derrière lui.",
+		"AQUA_MONICA": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie WATER.",
+		"FIERY_DRUM": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie FIRE.",
+		"GRASS_CORNET": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie GRASS.",
+		"ICY_FLUTE": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie ICE.",
+		"ROCK_HORN": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie ROCK.",
+		"SKY_MELODICA": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie FLYING.",
+		"TERRA_CYMBAL": "Les Pokémon en magasin ont 5% de chance de plus de partager la synergie GROUND."
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -3331,7 +3408,9 @@
 		"AVALUGG": "Peut porter jusqu'à 4 $t(pkm.BERGMITE) sur son dos, récupérés depuis votre banc au début du combat.",
 		"EISCUE_NOICE": "Lorsqu'il démarre un combat sous la SNOW, il gagne sa forme Tête de Gel et 100 SHIELD. Lorsqu'il subit ou inflige FREEZE, il regagne sa forme Tête de Gel et gagne 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Lorsqu'il déclenche sa capacité, son SHIELD actuel est converti en SPECIAL supplémentaires. Lorsque le SHIELD est brisé ou après avoir lancé sa capacité, il retrouve sa forme Tête Dégel.",
-		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé."
+		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé.",
+		"COMATOSE": "Subit toujours l'altération SLEEP. Est immunisé à la BURN, l'altération POISONNED, FREEZE ou PARALYSIS. Quand un Pokémon partageant la synergie SOUND essaie de le réveiller par ses cris, $t(pkm.KOMALA) plonge encore plus profondément dans ses rêves, et gagne 5 AP.",
+		"VESPIQUEN": "La portée d' $t(pkm.VESPIQUEEN) et sa capacité diffèrent en fonction de la rangée sur la laquelle est le Pokémon. La synergie BUG ne copie plus $t(pkm.VESPIQUEEN), mais 2 $t(pkm.COMBEE) à la place."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -3473,7 +3552,8 @@
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
 		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets.",
-		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}"
+		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}",
+		"FAIRY_WANDS": "Branches obtenues: {{wands}}"
 	},
 	"title": {
 		"no_title": "Aucun Titre",
@@ -3571,7 +3651,8 @@
 		"EXPLORER": "Explorateur",
 		"POSTMAN": "Facteur",
 		"SURVEY_CORPS": "Corps d'exploration",
-		"GUILDMASTER": "Maître de Guilde"
+		"GUILDMASTER": "Maître de Guilde",
+		"LEGIONNAIRE": "Légionnaire"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3667,7 +3748,8 @@
 		"EXPLORER": "Compléter une expédition d'exploration",
 		"POSTMAN": "Compléter une expédition de livraison",
 		"SURVEY_CORPS": "Compléter une expédition d'exploit de bataille",
-		"GUILDMASTER": "Compléter une expédition de rang S"
+		"GUILDMASTER": "Compléter une expédition de rang S",
+		"LEGIONNAIRE": "Réaliser une formation composée d'un Hexadron et de 8 troupes ou plus."
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
@@ -3744,7 +3826,7 @@
 		"show_all": "Afficher tout",
 		"show_locked": "Afficher les bloqués",
 		"show_unlockable": "Afficher les débloquables",
-		"show_unlocked": "Afficher les débloqués",				
+		"show_unlocked": "Afficher les débloqués",
 		"show_refundable": "Afficher les remboursables",
 		"show_newly_obtained": "Afficher les nouveaux obtenus",
 		"show_favorites": "Afficher les favoris",
@@ -3766,7 +3848,7 @@
 	"bot_builder": "Bot Builder",
 	"meta": "Méta",
 	"meta_report_info": "Généré le {{report_date}} à partir de {{time_limit}} - Données récupérées à partir de {{count}} parties",
-	"best_regions": "Meilleures régions",	
+	"best_regions": "Meilleures régions",
 	"back_to_lobby": "Retour au lobby",
 	"boosters": "Boosters",
 	"rank_labels": {
@@ -3782,7 +3864,7 @@
 	"bench": "Banc",
 	"synergies": "Synergies",
 	"join_as_guest": "Rejoindre en tant qu'invité",
-	"welcome": "Bienvenue",	
+	"welcome": "Bienvenue",
 	"stage": "Tour",
 	"spectate": "Regarder",
 	"spectating": "Vous observez {{ name }}",
@@ -3798,7 +3880,8 @@
 		"cancel_tournament_participation": "Annuler votre participation au tournoi",
 		"register_tournament_participation": "S'inscrire au tournoi",
 		"registrations_open_info": "Les inscriptions sont ouvertes une heure avant le début du tournoi",
-		"starts_at": "Démarre à"
+		"starts_at": "Démarre à",
+		"tournament_mode_locked": "Vous devez atteindre le niveau {{requiredLevel}} pour participer aux tournois."
 	},
 	"no_elo": "Juste pour le fun",
 	"enable_elo": "Activer Elo",
@@ -3822,7 +3905,7 @@
 	"games_in_progress_other": "{{count}} parties en cours",
 	"events": "Événements",
 	"custom_room_short": "Personnalisé",
-	"loading": "Connexion....",	
+	"loading": "Connexion....",
 	"no_data_available": "Aucune donnée disponible",
 	"no_bots_found": "Aucun bot trouvé !",
 	"leaderboard": "Classement",
@@ -3886,7 +3969,7 @@
 	"send_message": "Envoyer le message",
 	"shiny_hunter": "Chasseur de Shiny",
 	"pokedex": "Pokédex",
-	"alt_forms": "Formes Alternatives",	
+	"alt_forms": "Formes Alternatives",
 	"show_only_available_picks": "Afficher uniquement les choix additionnels et régionaux disponibles",
 	"close": "Fermer",
 	"additional_pokemon_hint": "Chaque joueur choisit des Pokémon additionnels qui seront disponibles dans le magasin de tous les joueurs pour ce jeu.",
@@ -3951,14 +4034,17 @@
 			"avatar_emotes": "Voir le menu des emotes",
 			"avatar_show_emote": "Lancer l'emote",
 			"wiki": "Ouvrir/fermer le wiki",
-			"team_planner": "Ouvrir/fermer le planificateur d'équipe"
-		}
+			"team_planner": "Ouvrir/fermer le planificateur d'équipe",
+			"meta_report": "Ouvrir/Fermer les rapports faits sur la méta"
+		},
+		"theme": "Thème"
 	},
 	"jukebox": {
 		"music_volume": "Volume de la musique",
 		"previous_music": "Musique précédente",
 		"next_music": "Musique suivante",
-		"random_music": "Musique aléatoire"
+		"random_music": "Musique aléatoire",
+		"music_credits": "Crédits musicaux"
 	},
 	"toggle_fullscreen": "Plein écran",
 	"filters": "Filtres",
@@ -3973,7 +4059,8 @@
 		"choose_mission_order": "Choisissez votre mission",
 		"choose_unique": "Choisissez un Pokémon Unique pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
 		"choose_legendary": "Choisissez un Pokémon Légendaire pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
-		"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos"
+		"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos",
+		"choose_wand": "Choisissez une branche pour conférer des effets additionnels aux attaques de vos Pokémon FAIRY."
 	},
 	"hide": "Cacher",
 	"show": "Montrer",
@@ -4009,7 +4096,12 @@
 	"name": "Nom",
 	"give_boosters": "Donner des boosters",
 	"admin_panel": {
-		"title": "Administration"
+		"title": "Administration",
+		"refresh_meta_reports": "Recharger les rapports de la méta",
+		"refresh_leaderboards": "Recharger le classement des leaders",
+		"refresh_sprite_gap_data": "Recharger les données relatives aux différences des visuels",
+		"refresh_twitch_streams": "Recharger les flux Twitch",
+		"refresh_twitch_blacklist": "Recharger les listes noires de Twitch"
 	},
 	"banned": "Banni",
 	"ban_user": "Bannir le joueur",
@@ -4095,7 +4187,7 @@
 	"valid": "Valide",
 	"invalid": "Invalide",
 	"all": "Tous",
-	"status_label": "Statuts",	
+	"status_label": "Statuts",
 	"help": "Aider",
 	"bot_admin": "Bot Admin",
 	"change": "Changer",
@@ -4162,7 +4254,13 @@
 		"synergy_wheel": "Roue des Synergies",
 		"synergy_wheel_desc": "Tire au hasard des synergies quand on cherche de l'inspiration",
 		"tier_list_maker": "Créateur de Tier List",
-		"tier_list_maker_desc": "Créez et partagez vos propres tier lists"
+		"tier_list_maker_desc": "Créez et partagez vos propres tier lists",
+		"certificate": "Certificat",
+		"certificate_desc": "Débloque le mode classé et la participation aux tournois",
+		"palette": "Palette de Queulorior ",
+		"palette_desc": "Pour ajuster le thème et les couleurs de l'interface, sélectionnez Options → Interface ",
+		"sprite_tracker": "Traqueur de visuels",
+		"sprite_tracker_desc": "Recherche les Pokémon disponibles sur SpriteCollab et les compare avec les Pokémon de Pokémon Auto Chess."
 	},
 	"level_required": "Niveau requis",
 	"map": {
@@ -4342,7 +4440,8 @@
 		"room_is_private": "Ce salon est privé. Saisissez le mot de passe",
 		"blacklisted": "Vous avez été exclu(e) de ce match.",
 		"min_rank_not_reached": "Votre rang n'est pas assez élevé pour jouer ce match classé",
-		"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé"
+		"max_rank_not_reached": "Votre rang est trop élevé pour jouer ce match classé",
+		"ranked_mode_locked": "Le mode classé est bloqué. Il vous faut atteindre le niveau {{requiredLevel}} pour le débloquer."
 	},
 	"npc_dialog": {
 		"welcome": "Bienvenue !",
@@ -4420,7 +4519,8 @@
 		"CINCCINO": "$t(pkm.CINCCINO) offre d'élégants SILK_SCARF",
 		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver.",
 		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !",
-		"LAPRAS": "Lapras vous offre un voyage vers une autre région."
+		"LAPRAS": "Lapras vous offre un voyage vers une autre région.",
+		"LUDICOLO": "Ludicolo célèbre l'arrivée du carnaval et offre des instruments aux joueurs pour qu'ils puissent également participer aux festivités."
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -4447,7 +4547,8 @@
 			"weather_label": "Météo",
 			"town_label": "Village",
 			"dungeon_label": "Régions",
-			"data_label": "Données"
+			"data_label": "Données",
+			"glossary_label": "Glossaire"
 		},
 		"faq": {
 			"official_game": "Est-ce un jeu officiel ?",
@@ -4489,7 +4590,9 @@
 			"code": "Quel langage/bibliothèque est utilisé pour coder le jeu ?",
 			"code_answer": "TypeScript, Phaser, Colyseus. Si vous souhaitez contribuer",
 			"pull_requests": "les pull requests sont ouvertes",
-			"faq": "FAQ."
+			"faq": "FAQ.",
+			"reconnect": "J'ai été déconnecté d'une partie/salon, comment permettre la reconnexion? ",
+			"reconnect_answer": "Essayez de relancer la connexion (Touche F5). Si cela ne marche pas, entrez à nouveau <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a> en tant qu'URL pour votre navigateur, réauthentifiez-vous si besoin et retournez dans le salon principal, puis essayez de retrouver votre partie sous le menu \"En jeu\" ou à l'endroit approprié au mode de votre partie. Vous devriez retrouver un bouton vert sur lequel il est écrit \"Reconnexion\", à côté du salon de votre précédente partie."
 		},
 		"tutorials": {
 			"thanks_to": "Merci à",
@@ -4534,7 +4637,9 @@
 			"mulch": "Engrais",
 			"mulch_description": "De l'engrais est collecté à chaque fois qu'un Pokémon FLORA est mis K.O. Utilisez-le pour faire évoluer vos Pots de Fleurs.",
 			"cell_battery_description": "Une fois le niveau maximum de synergie ELECTRIC atteint, vos Pokémon chargent une CELL_BATTERY avec leurs attaques. Vous pouvez l'utiliser pour surcharger un Pokémon ELECTRIC pendant le prochain combat.",
-			"fire_shard_description": "Une fois le niveau maximum de synergie FIRE atteint, à chaque tour vous pouvez utiliser un FIRE_SHARD pour renforcer un Pokémon FIRE en sacrifiant les PV de votre joueur."
+			"fire_shard_description": "Une fois le niveau maximum de synergie FIRE atteint, à chaque tour vous pouvez utiliser un FIRE_SHARD pour renforcer un Pokémon FIRE en sacrifiant les PV de votre joueur.",
+			"wands": "Baguettes",
+			"wands_description": "Les baguettes ajoutent des effets aux attaques des Pokémon FAIRY. "
 		},
 		"statistics": {
 			"stat_description": {
@@ -4610,7 +4715,21 @@
 			"luck_description": "La Chance augmente vos probabilités dans tous les tirages, que ce soit pour les coups critiques, les esquives, l'activation d'effets de statut après une attaque ou tout autre effet mentionné avec le symbole [LK].",
 			"luck_formula": "La Chance affecte les probabilités avec cette formule : P = baseP ^ (1 - chance/100) ; par exemple, un Pokémon avec 10% de chance de coup critique et 50 de chance aura en réalité 0,1^(1-50/100) = ~31,62% de chance d'exécuter un coup critique.",
 			"xp": "EXP",
-			"experience": "Expérience"
+			"experience": "Expérience",
+			"speed_calculation": "Comment la SPEED fonctionne?",
+			"speed_calculation_description": "La SPEED influence le délai entre deux actions réalisées par votre Pokémon. Ces actions peuvent être le déplacement, l'attaque ou l'utilisation d'une capacité. Le délai ce calcule comme suivant: Délai = 1000 / (0.4 + 0.007 * Vitesse). Ainsi un Pokémon doté de 0 de SPEED, réalisera 4 attaques toutes les 10 secondes. N. B. : le maximum de SPEED est de 300, un Pokémon doté d'une telle vitesse peut réaliser 25 attaques toutes les 10 secondes. Certaines capacités ou effets peuvent admettre un délai plus court ou un délai fixé."
+		},
+		"glossary": {
+			"damage_types": "Types de dégâts",
+			"SPECIAL": "Les capacités infligent la plupart du temps des SPECIAL. Quelque capacités peuvent toutefois infliger des TRUE.  Ce type de dégâts est diminué relativement à la SPE_DEF de la cible.",
+			"PHYSICAL": "Sauf indication contraire, les attaques infligent des PHYSICAL. Ce type de dégâts est diminué relativement à la DEF de la cible.",
+			"TRUE": "Les TRUE ne sont ni diminués par la DEF ni par la SPE_DEF ou même tout effet visant à la réduction de dégâts. Il est possible d'infliger des TRUE à l'aide de talents particuliers, d'objets ou d'effets de synergie.",
+			"item_categories": "Catégorie d'objet",
+			"components": "Deux composants peuvent être combinés en un objet fabricable. ",
+			"craftable_items": "Les objets fabricables sont créés par la combinaison de deux composants.",
+			"consumable_item": "Les objets consommables sont des objets à usage unique qui peuvent être retirés quand leurs effets sont appliqués.",
+			"unholdable_item": "Objet ne pouvant pas être porté par un Pokémon. Les effets de tels objets s'appliquent par défaut à l'intégralité de votre équipe.",
+			"removable_item": "Les Objets retirables sont des objets qui peuvent être retirés d'un Pokémon par le simple fait de le poser sur le banc."
 		}
 	},
 	"errors": {
@@ -4631,7 +4750,8 @@
 		"INVALID_PASSWORD": "Mot de passe incorrect",
 		"UNKNOWN_ERROR": "Une erreur inconnue est survenue: {{error}}",
 		"SERVER_SHUTDOWN": "Le serveur est en cours d'arrêt pour maintenance.",
-		"FAILED_TO_RECONNECT": "Impossible de se reconnecter au jeu. Veuillez actualiser la page et réessayer."
+		"FAILED_TO_RECONNECT": "Impossible de se reconnecter au jeu. Veuillez actualiser la page et réessayer.",
+		"title": "Erreur"
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Connexion perdue. Tentative de reconnexion…",
@@ -4659,14 +4779,19 @@
 		"ADJACENT": "adjacents",
 		"ADJACENT_IN_THE_SAME_ROW": "adjacents sur la même rangée",
 		"CONE": "cône",
-		"BOARD_EFFECT": "Effet de Plateau"
+		"BOARD_EFFECT": "Effet de Plateau",
+		"title": "Termes techniques",
+		"ON_ATTACK": "d'attaque",
+		"ON_HIT": "de coup"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Le plus fort est défini comme suit, par ordre de priorité : 1. Nombre d'objets tenus, 2. Tier de l'unité, 3. Rareté de l'unité",
 		"ADJACENT": "les 8 cases entourant une unité",
 		"ADJACENT_IN_THE_SAME_ROW": "les cases directement à gauche et à droite d'une unité",
 		"CONE": "tir dans un angle de 90 degrés devant l'unité, centré sur la cible",
-		"BOARD_EFFECT": "Un Effet de Plateau est un effet posé sur une case du plateau qui affecte toutes les unités qui se tiennent dessus, quelle que soit leur équipe, et qui reste jusqu'à la fin du combat. Les effets de plateau peuvent être dissipés par certaines capacités."
+		"BOARD_EFFECT": "Un Effet de Plateau est un effet posé sur une case du plateau qui affecte toutes les unités qui se tiennent dessus, quelle que soit leur équipe, et qui reste jusqu'à la fin du combat. Les effets de plateau peuvent être dissipés par certaines capacités.",
+		"ON_ATTACK": "Les effets d'attaque s'appliquent après qu'une unité a réalisé une attaque classique (et non une capacité consommant des PP) sur une unité encore en vie, à condition que l'attaque soit considérée comme ayant touché sa cible, que celle-ci ait esquivé ou non.",
+		"ON_HIT": "Les effets de coup sont appliqués quand une unité est touchée par une attaque ou une capacité. Ils sont appliqués même si la cible est dotée de SHIELD, mais toutefois pas si cette dernière esquive l'attaque ou la capacité, ou bien si la cible a le statut PROTECT."
 	},
 	"victory_road": {
 		"title": "Route Victoire",
@@ -4820,7 +4945,12 @@
 		"tournament_finished_message": "Vous avez été éliminé du tournoi !\\nVotre position finale: {{place}}",
 		"next": "Suivant",
 		"close": "Fermer",
-		"dismiss_all": "Tout fermer"
+		"dismiss_all": "Tout fermer",
+		"info_title": "Information",
+		"new_gadget_title": "Nouveau Gadget débloqué!",
+		"new_gadget_message": "Vous avez débloqué un nouveau gadget: {{gadget}}: {{description}}",
+		"new_theme_title": "Nouveau Thème débloqué!",
+		"new_theme_message": "Vous avez débloqué un nouveau thème: {{theme}}. Allez au niveau des Options et sélectionnez le!"
 	},
 	"profile": {
 		"title": "Profil",
@@ -4829,7 +4959,8 @@
 			"titles_unlocked": "{{count}} / {{total}} titres débloqués",
 			"avatars_unlocked": "{{count}} / {{total}} avatars déverrouillés",
 			"gadgets_unlocked": "{{count}} / {{total}} gadgets débloqués",
-			"pokemons_played": "{{count}} / {{total}} Pokémon joués"
+			"pokemons_played": "{{count}} / {{total}} Pokémon joués",
+			"unlocks_theme": "Thèmes débloqués: {{theme}}"
 		},
 		"avatar": {
 			"change_avatar": "Changer d'avatar",
@@ -4849,6 +4980,52 @@
 			"change_name": "Changer de nom",
 			"username_disclaimer": "Les noms d'utilisateur inappropriés entraîneront le bannissement de votre compte. Cela inclut les propos grossiers, à caractère adulte ou sexuel, les menaces directes et indirectes, les déclarations politiques et la publicité pour des contenus sans rapport avec le jeu.",
 			"invalid_username": "Nom d'utilisateur invalide. Le nom d'utilisateur doit comporter entre 3 et 24 caractères, commencer par une lettre, contenir uniquement des lettres ou des chiffres ou \".-_\", pas d'espaces."
+		},
+		"elo_tab": {
+			"title": "Elo",
+			"current_elo": "Elo actuel",
+			"max_elo_reached": "Plus grand Elo atteint",
+			"elo_decay_info": "Si vous n'avez pas participé à au moins 3 parties depuis les 20 derniers jours (des Parties Classées et ce si vous être classé au rang Hyper Ball ou tout rang supérieur), alors votre Elo décroîtra progressivement (à raison de {{eloLoss}} Elo par jour).",
+			"elo_decay_active": "Votre Elo est actuellement en train de décroître.",
+			"elo_decay_inactive": "Votre Elo commencera à décroître dans {{time}}."
 		}
-	}
+	},
+	"sprite_tracker": {
+		"normal": "Normal",
+		"shiny": "Chromatique",
+		"filter_mega": "Méga ({{count}})",
+		"filter_alternate": "Formes alternatives ({{count}})",
+		"filter_altcolor": "Couleurs alternatives ({{count}})",
+		"filter_female": "Femelles ({{count}})",
+		"filter_alcremie": "Charmilly ({{count}})",
+		"filter_beta": "Bétas ({{count}})",
+		"filter_cutscene": "Cinématiques ({{count}})",
+		"failed_to_fetch_data": "Données introuvables",
+		"error_label": "Erreur"
+	},
+	"game_count": "Parties",
+	"total_games_30d": "Parties (sur les 30 derniers jours)",
+	"wands": "Baguettes",
+	"game_activity": "Activité",
+	"twitch_streams": {
+		"title": "En train de diffuser du contenu",
+		"language": "Langage :{{language}}",
+		"unavailable": "Les diffusions faites sur Twitch ne sont actuellement pas disponibles.",
+		"viewers": "{{count}} spectateurs.",
+		"live_duration": "A commencé la diffusion il y a {{duration}}"
+	},
+	"terms_of_service": "Conditions générales d'utilisation",
+	"unlocked": "Débloqué",
+	"theme": {
+		"default": "Classique",
+		"super": "Pokémon Méga Donjon Mystère",
+		"autumn": "Automnal",
+		"rainbow": "Arc-en-ciel",
+		"umbra": "Nuit Etoilée",
+		"unown": "Zarbi Noir",
+		"zengarden": "Jardin Zen",
+		"redsea": "Mer Rouge",
+		"origin": "Origine"
+	},
+	"history": "Histoire"
 }
