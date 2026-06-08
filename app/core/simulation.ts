@@ -298,9 +298,7 @@ export default class Simulation extends Schema implements ISimulation {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
     pokemonEntity.orientation =
-      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
-    this.applySynergyEffects(pokemonEntity)
-    this.applyItemsEffects(pokemonEntity)
+      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT    
 
     this.board.setEntityOnCell(
       pokemonEntity.positionX,
@@ -330,6 +328,9 @@ export default class Simulation extends Schema implements ISimulation {
     pokemonEntity.getEffects(OnSpawnEffect).forEach((effect) => {
       effect.apply(pokemonEntity, player, isSpawn)
     })
+
+    this.applySynergyEffects(pokemonEntity)
+    this.applyItemsEffects(pokemonEntity)
 
     return pokemonEntity
   }
