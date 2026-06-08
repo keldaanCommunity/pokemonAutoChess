@@ -7671,7 +7671,6 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit, true)
     const nbHits = Math.round(
       4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
