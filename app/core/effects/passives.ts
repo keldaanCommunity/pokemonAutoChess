@@ -1235,12 +1235,19 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.VIGOROTH]: [
-    new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
+    new OnSpawnEffect((pkm) => {
+      pkm.status.sleep = false
+      pkm.effects.add(EffectEnum.IMMUNITY_SLEEP)
+    })
   ],
   [Passive.COMATOSE]: [
     new OnSpawnEffect((pkm) => {
       pkm.status.sleep = true
-      pkm.status.sleepCooldown = 1000
+      pkm.status.sleepCooldown = 1000      
+      pkm.status.burn = false
+      pkm.status.poisonStacks = 0
+      pkm.status.freeze = false
+      pkm.status.paralysis = false
       pkm.effects.add(EffectEnum.IMMUNITY_BURN)
       pkm.effects.add(EffectEnum.IMMUNITY_POISON)
       pkm.effects.add(EffectEnum.IMMUNITY_FREEZE)
@@ -1384,6 +1391,7 @@ export const PassiveEffects: Partial<
   [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
   [Passive.SPOT_PANDA]: [
     new OnSpawnEffect((entity) => {
+      entity.status.confusion = false
       entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
     })
   ],
