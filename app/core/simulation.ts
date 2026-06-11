@@ -296,7 +296,7 @@ export default class Simulation extends Schema implements ISimulation {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
     pokemonEntity.orientation =
-      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
+      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT    
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
 
@@ -323,6 +323,13 @@ export default class Simulation extends Schema implements ISimulation {
       this.redDpsMeter.set(pokemonEntity.id, dps)
     }
     this.entities.push(pokemonEntity)
+
+    /*
+    Effects appliance order:
+    1) Synergy effects
+    2) Item effects
+    3) OnSpawn effects (can include effects coming from synergies/items)
+    */
 
     pokemon.onSpawn({ entity: pokemonEntity, simulation: this, isSpawn })
     pokemonEntity.getEffects(OnSpawnEffect).forEach((effect) => {

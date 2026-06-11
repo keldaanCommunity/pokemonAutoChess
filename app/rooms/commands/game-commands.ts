@@ -1576,7 +1576,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+      if (pokemon.evolutionRule.type === EvolutionRuleType.STATE || pokemon.evolutionRule.type === EvolutionRuleType.STACK) {
         EvolutionManager.tryEvolve(pokemon, player, this.state)
       }
     })
