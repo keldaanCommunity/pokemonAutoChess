@@ -1,5 +1,4 @@
 import { AttackType } from "../../types/enum/Game"
-import { chance } from "../../utils/random"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -11,7 +10,6 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit, true)
     const nbHits = Math.round(
       ([1, 2, 3, 4, 8][pokemon.stars - 1] ?? 8) *
