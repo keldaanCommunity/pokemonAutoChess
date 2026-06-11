@@ -2261,7 +2261,7 @@
 		"SPITE": "대상의 PP 를 [20,40,60,100,SP]만큼 흡수하여 ADJACENT 아군에게 [20,40,60,100,SP] PP 를 분배한다.",
 		"GRUDGE": "대상을 3초간 SILENCE 상태로 만든 후, SILENCE 상태의 모든 적에게 [18,36,52,104,SP] SPECIAL 를 가한다.",
 		"JAW_LOCK": "대상을 물어 3초간 LOCKED 상태로 만들고 ATK 의 [125,SP]% + [10,15,20,40,SP] SPECIAL 를 가한다. 대상이 이미 물린 상태면 추가로 [25,50,100,200,SP] HP 를 회복한다.",
-		"LAST_RESPECTS": "[30,60,90,SP] SPECIAL 를 가하며 [10,8,6,SP=-0.2]초 후 KO시키는 CURSE 를 가한다. 대상이 이미 CURSE 상태면 대신 다른 ADJACENT 적을 대상으로 한다.",
+		"LAST_RESPECTS": "[30,60,90,180,SP] SPECIAL 를 가하며 [10,8,6,4,SP=-0.2]초 후 KO시키는 CURSE 를 가한다. 대상이 이미 CURSE 상태면 대신 다른 ADJACENT 적을 대상으로 한다.",
 		"OCTOLOCK": "[30,60,90,180,SP] SPECIAL 를 가한다. [3,3,6,10,SP]초간 LOCKED 와 ARMOR_BREAK 상태를 부여한다.",
 		"BURNING_JEALOUSY": "대상과 ADJACENT 적에게 [30,50,70,140,SP] SPECIAL 를 가한다. ATK 버프를 가진 적은 버프를 잃고 5초간 BURN 상태가 된다.",
 		"FIRST_IMPRESSION": "[45,90,180,360,SP]의 SPECIAL를 입히고, 대상에게 5초 간 FNINCH을 부여한다. 첫 사용일 시에는 뒤로 도약하며 무작위 1 STAR [Common, Uncommon, Rare] BUG를 시전 위치에 소환한다.",
