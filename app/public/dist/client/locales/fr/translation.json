@@ -2054,7 +2054,7 @@
 		"PSYCHIC_FANGS": "Retire tous les bonus d'ATK, de DEF et de SPE_DEF de la cible, puis inflige [20,40,80,160,SP] SPECIAL.",
 		"SHED_TAIL": "Lâche un leurre et fonce vers l'allié avec le moins de HP, lui donnant [40,60,80,160] SHIELD.",
 		"NIGHT_SLASH": "Inflige [15,30,60,120,SP] SPECIAL. Peut infliger un coup critique par défaut.",
-		"KOWTOW_CLEAVE": "Inflige 150% d'ATK à la cible + [20,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
+		"KOWTOW_CLEAVE": "Inflige 150% d'ATK à la cible + [20,20,20,50,SP]% par allié KO en TRUE. Peut infliger un coup critique par défaut.",
 		"SHIELDS_DOWN": "Transforme Météno en une forme Noyau aléatoire.",
 		"SHIELDS_UP": "Transforme Météno en forme Météore.",
 		"SANDSEAR_STORM": "Un violent typhon mêlé à du sable ardent s'abat sur tous les ennemis en ligne droite, infligeant [30,50,75,150] SPECIAL et BURN pendant [2,2,2,5] secondes.",

@@ -2027,7 +2027,7 @@
 		"PSYCHIC_FANGS": "Inflige [20,40,80,160,SP] de SPECIAL y elimina todas las ventajas de ATK, DEF y SPE_DEF del objetivo",
 		"SHED_TAIL": "Crea un sustituto y va hacia el aliado con menos HP para otorgarle [40,60,80,160] de SHIELD",
 		"NIGHT_SLASH": "Inflige [15,30,60,120,SP] de SPECIAL. Puede hacer daño crítico por defecto.",
-		"KOWTOW_CLEAVE": "Inflige 150% ATK + [20,SP]%  por aliado caído como TRUE. Puede hacer daño crítico por defecto.",
+		"KOWTOW_CLEAVE": "Inflige 150% ATK + [20,20,20,50,SP]%  por aliado caído como TRUE. Puede hacer daño crítico por defecto.",
 		"SHIELDS_DOWN": "Transforma a Minior en una forma núcleo aleatoria",
 		"SHIELDS_UP": "Transforma a Minior a su forma meteorito",
 		"SANDSEAR_STORM": "Arena abrasadora que golpea a todos los enemigos en línea recta, causando [30,50,75,150] de SPECIAL y BURN por [2,2,2,5] segundos",

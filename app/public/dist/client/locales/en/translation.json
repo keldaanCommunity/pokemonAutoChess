@@ -2080,7 +2080,7 @@
 		"PSYCHIC_FANGS": "Remove all the target's ATK, DEF and SPE_DEF stat increases, then deal [20,40,80,160,SP] SPECIAL.",
 		"SHED_TAIL": "Create a substitute and charge towards the ally with the lowest HP, granting them [40,60,80,160] SHIELD.",
 		"NIGHT_SLASH": "Deal [15,30,60,120,SP] SPECIAL to the target. Can crit by default.",
-		"KOWTOW_CLEAVE": "Deal 150% ATK to the target, + [20,SP]% TRUE for each fallen allied Pokémon. Can crit by default",
+		"KOWTOW_CLEAVE": "Deal 150% ATK to the target, + [20,20,20,50,SP]% TRUE for each fallen allied Pokémon. Can crit by default",
 		"SHIELDS_DOWN": "Transform Minior to a random core form.",
 		"SHIELDS_UP": "Transform Minior to its meteor form.",
 		"SANDSEAR_STORM": "Searingly hot sand that strikes all enemy Pokémon in a straight line, dealing [30,50,75,150] SPECIAL and applying BURN for [2,2,2,5] seconds.",

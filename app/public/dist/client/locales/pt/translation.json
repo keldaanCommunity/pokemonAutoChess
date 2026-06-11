@@ -2052,7 +2052,7 @@
 		"PSYCHIC_FANGS": "Remove todos os aumentos de atributos de ATK, DEF e SPE_DEF do alvo, então causa [20,40,80,160,SP] SPECIAL.",
 		"SHED_TAIL": "Cria um substituto e avança em direção ao aliado com o HP mais baixo, concedendo-lhe [40,60,80,160] SHIELD.",
 		"NIGHT_SLASH": "Cause [15,30,60,120,SP] SPECIAL ao alvo. Pode causar crítico por padrão.",
-		"KOWTOW_CLEAVE": "Cause 150% de ATK ao alvo, + [20,SP]% TRUE para cada Pokémon aliado caído. Pode causar crítico por padrão.",
+		"KOWTOW_CLEAVE": "Cause 150% de ATK ao alvo, + [20,20,20,50,SP]% TRUE para cada Pokémon aliado caído. Pode causar crítico por padrão.",
 		"SHIELDS_DOWN": "Transforma Minior em uma forma core aleatória.",
 		"SHIELDS_UP": "Transforma Minior em sua forma meteor.",
 		"SANDSEAR_STORM": "Areia escaldante que atinge todos os Pokémon inimigos em uma linha reta, causando [30,50,75,150] SPECIAL e aplicando BURN por [2,2,2,5] segundos.",
