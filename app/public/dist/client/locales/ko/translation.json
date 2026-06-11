@@ -1773,7 +1773,7 @@
 		"PRECIPICE_BLADES": "시전자와 동일한 세로줄 혹은 가로줄에 있는 모든 적포켓몬에게 [25,50,100,200,SP]의 SPECIAL를 가한다.",
 		"SONG_OF_DESIRE": "뒷줄의 상대 포켓몬 [1,1,2,3]마리를 3초간 CHARM 상태로 만들고, ATK을 [3,SP]만큼 감소시킨다.",
 		"CONFUSING_MIND": "뒷줄의 상대 포켓몬 [1,2,3,5]마리를 [3,SP]초동안 CONFUSION 상태로 만든다.",
-		"KNOWLEDGE_THIEF": "상대의 기술을 사용하고 1XP를 획득한다.",
+		"KNOWLEDGE_THIEF": "상대의 기술을 사용하고 [1,1,1,2,3] XP를 획득한다.",
 		"KING_SHIELD": "1.5초간 시전포켓몬이 PROTECT상태가 되며, [10,20,40,80,SP]의 SHIELD를 얻으며 가장 멀리 있는 적과 위치를 바꾼다.",
 		"U_TURN": "[15,30,50,100,SP] SHIELD를 얻고, 대상과 위치를 바꾸어 1초 동안 CHARM 상태로 만든다.",
 		"EXPLOSION": "시전자 및 ADJACENT 상대 포켓몬(들)에게 [50,100,200,400,SP] SPECIAL 를 가한다.",

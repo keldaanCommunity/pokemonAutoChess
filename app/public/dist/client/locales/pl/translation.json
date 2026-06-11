@@ -797,7 +797,7 @@
 		"PRECIPICE_BLADES": "Zadaj [25,50,100,200,SP] OBRAŻEŃ SPECIAL wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
 		"SONG_OF_DESIRE": "2 przeciwników w tylnej linii staje sie CHARM na 3 sekund i zmniejsz ich ATK o [3,SP]",
 		"CONFUSING_MIND": "Make [1,2,3,5] opponents in the backline CONFUSION for [3,SP] seconds",
-		"KNOWLEDGE_THIEF": "Użyj zdolności celu. Gracz otrzymuje 1 XP.",
+		"KNOWLEDGE_THIEF": "Użyj zdolności celu. Gracz otrzymuje [1,1,1,2,3] XP.",
 		"KING_SHIELD": "CHROŃ użytkownika na 1,5 sekundy, zyskaj [10,20,40,80,SP] SHIELD i zamień się pozycjami z najdalszym wrogim Pokémonem",
 		"EXPLOSION": "Zadaj [50,100,200,400,SP] SPECIAL wszystkim sąsiadującym wrogom. Niszczy użytkownika",
 		"CLANGOROUS_SOUL": "Wzmocnij siebie i sąsiadujących sojuszników ATK, DEF i SPE_DEF o [2,4,8,16,SP]",

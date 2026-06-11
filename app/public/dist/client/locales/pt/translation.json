@@ -1755,7 +1755,7 @@
 		"PRECIPICE_BLADES": "Inflige [25,50,100,200,SP] de SPECIAL a todas as unidades inimigas na mesma coluna ou linha do atacante",
 		"SONG_OF_DESIRE": "Aplica CHARM em [1,1,2,3] oponentes na linha de fundo por 3 segundos e reduz seus ATK em [3,SP]",
 		"CONFUSING_MIND": "Aplica CONFUSION em [1,2,3,5] oponentes na linha de fundo por [3,SP] segundos",
-		"KNOWLEDGE_THIEF": "Lançar a habilidade do alvo. O jogador aliado ganha 1 XP.",
+		"KNOWLEDGE_THIEF": "Lançar a habilidade do alvo. O jogador aliado ganha [1,1,1,2,3] XP.",
 		"KING_SHIELD": "Aplica PROTECT no usuário por 1,5 segundos, concede [10,20,40,80,SP] de SHIELD e troca de posição com o inimigo mais distante",
 		"EXPLOSION": "Inflige [50,100,200,400,SP] de SPECIAL a todos os inimigos ADJACENT. Causa a mesma quantidade de dano no usuário.",
 		"NIGHTMARE": "Aplica FATIGUE em todo o time inimigo por [2,4,6,10,ND=1] segundos. Qualquer inimigo que sofra de uma maldição GHOST recebe [25,50,100,200,SP] de SPECIAL.",

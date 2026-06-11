@@ -1736,7 +1736,7 @@
 		"PRECIPICE_BLADES": "Inflige [25,50,100,200,SP] de SPECIAL a todos los Pokémon enemigos en la misma columna del atacante.",
 		"SONG_OF_DESIRE": "Deja CHARM a [1,1,2,3] oponentes en la ultima línea durante 3 segundos y reduce su ATK en [3,SP].",
 		"CONFUSING_MIND": "Deja CONFUSION a [1,2,3,5] oponentes en la última línea durante [3,SP] segundos.",
-		"KNOWLEDGE_THIEF": "Usa la habilidad del objetivo. El jugador gana 1 XP.",
+		"KNOWLEDGE_THIEF": "Usa la habilidad del objetivo. El jugador gana [1,1,1,2,3] XP.",
 		"KING_SHIELD": "Garantiza PROTECT al usuario durante 1.5 segundos, otorga [10,20,40,80,SP] SHIELD e intercambia su posición con la del enemigo más lejano.",
 		"U_TURN": "Otorga [15,30,50,100,SP] SHIELD, intercambia posición con el objetivo que está CHARM durante 1 segundo.",
 		"EXPLOSION": "Otorga [50,100,200,400,SP] de SPECIAL a todos los enemigos en una casilla ADJACENT. También daña al usuario.",

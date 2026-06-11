@@ -1207,7 +1207,7 @@
 		"PRECIPICE_BLADES": "Gây [25,50,100,200,SP] SPECIAL cho tất cả Pokemon đối thủ ở cùng cột với bản thân",
 		"SONG_OF_DESIRE": "Khiến [1,1,2,3] đối thủ ở hậu tuyến bị CHARM trong 3 s, và làm giảm [3,SP] chỉ số ATK",
 		"CONFUSING_MIND": "Làm [1,2,3,5] đối thủ ở hậu tuyến CONFUSION trong [3,SP] giây",
-		"KNOWLEDGE_THIEF": "Sử dụng khả năng của mục tiêu. Người chơi nhận 1 XP",
+		"KNOWLEDGE_THIEF": "Sử dụng khả năng của mục tiêu. Người chơi nhận [1,1,1,2,3] XP",
 		"KING_SHIELD": "PROTECT người chơi trong 1.5 giây, nhận [10,20,40,80,SP] SHIELD và hoán đổi vị trí với Pokemon xa nhất của đối thủ",
 		"EXPLOSION": "Gây [50,100,200,400,SP] SPECIAL cho tất cả đối thủ gần nhất. Gây sát thương lên bản thân",
 		"NIGHTMARE": "FATIGUE tất cả Pokemon đối thủ trong [2,4,6,10,ND=1] giây. Bất kỳ kẻ địch nào bị lời nguyền GHOST gây [25,50,100,200,SP] SPECIAL.",
