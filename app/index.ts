@@ -31,22 +31,25 @@ Encoder.BUFFER_SIZE = 512 * 1024
 
 async function main() {
   if (process.env.NODE_APP_INSTANCE) {
+    // multiple threads config
     const processNumber = Number(process.env.NODE_APP_INSTANCE ?? "0")
     const port = (Number(process.env.PORT) ?? 2569) + processNumber
     initializeMetrics()
     await listen(app)
-    if (port === 2569) {
-      // only the first thread of the first instance will create the lobby and init cron jobs
+    const isLobbyThread = port === 2569
+    if (isLobbyThread) {
+      // only the first thread of the first machine will create the lobby and init cron jobs
       await matchMaker.createRoom("lobby", {})
       checkLobby()
-      initCronJobs()
-      void warmupSpriteGapScanner()
     }
+    initCronJobs(isLobbyThread)
+    warmupSpriteGapScanner()
   } else {
+    // single thread config
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
-    initCronJobs()
-    void warmupSpriteGapScanner()
+    initCronJobs(true)
+    warmupSpriteGapScanner()
   }
 
   logger.info("Fetching leaderboards...")
@@ -64,6 +67,7 @@ async function main() {
 }
 
 function checkLobby() {
+  // automatically recreate lobby room if its not found
   logger.info("checkLobby cron job")
   CronJob.from({
     cronTime: "* * * * *",
