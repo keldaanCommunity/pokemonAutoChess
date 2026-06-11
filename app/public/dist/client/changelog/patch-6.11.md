@@ -5,6 +5,7 @@
 
 - Nerf Alcremie Rainbow Swirl: 60 → 50 PP
 - Buff Alcremie Matcha: 40 → 60 max HP
+- Ditto: PP 50 → 10
 
 Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.
 - Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
@@ -14,7 +15,9 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Flame Wheel (Cyndaquil): 10/20/30 → 10/20/40/80 SPECIAL
 - Jet Punch (Palafin): 100% of SPEED as SPECIAL → 100/100/100/150/300%
 - Leaf's blade (Trecko, Galarian Farfetched, Kartana): 100% → 100/125/150/250% of ATK as TRUE
+- Luster Purge (Latios): 25 SPECIAL → 10/20/30/60 SPECIAL
 - Meteor Mash (Beldum): 100% → 100/120/140/200% of ATK 3 times
+- Mist Ball (Latias): 25 SPECIAL → 10/20/30/60 SPECIAL
 - Mortal Spin (Glimmet): 20/30 → 20/40/80/160 SPECIAL ; Poison duration: 4 → 4/4/8/16 seconds
 - Mystical Fire (Fennekin): AP reduction 20 → 15/20/25/50
 - Nutrients: healing 40 → 20/30/40/80 ; DEF/SPE_DEF buff: 2 → 1/2/3/6

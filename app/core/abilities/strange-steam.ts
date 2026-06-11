@@ -28,7 +28,7 @@ export class StrangeSteamStrategy extends AbilityStrategy {
         )
         if (cell.value && cell.value.team !== pokemon.team) {
           if (chance([0.3, 0.3, 1.0, 1.0][pokemon.stars - 1] ?? 1.0, pokemon)) {
-            cell.value.status.triggerConfusion(3000, cell.value, pokemon)
+            cell.value.status.triggerConfusion(3000, cell.value, pokemon, true)
           }
         } else if (cell.value && cell.value.team === pokemon.team) {
           cell.value.status.addFairyField(cell.value)

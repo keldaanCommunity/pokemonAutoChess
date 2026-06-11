@@ -13,7 +13,7 @@ export class SandsearStormStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30, 50, 75, 150][pokemon.stars - 1] ?? 150
+    const damage = [45,60,75,150][pokemon.stars - 1] ?? 150
     const burnDuration = [2000, 2000, 2000, 5000][pokemon.stars - 1] ?? 5000
 
     effectInLine(board, pokemon, target, (cell) => {

@@ -15,7 +15,7 @@ export class MistBallStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25, 25, 25, 50][pokemon.stars - 1] ?? 50
+    const damage = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
 
     effectInLine(board, pokemon, target, (cell) => {
       if (
