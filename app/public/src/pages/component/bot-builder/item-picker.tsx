@@ -58,7 +58,7 @@ export default function ItemPicker(props: {
       label: t("wands"),
       key: "wands",
       items: Wands,
-      hidden: props.origin === "team-planner"
+      hidden: props.origin === "team-planner" || props.origin === "bot-builder"
     },
     {
       label: t("special_items"),
