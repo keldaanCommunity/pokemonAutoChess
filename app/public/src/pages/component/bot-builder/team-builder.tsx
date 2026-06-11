@@ -318,7 +318,7 @@ export default function TeamBuilder(props: {
       <ItemPicker
         selectEntity={setSelection}
         selected={selection}
-        showUnholdableItems={false}
+        origin={inBotBuilder ? "bot-builder" : "team-planner"}
       />
       <PokemonPicker
         selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}

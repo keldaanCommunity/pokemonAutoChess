@@ -21,7 +21,7 @@ import { cc } from "../../utils/jsx"
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
-  showUnholdableItems?: boolean
+  origin: "tier-list" | "bot-builder" | "team-planner"
 }) {
   function handleOnDragStart(e: React.DragEvent, item: Item) {
     e.stopPropagation()
@@ -45,24 +45,21 @@ export default function ItemPicker(props: {
 
     { label: t("tools"), key: "tools", items: Tools },
     {
+      label: t("shiny_items"),
+      key: "shiny_items",
+      items: ShinyItems
+    },
+    {
       label: t("tm_short"),
       key: "tm",
       items: TMs
     },
     {
-      label: t("shiny_items"),
-      key: "shiny_items",
-      items: ShinyItems
+      label: t("wands"),
+      key: "wands",
+      items: Wands,
+      hidden: props.origin === "team-planner"
     },
-    ...(props.showUnholdableItems
-      ? [
-          {
-            label: t("wands"),
-            key: "wands",
-            items: Wands
-          }
-        ]
-      : []),
     {
       label: t("special_items"),
       key: "special_items",
@@ -75,11 +72,13 @@ export default function ItemPicker(props: {
         ...MemoryDiscs
       ]
     }
-  ]
+  ].filter((tab) => !tab.hidden)
 
-  if (props.showUnholdableItems === false) {
+  if (props.origin !== "tier-list") {
     tabs.forEach((tab) => {
-      tab.items = tab.items.filter((item) => !isIn(UnholdableItems, item))
+      if (tab.key !== "tm") {
+        tab.items = tab.items.filter((item) => !isIn(UnholdableItems, item))
+      }
     })
   }
 
