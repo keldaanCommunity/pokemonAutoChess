@@ -2201,7 +2201,7 @@
 		"ROOST": "Voa para longe, recebendo SLEEP por 1 segundo e ganhando [20,40,80,160,SP] de SHIELD.",
 		"BEHEMOTH_BLADE": "Avance rapidamente para trás do alvo e desfere um golpe poderoso, causando [100,SP] + [100,SP]% de ATK como SPECIAL.",
 		"HEAT_CRASH": "Investe contra o alvo, arremessando-o para trás e causando [40, 60, 80, 160, SP] de SPECIAL. Causa mais dano quanto maior for o ATK do usuário em comparação com o alvo.",
-		"LASER_BLADE": "Alterna entre:\n1. Gira a lâmina laser, movendo-se para trás do alvo, ganhando [25,SP] de SHIELD e causando [25,SP] de SPECIAL ao alvo e aos inimigos ADJACENT no caminho.\n2. Gira a lâmina laser em frente ao alvo, causando 2 vezes [25,SP] + ATK como SPECIAL.",
+		"LASER_BLADE": "Alterna entre:\n1. Gira a lâmina laser, movendo-se para trás do alvo, ganhando [25,25,25,50,SP] de SHIELD e causando [25,25,25,50,SP] de SPECIAL ao alvo e aos inimigos ADJACENT no caminho.\n2. Gira a lâmina laser em frente ao alvo, causando 2 vezes [25,25,25,50,SP] + ATK como SPECIAL.",
 		"ICICLE_MISSILE": "Lança [1,2,3,5] mísseis de gelo em inimigos na retaguarda, causando [50,SP] de SPECIAL e aplicando FREEZE por 2 segundos.",
 		"ARM_THRUST": "Ataca [LK] de 2 a 5 vezes, causando [100,100,200,400,SP]% do ATK como PHYSICAL a cada ataque. Cada acerto pode ser crítico independentemente, com base na CRIT_CHANCE.",
 		"DRUM_BEATING": "Alterna entre:\n1. Bloco de madeira: concede [10,20,40,80,SP] de SHIELD para toda a equipe\n2. Rufar de tambores: inflinge [10,20,40,80,SP] de SPECIAL a todos os inimigos\n3. Aumentar o ritmo: concede [10,20,40,80,SP] de SPEED para toda a equipe",

@@ -2229,7 +2229,7 @@
 		"ROOST": "Flies away and after landing, SLEEP for 1 second and gaining [20,40,80,160,SP] SHIELD.",
 		"BEHEMOTH_BLADE": "Dash behind the target and deliver a powerful slash, dealing [100,SP] + [100,SP]% ATK as SPECIAL",
 		"HEAT_CRASH": "Crashes into the target, knocking it back and dealing [40,60,80,160,SP] SPECIAL. Does more damage the more ATK the user has compared to the target.",
-		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,SP] SHIELD and dealing [25,SP] SPECIAL to target and ADJACENT enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,SP] + ATK as SPECIAL.",
+		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,25,25,50,SP] SHIELD and dealing [25,25,25,50,SP] SPECIAL to target and ADJACENT enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,25,25,50,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3,5] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for 2 seconds.",
 		"ARM_THRUST": "Attacks [LK] 2 to 5 times, dealing [100,100,200,400,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
 		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,80,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,80,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,80,SP] SPEED to the entire team",

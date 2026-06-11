@@ -2153,7 +2153,7 @@
 		"ROOST": "Vola via, rimanendo SLEEP per 1 secondo e guadagnando [20,40,80,160,SP] di SHIELD.",
 		"BEHEMOTH_BLADE": "Salta dietro al bersaglio e lo colpisce con un taglio potente, infliggendogli, [100,SP] + [100,SP]% ATK come SPECIAL",
 		"HEAT_CRASH": "Si schianta contro il bersaglio, spingendolo all'indietro e infliggendogli [40,60,80,160,SP] SPECIAL. Più l' ATK dell'utilizzatore è maggiore rispetto a quello del bersaglio, più potente è l'attacco.",
-		"LASER_BLADE": "Alterna tra:\n1. Roteare la propria lama intorno a sé, muovendosi dietro al bersaglio e guadgnando[25,SP] di SHIELD, infliggendo [25,SP] SPECIAL ai nemici ADJACENT nel cammino.\n2. Effettua un colpo roteante di fronte a sé, infliggendo 2 volte [25,SP] + ATK come SPECIAL.",
+		"LASER_BLADE": "Alterna tra:\n1. Roteare la propria lama intorno a sé, muovendosi dietro al bersaglio e guadgnando [25,25,25,50,SP] di SHIELD, infliggendo [25,25,25,50,SP] SPECIAL ai nemici ADJACENT nel cammino.\n2. Effettua un colpo roteante di fronte a sé, infliggendo 2 volte [25,25,25,50,SP] + ATK come SPECIAL.",
 		"ICICLE_MISSILE": "Lancia [1,2,3,5] ghiaccioli missile ai nemici nelle retrovie, infliggendo [50,SP] SPECIAL e FREEZE per 2 secondi",
 		"ARM_THRUST": "Attacca [LK] dalle 2 alle 5 volte, infliggendo [100,100,200,400,SP]% dell' ATK come PHYSICAL ad ogni attacco. Ogni colpo può fare autonomamente colpo critico, influenzato dalla CRIT_CHANCE.",
 		"DRUM_BEATING": "Alterna tra:\n1. Wood Block: dai [10,20,40,80,SP] SHIELD a tutti gli alleati\n2. Rullo di Tamburi: infliggi [10,20,40,80,SP] SPECIAL a tutti i nemici\n3. Alza il Ritmo: dai [10,20,40,80,SP] SPEED a tutti gli alleati",
