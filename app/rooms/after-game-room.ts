@@ -1,10 +1,10 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, Room } from "colyseus"
+import { type Client, Room } from "colyseus"
 import admin from "firebase-admin"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { IAfterGamePlayer } from "../types"
-import { GameMode } from "../types/enum/Game"
+import type { IAfterGamePlayer } from "../types"
+import type { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import AfterGameState from "./states/after-game-state"
 

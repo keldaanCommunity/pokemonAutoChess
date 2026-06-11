@@ -1,4 +1,4 @@
-import { HydratedDocument } from "mongoose"
+import type { HydratedDocument } from "mongoose"
 import {
   BoosterRarityProbability,
   EmotionCost,
@@ -14,7 +14,7 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
 import { Emotion } from "../types"
-import { Booster, BoosterCard } from "../types/Booster"
+import type { Booster, BoosterCard } from "../types/Booster"
 import { Ability } from "../types/enum/Ability"
 import { Rarity } from "../types/enum/Game"
 import { Pkm, PkmByIndex, PkmIndex, Unowns } from "../types/enum/Pokemon"

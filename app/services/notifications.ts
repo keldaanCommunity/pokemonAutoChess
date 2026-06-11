@@ -1,5 +1,6 @@
-import { matchMaker } from "colyseus"
-import { INotification, NotificationType } from "../types/notifications"
+import { type Client, matchMaker } from "colyseus"
+import { Transfer } from "../types"
+import type { INotification, NotificationType } from "../types/notifications"
 import { logger } from "../utils/logger"
 
 /**
@@ -19,7 +20,8 @@ class NotificationsService {
   addNotification(
     userId: string,
     type: NotificationType,
-    message: string
+    message: string,
+    client?: Client
   ): void {
     const notification: INotification = {
       id: `${userId}-${Date.now()}-${Math.random()}`,
@@ -30,6 +32,7 @@ class NotificationsService {
     }
 
     matchMaker.presence.publish("notification-added", notification)
+    client?.send(Transfer.NOTIFICATIONS, [notification])
   }
 
   onNotificationAdded(notification: INotification) {

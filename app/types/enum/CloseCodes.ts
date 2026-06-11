@@ -1,4 +1,4 @@
-import { ErrorMessage } from "../strings/ErrorMessage";
+import type { ErrorMessage } from "../strings/ErrorMessage"
 
 // see https://github.com/Luka967/websocket-close-codes#websocket-close-codes
 export enum CloseCodes {

@@ -7,22 +7,28 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
+import { SynergyEffects } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
-import { Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
+import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
-import { SynergyEffects } from "../models/effects"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
-import { getSellPrice } from "../models/shop"
-import { Emotion, IPokemon, IPokemonEntity, Title, Transfer } from "../types"
+import {
+  Emotion,
+  type IPokemon,
+  type IPokemonEntity,
+  Title,
+  Transfer
+} from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
   Orientation,
   PokemonActionState,
-  Rarity,
+  type Rarity,
   Stat,
   Team
 } from "../types/enum/Game"
@@ -42,13 +48,13 @@ import { count, isIn } from "../utils/array"
 import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
-import { clamp, min, roundToNDigits } from "../utils/number"
-import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
+import { clamp, max, min, roundToNDigits } from "../utils/number"
+import { chance, pickNRandomIn } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import AttackingState from "./attacking-state"
 import type { Board } from "./board"
 import {
-  Effect,
+  type Effect,
   Effect as EffectClass,
   OnAttackEffect,
   OnAttackReceivedEffect,
@@ -68,11 +74,12 @@ import {
   FlyingProtectionEffect,
   MonsterKillEffect
 } from "./effects/synergies"
+import { EvolutionManager } from "./evolution-logic/evolution-manager"
 import { IdleState } from "./idle-state"
 import MovingState from "./moving-state"
-import PokemonState from "./pokemon-state"
-import Simulation from "./simulation"
-import { DelayedCommand, SimulationCommand } from "./simulation-command"
+import type PokemonState from "./pokemon-state"
+import type Simulation from "./simulation"
+import { DelayedCommand, type SimulationCommand } from "./simulation-command"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -272,7 +279,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
           attacker.id !== this.id &&
-          this.hp <= 0.1 * this.maxHP))
+          this.hp <= 10))
     )
   }
 
@@ -399,7 +406,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         specialDamage *= 1.2
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
-        specialDamage *= attacker.critPower
+        const nbBlackAugurite = this.player
+          ? count(this.player.items, Item.BLACK_AUGURITE)
+          : 0
+        const reductionFactor = 1 - 0.1 * nbBlackAugurite
+        specialDamage *= attacker.critPower * reductionFactor
       }
       if (
         attacker &&
@@ -568,7 +579,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.maxHP = min(1)(this.maxHP + value)
     if (this.hp > 0) {
       // careful to not heal a KO pokemon
-      this.hp = clamp(this.hp + value, 1, this.maxHP)
+      if (value > 0) {
+        this.hp = clamp(this.hp + value, 1, this.maxHP)
+      } else {
+        // if maxHP is reduced under current HP, current HP is also reduced to avoid being above maxHP
+        this.hp = max(this.maxHP)(this.hp)
+      }
     }
 
     if (permanent && !this.isGhostOpponent) {
@@ -585,10 +601,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   ) {
     value =
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    value = applyBigEaterBeltStatBuff(this, value, caster)
+    value = applyBigEaterBeltStatBuff(this, value, caster, 3)
     value = applyTwistBandBuff(this, value, caster)
 
-    this.dodge = clamp(this.dodge + value, 0, 0.9)
+    this.dodge = max(0.9)(this.dodge + value)
   }
 
   addAbilityPower(
@@ -1770,11 +1786,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.refToBoardPokemon.stacks += amount
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
-    if (this.stacks === this.stacksRequired) {
-      const pokemonEvolved = this.refToBoardPokemon.evolutionRule.tryEvolve(
+    if (
+      this.refToBoardPokemon.evolutionRule.type === EvolutionRuleType.STACK &&
+      this.stacksRequired > 0 &&
+      this.stacks === this.stacksRequired
+    ) {
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         this.refToBoardPokemon as Pokemon,
-        this.player,
-        this.simulation.stageLevel
+        this.player
       )
       if (pokemonEvolved) {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
@@ -1787,28 +1806,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 }
 
-export function getStrongestUnit<T extends Pokemon | IPokemonEntity>(
-  pokemons: T[]
-): T {
-  /*
-    strongest is defined as:
-    1) number of items
-    2) stars level
-    3) rarity cost
-    */
-  const pokemonScores = pokemons.map((pokemon) => getUnitScore(pokemon))
-  const bestScore = Math.max(...pokemonScores)
-  return pickRandomIn(pokemons.filter((p, i) => pokemonScores[i] === bestScore))
-}
-
-export function getUnitScore(pokemon: IPokemonEntity | IPokemon) {
-  let score = 0
-  score += 100 * pokemon.items.size
-  score += 10 * pokemon.stars
-  score += getSellPrice(pokemon, null, true)
-  return score
-}
-
 export function canSell(
   pkm: Pkm,
   specialGameRule: SpecialGameRule | undefined | null
@@ -1818,14 +1815,6 @@ export function canSell(
   }
 
   return new PokemonClasses[pkm](pkm).canBeSold
-}
-
-export function getMoveSpeed(pokemon: IPokemonEntity): number {
-  // at 0 speed in normal conditions, the factor should be 0.5
-  // at 100 speed, the factor should be 1.5
-  // at max 300 speed, it's 3.5 = 143ms per cell
-  const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
-  return 0.5 + speed / 100
 }
 
 function applyBigEaterBeltStatBuff(

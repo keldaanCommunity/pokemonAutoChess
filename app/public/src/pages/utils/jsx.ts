@@ -11,24 +11,30 @@ export function cc(...classes: (string | Record<string, boolean>)[]): string {
 }
 
 export function jsxTextContent(node: React.ReactNode | object): string {
-  if (typeof node === 'string' || typeof node === 'number' || typeof node === 'boolean') {
-    return node.toString();
+  if (
+    typeof node === "string" ||
+    typeof node === "number" ||
+    typeof node === "boolean"
+  ) {
+    return node.toString()
   }
   if (!node) {
-    return '';
+    return ""
   }
   if (Array.isArray(node)) {
-    return node.map((entry) => jsxTextContent(entry)).join('');
+    return node.map((entry) => jsxTextContent(entry)).join("")
   }
 
   // Because ReactNode includes {} in its union we need to jump through a few hoops.
-  const props: { children?: React.ReactNode } = (node as any).props ? (node as any).props : {};
+  const props: { children?: React.ReactNode } = (node as any).props
+    ? (node as any).props
+    : {}
 
   if (!props || !props.children) {
-    return '';
+    return ""
   }
 
-  return jsxTextContent(props.children);
+  return jsxTextContent(props.children)
 }
 
-export default jsxTextContent;
+export default jsxTextContent

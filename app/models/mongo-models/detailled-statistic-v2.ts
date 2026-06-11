@@ -1,9 +1,9 @@
 import { model, Schema } from "mongoose"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { GameMode } from "../../types/enum/Game"
+import type { GameMode } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import type { Synergy } from "../../types/enum/Synergy"
 
 export interface Pokemon {
   name: string

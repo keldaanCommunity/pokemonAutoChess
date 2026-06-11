@@ -1,15 +1,15 @@
-import { User } from "@firebase/auth-types"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { User } from "@firebase/auth-types"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { CollectionUtils } from "../../../core/collection"
-import { Emotion, Title, Transfer } from "../../../types"
+import { type Emotion, type Title, Transfer } from "../../../types"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import { Language } from "../../../types/enum/Language"
-import {
+import type { Language } from "../../../types/enum/Language"
+import type {
   IPokemonCollectionItemUnpacked,
   IUserMetadataJSON,
   IUserMetadataUnpacked
 } from "../../../types/interfaces/UserMetadata"
-import { INotification } from "../../../types/notifications"
+import type { INotification } from "../../../types/notifications"
 import { getAvatarString } from "../../../utils/avatar"
 import { leaveAllRooms, rooms } from "../network.js"
 

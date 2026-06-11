@@ -1,9 +1,9 @@
 import type Phaser from "phaser"
-import PokemonSprite from "../public/src/game/components/pokemon"
-import { DebugScene } from "../public/src/game/scenes/debug-scene"
-import GameScene from "../public/src/game/scenes/game-scene"
-import { Ability } from "./enum/Ability"
-import { Orientation } from "./enum/Game"
+import type PokemonSprite from "../public/src/game/components/pokemon"
+import type { DebugScene } from "../public/src/game/scenes/debug-scene"
+import type GameScene from "../public/src/game/scenes/game-scene"
+import type { Ability } from "./enum/Ability"
+import type { Orientation } from "./enum/Game"
 
 export enum AnimationType {
   Idle = "Idle",

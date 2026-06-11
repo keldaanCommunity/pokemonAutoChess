@@ -1,7 +1,7 @@
 import { Team } from "../../types/enum/Game"
 import { min } from "../../utils/number"
 import type { Board } from "../board"
-import { PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 
 export class AbilityStrategy {
   copyable = true // if true, can be copied by mimic, metronome, encore...

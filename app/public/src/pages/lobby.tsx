@@ -1,14 +1,15 @@
-import { RoomAvailable } from "@colyseus/sdk"
+import type { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import GameState from "../../../rooms/states/game-state"
+import { MAX_LOADING_TIME } from "../../../config"
+import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { client, leaveRoom, rooms } from "../network"
+import { client, joinGame, leaveRoom, rooms } from "../network"
 import { resetBoosters } from "../stores/BoostersStore"
 import { resetLobby } from "../stores/LobbyStore"
 import {
@@ -76,7 +77,7 @@ export default function Lobby() {
         { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
         30
       )
-      leaveRoom("lobby", true)
+      joinGame(game, MAX_LOADING_TIME / 1000)
       dispatch(resetLobby())
       dispatch(resetBoosters())
       navigate("/game")

@@ -3,13 +3,13 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import {
+import type {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
 import { schemaEntries, schemaValues } from "../../../../../utils/schemas"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector } from "../../../hooks"
 import { participateInTournament } from "../../../network"
 import { formatDate } from "../../utils/date"
 import { cc } from "../../utils/jsx"
@@ -21,7 +21,6 @@ export default function TournamentItem(props: {
   tournament: TournamentSchema
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.network.profile)
   const uid: string = useAppSelector((state) => state.network.uid)
   const participating = props.tournament.players.has(uid)
@@ -70,12 +69,12 @@ export default function TournamentItem(props: {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <span>{getTournamentStage(props.tournament)}</span>
           <span>
-            {t("players_remaining")}: {remainingPlayers.length}
+            {t("tournament.players_remaining")}: {remainingPlayers.length}
           </span>
         </div>
       ) : (
         <p>
-          {t("starts_at")}{" "}
+          {t("tournament.starts_at")}{" "}
           {formatDate(new Date(props.tournament.startDate), {
             dateStyle: "long"
           })}
@@ -84,13 +83,17 @@ export default function TournamentItem(props: {
       {!tournamentStarted && !tournamentFinished && (
         <>
           {user && user.level < GADGETS.certificate.levelRequired && (
-            <p>{t("level_required")}</p>
+            <p>
+              {t("tournament.tournament_mode_locked", {
+                requiredLevel: GADGETS.certificate.levelRequired
+              })}
+            </p>
           )}
           <div className="actions">
             {participating ? (
               <button
                 className="participate-btn bubbly green"
-                title={t("cancel_tournament_participation")}
+                title={t("tournament.cancel_tournament_participation")}
                 disabled={
                   !registrationsOpen ||
                   (user && user.level < GADGETS.certificate.levelRequired)
@@ -102,12 +105,12 @@ export default function TournamentItem(props: {
                   })
                 }}
               >
-                {t("participating")}
+                {t("tournament.participating")}
               </button>
             ) : registrationsOpen ? (
               <button
                 className="participate-btn bubbly blue"
-                title={t("register_tournament_participation")}
+                title={t("tournament.register_tournament_participation")}
                 disabled={
                   !registrationsOpen ||
                   (user && user.level < GADGETS.certificate.levelRequired)
@@ -119,7 +122,7 @@ export default function TournamentItem(props: {
                   })
                 }}
               >
-                {t("participate")}
+                {t("tournament.participate")}
               </button>
             ) : null}
           </div>
@@ -127,18 +130,18 @@ export default function TournamentItem(props: {
       )}
       <Tabs>
         <TabList>
-          {tournamentStarted && <Tab>{t("brackets")}</Tab>}
+          {tournamentStarted && <Tab>{t("tournament.brackets")}</Tab>}
           {(tournamentStarted || tournamentFinished) && (
-            <Tab>{t("ranking")}</Tab>
+            <Tab>{t("tournament.ranking")}</Tab>
           )}
           {(registrationsOpen || tournamentStarted) && (
             <Tab>
-              {t("participants")} ({players.length})
+              {t("tournament.participants")} ({players.length})
             </Tab>
           )}
         </TabList>
         {!registrationsOpen && !tournamentStarted && (
-          <p>{t("registrations_open_info")}</p>
+          <p>{t("tournament.registrations_open_info")}</p>
         )}
         {tournamentStarted && (
           <TabPanel className="brackets">

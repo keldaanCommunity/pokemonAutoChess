@@ -1,16 +1,17 @@
-import { MapSchema } from "@colyseus/schema"
-import Player from "../../models/colyseus-models/player"
-import { Pokemon } from "../../models/colyseus-models/pokemon"
-import GameRoom from "../../rooms/game-room"
-import { IPokemonEntity } from "../../types"
-import { Ability } from "../../types/enum/Ability"
-import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
-import { Item } from "../../types/enum/Item"
-import { Passive } from "../../types/enum/Passive"
+import type { MapSchema } from "@colyseus/schema"
+import type Player from "../../models/colyseus-models/player"
+import type { Pokemon } from "../../models/colyseus-models/pokemon"
+import type GameRoom from "../../rooms/game-room"
+import type GameState from "../../rooms/states/game-state"
+import type { IPokemonEntity } from "../../types"
+import type { Ability } from "../../types/enum/Ability"
+import type { EffectEnum } from "../../types/enum/Effect"
+import type { AttackType } from "../../types/enum/Game"
+import type { Item } from "../../types/enum/Item"
+import type { Passive } from "../../types/enum/Passive"
 import type { Board } from "../board"
-import { PokemonEntity } from "../pokemon-entity"
-import Simulation from "../simulation"
+import type { PokemonEntity } from "../pokemon-entity"
+import type Simulation from "../simulation"
 
 type EffectOrigin = EffectEnum | Item | Passive | Ability
 
@@ -45,7 +46,7 @@ export class OnSpawnEffect extends Effect {
 interface OnDishConsumedEffectArgs {
   pokemon: Pokemon
   dish: Item
-  player: Player
+  player?: Player
   entity?: PokemonEntity
 }
 export class OnDishConsumedEffect extends Effect {
@@ -87,6 +88,56 @@ export class OnStageStartEffect extends Effect {
   apply(args: OnStageStartEffectArgs) {}
 }
 
+// applied when pokemon is moved to another position on the board during pick phases
+
+interface OnChangePositionEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  state?: GameState // can be undefined for bots updatePlayerTeam method
+  oldX: number
+  oldY: number
+  newX: number
+  newY: number
+}
+
+export class OnChangePositionEffect extends Effect {
+  constructor(
+    effect?: (args: OnChangePositionEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: OnChangePositionEffectArgs) {}
+}
+
+// applied after evolution
+
+export class OnEvolutionEffect extends Effect {
+  constructor(
+    effect?: (args: { pokemonEvolved: Pokemon; player: Player }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemonEvolved: Pokemon; player: Player }) {}
+}
+
+// applied when a pokemon enters or leaves the spotlight
+
+export class OnSpotlightChangeEffect extends Effect {
+  constructor(
+    effect?: (args: {
+      pokemon: Pokemon
+      player: Player
+      inSpotlight: boolean
+    }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemon: Pokemon; player: Player; inSpotlight: boolean }) {}
+}
+
 // applied when a pokemon is benched during a fight
 interface OnBenchedDuringFightEffectArgs {
   pokemon: Pokemon
@@ -106,7 +157,7 @@ export class OnBenchedDuringFightEffect extends Effect {
 
 interface OnSimulationStartEffectArgs {
   simulation: Simulation
-  player: Player
+  player?: Player
   team: MapSchema<IPokemonEntity>
   entity: PokemonEntity
 }
@@ -389,6 +440,18 @@ export class OnShieldDepletedEffect extends Effect {
   override apply(args: OnShieldDepletedEffectArgs) {}
   constructor(
     effect?: (args: OnShieldDepletedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+// applied after a Ground Pokémon digs the ground between rounds
+
+export class OnGroundDiggingEffect extends Effect {
+  override apply(args: { pokemon: Pokemon; player: Player }) {}
+  constructor(
+    effect?: (args: { pokemon: Pokemon; player: Player }) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

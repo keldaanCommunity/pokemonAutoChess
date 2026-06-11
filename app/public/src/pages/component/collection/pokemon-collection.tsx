@@ -1,6 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
+import type React from "react"
+import {
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useMemo,
@@ -20,7 +21,7 @@ import { getAvailableEmotions } from "../../../../../models/precomputed/precompu
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Ability } from "../../../../../types/enum/Ability"
-import { Emotion } from "../../../../../types/enum/Emotion"
+import type { Emotion } from "../../../../../types/enum/Emotion"
 import { Passive } from "../../../../../types/enum/Passive"
 import {
   NonPkm,
@@ -29,7 +30,7 @@ import {
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
 import { LocalStoreKeys, localStore, useLocalStore } from "../../utils/store"
@@ -207,14 +208,20 @@ export default function PokemonCollection() {
           <option value={"all"}>{t("collection.show_all")}</option>
           <option value={"favorite"}>{t("collection.show_favorites")}</option>
           {filterState.mode !== "pokedex" && (
-            <option value={"unlockable"}>{t("collection.show_unlockable")}</option>
+            <option value={"unlockable"}>
+              {t("collection.show_unlockable")}
+            </option>
           )}
           <option value={"locked"}>{t("collection.show_locked")}</option>
           <option value={"unlocked"}>{t("collection.show_unlocked")}</option>
           {filterState.mode !== "pokedex" && (
             <>
-              <option value={"refundable"}>{t("collection.show_refundable")}</option>
-              <option value={"new"}>{t("collection.show_newly_obtained")}</option>
+              <option value={"refundable"}>
+                {t("collection.show_refundable")}
+              </option>
+              <option value={"new"}>
+                {t("collection.show_newly_obtained")}
+              </option>
             </>
           )}
         </select>
@@ -230,7 +237,9 @@ export default function PokemonCollection() {
         >
           <option value={"index"}>{t("collection.sort_by_index")}</option>
           <option value={"shards"}>{t("collection.sort_by_shards")}</option>
-          <option value={"unlocked"}>{t("collection.sort_by_emotes_unlocked")}</option>
+          <option value={"unlocked"}>
+            {t("collection.sort_by_emotes_unlocked")}
+          </option>
           <option value={"played"}>{t("collection.sort_by_played")}</option>
         </select>
 

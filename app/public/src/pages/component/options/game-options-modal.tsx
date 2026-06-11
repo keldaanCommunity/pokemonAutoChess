@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { isThemeUnlocked, THEMES } from "../../../../../config"
@@ -11,7 +11,7 @@ import { usePreferences } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
-import { Page } from "../main-sidebar/main-sidebar"
+import type { Page } from "../main-sidebar/main-sidebar"
 import { Modal } from "../modal/modal"
 import GameFiles from "./game-files"
 import KeybindInfo from "./keybind-info"
@@ -178,9 +178,7 @@ export default function GameOptionsModal(props: {
                 setPreferences({ disableAnimatedTilemap: checked })
                 const gameScene = getGameScene()
                 if (gameScene) {
-                  const animatedTiles = (gameScene?.sys as any).animatedTiles
-                  if (checked) animatedTiles.pause()
-                  else animatedTiles.resume()
+                  gameScene.toggleTilesetAnimation(checked)
                 }
               }}
               label={t("options.disable_animated_tilemap")}

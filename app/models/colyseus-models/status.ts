@@ -2,12 +2,18 @@ import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import type { PokemonEntity } from "../../core/pokemon-entity"
+import {
+  type IPokemonEntity,
+  type ISimulation,
+  type IStatus,
+  Transfer
+} from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
+import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
@@ -1155,11 +1161,19 @@ export default class Status extends Schema implements IStatus {
   updateLocked(dt: number, pokemon: PokemonEntity) {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
-      pokemon.range =
-        pokemon.baseRange +
-        (pokemon.items.has(Item.WIDE_LENS)
-          ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
-          : 0)
+      let range = pokemon.baseRange
+      if (pokemon.items.has(Item.WIDE_LENS)) {
+        range += ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0
+      }
+      if (
+        pokemon.player &&
+        pokemon.player.items.includes(Item.LONG_WAND) &&
+        pokemon.types.has(Synergy.FAIRY)
+      ) {
+        range += 1
+      }
+      pokemon.range = range
+
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.lockedCooldown -= dt

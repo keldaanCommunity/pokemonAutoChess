@@ -12,15 +12,15 @@ import {
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
-import { EloRank } from "../../../../../types/enum/EloRank"
+import type { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
-import { IPokemonsStatisticV2 } from "../../../models/pokemons-statistic-v2"
+import type { IPokemonsStatisticV2 } from "../../../models/pokemons-statistic-v2"
 import { formatDateShort } from "./history-utils"
 import "./pokemon-history-panel.css"
-import { PoolType } from "../../../../../types/enum/PoolType"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 
 const TOP_N_OPTIONS = [10, 20, 50] as const
 

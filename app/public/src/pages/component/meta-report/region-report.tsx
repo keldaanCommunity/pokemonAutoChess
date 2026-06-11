@@ -1,9 +1,9 @@
 import { t } from "i18next"
 import { useEffect, useState } from "react"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   fetchMetaRegions,
-  IRegionStatistic
+  type IRegionStatistic
 } from "../../../models/regions-statistic"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import RegionStatistic from "./region-statistic"

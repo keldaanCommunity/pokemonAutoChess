@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { Role, Title } from "../../../../../types"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Role, type Title } from "../../../../../types"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonPortrait from "../pokemon-portrait"
 import { RoleBadge } from "./role-badge"
 

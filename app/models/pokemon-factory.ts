@@ -1,14 +1,14 @@
 import { MapSchema } from "@colyseus/schema"
-import { Emotion, IPlayer, PkmCustom } from "../types"
-import { Stat } from "../types/enum/Game"
+import { Emotion, type IPlayer, type PkmCustom } from "../types"
+import type { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
-import { TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
+import { type TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
 
 import { logger } from "../utils/logger"
-import Player from "./colyseus-models/player"
+import type Player from "./colyseus-models/player"
 import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getPkmWithCustom } from "./colyseus-models/pokemon-customs"
-import { PVEStage } from "./pve-stages"
+import type { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
   static makePveBoard(
@@ -59,7 +59,7 @@ export default class PokemonFactory {
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
       const pokemon = new PokemonClass(name, shiny, emotion)
-      pokemon.maxHP = pokemon.hp
+      pokemon.postConstructor()      
       return pokemon
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)

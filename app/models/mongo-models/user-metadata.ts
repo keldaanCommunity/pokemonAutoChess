@@ -4,7 +4,7 @@ import { GADGETS_UNLOCKED_BY_LEVEL } from "../../config/game/gadgets"
 import { CollectionUtils } from "../../core/collection"
 import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
-import {
+import type {
   IPokemonCollectionItemMongo,
   IUserMetadataJSON,
   IUserMetadataLean,

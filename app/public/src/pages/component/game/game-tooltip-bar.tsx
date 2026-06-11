@@ -1,6 +1,6 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
-import { Stat } from "../../../../../types/enum/Game"
+import type { Stat } from "../../../../../types/enum/Game"
 import { clamp } from "../../../../../utils/number"
 import "./game-tooltip-bar.css"
 

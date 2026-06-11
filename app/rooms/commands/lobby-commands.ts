@@ -1,7 +1,6 @@
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
+import { type Client, matchMaker } from "colyseus"
 import { randomBytes } from "crypto"
-import { writeHeapSnapshot } from "v8"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -13,14 +12,14 @@ import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
-import { Emotion, Role, Title, Transfer } from "../../types"
+import { Emotion, Role, type Title, Transfer } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
-import { Language } from "../../types/enum/Language"
+import type { Language } from "../../types/enum/Language"
 import { PkmIndex } from "../../types/enum/Pokemon"
 import { Starters } from "../../types/enum/Starters"
-import {
+import type {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
 } from "../../types/interfaces/UserMetadata"
@@ -30,7 +29,7 @@ import { logger } from "../../utils/logger"
 import { generateRandomName } from "../../utils/name-generation"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
-import CustomLobbyRoom from "../custom-lobby-room"
+import type CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -188,19 +187,6 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-}
-
-export class HeapSnapshotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  execute({ client }: { client: Client }) {
-    const u = this.room.users.get(client.auth.uid)
-    if (u && u.role === Role.ADMIN) {
-      logger.info("writing heap snapshot")
-      writeHeapSnapshot()
     }
   }
 }

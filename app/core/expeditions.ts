@@ -10,20 +10,20 @@ import {
 } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import {
-  BattleMissionData,
-  BattleMissionStat,
+  type BattleMissionData,
+  type BattleMissionStat,
   BattleMissionStats,
-  DeliveryMissionData,
-  Expedition,
-  ExpeditionData,
+  type DeliveryMissionData,
+  type Expedition,
+  type ExpeditionData,
   ExpeditionRank,
   ExpeditionType,
-  ExplorationMissionData,
-  RescueMissionData
+  type ExplorationMissionData,
+  type RescueMissionData
 } from "../types/enum/Expedition"
 import { Rarity } from "../types/enum/Game"
 import { Synergy } from "../types/enum/Synergy"
-import {
+import type {
   IUserMetadataClient,
   IUserMetadataMongo,
   IUserMetadataUnpacked

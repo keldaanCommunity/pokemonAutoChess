@@ -3,12 +3,15 @@ import { useTranslation } from "react-i18next"
 import {
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
-  TitleUnlockingTheme
+  type TitleUnlockingTheme
 } from "../../../../../config"
 import { Title } from "../../../../../types"
 import { isIn } from "../../../../../utils/array"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { fetchTitles, ITitleStatistic } from "../../../models/title-statistic"
+import {
+  fetchTitles,
+  type ITitleStatistic
+} from "../../../models/title-statistic"
 import { setTitle } from "../../../stores/NetworkStore"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"

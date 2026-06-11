@@ -1,5 +1,5 @@
-import { Emotion, Role, Title } from ".."
-import { Language } from "../enum/Language"
+import type { Emotion, Role, Title } from ".."
+import type { Language } from "../enum/Language"
 
 interface IUserMetadata {
   uid: string

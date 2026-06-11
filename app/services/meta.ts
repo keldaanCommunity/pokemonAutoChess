@@ -7,9 +7,9 @@ import RegionStatistic from "../models/mongo-models/regions-statistic"
 import ReportMetadata from "../models/mongo-models/report-metadata"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
-import { EloRank } from "../types/enum/EloRank"
-import { Synergy } from "../types/enum/Synergy"
-import { ITypeStatistics } from "../types/meta"
+import type { EloRank } from "../types/enum/EloRank"
+import type { Synergy } from "../types/enum/Synergy"
+import type { ITypeStatistics } from "../types/meta"
 import type { IDendrogram } from "../types/models/dendrogram"
 import type {
   IGameActivity,

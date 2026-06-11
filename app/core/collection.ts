@@ -1,6 +1,6 @@
-import { CollectionEmotions, Emotion, PkmWithCustom } from "../types"
+import { CollectionEmotions, Emotion, type PkmWithCustom } from "../types"
 import { PkmIndex } from "../types/enum/Pokemon"
-import {
+import type {
   IPokemonCollectionItemClient,
   IPokemonCollectionItemMongo,
   IPokemonCollectionItemUnpacked

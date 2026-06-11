@@ -1,18 +1,16 @@
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
 import { SynergyTriggers } from "../../../../../config"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
-import SynergyDetailComponent from "./synergy-detail-component"
 
 export default function SynergyComponent(props: {
   type: Synergy
   value: number
   index: number
-  tooltipPortal: boolean
+  onMouseEnter: () => void
+  onMouseLeave: () => void
 }) {
   const { t } = useTranslation()
   const levelReached = SynergyTriggers[props.type]
@@ -47,18 +45,6 @@ export default function SynergyComponent(props: {
     })
   }
 
-  const tooltip = (
-    <Tooltip
-      id={"detail-" + props.type}
-      className="custom-theme-tooltip"
-      place="right-start"
-      delayShow={100}
-      delayHide={0}
-    >
-      <SynergyDetailComponent type={props.type} value={props.value} />
-    </Tooltip>
-  )
-
   return (
     <div
       style={{
@@ -79,22 +65,20 @@ export default function SynergyComponent(props: {
             : "none",
         cursor: "var(--cursor-hover)"
       }}
-      data-tooltip-id={"detail-" + props.type}
+      data-tooltip-id="detail-synergy"
       onMouseEnter={() => {
         highlightSynergy(props.type)
+        props.onMouseEnter()
       }}
       onMouseLeave={() => {
         removeHighlightSynergy(props.type)
+        props.onMouseLeave()
       }}
     >
-      {props.tooltipPortal
-        ? ReactDOM.createPortal(tooltip, document.body)
-        : tooltip}
-
-      <SynergyIcon type={props.type} size="40px" />
+      <SynergyIcon type={props.type} />
       <span
         style={{
-          fontSize: "32px",
+          fontSize: "2em",
           textShadow: "2px 2px 2px #000000c0",
           textAlign: "center",
           marginRight: "4px",

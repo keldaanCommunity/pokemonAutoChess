@@ -73,7 +73,11 @@
         "noInvalidBuiltinInstantiation": "error",
         "useValidTypeof": "error"
       },
-      "style": { "noNamespace": "error", "useAsConstAssertion": "error" },
+      "style": { 
+        "noNamespace": "error", 
+        "useAsConstAssertion": "error",
+        "useImportType": "error"
+      },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
         "noCatchAssign": "error",

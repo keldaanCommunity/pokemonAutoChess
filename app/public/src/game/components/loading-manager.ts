@@ -1,17 +1,17 @@
 import { t } from "i18next"
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
-import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
-import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
 
@@ -108,13 +108,6 @@ export default class LoadingManager {
 
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
-
-    scene.load.scenePlugin(
-      "animatedTiles",
-      AnimatedTilesPlugin,
-      "animatedTiles",
-      "animatedTiles"
-    )
   }
 }
 

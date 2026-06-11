@@ -1,21 +1,22 @@
-import { Client, Room } from "@colyseus/sdk"
-import { User } from "@firebase/auth-types"
+import { Client, type Room } from "@colyseus/sdk"
+import type { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
 import type { server } from "../../app.config.ts"
 import { FIREBASE_CONFIG } from "../../config"
-import AfterGameState from "../../rooms/states/after-game-state"
-import GameState from "../../rooms/states/game-state"
-import LobbyState from "../../rooms/states/lobby-state"
-import PreparationState from "../../rooms/states/preparation-state"
-import { Emotion, Role, Title, Transfer } from "../../types"
+import type AfterGameState from "../../rooms/states/after-game-state"
+import type GameState from "../../rooms/states/game-state"
+import type LobbyState from "../../rooms/states/lobby-state"
+import type PreparationState from "../../rooms/states/preparation-state"
+import { type Emotion, type Role, type Title, Transfer } from "../../types"
 import type { Booster } from "../../types/Booster"
 import { CloseCodes } from "../../types/enum/CloseCodes"
-import { EloRank } from "../../types/enum/EloRank.js"
-import { BotDifficulty } from "../../types/enum/Game.js"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
-import { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
+import type { EloRank } from "../../types/enum/EloRank"
+import type { BotDifficulty } from "../../types/enum/Game"
+import type { MaintenanceOrder } from "../../types/enum/MaintenanceOrder"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
-import { IBot } from "./models/bot-v2"
+import type { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
 import { setBoosterContent } from "./stores/BoostersStore"
@@ -382,8 +383,8 @@ export function giveBooster(params: { uid: string; numberOfBoosters: number }) {
   rooms.lobby?.send(Transfer.GIVE_BOOSTER, params)
 }
 
-export function heapSnapshot() {
-  rooms.lobby?.send(Transfer.HEAP_SNAPSHOT)
+export function sendMaintenanceOrder(order: MaintenanceOrder) {
+  rooms.lobby?.send(Transfer.MAINTENANCE, order)
 }
 
 export function deleteAccount() {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Emotion, PkmWithCustom } from "../../../../../types"
-import { Item } from "../../../../../types/enum/Item"
+import { Emotion, type PkmWithCustom } from "../../../../../types"
+import type { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { ITierList } from "../../../../../types/interfaces/TierList"
+import type { ITierList } from "../../../../../types/interfaces/TierList"
 import { exportElementAsImage } from "../../../../../utils/export-image"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import ItemPicker from "../bot-builder/item-picker"
@@ -154,7 +154,7 @@ export default function TierListMaker() {
         </button>
       </div>
       <TierList tierList={tierList} onUpdate={setTierList} />
-      <ItemPicker />
+      <ItemPicker origin="tier-list" />
       <PokemonPicker />
     </div>
   )

@@ -1,4 +1,4 @@
-import { ISimplePlayer } from "../types"
+import type { ISimplePlayer } from "../types"
 import { GameMode } from "../types/enum/Game"
 import { average, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"

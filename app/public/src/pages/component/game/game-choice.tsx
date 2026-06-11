@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
+import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
-  Pkm,
+  type Pkm,
   PkmDuo,
   PkmDuos,
   PkmFamily
@@ -12,7 +12,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
-import { IDetailledPokemon } from "../../../models/bot-v2"
+import type { IDetailledPokemon } from "../../../models/bot-v2"
 import { pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"

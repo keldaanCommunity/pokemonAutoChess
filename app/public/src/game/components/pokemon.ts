@@ -12,13 +12,16 @@ import {
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
-  FlowerMonByPot,
-  FlowerPots
+  FlowerMonByPot
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { type IPokemon, type IPokemonEntity } from "../../../../types"
 import {
-  AbilityAnimationArgs,
+  FlowerPots,
+  type IPokemon,
+  type IPokemonEntity
+} from "../../../../types"
+import {
+  type AbilityAnimationArgs,
   AttackSprite,
   AttackSpriteScale
 } from "../../../../types/Animation"
@@ -51,7 +54,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
-import { GameDialog } from "./game-dialog"
+import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import {

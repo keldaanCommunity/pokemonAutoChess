@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { getEmotionCost } from "../../../../../config"
-import { AvatarEmotions, Emotion } from "../../../../../types"
+import { AvatarEmotions, type Emotion } from "../../../../../types"
 import { PkmByIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { useAppSelector } from "../../../hooks"

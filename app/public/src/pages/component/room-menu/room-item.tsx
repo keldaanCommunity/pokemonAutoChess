@@ -1,10 +1,10 @@
-import { RoomAvailable } from "@colyseus/sdk"
+import type { RoomAvailable } from "@colyseus/sdk"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
-import { IPreparationMetadata, Role } from "../../../../../types"
-import { EloRank } from "../../../../../types/enum/EloRank"
+import { type IPreparationMetadata, Role } from "../../../../../types"
+import type { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"
@@ -65,8 +65,7 @@ export default function RoomItem(props: {
     disabledReason = t("room_menu.max_rank_not_reached")
   } else if (
     props.room.metadata?.gameMode === GameMode.RANKED &&
-    user?.level != null &&
-    user.level < GADGETS.certificate.levelRequired
+    (!user || user.level < GADGETS.certificate.levelRequired)
   ) {
     canJoin = false
     disabledReason = t("room_menu.ranked_mode_locked", {

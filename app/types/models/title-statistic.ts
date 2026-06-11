@@ -1,4 +1,4 @@
-import { Title } from ".."
+import type { Title } from ".."
 
 export interface ITitleStatistic {
   name: Title

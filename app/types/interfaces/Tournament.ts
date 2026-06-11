@@ -1,5 +1,5 @@
-import { ArraySchema, MapSchema } from "@colyseus/schema"
-import {
+import type { ArraySchema, MapSchema } from "@colyseus/schema"
+import type {
   TournamentBracketSchema,
   TournamentPlayerSchema
 } from "../../models/colyseus-models/tournament"

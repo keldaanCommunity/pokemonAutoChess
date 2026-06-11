@@ -5,7 +5,7 @@ import {
   getExpeditionLabel,
   getPlayerExpeditions
 } from "../../../../../core/expeditions"
-import { Expedition } from "../../../../../types/enum/Expedition"
+import type { Expedition } from "../../../../../types/enum/Expedition"
 import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
 import { formatDuration } from "../../utils/date"

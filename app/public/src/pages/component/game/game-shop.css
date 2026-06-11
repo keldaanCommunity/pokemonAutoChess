@@ -342,9 +342,13 @@
 
 @media (aspect-ratio > 4 / 3) and (width <= 1280px) {
   #game-wrapper .game-shop {
-    transform: scale(0.8);
-    transform-origin: bottom left;
-    right: 0;
+    font-size: 75%;
+    right: 8px;
+  }
+
+  #game-streak-info > div {
+    width: 20px;
+    height: 20px;
   }
 }
 

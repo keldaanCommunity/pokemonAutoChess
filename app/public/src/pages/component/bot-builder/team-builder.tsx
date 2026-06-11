@@ -1,16 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Emotion, PkmWithCustom, Role, Transfer } from "../../../../../types"
+import {
+  Emotion,
+  type PkmWithCustom,
+  Role,
+  Transfer
+} from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import { isOnBench } from "../../../../../utils/board"
 import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
-import { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
 import { rooms } from "../../../network"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
@@ -309,7 +315,11 @@ export default function TeamBuilder(props: {
         showBench={inBotBuilder}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} selected={selection} />
+      <ItemPicker
+        selectEntity={setSelection}
+        selected={selection}
+        origin={inBotBuilder ? "bot-builder" : "team-planner"}
+      />
       <PokemonPicker
         selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}
         addEntity={addPokemonOnFirstEmptyCell}

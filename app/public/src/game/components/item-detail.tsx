@@ -1,4 +1,5 @@
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
@@ -15,9 +16,9 @@ import {
   UnholdableItems
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
+import { entries } from "../../../../utils/object"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
-import { entries } from "../../../../utils/object"
 
 export function ItemDetailTooltipContent({
   item,
@@ -129,16 +130,18 @@ export function ItemDetailTooltipContent({
           })}
         </div>
       )}
-      <Tooltip
-        id="item-detail-recipes-tooltip"
-        className="custom-theme-tooltip item-detail-tooltip"
-        render={({ content }) => (
-          <ItemDetailTooltipContent
-            item={content as Item}
-            showItemCombinationsTooltip={false}
-          />
-        )}
-      />
+      {showItemCombinationsTooltip && (
+        <Tooltip
+          id="item-detail-recipes-tooltip"
+          className="custom-theme-tooltip item-detail-tooltip"
+          render={({ content }) => (
+            <ItemDetailTooltipContent
+              item={content as Item}
+              showItemCombinationsTooltip={false}
+            />
+          )}
+        />
+      )}
     </div>
   )
 }

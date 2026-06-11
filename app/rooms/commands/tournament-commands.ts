@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
+import { type Client, matchMaker } from "colyseus"
 import { GADGETS } from "../../config/game/gadgets"
 import {
   getRemainingPlayers,
@@ -13,12 +13,12 @@ import {
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { notificationsService } from "../../services/notifications"
-import { IPlayer, Role, Title, Transfer } from "../../types"
+import { type IPlayer, Role, Title, Transfer } from "../../types"
 import { GameMode } from "../../types/enum/Game"
-import { ITournamentPlayer } from "../../types/interfaces/Tournament"
+import type { ITournamentPlayer } from "../../types/interfaces/Tournament"
 import { logger } from "../../utils/logger"
 import { convertSchemaToRawObject, schemaValues } from "../../utils/schemas"
-import CustomLobbyRoom from "../custom-lobby-room"
+import type CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnCreateTournamentCommand extends Command<
   CustomLobbyRoom,

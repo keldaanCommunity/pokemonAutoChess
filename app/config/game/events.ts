@@ -1,4 +1,4 @@
-import { GameEvent, GameEvents } from "../../types/events"
+import { type GameEvent, GameEvents } from "../../types/events"
 
 export const VICTORY_ROAD_MAX_EVENT_POINTS = 500
 

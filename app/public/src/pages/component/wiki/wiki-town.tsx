@@ -5,7 +5,7 @@ import {
 } from "../../../../../config"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import {
-  TownEncounter,
+  type TownEncounter,
   TownEncounters
 } from "../../../../../types/enum/TownEncounter"
 import { addIconsToDescription } from "../../utils/descriptions"

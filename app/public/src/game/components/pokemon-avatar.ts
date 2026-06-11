@@ -1,6 +1,11 @@
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
+import {
+  AvatarEmotions,
+  type Emotion,
+  type IPokemonAvatar
+} from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
 import { getAvatarSrc, getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
@@ -9,7 +14,7 @@ import { playSound, SOUNDS } from "../../pages/utils/audio"
 import { preference } from "../../preferences"
 import store from "../../stores"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"

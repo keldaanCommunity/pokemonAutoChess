@@ -10,7 +10,6 @@
 @import "./react-tooltip.css";
 @import "./scrollbar.css";
 @import "./toastify.css";
-@import "../pages/component/events-menu/twitch-streams.css";
 
 :root {
   --sidebar-width: 60px;
@@ -262,15 +261,27 @@ summary,
   }
 }
 
-@media (width <= 1024px) {
+@media (width <= 1280px) {
   body {
     font-size: 16px;
   }
 }
 
-@media (width <= 640px) {
+@media (width <= 1024px) {
   body {
     font-size: 14px;
+  }
+
+  :root {
+    --border-thick: 2px solid black;
+    --border-thin: 1px solid black;
+    --border-extra-thin: 1px solid black;
+  }
+}
+
+@media (width <= 640px) {
+  body {
+    font-size: 12px;
   }
 
   #root .my-container {

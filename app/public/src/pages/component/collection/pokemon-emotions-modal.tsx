@@ -8,8 +8,8 @@ import {
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -253,7 +253,9 @@ export default function PokemonEmotionsModal(props: {
                 )
               }
             >
-              {isCurrentAvatar ? t("collection.chosen_as_avatar") : t("collection.choose_as_avatar")}
+              {isCurrentAvatar
+                ? t("collection.chosen_as_avatar")
+                : t("collection.choose_as_avatar")}
               &nbsp;
               <PokemonPortrait
                 portrait={{
@@ -298,7 +300,9 @@ export default function PokemonEmotionsModal(props: {
               onClick={toggleFavorite}
             >
               ❤️&nbsp;
-              {isFavorite ? t("collection.remove_from_favorites") : t("collection.add_to_favorites")}
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
             </button>
           </>
         }

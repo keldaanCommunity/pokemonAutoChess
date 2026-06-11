@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IChatV2 } from "../../../../../types"
+import type { IChatV2 } from "../../../../../types"
 import ChatHistory from "../chat/chat-history"
 
 export function ProfileChatHistory(props: { uid: string }) {

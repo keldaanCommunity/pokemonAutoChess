@@ -1,6 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
+import type React from "react"
+import {
+  type Dispatch,
+  type SetStateAction,
   useEffect,
   useRef,
   useState
@@ -11,10 +12,11 @@ import {
   PkmAltForms,
   PkmAltFormsByPkm
 } from "../../../../../config"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import type { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Stat } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { NonPkm, Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { clamp } from "../../../../../utils/number"
 import { pickRandomIn } from "../../../../../utils/random"
@@ -26,7 +28,11 @@ import PokemonPortrait from "../pokemon-portrait"
 import "./pokeguesser.css"
 
 const listPokemonsToGuess = precomputedPokemonsImplemented
-  .filter((p) => !(PkmFamily[p.name] === Pkm.UNOWN_A && p.name !== Pkm.UNOWN_A))
+  .filter(
+    (p) =>
+      !(PkmFamily[p.name] === Pkm.UNOWN_A && p.name !== Pkm.UNOWN_A) &&
+      !isIn(NonPkm, p.name)
+  )
   .sort(
     (a, b) => parseInt(a.index.split("-")[0]) - parseInt(b.index.split("-")[0])
   )

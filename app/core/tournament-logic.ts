@@ -1,5 +1,5 @@
 import { ArraySchema } from "@colyseus/schema"
-import {
+import type {
   ITournament,
   ITournamentBracket,
   ITournamentPlayer

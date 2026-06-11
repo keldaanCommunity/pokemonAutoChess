@@ -3,7 +3,7 @@ import Message from "../../models/colyseus-models/message"
 import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
 import tournament from "../../models/mongo-models/tournament"
-import { ITournament } from "../../types/interfaces/Tournament"
+import type { ITournament } from "../../types/interfaces/Tournament"
 import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {

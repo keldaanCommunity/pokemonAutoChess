@@ -1,9 +1,9 @@
 import Phaser from "phaser"
 import { getRegionTint, RegionDetails } from "../../../../config"
-import { DesignTiled } from "../../../../core/design"
+import type { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
-import { DungeonPMDO } from "../../../../types/enum/Dungeon"
+import type { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Status } from "../../../../types/enum/Status"
@@ -181,10 +181,6 @@ export class DebugScene extends Phaser.Scene {
         this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-        const sys = this.sys as any
-        if (sys.animatedTiles) {
-          sys.animatedTiles.pause()
-        }
         playMusic(this as any, RegionDetails[mapName].music)
         resolve()
       })
@@ -219,7 +215,6 @@ export class DebugScene extends Phaser.Scene {
           )!
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
-        ;(this.sys as any).animatedTiles.init(map)
         playMusic(this as any, RegionDetails[mapName].music)
       })
       .then(() => {

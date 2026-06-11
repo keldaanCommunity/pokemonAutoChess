@@ -1,5 +1,6 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
@@ -7,15 +8,15 @@ import { EloRankThreshold } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   CraftableItems,
-  Item,
+  type Item,
   ShinyItems,
   Tools,
   UnholdableItems
 } from "../../../../../types/enum/Item"
 import {
   fetchMetaItems,
-  IItemsStatisticV2,
-  IItemV2
+  type IItemsStatisticV2,
+  type IItemV2
 } from "../../../models/items-statistic-v2"
 import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"

@@ -2,8 +2,8 @@ import { Ability } from "../../types/enum/Ability"
 import { Rarity } from "../../types/enum/Game"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
-import { IPokemonData } from "../../types/interfaces/PokemonData"
+import type { Synergy } from "../../types/enum/Synergy"
+import type { IPokemonData } from "../../types/interfaces/PokemonData"
 import { mapToObj } from "../../utils/map"
 import { schemaValues } from "../../utils/schemas"
 import { precomputedPokemons } from "./precomputed-pokemons"
@@ -72,4 +72,28 @@ export function getPokemonData(name: Pkm): IPokemonData {
     evolution: null,
     evolutions: []
   }
+}
+
+export function getRegularsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemonData = getPokemonData(p)
+    return (
+      pokemonData.stars === 1 &&
+      pokemonData.skill !== Ability.DEFAULT &&
+      !pokemonData.additional &&
+      !pokemonData.regional
+    )
+  })
+}
+
+export function getAdditionalsTier1(pokemons: Pkm[]) {
+  return pokemons.filter((p) => {
+    const pokemonData = getPokemonData(p)
+    return (
+      pokemonData.stars === 1 &&
+      pokemonData.skill !== Ability.DEFAULT &&
+      pokemonData.additional &&
+      !pokemonData.regional
+    )
+  })
 }

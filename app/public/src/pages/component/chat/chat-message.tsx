@@ -1,6 +1,6 @@
-import { IChatV2, Role } from "../../../../../types"
+import { type IChatV2, Role } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
-import { ChatRoom, removeMessage, searchById } from "../../../network"
+import { type ChatRoom, removeMessage, searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 

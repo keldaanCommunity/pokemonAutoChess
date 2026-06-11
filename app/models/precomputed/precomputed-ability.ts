@@ -1,5 +1,5 @@
 import { Ability } from "../../types/enum/Ability"
-import { Pkm } from "../../types/enum/Pokemon"
+import type { Pkm } from "../../types/enum/Pokemon"
 import { mapToObj } from "../../utils/map"
 import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 

@@ -6,13 +6,13 @@ import {
   matchMaker,
   RedisDriver,
   RedisPresence,
-  ServerOptions
+  type ServerOptions
 } from "colyseus"
 import cors from "cors"
-import express, { ErrorRequestHandler } from "express"
+import express, { type ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
 import admin from "firebase-admin"
-import { UserRecord } from "firebase-admin/auth"
+import type { UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
 import { marked } from "marked"
 import { connect } from "mongoose"
@@ -71,7 +71,7 @@ import {
   startTwitchAccountVerification,
   unlinkTwitchAccount
 } from "./services/twitch"
-import { ISuggestionUser, Role } from "./types"
+import { type ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
 import { Item } from "./types/enum/Item"
