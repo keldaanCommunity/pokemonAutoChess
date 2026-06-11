@@ -3650,7 +3650,8 @@
 		"POSTMAN": "Postman",
 		"SURVEY_CORPS": "Survey Corps",
 		"GUILDMASTER": "Guildmaster",
-		"LEGIONNAIRE": "Legionnaire"
+		"LEGIONNAIRE": "Legionnaire",
+		"FIVE_STARS": "★★★★★"
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3747,7 +3748,8 @@
 		"POSTMAN": "Complete a Delivery mission expedition",
 		"SURVEY_CORPS": "Complete a Battle mission expedition",
 		"GUILDMASTER": "Complete a rank S expedition",
-		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more"
+		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more",
+		"FIVE_STARS": "Play with a five stars Pokémon in your team"
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

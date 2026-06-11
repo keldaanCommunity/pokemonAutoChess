@@ -54,3 +54,5 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Bugfix
 
 # Misc
+
+- New title: Five Stars

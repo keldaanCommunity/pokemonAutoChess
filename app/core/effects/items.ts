@@ -1356,10 +1356,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.STAR_PIECE]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.stars = max(5)(pokemon.stars + 1)
+      if (pokemon.stars === 5 && pokemon.player) {
+        pokemon.player.titles.add(Title.FIVE_STARS)
+      }
     }),
     new OnItemRemovedEffect((pokemon) => {
       pokemon.stars = min(1)(pokemon.stars - 1)
-    }),
+    })
   ],
 
   [Item.OLD_ROD]: [new FishingRodEffect(Item.OLD_ROD)],
