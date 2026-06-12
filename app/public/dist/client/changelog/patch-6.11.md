@@ -46,6 +46,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Gameplay
 
+- Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
+
 # UI
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
