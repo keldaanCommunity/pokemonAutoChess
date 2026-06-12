@@ -815,13 +815,8 @@ export default abstract class PokemonState {
     attacker: PokemonEntity | null,
     board: Board,
     attackType: AttackType
-  ) {
-    const originalTeam = pokemon.status.possessed
-      ? pokemon.team === Team.BLUE_TEAM
-        ? Team.RED_TEAM
-        : Team.BLUE_TEAM
-      : pokemon.team
-    pokemon.team = originalTeam
+  ) {    
+    pokemon.team = pokemon.baseTeam
     pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
     if (attacker && pokemon !== attacker) {
