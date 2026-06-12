@@ -1,4 +1,12 @@
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
+import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
+import { Rarity, Team } from "../../types/enum/Game"
+import type { DisplayText } from "../../types/strings/DisplayText"
+import { pickRandomIn } from "../../utils/random"
+import type { Board } from "../board"
+import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 import { AbsorbStrategy } from "./absorb"
 import { AccelerockStrategy } from "./accelerock"
@@ -19,7 +27,6 @@ import { AquaTailStrategy } from "./aqua-tail"
 import { ArmThrustStrategy } from "./arm-thrust"
 import { ArmorCannonStrategy } from "./armor-cannon"
 import { AromatherapyStrategy } from "./aroma-therapy"
-import { AssistStrategy } from "./assist"
 import { AssuranceStrategy } from "./assurance"
 import { AstralBarrageStrategy } from "./astral-barrage"
 import { AttackOrderStrategy } from "./attack-order"
@@ -128,7 +135,6 @@ import { ElectrifyStrategy } from "./electrify"
 import { ElectroBallStrategy } from "./electro-ball"
 import { ElectroShotStrategy } from "./electro-shot"
 import { ElectroWebStrategy } from "./electro-web"
-import { EncoreStrategy } from "./encore"
 import { EntanglingThreadStrategy } from "./entangling-thread"
 import { EntrainmentStrategy } from "./entrainment"
 import { EruptionStrategy } from "./eruption"
@@ -267,7 +273,6 @@ import { JetPunchStrategy } from "./jet-punch"
 import { JudgementStrategy } from "./judgement"
 import { KingShieldStrategy } from "./king-shield"
 import { KnockOffStrategy } from "./knock-off"
-import { KnowledgeThiefStrategy } from "./knowledge-thief"
 import { KowtowCleaveStrategy } from "./kowtow-cleave"
 import { LandsWrathStrategy } from "./lands-wrath"
 import { LaserBladeStrategy } from "./laser-blade"
@@ -302,8 +307,6 @@ import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"
 import { MeteorMashStrategy } from "./meteor-mash"
-import { MetronomeStrategy } from "./metronome"
-import { MimicStrategy } from "./mimic"
 import { MindBendStrategy } from "./mind-bend"
 import { MindBlownStrategy } from "./mind-blown"
 import { MistBallStrategy } from "./mist-ball"
@@ -556,8 +559,168 @@ import { YawnStrategy } from "./yawn"
 import { ZapCannonStrategy } from "./zap-cannon"
 import { ZingZapStrategy } from "./zing-zap"
 
-export * from "./hidden-power"
-export type { SurfStrategy } from "./surf"
+export class AssistStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    const skill = pickRandomIn(
+      board.cells
+        .filter(
+          (v) =>
+            v &&
+            v.team === pokemon.team &&
+            v.skill &&
+            AbilityStrategies[v.skill].copyable
+        )
+        .map((v) => v?.skill)
+    )
+    if (skill) {
+      pokemon.broadcastAbility({ skill })
+      AbilityStrategies[skill].process(pokemon, board, target, crit)
+    } else super.process(pokemon, board, target, crit)
+  }
+}
+
+export class EncoreStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const abilitiesCast =
+      pokemon.team === Team.BLUE_TEAM
+        ? pokemon.simulation.blueAbilitiesCast
+        : pokemon.simulation.redAbilitiesCast
+    const lastAbilityUsed = abilitiesCast?.findLast(
+      (ability) =>
+        ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
+    )
+    if (lastAbilityUsed) {
+      AbilityStrategies[lastAbilityUsed].process(pokemon, board, target, crit)
+    }
+  }
+}
+
+export class KnowledgeThiefStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    if (AbilityStrategies[target.skill].copyable) {
+      AbilityStrategies[target.skill].process(pokemon, board, target, crit)
+    } else super.process(pokemon, board, target, crit)
+    if (pokemon.player && !pokemon.isGhostOpponent) {
+      const xpGain = [1, 1, 1, 2, 3][pokemon.stars - 1] ?? 3
+      pokemon.player.addExperience(xpGain)
+    }
+  }
+}
+
+export class MetronomeStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    const threshold = Math.pow(Math.random(), 1 + pokemon.luck / 100)
+    let rarity = Rarity.COMMON
+    if (threshold < 1 / 8) {
+      rarity = Rarity.ULTRA
+    } else if (threshold < 2 / 8) {
+      rarity = Rarity.LEGENDARY
+    } else if (threshold < 3 / 8) {
+      rarity = Rarity.EPIC
+    } else if (threshold < 4 / 8) {
+      rarity = Rarity.UNIQUE
+    } else if (threshold < 5 / 8) {
+      rarity = Rarity.RARE
+    } else if (threshold < 6 / 8) {
+      rarity = Rarity.SPECIAL
+    } else if (threshold < 7 / 8) {
+      rarity = Rarity.UNCOMMON
+    } else {
+      rarity = Rarity.COMMON
+    }
+
+    const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+    if (rarity === Rarity.SPECIAL) {
+      pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
+    }
+
+    const skillOptions = [
+      ...new Set(pokemonOptions.map((p) => getPokemonData(p).skill))
+    ]
+
+    const skill = pickRandomIn(
+      skillOptions.filter((s) => AbilityStrategies[s].copyable)
+    )
+
+    pokemon.broadcastAbility({ skill })
+    AbilityStrategies[skill].process(pokemon, board, target, crit)
+
+    pokemon.simulation.broadcastToSpectators(Transfer.DISPLAY_TEXT, {
+      id: pokemon.simulation.id,
+      text: `ability.${skill}` as DisplayText,
+      x: pokemon.positionX,
+      y: pokemon.positionY
+    })
+  }
+}
+
+export class MimicStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    if (AbilityStrategies[target.skill].copyable) {
+      AbilityStrategies[target.skill].process(pokemon, board, target, crit)
+    } else super.process(pokemon, board, target, crit)
+  }
+}
+
+
+export class SkillSwapStrategy extends AbilityStrategy {
+  copyable = false
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    if (AbilityStrategies[target.skill].copyable) {
+      pokemon.skill = target.skill
+      pokemon.maxPP = target.refToBoardPokemon
+        ? target.refToBoardPokemon.maxPP
+        : target.maxPP
+      if (
+        pokemon.refToBoardPokemon &&
+        !(
+          pokemon.refToBoardPokemon.skill === Ability.SKETCH &&
+          pokemon.refToBoardPokemon.tm === Ability.DEFAULT
+        )
+      ) {
+        pokemon.refToBoardPokemon.skill = target.skill
+      }
+      AbilityStrategies[target.skill].process(pokemon, board, target, crit)
+    }
+  }
+}
 
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ABSORB]: new AbsorbStrategy(),
