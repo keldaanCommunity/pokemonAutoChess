@@ -367,7 +367,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               (this.effects.has(EffectEnum.ABILITY_CRIT) &&
                 chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
-              ([0.5, 1][this.stars - 1] ?? 1) *
+              ([0.5, 1, 2, 4][this.stars - 1] ?? 4) *
                 damage *
                 (1 + this.ap / 100) *
                 (bounceCrit ? this.critPower : 1)

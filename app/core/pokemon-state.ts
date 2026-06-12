@@ -61,7 +61,7 @@ export default abstract class PokemonState {
         )
         critChance += 0.01 * distance
       }
-      const crit = chance(critChance, pokemon)      
+      const crit = chance(critChance, pokemon)
 
       const nbBlackAugurite = target.player
         ? count(target.player.items, Item.BLACK_AUGURITE)
@@ -78,7 +78,7 @@ export default abstract class PokemonState {
             reductionFactor -= 0.7
           }
           reductionFactor -= 0.1 * nbBlackAugurite
-          
+
           const damageWithoutCrit = damage
           const damageAfterCrit = damage * pokemon.critPower
           const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
@@ -92,11 +92,10 @@ export default abstract class PokemonState {
         }
       }
 
-      
       let reductionFactor = 1 - 0.1 * nbBlackAugurite
       if (target.items.has(Item.ROCKY_HELMET) === true) {
         reductionFactor = 0
-      } 
+      }
 
       if (target.effects.has(EffectEnum.WONDER_ROOM)) {
         attackType = AttackType.SPECIAL
@@ -144,7 +143,9 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(EffectEnum.CHARGE)) {
-        const chargeDamage = damage * pokemon.count.ult * (1 + pokemon.ap / 100)
+        const tierFactor = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+        const chargeDamage =
+          damage * tierFactor * pokemon.count.ult * (1 + pokemon.ap / 100)
         specialDamage += Math.ceil(chargeDamage)
       }
 
@@ -171,27 +172,28 @@ export default abstract class PokemonState {
         trueDamagePart += 0.25
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON)) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        trueDamagePart +=
+          ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
 
       if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-         specialDamage += Math.ceil(
+        specialDamage += Math.ceil(
           [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor): 1)
+            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
         )
-        
+
         pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
       }
 
       if (pokemon.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
         const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
         specialDamage += Math.ceil(
-          [30, 60, 120][pokemon.stars - 1] *
+          ([30, 60, 120, 240][pokemon.stars - 1] ?? 240) *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor): 1)
+            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
         )
         pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
       }
@@ -206,8 +208,8 @@ export default abstract class PokemonState {
         }, 0)
 
         specialDamage += Math.ceil(
-          (([20, 40, 60][pokemon.stars - 1] ?? 60) +
-            nbComfeeAllies * ([10, 20, 30][pokemon.stars - 1] ?? 60)) *
+          (([20, 40, 60, 120][pokemon.stars - 1] ?? 120) +
+            nbComfeeAllies * ([10, 20, 30, 60][pokemon.stars - 1] ?? 60)) *
             (1 + pokemon.ap / 100) *
             (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
         )
@@ -227,7 +229,8 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        physicalDamage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+        const stoneEdgeMult = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
+        physicalDamage += Math.round(pokemon.def * (stoneEdgeMult + pokemon.ap / 100))
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
