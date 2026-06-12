@@ -36,6 +36,7 @@ export const InimitableAbilities: Ability[] = [
   Ability.MAGNET_PULL,
   Ability.METRONOME,
   Ability.MIMIC,
+  Ability.SHADOW_FORCE,
   Ability.SKETCH,
   Ability.SKILL_SWAP
 ]
