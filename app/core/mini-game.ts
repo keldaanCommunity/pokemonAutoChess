@@ -20,7 +20,6 @@ import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
-import { getSynergyStep } from "../models/colyseus-models/synergies"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
 import { SynergyGivenByItem, Transfer } from "../types"
@@ -57,6 +56,7 @@ import {
 import { schemaKeys, schemaValues } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
 import { spawnDIAYAvatar } from "./scribbles"
+import { getSynergyStep } from "./synergies"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004

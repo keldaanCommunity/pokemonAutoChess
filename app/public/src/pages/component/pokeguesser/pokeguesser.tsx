@@ -364,7 +364,7 @@ export function PokemonAttempt({
       {schemaValues(pokemon.types).map((type, i) => (
         <span
           key={i}
-          className={cc("type", type, { valid: solution.hasSynergy(type) })}
+          className={cc("type", type, { valid: solution.types.has(type) })}
         >
           <SynergyIcon type={type} /> {t(`synergy.${type}`)}
         </span>

@@ -5,7 +5,6 @@ import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -37,6 +36,7 @@ import { castAbility } from "../abilities/cast"
 import type { Board, Cell } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getSynergyStep } from "../synergies";
 import { getStrongestUnit } from "../unit-score"
 import {
   type Effect,

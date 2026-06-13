@@ -243,7 +243,7 @@ export interface IPlayer {
   id: string
   name: string
   avatar: string
-  board: MapSchema<Pokemon>
+  board: MapSchema<IPokemon>
   shop: ArraySchema<Pkm>
   simulationId: string
   team: Team

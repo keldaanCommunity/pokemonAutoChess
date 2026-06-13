@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { SynergyTriggers } from "../../../../../config"
-import type { Synergy } from "../../../../../types/enum/Synergy"
+import { Synergy } from "../../../../../types/enum/Synergy"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
@@ -23,7 +23,7 @@ export default function SynergyComponent(props: {
     if (!scene) return
     if (!spectatedPlayer?.board) return
     spectatedPlayer.board.forEach((p) => {
-      if (p.hasSynergy(type)) {
+      if (p.types.has(type) || p.types.has(Synergy.STELLAR)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.setHovered(sprite, 4)
@@ -36,7 +36,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     spectatedPlayer?.board.forEach((p) => {
-      if (p.hasSynergy(type)) {
+      if (p.types.has(type) || p.types.has(Synergy.STELLAR)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.clearHovered(sprite)

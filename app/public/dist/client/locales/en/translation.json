@@ -2563,7 +2563,7 @@
 		"BANQUET": "Gain a second CHEF_HAT.",
 		"TERASTAL": "+1 to all active synergies levels",
 		"TERA_BLAST": "+2 to all active synergies levels",
-		"TERA_STAR_STORM": "Activates all synergies to their full potential. A storm of stars strikes the battlefield."
+		"TERA_STAR_STORM": "Activates all synergies to their full potential."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossil Stone",
