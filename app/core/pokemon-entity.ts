@@ -599,14 +599,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addDodgeChance(
     value: number,
-    caster: IPokemonEntity,
+    origin: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
-    value = applyBigEaterBeltStatBuff(this, value, caster, 3)
-    value = applyTwistBandBuff(this, value, caster)
+    if (origin !== "environment") {
+      value =
+        value *
+        (1 + (apBoost * origin.ap) / 100) *
+        (crit ? origin.critPower : 1)
+    }
+    value = applyBigEaterBeltStatBuff(this, value, origin, 3)
+    value = applyTwistBandBuff(this, value, origin)
 
     this.dodge = max(0.9)(this.dodge + value)
   }

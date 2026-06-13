@@ -5,11 +5,12 @@ import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { Synergy } from "../../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { isOnBench } from "../../utils/board"
 import { schemaValues } from "../../utils/schemas"
 import { getPokemonData } from "../precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../pve-stages"
+import type { Pokemon } from "./pokemon"
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
@@ -72,13 +73,13 @@ export default class Synergies extends MapSchema<number, Synergy> {
 }
 
 export function computeSynergies(
-  board: IPokemon[],
+  board: Pokemon[],
   bonusSynergies?: Map<Synergy, number>,
   specialGameRule?: SpecialGameRule | null
 ): Map<Synergy, number> {
   const synergies = new Map<Synergy, number>()
-  Object.keys(Synergy).forEach((key) => {
-    synergies.set(key as Synergy, bonusSynergies?.get(key as Synergy) ?? 0)
+  SynergyArray.forEach((synergy) => {
+    synergies.set(synergy, bonusSynergies?.get(synergy) ?? 0)
   })
 
   const typesPerFamily = new Map<string, Set<Synergy>>()
@@ -109,7 +110,7 @@ export function computeSynergies(
 
   function applyDragonDoubleTypes() {
     const dragonDoubleTypes = new Map<string, Set<Synergy>>()
-    board.forEach((pkm: IPokemon, index) => {
+    board.forEach((pkm: Pokemon, index) => {
       if (
         pkm.positionY != 0 &&
         pkm.hasSynergy(Synergy.DRAGON) &&
@@ -138,7 +139,7 @@ export function computeSynergies(
   }
 
   // add dynamic synergies (Arceus & Kecleon)
-  board.forEach((pkm: IPokemon) => {
+  board.forEach((pkm: Pokemon) => {
     if (
       pkm.positionY !== 0 &&
       (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
@@ -262,9 +263,8 @@ export function computeSynergies(
   if (stellarLevel) {
     if (stellarLevel >= 3) {
       // gives all synergies their max
-      Object.values(Synergy)
-        .filter((synergy) => synergy !== Synergy.STELLAR)
-        .forEach((synergy) => {
+      SynergyArray.filter((synergy) => synergy !== Synergy.STELLAR).forEach(
+        (synergy) => {
           synergies.set(
             synergy,
             Math.max(
@@ -272,7 +272,8 @@ export function computeSynergies(
               SynergyTriggers[synergy].at(-1) ?? 0
             )
           )
-        })
+        }
+      )
     } else {
       synergies.forEach((level, synergy) => {
         if (

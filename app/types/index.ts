@@ -345,7 +345,6 @@ export interface IPokemon {
   killCount: number
   readonly hasEvolution: boolean
   supercharged: boolean
-  hasSynergy(synergy: Synergy): boolean
 }
 
 export interface IExperienceManager {
@@ -407,7 +406,6 @@ export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
   get player(): IPlayer | undefined
-  hasSynergy(synergy: Synergy): boolean
   broadcastAbility(options: any): void
   applyStat(stat: Stat, value: number): void
   addAbilityPower(

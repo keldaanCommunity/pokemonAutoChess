@@ -1,12 +1,12 @@
 import { Rarity } from "../../types/enum/Game"
 import { type Pkm, PkmFamily } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { type Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-types-and-categories")
 
 const data = Object.fromEntries(
-  Object.values(Synergy).map((type) => [
+  SynergyArray.map((type) => [
     type,
     {
       pokemons: [],

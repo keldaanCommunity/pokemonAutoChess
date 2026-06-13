@@ -740,7 +740,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyEffect(pokemon: IPokemonEntity, effect: EffectEnum) {
+  applyEffect(pokemon: PokemonEntity, effect: EffectEnum) {
     const player = pokemon.player
     const types = pokemon.types
     switch (effect) {

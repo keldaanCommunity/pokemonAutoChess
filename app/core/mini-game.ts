@@ -622,7 +622,7 @@ export class MiniGame {
   pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
-        SynergyArray,
+        SynergyArray.filter((s) => s !== Synergy.STELLAR),
         3 * ((this.avatars?.size ?? 8) + 1)
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)
@@ -633,7 +633,8 @@ export class MiniGame {
     } else {
       this.avatars?.forEach((avatar) => {
         const player = this.alivePlayers.find((p) => p.id === avatar.id)!
-        const synergiesUsable = Object.values(Synergy).filter((type) => {
+        const synergiesUsable = SynergyArray.filter((type) => {
+          if (type === Synergy.STELLAR) return false // Stellar symbols cannot appear on portals
           if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
           return true
         })
