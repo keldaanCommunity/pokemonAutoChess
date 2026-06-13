@@ -3530,7 +3530,7 @@
 		"DRAGON": "DRAGON Pokémon amplify synergies and gain more stats when fully evolved.{{additionalInfo}}",
 		"FIELD": "When a FIELD Pokémon is KO'd, all the other FIELD Pokémon are healed and gain SPEED",
 		"MONSTER": "MONSTER Pokémon can FLINCH their opponents for 3 seconds ON_ATTACK. Every time they get a KO, they gain stats, heal and grow in size.",
-		"HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs and HMs.",
+		"HUMAN": "HUMAN Pokémon heal for a percentage of the damage they deal with attacks and abilities, and can learn a new ability with TMs.",
 		"AQUATIC": "AQUATIC Pokémon mitigate status afflictions for all your team. After 7 seconds, a tidal wave cleans up negative status and field effects, heals your AQUATIC allies, and knocks back and damages enemies.",
 		"BUG": "At the start of combat spawns a copy of your STRONGEST BUG Pokémon.",
 		"FLYING": "FLYING Pokémon fly away when they fall under a certain amount of HP unless affected by PARALYSIS, FREEZE, LOCKED or SLEEP.",

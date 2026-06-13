@@ -3431,7 +3431,7 @@
 		"DRAGON": "Pokémons DRAGON amplificam sinergias e ganham mais estatísticas quando totalmente evoluídos. {{additionalInfo}}",
 		"FIELD": "Quando um Pokémon FIELD é nocauteado, todos os outros pokémons FIELD são curados e recebem SPEED",
 		"MONSTER": "Pokémons MONSTER podem causar FLINCH em seus oponentes. Cada vez que nocauteiam um inimigo, eles recebem ATK adicional, curam e aumentam de tamanho.",
-		"HUMAN": "Os Pokémons HUMAN curam uma porcentagem do dano causado por seus ataques e habilidades, e podem aprender uma nova habilidade com TMs e HMs.",
+		"HUMAN": "Os Pokémons HUMAN curam uma porcentagem do dano causado por seus ataques e habilidades, e podem aprender uma nova habilidade com TMs.",
 		"AQUATIC": "Os Pokémons AQUATIC mitigam efeitos negativos de status para toda a sua equipe. Após 7 segundos, uma onda gigante limpa os status negativos e os efeitos de campo, cura seus aliados AQUATIC, e repele e causa danos aos inimigos.",
 		"BUG": "No início do combate, seus Pokémons BUG STRONGEST são clonados.",
 		"FLYING": "Os Pokémons FLYING voam para longe quando caem abaixo de uma certa quantidade de HP, a menos que afetados por PARALYSIS, FREEZE, LOCKED ou SLEEP",
