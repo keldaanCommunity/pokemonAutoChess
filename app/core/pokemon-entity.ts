@@ -770,6 +770,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addItem(item: Item, permanent = false) {
     const type = SynergyGivenByItem[item]
+
     if (
       this.items.size >= 3 ||
       (isIn(SynergyStones, item) && this.types.has(type)) ||
@@ -792,10 +793,19 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       this.refToBoardPokemon.items.add(item)
     }
-
+    
     if (type && !this.types.has(type)) {
       if (type === Synergy.DRAGON) {
         this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
+      } else if (type === Synergy.STELLAR) {
+        // remove native types
+        this.types.clear()
+        this.items.forEach((item) => {
+          const synergyGiven = SynergyGivenByItem[item]
+          if (synergyGiven) {
+            this.types.add(synergyGiven)
+          }
+        })
       } else {
         this.types.add(type)
       }
@@ -840,8 +850,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     )
 
     const type = SynergyGivenByItem[item]
-    const default_types = getPokemonData(this.name).types
-    if (type && !default_types.includes(type)) {
+    const nativeTypes = getPokemonData(this.name).types
+    if (type && !nativeTypes.includes(type)) {
       this.types.delete(type)
       SynergyEffects[type].forEach((effectName) => {
         this.effects.delete(effectName)
@@ -849,6 +859,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           if (effect.origin === effectName) this.effectsSet.delete(effect)
         })
       })
+      if (type === Synergy.STELLAR) {
+        this.types = new SetSchema([
+          ...nativeTypes,
+          ...schemaValues(this.types)
+        ])
+      }
     }
 
     ItemEffects[item]?.forEach((effectOrEffectFn) => {

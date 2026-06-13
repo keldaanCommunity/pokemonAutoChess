@@ -23,12 +23,7 @@ import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import { getSynergyStep } from "../models/colyseus-models/synergies"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
-import {
-  MemoryDiscs,
-  SynergyGivenByItem,
-  SynergyItems,
-  Transfer
-} from "../types"
+import { SynergyGivenByItem, Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -40,6 +35,7 @@ import {
   NonSpecialBerries,
   SynergyGems,
   SynergyGivenByGem,
+  SynergyItemsNoSpecial,
   SynergyStones,
   Tools
 } from "../types/enum/Item"
@@ -531,11 +527,8 @@ export class MiniGame {
       const topSynergies = schemaValues(state.players).flatMap((p) =>
         p.synergies.getTopSynergies(3)
       )
-      itemsSet = SynergyItems.filter(
-        (i) =>
-          !isIn(MemoryDiscs, i) &&
-          i !== Item.SHINY_STONE &&
-          isIn(topSynergies, SynergyGivenByItem[i])
+      itemsSet = SynergyItemsNoSpecial.filter((i) =>
+        isIn(topSynergies, SynergyGivenByItem[i])
       )
       maxCopiesPerItem = 2
     }

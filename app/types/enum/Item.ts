@@ -122,6 +122,7 @@ export enum Item {
   STAR_PIECE = "STAR_PIECE",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
+  TERA_ORB = "TERA_ORB",
   DAMP_ROCK = "DAMP_ROCK",
   ICY_ROCK = "ICY_ROCK",
   HEAT_ROCK = "HEAT_ROCK",
@@ -286,6 +287,7 @@ export enum Item {
   AQUATIC_MEMORY = "AQUATIC_MEMORY",
   DRAGON_MEMORY = "DRAGON_MEMORY",
   FLORA_MEMORY = "FLORA_MEMORY",
+  STELLAR_MEMORY = "STELLAR_MEMORY",
   MISSION_ORDER_PINK = "MISSION_ORDER_PINK",
   MISSION_ORDER_RED = "MISSION_ORDER_RED",
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
@@ -359,7 +361,8 @@ export const MemoryDiscs = [
   Item.MONSTER_MEMORY,
   Item.AQUATIC_MEMORY,
   Item.DRAGON_MEMORY,
-  Item.FLORA_MEMORY
+  Item.FLORA_MEMORY,
+  Item.STELLAR_MEMORY
 ] satisfies Item[]
 
 export const MemoryDiscsBySynergy: {
@@ -390,7 +393,8 @@ export const MemoryDiscsBySynergy: {
   [Synergy.MONSTER]: Item.MONSTER_MEMORY,
   [Synergy.AQUATIC]: Item.AQUATIC_MEMORY,
   [Synergy.DRAGON]: Item.DRAGON_MEMORY,
-  [Synergy.FLORA]: Item.FLORA_MEMORY
+  [Synergy.FLORA]: Item.FLORA_MEMORY,
+  [Synergy.STELLAR]: Item.STELLAR_MEMORY
 }
 
 export const MissionOrders = [
@@ -468,7 +472,6 @@ export const SpecialItems: Item[] = [
   Item.METEORITE,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
-  Item.MYSTERY_BOX,
   Item.RUSTED_SWORD,
   Item.SCROLL_OF_WATERS,
   Item.SCROLL_OF_DARKNESS,
@@ -477,7 +480,8 @@ export const SpecialItems: Item[] = [
   Item.COMFEY,
   Item.TATSUGIRI_CURLY,
   Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY
+  Item.TATSUGIRI_STRETCHY,
+  Item.MYSTERY_BOX
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -660,6 +664,7 @@ export const ShinyItems = [
   Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
+  Item.TERA_ORB,
   Item.RED_SCALE
 ] satisfies Item[]
 
@@ -803,7 +808,6 @@ export const SynergyItemsNoSpecial = [
   Item.MAGMARIZER,
   Item.EXPLORER_KIT,
   Item.SPELL_TAG,
-  Item.SHINY_STONE,
   Item.SHED_SHELL,
   Item.COOKING_POT,
   Item.RUNNING_SHOES,
@@ -815,7 +819,9 @@ export const SynergyItemsNoSpecial = [
 
 export const SynergyItems = [
   ...SynergyItemsNoSpecial,
-  ...MemoryDiscs
+  ...MemoryDiscs,
+  Item.SHINY_STONE,
+  Item.TERA_ORB
 ] satisfies Item[]
 
 export const SynergyGivenByItem = {
@@ -841,6 +847,7 @@ export const SynergyGivenByItem = {
   [Item.EXPLORER_KIT]: Synergy.GROUND,
   [Item.SPELL_TAG]: Synergy.GHOST,
   [Item.SHINY_STONE]: Synergy.LIGHT,
+  [Item.TERA_ORB]: Synergy.STELLAR,
   [Item.FRIEND_BOW]: Synergy.NORMAL,
   [Item.SHED_SHELL]: Synergy.BUG,
   [Item.COOKING_POT]: Synergy.GOURMET,
@@ -873,7 +880,8 @@ export const SynergyGivenByItem = {
   [Item.MONSTER_MEMORY]: Synergy.MONSTER,
   [Item.AQUATIC_MEMORY]: Synergy.AQUATIC,
   [Item.DRAGON_MEMORY]: Synergy.DRAGON,
-  [Item.FLORA_MEMORY]: Synergy.FLORA
+  [Item.FLORA_MEMORY]: Synergy.FLORA,
+  [Item.STELLAR_MEMORY]: Synergy.STELLAR
 } satisfies Record<(typeof SynergyItems)[number], Synergy>
 
 export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
@@ -1103,8 +1111,9 @@ export const SynergyFlavors = {
   [Synergy.LIGHT]: Item.RAINBOW_SWIRL_FLAVOR,
   [Synergy.WILD]: Item.RUBY_SWIRL_FLAVOR,
   [Synergy.BABY]: Item.RAINBOW_SWIRL_FLAVOR,
-  [Synergy.AMORPHOUS]: Item.RAINBOW_SWIRL_FLAVOR,
-  [Synergy.GOURMET]: Item.VANILLA_FLAVOR
+  [Synergy.AMORPHOUS]: Item.RUBY_FLAVOR,
+  [Synergy.GOURMET]: Item.VANILLA_FLAVOR,
+  [Synergy.STELLAR]: Item.RAINBOW_SWIRL_FLAVOR
 } satisfies { [key in Synergy]: (typeof Flavors)[number] }
 
 export const Sweets = [

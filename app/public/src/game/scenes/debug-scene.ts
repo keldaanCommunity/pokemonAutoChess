@@ -280,7 +280,13 @@ export class DebugScene extends Phaser.Scene {
   }
 
   applyStatusAnimation(
-    status: Status | Boost | "BALM_MUSHROOM" | "POISONNED_BADLY" | ""
+    status:
+      | Status
+      | Boost
+      | "BALM_MUSHROOM"
+      | "STELLAR"
+      | "POISONNED_BADLY"
+      | ""
   ) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
@@ -311,6 +317,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removePsychicField()
       this.pokemonSprite.removeGrassField()
       this.pokemonSprite.removeFairyField()
+      this.pokemonSprite.removeStellarEffect()
 
       if (status === Status.POISONNED) {
         this.pokemonSprite.addPoison(1)
@@ -404,6 +411,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status === "BALM_MUSHROOM") {
         this.pokemonSprite.addBalmMushroomEffect()
+      }
+      if (status === "STELLAR") {
+        this.pokemonSprite.addStellarEffect()
       }
       if (status === "BOOST/ATK") {
         this.pokemonSprite.displayBoost(Stat.ATK, true)

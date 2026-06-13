@@ -91,6 +91,16 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.SHINY_STONE]: { [Stat.AP]: 50 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
+  [Item.TERA_ORB]: {
+    [Stat.HP]: 15,
+    [Stat.PP]: 15,
+    [Stat.DEF]: 3,
+    [Stat.SPE_DEF]: 3,
+    [Stat.ATK]: 3,
+    [Stat.SPEED]: 10,
+    [Stat.CRIT_CHANCE]: 10,
+    [Stat.AP]: 10
+  },
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },
   [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 100, [Stat.SPE_DEF]: 10 },
   [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 100, [Stat.DEF]: 10 },

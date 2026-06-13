@@ -1,6 +1,6 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTriggers } from "../../config"
-import type { IPlayer, IPokemon } from "../../types"
+import { type IPlayer, type IPokemon, Item } from "../../types"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
@@ -8,6 +8,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { isOnBench } from "../../utils/board"
 import { schemaValues } from "../../utils/schemas"
+import { getPokemonData } from "../precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../pve-stages"
 
 export default class Synergies extends MapSchema<number, Synergy> {
@@ -256,6 +257,34 @@ export function computeSynergies(
     }
   })
 
+  // compute stellar
+  const stellarLevel = synergies.get(Synergy.STELLAR)
+  if (stellarLevel) {
+    if (stellarLevel >= 3) {
+      // gives all synergies their max
+      Object.values(Synergy)
+        .filter((synergy) => synergy !== Synergy.STELLAR)
+        .forEach((synergy) => {
+          synergies.set(
+            synergy,
+            Math.max(
+              synergies.get(synergy) ?? 0,
+              SynergyTriggers[synergy].at(-1) ?? 0
+            )
+          )
+        })
+    } else {
+      synergies.forEach((level, synergy) => {
+        if (
+          synergy !== Synergy.STELLAR &&
+          level >= (SynergyTriggers[synergy][0] ?? 0)
+        ) {
+          synergies.set(synergy, (synergies.get(synergy) ?? 0) + stellarLevel)
+        }
+      })
+    }
+  }
+
   return synergies
 }
 
@@ -265,6 +294,20 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
     if (synergy) {
       if (synergy === Synergy.DRAGON) {
         pkm.types = new SetSchema<Synergy>([synergy, ...pkm.types])
+      } else if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {
+        // remove native types if stellar
+        const nativeTypes = getPokemonData(pkm.name).types.filter(
+          (type) =>
+            !schemaValues(pkm.items).some(
+              (item) => SynergyGivenByItem[item] === type
+            )
+        )
+        pkm.types = new SetSchema<Synergy>([
+          synergy,
+          ...schemaValues(pkm.types).filter(
+            (type) => !nativeTypes.includes(type)
+          )
+        ])
       } else {
         pkm.types.add(synergy)
       }

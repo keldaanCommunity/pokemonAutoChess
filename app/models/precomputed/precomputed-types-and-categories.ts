@@ -1,35 +1,33 @@
 import { Rarity } from "../../types/enum/Game"
 import { type Pkm, PkmFamily } from "../../types/enum/Pokemon"
-import type { Synergy } from "../../types/enum/Synergy"
+import { Synergy } from "../../types/enum/Synergy"
 import { precomputedPokemonsImplemented } from "./precomputed-pokemons"
 
 console.time("precompute-types-and-categories")
 
-const data: Partial<
-  Record<
-    Synergy,
+const data = Object.fromEntries(
+  Object.values(Synergy).map((type) => [
+    type,
     {
-      pokemons: Pkm[]
-      uniquePokemons: Pkm[]
-      legendaryPokemons: Pkm[]
-      additionalPokemons: Pkm[]
-      specialPokemons: Pkm[]
+      pokemons: [],
+      uniquePokemons: [],
+      legendaryPokemons: [],
+      additionalPokemons: [],
+      specialPokemons: []
     }
-  >
-> = {}
+  ])
+) as any as {
+  [key in Synergy]: {
+    pokemons: Pkm[]
+    uniquePokemons: Pkm[]
+    legendaryPokemons: Pkm[]
+    additionalPokemons: Pkm[]
+    specialPokemons: Pkm[]
+  }
+}
 
 precomputedPokemonsImplemented.forEach((pokemon) => {
   pokemon.types.forEach((type: Synergy) => {
-    if (type in data === false) {
-      data[type] = {
-        pokemons: [],
-        uniquePokemons: [],
-        legendaryPokemons: [],
-        additionalPokemons: [],
-        specialPokemons: []
-      }
-    }
-
     if (pokemon.rarity === Rarity.UNIQUE) {
       data[type]!.uniquePokemons.push(pokemon.name)
     } else if (pokemon.rarity === Rarity.LEGENDARY) {

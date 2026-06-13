@@ -901,6 +901,13 @@ export default class BoardManager {
           pkm?.addBerserkEffect()
         }
       }
+      if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {
+        if (removed) {
+          pkm?.removeStellarEffect()
+        } else {
+          pkm?.addStellarEffect()
+        }
+      }
       if (item === Item.AIR_BALLOON) {
         if (removed) {
           pkm?.removeFloatingAnimation()

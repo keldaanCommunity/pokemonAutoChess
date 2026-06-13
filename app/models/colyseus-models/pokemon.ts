@@ -287,6 +287,14 @@ export class Pokemon extends Schema implements IPokemon {
         if (nativeTypes.has(synergyRemoved) === false) {
           this.types.delete(synergyRemoved)
         }
+        if (synergyRemoved === Synergy.STELLAR) {
+          this.types.delete(synergyRemoved)
+          // give back native types removed by Stellar
+          this.types = new SetSchema([
+            ...nativeTypes,
+            ...schemaValues(this.types)
+          ])
+        }
         if (this.passive === Passive.RKS_SYSTEM) {
           const memory = MemoryDiscsBySynergy[synergyRemoved]
           if (player.items.includes(memory) === false && memory) {
@@ -10124,6 +10132,7 @@ export class TypeNull extends Pokemon {
         case Synergy.AQUATIC:
           return Pkm.SILVALLY_WATER
         case Synergy.FIELD:
+        case Synergy.STELLAR:
         default:
           return Pkm.SILVALLY
       }
