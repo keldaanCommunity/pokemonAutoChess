@@ -19,3 +19,5 @@ This special synergy is only given through special items and Pokémon. Its effec
 # Bugfix
 
 # Misc
+
+- New title: Terastal
