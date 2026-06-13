@@ -42,13 +42,10 @@ import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
 import { max } from "../utils/number"
-import {
-  pickRandomIn,
-  randomBetween,
-  shuffleArray
-} from "../utils/random"
+import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
-import { AbilityStrategies, type SurfStrategy } from "./abilities/abilities"
+import { AbilityStrategies } from "./abilities/abilities"
+import type { SurfStrategy } from "./abilities/surf"
 import { Board } from "./board"
 import Dps from "./dps"
 import { DishEffects } from "./effects/dishes"
@@ -296,7 +293,7 @@ export default class Simulation extends Schema implements ISimulation {
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
     pokemonEntity.orientation =
-      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT    
+      team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
     this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
 
