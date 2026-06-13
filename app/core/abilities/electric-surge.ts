@@ -13,7 +13,7 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
         ally &&
         ally.id !== pokemon.id &&
         pokemon.team === ally.team &&
-        ally.types.has(Synergy.ELECTRIC)
+        ally.hasSynergy(Synergy.ELECTRIC)
       ) {
         ally.addSpeed(buff, pokemon, 1, crit)
       }

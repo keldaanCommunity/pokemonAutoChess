@@ -440,7 +440,7 @@ export default class Shop {
           pkm in PkmRegionalVariants &&
           PkmRegionalVariants[pkm]?.some((p) => {
             const variant = new PokemonClasses[p](p)
-            const lostTypes = types.filter((type) => !variant.types.has(type))
+            const lostTypes = types.filter((type) => !variant.hasSynergy(type))
             return (
               variant.isInRegion(player.map) &&
               synergyWanted &&

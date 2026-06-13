@@ -23,7 +23,7 @@ export default function SynergyComponent(props: {
     if (!scene) return
     if (!spectatedPlayer?.board) return
     spectatedPlayer.board.forEach((p) => {
-      if (p.types.has(type)) {
+      if (p.hasSynergy(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.setHovered(sprite, 4)
@@ -36,7 +36,7 @@ export default function SynergyComponent(props: {
     const scene = getGameScene()
     if (!scene) return
     spectatedPlayer?.board.forEach((p) => {
-      if (p.types.has(type)) {
+      if (p.hasSynergy(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.clearHovered(sprite)

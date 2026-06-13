@@ -26,9 +26,9 @@ export class SaltCureStrategy extends AbilityStrategy {
           cell.value.status.clearNegativeStatus(cell.value, pokemon)
         } else {
           if (
-            cell.value.types.has(Synergy.WATER) ||
-            cell.value.types.has(Synergy.STEEL) ||
-            cell.value.types.has(Synergy.GHOST)
+            cell.value.hasSynergy(Synergy.WATER) ||
+            cell.value.hasSynergy(Synergy.STEEL) ||
+            cell.value.hasSynergy(Synergy.GHOST)
           ) {
             cell.value.status.triggerBurn(5000, cell.value, pokemon)
           }

@@ -111,7 +111,7 @@ export default function SynergyDetailComponent(props: {
         const totalDragonStars = schemaValues(spectatedPlayer.board).reduce(
           (acc, pokemon) =>
             acc +
-            (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
+            (pokemon.hasSynergy(Synergy.DRAGON) && !isOnBench(pokemon)
               ? pokemon.stars
               : 0),
           0
@@ -227,7 +227,7 @@ function PokemonPortraitList(props: {
     props.player == null
       ? []
       : schemaValues(props.player.board)
-          .filter((x) => x.types.has(props.type))
+          .filter((x) => x.hasSynergy(props.type))
           .map((x) => PkmFamily[x.name])
   )
 

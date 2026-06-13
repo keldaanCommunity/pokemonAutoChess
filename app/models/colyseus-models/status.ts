@@ -1168,7 +1168,7 @@ export default class Status extends Schema implements IStatus {
       if (
         pokemon.player &&
         pokemon.player.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY)
+        pokemon.hasSynergy(Synergy.FAIRY)
       ) {
         range += 1
       }

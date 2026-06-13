@@ -241,7 +241,7 @@ export default class PokemonSprite extends DraggableObject {
     if (pokemon.items.has(Item.AIR_BALLOON)) {
       this.addFloatingAnimation()
     }
-    if (pokemon.types.has(Synergy.STELLAR)) {
+    if (pokemon.hasSynergy(Synergy.STELLAR)) {
       this.addStellarEffect()
     }
     this.add(this.itemsContainer)

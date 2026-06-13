@@ -206,7 +206,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
-    if (this.types.has(Synergy.DARK) && this.range === 1) {
+    if (this.hasSynergy(Synergy.DARK) && this.range === 1) {
       this.cooldown = 300 // ensure dark assassins move first
     } else {
       this.resetCooldown(500)
@@ -303,9 +303,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       (positionX === lightX && positionY === lightY) ||
       this.items.has(Item.SHINY_STONE) ||
       (this.passive === Passive.CONVERSION &&
-        this.types.has(Synergy.LIGHT) &&
+        this.hasSynergy(Synergy.LIGHT) &&
         !this.items.has(Item.LIGHT_BALL))
     )
+  }
+
+  hasSynergy(synergy: Synergy): boolean {
+    return this.types.has(synergy) || this.types.has(Synergy.STELLAR)
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
@@ -773,7 +777,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (
       this.items.size >= 3 ||
-      (isIn(SynergyStones, item) && this.types.has(type)) ||
+      (isIn(SynergyStones, item) && this.hasSynergy(type)) ||
       ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
         !this.refToBoardPokemon.hasEvolution) ||
       (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
@@ -793,8 +797,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       this.refToBoardPokemon.items.add(item)
     }
-    
-    if (type && !this.types.has(type)) {
+
+    if (type && !this.hasSynergy(type)) {
       if (type === Synergy.DRAGON) {
         this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
       } else if (type === Synergy.STELLAR) {
@@ -1030,7 +1034,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     })
 
-    if (this.hasSynergyEffect(Synergy.ICE) && this.types.has(Synergy.ICE)) {
+    if (this.hasSynergyEffect(Synergy.ICE) && this.hasSynergy(Synergy.ICE)) {
       const nbIcyRocks =
         this.player && this.simulation.weather === Weather.SNOW
           ? count(this.player.items, Item.ICY_ROCK)

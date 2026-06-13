@@ -118,7 +118,7 @@ export default class Bot {
           stepTeam.board[i].items.forEach((item) => {
             if (TMs.includes(item)) {
               const ability = AbilityPerTM[item]
-              if (!ability || pkm.types.has(Synergy.HUMAN) === false)
+              if (!ability || pkm.hasSynergy(Synergy.HUMAN) === false)
                 return false // prevent equipping TMs on non-human pokemon
               pkm.tm = ability
               pkm.skill = ability

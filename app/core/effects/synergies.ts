@@ -233,7 +233,7 @@ export class OnFieldDeathEffect extends OnDeathEffect {
           if (
             value &&
             value.team === pokemon.team &&
-            value.types.has(Synergy.FIELD)
+            value.hasSynergy(Synergy.FIELD)
           ) {
             value.count.fieldCount++
             value.handleHeal(heal, pokemon, 0, false)
@@ -805,7 +805,7 @@ export const cloneBugs = ({
 }) => {
   const bugTeam = new Array<IPokemon>()
   board.forEach((pkm) => {
-    if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+    if (pkm.hasSynergy(Synergy.BUG) && pkm.positionY != 0) {
       bugTeam.push(pkm)
     }
   })

@@ -12,9 +12,14 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
         ally &&
         ally.id !== pokemon.id &&
         pokemon.team === ally.team &&
-        ally.types.has(Synergy.PSYCHIC)
+        ally.hasSynergy(Synergy.PSYCHIC)
       ) {
-        ally.addShield([20, 25, 30, 60][pokemon.stars - 1] ?? 60, pokemon, 1, crit)
+        ally.addShield(
+          [20, 25, 30, 60][pokemon.stars - 1] ?? 60,
+          pokemon,
+          1,
+          crit
+        )
       }
     })
   }

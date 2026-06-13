@@ -179,6 +179,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  hasSynergy(synergy: Synergy) {
+    return this.types.has(synergy) || this.types.has(Synergy.STELLAR)
+  }
+
   onItemGiven(item: Item, player: Player) {
     // called after giving an item to the mon
   }
@@ -238,14 +242,14 @@ export class Pokemon extends Schema implements IPokemon {
 
     if (originalVariant) {
       const commonTypes = schemaValues(originalVariant.types).filter((t) =>
-        this.types.has(t)
+        this.hasSynergy(t)
       )
       if (commonTypes.some((t) => regionSynergies.includes(t))) {
         return false // ignore variant if map has the synergy of the original variant
       }
     }
 
-    return regionSynergies.some((s) => this.types.has(s))
+    return regionSynergies.some((s) => this.hasSynergy(s))
   }
 
   addItem(item: Item, player: Player) {

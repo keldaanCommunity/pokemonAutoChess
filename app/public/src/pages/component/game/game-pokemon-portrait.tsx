@@ -144,13 +144,13 @@ export default function GamePokemonPortrait(props: {
   const gainedSynergies =
     pokemonEvolution && willEvolve
       ? schemaValues(pokemonEvolution.types).filter(
-          (type) => !pokemon.types.has(type)
+          (type) => !pokemon.hasSynergy(type)
         )
       : []
   const lostSynergies =
     pokemonEvolution && willEvolve
       ? schemaValues(pokemon.types).filter(
-          (type) => !pokemonEvolution.types.has(type)
+          (type) => !pokemonEvolution.hasSynergy(type)
         )
       : []
 

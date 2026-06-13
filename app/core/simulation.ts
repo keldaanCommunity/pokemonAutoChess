@@ -154,7 +154,7 @@ export default class Simulation extends Schema implements ISimulation {
             // OnBenchedDuringFightEffect should be applied here
             if (
               teamEffects.has(EffectEnum.COACHING) &&
-              pokemon.types.has(Synergy.FIGHTING)
+              pokemon.hasSynergy(Synergy.FIGHTING)
             ) {
               fightingTrainingEffect.apply({
                 pokemon,
@@ -492,14 +492,14 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (
       (singleType === Synergy.SOUND ||
-        (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+        (!singleType && pokemon.hasSynergy(Synergy.SOUND))) &&
       !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
     }
 
-    if (pokemon.types.has(Synergy.ELECTRIC) && pokemon.player) {
+    if (pokemon.hasSynergy(Synergy.ELECTRIC) && pokemon.player) {
       const nbCellBatteries = schemaValues(pokemon.player.items).filter(
         (item) => item === Item.CELL_BATTERY
       ).length
@@ -969,7 +969,7 @@ export default class Simulation extends Schema implements ISimulation {
             const dragonLevel = schemaValues(player.board).reduce(
               (acc, p) =>
                 acc +
-                (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
+                (p.hasSynergy(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
               0
             )
             if (
@@ -1192,7 +1192,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.CURSE_OF_WEAKNESS:
       case EffectEnum.CURSE_OF_TORMENT:
       case EffectEnum.CURSE_OF_FATE:
-        if (pokemon.types.has(Synergy.GHOST)) {
+        if (pokemon.hasSynergy(Synergy.GHOST)) {
           pokemon.effects.add(effect)
           pokemon.addDodgeChance(0.15, pokemon, 0, false)
         }
@@ -1218,7 +1218,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         pokemon.addSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
+          (pokemon.hasSynergy(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
           "environment",
           0,
           false
@@ -1227,7 +1227,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.SNOW:
-        if (pokemon.types.has(Synergy.ICE) === false) {
+        if (pokemon.hasSynergy(Synergy.ICE) === false) {
           pokemon.addSpeed(-10, "environment", 0, false)
         }
         break
@@ -1267,7 +1267,7 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
         const luckDebuff =
-          10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
+          10 * nbOddStones - (pokemon.hasSynergy(Synergy.GHOST) ? 0 : 30)
         pokemon.addLuck(luckDebuff, "environment", 0, false)
         break
       }
@@ -1346,7 +1346,7 @@ export default class Simulation extends Schema implements ISimulation {
               false
             )
           }
-          if (pokemonOnCell.types.has(Synergy.ELECTRIC)) {
+          if (pokemonOnCell.hasSynergy(Synergy.ELECTRIC)) {
             pokemonOnCell.status.addElectricField(pokemonOnCell)
             pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
@@ -1584,7 +1584,7 @@ export default class Simulation extends Schema implements ISimulation {
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
       (p) => p.hp > 0
     ) as PokemonEntity[]
-    const curser = schemaValues(team).find((e) => e.types.has(Synergy.GHOST))
+    const curser = schemaValues(team).find((e) => e.hasSynergy(Synergy.GHOST))
     // the curser is not important, we just need a reference to an opponent for stat debuffs
     if (!curser) return
 
@@ -1714,7 +1714,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemonHit) {
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
-            if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
+            if (pokemonHit.hasSynergy(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
                 pokemonHit,

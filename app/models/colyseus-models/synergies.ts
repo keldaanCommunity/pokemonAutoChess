@@ -112,7 +112,7 @@ export function computeSynergies(
     board.forEach((pkm: IPokemon, index) => {
       if (
         pkm.positionY != 0 &&
-        pkm.types.has(Synergy.DRAGON) &&
+        pkm.hasSynergy(Synergy.DRAGON) &&
         pkm.types.size > 1
       ) {
         const family =
@@ -162,7 +162,7 @@ export function computeSynergies(
       let shouldComputeDragonDoubleTypeAgain = false
       for (let i = 0; i < nbDynamicSynergies; i++) {
         const type = synergiesSorted[i]
-        if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
+        if (type && !pkm.hasSynergy(type) && synergies.get(type)! > 0) {
           pkm.types.add(type)
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
           //apply dragon double synergies just for Arceus & Kecleon if Dragon
@@ -330,7 +330,7 @@ export function getWildChance(player: IPlayer, stageLevel: number): number {
   const baseChance = isPVE || wildLevel > 0 ? 6 : 0
   // each star of a pokemon with wild synergy gives 0.5% wild chance
   const nbWildStars = schemaValues(player.board)
-    .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
+    .filter((p) => p.hasSynergy(Synergy.WILD) && isOnBench(p) === false)
     .reduce((total, p) => total + p.stars, 0)
   const bonusChance = wildLevel > 0 ? nbWildStars * 0.5 : 0
   return (baseChance + bonusChance) / 100
