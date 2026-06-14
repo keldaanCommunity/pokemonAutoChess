@@ -2237,7 +2237,7 @@
 		"WICKED_BLOW": "Deal [30,45,60,120,SP] TRUE to the target. Always deal a critical hit.",
 		"SURGING_STRIKES": "Strikes the target with a flowing motion 3 times in a row, dealing [100,100,100,200,SP]% of ATK each as SPECIAL. Always deal critical hits.",
 		"VICTORY_DANCE": "Performs a dance to usher in victory. Raise user's ATK and DEF by [3,SP] and SPEED by [10,SP].",
-		"BOOMBURST": "Deal [60,60,60,120,SP] SPECIAL to all ADJACENT units including allies, and causing FLINCH for 4 seconds.",
+		"BOOMBURST": "Deal [60,60,60,120,SP] SPECIAL to all ADJACENT units **including allies**, and causing FLINCH for 4 seconds.",
 		"FOLLOW_ME": "Jump to a free tile far away and gain [10,20,40,80,SP] SHIELD. Enemies that were targeting the user get CHARM for [1,2,3,5] seconds.",
 		"AFTER_YOU": "Gives [5,10,15,30,SP] PP and [5,10,15,20,SP] SPEED buff to the STRONGEST closest ally.",
 		"COTTON_SPORE": "Create a cloud of cotton spores that reduce the SPEED of the 3 closest enemies by [10,20,30,50,SP]. BOARD_EFFECT: cotton inflicts SLEEP for 1 second on any Pokémon that walk on it.",
