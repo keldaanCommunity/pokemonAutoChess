@@ -20,15 +20,9 @@ import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
-import { getSynergyStep } from "../models/colyseus-models/synergies"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
-import {
-  MemoryDiscs,
-  SynergyGivenByItem,
-  SynergyItems,
-  Transfer
-} from "../types"
+import { SynergyGivenByItem, Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -40,6 +34,7 @@ import {
   NonSpecialBerries,
   SynergyGems,
   SynergyGivenByGem,
+  SynergyItemsNoSpecial,
   SynergyStones,
   Tools
 } from "../types/enum/Item"
@@ -61,6 +56,7 @@ import {
 import { schemaKeys, schemaValues } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
 import { spawnDIAYAvatar } from "./scribbles"
+import { getSynergyStep } from "./synergies"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -531,11 +527,8 @@ export class MiniGame {
       const topSynergies = schemaValues(state.players).flatMap((p) =>
         p.synergies.getTopSynergies(3)
       )
-      itemsSet = SynergyItems.filter(
-        (i) =>
-          !isIn(MemoryDiscs, i) &&
-          i !== Item.SHINY_STONE &&
-          isIn(topSynergies, SynergyGivenByItem[i])
+      itemsSet = SynergyItemsNoSpecial.filter((i) =>
+        isIn(topSynergies, SynergyGivenByItem[i])
       )
       maxCopiesPerItem = 2
     }
@@ -629,7 +622,7 @@ export class MiniGame {
   pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
-        SynergyArray,
+        SynergyArray.filter((s) => s !== Synergy.STELLAR),
         3 * ((this.avatars?.size ?? 8) + 1)
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)
@@ -640,7 +633,8 @@ export class MiniGame {
     } else {
       this.avatars?.forEach((avatar) => {
         const player = this.alivePlayers.find((p) => p.id === avatar.id)!
-        const synergiesUsable = Object.values(Synergy).filter((type) => {
+        const synergiesUsable = SynergyArray.filter((type) => {
+          if (type === Synergy.STELLAR) return false // Stellar symbols cannot appear on portals
           if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
           return true
         })

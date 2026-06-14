@@ -15,10 +15,7 @@ import {
   rewriteBotRoundsRequiredto1,
   validateBoard
 } from "../../../../../core/bot-logic"
-import {
-  computeSynergies,
-  getSynergyStep
-} from "../../../../../models/colyseus-models/synergies"
+import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
@@ -35,6 +32,7 @@ import ImportBotModal from "./import-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
 import "./bot-builder.css"
+import { getSynergyStep } from "../../../../../core/synergies"
 
 export default function BotBuilder() {
   const { t } = useTranslation()

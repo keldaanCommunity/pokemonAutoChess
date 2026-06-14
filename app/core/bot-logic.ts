@@ -1,8 +1,5 @@
 import { AdditionalPicksStages, PortalCarouselStages } from "../config"
-import {
-  computeSynergies,
-  getSynergyStep
-} from "../models/colyseus-models/synergies"
+import { computeSynergies } from "../models/colyseus-models/synergies"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { Rarity } from "../types/enum/Game"
@@ -26,6 +23,7 @@ import type { IBot, IDetailledPokemon, IStep } from "../types/models/bot-v2"
 import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
+import { getSynergyStep } from "./synergies"
 
 export const MAX_BOTS_STAGE = 30
 

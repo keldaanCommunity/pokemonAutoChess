@@ -35,6 +35,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../types/enum/Synergy"
 import { min } from "../../../../utils/number"
 import {
   OrientationArray,
@@ -113,6 +114,7 @@ export default class PokemonSprite extends DraggableObject {
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
   fairyField: GameObjects.Sprite | undefined
+  stellarField: GameObjects.Sprite | undefined
   curseVulnerability: GameObjects.Sprite | undefined
   curseWeakness: GameObjects.Sprite | undefined
   curseTorment: GameObjects.Sprite | undefined
@@ -238,6 +240,9 @@ export default class PokemonSprite extends DraggableObject {
     }
     if (pokemon.items.has(Item.AIR_BALLOON)) {
       this.addFloatingAnimation()
+    }
+    if (pokemon.types.has(Synergy.STELLAR)) {
+      this.addStellarEffect()
     }
     this.add(this.itemsContainer)
 
@@ -1523,6 +1528,42 @@ export default class PokemonSprite extends DraggableObject {
     this.sprite.once("destroy", () => {
       this.scene.events.off("update", updateBalmMushroomEffect)
     })
+  }
+
+  addStellarEffect() {
+    let i = 0
+    const hsv = Phaser.Display.Color.HSVColorWheel(0.3, 1)
+    const updateStellarEffect = () => {
+      const top = hsv[i].color
+      const bottom = hsv[359 - i].color
+      this.sprite.setTint(top, top, bottom, bottom)
+      i = (i + 1) % 360
+    }
+    this.scene.events.on("update", updateStellarEffect)
+    this.sprite.once("destroy", () => {
+      this.scene.events.off("update", updateStellarEffect)
+    })
+    this.sprite.once("remove-stellar", () => {
+      this.scene.events.off("update", updateStellarEffect)
+    })
+    this.sprite.enableFilters()
+    this.sprite.filters?.internal.addGlow(0xffffff, 2, 0, 0.4)
+    if (!this.stellarField) {
+      this.stellarField = this.scene.add
+        .sprite(0, -5, "status", "STELLAR/000.png")
+        .setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
+        .setScale(1)
+      this.stellarField.anims.play("STELLAR")
+      this.add(this.stellarField)
+    }
+  }
+
+  removeStellarEffect() {
+    this.sprite.emit("remove-stellar")
+    if (this.stellarField) {
+      this.remove(this.stellarField, true)
+      this.stellarField = undefined
+    }
   }
 
   removeRageEffect(hasBerserkGene: boolean = false) {

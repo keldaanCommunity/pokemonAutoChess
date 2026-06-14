@@ -57,7 +57,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   BLACK_SLUDGE: [
     new OnSpawnEffect((entity) => {
-      if (entity.types.has(Synergy.POISON)) {
+      if (entity.hasSynergy(Synergy.POISON)) {
         entity.effectsSet.add(
           new PeriodicEffect(
             (entity) => {

@@ -16,7 +16,7 @@ export class ElectrifyStrategy extends AbilityStrategy {
         entity &&
         entity.team === pokemon.team &&
         entity.id !== pokemon.id &&
-        entity.types.has(Synergy.ELECTRIC) === false &&
+        entity.hasSynergy(Synergy.ELECTRIC) === false &&
         entity.status.electricField !== true
     ) as PokemonEntity[]
     const strongestAlly = getStrongestUnit(nonElectricAllies)
@@ -24,7 +24,7 @@ export class ElectrifyStrategy extends AbilityStrategy {
     const shield = [15, 30, 60, 120][pokemon.stars - 1] ?? 120
     buffedUnit.status.addElectricField(buffedUnit)
     buffedUnit.addShield(shield, pokemon, 1, crit)
-    if (buffedUnit.types.has(Synergy.ELECTRIC) === false) {
+    if (buffedUnit.hasSynergy(Synergy.ELECTRIC) === false) {
       buffedUnit.types.add(Synergy.ELECTRIC)
       pokemon.simulation.applySynergyEffects(buffedUnit, Synergy.ELECTRIC)
       if (pokemon.player) {

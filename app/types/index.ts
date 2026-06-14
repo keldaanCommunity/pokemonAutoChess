@@ -243,7 +243,7 @@ export interface IPlayer {
   id: string
   name: string
   avatar: string
-  board: MapSchema<Pokemon>
+  board: MapSchema<IPokemon>
   shop: ArraySchema<Pkm>
   simulationId: string
   team: Team
@@ -669,6 +669,7 @@ export enum Title {
   POKEMON_RANGER = "POKEMON_RANGER",
   CAMPER = "CAMPER",
   RIVAL = "RIVAL",
+  TERASTAL = "TERASTAL",
   SKIER = "SKIER",
   POKEFAN = "POKEFAN",
   HEX_MANIAC = "HEX_MANIAC",

@@ -1,6 +1,5 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -47,6 +46,7 @@ import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getSynergyStep } from "../synergies";
 import { getUnitScore } from "../unit-score"
 import {
   BeforeAttackEffect,
@@ -455,13 +455,13 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             if (!pokemon.canEat) return
             if (dish === Item.HERBA_MYSTICA) {
               const flavors: Dish[] = []
-              if (pokemon.types.has(Synergy.FAIRY))
+              if (pokemon.hasSynergy(Synergy.FAIRY))
                 flavors.push(Item.HERBA_MYSTICA_SWEET)
-              if (pokemon.types.has(Synergy.PSYCHIC))
+              if (pokemon.hasSynergy(Synergy.PSYCHIC))
                 flavors.push(Item.HERBA_MYSTICA_SPICY)
-              if (pokemon.types.has(Synergy.ELECTRIC))
+              if (pokemon.hasSynergy(Synergy.ELECTRIC))
                 flavors.push(Item.HERBA_MYSTICA_SOUR)
-              if (pokemon.types.has(Synergy.GRASS))
+              if (pokemon.hasSynergy(Synergy.GRASS))
                 flavors.push(Item.HERBA_MYSTICA_BITTER)
               if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
               dish = pickRandomIn(flavors)
@@ -515,7 +515,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       [
         // prevent adding a synergy stone on a pokemon that already has this synergy
         new OnItemDroppedEffect(
-          ({ pokemon, item }) => !pokemon.types.has(SynergyGivenByItem[item])
+          ({ pokemon, item }) => !pokemon.hasSynergy(SynergyGivenByItem[item])
         )
       ]
     ])
@@ -527,7 +527,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       [
         new OnItemDroppedEffect(({ pokemon, player, item }) => {
           const ability = AbilityPerTM[item]
-          if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
+          if (!ability || pokemon.hasSynergy(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
           pokemon.tm = ability
           pokemon.skill = ability
@@ -897,28 +897,28 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           if (
             pokemon.status.electricField &&
             !ally.status.electricField &&
-            ally.types.has(Synergy.ELECTRIC)
+            ally.hasSynergy(Synergy.ELECTRIC)
           ) {
             ally.status.addElectricField(ally)
           }
           if (
             pokemon.status.grassField &&
             !ally.status.grassField &&
-            ally.types.has(Synergy.GRASS)
+            ally.hasSynergy(Synergy.GRASS)
           ) {
             ally.status.addGrassField(ally)
           }
           if (
             pokemon.status.psychicField &&
             !ally.status.psychicField &&
-            ally.types.has(Synergy.PSYCHIC)
+            ally.hasSynergy(Synergy.PSYCHIC)
           ) {
             ally.status.addPsychicField(ally)
           }
           if (
             pokemon.status.fairyField &&
             !ally.status.fairyField &&
-            ally.types.has(Synergy.FAIRY)
+            ally.hasSynergy(Synergy.FAIRY)
           ) {
             ally.status.addFairyField(ally)
           }
@@ -1129,7 +1129,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.FIRE_SHARD]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.types.has(Synergy.FIRE) && player.life > 3) {
+      if (pokemon.hasSynergy(Synergy.FIRE) && player.life > 3) {
         pokemon.atk += 3
         pokemon.speed += 3
         player.life = min(1)(player.life - 3)
@@ -1142,7 +1142,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.CELL_BATTERY]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.types.has(Synergy.ELECTRIC) && !pokemon.supercharged) {
+      if (pokemon.hasSynergy(Synergy.ELECTRIC) && !pokemon.supercharged) {
         pokemon.supercharged = true
         removeInArray(player.items, item)
       }
@@ -1183,7 +1183,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.CHEF_HAT]: [
     chefCookEffect,
     new OnItemDroppedEffect(({ pokemon }) => {
-      const canEquip = pokemon.types.has(Synergy.GOURMET)
+      const canEquip = pokemon.hasSynergy(Synergy.GOURMET)
       return canEquip
     })
   ],

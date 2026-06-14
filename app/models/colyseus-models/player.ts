@@ -14,6 +14,7 @@ import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-ha
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
+import { getSynergyStep } from "../../core/synergies"
 import type GameState from "../../rooms/states/game-state"
 import {
   type FlowerPot,
@@ -93,7 +94,7 @@ import HistoryItem from "./history-item"
 import { PlayerChoice } from "./player-choice"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
-import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
+import Synergies, { computeSynergies } from "./synergies"
 import { Wanderer } from "./wanderer"
 
 export default class Player extends Schema implements IPlayer {

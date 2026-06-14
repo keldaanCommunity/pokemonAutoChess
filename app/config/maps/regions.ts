@@ -1,6 +1,6 @@
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
 import { type Dish, Item } from "../../types/enum/Item"
-import { Synergy } from "../../types/enum/Synergy"
+import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { getMusicAlt } from "../game/music"
 
 export interface RegionDetail {
@@ -790,7 +790,7 @@ export function countRegionsBySynergy() {
   const synergyCount: Record<Synergy, number> = {} as Record<Synergy, number>
 
   // Initialize all synergies to 0
-  Object.values(Synergy).forEach((synergy) => {
+  SynergyArray.forEach((synergy) => {
     synergyCount[synergy] = 0
   })
 

@@ -5,7 +5,6 @@ import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -37,6 +36,7 @@ import { castAbility } from "../abilities/cast"
 import type { Board, Cell } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getSynergyStep } from "../synergies";
 import { getStrongestUnit } from "../unit-score"
 import {
   type Effect,
@@ -163,7 +163,7 @@ const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
         (entity) =>
           entity &&
           entity.team === pokemon.team &&
-          entity.types.has(Synergy.BUG)
+          entity.hasSynergy(Synergy.BUG)
       ).length - 1
     if (bugAllies > 0) {
       target.handleDamage({
@@ -851,7 +851,7 @@ const conversionEffect = new OnSimulationStartEffect(
         : simulation.bluePlayer
     if (!opponent) return
     const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies(1))
-    if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
+    if (entity.hasSynergy(synergyCopied)) return // does not copy if already has the synergy
     entity.types.add(synergyCopied)
     const effect =
       SynergyEffects[synergyCopied].find((effect) =>
@@ -876,7 +876,7 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.DRAGON) {
       const opponentTeam = simulation.getOpponentTeam(player.id)!
       const dragonLevel = schemaValues(opponentTeam).reduce(
-        (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
+        (acc, p) => acc + (p.hasSynergy(Synergy.DRAGON) ? p.stars : 0),
         0
       )
       if (
@@ -1251,7 +1251,7 @@ export const PassiveEffects: Partial<
   [Passive.COMATOSE]: [
     new OnSpawnEffect((pkm) => {
       pkm.status.sleep = true
-      pkm.status.sleepCooldown = 1000      
+      pkm.status.sleepCooldown = 1000
       pkm.status.burn = false
       pkm.status.poisonStacks = 0
       pkm.status.freeze = false
@@ -1629,7 +1629,7 @@ export const PassiveEffects: Partial<
           ally &&
           ally.team === entity.team &&
           y === entity.positionY &&
-          ally.types.has(Synergy.ROCK)
+          ally.hasSynergy(Synergy.ROCK)
         ) {
           ally.addShield(50, entity, 0, false)
           ally.status.triggerLocked(60000, ally)

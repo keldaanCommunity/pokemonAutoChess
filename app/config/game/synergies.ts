@@ -170,6 +170,11 @@ export const SynergyEffects = {
     EffectEnum.APPETIZER,
     EffectEnum.LUNCH_BREAK,
     EffectEnum.BANQUET
+  ],
+  [Synergy.STELLAR]: [
+    EffectEnum.TERASTAL,
+    EffectEnum.TERA_BLAST,
+    EffectEnum.TERA_STAR_STORM
   ]
 } satisfies { [key in Synergy]: readonly EffectEnum[] }
 
@@ -207,7 +212,8 @@ export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.LIGHT]: [2, 3, 4, 5],
   [Synergy.WILD]: [2, 4, 6, 9],
   [Synergy.AMORPHOUS]: [3, 5, 7],
-  [Synergy.GOURMET]: [3, 4, 5]
+  [Synergy.GOURMET]: [3, 4, 5],
+  [Synergy.STELLAR]: [1, 2, 3]
 }
 
 export const FishRarityProbability: {
@@ -314,5 +320,6 @@ export const SYNERGY_COLORS: Record<Synergy, `#${string}`> = {
   LIGHT: "#FFF896",
   GOURMET: "#FF8473",
   FOSSIL: "#D2D35B",
-  ARTIFICIAL: "#EDEDED"
+  ARTIFICIAL: "#EDEDED",
+  STELLAR: "#00FFFF"
 }

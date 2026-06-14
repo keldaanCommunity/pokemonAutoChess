@@ -41,6 +41,7 @@ import {
   UniquePool
 } from "../config"
 import { pickFirstPartners } from "../core/scribbles"
+import { getWildChance } from "../core/synergies"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -78,7 +79,6 @@ import {
   type PlayerChoiceType
 } from "./colyseus-models/player-choice"
 import { type Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { getWildChance } from "./colyseus-models/synergies"
 import { getPokemonBaseline } from "./pokemon-factory"
 import {
   getPokemonData,
@@ -440,7 +440,7 @@ export default class Shop {
           pkm in PkmRegionalVariants &&
           PkmRegionalVariants[pkm]?.some((p) => {
             const variant = new PokemonClasses[p](p)
-            const lostTypes = types.filter((type) => !variant.types.has(type))
+            const lostTypes = types.filter((type) => !variant.hasSynergy(type))
             return (
               variant.isInRegion(player.map) &&
               synergyWanted &&

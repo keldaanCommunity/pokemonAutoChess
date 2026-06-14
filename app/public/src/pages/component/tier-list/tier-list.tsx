@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Emotion, type PkmWithCustom } from "../../../../../types"
 import type { Item } from "../../../../../types/enum/Item"
 import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { type Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import type { ITierList } from "../../../../../types/interfaces/TierList"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
@@ -271,10 +271,7 @@ export default function TierList(props: {
   }
 
   function isSynergy(item: Item | PkmWithCustom | Synergy): item is Synergy {
-    return (
-      typeof item === "string" &&
-      Object.values(Synergy).includes(item as Synergy)
-    )
+    return typeof item === "string" && SynergyArray.includes(item as Synergy)
   }
 
   function renderItemImage(item: Item | PkmWithCustom | Synergy) {
