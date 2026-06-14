@@ -1,3 +1,4 @@
+import { InimitableAbilities } from "../../config/game/abilities"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precomputed-rarity"
 import { Transfer } from "../../types"
@@ -559,7 +560,6 @@ import { ZapCannonStrategy } from "./zap-cannon"
 import { ZingZapStrategy } from "./zing-zap"
 
 export class AssistStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -573,7 +573,7 @@ export class AssistStrategy extends AbilityStrategy {
             v &&
             v.team === pokemon.team &&
             v.skill &&
-            AbilityStrategies[v.skill].copyable
+            !InimitableAbilities.includes(v.skill)
         )
         .map((v) => v?.skill)
     )
@@ -585,7 +585,6 @@ export class AssistStrategy extends AbilityStrategy {
 }
 
 export class EncoreStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -598,8 +597,7 @@ export class EncoreStrategy extends AbilityStrategy {
         ? pokemon.simulation.blueAbilitiesCast
         : pokemon.simulation.redAbilitiesCast
     const lastAbilityUsed = abilitiesCast?.findLast(
-      (ability) =>
-        ability !== Ability.ENCORE && AbilityStrategies[ability]?.copyable
+      (ability) => InimitableAbilities.includes(ability) === false
     )
     if (lastAbilityUsed) {
       AbilityStrategies[lastAbilityUsed].process(pokemon, board, target, crit)
@@ -608,14 +606,13 @@ export class EncoreStrategy extends AbilityStrategy {
 }
 
 export class KnowledgeThiefStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    if (AbilityStrategies[target.skill].copyable) {
+    if (InimitableAbilities.includes(target.skill) === false) {
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     } else super.process(pokemon, board, target, crit)
     if (pokemon.player && !pokemon.isGhostOpponent) {
@@ -626,7 +623,6 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
 }
 
 export class MetronomeStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -663,7 +659,7 @@ export class MetronomeStrategy extends AbilityStrategy {
     ]
 
     const skill = pickRandomIn(
-      skillOptions.filter((s) => AbilityStrategies[s].copyable)
+      skillOptions.filter((s) => InimitableAbilities.includes(s) === false)
     )
 
     pokemon.broadcastAbility({ skill })
@@ -679,22 +675,19 @@ export class MetronomeStrategy extends AbilityStrategy {
 }
 
 export class MimicStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
     target: PokemonEntity,
     crit: boolean
   ) {
-    if (AbilityStrategies[target.skill].copyable) {
+    if (InimitableAbilities.includes(target.skill) === false) {
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     } else super.process(pokemon, board, target, crit)
   }
 }
 
-
 export class SkillSwapStrategy extends AbilityStrategy {
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -702,7 +695,7 @@ export class SkillSwapStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    if (AbilityStrategies[target.skill].copyable) {
+    if (InimitableAbilities.includes(target.skill) === false) {
       pokemon.skill = target.skill
       pokemon.maxPP = target.refToBoardPokemon
         ? target.refToBoardPokemon.maxPP

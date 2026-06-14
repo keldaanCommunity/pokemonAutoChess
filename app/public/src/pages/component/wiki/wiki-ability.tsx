@@ -3,6 +3,7 @@ import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
+import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -165,6 +166,11 @@ function AbilityRow({
           >
             <div>
               <h2>{t(`ability.${ability}`)}</h2>
+              {InimitableAbilities.includes(ability) && (
+                <p style={{ marginBottom: "0.5em" }}>
+                  {addIconsToDescription("INIMITABLE")}
+                </p>
+              )}
               <p>
                 {addIconsToDescription(t(`ability_description.${ability}`))}
               </p>
