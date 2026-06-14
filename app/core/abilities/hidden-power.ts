@@ -30,7 +30,6 @@ import { thunderShockStrategy } from "./thunder-shock"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   requiresTarget = false
-  copyable = false
   process(
     pokemon: PokemonEntity,
     board: Board,
