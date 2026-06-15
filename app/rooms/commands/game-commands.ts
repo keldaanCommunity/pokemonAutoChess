@@ -1736,6 +1736,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             } else {
               this.state.shop.refillShop(player, this.state)
               player.shopLocked = false
+              player.unownReminiscences = 0
             }
           }
         }
