@@ -15,11 +15,11 @@ export class FalinksFormationEffect extends OnSpawnEffect {
           p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
       )
       this.stacks = troopers.length
-      if (this.stacks > 0) {
-        pkm.addAttack(this.stacks * 1, pkm, 0, false)
-        pkm.addDefense(this.stacks * 1, pkm, 0, false)
-        pkm.addShield(this.stacks * 30, pkm, 0, false)
-      }
+      troopers.forEach(trooper => {
+        pkm.addAttack(trooper.atk, pkm, 0, false)
+        pkm.addDefense(trooper.def, pkm, 0, false)
+        pkm.addShield(trooper.maxHP, pkm, 0, false)
+      })
       if (this.stacks >= 8 && pkm.player) {
         pkm.player.titles.add(Title.LEGIONNAIRE)
       }
