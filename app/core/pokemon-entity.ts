@@ -418,7 +418,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attackType === AttackType.SPECIAL
       ) {
         this.status.triggerBurn(3000, this, attacker)
-        this.addSpecialDefense(-1, attacker, 0, false)
       }
 
       const damageResult = this.state.handleDamage({

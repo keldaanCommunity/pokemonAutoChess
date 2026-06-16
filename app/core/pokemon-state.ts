@@ -611,6 +611,7 @@ export default abstract class PokemonState {
 
         if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
           pokemon.status.triggerBurn(3000, pokemon, attacker)
+          pokemon.addSpecialDefense(-1, attacker, 0, false)
         }
       }
 
