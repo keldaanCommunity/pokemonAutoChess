@@ -12,6 +12,7 @@ import { Encoder } from "@colyseus/schema"
 import { listen } from "@colyseus/tools"
 import { logger, matchMaker } from "colyseus"
 import { CronJob } from "cron"
+import { writeHeapSnapshot } from "v8"
 import { server as app } from "./app.config"
 import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
@@ -22,6 +23,7 @@ import {
   warmupSpriteGapScanner
 } from "./services/sprite-gap-scanner"
 import { refreshTwitchBlacklist, refreshTwitchStreams } from "./services/twitch"
+import { MaintenanceOrder } from "./types/enum/MaintenanceOrder"
 
 /*
 Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
@@ -64,6 +66,7 @@ async function main() {
   setInterval(() => refreshTwitchBlacklist(), 1000 * 60)
   refreshTwitchStreams()
   setInterval(() => refreshTwitchStreams(), 1000 * 60 * 5) // refresh every 5 minutes
+  listenForMaintenanceOrders()
 }
 
 function checkLobby() {
@@ -105,6 +108,29 @@ function checkLobby() {
     },
     start: true
   })
+}
+
+function listenForMaintenanceOrders() {
+  matchMaker.presence.subscribe(
+    "maintenance",
+    ({ order }: { userId: string; order: MaintenanceOrder }) => {
+      if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+        logger.info("Writing heap snapshot...")
+        writeHeapSnapshot()
+        logger.info("Heap snapshot written")
+      } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+        fetchLeaderboards()
+      } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+        fetchMetaReports()
+      } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+        refreshSpriteGapData()
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+        refreshTwitchStreams()
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+        refreshTwitchBlacklist()
+      }
+    }
+  )
 }
 
 main()
