@@ -88,6 +88,8 @@ export default class GameScene extends Scene {
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
+    globalThis.devcommand = (action: string, ...params: any[]) =>
+      this.room?.send(Transfer.DEV, { action, ...params })
   }
 
   preload() {

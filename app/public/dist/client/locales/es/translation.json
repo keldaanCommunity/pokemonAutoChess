@@ -2201,7 +2201,7 @@
 		"DRILL_RUN": "Carga a través del objetivo como si fuese un taladro, infligiendo [15,30,60,120,SP] de TRUE e intercambiando posiciones. Si hay otro Pokémon enemigo en la misma dirección, vuelve a lanzar la habilidad sobre este nuevo objetivo. Puede ser crítico por defecto.",
 		"ROCK_ARTILLERY": "Lanza [10,15,25,50] rocas a enemigos aleatorios, cayendo cada una sobre el objetivo o una casilla ADJACENT, y causando [20,30,40,80,SP] de SPECIAL.",
 		"ZING_ZAP": "Rueda y se coloca detrás del objetivo, infligiendo [30,60,90,180,SP] de SPECIAL y causando FLINCH durante 3 segundos. Si el objetivo sufre de PARALYSIS, gana [10,20,40,80,SP] de SHIELD.",
-		"NO_RETREAT": "Gana 1 de ATK, 1 de DEF, 1 de SPE_DEF y 5 de SPEED por cada Falinks en tu equipo. Cada uno de los soldados golpean al objetivo y le infligen [20,20,20,40,SP] de SPECIAL.",
+		"NO_RETREAT": "Gana 1 de DEF y 1 de SPE_DEF por cada Falinks en tu equipo. Cada uno de los soldados golpean al objetivo y le infligen [20,20,20,40,SP] de SPECIAL.",
 		"TACKLE": "Inflige [20,40,60,120,SP] de SPECIAL al objetivo.",
 		"STATIC_SHOCK": "Inflige [30,50,70,100,SP] SPECIAL al objetivo. Gana [10,20,30,60,SP] de SHIELD por cada Pokémon ADJACENT de tipo ELECTRIC y se cura [10,20,30,60,SP] HP por cada Pokémon ADJACENT de tipo FAIRY.",
 		"SAND_SPIT": "Escupe arena hasta a 3 Pokémon frente al usuario, infligiendo [30,60,120,240,SP] de SPECIAL y causándoles BLINDED durante 2 segundos.",

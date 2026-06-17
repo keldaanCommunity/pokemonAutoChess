@@ -2249,7 +2249,7 @@
 		"DRILL_PECK": "드릴처럼 대상을 관통하여 [30,60,120,240,SP] SPECIAL 를 가하며 위치를 바꾼다. 같은 방향 뒤에 다른 대상이 있으면 즉시 그 대상에게 기술을 다시 시전한다.",
 		"ROCK_ARTILLERY": "무작위 적에게 [10,15,25,50]개의 바위를 던진다. 각 바위는 대상이나 ADJACENT 타일에 무작위로 떨어지며 각각 [20,30,40,80,SP] SPECIAL 를 가한다.",
 		"ZING_ZAP": "대상 뒤로 구르며 [30,60,90,180,SP] SPECIAL 를 가하고 3초간 FLINCH 상태로 만든다. 대상이 PARALYSIS 상태면 [10,20,40,80,SP] SHIELD 를 얻는다.",
-		"NO_RETREAT": "팀 내 대여르 하나당 1 ATK, 1 DEF, 1 SPE_DEF, 5 SPEED 를 얻는다. 멤버들은 대상에게 각각 [20,20,20,40,SP] SPECIAL 를 가한다.",
+		"NO_RETREAT": "팀 내 대여르 하나당 1 DEF, 1 SPE_DEF 를 얻는다. 멤버들은 대상에게 각각 [20,20,20,40,SP] SPECIAL 를 가한다.",
 		"TACKLE": "대상에게 [20,40,60,120,SP] SPECIAL 를 가한다.",
 		"STATIC_SHOCK": "대상에게 [30,50,70,100,SP] SPECIAL 를 가하며, ADJACENT ELECTRIC 포켓몬 당 [10,20,30,60,SP] SHIELD 를, ADJACENT FAIRY 포켓몬 당 [10,20,30,60,SP] HP 를 얻는다.",
 		"SAND_SPIT": "시전자 전방의 적 포켓몬 3마리에게 모래를 뿜어 [30,60,120,240,SP] SPECIAL 를 가하고 2초간 BLINDED 상태로 만든다.",

@@ -74,7 +74,7 @@ import {
   getFirstAvailablePositionOnBoard,
   isOnBench
 } from "../../utils/board"
-import { min } from "../../utils/number"
+import { max, min } from "../../utils/number"
 import {
   chance,
   pickNRandomIn,
@@ -641,28 +641,58 @@ export default class Player extends Schema implements IPlayer {
     const nbWandsByLevel = [0, 1, 2, 3, 4]
     const newNbWands = nbWandsByLevel[newFairyLevel] ?? 0
     const currentNbWands = this.items.filter((item) => isIn(Wands, item)).length
+    const pendingChoices = this.choices.filter((c) => c.type === "wand")
 
-    if (currentNbWands < newNbWands) {
-      // some wands are gained
+    /* 4 cases to cover:
+    - wands to be given
+    - wands to be removed
+    - wands choices to be given
+    - wands choices to be removed
+    */
+    if (
+      currentNbWands < newNbWands &&
+      currentNbWands < this.fairyWands.length
+    ) {
+      // wands to be given
       const gainedWands = this.fairyWands.slice(currentNbWands, newNbWands)
-      if (
-        gainedWands.length < newNbWands - currentNbWands &&
-        newFairyLevel - 1 in FAIRY_WANDS_BY_SYNERGY_LEVEL &&
-        this.choices.filter((c) => c.type === "wand").length === 0
-      ) {
-        // player has to choose between wands
-        this.choices.push(
-          new PlayerChoice({
-            type: "wand",
-            items: pickNRandomIn(
-              FAIRY_WANDS_BY_SYNERGY_LEVEL[newFairyLevel - 1],
-              3
-            )
-          })
-        )
-      }
       this.items.push(...gainedWands)
-    } else if (newNbWands < currentNbWands) {
+    }
+
+    if (this.fairyWands.length + pendingChoices.length < newNbWands) {
+      // player has to choose between wands
+      for (
+        let i = this.fairyWands.length + pendingChoices.length;
+        i < newNbWands;
+        i++
+      ) {
+        if (i in FAIRY_WANDS_BY_SYNERGY_LEVEL) {
+          this.choices.push(
+            new PlayerChoice({
+              type: "wand",
+              items: pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[i], 3)
+            })
+          )
+        }
+      }
+    }
+
+    if (
+      pendingChoices.length > 0 &&
+      newNbWands < currentNbWands + pendingChoices.length
+    ) {
+      // some pending choices need to be cancelled
+      const nbChoicesToCancel = max(pendingChoices.length)(
+        currentNbWands + pendingChoices.length - newNbWands
+      )
+      pendingChoices.slice(-nbChoicesToCancel).forEach((choiceToCancel) => {
+        this.choices.splice(
+          this.choices.findIndex((c) => c.id === choiceToCancel.id),
+          1
+        )
+      })
+    }
+
+    if (newNbWands < currentNbWands) {
       // some wands are lost, we need to remove them from the inventory
       const lostWands = this.fairyWands.slice(newNbWands, currentNbWands)
       lostWands.forEach((wand) => {

@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
+import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { DishByPkm } from "../../../../../config/game/dishes"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -220,6 +221,19 @@ export function GamePokemonDetail(props: {
     )
   }, [pokemon?.tm, pokemon?.skill])
 
+  const inimitableIcon = useMemo(() => {
+    if (!pokemon) return null
+    const skill = pokemon.tm !== Ability.DEFAULT ? pokemon.tm : pokemon.skill
+    return InimitableAbilities.includes(skill) ? (
+      <img
+        src="assets/ui/inimitable.svg"
+        className="game-pokemon-detail-ability-icon"
+        alt={t("inimitable")}
+        title={t("technical_terms_definitions.INIMITABLE")}
+      />
+    ) : null
+  }, [pokemon?.tm, pokemon?.skill])
+
   if (!pokemon) {
     return null
   }
@@ -322,7 +336,9 @@ export function GamePokemonDetail(props: {
         <div className="game-pokemon-detail-passive">
           <p>
             {addIconsToDescription(
-              t(`passive_description.${pokemon.passive}`),
+              t(`passive_description.${pokemon.passive}`, {
+                stacks: pokemon.stacks
+              }),
               {
                 ap: pokemon.ap,
                 luck: pokemon.luck,
@@ -348,8 +364,9 @@ export function GamePokemonDetail(props: {
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">
+            <span>{t(`ability.${pokemon.skill}`)}</span>
             {tmIcon}
-            {t(`ability.${pokemon.skill}`)}
+            {inimitableIcon}
           </div>
           <div>
             <AbilityTooltip

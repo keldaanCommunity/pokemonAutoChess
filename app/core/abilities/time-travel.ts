@@ -1,3 +1,4 @@
+import { Passive } from "../../types/enum/Passive";
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -17,9 +18,11 @@ export class TimeTravelStrategy extends AbilityStrategy {
     if (
       pokemon.player &&
       !pokemon.isGhostOpponent &&
-      pokemon.player.life < 100
+      pokemon.player.life < 100 &&
+      pokemon.passive === Passive.CELEBI
     ) {
       pokemon.player.life += 1
+      pokemon.addStack()
     }
   }
 }

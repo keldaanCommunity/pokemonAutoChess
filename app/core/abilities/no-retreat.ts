@@ -18,11 +18,9 @@ export class NoRetreatStrategy extends AbilityStrategy {
         (e) => e instanceof FalinksFormationEffect
       )?.stacks ?? 0
     if (nbFalinks > 0) {
-      //Gain 1 ATK, 1 DEF, 1 SPE_DEF and 5 SPEED per Falinks on your team. Troopers tackle target for [20,20,20,40,SP] SPECIAL each.      
-      pokemon.addAttack(nbFalinks, pokemon, 0, false)
+      //Gain 1 DEF and 1 SPE_DEF per Falinks on your team. Troopers tackle target for [20,20,20,40,SP] SPECIAL each.  
       pokemon.addDefense(nbFalinks, pokemon, 0, false)
       pokemon.addSpecialDefense(nbFalinks, pokemon, 0, false)
-      pokemon.addSpeed(nbFalinks * 5, pokemon, 0, false)
 
       const damage = [20,20,20,40][pokemon.stars - 1] ?? 40
       for (let i = 0; i < nbFalinks; i++) {

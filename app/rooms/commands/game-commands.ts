@@ -1739,6 +1739,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             } else {
               this.state.shop.refillShop(player, this.state)
               player.shopLocked = false
+              player.unownReminiscences = 0
             }
           }
         }
@@ -2141,6 +2142,14 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
     })
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
+  }
+}
+
+export class OnDevCommand extends Command<GameRoom> {
+  execute(msg: { action: string }) {
+    if (msg.action === "skipStage") {
+      this.room.state.time = 0
+    }
   }
 }
 

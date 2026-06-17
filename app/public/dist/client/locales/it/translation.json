@@ -2182,7 +2182,7 @@
 		"DRILL_PECK": "Trapana il bersaglio con il proprio becco [30,60,120,240,SP] SPECIAL e scambiando le loro posizioni. Se c'è un altro bersaglio dietro al primo, usa immediatamente l'abilità sul prossimo bersaglio.",
 		"ROCK_ARTILLERY": "Lancia [10,15,25,50] macigni notevoli a nemici casuali, con la possibilità di colpire il bersaglio o una casella ADJACENT. Ciascun macigno infligge [20,30,40,80,SP] SPECIAL.",
 		"ZING_ZAP": "Rotola dietro al bersaglio, infliggendo [30,60,90,180,SP] SPECIAL e infliggendo FLINCH per 3 secondi. Se il bersaglio è afflito da PARALYSIS, guadagna [10,20,40,80,SP] SHIELD.",
-		"NO_RETREAT": "Guadagna 1 ATK, 1 DEF, 1 SPE_DEF e 5 SPEED per ogni Falinks nel tuo team. Ogni truppa placca il bersaglio, infliggendo [20,20,20,40,SP] SPECIAL ciascuna.",
+		"NO_RETREAT": "Guadagna 1 DEF e 1 SPE_DEF per ogni Falinks nel tuo team. Ogni truppa placca il bersaglio, infliggendo [20,20,20,40,SP] SPECIAL ciascuna.",
 		"TACKLE": "Infliggi [20,40,60,120,SP] SPECIAL al bersaglio.",
 		"STATIC_SHOCK": "Infliggi [30,50,70,100,SP] SPECIAL al bersaglio e guadagna [10,20,30,60,SP] di SHIELD per ogni Pokémon di tipo ELECTRIC ADJACENT, cura per [10,20,30,60,SP] HP per ogni Pokémon di tipo FAIRY.",
 		"SAND_SPIT": "Sputa sabbia ai 3 Pokémon nemici di fronte all'utilizzatore, infliggendo [30,60,120,240,SP] SPECIAL e infliggendo BLINDED per 2 secondi.",
