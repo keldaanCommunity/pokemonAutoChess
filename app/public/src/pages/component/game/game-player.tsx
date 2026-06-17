@@ -1,7 +1,7 @@
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import { Tooltip } from "react-tooltip"
 
-import { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../../../types"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"

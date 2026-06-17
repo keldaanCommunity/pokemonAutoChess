@@ -1,8 +1,8 @@
-import Player from "../models/colyseus-models/player"
+import type Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import type { Board } from "./board"
-import { PokemonEntity } from "./pokemon-entity"
+import type { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 
 export class IdleState extends PokemonState {
@@ -27,6 +27,11 @@ export class IdleState extends PokemonState {
       pokemon.cooldown = 500
     } else {
       pokemon.cooldown -= dt
+      if (pokemon.status.skydiving && pokemon.cooldown <= 500) {
+        // just landed, 500ms remaining cooldown to reposition
+        // only used by special cases like Sudowoodo + Comet Shard
+        pokemon.status.skydiving = false
+      }
     }
   }
 

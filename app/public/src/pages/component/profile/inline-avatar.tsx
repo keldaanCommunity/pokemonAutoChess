@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next"
-import { Role } from "../../../../../types"
+import { Role, type Title } from "../../../../../types"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import PokemonPortrait from "../pokemon-portrait"
 import { RoleBadge } from "./role-badge"
 
 export function InlineAvatar(props: {
   avatar: string
   name: string
-  title?: string
+  title?: Title | ""
   role?: Role
   twitchLogin?: string
   twitchDisplayName?: string
@@ -33,7 +34,7 @@ export function InlineAvatar(props: {
         <span className="player-title">{t(`title.${props.title}`)}</span>
       )}
       <span className="player-name">
-        {props.role === Role.BOT ? t(`pkm.${props.name}`) : props.name}
+        {props.role === Role.BOT ? t(`pkm.${props.name as Pkm}`) : props.name}
       </span>
       {props.role && <RoleBadge role={props.role} />}
       {twitchUrl && (

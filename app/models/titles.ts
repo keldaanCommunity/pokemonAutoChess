@@ -1,11 +1,11 @@
 import { getBaseAltForm, PkmAltFormsByPkm } from "../config"
-import GameState from "../rooms/states/game-state"
-import { IPlayer, Scarves, Title } from "../types"
+import type GameState from "../rooms/states/game-state"
+import { type IPlayer, Scarves, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 
 export function updatePlayerTitlesAfterFight(
   player: IPlayer,
@@ -33,7 +33,7 @@ export function updatePlayerTitlesAfterFight(
         case EffectEnum.POWER_SURGE:
           player.titles.add(Title.ELECTRICIAN)
           break
-        case EffectEnum.JUSTIFIED:
+        case EffectEnum.COACHING:
           player.titles.add(Title.BLACK_BELT)
           break
         case EffectEnum.TRANSCENDENCE:
@@ -146,7 +146,9 @@ export function updatePlayerTitlesAfterFight(
       player.titles.add(Title.ETERNAL)
     }
 
-    const equippedItems = values(player.board).flatMap((p) => values(p.items))
+    const equippedItems = schemaValues(player.board).flatMap((p) =>
+      schemaValues(p.items)
+    )
     if (equippedItems.filter((i) => isIn(Scarves, i)).length >= 5) {
       player.titles.add(Title.SCOUT)
     }

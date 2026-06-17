@@ -2,16 +2,22 @@ import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { IPokemonEntity, ISimulation, IStatus, Transfer } from "../../types"
+import type { PokemonEntity } from "../../core/pokemon-entity"
+import {
+  type IPokemonEntity,
+  type ISimulation,
+  type IStatus,
+  Transfer
+} from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
+import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
@@ -1155,11 +1161,19 @@ export default class Status extends Schema implements IStatus {
   updateLocked(dt: number, pokemon: PokemonEntity) {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
-      pokemon.range =
-        pokemon.baseRange +
-        (pokemon.items.has(Item.WIDE_LENS)
-          ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
-          : 0)
+      let range = pokemon.baseRange
+      if (pokemon.items.has(Item.WIDE_LENS)) {
+        range += ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0
+      }
+      if (
+        pokemon.player &&
+        pokemon.player.items.includes(Item.LONG_WAND) &&
+        pokemon.types.has(Synergy.FAIRY)
+      ) {
+        range += 1
+      }
+      pokemon.range = range
+
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.lockedCooldown -= dt
@@ -1176,7 +1190,11 @@ export default class Status extends Schema implements IStatus {
         pkm.team === Team.RED_TEAM
           ? pkm.simulation.redTeam
           : pkm.simulation.blueTeam
-      if (values(pkmTeam).some((p) => p.id !== pkm.id && !p.status.possessed)) {
+      if (
+        schemaValues(pkmTeam).some(
+          (p) => p.id !== pkm.id && !p.status.possessed
+        )
+      ) {
         if (!this.possessed) {
           pkm.team =
             pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
@@ -1201,7 +1219,7 @@ export default class Status extends Schema implements IStatus {
       pkm.team === Team.RED_TEAM
         ? pkm.simulation.blueTeam
         : pkm.simulation.redTeam
-    const possessedCount = values(otherTeam).filter(
+    const possessedCount = schemaValues(otherTeam).filter(
       (pokemon) => pokemon.status.possessed
     ).length
     const lastAliveArePossessed = possessedCount === otherTeam.size

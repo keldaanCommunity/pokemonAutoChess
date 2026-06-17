@@ -8,16 +8,22 @@ import GameRarityPercentage from "./game-rarity-percentage"
 import GameRefresh from "./game-refresh"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
 import GameStore from "./game-store"
+import { GameStreakInfo } from "./game-streak-info"
 import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
+import { DEPTH } from "../../../game/depths"
 
 export default function GameShop() {
   return (
     <>
-      <div className="game-shop my-container">
+      <div
+        className="game-shop my-container"
+        style={{ zIndex: DEPTH.GAME_SHOP }}
+      >
         <div id="game-shop-info">
           <GameLifeInfo />
           <GameMoneyInfo />
+          <GameStreakInfo />
           <div className="spacer"></div>
           <GameTeamInfo />
         </div>

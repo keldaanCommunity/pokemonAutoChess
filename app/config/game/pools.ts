@@ -1,5 +1,5 @@
 import { Rarity } from "../../types/enum/Game"
-import { Pkm, PkmDuo, PkmProposition } from "../../types/enum/Pokemon"
+import { Pkm, PkmDuo, type PkmProposition } from "../../types/enum/Pokemon"
 
 export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.COMMON]: [1, 18, 27],
@@ -120,7 +120,9 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.FINIZEN,
   Pkm.DONDOZO,
   Pkm.EISCUE_NOICE,
-  Pkm.KOMALA
+  Pkm.KOMALA,
+  Pkm.SLITHER_WING,
+  Pkm.VESPIQUEN
 )
 
 export const LegendaryPool = new Array<PkmProposition>(

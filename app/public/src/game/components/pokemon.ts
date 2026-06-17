@@ -12,13 +12,16 @@ import {
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
-  FlowerMonByPot,
-  FlowerPots
+  FlowerMonByPot
 } from "../../../../core/flower-pots"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { type IPokemon, type IPokemonEntity } from "../../../../types"
 import {
-  AbilityAnimationArgs,
+  FlowerPots,
+  type IPokemon,
+  type IPokemonEntity
+} from "../../../../types"
+import {
+  type AbilityAnimationArgs,
   AttackSprite,
   AttackSpriteScale
 } from "../../../../types/Animation"
@@ -38,7 +41,7 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { randomBetween } from "../../../../utils/random"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -51,7 +54,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
-import { GameDialog } from "./game-dialog"
+import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
 import {
@@ -184,7 +187,7 @@ export default class PokemonSprite extends DraggableObject {
     const baseHP = getPokemonData(pokemon.name).hp
     const maxHP = inBattle
       ? pokemon.maxHP
-      : values(pokemon.items).reduce(
+      : schemaValues(pokemon.items).reduce(
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
@@ -242,7 +245,7 @@ export default class PokemonSprite extends DraggableObject {
       this.setLifeBar(pokemon, scene)
     } else {
       if (pokemon.dishes.size > 0) {
-        this.updateDishes(values(pokemon.dishes))
+        this.updateDishes(schemaValues(pokemon.dishes))
       }
     }
 

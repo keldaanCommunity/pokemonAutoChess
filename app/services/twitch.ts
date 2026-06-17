@@ -1,7 +1,7 @@
 import { matchMaker } from "colyseus"
 import { createHash, createHmac, randomBytes, timingSafeEqual } from "crypto"
 import TwitchBlacklistedStreamer, {
-  ITwitchBlacklistedStreamer
+  type ITwitchBlacklistedStreamer
 } from "../models/mongo-models/twitch-blacklisted-streamer"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { logger } from "../utils/logger"

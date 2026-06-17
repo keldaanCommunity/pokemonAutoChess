@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IItemV2 } from "../../../models/items-statistic-v2"
+import type { IItemV2 } from "../../../models/items-statistic-v2"
 import PokemonPortrait from "../pokemon-portrait"
 import { HistoryChart } from "./history-chart"
 import { HistoryDelta } from "./history-delta"

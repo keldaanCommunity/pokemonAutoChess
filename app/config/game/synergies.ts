@@ -1,6 +1,180 @@
+import { EffectEnum } from "../../types/enum/Effect"
 import { Rarity } from "../../types/enum/Game"
-import { FishingRod, Item, ShinyItem } from "../../types/enum/Item"
+import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
+
+export const SynergyEffects = {
+  [Synergy.NORMAL]: [
+    EffectEnum.STAMINA,
+    EffectEnum.STRENGTH,
+    EffectEnum.ENDURE,
+    EffectEnum.PURE_POWER
+  ],
+  [Synergy.GRASS]: [
+    EffectEnum.INGRAIN,
+    EffectEnum.GROWTH,
+    EffectEnum.SPORE,
+    EffectEnum.OVERGROW
+  ],
+  [Synergy.FIRE]: [
+    EffectEnum.FLAME_BODY,
+    EffectEnum.WILDFIRE,
+    EffectEnum.BLAZE,
+    EffectEnum.DESOLATE_LAND
+  ],
+  [Synergy.WATER]: [
+    EffectEnum.RAIN_DANCE,
+    EffectEnum.DRIZZLE,
+    EffectEnum.PRIMORDIAL_SEA
+  ],
+  [Synergy.ELECTRIC]: [
+    EffectEnum.RISING_VOLTAGE,
+    EffectEnum.POWER_SURGE,
+    EffectEnum.SUPERCHARGED
+  ],
+  [Synergy.FIGHTING]: [
+    EffectEnum.GUTS,
+    EffectEnum.STURDY,
+    EffectEnum.DEFIANT,
+    EffectEnum.COACHING
+  ],
+  [Synergy.PSYCHIC]: [
+    EffectEnum.PRECOGNITION,
+    EffectEnum.AURA,
+    EffectEnum.TRANSCENDENCE
+  ],
+  [Synergy.DARK]: [
+    EffectEnum.HONE_CLAWS,
+    EffectEnum.ASSURANCE,
+    EffectEnum.BEAT_UP
+  ],
+  [Synergy.STEEL]: [
+    EffectEnum.STEEL_SURGE,
+    EffectEnum.STEEL_SPIKE,
+    EffectEnum.CORKSCREW_CRASH,
+    EffectEnum.MAX_MELTDOWN
+  ],
+  [Synergy.GROUND]: [
+    EffectEnum.TILLER,
+    EffectEnum.DIGGER,
+    EffectEnum.DRILLER,
+    EffectEnum.DEEP_MINER
+  ],
+  [Synergy.POISON]: [
+    EffectEnum.POISONOUS,
+    EffectEnum.VENOMOUS,
+    EffectEnum.TOXIC
+  ],
+  [Synergy.DRAGON]: [
+    EffectEnum.DRAGON_ENERGY,
+    EffectEnum.DRAGON_SCALES,
+    EffectEnum.DRAGON_DANCE
+  ],
+  [Synergy.FIELD]: [
+    EffectEnum.BULK_UP,
+    EffectEnum.RAGE,
+    EffectEnum.ANGER_POINT
+  ],
+  [Synergy.MONSTER]: [
+    EffectEnum.PURSUIT,
+    EffectEnum.BRUTAL_SWING,
+    EffectEnum.POWER_TRIP,
+    EffectEnum.MERCILESS
+  ],
+  [Synergy.HUMAN]: [
+    EffectEnum.MEDITATE,
+    EffectEnum.FOCUS_ENERGY,
+    EffectEnum.CALM_MIND
+  ],
+  [Synergy.AQUATIC]: [
+    EffectEnum.SWIFT_SWIM,
+    EffectEnum.HYDRATION,
+    EffectEnum.WATER_VEIL,
+    EffectEnum.SURGE_SURFER
+  ],
+  [Synergy.BUG]: [
+    EffectEnum.COCOON,
+    EffectEnum.INFESTATION,
+    EffectEnum.HORDE,
+    EffectEnum.HEART_OF_THE_SWARM
+  ],
+  [Synergy.FLYING]: [
+    EffectEnum.TAILWIND,
+    EffectEnum.FEATHER_DANCE,
+    EffectEnum.MAX_AIRSTREAM,
+    EffectEnum.SKYDIVE
+  ],
+  [Synergy.FLORA]: [
+    EffectEnum.COTTONWEED,
+    EffectEnum.FLYCATCHER,
+    EffectEnum.FRAGRANT,
+    EffectEnum.FLOWER_POWER
+  ],
+  [Synergy.ROCK]: [
+    EffectEnum.BATTLE_ARMOR,
+    EffectEnum.MOUTAIN_RESISTANCE,
+    EffectEnum.DIAMOND_STORM
+  ],
+  [Synergy.GHOST]: [
+    EffectEnum.CURSE_OF_VULNERABILITY,
+    EffectEnum.CURSE_OF_WEAKNESS,
+    EffectEnum.CURSE_OF_TORMENT,
+    EffectEnum.CURSE_OF_FATE
+  ],
+  [Synergy.FAIRY]: [
+    EffectEnum.AROMATIC_MIST,
+    EffectEnum.FAIRY_WIND,
+    EffectEnum.STRANGE_STEAM,
+    EffectEnum.MOON_FORCE
+  ],
+  [Synergy.ICE]: [
+    EffectEnum.CHILLY,
+    EffectEnum.FROSTY,
+    EffectEnum.FREEZING,
+    EffectEnum.SHEER_COLD
+  ],
+  [Synergy.FOSSIL]: [
+    EffectEnum.ANCIENT_POWER,
+    EffectEnum.ELDER_POWER,
+    EffectEnum.FORGOTTEN_POWER
+  ],
+  [Synergy.SOUND]: [EffectEnum.LARGO, EffectEnum.ALLEGRO, EffectEnum.PRESTO],
+  [Synergy.ARTIFICIAL]: [
+    EffectEnum.DUBIOUS_DISC,
+    EffectEnum.LINK_CABLE,
+    EffectEnum.GOOGLE_SPECS
+  ],
+  [Synergy.BABY]: [
+    EffectEnum.HATCHER,
+    EffectEnum.BREEDER,
+    EffectEnum.GOLDEN_EGGS
+  ],
+  [Synergy.LIGHT]: [
+    EffectEnum.SHINING_RAY,
+    EffectEnum.LIGHT_PULSE,
+    EffectEnum.ETERNAL_LIGHT,
+    EffectEnum.MAX_ILLUMINATION
+  ],
+  [Synergy.WILD]: [
+    EffectEnum.QUICK_FEET,
+    EffectEnum.RUN_AWAY,
+    EffectEnum.HUSTLE,
+    EffectEnum.BERSERK
+  ],
+  [Synergy.AMORPHOUS]: [
+    EffectEnum.FLUID,
+    EffectEnum.SHAPELESS,
+    EffectEnum.ETHEREAL
+  ],
+  [Synergy.GOURMET]: [
+    EffectEnum.APPETIZER,
+    EffectEnum.LUNCH_BREAK,
+    EffectEnum.BANQUET
+  ]
+} satisfies { [key in Synergy]: readonly EffectEnum[] }
+
+export type SynergyEffect<T extends Synergy = Synergy> =
+  (typeof SynergyEffects)[T][number]
 
 export const SynergyTriggers: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
@@ -99,11 +273,11 @@ export const GoldenEggItems = [
   Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.EVIOLITE,
-  Item.WHITE_FLUTE,
+  Item.GOLD_MASK,
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD,
+  Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW
 ] satisfies ShinyItem[]

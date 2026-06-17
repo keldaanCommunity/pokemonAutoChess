@@ -2,18 +2,18 @@ import { getBaseAltForm } from "../config"
 import { ExpPerExpeditionRank } from "../config/game/expeditions"
 import { getExpeditionData, getPlayerExpeditions } from "../core/expeditions"
 import { notificationsService } from "../services/notifications"
-import { IPlayer, Title } from "../types"
+import { type IPlayer, Title } from "../types"
 import {
-  BattleMissionData,
-  DeliveryMissionData,
-  Expedition,
+  type BattleMissionData,
+  type DeliveryMissionData,
+  type Expedition,
   ExpeditionRank,
   ExpeditionType,
-  ExplorationMissionData,
-  RescueMissionData
+  type ExplorationMissionData,
+  type RescueMissionData
 } from "../types/enum/Expedition"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
-import { values } from "../utils/schemas"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import { schemaValues } from "../utils/schemas"
 import { giveUserExp } from "./mongo-models/user-metadata"
 
 export function updatePlayerExpeditionsAfterGame(
@@ -65,7 +65,7 @@ export function checkExpeditionCompletion(
     case ExpeditionType.RESCUE: {
       const expeditionData = getExpeditionData(expedition) as RescueMissionData
       const pokemonToRescue = getBaseAltForm(expeditionData.pokemon)
-      return values(player.board).some(
+      return schemaValues(player.board).some(
         (p) => getBaseAltForm(p.name) === pokemonToRescue
       )
     }
@@ -94,7 +94,7 @@ export function checkExpeditionCompletion(
       ) as DeliveryMissionData
       const items = [
         ...player.items,
-        ...values(player.board).flatMap((p) => values(p.items))
+        ...schemaValues(player.board).flatMap((p) => schemaValues(p.items))
       ]
       return (
         items.filter((item) => item === expeditionData.item).length >=

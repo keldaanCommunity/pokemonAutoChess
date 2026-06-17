@@ -1,7 +1,7 @@
 import { t } from "i18next"
-import React from "react"
+import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { PkmWithCustom } from "../../../../../types"
+import type { PkmWithCustom } from "../../../../../types"
 import {
   Berries,
   CraftableItems,
@@ -10,14 +10,18 @@ import {
   MemoryDiscs,
   ShinyItems,
   TMs,
-  Tools
+  Tools,
+  UnholdableItems,
+  Wands
 } from "../../../../../types/enum/Item"
+import { isIn } from "../../../../../utils/array"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
 
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
+  origin: "tier-list" | "bot-builder" | "team-planner"
 }) {
   function handleOnDragStart(e: React.DragEvent, item: Item) {
     e.stopPropagation()
@@ -41,14 +45,20 @@ export default function ItemPicker(props: {
 
     { label: t("tools"), key: "tools", items: Tools },
     {
+      label: t("shiny_items"),
+      key: "shiny_items",
+      items: ShinyItems
+    },
+    {
       label: t("tm_short"),
       key: "tm",
       items: TMs
     },
     {
-      label: t("shiny_items"),
-      key: "shiny_items",
-      items: ShinyItems
+      label: t("wands"),
+      key: "wands",
+      items: Wands,
+      hidden: props.origin === "team-planner" || props.origin === "bot-builder"
     },
     {
       label: t("special_items"),
@@ -62,7 +72,15 @@ export default function ItemPicker(props: {
         ...MemoryDiscs
       ]
     }
-  ]
+  ].filter((tab) => !tab.hidden)
+
+  if (props.origin !== "tier-list") {
+    tabs.forEach((tab) => {
+      if (tab.key !== "tm") {
+        tab.items = tab.items.filter((item) => !isIn(UnholdableItems, item))
+      }
+    })
+  }
 
   return (
     <Tabs className="my-box" id="item-picker">

@@ -1,13 +1,15 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
-import { DishByPkm } from "../../../../../core/dishes"
+import { InimitableAbilities } from "../../../../../config/game/abilities"
+import { DishByPkm } from "../../../../../config/game/dishes"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
+import type { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
 import {
@@ -21,7 +23,7 @@ import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
-import { values } from "../../../../../utils/schemas"
+import { schemaValues } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -38,7 +40,7 @@ interface StatInfo {
 }
 
 export function GamePokemonDetail(props: {
-  pokemon: Pkm | IPokemon | IPokemonEntity
+  pokemon: Pkm | IPokemon | IPokemonEntity | null | undefined
   origin:
     | "shop"
     | "proposition"
@@ -53,7 +55,10 @@ export function GamePokemonDetail(props: {
   isAlly?: boolean
 }) {
   const { t } = useTranslation()
-  const pokemon: IPokemon | IPokemonEntity = useMemo(() => {
+  const pokemon = useMemo<IPokemon | IPokemonEntity | null>(() => {
+    if (!props.pokemon) {
+      return null
+    }
     if (typeof props.pokemon === "string") {
       const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
       pokemon.pp = pokemon.maxPP
@@ -63,6 +68,10 @@ export function GamePokemonDetail(props: {
   }, [props.pokemon])
 
   const pokemonStats = useMemo(() => {
+    if (!pokemon) {
+      return []
+    }
+
     const baseStats = PokemonFactory.createPokemonFromName(pokemon.name)
     const stats: StatInfo[] = [
       { stat: Stat.DEF, value: pokemon.def, baseValue: baseStats.def },
@@ -92,7 +101,7 @@ export function GamePokemonDetail(props: {
     return stats.map((s) => {
       if (props.origin === "team") {
         // count item stats as well
-        s.value = values(pokemon.items).reduce((acc, item) => {
+        s.value = schemaValues(pokemon.items).reduce((acc, item) => {
           let itemStatBonus = ItemStats[item]?.[s.stat] ?? 0
           if (
             pokemon.items.has(Item.BIG_EATER_BELT) &&
@@ -110,26 +119,31 @@ export function GamePokemonDetail(props: {
       return s
     })
   }, [
-    pokemon.name,
-    pokemon.items,
-    pokemon.def,
-    pokemon.atk,
-    pokemon.critChance,
-    pokemon.ap,
-    pokemon.range,
-    pokemon.speDef,
-    pokemon.speed,
-    pokemon.critPower,
-    pokemon.luck,
+    pokemon?.name,
+    pokemon?.items,
+    pokemon?.def,
+    pokemon?.atk,
+    pokemon?.critChance,
+    pokemon?.ap,
+    pokemon?.range,
+    pokemon?.speDef,
+    pokemon?.speed,
+    pokemon?.critPower,
+    pokemon?.luck,
     props.origin
   ])
+
+  const isEntity = (
+    obj: IPokemonEntity | IPokemon | Pkm | null | undefined
+  ): obj is IPokemonEntity => obj != null && obj.hasOwnProperty("simulation")
+  const isInFight = isEntity(props.pokemon)
 
   const getStatWithItemBonus = (stat: Stat): number | undefined => {
     return pokemonStats.find((s) => s.stat === stat)?.value
   }
 
-  let dish = DishByPkm[pokemon.name]
-  if (!dish && pokemon.types.has(Synergy.GOURMET)) {
+  let dish = pokemon ? DishByPkm[pokemon.name] : undefined
+  if (pokemon && !dish && pokemon.types.has(Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
       dish = Item.HEARTY_STEW
     } else if (dish !== null) {
@@ -138,41 +152,45 @@ export function GamePokemonDetail(props: {
   }
 
   const hp = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.hp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
         pokemon.hp
       )
     }
 
     return undefined // only show max HP in shop/planner/wiki
-  }, [pokemon.hp, pokemon.items, props.origin])
+  }, [pokemon?.hp, pokemon?.items, props.origin])
 
   const pp = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.pp
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.PP] ?? 0),
         pokemon.pp
       )
     }
     return undefined // only show max PP in shop/planner/wiki
-  }, [pokemon.pp, pokemon.items, props.origin])
+  }, [pokemon?.pp, pokemon?.items, props.origin])
 
   const shield = useMemo(() => {
+    if (!pokemon) return undefined
     if (props.origin === "battle") return pokemon.shield
     if (props.origin === "team") {
-      return values(pokemon.items).reduce(
+      return schemaValues(pokemon.items).reduce(
         (acc, item) => acc + (ItemStats[item]?.[Stat.SHIELD] ?? 0),
         0
       )
     }
     return undefined
-  }, [pokemon.items, props.origin, pokemon.shield])
+  }, [pokemon?.items, props.origin, pokemon?.shield])
 
-  let name = t(`pkm.${pokemon.name}`)
+  let name = pokemon ? t(`pkm.${pokemon.name}`) : ""
   if (
+    pokemon &&
     pokemon.index === PkmIndex[Pkm.SUBSTITUTE] &&
     "evolution" in pokemon &&
     pokemon.evolution != null &&
@@ -182,9 +200,8 @@ export function GamePokemonDetail(props: {
   }
 
   const tmIcon = useMemo(() => {
-    if (pokemon.tm === Ability.DEFAULT) return null
+    if (!pokemon || pokemon.tm === Ability.DEFAULT) return null
     let icon = "assets/item/TM.png"
-    console.log("TM", pokemon.tm, pokemon.skill)
     if (
       pokemon.tm === Ability.SKILL_SWAP &&
       pokemon.skill !== Ability.SKILL_SWAP
@@ -202,7 +219,27 @@ export function GamePokemonDetail(props: {
         alt={t("tm")}
       />
     )
-  }, [pokemon.tm, pokemon.skill])
+  }, [pokemon?.tm, pokemon?.skill])
+
+  const inimitableIcon = useMemo(() => {
+    if (!pokemon) return null
+    const skill = pokemon.tm !== Ability.DEFAULT ? pokemon.tm : pokemon.skill
+    return InimitableAbilities.includes(skill) ? (
+      <img
+        src="assets/ui/inimitable.svg"
+        className="game-pokemon-detail-ability-icon"
+        alt={t("inimitable")}
+        title={t("technical_terms_definitions.INIMITABLE")}
+      />
+    ) : null
+  }, [pokemon?.tm, pokemon?.skill])
+
+  if (!pokemon) {
+    return null
+  }
+
+  const stars =
+    pokemon.stars + (pokemon.items.has(Item.STAR_PIECE) && !isInFight ? 1 : 0)
 
   return (
     <div className="game-pokemon-detail">
@@ -232,11 +269,11 @@ export function GamePokemonDetail(props: {
           {t(`rarity.${pokemon.rarity}`)}
         </p>
         <p className="game-pokemon-detail-entry-tier">
-          {Array.from({ length: pokemon.stars }, (_, index) => (
+          {Array.from({ length: stars }, (_, index) => (
             <img key={index} src="assets/ui/star.svg" height="16"></img>
           ))}
           {Array.from(
-            { length: getPokemonData(pokemon.name).stages - pokemon.stars },
+            { length: getPokemonData(pokemon.name).stages - stars },
             (_, index) => (
               <img key={index} src="assets/ui/star_empty.svg" height="16"></img>
             )
@@ -299,12 +336,15 @@ export function GamePokemonDetail(props: {
         <div className="game-pokemon-detail-passive">
           <p>
             {addIconsToDescription(
-              t(`passive_description.${pokemon.passive}`),
+              t(`passive_description.${pokemon.passive}`, {
+                stacks: pokemon.stacks
+              }),
               {
                 ap: pokemon.ap,
                 luck: pokemon.luck,
-                stars: pokemon.stars,
-                stages: getPokemonData(pokemon.name).stages
+                stars,
+                stages: getPokemonData(pokemon.name).stages,
+                showAbilityTiers: props.origin === "wiki"
               }
             )}
           </p>
@@ -324,8 +364,9 @@ export function GamePokemonDetail(props: {
       {pokemon.skill !== Ability.DEFAULT && (
         <div className="game-pokemon-detail-ult">
           <div className="ability-name">
+            <span>{t(`ability.${pokemon.skill}`)}</span>
             {tmIcon}
-            {t(`ability.${pokemon.skill}`)}
+            {inimitableIcon}
           </div>
           <div>
             <AbilityTooltip
@@ -333,8 +374,9 @@ export function GamePokemonDetail(props: {
               stats={{
                 ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
-                stars: pokemon.stars,
-                stages: getPokemonData(pokemon.name).stages
+                stars,
+                stages: getPokemonData(pokemon.name).stages,
+                showAbilityTiers: props.origin === "wiki"
               }}
               key={pokemon.id}
             />

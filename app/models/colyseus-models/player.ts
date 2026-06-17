@@ -8,16 +8,23 @@ import {
   SynergyTriggers
 } from "../../config"
 import { CollectionUtils } from "../../core/collection"
-import {
-  ConditionBasedEvolutionRule,
-  carryOverPermanentStats
-} from "../../core/evolution-rules"
-import { FlowerPot, FlowerPots, MulchStockCaps } from "../../core/flower-pots"
-import { PokemonEntity } from "../../core/pokemon-entity"
+import { OnSpotlightChangeEffect } from "../../core/effects/effect"
+import { PassiveEffects } from "../../core/effects/passives"
+import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
+import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
+import { MulchStockCaps } from "../../core/flower-pots"
+import type { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
-import { IPlayer, Role, Title } from "../../types"
+import {
+  type FlowerPot,
+  FlowerPots,
+  type IPlayer,
+  type Role,
+  Title
+} from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
-import { DungeonPMDO } from "../../types/enum/Dungeon"
+import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
   PokemonActionState,
@@ -29,9 +36,9 @@ import {
   ArtificialItems,
   Item,
   ItemComponentsNoFossilOrScarf,
-  MissionOrder,
+  type MissionOrder,
   NonSpecialBerries,
-  ScarfItem,
+  type ScarfItem,
   SynergyGemsBuried,
   SynergyGivenByItem,
   TMsBronze,
@@ -43,6 +50,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
+  Pillars,
   Pkm,
   PkmFamily,
   PkmIndex,
@@ -53,19 +61,26 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
-import { GameStats, initialGameStats } from "../../types/interfaces/GameStats"
-import { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
+import {
+  type GameStats,
+  initialGameStats
+} from "../../types/interfaces/GameStats"
+import type { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
-import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
-import { min } from "../../utils/number"
+import {
+  getFirstAvailablePositionInBench,
+  getFirstAvailablePositionOnBoard,
+  isOnBench
+} from "../../utils/board"
+import { max, min } from "../../utils/number"
 import {
   chance,
   pickNRandomIn,
   pickRandomIn,
   shuffleArray
 } from "../../utils/random"
-import { resetArraySchema, values } from "../../utils/schemas"
+import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { Effects } from "../effects"
 import PokemonFactory, { getPokemonBaseline } from "../pokemon-factory"
 import {
@@ -101,7 +116,7 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentId: string = ""
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
-  @type("string") opponentTitle: string = ""
+  @type("string") opponentTitle: Title | "WILD" | "" = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
@@ -172,6 +187,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  unownReminiscences: number = 0
 
   constructor(
     id: string,
@@ -260,8 +276,8 @@ export default class Player extends Schema implements IPlayer {
     this.money += value
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
-      if (pokemon.evolutionRule instanceof ConditionBasedEvolutionRule) {
-        pokemon.evolutionRule.tryEvolve(pokemon, this, 0) // for Goldengo evolution ; TOFIX: pass stagelevel instead of 0
+      if (pokemon.evolutionRule.type === EvolutionRuleType.MONEY) {
+        EvolutionManager.tryEvolve(pokemon, this, this.money)
       }
     })
     if (
@@ -291,7 +307,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getPokemonAt(x: number, y: number): Pokemon | undefined {
-    return values(this.board).find(
+    return schemaValues(this.board).find(
       (pokemon) => pokemon.positionX == x && pokemon.positionY == y
     )
   }
@@ -317,7 +333,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateSynergies() {
-    const pokemons: Pokemon[] = values(this.board)
+    const pokemons: Pokemon[] = schemaValues(this.board)
     const previousSynergies = this.synergies.toMap()
     let updatedSynergies = computeSynergies(
       pokemons,
@@ -346,15 +362,16 @@ export default class Player extends Schema implements IPlayer {
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
     const minimumToGetLight = SynergyTriggers[Synergy.LIGHT][0]
-    const lightChanged =
-      (previousLight >= minimumToGetLight && newLight < minimumToGetLight) || // light lost
-      (previousLight < minimumToGetLight && newLight >= minimumToGetLight) // light gained
+    const lightGained =
+      previousLight < minimumToGetLight && newLight >= minimumToGetLight
+    const lightLost =
+      previousLight >= minimumToGetLight && newLight < minimumToGetLight
 
     updatedSynergies.forEach((value, synergy) =>
       this.synergies.set(synergy, value)
     )
 
-    if (lightChanged) this.onLightChange()
+    if (lightGained || lightLost) this.onLightChange(lightGained)
 
     if (
       previousSynergies.get(Synergy.WATER) !==
@@ -387,21 +404,21 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies.get(Synergy.FAIRY) !==
       updatedSynergies.get(Synergy.FAIRY)
     ) {
-      this.updateFairyWands(previousSynergies, updatedSynergies)
+      this.updateFairyWands()
     }
 
     this.effects.update(this.synergies, this.board)
 
     if (
       this.items.includes(Item.MISSION_ORDER_GREEN) &&
-      this.synergies.countActiveSynergies() >= 9
+      this.synergies.countActiveSynergies() >= 8
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GREEN)
     }
 
     if (
       this.items.includes(Item.MISSION_ORDER_PINK) &&
-      values(this.board).filter((p) => p.stars >= 3).length >= 5
+      schemaValues(this.board).filter((p) => p.stars >= 3).length >= 4
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_PINK)
     }
@@ -438,7 +455,7 @@ export default class Player extends Schema implements IPlayer {
 
       const removeArtificialItem = (item: Item) => {
         // first check held items
-        const pokemons = values(this.board)
+        const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
             pokemon.removeItem(item, this)
@@ -504,7 +521,7 @@ export default class Player extends Schema implements IPlayer {
       newScarves.forEach((s) => removeInArray(lostScarves, s))
       const removeScarf = (item: ScarfItem) => {
         // first check held items
-        const pokemons = values(this.board)
+        const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
             pokemon.removeItem(item, this)
@@ -560,7 +577,7 @@ export default class Player extends Schema implements IPlayer {
       const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
       lostTMs.forEach((tm) => {
         removeInArray(this.items, tm)
-        const pokemonWithThisTm = values(this.board).find(
+        const pokemonWithThisTm = schemaValues(this.board).find(
           (p) => p.tm === AbilityPerTM[tm]
         )
         if (pokemonWithThisTm) {
@@ -594,7 +611,7 @@ export default class Player extends Schema implements IPlayer {
   updateChefsHats() {
     const gourmetLevel = getSynergyStep(this.synergies, Synergy.GOURMET)
     const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
-    const hatHolders = values(this.board).filter((p) =>
+    const hatHolders = schemaValues(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
     )
     let currentNbHats =
@@ -618,43 +635,106 @@ export default class Player extends Schema implements IPlayer {
     } while (newNbHats !== currentNbHats)
   }
 
-  updateFairyWands(
-    previousSynergies: Map<Synergy, number>,
-    updatedSynergies: Map<Synergy, number>
-  ) {
-    const previousFairyLevel = getSynergyStep(previousSynergies, Synergy.FAIRY)
-    const newFairyLevel = getSynergyStep(updatedSynergies, Synergy.FAIRY)
+  updateFairyWands() {
+    const newFairyLevel = getSynergyStep(this.synergies, Synergy.FAIRY)
     const nbWandsByLevel = [0, 1, 2, 3, 4]
-    const previousNbWands = nbWandsByLevel[previousFairyLevel] ?? 0
     const newNbWands = nbWandsByLevel[newFairyLevel] ?? 0
     const currentNbWands = this.items.filter((item) => isIn(Wands, item)).length
+    const pendingChoices = this.choices.filter((c) => c.type === "wand")
 
-    if (currentNbWands < newNbWands) {
-      // some wands are gained
-      const gainedWands = this.fairyWands.slice(previousNbWands, newNbWands)
-      if (
-        gainedWands.length < newNbWands - currentNbWands &&
-        newFairyLevel - 1 in FAIRY_WANDS_BY_SYNERGY_LEVEL &&
-        this.choices.filter((c) => c.type === "wand").length === 0
-      ) {
-        // player has to choose between wands
-        this.choices.push(
-          new PlayerChoice({
-            type: "wand",
-            items: pickNRandomIn(
-              FAIRY_WANDS_BY_SYNERGY_LEVEL[newFairyLevel - 1],
-              3
-            )
-          })
-        )
-      }
+    /* 4 cases to cover:
+    - wands to be given
+    - wands to be removed
+    - wands choices to be given
+    - wands choices to be removed
+    */
+    if (
+      currentNbWands < newNbWands &&
+      currentNbWands < this.fairyWands.length
+    ) {
+      // wands to be given
+      const gainedWands = this.fairyWands.slice(currentNbWands, newNbWands)
       this.items.push(...gainedWands)
-    } else if (newNbWands < previousNbWands) {
+    }
+
+    if (this.fairyWands.length + pendingChoices.length < newNbWands) {
+      // player has to choose between wands
+      for (
+        let i = this.fairyWands.length + pendingChoices.length;
+        i < newNbWands;
+        i++
+      ) {
+        if (i in FAIRY_WANDS_BY_SYNERGY_LEVEL) {
+          this.choices.push(
+            new PlayerChoice({
+              type: "wand",
+              items: pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[i], 3)
+            })
+          )
+        }
+      }
+    }
+
+    if (
+      pendingChoices.length > 0 &&
+      newNbWands < currentNbWands + pendingChoices.length
+    ) {
+      // some pending choices need to be cancelled
+      const nbChoicesToCancel = max(pendingChoices.length)(
+        currentNbWands + pendingChoices.length - newNbWands
+      )
+      pendingChoices.slice(-nbChoicesToCancel).forEach((choiceToCancel) => {
+        this.choices.splice(
+          this.choices.findIndex((c) => c.id === choiceToCancel.id),
+          1
+        )
+      })
+    }
+
+    if (newNbWands < currentNbWands) {
       // some wands are lost, we need to remove them from the inventory
-      const lostWands = this.fairyWands.slice(newNbWands, previousNbWands)
+      const lostWands = this.fairyWands.slice(newNbWands, currentNbWands)
       lostWands.forEach((wand) => {
         removeInArray(this.items, wand)
       })
+    }
+  }
+
+  updatePillars() {
+    const expectedNbPillarsByRank = [0, 0, 0]
+    schemaValues(this.board)
+      .filter(
+        (p) => getPokemonBaseline(p.name) === Pkm.TIMBURR && !isOnBench(p)
+      )
+      .forEach((p) => {
+        expectedNbPillarsByRank[p.stars - 1] +=
+          p.name === Pkm.CONKELDURR ? 2 : 1
+      })
+
+    for (let rank = 0; rank < 3; rank++) {
+      const currentPillars = schemaValues(this.board).filter(
+        (p) => p.name === Pillars[rank]
+      )
+      const nbExpectedPillars = expectedNbPillarsByRank[rank]
+      if (currentPillars.length < nbExpectedPillars) {
+        const nbPillarsToAdd = nbExpectedPillars - currentPillars.length
+        for (let i = 0; i < nbPillarsToAdd; i++) {
+          const freeSpace = getFirstAvailablePositionOnBoard(this.board, 1)
+          if (freeSpace) {
+            const pillar = PokemonFactory.createPokemonFromName(
+              Pillars[rank],
+              this
+            )
+            pillar.positionX = freeSpace[0]
+            pillar.positionY = freeSpace[1]
+            this.board.set(pillar.id, pillar)
+          }
+        }
+      } else if (nbExpectedPillars < currentPillars.length) {
+        for (let i = 0; i < currentPillars.length - nbExpectedPillars; i++) {
+          this.board.delete(currentPillars[i].id)
+        }
+      }
     }
   }
 
@@ -712,7 +792,7 @@ export default class Player extends Schema implements IPlayer {
       }
 
       // Cannot be a ConditionBasedEvolutionRule because it has another CountEvolutionRule for Wormadam
-      const burmys = values(this.board).filter(
+      const burmys = schemaValues(this.board).filter(
         (p) => p.passive === Passive.BURMY
       )
       if (burmys.length > 0 && state.stageLevel >= 20) {
@@ -732,17 +812,7 @@ export default class Player extends Schema implements IPlayer {
         ) {
           const burmyEvolving = burmys[0]
           burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
-
-          const mothim = burmyEvolving.evolutionRule.evolve(
-            burmyEvolving,
-            this,
-            state.stageLevel
-          )
-          burmyEvolving.evolutionRule.afterEvolve(
-            mothim,
-            this,
-            state.stageLevel
-          )
+          EvolutionManager.evolve(burmyEvolving, this)
         }
       }
     }
@@ -789,17 +859,19 @@ export default class Player extends Schema implements IPlayer {
     )
   }
 
-  onLightChange() {
-    const pokemonsReactingToLight = [
-      Pkm.NECROZMA,
-      Pkm.ULTRA_NECROZMA,
-      Pkm.CHERRIM_SUNLIGHT,
-      Pkm.CHERRIM
-    ]
+  onLightChange(hasLightActive: boolean) {
     this.board.forEach((pokemon) => {
-      if (pokemonsReactingToLight.includes(pokemon.name)) {
-        pokemon.onChangePosition(pokemon.positionX, pokemon.positionY, this)
-      }
+      const inSpotlight =
+        hasLightActive &&
+        ((pokemon.positionX === this.lightX &&
+          pokemon.positionY === this.lightY) ||
+          pokemon.items.has(Item.SHINY_STONE))
+
+      PassiveEffects[pokemon.passive]?.forEach((effect) => {
+        if (effect instanceof OnSpotlightChangeEffect) {
+          effect.apply({ pokemon, player: this, inSpotlight })
+        }
+      })
     })
   }
 
@@ -840,7 +912,7 @@ export default class Player extends Schema implements IPlayer {
   getFinalizedLines(): Set<Pkm> {
     if (this.specialGameRule === SpecialGameRule.FAMILY_OUTING) return new Set() // in family outing mode, do not remove finished lines from shop
     const finals = new Set(
-      values(this.board)
+      schemaValues(this.board)
         .filter((pokemon) => pokemon.final)
         .map((pokemon) => getPokemonBaseline(pokemon.name))
     )
@@ -910,7 +982,7 @@ export default class Player extends Schema implements IPlayer {
 
     const dps = simulation.getDpsMeter(this.id)
     if (dps) {
-      const dpsList = values(dps)
+      const dpsList = schemaValues(dps)
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,
         ...dpsList.map((d) => d.heal)

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { IDps } from "../../../../../types"
+import type { IDps } from "../../../../../types"
 import GameDpsHeal from "./game-dps-heal"
 
 export default function GamePlayerHpsMeter({

@@ -1,12 +1,11 @@
-import { MapSchema } from "@colyseus/schema"
-import { PokemonEntity } from "../core/pokemon-entity"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import PokemonSprite from "../public/src/game/components/pokemon"
-import { IPokemon } from "../types"
+import type { MapSchema } from "@colyseus/schema"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
+import type PokemonSprite from "../public/src/game/components/pokemon"
+import type { IPokemon } from "../types"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { values } from "./schemas"
+import { schemaValues } from "./schemas"
 
-export function isOnBench(pokemon: IPokemon | PokemonEntity | PokemonSprite) {
+export function isOnBench(pokemon: IPokemon | PokemonSprite) {
   return pokemon.positionY === 0
 }
 
@@ -16,7 +15,8 @@ export function isPositionEmpty(
   board: MapSchema<Pokemon, string>
 ) {
   return (
-    values(board).some((p) => p.positionX === x && p.positionY === y) === false
+    schemaValues(board).some((p) => p.positionX === x && p.positionY === y) ===
+    false
   )
 }
 

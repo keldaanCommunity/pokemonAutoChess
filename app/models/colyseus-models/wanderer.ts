@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { Pkm } from "../../types/enum/Pokemon"
+import type { Pkm } from "../../types/enum/Pokemon"
 import type { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 
 export class Wanderer extends Schema {

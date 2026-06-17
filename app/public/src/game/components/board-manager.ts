@@ -10,21 +10,25 @@ import {
   RegionDetails,
   SynergyTriggers
 } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
-  FlowerPotMons,
-  FlowerPots
+  FlowerPotMons
 } from "../../../../core/flower-pots"
-import Player from "../../../../models/colyseus-models/player"
+import type Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { PVEStage, PVEStages } from "../../../../models/pve-stages"
-import GameState from "../../../../rooms/states/game-state"
-import { IPokemon, IPokemonEntity } from "../../../../types"
+import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
+import type GameState from "../../../../rooms/states/game-state"
+import {
+  FlowerPots,
+  type IPokemon,
+  type IPokemonEntity
+} from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
-  GameMode,
+  type GameMode,
   GamePhaseState,
   Orientation,
   PokemonActionState,
@@ -34,7 +38,7 @@ import {
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
@@ -43,7 +47,7 @@ import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
 import { randomBetween } from "../../../../utils/random"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { getGameContainer } from "../../pages/game"
 import { playMusic } from "../../pages/utils/audio"
@@ -54,10 +58,10 @@ import {
 import { preference } from "../../preferences"
 import store from "../../stores"
 import { refreshShopUI } from "../../stores/GameStore"
-import AnimationManager from "../animation-manager"
+import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
@@ -94,6 +98,8 @@ export default class BoardManager {
   mulchAmountText: Phaser.GameObjects.Text | null = null
   mulchIcon: Phaser.GameObjects.Image | null = null
   groundHoles: Phaser.GameObjects.Sprite[]
+  trainingBag: Phaser.GameObjects.Sprite | null = null
+  trainingRack: Phaser.GameObjects.Sprite | null = null
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
@@ -156,8 +162,8 @@ export default class BoardManager {
       }
       if (this.pveChest && this.pveChestGroup) {
         const rewards = [
-          ...values(this.player.pveRewards),
-          ...values(this.player.pveRewardsPropositions)
+          ...schemaValues(this.player.pveRewards),
+          ...schemaValues(this.player.pveRewardsPropositions)
         ]
         this.openChest(this.pveChestGroup, this.pveChest, rewards)
       }
@@ -235,6 +241,7 @@ export default class BoardManager {
       this.renderBerryTrees()
       this.renderFlowerPots()
       this.renderGroundHoles()
+      this.renderTrainingBag()
     }
 
     if (this.mode === BoardMode.PICK) {
@@ -252,7 +259,7 @@ export default class BoardManager {
         this.smeargle.destroy()
         this.smeargle = null
       }
-      this.addSmeargle()
+      this.addSmeargle(this.specialGameRule)
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
@@ -349,7 +356,9 @@ export default class BoardManager {
       const isOnBattle =
         this.mode === BoardMode.BATTLE &&
         simulation?.started &&
-        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+        schemaValues(simulation.blueDpsMeter).some(
+          (p) => p.id === potPokemon.id
+        )
 
       if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
@@ -474,6 +483,44 @@ export default class BoardManager {
   hideGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
+  }
+
+  hideTrainingBag() {
+    this.trainingRack?.destroy()
+    this.trainingBag?.destroy()
+    this.trainingRack = null
+    this.trainingBag = null
+  }
+
+  renderTrainingBag() {
+    this.hideTrainingBag()
+    const fightingLevel = this.player.synergies.get(Synergy.FIGHTING) ?? 0
+    if (fightingLevel >= SynergyTriggers[Synergy.FIGHTING][3]) {
+      this.trainingRack = this.scene.add
+        .sprite(605, 775, "training_bag", "rack.png")
+        .setScale(1.5)
+        .setDepth(DEPTH.INANIMATE_OBJECTS)
+      this.trainingBag = this.scene.add
+        .sprite(621, 750, "training_bag", "bag.png")
+        .setScale(1.5)
+        .setOrigin(35 / 48, 19 / 72)
+        .setDepth(DEPTH.INANIMATE_OBJECTS + 0.1)
+    }
+  }
+
+  animateTrainingBag() {
+    if (!this.trainingBag) return
+    this.scene.tweens.add({
+      targets: this.trainingBag,
+      angle: {
+        getStart: () => -10,
+        getEnd: () => 10
+      },
+      ease: "Sine.easeInOut",
+      duration: 200,
+      yoyo: true,
+      repeat: -1
+    })
   }
 
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
@@ -610,7 +657,7 @@ export default class BoardManager {
     const players = this.state.players
     if (!players) return
 
-    const scoutingPlayers = values(players).filter((p) => {
+    const scoutingPlayers = schemaValues(players).filter((p) => {
       const spectatedPlayer = players.get(p.spectatedPlayerId)
 
       if (
@@ -657,7 +704,9 @@ export default class BoardManager {
       (p) => this.scoutingAvatars.some((a) => a.playerId === p.id) === false
     )
     newScoutingAvatars.forEach((player) => {
-      const playerIndex = values(players).findIndex((p) => p.id === player.id)
+      const playerIndex = schemaValues(players).findIndex(
+        (p) => p.id === player.id
+      )
       const scoutAvatarModel = new PokemonAvatarModel(
         player.id,
         player.avatar,
@@ -773,16 +822,26 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (this.state.stageLevel === PortalCarouselStages[0])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
-    if (this.state.stageLevel === PortalCarouselStages[1])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
-    if (this.state.stageLevel === PortalCarouselStages[2])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    if (this.state.townEncounter === TownEncounters.LUDICOLO) {
+      playMusic(this.scene, DungeonMusic.CARNIVAL_LUDICOLO)
+      this.scene.music?.once("looped", () => {
+        playMusic(
+          this.scene,
+          RegionDetails[this.player.map].music ?? DungeonMusic.TREASURE_TOWN
+        )
+      })
+    } else if (this.state.stageLevel === PortalCarouselStages[0]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
+    } else if (this.state.stageLevel === PortalCarouselStages[1]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
+    } else if (this.state.stageLevel === PortalCarouselStages[2]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
+    }
     this.hideLightCell()
     this.hideBerryTrees()
     this.hideFlowerPots()
     this.hideGroundHoles()
+    this.hideTrainingBag()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -885,7 +944,7 @@ export default class BoardManager {
           )
           store.dispatch(refreshShopUI(0))
           this.showSupportItemsVfx(
-            values(pokemon.items),
+            schemaValues(pokemon.items),
             pokemonSprite,
             pokemon.positionX,
             pokemon.positionY
@@ -918,7 +977,7 @@ export default class BoardManager {
           store.dispatch(refreshShopUI(0))
           if (!isOnBench(pokemon)) {
             this.showSupportItemsVfx(
-              values(pokemon.items),
+              schemaValues(pokemon.items),
               pokemonSprite,
               pokemon.positionX,
               pokemon.positionY
@@ -933,12 +992,18 @@ export default class BoardManager {
             value as IPokemon["action"],
             false
           )
+          if (
+            value === PokemonActionState.TRAINING &&
+            pokemon.positionX === 0
+          ) {
+            this.animateTrainingBag()
+          }
           break
 
         case "hp":
         case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
-          const hp = values(pokemon.items).reduce(
+          const hp = schemaValues(pokemon.items).reduce(
             (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
             pokemon.hp
           )
@@ -1072,15 +1137,15 @@ export default class BoardManager {
     }
   }
 
-  addSmeargle() {
+  addSmeargle(specialGameRule: SpecialGameRule) {
     this.smeargle = new PokemonSpecial({
       scene: this.scene,
       x: 1512,
       y: 396,
       name: Pkm.SMEARGLE,
       orientation: Orientation.DOWNLEFT,
-      dialog: t(`scribble_description.${this.specialGameRule}`),
-      dialogTitle: t(`scribble.${this.specialGameRule}`)
+      dialog: t(`scribble_description.${specialGameRule}`),
+      dialogTitle: t(`scribble.${specialGameRule}`)
     })
   }
 
@@ -1162,7 +1227,7 @@ export default class BoardManager {
 
   portalTransition(isRedPlayer: boolean) {
     const [portalX, portalY] = transformBoardCoordinates(3.5, 5)
-    const opponent = values(this.state.players).find(
+    const opponent = schemaValues(this.state.players).find(
       (p) => p.id === this.player.opponentId
     )
     if (!opponent) {
@@ -1360,7 +1425,7 @@ export default class BoardManager {
 
       // opponent pokemons move out of the portal
       setTimeout(() => {
-        const opponent = values(this.state.players).find(
+        const opponent = schemaValues(this.state.players).find(
           (p) => p.id === this.player.opponentId
         )
         if (!opponent) return

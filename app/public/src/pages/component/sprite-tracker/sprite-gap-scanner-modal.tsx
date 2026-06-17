@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import { useTranslation } from "react-i18next"
 import { Modal } from "../modal/modal"
 import SpriteGapScanner from "./sprite-gap-scanner"
@@ -13,7 +13,7 @@ export default function SpriteGapScannerModal(props: {
     <Modal
       show={props.show}
       onClose={props.handleClose}
-      header={t("gadget.sprite_gap_scanner")}
+      header={t("gadget.sprite_tracker")}
       className="sprite-gap-scanner-modal"
     >
       <SpriteGapScanner />

@@ -40,7 +40,7 @@ If you are using MongoDB Cloud, you may need to create an admin user under Datab
 - A cloud uri will look like smth `mongodb+srv://admin:<password>@<cluster>.mongodb.net/dev?retryWrites=true&w=majority`.
 - The local uri will look smth like `mongodb://localhost:27017/dev`.
 
-In order to play against bots, you will need to load bots data into your newly created database. In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botV2` empty collection.
+In order to play against bots, you will need to load bots data into your newly created database. In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botv2` empty collection.
 
 In the `.env` file at the root folder, add the mongoDB URI:
 

@@ -1,6 +1,6 @@
-import Player from "../models/colyseus-models/player"
-import { Title } from "../types"
+import { type IPlayer, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
+import { FlowerPot } from "../types/enum/FlowerPot"
 import { Pkm } from "../types/enum/Pokemon"
 
 export const FLOWER_POTS_POSITIONS_BLUE = [
@@ -19,22 +19,6 @@ export const FLOWER_POTS_POSITIONS_RED = [
   [1448, 186]
 ]
 
-export enum FlowerPot {
-  PINK = "PINK",
-  YELLOW = "YELLOW",
-  WHITE = "WHITE",
-  BLUE = "BLUE",
-  ORANGE = "ORANGE"
-}
-
-export const FlowerPots = [
-  FlowerPot.PINK,
-  FlowerPot.YELLOW,
-  FlowerPot.WHITE,
-  FlowerPot.BLUE,
-  FlowerPot.ORANGE
-] as const
-
 export const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
   [FlowerPot.PINK]: [Pkm.HOPPIP, Pkm.SKIPLOOM, Pkm.JUMPLUFF],
   [FlowerPot.YELLOW]: [Pkm.BELLSPROUT, Pkm.WEEPINBELL, Pkm.VICTREEBEL],
@@ -43,7 +27,7 @@ export const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
   [FlowerPot.ORANGE]: [Pkm.BELLOSSOM]
 }
 
-export function getFlowerPotsUnlocked(player: Player): FlowerPot[] {
+export function getFlowerPotsUnlocked(player: IPlayer): FlowerPot[] {
   const hasAllEvolutions = player.flowerPots.every(
     (pot) => pot.evolution === Pkm.DEFAULT
   )

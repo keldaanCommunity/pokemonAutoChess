@@ -2,13 +2,13 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor, SynergyTriggers } from "../../../../../config"
-import { SynergyEffects } from "../../../../../models/effects"
+import { SynergyEffects } from "../../../../../config/game/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
@@ -56,6 +56,7 @@ export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
   const [preferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
+  const effects = SynergyEffects[props.type]
 
   const pokemons = filterPokemonsAccordingToPreferences(
     PRECOMPUTED_POKEMONS_PER_TYPE[props.type],
@@ -99,13 +100,13 @@ export function WikiType(props: { type: Synergy }) {
           t(`synergy_description.${props.type}`, { additionalInfo: "" })
         )}
       </p>
-      {SynergyEffects[props.type].map((effect, i) => {
+      {effects.map((effect: (typeof effects)[number], i) => {
         return (
           <div
             key={t(`effect.${effect}`)}
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: "flex", alignItems: "flex-start" }}
           >
-            <span>
+            <span style={{ whiteSpace: "nowrap" }}>
               ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
               :&nbsp;
             </span>

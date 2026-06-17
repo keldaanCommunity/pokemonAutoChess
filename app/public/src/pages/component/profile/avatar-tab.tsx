@@ -1,7 +1,11 @@
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
-import { Pkm, PkmByIndex, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  type Pkm,
+  PkmByIndex,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
@@ -65,7 +69,9 @@ export function AvatarTab() {
               }}
             >
               ❤️&nbsp;
-              {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
             </button>
           </>
         )}

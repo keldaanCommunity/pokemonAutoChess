@@ -9,6 +9,14 @@
   --border-extra-thin: 1px solid #2f3044;
 }
 
+#root .ps-sidebar-root {
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+}
+
+dialog {
+  box-shadow: 0 0 16px black;
+}
+
 .custom-bg {
   position: relative;
   background: rgba(0, 0, 0, 0.25);
@@ -43,6 +51,15 @@
   text-shadow: none;
 }
 
+.timer-bar {
+  left: -2px;
+  right: -2px;
+}
+
+.boosters-modal {
+  background: color-mix(in hsl, var(--color-bg-primary) 90%, transparent 10%);
+}
+
 #videobg {
   position: fixed;
   top: 0;
@@ -51,4 +68,8 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+.scales-ap .ability-value {
+  color: #861eff;
 }

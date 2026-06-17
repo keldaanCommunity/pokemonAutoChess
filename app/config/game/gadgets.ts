@@ -1,10 +1,11 @@
-import { BOTS_ENABLED } from ".."
+import { BOTS_ENABLED } from "./game"
 
 export const GADGETS_NAMES = [
   "trainer_card",
   "bag",
   "team_planner",
   "jukebox",
+  "certificate",
   "palette",
   "synergy_wheel",
   "gameboy",
@@ -42,11 +43,16 @@ export const GADGETS: Record<GadgetName, Gadget> = {
   jukebox: {
     name: "jukebox",
     icon: "compact-disc",
-    levelRequired: 5
+    levelRequired: 3
   },
   palette: {
     name: "palette",
     icon: "palette",
+    levelRequired: 5
+  },
+  certificate: {
+    name: "certificate",
+    icon: "certificate",
     levelRequired: 10
   },
   synergy_wheel: {
@@ -70,7 +76,6 @@ export const GADGETS: Record<GadgetName, Gadget> = {
     levelRequired: 40,
     disabled: !BOTS_ENABLED
   },
-
   tier_list_maker: {
     name: "tier_list_maker",
     icon: "tier-list",

@@ -45,6 +45,12 @@ export default function WikiFaq() {
         <p>{t("wiki.faq.items_answer")}</p>
       </details>
       <details className="my-box">
+        <summary>{t("wiki.faq.reconnect")}</summary>
+        <p
+          dangerouslySetInnerHTML={{ __html: t("wiki.faq.reconnect_answer") }}
+        ></p>
+      </details>
+      <details className="my-box">
         <summary>{t("wiki.faq.bots")}</summary>
         <p>{t("wiki.faq.bots_answer")}</p>
       </details>

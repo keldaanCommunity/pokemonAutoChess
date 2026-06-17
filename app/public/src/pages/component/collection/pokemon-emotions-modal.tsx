@@ -8,8 +8,8 @@ import {
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -38,7 +38,7 @@ export default function PokemonEmotionsModal(props: {
   const onError = useCallback(
     (error: unknown) => {
       const message =
-        error instanceof Error ? error.message : t("errors.unknown_error")
+        error instanceof Error ? error.message : t("errors.UNKNOWN_ERROR")
       setRequestError(message)
     },
     [t]
@@ -128,7 +128,7 @@ export default function PokemonEmotionsModal(props: {
 
   const isAltForm =
     PkmAltForms.includes(props.pokemon) || props.pokemon in PkmAltFormsByPkm
-  const altForms = isAltForm
+  const altForms: Pkm[] = isAltForm
     ? [props.pokemon, ...(PkmAltFormsByPkm[props.pokemon] || [])]
     : []
 
@@ -177,7 +177,7 @@ export default function PokemonEmotionsModal(props: {
         body={
           <>
             <section>
-              <p>{t("normal_emotions")}</p>
+              <p>{t("collection.normal_emotions")}</p>
               <div>
                 {availableEmotions.map((e) => {
                   return (
@@ -205,7 +205,7 @@ export default function PokemonEmotionsModal(props: {
             </section>
             {shinyAvailable && (
               <section>
-                <p>{t("shiny_emotions")}</p>
+                <p>{t("collection.shiny_emotions")}</p>
                 <div>
                   {shinyAvailableEmotions.map((e) => {
                     return (
@@ -253,7 +253,9 @@ export default function PokemonEmotionsModal(props: {
                 )
               }
             >
-              {isCurrentAvatar ? t("chosen_as_avatar") : t("choose_as_avatar")}
+              {isCurrentAvatar
+                ? t("collection.chosen_as_avatar")
+                : t("collection.choose_as_avatar")}
               &nbsp;
               <PokemonPortrait
                 portrait={{
@@ -273,14 +275,14 @@ export default function PokemonEmotionsModal(props: {
                 buyBooster({ index }).catch(onError)
               }}
             >
-              {t("buy_booster", { cost: boosterCost })}
+              {t("collection.buy_booster", { cost: boosterCost })}
               <img src={getPortraitSrc(index)} className="dust" alt="dust" />
             </button>
 
             {item.selectedEmotion != null &&
               item.selectedEmotion != Emotion.NORMAL && (
                 <button className="bubbly blue" onClick={resetEmotion}>
-                  {t("reset_emotion")}
+                  {t("collection.reset_emotion")}
                   &nbsp;
                   <PokemonPortrait
                     portrait={{
@@ -298,7 +300,9 @@ export default function PokemonEmotionsModal(props: {
               onClick={toggleFavorite}
             >
               ❤️&nbsp;
-              {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
             </button>
           </>
         }
@@ -308,7 +312,7 @@ export default function PokemonEmotionsModal(props: {
         show={requestError != null}
         onClose={() => setRequestError(null)}
         className="is-dark basic-modal-body"
-        header={t("error")}
+        header={t("errors.title")}
         body={<p style={{ padding: "1em" }}>{requestError}</p>}
       />
     </>

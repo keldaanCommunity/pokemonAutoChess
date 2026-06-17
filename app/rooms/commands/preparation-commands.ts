@@ -1,9 +1,9 @@
 import { memoryUsage } from "node:process"
 import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
-import { UserRecord } from "firebase-admin/lib/auth/user-record"
-import { QueryFilter } from "mongoose"
+import { type Client, matchMaker } from "colyseus"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { QueryFilter } from "mongoose"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
@@ -14,22 +14,26 @@ import {
   isPlayerTimeout,
   setPendingGame
 } from "../../core/pending-game-manager"
-import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
+import {
+  GameUser,
+  type IGameUser
+} from "../../models/colyseus-models/game-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
-import { EloRank } from "../../types/enum/EloRank"
+import type { EloRank } from "../../types/enum/EloRank"
 import { BotDifficulty, GameMode } from "../../types/enum/Game"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IBot } from "../../types/models/bot-v2"
 import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
-import { entries, values } from "../../utils/schemas"
-import PreparationRoom from "../preparation-room"
+import { schemaEntries, schemaValues } from "../../utils/schemas"
+import type PreparationRoom from "../preparation-room"
+import { GADGETS } from "../../config/game/gadgets"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -76,7 +80,7 @@ export class OnJoinCommand extends Command<
           avatar: user.avatar
         })
       } else {
-        const nbHumanPlayers = values(this.state.users).filter(
+        const nbHumanPlayers = schemaValues(this.state.users).filter(
           (u) => !u.isBot
         ).length
         const isAdmin = u.role === Role.ADMIN
@@ -102,6 +106,11 @@ export class OnJoinCommand extends Command<
           !isAdmin
         ) {
           client.leave(CloseCodes.USER_RANK_TOO_HIGH)
+          return
+        }
+
+        if (this.state.gameMode === GameMode.RANKED && u.level < GADGETS.certificate.levelRequired) {
+          client.leave(CloseCodes.USER_RANK_TOO_LOW)
           return
         }
 
@@ -153,7 +162,7 @@ export class OnJoinCommand extends Command<
 
       while (this.state.users.size > MAX_PLAYERS_PER_GAME) {
         // delete a random bot to make room
-        const users = entries(this.state.users)
+        const users = schemaEntries(this.state.users)
         const entryToDelete = users.find(([key, user]) => user.isBot)
         if (entryToDelete) {
           const [key, bot] = entryToDelete
@@ -274,7 +283,7 @@ export class OnGameStartRequestCommand extends Command<
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
         const gameRoom = await matchMaker.createRoom("game", {
-          users: Object.fromEntries(entries(this.state.users)),
+          users: Object.fromEntries(schemaEntries(this.state.users)),
           name: this.state.name,
           ownerName: this.state.ownerName,
           preparationId: this.room.roomId,
@@ -566,7 +575,7 @@ export class OnLeaveCommand extends Command<
           this.state.users.delete(client.auth.uid)
 
           if (client.auth.uid === this.state.ownerId) {
-            const newOwner = values(this.state.users).find(
+            const newOwner = schemaValues(this.state.users).find(
               (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
@@ -621,7 +630,7 @@ export class OnToggleReadyCommand extends Command<
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
         this.state.users.size === nbExpectedPlayers &&
-        values(this.state.users).every((user) => user.ready)
+        schemaValues(this.state.users).every((user) => user.ready)
       ) {
         // auto start when ranked lobby is full and all ready
         this.room.state.addMessage({

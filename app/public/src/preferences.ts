@@ -16,6 +16,7 @@ export type Keybindings = {
   board_return: string
   wiki: string
   team_planner: string
+  meta_report: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -43,6 +44,8 @@ export interface IPreferencesState {
   colorblindMode: boolean
   theme: string
 }
+
+export type PreferenceKey = keyof IPreferencesState
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
@@ -80,6 +83,7 @@ const defaultPreferences: IPreferencesState = {
     next_player: "PAGE_DOWN",
     board_return: "HOME",
     wiki: "W",
+    meta_report: "M",
     team_planner: "T"
   }
 }

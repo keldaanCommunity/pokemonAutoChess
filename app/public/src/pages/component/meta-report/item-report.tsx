@@ -1,5 +1,6 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
@@ -7,20 +8,21 @@ import { EloRankThreshold } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
   CraftableItems,
-  Item,
+  type Item,
   ShinyItems,
   Tools,
   UnholdableItems
 } from "../../../../../types/enum/Item"
 import {
   fetchMetaItems,
-  IItemsStatisticV2,
-  IItemV2
+  type IItemsStatisticV2,
+  type IItemV2
 } from "../../../models/items-statistic-v2"
 import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
 import "./item-report.css"
+import { keys } from "../../../../../utils/object"
 import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
@@ -80,7 +82,7 @@ export function ItemReport() {
           value={eloThreshold}
           onChange={(e) => setEloTreshold(e.target.value as EloRank)}
         >
-          {Object.keys(EloRank).map((r) => (
+          {keys(EloRank).map((r) => (
             <option value={r} key={r}>
               {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
             </option>

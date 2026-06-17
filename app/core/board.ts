@@ -1,12 +1,12 @@
-import { IPokemonEntity, Transfer } from "../types"
-import { BoardEffect, EffectEnum } from "../types/enum/Effect"
+import { type IPokemonEntity, Transfer } from "../types"
+import { type BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
-import { PokemonEntity } from "./pokemon-entity"
-import Simulation from "./simulation"
+import type { PokemonEntity } from "./pokemon-entity"
+import type Simulation from "./simulation"
 
 export type Cell = {
   x: number
@@ -402,8 +402,7 @@ export class Board {
     }
 
     const enemies = this.cells.filter(
-      (e): e is PokemonEntity =>
-        e instanceof PokemonEntity && e.hp > 0 && e.team !== entity.team
+      (e): e is PokemonEntity => e != null && e.hp > 0 && e.team !== entity.team
     )
 
     if (enemies.length === 0) {
@@ -678,11 +677,11 @@ export class Board {
         y
       })
     } else {
-      // Clear all effects
-      existingEffects.clear()
+      // Clear all effects      
       if (entityOnCell) {
         existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
       }
+      existingEffects.clear()
       simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,
@@ -742,9 +741,7 @@ export class Board {
     const closestEnemy = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
-          entity.team === enemyTeam &&
-          entity.hp > 0
+          entity != null && entity.team === enemyTeam && entity.hp > 0
       )
       .sort(
         (a, b) =>
@@ -771,7 +768,7 @@ export class Board {
     const closestAlly = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
+          entity != null &&
           entity.team === allyTeam &&
           entity.hp > 0 &&
           (!excludeId || entity.id !== excludeId)
@@ -800,9 +797,7 @@ export class Board {
     return this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity instanceof PokemonEntity &&
-          entity.team === enemyTeam &&
-          entity.hp > 0
+          entity != null && entity.team === enemyTeam && entity.hp > 0
       )
       .sort(
         (a, b) =>
@@ -810,4 +805,136 @@ export class Board {
           distanceC(b.positionX, b.positionY, positionX, positionY)
       )
   }
+}
+
+export function effectInOrientation(
+  board: Board,
+  pokemon: PokemonEntity,
+  target: PokemonEntity | Orientation,
+  effect: (cell: Cell) => void,
+  maxRange?: number
+) {
+  const orientation: Orientation =
+    typeof target === "string"
+      ? target
+      : board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY,
+          pokemon,
+          target
+        )
+
+  const targetsHit = new Set()
+
+  const applyEffect = (x: number, y: number) => {
+    if (maxRange != null) {
+      const distance = distanceC(x, y, pokemon.positionX, pokemon.positionY)
+      if (distance > maxRange) {
+        return
+      }
+    }
+    const value = board.getEntityOnCell(x, y)
+    if (value != null && value.team !== pokemon.team) {
+      targetsHit.add(value)
+    }
+    effect({ x, y, value })
+  }
+
+  switch (orientation) {
+    case Orientation.UP:
+      for (let y = pokemon.positionY + 1; y < board.rows; y++) {
+        applyEffect(pokemon.positionX, y)
+      }
+      break
+
+    case Orientation.UPRIGHT:
+      for (
+        let x = pokemon.positionX + 1, y = pokemon.positionY + 1;
+        x < board.columns && y < board.rows;
+        x++, y++
+      ) {
+        applyEffect(x, y)
+      }
+      break
+
+    case Orientation.RIGHT:
+      for (let x = pokemon.positionX + 1; x < board.rows; x++) {
+        applyEffect(x, pokemon.positionY)
+      }
+      break
+
+    case Orientation.DOWNRIGHT:
+      for (
+        let x = pokemon.positionX + 1, y = pokemon.positionY - 1;
+        x < board.columns && y >= 0;
+        x++, y--
+      ) {
+        applyEffect(x, y)
+      }
+      break
+
+    case Orientation.DOWN:
+      for (let y = pokemon.positionY - 1; y >= 0; y--) {
+        applyEffect(pokemon.positionX, y)
+      }
+      break
+
+    case Orientation.DOWNLEFT:
+      for (
+        let x = pokemon.positionX - 1, y = pokemon.positionY - 1;
+        x >= 0 && y >= 0;
+        x--, y--
+      ) {
+        applyEffect(x, y)
+      }
+      break
+
+    case Orientation.LEFT:
+      for (let x = pokemon.positionX - 1; x >= 0; x--) {
+        applyEffect(x, pokemon.positionY)
+      }
+      break
+
+    case Orientation.UPLEFT:
+      for (
+        let x = pokemon.positionX - 1, y = pokemon.positionY + 1;
+        x >= 0 && y < board.rows;
+        x--, y++
+      ) {
+        applyEffect(x, y)
+      }
+      break
+  }
+
+  const isEntity = (obj: PokemonEntity | Orientation): obj is PokemonEntity =>
+    obj.hasOwnProperty("positionX")
+  if (isEntity(target) && targetsHit.size === 0) {
+    // should at least touch the original target
+    // this can happen when target has an angle in between 45 degrees modulo, see https://discord.com/channels/737230355039387749/1098262507505848523
+    effect({ x: target.positionX, y: target.positionY, value: target })
+  }
+}
+
+export function effectInLine(
+  board: Board,
+  pokemon: PokemonEntity,
+  target: PokemonEntity,
+  effect: (cell: Cell) => void
+) {
+  const angleToTarget = Math.atan2(
+    target.positionY - pokemon.positionY,
+    target.positionX - pokemon.positionX
+  )
+  const distance = 12 // sufficiently large to cover the whole board in diagonal
+  const finalX = Math.round(
+    pokemon.positionX + distance * Math.cos(angleToTarget)
+  )
+  const finalY = Math.round(
+    pokemon.positionY + distance * Math.sin(angleToTarget)
+  )
+  board
+    .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)
+    .forEach(effect)
 }

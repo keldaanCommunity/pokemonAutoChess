@@ -1,4 +1,4 @@
-import { reverseMap } from "../../utils/map"
+import { objToMap, reverseMap } from "../../utils/map"
 import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
@@ -115,11 +115,11 @@ export enum Item {
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
   RED_SCALE = "RED_SCALE",
-  WHITE_FLUTE = "WHITE_FLUTE",
+  GOLD_MASK = "GOLD_MASK",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
   SACRED_ASH = "SACRED_ASH",
-  COMET_SHARD = "COMET_SHARD",
+  STAR_PIECE = "STAR_PIECE",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
   DAMP_ROCK = "DAMP_ROCK",
@@ -210,6 +210,7 @@ export enum Item {
   BIG_MUSHROOM = "BIG_MUSHROOM",
   BALM_MUSHROOM = "BALM_MUSHROOM",
   RICE = "RICE",
+  BERRIES = "BERRIES",
   POFFIN = "POFFIN",
   ROCK_SALT = "ROCK_SALT",
   NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
@@ -322,7 +323,14 @@ export enum Item {
   WARP_WAND = "WARP_WAND",
   SWITCHER_WAND = "SWITCHER_WAND",
   WHIRLWIND_WAND = "WHIRLWIND_WAND",
-  TUNNEL_WAND = "TUNNEL_WAND"
+  TUNNEL_WAND = "TUNNEL_WAND",
+  AQUA_MONICA = "AQUA_MONICA",
+  FIERY_DRUM = "FIERY_DRUM",
+  GRASS_CORNET = "GRASS_CORNET",
+  ICY_FLUTE = "ICY_FLUTE",
+  ROCK_HORN = "ROCK_HORN",
+  SKY_MELODICA = "SKY_MELODICA",
+  TERRA_CYMBAL = "TERRA_CYMBAL"
 }
 
 export const MemoryDiscs = [
@@ -401,6 +409,16 @@ export const DojoTickets = [
   Item.GOLD_DOJO_TICKET
 ] satisfies Item[]
 
+export const SevenTreasures = [
+  Item.AQUA_MONICA,
+  Item.FIERY_DRUM,
+  Item.GRASS_CORNET,
+  Item.ICY_FLUTE,
+  Item.ROCK_HORN,
+  Item.SKY_MELODICA,
+  Item.TERRA_CYMBAL
+] satisfies Item[]
+
 export const TownItems = [
   Item.TREASURE_BOX,
   Item.AMULET_COIN,
@@ -409,6 +427,7 @@ export const TownItems = [
   Item.RECYCLE_TICKET,
   ...DojoTickets,
   ...MissionOrders,
+  ...SevenTreasures,
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
@@ -634,11 +653,11 @@ export const ShinyItems = [
   Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.EVIOLITE,
-  Item.WHITE_FLUTE,
+  Item.GOLD_MASK,
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD,
+  Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.RED_SCALE
@@ -742,7 +761,10 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.STEEL_GEM,
   Item.DRAGON_GEM,
   Item.POISON_GEM,
-  Item.GHOST_GEM
+  Item.GHOST_GEM,
+  Item.FIELD_GEM,
+  Item.GROUND_GEM,
+  Item.AMORPHOUS_GEM
 ] satisfies SynergyGem[]
 
 export const ToolsBuried: Tool[] = [
@@ -957,6 +979,10 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
+export const TMPerAbility = reverseMap(
+  objToMap(AbilityPerTM as Record<Item, Ability>)
+)
+
 export const Dishes = [
   Item.OLIVE_OIL,
   Item.RAGE_CANDY_BAR,
@@ -1001,7 +1027,8 @@ export const Dishes = [
   Item.TINY_MUSHROOM,
   Item.BIG_MUSHROOM,
   Item.BALM_MUSHROOM,
-  Item.RICE
+  Item.RICE,
+  Item.BERRIES
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
@@ -1104,6 +1131,7 @@ export const UnholdableItems = [
   ...SynergyGems,
   ...Mulches,
   ...MissionOrders,
+  ...SevenTreasures,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,

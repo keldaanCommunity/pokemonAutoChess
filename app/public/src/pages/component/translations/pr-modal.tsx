@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Language } from "../../../../../types/enum/Language"
+import type { Language } from "../../../../../types/enum/Language"
 import "./pr-modal.css"
 
 const REPO_OWNER = "keldaanCommunity"

@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Menu, MenuItem, MenuItemProps, Sidebar } from "react-pro-sidebar"
+import { Menu, MenuItem, type MenuItemProps, Sidebar } from "react-pro-sidebar"
 import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../config/game/gadgets"
@@ -15,6 +15,7 @@ import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
+import AdminPanel from "../admin/admin-panel"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
@@ -31,7 +32,6 @@ import ServersList from "../servers/servers-list"
 import SpriteTrackerModal from "../sprite-tracker/sprite-tracker-modal"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import TierListMakerModal from "../tier-list/tier-list-maker-modal"
-import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
@@ -90,7 +90,7 @@ export function MainSidebar(props: MainSidebarProps) {
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
-      //if event occures in an input, textarea or select, ignore it
+      //if event occurs in an input, textarea or select, ignore it
       if (
         ["INPUT", "TEXTAREA", "SELECT", "OPTION"].includes(
           (e.target as HTMLElement).tagName
@@ -104,6 +104,9 @@ export function MainSidebar(props: MainSidebarProps) {
       if (key === keybindings.wiki) {
         e.preventDefault()
         setModal((current) => (current === "wiki" ? undefined : "wiki"))
+      } else if (key === keybindings.meta_report) {
+        e.preventDefault()
+        setModal((current) => (current === "meta" ? undefined : "meta"))
       } else if (
         key === keybindings.team_planner &&
         profileLevel >= GADGETS.team_planner.levelRequired
@@ -192,7 +195,7 @@ export function MainSidebar(props: MainSidebarProps) {
             className="blue"
             handleClick={changeModal}
           >
-            {t("collection")}
+            {t("collection.title")}
           </NavLink>
         )}
         {(page === "main_lobby" || page === "preparation") &&
@@ -213,7 +216,7 @@ export function MainSidebar(props: MainSidebarProps) {
           className="green"
           handleClick={changeModal}
         >
-          {t("wiki_label")}
+          {t("wiki.title")}
         </NavLink>
         <NavLink
           svg="meta"
@@ -315,6 +318,9 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
+            <NavLink svg="admin" location="admin" handleClick={changeModal}>
+              {t("admin_panel.title")}
+            </NavLink>
             <NavLink
               svg="pokemon-sprite"
               onClick={() => navigate("/sprite-viewer")}
@@ -323,13 +329,6 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
             <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
               Map Viewer
-            </NavLink>
-            <NavLink
-              svg="tournament"
-              location="tournaments"
-              handleClick={changeModal}
-            >
-              Tournaments
             </NavLink>
           </>
         )}
@@ -340,7 +339,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="jukebox"
             handleClick={changeModal}
           >
-            Jukebox
+            {t("gadget.jukebox")}
           </NavLink>
         )}
 
@@ -363,7 +362,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="servers"
             handleClick={changeModal}
           >
-            {t("community_servers")}
+            {t("servers_list.title")}
           </NavLink>
         )}
 
@@ -469,6 +468,7 @@ export type Modals =
   | "announcement"
   | "booster"
   | "moderation"
+  | "admin"
   | "collection"
   | "jukebox"
   | "keybinds"
@@ -482,7 +482,6 @@ export type Modals =
   | "synergy-wheel"
   | "team-builder"
   | "tier-list"
-  | "tournaments"
   | "wiki"
 
 function Modals({
@@ -520,7 +519,6 @@ function Modals({
       <Modal
         onClose={() => {
           closeModal()
-          console.log("Resetting searched user on close modal profile")
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
@@ -531,7 +529,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "collection"}
-        header={t("collection")}
+        header={t("collection.title")}
         className="anchor-top"
       >
         <PokemonCollection />
@@ -539,7 +537,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "booster"}
-        className="custom-bg"
+        className="custom-bg boosters-modal"
       >
         <Booster />
       </Modal>
@@ -547,7 +545,7 @@ function Modals({
         onClose={closeModal}
         show={modal === "wiki"}
         className="wiki-modal"
-        header={t("wiki_label")}
+        header={t("wiki.title")}
       >
         <Wiki inGame={page === "game"} />
       </Modal>
@@ -558,14 +556,10 @@ function Modals({
         onClose={closeModal}
         show={modal === "servers"}
         className="servers-modal"
-        header={t("community_servers")}
+        header={t("servers_list.title")}
       >
         <ServersList />
       </Modal>
-      <TeamBuilderModal
-        show={modal === "team-builder"}
-        handleClose={closeModal}
-      />
       <TeamBuilderModal
         show={modal === "team-builder"}
         handleClose={closeModal}
@@ -585,17 +579,13 @@ function Modals({
       />
       <Modal
         onClose={closeModal}
-        show={modal === "tournaments"}
-        header="Tournaments"
-      >
-        <TournamentsAdmin />
-      </Modal>
-      <Modal
-        onClose={closeModal}
         show={modal === "moderation"}
         header="Moderation"
       >
         <ModerationPanel />
+      </Modal>
+      <Modal onClose={closeModal} show={modal === "admin"} header="Admin">
+        <AdminPanel />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />

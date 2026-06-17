@@ -15,8 +15,8 @@ import { EloRank } from "../../../../../types/enum/EloRank"
 import { getRank } from "../../../../../utils/elo"
 import {
   fetchPlayerRankDistribution,
-  IPlayerRankDistribution,
-  IPlayerRankDistributionBucket
+  type IPlayerRankDistribution,
+  type IPlayerRankDistributionBucket
 } from "../../../models/player-rank-distribution"
 import { formatDate } from "../../utils/date"
 

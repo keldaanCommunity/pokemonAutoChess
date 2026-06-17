@@ -1,13 +1,14 @@
 import { t } from "i18next"
-import Phaser, { GameObjects } from "phaser"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
 import {
   OUTLAW_GOLD_REWARD,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
   SHARDS_PER_UNOWN_WANDERER
 } from "../../../../config"
-import { Wanderer } from "../../../../models/colyseus-models/wanderer"
+import type { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Item, Transfer } from "../../../../types"
+import { type Item, Transfer } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { WandererBehavior, WandererType } from "../../../../types/enum/Wanderer"
@@ -15,7 +16,7 @@ import { getFreeSpaceOnBench } from "../../../../utils/board"
 import { clamp } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
 

@@ -1,22 +1,25 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
-  Dish,
+  type Dish,
   DishesGoingToInventory,
-  FishingRod,
+  type FishingRod,
   Flavors,
   HerbaMysticas,
   Item,
   ItemRecipe,
   MemoryDiscs,
+  NonSpecialBerries,
   OgerponMasks,
   Scarves,
   Sweets,
@@ -38,23 +41,23 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { DishByPkm } from "../dishes"
-import { ConditionBasedEvolutionRule } from "../evolution-rules"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
-import { getUnitScore, PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getUnitScore } from "../unit-score"
 import {
   BeforeAttackEffect,
-  Effect,
+  type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
-  OnDeathEffectArgs,
+  type OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
@@ -227,7 +230,7 @@ export class MachRibbonEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(15, pokemon, 0, false)
+        pokemon.addSpeed(20, pokemon, 0, false)
         pokemon.count.machRibbonCount++
         if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
           pokemon.player.titles.add(Title.TOP_GUN)
@@ -304,7 +307,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
       pokemon.passive === Passive.OGERPON_CORNERSTONE
     ) {
-      const currentMask = values(pokemon.items).find((i) =>
+      const currentMask = schemaValues(pokemon.items).find((i) =>
         OgerponMasks.includes(i)
       )
       if (currentMask) {
@@ -343,12 +346,15 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player
       )
       pokemon.items.forEach((item) => substitute.items.add(item))
-      pokemon.removeItems(values(pokemon.items), player)
+      pokemon.removeItems(schemaValues(pokemon.items), player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
+      substitute.evolutionRule = {
+        type: EvolutionRuleType.STATE,
+        condition: () => false
+      } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
@@ -359,6 +365,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
       })
       removeInArray(player.items, item)
+      player.updateSynergies()
       return false // prevent item from being equipped
     })
   }
@@ -390,6 +397,12 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
 
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
+    if (dish === Item.BERRIES) {
+      dishes = pickNRandomIn(
+        NonSpecialBerries.filter((i) => pokemon.items.has(i) === false),
+        nbDishes
+      )
+    }
     if (dish === Item.MUSHROOMS) {
       dishes = Array.from(
         { length: nbDishes },
@@ -411,14 +424,20 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       })
       room.clock.setTimeout(() => {
         dishes.forEach((dish, i) => {
-          if (isIn(DishesGoingToInventory, dish)) {
+          if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
+            if (pokemon.items.size < 3) {
+              pokemon.addItem(dish, player)
+            } else {
+              player.items.push(dish)
+            }
+          } else if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
           } else {
-            let candidates = values(player.board).filter(
+            let candidates = schemaValues(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
-                !isOnBench(p) &&
+                isOnBench(chef) === isOnBench(p) &&
                 distanceC(
                   chef.positionX,
                   chef.positionY,
@@ -854,7 +873,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         Synergy.PSYCHIC,
         Synergy.FAIRY
       ]
-      const fieldEffect = values(entity.types).find((type) =>
+      const fieldEffect = schemaValues(entity.types).find((type) =>
         terrainTypes.includes(type)
       )
       switch (fieldEffect) {
@@ -1180,7 +1199,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.canEat) {
         let nbSandwiches = 0
-        values(player.board).forEach((pkm) => {
+        schemaValues(player.board).forEach((pkm) => {
           if (
             pkm.canEat &&
             pokemon &&
@@ -1209,7 +1228,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LAPRAS_PASSPORT]: [
     new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
       const previousMap = player.map
-      const chosenSynergies = values(pokemon.types)
+      const chosenSynergies = schemaValues(pokemon.types)
       const maps = Object.values(DungeonPMDO).filter(
         (map) => map !== previousMap
       )
@@ -1258,12 +1277,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     ])
   ),
 
-  [Item.BLACK_AUGURITE]: [
-    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
-      return pokemon.passive === Passive.SCYTHER // is then consummed by ItemEvolutionRule
-    })
-  ],
-
   [Item.MALICIOUS_ARMOR]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
@@ -1290,7 +1303,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
+      const evolution = EvolutionManager.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
@@ -1300,11 +1313,33 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      pokemon.afterEvolve({
+      const additionalArgs: any[] = []
+      if (pokemonEvolved.evolutionRule.type === EvolutionRuleType.ITEM) {
+        additionalArgs.push(item)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.MONEY
+      ) {
+        additionalArgs.push(player.money)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.PLACEMENT
+      ) {
+        additionalArgs.push(player.board)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STACK
+      ) {
+        additionalArgs.push(pokemonEvolved.stacks)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STATE
+      ) {
+        additionalArgs.push(room.state)
+      }
+
+      EvolutionManager.afterEvolve(
         pokemonEvolved,
-        pokemonsBeforeEvolution: [pokemon],
-        player
-      })
+        pokemon,
+        player,
+        ...additionalArgs
+      )
 
       pokemonEvolved.items.add(item)
       removeInArray(player.items, item)
@@ -1312,9 +1347,21 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon)
+      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
+    })
+  ],
+
+  [Item.STAR_PIECE]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.stars = max(5)(pokemon.stars + 1)
+      if (pokemon.stars === 5 && pokemon.player) {
+        pokemon.player.titles.add(Title.FIVE_STARS)
+      }
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.stars = min(1)(pokemon.stars - 1)
     })
   ],
 

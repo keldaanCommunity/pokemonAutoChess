@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 
 export default class WeatherManager {
   scene: Phaser.Scene

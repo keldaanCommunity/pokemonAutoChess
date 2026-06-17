@@ -6,10 +6,15 @@ import {
   PkmAltForms,
   PkmAltFormsByPkm
 } from "../config"
-import { CollectionUtils, createBooster } from "../core/collection"
+import { CollectionUtils } from "../core/collection"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
-import { CollectionEmotions, Emotion, PkmWithCustom, Title } from "../types"
+import {
+  CollectionEmotions,
+  Emotion,
+  type PkmWithCustom,
+  Title
+} from "../types"
 import type { Booster } from "../types/Booster"
 import {
   NonPkm,
@@ -18,10 +23,11 @@ import {
   PkmIndex,
   Unowns
 } from "../types/enum/Pokemon"
-import {
+import type {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
 } from "../types/interfaces/UserMetadata"
+import { createBooster } from "./collection"
 
 export type OpenBoosterResult = {
   userDoc: IUserMetadataMongo

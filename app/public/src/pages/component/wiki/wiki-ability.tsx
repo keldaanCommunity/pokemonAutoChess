@@ -1,13 +1,15 @@
-import React, { useMemo, useState } from "react"
+import type React from "react"
+import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
+import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import {
   AbilityPerTM,
-  Item,
+  type Item,
   TMsBronze,
   TMsSilver
 } from "../../../../../types/enum/Item"
@@ -67,7 +69,11 @@ export default function WikiAbility() {
       (a) =>
         a !== Ability.DEFAULT &&
         (!searchQuery.trim() ||
-          jsxTextContent(addIconsToDescription(`${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`))
+          jsxTextContent(
+            addIconsToDescription(
+              `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+            )
+          )
             .toLowerCase()
             .includes(searchQuery.trim().toLowerCase()))
     )
@@ -107,8 +113,7 @@ export default function WikiAbility() {
                   abilities: filteredAbilities,
                   columnCount,
                   pokemonsPerAbility,
-                  tmPerAbility,
-                  t
+                  tmPerAbility
                 }}
               />
             )
@@ -126,7 +131,6 @@ type AbilityRowData = {
   columnCount: number
   pokemonsPerAbility: Record<string, any[]>
   tmPerAbility: Partial<Record<Ability, Item>>
-  t: (key: string) => string
 }
 
 function AbilityRow({
@@ -135,8 +139,7 @@ function AbilityRow({
   abilities,
   columnCount,
   pokemonsPerAbility,
-  tmPerAbility,
-  t
+  tmPerAbility
 }: {
   ariaAttributes: object
   index: number
@@ -144,6 +147,7 @@ function AbilityRow({
 } & AbilityRowData): React.ReactElement | null {
   const startIdx = index * columnCount
   const rowAbilities = abilities.slice(startIdx, startIdx + columnCount)
+  const { t } = useTranslation()
 
   return (
     <div style={{ ...style, paddingBottom: "0.5em" }}>
@@ -162,6 +166,11 @@ function AbilityRow({
           >
             <div>
               <h2>{t(`ability.${ability}`)}</h2>
+              {InimitableAbilities.includes(ability) && (
+                <p style={{ marginBottom: "0.5em" }}>
+                  {addIconsToDescription("INIMITABLE")}
+                </p>
+              )}
               <p>
                 {addIconsToDescription(t(`ability_description.${ability}`))}
               </p>

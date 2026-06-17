@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { IGameUser } from "../../../../../models/colyseus-models/game-user"
+import type { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
 import { useAppSelector } from "../../../hooks"
 import { kick, removeBot } from "../../../network"

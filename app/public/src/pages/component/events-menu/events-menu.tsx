@@ -2,7 +2,7 @@ import { t } from "i18next"
 import { useEffect, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { getCurrentGameEvent } from "../../../../../config"
-import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
+import type { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
 import { GameEvent } from "../../../../../types/events"
 import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
@@ -35,7 +35,9 @@ export function EventsMenu() {
 
     async function fetchTwitchStreams() {
       try {
-        const response = await fetch("/twitch/streams")
+        const response = await fetch(
+          `/twitch/streams?t=${Math.floor(Date.now() / 300000)}`
+        )
         const data = (await response.json()) as { streams: unknown[] }
         if (isMounted) {
           setShowTwitchTab((data.streams?.length ?? 0) > 0)

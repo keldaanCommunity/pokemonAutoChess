@@ -1,6 +1,6 @@
-import { Emotion, PkmWithCustom } from ".."
-import { Item } from "../enum/Item"
-import { Pkm } from "../enum/Pokemon"
+import type { Emotion, PkmWithCustom } from ".."
+import type { Item } from "../enum/Item"
+import type { Pkm } from "../enum/Pokemon"
 
 export interface IDetailledPokemon extends PkmWithCustom {
   name: Pkm
@@ -21,7 +21,7 @@ export interface IBot {
   author: string
   elo: number
   steps: IStep[]
-  name: string
+  name: Pkm
   id: string
   approved: boolean
 }

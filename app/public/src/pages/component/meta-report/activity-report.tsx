@@ -10,7 +10,10 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-import { fetchGameActivity, IGameActivity } from "../../../models/game-activity"
+import {
+  fetchGameActivity,
+  type IGameActivity
+} from "../../../models/game-activity"
 import { formatDate } from "../../utils/date"
 import "./activity-report.css"
 

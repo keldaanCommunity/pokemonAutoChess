@@ -1,19 +1,19 @@
-import { getStateCallbacks, Room, RoomAvailable } from "@colyseus/sdk"
+import { getStateCallbacks, type Room, type RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { t } from "i18next"
-import { NavigateFunction } from "react-router"
-import {
+import type { NavigateFunction } from "react-router"
+import type {
   TournamentBracketSchema,
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import LobbyState from "../../../rooms/states/lobby-state"
-import PreparationState from "../../../rooms/states/preparation-state"
+import type LobbyState from "../../../rooms/states/lobby-state"
+import type PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
-import {
+import type {
   IUserMetadataClient,
   IUserMetadataJSON
 } from "../../../types/interfaces/UserMetadata"
@@ -28,7 +28,7 @@ import {
   rooms
 } from "../network"
 import { LocalStoreKeys, localStore } from "../pages/utils/store"
-import { AppDispatch } from "../stores"
+import type { AppDispatch } from "../stores"
 import { resetBoosters } from "../stores/BoostersStore"
 import {
   addRoom,
@@ -319,7 +319,7 @@ export async function joinExistingPreparationRoom(
   } catch (error: any) {
     if (error?.code && error.code in CloseCodesMessages) {
       const errorMessage =
-        CloseCodesMessages[error.code as keyof typeof CloseCodesMessages]
+        CloseCodesMessages[error.code as keyof typeof CloseCodesMessages]!
       dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
     } else {
       logger.error(error)

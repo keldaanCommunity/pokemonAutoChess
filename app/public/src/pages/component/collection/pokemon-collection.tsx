@@ -1,6 +1,7 @@
-import React, {
-  Dispatch,
-  SetStateAction,
+import type React from "react"
+import {
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useMemo,
@@ -20,7 +21,7 @@ import { getAvailableEmotions } from "../../../../../models/precomputed/precompu
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
 import { Ability } from "../../../../../types/enum/Ability"
-import { Emotion } from "../../../../../types/enum/Emotion"
+import type { Emotion } from "../../../../../types/enum/Emotion"
 import { Passive } from "../../../../../types/enum/Passive"
 import {
   NonPkm,
@@ -29,6 +30,7 @@ import {
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
 import { LocalStoreKeys, localStore, useLocalStore } from "../../utils/store"
@@ -53,6 +55,15 @@ export type CollectionFilterState = {
     | "new"
     | "favorite"
   sort: "index" | "shards" | "played" | "unlocked"
+}
+
+type CollectionItem = {
+  pkm: Pkm
+  item: IPokemonCollectionItemUnpacked
+  isNew: boolean
+  isFavorite: boolean
+  isUnlocked: boolean
+  isUnlockable: boolean
 }
 
 const listPokemons = precomputedPokemonsImplemented.filter(
@@ -164,7 +175,7 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"collection"}>{t("collection")}</option>
+          <option value={"collection"}>{t("collection.title")}</option>
           <option value={"shiny"}>{t("shiny_hunter")}</option>
           <option value={"pokedex"}>{t("pokedex")}</option>
         </select>
@@ -194,17 +205,23 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"all"}>{t("show_all")}</option>
-          <option value={"favorite"}>{t("show_favorites")}</option>
+          <option value={"all"}>{t("collection.show_all")}</option>
+          <option value={"favorite"}>{t("collection.show_favorites")}</option>
           {filterState.mode !== "pokedex" && (
-            <option value={"unlockable"}>{t("show_unlockable")}</option>
+            <option value={"unlockable"}>
+              {t("collection.show_unlockable")}
+            </option>
           )}
-          <option value={"locked"}>{t("show_locked")}</option>
-          <option value={"unlocked"}>{t("show_unlocked")}</option>
+          <option value={"locked"}>{t("collection.show_locked")}</option>
+          <option value={"unlocked"}>{t("collection.show_unlocked")}</option>
           {filterState.mode !== "pokedex" && (
             <>
-              <option value={"refundable"}>{t("show_refundable")}</option>
-              <option value={"new"}>{t("show_newly_obtained")}</option>
+              <option value={"refundable"}>
+                {t("collection.show_refundable")}
+              </option>
+              <option value={"new"}>
+                {t("collection.show_newly_obtained")}
+              </option>
             </>
           )}
         </select>
@@ -218,10 +235,12 @@ export default function PokemonCollection() {
             })
           }
         >
-          <option value={"index"}>{t("sort_by_index")}</option>
-          <option value={"shards"}>{t("sort_by_shards")}</option>
-          <option value={"unlocked"}>{t("sort_by_emotes_unlocked")}</option>
-          <option value={"played"}>{t("sort_by_played")}</option>
+          <option value={"index"}>{t("collection.sort_by_index")}</option>
+          <option value={"shards"}>{t("collection.sort_by_shards")}</option>
+          <option value={"unlocked"}>
+            {t("collection.sort_by_emotes_unlocked")}
+          </option>
+          <option value={"played"}>{t("collection.sort_by_played")}</option>
         </select>
 
         <PokemonTypeahead
@@ -326,7 +345,7 @@ export function PokemonCollectionList(props: {
     })
   }, [props.filterState.sort, getItem])
 
-  const pokemonsFiltered = useMemo(() => {
+  const pokemonsFilteredByType = useMemo(() => {
     return pokemonsSorted.filter((pkm) => {
       const pokemonData = getPokemonData(pkm)
       return (
@@ -342,72 +361,82 @@ export function PokemonCollectionList(props: {
   }, [pokemonsSorted, props.type])
 
   // Pre-filter items so the grid knows the exact count (no null renders)
-  const displayedPokemons = useMemo(() => {
-    return pokemonsFiltered.filter((pkm) => {
-      const pokemonData = getPokemonData(pkm)
-      const item = getItem(pokemonData.index)
+  const filteredItems = useMemo<CollectionItem[]>(() => {
+    return pokemonsFilteredByType
+      .map((pkm) => {
+        const pokemonData = getPokemonData(pkm)
+        const item = getItem(pokemonData.index)
 
-      if (getAvailableEmotions(pokemonData.index, false).length === 0)
-        return false
+        if (getAvailableEmotions(pokemonData.index, false).length === 0)
+          return null
 
-      const { dust, emotions, shinyEmotions } = item ?? {
-        dust: 0,
-        emotions: [] as Emotion[],
-        shinyEmotions: [] as Emotion[]
-      }
+        const { dust, emotions, shinyEmotions } = item ?? {
+          dust: 0,
+          emotions: [] as Emotion[],
+          shinyEmotions: [] as Emotion[]
+        }
 
-      const allForms = getAllAltForms(pkm)
-      const isUnlocked = allForms.some((form) => {
-        const formItem = getItem(PkmIndex[form])
-        const formEmotions = formItem?.emotions ?? []
-        const formShinyEmotions = formItem?.shinyEmotions ?? []
-        return props.filterState.mode === "pokedex"
-          ? (formItem?.played ?? 0) > 0
-          : props.filterState.mode === "shiny"
-            ? formShinyEmotions.length > 0
-            : formEmotions.length > 0 || formShinyEmotions.length > 0
-      })
+        const allForms = getAllAltForms(pkm)
+        const isUnlocked = allForms.some((form) => {
+          const formItem = getItem(PkmIndex[form])
+          const formEmotions = formItem?.emotions ?? []
+          const formShinyEmotions = formItem?.shinyEmotions ?? []
+          return props.filterState.mode === "pokedex"
+            ? (formItem?.played ?? 0) > 0
+            : props.filterState.mode === "shiny"
+              ? formShinyEmotions.length > 0
+              : formEmotions.length > 0 || formShinyEmotions.length > 0
+        })
 
-      const isNew = lastBoostersOpened.some((booster) =>
-        booster.some((card) => allForms.includes(card.name) && card.new)
-      )
+        const isNew = lastBoostersOpened.some((booster) =>
+          booster.some((card) => allForms.includes(card.name) && card.new)
+        )
 
-      const isFavorite = favorites.includes(pkm)
-      const rarity = pokemonData.rarity
-      const boosterCost = BoosterPriceByRarity[rarity]
+        const isFavorite = favorites.includes(pkm)
+        const rarity = pokemonData.rarity
+        const boosterCost = BoosterPriceByRarity[rarity]
 
-      const availableEmotions = getAvailableEmotions(pokemonData.index, false)
-      const shinyAvailableEmotions = getAvailableEmotions(
-        pokemonData.index,
-        true
-      )
-      const canUnlock =
-        props.filterState.mode !== "pokedex" &&
-        (availableEmotions.some(
-          (e) =>
-            !emotions.includes(e) &&
-            dust >= getEmotionCost(e, false) &&
-            props.filterState.mode !== "shiny"
-        ) ||
-          shinyAvailableEmotions.some(
+        const availableEmotions = getAvailableEmotions(pokemonData.index, false)
+        const shinyAvailableEmotions = getAvailableEmotions(
+          pokemonData.index,
+          true
+        )
+        const isUnlockable =
+          props.filterState.mode !== "pokedex" &&
+          (availableEmotions.some(
             (e) =>
-              !shinyEmotions.includes(e) &&
-              dust >= getEmotionCost(e, true) &&
-              !PokemonAnimations[pkm]?.shinyUnavailable
-          ))
+              !emotions.includes(e) &&
+              dust >= getEmotionCost(e, false) &&
+              props.filterState.mode !== "shiny"
+          ) ||
+            shinyAvailableEmotions.some(
+              (e) =>
+                !shinyEmotions.includes(e) &&
+                dust >= getEmotionCost(e, true) &&
+                !PokemonAnimations[pkm]?.shinyUnavailable
+            ))
 
-      if (props.filterState.filter === "refundable" && dust < boosterCost)
-        return false
-      if (props.filterState.filter === "new" && !isNew) return false
-      if (props.filterState.filter === "unlocked" && !isUnlocked) return false
-      if (props.filterState.filter === "unlockable" && !canUnlock) return false
-      if (props.filterState.filter === "locked" && isUnlocked) return false
-      if (props.filterState.filter === "favorite" && !isFavorite) return false
+        if (props.filterState.filter === "refundable" && dust < boosterCost)
+          return null
+        if (props.filterState.filter === "new" && !isNew) return null
+        if (props.filterState.filter === "unlocked" && !isUnlocked) return null
+        if (props.filterState.filter === "unlockable" && !isUnlockable)
+          return null
+        if (props.filterState.filter === "locked" && isUnlocked) return null
+        if (props.filterState.filter === "favorite" && !isFavorite) return null
 
-      return true
-    })
+        return {
+          pkm,
+          item,
+          isNew,
+          isFavorite,
+          isUnlocked,
+          isUnlockable
+        }
+      })
+      .filter<CollectionItem>((item): item is CollectionItem => item !== null)
   }, [
-    pokemonsFiltered,
+    pokemonsFilteredByType,
     getItem,
     props.filterState,
     lastBoostersOpened,
@@ -420,7 +449,7 @@ export function PokemonCollectionList(props: {
         renderProp={({ height, width }) => {
           if (height === undefined || width === undefined) return null
           const columnCount = Math.max(1, Math.floor(width / CELL_WIDTH))
-          const rowCount = Math.ceil(displayedPokemons.length / columnCount)
+          const rowCount = Math.ceil(filteredItems.length / columnCount)
           return (
             <Grid<PokemonCellData>
               style={{ height, width }}
@@ -430,7 +459,7 @@ export function PokemonCollectionList(props: {
               rowHeight={CELL_HEIGHT}
               cellComponent={PokemonCell}
               cellProps={{
-                displayedPokemons,
+                filteredItems,
                 columnCount,
                 getItem,
                 filterState: props.filterState,
@@ -446,7 +475,7 @@ export function PokemonCollectionList(props: {
 }
 
 type PokemonCellData = {
-  displayedPokemons: Pkm[]
+  filteredItems: CollectionItem[]
   columnCount: number
   getItem: (index: string) => any
   filterState: CollectionFilterState
@@ -458,7 +487,7 @@ function PokemonCell({
   columnIndex,
   rowIndex,
   style,
-  displayedPokemons,
+  filteredItems,
   columnCount,
   getItem,
   filterState,
@@ -471,8 +500,9 @@ function PokemonCell({
   style: React.CSSProperties
 } & PokemonCellData): React.ReactElement | null {
   const index = rowIndex * columnCount + columnIndex
-  if (index >= displayedPokemons.length) return null
-  const pkm = displayedPokemons[index]
+  if (index >= filteredItems.length) return null
+  const { pkm, isNew, isFavorite, isUnlocked, isUnlockable } =
+    filteredItems[index]
   const pokemonData = getPokemonData(pkm)
   return (
     <div style={style}>
@@ -483,6 +513,10 @@ function PokemonCell({
         item={getItem(pokemonData.index)}
         filterState={filterState}
         setPokemon={setPokemon}
+        isNew={isNew}
+        isFavorite={isFavorite}
+        isUnlocked={isUnlocked}
+        isUnlockable={isUnlockable}
       />
     </div>
   )

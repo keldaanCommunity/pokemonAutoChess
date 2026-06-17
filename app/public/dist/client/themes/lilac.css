@@ -16,3 +16,7 @@ body {
 .lobby h2 {
   text-shadow: 0px 3px 6px black;
 }
+
+#boosters-page .actions .booster-count {
+  color: var(--color-fg-invert);
+}

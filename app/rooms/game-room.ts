@@ -1,6 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
-import { MapSchema } from "@colyseus/schema"
-import { Client, CloseCode, Room } from "colyseus"
+import type { MapSchema } from "@colyseus/schema"
+import { type Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
@@ -16,7 +16,7 @@ import {
 } from "../config"
 import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
@@ -25,9 +25,9 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
-import { IGameUser } from "../models/colyseus-models/game-user"
+import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
 import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
@@ -37,32 +37,34 @@ import UserMetadata, {
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
+  getAdditionalsTier1,
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { getAdditionalsTier1, getSellPrice } from "../models/shop"
+import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IGameHistoryPokemonRecord,
-  IGameHistorySimplePlayer,
-  IGameMetadata,
-  IPokemon,
-  IPokemonEntity,
-  ISimplePlayer,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IGameHistoryPokemonRecord,
+  type IGameHistorySimplePlayer,
+  type IGameMetadata,
+  type IPokemon,
+  type IPokemonEntity,
+  type ISimplePlayer,
   Role,
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { EloRank } from "../types/enum/EloRank"
+import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { Item, Wands } from "../types/enum/Item"
+import { type Item, Wands } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
@@ -71,9 +73,9 @@ import {
   PkmRegionalVariants
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
-import { Synergy } from "../types/enum/Synergy"
+import type { Synergy } from "../types/enum/Synergy"
 import { GameEvent } from "../types/events"
-import { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
@@ -86,9 +88,10 @@ import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp } from "../utils/number"
 import { shuffleArray } from "../utils/random"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
+  OnDevCommand,
   OnDragDropCombineCommand,
   OnDragDropItemCommand,
   OnDragDropPokemonCommand,
@@ -578,7 +581,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
           // already started, presumably a user refreshed page and wants to reconnect to game
           client.send(Transfer.LOADING_COMPLETE)
         } else if (
-          values(this.state.players).every((p) => p.loadingProgress === 100)
+          schemaValues(this.state.players).every(
+            (p) => p.loadingProgress === 100
+          )
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
@@ -604,6 +609,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     )
+
+    this.onMessage(Transfer.DEV, (client, message) => {
+      if (process.env.MODE === "dev") {
+        try {
+          this.dispatcher.dispatch(new OnDevCommand(), message)
+        } catch (error) {
+          logger.error("dev command error", message)
+        }
+      }
+    })
   }
 
   startGame() {
@@ -702,7 +717,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const player = this.state.players.get(client.auth.uid)
       const hasLeftGameBeforeTheEnd =
         player && player.life > 0 && !this.state.gameFinished
-      const otherHumans = values(this.state.players).filter(
+      const otherHumans = schemaValues(this.state.players).filter(
         (p) => !p.isBot && p.id !== client.auth.uid
       )
       if (
@@ -745,7 +760,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
     if (
       !this.state.gameLoaded &&
-      values(this.state.players).every((p) => p.loadingProgress === 100)
+      schemaValues(this.state.players).every((p) => p.loadingProgress === 100)
     ) {
       this.broadcast(Transfer.LOADING_COMPLETE)
       this.startGame()
@@ -755,7 +770,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   async onDispose() {
     logger.info("Dispose Game ", this.roomId)
     this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
-    const players = values(this.state.players)
+    const players = schemaValues(this.state.players)
     players.forEach((player) => {
       clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
     })
@@ -880,7 +895,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.gameMode === GameMode.RANKED) {
           player.titles.add(Title.VANQUISHER)
           const minElo = Math.min(
-            ...values(this.state.players).map((p) => p.elo)
+            ...schemaValues(this.state.players).map((p) => p.elo)
           )
           if (usr.elo === minElo && humans.length >= 8) {
             player.titles.add(Title.OUTSIDER)
@@ -1039,7 +1054,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         newTitlesEarned.forEach((title) => {
           notificationsService.addNotification(player.id, "new_title", title)
           if (
-            TITLES_UNLOCKING_THEMES.includes(title) &&
+            isIn(TITLES_UNLOCKING_THEMES, title) &&
             usr.level >= GADGETS.palette.levelRequired
           ) {
             notificationsService.addNotification(
@@ -1133,13 +1148,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     player.board.forEach((pokemon) => {
       if (
         pokemon.hasEvolution &&
-        pokemon.evolutionRule instanceof CountEvolutionRule
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
-          pokemon,
-          player,
-          this.state.stageLevel
-        )
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player)
         if (pokemonEvolved) {
           hasEvolved = true
         }
@@ -1152,19 +1163,20 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   checkEvolutionsAfterItemAcquired(
     playerId: string,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    itemAcquired: Item
   ): Pokemon | void {
     const player = this.state.players.get(playerId)
     if (!player) return
 
     if (
       pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof ItemEvolutionRule
+      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
     ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
-        this.state.stageLevel
+        itemAcquired
       )
       return pokemonEvolved
     }
@@ -1217,8 +1229,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const pokemon = pokemonsObtained[0]
       const isEvolution =
         pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
       const freeSpace = getFreeSpaceOnBench(player.board)
 
@@ -1244,7 +1256,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
-              ? pkm.evolutionRule.getEvolution(
+              ? EvolutionManager.getEvolution(
                   pkm,
                   player,
                   this.state.stageLevel
@@ -1297,9 +1309,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      player.items.push(item)
       if (isIn(Wands, item)) {
         player.fairyWands.push(item)
+        player.updateFairyWands()
+      } else {
+        player.items.push(item)
       }
     }
 

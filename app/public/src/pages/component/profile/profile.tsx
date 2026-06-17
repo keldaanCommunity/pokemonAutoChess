@@ -1,10 +1,12 @@
 import firebase from "firebase/compat/app"
-import React, { useCallback, useRef, useState } from "react"
+import type React from "react"
+import { useCallback, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
-import { ISuggestionUser, Role, Title } from "../../../../../types"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import { type ISuggestionUser, Role, Title } from "../../../../../types"
 import { debounce } from "../../../../../utils/function"
+import { keys } from "../../../../../utils/object"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   ban,
@@ -113,15 +115,18 @@ export default function Profile() {
           <div className="loading">{t("loading")}</div>
         ) : error ? (
           <div className="error">{error}</div>
+        ) : suggestions.length > 0 ? (
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => {
+              resetSearch()
+              searchById(suggestion.id)
+            }}
+          />
         ) : searchedUser ? (
           <OtherProfileActions
             rightPanel={rightPanel}
             setRightPanel={setRightPanel}
-          />
-        ) : suggestions.length > 0 ? (
-          <SearchResults
-            suggestions={suggestions}
-            onSelect={(suggestion) => searchById(suggestion.id)}
           />
         ) : (
           <MyProfileMenu />
@@ -267,9 +272,9 @@ function OtherProfileActions(props: {
             setProfileRole(e.target.value as Role)
           }}
         >
-          {Object.keys(Role).map((r) => (
+          {keys(Role).map((r) => (
             <option key={r} value={r}>
-              {t("role." + r).toUpperCase()}
+              {t(`role.${r}`).toUpperCase()}
             </option>
           ))}
         </select>

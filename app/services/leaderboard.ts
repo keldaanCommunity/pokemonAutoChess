@@ -1,5 +1,5 @@
 import UserMetadata from "../models/mongo-models/user-metadata"
-import {
+import type {
   ILeaderboardBotInfo,
   ILeaderboardInfo
 } from "../types/interfaces/LeaderboardInfo"

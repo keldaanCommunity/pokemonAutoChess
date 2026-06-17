@@ -1,21 +1,14 @@
 .sprite-tracker {
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.5em;
   height: 100%;
   max-height: none;
   overflow: hidden;
 }
 
-.modal.sprite-tracker-modal {
-  width: min(1280px, 94vw);
-}
-
 .sprite-tracker-modal .modal-body {
-  width: min(1260px, 92vw);
-  height: min(90vh, 860px);
-  max-height: 90vh;
+  height: min(90vh, 960px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -30,50 +23,50 @@
 }
 
 .sprite-tracker .loading {
-  background: rgba(100, 150, 255, 0.1);
-  color: #6496ff;
+  color: var(--color-fg-secondary);
 }
 
 .sprite-tracker .error {
-  background: rgba(255, 100, 100, 0.1);
-  color: #ff6464;
+  color: var(--color-fg-red);
 }
 
 /* Refresh Info */
 .sprite-tracker .refresh-info {
   text-align: center;
-  font-size: 13px;
-  opacity: 0.6;
-  padding: 4px 0;
-}
-
-.sprite-tracker .criteria-info {
-  font-size: 14px;
-  opacity: 0.85;
-  padding: 8px 10px;
-}
-
-.sprite-tracker .criteria-info strong {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
-.sprite-tracker .criteria-info p {
-  margin: 0 0 4px 0;
-  line-height: 1.45;
-}
-
-.sprite-tracker .criteria-info p:last-child {
-  margin-bottom: 0;
+  color: var(--color-fg-secondary);
 }
 
 /* Filters */
 .sprite-tracker .filter-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   align-items: center;
-  padding: 4px 2px;
+  justify-content: flex-end;
+}
+
+.sprite-tracker .filter-container details {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sprite-tracker .filter-container details > div {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  z-index: 2;
+  background: var(--color-bg-secondary);
+  padding: 0.5em;
+  border: var(--border-thin);
+  border-radius: 12px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sprite-tracker .filter-container details .checkbox-container {
+  margin: 0.5em 0;
 }
 
 /* Content */
@@ -141,16 +134,12 @@
   flex-shrink: 0;
 }
 
-.sprite-tracker .entry-info strong {
-  font-family: monospace;
-  font-size: 12px;
-  color: #6496ff;
+.sprite-tracker .entry-index {
+  color: var(--color-fg-secondary);
   white-space: nowrap;
 }
 
 .sprite-tracker .pokemon-name {
-  font-size: 13px;
-  opacity: 0.8;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -158,21 +147,10 @@
 
 .sprite-tracker .entry-title {
   font-weight: 600;
-  opacity: 0.9;
-}
-
-.sprite-tracker .entry-summary {
-  gap: 6px;
 }
 
 .sprite-tracker .entry-kind {
-  font-size: 11px;
-  opacity: 0.65;
-  text-transform: uppercase;
-}
-
-.sprite-tracker .entry-separator {
-  opacity: 0.45;
+  color: var(--color-fg-secondary);
 }
 
 .sprite-tracker .entry-name-link {
@@ -184,37 +162,7 @@
   text-decoration: underline;
 }
 
-.sprite-tracker .entry-name-link:focus-visible {
-  outline: 1px solid rgba(100, 150, 255, 0.7);
-  outline-offset: 2px;
-}
-
 .sprite-tracker .empty-state {
   padding: 32px 16px;
   text-align: center;
-  opacity: 0.6;
-}
-
-/* Scrollbar styling */
-.sprite-tracker::-webkit-scrollbar,
-.sprite-tracker .content::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.sprite-tracker::-webkit-scrollbar-track,
-.sprite-tracker .content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-.sprite-tracker::-webkit-scrollbar-thumb,
-.sprite-tracker .content::-webkit-scrollbar-thumb {
-  background: rgba(100, 150, 255, 0.3);
-  border-radius: 4px;
-}
-
-.sprite-tracker::-webkit-scrollbar-thumb:hover,
-.sprite-tracker .content::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 150, 255, 0.5);
 }

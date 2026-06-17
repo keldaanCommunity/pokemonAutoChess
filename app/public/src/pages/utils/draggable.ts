@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react"
+import { type RefObject, useEffect, useRef, useState } from "react"
 import { clamp } from "../../../../utils/number"
 
 const SIDEBAR_WIDTH = 60
@@ -17,7 +17,7 @@ interface UseDraggableOptions {
 interface UseDraggableReturn {
   position: Position
   isDragging: boolean
-  handleMouseDown: (e: React.MouseEvent, ignoreSelector?: string) => void
+  handlePointerDown: (e: React.PointerEvent, ignoreSelector?: string) => void
   containerRef: RefObject<HTMLDivElement | null>
 }
 
@@ -29,6 +29,7 @@ export function useDraggable(
   const [position, setPosition] = useState<Position>(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
   const dragRef = useRef({
+    activePointerId: null as number | null,
     startMouseX: 0,
     startMouseY: 0,
     startPosX: 0,
@@ -42,7 +43,10 @@ export function useDraggable(
 
   useEffect(() => {
     if (isDragging) {
-      const handleMouseMove = (e: MouseEvent) => {
+      const handlePointerMove = (e: PointerEvent) => {
+        if (dragRef.current.activePointerId !== e.pointerId) {
+          return
+        }
         const dx = e.clientX - dragRef.current.startMouseX
         const dy = e.clientY - dragRef.current.startMouseY
         const proposedLeft = dragRef.current.startLeft + dx
@@ -63,18 +67,29 @@ export function useDraggable(
         setPosition({ x: newX, y: newY })
       }
 
-      const handleMouseUp = () => {
+      const stopDragging = (e?: PointerEvent) => {
+        if (
+          e &&
+          dragRef.current.activePointerId !== null &&
+          dragRef.current.activePointerId !== e.pointerId
+        ) {
+          return
+        }
+
+        dragRef.current.activePointerId = null
         setIsDragging(false)
       }
 
-      window.addEventListener("mousemove", handleMouseMove)
-      window.addEventListener("mouseup", handleMouseUp)
+      window.addEventListener("pointermove", handlePointerMove)
+      window.addEventListener("pointerup", stopDragging)
+      window.addEventListener("pointercancel", stopDragging)
       return () => {
-        window.removeEventListener("mousemove", handleMouseMove)
-        window.removeEventListener("mouseup", handleMouseUp)
+        window.removeEventListener("pointermove", handlePointerMove)
+        window.removeEventListener("pointerup", stopDragging)
+        window.removeEventListener("pointercancel", stopDragging)
       }
     }
-  }, [isDragging])
+  }, [isDragging, margin])
 
   // Clamp position on mount and on resize to ensure it's always on-screen
   useEffect(() => {
@@ -106,14 +121,26 @@ export function useDraggable(
     return () => window.removeEventListener("resize", onResize)
   }, [margin])
 
-  const handleMouseDown = (e: React.MouseEvent, ignoreSelector?: string) => {
+  const handlePointerDown = (
+    e: React.PointerEvent,
+    ignoreSelector?: string
+  ) => {
+    if (!e.isPrimary || (e.pointerType === "mouse" && e.button !== 0)) {
+      return
+    }
+
     // If an ignore selector is provided, check if the click target matches it
     if (ignoreSelector && (e.target as HTMLElement).closest(ignoreSelector)) {
       return
     }
+
+    e.preventDefault()
+    dragRef.current.activePointerId = e.pointerId
+    e.currentTarget.setPointerCapture?.(e.pointerId)
     setIsDragging(true)
     const rect = containerRef.current?.getBoundingClientRect()
     dragRef.current = {
+      ...dragRef.current,
       startMouseX: e.clientX,
       startMouseY: e.clientY,
       startPosX: position.x,
@@ -128,7 +155,7 @@ export function useDraggable(
   return {
     position,
     isDragging,
-    handleMouseDown,
+    handlePointerDown,
     containerRef
   }
 }

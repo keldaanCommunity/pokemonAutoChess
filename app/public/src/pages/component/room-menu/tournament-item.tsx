@@ -1,14 +1,15 @@
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
+import { GADGETS } from "../../../../../config/game/gadgets"
 import { getTournamentStage } from "../../../../../core/tournament-logic"
-import {
+import type {
   TournamentPlayerSchema,
   TournamentSchema
 } from "../../../../../models/colyseus-models/tournament"
 import { average } from "../../../../../utils/number"
-import { entries, values } from "../../../../../utils/schemas"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { schemaEntries, schemaValues } from "../../../../../utils/schemas"
+import { useAppSelector } from "../../../hooks"
 import { participateInTournament } from "../../../network"
 import { formatDate } from "../../utils/date"
 import { cc } from "../../utils/jsx"
@@ -20,7 +21,7 @@ export default function TournamentItem(props: {
   tournament: TournamentSchema
 }) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.network.profile)
   const uid: string = useAppSelector((state) => state.network.uid)
   const participating = props.tournament.players.has(uid)
   const startTime = new Date(props.tournament.startDate).getTime()
@@ -28,12 +29,12 @@ export default function TournamentItem(props: {
   const tournamentStarted = Date.now() > startTime && !tournamentFinished
   const registrationsOpen =
     Date.now() > startTime - TOURNAMENT_REGISTRATION_TIME && !tournamentStarted
-  const players = values(props.tournament.players)
-  const brackets = values(props.tournament.brackets)
+  const players = schemaValues(props.tournament.players)
+  const brackets = schemaValues(props.tournament.brackets)
   const remainingPlayers = players.filter((p) => !p.eliminated)
   const nbStages = Math.max(...players.map((p) => p.ranks.length))
 
-  const sortedPlayers = entries(props.tournament.players).sort(
+  const sortedPlayers = schemaEntries(props.tournament.players).sort(
     ([idA, a], [idB, b]) => {
       if (a.eliminated !== b.eliminated) return a.eliminated ? +1 : -1
       if (a.ranks.length !== b.ranks.length)
@@ -45,7 +46,9 @@ export default function TournamentItem(props: {
           (b.ranks[b.ranks.length - 1] ?? 8)
         )
       }
-      return average(...values(a.ranks)) - average(...values(b.ranks))
+      return (
+        average(...schemaValues(a.ranks)) - average(...schemaValues(b.ranks))
+      )
     }
   )
 
@@ -66,63 +69,79 @@ export default function TournamentItem(props: {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <span>{getTournamentStage(props.tournament)}</span>
           <span>
-            {t("players_remaining")}: {remainingPlayers.length}
+            {t("tournament.players_remaining")}: {remainingPlayers.length}
           </span>
         </div>
       ) : (
         <p>
-          {t("starts_at")}{" "}
+          {t("tournament.starts_at")}{" "}
           {formatDate(new Date(props.tournament.startDate), {
             dateStyle: "long"
           })}
         </p>
       )}
       {!tournamentStarted && !tournamentFinished && (
-        <div className="actions">
-          {participating ? (
-            <button
-              className="participate-btn bubbly green"
-              title={t("cancel_tournament_participation")}
-              disabled={!registrationsOpen}
-              onClick={() => {
-                participateInTournament({
-                  tournamentId: props.tournament.id,
-                  participate: false
-                })
-              }}
-            >
-              {t("participating")}
-            </button>
-          ) : registrationsOpen ? (
-            <button
-              className="participate-btn bubbly blue"
-              title={t("register_tournament_participation")}
-              onClick={() => {
-                participateInTournament({
-                  tournamentId: props.tournament.id,
-                  participate: true
-                })
-              }}
-            >
-              {t("participate")}
-            </button>
-          ) : null}
-        </div>
+        <>
+          {user && user.level < GADGETS.certificate.levelRequired && (
+            <p>
+              {t("tournament.tournament_mode_locked", {
+                requiredLevel: GADGETS.certificate.levelRequired
+              })}
+            </p>
+          )}
+          <div className="actions">
+            {participating ? (
+              <button
+                className="participate-btn bubbly green"
+                title={t("tournament.cancel_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: false
+                  })
+                }}
+              >
+                {t("tournament.participating")}
+              </button>
+            ) : registrationsOpen ? (
+              <button
+                className="participate-btn bubbly blue"
+                title={t("tournament.register_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: true
+                  })
+                }}
+              >
+                {t("tournament.participate")}
+              </button>
+            ) : null}
+          </div>
+        </>
       )}
       <Tabs>
         <TabList>
-          {tournamentStarted && <Tab>{t("brackets")}</Tab>}
+          {tournamentStarted && <Tab>{t("tournament.brackets")}</Tab>}
           {(tournamentStarted || tournamentFinished) && (
-            <Tab>{t("ranking")}</Tab>
+            <Tab>{t("tournament.ranking")}</Tab>
           )}
           {(registrationsOpen || tournamentStarted) && (
             <Tab>
-              {t("participants")} ({players.length})
+              {t("tournament.participants")} ({players.length})
             </Tab>
           )}
         </TabList>
         {!registrationsOpen && !tournamentStarted && (
-          <p>{t("registrations_open_info")}</p>
+          <p>{t("tournament.registrations_open_info")}</p>
         )}
         {tournamentStarted && (
           <TabPanel className="brackets">
@@ -130,7 +149,7 @@ export default function TournamentItem(props: {
               <div className="bracket" key={bracket.name}>
                 <p>{bracket.name}</p>
                 <ul>
-                  {values(bracket.playersId).map((id, i) => (
+                  {schemaValues(bracket.playersId).map((id, i) => (
                     <TournamentPlayer
                       key={"player" + i}
                       playerId={id}
@@ -162,15 +181,17 @@ export default function TournamentItem(props: {
         {(registrationsOpen || tournamentStarted) && (
           <TabPanel className="participants">
             <ul>
-              {entries(props.tournament.players).map(([id, player], i) => (
-                <TournamentPlayer
-                  key={"player" + i}
-                  playerId={id}
-                  player={player}
-                  rank={i + 1}
-                  showScore={false}
-                />
-              ))}
+              {schemaEntries(props.tournament.players).map(
+                ([id, player], i) => (
+                  <TournamentPlayer
+                    key={"player" + i}
+                    playerId={id}
+                    player={player}
+                    rank={i + 1}
+                    showScore={false}
+                  />
+                )
+              )}
             </ul>
           </TabPanel>
         )}

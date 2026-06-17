@@ -1,10 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { GameUser, IGameUser } from "../../../models/colyseus-models/game-user"
-import Message from "../../../models/colyseus-models/message"
-import { IChatV2 } from "../../../types"
-import { EloRank } from "../../../types/enum/EloRank"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type {
+  GameUser,
+  IGameUser
+} from "../../../models/colyseus-models/game-user"
+import type Message from "../../../models/colyseus-models/message"
+import type { IChatV2 } from "../../../types"
+import type { EloRank } from "../../../types/enum/EloRank"
 import { GameMode } from "../../../types/enum/Game"
-import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 
 export interface IUserPreparationState {
   users: IGameUser[]

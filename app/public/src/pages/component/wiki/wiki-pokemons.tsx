@@ -7,7 +7,7 @@ import { getPokemonData } from "../../../../../models/precomputed/precomputed-po
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
@@ -53,7 +53,7 @@ export default function WikiPokemons() {
         {tabs.map((r) => {
           return (
             <Tab key={"title-" + r} style={{ color: RarityColor[Rarity[r]] }}>
-              {t("rarity." + r).toUpperCase()}
+              {t(`rarity.${r}`).toUpperCase()}
             </Tab>
           )
         })}

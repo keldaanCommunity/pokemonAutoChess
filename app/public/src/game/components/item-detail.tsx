@@ -1,3 +1,4 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
@@ -15,6 +16,7 @@ import {
   UnholdableItems
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
+import { entries } from "../../../../utils/object"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
@@ -29,12 +31,13 @@ export function ItemDetailTooltipContent({
   const recipes = useMemo(
     () =>
       ItemComponents.map((c) =>
-        Object.entries(ItemRecipe).find(
+        entries(ItemRecipe).find(
           ([, recipe]) =>
-            (recipe[0] === item && recipe[1] === c) ||
-            (recipe[1] === item && recipe[0] === c)
+            recipe != null &&
+            ((recipe[0] === item && recipe[1] === c) ||
+              (recipe[1] === item && recipe[0] === c))
         )
-      ).filter((r) => r != null),
+      ).filter<[Item, Item[]]>((r): r is [Item, Item[]] => r != null),
     [item]
   )
 
@@ -87,14 +90,14 @@ export function ItemDetailTooltipContent({
       </div>
       <div className="game-item-detail-stats">
         {itemCategoryLabel && <i>{itemCategoryLabel}</i>}
-        {Object.entries(ItemStats[item] ?? {}).map(([stat, value]) => (
+        {entries(ItemStats[item] ?? {}).map(([stat, value]) => (
           <div key={stat}>
             <img
               src={`assets/icons/${stat}.png`}
               alt={stat}
               title={t(`stat.${stat}`)}
             />
-            <span>{formatStat(stat as Stat, value)}</span>
+            <span>{formatStat(stat as Stat, value ?? 0)}</span>
           </div>
         ))}
       </div>
@@ -127,16 +130,18 @@ export function ItemDetailTooltipContent({
           })}
         </div>
       )}
-      <Tooltip
-        id="item-detail-recipes-tooltip"
-        className="custom-theme-tooltip item-detail-tooltip"
-        render={({ content }) => (
-          <ItemDetailTooltipContent
-            item={content as Item}
-            showItemCombinationsTooltip={false}
-          />
-        )}
-      />
+      {showItemCombinationsTooltip && (
+        <Tooltip
+          id="item-detail-recipes-tooltip"
+          className="custom-theme-tooltip item-detail-tooltip"
+          render={({ content }) => (
+            <ItemDetailTooltipContent
+              item={content as Item}
+              showItemCombinationsTooltip={false}
+            />
+          )}
+        />
+      )}
     </div>
   )
 }

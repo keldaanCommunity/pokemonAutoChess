@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
-import { IChatV2 } from "../../../../../types"
+import type { IChatV2 } from "../../../../../types"
 import {
   clearTitleNotificationIcon,
   setTitleNotificationIcon
 } from "../../../../../utils/window"
-import { ChatRoom } from "../../../network"
+import type { ChatRoom } from "../../../network"
 import ChatMessage from "./chat-message"
 
 export default function ChatHistory(props: {

@@ -1,25 +1,25 @@
 import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
+import { type Client, matchMaker } from "colyseus"
 import { randomBytes } from "crypto"
-import { writeHeapSnapshot } from "v8"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
   USERNAME_REGEXP
 } from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
 import { CollectionUtils } from "../../core/collection"
 import { getPendingGame } from "../../core/pending-game-manager"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import { discordService } from "../../services/discord"
 import { notificationsService } from "../../services/notifications"
-import { Emotion, Role, Title, Transfer } from "../../types"
+import { Emotion, Role, type Title, Transfer } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
-import { Language } from "../../types/enum/Language"
+import type { Language } from "../../types/enum/Language"
 import { PkmIndex } from "../../types/enum/Pokemon"
 import { Starters } from "../../types/enum/Starters"
-import {
+import type {
   IPokemonCollectionItemMongo,
   IUserMetadataMongo
 } from "../../types/interfaces/UserMetadata"
@@ -29,7 +29,7 @@ import { logger } from "../../utils/logger"
 import { generateRandomName } from "../../utils/name-generation"
 import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
-import CustomLobbyRoom from "../custom-lobby-room"
+import type CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
@@ -72,14 +72,30 @@ export class OnJoinCommand extends Command<
         // create new user account
         const starterBoosters = 3
         const starterPokemon = pickRandomIn(Starters)
-        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
         const randomName = generateRandomName(starterPokemon)
+        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
+        const starterCollection = new Map<string, IPokemonCollectionItemMongo>()
+        const starterCollectionItem: IPokemonCollectionItemMongo = {
+          id: PkmIndex[starterPokemon],
+          unlocked: Buffer.alloc(5, 0),
+          dust: 0,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        CollectionUtils.unlockEmotion(
+          starterCollectionItem.unlocked,
+          Emotion.NORMAL,
+          false
+        )
+        starterCollection.set(PkmIndex[starterPokemon], starterCollectionItem)
+
         await UserMetadata.create({
           uid: client.auth.uid,
           displayName: randomName,
           avatar: starterAvatar,
           booster: starterBoosters,
-          pokemonCollection: new Map<string, IPokemonCollectionItemMongo>()
+          pokemonCollection: starterCollection
         })
         const newUser: IUserMetadataMongo = {
           uid: client.auth.uid,
@@ -95,7 +111,7 @@ export class OnJoinCommand extends Command<
           eventPoints: 0,
           maxEventPoints: 0,
           eventFinishTime: null,
-          pokemonCollection: new Map<string, IPokemonCollectionItemMongo>(),
+          pokemonCollection: starterCollection,
           booster: starterBoosters,
           titles: [],
           title: "",
@@ -171,19 +187,6 @@ export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
       }
     } catch (error) {
       logger.error(error)
-    }
-  }
-}
-
-export class HeapSnapshotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  execute({ client }: { client: Client }) {
-    const u = this.room.users.get(client.auth.uid)
-    if (u && u.role === Role.ADMIN) {
-      logger.info("writing heap snapshot")
-      writeHeapSnapshot()
     }
   }
 }
@@ -546,6 +549,13 @@ export class JoinOrOpenRoomCommand extends Command<
       }
 
       case GameMode.RANKED: {
+        if (user.level < GADGETS.certificate.levelRequired) {
+          client.send(
+            Transfer.ALERT,
+            `You need to reach level ${GADGETS.certificate.levelRequired} to unlock ranked mode.`
+          )
+          return
+        }
         const userRank = getRank(user.elo)
         let minRank = EloRank.LEVEL_BALL
         let maxRank = EloRank.BEAST_BALL

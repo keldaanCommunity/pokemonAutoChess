@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction, type Slice } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
-import Simulation from "../../../core/simulation"
+import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import Synergies from "../../../models/colyseus-models/synergies"
-import {
+import type {
   Emotion,
   IDps,
   IExperienceManager,
@@ -11,13 +11,13 @@ import {
   ISimulation
 } from "../../../types"
 import { GameMode, GamePhaseState, Team } from "../../../types/enum/Game"
-import { Item } from "../../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
-import { Synergy } from "../../../types/enum/Synergy"
+import type { Item } from "../../../types/enum/Item"
+import type { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
+import type { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
+import type { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
-import { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
-import { entries } from "../../../utils/schemas"
+import type { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
+import { schemaEntries } from "../../../utils/schemas"
 import { getGameScene } from "../pages/game"
 
 export interface GameStateStore {
@@ -192,7 +192,7 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
 
       if (playerToUpdate !== -1) {
         state.players.at(playerToUpdate)!.synergies = new Synergies(
-          new Map(entries(action.payload.value))
+          new Map(schemaEntries(action.payload.value))
         )
       }
     },

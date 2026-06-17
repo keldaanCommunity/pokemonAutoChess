@@ -1,4 +1,4 @@
-import { Room } from "@colyseus/sdk"
+import type { Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import Phaser, { GameObjects, Scene } from "phaser"
 import {
@@ -7,27 +7,27 @@ import {
   getRegionTint,
   RegionDetails
 } from "../../../../config"
-import { DesignTiled } from "../../../../core/design"
+import type { DesignTiled } from "../../../../core/design"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
-import Player from "../../../../models/colyseus-models/player"
+import type Player from "../../../../models/colyseus-models/player"
 import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
-import GameState from "../../../../rooms/states/game-state"
+import type GameState from "../../../../rooms/states/game-state"
 import {
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
+import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
@@ -88,6 +88,8 @@ export default class GameScene extends Scene {
     this.spectate = data.spectate
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
+    globalThis.devcommand = (action: string, ...params: any[]) =>
+      this.room?.send(Transfer.DEV, { action, ...params })
   }
 
   preload() {
@@ -120,7 +122,7 @@ export default class GameScene extends Scene {
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = values(this.room.state.players).map((p) => p.id)
+      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
         this.spectate ? playerUids[0] : this.uid
       ) as Player
@@ -170,9 +172,15 @@ export default class GameScene extends Scene {
           RegionDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
         )
       }
-      //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
+  }
+
+  toggleTilesetAnimation(paused: boolean) {
+    if (!this.map) return
+    this.map.layers.forEach((layer) => {
+      layer.tilemapLayer.setTimerPaused(paused)
+    })
   }
 
   update(time: number, delta: number) {
@@ -224,46 +232,53 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
-    this.input.keyboard!.on(
-      "keydown-" + keybindings.refresh,
-      throttle(() => {
-        playSound(SOUNDS.REFRESH, 0.5)
-        this.refreshShop()
-      }, 300)
-    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
-      this.room?.send(Transfer.LOCK)
-    })
+    if (!this.spectate) {
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.refresh,
+        throttle(() => {
+          playSound(SOUNDS.REFRESH, 0.5)
+          this.refreshShop()
+        }, 300)
+      )
 
-    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
-      this.buyExperience()
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+        this.room?.send(Transfer.LOCK)
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
-      if (this.pokemonDragged != null) return
-      if (this.shopIndexHovered !== null) {
-        this.removeFromShop(this.shopIndexHovered)
-        this.shopIndexHovered = null
-      } else if (
-        this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
-      ) {
-        this.sellPokemon(this.pokemonHovered)
-        this.pokemonHovered = null
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+        this.buyExperience()
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
-      if (this.pokemonHovered) {
-        this.switchBetweenBenchAndBoard(this.pokemonHovered)
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+        if (this.pokemonDragged != null) return
+        if (this.shopIndexHovered !== null) {
+          this.removeFromShop(this.shopIndexHovered)
+          this.shopIndexHovered = null
+        } else if (
+          this.pokemonHovered &&
+          this.pokemonHovered
+            .getBounds()
+            .contains(
+              this.input.activePointer.worldX,
+              this.input.activePointer.worldY
+            )
+        ) {
+          this.sellPokemon(this.pokemonHovered)
+          this.pokemonHovered = null
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+        if (this.pokemonHovered) {
+          this.switchBetweenBenchAndBoard(this.pokemonHovered)
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+        playerClick(this.uid!)
+      })
+    }
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       savePreferences({ cameraLocked: !preference("cameraLocked") })
@@ -275,10 +290,6 @@ export default class GameScene extends Scene {
 
     this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
       cyclePlayers(1)
-    })
-
-    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-      playerClick(this.uid!)
     })
   }
 
@@ -359,10 +370,6 @@ export default class GameScene extends Scene {
       this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-      const sys = this.sys as any
-      if (sys.animatedTiles) {
-        sys.animatedTiles.pause()
-      }
       return
     }
 
@@ -381,13 +388,7 @@ export default class GameScene extends Scene {
       tileset.image?.setFilter(Phaser.Textures.FilterMode.NEAREST)
       map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
     })
-    const sys = this.sys as any
-    if (sys.animatedTiles) {
-      sys.animatedTiles.init(map)
-      if (preference("disableAnimatedTilemap")) {
-        sys.animatedTiles.pause()
-      }
-    }
+    this.toggleTilesetAnimation(preference("disableAnimatedTilemap"))
 
     // update region tint on pokemons
     this.board?.pokemons.forEach((p) => {

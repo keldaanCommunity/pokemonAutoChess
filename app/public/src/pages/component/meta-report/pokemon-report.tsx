@@ -3,18 +3,20 @@ import { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold, RarityColor } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import {
   fetchMetaPokemons,
-  IPokemonStatV2,
-  IPokemonsStatisticV2
+  type IPokemonStatV2,
+  type IPokemonsStatisticV2
 } from "../../../models/pokemons-statistic-v2"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
+import type { PoolType } from "../../../../../types/enum/PoolType"
+import { keys } from "../../../../../utils/object"
 import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
@@ -23,7 +25,7 @@ export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
-  const [pool, setPool] = useState<string>("all")
+  const [pool, setPool] = useState<PoolType | "all">("all")
   const [tier, setTier] = useState<string>("all")
   const [loading, setLoading] = useState<boolean>(true)
   const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
@@ -50,6 +52,8 @@ export function PokemonReport() {
       })
     }))
   }, [metaPokemons, pokemonRankingBy])
+
+  const pools = ["regular", "additional", "regional"] satisfies PoolType[]
 
   return (
     <div id="pokemon-report">
@@ -79,7 +83,7 @@ export function PokemonReport() {
             <option value={"all"}>
               {t("all")} {t("synergies")}
             </option>
-            {Object.keys(Synergy).map((s) => (
+            {keys(Synergy).map((s) => (
               <option value={s} key={s}>
                 {t(`synergy.${s}`)}
               </option>
@@ -92,7 +96,7 @@ export function PokemonReport() {
             <option value={"all"}>
               {t("rarity_label")}: {t("all")}
             </option>
-            {Object.keys(Rarity).map((r) => (
+            {keys(Rarity).map((r) => (
               <option
                 value={r}
                 key={r}
@@ -102,11 +106,14 @@ export function PokemonReport() {
               </option>
             ))}
           </select>
-          <select value={pool} onChange={(e) => setPool(e.target.value)}>
+          <select
+            value={pool}
+            onChange={(e) => setPool(e.target.value as PoolType | "all")}
+          >
             <option value={"all"}>
               {t("pool_label")}: {t("all")}
             </option>
-            {["regular", "additional", "regional"].map((p) => (
+            {pools.map((p) => (
               <option value={p} key={p}>
                 {t(`pool.${p}`)}
               </option>
@@ -129,7 +136,7 @@ export function PokemonReport() {
             value={eloThreshold}
             onChange={(e) => setEloTreshold(e.target.value as EloRank)}
           >
-            {Object.keys(EloRank).map((r) => (
+            {keys(EloRank).map((r) => (
               <option value={r} key={r}>
                 {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
               </option>

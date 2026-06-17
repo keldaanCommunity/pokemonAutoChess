@@ -1,10 +1,10 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
 import { validateBot } from "../../../../../core/bot-logic"
-import { Emotion, PkmWithCustom } from "../../../../../types"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import { Emotion, type PkmWithCustom } from "../../../../../types"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
-import { IBot } from "../../../models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 
 export default function BotAvatar(props: {
   bot: IBot

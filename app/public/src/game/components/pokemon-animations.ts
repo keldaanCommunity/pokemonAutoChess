@@ -2,7 +2,7 @@
   AnimationType,
   AttackSprite,
   HitSprite,
-  PokemonAnimationConfig
+  type PokemonAnimationConfig
 } from "../../../../types/Animation"
 import { Pkm } from "../../../../types/enum/Pokemon"
 
@@ -4293,7 +4293,7 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.BUG_MELEE,
     hitSprite: HitSprite.BUG_HIT
   },
-  [Pkm.VESPIQUEEN]: {
+  [Pkm.VESPIQUEN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot,
@@ -7915,8 +7915,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.RearUp,
-    attackSprite: AttackSprite.WATER_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.WATER_MELEE
   },
   [Pkm.TATSUGIRI_CURLY]: {
     attack: AnimationType.Attack,
@@ -8006,6 +8005,21 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.BUG_MELEE,
     shinyUnavailable: true
   },
+  [Pkm.SKWOVET]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    eat: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.GREEDENT]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot,
+    eat: AnimationType.Charge,
+    attackSprite: AttackSprite.NORMAL_MELEE,
+    shinyUnavailable: true
+  },
   [Pkm.QUAXLY]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Swing,
@@ -8029,5 +8043,25 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Sleep,
     attackSprite: AttackSprite.NORMAL_MELEE
+  },
+  [Pkm.TAROUNTULA]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Attack,
+    attackSprite: AttackSprite.BUG_RANGE,
+    hitSprite: HitSprite.BUG_HIT
+  },
+  [Pkm.SPIDOPS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_RANGE,
+    hitSprite: HitSprite.BUG_HIT
+  },
+  [Pkm.SLITHER_WING]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Swing,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BUG_MELEE
   }
 }

@@ -5,7 +5,7 @@ import {
   getExpeditionLabel,
   getPlayerExpeditions
 } from "../../../../../core/expeditions"
-import { Expedition } from "../../../../../types/enum/Expedition"
+import type { Expedition } from "../../../../../types/enum/Expedition"
 import { useAppSelector, useGameEventResetCountdown } from "../../../hooks"
 import { setEventLeaderboard } from "../../../stores/LobbyStore"
 import { formatDuration } from "../../utils/date"
@@ -162,7 +162,7 @@ export function ExpeditionBox(props: { expedition: Expedition }) {
       </p>
       <div className="expedition-objective">
         <span className="expedition-type">
-          {t("expeditions." + props.expedition.type)}
+          {t(`expeditions.${props.expedition.type}`)}
         </span>
         <p>{addIconsToDescription(getExpeditionLabel(props.expedition))}</p>
         <p className="expedition-rewards">

@@ -16,7 +16,7 @@ import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
 import durations from "../assets/pokemons/durations.json"
-import PokemonSprite from "./components/pokemon"
+import type PokemonSprite from "./components/pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
@@ -317,9 +317,12 @@ export default class AnimationManager {
       case PokemonActionState.WALK:
         return config.walk
       case PokemonActionState.ATTACK:
+      case PokemonActionState.TRAINING:
         return config.attack
       case PokemonActionState.EMOTE:
         return config.emote
+      case PokemonActionState.ABILITY:
+        return config.ability
       case PokemonActionState.IDLE:
       default:
         return config.idle
@@ -372,6 +375,10 @@ export default class AnimationManager {
         PokemonActionState.SLEEP,
         pokemonSprite
       )
+    }
+
+    if (action === PokemonActionState.TRAINING) {
+      pokemonSprite.orientation = Orientation.LEFT
     }
 
     try {

@@ -1,9 +1,9 @@
-import { RoomAvailable } from "@colyseus/sdk"
+import type { RoomAvailable } from "@colyseus/sdk"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { IPreparationMetadata, Role, Transfer } from "../../../../../types"
+import { type IPreparationMetadata, Role, Transfer } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
@@ -49,7 +49,7 @@ export default function RoomMenu() {
         user?.role !== Role.ADMIN &&
         user?.role !== Role.MODERATOR
       ) {
-        const inputPassword = prompt(t("room_is_private"))
+        const inputPassword = prompt(t("room_menu.room_is_private"))
         if (!inputPassword) return
         password = inputPassword
       }

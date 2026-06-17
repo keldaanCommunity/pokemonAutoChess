@@ -1,16 +1,17 @@
-import { ArraySchema } from "@colyseus/schema"
-import React, { useCallback, useEffect, useState } from "react"
+import type { ArraySchema } from "@colyseus/schema"
+import type React from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
 import { SynergyTriggers } from "../../../../../config"
-import {
+import type {
   IGameRecord,
   IPokemonRecord
 } from "../../../../../models/colyseus-models/game-record"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import { GameModeIcon } from "../icons/game-mode-icon"
@@ -113,8 +114,7 @@ export default function GameHistory(props: {
                   rowHeight={dynamicRowHeight}
                   rowComponent={GameHistoryRow}
                   rowProps={{
-                    gameHistory,
-                    t
+                    gameHistory
                   }}
                   onRowsRendered={handleRowsRendered}
                 />
@@ -129,20 +129,19 @@ export default function GameHistory(props: {
 
 type HistoryRowData = {
   gameHistory: IGameRecord[]
-  t: (key: string) => string
 }
 
 function GameHistoryRow({
   index,
   style,
-  gameHistory,
-  t
+  gameHistory
 }: {
   ariaAttributes: object
   index: number
   style: React.CSSProperties
 } & HistoryRowData): React.ReactElement | null {
   const r = gameHistory[index]
+  const { t } = useTranslation()
 
   return (
     <div style={style}>
