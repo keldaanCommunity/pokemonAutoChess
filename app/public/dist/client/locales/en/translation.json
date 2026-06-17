@@ -2441,7 +2441,10 @@
 		"ETHEREAL": "Ethereal",
 		"APPETIZER": "Appetizer",
 		"LUNCH_BREAK": "Lunch Break",
-		"BANQUET": "Banquet"
+		"BANQUET": "Banquet",
+		"TERASTAL": "Terastal",
+		"TERA_BLAST": "Tera Blast",
+		"TERA_STAR_STORM": "Tera Star Storm"
 	},
 	"effect_description": {
 		"STAMINA": "Gain 15 SHIELD. Get a SILK_SCARF.",
@@ -2557,7 +2560,10 @@
 		"ETHEREAL": "Ally team gains 5 SPEED and 10 HP per unique active synergy",
 		"APPETIZER": "Gain a CHEF_HAT. Cook a Signature Dish after every round and feed the STRONGEST ADJACENT ally.",
 		"LUNCH_BREAK": "The Chef cook two dishes and feed the two STRONGEST ADJACENT allies after every round.",
-		"BANQUET": "Gain a second CHEF_HAT."
+		"BANQUET": "Gain a second CHEF_HAT.",
+		"TERASTAL": "+1 to all active synergies levels",
+		"TERA_BLAST": "+2 to all active synergies levels",
+		"TERA_STAR_STORM": "Activates all synergies to their full potential."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossil Stone",
@@ -2677,6 +2683,7 @@
 		"STAR_PIECE": "Star Piece",
 		"REPEAT_BALL": "Repeat Ball",
 		"GOLD_BOW": "Gold Bow",
+		"TERA_ORB": "Tera Orb",
 		"RED_SCALE": "Red Scale",
 		"DAMP_ROCK": "Damp Rock",
 		"ICY_ROCK": "Icy Rock",
@@ -2842,6 +2849,7 @@
 		"AQUATIC_MEMORY": "Aquatic Memory",
 		"DRAGON_MEMORY": "Dragon Memory",
 		"FLORA_MEMORY": "Flora Memory",
+		"STELLAR_MEMORY": "Stellar Memory",
 		"MISSION_ORDER_BLUE": "Mission Order - Level up!",
 		"MISSION_ORDER_RED": "Mission Order - Destroy!",
 		"MISSION_ORDER_GREEN": "Mission Order - Diversify!",
@@ -3007,6 +3015,7 @@
 		"STAR_PIECE": "Gives the holder one additional STAR, which increases the power of their ability.",
 		"REPEAT_BALL": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
 		"GOLD_BOW": "The holder does not count for team size limit.",
+		"TERA_ORB": "The holder replaces their base types with the STELLAR type.",
 		"RED_SCALE": "Increase your passive income by 5 GOLD per round",
 		"DAMP_ROCK": "Counts for 3 towards RAIN. Under RAIN, your team gains +2 PP per second.",
 		"ICY_ROCK": "Counts for 3 towards SNOW. Under SNOW, your team recovers from FREEZE 20% faster and have [5,LK]% additional chance to FREEZE their opponents with their attacks.",
@@ -3118,14 +3127,14 @@
 		"LOVE_SWEET": "Gain 3 permanent DEF",
 		"STRAWBERRY_SWEET": "Gain 3 permanent ATK",
 		"VANILLA_FLAVOR": "Baked with NORMAL FLYING ARTIFICIAL GOURMET allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_VANILLA). $t(passive_description.VANILLA_CREAM)",
-		"RUBY_FLAVOR": "Baked with FIGHTING HUMAN STEEL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)",
+		"RUBY_FLAVOR": "Baked with FIGHTING HUMAN STEEL AMORPHOUS allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY). $t(passive_description.RUBY_CREAM)",
 		"MATCHA_FLAVOR": "Baked with GRASS FLORA POISON GHOST allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MATCHA). $t(passive_description.MATCHA_CREAM)",
 		"MINT_FLAVOR": "Baked with WATER AQUATIC ICE allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_MINT). $t(passive_description.MINT_CREAM)",
 		"LEMON_FLAVOR": "Baked with ELECTRIC BUG FAIRY SOUND allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_LEMON). $t(passive_description.LEMON_CREAM)",
 		"SALTED_FLAVOR": "Baked with ROCK GROUND FOSSIL allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_SALTED). $t(passive_description.SALTED_CREAM)",
 		"RUBY_SWIRL_FLAVOR": "Baked with FIRE WILD FIELD allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RUBY_SWIRL). $t(passive_description.RUBY_SWIRL_CREAM)",
 		"CARAMEL_SWIRL_FLAVOR": "Baked with DARK MONSTER DRAGON allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_CARAMEL_SWIRL). $t(passive_description.CARAMEL_SWIRL_CREAM)",
-		"RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC AMORPHOUS BABY LIGHT allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
+		"RAINBOW_SWIRL_FLAVOR": "Baked with PSYCHIC BABY LIGHT STELLAR allies. Use it on $t(pkm.MILCERY) to evolve into a $t(pkm.ALCREMIE_RAINBOW_SWIRL). $t(passive_description.RAINBOW_SWIRL_CREAM)",
 		"EGG_FOR_SELL": "An Egg sold at Chansey's Daycare",
 		"AMULET_COIN": "+1 GOLD each time the holder knocks out an opponent.\nReduce max interest cap by 10 GOLD.",
 		"GIMMIGHOUL_COIN": "+5 GOLD when obtained.\nIncrease max interest cap by 10 GOLD.",
@@ -3172,6 +3181,7 @@
 		"AQUATIC_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get AQUATIC type.",
 		"DRAGON_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get DRAGON type.",
 		"FLORA_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get FLORA type.",
+		"STELLAR_MEMORY": "Can be equipped on $t(pkm.SILVALLY) to get STELLAR type.",
 		"MISSION_ORDER_PINK": "Complete this mission to earn 30 GOLD:\n get 4 STAR STAR STAR Pokémon on board",
 		"MISSION_ORDER_RED": "Complete this mission to earn 30 GOLD:\n inflict 100 damage to other players",
 		"MISSION_ORDER_BLUE": "Complete this mission to earn 30 GOLD:\n reach level 9",
@@ -3512,7 +3522,8 @@
 		"LIGHT": "Light",
 		"WILD": "Wild",
 		"AMORPHOUS": "Amorphous",
-		"GOURMET": "Gourmet"
+		"GOURMET": "Gourmet",
+		"STELLAR": "Stellar"
 	},
 	"synergy_description": {
 		"NORMAL": "NORMAL Pokémon and their ADJACENT allies gain SHIELD when combat starts, and can craft various scarves.{{additionalInfo}}",
@@ -3551,7 +3562,8 @@
 		"WILD": "WILD Pokémon are only found during PvE encounters stages when synergy is not active (6% base chance). Their attacks have [25,LK]% chance to inflict WOUND for 3 seconds.{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\nCurrent chance to find a WILD Pokémon: {{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS Pokémon are extremely flexible and lack their own shape. Your team gains HP and SPEED by activating a wide variety of synergies.",
-		"GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed ADJACENT allies, giving them various buffs and effects."
+		"GOURMET": "GOURMET Pokémon can be equipped with a CHEF_HAT. Chefs will cook up their Signature Dish between fights and feed ADJACENT allies, giving them various buffs and effects.",
+		"STELLAR": "STELLAR Pokémon are considered to have all types and benefit from the effects of all active synergies"
 	},
 	"title": {
 		"no_title": "No Title",
@@ -3605,6 +3617,7 @@
 		"GYM_TRAINER": "Gym Trainer",
 		"CAMPER": "Camper",
 		"RIVAL": "Rival",
+		"TERASTAL": "Terastal",
 		"TYRANT": "Tyrant",
 		"SURVIVOR": "Survivor",
 		"GAMBLER": "Gambler",
@@ -3695,6 +3708,7 @@
 		"CHOSEN_ONE": "Max Synergy with LIGHT type in a game",
 		"CAMPER": "Max Synergy with FIELD in a game",
 		"RIVAL": "Max Synergy with HUMAN in a game",
+		"TERASTAL": "Max Synergy with STELLAR in a game",
 		"HARLEQUIN": "Have 5 different synergies at once",
 		"TACTICIAN": "Have 10 different synergies at once",
 		"STRATEGIST": "Have 15 different synergies at once",

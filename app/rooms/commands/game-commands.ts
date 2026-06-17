@@ -41,6 +41,7 @@ import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 import { selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
+import { getSynergyStep } from "../../core/synergies"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import type Player from "../../models/colyseus-models/player"
 import { PlayerChoice } from "../../models/colyseus-models/player-choice"
@@ -48,7 +49,6 @@ import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
   getPokemonBaseline
@@ -878,7 +878,7 @@ export class OnDragDropItemCommand extends Command<
       } else if (
         (isIn(SynergyStones, itemCombined) ||
           itemCombined === Item.FRIEND_BOW) &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
+        pokemon.hasSynergy(SynergyGivenByItem[itemCombined])
       ) {
         // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
         player.items.push(itemCombined)
@@ -888,7 +888,7 @@ export class OnDragDropItemCommand extends Command<
     } else {
       if (
         isIn(SynergyStones, item) &&
-        pokemon.types.has(SynergyGivenByItem[item])
+        pokemon.hasSynergy(SynergyGivenByItem[item])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_CANCEL, message)
@@ -1409,7 +1409,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     if (getSynergyStep(player.synergies, Synergy.GROUND) > 0) {
       player.board.forEach((pokemon, pokemonId) => {
         if (
-          pokemon.types.has(Synergy.GROUND) &&
+          pokemon.hasSynergy(Synergy.GROUND) &&
           !isOnBench(pokemon) &&
           !(
             pokemon.items.has(Item.CHEF_HAT) &&
@@ -1611,7 +1611,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (pokemon) {
             const coordinates = getFirstAvailablePositionOnBoard(
               player.board,
-              pokemon.types.has(Synergy.DARK) && pokemon.range === 1
+              pokemon.hasSynergy(Synergy.DARK) && pokemon.range === 1
                 ? 3
                 : pokemon.range
             )
@@ -2049,7 +2049,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = schemaValues(player.board).filter(
-        (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
+        (p) => !isOnBench(p) && p.hasSynergy(Synergy.BABY)
       )
 
       for (const baby of babies) {

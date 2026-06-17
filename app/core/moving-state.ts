@@ -81,7 +81,7 @@ export default class MovingState extends PokemonState {
     let y: number | undefined = undefined
 
     if (
-      pokemon.types.has(Synergy.DARK) &&
+      pokemon.hasSynergy(Synergy.DARK) &&
       pokemon.range === 1 &&
       pokemon.passive !== Passive.GUZZLORD &&
       !pokemon.status.locked

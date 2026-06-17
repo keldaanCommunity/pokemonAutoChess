@@ -13,7 +13,7 @@ export class GrassySurgeStrategy extends AbilityStrategy {
         ally &&
         ally.id !== pokemon.id &&
         pokemon.team === ally.team &&
-        ally.types.has(Synergy.GRASS)
+        ally.hasSynergy(Synergy.GRASS)
       ) {
         ally.addAttack(buff, pokemon, 1, crit)
       }

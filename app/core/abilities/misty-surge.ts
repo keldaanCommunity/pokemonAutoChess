@@ -14,7 +14,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
         ally &&
         ally.id !== pokemon.id &&
         pokemon.team === ally.team &&
-        ally.types.has(Synergy.FAIRY)
+        ally.hasSynergy(Synergy.FAIRY)
       ) {
         ally.addPP(ppGain, pokemon, 1, crit)
         ally.handleHeal(hpGain, pokemon, 1, crit)

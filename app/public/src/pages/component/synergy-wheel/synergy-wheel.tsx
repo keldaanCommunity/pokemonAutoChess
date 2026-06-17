@@ -1,11 +1,9 @@
 import { type Dispatch, type SetStateAction, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { type Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"
 import { Modal } from "../modal/modal"
 import "./synergy-wheel.css"
-
-const SYNERGIES = Object.values(Synergy)
 
 export default function SynergyWheelModal(props: {
   show: boolean
@@ -28,7 +26,7 @@ export default function SynergyWheelModal(props: {
 
     // Generate random results first - ensuring no duplicates
     const newResults: Synergy[] = []
-    const availableSynergies = [...SYNERGIES] // Create a copy to avoid modifying the original
+    const availableSynergies = [...SynergyArray] // Create a copy to avoid modifying the original
 
     for (let i = 0; i < numSynergies; i++) {
       if (availableSynergies.length === 0) break // Safety check
@@ -54,8 +52,8 @@ export default function SynergyWheelModal(props: {
           sequence.push(targetSynergy)
         } else {
           // Fill other positions with random synergies
-          const randomIndex = Math.floor(Math.random() * SYNERGIES.length)
-          sequence.push(SYNERGIES[randomIndex])
+          const randomIndex = Math.floor(Math.random() * SynergyArray.length)
+          sequence.push(SynergyArray[randomIndex])
         }
       }
       sequences.push(sequence)
@@ -135,7 +133,7 @@ export default function SynergyWheelModal(props: {
                   )) ||
                   // Fallback for when sequences aren't ready yet
                   [...Array(20)].map((_, symbolIndex) => {
-                    const synergy = SYNERGIES[symbolIndex % SYNERGIES.length]
+                    const synergy = SynergyArray[symbolIndex % SynergyArray.length]
                     return (
                       <div key={`${synergy}-${symbolIndex}`} className="symbol">
                         <SynergyIcon type={synergy} size="60px" />

@@ -179,6 +179,10 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
+  hasSynergy(synergy: Synergy) {
+    return this.types.has(synergy) || this.types.has(Synergy.STELLAR)
+  }
+
   onItemGiven(item: Item, player: Player) {
     // called after giving an item to the mon
   }
@@ -238,14 +242,14 @@ export class Pokemon extends Schema implements IPokemon {
 
     if (originalVariant) {
       const commonTypes = schemaValues(originalVariant.types).filter((t) =>
-        this.types.has(t)
+        this.hasSynergy(t)
       )
       if (commonTypes.some((t) => regionSynergies.includes(t))) {
         return false // ignore variant if map has the synergy of the original variant
       }
     }
 
-    return regionSynergies.some((s) => this.types.has(s))
+    return regionSynergies.some((s) => this.hasSynergy(s))
   }
 
   addItem(item: Item, player: Player) {
@@ -286,6 +290,14 @@ export class Pokemon extends Schema implements IPokemon {
       if (synergyRemoved && otherSynergyItemsHeld.length === 0) {
         if (nativeTypes.has(synergyRemoved) === false) {
           this.types.delete(synergyRemoved)
+        }
+        if (synergyRemoved === Synergy.STELLAR) {
+          this.types.delete(synergyRemoved)
+          // give back native types removed by Stellar
+          this.types = new SetSchema([
+            ...nativeTypes,
+            ...schemaValues(this.types)
+          ])
         }
         if (this.passive === Passive.RKS_SYSTEM) {
           const memory = MemoryDiscsBySynergy[synergyRemoved]
@@ -10124,6 +10136,7 @@ export class TypeNull extends Pokemon {
         case Synergy.AQUATIC:
           return Pkm.SILVALLY_WATER
         case Synergy.FIELD:
+        case Synergy.STELLAR:
         default:
           return Pkm.SILVALLY
       }

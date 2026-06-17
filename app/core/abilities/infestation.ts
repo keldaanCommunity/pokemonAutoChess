@@ -19,14 +19,15 @@ export class InfestationStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const numberOfBugAllies = board.cells.filter(
       (entity) =>
-        entity && entity.team === pokemon.team && entity.types.has(Synergy.BUG)
+        entity && entity.team === pokemon.team && entity.hasSynergy(Synergy.BUG)
     ).length
-    const damage = numberOfBugAllies * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
+    const damage =
+      numberOfBugAllies * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     if (pokemon.player && pokemon.count.ult === 1) {
       const bugsOnBench = schemaValues(pokemon.player?.board).filter(
-        (p) => p && p.types.has(Synergy.BUG) && isOnBench(p)
+        (p) => p && p.hasSynergy(Synergy.BUG) && isOnBench(p)
       )
       const mostPowerfulBug = getStrongestUnit(bugsOnBench)
       if (mostPowerfulBug) {

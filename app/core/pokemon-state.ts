@@ -51,7 +51,7 @@ export default abstract class PokemonState {
       let critChance = pokemon.critChance / 100
       if (
         pokemon.player?.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY)
+        pokemon.hasSynergy(Synergy.FAIRY)
       ) {
         const distance = distanceM(
           pokemon.positionX,
@@ -131,7 +131,7 @@ export default abstract class PokemonState {
         damage = 0
       }
 
-      if (isAttackSuccessful && pokemon.types.has(Synergy.FAIRY)) {
+      if (isAttackSuccessful && pokemon.hasSynergy(Synergy.FAIRY)) {
         const { takenDamage, death } = applyWandEffects(
           pokemon,
           target,
@@ -230,7 +230,9 @@ export default abstract class PokemonState {
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
         const stoneEdgeMult = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
-        physicalDamage += Math.round(pokemon.def * (stoneEdgeMult + pokemon.ap / 100))
+        physicalDamage += Math.round(
+          pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
+        )
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -818,7 +820,7 @@ export default abstract class PokemonState {
     attacker: PokemonEntity | null,
     board: Board,
     attackType: AttackType
-  ) {    
+  ) {
     pokemon.team = pokemon.baseTeam
     pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
@@ -941,7 +943,7 @@ export default abstract class PokemonState {
           pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (
-          pokemon.types.has(Synergy.GROUND) === false &&
+          pokemon.hasSynergy(Synergy.GROUND) === false &&
           pokemon.items.has(Item.SAFETY_GOGGLES) === false
         ) {
           pokemon.handleDamage({
@@ -1031,7 +1033,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.hasSynergy(Synergy.ROCK) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
@@ -1046,8 +1048,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !pokemon.types.has(Synergy.STEEL) &&
+      !pokemon.hasSynergy(Synergy.FLYING) &&
+      !pokemon.hasSynergy(Synergy.STEEL) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
@@ -1062,7 +1064,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
-      !pokemon.types.has(Synergy.POISON) &&
+      !pokemon.hasSynergy(Synergy.POISON) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.status.triggerPoison(1000, pokemon, undefined)
@@ -1070,7 +1072,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
-      !pokemon.types.has(Synergy.ICE) &&
+      !pokemon.hasSynergy(Synergy.ICE) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
@@ -1086,7 +1088,9 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
-      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
+      !(
+        pokemon.hasSynergy(Synergy.FIRE) || pokemon.hasSynergy(Synergy.FLYING)
+      ) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
