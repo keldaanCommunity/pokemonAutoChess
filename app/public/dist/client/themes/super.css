@@ -4,6 +4,10 @@
   --color-bg-tertiary: #334167;
 }
 
+body {
+  background-image: url("/assets/theme/super/checkerboard.svg");
+}
+
 .custom-bg {
   background-image: url("/assets/theme/super/custombg.jpg");
   background-position-x: center;

@@ -5,6 +5,10 @@
   --color-bg-accent: #b37b4d;
 }
 
+body {
+  background-image: url("/assets/theme/forest/checkerboard.svg");
+}
+
 .custom-bg {
   /*  background-image: url("/assets/theme/autumn/custombg.jpg");
   background-position-x: center;*/
