@@ -3297,7 +3297,7 @@
 		"HISUIAN_TYPHLOSION": "此宝可梦对处于BURN或SILENCE的目标额外造成20%的伤害。",
 		"PICKUP": "若此宝可梦没有携带任何道具，战斗开始时随机携带一件。",
 		"CORSOLA": "$t(pkm.CORSOLA)被击倒后进化为$t(pkm.GALAR_CORSOLA)。",
-		"CELEBI": "$t(pkm.CELEBI)每次释放$t(ability.TIME_TRAVEL)时，玩家恢复1点HP。",
+		"CELEBI": "$t(pkm.CELEBI)每次释放$t(ability.TIME_TRAVEL)时，玩家恢复1点HP。\n你已通过此法恢复了{{stacks}}点HP。",
 		"GIMMIGHOUL": "$t(pkm.GIMMIGHOUL)似乎需要99 GOLD……",
 		"GHOLDENGO": "每场战斗开始前，若玩家持有至少50 GOLD，本场战斗中$t(pkm.GHOLDENGO)全程处于RUNE_PROTECT。",
 		"METEOR": "$t(pkm.MINIOR)在其流星和核心的样子之间切换。在流星的样子下，每次攻击提升[5,SP]点SPEED。\n核心的样子的攻击会对目标及ADJACENT宝可梦施加额外效果——\n浅蓝色：额外造成[100,100,100,200,SP]%的SPECIAL\n红色：额外造成[150,150,150,300,SP]%的PHYSICAL\n橙色：额外造成[50,50,50,100,SP]%的TRUE\n绿色：为ADJACENT我方宝可梦恢复造成伤害量的[100,100,100,200,SP]%",
@@ -3312,7 +3312,7 @@
 		"ALIEN_DNA": "$t(pkm.DEOXYS)会因为METEORITE而改变形态。",
 		"BERRY_EATER": "每当此宝可梦攻击目标时，偷取目标所有树果并食用之。",
 		"TOXIC_BOOST": "此宝可梦受到的中毒伤害降低50%，且处于POISONNED时提升10点ATK。",
-		"GUZZLORD": "恶食大王太重又太贪吃了，无法像其他DARK宝可梦一样跳跃，也不会在携带CHEF_HAT时为其他宝可梦制作料理。若携带CHEF_HAT，则击倒宝可梦时永久提升10点最大HP和5点AP。若至少激活了GOURMET 4，此效果翻倍。",
+		"GUZZLORD": "恶食大王太重又太贪吃了，无法像其他DARK宝可梦一样跳跃，也不会在携带CHEF_HAT时为其他宝可梦制作料理。若携带CHEF_HAT，则击倒宝可梦时永久提升10点最大HP和5点AP。若至少激活了GOURMET 4，此效果翻倍。\n当前通过此被动获得的增幅层数：{{stacks}}",
 		"BURMY": "需要3只相同蓑衣的结草儿才能进化为结草贵妇。若在第20轮移动到了一个没有对应蓑衣的地区，结草儿会进化为绅士蛾。",
 		"PSYDUCK": "受到攻击时有[10,LK]%的概率陷入CONFUSION。此宝可梦每次陷入CONFUSION时，提升100点AP。",
 		"BLOODMOON": "在BLOODMOON中切换形态。",
@@ -3551,7 +3551,7 @@
 		"WILD": "若共鸣未激活，WILD宝可梦只会在野生对战轮次出现（基础概率为6%）。他们的攻击有[25,LK]%的概率让目标陷入WOUND 3秒。{{additionalInfo}}",
 		"WILD_ADDITIONAL": "\n\n当前发现WILD宝可梦的概率：{{wildChance}}%",
 		"AMORPHOUS": "AMORPHOUS宝可梦极为善于适应，自身形状不定。所有我方宝可梦能根据当前具有的不同共鸣种类数提升HP和SPEED。",
-		"GOURMET": "GOURMET宝可梦能够携带CHEF_HAT，成为厨师。厨师会在战斗准备期间制作其专属料理，并喂给ADJACENT我方宝可梦，使其获得多种多样的增益和效果。"
+		"GOURMET": "GOURMET宝可梦能够携带CHEF_HAT，成为厨师。厨师会在战斗准备期间制作其专属料理，并喂给ADJACENT我方宝可梦，使其获得多种多样的增幅和效果。"
 	},
 	"title": {
 		"no_title": "不使用头衔",
@@ -4683,7 +4683,7 @@
 			"berries": "树果",
 			"berries_description": "当GRASS共鸣生效时，你可以点击形象附近的果树来收获树果。",
 			"dishes": "料理",
-			"dishes_description": "GOURMET宝可梦中选定的厨师能够制作食物，为一只宝可梦提供持续一轮的强大增益。",
+			"dishes_description": "GOURMET宝可梦中选定的厨师能够制作食物，为一只宝可梦提供持续一轮的强大增幅。",
 			"fishing_rods": "钓鱼竿",
 			"fishing_rods_description": "钓鱼竿用于在每轮玩家对战结束后钓起一只WATER宝可梦。",
 			"mulch": "肥料",
