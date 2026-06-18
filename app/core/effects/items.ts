@@ -212,6 +212,15 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
   }
 )
 
+export const pokemonomiconOnDamageEffect = new OnDamageDealtEffect(
+  ({ attackType, target, pokemon }) => {
+    if (attackType === AttackType.SPECIAL) {
+      target.status.triggerBurn(3000, target, pokemon)
+      target.addSpecialDefense(-1, pokemon, 0, false)
+    }
+  }
+)
+
 export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
@@ -954,6 +963,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
+
+  [Item.POKEMONOMICON]: [pokemonomiconOnDamageEffect],
 
   [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
