@@ -336,7 +336,9 @@ export function GamePokemonDetail(props: {
         <div className="game-pokemon-detail-passive">
           <p>
             {addIconsToDescription(
-              t(`passive_description.${pokemon.passive}`),
+              t(`passive_description.${pokemon.passive}`, {
+                stacks: pokemon.stacks
+              }),
               {
                 ap: pokemon.ap,
                 luck: pokemon.luck,

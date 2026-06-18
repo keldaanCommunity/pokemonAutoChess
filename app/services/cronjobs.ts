@@ -21,6 +21,7 @@ import { GameMode } from "../types/enum/Game"
 import { GameEvent } from "../types/events"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
+import { logPreviousDayBoosterCreationStats } from "./booster-monitor"
 import { fetchMetaReports } from "./meta"
 import { notificationsService } from "./notifications"
 import { refreshSpriteGapData } from "./sprite-gap-scanner"
@@ -60,6 +61,12 @@ export function initCronJobs(isMainThread: boolean) {
       cronTime: "50 8 * * *", // every day at 8:50am
       timeZone: "Europe/Paris",
       onTick: () => notificationsService.cleanupOldNotifications(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "10 0 * * *", // every day at 00:10 UTC
+      timeZone: "UTC",
+      onTick: () => logPreviousDayBoosterCreationStats(),
       start: true
     })
     CronJob.from({
