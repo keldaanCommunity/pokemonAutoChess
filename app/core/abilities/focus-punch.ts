@@ -36,39 +36,49 @@ export class FocusPunchStrategy extends AbilityStrategy {
           }
         })
         pokemon.broadcastAbility({ skill: "FOCUS_PUNCH" })
-        if (farthestEmptyCell != null && target.canBeMoved) {
-          const targetX = target.positionX
-          const targetY = target.positionY
-          const willEject =
-            !blocked &&
-            !target.status.resurrection &&
-            !target.status.magicBounce &&
-            !target.status.protect
-          if (willEject) {
-            // eject from the board
-            pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
-            target.cooldown = 9999
-            target.handleSpecialDamage(
-              9999,
-              board,
-              AttackType.TRUE,
-              pokemon,
-              crit
-            )
-          } else {
-            const { x, y } = farthestEmptyCell as Cell
-            target.moveTo(x, y, board, true)
-            const damageMultiplier = [5, 5, 5, 10][pokemon.stars - 1] ?? 10
-            const damage = damageMultiplier * pokemon.atk
-            target.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+
+        const canBeMoved = farthestEmptyCell != null && target.canBeMoved
+        const willEject =
+          canBeMoved &&
+          !blocked &&
+          !target.status.resurrection &&
+          !target.status.magicBounce &&
+          !target.status.protect
+
+        if (willEject) {
+          // eject from the board
+          pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
+          target.cooldown = 9999
+          const { death } = target.handleSpecialDamage(
+            9999,
+            board,
+            AttackType.TRUE,
+            pokemon,
+            crit
+          )
+          if (!death) {
+            // force death even with shiny charm
+            pokemon.state.triggerDeath(target, pokemon, board, AttackType.TRUE)
           }
-          pokemon.moveTo(targetX, targetY, board, true)
+        } else {
+          // push as far as possible
+          const damageMultiplier = [5, 5, 5, 10][pokemon.stars - 1] ?? 10
+          const damage = damageMultiplier * pokemon.atk
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+
+          if (canBeMoved && farthestEmptyCell) {
+            const { x, y } = farthestEmptyCell as Cell
+            const initialTargetX = target.positionX
+            const initialTargetY = target.positionY
+            target.moveTo(x, y, board, true)
+            pokemon.moveTo(initialTargetX, initialTargetY, board, true)
+          }
         }
       }, 900)
     )
