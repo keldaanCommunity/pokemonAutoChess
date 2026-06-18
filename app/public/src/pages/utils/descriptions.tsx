@@ -50,9 +50,9 @@ export function addIconsToDescription(
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
-  return descriptionParts.map((f, i) => {
+  return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
-    let d: ReactElement | null = null
+    let icon: ReactElement | null = null
     const isAtStartOfSentence =
       i === 0 || descriptionParts[i - 1].trim().endsWith(".")
     const capitalize = (s: string) =>
@@ -60,7 +60,7 @@ export function addIconsToDescription(
 
     if (token) {
       if (token === "GOLD") {
-        d = (
+        icon = (
           <img
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
@@ -68,7 +68,7 @@ export function addIconsToDescription(
           />
         )
       } else if (token === "STAR") {
-        d = (
+        icon = (
           <img
             className="description-icon icon-star"
             src="/assets/ui/star.svg"
@@ -76,7 +76,7 @@ export function addIconsToDescription(
           />
         )
       } else if (isIn(DamageTypes, token)) {
-        d = (
+        icon = (
           <span
             className={
               token === Damage.PHYSICAL
@@ -90,14 +90,14 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Stats, token)) {
-        d = (
+        icon = (
           <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
         )
       } else if (isIn(DocumentedStatuses, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon status"
             title={t(`status_description.${token}`)}
@@ -113,7 +113,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Weathers, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon weather"
             title={t(`weather_description.${token}`)}
@@ -123,7 +123,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Items, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon item"
             title={t(`item_description.${token}`)}
@@ -133,14 +133,14 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Synergies, token)) {
-        d = (
+        icon = (
           <span className="description-icon synergy">
             <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
       } else if (isIn(TechnicalTerms, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon technical-term"
             title={t(`technical_terms_definitions.${token}`)}
@@ -174,7 +174,7 @@ export function addIconsToDescription(
             ? [array[params.stars - 1]] // only show relevant tier
             : array.slice(0, maxTier) // show tier scaling
 
-        d = (
+        icon = (
           <span
             className={cc("description-icon", {
               "scales-ap": scaleType === "AP",
@@ -233,10 +233,24 @@ export function addIconsToDescription(
       }
     }
 
+    const boldParts = part.split(/\*\*(.+?)\*\*/g)
+    const content =
+      boldParts.length > 1
+        ? boldParts.map((part, j) =>
+            j % 2 === 1 ? (
+              <strong key={j} className="description-important">
+                {part}
+              </strong>
+            ) : (
+              part
+            )
+          )
+        : part
+
     return (
       <React.Fragment key={i}>
-        {d}
-        {f}
+        {icon}
+        {content}
       </React.Fragment>
     )
   })

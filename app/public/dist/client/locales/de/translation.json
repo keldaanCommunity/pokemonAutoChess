@@ -2208,7 +2208,7 @@
 		"DRILL_RUN": "Stürmt wie ein Bohrer durch das Ziel, verursacht [15,30,60,120,SP] TRUE und tauscht die Position. Befindet sich dahinter in derselben Richtung ein weiteres Ziel, wird die Fähigkeit sofort erneut auf dieses Ziel angewendet. Kann standardmäßig kritisch treffen.",
 		"ROCK_ARTILLERY": "Wirft [10,15,25,50] Steine nahe zufälligem Gegnern, die beim drauftreten [20,30,40,80,SP] SPECIAL zufügen.",
 		"ZING_ZAP": "Roll hinter das Ziel und verursacht [30,60,90,180,SP] SPECIAL und FLINCH für 3 Sekunden. Wenn das Ziel unter PARALYSIS leidet, erzeugt es zusätlich [10,20,40,80,SP] SHIELD",
-		"NO_RETREAT": "Erhalte 1 ATK, 1 DEF, 1 SPE_DEF und 5 SPEED pro Legios auf deinem team. Untergebene tacklen das Ziel jeweils für [20,20,20,40,SP] SPECIAL.",
+		"NO_RETREAT": "Erhalte 1 DEF und 1 SPE_DEF pro Legios auf deinem team. Untergebene tacklen das Ziel jeweils für [20,20,20,40,SP] SPECIAL.",
 		"TACKLE": "Füge dem Ziel [20,40,60,120,SP] SPECIAL zu",
 		"STATIC_SHOCK": "Füge dem Ziel [30,50,70,100,SP] SPECIAL zu und erhalte [10,20,30,60,SP] SHIELD pro benachbartes ELECTRIC Pokémon."
 	},

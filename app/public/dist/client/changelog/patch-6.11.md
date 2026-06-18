@@ -29,6 +29,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Sweet Scent (Chikorita, Swirlix): SPE_DEF debuff: 6 → 4/6/8/10 ; SPEED debuff: 12 → 10/12/15/20
 - Tail Glow (Volbeat): AP buff 50 → 30
 
+- Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
 
 # Changes to Synergies
 

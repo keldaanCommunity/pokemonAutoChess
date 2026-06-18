@@ -2230,7 +2230,7 @@
 		"DRILL_PECK": "Avança até o alvo como uma broca, causando [30,60,120,240,SP] de SPECIAL e trocando de posição. Se houver outro alvo atrás na mesma direção, lança a habilidade novamente nesse alvo imediatamente.",
 		"ROCK_ARTILLERY": "Lança [10,15,25,50] pedras em inimigos aleatórios, cada uma caindo aleatoriamente em seu alvo ou em um espaço ADJACENT, cada uma causando [20,30,40,80,SP] de SPECIAL.",
 		"ZING_ZAP": "Rola para trás do alvo, causando [30,60,90,180,SP] de SPECIAL e aplicando FLINCH por 3 segundos. Se o alvo sofrer de PARALYSIS, ganha [10,20,40,80,SP] de SHIELD.",
-		"NO_RETREAT": "Ganhe 1 ATK, 1 DEF, 1 SPE_DEF e 5 SPEED para cada Falinks na sua equipe. Os soldados atacam o alvo causando [20,20,20,40,SP] de SPECIAL cada.",
+		"NO_RETREAT": "Ganhe 1 DEF e 1 SPE_DEF para cada Falinks na sua equipe. Os soldados atacam o alvo causando [20,20,20,40,SP] de SPECIAL cada.",
 		"TACKLE": "Inflinge [20,40,60,120,SP] de SPECIAL ao alvo.",
 		"STATIC_SHOCK": "Causa [30,50,70,100,SP] de SPECIAL ao alvo e ganha [10,20,30,60,SP] de SHIELD para cada Pokémon ELECTRIC ADJACENT, cura [10,20,30,60,SP] de HP para cada Pokémon FAIRY ADJACENT.",
 		"SAND_SPIT": "Cospe areia nos 3 Pokémon inimigos à frente do usuário, causando [30,60,120,240,SP] de SPECIAL e aplicando BLINDED por 2 segundos.",
