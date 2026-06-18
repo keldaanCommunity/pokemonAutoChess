@@ -1836,7 +1836,7 @@
 		"PSYBEAM": "Infliggi [25,50,100,SP] danni speciali a tutti i Pokèmon nemici dietro il bersaglio, con il [50,LK]% di possibilità di infliggere CONFUSION per 4 secondi.",
 		"DIVE": "Si tuffa sott'acqua e ottieni [15,30,60] SHIELD e riappare nel mezzo della squadra nemica, infliggendo [10,20,40,SP] SPECIAL a tutte le unità adiacenti.",
 		"SPIKY_SHIELD": "Per [3,5,10] secondi, i Pokèmon che attaccano in mischia l'utilizzatore ricevono WOUND e gli viene inflitto SPECIAL pari al [60,80,100,SP]% della DEF attuale dell'utilizzatore.",
-		"FUTURE_SIGHT": "Infliggi [15,30,60,SP] SPECIAL a 5 Pokèmon nemici.",
+		"FUTURE_SIGHT": "Infliggi [12,25,50,SP] SPECIAL a 5 Pokèmon nemici.",
 		"FAKE_TEARS": "Infligge [5,10,15,SP] SPECIAL all'intera squadra nemica e causa ARMOR_BREAK per 3 secondi.",
 		"SPARKLING_ARIA": "Infliggi [15,25,50,SP] SPECIAL al bersaglio e ai nemici adiacenti. Se gli alleati adiacenti sono sotto lo status BURN, lo status viene curato.",
 		"DRAGON_DARTS": "Lancia 3 freccette che infliggono [10,20,40,SP] SPECIAL al bersaglio. Se il bersaglio muore, recupera 40 PP.",
