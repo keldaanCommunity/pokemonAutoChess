@@ -16972,7 +16972,7 @@ export class Fletchling extends Pokemon {
   speed = 65
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -16988,7 +16988,7 @@ export class Fletchinder extends Pokemon {
   speed = 65
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -17003,7 +17003,7 @@ export class Talonflame extends Pokemon {
   speed = 65
   def = 14
   speDef = 14
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -17235,7 +17235,7 @@ export class Litten extends Pokemon {
   speed = 44
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARK_LARIAT
 }
@@ -17250,7 +17250,7 @@ export class Torracat extends Pokemon {
   speed = 44
   def = 12
   speDef = 12
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARK_LARIAT
 }
@@ -17264,7 +17264,7 @@ export class Incineroar extends Pokemon {
   speed = 44
   def = 16
   speDef = 16
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARK_LARIAT
 }
