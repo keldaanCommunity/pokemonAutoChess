@@ -941,11 +941,14 @@ export class MiniGame {
     }
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
+      const candidateMissions = MissionOrders.filter((m) =>
+        state.shinyEncounter ? m !== Item.MISSION_ORDER_GOLD : true
+      )
       this.alivePlayers.forEach((player) => {
         player.choices.push(
           new PlayerChoice({
             type: "mission_order",
-            items: pickNRandomIn(MissionOrders, 3)
+            items: pickNRandomIn(candidateMissions, 3)
           })
         )
       })

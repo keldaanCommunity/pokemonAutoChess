@@ -23,7 +23,6 @@ import {
   SynergyTriggers,
   USERNAME_REGEXP
 } from "./config"
-import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
@@ -47,7 +46,8 @@ import {
 } from "./services/bots"
 import {
   buyEmotionForUser,
-  changeSelectedEmotionForUser
+  changeSelectedEmotionForUser,
+  migrateShardsOfAltForms
 } from "./services/collection"
 import { getLeaderboard } from "./services/leaderboard"
 import {

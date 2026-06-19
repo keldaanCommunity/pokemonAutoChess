@@ -269,6 +269,7 @@
 
 #wiki-ability .my-box p {
   font-size: 0.8em;
+  white-space: pre-wrap;
 }
 
 #wiki-ability img.item {

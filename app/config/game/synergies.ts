@@ -273,11 +273,11 @@ export const GoldenEggItems = [
   Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.EVIOLITE,
-  Item.WHITE_FLUTE,
+  Item.GOLD_MASK,
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD,
+  Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW
 ] satisfies ShinyItem[]

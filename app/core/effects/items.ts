@@ -1,8 +1,10 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -41,12 +43,11 @@ import {
 } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { DishByPkm } from "../dishes"
-import { ConditionBasedEvolutionRule } from "../evolution-rules"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
-import { getUnitScore } from "../unit-score";
+import { getUnitScore } from "../unit-score"
 import {
   BeforeAttackEffect,
   type Effect,
@@ -211,6 +212,15 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
   }
 )
 
+export const pokemonomiconOnDamageEffect = new OnDamageDealtEffect(
+  ({ attackType, target, pokemon }) => {
+    if (attackType === AttackType.SPECIAL) {
+      target.status.triggerBurn(3000, target, pokemon)
+      target.addSpecialDefense(-1, pokemon, 0, false)
+    }
+  }
+)
+
 export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
@@ -350,7 +360,10 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
+      substitute.evolutionRule = {
+        type: EvolutionRuleType.STATE,
+        condition: () => false
+      } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
@@ -951,6 +964,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
 
+  [Item.POKEMONOMICON]: [pokemonomiconOnDamageEffect],
+
   [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
   [Item.STICKY_BARB]: [
@@ -1299,7 +1314,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
+      const evolution = EvolutionManager.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
@@ -1309,11 +1324,33 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      pokemon.afterEvolve({
+      const additionalArgs: any[] = []
+      if (pokemonEvolved.evolutionRule.type === EvolutionRuleType.ITEM) {
+        additionalArgs.push(item)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.MONEY
+      ) {
+        additionalArgs.push(player.money)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.PLACEMENT
+      ) {
+        additionalArgs.push(player.board)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STACK
+      ) {
+        additionalArgs.push(pokemonEvolved.stacks)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STATE
+      ) {
+        additionalArgs.push(room.state)
+      }
+
+      EvolutionManager.afterEvolve(
         pokemonEvolved,
-        pokemonsBeforeEvolution: [pokemon],
-        player
-      })
+        pokemon,
+        player,
+        ...additionalArgs
+      )
 
       pokemonEvolved.items.add(item)
       removeInArray(player.items, item)
@@ -1321,9 +1358,21 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon)
+      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
+    })
+  ],
+
+  [Item.STAR_PIECE]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.stars = max(5)(pokemon.stars + 1)
+      if (pokemon.stars === 5 && pokemon.player) {
+        pokemon.player.titles.add(Title.FIVE_STARS)
+      }
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.stars = min(1)(pokemon.stars - 1)
     })
   ],
 

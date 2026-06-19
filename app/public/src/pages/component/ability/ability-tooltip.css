@@ -87,3 +87,8 @@ h2 .description-icon > img {
   color: var(--color-fg-secondary);
   font-weight: 500;
 }
+
+.description-important {
+  font-weight: bold;
+  color: var(--color-fg-red);
+}

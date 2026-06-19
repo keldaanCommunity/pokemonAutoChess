@@ -115,11 +115,11 @@ export enum Item {
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
   RED_SCALE = "RED_SCALE",
-  WHITE_FLUTE = "WHITE_FLUTE",
+  GOLD_MASK = "GOLD_MASK",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
   SACRED_ASH = "SACRED_ASH",
-  COMET_SHARD = "COMET_SHARD",
+  STAR_PIECE = "STAR_PIECE",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
   DAMP_ROCK = "DAMP_ROCK",
@@ -653,11 +653,11 @@ export const ShinyItems = [
   Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.EVIOLITE,
-  Item.WHITE_FLUTE,
+  Item.GOLD_MASK,
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD,
+  Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.RED_SCALE
@@ -761,7 +761,10 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.STEEL_GEM,
   Item.DRAGON_GEM,
   Item.POISON_GEM,
-  Item.GHOST_GEM
+  Item.GHOST_GEM,
+  Item.FIELD_GEM,
+  Item.GROUND_GEM,
+  Item.AMORPHOUS_GEM
 ] satisfies SynergyGem[]
 
 export const ToolsBuried: Tool[] = [
