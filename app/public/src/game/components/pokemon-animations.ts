@@ -2271,22 +2271,22 @@ export const PokemonAnimations: {
   },
   [Pkm.BUDEW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSELIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSERADE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },

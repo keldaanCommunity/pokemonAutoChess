@@ -30,6 +30,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
+- New visual animations for Budew line
 
 # Changes to Synergies
 
