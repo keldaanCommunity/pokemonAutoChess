@@ -697,7 +697,9 @@ export default abstract class PokemonState {
         SynergyEffects[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
-      } else if (
+      }
+      
+      if (
         pokemon.hp - residualDamage <= 0 &&
         pokemon.items.has(Item.COVER_BAND) === false
       ) {
