@@ -6,7 +6,7 @@
 - Buff Alcremie Matcha: 40 → 60 max HP
 - Buff Litten line: PP 100 → 80
 - Buff Fletchling line: PP: 100 → 85
-- Nerf Future Sight (Ralts): base ability damage 15/30/60 → 12/25/50 ; Select 5 closest enemies instead of random
+- Change Future Sight (Ralts): base ability damage ~~15/30/60~~ → 20/35/50 SPECIAL ; Select ~~5 random enemies~~ 3/4/5 closest enemies
 
 # Changes to Synergies
 
