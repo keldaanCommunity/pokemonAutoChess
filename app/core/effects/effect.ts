@@ -95,6 +95,7 @@ interface OnChangePositionEffectArgs {
   pokemon: Pokemon
   player: Player
   state?: GameState // can be undefined for bots updatePlayerTeam method
+  room?: GameRoom   // can be undefined for bots updatePlayerTeam method
   oldX: number
   oldY: number
   newX: number
