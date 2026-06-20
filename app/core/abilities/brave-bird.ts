@@ -12,13 +12,9 @@ export class BraveBirdStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 90, 180][pokemon.stars - 1] ?? 180
-    const flyAwayCell = board.getSafePlaceAwayFrom(
-      pokemon.positionX,
-      pokemon.positionY,
-      pokemon.team
-    )
+    const flyAwayCell = pokemon.flyAway(board, false)
+
     if (flyAwayCell) {
-      pokemon.moveTo(flyAwayCell.x, flyAwayCell.y, board, false)
       const adjacentEmptyCells = board
         .getAdjacentCells(flyAwayCell.x, flyAwayCell.y)
         .filter((v) => v.value === undefined)
