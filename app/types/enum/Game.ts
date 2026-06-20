@@ -114,10 +114,12 @@ export enum BattleResult {
 }
 
 export enum BotDifficulty {
+  BEGINNER,
   EASY,
   MEDIUM,
   HARD,
   EXTREME,
+  MASTER,
   CUSTOM
 }
 
