@@ -3769,7 +3769,7 @@
 	"weather_description": {
 		"NEUTRAL": "Normal weather. No effects.",
 		"ZENITH": "+20% healing from all sources\n-30% SLEEP duration",
-		"DROUGHT": "+30% BURN damage\n-30% FREEZE duration",
+		"DROUGHT": "+30% BURN damage\n-30% FREEZE duration\n-3 PP per second",
 		"WINDY": "+10 SPEED (+20 if FLYING)",
 		"RAIN": "+3 PP per second\n-30% BURN and POISONNED damage",
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
