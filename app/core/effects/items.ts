@@ -371,7 +371,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       player.pokemonsTrainingInDojo.push({
         pokemon: pokemonLeaving,
         ticketLevel,
-        returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
+        returnStage: room.state.stageLevel + 3
       })
       removeInArray(player.items, item)
       player.updateSynergies()

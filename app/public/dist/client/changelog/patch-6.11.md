@@ -46,6 +46,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Flower Sweet: 5 → 10 SPEED gained
 - Buff Rice: 50 → 80 SHIELD
 
+- Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
+
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
