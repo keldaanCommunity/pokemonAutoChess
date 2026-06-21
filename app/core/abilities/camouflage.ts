@@ -2,7 +2,7 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-export class IllusionStrategy extends AbilityStrategy {
+export class CamouflageStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,

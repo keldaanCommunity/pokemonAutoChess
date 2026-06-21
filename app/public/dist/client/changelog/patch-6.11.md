@@ -35,6 +35,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Dondozo gains Monster synergy. HP: 250 → 220
 - Probopass gains Electric synergy. PP 90 → 100
 - Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
+- Rework Zoroark and Hisuian Zoroark line. New passive Illusion: copy the appearance of the ally on its left. New ability for Zoroark line: Night Daze. New ability for Hisuian Zoroark: Bitter Malice.
+- Kecleon ability Illusion has been renamed Camouflage
 
 # Changes to Synergies
 

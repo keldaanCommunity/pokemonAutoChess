@@ -1251,7 +1251,7 @@ export const PassiveEffects: Partial<
   [Passive.COMATOSE]: [
     new OnSpawnEffect((pkm) => {
       pkm.status.sleep = true
-      pkm.status.sleepCooldown = 1000      
+      pkm.status.sleepCooldown = 1000
       pkm.status.burn = false
       pkm.status.poisonStacks = 0
       pkm.status.freeze = false
@@ -1360,7 +1360,7 @@ export const PassiveEffects: Partial<
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
-        attacker.addStack(isDoubled ? 2 :1)
+        attacker.addStack(isDoubled ? 2 : 1)
       }
     })
   ],
@@ -1744,6 +1744,17 @@ export const PassiveEffects: Partial<
   [Passive.ORTHWORM]: [
     new OnGroundDiggingEffect(({ pokemon }) => {
       pokemon.addMaxHP(5)
+    })
+  ],
+
+  [Passive.ILLUSION]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player }) => {
+      const allyOnTheLeft = schemaValues(player.board).find(
+        (p) => p.positionX === newX - 1 && p.positionY === newY
+      )
+      if (allyOnTheLeft) {
+        pokemon.index = allyOnTheLeft.index
+      }
     })
   ]
 }

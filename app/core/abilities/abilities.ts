@@ -45,6 +45,7 @@ import { BehemothBladeStrategy } from "./behemoth-blade"
 import { BideStrategy } from "./bide"
 import { BiteStrategy } from "./bite"
 import { BitterBladeStrategy } from "./bitter-blade"
+import { BitterMaliceStrategy } from "./bitter-malice"
 import { BlastBurnStrategy } from "./blast-burn"
 import { BlazeKickStrategy } from "./blaze-kick"
 import { BleakwindStormStrategy } from "./bleakwind-storm"
@@ -66,6 +67,7 @@ import { BulldozeStrategy } from "./bulldoze"
 import { BulletPunchStrategy } from "./bullet-punch"
 import { BurnUpStrategy } from "./burn-up"
 import { BurningJealousyStrategy } from "./burning-jealousy"
+import { CamouflageStrategy } from "./camouflage"
 import { CavernousChompStrategy } from "./cavernous-chomp"
 import { CeaselessEdgeStrategy } from "./ceaseless-edge"
 import { ChainCrazedStrategy } from "./chain-crazed"
@@ -261,7 +263,6 @@ import { IceSpinnerStrategy } from "./ice-spinner"
 import { IcicleCrashStrategy } from "./icicle-crash"
 import { IcicleMissileStrategy } from "./icicle-missile"
 import { IcyWindStrategy } from "./icy-wind"
-import { IllusionStrategy } from "./illusion"
 import { InfernalParadeStrategy } from "./infernal-parade"
 import { InfestationStrategy } from "./infestation"
 import { IngrainStrategy } from "./ingrain"
@@ -324,6 +325,7 @@ import { MultiAttackStrategy } from "./multi-attack"
 import { MysticalFireStrategy } from "./mystical-fire"
 import { NastyPlotStrategy } from "./nasty-plot"
 import { NaturalGiftStrategy } from "./natural-gift"
+import { NightDazeStrategy } from "./night-daze"
 import { NightShadeStrategy } from "./night-shade"
 import { NightSlashStrategy } from "./night-slash"
 import { NightmareStrategy } from "./nightmare"
@@ -752,6 +754,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BIDE]: new BideStrategy(),
   [Ability.BITE]: new BiteStrategy(),
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
+  [Ability.BITTER_MALICE]: new BitterMaliceStrategy(),
   [Ability.BLAST_BURN]: new BlastBurnStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
@@ -773,6 +776,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy(),
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
+  [Ability.CAMOUFLAGE]: new CamouflageStrategy(),
   [Ability.CAVERNOUS_CHOMP]: new CavernousChompStrategy(),
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
@@ -968,7 +972,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICICLE_CRASH]: new IcicleCrashStrategy(),
   [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
-  [Ability.ILLUSION]: new IllusionStrategy(),
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.INGRAIN]: new IngrainStrategy(),
@@ -1034,6 +1037,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MYSTICAL_FIRE]: new MysticalFireStrategy(),
   [Ability.NASTY_PLOT]: new NastyPlotStrategy(),
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
+  [Ability.NIGHT_DAZE]: new NightDazeStrategy(),
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.NIGHTMARE]: new NightmareStrategy(),

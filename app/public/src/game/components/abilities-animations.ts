@@ -766,7 +766,7 @@ export const AbilitiesAnimations: {
   [Ability.HELPING_HAND]: onCasterScale2,
   [Ability.ENCORE]: onCaster({ ability: Ability.HELPING_HAND }),
   [Ability.FLORAL_HEALING]: onCasterScale2,
-  [Ability.ILLUSION]: onCasterScale2,
+  [Ability.CAMOUFLAGE]: onCasterScale2,
   [Ability.ROAR_OF_TIME]: onCasterScale2,
   [Ability.HAPPY_HOUR]: onCasterScale2,
   [Ability.TELEPORT]: onCasterScale2,
@@ -780,6 +780,8 @@ export const AbilitiesAnimations: {
   [Ability.LUNAR_BLESSING]: onCasterScale2,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
+  [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({
       oriented: true,
@@ -1215,7 +1217,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.NASTY_PLOT]: onCaster({ positionOffset: [0, -50] }),
   [Ability.ROCK_TOMB]: onTarget({ origin: [0.5, 0.9], scale: 1 }),
-  [Ability.SLACK_OFF]: onCaster({ ability: Ability.ILLUSION, scale: 1 }),
+  [Ability.SLACK_OFF]: onCaster({ ability: Ability.CAMOUFLAGE, scale: 1 }),
   [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
   [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
