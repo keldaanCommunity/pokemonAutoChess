@@ -7,7 +7,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyStep } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
-import { Title, Transfer } from "../../types"
+import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -18,13 +18,15 @@ import {
   Item,
   type OgerponMasks,
   SpecialBerries,
-  SynergyFlavors
+  SynergyFlavors,
+  SynergyItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -40,9 +42,12 @@ import {
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
+  OnChangePositionEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
   type OnDeathEffectArgs,
+  OnEvolutionEffect,
+  OnGroundDiggingEffect,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -51,6 +56,7 @@ import {
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnSpawnEffect,
+  OnSpotlightChangeEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -185,6 +191,8 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
         .map((cell) => cell.value!)
         .concat(target)
+      const multiplier = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+
       targets.forEach((t) => {
         pokemon.broadcastAbility({
           skill: Ability.SHIELDS_DOWN,
@@ -193,7 +201,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         })
         if (pokemon.name === Pkm.MINIOR_KERNEL_BLUE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.SPECIAL,
             attacker: pokemon,
@@ -202,7 +212,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         }
         if (pokemon.name === Pkm.MINIOR_KERNEL_RED) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 1.5 * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * 1.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.PHYSICAL,
             attacker: pokemon,
@@ -211,7 +223,9 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
         }
         if (pokemon.name === Pkm.MINIOR_KERNEL_ORANGE) {
           t.handleDamage({
-            damage: Math.ceil(physicalDamage * 0.5 * (1 + pokemon.ap / 100)),
+            damage: Math.ceil(
+              physicalDamage * 0.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
             board,
             attackType: AttackType.TRUE,
             attacker: pokemon,
@@ -222,7 +236,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
       if (pokemon.name === Pkm.MINIOR_KERNEL_GREEN) {
         cells.forEach((v) => {
           if (v.value && v.value.team === pokemon.team) {
-            v.value.handleHeal(physicalDamage, pokemon, 1, false)
+            v.value.handleHeal(physicalDamage * multiplier, pokemon, 1, false)
           }
         })
       }
@@ -247,25 +261,27 @@ const KubfuOnKillEffect = new OnKillEffect(
       if (nbBuffsSpeed < MAX_BUFFS) {
         pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsSpeed++
-        if (
-          nbBuffsSpeed === MAX_BUFFS &&
-          pokemon.player &&
-          pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
-        ) {
-          pokemon.player.items.push(Item.SCROLL_OF_WATERS)
-        }
+      }
+      if (
+        nbBuffsSpeed >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_WATERS)
       }
     } else {
       if (nbBuffsAP < MAX_BUFFS) {
         pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
         nbBuffsAP++
-        if (
-          nbBuffsAP === MAX_BUFFS &&
-          pokemon.player &&
-          pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
-        ) {
-          pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
-        }
+      }
+      if (
+        nbBuffsAP >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
       }
     }
 
@@ -828,7 +844,7 @@ const commanderPassive = new OnSimulationStartEffect(
 
 const conversionEffect = new OnSimulationStartEffect(
   ({ simulation, player, entity }) => {
-    if(!player) return
+    if (!player || entity.isSpawn) return
     const opponent =
       simulation.bluePlayerId === player.id
         ? simulation.redPlayer
@@ -940,7 +956,7 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
       )
       if (coord) {
         const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
-        if(player){
+        if (player) {
           player.pokemonsPlayed.add(Pkm.PHIONE)
         }
         simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
@@ -954,7 +970,12 @@ const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
       .getAdjacentCells(entity.positionX, entity.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === entity.team) {
-          cell.value.addAbilityPower(50, cell.value, 0, false)
+          cell.value.addAbilityPower(
+            entity.inSpotlight ? 100 : 50,
+            cell.value,
+            0,
+            false
+          )
         }
       })
   },
@@ -1108,6 +1129,19 @@ const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
       entity.addAttack(1, entity, 0, false, true)
     }
   })
+
+  if (!attacker.player) return
+  if (familyMembers.every((p) => p.isSpawn)) {
+    const originalPoipole = schemaValues(attacker.player.board).find(
+      (p) => PkmFamily[p.name] === Pkm.POIPOLE
+    )
+    if (originalPoipole) {
+      originalPoipole.stacks++
+      if (originalPoipole.stacks % 2 === 0) {
+        originalPoipole.addAttack(1)
+      }
+    }
+  }
 }, Passive.POIPOLE)
 
 const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
@@ -1209,12 +1243,19 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.VIGOROTH]: [
-    new OnSpawnEffect((pkm) => pkm.effects.add(EffectEnum.IMMUNITY_SLEEP))
+    new OnSpawnEffect((pkm) => {
+      pkm.status.sleep = false
+      pkm.effects.add(EffectEnum.IMMUNITY_SLEEP)
+    })
   ],
   [Passive.COMATOSE]: [
     new OnSpawnEffect((pkm) => {
       pkm.status.sleep = true
-      pkm.status.sleepCooldown = 1000
+      pkm.status.sleepCooldown = 1000      
+      pkm.status.burn = false
+      pkm.status.poisonStacks = 0
+      pkm.status.freeze = false
+      pkm.status.paralysis = false
       pkm.effects.add(EffectEnum.IMMUNITY_BURN)
       pkm.effects.add(EffectEnum.IMMUNITY_POISON)
       pkm.effects.add(EffectEnum.IMMUNITY_FREEZE)
@@ -1319,6 +1360,7 @@ export const PassiveEffects: Partial<
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
+        attacker.addStack(isDoubled ? 2 :1)
       }
     })
   ],
@@ -1358,6 +1400,7 @@ export const PassiveEffects: Partial<
   [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
   [Passive.SPOT_PANDA]: [
     new OnSpawnEffect((entity) => {
+      entity.status.confusion = false
       entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
     })
   ],
@@ -1599,6 +1642,108 @@ export const PassiveEffects: Partial<
           )
         }
       })
+    })
+  ],
+  [Passive.MELOETTA]: [
+    new OnChangePositionEffect(({ newY, pokemon, player }) => {
+      if (newY === 3 && pokemon.name === Pkm.MELOETTA) {
+        player.transformPokemon(pokemon, Pkm.PIROUETTE_MELOETTA)
+      }
+      if (newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
+        player.transformPokemon(pokemon, Pkm.MELOETTA)
+      }
+    })
+  ],
+  [Passive.RKS_SYSTEM]: [
+    new OnChangePositionEffect(({ newY, pokemon, player, state }) => {
+      if (newY === 0) {
+        const itemsToRemove = schemaValues(pokemon.items).filter((item) => {
+          return (
+            isIn(RemovableItems, item) ||
+            (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+              item !== Item.RARE_CANDY) ||
+            isIn(SynergyItems, item)
+          )
+        })
+        player.items.push(...itemsToRemove)
+        pokemon.removeItems(itemsToRemove, player)
+      }
+    })
+  ],
+  [Passive.PRISM]: [
+    new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
+      } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.NECROZMA)
+      }
+    })
+  ],
+
+  [Passive.BLOSSOM]: [
+    new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.name === Pkm.CHERRIM && inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
+      } else if (pokemon.name === Pkm.CHERRIM_SUNLIGHT && !inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.CHERRIM)
+      }
+    })
+  ],
+
+  [Passive.PILLAR]: [
+    new OnChangePositionEffect(({ player }) => {
+      player.updatePillars()
+    }),
+    new OnEvolutionEffect(({ player }) => {
+      player.updatePillars()
+    })
+  ],
+
+  [Passive.VESPIQUEN]: [
+    new OnChangePositionEffect(({ newY, pokemon }) => {
+      if (newY === 1) {
+        pokemon.range = 3
+        pokemon.skill = Ability.ATTACK_ORDER
+      } else if (newY === 2) {
+        pokemon.range = 2
+        pokemon.skill = Ability.HEAL_ORDER
+      } else if (newY === 3) {
+        pokemon.range = 1
+        pokemon.skill = Ability.DEFEND_ORDER
+      }
+    })
+  ],
+
+  [Passive.DUNSPARCE]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      if (!pokemon.player) return
+
+      const dunsparcesAlive: PokemonEntity[] =
+        board.cells.filter<PokemonEntity>(
+          (entity): entity is PokemonEntity =>
+            entity != null &&
+            entity.team === pokemon.team &&
+            PkmFamily[entity.name] === PkmFamily[pokemon.name]
+        )
+      dunsparcesAlive.forEach((entity) => {
+        entity.addStack()
+      })
+
+      if (dunsparcesAlive.every((p) => p.isSpawn)) {
+        const originalDunsparce = schemaValues(pokemon.player.board).find(
+          (p) => p.name === Pkm.DUNSPARCE
+        )
+        if (originalDunsparce) originalDunsparce.stacks++
+      }
+    }),
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.stacks += 1
+    })
+  ],
+
+  [Passive.ORTHWORM]: [
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.addMaxHP(5)
     })
   ]
 }

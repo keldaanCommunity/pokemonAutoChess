@@ -678,10 +678,10 @@ export class Board {
       })
     } else {
       // Clear all effects
-      existingEffects.clear()
       if (entityOnCell) {
         existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
       }
+      existingEffects.clear()
       simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,

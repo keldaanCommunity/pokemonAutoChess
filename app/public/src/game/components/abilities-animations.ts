@@ -822,7 +822,49 @@ export const AbilitiesAnimations: {
     scale: 1,
     positionOffset: [0, -20]
   }),
-  [Ability.PETAL_DANCE]: onCasterScale2,
+  [Ability.PETAL_DANCE]: [
+    onCaster({ scale: 2, positionOffset: [0, -40] }),
+    ({ scene, positionX, positionY, flip, ap }) => {
+      const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+      const petalCount = 5
+
+      for (const r of [64, 96]) {
+        const petalGroup = scene.add.group()
+        const circle = new Phaser.Geom.Circle(x, y, 48)
+        for (let i = 0; i < petalCount; i++) {
+          const petalSprite = scene.add
+            .sprite(0, 0, "abilities", `PETAL_DANCE_PROJECTILE/000.png`)
+            ?.setScale(2 * (1 + ap / 200))
+          petalSprite.anims.play({
+            key: "PETAL_DANCE_PROJECTILE",
+            frameRate: 8
+          })
+          petalGroup.add(petalSprite)
+          scene.abilitiesVfxGroup?.add(petalSprite)
+        }
+
+        Phaser.Actions.PlaceOnCircle(petalGroup.getChildren(), circle)
+
+        scene.tweens.add({
+          targets: circle,
+          radius: r,
+          ease: Phaser.Math.Easing.Quartic.Out,
+          duration: 1200,
+          onUpdate: function (tween) {
+            Phaser.Actions.RotateAroundDistance(
+              petalGroup.getChildren(),
+              { x, y },
+              (r === 96 ? 1 : -1) * 0.04,
+              circle.radius
+            )
+          },
+          onComplete: function () {
+            petalGroup.destroy(true, true)
+          }
+        })
+      }
+    }
+  ],
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
   [Ability.BRICK_BREAK]: onTargetScale2,
@@ -855,6 +897,7 @@ export const AbilitiesAnimations: {
   ["STAR_DUST"]: onCasterScale2,
   ["HEAL_ORDER"]: onCasterScale2,
   ["ATTACK_ORDER"]: onCasterScale2,
+  ["DEFEND_ORDER"]: onCasterScale2,
   ["FOSSIL_RESURRECT"]: onCasterScale2,
   ["LANDS_WRATH/hit"]: onCasterScale2,
   [Ability.BUG_BUZZ]: onTargetScale2,
@@ -940,9 +983,9 @@ export const AbilitiesAnimations: {
   [Ability.CROSS_POISON]: onTargetScale3,
   [Ability.FIERY_DANCE]: onTarget({ ability: Ability.FIRE_BLAST, scale: 2 }),
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
-  [Ability.DRACO_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DRAGON_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.GRUDGE_DIVE]: projectile({
-    ability: Ability.DRACO_ENERGY,
+    ability: Ability.DRAGON_ENERGY,
     tint: 0xcbc3e3
   }),
   [Ability.ROCK_WRECKER]: onSprite(({ casterSprite, ...args }) =>
@@ -1261,7 +1304,7 @@ export const AbilitiesAnimations: {
     positionOffset: [0, -20]
   }),
   [Ability.ATTRACT]: onCaster({ positionOffset: [0, -70] }),
-  [Ability.MAGNET_RISE]: onCaster({ ability: Ability.ELECTRO_BOOST }),
+  [Ability.MAGNET_RISE]: onCasterScale2,
   [Ability.FORCE_PALM]: onTarget({ ability: Ability.ANCHOR_SHOT }),
   [Ability.WATERFALL]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -1399,7 +1442,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.X_SCISSOR]: onTargetScale2,
-  [Ability.DEATH_WING]: onTargetScale2,
+  [Ability.OBLIVION_WING]: onTargetScale2,
   [Ability.GEOMANCY]: onCaster({
     positionOffset: [0, -50],
     depth: DEPTH.ABILITY_GROUND_LEVEL
@@ -2183,7 +2226,7 @@ export const AbilitiesAnimations: {
     duration: 250,
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
-  [Ability.DARK_LARIAT]: projectile({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DARKEST_LARIAT]: projectile({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.FIRESTARTER]: projectile({
     duration: 800,
     startCoords: "target",

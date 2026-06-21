@@ -35,7 +35,9 @@ export function EventsMenu() {
 
     async function fetchTwitchStreams() {
       try {
-        const response = await fetch("/twitch/streams")
+        const response = await fetch(
+          `/twitch/streams?t=${Math.floor(Date.now() / 300000)}`
+        )
         const data = (await response.json()) as { streams: unknown[] }
         if (isMounted) {
           setShowTwitchTab((data.streams?.length ?? 0) > 0)

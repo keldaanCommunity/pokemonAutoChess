@@ -1,3 +1,4 @@
+import type { MapSchema } from "@colyseus/schema"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -8,7 +9,9 @@ import {
   MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
 } from "../../config"
 import { type SynergyEffect, SynergyEffects } from "../../config/game/synergies"
-import { type FlowerPot, Title } from "../../types"
+import type Player from "../../models/colyseus-models/player"
+import PokemonFactory from "../../models/pokemon-factory"
+import { type FlowerPot, type IPokemon, Title } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -25,7 +28,9 @@ import { schemaValues } from "../../utils/schemas"
 import { type Board, effectInLine } from "../board"
 import { FlowerMonByPot, getFlowerPotsUnlocked } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
+import type Simulation from "../simulation"
 import { DelayedCommand } from "../simulation-command"
+import { getUnitScore } from "../unit-score"
 import {
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -73,7 +78,6 @@ export class MonsterKillEffect extends OnKillEffect {
     }
   }
 }
-
 export class GroundHoleEffect extends OnSpawnEffect {
   constructor(effect: SynergyEffect<Synergy.GROUND>) {
     const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
@@ -396,16 +400,6 @@ export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
   }
 })
 
-export const overgrowEffect = new OnDamageReceivedEffect(
-  ({ pokemon }: OnDamageReceivedEffectArgs) => {
-    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
-      pokemon.addAbilityPower(50, pokemon, 0, false)
-      // Remove the effect to avoid multiple triggers
-      pokemon.effectsSet.delete(overgrowEffect)
-    }
-  }
-)
-
 export const wildBerserkEffect = new OnDamageReceivedEffect(
   ({ pokemon }: OnDamageReceivedEffectArgs) => {
     if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
@@ -474,6 +468,10 @@ export function applyWandEffects(
 ): { takenDamage: number; death: boolean } {
   const board = pokemon.simulation.board
   const wands = pokemon.player?.items.filter((item) => isIn(Wands, item)) ?? []
+  if (wands.length === 0) {
+    return { takenDamage: 0, death: false }
+  }
+
   let specialDamageFactor = 0
 
   for (const wand of wands) {
@@ -549,7 +547,7 @@ export function applyWandEffects(
         const adjacentEnemies = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
           .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-        specialDamageFactor += 0.1 * adjacentEnemies.length
+        specialDamageFactor += 0.05 * adjacentEnemies.length
         break
       }
       case Item.TWO_EDGED_WAND: {
@@ -574,8 +572,10 @@ export function applyWandEffects(
     switch (wand) {
       case Item.HP_SWAP_WAND: {
         if (chance(0.2, pokemon)) {
-          target.addMaxHP(-Math.floor(specialDamage), pokemon, 0, false)
-          pokemon.addMaxHP(Math.floor(specialDamage), pokemon, 0, false)
+          target.addMaxHP(-Math.floor(takenDamage), pokemon, 0, false)
+          if (target.items.has(Item.TWIST_BAND) === false) {
+            pokemon.addMaxHP(Math.floor(takenDamage), pokemon, 0, false)
+          }
         }
         break
       }
@@ -683,7 +683,7 @@ export function applyWandEffects(
                 cell.value.positionX,
                 cell.value.positionY,
                 cell.value.team,
-                3
+                2
               )
               if (freeCellInTheBack) {
                 cell.value.moveTo(
@@ -779,3 +779,93 @@ export const pounceWandEffect = new OnAttackReceivedEffect(
     }
   }
 )
+
+export const cloneBugs = ({
+  board,
+  teamIndex,
+  player,
+  effects,
+  simulation
+}: {
+  board: MapSchema<IPokemon, string>
+  teamIndex: number
+  player: Player | undefined
+  effects: Set<EffectEnum>
+  simulation: Simulation
+}) => {
+  const bugTeam = new Array<IPokemon>()
+  board.forEach((pkm) => {
+    if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+      bugTeam.push(pkm)
+    }
+  })
+  bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+
+  let numberOfBugsToClone = 0
+  if (effects.has(EffectEnum.COCOON)) {
+    numberOfBugsToClone = 1
+  }
+  if (effects.has(EffectEnum.INFESTATION)) {
+    numberOfBugsToClone = 2
+  }
+  if (effects.has(EffectEnum.HORDE)) {
+    numberOfBugsToClone = 3
+  }
+  if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
+    numberOfBugsToClone = 5
+  }
+  numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
+
+  for (let i = 0; i < numberOfBugsToClone; i++) {
+    let numberOfClones = 1
+    const pokemonCloned = bugTeam[i]
+    let clonePkm = pokemonCloned.name
+
+    if (pokemonCloned.passive === Passive.VESPIQUEN) {
+      numberOfClones = 2
+      clonePkm = Pkm.COMBEE
+    }
+
+    for (
+      let numberOfClone = 0;
+      numberOfClone < numberOfClones;
+      numberOfClone++
+    ) {
+      const clone = PokemonFactory.createPokemonFromName(clonePkm, player)
+      clone.stacks = pokemonCloned.stacks
+
+      const coord = simulation.getClosestFreeCellToPokemon(
+        pokemonCloned,
+        teamIndex
+      )
+      if (coord) {
+        const cloneEntity = simulation.addPokemon(
+          clone,
+          coord.x,
+          coord.y,
+          teamIndex,
+          true
+        )
+        if (pokemonCloned.items.has(Item.SHED_SHELL)) {
+          const team =
+            teamIndex === Team.BLUE_TEAM
+              ? simulation.blueTeam
+              : simulation.redTeam
+          const clonedEntity = schemaValues(team).find(
+            (p) => p.refToBoardPokemon.id === pokemonCloned.id
+          )
+          if (clonedEntity) {
+            clonedEntity.addMaxHP(
+              -0.5 * pokemonCloned.maxHP,
+              clonedEntity,
+              0,
+              false
+            )
+          }
+
+          cloneEntity.addMaxHP(-0.5 * clone.maxHP, cloneEntity, 0, false)
+        }
+      }
+    }
+  }
+}

@@ -154,7 +154,7 @@ export default function TierListMaker() {
         </button>
       </div>
       <TierList tierList={tierList} onUpdate={setTierList} />
-      <ItemPicker />
+      <ItemPicker origin="tier-list" />
       <PokemonPicker />
     </div>
   )

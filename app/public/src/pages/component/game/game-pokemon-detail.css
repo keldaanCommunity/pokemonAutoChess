@@ -171,6 +171,17 @@
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+  display: flex;
+  align-items: center;
+}
+
+.game-pokemon-detail-ult .ability-name > span {
+  flex: 1;
+}
+
+.game-pokemon-detail-ult .ability-name > img {
+  flex: 0;
+  justify-self: end;
 }
 
 .game-pokemon-detail-ult .ability-name img {

@@ -63,6 +63,7 @@ export function Modal(props: ModalProps) {
   }, [show])
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
+    event.stopPropagation()
     if (event.key === "Escape") {
       close()
     }
