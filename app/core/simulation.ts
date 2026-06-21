@@ -68,7 +68,6 @@ import {
   normalShieldEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
-  overgrowEffect,
   pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
