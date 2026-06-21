@@ -2451,7 +2451,7 @@
 		"INGRAIN": "Restore 5 HP every 2 seconds. Get a berry tree.",
 		"GROWTH": "Restore 15 HP every 2 seconds. Get another berry tree.",
 		"SPORE": "Restore 25 HP every 2 seconds. Get a third berry tree.",
-		"OVERGROW": "Once below 30% max HP, gain 50 AP. Your berry trees turn golden.",
+		"OVERGROW": "Your berry trees turn golden. When consuming a berry, gain 50 AP.",
 		"FLAME_BODY": "Attacks have [30,LK]% chance to inflict BURN for 3 seconds",
 		"WILDFIRE": "+1 ATK after every hit",
 		"BLAZE": "+2 ATK after every hit",

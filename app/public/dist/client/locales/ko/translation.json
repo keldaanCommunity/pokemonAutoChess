@@ -2548,7 +2548,7 @@
 		"APPETIZER": "CHEF_HAT 를 획득한다. 매 스테이지 이후 시그니처 디쉬를 요리하여 인접한 아군 하나에게 먹인다",
 		"LUNCH_BREAK": "셰프가 매 스테이지 이후 2개의 시그니처 디쉬를 요리하여 인접한 아군 둘에게 먹인다",
 		"BANQUET": "두 번째 CHEF_HAT 획득",
-		"OVERGROW": "최대 HP의 30% 미만으로 떨어질 때 50 AP 획득, 황금 나무열매가 열림",
+		"OVERGROW": "베리 섭취 시 AP 50 획득, 황금 나무열매가 열림",
 		"COACHING": "12데미지 감소, 샌드백 획득. 대기실에 있는 FIGHTING 포켓몬을 샌드백 옆에 두면 단련하며 4 ATK과 10%의 최대 HP 영구 획득",
 		"AROMATIC_MIST": "BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND 중 한 가지 지팡이 선택",
 		"FAIRY_WIND": "CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND 중 한 가지 지팡이 선택",

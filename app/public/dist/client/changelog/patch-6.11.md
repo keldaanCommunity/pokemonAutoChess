@@ -39,6 +39,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Changes to Synergies
 
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
+- Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
 
 # Changes to Items
 
