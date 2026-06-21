@@ -35,6 +35,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Dondozo gains Monster synergy. HP: 250 → 220
 - Probopass gains Electric synergy. PP 90 → 100
 - Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
+- New ability for Ekans line: Coil: Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds (non scalable). User also buffs its ATK and DEF by [3,5,10,20,SP].
 
 # Changes to Synergies
 
