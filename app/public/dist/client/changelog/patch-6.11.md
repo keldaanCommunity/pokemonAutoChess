@@ -34,6 +34,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - Dondozo gains Monster synergy. HP: 250 → 220
 - Probopass gains Electric synergy. PP 90 → 100
+- Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
 
 # Changes to Synergies
 
