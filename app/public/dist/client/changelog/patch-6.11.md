@@ -33,6 +33,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New visual animations for Budew line
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - Dondozo gains Monster synergy. HP: 250 → 220
+- Probopass gains Electric synergy. PP 90 → 100
 
 # Changes to Synergies
 
