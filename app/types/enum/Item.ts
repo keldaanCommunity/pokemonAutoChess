@@ -330,7 +330,8 @@ export enum Item {
   ICY_FLUTE = "ICY_FLUTE",
   ROCK_HORN = "ROCK_HORN",
   SKY_MELODICA = "SKY_MELODICA",
-  TERRA_CYMBAL = "TERRA_CYMBAL"
+  TERRA_CYMBAL = "TERRA_CYMBAL",
+  SOOTHE_BELL = "SOOTHE_BELL"
 }
 
 export const MemoryDiscs = [
@@ -1171,7 +1172,8 @@ export const ConsumableItems = [
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR
+  Item.MALICIOUS_ARMOR,
+  Item.SOOTHE_BELL
 ] satisfies Item[]
 
 export const RemovableItems = [

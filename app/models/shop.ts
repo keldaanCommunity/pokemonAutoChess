@@ -312,11 +312,17 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player, state: GameState) {
+  refillShop(player: Player, state: GameState, specificTypes?: Synergy[]) {
     // No need to release pokemons since they won't be changed
     player.shop.forEach((pokemon, i) => {
       if (pokemon === Pkm.MAGIKARP || pokemon === Pkm.DEFAULT) {
-        player.shop[i] = this.pickPokemon(player, state, i)
+        player.shop[i] = this.pickPokemon(
+          player,
+          state,
+          i,
+          false,
+          specificTypes
+        )
       }
     })
   }
@@ -359,6 +365,17 @@ export default class Shop {
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = this.pickPokemon(player, state, i)
       }
+    }
+  }
+
+  assignSootheBellShop(
+    player: Player,
+    state: GameState,
+    specificTypes: Synergy[]
+  ) {
+    player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
+    for (let i = 0; i < SHOP_SIZE; i++) {
+      player.shop[i] = this.pickPokemon(player, state, i, true, specificTypes)
     }
   }
 
@@ -584,7 +601,8 @@ export default class Shop {
     player: Player,
     state: GameState,
     shopIndex: number = -1,
-    noSpecial = false
+    noSpecial = false,
+    specificTypes?: Synergy[]
   ): Pkm {
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
@@ -628,7 +646,9 @@ export default class Shop {
       if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
     }
 
-    if (attractor) {
+    if (specificTypes) {
+      specificTypesWanted = specificTypes
+    } else if (attractor) {
       specificTypesWanted = schemaValues(attractor.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]

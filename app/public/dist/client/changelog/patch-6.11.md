@@ -68,3 +68,4 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Misc
 
 - New title: Five Stars
+- New town encounter: Chimecho

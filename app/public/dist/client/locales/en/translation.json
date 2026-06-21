@@ -2886,7 +2886,8 @@
 		"ICY_FLUTE": "Icy Flute",
 		"ROCK_HORN": "Rock Horn",
 		"SKY_MELODICA": "Sky Melodica",
-		"TERRA_CYMBAL": "Terra Cymbal"
+		"TERRA_CYMBAL": "Terra Cymbal",
+		"SOOTHE_BELL": "Soothe Bell"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3216,7 +3217,8 @@
 		"ICY_FLUTE": "Pokémon in shop have 5% additional chance to have the ICE type.",
 		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
 		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
-		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type."
+		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type.",
+		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -4572,7 +4574,8 @@
 		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them",
 		"KINGAMBIT": "Kingambit has given the player in first place the LEADERS_CREST. Beat them in battle to earn extra GOLD!",
 		"LAPRAS": "Lapras offers a ride to go to a different region.",
-		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities."
+		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities.",
+		"CHIMECHO": "Chimecho can convene an assembly with the SOOTHE_BELL"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
