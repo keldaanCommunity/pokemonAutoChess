@@ -1775,10 +1775,10 @@
 		"SONG_OF_DESIRE": "뒷줄의 상대 포켓몬 [1,1,2,3]마리를 3초간 CHARM 상태로 만들고, ATK을 [3,SP]만큼 감소시킨다.",
 		"CONFUSING_MIND": "뒷줄의 상대 포켓몬 [1,2,3,5]마리를 [3,SP]초동안 CONFUSION 상태로 만든다.",
 		"KNOWLEDGE_THIEF": "상대의 기술을 사용하고 [1,1,1,2,3] XP를 획득한다.",
-		"KING_SHIELD": "1.5초간 시전포켓몬이 PROTECT상태가 되며, [10,20,40,80,SP]의 SHIELD를 얻으며 가장 멀리 있는 적과 위치를 바꾼다.",
+		"KING_SHIELD": "1.5초간 사용자가 PROTECT 상태가 되며, [10,20,40,80,SP]의 SHIELD를 얻고 가장 멀리 있는 적과 위치를 바꾼다.",
 		"U_TURN": "[15,30,50,100,SP] SHIELD를 얻고, 대상과 위치를 바꾸어 1초 동안 CHARM 상태로 만든다.",
-		"EXPLOSION": "시전자 및 ADJACENT 상대 포켓몬(들)에게 [50,100,200,400,SP] SPECIAL 를 가한다.",
-		"CHLOROBLAST": "ADJACENT 상대 포켓몬에게 [50,100,200,400,SP] SPECIAL를 입힌다. 시전자는 최대 HP의 50%를 잃는다.",
+		"EXPLOSION": "사용자를 포함한 ADJACENT 상대 포켓몬에게 [50,100,200,400,SP] SPECIAL를 입힌다.",
+		"CHLOROBLAST": "ADJACENT 상대 포켓몬에게 [50,100,200,400,SP] SPECIAL를 입힌다. 사용자는 최대 HP의 50%를 잃는다.",
 		"NIGHTMARE": "[2,4,6,10,SP]초간 모든 상대 포켓몬을 FATIGUE 상태로 만든다. GHOST 저주에 걸린 모든 상대는 [25,50,100,200,SP] SPECIAL을 받는다.",
 		"CLANGOROUS_SOUL": "시전포켓몬 및 인접한 같은 편 포켓몬의 ATK, DEF, SPE_DEF 을 [2,4,8,16,SP]만큼 올린다.",
 		"BONEMERANG": "상대를 향해 뼈를 부메랑처럼 던진다. 뼈에 맞은 상대 포켓몬들은 2x[15,30,60,120,SP] SPECIAL를 입는다.",
@@ -2880,10 +2880,12 @@
 		"SPIRIT_WAND": "영혼의지팡이",
 		"TATSUGIRI_CURLY": "사령탑 싸리용 (젖힌 모습)",
 		"TATSUGIRI_DROOPY": "사령탑 싸리용 (늘어진 모습)",
-		"TATSUGIRI_STRETCHY": "사령탑 싸리용 (뻗은 모습)"
+		"TATSUGIRI_STRETCHY": "사령탑 싸리용 (뻗은 모습)",
+		"GOLD_MASK": "황금가면",
+		"STAR_PIECE": "별의조각"
 	},
 	"item_description": {
-		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석",
+		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석.",
 		"TWISTED_SPOON": "+10 AP",
 		"MYSTIC_WATER": "+15 PP",
 		"MAGNET": "SPEED +10",
@@ -2892,21 +2894,21 @@
 		"NEVER_MELT_ICE": "SPE_DEF +3",
 		"CHARCOAL": "ATK +3",
 		"HEART_SCALE": "DEF +3",
-		"OLD_AMBER": "장착 시 타입에 FOSSIL 이 추가",
-		"DAWN_STONE": "장착 시 타입에 PSYCHIC 이 추가",
-		"WATER_STONE": "장착 시 타입에 WATER 이 추가",
-		"THUNDER_STONE": "장착 시 타입에 ELECTRIC 이 추가",
-		"FIRE_STONE": "장착 시 타입에 FIRE 이 추가",
-		"MOON_STONE": "장착 시 타입에 FAIRY 가 추가",
-		"DUSK_STONE": "장착 시 타입에 DARK 가 추가",
-		"LEAF_STONE": "장착 시 타입에 GRASS 가 추가",
-		"ICE_STONE": "장착 시 타입에 ICE 가 추가",
+		"OLD_AMBER": "장착 시 타입에 FOSSIL 추가",
+		"DAWN_STONE": "장착 시 타입에 PSYCHIC 추가",
+		"WATER_STONE": "장착 시 타입에 WATER 추가",
+		"THUNDER_STONE": "장착 시 타입에 ELECTRIC 추가",
+		"FIRE_STONE": "장착 시 타입에 FIRE 추가",
+		"MOON_STONE": "장착 시 타입에 FAIRY 추가",
+		"DUSK_STONE": "장착 시 타입에 DARK 추가",
+		"LEAF_STONE": "장착 시 타입에 GRASS 추가",
+		"ICE_STONE": "장착 시 타입에 ICE 추가",
 		"CHOICE_SPECS": "장착 시 AP +100",
 		"SOUL_DEW": "장착 시 전투 중 매 초마다 AP 5 PP 5 획득 ",
 		"UPGRADE": "장착 시 공격이 명중할때마다 SPEED 5씩 증가",
-		"REAPER_CLOTH": "장착 시 기술에도 치명타 가능",
-		"POKEMONOMICON": "장착한 포켓몬이 SPECIAL 을 가할 경우, 대상을 3초 동안 BURN 상태 만듬",
-		"POWER_LENS": "장착 시 SPE_DEF 에 의해 감소된 SPECIAL 만큼 공격자에게 반사",
+		"REAPER_CLOTH": "장착 시 CRIT_CHANCE에 따라 기술이 치명타를 입힐 수 있다. 치명타를 이미 입힐 수 있는 기술은 CRIT_POWER을 50% 증가시킨다.",
+		"POKEMONOMICON": "장착한 포켓몬이 SPECIAL를 입히면 상대를 3초 동안 BURN 상태 만들고 SPE_DEF를 1 낮춘다.",
+		"POWER_LENS": "장착 시 SPE_DEF에 의해 감소된 SPECIAL 만큼 공격자에게 반사",
 		"SHELL_BELL": "가한 데미지의 33%만큼 회복",
 		"HEAVY_DUTY_BOOTS": "소지자는 필드 효과 및 강제 이동에 면역",
 		"AQUA_EGG": "소지자는 기술 시전 후 최대 PP의 20%를 회복하며, 해당 전투에서 시전할 때마다 PP 2를 추가 회복",
@@ -2987,10 +2989,10 @@
 		"DYNAMAX_BAND": "전투 시작 시, 최대 HP 을 200% 증가시킨다.",
 		"SHINY_STONE": "LIGHT 시너지 부여, 및 필드에 두 번째 스포트라이트를 생성한다.",
 		"RARE_CANDY": "포켓몬을 즉시 진화시킨다. 최종 진화형이 아닌 포켓몬만 착용할 수 있고, 포켓몬의 판매 가격을 한 단계 낮춘다.",
-		"EVIOLITE": "착용자는 여러 스탯을 획득하지만 더 이상 진화할 수 없다. 최종 진화형이 아닌 포켓몬만 착용할 수 있다.",		
+		"EVIOLITE": "착용자는 여러 스탯을 획득하지만 더 이상 진화할 수 없다. 최종 진화형이 아닌 포켓몬만 착용할 수 있다.",
 		"GOLD_BOTTLE_CAP": "1 GOLD 마다 +1% CRIT_POWER. 처치 시 1 GOLD 를 획득하고. 마지막 적을 제거하면, 라운드 동안 획득한 금액의 두 배를 주는 잭팟을 얻습니다.",
 		"ABSORB_BULB": "모든 피해 감소량이 ABSORB_BULB 에 저장된다. HP 가 50% 미만으로 감소할 때 ABSORB_BULB 가 폭발하여 저장한 모든 피해를 주변 적에게 SPECIAL 로 가한다.",
-		"SACRED_ASH": "RESURRECTION 부여. 부활할 때 기절한 아군 포켓몬을 최대 3마리까지 같이 부활시키나 그들은 도구를 지니지 않은 상태로 부활한다.",		
+		"SACRED_ASH": "RESURRECTION 부여. 부활할 때 기절한 아군 포켓몬을 최대 3마리까지 같이 부활시키나 그들은 도구를 지니지 않은 상태로 부활한다.",
 		"REPEAT_BALL": "2번의 상점 재시전마다 1%의 SPEED와 2 SHIELD를 얻습니다. 또한, 재시전에 골드를 쓸 때마다 1번의 무료 재시전을 얻습니다. 여러 번 재시전한 후에는 상점에서 강력한 포켓몬을 만날 수 있습니다.",
 		"GOLD_BOW": "착용자는 아군 숫자 카운트에 포함되지 않습니다.",
 		"DAMP_ROCK": "RAIN 날씨 영향력 +3. RAIN가 내릴 때 같은 편은 초마다 2 PP를 회복한다.",
@@ -3588,7 +3590,8 @@
 		"BLOSSOMED": "꽃을 피운",
 		"TOP_GUN": "탑건",
 		"SCOUT": "스카우트",
-		"no_title": "칭호 없음"
+		"no_title": "칭호 없음",
+		"FIVE_STARS": "★★★★★"
 	},
 	"title_description": {
 		"NOVICE": "첫 게임을 플레이하기",
@@ -3685,7 +3688,8 @@
 		"POSTMAN": "탐험에서 배달 임무 완료하기",
 		"SURVEY_CORPS": "탐험에서 배틀 임무 완료하기",
 		"GUILDMASTER": "S 랭크 임무 완료하기",
-		"LEGIONNAIRE": "대여르를 8마리 이상 뭉치게 하기"
+		"LEGIONNAIRE": "대여르를 8마리 이상 뭉치게 하기",
+		"FIVE_STARS": "팀에 5성 포켓몬 배치하기"
 	},
 	"weather": {
 		"NEUTRAL": "평범한 날씨",
@@ -4096,7 +4100,7 @@
 	"add_bot": "봇 추가",
 	"easy_bot": "쉬움 (<800)",
 	"normal_bot": "보통 (800-1099)",
-	"hard_bot": "어려움 (1100-1400",
+	"hard_bot": "어려움 (1100-1400)",
 	"extreme_bot": "극한 (>1400)",
 	"custom_bot": "직접 지정하기",
 	"room_leader": "방장",
@@ -4208,7 +4212,7 @@
 		"gameboy": "게임보이",
 		"gameboy_desc": "게임보이 프로토타입을 플레이합니다.",
 		"tier_list_maker": "티어리스트 만들기",
-		"tier_list_maker_desc": "직접 티어리스트를 만들고 공유하세요",
+		"tier_list_maker_desc": "직접 티어리스트를 만들고 공유하세요.",
 		"certificate": "자격",
 		"certificate_desc": "토너먼트에 참가하려면 랭크매치를 해금해야 합니다.",
 		"palette": "루브도의 팔레트",
@@ -4216,7 +4220,9 @@
 		"synergy_wheel": "시너지 룰렛",
 		"synergy_wheel_desc": "참고용으로 쓸만한 시너지 룰렛입니다.",
 		"pokeguesser": "포켓몬 퀴즈",
-		"pokeguesser_desc": "로비에서 시간 때우기 좋은 포켓몬 맞추기 게임입니다."
+		"pokeguesser_desc": "로비에서 시간 때우기 좋은 포켓몬 맞추기 게임입니다.",
+		"sprite_tracker": "스프라이트 찾기",
+		"sprite_tracker_desc": "포켓몬 오토체스에서 사용 가능한 SpriteCollab의 스프라이트를 찾습니다."
 	},
 	"level_required": "레벨 요구됨",
 	"map": {
@@ -4570,7 +4576,7 @@
 			"item_recipes": "지닌물건 조합법",
 			"craftable_items_description": "두 재료를 조합해서 강력한 지닌물건을 만드세요!",
 			"shiny_items_description": "PvE 스테이지에서 색이 다른 야생 포켓몬을 만나거나 황금알을 발견하는 경우, 보상으로 색다른 도구를 획득할 수 있습니다.",
-			"special_items_description": "이 도구들은 특정한 포켓몬들만 사용합니다.",
+			"special_items_description": "이 도구들은 특정 포켓몬만 사용 가능합니다.",
 			"tools_description": "ARTIFICIAL 시너지를 활성화하면 전용 도구를 획득합니다. 세 가지 아이템이 랜덤하게 결정되며, 포켓몬을 대기실에 두면 해제할 수 있습니다.",
 			"weather_rocks": "날씨 돌",
 			"weather_rocks_description": "ROCK 시너지를 활성화하면, 각각의 날씨마다 전투 후에 날씨 돌을 획득합니다. 날씨 돌은 해당 날씨가 활성화된 경우 아군 전체에게 추가 효과를 부여합니다. 날씨 돌의 효과는 중첩될 수 있습니다.",
@@ -4672,7 +4678,8 @@
 			"luck_formula": "행운은 다음 공식에 따라 확률에 영향을 준다:\nP = baseP^(1 - luck/100)예를 들어, 급소 확률이 10%이고 행운이 50인 포켓몬의 실제 급소 확률은\n**0.1^(1 - 50/100) ≈ 31.62%**가 된다.",
 			"xp": "XP",
 			"experience": "경험치",
-			"speed_calculation": "SPEED 계산식이 궁금해요!"
+			"speed_calculation": "SPEED 계산식이 궁금해요!",
+			"speed_calculation_description": "SPEED는 포켓몬의 이동속도, 공격속도와 기술 발동 시간의 딜레이에 영향을 줍니다. 딜레이 계산식은 다음과 같습니다. 딜레이 = 1000/(0.4+0.007속도). 따라서 0 SPEED에는 초당 0.4회 공격할 수 있고, 최대치인 300 SPEED에는 초당 2.5회 공격할 수 있습니다. 기술이나 효과의 성질에 따라 딜레이는 달라질 수 있습니다."
 		},
 		"glossary": {
 			"damage_types": "데미지의 종류",
@@ -4731,7 +4738,8 @@
 		"CONE": "부채꼴 모양",
 		"BOARD_EFFECT": "보드 효과",
 		"ON_HIT": "피격 중인",
-		"ON_ATTACK": "공격 중인"
+		"ON_ATTACK": "공격 중인",
+		"INIMITABLE": "복사 불가"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "강한 포켓몬의 순위는 다음 조건으로 결정됩니다.\n1. 지닌 물건의 갯수\n2. 포켓몬의 단계\n3. 포켓몬의 희귀도",
@@ -4740,7 +4748,8 @@
 		"CONE": "바로 앞의 인접한 세 칸",
 		"BOARD_EFFECT": "보드 효과는 팀을 가리지 않고 모든 포켓몬이 특정 칸 위에 올라갈 때 발동됩니다. 전투가 종료될 때 까지 지속되며, 특정 기술로 제거할 수 있습니다.",
 		"ON_HIT": "공격이나 기술을 당하고 있을 때의 판정입니다. SHIELD가 있어도 이 판정이 생기며, PROTECT 상태거나 회피했다면 이 판정이 일어나지 않습니다.",
-		"ON_ATTACK": "포켓몬이 기본 공격을 할 때의 판정입니다. 공격이 성공하거나 실패하거나 이 판정이 발생합니다."
+		"ON_ATTACK": "포켓몬이 기본 공격을 할 때의 판정입니다. 공격이 성공하거나 실패하거나 이 판정이 발생합니다.",
+		"INIMITABLE": "다른 포켓몬이 따라할 수 없는 기술입니다."
 	},
 	"stage_type": {
 		"pve": "PvE 조우",
@@ -4890,7 +4899,16 @@
 		"title": "클러스터 분석"
 	},
 	"cluster_map": {
-		"title": "클러스터맵"
+		"title": "클러스터맵",
+		"description": "시너지 유사도를 기반으로 팀이 구성된 것을 클러스터 맵으로 보여줍니다. 포인트는 팀 빌드 클러스터의 유사도를 나타냅니다.",
+		"loading": "클러스터 맵 로딩 중...",
+		"total_clusters": "전체 클러스터",
+		"total_matches": "반영된 매치 수",
+		"cluster": "클러스터",
+		"rank": "랭크",
+		"winrate": "승률",
+		"popularity": "선호도",
+		"count": "반영 횟수"
 	},
 	"thanks_for_playing": "게임을 플레이해주셔서 감사합니다!",
 	"full_patch_notes": "패치노트 전문",
@@ -4904,5 +4922,6 @@
 	"example_teams": "팀 빌드",
 	"region_report": "지역 보고서",
 	"ranked_match_short": "랭크매치",
-	"smeargle_scribble_short": "루브도의 스케치"
+	"smeargle_scribble_short": "루브도의 스케치",
+	"inimitable": "복사 불가"
 }
