@@ -10,6 +10,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
+import { Emotion } from "../../types/enum/Emotion"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Berries,
@@ -27,6 +28,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
+import { getAvatarString } from "../../utils/avatar"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -1251,7 +1253,7 @@ export const PassiveEffects: Partial<
   [Passive.COMATOSE]: [
     new OnSpawnEffect((pkm) => {
       pkm.status.sleep = true
-      pkm.status.sleepCooldown = 1000      
+      pkm.status.sleepCooldown = 1000
       pkm.status.burn = false
       pkm.status.poisonStacks = 0
       pkm.status.freeze = false
@@ -1360,7 +1362,7 @@ export const PassiveEffects: Partial<
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
-        attacker.addStack(isDoubled ? 2 :1)
+        attacker.addStack(isDoubled ? 2 : 1)
       }
     })
   ],
@@ -1744,6 +1746,25 @@ export const PassiveEffects: Partial<
   [Passive.ORTHWORM]: [
     new OnGroundDiggingEffect(({ pokemon }) => {
       pokemon.addMaxHP(5)
+    })
+  ],
+
+  [Passive.STOUTLAND_SEARCH]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
+      const index = (newY - 1) * BOARD_WIDTH + newX
+      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+        // BARK
+        room.broadcast(Transfer.SHOW_EMOTE, {
+          id: pokemon.id,
+          emote: getAvatarString(pokemon.index, pokemon.shiny, Emotion.JOYOUS)
+        })
+        room.broadcast(Transfer.DISPLAY_TEXT, {
+          id: player.id,
+          text: "bark",
+          x: pokemon.positionX,
+          y: pokemon.positionY
+        })
+      }
     })
   ]
 }

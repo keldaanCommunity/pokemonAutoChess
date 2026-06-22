@@ -1121,18 +1121,30 @@ export default class BoardManager {
     return benchSize
   }
 
-  showEmote(playerId: string, emote?: string) {
+  showEmote(playerOrPokemonId: string, emote?: string) {
     const avatars = [
       this.playerAvatar,
       this.opponentAvatar,
       ...this.scoutingAvatars
     ]
-    const player = avatars.find((a) => a?.playerId === playerId)
+    const player = avatars.find((a) => a?.playerId === playerOrPokemonId)
     if (player) {
       this.animationManager.play(player, PokemonAnimations[player.name].emote)
 
       if (emote) {
         player.drawSpeechBubble(emote, player === this.opponentAvatar)
+      }
+    } else {
+      const pokemonSprite = this.pokemons.get(playerOrPokemonId)
+      if (pokemonSprite) {
+        this.animationManager.play(
+          pokemonSprite,
+          PokemonAnimations[pokemonSprite.name].emote
+        )
+
+        if (emote) {
+          pokemonSprite.drawSpeechBubble(emote, player === this.opponentAvatar)
+        }
       }
     }
   }

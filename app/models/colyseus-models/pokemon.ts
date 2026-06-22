@@ -13931,6 +13931,7 @@ export class Stoutland extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.RETALIATE
+  passive = Passive.STOUTLAND_SEARCH
 }
 
 export class Pheromosa extends Pokemon {

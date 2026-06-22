@@ -454,7 +454,8 @@ export class OnDragDropPokemonCommand extends Command<
         oldX,
         oldY,
         player,
-        state: this.state
+        state: this.state,
+        room: this.room
       })
     }
     const oldX = pokemon.positionX
@@ -468,7 +469,8 @@ export class OnDragDropPokemonCommand extends Command<
       oldX,
       oldY,
       player,
-      state: this.state
+      state: this.state,
+      room: this.room
     })
   }
 }
@@ -520,7 +522,8 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           oldX,
           oldY,
           player,
-          state: this.state
+          state: this.state,
+          room: this.room
         })
       }
     } else {
@@ -538,7 +541,8 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           oldX: oldX,
           oldY: oldY,
           player,
-          state: this.state
+          state: this.state,
+          room: this.room
         })
       }
     }
@@ -1631,7 +1635,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 oldX,
                 oldY,
                 player,
-                state: this.state
+                state: this.state,
+                room: this.room
               })
             }
           }
@@ -2166,6 +2171,7 @@ export function onPokemonChangePosition({
   oldX,
   oldY,
   state,
+  room,
   doNotRemoveItems = false
 }: {
   pokemon: Pokemon
@@ -2175,6 +2181,7 @@ export function onPokemonChangePosition({
   oldX: number
   oldY: number
   state: GameState
+  room: GameRoom
   doNotRemoveItems?: boolean
 }) {
   // called after manually changing position of the pokemon on board
@@ -2213,6 +2220,7 @@ export function onPokemonChangePosition({
           pokemon,
           player,
           state,
+          room,
           oldX,
           oldY,
           newX,

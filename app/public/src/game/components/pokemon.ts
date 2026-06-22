@@ -54,6 +54,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
+import { EmoteBubble } from "./emote-bubble"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
@@ -130,6 +131,7 @@ export default class PokemonSprite extends DraggableObject {
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
   isTeleporting: boolean = false
+  emoteBubble: EmoteBubble | null
 
   constructor(
     scene: GameScene | DebugScene,
@@ -161,6 +163,7 @@ export default class PokemonSprite extends DraggableObject {
     this.id = pokemon.id
     this.targetX = null
     this.targetY = null
+    this.emoteBubble = null
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
@@ -1599,6 +1602,22 @@ export default class PokemonSprite extends DraggableObject {
 
   displayBoost(stat: Stat, debug?: boolean) {
     displayBoost(this, stat, 0, 0, debug)
+  }
+
+  drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
+    this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, isOpponent)
+    this.add(this.emoteBubble)
+
+    const x = isOpponent ? -40 : +40
+    const y = isOpponent ? +100 : -120
+    this.emoteBubble.setPosition(x, y)
+
+    setTimeout(() => {
+      if (this.emoteBubble) {
+        this.emoteBubble.destroy()
+        this.emoteBubble = null
+      }
+    }, 3000)
   }
 }
 
