@@ -296,11 +296,13 @@ export default function PreparationMenu() {
             setBotDifficulty(parseInt(e.target.value, 10))
           }}
         >
-          <option value={BotDifficulty.EASY}>{t("easy_bot")}</option>
-          <option value={BotDifficulty.MEDIUM}>{t("normal_bot")}</option>
-          <option value={BotDifficulty.HARD}>{t("hard_bot")}</option>
-          <option value={BotDifficulty.EXTREME}>{t("extreme_bot")}</option>
-          <option value={BotDifficulty.CUSTOM}>{t("custom_bot")}</option>
+          <option value={BotDifficulty.BEGINNER}>{t("bot_difficulty.BEGINNER")}</option>
+          <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
+          <option value={BotDifficulty.MEDIUM}>{t("bot_difficulty.MEDIUM")}</option>
+          <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
+          <option value={BotDifficulty.EXTREME}>{t("bot_difficulty.EXTREME")}</option>
+          <option value={BotDifficulty.MASTER}>{t("bot_difficulty.MASTER")}</option>
+          <option value={BotDifficulty.CUSTOM}>{t("bot_difficulty.CUSTOM")}</option>
         </select>
       </div>
     )

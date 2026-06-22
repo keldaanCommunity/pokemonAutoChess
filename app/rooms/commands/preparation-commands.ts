@@ -9,6 +9,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
 } from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
 import {
   getPendingGame,
   isPlayerTimeout,
@@ -33,7 +34,6 @@ import { cleanProfanity } from "../../utils/profanity-filter"
 import { pickRandomIn } from "../../utils/random"
 import { schemaEntries, schemaValues } from "../../utils/schemas"
 import type PreparationRoom from "../preparation-room"
-import { GADGETS } from "../../config/game/gadgets"
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -109,7 +109,10 @@ export class OnJoinCommand extends Command<
           return
         }
 
-        if (this.state.gameMode === GameMode.RANKED && u.level < GADGETS.certificate.levelRequired) {
+        if (
+          this.state.gameMode === GameMode.RANKED &&
+          u.level < GADGETS.certificate.levelRequired
+        ) {
           client.leave(CloseCodes.USER_RANK_TOO_LOW)
           return
         }
@@ -751,17 +754,23 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         let elo: QueryFilter<IBot>["elo"] | undefined
 
         switch (difficulty) {
+          case BotDifficulty.BEGINNER:
+            elo = { $lt: 850 }
+            break
           case BotDifficulty.EASY:
-            elo = { $lt: 800 }
+            elo = { $gte: 850, $lt: 999 }
             break
           case BotDifficulty.MEDIUM:
-            elo = { $gte: 800, $lt: 1100 }
+            elo = { $gte: 1000, $lt: 1149 }
             break
           case BotDifficulty.HARD:
-            elo = { $gte: 1100, $lt: 1400 }
+            elo = { $gte: 1150, $lt: 1299 }
             break
           case BotDifficulty.EXTREME:
-            elo = { $gte: 1400 }
+            elo = { $gte: 1300, $lt: 1449 }
+            break
+          case BotDifficulty.MASTER:
+            elo = { $gte: 1450 }
             break
         }
 
