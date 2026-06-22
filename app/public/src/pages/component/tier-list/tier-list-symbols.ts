@@ -19,4 +19,4 @@ export const TierListSymbols = [
   "9"
 ] as const
 
-export type TierListSymbol = typeof TierListSymbols[number]
+export type TierListSymbol = (typeof TierListSymbols)[number]

@@ -17,19 +17,27 @@ import {
 import { isIn } from "../../../../../utils/array"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
-import { TierListSymbols } from "../tier-list/tier-list-symbols"
+import {
+  type TierListSymbol,
+  TierListSymbols
+} from "../tier-list/tier-list-symbols"
 
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
   origin: "tier-list" | "bot-builder" | "team-planner"
 }) {
-  function handleOnDragStart(e: React.DragEvent, item: Item) {
+  function handleOnDragStart(e: React.DragEvent, item: Item | TierListSymbol) {
     e.stopPropagation()
     e.dataTransfer.setData("text/plain", `item,${item}`)
   }
 
-  const tabs = [
+  const tabs: {
+    label: string
+    key: string
+    items: readonly Item[] | readonly TierListSymbol[]
+    hidden?: boolean
+  }[] = [
     { label: t("components"), key: "components", items: ItemComponents },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     {
@@ -93,7 +101,7 @@ export default function ItemPicker(props: {
       {tabs.map((t) => (
         <TabPanel key={t.key}>
           {t.items.map((item) => {
-            if (TierListSymbols.includes(item)) {
+            if (isIn(TierListSymbols, item)) {
               return (
                 <img
                   key={item}
