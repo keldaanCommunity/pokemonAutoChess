@@ -2352,7 +2352,7 @@
 		"INGRAIN": "Ripristina 5 HP ogni 2 secondi. Ottieni un albero di bacche.",
 		"GROWTH": "Ripristina 15 HP ogni 2 secondi. Ottieni un altro albero di bacche.",
 		"SPORE": "Ripristina 25 HP ogni 2 secondi. Ottieni un terzo albero di bacche.",
-		"OVERGROW": "Quando sotto il 30% dei HP massimi, guadagna 50 AP. I tuoi alberi di bacche diventano dorati.",
+		"OVERGROW": "I tuoi alberi di bacche diventano dorati. Quando consumi una bacca, guadagni 50 AP.",
 		"FLAME_BODY": "[30,LK]% di possibilità di infliggere BURN.",
 		"WILDFIRE": "+1 all'ATK dopo ogni colpo.",
 		"BLAZE": "+2 all'ATK dopo ogni colpo.",

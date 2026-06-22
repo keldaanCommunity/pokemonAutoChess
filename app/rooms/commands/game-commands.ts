@@ -43,7 +43,10 @@ import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import type Player from "../../models/colyseus-models/player"
-import { PlayerChoice } from "../../models/colyseus-models/player-choice"
+import {
+  PlayerChoice,
+  type PlayerChoiceType
+} from "../../models/colyseus-models/player-choice"
 import {
   type Pokemon,
   PokemonClasses
@@ -1649,13 +1652,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   stopPickingPhase() {
     this.state.players.forEach((player) => {
       // auto pick choices if player did not choose in time
+      const autoPickChoices: PlayerChoiceType[] = [
+        "addPick",
+        "item",
+        "starter",
+        "unique",
+        "legendary"
+      ]
       player.choices
-        .filter(
-          (choice) =>
-            choice.type === "addPick" ||
-            choice.type === "item" ||
-            choice.type === "unique"
-        )
+        .filter((choice) => autoPickChoices.includes(choice.type))
         .forEach((choice) => {
           const randomPick = randomBetween(
             0,
