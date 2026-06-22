@@ -9,18 +9,13 @@
   text-align: center;
 }
 
-.game-history-list div {
-  flex: 1;
-  overflow-y: auto;
-}
-
 .game-history.my-box {
   display: grid;
   align-items: center;
   gap: 0 0.5em;
   grid-template-areas:
     "top elo syn team"
-    "date date syn team";
+    "date date items team";
   grid-template-columns: 8ch 7ch 160px 1fr;
   background-color: var(--color-bg-secondary);
   margin: 0 0 0.5em 0;
@@ -82,11 +77,20 @@
   line-height: 80%;
 }
 
+.game-history .player-items {
+  grid-area: items;
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: center;
+  gap: 2px;
+}
+
 @media (width <= 640px) {
   .game-history.my-box {
     grid-template-areas:
       "top elo date"
       "syn syn syn"
+      "items items items"
       "team team team";
     grid-template-columns: 5ch 7ch 1fr;
   }

@@ -32,12 +32,14 @@ export interface IGameRecord {
   pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
   elo: number
   gameMode: GameMode
+  unholdableItems: Item[]
 }
 
 export class GameRecord extends Schema implements IGameRecord {
   @type("uint64") time: number
   @type("uint8") rank: number
   @type([PokemonRecord]) pokemons = new ArraySchema<IPokemonRecord>()
+  @type(["string"]) unholdableItems = new ArraySchema<Item>()
   @type("uint16") elo: number
   @type("string") gameMode: GameMode = GameMode.CUSTOM_LOBBY
 
@@ -46,13 +48,15 @@ export class GameRecord extends Schema implements IGameRecord {
     rank: number,
     elo: number,
     pokemons: any[],
-    gameMode: GameMode
+    gameMode: GameMode,
+    unholdableItems: Item[]
   ) {
     super()
     this.time = time
     this.rank = rank
     this.elo = elo
     this.gameMode = gameMode
+    this.unholdableItems.push(...unholdableItems)
 
     pokemons.forEach((pokemon) => {
       this.pokemons.push(new PokemonRecord(pokemon))

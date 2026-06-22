@@ -35,7 +35,7 @@ export default function ItemPicker(props: {
   const tabs: {
     label: string
     key: string
-    items: readonly Item[] | readonly TierListSymbol[]
+    items: readonly (Item | TierListSymbol)[]
     hidden?: boolean
   }[] = [
     { label: t("components"), key: "components", items: ItemComponents },
