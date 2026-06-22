@@ -2490,7 +2490,7 @@
 		"ELECTRIC_TERRAIN": "Aumente o dano causado em 20% (somente Elétrico)",
 		"MISTY_TERRAIN": "Aumente o dano causado em 20% (somente Fada)",
 		"AURA": "+100% AP. Um Unown aparece a cada 3 lojas.",
-		"OVERGROW": "Quando estiver abaixo de 30% do HP, ganhe 50 AP. Suas árvores de frutos silvestres ficam douradas.",
+		"OVERGROW": "Suas árvores de frutos silvestres ficam douradas. Ao consumir uma baga, ganhe 50 AP.",
 		"SUPERCHARGED": "Os ataques triplos também queimam 10 PP do alvo e carregam uma CELL_BATTERY em 5%.",
 		"PRECOGNITION": "+50 AP. Um Unown aparece a cada 5 lojas.",
 		"TRANSCENDENCE": "+150 AP. Receba uma loja Unown e uma nova atualização de loja gratuita após cada combate e a cada 10 atualizações de loja.",

@@ -32,10 +32,15 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
 - New visual animations for Budew line
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
+- New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
+- Dondozo gains Monster synergy. HP: 250 → 220
+- Probopass gains Electric synergy. PP 90 → 100
+- Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
 
 # Changes to Synergies
 
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
+- Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
 
 # Changes to Items
 
@@ -52,6 +57,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
+- New effect for Drought weather: -3 PP per second
 
 # UI
 

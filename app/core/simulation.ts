@@ -68,7 +68,6 @@ import {
   normalShieldEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
-  overgrowEffect,
   pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
@@ -792,9 +791,6 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.OVERGROW:
         if (types.has(Synergy.GRASS)) {
           pokemon.effects.add(effect)
-          if (effect === EffectEnum.OVERGROW) {
-            pokemon.effectsSet.add(overgrowEffect)
-          }
         }
         break
 
