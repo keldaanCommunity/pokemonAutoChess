@@ -10,6 +10,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
+import { Emotion } from "../../types/enum/Emotion"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Berries,
@@ -27,6 +28,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
+import { getAvatarString } from "../../utils/avatar"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -1754,6 +1756,25 @@ export const PassiveEffects: Partial<
       )
       if (allyOnTheLeft) {
         pokemon.index = allyOnTheLeft.index
+      }
+    })
+  ],
+
+  [Passive.STOUTLAND_SEARCH]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
+      const index = (newY - 1) * BOARD_WIDTH + newX
+      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+        // BARK
+        room.broadcast(Transfer.SHOW_EMOTE, {
+          id: pokemon.id,
+          emote: getAvatarString(pokemon.index, pokemon.shiny, Emotion.JOYOUS)
+        })
+        room.broadcast(Transfer.DISPLAY_TEXT, {
+          id: player.id,
+          text: "bark",
+          x: pokemon.positionX,
+          y: pokemon.positionY
+        })
       }
     })
   ]

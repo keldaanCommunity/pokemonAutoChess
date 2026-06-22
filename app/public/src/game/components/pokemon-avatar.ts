@@ -7,7 +7,7 @@ import {
   type IPokemonAvatar
 } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { getAvatarSrc, getAvatarString } from "../../../../utils/avatar"
+import { getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
 import { showEmote } from "../../network"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
@@ -15,6 +15,7 @@ import { preference } from "../../preferences"
 import store from "../../stores"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
+import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
@@ -266,23 +267,5 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.playAnimation()
     }
-  }
-}
-
-export class EmoteBubble extends GameObjects.DOMElement {
-  dom: HTMLDivElement
-
-  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean) {
-    super(scene, 0, 0)
-
-    this.dom = document.createElement("div")
-    this.dom.className =
-      "game-emote-bubble " + (isOpponent ? "opponent" : "current")
-
-    const emoteImg = document.createElement("img")
-    emoteImg.src = getAvatarSrc(emoteAvatar)
-
-    this.dom.appendChild(emoteImg)
-    this.setElement(this.dom)
   }
 }

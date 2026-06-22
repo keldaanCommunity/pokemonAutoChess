@@ -3413,7 +3413,8 @@
 		"COMATOSE": "Always under SLEEP. Immune to BURN, POISONNED, FREEZE and PARALYSIS. When a SOUND try to wake this Pokémon up, it sinks deeper into its dream, gaining 5 AP.",
 		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted.",
 		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in.\nBUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead.",
-		"ILLUSION": "Copy the apperance of the ally on its left."
+		"ILLUSION": "Copy the apperance of the ally on its left.",
+		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground."
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -3778,7 +3779,7 @@
 		"WINDY": "+10 SPEED (+20 if FLYING)",
 		"RAIN": "+3 PP per second\n-30% BURN and POISONNED damage",
 		"NIGHT": "+10% CRIT_CHANCE\n+30% SLEEP duration",
-		"STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are immune)\n+30% PARALYSIS duration",
+		"STORM": "Lightning randomly strikes on the board, dealing 100 SPECIAL (ELECTRIC are supercharged instead)\n+30% PARALYSIS duration",
 		"MISTY": "+20% SPECIAL\n+30% CHARM duration",
 		"SNOW": "-10 SPEED if not ICE\n+30% FREEZE duration",
 		"SANDSTORM": "5 SPECIAL per second (GROUND are immune)\n+30% CONFUSION duration",
@@ -4214,11 +4215,15 @@
 	"make_room_public_hint": "Remove password of this room",
 	"change_room_name": "Change room name",
 	"add_bot": "Add Bot",
-	"easy_bot": "Easy (<800)",
-	"normal_bot": "Normal (800-1099)",
-	"hard_bot": "Hard (1100-1400)",
-	"extreme_bot": "Extreme (>1400)",
-	"custom_bot": "Custom",
+	"bot_difficulty": {
+		"BEGINNER": "Beginner (<850)",
+		"EASY":  "Easy (850-999)",
+		"MEDIUM": "Medium (1000-1149)",
+		"HARD": "Hard (1150-1299)",
+		"EXTREME": "Extreme (1300-1449)",
+		"MASTER": "Master (>1450)",
+		"CUSTOM": "Custom"
+	},
 	"room_leader": "Room leader",
 	"room_password": "This room is private, password",
 	"ready": "Ready",
@@ -4243,6 +4248,7 @@
 	"fully_grown": "FULLY GROWN",
 	"already_held": "ALREADY HELD",
 	"caught": "CAUGHT !",
+	"bark": "WOOF !",
 	"drop_here_to_sell": "Drop here to sell",
 	"for_price_gold": "for {{price}} gold",
 	"buy_xp": "Buy XP {{cost}}",
