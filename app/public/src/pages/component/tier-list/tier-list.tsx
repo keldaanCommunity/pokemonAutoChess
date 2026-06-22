@@ -5,8 +5,10 @@ import type { Item } from "../../../../../types/enum/Item"
 import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import type { ITierList } from "../../../../../types/interfaces/TierList"
+import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import SynergyIcon from "../icons/synergy-icon"
+import { type TierListSymbol, TierListSymbols } from "./tier-list-symbols"
 import "./tier-list.css"
 
 export default function TierList(props: {
@@ -277,8 +279,17 @@ export default function TierList(props: {
     )
   }
 
-  function renderItemImage(item: Item | PkmWithCustom | Synergy) {
-    if (isPokemon(item)) {
+  function renderItemImage(
+    item: Item | PkmWithCustom | Synergy | TierListSymbol
+  ) {
+    if (isIn(TierListSymbols, item)) {
+      return (
+        <img
+          src={"assets/ui/" + item.toLowerCase() + ".svg"}
+          className={"tier-list-symbol-icon"}
+        />
+      )
+    } else if (isPokemon(item)) {
       const pokemon = item as PkmWithCustom
       return (
         <img

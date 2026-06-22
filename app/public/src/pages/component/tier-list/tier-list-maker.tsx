@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Emotion, type PkmWithCustom } from "../../../../../types"
-import type { Item } from "../../../../../types/enum/Item"
-import { Pkm } from "../../../../../types/enum/Pokemon"
 import type { ITierList } from "../../../../../types/interfaces/TierList"
 import { exportElementAsImage } from "../../../../../utils/export-image"
 import { LocalStoreKeys, localStore } from "../../utils/store"
@@ -26,11 +23,6 @@ export default function TierListMaker() {
       ]
     }
   }
-  const [selection, setSelection] = useState<Item | PkmWithCustom>({
-    name: Pkm.MAGIKARP,
-    shiny: false,
-    emotion: Emotion.NORMAL
-  })
 
   const [tierList, setTierList] = useState<ITierList>(
     localStore.get(LocalStoreKeys.TIER_LIST) ?? getInitialTierList()

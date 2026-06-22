@@ -4935,7 +4935,8 @@
 		"share_on_discord": "Share on Discord",
 		"move_row_up": "Move row up",
 		"move_row_down": "Move row down",
-		"delete_row": "Delete row"
+		"delete_row": "Delete row",
+		"symbols": "Symbols"
 	},
 	"game_modes": {
 		"CLASSIC": "Classic",
