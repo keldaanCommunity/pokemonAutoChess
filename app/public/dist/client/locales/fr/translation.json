@@ -2157,7 +2157,7 @@
 		"FORCE_PALM": "Inflige [15,30,60,120,SP] + [10,SP]% des HP max de la cible en SPECIAL et PARALYSIS pendant 6 secondes. Si la cible subit déjà PARALYSIS, inflige +[10,20,40,80,SP] SPECIAL supplémentaires et repousse la cible en arrière.",
 		"THUNDER_CAGE": "Piège la cible et les ennemis ADJACENT dans une prison électrique, infligeant [15,30,60,120,SP] SPECIAL, PARALYSIS et deviennent LOCKED pendant 3 secondes.",
 		"HEADBUTT": "Inflige [20,40,80,160,SP] SPECIAL à la cible et lui inflige FLINCH pendant 5 secondes. Dégâts doublés si la cible a un SHIELD.",
-		"DIZZY_PUNCH": "Inflige [20,40,80,160,SP] SPECIAL à la cible et le rend CONFUSION pendant 3 secondes. Les dégâts sont doublés si la cible possède un SHIELD.",
+		"DIZZY_PUNCH": "Inflige à la cible [20,40,80,160,SP] SPECIAL et CONFUSION pendant 3 secondes. Les dégâts sont doublés si la cible possède un SHIELD.",
 		"STEEL_WING": "Fonce vers l'ennemi le plus éloigné, infligeant [10,20,40,80,SP] SPECIAL + 2x DEF en SPECIAL en volant 1 DEF à tous les ennemis touchés sur le chemin.",
 		"YAWN": "Gagne [15,30,60,120,SP] SHIELD. Les ennemis qui ciblent le lanceur subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
 		"WISE_YAWN": "Confère à l'allié ayant le moins de HP [15,30,60,120,SP] de SHIELD. Les ennemis qui attaquent cet allié subissent FATIGUE pendant 3 secondes et perdent 20 AP.",
