@@ -14,6 +14,7 @@
 
 # Changes to Items
 
+- Nerf Curry: 4 → 3 seconds
 - Nerf Tea: 80 → 60 PP
 - Nerf Smoked Fillet: 5 → 3 ATK gained
 - Buff Flower Sweet: 5 → 10 SPEED gained

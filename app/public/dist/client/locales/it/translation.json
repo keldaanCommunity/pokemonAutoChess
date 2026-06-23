@@ -2943,7 +2943,7 @@
 		"HEARTY_STEW": "All'inizio del prossimo combattimento, aumenta i HP massimi del 30%. Se servito al Pokémon che possiede la COOKING_POT, il Pokémon è bruciato per 5 secondi.",
 		"RAGE_CANDY_BAR": "Ottieni 10 di ATK all'inizio del prossimo combattimento.",
 		"TEA": "Ottieni 80 PP all'inizio del prossimo combattimento.",
-		"CURRY": "Ottieni RAGE per 4 secondi all'inizio del prossimo combattimento.",
+		"CURRY": "Ottieni RAGE per 3 secondi all'inizio del prossimo combattimento.",
 		"CASTELIACONE": "Il primo attacco effettuato nel prossimo combattimento infligge FREEZE on-hit per 5 secondi.",
 		"WHIPPED_DREAM": "Il primo attacco effettuato nel prossimo combattimento infligge CHARM on-hit per 5 secondi.",
 		"BERRY_JUICE": "Ottieni 100 di SHIELD all'inizio del prossimo combattimento e ogniqualvolta consumi una bacca.",
