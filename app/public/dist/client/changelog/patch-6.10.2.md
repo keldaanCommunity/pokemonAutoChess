@@ -20,3 +20,7 @@
 - Nerf Smoked Fillet: 5 → 3 ATK gained
 - Buff Flower Sweet: 5 → 10 SPEED gained
 - Buff Rice: 50 → 80 SHIELD
+
+# Misc
+
+- Ludicolo town encounter now proposes 2 more regular item components in carousel
