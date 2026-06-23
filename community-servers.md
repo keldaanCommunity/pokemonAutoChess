@@ -47,6 +47,16 @@ China Community Server for Pokemon Auto Chess
 
 Pokemon Auto Spire is a Slay the Spire inspired mod of PAC - its a single player game!
 
+# Pokemon Auto Legacy
+
+- url: https://www.pokemon-auto-legacy.com/
+- logo: /assets/community-servers/pal-log.png
+- creator: Vimby
+- discord: ttps://discord.gg/G7Yhtezj
+- location: North America
+
+Server for experiencing older patches of Pokemon Auto Chess, completely faithful to how they were at the time they were live. Swaps to different patches about monthly.
+  
 # Eternara PAC
 
 - url: https://eternara.site
