@@ -1,3 +1,4 @@
+import type { Delayed } from "@colyseus/core"
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
@@ -5,7 +6,6 @@ import chatV2 from "../../models/mongo-models/chat-v2"
 import type { EloRank } from "../../types/enum/EloRank"
 import { GameMode } from "../../types/enum/Game"
 import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { Delayed } from "@colyseus/core";
 
 export interface IPreparationState {
   users: MapSchema<GameUser>

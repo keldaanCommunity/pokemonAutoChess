@@ -597,7 +597,7 @@ export class MiniGame {
         Item.SKY_MELODICA,
         Item.TERRA_CYMBAL
       )
-      nbItemsToPick -= 3
+      nbItemsToPick -= 1
     }
 
     if (encounter === TownEncounters.SABLEYE) {

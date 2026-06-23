@@ -1,5 +1,5 @@
 import { AttackType } from "../../types/enum/Game"
-import { pickNRandomIn } from "../../utils/random"
+import { distanceM } from "../../utils/distance"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -14,7 +14,24 @@ export class FutureSightStrategy extends AbilityStrategy {
     const enemies = board.cells.filter<PokemonEntity>(
       (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
     )
-    const targets: PokemonEntity[] = pickNRandomIn(enemies, count)
+    const targets: PokemonEntity[] = enemies
+      .sort((a, b) => {
+        return (
+          distanceM(
+            a.positionX,
+            a.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) -
+          distanceM(
+            b.positionX,
+            b.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+        )
+      })
+      .slice(0, count)
 
     for (const tg of targets) {
       pokemon.broadcastAbility({
