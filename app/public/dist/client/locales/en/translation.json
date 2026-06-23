@@ -3463,7 +3463,7 @@
 		"FREEZE": "Prevents moving, dodging or attacking",
 		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain.",
 		"SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
-		"CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
+		"CONFUSION": "Force to change target all the time and sometimes target itself",
 		"WOUND": "Prevents healing from any source",
 		"RAGE": "Double all damage, get +80 SPEED. Half healing, SHIELD, FREEZE and SLEEP durations, and lose PROTECT. All units become RAGE after 35 seconds of fight.",
 		"RESURRECTION": "Prevents KO once, restoring to base max HP. Synergy buffs, item stacks and statuses are reset upon resurrection.",
