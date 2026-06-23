@@ -15,8 +15,12 @@
 
 # Changes to Items
 
-- Nerf Curry: 4 → 3 seconds
-- Nerf Tea: 80 → 60 PP
-- Nerf Smoked Fillet: 5 → 3 ATK gained
-- Buff Flower Sweet: 5 → 10 SPEED gained
-- Buff Rice: 50 → 80 SHIELD
+- Nerf CURRY: 4 → 3 seconds
+- Nerf TEA: 80 → 60 PP
+- Nerf SMOKED_FILET: 5 → 3 ATK gained
+- Buff FLOWER_SWEET: 5 → 10 SPEED gained
+- Buff RICE: 50 → 80 SHIELD
+
+# Misc
+
+- Ludicolo town encounter now proposes 2 more regular item components in carousel
