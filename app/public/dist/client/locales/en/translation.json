@@ -3212,13 +3212,13 @@
 		"SWITCHER_WAND": "Fairy attacks deal 20% additional SPECIAL ON_HIT and have [5,LK]% chance to swap target position with farthest enemy",
 		"WHIRLWIND_WAND": "Fairy attacks deal 20% additional SPECIAL ON_HIT and have [5,LK]% chance to throw a whirlwind that makes all the units in its path to fly away.",
 		"TUNNEL_WAND": "Fairy attacks deal 20% additional SPECIAL ON_HIT. Wands SPECIAL has [5,LK]% chance to pass through the target to hit enemies in a line behind it.",
-		"AQUA_MONICA": "Pokémon in shop have 5% additional chance to have the WATER type.",
-		"FIERY_DRUM": "Pokémon in shop have 5% additional chance to have the FIRE type.",
-		"GRASS_CORNET": "Pokémon in shop have 5% additional chance to have the GRASS type.",
-		"ICY_FLUTE": "Pokémon in shop have 5% additional chance to have the ICE type.",
-		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
-		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
-		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type."
+		"AQUA_MONICA": "Pokémon in the shop are more likely to have the WATER type (5% bonus chance for each shop slot).",
+		"FIERY_DRUM": "Pokémon in the shop are more likely to have the FIRE type (5% bonus chance for each shop slot).",
+		"GRASS_CORNET": "Pokémon in the shop are more likely to have the GRASS type (5% bonus chance for each shop slot).",
+		"ICY_FLUTE": "Pokémon in the shop are more likely to have the ICE type (5% bonus chance for each shop slot).",
+		"ROCK_HORN": "Pokémon in the shop are more likely to have the ROCK type (5% bonus chance for each shop slot).",
+		"SKY_MELODICA": "Pokémon in the shop are more likely to have the FLYING type (5% bonus chance for each shop slot).",
+		"TERRA_CYMBAL": "Pokémon in the shop are more likely to have the GROUND type (5% bonus chance for each shop slot)."
 	},
 	"passive_description": {
 		"NONE": "No passive",
