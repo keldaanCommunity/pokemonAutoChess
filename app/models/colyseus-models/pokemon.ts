@@ -11774,7 +11774,7 @@ export class Ekans extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.VENOSHOCK
+  skill = Ability.COIL
   additional = true
 }
 
@@ -11789,7 +11789,7 @@ export class Arbok extends Pokemon {
   speDef = 8
   maxPP = 90
   range = 1
-  skill = Ability.VENOSHOCK
+  skill = Ability.COIL
   additional = true
 }
 
