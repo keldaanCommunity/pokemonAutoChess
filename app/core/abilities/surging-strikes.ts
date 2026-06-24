@@ -5,6 +5,7 @@ import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class SurgingStrikesStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,

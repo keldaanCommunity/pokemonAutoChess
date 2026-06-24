@@ -215,7 +215,13 @@ function PokemonPickerTab(props: {
     <>
       <div
         className="filters"
-        style={{ display: "flex", justifyContent: "end", gap: "1em" }}
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          gap: "1em",
+          float: "right",
+          marginLeft: "1em"
+        }}
       >
         {ingame && (
           <Checkbox
@@ -237,20 +243,8 @@ function PokemonPickerTab(props: {
           />
         )}
       </div>
-      <dl id="rarity-grid">
-        {(
-          [
-            Rarity.COMMON,
-            Rarity.UNIQUE,
-            Rarity.UNCOMMON,
-            Rarity.LEGENDARY,
-            Rarity.RARE,
-            Rarity.HATCH,
-            Rarity.EPIC,
-            Rarity.SPECIAL,
-            Rarity.ULTRA
-          ] as Rarity[]
-        ).map((rarity) => (
+      <dl>
+        {Object.values(Rarity).map((rarity) => (
           <React.Fragment key={rarity}>
             <dt
               style={{

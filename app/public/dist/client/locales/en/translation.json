@@ -2888,7 +2888,8 @@
 		"ICY_FLUTE": "Icy Flute",
 		"ROCK_HORN": "Rock Horn",
 		"SKY_MELODICA": "Sky Melodica",
-		"TERRA_CYMBAL": "Terra Cymbal"
+		"TERRA_CYMBAL": "Terra Cymbal",
+		"SOOTHE_BELL": "Soothe Bell"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3078,7 +3079,7 @@
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",
 		"RAGE_CANDY_BAR": "Gain 10 ATK at the start of the next fight.",
 		"TEA": "Gain 80 PP at the start of the next fight.",
-		"CURRY": "Start the next fight RAGE for 4 seconds.",
+		"CURRY": "Start the next fight RAGE for 3 seconds.",
 		"CASTELIACONE": "The first attack in the next fight will inflict FREEZE for 5 seconds ON_HIT.",
 		"WHIPPED_DREAM": "The first attack in the next fight will inflict CHARM for 5 seconds ON_HIT.",
 		"BERRY_JUICE": "Gain 100 SHIELD at the start of the next fight and every time a berry is consumed.",
@@ -3218,7 +3219,8 @@
 		"ICY_FLUTE": "Pokémon in shop have 5% additional chance to have the ICE type.",
 		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
 		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
-		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type."
+		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type.",
+		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3465,7 +3467,7 @@
 		"FREEZE": "Prevents moving, dodging or attacking",
 		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain.",
 		"SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
-		"CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
+		"CONFUSION": "Force to change target all the time and sometimes target itself",
 		"WOUND": "Prevents healing from any source",
 		"RAGE": "Double all damage, get +80 SPEED. Half healing, SHIELD, FREEZE and SLEEP durations, and lose PROTECT. All units become RAGE after 35 seconds of fight.",
 		"RESURRECTION": "Prevents KO once, restoring to base max HP. Synergy buffs, item stacks and statuses are reset upon resurrection.",
@@ -4076,7 +4078,7 @@
 	},
 	"hide": "Hide",
 	"show": "Show",
-	"encounter_rates": "Encouter rates",
+	"encounter_rates": "Encounter rates",
 	"rarity_label": "Rarity",
 	"pool_label": "Pool",
 	"tier": "Tier",
@@ -4580,7 +4582,8 @@
 		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them",
 		"KINGAMBIT": "Kingambit has given the player in first place the LEADERS_CREST. Beat them in battle to earn extra GOLD!",
 		"LAPRAS": "Lapras offers a ride to go to a different region.",
-		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities."
+		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities.",
+		"CHIMECHO": "Chimecho can convene an assembly with the SOOTHE_BELL"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
@@ -4937,7 +4940,8 @@
 		"share_on_discord": "Share on Discord",
 		"move_row_up": "Move row up",
 		"move_row_down": "Move row down",
-		"delete_row": "Delete row"
+		"delete_row": "Delete row",
+		"symbols": "Symbols"
 	},
 	"game_modes": {
 		"CLASSIC": "Classic",

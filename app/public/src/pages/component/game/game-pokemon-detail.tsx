@@ -50,6 +50,7 @@ export function GamePokemonDetail(props: {
     | "wiki"
     | "patchnotes"
     | "after"
+    | "history"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean
@@ -449,7 +450,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
 }
 
 export function GamePokemonDetailTooltip(props: {
-  origin: "wiki" | "patchnotes" | "after" | "planner"
+  origin: "wiki" | "patchnotes" | "after" | "planner" | "history"
   isOpen?: boolean
 }) {
   return (
