@@ -62,5 +62,6 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Misc
 
 - New title: Five Stars
+- New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
 - Add symbols to tier list maker gadget and change layout
