@@ -87,7 +87,7 @@ export default function PreparationMenu() {
   }, [nbUsersReady, users.length, allUsersReady])
 
   const humans = users.filter((u) => !u.isBot)
-  const isEligibleForELO = gameMode === GameMode.CLASSIC || humans.length >= 2
+  const isEligibleForELO = gameMode === GameMode.RANKED
   const averageElo =
     humans.length > 0
       ? Math.round(humans.reduce((acc, u) => acc + u.elo, 0) / humans.length)
@@ -296,13 +296,23 @@ export default function PreparationMenu() {
             setBotDifficulty(parseInt(e.target.value, 10))
           }}
         >
-          <option value={BotDifficulty.BEGINNER}>{t("bot_difficulty.BEGINNER")}</option>
+          <option value={BotDifficulty.BEGINNER}>
+            {t("bot_difficulty.BEGINNER")}
+          </option>
           <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
-          <option value={BotDifficulty.MEDIUM}>{t("bot_difficulty.MEDIUM")}</option>
+          <option value={BotDifficulty.MEDIUM}>
+            {t("bot_difficulty.MEDIUM")}
+          </option>
           <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
-          <option value={BotDifficulty.EXTREME}>{t("bot_difficulty.EXTREME")}</option>
-          <option value={BotDifficulty.MASTER}>{t("bot_difficulty.MASTER")}</option>
-          <option value={BotDifficulty.CUSTOM}>{t("bot_difficulty.CUSTOM")}</option>
+          <option value={BotDifficulty.EXTREME}>
+            {t("bot_difficulty.EXTREME")}
+          </option>
+          <option value={BotDifficulty.MASTER}>
+            {t("bot_difficulty.MASTER")}
+          </option>
+          <option value={BotDifficulty.CUSTOM}>
+            {t("bot_difficulty.CUSTOM")}
+          </option>
         </select>
       </div>
     )
