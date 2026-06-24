@@ -1723,12 +1723,29 @@ export class FutureSightStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [15, 30, 60][pokemon.stars - 1] ?? 60
-    const count = 5
+    const damage = [20, 30, 50][pokemon.stars - 1] ?? 50
+    const count = [3, 4, 5][pokemon.stars - 1] ?? 5
     const enemies = board.cells.filter<PokemonEntity>(
       (p): p is PokemonEntity => p !== undefined && p.team !== pokemon.team
     )
-    const targets: PokemonEntity[] = pickNRandomIn(enemies, count)
+    const targets: PokemonEntity[] = enemies
+      .sort((a, b) => {
+        return (
+          distanceM(
+            a.positionX,
+            a.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          ) -
+          distanceM(
+            b.positionX,
+            b.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+        )
+      })
+      .slice(0, count)
 
     for (const tg of targets) {
       pokemon.broadcastAbility({
