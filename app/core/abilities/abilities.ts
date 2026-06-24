@@ -79,6 +79,7 @@ import { ChloroblastStrategy } from "./chloroblast"
 import { CityShuttleStrategy } from "./city-shuttle"
 import { ClangorousSoulStrategy } from "./clangorous-soul"
 import { CloseCombatStrategy } from "./close-combat"
+import { CoilStrategy } from "./coil"
 import { ColumnCrushStrategy } from "./column-crush"
 import { ConfusingMindStrategy } from "./confusing-mind"
 import { ConfusionStrategy } from "./confusion"
@@ -788,6 +789,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
   [Ability.CLANGOROUS_SOUL]: new ClangorousSoulStrategy(),
   [Ability.CLOSE_COMBAT]: new CloseCombatStrategy(),
+  [Ability.COIL]: new CoilStrategy(),
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.CONFUSING_MIND]: new ConfusingMindStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),

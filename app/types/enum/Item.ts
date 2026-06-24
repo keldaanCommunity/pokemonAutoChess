@@ -330,7 +330,8 @@ export enum Item {
   ICY_FLUTE = "ICY_FLUTE",
   ROCK_HORN = "ROCK_HORN",
   SKY_MELODICA = "SKY_MELODICA",
-  TERRA_CYMBAL = "TERRA_CYMBAL"
+  TERRA_CYMBAL = "TERRA_CYMBAL",
+  SOOTHE_BELL = "SOOTHE_BELL"
 }
 
 export const MemoryDiscs = [
@@ -915,7 +916,7 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
-export const Wands: Item[] = [
+export const Wands = [
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
   Item.SPIRIT_WAND,
@@ -932,7 +933,7 @@ export const Wands: Item[] = [
   Item.SWITCHER_WAND,
   Item.WHIRLWIND_WAND,
   Item.TUNNEL_WAND
-]
+] satisfies Item[]
 
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
@@ -946,23 +947,23 @@ export const TMsBronze = [
   Item.TM_RETURN,
   Item.TM_COUNTER,
   Item.TM_DISABLE
-]
+] satisfies Item[]
 
 export const TMsSilver = [
   Item.TM_BULK_UP,
   Item.TM_CHARGE,
   Item.TM_REFLECT,
   Item.TM_PAYDAY
-]
+] satisfies Item[]
 
 export const TMsGold = [
   Item.TM_FOCUS_PUNCH,
   Item.TM_HYPER_BEAM,
   Item.TM_PROTECT,
   Item.TM_SKILL_SWAP
-]
+] satisfies Item[]
 
-export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold]
+export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold] satisfies Item[]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
@@ -1155,6 +1156,8 @@ export const UnholdableItems = [
   Item.RED_SCALE
 ] satisfies Item[]
 
+export type UnholdableItem = (typeof UnholdableItems)[number]
+
 export const ConsumableItems = [
   ...TMs,
   ...Dishes,
@@ -1171,7 +1174,8 @@ export const ConsumableItems = [
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR
+  Item.MALICIOUS_ARMOR,
+  Item.SOOTHE_BELL
 ] satisfies Item[]
 
 export const RemovableItems = [
@@ -1181,3 +1185,11 @@ export const RemovableItems = [
   ...Scarves,
   ...MemoryDiscs
 ] satisfies Item[]
+
+export const UnholdableItemsToSaveForStats = [
+  Item.GIMMIGHOUL_COIN,
+  ...Wands,
+  ...SynergyGems,
+  ...SevenTreasures,
+  ...WeatherRocks
+] satisfies UnholdableItem[]

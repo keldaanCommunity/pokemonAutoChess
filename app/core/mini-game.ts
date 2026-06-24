@@ -419,6 +419,10 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.LAPRAS_PASSPORT)
       })
+    } else if (state.townEncounter === TownEncounters.CHIMECHO) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.SOOTHE_BELL)
+      })
     }
   }
 

@@ -5,6 +5,7 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class CeaselessEdgeStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,

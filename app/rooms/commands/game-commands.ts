@@ -809,7 +809,7 @@ export class OnDragDropItemCommand extends Command<
       }
     }
 
-    if (UnholdableItems.includes(item) && !ConsumableItems.includes(item)) {
+    if (isIn(UnholdableItems, item) && !ConsumableItems.includes(item)) {
       // Unholdable and non-consummable items should have zero interaction on any Pokémon
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
@@ -817,7 +817,7 @@ export class OnDragDropItemCommand extends Command<
 
     if (
       pokemon.canHoldItems === false &&
-      !(UnholdableItems.includes(item) && isIn(ConsumableItems, item)) // unholdable consumable items like dishes or dojo tickets can still be used on pokemon that can't hold items, since they are consumed right away and don't actually get held by the pokemon
+      !(isIn(UnholdableItems, item) && isIn(ConsumableItems, item)) // unholdable consumable items like dishes or dojo tickets can still be used on pokemon that can't hold items, since they are consumed right away and don't actually get held by the pokemon
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
@@ -832,7 +832,7 @@ export class OnDragDropItemCommand extends Command<
     if (
       pokemon.items.size >= 3 &&
       !(isBasicItem && existingBasicItemToCombine) &&
-      UnholdableItems.includes(item) === false
+      !isIn(UnholdableItems, item)
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, {
         ...message,

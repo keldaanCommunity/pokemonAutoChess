@@ -1191,6 +1191,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.SOOTHE_BELL]: [
+    new OnItemDroppedEffect(({ player, pokemon, room, item }) => {
+      room.state.shop.assignSootheBellShop(
+        player,
+        room.state,
+        schemaValues(pokemon.types)
+      )
+      removeInArray(player.items, item)
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.CHEF_HAT]: [
     chefCookEffect,
     new OnItemDroppedEffect(({ pokemon }) => {
