@@ -37,7 +37,7 @@ export class NightDazeStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      enemy.status.triggerBlinded(blindDuration, enemy)
+      enemy.status.triggerBlinded(blindDuration, enemy, pokemon, true)
     })
   }
 }

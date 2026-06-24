@@ -37,7 +37,7 @@ export class BitterMaliceStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      enemy.status.triggerFatigue(fatigueDuration, enemy)
+      enemy.status.triggerFatigue(fatigueDuration, enemy, pokemon, true)
     })
   }
 }

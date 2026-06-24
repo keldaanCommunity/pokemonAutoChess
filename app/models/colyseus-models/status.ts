@@ -397,7 +397,7 @@ export default class Status extends Schema implements IStatus {
   triggerBurn(
     duration: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | null
   ) {
     const alreadyBurning = this.burn
     if (
@@ -546,13 +546,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerFatigue(duration: number, pkm: PokemonEntity) {
+  triggerFatigue(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
     if (!this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       duration = this.applyStatusDurationReductions(duration, pkm)
 
       this.fatigue = true
       if (duration > this.fatigueCooldown) {
-        this.fatigueCooldown = duration
+        this.fatigueCooldown = Math.round(duration)
       }
     }
   }
@@ -807,8 +813,7 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect &&
       !pkm.effects.has(EffectEnum.IMMUNITY_CONFUSION)
     ) {
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.SANDSTORM) {
         duration *= 1.3
       }
@@ -844,8 +849,7 @@ export default class Status extends Schema implements IStatus {
     apBoost = false
   ) {
     if (!this.charm && !this.runeProtect) {
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.MISTY) {
         duration *= 1.3
       }
@@ -910,8 +914,7 @@ export default class Status extends Schema implements IStatus {
       if (!this.paralysis) {
         this.paralysis = true
       }
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.STORM) {
         duration *= 1.3
         const nbElectricQuartz = pkm.player
@@ -1247,8 +1250,15 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerBlinded(duration: number, pkm: PokemonEntity) {
+  triggerBlinded(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
     if (!this.blinded && !this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
+
       if (pkm.status.enraged) {
         duration = duration / 2
       }
