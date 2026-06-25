@@ -230,7 +230,9 @@ export default abstract class PokemonState {
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
         const stoneEdgeMult = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
-        physicalDamage += Math.round(pokemon.def * (stoneEdgeMult + pokemon.ap / 100))
+        physicalDamage += Math.round(
+          pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
+        )
       }
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
@@ -537,8 +539,9 @@ export default abstract class PokemonState {
           const reflectCrit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance / 100, pokemon)
+          const reflectFactor = [0.5, 0.75, 1, 1.5][pokemon.stars - 1] ?? 1.5
           const reflectDamage = Math.round(
-            0.5 *
+            reflectFactor *
               damage *
               (1 + pokemon.ap / 100) *
               (reflectCrit ? pokemon.critPower : 1)
@@ -698,7 +701,7 @@ export default abstract class PokemonState {
           pokemon.effects.delete(e)
         })
       }
-      
+
       if (
         pokemon.hp - residualDamage <= 0 &&
         pokemon.items.has(Item.COVER_BAND) === false
@@ -816,7 +819,7 @@ export default abstract class PokemonState {
     attacker: PokemonEntity | null,
     board: Board,
     attackType: AttackType
-  ) {    
+  ) {
     pokemon.team = pokemon.baseTeam
     pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
@@ -975,12 +978,12 @@ export default abstract class PokemonState {
 
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
     let passivePPGain = 10
-    if(pokemon.simulation.weather === Weather.RAIN){
+    if (pokemon.simulation.weather === Weather.RAIN) {
       passivePPGain += 3
-    } else if(pokemon.simulation.weather === Weather.DROUGHT){
+    } else if (pokemon.simulation.weather === Weather.DROUGHT) {
       passivePPGain -= 3
     }
-    
+
     pokemon.addPP(passivePPGain, pokemon, 0, false)
     if (pokemon.effects.has(EffectEnum.RAIN_DANCE)) {
       pokemon.addPP(4, pokemon, 0, false)

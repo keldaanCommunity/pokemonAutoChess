@@ -1996,7 +1996,7 @@
 		"COSMIC_POWER_SUN": "Aumenta o ATK base de todos os Pokémon aliados, exceto o usuário, em [25,25,25,50,SP]%.",
 		"ICE_BALL": "Aumenta a SPE_DEF do usuário em 10 e então causa SPECIAL igual a [10,20,30,60,SP] + [50,100,150,300,SP]% da SPE_DEF do usuário.",
 		"MAGMA_STORM": "Um redemoinho de fogo causa [50,75,100,200,SP] SPECIAL antes de se propagar para inimigos ADJACENT até 5 vezes, perdendo 20% de seu poder para cada quadrado percorrido.",
-		"REFLECT": "Por [2,2,3,5,SP=0.5] segundos, sempre que o usuário receber PHYSICAL, bloqueia o dano e reflete [50,SP]% do dano como SPECIAL ao atacante.",
+		"REFLECT": "Por [3,3,3,5] segundos, sempre que o usuário receber PHYSICAL, bloqueia o dano e reflete [50,75,100,150,SP]% do dano como SPECIAL ao atacante.",
 		"HIDDEN_POWER_S": "Uma onda gigante limpa status negativos e efeitos de campo, cura 20% de HP de toda a sua equipe e empurra e causa dano aos inimigos de 10% de seu HP como TRUE.",
 		"HIDDEN_POWER_Y": "Toda a sua equipe conjura $t(ability.MEDITATE), o que aumenta o ataque deles em [100,SP]%.",
 		"SUPER_FANG": "Causa [20,30,50,70,SP=0.5]% do HP máximo do alvo como TRUE.",
