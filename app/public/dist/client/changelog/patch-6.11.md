@@ -3,10 +3,6 @@
 
 # Changes to Pokemon & Abilities
 
-- Nerf Alcremie Rainbow Swirl: 60 → 50 PP
-- Buff Alcremie Matcha: 40 → 60 max HP
-- Ditto: PP 50 → 10
-
 Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.
 - Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
 - After You (Indeedee): SPEED buff: 10 → 5/10/15/20
@@ -36,6 +32,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Dondozo gains Monster synergy. HP: 250 → 220
 - Probopass gains Electric synergy. PP 90 → 100
 - Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
+- New ability for Ekans line: Coil: Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds (non scalable). User also buffs its ATK and DEF by [3,5,10,20,SP].
+- Ditto: PP 50 → 10
 
 # Changes to Synergies
 
@@ -47,10 +45,6 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
 
-- Nerf Tea: 80 → 60 PP
-- Nerf Smoked Fillet: 5 → 3 ATK gained
-- Buff Flower Sweet: 5 → 10 SPEED gained
-- Buff Rice: 50 → 80 SHIELD
 
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
@@ -69,5 +63,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Misc
 
 - New title: Five Stars
+- New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
 - Avatar emotes can now be used in lobby chat
+- Add symbols to tier list maker gadget and change layout

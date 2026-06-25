@@ -1767,7 +1767,8 @@
 		"SNORE": "Snore",
 		"STUFF_CHEEKS": "Stuff Cheeks",
 		"SILK_TRAP": "Silk Trap",
-		"SKITTER_SMACK": "Skitter Smack"
+		"SKITTER_SMACK": "Skitter Smack",
+		"COIL": "Coil"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2165,7 +2166,7 @@
 		"THUNDER_CAGE": "Trap the target and ADJACENT enemy Pokémon in an electric prison, dealing [15,30,60,120,SP] SPECIAL and inflicting LOCKED and PARALYSIS for 3 seconds.",
 		"HEADBUTT": "Deal [20,40,80,160,SP] SPECIAL to the target and inflict them with FLINCH for 5 seconds. The damage is doubled if the target has a SHIELD.",
 		"DIZZY_PUNCH": "Deal [20,40,80,160,SP] SPECIAL to the target and inflict them with CONFUSION for 3 seconds. The damage is doubled if the target has a SHIELD.",
-		"STEEL_WING": "Dash to the farthest reachable enemy Pokémon, dealing [10,20,40,80,SP] SPECIAL + 2x DEF as SPECIAL and stealing 1 DEF to all enemy Pokémon in the path.",
+		"STEEL_WING": "Dash to the farthest reachable enemy Pokémon, dealing [10,20,40,80,SP] SPECIAL + 2x DEF as SPECIAL to and stealing 1 DEF from all enemy Pokémon in the path.",
 		"YAWN": "Gain [15,30,60,120,SP] SHIELD. Enemy Pokémon targeting the user are inflicted with FATIGUE for 3 seconds and lose 20 AP.",
 		"WISE_YAWN": "Grant the lowest HP ally [15,30,60,120,SP] SHIELD. Enemies attacking that ally suffer FATIGUE for 3 seconds and lose 20 AP.",
 		"FIERY_DANCE": "Cloaked in flames, the user dances and flaps its wings dealing [25,50,100,200,SP] SPECIAL to the target and raises their own AP by 30.",
@@ -2324,7 +2325,8 @@
 		"SNORE": "Deal [20,40,60,120,SP] SPECIAL to the 3 enemy Pokémon in front, causing them to FLINCH for 3 seconds.",
 		"STUFF_CHEEKS": "If the user is holding any berries, eat one of them immediately and gain [100,SP]% of the HP healed by it as SHIELD instead. Otherwise, forage and equip a random berry that will be kept for future battles if possible.",
 		"SILK_TRAP": "The user spins a silken trap, gaining PROTECT for 1.5 seconds. Any attack at melee range received during that time will lower the SPEED of the attacker by [5,10,15,30,SP] and inflict PARALYSIS for [1.5,SP,ND=1] seconds.",
-		"SKITTER_SMACK": "Skitters behind the target to strike, dealing [15,30,60,120,SP] SPECIAL. This also lowers the target's AP by 20."
+		"SKITTER_SMACK": "Skitters behind the target to strike, dealing [15,30,60,120,SP] SPECIAL. This also lowers the target's AP by 20.",
+		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2886,7 +2888,8 @@
 		"ICY_FLUTE": "Icy Flute",
 		"ROCK_HORN": "Rock Horn",
 		"SKY_MELODICA": "Sky Melodica",
-		"TERRA_CYMBAL": "Terra Cymbal"
+		"TERRA_CYMBAL": "Terra Cymbal",
+		"SOOTHE_BELL": "Soothe Bell"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3076,7 +3079,7 @@
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",
 		"RAGE_CANDY_BAR": "Gain 10 ATK at the start of the next fight.",
 		"TEA": "Gain 80 PP at the start of the next fight.",
-		"CURRY": "Start the next fight RAGE for 4 seconds.",
+		"CURRY": "Start the next fight RAGE for 3 seconds.",
 		"CASTELIACONE": "The first attack in the next fight will inflict FREEZE for 5 seconds ON_HIT.",
 		"WHIPPED_DREAM": "The first attack in the next fight will inflict CHARM for 5 seconds ON_HIT.",
 		"BERRY_JUICE": "Gain 100 SHIELD at the start of the next fight and every time a berry is consumed.",
@@ -3216,7 +3219,8 @@
 		"ICY_FLUTE": "Pokémon in shop have 5% additional chance to have the ICE type.",
 		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
 		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
-		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type."
+		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type.",
+		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3463,7 +3467,7 @@
 		"FREEZE": "Prevents moving, dodging or attacking",
 		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain.",
 		"SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
-		"CONFUSION": "Force to change target all the time and sometimes deal damage to itself",
+		"CONFUSION": "Force to change target all the time and sometimes target itself",
 		"WOUND": "Prevents healing from any source",
 		"RAGE": "Double all damage, get +80 SPEED. Half healing, SHIELD, FREEZE and SLEEP durations, and lose PROTECT. All units become RAGE after 35 seconds of fight.",
 		"RESURRECTION": "Prevents KO once, restoring to base max HP. Synergy buffs, item stacks and statuses are reset upon resurrection.",
@@ -4074,7 +4078,7 @@
 	},
 	"hide": "Hide",
 	"show": "Show",
-	"encounter_rates": "Encouter rates",
+	"encounter_rates": "Encounter rates",
 	"rarity_label": "Rarity",
 	"pool_label": "Pool",
 	"tier": "Tier",
@@ -4578,7 +4582,8 @@
 		"MAGNEZONE": "Magnezone is looking for an outlaw and offers a reward to find them",
 		"KINGAMBIT": "Kingambit has given the player in first place the LEADERS_CREST. Beat them in battle to earn extra GOLD!",
 		"LAPRAS": "Lapras offers a ride to go to a different region.",
-		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities."
+		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities.",
+		"CHIMECHO": "Chimecho can convene an assembly with the SOOTHE_BELL"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
@@ -4935,7 +4940,8 @@
 		"share_on_discord": "Share on Discord",
 		"move_row_up": "Move row up",
 		"move_row_down": "Move row down",
-		"delete_row": "Delete row"
+		"delete_row": "Delete row",
+		"symbols": "Symbols"
 	},
 	"game_modes": {
 		"CLASSIC": "Classic",

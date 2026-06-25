@@ -23,6 +23,7 @@
   display: flex;
 }
 
+.player-items img,
 .player-team-pokemons .pokemon-items img {
   width: 20px;
   height: 20px;
