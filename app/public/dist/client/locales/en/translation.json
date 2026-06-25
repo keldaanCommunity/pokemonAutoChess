@@ -1819,7 +1819,7 @@
 		"THUNDER": "Lightning strikes up to 3 random enemies, inflicting [25,50,100,200,SP] SPECIAL with [30,LK]% chance to inflict PARALYSIS for 3 seconds",
 		"HYDRO_PUMP": "Deal [20,40,80,160,SP] SPECIAL to all enemies in a line.",
 		"DRACO_METEOR": "A meteor falls from the sky on target, dealing [30,60,120,150,300,SP] SPECIAL to target and ADJACENT opponents, then user loses 20 AP.",
-		"BLAZE_KICK": "Deal [30,60,120,240,SP] SPECIAL and BURN the target for 2 seconds. If it already has BURN, deal +30% damage.",
+		"BLAZE_KICK": "Kick the target away, dealing [30,60,120,240,SP] SPECIAL and BURN for 2 seconds. If it already has BURN, deal +30% damage.",
 		"WISH": "Grant [30,60,120,240,SP] SHIELD and 1.5 second PROTECT to the lowest % HP ally.",
 		"LUNAR_BLESSING": "Heal the user and all allied Pokémon for [25,25,25,50,SP]% of their max HP and cure their negative status conditions.",
 		"MEDITATE": "Increase the user's ATK by [100,100,200,400,SP]% of base ATK.",
