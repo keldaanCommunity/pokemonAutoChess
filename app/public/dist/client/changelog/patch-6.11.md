@@ -41,7 +41,6 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Reflect (TM): 2 → 3/3/3/5 seconds, duration no longer scaling with AP. Reflect percentage: 50 → 50/75/100/150
 - Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
 
-
 # Changes to Synergies
 
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
@@ -64,6 +63,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
+- Add in Wiki > Pokémon a tab for units that are not Pokémon
 
 # Bugfix
 

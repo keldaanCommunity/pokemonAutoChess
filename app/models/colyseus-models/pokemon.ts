@@ -422,6 +422,7 @@ export class Substitute extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.DEFAULT
+  passive = Passive.SUBSTITUTE
   canHoldItems = false
 }
 

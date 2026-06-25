@@ -3418,7 +3418,8 @@
 		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted.",
 		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in.\nBUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead.",
 		"ILLUSION": "Copy the apperance of the ally on its left.",
-		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground."
+		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground.",
+		"SUBSTITUTE": "A decoy created to look like a Pokémon"
 	},
 	"stat": {
 		"ATK": "Attack",
@@ -4239,6 +4240,7 @@
 	"bot": "bot",
 	"valid": "Valid",
 	"invalid": "Invalid",
+	"not_pokemons": "Not Pokémon",
 	"all": "All",
 	"status_label": "Status",	
 	"help": "Help",

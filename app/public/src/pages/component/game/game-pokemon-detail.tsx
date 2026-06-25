@@ -258,7 +258,13 @@ export function GamePokemonDetail(props: {
         pokemon.evolution != null && (
           <img
             className="game-pokemon-detail-portrait-hint"
-            src={getPortraitSrc(PkmIndex[pokemon.evolution])}
+            src={getPortraitSrc(
+              PkmIndex[
+                pokemon.evolution === Pkm.DEFAULT
+                  ? Pkm.SCORBUNNY
+                  : pokemon.evolution
+              ]
+            )}
           />
         )}
       <div className="game-pokemon-detail-entry">
