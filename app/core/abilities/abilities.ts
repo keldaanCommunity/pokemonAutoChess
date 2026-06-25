@@ -487,6 +487,7 @@ import { StringShotStrategy } from "./string-shot"
 import { StruggleBugStrategy } from "./struggle-bug"
 import { StuffCheeksStrategy } from "./stuff-cheeks"
 import { StunSporeStrategy } from "./stun-spore"
+import { SubstituteStrategy } from "./substitute"
 import { SuctionHealStrategy } from "./suction-heal"
 import { SunsteelStrikeStrategy } from "./sunsteel-strike"
 import { SuperFangStrategy } from "./super-fang"
@@ -1201,6 +1202,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STRUGGLE_BUG]: new StruggleBugStrategy(),
   [Ability.STUFF_CHEEKS]: new StuffCheeksStrategy(),
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
+  [Ability.SUBSTITUTE]: new SubstituteStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.SUPER_FANG]: new SuperFangStrategy(),

@@ -37,9 +37,11 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New ability for Ekans line: Coil: Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds (non scalable). User also buffs its ATK and DEF by [3,5,10,20,SP].
 - Ditto: PP 50 → 10
 - Change Blaze Kick (Torchic): now kicks the target away
+
 - Disable (TM) now applies damage to the target and all adjacent enemies. Damage: 15/30/60 → 12/25/50/100
 - Buff Reflect (TM): 2 → 3/3/3/5 seconds, duration no longer scaling with AP. Reflect percentage: 50 → 50/75/100/150
 - Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
+- New TM Substitute (replaces TM Protect): spawns a Substitute at the location of the user with [25,25,25,50,SP]% of max HP of the user as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.
 
 # Changes to Synergies
 

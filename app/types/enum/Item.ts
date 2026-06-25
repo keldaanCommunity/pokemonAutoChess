@@ -180,7 +180,7 @@ export enum Item {
   TM_PAYDAY = "TM_PAYDAY",
   TM_FOCUS_PUNCH = "TM_FOCUS_PUNCH",
   TM_HYPER_BEAM = "TM_HYPER_BEAM",
-  TM_PROTECT = "TM_PROTECT",
+  TM_SUBSTITUTE = "TM_SUBSTITUTE",
   TM_SKILL_SWAP = "TM_SKILL_SWAP",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
@@ -959,7 +959,7 @@ export const TMsSilver = [
 export const TMsGold = [
   Item.TM_FOCUS_PUNCH,
   Item.TM_HYPER_BEAM,
-  Item.TM_PROTECT,
+  Item.TM_SUBSTITUTE,
   Item.TM_SKILL_SWAP
 ] satisfies Item[]
 
@@ -976,7 +976,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.TM_FOCUS_PUNCH]: Ability.FOCUS_PUNCH,
   [Item.TM_HYPER_BEAM]: Ability.HYPER_BEAM,
-  [Item.TM_PROTECT]: Ability.PROTECT,
+  [Item.TM_SUBSTITUTE]: Ability.SUBSTITUTE,
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
