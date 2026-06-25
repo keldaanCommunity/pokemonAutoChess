@@ -27,7 +27,7 @@ export class NightmareStrategy extends AbilityStrategy {
             true
           )
         }
-        enemy.status.triggerFatigue(duration, enemy)
+        enemy.status.triggerFatigue(duration, enemy, pokemon)
       }
     })
   }

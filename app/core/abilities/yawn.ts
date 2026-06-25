@@ -14,7 +14,7 @@ export class YawnStrategy extends AbilityStrategy {
     )
 
     opponentsTargetingMe.forEach((opponent) => {
-      opponent.status.triggerFatigue(3000, pokemon)
+      opponent.status.triggerFatigue(3000, opponent, pokemon)
       opponent.addAbilityPower(-20, pokemon, 0, false)
     })
 

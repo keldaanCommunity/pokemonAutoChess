@@ -23,7 +23,7 @@ export class SoulTrapStrategy extends AbilityStrategy {
     enemies.forEach((cell) => {
       const enemy = cell.value!
       enemy.addPP(-ppLoss, pokemon, 1, crit)
-      enemy.status.triggerFatigue(fatigueDuration, enemy)
+      enemy.status.triggerFatigue(fatigueDuration, enemy, pokemon)
     })
   }
 }

@@ -1628,7 +1628,7 @@ export default class Simulation extends Schema implements ISimulation {
       if (enemyWithHighestAP) {
         enemyWithHighestAP.addAbilityPower(-30, curser, 0, false)
         enemyWithHighestAP.status.curseTorment = true
-        enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)
+        enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP, null)
       }
     }
 

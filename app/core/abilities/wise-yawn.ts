@@ -26,7 +26,7 @@ export class WiseYawnStrategy extends AbilityStrategy {
 
       // Apply fatigue and AP reduction to attackers
       opponentsTargetingLowestHealthAlly.forEach((opponent) => {
-        opponent.status.triggerFatigue(3000, pokemon)
+        opponent.status.triggerFatigue(3000, opponent, pokemon)
         opponent.addAbilityPower(-20, pokemon, 0, false)
       })
 

@@ -19,7 +19,7 @@ export class FlashStrategy extends AbilityStrategy {
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 3, false)
       .forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
-          cell.value.status.triggerBlinded(duration, cell.value)
+          cell.value.status.triggerBlinded(duration, cell.value, pokemon)
         }
       })
   }

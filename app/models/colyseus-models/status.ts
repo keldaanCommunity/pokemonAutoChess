@@ -169,7 +169,7 @@ export default class Status extends Schema implements IStatus {
   transferNegativeStatus(from: PokemonEntity, to: PokemonEntity) {
     if (this.burn) to.status.triggerBurn(this.burnCooldown, to, from)
     if (this.silence) to.status.triggerSilence(this.silenceCooldown, to, from)
-    if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to)
+    if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to, from)
     if (this.poisonStacks > 0)
       to.status.triggerPoison(this.poisonCooldown, to, from)
     if (this.freeze) to.status.triggerFreeze(this.freezeCooldown, to, from)
@@ -185,7 +185,7 @@ export default class Status extends Schema implements IStatus {
       to.status.triggerArmorReduction(this.armorReductionCooldown, to)
     if (this.curse) to.status.triggerCurse(this.curseCooldown, to)
     if (this.locked) to.status.triggerLocked(this.lockedCooldown, to)
-    if (this.blinded) to.status.triggerBlinded(this.blindCooldown, to)
+    if (this.blinded) to.status.triggerBlinded(this.blindCooldown, to, from)
     if (this.possessed)
       to.status.triggerPossessed(this.possessedCooldown, to, from)
   }
@@ -204,7 +204,7 @@ export default class Status extends Schema implements IStatus {
       !this.blinded &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerBlinded(1000, pokemon)
+      this.triggerBlinded(1000, pokemon, null)
     }
 
     if (
@@ -331,7 +331,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
-      this.triggerFatigue(30000, pokemon)
+      this.triggerFatigue(30000, pokemon, null)
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
