@@ -2309,7 +2309,7 @@
 		"WAVE_SPLASH": "User shrouds itself in water, gaining [20,20,20,50,SP]% of its max HP as SHIELD, then slams into the target with its whole body to inflict [20,20,20,50,SP]% of its max HP as SPECIAL.",
 		"TWISTER": "Whips up a whirlwind dealing [25,50,100,200,SP] SPECIAL to ADJACENT enemies and pushing them at a random location [1,2,3,6,SP] tiles away. ADJACENT FLYING allies take off and FLY_AWAY.",
 		"FOCUS_PUNCH": "Focuses its energy into a single punch, rushing towards the target after 1 second, dealing [500,500,500,1000,SP]% of ATK as SPECIAL and pushing it back. Target is ejected from the board if it does not collide with any other unit.",
-		"HYPER_BEAM": "Concentrates its energy for 1 second then fires a powerful beam that deals [50,100,150,300,SP] SPECIAL to enemies in a line. Then user gets FATIGUE for 5 seconds.",
+		"HYPER_BEAM": "Concentrates its energy for 1 second then fires a powerful beam that deals [65,130,250,500,SP] SPECIAL to enemies in a line. Then user gets FATIGUE for 5 seconds.",
 		"SKILL_SWAP": "Copy the ability and max PP of the target if not INIMITABLE, then cast it immediately. The copied ability persists between fights and can be reset by benching the user.",
 		"JET_PUNCH": "Deal [100,100,100,150,300,SP]% of user's SPEED as SPECIAL to the target.",
 		"BANEFUL_BUNKER": "Taunt all ADJACENT enemies and PROTECT itself for 2 seconds. During this time, units that melee attack the user take [10,20,30,50,SP] SPECIAL and are inflicted with POISONNED for 3 seconds.",

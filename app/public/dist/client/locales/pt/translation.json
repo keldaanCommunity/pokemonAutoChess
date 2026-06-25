@@ -2278,7 +2278,7 @@
 		"WAVE_SPLASH": "O usuário se envolve em água, ganhando [20,20,20,50,SP]% de seu HP máximo como SHIELD, então se choca contra o alvo com todo o seu corpo para infligir [20,20,20,50,SP]% de seu HP máximo como SPECIAL.",
 		"TWISTER": "Cria um turbilhão que causa [25, 50, 100, 200, SP] de SPECIAL a inimigos ADJACENT e os empurra para um local aleatório a [1, 2, 3, 6, SP] espaços de distância. Aliados do tipo FLYING ADJACENT decolam e voam para longe, ativando seu efeito de sinergia.",
 		"FOCUS_PUNCH": "Concentra sua energia em um único soco, avançando em direção ao alvo após 1 segundo, causando [500,500,500,1000,SP]% do ATK como SPECIAL e empurrando-o para trás. O alvo é ejetado do tabuleiro se não colidir com nenhuma outra unidade.",
-		"HYPER_BEAM": "Concentra sua energia por 1 segundo e então dispara um poderoso raio que causa [50,100,150,300,SP] de SPECIAL aos inimigos em linha reta. Em seguida, o usuário recebe FATIGUE por 5 segundos.",
+		"HYPER_BEAM": "Concentra sua energia por 1 segundo e então dispara um poderoso raio que causa [65,130,250,500,SP] de SPECIAL aos inimigos em linha reta. Em seguida, o usuário recebe FATIGUE por 5 segundos.",
 		"SKILL_SWAP": "Copie a habilidade e o PP máximo do alvo e use-a imediatamente. A habilidade copiada persiste entre as lutas e pode ser redefinida ao colocar o usuário no banco.",
 		"JET_PUNCH": "Inflige [100,100,100,150,300,SP]% da SPEED do usuário como SPECIAL ao alvo.",
 		"BANEFUL_BUNKER": "Provoca todos os inimigos ADJACENT e recebe PROTECT por 2 segundos. Durante esse tempo, unidades que atacarem o usuário corpo a corpo recebem [10,20,30,50,SP] de SPECIAL e recebem POISONNED por 3 segundos.",

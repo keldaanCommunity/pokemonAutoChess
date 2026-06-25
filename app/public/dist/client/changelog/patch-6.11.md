@@ -39,6 +39,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Change Blaze Kick (Torchic): now kicks the target away
 - Disable (TM) now applies damage to the target and all adjacent enemies. Damage: 15/30/60 → 12/25/50/100
 - Buff Reflect (TM): 2 → 3/3/3/5 seconds, duration no longer scaling with AP. Reflect percentage: 50 → 50/75/100/150
+- Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
 
 
 # Changes to Synergies

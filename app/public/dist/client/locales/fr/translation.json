@@ -2301,7 +2301,7 @@
 		"ACID_ARMOR": "Gagne [3,6,12,25,SP] DEF. Les 4 prochaines attaques reçues au corps à corps réduisent la DEF de l'attaquant de 1.",
 		"TWISTER": "Déchaîne un tourbillon infligeant [25,50,100,200,SP] SPECIAL aux ennemis ADJACENT et les repoussant à une distance de [1, 2, 3, 6, SP] cases. Les alliés FLYING ADJACENT décollent et s'envolent, déclenchant leur effet de synergie.",
 		"FOCUS_PUNCH": "Concentre son énergie dans un unique coup de poing, puis fonce vers la cible après 1 seconde et inflige [500,500,500,1000,SP]% de son ATK en SPECIAL, la projetant au loin. La cible est éjectée du terrain si elle ne rentre pas en collision avec un autre Pokémon.",
-		"HYPER_BEAM": "Concentre son énergie pendant 1 seconde puis déclenche un laser surpuissant infligeant [50,100,150,300,SP] SPECIAL aux ennemis dans la ligne de mire. Puis le lanceur subit FATIGUE pendant 5 secondes.",
+		"HYPER_BEAM": "Concentre son énergie pendant 1 seconde puis déclenche un laser surpuissant infligeant [65,130,250,500,SP] SPECIAL aux ennemis dans la ligne de mire. Puis le lanceur subit FATIGUE pendant 5 secondes.",
 		"SKILL_SWAP": "Copie la capacité et les PP max de la cible, puis la déclenche immédiatement. La capacité copiée persiste entre les combats et peut être oubliée en plaçant le lanceur sur le banc.",
 		"JET_PUNCH": "Inflige [100,100,100,150,300,SP]% de la SPEED du lanceur en SPECIAL à la cible",
 		"BANEFUL_BUNKER": "Provoque tous les ennemis ADJACENT et active PROTECT sur soi pendant 2 secondes. Pendant ce délai, les ennemis qui attaquent au corps à corps le lanceur subissent [10,20,30,50,SP] SPECIAL et POISON pendant 3 secondes.",

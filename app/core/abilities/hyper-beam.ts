@@ -24,7 +24,7 @@ export class HyperBeamStrategy extends AbilityStrategy {
 
     pokemon.commands.push(
       new DelayedCommand(() => {
-        const damage = [50, 100, 150, 300][pokemon.stars - 1] ?? 300
+        const damage = [65, 130, 250, 500][pokemon.stars - 1] ?? 500
         pokemon.broadcastAbility({
           skill: Ability.HYPER_BEAM,
           targetX: target.positionX,
