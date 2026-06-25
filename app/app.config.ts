@@ -246,7 +246,9 @@ export const server = defineServer({
               "https://uruwhy.online",
               "https://koala-pac.com",
               "https://pokev9.52kx.net",
-              "https://www.john-auto-chess.com/"
+              "https://www.john-auto-chess.com",
+              "https://pokemon-auto-spire.com",
+              "https://www.pokemon-auto-legacy.com"
             ],
             scriptSrc: [
               "'self'",
@@ -576,7 +578,7 @@ export const server = defineServer({
 
       const stats = await DetailledStatistic.find(
         params,
-        ["pokemons", "time", "rank", "elo", "gameMode"],
+        ["pokemons", "time", "rank", "elo", "gameMode", "unholdableItems"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
@@ -587,7 +589,8 @@ export const server = defineServer({
               record.rank,
               record.elo,
               record.pokemons,
-              record.gameMode
+              record.gameMode,
+              record.unholdableItems
             )
         )
 

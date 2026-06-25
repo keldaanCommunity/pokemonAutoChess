@@ -15,6 +15,7 @@ export class MountainGaleStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    const isFirstCast = pokemon.count.ult === 0
     super.process(pokemon, board, target, crit, true)
     const damage = 40
     const targets: PokemonEntity[] = board
@@ -26,14 +27,13 @@ export class MountainGaleStrategy extends AbilityStrategy {
     }
 
     const nbHits = [1, 3, 5, 10][pokemon.stars - 1] ?? 10
-    const nbBergmites =
-      pokemon.count.ult === 0
-        ? max(MaxTroopersPerPkm[pokemon.name] ?? 0)(
-            [...pokemon.effectsSet.values()].find(
-              (e) => e instanceof BergmiteOnBackEffect
-            )?.stacks ?? 0
-          )
-        : 0
+    const nbBergmites = isFirstCast
+      ? max(MaxTroopersPerPkm[pokemon.name] ?? 0)(
+          [...pokemon.effectsSet.values()].find(
+            (e) => e instanceof BergmiteOnBackEffect
+          )?.stacks ?? 0
+        )
+      : 0
     for (let i = 0; i < nbHits + nbBergmites; i++) {
       const t = pickRandomIn(targets)
       pokemon.commands.push(

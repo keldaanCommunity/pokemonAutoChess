@@ -7,6 +7,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import type { IBot } from "../types/models/bot-v2"
+import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import {
@@ -116,7 +117,7 @@ export default class Bot {
 
         if (stepTeam.board[i].items) {
           stepTeam.board[i].items.forEach((item) => {
-            if (TMs.includes(item)) {
+            if (isIn(TMs, item)) {
               const ability = AbilityPerTM[item]
               if (!ability || pkm.types.has(Synergy.HUMAN) === false)
                 return false // prevent equipping TMs on non-human pokemon

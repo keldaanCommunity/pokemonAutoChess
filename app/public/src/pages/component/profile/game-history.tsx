@@ -12,12 +12,14 @@ import type {
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import type { Synergy } from "../../../../../types/enum/Synergy"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
 import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import "./game-history.css"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail";
 
 const ROW_HEIGHT = 72
 
@@ -99,7 +101,7 @@ export default function GameHistory(props: {
   return (
     <article className="game-history-list">
       <h2>{t("game_history")}</h2>
-      <div style={{ flex: 1, minHeight: 0 }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
         {(!gameHistory || gameHistory.length === 0) && (
           <p>{t("no_history_found")}</p>
         )}
@@ -123,6 +125,8 @@ export default function GameHistory(props: {
           />
         )}
       </div>
+      <GamePokemonDetailTooltip origin="history" />
+      <ItemDetailTooltip />
     </article>
   )
 }
@@ -161,6 +165,16 @@ function GameHistoryRow({
         </ul>
         <p className="date">{formatDate(r.time)}</p>
         <Team team={r.pokemons}></Team>
+        <div className="player-items">
+          {r.unholdableItems.map((item, i) => (
+            <img
+              key={i}
+              src={"/assets/item/" + item + ".png"}
+              data-tooltip-id="item-detail-tooltip"
+              data-tooltip-content={item}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
