@@ -33,7 +33,7 @@ export default function Chat(props: { source: ChatRoom; canWrite: boolean }) {
       }
     const { name, shiny: isShiny } = getPokemonCustomFromAvatar(profile.avatar)
     const index = PkmIndex[name]
-    const allEmotions = getAvailableEmotions(index, isShiny)
+    const allEmotions = getAvailableEmotions(index, isShiny ?? false)
     const collectionItem = profile.pokemonCollection.get(index)
     const unlockedEmotions = isShiny
       ? (collectionItem?.shinyEmotions ?? [])
