@@ -41,7 +41,7 @@ export class HyperBeamStrategy extends AbilityStrategy {
             )
           }
         })
-        pokemon.status.triggerFatigue(5000, pokemon)
+        pokemon.status.triggerFatigue(5000, pokemon, pokemon)
       }, 1000)
     )
   }

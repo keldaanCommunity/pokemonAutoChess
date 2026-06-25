@@ -23,7 +23,7 @@ export class SandSpitStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBlinded(2000, cell.value)
+        cell.value.status.triggerBlinded(2000, cell.value, pokemon)
       }
     }
   }

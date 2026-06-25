@@ -15,6 +15,6 @@ export class OctazookaStrategy extends AbilityStrategy {
     
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
-    target.status.triggerBlinded(4000, target)
+    target.status.triggerBlinded(4000, target, pokemon)
   }
 }

@@ -6362,7 +6362,7 @@ export class Kecleon extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.ILLUSION
+  skill = Ability.CAMOUFLAGE
   passive = Passive.PROTEAN2
 }
 
@@ -11602,7 +11602,8 @@ export class Zorua extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.ILLUSION
+  passive = Passive.ILLUSION
+  skill = Ability.NIGHT_DAZE
   additional = true
 }
 
@@ -11617,7 +11618,8 @@ export class Zoroark extends Pokemon {
   speDef = 8
   maxPP = 85
   range = 1
-  skill = Ability.ILLUSION
+  passive = Passive.ILLUSION
+  skill = Ability.NIGHT_DAZE
   additional = true
 }
 
@@ -11633,7 +11635,8 @@ export class HisuiZorua extends Pokemon {
   speDef = 4
   maxPP = 85
   range = 1
-  skill = Ability.ILLUSION
+  passive = Passive.ILLUSION
+  skill = Ability.BITTER_MALICE
   regional = true
   additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {
@@ -11656,7 +11659,8 @@ export class HisuiZoroark extends Pokemon {
   speDef = 8
   maxPP = 85
   range = 1
-  skill = Ability.ILLUSION
+  passive = Passive.ILLUSION
+  skill = Ability.BITTER_MALICE
   regional = true
   additional = true
   isInRegion(map: DungeonPMDO, state: GameState) {

@@ -283,7 +283,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       if (!chance(0.8, entity)) {
         entity.status.triggerConfusion(5000, entity, entity)
       } else if (!chance(0.8, entity)) {
-        entity.status.triggerBlinded(5000, entity)
+        entity.status.triggerBlinded(5000, entity, entity)
       } else if (!chance(0.8, entity)) {
         entity.status.triggerSleep(5000, entity)
       }

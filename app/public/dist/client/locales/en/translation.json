@@ -1352,7 +1352,7 @@
 		"MISTY_SURGE": "Misty Surge",
 		"SKY_ATTACK": "Sky Attack",
 		"SKY_ATTACK_SHADOW": "Sky Attack",
-		"ILLUSION": "Illusion",
+		"CAMOUFLAGE": "Camouflage",
 		"SHELTER": "Shelter",
 		"ACID_ARMOR": "Acid Armor",
 		"LAVA_PLUME": "Lava Plume",
@@ -1768,6 +1768,8 @@
 		"STUFF_CHEEKS": "Stuff Cheeks",
 		"SILK_TRAP": "Silk Trap",
 		"SKITTER_SMACK": "Skitter Smack",
+		"NIGHT_DAZE": "Night Daze",
+		"BITTER_MALICE": "Bitter Malice",
 		"COIL": "Coil"
 	},
 	"ability_description": {
@@ -1913,7 +1915,7 @@
 		"SKY_ATTACK": "Rise in the air and fall on the farthest target after 1 second, dealing [30,60,120,240,SP] SPECIAL.",
 		"SKY_ATTACK_SHADOW": "Rise in the air and fall on the farthest target after 1 second, dealing [30,60,120,240,SP] SPECIAL. Can crit by default.",
 		"FLYING_PRESS": "Dives down onto the farthest target from the sky, dealing [50,50,50,100,SP]% of the user's max HP as SPECIAL.",
-		"ILLUSION": "The user recovers [30,50,70,140,SP=0.5] HP and copies the appearance, ATK, DEF, SPE_DEF and RANGE of the target.",
+		"CAMOUFLAGE": "The user recovers [30,50,70,140,SP=0.5] HP and copies the appearance, ATK, DEF, SPE_DEF and RANGE of the target.",
 		"SLUDGE": "Throw trash at the 3 enemy Pokémon in front of the user to inflict [2,3,4,8] stacks of POISONNED for [3,3,3,10,SP] seconds.",
 		"SLUDGE_WAVE": "Throw a spray of waste on the target and ADJACENT enemy Pokémon, dealing [10,20,40,80,SP] SPECIAL and inflict POISONNED for [2,3,4,8,SP] seconds.",
 		"SMOG": "Project a cloud of stinking gas onto the 3 tiles in front of the user, dealing [10,20,40,80,SP] SPECIAL. BOARD_EFFECT: gas makes Pokémon BLINDED.",
@@ -2326,6 +2328,8 @@
 		"STUFF_CHEEKS": "If the user is holding any berries, eat one of them immediately and gain [100,SP]% of the HP healed by it as SHIELD instead. Otherwise, forage and equip a random berry that will be kept for future battles if possible.",
 		"SILK_TRAP": "The user spins a silken trap, gaining PROTECT for 1.5 seconds. Any attack at melee range received during that time will lower the SPEED of the attacker by [5,10,15,30,SP] and inflict PARALYSIS for [1.5,SP,ND=1] seconds.",
 		"SKITTER_SMACK": "Skitters behind the target to strike, dealing [15,30,60,120,SP] SPECIAL. This also lowers the target's AP by 20.",
+		"NIGHT_DAZE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict BLINDED for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
+		"BITTER_MALICE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict FATIGUE for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]"
 	},
 	"effect": {
@@ -3413,6 +3417,7 @@
 		"COMATOSE": "Always under SLEEP. Immune to BURN, POISONNED, FREEZE and PARALYSIS. When a SOUND try to wake this Pokémon up, it sinks deeper into its dream, gaining 5 AP.",
 		"WALL_OF_STONE": "At the start of the fight, Stakataka and all ROCK allies on the same row get 50 SHIELD and are LOCKED until their SHIELD is depleted.",
 		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in.\nBUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead.",
+		"ILLUSION": "Copy the apperance of the ally on its left.",
 		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground."
 	},
 	"stat": {

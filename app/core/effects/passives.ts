@@ -1749,6 +1749,17 @@ export const PassiveEffects: Partial<
     })
   ],
 
+  [Passive.ILLUSION]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player }) => {
+      const allyOnTheLeft = schemaValues(player.board).find(
+        (p) => p.positionX === newX - 1 && p.positionY === newY
+      )
+      if (allyOnTheLeft) {
+        pokemon.index = allyOnTheLeft.index
+      }
+    })
+  ],
+
   [Passive.STOUTLAND_SEARCH]: [
     new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
       const index = (newY - 1) * BOARD_WIDTH + newX

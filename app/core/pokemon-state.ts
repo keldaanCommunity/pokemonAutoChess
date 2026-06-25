@@ -1100,7 +1100,7 @@ export default abstract class PokemonState {
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerBurn(1100, pokemon, undefined)
+      pokemon.status.triggerBurn(1100, pokemon, null)
     }
   }
 

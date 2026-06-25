@@ -298,7 +298,7 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerParalysis(4000, cell.value, pokemon)
-        cell.value.status.triggerBlinded(4000, cell.value)
+        cell.value.status.triggerBlinded(4000, cell.value, pokemon)
       }
     })
     pokemon.broadcastAbility({ skill: "SMOKE_BALL" })

@@ -15,7 +15,7 @@ export class SpinOutStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = Math.round([0.25, 0.5, 1, 2][pokemon.stars - 1] * pokemon.speed)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    target.status.triggerBlinded(1000, target)
+    target.status.triggerBlinded(1000, target, pokemon)
 
     // move back to your own backline
     // move to backline

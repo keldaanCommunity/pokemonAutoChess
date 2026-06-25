@@ -65,7 +65,7 @@ export class MindBlownStrategy extends AbilityStrategy {
                     crit,
                     false
                   )
-                  cell.value.status.triggerFatigue(5000, cell.value)
+                  cell.value.status.triggerFatigue(5000, cell.value, pokemon)
                 }
                 break
               case "yellow":
