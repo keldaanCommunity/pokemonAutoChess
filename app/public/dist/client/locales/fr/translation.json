@@ -3070,7 +3070,7 @@
 		"SANDWICH": "Donne divers bonus de statistiques pour le prochain combat en fonction des types du Pokémon qui le mange.",
 		"HEARTY_STEW": "Au début du prochain combat, augmente les HP max de 30%. Si le Pokémon tient la COOKING_POT, il subit BURN pendant 5 secondes.",
 		"RAGE_CANDY_BAR": "Gagne 10 ATK au début du prochain combat.",
-		"TEA": "Gagne 80 PP au début du prochain combat.",
+		"TEA": "Gagne 60 PP au début du prochain combat.",
 		"CURRY": "Commence le prochain combat en étant RAGE pendant 3 secondes.",
 		"CASTELIACONE": "La première attaque du prochain combat infligera FREEZE pendant 5 secondes à sa cible.",
 		"WHIPPED_DREAM": "La première attaque du prochain combat rendra sa cible CHARM pendant 5 secondes.",
