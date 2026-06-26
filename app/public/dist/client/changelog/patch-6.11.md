@@ -74,4 +74,5 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New title: Five Stars
 - New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
+- Avatar emotes can now be used in lobby chat
 - Add symbols to tier list maker gadget and change layout
