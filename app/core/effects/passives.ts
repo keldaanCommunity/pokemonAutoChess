@@ -900,7 +900,7 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to gourmet, get a Chef hat. Useless but funny
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
-      entity.items.add(Item.CHEF_HAT)
+      entity.addItem(Item.CHEF_HAT)
     }
 
     // when converting to ground, fully dig a hole at their position

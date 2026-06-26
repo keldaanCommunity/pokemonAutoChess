@@ -8063,5 +8063,12 @@ export const PokemonAnimations: {
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.PASSIMIAN]: {
+    attack: AnimationType.SpAttack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BALL_RANGE,
+    hitSprite: HitSprite.FIGHTING_HIT
   }
 }
