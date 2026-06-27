@@ -1352,7 +1352,7 @@
 		"MISTY_SURGE": "薄雾制造者",
 		"SKY_ATTACK": "神鸟猛击",
 		"SKY_ATTACK_SHADOW": "神鸟猛击",
-		"CAMOUFLAGE": "幻觉",
+		"CAMOUFLAGE": "保护色",
 		"SHELTER": "闭关",
 		"ACID_ARMOR": "溶化",
 		"LAVA_PLUME": "喷烟",
@@ -1767,7 +1767,10 @@
 		"SNORE": "打鼾",
 		"STUFF_CHEEKS": "大快朵颐",
 		"SILK_TRAP": "线阱",
-		"SKITTER_SMACK": "爬击"
+		"SKITTER_SMACK": "爬击",
+		"NIGHT_DAZE": "Night Daze",
+		"BITTER_MALICE": "Bitter Malice",
+		"COIL": "盘蜷"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1903,7 +1906,7 @@
 		"PSYBEAM": "对目标身后的所有敌方宝可梦造成[25,50,100,200,SP]点SPECIAL，并有[50,LK]%的概率使他们陷入CONFUSION 4秒。",
 		"DIVE": "潜入水下，获得[15,30,60,120]点SHIELD，然后在敌方阵型中间现身，对所有ADJACENT宝可梦造成[10,20,40,80,SP]点SPECIAL。",
 		"SPIKY_SHIELD": "在接下来的[3,5,10,10]秒内，近战攻击使用者的宝可梦会陷入WOUND 2秒，并受到SPECIAL，数值相当于使用者[60,80,100,200,SP]%的DEF。若效果结束前再次释放该招式，则朝周围发射尖刺，对击中的敌方宝可梦造成[30,30,30,60,SP]点SPECIAL。",
-		"FUTURE_SIGHT": "随机选取[3,4,5,6]只敌方宝可梦。2秒后，对被选中的目标造成[20,30,50,80,SP]点SPECIAL，每个目标的ADJACENT敌方宝可梦受到20%的伤害。",
+		"FUTURE_SIGHT": "选取[3,4,5,6]只最近的敌方宝可梦。2秒后，对被选中的目标造成[20,30,50,80,SP]点SPECIAL，每个目标的ADJACENT敌方宝可梦受到20%的伤害。",
 		"FAKE_TEARS": "对所有敌方宝可梦造成[5,10,15,30,SP]点SPECIAL，并使他们陷入ARMOR_BREAK [3,3,3,6]秒。",
 		"SPARKLING_ARIA": "对目标和ADJACENT敌方宝可梦造成[15,25,50,100,SP]点SPECIAL。若有处于BURN的ADJACENT我方宝可梦，解除其BURN。",
 		"DRAGON_DARTS": "向目标发射3枚造成[10,20,40,80,SP]点SPECIAL的龙箭。若目标因此倒下，恢复[40,40,40,80]点PP。",
@@ -2324,7 +2327,10 @@
 		"SNORE": "对前方的3只敌方宝可梦造成[20,40,60,120,SP]点SPECIAL，并使他们陷入FLINCH 3秒。",
 		"STUFF_CHEEKS": "若使用者携带至少一枚树果，则立即食用其中一枚，获得SHIELD，数值相当于其应当恢复的HP的[100,SP]%。若没有，则获取并携带一枚随机树果，该树果在战斗结束后可以保留。",
 		"SILK_TRAP": "用丝设置陷阱，获得PROTECT 1.5秒。在此期间，近战攻击使用者的宝可梦会降低[5,10,15,30,SP]点SPEED，并陷入PARALYSIS [1.5,SP,ND=1]秒。",
-		"SKITTER_SMACK": "从目标背后爬近，对其造成[15,30,60,120,SP]点SPECIAL，并降低其20点AP。"
+		"SKITTER_SMACK": "从目标背后爬近，对其造成[15,30,60,120,SP]点SPECIAL，并降低其20点AP。",
+		"NIGHT_DAZE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入BLINDED [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
+		"BITTER_MALICE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入FATIGUE [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
+		"COIL": "用强壮的尾巴抓住目标。使其陷入LOCKED和PARALYSIS 3秒。使用者提升自身[3,5,10,20,SP]点ATK和DEF。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3408,7 +3414,9 @@
 		"EISCUE_ICE_FACE": "释放招式时，将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或释放招式后，变为解冻头。",
 		"COMATOSE": "始终处于SLEEP。免疫BURN，POISONNED，FREEZE或是PARALYSIS。SOUND宝可梦的叫声无法唤醒此宝可梦，反而会使之陷入更深的梦境，提升5点AP。",
 		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，并陷入LOCKED直到失去所有SHIELD。",
-		"VESPIQUEN": "蜂女王会根据对战开始时自身所处的横排改变RANGE和使用的招式。\n若蜂女王将被BUG共鸣复制，改为生成2只三蜜蜂。"
+		"VESPIQUEN": "蜂女王会根据对战开始时自身所处的横排改变RANGE和使用的招式。\n若蜂女王将被BUG共鸣复制，改为生成2只三蜜蜂。",
+		"ILLUSION": "此宝可梦会伪装为其左侧的我方宝可梦。",
+		"STOUTLAND_SEARCH": "长毛狗站在埋有隐藏道具的格子上时，会发出吠叫声。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -3462,7 +3470,7 @@
 		"FREEZE": "无法移动，闪避或发起攻击。",
 		"PROTECT": "无法受到任何形式的伤害，但也不能恢复HP和PP。敌方宝可梦会避免指定守住的宝可梦为目标。",
 		"SLEEP": "无法移动，闪避或发起攻击。受到攻击会降低持续时间。",
-		"CONFUSION": "强制随时切换目标，有时还会对自身造成伤害。",
+		"CONFUSION": "强制随时切换目标，有时还会是自身。",
 		"WOUND": "无法受到任何来源的治疗。",
 		"RAGE": "造成的伤害翻倍，提升80点SPEED，受到治疗、获得SHIELD，陷入FREEZE和SLEEP的时间减半，并失去PROTECT。所有宝可梦战斗35秒后自动陷入RAGE。",
 		"RESURRECTION": "第一次受到致命伤害时防止此伤害，并恢复HP至满（基础值）。来自共鸣的增幅，道具的叠层和异常状态会被重置。",
@@ -4210,12 +4218,12 @@
 	"change_room_name": "修改房间名",
 	"add_bot": "添加机器人",
 	"bot_difficulty": {
-		"BEGINNER": "Beginner (<850)",
+		"BEGINNER": "新手 (<850)",
 		"EASY":  "简单 (850-999)",
 		"MEDIUM": "普通 (1000-1149)",
 		"HARD": "困难 (1150-1299)",
 		"EXTREME": "极限 (1300-1449)",
-		"MASTER": "Master (>1450)",
+		"MASTER": "大师 (>1450)",
 		"CUSTOM": "自定义"
 	},
 	"room_leader": "房主",
@@ -4242,6 +4250,7 @@
 	"fully_grown": "已经长成",
 	"already_held": "已经持有",
 	"caught": "抓到了！",
+	"bark": "汪汪！",
 	"drop_here_to_sell": "拖动至此松开，",
 	"for_price_gold": "以{{price}}金币的价格出售",
 	"buy_xp": "购买经验{{cost}}",
