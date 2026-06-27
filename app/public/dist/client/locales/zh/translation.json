@@ -1768,9 +1768,10 @@
 		"STUFF_CHEEKS": "大快朵颐",
 		"SILK_TRAP": "线阱",
 		"SKITTER_SMACK": "爬击",
-		"NIGHT_DAZE": "Night Daze",
-		"BITTER_MALICE": "Bitter Malice",
-		"COIL": "盘蜷"
+		"NIGHT_DAZE": "暗黑爆破",
+		"BITTER_MALICE": "冤冤相报",
+		"COIL": "盘蜷",
+		"SUBSTITUTE": "替身"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1819,7 +1820,7 @@
 		"THUNDER": "雷击至多3个随机敌方宝可梦，对他们造成[25,50,100,200,SP]点SPECIAL，并有[30,LK]%的概率使他们陷入PARALYSIS 3秒。",
 		"HYDRO_PUMP": "对一条直线上的所有敌方宝可梦造成[20,40,80,160,SP]点SPECIAL。",
 		"DRACO_METEOR": "从天空中落下陨石，对目标和ADJACENT敌方宝可梦造成[30,60,120,150,300,SP]点SPECIAL，然后降低使用者20点AP。",
-		"BLAZE_KICK": "对目标造成[30,60,120,240,SP]点SPECIAL，并使其陷入BURN 2秒。若目标已经处于BURN，则造成的伤害提升30%。",
+		"BLAZE_KICK": "将目标击退，并对其造成[30,60,120,240,SP]点SPECIAL，且使其陷入BURN 2秒。若目标已经处于BURN，则造成的伤害提升30%。",
 		"WISH": "使HP百分比最低的我方宝可梦获得[30,60,120,240,SP]点SHIELD，以及PROTECT 1.5秒。",
 		"LUNAR_BLESSING": "为使用者和所有我方宝可梦恢复各自[25,25,25,50,SP]%的最大HP，并清除他们的负面状态。",
 		"MEDITATE": "提升使用者[100,100,200,400,SP]%的基础ATK。",
@@ -1875,7 +1876,7 @@
 		"PASTEL_VEIL": "突进至最远我方宝可梦的位置。所有经过的我方宝可梦和使用者自身均获得[20,40,80,160,SP]点SHIELD，并移除负面状态。",
 		"LEECH_SEED": "使目标陷入POISONNED [3,6,12,24]秒，并恢复使用者[20,40,80,160,SP]点HP。",
 		"LOCK_ON": "锁定目标。下一次攻击必定命中，且额外造成[200,200,200,500,SP]%的TRUE。",
-		"DISABLE": "对目标造成[12,25,50,100,SP]点SPECIAL，并使其和所有ADJACENT敌方宝可梦陷入SILENCE [2,3,4,8]秒。",
+		"DISABLE": "对目标及其ADJACENT敌方宝可梦造成[12,25,50,100,SP]点SPECIAL，并使他们陷入SILENCE [2,3,4,8]秒。",
 		"RAZOR_WIND": "对目标造成[20,40,80,160,SP]点SPECIAL。该招式可以暴击。",
 		"WONDER_GUARD": "对所有ADJACENT敌方宝可梦造成[30,60,120,240,SP]点SPECIAL，并使他们陷入PARALYSIS 3秒。",
 		"ELECTRIC_SURGE": "除使用者自身外，提升所有我方ELECTRIC宝可梦[10,10,10,20,SP]点SPEED。",
@@ -2330,7 +2331,8 @@
 		"SKITTER_SMACK": "从目标背后爬近，对其造成[15,30,60,120,SP]点SPECIAL，并降低其20点AP。",
 		"NIGHT_DAZE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入BLINDED [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
 		"BITTER_MALICE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入FATIGUE [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
-		"COIL": "用强壮的尾巴抓住目标。使其陷入LOCKED和PARALYSIS 3秒。使用者提升自身[3,5,10,20,SP]点ATK和DEF。"
+		"COIL": "用强壮的尾巴抓住目标。使其陷入LOCKED和PARALYSIS 3秒。使用者提升自身[3,5,10,20,SP]点ATK和DEF。",
+		"SUBSTITUTE": "在使用者的位置创建一个HP为自身最大HP的[25,25,25,50,SP]%的替身。使用者移动至附近的空格子，所有原本以其为目标的敌方宝可梦改为以替身为目标。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2892,7 +2894,8 @@
 		"ICY_FLUTE": "冷冰笛子",
 		"ROCK_HORN": "岩石号角",
 		"SKY_MELODICA": "飞空笛琴",
-		"TERRA_CYMBAL": "大地铙钹"
+		"TERRA_CYMBAL": "大地铙钹",
+		"SOOTHE_BELL": "安抚之铃"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -3222,7 +3225,8 @@
 		"ICY_FLUTE": "商店中刷出ICE宝可梦的概率提升5%。",
 		"ROCK_HORN": "商店中刷出ROCK宝可梦的概率提升5%。",
 		"SKY_MELODICA": "商店中刷出FLYING宝可梦的概率提升5%。",
-		"TERRA_CYMBAL": "商店中刷出GROUND宝可梦的概率提升5%。"
+		"TERRA_CYMBAL": "商店中刷出GROUND宝可梦的概率提升5%。",
+		"SOOTHE_BELL": "对一只宝可梦使用，立即刷新商店，且本次刷新中所有商店中宝可梦与该宝可梦至少一项共鸣相同。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3416,7 +3420,8 @@
 		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，并陷入LOCKED直到失去所有SHIELD。",
 		"VESPIQUEN": "蜂女王会根据对战开始时自身所处的横排改变RANGE和使用的招式。\n若蜂女王将被BUG共鸣复制，改为生成2只三蜜蜂。",
 		"ILLUSION": "此宝可梦会伪装为其左侧的我方宝可梦。",
-		"STOUTLAND_SEARCH": "长毛狗站在埋有隐藏道具的格子上时，会发出吠叫声。"
+		"STOUTLAND_SEARCH": "长毛狗站在埋有隐藏道具的格子上时，会发出吠叫声。",
+		"SUBSTITUTE": "一个看起来像是宝可梦的替身。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -4237,6 +4242,7 @@
 	"bot": "机器人",
 	"valid": "有效",
 	"invalid": "无效",
+	"not_pokemons": "非宝可梦",
 	"all": "全部",
 	"status_label": "状态列表",	
 	"help": "帮助",
@@ -4585,7 +4591,8 @@
 		"MAGNEZONE": "自爆磁怪正在寻找一名通缉犯，并会为抓获者支付报酬。",
 		"KINGAMBIT": "仆刀将军将一枚LEADERS_CREST交给了第一名的玩家。在战斗中击败他就能获得额外的GOLD！",
 		"LAPRAS": "拉普拉斯能将你带到一个不同的地区。",
-		"LUDICOLO": "乐天河童正在欢庆节日，他提供乐器与大家同乐。"
+		"LUDICOLO": "乐天河童正在欢庆节日，他提供乐器与大家同乐。",
+		"CHIMECHO": "风铃铃能用SOOTHE_BELL召集队员。"
 	},
 	"loading_hints": {
 		"tab_out": "不要切屏离开！如果这个浏览器窗口不活跃，加载会自动暂停。",
@@ -4942,7 +4949,8 @@
 		"share_on_discord": "分享到Discord",
 		"move_row_up": "上移整行",
 		"move_row_down": "下移整行",
-		"delete_row": "删除行"
+		"delete_row": "删除行",
+		"symbols": "插入符号"
 	},
 	"game_modes": {
 		"CLASSIC": "经典模式",
