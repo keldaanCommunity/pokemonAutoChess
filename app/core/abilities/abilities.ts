@@ -168,6 +168,7 @@ import { FlameChargeStrategy } from "./flame-charge"
 import { FlameThrowerStrategy } from "./flame-thrower"
 import { FlashStrategy } from "./flash"
 import { FleurCannonStrategy } from "./fleur-cannon"
+import { FlingStrategy } from "./fling"
 import { FloralHealingStrategy } from "./floral-healing"
 import { FlowerTrickStrategy } from "./flower-trick"
 import { FlyStrategy } from "./fly"
@@ -882,6 +883,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.FLASH]: new FlashStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
+  [Ability.FLING]: new FlingStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
   [Ability.FLY]: new FlyStrategy(),

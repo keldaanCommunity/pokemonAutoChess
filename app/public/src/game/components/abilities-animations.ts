@@ -3121,7 +3121,14 @@ export const AbilitiesAnimations: {
     ability: Ability.WHIRLWIND,
     duration: 1500,
     distance: 8
-  })
+  }),
+  ["BALL"]: (args) =>
+    projectile({
+      delay: 0,
+      scale: 1,
+      duration: args.delay,
+      oriented: true
+    })(args)
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

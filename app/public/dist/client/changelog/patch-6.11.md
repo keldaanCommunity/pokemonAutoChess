@@ -1,6 +1,8 @@
 
 # New Pokemons:
 
+- Passimian
+
 # Changes to Pokemon & Abilities
 
 Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.

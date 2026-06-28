@@ -736,6 +736,7 @@ export enum Pkm {
   PANGORO = "PANGORO",
   PARAS = "PARAS",
   PARASECT = "PARASECT",
+  PASSIMIAN = "PASSIMIAN",
   PATRAT = "PATRAT",
   PAWMI = "PAWMI",
   PAWMO = "PAWMO",
@@ -2154,7 +2155,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TSAREENA]: "0763",
   [Pkm.COMFEY]: "0764",
   //[Pkm.ORANGURU]: "0765",
-  //[Pkm.PASSIMIAN]: "0766",
+  [Pkm.PASSIMIAN]: "0766",
   [Pkm.WIMPOD]: "0767",
   [Pkm.GOLISOPOD]: "0768",
   [Pkm.SANDYGAST]: "0769",
@@ -3664,7 +3665,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.TAROUNTULA]: Pkm.TAROUNTULA,
   [Pkm.SPIDOPS]: Pkm.TAROUNTULA,
   [Pkm.BUG_NEST]: Pkm.BUG_NEST,
-  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING
+  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING,
+  [Pkm.PASSIMIAN]: Pkm.PASSIMIAN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

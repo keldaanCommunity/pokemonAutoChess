@@ -2055,7 +2055,7 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
       pokemon.positionX = p.x
       pokemon.positionY = p.y
-      p.items.forEach((item) => pokemon.items.add(item))
+      pokemon.addItems(p.items, player)
       player.board.set(pokemon.id, pokemon)
     })
     player.updateSynergies()
