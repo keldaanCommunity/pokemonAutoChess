@@ -640,7 +640,7 @@ export default abstract class PokemonState {
         if (attacker && attacker.items.has(Item.PROTECTIVE_PADS)) {
           damageOnShield *= 2 // double damage on shield
         }
-        if (damageOnShield > pokemon.shield) {
+        if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
           pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
