@@ -1,5 +1,5 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -697,7 +697,7 @@ export default abstract class PokemonState {
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
         pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
-        SynergyEffects[Synergy.FOSSIL].forEach((e) => {
+        SynergyTiers[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
       }

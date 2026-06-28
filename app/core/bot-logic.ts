@@ -1,7 +1,7 @@
 import { AdditionalPicksStages, PortalCarouselStages } from "../config"
 import {
   computeSynergies,
-  getSynergyStep
+  getSynergyTier
 } from "../models/colyseus-models/synergies"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
@@ -269,10 +269,10 @@ export function validateBoard(
   const maxItems = getMaxItemComponents(stage)
 
   const scarves = getNbScarvesOnBoard(board)
-  const maxScarves = getSynergyStep(synergies, Synergy.NORMAL)
+  const maxScarves = getSynergyTier(synergies, Synergy.NORMAL)
 
   const nbToolsOnBoard = getNbToolsOnBoard(board)
-  const nbMaxToolsOnBoard = getSynergyStep(synergies, Synergy.ARTIFICIAL)
+  const nbMaxToolsOnBoard = getSynergyTier(synergies, Synergy.ARTIFICIAL)
 
   const duos = Object.values(PkmDuos)
 

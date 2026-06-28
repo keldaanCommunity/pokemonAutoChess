@@ -10,10 +10,9 @@ import {
   DEFAULT_CRIT_POWER,
   DEFAULT_SPEED,
   getAltFormForPlayer,
-  RegionDetails,
-  SynergyTriggers
+  RegionDetails
 } from "../../config"
-import { SynergyEffects } from "../../config/game/synergies"
+import { SynergyTiers } from "../../config/game/synergies"
 import type Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
 import {
@@ -419,7 +418,7 @@ export class Substitute extends Pokemon {
   speed = 28
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 0
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.SUBSTITUTE
@@ -435,7 +434,7 @@ export class Egg extends Pokemon {
   speed = 41
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 0
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.EGG
@@ -13075,9 +13074,7 @@ export class Cherubi extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon, player) => {
-      const hasLight =
-        (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-        SynergyTriggers[Synergy.LIGHT][0]
+      const hasLight = player.synergies.hasSynergyActive(Synergy.LIGHT)
       if (
         pokemon.positionX === player.lightX &&
         pokemon.positionY === player.lightY &&
@@ -14823,7 +14820,7 @@ export class Cosmoem extends Pokemon {
       if (
         pokemon.positionX === player.lightX &&
         pokemon.positionY === player.lightY &&
-        SynergyEffects[Synergy.LIGHT].some((e) => player.effects.has(e))
+        SynergyTiers[Synergy.LIGHT].some((e) => player.effects.has(e))
       )
         return Pkm.SOLGALEO
       else return Pkm.LUNALA
@@ -17153,7 +17150,7 @@ export class PillarWood extends Pokemon {
   speed = 0
   def = 2
   speDef = 2
-  maxPP = 10
+  maxPP = 0
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
@@ -17170,7 +17167,7 @@ export class PillarIron extends Pokemon {
   speed = 0
   def = 6
   speDef = 6
-  maxPP = 10
+  maxPP = 0
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
@@ -17187,7 +17184,7 @@ export class PillarConcrete extends Pokemon {
   speed = 0
   def = 10
   speDef = 10
-  maxPP = 10
+  maxPP = 0
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.INANIMATE
@@ -20712,6 +20709,24 @@ export class Tarountula extends Pokemon {
   additional = true
 }
 
+export class BugNest extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 1
+  hp = 100
+  atk = 0
+  speed = 0
+  def = 5
+  speDef = 5
+  maxPP = 80
+  range = 1
+  skill = Ability.SWARM
+  passive = Passive.INANIMATE
+  canHoldItems = false
+  canBeSold = false
+  canBeBenched = false
+}
+
 export class Spidops extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
   rarity = Rarity.UNCOMMON
@@ -21959,6 +21974,7 @@ export const PokemonClasses: Record<
   [Pkm.KOMALA]: Komala,
   [Pkm.TAROUNTULA]: Tarountula,
   [Pkm.SPIDOPS]: Spidops,
+  [Pkm.BUG_NEST]: BugNest,
   [Pkm.SLITHER_WING]: SlitherWing,
   [Pkm.PASSIMIAN]: Passimian
 }

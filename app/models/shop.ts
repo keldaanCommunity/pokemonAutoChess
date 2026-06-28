@@ -33,7 +33,7 @@ import {
   SellPrices,
   SHOP_SIZE,
   SKY_MELODICA_CHANCE,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   TERRA_CYMBAL_CHANCE,
   UNOWN_PSY3_NB_SHOPS_INTERVAL,
   UNOWN_PSY5_NB_SHOPS_INTERVAL,
@@ -338,7 +338,8 @@ export default class Shop {
       player.unownReminiscences = 0
     }
 
-    const hasTranscendence = psychicLevel >= SynergyTriggers[Synergy.PSYCHIC][2]
+    const hasTranscendence =
+      psychicLevel >= SynergyTiersThresholds[Synergy.PSYCHIC][2]
     if (hasTranscendence) {
       player.shopsSinceLastUnownShop += 1
     }

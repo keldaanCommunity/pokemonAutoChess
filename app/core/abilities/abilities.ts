@@ -498,6 +498,7 @@ import { SurfStrategy } from "./surf"
 import { SurgingStrikesStrategy } from "./surging-strikes"
 import { SwaggerStrategy } from "./swagger"
 import { SwallowStrategy } from "./swallow"
+import { SwarmStrategy } from "./swarm"
 import { SweetScentStrategy } from "./sweet-scent"
 import { SyrupBombStrategy } from "./syrup-bomb"
 import { TackleStrategy } from "./tackle"
@@ -1213,6 +1214,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SURF]: new SurfStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.SWAGGER]: new SwaggerStrategy(),
+  [Ability.SWARM]: new SwarmStrategy(),
   [Ability.SWALLOW]: new SwallowStrategy(),
   [Ability.SWEET_SCENT]: new SweetScentStrategy(),
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),

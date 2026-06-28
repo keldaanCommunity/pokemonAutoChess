@@ -1,6 +1,6 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -385,8 +385,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
 
-  const gourmetLevel = getSynergyStep(player.synergies, Synergy.GOURMET)
-  const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+  const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
+  const nbDishes = [0, 1, 2, 2][gourmetTier] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW

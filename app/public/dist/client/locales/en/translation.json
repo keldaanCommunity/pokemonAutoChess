@@ -1187,6 +1187,7 @@
 		"KOMALA": "Komala",
 		"TAROUNTULA": "Tarountula",
 		"SPIDOPS": "Spidops",
+		"BUG_NEST": "Bug Nest",
 		"SLITHER_WING": "Slither Wing",
 		"PASSIMIAN": "Passimian"
 	},
@@ -1773,6 +1774,7 @@
 		"BITTER_MALICE": "Bitter Malice",
 		"COIL": "Coil",
 		"SUBSTITUTE": "Substitute",
+		"SWARM": "Call of the Swarm",
 		"FLING": "Fling"
 	},
 	"ability_description": {
@@ -2335,6 +2337,7 @@
 		"BITTER_MALICE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict FATIGUE for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]",
 		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
+		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead"
 	},
 	"effect": {
@@ -2514,7 +2517,7 @@
 		"COCOON": "Copy 1 BUG Pokémon",
 		"INFESTATION": "Copy 2 BUG Pokémon",
 		"HORDE": "Copy 3 BUG Pokémon",
-		"HEART_OF_THE_SWARM": "Copy 5 BUG Pokémon",
+		"HEART_OF_THE_SWARM": "Copy 4 BUG Pokémon and get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.",
 		"TAILWIND": "FLY_AWAY once under 20% HP",
 		"FEATHER_DANCE": "Get PROTECT for 2 seconds after the FLY_AWAY",
 		"MAX_AIRSTREAM": "FLY_AWAY twice when under 50% HP and 20% HP",
@@ -3251,7 +3254,7 @@
 		"RKS_SYSTEM": "RKS system: All synergy items held are removable and give MEMORY_DISCS of those synergies when removed.",
 		"SUDOWOODO": "Pretends to be a tree and does not attack but gain [2,4] ATK per second instead (stackable).\nStarts attacking when PP bar is full, cannot be SILENCE or lose PP until then.",
 		"WOBBUFFET": "Does not move or attack until PP bar is full, cannot be SILENCE or lose PP until then.",
-		"DITTO": "Ditto can transform to create a 1 STAR copy of one of your Pokémon you drop it over (not Unique, Legendary or Hatch)",
+		"DITTO": "Ditto can transform into a 1 STAR copy of one of your Pokémon you drop it over (does not work for Unique, Legendary or Hatch)",
 		"EGG": "You can feel something moving inside",
 		"HATCH": "Hatched Pokémon evolve automatically after 5 stages",
 		"SYNCHRO": "If the Pokémon is affected by POISONNED, BURN, WOUND or SILENCE, the enemy caster will suffer the same negative status",
@@ -3362,7 +3365,7 @@
 		"ZYGARDE": "Zygarde cells emerge from fully dug holes every second to join Zygarde, giving it 1 max HP each. When 95 cells have been collected, transforms into its complete form.",
 		"GLIMMORA": "Once below 50% max HP, throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 SPECIAL. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
 		"PILLAR": "Builds [1,1,2] movable pillars that block the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
-		"INANIMATE": "Inanimate objects cannot be copied or sold. They cannot move or attack, and are immune to status effects.",
+		"INANIMATE": "Inanimate objects cannot be copied or sold, cannot move or attack, cannot hold items, and are immune to status effects.",
 		"DRAMPA": "Gains 5 AP each time a Pokémon is affected by its ability.",
 		"APPLIN": "Applin will evolve when given an apple:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",

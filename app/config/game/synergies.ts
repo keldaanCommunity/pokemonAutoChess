@@ -3,7 +3,7 @@ import { Rarity } from "../../types/enum/Game"
 import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 
-export const SynergyEffects = {
+export const SynergyTiers = {
   [Synergy.NORMAL]: [
     EffectEnum.STAMINA,
     EffectEnum.STRENGTH,
@@ -173,10 +173,10 @@ export const SynergyEffects = {
   ]
 } satisfies { [key in Synergy]: readonly EffectEnum[] }
 
-export type SynergyEffect<T extends Synergy = Synergy> =
-  (typeof SynergyEffects)[T][number]
+export type SynergyTier<T extends Synergy = Synergy> =
+  (typeof SynergyTiers)[T][number]
 
-export const SynergyTriggers: { [key in Synergy]: number[] } = {
+export const SynergyTiersThresholds: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7, 9],
   [Synergy.FIRE]: [2, 4, 6, 8],
@@ -238,12 +238,26 @@ export const FishRarityProbability: {
   }
 }
 
-export const MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL = [3, 6, 10, 10]
-export const MONSTER_AP_BUFF_PER_SYNERGY_LEVEL = [10, 20, 30, 30]
-export const MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL = [0.2, 0.4, 0.6, 0.6]
+export const MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER = [0, 3, 6, 10, 10]
+export const MONSTER_AP_BUFF_PER_SYNERGY_TIER = [0, 10, 20, 30, 30]
+export const MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER = [
+  0, 0.2, 0.4, 0.6, 0.6
+]
 
-export const FIELD_HEAL_PER_SYNERGY_LEVEL = [30, 40, 50]
-export const FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL = [15, 20, 25]
+export const FIELD_HEAL_PER_SYNERGY_TIER = [0, 30, 40, 50]
+export const FIELD_SPEED_BUFF_PER_SYNERGY_TIER = [0, 15, 20, 25]
+
+export const AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER = [0, 1, 3, 5]
+export const AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER = [0, 3, 6, 10]
+
+export const GROUND_DEF_BUFF_PER_SYNERGY_TIER = [0, 1, 2, 3, 3]
+export const GROUND_ATK_BUFF_PER_SYNERGY_TIER = [0, 3, 5, 8, 8]
+
+export const FIRE_ATK_BUFF_PER_SYNERGY_TIER = [0, 0, 1, 2, 3]
+
+export const SOUND_ATK_BUFF_PER_SYNERGY_TIER = [0, 2, 1, 1]
+export const SOUND_SPEED_BUFF_PER_SYNERGY_TIER = [0, 0, 5, 5]
+export const SOUND_PP_GAIN_PER_SYNERGY_TIER = [0, 0, 0, 3]
 
 export const FAIRY_WANDS_BY_SYNERGY_LEVEL = [
   [Item.LONG_WAND, Item.SPIRIT_WAND, Item.HP_SWAP_WAND, Item.BLAST_WAND],

@@ -1,11 +1,11 @@
 import { BOARD_WIDTH } from "../../config"
-import { SynergyEffects } from "../../config/game/synergies"
+import { SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
@@ -453,12 +453,9 @@ const GalarianDarmanitanBurnEffect = new PeriodicEffect(
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
-  const aquaticStepReached = getSynergyStep(
-    pkm.player.synergies,
-    Synergy.AQUATIC
-  )
-  pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
-  pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
+  const aquaticTier = getSynergyTier(pkm.player.synergies, Synergy.AQUATIC)
+  pkm.addShield(50 * aquaticTier, pkm, 0, false)
+  pkm.addAttack(3 * aquaticTier, pkm, 0, false)
 }, Passive.PIKACHU_SURFER)
 
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
@@ -856,9 +853,9 @@ const conversionEffect = new OnSimulationStartEffect(
     if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
     entity.types.add(synergyCopied)
     const effect =
-      SynergyEffects[synergyCopied].find((effect) =>
+      SynergyTiers[synergyCopied].find((effect) =>
         opponent.effects.has(effect)
-      ) ?? SynergyEffects[synergyCopied][0]!
+      ) ?? SynergyTiers[synergyCopied][0]!
 
     simulation.applyEffect(entity, effect)
 
@@ -910,14 +907,14 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
     if (synergyCopied === Synergy.FLORA) {
-      const floraLevel = getSynergyStep(opponent.synergies, Synergy.FLORA)
+      const floraTier = getSynergyTier(opponent.synergies, Synergy.FLORA)
       entity.effectsSet.add(
         new OnDeathEffect(({ pokemon }) => {
           let flowerToSpawn: Pkm | null = null
-          if (floraLevel === 1) flowerToSpawn = Pkm.JUMPLUFF
-          else if (floraLevel === 2) flowerToSpawn = Pkm.VICTREEBEL
-          else if (floraLevel === 3) flowerToSpawn = Pkm.MEGANIUM
-          else if (floraLevel === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (floraTier === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraTier === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraTier === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraTier === 4) flowerToSpawn = Pkm.VILEPLUME
           if (flowerToSpawn) {
             const spawnSpot =
               simulation.board.getFarthestTargetCoordinateAvailablePlace(

@@ -6575,6 +6575,14 @@ export const PokemonAnimations: {
     shinyUnavailable: true,
     noShadow: true
   },
+  [Pkm.BUG_NEST]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
   [Pkm.ELGYEM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,

@@ -724,6 +724,8 @@ class GameContainer {
       if (!pokemonUI) return
       if (pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
+      } else if (pokemon.action === PokemonActionState.NEST) {
+        pokemonUI.nestAnimation(false)
       } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(
