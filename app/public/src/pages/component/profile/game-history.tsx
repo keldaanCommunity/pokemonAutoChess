@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import { SynergyTriggers } from "../../../../../config"
+import { SynergyTiersThresholds } from "../../../../../config"
 import type {
   IGameRecord,
   IPokemonRecord
@@ -15,11 +15,11 @@ import type { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
 import "./game-history.css"
-import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail";
 
 const ROW_HEIGHT = 72
 
@@ -198,15 +198,13 @@ function getTopSynergies(
     .sort((a, b) => {
       const [typeA, valueA] = a
       const [typeB, valueB] = b
-      const aTriggerReached = SynergyTriggers[typeA].filter(
+      const aTier = SynergyTiersThresholds[typeA].filter(
         (n) => valueA >= n
       ).length
-      const bTriggerReached = SynergyTriggers[typeB].filter(
+      const bTier = SynergyTiersThresholds[typeB].filter(
         (n) => valueB >= n
       ).length
-      return aTriggerReached !== bTriggerReached
-        ? bTriggerReached - aTriggerReached
-        : valueB - valueA
+      return aTier !== bTier ? bTier - aTier : valueB - valueA
     })
     .slice(0, 4)
   return topSynergies

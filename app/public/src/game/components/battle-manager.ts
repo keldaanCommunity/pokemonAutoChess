@@ -130,6 +130,8 @@ export default class BattleManager {
       }
       if (pokemon.action === PokemonActionState.BLOSSOM) {
         pokemonUI.blossomAnimation()
+      } else if (pokemon.action === PokemonActionState.NEST) {
+        pokemonUI.nestAnimation(true)
       } else {
         this.animationManager.animatePokemon(
           pokemonUI,
@@ -166,7 +168,11 @@ export default class BattleManager {
       this.pokemonSprites.has(pokemon.id)
     ) {
       const pokemonSprite = this.pokemonSprites.get(pokemon.id)!
-      if (pokemon.passive === Passive.INANIMATE && pokemon.hp > 0) {
+      if (
+        pokemon.passive === Passive.INANIMATE &&
+        (this.simulation.blueTeam.has(pokemon.id) ||
+          this.simulation.redTeam.has(pokemon.id))
+      ) {
         // pillar is thrown, skip death animation
         setTimeout(() => pokemonSprite.destroy(), 500)
       } else {
@@ -914,7 +920,6 @@ export default class BattleManager {
   }
 
   removeBoardEvent(event: IBoardEvent) {
-    //console.log("Removing board event", event)
     const index = event.y * BOARD_WIDTH + event.x
     if (event.effect === null) {
       // Clear all effects on this cell

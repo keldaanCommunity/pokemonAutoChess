@@ -7,7 +7,7 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -309,7 +309,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
-    return SynergyEffects[synergy].some((effect) => this.effects.has(effect))
+    return SynergyTiers[synergy].some((effect) => this.effects.has(effect))
   }
 
   resetCooldown(baseDuration: number, speed = this.speed) {
@@ -835,7 +835,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const default_types = getPokemonData(this.name).types
     if (type && !default_types.includes(type)) {
       this.types.delete(type)
-      SynergyEffects[type].forEach((effectName) => {
+      SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
         this.effectsSet.forEach((effect) => {
           if (effect.origin === effectName) this.effectsSet.delete(effect)
@@ -1505,7 +1505,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           .forEach((effect: FlyingProtectionEffect) => {
             effect.flyingProtection = 0 // prevent flying effects twice
           })
-        SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+        SynergyTiers[Synergy.FOSSIL].forEach((e) =>
           spawnedEntity.effects.delete(e)
         )
       })

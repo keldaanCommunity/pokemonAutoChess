@@ -36,6 +36,7 @@ export enum PokemonActionState {
   EAT = "Eat",
   FISH = "Fish",
   BLOSSOM = "Blossom",
+  NEST = "Nest",
   TRAINING = "Training"
 }
 

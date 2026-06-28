@@ -1129,7 +1129,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return simplePlayer
   }
 
-  spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
+  spawnOnBench(
+    player: Player,
+    pkm: Pkm,
+    anim: "fishing" | "nest" | "spawn" = "spawn"
+  ) {
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
@@ -1137,6 +1141,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       pokemon.positionY = 0
       if (anim === "fishing") {
         pokemon.action = PokemonActionState.FISH
+      } else if (anim === "nest") {
+        pokemon.action = PokemonActionState.NEST
       }
 
       player.board.set(pokemon.id, pokemon)

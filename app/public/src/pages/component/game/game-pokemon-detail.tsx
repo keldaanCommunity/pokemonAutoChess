@@ -300,7 +300,9 @@ export function GamePokemonDetail(props: {
           maxValue={props.origin === "team" ? hp! : pokemon.maxHP}
           graduationStep={10}
         />
-        <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
+        {pokemon.maxPP > 0 && (
+          <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
+        )}
       </div>
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value, baseValue, formatter }) => (

@@ -45,6 +45,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Changes to Synergies
 
+- Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
 - Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
 

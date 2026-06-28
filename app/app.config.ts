@@ -20,7 +20,7 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
 import { initTilemap } from "./core/design"
@@ -370,7 +370,7 @@ export const server = defineServer({
     })
 
     app.get("/types-trigger", (req, res) => {
-      res.send(SynergyTriggers)
+      res.send(SynergyTiersThresholds)
     })
 
     app.get("/titles", async (req, res) => {
