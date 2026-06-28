@@ -1187,7 +1187,8 @@
 		"KOMALA": "Komala",
 		"TAROUNTULA": "Tarountula",
 		"SPIDOPS": "Spidops",
-		"SLITHER_WING": "Slither Wing"
+		"SLITHER_WING": "Slither Wing",
+		"PASSIMIAN": "Passimian"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1771,7 +1772,8 @@
 		"NIGHT_DAZE": "Night Daze",
 		"BITTER_MALICE": "Bitter Malice",
 		"COIL": "Coil",
-		"SUBSTITUTE": "Substitute"
+		"SUBSTITUTE": "Substitute",
+		"FLING": "Fling"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2332,7 +2334,8 @@
 		"NIGHT_DAZE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict BLINDED for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"BITTER_MALICE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict FATIGUE for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]",
-		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute."
+		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
+		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2895,7 +2898,8 @@
 		"ROCK_HORN": "Rock Horn",
 		"SKY_MELODICA": "Sky Melodica",
 		"TERRA_CYMBAL": "Terra Cymbal",
-		"SOOTHE_BELL": "Soothe Bell"
+		"SOOTHE_BELL": "Soothe Bell",
+		"BALL": "Ball"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3226,7 +3230,8 @@
 		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
 		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
 		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type.",
-		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon"
+		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon",
+		"BALL": "A ball made of a large hard berry. When casting ability, throws the ball to the furthest FIELD ally to pass them the BALL and 50 SHIELD. If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead, dealing [30,SP]% of user's SPEED as PHYSICAL"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3421,7 +3426,8 @@
 		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in.\nBUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead.",
 		"ILLUSION": "Copy the apperance of the ally on its left.",
 		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground.",
-		"SUBSTITUTE": "A decoy created to look like a Pokémon"
+		"SUBSTITUTE": "A decoy created to look like a Pokémon",
+		"PASSIMIAN": "Passimian comes with a BALL as item held"
 	},
 	"stat": {
 		"ATK": "Attack",
