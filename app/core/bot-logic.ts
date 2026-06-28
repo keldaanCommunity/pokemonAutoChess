@@ -157,11 +157,12 @@ export function getPowerEvaluation(powerScore: number, stage: number) {
 
 export function getMaxItemComponents(stage: number): number {
   const nbComponentsPerStage = [
-    0, 0, 1, 2, 4, 5, 6, 6, 6, 7, 8, 8, 9, 10, 10, 11, 12, 12, 13, 13, 14, 14,
-    14, 16, 16, 16, 18, 18, 20, 20, 22, 22, 22, 22, 24, 26, 26, 28, 28, 28, 28,
-    30
+    0, // stage 0 (unused / pre-game)
+    1, 2, 3, 5, 6, 6, 6, 7, 7, 8,       // stages 1–10
+    9, 10, 10, 10, 11, 11, 12, 12, 12, 14, // stages 11–20
+    14, 16, 16, 16, 18, 18, 20, 20, 22, 22 // stages 21–30
   ]
-  return nbComponentsPerStage[stage] ?? 30
+  return nbComponentsPerStage[stage] ?? 22
 }
 
 export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
