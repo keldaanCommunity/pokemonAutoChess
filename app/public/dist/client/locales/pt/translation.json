@@ -3000,7 +3000,7 @@
 		"TM_SKILL_SWAP": "$t(item_description.TM)\n$t(ability.SKILL_SWAP): $t(ability_description.SKILL_SWAP)",
 		"CHEF_HAT": "O portador preparará seu Prato de Assinatura entre as rodadas.",
 		"RAGE_CANDY_BAR": "Recebe +10 ATK no início da próxima luta.",
-		"TEA": "Recebe 80 PP no início da próxima luta.",
+		"TEA": "Recebe 60 PP no início da próxima luta.",
 		"CURRY": "Inicie a próxima luta com RAGE por 3 segundos.",
 		"CASTELIACONE": "O primeiro ataque na próxima luta infligirá FREEZE por 5 segundos ao atingir o alvo.",
 		"WHIPPED_DREAM": "O primeiro ataque na próxima luta infligirá CHARM por 5 segundos ao atingir o alvo.",
