@@ -1,0 +1,1778 @@
+import { BOARD_WIDTH } from "../../config"
+import { SynergyTiers } from "../../config/game/synergies"
+import {
+  BasculinWhite,
+  type Pokemon,
+  PokemonClasses
+} from "../../models/colyseus-models/pokemon"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
+import PokemonFactory from "../../models/pokemon-factory"
+import { RemovableItems, Transfer } from "../../types"
+import { Ability } from "../../types/enum/Ability"
+import { EffectEnum } from "../../types/enum/Effect"
+import { Emotion } from "../../types/enum/Emotion"
+import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
+import {
+  Berries,
+  ConsumableItems,
+  Flavors,
+  Item,
+  type OgerponMasks,
+  SpecialBerries,
+  SynergyFlavors,
+  SynergyItems
+} from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
+import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Synergy, SynergyArray } from "../../types/enum/Synergy"
+import { Weather } from "../../types/enum/Weather"
+import { isIn, removeInArray } from "../../utils/array"
+import { getAvatarString } from "../../utils/avatar"
+import { isOnBench } from "../../utils/board"
+import { distanceC } from "../../utils/distance"
+import { max, min } from "../../utils/number"
+import { chance, pickRandomIn } from "../../utils/random"
+import { schemaValues } from "../../utils/schemas"
+import { AbilityStrategies } from "../abilities/abilities"
+import { castAbility } from "../abilities/cast"
+import type { Board, Cell } from "../board"
+import type { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
+import { getStrongestUnit } from "../unit-score"
+import {
+  type Effect,
+  OnAbilityCastEffect,
+  OnAttackEffect,
+  OnChangePositionEffect,
+  OnDamageReceivedEffect,
+  OnDeathEffect,
+  type OnDeathEffectArgs,
+  OnEvolutionEffect,
+  OnGroundDiggingEffect,
+  OnHitEffect,
+  OnItemDroppedEffect,
+  OnKillEffect,
+  OnMoveEffect,
+  OnResurrectEffect,
+  OnShieldDepletedEffect,
+  OnSimulationStartEffect,
+  OnSpawnEffect,
+  OnSpotlightChangeEffect,
+  OnStageStartEffect,
+  PeriodicEffect
+} from "./effect"
+import { AccelerationEffect } from "./passives/acceleration"
+import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
+import { FalinksFormationEffect } from "./passives/falinks-formation"
+
+export function drumBeat(pokemon: PokemonEntity, board: Board) {
+  const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
+  pokemon.resetCooldown(1000, speed) // use attack state cooldown
+  if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
+    // CAST ABILITY
+    const target = pokemon.state.getNearestTargetAtSight(pokemon, board)?.target
+    if (target) {
+      castAbility(AbilityStrategies[pokemon.skill], pokemon, board, target)
+    }
+    return
+  }
+
+  pokemon.count.attackCount++
+  pokemon.targetY = -1
+  const ppGained = [2, 3, 5][pokemon.stars - 1] ?? 5
+  board
+    .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+    .forEach((cell) => {
+      if (
+        cell.value &&
+        cell.value.team === pokemon.team &&
+        cell.value.passive !== Passive.DRUMMER
+      ) {
+        cell.value.addPP(ppGained, pokemon, 0, false)
+      }
+    })
+  pokemon.getEffects(OnAttackEffect).forEach((effect) => {
+    effect.apply({
+      pokemon,
+      target: null,
+      board,
+      physicalDamage: 0,
+      specialDamage: 0,
+      trueDamage: 0,
+      totalDamage: 0,
+      crit: false
+    })
+  })
+}
+
+export function stenchJump(
+  pokemon: PokemonEntity,
+  board: Board,
+  x: number,
+  y: number
+) {
+  if (!pokemon.simulation || !board) return
+  board
+    .getCellsBetween(x, y, pokemon.positionX, pokemon.positionY)
+    .forEach((cell) => {
+      if (cell.x !== x || cell.y !== y) {
+        board.addBoardEffect(
+          cell.x,
+          cell.y,
+          EffectEnum.POISON_GAS,
+          pokemon.simulation
+        )
+      }
+    })
+}
+
+export function partingShot(
+  pokemon: PokemonEntity,
+  target: PokemonEntity,
+  x: number,
+  y: number
+) {
+  target.addAbilityPower(-20, pokemon, 0, false)
+  target.addAttack(-0.2 * target.baseAtk, pokemon, 0, false)
+  target.effects.add(EffectEnum.PARTING_SHOT)
+  pokemon.broadcastAbility({
+    skill: "PARTING_SHOT",
+    positionX: x,
+    positionY: y
+  })
+}
+
+const SharedVisionEffect = new OnAttackEffect(({ pokemon, board }) => {
+  board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
+    if (
+      ally &&
+      ally.passive === Passive.SHARED_VISION &&
+      pokemon.team === ally.team &&
+      pokemon.targetEntityId !== ally.id // do not self inflict damage if ally is confused and targeting you
+    ) {
+      ally.targetX = pokemon.targetX
+      ally.targetY = pokemon.targetY
+      ally.targetEntityId = pokemon.targetEntityId
+    }
+  })
+}, Passive.SHARED_VISION)
+
+const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
+  if (target) {
+    const bugAllies =
+      board.cells.filter(
+        (entity) =>
+          entity &&
+          entity.team === pokemon.team &&
+          entity.types.has(Synergy.BUG)
+      ).length - 1
+    if (bugAllies > 0) {
+      target.handleDamage({
+        damage: bugAllies,
+        board,
+        attackType: AttackType.TRUE,
+        attacker: pokemon,
+        shouldTargetGainMana: true
+      })
+    }
+  }
+}, Passive.DURANT)
+
+const MiniorKernelOnAttackEffect = new OnAttackEffect(
+  ({ pokemon, target, board, physicalDamage }) => {
+    if (
+      target &&
+      (pokemon.name === Pkm.MINIOR_KERNEL_BLUE ||
+        pokemon.name === Pkm.MINIOR_KERNEL_GREEN ||
+        pokemon.name === Pkm.MINIOR_KERNEL_RED ||
+        pokemon.name === Pkm.MINIOR_KERNEL_ORANGE)
+    ) {
+      const cells = board.getAdjacentCells(target.positionX, target.positionY)
+      const targets = cells
+        .filter((cell) => cell.value && pokemon.team != cell.value.team)
+        .map((cell) => cell.value!)
+        .concat(target)
+      const multiplier = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+
+      targets.forEach((t) => {
+        pokemon.broadcastAbility({
+          skill: Ability.SHIELDS_DOWN,
+          targetX: t.positionX,
+          targetY: t.positionY
+        })
+        if (pokemon.name === Pkm.MINIOR_KERNEL_BLUE) {
+          t.handleDamage({
+            damage: Math.ceil(
+              physicalDamage * (1 + pokemon.ap / 100) * multiplier
+            ),
+            board,
+            attackType: AttackType.SPECIAL,
+            attacker: pokemon,
+            shouldTargetGainMana: false
+          })
+        }
+        if (pokemon.name === Pkm.MINIOR_KERNEL_RED) {
+          t.handleDamage({
+            damage: Math.ceil(
+              physicalDamage * 1.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
+            board,
+            attackType: AttackType.PHYSICAL,
+            attacker: pokemon,
+            shouldTargetGainMana: false
+          })
+        }
+        if (pokemon.name === Pkm.MINIOR_KERNEL_ORANGE) {
+          t.handleDamage({
+            damage: Math.ceil(
+              physicalDamage * 0.5 * (1 + pokemon.ap / 100) * multiplier
+            ),
+            board,
+            attackType: AttackType.TRUE,
+            attacker: pokemon,
+            shouldTargetGainMana: false
+          })
+        }
+      })
+      if (pokemon.name === Pkm.MINIOR_KERNEL_GREEN) {
+        cells.forEach((v) => {
+          if (v.value && v.value.team === pokemon.team) {
+            v.value.handleHeal(physicalDamage * multiplier, pokemon, 1, false)
+          }
+        })
+      }
+    }
+  },
+  Passive.METEOR
+)
+
+const KubfuOnKillEffect = new OnKillEffect(
+  ({ attacker: pokemon, attackType }) => {
+    const SPEED_BUFF_PER_KILL = 3
+    const AP_BUFF_PER_KILL = 5
+    const MAX_BUFFS = 10
+
+    const baseSpeed = 50
+    let nbBuffsSpeed = Math.floor(
+      (pokemon.refToBoardPokemon.speed - baseSpeed) / SPEED_BUFF_PER_KILL
+    )
+    let nbBuffsAP = Math.floor(pokemon.refToBoardPokemon.ap / AP_BUFF_PER_KILL)
+
+    if (attackType === AttackType.PHYSICAL) {
+      if (nbBuffsSpeed < MAX_BUFFS) {
+        pokemon.addSpeed(SPEED_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsSpeed++
+      }
+      if (
+        nbBuffsSpeed >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_WATERS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_WATERS)
+      }
+    } else {
+      if (nbBuffsAP < MAX_BUFFS) {
+        pokemon.addAbilityPower(AP_BUFF_PER_KILL, pokemon, 0, false, true)
+        nbBuffsAP++
+      }
+      if (
+        nbBuffsAP >= MAX_BUFFS &&
+        pokemon.name === Pkm.KUBFU &&
+        pokemon.player &&
+        pokemon.player.items.includes(Item.SCROLL_OF_DARKNESS) === false
+      ) {
+        pokemon.player.items.push(Item.SCROLL_OF_DARKNESS)
+      }
+    }
+
+    pokemon.refToBoardPokemon.stacks = max(MAX_BUFFS)(
+      Math.max(nbBuffsAP, nbBuffsSpeed)
+    )
+    pokemon.stacks = pokemon.refToBoardPokemon.stacks // update entity tooltip in real time
+  },
+  Passive.KUBFU
+)
+
+const QwilfishPassiveEffect = new OnDamageReceivedEffect(
+  ({ pokemon, attacker, attackType, isRetaliation }) => {
+    if (
+      attackType === AttackType.PHYSICAL &&
+      !isRetaliation &&
+      attacker &&
+      attacker.items.has(Item.PROTECTIVE_PADS) === false &&
+      distanceC(
+        pokemon.positionX,
+        pokemon.positionY,
+        attacker.positionX,
+        attacker.positionY
+      ) === 1
+    ) {
+      const damage = 5
+      attacker.handleDamage({
+        damage,
+        board: pokemon.simulation.board,
+        attackType: AttackType.TRUE,
+        attacker: pokemon,
+        shouldTargetGainMana: true
+      })
+      if (chance(0.3, pokemon)) {
+        attacker.status.triggerPoison(3000, attacker, pokemon)
+      }
+    }
+  },
+  Passive.QWILFISH
+)
+
+export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
+  board.forEach((x, y, pkm) => {
+    if (pkm?.passive === Passive.WATER_SPRING && pkm.team !== pokemon.team) {
+      pkm.addPP(5, pkm, 0, false)
+      pkm.broadcastAbility({ skill: pkm.skill })
+    }
+  })
+}, Passive.WATER_SPRING)
+
+const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon }) => {
+    if (pokemon.hp / pokemon.maxHP < 0.5) {
+      pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
+      pokemon.name = Pkm.MIMIKYU_BUSTED
+      pokemon.changePassive(Passive.MIMIKYU_BUSTED)
+      pokemon.addAttack(8, pokemon, 0, false)
+      pokemon.status.triggerProtect(1500)
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+      }
+    }
+  },
+  Passive.MIMIKYU
+)
+
+const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon, board }) => {
+    if (
+      pokemon.hp < 0.3 * pokemon.maxHP &&
+      pokemon.passive === Passive.DARMANITAN
+    ) {
+      pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
+      pokemon.name = Pkm.DARMANITAN_ZEN
+      pokemon.changePassive(Passive.DARMANITAN_ZEN)
+      pokemon.skill = Ability.TRANSE
+      pokemon.pp = 0
+      const destination = board.getTeleportationCell(
+        pokemon.positionX,
+        pokemon.positionY,
+        pokemon.team
+      )
+      if (destination)
+        pokemon.moveTo(destination.x, destination.y, board, false)
+      pokemon.toIdleState()
+      pokemon.addAttack(-10, pokemon, 0, false)
+      pokemon.addSpeed(-20, pokemon, 0, false)
+      pokemon.addDefense(6, pokemon, 0, false)
+      pokemon.addSpecialDefense(6, pokemon, 0, false)
+      pokemon.range += 4
+      pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
+      }
+    }
+  },
+  Passive.DARMANITAN
+)
+
+const GalarianDarmanitanZenTransformEffect = new OnDamageReceivedEffect(
+  ({ pokemon }) => {
+    if (
+      pokemon.hp < 0.3 * pokemon.maxHP &&
+      pokemon.passive === Passive.GALARIAN_DARMANITAN
+    ) {
+      pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
+      pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
+      pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
+      pokemon.skill = Ability.TRANSE
+      pokemon.pp = 0
+      pokemon.status.tree = true
+      pokemon.status.untargettable = true
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.status.untargettable = false
+        }, 1500)
+      )
+
+      pokemon.toIdleState()
+      pokemon.addAttack(6, pokemon, 0, false)
+      pokemon.addSpeed(-60, pokemon, 0, false)
+
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
+      }
+    }
+  },
+  Passive.GALARIAN_DARMANITAN
+)
+
+const DarmanitanZenOnHitEffect = new OnHitEffect(
+  ({ attacker, totalTakenDamage }) => {
+    attacker.handleHeal(totalTakenDamage, attacker, 0, false)
+  },
+  Passive.DARMANITAN_ZEN
+)
+
+const GalarianDarmanitanBurnEffect = new PeriodicEffect(
+  (pokemon, board) => {
+    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
+      // inflict special damage and burn adjacent enemies
+      pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
+      const crit =
+        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+        chance(pokemon.critChance / 100, pokemon)
+      pokemon.handleHeal(10, pokemon, 1, crit)
+      const damage = 0.25 * pokemon.atk
+      board
+        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+        .forEach((cell) => {
+          if (cell.value && cell.value.team !== pokemon.team) {
+            cell.value.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
+            cell.value.status.triggerBurn(2000, pokemon, cell.value)
+          }
+        })
+    }
+  },
+  Passive.GALARIAN_DARMANITAN_ZEN,
+  1000
+)
+
+const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
+  if (!pkm.player) return
+  const aquaticTier = getSynergyTier(pkm.player.synergies, Synergy.AQUATIC)
+  pkm.addShield(50 * aquaticTier, pkm, 0, false)
+  pkm.addAttack(3 * aquaticTier, pkm, 0, false)
+}, Passive.PIKACHU_SURFER)
+
+const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
+  if (
+    pokemon.passive === Passive.GLIMMORA &&
+    pokemon.hp < 0.5 * pokemon.maxHP &&
+    pokemon.simulation &&
+    board
+  ) {
+    pokemon.changePassive(Passive.NONE)
+
+    const cells = new Array<Cell>()
+
+    let startY = 1
+    let endY = 3
+    if (pokemon.team === Team.RED_TEAM) {
+      startY = -2
+      endY = 0
+    }
+
+    for (let x = -1; x < 2; x++) {
+      for (let y = startY; y < endY; y++) {
+        if (board.isOnBoard(pokemon.positionX + x, pokemon.positionY + y)) {
+          cells.push({
+            x: pokemon.positionX + x,
+            y: pokemon.positionY + y,
+            value:
+              board.cells[
+                board.columns * (pokemon.positionY + y) +
+                  (pokemon.positionX + x)
+              ]
+          })
+        }
+      }
+    }
+
+    cells.forEach((cell) => {
+      board.addBoardEffect(
+        cell.x,
+        cell.y,
+        EffectEnum.TOXIC_SPIKES,
+        pokemon.simulation
+      )
+
+      pokemon.broadcastAbility({
+        skill: "TOXIC_SPIKES",
+        targetX: cell.x,
+        targetY: cell.y
+      })
+
+      if (cell.value && cell.value.team !== pokemon.team) {
+        cell.value.handleSpecialDamage(
+          20,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
+  }
+}, Passive.GLIMMORA)
+
+const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
+  if (!pokemon) return
+  if (isOnBench(pokemon)) {
+    const { speed: initialSpeed, def: initialDef } = new PokemonClasses[
+      pokemon.name
+    ](pokemon.name)
+    pokemon.speed = initialSpeed
+    pokemon.def = initialDef
+    if (pokemon.stacks >= pokemon.stacksRequired && player) {
+      pokemon.stacks = 0
+      player.items.push(Item.SILK_SCARF)
+    }
+    pokemon.stacks = 0
+  } else if (pokemon.stacks < pokemon.stacksRequired) {
+    pokemon.speed = min(0)(pokemon.speed - 5)
+    pokemon.def += 2
+    pokemon.stacks += 1
+  }
+}, Passive.FUR_COAT)
+
+const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
+  const milcery = pokemon
+  if (!milcery) return
+  const surroundingSynergies = new Map<Synergy, number>()
+  SynergyArray.forEach((synergy) => {
+    surroundingSynergies.set(synergy, 0)
+  })
+  const adjacentAllies = schemaValues(player.board).filter(
+    (p) =>
+      isOnBench(p) === false &&
+      distanceC(
+        milcery.positionX,
+        milcery.positionY,
+        p.positionX,
+        p.positionY
+      ) <= 1
+  )
+  adjacentAllies.forEach((ally) => {
+    ally.types.forEach((synergy) => {
+      surroundingSynergies.set(synergy, surroundingSynergies.get(synergy)! + 1)
+    })
+  })
+  let maxSynergy = Synergy.NORMAL
+  surroundingSynergies.forEach((value, key) => {
+    if (value > surroundingSynergies.get(maxSynergy)!) {
+      maxSynergy = key
+    }
+  })
+  const flavor = SynergyFlavors[maxSynergy]
+  Flavors.forEach((f) => {
+    removeInArray(player.items, f)
+  })
+  player.items.push(flavor)
+}, Passive.CREAM)
+
+const PachirisuBerryEffect = new OnStageStartEffect(
+  ({ pokemon, room, player }) => {
+    if (!pokemon || !player) return
+    room.clock.setTimeout(() => {
+      if (chance(0.3, pokemon)) {
+        room.broadcast(Transfer.DIG, {
+          pokemonId: pokemon.id,
+          buriedItem: Item.SITRUS_BERRY
+        })
+        room.clock.setTimeout(() => {
+          player.items.push(Item.SITRUS_BERRY)
+        }, 3000)
+      }
+    }, 1000)
+  },
+  Passive.PACHIRISU
+)
+
+class ClearWingEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        pokemon.addSpeed(1, pokemon, 0, false)
+      },
+      Passive.CLEAR_WING,
+      1000
+    )
+  }
+}
+
+class ZygardeCellsEffect extends PeriodicEffect {
+  cellsCount = 0
+  constructor() {
+    super(
+      (pokemon) => {
+        if (!pokemon.player || this.cellsCount >= 95) return
+
+        const fullyDugHolesIndexes: number[] = []
+        let cellsSpawned = 0
+        const delay = 1800
+
+        for (let i = 0; i < 24; i++)
+          if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
+
+        for (const index of fullyDugHolesIndexes) {
+          if (this.cellsCount < 95) {
+            this.cellsCount++
+            cellsSpawned++
+            const x = +index % 8
+            const y = Math.floor(+index / 8)
+            if (x !== pokemon.positionX || y !== pokemon.positionY) {
+              pokemon.broadcastAbility({
+                targetX: x,
+                targetY: y,
+                skill: "ZYGARDE_CELL"
+              })
+            }
+          }
+        }
+
+        pokemon.commands.push(
+          new DelayedCommand(() => {
+            if (pokemon.name === Pkm.ZYGARDE_100) return
+            pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
+            if (this.cellsCount >= 95) {
+              pokemon.handleHeal(0.2 * pokemon.maxHP, pokemon, 0, false)
+              if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+                pokemon.addDefense(2, pokemon, 0, false)
+                pokemon.addSpecialDefense(2, pokemon, 0, false)
+                pokemon.addMaxHP(5, pokemon, 0, false)
+                pokemon.addSpeed(-12, pokemon, 0, false)
+                pokemon.range = min(1)(pokemon.range + 1)
+              } else if (pokemon.index === PkmIndex[Pkm.ZYGARDE_50]) {
+                pokemon.addAttack(5, pokemon, 0, false)
+                pokemon.addDefense(5, pokemon, 0, false)
+                pokemon.addSpecialDefense(5, pokemon, 0, false)
+                pokemon.addMaxHP(35, pokemon, 0, false)
+                pokemon.addSpeed(-5, pokemon, 0, false)
+                pokemon.range = min(1)(pokemon.range - 1)
+              }
+
+              pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
+              pokemon.name = Pkm.ZYGARDE_100
+              pokemon.changePassive(Passive.NONE)
+              pokemon.skill = Ability.CORE_ENFORCER
+              pokemon.effectsSet.delete(this)
+              if (pokemon.player) {
+                pokemon.player.pokemonsPlayed.add(Pkm.ZYGARDE_100)
+              }
+            }
+          }, delay)
+        )
+      },
+      Passive.ZYGARDE,
+      1000
+    )
+  }
+}
+
+class SynchroEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        const status = pokemon.status
+        if (status.burn && status.burnOrigin) {
+          status.burnOrigin.status.triggerBurn(3000, status.burnOrigin, pokemon)
+        }
+        if (status.poisonStacks && status.poisonOrigin) {
+          status.poisonOrigin.status.triggerPoison(
+            3000,
+            status.poisonOrigin,
+            pokemon
+          )
+        }
+        if (status.wound && status.woundOrigin) {
+          status.woundOrigin.status.triggerWound(
+            3000,
+            status.woundOrigin,
+            pokemon
+          )
+        }
+        if (status.silence && status.silenceOrigin) {
+          status.silenceOrigin.status.triggerSilence(
+            3000,
+            status.silenceOrigin,
+            pokemon
+          )
+        }
+      },
+      Passive.SYNCHRO,
+      3000
+    )
+  }
+}
+
+const ogerponMaskDropEffect = (
+  mask: (typeof OgerponMasks)[number],
+  from: Pkm,
+  to: Pkm
+) =>
+  new OnShieldDepletedEffect(({ pokemon }) => {
+    if (pokemon.name === from && pokemon.items.has(mask)) {
+      pokemon.index = PkmIndex[to]
+      pokemon.name = to
+      pokemon.removeItem(mask)
+      if (pokemon.player) {
+        pokemon.player.pokemonsPlayed.add(to)
+      }
+    }
+  }, mask)
+
+const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
+  ({ pokemon, board }) => {
+    pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
+    const adjcells = board.getAdjacentCells(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    const damage = Math.round(0.5 * pokemon.maxHP)
+    adjcells.forEach((cell) => {
+      if (cell.value && pokemon.team != cell.value.team) {
+        cell.value.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
+  },
+  Passive.PYUKUMUKU
+)
+
+const comfeyEquipOnSimulationStartEffect = new OnSimulationStartEffect(
+  ({ simulation, team, entity }) => {
+    const alliesWithFreeSlots = schemaValues(team).filter(
+      (p) =>
+        p.name !== Pkm.COMFEY &&
+        p.items.size < 3 &&
+        p.refToBoardPokemon.canHoldItems
+    )
+
+    if (alliesWithFreeSlots.length > 0) {
+      // Find the minimum distance to any ally with free slots
+      const minDistance = Math.min(
+        ...alliesWithFreeSlots.map((a) =>
+          distanceC(
+            a.positionX,
+            a.positionY,
+            entity.positionX,
+            entity.positionY
+          )
+        )
+      )
+      // Filter allies at the shortest distance
+      const nearestAllies = alliesWithFreeSlots.filter(
+        (a) =>
+          distanceC(
+            a.positionX,
+            a.positionY,
+            entity.positionX,
+            entity.positionY
+          ) === minDistance
+      )
+
+      const holder = getStrongestUnit(nearestAllies)
+
+      // delete comfey
+      team.delete(entity.id)
+      simulation.board.setEntityOnCell(
+        entity.positionX,
+        entity.positionY,
+        undefined
+      )
+      if (simulation.blueDpsMeter.has(entity.id)) {
+        simulation.blueDpsMeter.delete(entity.id)
+      }
+      if (simulation.redDpsMeter.has(entity.id)) {
+        simulation.redDpsMeter.delete(entity.id)
+      }
+
+      holder.addItem(Item.COMFEY)
+    }
+  },
+  Passive.COMFEY
+)
+
+const commanderPassive = new OnSimulationStartEffect(
+  ({ simulation, team, entity }) => {
+    const dondozo = simulation.board
+      .getAdjacentCells(entity.positionX, entity.positionY)
+      .find(
+        (cell) =>
+          cell.value &&
+          cell.value.name === Pkm.DONDOZO &&
+          cell.value.team === entity.team &&
+          cell.value.items.size < 3
+      )?.value
+
+    if (dondozo) {
+      // delete tatsugiri
+      team.delete(entity.id)
+      simulation.board.setEntityOnCell(
+        entity.positionX,
+        entity.positionY,
+        undefined
+      )
+      if (simulation.blueDpsMeter.has(entity.id)) {
+        simulation.blueDpsMeter.delete(entity.id)
+      }
+      if (simulation.redDpsMeter.has(entity.id)) {
+        simulation.redDpsMeter.delete(entity.id)
+      }
+
+      if (entity.name === Pkm.TATSUGIRI_CURLY) {
+        dondozo.addItem(Item.TATSUGIRI_CURLY)
+      } else if (entity.name === Pkm.TATSUGIRI_DROOPY) {
+        dondozo.addItem(Item.TATSUGIRI_DROOPY)
+      } else if (entity.name === Pkm.TATSUGIRI_STRETCHY) {
+        dondozo.addItem(Item.TATSUGIRI_STRETCHY)
+      }
+    }
+  },
+  Passive.COMMANDER
+)
+
+const conversionEffect = new OnSimulationStartEffect(
+  ({ simulation, player, entity }) => {
+    if (!player || entity.isSpawn) return
+    const opponent =
+      simulation.bluePlayerId === player.id
+        ? simulation.redPlayer
+        : simulation.bluePlayer
+    if (!opponent) return
+    const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies(1))
+    if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
+    entity.types.add(synergyCopied)
+    const effect =
+      SynergyTiers[synergyCopied].find((effect) =>
+        opponent.effects.has(effect)
+      ) ?? SynergyTiers[synergyCopied][0]!
+
+    simulation.applyEffect(entity, effect)
+
+    // when converting to bug, get a clone
+    if (synergyCopied === Synergy.BUG) {
+      const coord = simulation.getClosestFreeCellToPokemonEntity(
+        entity,
+        entity.team
+      )
+      if (coord) {
+        const bug = PokemonFactory.createPokemonFromName(entity.name, player)
+        simulation.addPokemon(bug, coord.x, coord.y, entity.team, true)
+      }
+    }
+
+    // when converting to dragon, no double synergy but gains the AP/AS/SHIELD based on opponent team
+    if (synergyCopied === Synergy.DRAGON) {
+      const opponentTeam = simulation.getOpponentTeam(player.id)!
+      const dragonLevel = schemaValues(opponentTeam).reduce(
+        (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
+        0
+      )
+      if (
+        effect === EffectEnum.DRAGON_SCALES ||
+        effect === EffectEnum.DRAGON_DANCE
+      ) {
+        entity.addShield(dragonLevel * 5, entity, 0, false)
+      }
+      if (effect === EffectEnum.DRAGON_DANCE) {
+        entity.addAbilityPower(dragonLevel, entity, 0, false)
+        entity.addSpeed(dragonLevel, entity, 0, false)
+      }
+    }
+
+    // when converting to ghost, get Dodge chance
+    if (synergyCopied === Synergy.GHOST) {
+      entity.addDodgeChance(0.15, entity, 0, false)
+    }
+
+    // when converting to gourmet, get a Chef hat. Useless but funny
+    if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
+      entity.addItem(Item.CHEF_HAT)
+    }
+
+    // when converting to ground, fully dig a hole at their position
+    if (synergyCopied === Synergy.GROUND) {
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+    }
+
+    // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
+    if (synergyCopied === Synergy.FLORA) {
+      const floraTier = getSynergyTier(opponent.synergies, Synergy.FLORA)
+      entity.effectsSet.add(
+        new OnDeathEffect(({ pokemon }) => {
+          let flowerToSpawn: Pkm | null = null
+          if (floraTier === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraTier === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraTier === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraTier === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (flowerToSpawn) {
+            const spawnSpot =
+              simulation.board.getFarthestTargetCoordinateAvailablePlace(
+                pokemon,
+                true
+              )
+            if (spawnSpot) {
+              const spawnedPokemon = PokemonFactory.createPokemonFromName(
+                flowerToSpawn,
+                player
+              )
+              const entity = pokemon.simulation.addPokemon(
+                spawnedPokemon,
+                spawnSpot.x,
+                spawnSpot.y,
+                player.team,
+                true
+              )
+              entity.action = PokemonActionState.BLOSSOM
+              entity.cooldown = 1000
+              player.pokemonsPlayed.add(flowerToSpawn)
+            }
+          }
+        })
+      )
+    }
+  },
+  Passive.CONVERSION
+)
+
+const spawnPhioneFromAquaEggOnSimulationStartEffect =
+  new OnSimulationStartEffect(({ entity, simulation, player }) => {
+    if (entity.items.has(Item.AQUA_EGG)) {
+      entity.removeItem(Item.AQUA_EGG)
+      const coord = simulation.getClosestFreeCellToPokemonEntity(
+        entity,
+        entity.team
+      )
+      if (coord) {
+        const phione = PokemonFactory.createPokemonFromName(Pkm.PHIONE, player)
+        if (player) {
+          player.pokemonsPlayed.add(Pkm.PHIONE)
+        }
+        simulation.addPokemon(phione, coord.x, coord.y, entity.team, true)
+      }
+    }
+  }, Passive.MANAPHY)
+
+const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    simulation.board
+      .getAdjacentCells(entity.positionX, entity.positionY)
+      .forEach((cell) => {
+        if (cell.value && cell.value.team === entity.team) {
+          cell.value.addAbilityPower(
+            entity.inSpotlight ? 100 : 50,
+            cell.value,
+            0,
+            false
+          )
+        }
+      })
+  },
+  Passive.STONJOURNER
+)
+
+const treeEffect = new OnSpawnEffect((entity) => {
+  entity.status.tree = true
+  entity.toIdleState()
+})
+
+const inanimateObjectEffect = new OnSpawnEffect((entity) => {
+  entity.status.tree = true
+  entity.status.triggerRuneProtect(30000, entity, entity)
+  entity.toIdleState()
+}, Passive.INANIMATE)
+
+const skarmorySpikesOnSimulationStartEffect = new OnSimulationStartEffect(
+  ({ simulation, entity }) => {
+    if (!simulation) return
+    entity.commands.push(
+      new DelayedCommand(() => {
+        const board = simulation.board
+        if (!board) return
+        const nbSpikes = 10
+        const positions = new Set<string>()
+        for (let i = 0; i < nbSpikes; i++) {
+          let x, y
+          do {
+            x = Math.floor(Math.random() * board.columns)
+            y =
+              Math.floor((Math.random() * board.rows) / 2) +
+              (entity.positionY < 3 ? 3 : 0)
+          } while (positions.has(`${x},${y}`))
+          positions.add(`${x},${y}`)
+
+          board.addBoardEffect(x, y, EffectEnum.SPIKES, simulation)
+          entity.broadcastAbility({
+            skill: Ability.SPIKES,
+            targetX: x,
+            targetY: y
+          })
+        }
+      }, 300)
+    )
+  },
+  Passive.SKARMORY
+)
+
+class DrySkinPeriodicEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon, board) => {
+        if (pokemon.simulation.weather === Weather.RAIN) {
+          pokemon.handleHeal(8, pokemon, 0, false)
+        } else if (pokemon.simulation.weather === Weather.DROUGHT) {
+          pokemon.handleSpecialDamage(
+            8,
+            board,
+            AttackType.TRUE,
+            pokemon,
+            false,
+            false
+          )
+        }
+      },
+      Passive.DRY_SKIN,
+      1000
+    )
+  }
+}
+
+const drySkinOnSpawnEffect = new OnSpawnEffect((entity) => {
+  if (
+    entity.simulation.weather === Weather.RAIN ||
+    entity.simulation.weather === Weather.DROUGHT
+  ) {
+    entity.effectsSet.add(new DrySkinPeriodicEffect())
+  } else if (entity.simulation.weather === Weather.SANDSTORM) {
+    entity.addDodgeChance(0.25, entity, 0, false)
+  } else if (entity.simulation.weather === Weather.ZENITH) {
+    entity.addAbilityPower(50, entity, 0, false)
+  }
+}, Passive.DRY_SKIN)
+
+const spiritombWispEffect = new OnSimulationStartEffect(
+  ({ entity, simulation }) => {
+    if (!entity.player) return
+    const nbOddKeystones = max(3)(
+      entity.player.items.filter((i) => i === Item.ODD_KEYSTONE).length
+    )
+    if (nbOddKeystones === 0) return
+    const shieldAmount = nbOddKeystones * 10
+    const onKOEffect = new OnDeathEffect(({ pokemon }) => {
+      if (entity.hp <= 0) return
+      entity.broadcastAbility({
+        skill: "WISP",
+        positionX: entity.positionX,
+        positionY: entity.positionY,
+        targetX: pokemon.positionX,
+        targetY: pokemon.positionY
+      })
+      entity.commands.push(
+        new DelayedCommand(() => {
+          entity.addShield(shieldAmount, entity, 0, false)
+        }, 1000)
+      )
+    })
+    simulation.board.cells.forEach((pkm) => {
+      if (pkm && pkm !== entity) {
+        pkm.effectsSet.add(onKOEffect)
+      }
+    })
+  },
+  Passive.SPIRITOMB
+)
+
+const chinglingCountCastsEffect = new OnSimulationStartEffect(
+  ({ team, entity }) => {
+    if (!entity.player) return
+    team.forEach((pkm) => {
+      pkm.effectsSet.add(
+        new OnAbilityCastEffect(() => (entity as PokemonEntity).addStack())
+      )
+    })
+  },
+  Passive.CHINGLING
+)
+
+const SudowoodoGainAttackEffect = new PeriodicEffect(
+  (pokemon) => {
+    if (pokemon.status.tree) {
+      pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
+    }
+  },
+  Passive.SUDOWOODO,
+  1000
+)
+
+const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
+  const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
+    (entity): entity is PokemonEntity =>
+      entity != null &&
+      entity.team === attacker.team &&
+      PkmFamily[entity.name] === PkmFamily[attacker.name]
+  )
+  familyMembers.forEach((entity) => {
+    if (!attacker.player) return
+    entity.addStack()
+    if (entity.refToBoardPokemon.stacks % 2 === 0) {
+      entity.addAttack(1, entity, 0, false, true)
+    }
+  })
+
+  if (!attacker.player) return
+  if (familyMembers.every((p) => p.isSpawn)) {
+    const originalPoipole = schemaValues(attacker.player.board).find(
+      (p) => PkmFamily[p.name] === Pkm.POIPOLE
+    )
+    if (originalPoipole) {
+      originalPoipole.stacks++
+      if (originalPoipole.stacks % 2 === 0) {
+        originalPoipole.addAttack(1)
+      }
+    }
+  }
+}, Passive.POIPOLE)
+
+const addPrimeapeStack = ({ pokemon }: OnDeathEffectArgs) => {
+  pokemon.addAttack(1, pokemon, 0, false, true)
+  pokemon.addStack()
+}
+
+const superchargeTadbulb = (
+  pokemon: PokemonEntity & { lastSuperchargeTime?: number },
+  board: Board
+) => {
+  if (
+    pokemon.lastSuperchargeTime &&
+    Date.now() - pokemon.lastSuperchargeTime < 3000
+  ) {
+    return
+  }
+  pokemon.lastSuperchargeTime = Date.now()
+
+  if (pokemon.status.electricField === false) {
+    pokemon.status.electricField = true
+    pokemon.addSpeed(20, pokemon, 0, false)
+    pokemon.addShield(30, pokemon, 0, false)
+    pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
+  }
+  board
+    .getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    .forEach((cell) => {
+      if (cell.value && cell.value.team !== pokemon.team) {
+        const orientation = board.orientation(
+          pokemon.positionX,
+          pokemon.positionY,
+          cell.value.positionX,
+          cell.value.positionY,
+          pokemon,
+          undefined
+        )
+        const destination = board.getKnockBackPlace(
+          cell.value.positionX,
+          cell.value.positionY,
+          orientation
+        )
+
+        if (destination) {
+          cell.value.moveTo(destination.x, destination.y, board, true)
+          cell.value.cooldown = 500
+        }
+
+        cell.value.handleDamage({
+          damage: 10,
+          board,
+          attackType: AttackType.SPECIAL,
+          attacker: pokemon,
+          isRetaliation: true,
+          shouldTargetGainMana: true
+        })
+      }
+    })
+}
+
+export function transformToIceFace(
+  entity: PokemonEntity,
+  isBattleStart: boolean
+) {
+  entity.index = PkmIndex[Pkm.EISCUE]
+  entity.name = Pkm.EISCUE
+  entity.changePassive(Passive.EISCUE_ICE_FACE)
+  entity.addShield(isBattleStart ? 100 : 50, entity, 0, false)
+  if (entity.player) {
+    entity.player.pokemonsPlayed.add(Pkm.EISCUE)
+  }
+}
+
+export function transformToNoice(entity: PokemonEntity) {
+  entity.index = PkmIndex[Pkm.EISCUE_NOICE]
+  entity.name = Pkm.EISCUE_NOICE
+  entity.changePassive(Passive.EISCUE_NOICE)
+  entity.shield = 0
+}
+
+export const PassiveEffects: Partial<
+  Record<Passive, (Effect | (() => Effect))[]>
+> = {
+  [Passive.DURANT]: [DurantBugBuffEffect],
+  [Passive.SHARED_VISION]: [SharedVisionEffect],
+  [Passive.METEOR]: [MiniorKernelOnAttackEffect],
+  [Passive.KUBFU]: [KubfuOnKillEffect],
+  [Passive.QWILFISH]: [QwilfishPassiveEffect],
+  [Passive.HISUIAN_QWILFISH]: [
+    new OnAbilityCastEffect((pokemon) => pokemon.addStack())
+  ],
+  [Passive.SLOW_START]: [
+    new OnSpawnEffect((pokemon) => pokemon.addSpeed(-30, pokemon, 0, false)),
+    new OnAbilityCastEffect((pokemon) => {
+      if (pokemon.count.ult === 1) {
+        pokemon.addSpeed(30, pokemon, 0, false)
+        pokemon.addAttack(10, pokemon, 0, false)
+      }
+    })
+  ],
+  [Passive.VIGOROTH]: [
+    new OnSpawnEffect((pkm) => {
+      pkm.status.sleep = false
+      pkm.effects.add(EffectEnum.IMMUNITY_SLEEP)
+    })
+  ],
+  [Passive.COMATOSE]: [
+    new OnSpawnEffect((pkm) => {
+      pkm.status.sleep = true
+      pkm.status.sleepCooldown = 1000
+      pkm.status.burn = false
+      pkm.status.poisonStacks = 0
+      pkm.status.freeze = false
+      pkm.status.paralysis = false
+      pkm.effects.add(EffectEnum.IMMUNITY_BURN)
+      pkm.effects.add(EffectEnum.IMMUNITY_POISON)
+      pkm.effects.add(EffectEnum.IMMUNITY_FREEZE)
+      pkm.effects.add(EffectEnum.IMMUNITY_PARALYSIS)
+    })
+  ],
+  [Passive.MEGA_SABLEYE]: [
+    new OnSpawnEffect((entity) =>
+      entity.status.triggerRuneProtect(60000, entity, entity)
+    )
+  ],
+  [Passive.PIKACHU_SURFER]: [PikachuSurferBuffEffect],
+  [Passive.ACCELERATION]: [
+    () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.MIMIKYU]: [MimikuBustedTransformEffect],
+  [Passive.DARMANITAN]: [DarmanitanZenTransformEffect],
+  [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
+  [Passive.GALARIAN_DARMANITAN]: [GalarianDarmanitanZenTransformEffect],
+  [Passive.GALARIAN_DARMANITAN_ZEN]: [GalarianDarmanitanBurnEffect, treeEffect],
+  [Passive.GLIMMORA]: [ToxicSpikesEffect],
+  [Passive.FUR_COAT]: [FurCoatEffect],
+  [Passive.CREAM]: [MilceryFlavorEffect],
+  [Passive.CLEAR_WING]: [
+    () => new ClearWingEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.SYNCHRO]: [
+    () => new SynchroEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.ZYGARDE]: [
+    () => new ZygardeCellsEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.FALINKS]: [
+    () => new FalinksFormationEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.AVALUGG]: [
+    () => new BergmiteOnBackEffect() // needs new instance of effect for each pokemon due to internal stack counter
+  ],
+  [Passive.OGERPON_CORNERSTONE]: [
+    ogerponMaskDropEffect(
+      Item.CORNERSTONE_MASK,
+      Pkm.OGERPON_CORNERSTONE_MASK,
+      Pkm.OGERPON_CORNERSTONE
+    )
+  ],
+  [Passive.OGERPON_HEARTHFLAME]: [
+    ogerponMaskDropEffect(
+      Item.HEARTHFLAME_MASK,
+      Pkm.OGERPON_HEARTHFLAME_MASK,
+      Pkm.OGERPON_HEARTHFLAME
+    )
+  ],
+  [Passive.OGERPON_TEAL]: [
+    ogerponMaskDropEffect(
+      Item.TEAL_MASK,
+      Pkm.OGERPON_TEAL_MASK,
+      Pkm.OGERPON_TEAL
+    )
+  ],
+  [Passive.OGERPON_WELLSPRING]: [
+    ogerponMaskDropEffect(
+      Item.WELLSPRING_MASK,
+      Pkm.OGERPON_WELLSPRING_MASK,
+      Pkm.OGERPON_WELLSPRING
+    )
+  ],
+  [Passive.PACHIRISU]: [PachirisuBerryEffect],
+  [Passive.SOUL_HEART]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addPP(10, attacker, 0, false)
+      attacker.addAbilityPower(10, attacker, 0, false)
+    })
+  ],
+  [Passive.BEAST_BOOST_ATK]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAttack(5, attacker, 0, false)
+    })
+  ],
+  [Passive.BEAST_BOOST_AP]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAbilityPower(10, attacker, 0, false)
+    })
+  ],
+  [Passive.GRIM_NEIGH]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAbilityPower(30, attacker, 0, false)
+    })
+  ],
+  [Passive.CHILLING_NEIGH]: [
+    new OnKillEffect(({ attacker }) => {
+      attacker.addAttack(5, attacker, 0, false)
+    })
+  ],
+  [Passive.GUZZLORD]: [
+    new OnKillEffect(({ attacker }) => {
+      if (attacker.items.has(Item.CHEF_HAT)) {
+        const isDoubled = attacker.player
+          ? attacker.player.synergies.hasSynergyTriggerOrMore(
+              Synergy.GOURMET,
+              2
+            )
+          : false
+        attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
+        attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
+        attacker.addStack(isDoubled ? 2 : 1)
+      }
+    })
+  ],
+  [Passive.STENCH]: [
+    new OnMoveEffect((pokemon, board, oldX, oldY) => {
+      if (pokemon.simulation && board) {
+        board.addBoardEffect(
+          oldX,
+          oldY,
+          EffectEnum.POISON_GAS,
+          pokemon.simulation
+        )
+      }
+    })
+  ],
+  [Passive.PYUKUMUKU]: [PyukumukuExplodeOnDeathEffect],
+  [Passive.BEADS_OF_RUIN]: [
+    new OnHitEffect(({ attacker, target }) => {
+      target.addSpecialDefense(-1, attacker, 0, false)
+    })
+  ],
+  [Passive.EMERGENCY_EXIT]: [
+    new OnSpawnEffect((pkm) => pkm.addPP(pkm.maxPP, pkm, 0, false))
+  ],
+  [Passive.COMFEY]: [comfeyEquipOnSimulationStartEffect],
+  [Passive.COMMANDER]: [commanderPassive],
+  [Passive.CONVERSION]: [conversionEffect],
+  [Passive.MANAPHY]: [spawnPhioneFromAquaEggOnSimulationStartEffect],
+  [Passive.STONJOURNER]: [
+    stonjournerPowerSpotOnSimulationStartEffect,
+    treeEffect
+  ],
+  [Passive.WOBBUFFET]: [treeEffect],
+  [Passive.SUDOWOODO]: [treeEffect, SudowoodoGainAttackEffect],
+  [Passive.INANIMATE]: [inanimateObjectEffect],
+  [Passive.SKARMORY]: [skarmorySpikesOnSimulationStartEffect],
+  [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
+  [Passive.SPOT_PANDA]: [
+    new OnSpawnEffect((entity) => {
+      entity.status.confusion = false
+      entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
+    })
+  ],
+  [Passive.AQUA_VEIL]: [
+    new OnSpawnEffect((entity) => {
+      if (entity.simulation.weather === Weather.RAIN) {
+        entity.status.triggerRuneProtect(60000, entity, entity)
+      }
+    })
+  ],
+  [Passive.SPECIAL_ATTACK]: [
+    new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.SPECIAL_ATTACKS)
+    })
+  ],
+  [Passive.GHOLDENGO]: [
+    new OnSpawnEffect((entity) => {
+      if (
+        entity.player &&
+        entity.player.money >= entity.player.maxInterest * 10
+      ) {
+        entity.status.triggerRuneProtect(60000, entity, entity)
+      }
+    })
+  ],
+  [Passive.BASCULIN_WHITE]: [
+    new OnKillEffect(({ attacker }) => {
+      const pokemon = attacker.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        attacker.stacks = pokemon.stacks // update entity tooltip in real time
+        if (
+          pokemon.killCount === pokemon.stacksRequired &&
+          pokemon.deathCount < pokemon.stacksRequired
+        ) {
+          attacker.addStack(0) // trigger evolution
+        }
+      }
+    }),
+    new OnDeathEffect(({ pokemon: pokemonEntity }) => {
+      const pokemon = pokemonEntity.refToBoardPokemon
+      if (pokemon && pokemon instanceof BasculinWhite) {
+        pokemon.stacks = pokemon.deathCount
+        //pokemon.stacks = Math.max(pokemon.deathCount, pokemon.killCount)
+        if (
+          pokemon.deathCount === pokemon.stacksRequired &&
+          pokemon.killCount < pokemon.stacksRequired
+        ) {
+          pokemonEntity.addStack(0) // trigger evolution
+        }
+      }
+    })
+  ],
+  [Passive.BASCULIN_RED_BLUE]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      const basculins: PokemonEntity[] = board.cells.filter(
+        (p) =>
+          p !== undefined &&
+          p.team === pokemon.team &&
+          p.passive === Passive.BASCULIN_RED_BLUE
+      ) as PokemonEntity[]
+
+      const basculinWithMostAttack = basculins.sort((a, b) => b.atk - a.atk)[0]
+
+      if (basculinWithMostAttack && pokemon.atk < basculinWithMostAttack.atk) {
+        const delta = basculinWithMostAttack.atk - pokemon.atk
+        pokemon.addAttack(delta, pokemon, 0, false)
+      }
+    })
+  ],
+  [Passive.SPIRITOMB]: [spiritombWispEffect],
+  [Passive.CHINGLING]: [chinglingCountCastsEffect],
+  [Passive.RECYCLE]: [
+    new OnItemDroppedEffect(({ pokemon, item, player }) => {
+      if (Berries.includes(item)) {
+        pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15)
+        removeInArray(player.items, item)
+        return false
+      } else if (ConsumableItems.includes(item)) {
+        pokemon.addMaxHP(30)
+        player.items.push(Item.TRASH)
+        removeInArray(player.items, item)
+        return false
+      }
+      return true
+    })
+  ],
+  [Passive.POIPOLE]: [PoipoleOnKillEffect],
+  [Passive.NAGANADEL]: [PoipoleOnKillEffect],
+  [Passive.BAD_LUCK]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team !== entity.team) {
+          pkm.addLuck(-20, pkm, 0, false)
+        }
+      })
+    }, Passive.BAD_LUCK)
+  ],
+  [Passive.PRIMEAPE]: [
+    new OnResurrectEffect(addPrimeapeStack, Passive.PRIMEAPE),
+    new OnDeathEffect(addPrimeapeStack, Passive.PRIMEAPE)
+  ],
+  [Passive.GEARS]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      const interval = [3000, 2000, 1000][entity.stars - 1] ?? 1000
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team === entity.team) {
+          pkm.effectsSet.add(
+            new PeriodicEffect(
+              (pokemon) => {
+                if (entity.hp > 0) {
+                  pokemon.addSpeed(1, pokemon, 0, false)
+                }
+              },
+              Passive.GEARS,
+              interval
+            )
+          )
+        }
+      })
+    }, Passive.GEARS)
+  ],
+  [Passive.TADBULB]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      if (entity.status.light) {
+        superchargeTadbulb(entity, simulation.board)
+      }
+    }),
+    new OnDamageReceivedEffect(
+      ({ pokemon, damageBeforeReduction, board, isRetaliation }) => {
+        if (damageBeforeReduction >= 50 && !isRetaliation) {
+          superchargeTadbulb(pokemon, board)
+        }
+      }
+    )
+  ],
+  [Passive.PINCURCHIN]: [
+    new OnDamageReceivedEffect(({ pokemon, attackType, attacker }) => {
+      if (attackType === AttackType.SPECIAL) {
+        pokemon.status.electricField = true
+      }
+      if (
+        pokemon.status.electricField &&
+        attacker &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          attacker.positionX,
+          attacker.positionY
+        ) <= 1
+      ) {
+        attacker.status.triggerParalysis(2000, attacker, pokemon)
+      }
+    })
+  ],
+  [Passive.STAMINA]: [
+    new OnDamageReceivedEffect(({ pokemon }) => {
+      const shield = 20
+      if (pokemon.count.damageReceivedCount % 10 === 0) {
+        pokemon.addShield(shield, pokemon, 1, false)
+      }
+    })
+  ],
+  [Passive.FINIZEN]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      if (entity.name === Pkm.PALAFIN_HERO) return
+      let nbAlliesKo = 0
+      let nbAllies = 0
+      let transformed = false
+
+      const transformToHero = () => {
+        transformed = true
+        const isFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
+        entity.index = PkmIndex[Pkm.PALAFIN_HERO]
+        entity.name = Pkm.PALAFIN_HERO
+        entity.addAttack(18, entity, 0, false)
+        entity.addSpeed(16, entity, 0, false)
+        entity.addDefense(5, entity, 0, false)
+        entity.addSpecialDefense(5, entity, 0, false)
+        entity.hp = entity.maxHP
+        if (entity.player && !entity.isGhostOpponent && isFinizenOnBoard) {
+          entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
+          entity.player.transformPokemon(
+            entity.refToBoardPokemon as Pokemon,
+            Pkm.PALAFIN
+          )
+        }
+      }
+
+      const transformToHeroOnDeathEffect = new OnDeathEffect(() => {
+        nbAlliesKo++
+        if (!transformed && (nbAlliesKo >= 5 || nbAlliesKo >= nbAllies)) {
+          transformToHero()
+        }
+      })
+
+      simulation.board.forEach((x, y, pkm) => {
+        if (pkm && pkm.team === entity.team && pkm.id !== entity.id) {
+          nbAllies++
+          pkm.effectsSet.add(transformToHeroOnDeathEffect)
+        }
+      })
+
+      // edge case no allies: transform immediately
+      if (nbAllies === 0) {
+        transformToHero()
+      }
+    })
+  ],
+  [Passive.EISCUE_NOICE]: [
+    new OnSimulationStartEffect(({ entity, simulation }) => {
+      if (simulation.weather === Weather.SNOW) {
+        transformToIceFace(entity, true)
+      }
+    }, Passive.EISCUE_NOICE)
+  ],
+  [Passive.EISCUE_ICE_FACE]: [
+    new OnShieldDepletedEffect(({ pokemon }) => {
+      transformToNoice(pokemon)
+    })
+  ],
+  [Passive.WALL_OF_STONE]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked until their shield is depleted
+      simulation.board.forEach((x, y, ally) => {
+        if (
+          ally &&
+          ally.team === entity.team &&
+          y === entity.positionY &&
+          ally.types.has(Synergy.ROCK)
+        ) {
+          ally.addShield(50, entity, 0, false)
+          ally.status.triggerLocked(60000, ally)
+          ally.effectsSet.add(
+            new OnShieldDepletedEffect(({ pokemon }) => {
+              pokemon.status.lockedCooldown = 0
+              pokemon.status.updateLocked(0, pokemon)
+            })
+          )
+        }
+      })
+    })
+  ],
+  [Passive.MELOETTA]: [
+    new OnChangePositionEffect(({ newY, pokemon, player }) => {
+      if (newY === 3 && pokemon.name === Pkm.MELOETTA) {
+        player.transformPokemon(pokemon, Pkm.PIROUETTE_MELOETTA)
+      }
+      if (newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
+        player.transformPokemon(pokemon, Pkm.MELOETTA)
+      }
+    })
+  ],
+  [Passive.RKS_SYSTEM]: [
+    new OnChangePositionEffect(({ newY, pokemon, player, state }) => {
+      if (newY === 0) {
+        const itemsToRemove = schemaValues(pokemon.items).filter((item) => {
+          return (
+            isIn(RemovableItems, item) ||
+            (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+              item !== Item.RARE_CANDY) ||
+            isIn(SynergyItems, item)
+          )
+        })
+        player.items.push(...itemsToRemove)
+        pokemon.removeItems(itemsToRemove, player)
+      }
+    })
+  ],
+  [Passive.PRISM]: [
+    new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
+      } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.NECROZMA)
+      }
+    })
+  ],
+
+  [Passive.BLOSSOM]: [
+    new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.name === Pkm.CHERRIM && inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
+      } else if (pokemon.name === Pkm.CHERRIM_SUNLIGHT && !inSpotlight) {
+        player.transformPokemon(pokemon, Pkm.CHERRIM)
+      }
+    })
+  ],
+
+  [Passive.PILLAR]: [
+    new OnChangePositionEffect(({ player }) => {
+      player.updatePillars()
+    }),
+    new OnEvolutionEffect(({ player }) => {
+      player.updatePillars()
+    })
+  ],
+
+  [Passive.VESPIQUEN]: [
+    new OnChangePositionEffect(({ newY, pokemon }) => {
+      if (newY === 1) {
+        pokemon.range = 3
+        pokemon.skill = Ability.ATTACK_ORDER
+      } else if (newY === 2) {
+        pokemon.range = 2
+        pokemon.skill = Ability.HEAL_ORDER
+      } else if (newY === 3) {
+        pokemon.range = 1
+        pokemon.skill = Ability.DEFEND_ORDER
+      }
+    })
+  ],
+
+  [Passive.DUNSPARCE]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      if (!pokemon.player) return
+
+      const dunsparcesAlive: PokemonEntity[] =
+        board.cells.filter<PokemonEntity>(
+          (entity): entity is PokemonEntity =>
+            entity != null &&
+            entity.team === pokemon.team &&
+            PkmFamily[entity.name] === PkmFamily[pokemon.name]
+        )
+      dunsparcesAlive.forEach((entity) => {
+        entity.addStack()
+      })
+
+      if (dunsparcesAlive.every((p) => p.isSpawn)) {
+        const originalDunsparce = schemaValues(pokemon.player.board).find(
+          (p) => p.name === Pkm.DUNSPARCE
+        )
+        if (originalDunsparce) originalDunsparce.stacks++
+      }
+    }),
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.stacks += 1
+    })
+  ],
+
+  [Passive.ORTHWORM]: [
+    new OnGroundDiggingEffect(({ pokemon }) => {
+      pokemon.addMaxHP(5)
+    })
+  ],
+
+  [Passive.ILLUSION]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player }) => {
+      const allyOnTheLeft = schemaValues(player.board).find(
+        (p) => p.positionX === newX - 1 && p.positionY === newY
+      )
+      if (allyOnTheLeft) {
+        pokemon.index = allyOnTheLeft.index
+      }
+    })
+  ],
+
+  [Passive.STOUTLAND_SEARCH]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
+      const index = (newY - 1) * BOARD_WIDTH + newX
+      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+        // BARK
+        room.broadcast(Transfer.SHOW_EMOTE, {
+          id: pokemon.id,
+          emote: getAvatarString(pokemon.index, pokemon.shiny, Emotion.JOYOUS)
+        })
+        room.broadcast(Transfer.DISPLAY_TEXT, {
+          id: player.id,
+          text: "bark",
+          x: pokemon.positionX,
+          y: pokemon.positionY
+        })
+      }
+    })
+  ]
+}

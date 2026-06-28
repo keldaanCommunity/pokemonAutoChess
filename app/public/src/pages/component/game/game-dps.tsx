@@ -1,39 +1,49 @@
-import React from "react"
-import ProgressBar from "react-bootstrap/ProgressBar"
-import { IDps } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import { useTranslation } from "react-i18next"
+import type { IDps } from "../../../../../types"
+import { usePreference } from "../../../preferences"
+import PokemonPortrait from "../pokemon-portrait"
+import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
+  const { t } = useTranslation()
+  const [colorblindMode] = usePreference("colorblindMode")
   return (
     <div className="game-dps-bar">
-      <img className="pokemon-portrait" src={getAvatarSrc(props.dps.name)} />
+      <PokemonPortrait avatar={props.dps.name} />
       <div className="game-dps-progress-wrapper">
         <p>
           {props.dps.physicalDamage +
             props.dps.specialDamage +
             props.dps.trueDamage}
         </p>
-        <ProgressBar className="nes-progress is-primary">
+        <ProgressBar className="my-progress is-primary">
           <ProgressBar
-            style={{ backgroundColor: "#e76e55" }}
+            className={
+              colorblindMode ? "colorblind-pattern-vertical-stripes" : ""
+            }
+            style={{ backgroundColor: "var(--color-physical)" }}
             max={props.maxDamage}
             now={props.dps.physicalDamage}
             key="physical"
-            title={props.dps.physicalDamage.toString()}
+            title={`${t("game_stats.physical_damage_dealt")}: ${props.dps.physicalDamage}`}
           />
           <ProgressBar
-            style={{ backgroundColor: "#209cee" }}
+            className={
+              colorblindMode ? "colorblind-pattern-diagonal-stripes" : ""
+            }
+            style={{ backgroundColor: "var(--color-special)" }}
             max={props.maxDamage}
             now={props.dps.specialDamage}
             key="special"
-            title={props.dps.specialDamage.toString()}
+            title={`${t("game_stats.special_damage_dealt")}: ${props.dps.specialDamage}`}
           />
           <ProgressBar
-            style={{ backgroundColor: "#f7d51d" }}
+            className={colorblindMode ? "colorblind-pattern-dots" : ""}
+            style={{ backgroundColor: "var(--color-true)" }}
             max={props.maxDamage}
             now={props.dps.trueDamage}
             key="true"
-            title={props.dps.trueDamage.toString()}
+            title={`${t("game_stats.true_damage_dealt")}: ${props.dps.trueDamage}`}
           />
         </ProgressBar>
       </div>

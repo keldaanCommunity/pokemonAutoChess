@@ -1,24 +1,22 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
-import { Role } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import type { Role, Title } from "../../../../../types"
+import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
-
 import "./avatar.css"
 
 export function Avatar(props: {
   name: string
   avatar: string
   elo?: number
-  title?: string
+  title?: Title | ""
   role?: Role
 }) {
   const { t } = useTranslation()
 
   return (
-    <div className="avatar player-box">
-      <img className="pokemon-portrait" src={getAvatarSrc(props.avatar)} />
+    <div className="avatar player my-box">
+      <PokemonPortrait avatar={props.avatar} />
       <div className="player-portrait">
         <span className="player-title-role">
           {props.title && (

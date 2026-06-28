@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
-/* eslint-disable max-len */
-import { AnimationComplete, AnimationType } from "../../../types/Animation"
+import type Phaser from "phaser"
+import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
+import { AnimationOriented, AnimationType } from "../../../types/Animation"
+import delays from "../../../types/delays.json"
 import {
   Orientation,
   OrientationFlip,
@@ -8,105 +9,37 @@ import {
   PokemonTint,
   SpriteType
 } from "../../../types/enum/Game"
-import { Berries } from "../../../types/enum/Item"
-import { AnimationConfig, Pkm, PkmIndex } from "../../../types/enum/Pokemon"
+import { Berries, Item } from "../../../types/enum/Item"
+import { Passive } from "../../../types/enum/Passive"
+import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
-import durations from "../../dist/client/assets/pokemons/durations.json"
-import indexList from "../../dist/client/assets/pokemons/indexList.json"
 import atlas from "../assets/atlas.json"
-import PokemonSprite from "./components/pokemon"
+import durations from "../assets/pokemons/durations.json"
+import type PokemonSprite from "./components/pokemon"
+import {
+  DEFAULT_POKEMON_ANIMATION_CONFIG,
+  PokemonAnimations
+} from "./components/pokemon-animations"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
+
+export const isAnimationOriented = (action: AnimationType, index: string) => {
+  const defaultsOverrides =
+    PokemonAnimations[PkmByIndex[index]]?.animationsOriented
+  if (AnimationOriented[action] === false) {
+    return defaultsOverrides?.[action] === true
+  } else {
+    return defaultsOverrides?.[action] !== false
+  }
+}
 
 export default class AnimationManager {
   game: Phaser.Scene
 
   constructor(game: Phaser.Scene) {
     this.game = game
-
-    indexList.forEach((index) => {
-      const tints = Object.values(PokemonTint) as PokemonTint[]
-      tints.forEach((shiny) => {
-        const actions: AnimationType[] = [
-          AnimationType.Idle,
-          AnimationType.Walk,
-          AnimationType.Sleep,
-          AnimationType.Hop,
-          AnimationType.Hurt
-        ]
-
-        const conf = (Object.keys(PkmIndex) as Pkm[]).find(
-          (p) => index === PkmIndex[p]
-        )
-
-        if (conf && AnimationConfig[conf]) {
-          if (
-            AnimationConfig[conf].shinyUnavailable &&
-            shiny === PokemonTint.SHINY
-          )
-            return
-          if (!actions.includes(AnimationConfig[conf as Pkm].attack)) {
-            actions.push(AnimationConfig[conf as Pkm].attack)
-          }
-          if (!actions.includes(AnimationConfig[conf as Pkm].ability)) {
-            actions.push(AnimationConfig[conf as Pkm].ability)
-          }
-          if (!actions.includes(AnimationConfig[conf as Pkm].emote)) {
-            actions.push(AnimationConfig[conf as Pkm].emote)
-          }
-        } else {
-          actions.push(AnimationType.Attack)
-        }
-
-        //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
-
-        actions.forEach((action) => {
-          const modes = Object.values(SpriteType) as SpriteType[]
-          modes.forEach((mode) => {
-            const directionArray =
-              AnimationComplete[action] === false
-                ? [Orientation.DOWN]
-                : Object.values(Orientation)
-            directionArray.forEach((direction) => {
-              const durationArray: number[] =
-                durations[`${index}/${shiny}/${action}/${mode}`]
-              if (durationArray) {
-                const frameArray = this.game.anims.generateFrameNames(index, {
-                  start: 0,
-                  end: durationArray.length - 1,
-                  zeroPad: 4,
-                  prefix: `${shiny}/${action}/${mode}/${direction}/`
-                })
-                for (let i = 0; i < durationArray.length; i++) {
-                  if (frameArray[i]) {
-                    frameArray[i]["duration"] =
-                      durationArray[i] * (1000 / FPS_POKEMON_ANIMS)
-                  }
-                }
-                const shouldLoop = [
-                  AnimationType.Idle,
-                  AnimationType.Sleep,
-                  AnimationType.Hop
-                ].includes(action)
-
-                this.game.anims.create({
-                  key: `${index}/${shiny}/${action}/${mode}/${direction}`,
-                  frames: frameArray,
-                  repeat: shouldLoop ? -1 : 0
-                })
-              } else {
-                logger.warn(
-                  "duration array missing for",
-                  `${index}/${shiny}/${action}/${mode}`
-                )
-              }
-            })
-          })
-        })
-      })
-    })
 
     for (const pack in atlas.packs) {
       if (atlas.packs[pack].anims) {
@@ -126,6 +59,133 @@ export default class AnimationManager {
 
     this.createMinigameAnimations()
     this.createEnvironmentAnimations()
+  }
+
+  createPokemonAnimations(index: string, shiny: PokemonTint) {
+    const pkm = PkmByIndex[index]
+
+    if (!pkm && !PokemonAnimations[pkm]) {
+      logger.warn(`No animation config declared for ${pkm}`)
+      return
+    }
+    const pokemonData = getPokemonData(pkm)
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[pkm] ?? {})
+    }
+
+    if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
+
+    const actions: Set<AnimationType> = new Set([AnimationType.Idle])
+    actions.add(config.hurt ?? AnimationType.Hurt)
+
+    if (pokemonData.passive !== Passive.INANIMATE) {
+      actions.add(config.walk)
+      actions.add(config.sleep)
+      actions.add(config.eat)
+      actions.add(config.hop)
+      actions.add(config.attack)
+      actions.add(config.ability)
+      actions.add(config.emote)
+    }
+
+    //logger.debug(`Init animations: ${index} => ${actions.join(",")}`)
+
+    actions.forEach((action) => {
+      const spriteTypes = config.noShadow
+        ? [SpriteType.ANIM]
+        : [SpriteType.ANIM, SpriteType.SHADOW]
+      spriteTypes.forEach((mode) => {
+        const directionArray = isAnimationOriented(action, index)
+          ? Object.values(Orientation)
+          : [Orientation.DOWN]
+        directionArray.forEach((direction) => {
+          const durationArray: number[] =
+            durations[`${index}/${shiny}/${action}/${mode}`]
+          if (!durationArray && action === AnimationType.Eat) {
+            // Very few pokemons have eat animations, so we use sleep animations instead as a fallback
+            config.eat = AnimationType.Sleep
+            return
+          }
+          if (durationArray) {
+            const frameArray = this.game.anims.generateFrameNames(index, {
+              start: 0,
+              end: durationArray.length - 1,
+              zeroPad: 4,
+              prefix: `${shiny}/${action}/${mode}/${direction}/`
+            })
+            for (let i = 0; i < durationArray.length; i++) {
+              if (frameArray[i]) {
+                frameArray[i]["duration"] =
+                  durationArray[i] * (1000 / FPS_POKEMON_ANIMS)
+              }
+            }
+            const shouldLoop = [
+              AnimationType.Idle,
+              AnimationType.Sleep,
+              AnimationType.Eat,
+              AnimationType.Hop
+            ].includes(action)
+
+            const key = `${index}/${shiny}/${action}/${mode}/${direction}`
+            if (!this.game.anims.exists(key)) {
+              this.game.anims.create({
+                key: `${index}/${shiny}/${action}/${mode}/${direction}`,
+                frames: frameArray,
+                repeat: shouldLoop ? -1 : 0
+              })
+            }
+          } else {
+            logger.warn(
+              "duration array missing for",
+              `${index}/${shiny}/${action}/${mode}`
+            )
+          }
+        })
+      })
+    })
+  }
+
+  unloadPokemonAnimations(index: string, shiny: PokemonTint) {
+    const pkm = PkmByIndex[index]
+    const pokemonData = getPokemonData(pkm)
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[pkm] ?? {})
+    }
+
+    if (config.shinyUnavailable && shiny === PokemonTint.SHINY) return
+
+    const actions: Set<AnimationType> = new Set([AnimationType.Idle])
+    actions.add(config.hurt)
+
+    if (pokemonData.passive !== Passive.INANIMATE) {
+      actions.add(AnimationType.Walk)
+      actions.add(config.sleep)
+      actions.add(config.eat)
+      actions.add(config.hop)
+      actions.add(config.attack)
+      actions.add(config.ability)
+      actions.add(config.emote)
+    }
+
+    //logger.debug(`Remove animations: ${index} => ${actions.join(",")}`)
+
+    actions.forEach((action) => {
+      const spriteTypes = config.noShadow
+        ? [SpriteType.ANIM]
+        : [SpriteType.ANIM, SpriteType.SHADOW]
+      spriteTypes.forEach((mode) => {
+        const directionArray = isAnimationOriented(action, index)
+          ? Object.values(Orientation)
+          : [Orientation.DOWN]
+        directionArray.forEach((direction) => {
+          this.game.anims.remove(
+            `${index}/${shiny}/${action}/${mode}/${direction}`
+          )
+        })
+      })
+    })
   }
 
   createAnimation({
@@ -196,14 +256,15 @@ export default class AnimationManager {
   }
 
   createEnvironmentAnimations() {
-    Berries.forEach((berryName) => {
+    Berries.filter((b) => b !== Item.NANAB_BERRY).forEach((berryName) => {
       for (let step = 1; step <= 3; step++) {
         this.game.anims.create({
           key: `${berryName}_TREE_STEP_${step}`,
           frames: this.game.anims.generateFrameNames("berry_trees", {
             start: step * 2 - 1,
             end: step * 2,
-            prefix: berryName + "_"
+            prefix: berryName + "_",
+            suffix: ".png"
           }),
           duration: 600,
           repeat: -1
@@ -216,45 +277,68 @@ export default class AnimationManager {
       frames: this.game.anims.generateFrameNames("berry_trees", {
         start: 1,
         end: 2,
-        prefix: "CROP_"
+        prefix: "CROP_",
+        suffix: ".png"
       }),
       duration: 600,
+      repeat: -1
+    })
+
+    this.game.anims.create({
+      key: "loading_pokeball",
+      frames: this.game.anims.generateFrameNames("loading_pokeball", {
+        frames: [2, 1, 0, 1, 2, 3, 4, 3],
+        suffix: ".png"
+      }),
+      frameRate: 8,
       repeat: -1
     })
   }
 
   convertPokemonActionStateToAnimationType(
     state: PokemonActionState,
-    entity: PokemonSprite
+    pkmSprite: PokemonSprite
   ): AnimationType {
+    const config = {
+      ...DEFAULT_POKEMON_ANIMATION_CONFIG,
+      ...(PokemonAnimations[PkmByIndex[pkmSprite.pokemon.index]] ?? {})
+    }
     switch (state) {
       case PokemonActionState.HOP:
       case PokemonActionState.FISH:
-        return AnimationType.Hop
+      case PokemonActionState.BLOSSOM:
+      case PokemonActionState.NEST:
+        return config.hop
       case PokemonActionState.HURT:
-        return AnimationType.Hurt
+        return config.hurt
       case PokemonActionState.SLEEP:
-        return AnimationType.Sleep
+        return config.sleep
+      case PokemonActionState.EAT:
+        return config.eat
       case PokemonActionState.WALK:
-        return AnimationType.Walk
+        return config.walk
       case PokemonActionState.ATTACK:
-        return AnimationConfig[entity.name as Pkm].attack
+      case PokemonActionState.TRAINING:
+        return config.attack
       case PokemonActionState.EMOTE:
-        return AnimationConfig[entity.name as Pkm].emote
+        return config.emote
+      case PokemonActionState.ABILITY:
+        return config.ability
       case PokemonActionState.IDLE:
       default:
-        return AnimationType.Idle
+        return config.idle
     }
   }
 
   animatePokemon(
-    entity: PokemonSprite,
+    pokemonSprite: PokemonSprite,
     action: PokemonActionState,
-    flip: boolean
+    flip: boolean,
+    loop: boolean = true
   ) {
-    const animation = this.convertPokemonActionStateToAnimationType(
+    let animation = this.convertPokemonActionStateToAnimationType(
       action,
-      entity
+      pokemonSprite
     )
 
     const shouldLock =
@@ -262,51 +346,125 @@ export default class AnimationManager {
       action === PokemonActionState.HURT ||
       action === PokemonActionState.EMOTE
 
-    const shouldLoop =
-      action === PokemonActionState.HOP ||
-      action === PokemonActionState.HURT ||
+    const timeScale =
+      action === PokemonActionState.ATTACK
+        ? getAttackAnimTimeScale(
+            pokemonSprite.pokemon.index,
+            pokemonSprite.pokemon.speed
+          )
+        : 1
+
+    if (
+      pokemonSprite.pokemon.passive === Passive.DRUMMER &&
+      pokemonSprite.targetY == null &&
       action === PokemonActionState.WALK
+    ) {
+      animation =
+        PokemonAnimations[PkmByIndex[pokemonSprite.pokemon.index]].emote ??
+        DEFAULT_POKEMON_ANIMATION_CONFIG.emote // use drumming animation instead of attack
+      pokemonSprite.orientation = Orientation.DOWN
+    }
+
+    if (
+      action === PokemonActionState.EAT &&
+      this.game.anims.exists(
+        `${pokemonSprite.pokemon.index}/${pokemonSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL}/${animation}/${SpriteType.ANIM}/${Orientation.DOWN}`
+      ) === false
+    ) {
+      // fallback to sleep animation if eat animation doesn't exist
+      animation = this.convertPokemonActionStateToAnimationType(
+        PokemonActionState.SLEEP,
+        pokemonSprite
+      )
+    }
+
+    if (action === PokemonActionState.TRAINING) {
+      pokemonSprite.orientation = Orientation.LEFT
+    }
 
     try {
-      this.play(entity, animation, {
+      this.play(pokemonSprite, animation, {
         flip,
         lock: shouldLock,
-        repeat: shouldLoop ? -1 : 0
+        repeat: loop ? -1 : 0,
+        timeScale
       })
     } catch (err) {
-      logger.warn(`Can't play animation ${animation} for ${entity.name}`, err)
+      logger.warn(
+        `Can't play animation ${animation} for ${pokemonSprite?.name}`,
+        err
+      )
+    }
+
+    if (pokemonSprite.troopers) {
+      pokemonSprite.troopers.forEach((trooper) => {
+        trooper.orientation = pokemonSprite.orientation
+        this.animatePokemon(trooper, action, flip, loop)
+      })
     }
   }
 
   play(
-    entity: PokemonSprite,
+    pkmSprite: PokemonSprite,
     animation: AnimationType,
-    config: { flip?: boolean; repeat?: number; lock?: boolean } = {}
+    config: {
+      flip?: boolean
+      repeat?: number
+      lock?: boolean
+      timeScale?: number
+    } = {}
   ) {
-    if (entity.animationLocked) return
+    if (pkmSprite.animationLocked || !pkmSprite.sprite?.anims) return
+    if (pkmSprite.sprite.texture.key === "loading_pokeball") return // still loading the actual pokemon textures
 
-    const orientation = config.flip
-      ? OrientationFlip[entity.orientation]
-      : entity.orientation
+    let orientation = config.flip
+      ? OrientationFlip[pkmSprite.orientation]
+      : pkmSprite.orientation
 
-    const orientationCorrected =
-      AnimationComplete[animation] === true ? orientation : Orientation.DOWN
+    if (isAnimationOriented(animation, pkmSprite.pokemon.index) === false) {
+      orientation = Orientation.DOWN
+    }
 
     const textureIndex =
-      entity.scene && entity.scene.textures.exists(entity.index)
-        ? entity.index
+      pkmSprite.scene &&
+      pkmSprite.scene.textures.exists(pkmSprite.pokemon.index)
+        ? pkmSprite.pokemon.index
         : "0000"
     const tint =
-      entity.shiny && !AnimationConfig[entity.name].shinyUnavailable
+      pkmSprite.pokemon.shiny &&
+      !PokemonAnimations[PkmByIndex[pkmSprite.pokemon.index]].shinyUnavailable
         ? PokemonTint.SHINY
         : PokemonTint.NORMAL
-    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientationCorrected}`
-    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientationCorrected}`
+    const animKey = `${textureIndex}/${tint}/${animation}/${SpriteType.ANIM}/${orientation}`
+    const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
 
-    entity.sprite.anims.play({ key: animKey, repeat: config.repeat })
-    entity.shadow.anims.play({ key: shadowKey, repeat: config.repeat })
+    if (
+      pkmSprite.sprite.anims.currentAnim?.key === animKey &&
+      pkmSprite.sprite.anims.currentAnim?.repeat === -1
+    )
+      return
+
+    pkmSprite.sprite.anims.play({
+      key: animKey,
+      repeat: config.repeat,
+      timeScale: config.timeScale
+    })
+    if (pkmSprite.shadow) {
+      pkmSprite.shadow.anims.play({
+        key: shadowKey,
+        repeat: config.repeat,
+        timeScale: config.timeScale
+      })
+    }
     if (config.lock) {
-      entity.animationLocked = true
+      pkmSprite.animationLocked = true
     }
   }
+}
+
+export function getAttackAnimTimeScale(pokemonIndex: string, speed: number) {
+  const t = delays[pokemonIndex]?.t || 36 // total number of frames in the animation
+
+  const timeScale = (t * (0.4 + speed * 0.007)) / FPS_POKEMON_ANIMS
+  return timeScale
 }

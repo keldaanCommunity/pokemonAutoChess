@@ -1,0 +1,4 @@
+2023-02-17 14:55:23.135543	<@!593113130213572610>	CUR	PMDCollab_1	Normal,Sad,Happy,Crying,Inspired,Pain,Shouting,Surprised,Angry,Teary-Eyed,Worried
+2023-10-10 15:29:10.381436	<@!593113130213572610>	CUR	PMDCollab_2	Joyous,Sigh,Stunned,Dizzy,Determined
+2023-10-10 21:47:18.909730	<@!476409795239477248>	CUR	PMDCollab_2	Joyous
+2024-02-26 20:17:42.640238	<@!593113130213572610>	CUR	CC_BY-NC_4	Shouting

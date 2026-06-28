@@ -1,48 +1,128 @@
-import React, { Dispatch, SetStateAction, useMemo } from "react"
+import { type Dispatch, type SetStateAction, useMemo } from "react"
+import { BoosterPriceByRarity, getEmotionCost } from "../../../../../config"
+import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types/enum/Emotion"
+import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
+import type { CollectionFilterState } from "./pokemon-collection"
 import PokemonCollectionItem from "./pokemon-collection-item"
 import "./unown-panel.css"
 
 export default function UnownPanel(props: {
-  setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
-  filter: string
-  sort: string
-  shinyOnly: boolean
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
+  filterState: CollectionFilterState
 }) {
   const pokemonCollection = useAppSelector(
-    (state) => state.lobby.pokemonCollection
+    (state) =>
+      state.network.profile?.pokemonCollection ??
+      new Map<string, IPokemonCollectionItemUnpacked>()
   )
   const secretMessage = `    
-    To unleash ancient power ?
-    Max Groudon with a red Orb
-    Delta Sphere over Rayquaza
-    And blue Jewel for Kyogre!
+    To unleash ancient powers?
+    Max Groudon with a red orb
+    Give Kyogre a blue orb and
+    use Jade orb for Rayquaza!
     `
     .replace(/^\s+/gm, "")
     .replace(/\s+$/gm, "")
     .split("")
 
-  const unowns = useMemo(
+  const [favorites] = useLocalStore<Pkm[]>(
+    LocalStoreKeys.FAVORITES,
+    [],
+    Infinity
+  )
+  const lastBoostersOpened = useAppSelector(
+    (state) => state.boosters.lastBoostersOpened
+  )
+
+  type CollectionItem = {
+    pkm: Pkm
+    item: IPokemonCollectionItemUnpacked
+    isNew: boolean
+    isFavorite: boolean
+    isUnlocked: boolean
+    isUnlockable: boolean
+  }
+
+  const unowns = useMemo<CollectionItem[]>(
     () =>
-      Unowns.flatMap((pkm: Pkm) => {
-        const config = pokemonCollection.find((p) => p.id === PkmIndex[pkm])
-        const { emotions, shinyEmotions } = config ?? {
+      Unowns.map((pkm: Pkm) => {
+        const item = pokemonCollection.get(PkmIndex[pkm]) ?? {
           dust: 0,
           emotions: [] as Emotion[],
-          shinyEmotions: [] as Emotion[]
+          shinyEmotions: [] as Emotion[],
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          id: PkmIndex[pkm],
+          played: 0
         }
-        const isUnlocked = emotions?.length > 0 || shinyEmotions?.length > 0
-        return [{ pkm, config, isUnlocked }]
-      }).sort((a, b) => {
-        if (props.sort === "index") {
-          return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
-        } else {
-          return (b.config?.dust ?? 0) - (a.config?.dust ?? 0)
-        }
+        const pokemonData = getPokemonData(pkm)
+        const availableEmotions = getAvailableEmotions(pokemonData.index, false)
+        const shinyAvailableEmotions = getAvailableEmotions(
+          pokemonData.index,
+          true
+        )
+        const isUnlocked =
+          item.emotions?.length > 0 || item.shinyEmotions?.length > 0
+        const isNew = lastBoostersOpened.some((booster) =>
+          booster.some((card) => card.name === pkm && card.new)
+        )
+        const isFavorite = favorites.includes(pkm)
+        const isUnlockable =
+          props.filterState.mode !== "pokedex" &&
+          (availableEmotions.some(
+            (e) =>
+              !item.emotions.includes(e) &&
+              item.dust >= getEmotionCost(e, false) &&
+              props.filterState.mode !== "shiny"
+          ) ||
+            shinyAvailableEmotions.some(
+              (e) =>
+                !item.shinyEmotions.includes(e) &&
+                item.dust >= getEmotionCost(e, true) &&
+                !PokemonAnimations[pkm]?.shinyUnavailable
+            ))
+
+        return { pkm, item, isUnlocked, isNew, isFavorite, isUnlockable }
       }),
-    [props.sort]
+    [pokemonCollection, favorites, lastBoostersOpened, props.filterState.mode]
+  )
+
+  const filteredUnowns = useMemo<CollectionItem[]>(
+    () =>
+      unowns
+        .filter(({ item, isNew, isUnlocked, isFavorite, isUnlockable }) => {
+          const boosterCost = BoosterPriceByRarity[Rarity.SPECIAL]
+          if (
+            props.filterState.filter === "refundable" &&
+            item.dust < boosterCost
+          )
+            return false
+          if (props.filterState.filter === "new" && !isNew) return false
+          if (props.filterState.filter === "unlocked" && !isUnlocked)
+            return false
+          if (props.filterState.filter === "unlockable" && !isUnlockable)
+            return false
+          if (props.filterState.filter === "locked" && isUnlocked) return false
+          if (props.filterState.filter === "favorite" && !isFavorite)
+            return false
+
+          return true
+        })
+        .sort((a, b) => {
+          if (props.filterState.sort === "index") {
+            return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
+          } else {
+            return (b.item?.dust ?? 0) - (a.item?.dust ?? 0)
+          }
+        }),
+    [props.filterState.sort, props.filterState.filter, props.filterState.mode]
   )
 
   return (
@@ -50,21 +130,21 @@ export default function UnownPanel(props: {
       <div id="unown-panel">
         {secretMessage.map((char, i) => renderChar(char, i, unowns))}
       </div>
-      <div className="pokemon-carousel">
-        {unowns.map((unown) => {
-          if (!unown) return null
-          return (
-            <PokemonCollectionItem
-              key={PkmIndex[unown.pkm]}
-              name={unown.pkm}
-              index={PkmIndex[unown.pkm]}
-              config={unown.config}
-              setPokemon={props.setPokemon}
-              filter={props.filter}
-              shinyOnly={props.shinyOnly}
-            />
-          )
-        })}
+      <div className="unown-collection-grid">
+        {filteredUnowns.map((unown) => (
+          <PokemonCollectionItem
+            key={PkmIndex[unown.pkm]}
+            name={unown.pkm}
+            index={PkmIndex[unown.pkm]}
+            item={unown.item}
+            setPokemon={props.setPokemon}
+            filterState={props.filterState}
+            isUnlocked={unown.isUnlocked}
+            isNew={unown.isNew}
+            isFavorite={unown.isFavorite}
+            isUnlockable={unown.isUnlockable}
+          />
+        ))}
       </div>
     </div>
   )
@@ -73,7 +153,10 @@ export default function UnownPanel(props: {
 function renderChar(
   c: string,
   index: number,
-  unowns: { pkm: Pkm; isUnlocked: boolean }[]
+  unowns: {
+    pkm: Pkm
+    isUnlocked: boolean
+  }[]
 ) {
   let unown
   switch (c) {

@@ -1,69 +1,144 @@
-import React, { useCallback, useState } from "react"
+import firebase from "firebase/compat/app"
+import type React from "react"
+import { useCallback, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Role, Title } from "../../../../../types"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import { type ISuggestionUser, Role, Title } from "../../../../../types"
+import { debounce } from "../../../../../utils/function"
+import { keys } from "../../../../../utils/object"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { setSearchedUser, setSuggestions } from "../../../stores/LobbyStore"
 import {
   ban,
   giveBooster,
   giveRole,
   giveTitle,
-  searchName,
+  searchById,
   unban
-} from "../../../stores/NetworkStore"
+} from "../../../network"
+import { setSearchedUser } from "../../../stores/LobbyStore"
+import { AccountTab } from "./account-tab"
 import { AvatarTab } from "./avatar-tab"
+import { EloTab } from "./elo-tab"
 import { GadgetsTab } from "./gadgets-tab"
-import History from "./history"
-import { NameTab } from "./name-tab"
+import GameHistory from "./game-history"
 import PlayerBox from "./player-box"
-import "./profile.css"
+import { ProfileChatHistory } from "./profile-chat-history"
+import { ProgressTab } from "./progress-tab"
 import { SearchBar } from "./search-bar"
 import SearchResults from "./search-results"
 import { TitleTab } from "./title-tab"
+import "./profile.css"
 
 export default function Profile() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.lobby.user)
-  const suggestions = useAppSelector((state) => state.lobby.suggestions)
+  const user = useAppSelector((state) => state.network.profile)
+  const [suggestions, setSuggestions] = useState<ISuggestionUser[]>([])
   const searchedUser = useAppSelector((state) => state.lobby.searchedUser)
 
   const profile = searchedUser ?? user
+  const [gameHistory, setGameHistory] = useState<IGameRecord[]>([])
+  const [rightPanel, setRightPanel] = useState<"chat" | "game">("game")
+
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const abortControllerRef = useRef<AbortController | null>(null)
+
+  async function searchName(query: string) {
+    abortControllerRef.current = new AbortController()
+    const { signal } = abortControllerRef.current
+    setLoading(true)
+    setError("")
+    try {
+      const token = await firebase.auth().currentUser?.getIdToken()
+      const res = await fetch(`/players?name=${encodeURIComponent(query)}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        signal
+      })
+      if (res.ok) {
+        const suggestions = await res.json()
+        if (suggestions.length === 0) {
+          setError(t("no_results_found"))
+        } else {
+          setSuggestions(suggestions)
+          setError("")
+        }
+      } else {
+        setError(res.statusText)
+      }
+    } catch (err: any) {
+      if (err.name !== "AbortError") {
+        setError(err.message)
+      }
+    }
+    setLoading(false)
+  }
+
+  const debouncedSearchName = useRef(debounce(searchName, 500)).current
 
   function onSearchQueryChange(query: string) {
+    abortControllerRef.current?.abort()
     if (query) {
-      dispatch(searchName(query))
+      debouncedSearchName(query)
     } else {
       resetSearch()
     }
   }
 
-  const resetSearch = useCallback(() => {
-    dispatch(setSearchedUser(undefined))
-    dispatch(setSuggestions([]))
-  }, [dispatch])
+  const resetSearch = useCallback(
+    (user = searchedUser) => {
+      dispatch(setSearchedUser(user))
+      setSuggestions([])
+      setError("")
+    },
+    [dispatch]
+  )
 
   return (
-    <div className="nes-container profile">
+    <div className="profile-modal">
       <div className="profile-box">
-        <h1>{t("profile")}</h1>
-        {profile && <PlayerBox user={profile} />}
+        <h2>
+          {profile?.displayName ?? ""} {t("profile.title")}
+        </h2>
+        {profile && <PlayerBox user={profile} history={gameHistory} />}
       </div>
 
       <SearchBar onChange={onSearchQueryChange} />
 
       <div className="profile-actions">
-        {searchedUser ? (
-          <OtherProfileActions resetSearch={resetSearch} />
+        {loading ? (
+          <div className="loading">{t("loading")}</div>
+        ) : error ? (
+          <div className="error">{error}</div>
         ) : suggestions.length > 0 ? (
-          <SearchResults />
+          <SearchResults
+            suggestions={suggestions}
+            onSelect={(suggestion) => {
+              resetSearch()
+              searchById(suggestion.id)
+            }}
+          />
+        ) : searchedUser ? (
+          <OtherProfileActions
+            rightPanel={rightPanel}
+            setRightPanel={setRightPanel}
+          />
         ) : (
           <MyProfileMenu />
         )}
       </div>
 
-      {profile && <History history={profile.history} />}
+      {rightPanel === "game" && profile && (
+        <GameHistory uid={profile.uid} onUpdate={setGameHistory} />
+      )}
+      {rightPanel === "chat" && profile && (
+        <ProfileChatHistory uid={profile.uid} />
+      )}
     </div>
   )
 }
@@ -73,14 +148,16 @@ function MyProfileMenu() {
   return (
     <Tabs>
       <TabList>
-        <Tab>{t("name")}</Tab>
+        <Tab>{t("profile.progress.title")}</Tab>
         <Tab>{t("avatar")}</Tab>
         <Tab>{t("title_label")}</Tab>
         <Tab>{t("gadgets")}</Tab>
+        <Tab>{t("profile.elo_tab.title")}</Tab>
+        <Tab>{t("profile.account.title")}</Tab>
       </TabList>
 
       <TabPanel>
-        <NameTab />
+        <ProgressTab />
       </TabPanel>
       <TabPanel>
         <AvatarTab />
@@ -91,14 +168,23 @@ function MyProfileMenu() {
       <TabPanel>
         <GadgetsTab />
       </TabPanel>
+      <TabPanel>
+        <EloTab />
+      </TabPanel>
+      <TabPanel>
+        <AccountTab />
+      </TabPanel>
     </Tabs>
   )
 }
 
-function OtherProfileActions({ resetSearch }) {
+function OtherProfileActions(props: {
+  rightPanel: "game" | "chat"
+  setRightPanel: React.Dispatch<React.SetStateAction<"game" | "chat">>
+}) {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const role = useAppSelector((state) => state.lobby.user?.role)
+  const currentUid = useAppSelector((state) => state.network.profile?.uid)
+  const role = useAppSelector((state) => state.network.profile?.role)
   const user = useAppSelector((state) => state.lobby.searchedUser)
   const [title, setTitle] = useState<Title>(user?.title || Title.ACE_TRAINER)
   const [profileRole, setProfileRole] = useState<Role>(user?.role ?? Role.BASIC)
@@ -108,15 +194,13 @@ function OtherProfileActions({ resetSearch }) {
       <button
         className="bubbly green"
         onClick={() => {
-          dispatch(
-            giveBooster({
-              numberOfBoosters: Number(prompt("How many boosters ?")) || 1,
-              uid: user.id
-            })
-          )
+          giveBooster({
+            numberOfBoosters: Number(prompt("How many boosters ?")) || 1,
+            uid: user.uid
+          })
         }}
       >
-        <p style={{ margin: "0px" }}>{t("give_boosters")}</p>
+        {t("give_boosters")}
       </button>
     ) : null
 
@@ -126,12 +210,10 @@ function OtherProfileActions({ resetSearch }) {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the ban:`)
-          dispatch(
-            ban({ uid: user.id, name: user.name, reason: reason ? reason : "" })
-          )
+          ban({ uid: user.uid, reason: reason ?? "" })
         }}
       >
-        <p style={{ margin: "0px" }}>{t("ban_user")}</p>
+        {t("ban_user")}
       </button>
     ) : null
 
@@ -140,20 +222,46 @@ function OtherProfileActions({ resetSearch }) {
       <button
         className="bubbly red"
         onClick={() => {
-          dispatch(unban({ uid: user.id, name: user.name }))
+          const reason = prompt(`Reason for the unban:`)
+          unban({ uid: user.uid, reason: reason ?? "" })
         }}
       >
-        <p style={{ margin: "0px" }}>{t("unban_user")}</p>
+        {t("unban_user")}
+      </button>
+    ) : null
+
+  const chatHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("chat")
+        }}
+      >
+        {t("see_chat_history")}
+      </button>
+    ) : null
+
+  const gameHistoryButton =
+    user && role && (role === Role.ADMIN || role === Role.MODERATOR) ? (
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          props.setRightPanel("game")
+        }}
+      >
+        {t("see_game_history")}
       </button>
     ) : null
 
   const roleButton =
     user && role && role === Role.ADMIN ? (
-      <div style={{ display: "flex" }}>
+      <div className="my-input-group">
         <button
           className="bubbly orange"
           onClick={() => {
-            dispatch(giveRole({ uid: user.id, role: profileRole }))
+            giveRole({ uid: user.uid, role: profileRole })
+            alert(`Role ${profileRole} given to ${user.displayName}`)
           }}
         >
           {t("give_role")}
@@ -164,9 +272,9 @@ function OtherProfileActions({ resetSearch }) {
             setProfileRole(e.target.value as Role)
           }}
         >
-          {Object.keys(Role).map((r) => (
+          {keys(Role).map((r) => (
             <option key={r} value={r}>
-              {t("role." + r).toUpperCase()}
+              {t(`role.${r}`).toUpperCase()}
             </option>
           ))}
         </select>
@@ -175,11 +283,12 @@ function OtherProfileActions({ resetSearch }) {
 
   const titleButton =
     user && role && role === Role.ADMIN ? (
-      <div style={{ display: "flex" }}>
+      <div className="my-input-group">
         <button
           className="bubbly blue"
           onClick={() => {
-            dispatch(giveTitle({ uid: user.id, title: title }))
+            giveTitle({ uid: user.uid, title: title })
+            alert(`Title ${title} given to ${user.displayName}`)
           }}
         >
           {t("give_title")}
@@ -200,15 +309,17 @@ function OtherProfileActions({ resetSearch }) {
     ) : null
 
   return role === Role.ADMIN || role === Role.MODERATOR ? (
-    <div className="actions">
+    <>
       {giveButton}
       {roleButton}
       {titleButton}
-      {banButton}
-      {unbanButton}
-      <button className="bubbly blue" onClick={resetSearch}>
-        {t("back_to_my_profile")}
-      </button>
-    </div>
+      {user?.banned ? unbanButton : banButton}
+      {props.rightPanel === "game" ? chatHistoryButton : gameHistoryButton}
+      {currentUid && user && user.uid !== currentUid && (
+        <button className="bubbly blue" onClick={() => searchById(currentUid)}>
+          {t("back_to_my_profile")}
+        </button>
+      )}
+    </>
   ) : null
 }

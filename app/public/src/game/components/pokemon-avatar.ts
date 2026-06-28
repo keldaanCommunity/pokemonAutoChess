@@ -1,19 +1,29 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { IPokemonAvatar } from "../../../../types"
+import {
+  AvatarEmotions,
+  type Emotion,
+  type IPokemonAvatar
+} from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
+import { getAvatarString } from "../../../../utils/avatar"
+import { throttle } from "../../../../utils/function"
+import { showEmote } from "../../network"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
+import { preference } from "../../preferences"
 import store from "../../stores"
-import { toggleAnimation } from "../../stores/NetworkStore"
-import { getAvatarSrc } from "../../utils"
-import GameScene from "../scenes/game-scene"
+import { DEPTH } from "../depths"
+import type GameScene from "../scenes/game-scene"
+import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
 
 export default class PokemonAvatar extends PokemonSprite {
-  circleHitbox: GameObjects.Ellipse | undefined
-  circleTimer: GameObjects.Graphics
+  scene: GameScene
+  circleHitbox: GameObjects.Ellipse | null = null
+  circleTimer: GameObjects.Graphics | null = null
   isCurrentPlayerAvatar: boolean
   emoteBubble: EmoteBubble | null
   emoteMenu: EmoteMenu | null
@@ -23,48 +33,101 @@ export default class PokemonAvatar extends PokemonSprite {
     x: number,
     y: number,
     pokemon: IPokemonAvatar,
-    playerId: string
+    playerId: string,
+    scouting?: boolean
   ) {
     super(
       scene,
       x,
       y,
       PokemonFactory.createPokemonFromName(pokemon.name, {
-        selectedShiny: pokemon.shiny
+        shiny: pokemon.shiny
       }),
       playerId,
       false,
       false
     )
+    this.scene = scene
     this.shouldShowTooltip = false
     this.draggable = false
     this.emoteBubble = null
     this.emoteMenu = null
     this.isCurrentPlayerAvatar = this.playerId === scene.uid
-    if (scene.room?.state.phase === GamePhaseState.MINIGAME) {
+    if (scene.room?.state.phase === GamePhaseState.TOWN) {
       this.drawCircles()
-    } else {
+    } else if (!scouting) {
       this.drawLifebar()
     }
-    this.registerKeys()
+    if (this.isCurrentPlayerAvatar) {
+      this.registerKeys()
+    } else {
+      this.disableInteractive()
+    }
+    this.setDepth(DEPTH.POKEMON)
+    this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
   }
 
   registerKeys() {
-    this.scene.input.keyboard!.on("keydown-A", () => {
-      if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
-        this.playAnimation()
+    const keybindings = preference("keybindings")
+    let onKeyA,
+      onKeyCtrl,
+      onKeyCtrlUp,
+      onNumKey = {}
+    this.scene.input.keyboard!.on(
+      "keydown-" + keybindings.emote,
+      (onKeyA = () => {
+        if (this.isCurrentPlayerAvatar && this.scene && this.scene.game) {
+          this.playAnimation()
+        }
+      })
+    )
+    this.scene.input.keyboard!.on(
+      "keydown-CTRL",
+      (onKeyCtrl = () => {
+        if (this.isCurrentPlayerAvatar && this.scene?.game) {
+          this.showEmoteMenu()
+        }
+      })
+    )
+
+    this.scene.input.keyboard!.on(
+      "keyup-CTRL",
+      (onKeyCtrlUp = () => {
+        this.hideEmoteMenu()
+      })
+    )
+
+    const NUM_KEYS = [
+      "ONE",
+      "TWO",
+      "THREE",
+      "FOUR",
+      "FIVE",
+      "SIX",
+      "SEVEN",
+      "EIGHT",
+      "NINE"
+    ]
+    NUM_KEYS.forEach((keycode, i) => {
+      onNumKey[i] = (event) => {
+        if (this.isCurrentPlayerAvatar && this.scene?.game && event.ctrlKey) {
+          event.preventDefault()
+          this.sendEmote(AvatarEmotions[i])
+        }
       }
+      this.scene.input.keyboard!.on("keydown-" + keycode, onNumKey[i])
+      this.scene.input.keyboard!.on("keydown-NUMPAD_" + keycode, onNumKey[i])
     })
-    this.scene.input.keyboard!.on("keydown-S", () => {
-      const scene = this.scene as GameScene
-      if (
-        this.isCurrentPlayerAvatar &&
-        this.scene &&
-        scene.room?.state.phase !== GamePhaseState.MINIGAME &&
-        this.scene.game
-      ) {
-        this.toggleEmoteMenu()
-      }
+
+    // do not forget to clean up parent listeners after destroy
+    this.sprite.once("destroy", () => {
+      this.scene.input.keyboard!.off("keydown-" + keybindings.emote, onKeyA)
+      this.scene.input.keyboard!.off("keydown-CTRL", onKeyCtrl)
+      this.scene.input.keyboard!.off("keyup-CTRL", onKeyCtrlUp)
+      NUM_KEYS.forEach((keycode, i) => {
+        this.scene.input.keyboard!.off("keydown-" + keycode, onNumKey[i])
+        this.scene.input.keyboard!.off("keydown-NUMPAD_" + keycode, onNumKey[i])
+      })
     })
   }
 
@@ -72,13 +135,13 @@ export default class PokemonAvatar extends PokemonSprite {
     const scene = this.scene as GameScene
     this.circleHitbox = new GameObjects.Ellipse(scene, 0, 0, 50, 50)
     this.add(this.circleHitbox)
-    this.circleHitbox.setDepth(-1)
+    this.circleHitbox.setDepth(DEPTH.INDICATOR_BELOW_POKEMON)
     this.circleHitbox.setVisible(
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     )
     this.circleTimer = new GameObjects.Graphics(scene)
     this.add(this.circleTimer)
-    this.circleTimer.setDepth(-1)
+    this.circleTimer.setDepth(DEPTH.INDICATOR_BELOW_POKEMON)
     if (this.isCurrentPlayerAvatar) {
       this.circleHitbox.setStrokeStyle(2, 0xffffff, 0.8)
     } else {
@@ -88,27 +151,27 @@ export default class PokemonAvatar extends PokemonSprite {
 
   updateCircleTimer(timer: number) {
     if (timer <= 0) {
-      this.circleTimer.destroy()
+      this.circleTimer?.destroy()
       if (this.isCurrentPlayerAvatar) {
         playSound(SOUNDS.CAROUSEL_UNLOCK)
       }
     } else {
-      this.circleTimer.clear()
-      this.circleTimer.lineStyle(
+      this.circleTimer?.clear()
+      this.circleTimer?.lineStyle(
         8,
-        0xf7d51d,
+        0x32ffea,
         this.isCurrentPlayerAvatar ? 0.8 : 0.5
       )
-      this.circleTimer.beginPath()
+      this.circleTimer?.beginPath()
 
       const angle = (Math.min(timer, 8000) / 8000) * Math.PI * 2
-      this.circleTimer.arc(0, 0, 30, 0, angle)
-      this.circleTimer.strokePath()
+      this.circleTimer?.arc(0, 0, 30, 0, angle)
+      this.circleTimer?.strokePath()
     }
   }
 
   updateLife(life: number) {
-    this.lifebar?.setAmount(life)
+    this.lifebar?.setHp(life)
   }
 
   drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
@@ -137,7 +200,7 @@ export default class PokemonAvatar extends PokemonSprite {
       this.scene,
       0,
       28,
-      60,
+      100,
       100,
       0,
       this.isCurrentPlayerAvatar ? 0 : 1,
@@ -146,31 +209,55 @@ export default class PokemonAvatar extends PokemonSprite {
     this.add(this.lifebar)
   }
 
-  toggleEmoteMenu() {
+  showEmoteMenu() {
+    if (this.isCurrentPlayerAvatar && !this.emoteMenu) {
+      this.emoteMenu = new EmoteMenu(
+        this.scene as GameScene,
+        this.pokemon.index,
+        this.pokemon.shiny,
+        this.sendEmote
+      )
+      this.add(this.emoteMenu)
+    }
+  }
+
+  hideEmoteMenu() {
     if (this.emoteMenu) {
       this.emoteMenu.destroy()
       this.emoteMenu = null
-    } else if (this.isCurrentPlayerAvatar) {
-      this.emoteMenu = new EmoteMenu(this.scene, this.index, this.shiny)
-      this.add(this.emoteMenu)
+    }
+  }
+
+  toggleEmoteMenu() {
+    if (this.emoteMenu) this.hideEmoteMenu()
+    else this.showEmoteMenu()
+  }
+
+  sendEmote(emotion: Emotion) {
+    const state = store.getState()
+    if (state.game.emotesUnlocked.includes(emotion)) {
+      showEmote(
+        getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
+      )
+      this.hideEmoteMenu()
     }
   }
 
   playAnimation() {
     try {
-      store.dispatch(toggleAnimation())
+      showEmote()
     } catch (err) {
       console.error("could not play animation", err)
     }
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer): void {
-    super.onPointerDown(pointer)
+  onPointerDown(pointer: Phaser.Input.Pointer, event): void {
+    super.onPointerDown(pointer, event)
     const scene = this.scene as GameScene
 
     if (
       !this.isCurrentPlayerAvatar ||
-      scene.room?.state.phase === GamePhaseState.MINIGAME
+      scene.room?.state.phase === GamePhaseState.TOWN
     ) {
       return
     }
@@ -180,23 +267,5 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.playAnimation()
     }
-  }
-}
-
-export class EmoteBubble extends GameObjects.DOMElement {
-  dom: HTMLDivElement
-
-  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean) {
-    super(scene, 0, 0)
-
-    this.dom = document.createElement("div")
-    this.dom.className =
-      "game-emote-bubble " + (isOpponent ? "opponent" : "current")
-
-    const emoteImg = document.createElement("img")
-    emoteImg.src = getAvatarSrc(emoteAvatar)
-
-    this.dom.appendChild(emoteImg)
-    this.setElement(this.dom)
   }
 }

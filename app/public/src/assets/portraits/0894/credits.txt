@@ -1,0 +1,2 @@
+2021-01-12 23:47:25.995586	EZERART	CUR	PMDCollab_1	Normal
+2021-05-04 19:56:32.606565	<@!533406104256905257>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special2,Special3,Stunned,Surprised,Teary-Eyed,Worried

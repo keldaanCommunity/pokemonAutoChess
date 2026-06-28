@@ -1,7 +1,8 @@
-.welcome-text {
-  font-size: 400%;
+#play-panel p {
+  font-size: 150%;
+  color: var(--color-fg-primary);
+  margin-bottom: 2em;
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
-  color: white;
 }
 
 #play-panel .actions {
@@ -20,4 +21,10 @@
 
 #play-panel .actions .bubbly {
   min-width: 8em;
+}
+
+@media (max-width: 640px) {
+  #play-panel .actions {
+    flex-direction: row;
+  }
 }

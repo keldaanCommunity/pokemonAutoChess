@@ -1,12 +1,13 @@
-import Player from "../models/colyseus-models/player"
-import GameState from "../rooms/states/game-state"
+import type Player from "../models/colyseus-models/player"
+import type GameState from "../rooms/states/game-state"
+import type { IPlayer } from "../types"
 import { sum } from "../utils/array"
-import { pickRandomIn } from "../utils/random"
-import { values } from "../utils/schemas"
+import { pickRandomIn, shuffleArray } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 
 export type Matchup = {
-  a: Player
-  b: Player
+  bluePlayer: Player
+  redPlayer: Player
   count: number
   distance: number
   ghost?: boolean
@@ -16,13 +17,13 @@ function getAllPossibleMatchups(remainingPlayers: Player[]): Matchup[] {
   const matchups: Matchup[] = []
   for (let i = 0; i < remainingPlayers.length; i++) {
     for (let j = i + 1; j < remainingPlayers.length; j++) {
-      const a = remainingPlayers[i],
-        b = remainingPlayers[j]
+      const bluePlayer = remainingPlayers[i],
+        redPlayer = remainingPlayers[j]
       matchups.push({
-        a,
-        b,
-        count: getCount(a, b, false),
-        distance: getDistance(a, b, false)
+        bluePlayer,
+        redPlayer,
+        count: getCount(bluePlayer, redPlayer, false),
+        distance: getDistance(bluePlayer, redPlayer, false)
       })
     }
   }
@@ -34,8 +35,8 @@ function completeMatchupCombination(
   matchups: Matchup[],
   players: Player[]
 ): Matchup[][] {
-  const remainingPlayers = players.filter(
-    (p) => !combination.some((m) => m.a === p || m.b === p)
+  const remainingPlayers: Player[] = players.filter(
+    (p) => !combination.some((m) => m.bluePlayer === p || m.redPlayer === p)
   )
   if (remainingPlayers.length === 0)
     return [combination] // combination is complete
@@ -43,21 +44,19 @@ function completeMatchupCombination(
     // player count is odd, so we need to add one ghost matchup at the end of each combination
     const remainingPlayer = remainingPlayers[0]
     const ghostMatchups = matchups
-      .filter((m) => m.a === remainingPlayer || m.b === remainingPlayer)
+      .filter(
+        (m) =>
+          m.bluePlayer === remainingPlayer || m.redPlayer === remainingPlayer
+      )
       .map((matchup) => {
         const playerToGhost =
-          matchup.a === remainingPlayer ? matchup.b : matchup.a
-        const ghost: Player = {
-          /* dereference player so that money gain is not applied to original player when playing as ghost */
-          ...playerToGhost,
-          id: "ghost-" + playerToGhost.id,
-          name: `Ghost of ${playerToGhost.name}`,
-          avatar: playerToGhost.avatar
-        } as Player
+          matchup.bluePlayer === remainingPlayer
+            ? matchup.redPlayer
+            : matchup.bluePlayer
         const ghostMatchup: Matchup = {
           ghost: true,
-          a: remainingPlayer, // ensure remaining player is player A and ghost is playerB in ghost round
-          b: ghost,
+          bluePlayer: remainingPlayer, // ensure remaining player is blue player and ghost is red player in ghost matchups
+          redPlayer: playerToGhost,
           count: getCount(remainingPlayer, playerToGhost, true),
           distance: getDistance(remainingPlayer, playerToGhost, true)
         }
@@ -67,8 +66,14 @@ function completeMatchupCombination(
     return ghostMatchups.map((m) => [...combination, m])
   } else {
     const remainingMatchups = matchups.filter(
-      (m) => remainingPlayers.includes(m.a) && remainingPlayers.includes(m.b)
+      (m) =>
+        remainingPlayers.includes(m.bluePlayer) &&
+        remainingPlayers.includes(m.redPlayer)
     )
+    if (remainingMatchups.length === 0) {
+      // no more matchups, need to complete with a ghost matchup
+      return completeMatchupCombination([...combination], matchups, players)
+    }
     return remainingMatchups.flatMap((m) =>
       completeMatchupCombination([...combination, m], matchups, players)
     )
@@ -77,8 +82,11 @@ function completeMatchupCombination(
 
 export function selectMatchups(state: GameState): Matchup[] {
   /* step 1) establish all the matchups possible with players alive and their associated count
-  count = number of times A fought B or his ghost) +(number of times B fought A or his ghost) */
-  const players = values(state.players).filter((p) => p.alive)
+  count = number of times A fought B or his ghost) + (number of times B fought A or his ghost) */
+  const players = shuffleArray(
+    schemaValues(state.players).filter((p) => p.alive)
+  )
+  if (players.length <= 1) return []
   const matchups = getAllPossibleMatchups(players)
 
   /* step 2) establish all the matchup combinations possible */
@@ -89,27 +97,21 @@ export function selectMatchups(state: GameState): Matchup[] {
   )
 
   /* step 3) get matchup combinations that have the lowest total count */
-  matchupCombinations.sort((a, b) => {
-    return sum(a.map((m) => m.count)) - sum(b.map((m) => m.count))
-  })
-  const lowestTotalCount = sum(matchupCombinations[0].map((m) => m.count))
+  const matchupCombinationsCount = matchupCombinations.map((combination) =>
+    sum(combination.map((m) => m.count))
+  )
+  const lowestTotalCount = Math.min(...matchupCombinationsCount)
   const lowestTotalCountMatchupCombinations = matchupCombinations.filter(
-    (matchups) => {
-      return sum(matchups.map((m) => m.count)) === lowestTotalCount
-    }
+    (matchups, index) => matchupCombinationsCount[index] === lowestTotalCount
   )
 
   /* step 4) get matchup combinations that have the largest total distance */
-  lowestTotalCountMatchupCombinations.sort((a, b) => {
-    return sum(b.map((m) => m.distance)) - sum(a.map((m) => m.distance))
-  })
-  const maxDistance = sum(
-    lowestTotalCountMatchupCombinations[0].map((m) => m.distance)
+  const matchupCombinationsDistance = lowestTotalCountMatchupCombinations.map(
+    (combination) => sum(combination.map((m) => m.distance))
   )
+  const maxDistance = Math.max(...matchupCombinationsDistance)
   const mostDistantMatchups = lowestTotalCountMatchupCombinations.filter(
-    (matchups) => {
-      return sum(matchups.map((m) => m.distance)) === maxDistance
-    }
+    (matchups, index) => matchupCombinationsDistance[index] === maxDistance
   )
 
   /* step 5) pick a random matchup combination among the most distant and the lowest count */
@@ -127,7 +129,7 @@ export function selectMatchups(state: GameState): Matchup[] {
     matchups
       .map(
         (m) =>
-          `${m.a.name} - ${m.b.name} (count: ${m.count}, distance: ${m.distance})`
+          `${m.bluePlayer.name} - ${m.redPlayer.name} (count: ${m.count}, distance: ${m.distance})`
       )
       .join("\n")
   )
@@ -136,7 +138,9 @@ export function selectMatchups(state: GameState): Matchup[] {
     matchupCombinations
       .map(
         (c) =>
-          c.map((m) => `${m.a.name} - ${m.b.name}`).join(" ; ") +
+          c
+            .map((m) => `${m.bluePlayer.name} - ${m.redPlayer.name}`)
+            .join(" ; ") +
           ` (total count: ${sum(c.map((m) => m.count))}, total distance: ${sum(
             c.map((m) => m.distance)
           )})`
@@ -146,7 +150,7 @@ export function selectMatchups(state: GameState): Matchup[] {
   logger.debug("Selected matchups:")
   selectedMatchups.forEach((matchup) => {
     logger.debug(
-      `${matchup.a.name} - ${matchup.b.name} (count: ${
+      `${matchup.bluePlayer.name} - ${matchup.redPlayer.name} (count: ${
         matchup.count
       }, distance: ${matchup.distance}) (${matchup.ghost ? "ghost" : "pvp"})`
     )
@@ -155,7 +159,7 @@ export function selectMatchups(state: GameState): Matchup[] {
   return selectedMatchups
 }
 
-export function getCount(a: Player, b: Player, bIsGhost: boolean): number {
+export function getCount(a: IPlayer, b: IPlayer, bIsGhost: boolean): number {
   // count(A,B) = (number of times A fought B or his ghost) + (number of times B fought A or his ghost)
   const countA =
     (a.opponents.get(b.id) ?? 0) + (a.opponents.get("ghost-" + b.id) ?? 0)
@@ -166,7 +170,7 @@ export function getCount(a: Player, b: Player, bIsGhost: boolean): number {
   else return countA + countB
 }
 
-export function getDistance(a: Player, b: Player, bIsGhost: boolean): number {
+export function getDistance(a: IPlayer, b: IPlayer, bIsGhost: boolean): number {
   // distance(A,B) = (number of stages ago A fought B or his ghost) + (number of stages ago B fought A or his ghost)
   const distanceA =
     a.history.length -

@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 const F = (Math.sqrt(3) - 1) / 2
 const G = (3 - Math.sqrt(3)) / 6
 const GRAD = [
@@ -36,8 +35,9 @@ export default class Terrain {
   }
 
   newRandom(seed: number) {
+    let s: string
     try {
-      var s = seed.toString()
+      s = seed.toString()
     } catch (_) {
       s = (new Date().getTime() + Math.random()).toString()
     }

@@ -1,35 +1,239 @@
-import { localStore, LocalStoreKeys } from "./pages/utils/store"
+import Phaser from "phaser"
+import { useCallback, useEffect, useState } from "react"
+import { removeInArray } from "../../utils/array"
+import { LocalStoreKeys, localStore } from "./pages/utils/store"
 
+export type Keybindings = {
+  sell: string
+  buy_xp: string
+  refresh: string
+  lock: string
+  camera_lock: string
+  switch: string
+  emote: string
+  prev_player: string
+  next_player: string
+  board_return: string
+  wiki: string
+  team_planner: string
+  meta_report: string
+}
 export interface IPreferencesState {
   musicVolume: number
   sfxVolume: number
+  playInBackground: boolean
   showDpsMeter: boolean
+  dpsMeterPosition: { x: number; y: number }
+  synergiesPosition: { x: number; y: number }
+  expeditionsPosition: { x: number; y: number }
   showDetailsOnHover: boolean
+  showDamageNumbers: boolean
+  showEvolutions: boolean
+  showAltForms: boolean
+  showRegularPool: boolean
+  showAdditionalPool: boolean
+  showRegionalPool: boolean
+  showSpecialPool: boolean
+  filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
+  disableCameraShake: boolean
+  cameraLocked: boolean
+  keybindings: Keybindings
+  renderer: number
+  antialiasing: boolean
+  colorblindMode: boolean
+  theme: string
 }
+
+export type PreferenceKey = keyof IPreferencesState
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
   sfxVolume: 30,
+  playInBackground: false,
   showDpsMeter: false,
+  dpsMeterPosition: { x: 0, y: 0 },
+  synergiesPosition: { x: 0, y: 0 },
+  expeditionsPosition: { x: 0, y: 0 },
   showDetailsOnHover: false,
-  disableAnimatedTilemap: false
+  showDamageNumbers: true,
+  showEvolutions: true,
+  showAltForms: true,
+  showRegularPool: true,
+  showAdditionalPool: true,
+  showRegionalPool: true,
+  showSpecialPool: true,
+  filterAvailableAddsAndRegionals: false,
+  disableAnimatedTilemap: false,
+  disableCameraShake: true,
+  cameraLocked: false,
+  renderer: Phaser.AUTO,
+  antialiasing: true,
+  colorblindMode: false,
+  theme: "default",
+  keybindings: {
+    sell: "E",
+    buy_xp: "F",
+    refresh: "D",
+    lock: "R",
+    camera_lock: "L",
+    switch: "SPACE",
+    emote: "A",
+    prev_player: "PAGE_UP",
+    next_player: "PAGE_DOWN",
+    board_return: "HOME",
+    wiki: "W",
+    meta_report: "M",
+    team_planner: "T"
+  }
 }
 
-export const preferences: IPreferencesState = loadPreferences()
+const LEGACY_DOM_TO_PHASER: Record<string, string> = {
+  ARROWUP: "UP",
+  ARROWDOWN: "DOWN",
+  ARROWLEFT: "LEFT",
+  ARROWRIGHT: "RIGHT"
+}
 
-export function loadPreferences(): IPreferencesState {
+function migrateLegacyKeybindings(stored: any): {
+  migrated: any
+  changed: boolean
+} {
+  const keybindings = stored?.keybindings
+  if (!keybindings || typeof keybindings !== "object") {
+    return { migrated: stored, changed: false }
+  }
+
+  let changed = false
+  const migratedKeybindings: Record<string, string> = { ...keybindings }
+
+  for (const [action, key] of Object.entries(migratedKeybindings)) {
+    if (typeof key !== "string") continue
+    const mapped = LEGACY_DOM_TO_PHASER[key] ?? key
+    if (mapped !== key) {
+      migratedKeybindings[action] = mapped
+      changed = true
+    }
+  }
+
+  if (!changed) return { migrated: stored, changed: false }
+  return {
+    migrated: { ...stored, keybindings: migratedKeybindings },
+    changed: true
+  }
+}
+
+function loadPreferences(): IPreferencesState {
   if (localStore.has(LocalStoreKeys.PREFERENCES)) {
+    const stored = localStore.get(LocalStoreKeys.PREFERENCES)
+
+    const { migrated, changed } = migrateLegacyKeybindings(stored)
+    if (changed) {
+      localStore.put(LocalStoreKeys.PREFERENCES, migrated, Infinity)
+    }
+
     return {
       ...defaultPreferences,
-      ...localStore.get(LocalStoreKeys.PREFERENCES)
+      ...migrated,
+      keybindings: {
+        ...defaultPreferences.keybindings,
+        ...migrated?.keybindings
+      }
     }
   } else {
     return defaultPreferences
   }
 }
 
-export async function savePreferences(modified: Partial<IPreferencesState>) {
-  localStore.put(LocalStoreKeys.PREFERENCES, modified)
-  Object.assign(preferences, modified)
+type Subscription = (newPreferences: IPreferencesState) => void
+let preferences: IPreferencesState = Object.freeze(loadPreferences())
+const subscriptions: Subscription[] = []
+
+// returns a method that unsubscribes
+export function subscribeToPreferences(fn: Subscription, runInitially = false) {
+  subscriptions.push(fn)
+  if (runInitially) fn(preferences)
+  return unsubscribeToPreferences.bind(undefined, fn)
+}
+
+export function subscribeToPreference<T extends keyof IPreferencesState>(
+  key: T,
+  fn: (newValue: IPreferencesState[T]) => void,
+  runInitially = false
+) {
+  let previousValue = preferences[key]
+  const subscription: Subscription = (newPreferences) => {
+    if (newPreferences[key] === previousValue) return
+    previousValue = newPreferences[key]
+    fn(newPreferences[key])
+  }
+  subscriptions.push(subscription)
+  if (runInitially) fn(preferences[key])
+  return unsubscribeToPreferences.bind(undefined, subscription)
+}
+
+export function unsubscribeToPreferences(fn: Subscription) {
+  removeInArray(subscriptions, fn)
+}
+
+export function preference<T extends keyof IPreferencesState>(
+  key: T
+): IPreferencesState[T] {
+  return preferences[key]
+}
+
+// save preferences and notify subscribers
+export function savePreferences(
+  modified:
+    | Partial<IPreferencesState>
+    | ((old: IPreferencesState) => Partial<IPreferencesState>)
+) {
+  const resolved: Partial<IPreferencesState> =
+    typeof modified === "function" ? modified(preferences) : modified
+  localStore.put(LocalStoreKeys.PREFERENCES, resolved, Infinity)
+  preferences = Object.freeze({ ...preferences, ...resolved })
+  subscriptions.forEach((s) => s(preferences))
+}
+
+// react hooks
+export function usePreferences(): [IPreferencesState, typeof savePreferences] {
+  const [preferenceState, setPreferenceState] = useState(preferences)
+
+  // unsubscribes on unmount since `subscribeToPreferences` returns an unsubscribe fn
+  useEffect(() => subscribeToPreferences(setPreferenceState), [])
+
+  return [preferenceState, savePreferences]
+}
+
+export function usePreference<T extends keyof IPreferencesState>(
+  key: T
+): [
+  IPreferencesState[T],
+  (
+    set:
+      | IPreferencesState[T]
+      | ((old: IPreferencesState[T]) => IPreferencesState[T])
+  ) => void
+] {
+  const [preferenceState, setPreferenceState] = useState<IPreferencesState[T]>(
+    preferences[key]
+  )
+
+  // unsubscribes on unmount since `subscribeToPreferences` returns an unsubscribe fn
+  useEffect(
+    () =>
+      subscribeToPreferences((newPreferences: IPreferencesState) => {
+        setPreferenceState(newPreferences[key])
+      }),
+    [key]
+  )
+
+  const update = useCallback(
+    (value: IPreferencesState[T] | ((old: IPreferencesState[T]) => void)) => {
+      savePreferences({ [key]: value })
+    },
+    [key]
+  )
+
+  return [preferenceState, update]
 }

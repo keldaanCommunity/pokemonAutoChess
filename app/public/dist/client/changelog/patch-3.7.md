@@ -9,7 +9,7 @@
 - Reworked ability Confusion (Meditite, Smoochum): Makes the target confused for 3/5/7 seconds. If the target is already confused, deals 75/150/300 special damage instead
 - Changed ability Hypnosis (Hoothoot): sleep duration now scales with AP
 - Changed ability TriAttack (Porygon): now deals 25/50/100 special damage
-- Stats ajustments: Buffed Fennekin, Jangmo-O, Hakamo-O, Kommo-O, Vespiqueen, Shuppet, Banette, Mega-Banette, Gastly, Haunter, Gengar, Seel, Dewgong ; Nerfed Lampent, Chandelure, Virizion, Alolan Golem, Gothitelle, Greninja
+- Stats ajustments: Buffed Fennekin, Jangmo-O, Hakamo-O, Kommo-O, Vespiquen, Shuppet, Banette, Mega-Banette, Gastly, Haunter, Gengar, Seel, Dewgong ; Nerfed Lampent, Chandelure, Virizion, Alolan Golem, Gothitelle, Greninja
 - Nerfed Dive ability: freeze duration is now 1.5 seconds for all tiers
 - Nerfed damage of abilities Discharge and Spirit Shackle at tier 3
 - Buffed PVE rounds pokemons: Rattata and Spearow now have abilities, Gyarados has more HP and attack
@@ -35,10 +35,10 @@
 - Passive abilities are now indicated separately on pokemon tooltips
 - Pokemon tooltips are now displayed in the wiki
 - Added an arrow indicator and a sound effect on Carousel rounds
-- Resurection now has an animation and a 2 seconds delay before the pokemon is revived
+- Resurrection now has an animation and a 2 seconds delay before the pokemon is revived
 
 # Misc
-- Lobbys don't need 8 players any more to be elligible for ELO, but need at least 2 human players
+- Lobbys don't need 8 players any more to be eligible for ELO, but need at least 2 human players
 - Bots are no longer taken into account for ELO gain/loss calculations
 - ELO elligibility is now indicated on room preparation screen
 - Replace Icy rock with ice stone
