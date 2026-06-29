@@ -68,7 +68,7 @@
     "express": "^5.2.1",
     "express-basic-auth": "^1.2.0",
     "fast-xml-parser": "^5.7.3",
-    "firebase": "^10.0.0",
+    "firebase": "^12.13.0",
     "firebase-admin": "^13.9.0",
     "firebaseui": "^6.1.0",
     "fs-extra": "^11.3.5",
