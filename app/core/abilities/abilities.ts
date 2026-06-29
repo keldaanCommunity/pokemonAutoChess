@@ -7221,6 +7221,7 @@ export class SpikesStrategy extends AbilityStrategy {
 }
 
 export class CeaselessEdgeStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
