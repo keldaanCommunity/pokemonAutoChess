@@ -5637,7 +5637,7 @@ export class Articuno extends Pokemon {
   speed = 52
   def = 6
   speDef = 6
-  maxPP = 110
+  maxPP = 120
   range = 2
   skill = Ability.BLIZZARD
   passive = Passive.SNOW
