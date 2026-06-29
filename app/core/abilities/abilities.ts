@@ -7221,6 +7221,7 @@ export class SpikesStrategy extends AbilityStrategy {
 }
 
 export class CeaselessEdgeStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -7671,7 +7672,6 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    crit = chance(pokemon.critChance / 100, pokemon) // can crit by default with increased crit chance
     super.process(pokemon, board, target, crit, true)
     const nbHits = Math.round(
       4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
@@ -11671,7 +11671,7 @@ export class BanefulBunkerStrategy extends AbilityStrategy {
           pokemon,
           false
         )
-        pokemon.status.triggerPoison(3000, attacker, pokemon)
+        attacker.status.triggerPoison(3000, attacker, pokemon)
       }
     })
 
@@ -13524,6 +13524,7 @@ export class DrumBeatingStrategy extends AbilityStrategy {
 }
 
 export class SurgingStrikesStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -16248,38 +16249,49 @@ export class FocusPunchStrategy extends AbilityStrategy {
           }
         })
         pokemon.broadcastAbility({ skill: "FOCUS_PUNCH" })
-        if (farthestEmptyCell != null && target.canBeMoved) {
-          const targetX = target.positionX
-          const targetY = target.positionY
-          const willEject =
-            !blocked &&
-            !target.status.resurrection &&
-            !target.status.magicBounce &&
-            !target.status.protect
-          if (willEject) {
-            // eject from the board
-            pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
-            target.cooldown = 9999
-            target.handleSpecialDamage(
-              9999,
-              board,
-              AttackType.TRUE,
-              pokemon,
-              crit
-            )
-          } else {
-            const { x, y } = farthestEmptyCell as Cell
-            target.moveTo(x, y, board, true)
-            const damage = 5 * pokemon.atk
-            target.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
+
+        const canBeMoved = farthestEmptyCell != null && target.canBeMoved
+        const willEject =
+          canBeMoved &&
+          !blocked &&
+          !target.status.resurrection &&
+          !target.status.magicBounce &&
+          !target.status.protect
+
+        if (willEject) {
+          // eject from the board
+          pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
+          target.cooldown = 9999
+          const { death } = target.handleSpecialDamage(
+            9999,
+            board,
+            AttackType.TRUE,
+            pokemon,
+            crit
+          )
+          if (!death) {
+            // force death even with shiny charm
+            pokemon.state.triggerDeath(target, pokemon, board, AttackType.TRUE)
           }
-          pokemon.moveTo(targetX, targetY, board, true)
+        } else {
+          // push as far as possible
+          const damageMultiplier = [5, 5, 5, 10][pokemon.stars - 1] ?? 10
+          const damage = damageMultiplier * pokemon.atk
+          target.handleSpecialDamage(
+            damage,
+            board,
+            AttackType.SPECIAL,
+            pokemon,
+            crit
+          )
+
+          if (canBeMoved && farthestEmptyCell) {
+            const { x, y } = farthestEmptyCell as Cell
+            const initialTargetX = target.positionX
+            const initialTargetY = target.positionY
+            target.moveTo(x, y, board, true)
+            pokemon.moveTo(initialTargetX, initialTargetY, board, true)
+          }
         }
       }, 900)
     )
@@ -16644,6 +16656,7 @@ export class MountainGaleStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    const isFirstCast = pokemon.count.ult === 0
     super.process(pokemon, board, target, crit, true)
     const damage = [20, 40, 80][pokemon.stars - 1] ?? 80
     const targets: PokemonEntity[] = board
@@ -16655,14 +16668,13 @@ export class MountainGaleStrategy extends AbilityStrategy {
     }
 
     const nbHits = [1, 3, 3][pokemon.stars - 1] ?? 3
-    const nbBergmites =
-      pokemon.count.ult === 0
-        ? max(MaxTroopersPerPkm[pokemon.name] ?? 0)(
-            [...pokemon.effectsSet.values()].find(
-              (e) => e instanceof BergmiteOnBackEffect
-            )?.stacks ?? 0
-          )
-        : 0
+    const nbBergmites = isFirstCast
+      ? max(MaxTroopersPerPkm[pokemon.name] ?? 0)(
+          [...pokemon.effectsSet.values()].find(
+            (e) => e instanceof BergmiteOnBackEffect
+          )?.stacks ?? 0
+        )
+      : 0
     for (let i = 0; i < nbHits + nbBergmites; i++) {
       const t = pickRandomIn(targets)
       pokemon.commands.push(
