@@ -74,7 +74,7 @@ import {
 import { type ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
-import { Item } from "./types/enum/Item"
+import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
 
@@ -367,6 +367,10 @@ export const server = defineServer({
 
     app.get("/items", (req, res) => {
       res.send(Item)
+    })
+
+    app.get("/unholdable-items", (req, res) => {
+      res.send(UnholdableItemsToSaveForStats)
     })
 
     app.get("/types-trigger", (req, res) => {
