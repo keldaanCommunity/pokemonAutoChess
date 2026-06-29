@@ -45,6 +45,7 @@ import { BehemothBladeStrategy } from "./behemoth-blade"
 import { BideStrategy } from "./bide"
 import { BiteStrategy } from "./bite"
 import { BitterBladeStrategy } from "./bitter-blade"
+import { BitterMaliceStrategy } from "./bitter-malice"
 import { BlastBurnStrategy } from "./blast-burn"
 import { BlazeKickStrategy } from "./blaze-kick"
 import { BleakwindStormStrategy } from "./bleakwind-storm"
@@ -66,6 +67,7 @@ import { BulldozeStrategy } from "./bulldoze"
 import { BulletPunchStrategy } from "./bullet-punch"
 import { BurnUpStrategy } from "./burn-up"
 import { BurningJealousyStrategy } from "./burning-jealousy"
+import { CamouflageStrategy } from "./camouflage"
 import { CavernousChompStrategy } from "./cavernous-chomp"
 import { CeaselessEdgeStrategy } from "./ceaseless-edge"
 import { ChainCrazedStrategy } from "./chain-crazed"
@@ -77,6 +79,7 @@ import { ChloroblastStrategy } from "./chloroblast"
 import { CityShuttleStrategy } from "./city-shuttle"
 import { ClangorousSoulStrategy } from "./clangorous-soul"
 import { CloseCombatStrategy } from "./close-combat"
+import { CoilStrategy } from "./coil"
 import { ColumnCrushStrategy } from "./column-crush"
 import { ConfusingMindStrategy } from "./confusing-mind"
 import { ConfusionStrategy } from "./confusion"
@@ -165,6 +168,7 @@ import { FlameChargeStrategy } from "./flame-charge"
 import { FlameThrowerStrategy } from "./flame-thrower"
 import { FlashStrategy } from "./flash"
 import { FleurCannonStrategy } from "./fleur-cannon"
+import { FlingStrategy } from "./fling"
 import { FloralHealingStrategy } from "./floral-healing"
 import { FlowerTrickStrategy } from "./flower-trick"
 import { FlyStrategy } from "./fly"
@@ -261,7 +265,6 @@ import { IceSpinnerStrategy } from "./ice-spinner"
 import { IcicleCrashStrategy } from "./icicle-crash"
 import { IcicleMissileStrategy } from "./icicle-missile"
 import { IcyWindStrategy } from "./icy-wind"
-import { IllusionStrategy } from "./illusion"
 import { InfernalParadeStrategy } from "./infernal-parade"
 import { InfestationStrategy } from "./infestation"
 import { IngrainStrategy } from "./ingrain"
@@ -324,6 +327,7 @@ import { MultiAttackStrategy } from "./multi-attack"
 import { MysticalFireStrategy } from "./mystical-fire"
 import { NastyPlotStrategy } from "./nasty-plot"
 import { NaturalGiftStrategy } from "./natural-gift"
+import { NightDazeStrategy } from "./night-daze"
 import { NightShadeStrategy } from "./night-shade"
 import { NightSlashStrategy } from "./night-slash"
 import { NightmareStrategy } from "./nightmare"
@@ -484,6 +488,7 @@ import { StringShotStrategy } from "./string-shot"
 import { StruggleBugStrategy } from "./struggle-bug"
 import { StuffCheeksStrategy } from "./stuff-cheeks"
 import { StunSporeStrategy } from "./stun-spore"
+import { SubstituteStrategy } from "./substitute"
 import { SuctionHealStrategy } from "./suction-heal"
 import { SunsteelStrikeStrategy } from "./sunsteel-strike"
 import { SuperFangStrategy } from "./super-fang"
@@ -493,6 +498,7 @@ import { SurfStrategy } from "./surf"
 import { SurgingStrikesStrategy } from "./surging-strikes"
 import { SwaggerStrategy } from "./swagger"
 import { SwallowStrategy } from "./swallow"
+import { SwarmStrategy } from "./swarm"
 import { SweetScentStrategy } from "./sweet-scent"
 import { SyrupBombStrategy } from "./syrup-bomb"
 import { TackleStrategy } from "./tackle"
@@ -752,6 +758,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BIDE]: new BideStrategy(),
   [Ability.BITE]: new BiteStrategy(),
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
+  [Ability.BITTER_MALICE]: new BitterMaliceStrategy(),
   [Ability.BLAST_BURN]: new BlastBurnStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
@@ -773,6 +780,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy(),
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
+  [Ability.CAMOUFLAGE]: new CamouflageStrategy(),
   [Ability.CAVERNOUS_CHOMP]: new CavernousChompStrategy(),
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
   [Ability.CHAIN_CRAZED]: new ChainCrazedStrategy(),
@@ -784,6 +792,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CITY_SHUTTLE]: new CityShuttleStrategy(),
   [Ability.CLANGOROUS_SOUL]: new ClangorousSoulStrategy(),
   [Ability.CLOSE_COMBAT]: new CloseCombatStrategy(),
+  [Ability.COIL]: new CoilStrategy(),
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.CONFUSING_MIND]: new ConfusingMindStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
@@ -874,6 +883,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.FLASH]: new FlashStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
+  [Ability.FLING]: new FlingStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
   [Ability.FLY]: new FlyStrategy(),
@@ -968,7 +978,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICICLE_CRASH]: new IcicleCrashStrategy(),
   [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
-  [Ability.ILLUSION]: new IllusionStrategy(),
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.INGRAIN]: new IngrainStrategy(),
@@ -1034,6 +1043,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MYSTICAL_FIRE]: new MysticalFireStrategy(),
   [Ability.NASTY_PLOT]: new NastyPlotStrategy(),
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
+  [Ability.NIGHT_DAZE]: new NightDazeStrategy(),
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
   [Ability.NIGHTMARE]: new NightmareStrategy(),
@@ -1195,6 +1205,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STRUGGLE_BUG]: new StruggleBugStrategy(),
   [Ability.STUFF_CHEEKS]: new StuffCheeksStrategy(),
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
+  [Ability.SUBSTITUTE]: new SubstituteStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.SUPER_FANG]: new SuperFangStrategy(),
@@ -1203,6 +1214,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SURF]: new SurfStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.SWAGGER]: new SwaggerStrategy(),
+  [Ability.SWARM]: new SwarmStrategy(),
   [Ability.SWALLOW]: new SwallowStrategy(),
   [Ability.SWEET_SCENT]: new SweetScentStrategy(),
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),

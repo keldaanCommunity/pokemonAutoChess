@@ -14,6 +14,7 @@ import {
   TMsSilver
 } from "../../../../../types/enum/Item"
 import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -197,7 +198,7 @@ function AbilityRow({
                     data-tooltip-content={tmPerAbility[ability]}
                   >
                     <img
-                      src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]!) ? "TM_BRONZE" : TMsSilver.includes(tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
+                      src={`assets/item/${isIn(TMsBronze, tmPerAbility[ability]!) ? "TM_BRONZE" : isIn(TMsSilver, tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
                       className="item"
                     />
                   </li>

@@ -6,7 +6,12 @@ import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  NonPkm,
+  Pkm,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -29,7 +34,11 @@ export default function WikiPokemons() {
 
   useEffect(() => {
     if (selectedPkm) {
-      setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
+      if (NonPkm.includes(selectedPkm)) {
+        setTabIndex(tabs.length)
+      } else {
+        setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
+      }
     }
   }, [selectedPkm, tabs])
 
@@ -57,6 +66,9 @@ export default function WikiPokemons() {
             </Tab>
           )
         })}
+        <Tab key="title-not-pokemons" style={{ color: "#999" }}>
+          {t("not_pokemons")}
+        </Tab>
         <Tab key="title-all">{t("all")}</Tab>
       </TabList>
 
@@ -71,6 +83,14 @@ export default function WikiPokemons() {
           </TabPanel>
         )
       })}
+      <TabPanel key="not_pokemons">
+        <WikiPokemon
+          rarity={Rarity.SPECIAL}
+          selected={selectedPkm}
+          onSelect={setSelectedPkm}
+          showsNonPokemons={true}
+        />
+      </TabPanel>
       <TabPanel key="all">
         <WikiAllPokemons />
       </TabPanel>
@@ -82,13 +102,16 @@ export function WikiPokemon(props: {
   rarity: Rarity
   selected: Pkm | ""
   onSelect: (pkm: Pkm) => void
+  showsNonPokemons?: boolean
 }) {
   const [preferences] = usePreferences()
   const pokemons = useMemo(
     () =>
       filterPokemonsAccordingToPreferences(
         PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity],
-        preferences
+        preferences,
+        props.showsNonPokemons,
+        props.showsNonPokemons !== true
       ).sort((a: Pkm, b: Pkm) => {
         return PkmFamily[a] === PkmFamily[b]
           ? getPokemonData(a).stars - getPokemonData(b).stars

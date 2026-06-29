@@ -1,6 +1,10 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import {
+  AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
+  AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
+  SynergyTiers
+} from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -67,13 +71,11 @@ import {
   normalShieldEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
-  overgrowEffect,
   pounceWandEffect,
   SoundCryEffect,
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
-import { getSynergyStep } from "./synergies"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -177,7 +179,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.winnerId = ""
     this.stormLightningTimer = randomBetween(4000, 8000)
     if (
-      SynergyEffects[Synergy.AQUATIC].some(
+      SynergyTiers[Synergy.AQUATIC].some(
         (e) => this.blueEffects.has(e) || this.redEffects.has(e)
       )
     ) {
@@ -480,7 +482,7 @@ export default class Simulation extends Schema implements ISimulation {
     }
 
     if (singleType) {
-      const effect = SynergyEffects[singleType].find((e) => allyEffects.has(e))
+      const effect = SynergyTiers[singleType].find((e) => allyEffects.has(e))
       if (effect && !pokemon.effects.has(effect)) {
         apply(effect)
       }
@@ -493,7 +495,7 @@ export default class Simulation extends Schema implements ISimulation {
     if (
       (singleType === Synergy.SOUND ||
         (!singleType && pokemon.hasSynergy(Synergy.SOUND))) &&
-      !SynergyEffects[Synergy.SOUND].some((e) => allyEffects.has(e))
+      !SynergyTiers[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
@@ -791,9 +793,6 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.OVERGROW:
         if (pokemon.hasSynergy(Synergy.GRASS)) {
           pokemon.effects.add(effect)
-          if (effect === EffectEnum.OVERGROW) {
-            pokemon.effectsSet.add(overgrowEffect)
-          }
         }
         break
 
@@ -1177,10 +1176,9 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.SHAPELESS:
       case EffectEnum.ETHEREAL: {
         const activeSynergies = player?.synergies.countActiveSynergies() || 0
-        const speedFactor =
-          [1, 3, 5][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
-        const hpFactor =
-          [3, 6, 10][SynergyEffects[Synergy.AMORPHOUS].indexOf(effect)] ?? 0
+        const tier = SynergyTiers[Synergy.AMORPHOUS].indexOf(effect) + 1
+        const speedFactor = AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER[tier] ?? 0
+        const hpFactor = AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER[tier] ?? 0
         pokemon.effects.add(effect)
         pokemon.addSpeed(speedFactor * activeSynergies, pokemon, 0, false)
         pokemon.addMaxHP(hpFactor * activeSynergies, pokemon, 0, false)
@@ -1557,7 +1555,7 @@ export default class Simulation extends Schema implements ISimulation {
       // Handle weather rock collection
       if (
         this.weather !== Weather.NEUTRAL &&
-        getSynergyStep(player.synergies, Synergy.ROCK) > 0 &&
+        player.synergies.hasSynergyActive(Synergy.ROCK) &&
         !isGhostPlayer &&
         !isPvE // No weather rocks collected for PvE rounds
       ) {
@@ -1631,7 +1629,11 @@ export default class Simulation extends Schema implements ISimulation {
       if (enemyWithHighestAP) {
         enemyWithHighestAP.addAbilityPower(-30, curser, 0, false)
         enemyWithHighestAP.status.curseTorment = true
-        enemyWithHighestAP.status.triggerFatigue(30000, enemyWithHighestAP)
+        enemyWithHighestAP.status.triggerFatigue(
+          30000,
+          enemyWithHighestAP,
+          null
+        )
       }
     }
 

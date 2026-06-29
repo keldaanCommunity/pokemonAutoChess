@@ -11,19 +11,21 @@ import {
   type Item,
   ShinyItems,
   Tools,
-  UnholdableItems
+  UnholdableItems,
+  UnholdableItemsToSaveForStats
 } from "../../../../../types/enum/Item"
+import { isIn } from "../../../../../utils/array"
+import { keys } from "../../../../../utils/object"
 import {
   fetchMetaItems,
   type IItemsStatisticV2,
   type IItemV2
 } from "../../../models/items-statistic-v2"
+import { cc } from "../../utils/jsx"
 import { ItemDistribution } from "./item-distribution"
 import { ItemHistoryPanel } from "./item-history-panel"
 import ItemStatistic from "./item-statistic"
 import "./item-report.css"
-import { keys } from "../../../../../utils/object"
-import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
 
@@ -57,7 +59,12 @@ export function ItemReport() {
     {
       label: t("shiny_items"),
       key: "shiny_items",
-      items: ShinyItems.filter((i) => !UnholdableItems.includes(i))
+      items: ShinyItems.filter((i) => !isIn(UnholdableItems, i))
+    },
+    {
+      label: t("unholdable_item"),
+      key: "unholdable_items",
+      items: UnholdableItemsToSaveForStats
     }
   ]
 

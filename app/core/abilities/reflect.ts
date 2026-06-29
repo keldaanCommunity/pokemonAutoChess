@@ -10,6 +10,7 @@ export class ReflectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    pokemon.status.triggerReflect([2000, 2000, 3000, 5000][pokemon.stars - 1] ?? 5000)
+    const duration = [3000,3000,3000,5000][pokemon.stars - 1] ?? 5000
+    pokemon.status.triggerReflect(duration)
   }
 }

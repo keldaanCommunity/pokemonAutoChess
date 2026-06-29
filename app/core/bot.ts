@@ -1,4 +1,4 @@
-import { FAIRY_WANDS_BY_SYNERGY_LEVEL, SynergyTriggers } from "../config"
+import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
 import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
@@ -7,6 +7,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import type { IBot } from "../types/models/bot-v2"
+import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import {
@@ -83,11 +84,11 @@ export default class Bot {
         pkm.positionY = stepTeam.board[i].y
 
         if (pkm.passive !== Passive.NONE) {
-          const hasLight =
-            (this.player.synergies.get(Synergy.LIGHT) ?? 0) >=
-            SynergyTriggers[Synergy.LIGHT][0]
+          const hasLightActive = this.player.synergies.hasSynergyActive(
+            Synergy.LIGHT
+          )
           const inSpotlight =
-            hasLight &&
+            hasLightActive &&
             ((pkm.positionX === this.player.lightX &&
               pkm.positionY === this.player.lightY) ||
               pkm.items.has(Item.SHINY_STONE))
@@ -116,7 +117,7 @@ export default class Bot {
 
         if (stepTeam.board[i].items) {
           stepTeam.board[i].items.forEach((item) => {
-            if (TMs.includes(item)) {
+            if (isIn(TMs, item)) {
               const ability = AbilityPerTM[item]
               if (!ability || pkm.hasSynergy(Synergy.HUMAN) === false)
                 return false // prevent equipping TMs on non-human pokemon

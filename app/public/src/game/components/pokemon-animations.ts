@@ -2271,22 +2271,22 @@ export const PokemonAnimations: {
   },
   [Pkm.BUDEW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSELIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSERADE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
@@ -6575,6 +6575,14 @@ export const PokemonAnimations: {
     shinyUnavailable: true,
     noShadow: true
   },
+  [Pkm.BUG_NEST]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
   [Pkm.ELGYEM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
@@ -8063,5 +8071,12 @@ export const PokemonAnimations: {
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.PASSIMIAN]: {
+    attack: AnimationType.SpAttack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BALL_RANGE,
+    hitSprite: HitSprite.FIGHTING_HIT
   }
 }

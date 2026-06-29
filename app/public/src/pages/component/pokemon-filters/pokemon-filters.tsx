@@ -79,11 +79,17 @@ export function PokemonFilters() {
 export function filterPokemonsAccordingToPreferences(
   pokemons: Pkm[],
   preferences: IPreferencesState,
-  includesNonPkm = false
+  includesNonPkm = false,
+  includesPkm = true
 ) {
   const data = pokemons.map((p) => getPokemonData(p))
   return pokemons.filter((p) => {
-    if (NonPkm.includes(p) && !includesNonPkm) return false
+    if (NonPkm.includes(p)) {
+      if (!includesNonPkm) return false
+    } else {
+      if (!includesPkm) return false
+    }
+
     const { additional, regional, rarity, skill, stars } = getPokemonData(p)
     if (skill === Ability.DEFAULT && !includesNonPkm) return false // pokemons with no ability are not ready
     const special = rarity === Rarity.SPECIAL

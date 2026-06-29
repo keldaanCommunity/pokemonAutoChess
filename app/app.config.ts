@@ -20,7 +20,7 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
 import { initTilemap } from "./core/design"
@@ -74,7 +74,7 @@ import {
 import { type ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
-import { Item } from "./types/enum/Item"
+import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
 
@@ -246,7 +246,9 @@ export const server = defineServer({
               "https://uruwhy.online",
               "https://koala-pac.com",
               "https://pokev9.52kx.net",
-              "https://www.john-auto-chess.com/"
+              "https://www.john-auto-chess.com",
+              "https://pokemon-auto-spire.com",
+              "https://www.pokemon-auto-legacy.com"
             ],
             scriptSrc: [
               "'self'",
@@ -367,8 +369,12 @@ export const server = defineServer({
       res.send(Item)
     })
 
+    app.get("/unholdable-items", (req, res) => {
+      res.send(UnholdableItemsToSaveForStats)
+    })
+
     app.get("/types-trigger", (req, res) => {
-      res.send(SynergyTriggers)
+      res.send(SynergyTiersThresholds)
     })
 
     app.get("/titles", async (req, res) => {
@@ -576,7 +582,7 @@ export const server = defineServer({
 
       const stats = await DetailledStatistic.find(
         params,
-        ["pokemons", "time", "rank", "elo", "gameMode"],
+        ["pokemons", "time", "rank", "elo", "gameMode", "unholdableItems"],
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
@@ -587,7 +593,8 @@ export const server = defineServer({
               record.rank,
               record.elo,
               record.pokemons,
-              record.gameMode
+              record.gameMode,
+              record.unholdableItems
             )
         )
 

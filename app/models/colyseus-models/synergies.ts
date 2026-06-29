@@ -1,6 +1,7 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTriggers } from "../../config"
+import { SynergyTiers, SynergyTiersThresholds } from "../../config"
 import { Item } from "../../types"
+import type { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
@@ -19,21 +20,44 @@ export default class Synergies extends MapSchema<number, Synergy> {
   }
 
   hasSynergyActive(type: Synergy): boolean {
-    return (this.get(type) ?? 0) >= SynergyTriggers[type][0]
+    return (this.get(type) ?? 0) >= SynergyTiersThresholds[type][0]
   }
 
   hasSynergyTriggerOrMore(type: Synergy, level: number): boolean {
-    return (this.get(type) ?? 0) >= SynergyTriggers[type][level - 1]
+    return (this.get(type) ?? 0) >= SynergyTiersThresholds[type][level - 1]
   }
 
-  countActiveSynergies() {
+  countActiveSynergies(): number {
     let count = 0
     this.forEach((value, synergy) => {
-      if (value >= SynergyTriggers[synergy][0]) {
+      if (value >= SynergyTiersThresholds[synergy][0]) {
         count++
       }
     })
     return count
+  }
+
+  getActiveSynergies(): Synergy[] {
+    const activeSynergies: Synergy[] = []
+    this.forEach((value, synergy) => {
+      if (value >= SynergyTiersThresholds[synergy][0]) {
+        activeSynergies.push(synergy)
+      }
+    })
+    return activeSynergies
+  }
+
+  getActiveSynergyTiers(): EffectEnum[] {
+    const synergyTiers: EffectEnum[] = []
+    this.forEach((value, synergy) => {
+      const level = SynergyTiersThresholds[synergy].filter(
+        (n) => value >= n
+      ).length
+      if (level > 0 && level - 1 in SynergyTiers[synergy]) {
+        synergyTiers.push(SynergyTiers[synergy][level - 1])
+      }
+    })
+    return synergyTiers
   }
 
   getTopSynergies(amount?: number): Synergy[] {
@@ -45,8 +69,8 @@ export default class Synergies extends MapSchema<number, Synergy> {
       if (v2 === v1) {
         // if equal level, prioritize the highest amount of synergy steps reached
         return (
-          SynergyTriggers[s2].filter((n) => n <= v2).length -
-          SynergyTriggers[s1].filter((n) => n <= v1).length
+          SynergyTiersThresholds[s2].filter((n) => n <= v2).length -
+          SynergyTiersThresholds[s1].filter((n) => n <= v1).length
         )
       }
       return v2 - v1
@@ -131,7 +155,8 @@ export function computeSynergies(
   }
 
   if (
-    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+    (synergies.get(Synergy.DRAGON) ?? 0) >=
+    SynergyTiersThresholds[Synergy.DRAGON][0]
   ) {
     applyDragonDoubleTypes()
   }
@@ -168,13 +193,13 @@ export function computeSynergies(
           if (type === Synergy.DRAGON) {
             if (
               synergies.get(Synergy.DRAGON) ===
-              SynergyTriggers[Synergy.DRAGON][0]
+              SynergyTiersThresholds[Synergy.DRAGON][0]
             ) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
               shouldComputeDragonDoubleTypeAgain = true
             } else if (
               synergies.get(Synergy.DRAGON)! >
-              SynergyTriggers[Synergy.DRAGON][0]
+              SynergyTiersThresholds[Synergy.DRAGON][0]
             ) {
               // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
               const doubledType = synergiesSorted[1]
@@ -267,7 +292,7 @@ export function computeSynergies(
             synergy,
             Math.max(
               synergies.get(synergy) ?? 0,
-              SynergyTriggers[synergy].at(-1) ?? 0
+              SynergyTiersThresholds[synergy].at(-1) ?? 0
             )
           )
         }
@@ -276,7 +301,7 @@ export function computeSynergies(
       synergies.forEach((level, synergy) => {
         if (
           synergy !== Synergy.STELLAR &&
-          level >= (SynergyTriggers[synergy][0] ?? 0)
+          level >= (SynergyTiersThresholds[synergy][0] ?? 0)
         ) {
           synergies.set(synergy, (synergies.get(synergy) ?? 0) + stellarLevel)
         }

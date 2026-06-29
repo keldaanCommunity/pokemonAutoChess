@@ -96,7 +96,7 @@ export default class LifeBar extends GameObjects.Graphics {
     }
 
     // PP
-    if (this.pp !== undefined && this.maxPP !== undefined) {
+    if (this.pp !== undefined && this.maxPP !== undefined && this.maxPP > 0) {
       const ppPercentage = max(1)(this.pp / this.maxPP)
 
       this.fillStyle(ppBarBgColor, 1)

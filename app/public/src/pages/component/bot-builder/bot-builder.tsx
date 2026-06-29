@@ -15,6 +15,7 @@ import {
   rewriteBotRoundsRequiredto1,
   validateBoard
 } from "../../../../../core/bot-logic"
+import { getSynergyTier } from "../../../../../core/synergies"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
@@ -32,7 +33,6 @@ import ImportBotModal from "./import-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
 import "./bot-builder.css"
-import { getSynergyStep } from "../../../../../core/synergies"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -210,12 +210,12 @@ export default function BotBuilder() {
   )
   const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
   const nbMaxScarvesOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.NORMAL),
+    () => getSynergyTier(synergies, Synergy.NORMAL),
     [board]
   )
   const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
   const nbMaxToolsOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.ARTIFICIAL),
+    () => getSynergyTier(synergies, Synergy.ARTIFICIAL),
     [board]
   )
   const powerScore = useMemo(() => getPowerScore(board), [board])

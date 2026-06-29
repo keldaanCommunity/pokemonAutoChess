@@ -677,7 +677,7 @@ export class Board {
         y
       })
     } else {
-      // Clear all effects      
+      // Clear all effects
       if (entityOnCell) {
         existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
       }

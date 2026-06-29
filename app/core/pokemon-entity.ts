@@ -7,7 +7,7 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -80,6 +80,7 @@ import MovingState from "./moving-state"
 import type PokemonState from "./pokemon-state"
 import type Simulation from "./simulation"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
+import { hasSynergy } from "./synergies";
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -309,11 +310,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   hasSynergy(synergy: Synergy): boolean {
-    return this.types.has(synergy) || this.types.has(Synergy.STELLAR)
+    return hasSynergy(this, synergy)
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
-    return SynergyEffects[synergy].some((effect) => this.effects.has(effect))
+    return SynergyTiers[synergy].some((effect) => this.effects.has(effect))
   }
 
   resetCooldown(baseDuration: number, speed = this.speed) {
@@ -415,14 +416,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           : 0
         const reductionFactor = 1 - 0.1 * nbBlackAugurite
         specialDamage *= attacker.critPower * reductionFactor
-      }
-      if (
-        attacker &&
-        attacker.items.has(Item.POKEMONOMICON) &&
-        attackType === AttackType.SPECIAL
-      ) {
-        this.status.triggerBurn(3000, this, attacker)
-        this.addSpecialDefense(-1, attacker, 0, false)
       }
 
       const damageResult = this.state.handleDamage({
@@ -861,7 +854,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const nativeTypes = getPokemonData(this.name).types
     if (type && !nativeTypes.includes(type)) {
       this.types.delete(type)
-      SynergyEffects[type].forEach((effectName) => {
+      SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
         this.effectsSet.forEach((effect) => {
           if (effect.origin === effectName) this.effectsSet.delete(effect)
@@ -1537,7 +1530,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           .forEach((effect: FlyingProtectionEffect) => {
             effect.flyingProtection = 0 // prevent flying effects twice
           })
-        SynergyEffects[Synergy.FOSSIL].forEach((e) =>
+        SynergyTiers[Synergy.FOSSIL].forEach((e) =>
           spawnedEntity.effects.delete(e)
         )
       })
@@ -1731,6 +1724,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.effects.has(EffectEnum.BERRY_JUICE)) {
       this.addShield(100, this, 0, false)
+    }
+
+    if (this.effects.has(EffectEnum.OVERGROW)) {
+      this.addAbilityPower(50, this, 0, false)
     }
   }
 

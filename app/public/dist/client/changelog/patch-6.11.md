@@ -1,11 +1,9 @@
 
 # New Pokemons:
 
-# Changes to Pokemon & Abilities
+- Passimian
 
-- Nerf Alcremie Rainbow Swirl: 60 → 50 PP
-- Buff Alcremie Matcha: 40 → 60 max HP
-- Ditto: PP 50 → 10
+# Changes to Pokemon & Abilities
 
 Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.
 - Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
@@ -30,32 +28,55 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
+- New visual animations for Budew line
+- Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
+- New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
+- Dondozo gains Monster synergy. HP: 250 → 220
+- Probopass gains Electric synergy. PP 90 → 100
+- Teleport (Abra) now uses the same smarter destination cell pick algorithm than Flying fly away effect
+- Rework Zoroark and Hisuian Zoroark line. New passive Illusion: copy the appearance of the ally on its left. New ability for Zoroark line: Night Daze. New ability for Hisuian Zoroark: Bitter Malice.
+- Kecleon ability Illusion has been renamed Camouflage
+- New ability for Ekans line: Coil: Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds (non scalable). User also buffs its ATK and DEF by [3,5,10,20,SP].
+- Ditto: PP 50 → 10
+- Change Blaze Kick (Torchic): now kicks the target away
+
+- Disable (TM) now applies damage to the target and all adjacent enemies. Damage: 15/30/60 → 12/25/50/100
+- Buff Reflect (TM): 2 → 3/3/3/5 seconds, duration no longer scaling with AP. Reflect percentage: 50 → 50/75/100/150
+- Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
+- New TM Substitute (replaces TM Protect): spawns a Substitute at the location of the user with [25,25,25,50,SP]% of max HP of the user as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.
 
 # Changes to Synergies
 
+- Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
+- Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
 
 # Changes to Items
 
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
 
-- Nerf Tea: 80 → 60 PP
-- Nerf Smoked Fillet: 5 → 3 ATK gained
-- Buff Flower Sweet: 5 → 10 SPEED gained
-- Buff Rice: 50 → 80 SHIELD
+
+- Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
+- New effect for Drought weather: -3 PP per second
 
 # UI
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
+- Add in Wiki > Pokémon a tab for units that are not Pokémon
 
 # Bugfix
 
 # Misc
 
 - New title: Five Stars
+- New town encounter: Chimecho
+- Bots elo ranges have been updated to be more widespread
+- Avatar emotes can now be used in lobby chat
+- Add symbols to tier list maker gadget and change layout
+- Add /unholdable-items GET endpoint

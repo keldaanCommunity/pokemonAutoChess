@@ -1,5 +1,5 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -539,8 +539,9 @@ export default abstract class PokemonState {
           const reflectCrit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance / 100, pokemon)
+          const reflectFactor = [0.5, 0.75, 1, 1.5][pokemon.stars - 1] ?? 1.5
           const reflectDamage = Math.round(
-            0.5 *
+            reflectFactor *
               damage *
               (1 + pokemon.ap / 100) *
               (reflectCrit ? pokemon.critPower : 1)
@@ -610,10 +611,6 @@ export default abstract class PokemonState {
         pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
       } else if (attackType === AttackType.SPECIAL) {
         pokemon.specialDamageReduced += min(0)(damage - reducedDamage)
-
-        if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-          pokemon.status.triggerBurn(3000, pokemon, attacker)
-        }
       }
 
       if (isNaN(reducedDamage)) {
@@ -643,7 +640,7 @@ export default abstract class PokemonState {
         if (attacker && attacker.items.has(Item.PROTECTIVE_PADS)) {
           damageOnShield *= 2 // double damage on shield
         }
-        if (damageOnShield > pokemon.shield) {
+        if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
           pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
@@ -700,10 +697,12 @@ export default abstract class PokemonState {
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
         pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
-        SynergyEffects[Synergy.FOSSIL].forEach((e) => {
+        SynergyTiers[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
-      } else if (
+      }
+
+      if (
         pokemon.hp - residualDamage <= 0 &&
         pokemon.items.has(Item.COVER_BAND) === false
       ) {
@@ -978,7 +977,14 @@ export default abstract class PokemonState {
   }
 
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
-    pokemon.addPP(10, pokemon, 0, false)
+    let passivePPGain = 10
+    if (pokemon.simulation.weather === Weather.RAIN) {
+      passivePPGain += 3
+    } else if (pokemon.simulation.weather === Weather.DROUGHT) {
+      passivePPGain -= 3
+    }
+
+    pokemon.addPP(passivePPGain, pokemon, 0, false)
     if (pokemon.effects.has(EffectEnum.RAIN_DANCE)) {
       pokemon.addPP(4, pokemon, 0, false)
     }
@@ -990,7 +996,6 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.simulation.weather === Weather.RAIN) {
-      pokemon.addPP(3, pokemon, 0, false)
       const nbDampRocks = pokemon.player
         ? count(pokemon.player.items, Item.DAMP_ROCK)
         : 0
@@ -1100,7 +1105,7 @@ export default abstract class PokemonState {
         attacker: null,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerBurn(1100, pokemon, undefined)
+      pokemon.status.triggerBurn(1100, pokemon, null)
     }
   }
 

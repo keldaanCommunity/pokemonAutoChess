@@ -36,6 +36,7 @@ export enum PokemonActionState {
   EAT = "Eat",
   FISH = "Fish",
   BLOSSOM = "Blossom",
+  NEST = "Nest",
   TRAINING = "Training"
 }
 
@@ -114,10 +115,12 @@ export enum BattleResult {
 }
 
 export enum BotDifficulty {
+  BEGINNER,
   EASY,
   MEDIUM,
   HARD,
   EXTREME,
+  MASTER,
   CUSTOM
 }
 

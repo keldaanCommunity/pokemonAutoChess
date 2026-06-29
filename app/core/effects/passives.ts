@@ -1,5 +1,5 @@
 import { BOARD_WIDTH } from "../../config"
-import { SynergyEffects } from "../../config/game/synergies"
+import { SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
   type Pokemon,
@@ -9,6 +9,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
+import { Emotion } from "../../types/enum/Emotion"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Berries,
@@ -26,6 +27,7 @@ import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
+import { getAvatarString } from "../../utils/avatar"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -36,7 +38,7 @@ import { castAbility } from "../abilities/cast"
 import type { Board, Cell } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
-import { getSynergyStep } from "../synergies";
+import { getSynergyTier } from "../synergies"
 import { getStrongestUnit } from "../unit-score"
 import {
   type Effect,
@@ -451,12 +453,9 @@ const GalarianDarmanitanBurnEffect = new PeriodicEffect(
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
-  const aquaticStepReached = getSynergyStep(
-    pkm.player.synergies,
-    Synergy.AQUATIC
-  )
-  pkm.addShield(50 * aquaticStepReached, pkm, 0, false)
-  pkm.addAttack(3 * aquaticStepReached, pkm, 0, false)
+  const aquaticTier = getSynergyTier(pkm.player.synergies, Synergy.AQUATIC)
+  pkm.addShield(50 * aquaticTier, pkm, 0, false)
+  pkm.addAttack(3 * aquaticTier, pkm, 0, false)
 }, Passive.PIKACHU_SURFER)
 
 const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
@@ -854,9 +853,9 @@ const conversionEffect = new OnSimulationStartEffect(
     if (entity.hasSynergy(synergyCopied)) return // does not copy if already has the synergy
     entity.types.add(synergyCopied)
     const effect =
-      SynergyEffects[synergyCopied].find((effect) =>
+      SynergyTiers[synergyCopied].find((effect) =>
         opponent.effects.has(effect)
-      ) ?? SynergyEffects[synergyCopied][0]!
+      ) ?? SynergyTiers[synergyCopied][0]!
 
     simulation.applyEffect(entity, effect)
 
@@ -898,7 +897,7 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to gourmet, get a Chef hat. Useless but funny
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
-      entity.items.add(Item.CHEF_HAT)
+      entity.addItem(Item.CHEF_HAT)
     }
 
     // when converting to ground, fully dig a hole at their position
@@ -908,14 +907,14 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
     if (synergyCopied === Synergy.FLORA) {
-      const floraLevel = getSynergyStep(opponent.synergies, Synergy.FLORA)
+      const floraTier = getSynergyTier(opponent.synergies, Synergy.FLORA)
       entity.effectsSet.add(
         new OnDeathEffect(({ pokemon }) => {
           let flowerToSpawn: Pkm | null = null
-          if (floraLevel === 1) flowerToSpawn = Pkm.JUMPLUFF
-          else if (floraLevel === 2) flowerToSpawn = Pkm.VICTREEBEL
-          else if (floraLevel === 3) flowerToSpawn = Pkm.MEGANIUM
-          else if (floraLevel === 4) flowerToSpawn = Pkm.VILEPLUME
+          if (floraTier === 1) flowerToSpawn = Pkm.JUMPLUFF
+          else if (floraTier === 2) flowerToSpawn = Pkm.VICTREEBEL
+          else if (floraTier === 3) flowerToSpawn = Pkm.MEGANIUM
+          else if (floraTier === 4) flowerToSpawn = Pkm.VILEPLUME
           if (flowerToSpawn) {
             const spawnSpot =
               simulation.board.getFarthestTargetCoordinateAvailablePlace(
@@ -965,13 +964,16 @@ const spawnPhioneFromAquaEggOnSimulationStartEffect =
   }, Passive.MANAPHY)
 
 const stonjournerPowerSpotOnSimulationStartEffect = new OnSimulationStartEffect(
-  ({ entity, simulation }) => {
+  ({ entity, simulation, player }) => {
     simulation.board
       .getAdjacentCells(entity.positionX, entity.positionY)
       .forEach((cell) => {
         if (cell.value && cell.value.team === entity.team) {
           cell.value.addAbilityPower(
-            entity.inSpotlight ? 100 : 50,
+            entity.inSpotlight &&
+              player?.synergies.hasSynergyActive(Synergy.LIGHT)
+              ? 100
+              : 50,
             cell.value,
             0,
             false
@@ -1360,7 +1362,7 @@ export const PassiveEffects: Partial<
           : false
         attacker.addAbilityPower(isDoubled ? 10 : 5, attacker, 0, false, true)
         attacker.addMaxHP(isDoubled ? 20 : 10, attacker, 0, false, true)
-        attacker.addStack(isDoubled ? 2 :1)
+        attacker.addStack(isDoubled ? 2 : 1)
       }
     })
   ],
@@ -1744,6 +1746,36 @@ export const PassiveEffects: Partial<
   [Passive.ORTHWORM]: [
     new OnGroundDiggingEffect(({ pokemon }) => {
       pokemon.addMaxHP(5)
+    })
+  ],
+
+  [Passive.ILLUSION]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player }) => {
+      const allyOnTheLeft = schemaValues(player.board).find(
+        (p) => p.positionX === newX - 1 && p.positionY === newY
+      )
+      if (allyOnTheLeft) {
+        pokemon.index = allyOnTheLeft.index
+      }
+    })
+  ],
+
+  [Passive.STOUTLAND_SEARCH]: [
+    new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
+      const index = (newY - 1) * BOARD_WIDTH + newX
+      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+        // BARK
+        room.broadcast(Transfer.SHOW_EMOTE, {
+          id: pokemon.id,
+          emote: getAvatarString(pokemon.index, pokemon.shiny, Emotion.JOYOUS)
+        })
+        room.broadcast(Transfer.DISPLAY_TEXT, {
+          id: player.id,
+          text: "bark",
+          x: pokemon.positionX,
+          y: pokemon.positionY
+        })
+      }
     })
   ]
 }

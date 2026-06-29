@@ -766,7 +766,7 @@ export const AbilitiesAnimations: {
   [Ability.HELPING_HAND]: onCasterScale2,
   [Ability.ENCORE]: onCaster({ ability: Ability.HELPING_HAND }),
   [Ability.FLORAL_HEALING]: onCasterScale2,
-  [Ability.ILLUSION]: onCasterScale2,
+  [Ability.CAMOUFLAGE]: onCasterScale2,
   [Ability.ROAR_OF_TIME]: onCasterScale2,
   [Ability.HAPPY_HOUR]: onCasterScale2,
   [Ability.TELEPORT]: onCasterScale2,
@@ -780,6 +780,8 @@ export const AbilitiesAnimations: {
   [Ability.LUNAR_BLESSING]: onCasterScale2,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
+  [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({
       oriented: true,
@@ -822,7 +824,49 @@ export const AbilitiesAnimations: {
     scale: 1,
     positionOffset: [0, -20]
   }),
-  [Ability.PETAL_DANCE]: onCasterScale2,
+  [Ability.PETAL_DANCE]: [
+    onCaster({ scale: 2, positionOffset: [0, -40] }),
+    ({ scene, positionX, positionY, flip, ap }) => {
+      const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+      const petalCount = 5
+
+      for (const r of [64, 96]) {
+        const petalGroup = scene.add.group()
+        const circle = new Phaser.Geom.Circle(x, y, 48)
+        for (let i = 0; i < petalCount; i++) {
+          const petalSprite = scene.add
+            .sprite(0, 0, "abilities", `PETAL_DANCE_PROJECTILE/000.png`)
+            ?.setScale(2 * (1 + ap / 200))
+          petalSprite.anims.play({
+            key: "PETAL_DANCE_PROJECTILE",
+            frameRate: 8
+          })
+          petalGroup.add(petalSprite)
+          scene.abilitiesVfxGroup?.add(petalSprite)
+        }
+
+        Phaser.Actions.PlaceOnCircle(petalGroup.getChildren(), circle)
+
+        scene.tweens.add({
+          targets: circle,
+          radius: r,
+          ease: Phaser.Math.Easing.Quartic.Out,
+          duration: 1200,
+          onUpdate: function (tween) {
+            Phaser.Actions.RotateAroundDistance(
+              petalGroup.getChildren(),
+              { x, y },
+              (r === 96 ? 1 : -1) * 0.04,
+              circle.radius
+            )
+          },
+          onComplete: function () {
+            petalGroup.destroy(true, true)
+          }
+        })
+      }
+    }
+  ],
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
   [Ability.BRICK_BREAK]: onTargetScale2,
@@ -1173,7 +1217,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.NASTY_PLOT]: onCaster({ positionOffset: [0, -50] }),
   [Ability.ROCK_TOMB]: onTarget({ origin: [0.5, 0.9], scale: 1 }),
-  [Ability.SLACK_OFF]: onCaster({ ability: Ability.ILLUSION, scale: 1 }),
+  [Ability.SLACK_OFF]: onCaster({ ability: Ability.CAMOUFLAGE, scale: 1 }),
   [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
   [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
@@ -3077,7 +3121,14 @@ export const AbilitiesAnimations: {
     ability: Ability.WHIRLWIND,
     duration: 1500,
     distance: 8
-  })
+  }),
+  ["BALL"]: (args) =>
+    projectile({
+      delay: 0,
+      scale: 1,
+      duration: args.delay,
+      oriented: true
+    })(args)
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

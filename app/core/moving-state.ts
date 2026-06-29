@@ -145,6 +145,7 @@ export default class MovingState extends PokemonState {
         // logger.debug(`pokemon ${pokemon.name} moved from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         const oldX = pokemon.positionX
         const oldY = pokemon.positionY
+        pokemon.action = PokemonActionState.WALK
         board.swapCells(oldX, oldY, x, y)
         this.onMove(pokemon, board, oldX, oldY, x, y)
       }

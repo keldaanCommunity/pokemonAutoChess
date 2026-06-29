@@ -14,7 +14,7 @@ export class WhirlwindStrategy extends AbilityStrategy {
     const x = target.positionX
     const y = target.positionY
     const damage = [40, 80, 120, 240][pokemon.stars - 1] ?? 240
-    target.flyAway(board, false, false)
+    target.flyAway(board)
     pokemon.broadcastAbility({
       positionX: x,
       positionY: y,

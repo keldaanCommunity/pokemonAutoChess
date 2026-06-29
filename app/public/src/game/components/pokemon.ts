@@ -34,6 +34,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { min } from "../../../../utils/number"
@@ -44,7 +45,10 @@ import {
 import { randomBetween } from "../../../../utils/random"
 import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
-import { transformEntityCoordinates } from "../../pages/utils/utils"
+import {
+  transformBoardCoordinates,
+  transformEntityCoordinates
+} from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
@@ -55,6 +59,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
+import { EmoteBubble } from "./emote-bubble"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
@@ -132,6 +137,7 @@ export default class PokemonSprite extends DraggableObject {
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
   isTeleporting: boolean = false
+  emoteBubble: EmoteBubble | null
 
   constructor(
     scene: GameScene | DebugScene,
@@ -163,6 +169,7 @@ export default class PokemonSprite extends DraggableObject {
     this.id = pokemon.id
     this.targetX = null
     this.targetY = null
+    this.emoteBubble = null
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
@@ -193,7 +200,7 @@ export default class PokemonSprite extends DraggableObject {
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
-    const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
+    const scale = 2 * Math.sqrt(1 + (maxHP - baseHP) / baseHP)
     this.sprite
       .setScale(scale)
       .setDepth(DEPTH.POKEMON)
@@ -697,6 +704,47 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  nestAnimation(inBattle: boolean) {
+    const scene = <GameScene>this.scene
+    let nest: PokemonSprite | undefined
+    if (scene.battle && inBattle) {
+      nest = [...scene.battle.pokemonSprites.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    } else if (scene.board && !inBattle) {
+      nest = [...scene.board.pokemons.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    }
+    if (nest) {
+      this.moveManager.setEnable(false)
+
+      const [x, y] = inBattle
+        ? transformEntityCoordinates(this.positionX, this.positionY, this.flip)
+        : transformBoardCoordinates(this.positionX, this.positionY)
+
+      this.setScale(0.2)
+      this.setPosition(nest.x, nest.y)
+
+      scene.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.HOP,
+        this.flip,
+        false
+      )
+      scene.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration: 1000,
+        scale: 1,
+        onComplete: () => {
+          this.moveManager.setEnable(true)
+        }
+      })
+    }
+  }
+
   emoteAnimation() {
     const g = <GameScene>this.scene
     if (!g.animationManager) return
@@ -942,7 +990,7 @@ export default class PokemonSprite extends DraggableObject {
     if (pokemon.status.resurrection) {
       this.addResurrection()
     }
-    if (pokemon.status.runeProtect) {
+    if (pokemon.status.runeProtect && pokemon.passive !== Passive.INANIMATE) {
       this.addRuneProtect()
     }
     if (pokemon.status.spikeArmor) {
@@ -1641,6 +1689,22 @@ export default class PokemonSprite extends DraggableObject {
   displayBoost(stat: Stat, debug?: boolean) {
     displayBoost(this, stat, 0, 0, debug)
   }
+
+  drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
+    this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, isOpponent)
+    this.add(this.emoteBubble)
+
+    const x = isOpponent ? -40 : +40
+    const y = isOpponent ? +100 : -120
+    this.emoteBubble.setPosition(x, y)
+
+    setTimeout(() => {
+      if (this.emoteBubble) {
+        this.emoteBubble.destroy()
+        this.emoteBubble = null
+      }
+    }, 3000)
+  }
 }
 
 export const isEntity = (
@@ -1726,7 +1790,6 @@ export function loadCompressedAtlas(
 
         const index = image.replace(".png", "")
 
-        //console.log("load multiatlas " + index)
         scene.textures.once(`addtexture-${index}`, () => {
           delete lazyLoadingRequests[index]
           resolve(index)

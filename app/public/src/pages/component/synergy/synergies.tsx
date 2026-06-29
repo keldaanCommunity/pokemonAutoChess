@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ReactDOM from "react-dom"
 import { Tooltip } from "react-tooltip"
-import { SynergyTriggers } from "../../../../../config"
+import { SynergyTiersThresholds } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyComponent from "./synergy-component"
 import SynergyDetailComponent from "./synergy-detail-component"
@@ -19,7 +19,7 @@ export default function Synergies(props: {
       const sa = fa ? fa : 0
       const sb = fb ? fb : 0
       if (sa[1] == sb[1]) {
-        if (sa[1] >= SynergyTriggers[a][0]) {
+        if (sa[1] >= SynergyTiersThresholds[a][0]) {
           return -1
         } else {
           return 1

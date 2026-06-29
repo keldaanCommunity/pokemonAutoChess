@@ -7,6 +7,7 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
 import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { DishByPkm } from "../../../../../config/game/dishes"
+import { hasSynergy } from "../../../../../core/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import type { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
@@ -50,6 +51,7 @@ export function GamePokemonDetail(props: {
     | "wiki"
     | "patchnotes"
     | "after"
+    | "history"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean
@@ -143,7 +145,7 @@ export function GamePokemonDetail(props: {
   }
 
   let dish = pokemon ? DishByPkm[pokemon.name] : undefined
-  if (pokemon && !dish && pokemon.types.has(Synergy.GOURMET)) {
+  if (pokemon && !dish && hasSynergy(pokemon, Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
       dish = Item.HEARTY_STEW
     } else if (dish !== null) {
@@ -257,7 +259,13 @@ export function GamePokemonDetail(props: {
         pokemon.evolution != null && (
           <img
             className="game-pokemon-detail-portrait-hint"
-            src={getPortraitSrc(PkmIndex[pokemon.evolution])}
+            src={getPortraitSrc(
+              PkmIndex[
+                pokemon.evolution === Pkm.DEFAULT
+                  ? Pkm.SCORBUNNY
+                  : pokemon.evolution
+              ]
+            )}
           />
         )}
       <div className="game-pokemon-detail-entry">
@@ -293,7 +301,9 @@ export function GamePokemonDetail(props: {
           maxValue={props.origin === "team" ? hp! : pokemon.maxHP}
           graduationStep={10}
         />
-        <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
+        {pokemon.maxPP > 0 && (
+          <GameTooltipBar type="PP" value={pp} maxValue={pokemon.maxPP} />
+        )}
       </div>
       <div className="game-pokemon-detail-stats">
         {pokemonStats.map(({ stat, value, baseValue, formatter }) => (
@@ -449,7 +459,7 @@ export class GamePokemonDetailDOMWrapper extends GameObjects.DOMElement {
 }
 
 export function GamePokemonDetailTooltip(props: {
-  origin: "wiki" | "patchnotes" | "after" | "planner"
+  origin: "wiki" | "patchnotes" | "after" | "planner" | "history"
   isOpen?: boolean
 }) {
   return (
