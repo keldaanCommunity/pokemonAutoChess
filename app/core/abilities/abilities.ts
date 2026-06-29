@@ -11670,7 +11670,7 @@ export class BanefulBunkerStrategy extends AbilityStrategy {
           pokemon,
           false
         )
-        pokemon.status.triggerPoison(3000, attacker, pokemon)
+        attacker.status.triggerPoison(3000, attacker, pokemon)
       }
     })
 
