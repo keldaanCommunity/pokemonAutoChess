@@ -4212,12 +4212,11 @@
 		"ULTRA_BALL": "Ultra Ball",
 		"MASTER_BALL": "Master Ball",
 		"BEAST_BALL": "Beast Ball"
-	},
-	"room_is_private": "Questa stanza è privata. Inserire la password",
-	"game_already_started": "La partita è già iniziata",
+	},	
 	"room_menu": {
 		"game_full": "Questo gruppo è pieno",
 		"blacklisted": "Sei stato kickato dal match",
+		"room_is_private": "Questa stanza è privata. Inserire la password",
 		"min_rank_not_reached": "Il tuo rango non è alto abbastanza per giocare a questa partita classificata",
 		"max_rank_not_reached": "Il tuo rango è troppo alto per giocare a questa partita classificata"
 	},
