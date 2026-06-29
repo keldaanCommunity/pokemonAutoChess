@@ -13524,6 +13524,7 @@ export class DrumBeatingStrategy extends AbilityStrategy {
 }
 
 export class SurgingStrikesStrategy extends AbilityStrategy {
+  canCritByDefault = true
   process(
     pokemon: PokemonEntity,
     board: Board,
