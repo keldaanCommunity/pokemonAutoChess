@@ -11,7 +11,8 @@ import {
   type Item,
   ShinyItems,
   Tools,
-  UnholdableItems
+  UnholdableItems,
+  UnholdableItemsToSaveForStats
 } from "../../../../../types/enum/Item"
 import { isIn } from "../../../../../utils/array"
 import { keys } from "../../../../../utils/object"
@@ -59,6 +60,11 @@ export function ItemReport() {
       label: t("shiny_items"),
       key: "shiny_items",
       items: ShinyItems.filter((i) => !isIn(UnholdableItems, i))
+    },
+    {
+      label: t("unholdable_item"),
+      key: "unholdable_items",
+      items: UnholdableItemsToSaveForStats
     }
   ]
 
