@@ -31,7 +31,7 @@ export class PsychoBoostStrategy extends AbilityStrategy {
           crit,
           true
         )
-        pokemon.addAbilityPower(-20, pokemon, 0, false)
+        pokemon.addAbilityPower(-10, pokemon, 0, false)
       }
     }
   }

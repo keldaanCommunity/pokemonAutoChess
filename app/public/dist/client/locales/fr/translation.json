@@ -2098,7 +2098,7 @@
 		"SHEER_COLD": "Une vague de froid glacial frappe la cible, causant [50,100,200,400,SP] SPECIAL avec [10,20,30,60]% de chance de la mettre KO en un coup. Plus le lanceur a de HP comparé à sa cible, plus les chances augmentent. Met KO systématiquement les cibles qui souffre du FREEZE, mais ne met jamais KO les Pokémon ICE.",
 		"EXTREME_SPEED": "Fonce vers l'ennemi le plus éloigné, infligeant [20,30,40,80,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"ZAP_CANNON": "Lance une décharge électrique avec la force d'un canon pour infliger à la cible [25,50,100,200,SP] SPECIAL, PARALYSIS et ARMOR_BREAK pendant [1,2,4,8,SP] secondes.",
-		"PSYCHO_BOOST": "Tranche la cible et tous les ennemis ADJACENT_IN_THE_SAME_ROW, infligeant [90,120,150,300,SP] SPECIAL. Puis, réduit la AP du lanceur de 20 pour chaque Pokémon touché.",
+		"PSYCHO_BOOST": "Tranche la cible et tous les ennemis ADJACENT_IN_THE_SAME_ROW, infligeant [90,120,150,300,SP] SPECIAL. Puis, réduit la AP du lanceur de 10 pour chaque Pokémon touché.",
 		"ICE_HAMMER": "Inflige [50,100,200,400,SP] SPECIAL à la cible et FREEZE pendant 3 secondes. Le lanceur subit PARALYSIS pendant 3 secondes.",
 		"POLLEN_PUFF": "Donne à l'allié avec les plus faibles HP une bouffée de pollen qui restaure [30,60,120,240,SP] HP.",
 		"PSYSTRIKE": "Matérialise une vague psychique vers l'ennemi le plus éloigné, infligeant [20,40,80,160,SP] SPECIAL et téléportant toutes les unités sur son chemin.",

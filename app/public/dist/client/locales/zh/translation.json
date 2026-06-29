@@ -2109,7 +2109,7 @@
 		"SHEER_COLD": "对目标发射一道绝对零度的冷风，造成[50,100,200,400,SP]点SPECIAL并有[10,20,30,LK]%的概率直接将其击倒。使用者的HP比目标的越多，直接击倒概率越高。必定能直接击倒处于FREEZE的目标。无法直接击倒ICE宝可梦。",
 		"EXTREME_SPEED": "突进至最远的敌方宝可梦的位置，对所有经过的敌方宝可梦造成[20,30,40,80,SP]点SPECIAL。",
 		"ZAP_CANNON": "发射大炮一样的电流，对目标造成[25,50,100,200,SP]点SPECIAL，并使目标陷入PARALYSIS和ARMOR_BREAK [1,2,4,8,SP]秒。",
-		"PSYCHO_BOOST": "斩击目标和与之ADJACENT_IN_THE_SAME_ROW的敌方宝可梦，对他们造成[90,120,150,300,SP]点SPECIAL。然后每击中一个目标，**降低使用者**20点AP。",
+		"PSYCHO_BOOST": "斩击目标和与之ADJACENT_IN_THE_SAME_ROW的敌方宝可梦，对他们造成[90,120,150,300,SP]点SPECIAL。然后每击中一个目标，**降低使用者**10点AP。",
 		"ICE_HAMMER": "对目标造成[50,100,200,400,SP]点SPECIAL，并使其陷入FREEZE 3秒。使用者自身则陷入PARALYSIS 3秒。",
 		"POLLEN_PUFF": "使HP最低的我方宝可梦获得一个能恢复[30,60,120,240,SP]点HP的花粉团。",
 		"PSYSTRIKE": "将神奇的念波实体化攻击最远的敌方宝可梦，对经过的所有目标造成[20,40,80,160,SP]点SPECIAL并将他们随机传送至其他位置。",

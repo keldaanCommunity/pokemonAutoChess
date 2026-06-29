@@ -2077,7 +2077,7 @@
 		"SHEER_COLD": "Uma rajada de frio zero-absoluto causa [50,100,200,400,SP] SPECIAL ao alvo com [10,20,30,60]% de chance de executar. Quanto mais HP o usuário tiver em relação ao alvo, maior será a chance. Sempre execute Pokémon inimigos sofrendo de FREEZE, mas nunca execute Pokémon ICE.",
 		"EXTREME_SPEED": "Avance para o inimigo mais distante, causando [20,30,40,80,SP] SPECIAL a todos os Pokémon inimigos no caminho.",
 		"ZAP_CANNON": "Dispare uma rajada elétrica como um canhão, causando [25,50,100,200,SP] SPECIAL ao alvo e infligindo-lhes PARALYSIS e ARMOR_BREAK por [1,2,4,8,SP] segundos.",
-		"PSYCHO_BOOST": "Corte o alvo e qualquer Pokémon inimigo ADJACENT_IN_THE_SAME_ROW, causando [90,120,150,300,SP] SPECIAL. Em seguida, reduza o AP do usuário em 20 para cada Pokémon atingido.",
+		"PSYCHO_BOOST": "Corte o alvo e qualquer Pokémon inimigo ADJACENT_IN_THE_SAME_ROW, causando [90,120,150,300,SP] SPECIAL. Em seguida, reduza o AP do usuário em 10 para cada Pokémon atingido.",
 		"ICE_HAMMER": "Cause [50,100,200,400,SP] SPECIAL ao alvo, aplicando FREEZE por 3 segundos. O usuário sofre PARALYSIS por 3 segundos.",
 		"POLLEN_PUFF": "Dê ao Pokémon aliado com menos HP um pollen puff que o cura em [30,60,120,240,SP] HP.",
 		"PSYSTRIKE": "Materialize uma estranha onda psíquica em direção ao Pokémon inimigo mais distante, causando [20,40,80,160,SP] SPECIAL a ele e teletransportando todos os Pokémon em seu caminho.",

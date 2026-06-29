@@ -2113,7 +2113,7 @@
 		"SHEER_COLD": "A blast of absolute-zero cold deals [50,100,200,400,SP] SPECIAL to the target with [10,20,30,60]% chance to execute. The more HP the user has relative to the target, the greater the chance. Always execute enemy Pokémon suffering from FREEZE, but never execute ICE Pokémon.",
 		"EXTREME_SPEED": "Dash to the farthest enemy, dealing [20,30,40,80,SP] SPECIAL to all enemy Pokémon in the path.",
 		"ZAP_CANNON": "Fire an electric blast like a cannon, dealing [25,50,100,200,SP] SPECIAL to the target and inflicting them with PARALYSIS and ARMOR_BREAK for [1,2,4] seconds.",
-		"PSYCHO_BOOST": "Slash the target and any enemy Pokémon ADJACENT_IN_THE_SAME_ROW, dealing [90,120,150,300,SP] SPECIAL. Then, **reduce the user's** AP by 20 for each Pokémon hit.",
+		"PSYCHO_BOOST": "Slash the target and any enemy Pokémon ADJACENT_IN_THE_SAME_ROW, dealing [90,120,150,300,SP] SPECIAL. Then, **reduce the user's** AP by 10 for each Pokémon hit.",
 		"ICE_HAMMER": "Deal [50,100,200,400,SP] SPECIAL to the target, applying FREEZE for 3 seconds. The user is inflicted with PARALYSIS for 3 seconds.",
 		"POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [30,60,120,240,SP] HP.",
 		"PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [20,40,80,160,SP] SPECIAL to them and teleporting all Pokémon in its path.",

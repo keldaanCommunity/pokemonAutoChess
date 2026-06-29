@@ -2060,7 +2060,7 @@
 		"SHEER_COLD": "Ein Kältestoß von absolut Null fügt dem Ziel [50,100,200,400] SPECIAL zu mit einer Chance von [10,20,30,60]% auf Ausführung. Je mehr HP der Anwender im Verhältnis zum Ziel hat, desto größer ist die Chance. Führe immer FREEZE-Feinde, aber niemals ICE Ziele aus.",
 		"EXTREME_SPEED": "Rase auf den am weitesten entfernten Gegner zu und füge ihm dabei [20,30,40,80,SP] SPECIAL zu.",
 		"ZAP_CANNON": "Der Zaubernde feuert eine elektrische Explosion wie eine Kanone ab, die [25,50,100,200,SP] SPECIAL verursacht und für [1,2,4,8,SP] Sekunden PARALYSIS und ARMOR_BREAK bewirkt.",
-		"PSYCHO_BOOST": "Schneidet einen horizontalen Schnitt um das Ziel herum und fügt allen getroffenen Gegnern [90,120,150,300,SP] SPECIAL zu. Verringert die AP des Zaubernden um 20 für jedes getroffene Pokémon.",
+		"PSYCHO_BOOST": "Schneidet einen horizontalen Schnitt um das Ziel herum und fügt allen getroffenen Gegnern [90,120,150,300,SP] SPECIAL zu. Verringert die AP des Zaubernden um 10 für jedes getroffene Pokémon.",
 		"ICE_HAMMER": "Fügt dem Ziel [50,100,200,400,SP] SPECIAL zu und lässt es 3 Sekunden lang FREEZE. PARALYSIS den Zaubernden für 3 Sekunden.",
 		"POLLEN_PUFF": "Gib dem Verbündeten mit den niedrigsten HP einen Pollenstoß, der [30,60,120,240,SP] HP wiederherstellt",
 		"PSYSTRIKE": "Der Zaubernde materialisiert eine seltsame psychische Welle in Richtung des am weitesten entfernten Gegners, die ihm [20,40,80,160,SP] SPECIAL zufügt und alles in ihrem Weg teleportiert",

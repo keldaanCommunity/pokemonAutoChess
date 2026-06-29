@@ -45,6 +45,9 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
 - New TM Substitute (replaces TM Protect): spawns a Substitute at the location of the user with [25,25,25,50,SP]% of max HP of the user as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.
 
+- Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
+- Buff Deoxys Speed Form: SPEED 90 → 100
+
 # Changes to Synergies
 
 - Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.

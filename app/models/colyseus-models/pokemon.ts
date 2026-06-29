@@ -7310,7 +7310,7 @@ export class DeoxysSpeed extends Pokemon {
   stars = 3
   hp = 250
   atk = 15
-  speed = 90
+  speed = 100
   def = 6
   speDef = 6
   maxPP = 60

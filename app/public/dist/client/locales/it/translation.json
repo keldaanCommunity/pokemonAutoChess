@@ -2029,7 +2029,7 @@
 		"SHEER_COLD": "Una ventata di freddo gelido infligge [50,100,200,400,SP] SPECIAL col il [10,20,30,60]% di probabilità di uccidere istantaneamente il bersaglio. Più sono i HP dell'utilizzatore rispetto al bersaglio, più è alta la probabilità. Uccidi istantaneamente sempre i nemici che sono sotto lo status FREEZE, però sono immuni i Pokèmon ICE.",
 		"EXTREME_SPEED": "Balza verso il nemico più lontano, infliggendo [20,30,40,80,SP] SPECIAL a tutti i Pokèmon nella traiettoria.",
 		"ZAP_CANNON": "Scaglia una sfera elettrica che infligge [25,50,100,200,SP] SPECIAL e causa PARALYSIS e ARMOR_BREAK per [1,2,4,8,SP] secondi.",
-		"PSYCHO_BOOST": "Tagliuzza i nemici affianco i nemici affianco al bersaglio, infliggendo [90,120,150,300,SP] SPECIAL a tutti i nemici colpiti. Riduci i AP dell'utilizzatore di 20 per ogni Pokèmon colpito.",
+		"PSYCHO_BOOST": "Tagliuzza i nemici affianco i nemici affianco al bersaglio, infliggendo [90,120,150,300,SP] SPECIAL a tutti i nemici colpiti. Riduci i AP dell'utilizzatore di 10 per ogni Pokèmon colpito.",
 		"ICE_HAMMER": "Infliggi [50,100,200,400,SP] SPECIAL e causa FREEZE per 3 secondi. Causa PARALYSIS all'utilizzatore per 3 secondi.",
 		"POLLEN_PUFF": "Cura l'alleato con meno HP di [30,60,120,240,SP].",
 		"PSYSTRIKE": "L'utilizzatore materializza un onda psichica in direzione del nemico più lontano, infliggendogli [20,40,80,160,SP] SPECIAL e teletrasporta tutto ciò che viene colpito nella traiettoria.",

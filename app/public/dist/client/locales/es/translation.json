@@ -2079,7 +2079,7 @@
 		"SHEER_COLD": "Un golpe de frío bajo cero inflige [50,100,200,400,SP] de SPECIAL con un [10,20,30,60]% de probabilidad de ejecutar. Mientras más HP tenga el usuario en comparación al objetivo, mayor será la probabilidad. Siempre ejecuta a enemigos que se encuentren FREEZE, pero nunca ejecuta a objetivos ICE.",
 		"EXTREME_SPEED": "Avanza hacia el enemigo más lejano, infligiendo [20,30,40,80,SP] de SPECIAL en el camino",
 		"ZAP_CANNON": "El emisor da un disparo eléctrico como un cañón para infligir [25,50,100,200,SP] de SPECIAL y causar PARALYSIS junto a ARMOR_BREAK por [1,2,4,8,SP] segundos",
-		"PSYCHO_BOOST": "Traza un corte horizontal alrededor del enemigo, haciendo [90,120,150,300,SP] de SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 20 por cada Pokémon golpeado.",
+		"PSYCHO_BOOST": "Traza un corte horizontal alrededor del enemigo, haciendo [90,120,150,300,SP] de SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 10 por cada Pokémon golpeado.",
 		"ICE_HAMMER": "Inflige [50,100,200,400,SP] de SPECIAL al objetivo, causando FREEZE por 3 segundos. PARALYSIS al emisor por 3 segundos.",
 		"POLLEN_PUFF": "El aliado con menor HP recibe una bola de polen que restaura [30,60,120,240,SP] HP",
 		"PSYSTRIKE": "El emisor materializa una extraña onda psíquica hacía el enemigo más lejano, infligiendo [20,40,80,160,SP] de SPECIAL y teletransportando a todo en su camino",
