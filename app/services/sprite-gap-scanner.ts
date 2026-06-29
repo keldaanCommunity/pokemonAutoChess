@@ -390,7 +390,7 @@ async function refreshSpriteGapDataInternal(): Promise<SpriteGapScannerResult> {
 }
 
 export function refreshSpriteGapData(): void {
-  void refreshSpriteGapDataInternal()
+  refreshSpriteGapDataInternal()
 }
 
 /**
