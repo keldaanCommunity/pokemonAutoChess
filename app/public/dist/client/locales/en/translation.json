@@ -1971,7 +1971,7 @@
 		"GIGATON_HAMMER": "Deal [100,200,400,800,SP] SPECIAL to the target and inflict the user with FATIGUE for 6 seconds.",
 		"ACROBATICS": "Deal [20,40,80,160,SP] SPECIAL and move to a tile at good distance from its target. Move further away if not holding any item.",
 		"ABSORB": "Deal [30,60,120,240,SP] SPECIAL to the target and heal ADJACENT allied Pokémon for [3,6,12,24,SP] HP.",
-		"ROLLOUT": "Increase the user's DEF by [2,5,10,20,SP] then deal SPECIAL equal to 2x the user's DEF.",
+		"ROLLOUT": "Increase the user's DEF by [2,5,10,20,SP] then deal [200,SP]% of user's DEF as SPECIAL to the target.",
 		"ICE_BALL": "Increase the user's SPE_DEF by 10 then deal SPECIAL equal to [10,20,30,60,SP] + [50,100,150,300,SP]% of the user's SPE_DEF.",
 		"THRASH": "Increase ATK by [100,100,120,150,SP]% of base ATK and inflict the user with CONFUSION for 3 seconds.",
 		"SOLAR_BEAM": "Deal [25,50,100,200,SP] SPECIAL to all enemy Pokémon in a line behind the target and BURN them for 3 seconds. If Pokémon is in the spotlight or if the weather is ZENITH, deals +30% damage and restore 20 PP.",
