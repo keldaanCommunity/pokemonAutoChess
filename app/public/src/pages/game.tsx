@@ -117,15 +117,22 @@ export function getGameContainer(): GameContainer {
 }
 
 export function cyclePlayers(amt: number) {
-  const players = schemaValues(gameContainer.room?.state.players)
-  playerClick(
-    players[
-      (players.findIndex((p) => p === gameContainer.player) +
-        amt +
-        players.length) %
-        players.length
-    ].id
+  const players = schemaValues(gameContainer.room?.state.players).sort(
+    (a, b) => {
+      return a.rank - b.rank
+    }
   )
+  const currentPlayerIndex = players.findIndex(
+    (p) => p.id === gameContainer.player?.id
+  )
+
+  if (players.length === 0 || currentPlayerIndex < 0) {
+    return
+  }
+
+  const nextPlayer =
+    players[(currentPlayerIndex + amt + players.length) % players.length]
+  playerClick(nextPlayer.id)
 }
 
 export function playerClick(id: string) {
