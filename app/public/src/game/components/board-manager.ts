@@ -1303,7 +1303,7 @@ export default class BoardManager {
 
           // show the opponent pokemons
           opponent.board.forEach((pokemon) => {
-            if (isOnBench(pokemon)) return
+            if (simulation?.started || isOnBench(pokemon)) return
             const [x, y] = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY - 1,
@@ -1439,7 +1439,7 @@ export default class BoardManager {
         )
         if (!opponent) return
         opponent.board.forEach((pokemon) => {
-          if (isOnBench(pokemon)) return
+          if (simulation?.started || isOnBench(pokemon)) return
           const pokemonSprite = new PokemonSprite(
             this.scene,
             portalX,
