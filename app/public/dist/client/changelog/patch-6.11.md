@@ -76,6 +76,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Bugfix
 
+- Previous/next player board hotkeys now follow the same order as the right-side player list.
+
 # Misc
 
 - New title: Five Stars
