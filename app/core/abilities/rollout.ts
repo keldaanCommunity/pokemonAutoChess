@@ -20,7 +20,8 @@ export class RolloutStrategy extends AbilityStrategy {
       board,
       AttackType.SPECIAL,
       pokemon,
-      crit
+      false,
+      false
     )
   }
 }
