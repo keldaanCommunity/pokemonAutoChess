@@ -1662,9 +1662,9 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.FAIRY_HIT
   },
   [Pkm.KELDEO]: {
-    attack: AnimationType.Swing,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
     attackSprite: AttackSprite.FIGHTING_MELEE,
     hitSprite: HitSprite.WATER_HIT
   },
