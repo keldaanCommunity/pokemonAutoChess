@@ -1,0 +1,81 @@
+.tournament-item {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+}
+
+.tournament-item > * {
+  flex: 0;
+}
+
+.tournament-item > .react-tabs {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 0;
+}
+
+.tournament-item .actions {
+  display: flex;
+  justify-content: end;
+}
+
+.tournament-item .remove-btn {
+  float: right;
+}
+
+.tournament-item .player-box {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  border: var(--border-thin);
+  background-color: var(--color-bg-primary);
+  overflow: hidden;
+  margin-bottom: 0.25em;
+}
+
+.tournament-item .player-box.eliminated {
+  background-color: var(--color-bg-secondary);
+  color: #ccc;
+}
+
+.tournament-item .player-box.eliminated img {
+  filter: grayscale(1);
+}
+
+.tournament-item .player-box.myself {
+  background-color: var(--color-bg-accent);
+}
+
+.tournament-item .player-box span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tournament-item .player-ranks {
+  display: block;
+  min-width: 2ch;
+}
+
+.tournament-item p {
+  margin: 0;
+  flex: 1;
+}
+
+.tournament-item ul {
+  padding: 0;
+  margin: 0;
+}
+
+.tournament-item .player-rank {
+  line-height: 40px;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.tournament-item .react-tabs__tab-panel--selected {
+  overflow-y: auto;
+}

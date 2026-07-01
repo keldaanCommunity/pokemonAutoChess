@@ -1,7 +1,8 @@
+import Phaser from "phaser"
 import LoadingManager from "../components/loading-manager"
 
 export class PreloadingScene extends Phaser.Scene {
-  loadingManager: LoadingManager
+  loadingManager: LoadingManager | null = null
   onProgress: (value: number) => void
   onComplete: () => void
 
@@ -21,6 +22,4 @@ export class PreloadingScene extends Phaser.Scene {
       this.onComplete()
     })
   }
-
-  create() {}
 }

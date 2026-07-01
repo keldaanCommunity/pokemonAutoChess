@@ -1,28 +1,26 @@
-import { Client, Room } from "colyseus.js"
-import firebase from "firebase/compat/app"
-import React, { useEffect, useRef, useState } from "react"
-import { Navigate } from "react-router-dom"
-import AfterGameState from "../../../rooms/states/after-game-state"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
+import { useEffect, useRef, useState } from "react"
+import { Navigate } from "react-router"
+import type AfterGameState from "../../../rooms/states/after-game-state"
+import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { useAppDispatch, useAppSelector } from "../hooks"
+import { authenticateUser, client, joinAfter, rooms } from "../network"
+import { preference } from "../preferences"
 import {
   addPlayer,
   leaveAfter,
   setElligibilityToELO,
-  setElligibilityToXP
+  setElligibilityToXP,
+  setGameMode
 } from "../stores/AfterGameStore"
-import { joinAfter, logIn } from "../stores/NetworkStore"
 import AfterMenu from "./component/after/after-menu"
-import { SOUNDS, playSound } from "./utils/audio"
+import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
-  const client: Client = useAppSelector((state) => state.network.client)
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
-  const room: Room<AfterGameState> | undefined = useAppSelector(
-    (state) => state.network.after
-  )
+  const room: Room<AfterGameState> | undefined = rooms.after
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
@@ -30,60 +28,71 @@ export default function AfterGame() {
   useEffect(() => {
     const reconnect = async () => {
       initialized.current = true
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          dispatch(logIn(user))
+      authenticateUser()
+        .then(async () => {
           try {
             const cachedReconnectionToken = localStore.get(
-              LocalStoreKeys.RECONNECTION_TOKEN
-            )
+              LocalStoreKeys.RECONNECTION_AFTER_GAME
+            )?.reconnectionToken
             if (cachedReconnectionToken) {
-              const r: Room<AfterGameState> = await client.reconnect(
+              const r = await client.reconnect<AfterGameState>(
                 cachedReconnectionToken
               )
               await initialize(r)
-              dispatch(joinAfter(r))
+              joinAfter(r)
             } else {
               setToLobby(true)
             }
           } catch (error) {
             setTimeout(async () => {
               const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_TOKEN
-              )
+                LocalStoreKeys.RECONNECTION_AFTER_GAME
+              )?.reconnectionToken
               if (cachedReconnectionToken) {
-                const r: Room<AfterGameState> = await client.reconnect(
+                const r = await client.reconnect<AfterGameState>(
                   cachedReconnectionToken
                 )
                 await initialize(r)
-                dispatch(joinAfter(r))
+                joinAfter(r)
               } else {
                 setToLobby(true)
               }
             }, 1000)
           }
-        } else {
-          setToAuth(true)
-        }
-      })
+        })
+        .catch((err) => {
+          if (err === CloseCodes.USER_NOT_AUTHENTICATED) {
+            setToAuth(true)
+          }
+        })
     }
 
-    const initialize = async (r: Room<AfterGameState>) => {
-      localStore.set(LocalStoreKeys.RECONNECTION_TOKEN, r.reconnectionToken, 30)
-      r.state.players.onAdd((player) => {
+    const initialize = async (room: Room<AfterGameState>) => {
+      localStore.delete(LocalStoreKeys.RECONNECTION_GAME)
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_AFTER_GAME,
+        { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+        30
+      )
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
+      $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
-          playSound(SOUNDS["FINISH" + player.rank])
+          playSound(
+            SOUNDS[("FINISH" + player.rank) as keyof typeof SOUNDS],
+            preference("musicVolume") / 100
+          )
         }
       })
-      r.state.listen("elligibleToELO", (value, previousValue) => {
+      $state.listen("eligibleToELO", (value, previousValue) => {
         dispatch(setElligibilityToELO(value))
       })
-      r.state.listen("elligibleToXP", (value, previousValue) => {
+      $state.listen("eligibleToXP", (value, previousValue) => {
         dispatch(setElligibilityToXP(value))
+      })
+      $state.listen("gameMode", (value, previousValue) => {
+        dispatch(setGameMode(value))
       })
     }
 
@@ -104,11 +113,11 @@ export default function AfterGame() {
           className="bubbly blue"
           style={{ margin: "10px 0 0 10px" }}
           onClick={() => {
-            if (room) {
-              room.connection.close()
+            if (room?.connection.isOpen) {
+              room.leave()
             }
             dispatch(leaveAfter())
-            localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
+            localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
             setToLobby(true)
           }}
         >

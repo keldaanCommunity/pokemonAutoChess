@@ -1,9 +1,8 @@
-import React from "react"
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 import { useTranslation } from "react-i18next"
-import { IPlayer } from "../../../../../types"
-import { getAvatarSrc } from "../../../utils"
+import type { IPlayer } from "../../../../../types"
+import { getAvatarSrc } from "../../../../../utils/avatar"
 import { getGameScene } from "../../game"
 import { cc } from "../../utils/jsx"
 import "./game-player-loading.css"
@@ -34,9 +33,9 @@ export default function GamePlayerLoadingBar(props: { player: IPlayer }) {
         />
       </div>
 
-      <p>{props.player.name}</p>
+      <p style={{ fontWeight: "500" }}>{props.player.name}</p>
       <p>
-        {t("elo")}: {props.player.elo}
+        {t("elo")}: <b>{props.player.elo}</b>
       </p>
     </div>
   )

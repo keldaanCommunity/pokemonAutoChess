@@ -1,25 +1,40 @@
 #team-builder {
   width: 100%;
   display: grid;
-  grid-template-areas: "synergies board selected" "synergies pokemons items";
-  grid-template-columns: 250px 1fr 340px;
-  grid-template-rows: 1fr 420px;
+  grid-template-areas: "synergies actions selected" "synergies board selected" "pokemons pokemons items";
+  grid-template-columns: 250px 1fr 480px;
+  grid-template-rows: min-content 1fr 420px;
   min-width: 1400px;
   gap: 5px;
+  padding: 5px;
   height: 75vh;
   overflow-y: auto;
+  position: relative;
 }
 
-.basic-modal-body > #team-builder {
-  margin-top: -4px;
+.team-builder-modal .modal-body {
+  padding: 0;
+}
+
+.modal-body > #team-builder {
   border-radius: 0 0 12px 12px;
   width: 2000px;
-  max-width: 98vw;
+  max-width: 94vw;
 }
 
 #team-builder .synergies-container {
   grid-area: synergies;
-  overflow: visible;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-thin);
+  overflow-y: auto;
+  padding: 5px;
+}
+
+#team-builder .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 1em;
 }
 
 #team-editor {
@@ -29,17 +44,13 @@
   position: relative;
 }
 
-#team-editor table {
-  border-top: 4px dotted red;
-}
-
 #team-editor td {
   width: 84px;
   height: 84px;
   cursor: var(--cursor-hover);
   padding: 0;
-  background-color: #54596b;
-  border: 4px solid black;
+  background-color: var(--color-bg-secondary);
+  border: var(--border-thick);
   position: relative;
   background-clip: padding-box;
 }
@@ -60,6 +71,7 @@
   display: flex;
   justify-content: space-evenly;
   gap: 1px;
+  user-select: none;
 }
 
 #team-editor td .pokemon-items > img {
@@ -67,20 +79,28 @@
   width: 26px;
   object-fit: contain;
   border-radius: 50%;
-  border: 2px solid black;
-  background-color: #54596b;
+  border: var(--border-thin);
+  background-color: var(--color-bg-secondary);
 }
 
 #selected-entity {
   grid-area: selected;
   align-self: start;
+  background-color: var(--color-bg-primary);
+  padding: 5px;
+  overflow-y: auto;
+  max-height: 100%;
+  margin: 0 auto;
 }
 
 #selected-entity fieldset {
-  color: white;
+  color: var(--color-fg-primary);
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
+  border: none;
+  padding: 0;
+  margin: 0 0 0.5em 0;
 }
 
 #item-picker {
@@ -89,6 +109,7 @@
   flex-wrap: wrap;
   align-content: start;
   overflow: auto;
+  padding: 5px;
 }
 
 #item-picker .react-tabs__tab {
@@ -96,7 +117,8 @@
   padding: 4px 8px;
 }
 
-#item-picker img.item {
+#item-picker img.item,
+#item-picker img.symbol {
   width: 40px;
   height: 40px;
   image-rendering: pixelated;
@@ -107,32 +129,52 @@
 #pokemon-picker {
   grid-area: pokemons;
   overflow-y: auto;
+  padding: 5px;
 }
 
-#pokemon-picker img.pokemon {
+#pokemon-picker .selected,
+#item-picker .selected {
+  outline: 4px solid #109fff;
+}
+
+#pokemon-picker dd > .pokemon-portrait {
   width: 40px;
   height: 40px;
-  image-rendering: pixelated;
   cursor: var(--cursor-hover);
+}
+
+#pokemon-picker dd > .pokemon-portrait img {
+  display: block;
+  image-rendering: pixelated;
 }
 
 #pokemon-picker .react-tabs__tab {
   padding: 0;
   text-align: center;
   vertical-align: bottom;
-  min-width: 1ch;
+  min-width: max(1ch, 40px);
   line-height: 40px;
+  margin: 0 1px;
 }
 
 #pokemon-picker .react-tabs__tab img {
   display: block;
 }
 
-#rarity-grid {
-  display: grid;
-  grid-template: auto / 8ch 1fr 8ch 1fr;
-  margin: 0;
-  gap: 0 0.5em;
+#pokemon-picker .synergy-overlaps ul {
+  max-width: 640px;
+  padding: 0;
+}
+
+#pokemon-picker summary {
+  margin: 0.5em 0;
+  font-size: 1rem;
+}
+
+#pokemon-picker .filters label {
+  font-size: 1rem;
+  float: right;
+  margin-left: 1em;
 }
 
 #bot-info {
@@ -144,10 +186,46 @@
 #bot-info .bot-avatar {
   width: 80px;
   height: 80px;
-  border: 4px solid black;
+  border: var(--border-thick);
   border-radius: 8px;
 }
 
 #bot-info p {
   margin: 0;
+}
+
+@media (width <= 640px) {
+  #team-builder {
+    grid-template-areas: "synergies" "board" "selected" "pokemons" "items";
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-auto-rows: min-content;
+    min-width: auto;
+    gap: 5px;
+    height: 75vh;
+    overflow-y: auto;
+  }
+
+  .modal-body > #team-builder {
+    width: 95vw;
+  }
+
+  #team-editor td {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+  }
+
+  #team-editor td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #pokemon-picker {
+    padding: 2px;
+  }
+
+  #bot-info {
+    position: static;
+  }
 }

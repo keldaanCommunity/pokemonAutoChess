@@ -1,0 +1,328 @@
+import { getStateCallbacks, type Room, type RoomAvailable } from "@colyseus/sdk"
+import firebase from "firebase/compat/app"
+import { t } from "i18next"
+import type { NavigateFunction } from "react-router"
+import type {
+  TournamentBracketSchema,
+  TournamentPlayerSchema,
+  TournamentSchema
+} from "../../../models/colyseus-models/tournament"
+import type LobbyState from "../../../rooms/states/lobby-state"
+import type PreparationState from "../../../rooms/states/preparation-state"
+import { Transfer } from "../../../types"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import type {
+  IUserMetadataClient,
+  IUserMetadataJSON
+} from "../../../types/interfaces/UserMetadata"
+import { logger } from "../../../utils/logger"
+import {
+  authenticateUser,
+  client,
+  joinLobby,
+  joinPreparation,
+  leaveRoom,
+  removeMessage,
+  rooms
+} from "../network"
+import { LocalStoreKeys, localStore } from "../pages/utils/store"
+import type { AppDispatch } from "../stores"
+import { resetBoosters } from "../stores/BoostersStore"
+import {
+  addRoom,
+  addTournament,
+  addTournamentBracket,
+  changeTournament,
+  changeTournamentBracket,
+  changeTournamentPlayer,
+  pushMessage,
+  removeRoom,
+  removeTournament,
+  removeTournamentBracket,
+  resetLobby,
+  setCcu,
+  setSearchedUser,
+  updateTournament
+} from "../stores/LobbyStore"
+import {
+  setConnectionStatus,
+  setErrorAlertMessage,
+  setNotifications,
+  setPendingGameId,
+  setProfile
+} from "../stores/NetworkStore"
+import { resetPreparation } from "../stores/PreparationStore"
+
+export async function joinLobbyRoom(
+  dispatch: AppDispatch,
+  navigate: NavigateFunction
+): Promise<Room<{ state: LobbyState }>> {
+  const promise: Promise<Room<{ state: LobbyState }>> = new Promise(
+    (resolve, reject) => {
+      if (rooms.lobby?.connection.isOpen) {
+        // already connected to a lobby room fully initialized
+        return resolve(rooms.lobby)
+      }
+
+      authenticateUser().then(async (user) => {
+        try {
+          let room: Room<{ state: LobbyState }> | undefined = undefined
+
+          const reconnectToken: string = localStore.get(
+            LocalStoreKeys.RECONNECTION_LOBBY
+          )?.reconnectionToken
+          if (reconnectToken) {
+            try {
+              // if a reconnect token is found, try to reconnect to the lobby room
+              room = await client.reconnect<LobbyState>(reconnectToken)
+            } catch (error) {
+              localStore.delete(LocalStoreKeys.RECONNECTION_LOBBY)
+            }
+          }
+
+          if (!room) {
+            // otherwise, connect to the lobby room
+            const idToken = await user.getIdToken()
+            room = await client.join<LobbyState>("lobby", { idToken })
+          }
+
+          if (!room) {
+            throw new Error("Failed to join or reconnect to the lobby room")
+          }
+
+          // store reconnection token for 5 minutes ; server may kick the inactive users before that
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_LOBBY,
+            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+            60 * 5
+          )
+
+          // setup event listeners for the lobby room
+          const $ = getStateCallbacks(room)
+          const $state = $(room.state)
+
+          room.onLeave((code: number) => {
+            logger.info(`left lobby with code ${code}`)
+            const shouldGoToLoginPage =
+              window.location.pathname === "/lobby" &&
+              (code === CloseCodes.USER_INACTIVE ||
+                code === CloseCodes.USER_BANNED ||
+                code === CloseCodes.USER_DELETED ||
+                code === CloseCodes.USER_NOT_AUTHENTICATED)
+            if (shouldGoToLoginPage) {
+              const errorMessage = CloseCodesMessages[code]
+              if (errorMessage) {
+                dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+              }
+              dispatch(resetLobby())
+              dispatch(resetBoosters())
+              navigate("/")
+            }
+          })
+
+          $state.messages.onAdd((m) => {
+            dispatch(pushMessage(m))
+          })
+          $state.messages.onRemove((m) => {
+            removeMessage(m, "lobby")
+          })
+
+          $state.listen("ccu", (value) => {
+            dispatch(setCcu(value))
+          })
+
+          $state.tournaments.onAdd((tournament) => {
+            dispatch(addTournament(tournament))
+            const $tournament = $(tournament)
+            const fields = [
+              "id",
+              "name",
+              "startDate"
+            ] satisfies NonFunctionPropNames<TournamentSchema>[]
+
+            fields.forEach((field) => {
+              $tournament.listen(field, (value) => {
+                dispatch(
+                  changeTournament({
+                    tournamentId: tournament.id,
+                    field: field,
+                    value: value
+                  })
+                )
+              })
+            })
+
+            $tournament.players.onAdd((player, userId) => {
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
+              const $player = $(player)
+              const fields = [
+                "eliminated"
+              ] satisfies NonFunctionPropNames<TournamentPlayerSchema>[]
+              fields.forEach((field) => {
+                $player.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentPlayer({
+                      tournamentId: tournament.id,
+                      playerId: userId,
+                      field: field,
+                      value: value
+                    })
+                  )
+                })
+              })
+            })
+
+            $tournament.players.onRemove((player, userId) => {
+              dispatch(updateTournament()) // TOFIX: force redux reactivity
+            })
+
+            $tournament.brackets.onAdd((bracket, bracketId) => {
+              dispatch(
+                addTournamentBracket({
+                  tournamendId: tournament.id,
+                  bracketId,
+                  bracket
+                })
+              )
+
+              const $bracket = $(bracket)
+              const fields = [
+                "name",
+                "finished"
+              ] satisfies NonFunctionPropNames<TournamentBracketSchema>[]
+              fields.forEach((field) => {
+                $bracket.listen(field, (value) => {
+                  dispatch(
+                    changeTournamentBracket({
+                      tournamentId: tournament.id,
+                      bracketId,
+                      field,
+                      value
+                    })
+                  )
+                })
+              })
+
+              $bracket.playersId.onChange(() => {
+                dispatch(
+                  changeTournamentBracket({
+                    tournamentId: tournament.id,
+                    bracketId,
+                    field: "playersId",
+                    value: bracket.playersId
+                  })
+                )
+              })
+            })
+
+            $tournament.brackets.onRemove((bracket, bracketId) => {
+              dispatch(
+                removeTournamentBracket({
+                  tournamendId: tournament.id,
+                  bracketId
+                })
+              )
+            })
+          })
+
+          $state.tournaments.onRemove((tournament) => {
+            dispatch(removeTournament(tournament))
+          })
+
+          room.onMessage(Transfer.ALERT, (message) => {
+            alert(message)
+          })
+
+          room.onMessage(Transfer.NOTIFICATIONS, (notifications) => {
+            dispatch(setNotifications(notifications))
+          })
+
+          room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
+            rooms.forEach((room) => dispatch(addRoom(room)))
+          })
+
+          room.onMessage(Transfer.REQUEST_ROOM, async (roomId: string) => {
+            joinExistingPreparationRoom(roomId, dispatch, navigate)
+          })
+
+          room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
+            if (room.name === "preparation" || room.name === "game") {
+              dispatch(addRoom(room))
+            }
+          })
+
+          room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
+            dispatch(removeRoom(roomId))
+          )
+
+          room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadataJSON) => {
+            dispatch(setProfile(user))
+          })
+
+          room.onMessage(Transfer.RECONNECT_PROMPT, (pendingGameId: string) => {
+            dispatch(setPendingGameId(pendingGameId))
+          })
+
+          room.onMessage(Transfer.USER, (user: IUserMetadataClient) =>
+            dispatch(setSearchedUser(user))
+          )
+
+          joinLobby(room) // lobby room is now fully initialized and accessible
+          resolve(room)
+        } catch (error) {
+          reject(error)
+        }
+      })
+    }
+  )
+
+  promise.catch((err) => {
+    logger.error(err)
+    if (err.message) {
+      dispatch(setErrorAlertMessage(err.message))
+    }
+    navigate("/")
+  })
+
+  return promise
+}
+
+export async function joinExistingPreparationRoom(
+  roomId: string,
+  dispatch: AppDispatch,
+  navigate: NavigateFunction,
+  password?: string
+) {
+  try {
+    const token = await firebase.auth().currentUser?.getIdToken()
+    if (token) {
+      dispatch(resetPreparation())
+      const room = await client.joinById<PreparationState>(roomId, {
+        idToken: token,
+        password
+      })
+      if (room.name !== "preparation") {
+        room.connection.isOpen && room.leave(false)
+        throw new Error(
+          `Expected to join a preparation room but joined ${room.name} instead`
+        )
+      }
+      joinPreparation(room, 30)
+      leaveRoom("lobby")
+      dispatch(resetLobby())
+      dispatch(resetBoosters())
+      navigate("/preparation")
+    }
+  } catch (error: any) {
+    if (error?.code && error.code in CloseCodesMessages) {
+      const errorMessage =
+        CloseCodesMessages[error.code as keyof typeof CloseCodesMessages]!
+      dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+    } else {
+      logger.error(error)
+    }
+  }
+}

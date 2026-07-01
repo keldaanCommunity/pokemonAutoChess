@@ -9,5 +9,10 @@ export const LanguageNames: { [key in Language]: string } = {
   [Language.it]: "Italiano",
   [Language.ja]: "日本語",
   [Language.nl]: "Nederlands",
-  [Language.bg]: "Български"
+  [Language.bg]: "Български",
+  [Language.ko]: "한국어",
+  [Language.pl]: "Polski",
+  [Language.vi]: "Tiếng Việt",
+  [Language.th]: "ภาษาไทย",
+  [Language.zh]: "中文"
 }

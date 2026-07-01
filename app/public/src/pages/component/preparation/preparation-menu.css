@@ -1,5 +1,4 @@
 .preparation-menu {
-  background-image: url("assets/ui/back1.png");
   background-size: cover;
   background-position-x: left;
   display: flex;
@@ -10,20 +9,31 @@
 
 .preparation-menu h1 {
   text-align: center;
-  color: white;
+  color: var(--color-fg-primary);
+  text-shadow: 2px 2px 2px black;
+}
+
+.preparation-menu p,
+.preparation-menu label {
+  color: var(--color-fg-primary);
   text-shadow: 2px 2px 2px black;
 }
 
 .preparation-menu header p {
-  color: white;
+  text-align: center;
   margin-bottom: 0.5em;
-  text-shadow: 2px 2px 2px black;
 }
 
 .preparation-menu header img {
   width: 2em;
   height: 2em;
   margin-right: 0.5em;
+
+  &.noelo,
+  &.scribble,
+  &.classic {
+    border-radius: 50%;
+  }
 }
 
 .preparation-menu-users {
@@ -34,8 +44,13 @@
   flex: 1;
 }
 
-.preparation-menu .actions {
+.preparation-menu-users .pokemon-portrait {
+  margin: 2px;
+}
+
+.preparation-menu .actions > div {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.5em;
@@ -43,18 +58,12 @@
 }
 
 .preparation-menu .actions span {
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 1px 1px 2px black;
 }
 
-.preparation-menu .room-leader {
-  color: white;
-  font-size: 140%;
-  text-shadow: 2px 2px 2px black;
-  margin: 0 0.5em;
-  text-align: left;
-}
-
-.preparation-menu .my-select {
-  font-size: 140%;
+@media (width <= 640px) {
+  .preparation-menu-users {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

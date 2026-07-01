@@ -1,26 +1,28 @@
 #game-stage-info {
   position: absolute;
   top: 0.5%;
-  left: 30%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 40%;
-  height: 5%;
-  color: white;
+  max-width: 100vw;
+  color: var(--color-fg-primary);
   border-radius: 12px 12px 0 0;
-  padding: 1px 5px 3px 5px;
-  overflow: hidden;
+  padding: 1px 0.5em;
+  font-size: 1em;
+  gap: 0.5em;
 }
 
 #game-stage-info p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 600;
 }
 
 #game-stage-info .stage-information {
-  width: 4vw;
   text-align: center;
 }
 
@@ -59,11 +61,12 @@
 
 #game-stage-info .player-information .player-title {
   margin: 0;
+  color: var(--color-fg-gold);
 }
 
 #game-stage-info .player-information .player-name {
   margin-left: 0.25em;
-  color: white;
+  color: var(--color-fg-primary);
   text-align: center;
 }
 
@@ -75,13 +78,13 @@
 
 .game-stage-path .stage-path {
   position: relative;
-  background-color: #54596b;
+  background-color: var(--color-bg-secondary);
   border-radius: 8px;
   border: 4px solid transparent;
 }
 
 .game-stage-path .stage-path.current {
-  background-color: #109fff;
+  background-color: var(--color-bg-accent);
 }
 
 .game-stage-path .stage-path.current::before {
@@ -115,12 +118,15 @@
   width: 1.5em;
 }
 
-#game-stage-info .weather-information > img {
+#game-stage-info .weather-information > img,
+#game-stage-info .map-information > img {
   width: 1.5em;
   height: 1.5em;
 }
 
-#detail-weather p {
+#detail-weather p,
+#detail-map p {
   white-space: pre-line;
   margin: 0 0.25em;
+  line-height: 40px;
 }

@@ -1,37 +1,15 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
+import { ExpThreshold } from "../../config"
+import { GADGETS_UNLOCKED_BY_LEVEL } from "../../config/game/gadgets"
+import { CollectionUtils } from "../../core/collection"
+import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
-import { Language } from "../../types/enum/Language"
-import MapTileset from "../colyseus-models/map-tileset"
-import WinTileset from "../colyseus-models/win-tileset"
-
-export interface IUserMetadata {
-  uid: string
-  displayName: string
-  language: Language | ""
-  avatar: string
-  wins: number
-  exp: number
-  level: number
-  elo: number
-  donor: boolean
-  mapWin: WinTileset
-  map: MapTileset
-  honors: string[]
-  pokemonCollection: Map<string, IPokemonConfig>
-  booster: number
-  titles: Title[]
-  title: "" | Title
-  role: Role
-}
-
-export interface IPokemonConfig {
-  dust: number
-  emotions: Emotion[]
-  shinyEmotions: Emotion[]
-  selectedEmotion: Emotion
-  selectedShiny: boolean
-  id: string
-}
+import type {
+  IPokemonCollectionItemMongo,
+  IUserMetadataJSON,
+  IUserMetadataLean,
+  IUserMetadataMongo
+} from "../../types/interfaces/UserMetadata"
 
 const userMetadataSchema = new Schema({
   uid: {
@@ -39,6 +17,23 @@ const userMetadataSchema = new Schema({
   },
   displayName: {
     type: String
+  },
+  twitchUserId: {
+    type: String
+  },
+  twitchLogin: {
+    type: String,
+    lowercase: true,
+    trim: true
+  },
+  twitchDisplayName: {
+    type: String
+  },
+  twitchVerifiedAt: {
+    type: Date
+  },
+  twitchVerificationRevokedAt: {
+    type: Date
   },
   language: {
     type: String,
@@ -49,6 +44,10 @@ const userMetadataSchema = new Schema({
     default: "0019/Normal"
   },
   wins: {
+    type: Number,
+    default: 0
+  },
+  games: {
     type: Number,
     default: 0
   },
@@ -64,65 +63,25 @@ const userMetadataSchema = new Schema({
     type: Number,
     default: 1000
   },
-  donor: {
-    type: Boolean,
-    default: false
+  maxElo: {
+    type: Number,
+    default: 1000
+  },
+  eventPoints: {
+    type: Number,
+    default: 0
+  },
+  maxEventPoints: {
+    type: Number,
+    default: 0
+  },
+  eventFinishTime: {
+    type: Date,
+    sparse: true
   },
   booster: {
     type: Number,
     default: 0
-  },
-  mapWin: {
-    ICE: {
-      type: Number,
-      default: 0
-    },
-    FIRE: {
-      type: Number,
-      default: 0
-    },
-    GROUND: {
-      type: Number,
-      default: 0
-    },
-    NORMAL: {
-      type: Number,
-      default: 0
-    },
-    GRASS: {
-      type: Number,
-      default: 0
-    },
-    WATER: {
-      type: Number,
-      default: 0
-    }
-  },
-  map: {
-    ICE: {
-      type: String,
-      default: "ICE0"
-    },
-    FIRE: {
-      type: String,
-      default: "FIRE0"
-    },
-    GROUND: {
-      type: String,
-      default: "GROUND0"
-    },
-    NORMAL: {
-      type: String,
-      default: "NORMAL0"
-    },
-    GRASS: {
-      type: String,
-      default: "GRASS0"
-    },
-    WATER: {
-      type: String,
-      default: "WATER0"
-    }
   },
   title: {
     type: String
@@ -132,11 +91,10 @@ const userMetadataSchema = new Schema({
     enum: Role,
     default: Role.BASIC
   },
-  honors: [
-    {
-      type: String
-    }
-  ],
+  banned: {
+    type: Boolean,
+    default: false
+  },
   titles: [
     {
       type: String,
@@ -149,30 +107,102 @@ const userMetadataSchema = new Schema({
       dust: {
         type: Number
       },
+      // OPTIMIZED: Single 5-byte field instead of multiple arrays for emotions and shiny emotions unlocked
+      unlocked: {
+        type: Buffer,
+        default: () => Buffer.alloc(5, 0)
+      },
       selectedEmotion: {
         type: String,
         enum: Emotion
       },
-      emotions: [
-        {
-          type: String,
-          enum: Emotion
-        }
-      ],
-      shinyEmotions: [
-        {
-          type: String,
-          enum: Emotion
-        }
-      ],
       selectedShiny: {
         type: Boolean
       },
       id: {
         type: String
+      },
+      played: {
+        type: Number,
+        default: 0
       }
     }
   }
 })
 
-export default model<IUserMetadata>("UserMetadata", userMetadataSchema)
+userMetadataSchema.index(
+  { displayName: 1 },
+  { collation: { locale: "en", strength: 2 } }
+)
+userMetadataSchema.index({ elo: 1 })
+userMetadataSchema.index({ titles: 1 })
+userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
+userMetadataSchema.index({ twitchLogin: 1 }, { unique: true, sparse: true })
+
+export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
+
+export function toLeanUserMetadata(
+  user: IUserMetadataLean | IUserMetadataMongo
+): IUserMetadataMongo {
+  const pokemonCollection = new Map<string, IPokemonCollectionItemMongo>()
+  const collectionEntries =
+    user.pokemonCollection instanceof Map
+      ? user.pokemonCollection.entries()
+      : Object.entries(user.pokemonCollection ?? {})
+
+  for (const [key, item] of collectionEntries) {
+    pokemonCollection.set(key, {
+      ...item,
+      unlocked: Buffer.isBuffer(item?.unlocked)
+        ? item.unlocked
+        : item?.unlocked?.buffer
+          ? Buffer.from(item.unlocked.buffer)
+          : Buffer.alloc(5, 0)
+    })
+  }
+  return {
+    ...user,
+    pokemonCollection
+  } as IUserMetadataMongo
+}
+
+export function toUserMetadataJSON(user): IUserMetadataJSON {
+  const pokemonCollection: {
+    [index: string]: IUserMetadataJSON["pokemonCollection"][string]
+  } = {}
+  user.pokemonCollection.forEach((item, index) => {
+    pokemonCollection[index] = CollectionUtils.toCollectionItemClient(item)
+  })
+  return {
+    ...user.toObject(),
+    pokemonCollection
+  }
+}
+
+export function giveUserExp(user: IUserMetadataMongo, exp: number) {
+  if (user.exp + exp >= ExpThreshold) {
+    user.level += 1
+    user.booster += 1
+    user.exp = user.exp + exp - ExpThreshold
+
+    if (user.level <= 2) {
+      // Add level up notification
+      notificationsService.addNotification(
+        user.uid,
+        "level_up",
+        user.level.toString()
+      )
+    }
+
+    if (user.level in GADGETS_UNLOCKED_BY_LEVEL) {
+      notificationsService.addNotification(
+        user.uid,
+        "new_gadget",
+        GADGETS_UNLOCKED_BY_LEVEL[user.level].name
+      )
+    }
+  } else {
+    user.exp = user.exp + exp
+  }
+  user.exp = !isNaN(user.exp) ? user.exp : 0
+}

@@ -1,20 +1,19 @@
 import { t } from "i18next"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-
-import DebugScene from "./component/debug/debug-scene"
-import { MainSidebar } from "./component/main-sidebar/main-sidebar"
-import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
-
+import { useState } from "react"
+import { useNavigate } from "react-router"
 import { Orientation } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
-
+import { Checkbox } from "./component/checkbox/checkbox"
+import DebugScene from "./component/debug/debug-scene"
+import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { PokemonTypeahead } from "./component/typeahead/pokemon-typeahead"
 import "./sprite-viewer.css"
 
 export function SpriteDebug() {
   const navigate = useNavigate()
   const [pkm, setPkm] = useState<Pkm>(Pkm.RATTATA)
+  const [shiny, setShiny] = useState<boolean>(false)
   const [orientation, setOrientation] = useState<Orientation>(
     Orientation.DOWNLEFT
   )
@@ -29,76 +28,86 @@ export function SpriteDebug() {
         leaveLabel={t("back_to_lobby")}
       />
       <div className="sprite-viewer-container">
-        <div className="sprite-viewer-toolbar">
-          <div className="nes-container">
-            <label htmlFor="pokemon-typeahead">Pokemon</label>
-            <PokemonTypeahead
-              value={pkm}
-              onChange={(pkm) => {
-                if (pkm) {
-                  setPkm(pkm)
-                  setAnimType("Idle")
-                }
-              }}
-            />
-          </div>
-          <div className="nes-container">
-            <label htmlFor="sprite-viewer-orientation">Orientation</label>
-            <select
-              className="my-select"
-              id="sprite-viewer-orientation"
-              value={orientation}
-              onChange={(e) =>
-                setOrientation(e.currentTarget.value as Orientation)
+        <div className="sprite-viewer-toolbar my-box">
+          <label htmlFor="pokemon-typeahead">Pokemon</label>
+          <PokemonTypeahead
+            value={pkm}
+            options={Object.values(Pkm).sort((a, b) =>
+              t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
+            )}
+            onChange={(pkm) => {
+              if (pkm) {
+                setPkm(pkm)
               }
-            >
-              {Object.entries(Orientation).map(([k, v]) => (
-                <option value={v} key={v}>
-                  {k}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="nes-container">
-            <label htmlFor="sprite-viewer-anim-type">Anim type</label>
-            <select
-              className="my-select"
-              id="sprite-viewer-anim-type"
-              value={animationType}
-              onChange={(e) => setAnimType(e.currentTarget.value)}
-            >
-              <option value="Idle">Idle</option>
-              <option value="Walk">Walk</option>
-              <option value="Sleep">Sleep</option>
-              <option value="Hurt">Hurt</option>
-              <option value="Hop">Hop</option>
-              <option value="Attack">Attack</option>
-              <option value="Ability">Ability</option>
-              <option value="Emote">Emote</option>
-            </select>
-          </div>
-          <div className="nes-container">
-            <label htmlFor="sprite-viewer-status">Status</label>
-            <select
-              className="my-select"
-              id="sprite-viewer-status"
-              value={status}
-              onChange={(e) => setStatus(e.currentTarget.value as Status)}
-            >
-              <option value="">None</option>
-              {Object.entries(Status).map(([k, v]) => (
-                <option value={v} key={v}>
-                  {k}
-                </option>
-              ))}
-            </select>
-          </div>
+            }}
+          />
+          <Checkbox
+            checked={shiny}
+            onToggle={setShiny}
+            label={t("shiny")}
+            isDark
+          />
+
+          <label htmlFor="sprite-viewer-orientation">Orientation</label>
+          <select
+            id="sprite-viewer-orientation"
+            value={orientation}
+            onChange={(e) =>
+              setOrientation(e.currentTarget.value as Orientation)
+            }
+          >
+            {Object.entries(Orientation).map(([k, v]) => (
+              <option value={v} key={v}>
+                {k}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="sprite-viewer-anim-type">Anim type</label>
+          <select
+            id="sprite-viewer-anim-type"
+            value={animationType}
+            onChange={(e) => setAnimType(e.currentTarget.value)}
+          >
+            <option value="Idle">Idle</option>
+            <option value="Walk">Walk</option>
+            <option value="Sleep">Sleep</option>
+            <option value="Eat">Eat</option>
+            <option value="Hurt">Hurt</option>
+            <option value="Hop">Hop</option>
+            <option value="Attack">Attack</option>
+            <option value="Ability">Ability</option>
+            <option value="Emote">Emote</option>
+          </select>
+
+          <label htmlFor="sprite-viewer-status">Status</label>
+          <select
+            id="sprite-viewer-status"
+            value={status}
+            onChange={(e) => setStatus(e.currentTarget.value as Status)}
+          >
+            <option value="">None</option>
+            {Object.entries(Status).map(([k, v]) => (
+              <option value={v} key={v}>
+                {k}
+              </option>
+            ))}
+            <option value="POISONNED_BADLY">Poisonned badly</option>
+            <option value="BALM_MUSHROOM">Balm Mushroom</option>
+            <option value="BOOST/ATK">Boost Attack</option>
+            <option value="BOOST/DEF">Boost Defense</option>
+            <option value="BOOST/SPE_DEF">Boost Special Defense</option>
+            <option value="BOOST/SHIELD">Boost Shield</option>
+            <option value="BOOST/SPEED">Boost Speed</option>
+            <option value="BOOST/AP">Boost AP</option>
+          </select>
         </div>
         <div className="sprite-viewer-sprite">
           <DebugScene
             pkm={pkm}
             orientation={orientation}
             animationType={animationType}
+            shiny={shiny}
             status={status}
             width={1950}
             height={1000}

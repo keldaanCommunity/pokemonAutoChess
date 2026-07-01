@@ -1,182 +1,235 @@
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
-import { CountEvolutionRule } from "../../../../../core/evolution-rules"
-import { Pokemon } from "../../../../../models/colyseus-models/pokemon"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
+import { RarityColor } from "../../../../../config"
+import { EvolutionManager } from "../../../../../core/evolution-logic/evolution-manager"
+import type { Pokemon } from "../../../../../models/colyseus-models/pokemon"
+import {
+  getPkmWithCustom,
+  type PokemonCustoms
+} from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { getPokemonData } from "../../../../../models/precomputed"
-import { RarityColor } from "../../../../../types/Config"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
-import { useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../utils"
+import { getBuyPrice } from "../../../../../models/shop"
+import { EvolutionRuleType } from "../../../../../types/EvolutionRules"
+import { type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import { getPortraitSrc } from "../../../../../utils/avatar"
+import { schemaValues } from "../../../../../utils/schemas"
+import {
+  selectConnectedPlayer,
+  selectSpectatedPlayer,
+  useAppSelector
+} from "../../../hooks"
 import { getGameScene } from "../../game"
+import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
 
+export function getCachedPortrait(
+  index: string,
+  customs?: PokemonCustoms
+): string {
+  const scene = getGameScene()
+  const pokemonCustom = getPkmWithCustom(index, customs)
+  return (
+    scene?.textures.getBase64(`portrait-${index}`) ??
+    getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
+  )
+}
+
 export default function GamePokemonPortrait(props: {
   index: number
-  origin: string
+  origin: "wiki" | "shop" | "proposition" | "team" | "planner" | "battle"
   pokemon: Pokemon | Pkm | undefined
   click?: React.MouseEventHandler<HTMLDivElement>
   onMouseEnter?: React.MouseEventHandler<HTMLDivElement>
   onMouseLeave?: React.MouseEventHandler<HTMLDivElement>
+  inPlanner?: boolean
 }) {
-  if (!props.pokemon) {
-    return <div className="game-pokemon-portrait nes-container empty" />
-  } else {
-    const pokemon = useMemo(
-      () =>
-        typeof props.pokemon === "string"
-          ? PokemonFactory.createPokemonFromName(props.pokemon)
-          : props.pokemon!,
-      [props.pokemon]
-    )
-    const rarityColor = RarityColor[pokemon.rarity]
-    const pokemonCollection = useAppSelector(
-      (state) => state.game.pokemonCollection
-    )
-    const pokemonConfig: IPokemonConfig | undefined = pokemonCollection.get(
-      pokemon.index
-    )
+  const pokemon = useMemo(() => {
+    if (typeof props.pokemon === "string") {
+      const pokemon = PokemonFactory.createPokemonFromName(props.pokemon)
+      pokemon.pp = pokemon.maxPP
+      return pokemon
+    }
+    return props.pokemon
+  }, [props.pokemon])
 
-    const uid: string = useAppSelector((state) => state.network.uid)
-    const currentPlayerId: string = useAppSelector(
-      (state) => state.game.currentPlayerId
-    )
-    const board = useAppSelector(
-      (state) => state.game.players.find((p) => p.id === uid)?.board
-    )
-    const isOnAnotherBoard = currentPlayerId !== uid
+  const currentPlayerUid: string = useAppSelector((state) => state.network.uid)
+  const spectatedPlayerId: string = useAppSelector(
+    (state) => state.game.playerIdSpectated
+  )
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const connectedPlayer = useAppSelector(selectConnectedPlayer)
 
-    const [count, setCount] = useState(0)
-    const [countEvol, setCountEvol] = useState(0)
+  const board = connectedPlayer?.board ?? null
 
-    useEffect(() => {
-      let _count = 0
-      let _countEvol = 0
-      if (board && board.forEach && !isOnAnotherBoard && props.pokemon) {
-        board.forEach((p) => {
-          if (p.index === pokemon.index && p.evolution !== Pkm.DEFAULT) {
-            _count++
-          }
-          if (
-            pokemonEvolution !== Pkm.DEFAULT &&
-            p.evolution !== Pkm.DEFAULT &&
-            p.index === PkmIndex[pokemonEvolution]
-          ) {
-            _countEvol++
-          }
-        })
-      }
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
 
-      setCount(_count)
-      setCountEvol(_countEvol)
-    }, [board?.size, props.pokemon]) // recount where board size or pokemon on this shop cell changes
+  const isOnAnotherBoard = spectatedPlayerId !== currentPlayerUid
 
-    let pokemonEvolution = pokemon.evolution
-    const pokemonEvolution2 = getPokemonData(pokemonEvolution).evolution
+  const [count, setCount] = useState(0)
+  const [countEvol, setCountEvol] = useState(0)
 
-    const willEvolve =
-      pokemon.evolutionRule instanceof CountEvolutionRule &&
-      count === pokemon.evolutionRule.numberRequired - 1
-
-    const shouldShimmer =
-      pokemon.evolutionRule instanceof CountEvolutionRule &&
-      ((count > 0 && pokemonEvolution !== Pkm.DEFAULT) ||
-        (countEvol > 0 && pokemonEvolution2 !== Pkm.DEFAULT))
-
+  // recount where board size or pokemon on this shop cell changes
+  useEffect(() => {
+    let _count = 0
+    let _countEvol = 0
     if (
-      pokemon.evolutionRule instanceof CountEvolutionRule &&
-      count === pokemon.evolutionRule.numberRequired - 1 &&
-      countEvol === pokemon.evolutionRule.numberRequired - 1 &&
-      pokemonEvolution2 != null
-    )
-      pokemonEvolution = pokemonEvolution2
-
-    const pokemonInPortrait =
-      willEvolve && pokemonEvolution
-        ? PokemonFactory.createPokemonFromName(pokemonEvolution)
-        : pokemon
-    const pokemonInPortraitConfig = pokemonCollection.get(
-      pokemonInPortrait.index
-    )
-
-    let cost = PokemonFactory.getBuyPrice(pokemon.name)
-    const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
-    if (
-      willEvolve &&
-      pokemonEvolution &&
-      specialLobbyRule === SpecialLobbyRule.BUYER_FEVER
+      board &&
+      board.forEach &&
+      !isOnAnotherBoard &&
+      props.pokemon &&
+      pokemon &&
+      pokemon.hasEvolution
     ) {
-      cost = 0
+      board.forEach((p) => {
+        if (p.name === pokemon.name) {
+          _count++
+        } else if (PkmFamily[p.name] === pokemon.name) {
+          _countEvol++
+        }
+      })
     }
 
-    return (
-      <div
-        className={`nes-container game-pokemon-portrait ${
-          shouldShimmer ? "shimmer" : ""
-        }`}
-        style={{
-          backgroundColor: rarityColor,
-          borderColor: rarityColor,
-          backgroundImage: `url("${getPortraitSrc(
-            pokemonInPortrait.index,
-            pokemonInPortraitConfig?.selectedShiny,
-            pokemonInPortraitConfig?.selectedEmotion
-          )}")`
-        }}
-        onClick={props.click}
-        onMouseEnter={props.onMouseEnter}
-        onMouseLeave={props.onMouseLeave}
-        data-tooltip-id={`tooltip-${props.origin}-${props.index}`}
-      >
-        <Tooltip
-          id={`tooltip-${props.origin}-${props.index}`}
-          className="custom-theme-tooltip game-pokemon-detail-tooltip"
-          place="top"
-        >
-          <GamePokemonDetail
-            key={pokemonInPortrait.id}
-            pokemon={pokemonInPortrait}
-            emotion={pokemonInPortraitConfig?.selectedEmotion}
-            shiny={pokemonInPortraitConfig?.selectedShiny}
-          />
-        </Tooltip>
-        {willEvolve && pokemonEvolution && (
-          <div className="game-pokemon-portrait-evolution">
-            <img
-              src={getPortraitSrc(
-                pokemon.index,
-                pokemonConfig?.selectedShiny,
-                pokemonConfig?.selectedEmotion
-              )}
-              className="game-pokemon-portrait-evolution-portrait"
-            />
-            <img
-              src="/assets/ui/evolution.png"
-              alt=""
-              className="game-pokemon-portrait-evolution-icon"
-            />
-          </div>
-        )}
-        {props.origin === "shop" && (
-          <div className="game-pokemon-portrait-cost">
-            <Money value={cost} />
-          </div>
-        )}
-        <ul className="game-pokemon-portrait-types">
-          {Array.from(pokemon.types.values()).map((type) => {
-            return (
-              <li key={type}>
-                <SynergyIcon type={type} size="1.4vw" />
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    )
+    setCount(_count)
+    setCountEvol(_countEvol)
+  }, [board, board?.size, props.pokemon, pokemon, isOnAnotherBoard])
+
+  if (!props.pokemon || !pokemon) {
+    return <div className="game-pokemon-portrait my-box empty" />
   }
+
+  const customs = spectatedPlayer?.pokemonCustoms
+  const pokemonCustom = getPkmWithCustom(pokemon.index, customs)
+  const rarityColor = RarityColor[pokemon.rarity]
+
+  const evolutionName = spectatedPlayer
+    ? EvolutionManager.getEvolution(pokemon, spectatedPlayer)
+    : (pokemon.evolutions[0] ?? pokemon.evolution)
+  let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
+
+  const willEvolve =
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+    count === pokemon.evolutionRule.numberRequired - 1
+
+  const shouldShimmer =
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+    ((count > 0 && pokemon.hasEvolution) ||
+      (countEvol > 0 && pokemonEvolution.hasEvolution))
+
+  if (
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+    count === pokemon.evolutionRule.numberRequired - 1 &&
+    countEvol === pokemon.evolutionRule.numberRequired - 1 &&
+    pokemonEvolution.hasEvolution
+  ) {
+    const evolutionName2 = spectatedPlayer
+      ? EvolutionManager.getEvolution(
+          pokemonEvolution,
+          spectatedPlayer,
+          stageLevel
+        )
+      : (pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution)
+    pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
+  }
+
+  const pokemonInPortrait =
+    willEvolve && pokemonEvolution ? pokemonEvolution : pokemon
+
+  const cost = getBuyPrice(pokemon.name, specialGameRule)
+
+  const gainedSynergies =
+    pokemonEvolution && willEvolve
+      ? schemaValues(pokemonEvolution.types).filter(
+          (type) => !pokemon.types.has(type)
+        )
+      : []
+  const lostSynergies =
+    pokemonEvolution && willEvolve
+      ? schemaValues(pokemon.types).filter(
+          (type) => !pokemonEvolution.types.has(type)
+        )
+      : []
+
+  const canBuy = spectatedPlayer?.alive && spectatedPlayer?.money >= cost
+
+  return (
+    <div
+      className={cc("my-box", "clickable", "game-pokemon-portrait", {
+        shimmer: shouldShimmer,
+        disabled: !canBuy && props.origin === "shop",
+        planned: props.inPlanner ?? false
+      })}
+      style={{
+        backgroundColor: rarityColor,
+        borderColor: rarityColor,
+        backgroundImage: `url("${getCachedPortrait(pokemonInPortrait.index, customs)}")`
+      }}
+      onClick={(e) => {
+        if (canBuy && props.click) props.click(e)
+      }}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+      data-tooltip-id={`tooltip-${props.origin}-${props.index}`}
+    >
+      <Tooltip
+        id={`tooltip-${props.origin}-${props.index}`}
+        className="custom-theme-tooltip game-pokemon-detail-tooltip"
+        place="top"
+      >
+        <GamePokemonDetail
+          key={pokemonInPortrait.id}
+          pokemon={pokemonInPortrait}
+          emotion={pokemonCustom.emotion}
+          shiny={pokemonCustom.shiny}
+          origin={props.origin}
+        />
+      </Tooltip>
+      {willEvolve && pokemonEvolution && (
+        <div className="game-pokemon-portrait-evolution">
+          <img
+            src={getCachedPortrait(pokemon.index, customs)}
+            className="game-pokemon-portrait-evolution-portrait"
+          />
+          <img
+            src="/assets/ui/evolution.png"
+            alt=""
+            className="game-pokemon-portrait-evolution-icon"
+          />
+        </div>
+      )}
+      {props.inPlanner && (!willEvolve || !pokemonEvolution) && (
+        <img
+          src="/assets/ui/planned.png"
+          alt=""
+          className="game-pokemon-portrait-planned-icon"
+        />
+      )}
+      {props.origin === "shop" && (
+        <div className="game-pokemon-portrait-cost">
+          <Money value={cost} />
+        </div>
+      )}
+      <ul className="game-pokemon-portrait-types">
+        {Array.from(pokemonInPortrait.types.values()).map((type) => {
+          return (
+            <li
+              key={type}
+              className={cc({ gained: gainedSynergies.includes(type) })}
+            >
+              <SynergyIcon type={type} />
+            </li>
+          )
+        })}
+        {lostSynergies.map((type) => (
+          <li key={type} className="lost">
+            <SynergyIcon type={type} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
