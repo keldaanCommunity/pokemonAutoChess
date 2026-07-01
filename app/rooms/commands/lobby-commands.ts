@@ -1,150 +1,123 @@
 import { Command } from "@colyseus/command"
-import { ArraySchema } from "@colyseus/schema"
-import { Client, logger, matchMaker, RoomListingData } from "colyseus"
-import { EmbedBuilder } from "discord.js"
-import { nanoid } from "nanoid"
-import { GameRecord } from "../../models/colyseus-models/game-record"
-import LobbyUser from "../../models/colyseus-models/lobby-user"
-import PokemonConfig from "../../models/colyseus-models/pokemon-config"
-import BannedUser from "../../models/mongo-models/banned-user"
-import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import DetailledStatistic from "../../models/mongo-models/detailled-statistic-v2"
-import UserMetadata, {
-  IPokemonConfig
-} from "../../models/mongo-models/user-metadata"
+import { type Client, matchMaker } from "colyseus"
+import { randomBytes } from "crypto"
 import {
-  PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX,
-  PRECOMPUTED_POKEMONS_PER_RARITY
-} from "../../models/precomputed"
-import { getAvatarSrc, getPortraitSrc } from "../../public/src/utils"
-import {
-  CDN_PORTRAIT_URL,
-  Emotion,
-  ISuggestionUser,
-  PkmWithConfig,
-  Role,
-  Title,
-  Transfer,
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME,
   USERNAME_REGEXP
-} from "../../types"
-import {
-  BoosterRarityProbability,
-  DUST_PER_BOOSTER,
-  DUST_PER_SHINY,
-  EloRank,
-  getEmotionCost
-} from "../../types/Config"
-import { LobbyType, Rarity } from "../../types/enum/Game"
-import { Language } from "../../types/enum/Language"
-import { Pkm, PkmIndex, Unowns } from "../../types/enum/Pokemon"
-import { sum } from "../../utils/array"
+} from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
+import { CollectionUtils } from "../../core/collection"
+import { getPendingGame } from "../../core/pending-game-manager"
+import UserMetadata from "../../models/mongo-models/user-metadata"
+import { discordService } from "../../services/discord"
+import { notificationsService } from "../../services/notifications"
+import { Emotion, Role, type Title, Transfer } from "../../types"
+import { CloseCodes } from "../../types/enum/CloseCodes"
+import { EloRank } from "../../types/enum/EloRank"
+import { GameMode } from "../../types/enum/Game"
+import type { Language } from "../../types/enum/Language"
+import { PkmIndex } from "../../types/enum/Pokemon"
+import { Starters } from "../../types/enum/Starters"
+import type {
+  IPokemonCollectionItemMongo,
+  IUserMetadataMongo
+} from "../../types/interfaces/UserMetadata"
+import { getPortraitSrc } from "../../utils/avatar"
+import { getRank } from "../../utils/elo"
+import { logger } from "../../utils/logger"
+import { generateRandomName } from "../../utils/name-generation"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { chance, pickRandomIn } from "../../utils/random"
-import CustomLobbyRoom from "../custom-lobby-room"
+import { pickRandomIn } from "../../utils/random"
+import type CustomLobbyRoom from "../custom-lobby-room"
 
 export class OnJoinCommand extends Command<
   CustomLobbyRoom,
   {
     client: Client
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
+    user: IUserMetadataMongo | null
   }
 > {
   async execute({
     client,
-    rooms = []
+    user
   }: {
     client: Client
-    options: any
-    auth: any
-    rooms: RoomListingData<any>[] | undefined
+    user: IUserMetadataMongo | null
   }) {
     try {
       //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
-      client.send(Transfer.ROOMS, rooms)
-      const user = await UserMetadata.findOne({ uid: client.auth.uid })
+      client.send(Transfer.ROOMS, this.room.rooms)
+      client.userData = { joinedAt: Date.now() }
 
       if (user) {
         // load existing account
-        const stats = await DetailledStatistic.find(
-          { playerId: client.auth.uid },
-          ["pokemons", "time", "rank", "elo"],
-          { limit: 10, sort: { time: -1 } }
+        this.room.users.set(client.auth.uid, user)
+        const pendingGame = await getPendingGame(
+          this.room.presence,
+          client.auth.uid
         )
-        if (stats) {
-          const records = new ArraySchema<GameRecord>()
-          stats.forEach((record) => {
-            records.push(
-              new GameRecord(
-                record.time,
-                record.rank,
-                record.elo,
-                record.pokemons
-              )
-            )
-          })
+        if (pendingGame != null && !pendingGame.isExpired) {
+          client.send(Transfer.RECONNECT_PROMPT, pendingGame.gameId)
+        }
 
-          this.state.users.set(
-            client.auth.uid,
-            new LobbyUser(
-              user.uid,
-              user.displayName,
-              user.elo,
-              user.avatar,
-              user.wins,
-              user.exp,
-              user.level,
-              user.donor,
-              records,
-              user.honors,
-              user.pokemonCollection,
-              user.booster,
-              user.titles,
-              user.title,
-              user.role,
-              client.auth.email === undefined &&
-                client.auth.photoURL === undefined,
-              client.auth.metadata.creationTime,
-              client.auth.metadata.lastSignInTime,
-              user.language
-            )
-          )
+        // Send any pending notifications
+        const notifications = notificationsService.getNotifications(
+          client.auth.uid
+        )
+        if (notifications.length > 0) {
+          client.send(Transfer.NOTIFICATIONS, notifications)
         }
       } else {
         // create new user account
-        const numberOfBoosters = 3
-        UserMetadata.create({
-          uid: client.auth.uid,
-          displayName: client.auth.displayName,
-          booster: numberOfBoosters,
-          pokemonCollection: new Map<string, IPokemonConfig>()
-        })
-        this.state.users.set(
-          client.auth.uid,
-          new LobbyUser(
-            client.auth.uid,
-            client.auth.displayName,
-            1000,
-            "0019/Normal",
-            0,
-            0,
-            0,
-            false,
-            [],
-            [],
-            new Map<string, IPokemonConfig>(),
-            numberOfBoosters,
-            [],
-            "",
-            Role.BASIC,
-            client.auth.email === undefined &&
-              client.auth.photoURL === undefined,
-            client.auth.metadata.creationTime,
-            client.auth.metadata.lastSignInTime,
-            ""
-          )
+        const starterBoosters = 3
+        const starterPokemon = pickRandomIn(Starters)
+        const randomName = generateRandomName(starterPokemon)
+        const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
+        const starterCollection = new Map<string, IPokemonCollectionItemMongo>()
+        const starterCollectionItem: IPokemonCollectionItemMongo = {
+          id: PkmIndex[starterPokemon],
+          unlocked: Buffer.alloc(5, 0),
+          dust: 0,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        CollectionUtils.unlockEmotion(
+          starterCollectionItem.unlocked,
+          Emotion.NORMAL,
+          false
         )
+        starterCollection.set(PkmIndex[starterPokemon], starterCollectionItem)
+
+        await UserMetadata.create({
+          uid: client.auth.uid,
+          displayName: randomName,
+          avatar: starterAvatar,
+          booster: starterBoosters,
+          pokemonCollection: starterCollection
+        })
+        const newUser: IUserMetadataMongo = {
+          uid: client.auth.uid,
+          displayName: randomName,
+          language: client.auth.metadata.language,
+          avatar: starterAvatar,
+          games: 0,
+          wins: 0,
+          exp: 0,
+          level: 0,
+          elo: 1000,
+          maxElo: 1000,
+          eventPoints: 0,
+          maxEventPoints: 0,
+          eventFinishTime: null,
+          pokemonCollection: starterCollection,
+          booster: starterBoosters,
+          titles: [],
+          title: "",
+          role: Role.BASIC
+        }
+        this.room.users.set(client.auth.uid, newUser)
       }
     } catch (error) {
       logger.error(error)
@@ -160,7 +133,7 @@ export class OnLeaveCommand extends Command<
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
         //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
-        this.state.users.delete(client.auth.uid)
+        this.room.users.delete(client.auth.uid)
       }
     } catch (error) {
       logger.error(error)
@@ -182,8 +155,8 @@ export class GiveTitleCommand extends Command<
     title: Title
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid })
@@ -195,6 +168,22 @@ export class GiveTitleCommand extends Command<
             targetUser.titles.push(title)
           }
         }
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class DeleteAccountCommand extends Command<CustomLobbyRoom> {
+  async execute({ client }: { client: Client }) {
+    try {
+      if (client.auth.uid) {
+        logger.info(
+          `User ${client.auth.displayName} [${client.auth.uid}] has deleted their account`
+        )
+        await UserMetadata.deleteOne({ uid: client.auth.uid })
+        client.leave(CloseCodes.USER_DELETED)
       }
     } catch (error) {
       logger.error(error)
@@ -216,8 +205,8 @@ export class GiveBoostersCommand extends Command<
     numberOfBoosters: number
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
 
       if (u && u.role && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid: uid })
@@ -250,8 +239,8 @@ export class GiveRoleCommand extends Command<
     role: Role
   }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      const targetUser = this.state.users.get(uid)
+      const u = this.room.users.get(client.auth.uid)
+      const targetUser = this.room.users.get(uid)
       // logger.debug(u.role, uid)
       if (u && u.role === Role.ADMIN) {
         const user = await UserMetadata.findOne({ uid: uid })
@@ -278,9 +267,13 @@ export class OnNewMessageCommand extends Command<
       const MAX_MESSAGE_LENGTH = 250
       message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-      const user = this.state.users.get(client.auth.uid)
-      if (user && !user.anonymous && message != "") {
-        this.state.addMessage(message, user.id, user.name, user.avatar)
+      const user = this.room.users.get(client.auth.uid)
+      if (
+        user &&
+        [Role.ADMIN, Role.MODERATOR].includes(user.role) &&
+        message != ""
+      ) {
+        this.state.addMessage(message, user.uid, user.displayName, user.avatar)
       }
     } catch (error) {
       logger.error(error)
@@ -294,7 +287,7 @@ export class RemoveMessageCommand extends Command<
 > {
   execute({ client, messageId }: { client: Client; messageId: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (
         user &&
         user.role &&
@@ -308,127 +301,21 @@ export class RemoveMessageCommand extends Command<
   }
 }
 
-export class OpenBoosterCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client }
-> {
-  async execute({ client }: { client: Client }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-
-      const NB_BOOSTERS = 10
-      if (user && user.booster && user.booster > 0) {
-        user.booster -= 1
-        const boosterContent: PkmWithConfig[] = []
-
-        for (let i = 0; i < NB_BOOSTERS; i++) {
-          const guaranteedUnique = i === NB_BOOSTERS - 1
-          boosterContent.push(pickRandomPokemonBooster(guaranteedUnique))
-        }
-
-        boosterContent.forEach((pkmWithConfig) => {
-          const i = PkmIndex[pkmWithConfig.name]
-          const c = user.pokemonCollection.get(i)
-          const dustGain = pkmWithConfig.shiny
-            ? DUST_PER_SHINY
-            : DUST_PER_BOOSTER
-
-          if (c) {
-            c.dust += dustGain
-          } else {
-            const newConfig = new PokemonConfig(i)
-            newConfig.dust += dustGain
-            user.pokemonCollection.set(i, newConfig)
-          }
-        })
-
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
-
-        if (u) {
-          u.booster = user.booster
-          boosterContent.forEach((pkmWithConfig) => {
-            const i = PkmIndex[pkmWithConfig.name]
-            const c = u.pokemonCollection.get(i)
-            const dustGain = pkmWithConfig.shiny
-              ? DUST_PER_SHINY
-              : DUST_PER_BOOSTER
-
-            if (c) {
-              c.dust += dustGain
-            } else {
-              u.pokemonCollection.set(i, {
-                id: i,
-                emotions: [],
-                shinyEmotions: [],
-                dust: dustGain,
-                selectedEmotion: Emotion.NORMAL,
-                selectedShiny: false
-              })
-            }
-          })
-          u.save()
-        }
-
-        client.send(Transfer.BOOSTER_CONTENT, boosterContent)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-function pickRandomPokemonBooster(guarantedUnique: boolean): PkmWithConfig {
-  let pkm = Pkm.MAGIKARP,
-    shiny = chance(0.03),
-    emotion = Emotion.NORMAL
-  const rarities = Object.keys(Rarity) as Rarity[]
-  const seed = Math.random() * sum(Object.values(BoosterRarityProbability))
-  let threshold = 0
-
-  if (guarantedUnique) {
-    pkm = pickRandomIn([
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
-      ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
-    ]) as Pkm
-  } else {
-    for (let i = 0; i < rarities.length; i++) {
-      const rarity = rarities[i]
-      const rarityProbability = BoosterRarityProbability[rarity]
-      threshold += rarityProbability
-      if (
-        seed < threshold &&
-        PRECOMPUTED_POKEMONS_PER_RARITY[rarity] &&
-        PRECOMPUTED_POKEMONS_PER_RARITY[rarity].length > 0
-      ) {
-        pkm = pickRandomIn(PRECOMPUTED_POKEMONS_PER_RARITY[rarity]) as Pkm
-        break
-      }
-    }
-  }
-
-  const availableEmotions = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[PkmIndex[pkm]]?.[i] === 1
-  )
-  emotion = pickRandomIn(availableEmotions)
-
-  return { name: pkm, shiny, emotion }
-}
-
 export class ChangeNameCommand extends Command<
   CustomLobbyRoom,
   { client: Client; name: string }
 > {
   async execute({ client, name }: { client: Client; name: string }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
       if (!user) return
       if (USERNAME_REGEXP.test(name)) {
-        user.name = name
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.displayName = name
-          usr.save()
+        logger.info(`${client.auth.displayName} changed name to ${name}`)
+        user.displayName = name
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.displayName = name
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -443,61 +330,16 @@ export class ChangeTitleCommand extends Command<
 > {
   async execute({ client, title }: { client: Client; title: Title | "" }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user) {
-        if (user.title === title) {
-          title = "" // remove title if user already has it
-        }
-        user.title = title
-        const usr = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (usr) {
-          usr.title = title
-          usr.save()
-        }
+      const user = this.room.users.get(client.auth.uid)
+      if (title !== "" && user?.titles.includes(title) === false) {
+        throw new Error("User does not have this title unlocked")
       }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class ChangeSelectedEmotionCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string; emotion: Emotion; shiny: boolean }
-> {
-  async execute({
-    client,
-    emotion,
-    index,
-    shiny
-  }: {
-    client: Client
-    index: string
-    emotion: Emotion
-    shiny: boolean
-  }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (pokemonConfig) {
-        const emotionsToCheck = shiny
-          ? pokemonConfig.shinyEmotions
-          : pokemonConfig.emotions
-        if (
-          emotionsToCheck.includes(emotion) &&
-          (emotion != pokemonConfig.selectedEmotion ||
-            shiny != pokemonConfig.selectedShiny)
-        ) {
-          pokemonConfig.selectedEmotion = emotion
-          pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          const pkmConfig = u?.pokemonCollection.get(index)
-          if (u && pkmConfig) {
-            pkmConfig.selectedEmotion = emotion
-            pkmConfig.selectedShiny = shiny
-            u.save()
-          }
+      if (user) {
+        user.title = title
+        const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (mongoUser) {
+          mongoUser.title = title
+          await mongoUser.save()
         }
       }
     } catch (error) {
@@ -522,154 +364,22 @@ export class ChangeAvatarCommand extends Command<
     shiny: boolean
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
+      const user = this.room.users.get(client.auth.uid)
+      const mongoUser = await UserMetadata.findOne({ uid: client.auth.uid })
       if (!user) return
-      const config = user.pokemonCollection.get(index)
-      if (config) {
-        const emotionsToCheck = shiny ? config.shinyEmotions : config.emotions
-        if (emotionsToCheck.includes(emotion)) {
-          const portrait = getPortraitSrc(index, shiny, emotion)
-            .replace(CDN_PORTRAIT_URL, "")
-            .replace(".png", "")
-          user.avatar = portrait
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            u.avatar = portrait
-            u.save()
-          }
-        }
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class BuyEmotionCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string; emotion: Emotion; shiny: boolean }
-> {
-  async execute({
-    client,
-    emotion,
-    index,
-    shiny
-  }: {
-    client: Client
-    index: string
-    emotion: Emotion
-    shiny: boolean
-  }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (pokemonConfig) {
-        const emotionsToCheck = shiny
-          ? pokemonConfig.shinyEmotions
-          : pokemonConfig.emotions
-        const cost = getEmotionCost(emotion, shiny)
-        if (!emotionsToCheck.includes(emotion) && pokemonConfig.dust >= cost) {
-          emotionsToCheck.push(emotion)
-          pokemonConfig.dust -= cost
-          pokemonConfig.selectedEmotion = emotion
-          pokemonConfig.selectedShiny = shiny
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            let numberOfShinies = 0
-            u.pokemonCollection.forEach((c) => {
-              numberOfShinies += c.shinyEmotions.length
-            })
-            if (
-              numberOfShinies > 30 &&
-              !u.titles.includes(Title.SHINY_SEEKER)
-            ) {
-              u.titles.push(Title.SHINY_SEEKER)
-            }
-            if (
-              u.pokemonCollection.size >= 30 &&
-              !u.titles.includes(Title.DUKE)
-            ) {
-              u.titles.push(Title.DUKE)
-            }
-            if (
-              emotion === Emotion.ANGRY &&
-              index === PkmIndex[Pkm.ARBOK] &&
-              !u.titles.includes(Title.DENTIST)
-            ) {
-              u.titles.push(Title.DENTIST)
-            }
-
-            const uPokemonConfig = u.pokemonCollection.get(index)
-
-            if (uPokemonConfig) {
-              if (
-                uPokemonConfig.shinyEmotions.length >=
-                  Object.keys(Emotion).length &&
-                uPokemonConfig.emotions.length >= Object.keys(Emotion).length &&
-                !u.titles.includes(Title.DUCHESS)
-              ) {
-                u.titles.push(Title.DUCHESS)
-              }
-
-              if (
-                !u.titles.includes(Title.ARCHEOLOGIST) &&
-                Unowns.every((name) => {
-                  const index = PkmIndex[name]
-                  const collection = u.pokemonCollection.get(index)
-                  const isUnlocked =
-                    collection &&
-                    (collection.emotions.length > 0 ||
-                      collection.shinyEmotions.length > 0)
-                  return isUnlocked || index === index
-                })
-              ) {
-                u.titles.push(Title.ARCHEOLOGIST)
-              }
-
-              if (shiny) {
-                uPokemonConfig.shinyEmotions.push(emotion)
-              } else {
-                uPokemonConfig.emotions.push(emotion)
-              }
-
-              uPokemonConfig.dust -= cost
-              uPokemonConfig.selectedEmotion = emotion
-              uPokemonConfig.selectedShiny = shiny
-              u.save()
-            }
-          }
-        }
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class BuyBoosterCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; index: string }
-> {
-  async execute({ client, index }: { client: Client; index: string }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-      const pokemonConfig = user.pokemonCollection.get(index)
-      if (pokemonConfig) {
-        const BOOSTER_COST = 500
-        if (pokemonConfig.dust >= BOOSTER_COST) {
-          pokemonConfig.dust -= BOOSTER_COST
-          user.booster += 1
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          const pkmConfig = u?.pokemonCollection.get(index)
-          if (u && pkmConfig) {
-            pkmConfig.dust = pokemonConfig.dust
-            u.booster = user.booster
-            u.save()
-          }
-        }
-      }
+      if (!mongoUser) return
+      const collectionItem = mongoUser.pokemonCollection.get(index)
+      if (
+        !collectionItem ||
+        !CollectionUtils.hasUnlocked(collectionItem.unlocked, emotion, shiny)
+      )
+        return
+      const portrait = getPortraitSrc(index, shiny, emotion)
+        .replace("/assets/portraits/", "")
+        .replace(".png", "")
+      user.avatar = portrait
+      mongoUser.avatar = portrait
+      mongoUser.save()
     } catch (error) {
       logger.error(error)
     }
@@ -684,69 +394,7 @@ export class OnSearchByIdCommand extends Command<
     try {
       const user = await UserMetadata.findOne({ uid: uid })
       if (user) {
-        const statistic = await DetailledStatistic.find(
-          { playerId: user.uid },
-          ["pokemons", "time", "rank", "elo"],
-          { limit: 10, sort: { time: -1 } }
-        )
-        if (statistic) {
-          client.send(
-            Transfer.USER,
-            new LobbyUser(
-              user.uid,
-              user.displayName,
-              user.elo,
-              user.avatar,
-              user.wins,
-              user.exp,
-              user.level,
-              user.donor,
-              statistic.map((r) => {
-                return new GameRecord(r.time, r.rank, r.elo, r.pokemons)
-              }),
-              user.honors,
-              user.pokemonCollection,
-              user.booster,
-              user.titles,
-              user.title,
-              user.role,
-              false,
-              client.auth.metadata.creationTime,
-              client.auth.metadata.lastSignInTime,
-              user.language
-            )
-          )
-        }
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnSearchCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; name: string }
-> {
-  async execute({ client, name }: { client: Client; name: string }) {
-    try {
-      const regExp = new RegExp("^" + name)
-      const users = await UserMetadata.find(
-        { displayName: { $regex: regExp, $options: "i" } },
-        ["uid", "elo", "displayName", "level", "avatar"],
-        { limit: 100, sort: { level: -1 } }
-      )
-      if (users) {
-        const suggestions: Array<ISuggestionUser> = users.map((u) => {
-          return {
-            id: u.uid,
-            elo: u.elo,
-            name: u.displayName,
-            level: u.level,
-            avatar: u.avatar
-          }
-        })
-        client.send(Transfer.SUGGESTIONS, suggestions)
+        client.send(Transfer.USER, user)
       }
     } catch (error) {
       logger.error(error)
@@ -756,59 +404,50 @@ export class OnSearchCommand extends Command<
 
 export class BanUserCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; uid: string; name: string; reason: string }
+  { client: Client; uid: string; reason: string }
 > {
   async execute({
     client,
     uid,
-    name,
     reason
   }: {
     client: Client
     uid: string
-    name: string
     reason: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
+      const bannedUser = await UserMetadata.findOne({ uid })
+      const user = this.room.users.get(client.auth.uid)
+      if (
+        user &&
+        bannedUser &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR) &&
+        bannedUser.role !== Role.ADMIN
+      ) {
+        const res = await UserMetadata.updateOne({ uid }, { banned: true })
         this.state.removeMessages(uid)
-        const banned = await BannedUser.findOne({ uid })
-        if (!banned) {
-          BannedUser.create({
-            uid,
-            author: user.name,
-            time: Date.now(),
-            name
-          })
-          client.send(Transfer.BANNED, `${user.name} banned the user ${name}`)
+        if (res.modifiedCount > 0) {
+          client.send(
+            Transfer.ALERT,
+            `${user.displayName} banned the user ${bannedUser.displayName}`
+          )
 
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(`${user.name} banned the user ${name}`)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `${user.name} banned the user ${name}. Reason: ${reason}`
-            )
-            .setThumbnail(getAvatarSrc(user.avatar))
-          try {
-            this.room.discordBanWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+          discordService.announceBan(user, bannedUser, reason)
+          bannedUser.banned = true
+          client.send(Transfer.USER, bannedUser)
         } else {
-          client.send(Transfer.BANNED, `${name} was already banned`)
+          client.send(
+            Transfer.ALERT,
+            `${bannedUser.displayName} was already banned`
+          )
         }
         this.room.clients.forEach((c) => {
           if (c.auth.uid === uid) {
-            c.send(Transfer.BAN)
-            c.leave()
+            c.leave(CloseCodes.USER_BANNED)
           }
         })
+      } else if (!bannedUser) {
+        client.send(Transfer.ALERT, `No user found with ID ${uid}`)
       }
     } catch (error) {
       logger.error(error)
@@ -818,39 +457,42 @@ export class BanUserCommand extends Command<
 
 export class UnbanUserCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; uid: string; name: string }
+  { client: Client; uid: string; reason: string }
 > {
   async execute({
     client,
     uid,
-    name
+    reason
   }: {
     client: Client
     uid: string
-    name: string
+    reason: string
   }) {
     try {
-      const user = this.state.users.get(client.auth.uid)
-      if (user && (user.role === Role.ADMIN || user.role === Role.MODERATOR)) {
-        const res = await BannedUser.deleteOne({ uid })
-        if (res.deletedCount > 0) {
-          client.send(Transfer.BANNED, `${user.name} unbanned the user ${name}`)
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(`${user.name} unbanned the user ${name}`)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(`${user.name} unbanned the user ${name}`)
-            .setThumbnail(getAvatarSrc(user.avatar))
-          try {
-            this.room.discordBanWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+      const unbannedUser = await UserMetadata.findOne({ uid })
+      const user = this.room.users.get(client.auth.uid)
+      if (
+        unbannedUser &&
+        user &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+      ) {
+        const res = await UserMetadata.updateOne({ uid }, { banned: false })
+        if (res.modifiedCount > 0) {
+          client.send(
+            Transfer.ALERT,
+            `${user.displayName} unbanned the user ${unbannedUser?.displayName} (User ID: ${uid})`
+          )
+          discordService.announceUnban(user, unbannedUser, reason)
+          unbannedUser.banned = false
+          client.send(Transfer.USER, unbannedUser)
+        } else {
+          client.send(
+            Transfer.ALERT,
+            `${unbannedUser.displayName} was not banned`
+          )
         }
+      } else if (!unbannedUser) {
+        client.send(Transfer.ALERT, `No user found with ID ${uid}`)
       }
     } catch (error) {
       logger.error(error)
@@ -864,12 +506,12 @@ export class SelectLanguageCommand extends Command<
 > {
   async execute({ client, message }: { client: Client; message: Language }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
+      const u = this.room.users.get(client.auth.uid)
       if (client.auth.uid && u) {
         const user = await UserMetadata.findOne({ uid: client.auth.uid })
         if (user) {
           user.language = message
-          user.save()
+          await user.save()
         }
         u.language = message
       }
@@ -879,262 +521,231 @@ export class SelectLanguageCommand extends Command<
   }
 }
 
-export class AddBotCommand extends Command<
+export class JoinOrOpenRoomCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; message: any }
+  { client: Client; gameMode: GameMode }
 > {
-  async execute({ client, message }: { client: Client; message: any }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (
-        user &&
-        (user.role === Role.ADMIN ||
-          user.role === Role.BOT_MANAGER ||
-          user.role === Role.MODERATOR)
-      ) {
-        const id = message.slice(21)
-        client.send(Transfer.BOT_DATABASE_LOG, `retrieving id : ${id} ...`)
-        client.send(Transfer.BOT_DATABASE_LOG, "retrieving data ...")
-        const data = await this.room.pastebin?.getPaste(id, false)
-        if (data) {
-          client.send(Transfer.BOT_DATABASE_LOG, "parsing JSON data ...")
-          const json = JSON.parse(data)
-          const resultDelete = await BotV2.deleteMany({
-            avatar: json.avatar,
-            author: json.author
-          })
-          const keys = new Array<string>()
-          this.room.bots.forEach((b) => {
-            if (b.avatar === json.avatar && b.author === json.author) {
-              keys.push(b.id)
-            }
-          })
-          keys.forEach((k) => {
-            this.room.bots.delete(k)
-          })
-          client.send(
-            Transfer.BOT_DATABASE_LOG,
-            JSON.stringify(resultDelete, null, 2)
-          )
-          client.send(
-            Transfer.BOT_DATABASE_LOG,
-            `creating Bot ${json.avatar} by ${json.author}...`
-          )
-          const resultCreate = await BotV2.create({
-            name: json.name,
-            avatar: json.avatar,
-            elo: json.elo ? json.elo : 1200,
-            author: json.author,
-            steps: json.steps,
-            id: nanoid()
-          })
+  async execute({ client, gameMode }: { client: Client; gameMode: GameMode }) {
+    const user = this.room.users.get(client.auth.uid)
+    if (!user) return
 
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(
-              `BOT ${json.name} by @${json.author} loaded by ${user.name}`
-            )
-            .setURL(message as string)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `BOT ${json.name} by @${json.author} (url: ${message} ) loaded by ${user.name}`
-            )
-            .setThumbnail(getAvatarSrc(json.avatar))
-          try {
-            this.room.discordWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
+    switch (gameMode) {
+      case GameMode.CUSTOM_LOBBY:
+        return [new OpenGameCommand().setPayload({ gameMode, client })]
 
-          this.room.bots.set(resultCreate.id, resultCreate)
-          this.room.broadcast(
-            Transfer.REQUEST_BOT_LIST,
-            createBotList(this.room.bots, { withSteps: true })
-          )
+      case GameMode.CLASSIC: {
+        const existingClassicLobby = this.room.rooms?.find(
+          (room) =>
+            room.name === "preparation" &&
+            room.metadata?.gameMode === GameMode.CLASSIC &&
+            room.clients < MAX_PLAYERS_PER_GAME
+        )
+        if (existingClassicLobby) {
+          client.send(Transfer.REQUEST_ROOM, existingClassicLobby.roomId)
         } else {
+          return [new OpenGameCommand().setPayload({ gameMode, client })]
+        }
+        break
+      }
+
+      case GameMode.RANKED: {
+        if (user.level < GADGETS.certificate.levelRequired) {
           client.send(
-            Transfer.BOT_DATABASE_LOG,
-            `no pastebin found with given url ${message}`
+            Transfer.ALERT,
+            `You need to reach level ${GADGETS.certificate.levelRequired} to unlock ranked mode.`
           )
+          return
         }
-      }
-    } catch (error) {
-      logger.error(error)
-      client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
-    }
-  }
-}
-
-export class DeleteBotCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; message: string }
-> {
-  async execute({ client, message }: { client: Client; message: string }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (
-        user &&
-        (user.role === Role.ADMIN ||
-          user.role === Role.BOT_MANAGER ||
-          user.role === Role.MODERATOR)
-      ) {
-        const id = message
-        const botData = this.room.bots.get(id)
-        client.send(
-          Transfer.BOT_DATABASE_LOG,
-          `deleting bot ${botData?.name}by @${botData?.author} id ${id}`
-        )
-        const resultDelete = await BotV2.deleteOne({ id: id })
-        client.send(
-          Transfer.BOT_DATABASE_LOG,
-          JSON.stringify(resultDelete, null, 2)
-        )
-        const dsEmbed = new EmbedBuilder()
-          .setTitle(
-            `BOT ${botData?.name} by @${botData?.author} deleted by ${user.name}`
-          )
-          .setAuthor({
-            name: user.name,
-            iconURL: getAvatarSrc(user.avatar)
-          })
-          .setDescription(
-            `BOT ${botData?.name} by @${botData?.author} (id: ${message} ) deleted by ${user.name}`
-          )
-          .setThumbnail(getAvatarSrc(botData?.avatar ? botData?.avatar : ""))
-        try {
-          this.room.discordWebhook?.send({
-            embeds: [dsEmbed]
-          })
-        } catch (error) {
-          logger.error(error)
+        const userRank = getRank(user.elo)
+        let minRank = EloRank.LEVEL_BALL
+        let maxRank = EloRank.BEAST_BALL
+        switch (userRank) {
+          case EloRank.LEVEL_BALL:
+          case EloRank.NET_BALL:
+            // 0- 1099
+            minRank = EloRank.LEVEL_BALL
+            maxRank = EloRank.NET_BALL
+            break
+          case EloRank.SAFARI_BALL:
+          case EloRank.LOVE_BALL:
+            // 1050-1200
+            minRank = EloRank.NET_BALL
+            maxRank = EloRank.LOVE_BALL
+            break
+          case EloRank.PREMIER_BALL:
+          case EloRank.QUICK_BALL:
+            // 1150-1299
+            minRank = EloRank.LOVE_BALL
+            maxRank = EloRank.QUICK_BALL
+            break
+          case EloRank.POKE_BALL:
+          case EloRank.SUPER_BALL:
+          case EloRank.ULTRA_BALL:
+          case EloRank.MASTER_BALL:
+          case EloRank.BEAST_BALL:
+            // 1250+
+            minRank = EloRank.QUICK_BALL
+            maxRank = EloRank.BEAST_BALL
+            break
         }
-
-        this.room.bots.delete(id)
-        this.room.broadcast(
-          Transfer.REQUEST_BOT_LIST,
-          createBotList(this.room.bots, { withSteps: true })
-        )
+        const existingRanked = this.room.rooms?.find((room) => {
+          const { minRank, maxRank, gameMode } = room.metadata ?? {}
+          const minElo = minRank ? EloRankThreshold[minRank] : 0
+          const maxRankThreshold = maxRank
+            ? EloRankThreshold[maxRank]
+            : Infinity
+          return (
+            room.name === "preparation" &&
+            gameMode === GameMode.RANKED &&
+            user.elo >= minElo &&
+            (user.elo <= maxRankThreshold || userRank === maxRank) &&
+            room.clients < MAX_PLAYERS_PER_GAME
+          )
+        })
+        if (existingRanked) {
+          client.send(Transfer.REQUEST_ROOM, existingRanked.roomId)
+        } else {
+          return [
+            new OpenGameCommand().setPayload({
+              gameMode,
+              client,
+              minRank,
+              maxRank
+            })
+          ]
+        }
+        break
       }
-    } catch (error) {
-      logger.error(error)
-      client.send(Transfer.BOT_DATABASE_LOG, JSON.stringify(error))
+
+      case GameMode.SCRIBBLE: {
+        const existingScribble = this.room.rooms?.find(
+          (room) =>
+            room.name === "preparation" &&
+            room.metadata?.gameMode === GameMode.SCRIBBLE &&
+            room.clients < MAX_PLAYERS_PER_GAME
+        )
+        if (existingScribble) {
+          client.send(Transfer.REQUEST_ROOM, existingScribble.roomId)
+        } else {
+          return [new OpenGameCommand().setPayload({ gameMode, client })]
+        }
+        break
+      }
     }
   }
 }
 
-export function createBotList(
-  bots: Map<string, IBot>,
-  options: { withSteps: boolean } = { withSteps: true }
-): Partial<IBot>[] {
-  return [...bots.values()].map((bot) => ({
-    name: bot.name,
-    avatar: bot.avatar,
-    id: bot.id,
-    author: bot.author,
-    elo: bot.elo,
-    ...(options.withSteps ? { steps: bot.steps } : {})
-  }))
-}
-
-export class OnBotUploadCommand extends Command<
+export class OpenGameCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; bot: IBot }
-> {
-  execute({ client, bot }: { client: Client; bot: IBot }) {
-    try {
-      const user = this.state.users.get(client.auth.uid)
-      if (!user) return
-      this.room.pastebin
-        ?.createPaste({
-          text: JSON.stringify(bot),
-          title: `${user.name} has uploaded BOT ${bot.name}`,
-          format: "json"
-        })
-        .then((data: unknown) => {
-          const dsEmbed = new EmbedBuilder()
-            .setTitle(`BOT ${bot.name} created by ${bot.author}`)
-            .setURL(data as string)
-            .setAuthor({
-              name: user.name,
-              iconURL: getAvatarSrc(user.avatar)
-            })
-            .setDescription(
-              `A new bot has been created by ${user.name}, You can import the data in the Pokemon Auto Chess Bot Builder (url: ${data} ).`
-            )
-            .setThumbnail(getAvatarSrc(bot.avatar))
-          client.send(Transfer.PASTEBIN_URL, { url: data as string })
-          try {
-            this.room.discordWebhook?.send({
-              embeds: [dsEmbed]
-            })
-          } catch (error) {
-            logger.error(error)
-          }
-        })
-        .catch((error) => {
-          logger.error(error)
-        })
-    } catch (error) {
-      logger.error(error)
-    }
+  {
+    gameMode: GameMode
+    client: Client
+    minRank?: EloRank
+    maxRank?: EloRank
   }
-}
-
-export class OpenSpecialLobbyCommand extends Command<
-  CustomLobbyRoom,
-  { lobbyType: LobbyType; minRank?: EloRank | null; noElo?: boolean }
 > {
-  execute({
-    lobbyType,
+  async execute({
+    gameMode,
+    client,
     minRank,
-    noElo
+    maxRank
   }: {
-    lobbyType: LobbyType
-    minRank?: EloRank | null
-    noElo?: boolean
+    gameMode: GameMode
+    client: Client
+    minRank?: EloRank
+    maxRank?: EloRank
   }) {
-    logger.info(`Creating special Lobby ${lobbyType} ${minRank ?? ""}`)
-    let roomName = "Special Lobby"
-    if (lobbyType === LobbyType.RANKED) {
-      if (minRank === EloRank.GREATBALL) {
-        roomName = "Great Ball Ranked Match"
-      }
-      if (minRank === EloRank.ULTRABALL) {
-        roomName = "Ultra Ball Ranked Match"
-      }
-    } else if (lobbyType === LobbyType.SCRIBBLE) {
+    const user = this.room.users.get(client.auth.uid)
+    if (!user) return
+    let roomName = `${user.displayName}'${user.displayName.endsWith("s") ? "" : "s"} room`
+    let noElo: boolean = true
+    let password: string | null = null
+    let ownerId: string | null = null
+
+    if (gameMode === GameMode.RANKED) {
+      roomName = "Ranked Match"
+      noElo = false
+    } else if (gameMode === GameMode.SCRIBBLE) {
       roomName = "Smeargle's Scribble"
+    } else if (gameMode === GameMode.CUSTOM_LOBBY) {
+      ownerId = user.uid
+      const secureCode = randomBytes(4)
+        .toString("base64url")
+        .replace(/[^a-zA-Z0-9]/g, "")
+      password = (secureCode + randomBytes(4).toString("hex"))
+        .substring(0, 4)
+        .toUpperCase()
+    } else if (gameMode === GameMode.CLASSIC) {
+      roomName = "Classic"
     }
 
-    matchMaker.createRoom("preparation", {
-      lobbyType,
+    const newRoom = await matchMaker.createRoom("preparation", {
+      gameMode,
       minRank,
+      maxRank,
       noElo,
-      ownerId: null,
-      roomName,
-      autoStartDelayInSeconds: 15 * 60
+      password,
+      ownerId,
+      roomName
     })
-
-    this.state.getNextSpecialLobbyDate()
+    client.send(Transfer.REQUEST_ROOM, newRoom.roomId)
   }
 }
 
-export class MakeServerAnnouncementCommand extends Command<
+export class DeleteRoomCommand extends Command<
   CustomLobbyRoom,
-  { client: Client; message: string }
+  {
+    client: Client
+    roomId?: string
+    tournamentId?: string
+    bracketId?: string
+  }
 > {
-  async execute({ client, message }: { client: Client; message: string }) {
+  async execute({ client, roomId, tournamentId, bracketId }) {
     try {
-      const u = this.state.users.get(client.auth.uid)
-      if (u && u.role && u.role === Role.ADMIN) {
-        this.room.presence.publish("server-announcement", message)
+      if (client) {
+        const user = this.room.users.get(client.auth.uid)
+        if (!user || !user.role || user.role !== Role.ADMIN) {
+          return
+        }
       }
+
+      const roomsIdToDelete: string[] = []
+      if (roomId) {
+        roomsIdToDelete.push(roomId)
+      } else if (tournamentId) {
+        const tournament = this.state.tournaments.find(
+          (t) => t.id === tournamentId
+        )
+        if (!tournament)
+          return logger.error(
+            `DeleteRoomCommand ; Tournament not found: ${tournamentId}`
+          )
+
+        const allRooms = await matchMaker.query({})
+        roomsIdToDelete.push(
+          ...allRooms
+            .filter(
+              (result) =>
+                result.metadata?.tournamentId === tournamentId &&
+                (bracketId === "all" ||
+                  result.metadata?.bracketId === bracketId)
+            )
+            .map((result) => result.roomId)
+        )
+      }
+
+      if (roomsIdToDelete.length === 0) {
+        return logger.error(
+          `DeleteRoomCommand ; room not found with query: roomId: ${roomId} tournamentId: ${tournamentId} bracketId: ${bracketId}`
+        )
+      }
+
+      roomsIdToDelete.forEach((roomIdToDelete) => {
+        this.room.presence.publish("room-deleted", roomIdToDelete)
+      })
     } catch (error) {
-      logger.error(error)
+      logger.error(`DeleteRoomCommand error:`, error)
     }
   }
 }

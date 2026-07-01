@@ -1,84 +1,121 @@
 import { Dispatcher } from "@colyseus/command"
-import { MapSchema } from "@colyseus/schema"
-import { Client, Room } from "colyseus"
-import EloEngine from "elo-rank"
+import type { MapSchema } from "@colyseus/schema"
+import { type Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
-import { components } from "../api-v1/openapi"
+import {
+  ALLOWED_GAME_RECONNECTION_TIME,
+  ExpPlace,
+  getCurrentGameEvent,
+  MAX_LOADING_TIME,
+  MAX_SIMULATION_DELTA_TIME,
+  MinStageForGameToCount,
+  THEME_BY_TITLE,
+  TITLES_UNLOCKING_THEMES,
+  VICTORY_ROAD_MAX_EVENT_POINTS,
+  VictoryRoadPointsPerRank
+} from "../config"
+import { GADGETS } from "../config/game/gadgets"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
-import { MiniGame } from "../core/matter/mini-game"
-import { IGameUser } from "../models/colyseus-models/game-user"
+import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
+import { MiniGame } from "../core/mini-game"
+import {
+  clearPendingGame,
+  clearPendingGamesOnRoomDispose,
+  getPendingGame,
+  givePlayerTimeout,
+  setPendingGame
+} from "../core/pending-game-manager"
+import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import BannedUser from "../models/mongo-models/banned-user"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
+import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
-import History from "../models/mongo-models/history"
 import UserMetadata, {
-  IPokemonConfig
+  giveUserExp,
+  toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
+  getAdditionalsTier1,
   getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
-} from "../models/precomputed"
-import { getAvatarString } from "../public/src/utils"
+  PRECOMPUTED_REGIONAL_MONS
+} from "../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
+import { getSellPrice } from "../models/shop"
+import { updatePlayerTitlesAfterGame } from "../models/titles"
+import { fetchEventLeaderboard } from "../services/leaderboard"
+import { notificationsService } from "../services/notifications"
 import {
-  Emotion,
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IGameHistoryPokemonRecord,
-  IGameHistorySimplePlayer,
-  IGameMetadata,
-  IPokemon,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IGameHistoryPokemonRecord,
+  type IGameHistorySimplePlayer,
+  type IGameMetadata,
+  type IPokemon,
+  type IPokemonEntity,
+  type ISimplePlayer,
   Role,
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
+import { CloseCodes } from "../types/enum/CloseCodes"
+import type { EloRank } from "../types/enum/EloRank"
+import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import {
-  AdditionalPicksStages,
-  DungeonPMDO,
-  EloRank,
-  ExpPlace,
-  LegendaryShop,
-  PortalCarouselStages,
-  RequiredStageLevelForXpElligibility,
-  UniqueShop
-} from "../types/Config"
-import { LobbyType, Rarity } from "../types/enum/Game"
-import { Item } from "../types/enum/Item"
-import { Pkm, PkmDuos, PkmProposition } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
-import { Synergy } from "../types/enum/Synergy"
-import { removeInArray } from "../utils/array"
-import { logger } from "../utils/logger"
-import { shuffleArray } from "../utils/random"
-import { keys, values } from "../utils/schemas"
+  type Item,
+  UnholdableItemsToSaveForStats,
+  Wands
+} from "../types/enum/Item"
+import { Passive } from "../types/enum/Passive"
+import {
+  Pkm,
+  PkmDuos,
+  PkmIndex,
+  PkmRegionalVariants
+} from "../types/enum/Pokemon"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
+import type { Synergy } from "../types/enum/Synergy"
+import { GameEvent } from "../types/events"
+import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type { IDetailledPokemon } from "../types/models/bot-v2"
+import { isIn, removeInArray } from "../utils/array"
+import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
 } from "../utils/board"
+import { isValidDate } from "../utils/date"
+import { formatMinMaxRanks, getRank } from "../utils/elo"
+import { logger } from "../utils/logger"
+import { clamp } from "../utils/number"
+import { shuffleArray } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 import {
+  OnBuyPokemonCommand,
+  OnDevCommand,
   OnDragDropCombineCommand,
-  OnDragDropCommand,
   OnDragDropItemCommand,
+  OnDragDropPokemonCommand,
   OnJoinCommand,
   OnLevelUpCommand,
   OnLockCommand,
+  OnOverwriteBoardCommand,
   OnPickBerryCommand,
   OnPokemonCatchCommand,
-  OnRefreshCommand,
   OnRemoveFromShopCommand,
-  OnSellDropCommand,
-  OnShopCommand,
+  OnSellPokemonCommand,
+  OnShopRerollCommand,
+  OnSpectateCommand,
+  OnSwitchBenchAndBoardCommand,
   OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
-export default class GameRoom extends Room<GameState> {
+export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>
-  eloEngine: EloEngine
   additionalUncommonPool: Array<Pkm>
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
@@ -86,44 +123,75 @@ export default class GameRoom extends Room<GameState> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.eloEngine = new EloEngine()
     this.additionalUncommonPool = new Array<Pkm>()
     this.additionalRarePool = new Array<Pkm>()
     this.additionalEpicPool = new Array<Pkm>()
-    this.miniGame = new MiniGame()
+    this.miniGame = new MiniGame(this)
   }
 
   // When room is initialized
-  async onCreate(options: {
-    users: MapSchema<IGameUser>
+  async onCreate({
+    users,
+    preparationId,
+    name,
+    ownerName,
+    noElo,
+    gameMode,
+    specialGameRule,
+    minRank,
+    maxRank,
+    tournamentId,
+    bracketId
+  }: {
+    users: Record<string, IGameUser>
     preparationId: string
     name: string
+    ownerName: string
     noElo: boolean
-    selectedMap: DungeonPMDO | "random"
-    lobbyType: LobbyType
+    gameMode: GameMode
+    specialGameRule: SpecialGameRule | null
     minRank: EloRank | null
-    whenReady: (room: GameRoom) => void
+    maxRank: EloRank | null
+    tournamentId: string | null
+    bracketId: string | null
   }) {
-    logger.trace("create game room")
+    logger.info("Create Game ", this.roomId)
+
+    this.onRoomDeleted = this.onRoomDeleted.bind(this)
+    this.presence.subscribe("room-deleted", this.onRoomDeleted)
+
+    if (gameMode === GameMode.RANKED) {
+      // add the elo range in the game room name
+      // see https://discord.com/channels/737230355039387749/1019939174691905556/threads/1404518859184013422
+      name = `${formatMinMaxRanks(minRank, maxRank)} ${name}`
+    }
+
+    if (gameMode === GameMode.RANKED || gameMode === GameMode.TOURNAMENT) {
+      this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
+    }
+
     this.setMetadata(<IGameMetadata>{
-      name: options.name,
-      lobbyType: options.lobbyType,
-      playerIds: keys(options.users).filter(
-        (id) => options.users.get(id)!.isBot === false
+      name,
+      ownerName,
+      gameMode,
+      playerIds: Object.keys(users).filter((id) => users[id].isBot === false),
+      playersInfo: Object.keys(users).map(
+        (u) => `${users[u].name} [${users[u].elo}]`
       ),
       stageLevel: 0,
-      type: "game"
+      type: "game",
+      tournamentId,
+      bracketId
     })
     // logger.debug(options);
-    this.setState(
-      new GameState(
-        options.preparationId,
-        options.name,
-        options.noElo,
-        options.selectedMap,
-        options.lobbyType,
-        options.minRank
-      )
+    this.state = new GameState(
+      preparationId,
+      name,
+      noElo,
+      gameMode,
+      minRank,
+      maxRank,
+      specialGameRule
     )
     this.miniGame.create(
       this.state.avatars,
@@ -131,76 +199,106 @@ export default class GameRoom extends Room<GameState> {
       this.state.portals,
       this.state.symbols
     )
-    Object.keys(PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY).forEach((type) => {
-      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
-        type
-      ].additionalPokemons.forEach((p) => {
-        const { stars, rarity } = getPokemonData(p)
+
+    this.additionalUncommonPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
+    )
+    this.additionalRarePool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.RARE
+    )
+    this.additionalEpicPool = getAdditionalsTier1(
+      PRECOMPUTED_POKEMONS_PER_RARITY.EPIC
+    )
+
+    if (this.state.specialGameRule !== SpecialGameRule.EVERYONE_IS_HERE) {
+      /* based on the season, we remove the Deerling seasonal forms to only keep the current season's form */
+      // Determine season based on precise date, not just month
+      const now = new Date()
+      const year = now.getFullYear()
+      const date = new Date(year, now.getMonth(), now.getDate())
+
+      // seasons (Northern Hemisphere)
+      // Spring: Mar 20 - June 21
+      // Summer: Jun 22 - Sep 22
+      // Autumn: Sep 23 - Dec 20
+      // Winter: Dec 21 - Mar 19
+
+      let season: "spring" | "summer" | "autumn" | "winter"
+      const springStart = new Date(year, 2, 20) // Mar 20
+      const summerStart = new Date(year, 5, 22) // Jun 22
+      const autumnStart = new Date(year, 8, 23) // Sep 23
+      const winterStart = new Date(year, 11, 21) // Dec 21
+
+      if (date >= springStart && date < summerStart) {
+        season = "spring"
+      } else if (date >= summerStart && date < autumnStart) {
+        season = "summer"
+      } else if (date >= autumnStart && date < winterStart) {
+        season = "autumn"
+      } else {
+        season = "winter"
+      }
+
+      // Remove all Deerling forms except the current season's
+      this.additionalRarePool = this.additionalRarePool.filter((p) => {
         if (
-          (rarity === Rarity.UNCOMMON || rarity === Rarity.COMMON) && // TEMP: we should move all common add picks to uncommon rarity
-          !this.additionalUncommonPool.includes(p) &&
-          stars === 1
+          (p === Pkm.DEERLING_SPRING && season !== "spring") ||
+          (p === Pkm.DEERLING_SUMMER && season !== "summer") ||
+          (p === Pkm.DEERLING_AUTUMN && season !== "autumn") ||
+          (p === Pkm.DEERLING_WINTER && season !== "winter")
         ) {
-          this.additionalUncommonPool.push(p)
-        } else if (
-          rarity === Rarity.RARE &&
-          !this.additionalRarePool.includes(p) &&
-          stars === 1
-        ) {
-          this.additionalRarePool.push(p)
-        } else if (
-          rarity === Rarity.EPIC &&
-          !this.additionalEpicPool.includes(p) &&
-          stars === 1
-        ) {
-          this.additionalEpicPool.push(p)
+          return false
         }
+        return true
       })
-    })
+    }
+
     shuffleArray(this.additionalUncommonPool)
     shuffleArray(this.additionalRarePool)
     shuffleArray(this.additionalEpicPool)
 
-    if (this.state.specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+    if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
       this.additionalUncommonPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalRarePool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
       this.additionalEpicPool.forEach((p) =>
-        this.state.shop.addAdditionalPokemon(p)
+        this.state.shop.addAdditionalPokemon(p, this.state)
       )
     }
 
     await Promise.all(
-      keys(options.users).map(async (id) => {
-        const user = options.users[id]
+      Object.keys(users).map(async (id) => {
+        const user = users[id]
         //logger.debug(`init player`, user)
         if (user.isBot) {
           const player = new Player(
-            user.id,
+            user.uid,
             user.name,
             user.elo,
+            user.games + 1, // already counting this new game
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonConfig>(),
+            new Map<string, IPokemonCollectionItemMongo>(),
             "",
             Role.BOT,
             this.state
           )
-          this.state.players.set(user.id, player)
+          this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
-          //this.state.shop.assignShop(player)
         } else {
-          const user = await UserMetadata.findOne({ uid: id })
+          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
+          const user = leanUser ? toLeanUserMetadata(leanUser) : null
           if (user) {
             // init player
             const player = new Player(
               user.uid,
               user.displayName,
               user.elo,
+              user.games + 1, // already counting this new game
               user.avatar,
               false,
               this.state.players.size + 1,
@@ -212,33 +310,38 @@ export default class GameRoom extends Room<GameState> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
+
+            if (
+              this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
+            ) {
+              PRECOMPUTED_REGIONAL_MONS.forEach((p) => {
+                if (getPokemonData(p).stars === 1) {
+                  this.state.shop.addRegionalPokemon(p, player)
+                }
+              })
+            }
           }
         }
       })
     )
 
-    setTimeout(() => {
+    this.clock.setTimeout(() => {
+      if (this.state.gameLoaded) return // already started
       this.broadcast(Transfer.LOADING_COMPLETE)
+      this.state.players.forEach((player) => {
+        clearPendingGame(this.presence, player.id)
+      })
       this.startGame()
-    }, 5 * 60 * 1000) // maximum 5 minutes of loading game, game will start no matter what after that
-
-    this.onMessage(Transfer.ITEM, (client, item: Item) => {
-      if (!this.state.gameFinished && client.auth) {
-        try {
-          this.pickItemProposition(client.auth.uid, item)
-        } catch (error) {
-          logger.error(error)
-        }
-      }
-    })
+    }, MAX_LOADING_TIME) // maximum 3 minutes of loading game, game will start no matter what after that
 
     this.onMessage(Transfer.SHOP, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnShopCommand(), {
+          this.dispatcher.dispatch(new OnBuyPokemonCommand(), {
             playerId: client.auth.uid,
             index: message.id
           })
+          clearPendingGame(this.presence, client.auth.uid) // tryfix for reconnection leading to eject bug
         } catch (error) {
           logger.error("shop error", message, error)
         }
@@ -258,29 +361,37 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.POKEMON_PROPOSITION, (client, pkm: Pkm) => {
-      if (!this.state.gameFinished && client.auth) {
-        try {
-          this.pickPokemonProposition(client.auth.uid, pkm)
-        } catch (error) {
-          logger.error(error)
+    this.onMessage(
+      Transfer.CHOICE,
+      (client, message: { choiceId: string; choiceIndex: number }) => {
+        if (!this.state.gameFinished && client.auth) {
+          try {
+            this.pickChoice(
+              client.auth.uid,
+              message.choiceId,
+              message.choiceIndex
+            )
+          } catch (error) {
+            logger.error(error)
+          }
         }
       }
-    })
+    )
 
     this.onMessage(Transfer.DRAG_DROP, (client, message: IDragDropMessage) => {
       if (!this.state.gameFinished) {
         try {
-          this.dispatcher.dispatch(new OnDragDropCommand(), {
+          this.dispatcher.dispatch(new OnDragDropPokemonCommand(), {
             client: client,
             detail: message
           })
+          clearPendingGame(this.presence, client.auth.uid) // tryfix for reconnection leading to eject bug
         } catch (error) {
           const errorInformation = {
             updateBoard: true,
             updateItems: true
           }
-          client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+          client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
           logger.error("drag drop error", error)
         }
       }
@@ -300,7 +411,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }
@@ -321,7 +432,7 @@ export default class GameRoom extends Room<GameState> {
               updateBoard: true,
               updateItems: true
             }
-            client.send(Transfer.DRAG_DROP_FAILED, errorInformation)
+            client.send(Transfer.DRAG_DROP_CANCEL, errorInformation)
             logger.error("drag drop error", error)
           }
         }
@@ -344,7 +455,7 @@ export default class GameRoom extends Room<GameState> {
     this.onMessage(Transfer.SELL_POKEMON, (client, pokemonId: string) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnSellDropCommand(), {
+          this.dispatcher.dispatch(new OnSellPokemonCommand(), {
             client,
             pokemonId
           })
@@ -354,14 +465,10 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    this.onMessage(Transfer.REQUEST_TILEMAP, (client, message) => {
-      client.send(Transfer.REQUEST_TILEMAP, this.state.tilemap)
-    })
-
     this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnRefreshCommand(), client.auth.uid)
+          this.dispatcher.dispatch(new OnShopRerollCommand(), client.auth.uid)
         } catch (error) {
           logger.error("refresh error", message)
         }
@@ -378,6 +485,37 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(
+      Transfer.SWITCH_BENCH_AND_BOARD,
+      (client, pokemonId: string) => {
+        if (!this.state.gameFinished && client.auth) {
+          try {
+            this.dispatcher.dispatch(new OnSwitchBenchAndBoardCommand(), {
+              client,
+              pokemonId
+            })
+          } catch (error) {
+            logger.error("sell drop error", pokemonId)
+          }
+        }
+      }
+    )
+
+    this.onMessage(Transfer.SPECTATE, (client, spectatedPlayerId: string) => {
+      if (client.auth) {
+        try {
+          if (!client.userData) client.userData = {}
+          client.userData.spectatedPlayerId = spectatedPlayerId
+          this.dispatcher.dispatch(new OnSpectateCommand(), {
+            id: client.auth.uid,
+            spectatedPlayerId
+          })
+        } catch (error) {
+          logger.error("spectate error", client.auth.uid, spectatedPlayerId)
+        }
+      }
+    })
+
     this.onMessage(Transfer.LEVEL_UP, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -388,62 +526,39 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
+    this.onMessage(Transfer.SHOW_EMOTE, (client: Client, message?: string) => {
+      if (client.auth) {
+        this.broadcast(Transfer.SHOW_EMOTE, {
+          id: client.auth.uid,
+          emote: message
+        })
+      }
+    })
+
     this.onMessage(
-      Transfer.TOGGLE_ANIMATION,
-      (client: Client, message?: string) => {
+      Transfer.WANDERER_CLICKED,
+      async (client, msg: { id: string }) => {
         if (client.auth) {
-          this.broadcast(Transfer.TOGGLE_ANIMATION, {
-            id: client.auth.uid,
-            emote: message
-          })
+          try {
+            this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
+              client,
+              playerId: client.auth.uid,
+              id: msg.id
+            })
+          } catch (e) {
+            logger.error("catch wandering error", e)
+          }
         }
       }
     )
 
-    this.onMessage(Transfer.UNOWN_WANDERING, async (client, unownIndex) => {
-      try {
-        if (client.auth) {
-          const DUST_PER_ENCOUNTER = 50
-          const u = await UserMetadata.findOne({ uid: client.auth.uid })
-          if (u) {
-            const c = u.pokemonCollection.get(unownIndex)
-            if (c) {
-              c.dust += DUST_PER_ENCOUNTER
-            } else {
-              u.pokemonCollection.set(unownIndex, {
-                id: unownIndex,
-                emotions: [],
-                shinyEmotions: [],
-                dust: DUST_PER_ENCOUNTER,
-                selectedEmotion: Emotion.NORMAL,
-                selectedShiny: false
-              })
-            }
-            u.save()
-          }
-        }
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.onMessage(Transfer.POKEMON_WANDERING, async (client, pkm) => {
-      if (client.auth) {
-        try {
-          this.dispatcher.dispatch(new OnPokemonCatchCommand(), {
-            playerId: client.auth.uid,
-            pkm
-          })
-        } catch (e) {
-          logger.error("catch wandering error", e)
-        }
-      }
-    })
-
-    this.onMessage(Transfer.PICK_BERRY, async (client) => {
+    this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
         try {
-          this.dispatcher.dispatch(new OnPickBerryCommand(), client.auth.uid)
+          this.dispatcher.dispatch(new OnPickBerryCommand(), {
+            playerId: client.auth.uid,
+            berryIndex: index
+          })
         } catch (error) {
           logger.error("error picking berry", error)
         }
@@ -464,12 +579,15 @@ export default class GameRoom extends Room<GameState> {
         const player = this.state.players.get(client.auth.uid)
         if (player) {
           player.loadingProgress = 100
+          clearPendingGame(this.presence, client.auth.uid)
         }
         if (this.state.gameLoaded) {
           // already started, presumably a user refreshed page and wants to reconnect to game
           client.send(Transfer.LOADING_COMPLETE)
         } else if (
-          values(this.state.players).every((p) => p.loadingProgress === 100)
+          schemaValues(this.state.players).every(
+            (p) => p.loadingProgress === 100
+          )
         ) {
           this.broadcast(Transfer.LOADING_COMPLETE)
           this.startGame()
@@ -477,15 +595,44 @@ export default class GameRoom extends Room<GameState> {
       }
     })
 
-    // room ready
-    options.whenReady(this)
+    this.onMessage(
+      Transfer.OVERWRITE_BOARD,
+      (client, board: IDetailledPokemon[]) => {
+        if (client.auth) {
+          const player = this.state.players.get(client.auth.uid)
+          if (player?.role !== Role.ADMIN) return
+
+          try {
+            this.dispatcher.dispatch(new OnOverwriteBoardCommand(), {
+              playerId: client.auth.uid,
+              board
+            })
+          } catch (error) {
+            logger.error("overwrite board error", error)
+          }
+        }
+      }
+    )
+
+    this.onMessage(Transfer.DEV, (client, message) => {
+      if (process.env.MODE === "dev") {
+        try {
+          this.dispatcher.dispatch(new OnDevCommand(), message)
+        } catch (error) {
+          logger.error("dev command error", message)
+        }
+      }
+    })
   }
 
   startGame() {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
     this.setSimulationInterval((deltaTime: number) => {
-      if (!this.state.gameFinished) {
+      /* in case of lag spikes, the game should feel slower, 
+      but this max simulation dt helps preserving the correctness of simulation result */
+      deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
+      if (!this.state.gameFinished && !this.state.simulationPaused) {
         try {
           this.dispatcher.dispatch(new OnUpdateCommand(), { deltaTime })
         } catch (error) {
@@ -493,92 +640,163 @@ export default class GameRoom extends Room<GameState> {
         }
       }
     })
+    this.state.botManager.updateBots()
+    this.miniGame.initialize(this.state, this)
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, context) {
     try {
-      super.onAuth(client, options, request)
+      super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
-      const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
-        throw "No display name"
-      } else if (isBanned) {
-        throw "User banned"
-      } else {
-        return user
+        logger.error("No display name for this account", user.uid)
+        throw new Error(
+          "No display name for this account. Please report this error."
+        )
       }
+
+      return user
     } catch (error) {
       logger.error(error)
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
-    this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
+  async onJoin(client: Client) {
+    const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+    if (userProfile?.banned) {
+      throw "Account banned"
+    }
+    this.dispatcher.dispatch(new OnJoinCommand(), { client })
+    const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+    if (pendingGame?.gameId === this.roomId) {
+      // user reconnected without reconnection token (new browser/machine/session)
+      clearPendingGame(this.presence, client.auth.uid)
+    } else if (pendingGame != null && !pendingGame.isExpired) {
+      client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+    }
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onDrop(client: Client, code: number) {
+    /*if (client && client.auth && client.auth.displayName) {
+      logger.info(`${client.auth.displayName} has been disconnected`)
+    }*/
     try {
+      // allow disconnected client to reconnect into this room until 5 minutes
+      setPendingGame(this.presence, client.auth.uid, this.roomId)
+      await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+    } catch (e) {
       /*if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} has been disconnected`)
+        logger.info(`${client.auth.displayName} left game room`)
       }*/
-      if (consented) {
-        throw new Error("consented leave")
+    }
+  }
+
+  async onReconnect(client: Client) {
+    // if the user reconnects, we clear the pending game and recall the OnJoinCommand
+    clearPendingGame(this.presence, client.auth.uid)
+    this.dispatcher.dispatch(new OnJoinCommand(), { client })
+  }
+
+  async onLeave(client: Client, code: number) {
+    const consented = code === CloseCode.CONSENTED
+
+    if (client && client.auth && client.auth.displayName) {
+      const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+      if (!pendingGame && !consented)
+        return // user has reconnected through other ways (new browser/machine/session)
+      else if (
+        pendingGame &&
+        isValidDate(pendingGame.reconnectionDeadline) &&
+        pendingGame.reconnectionDeadline.getTime() > Date.now()
+      ) {
+        // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+        // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+        return
+      }
+      clearPendingGame(this.presence, client.auth.uid)
+
+      //logger.info(`${client.auth.displayName} left game`)
+      const player = this.state.players.get(client.auth.uid)
+      const hasLeftGameBeforeTheEnd =
+        player && player.life > 0 && !this.state.gameFinished
+      const otherHumans = schemaValues(this.state.players).filter(
+        (p) => !p.isBot && p.id !== client.auth.uid
+      )
+      if (
+        hasLeftGameBeforeTheEnd &&
+        otherHumans.length >= 1 &&
+        player.role !== Role.ADMIN
+      ) {
+        /* if a user leaves a game before the end, 
+        they cannot join another in the next 5 minutes */
+        givePlayerTimeout(this.presence, client.auth.uid)
       }
 
-      // allow disconnected client to reconnect into this room until 3 minutes
-      await this.allowReconnection(client, 180)
-    } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        //logger.info(`${client.auth.displayName} left game`)
-        const player = this.state.players.get(client.auth.uid)
-        if (player && this.state.stageLevel <= 5) {
-          // if player left game during the loading screen or before stage 6, remove it from the players
-          this.state.players.delete(client.auth.uid)
-          this.setMetadata({
-            playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
-          })
-          /*logger.info(
-            `${client.auth.displayName} has been removed from players list`
-          )*/
+      if (player && this.state.stageLevel <= 5 && !consented) {
+        /* 
+        if player left game during the loading screen or before stage 6,
+        we consider they didn't play the game and presume a technical issue
+        we remove it from the players and don't give them any rewards
+        */
+        this.state.players.delete(client.auth.uid)
+        this.setMetadata({
+          playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
+        })
+
+        /*logger.info(
+          `${client.auth.displayName} has been removed from players list`
+        )*/
+      } else if (player && !player.hasLeftGame) {
+        player.hasLeftGame = true
+        player.spectatedPlayerId = player.id
+
+        const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
+        if (hasLeftBeforeEnd) {
+          // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
+          player.life = -99
+          this.rankPlayers()
         }
+
+        this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
       }
-      if (values(this.state.players).every((p) => p.loadingProgress === 100)) {
-        this.broadcast(Transfer.LOADING_COMPLETE)
-        this.startGame()
-      }
+    }
+    if (
+      !this.state.gameLoaded &&
+      schemaValues(this.state.players).every((p) => p.loadingProgress === 100)
+    ) {
+      this.broadcast(Transfer.LOADING_COMPLETE)
+      this.startGame()
     }
   }
 
   async onDispose() {
-    const numberOfPlayersAlive = values(this.state.players).filter(
-      (p) => p.alive
-    ).length
-    if (numberOfPlayersAlive > 1) {
-      logger.warn(
-        `Game room has been disposed while they were still ${numberOfPlayersAlive} players alive.`
-      )
-      return // we skip elo compute/game history in case of technical issue such as a crash of node
+    logger.info("Dispose Game ", this.roomId)
+    this.presence.unsubscribe("room-deleted", this.onRoomDeleted)
+    const players = schemaValues(this.state.players)
+    players.forEach((player) => {
+      clearPendingGamesOnRoomDispose(this.presence, player.id, this.roomId)
+    })
+    const playersAlive = players.filter((p) => p.alive)
+    const humansAlive = playersAlive.filter((p) => !p.isBot)
+
+    // we skip elo compute/game history if game is not finished
+    // that is at least two players including one human are still alive
+    if (playersAlive.length >= 2 && humansAlive.length >= 1) {
+      if (humansAlive.length > 1) {
+        // this can happen if all players disconnect before the end
+        // or if there's another technical issue
+        // adding a log just in case
+        logger.warn(
+          `Game room has been disposed while they were still ${humansAlive.length} players alive.`
+        )
+      }
+      return // game not finished before being disposed, we skip elo compute/game history
     }
 
     try {
       this.state.endTime = Date.now()
-      const players: components["schemas"]["GameHistory"]["players"] = []
-      this.state.players.forEach((p) => {
-        if (!p.isBot) {
-          players.push(this.transformToSimplePlayer(p))
-        }
-      })
-      History.create({
-        id: this.state.preparationId,
-        name: this.state.name,
-        startTime: this.state.startTime,
-        endTime: this.state.endTime,
-        players
-      })
 
       const humans: Player[] = []
       const bots: Player[] = []
@@ -591,164 +809,277 @@ export default class GameRoom extends Room<GameState> {
         }
       })
 
-      const elligibleToXP =
-        this.state.players.size >= 2 &&
-        this.state.stageLevel >= RequiredStageLevelForXpElligibility
-      const elligibleToELO =
-        elligibleToXP && !this.state.noElo && humans.length >= 2
+      const players: ISimplePlayer[] = [...humans, ...bots].map((p) =>
+        this.transformToSimplePlayer(p)
+      )
 
-      if (elligibleToXP) {
-        for (let i = 0; i < bots.length; i++) {
-          const player = bots[i]
-          const results = await BotV2.find({ id: player.id })
-          if (results) {
-            results.forEach((bot) => {
+      if (this.state.stageLevel >= MinStageForGameToCount) {
+        const eligibleToXP = this.state.players.size >= 2
+        if (eligibleToXP) {
+          for (let i = 0; i < bots.length; i++) {
+            const botPlayer = bots[i]
+            const bot = await BotV2.findOne({ id: botPlayer.id })
+            if (bot) {
               bot.elo = computeElo(
-                this.transformToSimplePlayer(player),
-                player.rank,
+                this.transformToSimplePlayer(botPlayer),
+                botPlayer.rank,
                 bot.elo,
-                [...humans, ...bots].map((p) => this.transformToSimplePlayer(p))
+                players,
+                this.state.gameMode,
+                true
               )
               bot.save()
-            })
-          }
-        }
-
-        for (let i = 0; i < humans.length; i++) {
-          const player = humans[i]
-          const exp = ExpPlace[player.rank - 1]
-          let rank = player.rank
-
-          if (!this.state.gameFinished && player.life > 0) {
-            let rankOfLastPlayerAlive = this.state.players.size
-            this.state.players.forEach((plyr) => {
-              if (plyr.life <= 0 && plyr.rank < rankOfLastPlayerAlive) {
-                rankOfLastPlayerAlive = plyr.rank
-              }
-            })
-            rank = rankOfLastPlayerAlive
+            }
           }
 
-          const usr = await UserMetadata.findOne({ uid: player.id })
-          if (usr) {
-            const expThreshold = 1000
-            if (usr.exp + exp >= expThreshold) {
-              usr.level += 1
-              usr.booster += 1
-              usr.exp = usr.exp + exp - expThreshold
-            } else {
-              usr.exp = usr.exp + exp
+          for (let i = 0; i < humans.length; i++) {
+            const player = humans[i]
+            if (!player.hasLeftGame) {
+              player.hasLeftGame = true
+              this.updatePlayerAfterGame(player, false)
             }
-            usr.exp = !isNaN(usr.exp) ? usr.exp : 0
-
-            if (rank === 1) {
-              usr.wins += 1
-              if (this.state.lobbyType === LobbyType.RANKED) {
-                if (this.state.minRank === EloRank.GREATBALL) {
-                  usr.booster += 1
-                }
-                if (this.state.minRank === EloRank.ULTRABALL) {
-                  usr.booster += 5
-                }
-                player.titles.add(Title.VANQUISHER)
-                const minElo = Math.min(
-                  ...values(this.state.players).map((p) => p.elo)
-                )
-                if (usr.elo === minElo && humans.length >= 8) {
-                  player.titles.add(Title.OUTSIDER)
-                }
-                this.presence.publish("ranked-lobby-winner", player)
-              }
-            }
-
-            if (usr.level >= 10) {
-              player.titles.add(Title.ROOKIE)
-            }
-            if (usr.level >= 20) {
-              player.titles.add(Title.AMATEUR)
-              player.titles.add(Title.BOT_BUILDER)
-            }
-            if (usr.level >= 30) {
-              player.titles.add(Title.VETERAN)
-            }
-            if (usr.level >= 50) {
-              player.titles.add(Title.PRO)
-            }
-            if (usr.level >= 100) {
-              player.titles.add(Title.EXPERT)
-            }
-            if (usr.level >= 150) {
-              player.titles.add(Title.ELITE)
-            }
-            if (usr.level >= 200) {
-              player.titles.add(Title.MASTER)
-            }
-            if (usr.level >= 300) {
-              player.titles.add(Title.GRAND_MASTER)
-            }
-
-            if (usr.elo != null && elligibleToELO) {
-              const elo = computeElo(
-                this.transformToSimplePlayer(player),
-                rank,
-                usr.elo,
-                humans.map((p) => this.transformToSimplePlayer(p))
-              )
-              if (elo) {
-                if (elo > 1100) {
-                  player.titles.add(Title.GYM_TRAINER)
-                }
-                if (elo > 1200) {
-                  player.titles.add(Title.GYM_CHALLENGER)
-                }
-                if (elo > 1400) {
-                  player.titles.add(Title.GYM_LEADER)
-                }
-                usr.elo = elo
-              }
-
-              const dbrecord = this.transformToSimplePlayer(player)
-              DetailledStatistic.create({
-                time: Date.now(),
-                name: dbrecord.name,
-                pokemons: dbrecord.pokemons,
-                rank: dbrecord.rank,
-                avatar: dbrecord.avatar,
-                playerId: dbrecord.id,
-                elo: elo
-              })
-            }
-
-            if (player.life === 100 && rank === 1) {
-              player.titles.add(Title.TYRANT)
-            }
-            if (player.life === 1 && rank === 1) {
-              player.titles.add(Title.SURVIVOR)
-            }
-
-            if (player.rerollCount > 60) {
-              player.titles.add(Title.GAMBLER)
-            }
-
-            if (usr.titles === undefined) {
-              usr.titles = []
-            }
-
-            player.titles.forEach((t) => {
-              if (!usr.titles.includes(t)) {
-                //logger.info("title added ", t)
-                usr.titles.push(t)
-              }
-            })
-            //logger.debug(usr);
-            //usr.markModified('metadata');
-            usr.save()
           }
         }
       }
+
+      if (this.state.gameMode === GameMode.TOURNAMENT) {
+        this.presence.publish("tournament-match-end", {
+          tournamentId: this.metadata?.tournamentId,
+          bracketId: this.metadata?.bracketId,
+          players: humans
+        })
+      }
+
       this.dispatcher.stop()
     } catch (error) {
       logger.error(error)
+    }
+  }
+
+  // when a player leaves the game
+  async updatePlayerAfterGame(player: Player, hasLeftBeforeEnd: boolean) {
+    // if player left before stage 10, they do not earn experience to prevent xp farming abuse
+    const eligibleToXP =
+      this.state.players.size >= 2 &&
+      this.state.stageLevel >= MinStageForGameToCount
+
+    const humans: Player[] = []
+    const bots: Player[] = []
+
+    this.state.players.forEach((player) => {
+      if (player.isBot) {
+        bots.push(player)
+      } else {
+        humans.push(player)
+      }
+    })
+
+    let shouldRefetchEventLeaderboard = false
+    const eligibleToELO = true //TEMP
+    /*!this.state.noElo &&
+      (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
+      humans.length >= 2*/
+
+    const rank = player.rank
+    const exp = ExpPlace[rank - 1]
+
+    const usr = await UserMetadata.findOne({ uid: player.id })
+    if (usr) {
+      // Track previous values for notifications
+      const previousElo = usr.elo
+      const previousRank = getRank(previousElo)
+
+      if (eligibleToXP) {
+        giveUserExp(usr, exp)
+      }
+
+      usr.games += 1
+      if (rank === 1) {
+        usr.wins += 1
+        if (this.state.gameMode === GameMode.RANKED) {
+          player.titles.add(Title.VANQUISHER)
+          const minElo = Math.min(
+            ...schemaValues(this.state.players).map((p) => p.elo)
+          )
+          if (usr.elo === minElo && humans.length >= 8) {
+            player.titles.add(Title.OUTSIDER)
+          }
+        }
+      }
+
+      if (usr.elo != null && eligibleToELO) {
+        let elo = computeElo(
+          this.transformToSimplePlayer(player),
+          rank,
+          usr.elo,
+          humans.map((p) => this.transformToSimplePlayer(p)),
+          this.state.gameMode,
+          false
+        )
+
+        if (!elo || isNaN(elo)) {
+          logger.error(
+            `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
+          )
+          elo = usr.elo
+        }
+
+        usr.elo = elo
+        usr.maxElo = Math.max(usr.maxElo, elo)
+
+        // Check if elo rank changed
+        const newRank = getRank(elo)
+        if (newRank !== previousRank) {
+          notificationsService.addNotification(
+            player.id,
+            "elo_rank_change",
+            newRank
+          )
+        }
+
+        const dbrecord = this.transformToSimplePlayer(player)
+        const synergiesMap = new Map<Synergy, number>()
+        player.synergies.forEach((v, k) => {
+          v > 0 && synergiesMap.set(k, v)
+        })
+        DetailledStatistic.create({
+          time: Date.now(),
+          name: dbrecord.name,
+          pokemons: dbrecord.pokemons.map((pokemon) => ({
+            ...pokemon,
+            items: Array.from(pokemon.items ?? []).map(
+              (item) => item.toString() as Item
+            )
+          })),
+          rank: dbrecord.rank,
+          nbplayers: humans.length + bots.length,
+          avatar: dbrecord.avatar,
+          playerId: dbrecord.id,
+          elo: elo,
+          synergies: synergiesMap,
+          gameMode: this.state.gameMode,
+          regions: player.regions,
+          unholdableItems: schemaValues(player.items).filter((item) =>
+            isIn(UnholdableItemsToSaveForStats, item)
+          )
+        })
+
+        if (
+          usr.eventFinishTime == null &&
+          getCurrentGameEvent() === GameEvent.VICTORY_ROAD
+        ) {
+          try {
+            const eventPointsGained =
+              VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
+            usr.eventPoints = clamp(
+              usr.eventPoints + eventPointsGained,
+              0,
+              VICTORY_ROAD_MAX_EVENT_POINTS
+            )
+            usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+            if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
+              usr.eventFinishTime = new Date()
+              usr.markModified("eventFinishTime")
+
+              const nbFinishers = await UserMetadata.countDocuments({
+                eventFinishTime: { $exists: true, $ne: null }
+              })
+              if (nbFinishers === 0) {
+                player.titles.add(Title.VICTORIOUS)
+                this.presence.publish(
+                  "announcement",
+                  `${player.name} won the Victory Road race !`
+                )
+              }
+              player.titles.add(Title.FINISHER)
+              notificationsService.addNotification(
+                player.id,
+                "victory_road_finished",
+                `${nbFinishers + 1}`
+              )
+              shouldRefetchEventLeaderboard = true
+            }
+
+            if (usr.maxEventPoints >= 100) {
+              player.titles.add(Title.RUNNER)
+            }
+          } catch (error) {
+            logger.error("Error updating event points", error)
+          }
+        }
+      }
+
+      // update all pokemons played count
+      player.pokemonsPlayed.forEach((pkm) => {
+        const index = PkmIndex[pkm]
+        const pokemonCollectionItem = usr.pokemonCollection.get(index)
+        if (pokemonCollectionItem) {
+          pokemonCollectionItem.played = pokemonCollectionItem.played + 1
+          usr.markModified(`pokemonCollection.${index}.played`)
+        } else {
+          const newConfig: IPokemonCollectionItemMongo = {
+            dust: 0,
+            id: index,
+            unlocked: Buffer.alloc(5, 0),
+            selectedEmotion: null,
+            selectedShiny: false,
+            played: 1
+          }
+          usr.pokemonCollection.set(index, newConfig)
+        }
+      })
+
+      if (
+        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
+        eligibleToXP &&
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY
+      ) {
+        const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
+          player,
+          usr
+        )
+        if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+      }
+
+      updatePlayerTitlesAfterGame(player, usr, rank)
+
+      if (usr.titles === undefined) {
+        usr.titles = []
+      }
+
+      const newTitlesEarned: Title[] = []
+      player.titles.forEach((t) => {
+        if (!usr.titles.includes(t)) {
+          //logger.info("title added ", t)
+          usr.titles.push(t)
+          newTitlesEarned.push(t)
+        }
+      })
+
+      // Add notification for new titles
+      if (newTitlesEarned.length > 0) {
+        newTitlesEarned.forEach((title) => {
+          notificationsService.addNotification(player.id, "new_title", title)
+          if (
+            isIn(TITLES_UNLOCKING_THEMES, title) &&
+            usr.level >= GADGETS.palette.levelRequired
+          ) {
+            notificationsService.addNotification(
+              player.id,
+              "new_theme",
+              THEME_BY_TITLE[title]!
+            )
+          }
+        })
+      }
+
+      //logger.debug(usr);
+      //usr.markModified('metadata');
+      await usr.save()
+      if (shouldRefetchEventLeaderboard) {
+        await fetchEventLeaderboard()
+        //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
+      }
     }
   }
 
@@ -765,6 +1096,7 @@ export default class GameRoom extends Room<GameState> {
         inventory: Item[]
       }>(),
       elo: player.elo,
+      games: player.games,
       synergies: [],
       title: player.title,
       role: player.role
@@ -775,7 +1107,7 @@ export default class GameRoom extends Room<GameState> {
     })
 
     player.board.forEach((pokemon: IPokemon) => {
-      if (pokemon.positionY != 0) {
+      if (pokemon.positionY != 0 && pokemon.passive !== Passive.INANIMATE) {
         const avatar = getAvatarString(
           pokemon.index,
           pokemon.shiny,
@@ -797,29 +1129,28 @@ export default class GameRoom extends Room<GameState> {
     return simplePlayer
   }
 
-  swap(player: Player, pokemon: IPokemon, x: number, y: number) {
-    const pokemonToSwap = this.getPokemonByPosition(player, x, y)
-    if (pokemonToSwap) {
-      pokemonToSwap.positionX = pokemon.positionX
-      pokemonToSwap.positionY = pokemon.positionY
-      pokemonToSwap.onChangePosition(
-        pokemon.positionX,
-        pokemon.positionY,
-        player
-      )
-    }
-    pokemon.positionX = x
-    pokemon.positionY = y
-  }
-
-  getPokemonByPosition(
+  spawnOnBench(
     player: Player,
-    x: number,
-    y: number
-  ): Pokemon | undefined {
-    return values(player.board).find(
-      (pokemon) => pokemon.positionX == x && pokemon.positionY == y
-    )
+    pkm: Pkm,
+    anim: "fishing" | "nest" | "spawn" = "spawn"
+  ) {
+    const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
+    const x = getFirstAvailablePositionInBench(player.board)
+    if (x !== null) {
+      pokemon.positionX = x
+      pokemon.positionY = 0
+      if (anim === "fishing") {
+        pokemon.action = PokemonActionState.FISH
+      } else if (anim === "nest") {
+        pokemon.action = PokemonActionState.NEST
+      }
+
+      player.board.set(pokemon.id, pokemon)
+      this.clock.setTimeout(() => {
+        pokemon.action = PokemonActionState.IDLE
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      }, 1000)
+    }
   }
 
   checkEvolutionsAfterPokemonAcquired(playerId: string): boolean {
@@ -829,18 +1160,12 @@ export default class GameRoom extends Room<GameState> {
 
     player.board.forEach((pokemon) => {
       if (
-        pokemon.evolution !== Pkm.DEFAULT &&
-        pokemon.evolutionRule instanceof CountEvolutionRule
+        pokemon.hasEvolution &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
-          pokemon,
-          player,
-          this.state.stageLevel
-        )
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player)
         if (pokemonEvolved) {
           hasEvolved = true
-          // check item evolution rule after count evolution (example: Clefairy)
-          this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
         }
       }
     })
@@ -849,23 +1174,24 @@ export default class GameRoom extends Room<GameState> {
     return hasEvolved
   }
 
-  checkEvolutionsAfterItemAcquired(playerId: string, pokemon: Pokemon) {
+  checkEvolutionsAfterItemAcquired(
+    playerId: string,
+    pokemon: Pokemon,
+    itemAcquired: Item
+  ): Pokemon | void {
     const player = this.state.players.get(playerId)
-    if (!player) return false
+    if (!player) return
 
     if (
       pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof ItemEvolutionRule
+      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
     ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
-        this.state.stageLevel
+        itemAcquired
       )
-      if (pokemonEvolved) {
-        // check additional item evolution rules. Not used yet in the game but we never know
-        this.checkEvolutionsAfterItemAcquired(playerId, pokemonEvolved)
-      }
+      return pokemonEvolved
     }
   }
 
@@ -883,7 +1209,7 @@ export default class GameRoom extends Room<GameState> {
     let size = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY != 0) {
+      if (pokemon.positionY != 0 && pokemon.doesCountForTeamSize) {
         size++
       }
     })
@@ -891,66 +1217,175 @@ export default class GameRoom extends Room<GameState> {
     return size
   }
 
-  pickPokemonProposition(
+  pickChoice(
     playerId: string,
-    pkm: PkmProposition,
+    choiceId: string,
+    choiceIndex: number,
     bypassLackOfSpace = false
   ) {
     const player = this.state.players.get(playerId)
-    if (!player || player.pokemonsProposition.length === 0) return
-    if (this.state.additionalPokemons.includes(pkm)) return // already picked, probably a double click
-    if (UniqueShop.includes(pkm)) {
-      if (this.state.stageLevel !== PortalCarouselStages[0]) return // should not be pickable at this stage
+    if (!player) return
+    const choice = player.choices.find((c) => c.id === choiceId)
+    if (
+      !choice ||
+      choiceIndex < 0 ||
+      choiceIndex >= (choice.pokemons?.length || choice.items?.length)
+    )
+      return
+
+    if (choice.pokemons.length > 0) {
+      const pkm = choice.pokemons[choiceIndex]
+      let pokemonsObtained: Pokemon[] = (
+        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
+      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
+
+      const pokemon = pokemonsObtained[0]
+      const isEvolution =
+        pokemon.evolutionRule &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
+
+      const freeSpace = getFreeSpaceOnBench(player.board)
+
       if (
-        values(player.board).some((p) => p.rarity === Rarity.UNIQUE) &&
-        this.state.specialLobbyRule !== SpecialLobbyRule.UNIQUE_STARTER
+        freeSpace < pokemonsObtained.length &&
+        !bypassLackOfSpace &&
+        !isEvolution
       )
-        return // already picked a unique
+        return false // prevent picking if not enough space on bench
+
+      if (choice.type === "addPick") {
+        if (pokemonsObtained[0]?.regional) {
+          // If player picked their regional variant, we need to add the base pokemon to the shop pool
+          const basePkm = (Object.keys(PkmRegionalVariants).find((p) =>
+            PkmRegionalVariants[p].includes(pokemonsObtained[0].name)
+          ) ?? pokemonsObtained[0].name) as Pkm
+          this.state.shop.addAdditionalPokemon(basePkm, this.state)
+          player.regionalPokemons.push(pkm as Pkm)
+        } else {
+          this.state.shop.addAdditionalPokemon(pkm, this.state)
+        }
+
+        if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
+          pokemonsObtained = pokemonsObtained.map((pkm) => {
+            const evolution = pkm.hasEvolution
+              ? EvolutionManager.getEvolution(
+                  pkm,
+                  player,
+                  this.state.stageLevel
+                )
+              : pkm.name
+            const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
+              pkm.rarity
+            )
+            const replacement = PokemonFactory.createPokemonFromName(
+              evolution,
+              player
+            )
+            replacement.addMaxHP([50, 100, 150][rank] ?? 50)
+            replacement.addAttack([5, 10, 15][rank] ?? 5)
+            replacement.addAbilityPower([15, 30, 45][rank] ?? 15)
+            return replacement
+          })
+        }
+
+        // update regional pokemons in case some regional variants of add picks are now available
+        this.state.players.forEach((p) =>
+          p.updateRegionalPool(this.state, false)
+        )
+      }
+
+      if (choice.type === "starter") {
+        player.firstPartner = pokemonsObtained[0].name
+      }
+
+      pokemonsObtained.forEach((pokemon) => {
+        const freeCellX = getFirstAvailablePositionInBench(player.board)
+        if (isEvolution) {
+          pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+          pokemon.onAcquired(player)
+          this.checkEvolutionsAfterPokemonAcquired(playerId)
+        } else if (freeCellX !== null) {
+          pokemon.positionX = freeCellX
+          pokemon.positionY = 0
+          player.board.set(pokemon.id, pokemon)
+          pokemon.onAcquired(player)
+        } else {
+          // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
+          const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+          player.addMoney(sellPrice, true, null)
+        }
+      })
     }
-    if (LegendaryShop.includes(pkm)) {
-      if (this.state.stageLevel !== PortalCarouselStages[1]) return // should not be pickable at this stage
-      if (values(player.board).some((p) => LegendaryShop.includes(p.name)))
-        return // already picked a legendary
-    }
 
-    const pokemonsObtained: Pokemon[] = (
-      pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-    ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-
-    const freeSpace = getFreeSpaceOnBench(player.board)
-    if (freeSpace < pokemonsObtained.length && !bypassLackOfSpace) return // prevent picking if not enough space on bench
-
-    // at this point, the player is allowed to pick a proposition
-    if (AdditionalPicksStages.includes(this.state.stageLevel)) {
-      this.state.additionalPokemons.push(pkm)
-      this.state.shop.addAdditionalPokemon(pkm)
-      const selectedIndex = player.pokemonsProposition.indexOf(pkm)
-      if (
-        player.itemsProposition.length > 0 &&
-        player.itemsProposition[selectedIndex] != null
-      ) {
-        player.items.add(player.itemsProposition[selectedIndex])
-        player.itemsProposition.clear()
+    if (choice.items.length > 0) {
+      const item = choice.items[choiceIndex]
+      if (isIn(Wands, item)) {
+        player.fairyWands.push(item)
+        player.updateFairyWands()
+      } else {
+        player.items.push(item)
       }
     }
 
-    pokemonsObtained.forEach((pokemon) => {
-      const freeCellX = getFirstAvailablePositionInBench(player.board)
-      if (freeCellX !== undefined) {
-        pokemon.positionX = freeCellX
-        pokemon.positionY = 0
-        player.board.set(pokemon.id, pokemon)
-      }
-    })
-
-    player.pokemonsProposition.clear()
+    removeInArray(player.choices, choice)
   }
 
-  pickItemProposition(playerId: string, item: Item) {
-    const player = this.state.players.get(playerId)
-    if (player && player.itemsProposition.includes(item)) {
-      player.items.add(item)
-      player.itemsProposition.clear()
+  computeRoundDamage(
+    opponentTeam: MapSchema<IPokemonEntity>,
+    stageLevel: number
+  ) {
+    let damage = Math.ceil(stageLevel / 2)
+    if (opponentTeam.size > 0) {
+      opponentTeam.forEach((pokemon) => {
+        if (!pokemon.isSpawn && pokemon.passive !== Passive.INANIMATE) {
+          damage += 1
+        }
+      })
+    }
+    return damage
+  }
+
+  rankPlayers() {
+    const rankArray = new Array<{ id: string; life: number; level: number }>()
+    this.state.players.forEach((player) => {
+      if (!player.alive) {
+        return
+      }
+
+      rankArray.push({
+        id: player.id,
+        life: player.life,
+        level: player.experienceManager.level
+      })
+    })
+
+    const sortPlayers = (
+      a: { id: string; life: number; level: number },
+      b: { id: string; life: number; level: number }
+    ) => {
+      let diff = b.life - a.life
+      if (diff == 0) {
+        diff = b.level - a.level
+      }
+      return diff
+    }
+
+    rankArray.sort(sortPlayers)
+
+    rankArray.forEach((rankPlayer, index) => {
+      const player = this.state.players.get(rankPlayer.id)
+      if (player) {
+        player.rank = index + 1
+      }
+    })
+  }
+
+  onRoomDeleted(roomId) {
+    if (this.roomId === roomId) {
+      this.disconnect(CloseCodes.ROOM_DELETED)
     }
   }
 }

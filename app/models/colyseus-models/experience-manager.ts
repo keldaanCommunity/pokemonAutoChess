@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
-import { IExperienceManager } from "../../types"
-import { ExpTable } from "../../types/Config"
-import { SpecialLobbyRule } from "../../types/enum/SpecialLobbyRule"
+import { ExpTable } from "../../config"
+import type { IExperienceManager } from "../../types"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export default class ExperienceManager
   extends Schema
@@ -20,7 +20,7 @@ export default class ExperienceManager
     this.maxLevel = 9
   }
 
-  canLevel() {
+  canLevelUp() {
     return this.level < this.maxLevel
   }
 
@@ -46,11 +46,7 @@ export default class ExperienceManager
   }
 }
 
-export function getLevelUpCost(specialLobbyRule?: SpecialLobbyRule | null) {
-  let cost = 4
-  if (specialLobbyRule === SpecialLobbyRule.RARE_IS_EXPENSIVE) {
-    cost = 8
-  }
-
+export function getLevelUpCost(specialGameRule?: SpecialGameRule | null) {
+  const cost = 4
   return cost
 }

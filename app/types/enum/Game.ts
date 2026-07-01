@@ -10,43 +10,45 @@ export enum Rarity {
   SPECIAL = "SPECIAL"
 }
 
-export enum LobbyType {
-  NORMAL = "NORMAL",
+export enum GameMode {
+  CUSTOM_LOBBY = "CUSTOM_LOBBY",
+  CLASSIC = "CLASSIC",
   RANKED = "RANKED",
-  SCRIBBLE = "SCRIBBLE"
+  SCRIBBLE = "SCRIBBLE",
+  TOURNAMENT = "TOURNAMENT"
 }
-
-export type SpecialLobbyType =
-  | "GREATBALL_RANKED"
-  | "ULTRABALL_RANKED"
-  | "SCRIBBLE"
 
 export enum GamePhaseState {
   PICK,
   FIGHT,
-  MINIGAME
+  TOWN
 }
 
 export enum PokemonActionState {
   IDLE = "Idle",
   ATTACK = "Attack",
+  ABILITY = "Ability",
   WALK = "Walk",
   SLEEP = "Sleep",
   HOP = "Hop",
   HURT = "Hurt",
+  EMOTE = "Emote",
+  EAT = "Eat",
   FISH = "Fish",
-  EMOTE = "Emote"
+  BLOSSOM = "Blossom",
+  NEST = "Nest",
+  TRAINING = "Training"
 }
 
 export enum Orientation {
   DOWN = "0",
-  DOWNLEFT = "7",
-  LEFT = "6",
-  UPLEFT = "5",
-  UP = "4",
-  UPRIGHT = "3",
+  DOWNRIGHT = "1",
   RIGHT = "2",
-  DOWNRIGHT = "1"
+  UPRIGHT = "3",
+  UP = "4",
+  UPLEFT = "5",
+  LEFT = "6",
+  DOWNLEFT = "7"
 }
 
 export const OrientationFlip: { [key in Orientation]: Orientation } = {
@@ -58,6 +60,41 @@ export const OrientationFlip: { [key in Orientation]: Orientation } = {
   [Orientation.UPRIGHT]: Orientation.DOWNRIGHT,
   [Orientation.RIGHT]: Orientation.RIGHT,
   [Orientation.DOWNRIGHT]: Orientation.UPRIGHT
+}
+
+export const OrientationKnockback: { [key in Orientation]: Orientation[] } = {
+  [Orientation.DOWN]: [
+    Orientation.DOWN,
+    Orientation.DOWNRIGHT,
+    Orientation.DOWNLEFT
+  ],
+  [Orientation.DOWNLEFT]: [
+    Orientation.DOWNLEFT,
+    Orientation.DOWN,
+    Orientation.LEFT
+  ],
+  [Orientation.LEFT]: [
+    Orientation.LEFT,
+    Orientation.DOWNLEFT,
+    Orientation.UPLEFT
+  ],
+  [Orientation.UPLEFT]: [Orientation.UPLEFT, Orientation.LEFT, Orientation.UP],
+  [Orientation.UP]: [Orientation.UP, Orientation.UPLEFT, Orientation.UPRIGHT],
+  [Orientation.UPRIGHT]: [
+    Orientation.UPRIGHT,
+    Orientation.UP,
+    Orientation.RIGHT
+  ],
+  [Orientation.RIGHT]: [
+    Orientation.RIGHT,
+    Orientation.UPRIGHT,
+    Orientation.DOWNRIGHT
+  ],
+  [Orientation.DOWNRIGHT]: [
+    Orientation.DOWNRIGHT,
+    Orientation.RIGHT,
+    Orientation.DOWN
+  ]
 }
 
 export enum AttackType {
@@ -78,10 +115,12 @@ export enum BattleResult {
 }
 
 export enum BotDifficulty {
+  BEGINNER,
   EASY,
   MEDIUM,
   HARD,
   EXTREME,
+  MASTER,
   CUSTOM
 }
 
@@ -97,7 +136,7 @@ export enum SpriteType {
 
 export enum Stat {
   ATK = "ATK",
-  ATK_SPEED = "ATK_SPEED",
+  SPEED = "SPEED",
   DEF = "DEF",
   SPE_DEF = "SPE_DEF",
   HP = "HP",
@@ -105,9 +144,10 @@ export enum Stat {
   PP = "PP",
   MAX_PP = "MAX_PP",
   CRIT_CHANCE = "CRIT_CHANCE",
-  CRIT_DAMAGE = "CRIT_DAMAGE",
+  CRIT_POWER = "CRIT_POWER",
   AP = "AP",
-  SHIELD = "SHIELD"
+  SHIELD = "SHIELD",
+  LUCK = "LUCK"
 }
 
 export enum Damage {
@@ -117,13 +157,6 @@ export enum Damage {
 }
 
 export enum Team {
-  BLUE_TEAM,
-  RED_TEAM
-}
-
-export enum BoardEvent {
-  LIGHTNING = "LIGHTNING",
-  GAS = "GAS",
-  POISON_GAS = "POISON_GAS",
-  STEALTH_ROCKS = "STEALTH_ROCKS"
+  BLUE_TEAM = 0,
+  RED_TEAM = 1
 }

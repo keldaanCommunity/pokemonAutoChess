@@ -1,12 +1,14 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import React, { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router"
+import { FIREBASE_CONFIG } from "../../../../../config"
+import { throttle } from "../../../../../utils/function"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
-import { FIREBASE_CONFIG } from "../../utils/utils"
-import AnonymousButton from "./anonymous-button"
+//import AnonymousButton from "./anonymous-button"
 import { StyledFirebaseAuth } from "./styled-firebase-auth"
 
 import "firebaseui/dist/firebaseui.css"
@@ -15,8 +17,19 @@ import "./login.css"
 export default function Login() {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const uid = useAppSelector((state) => state.network.uid)
   const displayName = useAppSelector((state) => state.network.displayName)
+  const email = useAppSelector((state) => state.network.email)
+  const [prejoining, setPrejoining] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
+
+  const preJoinLobby = throttle(async function prejoin() {
+    setPrejoining(true)
+    return joinLobbyRoom(dispatch, navigate)
+      .then(() => navigate("/lobby"))
+      .catch(() => setPrejoining(false))
+  }, 1000)
 
   const uiConfig = {
     // Popup signin flow rather than Navigate flow.
@@ -29,7 +42,6 @@ export default function Login() {
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         requireDisplayName: true
       },
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.TwitterAuthProvider.PROVIDER_ID
     ],
     callbacks: {
@@ -58,30 +70,43 @@ export default function Login() {
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
         />
-        <AnonymousButton />
+        {/* <AnonymousButton /> */}
       </div>
     )
   } else {
     return (
       <div id="play-panel">
-        <p className="welcome-text">
-          {t("welcome")} {displayName}
+        <p>
+          {t("auth.authenticated_as")}:{" "}
+          <span title={`${displayName}${email ? ` (${email})` : ""}`}>
+            {t("auth.hover_to_reveal")}
+          </span>
         </p>
         <ul className="actions">
           <li>
-            <Link className="bubbly green" to={"/lobby"}>
-              {t("join_lobby")}
-            </Link>
+            <button
+              className="bubbly green"
+              onClick={preJoinLobby}
+              disabled={prejoining}
+            >
+              {prejoining ? t("auth.connecting") : t("auth.join_lobby")}
+            </button>
           </li>
           <li>
             <button
               className="bubbly red"
-              onClick={() => {
-                firebase.auth().signOut()
-                dispatch(logOut())
+              disabled={prejoining || loggingOut}
+              onClick={async () => {
+                setLoggingOut(true)
+                try {
+                  await firebase.auth().signOut()
+                  dispatch(logOut())
+                } finally {
+                  setLoggingOut(false)
+                }
               }}
             >
-              {t("sign_out")}
+              {loggingOut ? t("auth.signing_out") : t("auth.sign_out")}
             </button>
           </li>
         </ul>

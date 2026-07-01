@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 
 export default class DraggableObject extends GameObjects.Container {
@@ -15,6 +15,7 @@ export default class DraggableObject extends GameObjects.Container {
     super(scene, x, y)
     this.dragDisabled = dragDisabled
     this.setSize(width, height)
+
     this.setInteractive()
       .on("pointerover", (pointer: Phaser.Input.Pointer) => {
         this.onPointerOver(pointer)
@@ -28,11 +29,22 @@ export default class DraggableObject extends GameObjects.Container {
           _y: number,
           event: Phaser.Types.Input.EventData
         ) => {
-          event.stopPropagation()
-          this.onPointerDown(pointer)
+          this.onPointerDown(pointer, event)
         }
       )
       .on("pointerup", () => this.onPointerUp())
+
+    /* DEBUG HITBOX AREAS
+    scene.input.enableDebug(this, 0x00ff00);
+    // AFTER enabling debug, access the debug graphic and set its depth
+    if (this.input && this.input.hitAreaDebug) {
+      this.input.hitAreaDebug.setDepth(100); // Set a high depth value
+      console.log("Debug graphic created and depth set.");
+    } else {
+      console.warn("Debug graphic not found on sprite after enableDebug.");
+    }
+    */
+
     this.scene.add.existing(this)
   }
 
@@ -45,7 +57,6 @@ export default class DraggableObject extends GameObjects.Container {
     this.scene.input.setDraggable(this, isDraggable)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onPointerOver(pointer) {
     if (!this.dragDisabled) {
       document.body.classList.add("grab")
@@ -58,8 +69,7 @@ export default class DraggableObject extends GameObjects.Container {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onPointerDown(pointer) {
+  onPointerDown(pointer, event) {
     if (!this.dragDisabled) {
       document.body.classList.add("grabbing")
     }

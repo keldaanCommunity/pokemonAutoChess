@@ -32,7 +32,7 @@ Some of the pokemons that are in pokemon auto chess are not yet in in PMD Collab
 Now, each time you level up (a level is now 1000 xp (was 10 000 before for high level)), you 'll get one booster. You can open those "boosters" in the booster tab.
 When opening boosters, you get pokemon shards. Those shards are specific to every pokemon. In the collection tab, you can buy pokemon emotions with those shards.
 You can see pokemon emotions as a detailled customization. When selecting an emotion pokemon portrait, the pokemon will appear everywhere with the same emotion portrait that you have selected.
-Eveyone will see the emotion that you picked for this pokemon. Moreover, if you have selected a shiny emotion, the pokemon will appear shiny to everyone else.
+Everyone will see the emotion that you picked for this pokemon. Moreover, if you have selected a shiny emotion, the pokemon will appear shiny to everyone else.
 
 **New avatar system**
 

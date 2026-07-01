@@ -1,0 +1,33 @@
+.room-selection-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5em;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.room-selection-menu li {
+  text-align: center;
+  flex: 1 1 240px;
+  padding: 1em 0.5em;
+}
+
+.room-selection-menu li > * {
+  user-select: none;
+}
+
+.room-selection-menu li:hover {
+  background-color: var(--color-bg-accent);
+  cursor: var(--cursor-hover);
+}
+
+.room-selection-menu li img {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.room-selection-menu p {
+  white-space: pre-line;
+}

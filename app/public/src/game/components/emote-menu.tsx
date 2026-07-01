@@ -1,69 +1,43 @@
 import { GameObjects } from "phaser"
-import React from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../models/precomputed"
-import { IPlayer } from "../../../../types"
-import { Emotion } from "../../../../types/enum/Emotion"
-import { throttle } from "../../../../utils/function"
+import { getAvailableEmotions } from "../../../../models/precomputed/precomputed-emotions"
+import type { IPlayer } from "../../../../types"
+import { AvatarEmotions, type Emotion } from "../../../../types/enum/Emotion"
 import { logger } from "../../../../utils/logger"
+import PokemonPortrait from "../../pages/component/pokemon-portrait"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
-import { toggleAnimation } from "../../stores/NetworkStore"
-import { getAvatarString, getPortraitSrc } from "../../utils"
+import type GameScene from "../scenes/game-scene"
 import "./emote-menu.css"
-
-const sendEmote = throttle(function (
-  index: string,
-  shiny: boolean,
-  emotion: Emotion
-) {
-  store.dispatch(toggleAnimation(getAvatarString(index, shiny, emotion)))
-},
-3000)
 
 export function EmoteMenuComponent(props: {
   player: IPlayer
   index: string
   shiny: boolean
+  sendEmote: (emotion: Emotion) => void
 }) {
   const { t } = useTranslation()
-  const emotions: Emotion[] = [
-    Emotion.HAPPY,
-    Emotion.JOYOUS,
-    Emotion.DETERMINED,
-    Emotion.PAIN,
-    Emotion.ANGRY,
-    Emotion.CRYING,
-    Emotion.SURPRISED,
-    Emotion.STUNNED,
-    Emotion.DIZZY
-  ].filter((emotion) => {
-    const indexEmotion = Object.values(Emotion).indexOf(emotion)
-    return (
-      PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[indexEmotion] === 1
-    )
-  })
-
-  const pokemonCollection = props.player.pokemonCollection
-  const pConfig = pokemonCollection[props.index]
+  const availableEmotions = getAvailableEmotions(props.index, props.shiny)
+  const emotions: Emotion[] = AvatarEmotions.filter((emotion) =>
+    availableEmotions.includes(emotion)
+  )
 
   return emotions.length === 0 ? (
     <div>{t("no_emotions_available")}</div>
   ) : (
     <ul>
-      {emotions.map((emotion) => {
-        const unlocked = pConfig && pConfig.emotions.includes(emotion)
+      {emotions.map((emotion, i) => {
+        const unlocked = store.getState().game.emotesUnlocked.includes(emotion)
         return (
           <li key={emotion}>
-            <img
-              src={getPortraitSrc(props.index, props.shiny, emotion)}
+            <PokemonPortrait
+              portrait={{ index: props.index, shiny: props.shiny, emotion }}
               title={emotion + (!unlocked ? " (locked)" : "")}
               className={cc({ locked: !unlocked })}
-              onClick={() =>
-                unlocked && sendEmote(props.index, props.shiny, emotion)
-              }
+              onClick={() => unlocked && props.sendEmote(emotion)}
             />
+            <span className="counter">{i + 1}</span>
           </li>
         )
       })}
@@ -73,19 +47,28 @@ export function EmoteMenuComponent(props: {
 
 export default class EmoteMenu extends GameObjects.DOMElement {
   dom: HTMLDivElement
-  constructor(scene: Phaser.Scene, avatarIndex: string, shiny: boolean) {
+  constructor(
+    scene: GameScene,
+    avatarIndex: string,
+    shiny: boolean,
+    sendEmote: (emotion: Emotion) => void
+  ) {
     super(scene, -350, -150)
     const state = store.getState()
-    const player = state.game.players.find(
-      (p) => p.id === state.game.currentPlayerId
-    )
+    const player = state.game.players.find((p) => p.id === scene.uid)
+
     this.dom = document.createElement("div")
-    this.dom.className = "nes-container emote-menu"
+    this.dom.className = "my-container emote-menu"
     this.setElement(this.dom)
     const root = ReactDOM.createRoot(this.dom)
     if (player) {
       root.render(
-        <EmoteMenuComponent player={player} index={avatarIndex} shiny={shiny} />
+        <EmoteMenuComponent
+          player={player}
+          index={avatarIndex}
+          shiny={shiny}
+          sendEmote={sendEmote}
+        />
       )
     } else {
       logger.error(`Cant' find player bound to EmoteMenu`)

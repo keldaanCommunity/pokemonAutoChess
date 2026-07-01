@@ -1,0 +1,2 @@
+2025-10-23 04:20:47.949493	CHUNSOFT	CUR	CC_BY-NC_4	Normal,Happy,Special0
+2025-10-23 04:29:12.295734	<@!149282718578901001>	CUR	CC_BY-NC_4	Sad,Joyous,Special1,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined

@@ -2079,7 +2079,7 @@
 		"SHEER_COLD": "Un golpe de frío bajo cero inflige [50,100,200,400,SP] de SPECIAL con un [10,20,30,60]% de probabilidad de ejecutar. Mientras más HP tenga el usuario en comparación al objetivo, mayor será la probabilidad. Siempre ejecuta a enemigos que se encuentren FREEZE, pero nunca ejecuta a objetivos ICE.",
 		"EXTREME_SPEED": "Avanza hacia el enemigo más lejano, infligiendo [20,30,40,80,SP] de SPECIAL en el camino",
 		"ZAP_CANNON": "El emisor da un disparo eléctrico como un cañón para infligir [25,50,100,200,SP] de SPECIAL y causar PARALYSIS junto a ARMOR_BREAK por [1,2,4,8,SP] segundos",
-		"PSYCHO_BOOST": "Traza un corte horizontal alrededor del enemigo, haciendo [90,120,150,300,SP] de SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 20 por cada Pokémon golpeado.",
+		"PSYCHO_BOOST": "Traza un corte horizontal alrededor del enemigo, haciendo [90,120,150,300,SP] de SPECIAL a todos los enemigos golpeados. Reduce el AP del emisor en 10 por cada Pokémon golpeado.",
 		"ICE_HAMMER": "Inflige [50,100,200,400,SP] de SPECIAL al objetivo, causando FREEZE por 3 segundos. PARALYSIS al emisor por 3 segundos.",
 		"POLLEN_PUFF": "El aliado con menor HP recibe una bola de polen que restaura [30,60,120,240,SP] HP",
 		"PSYSTRIKE": "El emisor materializa una extraña onda psíquica hacía el enemigo más lejano, infligiendo [20,40,80,160,SP] de SPECIAL y teletransportando a todo en su camino",
@@ -3022,7 +3022,26 @@
 		"COVER_BAND": "Si un aliado ADJACENT está por ser derrotado por daño inminente, el usuario toma el daño en vez de él.",
 		"EFFICIENT_BANDANNA": "El usuario y los aliados ADJACENT_IN_THE_SAME_ROW tienen sus PP máximos reducidos en un 15%.",
 		"NULLIFY_BANDANNA": "El usuario ya no puede usar su habilidad. AP es convertido a escudo, y PP es convertido a SPECIAL adicional en el próximo ataque",
-		"WANTED_NOTICE": "Se busca: Debilitado o Vivo\nRecompensa: 10 GOLD"
+		"WANTED_NOTICE": "Se busca: Debilitado o Vivo\nRecompensa: 10 GOLD",
+		"CONFUSE_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de probabilidad de causar CONFUSION por 2 segundos y reducir su SPE_DEF por 3.",
+		"PETRIFY_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional  y tienen un [5,LK]% de causar LOCKED por 2 segundos y reducir su DEF por 3.",
+		"SLOW_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de causar PARALYSIS por dos segundos y reducir su SPEED por 10.",
+		"SLUMBER_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de causar SLEEP por 2 segundos y reducir su ATK por 3.",
+		"BLAST_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional, o 40% si es un golpe crítico.",
+		"HP_SWAP_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional . El SPECIAL de las varitas tiene un [20,LK]% de probabilidad de ser robado del HP máximo del objetivo y ser dado al atacante.",
+		"SPIRIT_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional + 5% por cada habilidad usada por el atacante durante la pelea, y tiene un [20,LK]% de probabilidad de dar 5 PP adicionales.",
+		"LONG_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional. Los aliados hada ganan +1 RANGE y tienen [1,LK]% de CRIT_CHANCE incrementado, multiplicado por la distancia entre el atacante y el objetivo.",
+		"GUIDING_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT. El SPECIAL de las varitas tiene un [50,LK]% de probabilidades de ser redireccionado al enemigo con la menor vida en RANGE.",
+		"SURROUND_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT +5% por enemigo ADJACENT al atacante. El SPECIAL de las varitas tiene un [10,LK]% de ser infligido a todos los enemigos ADJACENT al atacante en adición de al objetivo.",
+		"POUNCE_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional. Cuando son golpeados cuerpo a cuerpo, los aliados de hada tienen un [10,LK]% de probabilidad de vengarse por un 30% del daño recibido a los enemigos ADJACENT, garantizado si es un golpe crítico.",
+		"TWO_EDGED_WAND": "Los ataques de hada realizan un 40% de SPECIAL ON_HIT adicional. El SPECIAL de las varitas también puede ser infligido como daño de retroceso al atacante ([80,LK]% de probabilidad de prevenir el daño de retroceso).",
+		"WARP_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de probabilidad de teletransportar al objetivo a una casilla lejana.",
+		"SWITCHER_WAND": "Los ataques hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de intercambiar la posición del objetivo con la del enemigo más lejano.",
+		"WHIRLWIND_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de probabilidad de crear un torbellino que lanza a volar a todas las unidades en su paso.",
+		"TUNNEL_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional. El SPECIAL de las varitas tiene un [5,LK]% de probabilidad de atravesar al objetivo y golpear a los enemigos en una línea detrás de el.",
+		"TATSUGIRI_CURLY": "Puede comandar a un Dondozo",
+		"TATSUGIRI_DROOPY": "Puede comandar a un Dondozo",
+		"TATSUGIRI_STRETCHY": "Puede comandar a un Dondozo"
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3332,7 +3351,8 @@
 		"WILD_ADDITIONAL": "\nPosibilidades actuales de encontrar un Pokémon WILD : {{wildChance}}%",
 		"AMORPHOUS": "Los Pokémon AMOPRHOUS son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y SPEED al activar una gran variedad de sinergias.",
 		"GOURMET": "Los Pokémon GOURMET pueden llevar un CHEF_HAT. Los cocineros prepararán sus platos insignia después de cada batalla y se los darán a sus aliados ADJACENT, otorgándoles mejoras y efectos variados.",
-		"ELECTRIC_CHARGE": "Carga de CELL_BATTERY: {{charge}}% "
+		"ELECTRIC_CHARGE": "Carga de CELL_BATTERY: {{charge}}% ",
+		"FAIRY": "Los Pokémon FAIRY usan varitas para realizar SPECIAL adicional y efectos varios con sus ataques. "
 	},
 	"title": {
 		"no_title": "Sin Título",

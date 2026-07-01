@@ -1,8 +1,9 @@
-import { DungeonPMDO, Mask, TerrainType } from "../types/Config"
+import { type Mask, TerrainType } from "../config"
+import type { DungeonPMDO } from "../types/enum/Dungeon"
 import { logger } from "../utils/logger"
 import Masker from "./masker"
 import Terrain from "./terrain"
-import Tileset, { TilesetTiled } from "./tileset"
+import Tileset, { type TilesetTiled } from "./tileset"
 
 export type LayerTiled = {
   data: number[]
@@ -45,7 +46,7 @@ export default class Design {
   terrain: TerrainType[][] = []
   bitmask: Mask[][] = []
   layers: TileMapping[][] = []
-  width = 42
+  width = 50
   height = 32
   frequency: number
   persistance: number
@@ -141,20 +142,36 @@ export default class Design {
     // player avatars slots
     this.drawGroundRect(9, 13, 3, 3)
     this.drawGroundRect(30, 1, 3, 3)
+    for (let y = 4; y < 12; y++) this.terrain[y][31] = TerrainType.GROUND
 
     // berry tree slots
     this.terrain[14][8] = TerrainType.GROUND
+    this.terrain[14][7] = TerrainType.GROUND
+    this.terrain[14][6] = TerrainType.GROUND
+
+    // flower pots slots
+    this.drawGroundRect(5, 11, 5, 4, false)
+
+    // training bag slot
+    this.drawGroundRect(11, 16, 2, 2, false)
 
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND
   }
 
-  drawGroundRect(x: number, y: number, width: number, height: number) {
+  drawGroundRect(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    addWalls = true
+  ) {
     for (let i = x; i < x + width; i++) {
       for (let j = y; j < y + height; j++) {
         if (j in this.terrain && i in this.terrain[j]) {
           this.terrain[j][i] =
-            i === x || i === x + width - 1 || j === y || j === y + height - 1
+            addWalls &&
+            (i === x || i === x + width - 1 || j === y || j === y + height - 1)
               ? TerrainType.WALL
               : TerrainType.GROUND
         }
@@ -248,6 +265,10 @@ export default class Design {
 }
 
 export function initTilemap(mapName: DungeonPMDO): DesignTiled {
+  if (!mapName) {
+    logger.error("Invalid map name provided to initTilemap", { mapName })
+    throw new Error("Invalid map name provided to initTilemap")
+  }
   const design = new Design(mapName, 5, 0.1)
   design.create()
   const tilemap = design.exportToTiled()

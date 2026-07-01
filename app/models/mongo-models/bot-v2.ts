@@ -1,31 +1,8 @@
-import { Schema, model } from "mongoose"
-import { nanoid } from "nanoid"
-import { Emotion, PkmWithConfig } from "../../types"
+import { model, Schema } from "mongoose"
+import { Emotion } from "../../types"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
-
-export interface IDetailledPokemon extends PkmWithConfig {
-  name: Pkm
-  x: number
-  y: number
-  items: Item[]
-  emotion?: Emotion
-  shiny?: boolean
-}
-
-export interface IStep {
-  board: IDetailledPokemon[]
-  roundsRequired: number
-}
-
-export interface IBot {
-  avatar: string
-  author: string
-  elo: number
-  steps: IStep[]
-  name: string
-  id: string
-}
+import type { IBot } from "../../types/models/bot-v2"
 
 const pkm = new Schema({
   name: {
@@ -75,7 +52,11 @@ const bot = new Schema(
     id: {
       type: String,
       required: true,
-      default: nanoid()
+      default: crypto.randomUUID()
+    },
+    approved: {
+      type: Boolean,
+      default: false
     },
     name: {
       type: String
@@ -96,7 +77,7 @@ const bot = new Schema(
   },
   {
     toJSON: {
-      transform: function (doc, ret) {
+      transform: function (doc, ret: any) {
         delete ret._id
         delete ret.__v
         if (ret.steps)
@@ -111,5 +92,6 @@ const bot = new Schema(
   }
 )
 
-const BotV2 = model<IBot>("botV2", bot)
+const BotV2 = model<IBot>("botv2", bot)
+
 export { BotV2 }

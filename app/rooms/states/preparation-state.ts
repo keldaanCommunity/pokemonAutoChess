@@ -1,50 +1,103 @@
-import { MapSchema, Schema, type } from "@colyseus/schema"
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
-import { Dungeon, EloRank } from "../../types/Config"
-import { LobbyType } from "../../types/enum/Game"
+import Message from "../../models/colyseus-models/message"
+import chatV2 from "../../models/mongo-models/chat-v2"
+import type { EloRank } from "../../types/enum/EloRank"
+import { GameMode } from "../../types/enum/Game"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export interface IPreparationState {
   users: MapSchema<GameUser>
-  gameStarted: boolean
+  messages: ArraySchema<Message>
+  gameStartedAt: string | null
   ownerId: string
   ownerName: string
   name: string
-  selectedMap: Dungeon | "random"
   minRank: EloRank | null
-  lobbyType: LobbyType
+  gameMode: GameMode
 }
 
 export default class PreparationState
   extends Schema
   implements IPreparationState
 {
+  @type([Message]) messages = new ArraySchema<Message>()
   @type({ map: GameUser }) users = new MapSchema<GameUser>()
-  @type("boolean") gameStarted: boolean
+  @type("string") gameStartedAt: string | null
   @type("string") ownerId: string
   @type("string") ownerName: string
   @type("string") name: string
   @type("string") password: string | null
-  @type("boolean") noElo: boolean
-  @type("string") selectedMap: Dungeon | "random"
   @type("string") minRank: EloRank | null
-  @type("string") lobbyType: LobbyType = LobbyType.NORMAL
+  @type("string") maxRank: EloRank | null
+  @type("string") gameMode: GameMode = GameMode.CUSTOM_LOBBY
+  @type("string") specialGameRule: SpecialGameRule | null
+  @type("boolean") noElo: boolean
+  @type(["string"]) whitelist: string[]
+  @type(["string"]) blacklist: string[]
+  abortOnPlayerLeave?: AbortController
 
   constructor(params: {
     ownerId?: string
     roomName: string
     minRank?: EloRank
+    maxRank?: EloRank
     noElo?: boolean
-    lobbyType: LobbyType
+    password?: string
+    gameMode: GameMode
+    specialGameRule?: SpecialGameRule
+    whitelist?: string[]
+    blacklist?: string[]
   }) {
     super()
-    this.ownerId = params.ownerId ?? ""
+    this.ownerId =
+      params.gameMode === GameMode.CUSTOM_LOBBY ? (params.ownerId ?? "") : ""
     this.name = params.roomName
-    this.gameStarted = false
+    this.gameStartedAt = null
     this.ownerName = ""
-    this.password = null
+    this.password = params.password ?? null
     this.noElo = params.noElo ?? false
-    this.selectedMap = "random"
     this.minRank = params.minRank ?? null
-    this.lobbyType = params.lobbyType
+    this.maxRank = params.maxRank ?? null
+    this.gameMode = params.gameMode
+    this.specialGameRule = params.specialGameRule ?? null
+    this.whitelist = params.whitelist ?? []
+    this.blacklist = params.blacklist ?? []
+  }
+
+  addMessage(params: {
+    payload: string
+    authorId: string
+    author?: string | undefined
+    avatar?: string | undefined
+  }) {
+    const id = crypto.randomUUID()
+    const time = Date.now()
+    const message = new Message(
+      id,
+      params.payload,
+      params.authorId,
+      params.author ?? "",
+      params.avatar ?? "",
+      time
+    )
+    if (params.author) {
+      chatV2.create({
+        id: id,
+        payload: message.payload,
+        authorId: message.authorId,
+        author: message.author,
+        avatar: message.avatar,
+        time: time
+      })
+    }
+    this.messages.push(message)
+  }
+
+  removeMessage(id: string) {
+    const messageIndex = this.messages.findIndex((m) => m.id === id)
+    if (messageIndex !== -1) {
+      this.messages.splice(messageIndex, 1)
+    }
   }
 }
