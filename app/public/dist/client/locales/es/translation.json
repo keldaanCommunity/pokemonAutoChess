@@ -579,7 +579,11 @@
 		"SILK_TRAP": "Telatrampa",
 		"SKITTER_SMACK": "Golpe Rastrero",
 		"NIGHT_DAZE": "Pulso Nocturno",
-		"BITTER_MALICE": "Rencor Reprimido"
+		"BITTER_MALICE": "Rencor Reprimido",
+		"DEFAULT": "Sin Habilidad",
+		"EAR_DIG": "Cavaoreja",
+		"SWARM": "Llamada del Enjambre",
+		"FLING": "Lanzamiento"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1756,7 +1760,17 @@
 		"ESCAVALIER": "Escavalier",
 		"EISCUE_NOICE": "Esicue",
 		"DWEBBLE": "Dwebble",
-		"CRUSTLE": "Crustle"
+		"CRUSTLE": "Crustle",
+		"PASSIMIAN": "Passimian",
+		"SPIDOPS": "Spidops",
+		"TAROUNTULA": "Tarountula",
+		"KOMALA": "Komala",
+		"QUAQUAVAL": "Quaquaval",
+		"QUAXWELL": "Quaxwell",
+		"QUAXLY": "Quaxly",
+		"GREEDENT": "Greedent",
+		"SKWOVET": "Skwovet",
+		"EISCUE": "Eiscue (Cara Hielo)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,160,SP] SHIELD a todos los aliados.",
@@ -2740,7 +2754,26 @@
 		"SHED_SHELL": "Muda Concha",
 		"ROTOM_CATALOG": "Catálogo Rotom",
 		"RED_SCALE": "Escama Roja",
-		"SUN_STONE": "Piedra Solar"
+		"SUN_STONE": "Piedra Solar",
+		"TATSUGIRI_STRETCHY": "Tatsugiri Comandante (Recto)",
+		"TATSUGIRI_CURLY": "Tatsugiri Comandante (Curvado)",
+		"TATSUGIRI_DROOPY": "Tatsugiri Comandante (Lánguido)",
+		"CONFUSE_WAND": "Varita Confundidora",
+		"PETRIFY_WAND": "Varita Petrificadora",
+		"SLOW_WAND": "Varita Ralentizadora",
+		"SLUMBER_WAND": "Varita de Sueño",
+		"BLAST_WAND": "Varita Explosiva",
+		"HP_SWAP_WAND": "Varita Roba Vida",
+		"SPIRIT_WAND": "Varita Espíritu",
+		"LONG_WAND": "Varita Larga",
+		"GUIDING_WAND": "Varita Guiadora",
+		"SURROUND_WAND": "Varita Envolvente",
+		"POUNCE_WAND": "Varita Repentina",
+		"TWO_EDGED_WAND": "Varita de Doble Filo",
+		"WARP_WAND": "Varita Transportadora",
+		"SWITCHER_WAND": "Varita Intercambiadora",
+		"WHIRLWIND_WAND": "Varita de Remolino",
+		"TUNNEL_WAND": "Varita de Tunel"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3006,6 +3039,22 @@
 		"AMORPHOUS_GEM": "+1 a la sinergia AMORPHOUS",
 		"GOURMET_GEM": "+1 a la sinergia GOURMET",
 		"CELL_BATTERY": "Cada batería en el banco da 2 SPEED a todos tus Pokémon ELECTRIC. Úsalo en un pokemon ELECTRIC para supercargarlo durante la siguiente pelea, dándole 20 SPEED, 30 SHIELD y ELECTRIC_FIELD",
+		"MISSION_ORDER_PINK": "Completa esta misión para ganar 30 GOLD:\nconsigue 4 Pokémon STAR STAR STAR en el tablero",
+		"MISSION_ORDER_RED": "Completa esta misión para obtener 30 GOLD:\ninflige 100 de daño a otros jugadores",
+		"MISSION_ORDER_BLUE": "Completa esta misión para ganar 30 GOLD:\nllega a nivel 9",
+		"MISSION_ORDER_GREEN": "Completa esta misión para ganar 30 GOLD:\nconsigue 8 sinergias activas diferentes.",
+		"MISSION_ORDER_GOLD": "Completa esta misión para ganar 30 GOLD:\nconsigue 200 GOLD en total durante el juego",
+		"LEADERS_CREST": "Cuando otro jugador te derrote en una batalla consigue 4 GOLD adicional y toma la LEADERS_CREST",
+		"LAPRAS_PASSPORT": "Lapras te ofrece un viaje a otra región. Usa el pasaporte en un Pokémon para influenciar el destino basado en sus sinergias.",
+		"FRIEND_BOW": "El usuario consigue el tipo NORMAL.",
+		"BLACK_BELT": "",
+		"AQUA_MONICA": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo WATER.",
+		"FIERY_DRUM": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo FIRE.",
+		"GRASS_CORNET": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo GRASS.",
+		"ICY_FLUTE": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo ICE.",
+		"ROCK_HORN": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo ROCK.",
+		"SKY_MELODICA": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo FLYING.",
+		"TERRA_CYMBAL": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo GROUND.",
 		"MAGMARIZER": "El usuario obtiene el tipo FIRE y no sufre daño de BURN. En cambio, gana 30 SPEED mientras está quemado.",
 		"SPELL_TAG": "Otorga la sinergia GHOST. Cuando el portador es derrotado, el atacante es CURSE y es derrotado tras 10 segundos",
 		"TERRAIN_EXTENDER": "Al comienzo de la pelea el usuario obtiene ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD o FAIRY_FIELD basado en sus sinergias. Cuando utiliza su habilidad comparte el efecto con todos los aliados del mismo tipo del campo.",
@@ -3565,7 +3614,8 @@
 		"SANDSTORM": "5 de SPECIAL por segundo (GROUND son inmunes)\n+30% de duración de CONFUSION",
 		"BLOODMOON": "+20% de PHYSICAL\nDuración de WOUND +30%",
 		"SMOG": "-15% de precisión\n+30% de duración de POISONNED",
-		"MURKY": "-30 LUCK (GHOST es inmune)\n+30% de duración de SILENCE"
+		"MURKY": "-30 LUCK (GHOST es inmune)\n+30% de duración de SILENCE",
+		"ZENITH": "+20% de curación de todas las fuentes\n-30% de duración de SLEEP"
 	},
 	"emotion": {
 		"Normal": "Normal",
@@ -3675,7 +3725,8 @@
 		"cancel_tournament_participation": "Cancela tu participación en el torneo",
 		"register_tournament_participation": "Apúntate a este torneo",
 		"registrations_open_info": "Las inscripciones estarán abiertas una hora antes del inicio del torneo",
-		"starts_at": "Empieza a"
+		"starts_at": "Empieza a",
+		"tournament_mode_locked": "Necesitas llegar al nivel {{requiredLevel}} para participar en torneos."
 	},
 	"no_elo": "Solo por diversión",
 	"enable_elo": "Activar Elo",
@@ -3820,7 +3871,8 @@
 			"board_return": "Volver a tu tablero",
 			"avatar_emotes": "Ver el menú de gestos",
 			"avatar_show_emote": "Usar emote"
-		}
+		},
+		"theme": "Tema"
 	},
 	"jukebox": {
 		"music_volume": "Volumen de la música",
@@ -4015,7 +4067,9 @@
 		"gameboy": "Gameboy",
 		"gameboy_desc": "Juega el prototipo Gameboy del juego",
 		"pokeguesser": "PokéGuessr",
-		"pokeguesser_desc": "Adivina de qué Pokémon se trata mientras se prepara la partida para empezar."
+		"pokeguesser_desc": "Adivina de qué Pokémon se trata mientras se prepara la partida para empezar.",
+		"synergy_wheel": "Rueda de sinergias",
+		"palette_desc": "Personaliza el tema y los colores del juego en Opciones → Interface"
 	},
 	"level_required": "Nivel exigido",
 	"map": {
@@ -4194,7 +4248,9 @@
 		"game_already_started": "La partida ya ha comenzado",
 		"room_is_private": "Esta sala es privada. Introduce la contraseña",
 		"min_rank_not_reached": "Tu rango no es lo suficientemente alto para jugar esta partida clasificatoria.",
-		"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria"
+		"max_rank_not_reached": "Tu rango es muy alto para jugar esta partida clasificatoria",
+		"blacklisted": "Has sido expulsado de esta partida",
+		"ranked_mode_locked": "El modo clasificatorio está bloqueado. Necesitas llegas al nivel {{requiredLevel}} para desbloquearlo."
 	},
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
@@ -4256,7 +4312,14 @@
 		"MUNCHLAX": "Munchlax ha traído una PICNIC_SET para todos",
 		"SABLEYE": "Sableye ofrece gemas que aumentan tus niveles de sinergia.",
 		"CELEBI": "Celebi predice que la siguiente batalla JcE será variocolor",
-		"MAKUHITA": "Makuhita entrena a uno de tus Pokémon durante 5 rondas para mejorar sus estadísticas"
+		"MAKUHITA": "Makuhita entrena a uno de tus Pokémon durante 5 rondas para mejorar sus estadísticas",
+		"CINCCINO": "Cinccino ofrece elegantes SILK_SCARF",
+		"CROAGUNK": "Croagunk te permite cambiar un item sin usar por otro de la misma categoría.",
+		"WIGGLYTUFF": "Completa misiones para el Gremio Wigglituff para conseguir recompensas.",
+		"MAGNEZONE": "Magnezone está buscando a un forajido y ofrece una recompensa por encontrarlo.",
+		"KINGAMBIT": "Kingambit le ha dado al jugador en primer lugar la LEADERS_CREST. Vencelo en batalla para obtener GOLD extra!",
+		"LAPRAS": "Lapras te ofrece un viaje a otra región diferente.",
+		"LUDICOLO": "Ludicolo celebra el carnaval y ofrece instrumentos para unirte a las festividades."
 	},
 	"loading_hints": {
 		"tab_out": "¡No cambies de ventana! La carga se detiene cuando esta ventana del navegador está inactiva.",
@@ -4283,7 +4346,8 @@
 			"weather_label": "CLIMA",
 			"town_label": "Encuentros",
 			"dungeon_label": "Regiones",
-			"data_label": "Datos"
+			"data_label": "Datos",
+			"glossary_label": "Glosario"
 		},
 		"faq": {
 			"official_game": "¿Es este un juego oficial?",
@@ -4357,7 +4421,18 @@
 			"berries": "Bayas",
 			"berries_description": "Cuando la sinergia GRASS esta activa, puedes recolectar bayas haciendo click en los arboles de bayas al lado de tu avatar.",
 			"dishes": "Platos",
-			"dishes_description": "Los platos son preparados por cocineros GOURMET para dar grandes mejoras a un Pokémon en la siguiente batalla."
+			"dishes_description": "Los platos son preparados por cocineros GOURMET para dar grandes mejoras a un Pokémon en la siguiente batalla.",
+			"scarves_description": "La sinergia NORMAL te da SILK_SCARF, que puede ser combinado con otros componentes para obtener items exclusivos. Estos items son removidos cuando la sinergia NORMAL es perdida o disminuida. Las bufandas pueden ser removidas al llevar la unidad al banco.",
+			"other_tools_description": "Otras herramientas son exclusivas a algunos mercaderes encontrados en la ciudad o a ciertas recompensas:",
+			"gems_not_buried_description": "Otras gemas son exclusivas a ciertos mercantes encontrados en la ciudad o a ciertas recompensas:",
+			"you_may_also_find_in_the_ground": "También podés encontrar en la tierra:",
+			"fishing_rods": "Cañas de Pescar",
+			"fishing_rods_description": "Las cañas de pescar son usadas para pescar Pokémons WATER después de una pelea con otro jugador.",
+			"mulch": "Mantillo",
+			"mulch_description": "El Mantillo es obtenido cada vez que un Pokémon FLORA es debilitado. Usalo para evolucionar tus macetas de flores.",
+			"wands": "Varitas",
+			"wands_description": "Las varitas te dan efectos adicionales a tus Pokémon FAIRY",
+			"cell_battery_description": "Al alcanzar el nivel máximo de la sinergia ELECTRIC, tus Pokémon cargan CELL_BATTERY con sus ataques, las cuales puedes usar para supercargar a un Pokémon ELECTRIC durante la siguiente pelea."
 		},
 		"statistics": {
 			"stat_description": {
@@ -4536,6 +4611,23 @@
 			"username_disclaimer": "Los nombres de usuario inapropiados provocarán que tu cuenta sea baneada. Esto incluye blasfemia, temas sexuales, amenazas directas o indirectas, declaraciones políticas o propaganda no relacionada con el juego.",
 			"invalid_username": "Nombre de usuario inválido. El nombre de usuario debe tener entre 3 y 24 carácteres, empezar por una letra, solamente contener letras o números o \".-_\" y sin espacios."
 		}
+	},
+	"item_component": "Componente",
+	"gold_needed_to_level_up": "Oro necesitado para subir de nivel:",
+	"clicks_one": "{{count}} click",
+	"clicks_other": "{{count}} clicks",
+	"max_level_reached": "Nivel máximo alcanzado",
+	"scarves": "Bufandas",
+	"tm_short": "MT",
+	"wands": "Varitas",
+	"inimitable": "Inimitable",
+	"full_patch_notes": "Notas de parche completas",
+	"caught": "Atrapado!",
+	"notification": {
+		"new_title_title": "Nuevo Título Desbloqueado!",
+		"new_title_message": "Desbloqueaste un nuevo título:\n{{title}}: {{description}}",
+		"new_gadget_title": "Nuevo Gadget Desbloqueado!",
+		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{descripción}}"
 	},
 	"bench": "Banco",
 	"item_component": "Componente",
