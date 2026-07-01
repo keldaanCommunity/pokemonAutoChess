@@ -3046,8 +3046,6 @@
 		"MISSION_ORDER_GOLD": "Completa esta misión para ganar 30 GOLD:\nconsigue 200 GOLD en total durante el juego",
 		"LEADERS_CREST": "Cuando otro jugador te derrote en una batalla consigue 4 GOLD adicional y toma la LEADERS_CREST",
 		"LAPRAS_PASSPORT": "Lapras te ofrece un viaje a otra región. Usa el pasaporte en un Pokémon para influenciar el destino basado en sus sinergias.",
-		"FRIEND_BOW": "El usuario consigue el tipo NORMAL.",
-		"BLACK_BELT": "",
 		"AQUA_MONICA": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo WATER.",
 		"FIERY_DRUM": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo FIRE.",
 		"GRASS_CORNET": "Pokémon en la tienda tienen un 5% de probabilidad adicional de tener el tipo GRASS.",
@@ -4630,6 +4628,5 @@
 		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{descripción}}"
 	},
 	"bench": "Banco",
-	"item_component": "Componente",
 	"filters": "Filtros"
 }
