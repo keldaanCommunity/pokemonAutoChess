@@ -3006,6 +3006,23 @@
 		"AMORPHOUS_GEM": "+1 a la sinergia AMORPHOUS",
 		"GOURMET_GEM": "+1 a la sinergia GOURMET",
 		"CELL_BATTERY": "Cada batería en el banco da 2 SPEED a todos tus Pokémon ELECTRIC. Úsalo en un pokemon ELECTRIC para supercargarlo durante la siguiente pelea, dándole 20 SPEED, 30 SHIELD y ELECTRIC_FIELD",
+		"MAGMARIZER": "El usuario obtiene el tipo FIRE y no sufre daño de BURN. En cambio, gana 30 SPEED mientras está quemado.",
+		"SPELL_TAG": "Otorga la sinergia GHOST. Cuando el portador es derrotado, el atacante es CURSE y es derrotado tras 10 segundos",
+		"TERRAIN_EXTENDER": "Al comienzo de la pelea el usuario obtiene ELECTRIC_FIELD, GRASS_FIELD, PSYCHIC_FIELD o FAIRY_FIELD basado en sus sinergias. Cuando utiliza su habilidad comparte el efecto con todos los aliados del mismo tipo del campo.",
+		"SHED_SHELL": "Otorga la sinergia BUG pero reduce el HP del usuario por 50% cuando es clonado.",
+		"RED_SCALE": "Incrementa el ingreso pasivo de GOLD en 5 por ronda",
+		"RECYCLE_TICKET": "Recicla un objeto crafteado en el banco o dado a un Pokémon en sus componentes básicos. Un solo uso.",
+		"FRIEND_BOW": "El usuario adquiere el tipo NORMAL.",
+		"BLACK_BELT": "Los ataques críticos proveen 33% del daño infligido como SHIELD",
+		"MACH_RIBBON": "Cada 3 segundos gana 20 SPEED",
+		"EXPLOSIVE_BAND": "La primera vez que el blindaje del usuario es consumido este objeto explota, haciendo 50% de todo el SHIELD obtenido hasta ahora como SPECIAL a todos los enemigos ADJACENT",
+		"TWIST_BAND": "Las reducciones de estadísticas infligidas por enemigos se vuelven mejoras. Las mejoras de estadísticas del usuario no pueden ser robadas.",
+		"BIG_EATER_BELT": "Incrementa todas las mejoras de estadísticas en un 25% (redondeadas hacia abajo, sin afectar PP). Permite que el usuario consuma 2 platos por ronda.",
+		"LUCKY_RIBBON": "El usuario obtiene 20 LUCK y tiene [15,LK]% de probabilidad de esquivar ataques.",
+		"COVER_BAND": "Si un aliado ADJACENT está por ser derrotado por daño inminente, el usuario toma el daño en vez de él.",
+		"EFFICIENT_BANDANNA": "El usuario y los aliados ADJACENT_IN_THE_SAME_ROW tienen sus PP máximos reducidos en un 15%.",
+		"NULLIFY_BANDANNA": "El usuario ya no puede usar su habilidad. AP es convertido a escudo, y PP es convertido a SPECIAL adicional en el próximo ataque",
+		"WANTED_NOTICE": "Se busca: Debilitado o Vivo\nRecompensa: 10 GOLD",
 		"CONFUSE_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de probabilidad de causar CONFUSION por 2 segundos y reducir su SPE_DEF por 3.",
 		"PETRIFY_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional  y tienen un [5,LK]% de causar LOCKED por 2 segundos y reducir su DEF por 3.",
 		"SLOW_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional y tienen un [5,LK]% de causar PARALYSIS por dos segundos y reducir su SPEED por 10.",
@@ -4519,5 +4536,8 @@
 			"username_disclaimer": "Los nombres de usuario inapropiados provocarán que tu cuenta sea baneada. Esto incluye blasfemia, temas sexuales, amenazas directas o indirectas, declaraciones políticas o propaganda no relacionada con el juego.",
 			"invalid_username": "Nombre de usuario inválido. El nombre de usuario debe tener entre 3 y 24 carácteres, empezar por una letra, solamente contener letras o números o \".-_\" y sin espacios."
 		}
-	}
+	},
+	"bench": "Banco",
+	"item_component": "Componente",
+	"filters": "Filtros"
 }
