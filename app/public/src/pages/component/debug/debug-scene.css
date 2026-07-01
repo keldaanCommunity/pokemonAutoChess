@@ -6,7 +6,7 @@
   width: 800px;
   height: 800px;
   overflow: hidden;
-  border: 4px solid black;
+  border: var(--border-thick);
   border-radius: 4px;
 }
 
@@ -20,7 +20,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: white;
+  color: var(--color-fg-primary);
   background-color: black;
   z-index: 2;
 }
@@ -30,5 +30,10 @@
   top: 1em;
   right: 1em;
   background-color: black;
-  color: white;
+  color: var(--color-fg-primary);
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: start;
+  gap: 0.5em;
+  padding: 0.5em;
 }

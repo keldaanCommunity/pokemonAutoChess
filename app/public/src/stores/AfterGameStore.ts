@@ -1,31 +1,37 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import SimplePlayer from "../../../models/colyseus-models/simple-player"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { IAfterGamePlayer } from "../../../types"
+import { GameMode } from "../../../types/enum/Game"
 
-interface IUserAfterState {
-  players: SimplePlayer[]
-  elligibleToXP: boolean
-  elligibleToELO: boolean
+export interface IUserAfterState {
+  players: IAfterGamePlayer[]
+  eligibleToXP: boolean
+  eligibleToELO: boolean
+  gameMode: GameMode
 }
 
 const initialState: IUserAfterState = {
-  players: new Array<SimplePlayer>(),
-  elligibleToXP: false,
-  elligibleToELO: false
+  players: new Array<IAfterGamePlayer>(),
+  eligibleToXP: false,
+  eligibleToELO: false,
+  gameMode: GameMode.CUSTOM_LOBBY
 }
 
-export const afterSlice = createSlice({
+const afterSlice = createSlice({
   name: "after",
   initialState: initialState,
   reducers: {
-    addPlayer: (state, action: PayloadAction<SimplePlayer>) => {
-      state.players.push(JSON.parse(JSON.stringify(action.payload)))
+    addPlayer: (state, action: PayloadAction<IAfterGamePlayer>) => {
+      state.players.push(action.payload)
     },
     leaveAfter: () => initialState,
     setElligibilityToXP: (state, action: PayloadAction<boolean>) => {
-      state.elligibleToXP = action.payload
+      state.eligibleToXP = action.payload
     },
     setElligibilityToELO: (state, action: PayloadAction<boolean>) => {
-      state.elligibleToELO = action.payload
+      state.eligibleToELO = action.payload
+    },
+    setGameMode: (state, action: PayloadAction<GameMode>) => {
+      state.gameMode = action.payload
     }
   }
 })
@@ -34,7 +40,8 @@ export const {
   addPlayer,
   leaveAfter,
   setElligibilityToXP,
-  setElligibilityToELO
+  setElligibilityToELO,
+  setGameMode
 } = afterSlice.actions
 
 export default afterSlice.reducer

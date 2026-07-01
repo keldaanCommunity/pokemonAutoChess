@@ -1,395 +1,855 @@
-import GameState from "../rooms/states/game-state"
-import { IPlayer } from "../types"
 import {
+  AQUA_MONICA_CHANCE,
+  ARCEUS_RATE,
+  BuyPrices,
   DITTO_RATE,
+  EEVEE_RATE,
+  FALINKS_TROOPER_RATE,
+  FIERY_DRUM_CHANCE,
   FishRarityProbability,
+  GRASS_CORNET_CHANCE,
+  getAltFormForPlayer,
+  getUnownsPoolPerStage,
+  HIGH_ROLLER_CHANCE,
+  HONEY_CHANCE,
+  ICY_FLUTE_CHANCE,
+  INCENSE_CHANCE,
+  KECLEON_RATE,
+  LegendaryPool,
+  MIN_STAGE_FOR_DITTO,
+  NB_STARTERS,
   NB_UNIQUE_PROPOSITIONS,
+  PkmAltFormsByPkm,
+  PkmsWithAltForms,
   PoolSize,
+  PortalCarouselStages,
+  RarityCost,
   RarityProbabilityPerLevel,
-  SHOP_SIZE
-} from "../types/Config"
-import { Ability } from "../types/enum/Ability"
-import { Effect } from "../types/enum/Effect"
+  REMORAID_RATE,
+  REPEAT_BALL_LEGENDARY_CAP,
+  REPEAT_BALL_UNIQUE_CAP,
+  REPEAT_BALL_UNIQUE_INTERVAL,
+  ROCK_HORN_CHANCE,
+  SellPrices,
+  SHOP_SIZE,
+  SKY_MELODICA_CHANCE,
+  SynergyTiersThresholds,
+  TERRA_CYMBAL_CHANCE,
+  UNOWN_PSY3_NB_SHOPS_INTERVAL,
+  UNOWN_PSY5_NB_SHOPS_INTERVAL,
+  UNOWN_PSY7_NB_SHOPS_INTERVAL,
+  UniquePool
+} from "../config"
+import { pickFirstPartners } from "../core/scribbles"
+import type GameState from "../rooms/states/game-state"
+import type { IPokemon, IPokemonEntity } from "../types"
+import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
+  type FishingRod,
+  Item,
+  ItemComponentsNoFossilOrScarf
+} from "../types/enum/Item"
+import {
+  isRegionalVariant,
   Pkm,
   PkmDuos,
   PkmFamily,
-  PkmProposition,
-  getUnownsPoolPerStage
+  type PkmProposition,
+  PkmRegionalVariants,
+  Unowns
 } from "../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../types/enum/SpecialLobbyRule"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { removeInArray } from "../utils/array"
 import { logger } from "../utils/logger"
-import { clamp } from "../utils/number"
-import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
-import { values } from "../utils/schemas"
-import Player from "./colyseus-models/player"
-import { PRECOMPUTED_POKEMONS_PER_RARITY, getPokemonData } from "./precomputed"
-import { PVEStages } from "./pve-stages"
+import { clamp, min } from "../utils/number"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomWeighted,
+  shuffleArray
+} from "../utils/random"
+import { schemaValues } from "../utils/schemas"
+import type Player from "./colyseus-models/player"
+import {
+  PlayerChoice,
+  type PlayerChoiceType
+} from "./colyseus-models/player-choice"
+import { type Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { getWildChance } from "./colyseus-models/synergies"
+import { getPokemonBaseline } from "./pokemon-factory"
+import {
+  getPokemonData,
+  getRegularsTier1
+} from "./precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "./precomputed/precomputed-rarity"
 
 export function getPoolSize(rarity: Rarity, maxStars: number): number {
   return PoolSize[rarity][clamp(maxStars, 1, 3) - 1]
 }
 
-function getRegularsTier1(pokemons: Pkm[]) {
-  return pokemons.filter((p) => {
-    const pokemonData = getPokemonData(p)
-    return (
-      pokemonData.stars === 1 &&
-      pokemonData.skill !== Ability.DEFAULT &&
-      !pokemonData.additional
-    )
-  })
+export function getSellPrice(
+  pokemon: IPokemon | IPokemonEntity,
+  specialGameRule?: SpecialGameRule | null,
+  ignoreRareCandy = false
+): number {
+  const name = pokemon.name
+
+  if (specialGameRule === SpecialGameRule.FREE_MARKET && name !== Pkm.EGG)
+    return 0
+
+  const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
+
+  let price = 1
+  let stars = pokemon.stars
+  const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
+
+  if (hasRareCandy && !ignoreRareCandy) {
+    stars = min(1)(stars - 1)
+  }
+
+  if (name === Pkm.EGG) {
+    price = pokemon.shiny ? SellPrices.SHINY_EGG : SellPrices.EGG
+  } else if (name == Pkm.DITTO) {
+    price = SellPrices.DITTO
+  } else if (name == Pkm.FALINKS_TROOPER) {
+    price = SellPrices.FALINKS_TROOPER
+  } else if (name == Pkm.MELTAN) {
+    price = SellPrices.MELTAN
+  } else if (name === Pkm.MAGIKARP) {
+    price = SellPrices.MAGIKARP
+  } else if (name === Pkm.FEEBAS) {
+    price = SellPrices.FEEBAS
+  } else if (name === Pkm.WISHIWASHI) {
+    price = SellPrices.WISHIWASHI
+  } else if (name === Pkm.REMORAID) {
+    price = SellPrices.REMORAID
+  } else if (name === Pkm.OCTILLERY) {
+    price = hasRareCandy ? SellPrices.REMORAID : SellPrices.OCTILLERY
+  } else if (name === Pkm.GYARADOS) {
+    price = hasRareCandy ? SellPrices.MAGIKARP : SellPrices.GYARADOS
+  } else if (name === Pkm.MILOTIC) {
+    price = hasRareCandy ? SellPrices.FEEBAS : SellPrices.MILOTIC
+  } else if (name === Pkm.WISHIWASHI_SCHOOL) {
+    price = hasRareCandy ? SellPrices.WISHIWASHI : SellPrices.WISHIWASHI_SCHOOL
+  } else if (Unowns.includes(name)) {
+    price = SellPrices.UNOWN
+  } else if (pokemon.rarity === Rarity.HATCH) {
+    price = SellPrices.HATCH[stars - 1] ?? SellPrices.HATCH.at(-1)
+  } else if (pokemon.rarity === Rarity.UNIQUE) {
+    price = duo ? SellPrices.UNIQUE_DUO : SellPrices.UNIQUE
+  } else if (pokemon.rarity === Rarity.LEGENDARY) {
+    price = duo ? SellPrices.LEGENDARY_DUO : SellPrices.LEGENDARY
+  } else if (getPokemonBaseline(name) === Pkm.EEVEE) {
+    price = SellPrices.EEVEE
+  } else if (duo) {
+    price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
+  } else if (name === Pkm.MOTHIM) {
+    price = RarityCost[pokemon.rarity] * 1
+  } else {
+    price = RarityCost[pokemon.rarity] * stars
+  }
+
+  return price
+}
+
+export function getBuyPrice(
+  name: Pkm,
+  specialGameRule?: SpecialGameRule | null
+): number {
+  if (specialGameRule === SpecialGameRule.FREE_MARKET) return 0
+
+  let price: number
+
+  if (name === Pkm.DITTO) {
+    price = BuyPrices.DITTO
+  } else if (name === Pkm.FALINKS_TROOPER) {
+    price = BuyPrices.FALINKS_TROOPER
+  } else if (name === Pkm.MELTAN) {
+    price = BuyPrices.MELTAN
+  } else if (Unowns.includes(name)) {
+    price = BuyPrices.UNOWN
+  } else {
+    price = RarityCost[getPokemonData(name).rarity]
+  }
+
+  return price
 }
 
 const CommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.COMMON)
-const UncommonShop = getRegularsTier1(
-  PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON
-).concat(Pkm.LICKITUNG)
+const UncommonShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.UNCOMMON)
 const RareShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.RARE)
 const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
 const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
 
 export default class Shop {
-  commonPool: Map<Pkm, number> = new Map<Pkm, number>()
-  uncommonPool: Map<Pkm, number> = new Map<Pkm, number>()
-  rarePool: Map<Pkm, number> = new Map<Pkm, number>()
-  epicPool: Map<Pkm, number> = new Map<Pkm, number>()
-  ultraPool: Map<Pkm, number> = new Map<Pkm, number>()
+  commonPool: Pkm[] = new Array<Pkm>()
+  uncommonPool: Pkm[] = new Array<Pkm>()
+  rarePool: Pkm[] = new Array<Pkm>()
+  epicPool: Pkm[] = new Array<Pkm>()
+  ultraPool: Pkm[] = new Array<Pkm>()
   constructor() {
-    CommonShop.forEach((pkm) => {
-      this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 3))
-    })
-    UncommonShop.forEach((pkm) => {
-      const maxStars = pkm === Pkm.EEVEE ? 2 : 3
-      this.uncommonPool.set(pkm, getPoolSize(Rarity.UNCOMMON, maxStars))
-    })
-    RareShop.forEach((pkm) => {
-      this.rarePool.set(pkm, getPoolSize(Rarity.RARE, 3))
-    })
-    EpicShop.forEach((pkm) => {
-      this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 3))
-    })
-    UltraShop.forEach((pkm) => {
-      this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 3))
-    })
+    this.commonPool = CommonShop.flatMap((pkm) =>
+      Array(getPoolSize(Rarity.COMMON, 3)).fill(pkm)
+    )
+    this.uncommonPool = UncommonShop.flatMap((pkm) =>
+      Array(getPoolSize(Rarity.UNCOMMON, 3)).fill(pkm)
+    )
+    this.rarePool = RareShop.flatMap((pkm) =>
+      Array(getPoolSize(Rarity.RARE, 3)).fill(pkm)
+    )
+    this.epicPool = EpicShop.flatMap((pkm) =>
+      Array(getPoolSize(Rarity.EPIC, 3)).fill(pkm)
+    )
+    this.ultraPool = UltraShop.flatMap((pkm) =>
+      Array(getPoolSize(Rarity.ULTRA, 3)).fill(pkm)
+    )
   }
 
-  addAdditionalPokemon(pkmProposition: PkmProposition) {
-    const pkm: Pkm =
-      pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
-    const rarity = getPokemonData(pkm).rarity
+  getPool(rarity: Rarity) {
     switch (rarity) {
       case Rarity.COMMON:
-        this.commonPool.set(pkm, getPoolSize(Rarity.COMMON, 2))
-        break
+        return this.commonPool
       case Rarity.UNCOMMON:
-        this.uncommonPool.set(pkm, getPoolSize(Rarity.UNCOMMON, 2))
-        break
+        return this.uncommonPool
       case Rarity.RARE:
-        this.rarePool.set(pkm, getPoolSize(Rarity.RARE, 2))
-        break
+        return this.rarePool
       case Rarity.EPIC:
-        this.epicPool.set(pkm, getPoolSize(Rarity.EPIC, 2))
-        break
+        return this.epicPool
       case Rarity.ULTRA:
-        this.ultraPool.set(pkm, getPoolSize(Rarity.ULTRA, 2))
-        break
-      default:
-        break
+        return this.ultraPool
     }
   }
 
-  releasePokemon(pkm: Pkm) {
-    const { stars, rarity } = getPokemonData(pkm)
-    const family = PkmFamily[pkm]
+  getRegionalPool(rarity: Rarity, player: Player) {
+    switch (rarity) {
+      case Rarity.COMMON:
+        return player.commonRegionalPool
+      case Rarity.UNCOMMON:
+        return player.uncommonRegionalPool
+      case Rarity.RARE:
+        return player.rareRegionalPool
+      case Rarity.EPIC:
+        return player.epicRegionalPool
+      case Rarity.ULTRA:
+        return player.ultraRegionalPool
+    }
+  }
+
+  addAdditionalPokemon(pkmProposition: PkmProposition, state: GameState) {
+    const pkm: Pkm =
+      pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
+    if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
+    state.additionalPokemons.push(pkm)
+    const { rarity, stages } = getPokemonData(pkm)
+    const pool = this.getPool(rarity)
+    const entityNumber = getPoolSize(rarity, stages)
+    if (pool) {
+      for (let n = 0; n < entityNumber; n++) {
+        pool.push(pkm)
+      }
+    }
+  }
+
+  addRegionalPokemon(pkm: Pkm, player: Player) {
+    //logger.debug("adding regional pokemon", pkm)
+    const { rarity, stages } = getPokemonData(pkm)
+    const pool = this.getRegionalPool(rarity, player)
+    const entityNumber = getPoolSize(rarity, stages)
+    if (pool) {
+      for (let n = 0; n < entityNumber; n++) {
+        pool.push(pkm)
+      }
+    }
+  }
+
+  resetRegionalPool(player: Player) {
+    player.commonRegionalPool = player.commonRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.uncommonRegionalPool = player.uncommonRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.rareRegionalPool = player.rareRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.epicRegionalPool = player.epicRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+    player.ultraRegionalPool = player.ultraRegionalPool.filter(
+      (p) => getPokemonData(p).regional === false
+    )
+  }
+
+  releasePokemon(pkm: Pkm, player: Player, state: GameState) {
+    const { stars, rarity, regional } = getPokemonData(pkm)
+    const baseline = getPokemonBaseline(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
-    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(pkm))
+    const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both
       // but it is negligible and cannot be abused
       entityNumber = Math.ceil(entityNumber / 2)
     }
 
-    if (rarity === Rarity.COMMON) {
-      const value = this.commonPool.get(family)
-      if (value !== undefined) {
-        this.commonPool.set(family, value + entityNumber)
-      }
-    } else if (rarity === Rarity.UNCOMMON) {
-      const value = this.uncommonPool.get(family)
-      if (value !== undefined) {
-        this.uncommonPool.set(family, value + entityNumber)
-      }
-    } else if (rarity === Rarity.RARE) {
-      const value = this.rarePool.get(family)
-      if (value !== undefined) {
-        this.rarePool.set(family, value + entityNumber)
-      }
-    } else if (rarity === Rarity.EPIC) {
-      const value = this.epicPool.get(family)
-      if (value !== undefined) {
-        this.epicPool.set(family, value + entityNumber)
-      }
-    } else if (rarity === Rarity.ULTRA) {
-      const value = this.ultraPool.get(family)
-      if (value !== undefined) {
-        this.ultraPool.set(family, value + entityNumber)
+    if (
+      regional &&
+      new PokemonClasses[pkm](pkm).isInRegion(player.map, state) === false
+    ) {
+      return // regional pokemons sold in a region other than their original region are not added back to the pool
+    }
+
+    const pool = regional
+      ? this.getRegionalPool(rarity, player)
+      : this.getPool(rarity)
+
+    if (pool) {
+      for (let n = 0; n < entityNumber; n++) {
+        pool.push(baseline)
       }
     }
   }
 
-  refillShop(player: Player, state: GameState) {
+  refillShop(player: Player, state: GameState, specificTypes?: Synergy[]) {
     // No need to release pokemons since they won't be changed
-    const PkmList = player.shop.map((pokemon) => {
-      if (pokemon != Pkm.MAGIKARP && pokemon != Pkm.DEFAULT) {
-        return pokemon
+    player.shop.forEach((pokemon, i) => {
+      if (pokemon === Pkm.MAGIKARP || pokemon === Pkm.DEFAULT) {
+        player.shop[i] = this.pickPokemon(
+          player,
+          state,
+          i,
+          false,
+          specificTypes
+        )
       }
-      return this.pickPokemon(player, state)
     })
-
-    for (let i = 0; i < SHOP_SIZE; i++) {
-      player.shop[i] = PkmList[i]
-    }
   }
 
   assignShop(player: Player, manualRefresh: boolean, state: GameState) {
-    player.shop.forEach((pkm) => this.releasePokemon(pkm))
+    player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
 
-    if (player.effects.has(Effect.EERIE_SPELL) && !manualRefresh) {
+    let psychicLevel = player.synergies.get(Synergy.PSYCHIC) ?? 0
+
+    if (!manualRefresh && player.unownReminiscences > 0) {
+      // consume unown reminescenses for next automatic shopm
+      psychicLevel += player.unownReminiscences
+      player.unownReminiscences = 0
+    }
+
+    const hasTranscendence =
+      psychicLevel >= SynergyTiersThresholds[Synergy.PSYCHIC][2]
+    if (hasTranscendence) {
+      player.shopsSinceLastUnownShop += 1
+    }
+    const shouldBeUnownShop =
+      hasTranscendence &&
+      ((!manualRefresh && !player.shopLocked) ||
+        (manualRefresh &&
+          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
+
+    if (shouldBeUnownShop) {
+      // Unown shop
+      player.shopFreeRolls += 1
+      player.shopsSinceLastUnownShop = 0
       const unowns = getUnownsPoolPerStage(state.stageLevel)
+      const chosenUnowns: Pkm[] = []
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = pickRandomIn(unowns)
+        const availableUnowns = unowns.filter((u) => !chosenUnowns.includes(u))
+        const randomUnown = pickRandomIn(availableUnowns)
+        chosenUnowns.push(randomUnown)
+        player.shop[i] = randomUnown
       }
     } else {
+      // Regular shop
       for (let i = 0; i < SHOP_SIZE; i++) {
-        player.shop[i] = this.pickPokemon(player, state)
+        player.shop[i] = this.pickPokemon(player, state, i)
       }
+    }
+  }
+
+  assignSootheBellShop(
+    player: Player,
+    state: GameState,
+    specificTypes: Synergy[]
+  ) {
+    player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
+    for (let i = 0; i < SHOP_SIZE; i++) {
+      player.shop[i] = this.pickPokemon(player, state, i, true, specificTypes)
     }
   }
 
   assignUniquePropositions(
     player: Player,
-    list: PkmProposition[],
-    synergies: Synergy[]
+    state: GameState,
+    portalSynergies: Synergy[]
   ) {
-    const propositions = [...list]
+    const stageLevel = state.stageLevel
+    const typeByStage: { [stage: number]: PlayerChoiceType } = {
+      [PortalCarouselStages[0]]: "starter",
+      [PortalCarouselStages[1]]: "unique",
+      [PortalCarouselStages[2]]: "legendary"
+    }
+    const type = typeByStage[stageLevel]
 
-    // ensure we have at least one synergy per proposition
-    if (synergies.length > NB_UNIQUE_PROPOSITIONS) {
-      synergies = pickNRandomIn(synergies, NB_UNIQUE_PROPOSITIONS)
-    } else if (synergies.length < NB_UNIQUE_PROPOSITIONS) {
-      while (synergies.length < NB_UNIQUE_PROPOSITIONS) {
-        synergies.push(pickRandomIn(Synergy))
+    const poolByType: {
+      [type in "starter" | "unique" | "legendary"]: PkmProposition[]
+    } = {
+      starter: [...this.commonPool],
+      unique: [...UniquePool],
+      legendary: [...LegendaryPool]
+    }
+
+    let allCandidates: PkmProposition[] = poolByType[type] || []
+
+    if (stageLevel === 0) {
+      if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
+        allCandidates = [...UniquePool]
+      } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
+        allCandidates = pickFirstPartners(player, state)
       }
     }
 
-    for (let i = 0; i < NB_UNIQUE_PROPOSITIONS; i++) {
-      const synergy = synergies[i]
-      const candidates = propositions.filter((m) => {
-        const pkm: Pkm = m in PkmDuos ? PkmDuos[m][0] : m
-        return getPokemonData(pkm).types.includes(synergy)
-      })
-      const selectedProposition = pickRandomIn(
-        candidates.length > 0 ? candidates : propositions
-      )
-      removeInArray(propositions, selectedProposition)
-      player.pokemonsProposition.push(selectedProposition)
+    // ensure we have at least one synergy per proposition
+    if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
+      portalSynergies = pickNRandomIn(portalSynergies, NB_UNIQUE_PROPOSITIONS)
     }
+
+    const nbPropositions =
+      stageLevel === PortalCarouselStages[0]
+        ? NB_STARTERS
+        : NB_UNIQUE_PROPOSITIONS
+    const pokemonsProposed: PkmProposition[] = []
+    const itemsProposed: Item[] = []
+
+    for (let i = 0; i < nbPropositions; i++) {
+      let synergyWanted: Synergy | undefined = portalSynergies[i]
+
+      function filterCandidates(proposition: PkmProposition): boolean {
+        const pkm: Pkm =
+          proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
+        const { types, regional } = getPokemonData(pkm)
+
+        const hasSynergyWanted =
+          synergyWanted === undefined || types.includes(synergyWanted)
+
+        if (!hasSynergyWanted) return false
+
+        if (regional) {
+          const pokemon = new PokemonClasses[pkm](pkm)
+          if (!pokemon.isInRegion(player.map)) {
+            // skip regional pokemons not in their region
+            return false
+          }
+        }
+
+        if (
+          pokemonsProposed.some((prop) => {
+            const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
+            return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
+          })
+        ) {
+          // avoid proposing two pokemons of the same family or regional variants
+          return false
+        }
+
+        if (
+          pkm in PkmRegionalVariants &&
+          PkmRegionalVariants[pkm]?.some((p) => {
+            const variant = new PokemonClasses[p](p)
+            const lostTypes = types.filter((type) => !variant.types.has(type))
+            return (
+              variant.isInRegion(player.map) &&
+              synergyWanted &&
+              lostTypes.includes(synergyWanted)
+            )
+          })
+        ) {
+          // avoid proposing pokemon whose regional variants would lose the wanted synergy
+          return false
+        }
+
+        return true
+      }
+
+      let candidates = allCandidates.filter(filterCandidates)
+      const initialCandidatesEmpty = candidates.length === 0
+      if (initialCandidatesEmpty) {
+        synergyWanted = undefined
+        candidates = allCandidates.filter(filterCandidates)
+      }
+      let selected = pickRandomIn(candidates)
+
+      if (selected in PkmRegionalVariants) {
+        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+          new PokemonClasses[p](p).isInRegion(player.map)
+        )
+        if (regionalVariants.length > 0)
+          selected = pickRandomIn(regionalVariants)
+      }
+      if (selected in PkmAltFormsByPkm) {
+        selected = getAltFormForPlayer(selected as Pkm, player)
+      }
+
+      if (stageLevel === PortalCarouselStages[0]) {
+        itemsProposed[i] = pickRandomIn(
+          ItemComponentsNoFossilOrScarf.filter(
+            (c) => itemsProposed.includes(c) === false
+          )
+        )
+      }
+
+      if (
+        stageLevel === PortalCarouselStages[0] &&
+        pokemonsProposed.includes(Pkm.EEVEE) === false &&
+        (chance(EEVEE_RATE) || initialCandidatesEmpty) &&
+        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
+        state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
+      ) {
+        selected = Pkm.EEVEE
+        itemsProposed[i] = Item.FOSSIL_STONE
+      } else if (
+        stageLevel === PortalCarouselStages[1] &&
+        pokemonsProposed.includes(Pkm.KECLEON) === false &&
+        chance(KECLEON_RATE)
+      ) {
+        selected = Pkm.KECLEON
+      } else if (
+        stageLevel === PortalCarouselStages[2] &&
+        pokemonsProposed.includes(Pkm.ARCEUS) === false &&
+        chance(ARCEUS_RATE)
+      ) {
+        selected = Pkm.ARCEUS
+      }
+
+      removeInArray(allCandidates, selected)
+      pokemonsProposed.push(selected)
+    }
+
+    player.choices.push(
+      new PlayerChoice({
+        type,
+        pokemons: pokemonsProposed,
+        items: itemsProposed
+      })
+    )
   }
 
   getRandomPokemonFromPool(
-    pool: Map<Pkm, number>,
-    finals: Set<Pkm>,
-    specificTypeWanted?: Synergy
+    rarity: Rarity,
+    player: Player,
+    finals: Set<Pkm> = new Set(),
+    specificTypesWanted?: Synergy[]
   ): Pkm {
     let pkm = Pkm.MAGIKARP
-    const candidates = new Array<Pkm>()
-    pool.forEach((value, pkm) => {
-      const types = getPokemonData(pkm).types
-      const isOfTypeWanted = specificTypeWanted
-        ? types.includes(specificTypeWanted)
-        : types.includes(Synergy.WILD) === false
-
-      if (isOfTypeWanted && !finals.has(pkm)) {
-        for (let i = 0; i < value; i++) {
-          candidates.push(pkm)
+    const candidates = (this.getPool(rarity) ?? [])
+      .concat(this.getRegionalPool(rarity, player) ?? [])
+      .map((pkm) => {
+        if (pkm in PkmRegionalVariants) {
+          const regionalVariants = PkmRegionalVariants[pkm]!.filter((p) =>
+            player.regionalPokemons.includes(p)
+          )
+          if (regionalVariants.length > 0) pkm = pickRandomIn(regionalVariants)
         }
-      }
-    })
+        return pkm
+      })
+      .filter((pkm) => {
+        const types = getPokemonData(pkm).types
+        const isOfTypeWanted = specificTypesWanted
+          ? specificTypesWanted.some((specificTypeWanted) =>
+              types.includes(specificTypeWanted)
+            )
+          : types.includes(Synergy.WILD) === false
+
+        if (
+          PkmsWithAltForms.includes(pkm) &&
+          getAltFormForPlayer(pkm, player) !== pkm
+        ) {
+          // only keep desired alt form for player
+          return false
+        }
+
+        return isOfTypeWanted && !finals.has(getPokemonBaseline(pkm))
+      })
 
     if (candidates.length > 0) {
       pkm = pickRandomIn(candidates)
-    } else if (specificTypeWanted === Synergy.WATER) {
+    } else if (
+      specificTypesWanted &&
+      specificTypesWanted.includes(Synergy.WATER)
+    ) {
       return Pkm.MAGIKARP // if no more water in pool, return magikarp
-    } else if (specificTypeWanted) {
-      return this.getRandomPokemonFromPool(pool, finals) // could not find of specific type, return another type
+    } else if (specificTypesWanted) {
+      return this.getRandomPokemonFromPool(rarity, player, finals) // could not find of specific type, return another type
     }
 
-    const val = pool.get(pkm)
-    if (val !== undefined) {
-      pool.set(pkm, Math.max(0, val - 1))
+    const { regional } = getPokemonData(pkm)
+    const pool = regional
+      ? this.getRegionalPool(rarity, player)
+      : this.getPool(rarity)
+    if (pool) {
+      const index = pool.indexOf(getPokemonBaseline(pkm))
+      if (index >= 0) {
+        pool.splice(index, 1)
+      }
     }
-    //logger.debug("taking a ", pkm, "from the shop", val)
+
     return pkm
   }
 
-  pickPokemon(player: Player, state: GameState) {
-    const rarityProbability =
-      RarityProbabilityPerLevel[player.experienceManager.level]
-    const rarity_seed = Math.random()
-    let pokemon = Pkm.MAGIKARP
-    let threshold = 0
-
+  pickPokemon(
+    player: Player,
+    state: GameState,
+    shopIndex: number = -1,
+    noSpecial = false,
+    specificTypes?: Synergy[]
+  ): Pkm {
     if (
-      state.specialLobbyRule !== SpecialLobbyRule.DITTO_PARTY &&
-      chance(DITTO_RATE)
+      state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
+      chance(DITTO_RATE) &&
+      state.stageLevel >= MIN_STAGE_FOR_DITTO &&
+      !noSpecial
     ) {
-      return Pkm.DITTO
+      return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
-    const UNOWN_RATE = 0.05
-    if (
-      (player.effects.has(Effect.LIGHT_SCREEN) ||
-        player.effects.has(Effect.EERIE_SPELL)) &&
-      chance(UNOWN_RATE)
-    ) {
-      const unowns = getUnownsPoolPerStage(state.stageLevel)
-      return pickRandomIn(unowns)
-    }
-
-    const isPVE = state.stageLevel in PVEStages
-    const wildChance = player.effects.has(Effect.QUICK_FEET)
-      ? 0.05
-      : player.effects.has(Effect.RUN_AWAY)
-      ? 0.1
-      : player.effects.has(Effect.HUSTLE)
-      ? 0.15
-      : player.effects.has(Effect.BERSERK)
-      ? 0.2
-      : isPVE
-      ? 0.05
-      : 0
-
-    const finals = new Set(
-      values(player.board)
-        .filter((pokemon) => pokemon.final)
-        .map((pokemon) => PkmFamily[pokemon.name])
-    )
-
-    let specificTypeWanted: Synergy | undefined = undefined
-    if (wildChance > 0 && chance(wildChance)) {
-      specificTypeWanted = Synergy.WILD
-    }
-
-    for (let i = 0; i < rarityProbability.length; i++) {
-      threshold += rarityProbability[i]
-      if (rarity_seed < threshold) {
-        switch (i) {
-          case 0:
-            pokemon = this.getRandomPokemonFromPool(
-              this.commonPool,
-              finals,
-              specificTypeWanted
-            )
-            break
-          case 1:
-            pokemon = this.getRandomPokemonFromPool(
-              this.uncommonPool,
-              finals,
-              specificTypeWanted
-            )
-            break
-          case 2:
-            pokemon = this.getRandomPokemonFromPool(
-              this.rarePool,
-              finals,
-              specificTypeWanted
-            )
-            break
-          case 3:
-            pokemon = this.getRandomPokemonFromPool(
-              this.epicPool,
-              finals,
-              specificTypeWanted
-            )
-            break
-          case 4:
-            pokemon = this.getRandomPokemonFromPool(
-              this.ultraPool,
-              finals,
-              specificTypeWanted
-            )
-            break
-          default:
-            logger.error(
-              `error in shop while picking seed = ${rarity_seed}, threshold = ${threshold}, index = ${i}`
-            )
-            break
-        }
-        break
+    if (shopIndex === 5 && !noSpecial) {
+      const totalRerolls = player.gameStats.rerollCount + state.stageLevel
+      if (
+        (player.effects.has(EffectEnum.PRECOGNITION) &&
+          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+        (player.effects.has(EffectEnum.AURA) &&
+          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+      ) {
+        const unowns = getUnownsPoolPerStage(state.stageLevel)
+        return pickRandomIn(unowns)
       }
     }
 
-    return pokemon
+    if (
+      player.effects.has(EffectEnum.FALINKS_BRASS) &&
+      chance(FALINKS_TROOPER_RATE)
+    ) {
+      return Pkm.FALINKS_TROOPER
+    }
+
+    const wildChance = getWildChance(player, state.stageLevel)
+    const finals = player.getFinalizedLines()
+    let specificTypesWanted: Synergy[] | undefined = undefined
+
+    const attractors = schemaValues(player.board).filter(
+      (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)
+    )
+    let attractor: Pokemon | null = null
+    for (const p of attractors) {
+      if (p.items.has(Item.INCENSE) && chance(INCENSE_CHANCE, p)) attractor = p
+      if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
+    }
+
+    if (specificTypes) {
+      specificTypesWanted = specificTypes
+    } else if (attractor) {
+      specificTypesWanted = schemaValues(attractor.types)
+    } else if (wildChance > 0 && chance(wildChance)) {
+      specificTypesWanted = [Synergy.WILD]
+    } else if (
+      player.items.includes(Item.AQUA_MONICA) &&
+      chance(AQUA_MONICA_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.WATER]
+    } else if (
+      player.items.includes(Item.FIERY_DRUM) &&
+      chance(FIERY_DRUM_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.FIRE]
+    } else if (
+      player.items.includes(Item.GRASS_CORNET) &&
+      chance(GRASS_CORNET_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.GRASS]
+    } else if (
+      player.items.includes(Item.ICY_FLUTE) &&
+      chance(ICY_FLUTE_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.ICE]
+    } else if (
+      player.items.includes(Item.ROCK_HORN) &&
+      chance(ROCK_HORN_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.ROCK]
+    } else if (
+      player.items.includes(Item.SKY_MELODICA) &&
+      chance(SKY_MELODICA_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.FLYING]
+    } else if (
+      player.items.includes(Item.TERRA_CYMBAL) &&
+      chance(TERRA_CYMBAL_CHANCE)
+    ) {
+      specificTypesWanted = [Synergy.GROUND]
+    }
+
+    const probas = RarityProbabilityPerLevel[player.experienceManager.level]
+    const rarity_seed = Math.random()
+    let i = 0,
+      threshold = 0
+    while (rarity_seed > threshold) {
+      threshold += probas[i]
+      i++
+    }
+    const rarity = [
+      Rarity.COMMON,
+      Rarity.UNCOMMON,
+      Rarity.RARE,
+      Rarity.EPIC,
+      Rarity.ULTRA
+    ][i - 1]
+
+    if (
+      state.specialGameRule === SpecialGameRule.HIGH_ROLLER &&
+      chance(HIGH_ROLLER_CHANCE) &&
+      !noSpecial
+    ) {
+      if (state.stageLevel < 10) return this.pickSpecialPokemon(Rarity.HATCH)
+      if (state.stageLevel < 20) return this.pickSpecialPokemon(Rarity.UNIQUE)
+      return this.pickSpecialPokemon(Rarity.LEGENDARY)
+    }
+
+    if (!rarity) {
+      logger.error(
+        `error in shop while picking seed = ${rarity_seed}, threshold = ${threshold}`
+      )
+      return Pkm.MAGIKARP
+    }
+
+    const repeatBallHolders = schemaValues(player.board).filter((p) =>
+      p.items.has(Item.REPEAT_BALL)
+    )
+    const totalRerolls = player.gameStats.rerollCount + state.stageLevel
+
+    if (
+      repeatBallHolders.length > 0 &&
+      shopIndex >= 0 &&
+      shopIndex < repeatBallHolders.length &&
+      !noSpecial
+    ) {
+      if (
+        totalRerolls >= REPEAT_BALL_LEGENDARY_CAP &&
+        totalRerolls % REPEAT_BALL_UNIQUE_INTERVAL === 0
+      ) {
+        return this.pickSpecialPokemon(Rarity.LEGENDARY)
+      } else if (
+        totalRerolls >= REPEAT_BALL_UNIQUE_CAP &&
+        totalRerolls % REPEAT_BALL_UNIQUE_INTERVAL === 0
+      ) {
+        return this.pickSpecialPokemon(Rarity.UNIQUE)
+      }
+    }
+
+    return this.getRandomPokemonFromPool(
+      rarity,
+      player,
+      finals,
+      specificTypesWanted
+    )
   }
 
-  fishPokemon(player: IPlayer, fishingLevel: number): Pkm {
-    const rarityProbability = FishRarityProbability[fishingLevel]
-    const rarity_seed = Math.random()
-    let fish: Pkm = Pkm.MAGIKARP
-    let threshold = 0
-    const finals = new Set(
-      values(player.board)
-        .filter((pokemon) => pokemon.final)
-        .map((pokemon) => PkmFamily[pokemon.name])
+  pickSpecialPokemon(rarity: Rarity) {
+    let pool: PkmProposition[]
+    switch (rarity) {
+      case Rarity.LEGENDARY:
+        pool = LegendaryPool
+        break
+      case Rarity.UNIQUE:
+        pool = UniquePool
+        break
+      case Rarity.HATCH:
+        pool = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
+          (p) => getPokemonData(p).stars === 1
+        )
+        break
+      default:
+        return Pkm.MAGIKARP
+    }
+    let candidates: Pkm[] = pool.filter<Pkm>((p): p is Pkm => !(p in PkmDuos))
+    shuffleArray(candidates)
+    candidates = candidates.filter(
+      (p, index) =>
+        candidates.findIndex((p2) => PkmFamily[p2] === PkmFamily[p]) === index
+    )
+    if (candidates.length > 0) return pickRandomIn(candidates)
+    return Pkm.MAGIKARP
+  }
+
+  pickFish(player: Player, rod: FishingRod, state: GameState): Pkm {
+    const mantine = schemaValues(player.board).find(
+      (p) => p.name === Pkm.MANTYKE || p.name === Pkm.MANTINE
     )
 
-    for (const rarity in rarityProbability) {
-      threshold += rarityProbability[rarity]
+    const rarityProbability = FishRarityProbability[rod]
+    const rarity_seed = Math.random()
+    let threshold = 0
+    const finals = player.getFinalizedLines()
+    const wildChance = getWildChance(player, state.stageLevel)
+
+    if (
+      finals.has(Pkm.REMORAID) === false &&
+      ((mantine && chance(REMORAID_RATE, mantine)) || chance(wildChance))
+    )
+      return Pkm.REMORAID
+
+    let rarity = Rarity.SPECIAL
+    for (const r in rarityProbability) {
+      threshold += rarityProbability[r]
       if (rarity_seed < threshold) {
-        switch (rarity) {
-          case Rarity.COMMON:
-            fish = this.getRandomPokemonFromPool(
-              this.commonPool,
-              finals,
-              Synergy.WATER
-            )
-            break
-          case Rarity.UNCOMMON:
-            fish = this.getRandomPokemonFromPool(
-              this.uncommonPool,
-              finals,
-              Synergy.WATER
-            )
-            break
-          case Rarity.RARE:
-            fish = this.getRandomPokemonFromPool(
-              this.rarePool,
-              finals,
-              Synergy.WATER
-            )
-            break
-          case Rarity.EPIC:
-            fish = this.getRandomPokemonFromPool(
-              this.epicPool,
-              finals,
-              Synergy.WATER
-            )
-            break
-          case Rarity.SPECIAL:
-          default:
-            if (fishingLevel === 1) fish = Pkm.MAGIKARP
-            if (fishingLevel === 2) fish = Pkm.FEEBAS
-            //if (fishingLevel >= 3) fish = Pkm.WISHIWASHI // when available
-            break
-        }
+        rarity = r as Rarity
         break
       }
     }
 
-    return fish
+    if (rarity !== Rarity.SPECIAL) {
+      const fish = this.getRandomPokemonFromPool(rarity, player, finals, [
+        Synergy.WATER
+      ])
+      if (fish !== Pkm.MAGIKARP) return fish
+    }
+
+    if (rod === Item.SUPER_ROD) return Pkm.WISHIWASHI
+    if (rod === Item.GOOD_ROD) return Pkm.FEEBAS
+    return Pkm.MAGIKARP
+  }
+
+  magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
+    const finals = player.getFinalizedLines()
+
+    const rarityProbabilies =
+      RarityProbabilityPerLevel[player.experienceManager.level]
+    const magnetPullRatePerRarity = {
+      [Rarity.COMMON]: rarityProbabilies[0],
+      [Rarity.UNCOMMON]: rarityProbabilies[1],
+      [Rarity.RARE]: rarityProbabilies[2],
+      [Rarity.EPIC]: rarityProbabilies[3],
+      [Rarity.ULTRA]: rarityProbabilies[4],
+      [Rarity.SPECIAL]: 0.35
+    }
+    const rarity =
+      randomWeighted(
+        magnetPullRatePerRarity,
+        1.35,
+        meltan.ap,
+        0.5,
+        meltan.luck
+      ) ?? Rarity.SPECIAL
+
+    if (rarity !== Rarity.SPECIAL) {
+      const steelPkm = this.getRandomPokemonFromPool(rarity, player, finals, [
+        Synergy.STEEL
+      ])
+      if (getPokemonData(steelPkm).types.includes(Synergy.STEEL))
+        return steelPkm
+    }
+
+    return Pkm.MELTAN
   }
 }

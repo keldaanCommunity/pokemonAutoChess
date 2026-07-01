@@ -1,0 +1,164 @@
+import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { usePreferences } from "../../../preferences"
+import { getGameScene } from "../../game"
+import { cc } from "../../utils/jsx"
+
+import "./keybind-info.css"
+
+export default function KeybindInfo() {
+  const { t } = useTranslation()
+  const [preferences, setPreferences] = usePreferences()
+  const [currentlyRemapping, setCurrentlyRemapping] = useState<string | null>(
+    null
+  )
+
+  useEffect(() => {
+    function onKeydown(e: KeyboardEvent) {
+      if (currentlyRemapping === null) return
+
+      // Prevent page scroll / focus movement while capturing keys (arrows, space, etc.)
+      e.preventDefault()
+      e.stopPropagation()
+
+      let key = e.key.toUpperCase()
+      if (key === "ESCAPE") {
+        setCurrentlyRemapping(null)
+        return
+      }
+      key = KEY_CODES_TO_PHASER_KEY_CODES[key] ?? key
+      setPreferences((old) => ({
+        keybindings: { ...old.keybindings, [currentlyRemapping]: key }
+      }))
+      setCurrentlyRemapping(null)
+
+      const gameScene = getGameScene()
+      if (gameScene) gameScene.registerKeys() // update key listeners
+    }
+
+    window.addEventListener("keydown", onKeydown)
+    //clean up event listener when destroyed
+    return () => {
+      window.removeEventListener("keydown", onKeydown)
+    }
+  }, [currentlyRemapping])
+
+  const keys = Object.keys(preferences.keybindings)
+  const conflictingKeys = keys.filter((key, i) =>
+    keys.some(
+      (otherKey, otherIndex) =>
+        i !== otherIndex &&
+        preferences.keybindings[key] === preferences.keybindings[otherKey]
+    )
+  )
+
+  const RemappableKey = ({ keyId }: { keyId: string }) => {
+    return (
+      <kbd
+        className={cc("remappable", {
+          remapping: currentlyRemapping === keyId,
+          conflict: conflictingKeys.includes(keyId)
+        })}
+        onClick={() => setCurrentlyRemapping(keyId)}
+      >
+        {currentlyRemapping === keyId ? "?" : preferences.keybindings[keyId]}
+      </kbd>
+    )
+  }
+
+  return (
+    <div className="keybind-container">
+      <h2>{t("options.key_bindings")}</h2>
+      <dl>
+        <dt>
+          <RemappableKey keyId="sell" />
+        </dt>
+        <dd>{t("options.key_description.sell")}</dd>
+
+        <dt>
+          <RemappableKey keyId="buy_xp" />
+        </dt>
+        <dd>{t("options.key_description.buy_xp")}</dd>
+
+        <dt>
+          <RemappableKey keyId="refresh" />
+        </dt>
+        <dd>{t("options.key_description.refresh")}</dd>
+
+        <dt>
+          <RemappableKey keyId="lock" />
+        </dt>
+        <dd>{t("options.key_description.lock")}</dd>
+
+        <dt>
+          <RemappableKey keyId="camera_lock" />
+        </dt>
+        <dd>{t("options.key_description.camera_lock")}</dd>
+
+        <dt>
+          <RemappableKey keyId="switch" />
+        </dt>
+        <dd>{t("options.key_description.switch")}</dd>
+
+        <dt>
+          <RemappableKey keyId="emote" />
+        </dt>
+        <dd>{t("options.key_description.avatar_anim")}</dd>
+
+        <dt>
+          <RemappableKey keyId="prev_player" />
+        </dt>
+        <dd>{t("options.key_description.prev_player")}</dd>
+
+        <dt>
+          <RemappableKey keyId="next_player" />
+        </dt>
+        <dd>{t("options.key_description.next_player")}</dd>
+
+        <dt>
+          <RemappableKey keyId="board_return" />
+        </dt>
+        <dd>{t("options.key_description.board_return")}</dd>
+
+        <dt>
+          <RemappableKey keyId="wiki" />
+        </dt>
+        <dd>{t("options.key_description.wiki")}</dd>
+
+        <dt>
+          <RemappableKey keyId="team_planner" />
+        </dt>
+        <dd>{t("options.key_description.team_planner")}</dd>
+
+        <dt>
+          <RemappableKey keyId="meta_report" />
+        </dt>
+        <dd>{t("options.key_description.meta_report")}</dd>
+
+        <dt>
+          <kbd>Ctrl</kbd>
+        </dt>
+        <dd>{t("options.key_description.avatar_emotes")}</dd>
+
+        <dt>
+          <kbd>Ctrl</kbd>+<kbd>1</kbd>..<kbd>9</kbd>
+        </dt>
+        <dd>{t("options.key_description.avatar_show_emote")} 1..9</dd>
+      </dl>
+      <p>{t("options.click_on_keybind_to_change_it")}</p>
+    </div>
+  )
+}
+
+const KEY_CODES_TO_PHASER_KEY_CODES: { [key: string]: string } = {
+  " ": "SPACE",
+  PAGEUP: "PAGE_UP",
+  PAGEDOWN: "PAGE_DOWN",
+
+  // Normalize arrow keys from DOM KeyboardEvent format to Phaser key names
+  // e.g. "ArrowLeft" -> "ARROWLEFT" -> "LEFT"
+  ARROWUP: "UP",
+  ARROWDOWN: "DOWN",
+  ARROWLEFT: "LEFT",
+  ARROWRIGHT: "RIGHT"
+}

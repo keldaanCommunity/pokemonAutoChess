@@ -1,70 +1,103 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 
 export default function WikiFaq() {
   const { t } = useTranslation()
   return (
-    <div style={{ padding: "1em" }}>
-      <h4 className="nes-text is-success">{t("faq.official_game")}</h4>
-      <p>{t("faq.official_game_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.how_pokemon_evolve")}</h4>
-      <p>{t("faq.how_pokemon_evolve_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.income")}</h4>
-      <p>{t("faq.income_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.collection")}</h4>
-      <p>{t("faq.collection_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.avatars")}</h4>
-      <p>{t("faq.avatars_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.boosters")}</h4>
-      <p>{t("faq.boosters_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.level")}</h4>
-      <p>{t("faq.level_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.sprite")}</h4>
-      <p>
-        {t("faq.sprite_answer1")}
-        <a href="https://github.com/PMDCollab/SpriteCollab">
-          https://github.com/PMDCollab/SpriteCollab
-        </a>
-        . {t("faq.sprite_answer2")}
-      </p>
-      <h4 className="nes-text is-success">{t("faq.mythical")}</h4>
-      <p>{t("faq.mythical_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.ditto")}</h4>
-      <p>{t("faq.ditto_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.items")}</h4>
-      <p>{t("faq.items_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.bots")}</h4>
-      <p>{t("faq.bots_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.create_bot")}</h4>
-      <p>{t("faq.create_bot_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.elo")}</h4>
-      <p>{t("faq.elo_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.missing_points")}</h4>
-      <p>{t("faq.missing_points_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.damage")}</h4>
-      <p>{t("faq.damage_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.defense")}</h4>
-      <p>{t("faq.defense_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.shiny")}</h4>
-      <p>{t("faq.shiny_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.support")}</h4>
-      <p>
-        {t("faq.support_answer")}
-        &nbsp;<a href="https://en.tipeee.com/pokemon-auto-chess">Tipeee</a>.
-      </p>
-      <h4 className="nes-text is-success">{t("faq.mobile")}</h4>
-      <p>{t("faq.mobile_answer")}</p>
-      <h4 className="nes-text is-success">{t("faq.code")}</h4>
-      <p>
-        {t("faq.code_answer")},&nbsp;
-        <a
-          href="https://github.com/keldaanCommunity/pokemonAutoChess"
-          target="_blank"
-        >
-          {t("faq.pull_requests")}
-        </a>{" "}
-        !
-      </p>
+    <div className="wiki-faq">
+      <details className="my-box">
+        <summary>{t("wiki.faq.official_game")}</summary>
+        <p>{t("wiki.faq.official_game_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.how_pokemon_evolve")}</summary>
+        <p>{t("wiki.faq.how_pokemon_evolve_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.income")}</summary>
+        <p>{t("wiki.faq.income_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.collection")}</summary>
+        <p>{t("wiki.faq.collection_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.avatars")}</summary>
+        <p>{t("wiki.faq.avatars_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.boosters")}</summary>
+        <p>{t("wiki.faq.boosters_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.level")}</summary>
+        <p>{t("wiki.faq.level_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.mythical")}</summary>
+        <p>{t("wiki.faq.mythical_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.ditto")}</summary>
+        <p>{t("wiki.faq.ditto_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.items")}</summary>
+        <p>{t("wiki.faq.items_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.reconnect")}</summary>
+        <p
+          dangerouslySetInnerHTML={{ __html: t("wiki.faq.reconnect_answer") }}
+        ></p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.bots")}</summary>
+        <p>{t("wiki.faq.bots_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.create_bot")}</summary>
+        <p>{t("wiki.faq.create_bot_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.elo")}</summary>
+        <p>{t("wiki.faq.elo_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.missing_points")}</summary>
+        <p>{t("wiki.faq.missing_points_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.damage")}</summary>
+        <p>{t("wiki.faq.damage_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.shiny")}</summary>
+        <p>{t("wiki.faq.shiny_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.support")}</summary>
+        <p>
+          {t("wiki.faq.support_answer")}
+          &nbsp;<a href="https://en.tipeee.com/keldaan">Tipee</a>.
+        </p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.mobile")}</summary>
+        <p>{t("wiki.faq.mobile_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.code")}</summary>
+        <p>
+          {t("wiki.faq.code_answer")},&nbsp;
+          <a
+            href="https://github.com/keldaanCommunity/pokemonAutoChess"
+            target="_blank"
+          >
+            {t("wiki.faq.pull_requests")}
+          </a>{" "}
+          !
+        </p>
+      </details>
     </div>
   )
 }

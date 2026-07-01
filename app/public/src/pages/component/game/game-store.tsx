@@ -1,13 +1,34 @@
-import React from "react"
+import { useEffect, useState } from "react"
+import { isSameFamily } from "../../../../../models/pokemon-factory"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { shopClick } from "../../../stores/NetworkStore"
+import { useAppSelector } from "../../../hooks"
+import type { IDetailledPokemon } from "../../../models/bot-v2"
+import { buyInShop } from "../../../network"
 import { getGameScene } from "../../game"
+import { playSound, SOUNDS } from "../../utils/audio"
+import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 
 export default function GameStore() {
-  const dispatch = useAppDispatch()
   const shop = useAppSelector((state) => state.game.shop)
+  const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
+    localStore.get(LocalStoreKeys.TEAM_PLANNER)
+  )
+  useEffect(() => {
+    if (teamPlanner && !Array.isArray(teamPlanner)) {
+      setTeamPlanner([]) // in case team planner local storage has been corrupted somehow (loading a wrong file for example)
+    }
+    const updateTeamPlanner = (e: StorageEvent) => {
+      if (e.key === LocalStoreKeys.TEAM_PLANNER) {
+        setTeamPlanner(localStore.get(LocalStoreKeys.TEAM_PLANNER))
+      }
+    }
+    window.addEventListener("storage", updateTeamPlanner)
+    return () => {
+      window.removeEventListener("storage", updateTeamPlanner)
+    }
+  }, [])
+
   const scene = getGameScene()
 
   return (
@@ -20,14 +41,25 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={pokemon}
+              inPlanner={teamPlanner?.some((p) =>
+                isSameFamily(p.name, pokemon)
+              )}
               onMouseEnter={() => {
-                if (scene) scene.shopIndexHovered = index
+                if (scene) {
+                  if (scene.pokemonHovered) {
+                    scene.clearHovered(scene.pokemonHovered.sprite)
+                  }
+                  scene.pokemonHovered = null
+                  scene.shopIndexHovered = index
+                }
               }}
               onMouseLeave={() => {
                 if (scene) scene.shopIndexHovered = null
               }}
               click={(e) => {
-                dispatch(shopClick(index))
+                playSound(SOUNDS.BUTTON_CLICK)
+                buyInShop(index)
+                if (scene) scene.shopIndexHovered = null
               }}
             />
           )
@@ -38,7 +70,6 @@ export default function GameStore() {
               origin="shop"
               index={index}
               pokemon={undefined}
-              click={() => {}}
             />
           )
         }

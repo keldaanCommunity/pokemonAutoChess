@@ -1,21 +1,3 @@
----
-patch announcement
----
-
-> June, 30th
-
-# Patch 3.9: Duality
-
-Dual mythicals mechanic
-Minus and Plusle
-Latios & Latias rework as dual
-Show player avatars on the side of the board
-Emotes communication between players ingame
-
----
-
-## full changelog
-
 # New Pokemons:
 
 - Tinkatin/Tinkatuff/Tinkaton
@@ -67,8 +49,8 @@ Emotes communication between players ingame
 # Changes to Items
 
 - Buff Pokemonomicon: Wound/Burn duration 2 → 3 seconds ; now works with any source of special damage, not only abilities
-- Nerf Souldew: gains 10% → 8% AP every second
-- Buff Lucky Egg: +30% → +40% AP
+- Nerf Souldew: gains 10% → 8 AP every second
+- Buff Lucky Egg: +30% → +40 AP
 - Buff Delta Orb: +3 → +4 PP
 
 # Bugfix

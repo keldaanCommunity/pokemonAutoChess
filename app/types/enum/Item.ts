@@ -1,4 +1,7 @@
+import { objToMap, reverseMap } from "../../utils/map"
+import { Ability } from "./Ability"
 import { Synergy } from "./Synergy"
+import { Weather } from "./Weather"
 
 export enum Item {
   FOSSIL_STONE = "FOSSIL_STONE",
@@ -24,27 +27,28 @@ export enum Item {
   UPGRADE = "UPGRADE",
   REAPER_CLOTH = "REAPER_CLOTH",
   POKEMONOMICON = "POKEMONOMICON",
+  ABILITY_SHIELD = "ABILITY_SHIELD",
   POWER_LENS = "POWER_LENS",
   SHELL_BELL = "SHELL_BELL",
-  LUCKY_EGG = "LUCKY_EGG",
+  HEAVY_DUTY_BOOTS = "HEAVY_DUTY_BOOTS",
   AQUA_EGG = "AQUA_EGG",
   BLUE_ORB = "BLUE_ORB",
   SCOPE_LENS = "SCOPE_LENS",
   STAR_DUST = "STAR_DUST",
-  DELTA_ORB = "DELTA_ORB",
-  MANA_SCARF = "MANA_SCARF",
+  GREEN_ORB = "GREEN_ORB",
+  DEEP_SEA_TOOTH = "DEEP_SEA_TOOTH",
   SMOKE_BALL = "SMOKE_BALL",
   XRAY_VISION = "XRAY_VISION",
   RAZOR_FANG = "RAZOR_FANG",
-  LEFTOVERS = "LEFTOVERS",
-  CHOICE_SCARF = "CHOICE_SCARF",
-  FIRE_GEM = "FIRE_GEM",
-  DEFENSIVE_RIBBON = "DEFENSIVE_RIBBON",
+  PROTECTIVE_PADS = "PROTECTIVE_PADS",
+  LOADED_DICE = "LOADED_DICE",
+  PUNCHING_GLOVE = "PUNCHING_GLOVE",
+  MUSCLE_BAND = "MUSCLE_BAND",
   WONDER_BOX = "WONDER_BOX",
-  CLEANSE_TAG = "CLEANSE_TAG",
+  STICKY_BARB = "STICKY_BARB",
   WIDE_LENS = "WIDE_LENS",
   RAZOR_CLAW = "RAZOR_CLAW",
-  FLUFFY_TAIL = "FLUFFY_TAIL",
+  SAFETY_GOGGLES = "SAFETY_GOGGLES",
   KINGS_ROCK = "KINGS_ROCK",
   SHINY_CHARM = "SHINY_CHARM",
   GRACIDEA_FLOWER = "GRACIDEA_FLOWER",
@@ -75,36 +79,438 @@ export enum Item {
   ROWAP_BERRY = "ROWAP_BERRY",
   SALAC_BERRY = "SALAC_BERRY",
   SITRUS_BERRY = "SITRUS_BERRY",
+  GOLDEN_RAZZ_BERRY = "GOLDEN_RAZZ_BERRY",
+  GOLDEN_NANAB_BERRY = "GOLDEN_NANAB_BERRY",
+  GOLDEN_PINAP_BERRY = "GOLDEN_PINAP_BERRY",
   COMFEY = "COMFEY",
   ELECTIRIZER = "ELECTIRIZER",
   MAGMARIZER = "MAGMARIZER",
   MACHO_BRACE = "MACHO_BRACE",
   LIGHT_BALL = "LIGHT_BALL",
-  TOXIC_ORB = "TOXIC_ORB",
+  DRAGON_SCALE = "DRAGON_SCALE",
   METRONOME = "METRONOME",
+  EXPLORER_KIT = "EXPLORER_KIT",
   METAL_COAT = "METAL_COAT",
-  SWIFT_WING = "SWIFT_WING",
-  HARD_STONE = "HARD_STONE",
-  BIG_NUGGET = "BIG_NUGGET",
+  AIR_BALLOON = "AIR_BALLOON",
+  PROTECTOR = "PROTECTOR",
   INCENSE = "INCENSE",
-  EXP_SHARE = "EXP_SHARE"
+  EXP_SHARE = "EXP_SHARE",
+  TERRAIN_EXTENDER = "TERRAIN_EXTENDER",
+  POKERUS_VIAL = "POKERUS_VIAL",
+  SPELL_TAG = "SPELL_TAG",
+  SHED_SHELL = "SHED_SHELL",
+  BERSERK_GENE = "BERSERK_GENE",
+  SURFBOARD = "SURFBOARD",
+  COOKING_POT = "COOKING_POT",
+  RUNNING_SHOES = "RUNNING_SHOES",
+  MAX_ELIXIR = "MAX_ELIXIR",
+  METEORITE = "METEORITE",
+  ROTOM_CATALOG = "ROTOM_CATALOG",
+  TRASH = "TRASH",
+  DYNAMAX_BAND = "DYNAMAX_BAND",
+  SHINY_STONE = "SHINY_STONE",
+  OLD_ROD = "OLD_ROD",
+  GOOD_ROD = "GOOD_ROD",
+  SUPER_ROD = "SUPER_ROD",
+  RARE_CANDY = "RARE_CANDY",
+  EVIOLITE = "EVIOLITE",
+  RED_SCALE = "RED_SCALE",
+  GOLD_MASK = "GOLD_MASK",
+  GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
+  ABSORB_BULB = "ABSORB_BULB",
+  SACRED_ASH = "SACRED_ASH",
+  STAR_PIECE = "STAR_PIECE",
+  REPEAT_BALL = "REPEAT_BALL",
+  GOLD_BOW = "GOLD_BOW",
+  DAMP_ROCK = "DAMP_ROCK",
+  ICY_ROCK = "ICY_ROCK",
+  HEAT_ROCK = "HEAT_ROCK",
+  SMOOTH_ROCK = "SMOOTH_ROCK",
+  BLACK_AUGURITE = "BLACK_AUGURITE",
+  FLOAT_STONE = "FLOAT_STONE",
+  MIST_STONE = "MIST_STONE",
+  ELECTRIC_QUARTZ = "ELECTRIC_QUARTZ",
+  BLOOD_STONE = "BLOOD_STONE",
+  SMELLY_CLAY = "SMELLY_CLAY",
+  ODD_KEYSTONE = "ODD_KEYSTONE",
+  SUN_STONE = "SUN_STONE",
+  NORMAL_GEM = "NORMAL_GEM",
+  GRASS_GEM = "GRASS_GEM",
+  FIRE_GEM = "FIRE_GEM",
+  WATER_GEM = "WATER_GEM",
+  ELECTRIC_GEM = "ELECTRIC_GEM",
+  FIGHTING_GEM = "FIGHTING_GEM",
+  PSYCHIC_GEM = "PSYCHIC_GEM",
+  DARK_GEM = "DARK_GEM",
+  STEEL_GEM = "STEEL_GEM",
+  GROUND_GEM = "GROUND_GEM",
+  POISON_GEM = "POISON_GEM",
+  DRAGON_GEM = "DRAGON_GEM",
+  FIELD_GEM = "FIELD_GEM",
+  MONSTER_GEM = "MONSTER_GEM",
+  HUMAN_GEM = "HUMAN_GEM",
+  AQUATIC_GEM = "AQUATIC_GEM",
+  BUG_GEM = "BUG_GEM",
+  FLYING_GEM = "FLYING_GEM",
+  FLORA_GEM = "FLORA_GEM",
+  ROCK_GEM = "ROCK_GEM",
+  GHOST_GEM = "GHOST_GEM",
+  FAIRY_GEM = "FAIRY_GEM",
+  ICE_GEM = "ICE_GEM",
+  FOSSIL_GEM = "FOSSIL_GEM",
+  SOUND_GEM = "SOUND_GEM",
+  ARTIFICIAL_GEM = "ARTIFICIAL_GEM",
+  LIGHT_GEM = "LIGHT_GEM",
+  WILD_GEM = "WILD_GEM",
+  AMORPHOUS_GEM = "AMORPHOUS_GEM",
+  GOURMET_GEM = "GOURMET_GEM",
+  FIRE_SHARD = "FIRE_SHARD",
+  TEAL_MASK = "TEAL_MASK",
+  WELLSPRING_MASK = "WELLSPRING_MASK",
+  CORNERSTONE_MASK = "CORNERSTONE_MASK",
+  HEARTHFLAME_MASK = "HEARTHFLAME_MASK",
+  ZYGARDE_CUBE = "ZYGARDE_CUBE",
+  TM_RAGE = "TM_RAGE",
+  TM_RETURN = "TM_RETURN",
+  TM_COUNTER = "TM_COUNTER",
+  TM_DISABLE = "TM_DISABLE",
+  TM_BULK_UP = "TM_BULK_UP",
+  TM_CHARGE = "TM_CHARGE",
+  TM_REFLECT = "TM_REFLECT",
+  TM_PAYDAY = "TM_PAYDAY",
+  TM_FOCUS_PUNCH = "TM_FOCUS_PUNCH",
+  TM_HYPER_BEAM = "TM_HYPER_BEAM",
+  TM_SUBSTITUTE = "TM_SUBSTITUTE",
+  TM_SKILL_SWAP = "TM_SKILL_SWAP",
+  CHEF_HAT = "CHEF_HAT",
+  PICNIC_SET = "PICNIC_SET",
+  SANDWICH = "SANDWICH",
+  HEARTY_STEW = "HEARTY_STEW",
+  RAGE_CANDY_BAR = "RAGE_CANDY_BAR",
+  TEA = "TEA",
+  CURRY = "CURRY",
+  CASTELIACONE = "CASTELIACONE",
+  WHIPPED_DREAM = "WHIPPED_DREAM",
+  BERRY_JUICE = "BERRY_JUICE",
+  NANAB_BERRY = "NANAB_BERRY",
+  OLIVE_OIL = "OLIVE_OIL",
+  TART_APPLE = "TART_APPLE",
+  SWEET_APPLE = "SWEET_APPLE",
+  SIRUPY_APPLE = "SIRUPY_APPLE",
+  HERBA_MYSTICA = "HERBA_MYSTICA",
+  HERBA_MYSTICA_SWEET = "HERBA_MYSTICA_SWEET",
+  HERBA_MYSTICA_SPICY = "HERBA_MYSTICA_SPICY",
+  HERBA_MYSTICA_SOUR = "HERBA_MYSTICA_SOUR",
+  HERBA_MYSTICA_BITTER = "HERBA_MYSTICA_BITTER",
+  HERBA_MYSTICA_SALTY = "HERBA_MYSTICA_SALTY",
+  MOOMOO_MILK = "MOOMOO_MILK",
+  HONEY = "HONEY",
+  MUSHROOMS = "MUSHROOMS",
+  TINY_MUSHROOM = "TINY_MUSHROOM",
+  BIG_MUSHROOM = "BIG_MUSHROOM",
+  BALM_MUSHROOM = "BALM_MUSHROOM",
+  RICE = "RICE",
+  BERRIES = "BERRIES",
+  POFFIN = "POFFIN",
+  ROCK_SALT = "ROCK_SALT",
+  NUTRITIOUS_EGG = "NUTRITIOUS_EGG",
+  LEFTOVERS = "LEFTOVERS",
+  BLACK_SLUDGE = "BLACK_SLUDGE",
+  FRUIT_JUICE = "FRUIT_JUICE",
+  LEEK = "LEEK",
+  LARGE_LEEK = "LARGE_LEEK",
+  SMOKED_FILET = "SMOKED_FILET",
+  SPINDA_COCKTAIL = "SPINDA_COCKTAIL",
+  BINDING_MOCHI = "BINDING_MOCHI",
+  STRAWBERRY_SWEET = "STRAWBERRY_SWEET",
+  LOVE_SWEET = "LOVE_SWEET",
+  BERRY_SWEET = "BERRY_SWEET",
+  CLOVER_SWEET = "CLOVER_SWEET",
+  FLOWER_SWEET = "FLOWER_SWEET",
+  STAR_SWEET = "STAR_SWEET",
+  RIBBON_SWEET = "RIBBON_SWEET",
+  SWEETS = "SWEETS",
+  VANILLA_FLAVOR = "VANILLA_FLAVOR",
+  RUBY_FLAVOR = "RUBY_FLAVOR",
+  MATCHA_FLAVOR = "MATCHA_FLAVOR",
+  MINT_FLAVOR = "MINT_FLAVOR",
+  LEMON_FLAVOR = "LEMON_FLAVOR",
+  SALTED_FLAVOR = "SALTED_FLAVOR",
+  RUBY_SWIRL_FLAVOR = "RUBY_SWIRL_FLAVOR",
+  CARAMEL_SWIRL_FLAVOR = "CARAMEL_SWIRL_FLAVOR",
+  RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
+  EGG_FOR_SELL = "EGG_FOR_SELL",
+  COIN = "COIN",
+  NUGGET = "NUGGET",
+  BIG_NUGGET = "BIG_NUGGET",
+  GIMMIGHOUL_COIN = "GIMMIGHOUL_COIN",
+  EXCHANGE_TICKET = "EXCHANGE_TICKET",
+  RECYCLE_TICKET = "RECYCLE_TICKET",
+  TREASURE_BOX = "TREASURE_BOX",
+  AUSPICIOUS_ARMOR = "AUSPICIOUS_ARMOR",
+  MALICIOUS_ARMOR = "MALICIOUS_ARMOR",
+  RUSTED_SWORD = "RUSTED_SWORD",
+  SCROLL_OF_WATERS = "SCROLL_OF_WATERS",
+  SCROLL_OF_DARKNESS = "SCROLL_OF_DARKNESS",
+  MYSTERY_BOX = "MYSTERY_BOX",
+  RICH_MULCH = "RICH_MULCH",
+  AMAZE_MULCH = "AMAZE_MULCH",
+  BRONZE_DOJO_TICKET = "BRONZE_DOJO_TICKET",
+  SILVER_DOJO_TICKET = "SILVER_DOJO_TICKET",
+  GOLD_DOJO_TICKET = "GOLD_DOJO_TICKET",
+  WANTED_NOTICE = "WANTED_NOTICE",
+  MEMORY_DISCS = "MEMORY_DISCS",
+  FIRE_MEMORY = "FIRE_MEMORY",
+  FOSSIL_MEMORY = "FOSSIL_MEMORY",
+  PSYCHIC_MEMORY = "PSYCHIC_MEMORY",
+  WATER_MEMORY = "WATER_MEMORY",
+  ELECTRIC_MEMORY = "ELECTRIC_MEMORY",
+  FAIRY_MEMORY = "FAIRY_MEMORY",
+  DARK_MEMORY = "DARK_MEMORY",
+  GRASS_MEMORY = "GRASS_MEMORY",
+  ICE_MEMORY = "ICE_MEMORY",
+  FIGHTING_MEMORY = "FIGHTING_MEMORY",
+  POISON_MEMORY = "POISON_MEMORY",
+  SOUND_MEMORY = "SOUND_MEMORY",
+  STEEL_MEMORY = "STEEL_MEMORY",
+  FLYING_MEMORY = "FLYING_MEMORY",
+  ROCK_MEMORY = "ROCK_MEMORY",
+  GROUND_MEMORY = "GROUND_MEMORY",
+  FIELD_MEMORY = "FIELD_MEMORY",
+  GHOST_MEMORY = "GHOST_MEMORY",
+  LIGHT_MEMORY = "LIGHT_MEMORY",
+  NORMAL_MEMORY = "NORMAL_MEMORY",
+  BUG_MEMORY = "BUG_MEMORY",
+  GOURMET_MEMORY = "GOURMET_MEMORY",
+  MONSTER_MEMORY = "MONSTER_MEMORY",
+  AQUATIC_MEMORY = "AQUATIC_MEMORY",
+  DRAGON_MEMORY = "DRAGON_MEMORY",
+  FLORA_MEMORY = "FLORA_MEMORY",
+  MISSION_ORDER_PINK = "MISSION_ORDER_PINK",
+  MISSION_ORDER_RED = "MISSION_ORDER_RED",
+  MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
+  MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
+  MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
+  LEADERS_CREST = "LEADERS_CREST",
+  LAPRAS_PASSPORT = "LAPRAS_PASSPORT",
+  CELL_BATTERY = "CELL_BATTERY",
+  SILK_SCARF = "SILK_SCARF",
+  FRIEND_BOW = "FRIEND_BOW",
+  BLACK_BELT = "BLACK_BELT",
+  MACH_RIBBON = "MACH_RIBBON",
+  EXPLOSIVE_BAND = "EXPLOSIVE_BAND",
+  TWIST_BAND = "TWIST_BAND",
+  BIG_EATER_BELT = "BIG_EATER_BELT",
+  LUCKY_RIBBON = "LUCKY_RIBBON",
+  COVER_BAND = "COVER_BAND",
+  EFFICIENT_BANDANNA = "EFFICIENT_BANDANNA",
+  NULLIFY_BANDANNA = "NULLIFY_BANDANNA",
+  TATSUGIRI_CURLY = "TATSUGIRI_CURLY",
+  TATSUGIRI_DROOPY = "TATSUGIRI_DROOPY",
+  TATSUGIRI_STRETCHY = "TATSUGIRI_STRETCHY",
+  CONFUSE_WAND = "CONFUSE_WAND",
+  PETRIFY_WAND = "PETRIFY_WAND",
+  SLOW_WAND = "SLOW_WAND",
+  SLUMBER_WAND = "SLUMBER_WAND",
+  BLAST_WAND = "BLAST_WAND",
+  HP_SWAP_WAND = "HP_SWAP_WAND",
+  SPIRIT_WAND = "SPIRIT_WAND",
+  LONG_WAND = "LONG_WAND",
+  GUIDING_WAND = "GUIDING_WAND",
+  SURROUND_WAND = "SURROUND_WAND",
+  POUNCE_WAND = "POUNCE_WAND",
+  TWO_EDGED_WAND = "TWO_EDGED_WAND",
+  WARP_WAND = "WARP_WAND",
+  SWITCHER_WAND = "SWITCHER_WAND",
+  WHIRLWIND_WAND = "WHIRLWIND_WAND",
+  TUNNEL_WAND = "TUNNEL_WAND",
+  AQUA_MONICA = "AQUA_MONICA",
+  FIERY_DRUM = "FIERY_DRUM",
+  GRASS_CORNET = "GRASS_CORNET",
+  ICY_FLUTE = "ICY_FLUTE",
+  ROCK_HORN = "ROCK_HORN",
+  SKY_MELODICA = "SKY_MELODICA",
+  TERRA_CYMBAL = "TERRA_CYMBAL",
+  SOOTHE_BELL = "SOOTHE_BELL",
+  BALL = "BALL"
 }
 
-export const AllItems: Item[] = Object.values(Item)
+export const MemoryDiscs = [
+  Item.FIRE_MEMORY,
+  Item.FOSSIL_MEMORY,
+  Item.PSYCHIC_MEMORY,
+  Item.WATER_MEMORY,
+  Item.ELECTRIC_MEMORY,
+  Item.FAIRY_MEMORY,
+  Item.DARK_MEMORY,
+  Item.GRASS_MEMORY,
+  Item.ICE_MEMORY,
+  Item.FIGHTING_MEMORY,
+  Item.POISON_MEMORY,
+  Item.SOUND_MEMORY,
+  Item.STEEL_MEMORY,
+  Item.FLYING_MEMORY,
+  Item.ROCK_MEMORY,
+  Item.GROUND_MEMORY,
+  Item.FIELD_MEMORY,
+  Item.GHOST_MEMORY,
+  Item.LIGHT_MEMORY,
+  Item.NORMAL_MEMORY,
+  Item.BUG_MEMORY,
+  Item.GOURMET_MEMORY,
+  Item.MONSTER_MEMORY,
+  Item.AQUATIC_MEMORY,
+  Item.DRAGON_MEMORY,
+  Item.FLORA_MEMORY
+] satisfies Item[]
+
+export const MemoryDiscsBySynergy: {
+  [s in Synergy]?: (typeof MemoryDiscs)[number]
+} = {
+  [Synergy.FIRE]: Item.FIRE_MEMORY,
+  [Synergy.FOSSIL]: Item.FOSSIL_MEMORY,
+  [Synergy.PSYCHIC]: Item.PSYCHIC_MEMORY,
+  [Synergy.WATER]: Item.WATER_MEMORY,
+  [Synergy.ELECTRIC]: Item.ELECTRIC_MEMORY,
+  [Synergy.FAIRY]: Item.FAIRY_MEMORY,
+  [Synergy.DARK]: Item.DARK_MEMORY,
+  [Synergy.GRASS]: Item.GRASS_MEMORY,
+  [Synergy.ICE]: Item.ICE_MEMORY,
+  [Synergy.FIGHTING]: Item.FIGHTING_MEMORY,
+  [Synergy.POISON]: Item.POISON_MEMORY,
+  [Synergy.SOUND]: Item.SOUND_MEMORY,
+  [Synergy.STEEL]: Item.STEEL_MEMORY,
+  [Synergy.FLYING]: Item.FLYING_MEMORY,
+  [Synergy.ROCK]: Item.ROCK_MEMORY,
+  [Synergy.GROUND]: Item.GROUND_MEMORY,
+  [Synergy.FIELD]: Item.FIELD_MEMORY,
+  [Synergy.GHOST]: Item.GHOST_MEMORY,
+  [Synergy.LIGHT]: Item.LIGHT_MEMORY,
+  [Synergy.NORMAL]: Item.NORMAL_MEMORY,
+  [Synergy.BUG]: Item.BUG_MEMORY,
+  [Synergy.GOURMET]: Item.GOURMET_MEMORY,
+  [Synergy.MONSTER]: Item.MONSTER_MEMORY,
+  [Synergy.AQUATIC]: Item.AQUATIC_MEMORY,
+  [Synergy.DRAGON]: Item.DRAGON_MEMORY,
+  [Synergy.FLORA]: Item.FLORA_MEMORY
+}
+
+export const MissionOrders = [
+  Item.MISSION_ORDER_PINK,
+  Item.MISSION_ORDER_RED,
+  Item.MISSION_ORDER_BLUE,
+  Item.MISSION_ORDER_GREEN,
+  Item.MISSION_ORDER_GOLD
+] satisfies Item[]
+
+export type MissionOrder = (typeof MissionOrders)[number]
+
+export const DojoTickets = [
+  Item.BRONZE_DOJO_TICKET,
+  Item.SILVER_DOJO_TICKET,
+  Item.GOLD_DOJO_TICKET
+] satisfies Item[]
+
+export const SevenTreasures = [
+  Item.AQUA_MONICA,
+  Item.FIERY_DRUM,
+  Item.GRASS_CORNET,
+  Item.ICY_FLUTE,
+  Item.ROCK_HORN,
+  Item.SKY_MELODICA,
+  Item.TERRA_CYMBAL
+] satisfies Item[]
+
+export const TownItems = [
+  Item.TREASURE_BOX,
+  Item.AMULET_COIN,
+  Item.GIMMIGHOUL_COIN,
+  Item.EXCHANGE_TICKET,
+  Item.RECYCLE_TICKET,
+  ...DojoTickets,
+  ...MissionOrders,
+  ...SevenTreasures,
+  Item.EGG_FOR_SELL,
+  Item.PICNIC_SET,
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT
+] satisfies Item[]
 
 // should be excluded from carousels
-export const SpecialItems: Item[] = [Item.COMFEY]
+export const SpecialItems: Item[] = [
+  ...TownItems,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
+  Item.TRASH,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
+  Item.CHEF_HAT,
+  Item.VANILLA_FLAVOR,
+  Item.RUBY_FLAVOR,
+  Item.MATCHA_FLAVOR,
+  Item.MINT_FLAVOR,
+  Item.LEMON_FLAVOR,
+  Item.SALTED_FLAVOR,
+  Item.RUBY_SWIRL_FLAVOR,
+  Item.CARAMEL_SWIRL_FLAVOR,
+  Item.RAINBOW_SWIRL_FLAVOR,
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH,
+  Item.ROTOM_CATALOG,
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK,
+  Item.ZYGARDE_CUBE,
+  Item.METEORITE,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.MYSTERY_BOX,
+  Item.RUSTED_SWORD,
+  Item.SCROLL_OF_WATERS,
+  Item.SCROLL_OF_DARKNESS,
+  Item.MEMORY_DISCS,
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY,
+  Item.BALL
+] satisfies Item[]
 
-export const BasicItems: Item[] = [
-  Item.FOSSIL_STONE,
-  Item.TWISTED_SPOON,
+export const FishingRods = [
+  Item.SUPER_ROD,
+  Item.GOOD_ROD,
+  Item.OLD_ROD
+] satisfies Item[] // order matters
+
+export type FishingRod = (typeof FishingRods)[number]
+
+export const ItemComponentsNoFossilOrScarf: Item[] = [
+  Item.MIRACLE_SEED,
+  Item.MYSTIC_WATER,
+  Item.HEART_SCALE,
+  Item.NEVER_MELT_ICE,
+  Item.CHARCOAL,
   Item.MAGNET,
   Item.BLACK_GLASSES,
-  Item.MIRACLE_SEED,
-  Item.CHARCOAL,
-  Item.NEVER_MELT_ICE,
-  Item.HEART_SCALE,
-  Item.MYSTIC_WATER
+  Item.TWISTED_SPOON
+]
+
+export const ItemComponentsNoScarf: Item[] = [
+  ...ItemComponentsNoFossilOrScarf,
+  Item.FOSSIL_STONE
+]
+
+export const ItemComponents: Item[] = [
+  ...ItemComponentsNoFossilOrScarf,
+  Item.FOSSIL_STONE,
+  Item.SILK_SCARF
 ]
 
 export const ItemRecipe: { [key in Item]?: Item[] } = {
@@ -121,41 +527,57 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.SOUL_DEW]: [Item.TWISTED_SPOON, Item.MYSTIC_WATER],
   [Item.UPGRADE]: [Item.TWISTED_SPOON, Item.MAGNET],
   [Item.REAPER_CLOTH]: [Item.TWISTED_SPOON, Item.BLACK_GLASSES],
-  [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
+  [Item.ABILITY_SHIELD]: [Item.TWISTED_SPOON, Item.MIRACLE_SEED],
   [Item.POWER_LENS]: [Item.TWISTED_SPOON, Item.NEVER_MELT_ICE],
-  [Item.SHELL_BELL]: [Item.TWISTED_SPOON, Item.CHARCOAL],
-  [Item.LUCKY_EGG]: [Item.TWISTED_SPOON, Item.HEART_SCALE],
+  [Item.POKEMONOMICON]: [Item.TWISTED_SPOON, Item.CHARCOAL],
+  [Item.HEAVY_DUTY_BOOTS]: [Item.TWISTED_SPOON, Item.HEART_SCALE],
   [Item.AQUA_EGG]: [Item.MYSTIC_WATER, Item.MYSTIC_WATER],
   [Item.BLUE_ORB]: [Item.MYSTIC_WATER, Item.MAGNET],
   [Item.SCOPE_LENS]: [Item.MYSTIC_WATER, Item.BLACK_GLASSES],
-  [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
-  [Item.DELTA_ORB]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
-  [Item.MANA_SCARF]: [Item.MYSTIC_WATER, Item.CHARCOAL],
-  [Item.SMOKE_BALL]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
+  [Item.STAR_DUST]: [Item.MYSTIC_WATER, Item.NEVER_MELT_ICE],
+  [Item.GREEN_ORB]: [Item.MYSTIC_WATER, Item.MIRACLE_SEED],
+  [Item.DEEP_SEA_TOOTH]: [Item.MYSTIC_WATER, Item.CHARCOAL],
+  [Item.SHINY_CHARM]: [Item.MYSTIC_WATER, Item.HEART_SCALE],
   [Item.XRAY_VISION]: [Item.MAGNET, Item.MAGNET],
   [Item.RAZOR_FANG]: [Item.MAGNET, Item.BLACK_GLASSES],
-  [Item.LEFTOVERS]: [Item.MAGNET, Item.MIRACLE_SEED],
-  [Item.CHOICE_SCARF]: [Item.MAGNET, Item.NEVER_MELT_ICE],
-  [Item.FIRE_GEM]: [Item.MAGNET, Item.CHARCOAL],
-  [Item.DEFENSIVE_RIBBON]: [Item.MAGNET, Item.HEART_SCALE],
+  [Item.GRACIDEA_FLOWER]: [Item.MAGNET, Item.MIRACLE_SEED],
+  [Item.LOADED_DICE]: [Item.MAGNET, Item.NEVER_MELT_ICE],
+  [Item.PUNCHING_GLOVE]: [Item.MAGNET, Item.CHARCOAL],
+  [Item.MUSCLE_BAND]: [Item.MAGNET, Item.HEART_SCALE],
   [Item.WONDER_BOX]: [Item.BLACK_GLASSES, Item.BLACK_GLASSES],
-  [Item.CLEANSE_TAG]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
+  [Item.SMOKE_BALL]: [Item.BLACK_GLASSES, Item.MIRACLE_SEED],
   [Item.WIDE_LENS]: [Item.BLACK_GLASSES, Item.NEVER_MELT_ICE],
   [Item.RAZOR_CLAW]: [Item.BLACK_GLASSES, Item.CHARCOAL],
-  [Item.FLUFFY_TAIL]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
+  [Item.SAFETY_GOGGLES]: [Item.BLACK_GLASSES, Item.HEART_SCALE],
   [Item.KINGS_ROCK]: [Item.MIRACLE_SEED, Item.MIRACLE_SEED],
-  [Item.SHINY_CHARM]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
-  [Item.GRACIDEA_FLOWER]: [Item.MIRACLE_SEED, Item.CHARCOAL],
-  [Item.FLAME_ORB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
+  [Item.STICKY_BARB]: [Item.MIRACLE_SEED, Item.HEART_SCALE],
+  [Item.PROTECTIVE_PADS]: [Item.MIRACLE_SEED, Item.CHARCOAL],
+  [Item.MAX_REVIVE]: [Item.MIRACLE_SEED, Item.NEVER_MELT_ICE],
   [Item.ASSAULT_VEST]: [Item.NEVER_MELT_ICE, Item.NEVER_MELT_ICE],
-  [Item.AMULET_COIN]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
+  [Item.SHELL_BELL]: [Item.NEVER_MELT_ICE, Item.CHARCOAL],
   [Item.POKE_DOLL]: [Item.NEVER_MELT_ICE, Item.HEART_SCALE],
   [Item.RED_ORB]: [Item.CHARCOAL, Item.CHARCOAL],
-  [Item.MAX_REVIVE]: [Item.CHARCOAL, Item.HEART_SCALE],
-  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE]
+  [Item.FLAME_ORB]: [Item.CHARCOAL, Item.HEART_SCALE],
+  [Item.ROCKY_HELMET]: [Item.HEART_SCALE, Item.HEART_SCALE],
+  [Item.FRIEND_BOW]: [Item.SILK_SCARF, Item.FOSSIL_STONE],
+  [Item.BLACK_BELT]: [Item.SILK_SCARF, Item.BLACK_GLASSES],
+  [Item.MACH_RIBBON]: [Item.SILK_SCARF, Item.MAGNET],
+  [Item.EXPLOSIVE_BAND]: [Item.SILK_SCARF, Item.CHARCOAL],
+  [Item.TWIST_BAND]: [Item.SILK_SCARF, Item.NEVER_MELT_ICE],
+  [Item.LUCKY_RIBBON]: [Item.SILK_SCARF, Item.TWISTED_SPOON],
+  [Item.BIG_EATER_BELT]: [Item.SILK_SCARF, Item.MIRACLE_SEED],
+  [Item.COVER_BAND]: [Item.SILK_SCARF, Item.HEART_SCALE],
+  [Item.EFFICIENT_BANDANNA]: [Item.SILK_SCARF, Item.MYSTIC_WATER],
+  [Item.NULLIFY_BANDANNA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
 
-export const Berries: Item[] = [
+export const Scarves = Object.keys(ItemRecipe).filter((itemKey) =>
+  ItemRecipe[itemKey as Item]?.includes(Item.SILK_SCARF)
+) as Item[]
+
+export type ScarfItem = (typeof Scarves)[number]
+
+export const NonSpecialBerries: Item[] = [
   Item.AGUAV_BERRY,
   Item.APICOT_BERRY,
   Item.ASPEAR_BERRY,
@@ -178,22 +600,111 @@ export const Berries: Item[] = [
   Item.SITRUS_BERRY
 ]
 
-export const ArtificialItems: Item[] = [
-  Item.ELECTIRIZER,
-  Item.MAGMARIZER,
-  Item.EXP_SHARE,
-  Item.LIGHT_BALL,
-  Item.TOXIC_ORB,
-  Item.HARD_STONE,
-  Item.METAL_COAT,
-  Item.SWIFT_WING,
-  Item.MACHO_BRACE,
-  Item.INCENSE,
-  Item.METRONOME,
-  Item.BIG_NUGGET
+export const SpecialBerries: Item[] = [
+  Item.NANAB_BERRY,
+  Item.GOLDEN_RAZZ_BERRY,
+  Item.GOLDEN_NANAB_BERRY,
+  Item.GOLDEN_PINAP_BERRY
 ]
 
-export const CraftableItems: Item[] = Object.keys(ItemRecipe) as Item[]
+export const Berries = [...NonSpecialBerries, ...SpecialBerries]
+
+export type Berry = (typeof Berries)[number]
+
+export const Tools = [
+  Item.LIGHT_BALL,
+  Item.PROTECTOR,
+  Item.DRAGON_SCALE,
+  Item.METAL_COAT,
+  Item.AIR_BALLOON,
+  Item.MACHO_BRACE,
+  Item.METRONOME,
+  Item.EXPLORER_KIT,
+  Item.SPELL_TAG,
+  Item.SHED_SHELL,
+  Item.BERSERK_GENE,
+  Item.SURFBOARD,
+  Item.COOKING_POT,
+  Item.RUNNING_SHOES,
+  Item.INCENSE,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.POKERUS_VIAL,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE,
+  Item.TERRAIN_EXTENDER
+] satisfies Item[]
+
+export type Tool = (typeof Tools)[number]
+
+export const ArtificialItems = [
+  Item.METAL_COAT,
+  Item.MACHO_BRACE,
+  Item.SPELL_TAG,
+  Item.SHED_SHELL,
+  Item.MAGMARIZER,
+  Item.ELECTIRIZER,
+  Item.POKERUS_VIAL,
+  Item.COOKING_POT,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE,
+  Item.TERRAIN_EXTENDER
+] satisfies Tool[]
+
+export const ShinyItems = [
+  Item.DYNAMAX_BAND,
+  Item.SHINY_STONE,
+  Item.RARE_CANDY,
+  Item.EVIOLITE,
+  Item.GOLD_MASK,
+  Item.GOLD_BOTTLE_CAP,
+  Item.ABSORB_BULB,
+  Item.SACRED_ASH,
+  Item.STAR_PIECE,
+  Item.REPEAT_BALL,
+  Item.GOLD_BOW,
+  Item.RED_SCALE
+] satisfies Item[]
+
+export type ShinyItem = (typeof ShinyItems)[number]
+
+export const WeatherRocks = [
+  Item.SUN_STONE,
+  Item.HEAT_ROCK,
+  Item.DAMP_ROCK,
+  Item.ICY_ROCK,
+  Item.SMOOTH_ROCK,
+  Item.BLACK_AUGURITE,
+  Item.FLOAT_STONE,
+  Item.ELECTRIC_QUARTZ,
+  Item.MIST_STONE,
+  Item.BLOOD_STONE,
+  Item.SMELLY_CLAY,
+  Item.ODD_KEYSTONE
+] satisfies Item[]
+
+export const WeatherRocksByWeather = new Map([
+  [Weather.DROUGHT, Item.HEAT_ROCK],
+  [Weather.ZENITH, Item.SUN_STONE],
+  [Weather.RAIN, Item.DAMP_ROCK],
+  [Weather.SANDSTORM, Item.SMOOTH_ROCK],
+  [Weather.SNOW, Item.ICY_ROCK],
+  [Weather.STORM, Item.ELECTRIC_QUARTZ],
+  [Weather.MISTY, Item.MIST_STONE],
+  [Weather.WINDY, Item.FLOAT_STONE],
+  [Weather.SMOG, Item.SMELLY_CLAY],
+  [Weather.MURKY, Item.ODD_KEYSTONE],
+  [Weather.NIGHT, Item.BLACK_AUGURITE],
+  [Weather.BLOODMOON, Item.BLOOD_STONE],
+  [Weather.NEUTRAL, null]
+]) satisfies Map<Weather, (typeof WeatherRocks)[number] | null>
+
+export const WeatherByWeatherRocks = reverseMap(WeatherRocksByWeather)
+
+export const CraftableItems = Object.keys(ItemRecipe) as Item[]
+export const CraftableItemsNoScarves = CraftableItems.filter(
+  (item) => !Scarves.includes(item)
+) as Item[]
 
 export const SynergyStones = [
   Item.OLD_AMBER,
@@ -205,9 +716,75 @@ export const SynergyStones = [
   Item.DUSK_STONE,
   Item.LEAF_STONE,
   Item.ICE_STONE
+] satisfies Item[]
+
+export const SynergyGems = [
+  Item.NORMAL_GEM,
+  Item.GRASS_GEM,
+  Item.FIRE_GEM,
+  Item.WATER_GEM,
+  Item.ELECTRIC_GEM,
+  Item.FIGHTING_GEM,
+  Item.PSYCHIC_GEM,
+  Item.DARK_GEM,
+  Item.STEEL_GEM,
+  Item.GROUND_GEM,
+  Item.POISON_GEM,
+  Item.DRAGON_GEM,
+  Item.FIELD_GEM,
+  Item.MONSTER_GEM,
+  Item.HUMAN_GEM,
+  Item.AQUATIC_GEM,
+  Item.BUG_GEM,
+  Item.FLYING_GEM,
+  Item.FLORA_GEM,
+  Item.ROCK_GEM,
+  Item.GHOST_GEM,
+  Item.FAIRY_GEM,
+  Item.ICE_GEM,
+  Item.FOSSIL_GEM,
+  Item.SOUND_GEM,
+  Item.ARTIFICIAL_GEM,
+  Item.LIGHT_GEM,
+  Item.WILD_GEM,
+  Item.AMORPHOUS_GEM,
+  Item.GOURMET_GEM
+] satisfies Item[]
+
+export type SynergyGem = (typeof SynergyGems)[number]
+
+export const SynergyGemsBuried: SynergyGem[] = [
+  Item.FIRE_GEM,
+  Item.ROCK_GEM,
+  Item.NORMAL_GEM,
+  Item.BUG_GEM,
+  Item.FLYING_GEM,
+  Item.ICE_GEM,
+  Item.WATER_GEM,
+  Item.STEEL_GEM,
+  Item.DRAGON_GEM,
+  Item.POISON_GEM,
+  Item.GHOST_GEM,
+  Item.FIELD_GEM,
+  Item.GROUND_GEM,
+  Item.AMORPHOUS_GEM
+] satisfies SynergyGem[]
+
+export const ToolsBuried: Tool[] = [
+  Item.PROTECTOR,
+  Item.METAL_COAT,
+  Item.EXPLORER_KIT,
+  Item.SPELL_TAG,
+  Item.SHED_SHELL,
+  Item.INCENSE,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.MAX_ELIXIR,
+  Item.EXP_SHARE,
+  Item.DRAGON_SCALE
 ]
 
-export const SynergyItems = [
+export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
   Item.DAWN_STONE,
   Item.WATER_STONE,
@@ -219,19 +796,32 @@ export const SynergyItems = [
   Item.ICE_STONE,
   Item.MACHO_BRACE,
   Item.LIGHT_BALL,
-  Item.TOXIC_ORB,
+  Item.DRAGON_SCALE,
+  Item.POKERUS_VIAL,
   Item.METRONOME,
   Item.METAL_COAT,
-  Item.SWIFT_WING,
-  Item.HARD_STONE,
-  Item.BIG_NUGGET,
-  Item.INCENSE
-] as const
+  Item.AIR_BALLOON,
+  Item.PROTECTOR,
+  Item.ELECTIRIZER,
+  Item.MAGMARIZER,
+  Item.EXPLORER_KIT,
+  Item.SPELL_TAG,
+  Item.SHINY_STONE,
+  Item.SHED_SHELL,
+  Item.COOKING_POT,
+  Item.RUNNING_SHOES,
+  Item.BERSERK_GENE,
+  Item.SURFBOARD,
+  Item.INCENSE,
+  Item.FRIEND_BOW
+] satisfies Item[]
 
-export const SynergyGivenByItem: Record<
-  (typeof SynergyItems)[number],
-  Synergy
-> = {
+export const SynergyItems = [
+  ...SynergyItemsNoSpecial,
+  ...MemoryDiscs
+] satisfies Item[]
+
+export const SynergyGivenByItem = {
   [Item.OLD_AMBER]: Synergy.FOSSIL,
   [Item.DAWN_STONE]: Synergy.PSYCHIC,
   [Item.WATER_STONE]: Synergy.WATER,
@@ -243,22 +833,365 @@ export const SynergyGivenByItem: Record<
   [Item.ICE_STONE]: Synergy.ICE,
   [Item.MACHO_BRACE]: Synergy.FIGHTING,
   [Item.LIGHT_BALL]: Synergy.LIGHT,
-  [Item.TOXIC_ORB]: Synergy.POISON,
+  [Item.DRAGON_SCALE]: Synergy.DRAGON,
+  [Item.POKERUS_VIAL]: Synergy.POISON,
   [Item.METRONOME]: Synergy.SOUND,
   [Item.METAL_COAT]: Synergy.STEEL,
-  [Item.SWIFT_WING]: Synergy.FLYING,
-  [Item.HARD_STONE]: Synergy.ROCK,
-  [Item.BIG_NUGGET]: Synergy.GROUND,
-  [Item.INCENSE]: Synergy.FLORA
+  [Item.ELECTIRIZER]: Synergy.ELECTRIC,
+  [Item.MAGMARIZER]: Synergy.FIRE,
+  [Item.AIR_BALLOON]: Synergy.FLYING,
+  [Item.PROTECTOR]: Synergy.ROCK,
+  [Item.EXPLORER_KIT]: Synergy.GROUND,
+  [Item.SPELL_TAG]: Synergy.GHOST,
+  [Item.SHINY_STONE]: Synergy.LIGHT,
+  [Item.FRIEND_BOW]: Synergy.NORMAL,
+  [Item.SHED_SHELL]: Synergy.BUG,
+  [Item.COOKING_POT]: Synergy.GOURMET,
+  [Item.INCENSE]: Synergy.FLORA,
+  [Item.RUNNING_SHOES]: Synergy.FIELD,
+  [Item.BERSERK_GENE]: Synergy.MONSTER,
+  [Item.SURFBOARD]: Synergy.AQUATIC,
+  [Item.FIRE_MEMORY]: Synergy.FIRE,
+  [Item.FOSSIL_MEMORY]: Synergy.FOSSIL,
+  [Item.PSYCHIC_MEMORY]: Synergy.PSYCHIC,
+  [Item.WATER_MEMORY]: Synergy.WATER,
+  [Item.ELECTRIC_MEMORY]: Synergy.ELECTRIC,
+  [Item.FAIRY_MEMORY]: Synergy.FAIRY,
+  [Item.DARK_MEMORY]: Synergy.DARK,
+  [Item.GRASS_MEMORY]: Synergy.GRASS,
+  [Item.ICE_MEMORY]: Synergy.ICE,
+  [Item.FIGHTING_MEMORY]: Synergy.FIGHTING,
+  [Item.POISON_MEMORY]: Synergy.POISON,
+  [Item.SOUND_MEMORY]: Synergy.SOUND,
+  [Item.STEEL_MEMORY]: Synergy.STEEL,
+  [Item.FLYING_MEMORY]: Synergy.FLYING,
+  [Item.ROCK_MEMORY]: Synergy.ROCK,
+  [Item.GROUND_MEMORY]: Synergy.GROUND,
+  [Item.FIELD_MEMORY]: Synergy.FIELD,
+  [Item.GHOST_MEMORY]: Synergy.GHOST,
+  [Item.LIGHT_MEMORY]: Synergy.LIGHT,
+  [Item.NORMAL_MEMORY]: Synergy.NORMAL,
+  [Item.BUG_MEMORY]: Synergy.BUG,
+  [Item.GOURMET_MEMORY]: Synergy.GOURMET,
+  [Item.MONSTER_MEMORY]: Synergy.MONSTER,
+  [Item.AQUATIC_MEMORY]: Synergy.AQUATIC,
+  [Item.DRAGON_MEMORY]: Synergy.DRAGON,
+  [Item.FLORA_MEMORY]: Synergy.FLORA
+} satisfies Record<(typeof SynergyItems)[number], Synergy>
+
+export const SynergyGivenByGem: Record<(typeof SynergyGems)[number], Synergy> =
+  {
+    [Item.NORMAL_GEM]: Synergy.NORMAL,
+    [Item.GRASS_GEM]: Synergy.GRASS,
+    [Item.FIRE_GEM]: Synergy.FIRE,
+    [Item.WATER_GEM]: Synergy.WATER,
+    [Item.ELECTRIC_GEM]: Synergy.ELECTRIC,
+    [Item.FIGHTING_GEM]: Synergy.FIGHTING,
+    [Item.PSYCHIC_GEM]: Synergy.PSYCHIC,
+    [Item.DARK_GEM]: Synergy.DARK,
+    [Item.STEEL_GEM]: Synergy.STEEL,
+    [Item.GROUND_GEM]: Synergy.GROUND,
+    [Item.POISON_GEM]: Synergy.POISON,
+    [Item.DRAGON_GEM]: Synergy.DRAGON,
+    [Item.FIELD_GEM]: Synergy.FIELD,
+    [Item.MONSTER_GEM]: Synergy.MONSTER,
+    [Item.HUMAN_GEM]: Synergy.HUMAN,
+    [Item.AQUATIC_GEM]: Synergy.AQUATIC,
+    [Item.BUG_GEM]: Synergy.BUG,
+    [Item.FLYING_GEM]: Synergy.FLYING,
+    [Item.FLORA_GEM]: Synergy.FLORA,
+    [Item.ROCK_GEM]: Synergy.ROCK,
+    [Item.GHOST_GEM]: Synergy.GHOST,
+    [Item.FAIRY_GEM]: Synergy.FAIRY,
+    [Item.ICE_GEM]: Synergy.ICE,
+    [Item.FOSSIL_GEM]: Synergy.FOSSIL,
+    [Item.SOUND_GEM]: Synergy.SOUND,
+    [Item.ARTIFICIAL_GEM]: Synergy.ARTIFICIAL,
+    [Item.LIGHT_GEM]: Synergy.LIGHT,
+    [Item.WILD_GEM]: Synergy.WILD,
+    [Item.AMORPHOUS_GEM]: Synergy.AMORPHOUS,
+    [Item.GOURMET_GEM]: Synergy.GOURMET
+  }
+
+export const CraftableNoStonesOrScarves: Item[] =
+  CraftableItemsNoScarves.filter(
+    (item) => SynergyGivenByItem.hasOwnProperty(item) === false
+  )
+
+export const Wands = [
+  Item.BLAST_WAND,
+  Item.HP_SWAP_WAND,
+  Item.SPIRIT_WAND,
+  Item.LONG_WAND,
+  Item.CONFUSE_WAND,
+  Item.PETRIFY_WAND,
+  Item.SLOW_WAND,
+  Item.SLUMBER_WAND,
+  Item.GUIDING_WAND,
+  Item.SURROUND_WAND,
+  Item.POUNCE_WAND,
+  Item.TWO_EDGED_WAND,
+  Item.WARP_WAND,
+  Item.SWITCHER_WAND,
+  Item.WHIRLWIND_WAND,
+  Item.TUNNEL_WAND
+] satisfies Item[]
+
+export const OgerponMasks: Item[] = [
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK
+]
+
+export const TMsBronze = [
+  Item.TM_RAGE,
+  Item.TM_RETURN,
+  Item.TM_COUNTER,
+  Item.TM_DISABLE
+] satisfies Item[]
+
+export const TMsSilver = [
+  Item.TM_BULK_UP,
+  Item.TM_CHARGE,
+  Item.TM_REFLECT,
+  Item.TM_PAYDAY
+] satisfies Item[]
+
+export const TMsGold = [
+  Item.TM_FOCUS_PUNCH,
+  Item.TM_HYPER_BEAM,
+  Item.TM_SUBSTITUTE,
+  Item.TM_SKILL_SWAP
+] satisfies Item[]
+
+export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold] satisfies Item[]
+
+export const AbilityPerTM: { [item in Item]?: Ability } = {
+  [Item.TM_RAGE]: Ability.RAGE,
+  [Item.TM_RETURN]: Ability.RETURN,
+  [Item.TM_COUNTER]: Ability.COUNTER,
+  [Item.TM_DISABLE]: Ability.DISABLE,
+  [Item.TM_BULK_UP]: Ability.BULK_UP,
+  [Item.TM_CHARGE]: Ability.CHARGE,
+  [Item.TM_REFLECT]: Ability.REFLECT,
+  [Item.TM_PAYDAY]: Ability.PAYDAY,
+  [Item.TM_FOCUS_PUNCH]: Ability.FOCUS_PUNCH,
+  [Item.TM_HYPER_BEAM]: Ability.HYPER_BEAM,
+  [Item.TM_SUBSTITUTE]: Ability.SUBSTITUTE,
+  [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
-export const NonSpecialItemComponents: Item[] = [
-  Item.TWISTED_SPOON,
-  Item.MAGNET,
-  Item.BLACK_GLASSES,
-  Item.MIRACLE_SEED,
-  Item.CHARCOAL,
-  Item.NEVER_MELT_ICE,
-  Item.HEART_SCALE,
-  Item.MYSTIC_WATER
+export const TMPerAbility = reverseMap(
+  objToMap(AbilityPerTM as Record<Item, Ability>)
+)
+
+export const Dishes = [
+  Item.OLIVE_OIL,
+  Item.RAGE_CANDY_BAR,
+  Item.ROCK_SALT,
+  Item.TEA,
+  Item.CURRY,
+  Item.POFFIN,
+  Item.CASTELIACONE,
+  Item.WHIPPED_DREAM,
+  Item.TART_APPLE,
+  Item.SWEET_APPLE,
+  Item.SIRUPY_APPLE,
+  Item.LEFTOVERS,
+  Item.HERBA_MYSTICA,
+  Item.HERBA_MYSTICA_SWEET,
+  Item.HERBA_MYSTICA_SPICY,
+  Item.HERBA_MYSTICA_SOUR,
+  Item.HERBA_MYSTICA_BITTER,
+  Item.HERBA_MYSTICA_SALTY,
+  Item.HONEY,
+  Item.BLACK_SLUDGE,
+  Item.FRUIT_JUICE,
+  Item.NUTRITIOUS_EGG,
+  Item.LEEK,
+  Item.LARGE_LEEK,
+  Item.MOOMOO_MILK,
+  Item.SMOKED_FILET,
+  Item.SPINDA_COCKTAIL,
+  Item.BERRY_JUICE,
+  Item.BINDING_MOCHI,
+  Item.STRAWBERRY_SWEET,
+  Item.LOVE_SWEET,
+  Item.BERRY_SWEET,
+  Item.CLOVER_SWEET,
+  Item.FLOWER_SWEET,
+  Item.STAR_SWEET,
+  Item.RIBBON_SWEET,
+  Item.SWEETS,
+  Item.SANDWICH,
+  Item.HEARTY_STEW,
+  Item.MUSHROOMS,
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM,
+  Item.RICE,
+  Item.BERRIES
+] satisfies Item[]
+
+export type Dish = (typeof Dishes)[number]
+
+export const Mushrooms = [
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM
+] satisfies Item[]
+
+export const DishesGoingToInventory = [
+  Item.TART_APPLE,
+  Item.SWEET_APPLE,
+  Item.SIRUPY_APPLE,
+  Item.TINY_MUSHROOM,
+  Item.BIG_MUSHROOM,
+  Item.BALM_MUSHROOM,
+  Item.NANAB_BERRY
+] satisfies (Dish | Berry)[]
+
+export const ItemsSoldAtTown = [...Mushrooms] satisfies Item[]
+export type ItemsSoldAtTown = (typeof ItemsSoldAtTown)[number]
+
+export const HerbaMysticas: Dish[] = [
+  Item.HERBA_MYSTICA,
+  Item.HERBA_MYSTICA_SWEET,
+  Item.HERBA_MYSTICA_SPICY,
+  Item.HERBA_MYSTICA_SOUR,
+  Item.HERBA_MYSTICA_BITTER,
+  Item.HERBA_MYSTICA_SALTY
 ]
+
+export const Flavors = [
+  Item.VANILLA_FLAVOR,
+  Item.RUBY_FLAVOR,
+  Item.MATCHA_FLAVOR,
+  Item.MINT_FLAVOR,
+  Item.LEMON_FLAVOR,
+  Item.SALTED_FLAVOR,
+  Item.RUBY_SWIRL_FLAVOR,
+  Item.CARAMEL_SWIRL_FLAVOR,
+  Item.RAINBOW_SWIRL_FLAVOR
+] satisfies Item[]
+
+export const SynergyFlavors = {
+  [Synergy.NORMAL]: Item.VANILLA_FLAVOR,
+  [Synergy.GRASS]: Item.MATCHA_FLAVOR,
+  [Synergy.FIRE]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.WATER]: Item.MINT_FLAVOR,
+  [Synergy.ELECTRIC]: Item.LEMON_FLAVOR,
+  [Synergy.FIGHTING]: Item.RUBY_FLAVOR,
+  [Synergy.PSYCHIC]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.DARK]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.STEEL]: Item.RUBY_FLAVOR,
+  [Synergy.GROUND]: Item.SALTED_FLAVOR,
+  [Synergy.POISON]: Item.MATCHA_FLAVOR,
+  [Synergy.DRAGON]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.FIELD]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.MONSTER]: Item.CARAMEL_SWIRL_FLAVOR,
+  [Synergy.HUMAN]: Item.RUBY_FLAVOR,
+  [Synergy.AQUATIC]: Item.MINT_FLAVOR,
+  [Synergy.BUG]: Item.LEMON_FLAVOR,
+  [Synergy.FLYING]: Item.VANILLA_FLAVOR,
+  [Synergy.FLORA]: Item.MATCHA_FLAVOR,
+  [Synergy.ROCK]: Item.SALTED_FLAVOR,
+  [Synergy.GHOST]: Item.MATCHA_FLAVOR,
+  [Synergy.FAIRY]: Item.LEMON_FLAVOR,
+  [Synergy.ICE]: Item.MINT_FLAVOR,
+  [Synergy.FOSSIL]: Item.SALTED_FLAVOR,
+  [Synergy.SOUND]: Item.LEMON_FLAVOR,
+  [Synergy.ARTIFICIAL]: Item.VANILLA_FLAVOR,
+  [Synergy.LIGHT]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.WILD]: Item.RUBY_SWIRL_FLAVOR,
+  [Synergy.BABY]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.AMORPHOUS]: Item.RAINBOW_SWIRL_FLAVOR,
+  [Synergy.GOURMET]: Item.VANILLA_FLAVOR
+} satisfies { [key in Synergy]: (typeof Flavors)[number] }
+
+export const Sweets = [
+  Item.STRAWBERRY_SWEET,
+  Item.LOVE_SWEET,
+  Item.FLOWER_SWEET,
+  Item.CLOVER_SWEET,
+  Item.BERRY_SWEET,
+  Item.CLOVER_SWEET,
+  Item.FLOWER_SWEET,
+  Item.STAR_SWEET,
+  Item.RIBBON_SWEET
+] satisfies Item[]
+
+export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
+
+export const UnholdableItems = [
+  ...WeatherRocks,
+  ...FishingRods,
+  ...Wands,
+  ...TMs,
+  ...Flavors,
+  ...Dishes,
+  ...SynergyGems,
+  ...Mulches,
+  ...MissionOrders,
+  ...SevenTreasures,
+  Item.METEORITE,
+  Item.ROTOM_CATALOG,
+  Item.MYSTERY_BOX,
+  Item.TREASURE_BOX,
+  Item.ZYGARDE_CUBE,
+  Item.SCROLL_OF_DARKNESS,
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.GIMMIGHOUL_COIN,
+  Item.EGG_FOR_SELL,
+  Item.EXCHANGE_TICKET,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
+  Item.WANTED_NOTICE,
+  Item.LEADERS_CREST,
+  Item.LAPRAS_PASSPORT,
+  Item.RED_SCALE
+] satisfies Item[]
+
+export type UnholdableItem = (typeof UnholdableItems)[number]
+
+export const ConsumableItems = [
+  ...TMs,
+  ...Dishes,
+  ...Mulches,
+  ...Flavors,
+  ...Sweets,
+  ...DojoTickets,
+  ...Berries,
+  Item.EXCHANGE_TICKET,
+  Item.RECYCLE_TICKET,
+  Item.PICNIC_SET,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.SCROLL_OF_DARKNESS,
+  Item.SCROLL_OF_WATERS,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.SOOTHE_BELL
+] satisfies Item[]
+
+export const RemovableItems = [
+  Item.CHEF_HAT,
+  Item.TRASH,
+  ...Tools,
+  ...Scarves,
+  ...MemoryDiscs
+] satisfies Item[]
+
+export const UnholdableItemsToSaveForStats = [
+  Item.GIMMIGHOUL_COIN,
+  ...Wands,
+  ...SynergyGems,
+  ...SevenTreasures,
+  ...WeatherRocks
+] satisfies UnholdableItem[]

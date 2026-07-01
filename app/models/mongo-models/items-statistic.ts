@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 
@@ -28,12 +28,14 @@ const itemsStatistic = new Schema({
   ]
 })
 
-export default model<IItemsStatistic>(
+export const ItemsStatistics = model<IItemsStatistic>(
   "ItemsStatistic",
   itemsStatistic,
   "items-statistic"
 )
 
+export default ItemsStatistics
+
 export async function fetchMetaItems(): Promise<IItemsStatistic[]> {
-  return fetch("/meta/items").then((res) => res.json())
+  return fetch(`/meta/items?t=${new Date().getUTCDate()}`).then((res) => res.json())
 }
