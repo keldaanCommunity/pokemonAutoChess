@@ -2884,7 +2884,8 @@
 		"ICY_FLUTE": "Flûte Glacée",
 		"ROCK_HORN": "Cor de Roche",
 		"SKY_MELODICA": "Aéromélodica",
-		"TERRA_CYMBAL": "Terracymbale"
+		"TERRA_CYMBAL": "Terracymbale",
+		"SOOTHE_BELL": "Grelot Zen"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -2997,10 +2998,10 @@
 		"DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 200%.",
 		"SHINY_STONE": "Le porteur gagne le type LIGHT. Un second spot de lumière est projeté sur la case du porteur au début du combat.",
 		"RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Ne peut être donné qu'à un Pokémon pouvant encore évoluer, et ramène son prix de vente au tier précédent.",
-		"EVIOLITE": "Le porteur gagne beaucoup de bonus statistiques mais son espèce ne peut plus évoluer. Ne peut être donné qu'à un Pokémon pouvant encore évoluer.",		
+		"EVIOLITE": "Le porteur gagne beaucoup de bonus statistiques mais son espèce ne peut plus évoluer. Ne peut être donné qu'à un Pokémon pouvant encore évoluer.",
 		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER par GOLD en votre possession. +1 GOLD à chaque fois que le porteur met KO un ennemi. S'il élimine le dernier ennemi, il remporte le Jackpot et double le montant gagné pendant cette manche.",
 		"ABSORB_BULB": "Tous les dégâts réduits sont absorbés par le bulbe. Une fois sous les 50% de HP, le bulbe explose, infligeant tous les dégâts absorbés en SPECIAL aux ennemis ADJACENT.",
-		"SACRED_ASH": "Octroie RESURRECTION. Après résurrection, jusqu'à 3 alliés KO sont également ressuscités, mais sans leurs objets.",		
+		"SACRED_ASH": "Octroie RESURRECTION. Après résurrection, jusqu'à 3 alliés KO sont également ressuscités, mais sans leurs objets.",
 		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
 		"GOLD_BOW": "Le porteur ne compte pas dans la taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
@@ -4166,7 +4167,7 @@
 	"add_bot": "Ajouter un bot",
 	"bot_difficulty": {
 		"BEGINNER": "Débutant (<850)",
-		"EASY":  "Facile (850-999)",
+		"EASY": "Facile (850-999)",
 		"MEDIUM": "Moyen (1000-1149)",
 		"HARD": "Difficile (1150-1299)",
 		"EXTREME": "Extrême (1300-1449)",
