@@ -41,25 +41,26 @@ export class PowderStrategy extends AbilityStrategy {
           positionX: cell.x,
           positionY: cell.y
         })
-        if (cell.value) {
-          if (cell.value.team !== pokemon.team) {
+        const debuffedUnit = cell.value
+        if (debuffedUnit) {
+          if (debuffedUnit.team !== pokemon.team) {
             // Enemy: take damage and reduce SPEED
-            cell.value.handleSpecialDamage(
+            debuffedUnit.handleSpecialDamage(
               damage,
               board,
               AttackType.SPECIAL,
               pokemon,
               crit
             )
-            const speedNerf = max(cell.value.speed)(
+            const speedNerf = max(debuffedUnit.speed)(
               speedFactor *
                 (1 + pokemon.ap / 100) *
                 (crit ? pokemon.critPower : 1)
             )
-            cell.value.addSpeed(-speedNerf, pokemon, 0, false)
-            cell.value.commands.push(
+            debuffedUnit.addSpeed(-speedNerf, pokemon, 0, false)
+            debuffedUnit.commands.push(
               new DelayedCommand(() => {
-                cell.value?.addSpeed(speedNerf, pokemon, 0, false)
+                debuffedUnit.addSpeed(speedNerf, pokemon, 0, false)
               }, 5000)
             )
           }

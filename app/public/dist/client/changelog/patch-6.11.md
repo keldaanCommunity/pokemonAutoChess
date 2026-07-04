@@ -76,6 +76,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Bugfix
 
+- Fix Powder's SPEED debuff not always being restored to the correct Pokémon after movement.
+
 # Misc
 
 - New title: Five Stars
