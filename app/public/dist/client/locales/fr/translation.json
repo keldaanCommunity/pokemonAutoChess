@@ -2891,7 +2891,8 @@
 		"ICY_FLUTE": "Flûte Glacée",
 		"ROCK_HORN": "Cor de Roche",
 		"SKY_MELODICA": "Aéromélodica",
-		"TERRA_CYMBAL": "Terracymbale"
+		"TERRA_CYMBAL": "Terracymbale",
+		"SOOTHE_BELL": "Grelot Zen"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
