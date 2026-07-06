@@ -798,6 +798,11 @@ export default function Game() {
             dispatch(setShopLocked(player.shopLocked))
             dispatch(setShopFreeRolls(player.shopFreeRolls))
             dispatch(setEmotesUnlocked(player.emotesUnlocked))
+            // dispatch the current shop up-front: onChange below only sends later deltas, so binding to an
+            // already-populated shop (replay seek or mid-match reconnect) would otherwise render blank
+            player.shop.forEach((pkm, index) =>
+              dispatch(changeShop({ value: pkm, index }))
+            )
 
             $player.listen("interest", (value) => {
               dispatch(setInterest(value))
