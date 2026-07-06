@@ -2,36 +2,59 @@ import type { MapSchema } from "@colyseus/schema"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
-  FIELD_HEAL_PER_SYNERGY_LEVEL,
-  FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL,
-  MONSTER_AP_BUFF_PER_SYNERGY_LEVEL,
-  MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL,
-  MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL
+  FIELD_HEAL_PER_SYNERGY_TIER,
+  FIELD_SPEED_BUFF_PER_SYNERGY_TIER,
+  MONSTER_AP_BUFF_PER_SYNERGY_TIER,
+  MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER,
+  MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER,
+  RarityCost
 } from "../../config"
-import { type SynergyEffect, SynergyEffects } from "../../config/game/synergies"
+import {
+  FIRE_ATK_BUFF_PER_SYNERGY_TIER,
+  GROUND_ATK_BUFF_PER_SYNERGY_TIER,
+  GROUND_DEF_BUFF_PER_SYNERGY_TIER,
+  SOUND_ATK_BUFF_PER_SYNERGY_TIER,
+  SOUND_PP_GAIN_PER_SYNERGY_TIER,
+  SOUND_SPEED_BUFF_PER_SYNERGY_TIER,
+  type SynergyTier,
+  SynergyTiers
+} from "../../config/game/synergies"
 import type Player from "../../models/colyseus-models/player"
-import PokemonFactory from "../../models/pokemon-factory"
-import { type FlowerPot, type IPokemon, Title } from "../../types"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
+import PokemonFactory, {
+  getPokemonBaseline
+} from "../../models/pokemon-factory"
+import { type FlowerPot, type IPokemon, Title, Transfer } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
-import { Item, Scarves, Wands } from "../../types/enum/Item"
+import {
+  Item,
+  ItemComponents,
+  Scarves,
+  SynergyGems,
+  SynergyGivenByGem,
+  Wands
+} from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pillars, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"
-import { isOnBench } from "../../utils/board"
+import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
-import { min } from "../../utils/number"
-import { chance } from "../../utils/random"
+import { max, min } from "../../utils/number"
+import { chance, pickNRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { type Board, effectInLine } from "../board"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerMonByPot, getFlowerPotsUnlocked } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import type Simulation from "../simulation"
 import { DelayedCommand } from "../simulation-command"
 import { getUnitScore } from "../unit-score"
 import {
+  type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnAttackReceivedEffect,
@@ -42,31 +65,30 @@ import {
   OnDamageReceivedEffect,
   type OnDamageReceivedEffectArgs,
   OnDeathEffect,
+  OnGroundDiggingEffect,
   OnKillEffect,
   type OnKillEffectArgs,
   OnSimulationStartEffect,
-  OnSpawnEffect
+  OnSpawnEffect,
+  OnStageStartEffect
 } from "./effect"
+import { PassiveEffects } from "./passives"
 
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0
-  synergyLevel: number
-  constructor(effect: SynergyEffect<Synergy.MONSTER>) {
-    super(undefined, effect)
-    this.synergyLevel = SynergyEffects[Synergy.MONSTER].indexOf(effect)
+  synergyTier: number
+  constructor(tier: SynergyTier<Synergy.MONSTER>) {
+    super(undefined, tier)
+    this.synergyTier = SynergyTiers[Synergy.MONSTER].indexOf(tier) + 1
   }
 
   apply({ attacker, target }: OnKillEffectArgs) {
     const attackBoost =
-      MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL[this.synergyLevel] ??
-      MONSTER_ATTACK_BUFF_PER_SYNERGY_LEVEL.at(-1)
-    const apBoost =
-      MONSTER_AP_BUFF_PER_SYNERGY_LEVEL[this.synergyLevel] ??
-      MONSTER_AP_BUFF_PER_SYNERGY_LEVEL.at(-1)
+      MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
+    const apBoost = MONSTER_AP_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
     const hpGain =
-      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL[this.synergyLevel] ??
-      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_LEVEL.at(-1)
+      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[this.synergyTier] ?? 0
     const lifeBoost = hpGain * target.maxHP
     attacker.addAttack(attackBoost, attacker, 0, false)
     attacker.addAbilityPower(apBoost, attacker, 0, false)
@@ -79,8 +101,8 @@ export class MonsterKillEffect extends OnKillEffect {
   }
 }
 export class GroundHoleEffect extends OnSpawnEffect {
-  constructor(effect: SynergyEffect<Synergy.GROUND>) {
-    const synergyLevel = SynergyEffects[Synergy.GROUND].indexOf(effect) + 1
+  constructor(effect: SynergyTier<Synergy.GROUND>) {
+    const synergyTier = SynergyTiers[Synergy.GROUND].indexOf(effect) + 1
     super((pokemon, player) => {
       const y =
         player?.team === Team.RED_TEAM
@@ -88,9 +110,10 @@ export class GroundHoleEffect extends OnSpawnEffect {
           : pokemon.positionY
       const index = y * BOARD_WIDTH + pokemon.positionX
       const holeLevel = player?.groundHoles[index] ?? 0
-      let defBuff = holeLevel * [0, 1, 2, 3, 3][synergyLevel]
-      let atkBuff = holeLevel === 5 ? [0, 3, 5, 8, 8][synergyLevel] : 0
-      if (synergyLevel === 4) {
+      let defBuff = holeLevel * GROUND_DEF_BUFF_PER_SYNERGY_TIER[synergyTier]
+      let atkBuff =
+        holeLevel === 5 ? GROUND_ATK_BUFF_PER_SYNERGY_TIER[synergyTier] : 0
+      if (synergyTier === 4) {
         const nbFullyDugRows = [0, 8, 16].reduce((count, startIdx) => {
           const row = player?.groundHoles.slice(startIdx, startIdx + 8) ?? []
           return count + (row.every((hole) => hole === 5) ? 1 : 0)
@@ -112,14 +135,17 @@ export class GroundHoleEffect extends OnSpawnEffect {
 
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
-  synergyLevel: number
-  constructor(effect: SynergyEffect<Synergy.FIRE>) {
+  synergyTier: number
+  constructor(effect: SynergyTier<Synergy.FIRE>) {
     super(undefined, effect)
-    this.synergyLevel = SynergyEffects[Synergy.FIRE].indexOf(effect)
+    this.synergyTier = SynergyTiers[Synergy.FIRE].indexOf(effect) + 1
   }
 
   apply({ pokemon }) {
-    pokemon.addAttack(this.synergyLevel, pokemon, 0, false)
+    const atkBuff = FIRE_ATK_BUFF_PER_SYNERGY_TIER[this.synergyTier]
+    if (atkBuff) {
+      pokemon.addAttack(atkBuff, pokemon, 0, false)
+    }
     this.count += 1
   }
 }
@@ -163,19 +189,19 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
-  synergyLevel: number = -1
-  constructor(effect?: SynergyEffect<Synergy.SOUND>) {
+  synergyTier: number = 0
+  constructor(effect?: SynergyTier<Synergy.SOUND>) {
     super(undefined, effect)
     if (effect) {
-      this.synergyLevel = SynergyEffects[Synergy.SOUND].indexOf(effect)
+      this.synergyTier = SynergyTiers[Synergy.SOUND].indexOf(effect) + 1
     }
   }
 
   apply(pokemon: PokemonEntity, board: Board) {
     pokemon.broadcastAbility({ skill: Ability.ECHO })
-    const attackBoost = [2, 1, 1][this.synergyLevel] ?? 0
-    const speedBoost = [0, 5, 5][this.synergyLevel] ?? 0
-    const manaBoost = [0, 0, 3][this.synergyLevel] ?? 0
+    const attackBuff = SOUND_ATK_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
+    const speedBuff = SOUND_SPEED_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
+    const ppGain = SOUND_PP_GAIN_PER_SYNERGY_TIER[this.synergyTier] ?? 0
 
     const chimecho = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -196,9 +222,9 @@ export class SoundCryEffect extends OnAbilityCastEffect {
         } else {
           ally.status.sleepCooldown = 0
         }
-        ally.addAttack(attackBoost * scale, pokemon, 0, false)
-        ally.addSpeed(speedBoost * scale, pokemon, 0, false)
-        ally.addPP(manaBoost * scale, pokemon, 0, false)
+        ally.addAttack(attackBuff * scale, pokemon, 0, false)
+        ally.addSpeed(speedBuff * scale, pokemon, 0, false)
+        ally.addPP(ppGain * scale, pokemon, 0, false)
         ally.count.soundCryCount += scale
       }
     })
@@ -223,11 +249,11 @@ export const humanHealEffect = new OnDamageDealtEffect(
 )
 
 export class OnFieldDeathEffect extends OnDeathEffect {
-  constructor(effect: SynergyEffect<Synergy.FIELD>) {
+  constructor(effect: SynergyTier<Synergy.FIELD>) {
     super(({ pokemon, board }) => {
-      const effectsIndex = SynergyEffects[Synergy.FIELD].indexOf(effect)
-      const heal = FIELD_HEAL_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
-      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_LEVEL[effectsIndex] ?? 0
+      const synergyTier = SynergyTiers[Synergy.FIELD].indexOf(effect) + 1
+      const heal = FIELD_HEAL_PER_SYNERGY_TIER[synergyTier] ?? 0
+      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_TIER[synergyTier] ?? 0
       pokemon.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
           if (
@@ -456,6 +482,20 @@ export const normalShieldEffect = new OnSimulationStartEffect(
           cell.value.addShield(shieldBonus, entity, 0, false)
         }
       })
+    }
+  }
+)
+
+export const bugSwarmSpawnEffect = new OnStageStartEffect(
+  ({ player, room }) => {
+    if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
+      const bugsNotFinal = [...player.board.values()]
+        .filter((p) => p.types.has(Synergy.BUG) && !p.final)
+        .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+      if (bugsNotFinal.length > 0) {
+        const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
+        room.spawnOnBench(player, spawn, "nest")
+      }
     }
   }
 )
@@ -812,7 +852,7 @@ export const cloneBugs = ({
     numberOfBugsToClone = 3
   }
   if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
-    numberOfBugsToClone = 5
+    numberOfBugsToClone = 4
   }
   numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
@@ -868,4 +908,117 @@ export const cloneBugs = ({
       }
     }
   }
+}
+
+const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
+  if (
+    getSynergyTier(player.synergies, Synergy.FIRE) === 4 &&
+    player.items.includes(Item.FIRE_SHARD) === false &&
+    player.life > 2
+  ) {
+    player.items.push(Item.FIRE_SHARD)
+  }
+})
+
+const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
+  const nbTrees = getSynergyTier(player.synergies, Synergy.GRASS)
+  for (let i = 0; i < nbTrees; i++) {
+    player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
+  }
+})
+
+const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
+  if (getSynergyTier(player.synergies, Synergy.GROUND) > 0) {
+    player.board.forEach((pokemon, pokemonId) => {
+      if (
+        pokemon.types.has(Synergy.GROUND) &&
+        !isOnBench(pokemon) &&
+        !(
+          pokemon.items.has(Item.CHEF_HAT) &&
+          player.synergies.hasSynergyActive(Synergy.GOURMET)
+        )
+      ) {
+        const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
+        const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
+        const isReachingMaxDepth = player.groundHoles[index] === 4
+        if (!hasAlreadyReachedMaxDepth) {
+          let buriedItem = isReachingMaxDepth ? player.buriedItems[index] : null
+          if (
+            pokemon.items.has(Item.EXPLORER_KIT) &&
+            isReachingMaxDepth &&
+            !buriedItem
+          ) {
+            if (chance(0.1, pokemon)) {
+              buriedItem = Item.BIG_NUGGET
+            } else if (chance(0.5, pokemon)) {
+              buriedItem = Item.NUGGET
+            } else {
+              buriedItem = Item.COIN
+            }
+          }
+          room.broadcast(Transfer.DIG, {
+            pokemonId,
+            buriedItem
+          })
+          room.clock.setTimeout(() => {
+            player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+            PassiveEffects[pokemon.passive]?.forEach((effect) => {
+              if (effect instanceof OnGroundDiggingEffect) {
+                effect.apply({ pokemon, player })
+              }
+            })
+            player.board.forEach((pokemon) => {
+              // Condition based evolutions on ground hole dig
+              if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+                EvolutionManager.tryEvolve(pokemon, player, room.state)
+              } else if (
+                pokemon.evolutionRule.type === EvolutionRuleType.STACK
+              ) {
+                EvolutionManager.tryEvolve(pokemon, player)
+              }
+            })
+          }, 1000)
+
+          if (buriedItem) {
+            room.clock.setTimeout(() => {
+              if (buriedItem === Item.COIN) {
+                player.addMoney(1, true, null)
+              } else if (buriedItem === Item.NUGGET) {
+                player.addMoney(3, true, null)
+              } else if (buriedItem === Item.BIG_NUGGET) {
+                player.addMoney(10, true, null)
+              } else if (buriedItem === Item.TREASURE_BOX) {
+                player.items.push(...pickNRandomIn(ItemComponents, 2))
+              } else if (isIn(SynergyGems, buriedItem)) {
+                const type = SynergyGivenByGem[buriedItem]
+                player.bonusSynergies.set(
+                  type,
+                  (player.bonusSynergies.get(type) ?? 0) + 1
+                )
+                player.items.push(buriedItem)
+                player.updateSynergies()
+              } else {
+                player.items.push(buriedItem)
+              }
+            }, 2500)
+          }
+        }
+      }
+    })
+  }
+})
+
+export const SynergyEffects: Partial<
+  Record<EffectEnum, (Effect | (() => Effect))[]>
+> = {
+  [EffectEnum.HEART_OF_THE_SWARM]: [bugSwarmSpawnEffect],
+  [EffectEnum.DESOLATE_LAND]: [giveFireShardEffect],
+  [EffectEnum.INGRAIN]: [growBerryTreesEffect],
+  [EffectEnum.GROWTH]: [growBerryTreesEffect],
+  [EffectEnum.SPORE]: [growBerryTreesEffect],
+  [EffectEnum.OVERGROW]: [growBerryTreesEffect],
+  [EffectEnum.TILLER]: [groundDigEffect],
+  [EffectEnum.DIGGER]: [groundDigEffect],
+  [EffectEnum.DRILLER]: [groundDigEffect],
+  [EffectEnum.DEEP_MINER]: [groundDigEffect]
 }

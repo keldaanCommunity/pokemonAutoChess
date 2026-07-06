@@ -1,6 +1,6 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
@@ -33,7 +33,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { isIn, removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
-import { distanceC } from "../../utils/distance"
+import { distanceC, distanceM } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import {
   chance,
@@ -327,16 +327,16 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       }
 
       if (item === Item.TEAL_MASK) {
-        pokemon.items.add(Item.TEAL_MASK)
+        pokemon.addItem(Item.TEAL_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
       } else if (item === Item.WELLSPRING_MASK) {
-        pokemon.items.add(Item.WELLSPRING_MASK)
+        pokemon.addItem(Item.WELLSPRING_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
       } else if (item === Item.HEARTHFLAME_MASK) {
-        pokemon.items.add(Item.HEARTHFLAME_MASK)
+        pokemon.addItem(Item.HEARTHFLAME_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
       } else if (item === Item.CORNERSTONE_MASK) {
-        pokemon.items.add(Item.CORNERSTONE_MASK)
+        pokemon.addItem(Item.CORNERSTONE_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
       }
       return true
@@ -354,8 +354,9 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         Pkm.SUBSTITUTE,
         player
       )
-      pokemon.items.forEach((item) => substitute.items.add(item))
-      pokemon.removeItems(schemaValues(pokemon.items), player)
+      const items = schemaValues(pokemon.items)
+      substitute.addItems(items, player)
+      pokemon.removeItems(items, player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
@@ -384,8 +385,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
 
-  const gourmetLevel = getSynergyStep(player.synergies, Synergy.GOURMET)
-  const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+  const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
+  const nbDishes = [0, 1, 2, 2][gourmetTier] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
@@ -1481,6 +1482,106 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LUCKY_RIBBON]: [
     new OnSimulationStartEffect(({ entity }) => {
       entity.addDodgeChance(0.15, entity, 0, false)
+    })
+  ],
+
+  [Item.BALL]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      // When casting ability, throws the ball to the furthest FIELD ally to grant them the BALL and 50 SHIELD.
+
+      const fieldAllies = board.cells.filter<PokemonEntity>(
+        (p): p is PokemonEntity =>
+          p != null &&
+          p.id !== pokemon.id &&
+          p.team === pokemon.team &&
+          p.items.size < 3 &&
+          p.items.has(Item.BALL) === false &&
+          p.types.has(Synergy.FIELD)
+      )
+
+      let furthestFieldAlly: PokemonEntity | null = null
+      let maxDistance = 0
+      for (const ally of fieldAllies) {
+        const distance = distanceM(
+          ally.positionX,
+          ally.positionY,
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        if (distance > maxDistance) {
+          furthestFieldAlly = ally
+          maxDistance = distance
+        }
+      }
+
+      if (furthestFieldAlly) {
+        const travelTime = Math.round(
+          (maxDistance * 1000) / (4 * (1 + pokemon.speed / 100))
+        )
+        pokemon.broadcastAbility({
+          skill: "BALL",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: furthestFieldAlly.positionX,
+          targetY: furthestFieldAlly.positionY,
+          delay: travelTime
+        })
+        furthestFieldAlly.commands.push(
+          new DelayedCommand(() => {
+            furthestFieldAlly.addItem(Item.BALL)
+            furthestFieldAlly.addShield(50, pokemon, 0, false)
+          }, 500)
+        )
+        pokemon.removeItem(Item.BALL)
+      } else {
+        // If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead,
+        // dealing [30,SP]% of user's SPEEED as PHYSICAL
+
+        const enemies = board.cells.filter<PokemonEntity>(
+          (p): p is PokemonEntity => p != null && p.team !== pokemon.team
+        )
+        let furthestEnemy: PokemonEntity | null = null
+        let maxDistance = 0
+        for (const enemy of enemies) {
+          const distance = distanceM(
+            enemy.positionX,
+            enemy.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+          if (distance > maxDistance) {
+            furthestEnemy = enemy
+            maxDistance = distance
+          }
+        }
+
+        if (furthestEnemy) {
+          const damage = Math.round(0.3 * pokemon.speed)
+          const travelTime = Math.round(
+            (maxDistance * 1000) / (4 * (1 + pokemon.speed / 100))
+          )
+          pokemon.broadcastAbility({
+            skill: "BALL",
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: furthestEnemy.positionX,
+            targetY: furthestEnemy.positionY,
+            delay: travelTime
+          })
+          furthestEnemy.commands.push(
+            new DelayedCommand(() => {
+              furthestEnemy.handleDamage({
+                damage,
+                attackType: AttackType.PHYSICAL,
+                attacker: pokemon,
+                board,
+                shouldTargetGainMana: true
+              })
+            }, travelTime)
+          )
+          pokemon.removeItem(Item.BALL)
+        }
+      }
     })
   ]
 }

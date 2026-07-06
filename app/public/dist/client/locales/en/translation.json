@@ -1187,7 +1187,9 @@
 		"KOMALA": "Komala",
 		"TAROUNTULA": "Tarountula",
 		"SPIDOPS": "Spidops",
-		"SLITHER_WING": "Slither Wing"
+		"BUG_NEST": "Bug Nest",
+		"SLITHER_WING": "Slither Wing",
+		"PASSIMIAN": "Passimian"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1771,7 +1773,9 @@
 		"NIGHT_DAZE": "Night Daze",
 		"BITTER_MALICE": "Bitter Malice",
 		"COIL": "Coil",
-		"SUBSTITUTE": "Substitute"
+		"SUBSTITUTE": "Substitute",
+		"SWARM": "Call of the Swarm",
+		"FLING": "Fling"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1967,7 +1971,7 @@
 		"GIGATON_HAMMER": "Deal [100,200,400,800,SP] SPECIAL to the target and inflict the user with FATIGUE for 6 seconds.",
 		"ACROBATICS": "Deal [20,40,80,160,SP] SPECIAL and move to a tile at good distance from its target. Move further away if not holding any item.",
 		"ABSORB": "Deal [30,60,120,240,SP] SPECIAL to the target and heal ADJACENT allied Pokémon for [3,6,12,24,SP] HP.",
-		"ROLLOUT": "Increase the user's DEF by [2,5,10,20,SP] then deal SPECIAL equal to 2x the user's DEF.",
+		"ROLLOUT": "Increase the user's DEF by [2,5,10,20,SP] then deal [200,SP]% of user's DEF as SPECIAL to the target.",
 		"ICE_BALL": "Increase the user's SPE_DEF by 10 then deal SPECIAL equal to [10,20,30,60,SP] + [50,100,150,300,SP]% of the user's SPE_DEF.",
 		"THRASH": "Increase ATK by [100,100,120,150,SP]% of base ATK and inflict the user with CONFUSION for 3 seconds.",
 		"SOLAR_BEAM": "Deal [25,50,100,200,SP] SPECIAL to all enemy Pokémon in a line behind the target and BURN them for 3 seconds. If Pokémon is in the spotlight or if the weather is ZENITH, deals +30% damage and restore 20 PP.",
@@ -2109,7 +2113,7 @@
 		"SHEER_COLD": "A blast of absolute-zero cold deals [50,100,200,400,SP] SPECIAL to the target with [10,20,30,60]% chance to execute. The more HP the user has relative to the target, the greater the chance. Always execute enemy Pokémon suffering from FREEZE, but never execute ICE Pokémon.",
 		"EXTREME_SPEED": "Dash to the farthest enemy, dealing [20,30,40,80,SP] SPECIAL to all enemy Pokémon in the path.",
 		"ZAP_CANNON": "Fire an electric blast like a cannon, dealing [25,50,100,200,SP] SPECIAL to the target and inflicting them with PARALYSIS and ARMOR_BREAK for [1,2,4] seconds.",
-		"PSYCHO_BOOST": "Slash the target and any enemy Pokémon ADJACENT_IN_THE_SAME_ROW, dealing [90,120,150,300,SP] SPECIAL. Then, **reduce the user's** AP by 20 for each Pokémon hit.",
+		"PSYCHO_BOOST": "Slash the target and any enemy Pokémon ADJACENT_IN_THE_SAME_ROW, dealing [90,120,150,300,SP] SPECIAL. Then, **reduce the user's** AP by 10 for each Pokémon hit.",
 		"ICE_HAMMER": "Deal [50,100,200,400,SP] SPECIAL to the target, applying FREEZE for 3 seconds. The user is inflicted with PARALYSIS for 3 seconds.",
 		"POLLEN_PUFF": "Give the lowest HP allied Pokémon a pollen puff that heals them for [30,60,120,240,SP] HP.",
 		"PSYSTRIKE": "Materialize a strange psychic wave toward the farthest enemy Pokémon, dealing [20,40,80,160,SP] SPECIAL to them and teleporting all Pokémon in its path.",
@@ -2332,7 +2336,9 @@
 		"NIGHT_DAZE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict BLINDED for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"BITTER_MALICE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict FATIGUE for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]",
-		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute."
+		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
+		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
+		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2511,7 +2517,7 @@
 		"COCOON": "Copy 1 BUG Pokémon",
 		"INFESTATION": "Copy 2 BUG Pokémon",
 		"HORDE": "Copy 3 BUG Pokémon",
-		"HEART_OF_THE_SWARM": "Copy 5 BUG Pokémon",
+		"HEART_OF_THE_SWARM": "Copy 4 BUG Pokémon and get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.",
 		"TAILWIND": "FLY_AWAY once under 20% HP",
 		"FEATHER_DANCE": "Get PROTECT for 2 seconds after the FLY_AWAY",
 		"MAX_AIRSTREAM": "FLY_AWAY twice when under 50% HP and 20% HP",
@@ -2895,7 +2901,8 @@
 		"ROCK_HORN": "Rock Horn",
 		"SKY_MELODICA": "Sky Melodica",
 		"TERRA_CYMBAL": "Terra Cymbal",
-		"SOOTHE_BELL": "Soothe Bell"
+		"SOOTHE_BELL": "Soothe Bell",
+		"BALL": "Ball"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3226,7 +3233,8 @@
 		"ROCK_HORN": "Pokémon in shop have 5% additional chance to have the ROCK type.",
 		"SKY_MELODICA": "Pokémon in shop have 5% additional chance to have the FLYING type.",
 		"TERRA_CYMBAL": "Pokémon in shop have 5% additional chance to have the GROUND type.",
-		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon"
+		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon",
+		"BALL": "A ball made of a large hard berry. When casting ability, throws the ball to the furthest FIELD ally to pass them the BALL and 50 SHIELD. If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead, dealing [30,SP]% of user's SPEED as PHYSICAL"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3246,7 +3254,7 @@
 		"RKS_SYSTEM": "RKS system: All synergy items held are removable and give MEMORY_DISCS of those synergies when removed.",
 		"SUDOWOODO": "Pretends to be a tree and does not attack but gain [2,4] ATK per second instead (stackable).\nStarts attacking when PP bar is full, cannot be SILENCE or lose PP until then.",
 		"WOBBUFFET": "Does not move or attack until PP bar is full, cannot be SILENCE or lose PP until then.",
-		"DITTO": "Ditto can transform to create a 1 STAR copy of one of your Pokémon you drop it over (not Unique, Legendary or Hatch)",
+		"DITTO": "Ditto can transform into a 1 STAR copy of one of your Pokémon you drop it over (does not work for Unique, Legendary or Hatch)",
 		"EGG": "You can feel something moving inside",
 		"HATCH": "Hatched Pokémon evolve automatically after 5 stages",
 		"SYNCHRO": "If the Pokémon is affected by POISONNED, BURN, WOUND or SILENCE, the enemy caster will suffer the same negative status",
@@ -3357,7 +3365,7 @@
 		"ZYGARDE": "Zygarde cells emerge from fully dug holes every second to join Zygarde, giving it 1 max HP each. When 95 cells have been collected, transforms into its complete form.",
 		"GLIMMORA": "Once below 50% max HP, throws toxic spikes in a 2x3 rectangle in front of itself, dealing 20 SPECIAL. Toxic spikes apply POISONNED to Pokémon, unless they are POISON.",
 		"PILLAR": "Builds [1,1,2] movable pillars that block the path of enemies, with increased HP, DEF and SPE_DEF based on unit STAR.",
-		"INANIMATE": "Inanimate objects cannot be copied or sold. They cannot move or attack, and are immune to status effects.",
+		"INANIMATE": "Inanimate objects cannot be copied or sold, cannot move or attack, cannot hold items, and are immune to status effects.",
 		"DRAMPA": "Gains 5 AP each time a Pokémon is affected by its ability.",
 		"APPLIN": "Applin will evolve when given an apple:\nTART_APPLE: $t(pkm.FLAPPLE)\nSWEET_APPLE: $t(pkm.APPLETUN)\nSIRUPY_APPLE: $t(pkm.DIPPLIN)",
 		"DIPPLIN": "Dipplin is looking for a SIRUPY_APPLE.",
@@ -3421,7 +3429,8 @@
 		"VESPIQUEN": "Vespiquen's RANGE and ability differs based on the row it starts in.\nBUG synergy effect does not spawn a copy of Vespiquen but 2 Combee instead.",
 		"ILLUSION": "Copy the apperance of the ally on its left.",
 		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground.",
-		"SUBSTITUTE": "A decoy created to look like a Pokémon"
+		"SUBSTITUTE": "A decoy created to look like a Pokémon",
+		"PASSIMIAN": "Passimian comes with a BALL as item held"
 	},
 	"stat": {
 		"ATK": "Attack",

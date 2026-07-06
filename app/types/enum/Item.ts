@@ -331,7 +331,8 @@ export enum Item {
   ROCK_HORN = "ROCK_HORN",
   SKY_MELODICA = "SKY_MELODICA",
   TERRA_CYMBAL = "TERRA_CYMBAL",
-  SOOTHE_BELL = "SOOTHE_BELL"
+  SOOTHE_BELL = "SOOTHE_BELL",
+  BALL = "BALL"
 }
 
 export const MemoryDiscs = [
@@ -478,7 +479,8 @@ export const SpecialItems: Item[] = [
   Item.COMFEY,
   Item.TATSUGIRI_CURLY,
   Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY
+  Item.TATSUGIRI_STRETCHY,
+  Item.BALL
 ] satisfies Item[]
 
 export const FishingRods = [

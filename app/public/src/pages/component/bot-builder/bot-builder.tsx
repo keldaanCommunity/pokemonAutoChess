@@ -17,7 +17,7 @@ import {
 } from "../../../../../core/bot-logic"
 import {
   computeSynergies,
-  getSynergyStep
+  getSynergyTier
 } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
@@ -212,12 +212,12 @@ export default function BotBuilder() {
   )
   const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
   const nbMaxScarvesOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.NORMAL),
+    () => getSynergyTier(synergies, Synergy.NORMAL),
     [board]
   )
   const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
   const nbMaxToolsOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.ARTIFICIAL),
+    () => getSynergyTier(synergies, Synergy.ARTIFICIAL),
     [board]
   )
   const powerScore = useMemo(() => getPowerScore(board), [board])

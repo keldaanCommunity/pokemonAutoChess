@@ -1,4 +1,4 @@
-import { FAIRY_WANDS_BY_SYNERGY_LEVEL, SynergyTriggers } from "../config"
+import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
 import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
@@ -84,11 +84,11 @@ export default class Bot {
         pkm.positionY = stepTeam.board[i].y
 
         if (pkm.passive !== Passive.NONE) {
-          const hasLight =
-            (this.player.synergies.get(Synergy.LIGHT) ?? 0) >=
-            SynergyTriggers[Synergy.LIGHT][0]
+          const hasLightActive = this.player.synergies.hasSynergyActive(
+            Synergy.LIGHT
+          )
           const inSpotlight =
-            hasLight &&
+            hasLightActive &&
             ((pkm.positionX === this.player.lightX &&
               pkm.positionY === this.player.lightY) ||
               pkm.items.has(Item.SHINY_STONE))

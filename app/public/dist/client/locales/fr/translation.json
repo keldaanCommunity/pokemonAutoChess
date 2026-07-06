@@ -577,7 +577,12 @@
 		"STUFF_CHEEKS": "Garde-à-Joues",
 		"SILK_TRAP": "Piège de Fil",
 		"SKITTER_SMACK": "Ravage Rampant",
-		"VESPIQUEN_ORDERS": "Ordres d'Apireine"
+		"VESPIQUEN_ORDERS": "Ordres d'Apireine",
+		"BITTER_MALICE": "Cœur de Rancœur",
+		"NIGHT_DAZE": "Explonuit",
+		"COIL": "Enroulement",
+		"SUBSTITUTE": "Clonage",
+		"FLING": "Dégommage"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1767,7 +1772,9 @@
 		"KOMALA": "Dodoala",
 		"TAROUNTULA": "Tissemboule",
 		"SPIDOPS": "Filentrappe",
-		"SLITHER_WING": "Rampe-Ailes"
+		"SLITHER_WING": "Rampe-Ailes",
+		"BUG_NEST": "Nids d’insectes",
+		"PASSIMIAN": "Quartermac"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,160,SP] SHIELD à tous les alliés.",
@@ -2098,7 +2105,7 @@
 		"SHEER_COLD": "Une vague de froid glacial frappe la cible, causant [50,100,200,400,SP] SPECIAL avec [10,20,30,60]% de chance de la mettre KO en un coup. Plus le lanceur a de HP comparé à sa cible, plus les chances augmentent. Met KO systématiquement les cibles qui souffre du FREEZE, mais ne met jamais KO les Pokémon ICE.",
 		"EXTREME_SPEED": "Fonce vers l'ennemi le plus éloigné, infligeant [20,30,40,80,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"ZAP_CANNON": "Lance une décharge électrique avec la force d'un canon pour infliger à la cible [25,50,100,200,SP] SPECIAL, PARALYSIS et ARMOR_BREAK pendant [1,2,4,8,SP] secondes.",
-		"PSYCHO_BOOST": "Tranche la cible et tous les ennemis ADJACENT_IN_THE_SAME_ROW, infligeant [90,120,150,300,SP] SPECIAL. Puis, réduit la AP du lanceur de 20 pour chaque Pokémon touché.",
+		"PSYCHO_BOOST": "Tranche la cible et tous les ennemis ADJACENT_IN_THE_SAME_ROW, infligeant [90,120,150,300,SP] SPECIAL. Puis, réduit la AP du lanceur de 10 pour chaque Pokémon touché.",
 		"ICE_HAMMER": "Inflige [50,100,200,400,SP] SPECIAL à la cible et FREEZE pendant 3 secondes. Le lanceur subit PARALYSIS pendant 3 secondes.",
 		"POLLEN_PUFF": "Donne à l'allié avec les plus faibles HP une bouffée de pollen qui restaure [30,60,120,240,SP] HP.",
 		"PSYSTRIKE": "Matérialise une vague psychique vers l'ennemi le plus éloigné, infligeant [20,40,80,160,SP] SPECIAL et téléportant toutes les unités sur son chemin.",
@@ -2884,7 +2891,8 @@
 		"ICY_FLUTE": "Flûte Glacée",
 		"ROCK_HORN": "Cor de Roche",
 		"SKY_MELODICA": "Aéromélodica",
-		"TERRA_CYMBAL": "Terracymbale"
+		"TERRA_CYMBAL": "Terracymbale",
+		"SOOTHE_BELL": "Grelot Zen"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -2997,10 +3005,10 @@
 		"DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 200%.",
 		"SHINY_STONE": "Le porteur gagne le type LIGHT. Un second spot de lumière est projeté sur la case du porteur au début du combat.",
 		"RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Ne peut être donné qu'à un Pokémon pouvant encore évoluer, et ramène son prix de vente au tier précédent.",
-		"EVIOLITE": "Le porteur gagne beaucoup de bonus statistiques mais son espèce ne peut plus évoluer. Ne peut être donné qu'à un Pokémon pouvant encore évoluer.",		
+		"EVIOLITE": "Le porteur gagne beaucoup de bonus statistiques mais son espèce ne peut plus évoluer. Ne peut être donné qu'à un Pokémon pouvant encore évoluer.",
 		"GOLD_BOTTLE_CAP": "+1% CRIT_POWER par GOLD en votre possession. +1 GOLD à chaque fois que le porteur met KO un ennemi. S'il élimine le dernier ennemi, il remporte le Jackpot et double le montant gagné pendant cette manche.",
 		"ABSORB_BULB": "Tous les dégâts réduits sont absorbés par le bulbe. Une fois sous les 50% de HP, le bulbe explose, infligeant tous les dégâts absorbés en SPECIAL aux ennemis ADJACENT.",
-		"SACRED_ASH": "Octroie RESURRECTION. Après résurrection, jusqu'à 3 alliés KO sont également ressuscités, mais sans leurs objets.",		
+		"SACRED_ASH": "Octroie RESURRECTION. Après résurrection, jusqu'à 3 alliés KO sont également ressuscités, mais sans leurs objets.",
 		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
 		"GOLD_BOW": "Le porteur ne compte pas dans la taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
@@ -4166,7 +4174,7 @@
 	"add_bot": "Ajouter un bot",
 	"bot_difficulty": {
 		"BEGINNER": "Débutant (<850)",
-		"EASY":  "Facile (850-999)",
+		"EASY": "Facile (850-999)",
 		"MEDIUM": "Moyen (1000-1149)",
 		"HARD": "Difficile (1150-1299)",
 		"EXTREME": "Extrême (1300-1449)",
@@ -5024,7 +5032,9 @@
 		"unown": "Zarbi Noir",
 		"zengarden": "Jardin Zen",
 		"redsea": "Mer Rouge",
-		"origin": "Origine"
+		"origin": "Origine",
+		"lilac": "Lilas",
+		"deerling": "Vivaldaim"
 	},
 	"history": "Histoire"
 }

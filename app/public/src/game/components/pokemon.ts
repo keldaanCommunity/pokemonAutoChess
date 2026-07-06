@@ -34,6 +34,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { min } from "../../../../utils/number"
 import {
@@ -43,7 +44,10 @@ import {
 import { randomBetween } from "../../../../utils/random"
 import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
-import { transformEntityCoordinates } from "../../pages/utils/utils"
+import {
+  transformBoardCoordinates,
+  transformEntityCoordinates
+} from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
@@ -67,6 +71,7 @@ const spriteCountPerPokemon = new Map<string, number>()
 
 export function resetSpriteCounts() {
   spriteCountPerPokemon.clear()
+  for (const index in lazyLoadingRequests) delete lazyLoadingRequests[index]
 }
 
 const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
@@ -194,7 +199,7 @@ export default class PokemonSprite extends DraggableObject {
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
-    const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
+    const scale = 2 * Math.sqrt(1 + (maxHP - baseHP) / baseHP)
     this.sprite
       .setScale(scale)
       .setDepth(DEPTH.POKEMON)
@@ -695,6 +700,47 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  nestAnimation(inBattle: boolean) {
+    const scene = <GameScene>this.scene
+    let nest: PokemonSprite | undefined
+    if (scene.battle && inBattle) {
+      nest = [...scene.battle.pokemonSprites.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    } else if (scene.board && !inBattle) {
+      nest = [...scene.board.pokemons.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    }
+    if (nest) {
+      this.moveManager.setEnable(false)
+
+      const [x, y] = inBattle
+        ? transformEntityCoordinates(this.positionX, this.positionY, this.flip)
+        : transformBoardCoordinates(this.positionX, this.positionY)
+
+      this.setScale(0.2)
+      this.setPosition(nest.x, nest.y)
+
+      scene.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.HOP,
+        this.flip,
+        false
+      )
+      scene.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration: 1000,
+        scale: 1,
+        onComplete: () => {
+          this.moveManager.setEnable(true)
+        }
+      })
+    }
+  }
+
   emoteAnimation() {
     const g = <GameScene>this.scene
     if (!g.animationManager) return
@@ -940,7 +986,7 @@ export default class PokemonSprite extends DraggableObject {
     if (pokemon.status.resurrection) {
       this.addResurrection()
     }
-    if (pokemon.status.runeProtect) {
+    if (pokemon.status.runeProtect && pokemon.passive !== Passive.INANIMATE) {
       this.addRuneProtect()
     }
     if (pokemon.status.spikeArmor) {
@@ -1637,6 +1683,13 @@ export function loadCompressedAtlas(
     return lazyLoadingRequests[index]
   }
   lazyLoadingRequests[index] = new Promise((resolve) => {
+    const onError = (file: Phaser.Loader.File) => {
+      if (file.key !== `pokemon-atlas-${index}` && file.key !== index) return
+      scene.load.off("loaderror", onError)
+      delete lazyLoadingRequests[index]
+      resolve(index)
+    }
+    scene.load.on("loaderror", onError)
     scene.load.once(
       `filecomplete-json-pokemon-atlas-${index}`,
       (key, type, data) => {
@@ -1704,8 +1757,8 @@ export function loadCompressedAtlas(
 
         const index = image.replace(".png", "")
 
-        //console.log("load multiatlas " + index)
         scene.textures.once(`addtexture-${index}`, () => {
+          scene.load.off("loaderror", onError)
           delete lazyLoadingRequests[index]
           resolve(index)
         })

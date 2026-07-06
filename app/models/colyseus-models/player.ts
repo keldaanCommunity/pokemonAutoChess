@@ -5,7 +5,7 @@ import {
   BOARD_WIDTH,
   FAIRY_WANDS_BY_SYNERGY_LEVEL,
   RegionDetails,
-  SynergyTriggers
+  SynergyTiersThresholds
 } from "../../config"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
@@ -93,7 +93,7 @@ import HistoryItem from "./history-item"
 import { PlayerChoice } from "./player-choice"
 import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
-import Synergies, { computeSynergies, getSynergyStep } from "./synergies"
+import Synergies, { computeSynergies, getSynergyTier } from "./synergies"
 import { Wanderer } from "./wanderer"
 
 export default class Player extends Schema implements IPlayer {
@@ -316,7 +316,7 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
-      newPokemon.items.add(item)
+      newPokemon.addItem(item, this)
       if (item === Item.SHINY_CHARM) {
         newPokemon.shiny = true
       }
@@ -361,7 +361,7 @@ export default class Player extends Schema implements IPlayer {
 
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
     const newLight = updatedSynergies.get(Synergy.LIGHT) ?? 0
-    const minimumToGetLight = SynergyTriggers[Synergy.LIGHT][0]
+    const minimumToGetLight = SynergyTiersThresholds[Synergy.LIGHT][0]
     const lightGained =
       previousLight < minimumToGetLight && newLight >= minimumToGetLight
     const lightLost =
@@ -401,6 +401,12 @@ export default class Player extends Schema implements IPlayer {
     }
 
     if (
+      previousSynergies.get(Synergy.BUG) !== updatedSynergies.get(Synergy.BUG)
+    ) {
+      this.updateBugNest()
+    }
+
+    if (
       previousSynergies.get(Synergy.FAIRY) !==
       updatedSynergies.get(Synergy.FAIRY)
     ) {
@@ -429,13 +435,12 @@ export default class Player extends Schema implements IPlayer {
     updatedSynergies: Map<Synergy, number>
   ): boolean {
     let needsRecomputingSynergiesAgain = false
-    const previousNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => (previousSynergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
-    ).length
 
-    const newNbArtifItems = SynergyTriggers[Synergy.ARTIFICIAL].filter(
-      (n) => (updatedSynergies.get(Synergy.ARTIFICIAL) ?? 0) >= n
-    ).length
+    const previousNbArtifItems = getSynergyTier(
+      previousSynergies,
+      Synergy.ARTIFICIAL
+    )
+    const newNbArtifItems = getSynergyTier(updatedSynergies, Synergy.ARTIFICIAL)
 
     if (newNbArtifItems > previousNbArtifItems) {
       // some artificial items are gained
@@ -496,14 +501,14 @@ export default class Player extends Schema implements IPlayer {
     updatedSynergies: Map<Synergy, number>
   ): boolean {
     let needsRecomputingSynergiesAgain = false
-    const previousNbNormalScarves = getSynergyStep(
+    const previousNbNormalScarves = getSynergyTier(
       previousSynergies,
       Synergy.NORMAL
     )
     const previousScarves = this.getScarvesItemsWithNbScarves(
       previousNbNormalScarves
     )
-    const newNbNormalScarves = getSynergyStep(updatedSynergies, Synergy.NORMAL)
+    const newNbNormalScarves = getSynergyTier(updatedSynergies, Synergy.NORMAL)
     const newScarves = this.getScarvesItemsWithNbScarves(newNbNormalScarves)
 
     if (newScarves.length > previousScarves.length) {
@@ -544,7 +549,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const nbWeatherRocks = getSynergyStep(this.synergies, Synergy.ROCK)
+    const nbWeatherRocks = getSynergyTier(this.synergies, Synergy.ROCK)
 
     let weatherRockInInventory
     do {
@@ -566,8 +571,8 @@ export default class Player extends Schema implements IPlayer {
     previousSynergies: Map<Synergy, number>,
     updatedSynergies: Map<Synergy, number>
   ) {
-    const previousNbTMs = getSynergyStep(previousSynergies, Synergy.HUMAN)
-    const newNbTMs = getSynergyStep(updatedSynergies, Synergy.HUMAN)
+    const previousNbTMs = getSynergyTier(previousSynergies, Synergy.HUMAN)
+    const newNbTMs = getSynergyTier(updatedSynergies, Synergy.HUMAN)
     if (previousNbTMs < newNbTMs) {
       // some TMs are gained
       const gainedTMs = this.tms.slice(previousNbTMs, newNbTMs)
@@ -591,7 +596,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateFishingRods() {
-    const fishingLevel = getSynergyStep(this.synergies, Synergy.WATER)
+    const fishingLevel = getSynergyTier(this.synergies, Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
       removeInArray<Item>(this.items, Item.OLD_ROD)
@@ -609,7 +614,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateChefsHats() {
-    const gourmetLevel = getSynergyStep(this.synergies, Synergy.GOURMET)
+    const gourmetLevel = getSynergyTier(this.synergies, Synergy.GOURMET)
     const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
     const hatHolders = schemaValues(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
@@ -636,7 +641,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateFairyWands() {
-    const newFairyLevel = getSynergyStep(this.synergies, Synergy.FAIRY)
+    const newFairyLevel = getSynergyTier(this.synergies, Synergy.FAIRY)
     const nbWandsByLevel = [0, 1, 2, 3, 4]
     const newNbWands = nbWandsByLevel[newFairyLevel] ?? 0
     const currentNbWands = this.items.filter((item) => isIn(Wands, item)).length
@@ -735,6 +740,22 @@ export default class Player extends Schema implements IPlayer {
           this.board.delete(currentPillars[i].id)
         }
       }
+    }
+  }
+
+  updateBugNest() {
+    const hasBugNest = getSynergyTier(this.synergies, Synergy.BUG) >= 4
+    let nest = schemaValues(this.board).find((p) => p.name === Pkm.BUG_NEST)
+    if (hasBugNest && !nest) {
+      const freeSpace = getFirstAvailablePositionOnBoard(this.board, 1)
+      if (freeSpace) {
+        nest = PokemonFactory.createPokemonFromName(Pkm.BUG_NEST, this)
+        nest.positionX = freeSpace[0]
+        nest.positionY = freeSpace[1]
+        this.board.set(nest.id, nest)
+      }
+    } else if (nest && !hasBugNest) {
+      this.board.delete(nest.id)
     }
   }
 

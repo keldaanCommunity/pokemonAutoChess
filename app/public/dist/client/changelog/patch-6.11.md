@@ -1,6 +1,8 @@
 
 # New Pokemons:
 
+- Passimian
+
 # Changes to Pokemon & Abilities
 
 Added a fourth tier (or fifth tier ?) of ability power per unit star level to all abilities. Many abilities that had only one tier (most of Unique/Legendary abilities) now have 4 tiers.
@@ -43,8 +45,13 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
 - New TM Substitute (replaces TM Protect): spawns a Substitute at the location of the user with [25,25,25,50,SP]% of max HP of the user as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.
 
+- Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
+- Buff Deoxys Speed Form: SPEED 90 → 100
+- Revert Articuno buff from 6.2; PP 110 → 120
+
 # Changes to Synergies
 
+- Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
 - Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
 
@@ -76,3 +83,4 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Bots elo ranges have been updated to be more widespread
 - Avatar emotes can now be used in lobby chat
 - Add symbols to tier list maker gadget and change layout
+- Add /unholdable-items GET endpoint

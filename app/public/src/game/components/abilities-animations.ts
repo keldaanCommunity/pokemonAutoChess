@@ -2527,7 +2527,7 @@ export const AbilitiesAnimations: {
       ability: "SNIPE_SHOT/projectile",
       scale: 3,
       duration: 1000,
-      rotation: -targetAngle,
+      rotation: args.flip ? targetAngle : -targetAngle,
       endCoords: [
         args.positionX + Math.round(Math.cos(targetAngle) * 10),
         args.positionY + Math.round(Math.sin(targetAngle) * 10),
@@ -3121,7 +3121,14 @@ export const AbilitiesAnimations: {
     ability: Ability.WHIRLWIND,
     duration: 1500,
     distance: 8
-  })
+  }),
+  ["BALL"]: (args) =>
+    projectile({
+      delay: 0,
+      scale: 1,
+      duration: args.delay,
+      oriented: true
+    })(args)
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

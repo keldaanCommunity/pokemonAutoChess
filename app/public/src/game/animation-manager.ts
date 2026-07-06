@@ -307,6 +307,7 @@ export default class AnimationManager {
       case PokemonActionState.HOP:
       case PokemonActionState.FISH:
       case PokemonActionState.BLOSSOM:
+      case PokemonActionState.NEST:
         return config.hop
       case PokemonActionState.HURT:
         return config.hurt

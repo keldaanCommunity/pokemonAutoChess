@@ -20,7 +20,7 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
 import { initTilemap } from "./core/design"
@@ -74,7 +74,7 @@ import {
 import { type ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
-import { Item } from "./types/enum/Item"
+import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import { logger } from "./utils/logger"
 
@@ -369,8 +369,12 @@ export const server = defineServer({
       res.send(Item)
     })
 
+    app.get("/unholdable-items", (req, res) => {
+      res.send(UnholdableItemsToSaveForStats)
+    })
+
     app.get("/types-trigger", (req, res) => {
-      res.send(SynergyTriggers)
+      res.send(SynergyTiersThresholds)
     })
 
     app.get("/titles", async (req, res) => {

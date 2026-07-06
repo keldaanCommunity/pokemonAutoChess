@@ -168,6 +168,7 @@ import { FlameChargeStrategy } from "./flame-charge"
 import { FlameThrowerStrategy } from "./flame-thrower"
 import { FlashStrategy } from "./flash"
 import { FleurCannonStrategy } from "./fleur-cannon"
+import { FlingStrategy } from "./fling"
 import { FloralHealingStrategy } from "./floral-healing"
 import { FlowerTrickStrategy } from "./flower-trick"
 import { FlyStrategy } from "./fly"
@@ -497,6 +498,7 @@ import { SurfStrategy } from "./surf"
 import { SurgingStrikesStrategy } from "./surging-strikes"
 import { SwaggerStrategy } from "./swagger"
 import { SwallowStrategy } from "./swallow"
+import { SwarmStrategy } from "./swarm"
 import { SweetScentStrategy } from "./sweet-scent"
 import { SyrupBombStrategy } from "./syrup-bomb"
 import { TackleStrategy } from "./tackle"
@@ -881,6 +883,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLAMETHROWER]: new FlameThrowerStrategy(),
   [Ability.FLASH]: new FlashStrategy(),
   [Ability.FLEUR_CANNON]: new FleurCannonStrategy(),
+  [Ability.FLING]: new FlingStrategy(),
   [Ability.FLORAL_HEALING]: new FloralHealingStrategy(),
   [Ability.FLOWER_TRICK]: new FlowerTrickStrategy(),
   [Ability.FLY]: new FlyStrategy(),
@@ -1211,6 +1214,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SURF]: new SurfStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.SWAGGER]: new SwaggerStrategy(),
+  [Ability.SWARM]: new SwarmStrategy(),
   [Ability.SWALLOW]: new SwallowStrategy(),
   [Ability.SWEET_SCENT]: new SweetScentStrategy(),
   [Ability.SYRUP_BOMB]: new SyrupBombStrategy(),

@@ -815,7 +815,9 @@
 	"team": "Zespół",
 	"welcome": "Witaj",	
 	"join": "Dołącz",
-	"starts_at": "Zaczyna się o",
+	"tournament": {
+		"starts_at": "Zaczyna się o"
+	},
 	"no_elo": "Brak Elo",
 	"enable_elo": "Włącz Elo",
 	"disable_elo": "Wyłącz Elo",

@@ -127,6 +127,7 @@ export enum Pkm {
   BRONZOR = "BRONZOR",
   BRUXISH = "BRUXISH",
   BUDEW = "BUDEW",
+  BUG_NEST = "BUG_NEST",
   BUIZEL = "BUIZEL",
   BULBASAUR = "BULBASAUR",
   BUNEARY = "BUNEARY",
@@ -735,6 +736,7 @@ export enum Pkm {
   PANGORO = "PANGORO",
   PARAS = "PARAS",
   PARASECT = "PARASECT",
+  PASSIMIAN = "PASSIMIAN",
   PATRAT = "PATRAT",
   PAWMI = "PAWMI",
   PAWMO = "PAWMO",
@@ -1858,11 +1860,8 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.EXCADRILL]: "0530",
   [Pkm.AUDINO]: "0531",
   [Pkm.TIMBURR]: "0532",
-  [Pkm.PILLAR_WOOD]: "0532-0002",
   [Pkm.GURDURR]: "0533",
-  [Pkm.PILLAR_IRON]: "0533-0002",
   [Pkm.CONKELDURR]: "0534",
-  [Pkm.PILLAR_CONCRETE]: "0534-0002",
   [Pkm.TYMPOLE]: "0535",
   [Pkm.PALPITOAD]: "0536",
   [Pkm.SEISMITOAD]: "0537",
@@ -2156,7 +2155,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TSAREENA]: "0763",
   [Pkm.COMFEY]: "0764",
   //[Pkm.ORANGURU]: "0765",
-  //[Pkm.PASSIMIAN]: "0766",
+  [Pkm.PASSIMIAN]: "0766",
   [Pkm.WIMPOD]: "0767",
   [Pkm.GOLISOPOD]: "0768",
   [Pkm.SANDYGAST]: "0769",
@@ -2466,7 +2465,12 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.OGERPON_CORNERSTONE_MASK]: "1017-0007",
   [Pkm.ARCHALUDON]: "1018",
   [Pkm.HYDRAPPLE]: "1019",
-  [Pkm.PECHARUNT]: "1025"
+  [Pkm.PECHARUNT]: "1025",
+
+  [Pkm.BUG_NEST]: "9999-0010",
+  [Pkm.PILLAR_WOOD]: "9999-0532",
+  [Pkm.PILLAR_IRON]: "9999-0533",
+  [Pkm.PILLAR_CONCRETE]: "9999-0534"
 }
 
 export const PkmByIndex: { [index: string]: Pkm } = Object.fromEntries(
@@ -3660,7 +3664,9 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.KOMALA]: Pkm.KOMALA,
   [Pkm.TAROUNTULA]: Pkm.TAROUNTULA,
   [Pkm.SPIDOPS]: Pkm.TAROUNTULA,
-  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING
+  [Pkm.BUG_NEST]: Pkm.BUG_NEST,
+  [Pkm.SLITHER_WING]: Pkm.SLITHER_WING,
+  [Pkm.PASSIMIAN]: Pkm.PASSIMIAN
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
@@ -3792,11 +3798,18 @@ export const Pillars = [
   Pkm.PILLAR_CONCRETE
 ] satisfies readonly Pkm[]
 
-export const NonPkm: Pkm[] = [Pkm.SUBSTITUTE, Pkm.EGG, ...Pillars, Pkm.DEFAULT]
+export const NonPkm: Pkm[] = [
+  Pkm.SUBSTITUTE,
+  Pkm.EGG,
+  Pkm.BUG_NEST,
+  ...Pillars,
+  Pkm.DEFAULT
+]
 
 export const NON_PMD_PKM_INDEXES: string[] = [
-  "0532-0002", // Pillar Wood
-  "0533-0002", // Pillar Iron
-  "0534-0002", // Pillar Concrete,
-  "0025-9999" // Pikachu Surfer
+  "0025-9999", // Pikachu Surfer
+  "9999-0010", // Bug Nest
+  "9999-0532", // Pillar Wood
+  "9999-0533", // Pillar Iron
+  "9999-0534" // Pillar Concrete,
 ]

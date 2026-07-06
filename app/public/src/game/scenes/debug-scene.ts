@@ -1,8 +1,13 @@
 import Phaser from "phaser"
-import { getRegionTint, RegionDetails } from "../../../../config"
+import {
+  BASE_PROJECTILE_SPEED,
+  getRegionTint,
+  RegionDetails
+} from "../../../../config"
 import type { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { AnimationType } from "../../../../types/Animation"
+import delays from "../../../../types/delays.json"
 import type { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
@@ -451,11 +456,21 @@ export class DebugScene extends Phaser.Scene {
   addAttackAnim() {
     const attack = () => {
       if (!this.pokemonSprite) return
+      const speed = this.pokemonSprite.pokemon.speed
+      const attackDuration = 1000 / (0.4 + speed * 0.007)
+      const d = delays[this.pokemonSprite.pokemon.index]?.d || 18 // number of frames before hit
+      const t = delays[this.pokemonSprite.pokemon.index]?.t || 36 // total number of frames in the animation
+
+      const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)
+      const distance = this.pokemonSprite.pokemon.range
+      const travelTime =
+        (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
+
       this.pokemonSprite.attackAnimation(
         this.pokemonSprite.targetX || 0,
         this.pokemonSprite.targetY || 0,
-        0,
-        1000,
+        delayBeforeShoot,
+        travelTime,
         () => {
           if (!this.pokemonSprite) return
           const [x, y] = transformEntityCoordinates(
