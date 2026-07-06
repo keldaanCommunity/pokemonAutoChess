@@ -38,6 +38,11 @@ export default class LoadingManager {
   async preload() {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
+
+    // skip cached multiatlases; a replay seek re-preloads the same keys
+    const multi = (key: string, url: string, path: string) => {
+      if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+    }
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
@@ -53,7 +58,7 @@ export default class LoadingManager {
     scene.load.image("sun", "/assets/environment/sun.png")
     scene.load.image("clouds", "/assets/environment/clouds.png")
     scene.load.image("distort", "/assets/environment/noise.png")
-    scene.load.multiatlas(
+    multi(
       "snowflakes",
       "/assets/environment/snowflakes.json",
       "/assets/environment/"
@@ -85,7 +90,7 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      scene.load.multiatlas(
+      multi(
         atlas.packs[pack].name,
         `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
         `/assets/${pack}/`
@@ -112,42 +117,34 @@ export default class LoadingManager {
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
-    "portal",
-    "/assets/environment/portal.json",
-    "/assets/environment/"
-  )
-  scene.load.multiatlas(
-    "chest",
-    "/assets/environment/chest.json",
-    "/assets/environment/"
-  )
-  scene.load.multiatlas(
-    "shine",
-    "/assets/environment/shine.json",
-    "/assets/environment/"
-  )
-  scene.load.multiatlas(
+  // skip already cached atlases
+  const multi = (key: string, url: string, path: string) => {
+    if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+  }
+  multi("portal", "/assets/environment/portal.json", "/assets/environment/")
+  multi("chest", "/assets/environment/chest.json", "/assets/environment/")
+  multi("shine", "/assets/environment/shine.json", "/assets/environment/")
+  multi(
     "berry_trees",
     "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  multi(
     "flower_pots",
     "/assets/environment/flower_pots.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  multi(
     "ground_holes",
     "/assets/environment/ground_holes.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  multi(
     "loading_pokeball",
     "/assets/environment/loading_pokeball.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  multi(
     "training_bag",
     "/assets/environment/training_bag.json",
     "/assets/environment/"

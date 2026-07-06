@@ -41,6 +41,7 @@ import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
 import { schemaValues } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
+import { isReplayRoom } from "../game/replay-room-id"
 import type GameScene from "../game/scenes/game-scene"
 import {
   selectConnectedPlayer,
@@ -95,6 +96,7 @@ import GameSpectatePlayerInfo from "./component/game/game-spectate-player-info"
 import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
+import { clearPortraitBase64Cache } from "./component/game/game-pokemon-portrait"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
@@ -105,6 +107,17 @@ import {
 } from "./utils/utils"
 
 let gameContainer: GameContainer
+
+// re-attach hook for the replay viewer's seek (see reattachReplayRoom)
+let reattachReplayRoomImpl:
+  | ((room: Room<GameState>, spectatedPlayerId?: string) => void)
+  | null = null
+export function reattachReplayRoom(
+  room: Room<GameState>,
+  spectatedPlayerId?: string
+) {
+  reattachReplayRoomImpl?.(room, spectatedPlayerId)
+}
 
 export function getGameScene(): GameScene | undefined {
   return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
@@ -241,11 +254,17 @@ export default function Game() {
   )
 
   const leave = useCallback(async () => {
+    if (isReplayRoom(room)) {
+      navigate("/lobby")
+      return
+    }
     const afterPlayers = new Array<IAfterGamePlayer>()
 
     const token = await firebase.auth().currentUser?.getIdToken()
 
     if (gameContainer && gameContainer.game) {
+      // textures die with the TextureManager here; drop the portrait cache or the next game shows stale sprites
+      clearPortraitBase64Cache()
       gameContainer.game.destroy(true)
     }
 
@@ -404,6 +423,8 @@ export default function Game() {
   }, [])
 
   useEffect(() => {
+    // clear on entry too: abnormal exits (ROOM_DELETED / USER_BANNED) skip the normal-exit cache clear
+    clearPortraitBase64Cache()
     const connect = () => {
       logger.debug("connecting to game")
       authenticateUser().then(async (user) => {
@@ -430,6 +451,8 @@ export default function Game() {
       initialized.current = true
 
       gameContainer = new GameContainer(container.current, uid, room)
+      // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+      if (isReplayRoom(room)) gameContainer.spectate = true
 
       const gameElm = document.getElementById("game")
       gameElm?.addEventListener(Transfer.DRAG_DROP, ((
@@ -448,8 +471,7 @@ export default function Game() {
         gameContainer.onDragDropCombine(event)
       }) as EventListener)
 
-      // Per-room bindings (message handlers + state-change callbacks), extracted into a function so
-      // they can be re-bound to a fresh room without rebuilding the scene (the replay viewer's seek).
+      // per-room bindings, extracted so a seek can re-bind them to a fresh room without rebuilding the scene
       const bindRoom = (room: Room<GameState>) => {
         room.onMessage(Transfer.LOADING_COMPLETE, () => {
           setLoaded(true)
@@ -457,7 +479,8 @@ export default function Game() {
 
         room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
           setFinalRank(finalRank)
-          setFinalRankVisibility(FinalRankVisibility.VISIBLE)
+          if (!isReplayRoom(room))
+            setFinalRankVisibility(FinalRankVisibility.VISIBLE)
         })
 
         room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
@@ -585,7 +608,11 @@ export default function Game() {
           }
         })
 
-        room.onMessage(Transfer.GAME_END, leave)
+        room.onMessage(Transfer.GAME_END, () => {
+          // replay: GAME_END is a recorded frame, skip the live leave flow
+          if (isReplayRoom(room)) return
+          leave()
+        })
 
         room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
           gameContainer.handleDragDropCancel(message)
@@ -814,6 +841,7 @@ export default function Game() {
               value !== previousValue &&
               player.id === uid &&
               !spectate &&
+              !isReplayRoom(room) &&
               finalRankVisibility === FinalRankVisibility.HIDDEN
             ) {
               setFinalRankVisibility(FinalRankVisibility.VISIBLE)
@@ -884,7 +912,8 @@ export default function Game() {
             if (room?.state?.players) {
               const spectatedPlayer =
                 room?.state?.players.get(spectatedPlayerId)
-              if (spectatedPlayer && player.id === uid) {
+              const isReplay = isReplayRoom(room)
+              if (spectatedPlayer && player.id === uid && !isReplay) {
                 gameContainer.setPlayer(spectatedPlayer)
 
                 const simulation = room.state.simulations.get(
@@ -979,6 +1008,23 @@ export default function Game() {
       }
 
       bindRoom(room)
+
+      // replay seek re-attach: re-point the GameContainer at a fresh room and restart its scene, keeping Phaser alive
+      reattachReplayRoomImpl = (
+        newRoom: Room<GameState>,
+        spectatedPlayerId?: string
+      ) => {
+        gameContainer.room = newRoom
+        gameContainer.$ = getStateCallbacks(newRoom)
+        gameContainer.initializeEvents()
+        bindRoom(newRoom)
+        // start on the board being watched (carried across the seek) so the rebuild doesn't flash players[0] before setPlayer() re-centres
+        gameContainer.game?.scene.start("gameScene", {
+          room: newRoom,
+          spectate: gameContainer.spectate,
+          spectatedPlayerId
+        })
+      }
     }
   }, [
     connected,

@@ -74,6 +74,7 @@ export default class GameScene extends Scene {
   loadingManager: LoadingManager | null = null
   started: boolean = false
   spectate: boolean = false
+  spectatedPlayerId: string | undefined = undefined
 
   constructor() {
     super({
@@ -82,14 +83,25 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data: { room: Room<GameState>; spectate: boolean }) {
+  init(data: {
+    room: Room<GameState>
+    spectate: boolean
+    spectatedPlayerId?: string
+  }) {
     this.tilemaps = new Map()
     this.room = data.room
     this.spectate = data.spectate
+    this.spectatedPlayerId = data.spectatedPlayerId
     this.uid = firebase.auth().currentUser?.uid
     this.started = false
     globalThis.devcommand = (action: string, ...params: any[]) =>
       this.room?.send(Transfer.DEV, { action, ...params })
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, this.shutdown, this)
+  }
+
+  shutdown() {
+    this.wandererManager?.dispose()
+    this.started = false
   }
 
   preload() {
@@ -124,7 +136,7 @@ export default class GameScene extends Scene {
 
       const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
-        this.spectate ? playerUids[0] : this.uid
+        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
       ) as Player
 
       this.setMap(player.map)

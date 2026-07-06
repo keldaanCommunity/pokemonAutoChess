@@ -50,6 +50,7 @@ import {
 } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
+import { isReplayRoom } from "../replay-room-id"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import {
@@ -265,7 +266,11 @@ export default class PokemonSprite extends DraggableObject {
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
+    if (
+      isGameScene(this.scene) &&
+      this.scene.lastPokemonDetail &&
+      !isReplayRoom(this.scene.room)
+    ) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
     }

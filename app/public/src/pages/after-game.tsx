@@ -14,6 +14,7 @@ import {
   setGameMode
 } from "../stores/AfterGameStore"
 import AfterMenu from "./component/after/after-menu"
+import RecorderEndGame from "./component/replay/recorder-endgame"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 
@@ -123,6 +124,7 @@ export default function AfterGame() {
         >
           Back to Lobby
         </button>
+        <RecorderEndGame />
         <AfterMenu />
       </div>
     )

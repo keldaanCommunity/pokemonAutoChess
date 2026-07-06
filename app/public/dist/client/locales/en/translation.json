@@ -3879,6 +3879,72 @@
 	},
 	"rank": "Rank",
 	"replay": {
+		"loading": "Loading replay…",
+		"loading_sub": "preparing the match",
+		"seeking": "Seeking…",
+		"seeking_sub": "rebuilding the scene",
+		"error_title": "Replay error",
+		"boundary_title": "The replay view hit an error",
+		"resume": "Resume",
+		"reload": "Reload",
+		"nav": "Replays",
+		"controls": {
+			"prev_stage": "Previous stage (Shift+←)",
+			"prev_phase": "Previous phase (←)",
+			"next_phase": "Next phase (→)",
+			"next_stage": "Next stage (Shift+→)",
+			"restart": "Restart",
+			"play": "Play (Space)",
+			"pause": "Pause (Space)",
+			"step_back": "Step back one frame (,)",
+			"step_forward": "Step forward one frame (.)",
+			"speed": "Playback speed (↑/↓)",
+			"ended": "Replay ended",
+			"badge": "REPLAY",
+			"pos": "S{{stage}} · {{phase}}",
+			"events": "Event log"
+		},
+		"endgame": {
+			"download": "Download replay",
+			"download_failed": "Download failed"
+		},
+		"library": {
+			"title": "Watch a replay",
+			"saved_here": "Saved in this browser",
+			"open_file": "Open a file",
+			"keep_before": "Keep",
+			"keep_after": "most recent",
+			"loading": "Loading saved replays…",
+			"empty": "No replays are saved in this browser yet.",
+			"empty_on": "They'll appear here after you finish a game.",
+			"empty_off": "Recording is currently off, turn it on in the options menu.",
+			"empty_unsupported": "Saving replays isn't supported in this browser.",
+			"other_build": "other build",
+			"delete_q": "Delete?",
+			"watch": "Watch",
+			"download_tip": "Download",
+			"dropzone_pre": "Drag a",
+			"dropzone_post": "file here, or",
+			"choose_file": "Choose a file",
+			"reading": "Reading replay…",
+			"choose_another": "Choose another",
+			"no_summary": "No preview for this recording"
+		},
+		"about": {
+			"title": "About browser-recorded replays",
+			"storage": "Your replays are saved in this browser, not in the cloud. Only your most recent games are kept; older replays are pruned automatically when you start a new game. Download any you want to keep.",
+			"storage_detail": "They stay on this device only and aren't backed up or synced. Clearing your browser data deletes them, and a replay made in a private window is gone once you close it.",
+			"recording_title": "Recording limitations",
+			"rec_intro": "Replays are recorded from one player's point of view. This means that:",
+			"rec_shop": "Only the recording player's shop is captured. Other players' shops are hidden, and another player buying a unit will show in the event log as \"gained\".",
+			"rec_combat": "Ability casts and combat damage are only recorded for the board that the recording player was viewing at the time. This means that all other combats will not play ability animations, and the event log does not have a record of those casts. Board state such as HP/MP is still tracked for every board, so combats are still legible.",
+			"rec_income": "Only the recording player's income breakdown (base, interest, streak) is captured.",
+			"rec_gap": "If the recording player disconnected mid-game, that stretch of the match will be missing from the recording.",
+			"playback_title": "Playback limitations",
+			"play_rebuild": "The replay is rebuilt from saved game data, not from a video. This means that:",
+			"play_sound": "Music and other sound effects are played live, not from the recording. They are not affected by playback speed.",
+			"play_speed": "The speed control changes how fast the match advances, but has no effect on the speed of the renderer. Animations always play at normal speed, so higher speeds can look choppy. Pausing stops the match from advancing, but unit animations keep looping. The speed is best-effort, so a slow or overloaded device may not keep up with the highest settings."
+		},
 		"eventlog": {
 			"title": "Event log",
 			"free_scroll": "Free scroll",
@@ -3969,6 +4035,11 @@
 				"npc_dialog": "{{npc}}: {{dialog}}",
 				"emote": "Emote"
 			}
+		},
+		"skew": {
+			"version": "This replay was recorded on game version {{recorded}}; you're running {{running}}. Some of it may not play back correctly.",
+			"serializer": "This replay was recorded with a different state format ({{recorded}} vs {{running}}). Some of it may not play back correctly.",
+			"build": "This replay was recorded on a different build of {{version}} ({{recorded}} vs {{running}}). Some of it may not play back correctly."
 		}
 	},
 	"player": "Player",

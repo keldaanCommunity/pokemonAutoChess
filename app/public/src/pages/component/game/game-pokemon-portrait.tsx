@@ -26,16 +26,33 @@ import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
 
+// getBase64() is an expensive canvas readback and every portrait re-runs it on each state change, so cache
+// by index. customs bake into the texture, which the TextureManager drops on teardown, so clear the cache
+// there or a later game shows a stale sprite
+const portraitBase64Cache = new Map<string, string>()
 export function getCachedPortrait(
   index: string,
   customs?: PokemonCustoms
 ): string {
+  const cached = portraitBase64Cache.get(index)
+  if (cached !== undefined) return cached
+  // only read back a loaded texture: getBase64 returns "" for an absent key and the old `??` passed that
+  // through as a broken url(""). an absent texture falls back to the portrait url and stays uncached, so a
+  // later render caches the real base64 once the texture loads
   const scene = getGameScene()
+  if (scene?.textures.exists(`portrait-${index}`)) {
+    const base64 = scene.textures.getBase64(`portrait-${index}`)
+    portraitBase64Cache.set(index, base64)
+    return base64
+  }
   const pokemonCustom = getPkmWithCustom(index, customs)
-  return (
-    scene?.textures.getBase64(`portrait-${index}`) ??
-    getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
-  )
+  return getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
+}
+
+// drop every cached portrait base64. the cache mirrors the portrait-${index} textures, which die with the
+// TextureManager, so call this at each teardown (live leave, /replay unmount, loading a recording)
+export function clearPortraitBase64Cache() {
+  portraitBase64Cache.clear()
 }
 
 export default function GamePokemonPortrait(props: {
