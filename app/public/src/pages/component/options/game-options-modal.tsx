@@ -212,6 +212,14 @@ export default function GameOptionsModal(props: {
               label={t("options.colorblind_mode")}
             />
           </p>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.recordReplays}
+              onToggle={(checked) => setPreferences({ recordReplays: checked })}
+              label={t("options.record_replays")}
+            />
+          </p>
           {props.page === "main_lobby" && (
             <div>
               <label>

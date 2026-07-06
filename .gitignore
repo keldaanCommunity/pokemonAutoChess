@@ -42,3 +42,5 @@ id_digital_ocean.pub
 /app/public/dist/server/app/public/src/assets/pokemons/durations.json
 .devmode.json
 .assetpack/
+app/public/dist/client/recorder.worker.js
+app/public/dist/client/recorder.worker.js.map

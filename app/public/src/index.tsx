@@ -14,9 +14,13 @@ import Lobby from "./pages/lobby"
 import Preparation from "./pages/preparation"
 import { SpriteDebug } from "./pages/sprite-viewer"
 import TranslationsPage from "./pages/translations"
+import { installRecorder } from "./game/recorder"
 import store from "./stores/index"
 import "./style/index.css"
 import "./theme"
+
+// tap the inbound colyseus stream before any game room joins, so a match can be recorded and downloaded
+installRecorder()
 
 // Redirect top window if running in an iframe
 if (window.top && window !== window.top) {

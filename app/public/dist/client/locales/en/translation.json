@@ -4028,6 +4028,7 @@
 		"disable_camera_shake": "No camera shake or flashes",
 		"antialiasing": "Enable anti-aliasing",
 		"colorblind_mode": "Colorblind mode",
+		"record_replays": "Record replays",
 		"renderer": "Renderer",
 		"renderer_info": "WebGL is faster but may cause visual glitches on some devices. Canvas is slower but more compatible.",
 		"theme": "Theme",
