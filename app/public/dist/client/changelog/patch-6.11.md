@@ -76,6 +76,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Bugfix
 
+- Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
+
 # Misc
 
 - New title: Five Stars
