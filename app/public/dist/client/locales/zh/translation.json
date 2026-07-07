@@ -4520,7 +4520,7 @@
 		"players_remaining": "存活玩家数",
 		"cancel_tournament_participation": "退出本次锦标赛，不再参加",
 		"register_tournament_participation": "注册为本场锦标赛的参赛者",
-		"registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
+		"registrations_open_info": "锦标赛正式开赛前一小时内可以注册",
 		"starts_at": "开始时间："
 	},
 	"npc_dialog": {
