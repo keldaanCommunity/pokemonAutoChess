@@ -113,7 +113,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "csv-writer": "^1.6.0",
-    "degit": "^2.8.4",
+    "degit": "^3.4.7",
     "esbuild": "^0.28.0",
     "knip": "^6.12.2",
     "npm-run-all2": "^8.0.0",
