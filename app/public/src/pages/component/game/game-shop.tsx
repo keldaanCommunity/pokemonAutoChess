@@ -1,4 +1,5 @@
 import { ToastContainer } from "react-toastify"
+import { DEPTH } from "../../../game/depths"
 import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
 import GameExperience from "./game-experience"
 import { GameLifeInfo } from "./game-life-info"
@@ -11,7 +12,6 @@ import GameStore from "./game-store"
 import { GameStreakInfo } from "./game-streak-info"
 import { GameTeamInfo } from "./game-team-info"
 import "./game-shop.css"
-import { DEPTH } from "../../../game/depths"
 
 export default function GameShop() {
   return (
