@@ -75,15 +75,15 @@ export function initCronJobs(isMainThread: boolean) {
       onTick: () => resetEventScores(),
       start: true
     })
-  }
 
-  // These cronjobs should run on every single process because they retrieve data in each process memory
-  CronJob.from({
-    cronTime: "0 9 * * *", // every day at 9:00 AM UTC
-    timeZone: "UTC",
-    onTick: () => refreshSpriteGapData(),
-    start: true
-  })
+    // SpriteCollab endpoint refresh should be triggered once globally.
+    CronJob.from({
+      cronTime: "0 9 * * 1", // every Monday at 9:00 AM UTC
+      timeZone: "UTC",
+      onTick: () => refreshSpriteGapData(),
+      start: true
+    })
+  }
 
   // see https://github.com/keldaanCommunity/pokemonAutoChessMetaReport/blob/main/.github/workflows/main.yml
   // Meta report generation task is launched at 1:00 AM UTC, so we expect meta report generation to be done by then (< 1 hour)
