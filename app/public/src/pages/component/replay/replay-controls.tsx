@@ -101,25 +101,31 @@ export default function ReplayControls({
   const [pos, setPos] = useState<{ x: number; y: number } | null>(loadPos)
 
   // default dock just above the shop: measure the live `.game-shop` + bar width, anchor the bar's upper-left over it.
-  // `left` freezes on the first good measure (never recenters); `bottom` re-tracks the shop each measure; a user drag switches to a persisted px position and stops the auto-dock
+  // `left` freezes on the first good measure (never recenters, only re-clamps into the viewport); `bottom` re-tracks the shop each measure; a user drag switches to a persisted px position and stops the auto-dock
   const [dock, setDock] = useState<{ left: number; bottom: number } | null>(
     null
   )
   useEffect(() => {
-    if (pos) return
     const measure = () => {
-      const shop = document.querySelector(".game-shop")?.getBoundingClientRect()
       const bar = barRef.current?.getBoundingClientRect()
-      if (shop && shop.height > 0 && bar && bar.width > 0) {
+      if (!bar || bar.width === 0) return
+      if (pos) {
+        // a dragged position persisted on a bigger window can sit off-screen here; pull it back in reach
+        const x = clamp(pos.x, 0, Math.max(0, window.innerWidth - bar.width))
+        const y = clamp(pos.y, 0, Math.max(0, window.innerHeight - bar.height))
+        if (x !== pos.x || y !== pos.y) setPos({ x, y })
+        return
+      }
+      const shop = document.querySelector(".game-shop")?.getBoundingClientRect()
+      if (shop && shop.height > 0) {
         const bottom = window.innerHeight - shop.top + DOCK_GAP
         setDock((d) => ({
-          left:
-            d?.left ??
-            clamp(
-              shop.left + (shop.width - bar.width) / 2,
-              8,
-              window.innerWidth - bar.width - 8
-            ),
+          // clamp every measure (not just the first) so shrinking the window keeps the bar on-screen
+          left: clamp(
+            d?.left ?? shop.left + (shop.width - bar.width) / 2,
+            8,
+            Math.max(8, window.innerWidth - bar.width - 8)
+          ),
           bottom
         }))
       }

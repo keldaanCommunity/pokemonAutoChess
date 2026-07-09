@@ -48,12 +48,29 @@ function measureDefaultBox(): {
   const teamInfo = rect("#game-team-info") // board-count pill above the shop bar
   const dps = rect(".game-dps-meter") // battle-stats panel, fight-only
   const gap = clampGap(Math.round(shop.top - controls.bottom))
-  const left = Math.round(controls.right + gap)
+  const vw = window.innerWidth
+  const vh = window.innerHeight
   const right = Math.round(players.left - gap)
-  const top = Math.round(dps ? dps.bottom + gap : window.innerHeight * 0.11)
   const bottom = Math.round((teamInfo ?? shop).top - gap)
-  const width = Math.max(240, right - left)
-  const height = Math.max(140, bottom - top)
+  const width = Math.min(
+    Math.max(240, right - Math.round(controls.right + gap)),
+    vw - 16
+  )
+  const height = Math.min(
+    Math.max(140, bottom - Math.round(dps ? dps.bottom + gap : vh * 0.11)),
+    vh - 16
+  )
+  // clamp into the viewport: on a narrow window the anchor gap collapses and the floored width used to run off the right edge
+  const left = clamp(
+    Math.round(controls.right + gap),
+    8,
+    Math.max(8, vw - width - 8)
+  )
+  const top = clamp(
+    Math.round(dps ? dps.bottom + gap : vh * 0.11),
+    8,
+    Math.max(8, vh - height - 8)
+  )
   return { left, top, width, height }
 }
 
@@ -364,6 +381,21 @@ export default function ReplayEventLog({
     }
   }, [open, fullyPlaced])
 
+  // a drag position persisted on a bigger window can sit off-screen here; pull it back in reach
+  useEffect(() => {
+    if (!open || !pos) return
+    const reclamp = () => {
+      const r = panelRef.current?.getBoundingClientRect()
+      if (!r) return
+      const x = clamp(pos.x, 0, Math.max(0, window.innerWidth - r.width))
+      const y = clamp(pos.y, 0, Math.max(0, window.innerHeight - r.height))
+      if (x !== pos.x || y !== pos.y) setPos({ x, y })
+    }
+    reclamp()
+    window.addEventListener("resize", reclamp)
+    return () => window.removeEventListener("resize", reclamp)
+  }, [open, pos])
+
   // drag by the header, hand-rolled to dodge the shared hook's mount-time clamp
   const onHeadDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest("button, label, input")) return
@@ -669,7 +701,9 @@ export default function ReplayEventLog({
       style={posStyle}
     >
       <header className="replay-eventlog-head" onMouseDown={onHeadDown}>
-        <span className="replay-eventlog-title">{t("replay.eventlog.title")}</span>
+        <span className="replay-eventlog-title">
+          {t("replay.eventlog.title")}
+        </span>
         <span className="replay-eventlog-count">
           {visible.length} / {events.length}
         </span>
@@ -679,7 +713,11 @@ export default function ReplayEventLog({
         >
           {t("replay.eventlog.free_scroll")}
         </button>
-        <button className="replay-eventlog-close" title={t("close")} onClick={onClose}>
+        <button
+          className="replay-eventlog-close"
+          title={t("close")}
+          onClick={onClose}
+        >
           ×
         </button>
       </header>

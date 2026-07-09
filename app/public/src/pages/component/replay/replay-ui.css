@@ -14,7 +14,8 @@
   padding: 0.4em 0.6em 0.5em;
   /* em-based width (52em) so it grows with the bar's font-size; 46vw caps it to ~half a wide screen */
   width: min(46vw, 52em);
-  min-width: 360px;
+  /* floor for usability, but never wider than the window itself (unofficial phone players) */
+  min-width: min(360px, calc(100vw - 16px));
   font-size: 0.875em; /* slightly smaller than the surrounding ui but scales with it */
   user-select: none;
 }
@@ -386,6 +387,10 @@
 .replay-limitations li {
   margin: 0.15em 0;
 }
+/* no trailing margin: the left column scrolls, and a bottom margin here reads as phantom overflow */
+.replay-limitations > :last-child {
+  margin-bottom: 0;
+}
 .replay-limitations strong {
   color: var(--color-fg-primary);
   font-weight: 600;
@@ -439,13 +444,14 @@
 
 /* replays library: recordings stored in this browser (OPFS) with watch/download/delete + a retention control */
 .replay-library-card {
-  /* wide enough that a full team (≤9 portraits + "Top N") fits one line at full 38px in both columns */
-  max-width: 1520px;
-  width: min(1520px, 95vw);
+  /* em-based so the card tracks the responsive body font-size (16px→22px across resolutions);
+     wide enough that a full team (≤9 portraits + "Top N") fits one line in both columns */
+  max-width: 84em;
+  width: min(84em, 95vw);
   /* landscape aspect at this width; capped to the viewport so a short screen scrolls instead of clipping */
-  min-height: min(880px, 86vh);
+  min-height: min(52em, 86vh);
   /* cap height (not just a floor) so a long recordings list scrolls inside instead of growing the card off-page */
-  max-height: min(880px, 86vh);
+  max-height: min(52em, 86vh);
 }
 /* even out .my-container's asymmetric padding (0.25em top/bottom vs 0.5em sides); qualifier wins by specificity */
 .replay-library-card.my-container {
@@ -488,6 +494,14 @@
   flex-direction: column;
   /* no uniform gap; the header's shared margin lines the picker top up with the first library row */
   justify-content: flex-start;
+  /* the column's content can outgrow the fixed-height card (the body font scales with resolution but
+     the viewport may not); scroll it inside the column instead of spilling out of the card */
+  min-height: 0;
+  overflow-y: auto;
+}
+/* keep natural heights so the column scrolls; flex would otherwise compress the picker over the blurb below */
+.replay-landing-left > * {
+  flex-shrink: 0;
 }
 .replay-landing-left .replay-dropzone {
   margin-top: 0;
@@ -578,12 +592,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.8em;
+  flex-wrap: wrap; /* on a narrow card the actions drop below the name instead of overflowing the box */
 }
 .replay-row-info {
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 0;
+  /* floor instead of 0: below it the actions wrap under the name rather than squeezing it to a sliver */
+  min-width: min(11em, 100%);
 }
 /* POV player name, the row's primary line; disambiguates whose game a recording is on a shared browser */
 .replay-row-name {
