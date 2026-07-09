@@ -135,7 +135,7 @@ export function MainSidebar(props: MainSidebarProps) {
   function onClickLeave() {
     // a replay exits straight to the lobby (the live leave() would hit the /after flow)
     if (isReplayRoom(rooms.game)) {
-      ;(rooms.game as unknown as { pause?: () => void }).pause?.()
+      rooms.game.pause()
       navigate("/lobby")
       return
     }

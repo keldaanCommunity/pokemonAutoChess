@@ -1,5 +1,5 @@
-/* styling for the replay viewer's overlays (playback controls, after-game download); reuses the
- * game's design tokens (colors.css) and shared classes (.my-container, .bubbly) */
+/* the replay viewer's UI styles (controls, overlays, library), imported once by the /replay page;
+ * reuses the game's design tokens (colors.css) and shared classes (.my-container, .bubbly) */
 
 /* ── playback controls bar ─────────────────────────────────────────────────────────────────── */
 .replay-controls {
@@ -283,12 +283,6 @@
 .replay-controls .replay-controls-step {
   display: flex;
   gap: 0.25em;
-}
-
-/* ── after-game download button (/after) ───────────────────────────────────────────────────── */
-/* in normal flow, just below the back-to-lobby button, not a floating overlay */
-.recorder-endgame {
-  margin: 0.5em 0 0 10px;
 }
 
 /* ── full-screen overlays (loading / seeking / error) + the file picker ─────────────────────── */

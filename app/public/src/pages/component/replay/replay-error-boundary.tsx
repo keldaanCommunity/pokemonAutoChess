@@ -1,6 +1,5 @@
 import { Component, type ReactNode } from "react"
 import i18n from "../../../i18n"
-import "./replay-ui.css"
 
 // the app has no error boundaries, so a render error blanks the whole tree; this contains them to the
 // replay viewer with a recoverable fallback (Resume re-mounts)

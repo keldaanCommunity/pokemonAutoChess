@@ -6,7 +6,7 @@ import {
   getStoredReplayInfo
 } from "../../../game/recorder"
 import { useAppSelector } from "../../../hooks"
-import "./replay-ui.css"
+import "./recorder-endgame.css"
 
 // "Download replay" button on the after-game screen; uses the game room the recorder retains (rooms.game is
 // cleared at game end), so the just-played match is still downloadable. gated on the stored frame count, shown only for a non-empty capture

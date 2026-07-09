@@ -42,7 +42,7 @@ import ReplayControls from "./component/replay/replay-controls"
 import ReplayEventLog from "./component/replay/replay-event-log"
 import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
 import "./component/replay/replay-readonly.css"
-import "./component/replay/replay-ui.css" // overlay/file-picker styles, needed before ReplayControls mounts
+import "./component/replay/replay-ui.css" // all the viewer's UI styles (controls/overlays/library), imported once here for the replay tree
 import Game, { getGameContainer, reattachReplayRoom } from "./game"
 
 // this viewer's build, stamped like recorder.ts GAME_BUILD; compared to the recording to warn on skew.

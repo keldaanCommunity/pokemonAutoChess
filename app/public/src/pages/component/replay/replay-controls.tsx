@@ -11,7 +11,6 @@ import {
 } from "../../../game/replay-index"
 import { phaseWord } from "../../../game/replay-event-format"
 import type { ReplayRoom } from "../../../game/replay-room"
-import "./replay-ui.css"
 
 // overlay controls for the replay viewer: play/pause, scrub, speed, skip-by-phase/stage, timeline, frame-step.
 // polls the ReplayRoom (which owns playback timing), styled with the game's classes; skip buttons/markers/bands come from a derived transcript index (replay-index.ts), else a plain scrubber
