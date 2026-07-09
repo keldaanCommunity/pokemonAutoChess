@@ -1,3 +1,4 @@
+import type Phaser from "phaser"
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
@@ -27,9 +28,10 @@ import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
 
 // getBase64() is an expensive canvas readback and every portrait re-runs it on each state change, so cache
-// by index. customs bake into the texture, which the TextureManager drops on teardown, so clear the cache
-// there or a later game shows a stale sprite
+// by index. customs bake into the texture, which the TextureManager drops when its game is destroyed, so
+// the cache registers a destroy listener on the game it reads from and clears itself with it
 const portraitBase64Cache = new Map<string, string>()
+let cacheSourceGame: Phaser.Game | null = null
 export function getCachedPortrait(
   index: string,
   customs?: PokemonCustoms
@@ -41,6 +43,11 @@ export function getCachedPortrait(
   // later render caches the real base64 once the texture loads
   const scene = getGameScene()
   if (scene?.textures.exists(`portrait-${index}`)) {
+    // tie the cache's lifetime to the game whose textures it mirrors
+    if (cacheSourceGame !== scene.game) {
+      cacheSourceGame = scene.game
+      scene.game.events.once("destroy", clearPortraitBase64Cache)
+    }
     const base64 = scene.textures.getBase64(`portrait-${index}`)
     portraitBase64Cache.set(index, base64)
     return base64
@@ -49,10 +56,11 @@ export function getCachedPortrait(
   return getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
 }
 
-// drop every cached portrait base64. the cache mirrors the portrait-${index} textures, which die with the
-// TextureManager, so call this at each teardown (live leave, /replay unmount, loading a recording)
+// drop every cached portrait base64; fired by the source game's destroy event. also called on game entry
+// because an abnormal exit (ROOM_DELETED / USER_BANNED) navigates away without destroying the game
 export function clearPortraitBase64Cache() {
   portraitBase64Cache.clear()
+  cacheSourceGame = null
 }
 
 export default function GamePokemonPortrait(props: {

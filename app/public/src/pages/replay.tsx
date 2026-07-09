@@ -44,7 +44,6 @@ import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
 import "./component/replay/replay-readonly.css"
 import "./component/replay/replay-ui.css" // overlay/file-picker styles, needed before ReplayControls mounts
 import Game, { getGameContainer, reattachReplayRoom } from "./game"
-import { clearPortraitBase64Cache } from "./component/game/game-pokemon-portrait"
 
 // this viewer's build, stamped like recorder.ts GAME_BUILD; compared to the recording to warn on skew.
 // serializerId is the SchemaSerializer id the recorder also stamps, so a future serializer swap is caught
@@ -510,8 +509,6 @@ function ReplayGameHost() {
   useEffect(
     () => () => {
       try {
-        // drop the portrait base64 cache + textures, so a later game with different POV customs can't show this one's sprites
-        clearPortraitBase64Cache()
         getGameContainer()?.game?.destroy(true)
       } catch {
         /* already gone */

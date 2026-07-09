@@ -263,8 +263,6 @@ export default function Game() {
     const token = await firebase.auth().currentUser?.getIdToken()
 
     if (gameContainer && gameContainer.game) {
-      // textures die with the TextureManager here; drop the portrait cache or the next game shows stale sprites
-      clearPortraitBase64Cache()
       gameContainer.game.destroy(true)
     }
 
@@ -423,7 +421,8 @@ export default function Game() {
   }, [])
 
   useEffect(() => {
-    // clear on entry too: abnormal exits (ROOM_DELETED / USER_BANNED) skip the normal-exit cache clear
+    // clear on entry: abnormal exits (ROOM_DELETED / USER_BANNED) navigate away without destroying the
+    // game, so the cache's destroy listener never fired for them
     clearPortraitBase64Cache()
     const connect = () => {
       logger.debug("connecting to game")
