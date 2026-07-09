@@ -28,7 +28,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
-- New visual animations for Budew line
+- Buff Budew line: DEF/ SPE_DEF: 2 at all ranks → 2/4/6 ; ATK: 5/15/17 → 5/15/25
+- Rework Petal Dance (Budew): Release 3/4/5 petals spread equally among the closest enemy pokemon. New visual animation. Projectiles now have travel time.
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
 - Dondozo gains Monster synergy. HP: 250 → 220

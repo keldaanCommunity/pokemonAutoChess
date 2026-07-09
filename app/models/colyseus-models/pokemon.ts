@@ -1494,8 +1494,8 @@ export class Roselia extends Pokemon {
   hp = 130
   atk = 15
   speed = 54
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
@@ -1506,10 +1506,10 @@ export class Roserade extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   hp = 230
-  atk = 17
+  atk = 25
   speed = 54
-  def = 2
-  speDef = 2
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE

@@ -644,12 +644,21 @@ const projectile: AbilityAnimationMaker<
     distance?: number
     easeX?: string | ((v: number) => number)
     easeY?: string | ((v: number) => number)
+    projectileSpeed?: number // manhattan distance travelled in one second
   }
 > =
   (options = {}) =>
   (args) => {
-    let { startCoords, endCoords, oriented, rotation, distance, orientation } =
-      options
+    let {
+      startCoords,
+      endCoords,
+      oriented,
+      rotation,
+      distance,
+      orientation,
+      projectileSpeed,
+      duration
+    } = options
 
     let endPosition: [number, number]
     if (distance !== undefined || orientation !== undefined) {
@@ -679,8 +688,8 @@ const projectile: AbilityAnimationMaker<
         dy = Math.sin(angleToTarget)
       }
       endPosition = transformEntityCoordinates(
-        ox + dx * (options.distance ?? 12),
-        oy + dy * (options.distance ?? 12),
+        ox + dx * (distance ?? 12),
+        oy + dy * (distance ?? 12),
         args.flip
       )
 
@@ -690,23 +699,26 @@ const projectile: AbilityAnimationMaker<
       }
     } else {
       // projectile stopping on target or certain coordinates
-      const [endRow, endCol, endFlip] = parseCoordinates(
+      const [endX, endY, endFlip] = parseCoordinates(
         endCoords ?? "target",
         args
       )
-      endPosition = transformEntityCoordinates(
-        endRow,
-        endCol,
-        endFlip ?? args.flip
-      )
+      const [ox, oy] = parseCoordinates(startCoords ?? "caster", args)
+      distance = distanceM(ox, oy, endX, endY)
+      endPosition = transformEntityCoordinates(endX, endY, endFlip ?? args.flip)
     }
 
     endPosition[0] += options.endPositionOffset?.[0] ?? 0
     endPosition[1] += options.endPositionOffset?.[1] ?? 0
 
+    if (projectileSpeed !== undefined && duration === undefined) {
+      duration = Math.round(((distance ?? 12) * 1000) / projectileSpeed)
+    }
+
     return tweenAnimation({
       ...options,
       oriented,
+      duration,
       rotation,
       startCoords,
       endCoords,
@@ -867,6 +879,10 @@ export const AbilitiesAnimations: {
       }
     }
   ],
+  ["PETAL_DANCE_PROJECTILE"]: projectile({
+    projectileSpeed: 10,
+    hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 })
+  }),
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
   [Ability.BRICK_BREAK]: onTargetScale2,
