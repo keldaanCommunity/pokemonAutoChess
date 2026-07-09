@@ -51,6 +51,10 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Revert Articuno buff from 6.2; PP 110 → 120
 - Nerf all Eeveelutions: HP 180 → 150
 
+> Lapras can't enough nerfs. Back to 120PP for the third time.
+
+- Lapras DEF: 7 → 5 ; PP: 100 → 120
+
 # Changes to Synergies
 
 - Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.

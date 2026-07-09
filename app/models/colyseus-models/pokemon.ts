@@ -6950,9 +6950,9 @@ export class Lapras extends Pokemon {
   hp = 225
   atk = 12
   speed = 38
-  def = 7
+  def = 5
   speDef = 9
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
 }
