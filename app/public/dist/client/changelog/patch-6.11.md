@@ -49,6 +49,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
 - Buff Deoxys Speed Form: SPEED 90 → 100
 - Revert Articuno buff from 6.2; PP 110 → 120
+- Nerf all Eeveelutions: HP 180 → 150
 
 # Changes to Synergies
 

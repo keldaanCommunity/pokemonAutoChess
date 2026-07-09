@@ -6124,7 +6124,7 @@ export class Vaporeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6138,7 +6138,7 @@ export class Jolteon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 8
   speed = 83
   def = 6
@@ -6152,7 +6152,7 @@ export class Flareon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6166,7 +6166,7 @@ export class Espeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 8
   speed = 70
   def = 6
@@ -6180,7 +6180,7 @@ export class Umbreon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6194,7 +6194,7 @@ export class Leafeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 9
   speed = 61
   def = 6
@@ -6208,7 +6208,7 @@ export class Sylveon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6222,7 +6222,7 @@ export class Glaceon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
