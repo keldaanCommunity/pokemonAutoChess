@@ -229,7 +229,10 @@ export default function ReplayControls({
             )
           })}
           <div className="replay-controls-fill" style={{ width: `${pct}%` }} />
-          <div className="replay-controls-playhead" style={{ left: `${pct}%` }} />
+          <div
+            className="replay-controls-playhead"
+            style={{ left: `${pct}%` }}
+          />
           {/* stage-start ticks; click-to-seek to the stage. stopPropagation so the tick hits the boundary exactly, not the coarse track click */}
           {index?.stages.map((st, i) => (
             <button
@@ -245,7 +248,10 @@ export default function ReplayControls({
             />
           ))}
           {hover && (
-            <div className="replay-controls-hover-line" style={{ left: `${hover.xPct}%` }} />
+            <div
+              className="replay-controls-hover-line"
+              style={{ left: `${hover.xPct}%` }}
+            />
           )}
         </div>
         {hover &&
@@ -256,9 +262,13 @@ export default function ReplayControls({
                 className="replay-controls-hover-tip"
                 style={{ left: `${clamp(hover.xPct, 7, 93)}%` }}
               >
-                <span className="replay-controls-hover-time">{fmt(hover.ms - base)}</span>
+                <span className="replay-controls-hover-time">
+                  {fmt(hover.ms - base)}
+                </span>
                 {seg ? (
-                  <span className={`replay-controls-hover-seg ${segmentBandKind(seg)}`}>
+                  <span
+                    className={`replay-controls-hover-seg ${segmentBandKind(seg)}`}
+                  >
                     {t("replay.controls.pos", {
                       stage: seg.stage,
                       phase: phaseWord(t, seg.phaseLabel)
@@ -280,7 +290,9 @@ export default function ReplayControls({
           <span className="replay-controls-badge replay-controls-time">
             {fmt(elapsed)}/{fmt(span)}
           </span>
-          <span className={`replay-controls-badge replay-controls-pos${room.ended ? " ended" : ""}`}>
+          <span
+            className={`replay-controls-badge replay-controls-pos${room.ended ? " ended" : ""}`}
+          >
             {room.ended
               ? t("replay.controls.ended")
               : here

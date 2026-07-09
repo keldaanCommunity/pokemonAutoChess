@@ -198,12 +198,7 @@
   pointer-events: none;
 }
 .replay-controls .replay-controls-band.fight {
-  background: rgba(
-    224,
-    32,
-    32,
-    0.42
-  ); /* combat red */
+  background: rgba(224, 32, 32, 0.42); /* combat red */
 }
 .replay-controls .replay-controls-band.carousel {
   background: rgba(74, 165, 46, 0.5); /* wiki #4aa52e */
@@ -266,9 +261,7 @@
 /* speed dropdown styled like the .bubbly buttons; fixed width so the longest label (1/8×) never widens the bar */
 .replay-controls .replay-controls-speed-select {
   font-size: 100%;
-  height: var(
-    --replay-controls-ctrl-h
-  ); /* same fixed height as the buttons */
+  height: var(--replay-controls-ctrl-h); /* same fixed height as the buttons */
   box-sizing: border-box;
   color: #fff;
   background: var(--color-bg-secondary);
