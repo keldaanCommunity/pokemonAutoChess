@@ -272,6 +272,13 @@ export function installRecorder() {
   if (installed) return
   // no OPFS means a recording can never persist, so don't patch the SDK prototypes at all
   if (!replaysSupported) return
+  // recording off = prototypes untouched (the pref doubles as a kill switch); install on a later enable
+  if (!preference("recordReplays")) {
+    subscribeToPreference("recordReplays", (enabled) => {
+      if (enabled) installRecorder()
+    })
+    return
+  }
   installed = true
 
   const S = SchemaSerializer.prototype as unknown as {
