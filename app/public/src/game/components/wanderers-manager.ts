@@ -32,29 +32,11 @@ List of wanderers:
 export default class WanderersManager {
   scene: GameScene
 
-  // deferred wanderer timers; Phaser doesn't cancel raw setTimeouts on shutdown, so dispose() clears them on a replay seek
-  private timers = new Set<ReturnType<typeof setTimeout>>()
-
   constructor(scene: GameScene) {
     this.scene = scene
     scene.board?.player.wanderers.forEach((wanderer) => {
       this.addWanderer(wanderer)
     })
-  }
-
-  // schedule `callback` after `ms`, tracking the handle so dispose() can cancel a still-pending fuse
-  private delay(callback: () => void, ms: number) {
-    const id = setTimeout(() => {
-      this.timers.delete(id)
-      callback()
-    }, ms)
-    this.timers.add(id)
-  }
-
-  // cancel every still-pending wanderer timer
-  dispose() {
-    this.timers.forEach((id) => clearTimeout(id))
-    this.timers.clear()
   }
 
   addWanderer(wanderer: Wanderer) {
@@ -155,9 +137,10 @@ export default class WanderersManager {
           sprite.closeDetail()
         } else {
           sprite.openDetail()
-          this.delay(() => {
+          // scene-clocked so a still-pending fuse dies with the scene (a replay seek restarts it)
+          this.scene.time.delayedCall(3000, () => {
             sprite.closeDetail()
-          }, 3000)
+          })
         }
         return false
       }
@@ -165,28 +148,28 @@ export default class WanderersManager {
 
     if (wanderer.pkm === Pkm.XATU && wanderer.data && this.scene.board) {
       const { chest, chestGroup } = this.scene.board.addChest(590, 450)
-      this.delay(() => {
+      this.scene.time.delayedCall(5000, () => {
         this.scene.board?.openChest(
           chestGroup,
           chest,
           wanderer.data.split(";") as Item[]
         )
-      }, 5000)
-      this.delay(() => {
+      })
+      this.scene.time.delayedCall(8000, () => {
         chestGroup.destroy(true, true)
-      }, 8000)
+      })
     }
 
     if (wanderer.pkm === Pkm.LAPRAS) {
-      this.delay(() => {
+      this.scene.time.delayedCall(9000, () => {
         sprite.moveManager.setSpeed(350)
         sprite.moveManager.moveTo(15 * 48, -100)
         this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
-        this.delay(() => {
+        this.scene.time.delayedCall(1200, () => {
           this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
           sprite.destroy()
-        }, 1200)
-      }, 9000)
+        })
+      })
     }
   }
 

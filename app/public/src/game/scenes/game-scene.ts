@@ -96,12 +96,6 @@ export default class GameScene extends Scene {
     this.started = false
     globalThis.devcommand = (action: string, ...params: any[]) =>
       this.room?.send(Transfer.DEV, { action, ...params })
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, this.shutdown, this)
-  }
-
-  shutdown() {
-    this.wandererManager?.dispose()
-    this.started = false
   }
 
   preload() {
