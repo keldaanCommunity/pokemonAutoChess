@@ -312,6 +312,7 @@ class GameContainer {
     this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
+      uid: this.uid,
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)

@@ -1,5 +1,4 @@
 import type { Room } from "@colyseus/sdk"
-import firebase from "firebase/compat/app"
 import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
@@ -85,6 +84,7 @@ export default class GameScene extends Scene {
 
   init(data: {
     room: Room<GameState>
+    uid: string
     spectate: boolean
     spectatedPlayerId?: string
   }) {
@@ -92,7 +92,7 @@ export default class GameScene extends Scene {
     this.room = data.room
     this.spectate = data.spectate
     this.spectatedPlayerId = data.spectatedPlayerId
-    this.uid = firebase.auth().currentUser?.uid
+    this.uid = data.uid
     this.started = false
     globalThis.devcommand = (action: string, ...params: any[]) =>
       this.room?.send(Transfer.DEV, { action, ...params })

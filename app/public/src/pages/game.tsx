@@ -1026,6 +1026,7 @@ export default function Game() {
         // start on the board being watched (carried across the seek) so the rebuild doesn't flash players[0] before setPlayer() re-centres
         gameContainer.game?.scene.start("gameScene", {
           room: newRoom,
+          uid: gameContainer.uid,
           spectate: gameContainer.spectate,
           spectatedPlayerId
         })

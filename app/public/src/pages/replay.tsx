@@ -5,6 +5,7 @@ import { type ReactNode, useEffect, useRef, useState } from "react"
 import { flushSync } from "react-dom"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
+import { FIREBASE_CONFIG } from "../../../config"
 import pkg from "../../../../package.json"
 import type GameState from "../../../rooms/states/game-state"
 import { GamePhaseState } from "../../../types/enum/Game"
@@ -133,6 +134,11 @@ export default function Replay() {
 
   // full teardown on any /replay exit: restore real uid, reset GameStore (clears the spectated player's stale shop/board), drop the dead room, else it leaks into the next match
   useEffect(() => {
+    // a cold page load at /replay skips the login/auth flow, so nothing has initialized the firebase app
+    // yet; init it here (no sign-in) or any firebase.auth() access while watching throws app-compat/no-app
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG)
+    }
     // re-arm on (re)mount: StrictMode's setup/cleanup/setup sets aliveRef false and refs persist, so without this every deferred buildAndBoot bails
     aliveRef.current = true
     return () => {
