@@ -4,6 +4,7 @@ import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
 
 export enum Item {
+  PRISON_BOTTLE = "PRISON_BOTTLE",
   FOSSIL_STONE = "FOSSIL_STONE",
   TWISTED_SPOON = "TWISTED_SPOON",
   MYSTIC_WATER = "MYSTIC_WATER",
@@ -439,6 +440,7 @@ export const TownItems = [
 
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
+  Item.PRISON_BOTTLE,
   ...TownItems,
   Item.COIN,
   Item.NUGGET,
@@ -570,6 +572,16 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.EFFICIENT_BANDANNA]: [Item.SILK_SCARF, Item.MYSTIC_WATER],
   [Item.NULLIFY_BANDANNA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
+
+// only these items for now, to avoid synergy item problems
+export const DoubleUpTradeableItems: Item[] = [
+  ...ItemComponentsNoScarf,
+  ...(Object.entries(ItemRecipe) as [Item, Item[]][])
+    .filter(([, ingredients]) =>
+      ingredients.every(i => ItemComponentsNoScarf.includes(i))
+    )
+    .map(([item]) => item)
+]
 
 export const Scarves = Object.keys(ItemRecipe).filter((itemKey) =>
   ItemRecipe[itemKey as Item]?.includes(Item.SILK_SCARF)
@@ -1125,6 +1137,7 @@ export const Sweets = [
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
 export const UnholdableItems = [
+  Item.PRISON_BOTTLE,
   ...WeatherRocks,
   ...FishingRods,
   ...Wands,

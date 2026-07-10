@@ -31,7 +31,8 @@ import {
   OnRoomNameCommand,
   OnRoomPasswordCommand,
   OnToggleReadyCommand,
-  RemoveMessageCommand
+  RemoveMessageCommand,
+  OnSelectPartnerCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
 
@@ -280,6 +281,14 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
         logger.error(error)
       }
     })
+
+    this.onMessage(Transfer.SELECT_PARTNER, (client, partnerId: string) => {
+      try {
+        this.dispatcher.dispatch(new OnSelectPartnerCommand(), { client, partnerId })
+      } catch (error) {
+        logger.error(error)
+      }
+    })  
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       logger.info(Transfer.NEW_MESSAGE, this.roomName)

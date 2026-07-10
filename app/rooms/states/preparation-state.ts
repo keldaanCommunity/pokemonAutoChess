@@ -51,7 +51,9 @@ export default class PreparationState
   }) {
     super()
     this.ownerId =
-      params.gameMode === GameMode.CUSTOM_LOBBY ? (params.ownerId ?? "") : ""
+      (params.gameMode === GameMode.CUSTOM_LOBBY || params.gameMode === GameMode.DOUBLE_UP)
+        ? (params.ownerId ?? "")
+        : ""
     this.name = params.roomName
     this.gameStartedAt = null
     this.ownerName = ""

@@ -1,10 +1,10 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../config"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
   SynergyTiers
 } from "../config/game/synergies"
+import { BOARD_HEIGHT, BOARD_WIDTH, BOARD_SIDE_HEIGHT } from "../config"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -26,7 +26,8 @@ import {
   Orientation,
   PokemonActionState,
   Rarity,
-  Team
+  Team,
+  GameMode
 } from "../types/enum/Game"
 import {
   CraftableItemsNoScarves,
@@ -106,6 +107,8 @@ export default class Simulation extends Schema implements ISimulation {
   tidalWaveTimer = 0
   tidalWaveCounter = 0
   entities: IPokemonEntity[] = []
+  finishedAt: number = 0
+  reinforcementsSent: boolean = false
 
   constructor(
     id: string,
@@ -289,14 +292,15 @@ export default class Simulation extends Schema implements ISimulation {
     x: number,
     y: number,
     team: Team,
-    isSpawn = false
+    isSpawn = false,
+    skipSynergyEffects = false
   ) {
     const player = team === Team.BLUE_TEAM ? this.bluePlayer : this.redPlayer
     const pokemonEntity = new PokemonEntity(pokemon, x, y, team, this)
     pokemonEntity.isSpawn = isSpawn
     pokemonEntity.orientation =
       team === Team.BLUE_TEAM ? Orientation.UPRIGHT : Orientation.DOWNLEFT
-    this.applySynergyEffects(pokemonEntity)
+    if (!skipSynergyEffects) this.applySynergyEffects(pokemonEntity)
     this.applyItemsEffects(pokemonEntity)
 
     this.board.setEntityOnCell(
@@ -340,7 +344,7 @@ export default class Simulation extends Schema implements ISimulation {
 
   getFirstFreeCell(team: Team): { x: number; y: number } | null {
     if (team === Team.BLUE_TEAM) {
-      for (let y = 0; y < this.board.rows; y++) {
+      for (let y = 0; y <= BOARD_SIDE_HEIGHT - 1; y++) {
         for (let x = 0; x < this.board.columns; x++) {
           if (
             this.board.isOnBoard(x, y) &&
@@ -351,7 +355,7 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
     } else {
-      for (let y = this.board.rows - 1; y >= 0; y--) {
+      for (let y = this.board.rows - 1; y >= this.board.rows - BOARD_SIDE_HEIGHT; y--) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
           if (
             this.board.isOnBoard(x, y) &&
@@ -1407,6 +1411,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   onFinish() {
+    this.finishedAt = Date.now()
     this.finished = true
 
     if (this.blueTeam.size === 0 && this.redTeam.size > 0) {
@@ -1536,7 +1541,8 @@ export default class Simulation extends Schema implements ISimulation {
           opponentTeam,
           this.stageLevel
         )
-        if (!isGhostPlayer) {
+        const isPVE = this.redPlayerId === "pve"
+        if (!isGhostPlayer && (isPVE || this.room.state.gameMode !== GameMode.DOUBLE_UP)) {
           player.life -= playerDamage
           if (playerDamage > 0) {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)

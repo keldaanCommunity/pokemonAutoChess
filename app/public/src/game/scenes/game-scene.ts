@@ -460,6 +460,11 @@ export default class GameScene extends Scene {
       zone.setName("berry-tree-zone")
       zone.setData({ x, y, index: i })
     }
+    
+    const [croagunkX, croagunkY] = transformBoardCoordinates(7.5, 0.4)
+    const croagunkZone = this.add.zone(croagunkX, croagunkY, 96, 96)
+    croagunkZone.setRectangleDropZone(130,130)
+    croagunkZone.setName("croagunk-trade-zone")
 
     this.input.on("pointerdown", (pointer) => {
       if (
@@ -652,6 +657,10 @@ export default class GameScene extends Scene {
             (this.room?.state.phase == GamePhaseState.PICK ||
               dropZone.getData("y") == 0)
           ) {
+            if (gameObject.name === "PRISON_BOTTLE" && this.room?.state.phase === GamePhaseState.PICK && dropZone.getData("y") === 0) {
+              console.log("prison bottle drop x:", dropZone.getData("x"), "y:", dropZone.getData("y"))
+              this.board?.playItemDropAnimation(dropZone.getData("x"), 0)
+            }
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,
               index:
@@ -672,6 +681,15 @@ export default class GameScene extends Scene {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,
               index: dropZone.getData("index"),
+              id: gameObject.name
+            })
+          }
+
+          // Item -> Croagunk = OFFER TRADE
+          else if (dropZone.name === "croagunk-trade-zone") {
+            this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
+              zone: dropZone.name,
+              index: 0,
               id: gameObject.name
             })
           }

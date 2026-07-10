@@ -74,6 +74,18 @@ export function RoomSelectionMenu(props: {
             <h2>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</h2>
             <p>{t(`game_modes_descriptions.${GameMode.CUSTOM_LOBBY}`)}</p>
           </li>
+          <li
+            className="my-box"
+            onClick={() => props.onSelectMode(GameMode.DOUBLE_UP)}
+          >
+            <img
+              src="assets/ui/game_modes/double_up.png"
+              alt={t(`game_modes.${GameMode.DOUBLE_UP}`)}
+              draggable="false"
+            />
+            <h2>{t(`game_modes.${GameMode.DOUBLE_UP}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.DOUBLE_UP}`)}</p>
+          </li>
         </ul>
       }
     />

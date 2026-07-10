@@ -21,11 +21,14 @@ import {
   type TierListSymbol,
   TierListSymbols
 } from "../tier-list/tier-list-symbols"
+import { FreeOptions, PaidOptions } from "../../../../../types/enum/ArmoryOptions"
+import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
   origin: "tier-list" | "bot-builder" | "team-planner"
+  showUnholdableItems?: boolean
 }) {
   function handleOnDragStart(e: React.DragEvent, item: Item | TierListSymbol) {
     e.stopPropagation()
@@ -63,6 +66,15 @@ export default function ItemPicker(props: {
       items: Wands,
       hidden: props.origin === "team-planner" || props.origin === "bot-builder"
     },
+    ...(props.showUnholdableItems
+      ? [
+          {
+            label: t("bundles"),
+            key: "bundles",
+            items: [...Object.values(FreeOptions), ...Object.values(PaidOptions)] as unknown as Item[]
+          }
+        ]
+      : []),
     {
       label: t("special_items"),
       key: "special_items",
@@ -100,37 +112,24 @@ export default function ItemPicker(props: {
       </TabList>
       {tabs.map((t) => (
         <TabPanel key={t.key}>
-          {t.items.map((item) => {
-            if (isIn(TierListSymbols, item)) {
-              return (
-                <img
-                  key={item}
-                  src={"assets/ui/" + item.toLowerCase() + ".svg"}
-                  className={"symbol"}
-                  draggable
-                  onDragStart={(e) => handleOnDragStart(e, item)}
-                />
-              )
-            } else {
-              return (
-                <img
-                  key={item}
-                  src={"assets/item/" + Item[item] + ".png"}
-                  className={cc("item", {
-                    selected: item === props.selected
-                  })}
-                  data-tooltip-id="item-detail-tooltip"
-                  data-tooltip-content={item}
-                  onClick={() => props.selectEntity?.(item)}
-                  draggable
-                  onDragStart={(e) => handleOnDragStart(e, item)}
-                />
-              )
-            }
-          })}
+          {t.items.map((item) => (
+            <img
+              key={item}
+              src={"assets/item/" + item + ".png"}
+              className={cc("item", {
+                selected: item === props.selected
+              })}
+              data-tooltip-id={t.key === "bundles" ? "bundle-detail-tooltip" : "item-detail-tooltip"} 
+              data-tooltip-content={item}
+              onClick={() => props.selectEntity?.(item as Item)}
+              draggable
+              onDragStart={(e) => handleOnDragStart(e, item)}
+            />
+          ))}
         </TabPanel>
       ))}
       <ItemDetailTooltip />
+      <BundleDetailTooltip /> 
     </Tabs>
   )
 }

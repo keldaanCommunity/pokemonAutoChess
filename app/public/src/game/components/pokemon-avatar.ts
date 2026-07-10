@@ -3,7 +3,7 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AvatarEmotions,
-  type Emotion,
+  Emotion,
   type IPokemonAvatar
 } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
@@ -19,6 +19,7 @@ import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
+import { Item, ItemComponents } from "../../../../types/enum/Item"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene
@@ -65,6 +66,9 @@ export default class PokemonAvatar extends PokemonSprite {
     }
     this.setDepth(DEPTH.POKEMON)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
+    this.sendItemEmote = this.sendItemEmote.bind(this)
+    this.sendTextEmote = this.sendTextEmote.bind(this)
+    this.sendDittoEmote = this.sendDittoEmote.bind(this)
   }
 
   registerKeys() {
@@ -215,7 +219,11 @@ export default class PokemonAvatar extends PokemonSprite {
         this.scene as GameScene,
         this.pokemon.index,
         this.pokemon.shiny,
-        this.sendEmote
+        this.sendEmote,
+        this.sendItemEmote,
+        this.sendTextEmote,
+        this.sendDittoEmote
+
       )
       this.add(this.emoteMenu)
     }
@@ -267,5 +275,19 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.playAnimation()
     }
+  }
+
+  sendDittoEmote() {
+    showEmote(getAvatarString("0132", false, Emotion.NORMAL))
+    this.hideEmoteMenu()
+  }
+  sendItemEmote(item: Item) {
+    console.log("sendItemEmote", item)
+    showEmote("item/" + item)
+    this.hideEmoteMenu()
+  }
+  sendTextEmote(text: string) {
+    showEmote("text/" + text)
+    this.hideEmoteMenu()
   }
 }

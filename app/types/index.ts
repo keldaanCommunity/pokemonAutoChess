@@ -36,6 +36,7 @@ import type { Pkm } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
 import type { Weather } from "./enum/Weather"
 import type { GameStats } from "./interfaces/GameStats"
+import { ArmoryOptions } from "./enum/ArmoryOptions"
 
 export * from "./enum/Emotion"
 export * from "./enum/FlowerPot"
@@ -89,6 +90,7 @@ export enum Transfer {
   DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
+  DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
@@ -135,7 +137,10 @@ export enum Transfer {
   OVERWRITE_BOARD = "OVERWRITE_BOARD",
   NOTIFICATIONS = "NOTIFICATIONS",
   NOTIFICATION_SEEN = "NOTIFICATION_SEEN",
-  DEV = "DEV"
+  DEV = "DEV",
+  CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
+  SELECT_PARTNER = "SELECT_PARTNER",
+  ARMORY_GIFT = "ARMORY_GIFT"
 }
 
 export enum ReadWriteMode {
@@ -256,6 +261,10 @@ export interface IPlayer {
   shopFreeRolls: number
   streak: number
   interest: number
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
+  doubleUpEliminationRound: number
+  doubleUpGifts: ArraySchema<ArmoryOptions>
   opponentId: string
   opponentName: string
   opponentAvatar: string

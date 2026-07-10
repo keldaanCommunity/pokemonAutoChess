@@ -14,6 +14,7 @@ import WikiTown from "./wiki-town"
 import WikiTutorials from "./wiki-tutorials"
 import WikiTypes from "./wiki-types"
 import WikiWeather from "./wiki-weather"
+import WikiDoubleUp from "./wiki-double-up"
 import "./wiki.css"
 
 export default function Wiki({ inGame = false }: { inGame: boolean }) {
@@ -28,6 +29,7 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
               <Tab key="title-tutorials">{t("wiki.nav.how_to_play")}</Tab>
             </>
           )}
+          <Tab key="title-double-up">Double Up</Tab>
           <Tab key="title-pokemon">{t("wiki.nav.pokemons_label")}</Tab>
           <Tab key="title-ability">{t("wiki.nav.abilities_label")}</Tab>
           <Tab key="title-items">{t("wiki.nav.items_label")}</Tab>
@@ -52,6 +54,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
             </TabPanel>
           </>
         )}
+        <TabPanel key="double-up">
+          <WikiDoubleUp />
+        </TabPanel>
         <TabPanel key="pokemon">
           <WikiPokemons />
         </TabPanel>

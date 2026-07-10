@@ -12,7 +12,9 @@ export class EmoteBubble extends GameObjects.DOMElement {
       "game-emote-bubble " + (isOpponent ? "opponent" : "current")
 
     const emoteImg = document.createElement("img")
-    emoteImg.src = getAvatarSrc(emoteAvatar)
+    emoteImg.src = emoteAvatar.startsWith("item/")
+      ? `assets/${emoteAvatar}.png`
+      : getAvatarSrc(emoteAvatar)
 
     this.dom.appendChild(emoteImg)
     this.setElement(this.dom)

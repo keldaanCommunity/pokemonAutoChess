@@ -769,6 +769,7 @@ const poppingIcon: AbilityAnimationMaker<
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
+  ["PRISON_BOTTLE_PORTAL"]: onCasterScale2,
   ["PUFF_RED"]: onTargetScale2,
   ["PUFF_PINK"]: onTargetScale2,
   ["PUFF_GREEN"]: onTargetScale2,

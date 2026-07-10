@@ -31,9 +31,35 @@ import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { pickRandomIn } from "../../utils/random"
+import { pickRandomIn, shuffleArray } from "../../utils/random"
 import { schemaEntries, schemaValues } from "../../utils/schemas"
 import type PreparationRoom from "../preparation-room"
+
+function autoAssignPartner(state: PreparationRoom["state"], uid: string) {
+  if (state.gameMode !== GameMode.DOUBLE_UP) return
+  const newUser = state.users.get(uid)
+  if (!newUser) return
+  const unpaired = schemaValues(state.users).find(
+    (p) => p.uid !== uid && p.doubleUpPartnerId === ""
+  )
+  if (!unpaired) {
+    newUser.doubleUpPartnerId = ""
+    newUser.doubleUpTeamId = ""
+    return
+  }
+  const allTeamIds = new Set(
+    schemaValues(state.users)
+      .map((p) => p.doubleUpTeamId)
+      .filter((id) => id !== "")
+  )
+  let teamIndex = 0
+  while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+  const teamId = `team-${teamIndex}`
+  newUser.doubleUpPartnerId = unpaired.uid
+  newUser.doubleUpTeamId = teamId
+  unpaired.doubleUpPartnerId = uid
+  unpaired.doubleUpTeamId = teamId
+}
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -54,14 +80,14 @@ export class OnJoinCommand extends Command<
         this.room.presence,
         client.auth.uid
       )
-      if (pendingGame != null && !pendingGame.isExpired) {
-        client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
-        return
-      }
+      // if (pendingGame != null && !pendingGame.isExpired) {
+      //   client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+      //   return
+      // }
 
       if (
         this.state.ownerId == "" &&
-        this.state.gameMode === GameMode.CUSTOM_LOBBY
+        (this.state.gameMode === GameMode.CUSTOM_LOBBY || this.state.gameMode === GameMode.DOUBLE_UP)
       ) {
         this.state.ownerId = auth.uid
       }
@@ -136,6 +162,9 @@ export class OnJoinCommand extends Command<
         )
         this.room.updatePlayersInfo()
 
+        // auto-pair in Double Up mode
+        autoAssignPartner(this.state, u.uid)
+
         if (u.uid == this.state.ownerId) {
           // logger.debug(user.displayName);
           this.state.ownerName = u.displayName
@@ -144,7 +173,7 @@ export class OnJoinCommand extends Command<
           })
         }
 
-        if (this.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+        if (this.state.gameMode !== GameMode.CUSTOM_LOBBY  && this.state.gameMode !== GameMode.DOUBLE_UP) {
           this.clock.setTimeout(() => {
             if (
               this.state.users.has(u.uid) &&
@@ -228,7 +257,26 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      if (!allUsersReady && this.state.gameMode === GameMode.CUSTOM_LOBBY) {
+      if (this.state.gameMode === GameMode.DOUBLE_UP) {
+        if (this.state.users.size < 4) {
+          this.state.addMessage({
+            authorId: "Server",
+            payload: `Double Up requires at least 4 players.`,
+            avatar: "0079/Sigh"
+          })
+          return
+        }
+        if (this.state.users.size % 2 !== 0) {
+          this.state.addMessage({
+            authorId: "Server",
+            payload: `Double Up requires an even number of players.`,
+            avatar: "0079/Sigh"
+          })
+          return
+        }
+      }
+
+      if (!allUsersReady && (this.state.gameMode === GameMode.CUSTOM_LOBBY || this.state.gameMode === GameMode.DOUBLE_UP)) {
         this.state.addMessage({
           authorId: "Server",
           payload: `Not all players are ready.`,
@@ -285,6 +333,36 @@ export class OnGameStartRequestCommand extends Command<
         this.state.gameStartedAt = new Date().toISOString()
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
+
+        if (this.state.gameMode === GameMode.DOUBLE_UP) {
+          const userList = schemaValues(this.state.users)
+          const paired: Set<string> = new Set()
+          let teamIndex = 0
+
+          // honor lobby selections first
+          userList.forEach((a) => {
+            if (paired.has(a.uid) || !a.doubleUpPartnerId) return
+            const b = this.state.users.get(a.doubleUpPartnerId)
+            if (!b || paired.has(b.uid)) return
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpTeamId = teamId
+            b.doubleUpTeamId = teamId
+            paired.add(a.uid)
+            paired.add(b.uid)
+          })
+
+          // randomly pair remaining unpaired users
+          const unpaired = shuffleArray(userList.filter((u) => !paired.has(u.uid)))
+          for (let i = 0; i < unpaired.length - 1; i += 2) {
+            const a = unpaired[i], b = unpaired[i + 1]
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpPartnerId = b.uid
+            a.doubleUpTeamId = teamId
+            b.doubleUpPartnerId = a.uid
+            b.doubleUpTeamId = teamId
+          }
+        }
+
         const gameRoom = await matchMaker.createRoom("game", {
           users: Object.fromEntries(schemaEntries(this.state.users)),
           name: this.state.name,
@@ -575,7 +653,18 @@ export class OnLeaveCommand extends Command<
             payload: `${user.name} left.`,
             avatar: user.avatar
           })
+          const partnerIdBeforeLeave = user.doubleUpPartnerId
+          if (partnerIdBeforeLeave) {
+            const partner = this.state.users.get(partnerIdBeforeLeave)
+            if (partner) {
+              partner.doubleUpPartnerId = ""
+              partner.doubleUpTeamId = ""
+            }
+          }
           this.state.users.delete(client.auth.uid)
+          if (partnerIdBeforeLeave) {
+            autoAssignPartner(this.state, partnerIdBeforeLeave)
+          }
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = schemaValues(this.state.users).find(
@@ -615,7 +704,7 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in classic / ranked / tournament game mode
-      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
+        if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && this.room.state.gameMode !== GameMode.DOUBLE_UP && ready !== true)
         return
 
       // logger.debug(this.state.users.get(client.auth.uid).ready);
@@ -632,6 +721,7 @@ export class OnToggleReadyCommand extends Command<
 
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+        this.state.gameMode !== GameMode.DOUBLE_UP &&
         this.state.users.size === nbExpectedPlayers &&
         schemaValues(this.state.users).every((user) => user.ready)
       ) {
@@ -717,6 +807,7 @@ export class InitializeBotsCommand extends Command<
                 false
               )
             )
+            autoAssignPartner(this.state, bot.id)
           })
         }
         this.room.updatePlayersInfo()
@@ -824,6 +915,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         )
 
         this.room.updatePlayersInfo()
+        autoAssignPartner(this.state, bot.id)
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${bot.name} added.`
@@ -845,12 +937,118 @@ export class OnRemoveBotCommand extends Command<
   execute({ target, user }) {
     try {
       const name = this.state.users.get(target)?.name
+      const bot = this.state.users.get(target)
+      if (bot?.doubleUpPartnerId) {
+        const partner = this.state.users.get(bot.doubleUpPartnerId)
+        if (partner) {
+          partner.doubleUpPartnerId = ""
+          partner.doubleUpTeamId = ""
+        }
+      }
       if (name && this.state.users.delete(target)) {
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${name} removed.`
         })
       }
+      if (bot?.doubleUpPartnerId) {
+        autoAssignPartner(this.state, bot.doubleUpPartnerId)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnSelectPartnerCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    partnerId: string
+  }
+> {
+  execute({ client, partnerId }) {
+    try {
+      const uid = client.auth?.uid
+      if (!uid) return
+      const user = this.state.users.get(uid)
+      if (!user) return
+      if (user.doubleUpPartnerId === partnerId) {
+        const oldPartner = this.state.users.get(partnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+        user.doubleUpPartnerId = ""
+        user.doubleUpTeamId = ""
+        if (!user.isBot) user.ready = false
+        return  // just return, no auto-assign
+      }
+
+      const target = this.state.users.get(partnerId)
+      if (!target) return
+      if (target.ready || user.ready) return
+
+      // save old partner ids before clearing
+      const userOldPartnerId = user.doubleUpPartnerId
+      const targetOldPartnerId = target.doubleUpPartnerId
+
+      // clear previous partners
+      if (userOldPartnerId) {
+        const oldPartner = this.state.users.get(userOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+      }
+      if (targetOldPartnerId) {
+        const oldPartner = this.state.users.get(targetOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+      }
+
+      // find lowest available team index for new pair
+      const allTeamIds = new Set(
+        schemaValues(this.state.users)
+          .map((u) => u.doubleUpTeamId)
+          .filter((id) => id !== "")
+      )
+      let teamIndex = 0
+      while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+      const teamId = `team-${teamIndex}`
+      allTeamIds.add(teamId) // mark as taken before orphan search
+
+      user.doubleUpPartnerId = partnerId
+      user.doubleUpTeamId = teamId
+      target.doubleUpPartnerId = uid
+      target.doubleUpTeamId = teamId
+
+      // pair orphans with each other if both had partners
+      if (userOldPartnerId && targetOldPartnerId) {
+        const orphanA = this.state.users.get(userOldPartnerId)
+        const orphanB = this.state.users.get(targetOldPartnerId)
+        if (orphanA && orphanB) {
+          let ti = 0
+          while (allTeamIds.has(`team-${ti}`)) ti++
+          orphanA.doubleUpPartnerId = targetOldPartnerId
+          orphanA.doubleUpTeamId = `team-${ti}`
+          orphanB.doubleUpPartnerId = userOldPartnerId
+          orphanB.doubleUpTeamId = `team-${ti}`
+        }
+      } else {
+        if (userOldPartnerId) {
+          autoAssignPartner(this.state, userOldPartnerId)
+        }
+        if (targetOldPartnerId) {
+          autoAssignPartner(this.state, targetOldPartnerId)
+        }
+      }
+
     } catch (error) {
       logger.error(error)
     }

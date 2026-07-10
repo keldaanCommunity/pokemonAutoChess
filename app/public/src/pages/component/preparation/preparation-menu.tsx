@@ -274,7 +274,7 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.CUSTOM_LOBBY &&
+  const botControls = ( gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP ) && 
     (isOwner || isAdmin) && (
       <div className="my-input-group">
         <button
@@ -327,7 +327,7 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || !isReady) &&
+  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP || !isReady) &&
     users.length > 0 && (
       <button
         className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
@@ -362,17 +362,53 @@ export default function PreparationMenu() {
         {headerMessage}
       </header>
 
-      <div className="preparation-menu-users">
-        {users.map((u) => {
-          return (
-            <PreparationMenuUser
-              key={u.uid}
-              user={u}
-              isOwner={isOwner}
-              ownerId={ownerId}
-            />
-          )
-        })}
+      <div className={`preparation-menu-users${gameMode === GameMode.DOUBLE_UP ? " double-up" : ""}`}>
+        {gameMode === GameMode.DOUBLE_UP
+          ? (() => {
+              const paired: Set<string> = new Set()
+              const groups: IGameUser[][] = []
+              users.forEach((u) => {
+                if (paired.has(u.uid)) return
+                const partner = users.find(
+                  (p) =>
+                    p.uid === u.doubleUpPartnerId &&
+                    u.doubleUpPartnerId !== "" &&
+                    p.doubleUpPartnerId === u.uid &&
+                    !paired.has(p.uid)  // add this check
+                )
+                if (partner) {
+                  groups.push([u, partner])
+                  paired.add(u.uid)
+                  paired.add(partner.uid)
+                } else {
+                  groups.push([u])
+                }
+              })
+              return groups.map((group, colorIndex) => (
+                <div
+                  key={group.map((u) => u.uid).join("-")}
+                  className={`double-up-pair ${group.length === 2 ? "paired" : "unpaired"}`}
+                >
+                  {group.map((u) => (
+                    <PreparationMenuUser
+                      key={u.uid}
+                      user={u}
+                      isOwner={isOwner}
+                      ownerId={ownerId}
+                      colorIndex={colorIndex}
+                    />
+                  ))}
+                </div>
+              ))
+            })()
+          : users.map((u) => (
+              <PreparationMenuUser
+                key={u.uid}
+                user={u}
+                isOwner={isOwner}
+                ownerId={ownerId}
+              />
+            ))}
       </div>
 
       <div className="actions">

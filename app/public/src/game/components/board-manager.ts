@@ -908,6 +908,14 @@ export default class BoardManager {
     }
   }
 
+  playItemDropAnimation(x: number, y: number) {
+    const [px, py] = transformBoardCoordinates(x, y)
+    const vfx = this.scene.add.sprite(px, py, "prison_bottle_portal", "000.png")
+    vfx.setScale(2).setDepth(DEPTH.ABILITY_MAJOR)
+    vfx.play("PRISON_BOTTLE_PORTAL")
+    vfx.once("animationcomplete", () => vfx.destroy())
+  }
+
   updatePokemonDishes(playerId: string, pokemon: IPokemon, dishes: Item[]) {
     if (this.player.id === playerId) {
       const pokemonUI = this.pokemons.get(pokemon.id)

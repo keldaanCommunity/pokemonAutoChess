@@ -72,12 +72,48 @@ function completeMatchupCombination(
     )
     if (remainingMatchups.length === 0) {
       // no more matchups, need to complete with a ghost matchup
-      return completeMatchupCombination([...combination], matchups, players)
+      return []
     }
     return remainingMatchups.flatMap((m) =>
       completeMatchupCombination([...combination, m], matchups, players)
     )
   }
+}
+
+export function selectDoubleUpMatchups(state: GameState): Matchup[] {
+  const players = shuffleArray(
+    schemaValues(state.players).filter((p) => p.alive)
+  )
+  if (players.length <= 1) return []
+
+  // Same pipeline as selectMatchups, but teammates are never paired
+  const matchups = getAllPossibleMatchups(players).filter(
+    (m) => m.bluePlayer.doubleUpTeamId !== m.redPlayer.doubleUpTeamId
+  )
+
+  const matchupCombinations: Matchup[][] = completeMatchupCombination(
+    [],
+    matchups,
+    players
+  )
+
+  const matchupCombinationsCount = matchupCombinations.map((combination) =>
+    sum(combination.map((m) => m.count))
+  )
+  const lowestTotalCount = Math.min(...matchupCombinationsCount)
+  const lowestTotalCountMatchupCombinations = matchupCombinations.filter(
+    (matchups, index) => matchupCombinationsCount[index] === lowestTotalCount
+  )
+
+  const matchupCombinationsDistance = lowestTotalCountMatchupCombinations.map(
+    (combination) => sum(combination.map((m) => m.distance))
+  )
+  const maxDistance = Math.max(...matchupCombinationsDistance)
+  const mostDistantMatchups = lowestTotalCountMatchupCombinations.filter(
+    (matchups, index) => matchupCombinationsDistance[index] === maxDistance
+  )
+
+  return pickRandomIn(mostDistantMatchups)
 }
 
 export function selectMatchups(state: GameState): Matchup[] {
