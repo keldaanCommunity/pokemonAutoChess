@@ -37,7 +37,7 @@ export default function RecorderEndGame() {
   return (
     <div className="recorder-endgame">
       <button
-        className="bubbly blue"
+        className="bubbly dark"
         onClick={() => {
           // downloadReplay drains OPFS + reads the file; surface a failure, not a silent no-op
           setFailed(false)
