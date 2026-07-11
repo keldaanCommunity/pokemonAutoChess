@@ -6,6 +6,7 @@ import { Transfer } from "../../../types"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
+import { getRankLabel } from "../../../types/strings/Strings"
 import { statusName } from "./replay-combat-scan"
 
 // SCREAMING_SNAKE enum value to Title Case (ICE_SPINNER becomes "Ice Spinner"); derived so it survives a bump
@@ -125,8 +126,8 @@ export const phaseWord = (t: TFunction, label: string): string => {
   return k ? t(k) : label
 }
 
-// signed gold delta with the in-game "g" unit, e.g. "+2g" / "-3g"
-const goldStr = (n: number): string => `${n > 0 ? "+" : ""}${n}g`
+// signed gold delta, e.g. "+2 gold" / "-3 gold"
+const goldStr = (n: number): string => `${n > 0 ? "+" : ""}${n} gold`
 
 // one picked option to its display string: "Pkm (+ Pkm) (Item)" or, item-only, "Item"
 const pickOption = (t: TFunction, o: PickOption): string => {
@@ -267,7 +268,7 @@ function formatReplayEventRow(
       return t(`${ROW_KEY}.berry_ripe`, { berry: itemName(t, String(a.berry)) })
     case "berries": {
       const list = (a.list as string[] | undefined) ?? []
-      return t(`${ROW_KEY}.berry_trees`, {
+      return t(`${ROW_KEY}.berries`, {
         list: list.map((b) => itemName(t, b)).join(", ")
       })
     }
@@ -304,10 +305,10 @@ function formatReplayEventRow(
           })
     case "stat": {
       const d = Number(a.delta)
-      return t(`${ROW_KEY}.stat`, {
+      return t(`${ROW_KEY}.${d > 0 ? "stat_gain" : "stat_loss"}`, {
         unit: pkmName(t, String(a.unit)),
         stat: statLabel(t, String(a.field)),
-        delta: `${d > 0 ? "+" : ""}${d}`
+        delta: Math.abs(d)
       })
     }
     default:
@@ -422,17 +423,12 @@ export function formatMessageRow(
         }
         return t(`${ROW_KEY}.income_plain`, { total })
       }
-      case Transfer.FINAL_RANK:
-        return t(`${ROW_KEY}.placed`, {
-          rank:
-            typeof p === "number"
-              ? p
-              : ((p as { value?: number })?.value ?? "?")
-        })
-      case Transfer.PRELOAD_MAPS:
-        return Array.isArray(payload)
-          ? t(`${ROW_KEY}.region_maps`, { count: payload.length })
+      case Transfer.FINAL_RANK: {
+        const rank = typeof p === "number" ? p : (p as { value?: number })?.value
+        return rank != null
+          ? t(`${ROW_KEY}.placed`, { rank: getRankLabel(rank) })
           : ""
+      }
       case Transfer.LOADING_COMPLETE:
         return t(`${ROW_KEY}.game_start`)
       case Transfer.GAME_END:
