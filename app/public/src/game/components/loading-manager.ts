@@ -114,12 +114,9 @@ export default class LoadingManager {
   }
 }
 
-// phaser dedupes queued files by key, but for a multiatlas that check only covers the json asset
-// itself: the texture files it references are injected into the loader queue on the fly, so
-// re-queuing a key whose textures are already in the TextureManager (a replay seek restarts the
-// scene and re-runs preload on a live game instance) re-downloads and re-decodes every texture,
-// then errors when re-adding it. skip the whole multiatlas when its texture already exists; live
-// games destroy the game (and its textures) between matches, so this never skips there
+// phaser's duplicate-key check covers only the multiatlas json file, and the texture files it
+// references are queued on the fly; a replay seek re-running preload would re-download every
+// texture and error re-adding it
 function loadMultiAtlas(
   scene: Phaser.Scene,
   key: string,

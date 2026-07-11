@@ -74,7 +74,7 @@ class GameContainer {
     this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    // a replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
     this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }

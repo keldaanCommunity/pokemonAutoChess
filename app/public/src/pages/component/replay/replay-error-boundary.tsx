@@ -20,8 +20,7 @@ export default class ReplayErrorBoundary extends Component<
 
   componentDidCatch(error: Error) {
     console.error("[replay] contained render error:", error)
-    // the fallback replaces <Game/> without going through leave(), so nothing else destroys the
-    // orphaned phaser instance; kill it here or Resume boots a second one on top of it
+    // the fallback replaces <Game/> without going through leave(), so destroy the game here
     try {
       getGameContainer()?.game?.destroy(true)
     } catch {

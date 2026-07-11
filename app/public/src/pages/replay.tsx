@@ -53,8 +53,7 @@ const RUNNING_BUILD = {
   serializerId: "schema"
 }
 
-// styling hooks only (replay-readonly.css): the game ui itself stays inert through the no-op
-// ReplayRoom.send and the spectate flag, so clicks don't need to be intercepted
+// styling hooks for the read-only game ui
 function installReadonlyGuard(): () => void {
   document.body.classList.add("replay-mode")
   return () => document.body.classList.remove("replay-mode")
@@ -431,7 +430,7 @@ export default function Replay() {
       </div>
     )
   return (
-    // suppress the native context menu over the viewer overlays too: they sit outside #game-wrapper, the only node the game blocks
+    // the overlays sit outside #game-wrapper, so the game's contextmenu block doesn't cover them
     <div onContextMenu={(e) => e.preventDefault()}>
       {/* <Game/> mounts once and stays mounted; seeks re-attach in place, so Phaser and its assets persist; `gen` keys a boundary per mount */}
       {showGame && (
