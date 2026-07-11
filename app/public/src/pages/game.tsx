@@ -91,12 +91,12 @@ import GameExpeditions from "./component/game/game-expeditions"
 import GameFinalRank from "./component/game/game-final-rank"
 import GameLoadingScreen from "./component/game/game-loading-screen"
 import GamePlayers from "./component/game/game-players"
+import { clearPortraitBase64Cache } from "./component/game/game-pokemon-portrait"
 import GameShop from "./component/game/game-shop"
 import GameSpectatePlayerInfo from "./component/game/game-spectate-player-info"
 import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
-import { clearPortraitBase64Cache } from "./component/game/game-pokemon-portrait"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
@@ -254,17 +254,17 @@ export default function Game() {
   )
 
   const leave = useCallback(async () => {
+    if (gameContainer && gameContainer.game) {
+      gameContainer.game.destroy(true)
+    }
+    
     if (isReplayRoom(room)) {
       navigate("/lobby")
       return
     }
     const afterPlayers = new Array<IAfterGamePlayer>()
 
-    const token = await firebase.auth().currentUser?.getIdToken()
-
-    if (gameContainer && gameContainer.game) {
-      gameContainer.game.destroy(true)
-    }
+    const token = await firebase.auth().currentUser?.getIdToken()    
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =

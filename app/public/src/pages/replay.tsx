@@ -5,10 +5,24 @@ import { type ReactNode, useEffect, useRef, useState } from "react"
 import { flushSync } from "react-dom"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { FIREBASE_CONFIG } from "../../../config"
 import pkg from "../../../../package.json"
+import { FIREBASE_CONFIG } from "../../../config"
 import type GameState from "../../../rooms/states/game-state"
 import { GamePhaseState } from "../../../types/enum/Game"
+import {
+  deleteStoredReplay,
+  downloadStoredReplay,
+  listReplays,
+  loadStoredReplay,
+  type ReplayFileInfo,
+  replaysSupported
+} from "../game/recorder"
+import {
+  detectBuildSkew,
+  loadReplay,
+  type ReplayManifest,
+  type ReplaySummary
+} from "../game/replay-format"
 import {
   buildReplayIndex,
   nextPhase,
@@ -17,33 +31,19 @@ import {
   prevStage,
   type ReplayIndex
 } from "../game/replay-index"
-import {
-  deleteStoredReplay,
-  downloadStoredReplay,
-  listReplays,
-  loadStoredReplay,
-  replaysSupported,
-  type ReplayFileInfo
-} from "../game/recorder"
-import {
-  detectBuildSkew,
-  loadReplay,
-  type ReplayManifest,
-  type ReplaySummary
-} from "../game/replay-format"
 import { ReplayRoom } from "../game/replay-room"
-import PokemonPortrait from "./component/pokemon-portrait"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { rooms } from "../network"
 import { usePreference } from "../preferences"
 import { leaveGame, setPlayer } from "../stores/GameStore"
 import { logIn } from "../stores/NetworkStore"
+import PokemonPortrait from "./component/pokemon-portrait"
 import ReplayControls from "./component/replay/replay-controls"
-import ReplayEventLog from "./component/replay/replay-event-log"
 import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
+import ReplayEventLog from "./component/replay/replay-event-log"
+import Game, { getGameContainer, reattachReplayRoom } from "./game"
 import "./component/replay/replay-readonly.css"
 import "./component/replay/replay-ui.css" // all the viewer's UI styles (controls/overlays/library), imported once here for the replay tree
-import Game, { getGameContainer, reattachReplayRoom } from "./game"
 
 // this viewer's build, stamped like recorder.ts GAME_BUILD; compared to the recording to warn on skew.
 // serializerId is the SchemaSerializer id the recorder also stamps, so a future serializer swap is caught
@@ -457,7 +457,7 @@ export default function Replay() {
       {/* <Game/> mounts once and stays mounted; seeks re-attach in place, so Phaser and its assets persist; `gen` keys a boundary per mount */}
       {showGame && (
         <ReplayErrorBoundary key={gen}>
-          <ReplayGameHost />
+          <Game />
         </ReplayErrorBoundary>
       )}
       {/* cover the (re)booting scene until playback starts, so a seek doesn't flash the half-built scene */}
@@ -502,21 +502,6 @@ export default function Replay() {
       )}
     </>
   )
-}
-
-// wraps <Game/> and destroys its Phaser game on unmount (the game's own teardown only runs on the live leave flow, which a replay skips)
-function ReplayGameHost() {
-  useEffect(
-    () => () => {
-      try {
-        getGameContainer()?.game?.destroy(true)
-      } catch {
-        /* already gone */
-      }
-    },
-    []
-  )
-  return <Game />
 }
 
 // format a recording's timestamp: header recordedAt (real match time), else fallback wall-clock (file mtime); viewer locale
