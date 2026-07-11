@@ -3,6 +3,7 @@ import { SetSchema, StateView } from "@colyseus/schema"
 import { type Client, updateLobby } from "colyseus"
 import {
   AdditionalPicksStages,
+  ArmoryAssistStages,
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
@@ -21,8 +22,7 @@ import {
   SHINY_UNOWN_ENCOUNTER_CHANCE,
   StageDuration,
   TREASURE_BOX_LIFE_THRESHOLD,
-  UNOWN_ENCOUNTER_CHANCE,
-  ArmoryAssistStages
+  UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
@@ -38,7 +38,7 @@ import { SynergyEffects } from "../../core/effects/synergies"
 import { giveRandomEgg } from "../../core/eggs"
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { getFlowerPotsUnlocked } from "../../core/flower-pots"
-import { selectMatchups, selectDoubleUpMatchups} from "../../core/matchmaking"
+import { selectDoubleUpMatchups, selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
@@ -74,21 +74,27 @@ import {
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
+import {
+  type ArmoryOptions,
+  FreeOptions,
+  PaidOptions
+} from "../../types/enum/ArmoryOptions"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import {
   BattleResult,
+  GameMode,
   GamePhaseState,
   PokemonActionState,
-  Team,
-  GameMode,
-  Rarity
+  Rarity,
+  Team
 } from "../../types/enum/Game"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
+  DoubleUpTradeableItems,
   Item,
   ItemComponents,
   ItemComponentsNoFossilOrScarf,
@@ -101,8 +107,7 @@ import {
   SynergyGivenByItem,
   SynergyStones,
   Tools,
-  UnholdableItems,
-  DoubleUpTradeableItems
+  UnholdableItems
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -141,7 +146,6 @@ import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { getWeather } from "../../utils/weather"
 import type GameRoom from "../game-room"
 import type GameState from "../states/game-state"
-import { FreeOptions, PaidOptions, ArmoryOptions } from "../../types/enum/ArmoryOptions"
 
 export class OnBuyPokemonCommand extends Command<
   GameRoom,
@@ -311,7 +315,7 @@ function sendPokemonToPartner(
     pokemon.rarity === Rarity.SPECIAL
       ? 5
       : 3
-  sender.doubleUpSendCooldown =  cooldown
+  sender.doubleUpSendCooldown = cooldown
 
   // Remove from sender's board
   sender.board.delete(pokemon.id)
@@ -870,7 +874,7 @@ export class OnDragDropItemCommand extends Command<
       }
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
-    } else if (zone  === "croagunk-trade-zone") {
+    } else if (zone === "croagunk-trade-zone") {
       if (
         this.state.gameMode === GameMode.DOUBLE_UP &&
         this.state.phase === GamePhaseState.PICK
@@ -944,28 +948,28 @@ export class OnDragDropItemCommand extends Command<
       this.state.phase === GamePhaseState.PICK &&
       isOnBench(pokemon)
     ) {
-    if (
-      pokemon.rarity === Rarity.UNIQUE ||
-      pokemon.rarity === Rarity.LEGENDARY ||
-      pokemon.name === Pkm.EGG ||
-      pokemon.name === Pkm.SUBSTITUTE ||
-      pokemon.name === Pkm.PILLAR_WOOD ||
-      pokemon.name === Pkm.PILLAR_IRON ||
-      pokemon.name === Pkm.PILLAR_CONCRETE ||
-      pokemon.name === Pkm.EEVEE ||
-      pokemon.name === Pkm.VAPOREON ||
-      pokemon.name === Pkm.JOLTEON ||
-      pokemon.name === Pkm.FLAREON ||
-      pokemon.name === Pkm.ESPEON ||
-      pokemon.name === Pkm.UMBREON ||
-      pokemon.name === Pkm.LEAFEON ||
-      pokemon.name === Pkm.GLACEON ||
-      pokemon.name === Pkm.SYLVEON ||
-      pokemon.items.has(Item.RARE_CANDY)
-    ) {
-      client.send(Transfer.DRAG_DROP_CANCEL, message)
-      return
-    }
+      if (
+        pokemon.rarity === Rarity.UNIQUE ||
+        pokemon.rarity === Rarity.LEGENDARY ||
+        pokemon.name === Pkm.EGG ||
+        pokemon.name === Pkm.SUBSTITUTE ||
+        pokemon.name === Pkm.PILLAR_WOOD ||
+        pokemon.name === Pkm.PILLAR_IRON ||
+        pokemon.name === Pkm.PILLAR_CONCRETE ||
+        pokemon.name === Pkm.EEVEE ||
+        pokemon.name === Pkm.VAPOREON ||
+        pokemon.name === Pkm.JOLTEON ||
+        pokemon.name === Pkm.FLAREON ||
+        pokemon.name === Pkm.ESPEON ||
+        pokemon.name === Pkm.UMBREON ||
+        pokemon.name === Pkm.LEAFEON ||
+        pokemon.name === Pkm.GLACEON ||
+        pokemon.name === Pkm.SYLVEON ||
+        pokemon.items.has(Item.RARE_CANDY)
+      ) {
+        client.send(Transfer.DRAG_DROP_CANCEL, message)
+        return
+      }
       sendPokemonToPartner(this.state, this.room, player, pokemon, item)
       return
     }
@@ -1291,7 +1295,9 @@ export class OnUpdateCommand extends Command<
       if (!winnerPlayer) return // PVE fight
 
       // Find partner's running sim via doubleUpPartnerId on the Player
-      const partnerPlayer = this.state.players.get(winnerPlayer.doubleUpPartnerId)
+      const partnerPlayer = this.state.players.get(
+        winnerPlayer.doubleUpPartnerId
+      )
       if (!partnerPlayer?.alive) return
 
       const partnerSim = this.state.simulations.get(partnerPlayer.simulationId)
@@ -1307,17 +1313,22 @@ export class OnUpdateCommand extends Command<
     const winnerPlayer = winnerIsBlue ? source.bluePlayer : source.redPlayer
     if (!winnerPlayer) return
 
-		const partnerIsBlue = target.bluePlayer?.id === winnerPlayer.doubleUpPartnerId
+    const partnerIsBlue =
+      target.bluePlayer?.id === winnerPlayer.doubleUpPartnerId
     const partnerTeam = partnerIsBlue ? Team.BLUE_TEAM : Team.RED_TEAM
 
-    if (!partnerIsBlue && target.redPlayer?.id !== winnerPlayer.doubleUpPartnerId) {
+    if (
+      !partnerIsBlue &&
+      target.redPlayer?.id !== winnerPlayer.doubleUpPartnerId
+    ) {
       return
     }
 
     const winningTeam = winnerIsBlue ? source.blueTeam : source.redTeam
     const survivors: PokemonEntity[] = []
     winningTeam.forEach((e) => {
-      if (e.hp > 0 && !e.name.startsWith("UNOWN")) survivors.push(e as PokemonEntity)
+      if (e.hp > 0 && !e.name.startsWith("UNOWN"))
+        survivors.push(e as PokemonEntity)
     })
     if (survivors.length === 0) return
 
@@ -1338,7 +1349,7 @@ export class OnUpdateCommand extends Command<
       reinforcement.sourcePlayer = winnerPlayer
       // e.g. comfey will be attached here
       reinforcement.items.clear()
-      entity.items.forEach(item => reinforcement.items.add(item))
+      entity.items.forEach((item) => reinforcement.items.add(item))
       // negative status effects are not carried over, therefore do not bring over (most) positive status effects
       // positive effects we ignore: spikeArmor, magigBounce, reflect, pokerus, rage
 
@@ -1346,7 +1357,8 @@ export class OnUpdateCommand extends Command<
       reinforcement.status.light = entity.status.light
       reinforcement.status.resurrection = entity.status.resurrection
       reinforcement.status.runeProtect = entity.status.runeProtect
-      reinforcement.status.runeProtectCooldown = entity.status.runeProtectCooldown
+      reinforcement.status.runeProtectCooldown =
+        entity.status.runeProtectCooldown
 
       // bring over current active fields (debatable, since technically positie status in wiki)
       reinforcement.status.grassField = entity.status.grassField
@@ -1379,20 +1391,23 @@ export class OnUpdateCommand extends Command<
       reinforcement.count.soundCryCount = entity.count.soundCryCount
 
       // overwrite with players synergy effects
-      Array.from(reinforcement.effects).forEach(e => reinforcement.effects.delete(e))
-      entity.effects.forEach(e => reinforcement.effects.add(e))
+      Array.from(reinforcement.effects).forEach((e) =>
+        reinforcement.effects.delete(e)
+      )
+      entity.effects.forEach((e) => reinforcement.effects.add(e))
       reinforcement.effectsSet = new Set(entity.effectsSet)
     }
     // apply ghost curses, outside the loop to avoid multiple applications
-    const opponentTeam = partnerTeam === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+    const opponentTeam =
+      partnerTeam === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
     const ghostCurseEffects = [
       EffectEnum.CURSE_OF_VULNERABILITY,
       EffectEnum.CURSE_OF_WEAKNESS,
       EffectEnum.CURSE_OF_TORMENT,
       EffectEnum.CURSE_OF_FATE
     ]
-    ghostCurseEffects.forEach(curse => {
-      if (survivors.some(e => e.effects.has(curse))) {
+    ghostCurseEffects.forEach((curse) => {
+      if (survivors.some((e) => e.effects.has(curse))) {
         target.applyCurse(curse, opponentTeam)
       }
     })
@@ -1563,7 +1578,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     // Pass 3: send correct rank to each
     newlyDead.forEach((player) => {
-      const client = this.room.clients.find(cli => cli.auth.uid === player.id)
+      const client = this.room.clients.find((cli) => cli.auth.uid === player.id)
       if (client) {
         client.send(Transfer.FINAL_RANK, player.rank)
       }
@@ -1575,7 +1590,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time =
       (StageDuration[this.state.stageLevel] ?? StageDuration.DEFAULT) * 1000
 
-    if (this.state.stageLevel === 1 && this.state.gameMode === GameMode.DOUBLE_UP) {
+    if (
+      this.state.stageLevel === 1 &&
+      this.state.gameMode === GameMode.DOUBLE_UP
+    ) {
       this.state.players.forEach((player: Player) => {
         player.items.push(Item.PRISON_BOTTLE)
       })
@@ -1650,29 +1668,46 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
     }
 
-    if (this.state.gameMode === GameMode.DOUBLE_UP && ArmoryAssistStages.includes(this.state.stageLevel)){
-      let firstGroup : Player[] = [];
-      let secondGroup : Player[] = [];
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      ArmoryAssistStages.includes(this.state.stageLevel)
+    ) {
+      const firstGroup: Player[] = []
+      const secondGroup: Player[] = []
       // Make groups by user id
       this.state.players.forEach((p) => {
-        if (p.id < p.doubleUpPartnerId) firstGroup.push(p);
-        else secondGroup.push(p);
+        if (p.id < p.doubleUpPartnerId) firstGroup.push(p)
+        else secondGroup.push(p)
       })
-      const partnersToPrompt = 
-        (this.state.stageLevel === ArmoryAssistStages[0] || this.state.stageLevel === ArmoryAssistStages[2]) ? firstGroup : secondGroup;
+      const partnersToPrompt =
+        this.state.stageLevel === ArmoryAssistStages[0] ||
+        this.state.stageLevel === ArmoryAssistStages[2]
+          ? firstGroup
+          : secondGroup
 
       partnersToPrompt.forEach((p) => {
-        const armoryChoices : ArmoryOptions[] = [];
-        armoryChoices.push(pickRandomIn([...Object.values(FreeOptions)].filter((gift) => !p.doubleUpGifts.includes(gift))));
-        const paidOptions = pickNRandomIn([...Object.values(PaidOptions)].filter((gift) => !p.doubleUpGifts.includes(gift)), 2)
+        const armoryChoices: ArmoryOptions[] = []
+        armoryChoices.push(
+          pickRandomIn(
+            [...Object.values(FreeOptions)].filter(
+              (gift) => !p.doubleUpGifts.includes(gift)
+            )
+          )
+        )
+        const paidOptions = pickNRandomIn(
+          [...Object.values(PaidOptions)].filter(
+            (gift) => !p.doubleUpGifts.includes(gift)
+          ),
+          2
+        )
         paidOptions.forEach((op) => armoryChoices.push(op))
 
         p.choices.push(
-            new PlayerChoice({
-              type: "armory_assist",
-              armoryOptions: armoryChoices,
-            })
-          )
+          new PlayerChoice({
+            type: "armory_assist",
+            armoryOptions: armoryChoices
+          })
+        )
       })
     }
 
@@ -1970,7 +2005,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }
     })
     if (this.state.gameMode === GameMode.DOUBLE_UP) {
-      this.applyDoubleUpDamage()
+      this.applyDoubleUpRoundDamage()
       this.syncTeamLife()
       this.room.rankPlayers()
     }
@@ -1985,7 +2020,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           }
         }
       })
-    }    
+    }
     // stop all simulations
     this.state.simulations.forEach((simulation) => {
       simulation.stop()
@@ -2001,7 +2036,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         const croagunk = [...player.wanderers.values()].find(
-          w => w.type === WandererType.CROAGUNK_TRADE
+          (w) => w.type === WandererType.CROAGUNK_TRADE
         )
         player.wanderers.clear()
         if (croagunk) player.wanderers.set(croagunk.id, croagunk)
@@ -2069,9 +2104,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Update Bots after unown deletion so unown in bot boards are not deleted
       this.state.botManager.updateBots()
     }
-
   }
-  applyDoubleUpDamage() {
+  applyDoubleUpRoundDamage() {
     this.state.simulations.forEach((sim) => {
       if (sim.isGhostBattle) return
       if (sim.redPlayerId === "pve") return
@@ -2084,10 +2118,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const winningTeam = loserIsBlue ? sim.redTeam : sim.blueTeam
       if (!losingPlayer || !losingPlayer.alive) return
 
-      const damage = this.room.computeRoundDamage(winningTeam, this.state.stageLevel)
+      const damage = this.room.computeRoundDamage(
+        winningTeam,
+        this.state.stageLevel
+      )
       losingPlayer.life -= damage
       if (damage > 0) {
-        const client = this.room.clients.find((c) => c.auth.uid === losingPlayer.id)
+        const client = this.room.clients.find(
+          (c) => c.auth.uid === losingPlayer.id
+        )
         client?.send(Transfer.PLAYER_DAMAGE, damage)
       }
     })
@@ -2112,7 +2151,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.miniGame.stop(this.room.state)
     this.state.players.forEach((player: Player) => {
       const croagunk = [...player.wanderers.values()].find(
-        w => w.type === WandererType.CROAGUNK_TRADE
+        (w) => w.type === WandererType.CROAGUNK_TRADE
       )
       player.wanderers.clear()
       if (croagunk) {
@@ -2128,12 +2167,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           player.doubleUpTradeOffer = ""
           const croagunk = [...player.wanderers.values()].find(
             (w) => w.type === WandererType.CROAGUNK_TRADE
-          ) 
+          )
           if (croagunk) croagunk.data = ""
         }
         if (player.alive) {
           const hasCroagunk = [...player.wanderers.values()].some(
-            w => w.type === WandererType.CROAGUNK_TRADE
+            (w) => w.type === WandererType.CROAGUNK_TRADE
           )
           if (!hasCroagunk) {
             player.spawnWanderingPokemon({
@@ -2255,7 +2294,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
       })
     } else {
-      const matchups = 
+      const matchups =
         this.state.gameMode === GameMode.DOUBLE_UP
           ? selectDoubleUpMatchups(this.state)
           : selectMatchups(this.state)

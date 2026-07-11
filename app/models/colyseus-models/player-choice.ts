@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
+import type { ArmoryOptions } from "../../types/enum/ArmoryOptions"
 import type { Item } from "../../types/enum/Item"
 import type { PkmProposition } from "../../types/enum/Pokemon"
-import { ArmoryOptions } from "../../types/enum/ArmoryOptions"
 
 export type PlayerChoiceType =
   | "item"

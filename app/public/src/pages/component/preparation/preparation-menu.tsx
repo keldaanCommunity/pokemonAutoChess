@@ -14,6 +14,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
+import { keys } from "../../../../../utils/object"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppSelector } from "../../../hooks"
 import {
@@ -32,7 +33,6 @@ import { GameModeIcon } from "../icons/game-mode-icon"
 import { BotSelectModal } from "./bot-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
-import { keys } from "../../../../../utils/object"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -274,7 +274,8 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = ( gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP ) && 
+  const botControls = (gameMode === GameMode.CUSTOM_LOBBY ||
+    gameMode === GameMode.DOUBLE_UP) &&
     (isOwner || isAdmin) && (
       <div className="my-input-group">
         <button
@@ -327,7 +328,9 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP || !isReady) &&
+  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY ||
+    gameMode === GameMode.DOUBLE_UP ||
+    !isReady) &&
     users.length > 0 && (
       <button
         className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
@@ -362,7 +365,9 @@ export default function PreparationMenu() {
         {headerMessage}
       </header>
 
-      <div className={`preparation-menu-users${gameMode === GameMode.DOUBLE_UP ? " double-up" : ""}`}>
+      <div
+        className={`preparation-menu-users${gameMode === GameMode.DOUBLE_UP ? " double-up" : ""}`}
+      >
         {gameMode === GameMode.DOUBLE_UP
           ? (() => {
               const paired: Set<string> = new Set()
@@ -374,7 +379,7 @@ export default function PreparationMenu() {
                     p.uid === u.doubleUpPartnerId &&
                     u.doubleUpPartnerId !== "" &&
                     p.doubleUpPartnerId === u.uid &&
-                    !paired.has(p.uid)  // add this check
+                    !paired.has(p.uid) // add this check
                 )
                 if (partner) {
                   groups.push([u, partner])

@@ -24,6 +24,7 @@ import {
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
+import type { ArmoryOptions } from "../../types/enum/ArmoryOptions"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
@@ -95,7 +96,6 @@ import { Pokemon, PokemonClasses } from "./pokemon"
 import { PokemonCustoms } from "./pokemon-customs"
 import Synergies, { computeSynergies, getSynergyTier } from "./synergies"
 import { Wanderer } from "./wanderer"
-import { ArmoryOptions } from "../../types/enum/ArmoryOptions"
 
 export default class Player extends Schema implements IPlayer {
   @type("string") id: string

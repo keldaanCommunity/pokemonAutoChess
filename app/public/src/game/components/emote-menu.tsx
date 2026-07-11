@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next"
 import { getAvailableEmotions } from "../../../../models/precomputed/precomputed-emotions"
 import type { IPlayer } from "../../../../types"
 import { AvatarEmotions, Emotion } from "../../../../types/enum/Emotion"
+import { Item, ItemComponents } from "../../../../types/enum/Item"
 import { logger } from "../../../../utils/logger"
 import PokemonPortrait from "../../pages/component/pokemon-portrait"
 import { cc } from "../../pages/utils/jsx"
 import store from "../../stores"
 import type GameScene from "../scenes/game-scene"
 import "./emote-menu.css"
-import { Item, ItemComponents } from "../../../../types/enum/Item"
 
 export function EmoteMenuComponent(props: {
   player: IPlayer
@@ -33,7 +33,9 @@ export function EmoteMenuComponent(props: {
       ) : (
         <ul>
           {emotions.map((emotion, i) => {
-            const unlocked = store.getState().game.emotesUnlocked.includes(emotion)
+            const unlocked = store
+              .getState()
+              .game.emotesUnlocked.includes(emotion)
             return (
               <li key={emotion}>
                 <PokemonPortrait
@@ -48,7 +50,11 @@ export function EmoteMenuComponent(props: {
           })}
           <li key="ditto">
             <PokemonPortrait
-              portrait={{ index: "0132", shiny: false, emotion: Emotion.NORMAL}}
+              portrait={{
+                index: "0132",
+                shiny: false,
+                emotion: Emotion.NORMAL
+              }}
               title="Ditto"
               onClick={() => props.sendDittoEmote()}
             />
@@ -56,16 +62,27 @@ export function EmoteMenuComponent(props: {
         </ul>
       )}
       <ul className="item-emotes">
-        {ItemComponents.filter((item) => item !== Item.SILK_SCARF).map((item) => (
-          <li key={item} onClick={() => props.sendItemEmote(item)}>
-            <img src={`assets/item/${item}.png`} title={item} />
-          </li>
-        ))}
+        {ItemComponents.filter((item) => item !== Item.SILK_SCARF).map(
+          (item) => (
+            <li key={item} onClick={() => props.sendItemEmote(item)}>
+              <img src={`assets/item/${item}.png`} title={item} />
+            </li>
+          )
+        )}
       </ul>
       <ul className="text-emotes">
         {["ME", "YOU", "FREE ⛶", "⇌ ?", "✗", "OK"].map((text) => (
           <li key={text} onClick={() => props.sendTextEmote(text)}>
-            <span style={{ fontSize: "1.5em", fontWeight: "bold", padding: "4px 8px", cursor: "pointer" }}>{text}</span>
+            <span
+              style={{
+                fontSize: "1.5em",
+                fontWeight: "bold",
+                padding: "4px 8px",
+                cursor: "pointer"
+              }}
+            >
+              {text}
+            </span>
           </li>
         ))}
       </ul>

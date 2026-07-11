@@ -3,6 +3,10 @@ import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Dishes, type PkmWithCustom } from "../../../../../types"
 import {
+  FreeOptions,
+  PaidOptions
+} from "../../../../../types/enum/ArmoryOptions"
+import {
   Berries,
   CraftableItems,
   Item,
@@ -15,14 +19,13 @@ import {
   Wands
 } from "../../../../../types/enum/Item"
 import { isIn } from "../../../../../utils/array"
+import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
 import {
   type TierListSymbol,
   TierListSymbols
 } from "../tier-list/tier-list-symbols"
-import { FreeOptions, PaidOptions } from "../../../../../types/enum/ArmoryOptions"
-import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 
 export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
@@ -71,7 +74,10 @@ export default function ItemPicker(props: {
           {
             label: t("bundles"),
             key: "bundles",
-            items: [...Object.values(FreeOptions), ...Object.values(PaidOptions)] as unknown as Item[]
+            items: [
+              ...Object.values(FreeOptions),
+              ...Object.values(PaidOptions)
+            ] as unknown as Item[]
           }
         ]
       : []),
@@ -119,7 +125,11 @@ export default function ItemPicker(props: {
               className={cc("item", {
                 selected: item === props.selected
               })}
-              data-tooltip-id={t.key === "bundles" ? "bundle-detail-tooltip" : "item-detail-tooltip"} 
+              data-tooltip-id={
+                t.key === "bundles"
+                  ? "bundle-detail-tooltip"
+                  : "item-detail-tooltip"
+              }
               data-tooltip-content={item}
               onClick={() => props.selectEntity?.(item as Item)}
               draggable
@@ -129,7 +139,7 @@ export default function ItemPicker(props: {
         </TabPanel>
       ))}
       <ItemDetailTooltip />
-      <BundleDetailTooltip /> 
+      <BundleDetailTooltip />
     </Tabs>
   )
 }

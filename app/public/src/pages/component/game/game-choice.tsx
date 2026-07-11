@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
+import {
+  type ArmoryOptions,
+  ArmoryOptionsPrice
+} from "../../../../../types/enum/ArmoryOptions"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
   type Pkm,
@@ -13,7 +17,7 @@ import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import type { IDetailledPokemon } from "../../../models/bot-v2"
-import { pickChoice, pickArmoryGift } from "../../../network"
+import { pickArmoryGift, pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -21,7 +25,6 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-choice.css"
-import { ArmoryOptions, ArmoryOptionsPrice } from "../../../../../types/enum/ArmoryOptions"
 
 function isPokemonChoice(choice: PlayerChoice): boolean {
   return choice.pokemons.length > 0
@@ -200,7 +203,8 @@ export default function GameChoice() {
               </div>
             ))}
           </div>
-        ) : <div className="game-choice-items-list">
+        ) : (
+          <div className="game-choice-items-list">
             {choice.armoryOptions.map((option: ArmoryOptions, index) => (
               <div
                 className="my-box active clickable"
@@ -211,22 +215,39 @@ export default function GameChoice() {
                   pickArmoryGift(choice.id, index)
                 }}
               >
-                {<img
-                  style={{ width: "4rem", height: "4rem" }}
-                  src={"assets/item/" + option + ".png"}
-                />}
+                {
+                  <img
+                    style={{ width: "4rem", height: "4rem" }}
+                    src={"assets/item/" + option + ".png"}
+                  />
+                }
                 <h3 style={{ margin: "0.25em 0" }}>{t(`armory.${option}`)}</h3>
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`armory_description.${option}`))}
                 </p>
-                <p style={{ marginBottom: "0.5em", fontWeight: "bold", fontSize: "1.5rem"}}>
-                  {ArmoryOptionsPrice[option]} 
-                  <img className="icon-money" src="/assets/icons/money.svg" alt="$" style={{ marginLeft: "0.25em", width: "1.5rem", height: "1.5rem" }}/>
+                <p
+                  style={{
+                    marginBottom: "0.5em",
+                    fontWeight: "bold",
+                    fontSize: "1.5rem"
+                  }}
+                >
+                  {ArmoryOptionsPrice[option]}
+                  <img
+                    className="icon-money"
+                    src="/assets/icons/money.svg"
+                    alt="$"
+                    style={{
+                      marginLeft: "0.25em",
+                      width: "1.5rem",
+                      height: "1.5rem"
+                    }}
+                  />
                 </p>
               </div>
             ))}
           </div>
-        }
+        )}
 
         {isBenchFull && choice.pokemons.length > 0 && (
           <p>{t("player_choices.free_slot_hint")}</p>

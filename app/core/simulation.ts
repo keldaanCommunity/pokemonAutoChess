@@ -1541,8 +1541,8 @@ export default class Simulation extends Schema implements ISimulation {
           opponentTeam,
           this.stageLevel
         )
-        const isPVE = this.redPlayerId === "pve"
-        if (!isGhostPlayer && (isPVE || this.room.state.gameMode !== GameMode.DOUBLE_UP)) {
+        
+        if (!isGhostPlayer && !(this.room.state.gameMode === GameMode.DOUBLE_UP && !isPvE)) {
           player.life -= playerDamage
           if (playerDamage > 0) {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)

@@ -44,6 +44,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
+import { armoryGiftService } from "../services/armory-options"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -61,6 +62,7 @@ import {
   Transfer
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
+import { ArmoryOptionsPrice } from "../types/enum/ArmoryOptions"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
@@ -95,6 +97,7 @@ import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
+  OnCancelTradeOfferCommand,
   OnDevCommand,
   OnDragDropCombineCommand,
   OnDragDropItemCommand,
@@ -110,12 +113,9 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand,
-  OnCancelTradeOfferCommand
+  OnUpdateCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
-import { ArmoryOptionsPrice } from "../types/enum/ArmoryOptions"
-import { armoryGiftService } from "../services/armory-options"
 
 export default class GameRoom extends Room<{ state: GameState }> {
   dispatcher: Dispatcher<this>
@@ -173,6 +173,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
     }
 
+    if (gameMode === GameMode.DOUBLE_UP) {
+      noElo = true
+    }
+
     this.setMetadata(<IGameMetadata>{
       name,
       ownerName,
@@ -187,7 +191,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       bracketId
     })
 
-    if (gameMode === GameMode.DOUBLE_UP) noElo = true
     // logger.debug(options);
     this.state = new GameState(
       preparationId,
@@ -389,7 +392,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     this.onMessage(
       Transfer.ARMORY_GIFT,
-      (client, message: { choiceId: string; choiceIndex: number; partnerId: string }) => {
+      (
+        client,
+        message: { choiceId: string; choiceIndex: number; partnerId: string }
+      ) => {
         if (!this.state.gameFinished && client.auth) {
           try {
             this.pickGift(
@@ -1255,11 +1261,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  pickGift(
-    playerId: string,
-    choiceId: string,
-    choiceIndex: number
-  ) {
+  pickGift(playerId: string, choiceId: string, choiceIndex: number) {
     const player = this.state.players.get(playerId)
     if (!player) return
     const partner = this.state.players.get(player.doubleUpPartnerId)
@@ -1272,18 +1274,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
       choiceIndex >= choice.armoryOptions?.length
     )
       return
-    
-      
+
     if (choice.armoryOptions.length > 0) {
       const gift = choice.armoryOptions[choiceIndex]
-      if (gift && (player.money < ArmoryOptionsPrice[gift])) {
+      if (gift && player.money < ArmoryOptionsPrice[gift]) {
         // Show warning not enough gold
         return
       }
       const giftEffect = armoryGiftService[gift]
 
       // Process each gift - each armory option has its corresponding function to trigger
-      const res = giftEffect?.(partner, player);
+      const res = giftEffect?.(partner, player)
 
       if (!res) return
       player.doubleUpGifts.push(gift)
@@ -1466,14 +1467,35 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   rankPlayersDoubleUp() {
-    const teamMap = new Map<string, { life: number; level: number; ids: string[]; alive: boolean; eliminationRound: number }>() 
+    const teamMap = new Map<
+      string,
+      {
+        life: number
+        level: number
+        ids: string[]
+        alive: boolean
+        eliminationRound: number
+      }
+    >()
     this.state.players.forEach((player) => {
       if (!teamMap.has(player.doubleUpTeamId)) {
-        teamMap.set(player.doubleUpTeamId, { life: Infinity, level: 0, ids: [], alive: false, eliminationRound: 999 })
+        teamMap.set(player.doubleUpTeamId, {
+          life: Infinity,
+          level: 0,
+          ids: [],
+          alive: false,
+          eliminationRound: 999
+        })
       }
       const entry = teamMap.get(player.doubleUpTeamId)!
-      entry.eliminationRound = Math.min(entry.eliminationRound, player.doubleUpEliminationRound)
-      entry.life = Math.min(entry.life === 0 && entry.ids.length === 0 ? Infinity : entry.life, player.life)
+      entry.eliminationRound = Math.min(
+        entry.eliminationRound,
+        player.doubleUpEliminationRound
+      )
+      entry.life = Math.min(
+        entry.life === 0 && entry.ids.length === 0 ? Infinity : entry.life,
+        player.life
+      )
       entry.level += player.experienceManager.level
       entry.ids.push(player.id)
       entry.alive = entry.alive || player.alive
@@ -1496,7 +1518,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       })
     })
   }
-
 
   onRoomDeleted(roomId) {
     if (this.roomId === roomId) {

@@ -147,7 +147,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
-  sourcePlayer: Player | undefined = undefined
+  sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
 
   constructor(
     pokemon: IPokemon,
