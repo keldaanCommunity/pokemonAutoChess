@@ -64,18 +64,6 @@ export function RoomSelectionMenu(props: {
           </li>
           <li
             className="my-box"
-            onClick={() => props.onSelectMode(GameMode.CUSTOM_LOBBY)}
-          >
-            <img
-              src="assets/ui/game_modes/custom_lobby.png"
-              alt={t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}
-              draggable="false"
-            />
-            <h2>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</h2>
-            <p>{t(`game_modes_descriptions.${GameMode.CUSTOM_LOBBY}`)}</p>
-          </li>
-          <li
-            className="my-box"
             onClick={() => props.onSelectMode(GameMode.DOUBLE_UP)}
           >
             <img
@@ -85,6 +73,18 @@ export function RoomSelectionMenu(props: {
             />
             <h2>{t(`game_modes.${GameMode.DOUBLE_UP}`)}</h2>
             <p>{t(`game_modes_descriptions.${GameMode.DOUBLE_UP}`)}</p>
+          </li>
+          <li
+            className="my-box"
+            onClick={() => props.onSelectMode(GameMode.CUSTOM_LOBBY)}
+          >
+            <img
+              src="assets/ui/game_modes/custom_lobby.png"
+              alt={t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}
+              draggable="false"
+            />
+            <h2>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</h2>
+            <p>{t(`game_modes_descriptions.${GameMode.CUSTOM_LOBBY}`)}</p>
           </li>
         </ul>
       }
