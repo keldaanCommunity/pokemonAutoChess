@@ -13,19 +13,8 @@ export default function GamePlayers(props: { click: (id: string) => void }) {
   const teamColorMap = new Map<string, string>()
 
   if (isDoubleUp) {
-    const DOUBLE_UP_TEAM_COLORS = ["#f9e07f", "#f4a7b9", "#a8e6e6", "#b8e6a0"]
-    let colorIndex = 0
-    ;[...players]
-      .sort((a, b) => a.doubleUpTeamId.localeCompare(b.doubleUpTeamId))
-      .forEach((p, i) => {
-        if (p.doubleUpTeamId && !teamColorMap.has(p.doubleUpTeamId)) {
-          teamColorMap.set(
-            p.doubleUpTeamId,
-            DOUBLE_UP_TEAM_COLORS[colorIndex % DOUBLE_UP_TEAM_COLORS.length]
-          )
-          colorIndex++
-        }
-      })
+    const teams = [...new Set(players.map(p => p.doubleUpTeamId))]
+    teams.forEach((team, i) => teamColorMap.set(team, `var(--color-team${i+1})`))
   }
 
   const sortedPlayers = sortPlayersByRankAndTeam(players, gameMode)

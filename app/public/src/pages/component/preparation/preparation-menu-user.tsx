@@ -44,11 +44,8 @@ export default function PreparationMenuUser(props: {
   const isMe = props.user.uid === myUid
   const myPartner = users.find((u) => u.uid === myUid)?.doubleUpPartnerId
   const isPaired = myPartner === props.user.uid
-  const DOUBLE_UP_TEAM_COLORS = ["#f9e07f", "#f4a7b9", "#a8e6e6", "#b8e6a0"]
   const teamColor = isDoubleUp
-    ? DOUBLE_UP_TEAM_COLORS[
-        (props.colorIndex ?? 0) % DOUBLE_UP_TEAM_COLORS.length
-      ]
+    ? `var(--color-team${(props.colorIndex ?? 0) + 1})`
     : undefined
   const myReady = users.find((u) => u.uid === myUid)?.ready
 
