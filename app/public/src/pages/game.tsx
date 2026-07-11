@@ -49,6 +49,7 @@ import {
   useAppSelector
 } from "../hooks"
 import { authenticateUser, client, joinGame, rooms } from "../network"
+import { usePreference } from "../preferences"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -971,6 +972,11 @@ export default function Game() {
     connectToGame,
     leave
   ])
+
+  const [colorblindMode] = usePreference("colorblindMode")
+  useEffect(() => {
+    document.body.classList.toggle("colorblind-mode", colorblindMode)
+  }, [colorblindMode])
 
   return (
     <main id="game-wrapper" onContextMenu={(e) => e.preventDefault()}>

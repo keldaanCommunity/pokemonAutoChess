@@ -1187,7 +1187,9 @@
 		"KOMALA": "树枕尾熊",
 		"TAROUNTULA": "团珠蛛",
 		"SPIDOPS": "操陷蛛",
-		"SLITHER_WING": "爬地翅"
+		"BUG_NEST": "虫巢",
+		"SLITHER_WING": "爬地翅",
+		"PASSIMIAN": "投掷猴"
 	},
 	"rarity": {
 		"COMMON": "常见",
@@ -1771,7 +1773,9 @@
 		"NIGHT_DAZE": "暗黑爆破",
 		"BITTER_MALICE": "冤冤相报",
 		"COIL": "盘蜷",
-		"SUBSTITUTE": "替身"
+		"SUBSTITUTE": "替身",
+		"SWARM": "虫群呼唤",
+		"FLING": "投掷"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1967,7 +1971,7 @@
 		"GIGATON_HAMMER": "对目标造成[100,200,400,800,SP]点SPECIAL，但使用者自身陷入FATIGUE 6秒。",
 		"ACROBATICS": "对目标造成[20,40,80,160,SP]点SPECIAL，并移动至与目标有一定距离的单元格。若使用者没有携带任何道具，与目标的距离会进一步提升。",
 		"ABSORB": "对目标造成[30,60,120,240,SP]点SPECIAL，并为ADJACENT我方宝可梦恢复[3,6,12,24,SP]点HP。",
-		"ROLLOUT": "提升[2,5,10,20,SP]点DEF，随后对目标造成SPECIAL，数值相当于DEF乘以2。",
+		"ROLLOUT": "提升[2,5,10,20,SP]点DEF，随后对目标造成SPECIAL，数值相当于使用者[200,SP]%的DEF。",
 		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,300,SP]%的SPE_DEF加[10,20,30,60,SP]。",
 		"THRASH": "提升[100,100,120,150,SP]%的基础ATK，但陷入CONFUSION 3秒。",
 		"SOLAR_BEAM": "对目标身后的一条直线上的所有敌方宝可梦造成[25,50,100,200,SP]点SPECIAL，并使他们陷入BURN 3秒。若使用者被LIGHT共鸣的聚光灯照射或天气为ZENITH，造成的伤害提升30%，并恢复20点PP。",
@@ -2332,7 +2336,9 @@
 		"NIGHT_DAZE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入BLINDED [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
 		"BITTER_MALICE": "对目标造成[25,50,100,200,SP]点SPECIAL，并使其陷入FATIGUE [3,SP]秒。若使用者正在伪装为其他我方宝可梦，此招式额外影响目标的ADJACENT敌方宝可梦，随后使用者解除伪装。",
 		"COIL": "用强壮的尾巴抓住目标。使其陷入LOCKED和PARALYSIS 3秒。使用者提升自身[3,5,10,20,SP]点ATK和DEF。",
-		"SUBSTITUTE": "在使用者的位置创建一个HP为自身最大HP的[25,25,25,50,SP]%的替身。使用者移动至附近的空格子，所有原本以其为目标的敌方宝可梦改为以替身为目标。"
+		"SUBSTITUTE": "在使用者的位置创建一个HP为自身最大HP的[25,25,25,50,SP]%的替身。使用者移动至附近的空格子，所有原本以其为目标的敌方宝可梦改为以替身为目标。",
+		"SWARM": "从虫巢中召唤场上的一只我方BUG宝可梦的复制。每次释放此招式时，提升被召唤宝可梦的稀有度上限。",
+		"FLING": "若携带着BALL，本次投球时使用者和接球者之间的所有敌方宝可梦受到SPECIAL，数值相当于使用者[30,30,30,100,SP]%的SPEED。若未携带BALL，则改为跳至战场一角并获得一个新的BALL。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2511,7 +2517,7 @@
 		"COCOON": "复制1只BUG宝可梦。",
 		"INFESTATION": "复制2只BUG宝可梦。",
 		"HORDE": "复制3只BUG宝可梦。",
-		"HEART_OF_THE_SWARM": "复制5只BUG宝可梦。",
+		"HEART_OF_THE_SWARM": "复制4只BUG宝可梦，并获得一个虫巢。若备战区有空位，每轮结束时，获得我方BUG宝可梦中稀有度最低的未完全进化的那只宝可梦的一只复制。",
 		"TAILWIND": "在HP低于20%时会FLY_AWAY一次。",
 		"FEATHER_DANCE": "FLY_AWAY后，获得PROTECT 2秒。",
 		"MAX_AIRSTREAM": "在HP低于50%或20%时会各FLY_AWAY一次。",
@@ -2895,7 +2901,8 @@
 		"ROCK_HORN": "岩石号角",
 		"SKY_MELODICA": "飞空笛琴",
 		"TERRA_CYMBAL": "大地铙钹",
-		"SOOTHE_BELL": "安抚之铃"
+		"SOOTHE_BELL": "安抚之铃",
+		"BALL": "硬果球"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "某只远古时代生活着的宝可梦的化石。",
@@ -3226,7 +3233,8 @@
 		"ROCK_HORN": "商店中刷出ROCK宝可梦的概率提升5%。",
 		"SKY_MELODICA": "商店中刷出FLYING宝可梦的概率提升5%。",
 		"TERRA_CYMBAL": "商店中刷出GROUND宝可梦的概率提升5%。",
-		"SOOTHE_BELL": "对一只宝可梦使用，立即刷新商店，且本次刷新中所有商店中宝可梦与该宝可梦至少一项共鸣相同。"
+		"SOOTHE_BELL": "对一只宝可梦使用，立即刷新商店，且本次刷新中所有商店中宝可梦与该宝可梦至少一项共鸣相同。",
+		"BALL": "坚硬的树果制成的大球。释放招式时，同时将球抛给最远的我方FIELD宝可梦，使其获得这枚BALL和50点SHIELD。若没有能够携带道具的我方FIELD宝可梦，改为将球砸向最远的敌方宝可梦，对其造成PHYSICAL，数值相当于使用者[30,SP]%的SPEED。"
 	},
 	"passive_description": {
 		"NONE": "无被动能力",
@@ -3246,7 +3254,7 @@
 		"RKS_SYSTEM": "ＡＲ系统：$t(pkm.SILVALLY)会在返回备战区时卸下所有共鸣赋予道具，并获得对应共鸣的MEMORY_DISCS。",
 		"SUDOWOODO": "战斗开始时，装成一棵树，不会发起攻击，但每秒提升[2,4]点ATK（可叠加）。\nPP槽恢复至满时开始发起攻击。在此之前，无法陷入SILENCE或被扣除PP。",
 		"WOBBUFFET": "PP槽恢复至满时开始移动和发起攻击。在此之前，无法陷入SILENCE或被扣除PP。",
-		"DITTO": "将百变怪叠放在一只星级为STAR的我方宝可梦上，可以使其变形为那只宝可梦（无法变形为独特，传说或孵化宝可梦）。",
+		"DITTO": "将百变怪叠放在一只我方宝可梦上，可以使其变形为星级为STAR的那只宝可梦（无法变形为独特，传说或孵化宝可梦）。",
 		"EGG": "似乎有什么在里面一动一动……",
 		"HATCH": "孵化宝可梦每5轮自动进化一次。",
 		"SYNCHRO": "若此宝可梦因敌方宝可梦而陷入POISONNED、BURN，WOUND或SILENCE，施加者也会受到同样的效果。",
@@ -3357,7 +3365,7 @@
 		"ZYGARDE": "每个最大深度的坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
 		"GLIMMORA": "HP首次低于最大值的50%时，此宝可梦会向前方2x3的矩形投放毒菱，造成20点伤害。毒菱使走到其上的非POISON宝可梦陷入POISONNED。",
 		"PILLAR": "建造[1,1,2]根能够阻挡敌方宝可梦的立柱。立柱可以被移动，并会根据此宝可梦的STAR数量而具有对应的HP，DEF和SPE_DEF。",
-		"INANIMATE": "非生物单位无法被复制或出售。此类单位也无法主动移动或发起攻击，并免疫异常状态。",
+		"INANIMATE": "非生物单位无法被复制或出售、无法主动移动、发起攻击或携带道具，并免疫异常状态。",
 		"DRAMPA": "每当有宝可梦被此宝可梦的招式命中时，获得5点AP。",
 		"APPLIN": "啃果虫会根据所吃下的苹果决定进化型——\nSWEET_APPLE：$t(pkm.APPLETUN)\nTART_APPLE：$t(pkm.FLAPPLE)\nSIRUPY_APPLE：$t(pkm.DIPPLIN)",
 		"DIPPLIN": "裹蜜虫想要吃下一颗SIRUPY_APPLE……",
@@ -3421,7 +3429,8 @@
 		"VESPIQUEN": "蜂女王会根据对战开始时自身所处的横排改变RANGE和使用的招式。\n若蜂女王将被BUG共鸣复制，改为生成2只三蜜蜂。",
 		"ILLUSION": "此宝可梦会伪装为其左侧的我方宝可梦。",
 		"STOUTLAND_SEARCH": "长毛狗站在埋有隐藏道具的格子上时，会发出吠叫声。",
-		"SUBSTITUTE": "一个看起来像是宝可梦的替身。"
+		"SUBSTITUTE": "一个看起来像是宝可梦的替身。",
+		"PASSIMIAN": "投掷猴自身携带着一枚BALL。"
 	},
 	"stat": {
 		"ATK": "攻击",
@@ -4511,7 +4520,7 @@
 		"players_remaining": "存活玩家数",
 		"cancel_tournament_participation": "退出本次锦标赛，不再参加",
 		"register_tournament_participation": "注册为本场锦标赛的参赛者",
-		"registrations_open_info": "锦标赛正式开赛前一小时将关闭注册",
+		"registrations_open_info": "锦标赛正式开赛前一小时内可以注册",
 		"starts_at": "开始时间："
 	},
 	"npc_dialog": {

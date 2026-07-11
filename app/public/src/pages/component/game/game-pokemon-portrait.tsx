@@ -25,6 +25,7 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
+import { Rarity } from "../../../../../types/enum/Game"
 
 export function getCachedPortrait(
   index: string,
@@ -105,6 +106,17 @@ export default function GamePokemonPortrait(props: {
   const customs = spectatedPlayer?.pokemonCustoms
   const pokemonCustom = getPkmWithCustom(pokemon.index, customs)
   const rarityColor = RarityColor[pokemon.rarity]
+  const colorblindPatternPerRarity: Record<Rarity, string> = {
+    [Rarity.COMMON]: "",
+    [Rarity.UNCOMMON]: "colorblind-pattern-dots",
+    [Rarity.RARE]: "colorblind-pattern-horizontal-stripes",
+    [Rarity.EPIC]: "colorblind-pattern-diagonal-stripes",
+    [Rarity.ULTRA]: "colorblind-pattern-zigzag",
+    [Rarity.SPECIAL]: "colorblind-pattern-waves",
+    [Rarity.HATCH]: "",
+    [Rarity.UNIQUE]: "",
+    [Rarity.LEGENDARY]: ""
+  }
 
   const evolutionName = spectatedPlayer
     ? EvolutionManager.getEvolution(pokemon, spectatedPlayer)
@@ -213,7 +225,12 @@ export default function GamePokemonPortrait(props: {
           <Money value={cost} />
         </div>
       )}
-      <ul className="game-pokemon-portrait-types">
+      <ul
+        className={cc(
+          "game-pokemon-portrait-types",
+          colorblindPatternPerRarity[pokemon.rarity]
+        )}
+      >
         {Array.from(pokemonInPortrait.types.values()).map((type) => {
           return (
             <li
