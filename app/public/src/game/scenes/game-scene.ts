@@ -658,7 +658,6 @@ export default class GameScene extends Scene {
               dropZone.getData("y") == 0)
           ) {
             if (gameObject.name === "PRISON_BOTTLE" && this.room?.state.phase === GamePhaseState.PICK && dropZone.getData("y") === 0) {
-              console.log("prison bottle drop x:", dropZone.getData("x"), "y:", dropZone.getData("y"))
               this.board?.playItemDropAnimation(dropZone.getData("x"), 0)
             }
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
