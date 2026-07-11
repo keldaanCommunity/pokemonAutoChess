@@ -450,8 +450,6 @@ export default function Game() {
       initialized.current = true
 
       gameContainer = new GameContainer(container.current, uid, room)
-      // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
-      if (isReplayRoom(room)) gameContainer.spectate = true
 
       const gameElm = document.getElementById("game")
       gameElm?.addEventListener(Transfer.DRAG_DROP, ((

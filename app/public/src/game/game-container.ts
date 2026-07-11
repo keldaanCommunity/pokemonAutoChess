@@ -57,6 +57,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
+import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
 
 class GameContainer {
@@ -73,7 +74,8 @@ class GameContainer {
     this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    this.spectate = false
+    // a replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }
 
