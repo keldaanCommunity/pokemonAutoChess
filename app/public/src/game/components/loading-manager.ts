@@ -39,10 +39,6 @@ export default class LoadingManager {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
 
-    // skip cached multiatlases; a replay seek re-preloads the same keys
-    const multi = (key: string, url: string, path: string) => {
-      if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
-    }
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
@@ -58,7 +54,8 @@ export default class LoadingManager {
     scene.load.image("sun", "/assets/environment/sun.png")
     scene.load.image("clouds", "/assets/environment/clouds.png")
     scene.load.image("distort", "/assets/environment/noise.png")
-    multi(
+    loadMultiAtlas(
+      scene,
       "snowflakes",
       "/assets/environment/snowflakes.json",
       "/assets/environment/"
@@ -90,7 +87,8 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      multi(
+      loadMultiAtlas(
+        scene,
         atlas.packs[pack].name,
         `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
         `/assets/${pack}/`
@@ -116,35 +114,66 @@ export default class LoadingManager {
   }
 }
 
+// phaser dedupes queued files by key, but for a multiatlas that check only covers the json asset
+// itself: the texture files it references are injected into the loader queue on the fly, so
+// re-queuing a key whose textures are already in the TextureManager (a replay seek restarts the
+// scene and re-runs preload on a live game instance) re-downloads and re-decodes every texture,
+// then errors when re-adding it. skip the whole multiatlas when its texture already exists; live
+// games destroy the game (and its textures) between matches, so this never skips there
+function loadMultiAtlas(
+  scene: Phaser.Scene,
+  key: string,
+  url: string,
+  path: string
+) {
+  if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+}
+
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
-  // skip already cached atlases
-  const multi = (key: string, url: string, path: string) => {
-    if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
-  }
-  multi("portal", "/assets/environment/portal.json", "/assets/environment/")
-  multi("chest", "/assets/environment/chest.json", "/assets/environment/")
-  multi("shine", "/assets/environment/shine.json", "/assets/environment/")
-  multi(
+  loadMultiAtlas(
+    scene,
+    "portal",
+    "/assets/environment/portal.json",
+    "/assets/environment/"
+  )
+  loadMultiAtlas(
+    scene,
+    "chest",
+    "/assets/environment/chest.json",
+    "/assets/environment/"
+  )
+  loadMultiAtlas(
+    scene,
+    "shine",
+    "/assets/environment/shine.json",
+    "/assets/environment/"
+  )
+  loadMultiAtlas(
+    scene,
     "berry_trees",
     "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
     "/assets/environment/"
   )
-  multi(
+  loadMultiAtlas(
+    scene,
     "flower_pots",
     "/assets/environment/flower_pots.json",
     "/assets/environment/"
   )
-  multi(
+  loadMultiAtlas(
+    scene,
     "ground_holes",
     "/assets/environment/ground_holes.json",
     "/assets/environment/"
   )
-  multi(
+  loadMultiAtlas(
+    scene,
     "loading_pokeball",
     "/assets/environment/loading_pokeball.json",
     "/assets/environment/"
   )
-  multi(
+  loadMultiAtlas(
+    scene,
     "training_bag",
     "/assets/environment/training_bag.json",
     "/assets/environment/"
