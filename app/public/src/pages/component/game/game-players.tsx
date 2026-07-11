@@ -1,8 +1,8 @@
 import { GameMode } from "../../../../../types/enum/Game"
 import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
+import { sortPlayersByRankAndTeam } from "../../../models/sort-players"
 import GamePlayer from "./game-player"
-import { sortPlayersByRankAndTeam } from "./sort-players"
 import "./game-players.css"
 
 export default function GamePlayers(props: { click: (id: string) => void }) {

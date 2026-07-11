@@ -1,8 +1,12 @@
-import type { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../types"
+import { GameMode } from "../../../types/enum/Game"
 
-export function sortPlayersByRankAndTeam(players: IPlayer[], gameMode: string): IPlayer[] {
+export function sortPlayersByRankAndTeam(
+  players: IPlayer[],
+  gameMode: string
+): IPlayer[] {
   return [...players].sort((a, b) => {
-    if (gameMode === "DOUBLE_UP") {
+    if (gameMode === GameMode.DOUBLE_UP) {
       const aAlive = a.life > 0
       const bAlive = b.life > 0
       // Dead players always go below alive players

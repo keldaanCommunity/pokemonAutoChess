@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { ToastContainer } from "react-toastify"
 import { useAppSelector } from "../../../hooks"
-import { sortPlayersByRankAndTeam } from "./sort-players"
+import { sortPlayersByRankAndTeam } from "../../../models/sort-players"
 
 function GameToasts() {
   const players = useAppSelector((state) => state.game.players)
