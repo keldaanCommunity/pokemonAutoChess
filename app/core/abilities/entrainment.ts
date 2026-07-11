@@ -20,9 +20,9 @@ export class EntrainmentStrategy extends AbilityStrategy {
       const potentialTargets: { x: number; y: number; value: PokemonEntity }[] =
         []
       board.forEach(
-        (x: number, y: number, value: PokemonEntity | undefined) => {
-          if (value && value.team !== pokemon.team && value.hp > 0) {
-            potentialTargets.push({ x, y, value })
+        (x: number, y: number, entity?: PokemonEntity) => {
+          if (entity && entity.team !== pokemon.team && entity.hp > 0 && entity.skill !== Ability.ENTRAINMENT) {
+            potentialTargets.push({ x, y, value: entity })
           }
         }
       )

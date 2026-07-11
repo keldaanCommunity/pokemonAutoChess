@@ -54,6 +54,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 > Lapras can't enough nerfs. Back to 120PP for the third time.
 
 - Lapras DEF: 7 → 5 ; PP: 100 → 120
+- Change Entrainment (Audino): can no longer a target already entrained
+
 
 # Changes to Synergies
 
