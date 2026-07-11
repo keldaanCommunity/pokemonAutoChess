@@ -2,18 +2,7 @@
    (same right offset, clearing the right-edge portraits); draggable by its header and resizable, both persisted */
 
 .replay-eventlog {
-  /* per-category accent colors: one source for both the filter chip fill and the row type text */
-  --replay-eventlog-cat-combat: #ff9a8f;
-  --replay-eventlog-cat-status: #ff8fac;
-  --replay-eventlog-cat-stats: #ffab7a;
-  --replay-eventlog-cat-economy: #ffd479;
-  --replay-eventlog-cat-items: #e0a368;
-  --replay-eventlog-cat-flow: #8fd0ff;
-  --replay-eventlog-cat-synergy: #9be08f;
-  --replay-eventlog-cat-flavor: #c9a3ff;
-  --replay-eventlog-cat-positioning: #6fd6c4;
-  --replay-eventlog-cat-moves: #7ab6d6;
-  --replay-eventlog-cat-engine: #aab0b6;
+  /* per-category accent colors live in style/colors.css (--color-replay-cat-*) */
   position: fixed;
   /* top/left set inline by the component: default docks right, under the DPS meter; a drag switches to absolute top-left */
   z-index: 21;
@@ -229,34 +218,34 @@
 
 /* per-category accent (applied to the row type text always; to the chip fill when on) */
 .replay-eventlog-chip-combat.on {
-  background: var(--replay-eventlog-cat-combat);
+  background: var(--color-replay-cat-combat);
 }
 .replay-eventlog-chip-status.on {
-  background: var(--replay-eventlog-cat-status);
+  background: var(--color-replay-cat-status);
 }
 .replay-eventlog-chip-stats.on {
-  background: var(--replay-eventlog-cat-stats);
+  background: var(--color-replay-cat-stats);
 }
 .replay-eventlog-chip-economy.on {
-  background: var(--replay-eventlog-cat-economy);
+  background: var(--color-replay-cat-economy);
 }
 .replay-eventlog-chip-items.on {
-  background: var(--replay-eventlog-cat-items);
+  background: var(--color-replay-cat-items);
 }
 .replay-eventlog-chip-flow.on {
-  background: var(--replay-eventlog-cat-flow);
+  background: var(--color-replay-cat-flow);
 }
 .replay-eventlog-chip-synergy.on {
-  background: var(--replay-eventlog-cat-synergy);
+  background: var(--color-replay-cat-synergy);
 }
 .replay-eventlog-chip-flavor.on {
-  background: var(--replay-eventlog-cat-flavor);
+  background: var(--color-replay-cat-flavor);
 }
 .replay-eventlog-chip-positioning.on {
-  background: var(--replay-eventlog-cat-positioning);
+  background: var(--color-replay-cat-positioning);
 }
 .replay-eventlog-chip-engine.on {
-  background: var(--replay-eventlog-cat-engine);
+  background: var(--color-replay-cat-engine);
 }
 
 .replay-eventlog-list {
@@ -323,35 +312,35 @@
 
 /* per-category accent on the row type text */
 .replay-eventlog-cat-combat .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-combat);
+  color: var(--color-replay-cat-combat);
 }
 .replay-eventlog-cat-status .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-status);
+  color: var(--color-replay-cat-status);
 }
 .replay-eventlog-cat-stats .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-stats);
+  color: var(--color-replay-cat-stats);
 }
 .replay-eventlog-cat-economy .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-economy);
+  color: var(--color-replay-cat-economy);
 }
 .replay-eventlog-cat-items .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-items);
+  color: var(--color-replay-cat-items);
 }
 .replay-eventlog-cat-flow .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-flow);
+  color: var(--color-replay-cat-flow);
 }
 .replay-eventlog-cat-synergy .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-synergy);
+  color: var(--color-replay-cat-synergy);
 }
 .replay-eventlog-cat-flavor .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-flavor);
+  color: var(--color-replay-cat-flavor);
 }
 .replay-eventlog-cat-positioning .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-positioning);
+  color: var(--color-replay-cat-positioning);
 }
 .replay-eventlog-cat-moves .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-moves);
+  color: var(--color-replay-cat-moves);
 }
 .replay-eventlog-cat-engine .replay-eventlog-type {
-  color: var(--replay-eventlog-cat-engine);
+  color: var(--color-replay-cat-engine);
 }
