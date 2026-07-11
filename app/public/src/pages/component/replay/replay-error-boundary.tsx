@@ -1,5 +1,6 @@
 import { Component, type ReactNode } from "react"
 import i18n from "../../../i18n"
+import { getGameContainer } from "../../game"
 
 // the app has no error boundaries, so a render error blanks the whole tree; this contains them to the
 // replay viewer with a recoverable fallback (Resume re-mounts)
@@ -19,6 +20,13 @@ export default class ReplayErrorBoundary extends Component<
 
   componentDidCatch(error: Error) {
     console.error("[replay] contained render error:", error)
+    // the fallback replaces <Game/> without going through leave(), so nothing else destroys the
+    // orphaned phaser instance; kill it here or Resume boots a second one on top of it
+    try {
+      getGameContainer()?.game?.destroy(true)
+    } catch {
+      /* already torn down */
+    }
   }
 
   render() {
