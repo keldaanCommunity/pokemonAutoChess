@@ -44,7 +44,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
-import { armoryGiftService } from "../services/armory-options"
+import { GiftShopService } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -62,10 +62,10 @@ import {
   Transfer
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
-import { ArmoryOptionsPrice } from "../types/enum/ArmoryOptions"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
+import { GiftShopPrices } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -391,7 +391,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     )
 
     this.onMessage(
-      Transfer.ARMORY_GIFT,
+      Transfer.GIFT,
       (
         client,
         message: { choiceId: string; choiceIndex: number; partnerId: string }
@@ -1268,27 +1268,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (!partner) return
 
     const choice = player.choices.find((c) => c.id === choiceId)
-    if (
-      !choice ||
-      choiceIndex < 0 ||
-      choiceIndex >= choice.armoryOptions?.length
-    )
+    if (!choice || choiceIndex < 0 || choiceIndex >= choice.giftOptions?.length)
       return
 
-    if (choice.armoryOptions.length > 0) {
-      const gift = choice.armoryOptions[choiceIndex]
-      if (gift && player.money < ArmoryOptionsPrice[gift]) {
+    if (choice.giftOptions.length > 0) {
+      const gift = choice.giftOptions[choiceIndex]
+      if (gift && player.money < GiftShopPrices[gift]) {
         // Show warning not enough gold
         return
       }
-      const giftEffect = armoryGiftService[gift]
+      const giftEffect = GiftShopService[gift]
 
-      // Process each gift - each armory option has its corresponding function to trigger
+      // Process each gift - each option has its corresponding function to trigger
       const res = giftEffect?.(partner, player)
 
       if (!res) return
-      player.doubleUpGifts.push(gift)
-      player.money -= ArmoryOptionsPrice[gift]
+      player.giftsGiven.push(gift)
+      player.money -= GiftShopPrices[gift]
     }
 
     removeInArray(player.choices, choice)

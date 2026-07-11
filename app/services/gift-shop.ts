@@ -17,19 +17,24 @@ import {
   SynergyGivenByGem,
   Tools
 } from "../types"
-import {
-  type ArmoryOptions,
-  FreeOptions,
-  PaidOptions
-} from "../types/enum/ArmoryOptions"
 import { Rarity } from "../types/enum/Game"
+import {
+  FreeOptions,
+  type GiftShopOptions,
+  PaidOptions
+} from "../types/enum/GiftShop"
 import { Pkm, Unowns } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import {
   getFirstAvailablePositionInBench,
   getFreeSpaceOnBench
 } from "../utils/board"
-import { chance, pickNRandomIn, pickRandomIn, randomWeighted } from "../utils/random"
+import {
+  chance,
+  pickNRandomIn,
+  pickRandomIn,
+  randomWeighted
+} from "../utils/random"
 
 const giftAmountOfItem = (
   toPlayer: Player,
@@ -115,7 +120,8 @@ const giftHatchPokemon = (toPlayer: Player, amount: number): boolean => {
   const spaceInBench = getFreeSpaceOnBench(toPlayer.board)
   if (spaceInBench < amount) return false
 
-  if (chance(0.05)) { // 5% chance of getting a golden egg
+  if (chance(0.05)) {
+    // 5% chance of getting a golden egg
     const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
       (p) => getPokemonData(p).stars === 1
     )
@@ -175,7 +181,7 @@ const giftRandomPokemonByRarity = (
 
   const nbOfSynergies =
     rarity === Rarity.ULTRA || rarity === Rarity.LEGENDARY ? 2 : 1
-  var wantedSynergy = toPlayer.synergies.getTopSynergies(nbOfSynergies)
+  let wantedSynergy = toPlayer.synergies.getTopSynergies(nbOfSynergies)
   if (wantedSynergy.includes(Synergy.BABY)) {
     wantedSynergy = toPlayer.synergies.getTopSynergies(nbOfSynergies + 1)
     wantedSynergy.splice(wantedSynergy.indexOf(Synergy.BABY), 1)
@@ -297,8 +303,8 @@ const giftFoodAndPicnic = (toPlayer: Player): boolean => {
   return true
 }
 
-export const armoryGiftService: {
-  [key in ArmoryOptions]?: (toPlayer: Player, fromPlayer: Player) => boolean
+export const GiftShopService: {
+  [key in GiftShopOptions]?: (toPlayer: Player, fromPlayer: Player) => boolean
 } = {
   [FreeOptions.BERRYBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 7, "BERRIES"),

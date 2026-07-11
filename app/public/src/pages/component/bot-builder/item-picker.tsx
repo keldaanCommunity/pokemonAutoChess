@@ -5,7 +5,7 @@ import { Dishes, type PkmWithCustom } from "../../../../../types"
 import {
   FreeOptions,
   PaidOptions
-} from "../../../../../types/enum/ArmoryOptions"
+} from "../../../../../types/enum/GiftShop"
 import {
   Berries,
   CraftableItems,

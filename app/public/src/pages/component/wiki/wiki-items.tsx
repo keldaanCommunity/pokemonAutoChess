@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
+import { FreeOptions, PaidOptions } from "../../../../../types/enum/GiftShop"
 import {
   ArtificialItems,
   Berries,
@@ -24,11 +25,10 @@ import {
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { isIn } from "../../../../../utils/array"
+import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import SynergyIcon from "../icons/synergy-icon"
-import { FreeOptions, PaidOptions } from "../../../../../types/enum/ArmoryOptions"
-import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 
 function ItemList(props: { items: readonly Item[]; icon?: string }) {
   return props.items.map((i) => (
@@ -165,14 +165,17 @@ export default function WikiItems() {
         <h2>{t("wiki.items.bundles")}</h2>
         <p>{t("wiki.items.bundles_description")}</p>
         <ul className="town">
-          {[...Object.values(FreeOptions), ...Object.values(PaidOptions)].map((bundle) => (
-            <li key={bundle} data-tooltip-id="bundle-detail-tooltip" data-tooltip-content={bundle}>
-              <img
-                src={`assets/item/${bundle}.png`}
-                className="item"
-              />
-            </li>
-          ))}
+          {[...Object.values(FreeOptions), ...Object.values(PaidOptions)].map(
+            (bundle) => (
+              <li
+                key={bundle}
+                data-tooltip-id="bundle-detail-tooltip"
+                data-tooltip-content={bundle}
+              >
+                <img src={`assets/item/${bundle}.png`} className="item" />
+              </li>
+            )
+          )}
         </ul>
       </article>
 

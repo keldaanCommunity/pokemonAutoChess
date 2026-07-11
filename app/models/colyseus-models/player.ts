@@ -24,7 +24,6 @@ import {
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
-import type { ArmoryOptions } from "../../types/enum/ArmoryOptions"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import {
   BattleResult,
@@ -32,6 +31,7 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
+import type { GiftShopOptions } from "../../types/enum/GiftShop"
 import {
   AbilityPerTM,
   ArtificialItems,
@@ -122,8 +122,6 @@ export default class Player extends Schema implements IPlayer {
   @type("string") doubleUpTeamId: string = ""
   @type("uint8") doubleUpSendCooldown: number = 0
   @type("string") doubleUpTradeOffer: string = ""
-  @type("uint8") doubleUpEliminationRound: number = 999
-  @type(["string"]) doubleUpGifts = new ArraySchema<ArmoryOptions>()
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
@@ -178,6 +176,7 @@ export default class Player extends Schema implements IPlayer {
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
+  giftsGiven: GiftShopOptions[] = []
   flowerPotsSpawnOrder: FlowerPot[] = shuffleArray([...FlowerPots])
   lightX: number
   lightY: number
@@ -195,6 +194,7 @@ export default class Player extends Schema implements IPlayer {
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
   unownReminiscences: number = 0
+  doubleUpEliminationRound: number = 999
 
   constructor(
     id: string,

@@ -17,7 +17,6 @@ import type GameRoom from "../rooms/game-room"
 import type { AttackSprite } from "./Animation"
 import type { EvolutionRule } from "./EvolutionRules"
 import type { Ability } from "./enum/Ability"
-import type { ArmoryOptions } from "./enum/ArmoryOptions"
 import type { DungeonPMDO } from "./enum/Dungeon"
 import type { BoardEffect, EffectEnum } from "./enum/Effect"
 import type { EloRank } from "./enum/EloRank"
@@ -140,7 +139,7 @@ export enum Transfer {
   DEV = "DEV",
   CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
   SELECT_PARTNER = "SELECT_PARTNER",
-  ARMORY_GIFT = "ARMORY_GIFT"
+  GIFT = "GIFT"
 }
 
 export enum ReadWriteMode {
@@ -263,8 +262,6 @@ export interface IPlayer {
   interest: number
   doubleUpPartnerId: string
   doubleUpTeamId: string
-  doubleUpEliminationRound: number
-  doubleUpGifts: ArraySchema<ArmoryOptions>
   opponentId: string
   opponentName: string
   opponentAvatar: string

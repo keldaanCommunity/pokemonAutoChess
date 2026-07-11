@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
 import {
-  type ArmoryOptions,
-  ArmoryOptionsPrice
-} from "../../../../../types/enum/ArmoryOptions"
+  type GiftShopOptions,
+  GiftShopPrices
+} from "../../../../../types/enum/GiftShop"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
   type Pkm,
@@ -17,7 +17,7 @@ import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import type { IDetailledPokemon } from "../../../models/bot-v2"
-import { pickArmoryGift, pickChoice } from "../../../network"
+import { pickChoice, pickGift } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -90,8 +90,8 @@ export default function GameChoice() {
     message = t("player_choices.choose_item")
   } else if (choice.type === "wand") {
     message = t("player_choices.choose_wand")
-  } else if (choice.type === "armory_assist") {
-    message = t("player_choices.choose_armory")
+  } else if (choice.type === "gifts") {
+    message = t("player_choices.choose_gift")
   }
 
   return (
@@ -205,14 +205,14 @@ export default function GameChoice() {
           </div>
         ) : (
           <div className="game-choice-items-list">
-            {choice.armoryOptions.map((option: ArmoryOptions, index) => (
+            {choice.giftOptions.map((option: GiftShopOptions, index) => (
               <div
                 className="my-box active clickable"
                 key={`${choice.id}-${index}`}
                 onClick={(event) => {
                   event.stopPropagation()
                   playSound(SOUNDS.BUTTON_CLICK)
-                  pickArmoryGift(choice.id, index)
+                  pickGift(choice.id, index)
                 }}
               >
                 {
@@ -221,9 +221,9 @@ export default function GameChoice() {
                     src={"assets/item/" + option + ".png"}
                   />
                 }
-                <h3 style={{ margin: "0.25em 0" }}>{t(`armory.${option}`)}</h3>
+                <h3 style={{ margin: "0.25em 0" }}>{t(`item.${option}`)}</h3>
                 <p style={{ marginBottom: "0.5em" }}>
-                  {addIconsToDescription(t(`armory_description.${option}`))}
+                  {addIconsToDescription(t(`item_description.${option}`))}
                 </p>
                 <p
                   style={{
@@ -232,7 +232,7 @@ export default function GameChoice() {
                     fontSize: "1.5rem"
                   }}
                 >
-                  {ArmoryOptionsPrice[option]}
+                  {GiftShopPrices[option]}
                   <img
                     className="icon-money"
                     src="/assets/icons/money.svg"

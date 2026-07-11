@@ -228,8 +228,8 @@ export function pickChoice(choiceId: string, choiceIndex: number) {
   rooms.game?.send(Transfer.CHOICE, { choiceId, choiceIndex })
 }
 
-export function pickArmoryGift(choiceId: string, choiceIndex: number){
-  rooms.game?.send(Transfer.ARMORY_GIFT, { choiceId, choiceIndex })
+export function pickGift(choiceId: string, choiceIndex: number) {
+  rooms.game?.send(Transfer.GIFT, { choiceId, choiceIndex })
 }
 
 export function gameStartRequest(token: string) {

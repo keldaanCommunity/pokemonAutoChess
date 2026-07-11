@@ -3,10 +3,10 @@ import { SetSchema, StateView } from "@colyseus/schema"
 import { type Client, updateLobby } from "colyseus"
 import {
   AdditionalPicksStages,
-  ArmoryAssistStages,
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
+  GiftShopStages,
   GOLDEN_BERRY_TREE_TYPES,
   getAltFormForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
@@ -74,11 +74,6 @@ import {
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
-import {
-  type ArmoryOptions,
-  FreeOptions,
-  PaidOptions
-} from "../../types/enum/ArmoryOptions"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import {
@@ -89,6 +84,11 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
+import {
+  FreeOptions,
+  type GiftShopOptions,
+  PaidOptions
+} from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
@@ -1670,7 +1670,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (
       this.state.gameMode === GameMode.DOUBLE_UP &&
-      ArmoryAssistStages.includes(this.state.stageLevel)
+      GiftShopStages.includes(this.state.stageLevel)
     ) {
       const firstGroup: Player[] = []
       const secondGroup: Player[] = []
@@ -1680,32 +1680,32 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         else secondGroup.push(p)
       })
       const partnersToPrompt =
-        this.state.stageLevel === ArmoryAssistStages[0] ||
-        this.state.stageLevel === ArmoryAssistStages[2]
+        this.state.stageLevel === GiftShopStages[0] ||
+        this.state.stageLevel === GiftShopStages[2]
           ? firstGroup
           : secondGroup
 
       partnersToPrompt.forEach((p) => {
-        const armoryChoices: ArmoryOptions[] = []
-        armoryChoices.push(
+        const giftChoices: GiftShopOptions[] = []
+        giftChoices.push(
           pickRandomIn(
             [...Object.values(FreeOptions)].filter(
-              (gift) => !p.doubleUpGifts.includes(gift)
+              (gift) => !p.giftsGiven.includes(gift)
             )
           )
         )
         const paidOptions = pickNRandomIn(
           [...Object.values(PaidOptions)].filter(
-            (gift) => !p.doubleUpGifts.includes(gift)
+            (gift) => !p.giftsGiven.includes(gift)
           ),
           2
         )
-        paidOptions.forEach((op) => armoryChoices.push(op))
+        paidOptions.forEach((op) => giftChoices.push(op))
 
         p.choices.push(
           new PlayerChoice({
-            type: "armory_assist",
-            armoryOptions: armoryChoices
+            type: "gifts",
+            giftOptions: giftChoices
           })
         )
       })
