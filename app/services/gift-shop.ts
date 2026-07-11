@@ -18,11 +18,7 @@ import {
   Tools
 } from "../types"
 import { Rarity } from "../types/enum/Game"
-import {
-  FreeOptions,
-  type GiftShopOptions,
-  PaidOptions
-} from "../types/enum/GiftShop"
+import type { Gift } from "../types/enum/GiftShop"
 import { Pkm, Unowns } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import {
@@ -304,49 +300,49 @@ const giftFoodAndPicnic = (toPlayer: Player): boolean => {
 }
 
 export const GiftShopService: {
-  [key in GiftShopOptions]?: (toPlayer: Player, fromPlayer: Player) => boolean
+  [key in Gift]?: (toPlayer: Player, fromPlayer: Player) => boolean
 } = {
-  [FreeOptions.BERRYBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.BERRY_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 7, "BERRIES"),
-  [FreeOptions.SWEETSBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.SWEETS_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 7, "SWEETS"),
-  [FreeOptions.UNOWNBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.UNOWN_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfPokemon(toPlayer, 5, Pkm.UNOWN_A),
-  [FreeOptions.DITTOBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.DITTO_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfPokemon(toPlayer, 1, Pkm.DITTO),
-  [FreeOptions.TICKETBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.TICKET_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftSetOfItems(toPlayer, "TICKETS"),
-  [FreeOptions.HATCHBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.HATCH_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftHatchPokemon(toPlayer, 2),
-  [FreeOptions.REGIONBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.REGION_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftSetOfItems(toPlayer, "REGION"),
-  [FreeOptions.COOKINGBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.COOKING_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftFoodAndPicnic(toPlayer),
 
-  [PaidOptions.EVOLVEBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.EVOLVE_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     evolveRandomPokemonInBoard(toPlayer),
-  [PaidOptions.GEMSBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.GEMS_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 3, "GEMS"),
-  [PaidOptions.POTION]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.POTION]: (toPlayer: Player, fromPlayer: Player) =>
     giftPotion(toPlayer, fromPlayer),
-  [PaidOptions.DELUXE_BOX]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.DELUXE_BOX]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 2, "COMBINED_ITEMS"),
-  [PaidOptions.TOOLBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.TOOL_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftAmountOfItem(toPlayer, 3, "TOOLS"),
-  [PaidOptions.COMMONBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.COMMON_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.COMMON),
-  [PaidOptions.UNCOMMONBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.UNCOMMON_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.UNCOMMON),
-  [PaidOptions.RAREBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.RARE_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.RARE),
-  [PaidOptions.EPICBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.EPIC_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.EPIC),
-  [PaidOptions.ULTRABUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.ULTRA_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.ULTRA),
-  [PaidOptions.UNIQUEBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.UNIQUE_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.UNIQUE),
-  [PaidOptions.LEGENDARYBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.LEGENDARY_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftRandomPokemonByRarity(toPlayer, Rarity.LEGENDARY),
-  [PaidOptions.EXPBUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
+  [Item.EXP_BUNDLE]: (toPlayer: Player, fromPlayer: Player) =>
     giftExperienceAndRaiseLevelCap(toPlayer)
 }

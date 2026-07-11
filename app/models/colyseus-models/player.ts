@@ -31,7 +31,7 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
-import type { GiftShopOptions } from "../../types/enum/GiftShop"
+import type { Gift } from "../../types/enum/GiftShop"
 import {
   AbilityPerTM,
   ArtificialItems,
@@ -176,7 +176,7 @@ export default class Player extends Schema implements IPlayer {
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
-  giftsGiven: GiftShopOptions[] = []
+  giftsGiven: Gift[] = []
   flowerPotsSpawnOrder: FlowerPot[] = shuffleArray([...FlowerPots])
   lightX: number
   lightY: number

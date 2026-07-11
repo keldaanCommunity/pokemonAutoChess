@@ -84,11 +84,7 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
-import {
-  FreeOptions,
-  type GiftShopOptions,
-  PaidOptions
-} from "../../types/enum/GiftShop"
+import { FreeGifts, type Gift, PaidGifts } from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
@@ -1686,18 +1682,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           : secondGroup
 
       partnersToPrompt.forEach((p) => {
-        const giftChoices: GiftShopOptions[] = []
+        const giftChoices: Gift[] = []
         giftChoices.push(
-          pickRandomIn(
-            [...Object.values(FreeOptions)].filter(
-              (gift) => !p.giftsGiven.includes(gift)
-            )
-          )
+          pickRandomIn(FreeGifts.filter((gift) => !p.giftsGiven.includes(gift)))
         )
         const paidOptions = pickNRandomIn(
-          [...Object.values(PaidOptions)].filter(
-            (gift) => !p.giftsGiven.includes(gift)
-          ),
+          PaidGifts.filter((gift) => !p.giftsGiven.includes(gift)),
           2
         )
         paidOptions.forEach((op) => giftChoices.push(op))

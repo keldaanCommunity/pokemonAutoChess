@@ -4255,7 +4255,7 @@
 	"tm_short": "TM",
 	"special_items": "Special Items",
 	"wands": "Wands",
-	"bundles": "Bundles",
+	"gifts": "Gifts",
 	"shiny_items": "Shiny Items",
 	"inimitable": "Inimitable",
 	"news": "News",
@@ -4783,8 +4783,8 @@
 			"wands_description": "Wands give additional effects to FAIRY Pokémon attacks.",
 			"cell_battery_description": "After reaching max level in ELECTRIC synergy, your Pokémon charge CELL_BATTERY with their attacks, that you can consume to supercharge an ELECTRIC Pokémon for the next fight.",
 			"fire_shard_description": "After reaching max level in FIRE synergy, every round you can use FIRE_SHARD to sacrifice your player HP and buff a FIRE Pokémon.",
-      "bundles": "Bundles",
-      "bundles_description": "Bundles are gifts for the game mode Double Up"
+      		"gifts": "Gifts",
+      		"gifts_description": "Gifts can be given to your partner in the Double Up game mode"
 		},
 		"statistics": {
 			"stat_description": {

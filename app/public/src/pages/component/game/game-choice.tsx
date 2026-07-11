@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
-import {
-  type GiftShopOptions,
-  GiftShopPrices
-} from "../../../../../types/enum/GiftShop"
+import { type Gift, GiftShopPrices } from "../../../../../types/enum/GiftShop"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
   type Pkm,
@@ -205,7 +202,7 @@ export default function GameChoice() {
           </div>
         ) : (
           <div className="game-choice-items-list">
-            {choice.giftOptions.map((option: GiftShopOptions, index) => (
+            {choice.giftOptions.map((option: Gift, index) => (
               <div
                 className="my-box active clickable"
                 key={`${choice.id}-${index}`}

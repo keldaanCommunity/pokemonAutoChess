@@ -2,10 +2,7 @@ import { t } from "i18next"
 import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Dishes, type PkmWithCustom } from "../../../../../types"
-import {
-  FreeOptions,
-  PaidOptions
-} from "../../../../../types/enum/GiftShop"
+import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   Berries,
   CraftableItems,
@@ -19,7 +16,6 @@ import {
   Wands
 } from "../../../../../types/enum/Item"
 import { isIn } from "../../../../../utils/array"
-import { BundleDetailTooltip } from "../../../game/components/bundle-detail"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { cc } from "../../utils/jsx"
 import {
@@ -69,18 +65,12 @@ export default function ItemPicker(props: {
       items: Wands,
       hidden: props.origin === "team-planner" || props.origin === "bot-builder"
     },
-    ...(props.showUnholdableItems
-      ? [
-          {
-            label: t("bundles"),
-            key: "bundles",
-            items: [
-              ...Object.values(FreeOptions),
-              ...Object.values(PaidOptions)
-            ] as unknown as Item[]
-          }
-        ]
-      : []),
+    {
+      label: t("gifts"),
+      key: "gifts",
+      items: Gifts,
+      hidden: props.origin === "team-planner" || props.origin === "bot-builder"
+    },
     {
       label: t("special_items"),
       key: "special_items",
@@ -118,28 +108,37 @@ export default function ItemPicker(props: {
       </TabList>
       {tabs.map((t) => (
         <TabPanel key={t.key}>
-          {t.items.map((item) => (
-            <img
-              key={item}
-              src={"assets/item/" + item + ".png"}
-              className={cc("item", {
-                selected: item === props.selected
-              })}
-              data-tooltip-id={
-                t.key === "bundles"
-                  ? "bundle-detail-tooltip"
-                  : "item-detail-tooltip"
-              }
-              data-tooltip-content={item}
-              onClick={() => props.selectEntity?.(item as Item)}
-              draggable
-              onDragStart={(e) => handleOnDragStart(e, item)}
-            />
-          ))}
+          {t.items.map((item) => {
+            if (isIn(TierListSymbols, item)) {
+              return (
+                <img
+                  key={item}
+                  src={"assets/ui/" + item.toLowerCase() + ".svg"}
+                  className={"symbol"}
+                  draggable
+                  onDragStart={(e) => handleOnDragStart(e, item)}
+                />
+              )
+            } else {
+              return (
+                <img
+                  key={item}
+                  src={"assets/item/" + Item[item] + ".png"}
+                  className={cc("item", {
+                    selected: item === props.selected
+                  })}
+                  data-tooltip-id="item-detail-tooltip"
+                  data-tooltip-content={item}
+                  onClick={() => props.selectEntity?.(item)}
+                  draggable
+                  onDragStart={(e) => handleOnDragStart(e, item)}
+                />
+              )
+            }
+          })}
         </TabPanel>
       ))}
       <ItemDetailTooltip />
-      <BundleDetailTooltip />
     </Tabs>
   )
 }
