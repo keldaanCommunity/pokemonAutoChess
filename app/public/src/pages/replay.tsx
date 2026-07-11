@@ -53,33 +53,11 @@ const RUNNING_BUILD = {
   serializerId: "schema"
 }
 
-// own-POV action controls (lock/reroll/buy xp/buy) hit the no-op ReplayRoom.send, clickable but inert; swallow
-// their clicks in the capture phase rather than edit those components (board is already read-only via spectate)
-const READONLY_CONTROLS =
-  ".game-shop-actions .lock-icon," +
-  ".game-shop-actions .refresh-button," +
-  ".game-experience .buy-xp-button," +
-  ".game-pokemons-store .game-pokemon-portrait.clickable," +
-  ".game-choice .clickable"
-
+// styling hooks only (replay-readonly.css): the game ui itself stays inert through the no-op
+// ReplayRoom.send and the spectate flag, so clicks don't need to be intercepted
 function installReadonlyGuard(): () => void {
   document.body.classList.add("replay-mode")
-  const block = (e: Event) => {
-    const target = e.target
-    if (target instanceof Element && target.closest(READONLY_CONTROLS)) {
-      e.stopPropagation()
-      e.preventDefault()
-    }
-  }
-  // suppress native context menu: replay overlays sit outside #game-wrapper (the only node the game blocks), so a capture-phase handler stops right-click escaping to the browser menu
-  const blockContextMenu = (e: Event) => e.preventDefault()
-  document.addEventListener("click", block, true)
-  document.addEventListener("contextmenu", blockContextMenu, true)
-  return () => {
-    document.body.classList.remove("replay-mode")
-    document.removeEventListener("click", block, true)
-    document.removeEventListener("contextmenu", blockContextMenu, true)
-  }
+  return () => document.body.classList.remove("replay-mode")
 }
 
 // replay viewer: load a `.colreplay`, present it to <Game/> as a ReplayRoom (no server, no re-sim; the recorded
@@ -453,7 +431,8 @@ export default function Replay() {
       </div>
     )
   return (
-    <>
+    // suppress the native context menu over the viewer overlays too: they sit outside #game-wrapper, the only node the game blocks
+    <div onContextMenu={(e) => e.preventDefault()}>
       {/* <Game/> mounts once and stays mounted; seeks re-attach in place, so Phaser and its assets persist; `gen` keys a boundary per mount */}
       {showGame && (
         <ReplayErrorBoundary key={gen}>
@@ -500,7 +479,7 @@ export default function Replay() {
           onClose={() => setEventLogOpen(false)}
         />
       )}
-    </>
+    </div>
   )
 }
 
