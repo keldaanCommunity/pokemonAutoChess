@@ -1,9 +1,15 @@
-.emote-menu ul {
+.emote-menu .emotions-emotes {
   padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 4px;
+}
+
+.emote-menu ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
 }
 
 .emote-menu li {
@@ -42,13 +48,36 @@
 .emote-menu li img:not(.locked) {
   cursor: var(--cursor-hover);
 }
+
+.emote-menu .double-up-emotes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .emote-menu .item-emotes {
+  display: flex;
   background-color: var(--color-bg-primary);
+}
+
+.emote-menu .item-emotes li img {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
+.emote-menu .pkm-emotes {
+  display: flex;
+}
+
+.emote-menu .pkm-emotes li img {
+  width: 70px;
+  height: 70px;
 }
 
 .emote-menu .text-emotes {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
   margin-top: 4px;
 }
@@ -62,19 +91,12 @@
   box-shadow: 2px 2px #00000060;
   cursor: var(--cursor-hover);
   background-color: var(--color-bg-secondary);
-  min-height: 48px;
 }
 
 .emote-menu .text-emotes li span {
   color: white;
   text-shadow: 1px 1px 2px black;
-  font-size: 1.8em;
+  font-size: 1.2em;
   font-weight: bold;
-}
-.emote-menu ul {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 4px;
+  cursor: pointer;
 }

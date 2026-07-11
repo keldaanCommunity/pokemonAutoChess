@@ -4586,6 +4586,16 @@
 		"kecleon_preview": "The gift shop is coming up! Hold your gold and free your bench space, kec kec kec!",
 		"kecleon": "Kecleon"
 	},
+	"player_dialog": {
+		"YES": "YES",
+  		"NO": "NO",
+		"QM": "?",
+		"OK": "OK",
+		"ME": "ME",
+		"YOU": "YOU",
+		"TRADE": "⇌ TRADE ?",
+		"HELP": "HELP!"
+	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Everyone is here !",
 		"UNIQUE_STARTER": "Unique Starter",

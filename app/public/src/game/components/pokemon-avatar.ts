@@ -3,10 +3,18 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AvatarEmotions,
+  CollectionEmotions,
   Emotion,
   type IPokemonAvatar
 } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
+import {
+  type PlayerDialog,
+  PlayerDialogs
+} from "../../../../types/enum/PlayerDialog"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { isIn } from "../../../../utils/array"
 import { getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
 import { showEmote } from "../../network"
@@ -19,7 +27,6 @@ import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
-import { Item, ItemComponents } from "../../../../types/enum/Item"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene
@@ -66,9 +73,6 @@ export default class PokemonAvatar extends PokemonSprite {
     }
     this.setDepth(DEPTH.POKEMON)
     this.sendEmote = throttle(this.sendEmote, 1000).bind(this)
-    this.sendItemEmote = this.sendItemEmote.bind(this)
-    this.sendTextEmote = this.sendTextEmote.bind(this)
-    this.sendDittoEmote = this.sendDittoEmote.bind(this)
   }
 
   registerKeys() {
@@ -219,11 +223,7 @@ export default class PokemonAvatar extends PokemonSprite {
         this.scene as GameScene,
         this.pokemon.index,
         this.pokemon.shiny,
-        this.sendEmote,
-        this.sendItemEmote,
-        this.sendTextEmote,
-        this.sendDittoEmote
-
+        this.sendEmote
       )
       this.add(this.emoteMenu)
     }
@@ -241,14 +241,23 @@ export default class PokemonAvatar extends PokemonSprite {
     else this.showEmoteMenu()
   }
 
-  sendEmote(emotion: Emotion) {
+  sendEmote(emote: Emotion | Item | Pkm | PlayerDialog) {
     const state = store.getState()
-    if (state.game.emotesUnlocked.includes(emotion)) {
-      showEmote(
-        getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
-      )
-      this.hideEmoteMenu()
+    if (isIn(CollectionEmotions, emote)) {
+      if (state.game.emotesUnlocked.includes(emote)) {
+        showEmote(
+          getAvatarString(this.pokemon.index, this.pokemon.shiny, emote)
+        )
+      }
+    } else if (emote in Pkm) {
+      showEmote(getAvatarString(PkmIndex[emote], false, Emotion.NORMAL))
+    } else if (emote in Item) {
+      showEmote("item/" + emote)
+    } else if (isIn(PlayerDialogs, emote)) {
+      showEmote("player_dialog/" + emote)
     }
+
+    this.hideEmoteMenu()
   }
 
   playAnimation() {
@@ -275,19 +284,5 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.playAnimation()
     }
-  }
-
-  sendDittoEmote() {
-    showEmote(getAvatarString("0132", false, Emotion.NORMAL))
-    this.hideEmoteMenu()
-  }
-  sendItemEmote(item: Item) {
-    console.log("sendItemEmote", item)
-    showEmote("item/" + item)
-    this.hideEmoteMenu()
-  }
-  sendTextEmote(text: string) {
-    showEmote("text/" + text)
-    this.hideEmoteMenu()
   }
 }

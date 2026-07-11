@@ -189,6 +189,12 @@ p:last-child {
   image-rendering: pixelated;
 }
 
+.game-emote-bubble.item-emote img {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
 .game-emote-bubble::after {
   content: "";
   position: absolute;
