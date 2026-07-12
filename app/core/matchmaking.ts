@@ -71,9 +71,13 @@ function completeMatchupCombination(
         remainingPlayers.includes(m.redPlayer)
     )
     if (remainingMatchups.length === 0) {
-      console.error(
-        "no more matchups but at least 2 players without matchup, this case should not happen"
-      )
+      /* 
+       No more matchups but at least 2 players without matchup
+       this case should only happen in double up mode,
+       when you got AB-CD-EF as player teams and get into the case AD-BC-EF matchup combination.
+       E and F are in the same team so zero matchups remain and 2 players still have no match 
+       returning empty array to the flatMap excludes that branch of matchups completely
+       */
       return []
     }
     return remainingMatchups.flatMap((m) =>
