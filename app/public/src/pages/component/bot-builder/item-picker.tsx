@@ -27,7 +27,6 @@ export default function ItemPicker(props: {
   selected?: PkmWithCustom | Item
   selectEntity?: React.Dispatch<React.SetStateAction<PkmWithCustom | Item>>
   origin: "tier-list" | "bot-builder" | "team-planner"
-  showUnholdableItems?: boolean
 }) {
   function handleOnDragStart(e: React.DragEvent, item: Item | TierListSymbol) {
     e.stopPropagation()
