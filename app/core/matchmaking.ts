@@ -71,7 +71,9 @@ function completeMatchupCombination(
         remainingPlayers.includes(m.redPlayer)
     )
     if (remainingMatchups.length === 0) {
-      // no more matchups, need to complete with a ghost matchup
+      console.error(
+        "no more matchups but at least 2 players without matchup, this case should not happen"
+      )
       return []
     }
     return remainingMatchups.flatMap((m) =>
