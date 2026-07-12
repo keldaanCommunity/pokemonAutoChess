@@ -371,7 +371,7 @@ export default function PreparationMenu() {
         {gameMode === GameMode.DOUBLE_UP
           ? (() => {
               const paired: Set<string> = new Set()
-              const groups: IGameUser[][] = []
+              const teams: IGameUser[][] = []
               users.forEach((u) => {
                 if (paired.has(u.uid)) return
                 const partner = users.find(
@@ -382,28 +382,38 @@ export default function PreparationMenu() {
                     !paired.has(p.uid) // add this check
                 )
                 if (partner) {
-                  groups.push([u, partner])
+                  teams.push([u, partner])
                   paired.add(u.uid)
                   paired.add(partner.uid)
                 } else {
-                  groups.push([u])
+                  teams.push([u])
                 }
               })
-              return groups.map((group, colorIndex) => (
-                <div
-                  key={group.map((u) => u.uid).join("-")}
-                  className={`double-up-pair ${group.length === 2 ? "paired" : "unpaired"}`}
-                >
-                  {group.map((u) => (
-                    <PreparationMenuUser
-                      key={u.uid}
-                      user={u}
-                      isOwner={isOwner}
-                      ownerId={ownerId}
-                      colorIndex={colorIndex}
+              return teams.map((team, teamIndex) => (
+                <>
+                  <p className="team-name">
+                    <div
+                      className="team-color-indicator"
+                      style={{
+                        backgroundColor: `var(--color-team${teamIndex + 1})`
+                      }}
                     />
-                  ))}
-                </div>
+                    {t("team_name", { name: teamIndex + 1 })}
+                  </p>
+                  <div
+                    key={team.map((u) => u.uid).join("-")}
+                    className={`double-up-pair ${team.length === 2 ? "paired" : "unpaired"}`}
+                  >
+                    {team.map((u) => (
+                      <PreparationMenuUser
+                        key={u.uid}
+                        user={u}
+                        isOwner={isOwner}
+                        ownerId={ownerId}
+                      />
+                    ))}
+                  </div>
+                </>
               ))
             })()
           : users.map((u) => (

@@ -4,7 +4,6 @@ import { Role } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 import { kick, removeBot, selectPartner } from "../../../network"
-import { preference } from "../../../preferences"
 import { RemoveButton } from "../buttons/remove-button"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
@@ -15,7 +14,6 @@ export default function PreparationMenuUser(props: {
   user: IGameUser
   isOwner: boolean
   ownerId: string
-  colorIndex?: number
 }) {
   const { t } = useTranslation()
   const user = useAppSelector((state) => state.preparation.user)
@@ -44,9 +42,6 @@ export default function PreparationMenuUser(props: {
   const isMe = props.user.uid === myUid
   const myPartner = users.find((u) => u.uid === myUid)?.doubleUpPartnerId
   const isPaired = myPartner === props.user.uid
-  const teamColor = isDoubleUp
-    ? `var(--color-team${(props.colorIndex ?? 0) + 1})`
-    : undefined
   const myReady = users.find((u) => u.uid === myUid)?.ready
 
   return (
@@ -54,14 +49,6 @@ export default function PreparationMenuUser(props: {
       className={`my-container player my-box preparation-menu-user ${
         props.user.ready ? "ready" : "not-ready"
       }`}
-      style={
-        isDoubleUp
-          ? {
-              borderColor: teamColor,
-              position: "relative"
-            }
-          : undefined
-      }
     >
       <EloBadge elo={props.user?.elo} />
       <InlineAvatar
@@ -72,18 +59,7 @@ export default function PreparationMenuUser(props: {
         twitchLogin={props.user?.twitchLogin || undefined}
         twitchDisplayName={props.user?.twitchDisplayName || undefined}
       />
-      {preference("colorblindMode") && props.user.ready && t("ready")}
-      {isDoubleUp && props.user.ready && (
-        <span
-          style={{
-            color: "#76c442",
-            fontSize: "1.2em",
-            textShadow: "0 0 4px black"
-          }}
-        >
-          ✔
-        </span>
-      )}
+
       {isDoubleUp && !isMe && !myReady && !isPaired && (
         <button
           className="bubbly orange"
@@ -94,7 +70,7 @@ export default function PreparationMenuUser(props: {
               : undefined
           }
         >
-          Partner?
+          {t("choose_partner")}
         </button>
       )}
       {removeButton}
