@@ -258,14 +258,14 @@ export default function Game() {
     if (gameContainer && gameContainer.game) {
       gameContainer.game.destroy(true)
     }
-    
+
     if (isReplayRoom(room)) {
       navigate("/lobby")
       return
     }
     const afterPlayers = new Array<IAfterGamePlayer>()
 
-    const token = await firebase.auth().currentUser?.getIdToken()    
+    const token = await firebase.auth().currentUser?.getIdToken()
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =
@@ -611,7 +611,9 @@ export default function Game() {
           ({ partnerPlayerId }: { partnerPlayerId: string }) => {
             const partnerPlayer = room.state.players.get(partnerPlayerId)
             if (!partnerPlayer) return
-            const simulation = room.state.simulations.get(partnerPlayer.simulationId)
+            const simulation = room.state.simulations.get(
+              partnerPlayer.simulationId
+            )
             if (!simulation) return
             getGameScene()?.battle?.clear()
             gameContainer.setPlayer(partnerPlayer)
@@ -619,11 +621,11 @@ export default function Game() {
             room.send(Transfer.SPECTATE, partnerPlayerId)
           }
         )
-      
+
         room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
           gameContainer.handleDragDropCancel(message)
         )
-      
+
         room.onMessage(Transfer.GAME_END, () => {
           // replay: GAME_END is a recorded frame, skip the live leave flow
           if (isReplayRoom(room)) return
@@ -710,27 +712,30 @@ export default function Game() {
           }
         })
 
-      $state.listen("phase", (newPhase, previousPhase) => {
-        // if we were spectating partner's fight via reinforcements, go back to our own board
-        if (
-          newPhase === GamePhaseState.PICK &&
-          store.getState().game.playerIdSpectated !== gameContainer.uid &&
-          room.state.players.get(gameContainer.uid)?.alive
-        ) {
-          const myPlayer = room.state.players.get(gameContainer.uid)
-          if (myPlayer) {
-            gameContainer.setPlayer(myPlayer)
-            const simulation = room.state.simulations.get(myPlayer.simulationId)
-            if (simulation) gameContainer.setSimulation(simulation)
-            room.send(Transfer.SPECTATE, gameContainer.uid)
+        $state.listen("phase", (newPhase, previousPhase) => {
+          // if we were spectating partner's fight via reinforcements, go back to our own board
+          if (
+            newPhase === GamePhaseState.PICK &&
+            store.getState().game.playerIdSpectated !== gameContainer.uid &&
+            room.state.players.get(gameContainer.uid)?.alive
+          ) {
+            const myPlayer = room.state.players.get(gameContainer.uid)
+            if (myPlayer) {
+              gameContainer.setPlayer(myPlayer)
+              const simulation = room.state.simulations.get(
+                myPlayer.simulationId
+              )
+              if (simulation) gameContainer.setSimulation(simulation)
+              room.send(Transfer.SPECTATE, gameContainer.uid)
+            }
           }
-        }
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g) {
-            g.updatePhase(newPhase, previousPhase)
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g) {
+              g.updatePhase(newPhase, previousPhase)
+            }
+            dispatch(setPhase(newPhase))
           }
-          dispatch(setPhase(newPhase))
         })
 
         $state.listen("stageLevel", (value) => {
@@ -949,18 +954,8 @@ export default function Game() {
                 const simulation = room.state.simulations.get(
                   spectatedPlayer.simulationId
                 )
-              })
-            })
-          }
-          $experienceManager.listen("level", (value) => {
-            if (value > 1) {
-              toast(
-                <p>
-                  {t("level")} {value}
-                </p>,
-                {
-                  containerId: player.id,
-                  className: "toast-level-up"
+                if (simulation) {
+                  gameContainer.setSimulation(simulation)
                 }
               }
 
