@@ -594,16 +594,6 @@ export const ItemRecipe: { [key in Item]?: Item[] } = {
   [Item.NULLIFY_BANDANNA]: [Item.SILK_SCARF, Item.SILK_SCARF]
 }
 
-// only these items for now, to avoid synergy item problems
-export const DoubleUpTradeableItems: Item[] = [
-  ...ItemComponentsNoScarf,
-  ...(Object.entries(ItemRecipe) as [Item, Item[]][])
-    .filter(([, ingredients]) =>
-      ingredients.every(i => ItemComponentsNoScarf.includes(i))
-    )
-    .map(([item]) => item)
-]
-
 export const Scarves = Object.keys(ItemRecipe).filter((itemKey) =>
   ItemRecipe[itemKey as Item]?.includes(Item.SILK_SCARF)
 ) as Item[]
@@ -950,6 +940,12 @@ export const CraftableNoStonesOrScarves: Item[] =
   CraftableItemsNoScarves.filter(
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
+
+// only these items for now, to avoid synergy item problems
+export const DoubleUpTradeableItems: Item[] = [
+  ...ItemComponentsNoScarf,
+  ...CraftableItemsNoScarves
+]
 
 export const Wands = [
   Item.BLAST_WAND,
