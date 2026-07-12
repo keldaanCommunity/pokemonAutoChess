@@ -113,7 +113,18 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
       state.specialGameRule = action.payload
     },
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      state.players.push(JSON.parse(JSON.stringify(action.payload)))
+      // idempotent by id: a replay seek re-fires onAdd, so replace rather than push (avoids duplicate players)
+      const clone = JSON.parse(JSON.stringify(action.payload)) as IPlayer
+      // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
+      clone.synergies = new Synergies(
+        new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
+      )
+      const index = state.players.findIndex((p) => p.id === clone.id)
+      if (index >= 0) {
+        state.players[index] = clone
+      } else {
+        state.players.push(clone)
+      }
     },
     removePlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players = state.players.filter((p) => p.id !== action.payload.id)
