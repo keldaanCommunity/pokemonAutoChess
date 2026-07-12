@@ -1354,14 +1354,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
       if (isIn(Gifts, item)) {
-        const giftEffect = GiftEffects[item]
         const partner = this.state.players.get(player.doubleUpPartnerId)
         if (!partner) return
-
-        // Process each gift - each option has its corresponding function to trigger
-        const res = giftEffect?.(partner, player)
-
-        if (!res) return
+        const giftEffect = GiftEffects[item]
+        giftEffect(partner, player)
         player.giftsGiven.push(item)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
