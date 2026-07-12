@@ -80,14 +80,14 @@ export class OnJoinCommand extends Command<
         this.room.presence,
         client.auth.uid
       )
-      // if (pendingGame != null && !pendingGame.isExpired) {
-      //   client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
-      //   return
-      // }
+      if (pendingGame != null && !pendingGame.isExpired) {
+        client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+        return
+      }
 
       if (
         this.state.ownerId == "" &&
-        (this.state.gameMode === GameMode.CUSTOM_LOBBY || this.state.gameMode === GameMode.DOUBLE_UP)
+        this.state.gameMode === GameMode.CUSTOM_LOBBY
       ) {
         this.state.ownerId = auth.uid
       }
@@ -163,7 +163,9 @@ export class OnJoinCommand extends Command<
         this.room.updatePlayersInfo()
 
         // auto-pair in Double Up mode
-        autoAssignPartner(this.state, u.uid)
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, u.uid)
+        }
 
         if (u.uid == this.state.ownerId) {
           // logger.debug(user.displayName);
@@ -173,7 +175,10 @@ export class OnJoinCommand extends Command<
           })
         }
 
-        if (this.state.gameMode !== GameMode.CUSTOM_LOBBY  && this.state.gameMode !== GameMode.DOUBLE_UP) {
+        if (
+          this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+          this.state.gameMode !== GameMode.DOUBLE_UP
+        ) {
           this.clock.setTimeout(() => {
             if (
               this.state.users.has(u.uid) &&
@@ -257,26 +262,11 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      if (this.state.gameMode === GameMode.DOUBLE_UP) {
-        if (this.state.users.size < 4) {
-          this.state.addMessage({
-            authorId: "Server",
-            payload: `Double Up requires at least 4 players.`,
-            avatar: "0079/Sigh"
-          })
-          return
-        }
-        if (this.state.users.size % 2 !== 0) {
-          this.state.addMessage({
-            authorId: "Server",
-            payload: `Double Up requires an even number of players.`,
-            avatar: "0079/Sigh"
-          })
-          return
-        }
-      }
-
-      if (!allUsersReady && (this.state.gameMode === GameMode.CUSTOM_LOBBY || this.state.gameMode === GameMode.DOUBLE_UP)) {
+      if (
+        !allUsersReady &&
+        (this.state.gameMode === GameMode.CUSTOM_LOBBY ||
+          this.state.gameMode === GameMode.DOUBLE_UP)
+      ) {
         this.state.addMessage({
           authorId: "Server",
           payload: `Not all players are ready.`,
@@ -352,9 +342,12 @@ export class OnGameStartRequestCommand extends Command<
           })
 
           // randomly pair remaining unpaired users
-          const unpaired = shuffleArray(userList.filter((u) => !paired.has(u.uid)))
+          const unpaired = shuffleArray(
+            userList.filter((u) => !paired.has(u.uid))
+          )
           for (let i = 0; i < unpaired.length - 1; i += 2) {
-            const a = unpaired[i], b = unpaired[i + 1]
+            const a = unpaired[i],
+              b = unpaired[i + 1]
             const teamId = `team-${teamIndex++}`
             a.doubleUpPartnerId = b.uid
             a.doubleUpTeamId = teamId
@@ -654,16 +647,14 @@ export class OnLeaveCommand extends Command<
             avatar: user.avatar
           })
           const partnerIdBeforeLeave = user.doubleUpPartnerId
+          this.state.users.delete(client.auth.uid)
           if (partnerIdBeforeLeave) {
             const partner = this.state.users.get(partnerIdBeforeLeave)
             if (partner) {
               partner.doubleUpPartnerId = ""
               partner.doubleUpTeamId = ""
+              autoAssignPartner(this.state, partnerIdBeforeLeave)
             }
-          }
-          this.state.users.delete(client.auth.uid)
-          if (partnerIdBeforeLeave) {
-            autoAssignPartner(this.state, partnerIdBeforeLeave)
           }
 
           if (client.auth.uid === this.state.ownerId) {
@@ -704,7 +695,11 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in classic / ranked / tournament game mode
-        if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && this.room.state.gameMode !== GameMode.DOUBLE_UP && ready !== true)
+      if (
+        this.room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+        this.room.state.gameMode !== GameMode.DOUBLE_UP &&
+        ready !== true
+      )
         return
 
       // logger.debug(this.state.users.get(client.auth.uid).ready);
@@ -807,7 +802,9 @@ export class InitializeBotsCommand extends Command<
                 false
               )
             )
-            autoAssignPartner(this.state, bot.id)
+            if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+              autoAssignPartner(this.state, bot.id)
+            }
           })
         }
         this.room.updatePlayersInfo()
@@ -915,7 +912,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         )
 
         this.room.updatePlayersInfo()
-        autoAssignPartner(this.state, bot.id)
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, bot.id)
+        }
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${bot.name} added.`
@@ -983,7 +982,7 @@ export class OnSelectPartnerCommand extends Command<
         user.doubleUpPartnerId = ""
         user.doubleUpTeamId = ""
         if (!user.isBot) user.ready = false
-        return  // just return, no auto-assign
+        return // just return, no auto-assign
       }
 
       const target = this.state.users.get(partnerId)
@@ -1048,7 +1047,6 @@ export class OnSelectPartnerCommand extends Command<
           autoAssignPartner(this.state, targetOldPartnerId)
         }
       }
-
     } catch (error) {
       logger.error(error)
     }

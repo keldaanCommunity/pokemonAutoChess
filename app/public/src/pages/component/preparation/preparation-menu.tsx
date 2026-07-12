@@ -57,6 +57,7 @@ export default function PreparationMenu() {
   )
 
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
+  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -183,7 +184,7 @@ export default function PreparationMenu() {
         <p>{t("not_eligible_elo_hint")}</p>
       ) : null}
 
-      {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (
+      {hasBotsEnabled && users.length === 1 && (
         <p>
           {BOTS_ENABLED
             ? t("add_bot_or_wait_hint")
@@ -274,49 +275,47 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = (gameMode === GameMode.CUSTOM_LOBBY ||
-    gameMode === GameMode.DOUBLE_UP) &&
-    (isOwner || isAdmin) && (
-      <div className="my-input-group">
-        <button
-          className="bubbly blue"
-          onClick={() => {
-            if (botDifficulty === BotDifficulty.CUSTOM) {
-              setShowBotSelectModal(true)
-            } else {
-              addBot(botDifficulty)
-            }
-          }}
-        >
-          {t("add_bot")}
-        </button>
+  const botControls = hasBotsEnabled && (isOwner || isAdmin) && (
+    <div className="my-input-group">
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          if (botDifficulty === BotDifficulty.CUSTOM) {
+            setShowBotSelectModal(true)
+          } else {
+            addBot(botDifficulty)
+          }
+        }}
+      >
+        {t("add_bot")}
+      </button>
 
-        <select
-          value={botDifficulty}
-          onChange={(e) => {
-            setBotDifficulty(parseInt(e.target.value, 10))
-          }}
-        >
-          <option value={BotDifficulty.BEGINNER}>
-            {t("bot_difficulty.BEGINNER")}
-          </option>
-          <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
-          <option value={BotDifficulty.MEDIUM}>
-            {t("bot_difficulty.MEDIUM")}
-          </option>
-          <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
-          <option value={BotDifficulty.EXTREME}>
-            {t("bot_difficulty.EXTREME")}
-          </option>
-          <option value={BotDifficulty.MASTER}>
-            {t("bot_difficulty.MASTER")}
-          </option>
-          <option value={BotDifficulty.CUSTOM}>
-            {t("bot_difficulty.CUSTOM")}
-          </option>
-        </select>
-      </div>
-    )
+      <select
+        value={botDifficulty}
+        onChange={(e) => {
+          setBotDifficulty(parseInt(e.target.value, 10))
+        }}
+      >
+        <option value={BotDifficulty.BEGINNER}>
+          {t("bot_difficulty.BEGINNER")}
+        </option>
+        <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
+        <option value={BotDifficulty.MEDIUM}>
+          {t("bot_difficulty.MEDIUM")}
+        </option>
+        <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
+        <option value={BotDifficulty.EXTREME}>
+          {t("bot_difficulty.EXTREME")}
+        </option>
+        <option value={BotDifficulty.MASTER}>
+          {t("bot_difficulty.MASTER")}
+        </option>
+        <option value={BotDifficulty.CUSTOM}>
+          {t("bot_difficulty.CUSTOM")}
+        </option>
+      </select>
+    </div>
+  )
 
   const roomInfo = gameMode === GameMode.CUSTOM_LOBBY && (
     <p className="room-info">

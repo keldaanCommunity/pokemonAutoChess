@@ -1998,10 +1998,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.applyDoubleUpRoundDamage()
       this.syncTeamLife()
       this.room.rankPlayers()
-    }
 
-    // Double Up: countdown Prison Bottle cooldown
-    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      // Double Up: countdown Prison Bottle cooldown
       this.state.players.forEach((player: Player) => {
         if (player.alive && player.doubleUpSendCooldown > 0) {
           player.doubleUpSendCooldown--
