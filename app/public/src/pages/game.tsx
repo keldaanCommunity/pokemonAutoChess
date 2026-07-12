@@ -734,8 +734,8 @@ export default function Game() {
             if (g) {
               g.updatePhase(newPhase, previousPhase)
             }
-            dispatch(setPhase(newPhase))
           }
+          dispatch(setPhase(newPhase))
         })
 
         $state.listen("stageLevel", (value) => {
