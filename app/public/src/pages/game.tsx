@@ -76,6 +76,7 @@ import {
   setShopFreeRolls,
   setShopLocked,
   setSpecialGameRule,
+  setSpectatorCount,
   setStageLevel,
   setStreak,
   setSynergies,
@@ -1059,6 +1060,11 @@ export default function Game() {
 
         $state.spectators.onAdd((uid) => {
           gameContainer.initializeSpectactor(uid)
+          dispatch(setSpectatorCount(room.state.spectators.size))
+        })
+
+        $state.spectators.onRemove(() => {
+          dispatch(setSpectatorCount(room.state.spectators.size))
         })
       }
 

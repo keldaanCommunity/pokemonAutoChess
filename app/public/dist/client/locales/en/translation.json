@@ -4103,6 +4103,8 @@
 	"stage": "Stage",
 	"spectate": "Spectate",
 	"spectating": "Spectating {{ name }}",
+	"spectators_watching_one": "{{count}} spectator is watching this game",
+	"spectators_watching_other": "{{count}} spectators are watching this game",
 	"join": "Join",
 	"reconnect": "Reconnect",
 	"no_elo": "No Elo",
