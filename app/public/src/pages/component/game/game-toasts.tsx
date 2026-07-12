@@ -21,6 +21,7 @@ function GameToasts() {
           hideProgressBar
           newestOnTop
           closeOnClick
+          pauseOnHover
           limit={1}
           closeButton={false}
           style={{ top: `${2 + i * 12.5}%` }}

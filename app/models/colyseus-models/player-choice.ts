@@ -1,5 +1,4 @@
 import { Schema, type } from "@colyseus/schema"
-import type { Gift } from "../../types/enum/GiftShop"
 import type { Item } from "../../types/enum/Item"
 import type { PkmProposition } from "../../types/enum/Pokemon"
 
@@ -18,19 +17,19 @@ export class PlayerChoice extends Schema {
   @type("string") type: PlayerChoiceType
   @type(["string"]) items: Item[] = []
   @type(["string"]) pokemons: PkmProposition[] = []
-  @type(["string"]) giftOptions: Gift[] = []
+  @type(["number"]) costs: number[] = []
 
   constructor(args: {
     type: PlayerChoiceType
     items?: Item[]
     pokemons?: PkmProposition[]
-    giftOptions?: Gift[]
+    costs?: number[]
   }) {
     super()
     this.id = crypto.randomUUID()
     this.type = args.type
     if (args.items) this.items = args.items
     if (args.pokemons) this.pokemons = args.pokemons
-    if (args.giftOptions) this.giftOptions = args.giftOptions
+    if (args.costs) this.costs = args.costs
   }
 }

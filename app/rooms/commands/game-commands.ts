@@ -84,7 +84,7 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
-import { FreeGifts, type Gift, PaidGifts } from "../../types/enum/GiftShop"
+import { FreeGifts, type Gift, GiftShopPrices, PaidGifts } from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
@@ -1387,9 +1387,7 @@ export class OnUpdateCommand extends Command<
       reinforcement.count.soundCryCount = entity.count.soundCryCount
 
       // overwrite with players synergy effects
-      Array.from(reinforcement.effects).forEach((e) =>
-        reinforcement.effects.delete(e)
-      )
+      reinforcement.effects.clear()
       entity.effects.forEach((e) => reinforcement.effects.add(e))
       reinforcement.effectsSet = new Set(entity.effectsSet)
     }
@@ -1695,7 +1693,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         p.choices.push(
           new PlayerChoice({
             type: "gifts",
-            giftOptions: giftChoices
+            items: giftChoices,
+            costs: giftChoices.map(gift => GiftShopPrices[gift] ?? 0)
           })
         )
       })

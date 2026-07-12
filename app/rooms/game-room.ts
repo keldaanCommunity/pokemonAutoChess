@@ -44,7 +44,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
-import { GiftShopService } from "../services/gift-shop"
+import { GiftEffects } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -65,7 +65,7 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { GiftShopPrices } from "../types/enum/GiftShop"
+import { Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -390,26 +390,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     )
 
-    this.onMessage(
-      Transfer.GIFT,
-      (
-        client,
-        message: { choiceId: string; choiceIndex: number; partnerId: string }
-      ) => {
-        if (!this.state.gameFinished && client.auth) {
-          try {
-            this.pickGift(
-              client.auth.uid,
-              message.choiceId,
-              message.choiceIndex
-            )
-          } catch (error) {
-            logger.error(error)
-          }
-        }
-      }
-    )
-
     this.onMessage(Transfer.DRAG_DROP, (client, message: IDragDropMessage) => {
       if (!this.state.gameFinished) {
         try {
@@ -716,8 +696,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (pendingGame?.gameId === this.roomId) {
       // user reconnected without reconnection token (new browser/machine/session)
       clearPendingGame(this.presence, client.auth.uid)
-    }
-    else if (pendingGame != null && !pendingGame.isExpired) {
+    } else if (pendingGame != null && !pendingGame.isExpired) {
       client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
     }
   }
@@ -1261,35 +1240,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  pickGift(playerId: string, choiceId: string, choiceIndex: number) {
-    const player = this.state.players.get(playerId)
-    if (!player) return
-    const partner = this.state.players.get(player.doubleUpPartnerId)
-    if (!partner) return
-
-    const choice = player.choices.find((c) => c.id === choiceId)
-    if (!choice || choiceIndex < 0 || choiceIndex >= choice.giftOptions?.length)
-      return
-
-    if (choice.giftOptions.length > 0) {
-      const gift = choice.giftOptions[choiceIndex]
-      if (gift && player.money < GiftShopPrices[gift]) {
-        // Show warning not enough gold
-        return
-      }
-      const giftEffect = GiftShopService[gift]
-
-      // Process each gift - each option has its corresponding function to trigger
-      const res = giftEffect?.(partner, player)
-
-      if (!res) return
-      player.giftsGiven.push(gift)
-      player.money -= GiftShopPrices[gift]
-    }
-
-    removeInArray(player.choices, choice)
-  }
-
   pickChoice(
     playerId: string,
     choiceId: string,
@@ -1305,6 +1255,14 @@ export default class GameRoom extends Room<{ state: GameState }> {
       choiceIndex >= (choice.pokemons?.length || choice.items?.length)
     )
       return
+
+    let cost = 0
+    if (choice.costs.length > 0) {
+      cost = choice.costs[choiceIndex] ?? 0
+      if (cost && player.money < cost) {
+        return // not enough gold to pick that choice
+      }
+    }
 
     if (choice.pokemons.length > 0) {
       const pkm = choice.pokemons[choiceIndex]
@@ -1395,7 +1353,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      if (isIn(Wands, item)) {
+      if (isIn(Gifts, item)) {
+        const giftEffect = GiftEffects[item]
+        const partner = this.state.players.get(player.doubleUpPartnerId)
+        if (!partner) return
+
+        // Process each gift - each option has its corresponding function to trigger
+        const res = giftEffect?.(partner, player)
+
+        if (!res) return
+        player.giftsGiven.push(item)
+      } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
       } else {
@@ -1403,6 +1371,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
+    player.money -= cost
     removeInArray(player.choices, choice)
   }
 

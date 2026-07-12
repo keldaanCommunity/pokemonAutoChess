@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
-import { type Gift, GiftShopPrices } from "../../../../../types/enum/GiftShop"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
   type Pkm,
@@ -14,7 +13,7 @@ import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import type { IDetailledPokemon } from "../../../models/bot-v2"
-import { pickChoice, pickGift } from "../../../network"
+import { pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -177,7 +176,7 @@ export default function GameChoice() {
               )
             })}
           </div>
-        ) : choice.items.length > 0 ? (
+        ) : (
           <div className="game-choice-items-list">
             {choice.items.map((item: Item, index) => (
               <div
@@ -197,39 +196,14 @@ export default function GameChoice() {
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`item_description.${item}`))}
                 </p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="game-choice-items-list">
-            {choice.giftOptions.map((option: Gift, index) => (
-              <div
-                className="my-box active clickable"
-                key={`${choice.id}-${index}`}
-                onClick={(event) => {
-                  event.stopPropagation()
-                  playSound(SOUNDS.BUTTON_CLICK)
-                  pickGift(choice.id, index)
-                }}
-              >
-                {
-                  <img
-                    style={{ width: "4rem", height: "4rem" }}
-                    src={"assets/item/" + option + ".png"}
-                  />
-                }
-                <h3 style={{ margin: "0.25em 0" }}>{t(`item.${option}`)}</h3>
-                <p style={{ marginBottom: "0.5em" }}>
-                  {addIconsToDescription(t(`item_description.${option}`))}
-                </p>
-                <p
+                {choice.costs[index] > 0 && <p
                   style={{
                     marginBottom: "0.5em",
                     fontWeight: "bold",
                     fontSize: "1.5rem"
                   }}
                 >
-                  {GiftShopPrices[option]}
+                  {choice.costs[index]}
                   <img
                     className="icon-money"
                     src="/assets/icons/money.svg"
@@ -240,7 +214,7 @@ export default function GameChoice() {
                       height: "1.5rem"
                     }}
                   />
-                </p>
+                </p>}
               </div>
             ))}
           </div>

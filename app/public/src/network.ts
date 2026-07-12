@@ -228,10 +228,6 @@ export function pickChoice(choiceId: string, choiceIndex: number) {
   rooms.game?.send(Transfer.CHOICE, { choiceId, choiceIndex })
 }
 
-export function pickGift(choiceId: string, choiceIndex: number) {
-  rooms.game?.send(Transfer.GIFT, { choiceId, choiceIndex })
-}
-
 export function gameStartRequest(token: string) {
   rooms.preparation?.send(Transfer.GAME_START_REQUEST, { token })
 }
