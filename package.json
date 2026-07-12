@@ -51,6 +51,7 @@
   "dependencies": {
     "@colyseus/command": "^0.3.1",
     "@colyseus/monitor": "^0.17.7",
+    "@colyseus/msgpackr": "^1.11.2",
     "@colyseus/redis-driver": "^0.17.6",
     "@colyseus/redis-presence": "^0.17.6",
     "@colyseus/schema": "^4.0.25",
