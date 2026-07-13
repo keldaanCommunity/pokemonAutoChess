@@ -72,6 +72,10 @@
   margin-bottom: 0.5em;
 }
 
+#wiki-page .wiki-faq details p {
+  white-space: pre-wrap;
+}
+
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
   display: grid;

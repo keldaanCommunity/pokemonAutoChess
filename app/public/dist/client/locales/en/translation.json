@@ -4882,6 +4882,8 @@
 			"ditto_answer": "Ditto creates a plain copy of the unit you hover and drop it over. Each Pokémon in shop has a 0.5% chance to be a Ditto at every roll. You can't copy unique and hatch Pokémon.",
 			"items": "How do the items work ?",
 			"items_answer": "You can gain item components by winning PvE rounds or picking one in an item carousel. You can combine two item components to create a powerful tier 2 item. Every Pokémon can hold up to 3 items. The crafting list of all items is available in the wiki, in the items section.",
+			"double_up": "How does Double Up mode work ?",
+			"double_up_answer": "You start by picking a partner. When both players in a team click Ready, they are locked in and cannot switch team anymore.\nDuring the game, your health pool is shared with your partner. You take half the usual round damage, but this damage corresponds to the worst defeat between the two of you.\nIf you defeat your opponent while your partner is still fighting, your Pokémon will join their battle as reinforcements after 3 seconds. Active synergies, items and permanent stats from your team will carry over. Your Pokémon will not contribute to or gain any new synergy effects from your partner's team. Effects affecting the player will apply to the original player even when battling on the partner's board.\nThe slot on the far right of your bench can be used to trade Pokémon and their items held with your partner. Once you and your partner have placed a Pokémon on it and confirmed the trade, there will be a cooldown period before it can be used again; this duration increases based on the rarity and number of items traded.\nFinally, at stages 15–16 and 25–26, you'll have the opportunity to buy a gift for your partner.",
 			"reconnect": "I got disconnected from an ongoing game/room, how do I reconnect?",
 			"reconnect_answer": "Try reloading (F5 key). If that doesn't work, go back to <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reauthenticate if needed and go back to main lobby, and try looking for your game under the \"In Game\" tab or in the corresponding gamemode. There should be a green \"Reconnect\" button next to your game room.",
 			"bots": "How do bots work ?",
@@ -5043,18 +5045,7 @@
 			"pool_size_per_category_description": "The Pokémon you find in shops are taken from a pool shared by all players. The number of specimens of each Pokémon in the pool depends on its rarity and its number of evolution stages.",
 			"xp": "XP",
 			"experience": "Experience"
-		},
-    "double_up": {
-      "shared_hp": "Your health pool is shared with your partner. You take half the usual damage per fight, but at the end of each round your team takes the worse of the two losses.",
-      "trade_desc": "Drag and drop items or components onto Croagunk to trade with your partner. Trading is only available during the preparation phase. (If you place an item on Croagunk but your partner doesn't offer a counter-trade before the battle phase begins, the item is returned to your bench). Left-click a placed item to cancel it. You will see your partners item proposal hovering below Croagunk, vice versa. Prison Bottle can only be used on Unique and Legendary Pokemon after Tower Legendary Duo Stage",
-      "trade_rules": "Only basic components and their crafted items are tradable. Scarves, tools, and shiny items are excluded. Trades must be item-for-item or component-for-component — mismatched trades are cancelled.",
-      "prison_bottle_desc": "You start with a Prison Bottle. Drag it onto a benched Pokémon to send it to your partners bench during the preparation phase. Items held by the sent Pokémon will be removed before sending. Depending on the Pokémon's rarity, there is a cooldown before the Prison Bottle reappears, before you can send it again. UNIQUE and LEGENDARY Pokemon are too heavy for Hoopa ... and EGGs are too fragile! Cannot be sent!",
-      "prison_bottle_cooldown_long": "EPIC, ULTRA, SPECIAL: 5 rounds cooldown",
-      "prison_bottle_cooldown_short": "COMMON, UNCOMMON, RARE: 3 rounds cooldown",
-      "reinforcements_desc": "If you defeat your opponent before your partner finishes their round, your Pokémon will join their battle as reinforcements. Active synergies, itemization, and permanent stats from your team will carry over. Your Pokémon will not contribute to or gain any new synergy effects from your partner's team. There is a 3-second delay before reinforcements arrive. Unowns are too shy, to reinforce.",
-      "gift_desc": "At stages 15–16 and 25–26. Send your partner a gift bundle containing Pokémon, gems, items, and more — paid or free. Make sure your partner has a free bench slot before sending a Pokémon! Make sure you have enough Gold! Gifts can turn the tide of the game, so choose wisely.",
-      "lobby_desc": "Open a lobby, add bots if needed, and select a partner. Once both players in a pair click Ready, they are locked in and cannot be selected by others. If your partner gets stolen before readying, you'll need to find a new partner and ready again. No elo is gained or lost. No elo lost or gained. Good Luck! May the best team win ٩(^ᗜ^ )و ´- vinper & tegberen"
-    }
+		}
 	},
 	"errors": {
 		"title": "Error",
@@ -5210,14 +5201,14 @@
 		"SCRIBBLE": "Smeargle's Scribble",
 		"CUSTOM_LOBBY": "Custom room",
 		"TOURNAMENT": "Tournament",
-    "DOUBLE_UP": "Double Up"
+    	"DOUBLE_UP": "Double Up"
 	},
 	"game_modes_descriptions": {
 		"CLASSIC": "The casual PAC Experience !\n8 players, Elo disabled, open to everyone.",
 		"RANKED": "For competitors ! 8 players, Elo enabled\nRestricted to players close to your rank",
 		"SCRIBBLE": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
 		"CUSTOM_LOBBY": "Create a private room to play with your friends or with bots",
-    "DOUBLE_UP": "Team up with a partner and outlast every other duo!",
+    	"DOUBLE_UP": "Team up with a partner and outlast every other duo!",
 		"TOURNAMENT": "This match is part of a tournament. Check Discord for upcoming events."
 	},
 	"dendrogram": {
