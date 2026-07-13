@@ -84,7 +84,12 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
-import { FreeGifts, type Gift, GiftShopPrices, PaidGifts } from "../../types/enum/GiftShop"
+import {
+  FreeGifts,
+  type Gift,
+  GiftShopPrices,
+  PaidGifts
+} from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
@@ -107,6 +112,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
+  NonPkm,
   Pkm,
   PkmIndex,
   PkmRegionalVariants,
@@ -944,25 +950,7 @@ export class OnDragDropItemCommand extends Command<
       this.state.phase === GamePhaseState.PICK &&
       isOnBench(pokemon)
     ) {
-      if (
-        pokemon.rarity === Rarity.UNIQUE ||
-        pokemon.rarity === Rarity.LEGENDARY ||
-        pokemon.name === Pkm.EGG ||
-        pokemon.name === Pkm.SUBSTITUTE ||
-        pokemon.name === Pkm.PILLAR_WOOD ||
-        pokemon.name === Pkm.PILLAR_IRON ||
-        pokemon.name === Pkm.PILLAR_CONCRETE ||
-        pokemon.name === Pkm.EEVEE ||
-        pokemon.name === Pkm.VAPOREON ||
-        pokemon.name === Pkm.JOLTEON ||
-        pokemon.name === Pkm.FLAREON ||
-        pokemon.name === Pkm.ESPEON ||
-        pokemon.name === Pkm.UMBREON ||
-        pokemon.name === Pkm.LEAFEON ||
-        pokemon.name === Pkm.GLACEON ||
-        pokemon.name === Pkm.SYLVEON ||
-        pokemon.items.has(Item.RARE_CANDY)
-      ) {
+      if (isIn(NonPkm, pokemon)) {
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
@@ -1321,11 +1309,7 @@ export class OnUpdateCommand extends Command<
     }
 
     const winningTeam = winnerIsBlue ? source.blueTeam : source.redTeam
-    const survivors: PokemonEntity[] = []
-    winningTeam.forEach((e) => {
-      if (e.hp > 0 && !e.name.startsWith("UNOWN"))
-        survivors.push(e as PokemonEntity)
-    })
+    const survivors: PokemonEntity[] = schemaValues(winningTeam).filter(e => e.hp > 0)
     if (survivors.length === 0) return
 
     for (const entity of survivors) {
@@ -1694,7 +1678,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           new PlayerChoice({
             type: "gifts",
             items: giftChoices,
-            costs: giftChoices.map(gift => GiftShopPrices[gift] ?? 0)
+            costs: giftChoices.map((gift) => GiftShopPrices[gift] ?? 0)
           })
         )
       })
