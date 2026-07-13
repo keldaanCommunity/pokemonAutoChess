@@ -21,7 +21,9 @@
   "author": "keldaan-ag",
   "contributors": [
     "ogus",
-    "sylvainpolletvillard"
+    "sylvainpolletvillard",
+    "vinper",
+    "tegberen"
   ],
   "main": "public/dist/server/app/index.js",
   "scripts": {
