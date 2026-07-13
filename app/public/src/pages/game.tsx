@@ -258,14 +258,14 @@ export default function Game() {
     if (gameContainer && gameContainer.game) {
       gameContainer.game.destroy(true)
     }
-    
+
     if (isReplayRoom(room)) {
       navigate("/lobby")
       return
     }
     const afterPlayers = new Array<IAfterGamePlayer>()
 
-    const token = await firebase.auth().currentUser?.getIdToken()    
+    const token = await firebase.auth().currentUser?.getIdToken()
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =
@@ -606,15 +606,31 @@ export default function Game() {
           }
         })
 
+        room.onMessage(
+          Transfer.DOUBLE_UP_REINFORCEMENT_SENT,
+          ({ partnerPlayerId }: { partnerPlayerId: string }) => {
+            const partnerPlayer = room.state.players.get(partnerPlayerId)
+            if (!partnerPlayer) return
+            const simulation = room.state.simulations.get(
+              partnerPlayer.simulationId
+            )
+            if (!simulation) return
+            getGameScene()?.battle?.clear()
+            gameContainer.setPlayer(partnerPlayer)
+            gameContainer.setSimulation(simulation)
+            room.send(Transfer.SPECTATE, partnerPlayerId)
+          }
+        )
+
+        room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
+          gameContainer.handleDragDropCancel(message)
+        )
+
         room.onMessage(Transfer.GAME_END, () => {
           // replay: GAME_END is a recorded frame, skip the live leave flow
           if (isReplayRoom(room)) return
           leave()
         })
-
-        room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
-          gameContainer.handleDragDropCancel(message)
-        )
 
         room.onMessage(
           Transfer.DISPLAY_TEXT,
@@ -697,6 +713,22 @@ export default function Game() {
         })
 
         $state.listen("phase", (newPhase, previousPhase) => {
+          // if we were spectating partner's fight via reinforcements, go back to our own board
+          if (
+            newPhase === GamePhaseState.PICK &&
+            store.getState().game.playerIdSpectated !== gameContainer.uid &&
+            room.state.players.get(gameContainer.uid)?.alive
+          ) {
+            const myPlayer = room.state.players.get(gameContainer.uid)
+            if (myPlayer) {
+              gameContainer.setPlayer(myPlayer)
+              const simulation = room.state.simulations.get(
+                myPlayer.simulationId
+              )
+              if (simulation) gameContainer.setSimulation(simulation)
+              room.send(Transfer.SPECTATE, gameContainer.uid)
+            }
+          }
           if (gameContainer.game) {
             const g = getGameScene()
             if (g) {

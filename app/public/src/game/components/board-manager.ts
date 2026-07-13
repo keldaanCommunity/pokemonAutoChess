@@ -37,6 +37,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
@@ -908,6 +909,14 @@ export default class BoardManager {
     }
   }
 
+  playItemDropAnimation(x: number, y: number) {
+    const [px, py] = transformBoardCoordinates(x, y)
+    const vfx = this.scene.add.sprite(px, py, "prison_bottle_portal", "000.png")
+    vfx.setScale(2).setDepth(DEPTH.ABILITY_MAJOR)
+    vfx.play("PRISON_BOTTLE_PORTAL")
+    vfx.once("animationcomplete", () => vfx.destroy())
+  }
+
   updatePokemonDishes(playerId: string, pokemon: IPokemon, dishes: Item[]) {
     if (this.player.id === playerId) {
       const pokemonUI = this.pokemons.get(pokemon.id)
@@ -1128,7 +1137,16 @@ export default class BoardManager {
     if (player) {
       this.animationManager.play(player, PokemonAnimations[player.name].emote)
 
-      if (emote) {
+      if (emote && emote.startsWith("player_dialog/")) {
+        this.scene.board?.displayText(
+          player.x,
+          player.y - 10,
+          t(
+            `player_dialog.${emote.substring("player_dialog/".length) as PlayerDialog}`
+          ),
+          true
+        )
+      } else if (emote) {
         player.drawSpeechBubble(emote, player === this.opponentAvatar)
       }
     } else {

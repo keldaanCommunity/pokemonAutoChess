@@ -31,6 +31,7 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
+import type { Gift } from "../../types/enum/GiftShop"
 import {
   AbilityPerTM,
   ArtificialItems,
@@ -117,6 +118,10 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentName: string = ""
   @type("string") opponentAvatar: string = ""
   @type("string") opponentTitle: Title | "WILD" | "" = ""
+  @type("string") doubleUpPartnerId: string = ""
+  @type("string") doubleUpTeamId: string = ""
+  @type("uint8") doubleUpSendCooldown: number = 0
+  @type("string") doubleUpTradeOffer: string = ""
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>()
@@ -171,6 +176,7 @@ export default class Player extends Schema implements IPlayer {
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
+  giftsGiven: Gift[] = []
   flowerPotsSpawnOrder: FlowerPot[] = shuffleArray([...FlowerPots])
   lightX: number
   lightY: number
@@ -188,6 +194,7 @@ export default class Player extends Schema implements IPlayer {
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
   unownReminiscences: number = 0
+  doubleUpEliminationRound: number = 999
 
   constructor(
     id: string,

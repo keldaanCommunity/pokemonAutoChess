@@ -14,6 +14,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { formatMinMaxRanks } from "../../../../../utils/elo"
 import { throttle } from "../../../../../utils/function"
 import { max } from "../../../../../utils/number"
+import { keys } from "../../../../../utils/object"
 import { setTitleNotificationIcon } from "../../../../../utils/window"
 import { useAppSelector } from "../../../hooks"
 import {
@@ -32,7 +33,6 @@ import { GameModeIcon } from "../icons/game-mode-icon"
 import { BotSelectModal } from "./bot-select-modal"
 import PreparationMenuUser from "./preparation-menu-user"
 import "./preparation-menu.css"
-import { keys } from "../../../../../utils/object"
 
 export default function PreparationMenu() {
   const { t } = useTranslation()
@@ -57,6 +57,7 @@ export default function PreparationMenu() {
   )
 
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
+  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -183,7 +184,7 @@ export default function PreparationMenu() {
         <p>{t("not_eligible_elo_hint")}</p>
       ) : null}
 
-      {gameMode === GameMode.CUSTOM_LOBBY && users.length === 1 && (
+      {hasBotsEnabled && users.length === 1 && (
         <p>
           {BOTS_ENABLED
             ? t("add_bot_or_wait_hint")
@@ -274,48 +275,47 @@ export default function PreparationMenu() {
       </div>
     )
 
-  const botControls = gameMode === GameMode.CUSTOM_LOBBY &&
-    (isOwner || isAdmin) && (
-      <div className="my-input-group">
-        <button
-          className="bubbly blue"
-          onClick={() => {
-            if (botDifficulty === BotDifficulty.CUSTOM) {
-              setShowBotSelectModal(true)
-            } else {
-              addBot(botDifficulty)
-            }
-          }}
-        >
-          {t("add_bot")}
-        </button>
+  const botControls = hasBotsEnabled && (isOwner || isAdmin) && (
+    <div className="my-input-group">
+      <button
+        className="bubbly blue"
+        onClick={() => {
+          if (botDifficulty === BotDifficulty.CUSTOM) {
+            setShowBotSelectModal(true)
+          } else {
+            addBot(botDifficulty)
+          }
+        }}
+      >
+        {t("add_bot")}
+      </button>
 
-        <select
-          value={botDifficulty}
-          onChange={(e) => {
-            setBotDifficulty(parseInt(e.target.value, 10))
-          }}
-        >
-          <option value={BotDifficulty.BEGINNER}>
-            {t("bot_difficulty.BEGINNER")}
-          </option>
-          <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
-          <option value={BotDifficulty.MEDIUM}>
-            {t("bot_difficulty.MEDIUM")}
-          </option>
-          <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
-          <option value={BotDifficulty.EXTREME}>
-            {t("bot_difficulty.EXTREME")}
-          </option>
-          <option value={BotDifficulty.MASTER}>
-            {t("bot_difficulty.MASTER")}
-          </option>
-          <option value={BotDifficulty.CUSTOM}>
-            {t("bot_difficulty.CUSTOM")}
-          </option>
-        </select>
-      </div>
-    )
+      <select
+        value={botDifficulty}
+        onChange={(e) => {
+          setBotDifficulty(parseInt(e.target.value, 10))
+        }}
+      >
+        <option value={BotDifficulty.BEGINNER}>
+          {t("bot_difficulty.BEGINNER")}
+        </option>
+        <option value={BotDifficulty.EASY}>{t("bot_difficulty.EASY")}</option>
+        <option value={BotDifficulty.MEDIUM}>
+          {t("bot_difficulty.MEDIUM")}
+        </option>
+        <option value={BotDifficulty.HARD}>{t("bot_difficulty.HARD")}</option>
+        <option value={BotDifficulty.EXTREME}>
+          {t("bot_difficulty.EXTREME")}
+        </option>
+        <option value={BotDifficulty.MASTER}>
+          {t("bot_difficulty.MASTER")}
+        </option>
+        <option value={BotDifficulty.CUSTOM}>
+          {t("bot_difficulty.CUSTOM")}
+        </option>
+      </select>
+    </div>
+  )
 
   const roomInfo = gameMode === GameMode.CUSTOM_LOBBY && (
     <p className="room-info">
@@ -327,7 +327,9 @@ export default function PreparationMenu() {
     </p>
   )
 
-  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY || !isReady) &&
+  const readyButton = (gameMode === GameMode.CUSTOM_LOBBY ||
+    gameMode === GameMode.DOUBLE_UP ||
+    !isReady) &&
     users.length > 0 && (
       <button
         className={cc("bubbly", "ready-button", isReady ? "green" : "orange")}
@@ -362,17 +364,65 @@ export default function PreparationMenu() {
         {headerMessage}
       </header>
 
-      <div className="preparation-menu-users">
-        {users.map((u) => {
-          return (
-            <PreparationMenuUser
-              key={u.uid}
-              user={u}
-              isOwner={isOwner}
-              ownerId={ownerId}
-            />
-          )
-        })}
+      <div
+        className={`preparation-menu-users${gameMode === GameMode.DOUBLE_UP ? " double-up" : ""}`}
+      >
+        {gameMode === GameMode.DOUBLE_UP
+          ? (() => {
+              const paired: Set<string> = new Set()
+              const teams: IGameUser[][] = []
+              users.forEach((u) => {
+                if (paired.has(u.uid)) return
+                const partner = users.find(
+                  (p) =>
+                    p.uid === u.doubleUpPartnerId &&
+                    u.doubleUpPartnerId !== "" &&
+                    p.doubleUpPartnerId === u.uid &&
+                    !paired.has(p.uid) // add this check
+                )
+                if (partner) {
+                  teams.push([u, partner])
+                  paired.add(u.uid)
+                  paired.add(partner.uid)
+                } else {
+                  teams.push([u])
+                }
+              })
+              return teams.map((team, teamIndex) => (
+                <>
+                  <p className="team-name">
+                    <div
+                      className="team-color-indicator"
+                      style={{
+                        backgroundColor: `var(--color-team${teamIndex + 1})`
+                      }}
+                    />
+                    {t("team_name", { name: teamIndex + 1 })}
+                  </p>
+                  <div
+                    key={team.map((u) => u.uid).join("-")}
+                    className={`double-up-pair ${team.length === 2 ? "paired" : "unpaired"}`}
+                  >
+                    {team.map((u) => (
+                      <PreparationMenuUser
+                        key={u.uid}
+                        user={u}
+                        isOwner={isOwner}
+                        ownerId={ownerId}
+                      />
+                    ))}
+                  </div>
+                </>
+              ))
+            })()
+          : users.map((u) => (
+              <PreparationMenuUser
+                key={u.uid}
+                user={u}
+                isOwner={isOwner}
+                ownerId={ownerId}
+              />
+            ))}
       </div>
 
       <div className="actions">

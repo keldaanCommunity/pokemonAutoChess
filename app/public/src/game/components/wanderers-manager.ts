@@ -20,6 +20,7 @@ import { isReplayRoom } from "../replay-room-id"
 import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
+import { transformBoardCoordinates } from "../../pages/utils/utils"
 
 const DEFAULT_WANDERER_SPEED = 0.25
 
@@ -31,6 +32,7 @@ List of wanderers:
 
 export default class WanderersManager {
   scene: GameScene
+  croagunkSprite: PokemonSpecial | null = null
 
   constructor(scene: GameScene) {
     this.scene = scene
@@ -50,6 +52,8 @@ export default class WanderersManager {
       this.addDialogWanderer(wanderer)
     } else if (wanderer.type === WandererType.OUTLAW) {
       this.addOutlawWanderer(wanderer)
+    } else if (wanderer.type === WandererType.CROAGUNK_TRADE) {
+      this.addCroagunkTrader(wanderer)
     }
   }
 
@@ -361,6 +365,38 @@ export default class WanderersManager {
       }
     })
   }
+
+  addCroagunkTrader(wanderer: Wanderer) {
+    if (this.croagunkSprite) {
+      this.croagunkSprite.destroy()
+      this.croagunkSprite = null
+    }
+    const [x, y] = transformBoardCoordinates(7.5, 0.4)
+    this.croagunkSprite = new PokemonSpecial({
+      scene: this.scene,
+      x,
+      y,
+      name: Pkm.CROAGUNK,
+      orientation: Orientation.DOWNLEFT,
+      dialog: t("npc_dialog.croagunk_trade"),
+      dialogTitle: t("npc_dialog.croagunk_trade_title")
+    })
+    this.croagunkSprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      if (pointer.button === 0) {
+        this.scene.room?.send(Transfer.CANCEL_TRADE_OFFER)
+      }
+    })
+  }
+
+  updateCroagunkItem(myOffer: string, partnerOffer: string = "") {
+    if (this.croagunkSprite) {
+      const dishes: Item[] = []
+      if (myOffer) dishes.push(myOffer as Item)
+      if (partnerOffer) dishes.push(partnerOffer as Item)
+      this.croagunkSprite.updateDishes(dishes)
+    }
+  }
+
 }
 
 function getDialogsBySpecialWanderer(wanderer: Wanderer): {
@@ -393,6 +429,12 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   if (wanderer.pkm === Pkm.LAPRAS) {
     return {
       dialog: t("npc_dialog.lapras")
+    }
+  }
+  if (wanderer.pkm === Pkm.KECLEON_PURPLE) {
+    return {
+      dialog: t("npc_dialog.kecleon_preview"),
+      dialogTitle: t("npc_dialog.kecleon")
     }
   }
   return {}

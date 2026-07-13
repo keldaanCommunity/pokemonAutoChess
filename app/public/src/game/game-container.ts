@@ -535,7 +535,7 @@ class GameContainer {
           null
         )
         toast(i, {
-          containerId: player.rank.toString(),
+          containerId: player.id,
           className: "toast-new-pokemon"
         })
       }
@@ -558,11 +558,19 @@ class GameContainer {
 
     $player.items.onChange((value, key) => {
       if (player.id === this.playerIdSpectated) {
-        //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
-
+    $player.listen("doubleUpTradeOffer", (offer: string) => {
+      if (player.id === this.playerIdSpectated) {
+        const partner = this.room.state.players.get(player.doubleUpPartnerId)
+        this.gameScene?.wandererManager?.updateCroagunkItem(offer, partner?.doubleUpTradeOffer ?? "")
+      }
+      if (player.id === this.room.state.players.get(this.playerIdSpectated)?.doubleUpPartnerId) {
+        const me = this.room.state.players.get(this.playerIdSpectated)
+        this.gameScene?.wandererManager?.updateCroagunkItem(me?.doubleUpTradeOffer ?? "", offer)
+      }
+    })
     $player.synergies.onChange((level, synergy) => {
       if (
         player.id === this.playerIdSpectated &&

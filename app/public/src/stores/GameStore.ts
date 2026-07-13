@@ -155,7 +155,8 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
         ...state.experienceManager,
         experience: action.payload.experience,
         expNeeded: action.payload.expNeeded,
-        level: action.payload.level
+        level: action.payload.level,
+        maxLevel: action.payload.maxLevel
       }
     },
     changePlayer: (

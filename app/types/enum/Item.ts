@@ -4,6 +4,7 @@ import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
 
 export enum Item {
+  PRISON_BOTTLE = "PRISON_BOTTLE",
   FOSSIL_STONE = "FOSSIL_STONE",
   TWISTED_SPOON = "TWISTED_SPOON",
   MYSTIC_WATER = "MYSTIC_WATER",
@@ -332,7 +333,28 @@ export enum Item {
   SKY_MELODICA = "SKY_MELODICA",
   TERRA_CYMBAL = "TERRA_CYMBAL",
   SOOTHE_BELL = "SOOTHE_BELL",
-  BALL = "BALL"
+  BALL = "BALL",
+  BERRY_BUNDLE = "BERRY_BUNDLE",
+  UNOWN_BUNDLE = "UNOWN_BUNDLE",
+  SWEETS_BUNDLE = "SWEETS_BUNDLE",
+  DITTO_BUNDLE = "DITTO_BUNDLE",
+  TICKET_BUNDLE = "TICKET_BUNDLE",
+  HATCH_BUNDLE = "HATCH_BUNDLE",
+  REGION_BUNDLE = "REGION_BUNDLE",
+  COOKING_BUNDLE = "COOKING_BUNDLE",
+  GEMS_BUNDLE = "GEMS_BUNDLE",
+  POTION = "POTION",
+  DELUXE_BOX = "DELUXE_BOX",
+  TOOL_BUNDLE = "TOOL_BUNDLE",
+  EXP_BUNDLE = "EXP_BUNDLE",
+  EVOLVE_BUNDLE = "EVOLVE_BUNDLE",
+  COMMON_BUNDLE = "COMMON_BUNDLE",
+  UNCOMMON_BUNDLE = "UNCOMMON_BUNDLE",
+  RARE_BUNDLE = "RARE_BUNDLE",
+  EPIC_BUNDLE = "EPIC_BUNDLE",
+  ULTRA_BUNDLE = "ULTRA_BUNDLE",
+  UNIQUE_BUNDLE = "UNIQUE_BUNDLE",
+  LEGENDARY_BUNDLE = "LEGENDARY_BUNDLE"
 }
 
 export const MemoryDiscs = [
@@ -439,6 +461,7 @@ export const TownItems = [
 
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
+  Item.PRISON_BOTTLE,
   ...TownItems,
   Item.COIN,
   Item.NUGGET,
@@ -918,6 +941,12 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
+// only these items for now, to avoid synergy item problems
+export const DoubleUpTradeableItems: Item[] = [
+  ...ItemComponentsNoScarf,
+  ...CraftableItemsNoScarves
+]
+
 export const Wands = [
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
@@ -1125,6 +1154,7 @@ export const Sweets = [
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
 export const UnholdableItems = [
+  Item.PRISON_BOTTLE,
   ...WeatherRocks,
   ...FishingRods,
   ...Wands,

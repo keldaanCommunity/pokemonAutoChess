@@ -12,6 +12,7 @@ import {
   Transfer
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import {
@@ -677,7 +678,7 @@ export default class MinigameManager {
     }
   }
 
-  showEmote(id: string, emote: Emotion) {
+  showEmote(id: string, emote: string) {
     const pokemonAvatar = this.pokemons.get(id)
     if (pokemonAvatar) {
       pokemonAvatar.action = PokemonActionState.EMOTE
@@ -687,7 +688,18 @@ export default class MinigameManager {
         false,
         false
       )
-      pokemonAvatar.drawSpeechBubble(emote, false)
+      if (emote.startsWith("player_dialog/")) {
+        this.scene.board?.displayText(
+          pokemonAvatar.x,
+          pokemonAvatar.y - 10,
+          t(
+            `player_dialog.${emote.substring("player_dialog/".length) as PlayerDialog}`
+          ),
+          true
+        )
+      } else {
+        pokemonAvatar.drawSpeechBubble(emote, false)
+      }
     }
   }
 
