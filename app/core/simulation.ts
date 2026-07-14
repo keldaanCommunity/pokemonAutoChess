@@ -1,10 +1,10 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
+import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
   SynergyTiers
 } from "../config/game/synergies"
-import { BOARD_HEIGHT, BOARD_WIDTH, BOARD_SIDE_HEIGHT } from "../config"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -23,11 +23,11 @@ import { EffectEnum } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
+  GameMode,
   Orientation,
   PokemonActionState,
   Rarity,
-  Team,
-  GameMode
+  Team
 } from "../types/enum/Game"
 import {
   CraftableItemsNoScarves,
@@ -355,7 +355,11 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
     } else {
-      for (let y = this.board.rows - 1; y >= this.board.rows - BOARD_SIDE_HEIGHT; y--) {
+      for (
+        let y = this.board.rows - 1;
+        y >= this.board.rows - BOARD_SIDE_HEIGHT;
+        y--
+      ) {
         for (let x = this.board.columns - 1; x >= 0; x--) {
           if (
             this.board.isOnBoard(x, y) &&
@@ -1541,8 +1545,11 @@ export default class Simulation extends Schema implements ISimulation {
           opponentTeam,
           this.stageLevel
         )
-        
-        if (!isGhostPlayer && !(this.room.state.gameMode === GameMode.DOUBLE_UP && !isPvE)) {
+
+        if (
+          !isGhostPlayer &&
+          !(this.room.state.gameMode === GameMode.DOUBLE_UP && !isPvE)
+        ) {
           player.life -= playerDamage
           if (playerDamage > 0) {
             client?.send(Transfer.PLAYER_DAMAGE, playerDamage)

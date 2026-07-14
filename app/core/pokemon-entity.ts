@@ -1620,7 +1620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.PECHA_BERRY:
         heal(100)
-        this.status.poisonOrigin = undefined
+        this.status.poisonOrigin = null
         this.status.poisonStacks = 0
         this.status.poisonDamageCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_POISON)

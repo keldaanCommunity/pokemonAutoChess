@@ -55,6 +55,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 - Lapras DEF: 7 → 5 ; PP: 100 → 120
 - Change Entrainment (Audino): can no longer a target already entrained
+- Buff Ember board effect: BURN duration 1 second → 2 seconds
 
 
 # Changes to Synergies
@@ -85,6 +86,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 # Bugfix
 
 - Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
+- Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
 
 # Misc
 
