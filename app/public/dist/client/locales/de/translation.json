@@ -534,7 +534,6 @@
 		"GEAR_GRIND": "Klikkdiskus",
 		"STRANGE_STEAM": "Wunderdampf",
 		"PUMMELING_PAYBACK": "Vergeltungsschlag",
-		"VOLT_SURGE": "",
 		"SUPERCELL_SLAM": "Donnerstoß",
 		"HIGH_HORSEPOWER": "Pferdestärke",
 		"BULLET_PUNCH": "Panzerfäuste",
@@ -3167,8 +3166,7 @@
 		"CHINGLING": "$t(pkm.CHINGLING) entwickelt sich zu $t(pkm.CHIMECHO), nachdem dein Team 30 Fähigkeiten, mit Klingplim auf dem Feld, verwendet hat. ",
 		"CHIMECHO": "Palimpalim ist mit seinen ADJACENT Partnern im Gleichklang und erhält 3 PP, wenn diese ihre Fähigkeit nutzen. ",
 		"BURMY": "Burmy entwickelt sich zu Burmdame wenn du 3 Burmy mit dem selbem Umhang sammelst. Es entwickelt sich zu Moterpel auf Ebene 20, falls du in einer Region bist, die keinen Typen seines Umhanges hat. ",
-		"GALARIAN_DARMANITAN": "Wenn unter 30% HP, schüttelt Feinde ab und verwandle in Trance-Modus.",
-		"GALARIAN_DARMANITAN_ZEN": ""
+		"GALARIAN_DARMANITAN": "Wenn unter 30% HP, schüttelt Feinde ab und verwandle in Trance-Modus."
 	},
 	"stat": {
 		"ATK": "Angriff",
@@ -4483,6 +4481,4 @@
 	"gold_needed_to_level_up": "Gold benötigt zum Levelaufstieg:",
 	"item_component": "Komponente",
 	"unlocked": "Freigeschalten",
-	"show_alt_forms": "",
-	"filters": ""
 }
