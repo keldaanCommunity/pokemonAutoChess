@@ -1,82 +1,134 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
-import { IMeta, fetchMeta } from "../../../../../models/mongo-models/meta"
-import { MetaChart } from "./meta-chart"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
+import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import { fetchMetaV2, type IMetaV2 } from "../../../models/meta-v2"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import TeamComp from "./team-comp"
+import "./composition-report.css"
+
+const ROW_HEIGHT = 300
 
 export function CompositionReport() {
   const [loading, setLoading] = useState<boolean>(true)
-  const [meta, setMeta] = useState<IMeta[]>([])
-  const [selectedComposition, setSelectedComposition] = useState<
-    string | undefined
-  >()
+  const [meta, setMeta] = useState<IMetaV2[]>([])
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
+
   useEffect(() => {
-    fetchMeta().then((res) => {
+    fetchMetaV2().then((res) => {
       setLoading(false)
       setMeta(res)
     })
   }, [])
-  const [rankingBy, setRanking] = useState<string>("count")
+  const [rankingBy, setRanking] = useState<string>("mean_rank")
+
+  const popularPokemonOptions = useMemo(() => {
+    const pokemonPopularity = new Map<Pkm, number>()
+
+    meta.forEach((team) => {
+      Object.entries(team.mean_team?.pokemons ?? {}).forEach(
+        ([pokemon, data]) => {
+          const popularity = (data?.frequency ?? 0) * team.count
+          const current = pokemonPopularity.get(pokemon as Pkm) ?? 0
+          pokemonPopularity.set(pokemon as Pkm, current + popularity)
+        }
+      )
+    })
+
+    return [...pokemonPopularity.keys()].sort((a, b) => a.localeCompare(b))
+  }, [meta])
 
   const sortedMeta = useMemo(() => {
-    return [...meta].sort((a, b) => {
-      const order = rankingBy == "count" || rankingBy == "winrate" ? -1 : 1
+    const filteredMeta = selectedPkm
+      ? meta.filter((team) => {
+          const pokemons = team.mean_team?.pokemons ?? {}
+          const data = pokemons[selectedPkm]
+          return (data?.frequency ?? 0) > 0
+        })
+      : meta
+
+    return [...filteredMeta].sort((a, b) => {
+      const order = rankingBy === "count" || rankingBy === "winrate" ? -1 : 1
       return (a[rankingBy] - b[rankingBy]) * order
     })
-  }, [meta, rankingBy])
+  }, [meta, rankingBy, selectedPkm])
 
-  useEffect(() => {
-    if (selectedComposition) {
-      const element = document.getElementById(selectedComposition)
-      if (element) {
-        element.scrollIntoView()
-      }
-    }
-  }, [selectedComposition])
+  const dynamicRowHeight = useDynamicRowHeight({
+    defaultRowHeight: ROW_HEIGHT,
+    key: sortedMeta.length
+  })
 
   return (
     <div id="meta-report-compo">
       <header>
         <h2>{t("best_team_compositions")}</h2>
-        <select
-          value={rankingBy}
-          onChange={(e) => setRanking(e.target.value)}
-          className="my-select"
-        >
-          <option value="count">
-            {t("rank")} {t("by_poularity")}
-          </option>
-          <option value="mean_rank">
-            {t("rank")} {t("by_average_place")}
-          </option>
-          <option value="winrate">
-            {t("rank")} {t("by_winrate")}
-          </option>
-        </select>
+        <div className="filters">
+          <select
+            value={rankingBy}
+            onChange={(e) => setRanking(e.target.value)}
+          >
+            <option value="count">
+              {t("rank")} {t("by_popularity")}
+            </option>
+            <option value="mean_rank">
+              {t("rank")} {t("by_average_place")}
+            </option>
+            <option value="winrate">
+              {t("rank")} {t("by_winrate")}
+            </option>
+          </select>
+        </div>
+        <PokemonTypeahead
+          value={selectedPkm}
+          options={popularPokemonOptions}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
       </header>
 
-      <div
-        style={{
-          height: "calc(90vh - 8em)",
-          display: "flex",
-          justifyContent: "space-between",
-          gap: "1em"
-        }}
-      >
+      <article>
         {sortedMeta.length === 0 && (
           <p>{loading ? t("loading") : t("no_data_available")}</p>
         )}
-        {meta.length > 0 && (
-          <MetaChart
-            meta={meta}
-            setSelectedComposition={setSelectedComposition}
+        <div id="meta-report-compo-list">
+          <AutoSizer
+            renderProp={({ height, width }) => {
+              if (height === undefined || width === undefined) return null
+              return (
+                <List<CompoRowData>
+                  style={{ height, width }}
+                  rowCount={sortedMeta.length}
+                  rowHeight={dynamicRowHeight}
+                  rowComponent={CompositionRow}
+                  rowProps={{ sortedMeta }}
+                />
+              )
+            }}
           />
-        )}
-        <div style={{ width: "50%", overflowY: "scroll" }}>
-          {sortedMeta.map((team, i) => {
-            return <TeamComp team={team} rank={i + 1} key={team.cluster_id} />
-          })}
         </div>
+      </article>
+    </div>
+  )
+}
+
+type CompoRowData = {
+  sortedMeta: IMetaV2[]
+}
+
+function CompositionRow({
+  index,
+  style,
+  sortedMeta
+}: {
+  ariaAttributes: object
+  index: number
+  style: React.CSSProperties
+} & CompoRowData): React.ReactElement | null {
+  return (
+    <div style={{ ...style, paddingBottom: "0.5em" }}>
+      <div>
+        <TeamComp team={sortedMeta[index]} rank={index + 1} />
       </div>
     </div>
   )

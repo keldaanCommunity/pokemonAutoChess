@@ -1,0 +1,28 @@
+.game-spectate-player-info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: 1em;
+}
+
+.game-spectate-player-info .player-name {
+  font-weight: bold;
+}
+
+.game-spectate-player-info span {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.game-spectate-player-info .icon-life,
+.game-spectate-player-info .icon-money {
+  width: 1.5em;
+  height: 1.5em;
+}

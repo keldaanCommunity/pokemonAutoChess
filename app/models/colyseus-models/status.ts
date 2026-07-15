@@ -1,28 +1,41 @@
 import { Schema, type } from "@colyseus/schema"
-import Board from "../../core/board"
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { IPokemonEntity, IStatus, Transfer } from "../../types"
-import { Ability } from "../../types/enum/Ability"
-import { Effect } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import type { Board } from "../../core/board"
+import { transformToIceFace } from "../../core/effects/passives"
+import type { PokemonEntity } from "../../core/pokemon-entity"
+import {
+  type IPokemonEntity,
+  type ISimulation,
+  type IStatus,
+  Transfer
+} from "../../types"
+import { EffectEnum } from "../../types/enum/Effect"
+import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { max } from "../../utils/number"
+import { count } from "../../utils/array"
+import { max, min } from "../../utils/number"
+import { schemaValues } from "../../utils/schemas"
 
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
   @type("boolean") silence = false
+  @type("boolean") fatigue = false
   @type("number") poisonStacks = 0
   @type("boolean") freeze = false
   @type("boolean") protect = false
   @type("boolean") sleep = false
   @type("boolean") confusion = false
   @type("boolean") wound = false
-  @type("boolean") resurection = false
-  @type("boolean") resurecting = false
+  @type("boolean") resurrection = false
+  @type("boolean") resurrecting = false
   @type("boolean") paralysis = false
+  @type("boolean") pokerus = false
+  @type("boolean") possessed = false
+  @type("boolean") locked = false
+  @type("boolean") blinded = false
   @type("boolean") armorReduction = false
   @type("boolean") runeProtect = false
   @type("boolean") charm = false
@@ -33,24 +46,26 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") fairyField = false
   @type("boolean") spikeArmor = false
   @type("boolean") magicBounce = false
+  @type("boolean") reflect = false
   @type("boolean") light = false
   @type("boolean") curse = false
+  @type("boolean") curseVulnerability = false
+  @type("boolean") curseWeakness = false
+  @type("boolean") curseTorment = false
+  @type("boolean") curseFate = false
   @type("boolean") enraged = false
-  magmaStorm = false
-  soulDew = false
-  deltaOrbStacks = 0
-  clearWing = false
-  guts = false
-  burnOrigin: PokemonEntity | undefined = undefined
-  poisonOrigin: PokemonEntity | undefined = undefined
-  silenceOrigin: PokemonEntity | undefined = undefined
-  woundOrigin: PokemonEntity | undefined = undefined
-  charmOrigin: PokemonEntity | undefined = undefined
-  magmaStormOrigin: PokemonEntity | null = null
-  clearWingCooldown = 1000
+  @type("boolean") skydiving = false
+  @type("boolean") tree = false
+  burnOrigin: PokemonEntity | null = null
+  poisonOrigin: PokemonEntity | null = null
+  silenceOrigin: PokemonEntity | null = null
+  woundOrigin: PokemonEntity | null = null
+  charmOrigin: PokemonEntity | null = null
+  possessedOrigin: PokemonEntity | null = null
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
+  fatigueCooldown = 0
   poisonCooldown = 0
   poisonDamageCooldown = 1000
   freezeCooldown = 0
@@ -58,28 +73,56 @@ export default class Status extends Schema implements IStatus {
   sleepCooldown = 0
   confusionCooldown = 0
   woundCooldown = 0
-  soulDewCooldown = 0
   paralysisCooldown = 0
   armorReductionCooldown = 0
   runeProtectCooldown = 0
   charmCooldown = 0
   flinchCooldown = 0
+  enrageCooldown = 0
   spikeArmorCooldown = 0
   magicBounceCooldown = 0
-  synchroCooldown = 3000
-  magmaStormCooldown = 0
-  synchro = false
-  tree = false
-  resurectingCooldown = 0
-  doubleDamage = false
-  drySkin = false
-  drySkinCooldown = 1000
+  reflectCooldown = 0
+  resurrectingCooldown = 0
   curseCooldown = 0
+  pokerusCooldown = 3000
+  possessedCooldown = 0
+  lockedCooldown = 0
+  blindCooldown = 0
   enrageDelay = 35000
+  ccCooldown = 0
+  untargettable = false
 
-  clearNegativeStatus() {
+  constructor(simulation: ISimulation) {
+    super()
+    const elapsedTime = FIGHTING_PHASE_DURATION - simulation.room.state.time
+    this.enrageDelay = this.enrageDelay - elapsedTime
+  }
+
+  clearAllStatus(entity: PokemonEntity) {
+    this.clearNegativeStatus(entity)
+    this.clearPositiveStatus(entity)
+  }
+
+  clearPositiveStatus(entity: PokemonEntity) {
+    this.ccCooldown = 0
+    this.protectCooldown = 0
+    this.runeProtectCooldown = 0
+    this.enrageCooldown = 0
+    this.spikeArmorCooldown = 0
+    this.magicBounceCooldown = 0
+    this.reflectCooldown = 0
+    this.pokerusCooldown = 0
+    this.resurrection = false
+    this.removeElectricField(entity)
+    this.removePsychicField(entity)
+    this.removeGrassField(entity)
+    this.removeFairyField(entity)
+  }
+
+  clearNegativeStatus(entity: IPokemonEntity, origin?: IPokemonEntity) {
     this.burnCooldown = 0
     this.silenceCooldown = 0
+    this.fatigueCooldown = 0
     this.poisonCooldown = 0
     this.freezeCooldown = 0
     this.sleepCooldown = 0
@@ -89,29 +132,96 @@ export default class Status extends Schema implements IStatus {
     this.charmCooldown = 0
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
-    this.curseCooldown = 0
+    if (this.curse && this.curseCooldown > 0) {
+      this.curseCooldown += 2000 // do not clear curseCooldown on purpose
+    }
     this.curse = false
+    if (this.possessed && origin && origin.team === entity.team) {
+      // Posession should not be considered negative status if by being possessed it comes to your team
+    } else {
+      this.possessedCooldown = 0
+    }
+    this.lockedCooldown = 0
+    this.blindCooldown = 0
+  }
+
+  hasNegativeStatus() {
+    return (
+      this.burn ||
+      this.silence ||
+      this.fatigue ||
+      this.poisonStacks > 0 ||
+      this.freeze ||
+      this.sleep ||
+      this.confusion ||
+      this.wound ||
+      this.paralysis ||
+      this.charm ||
+      this.flinch ||
+      this.armorReduction ||
+      this.curse ||
+      this.locked ||
+      this.blinded ||
+      this.possessed
+    )
+  }
+
+  transferNegativeStatus(from: PokemonEntity, to: PokemonEntity) {
+    if (this.burn) to.status.triggerBurn(this.burnCooldown, to, from)
+    if (this.silence) to.status.triggerSilence(this.silenceCooldown, to, from)
+    if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to, from)
+    if (this.poisonStacks > 0)
+      to.status.triggerPoison(this.poisonCooldown, to, from)
+    if (this.freeze) to.status.triggerFreeze(this.freezeCooldown, to, from)
+    if (this.sleep) to.status.triggerSleep(this.sleepCooldown, to)
+    if (this.confusion)
+      to.status.triggerConfusion(this.confusionCooldown, to, from)
+    if (this.wound) to.status.triggerWound(this.woundCooldown, to, from)
+    if (this.paralysis)
+      to.status.triggerParalysis(this.paralysisCooldown, to, from)
+    if (this.charm) to.status.triggerCharm(this.charmCooldown, to, from)
+    if (this.flinch) to.status.triggerFlinch(this.flinchCooldown, to, from)
+    if (this.armorReduction)
+      to.status.triggerArmorReduction(this.armorReductionCooldown, to)
+    if (this.curse) to.status.triggerCurse(this.curseCooldown, to)
+    if (this.locked) to.status.triggerLocked(this.lockedCooldown, to)
+    if (this.blinded) to.status.triggerBlinded(this.blindCooldown, to, from)
+    if (this.possessed)
+      to.status.triggerPossessed(this.possessedCooldown, to, from)
   }
 
   updateAllStatus(dt: number, pokemon: PokemonEntity, board: Board) {
-    if (pokemon.effects.has(Effect.POISON_GAS) && this.poisonStacks === 0) {
+    if (
+      pokemon.effects.has(EffectEnum.POISON_GAS) &&
+      this.poisonStacks === 0 &&
+      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false
+    ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
 
     if (
-      pokemon.effects.has(Effect.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !this.wound
+      pokemon.effects.has(EffectEnum.SMOKE) &&
+      !this.blinded &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      pokemon.handleDamage({
-        damage: 10,
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker: null,
-        shouldTargetGainMana: true
-      })
-      this.triggerWound(1000, pokemon, undefined)
+      this.triggerBlinded(1000, pokemon, null)
+    }
+
+    if (
+      pokemon.effects.has(EffectEnum.STICKY_WEB) &&
+      !this.paralysis &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+    ) {
+      this.triggerParalysis(2000, pokemon, null)
+    }
+
+    if (
+      pokemon.effects.has(EffectEnum.COTTON_BALL) &&
+      !this.sleep &&
+      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+    ) {
+      this.triggerSleep(1000, pokemon)
+      pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
     if (pokemon.status.runeProtect) {
@@ -127,11 +237,15 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.sleep) {
-      this.updateSleep(dt)
+      this.updateSleep(dt, pokemon)
     }
 
     if (this.silence) {
       this.updateSilence(dt)
+    }
+
+    if (this.fatigue) {
+      this.updateFatigue(dt)
     }
 
     if (this.protect) {
@@ -143,19 +257,31 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.confusion) {
-      this.updateConfusion(dt)
+      this.updateConfusion(dt, pokemon)
     }
 
     if (this.wound) {
       this.updateWound(dt)
     }
 
-    if (this.soulDew) {
-      this.updateSoulDew(dt, pokemon)
-    }
-
     if (this.paralysis) {
       this.updateParalysis(dt, pokemon)
+    }
+
+    if (this.locked) {
+      this.updateLocked(dt, pokemon)
+    }
+
+    if (this.possessed) {
+      this.updatePossessed(dt, pokemon)
+    }
+
+    if (this.blinded) {
+      this.updateBlinded(dt)
+    }
+
+    if (this.pokerus) {
+      this.updatePokerus(dt, pokemon, board)
     }
 
     if (this.armorReduction) {
@@ -163,7 +289,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (this.charm) {
-      this.updateCharm(dt)
+      this.updateCharm(dt, pokemon)
     }
 
     if (this.flinch) {
@@ -178,81 +304,49 @@ export default class Status extends Schema implements IStatus {
       this.updateMagicBounce(dt)
     }
 
-    if (this.synchro) {
-      this.updateSynchro(dt, board, pokemon)
+    if (this.reflect) {
+      this.updateReflect(dt)
     }
 
-    if (this.resurecting) {
-      this.updateResurecting(dt, pokemon)
-    }
-
-    if (this.magmaStorm) {
-      this.updateMagmaStorm(dt, board, pokemon)
-    }
-
-    if (this.clearWing) {
-      this.updateClearWing(dt, pokemon)
-    }
-
-    if (this.drySkin) {
-      this.updateDrySkin(dt, pokemon)
+    if (this.resurrecting) {
+      this.updateResurrecting(dt, pokemon)
     }
 
     if (this.curse) {
       this.updateCurse(dt, board, pokemon)
     }
 
-    if (!this.enraged) {
-      this.updateRage(dt, pokemon)
+    this.updateRage(dt, pokemon)
+
+    if (this.ccCooldown > 0) {
+      this.ccCooldown = min(0)(this.ccCooldown - dt)
+    }
+
+    if (pokemon.status.curseVulnerability && !pokemon.status.flinch) {
+      this.triggerFlinch(30000, pokemon)
+    }
+
+    if (pokemon.status.curseWeakness && !pokemon.status.paralysis) {
+      this.triggerParalysis(30000, pokemon, null)
+    }
+
+    if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
+      this.triggerFatigue(30000, pokemon, null)
+    }
+
+    if (pokemon.status.curseFate && !pokemon.status.curse) {
+      this.triggerCurse(8100, pokemon) // +100 ms to trigger just after tidal wave
     }
   }
 
-  triggerMagmaStorm(pkm: PokemonEntity, origin: PokemonEntity | null) {
-    if (!this.magmaStorm && origin) {
-      this.magmaStorm = true
-      this.magmaStormCooldown = 500
-      this.magmaStormOrigin = origin
-    }
-  }
-
-  updateMagmaStorm(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.magmaStormCooldown - dt <= 0) {
-      this.magmaStorm = false
-      const adjacentCells = board.getAdjacentCells(pkm.positionX, pkm.positionY)
-      for (let i = 0; i < adjacentCells.length; i++) {
-        const cell = adjacentCells[i]
-        if (cell && cell.value && cell.value.team === pkm.team) {
-          cell.value.status.triggerMagmaStorm(cell.value, this.magmaStormOrigin)
-          break
-        }
-      }
-      pkm.simulation.room.broadcast(Transfer.ABILITY, {
-        id: pkm.simulation.id,
-        skill: Ability.MAGMA_STORM,
-        positionX: pkm.positionX,
-        positionY: pkm.positionY,
-        targetX: pkm.positionX,
-        targetY: pkm.positionY
-      })
-      pkm.handleSpecialDamage(
-        80,
-        board,
-        AttackType.SPECIAL,
-        this.magmaStormOrigin,
-        false
-      )
-      this.magmaStormOrigin = null
-      this.magmaStormCooldown = 0
-    } else {
-      this.magmaStormCooldown -= dt
-    }
-  }
-
-  triggerArmorReduction(timer: number) {
+  triggerArmorReduction(duration: number, pkm: PokemonEntity) {
     if (!this.runeProtect) {
       this.armorReduction = true
-      if (timer > this.armorReductionCooldown) {
-        this.armorReductionCooldown = timer
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.armorReductionCooldown) {
+        this.armorReductionCooldown = Math.round(duration)
       }
     }
   }
@@ -265,111 +359,76 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateRage(dt: number, pokemon: PokemonEntity) {
-    if (this.enrageDelay - dt <= 0) {
+  triggerRage(duration: number, pokemon: PokemonEntity) {
+    if (!this.enraged) {
       this.enraged = true
       this.protect = false
-      pokemon.addAttackSpeed(100)
-    } else {
-      this.enrageDelay -= dt
+      pokemon.addSpeed(80, pokemon, 0, false)
+      this.enrageCooldown = duration
+      this.sleepCooldown = Math.floor(this.sleepCooldown * 0.5) // Rage reduces sleep duration by half
+      this.freezeCooldown = Math.floor(this.freezeCooldown * 0.5) // Rage reduces freeze duration by half
+    } else if (duration > this.enrageCooldown) {
+      this.enrageCooldown = duration
     }
   }
 
-  triggerClearWing(timer: number) {
-    if (!this.clearWing) {
-      this.clearWing = true
-      this.clearWingCooldown = timer
+  updateRage(dt: number, pokemon: PokemonEntity) {
+    if (
+      !this.enraged &&
+      this.enrageDelay - dt <= 0 &&
+      !pokemon.simulation.finished
+    ) {
+      this.enraged = true
+      this.protect = false
+      pokemon.addSpeed(80, pokemon, 0, false)
+    } else if (
+      this.enraged &&
+      this.enrageCooldown - dt <= 0 &&
+      this.enrageDelay - dt > 0
+    ) {
+      this.enraged = false
+      pokemon.addSpeed(-80, pokemon, 0, false)
     }
-  }
 
-  updateClearWing(dt: number, pkm: PokemonEntity) {
-    if (this.clearWingCooldown - dt <= 0) {
-      this.clearWing = false
-      this.triggerClearWing(1000)
-      pkm.addAttackSpeed(2, false)
-    } else {
-      this.clearWingCooldown -= dt
-    }
-  }
-
-  triggerDrySkin(timer: number) {
-    if (!this.drySkin) {
-      this.drySkin = true
-      this.drySkinCooldown = timer
-    }
-  }
-
-  updateDrySkin(dt: number, pkm: PokemonEntity) {
-    if (this.drySkinCooldown - dt <= 0) {
-      this.drySkin = false
-      this.triggerDrySkin(1000)
-      pkm.handleHeal(8, pkm, 0)
-    } else {
-      this.drySkinCooldown -= dt
-    }
-  }
-
-  triggerSynchro() {
-    this.synchro = true
-    this.synchroCooldown = 3000
-  }
-
-  updateSynchro(dt: number, board: Board, pkm: PokemonEntity) {
-    if (this.synchroCooldown - dt <= 0) {
-      this.synchro = false
-      this.triggerSynchro()
-      if (this.burn && this.burnOrigin) {
-        this.burnOrigin.status.triggerBurn(3000, this.burnOrigin, pkm)
-      }
-      if (this.poisonStacks && this.poisonOrigin) {
-        this.poisonOrigin.status.triggerPoison(3000, this.poisonOrigin, pkm)
-      }
-      if (this.wound && this.woundOrigin) {
-        this.woundOrigin.status.triggerWound(3000, this.woundOrigin, pkm)
-      }
-      if (this.silence && this.silenceOrigin) {
-        this.silenceOrigin.status.triggerSilence(3000, pkm)
-      }
-    } else {
-      this.synchroCooldown -= dt
-    }
-  }
-
-  triggerSoulDew(timer: number) {
-    this.soulDew = true
-    this.soulDewCooldown = timer
-  }
-
-  updateSoulDew(dt: number, pkm: PokemonEntity) {
-    if (this.soulDewCooldown - dt <= 0) {
-      this.soulDew = false
-      pkm.addAbilityPower(8)
-      pkm.count.soulDewCount++
-      if (pkm.items.has(Item.SOUL_DEW)) {
-        this.triggerSoulDew(1000)
-      }
-    } else {
-      this.soulDewCooldown -= dt
-    }
+    this.enrageDelay -= dt
+    this.enrageCooldown -= dt
   }
 
   triggerBurn(
-    timer: number,
+    duration: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | null
   ) {
-    if (!pkm.effects.has(Effect.IMMUNITY_BURN) && !this.runeProtect) {
+    const alreadyBurning = this.burn
+    if (
+      !pkm.effects.has(EffectEnum.IMMUNITY_BURN) &&
+      !this.runeProtect &&
+      pkm.passive !== Passive.WATER_BUBBLE
+    ) {
       this.burn = true
-      if (timer > this.burnCooldown) {
-        this.burnCooldown = timer
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.burnCooldown) {
+        this.burnCooldown = duration
         if (origin) {
           this.burnOrigin = origin
         }
       }
 
-      if (pkm.passive === Passive.GUTS && !this.guts) {
-        this.guts = true
-        pkm.addAttack(5, false)
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(EffectEnum.GUTS_PASSIVE)
+      ) {
+        pkm.effects.add(EffectEnum.GUTS_PASSIVE)
+        pkm.addAttack(5, pkm, 0, false)
+      }
+
+      if (pkm.passive === Passive.WELL_BAKED && !alreadyBurning) {
+        pkm.addDefense(20, pkm, 0, false)
+      }
+      if (pkm.items.has(Item.MAGMARIZER) && !alreadyBurning) {
+        pkm.addSpeed(30, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -380,18 +439,47 @@ export default class Status extends Schema implements IStatus {
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
-      if (this.burnOrigin) {
-        let burnDamage = Math.ceil(pkm.hp * 0.05)
-        if (pkm.simulation.weather === Weather.SUN) {
-          burnDamage = Math.round(burnDamage * 1.3)
-        } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage = Math.round(burnDamage * 0.7)
+      let burnDamage = pkm.maxHP * 0.05
+      if (pkm.simulation.weather === Weather.DROUGHT) {
+        burnDamage *= 1.3
+        const nbHeatRocks = pkm.player
+          ? count(pkm.player.items, Item.HEAT_ROCK)
+          : 0
+        if (nbHeatRocks > 0) {
+          burnDamage *= 1 - 0.2 * nbHeatRocks
         }
+      } else if (pkm.simulation.weather === Weather.RAIN) {
+        burnDamage *= 0.7
+      }
 
-        if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage = Math.round(burnDamage * 0.5)
-        }
+      if (pkm.items.has(Item.ASSAULT_VEST)) {
+        burnDamage *= 0.5
+      }
 
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        burnDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        burnDamage *= 0.5
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
+      ) {
+        burnDamage *= 0.3
+      }
+
+      if (
+        pkm.passive === Passive.WELL_BAKED ||
+        pkm.items.has(Item.MAGMARIZER)
+      ) {
+        burnDamage = 0
+      }
+
+      if (pkm.items.has(Item.COOKING_POT)) {
+        pkm.addSpeed(10, pkm, 0, false)
+      }
+
+      burnDamage = Math.round(burnDamage)
+      if (burnDamage > 0) {
         pkm.handleDamage({
           damage: burnDamage,
           board,
@@ -399,8 +487,8 @@ export default class Status extends Schema implements IStatus {
           attacker: this.burnOrigin,
           shouldTargetGainMana: true
         })
-        this.burnDamageCooldown = 1000
       }
+      this.burnDamageCooldown = 1000
     } else {
       this.burnDamageCooldown -= dt
     }
@@ -413,20 +501,33 @@ export default class Status extends Schema implements IStatus {
   }
 
   healBurn(pkm: PokemonEntity) {
+    if (!this.burn) return
     this.burn = false
-    this.burnOrigin = undefined
-    this.burnDamageCooldown = 0
+    this.burnOrigin = null
+    this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
-      this.guts = false
-      pkm.addAttack(-5, false)
+      pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
+      pkm.addAttack(-5, pkm, 0, false)
+    }
+    if (pkm.passive === Passive.WELL_BAKED) {
+      pkm.addDefense(-20, pkm, 0, false)
+    }
+    if (pkm.items.has(Item.MAGMARIZER)) {
+      pkm.addSpeed(-30, pkm, 0, false)
     }
   }
 
-  triggerSilence(timer: number, origin: PokemonEntity | undefined) {
+  triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
+      if (pkm.simulation.weather === Weather.MURKY) {
+        duration *= 1.3
+      }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
       this.silence = true
-      if (timer > this.silenceCooldown) {
-        this.silenceCooldown = timer
+      if (duration > this.silenceCooldown) {
+        this.silenceCooldown = duration
         if (origin) {
           this.silenceOrigin = origin
         }
@@ -437,35 +538,74 @@ export default class Status extends Schema implements IStatus {
   updateSilence(dt: number) {
     if (this.silenceCooldown - dt <= 0) {
       this.silence = false
-      this.silenceOrigin = undefined
+      this.silenceOrigin = null
     } else {
       this.silenceCooldown -= dt
     }
   }
 
+  triggerFatigue(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
+    if (!this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      this.fatigue = true
+      if (duration > this.fatigueCooldown) {
+        this.fatigueCooldown = Math.round(duration)
+      }
+    }
+  }
+
+  updateFatigue(dt: number) {
+    if (this.fatigueCooldown - dt <= 0) {
+      this.fatigue = false
+    } else {
+      this.fatigueCooldown -= dt
+    }
+  }
+
   triggerPoison(
-    timer: number,
+    duration: number,
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
-    if (!pkm.effects.has(Effect.IMMUNITY_POISON) && !this.runeProtect) {
+    if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
       if (origin) {
         this.poisonOrigin = origin
-        if (origin.effects.has(Effect.VENOMOUS)) {
+        if (origin.effects.has(EffectEnum.VENOMOUS)) {
           maxStacks = 4
         }
-        if (origin.effects.has(Effect.TOXIC)) {
+        if (origin.effects.has(EffectEnum.TOXIC)) {
           maxStacks = 5
         }
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
-      if (timer > this.poisonCooldown) {
-        this.poisonCooldown = timer
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.poisonCooldown) {
+        this.poisonCooldown = duration
       }
-      if (pkm.passive === Passive.GUTS && !this.guts) {
-        this.guts = true
-        pkm.addAttack(5, false)
+      if (
+        pkm.passive === Passive.GUTS &&
+        !pkm.effects.has(EffectEnum.GUTS_PASSIVE)
+      ) {
+        pkm.effects.add(EffectEnum.GUTS_PASSIVE)
+        pkm.addAttack(5, pkm, 0, false)
+      }
+
+      if (
+        pkm.passive === Passive.TOXIC_BOOST &&
+        !pkm.effects.has(EffectEnum.TOXIC_BOOST)
+      ) {
+        pkm.effects.add(EffectEnum.TOXIC_BOOST)
+        pkm.addAttack(10, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.PECHA_BERRY)) {
@@ -476,23 +616,40 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = Math.ceil(pkm.hp * 0.05 * this.poisonStacks)
+      let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
+
+      if (pkm.passive === Passive.GLISCOR) {
+        poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
+      }
+
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage = Math.round(poisonDamage * 0.7)
+        poisonDamage *= 0.7
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
-        poisonDamage = Math.round(poisonDamage * 0.5)
+        poisonDamage *= 0.5
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        poisonDamage *= 0.5
       }
 
-      if (
-        pkm.passive === Passive.POISON_HEAL ||
-        pkm.passive === Passive.GLIGAR
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        poisonDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        poisonDamage *= 0.5
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
       ) {
-        pkm.handleHeal(poisonDamage, pkm, 0)
-      } else {
+        poisonDamage *= 0.3
+      }
+      poisonDamage = Math.round(poisonDamage)
+
+      if (poisonDamage < 0) {
+        pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
+      } else if (poisonDamage > 0) {
         pkm.handleDamage({
-          damage: poisonDamage,
+          damage: min(1)(Math.round(poisonDamage)),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
@@ -500,7 +657,7 @@ export default class Status extends Schema implements IStatus {
         })
       }
 
-      if (pkm.effects.has(Effect.POISON_GAS)) {
+      if (pkm.effects.has(EffectEnum.POISON_GAS)) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
       }
@@ -512,36 +669,62 @@ export default class Status extends Schema implements IStatus {
 
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
-      this.poisonOrigin = undefined
+      this.poisonOrigin = null
+      this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
-        this.guts = false
-        pkm.addAttack(-5, false)
+        pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
+        pkm.addAttack(-5, pkm, 0, false)
+      }
+      if (pkm.passive === Passive.TOXIC_BOOST) {
+        pkm.effects.delete(EffectEnum.TOXIC_BOOST)
+        pkm.addAttack(-10, pkm, 0, false)
       }
     } else {
       this.poisonCooldown = this.poisonCooldown - dt
     }
   }
 
-  triggerFreeze(timer: number, pkm: PokemonEntity) {
+  triggerFreeze(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | undefined
+  ) {
     if (
       !this.freeze && // freeze cannot be stacked
       !this.runeProtect &&
-      !pkm.effects.has(Effect.IMMUNITY_FREEZE)
+      !this.skydiving &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_FREEZE) &&
+      this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
-        timer *= 1.3
-      } else if (pkm.simulation.weather === Weather.SUN) {
-        timer *= 0.7
+        duration *= 1.3
+        const nbIcyRocks = pkm.player
+          ? count(pkm.player.items, Item.ICY_ROCK)
+          : 0
+        if (nbIcyRocks > 0) {
+          duration *= 1 - 0.2 * nbIcyRocks
+        }
+      } else if (pkm.simulation.weather === Weather.DROUGHT) {
+        duration *= 0.7
       }
       if (pkm.status.enraged) {
-        timer = timer / 2
+        duration = duration / 2
       }
 
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
       this.freeze = true
-      this.freezeCooldown = Math.round(timer)
+      this.freezeCooldown = Math.round(duration)
 
       if (pkm.items.has(Item.ASPEAR_BERRY)) {
         pkm.eatBerry(Item.ASPEAR_BERRY)
+      }
+
+      if (pkm.passive === Passive.EISCUE_NOICE) {
+        transformToIceFace(pkm, false)
+      }
+      if (origin?.passive === Passive.EISCUE_NOICE) {
+        transformToIceFace(origin, false)
       }
     }
   }
@@ -549,8 +732,9 @@ export default class Status extends Schema implements IStatus {
   updateFreeze(dt: number) {
     if (this.freezeCooldown - dt <= 0) {
       this.freeze = false
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
-      this.freezeCooldown -= dt
+      this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
     }
   }
 
@@ -570,20 +754,27 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerSleep(timer: number, pkm: PokemonEntity) {
+  triggerSleep(duration: number, pkm: PokemonEntity) {
     if (
       !this.sleep &&
       !this.runeProtect &&
-      !pkm.effects.has(Effect.IMMUNITY_SLEEP)
+      !this.skydiving &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+      this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
-        timer *= 1.3
+        duration *= 1.3
+      } else if (pkm.simulation.weather === Weather.ZENITH) {
+        duration *= 0.7
       }
       if (pkm.status.enraged) {
-        timer = timer / 2
+        duration = duration / 2
       }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
       this.sleep = true
-      this.sleepCooldown = Math.round(timer)
+      this.sleepCooldown = Math.round(duration)
 
       if (pkm.items.has(Item.CHESTO_BERRY)) {
         pkm.eatBerry(Item.CHESTO_BERRY)
@@ -591,80 +782,110 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  updateSleep(dt: number) {
+  updateSleep(dt: number, pkm: PokemonEntity) {
+    if (pkm.passive === Passive.COMATOSE) {
+      this.sleep = true
+      this.sleepCooldown = 1000
+      return
+    }
+
     if (this.sleepCooldown - dt <= 0) {
       this.sleep = false
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
+      if (pkm.passive === Passive.SLAKING) {
+        this.triggerRage(3000, pkm)
+      }
     } else {
       this.sleepCooldown = this.sleepCooldown - dt
     }
   }
 
-  triggerConfusion(timer: number, pkm: PokemonEntity) {
+  triggerConfusion(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity,
+    apBoost = false
+  ) {
     if (
       !this.confusion &&
       !this.runeProtect &&
-      !pkm.effects.has(Effect.IMMUNITY_CONFUSION)
+      !pkm.effects.has(EffectEnum.IMMUNITY_CONFUSION)
     ) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.SANDSTORM) {
-        timer = Math.round(timer * 1.3)
+        duration *= 1.3
       }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
       this.confusion = true
-      this.confusionCooldown = timer
+      this.confusionCooldown = Math.round(duration)
 
       if (pkm.items.has(Item.PERSIM_BERRY)) {
         pkm.eatBerry(Item.PERSIM_BERRY)
       }
+
+      if (pkm.passive === Passive.PSYDUCK) {
+        pkm.addAbilityPower(100, pkm, 0, false)
+      }
     }
   }
 
-  updateConfusion(dt: number) {
+  updateConfusion(dt: number, pkm: PokemonEntity) {
     if (this.confusionCooldown - dt <= 0) {
       this.confusion = false
+      pkm.setTarget(null) // Clear target when confusion ends
     } else {
       this.confusionCooldown -= dt
     }
   }
 
   triggerCharm(
-    timer: number,
+    duration: number,
     pkm: IPokemonEntity,
     origin: PokemonEntity,
     apBoost = false
   ) {
     if (!this.charm && !this.runeProtect) {
-      const boost = apBoost && origin ? (timer * origin.ap) / 100 : 0
-      timer = timer + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.MISTY) {
-        timer = Math.round(timer * 1.3)
+        duration *= 1.3
       }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
       this.charm = true
-      this.charmCooldown = timer
+      this.charmCooldown = duration
       this.charmOrigin = origin
-      if (origin) {
-        pkm.targetX = origin?.positionX
-        pkm.targetY = origin?.positionY
-      }
+      pkm.setTarget(origin)
     }
   }
 
-  updateCharm(dt: number) {
+  updateCharm(dt: number, pkm: PokemonEntity) {
     if (this.charmCooldown - dt <= 0) {
       this.charm = false
-      this.charmOrigin = undefined
+      this.charmOrigin = null
+      pkm.setTarget(null) // force retargeting
     } else {
       this.charmCooldown -= dt
     }
   }
 
   triggerWound(
-    timer: number,
+    duration: number,
     pkm: PokemonEntity,
     origin: PokemonEntity | undefined
   ) {
     if (!this.runeProtect) {
       this.wound = true
-      if (timer > this.woundCooldown) {
-        this.woundCooldown = timer
+      if (pkm.simulation.weather === Weather.BLOODMOON) {
+        duration *= 1.3
+      }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.woundCooldown) {
+        this.woundCooldown = duration
         if (origin) {
           this.woundOrigin = origin
         }
@@ -675,23 +896,37 @@ export default class Status extends Schema implements IStatus {
   updateWound(dt: number) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false
-      this.woundOrigin = undefined
+      this.woundOrigin = null
     } else {
       this.woundCooldown -= dt
     }
   }
 
-  triggerParalysis(timer: number, pkm: PokemonEntity) {
-    if (!this.runeProtect && !pkm.effects.has(Effect.IMMUNITY_PARALYSIS)) {
+  triggerParalysis(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
+    if (!this.runeProtect && !pkm.effects.has(EffectEnum.IMMUNITY_PARALYSIS)) {
       if (!this.paralysis) {
         this.paralysis = true
-        pkm.addAttackSpeed(-40)
       }
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.STORM) {
-        timer = Math.round(timer * 1.3)
+        duration *= 1.3
+        const nbElectricQuartz = pkm.player
+          ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
+          : 0
+        if (nbElectricQuartz > 0) {
+          duration *= 1 - 0.2 * nbElectricQuartz
+        }
       }
-      if (timer > this.paralysisCooldown) {
-        this.paralysisCooldown = timer
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.paralysisCooldown) {
+        this.paralysisCooldown = Math.round(duration)
       }
 
       if (pkm.items.has(Item.CHERI_BERRY)) {
@@ -712,13 +947,16 @@ export default class Status extends Schema implements IStatus {
     if (this.paralysis) {
       this.paralysis = false
       this.paralysisCooldown = 0
-      pkm.addAttackSpeed(40)
     }
   }
 
-  triggerRuneProtect(timer: number) {
+  triggerRuneProtect(
+    timer: number,
+    pokemon: IPokemonEntity,
+    origin: IPokemonEntity
+  ) {
     this.runeProtect = true
-    this.clearNegativeStatus()
+    this.clearNegativeStatus(pokemon, origin)
     if (timer > this.runeProtectCooldown) {
       this.runeProtectCooldown = timer
     }
@@ -732,11 +970,14 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerFlinch(timer: number) {
+  triggerFlinch(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect) {
       this.flinch = true
-      if (timer > this.flinchCooldown) {
-        this.flinchCooldown = timer
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      if (duration > this.flinchCooldown) {
+        this.flinchCooldown = Math.round(duration)
       }
     }
   }
@@ -779,37 +1020,70 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerResurection(pokemon: PokemonEntity) {
-    this.resurection = false
-    this.resurecting = true
-    this.resurectingCooldown = 2000
-    pokemon.status.clearNegativeStatus()
-  }
-
-  updateResurecting(dt: number, pokemon: PokemonEntity) {
-    if (this.resurectingCooldown - dt <= 0) {
-      this.resurecting = false
-      pokemon.resetStats()
-      pokemon.toMovingState()
-      pokemon.cooldown = 0
-    } else {
-      this.resurectingCooldown -= dt
+  triggerReflect(timer: number) {
+    this.reflect = true
+    if (timer > this.reflectCooldown) {
+      this.reflectCooldown = timer
     }
   }
 
-  triggerCurse(timer: number) {
+  updateReflect(dt: number) {
+    if (this.reflectCooldown - dt <= 0) {
+      this.reflect = false
+    } else {
+      this.reflectCooldown -= dt
+    }
+  }
+
+  addResurrection(pokemon: IPokemonEntity) {
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot be resurrected
+    this.resurrection = true
+  }
+
+  triggerResurrection(pokemon: PokemonEntity, board: Board) {
+    this.resurrection = false
+    this.resurrecting = true
+    this.resurrectingCooldown = 2000
+    this.untargettable = true
+    pokemon.status.clearNegativeStatus(pokemon)
+  }
+
+  updateResurrecting(dt: number, pokemon: PokemonEntity) {
+    if (this.resurrectingCooldown - dt <= 0) {
+      this.resurrecting = false
+      this.untargettable = false
+      pokemon.resurrect()
+      pokemon.toMovingState()
+      pokemon.cooldown = 0
+    } else {
+      this.resurrectingCooldown -= dt
+    }
+  }
+
+  triggerCurse(timer: number, pokemon: PokemonEntity) {
     if (!this.runeProtect) {
       if (this.curse) {
         this.curseCooldown = 0 // apply curse immediately if already cursed
       } else {
         this.curse = true
+        if (this.curseCooldown > 0) {
+          // if status has been cleared, take the remaining time
+          timer = Math.min(this.curseCooldown, timer)
+        } else {
+          const nbOddStones = pokemon.player
+            ? count(pokemon.player.items, Item.ODD_KEYSTONE)
+            : 0
+          timer += nbOddStones * 1000
+        }
+
         this.curseCooldown = timer
       }
     }
   }
 
   updateCurse(dt: number, board: Board, pokemon: PokemonEntity) {
-    if (this.curseCooldown - dt <= 0) {
+    this.curseCooldown -= dt
+    if (this.curseCooldown <= 0) {
       this.curse = false
       pokemon.handleDamage({
         damage: 9999,
@@ -825,8 +1099,253 @@ export default class Status extends Schema implements IStatus {
         positionY: pokemon.positionY,
         orientation: pokemon.orientation
       })
-    } else {
-      this.curseCooldown -= dt
     }
+  }
+
+  triggerPokerus(pokemon: PokemonEntity) {
+    if (pokemon.passive === Passive.INANIMATE) return // Inanimate objects cannot get Pokerus
+    if (!this.pokerus) {
+      this.pokerus = true
+    }
+  }
+
+  updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
+    if (this.pokerusCooldown - dt <= 0) {
+      pokemon.addAttack(1, pokemon, 0, false)
+      pokemon.addAbilityPower(10, pokemon, 0, false)
+      let infectCount = 0
+      const cells = board.getAdjacentCells(
+        pokemon.positionX,
+        pokemon.positionY,
+        false
+      )
+      cells.forEach((cell) => {
+        if (infectCount < 2 && cell.value !== undefined) {
+          if (
+            cell.value.team === pokemon.team &&
+            cell.value.status.pokerus === false
+          ) {
+            cell.value.status.triggerPokerus(cell.value)
+            infectCount++
+          }
+        }
+      })
+      this.pokerusCooldown = 3000
+    } else {
+      this.pokerusCooldown -= dt
+    }
+  }
+
+  triggerLocked(duration: number, pkm: PokemonEntity) {
+    if (
+      !this.locked && // lock cannot be stacked
+      !this.skydiving &&
+      !this.runeProtect &&
+      !pkm.effects.has(EffectEnum.IMMUNITY_LOCKED) &&
+      this.ccCooldown <= 0
+    ) {
+      if (pkm.status.enraged) {
+        duration = duration / 2
+      }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      this.locked = true
+      this.lockedCooldown = Math.round(duration)
+      if (pkm.range != 1) {
+        pkm.toMovingState() // force retargetting if the current range is not 1
+      }
+      pkm.range = 1
+    }
+  }
+
+  updateLocked(dt: number, pokemon: PokemonEntity) {
+    if (this.lockedCooldown - dt <= 0) {
+      this.locked = false
+      let range = pokemon.baseRange
+      if (pokemon.items.has(Item.WIDE_LENS)) {
+        range += ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0
+      }
+      if (
+        pokemon.player &&
+        pokemon.player.items.includes(Item.LONG_WAND) &&
+        pokemon.types.has(Synergy.FAIRY)
+      ) {
+        range += 1
+      }
+      pokemon.range = range
+
+      this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
+    } else {
+      this.lockedCooldown -= dt
+    }
+  }
+
+  triggerPossessed(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity
+  ) {
+    if (!this.runeProtect) {
+      const pkmTeam =
+        pkm.team === Team.RED_TEAM
+          ? pkm.simulation.redTeam
+          : pkm.simulation.blueTeam
+      if (
+        schemaValues(pkmTeam).some(
+          (p) => p.id !== pkm.id && !p.status.possessed
+        )
+      ) {
+        if (!this.possessed) {
+          pkm.team =
+            pkm.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+        }
+        this.possessed = true
+        duration = this.applyStatusDurationReductions(duration, pkm)
+        pkm.setTarget(null) // force retargetting
+        origin.setTarget(null) // force retargetting
+        this.possessedCooldown = Math.max(
+          Math.round(duration),
+          this.possessedCooldown
+        )
+        this.possessedOrigin = origin
+      } else {
+        this.triggerCharm(duration, pkm, origin, false)
+      }
+    }
+  }
+
+  updatePossessed(dt: number, pkm: PokemonEntity) {
+    const otherTeam =
+      pkm.team === Team.RED_TEAM
+        ? pkm.simulation.blueTeam
+        : pkm.simulation.redTeam
+    const possessedCount = schemaValues(otherTeam).filter(
+      (pokemon) => pokemon.status.possessed
+    ).length
+    const lastAliveArePossessed = possessedCount === otherTeam.size
+
+    this.possessedCooldown -= dt
+
+    if (this.possessedCooldown <= 0 || lastAliveArePossessed) {
+      this.possessed = false
+      pkm.team = pkm.baseTeam
+
+      if (
+        lastAliveArePossessed &&
+        this.possessedCooldown > 0 &&
+        this.possessedOrigin
+      ) {
+        pkm.status.triggerCharm(
+          this.possessedCooldown,
+          pkm,
+          this.possessedOrigin,
+          false
+        )
+      }
+
+      pkm.setTarget(null) // force retargeting
+    }
+  }
+
+  triggerBlinded(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
+    if (!this.blinded && !this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
+
+      if (pkm.status.enraged) {
+        duration = duration / 2
+      }
+
+      duration = this.applyStatusDurationReductions(duration, pkm)
+
+      this.blinded = true
+      this.blindCooldown = Math.round(duration)
+    }
+  }
+
+  updateBlinded(dt: number) {
+    if (this.blindCooldown - dt <= 0) {
+      this.blinded = false
+    } else {
+      this.blindCooldown -= dt
+    }
+  }
+
+  private applyStatusDurationReductions(
+    duration: number,
+    pkm: IPokemonEntity
+  ): number {
+    if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+      duration = Math.round(duration * 0.7)
+    } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+      duration = Math.round(duration * 0.5)
+    } else if (
+      pkm.effects.has(EffectEnum.WATER_VEIL) ||
+      pkm.effects.has(EffectEnum.SURGE_SURFER)
+    ) {
+      duration = Math.round(duration * 0.3)
+    }
+
+    const nbOddStones = pkm.player
+      ? count(pkm.player.items, Item.ODD_KEYSTONE)
+      : 0
+    if (nbOddStones > 0) {
+      duration = Math.round(duration * (1 - 0.1 * nbOddStones))
+    }
+
+    return duration
+  }
+
+  addPsychicField(entity: IPokemonEntity) {
+    if (this.psychicField) return
+    this.psychicField = true
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addSpeed(30, entity, 0, false)
+    }
+  }
+
+  removePsychicField(entity: IPokemonEntity) {
+    if (!this.psychicField) return
+    this.psychicField = false
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addSpeed(-30, entity, 0, false)
+    }
+  }
+
+  addElectricField(entity: IPokemonEntity) {
+    if (this.electricField) return
+    this.electricField = true
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addSpeed(30, entity, 0, false)
+    }
+  }
+
+  removeElectricField(entity: IPokemonEntity) {
+    if (!this.electricField) return
+    this.electricField = false
+    if (entity.passive === Passive.SURGE_SURFER) {
+      entity.addSpeed(-30, entity, 0, false)
+    }
+  }
+
+  addFairyField(entity: IPokemonEntity) {
+    this.fairyField = true
+  }
+
+  removeFairyField(entity: IPokemonEntity) {
+    this.fairyField = false
+  }
+
+  addGrassField(entity: IPokemonEntity) {
+    this.grassField = true
+  }
+
+  removeGrassField(entity: IPokemonEntity) {
+    this.grassField = false
   }
 }

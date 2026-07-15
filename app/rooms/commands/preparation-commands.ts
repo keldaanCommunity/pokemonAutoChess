@@ -1,112 +1,212 @@
-import { Command } from "@colyseus/command"
-import { Client, matchMaker } from "colyseus"
-import { FilterQuery } from "mongoose"
-import os from "node:os"
 import { memoryUsage } from "node:process"
-import { GameUser, IGameUser } from "../../models/colyseus-models/game-user"
-import { BotV2, IBot } from "../../models/mongo-models/bot-v2"
-import UserMetadata, {
-  IUserMetadata
-} from "../../models/mongo-models/user-metadata"
-import { IChatV2, Role, Transfer } from "../../types"
-import { EloRankThreshold, MAX_PLAYERS_PER_LOBBY } from "../../types/Config"
-import { BotDifficulty, LobbyType } from "../../types/enum/Game"
+import { setTimeout } from "node:timers/promises"
+import { Command } from "@colyseus/command"
+import { type Client, matchMaker } from "colyseus"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { QueryFilter } from "mongoose"
+import {
+  EloRankThreshold,
+  MAX_PLAYERS_PER_GAME,
+  MIN_HUMAN_PLAYERS
+} from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
+import {
+  getPendingGame,
+  isPlayerTimeout,
+  setPendingGame
+} from "../../core/pending-game-manager"
+import {
+  GameUser,
+  type IGameUser
+} from "../../models/colyseus-models/game-user"
+import { BotV2 } from "../../models/mongo-models/bot-v2"
+import UserMetadata from "../../models/mongo-models/user-metadata"
+import { Role } from "../../types"
+import { CloseCodes } from "../../types/enum/CloseCodes"
+import type { EloRank } from "../../types/enum/EloRank"
+import { BotDifficulty, GameMode } from "../../types/enum/Game"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { IBot } from "../../types/models/bot-v2"
+import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
-import { pickRandomIn } from "../../utils/random"
-import { entries, values } from "../../utils/schemas"
-import PreparationRoom from "../preparation-room"
+import { max } from "../../utils/number"
+import { cleanProfanity } from "../../utils/profanity-filter"
+import { pickRandomIn, shuffleArray } from "../../utils/random"
+import { schemaEntries, schemaValues } from "../../utils/schemas"
+import type PreparationRoom from "../preparation-room"
+
+function autoAssignPartner(state: PreparationRoom["state"], uid: string) {
+  if (state.gameMode !== GameMode.DOUBLE_UP) return
+  const newUser = state.users.get(uid)
+  if (!newUser) return
+  const unpaired = schemaValues(state.users).find(
+    (p) => p.uid !== uid && p.doubleUpPartnerId === ""
+  )
+  if (!unpaired) {
+    newUser.doubleUpPartnerId = ""
+    newUser.doubleUpTeamId = ""
+    return
+  }
+  const allTeamIds = new Set(
+    schemaValues(state.users)
+      .map((p) => p.doubleUpTeamId)
+      .filter((id) => id !== "")
+  )
+  let teamIndex = 0
+  while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+  const teamId = `team-${teamIndex}`
+  newUser.doubleUpPartnerId = unpaired.uid
+  newUser.doubleUpTeamId = teamId
+  unpaired.doubleUpPartnerId = uid
+  unpaired.doubleUpTeamId = teamId
+}
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
   {
-    client: Client
+    client: Client<{ auth: UserRecord }>
     options: any
-    auth: any
+    auth: UserRecord
   }
 > {
   async execute({ client, options, auth }) {
     try {
-      const numberOfHumanPlayers = values(this.state.users).filter(
-        (u) => !u.isBot
-      ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
-        client.send(Transfer.KICK)
-        client.leave()
-        return // lobby already full
+      if (await isPlayerTimeout(this.room.presence, client.auth.uid)) {
+        client.leave(CloseCodes.USER_TIMEOUT)
+        return
       }
+
+      const pendingGame = await getPendingGame(
+        this.room.presence,
+        client.auth.uid
+      )
+      if (pendingGame != null && !pendingGame.isExpired) {
+        client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
+        return
+      }
+
       if (
         this.state.ownerId == "" &&
-        this.state.lobbyType === LobbyType.NORMAL
+        this.state.gameMode === GameMode.CUSTOM_LOBBY
       ) {
         this.state.ownerId = auth.uid
       }
+
+      const u = await UserMetadata.findOne({ uid: auth.uid })
+      if (!u) {
+        client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
+        return
+      }
+
       if (this.state.users.has(auth.uid)) {
         const user = this.state.users.get(auth.uid)!
-        this.room.broadcast(Transfer.MESSAGES, {
-          author: "Server",
-          payload: `${user.name} joined.`,
-          avatar: user.avatar,
-          time: Date.now()
+        this.state.addMessage({
+          authorId: "server",
+          payload: `${user.name} is back.`,
+          avatar: user.avatar
         })
       } else {
-        const u = await UserMetadata.findOne({ uid: auth.uid })
-        const numberOfHumanPlayers = values(this.state.users).filter(
+        const nbHumanPlayers = schemaValues(this.state.users).filter(
           (u) => !u.isBot
         ).length
-        if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
-          // lobby has been filled with someone else while waiting for the database
-          client.send(Transfer.KICK)
-          client.leave()
+        const isAdmin = u.role === Role.ADMIN
+        if (nbHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
+          client.leave(CloseCodes.ROOM_FULL)
           return
         }
 
-        if (u) {
-          if (
-            this.state.minRank != null &&
-            u.elo < EloRankThreshold[this.state.minRank]
-          ) {
-            client.send(Transfer.KICK)
-            client.leave()
-            return // rank not high enough
-          }
+        if (
+          this.state.minRank != null &&
+          u.elo < EloRankThreshold[this.state.minRank] &&
+          !isAdmin
+        ) {
+          client.leave(CloseCodes.USER_RANK_TOO_LOW)
+          return
+        }
 
-          const initiallyReady = this.state.lobbyType !== LobbyType.NORMAL
-          this.state.users.set(
-            client.auth.uid,
-            new GameUser(
-              u.uid,
-              u.displayName,
-              u.elo,
-              u.avatar,
-              false,
-              initiallyReady,
-              u.title,
-              u.role,
-              auth.email === undefined && auth.photoURL === undefined
-            )
+        if (
+          this.state.maxRank != null &&
+          u.elo &&
+          EloRankThreshold[getRank(u.elo)] >
+            EloRankThreshold[this.state.maxRank] &&
+          !isAdmin
+        ) {
+          client.leave(CloseCodes.USER_RANK_TOO_HIGH)
+          return
+        }
+
+        if (
+          this.state.gameMode === GameMode.RANKED &&
+          u.level < GADGETS.certificate.levelRequired
+        ) {
+          client.leave(CloseCodes.USER_RANK_TOO_LOW)
+          return
+        }
+
+        this.state.users.set(
+          client.auth.uid,
+          new GameUser(
+            u.uid,
+            u.displayName,
+            u.elo,
+            u.games,
+            u.avatar,
+            false,
+            false,
+            u.title,
+            u.role,
+            auth.email === undefined && auth.photoURL === undefined,
+            u.twitchLogin ?? "",
+            u.twitchDisplayName ?? ""
           )
-          if (u.uid == this.state.ownerId) {
-            // logger.debug(user.displayName);
-            this.state.ownerName = u.displayName
-          }
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `${u.displayName} joined.`,
-            avatar: u.avatar,
-            time: Date.now()
+        )
+        this.room.updatePlayersInfo()
+
+        // auto-pair in Double Up mode
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, u.uid)
+        }
+
+        if (u.uid == this.state.ownerId) {
+          // logger.debug(user.displayName);
+          this.state.ownerName = u.displayName
+          this.room.setMetadata({
+            ownerName: this.state.ownerName
           })
         }
+
+        if (
+          this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+          this.state.gameMode !== GameMode.DOUBLE_UP
+        ) {
+          this.clock.setTimeout(() => {
+            if (
+              this.state.users.has(u.uid) &&
+              !this.state.users.get(u.uid)!.ready
+            ) {
+              this.state.users.delete(u.uid)
+              client.leave(CloseCodes.USER_KICKED) // kick clients that can't auto-ready in time. Still investigating why this happens for some people
+            }
+          }, 10000)
+        }
+
+        this.state.addMessage({
+          authorId: "server",
+          payload: `${u.displayName} joined.`,
+          avatar: u.avatar
+        })
       }
 
-      while (this.state.users.size > MAX_PLAYERS_PER_LOBBY) {
+      while (this.state.users.size > MAX_PLAYERS_PER_GAME) {
         // delete a random bot to make room
-        const users = entries(this.state.users)
+        const users = schemaEntries(this.state.users)
         const entryToDelete = users.find(([key, user]) => user.isBot)
         if (entryToDelete) {
           const [key, bot] = entryToDelete
-          this.room.broadcast(Transfer.MESSAGES, {
-            payload: `Bot ${bot.name} removed to make room for new player.`,
-            time: Date.now()
+          this.room.state.addMessage({
+            authorId: "server",
+            avatar: bot.avatar,
+            payload: `Bot ${bot.name} removed to make room for new player.`
           })
           this.state.users.delete(key)
         } else {
@@ -114,26 +214,6 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
-      }
-
-      if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
-        this.state.users.size === MAX_PLAYERS_PER_LOBBY
-      ) {
-        // auto start when special lobby is full and all ready
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: `Lobby is full, starting match...`,
-          time: Date.now()
-        })
-        this.clock.setTimeout(() => {
-          this.room.dispatcher.dispatch(new OnGameStartRequestCommand())
-          // open another one
-          this.room.presence.publish("special-lobby-full", {
-            lobbyType: this.state.lobbyType,
-            minRank: this.state.minRank,
-            noElo: this.state.noElo
-          })
-        }, 2000)
       }
     } catch (error) {
       logger.error(error)
@@ -147,9 +227,9 @@ export class OnGameStartRequestCommand extends Command<
     client?: Client
   }
 > {
-  execute({ client }: { client?: Client } = {}) {
+  async execute({ client }: { client?: Client } = {}) {
     try {
-      if (this.state.gameStarted) {
+      if (this.state.gameStartedAt != null) {
         return // game already started
       }
       let allUsersReady = true
@@ -164,75 +244,139 @@ export class OnGameStartRequestCommand extends Command<
         }
       })
 
-      if (!allUsersReady && this.state.lobbyType === LobbyType.NORMAL) {
-        client?.send(Transfer.MESSAGES, {
-          author: "Server",
-          payload: `Not all players are ready.`,
-          avatar: "0079/Sigh",
-          time: Date.now()
+      if (nbHumanPlayers < MIN_HUMAN_PLAYERS && process.env.MODE !== "dev") {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Due to the current high traffic on the game, to limit the resources used server side, only games with a minimum of ${MIN_HUMAN_PLAYERS} players are authorized.`,
+          avatar: "0054/Surprised"
         })
-      } else {
-        let freeMemory = os.freemem()
-        let totalMemory = os.totalmem()
-        /*logger.info(
+        return
+      }
+
+      if (this.state.users.size < 2) {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Add bots or wait for more players to join your room.`,
+          avatar: "0079/Sigh"
+        })
+        return
+      }
+
+      if (
+        !allUsersReady &&
+        (this.state.gameMode === GameMode.CUSTOM_LOBBY ||
+          this.state.gameMode === GameMode.DOUBLE_UP)
+      ) {
+        this.state.addMessage({
+          authorId: "Server",
+          payload: `Not all players are ready.`,
+          avatar: "0079/Sigh"
+        })
+        return
+      }
+
+      /*let freeMemory = os.freemem()
+      let totalMemory = os.totalmem()
+      logger.info(
           `Memory freemem/totalmem: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        freeMemory = memoryUsage().heapUsed
-        totalMemory = memoryUsage().heapTotal
-        /*logger.info(
+      const freeMemory = memoryUsage().heapUsed
+      const totalMemory = memoryUsage().heapTotal
+      /*logger.info(
           `Memory heapUsed/heapTotal: ${(
             (100 * freeMemory) /
             totalMemory
           ).toFixed(2)} % free (${totalMemory - freeMemory} / ${totalMemory})`
         )*/
-        if (freeMemory < 0.1 * totalMemory) {
-          // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
+
+      if (freeMemory < 0.1 * totalMemory) {
+        // if less than 10% free memory available, prevents starting another game to avoid out of memory crash
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. Try again in a few minutes, and avoid playing with bots. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (
+        freeMemory < 0.2 * totalMemory &&
+        nbHumanPlayers < MAX_PLAYERS_PER_GAME
+      ) {
+        // if less than 20% free memory available, prevents starting a game with bots
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_GAME} human players are enabled. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
+        // if less than 40% free memory available, prevents starting a game solo
+        this.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
+          avatar: "0025/Pain"
+        })
+      } else {
+        this.state.gameStartedAt = new Date().toISOString()
+        this.room.lock()
+        this.room.autoDispose = true // re-enable auto dispose for tournament games
+
+        if (this.state.gameMode === GameMode.DOUBLE_UP) {
+          const userList = schemaValues(this.state.users)
+          const paired: Set<string> = new Set()
+          let teamIndex = 0
+
+          // honor lobby selections first
+          userList.forEach((a) => {
+            if (paired.has(a.uid) || !a.doubleUpPartnerId) return
+            const b = this.state.users.get(a.doubleUpPartnerId)
+            if (!b || paired.has(b.uid)) return
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpTeamId = teamId
+            b.doubleUpTeamId = teamId
+            paired.add(a.uid)
+            paired.add(b.uid)
           })
-        } else if (
-          freeMemory < 0.2 * totalMemory &&
-          nbHumanPlayers < MAX_PLAYERS_PER_LOBBY
-        ) {
-          // if less than 20% free memory available, prevents starting a game with bots
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, only lobbys with ${MAX_PLAYERS_PER_LOBBY} human players are enabled. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
-          })
-        } else if (freeMemory < 0.4 * totalMemory && nbHumanPlayers === 1) {
-          // if less than 40% free memory available, prevents starting a game solo
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
-            payload: `Too many players are currently playing and the server is running out of memory. To save resources, solo games have been disabled. Please wait for more players to join the lobby before starting the game. Sorry for the inconvenience.`,
-            avatar: "0025/Pain",
-            time: Date.now()
-          })
-        } else {
-          this.state.gameStarted = true
-          matchMaker.createRoom("game", {
-            users: this.state.users,
-            name: this.state.name,
-            preparationId: this.room.roomId,
-            noElo: this.state.noElo,
-            selectedMap: this.state.selectedMap,
-            lobbyType: this.state.lobbyType,
-            minRank: this.state.minRank,
-            whenReady: (game) => {
-              this.room.setGameStarted(true)
-              //logger.debug("game start", game.roomId)
-              this.room.broadcast(Transfer.GAME_START, game.roomId)
-              setTimeout(() => this.room.disconnect(), 30000) // TRYFIX: ranked lobbies prep rooms not being removed
-            }
-          })
+
+          // randomly pair remaining unpaired users
+          const unpaired = shuffleArray(
+            userList.filter((u) => !paired.has(u.uid))
+          )
+          for (let i = 0; i < unpaired.length - 1; i += 2) {
+            const a = unpaired[i],
+              b = unpaired[i + 1]
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpPartnerId = b.uid
+            a.doubleUpTeamId = teamId
+            b.doubleUpPartnerId = a.uid
+            b.doubleUpTeamId = teamId
+          }
         }
+
+        const gameRoom = await matchMaker.createRoom("game", {
+          users: Object.fromEntries(schemaEntries(this.state.users)),
+          name: this.state.name,
+          ownerName: this.state.ownerName,
+          preparationId: this.room.roomId,
+          noElo: this.state.noElo,
+          gameMode: this.state.gameMode,
+          specialGameRule: this.state.specialGameRule,
+          tournamentId: this.room.metadata?.tournamentId,
+          bracketId: this.room.metadata?.bracketId,
+          minRank: this.state.minRank
+        })
+
+        this.state.users.forEach((user) => {
+          setPendingGame(this.room.presence, user.uid, gameRoom.roomId)
+        })
+
+        this.room.presence.publish("game-started", {
+          gameId: gameRoom.roomId,
+          preparationId: this.room.roomId
+        })
       }
     } catch (error) {
       logger.error(error)
@@ -240,16 +384,44 @@ export class OnGameStartRequestCommand extends Command<
   }
 }
 
-export class OnMessageCommand extends Command<
+export class OnNewMessageCommand extends Command<
   PreparationRoom,
-  {
-    client: Client
-    message: IChatV2
-  }
+  { client: Client; message: string }
 > {
-  execute({ client, message }) {
+  execute({ client, message }: { client: Client; message: string }) {
     try {
-      this.room.broadcast(Transfer.MESSAGES, { ...message, time: Date.now() })
+      const MAX_MESSAGE_LENGTH = 250
+      message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
+
+      const user = this.state.users.get(client.auth.uid)
+      if (user && !user.anonymous && message != "") {
+        this.state.addMessage({
+          author: user.name,
+          authorId: user.uid,
+          avatar: user.avatar,
+          payload: message
+        })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class RemoveMessageCommand extends Command<
+  PreparationRoom,
+  { client: Client; messageId: string }
+> {
+  execute({ client, messageId }: { client: Client; messageId: string }) {
+    try {
+      const user = this.state.users.get(client.auth.uid)
+      if (
+        user &&
+        user.role &&
+        (user.role === Role.ADMIN || user.role === Role.MODERATOR)
+      ) {
+        this.state.removeMessage(messageId)
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -263,14 +435,17 @@ export class OnRoomNameCommand extends Command<
     message: string
   }
 > {
-  execute({ client, message }) {
+  execute({ client, message: roomName }) {
+    roomName = cleanProfanity(roomName)
     try {
+      const user = this.state.users.get(client.auth?.uid)
       if (
-        client.auth?.uid == this.state.ownerId &&
-        this.state.name != message
+        this.state.name != roomName &&
+        (client.auth?.uid == this.state.ownerId ||
+          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)))
       ) {
-        this.room.setName(message)
-        this.state.name = message
+        this.room.setName(roomName)
+        this.state.name = roomName
       }
     } catch (error) {
       logger.error(error)
@@ -300,7 +475,77 @@ export class OnRoomPasswordCommand extends Command<
   }
 }
 
-export class OnToggleEloCommand extends Command<
+export class OnRoomChangeRankCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    minRank: EloRank | null
+    maxRank: EloRank | null
+  }
+> {
+  execute({ client, minRank, maxRank }) {
+    try {
+      if (
+        client.auth?.uid == this.state.ownerId &&
+        (minRank !== this.state.minRank || maxRank !== this.state.maxRank)
+      ) {
+        if (EloRankThreshold[minRank] > EloRankThreshold[maxRank]) {
+          if (minRank !== this.state.minRank) maxRank = minRank
+          else minRank = maxRank
+        }
+
+        this.room.setMinMaxRanks(minRank, maxRank)
+        this.state.minRank = minRank
+        this.state.maxRank = maxRank
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnRoomChangeSpecialRule extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    specialRule: SpecialGameRule | null
+  }
+> {
+  async execute({ client, specialRule }) {
+    try {
+      const u = await UserMetadata.findOne({ uid: client.auth?.uid })
+      if (!u) {
+        client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
+        return
+      }
+
+      if (client.auth?.uid == this.state.ownerId && u.role === Role.ADMIN) {
+        this.state.specialGameRule = specialRule
+        if (specialRule != null) {
+          this.state.noElo = true
+          this.room.setNoElo(true)
+        }
+        const leader = this.state.users.get(client.auth.uid)
+        this.room.state.addMessage({
+          author: "Server",
+          authorId: "server",
+          payload: `Smeargle's Scribble mode has been ${
+            specialRule ? "enabled" : "disabled"
+          } for this game. Players need to ready again.`,
+          avatar: leader?.avatar
+        })
+
+        this.state.users.forEach((user) => {
+          if (!user.isBot) user.ready = false
+        })
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnChangeNoEloCommand extends Command<
   PreparationRoom,
   {
     client: Client
@@ -314,14 +559,22 @@ export class OnToggleEloCommand extends Command<
         this.state.noElo != noElo
       ) {
         this.state.noElo = noElo
-        this.room.toggleElo(noElo)
-        this.room.broadcast(Transfer.MESSAGES, {
+        if (noElo === false) {
+          this.room.state.specialGameRule = null
+        }
+        this.room.setNoElo(noElo)
+        const leader = this.state.users.get(client.auth.uid)
+        this.room.state.addMessage({
           author: "Server",
-          payload: `Room leader ${
+          authorId: "server",
+          payload: `Elo gain has been ${
             noElo ? "disabled" : "enabled"
-          } ELO gain for this game.`,
-          avatar: this.state.users.get(client.auth.uid)?.avatar,
-          time: Date.now()
+          } for this game. Players need to ready again.`,
+          avatar: leader?.avatar
+        })
+
+        this.state.users.forEach((user) => {
+          if (!user.isBot) user.ready = false
         })
       }
     } catch (error) {
@@ -348,51 +601,27 @@ export class OnKickPlayerCommand extends Command<
           if (cli.auth?.uid === userId && this.state.users.has(userId)) {
             const user = this.state.users.get(userId)!
             if (user.role === Role.BASIC) {
-              this.room.broadcast(Transfer.MESSAGES, {
+              this.room.state.addMessage({
                 author: "Server",
+                authorId: "server",
                 payload: `${user.name} was kicked out of the room`,
-                avatar: this.state.users.get(client.auth.uid)?.avatar,
-                time: Date.now()
+                avatar: this.state.users.get(client.auth.uid)?.avatar
               })
               this.state.users.delete(userId)
-              cli.send(Transfer.KICK)
-              cli.leave()
+              this.room.setMetadata({
+                blacklist: this.room.metadata.blacklist.concat(userId)
+              })
+              cli.leave(CloseCodes.USER_KICKED)
             } else {
-              this.room.broadcast(Transfer.MESSAGES, {
+              this.room.state.addMessage({
                 author: "Server",
+                authorId: "server",
                 payload: `${this.state.ownerName} tried to kick a moderator (${user.name}).`,
-                avatar: "0068/Normal",
-                time: Date.now()
+                avatar: "0068/Normal"
               })
             }
           }
         })
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnDeleteRoomCommand extends Command<
-  PreparationRoom,
-  {
-    client: Client
-  }
-> {
-  execute({ client }) {
-    try {
-      const user = this.state.users.get(client.auth?.uid)
-      if (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)) {
-        this.room.clients.forEach((cli) => {
-          cli.send(Transfer.KICK)
-          cli.leave()
-        })
-        this.room.clients.forEach((cli) => {
-          cli.send(Transfer.KICK)
-          cli.leave()
-        })
-        this.room.disconnect()
       }
     } catch (error) {
       logger.error(error)
@@ -412,26 +641,39 @@ export class OnLeaveCommand extends Command<
       if (client.auth?.uid) {
         const user = this.state.users.get(client.auth?.uid)
         if (user) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            author: "Server",
+          this.room.state.addMessage({
+            authorId: "server",
             payload: `${user.name} left.`,
-            avatar: user.avatar,
-            time: Date.now()
+            avatar: user.avatar
           })
+          const partnerIdBeforeLeave = user.doubleUpPartnerId
           this.state.users.delete(client.auth.uid)
+          if (partnerIdBeforeLeave) {
+            const partner = this.state.users.get(partnerIdBeforeLeave)
+            if (partner) {
+              partner.doubleUpPartnerId = ""
+              partner.doubleUpTeamId = ""
+              autoAssignPartner(this.state, partnerIdBeforeLeave)
+            }
+          }
 
           if (client.auth.uid === this.state.ownerId) {
-            const newOwner = values(this.state.users).find(
-              (user) => user.id !== this.state.ownerId && !user.isBot
+            const newOwner = schemaValues(this.state.users).find(
+              (user) => user.uid !== this.state.ownerId && !user.isBot
             )
             if (newOwner) {
-              this.state.ownerId = newOwner.id
+              this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
-              this.room.broadcast(Transfer.MESSAGES, {
-                author: "Server",
+              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setName(
+                `${newOwner.name}'${
+                  newOwner.name.endsWith("s") ? "" : "s"
+                } room`
+              )
+              this.room.state.addMessage({
+                authorId: "server",
                 payload: `The new room leader is ${newOwner.name}`,
-                avatar: newOwner.avatar,
-                time: Date.now()
+                avatar: newOwner.avatar
               })
             }
           }
@@ -447,25 +689,79 @@ export class OnToggleReadyCommand extends Command<
   PreparationRoom,
   {
     client: Client
+    ready: boolean
   }
 > {
-  execute({ client }) {
+  execute({ client, ready }) {
     try {
+      // cannot toggle ready in classic / ranked / tournament game mode
+      if (
+        this.room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+        this.room.state.gameMode !== GameMode.DOUBLE_UP &&
+        ready !== true
+      )
+        return
+
       // logger.debug(this.state.users.get(client.auth.uid).ready);
       if (client.auth?.uid && this.state.users.has(client.auth.uid)) {
         const user = this.state.users.get(client.auth.uid)!
-        user.ready = !user.ready
+        user.ready = ready
       }
+
+      const nbExpectedPlayers =
+        this.room.metadata?.whitelist &&
+        this.room.metadata?.whitelist.length > 0
+          ? max(MAX_PLAYERS_PER_GAME)(this.room.metadata?.whitelist.length)
+          : MAX_PLAYERS_PER_GAME
+
       if (
-        this.state.lobbyType !== LobbyType.NORMAL &&
-        this.state.users.size === this.room.maxClients &&
-        values(this.state.users).every((user) => user.ready === true)
+        this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+        this.state.gameMode !== GameMode.DOUBLE_UP &&
+        this.state.users.size === nbExpectedPlayers &&
+        schemaValues(this.state.users).every((user) => user.ready)
       ) {
         // auto start when ranked lobby is full and all ready
-        return [new OnGameStartRequestCommand()]
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: "Lobby is full, starting match in 5 seconds..."
+        })
+
+        return new CheckAutoStartRoom()
       }
     } catch (error) {
       logger.error(error)
+    }
+  }
+}
+
+export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
+  async execute() {
+    try {
+      this.state.abortOnPlayerLeave = new AbortController()
+      const signal = this.state.abortOnPlayerLeave.signal
+
+      await setTimeout(5000, null, { signal })
+
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: "Starting match..."
+      })
+
+      if ([GameMode.RANKED, GameMode.SCRIBBLE].includes(this.state.gameMode)) {
+        // open another one
+        this.room.presence.publish("lobby-full", {
+          gameMode: this.state.gameMode,
+          minRank: this.state.minRank,
+          noElo: this.state.noElo
+        })
+      }
+
+      return new OnGameStartRequestCommand()
+    } catch (e) {
+      this.room.state.addMessage({
+        authorId: "server",
+        payload: "Waiting for the room to fill up."
+      })
     }
   }
 }
@@ -497,6 +793,7 @@ export class InitializeBotsCommand extends Command<
                 bot.id,
                 bot.name,
                 bot.elo,
+                99, // arbitrary number of games played
                 bot.avatar,
                 true,
                 true,
@@ -505,8 +802,12 @@ export class InitializeBotsCommand extends Command<
                 false
               )
             )
+            if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+              autoAssignPartner(this.state, bot.id)
+            }
           })
         }
+        this.room.updatePlayersInfo()
       }
     } catch (error) {
       logger.error(error)
@@ -521,93 +822,106 @@ type OnAddBotPayload = {
 
 export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
   async execute(data: OnAddBotPayload) {
-    if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-      this.room.broadcast(Transfer.MESSAGES, {
-        payload: "Room is full",
-        time: Date.now()
-      })
-      return
-    }
-
-    const { type, user } = data
-    let bot: IBot | undefined
-    if (typeof type === "object") {
-      // pick a specific bot chosen by the user
-      bot = type
-    } else {
-      // pick a random bot per difficulty
-      const difficulty = type
-      let d: FilterQuery<IBot> | undefined
-
-      switch (difficulty) {
-        case BotDifficulty.EASY:
-          d = { $lt: 800 }
-          break
-        case BotDifficulty.MEDIUM:
-          d = { $gte: 800, $lt: 1100 }
-          break
-        case BotDifficulty.HARD:
-          d = { $gte: 1100, $lt: 1400 }
-          break
-        case BotDifficulty.EXTREME:
-          d = { $gte: 1400 }
-          break
+    try {
+      if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: "Room is full"
+        })
+        return
       }
 
-      const existingBots = new Array<string>()
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          existingBots.push(key)
+      const { type } = data
+      let bot: IBot | undefined
+      if (typeof type === "object") {
+        // pick a specific bot chosen by the user
+        bot = type
+      } else {
+        // pick a random bot per difficulty
+        const difficulty = type
+        let elo: QueryFilter<IBot>["elo"] | undefined
+
+        switch (difficulty) {
+          case BotDifficulty.BEGINNER:
+            elo = { $lt: 850 }
+            break
+          case BotDifficulty.EASY:
+            elo = { $gte: 850, $lt: 999 }
+            break
+          case BotDifficulty.MEDIUM:
+            elo = { $gte: 1000, $lt: 1149 }
+            break
+          case BotDifficulty.HARD:
+            elo = { $gte: 1150, $lt: 1299 }
+            break
+          case BotDifficulty.EXTREME:
+            elo = { $gte: 1300, $lt: 1449 }
+            break
+          case BotDifficulty.MASTER:
+            elo = { $gte: 1450 }
+            break
         }
-      })
 
-      const bots = await BotV2.find({ id: { $nin: existingBots }, elo: d }, [
-        "avatar",
-        "elo",
-        "name",
-        "id"
-      ])
-
-      if (bots.length <= 0) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: "Error: No bots found",
-          time: Date.now()
+        const existingBots = new Array<string>()
+        this.state.users.forEach((value: GameUser, key: string) => {
+          if (value.isBot) {
+            existingBots.push(key)
+          }
         })
-        return
-      }
 
-      bot = pickRandomIn(bots)
-    }
-
-    if (bot) {
-      // we checked again the lobby size because of the async request ahead
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: "Room is full",
-          time: Date.now()
-        })
-        return
-      }
-
-      this.state.users.set(
-        bot.id,
-        new GameUser(
-          bot.id,
-          bot.name,
-          bot.elo,
-          bot.avatar,
-          true,
-          true,
-          "",
-          Role.BOT,
-          false
+        const bots = await BotV2.find(
+          { id: { $nin: existingBots }, elo, approved: true },
+          ["avatar", "elo", "name", "id"]
         )
-      )
 
-      this.room.broadcast(Transfer.MESSAGES, {
-        payload: `Bot ${bot.name} added.`,
-        time: Date.now()
-      })
+        if (bots.length <= 0) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Error: No bots found"
+          })
+          return
+        }
+
+        bot = pickRandomIn(bots)
+      }
+
+      if (bot) {
+        // we checked again the lobby size because of the async request ahead
+        if (this.state.users.size >= MAX_PLAYERS_PER_GAME) {
+          this.room.state.addMessage({
+            authorId: "server",
+            payload: "Room is full"
+          })
+          return
+        }
+
+        this.state.users.set(
+          bot.id,
+          new GameUser(
+            bot.id,
+            bot.name,
+            bot.elo,
+            99, // arbitrary number of games played
+            bot.avatar,
+            true,
+            true,
+            "",
+            Role.BOT,
+            false
+          )
+        )
+
+        this.room.updatePlayersInfo()
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, bot.id)
+        }
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Bot ${bot.name} added.`
+        })
+      }
+    } catch (error) {
+      logger.error(error)
     }
   }
 }
@@ -622,11 +936,22 @@ export class OnRemoveBotCommand extends Command<
   execute({ target, user }) {
     try {
       const name = this.state.users.get(target)?.name
+      const bot = this.state.users.get(target)
+      if (bot?.doubleUpPartnerId) {
+        const partner = this.state.users.get(bot.doubleUpPartnerId)
+        if (partner) {
+          partner.doubleUpPartnerId = ""
+          partner.doubleUpTeamId = ""
+        }
+      }
       if (name && this.state.users.delete(target)) {
-        this.room.broadcast(Transfer.MESSAGES, {
-          payload: `Bot ${name} removed.`,
-          time: Date.now()
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `Bot ${name} removed.`
         })
+      }
+      if (bot?.doubleUpPartnerId) {
+        autoAssignPartner(this.state, bot.doubleUpPartnerId)
       }
     } catch (error) {
       logger.error(error)
@@ -634,40 +959,93 @@ export class OnRemoveBotCommand extends Command<
   }
 }
 
-export class OnListBotsCommand extends Command<PreparationRoom> {
-  async execute(data: { user: IUserMetadata }) {
+export class OnSelectPartnerCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    partnerId: string
+  }
+> {
+  execute({ client, partnerId }) {
     try {
-      if (this.state.users.size >= MAX_PLAYERS_PER_LOBBY) {
-        return
+      const uid = client.auth?.uid
+      if (!uid) return
+      const user = this.state.users.get(uid)
+      if (!user) return
+      if (user.doubleUpPartnerId === partnerId) {
+        const oldPartner = this.state.users.get(partnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+        user.doubleUpPartnerId = ""
+        user.doubleUpTeamId = ""
+        if (!user.isBot) user.ready = false
+        return // just return, no auto-assign
       }
 
-      const userArray = new Array<string>()
+      const target = this.state.users.get(partnerId)
+      if (!target) return
+      if (target.ready || user.ready) return
 
-      this.state.users.forEach((value: GameUser, key: string) => {
-        if (value.isBot) {
-          userArray.push(key)
+      // save old partner ids before clearing
+      const userOldPartnerId = user.doubleUpPartnerId
+      const targetOldPartnerId = target.doubleUpPartnerId
+
+      // clear previous partners
+      if (userOldPartnerId) {
+        const oldPartner = this.state.users.get(userOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
         }
-      })
-
-      const bots = await BotV2.find({ id: { $nin: userArray } }, [
-        "avatar",
-        "elo",
-        "name",
-        "id"
-      ])
-
-      if (bots) {
-        if (bots.length <= 0) {
-          this.room.broadcast(Transfer.MESSAGES, {
-            payload: `Error: No bots found !`,
-            time: Date.now()
-          })
+      }
+      if (targetOldPartnerId) {
+        const oldPartner = this.state.users.get(targetOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
         }
-        this.room.clients.forEach((client) => {
-          if (client.auth?.uid === this.state.ownerId) {
-            client.send(Transfer.REQUEST_BOT_LIST, bots)
-          }
-        })
+      }
+
+      // find lowest available team index for new pair
+      const allTeamIds = new Set(
+        schemaValues(this.state.users)
+          .map((u) => u.doubleUpTeamId)
+          .filter((id) => id !== "")
+      )
+      let teamIndex = 0
+      while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+      const teamId = `team-${teamIndex}`
+      allTeamIds.add(teamId) // mark as taken before orphan search
+
+      user.doubleUpPartnerId = partnerId
+      user.doubleUpTeamId = teamId
+      target.doubleUpPartnerId = uid
+      target.doubleUpTeamId = teamId
+
+      // pair orphans with each other if both had partners
+      if (userOldPartnerId && targetOldPartnerId) {
+        const orphanA = this.state.users.get(userOldPartnerId)
+        const orphanB = this.state.users.get(targetOldPartnerId)
+        if (orphanA && orphanB) {
+          let ti = 0
+          while (allTeamIds.has(`team-${ti}`)) ti++
+          orphanA.doubleUpPartnerId = targetOldPartnerId
+          orphanA.doubleUpTeamId = `team-${ti}`
+          orphanB.doubleUpPartnerId = userOldPartnerId
+          orphanB.doubleUpTeamId = `team-${ti}`
+        }
+      } else {
+        if (userOldPartnerId) {
+          autoAssignPartner(this.state, userOldPartnerId)
+        }
+        if (targetOldPartnerId) {
+          autoAssignPartner(this.state, targetOldPartnerId)
+        }
       }
     } catch (error) {
       logger.error(error)

@@ -1,0 +1,290 @@
+import { matchMaker } from "colyseus"
+import { CronJob } from "cron"
+import dayjs from "dayjs"
+import admin from "firebase-admin"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import {
+  CRON_ELO_DECAY_DELAY,
+  CRON_ELO_DECAY_MINIMUM_ELO,
+  CRON_HISTORY_CLEANUP_DELAY,
+  ELO_DECAY_LOST_PER_DAY,
+  ELO_DECAY_NB_GAMES_REQUIRED,
+  EloRankThreshold,
+  getCurrentGameEvent
+} from "../config"
+import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
+import TitleStatistic from "../models/mongo-models/title-statistic"
+import UserMetadata from "../models/mongo-models/user-metadata"
+import { Title } from "../types"
+import { EloRank } from "../types/enum/EloRank"
+import { GameMode } from "../types/enum/Game"
+import { GameEvent } from "../types/events"
+import { logger } from "../utils/logger"
+import { min } from "../utils/number"
+import { logPreviousDayBoosterCreationStats } from "./booster-monitor"
+import { fetchMetaReports } from "./meta"
+import { notificationsService } from "./notifications"
+import { refreshSpriteGapData } from "./sprite-gap-scanner"
+
+function getDeterministicSpriteGapSchedule(seed: string): {
+  hour: number
+  minute: number
+} {
+  let hash = 0
+
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+
+  return {
+    hour: hash % 24,
+    minute: Math.floor(hash / 24) % 60
+  }
+}
+
+export function initCronJobs(isMainThread: boolean) {
+  logger.debug("init cron jobs")
+
+  if (isMainThread) {
+    // These cron jobs should only be trigged once no matter the amount of processes the server runs on,
+    // because they update the same database used by all processes
+
+    // CronJob.from({
+    //   cronTime: "0 8 * * *", // every day at 8am
+    //   timeZone: "Europe/Paris",
+    //   onTick: () => deleteOldAnonymousAccounts(),
+    //   start: true
+    // })
+    CronJob.from({
+      cronTime: "15 8 * * *", // every day at 8:15am
+      timeZone: "Europe/Paris",
+      onTick: () => deleteOldHistory(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "30 8 * * *", // every day at 8:30am
+      timeZone: "Europe/Paris",
+      onTick: () => eloDecay(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "45 8 * * *", // every day at 8:45am
+      timeZone: "Europe/Paris",
+      onTick: () => titleStats(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "50 8 * * *", // every day at 8:50am
+      timeZone: "Europe/Paris",
+      onTick: () => notificationsService.cleanupOldNotifications(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "10 0 * * *", // every day at 00:10 UTC
+      timeZone: "UTC",
+      onTick: () => logPreviousDayBoosterCreationStats(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
+      timeZone: "UTC",
+      onTick: () => resetEventScores(),
+      start: true
+    })
+
+    // SpriteCollab endpoint refresh should be triggered once globally.
+    // We use deterministic jitter per server so community servers do not refresh at the same UTC time.
+    const spriteGapSeed =
+      process.env.SPRITE_GAP_REFRESH_SEED ??
+      process.env.SERVER_NAME ??
+      process.env.HOSTNAME ??
+      "default"
+    const spriteGapSchedule = getDeterministicSpriteGapSchedule(spriteGapSeed)
+
+    logger.info(
+      `[CRON] Sprite gap weekly refresh scheduled at ${spriteGapSchedule.hour
+        .toString()
+        .padStart(2, "0")}:${spriteGapSchedule.minute
+        .toString()
+        .padStart(2, "0")} UTC on Monday (seed=${spriteGapSeed})`
+    )
+
+    CronJob.from({
+      cronTime: `${spriteGapSchedule.minute} ${spriteGapSchedule.hour} * * 1`, // every Monday at jittered UTC time
+      timeZone: "UTC",
+      onTick: () => refreshSpriteGapData(),
+      start: true
+    })
+  }
+
+  // see https://github.com/keldaanCommunity/pokemonAutoChessMetaReport/blob/main/.github/workflows/main.yml
+  // Meta report generation task is launched at 1:00 AM UTC, so we expect meta report generation to be done by then (< 1 hour)
+  CronJob.from({
+    cronTime: "0 2 * * *", // every day at 2:00 AM UTC
+    timeZone: "UTC",
+    onTick: () => {
+      fetchMetaReports()
+    },
+    start: true
+  })
+}
+
+async function deleteOldAnonymousAccounts() {
+  logger.info("[CRON] Deleting old anonymous accounts...")
+  const currentDate = dayjs() // Get the current date and time
+  const oneMonthLimit = currentDate.subtract(1, "month")
+  const anonymousAccounts = new Array<UserRecord>()
+  await listAllUsers()
+
+  async function listAllUsers(nextPageToken?: string) {
+    // List batch of users, 1000 at a time.
+    const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
+    //logger.debug(nextPageToken)
+    listUsersResult.users.forEach((userRecord) => {
+      const lastSignInDate = dayjs(userRecord.metadata.lastSignInTime)
+      if (
+        userRecord.email === undefined &&
+        userRecord.photoURL === undefined &&
+        userRecord.metadata.lastSignInTime &&
+        lastSignInDate.isBefore(oneMonthLimit)
+      ) {
+        anonymousAccounts.push(userRecord)
+      }
+    })
+    if (listUsersResult.pageToken) {
+      // List next batch of users.
+      await listAllUsers(listUsersResult.pageToken)
+    }
+  }
+
+  logger.info(
+    `deleting ${anonymousAccounts.length} inactive anonymous accounts`
+  )
+
+  while (anonymousAccounts.length > 0) {
+    const batchDeletion = new Array<string>()
+    for (let i = 0; i < 999; i++) {
+      const account = anonymousAccounts.pop()
+      account && batchDeletion.push(account.uid)
+    }
+    const firebaseDeletion = await admin.auth().deleteUsers(batchDeletion)
+    logger.info("firebase deletion result ", firebaseDeletion)
+    const pacDeletion = await UserMetadata.deleteMany({
+      uid: { $in: batchDeletion }
+    })
+    logger.info("pac deletion result ", pacDeletion)
+  }
+}
+
+async function eloDecay() {
+  logger.info("[CRON] Computing elo decay...")
+  const users = await UserMetadata.find(
+    { elo: { $gt: CRON_ELO_DECAY_MINIMUM_ELO } },
+    ["uid", "elo", "displayName"]
+  )
+  if (users && users.length > 0) {
+    logger.info(`Checking activity of ${users.length} users`)
+    for (let i = 0; i < users.length; i++) {
+      const u = users[i]
+      const stats = await DetailledStatistic.find(
+        {
+          playerId: u.uid,
+          ...(u.elo >= EloRankThreshold[EloRank.ULTRA_BALL]
+            ? { gameMode: GameMode.RANKED }
+            : {})
+        },
+        ["time"],
+        {
+          limit: 3,
+          sort: { time: -1 }
+        }
+      )
+
+      const shouldDecay =
+        stats.length < ELO_DECAY_NB_GAMES_REQUIRED ||
+        Date.now() - stats[2].time > CRON_ELO_DECAY_DELAY
+
+      if (shouldDecay) {
+        const eloAfterDecay = min(CRON_ELO_DECAY_MINIMUM_ELO)(
+          u.elo - ELO_DECAY_LOST_PER_DAY
+        )
+        logger.info(
+          `User ${u.displayName} (${u.elo}) will decay to ${eloAfterDecay}`
+        )
+        u.elo = eloAfterDecay
+        await u.save()
+      }
+    }
+  } else {
+    logger.info("No users to check")
+  }
+}
+
+async function titleStats() {
+  logger.info("[CRON] Recomputing title statistics...")
+  const count = await UserMetadata.estimatedDocumentCount()
+  logger.info(`${count} users found`)
+  for (const title of Object.values(Title)) {
+    const titleCount = await UserMetadata.countDocuments({
+      titles: title
+    })
+    await TitleStatistic.deleteMany({ name: title })
+    await TitleStatistic.create({ name: title, rarity: titleCount / count })
+  }
+}
+
+async function deleteOldHistory() {
+  logger.info("[CRON] Deleting 4 weeks old games...")
+  const deleteResults = await DetailledStatistic.deleteMany({
+    time: { $lt: Date.now() - CRON_HISTORY_CLEANUP_DELAY }
+  })
+  logger.info(`${deleteResults.deletedCount} detailed statistics deleted`)
+}
+
+async function resetEventScores() {
+  try {
+    logger.info("[CRON] Starting event scores reset...")
+
+    // Reset event-related fields for all users in a single operation
+    const result = await UserMetadata.updateMany(
+      {
+        $or: [
+          { eventPoints: { $gt: 0 } },
+          { maxEventPoints: { $gt: 0 } },
+          { eventFinishTime: { $exists: true, $ne: null } }
+        ]
+      },
+      {
+        $set: {
+          eventPoints: 0,
+          maxEventPoints: 0,
+          eventFinishTime: null
+        }
+      }
+    )
+
+    logger.info(
+      `Event reset completed! Reset event data for ${result.modifiedCount} users`
+    )
+
+    setTimeout(() => {
+      const newEvent = getCurrentGameEvent()
+      switch (newEvent) {
+        case GameEvent.VICTORY_ROAD:
+          matchMaker.presence.publish(
+            "announcement",
+            "Victory Road has started! Be the first to reach the finish line!"
+          )
+          break
+        case GameEvent.EXPEDITIONS:
+          matchMaker.presence.publish(
+            "announcement",
+            "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
+          )
+          break
+      }
+    }, 60 * 1000) // wait 1 minute to ensure the clock has ticked to the next month for all servers
+  } catch (e) {
+    logger.error("Error during event reset scores:", e)
+  }
+}

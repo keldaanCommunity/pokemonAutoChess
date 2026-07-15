@@ -1,7 +1,3 @@
----
-patch announcement
----
-
 > September, 9th
 
 # Patch 4.1
@@ -34,7 +30,7 @@ patch announcement
 - Nerf Lucario: Mana 90→100, Attack 24→20
 - Nerf WonderGuard: Paralysis duration ~~5 seconds (scales)~~ 3 seconds
 - Nerf Ninjask Mana 80 → 100 ; Shedninja Mana 60 → 100
-- Nerf Vespiqueen: HP 250 → 210
+- Nerf Vespiquen: HP 250 → 210
 - Nerf Ludicolo: Attack 26 → 22
 - Nerf Genesect: HP: 220 → 200, Mana 70 → 80
 - Nerf Lock-On: Duration 8 → 4 seconds

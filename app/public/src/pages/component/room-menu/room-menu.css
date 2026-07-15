@@ -1,0 +1,53 @@
+.room-menu {
+  display: flex;
+  flex-direction: column;
+  container-type: inline-size;
+}
+
+.room-menu .subtitle {
+  text-align: center;
+  color: var(--color-fg-primary);
+  font-size: 1.5rem;
+  margin-top: 1em;
+}
+
+.room-menu .tab-tournament.react-tabs__tab-panel--selected {
+  padding: 0.5em 0;
+}
+
+.room-menu .react-tabs__tab-panel--selected ul {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+}
+
+.room-menu .play-button {
+  margin: 0.5em auto;
+  min-width: 10em;
+}
+
+.room-menu .rank.icon {
+  width: 50px;
+}
+
+.room-menu > ul {
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  flex: 1;
+}
+
+section.room-menu .room-menu > ul {
+  max-height: calc(100% - 7em);
+}
+
+.room-menu li {
+  list-style: none;
+}
+
+.room-menu .room-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  gap: 8px;
+}

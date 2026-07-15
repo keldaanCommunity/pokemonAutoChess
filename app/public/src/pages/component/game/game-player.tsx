@@ -1,10 +1,10 @@
-import React from "react"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import { Tooltip } from "react-tooltip"
 
-import { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../../../types"
+import { getAvatarSrc } from "../../../../../utils/avatar"
+import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
-import { getAvatarSrc } from "../../../utils"
 import { cc } from "../../utils/jsx"
 import GamePlayerDetail from "./game-player-detail"
 
@@ -15,46 +15,49 @@ export default function GamePlayer(props: {
   player: IPlayer
   click: (id: string) => void
   index: number
+  teamColor?: string
 }) {
   const spectatedPlayerId = useAppSelector(
-    (state) => state.game.currentPlayerId
+    (state) => state.game.playerIdSpectated
   )
-  const selfPlayerId = useAppSelector((state) => state.network.uid)
+  const connectedPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
-    props.click(props.player.id)
+    if (spectatedPlayerId !== props.player.id) {
+      props.click(props.player.id)
+    }
   }
 
   return (
-    <div
-      style={{
-        top: `${1 + props.index * 12.5}%`,
-        backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`
-      }}
-      className={cc("game-player", {
-        spectated: spectatedPlayerId === props.player.id,
-        self: selfPlayerId === props.player.id,
-        dead: props.player.life <= 0
-      })}
-      onClick={playerClick}
-      data-tooltip-id={"detail-" + props.player.id}
-    >
-      <CircularProgressbarWithChildren value={props.player.life} />
-      <div className="nes-container life-text">{props.player.life}</div>
+    <div className="game-player-wrapper">
+      <div
+        style={{
+          top: `${1 + props.index * 12.5}%`,
+          backgroundImage: `url('${getAvatarSrc(props.player.avatar)}')`,
+          zIndex: DEPTH.PLAYER_ICON
+        }}
+        className={cc("game-player", {
+          spectated: spectatedPlayerId === props.player.id,
+          self: connectedPlayerId === props.player.id,
+          dead: props.player.life <= 0
+        })}
+        onClick={playerClick}
+        data-tooltip-id={"detail-" + props.player.id}
+      >
+        <CircularProgressbarWithChildren
+          value={props.player.life}
+          styles={{ path: { stroke: props.teamColor ?? "#f7d51d" } }}
+        />
+        <div className="my-container life-text">{props.player.life}</div>
+      </div>
       <Tooltip
         id={"detail-" + props.player.id}
         className="custom-theme-tooltip"
         place="left"
         data-tooltip-offset={{ left: 30, bottom: props.index === 0 ? 50 : 0 }}
+        style={{ zIndex: DEPTH.TOOLTIP }}
       >
-        <GamePlayerDetail
-          name={props.player.name}
-          life={props.player.life}
-          money={props.player.money}
-          level={props.player.experienceManager.level}
-          history={props.player.history}
-          synergies={props.player.synergies}
-        />
+        <GamePlayerDetail player={props.player} />
       </Tooltip>
     </div>
   )

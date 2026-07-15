@@ -1,49 +1,69 @@
 /* Pokemon sprites not controlled by any player, with custom onPointer */
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { PokemonActionState } from "../../../../types/enum/Game"
-import { Pkm } from "../../../../types/enum/Pokemon"
-import AnimationManager from "../animation-manager"
-import GameScene from "../scenes/game-scene"
+import type { Emotion } from "../../../../types"
+import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import type { Pkm } from "../../../../types/enum/Pokemon"
+import type GameScene from "../scenes/game-scene"
+import { GameDialog } from "./game-dialog"
 import PokemonSprite from "./pokemon"
-import { preferences } from "../../preferences"
-import { clamp, min } from "../../../../utils/number"
-import { PokemonSpecialDetail } from "./pokemon-special-detail"
 
 export default class PokemonSpecial extends PokemonSprite {
-  detail: PokemonSpecialDetail | null
-  animationManager: AnimationManager
+  detail: GameDialog | null = null
+  scene: GameScene
   dialog?: string
   dialogTitle?: string
 
-  constructor(
-    scene: GameScene,
-    x: number,
-    y: number,
-    name: Pkm,
-    animationManager: AnimationManager,
-    dialog?: string,
+  constructor({
+    scene,
+    x,
+    y,
+    name,
+    orientation = Orientation.DOWN,
+    animation = PokemonActionState.IDLE,
+    dialog,
+    dialogTitle,
+    emotion,
+    shiny
+  }: {
+    scene: GameScene
+    x: number
+    y: number
+    name: Pkm
+    orientation?: Orientation
+    animation?: PokemonActionState
+    dialog?: string
     dialogTitle?: string
-  ) {
+    emotion?: Emotion
+    shiny?: boolean
+  }) {
     super(
       scene,
-      x,
-      y,
-      PokemonFactory.createPokemonFromName(name),
+      x + 24,
+      y + 24,
+      PokemonFactory.createPokemonFromName(name, { emotion, shiny }),
       "environment",
       false,
       false
     )
 
+    this.scene = scene
     this.draggable = false
-    this.animationManager = animationManager
-    this.animationManager.animatePokemon(this, PokemonActionState.IDLE, false)
+    this.orientation = orientation
+    this.once("loaded", () =>
+      scene.animationManager?.animatePokemon(this, animation, false)
+    )
     this.dialog = dialog
     this.dialogTitle = dialogTitle
   }
 
-  onPointerDown(pointer) {
-    super.onPointerDown(pointer)
-    this.animationManager.animatePokemon(this, PokemonActionState.EMOTE, false)
+  onPointerDown(pointer, event) {
+    super.onPointerDown(pointer, event)
+    this.scene.animationManager?.animatePokemon(
+      this,
+      PokemonActionState.EMOTE,
+      false,
+      false
+    )
   }
 
   openDetail() {
@@ -54,40 +74,20 @@ export default class PokemonSpecial extends PokemonSprite {
         s.lastPokemonDetail = null
       }
 
-      this.detail = new PokemonSpecialDetail(
-        this.scene,
-        this.dialog,
-        this.dialogTitle
-      )
-      this.detail.setPosition(
-        this.detail.width / 2 + 40,
-        min(0)(-this.detail.height / 2 - 40)
-      )
-
+      this.detail = new GameDialog({
+        scene: this.scene,
+        dialog: this.dialog,
+        dialogTitle: this.dialogTitle,
+        portrait: {
+          index: this.pokemon.index,
+          shiny: this.pokemon.shiny,
+          emotion: this.pokemon.emotion
+        }
+      })
+      this.updateTooltipPosition()
       this.detail.removeInteractive()
       this.add(this.detail)
       s.lastPokemonDetail = this
-    }
-  }
-
-  updateTooltipPosition() {
-    if (this.detail) {
-      if (this.input && preferences.showDetailsOnHover) {
-        this.detail.setPosition(this.input.localX, this.input.localY)
-        return
-      }
-
-      const absX = this.x + this.detail.width / 2 + 40
-      const minX = this.detail.width / 2
-      const maxX = window.innerWidth - this.detail.width / 2
-      const absY = this.y - this.detail.height / 2 - 40
-      const minY = this.detail.height / 2
-      const maxY = window.innerHeight - this.detail.height / 2
-      const [x, y] = [
-        clamp(absX, minX, maxX) - this.x,
-        clamp(absY, minY, maxY) - this.y
-      ]
-      this.detail.setPosition(x, y)
     }
   }
 }

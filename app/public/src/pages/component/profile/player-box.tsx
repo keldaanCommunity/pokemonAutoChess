@@ -1,42 +1,62 @@
-import React from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { ILobbyUser } from "../../../../../models/colyseus-models/lobby-user"
-import { getPokemonData } from "../../../../../models/precomputed"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import type {
+  IUserMetadataClient,
+  IUserMetadataUnpacked
+} from "../../../../../types/interfaces/UserMetadata"
 import { useAppSelector } from "../../../hooks"
-import { getAvatarSrc } from "../../../utils"
 import SynergyIcon from "../icons/synergy-icon"
+import PokemonPortrait from "../pokemon-portrait"
 import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
 
-export default function PlayerBox(props: { user: ILobbyUser }) {
+export default function PlayerBox(props: {
+  user: IUserMetadataClient | IUserMetadataUnpacked
+  history?: IGameRecord[]
+}) {
   const { t } = useTranslation()
-  const role = useAppSelector((state) => state.lobby.user?.role)
+  const role = useAppSelector((state) => state.network.profile?.role)
 
   const pokemons: Pkm[] = []
-  props.user.history.forEach((record) =>
-    pokemons.push(...record.pokemons.map((p) => p.name.toUpperCase() as Pkm))
-  )
-  const countPokemons = new Map()
-  const countSynergies = new Map()
-  pokemons.forEach((p) => {
-    countPokemons.set(p, (countPokemons.get(p) ?? 0) + 1)
-    getPokemonData(p).types.forEach((type) => {
-      countSynergies.set(type, (countSynergies.get(type) ?? 0) + 1)
+  const [favoritePokemons, setFavoritePokemons] = useState<Pkm[]>([])
+  const [favoriteSynergies, setFavoriteSynergies] = useState<Synergy[]>([])
+  const twitchUrl = props.user.twitchLogin
+    ? `https://www.twitch.tv/${props.user.twitchLogin}`
+    : null
+
+  useEffect(() => {
+    if (!props.history) return
+    props.history.forEach((record) =>
+      pokemons.push(...record.pokemons.map((p) => p.name.toUpperCase() as Pkm))
+    )
+    const countPokemons = new Map()
+    const countSynergies = new Map()
+    pokemons.forEach((p) => {
+      countPokemons.set(p, (countPokemons.get(p) ?? 0) + 1)
+      getPokemonData(p).types.forEach((type) => {
+        countSynergies.set(type, (countSynergies.get(type) ?? 0) + 1)
+      })
     })
-  })
-  const favoritePokemons = [...countPokemons.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([k, v]) => k)
-  const favoriteSynergies = [...countSynergies.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([k, v]) => k)
+    const favoritePokemons = [...countPokemons.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([k, v]) => k)
+    const favoriteSynergies = [...countSynergies.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([k, v]) => k)
+
+    setFavoritePokemons(favoritePokemons)
+    setFavoriteSynergies(favoriteSynergies)
+  }, [props.history])
 
   return (
-    <div className="player-box">
+    <div className="player my-box">
       <div
         style={{
           display: "flex",
@@ -45,23 +65,36 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-          <img
-            src={getAvatarSrc(props.user.avatar)}
-            className="pokemon-portrait"
-          />
+          <PokemonPortrait avatar={props.user.avatar} />
           {props.user.title && (
             <p className="player-title">{t(`title.${props.user.title}`)}</p>
           )}
           <RoleBadge role={props.user.role} />
+          {props.user.banned && (
+            <div className="badge banned">{t("banned")}</div>
+          )}
           <p
+            className="player-display-name"
             style={{
               overflow: "hidden",
               whiteSpace: "nowrap",
               textOverflow: "ellipsis"
             }}
           >
-            {props.user.name}
+            {props.user.displayName}
           </p>
+          {twitchUrl && (
+            <a
+              className="twitch-badge-link"
+              href={twitchUrl}
+              target="_blank"
+              rel="noreferrer"
+              title={`Watch ${props.user.twitchDisplayName ?? props.user.twitchLogin} on Twitch`}
+              aria-label={`Watch ${props.user.twitchDisplayName ?? props.user.twitchLogin} on Twitch`}
+            >
+              <img src="/assets/ui/twitch.png" alt="" aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
       <div
@@ -96,16 +129,13 @@ export default function PlayerBox(props: { user: ILobbyUser }) {
         </p>
         <p>
           {favoritePokemons.map((name) => (
-            <img
-              src={getAvatarSrc(PkmIndex[name] + "/Normal")}
-              className="pokemon-portrait"
-            />
+            <PokemonPortrait key={name} avatar={PkmIndex[name] + "/Normal"} />
           ))}
         </p>
       </div>
-      {role === Role.ADMIN && (
+      {(role === Role.ADMIN || role === Role.MODERATOR) && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
-          {t("user_id")}: {props.user.id}
+          {t("profile.account.user_id")}: {props.user.uid}
         </p>
       )}
     </div>

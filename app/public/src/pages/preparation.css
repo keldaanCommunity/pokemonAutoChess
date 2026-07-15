@@ -1,18 +1,21 @@
 .preparation-page {
   display: flex;
   height: 100%;
+  overflow-y: auto;
 }
 
 .preparation-page main {
   display: flex;
   justify-content: center;
   gap: 1em;
-  width: 100%;
+  position: relative;
+  left: 60px;
+  width: calc(100vw - var(--sidebar-width));
   align-items: center;
 }
 
 .preparation-page .preparation-menu,
-.preparation-page .user-chat {
+.preparation-page .chat-container {
   height: calc(100vh - 8vw);
 }
 
@@ -20,8 +23,29 @@
   flex: 0 1 50em;
 }
 
-.preparation-page .user-chat {
+.preparation-menu .team-name {
+  display: flex;
+  align-items: center;
+}
+
+.preparation-menu .team-color-indicator {
+  border: var(--border-thin);
+  border-radius: 8px;
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.preparation-page .chat-container {
   flex: 0 1 30em;
+  display: flex;
+  flex-direction: column;
+}
+
+.preparation-page .chat-container h2 {
+  font-size: 1.5em;
+  text-align: center;
 }
 
 .preparation-page > footer {
@@ -32,23 +56,19 @@
   text-align: right;
 }
 
-#preloading-message {
-  color: white;
-  background-color: #00000080;
-  display: inline-block;
-  padding: 0 0.5em;
-}
-
 @media (max-width: 640px) {
   .preparation-page main {
     display: block;
   }
 
   .preparation-page .preparation-menu,
-  .preparation-page .user-chat {
+  .preparation-page .chat-container {
     min-height: initial;
-    height: calc(50vh - 4em);
     overflow: auto;
     margin-bottom: 1em;
+  }
+
+  .preparation-page .chat-container {
+    padding-bottom: 60px;
   }
 }

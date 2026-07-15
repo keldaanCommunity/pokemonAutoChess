@@ -3261,7 +3261,6 @@
 		"SLOWPOKE": "Evolucionará a $t(pkm.SLOWBRO) o a $t(pkm.SLOWKING) dependiendo de la sinergia predominante entre WATER y PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Evolucionará a $t(pkm.GALARIAN_SLOWBRO) o a $t(pkm.GALARIAN_SLOWKING) dependiendo de la sinergia predominante entre POISON y PSYCHIC.",
 		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
-		"WALL_OF_STONE": "",
 		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",
 		"ILLUSION": "Copia la apariencia del aliado a su izquierda.",
@@ -4557,6 +4556,7 @@
 		}
 	},
 	"errors": {
+    "title": "Error",
 		"USER_INACTIVE": "Fuiste expulsado por inactividad para ahorrar recursos del servidor",
 		"USER_KICKED": "Fuiste expulsado de esta sala",
 		"USER_BANNED": "Tu cuenta fue baneada",
@@ -4573,7 +4573,6 @@
 		"GAME_ALREADY_STARTED": "Esta partida ya ha empezado",
 		"INVALID_PASSWORD": "Contraseña incorrecta!",
 		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:",
-		"title": "Error",
 		"SERVER_SHUTDOWN": "El servidor está cerrando por mantenimiento",
 		"FAILED_TO_RECONNECT": "Fallo al reconectar al juego. Por favor refrescá la página e intentá de nuevo."
 	},
@@ -4593,6 +4592,7 @@
 		"hard": "Difícil"
 	},
 	"technical_terms": {
+    "title": "Términos Técnicos",
 		"STRONGEST": "más fuerte",
 		"ADJACENT": "adyacente",
 		"ADJACENT_IN_THE_SAME_ROW": "adyacentes en la misma fila",
@@ -4601,8 +4601,7 @@
 		"INIMITABLE": "inimitable",
 		"ON_HIT": "al golpear",
 		"ON_ATTACK": "al atacar",
-		"BOARD_EFFECT": "efectos de tablero",
-		"title": "Términos Técnicos"
+		"BOARD_EFFECT": "efectos de tablero"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "La unidad más fuerte se decide por el siguiente orden de prioridad: 1.º Número de objetos equipados, 2.º Categoría de la unidad, 3.º Rareza de la unidad",

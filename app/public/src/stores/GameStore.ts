@@ -1,104 +1,92 @@
-import { ArraySchema, MapSchema } from "@colyseus/schema"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import Simulation from "../../../core/simulation"
+import { createSlice, type PayloadAction, type Slice } from "@reduxjs/toolkit"
+import { StageDuration } from "../../../config"
+import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
-import PokemonCollection from "../../../models/colyseus-models/pokemon-collection"
 import Synergies from "../../../models/colyseus-models/synergies"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import { IDps, IDpsHeal, IPlayer, ISimulation } from "../../../types"
-import { StageDuration } from "../../../types/Config"
-import { GamePhaseState } from "../../../types/enum/Game"
-import { Item } from "../../../types/enum/Item"
-import { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
-import { Synergy } from "../../../types/enum/Synergy"
+import type {
+  Emotion,
+  IDps,
+  IExperienceManager,
+  IPlayer,
+  ISimulation
+} from "../../../types"
+import { GameMode, GamePhaseState, Team } from "../../../types/enum/Game"
+import type { Item } from "../../../types/enum/Item"
+import type { Pkm, PkmProposition } from "../../../types/enum/Pokemon"
+import type { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
+import type { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
+import type { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
+import { schemaEntries } from "../../../utils/schemas"
 import { getGameScene } from "../pages/game"
 
-interface GameStateStore {
+export interface GameStateStore {
   afterGameId: string
+  gameMode: GameMode
   phaseDuration: number
   roundTime: number
   phase: GamePhaseState
   players: IPlayer[]
   simulations: ISimulation[]
   stageLevel: number
-  mapName: string
   noElo: boolean
-  currentPlayerId: string
-  currentSimulationId: string
-  currentSimulationTeamIndex: number
+  specialGameRule: SpecialGameRule | null
+  playerIdSpectated: string
+  simulationIdSpectated: string
+  teamSpectated: Team
+  synergiesSpectated: [string, number][]
   money: number
   interest: number
+  maxInterest: number
   streak: number
+  shopFreeRolls: number
   shopLocked: boolean
-  experienceManager: ExperienceManager
+  experienceManager: IExperienceManager
   shop: Pkm[]
   itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
-  currentPlayerSynergies: [string, number][]
-  currentPlayerOpponentId: string
-  currentPlayerOpponentName: string
-  currentPlayerOpponentAvatar: string
-  currentPlayerOpponentTitle: string
-  currentPlayerBoardSize: number
-  currentPlayerLife: number
-  currentPlayerMoney: number
-  currentPlayerExperienceManager: ExperienceManager
-  currentPlayerName: string
-  currentPlayerAvatar: string
-  currentPlayerTitle: string
   weather: Weather
   blueDpsMeter: IDps[]
   redDpsMeter: IDps[]
-  blueHealDpsMeter: IDpsHeal[]
-  redHealDpsMeter: IDpsHeal[]
-  pokemonCollection: MapSchema<IPokemonConfig>
+  emotesUnlocked: Emotion[]
   additionalPokemons: Pkm[]
+  podium: ILeaderboardInfo[]
 }
 
 const initialState: GameStateStore = {
   afterGameId: "",
+  gameMode: GameMode.CUSTOM_LOBBY,
   phaseDuration: StageDuration[1],
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
   players: new Array<IPlayer>(),
   simulations: new Array<ISimulation>(),
   stageLevel: 0,
-  mapName: "",
   weather: Weather.NEUTRAL,
   noElo: false,
-  currentPlayerId: "",
-  currentSimulationId: "",
-  currentSimulationTeamIndex: 0,
+  playerIdSpectated: "",
+  simulationIdSpectated: "",
+  teamSpectated: Team.BLUE_TEAM,
+  synergiesSpectated: new Array<[Synergy, number]>(),
   money: 5,
   interest: 0,
+  maxInterest: 5,
   streak: 0,
+  shopFreeRolls: 0,
   shopLocked: false,
   experienceManager: new ExperienceManager(),
   shop: new Array<Pkm>(),
   itemsProposition: new Array<Item>(),
   pokemonsProposition: new Array<Pkm>(),
-  currentPlayerSynergies: new Array<[Synergy, number]>(),
-  currentPlayerOpponentId: "",
-  currentPlayerOpponentName: "",
-  currentPlayerOpponentAvatar: "0019/Normal",
-  currentPlayerOpponentTitle: "",
-  currentPlayerBoardSize: 0,
-  currentPlayerLife: 100,
-  currentPlayerMoney: 5,
-  currentPlayerExperienceManager: new ExperienceManager(),
-  currentPlayerName: "",
-  currentPlayerTitle: "",
-  currentPlayerAvatar: "0019/Normal",
   blueDpsMeter: new Array<IDps>(),
   redDpsMeter: new Array<IDps>(),
-  blueHealDpsMeter: new Array<IDpsHeal>(),
-  redHealDpsMeter: new Array<IDpsHeal>(),
-  pokemonCollection: new MapSchema<IPokemonConfig>(),
-  additionalPokemons: new Array<Pkm>()
+  emotesUnlocked: [],
+  additionalPokemons: new Array<Pkm>(),
+  specialGameRule: null,
+  podium: new Array<ILeaderboardInfo>()
 }
 
-export const gameSlice = createSlice({
+export const gameSlice: Slice<GameStateStore> = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
@@ -115,14 +103,28 @@ export const gameSlice = createSlice({
     setStageLevel: (state, action: PayloadAction<number>) => {
       state.stageLevel = action.payload
     },
-    setMapName: (state, action: PayloadAction<string>) => {
-      state.mapName = action.payload
-    },
     setNoELO: (state, action: PayloadAction<boolean>) => {
       state.noElo = action.payload
     },
+    setSpecialGameRule: (
+      state,
+      action: PayloadAction<SpecialGameRule | null>
+    ) => {
+      state.specialGameRule = action.payload
+    },
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      state.players.push(JSON.parse(JSON.stringify(action.payload)))
+      // idempotent by id: a replay seek re-fires onAdd, so replace rather than push (avoids duplicate players)
+      const clone = JSON.parse(JSON.stringify(action.payload)) as IPlayer
+      // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
+      clone.synergies = new Synergies(
+        new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
+      )
+      const index = state.players.findIndex((p) => p.id === clone.id)
+      if (index >= 0) {
+        state.players[index] = clone
+      } else {
+        state.players.push(clone)
+      }
     },
     removePlayer: (state, action: PayloadAction<IPlayer>) => {
       state.players = state.players.filter((p) => p.id !== action.payload.id)
@@ -133,40 +135,67 @@ export const gameSlice = createSlice({
     setInterest: (state, action: PayloadAction<number>) => {
       state.interest = action.payload
     },
+    setMaxInterest: (state, action: PayloadAction<number>) => {
+      state.maxInterest = action.payload
+    },
     setStreak: (state, action: PayloadAction<number>) => {
       state.streak = action.payload
     },
     setShopLocked: (state, action: PayloadAction<boolean>) => {
       state.shopLocked = action.payload
     },
-    setExperienceManager: (state, action: PayloadAction<ExperienceManager>) => {
-      state.experienceManager = action.payload
+    setShopFreeRolls: (state, action: PayloadAction<number>) => {
+      state.shopFreeRolls = action.payload
+    },
+    updateExperienceManager: (
+      state,
+      action: PayloadAction<IExperienceManager>
+    ) => {
+      state.experienceManager = {
+        ...state.experienceManager,
+        experience: action.payload.experience,
+        expNeeded: action.payload.expNeeded,
+        level: action.payload.level,
+        maxLevel: action.payload.maxLevel
+      }
     },
     changePlayer: (
       state,
       action: PayloadAction<{ id: string; field: string; value: any }>
     ) => {
       const index = state.players.findIndex((e) => action.payload.id == e.id)
-      state.players[index][action.payload.field] = action.payload.value
+      if (index >= 0) {
+        state.players[index][action.payload.field] = action.payload.value
+      } else {
+        console.error(
+          `changePlayer: Player not found ${action.payload.id} in ${state.players.map((p) => p.id)}`
+        )
+      }
     },
-    setShop: (state, action: PayloadAction<ArraySchema<Pkm>>) => {
-      state.shop = action.payload
+    changeShop: (
+      state,
+      action: PayloadAction<{ index: number; value: Pkm }>
+    ) => {
+      state.shop[action.payload.index] = action.payload.value
     },
-    setItemsProposition: (state, action: PayloadAction<ArraySchema<Item>>) => {
-      state.itemsProposition = JSON.parse(JSON.stringify(action.payload))
+    refreshShopUI: (state) => {
+      state.shop = state.shop.slice()
+    },
+    setItemsProposition: (state, action: PayloadAction<Item[]>) => {
+      state.itemsProposition = action.payload
     },
     setPokemonProposition: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.pokemonsProposition = JSON.parse(JSON.stringify(action.payload))
+      state.pokemonsProposition = action.payload
     },
-    setAdditionalPokemons: (state, action: PayloadAction<PkmProposition[]>) => {
-      state.additionalPokemons = JSON.parse(JSON.stringify(action.payload))
+    setAdditionalPokemons: (state, action: PayloadAction<Pkm[]>) => {
+      state.additionalPokemons = action.payload
     },
     setSynergies: (
       state,
       action: PayloadAction<{ value: Synergies; id: string }>
     ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerSynergies = Array.from(action.payload.value)
+      if (state.playerIdSpectated === action.payload.id) {
+        state.synergiesSpectated = Array.from(action.payload.value)
       }
 
       const playerToUpdate = state.players.findIndex(
@@ -174,106 +203,16 @@ export const gameSlice = createSlice({
       )
 
       if (playerToUpdate !== -1) {
-        state.players.at(playerToUpdate)!.synergies =
-          action.payload.value.toJSON()
-      }
-    },
-    setOpponentId: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentId = action.payload.value
-      }
-    },
-    setOpponentName: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentName = action.payload.value
-      }
-    },
-    setOpponentAvatar: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentAvatar = action.payload.value
-        getGameScene()?.board?.updateOpponentAvatar(
-          state.currentPlayerOpponentId,
-          state.currentPlayerOpponentAvatar
+        state.players.at(playerToUpdate)!.synergies = new Synergies(
+          new Map(schemaEntries(action.payload.value))
         )
       }
     },
-    setOpponentTitle: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerOpponentTitle = action.payload.value
-      }
-    },
-    setBoardSize: (
-      state,
-      action: PayloadAction<{ value: number; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerBoardSize = action.payload.value
-      }
-    },
     setLife: (state, action: PayloadAction<{ value: number; id: string }>) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerLife = action.payload.value
-      }
       getGameScene()?.board?.updateAvatarLife(
         action.payload.id,
         action.payload.value
       )
-    },
-    setPlayerExperienceManager: (
-      state,
-      action: PayloadAction<{ value: ExperienceManager; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerExperienceManager = action.payload.value
-      }
-      const player = state.players.find((e) => e.id === action.payload.id)
-      if (player) {
-        player.experienceManager = action.payload.value
-      }
-    },
-    setCurrentPlayerMoney: (
-      state,
-      action: PayloadAction<{ value: number; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerMoney = action.payload.value
-      }
-    },
-    setCurrentPlayerName: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerName = action.payload.value
-      }
-    },
-    setCurrentPlayerTitle: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerTitle = action.payload.value
-      }
-    },
-    setCurrentPlayerAvatar: (
-      state,
-      action: PayloadAction<{ value: string; id: string }>
-    ) => {
-      if (state.currentPlayerId === action.payload.id) {
-        state.currentPlayerAvatar = action.payload.value
-      }
     },
     setLoadingProgress: (
       state,
@@ -284,213 +223,101 @@ export const gameSlice = createSlice({
         player.loadingProgress = action.payload.value
       }
     },
+    setGameMode: (state, action: PayloadAction<GameMode>) => {
+      state.gameMode = action.payload
+    },
     setWeather: (
       state,
       action: PayloadAction<{ value: Weather; id: string }>
     ) => {
-      if (state.currentSimulationId === action.payload.id) {
+      if (state.simulationIdSpectated === action.payload.id) {
         state.weather = action.payload.value
       }
     },
     setSimulation: (state, action: PayloadAction<Simulation>) => {
       if (
-        state.currentPlayerId === action.payload.bluePlayerId ||
-        state.currentPlayerId === action.payload.redPlayerId
+        state.playerIdSpectated === action.payload.bluePlayerId ||
+        state.playerIdSpectated === action.payload.redPlayerId
       ) {
-        state.currentSimulationId = action.payload.id
-        state.currentSimulationTeamIndex =
-          state.currentPlayerId === action.payload.bluePlayerId ? 0 : 1
+        state.simulationIdSpectated = action.payload.id
+        state.teamSpectated =
+          state.playerIdSpectated === action.payload.bluePlayerId
+            ? Team.BLUE_TEAM
+            : Team.RED_TEAM
         state.weather = action.payload.weather
         state.blueDpsMeter = new Array<IDps>()
         state.redDpsMeter = new Array<IDps>()
-        state.blueHealDpsMeter = new Array<IDpsHeal>()
-        state.redHealDpsMeter = new Array<IDpsHeal>()
         action.payload.blueDpsMeter.forEach((dps) => {
-          state.blueDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+          state.blueDpsMeter.push(structuredClone(dps))
         })
         action.payload.redDpsMeter.forEach((dps) => {
-          state.redDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-        })
-        action.payload.redHealDpsMeter.forEach((dps) => {
-          state.redHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
-        })
-        action.payload.blueHealDpsMeter.forEach((dps) => {
-          state.blueHealDpsMeter.push(JSON.parse(JSON.stringify(dps)))
+          state.redDpsMeter.push(structuredClone(dps))
         })
       }
     },
     setPlayer: (state, action: PayloadAction<IPlayer>) => {
-      state.currentPlayerId = action.payload.id
-      state.currentSimulationId = action.payload.simulationId
-      state.currentSimulationTeamIndex = action.payload.simulationTeamIndex
-      state.currentPlayerMoney = action.payload.money
-      state.currentPlayerExperienceManager = action.payload.experienceManager
-      state.currentPlayerOpponentId = action.payload.opponentId
-      state.currentPlayerOpponentName = action.payload.opponentName
-      state.currentPlayerOpponentAvatar = action.payload.opponentAvatar
-      state.currentPlayerOpponentTitle = action.payload.opponentTitle
-      state.currentPlayerLife = action.payload.life
-      state.currentPlayerSynergies = Array.from(action.payload.synergies)
-      state.currentPlayerAvatar = action.payload.avatar
-      state.currentPlayerName = action.payload.name
-      state.currentPlayerTitle = action.payload.title
-      state.currentPlayerBoardSize = action.payload.boardSize
+      state.playerIdSpectated = action.payload.id
+      state.simulationIdSpectated = action.payload.simulationId
+      state.teamSpectated = action.payload.team
+      state.synergiesSpectated = Array.from(action.payload.synergies)
     },
-    addRedDpsMeter: (
+    addDpsMeter: (
       state,
-      action: PayloadAction<{ value: IDps; id: string }>
+      action: PayloadAction<{ value: IDps; team: Team; id: string }>
     ) => {
+      const { value, team, id } = action.payload
+      const dpsMeter =
+        team === Team.BLUE_TEAM ? state.blueDpsMeter : state.redDpsMeter
       if (
-        state.currentSimulationId === action.payload.id &&
-        state.redDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
+        state.simulationIdSpectated === id &&
+        dpsMeter.find((d) => d.id == value.id) === undefined
       ) {
-        state.redDpsMeter.push(JSON.parse(JSON.stringify(action.payload.value)))
+        dpsMeter.push(structuredClone(value))
       }
     },
-    addBlueDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDps; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.blueDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.blueDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    addRedHealDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDpsHeal; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.redHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.redHealDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    addBlueHealDpsMeter: (
-      state,
-      action: PayloadAction<{ value: IDpsHeal; id: string }>
-    ) => {
-      if (
-        state.currentSimulationId === action.payload.id &&
-        state.blueHealDpsMeter.find((d) => d.id == action.payload.value.id) ===
-          undefined
-      ) {
-        state.blueHealDpsMeter.push(
-          JSON.parse(JSON.stringify(action.payload.value))
-        )
-      }
-    },
-    changeRedDpsMeter: (
+
+    changeDpsMeter: (
       state,
       action: PayloadAction<{
         id: string
+        team: Team
         field: string
         value: string | number
         simulationId: string
       }>
     ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.redDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
+      const { value, field, team, id, simulationId } = action.payload
+      const dpsMeter =
+        team === Team.BLUE_TEAM ? state.blueDpsMeter : state.redDpsMeter
+      if (state.simulationIdSpectated === simulationId) {
+        const index = dpsMeter.findIndex((e) => id == e.id)
         if (index >= 0) {
-          state.redDpsMeter[index][action.payload.field] = action.payload.value
+          dpsMeter[index][field] = value
         }
       }
     },
-    changeBlueDpsMeter: (
+
+    removeDpsMeter: (
       state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
+      action: PayloadAction<{ id: string; team: Team; simulationId: string }>
     ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.blueDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.blueDpsMeter[
-            state.blueDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
+      const { id, team, simulationId } = action.payload
+      if (state.simulationIdSpectated === simulationId) {
+        if (team === Team.BLUE_TEAM)
+          state.blueDpsMeter = state.blueDpsMeter.filter((dps) => dps.id !== id)
+        if (team === Team.RED_TEAM)
+          state.redDpsMeter = state.redDpsMeter.filter((dps) => dps.id !== id)
       }
     },
-    changeRedHealDpsMeter: (
-      state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
-    ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.redHealDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.redHealDpsMeter[
-            state.redHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
-      }
+
+    setEmotesUnlocked: (state, action: PayloadAction<string>) => {
+      state.emotesUnlocked = action.payload.split(",") as Emotion[]
     },
-    changeBlueHealDpsMeter: (
-      state,
-      action: PayloadAction<{
-        id: string
-        field: string
-        value: string | number
-        simulationId: string
-      }>
-    ) => {
-      if (state.currentSimulationId === action.payload.simulationId) {
-        const index = state.blueHealDpsMeter.findIndex(
-          (e) => action.payload.id == e.id
-        )
-        if (index >= 0) {
-          state.blueHealDpsMeter[
-            state.blueHealDpsMeter.findIndex((e) => action.payload.id == e.id)
-          ][action.payload.field] = action.payload.value
-        }
-      }
+
+    setPodium(state, action: PayloadAction<ILeaderboardInfo[]>) {
+      state.podium = action.payload
     },
-    removeRedDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.redDpsMeter = new Array<IDps>()
-      }
-    },
-    removeBlueDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.blueDpsMeter = new Array<IDps>()
-      }
-    },
-    removeRedHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.redHealDpsMeter = new Array<IDpsHeal>()
-      }
-    },
-    removeBlueHealDpsMeter: (state, action: PayloadAction<string>) => {
-      if (state.currentSimulationId === action.payload) {
-        state.blueHealDpsMeter = new Array<IDpsHeal>()
-      }
-    },
-    setPokemonCollection: (state, action: PayloadAction<PokemonCollection>) => {
-      state.pokemonCollection = action.payload
-    },
+
     leaveGame: () => initialState
   }
 })
@@ -499,51 +326,37 @@ export const {
   setSimulation,
   setAdditionalPokemons,
   setPokemonProposition,
-  setPokemonCollection,
+  setEmotesUnlocked,
   leaveGame,
-  removeBlueDpsMeter,
-  removeRedDpsMeter,
-  removeBlueHealDpsMeter,
-  removeRedHealDpsMeter,
-  changeBlueDpsMeter,
-  changeRedDpsMeter,
-  changeBlueHealDpsMeter,
-  changeRedHealDpsMeter,
-  addRedDpsMeter,
-  addBlueDpsMeter,
-  addRedHealDpsMeter,
-  addBlueHealDpsMeter,
-  setCurrentPlayerName,
-  setCurrentPlayerTitle,
+  removeDpsMeter,
+  changeDpsMeter,
+  addDpsMeter,
   setLoadingProgress,
   setPlayer,
-  setCurrentPlayerAvatar,
-  setPlayerExperienceManager,
-  setCurrentPlayerMoney,
   setLife,
-  setBoardSize,
-  setOpponentId,
-  setOpponentName,
-  setOpponentAvatar,
-  setOpponentTitle,
   setSynergies,
+  setGameMode,
   setRoundTime,
   setAfterGameId,
   setPhase,
   setStageLevel,
-  setMapName,
   setWeather,
   setNoELO,
+  setSpecialGameRule,
   addPlayer,
   removePlayer,
-  setExperienceManager,
+  updateExperienceManager,
   setStreak,
   setInterest,
+  setMaxInterest,
   setMoney,
+  setShopFreeRolls,
   setShopLocked,
   changePlayer,
-  setShop,
-  setItemsProposition
+  changeShop,
+  refreshShopUI,
+  setItemsProposition,
+  setPodium
 } = gameSlice.actions
 
 export default gameSlice.reducer

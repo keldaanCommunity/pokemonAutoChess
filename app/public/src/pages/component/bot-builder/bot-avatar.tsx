@@ -1,26 +1,31 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
-import { Emotion, PkmWithConfig } from "../../../../../types"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getAvatarSrc } from "../../../utils"
-import { validateBot } from "./bot-logic"
+import { validateBot } from "../../../../../core/bot-logic"
+import { Emotion, type PkmWithCustom } from "../../../../../types"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import { getAvatarSrc } from "../../../../../utils/avatar"
+import type { IBot } from "../../../models/bot-v2"
 
 export default function BotAvatar(props: {
   bot: IBot
-  onChangeAvatar: (pkm: PkmWithConfig) => void
+  onChangeAvatar: (pkm: PkmWithCustom) => void
   onClick: () => void
 }) {
   const { t } = useTranslation()
 
   function handleOnDragOver(e: React.DragEvent) {
+    e.stopPropagation()
     e.preventDefault()
   }
 
   function handleDrop(e: React.DragEvent) {
-    if (e.dataTransfer.getData("pokemon") != "") {
+    e.stopPropagation()
+    e.preventDefault()
+    const data = e.dataTransfer.getData("text/plain")
+    if (data.startsWith("pokemon")) {
+      const [type, name] = data.split(",") as [string, Pkm]
       props.onChangeAvatar({
-        name: e.dataTransfer.getData("pokemon") as Pkm,
+        name,
         emotion: Emotion.NORMAL,
         shiny: false
       })
@@ -30,7 +35,7 @@ export default function BotAvatar(props: {
   const errors = validateBot(props.bot)
 
   return (
-    <div id="bot-info">
+    <div id="bot-info" className="my-box">
       <img
         className="bot-avatar"
         src={getAvatarSrc(props.bot.avatar)}
@@ -44,11 +49,16 @@ export default function BotAvatar(props: {
       <p>ELO: {props.bot.elo}</p>
       <p>
         {errors.length > 0 ? (
-          <span style={{ color: "red" }} title={errors.join("\n")}>
+          <span
+            style={{ color: "var(--color-fg-negative)" }}
+            title={errors.join("\n")}
+          >
             {t("invalid")}
           </span>
         ) : (
-          <span style={{ color: "lime" }}>{t("valid")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>
+            {t("valid")}
+          </span>
         )}
       </p>
     </div>

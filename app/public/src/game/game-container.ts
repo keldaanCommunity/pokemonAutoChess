@@ -1,64 +1,81 @@
-import { Room } from "colyseus.js"
+import type { SchemaCallbackProxy } from "@colyseus/schema"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
+import { t } from "i18next"
 import Phaser from "phaser"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin.js"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin"
 import React from "react"
 import { toast } from "react-toastify"
-import { DesignTiled } from "../../../core/design"
-import { PokemonEntity } from "../../../core/pokemon-entity"
-import Simulation from "../../../core/simulation"
-import Count from "../../../models/colyseus-models/count"
-import { FloatingItem } from "../../../models/colyseus-models/floating-item"
-import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import Player from "../../../models/colyseus-models/player"
-import { Pokemon } from "../../../models/colyseus-models/pokemon"
-import { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
-import { Portal, SynergySymbol } from "../../../models/colyseus-models/portal"
-import Status from "../../../models/colyseus-models/status"
-import { IPokemonConfig } from "../../../models/mongo-models/user-metadata"
-import GameState from "../../../rooms/states/game-state"
+import { ItemStats } from "../../../config"
+import { FLOWER_POTS_POSITIONS_BLUE } from "../../../core/flower-pots"
+import type { PokemonEntity } from "../../../core/pokemon-entity"
+import type Simulation from "../../../core/simulation"
+import type Count from "../../../models/colyseus-models/count"
+import type { FloatingItem } from "../../../models/colyseus-models/floating-item"
+import type Player from "../../../models/colyseus-models/player"
+import type { Pokemon } from "../../../models/colyseus-models/pokemon"
+import type { PokemonAvatarModel } from "../../../models/colyseus-models/pokemon-avatar"
+import type {
+  Portal,
+  SynergySymbol
+} from "../../../models/colyseus-models/portal"
+import type Status from "../../../models/colyseus-models/status"
+import type GameState from "../../../rooms/states/game-state"
 import {
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IPlayer,
-  IPokemon,
-  ISimplePlayer,
-  NonFunctionPropNames,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IPlayer,
+  type IPokemon,
+  type IPokemonEntity,
   Transfer
 } from "../../../types"
-import { Ability } from "../../../types/enum/Ability"
+import type { Ability } from "../../../types/enum/Ability"
+import { EffectEnum } from "../../../types/enum/Effect"
 import {
-  AttackType,
-  HealType,
-  Orientation,
+  type AttackType,
+  GamePhaseState,
+  type HealType,
+  type Orientation,
   PokemonActionState,
-  Rarity
+  Rarity,
+  Stat
 } from "../../../types/enum/Game"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import type { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
-import { clamp } from "../../../utils/number"
-import { getPath, transformCoordinate } from "../pages/utils/utils"
+import { clamp, max } from "../../../utils/number"
+import { schemaValues } from "../../../utils/schemas"
+import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
+import { playSound, SOUNDS } from "../pages/utils/audio"
+import { transformBoardCoordinates } from "../pages/utils/utils"
+import { preference, subscribeToPreferences } from "../preferences"
 import store from "../stores"
-import { changePlayer } from "../stores/GameStore"
-import { getPortraitSrc } from "../utils"
+import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
+import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
+import { DEPTH } from "./depths"
+import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
 
 class GameContainer {
   room: Room<GameState>
+  $: SchemaCallbackProxy<GameState>
   div: HTMLDivElement
   game: Phaser.Game | undefined
   player: Player | undefined
   simulation: Simulation | undefined
-  tilemap: DesignTiled | undefined
   uid: string
   spectate: boolean
   constructor(div: HTMLDivElement, uid: string, room: Room<GameState>) {
     this.room = room
+    this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    this.spectate = false
+    // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }
 
@@ -70,143 +87,191 @@ class GameContainer {
   initializeSimulation(simulation: Simulation) {
     if (
       simulation.bluePlayerId === this.player?.id ||
-      simulation.redPlayerId === this.player?.id
+      (simulation.redPlayerId === this.player?.id && !simulation.isGhostBattle)
     ) {
       this.setSimulation(simulation)
     }
 
-    simulation.listen("winnerId", (winnerId) => {
+    const $simulation = this.$<Simulation>(simulation)
+
+    $simulation.listen("winnerId", (winnerId) => {
       if (this.gameScene?.board?.player.simulationId === simulation.id) {
         this.gameScene.board.victoryAnimation(winnerId)
       }
     })
 
-    simulation.listen("weather", (value, previousValue) => {
+    $simulation.listen("weather", (value, previousValue) => {
       this.handleWeatherChange(simulation, value)
     })
-    ;[simulation.blueTeam, simulation.redTeam].forEach((team) => {
+
+    for (const team of [$simulation.blueTeam, $simulation.redTeam]) {
       team.onAdd((p, key) =>
-        this.initializePokemon(<PokemonEntity>p, simulation)
+        this.initializePokemon(
+          <PokemonEntity>p,
+          simulation,
+          team === $simulation.blueTeam
+            ? simulation.bluePlayerId
+            : simulation.redPlayerId
+        )
       )
       team.onRemove((pokemon, key) => {
         // logger.debug('remove pokemon');
         this.gameScene?.battle?.removePokemon(simulation.id, pokemon)
       })
+    }
+
+    $simulation.listen("started", (value, previousValue) => {
+      if (
+        this.gameScene?.board?.player.simulationId === simulation.id &&
+        value === true &&
+        value !== previousValue
+      ) {
+        this.gameScene?.board?.removePokemonsOnBoard()
+        this.gameScene?.battle?.onSimulationStart()
+      }
     })
   }
 
-  initializePokemon(pokemon: PokemonEntity, simulation: Simulation) {
-    this.gameScene?.battle?.addPokemonEntitySprite(simulation.id, pokemon)
-    const fields: NonFunctionPropNames<Status>[] = [
+  initializePokemon(
+    pokemon: PokemonEntity,
+    simulation: Simulation,
+    playerId: string
+  ) {
+    this.gameScene?.battle?.addPokemonEntitySprite(
+      simulation.id,
+      pokemon,
+      playerId
+    )
+
+    const $pokemon = this.$<PokemonEntity>(pokemon)
+
+    const fields = [
+      "positionX",
+      "positionY",
+      "orientation",
+      "action",
+      "critChance",
+      "critPower",
+      "ap",
+      "luck",
+      "speed",
+      "hp",
+      "maxHP",
+      "shield",
+      "pp",
+      "atk",
+      "def",
+      "speDef",
+      "range",
+      "targetX",
+      "targetY",
+      "team",
+      "index",
+      "name",
+      "shiny",
+      "skill",
+      "stars",
+      "types",
+      "stacks",
+      "stacksRequired"
+    ] satisfies (NonFunctionPropNames<PokemonEntity> & keyof IPokemonEntity)[]
+
+    fields.forEach((field) => {
+      $pokemon.listen(field, (value, previousValue) => {
+        this.gameScene?.battle?.changePokemon(
+          simulation.id,
+          pokemon,
+          field,
+          value,
+          previousValue
+        )
+      })
+    })
+
+    const statusFields = [
       "armorReduction",
       "burn",
       "charm",
       "confusion",
       "curse",
-      "deltaOrbStacks",
+      "curseVulnerability",
+      "curseWeakness",
+      "curseTorment",
+      "curseFate",
       "electricField",
       "fairyField",
+      "fatigue",
       "flinch",
       "freeze",
       "grassField",
       "paralysis",
+      "pokerus",
       "poisonStacks",
       "protect",
+      "skydiving",
       "psychicField",
-      "resurection",
-      "resurecting",
+      "resurrection",
+      "resurrecting",
       "runeProtect",
       "silence",
       "sleep",
-      "soulDew",
       "spikeArmor",
-      "synchro",
       "wound",
       "enraged",
-      "magicBounce"
-    ]
+      "possessed",
+      "locked",
+      "blinded",
+      "magicBounce",
+      "reflect",
+      "tree"
+    ] satisfies NonFunctionPropNames<Status>[]
 
-    fields.forEach((field) => {
-      pokemon.status.listen(field, (value, previousValue) => {
-        this.gameScene?.battle?.changeStatus(simulation.id, pokemon, field)
+    statusFields.forEach((field) => {
+      $pokemon.status.listen(field, (value, previousValue) => {
+        this.gameScene?.battle?.changeStatus(
+          simulation.id,
+          pokemon,
+          field,
+          previousValue
+        )
       })
     })
 
-    pokemon.onChange(() => {
-      const fields: NonFunctionPropNames<PokemonEntity>[] = [
-        "positionX",
-        "positionY",
-        "orientation",
-        "action",
-        "critChance",
-        "critDamage",
-        "ap",
-        "atkSpeed",
-        "life",
-        "shield",
-        "pp",
-        "atk",
-        "def",
-        "speDef",
-        "range",
-        "targetX",
-        "targetY",
-        "team",
-        "index",
-        "skill",
-        "stars",
-        "types"
-      ]
-
-      fields.forEach((field) => {
-        pokemon.listen(field, (value, previousValue) => {
-          this.gameScene?.battle?.changePokemon(
-            simulation.id,
-            pokemon,
-            field,
-            value,
-            previousValue
-          )
-        })
-      })
-    })
-
-    pokemon.items.onChange((value, key) => {
+    $pokemon.items.onChange((value, key) => {
       this.gameScene?.battle?.updatePokemonItems(simulation.id, pokemon)
     })
 
-    const fieldsCount: NonFunctionPropNames<Count>[] = [
+    $pokemon.effects.onChange((value, key) => {
+      if (pokemon.effects.has(EffectEnum.BALM_MUSHROOM)) {
+        this.gameScene?.battle?.pokemonSprites
+          .get(pokemon.id)
+          ?.addBalmMushroomEffect()
+      }
+    })
+
+    const fieldsCount = [
       "crit",
       "dodgeCount",
       "ult",
-      "petalDanceCount",
-      "futureSightCount",
-      "earthquakeCount",
       "fieldCount",
-      "soundCount",
-      "growGroundCount",
+      "fightingBlockCount",
       "fairyCritCount",
-      "powerLensCount",
       "starDustCount",
-      "mindBlownCount",
       "spellBlockedCount",
       "manaBurnCount",
-      "staticCount",
       "moneyCount",
       "amuletCoinCount",
+      "bottleCapCount",
       "attackCount",
       "tripleAttackCount",
-      "monsterExecutionCount",
       "upgradeCount",
       "soulDewCount",
-      "defensiveRibbonCount",
-      "attackOrderCount",
-      "healOrderCount",
-      "magmarizerCount"
-    ]
+      "muscleBandCount",
+      "machRibbonCount"
+    ] satisfies NonFunctionPropNames<Count>[]
 
     fieldsCount.forEach((field) => {
-      pokemon.count.listen(field, (value, previousValue) => {
+      $pokemon.count.listen(field, (value, previousValue) => {
         this.gameScene?.battle?.changeCount(
           simulation.id,
           pokemon,
@@ -220,9 +285,11 @@ class GameContainer {
 
   initializeGame() {
     if (this.game != null) return // prevent initializing twice
+
     // Create Phaser game
+    const renderer = Number(preference("renderer") ?? Phaser.AUTO)
     const config = {
-      type: Phaser.AUTO,
+      type: renderer,
       width: 1950,
       height: 1000,
       parent: this.div,
@@ -244,33 +311,48 @@ class GameContainer {
       }
     }
     this.game = new Phaser.Game(config)
+    this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
-      tilemap: this.tilemap,
+      uid: this.uid,
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)
+    if (this.game.renderer.type === Phaser.WEBGL) {
+      this.game.plugins.install("rexOutline", OutlinePlugin, true)
+    }
+    const unsubscribeToPreferences = subscribeToPreferences(
+      ({ antialiasing }) => {
+        if (!this.game?.canvas) return
+        this.game.canvas.style.imageRendering = antialiasing ? "" : "pixelated"
+      },
+      true
+    )
+    this.game.events.on("destroy", unsubscribeToPreferences)
   }
 
   resize() {
     const screenWidth = window.innerWidth - 60
     const screenHeight = window.innerHeight
     const screenRatio = screenWidth / screenHeight
-    const WIDTH = 42 * 48
-    const MIN_HEIGHT = 1008
+    const IDEAL_WIDTH = 42 * 48
+    const MIN_HEIGHT = 1050
     const MAX_HEIGHT = 32 * 48
-    const height = clamp(WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const height = clamp(IDEAL_WIDTH / screenRatio, MIN_HEIGHT, MAX_HEIGHT)
+    const width = max(50 * 48)(height * screenRatio)
 
-    if (this.game && this.game.scale.height !== height) {
-      this.game.scale.setGameSize(WIDTH, height)
+    if (
+      this.game &&
+      (this.game.scale.height !== height || this.game.scale.width !== width)
+    ) {
+      this.game.scale.setGameSize(width, height)
     }
   }
 
   initializeEvents() {
-    this.room.onMessage(Transfer.DRAG_DROP_FAILED, (message) =>
-      this.handleDragDropFailed(message)
-    )
-    this.room.state.avatars.onAdd((avatar) => {
+    const $state = this.$<GameState>(this.room.state)
+    $state.avatars.onAdd((avatar) => {
+      const $avatar = this.$<PokemonAvatarModel>(avatar)
       this.gameScene?.minigameManager?.addPokemon(avatar)
       const fields: NonFunctionPropNames<PokemonAvatarModel>[] = [
         "x",
@@ -280,25 +362,26 @@ class GameContainer {
         "orientation"
       ]
       fields.forEach((field) => {
-        avatar.listen(field, (value, previousValue) => {
-          this.gameScene?.minigameManager?.changePokemon(avatar, field, value)
+        $avatar.listen(field, (value, previousValue) => {
+          this.gameScene?.minigameManager?.changePokemon(avatar, field!, value)
         })
       })
     })
 
-    this.room.state.avatars.onRemove((avatar, key) => {
+    $state.avatars.onRemove((avatar, key) => {
       this.gameScene?.minigameManager?.removePokemon(avatar)
     })
 
-    this.room.state.floatingItems.onAdd((floatingItem) => {
+    $state.floatingItems.onAdd((floatingItem) => {
       this.gameScene?.minigameManager?.addItem(floatingItem)
-      const fields: NonFunctionPropNames<FloatingItem>[] = [
+      const fields = [
         "x",
         "y",
         "avatarId"
-      ]
+      ] satisfies NonFunctionPropNames<FloatingItem>[]
+      const $floatingItem = this.$<FloatingItem>(floatingItem)
       fields.forEach((field) => {
-        floatingItem.listen(field, (value, previousValue) => {
+        $floatingItem.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changeItem(
             floatingItem,
             field,
@@ -308,142 +391,236 @@ class GameContainer {
       })
     })
 
-    this.room.state.floatingItems.onRemove((floatingItem, key) => {
+    $state.floatingItems.onRemove((floatingItem, key) => {
       this.gameScene?.minigameManager?.removeItem(floatingItem)
     })
 
-    this.room.state.portals.onAdd((portal) => {
+    $state.portals.onAdd((portal) => {
       this.gameScene?.minigameManager?.addPortal(portal)
-      const fields: NonFunctionPropNames<Portal>[] = ["x", "y", "avatarId"]
+      const $portal = this.$<Portal>(portal)
+      const fields = [
+        "x",
+        "y",
+        "avatarId"
+      ] satisfies NonFunctionPropNames<Portal>[]
+
       fields.forEach((field) => {
-        portal.listen(field, (value, previousValue) => {
+        $portal.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changePortal(portal, field, value)
         })
       })
     })
 
-    this.room.state.portals.onRemove((portal, key) => {
+    $state.portals.onRemove((portal, key) => {
       this.gameScene?.minigameManager?.removePortal(portal)
     })
 
-    this.room.state.symbols.onAdd((symbol) => {
+    $state.symbols.onAdd((symbol) => {
       this.gameScene?.minigameManager?.addSymbol(symbol)
-      const fields: NonFunctionPropNames<SynergySymbol>[] = [
+      const $symbol = this.$<SynergySymbol>(symbol)
+      const fields = [
         "x",
         "y",
         "portalId"
-      ]
+      ] satisfies NonFunctionPropNames<SynergySymbol>[]
+
       fields.forEach((field) => {
-        symbol.listen(field, (value, previousValue) => {
+        $symbol.listen(field, (value, previousValue) => {
           this.gameScene?.minigameManager?.changeSymbol(symbol, field, value)
         })
       })
     })
 
-    this.room.state.symbols.onRemove((symbol, key) => {
+    $state.symbols.onRemove((symbol, key) => {
       this.gameScene?.minigameManager?.removeSymbol(symbol)
     })
 
     this.room.onError((err) => logger.error("room error", err))
   }
 
-  setTilemap(tilemap) {
-    this.tilemap = tilemap
-    if (this.player || (this.spectate && this.room.state.players.size > 0)) {
-      // logger.debug('setTilemap', this.player, this.tilemap);
-      this.initializeGame()
-    }
-  }
-
   initializePlayer(player: Player) {
     //logger.debug("initializePlayer", player, player.id)
-    if (this.uid == player.id) {
+    if (this.uid == player.id || (this.spectate && !this.player)) {
+      this.room.send(Transfer.SPECTATE, this.uid) // always spectate yourself when loading the game initially
       this.setPlayer(player)
-      if (this.tilemap) {
-        // logger.debug('initializePlayer', this.player, this.tilemap);
-        this.initializeGame()
-      }
-    } else if (this.spectate && this.tilemap) {
       this.initializeGame()
     }
 
-    const listenForPokemonChanges = (pokemon: Pokemon) => {
-      pokemon.onChange(() => {
-        const fields: NonFunctionPropNames<Pokemon>[] = [
-          "positionX",
-          "positionY",
-          "action",
-          "types"
-        ]
-        fields.forEach((field) => {
-          pokemon.listen(field, (value, previousValue) => {
-            if (player.id === this.spectatedPlayerId) {
-              this.gameScene?.board?.changePokemon(pokemon, field, value)
-            }
-          })
+    const listenForPokemonChanges = (
+      pokemon: Pokemon,
+      fields: NonFunctionPropNames<IPokemon>[] = [
+        "index",
+        "positionX",
+        "positionY",
+        "action",
+        "hp",
+        "maxHP",
+        "atk",
+        "ap",
+        "def",
+        "speed",
+        "luck",
+        "shiny",
+        "skill",
+        "supercharged"
+      ]
+    ) => {
+      const $pokemon = this.$<Pokemon>(pokemon)
+      fields.forEach((field) => {
+        $pokemon.listen(field, (value, previousValue) => {
+          if (field && player.id === this.playerIdSpectated) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              field,
+              value as IPokemon[typeof field],
+              previousValue as IPokemon[typeof field]
+            )
+          }
         })
+      })
+
+      $pokemon.items.onAdd((item) => {
+        if (player.id === this.playerIdSpectated) {
+          this.gameScene?.board?.updatePokemonItems(player.id, pokemon, item)
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
+        }
+      })
+
+      $pokemon.items.onRemove((item) => {
+        if (player.id === this.playerIdSpectated) {
+          this.gameScene?.board?.updatePokemonItems(
+            player.id,
+            pokemon,
+            item,
+            true
+          )
+          if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
+            this.gameScene?.board?.changePokemon(
+              pokemon,
+              "hp",
+              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp
+            )
+          }
+        }
+      })
+
+      $pokemon.dishes.onChange((value, key) => {
+        if (player.id === this.playerIdSpectated) {
+          this.gameScene?.board?.updatePokemonDishes(
+            player.id,
+            pokemon,
+            schemaValues(pokemon.dishes)
+          )
+        }
       })
     }
 
-    player.board.onAdd((pokemon, key) => {
+    const $player = this.$<Player>(player)
+
+    $player.board.onAdd((pokemon, key) => {
       if (pokemon.stars > 1) {
-        const config: IPokemonConfig | undefined = player.pokemonCollection.get(
-          pokemon.index
-        )
         const i = React.createElement(
           "img",
           {
-            src: getPortraitSrc(
-              pokemon.index,
-              config?.selectedShiny,
-              config?.selectedEmotion
-            )
+            src: getCachedPortrait(pokemon.index, player.pokemonCustoms)
           },
           null
         )
         toast(i, {
-          containerId: player.rank.toString(),
+          containerId: player.id,
           className: "toast-new-pokemon"
         })
       }
 
       listenForPokemonChanges(pokemon)
-
-      pokemon.items.onChange((value, key) => {
-        if (player.id === this.spectatedPlayerId) {
-          this.gameScene?.board?.updatePokemonItems(player.id, pokemon)
-        }
-      })
-
       this.handleBoardPokemonAdd(player, pokemon)
     }, false)
 
-    player.board.onRemove((pokemon, key) => {
-      if (player.id === this.spectatedPlayerId) {
+    $player.board.onRemove((pokemon, key) => {
+      if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
     })
 
-    player.board.onChange((pokemon, key) => {
+    $player.board.onChange((pokemon, key) => {
       store.dispatch(
         changePlayer({ id: player.id, field: "board", value: player.board })
       )
-      if (pokemon) {
-        listenForPokemonChanges(pokemon)
-      }
     })
 
-    player.items.onChange((value, key) => {
-      if (player.id === this.spectatedPlayerId) {
-        //logger.debug("changed", value, key, player.items)
+    $player.items.onChange((value, key) => {
+      if (player.id === this.playerIdSpectated) {
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
+    $player.listen("doubleUpTradeOffer", (offer: string) => {
+      if (player.id === this.playerIdSpectated) {
+        const partner = this.room.state.players.get(player.doubleUpPartnerId)
+        this.gameScene?.wandererManager?.updateCroagunkItem(offer, partner?.doubleUpTradeOffer ?? "")
+      }
+      if (player.id === this.room.state.players.get(this.playerIdSpectated)?.doubleUpPartnerId) {
+        const me = this.room.state.players.get(this.playerIdSpectated)
+        this.gameScene?.wandererManager?.updateCroagunkItem(me?.doubleUpTradeOffer ?? "", offer)
+      }
+    })
+    $player.synergies.onChange((level, synergy) => {
+      if (
+        player.id === this.playerIdSpectated &&
+        this.gameScene?.board?.mode === BoardMode.PICK
+      ) {
+        if (synergy === Synergy.LIGHT) this.gameScene?.board?.showLightCell()
+        if (synergy === Synergy.GRASS) this.gameScene?.board?.renderBerryTrees()
+        if (synergy === Synergy.FLORA) this.gameScene?.board?.renderFlowerPots()
+        if (synergy === Synergy.FIGHTING)
+          this.gameScene?.board?.renderTrainingBag()
+      }
+    })
 
-    player.synergies.onChange(() => {
-      if (player.id === this.spectatedPlayerId) {
-        this.gameScene?.board?.showLightCell()
-        this.gameScene?.board?.showBerryTree()
+    $player.berryTreesStages.onChange((value, key) => {
+      this.gameScene?.board?.renderBerryTrees()
+    })
+
+    $player.flowerPots.onAdd((pokemon, index) => {
+      listenForPokemonChanges(pokemon, ["hp", "ap"])
+      const board = this.gameScene?.board
+      if (
+        board &&
+        player.id === this.playerIdSpectated &&
+        this.gameScene?.board?.mode !== BoardMode.TOWN
+      ) {
+        board.renderFlowerPots()
+        const [x, y] = FLOWER_POTS_POSITIONS_BLUE[index]
+        const evolutionAnim = this.gameScene.add.sprite(
+          x,
+          y - 24,
+          "abilities",
+          "EVOLUTION/000.png"
+        )
+        evolutionAnim.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+          evolutionAnim.destroy()
+        )
+        evolutionAnim.setScale(2).setDepth(DEPTH.BOOST_BACK).play("EVOLUTION")
+      }
+    }, false)
+
+    $player.flowerPots.onChange((pokemon, key) => {
+      store.dispatch(
+        changePlayer({
+          id: player.id,
+          field: "flowerPots",
+          value: player.flowerPots
+        })
+      )
+      if (pokemon) {
+        listenForPokemonChanges(pokemon, ["hp", "ap"])
       }
     })
   }
@@ -451,7 +628,7 @@ class GameContainer {
   initializeSpectactor(uid: string) {
     if (this.uid === uid) {
       this.spectate = true
-      if (this.tilemap && this.room.state.players.size > 0) {
+      if (this.room.state.players.size > 0) {
         this.initializeGame()
       }
     }
@@ -461,8 +638,8 @@ class GameContainer {
     return this.game?.scene?.getScene("gameScene") as GameScene | undefined
   }
 
-  get spectatedPlayerId(): string {
-    return store.getState().game.currentPlayerId
+  get playerIdSpectated(): string {
+    return store.getState().game.playerIdSpectated
   }
 
   get simulationId(): string {
@@ -475,20 +652,28 @@ class GameContainer {
         this.gameScene.weatherManager.clearWeather()
         if (value === Weather.RAIN) {
           this.gameScene.weatherManager.addRain()
-        } else if (value === Weather.SUN) {
+        } else if (value === Weather.ZENITH) {
           this.gameScene.weatherManager.addSun()
+        } else if (value === Weather.DROUGHT) {
+          this.gameScene.weatherManager.addDrought()
         } else if (value === Weather.SANDSTORM) {
           this.gameScene.weatherManager.addSandstorm()
         } else if (value === Weather.SNOW) {
           this.gameScene.weatherManager.addSnow()
         } else if (value === Weather.NIGHT) {
           this.gameScene.weatherManager.addNight()
+        } else if (value === Weather.BLOODMOON) {
+          this.gameScene.weatherManager.addBloodMoon()
         } else if (value === Weather.WINDY) {
           this.gameScene.weatherManager.addWind()
         } else if (value === Weather.STORM) {
           this.gameScene.weatherManager.addStorm()
         } else if (value === Weather.MISTY) {
           this.gameScene.weatherManager.addMist()
+        } else if (value === Weather.SMOG) {
+          this.gameScene.weatherManager.addSmog()
+        } else if (value === Weather.MURKY) {
+          this.gameScene.weatherManager.addMurky()
         }
       }
     }
@@ -502,14 +687,10 @@ class GameContainer {
     index: string
     amount: number
   }) {
-    this.gameScene?.battle?.displayHeal(
-      message.x,
-      message.y,
-      message.amount,
-      message.type,
-      message.index,
-      message.id
-    )
+    if (document.hidden) return // do not display heal when the tab is not focused
+    if (preference("showDamageNumbers")) {
+      this.gameScene?.battle?.displayHeal(message)
+    }
   }
 
   handleDisplayDamage(message: {
@@ -520,14 +701,10 @@ class GameContainer {
     index: string
     amount: number
   }) {
-    this.gameScene?.battle?.displayDamage(
-      message.x,
-      message.y,
-      message.amount,
-      message.type,
-      message.index,
-      message.id
-    )
+    if (document.hidden) return // do not display damage when the tab is not focused
+    if (preference("showDamageNumbers")) {
+      this.gameScene?.battle?.displayDamage(message)
+    }
   }
 
   handleDisplayAbility(message: {
@@ -538,16 +715,11 @@ class GameContainer {
     positionY: number
     targetX?: number
     targetY?: number
+    delay?: number
+    ap?: number
   }) {
-    this.gameScene?.battle?.displayAbility(
-      message.id,
-      message.skill,
-      message.orientation,
-      message.positionX,
-      message.positionY,
-      message.targetX,
-      message.targetY
-    )
+    if (document.hidden) return // do not display abilities when the tab is not focused
+    this.gameScene?.battle?.displayAbility(message)
   }
 
   /* Board pokemons */
@@ -556,25 +728,38 @@ class GameContainer {
     const board = this.gameScene?.board
     if (
       board &&
-      player.id === this.spectatedPlayerId &&
+      player.id === this.playerIdSpectated &&
       (board.mode === BoardMode.PICK || pokemon.positionY === 0)
     ) {
       const pokemonUI = this.gameScene?.board?.addPokemonSprite(pokemon)
-      if (pokemonUI && pokemon.action === PokemonActionState.FISH) {
+      if (!pokemonUI) return
+      if (pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
-      } else if (pokemonUI && pokemon.stars > 1) {
+      } else if (pokemon.action === PokemonActionState.NEST) {
+        pokemonUI.nestAnimation(false)
+      } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
-      } else if (pokemonUI && pokemon.rarity === Rarity.HATCH) {
+        playSound(
+          pokemon.stars === 2 ? SOUNDS.EVOLUTION_T2 : SOUNDS.EVOLUTION_T3
+        )
+      } else if (pokemon.rarity === Rarity.HATCH) {
         pokemonUI.hatchAnimation()
+      } else {
+        pokemonUI.spawnAnimation()
       }
     }
   }
 
-  handleDragDropFailed(message: any) {
+  handleDragDropCancel(message: {
+    updateBoard: boolean
+    updateItems: boolean
+    text?: DisplayText
+    pokemonId?: string
+  }) {
     const gameScene = this.gameScene
     if (gameScene?.lastDragDropPokemon && message.updateBoard) {
       const tg = gameScene.lastDragDropPokemon
-      const coordinates = transformCoordinate(tg.positionX, tg.positionY)
+      const coordinates = transformBoardCoordinates(tg.positionX, tg.positionY)
       tg.x = coordinates[0]
       tg.y = coordinates[1]
     }
@@ -582,30 +767,38 @@ class GameContainer {
     if (message.updateItems && gameScene && this.player) {
       gameScene.itemsContainer?.render(this.player.items)
     }
-  }
 
-  onPlayerClick(id: string) {
-    const player = this.room.state.players.get(id)
-    if (player) {
-      this.setPlayer(player)
-      const simulation = this.room.state.simulations.get(player.simulationId)
-      if (simulation) {
-        this.setSimulation(simulation)
+    if (message.text && message.pokemonId) {
+      const pokemon = this.gameScene?.board?.pokemons.get(message.pokemonId)
+      if (pokemon) {
+        gameScene?.board?.displayText(
+          pokemon.x,
+          pokemon.y,
+          t(message.text),
+          true
+        )
       }
     }
   }
 
   setPlayer(player: Player) {
     this.player = player
-    this.gameScene?.setPlayer(player)
+    if (this.room.state.phase !== GamePhaseState.TOWN) {
+      this.gameScene?.setMap(player.map)
+    }
+    this.gameScene && clearAbilityAnimations(this.gameScene)
+    this.gameScene?.battle?.setPlayer(player)
+    this.gameScene?.board?.setPlayer(player)
+    this.gameScene?.itemsContainer?.setPlayer(player)
+    store.dispatch(setPlayer(player))
   }
 
   setSimulation(simulation: Simulation) {
     this.simulation = simulation
+    store.dispatch(setSimulation(simulation))
     if (this.gameScene?.battle) {
       this.gameScene?.battle.setSimulation(this.simulation)
     }
-    this.handleWeatherChange(simulation, simulation.weather)
   }
 
   onDragDrop(event: CustomEvent<IDragDropMessage>) {
@@ -618,43 +811,6 @@ class GameContainer {
 
   onDragDropItem(event: CustomEvent<IDragDropItemMessage>) {
     this.room.send(Transfer.DRAG_DROP_ITEM, event.detail)
-  }
-
-  transformToSimplePlayer(player: IPlayer): ISimplePlayer {
-    const simplePlayer = {
-      elo: player.elo,
-      name: player.name,
-      id: player.id,
-      rank: player.rank,
-      avatar: player.avatar,
-      title: player.title,
-      role: player.role,
-      pokemons: new Array<IPokemonRecord>(),
-      synergies: new Array<{ name: Synergy; value: number }>()
-    }
-
-    const allSynergies = new Array<{ name: Synergy; value: number }>()
-    player.synergies.forEach((v, k) => {
-      allSynergies.push({ name: k as Synergy, value: v })
-    })
-
-    allSynergies.sort((a, b) => b.value - a.value)
-
-    simplePlayer.synergies = allSynergies.slice(0, 5)
-
-    if (player.board && player.board.size > 0) {
-      player.board.forEach((pokemon) => {
-        if (pokemon.positionY != 0) {
-          simplePlayer.pokemons.push({
-            avatar: getPath(pokemon),
-            items: pokemon.items.toArray(),
-            name: pokemon.name
-          })
-        }
-      })
-    }
-
-    return simplePlayer
   }
 }
 
