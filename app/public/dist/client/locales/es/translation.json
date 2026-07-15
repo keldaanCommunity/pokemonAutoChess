@@ -1770,7 +1770,8 @@
 		"QUAXLY": "Quaxly",
 		"GREEDENT": "Greedent",
 		"SKWOVET": "Skwovet",
-		"EISCUE": "Eiscue (Cara Hielo)"
+		"EISCUE": "Eiscue (Cara Hielo)",
+		"BUG_NEST": "Nido de Bichos"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,160,SP] SHIELD a todos los aliados.",
@@ -2265,13 +2266,29 @@
 		"MOONBLAST": "Lanza 6 lunas que infligen [10,14,18,26,SP] de SPECIAL cada una. Derrotar a un Pokémon hace que las lunas restantes vayan a por otro objetivo y otorga 1 luna adicional.",
 		"HYDRO_STEAM": "Dispara un poderoso chorro de agua hirviendo, infligiendo [35,70,140,280,SP] de SPECIAL a los enemigos en un CONE de 2 casillas, además de dejarlos BURN durante 4 segundos.",
 		"UPROAR": "Inflige [5,10,20,40,SP] de SPECIAL  cada segundo, por 3 segundos, a cada enemigo en RANGE; todos los aliados en el área son inmunes a SLEEP durante este tiempo",
-		"WISH": "",
+		"WISH": "Le da [30,60,120,240,SP] SHIELD y 1.5 segundos de PROTECT al aliado con menos HP.",
 		"DIZZY_PUNCH": "Inglige [20,40,80,160,SP] SPECIAL al objetivo y le inflige CONFUSION por 3 segundos. El daño se duplica si el objetivo tiene SHIELD",
 		"PLASMA_FISSION": "Dispara un rayo de plasma hacia el objetivo que inflige [20,40,60,120,SP] SPECIAL al primer enemigo alcanzado, dividiendose en dos e infligiendo 50% menos SPECIAL cuando pasa por un enemigo.",
 		"SUPER_HEAT": "Emite un CONE de fuego que inflige 9 x [4,7,10,20,SP] SPECIAL por una duración de 3 segundos, y ARMOR_BREAK enemigos por 1 segundo.",
 		"POWER_WASH": "Inunda la fila con el mayor HP total enemigo con gotas de plasma, infligiendo [80,120,160,320,SP] SPECIAL dividido igualmente entre todos los enemigos en la fila.",
 		"DEEP_FREEZE": "Dispara [5,7,9,20] rayos de hielo  durante 3 segundos, cada uno infligiendo [10,SP] SPECIAL y reduciendo SPE_DEF del objetivo por 1. Si el objetivo es derrotado, los rayos encadenan al enemigo más cercano. ",
 		"PUMMELING_PAYBACK": "Golpea al objetivo con una tormenta de puñetazos, infligiendo [20,40,60,120,SP] + 125% ATK SPECIAL y curando [20,30,40,80,SP] HP.",
+		"DEFAULT": "Por Defecto",
+		"SHOCKWAVE": "Realiza [30,60,120,240,SP] SPECIAL a todos los enemigos en un rango de dos casillas, +1 de rango si el usuario está en un ELECTRIC_FIELD, -20 de daño por casilla de distancia al usuario.",
+		"METEOR_MASH": "Realiza 3 veces [100,120,140,200,SP]% del ATK como SPECIAL al objetivo (4 veces si el usuario está en un PSYCHIC_FIELD) luego incrementa el ATK del usuario por 2 en cada golpe.",
+		"MIND_BLOWN": "Arroja su cabeza en el aire, que luego explota en [3,4,5,8,SP] fuegos artificiales. El usuario sacrifica 50% de sus HP máximos en el proceso. Los fuegos artificiales golpean en un radio de dos casilla sobre enemigos aleatorios dependiendo de su color:\n-Rosa: Realiza 20 PHYSICAL y BURN durante 5 segundos.\n-Azul: Realiza 20 SPECIAL y FATIGUE por 5 segundos.\n-Amarillo: Realiza 20 TRUE.\n-Blanco: Da 20 SHIELD y cura efectos de estado a los aliados.",
+		"APPLE_ACID": "Realiza [15,30,50,100,SP] SPECIAL a los 3 enemigos enfrente. Realiza el doble de daño si la SPE_DEF del objetivo es 0.",
+		"ACID_ARMOR": "Gana [3,6,12,25,SP] DEF. Los próximos 4 ataques cuerpo a cuerpo recibidos reducen la DEF del atacante por 1.",
+		"VESPIQUEN_ORDERS": "Vespiquen cambia su habilidad según la hilera en la que empieza:\n-Hilera del frente: $t(ability.DEFEND_ORDER)\n-Hilera del medio: $t(ability.HEAL_ORDER)\n-Hilera de atrás: $t(ability.ATTACK_ORDER)",
+		"DEFEND_ORDER": "Crea un Combee cerca y le otorga [10,20,30,50,SP] SHIELD al usuario y a todos los Combee aliados. El usuario obtiene [10,20,30,SP] de SHIELD adicional por Combee aliado en el tablero.",
+		"ATTACK_ORDER": "Crea un Combee cerca, luego todos los Combee aliados son RAGE por 3 segundos. El próximo ataque del usuario realiza [20,40,60,120,SP] SPECIAL adicional + [10,20,30,60,SP] por Combee aliado en el tablero.",
+		"BUG_BITE": "Realiza [20,40,80,160,SP] SPECIAL al objetivo, roba y come una de sus bayas si la lleva equipada.",
+		"SHELL_TRAP": "El SHIELD del usuario explota, realizando [50,50,50,100,SP] SPECIAL + el SHIELD actual a todos los enemigos ADJACENT. Si el usuario no tiene SHIELD gana [25,50,75,150,SP] SHIELD.",
+		"PLASMA_TEMPEST": "Vuela lejos y dispara 3 rayos de plasma entre los enemigos más cercanos. Cada rayo realiza [20,30,40,80,SP] SPECIAL, reducido por 20% por cada enemigo que atraviesa.",
+		"AQUA_STEP": "Se mueve a una casilla ADJACENT no ocupada con pasos de baile fluidos antes de realizar [25,50,100,200,SP] SPECIAL al objetivo e incrementar la SPEED del usuario por [10,25,20,25,SP].",
+		"SWARM": "Una copia de un Pokémon BUG en tu tablero salta del nido. La rareza incrementa con cada uso.",
+		"ICE_SPINNER": "Cubre sus pies de hielo y gira hacia sus enemigos ADJACENT, realizando [15,30,60,120,SP], epujándolos y limpiando BOARD_EFFECT en casillas ADJACENT.",
+		"SUBSTITUTE": "Crea un sustituto en la ubicación del usuario con [25,25,25,50,SP]% del HP máximo del usuario como HP adicional. El usuario se mueve hacia una casilla libre cercana y toda la agresión es redireccionada al sustituto",
 		"NIGHT_DAZE": "Realiza [25,50,100,200,SP] al objetivo e inflige BLINDED por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz es destruido.\n",
 		"BITTER_MALICE": "Realiza [25,50,100,200,SP] SPECIAL al objetivo e inflige FATIGUE por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz del usuario es destruido.\n",
 		"COIL": "Atrapa al objetivo con su poderosa cola, infligiendo LOCKED y PARALYSIS por 3 segundos. El usuario también se incrementa su ATK y DEF por [3,5,10,20,SP]\n"
@@ -2502,7 +2519,12 @@
 		"APPETIZER": "Consigue un CHEF_HAT. Cocina un plato insignia después de cada ronda y se lo da al aliado ADJACENT STRONGEST.",
 		"LUNCH_BREAK": "El cocinero prepara dos platos y se los da a los dos aliados ADJACENT STRONGEST después de cada ronda.",
 		"BANQUET": "Consigue un segundo CHEF_HAT.",
-		"OVERGROW": "Tus árboles de ballas se convierten dorados. Al consumir una baya, gana 50 AP."
+		"OVERGROW": "Tus árboles de ballas se convierten dorados. Al consumir una baya, gana 50 AP.",
+		"COACHING": "Bloquea 12 de daño. Obtén un saco de boxeo. Cada turno, Pokémon FIGHTING en el banco con una bolsa de boxeo o un pilar a su izquierda entrenarán y ganarán 4 de ATK y 10% de su HP máximo permanentemente.",
+		"AROMATIC_MIST": "Elige una de tres varitas entre BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
+		"STRANGE_STEAM": "Elige una de tres varitas entre GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
+		"FAIRY_WIND": "Elige una de tres varitas entre CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
+		"MOON_FORCE": "Elige una de tres varitas entre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Los Pokémon FAIRY ganan 5 de LUCK."
 	},
 	"item": {
 		"FOSSIL_STONE": "Piedra Fósil",
@@ -2776,7 +2798,8 @@
 		"WARP_WAND": "Varita Transportadora",
 		"SWITCHER_WAND": "Varita Intercambiadora",
 		"WHIRLWIND_WAND": "Varita de Remolino",
-		"TUNNEL_WAND": "Varita de Tunel"
+		"TUNNEL_WAND": "Varita de Tunel",
+		"GOLD_MASK": "Máscara Dorada"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -2806,12 +2829,12 @@
 		"SHELL_BELL": "El usuario cura el 33% de todos los daños infligidos.",
 		"AQUA_EGG": "El usuario recupera el 20% de sus PP máximos cuando lanza su habilidad, +2 PP por cada vez que la haya lanzado durante esta ronda",
 		"BLUE_ORB": "Cada 3 ataques del poseedor, desata una cadena de rayos que rebota los 2 enemigos que se acercan, causando 10 SPECIAL y quemando 15 PP.",
-		"SCOPE_LENS": "Los golpes críticos roban 10 PP del objetivo.",
+		"SCOPE_LENS": "Los golpes críticos roban 10 PP del objetivo ON_HIT.",
 		"STAR_DUST": "Después de lanzar la habilidad, gana el 50 % del PP máximo como SHIELD",
 		"GREEN_ORB": "El poseedor y los aliados en una casilla ADJACENT recuperan 5% de sus HP máximos cada 2 segundos. Un 30% de la curación sobrante se convierte en PP.",
 		"DEEP_SEA_TOOTH": "Los ataques del titular restauran 5 PP adicionales. Si el usuario derrota al objetivo con un ataque, recupera 15 PP adicionales.",
 		"SMOKE_BALL": "Una vez que esté por debajo del 40% de HP máximo, suelta la bola de humo, gana 70 SHIELD y salta a una celda lejana. Cada enemigo ADJACENT queda PARALYSIS y BLINDED durante 4 segundos.",
-		"XRAY_VISION": "+50 SPEED. Los ataques del poseedor ya no pueden fallar.",
+		"XRAY_VISION": "+50 SPEED. El usuario es inmune a ser SLEEP y sus ataques ya no pueden fallar.",
 		"RAZOR_FANG": "+100% CRIT_POWER. Los golpes críticos aplican ARMOR_BREAK durante 2 segundos.",
 		"PROTECTIVE_PADS": "Los ataques causan el doble de daño contra SHIELD. El usuario es protegido del daño de retroceso y de efectos de contraataque.",
 		"PUNCHING_GLOVE": "Los ataques infligen un 8 % del HP máximo del objetivo como PHYSICAL adicional.",
@@ -3018,7 +3041,7 @@
 		"GOURMET_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo GOURMET",
 		"MONSTER_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo MONSTER",
 		"AQUATIC_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo AQUATIC",
-		"SILK_SCARF": "Otorga sinergia NORMAL e incrementa el SHIELD de todas las fuentes en un 50%.",
+		"SILK_SCARF": "Combinalo con otro componente para hacer todo tipo de pañuelos, bandas y moños. Estos objetos son removidos si disminuyes tu nivel de sinergia NORMAL.",
 		"HEAVY_DUTY_BOOTS": "El usuario es inmune a cualquier BOARD_EFFECT, desplazamiento forzado y LOCKED",
 		"LOADED_DICE": "Los ataques tienen [50,LK]% de probabilidad de golpear también al enemigo con la menor vida ADJACENT al objetivo por un 75% del daño, el cual también activa ON_HIT effectos.",
 		"NANAB_BERRY": "Se consume al estar por debajo del 50% HP, cura 50 HP y el jugador gana 1 GOLD",
@@ -3091,7 +3114,8 @@
 		"TUNNEL_WAND": "Los ataques de hada realizan un 20% de SPECIAL ON_HIT adicional. El SPECIAL de las varitas tiene un [5,LK]% de probabilidad de atravesar al objetivo y golpear a los enemigos en una línea detrás de el.",
 		"TATSUGIRI_CURLY": "Puede comandar a un Dondozo",
 		"TATSUGIRI_DROOPY": "Puede comandar a un Dondozo",
-		"TATSUGIRI_STRETCHY": "Puede comandar a un Dondozo"
+		"TATSUGIRI_STRETCHY": "Puede comandar a un Dondozo",
+		"FIELD_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FIELD"
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3260,10 +3284,13 @@
 		"SEASONAL": "Los Pokémon estacionales cambian su apariencia y tipos dependiendo de la estación actual (en el Hemisferio Norte).",
 		"SLOWPOKE": "Evolucionará a $t(pkm.SLOWBRO) o a $t(pkm.SLOWKING) dependiendo de la sinergia predominante entre WATER y PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Evolucionará a $t(pkm.GALARIAN_SLOWBRO) o a $t(pkm.GALARIAN_SLOWKING) dependiendo de la sinergia predominante entre POISON y PSYCHIC.",
+		"GEARS": "Cuando sus engranajes giran, genera energía y le otorga 1  de SPEED cada [3,2,1] segundos a tu equipo.",
+		"ORTHWORM": "Cuando cava un agujero gana 5 HP permanentemente.",
+		"COMATOSE": "Siempr está dormido. Inmune a BURN, POISONNED, FREEZE y PARALYSIS. Cuando un SOUND intenta despertar a este Pokémon, este se hunde más profundo en su sueño, ganando 5 AP.",
+		"ILLUSION": "Copia la apariencia del aliado a su izquierda.",
 		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
 		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
-		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",
-		"ILLUSION": "Copia la apariencia del aliado a su izquierda.",
+		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",		
 		"CHILLING_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un relincho gélido que incrementa su ATK en 5"
 	},
 	"stat": {
@@ -4698,7 +4725,7 @@
 		"new_title_title": "Nuevo Título Desbloqueado!",
 		"new_title_message": "Desbloqueaste un nuevo título:\n{{title}}: {{description}}",
 		"new_gadget_title": "Nuevo Gadget Desbloqueado!",
-		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{descripción}}",
+		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{description}}",
 		"info_title": "Información",
 		"level_up_title": "Subes de Nivel!",
 		"tournament_win_title": "Victoria!",
