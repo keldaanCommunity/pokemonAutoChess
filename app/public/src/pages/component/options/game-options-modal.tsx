@@ -48,6 +48,7 @@ export default function GameOptionsModal(props: {
         <TabList>
           <Tab key="sound">{t("options.sound")}</Tab>
           <Tab key="interface">{t("options.interface")}</Tab>
+          <Tab key="replays">{t("options.replays")}</Tab>
           <Tab key="hotkeys">{t("options.hotkeys")}</Tab>
           <Tab key="files">{t("options.game_files")}</Tab>
         </TabList>
@@ -236,6 +237,17 @@ export default function GameOptionsModal(props: {
               </label>
             </div>
           )}
+        </TabPanel>
+
+        <TabPanel>
+          <p>
+            <Checkbox
+              isDark
+              checked={preferences.recordReplays}
+              onToggle={(checked) => setPreferences({ recordReplays: checked })}
+              label={t("options.record_replays")}
+            />
+          </p>
         </TabPanel>
 
         <TabPanel>

@@ -44,6 +44,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
+import { GiftEffects } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -64,6 +65,7 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
+import { Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -95,6 +97,7 @@ import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
+  OnCancelTradeOfferCommand,
   OnDevCommand,
   OnDragDropCombineCommand,
   OnDragDropItemCommand,
@@ -170,6 +173,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
     }
 
+    if (gameMode === GameMode.DOUBLE_UP) {
+      noElo = true
+    }
+
     this.setMetadata(<IGameMetadata>{
       name,
       ownerName,
@@ -183,6 +190,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       tournamentId,
       bracketId
     })
+
     // logger.debug(options);
     this.state = new GameState(
       preparationId,
@@ -289,6 +297,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
           )
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
+          player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
+          player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
         } else {
           const leanUser = await UserMetadata.findOne({ uid: id }).lean()
           const user = leanUser ? toLeanUserMetadata(leanUser) : null
@@ -310,6 +320,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
+            player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
+            player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
 
             if (
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
@@ -551,6 +563,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     )
+    this.onMessage(Transfer.CANCEL_TRADE_OFFER, (client) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnCancelTradeOfferCommand(), {
+            playerId: client.auth.uid
+          })
+        } catch (e) {
+          logger.error("cancel trade offer error", e)
+        }
+      }
+    })
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -1233,6 +1256,14 @@ export default class GameRoom extends Room<{ state: GameState }> {
     )
       return
 
+    let cost = 0
+    if (choice.costs.length > 0) {
+      cost = choice.costs[choiceIndex] ?? 0
+      if (cost && player.money < cost) {
+        return // not enough gold to pick that choice
+      }
+    }
+
     if (choice.pokemons.length > 0) {
       const pkm = choice.pokemons[choiceIndex]
       let pokemonsObtained: Pokemon[] = (
@@ -1322,7 +1353,13 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      if (isIn(Wands, item)) {
+      if (isIn(Gifts, item)) {
+        const partner = this.state.players.get(player.doubleUpPartnerId)
+        if (!partner) return
+        const giftEffect = GiftEffects[item]
+        giftEffect(partner, player)
+        player.giftsGiven.push(item)
+      } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
       } else {
@@ -1330,6 +1367,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
+    player.money -= cost
     removeInArray(player.choices, choice)
   }
 
@@ -1345,10 +1383,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       })
     }
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      damage = Math.ceil(stageLevel / 2)
+    }
     return damage
   }
 
   rankPlayers() {
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      return this.rankPlayersDoubleUp()
+    }
     const rankArray = new Array<{ id: string; life: number; level: number }>()
     this.state.players.forEach((player) => {
       if (!player.alive) {
@@ -1380,6 +1424,59 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (player) {
         player.rank = index + 1
       }
+    })
+  }
+
+  rankPlayersDoubleUp() {
+    const teamMap = new Map<
+      string,
+      {
+        life: number
+        level: number
+        ids: string[]
+        alive: boolean
+        eliminationRound: number
+      }
+    >()
+    this.state.players.forEach((player) => {
+      if (!teamMap.has(player.doubleUpTeamId)) {
+        teamMap.set(player.doubleUpTeamId, {
+          life: Infinity,
+          level: 0,
+          ids: [],
+          alive: false,
+          eliminationRound: 999
+        })
+      }
+      const entry = teamMap.get(player.doubleUpTeamId)!
+      entry.eliminationRound = Math.min(
+        entry.eliminationRound,
+        player.doubleUpEliminationRound
+      )
+      entry.life = Math.min(
+        entry.life === 0 && entry.ids.length === 0 ? Infinity : entry.life,
+        player.life
+      )
+      entry.level += player.experienceManager.level
+      entry.ids.push(player.id)
+      entry.alive = entry.alive || player.alive
+    })
+    const teamArray = [...teamMap.values()]
+    teamArray.sort((a, b) => {
+      if (a.alive !== b.alive) return a.alive ? -1 : 1
+      if (!a.alive && !b.alive) {
+        if (a.eliminationRound !== b.eliminationRound) {
+          return b.eliminationRound - a.eliminationRound // later death = better rank?
+        }
+      }
+      return b.life - a.life || b.level - a.level
+    })
+
+    teamArray.forEach((team, i) => {
+      team.ids.forEach((id) => {
+        const player = this.state.players.get(id)
+        if (player) player.rank = i + 1
+      })
     })
   }
 

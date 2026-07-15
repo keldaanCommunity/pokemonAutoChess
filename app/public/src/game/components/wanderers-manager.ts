@@ -16,9 +16,11 @@ import { getFreeSpaceOnBench } from "../../../../utils/board"
 import { clamp } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
+import { isReplayRoom } from "../replay-room-id"
 import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
+import { transformBoardCoordinates } from "../../pages/utils/utils"
 
 const DEFAULT_WANDERER_SPEED = 0.25
 
@@ -30,6 +32,7 @@ List of wanderers:
 
 export default class WanderersManager {
   scene: GameScene
+  croagunkSprite: PokemonSpecial | null = null
 
   constructor(scene: GameScene) {
     this.scene = scene
@@ -49,6 +52,8 @@ export default class WanderersManager {
       this.addDialogWanderer(wanderer)
     } else if (wanderer.type === WandererType.OUTLAW) {
       this.addOutlawWanderer(wanderer)
+    } else if (wanderer.type === WandererType.CROAGUNK_TRADE) {
+      this.addCroagunkTrader(wanderer)
     }
   }
 
@@ -136,9 +141,10 @@ export default class WanderersManager {
           sprite.closeDetail()
         } else {
           sprite.openDetail()
-          setTimeout(() => {
+          // scene-clocked so a still-pending fuse dies with the scene (a replay seek restarts it)
+          this.scene.time.delayedCall(3000, () => {
             sprite.closeDetail()
-          }, 3000)
+          })
         }
         return false
       }
@@ -146,28 +152,28 @@ export default class WanderersManager {
 
     if (wanderer.pkm === Pkm.XATU && wanderer.data && this.scene.board) {
       const { chest, chestGroup } = this.scene.board.addChest(590, 450)
-      setTimeout(() => {
+      this.scene.time.delayedCall(5000, () => {
         this.scene.board?.openChest(
           chestGroup,
           chest,
           wanderer.data.split(";") as Item[]
         )
-      }, 5000)
-      setTimeout(() => {
+      })
+      this.scene.time.delayedCall(8000, () => {
         chestGroup.destroy(true, true)
-      }, 8000)
+      })
     }
 
     if (wanderer.pkm === Pkm.LAPRAS) {
-      setTimeout(() => {
+      this.scene.time.delayedCall(9000, () => {
         sprite.moveManager.setSpeed(350)
         sprite.moveManager.moveTo(15 * 48, -100)
         this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
-        setTimeout(() => {
+        this.scene.time.delayedCall(1200, () => {
           this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
           sprite.destroy()
-        }, 1200)
-      }, 9000)
+        })
+      })
     }
   }
 
@@ -288,12 +294,16 @@ export default class WanderersManager {
     tweens.push(tween)
 
     sprite.draggable = false
-    sprite.sprite.setInteractive()
-    sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      if (caught || !onClick) return
-      caught = onClick(wanderer, sprite, pointer)
-      if (caught) tweens.forEach((tween) => tween.destroy())
-    })
+
+    const isReplay = isReplayRoom(this.scene.room)
+    if (!isReplay) {
+      sprite.sprite.setInteractive()
+      sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+        if (caught || !onClick) return
+        caught = onClick(wanderer, sprite, pointer)
+        if (caught) tweens.forEach((tween) => tween.destroy())
+      })
+    }
 
     return sprite
   }
@@ -355,6 +365,38 @@ export default class WanderersManager {
       }
     })
   }
+
+  addCroagunkTrader(wanderer: Wanderer) {
+    if (this.croagunkSprite) {
+      this.croagunkSprite.destroy()
+      this.croagunkSprite = null
+    }
+    const [x, y] = transformBoardCoordinates(7.5, 0.4)
+    this.croagunkSprite = new PokemonSpecial({
+      scene: this.scene,
+      x,
+      y,
+      name: Pkm.CROAGUNK,
+      orientation: Orientation.DOWNLEFT,
+      dialog: t("npc_dialog.croagunk_trade"),
+      dialogTitle: t("npc_dialog.croagunk_trade_title")
+    })
+    this.croagunkSprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+      if (pointer.button === 0) {
+        this.scene.room?.send(Transfer.CANCEL_TRADE_OFFER)
+      }
+    })
+  }
+
+  updateCroagunkItem(myOffer: string, partnerOffer: string = "") {
+    if (this.croagunkSprite) {
+      const dishes: Item[] = []
+      if (myOffer) dishes.push(myOffer as Item)
+      if (partnerOffer) dishes.push(partnerOffer as Item)
+      this.croagunkSprite.updateDishes(dishes)
+    }
+  }
+
 }
 
 function getDialogsBySpecialWanderer(wanderer: Wanderer): {
@@ -387,6 +429,12 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   if (wanderer.pkm === Pkm.LAPRAS) {
     return {
       dialog: t("npc_dialog.lapras")
+    }
+  }
+  if (wanderer.pkm === Pkm.KECLEON_PURPLE) {
+    return {
+      dialog: t("npc_dialog.kecleon_preview"),
+      dialogTitle: t("npc_dialog.kecleon")
     }
   }
   return {}

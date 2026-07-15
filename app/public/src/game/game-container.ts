@@ -57,6 +57,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
+import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
 
 class GameContainer {
@@ -73,7 +74,8 @@ class GameContainer {
     this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    this.spectate = false
+    // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }
 
@@ -312,6 +314,7 @@ class GameContainer {
     this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
+      uid: this.uid,
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)
@@ -532,7 +535,7 @@ class GameContainer {
           null
         )
         toast(i, {
-          containerId: player.rank.toString(),
+          containerId: player.id,
           className: "toast-new-pokemon"
         })
       }
@@ -555,11 +558,19 @@ class GameContainer {
 
     $player.items.onChange((value, key) => {
       if (player.id === this.playerIdSpectated) {
-        //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
-
+    $player.listen("doubleUpTradeOffer", (offer: string) => {
+      if (player.id === this.playerIdSpectated) {
+        const partner = this.room.state.players.get(player.doubleUpPartnerId)
+        this.gameScene?.wandererManager?.updateCroagunkItem(offer, partner?.doubleUpTradeOffer ?? "")
+      }
+      if (player.id === this.room.state.players.get(this.playerIdSpectated)?.doubleUpPartnerId) {
+        const me = this.room.state.players.get(this.playerIdSpectated)
+        this.gameScene?.wandererManager?.updateCroagunkItem(me?.doubleUpTradeOffer ?? "", offer)
+      }
+    })
     $player.synergies.onChange((level, synergy) => {
       if (
         player.id === this.playerIdSpectated &&

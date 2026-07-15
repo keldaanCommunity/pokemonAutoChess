@@ -89,6 +89,7 @@ export enum Transfer {
   DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
+  DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
@@ -135,7 +136,9 @@ export enum Transfer {
   OVERWRITE_BOARD = "OVERWRITE_BOARD",
   NOTIFICATIONS = "NOTIFICATIONS",
   NOTIFICATION_SEEN = "NOTIFICATION_SEEN",
-  DEV = "DEV"
+  DEV = "DEV",
+  CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
+  SELECT_PARTNER = "SELECT_PARTNER"
 }
 
 export enum ReadWriteMode {
@@ -256,6 +259,8 @@ export interface IPlayer {
   shopFreeRolls: number
   streak: number
   interest: number
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
   opponentId: string
   opponentName: string
   opponentAvatar: string

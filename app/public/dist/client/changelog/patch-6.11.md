@@ -28,7 +28,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
-- New visual animations for Budew line
+- Buff Budew line: DEF/ SPE_DEF: 2 at all ranks → 2/4/6 ; ATK: 5/15/17 → 5/15/25
+- Rework Petal Dance (Budew): Release 3/4/5 petals spread equally among the closest enemy pokemon. New visual animation. Projectiles now have travel time.
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
 - Dondozo gains Monster synergy. HP: 250 → 220
@@ -48,6 +49,14 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
 - Buff Deoxys Speed Form: SPEED 90 → 100
 - Revert Articuno buff from 6.2; PP 110 → 120
+- Nerf all Eeveelutions: HP 180 → 150
+
+> Lapras can't enough nerfs. Back to 120PP for the third time.
+
+- Lapras DEF: 7 → 5 ; PP: 100 → 120
+- Change Entrainment (Audino): can no longer a target already entrained
+- Buff Ember board effect: BURN duration 1 second → 2 seconds
+
 
 # Changes to Synergies
 
@@ -76,6 +85,9 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Bugfix
 
+- Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
+- Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
+
 # Misc
 
 - New title: Five Stars
@@ -84,3 +96,4 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Avatar emotes can now be used in lobby chat
 - Add symbols to tier list maker gadget and change layout
 - Add /unholdable-items GET endpoint
+- Improved colorblind patterns on pokemon portraits in shop

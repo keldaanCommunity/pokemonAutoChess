@@ -86,6 +86,8 @@ export default function GameChoice() {
     message = t("player_choices.choose_item")
   } else if (choice.type === "wand") {
     message = t("player_choices.choose_wand")
+  } else if (choice.type === "gifts") {
+    message = t("player_choices.choose_gift")
   }
 
   return (
@@ -95,6 +97,11 @@ export default function GameChoice() {
         style={{ visibility: visible ? "visible" : "hidden" }}
       >
         {message && <h2>{message}</h2>}
+        {choices.length > 1 && (
+          <p style={{ textAlign: "center", opacity: 0.7, fontSize: "0.9em" }}>
+            {t("player_choices.more_choices", { count: choices.length - 1 })}
+          </p>
+        )}
 
         {choice.pokemons.length > 0 ? (
           <div className="game-choice-pokemons-list">
@@ -189,6 +196,25 @@ export default function GameChoice() {
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`item_description.${item}`))}
                 </p>
+                {choice.costs[index] > 0 && <p
+                  style={{
+                    marginBottom: "0.5em",
+                    fontWeight: "bold",
+                    fontSize: "1.5rem"
+                  }}
+                >
+                  {choice.costs[index]}
+                  <img
+                    className="icon-money"
+                    src="/assets/icons/money.svg"
+                    alt="$"
+                    style={{
+                      marginLeft: "0.25em",
+                      width: "1.5rem",
+                      height: "1.5rem"
+                    }}
+                  />
+                </p>}
               </div>
             ))}
           </div>

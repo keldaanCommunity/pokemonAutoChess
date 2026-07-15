@@ -1,6 +1,7 @@
 @import "./anims.css";
 @import "./buttons.css";
 @import "./colors.css";
+@import "./colorblind.css";
 @import "./container.css";
 @import "./cursor.css";
 @import "./custom-inputs.css";
@@ -161,7 +162,7 @@ p:last-child {
 
 .game-emote-bubble {
   position: relative;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 0.4em;
   padding: 4px;
   animation: 3000ms forwards speech-bubble;
@@ -188,6 +189,12 @@ p:last-child {
   image-rendering: pixelated;
 }
 
+.game-emote-bubble.item-emote img {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
 .game-emote-bubble::after {
   content: "";
   position: absolute;
@@ -198,8 +205,8 @@ p:last-child {
 }
 
 .game-emote-bubble.current::after {
+  border-top-color: var(--color-bg-primary);
   bottom: 0;
-  border-top-color: white;
   border-bottom: 0;
   border-left: 0;
   margin-left: -10px;
@@ -207,8 +214,8 @@ p:last-child {
 }
 
 .game-emote-bubble.opponent::after {
+  border-bottom-color: var(--color-bg-primary);
   top: 0;
-  border-bottom-color: white;
   border-top: 0;
   border-right: 0;
   margin-right: -10px;
