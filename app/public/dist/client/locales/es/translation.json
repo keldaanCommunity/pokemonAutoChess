@@ -3287,7 +3287,7 @@
 		"GEARS": "Cuando sus engranajes giran, genera energía y le otorga 1  de SPEED cada [3,2,1] segundos a tu equipo.",
 		"ORTHWORM": "Cuando cava un agujero gana 5 HP permanentemente.",
 		"COMATOSE": "Siempr está dormido. Inmune a BURN, POISONNED, FREEZE y PARALYSIS. Cuando un SOUND intenta despertar a este Pokémon, este se hunde más profundo en su sueño, ganando 5 AP.",
-		"ILLUSION": "Copia la apariencia del aliado a su izquierda."
+		"ILLUSION": "Copia la apariencia del aliado a su izquierda.",
 		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
 		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",		
@@ -4725,7 +4725,7 @@
 		"new_title_title": "Nuevo Título Desbloqueado!",
 		"new_title_message": "Desbloqueaste un nuevo título:\n{{title}}: {{description}}",
 		"new_gadget_title": "Nuevo Gadget Desbloqueado!",
-		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{description}}"
+		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{description}}",
 		"info_title": "Información",
 		"level_up_title": "Subes de Nivel!",
 		"tournament_win_title": "Victoria!",
