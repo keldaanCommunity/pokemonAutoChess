@@ -1,0 +1,60 @@
+#pokemon-report {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#pokemon-report .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#pokemon-report article {
+  overflow-y: auto;
+}
+
+#pokemon-report .pokemon-report-content {
+  flex: 1;
+  display: flex;
+  gap: 1em;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#pokemon-report .pokemon-statistics-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#pokemon-report .pokemon-distribution-chart {
+  flex: 1;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 799px) {
+  #pokemon-report .pokemon-distribution-chart {
+    display: none;
+  }
+}
+
+.view-switcher {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0;
+  flex-shrink: 0;
+}
+
+.view-switcher button {
+  font-size: 11px;
+}
+
+.view-limit-hint {
+  display: inline;
+  font-size: 9px;
+  opacity: 0.6;
+  margin-left: 4px;
+}

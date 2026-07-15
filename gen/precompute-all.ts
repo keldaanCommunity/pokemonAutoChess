@@ -1,8 +1,0 @@
-import "./precompute-ability"
-import "./precompute-credits"
-import "./precompute-emotions"
-import "./precompute-pokemon-data"
-import "./precompute-rarity"
-import "./precompute-types"
-import "./precompute-types-and-categories"
-import "./csv-export"

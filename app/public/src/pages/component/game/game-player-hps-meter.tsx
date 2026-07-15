@@ -1,20 +1,20 @@
-import React, { useMemo } from "react"
-import { IDpsHeal } from "../../../../../types"
+import { useMemo } from "react"
+import { useTranslation } from "react-i18next"
+import type { IDps } from "../../../../../types"
 import GameDpsHeal from "./game-dps-heal"
 
-type GamePlayerHpsMeterInput = {
-  hpsMeter: IDpsHeal[]
-}
-
 export default function GamePlayerHpsMeter({
-  hpsMeter = []
-}: GamePlayerHpsMeterInput) {
+  dpsMeter = []
+}: {
+  dpsMeter: IDps[]
+}) {
+  const { t } = useTranslation()
   const sortedHps = useMemo(
     () =>
-      [...hpsMeter].sort((a, b) => {
+      [...dpsMeter].sort((a, b) => {
         return b.shield + b.heal - (a.shield + a.heal)
       }),
-    [hpsMeter]
+    [dpsMeter]
   )
 
   const maxHealAmount = useMemo(() => {
@@ -37,9 +37,13 @@ export default function GamePlayerHpsMeter({
   return (
     <div>
       {sortedHps.map((p) => (
-        <GameDpsHeal key={p.id} dpsHeal={p} maxHeal={maxHealAmount} />
+        <GameDpsHeal key={p.id} dpsMeter={p} maxHeal={maxHealAmount} />
       ))}
-      {sortedHps.length > 0 && <div>Total: {totalHealAmount}</div>}
+      {sortedHps.length > 0 && (
+        <div>
+          {t("total")}: {totalHealAmount}
+        </div>
+      )}
     </div>
   )
 }

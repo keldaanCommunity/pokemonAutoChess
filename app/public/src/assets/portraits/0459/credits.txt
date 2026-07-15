@@ -1,0 +1,2 @@
+2020-10-07 17:58:44.763194	CHUNSOFT	CUR	Unspecified	Inspired,Normal,Pain,Surprised,Worried
+2021-01-19 03:49:35.925850	JARLEYPENO	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried

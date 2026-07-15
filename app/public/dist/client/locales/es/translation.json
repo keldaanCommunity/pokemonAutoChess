@@ -2286,10 +2286,12 @@
 		"SHELL_TRAP": "El SHIELD del usuario explota, realizando [50,50,50,100,SP] SPECIAL + el SHIELD actual a todos los enemigos ADJACENT. Si el usuario no tiene SHIELD gana [25,50,75,150,SP] SHIELD.",
 		"PLASMA_TEMPEST": "Vuela lejos y dispara 3 rayos de plasma entre los enemigos más cercanos. Cada rayo realiza [20,30,40,80,SP] SPECIAL, reducido por 20% por cada enemigo que atraviesa.",
 		"AQUA_STEP": "Se mueve a una casilla ADJACENT no ocupada con pasos de baile fluidos antes de realizar [25,50,100,200,SP] SPECIAL al objetivo e incrementar la SPEED del usuario por [10,25,20,25,SP].",
-		"POWER_WHIP": "",
 		"SWARM": "Una copia de un Pokémon BUG en tu tablero salta del nido. La rareza incrementa con cada uso.",
 		"ICE_SPINNER": "Cubre sus pies de hielo y gira hacia sus enemigos ADJACENT, realizando [15,30,60,120,SP], epujándolos y limpiando BOARD_EFFECT en casillas ADJACENT.",
-		"SUBSTITUTE": "Crea un sustituto en la ubicación del usuario con [25,25,25,50,SP]% del HP máximo del usuario como HP adicional. El usuario se mueve hacia una casilla libre cercana y toda la agresión es redireccionada al sustituto"
+		"SUBSTITUTE": "Crea un sustituto en la ubicación del usuario con [25,25,25,50,SP]% del HP máximo del usuario como HP adicional. El usuario se mueve hacia una casilla libre cercana y toda la agresión es redireccionada al sustituto",
+		"NIGHT_DAZE": "Realiza [25,50,100,200,SP] al objetivo e inflige BLINDED por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz es destruido.\n",
+		"BITTER_MALICE": "Realiza [25,50,100,200,SP] SPECIAL al objetivo e inflige FATIGUE por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz del usuario es destruido.\n",
+		"COIL": "Atrapa al objetivo con su poderosa cola, infligiendo LOCKED y PARALYSIS por 3 segundos. El usuario también se incrementa su ATK y DEF por [3,5,10,20,SP]\n"
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
@@ -3282,12 +3284,14 @@
 		"SEASONAL": "Los Pokémon estacionales cambian su apariencia y tipos dependiendo de la estación actual (en el Hemisferio Norte).",
 		"SLOWPOKE": "Evolucionará a $t(pkm.SLOWBRO) o a $t(pkm.SLOWKING) dependiendo de la sinergia predominante entre WATER y PSYCHIC.",
 		"GALARIAN_SLOWPOKE": "Evolucionará a $t(pkm.GALARIAN_SLOWBRO) o a $t(pkm.GALARIAN_SLOWKING) dependiendo de la sinergia predominante entre POISON y PSYCHIC.",
-		"BIVALVE": "Bivalva",
-		"WALL_OF_STONE": "",
 		"GEARS": "Cuando sus engranajes giran, genera energía y le otorga 1  de SPEED cada [3,2,1] segundos a tu equipo.",
 		"ORTHWORM": "Cuando cava un agujero gana 5 HP permanentemente.",
 		"COMATOSE": "Siempr está dormido. Inmune a BURN, POISONNED, FREEZE y PARALYSIS. Cuando un SOUND intenta despertar a este Pokémon, este se hunde más profundo en su sueño, ganando 5 AP.",
 		"ILLUSION": "Copia la apariencia del aliado a su izquierda."
+		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
+		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
+		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",		
+		"CHILLING_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un relincho gélido que incrementa su ATK en 5"
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -3394,7 +3398,7 @@
 		"GOURMET": "Gourmet"
 	},
 	"synergy_description": {
-		"NORMAL": "Los Pokémon NORMAL y sus aliados ADJACENT obtienen SHIELD cuando comienza el combate.",
+		"NORMAL": "Los Pokémon NORMAL y sus aliados ADJACENT obtienen SHIELD cuando comienza el combate, y puedes armar varios pañuelos- {{additionalInfo}}",
 		"GRASS": "Los Pokémon GRASS curan y producen bayas con el tiempo.",
 		"FIRE": "Los Pokémon FIRE ganan ATK después de cada golpe y tienen la posibilidad de provocar BURN a sus enemigos durante 2 segundos.",
 		"WATER": "Los Pokémon WATER generan más PP y se pueden pescar con una caña.",
@@ -3428,7 +3432,9 @@
 		"AMORPHOUS": "Los Pokémon AMOPRHOUS son extremadamente flexibles y carecen de una forma propia. Tu equipo gana HP y SPEED al activar una gran variedad de sinergias.",
 		"GOURMET": "Los Pokémon GOURMET pueden llevar un CHEF_HAT. Los cocineros prepararán sus platos insignia después de cada batalla y se los darán a sus aliados ADJACENT, otorgándoles mejoras y efectos variados.",
 		"ELECTRIC_CHARGE": "Carga de CELL_BATTERY: {{charge}}% ",
-		"FAIRY": "Los Pokémon FAIRY usan varitas para realizar SPECIAL adicional y efectos varios con sus ataques. "
+		"FAIRY": "Los Pokémon FAIRY usan varitas para realizar SPECIAL adicional y efectos varios con sus ataques. ",
+		"NORMAL_SCARVES": "Pañuelos hechos: {{scarves}}",
+		"FAIRY_WANDS": "Varitas equipadas: {{wands}}"
 	},
 	"title": {
 		"no_title": "Sin Título",
@@ -3731,7 +3737,21 @@
 		"special_damage_reduced": "Daño especial bloqueado",
 		"shield_damage_taken": "Daño bloqueado por blindaje",
 		"hp_healed": "HP curados",
-		"shield_given": "Blindaje dado"
+		"shield_given": "Blindaje dado",
+		"title": "Estadísticas de Batalla",
+		"maxHP": "HP Máximo en un Pokémon",
+		"maxAttack": "ATK Máximo en un Pokémon",
+		"maxDefense": "DEF Máxima en un Pokémon",
+		"maxSpecialDefense": "SPE_DEF Máxima en un Pokémon",
+		"maxAP": "AP Máximo en un Pokémon",
+		"maxSpeed": "SPEED Máxima en un Pokémon",
+		"maxPhysicalDamage": "PHYSICAL Máximo realizado en una pelea",
+		"maxSpecialDamage": "SPECIAL Máximo realizado en una pelea",
+		"maxTrueDamage": "TRUE Máximo realizado en una pelea",
+		"maxShield": "SHIELD Máximo dado en una pelea",
+		"maxHeal": "HP Máximo curado en una pelea.",
+		"maxWinStreak": "Racha de victorias más larga en la partida.",
+		"dittosUsed": "Número de copias de Ditto usadas en la partida."
 	},
 	"team": "Equipo",
 	"synergies": "Sinergias",
@@ -4302,7 +4322,9 @@
 		"HIGH_ROLLER": "Suertudo",
 		"REGIONAL_SPECIALTIES": "Especialidades Regionales",
 		"GO_BIG_OR_GO_HOME": "Aporta o aparta",
-		"FAMILY_OUTING": "Vacaciones en familia"
+		"FAMILY_OUTING": "Vacaciones en familia",
+		"UNOWN_SPELL": "Hechizo Unown",
+		"CHOSEN_ONES": "Los Elegidos"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Todas los pokémon adicionales están disponibles de inmediato.",
@@ -4322,7 +4344,9 @@
 		"HIGH_ROLLER": "Las tiendas tienen una probabilidad de contener Eclosiones en las rondas 0-10, Únicos en las rondas 10-20 y Legendarios a partir de la ronda 20.",
 		"REGIONAL_SPECIALTIES": "La región en la que te encuentras actualmente cuenta para tus sinergias. Cuando cambias de región, tu equipo prueba un plato local.",
 		"GO_BIG_OR_GO_HOME": "Las unidades ganan 5 de HP máximos y crecen en tamaño cada ronda.",
-		"FAMILY_OUTING": "Los Pokémon de la misma familia cuentan para los niveles de sinergia."
+		"FAMILY_OUTING": "Los Pokémon de la misma familia cuentan para los niveles de sinergia.",
+		"UNOWN_SPELL": "Unowns observan tus peleas y lanzan hechizos a ambos equipos en cada ronda.",
+		"CHOSEN_ONES": "Los Pokémon adicionales que elijas evolucionan automáticamente y obtienen estadísticias extra."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon vende piedras de sinergia por {{cost}} de GOLD",
@@ -4416,7 +4440,9 @@
 			"code": "¿Qué lenguaje/biblioteca se utiliza para programar el juego?",
 			"code_answer": "TypeScript, Phaser, Colyseus. Si quieres contribuir",
 			"pull_requests": "las pull requests están abiertas",
-			"faq": "PREGUNTAS MÁS FRECUENTES"
+			"faq": "PREGUNTAS MÁS FRECUENTES",
+			"reconnect": "Me desconecté de un juego/sala en marcha, cómo me reconecto?",
+			"reconnect_answer": "Intenta recargar (tecla F5). Si eso no funciona, vuelve a <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reautentificá si es necesario y ve al lobby principal, e intenta encontrar tu juego en la pestaña \"En Juego\" o en el modo de juego correspondiente. Ahí debería haber un botón verde que dice \"Reconectar\" junto a tu sala."
 		},
 		"tutorials": {
 			"thanks_to": "Gracias a",
@@ -4459,7 +4485,13 @@
 			"mulch_description": "El Mantillo es obtenido cada vez que un Pokémon FLORA es debilitado. Usalo para evolucionar tus macetas de flores.",
 			"wands": "Varitas",
 			"wands_description": "Las varitas te dan efectos adicionales a tus Pokémon FAIRY",
-			"cell_battery_description": "Al alcanzar el nivel máximo de la sinergia ELECTRIC, tus Pokémon cargan CELL_BATTERY con sus ataques, las cuales puedes usar para supercargar a un Pokémon ELECTRIC durante la siguiente pelea."
+			"cell_battery_description": "Al alcanzar el nivel máximo de la sinergia ELECTRIC, tus Pokémon cargan CELL_BATTERY con sus ataques, las cuales puedes usar para supercargar a un Pokémon ELECTRIC durante la siguiente pelea.",
+			"town_items": "Objetos de ciudad",
+			"town_items_description": "Estos objetos pueden ser obtenidos de algunos mercaderes encontrados en la ciudad.",
+			"items_from_synergies": "Objetos de Sinergias",
+			"fire_shard_description": "Al adquirir la sinergia FIRE máxima, puedes usar una FIRE_SHARD en cada ronda para sacrificar HP del jugador y mejorar a un Pokémon FIRE.",
+			"gifts": "Regalos",
+			"gifts_description": "Los regalos pueden ser dados a tu compañero en el modo de dos jugadores."
 		},
 		"statistics": {
 			"stat_description": {
@@ -4496,7 +4528,10 @@
 			"portal_description_2": "Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon que serán propuestos.",
 			"portal_description_3": "Si decides no tomar ningún portal, permanecerás en tu región actual, y los Pokémon propuestos serán totalmente aleatorios.",
 			"additional_description": "Elige una selección adicional y un componente de objeto entre 3 propuestas. Las selecciones adicionales son Pokémon de evolución de 2 etapas que se pueden encontrar en todas las tiendas de los jugadores después de ser elegidos.",
-			"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots."
+			"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots.",
+			"shiny_gyarados_description": "Gyarados Shiny da una RED_SCALE cuando es derrotado.",
+			"starter_pick": "Elección de Inicial",
+			"legendary_pick": "Elección de Legendario"
 		},
 		"town": {
 			"town_encounters_hint": "Puedes encontrarte a los residentes de la Aldea Tesoro en las rondas de carrusel. Pueden vender objetos especiales o provocar eventos especiales.",
@@ -4530,10 +4565,25 @@
 			"luck_description": "La suerte incrementa tus probabilidades en todos los cálculos, ya sean golpes críticos, esquivas, problemas de estado al golpear o cualquier otro efecto con el símbolo [LK].",
 			"luck_formula": "La suerte afecta a las probabilidades con la siguiente fórmula: P = baseP ^ (1 - suerte/100) ; Por ejemplo, un Pokémon con 10% de probabilidad de crítico y 50 de suerte tendrá en realidad 0,1^(1-50/100) = ~31.62 % de probabilidad de crítico",
 			"xp": "XP",
-			"experience": "Experiencia"
+			"experience": "Experiencia",
+			"speed_calculation": "¿Cómo funciona la velocidad?",
+			"speed_calculation_description": "La SPEED intluencia el tiempo entre cada acción de tu Pokémon: movimiento, ataque, uso de su habilidad. La demora se computa así: Demora=1000 / (0.4 + 0.007 * Velocidad). Entonces, a 0 de velocidad un Pokémon realiza 0.4 ataques por segundo, y a la máxima SPEED de 300, realiza 2.5 ataques por segundo. Algunas habilidades o efectos tienen una menor demora o una demora fija."
+		},
+		"glossary": {
+			"damage_types": "Tipos de daño",
+			"SPECIAL": "La mayoría de las habilidades realizan daño SPECIAL. Sin embargo, algunas habilidades pueden realizar daño verdadero o daño físico. Este tipo de daño es mitigado por SPE_DEF",
+			"PHYSICAL": "Los ataques automáticos realizan daño PHYSICAL, salvo que esté dicho lo contrario. Este tipo de daño es mitigado por la DEF",
+			"TRUE": "El TRUE no es mitigado por ninguna defensa ni por efectos de reducción de daño. Viene de habilidades específicas, objetos o efectos de sinergias.",
+			"item_categories": "Categorías de objetos",
+			"components": "Dos componentes pueden ser usados para armar un objeto construible",
+			"craftable_items": "Los objetos contruibles son creados por la combinación de dos componentes",
+			"consumable_item": "Los objetos consumibles se pueden usar una vez y son removidos cuando su efecto es utilizado.",
+			"unholdable_item": "Los objetos no equipables no pueden ser dados a un Pokémon. Su efecto igualmente se aplica a todo tu equipo.",
+			"removable_item": "Los objetos removibles pueden ser retirados de un Pokémon al llevarlos al banco."
 		}
 	},
 	"errors": {
+    "title": "Error",
 		"USER_INACTIVE": "Fuiste expulsado por inactividad para ahorrar recursos del servidor",
 		"USER_KICKED": "Fuiste expulsado de esta sala",
 		"USER_BANNED": "Tu cuenta fue baneada",
@@ -4549,7 +4599,9 @@
 		"ROOM_DELETED": "Esta sala fue borrada",
 		"GAME_ALREADY_STARTED": "Esta partida ya ha empezado",
 		"INVALID_PASSWORD": "Contraseña incorrecta!",
-		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:"
+		"UNKNOWN_ERROR": "Un error inesperado ha ocurrido:",
+		"SERVER_SHUTDOWN": "El servidor está cerrando por mantenimiento",
+		"FAILED_TO_RECONNECT": "Fallo al reconectar al juego. Por favor refrescá la página e intentá de nuevo."
 	},
 	"connection_status": {
 		"CONNECTION_LOST": "Conexión perdida. Reconectando...",
@@ -4567,16 +4619,27 @@
 		"hard": "Difícil"
 	},
 	"technical_terms": {
+    "title": "Términos Técnicos",
 		"STRONGEST": "más fuerte",
 		"ADJACENT": "adyacente",
 		"ADJACENT_IN_THE_SAME_ROW": "adyacentes en la misma fila",
-		"CONE": "cono"
+		"CONE": "cono",
+		"FLY_AWAY": "vuela",
+		"INIMITABLE": "inimitable",
+		"ON_HIT": "al golpear",
+		"ON_ATTACK": "al atacar",
+		"BOARD_EFFECT": "efectos de tablero"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "La unidad más fuerte se decide por el siguiente orden de prioridad: 1.º Número de objetos equipados, 2.º Categoría de la unidad, 3.º Rareza de la unidad",
 		"ADJACENT": "Las 8 casillas alrededor de una unidad",
 		"ADJACENT_IN_THE_SAME_ROW": "Las casillas inmediatamente situadas a la derecha e izquierda de una unidad",
-		"CONE": "Ángulo de 90º enfrente de la unidad, con el objetivo actuando como centro"
+		"CONE": "Ángulo de 90º enfrente de la unidad, con el objetivo actuando como centro",
+		"BOARD_EFFECT": "Un Efecto de Tablero es un efecto en una casilla del tablero que influencia a todas las unidades paradas en la misma, sin importar el equipo, hasta el fin de la pelea. Los Efectos de tablero pueden ser limpiados por ciertas habilidades.",
+		"FLY_AWAY": "Se mueve a el lugar más cercano mientras se mantiene en el RANGE de un enemigo.",
+		"INIMITABLE": "Una habilidad es inimitable si no puede ser copiada y usada por otro Pokémon.",
+		"ON_HIT": "Los efectos Al Golpear son activados cuando una unidad es golpeada por un ataque o una habilidad. Son activados incluso si el objetivo tiene SHIELD, pero no si el objetivo esquiva o tiene PROTECT.",
+		"ON_ATTACK": "Los efectos Al Atacar se activan cuando una unidad realiza un ataque básico en otra unidad que todavía está viva, en el momento que la unidad debería golpear, independientemente de si el ataque golpea o no."
 	},
 	"victory_road": {
 		"title": "Calle Victoria",
@@ -4637,6 +4700,14 @@
 			"change_name": "Cambiar nombre",
 			"username_disclaimer": "Los nombres de usuario inapropiados provocarán que tu cuenta sea baneada. Esto incluye blasfemia, temas sexuales, amenazas directas o indirectas, declaraciones políticas o propaganda no relacionada con el juego.",
 			"invalid_username": "Nombre de usuario inválido. El nombre de usuario debe tener entre 3 y 24 carácteres, empezar por una letra, solamente contener letras o números o \".-_\" y sin espacios."
+		},
+		"elo_tab": {
+			"title": "Elo",
+			"current_elo": "Elo actual.",
+			"max_elo_reached": "Elo más alto conseguido.",
+			"elo_decay_info": "Si no juegas por lo menos 3 juegos en los últimos 20 días (Partidas clasificatorias si estás en rango Ultra bola o más alto) tu elo empieza a decaer (-{{eloLoss}} elo/d+ia).",
+			"elo_decay_active": "Tu elo está decayendo",
+			"elo_decay_inactive": "Tu elo va a empezar a decaer en {{time}}"
 		}
 	},
 	"item_component": "Componente",
@@ -4654,8 +4725,70 @@
 		"new_title_title": "Nuevo Título Desbloqueado!",
 		"new_title_message": "Desbloqueaste un nuevo título:\n{{title}}: {{description}}",
 		"new_gadget_title": "Nuevo Gadget Desbloqueado!",
-		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{descripción}}"
+		"new_gadget_message": "Desbloqueaste un nuevo Gadget:\n{{gadget}}: {{description}}"
+		"info_title": "Información",
+		"level_up_title": "Subes de Nivel!",
+		"tournament_win_title": "Victoria!",
+		"tournament_win_message": "Felicidades!\nHas ganado el torneo!",
+		"next": "Próximo",
+		"close": "Cerrar",
+		"dismiss_all": "Ignorar todo.",
+		"tournament_finished_message": "Has sido eliminado del torneo.\nTu posición final: {{place}}"
 	},
 	"bench": "Banco",
-	"filters": "Filtros"
+	"filters": "Filtros",
+	"terms_of_service": "Términos del servicio",
+	"unlocked": "Desbloqueados",
+	"show_alt_forms": "Mostrar formas alternativas",
+	"alt_forms": "Formas Alternativas",
+	"popularity_over_time": "Popularidad a lo largo del tiempo",
+	"placement_over_time": "Posicionamiento a lo largo del tiempo",
+	"bark": "GUAU!",
+	"player_dialog": {
+		"YES": "SI",
+		"NO": "NO",
+		"QM": "¿?",
+		"OK": "OK",
+		"ME": "YO",
+		"YOU": "VOS",
+		"TRADE": "⇌ INTERCAMBIO?",
+		"HELP": "AYUDA!"
+	},
+	"synergy_wheel": {
+		"spin": "Girar",
+		"spinning": "Girando",
+		"results": "Resultado",
+		"number_to_draw": "Número de resultados."
+	},
+	"expeditions": {
+		"title": "Expediciones",
+		"points": "{{points}} puntos",
+		"your_points": "Tus puntos: {{puntos}}",
+		"RESCUE": "Misión de Rescate",
+		"DELIVERY": "Misión de Entrega",
+		"EXPLORATION": "Misión de Explotación",
+		"BATTLE": "Misión de Batalla",
+		"instructions": "Instrucciones",
+		"help1": "Completa los objetivos de las expediciones para obtener puntos de experiencia adicionales!",
+		"help2": "Cada expedición tiene una dificultad, clasificada de E a S. Completar expediciones difíciles te da más experiencia y desbloquea expediciones más difíciles.",
+		"help3": "Las expediciones pueden ser completadas en cualquier modo salvo en salas personalizadas, y requieren que el juego sea jugado hasta el final para evitar abuso.",
+		"help4": "Puedes completar todas las expediciones que quieras en un mismo juego, pero todas las expediciones actuales se renuevan una vez que se completa una.",
+		"leaderboard": "Tabla de clasificación",
+		"RESCUE_DESCRIPTION": "Tener un $t(pkm.{{pokemon}}) en tu equipo final",
+		"EXPLORATION_DESCRIPTION": "Viajar a $t(map.{{region}}) ({{regionSynergies}}) durante el juego y obtener la sinergia {{synergy}} en nivel {{level}} o más activa en tu equipo final",
+		"BATTLE_DESCRIPTION": "Tener un Pokémon que llegue o más en una pelea",
+		"BATTLE_WIN_STREAK_DESCRIPTION": "Obtener una racha de {{amount}} victorias o más.",
+		"DELIVERY_DESCRIPTION": "Obtener {{amount}} {{item}} en tu inventario o equipados en un pokémon al final del juego",
+		"reward": "Recompensa: {{points}} XP"
+	},
+	"tier_list": {
+		"add_row": "Añadir Fila",
+		"download_image": "Decargar Imágen",
+		"share_on_discord": "Compartir en Discord",
+		"move_row_up": "Mover fila hacia arriba",
+		"move_row_down": "Mover columna hacia abajo",
+		"delete_row": "Eliminar fila",
+		"symbols": "Símbolos",
+		"title": "Mi nueva tier list"
+	}
 }

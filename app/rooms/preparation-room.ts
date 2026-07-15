@@ -1,44 +1,52 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, Room, updateLobby } from "colyseus"
+import {
+  type Client,
+  type ClientArray,
+  CloseCode,
+  type Delayed,
+  Room
+} from "colyseus"
 import admin from "firebase-admin"
-import { nanoid } from "nanoid"
-import { components } from "../api-v1/openapi"
-import { GameUser } from "../models/colyseus-models/game-user"
-import BannedUser from "../models/mongo-models/banned-user"
-import { IBot } from "../models/mongo-models/bot-v2"
+import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import { MAX_PLAYERS_PER_GAME } from "../config"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { IPreparationMetadata, Transfer } from "../types"
-import { EloRank, MAX_PLAYERS_PER_LOBBY } from "../types/Config"
-import { BotDifficulty, LobbyType } from "../types/enum/Game"
+import { type IPreparationMetadata, Role, Transfer } from "../types"
+import { CloseCodes } from "../types/enum/CloseCodes"
+import type { EloRank } from "../types/enum/EloRank"
+import { type BotDifficulty, GameMode } from "../types/enum/Game"
+import type { IBot } from "../types/models/bot-v2"
 import { logger } from "../utils/logger"
-import { cleanProfanity } from "../utils/profanity-filter"
-import { values } from "../utils/schemas"
+import { schemaValues } from "../utils/schemas"
 import {
   OnAddBotCommand,
-  OnDeleteRoomCommand,
+  OnChangeNoEloCommand,
   OnGameStartRequestCommand,
   OnJoinCommand,
   OnKickPlayerCommand,
   OnLeaveCommand,
-  OnListBotsCommand,
-  OnMessageCommand,
+  OnNewMessageCommand,
   OnRemoveBotCommand,
+  OnRoomChangeRankCommand,
+  OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
-  OnToggleEloCommand,
-  OnToggleReadyCommand
+  OnToggleReadyCommand,
+  RemoveMessageCommand,
+  OnSelectPartnerCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
 
-export default class PreparationRoom extends Room<PreparationState> {
+export default class PreparationRoom extends Room<{ state: PreparationState }> {
   dispatcher: Dispatcher<this>
-  elos: Map<any, any>
+  clients!: ClientArray<Client<{ auth: UserRecord }>>
+  private roomPassword: string | null
+  autoStartTimeout: Delayed | null = null
 
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.maxClients = MAX_PLAYERS_PER_LOBBY
-    this.elos = new Map()
+    this.maxClients = MAX_PLAYERS_PER_GAME
+    this.roomPassword = null
   }
 
   async setName(name: string) {
@@ -46,38 +54,47 @@ export default class PreparationRoom extends Room<PreparationState> {
       name: name.slice(0, 30),
       type: "preparation"
     })
-    updateLobby(this)
   }
 
-  async setPassword(password: string) {
+  async setPassword(password: string | null) {
+    const hasPassword = password && password.trim().length > 0
     await this.setMetadata(<IPreparationMetadata>{
-      password: password,
+      passwordProtected: hasPassword,
       type: "preparation"
     })
-    updateLobby(this)
+    this.roomPassword = hasPassword ? password : null
   }
 
-  async toggleElo(noElo: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{
-      noElo: noElo
-    })
-    updateLobby(this)
+  async setNoElo(noElo: boolean) {
+    await this.setMetadata(<IPreparationMetadata>{ noElo })
   }
 
-  async setGameStarted(gameStarted: boolean) {
+  async setMinMaxRanks(minRank: EloRank, maxRank: EloRank) {
     await this.setMetadata(<IPreparationMetadata>{
-      gameStarted: gameStarted
+      minRank: minRank,
+      maxRank: maxRank
     })
+  }
+
+  async setGameStarted(gameStartedAt: string) {
+    await this.setMetadata(<IPreparationMetadata>{ gameStartedAt })
   }
 
   onCreate(options: {
     ownerId?: string
     roomName: string
     minRank?: EloRank
-    lobbyType: LobbyType
+    maxRank?: EloRank
+    gameMode: GameMode
     noElo?: boolean
+    password?: string
     autoStartDelayInSeconds?: number
+    whitelist?: string[]
+    blacklist?: string[]
+    tournamentId?: string
+    bracketId?: string
   }) {
+    logger.info("create Preparation ", this.roomId)
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
 
@@ -85,64 +102,100 @@ export default class PreparationRoom extends Room<PreparationState> {
     this.clock.start()
 
     // logger.debug(defaultRoomName);
-    this.setState(new PreparationState(options))
+    this.state = new PreparationState(options)
+    this.setPassword(options.password ?? null)
     this.setMetadata(<IPreparationMetadata>{
+      name: options.roomName.slice(0, 30),
+      ownerName: options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
       minRank: options.minRank ?? null,
+      maxRank: options.maxRank ?? null,
       noElo: options.noElo ?? false,
-      lobbyType: options.lobbyType
+      gameMode: options.gameMode,
+      whitelist: options.whitelist ?? [],
+      blacklist: options.blacklist ?? [],
+      playersInfo: [],
+      tournamentId: options.tournamentId ?? null,
+      bracketId: options.bracketId ?? null,
+      gameStartedAt: null,
+      passwordProtected: !!(
+        options.password && options.password.trim().length > 0
+      ),
+      type: "preparation"
     })
     this.maxClients = 8
-    // if (options.ownerId) {
-    //   this.dispatcher.dispatch(new InitializeBotsCommand(), {
-    //     ownerId: options.ownerId
-    //   })
-    // }
-    if (options.lobbyType !== LobbyType.NORMAL) {
+    if (options.gameMode === GameMode.TOURNAMENT) {
       this.autoDispose = false
     }
 
     if (options.autoStartDelayInSeconds) {
-      this.clock.setTimeout(() => {
-        if (this.state.users.size < 2) {
-          this.broadcast(Transfer.KICK)
-          this.disconnect()
+      this.autoStartTimeout = this.clock.setTimeout(() => {
+        if (this.state.gameStartedAt != null) {
+          // game has started but the prep room is still open
+          logger.debug(
+            "game has started but the prep room is still open, forcing close"
+          )
+          this.disconnect(CloseCodes.NORMAL_CLOSURE)
+          return
+        } else if (this.state.users.size < 2) {
+          // automatically remove lobbies with zero or one players
+          if (this.metadata?.tournamentId) {
+            // automatically give rank 1 if solo in a tournament lobby
+            this.presence.publish("tournament-match-end", {
+              tournamentId: this.metadata?.tournamentId,
+              bracketId: this.metadata?.bracketId,
+              players: schemaValues(this.state.users).map((p) => ({
+                id: p.uid,
+                rank: 1
+              }))
+            })
+          }
+
+          this.disconnect(CloseCodes.ROOM_EMPTY)
         } else {
           this.dispatcher.dispatch(new OnGameStartRequestCommand())
         }
       }, options.autoStartDelayInSeconds * 1000)
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 10; t++) {
-          this.clock.setTimeout(() => {
-            this.broadcast(Transfer.MESSAGES, {
-              author: "Server",
-              payload: `Game is starting in ${10 - t}`,
-              avatar: "0070/Normal",
-              time: Date.now()
-            })
-          }, t * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 10; t++) {
+            this.clock.setTimeout(() => {
+              this.state.addMessage({
+                author: "Server",
+                authorId: "server",
+                payload: `Game is starting in ${10 - t}`,
+                avatar: "0070/Normal"
+              })
+            }, t * 1000)
+          }
+        },
+        (options.autoStartDelayInSeconds - 10) * 1000
+      )
 
-      this.clock.setTimeout(() => {
-        for (let t = 0; t < 9; t++) {
-          this.clock.setTimeout(() => {
-            this.broadcast(Transfer.MESSAGES, {
-              author: "Server",
-              payload: `Game will start automatically in ${10 - t} minute${
-                t !== 9 ? "s" : ""
-              }`,
-              avatar: "0340/Special1",
-              time: Date.now()
-            })
-          }, t * 60 * 1000)
-        }
-      }, (options.autoStartDelayInSeconds - 10 * 60) * 1000)
+      this.clock.setTimeout(
+        () => {
+          for (let t = 0; t < 9; t++) {
+            this.clock.setTimeout(
+              () => {
+                this.state.addMessage({
+                  author: "Server",
+                  authorId: "server",
+                  payload: `Game will start automatically in ${10 - t} minute${
+                    t !== 9 ? "s" : ""
+                  }`,
+                  avatar: "0340/Special1"
+                })
+              },
+              t * 60 * 1000
+            )
+          }
+        },
+        (options.autoStartDelayInSeconds - 10 * 60) * 1000
+      )
     }
 
-    this.setName(options.roomName)
-
     this.onMessage(Transfer.KICK, (client, message) => {
+      logger.info(Transfer.KICK, this.roomName)
       try {
         this.dispatcher.dispatch(new OnKickPlayerCommand(), { client, message })
       } catch (error) {
@@ -150,15 +203,8 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.DELETE_ROOM, (client) => {
-      try {
-        this.dispatcher.dispatch(new OnDeleteRoomCommand(), { client })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
     this.onMessage(Transfer.CHANGE_ROOM_NAME, (client, message) => {
+      logger.info(Transfer.CHANGE_ROOM_NAME, this.roomName)
       try {
         this.dispatcher.dispatch(new OnRoomNameCommand(), { client, message })
       } catch (error) {
@@ -167,6 +213,7 @@ export default class PreparationRoom extends Room<PreparationState> {
     })
 
     this.onMessage(Transfer.CHANGE_ROOM_PASSWORD, (client, message) => {
+      logger.info(Transfer.CHANGE_ROOM_PASSWORD, this.roomName)
       try {
         this.dispatcher.dispatch(new OnRoomPasswordCommand(), {
           client,
@@ -177,25 +224,48 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_NO_ELO, (client, message) => {
+    this.onMessage(
+      Transfer.CHANGE_ROOM_RANKS,
+      (client, { minRank, maxRank }) => {
+        logger.info(Transfer.CHANGE_ROOM_RANKS, this.roomName, minRank, maxRank)
+        try {
+          this.dispatcher.dispatch(new OnRoomChangeRankCommand(), {
+            client,
+            minRank,
+            maxRank
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    )
+
+    this.onMessage(Transfer.CHANGE_SPECIAL_RULE, (client, specialRule) => {
+      logger.info(Transfer.CHANGE_SPECIAL_RULE, this.roomName, specialRule)
       try {
-        this.dispatcher.dispatch(new OnToggleEloCommand(), { client, message })
+        this.dispatcher.dispatch(new OnRoomChangeSpecialRule(), {
+          client,
+          specialRule
+        })
       } catch (error) {
         logger.error(error)
       }
     })
 
-    this.onMessage(Transfer.SELECT_TILEMAP, (client, message) => {
+    this.onMessage(Transfer.CHANGE_NO_ELO, (client, message) => {
+      logger.info(Transfer.CHANGE_NO_ELO, this.roomName)
       try {
-        if (client.auth?.uid === this.state.ownerId) {
-          this.state.selectedMap = message
-        }
+        this.dispatcher.dispatch(new OnChangeNoEloCommand(), {
+          client,
+          message
+        })
       } catch (error) {
         logger.error(error)
       }
     })
 
     this.onMessage(Transfer.GAME_START_REQUEST, (client) => {
+      logger.info(Transfer.GAME_START_REQUEST, this.roomName)
       try {
         this.dispatcher.dispatch(new OnGameStartRequestCommand(), { client })
       } catch (error) {
@@ -203,41 +273,51 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     })
 
-    this.onMessage(Transfer.TOGGLE_READY, (client) => {
+    this.onMessage(Transfer.TOGGLE_READY, (client, ready: boolean) => {
+      logger.info(Transfer.TOGGLE_READY, this.roomName)
       try {
-        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client })
+        this.dispatcher.dispatch(new OnToggleReadyCommand(), { client, ready })
       } catch (error) {
         logger.error(error)
       }
     })
-    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
-      try {
-        if (client.auth) {
-          const user = this.state.users.get(client.auth.uid)
-          const MAX_MESSAGE_LENGTH = 250
-          message = cleanProfanity(message.substring(0, MAX_MESSAGE_LENGTH))
 
-          if (user && !user.anonymous && message != "") {
-            this.dispatcher.dispatch(new OnMessageCommand(), {
-              client: client,
-              message: {
-                author: user.name,
-                authorId: user.id,
-                avatar: user.avatar,
-                payload: message,
-                time: Date.now(),
-                id: nanoid()
-              }
-            })
-          }
-        }
+    this.onMessage(Transfer.SELECT_PARTNER, (client, partnerId: string) => {
+      try {
+        this.dispatcher.dispatch(new OnSelectPartnerCommand(), { client, partnerId })
+      } catch (error) {
+        logger.error(error)
+      }
+    })  
+
+    this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
+      logger.info(Transfer.NEW_MESSAGE, this.roomName)
+      try {
+        this.dispatcher.dispatch(new OnNewMessageCommand(), { client, message })
       } catch (error) {
         logger.error(error)
       }
     })
+
+    this.onMessage(
+      Transfer.REMOVE_MESSAGE,
+      (client, message: { id: string }) => {
+        logger.info(Transfer.REMOVE_MESSAGE, this.roomName)
+        try {
+          this.dispatcher.dispatch(new RemoveMessageCommand(), {
+            client,
+            messageId: message.id
+          })
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    )
+
     this.onMessage(
       Transfer.ADD_BOT,
       (client: Client, botType: IBot | BotDifficulty) => {
+        logger.info(Transfer.ADD_BOT, this.roomName)
         try {
           const user = this.state.users.get(client.auth.uid)
           if (user) {
@@ -252,6 +332,7 @@ export default class PreparationRoom extends Room<PreparationState> {
       }
     )
     this.onMessage(Transfer.REMOVE_BOT, (client: Client, t: string) => {
+      logger.info(Transfer.REMOVE_BOT, this.roomName)
       try {
         const user = this.state.users.get(client.auth.uid)
         if (user) {
@@ -264,112 +345,158 @@ export default class PreparationRoom extends Room<PreparationState> {
         logger.error(error)
       }
     })
-    this.onMessage(Transfer.REQUEST_BOT_LIST, (client: Client) => {
-      try {
-        const user = this.state.users.get(client.auth.uid)
 
-        this.dispatcher.dispatch(new OnListBotsCommand(), {
-          user: user
-        })
-      } catch (error) {
-        logger.error(error)
-      }
-    })
-
-    this.presence.subscribe("server-announcement", (message: string) => {
-      this.broadcast(Transfer.MESSAGES, {
-        author: "Server Announcement",
-        payload: message,
-        avatar: "0294/Joyous",
-        time: Date.now()
-      })
-    })
+    this.onServerAnnouncement = this.onServerAnnouncement.bind(this)
+    this.presence.subscribe("server-announcement", this.onServerAnnouncement)
+    this.onGameStart = this.onGameStart.bind(this)
+    this.presence.subscribe("game-started", this.onGameStart)
+    this.onRoomDeleted = this.onRoomDeleted.bind(this)
+    this.presence.subscribe("room-deleted", this.onRoomDeleted)
   }
 
-  async onAuth(client: Client, options: any, request: any) {
+  async onAuth(client: Client, options, context) {
     try {
-      super.onAuth(client, options, request)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
+      const isAdmin = userProfile?.role === Role.ADMIN
+
+      // Check password protection - room owner, admins and moderators bypass password protection
+      if (
+        this.state.password &&
+        userProfile?.role === Role.BASIC &&
+        this.state.ownerId !== user.uid
+      ) {
+        if (!options.password || options.password !== this.roomPassword) {
+          client.leave(CloseCodes.INVALID_PASSWORD)
+          return
+        }
+      }
 
       const isAlreadyInRoom = this.state.users.has(user.uid)
-      const numberOfHumanPlayers = values(this.state.users).filter(
+      const numberOfHumanPlayers = schemaValues(this.state.users).filter(
         (u) => !u.isBot
       ).length
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_LOBBY) {
-        throw "Room is full"
-      } else if (this.state.gameStarted) {
-        throw "Game already started"
-      } else if (!user.displayName) {
-        throw "No display name"
-      } else if (isBanned) {
-        throw "User banned"
+
+      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
+        client.leave(CloseCodes.ROOM_FULL)
+        return
       } else if (isAlreadyInRoom) {
-        throw "User already in room"
+        client.leave(CloseCodes.USER_ALREADY_JOINED)
+        return
+      } else if (this.state.gameStartedAt != null) {
+        client.leave(CloseCodes.GAME_ALREADY_STARTED)
+        return
+      } else if (userProfile?.banned) {
+        client.leave(CloseCodes.USER_BANNED)
+        return
+      } else if (this.metadata.blacklist.includes(user.uid)) {
+        client.leave(CloseCodes.USER_KICKED)
+        return
+      } else if (
+        this.metadata.whitelist &&
+        this.metadata.whitelist.length > 0 &&
+        !this.metadata.whitelist.includes(user.uid)
+      ) {
+        client.leave(CloseCodes.USER_NOT_WHITELISTED)
+        return
       } else {
         return user
       }
     } catch (error) {
       logger.error(error)
+      client.leave(CloseCodes.ABNORMAL_CLOSURE)
     }
   }
 
-  onJoin(client: Client, options: any, auth: any) {
-    if (client && client.auth && client.auth.displayName) {
+  async onJoin(
+    client: Client<{ auth: UserRecord }>,
+    options: any,
+    auth: UserRecord | undefined
+  ) {
+    if (auth) {
       /*logger.info(
-        `${client.auth.displayName} ${client.id} join preparation room`
+        `${auth.displayName} ${client.id} join preparation room`
       )*/
-      this.dispatcher.dispatch(new OnJoinCommand(), { client, options, auth })
+      await this.dispatcher.dispatch(new OnJoinCommand(), {
+        client,
+        options,
+        auth
+      })
     }
   }
 
-  async onLeave(client: Client, consented: boolean) {
-    if (client && client.auth && client.auth.displayName) {
-      /*logger.info(
-        `${client.auth.displayName} ${client.id} is leaving preparation room`
-      )*/
-    }
+  async onDrop(client: Client, code: number) {
     try {
-      if (consented) {
-        throw new Error("consented leave")
-      }
+      /*if (client.auth && client.auth.displayName) {
+        logger.info(
+          `${client.auth.displayName} ${client.id} is leaving preparation room`
+        )
+      }*/
+      this.state.abortOnPlayerLeave?.abort()
       // allow disconnected client to reconnect into this room until 10 seconds
       await this.allowReconnection(client, 10)
     } catch (e) {
-      if (client && client.auth && client.auth.displayName) {
-        /*logger.info(
-          `${client.auth.displayName} ${client.id} leave preparation room`
-        )*/
-      }
-      this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left preparation room`)
+      }*/
     }
+  }
+
+  async onLeave(client: Client, code: number) {
+    const consented = code === CloseCode.CONSENTED
+    /*if (client.auth && client.auth.displayName) {
+        logger.info(
+          `${client.auth.displayName} ${client.id} leave preparation room`
+        )
+      }*/
+    if (this.state.gameStartedAt === null) {
+      this.state.abortOnPlayerLeave?.abort()
+    }
+    this.dispatcher.dispatch(new OnLeaveCommand(), { client, consented })
   }
 
   onDispose() {
-    //logger.info("Dispose preparation room")
+    logger.info("Dispose preparation room", this.roomId)
     this.dispatcher.stop()
-    this.presence.unsubscribe("server-announcement")
   }
 
-  status() {
-    const players = new Array<components["schemas"]["Player"]>()
-    this.state.users.forEach((user: GameUser) => {
-      if (!user.isBot) {
-        players.push({
-          id: user.id,
-          avatar: user.avatar,
-          name: user.name,
-          elo: user.elo
-        })
-      }
+  onServerAnnouncement(message: string) {
+    this.state.addMessage({
+      author: "Server Announcement",
+      authorId: "server",
+      payload: message,
+      avatar: "0294/Joyous"
     })
-    return {
-      players: players,
-      name: this.state.name,
-      id: this.roomId
+  }
+
+  onGameStart({
+    gameId,
+    preparationId
+  }: {
+    gameId: string
+    preparationId: string
+  }) {
+    if (this.roomId === preparationId) {
+      this.lock()
+      this.setGameStarted(new Date().toISOString())
+      //logger.debug("game start", game.roomId)
+      this.broadcast(Transfer.GAME_START, gameId)
     }
+  }
+
+  onRoomDeleted(roomId) {
+    if (this.roomId === roomId) {
+      this.autoStartTimeout?.clear()
+      this.disconnect(CloseCodes.ROOM_DELETED)
+    }
+  }
+
+  updatePlayersInfo() {
+    this.setMetadata({
+      playersInfo: [...this.state.users.values()].map(
+        (u) => `${u.name} [${u.elo}]`
+      )
+    })
   }
 }

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import pkg from "../../../../../../package.json"
-import { localStore, LocalStoreKeys } from "../../utils/store"
+import { LocalStoreKeys, localStore } from "../../utils/store"
 
 export function usePatchVersion() {
   const latestVersion = pkg.version

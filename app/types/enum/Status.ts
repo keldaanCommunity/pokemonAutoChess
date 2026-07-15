@@ -1,6 +1,7 @@
 export enum Status {
   BURN = "BURN",
   SILENCE = "SILENCE",
+  FATIGUE = "FATIGUE",
   POISONNED = "POISONNED",
   FREEZE = "FREEZE",
   PROTECT = "PROTECT",
@@ -10,16 +11,65 @@ export enum Status {
   FLINCH = "FLINCH",
   WOUND = "WOUND",
   RAGE = "RAGE",
-  RESURECTION = "RESURECTION",
-  RESURECTING = "RESURECTING",
+  RESURRECTION = "RESURRECTION",
+  RESURRECTING = "RESURRECTING",
   PARALYSIS = "PARALYSIS",
-  ARMOR_REDUCTION = "ARMOR_REDUCTION",
+  POKERUS = "POKERUS",
+  ARMOR_BREAK = "ARMOR_BREAK",
   RUNE_PROTECT = "RUNE_PROTECT",
   CURSE = "CURSE",
   ELECTRIC_FIELD = "ELECTRIC_FIELD",
   PSYCHIC_FIELD = "PSYCHIC_FIELD",
   GRASS_FIELD = "GRASS_FIELD",
   FAIRY_FIELD = "FAIRY_FIELD",
-  SPIKE_ARMOR = "SPIKE_ARMOR",
-  MAGIC_BOUNCE = "MAGIC_BOUNCE"
+  SPIKY_SHIELD = "SPIKY_SHIELD",
+  MAGIC_BOUNCE = "MAGIC_BOUNCE",
+  REFLECT = "REFLECT",
+  LOCKED = "LOCKED",
+  POSSESSED = "POSSESSED",
+  BLINDED = "BLINDED"
 }
+
+export const PositiveStatuses = [
+  Status.POKERUS,
+  Status.RESURRECTION,
+  Status.RUNE_PROTECT,
+  Status.PROTECT,
+  Status.ELECTRIC_FIELD,
+  Status.PSYCHIC_FIELD,
+  Status.GRASS_FIELD,
+  Status.FAIRY_FIELD,
+  Status.SPIKY_SHIELD,
+  Status.MAGIC_BOUNCE,
+  Status.REFLECT,
+  Status.RAGE
+]
+
+// some statuses are technically implemented as such but not documented in wiki or mentionned in abilities descriptions
+export const DocumentedStatuses = [
+  Status.BURN,
+  Status.POISONNED,
+  Status.PARALYSIS,
+  Status.FREEZE,
+  Status.SLEEP,
+  Status.CONFUSION,
+  Status.ARMOR_BREAK,
+  Status.FATIGUE,
+  Status.SILENCE,
+  Status.CURSE,
+  Status.WOUND,
+  Status.FLINCH,
+  Status.BLINDED,
+  Status.LOCKED,
+  Status.CHARM,
+  Status.POSSESSED,
+  Status.PROTECT,
+  Status.RESURRECTION,
+  Status.RUNE_PROTECT,
+  Status.RAGE,
+  Status.POKERUS,
+  Status.ELECTRIC_FIELD,
+  Status.FAIRY_FIELD,
+  Status.GRASS_FIELD,
+  Status.PSYCHIC_FIELD
+] satisfies Status[]

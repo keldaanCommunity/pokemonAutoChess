@@ -1,57 +1,57 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import { IPokemonsStatistic } from "../../../../../models/mongo-models/pokemons-statistic"
-import {
-  PRECOMPUTED_POKEMONS_PER_RARITY,
-  PRECOMPUTED_POKEMONS_PER_TYPE,
-  getPokemonData
-} from "../../../../../models/precomputed"
+import { AutoSizer } from "react-virtualized-auto-sizer"
+import { List, useDynamicRowHeight } from "react-window"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
+import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
 import {
-  Pkm,
-  PkmDuos,
+  type Pkm,
   PkmFamily,
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { getPortraitSrc } from "../../../utils"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import { getPortraitSrc } from "../../../../../utils/avatar"
+import type {
+  IHistoryEntry,
+  IPokemonStatV2
+} from "../../../models/pokemons-statistic-v2"
+import PokemonPortrait from "../pokemon-portrait"
+import { HistoryChart } from "./history-chart"
+import { HistoryDelta } from "./history-delta"
+import "./pokemon-statistic.css"
 
 export default function PokemonStatistic(props: {
-  pokemons: IPokemonsStatistic[]
+  pokemons: IPokemonStatV2[]
   rankingBy: string
   synergy: Synergy | "all"
   rarity: Rarity | "all"
+  pool: string
+  tier: string
+  selectedPkm: string
 }) {
   const { t } = useTranslation()
 
   type FamilyStats = {
-    pokemons: IPokemonsStatistic[]
+    pokemons: IPokemonStatV2[]
     totalCount?: number
     averageRank?: number | null
     averageItemHeld?: number | null
   }
   const families = new Map<Pkm, FamilyStats>()
-  const duos = Object.values(PkmDuos)
 
-  const filteredPokemons = props.pokemons
-    .filter((v) =>
-      props.synergy === "all"
-        ? v
-        : PRECOMPUTED_POKEMONS_PER_TYPE[props.synergy].includes(v.name)
-    )
-    .filter((v) =>
-      props.rarity === "all"
-        ? v
-        : PRECOMPUTED_POKEMONS_PER_RARITY[props.rarity].includes(v.name)
-    )
+  const filteredPokemons = props.pokemons.filter(
+    (p) =>
+      hasType(p, props.synergy) &&
+      hasRarity(p, props.rarity) &&
+      isInPool(p, props.pool) &&
+      (props.tier === "all" || getPokemonData(p.name).stars === +props.tier) &&
+      (props.selectedPkm === "" || p.name === props.selectedPkm)
+  )
 
   filteredPokemons.forEach((pokemon) => {
-    let familyName = PkmFamily[pokemon.name]
-    const duo = duos.find((duo) => duo.includes(pokemon.name))
-    if (duo) {
-      familyName = duo[0]
-    }
-
+    const familyName = PkmFamily[pokemon.name]
     const family = families.get(familyName)
     if (family) {
       family.pokemons.push(pokemon)
@@ -76,103 +76,215 @@ export default function PokemonStatistic(props: {
     props.rankingBy === "count"
       ? b[1].totalCount! - a[1].totalCount!
       : props.rankingBy === "item_count"
-      ? b[1].averageItemHeld! - a[1].averageItemHeld!
-      : (a[1].averageRank ?? 9) - (b[1].averageRank ?? 9)
+        ? b[1].averageItemHeld! - a[1].averageItemHeld!
+        : (a[1].averageRank ?? 9) - (b[1].averageRank ?? 9)
   )
+
+  const dynamicRowHeight = useDynamicRowHeight({
+    defaultRowHeight: 120,
+    key: familiesArray.length
+  })
 
   if (filteredPokemons.length === 0) {
     return <p>{t("no_data_available")}</p>
   }
   return (
-    <div style={{ height: "calc(90vh - 8em)", overflowY: "scroll" }}>
-      {familiesArray.map(([pkm, family], i) => (
-        <div key={pkm} className="nes-container pokemon-family-stat">
-          <span className="rank">{i + 1}</span>
-
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
+    <AutoSizer
+      renderProp={({ height, width }) => {
+        if (height === undefined || width === undefined) return null
+        return (
+          <List<PkmnStatRowData>
+            style={{ height, width }}
+            rowCount={familiesArray.length}
+            rowHeight={dynamicRowHeight}
+            rowComponent={PokemonFamilyRow}
+            rowProps={{
+              familiesArray
             }}
-          >
-            {family.pokemons.map((pokemon, i) => (
-              <li key={pokemon.name}>
-                <img
-                  className="pokemon-portrait"
-                  src={getPortraitSrc(PkmIndex[pokemon.name])}
-                />
-                <span>{t(`pkm.${pokemon.name}`)}</span>
-              </li>
-            ))}
-          </ul>
+          />
+        )
+      }}
+    />
+  )
+}
 
-          <span style={{ fontSize: "150%" }}>
-            {t("average_place")}{" "}
-            {family.averageRank ? family.averageRank.toFixed(1) : "???"}
-          </span>
+type PkmnStatRowData = {
+  familiesArray: [Pkm, any][]
+}
 
-          <span style={{ fontSize: "150%" }}>
-            <label>{t("count")}:</label> {family.totalCount}
-          </span>
+function PokemonFamilyRow({
+  index,
+  style,
+  familiesArray
+}: {
+  ariaAttributes: object
+  index: number
+  style: React.CSSProperties
+} & PkmnStatRowData): React.ReactElement | null {
+  const [pkm, family] = familiesArray[index]
 
-          <span style={{ fontSize: "150%" }}>
-            {family.averageItemHeld?.toFixed(2)}
-            <label>{t("held_items")}</label>
-          </span>
-
-          <ul
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
-            {family.pokemons.map((pokemon) => (
-              <li
-                key={pokemon.name}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "40px 6ch 12ch 12ch 1fr"
-                }}
-              >
-                <img
-                  className="pokemon-portrait"
-                  src={getPortraitSrc(PkmIndex[pokemon.name])}
-                />
-                <span>
-                  {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
-                </span>
-                <span>
-                  <label>{t("count")}:</label> {pokemon.count}
-                </span>
-                <span>
-                  <label>{t("held_items")}:</label> {pokemon.item_count}
-                </span>
-                <div>
-                  <label>{t("popular_items")}:</label>
-                  {pokemon.items.map((item) => (
-                    <img
-                      key={item}
-                      src={"assets/item/" + item + ".png"}
-                      style={{
-                        height: "32px",
-                        width: "32px",
-                        marginLeft: "4px"
-                      }}
-                    />
-                  ))}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+  return (
+    <div style={style}>
+      <div>
+        <PokemonFamilyCard pkm={pkm} family={family} rank={index + 1} />
+      </div>
     </div>
   )
 }
 
-function computeAverageRank(pokemons: IPokemonsStatistic[]): number | null {
+function PokemonFamilyCard(props: {
+  pkm: Pkm
+  family: {
+    pokemons: IPokemonStatV2[]
+    totalCount?: number
+    averageRank?: number | null
+    averageItemHeld?: number | null
+  }
+  rank: number
+}) {
+  const { family, rank } = props
+  const [expanded, setExpanded] = React.useState(false)
+  const { t } = useTranslation()
+
+  // Aggregated history for delta badges
+  const familyRankHistory = aggregateHistory(
+    family.pokemons.map((p) => p.rank_history ?? []),
+    "average"
+  )
+  const familyCountHistory = aggregateHistory(
+    family.pokemons.map((p) => p.count_history ?? []),
+    "sum"
+  )
+
+  return (
+    <div className="my-box pokemon-family-stat">
+      <div className="pokemon-family-stat-top">
+        <div className="pokemon-rank-col">
+          <span className="rank">{rank}</span>
+          <button
+            className="history-expand-btn"
+            onClick={() => setExpanded((v) => !v)}
+            title={t("history")}
+          >
+            {expanded ? "▾" : "▸"}
+          </button>
+        </div>
+
+        <div className="pokemon-family-content">
+          <div className="pokemon-family-top">
+            <div className="pokemon-family-summary">
+              <div className="pokemon-portraits-vertical">
+                {family.pokemons.map((pokemon) => (
+                  <div
+                    className="pokemon-detail-row"
+                    key={pokemon.name + "-portrait"}
+                  >
+                    <PokemonPortrait
+                      portrait={PkmIndex[pokemon.name]}
+                      width={40}
+                    />
+                    <span className="pokemon-name-container">
+                      <span>{t(`pkm.${pokemon.name}`)}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="pokemon-family-stats">
+                <span className="pokemon-stat-item">
+                  <div>{t("average_place")}</div>
+                  <span className="pokemon-stat-value">
+                    {family.averageRank ? family.averageRank.toFixed(1) : "???"}
+                  </span>
+                  <HistoryDelta entries={familyRankHistory} invertY={true} />
+                </span>
+                <span className="pokemon-stat-item">
+                  <div>{t("count")}</div>
+                  <span className="pokemon-stat-value">
+                    {family.totalCount}
+                  </span>
+                  <HistoryDelta entries={familyCountHistory} />
+                </span>
+                <span className="pokemon-stat-item">
+                  <div>{t("held_items")}</div>
+                  <span className="pokemon-stat-value">
+                    {family.averageItemHeld?.toFixed(2)}
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div className="pokemon-details-list">
+              {family.pokemons.map((pokemon) => (
+                <div
+                  key={pokemon.name + "-details"}
+                  className="pokemon-detail-row"
+                >
+                  <PokemonPortrait
+                    portrait={PkmIndex[pokemon.name]}
+                    width={40}
+                  />
+                  <span className="pokemon-detail-stat" title="Average Rank">
+                    <strong>
+                      {pokemon.count === 0 ? "???" : pokemon.rank.toFixed(1)}
+                    </strong>
+                  </span>
+                  <span className="pokemon-stat-container">
+                    <label>{t("count")}:</label> {pokemon.count}
+                  </span>
+                  <span className="pokemon-stat-container">
+                    <label>{t("held_items")}:</label> {pokemon.item_count}
+                  </span>
+                  <div className="pokemon-items-row">
+                    {pokemon.items.map((item) => (
+                      <img
+                        key={pokemon.name + "-item-" + item}
+                        src={"assets/item/" + item + ".png"}
+                        className="pokemon-item-img"
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {expanded && (
+        <div className="pokemon-history-charts">
+          {family.pokemons.map((pokemon) => (
+            <div
+              key={pokemon.name + "-history"}
+              className="pokemon-member-charts"
+            >
+              <div className="pokemon-member-charts-header">
+                <PokemonPortrait portrait={PkmIndex[pokemon.name]} width={24} />
+                <span>{t(`pkm.${pokemon.name}`)}</span>
+              </div>
+              <div className="pokemon-member-charts-row">
+                <HistoryChart
+                  entries={pokemon.rank_history ?? []}
+                  label="average_place"
+                  color="#e8a838"
+                  invertY={true}
+                  portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
+                />
+                <HistoryChart
+                  entries={pokemon.count_history ?? []}
+                  label="count"
+                  color="#76c893"
+                  portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function computeAverageRank(pokemons: IPokemonStatV2[]): number | null {
   const pokemonsPlayedAtLeastOnce = pokemons.filter((p) => p.count > 0)
   if (pokemonsPlayedAtLeastOnce.length === 0) return null
   return (
@@ -183,7 +295,7 @@ function computeAverageRank(pokemons: IPokemonsStatistic[]): number | null {
   )
 }
 
-function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
+function computeAverageItemHeld(pokemons: IPokemonStatV2[]): number | null {
   const pokemonsPlayedAtLeastOnce = pokemons.filter((p) => p.count > 0)
   if (pokemonsPlayedAtLeastOnce.length === 0) return null
   return (
@@ -192,4 +304,56 @@ function computeAverageItemHeld(pokemons: IPokemonsStatistic[]): number | null {
       0
     ) / pokemonsPlayedAtLeastOnce.reduce((prev, curr) => prev + curr.count, 0)
   )
+}
+
+function isInPool(pokemon: IPokemonStatV2, pool: string): boolean {
+  if (pool === "all") return true
+  const data = getPokemonData(pokemon.name)
+  if (pool === "special") return data.rarity === Rarity.SPECIAL
+  if (pool === "additional") return data.additional
+  if (pool === "regional") return data.regional
+  if (pool === "regular")
+    return !data.additional && !data.regional && data.rarity !== Rarity.SPECIAL
+  return false
+}
+
+function hasType(pokemon: IPokemonStatV2, synergy: Synergy | "all"): boolean {
+  if (synergy === "all") return true
+  const types = PRECOMPUTED_POKEMONS_PER_TYPE[synergy]
+  return types.includes(pokemon.name)
+}
+
+function hasRarity(pokemon: IPokemonStatV2, rarity: Rarity | "all"): boolean {
+  if (rarity === "all") return true
+  return PRECOMPUTED_POKEMONS_PER_RARITY[rarity].includes(pokemon.name)
+}
+
+function aggregateHistory(
+  histories: IHistoryEntry[][],
+  mode: "sum" | "average"
+): IHistoryEntry[] {
+  const nonEmpty = histories.filter((h) => h.length > 0)
+  if (nonEmpty.length === 0) return []
+
+  const byDate = new Map<string, number[]>()
+  for (const history of nonEmpty) {
+    for (const entry of history) {
+      const values = byDate.get(entry.date)
+      if (values) {
+        values.push(entry.value)
+      } else {
+        byDate.set(entry.date, [entry.value])
+      }
+    }
+  }
+
+  return Array.from(byDate.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, values]) => ({
+      date,
+      value:
+        mode === "sum"
+          ? values.reduce((a, b) => a + b, 0)
+          : values.reduce((a, b) => a + b, 0) / values.length
+    }))
 }

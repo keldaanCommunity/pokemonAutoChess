@@ -1,23 +1,3 @@
----
-patch announcement
----
-
-> June,
-
-# Patch 3.8: Nightfall
-
-Sound rework
-4 new weather effects: Night, Windy, Storm, Misty
-Weather system rework: counts the total number per type for both boards combined to elect weather
-Solrock / Lunatone
-Poison rework (heal reduction)
-Wurmple line
-More Wounding abilities
-
----
-
-## full changelog
-
 # New Pokemons:
 
 - Wynaut, Solrock, Lunatone, Gorebyss, Poliwrath

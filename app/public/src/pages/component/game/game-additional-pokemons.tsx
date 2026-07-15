@@ -1,80 +1,86 @@
-import React from "react"
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { getPokemonData } from "../../../../../models/precomputed"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { SpecialLobbyRule } from "../../../../../types/enum/SpecialLobbyRule"
-import { useAppSelector } from "../../../hooks"
-import { getPortraitSrc } from "../../../utils"
-import { getGameScene } from "../../game"
-import { GamePokemonDetail } from "./game-pokemon-detail"
+import { RarityColor } from "../../../../../config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
+import SynergyIcon from "../icons/synergy-icon"
+import { getCachedPortrait } from "./game-pokemon-portrait"
+
+export function GameAdditionalPokemonsIcon() {
+  return (
+    <div className="my-box" style={{ padding: "5px" }}>
+      <img
+        src="assets/ui/addpicks.png"
+        style={{ width: "2em", height: "2em" }}
+        data-tooltip-id={"game-additional-pokemons"}
+      />
+      <Tooltip
+        id="game-additional-pokemons"
+        float
+        place="top"
+        className="custom-theme-tooltip"
+      >
+        <GameAdditionalPokemons />
+      </Tooltip>
+    </div>
+  )
+}
 
 export function GameAdditionalPokemons() {
   const { t } = useTranslation()
-  const specialLobbyRule = getGameScene()?.room?.state.specialLobbyRule
+
+  const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const additionalPokemons = useAppSelector(
     (state) => state.game.additionalPokemons
   )
-  const pokemonCollection = useAppSelector(
-    (state) => state.game.pokemonCollection
-  )
+  const currentPlayer = useAppSelector(selectConnectedPlayer)
 
-  if (specialLobbyRule === SpecialLobbyRule.EVERYONE_IS_HERE) {
+  if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
-      <div className="nes-container game-additional-pokemons">
+      <div className="game-additional-pokemons">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>
       </div>
     )
   } else if (!additionalPokemons || additionalPokemons.length === 0) {
-    return null
+    return (
+      <div className="game-additional-pokemons">
+        <p className="help">{t("additional_pokemon_hint")}</p>
+      </div>
+    )
   } else {
     return (
-      <>
-        <Tooltip
-          id="detail-additional-pokemons"
-          className="custom-theme-tooltip"
-          place="left"
-        >
-          <p className="help">{t("additional_pokemon_hint")}</p>
-        </Tooltip>
-        <div
-          className="nes-container game-additional-pokemons"
-          data-tooltip-id="detail-additional-pokemons"
-        >
+      <div className="game-additional-pokemons">
+        <h2>{t("additional_picks")}</h2>
+        <p className="help">{t("additional_pokemon_hint")}</p>
+        <div className="grid">
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
+            const rarityColor = RarityColor[pokemon.rarity]
             return (
-              <React.Fragment key={"additional-pokemon-tooltip-" + index}>
-                {ReactDOM.createPortal(
-                  <Tooltip
-                    id={"additional-pokemon-" + p}
-                    className="custom-theme-tooltip game-pokemon-detail-tooltip"
-                    place="top"
-                    data-tooltip-offset={{ top: index < 4 ? 60 : 130 }}
-                  >
-                    <GamePokemonDetail
-                      pokemon={pokemon.name}
-                      emotion={
-                        pokemonCollection.get(pokemon.index)?.selectedEmotion
-                      }
-                      shiny={
-                        pokemonCollection.get(pokemon.index)?.selectedShiny
-                      }
-                    />
-                  </Tooltip>,
-                  document.body
-                )}
-                <img
-                  src={getPortraitSrc(PkmIndex[p])}
-                  className={pokemon.rarity.toLowerCase()}
-                  data-tooltip-id={"additional-pokemon-" + p}
-                />
-              </React.Fragment>
+              <div
+                className="my-box clickable game-pokemon-portrait"
+                key={"game-additional-pokemons-" + index}
+                style={{
+                  backgroundColor: rarityColor,
+                  borderColor: rarityColor,
+                  backgroundImage: `url("${getCachedPortrait(pokemon.index, currentPlayer?.pokemonCustoms)}")`
+                }}
+              >
+                <ul className="game-pokemon-portrait-types">
+                  {Array.from(pokemon.types.values()).map((type) => {
+                    return (
+                      <li key={type}>
+                        <SynergyIcon type={type} />
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
             )
           })}
         </div>
-      </>
+      </div>
     )
   }
 }
