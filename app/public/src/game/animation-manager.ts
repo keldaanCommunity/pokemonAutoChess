@@ -293,17 +293,6 @@ export default class AnimationManager {
       frameRate: 8,
       repeat: -1
     })
-    this.game.anims.create({
-      key: "PRISON_BOTTLE_PORTAL",
-      frames: this.game.anims.generateFrameNames("prison_bottle_portal", {
-        start: 0,
-        end: 6,
-        zeroPad: 3,
-        suffix: ".png"
-      }),
-      duration: 600,
-      repeat: 0
-    })
   }
 
   convertPokemonActionStateToAnimationType(

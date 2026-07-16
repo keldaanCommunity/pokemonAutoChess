@@ -1020,6 +1020,10 @@ export default function Game() {
             getGameScene()?.board?.updateMulchCount()
           })
 
+          $player.listen("doubleUpSendCooldown", (value) => {
+            getGameScene()?.board?.tradingPlatform?.updateCooldown(value)
+          })
+
           $player.wanderers.onAdd((wanderer: Wanderer) => {
             if (
               gameContainer.game &&

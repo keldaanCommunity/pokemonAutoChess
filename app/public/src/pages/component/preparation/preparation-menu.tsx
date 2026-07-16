@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   BOTS_ENABLED,
@@ -57,7 +57,8 @@ export default function PreparationMenu() {
   )
 
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
-  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY
+  const hasBotsEnabled =
+    gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP // TEMP
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -389,8 +390,8 @@ export default function PreparationMenu() {
                 }
               })
               return teams.map((team, teamIndex) => (
-                <>
-                  <p className="team-name">
+                <React.Fragment key={teamIndex}>
+                  <div className="team-name">
                     <div
                       className="team-color-indicator"
                       style={{
@@ -398,7 +399,7 @@ export default function PreparationMenu() {
                       }}
                     />
                     {t("team_name", { name: teamIndex + 1 })}
-                  </p>
+                  </div>
                   <div
                     key={team.map((u) => u.uid).join("-")}
                     className={`double-up-pair ${team.length === 2 ? "paired" : "unpaired"}`}
@@ -412,7 +413,7 @@ export default function PreparationMenu() {
                       />
                     ))}
                   </div>
-                </>
+                </React.Fragment>
               ))
             })()
           : users.map((u) => (
