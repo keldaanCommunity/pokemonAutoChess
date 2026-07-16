@@ -1021,7 +1021,8 @@ export default function Game() {
           })
 
           $player.listen("doubleUpSendCooldown", (value) => {
-            getGameScene()?.board?.tradingPlatform?.updateCooldown(value)
+            const board = getGameScene()?.board
+            board?.tradingPlatform?.updateCooldown(value, board.mode)
           })
 
           $player.wanderers.onAdd((wanderer: Wanderer) => {

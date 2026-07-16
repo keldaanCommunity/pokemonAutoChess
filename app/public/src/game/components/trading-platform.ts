@@ -2,15 +2,14 @@ import Phaser, { GameObjects } from "phaser"
 import { BOARD_WIDTH } from "../../../../config"
 import type Player from "../../../../models/colyseus-models/player"
 import { type IPokemon, Transfer } from "../../../../types"
-import { GamePhaseState } from "../../../../types/enum/Game"
 import { NonPkm } from "../../../../types/enum/Pokemon"
 import { schemaValues } from "../../../../utils/schemas"
-import { transformBoardCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import store from "../../stores"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import type BoardManager from "./board-manager"
+import { BoardMode } from "./board-manager"
 import PokemonSprite from "./pokemon"
 
 export class TradingPlatform extends GameObjects.Container {
@@ -119,22 +118,20 @@ export class TradingPlatform extends GameObjects.Container {
     this.add(this.arrowsVfx)
 
     this.scene.add.existing(this)
-    this.updateTrade()
+    this.updateTrade(manager.mode)
   }
 
   updatePartnerPokemon(pokemon: IPokemon | null) {
     if (this.partnerPokemon) {
       this.partnerPokemon?.destroy()
-      this.scene.board?.pokemons.delete(this.partnerPokemon.id)
     }
     if (pokemon === null) {
       this.partnerPokemon = null
     } else {
-      const [x, y] = transformBoardCoordinates(9, 0)
       this.partnerPokemon = new PokemonSprite(
         this.scene,
-        x,
-        y,
+        66 + (32 + 64) * 2,
+        60,
         pokemon,
         this.player.doubleUpPartnerId,
         false,
@@ -142,11 +139,11 @@ export class TradingPlatform extends GameObjects.Container {
       )
       this.partnerPokemon.sprite.setAlpha(0.5)
       this.partnerPokemon.shadow?.setAlpha(0.5)
-      this.scene.board?.pokemons.set(pokemon.id, this.partnerPokemon)
+      this.add(this.partnerPokemon)
     }
   }
 
-  updateTrade() {
+  updateTrade(boardMode: BoardMode) {
     const pokemonToTrade =
       schemaValues(this.player.board).find(
         (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
@@ -159,6 +156,7 @@ export class TradingPlatform extends GameObjects.Container {
 
     const partnerPokemonToTrade =
       (partner != null &&
+        typeof partner.board?.forEach === "function" &&
         schemaValues(partner.board).find(
           (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
         )) ||
@@ -181,30 +179,24 @@ export class TradingPlatform extends GameObjects.Container {
     if (partnerPokemonToTrade) {
       this.updatePartnerPokemon(partnerPokemonToTrade)
     }
-    this.updateTradeUI()
+    this.updateTradeUI(boardMode)
   }
 
-  updateTradeUI() {
-    const gameState = store.getState().game
-    const shouldShowPlatformUI = gameState.phase !== GamePhaseState.TOWN
+  updateTradeUI(boardMode: BoardMode) {
+    const shouldShowPlatformUI = boardMode !== BoardMode.TOWN
     const shouldShowActiveTradeUI =
-      gameState.phase === GamePhaseState.PICK && this.activeTrade != null
+      boardMode === BoardMode.PICK && this.activeTrade != null
     this.setVisible(shouldShowPlatformUI)
     this.activeVfx.setVisible(shouldShowActiveTradeUI)
     this.partnerActiveVfx.setVisible(shouldShowActiveTradeUI)
     this.arrowsVfx.setVisible(shouldShowActiveTradeUI)
     if (shouldShowPlatformUI === false && this.partnerPokemon) {
       this.partnerPokemon?.destroy()
-      this.scene.board?.pokemons.delete(this.partnerPokemon.id)
     }
   }
 
-  updateCooldown(value: number) {
-    if (value === 0) this.updateTrade()
-  }
-
-  onPhaseChange() {
-    this.updateTradeUI()
+  updateCooldown(value: number, mode: BoardMode) {
+    if (value === 0) this.updateTrade(mode)
   }
 
   openDetail() {

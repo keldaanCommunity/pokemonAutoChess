@@ -519,6 +519,13 @@ class GameContainer {
         }
       })
 
+      $pokemon.items.onChange(() => {
+        const board = this.gameScene?.board
+        if (board?.tradingPlatform?.activeTrade?.includes(pokemon.id)) {
+          board?.tradingPlatform.updateTrade(board.mode)
+        }
+      })
+
       $pokemon.dishes.onChange((value, key) => {
         if (player.id === this.playerIdSpectated) {
           this.gameScene?.board?.updatePokemonDishes(

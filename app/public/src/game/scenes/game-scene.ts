@@ -331,7 +331,6 @@ export default class GameScene extends Scene {
     this.weatherManager?.clearWeather()
     clearAbilityAnimations(this)
     this.resetDragState()
-    this.board?.tradingPlatform?.onPhaseChange()
 
     if (previousPhase === GamePhaseState.TOWN) {
       this.minigameManager?.dispose()

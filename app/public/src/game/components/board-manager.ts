@@ -139,8 +139,8 @@ export default class BoardManager {
       this.renderBoard(false)
       this.battleMode(false)
     } else if (state.phase === GamePhaseState.TOWN) {
-      this.renderBoard(false)
       this.minigameMode()
+      this.renderBoard(false) // render pokemons on bench when loading during a town phase
     } else {
       this.pickMode(false)
     }
@@ -532,6 +532,7 @@ export default class BoardManager {
   }
 
   renderTradingPlatform() {
+    this.hideTradingPlatform()
     this.tradingPlatform = new TradingPlatform(this, 1276, 746)
   }
 
@@ -771,9 +772,9 @@ export default class BoardManager {
   }
 
   battleMode(phaseJustChanged: boolean) {
-    // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
+    this.tradingPlatform?.updateTradeUI(BoardMode.BATTLE)
     if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
@@ -818,7 +819,6 @@ export default class BoardManager {
   }
 
   pickMode(phaseJustChanged: boolean) {
-    // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
     if (
@@ -951,48 +951,38 @@ export default class BoardManager {
       switch (field) {
         case "positionX":
         case "positionY": {
+          coordinates = transformBoardCoordinates(
+            pokemon.positionX,
+            pokemon.positionY
+          )
+          setTimeout(
+            () => {
+              pokemonSprite.x = coordinates[0]
+              pokemonSprite.y = coordinates[1]
+            },
+            this.scene.spectate ? 3000 : 0 // delay position update for spectators, see https://discord.com/channels/737230355039387749/1489057261593694318
+          )
+          const simulation = this.scene?.room?.state.simulations.get(
+            this.player.simulationId
+          )
           if (
-            player.id === this.player.doubleUpPartnerId &&
-            pokemon.positionY === 0
+            this.mode === BoardMode.BATTLE &&
+            !isOnBench(pokemon) &&
+            simulation?.started
           ) {
-            this.tradingPlatform?.updateTrade()
-          } else {
-            coordinates = transformBoardCoordinates(
+            pokemonSprite.destroy()
+            this.pokemons.delete(pokemonSprite.id)
+          }
+          store.dispatch(refreshShopUI(0))
+          if (!isOnBench(pokemon)) {
+            this.showSupportItemsVfx(
+              schemaValues(pokemon.items),
+              pokemonSprite,
               pokemon.positionX,
               pokemon.positionY
             )
-            setTimeout(
-              () => {
-                pokemonSprite.x = coordinates[0]
-                pokemonSprite.y = coordinates[1]
-              },
-              this.scene.spectate ? 3000 : 0 // delay position update for spectators, see https://discord.com/channels/737230355039387749/1489057261593694318
-            )
-            const simulation = this.scene?.room?.state.simulations.get(
-              this.player.simulationId
-            )
-            if (
-              this.mode === BoardMode.BATTLE &&
-              !isOnBench(pokemon) &&
-              simulation?.started
-            ) {
-              pokemonSprite.destroy()
-              this.pokemons.delete(pokemonSprite.id)
-            }
-            store.dispatch(refreshShopUI(0))
-            if (!isOnBench(pokemon)) {
-              this.showSupportItemsVfx(
-                schemaValues(pokemon.items),
-                pokemonSprite,
-                pokemon.positionX,
-                pokemon.positionY
-              )
-            }
-
-            if (player.doubleUpPartnerId && pokemon.positionY === 0) {
-              this.tradingPlatform?.updateTrade()
-            }
           }
+
           break
         }
 
@@ -1097,6 +1087,14 @@ export default class BoardManager {
           }
           break
       }
+    }
+
+    if (
+      (player.id === this.player.doubleUpPartnerId || player.id === this.uid) &&
+      (this.tradingPlatform?.activeTrade?.includes(pokemon.id) ||
+        (pokemon.positionX === BOARD_WIDTH - 1 && pokemon.positionY === 0))
+    ) {
+      this.tradingPlatform?.updateTrade(this.mode)
     }
   }
 
