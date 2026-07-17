@@ -521,7 +521,10 @@ class GameContainer {
 
       $pokemon.items.onChange(() => {
         const board = this.gameScene?.board
-        if (board?.tradingPlatform?.activeTrade?.includes(pokemon.id)) {
+        if (
+          board?.tradingPlatform?.pokemonToTrade?.id === pokemon.id ||
+          board?.tradingPlatform?.partnerPokemonToTrade?.id === pokemon.id
+        ) {
           board?.tradingPlatform.updateTrade(board.mode)
         }
       })
@@ -561,6 +564,14 @@ class GameContainer {
     $player.board.onRemove((pokemon, key) => {
       if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
+      }
+
+      if (player.doubleUpPartnerId) {
+        this.gameScene?.board?.tradingPlatform?.updateTradeIfPokemonInvolved(
+          pokemon,
+          player,
+          this.gameScene.board.mode
+        )
       }
     })
 

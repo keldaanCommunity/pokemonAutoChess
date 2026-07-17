@@ -774,7 +774,7 @@ export default class BoardManager {
   battleMode(phaseJustChanged: boolean) {
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
-    this.tradingPlatform?.updateTradeUI(BoardMode.BATTLE)
+    this.tradingPlatform?.updateTrade(BoardMode.BATTLE)
     if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
@@ -1089,13 +1089,7 @@ export default class BoardManager {
       }
     }
 
-    if (
-      (player.id === this.player.doubleUpPartnerId || player.id === this.uid) &&
-      (this.tradingPlatform?.activeTrade?.includes(pokemon.id) ||
-        (pokemon.positionX === BOARD_WIDTH - 1 && pokemon.positionY === 0))
-    ) {
-      this.tradingPlatform?.updateTrade(this.mode)
-    }
+    this.tradingPlatform?.updateTradeIfPokemonInvolved(pokemon, player, this.mode)
   }
 
   closeTooltips() {

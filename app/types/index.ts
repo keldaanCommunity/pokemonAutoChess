@@ -34,6 +34,7 @@ import type { Item } from "./enum/Item"
 import type { Passive } from "./enum/Passive"
 import type { Pkm } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
+import type { TradeStatus } from "./enum/TradeStatus"
 import type { Weather } from "./enum/Weather"
 import type { GameStats } from "./interfaces/GameStats"
 
@@ -139,7 +140,7 @@ export enum Transfer {
   DEV = "DEV",
   CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
   SELECT_PARTNER = "SELECT_PARTNER",
-  TRADE_PARTNER = "TRADE_PARTNER"
+  TRADE_ACCEPT = "TRADE_ACCEPT"
 }
 
 export enum ReadWriteMode {
@@ -262,6 +263,7 @@ export interface IPlayer {
   interest: number
   doubleUpPartnerId: string
   doubleUpTeamId: string
+  tradeStatus: TradeStatus
   opponentId: string
   opponentName: string
   opponentAvatar: string

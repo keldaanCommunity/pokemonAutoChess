@@ -119,6 +119,7 @@ import {
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
+import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import type { IDetailledPokemon } from "../../types/models/bot-v2"
 import type { DisplayText } from "../../types/strings/DisplayText"
@@ -293,35 +294,6 @@ export class OnPokemonCatchCommand extends Command<
     }
   }
 }
-
-function tradePokemonWithPartner(
-  state: GameState,
-  room: GameRoom,
-  playerA: Player,
-  playerB: Player
-) {
-  if (!playerA.alive || !playerB.alive) return
-
-  // Switch Pokémon
-  //TODO: prevent sending NonPkm
-
-  // Update trading platform cooldown based on nb of items traded & pokemon rarity
-  /*
-  const cooldown =
-    pokemon.rarity === Rarity.EPIC ||
-    pokemon.rarity === Rarity.LEGENDARY ||
-    pokemon.rarity === Rarity.UNIQUE ||
-    pokemon.rarity === Rarity.ULTRA ||
-    pokemon.rarity === Rarity.SPECIAL
-      ? 5
-      : 3
-  sender.doubleUpSendCooldown = cooldown
-
-  // Update synergies for both boards
-  room.checkEvolutionsAfterPokemonAcquired(partner.id) // for both players
-  */
-}
-
 export class OnCancelTradeOfferCommand extends Command<
   GameRoom,
   { playerId: string }
@@ -1000,6 +972,19 @@ export class OnSellPokemonCommand extends Command<
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
     pokemon.afterSell(player)
+
+    if (
+      player.doubleUpPartnerId &&
+      pokemon.positionY === 0 &&
+      pokemon.positionX === BOARD_WIDTH - 1
+    ) {
+      //cancel trade
+      player.tradeStatus = TradeStatus.PENDING
+      const partner = this.state.players.get(player.doubleUpPartnerId)
+      if (partner) {
+        partner.tradeStatus = TradeStatus.PENDING
+      }
+    }
   }
 }
 
@@ -1871,8 +1856,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
       // Double Up: update trading platform cooldown
       this.state.players.forEach((player: Player) => {
-        if (player.alive && player.doubleUpSendCooldown > 0) {
-          player.doubleUpSendCooldown -= 1
+        if (player.alive && player.tradeCooldown > 0) {
+          player.tradeCooldown -= 1
         }
       })
     }
@@ -2486,6 +2471,18 @@ export function onPokemonChangePosition({
       if (pokemon.name === Pkm.MANTYKE) {
         EvolutionManager.tryEvolve(pokemon, player, player.board)
       }
+    }
+  }
+
+  if (
+    (player.doubleUpPartnerId && newY === 0 && newX === BOARD_WIDTH - 1) ||
+    (oldY === 0 && oldX === BOARD_WIDTH - 1)
+  ) {
+    //cancel trade
+    player.tradeStatus = TradeStatus.PENDING
+    const partner = state.players.get(player.doubleUpPartnerId)
+    if (partner) {
+      partner.tradeStatus = TradeStatus.PENDING
     }
   }
 }
