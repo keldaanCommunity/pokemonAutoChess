@@ -1,3 +1,4 @@
+import { t } from "i18next"
 import Phaser, { GameObjects } from "phaser"
 import { BOARD_WIDTH } from "../../../../config"
 import { canBeTraded } from "../../../../core/trade-logic"
@@ -12,6 +13,7 @@ import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import type BoardManager from "./board-manager"
 import { BoardMode } from "./board-manager"
+import { GameDialog } from "./game-dialog"
 import PokemonSprite from "./pokemon"
 
 export class TradingPlatform extends GameObjects.Container {
@@ -19,7 +21,6 @@ export class TradingPlatform extends GameObjects.Container {
   board: BoardManager
   playerTile: GameObjects.Sprite
   partnerTile: GameObjects.Sprite
-  //detail: ItemDetail | undefined
   mouseoutTimeout: NodeJS.Timeout | null = null
   player: Player
   activeVfx: GameObjects.Sprite
@@ -34,6 +35,7 @@ export class TradingPlatform extends GameObjects.Container {
   partnerPokemon: PokemonSprite | null = null
   pokemonToTrade: IPokemon | null = null
   partnerPokemonToTrade: IPokemon | null = null
+  detail: GameDialog | null = null
 
   constructor(board: BoardManager, x: number, y: number) {
     super(board.scene, x, y)
@@ -53,10 +55,7 @@ export class TradingPlatform extends GameObjects.Container {
       .setOrigin(0, 0)
       .setPosition(35, 40)
       .setInteractive()
-      .on("pointerover", (pointer: Phaser.Input.Pointer) => {
-        this.onPointerOver(pointer)
-      })
-      .on("pointerout", () => this.onPointerOut())
+    this.addTooltip(this.playerTile, "player_tile")
 
     this.partnerTile = this.scene.add
       .sprite(0, 0, "trading_platform", "trade_tile_inactive/000.png")
@@ -65,6 +64,7 @@ export class TradingPlatform extends GameObjects.Container {
       .setOrigin(0, 0)
       .setAlpha(0.5)
       .setPosition(35 + (32 + 64) * 2, 40)
+    this.addTooltip(this.partnerTile, "partner_tile")
 
     this.activeVfx = this.scene.add
       .sprite(67, 70, "abilities", "WONDER_ROOM/000.png")
@@ -268,34 +268,35 @@ export class TradingPlatform extends GameObjects.Container {
 
   showTradeAnimation() {
     for (let p = 0; p < 2; p++) {
-      const portal = this.scene.add.sprite(
+      const vfx = this.scene.add.sprite(
         66 + (32 + 64) * 2 * p,
         52,
         "trading_platform",
-        "trade_portal/000.png"
+        "trade_warp/000.png"
       )
-      portal
+      vfx
         .setScale(2)
         .setDepth(DEPTH.ABILITY)
-        .play("trade_portal")
+        .play("trade_warp")
         .once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-          portal.destroy()
+          vfx.destroy()
         })
-      this.add(portal)
+      this.add(vfx)
     }
-  }
-
-  openDetail() {
+    }
+  openDetail(tooltip: TradeTooltip) {
     this.scene.closeTooltips() // close other open tooltips
-
-    /*if (this.detail === undefined) {
-      this.detail = new ItemDetail(this.scene, 0, 0, type)
+    this.detail?.destroy()
+    this.detail = new GameDialog({
+      scene: this.scene,
+      dialogTitle: t(`board_tooltips_titles.${tooltip}`),
+      dialog: t(`board_tooltips.${tooltip}`)
+    })
       this.detail.setDepth(DEPTH.TOOLTIP)
       this.detail.setPosition(
-        this.detail.width * 0.5 + 40,
-        this.detail.height * 0.5
+      this.detail.width * 0.5 + 80,
+      this.detail.height * 0.5 - 80
       )
-      this.detail.setVisible(false)
       this.detail.dom.addEventListener("mouseenter", () => {
         this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       })
@@ -310,30 +311,49 @@ export class TradingPlatform extends GameObjects.Container {
       })
 
       this.add(this.detail)
-    }
-
-    this.detail.setVisible(true)*/
   }
 
   closeDetail() {
-    //this.detail?.setVisible(false)
+    this.detail?.setVisible(false)
   }
 
-  onPointerOver(pointer: Phaser.Input.Pointer) {
-    /*if (preference("showDetailsOnHover") && !this.detail?.visible) {
+  onPointerOver(pointer: Phaser.Input.Pointer, tooltip: TradeTooltip) {
+    if (preference("showDetailsOnHover") && !this.detail?.visible) {
       this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
-      this.openDetail()
-    }*/
+      this.openDetail(tooltip)
+    }
   }
 
   onPointerOut() {
     if (preference("showDetailsOnHover")) {
       this.mouseoutTimeout = setTimeout(() => {
-        /*if (this.detail?.visible) {
+        if (this.detail?.visible) {
           this.closeDetail()
-        }*/
+        }
       }, 0)
     }
+  }
+
+  onPointerDown(pointer: Phaser.Input.Pointer, tooltip: TradeTooltip) {
+    if (pointer.rightButtonDown() && !preference("showDetailsOnHover")) {
+      if (!this.detail?.visible) {
+        this.openDetail(tooltip)
+      } else {
+        this.closeDetail()
+      }
+    }
+  }
+
+  addTooltip(obj: Phaser.GameObjects.GameObject, tooltip: TradeTooltip) {
+    obj
+      .setInteractive()
+      .on("pointerover", (pointer: Phaser.Input.Pointer) => {
+        this.onPointerOver(pointer, tooltip)
+      })
+      .on("pointerout", () => this.onPointerOut())
+      .on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+        this.onPointerDown(pointer, tooltip)
+      })
   }
 }
 
@@ -342,3 +362,5 @@ const TradeStatusIcons: Record<TradeStatus, string> = {
   [TradeStatus.REFUSED]: "trade_icons/refused.png",
   [TradeStatus.PENDING]: "trade_icons/waiting.png"
 }
+
+type TradeTooltip = "partner_tile" | "player_tile"
