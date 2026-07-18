@@ -56,9 +56,11 @@ export default function PreparationMenu() {
     (state) => state.preparation.ownerId === state.network.uid
   )
 
+  const isAdmin = user?.role === Role.ADMIN
+  const isModerator = user?.role === Role.MODERATOR
+
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
-  const hasBotsEnabled =
-    gameMode === GameMode.CUSTOM_LOBBY || gameMode === GameMode.DOUBLE_UP // TEMP
+  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY || isAdmin
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -66,9 +68,6 @@ export default function PreparationMenu() {
   const isReady = users.find((user) => user.uid === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
-
-  const isAdmin = user?.role === Role.ADMIN
-  const isModerator = user?.role === Role.MODERATOR
 
   const nbExpectedPlayers = useAppSelector((state) =>
     state.preparation.whitelist && state.preparation.whitelist.length > 0

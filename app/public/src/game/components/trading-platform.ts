@@ -83,8 +83,9 @@ export class TradingPlatform extends GameObjects.Container {
       .setVisible(false)
 
     this.acceptButton = this.scene.add
-      .sprite(135, 50, "trading_platform", "trade_icons/accept.png")
+      .sprite(140, 50, "trading_platform", "trade_icons/accept.png")
       .setScale(2)
+      .setDepth(DEPTH.TRADE_CONTROLS)
       .setInteractive()
       .on("pointerdown", () => {
         this.scene.room?.send(Transfer.TRADE_ACCEPT, true)
@@ -92,8 +93,9 @@ export class TradingPlatform extends GameObjects.Container {
     addOutlineOnHover(this.acceptButton)
 
     this.refuseButton = this.scene.add
-      .sprite(135, 90, "trading_platform", "trade_icons/refuse.png")
+      .sprite(140, 100, "trading_platform", "trade_icons/refuse.png")
       .setScale(2)
+      .setDepth(DEPTH.TRADE_CONTROLS)
       .setInteractive()
       .on("pointerdown", () => {
         this.scene.room?.send(Transfer.TRADE_ACCEPT, false)
@@ -101,11 +103,11 @@ export class TradingPlatform extends GameObjects.Container {
     addOutlineOnHover(this.refuseButton)
 
     this.playerTradeStatusIcon = this.scene.add
-      .sprite(135, 70, "trading_platform", "trade_icons/waiting.png")
+      .sprite(140, 70, "trading_platform", "trade_icons/waiting.png")
       .setScale(2)
 
     this.partnerTradeStatusIcon = this.scene.add
-      .sprite(195, 70, "trading_platform", "trade_icons/waiting.png")
+      .sprite(190, 70, "trading_platform", "trade_icons/waiting.png")
       .setScale(2)
 
     this.clockIcon = this.scene.add
