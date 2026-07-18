@@ -1290,7 +1290,7 @@
 		"BEAT_UP": "Triệu hồi [1,2,3,5] Houndour ([100,SP]% HP, không có trang bị)",
 		"BLUE_FLARE": "Gây [12,25,50,100,SP] SPECIAL + [10,10,10,20,SP] cho từng cấp bậc hiệu ứng hệ FIRE lên mục tiêu và đối thủ gần nó",
 		"FUSION_BOLT": "Gây [30,40,50,100,SP] SPECIAL + [10,10,10,20,SP] cho từng cấp bậc hiệu ứng hệ ELECTRIC lên mục tiêu và đối thủ gần nó",
-		"AURORA_VEIL": "Toàn bộ đồng minh nhận [5,10,20,50,SP] SHIELD và RUNE_PROTECT trong 1 giây",
+		"AURORA_VEIL": "Toàn bộ đồng minh nhận [5,10,20,50,SP] SHIELD và SAFEGUARD trong 1 giây",
 		"AQUA_JET": "Tốc biến đến hậu tuyến đối thủ, gây [20,40,80,160,SP] SPECIAL lên toàn bộ đối thủ trúng phải",
 		"CHATTER": "Gây [10,20,30,60,SP] SPECIAL cho tất cả Pokémon địch trong bán kính 3 ô xung quanh người dùng. Đối thủ có [50,LK]% khả năng trúng hiệu ứng CONFUSION trong 1 giây",
 		"STEAM_ERUPTION": "Gây [20,40,80,160,SP] SPECIAL lên mục tiêu",

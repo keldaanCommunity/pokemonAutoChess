@@ -90,6 +90,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Misc
 
+- Rune Protect status is renamed to Safeguard
 - New title: Five Stars
 - New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
