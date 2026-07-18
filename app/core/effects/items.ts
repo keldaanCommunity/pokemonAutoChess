@@ -17,6 +17,7 @@ import {
   Flavors,
   HerbaMysticas,
   Item,
+  ItemComponents,
   ItemRecipe,
   MemoryDiscs,
   NonSpecialBerries,
@@ -1172,6 +1173,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
+        } else if(isIn(ItemComponents, heldItem)){
+          player.items.push(heldItem)
+          pokemon.removeItem(heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
           removeInArray(player.scarvesItems, heldItem)
