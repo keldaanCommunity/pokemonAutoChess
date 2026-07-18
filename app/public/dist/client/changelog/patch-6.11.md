@@ -57,6 +57,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Change Entrainment (Audino): can no longer a target already entrained
 - Buff Ember board effect: BURN duration 1 second → 2 seconds
 - Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
+- Nerf Enamorus: ATK 26 → 23
 
 # Changes to Synergies
 
