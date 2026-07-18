@@ -1433,9 +1433,9 @@ export default class PokemonSprite extends DraggableObject {
   addRuneProtect() {
     if (!this.runeProtect) {
       this.runeProtect = this.scene.add
-        .sprite(0, -40, "status", "RUNE_PROTECT/000.png")
+        .sprite(0, -40, "status", "SAFEGUARD/000.png")
         .setScale(2)
-      this.runeProtect.anims.play("RUNE_PROTECT")
+      this.runeProtect.anims.play("SAFEGUARD")
       this.add(this.runeProtect)
     }
   }

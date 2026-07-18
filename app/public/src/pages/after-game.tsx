@@ -1,5 +1,6 @@
 import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
 import type AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
@@ -21,6 +22,7 @@ import { LocalStoreKeys, localStore } from "./utils/store"
 export default function AfterGame() {
   const dispatch = useAppDispatch()
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
+  const { t } = useTranslation()
   const room: Room<AfterGameState> | undefined = rooms.after
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
@@ -110,21 +112,29 @@ export default function AfterGame() {
   } else {
     return (
       <div className="after-game">
-        <button
-          className="bubbly blue"
-          style={{ margin: "10px 0 0 10px" }}
-          onClick={() => {
-            if (room?.connection.isOpen) {
-              room.leave()
-            }
-            dispatch(leaveAfter())
-            localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
-            setToLobby(true)
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "1em",
+            gap: "1em"
           }}
         >
-          Back to Lobby
-        </button>
-        <RecorderEndGame />
+          <button
+            className="bubbly blue"
+            onClick={() => {
+              if (room?.connection.isOpen) {
+                room.leave()
+              }
+              dispatch(leaveAfter())
+              localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
+              setToLobby(true)
+            }}
+          >
+            {t("back_to_lobby")}
+          </button>
+          <RecorderEndGame />
+        </nav>
         <AfterMenu />
       </div>
     )

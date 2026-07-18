@@ -24,25 +24,26 @@ export default class ExperienceManager
     return this.level < this.maxLevel
   }
 
-  addExperience(quantity: number) {
+  addExperience(quantity: number): number {
     let expToAdd = quantity
-    while (this.checkForLevelUp(expToAdd)) {
+    while (this.canLevelUpWithXP(expToAdd)) {
       expToAdd -= ExpTable[this.level]
       this.level += 1
       this.expNeeded = ExpTable[this.level] ?? 255
     }
+    if (this.level < this.maxLevel) {
+      this.experience += expToAdd
+      expToAdd = 0
+    }
+
+    return quantity - expToAdd // return xp actually gained
   }
 
-  checkForLevelUp(quantity: number) {
-    if (
+  canLevelUpWithXP(quantity: number): boolean {
+    return (
       this.experience + quantity >= ExpTable[this.level] &&
       this.level < this.maxLevel
-    ) {
-      return true
-    } else {
-      this.experience += quantity
-      return false
-    }
+    )
   }
 }
 

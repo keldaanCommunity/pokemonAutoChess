@@ -124,7 +124,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") tradeStatus: TradeStatus = TradeStatus.PENDING
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>()
+  @type(["string"]) items = new ArraySchema<Item>(Item.RECYCLE_TICKET)
   @type(["string"]) scarvesItems = new ArraySchema<Item>()
   @type(["string"]) fairyWands = new ArraySchema<Item>()
   @type("uint8") rank: number
@@ -266,14 +266,15 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  addExperience(value: number) {
-    this.experienceManager.addExperience(value)
+  addExperience(value: number): number {
+    const xpActuallyGained = this.experienceManager.addExperience(value)
     if (
       this.experienceManager.level >= 9 &&
       this.items.includes(Item.MISSION_ORDER_BLUE)
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_BLUE)
     }
+    return xpActuallyGained
   }
 
   addMoney(
