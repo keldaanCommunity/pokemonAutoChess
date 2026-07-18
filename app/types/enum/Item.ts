@@ -4,7 +4,6 @@ import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
 
 export enum Item {
-  PRISON_BOTTLE = "PRISON_BOTTLE",
   FOSSIL_STONE = "FOSSIL_STONE",
   TWISTED_SPOON = "TWISTED_SPOON",
   MYSTIC_WATER = "MYSTIC_WATER",
@@ -461,7 +460,6 @@ export const TownItems = [
 
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
-  Item.PRISON_BOTTLE,
   ...TownItems,
   Item.COIN,
   Item.NUGGET,
@@ -941,12 +939,6 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
-// only these items for now, to avoid synergy item problems
-export const DoubleUpTradeableItems: Item[] = [
-  ...ItemComponentsNoScarf,
-  ...CraftableItemsNoScarves
-]
-
 export const Wands = [
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
@@ -1154,7 +1146,6 @@ export const Sweets = [
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
 export const UnholdableItems = [
-  Item.PRISON_BOTTLE,
   ...WeatherRocks,
   ...FishingRods,
   ...Wands,

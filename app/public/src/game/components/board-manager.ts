@@ -23,12 +23,13 @@ import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
 import type GameState from "../../../../rooms/states/game-state"
 import {
   FlowerPots,
+  type IPlayer,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
-  type GameMode,
+  GameMode,
   GamePhaseState,
   Orientation,
   PokemonActionState,
@@ -68,6 +69,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { TradingPlatform } from "./trading-platform"
 
 export enum BoardMode {
   PICK = "pick",
@@ -103,6 +105,7 @@ export default class BoardManager {
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
+  tradingPlatform: TradingPlatform | null = null
 
   constructor(
     scene: GameScene,
@@ -136,8 +139,8 @@ export default class BoardManager {
       this.renderBoard(false)
       this.battleMode(false)
     } else if (state.phase === GamePhaseState.TOWN) {
-      this.renderBoard(false)
       this.minigameMode()
+      this.renderBoard(false) // render pokemons on bench when loading during a town phase
     } else {
       this.pickMode(false)
     }
@@ -246,6 +249,13 @@ export default class BoardManager {
 
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
+    }
+
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      this.mode !== BoardMode.TOWN
+    ) {
+      this.renderTradingPlatform()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -521,6 +531,16 @@ export default class BoardManager {
     })
   }
 
+  renderTradingPlatform() {
+    this.hideTradingPlatform()
+    this.tradingPlatform = new TradingPlatform(this, 1276, 746)
+  }
+
+  hideTradingPlatform() {
+    this.tradingPlatform?.destroy()
+    this.tradingPlatform = null
+  }
+
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
       fontSize: "24px",
@@ -752,9 +772,9 @@ export default class BoardManager {
   }
 
   battleMode(phaseJustChanged: boolean) {
-    // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
+    this.tradingPlatform?.updateTrade(BoardMode.BATTLE)
     if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
@@ -799,7 +819,6 @@ export default class BoardManager {
   }
 
   pickMode(phaseJustChanged: boolean) {
-    // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
     if (
@@ -840,6 +859,7 @@ export default class BoardManager {
     this.hideFlowerPots()
     this.hideGroundHoles()
     this.hideTrainingBag()
+    this.hideTradingPlatform()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -909,14 +929,6 @@ export default class BoardManager {
     }
   }
 
-  playItemDropAnimation(x: number, y: number) {
-    const [px, py] = transformBoardCoordinates(x, y)
-    const vfx = this.scene.add.sprite(px, py, "prison_bottle_portal", "000.png")
-    vfx.setScale(2).setDepth(DEPTH.ABILITY_MAJOR)
-    vfx.play("PRISON_BOTTLE_PORTAL")
-    vfx.once("animationcomplete", () => vfx.destroy())
-  }
-
   updatePokemonDishes(playerId: string, pokemon: IPokemon, dishes: Item[]) {
     if (this.player.id === playerId) {
       const pokemonUI = this.pokemons.get(pokemon.id)
@@ -928,6 +940,7 @@ export default class BoardManager {
 
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
     pokemon: IPokemon,
+    player: IPlayer,
     field: F,
     value: IPokemon[F],
     previousValue?: IPokemon[F]
@@ -937,26 +950,6 @@ export default class BoardManager {
     if (pokemonSprite) {
       switch (field) {
         case "positionX":
-          coordinates = transformBoardCoordinates(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          setTimeout(
-            () => {
-              pokemonSprite.x = coordinates[0]
-              pokemonSprite.y = coordinates[1]
-            },
-            this.scene.spectate ? 3000 : 0 // delay position update for spectators, see https://discord.com/channels/737230355039387749/1489057261593694318
-          )
-          store.dispatch(refreshShopUI(0))
-          this.showSupportItemsVfx(
-            schemaValues(pokemon.items),
-            pokemonSprite,
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          break
-
         case "positionY": {
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
@@ -989,6 +982,7 @@ export default class BoardManager {
               pokemon.positionY
             )
           }
+
           break
         }
 
@@ -1094,6 +1088,8 @@ export default class BoardManager {
           break
       }
     }
+
+    this.tradingPlatform?.updateTradeIfPokemonInvolved(pokemon, player, this.mode)
   }
 
   closeTooltips() {

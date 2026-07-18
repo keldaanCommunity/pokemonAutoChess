@@ -468,9 +468,14 @@ class GameContainer {
       const $pokemon = this.$<Pokemon>(pokemon)
       fields.forEach((field) => {
         $pokemon.listen(field, (value, previousValue) => {
-          if (field && player.id === this.playerIdSpectated) {
+          if (
+            field &&
+            (player.id === this.playerIdSpectated ||
+              player.doubleUpPartnerId === this.uid)
+          ) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               field,
               value as IPokemon[typeof field],
               previousValue as IPokemon[typeof field]
@@ -485,6 +490,7 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
               pokemon.hp + ItemStats[item][Stat.HP]!,
               pokemon.hp
@@ -504,11 +510,22 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
-              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp - ItemStats[item][Stat.HP]!,
               pokemon.hp
             )
           }
+        }
+      })
+
+      $pokemon.items.onChange(() => {
+        const board = this.gameScene?.board
+        if (
+          board?.tradingPlatform?.pokemonToTrade?.id === pokemon.id ||
+          board?.tradingPlatform?.partnerPokemonToTrade?.id === pokemon.id
+        ) {
+          board?.tradingPlatform.updateTrade(board.mode)
         }
       })
 
@@ -548,6 +565,14 @@ class GameContainer {
       if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
+
+      if (player.doubleUpPartnerId) {
+        this.gameScene?.board?.tradingPlatform?.updateTradeIfPokemonInvolved(
+          pokemon,
+          player,
+          this.gameScene.board.mode
+        )
+      }
     })
 
     $player.board.onChange((pokemon, key) => {
@@ -561,16 +586,7 @@ class GameContainer {
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
-    $player.listen("doubleUpTradeOffer", (offer: string) => {
-      if (player.id === this.playerIdSpectated) {
-        const partner = this.room.state.players.get(player.doubleUpPartnerId)
-        this.gameScene?.wandererManager?.updateCroagunkItem(offer, partner?.doubleUpTradeOffer ?? "")
-      }
-      if (player.id === this.room.state.players.get(this.playerIdSpectated)?.doubleUpPartnerId) {
-        const me = this.room.state.players.get(this.playerIdSpectated)
-        this.gameScene?.wandererManager?.updateCroagunkItem(me?.doubleUpTradeOffer ?? "", offer)
-      }
-    })
+
     $player.synergies.onChange((level, synergy) => {
       if (
         player.id === this.playerIdSpectated &&
