@@ -262,14 +262,15 @@ export default class Player extends Schema implements IPlayer {
     }
   }
 
-  addExperience(value: number) {
-    this.experienceManager.addExperience(value)
+  addExperience(value: number): number {
+    const xpActuallyGained = this.experienceManager.addExperience(value)
     if (
       this.experienceManager.level >= 9 &&
       this.items.includes(Item.MISSION_ORDER_BLUE)
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_BLUE)
     }
+    return xpActuallyGained
   }
 
   addMoney(

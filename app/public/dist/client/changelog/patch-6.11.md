@@ -83,6 +83,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
 - Add in Wiki > Pokémon a tab for units that are not Pokémon
+- Uxie XP gained is now indicated in their tooltip
 
 # Bugfix
 

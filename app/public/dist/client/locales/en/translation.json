@@ -3475,7 +3475,8 @@
 		"ILLUSION": "Copy the apperance of the ally on its left.",
 		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground.",
 		"SUBSTITUTE": "A decoy created to look like a Pokémon",
-		"PASSIMIAN": "Passimian comes with a BALL as item held"
+		"PASSIMIAN": "Passimian comes with a BALL as item held",
+		"UXIE": "XP gained: {{stacks}}"
 	},
 	"stat": {
 		"ATK": "Attack",

@@ -7014,6 +7014,7 @@ export class Uxie extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
+  passive = Passive.UXIE
 }
 
 export class Mesprit extends Pokemon {
