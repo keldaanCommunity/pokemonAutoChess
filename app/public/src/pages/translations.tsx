@@ -1,5 +1,6 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router"
+import { MigratedAbilities } from "../../../config/game/ability-definitions"
 import { Language } from "../../../types/enum/Language"
 import { LanguageNames } from "../../dist/client/locales"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -15,6 +16,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
+import { getDescriptionPlaceholderError } from "./utils/ability-description"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
@@ -36,6 +38,15 @@ function saveEdits(lang: Language, edits: Record<string, string>) {
 
 function clearEdits(lang: Language) {
   localStore.delete(storageKey(lang) as LocalStoreKeys)
+}
+
+function getAbilityDescriptionErrors(candidate: TranslationMap): string[] {
+  return MigratedAbilities.flatMap((ability) => {
+    const path = `ability_description.${ability}`
+    const targetTemplate = getNestedValue(candidate, path)
+    const error = getDescriptionPlaceholderError(path, targetTemplate)
+    return error ? [`${path}: ${error}`] : []
+  })
 }
 
 export default function TranslationsPage() {
@@ -207,6 +218,13 @@ export default function TranslationsPage() {
     async (token: string) => {
       if (!targetData) return
       const merged = applyEditsToObject(targetData, edits)
+      const descriptionErrors = getAbilityDescriptionErrors(merged)
+      if (descriptionErrors.length > 0) {
+        setPrError(
+          `Fix ability description placeholders before submitting:\n${descriptionErrors.join("\n")}`
+        )
+        return
+      }
       const content = JSON.stringify(merged, null, "\t")
       setPrSubmitting(true)
       setPrError("")

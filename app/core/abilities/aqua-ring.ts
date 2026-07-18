@@ -1,12 +1,16 @@
+import aquaRingDefinition from "../../config/game/ability-definitions/aqua-ring"
+import { getAbilityTierValue } from "../../config/game/ability-definitions/define-ability"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
+
+const { balance } = aquaRingDefinition
 
 export class AquaRingStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const heal = [20, 40, 80, 160][pokemon.stars - 1] ?? 160
+    const heal = getAbilityTierValue(balance.heal, pokemon.stars)
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(
         pokemon.team,

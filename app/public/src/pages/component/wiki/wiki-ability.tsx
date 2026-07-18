@@ -17,6 +17,7 @@ import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
+import { translateAbilityDescription } from "../../utils/ability-description"
 import { addIconsToDescription } from "../../utils/descriptions"
 import jsxTextContent, { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
@@ -72,7 +73,7 @@ export default function WikiAbility() {
         (!searchQuery.trim() ||
           jsxTextContent(
             addIconsToDescription(
-              `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+              `${t(`ability.${a}`)} ${translateAbilityDescription(t, a)}`
             )
           )
             .toLowerCase()
@@ -173,7 +174,7 @@ function AbilityRow({
                 </p>
               )}
               <p>
-                {addIconsToDescription(t(`ability_description.${ability}`))}
+                {addIconsToDescription(translateAbilityDescription(t, ability))}
               </p>
             </div>
             <div>
