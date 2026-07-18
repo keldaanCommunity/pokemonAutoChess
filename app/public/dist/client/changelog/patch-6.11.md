@@ -56,7 +56,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Lapras DEF: 7 → 5 ; PP: 100 → 120
 - Change Entrainment (Audino): can no longer a target already entrained
 - Buff Ember board effect: BURN duration 1 second → 2 seconds
-
+- Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
 
 # Changes to Synergies
 
@@ -68,8 +68,6 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
-
-
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
 # Gameplay
