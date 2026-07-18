@@ -3,8 +3,14 @@
 
 import aquaRingDefinition from "./aqua-ring"
 import blizzardDefinition from "./blizzard"
+import freezingGlareDefinition from "./freezing-glare"
+import protectDefinition from "./protect"
+import struggleBugDefinition from "./struggle-bug"
 
 export const AbilityDefinitions = Object.freeze({
   [aquaRingDefinition.ability]: aquaRingDefinition,
-  [blizzardDefinition.ability]: blizzardDefinition
+  [blizzardDefinition.ability]: blizzardDefinition,
+  [freezingGlareDefinition.ability]: freezingGlareDefinition,
+  [protectDefinition.ability]: protectDefinition,
+  [struggleBugDefinition.ability]: struggleBugDefinition
 })

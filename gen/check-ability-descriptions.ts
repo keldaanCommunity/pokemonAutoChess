@@ -34,12 +34,26 @@ const DEFINITION_INFRASTRUCTURE_FILES = new Set([
 ])
 const COMPARE_WITH_GIT = process.argv.includes("--compare-git")
 const LIST_UNMIGRATED = process.argv.includes("--list-unmigrated")
-const MAX_UNMIGRATED_NUMERIC_DESCRIPTIONS = 531
+const MAX_UNMIGRATED_NUMERIC_DESCRIPTIONS = 528
+const EXPECTED_NUMERIC_CORRECTIONS = new Set([
+  "bg.PROTECT",
+  "de.STRUGGLE_BUG",
+  "es.STRUGGLE_BUG",
+  "fr.STRUGGLE_BUG",
+  "it.STRUGGLE_BUG",
+  "ko.STRUGGLE_BUG",
+  "nl.PROTECT",
+  "pt.STRUGGLE_BUG",
+  "th.STRUGGLE_BUG",
+  "zh.FREEZING_GLARE",
+  "zh.STRUGGLE_BUG"
+])
 
 const errors: string[] = []
 let descriptionsChecked = 0
 let fallbackDescriptionsChecked = 0
 let baselineDescriptionsChecked = 0
+let numericCorrectionsChecked = 0
 const fallbackDescriptions: string[] = []
 const headTranslationCache = new Map<string, TranslationFile>()
 const i18nextInstances = new Map<string, ReturnType<typeof createInstance>>()
@@ -64,6 +78,10 @@ function readHeadTranslationFile(relativePath: string): TranslationFile {
 
 function sameVariables(left: string[], right: string[]): boolean {
   return left.join("|") === right.join("|")
+}
+
+function descriptionShape(description: string): string {
+  return description.replace(/\[[^\]]+\]|\d+(?:[.,]\d+)?/g, "<value>")
 }
 
 function renderWithI18next(
@@ -223,7 +241,7 @@ for (const ability of MigratedAbilities) {
       const headEnglishTemplate = readHeadTranslationFile(
         path.join("app/public/dist/client/locales/en/translation.json")
       ).ability_description?.[ability]
-      const baseline = headLocalizedTemplate ?? headEnglishTemplate
+      const baselineTemplate = headLocalizedTemplate ?? headEnglishTemplate
 
       if (
         localizedTemplate === undefined &&
@@ -233,18 +251,27 @@ for (const ability of MigratedAbilities) {
           `${name}.${ability}: localized description was removed and would now fall back to English`
         )
       }
-      if (baseline === undefined) {
+      if (baselineTemplate === undefined) {
         errors.push(
           `${name}.${ability}: missing from HEAD and English baselines`
         )
         continue
       }
 
+      const baseline = interpolateTranslationTemplate(baselineTemplate, params)
       baselineDescriptionsChecked += 1
       if (rendered !== baseline) {
-        errors.push(
-          `${name}.${ability}: rendered output changed during migration\n  before: ${baseline}\n  after:  ${rendered}`
-        )
+        const correctionKey = `${name}.${ability}`
+        if (
+          EXPECTED_NUMERIC_CORRECTIONS.has(correctionKey) &&
+          descriptionShape(rendered) === descriptionShape(baseline)
+        ) {
+          numericCorrectionsChecked += 1
+        } else {
+          errors.push(
+            `${name}.${ability}: rendered output changed during migration\n  before: ${baseline}\n  after:  ${rendered}`
+          )
+        }
       }
     }
   }
@@ -266,8 +293,13 @@ if (errors.length > 0) {
   }
   if (COMPARE_WITH_GIT) {
     console.log(
-      `Confirmed ${baselineDescriptionsChecked} rendered descriptions are unchanged from HEAD.`
+      `Confirmed ${baselineDescriptionsChecked - numericCorrectionsChecked} rendered descriptions are unchanged from HEAD.`
     )
+    if (numericCorrectionsChecked > 0) {
+      console.log(
+        `Confirmed ${numericCorrectionsChecked} expected numeric corrections without wording changes.`
+      )
+    }
   }
   console.log(
     `${unmigratedNumericDescriptions.length} English ability descriptions containing numeric literals remain unmigrated.`

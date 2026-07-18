@@ -1,6 +1,10 @@
+import { getAbilityTierValue } from "../../config/game/ability-definitions/define-ability"
+import protectDefinition from "../../config/game/ability-definitions/protect"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
+
+const { balance } = protectDefinition
 
 export class ProtectStrategy extends AbilityStrategy {
   process(
@@ -10,9 +14,10 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const factor = 0.5
+    const factor = balance.durationScalingFactor
+    const baseDuration = getAbilityTierValue(balance.durationMs, pokemon.stars)
     const duration = Math.round(
-      ([1000, 3000, 5000, 8000][pokemon.stars - 1] ?? 8000) *
+      baseDuration *
         (1 + (pokemon.ap / 100) * factor) *
         (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
     )

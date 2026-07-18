@@ -2,8 +2,9 @@ import { Ability } from "../../../types/enum/Ability"
 import {
   bonusMultiplierToPercent,
   defineAbility,
+  formatTierValues,
   millisecondsToSeconds,
-  tiered
+  scaling
 } from "./define-ability"
 
 export default defineAbility({
@@ -17,7 +18,7 @@ export default defineAbility({
   describe: (balance) => ({
     radius: balance.radius,
     freezeDuration: millisecondsToSeconds(balance.freezeDurationMs),
-    damage: tiered(balance.damage, "SP"),
+    damage: formatTierValues(balance.damage, scaling.ap()),
     frozenTargetBonusPercent: bonusMultiplierToPercent(
       balance.frozenTargetDamageMultiplier
     )

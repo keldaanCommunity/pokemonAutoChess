@@ -2,11 +2,13 @@ import { Ability } from "../../../types/enum/Ability"
 import { defineAbility, formatTierValues, scaling } from "./define-ability"
 
 export default defineAbility({
-  ability: Ability.AQUA_RING,
+  ability: Ability.STRUGGLE_BUG,
   balance: {
-    heal: [20, 40, 80, 160]
+    damage: [10, 20, 30, 60],
+    abilityPowerReduction: 30
   },
   describe: (balance) => ({
-    heal: formatTierValues(balance.heal, scaling.ap())
+    damage: formatTierValues(balance.damage, scaling.ap()),
+    abilityPowerReduction: balance.abilityPowerReduction
   })
 })
