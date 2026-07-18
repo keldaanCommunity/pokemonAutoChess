@@ -19,7 +19,7 @@ export function computeTradeCooldown(
     ...schemaValues(pokemonB.items)
   ].reduce((total, item) => {
     if (isIn(ItemComponents, item)) return total + 1
-    if (isIn(ShinyItems, item)) return total + 3
+    if (isIn(ShinyItems, item)) return total + 6
     return total + 2
   }, 0)
 
@@ -37,12 +37,12 @@ export function computeTradeCooldown(
 export const rarityCooldowns: Record<Rarity, number> = {
   [Rarity.SPECIAL]: 3,
   [Rarity.COMMON]: 1,
-  [Rarity.UNCOMMON]: 2,
-  [Rarity.RARE]: 3,
-  [Rarity.EPIC]: 4,
-  [Rarity.ULTRA]: 5,
+  [Rarity.UNCOMMON]: 1,
+  [Rarity.RARE]: 2,
+  [Rarity.EPIC]: 3,
+  [Rarity.ULTRA]: 4,
   [Rarity.HATCH]: 3,
-  [Rarity.UNIQUE]: 7,
+  [Rarity.UNIQUE]: 5,
   [Rarity.LEGENDARY]: 10
 }
 

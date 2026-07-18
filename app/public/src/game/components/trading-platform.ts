@@ -268,22 +268,23 @@ export class TradingPlatform extends GameObjects.Container {
 
   showTradeAnimation() {
     for (let p = 0; p < 2; p++) {
-      const vfx = this.scene.add.sprite(
+      const portal = this.scene.add.sprite(
         66 + (32 + 64) * 2 * p,
         52,
         "trading_platform",
-        "trade_warp/000.png"
+        "trade_portal/000.png"
       )
-      vfx
+      portal
         .setScale(2)
         .setDepth(DEPTH.ABILITY)
-        .play("trade_warp")
+        .play("trade_portal")
         .once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
-          vfx.destroy()
+          portal.destroy()
         })
-      this.add(vfx)
+      this.add(portal)
     }
-    }
+  }
+
   openDetail(tooltip: TradeTooltip) {
     this.scene.closeTooltips() // close other open tooltips
     this.detail?.destroy()
@@ -292,25 +293,25 @@ export class TradingPlatform extends GameObjects.Container {
       dialogTitle: t(`board_tooltips_titles.${tooltip}`),
       dialog: t(`board_tooltips.${tooltip}`)
     })
-      this.detail.setDepth(DEPTH.TOOLTIP)
-      this.detail.setPosition(
+    this.detail.setDepth(DEPTH.TOOLTIP)
+    this.detail.setPosition(
       this.detail.width * 0.5 + 80,
       this.detail.height * 0.5 - 80
-      )
-      this.detail.dom.addEventListener("mouseenter", () => {
-        this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
-      })
-      this.detail.dom.addEventListener("mouseleave", () => {
-        if (preference("showDetailsOnHover")) {
-          this.mouseoutTimeout = setTimeout(() => {
-            if (this.detail?.visible) {
-              this.closeDetail()
-            }
-          }, 0)
-        }
-      })
+    )
+    this.detail.dom.addEventListener("mouseenter", () => {
+      this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
+    })
+    this.detail.dom.addEventListener("mouseleave", () => {
+      if (preference("showDetailsOnHover")) {
+        this.mouseoutTimeout = setTimeout(() => {
+          if (this.detail?.visible) {
+            this.closeDetail()
+          }
+        }, 0)
+      }
+    })
 
-      this.add(this.detail)
+    this.add(this.detail)
   }
 
   closeDetail() {
