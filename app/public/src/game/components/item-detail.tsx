@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
+import { Gifts } from "../../../../types/enum/GiftShop"
 import {
   ConsumableItems,
   Item,
@@ -53,6 +54,7 @@ export function ItemDetailTooltipContent({
   }
 
   const itemCategoryLabel = useMemo(() => {
+    if (Gifts.includes(item)) return t("gift")
     if (ConsumableItems.includes(item)) return t("consumable_item")
     if (isIn(UnholdableItems, item)) return t("unholdable_item")
     if (isIn(RemovableItems, item)) return t("removable_item")
