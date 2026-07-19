@@ -9,11 +9,12 @@ export class HypnosisStrategy extends AbilityStrategy {
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
     super.process(pokemon, board, farthestTarget, crit)
     if (farthestTarget) {
-      const factor = 0.5
+      const flatDuration = [1000, 1750, 3000, 6000][pokemon.stars - 1] ?? 1000
+      const durationWithAP = flatDuration * (2 + pokemon.ap / 100)
+      const critScalingFactor = 0.5
       const duration = Math.round(
-        ([2000, 3500, 6000, 12000][pokemon.stars - 1] ?? 2000) *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+        durationWithAP *
+          (crit ? 1 + (pokemon.critPower - 1) * critScalingFactor : 1)
       )
       farthestTarget.status.triggerSleep(duration, farthestTarget)
     }
