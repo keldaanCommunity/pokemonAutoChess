@@ -136,10 +136,6 @@
   background-color: var(--color-bg-primary);
 }
 
-.translation-target.placeholder-error {
-  border-color: var(--color-fg-red);
-}
-
 .translation-placeholder-error {
   color: var(--color-fg-red);
   font-size: 0.75em;
@@ -148,6 +144,10 @@
 
 .translation-row.edited .translation-target {
   border-color: var(--color-fg-gold);
+}
+
+.translation-target.placeholder-error {
+  border-color: var(--color-fg-red);
 }
 
 /* ── Revert button ───────────────────────────────────────────────────────── */

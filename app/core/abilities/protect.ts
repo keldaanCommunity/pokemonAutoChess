@@ -1,10 +1,10 @@
-import { getAbilityTierValue } from "../../config/game/ability-definitions/define-ability"
-import protectDefinition from "../../config/game/ability-definitions/protect"
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const { balance } = protectDefinition
+const abilityConfig = AbilityConfigs[Ability.PROTECT]
 
 export class ProtectStrategy extends AbilityStrategy {
   process(
@@ -14,8 +14,9 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const factor = balance.durationScalingFactor
-    const baseDuration = getAbilityTierValue(balance.durationMs, pokemon.stars)
+    const factor = abilityConfig.durationScalingFactor
+    const baseDuration =
+      this.computeValue(abilityConfig.duration, pokemon) * 1000
     const duration = Math.round(
       baseDuration *
         (1 + (pokemon.ap / 100) * factor) *

@@ -1,11 +1,11 @@
-import blizzardDefinition from "../../config/game/ability-definitions/blizzard"
-import { getAbilityTierValue } from "../../config/game/ability-definitions/define-ability"
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const { balance } = blizzardDefinition
+const abilityConfig = AbilityConfigs[Ability.BLIZZARD]
 
 export class BlizzardStrategy extends AbilityStrategy {
   process(
@@ -15,12 +15,12 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = getAbilityTierValue(balance.damage, pokemon.stars)
+    const damage = this.computeValue(abilityConfig.damage, pokemon)
     board
       .getCellsInRadius(
         pokemon.positionX,
         pokemon.positionY,
-        balance.radius,
+        abilityConfig.radius,
         false
       )
       .forEach((cell) => {
@@ -28,14 +28,20 @@ export class BlizzardStrategy extends AbilityStrategy {
           const enemy = cell.value
           enemy.handleSpecialDamage(
             enemy.status.freeze
-              ? Math.round(damage * balance.frozenTargetDamageMultiplier)
+              ? Math.round(
+                  damage * (1 + abilityConfig.frozenTargetBonusPercent / 100)
+                )
               : damage,
             board,
             AttackType.SPECIAL,
             pokemon,
             crit
           )
-          enemy.status.triggerFreeze(balance.freezeDurationMs, enemy, pokemon)
+          enemy.status.triggerFreeze(
+            abilityConfig.freezeDuration * 1000,
+            enemy,
+            pokemon
+          )
         }
       })
   }

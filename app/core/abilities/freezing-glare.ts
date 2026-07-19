@@ -1,5 +1,5 @@
-import { getAbilityTierValue } from "../../config/game/ability-definitions/define-ability"
-import freezingGlareDefinition from "../../config/game/ability-definitions/freezing-glare"
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import { chance } from "../../utils/random"
 import type { Board } from "../board"
@@ -8,7 +8,7 @@ import { effectInLine } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const { balance } = freezingGlareDefinition
+const abilityConfig = AbilityConfigs[Ability.FREEZING_GLARE]
 
 export class FreezingGlareStrategy extends AbilityStrategy {
   process(
@@ -18,7 +18,7 @@ export class FreezingGlareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = getAbilityTierValue(balance.damage, pokemon.stars)
+    const damage = this.computeValue(abilityConfig.damage, pokemon)
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -28,12 +28,16 @@ export class FreezingGlareStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        if (chance(balance.freezeChance, pokemon)) {
-          const freezeDuration = getAbilityTierValue(
-            balance.freezeDurationMs,
-            pokemon.stars
+        if (chance(abilityConfig.freezeChance / 100, pokemon)) {
+          const freezeDuration = this.computeValue(
+            abilityConfig.freezeDuration,
+            pokemon
           )
-          cell.value.status.triggerFreeze(freezeDuration, cell.value, pokemon)
+          cell.value.status.triggerFreeze(
+            freezeDuration * 1000,
+            cell.value,
+            pokemon
+          )
         }
       }
     })

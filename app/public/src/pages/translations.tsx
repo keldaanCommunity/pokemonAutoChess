@@ -1,6 +1,7 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router"
-import { MigratedAbilities } from "../../../config/game/ability-definitions"
+import { AbilityConfigs } from "../../../config/game/abilities"
+import type { Ability } from "../../../types/enum/Ability"
 import { Language } from "../../../types/enum/Language"
 import { LanguageNames } from "../../dist/client/locales"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -41,7 +42,7 @@ function clearEdits(lang: Language) {
 }
 
 function getAbilityDescriptionErrors(candidate: TranslationMap): string[] {
-  return MigratedAbilities.flatMap((ability) => {
+  return (Object.keys(AbilityConfigs) as Ability[]).flatMap((ability) => {
     const path = `ability_description.${ability}`
     const targetTemplate = getNestedValue(candidate, path)
     const error = getDescriptionPlaceholderError(path, targetTemplate)
