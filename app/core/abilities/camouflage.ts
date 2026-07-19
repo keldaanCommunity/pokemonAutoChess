@@ -10,8 +10,9 @@ export class CamouflageStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const heal = [30, 50, 70, 140][pokemon.stars - 1] ?? 140
-    pokemon.handleHeal(heal, pokemon, 0.5, crit)
+    const flatHeal = [15, 25, 35, 70][pokemon.stars - 1] ?? 70
+    const healWithAP = flatHeal * (2 + pokemon.ap / 100)
+    pokemon.handleHeal(healWithAP, pokemon, 0, crit)
     if (target && target.canBeCopied) {
       pokemon.index = target.index
       pokemon.atk = Math.max(pokemon.atk, target.atk)
