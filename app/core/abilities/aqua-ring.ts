@@ -4,13 +4,13 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const abilityConfig = AbilityConfigs[Ability.AQUA_RING]
-
 export class AquaRingStrategy extends AbilityStrategy {
   requiresTarget = false
+  readonly config = AbilityConfigs[Ability.AQUA_RING]
+
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const heal = this.computeValue(abilityConfig.heal, pokemon)
+    const heal = this.computeValue(this.config.heal, pokemon)
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(
         pokemon.team,

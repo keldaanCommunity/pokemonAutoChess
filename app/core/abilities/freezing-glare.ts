@@ -8,9 +8,9 @@ import { effectInLine } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const abilityConfig = AbilityConfigs[Ability.FREEZING_GLARE]
-
 export class FreezingGlareStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.FREEZING_GLARE]
+
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -18,7 +18,7 @@ export class FreezingGlareStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = this.computeValue(abilityConfig.damage, pokemon)
+    const damage = this.computeValue(this.config.damage, pokemon)
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -28,9 +28,9 @@ export class FreezingGlareStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        if (chance(abilityConfig.freezeChance / 100, pokemon)) {
+        if (chance(this.config.freezeChance / 100, pokemon)) {
           const freezeDuration = this.computeValue(
-            abilityConfig.freezeDuration,
+            this.config.freezeDuration,
             pokemon
           )
           cell.value.status.triggerFreeze(

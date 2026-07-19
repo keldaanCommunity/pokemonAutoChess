@@ -73,7 +73,7 @@ export default function WikiAbility() {
         (!searchQuery.trim() ||
           jsxTextContent(
             addIconsToDescription(
-              `${t(`ability.${a}`)} ${translateAbilityDescription(t, a)}`
+              `${t(`ability.${a}`)} ${translateAbilityDescription(a)}`
             )
           )
             .toLowerCase()
@@ -174,7 +174,7 @@ function AbilityRow({
                 </p>
               )}
               <p>
-                {addIconsToDescription(translateAbilityDescription(t, ability))}
+                {addIconsToDescription(translateAbilityDescription(ability))}
               </p>
             </div>
             <div>

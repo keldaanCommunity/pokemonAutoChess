@@ -1,4 +1,4 @@
-import type { TFunction } from "i18next"
+import { t } from "i18next"
 import {
   type AbilityConfig,
   getAbilityConfig
@@ -9,27 +9,20 @@ const INTERPOLATION_VARIABLE_REGEXP = /{{\s*([^{},\s]+)\s*}}/g
 const DYNAMIC_VALUE_FORMAT_REGEXP = /\[[^\]\n]*{{\s*[^{}]+\s*}}[^\]\n]*\]/g
 
 export function translateAbilityDescription(
-  t: TFunction,
-  ability: Ability
+  ability: Ability,
+  template?: string
 ): string {
   const abilityConfig = getAbilityConfig(ability)
-  return abilityConfig
-    ? t(`ability_description.${ability}`, abilityConfig)
-    : t(`ability_description.${ability}`)
+  const key = template ?? `ability_description.${ability}`
+  return t(key, { defaultValue: key, ...abilityConfig })
 }
 
 export function resolveDescriptionPreview(
   path: string,
   template: string
 ): string {
-  const abilityConfig = getConfigFromDescriptionPath(path)
-  if (!abilityConfig) return template
-
-  return template.replace(
-    INTERPOLATION_VARIABLE_REGEXP,
-    (placeholder, variable: string) =>
-      variable in abilityConfig ? String(abilityConfig[variable]) : placeholder
-  )
+  const ability = getAbilityFromDescriptionPath(path)
+  return ability ? translateAbilityDescription(ability, template) : template
 }
 
 export function getDescriptionError(
@@ -73,8 +66,13 @@ function getDynamicValueFormats(template: string): string[] {
 }
 
 function getConfigFromDescriptionPath(path: string): AbilityConfig | undefined {
+  const ability = getAbilityFromDescriptionPath(path)
+  return ability ? getAbilityConfig(ability) : undefined
+}
+
+function getAbilityFromDescriptionPath(path: string): Ability | undefined {
   const [section, ability] = path.split(".")
   return section === "ability_description" && ability
-    ? getAbilityConfig(ability as Ability)
+    ? (ability as Ability)
     : undefined
 }

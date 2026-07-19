@@ -4,9 +4,9 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const abilityConfig = AbilityConfigs[Ability.PROTECT]
-
 export class ProtectStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.PROTECT]
+
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -14,9 +14,8 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const factor = abilityConfig.durationScalingFactor
-    const baseDuration =
-      this.computeValue(abilityConfig.duration, pokemon) * 1000
+    const factor = this.config.durationScalingFactor
+    const baseDuration = this.computeValue(this.config.duration, pokemon) * 1000
     const duration = Math.round(
       baseDuration *
         (1 + (pokemon.ap / 100) * factor) *

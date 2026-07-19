@@ -5,9 +5,9 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const abilityConfig = AbilityConfigs[Ability.STRUGGLE_BUG]
-
 export class StruggleBugStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.STRUGGLE_BUG]
+
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -21,13 +21,13 @@ export class StruggleBugStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.addAbilityPower(
-          -abilityConfig.abilityPowerReduction,
+          -this.config.abilityPowerReduction,
           pokemon,
           0,
           false
         )
         cell.value.handleSpecialDamage(
-          this.computeValue(abilityConfig.damage, pokemon),
+          this.computeValue(this.config.damage, pokemon),
           board,
           AttackType.SPECIAL,
           pokemon,

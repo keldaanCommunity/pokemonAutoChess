@@ -5,9 +5,9 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-const abilityConfig = AbilityConfigs[Ability.BLIZZARD]
-
 export class BlizzardStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.BLIZZARD]
+
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -15,12 +15,12 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = this.computeValue(abilityConfig.damage, pokemon)
+    const damage = this.computeValue(this.config.damage, pokemon)
     board
       .getCellsInRadius(
         pokemon.positionX,
         pokemon.positionY,
-        abilityConfig.radius,
+        this.config.radius,
         false
       )
       .forEach((cell) => {
@@ -29,7 +29,7 @@ export class BlizzardStrategy extends AbilityStrategy {
           enemy.handleSpecialDamage(
             enemy.status.freeze
               ? Math.round(
-                  damage * (1 + abilityConfig.frozenTargetBonusPercent / 100)
+                  damage * (1 + this.config.frozenTargetBonusPercent / 100)
                 )
               : damage,
             board,
@@ -38,7 +38,7 @@ export class BlizzardStrategy extends AbilityStrategy {
             crit
           )
           enemy.status.triggerFreeze(
-            abilityConfig.freezeDuration * 1000,
+            this.config.freezeDuration * 1000,
             enemy,
             pokemon
           )
