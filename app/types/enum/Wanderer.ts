@@ -8,6 +8,5 @@ export enum WandererType {
   UNOWN = "UNOWN",
   UNOWN_SPELL = "UNOWN_SPELL",
   DIALOG = "DIALOG",
-  OUTLAW = "OUTLAW",
-  CROAGUNK_TRADE = "CROAGUNK_TRADE"
+  OUTLAW = "OUTLAW"
 }

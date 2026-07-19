@@ -19,8 +19,7 @@ export const AbilityConfigs = {
     freezeDuration: [3, 3, 3, 6]
   },
   [Ability.PROTECT]: {
-    duration: [1, 3, 5, 8],
-    durationScalingFactor: 0.5
+    duration: [0.5, 1.5, 2.5, 4]
   },
   [Ability.STRUGGLE_BUG]: {
     damage: [10, 20, 30, 60],

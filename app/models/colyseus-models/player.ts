@@ -7,6 +7,7 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
+import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
 import { PassiveEffects } from "../../core/effects/passives"
@@ -40,12 +41,10 @@ import {
   type MissionOrder,
   NonSpecialBerries,
   type ScarfItem,
-  SynergyGemsBuried,
   SynergyGivenByItem,
   TMsBronze,
   TMsGold,
   TMsSilver,
-  ToolsBuried,
   Wands,
   WeatherRocks
 } from "../../types/enum/Item"
@@ -60,6 +59,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
+import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
 import {
@@ -120,8 +120,8 @@ export default class Player extends Schema implements IPlayer {
   @type("string") opponentTitle: Title | "WILD" | "" = ""
   @type("string") doubleUpPartnerId: string = ""
   @type("string") doubleUpTeamId: string = ""
-  @type("uint8") doubleUpSendCooldown: number = 0
-  @type("string") doubleUpTradeOffer: string = ""
+  @type("uint8") tradeCooldown: number = 0
+  @type("uint8") tradeStatus: TradeStatus = TradeStatus.PENDING
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
   @type(["string"]) items = new ArraySchema<Item>(Item.RECYCLE_TICKET)
@@ -172,7 +172,11 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   buriedItems: (Item | null)[] = initBuriedItems()
-  tms: Item[] = pickRandomTMs()
+  tms: Item[] = [
+    pickRandomIn(TMsBronze),
+    pickRandomIn(TMsSilver),
+    pickRandomIn(TMsGold)
+  ]
   weatherRocks: Item[] = []
   randomComponentsGiven: Item[] = []
   randomEggsGiven: Pkm[] = []
@@ -1071,41 +1075,6 @@ export default class Player extends Schema implements IPlayer {
     }, delay)
     return wanderer
   }
-}
-
-function pickRandomTMs() {
-  const bronzeTM = pickRandomIn(TMsBronze)
-  const silverTM = pickRandomIn(TMsSilver)
-  const goldTM = pickRandomIn(TMsGold)
-  return [bronzeTM, silverTM, goldTM]
-}
-
-function initBuriedItems() {
-  const buriedItems: (Item | null)[] = new Array(24).fill(null)
-
-  // 3 synergy gems
-  for (let i = 0; i < 3; i++) {
-    buriedItems[i] = pickRandomIn(SynergyGemsBuried)
-  }
-
-  // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
-  for (let i = 3; i < 7; i++) {
-    buriedItems[i] = pickRandomIn([
-      Item.TRASH,
-      Item.LEFTOVERS,
-      Item.COIN,
-      Item.NUGGET,
-      Item.FOSSIL_STONE
-    ])
-  }
-
-  // 1 precious (tool, treasure box, big nugget)
-  buriedItems[7] = chance(1 / 2)
-    ? pickRandomIn(ToolsBuried)
-    : pickRandomIn([Item.TREASURE_BOX, Item.BIG_NUGGET])
-
-  shuffleArray(buriedItems)
-  return buriedItems
 }
 
 function initFlowerPots(player: Player) {

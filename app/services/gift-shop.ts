@@ -12,6 +12,9 @@ import {
   Dishes,
   type IPokemon,
   Item,
+  ItemComponentsNoFossilOrScarf,
+  NonSpecialBerries,
+  ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
@@ -19,7 +22,7 @@ import {
 } from "../types"
 import { Rarity } from "../types/enum/Game"
 import type { Gift } from "../types/enum/GiftShop"
-import { Pkm, Unowns } from "../types/enum/Pokemon"
+import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
 import { getFirstAvailablePositionInBench } from "../utils/board"
@@ -52,11 +55,8 @@ const giftAmountOfItem =
 const giftAmountOfPokemon =
   (amount: number, pokemon: Pkm) => (toPlayer: Player) => {
     for (let i = 0; i < amount; i++) {
-      let pkm = pokemon
-      if (pokemon === Pkm.UNOWN_A) pkm = pickRandomIn(Unowns)
-
       const replacement = PokemonFactory.createPokemonFromName(
-        getPokemonData(pkm).name,
+        pokemon,
         toPlayer
       )
       const freeCellX = getFirstAvailablePositionInBench(toPlayer.board)
@@ -184,7 +184,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
     else otherPokemon.push(pkm)
   })
 
-  if (pokemonThatCanEvolve.length !== 0) {
+  if (pokemonThatCanEvolve.length > 0) {
     const randomPkm = pickRandomIn(pokemonThatCanEvolve)
     EvolutionManager.evolve(randomPkm, toPlayer)
   } else {
@@ -196,13 +196,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
     randomPkm2.addDefense(5)
     randomPkm2.addSpecialDefense(5)
     randomPkm2.addSpeed(20)
-    randomPkm2.addLuck(15)
   }
-}
-
-const giftExperienceAndRaiseLevelCap = (toPlayer: Player) => {
-  toPlayer.experienceManager.maxLevel = 10
-  toPlayer.addExperience(32)
 }
 
 const giftFoodAndPicnic = (toPlayer: Player) => {
@@ -232,37 +226,53 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
   toPlayer.items.push(Item.PICNIC_SET)
 }
 
+const giftXP = (amount: number) => (toPlayer: Player) => {
+  const xpActuallyGained = toPlayer.addExperience(24)
+  if (xpActuallyGained < amount) {
+    toPlayer.addMoney(amount - xpActuallyGained, true, null)
+  }
+}
+
 type GiftEffect = (toPlayer: Player, fromPlayer: Player) => void
 
 export const GiftEffects: {
-  [key in Gift]: GiftEffect
+  [key in Gift]: GiftEffect | GiftEffect[]
 } = {
-  [Item.BERRY_BUNDLE]: giftAmountOfItem(7, Berries),
-  [Item.SWEETS_BUNDLE]: giftAmountOfItem(7, Sweets),
-  [Item.UNOWN_BUNDLE]: giftAmountOfPokemon(5, Pkm.UNOWN_A),
-  [Item.DITTO_BUNDLE]: giftAmountOfPokemon(1, Pkm.DITTO),
+  [Item.BERRIES_GIFT]: giftAmountOfItem(7, Berries),
+  [Item.SWEETS_GIFT]: giftAmountOfItem(7, Sweets),
+  [Item.DITTO_GIFT]: giftAmountOfPokemon(1, Pkm.DITTO),
   [Item.TICKET_BUNDLE]: (toPlayer: Player, fromPlayer: Player) => {
     toPlayer.items.push(Item.EXCHANGE_TICKET)
     toPlayer.items.push(Item.RECYCLE_TICKET)
     toPlayer.items.push(Item.BRONZE_DOJO_TICKET)
   },
   [Item.HATCH_BUNDLE]: giftHatchPokemon(2),
-  [Item.REGION_BUNDLE]: (toPlayer: Player, fromPlayer: Player) => {
+  [Item.REGIONAL_TOUR]: (toPlayer: Player, fromPlayer: Player) => {
     toPlayer.items.push(Item.LAPRAS_PASSPORT)
     toPlayer.shopFreeRolls += 10
   },
-  [Item.COOKING_BUNDLE]: giftFoodAndPicnic,
-  [Item.EVOLVE_BUNDLE]: evolveRandomPokemonInBoard,
+  [Item.BANQUET]: giftFoodAndPicnic,
+  [Item.STAR_GIFT]: evolveRandomPokemonInBoard,
   [Item.GEMS_BUNDLE]: giftAmountOfItem(3, SynergyGems),
   [Item.POTION]: giftPotion,
-  [Item.DELUXE_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
-  [Item.TOOL_BUNDLE]: giftAmountOfItem(3, Tools),
-  [Item.COMMON_BUNDLE]: giftRandomPokemonByRarity(Rarity.COMMON),
-  [Item.UNCOMMON_BUNDLE]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
-  [Item.RARE_BUNDLE]: giftRandomPokemonByRarity(Rarity.RARE),
-  [Item.EPIC_BUNDLE]: giftRandomPokemonByRarity(Rarity.EPIC),
-  [Item.ULTRA_BUNDLE]: giftRandomPokemonByRarity(Rarity.ULTRA),
-  [Item.UNIQUE_BUNDLE]: giftRandomPokemonByRarity(Rarity.UNIQUE),
-  [Item.LEGENDARY_BUNDLE]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
-  [Item.EXP_BUNDLE]: giftExperienceAndRaiseLevelCap
+  [Item.FORAGE_BAG]: giftAmountOfItem(3, ItemComponentsNoFossilOrScarf),
+  [Item.COLLECTION_BOX]: [
+    giftAmountOfItem(1, [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE]),
+    giftAmountOfItem(1, [Item.SILK_SCARF]),
+    giftAmountOfItem(1, CraftableItemsNoScarves),
+    giftAmountOfItem(1, Tools),
+    giftAmountOfItem(2, NonSpecialBerries)
+  ],
+  [Item.PRETTY_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
+  [Item.DELUXE_BOX]: giftAmountOfItem(1, ShinyItems),
+  [Item.TOOLBOX]: giftAmountOfItem(3, Tools),
+  [Item.COMMON_GIFT]: giftRandomPokemonByRarity(Rarity.COMMON),
+  [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
+  [Item.RARE_GIFT]: giftRandomPokemonByRarity(Rarity.RARE),
+  [Item.EPIC_GIFT]: giftRandomPokemonByRarity(Rarity.EPIC),
+  [Item.ULTRA_GIFT]: giftRandomPokemonByRarity(Rarity.ULTRA),
+  [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
+  [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
+  [Item.SMALL_EXP_GIFT]: giftXP(8),
+  [Item.LARGE_EXP_GIFT]: giftXP(24)
 }

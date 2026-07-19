@@ -12,11 +12,12 @@ export class ObstructStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const scalingFactor = 0.5
+    const flatDuration = [500, 750, 1000, 2000][pokemon.stars - 1] ?? 2000
+    const durationWithAP = flatDuration * (2 + pokemon.ap / 100)
+    const critScalingFactor = 0.5
     const duration = Math.round(
-      ([1000, 1500, 2000, 4000][pokemon.stars - 1] ?? 4000) *
-        (1 + (pokemon.ap / 100) * scalingFactor) *
-        (crit ? 1 + (pokemon.critPower - 1) * scalingFactor : 1)
+      durationWithAP *
+        (crit ? 1 + (pokemon.critPower - 1) * critScalingFactor : 1)
     )
     pokemon.status.triggerProtect(duration)
     pokemon.effects.add(EffectEnum.OBSTRUCT)
