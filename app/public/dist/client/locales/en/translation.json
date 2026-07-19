@@ -3497,7 +3497,8 @@
 		"MAX_PP": "Max PP",
 		"AP": "Ability Power",
 		"SHIELD": "Shield",
-		"LUCK": "Luck"
+		"LUCK": "Luck",
+		"XP": "XP"
 	},
 	"status": {
 		"BURN": "Burn",

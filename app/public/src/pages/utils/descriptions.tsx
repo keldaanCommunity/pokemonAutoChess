@@ -32,7 +32,8 @@ export const iconRegExp = new RegExp(
     ...Items,
     ...TechnicalTerms,
     "GOLD",
-    "STAR"
+    "STAR",
+    "XP"
   ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
   "g"
 )
@@ -74,6 +75,13 @@ export function addIconsToDescription(
             src="/assets/ui/star.svg"
             alt="⭐"
           />
+        )
+      } else if (token === "XP") {
+        icon = (
+          <span className="description-icon stat">
+            <img src={`assets/icons/${token}.png`} />
+            <span className="stat-label">{t(`stat.${token}`)}</span>
+          </span>
         )
       } else if (isIn(DamageTypes, token)) {
         icon = (
@@ -286,6 +294,11 @@ export function addIconsToHtml(
         } else if (token === "STAR") {
           iconHTML =
             '<img class="description-icon icon-star" src="/assets/ui/star.svg" alt="⭐" />'
+        } else if (token === "XP") {
+          iconHTML = `<span className="description-icon stat">
+            <img src={${`assets/icons/${token}.png`}} />
+            <span className="stat-label">{${t(`stat.${token}`)}}</span>
+          </span>`
         } else if (isIn(DamageTypes, token)) {
           const className =
             token === Damage.PHYSICAL
