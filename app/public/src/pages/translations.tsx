@@ -41,11 +41,19 @@ function clearEdits(lang: Language) {
   localStore.delete(storageKey(lang) as LocalStoreKeys)
 }
 
-function getAbilityDescriptionErrors(candidate: TranslationMap): string[] {
+function getAbilityDescriptionErrors(
+  candidate: TranslationMap,
+  english: TranslationMap
+): string[] {
   return (Object.keys(AbilityConfigs) as Ability[]).flatMap((ability) => {
     const path = `ability_description.${ability}`
     const targetTemplate = getNestedValue(candidate, path)
-    const error = getDescriptionPlaceholderError(path, targetTemplate)
+    const englishTemplate = getNestedValue(english, path)
+    const error = getDescriptionPlaceholderError(
+      path,
+      targetTemplate,
+      englishTemplate
+    )
     return error ? [`${path}: ${error}`] : []
   })
 }
@@ -217,12 +225,12 @@ export default function TranslationsPage() {
 
   const handleSubmitPR = useCallback(
     async (token: string) => {
-      if (!targetData) return
+      if (!targetData || !enData) return
       const merged = applyEditsToObject(targetData, edits)
-      const descriptionErrors = getAbilityDescriptionErrors(merged)
+      const descriptionErrors = getAbilityDescriptionErrors(merged, enData)
       if (descriptionErrors.length > 0) {
         setPrError(
-          `Fix ability description placeholders before submitting:\n${descriptionErrors.join("\n")}`
+          `Fix ability description placeholders and formatting before submitting:\n${descriptionErrors.join("\n")}`
         )
         return
       }
@@ -245,7 +253,7 @@ export default function TranslationsPage() {
         setPrSubmitting(false)
       }
     },
-    [targetData, edits, targetLang]
+    [targetData, enData, edits, targetLang]
   )
 
   const handleDownload = useCallback(() => {

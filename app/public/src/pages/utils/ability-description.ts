@@ -6,6 +6,7 @@ import {
 import type { Ability } from "../../../../types/enum/Ability"
 
 const INTERPOLATION_VARIABLE_REGEXP = /{{\s*([^{},\s]+)\s*}}/g
+const DYNAMIC_VALUE_FORMAT_REGEXP = /\[[^\]\n]*{{\s*[^{}]+\s*}}[^\]\n]*\]/g
 
 export function translateAbilityDescription(
   t: TFunction,
@@ -33,7 +34,8 @@ export function resolveDescriptionPreview(
 
 export function getDescriptionPlaceholderError(
   path: string,
-  targetTemplate: string
+  targetTemplate: string,
+  englishTemplate?: string
 ): string | undefined {
   const abilityConfig = getConfigFromDescriptionPath(path)
   if (!abilityConfig || !targetTemplate) return undefined
@@ -47,9 +49,29 @@ export function getDescriptionPlaceholderError(
       )
     )
   ].sort()
-  if (expected.join("|") === actual.join("|")) return undefined
+  if (expected.join("|") !== actual.join("|")) {
+    return `Placeholders must match English: ${expected.map((name) => `{{${name}}}`).join(", ")}`
+  }
 
-  return `Placeholders must match English: ${expected.map((name) => `{{${name}}}`).join(", ")}`
+  if (englishTemplate) {
+    const expectedFormats = getDynamicValueFormats(englishTemplate)
+    const actualFormats = getDynamicValueFormats(targetTemplate)
+    if (expectedFormats.join("|") !== actualFormats.join("|")) {
+      return `Dynamic value formatting must match English (including SP/LK): ${expectedFormats.join(", ")}`
+    }
+  }
+
+  return undefined
+}
+
+function getDynamicValueFormats(template: string): string[] {
+  return [
+    ...new Set(
+      Array.from(template.matchAll(DYNAMIC_VALUE_FORMAT_REGEXP), (match) =>
+        match[0].replace(/\s/g, "")
+      )
+    )
+  ].sort()
 }
 
 function getConfigFromDescriptionPath(path: string): AbilityConfig | undefined {

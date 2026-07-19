@@ -31,7 +31,11 @@ export const TranslationRow = React.memo(function TranslationRow({
   const targetWrapRef = useRef<HTMLDivElement>(null)
   const enPreview = resolveDescriptionPreview(path, enValue)
   const targetPreview = resolveDescriptionPreview(path, targetValue)
-  const placeholderError = getDescriptionPlaceholderError(path, targetValue)
+  const placeholderError = getDescriptionPlaceholderError(
+    path,
+    targetValue,
+    enValue
+  )
 
   function handleFocus(field: "en" | "target") {
     const ref = field === "en" ? enWrapRef : targetWrapRef
