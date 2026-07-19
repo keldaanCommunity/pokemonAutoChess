@@ -76,6 +76,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
 - RECYCLE_TICKET now also remove base components
+- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
 
 # UI
 
