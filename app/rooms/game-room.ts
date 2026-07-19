@@ -46,7 +46,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
-import { GiftEffects } from "../services/gift-shop"
+import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -117,7 +117,8 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand
+  OnUpdateCommand,
+  OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
@@ -477,6 +478,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
           })
         } catch (error) {
           logger.error("sell drop error", pokemonId)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.USE_ITEM, (client, item: Item) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnUseItemCommand(), {
+            client,
+            item
+          })
+        } catch (error) {
+          logger.error("use item drop error", item)
         }
       }
     })
@@ -1512,14 +1526,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       delay: 3000
     })
 
-    setTimeout(() => {
-      const giftEffect = GiftEffects[gift]
-      if (Array.isArray(giftEffect)) {
-        giftEffect.forEach((effect) => effect(partner, player))
-      } else {
-        giftEffect(partner, player)
-      }
-    }, 10000)
+    setTimeout(() => openGift(gift, partner, player), 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {

@@ -60,6 +60,7 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
+import { openGift } from "../../services/gift-shop"
 import {
   Emotion,
   type IClient,
@@ -86,6 +87,7 @@ import {
 import {
   type Gift,
   GiftShopPrices,
+  Gifts,
   GiftsTier1,
   GiftsTier2,
   GiftsTier3
@@ -989,6 +991,33 @@ export class OnSellPokemonCommand extends Command<
   }
 }
 
+export class OnUseItemCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    item: Item
+  }
+> {
+  execute({ client, item }) {
+    const player = this.state.players.get(client.auth.uid)
+    if (!player || !player.alive || !player.doubleUpPartnerId) return
+
+    const fromPlayer = this.state.players.get(player?.doubleUpPartnerId)
+    if (!fromPlayer) return
+
+    let used = false
+
+    if (isIn(Gifts, item)) {
+      openGift(item, player, fromPlayer)
+      used = true
+    }
+
+    if (used) {
+      removeInArray(player.items, item)
+    }
+  }
+}
+
 export class OnShopRerollCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
@@ -1527,16 +1556,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Make groups by user id
       this.state.players.forEach((p) => {
         const partner = this.state.players.get(p.doubleUpPartnerId)
-        if(!partner) return
-        if(p.giftsGiven.length < partner.giftsGiven.length){
+        if (!partner) return
+        if (p.giftsGiven.length < partner.giftsGiven.length) {
           givers.push(p)
-        } if(p.giftsGiven.length > partner.giftsGiven.length){
+        }
+        if (p.giftsGiven.length > partner.giftsGiven.length) {
           receivers.push(p)
-        } else if(p.life > partner.life){
-           givers.push(p)
-        } else if(p.life < partner.life){
+        } else if (p.life > partner.life) {
+          givers.push(p)
+        } else if (p.life < partner.life) {
           receivers.push(p)
-        } else if(p.id < p.doubleUpPartnerId){
+        } else if (p.id < p.doubleUpPartnerId) {
           givers.push(p)
         } else {
           receivers.push(p)

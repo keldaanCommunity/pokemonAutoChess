@@ -1,4 +1,9 @@
-import { EvolutionTime, getBaseAltForm, PkmsWithAltForms } from "../config"
+import {
+  BOARD_WIDTH,
+  EvolutionTime,
+  getBaseAltForm,
+  PkmsWithAltForms
+} from "../config"
 import { giveRandomEgg } from "../core/eggs"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import type Player from "../models/colyseus-models/player"
@@ -25,7 +30,7 @@ import type { Gift } from "../types/enum/GiftShop"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
-import { getFirstAvailablePositionInBench } from "../utils/board"
+import { getFirstAvailablePositionInBench, isOnBench } from "../utils/board"
 import { max } from "../utils/number"
 import {
   chance,
@@ -33,6 +38,7 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 
 const giftAmountOfItem =
   (amount: number, itemsSet: Item[]) => (toPlayer: Player) => {
@@ -275,4 +281,31 @@ export const GiftEffects: {
   [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
   [Item.SMALL_EXP_GIFT]: giftXP(8),
   [Item.LARGE_EXP_GIFT]: giftXP(24)
+}
+
+export const openGift = (gift: Gift, toPlayer: Player, fromPlayer: Player) => {
+  const benchSpace =
+    BOARD_WIDTH - schemaValues(toPlayer.board).filter(isOnBench).length
+  if (
+    [
+      Item.DITTO_GIFT,
+      Item.COMMON_GIFT,
+      Item.UNCOMMON_GIFT,
+      Item.RARE_GIFT,
+      Item.EPIC_GIFT,
+      Item.LEGENDARY_GIFT,
+      Item.UNIQUE_GIFT,
+      Item.LEGENDARY_GIFT
+    ].includes(gift) &&
+    benchSpace === 0
+  ) {
+    toPlayer.items.push(gift) // player will open gift when they can
+  } else {
+    const giftEffect = GiftEffects[gift]
+    if (Array.isArray(giftEffect)) {
+      giftEffect.forEach((effect) => effect(toPlayer, fromPlayer))
+    } else {
+      giftEffect(toPlayer, fromPlayer)
+    }
+  }
 }
