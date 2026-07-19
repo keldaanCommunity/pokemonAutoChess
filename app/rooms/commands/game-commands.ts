@@ -1582,20 +1582,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         chance(pveStage.shinyChance ?? 0)
     }
 
-    if ([14, 24].includes(this.state.stageLevel)) {
-      this.state.players.forEach((player: Player) => {
-        if (player.alive && !player.isBot) {
-          player.spawnWanderingPokemon({
-            pkm: Pkm.KECLEON_PURPLE,
-            shiny: false,
-            type: WandererType.DIALOG,
-            behavior: WandererBehavior.SPECTATE,
-            data: ""
-          })
-        }
-      })
-    }
-
     return commands
   }
 

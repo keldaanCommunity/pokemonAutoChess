@@ -494,7 +494,7 @@
 		"FLOATZEL": "Floatzel",
 		"MAWILE": "Mawile",
 		"KECLEON": "Kecleon",
-    "KECLEON_PURPLE": "Kecleon (Purple)",
+    	"KECLEON_PURPLE": "Kecleon (Purple)",
 		"CARBINK": "Carbink",
 		"DIANCIE": "Diancie",
 		"CHATOT": "Chatot",
@@ -4756,7 +4756,7 @@
 		"magnezone": "Listen, let the police do their job; as soon as I have more information, rest assured you will be the first to know.",
 		"xatu": "Let me open this treasure box for you...",
 		"lapras": "Ready to go? Then all aboard!",
-		"kecleon_preview": "The gift shop is coming up! Hold your gold and free your bench space, kec kec kec!",
+		"kecleon_preview": "Your partner sent you a gift, kec kec kec!",
 		"kecleon": "Kecleon"
 	},
 	"player_dialog": {

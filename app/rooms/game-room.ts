@@ -67,7 +67,7 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { Gifts } from "../types/enum/GiftShop"
+import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -83,6 +83,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
 import { TradeStatus } from "../types/enum/TradeStatus"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
@@ -1375,15 +1376,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
       if (isIn(Gifts, item)) {
-        const partner = this.state.players.get(player.doubleUpPartnerId)
-        if (!partner) return
-        const giftEffect = GiftEffects[item]
-        if (Array.isArray(giftEffect)) {
-          giftEffect.forEach((effect) => effect(partner, player))
-        } else {
-          giftEffect(partner, player)
-        }
-        player.giftsGiven.push(item)
+        this.pickGift(item, player)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
@@ -1503,6 +1496,30 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (player) player.rank = i + 1
       })
     })
+  }
+
+  pickGift(gift: Gift, player: Player) {
+    const partner = this.state.players.get(player.doubleUpPartnerId)
+    if (!partner || !partner.alive) return
+    player.giftsGiven.push(gift)
+
+    partner.spawnWanderingPokemon({
+      pkm: Pkm.KECLEON_PURPLE,
+      shiny: false,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE,
+      data: gift,
+      delay: 3000
+    })
+
+    setTimeout(() => {
+      const giftEffect = GiftEffects[gift]
+      if (Array.isArray(giftEffect)) {
+        giftEffect.forEach((effect) => effect(partner, player))
+      } else {
+        giftEffect(partner, player)
+      }
+    }, 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {

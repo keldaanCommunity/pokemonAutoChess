@@ -160,6 +160,27 @@ export default class WanderersManager {
       })
     }
 
+    if (
+      wanderer.pkm === Pkm.KECLEON_PURPLE &&
+      wanderer.data &&
+      this.scene.board
+    ) {
+      const group = this.scene.add.group()
+      this.scene.time.delayedCall(5000, () => {
+        sprite.emoteAnimation()
+        this.scene.board?.showRewards(
+          group,
+          wanderer.data.split(";") as Item[],
+          sprite.x,
+          sprite.y,
+          DEPTH.ITEM_FOUND
+        )
+      })
+      this.scene.time.delayedCall(8000, () => {
+        group.destroy(true, true)
+      })
+    }
+
     if (wanderer.pkm === Pkm.LAPRAS) {
       this.scene.time.delayedCall(9000, () => {
         sprite.moveManager.setSpeed(350)
