@@ -919,10 +919,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     let shouldRefetchEventLeaderboard = false
-    const eligibleToELO = true //TEMP
-    /*!this.state.noElo &&
+    const eligibleToELO =
+      !this.state.noElo &&
       (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
-      humans.length >= 2*/
+      humans.length >= 2
 
     const rank = player.rank
     const exp = ExpPlace[rank - 1]
