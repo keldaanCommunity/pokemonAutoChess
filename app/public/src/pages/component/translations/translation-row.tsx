@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import {
-  getDescriptionPlaceholderError,
+  getDescriptionError,
   resolveDescriptionPreview
 } from "../../utils/ability-description"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -31,11 +31,7 @@ export const TranslationRow = React.memo(function TranslationRow({
   const targetWrapRef = useRef<HTMLDivElement>(null)
   const enPreview = resolveDescriptionPreview(path, enValue)
   const targetPreview = resolveDescriptionPreview(path, targetValue)
-  const placeholderError = getDescriptionPlaceholderError(
-    path,
-    targetValue,
-    enValue
-  )
+  const descriptionError = getDescriptionError(path, targetValue, enValue)
 
   function handleFocus(field: "en" | "target") {
     const ref = field === "en" ? enWrapRef : targetWrapRef
@@ -82,16 +78,16 @@ export const TranslationRow = React.memo(function TranslationRow({
           </div>
         )}
         <textarea
-          className={`translation-target${placeholderError ? " placeholder-error" : ""}`}
+          className={`translation-target${descriptionError ? " placeholder-error" : ""}`}
           value={targetValue}
           rows={1}
           onChange={(e) => onEdit(path, e.currentTarget.value)}
           onFocus={() => handleFocus("target")}
           onBlur={() => setFocused(null)}
         />
-        {placeholderError && (
+        {descriptionError && (
           <span className="translation-placeholder-error">
-            {placeholderError}
+            {descriptionError}
           </span>
         )}
       </div>

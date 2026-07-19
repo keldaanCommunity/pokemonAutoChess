@@ -32,10 +32,10 @@ export function resolveDescriptionPreview(
   )
 }
 
-export function getDescriptionPlaceholderError(
+export function getDescriptionError(
   path: string,
   targetTemplate: string,
-  englishTemplate?: string
+  englishTemplate: string
 ): string | undefined {
   const abilityConfig = getConfigFromDescriptionPath(path)
   if (!abilityConfig || !targetTemplate) return undefined
@@ -53,12 +53,10 @@ export function getDescriptionPlaceholderError(
     return `Placeholders must match English: ${expected.map((name) => `{{${name}}}`).join(", ")}`
   }
 
-  if (englishTemplate) {
-    const expectedFormats = getDynamicValueFormats(englishTemplate)
-    const actualFormats = getDynamicValueFormats(targetTemplate)
-    if (expectedFormats.join("|") !== actualFormats.join("|")) {
-      return `Dynamic value formatting must match English (including SP/LK): ${expectedFormats.join(", ")}`
-    }
+  const expectedFormats = getDynamicValueFormats(englishTemplate)
+  const actualFormats = getDynamicValueFormats(targetTemplate)
+  if (expectedFormats.join("|") !== actualFormats.join("|")) {
+    return `Dynamic value formatting must match English (including SP/LK): ${expectedFormats.join(", ")}`
   }
 
   return undefined

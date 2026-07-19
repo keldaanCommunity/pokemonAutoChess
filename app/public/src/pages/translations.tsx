@@ -1,7 +1,5 @@
 ﻿import { useCallback, useEffect, useMemo, useState } from "react"
 import { useNavigate } from "react-router"
-import { AbilityConfigs } from "../../../config/game/abilities"
-import type { Ability } from "../../../types/enum/Ability"
 import { Language } from "../../../types/enum/Language"
 import { LanguageNames } from "../../dist/client/locales"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -17,7 +15,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
-import { getDescriptionPlaceholderError } from "./utils/ability-description"
+import { getDescriptionError } from "./utils/ability-description"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
@@ -39,23 +37,6 @@ function saveEdits(lang: Language, edits: Record<string, string>) {
 
 function clearEdits(lang: Language) {
   localStore.delete(storageKey(lang) as LocalStoreKeys)
-}
-
-function getAbilityDescriptionErrors(
-  candidate: TranslationMap,
-  english: TranslationMap
-): string[] {
-  return (Object.keys(AbilityConfigs) as Ability[]).flatMap((ability) => {
-    const path = `ability_description.${ability}`
-    const targetTemplate = getNestedValue(candidate, path)
-    const englishTemplate = getNestedValue(english, path)
-    const error = getDescriptionPlaceholderError(
-      path,
-      targetTemplate,
-      englishTemplate
-    )
-    return error ? [`${path}: ${error}`] : []
-  })
 }
 
 export default function TranslationsPage() {
@@ -225,9 +206,16 @@ export default function TranslationsPage() {
 
   const handleSubmitPR = useCallback(
     async (token: string) => {
-      if (!targetData || !enData) return
+      if (!targetData) return
       const merged = applyEditsToObject(targetData, edits)
-      const descriptionErrors = getAbilityDescriptionErrors(merged, enData)
+      const descriptionErrors = allLeaves.flatMap(({ path, enValue }) => {
+        const error = getDescriptionError(
+          path,
+          getNestedValue(merged, path),
+          enValue
+        )
+        return error ? [`${path}: ${error}`] : []
+      })
       if (descriptionErrors.length > 0) {
         setPrError(
           `Fix ability description placeholders and formatting before submitting:\n${descriptionErrors.join("\n")}`
@@ -253,7 +241,7 @@ export default function TranslationsPage() {
         setPrSubmitting(false)
       }
     },
-    [targetData, enData, edits, targetLang]
+    [targetData, edits, allLeaves, targetLang]
   )
 
   const handleDownload = useCallback(() => {
