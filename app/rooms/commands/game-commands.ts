@@ -824,7 +824,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (isIn(UnholdableItems, item) && !ConsumableItems.includes(item)) {
-      // Unholdable and non-consummable items should have zero interaction on any Pokémon
+      // Unholdable and non-consumable items should have zero interaction on any Pokémon
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
