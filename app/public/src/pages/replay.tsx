@@ -34,9 +34,10 @@ import {
 import { ReplayRoom } from "../game/replay-room"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { rooms } from "../network"
-import { usePreference } from "../preferences"
+import { usePreference, usePreferences } from "../preferences"
 import { leaveGame, setPlayer } from "../stores/GameStore"
 import { logIn } from "../stores/NetworkStore"
+import { Checkbox } from "./component/checkbox/checkbox"
 import PokemonPortrait from "./component/pokemon-portrait"
 import ReplayControls from "./component/replay/replay-controls"
 import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
@@ -596,6 +597,7 @@ function ReplayLibrary({
 }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const [preferences, setPreferences] = usePreferences()
   const [files, setFiles] = useState<ReplayFileInfo[] | null>(null) // null while still listing
   const [busy, setBusy] = useState(false) // a watch/download is in flight; disable row actions
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null) // roomId pending inline confirm
@@ -683,6 +685,12 @@ function ReplayLibrary({
           <div className="replay-overlay-title">
             {t("replay.library.title")}
           </div>
+          <Checkbox
+            isDark
+            checked={preferences.recordReplays}
+            onToggle={(checked) => setPreferences({ recordReplays: checked })}
+            label={t("options.record_replays")}
+          />
         </div>
 
         <div className="replay-landing-cols">

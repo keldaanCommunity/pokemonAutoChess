@@ -99,3 +99,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Add symbols to tier list maker gadget and change layout
 - Add /unholdable-items GET endpoint
 - Improved colorblind patterns on pokemon portraits in shop
+- New gadget: Recorder ; unlocked at level 10, allows you to record your games in the background and watch and save replays. Thanks to brobinett for that huge work.
+- Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
+- Tier List Maker gadget is now unlocked at level 25 instead of level 50
+- Sprite Tracker gadget  is now unlocked at level 50 instead of level 60

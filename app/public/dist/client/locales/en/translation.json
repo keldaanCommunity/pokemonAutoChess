@@ -4233,7 +4233,6 @@
 		"interface": "Interface",
 		"hotkeys": "Hotkeys",
 		"game_files": "Game Files",
-		"replays": "Replays",
 		"sfx_volume": "SFX Volume",
 		"play_music_in_background": "Play music in background",
 		"language": "Language",
@@ -4552,7 +4551,9 @@
 		"tier_list_maker": "Tier List Maker",
 		"tier_list_maker_desc": "Create and share your own tier lists",
 		"sprite_tracker": "Sprite Tracker",
-		"sprite_tracker_desc": "Track Pokémon available in SpriteCollab and compare with Pokémon Auto Chess"
+		"sprite_tracker_desc": "Track Pokémon available in SpriteCollab and compare with Pokémon Auto Chess",
+		"recorder": "Recorder",
+		"recorder_desc": "Record your games and watch replays"
 	},
 	"level_required": "Level required",
 	"map": {

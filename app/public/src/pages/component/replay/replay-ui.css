@@ -457,7 +457,7 @@
 .replay-landing-header {
   align-self: stretch;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 25em 1fr 25em;
   align-items: center;
   gap: 0.5em;
   margin-bottom: 0.6em;
@@ -685,4 +685,15 @@
   color: var(--color-fg-gold);
   font-size: 0.85em;
   line-height: 1.45;
+}
+
+@media (width <= 1280px) {
+  .replay-landing-header {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.6em;
+  }
 }
