@@ -623,7 +623,8 @@ export class KnowledgeThiefStrategy extends AbilityStrategy {
     } else super.process(pokemon, board, target, crit)
     if (pokemon.player && !pokemon.isGhostOpponent) {
       const xpGain = [1, 1, 1, 2, 3][pokemon.stars - 1] ?? 3
-      pokemon.player.addExperience(xpGain)
+      const xpActuallyGained = pokemon.player.addExperience(xpGain)
+      pokemon.addStack(xpActuallyGained)
     }
   }
 }

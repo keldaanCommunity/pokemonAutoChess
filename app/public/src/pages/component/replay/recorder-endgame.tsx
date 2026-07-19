@@ -6,7 +6,6 @@ import {
   getStoredReplayInfo
 } from "../../../game/recorder"
 import { useAppSelector } from "../../../hooks"
-import "./recorder-endgame.css"
 
 // "Download replay" button on the after-game screen; uses the game room the recorder retains (rooms.game is
 // cleared at game end), so the just-played match is still downloadable. gated on the stored frame count, shown only for a non-empty capture
@@ -35,7 +34,7 @@ export default function RecorderEndGame() {
   if (!room || !info || info.frames === 0) return null
 
   return (
-    <div className="recorder-endgame">
+    <span className="recorder-endgame">
       <button
         className="bubbly dark"
         onClick={() => {
@@ -51,6 +50,6 @@ export default function RecorderEndGame() {
           {t("replay.endgame.download_failed")}
         </p>
       )}
-    </div>
+    </span>
   )
 }

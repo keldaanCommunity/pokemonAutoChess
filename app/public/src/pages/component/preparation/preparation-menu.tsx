@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   BOTS_ENABLED,
@@ -56,8 +56,11 @@ export default function PreparationMenu() {
     (state) => state.preparation.ownerId === state.network.uid
   )
 
+  const isAdmin = user?.role === Role.ADMIN
+  const isModerator = user?.role === Role.MODERATOR
+
   const gameMode = useAppSelector((state) => state.preparation.gameMode)
-  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY
+  const hasBotsEnabled = gameMode === GameMode.CUSTOM_LOBBY || isAdmin
   const [botDifficulty, setBotDifficulty] = useState<BotDifficulty>(
     BotDifficulty.MEDIUM
   )
@@ -65,9 +68,6 @@ export default function PreparationMenu() {
   const isReady = users.find((user) => user.uid === uid)?.ready
   const nbUsersReady = users.filter((user) => user.ready).length
   const allUsersReady = users.every((user) => user.ready) && nbUsersReady > 1
-
-  const isAdmin = user?.role === Role.ADMIN
-  const isModerator = user?.role === Role.MODERATOR
 
   const nbExpectedPlayers = useAppSelector((state) =>
     state.preparation.whitelist && state.preparation.whitelist.length > 0
@@ -389,8 +389,8 @@ export default function PreparationMenu() {
                 }
               })
               return teams.map((team, teamIndex) => (
-                <>
-                  <p className="team-name">
+                <React.Fragment key={teamIndex}>
+                  <div className="team-name">
                     <div
                       className="team-color-indicator"
                       style={{
@@ -398,7 +398,7 @@ export default function PreparationMenu() {
                       }}
                     />
                     {t("team_name", { name: teamIndex + 1 })}
-                  </p>
+                  </div>
                   <div
                     key={team.map((u) => u.uid).join("-")}
                     className={`double-up-pair ${team.length === 2 ? "paired" : "unpaired"}`}
@@ -412,7 +412,7 @@ export default function PreparationMenu() {
                       />
                     ))}
                   </div>
-                </>
+                </React.Fragment>
               ))
             })()
           : users.map((u) => (

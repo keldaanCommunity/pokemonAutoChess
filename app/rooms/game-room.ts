@@ -4,6 +4,7 @@ import { type Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
+  BOARD_WIDTH,
   ExpPlace,
   getCurrentGameEvent,
   MAX_LOADING_TIME,
@@ -25,6 +26,7 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
+import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
@@ -80,6 +82,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
+import { TradeStatus } from "../types/enum/TradeStatus"
 import { GameEvent } from "../types/events"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
@@ -643,6 +646,24 @@ export default class GameRoom extends Room<{ state: GameState }> {
           this.dispatcher.dispatch(new OnDevCommand(), message)
         } catch (error) {
           logger.error("dev command error", message)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.TRADE_ACCEPT, (client, message: boolean) => {
+      if (!client.auth) return
+      const player = this.state.players.get(client.auth.uid)
+      if (player) {
+        const partner = this.state.players.get(player.doubleUpPartnerId)
+        player.tradeStatus =
+          message === true ? TradeStatus.ACCEPTED : TradeStatus.REFUSED
+        if (
+          player.tradeStatus === TradeStatus.ACCEPTED &&
+          partner?.tradeStatus === TradeStatus.ACCEPTED
+        ) {
+          this.tradePokemonWithPartner(player, partner)
+          player.tradeStatus = TradeStatus.PENDING
+          partner.tradeStatus = TradeStatus.PENDING
         }
       }
     })
@@ -1478,6 +1499,45 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (player) player.rank = i + 1
       })
     })
+  }
+
+  tradePokemonWithPartner(playerA: Player, playerB: Player) {
+    if (!playerA.alive || !playerB.alive) return
+
+    const pokemonToTradeA = schemaValues(playerA.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    const pokemonToTradeB = schemaValues(playerB.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    if (
+      !pokemonToTradeA ||
+      !pokemonToTradeB ||
+      !canBeTraded(pokemonToTradeA) ||
+      !canBeTraded(pokemonToTradeB)
+    )
+      return
+
+    // Switch Pokémon
+
+    playerA.board.delete(pokemonToTradeA.id)
+    playerA.board.set(pokemonToTradeB.id, pokemonToTradeB)
+    pokemonToTradeB.onAcquired(playerA)
+
+    playerB.board.delete(pokemonToTradeB.id)
+    playerB.board.set(pokemonToTradeA.id, pokemonToTradeA)
+    pokemonToTradeA.onAcquired(playerB)
+
+    this.checkEvolutionsAfterPokemonAcquired(playerA.id)
+    this.checkEvolutionsAfterPokemonAcquired(playerB.id)
+
+    this.broadcast(Transfer.TRADE_ACCEPT, [playerA.id, playerB.id])
+
+    // Update trading platform cooldown based on nb of items traded & pokemon rarity
+
+    const cooldown = computeTradeCooldown(pokemonToTradeA, pokemonToTradeB)
+    playerA.tradeCooldown = cooldown
+    playerB.tradeCooldown = cooldown
   }
 
   onRoomDeleted(roomId) {

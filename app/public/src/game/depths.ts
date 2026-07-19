@@ -47,6 +47,7 @@ export const DEPTH = {
   INDICATOR: 57,
 
   // 61-70: HUD / Popup
+  TRADE_CONTROLS: 60,
   DPS_METER: 61,
   SYNERGIES_CONTAINER: 62,
   PLAYER_ICON: 63,

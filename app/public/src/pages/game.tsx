@@ -622,6 +622,12 @@ export default function Game() {
           }
         )
 
+        room.onMessage(Transfer.TRADE_ACCEPT, (playerIds: string[]) => {
+          if (playerIds.includes(store.getState().game.playerIdSpectated)) {
+            getGameScene()?.board?.tradingPlatform?.showTradeAnimation()
+          }
+        })
+
         room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
           gameContainer.handleDragDropCancel(message)
         )
@@ -883,6 +889,7 @@ export default function Game() {
               getGameScene()?.input.keyboard?.removeAllListeners()
             }
           })
+
           $player.listen("experienceManager", (experienceManager) => {
             const $experienceManager = $(experienceManager)
             if (player.id === uid) {
@@ -917,9 +924,11 @@ export default function Game() {
               }
             })
           })
+
           $player.listen("loadingProgress", (value) => {
             dispatch(setLoadingProgress({ id: player.id, value: value }))
           })
+
           $player.listen("map", (newMap) => {
             if (player.id === store.getState().game.playerIdSpectated) {
               const gameScene = getGameScene()
@@ -984,7 +993,8 @@ export default function Game() {
             "cellBattery",
             "gameStats",
             "scarvesItems",
-            "fairyWands"
+            "fairyWands",
+            "tradeStatus"
           ] satisfies NonFunctionPropNames<IPlayer>[]
 
           fields.forEach((field) => {
@@ -1018,6 +1028,16 @@ export default function Game() {
           $player.listen("mulchCap", (value) => {
             dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
             getGameScene()?.board?.updateMulchCount()
+          })
+
+          $player.listen("tradeCooldown", (value) => {
+            const board = getGameScene()?.board
+            board?.tradingPlatform?.updateCooldown(value, board.mode)
+          })
+
+          $player.listen("tradeStatus", () => {
+            const board = getGameScene()?.board
+            setTimeout(() => board?.tradingPlatform?.updateTrade(board.mode), 1)
           })
 
           $player.wanderers.onAdd((wanderer: Wanderer) => {

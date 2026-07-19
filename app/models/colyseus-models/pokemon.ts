@@ -6575,7 +6575,7 @@ export class Enamorus extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
-  atk = 26
+  atk = 23
   speed = 59
   def = 6
   speDef = 6
@@ -7014,6 +7014,7 @@ export class Uxie extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
+  passive = Passive.UXIE
 }
 
 export class Mesprit extends Pokemon {

@@ -4,7 +4,6 @@ import { Synergy } from "./Synergy"
 import { Weather } from "./Weather"
 
 export enum Item {
-  PRISON_BOTTLE = "PRISON_BOTTLE",
   FOSSIL_STONE = "FOSSIL_STONE",
   TWISTED_SPOON = "TWISTED_SPOON",
   MYSTIC_WATER = "MYSTIC_WATER",
@@ -334,27 +333,26 @@ export enum Item {
   TERRA_CYMBAL = "TERRA_CYMBAL",
   SOOTHE_BELL = "SOOTHE_BELL",
   BALL = "BALL",
-  BERRY_BUNDLE = "BERRY_BUNDLE",
-  UNOWN_BUNDLE = "UNOWN_BUNDLE",
-  SWEETS_BUNDLE = "SWEETS_BUNDLE",
-  DITTO_BUNDLE = "DITTO_BUNDLE",
+  BERRIES_GIFT = "BERRIES_GIFT",
+  SWEETS_GIFT = "SWEETS_GIFT",
+  DITTO_GIFT = "DITTO_GIFT",
   TICKET_BUNDLE = "TICKET_BUNDLE",
   HATCH_BUNDLE = "HATCH_BUNDLE",
-  REGION_BUNDLE = "REGION_BUNDLE",
-  COOKING_BUNDLE = "COOKING_BUNDLE",
+  REGIONAL_TOUR = "REGIONAL_TOUR",
+  BANQUET = "BANQUET",
   GEMS_BUNDLE = "GEMS_BUNDLE",
   POTION = "POTION",
   DELUXE_BOX = "DELUXE_BOX",
-  TOOL_BUNDLE = "TOOL_BUNDLE",
-  EXP_BUNDLE = "EXP_BUNDLE",
-  EVOLVE_BUNDLE = "EVOLVE_BUNDLE",
-  COMMON_BUNDLE = "COMMON_BUNDLE",
-  UNCOMMON_BUNDLE = "UNCOMMON_BUNDLE",
-  RARE_BUNDLE = "RARE_BUNDLE",
-  EPIC_BUNDLE = "EPIC_BUNDLE",
-  ULTRA_BUNDLE = "ULTRA_BUNDLE",
-  UNIQUE_BUNDLE = "UNIQUE_BUNDLE",
-  LEGENDARY_BUNDLE = "LEGENDARY_BUNDLE"
+  TOOLBOX = "TOOLBOX",
+  EXP_GIFT = "EXP_GIFT",
+  STAR_GIFT = "STAR_GIFT",
+  COMMON_GIFT = "COMMON_GIFT",
+  UNCOMMON_GIFT = "UNCOMMON_GIFT",
+  RARE_GIFT = "RARE_GIFT",
+  EPIC_GIFT = "EPIC_GIFT",
+  ULTRA_GIFT = "ULTRA_GIFT",
+  UNIQUE_GIFT = "UNIQUE_GIFT",
+  LEGENDARY_GIFT = "LEGENDARY_GIFT"
 }
 
 export const MemoryDiscs = [
@@ -461,7 +459,6 @@ export const TownItems = [
 
 // should be excluded from carousels
 export const SpecialItems: Item[] = [
-  Item.PRISON_BOTTLE,
   ...TownItems,
   Item.COIN,
   Item.NUGGET,
@@ -941,12 +938,6 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
-// only these items for now, to avoid synergy item problems
-export const DoubleUpTradeableItems: Item[] = [
-  ...ItemComponentsNoScarf,
-  ...CraftableItemsNoScarves
-]
-
 export const Wands = [
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
@@ -1154,7 +1145,6 @@ export const Sweets = [
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
 export const UnholdableItems = [
-  Item.PRISON_BOTTLE,
   ...WeatherRocks,
   ...FishingRods,
   ...Wands,

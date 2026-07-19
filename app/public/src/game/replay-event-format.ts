@@ -31,10 +31,12 @@ export type ReplayEventArgs = {
 type TD = (key: string, opts?: Record<string, unknown>) => string
 const typedT = (t: TFunction): TD => t as unknown as TD
 
-export const pkmName = (t: TFunction, v: string): string => typedT(t)(`pkm.${v}`)
+export const pkmName = (t: TFunction, v: string): string =>
+  typedT(t)(`pkm.${v}`)
 const abilityName = (t: TFunction, v: string): string =>
   typedT(t)(`ability.${v}`)
-export const itemName = (t: TFunction, v: string): string => typedT(t)(`item.${v}`)
+export const itemName = (t: TFunction, v: string): string =>
+  typedT(t)(`item.${v}`)
 export const mapName = (t: TFunction, v: string): string =>
   typedT(t)(`map.${v}`, { defaultValue: prettyName(v) })
 export const synergyName = (t: TFunction, v: string): string =>
@@ -71,7 +73,7 @@ const STATUS_LOCALE_KEY: Record<string, Status> = {
   locked: Status.LOCKED,
   blinded: Status.BLINDED,
   armorReduction: Status.ARMOR_BREAK,
-  runeProtect: Status.RUNE_PROTECT,
+  runeProtect: Status.SAFEGUARD,
   charm: Status.CHARM,
   flinch: Status.FLINCH,
   electricField: Status.ELECTRIC_FIELD,
@@ -166,7 +168,9 @@ function formatReplayEventRow(
         ? typedT(t)(String(a.opponent))
         : String(a.opponent || "opponent")
       const opponent =
-        a.isPvE && a.shiny ? t(`${ROW_KEY}.shiny_opponent`, { opponent: opp }) : opp
+        a.isPvE && a.shiny
+          ? t(`${ROW_KEY}.shiny_opponent`, { opponent: opp })
+          : opp
       return a.result === "win"
         ? t(`${ROW_KEY}.round_win`, { opponent })
         : a.result === "loss"
@@ -292,7 +296,9 @@ function formatReplayEventRow(
     case "rule":
       return t(`${ROW_KEY}.rule`, { rule: ruleName(t, String(a.rule)) })
     case "weather":
-      return t(`${ROW_KEY}.weather`, { weather: weatherLabel(t, String(a.weather)) })
+      return t(`${ROW_KEY}.weather`, {
+        weather: weatherLabel(t, String(a.weather))
+      })
     case "status":
       return a.field === "poisonStacks"
         ? t(`${ROW_KEY}.status_poison`, {
@@ -347,11 +353,18 @@ export function formatMessageRow(
         }
         const skill = abilityName(t, String(o?.skill))
         if (info?.caster)
-          return t(`${ROW_KEY}.cast`, { caster: pkmName(t, info.caster), skill })
+          return t(`${ROW_KEY}.cast`, {
+            caster: pkmName(t, info.caster),
+            skill
+          })
         // no resolved caster: a caster-less / team-wide cast (e.g. TIDAL_WAVE's (0,0) sentinel) has no meaningful tile, so render the skill alone
         if (o?.positionX == null || (o.positionX === 0 && o.positionY === 0))
           return skill
-        return t(`${ROW_KEY}.cast_at`, { skill, x: o.positionX, y: o.positionY })
+        return t(`${ROW_KEY}.cast_at`, {
+          skill,
+          x: o.positionX,
+          y: o.positionY
+        })
       }
       case Transfer.POKEMON_DAMAGE: {
         const o = p as {
@@ -385,7 +398,11 @@ export function formatMessageRow(
           ? pkmName(t, info.target)
           : `(${o?.x},${o?.y})`
         return o?.type === HealType.SHIELD
-          ? t(`${ROW_KEY}.heal_shield`, { src, amount: o?.amount ?? "?", target })
+          ? t(`${ROW_KEY}.heal_shield`, {
+              src,
+              amount: o?.amount ?? "?",
+              target
+            })
           : t(`${ROW_KEY}.heal`, { src, amount: o?.amount ?? "?", target })
       }
       case Transfer.BOARD_EVENT: {
@@ -418,13 +435,15 @@ export function formatMessageRow(
           const parts = [t(`${ROW_KEY}.income_base`, { n: b.base })]
           if (b.interest)
             parts.push(t(`${ROW_KEY}.income_interest`, { n: b.interest }))
-          if (b.streak) parts.push(t(`${ROW_KEY}.income_streak`, { n: b.streak }))
+          if (b.streak)
+            parts.push(t(`${ROW_KEY}.income_streak`, { n: b.streak }))
           return t(`${ROW_KEY}.income`, { total, parts: parts.join(" + ") })
         }
         return t(`${ROW_KEY}.income_plain`, { total })
       }
       case Transfer.FINAL_RANK: {
-        const rank = typeof p === "number" ? p : (p as { value?: number })?.value
+        const rank =
+          typeof p === "number" ? p : (p as { value?: number })?.value
         return rank != null
           ? t(`${ROW_KEY}.placed`, { rank: getRankLabel(rank) })
           : ""
