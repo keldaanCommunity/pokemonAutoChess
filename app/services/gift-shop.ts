@@ -12,6 +12,9 @@ import {
   Dishes,
   type IPokemon,
   Item,
+  ItemComponentsNoFossilOrScarf,
+  NonSpecialBerries,
+  ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
@@ -223,10 +226,17 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
   toPlayer.items.push(Item.PICNIC_SET)
 }
 
+const giftXP = (amount: number) => (toPlayer: Player) => {
+  const xpActuallyGained = toPlayer.addExperience(24)
+  if (xpActuallyGained < amount) {
+    toPlayer.addMoney(amount - xpActuallyGained, true, null)
+  }
+}
+
 type GiftEffect = (toPlayer: Player, fromPlayer: Player) => void
 
 export const GiftEffects: {
-  [key in Gift]: GiftEffect
+  [key in Gift]: GiftEffect | GiftEffect[]
 } = {
   [Item.BERRIES_GIFT]: giftAmountOfItem(7, Berries),
   [Item.SWEETS_GIFT]: giftAmountOfItem(7, Sweets),
@@ -245,7 +255,16 @@ export const GiftEffects: {
   [Item.STAR_GIFT]: evolveRandomPokemonInBoard,
   [Item.GEMS_BUNDLE]: giftAmountOfItem(3, SynergyGems),
   [Item.POTION]: giftPotion,
-  [Item.DELUXE_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
+  [Item.FORAGE_BAG]: giftAmountOfItem(3, ItemComponentsNoFossilOrScarf),
+  [Item.COLLECTION_BOX]: [
+    giftAmountOfItem(1, [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE]),
+    giftAmountOfItem(1, [Item.SILK_SCARF]),
+    giftAmountOfItem(1, CraftableItemsNoScarves),
+    giftAmountOfItem(1, Tools),
+    giftAmountOfItem(2, NonSpecialBerries)
+  ],
+  [Item.PRETTY_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
+  [Item.DELUXE_BOX]: giftAmountOfItem(1, ShinyItems),
   [Item.TOOLBOX]: giftAmountOfItem(3, Tools),
   [Item.COMMON_GIFT]: giftRandomPokemonByRarity(Rarity.COMMON),
   [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
@@ -254,5 +273,6 @@ export const GiftEffects: {
   [Item.ULTRA_GIFT]: giftRandomPokemonByRarity(Rarity.ULTRA),
   [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
   [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
-  [Item.EXP_GIFT]: (player: Player) => player.addExperience(24)
+  [Item.SMALL_EXP_GIFT]: giftXP(8),
+  [Item.LARGE_EXP_GIFT]: giftXP(24)
 }

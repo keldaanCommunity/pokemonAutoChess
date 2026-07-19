@@ -1378,7 +1378,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
         const partner = this.state.players.get(player.doubleUpPartnerId)
         if (!partner) return
         const giftEffect = GiftEffects[item]
-        giftEffect(partner, player)
+        if (Array.isArray(giftEffect)) {
+          giftEffect.forEach((effect) => effect(partner, player))
+        } else {
+          giftEffect(partner, player)
+        }
         player.giftsGiven.push(item)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)

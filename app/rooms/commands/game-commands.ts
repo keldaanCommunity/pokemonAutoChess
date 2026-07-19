@@ -84,10 +84,11 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  FreeGifts,
   type Gift,
   GiftShopPrices,
-  PaidGifts
+  GiftsTier1,
+  GiftsTier2,
+  GiftsTier3
 } from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
@@ -1521,29 +1522,39 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.gameMode === GameMode.DOUBLE_UP &&
       GiftShopStages.includes(this.state.stageLevel)
     ) {
-      const firstGroup: Player[] = []
-      const secondGroup: Player[] = []
+      const givers: Player[] = []
+      const receivers: Player[] = []
       // Make groups by user id
       this.state.players.forEach((p) => {
-        if (p.id < p.doubleUpPartnerId) firstGroup.push(p)
-        else secondGroup.push(p)
+        const partner = this.state.players.get(p.doubleUpPartnerId)
+        if(!partner) return
+        if(p.giftsGiven.length < partner.giftsGiven.length){
+          givers.push(p)
+        } if(p.giftsGiven.length > partner.giftsGiven.length){
+          receivers.push(p)
+        } else if(p.life > partner.life){
+           givers.push(p)
+        } else if(p.life < partner.life){
+          receivers.push(p)
+        } else if(p.id < p.doubleUpPartnerId){
+          givers.push(p)
+        } else {
+          receivers.push(p)
+        }
       })
-      const partnersToPrompt =
-        this.state.stageLevel === GiftShopStages[0] ||
-        this.state.stageLevel === GiftShopStages[2]
-          ? firstGroup
-          : secondGroup
 
-      partnersToPrompt.forEach((p) => {
-        const giftChoices: Gift[] = []
-        giftChoices.push(
-          pickRandomIn(FreeGifts.filter((gift) => !p.giftsGiven.includes(gift)))
-        )
-        const paidOptions = pickNRandomIn(
-          PaidGifts.filter((gift) => !p.giftsGiven.includes(gift)),
-          2
-        )
-        paidOptions.forEach((op) => giftChoices.push(op))
+      givers.forEach((p) => {
+        const giftChoices: [Gift, Gift, Gift] = [
+          pickRandomIn(
+            GiftsTier1.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier2.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier3.filter((gift) => !p.giftsGiven.includes(gift))
+          )
+        ]
 
         p.choices.push(
           new PlayerChoice({
