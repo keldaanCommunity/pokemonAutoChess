@@ -1771,7 +1771,12 @@
 		"GREEDENT": "Greedent",
 		"SKWOVET": "Skwovet",
 		"EISCUE": "Eiscue (Cara Hielo)",
-		"BUG_NEST": "Nido de Bichos"
+		"BUG_NEST": "Nido de Bichos",
+		"KECLEON_PURPLE": "Kecleon (Violeta)",
+		"TATSUGIRI_CURLY": "Tatsugiri (Curvado)",
+		"TATSUGIRI_DROOPY": "Tatsugiri (Curvado)",
+		"TATSUGIRI_STRETCHY": "Tatsugiri (Recto)",
+		"SLITHER_WING": "Reptalada"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,160,SP] SHIELD a todos los aliados.",
@@ -2291,7 +2296,50 @@
 		"SUBSTITUTE": "Crea un sustituto en la ubicación del usuario con [25,25,25,50,SP]% del HP máximo del usuario como HP adicional. El usuario se mueve hacia una casilla libre cercana y toda la agresión es redireccionada al sustituto",
 		"NIGHT_DAZE": "Realiza [25,50,100,200,SP] al objetivo e inflige BLINDED por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz es destruido.\n",
 		"BITTER_MALICE": "Realiza [25,50,100,200,SP] SPECIAL al objetivo e inflige FATIGUE por [3,SP] segundos. Si el usuario está disfrazado de un aliado, esta habilidad también afecta a los enemigos ADJACENT al objetivo, y el disfraz del usuario es destruido.\n",
-		"COIL": "Atrapa al objetivo con su poderosa cola, infligiendo LOCKED y PARALYSIS por 3 segundos. El usuario también se incrementa su ATK y DEF por [3,5,10,20,SP]\n"
+		"COIL": "Atrapa al objetivo con su poderosa cola, infligiendo LOCKED y PARALYSIS por 3 segundos. El usuario también se incrementa su ATK y DEF por [3,5,10,20,SP]\n",
+		"MAGMA_STORM": "Una vorágine de fuego realiza [50,75,100,200,SP] SPECIAL antes de propagarse a enemigos ADJACENT hasta 5 veces, perdiendo 20% de poder por cada casilla que pasa.",
+		"CAVERNOUS_CHOMP": "Realiza [40,80,160,320,SP] SPECIAL al objetivo. Si el usuario derrota al objetivo con su habilidad se vuelve RAGE por [1,2,3] segundos.",
+		"POWER_WHIP": "Libera una gran liana hacia el objetivo, realizando [15,30,60,120,SP] + [30,SP]% de los HP actuales del usuario como SPECIAL.",
+		"RETURN": "Realiza [20,40,80,160,SP] al objetivo, luego gana 2 AP permanentemente.",
+		"DRILL_PECK": "Atraviesa al objetivo como un taladro, realizando [30,60,120,240,SP] SPECIAL e intercambiando posición. Si hay otro objetivo detrás en la misma dirección, repite la habilidad inmediatamente en el mismo.",
+		"FIRST_IMPRESSION": "Realiza [45,90,180,360,SP] SPECIAL e inflige FLINCH por 5 segundos. En el primer uso de la habilidad salta hacia atrás, invocando un BUG aleatorio [Common, Uncommon, Rare] de 1 STAR en su ubicación anterior.",
+		"TRIMMING_MOWER": "Corre hasta a 2 casillas para golpear a la mayor cantidad de enemigos posibles y se cura [30,45,60,120,SP] HP. La curación excesiva se vuelve SHIELD. Realiza [20,30,40,80,SP] a enemigos ADJACENT.",
+		"PLASMA_FLASH": "Lanza 4 destellos de plasma realizando [5,10,20,40,SP] SPECIAL cada uno. Gana +1 destello por uso.",
+		"GEAR_GRIND": "Lanza dos engranajes al objetivo, cada uno realiza [25,50,100,200,SP]% de la SPEED del usuario como SPECIAL.",
+		"STRANGE_STEAM": "Proyecta un vapor extraño alrededor del usuario, ganando una casilla por uso. Los aliados en la zona reciben FAIRY_FIELD y los enemigos en la zona tienen un [30,30,100,100,LK]% de probabilidad de volverse CONFUSION por [3,SP,ND=1] segundos. BOARD_EFFECT: Pokémons en el vapor realizan y reciben 20% más SPECIAL.",
+		"VOLT_SURGE": "El usuario se superarga a si mismo, ganando ELECTRIC_FIELD, 20 SPEED y [10,20,30,60,SP] HP máximo. Después de esto cada tercer ataque se encadena hasta por 4 enemigos cercanos, realizando [10,20,30,60,SP] SPECIAL por cada uno.",
+		"SUPERCELL_SLAM": "Salta y aterriza en medio del equipo enemigo, realizando [10,20,40,80,SP] SPECIAL a todos los Pokémon enemigos ADJACENT y ganando [10,20,40,80,SP] SHIELD.",
+		"HIGH_HORSEPOWER": "Atraviesa al enemigo, luego realiza [15,30,60,120,SP] SPECIAL a todos los enemigos ADJACENT. Si solo un enemigo es golpeado, realiza el doble de SPECIAL.",
+		"CITY_SHUTTLE": "Salta al aliado más cercano y lo monta a espaldas del usuario, luego corre hacia el enemigo más lejano alcanzable. Realiza [10,20,30,40,SP] SPECIAL + [100,SP]% del ATK del aliado montado a todos los Pokémon enemigos en el camino. Otorga [20,40,80,160,SP] SHIELD al usuario y al aliado llevado.",
+		"BULLET_PUNCH": "Realiza [20,30,40,80,SP] TRUE al objetivo, luego gana [20,30,40,80,SP] SPEED por 2 segundos.",
+		"EAR_DIG": "Realiza [30,60,120,240,SP] SPECIAL + [5,10,20,40,SP] por profundidad del agujero en el que se encuentra el objetivo. Si el objetivo no está en un agujero, cava uno debajo del mismo.",
+		"POWDER_SNOW": "Una neblina de nieve sopla hacia el objetivo, realizando [20,40,80,160] SPECIAL a todos los enemigos en una línea con [15,30,50,100,LK]% de probabilidad de  dejarlos FREEZE.",
+		"POWDER": "Libera una nube de polvo hacia el enemigo con la mayor SPEED dentro del rango. Los enemigos alcanzados por la nube reciben [10,20,30,50,SP] SPECIAL y ven su SPEED reducida por [10,20,30,50,SP] por 5 segundos.",
+		"LINGERING_AROMA": "Durante los próximos 5 segundos, todos los ataques cuerpo a cuerpo recibidos por el usuario hacen que el atacante reciba [10,20,30,60,SP] y pierda 5 PP.",
+		"RAGING_BULL": "Destruye barreras como PROTECT, $t(ability.REFLECT), $t(ability.MAGIC_BOUNCE) mientras inflige ARMOR_BREAK por 3 segundos. Luego realiza [20,40,80,160,SP] SPECIAL al objetivo.",
+		"ELECTRIFY": "Le otorga ELECTRIC_FIELD y todos los efectos de la sinergia ELECTRIC activa + [15,30,60,120,SP] SHIELD a tu Pokémon no ELECTRIC STRONGEST. Si ningún aliado es encontrado, utiliza la habilidad en si mismo.",
+		"HEADLONG_RUSH": "Corre hacia el enemigo más lejano, realizando [20,40,80,160,SP] SPECIAL. Todos los enemigos en el camino son empujados hacia el costado y reciben [10,20,30,60,SP] SPECIAL. El usuario pierde 1 DEF y 1 SPE_DEF por cada enemigo golpeado.",
+		"WAVE_SPLASH": "El usuario se envuelve en agua, ganando [20,20,20,50,SP]% de sus HP máximos como SHIELD, luego carga contra el objetivo con todo su cuerpo para infligir [20,20,20,50,SP]% de sus HP máximos como SPECIAL.",
+		"TWISTER": "Genera un torbellino, realizando [25,50,100,200,SP] SPECIAL a enemigos ADJACENT y los empuja a una ubicación aleatoria a [1,2,3,6,SP] casillas de distancia. Aliados FLYING ADJACENT despegan y FLY_AWAY.",
+		"FOCUS_PUNCH": "Concentra su energía en un solo puñetazo, corriendo hacia el objetivo después de un segundo, realizando [500,500,500,1000,SP] del ataque del usuario como SPECIAL y empujándolo hacia atrás. El usuario es eyectado del tablero si no colisiona con otra unidad.",
+		"HYPER_BEAM": "Concentra su energía por un segundo y lanza un poderoso rayo que realiza [65,130,250,500,SP] SPECIAL a todos los enemigos en una línea. El usuario se FATIGUE por 5 segundos.",
+		"SKILL_SWAP": "Copia la habilidad y los PP máximos del objetivo si no es INIMITABLE, luego la utiliza inmediatamente. La habilidad copiada persiste entre peleas y puede ser reseteada poniendo al usuario en el banco.",
+		"JET_PUNCH": "Realiza [100,100,100,150,300,SP]% de la SPEED del usuario como SPECIAL al objetivo.",
+		"BANEFUL_BUNKER": "Mofa a todos los enemigos ADJACENT y usa PROTECT por 2 segundos. Durante este tiempo, la unidades que golpean cuerpo a cuerpo al usuario reciben [10,20,30,50,SP] y se vuelven POISONNED por 3 segundos.",
+		"SHADOW_FORCE": "Se teletransporta hacia el enemigo más grande de Pokémon enemigos, realizando [30,45,60,120,SP] SPECIAL a enemigos ADJACENT, rompiendo barreras como PROTECT y reflejo, y se transforma en su forma origen.",
+		"SHADOW_CLAW": "Acuchilla a los enemigos enfrente del usuario, realizando [20,40,60,120,SP] SPECIAL, curandose HP por 25% del daño realizado. Si solo un enemigo es golpeado realiza [60,100,140,280,SP] SPECIAL.",
+		"GLACIAL_LANCE": "Corre hacia una casilla segura en la retaguardia y arroja una lanza de hielo hacia el enemigo más alejado. El primer enemigo alcanzado por la misma recibe [300,300,300,600,SP]% del ATK del usuario como SPECIAL, y los enemigos ADJACENT reciben la mitad del daño.",
+		"FEATHER_DANCE": "Vuela hacia el aliado más lejano, dispersando 10 plumas en el camino. Cada pluma otorga un incremento de estadísticas a aliados o una disminución a enemigos de forma aleatoria: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, o [10,SP] LUCK.",
+		"ORDER_UP": "Realiza [30,60,100,200,SP] SPECIAL al objetivo. Si un Tatsugiri fue tragado, gana las estadísticas provistas por el de nuevo. Si no hay ningún Tatsugiri en el tablero, uno aparece en tu banco, con una forma diferente cada ronda.",
+		"CEASELESS_EDGE": "Golpea a los 3 enemigos enfrente del usuario por [20,40,80,160,SP] SPECIAL, dejando púas debajo de ellos. Puede ser un golpe crítico por defecto. BOARD_EFFECT: las púas realizan 10 TRUE e infligen ARMOR_BREAK a los Pokémon que no sean FLYING o STEEL que caminen sobre ellas.",
+		"MOUNTAIN_GALE": "Arroja [1,3,5,10] trozos de hielo enormes aleatoriamente al objetivo y a enemigos ADJACENT, infligiendo FLINCH por 3 segundos y luego [40,SP] SPECIAL por proyectil. Si el usuario tiene a Bergmite en la espalda, también son arrojados por el mismo daño.",
+		"TWINEEDLE": "Realiza [25,50,80,160,SP] SPECIAL al objetivo dos veces. El primer golpe puede ser un crítico por defecto, y el segundo tiene [40,LK]% de probabilidad de aplicar POISONNED por 4 segundos.",
+		"ROCK_WRECKER": "Lanza una gran roca hacia el objetivo, infligiendo FLINCH por 2 segundos y luego [80,160,320,640,SP] SPECIAL. Luego el usuario se FATIGUE por 4 segundos.",
+		"SNORE": "Realiza [20,40,60,120,SP] SPECIAL a los 3 enemigos enfrente, causándoles FLINCH por 3 segundos.",
+		"STUFF_CHEEKS": "Si el usuario tiene alguna baya, come una de ellas y obtiene [100,SP]% del HP que cura la misma como SHIELD. Si no tiene una, busca y equipa una baya aleatoria que será conservada para batallas futuras si es posible.",
+		"SILK_TRAP": "El usuario hace una trampa de seda, ganando PROTECT por 1.5 segundos. Cualquier ataque cuerpo a cuerpo recibido reducirá la SPEED del atacante por [5,10,15,30,SP] e inflige PARALYSIS por [1.5,SP,ND=1] segundos.",
+		"SKITTER_SMACK": "Se escabulle detrás del objetivo para golpearlo, realizando [15,30,60,120,SP] SPECIAL. Esto disminuye el AP del objetivo en 20.",
+		"FLING": "Cuando arroja la pelota, todos los enemigos entre el usuario y el recibidor reciben [30,30,30,100,SP]% de la SPEED como SPECIAL. Si no tiene una BALL, salta hacia una esquina del tablero y obtiene una nueva BALL."
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
@@ -2799,7 +2847,48 @@
 		"SWITCHER_WAND": "Varita Intercambiadora",
 		"WHIRLWIND_WAND": "Varita de Remolino",
 		"TUNNEL_WAND": "Varita de Tunel",
-		"GOLD_MASK": "Máscara Dorada"
+		"GOLD_MASK": "Máscara Dorada",
+		"STAR_PIECE": "Trozo de Estrella",
+		"GRASS_GEM": "Gema Planta",
+		"ELECTRIC_GEM": "Gema Eléctrico",
+		"FIGHTING_GEM": "Gema Lucha",
+		"PSYCHIC_GEM": "Gema Psíquico",
+		"GROUND_GEM": "Gema Tierra",
+		"FIELD_GEM": "Gema Campo",
+		"MONSTER_GEM": "Gema Monstruo",
+		"HUMAN_GEM": "Gema Humano",
+		"AQUATIC_GEM": "Gema Acuático",
+		"FLORA_GEM": "Gema Flora",
+		"FAIRY_GEM": "Gema Hada",
+		"FOSSIL_GEM": "Gema Fósil",
+		"SOUND_GEM": "Gema Sonido",
+		"ARTIFICIAL_GEM": "Gema Artificial",
+		"LIGHT_GEM": "Gema Luz",
+		"WILD_GEM": "Gema Salvaje",
+		"AMORPHOUS_GEM": "Gema Amorfo",
+		"GOURMET_GEM": "Gema Gourmet",
+		"CELL_BATTERY": "Batería",
+		"MUSHROOMS": "Hongos",
+		"BIG_MUSHROOM": "Hongo grande",
+		"BALM_MUSHROOM": "Hongo Bálsamo",
+		"RICE": "Arroz",
+		"BERRIES": "Bayas",
+		"RECYCLE_TICKET": "Ticket de Reciclaje",
+		"FIELD_MEMORY": "Memoria Campo",
+		"DRAGON_MEMORY": "Memoria Dragón",
+		"FLORA_MEMORY": "Memoria Flora",
+		"MISSION_ORDER_BLUE": "",
+		"FRIEND_BOW": "Moño Amistad",
+		"BLACK_BELT": "Cinturón Negro",
+		"EXPLOSIVE_BAND": "Banda Explosiva",
+		"TWIST_BAND": "Banda Torcida",
+		"BIG_EATER_BELT": "Cinturón de gran comedor",
+		"LUCKY_RIBBON": "Cinta de suerte",
+		"COVER_BAND": "Banda Cobertura",
+		"EFFICIENT_BANDANNA": "Bandana Eficiente",
+		"NULLIFY_BANDANNA": "Pañuelo anulador",
+		"MACH_RIBBON": "Cinta Mach",
+		"WANTED_NOTICE": "Aviso de búsqueda"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3115,7 +3204,8 @@
 		"TATSUGIRI_CURLY": "Puede comandar a un Dondozo",
 		"TATSUGIRI_DROOPY": "Puede comandar a un Dondozo",
 		"TATSUGIRI_STRETCHY": "Puede comandar a un Dondozo",
-		"FIELD_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FIELD"
+		"FIELD_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FIELD",
+		"MUSHROOMS": "Un conjunto de hongos que pueden ser vendidos por GOLD cuando vuelves a la ciudad."
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3290,7 +3380,7 @@
 		"ILLUSION": "Copia la apariencia del aliado a su izquierda.",
 		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
 		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
-		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",		
+		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",
 		"CHILLING_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un relincho gélido que incrementa su ATK en 5"
 	},
 	"stat": {
@@ -3530,7 +3620,10 @@
 		"EXPLORER": "Explorador",
 		"SURVEY_CORPS": "Cuerpo de Exploración",
 		"POSTMAN": "Compañero de Rescate",
-		"RESCUE_TEAM_MEMBER": "Compañero de Rescate"
+		"RESCUE_TEAM_MEMBER": "Compañero de Rescate",
+		"LEGIONNAIRE": "Legionario ",
+		"POFFIN_MASTER": "Maestro del Poffin",
+		"GUILDMASTER": "Maestro del Gremio"
 	},
 	"title_description": {
 		"NOVICE": "Juega tu primera partida",
@@ -3618,7 +3711,10 @@
 		"VICTORIOUS": "Completa la carrera de la Calle Victoria en primer lugar",
 		"MOLE": "Excava completamente todo tu tablero",
 		"BLOSSOMED": "Consigue 5 macetas Pokémon totalmente evolucionadas",
-		"AQUARIOPHILE": "Ten a $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) y a $t(pkm.BASCULIN_WHITE) en el mismo equipo"
+		"AQUARIOPHILE": "Ten a $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) y a $t(pkm.BASCULIN_WHITE) en el mismo equipo",
+		"POFFIN_MASTER": "Cocina un POFFIN con 3 bayas doradas diferentes en él.",
+		"TOP_GUN": "Llegar a Mach 10 con un MACH_RIBBON.",
+		"SCOUT": "Equipa a tu equipo con por lo menos 5 objetos hechos con SILK_SCARF."
 	},
 	"weather": {
 		"NEUTRAL": "Clima tranquilo",
@@ -4302,7 +4398,11 @@
 	"npc_dialog": {
 		"welcome": "¡Bienvenido!",
 		"tell_price": "¡{{price}} GOLD cada uno!",
-		"thank_you": "¡GRACIAS!"
+		"thank_you": "¡GRACIAS!",
+		"lapras": "Listo para ir? Entonces todos a bordo!",
+		"magnemite": "Has visto al fugitivo?",
+		"magnezone": "Escucha, deja que la policía haga su trabajo, apenas tenga más información dejaré que seas el primero en saber.",
+		"xatu": "Permiteme abrir esta caja del tesoro para tí..."
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "¡Todos estan aquí!",
@@ -4583,7 +4683,7 @@
 		}
 	},
 	"errors": {
-    "title": "Error",
+		"title": "Error",
 		"USER_INACTIVE": "Fuiste expulsado por inactividad para ahorrar recursos del servidor",
 		"USER_KICKED": "Fuiste expulsado de esta sala",
 		"USER_BANNED": "Tu cuenta fue baneada",
@@ -4619,7 +4719,7 @@
 		"hard": "Difícil"
 	},
 	"technical_terms": {
-    "title": "Términos Técnicos",
+		"title": "Términos Técnicos",
 		"STRONGEST": "más fuerte",
 		"ADJACENT": "adyacente",
 		"ADJACENT_IN_THE_SAME_ROW": "adyacentes en la misma fila",
@@ -4790,5 +4890,18 @@
 		"delete_row": "Eliminar fila",
 		"symbols": "Símbolos",
 		"title": "Mi nueva tier list"
+	},
+	"theme": {
+		"default": "Clásico",
+		"super": "Super",
+		"autumn": "Otoño",
+		"lilac": "Lila",
+		"rainbow": "Picos Arcoíris",
+		"umbra": "Umbría",
+		"unown": "Negro Unown",
+		"zengarden": "Jardín Zen",
+		"redsea": "Mar Rojo",
+		"deerling": "Deerling",
+		"origin": "Origen"
 	}
 }
