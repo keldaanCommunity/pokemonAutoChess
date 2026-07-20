@@ -582,7 +582,8 @@
 		"NIGHT_DAZE": "Explonuit",
 		"COIL": "Enroulement",
 		"SUBSTITUTE": "Clonage",
-		"FLING": "Dégommage"
+		"FLING": "Dégommage",
+		"SWARM": "Appel de l'Essaim"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1774,7 +1775,8 @@
 		"SPIDOPS": "Filentrappe",
 		"SLITHER_WING": "Rampe-Ailes",
 		"BUG_NEST": "Nids d’insectes",
-		"PASSIMIAN": "Quartermac"
+		"PASSIMIAN": "Quartermac",
+		"KECLEON_PURPLE": "Kecleon (Violet)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,160,SP] SHIELD à tous les alliés.",
@@ -2330,7 +2332,13 @@
 		"SNORE": "Inflige [20,40,60,120,SP] SPECIAL à trois cibles en face du lanceur, leur infligeant FLINCH pendant 3 secondes.",
 		"STUFF_CHEEKS": "Si l'utilisateur tient une baie, il en mange une et gagne instantanément [100,SP]% des HP soignés par cette dernière en SHIELD à la place. Sinon, ramasse et s'équipe d'une nouvelle baie qu'il gardera pour de futurs combats si possible.",
 		"SILK_TRAP": "L'utilisateur tisse un piège de fil permettant à l'utilisateur de gagner PROTECT pendant 1.5 secondes. Toute attaque reçue au corps-à-corps pendant ce temps diminuera la vitesse de l'attaquant de [5,10,15,30,SP] et lui infligera PARALYSIS pendant [1.5,SP,ND=1] secondes.",
-		"SKITTER_SMACK": "Rampe derrière la cible et la frappe, infligeant [15,30,60,120,SP]. Cela diminue également la AP de la cible de 20."
+		"SKITTER_SMACK": "Rampe derrière la cible et la frappe, infligeant [15,30,60,120,SP]. Cela diminue également la AP de la cible de 20.",
+		"SUBSTITUTE": "Fait apparaître un leurre à l'emplacement du lanceur avec [25,25,25,50,SP]% des HP max du lanceur en HP bonus. Le lanceur se déplace vers une case libre à proximité et le leurre est ciblé à la place.",
+		"NIGHT_DAZE": "Inflige [25,50,100,200,SP] SPECIAL à la cible et BLINDED pendant [3,SP] secondes. Si le lanceur est déguisé, la capacité affecte aussi les ennemis ADJACENT à la cible, puis le lanceur perd son déguisement.",
+		"BITTER_MALICE": "Inflige [25,50,100,200,SP] SPECIAL à la cible et FATIGUE pendant [3,SP] secondes. Si le lanceur est déguisé, la capacité affecte aussi les ennemis ADJACENT à la cible, puis le lanceur perd son déguisement.",
+		"COIL": "Ligotte la cible avec sa queue, infligeant LOCKED et PARALYSIS pendant 3 secondes. Le lanceur augmente également son ATK et sa DEF de [3,5,10,20,SP]",
+		"SWARM": "Une copie d'un Pokémon BUG sort du nid pour rejoindre votre banc. La rareté du Pokémon augmente à chaque fois que cela se produit.",
+		"FLING": "Lors du lancer de BALL, tous les ennemis entre le lanceur et le receveur reçoivent [30,30,30,100,SP]% de la SPEED du lanceur en SPECIAL. S'il n'a pas la balle, le lanceur saute dans un coin du terrain et obtient une nouvelle BALL."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2892,7 +2900,18 @@
 		"ROCK_HORN": "Cor de Roche",
 		"SKY_MELODICA": "Aéromélodica",
 		"TERRA_CYMBAL": "Terracymbale",
-		"SOOTHE_BELL": "Grelot Zen"
+		"SOOTHE_BELL": "Grelot Zen",
+		"GOLD_MASK": "Masque d'Or",
+		"BALL": "Balle",
+		"POTION": "Potion",
+		"FORAGE_BAG": "Sac de cueillette",
+		"COLLECTION_BOX": "Boîte de collecte",
+		"PRETTY_BOX": "Coffre élégant",
+		"DELUXE_BOX": "Coffre Luxe",
+		"BERRIES_GIFT": "Baies",
+		"SWEETS_GIFT": "Bonbons",
+		"DITTO_GIFT": "Cadeau Métamorph",
+		"GEMS_BUNDLE": "Gemmes"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
