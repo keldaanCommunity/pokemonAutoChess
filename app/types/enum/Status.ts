@@ -16,7 +16,7 @@ export enum Status {
   PARALYSIS = "PARALYSIS",
   POKERUS = "POKERUS",
   ARMOR_BREAK = "ARMOR_BREAK",
-  RUNE_PROTECT = "RUNE_PROTECT",
+  SAFEGUARD = "SAFEGUARD",
   CURSE = "CURSE",
   ELECTRIC_FIELD = "ELECTRIC_FIELD",
   PSYCHIC_FIELD = "PSYCHIC_FIELD",
@@ -33,7 +33,7 @@ export enum Status {
 export const PositiveStatuses = [
   Status.POKERUS,
   Status.RESURRECTION,
-  Status.RUNE_PROTECT,
+  Status.SAFEGUARD,
   Status.PROTECT,
   Status.ELECTRIC_FIELD,
   Status.PSYCHIC_FIELD,
@@ -44,3 +44,32 @@ export const PositiveStatuses = [
   Status.REFLECT,
   Status.RAGE
 ]
+
+// some statuses are technically implemented as such but not documented in wiki or mentionned in abilities descriptions
+export const DocumentedStatuses = [
+  Status.BURN,
+  Status.POISONNED,
+  Status.PARALYSIS,
+  Status.FREEZE,
+  Status.SLEEP,
+  Status.CONFUSION,
+  Status.ARMOR_BREAK,
+  Status.FATIGUE,
+  Status.SILENCE,
+  Status.CURSE,
+  Status.WOUND,
+  Status.FLINCH,
+  Status.BLINDED,
+  Status.LOCKED,
+  Status.CHARM,
+  Status.POSSESSED,
+  Status.PROTECT,
+  Status.RESURRECTION,
+  Status.SAFEGUARD,
+  Status.RAGE,
+  Status.POKERUS,
+  Status.ELECTRIC_FIELD,
+  Status.FAIRY_FIELD,
+  Status.GRASS_FIELD,
+  Status.PSYCHIC_FIELD
+] satisfies Status[]

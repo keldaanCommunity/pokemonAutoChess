@@ -1,5 +1,6 @@
 export const CRON_ELO_DECAY_DELAY = 86400 * 1000 * 20 // 20 days
 export const ELO_DECAY_LOST_PER_DAY = 5
+export const ELO_DECAY_NB_GAMES_REQUIRED = 3
 export const CRON_ELO_DECAY_MINIMUM_ELO = 1100
 export const CRON_HISTORY_CLEANUP_DELAY = 86400 * 1000 * 30 // 30 days
 

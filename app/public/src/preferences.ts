@@ -16,6 +16,7 @@ export type Keybindings = {
   board_return: string
   wiki: string
   team_planner: string
+  meta_report: string
 }
 export interface IPreferencesState {
   musicVolume: number
@@ -41,7 +42,12 @@ export interface IPreferencesState {
   renderer: number
   antialiasing: boolean
   colorblindMode: boolean
+  recordReplays: boolean
+  keepReplays: number
+  theme: string
 }
+
+export type PreferenceKey = keyof IPreferencesState
 
 const defaultPreferences: IPreferencesState = {
   musicVolume: 30,
@@ -54,7 +60,7 @@ const defaultPreferences: IPreferencesState = {
   showDetailsOnHover: false,
   showDamageNumbers: true,
   showEvolutions: true,
-  showAltForms: false,
+  showAltForms: true,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
@@ -66,6 +72,9 @@ const defaultPreferences: IPreferencesState = {
   renderer: Phaser.AUTO,
   antialiasing: true,
   colorblindMode: false,
+  recordReplays: true,
+  keepReplays: 5,
+  theme: "default",
   keybindings: {
     sell: "E",
     buy_xp: "F",
@@ -78,6 +87,7 @@ const defaultPreferences: IPreferencesState = {
     next_player: "PAGE_DOWN",
     board_return: "HOME",
     wiki: "W",
+    meta_report: "M",
     team_planner: "T"
   }
 }
@@ -148,6 +158,22 @@ export function subscribeToPreferences(fn: Subscription, runInitially = false) {
   subscriptions.push(fn)
   if (runInitially) fn(preferences)
   return unsubscribeToPreferences.bind(undefined, fn)
+}
+
+export function subscribeToPreference<T extends keyof IPreferencesState>(
+  key: T,
+  fn: (newValue: IPreferencesState[T]) => void,
+  runInitially = false
+) {
+  let previousValue = preferences[key]
+  const subscription: Subscription = (newPreferences) => {
+    if (newPreferences[key] === previousValue) return
+    previousValue = newPreferences[key]
+    fn(newPreferences[key])
+  }
+  subscriptions.push(subscription)
+  if (runInitially) fn(preferences[key])
+  return unsubscribeToPreferences.bind(undefined, subscription)
 }
 
 export function unsubscribeToPreferences(fn: Subscription) {

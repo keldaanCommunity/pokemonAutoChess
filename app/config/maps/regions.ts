@@ -1,6 +1,7 @@
 import { DungeonMusic, DungeonPMDO } from "../../types/enum/Dungeon"
-import { Dish, Item } from "../../types/enum/Item"
+import { type Dish, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
+import { getMusicAlt } from "../game/music"
 
 export interface RegionDetail {
   synergies: Synergy[]
@@ -770,7 +771,7 @@ export const RegionDetails: {
   },
   town: {
     synergies: [],
-    music: DungeonMusic.TREASURE_TOWN_STAGE_0,
+    music: getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0),
     regionalSpeciality: Item.NUTRITIOUS_EGG
   }
 }

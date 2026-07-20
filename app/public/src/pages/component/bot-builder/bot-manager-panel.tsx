@@ -1,11 +1,11 @@
 import firebase from "firebase/compat/app"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List } from "react-window"
-import { IBotLight } from "../../../../../models/mongo-models/bot-v2"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import type { IBotLight } from "../../../models/bot-v2"
 import { authenticateUser } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
@@ -276,7 +276,6 @@ function BotsList(props: {
                     rowComponent={BotRow}
                     rowProps={{
                       filteredBots,
-                      t,
                       navigate,
                       onApprove: approveBot,
                       onDelete: deleteBot
@@ -294,7 +293,6 @@ function BotsList(props: {
 
 type BotRowData = {
   filteredBots: IBotLight[]
-  t: (key: string) => string
   navigate: (path: string) => void
   onApprove: (botId: string, approved: boolean) => Promise<void>
   onDelete: (bot: IBotLight) => Promise<void>
@@ -304,7 +302,6 @@ function BotRow({
   index,
   style,
   filteredBots,
-  t,
   navigate,
   onApprove,
   onDelete
@@ -313,6 +310,7 @@ function BotRow({
   index: number
   style: React.CSSProperties
 } & BotRowData): React.ReactElement | null {
+  const { t } = useTranslation()
   const b = filteredBots[index]
   return (
     <div
@@ -328,9 +326,9 @@ function BotRow({
       <span style={{ color: "#999", fontSize: "80%" }}>{b.id}</span>
       <span>
         {b.approved ? (
-          <span style={{ color: "lime" }}>{t("yes")}</span>
+          <span style={{ color: "var(--color-fg-positive)" }}>{t("yes")}</span>
         ) : (
-          <span style={{ color: "red" }}>{t("no")}</span>
+          <span style={{ color: "var(--color-fg-negative)" }}>{t("no")}</span>
         )}
       </span>
       <span>

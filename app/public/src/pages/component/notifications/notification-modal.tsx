@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { INotification } from "../../../../../types/notifications"
+import { GADGETS, type GadgetName } from "../../../../../config/game/gadgets"
+import type { INotification } from "../../../../../types/notifications"
 import { getRankLabel } from "../../../../../types/strings/Strings"
 import { Modal } from "../modal/modal"
 import "./notification-modal.css"
+import type { Theme } from "../../../../../config/game/theme"
+import type { Title } from "../../../../../types"
+import type { EloRank } from "../../../../../types/enum/EloRank"
+import type { ExpeditionType } from "../../../../../types/enum/Expedition"
+import { cc } from "../../utils/jsx"
 
 interface NotificationModalProps {
   notifications: INotification[]
@@ -53,6 +59,10 @@ export function NotificationModal({
     switch (notification.type) {
       case "new_title":
         return t("notification.new_title_title")
+      case "new_gadget":
+        return t("notification.new_gadget_title")
+      case "new_theme":
+        return t("notification.new_theme_title")
       case "elo_rank_change":
         return t("notification.elo_rank_change_title")
       case "victory_road_finished":
@@ -67,8 +77,10 @@ export function NotificationModal({
         }
         return t("notification.tournament_finished_title")
       case "level_up":
-      default:
         return t("notification.level_up_title")
+      case "info":
+      default:
+        return t("notification.info_title")
     }
   }
 
@@ -80,12 +92,21 @@ export function NotificationModal({
         })
       case "new_title":
         return t("notification.new_title_message", {
-          title: t(`title.${notification.message}`),
-          description: t(`title_description.${notification.message}`)
+          title: t(`title.${notification.message as Title}`),
+          description: t(`title_description.${notification.message as Title}`)
+        })
+      case "new_gadget":
+        return t("notification.new_gadget_message", {
+          gadget: t(`gadget.${notification.message as GadgetName}`),
+          description: t(`gadget.${notification.message as GadgetName}_desc`)
+        })
+      case "new_theme":
+        return t("notification.new_theme_message", {
+          theme: t(`theme.${notification.message as Theme}`)
         })
       case "elo_rank_change":
         return t("notification.elo_rank_change_message", {
-          rank: t(`elorank.${notification.message}`)
+          rank: t(`elorank.${notification.message as EloRank}`)
         })
       case "victory_road_finished":
         return t("notification.victory_road_finished_message", {
@@ -94,7 +115,7 @@ export function NotificationModal({
       case "expedition_completed": {
         const [expeditionType, rank, points] = notification.message.split("|")
         return t("notification.expedition_completed_message", {
-          expedition: t(`expeditions.${expeditionType}`),
+          expedition: t(`expeditions.${expeditionType as ExpeditionType}`),
           rank,
           points
         })
@@ -110,15 +131,20 @@ export function NotificationModal({
         return t("notification.tournament_finished_message", {
           place: getRankLabel(Number(notification.message))
         })
+      case "info":
       default:
         return notification.message
     }
   }
 
-  const getIllustrationSrc = (notification: INotification) => {
+  const getIllustrationSrc = (notification: INotification): string | null => {
     switch (notification.type) {
       case "new_title":
         return `/assets/titles/${notification.message}.svg`
+      case "new_gadget":
+        return `/assets/ui/${GADGETS[notification.message as keyof typeof GADGETS].icon}.svg`
+      case "new_theme":
+        return `/assets/ui/palette.svg`
       case "elo_rank_change":
         return `/assets/ranks/${notification.message}.svg`
       case "victory_road_finished":
@@ -135,20 +161,24 @@ export function NotificationModal({
         }
         return `/assets/notifications/tournament_finish.svg`
       case "level_up":
-      default:
         return "/assets/ui/booster.png"
+      case "info":
+      default:
+        return null
     }
   }
 
+  const illustration = getIllustrationSrc(currentNotification)
+
   return (
     <Modal
-      className="notification-modal"
+      className={cc("notification-modal", currentNotification.type)}
       show={true}
       onClose={handleClose}
       header={getNotificationTitle(currentNotification)}
       body={
         <>
-          <img src={getIllustrationSrc(currentNotification)} alt="" />
+          {illustration != null && <img src={illustration} alt="" />}
           <p>{getNotificationMessage(currentNotification)}</p>
         </>
       }

@@ -6,17 +6,18 @@ import {
   PortalCarouselStages,
   TownEncountersByStage
 } from "../../../../../config"
+import { getAdditionalsTier1 } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
-import { PVEStages } from "../../../../../models/pve-stages"
-import { getAdditionalsTier1 } from "../../../../../models/shop"
+import { type PVEStage, PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
 import {
   CraftableItemsNoScarves,
-  Item,
+  type Item,
   ItemComponentsNoScarf
 } from "../../../../../types/enum/Item"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { entries } from "../../../../../utils/object"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -29,7 +30,7 @@ type StageInfo = {
   icon: string
   title?: string
   type: "pve" | "carousel" | "additional" | "portal" | "battle"
-  stageData?: any
+  stageData?: PVEStage
 }
 
 export default function WikiStages() {
@@ -60,11 +61,11 @@ export default function WikiStages() {
           icon: "/assets/ui/mythical.svg",
           title:
             level === 0
-              ? t("starter_pick")
+              ? t("wiki.stages.starter_pick")
               : level === 10
                 ? t("unique_pick")
                 : level === 20
-                  ? t("legendary_pick")
+                  ? t("wiki.stages.legendary_pick")
                   : undefined,
           type: "portal"
         })
@@ -99,7 +100,7 @@ export default function WikiStages() {
           type: "pve",
           stageData: pveStage
         })
-      } else {
+      } else if (level > 0) {
         // Regular battle stage
         stages.push({
           level,
@@ -255,16 +256,16 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
       {stageInfo.type === "pve" && stageInfo.stageData && (
         <div className="pve-stage-details">
           <div className="stage-board">
-            <h4>{t("enemy_team")}:</h4>
+            <h4>{t("wiki.stages.enemy_team")}:</h4>
             <table>
               <thead>
                 <tr>
-                  <th>{t("pokemon")}</th>
+                  <th>{t("wiki.stages.pokemon")}</th>
                   {stageInfo.stageData.marowakItems && (
-                    <th>{t("marowak_items")}</th>
+                    <th>{t("wiki.stages.marowak_items")}</th>
                   )}
                   {stageInfo.stageData.statBoosts && (
-                    <th>{t("stat_boosts")}</th>
+                    <th>{t("wiki.stages.stat_boosts")}</th>
                   )}
                 </tr>
               </thead>
@@ -275,9 +276,9 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
                       {pokemonDetail(pkm)}
                       <span>{t(`pkm.${pkm}`)}</span>
                     </td>
-                    {stageInfo.stageData.marowakItems && (
+                    {stageInfo.stageData!.marowakItems && (
                       <td className="items-cell">
-                        {stageInfo.stageData.marowakItems[index]?.map(
+                        {stageInfo.stageData!.marowakItems[index]?.map(
                           (item) => (
                             <React.Fragment key={item}>
                               {itemDetail(item)}
@@ -286,9 +287,9 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
                         )}
                       </td>
                     )}
-                    {stageInfo.stageData.statBoosts && (
+                    {stageInfo.stageData!.statBoosts && (
                       <td className="boosts-cell">
-                        {Object.entries(stageInfo.stageData.statBoosts).map(
+                        {entries(stageInfo.stageData!.statBoosts).map(
                           ([stat, boost]) => (
                             <div
                               key={stat}
@@ -313,7 +314,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
 
           {stageInfo.stageData.rewards && (
             <div className="stage-rewards">
-              <h4>{t("rewards")}</h4>
+              <h4>{t("wiki.stages.rewards")}</h4>
               <ul>
                 {stageInfo.stageData.rewards.map((item) => (
                   <li key={item}>{itemDetail(item)}</li>
@@ -325,17 +326,29 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
           {stageInfo.stageData.shinyChance && (
             <div className="stage-shiny">
               <h4>
-                {t("shiny_chance")}:{" "}
+                {t("wiki.stages.shiny_chance")}:{" "}
                 <span>
                   {(stageInfo.stageData.shinyChance * 100).toFixed(2)}%
                 </span>
               </h4>
               {stageInfo.level === 1 ? (
-                <p>{addIconsToDescription(t("shiny_magikarp_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_magikarp_description")
+                  )}
+                </p>
               ) : stageInfo.level === 9 ? (
-                <p>{addIconsToDescription(t("shiny_gyarados_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_gyarados_description")
+                  )}
+                </p>
               ) : (
-                <p>{addIconsToDescription(t("shiny_pve_description"))}</p>
+                <p>
+                  {addIconsToDescription(
+                    t("wiki.stages.shiny_pve_description")
+                  )}
+                </p>
               )}
             </div>
           )}
@@ -344,9 +357,9 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
 
       {stageInfo.type === "carousel" && (
         <div className="carousel-stage-details">
-          <p>{t("carousel_description")}</p>
+          <p>{t("wiki.stages.carousel_description")}</p>
 
-          <h4>{t("item_pool")}</h4>
+          <h4>{t("wiki.stages.item_pool")}</h4>
           <div className="stage-rewards">
             <ul className="">
               {(stageInfo.level >= 20
@@ -358,7 +371,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
             </ul>
           </div>
 
-          <h4>{t("town_encounters")}</h4>
+          <h4>{t("wiki.stages.town_encounters")}</h4>
           <div className="town-encounters">
             {TownEncountersByStage[stageInfo.level] && (
               <ul>
@@ -378,15 +391,15 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
 
       {stageInfo.type === "portal" && (
         <div className="portal-stage-details">
-          <p>{t("portal_description_1")}</p>
-          <p>{t("portal_description_2")}</p>
-          <p>{t("portal_description_3")}</p>
+          <p>{t("wiki.stages.portal_description_1")}</p>
+          <p>{t("wiki.stages.portal_description_2")}</p>
+          <p>{t("wiki.stages.portal_description_3")}</p>
         </div>
       )}
 
       {stageInfo.type === "additional" && (
         <div className="additional-stage-details">
-          <p>{t("additional_description")}</p>
+          <p>{t("wiki.stages.additional_description")}</p>
           <h4>{t("additional_picks")}</h4>
           <ul>
             {getAdditionalsTier1(
@@ -406,7 +419,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
 
       {stageInfo.type === "battle" && (
         <div className="battle-stage-details">
-          <p>{t("battle_description")}</p>
+          <p>{t("wiki.stages.battle_description")}</p>
         </div>
       )}
 

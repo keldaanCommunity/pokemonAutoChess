@@ -1,5 +1,4 @@
-import { FlowerPot } from "../../core/flower-pots"
-import { IPlayer } from "../../types"
+import { FlowerPot, type IPlayer } from "../../types"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"
@@ -396,7 +395,7 @@ export const PkmAltFormsByPkm = {
   [Pkm.BASCULEGION_MALE]: [Pkm.BASCULEGION_FEMALE],
   [Pkm.DARMANITAN]: [Pkm.DARMANITAN_ZEN],
   [Pkm.GALARIAN_DARMANITAN]: [Pkm.GALARIAN_DARMANITAN_ZEN],
-  [Pkm.MAUSHOLD_FOUR]: [Pkm.MAUSHOLD_THREE],
+  [Pkm.MAUSHOLD_THREE]: [Pkm.MAUSHOLD_FOUR],
   [Pkm.HOOPA]: [Pkm.HOOPA_UNBOUND],
   [Pkm.AEGISLASH]: [Pkm.AEGISLASH_BLADE],
   [Pkm.MIMIKYU]: [Pkm.MIMIKYU_BUSTED],

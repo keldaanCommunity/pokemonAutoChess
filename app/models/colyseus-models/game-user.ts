@@ -1,5 +1,5 @@
 import { Schema, type } from "@colyseus/schema"
-import { Role } from "../../types"
+import type { Role, Title } from "../../types"
 
 export interface IGameUser {
   uid: string
@@ -9,9 +9,13 @@ export interface IGameUser {
   isBot: boolean
   elo: number
   games: number
-  title: string
+  title: Title | ""
   role: Role
   anonymous: boolean
+  twitchLogin: string
+  twitchDisplayName: string
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
 }
 export class GameUser extends Schema implements IGameUser {
   @type("string") uid: string
@@ -21,9 +25,13 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") isBot: boolean
   @type("uint16") elo: number
   @type("uint16") games: number
-  @type("string") title: string
+  @type("string") title: Title | ""
   @type("string") role: Role
   @type("boolean") anonymous: boolean
+  @type("string") twitchLogin: string
+  @type("string") twitchDisplayName: string
+  @type("string") doubleUpPartnerId: string = ""
+  @type("string") doubleUpTeamId: string = ""
 
   constructor(
     uid: string,
@@ -33,9 +41,11 @@ export class GameUser extends Schema implements IGameUser {
     avatar: string,
     isBot: boolean,
     ready: boolean,
-    title: string,
+    title: Title | "",
     role: Role,
-    anonymous: boolean
+    anonymous: boolean,
+    twitchLogin = "",
+    twitchDisplayName = ""
   ) {
     super()
     this.uid = uid
@@ -48,5 +58,9 @@ export class GameUser extends Schema implements IGameUser {
     this.title = title
     this.role = role
     this.anonymous = anonymous
+    this.twitchLogin = twitchLogin
+    this.twitchDisplayName = twitchDisplayName
+    this.doubleUpPartnerId = ""
+    this.doubleUpTeamId = ""
   }
 }

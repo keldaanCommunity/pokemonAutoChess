@@ -1,4 +1,4 @@
-import { Synergy } from "../enum/Synergy"
+import type { Synergy } from "../enum/Synergy"
 import type { Item, PkmWithCustom } from "../index"
 
 export interface ITierList {

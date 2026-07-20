@@ -1,5 +1,6 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
+import type { Stat } from "../../../../../types/enum/Game"
 import { clamp } from "../../../../../utils/number"
 import "./game-tooltip-bar.css"
 
@@ -21,7 +22,7 @@ const BAR_COLORS: Record<BarType | "SHIELD", string> = {
   SHIELD: "linear-gradient(to bottom, #ffffff, #c0c0c0)"
 }
 
-const BAR_LABELS: Record<BarType, string> = {
+const BAR_LABELS: Record<BarType, `stat.${Stat}` | ""> = {
   HP_ALLY: "stat.HP",
   HP_ENEMY: "stat.HP",
   PP: "stat.PP",

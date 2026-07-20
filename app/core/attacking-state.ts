@@ -1,14 +1,15 @@
 import { BASE_PROJECTILE_SPEED } from "../config"
-import Player from "../models/colyseus-models/player"
-import { IPokemonEntity } from "../types"
+import type Player from "../models/colyseus-models/player"
+import type { IPokemonEntity } from "../types"
 import delays from "../types/delays.json"
 import { EffectEnum } from "../types/enum/Effect"
 import { PokemonActionState } from "../types/enum/Game"
 import { distanceC } from "../utils/distance"
 import { max } from "../utils/number"
-import { castAbility } from "./abilities/abilities"
+import { AbilityStrategies } from "./abilities/abilities"
+import { castAbility } from "./abilities/cast"
 import type { Board } from "./board"
-import { PokemonEntity } from "./pokemon-entity"
+import type { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
 import { AttackCommand } from "./simulation-command"
 
@@ -29,7 +30,10 @@ export default class AttackingState extends PokemonState {
         pokemon.simulation.blueTeam.get(pokemon.targetEntityId) ||
         pokemon.simulation.redTeam.get(pokemon.targetEntityId)
 
-      if (pokemon.effects.has(EffectEnum.MERCILESS)) {
+      if (
+        pokemon.effects.has(EffectEnum.MERCILESS) &&
+        pokemon.pp < pokemon.maxPP
+      ) {
         const candidates = this.getTargetsAtRange(pokemon, board)
         let minLife = Infinity
         for (const candidate of candidates) {
@@ -87,7 +91,7 @@ export default class AttackingState extends PokemonState {
 
         if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
           // CAST ABILITY
-          castAbility(pokemon.skill, pokemon, board, target)
+          castAbility(AbilityStrategies[pokemon.skill], pokemon, board, target)
         } else {
           // BASIC ATTACK
           pokemon.count.attackCount++
@@ -138,5 +142,6 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   )
   const travelTime =
     (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
+
   return { delayBeforeShoot, travelTime, attackDuration }
 }

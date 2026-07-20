@@ -1,20 +1,23 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
+import { DishByPkm } from "../../config/game/dishes"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
+import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   AbilityPerTM,
-  Dish,
+  type Dish,
   DishesGoingToInventory,
-  FishingRod,
+  type FishingRod,
   Flavors,
   HerbaMysticas,
   Item,
+  ItemComponents,
   ItemRecipe,
   MemoryDiscs,
   NonSpecialBerries,
@@ -29,9 +32,9 @@ import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
-import { distanceC } from "../../utils/distance"
+import { distanceC, distanceM } from "../../utils/distance"
 import { max, min } from "../../utils/number"
 import {
   chance,
@@ -39,22 +42,23 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../../utils/random"
-import { values } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
-import { DishByPkm } from "../dishes"
-import { ConditionBasedEvolutionRule } from "../evolution-rules"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
-import { getUnitScore, PokemonEntity } from "../pokemon-entity"
+import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getUnitScore } from "../unit-score"
 import {
-  Effect,
+  BeforeAttackEffect,
+  type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnAttackReceivedEffect,
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
-  OnDeathEffectArgs,
+  type OnDeathEffectArgs,
   OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
@@ -64,7 +68,6 @@ import {
   OnResurrectEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
-  OnSpawnEffect,
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
@@ -210,6 +213,15 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
   }
 )
 
+export const pokemonomiconOnDamageEffect = new OnDamageDealtEffect(
+  ({ attackType, target, pokemon }) => {
+    if (attackType === AttackType.SPECIAL) {
+      target.status.triggerBurn(3000, target, pokemon)
+      target.addSpecialDefense(-1, pokemon, 0, false)
+    }
+  }
+)
+
 export class SoulDewEffect extends PeriodicEffect {
   constructor() {
     super(
@@ -228,7 +240,7 @@ export class MachRibbonEffect extends PeriodicEffect {
   constructor() {
     super(
       (pokemon) => {
-        pokemon.addSpeed(15, pokemon, 0, false)
+        pokemon.addSpeed(20, pokemon, 0, false)
         pokemon.count.machRibbonCount++
         if (pokemon.count.machRibbonCount >= 10 && pokemon.player) {
           pokemon.player.titles.add(Title.TOP_GUN)
@@ -236,6 +248,36 @@ export class MachRibbonEffect extends PeriodicEffect {
       },
       Item.MACH_RIBBON,
       3000
+    )
+  }
+}
+
+export class GreenOrbEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon, board) => {
+        const adjacentCells = board.getAdjacentCells(
+          pokemon.positionX,
+          pokemon.positionY,
+          true
+        )
+        for (const cell of adjacentCells) {
+          if (cell.value && cell.value.team === pokemon.team) {
+            const { overheal } = cell.value.handleHeal(
+              0.05 * cell.value.maxHP,
+              pokemon,
+              0,
+              false
+            )
+            if (overheal > 0) {
+              cell.value.addPP(0.3 * overheal, pokemon, 0, false)
+            }
+          }
+        }
+        pokemon.broadcastAbility({ skill: "GREEN_ORB" })
+      },
+      Item.GREEN_ORB,
+      2000
     )
   }
 }
@@ -257,13 +299,13 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerParalysis(4000, cell.value, pokemon)
-        cell.value.status.triggerBlinded(4000, cell.value)
+        cell.value.status.triggerBlinded(4000, cell.value, pokemon)
       }
     })
     pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
     pokemon.removeItem(Item.SMOKE_BALL)
     pokemon.addShield(50, pokemon, 0, false)
-    pokemon.flyAway(board)
+    pokemon.flyAway(board, false, false)
   }
 })
 
@@ -275,7 +317,7 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       pokemon.passive === Passive.OGERPON_HEARTHFLAME ||
       pokemon.passive === Passive.OGERPON_CORNERSTONE
     ) {
-      const currentMask = values(pokemon.items).find((i) =>
+      const currentMask = schemaValues(pokemon.items).find((i) =>
         OgerponMasks.includes(i)
       )
       if (currentMask) {
@@ -286,16 +328,16 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       }
 
       if (item === Item.TEAL_MASK) {
-        pokemon.items.add(Item.TEAL_MASK)
+        pokemon.addItem(Item.TEAL_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
       } else if (item === Item.WELLSPRING_MASK) {
-        pokemon.items.add(Item.WELLSPRING_MASK)
+        pokemon.addItem(Item.WELLSPRING_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
       } else if (item === Item.HEARTHFLAME_MASK) {
-        pokemon.items.add(Item.HEARTHFLAME_MASK)
+        pokemon.addItem(Item.HEARTHFLAME_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
       } else if (item === Item.CORNERSTONE_MASK) {
-        pokemon.items.add(Item.CORNERSTONE_MASK)
+        pokemon.addItem(Item.CORNERSTONE_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
       }
       return true
@@ -313,13 +355,17 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         Pkm.SUBSTITUTE,
         player
       )
-      pokemon.items.forEach((item) => substitute.items.add(item))
-      pokemon.removeItems(values(pokemon.items), player)
+      const items = schemaValues(pokemon.items)
+      substitute.addItems(items, player)
+      pokemon.removeItems(items, player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
-      substitute.evolutionRule = new ConditionBasedEvolutionRule(() => false) // used only to store the original pokemon
+      substitute.evolutionRule = {
+        type: EvolutionRuleType.STATE,
+        condition: () => false
+      } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
@@ -327,9 +373,10 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       player.pokemonsTrainingInDojo.push({
         pokemon: pokemonLeaving,
         ticketLevel,
-        returnStage: room.state.stageLevel + ([3, 4, 5][ticketLevel - 1] ?? 5)
+        returnStage: room.state.stageLevel + 3
       })
       removeInArray(player.items, item)
+      player.updateSynergies()
       return false // prevent item from being equipped
     })
   }
@@ -339,8 +386,8 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (!pokemon) return
   const chef = pokemon
 
-  const gourmetLevel = getSynergyStep(player.synergies, Synergy.GOURMET)
-  const nbDishes = [0, 1, 2, 2][gourmetLevel] ?? 2
+  const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
+  const nbDishes = [0, 1, 2, 2][gourmetTier] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
@@ -362,7 +409,10 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   if (dish && nbDishes > 0) {
     let dishes = Array.from({ length: nbDishes }, () => dish!)
     if (dish === Item.BERRIES) {
-      dishes = pickNRandomIn(NonSpecialBerries, 3 * nbDishes)
+      dishes = pickNRandomIn(
+        NonSpecialBerries.filter((i) => pokemon.items.has(i) === false),
+        nbDishes
+      )
     }
     if (dish === Item.MUSHROOMS) {
       dishes = Array.from(
@@ -385,14 +435,20 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
       })
       room.clock.setTimeout(() => {
         dishes.forEach((dish, i) => {
-          if (DishesGoingToInventory.includes(dish)) {
+          if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
+            if (pokemon.items.size < 3) {
+              pokemon.addItem(dish, player)
+            } else {
+              player.items.push(dish)
+            }
+          } else if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
           } else {
-            let candidates = values(player.board).filter(
+            let candidates = schemaValues(player.board).filter(
               (p) =>
                 p.canEat &&
                 !p.dishes.has(dish) &&
-                !isOnBench(p) &&
+                isOnBench(chef) === isOnBench(p) &&
                 distanceC(
                   chef.positionX,
                   chef.positionY,
@@ -519,6 +575,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     })
   ],
+
   [Item.SOUL_DEW]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new SoulDewEffect())
@@ -532,18 +589,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           break
         }
       }
-    })
-  ],
-
-  [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect(({ attacker, target, board }) => {
-      target.handleDamage({
-        damage: Math.round(0.08 * target.maxHP),
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker,
-        shouldTargetGainMana: true
-      })
     })
   ],
 
@@ -671,38 +716,22 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.addShield(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ) * 2,
-        pokemon,
-        0,
-        false
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
       )
-      pokemon.addSpeed(
-        Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
-        pokemon,
-        0,
-        false
-      )
+      pokemon.addShield(repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(repeatBallValue, pokemon, 0, false)
     }),
     new OnItemRemovedEffect((pokemon) => {
-      pokemon.addAbilityPower(
-        -Math.floor(
-          ((pokemon.player?.gameStats.rerollCount ?? 0) +
-            pokemon.simulation.stageLevel) /
-            2
-        ),
-        pokemon,
-        0,
-        false
+      const repeatBallValue = Math.floor(
+        ((pokemon.player?.gameStats.rerollCount ?? 0) +
+          pokemon.simulation.stageLevel) /
+          2
       )
+      pokemon.addShield(-repeatBallValue * 2, pokemon, 0, false)
+      pokemon.addSpeed(-repeatBallValue, pokemon, 0, false)
     })
   ],
 
@@ -756,6 +785,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.machRibbonCount = 0
+          break
+        }
+      }
+    })
+  ],
+
+  [Item.GREEN_ORB]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new GreenOrbEffect())
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof GreenOrbEffect) {
+          pokemon.effectsSet.delete(effect)
           break
         }
       }
@@ -829,7 +872,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         Synergy.PSYCHIC,
         Synergy.FAIRY
       ]
-      const fieldEffect = values(entity.types).find((type) =>
+      const fieldEffect = schemaValues(entity.types).find((type) =>
         terrainTypes.includes(type)
       )
       switch (fieldEffect) {
@@ -911,6 +954,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.BLUE_ORB]: [blueOrbOnAttackEffect],
 
+  [Item.POKEMONOMICON]: [pokemonomiconOnDamageEffect],
+
   [Item.LOADED_DICE]: [loadedDiceOnAttackEffect],
 
   [Item.STICKY_BARB]: [
@@ -933,9 +978,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           attacker: pokemon,
           shouldTargetGainMana: true
         })
-        if (chance(0.3, pokemon)) {
-          attacker.status.triggerWound(3000, attacker, pokemon)
-        }
+        attacker.status.triggerWound(3000, attacker, pokemon)
       }
     })
   ],
@@ -949,6 +992,25 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.SCOPE_LENS]: [
+    new OnAttackEffect(({ pokemon, target, crit }) => {
+      if (crit && target) {
+        const ppStolen = max(target.pp)(10)
+        pokemon.addPP(ppStolen, pokemon, 0, false)
+        target.addPP(-ppStolen, pokemon, 0, false)
+        target.count.manaBurnCount++
+      }
+    })
+  ],
+
+  [Item.RAZOR_FANG]: [
+    new BeforeAttackEffect(({ target, crit }) => {
+      if (crit && target) {
+        target.status.triggerArmorReduction(2000, target)
+      }
+    })
+  ],
+
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -959,6 +1021,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LEPPA_BERRY]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.eatBerry(Item.LEPPA_BERRY)
+    })
+  ],
+
+  [Item.BABIRI_BERRY]: [
+    new OnAttackReceivedEffect(({ pokemon, crit }) => {
+      if (crit) {
+        pokemon.eatBerry(Item.BABIRI_BERRY)
+      }
     })
   ],
 
@@ -1091,6 +1161,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
+        } else if(isIn(ItemComponents, heldItem)){
+          player.items.push(heldItem)
+          pokemon.removeItem(heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
           removeInArray(player.scarvesItems, heldItem)
@@ -1107,6 +1180,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.EXCHANGE_TICKET]: [
     new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.SOOTHE_BELL]: [
+    new OnItemDroppedEffect(({ player, pokemon, room, item }) => {
+      room.state.shop.assignSootheBellShop(
+        player,
+        room.state,
+        schemaValues(pokemon.types)
+      )
+      removeInArray(player.items, item)
       return false // prevent item from being equipped
     })
   ],
@@ -1130,7 +1215,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.canEat) {
         let nbSandwiches = 0
-        values(player.board).forEach((pkm) => {
+        schemaValues(player.board).forEach((pkm) => {
           if (
             pkm.canEat &&
             pokemon &&
@@ -1159,7 +1244,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LAPRAS_PASSPORT]: [
     new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
       const previousMap = player.map
-      const chosenSynergies = values(pokemon.types)
+      const chosenSynergies = schemaValues(pokemon.types)
       const maps = Object.values(DungeonPMDO).filter(
         (map) => map !== previousMap
       )
@@ -1208,12 +1293,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     ])
   ),
 
-  [Item.BLACK_AUGURITE]: [
-    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
-      return pokemon.passive === Passive.SCYTHER // is then consummed by ItemEvolutionRule
-    })
-  ],
-
   [Item.MALICIOUS_ARMOR]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
@@ -1240,7 +1319,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const evolution = pokemon.evolutionRule?.getEvolution(pokemon, player)
+      const evolution = EvolutionManager.getEvolution(pokemon, player)
       if (
         !evolution ||
         evolution === Pkm.DEFAULT ||
@@ -1250,11 +1329,33 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      pokemon.afterEvolve({
+      const additionalArgs: any[] = []
+      if (pokemonEvolved.evolutionRule.type === EvolutionRuleType.ITEM) {
+        additionalArgs.push(item)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.MONEY
+      ) {
+        additionalArgs.push(player.money)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.PLACEMENT
+      ) {
+        additionalArgs.push(player.board)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STACK
+      ) {
+        additionalArgs.push(pokemonEvolved.stacks)
+      } else if (
+        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STATE
+      ) {
+        additionalArgs.push(room.state)
+      }
+
+      EvolutionManager.afterEvolve(
         pokemonEvolved,
-        pokemonsBeforeEvolution: [pokemon],
-        player
-      })
+        pokemon,
+        player,
+        ...additionalArgs
+      )
 
       pokemonEvolved.items.add(item)
       removeInArray(player.items, item)
@@ -1262,9 +1363,21 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon)
+      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
       player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
+    })
+  ],
+
+  [Item.STAR_PIECE]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.stars = max(5)(pokemon.stars + 1)
+      if (pokemon.stars === 5 && pokemon.player) {
+        pokemon.player.titles.add(Title.FIVE_STARS)
+      }
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.stars = min(1)(pokemon.stars - 1)
     })
   ],
 
@@ -1329,9 +1442,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.broadcastAbility({ skill: "EXPLOSION" })
       pokemon.removeItem(Item.EXPLOSIVE_BAND)
 
-      pokemon.broadcastAbility({ skill: "EXPLOSION" })
-      pokemon.removeItem(Item.EXPLOSIVE_BAND)
-
       adjacentCells.forEach((cell) => {
         if (cell.value && cell.value.team !== pokemon.team) {
           cell.value.handleSpecialDamage(
@@ -1359,5 +1469,111 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       })
     }, Item.EFFICIENT_BANDANNA)
+  ],
+
+  [Item.LUCKY_RIBBON]: [
+    new OnSimulationStartEffect(({ entity }) => {
+      entity.addDodgeChance(0.15, entity, 0, false)
+    })
+  ],
+
+  [Item.BALL]: [
+    new OnAbilityCastEffect((pokemon, board) => {
+      // When casting ability, throws the ball to the furthest FIELD ally to grant them the BALL and 50 SHIELD.
+
+      const fieldAllies = board.cells.filter<PokemonEntity>(
+        (p): p is PokemonEntity =>
+          p != null &&
+          p.id !== pokemon.id &&
+          p.team === pokemon.team &&
+          p.items.size < 3 &&
+          p.items.has(Item.BALL) === false &&
+          p.types.has(Synergy.FIELD)
+      )
+
+      let furthestFieldAlly: PokemonEntity | null = null
+      let maxDistance = 0
+      for (const ally of fieldAllies) {
+        const distance = distanceM(
+          ally.positionX,
+          ally.positionY,
+          pokemon.positionX,
+          pokemon.positionY
+        )
+        if (distance > maxDistance) {
+          furthestFieldAlly = ally
+          maxDistance = distance
+        }
+      }
+
+      if (furthestFieldAlly) {
+        const travelTime = Math.round(
+          (maxDistance * 1000) / (4 * (1 + pokemon.speed / 100))
+        )
+        pokemon.broadcastAbility({
+          skill: "BALL",
+          positionX: pokemon.positionX,
+          positionY: pokemon.positionY,
+          targetX: furthestFieldAlly.positionX,
+          targetY: furthestFieldAlly.positionY,
+          delay: travelTime
+        })
+        furthestFieldAlly.commands.push(
+          new DelayedCommand(() => {
+            furthestFieldAlly.addItem(Item.BALL)
+            furthestFieldAlly.addShield(50, pokemon, 0, false)
+          }, 500)
+        )
+        pokemon.removeItem(Item.BALL)
+      } else {
+        // If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead,
+        // dealing [30,SP]% of user's SPEEED as PHYSICAL
+
+        const enemies = board.cells.filter<PokemonEntity>(
+          (p): p is PokemonEntity => p != null && p.team !== pokemon.team
+        )
+        let furthestEnemy: PokemonEntity | null = null
+        let maxDistance = 0
+        for (const enemy of enemies) {
+          const distance = distanceM(
+            enemy.positionX,
+            enemy.positionY,
+            pokemon.positionX,
+            pokemon.positionY
+          )
+          if (distance > maxDistance) {
+            furthestEnemy = enemy
+            maxDistance = distance
+          }
+        }
+
+        if (furthestEnemy) {
+          const damage = Math.round(0.3 * pokemon.speed)
+          const travelTime = Math.round(
+            (maxDistance * 1000) / (4 * (1 + pokemon.speed / 100))
+          )
+          pokemon.broadcastAbility({
+            skill: "BALL",
+            positionX: pokemon.positionX,
+            positionY: pokemon.positionY,
+            targetX: furthestEnemy.positionX,
+            targetY: furthestEnemy.positionY,
+            delay: travelTime
+          })
+          furthestEnemy.commands.push(
+            new DelayedCommand(() => {
+              furthestEnemy.handleDamage({
+                damage,
+                attackType: AttackType.PHYSICAL,
+                attacker: pokemon,
+                board,
+                shouldTargetGainMana: true
+              })
+            }, travelTime)
+          )
+          pokemon.removeItem(Item.BALL)
+        }
+      }
+    })
   ]
 }

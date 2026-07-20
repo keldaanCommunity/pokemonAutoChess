@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
+import Phaser, { GameObjects } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_HEIGHT,
@@ -7,21 +7,26 @@ import {
   getRegionTint,
   ItemStats,
   PortalCarouselStages,
-  RegionDetails,
-  SynergyTriggers
+  RegionDetails
 } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
-  FlowerPotMons,
-  FlowerPots
+  FlowerPotMons
 } from "../../../../core/flower-pots"
-import Player from "../../../../models/colyseus-models/player"
+import type Player from "../../../../models/colyseus-models/player"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
+import { getSynergyTier } from "../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
-import { PVEStage, PVEStages } from "../../../../models/pve-stages"
-import GameState from "../../../../rooms/states/game-state"
-import { IPokemon, IPokemonEntity } from "../../../../types"
+import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
+import type GameState from "../../../../rooms/states/game-state"
+import {
+  FlowerPots,
+  type IPlayer,
+  type IPokemon,
+  type IPokemonEntity
+} from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
   GameMode,
@@ -33,17 +38,17 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
-import { max } from "../../../../utils/number"
 import { randomBetween } from "../../../../utils/random"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { getGameContainer } from "../../pages/game"
 import { playMusic } from "../../pages/utils/audio"
@@ -54,16 +59,17 @@ import {
 import { preference } from "../../preferences"
 import store from "../../stores"
 import { refreshShopUI } from "../../stores/GameStore"
-import AnimationManager from "../animation-manager"
+import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { TradingPlatform } from "./trading-platform"
 
 export enum BoardMode {
   PICK = "pick",
@@ -94,9 +100,12 @@ export default class BoardManager {
   mulchAmountText: Phaser.GameObjects.Text | null = null
   mulchIcon: Phaser.GameObjects.Image | null = null
   groundHoles: Phaser.GameObjects.Sprite[]
+  trainingBag: Phaser.GameObjects.Sprite | null = null
+  trainingRack: Phaser.GameObjects.Sprite | null = null
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
+  tradingPlatform: TradingPlatform | null = null
 
   constructor(
     scene: GameScene,
@@ -130,8 +139,8 @@ export default class BoardManager {
       this.renderBoard(false)
       this.battleMode(false)
     } else if (state.phase === GamePhaseState.TOWN) {
-      this.renderBoard(false)
       this.minigameMode()
+      this.renderBoard(false) // render pokemons on bench when loading during a town phase
     } else {
       this.pickMode(false)
     }
@@ -156,8 +165,8 @@ export default class BoardManager {
       }
       if (this.pveChest && this.pveChestGroup) {
         const rewards = [
-          ...values(this.player.pveRewards),
-          ...values(this.player.pveRewardsPropositions)
+          ...schemaValues(this.player.pveRewards),
+          ...schemaValues(this.player.pveRewardsPropositions)
         ]
         this.openChest(this.pveChestGroup, this.pveChest, rewards)
       }
@@ -235,10 +244,18 @@ export default class BoardManager {
       this.renderBerryTrees()
       this.renderFlowerPots()
       this.renderGroundHoles()
+      this.renderTrainingBag()
     }
 
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
+    }
+
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      this.mode !== BoardMode.TOWN
+    ) {
+      this.renderTradingPlatform()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -252,7 +269,7 @@ export default class BoardManager {
         this.smeargle.destroy()
         this.smeargle = null
       }
-      this.addSmeargle()
+      this.addSmeargle(this.specialGameRule)
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
@@ -262,8 +279,8 @@ export default class BoardManager {
 
   showLightCell() {
     this.hideLightCell()
-    const lightCount = this.player.synergies.get(Synergy.LIGHT)
-    if (lightCount && lightCount >= SynergyTriggers[Synergy.LIGHT][0]) {
+    const lightTier = getSynergyTier(this.player.synergies, Synergy.LIGHT)
+    if (lightTier > 0) {
       const coordinates = transformBoardCoordinates(this.lightX, this.lightY)
       this.lightCell = this.scene.add.sprite(
         coordinates[0],
@@ -285,10 +302,9 @@ export default class BoardManager {
   renderBerryTrees() {
     this.berryTrees.forEach((tree) => tree.destroy())
     this.berryTrees = []
-    const grassLevel = this.player.synergies.get(Synergy.GRASS) ?? 0
-    const nbTrees = max(3)(
-      SynergyTriggers[Synergy.GRASS].filter((n) => n <= grassLevel).length
-    )
+    const grassTier = getSynergyTier(this.player.synergies, Synergy.GRASS)
+    const nbTreesPerTier = [0, 1, 2, 3, 3]
+    const nbTrees = nbTreesPerTier[grassTier] ?? 0
 
     for (let i = 0; i < nbTrees; i++) {
       const tree = new BerryTree(
@@ -307,12 +323,11 @@ export default class BoardManager {
   }
 
   getNbFlowerPots(): number {
-    const floraLevel = this.player.synergies.get(Synergy.FLORA) ?? 0
-    let nbPots = SynergyTriggers[Synergy.FLORA].filter(
-      (n) => n <= floraLevel
-    ).length
+    const floraTier = getSynergyTier(this.player.synergies, Synergy.FLORA)
+    const nbPotsPerTier = [0, 1, 2, 3, 4][floraTier] ?? 0
+    let nbPots = nbPotsPerTier[floraTier]
     if (
-      floraLevel >= 6 &&
+      floraTier >= 4 &&
       this.player.flowerPots.every((p) => p.evolution === Pkm.DEFAULT)
     ) {
       nbPots = 5
@@ -349,7 +364,9 @@ export default class BoardManager {
       const isOnBattle =
         this.mode === BoardMode.BATTLE &&
         simulation?.started &&
-        values(simulation.blueDpsMeter).some((p) => p.id === potPokemon.id)
+        schemaValues(simulation.blueDpsMeter).some(
+          (p) => p.id === potPokemon.id
+        )
 
       if (potPokemon && !isOnBattle) {
         const flowerInPot = new PokemonSprite(
@@ -474,6 +491,54 @@ export default class BoardManager {
   hideGroundHoles() {
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
+  }
+
+  hideTrainingBag() {
+    this.trainingRack?.destroy()
+    this.trainingBag?.destroy()
+    this.trainingRack = null
+    this.trainingBag = null
+  }
+
+  renderTrainingBag() {
+    this.hideTrainingBag()
+    const fightingTier = getSynergyTier(this.player.synergies, Synergy.FIGHTING)
+    if (fightingTier >= 4) {
+      this.trainingRack = this.scene.add
+        .sprite(605, 775, "training_bag", "rack.png")
+        .setScale(1.5)
+        .setDepth(DEPTH.INANIMATE_OBJECTS)
+      this.trainingBag = this.scene.add
+        .sprite(621, 750, "training_bag", "bag.png")
+        .setScale(1.5)
+        .setOrigin(35 / 48, 19 / 72)
+        .setDepth(DEPTH.INANIMATE_OBJECTS + 0.1)
+    }
+  }
+
+  animateTrainingBag() {
+    if (!this.trainingBag) return
+    this.scene.tweens.add({
+      targets: this.trainingBag,
+      angle: {
+        getStart: () => -10,
+        getEnd: () => 10
+      },
+      ease: "Sine.easeInOut",
+      duration: 200,
+      yoyo: true,
+      repeat: -1
+    })
+  }
+
+  renderTradingPlatform() {
+    this.hideTradingPlatform()
+    this.tradingPlatform = new TradingPlatform(this, 1276, 746)
+  }
+
+  hideTradingPlatform() {
+    this.tradingPlatform?.destroy()
+    this.tradingPlatform = null
   }
 
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
@@ -610,7 +675,7 @@ export default class BoardManager {
     const players = this.state.players
     if (!players) return
 
-    const scoutingPlayers = values(players).filter((p) => {
+    const scoutingPlayers = schemaValues(players).filter((p) => {
       const spectatedPlayer = players.get(p.spectatedPlayerId)
 
       if (
@@ -657,7 +722,9 @@ export default class BoardManager {
       (p) => this.scoutingAvatars.some((a) => a.playerId === p.id) === false
     )
     newScoutingAvatars.forEach((player) => {
-      const playerIndex = values(players).findIndex((p) => p.id === player.id)
+      const playerIndex = schemaValues(players).findIndex(
+        (p) => p.id === player.id
+      )
       const scoutAvatarModel = new PokemonAvatarModel(
         player.id,
         player.avatar,
@@ -705,9 +772,9 @@ export default class BoardManager {
   }
 
   battleMode(phaseJustChanged: boolean) {
-    // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
+    this.tradingPlatform?.updateTrade(BoardMode.BATTLE)
     if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
@@ -752,7 +819,6 @@ export default class BoardManager {
   }
 
   pickMode(phaseJustChanged: boolean) {
-    // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
     if (
@@ -773,16 +839,27 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (this.state.stageLevel === PortalCarouselStages[0])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
-    if (this.state.stageLevel === PortalCarouselStages[1])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
-    if (this.state.stageLevel === PortalCarouselStages[2])
-      playMusic(this.scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    if (this.state.townEncounter === TownEncounters.LUDICOLO) {
+      playMusic(this.scene, DungeonMusic.CARNIVAL_LUDICOLO)
+      this.scene.music?.once("looped", () => {
+        playMusic(
+          this.scene,
+          RegionDetails[this.player.map].music ?? DungeonMusic.TREASURE_TOWN
+        )
+      })
+    } else if (this.state.stageLevel === PortalCarouselStages[0]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
+    } else if (this.state.stageLevel === PortalCarouselStages[1]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
+    } else if (this.state.stageLevel === PortalCarouselStages[2]) {
+      playMusic(this.scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
+    }
     this.hideLightCell()
     this.hideBerryTrees()
     this.hideFlowerPots()
     this.hideGroundHoles()
+    this.hideTrainingBag()
+    this.hideTradingPlatform()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -863,6 +940,7 @@ export default class BoardManager {
 
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
     pokemon: IPokemon,
+    player: IPlayer,
     field: F,
     value: IPokemon[F],
     previousValue?: IPokemon[F]
@@ -872,26 +950,6 @@ export default class BoardManager {
     if (pokemonSprite) {
       switch (field) {
         case "positionX":
-          coordinates = transformBoardCoordinates(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          setTimeout(
-            () => {
-              pokemonSprite.x = coordinates[0]
-              pokemonSprite.y = coordinates[1]
-            },
-            this.scene.spectate ? 3000 : 0 // delay position update for spectators, see https://discord.com/channels/737230355039387749/1489057261593694318
-          )
-          store.dispatch(refreshShopUI(0))
-          this.showSupportItemsVfx(
-            values(pokemon.items),
-            pokemonSprite,
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          break
-
         case "positionY": {
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
@@ -918,12 +976,13 @@ export default class BoardManager {
           store.dispatch(refreshShopUI(0))
           if (!isOnBench(pokemon)) {
             this.showSupportItemsVfx(
-              values(pokemon.items),
+              schemaValues(pokemon.items),
               pokemonSprite,
               pokemon.positionX,
               pokemon.positionY
             )
           }
+
           break
         }
 
@@ -933,17 +992,23 @@ export default class BoardManager {
             value as IPokemon["action"],
             false
           )
+          if (
+            value === PokemonActionState.TRAINING &&
+            pokemon.positionX === 0
+          ) {
+            this.animateTrainingBag()
+          }
           break
 
         case "hp":
         case "maxHP": {
           const baseHP = getPokemonData(pokemon.name).hp
-          const hp = values(pokemon.items).reduce(
+          const hp = schemaValues(pokemon.items).reduce(
             (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
             pokemon.hp
           )
-          const sizeBuff = (hp - baseHP) / baseHP
-          pokemonSprite.sprite.setScale(2 + sizeBuff)
+          const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
+          pokemonSprite.sprite.setScale(scale)
           if (previousValue != null && value && value > previousValue)
             pokemonSprite.displayBoost(Stat.HP)
           break
@@ -1003,7 +1068,7 @@ export default class BoardManager {
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
               pokemonSprite.attackSprite
             // load the new ones
-            pokemonSprite.lazyloadAnimations(this.scene).then(() => {
+            pokemonSprite.lazyLoadAnimations(this.scene).then(() => {
               pokemonSprite.animationLocked = false
               pokemonSprite.evolutionAnimation()
             })
@@ -1023,6 +1088,12 @@ export default class BoardManager {
           break
       }
     }
+
+    this.tradingPlatform?.updateTradeIfPokemonInvolved(
+      pokemon,
+      player,
+      this.mode
+    )
   }
 
   closeTooltips() {
@@ -1056,31 +1127,52 @@ export default class BoardManager {
     return benchSize
   }
 
-  showEmote(playerId: string, emote?: string) {
+  showEmote(playerOrPokemonId: string, emote?: string) {
     const avatars = [
       this.playerAvatar,
       this.opponentAvatar,
       ...this.scoutingAvatars
     ]
-    const player = avatars.find((a) => a?.playerId === playerId)
+    const player = avatars.find((a) => a?.playerId === playerOrPokemonId)
     if (player) {
       this.animationManager.play(player, PokemonAnimations[player.name].emote)
 
-      if (emote) {
+      if (emote && emote.startsWith("player_dialog/")) {
+        this.scene.board?.displayText(
+          player.x,
+          player.y - 10,
+          t(
+            `player_dialog.${emote.substring("player_dialog/".length) as PlayerDialog}`
+          ),
+          true
+        )
+      } else if (emote) {
         player.drawSpeechBubble(emote, player === this.opponentAvatar)
+      }
+    } else {
+      const pokemonSprite = this.pokemons.get(playerOrPokemonId)
+      if (pokemonSprite) {
+        this.animationManager.play(
+          pokemonSprite,
+          PokemonAnimations[pokemonSprite.name].emote
+        )
+
+        if (emote) {
+          pokemonSprite.drawSpeechBubble(emote, player === this.opponentAvatar)
+        }
       }
     }
   }
 
-  addSmeargle() {
+  addSmeargle(specialGameRule: SpecialGameRule) {
     this.smeargle = new PokemonSpecial({
       scene: this.scene,
       x: 1512,
       y: 396,
       name: Pkm.SMEARGLE,
       orientation: Orientation.DOWNLEFT,
-      dialog: t(`scribble_description.${this.specialGameRule}`),
-      dialogTitle: t(`scribble.${this.specialGameRule}`)
+      dialog: t(`scribble_description.${specialGameRule}`),
+      dialogTitle: t(`scribble.${specialGameRule}`)
     })
   }
 
@@ -1162,7 +1254,7 @@ export default class BoardManager {
 
   portalTransition(isRedPlayer: boolean) {
     const [portalX, portalY] = transformBoardCoordinates(3.5, 5)
-    const opponent = values(this.state.players).find(
+    const opponent = schemaValues(this.state.players).find(
       (p) => p.id === this.player.opponentId
     )
     if (!opponent) {
@@ -1229,7 +1321,7 @@ export default class BoardManager {
 
           // show the opponent pokemons
           opponent.board.forEach((pokemon) => {
-            if (isOnBench(pokemon)) return
+            if (simulation?.started || isOnBench(pokemon)) return
             const [x, y] = transformEntityCoordinates(
               pokemon.positionX,
               pokemon.positionY - 1,
@@ -1360,12 +1452,12 @@ export default class BoardManager {
 
       // opponent pokemons move out of the portal
       setTimeout(() => {
-        const opponent = values(this.state.players).find(
+        const opponent = schemaValues(this.state.players).find(
           (p) => p.id === this.player.opponentId
         )
         if (!opponent) return
         opponent.board.forEach((pokemon) => {
-          if (isOnBench(pokemon)) return
+          if (simulation?.started || isOnBench(pokemon)) return
           const pokemonSprite = new PokemonSprite(
             this.scene,
             portalX,
@@ -1437,26 +1529,31 @@ export default class BoardManager {
     rewards: Item[]
   ) {
     chest.anims.play("open_chest")
+    this.showRewards(chestGroup, rewards, chest.x, chest.y, chest.depth + 1)
+  }
+
+  showRewards(
+    group: Phaser.GameObjects.Group,
+    rewards: Item[],
+    x: number,
+    y: number,
+    depth: number
+  ) {
     rewards.forEach((item, i) => {
-      const itemSprite = this.scene.add.sprite(
-        chest.x,
-        chest.y,
-        "item",
-        item + ".png"
-      )
-      itemSprite.setScale(0.5).setDepth(chest.depth + 1)
-      const shinyEffect = this.scene.add.sprite(chest.x, chest.y, "shine")
+      const itemSprite = this.scene.add.sprite(x, y, "item", item + ".png")
+      itemSprite.setScale(0.5).setDepth(depth + 1)
+      const shinyEffect = this.scene.add.sprite(x, y, "shine")
       shinyEffect
         .setScale(2)
-        .setDepth(chest.depth + 1)
+        .setDepth(depth + 1)
         .play("shine")
-      chestGroup?.addMultiple([itemSprite, shinyEffect])
+      group?.addMultiple([itemSprite, shinyEffect])
       this.scene.tweens.add({
         targets: [itemSprite, shinyEffect],
         ease: Phaser.Math.Easing.Quadratic.Out,
         duration: 1000,
-        y: chest.y - 48,
-        x: chest.x + (i - (rewards.length - 1) / 2) * 70
+        y: y - 48,
+        x: x + (i - (rewards.length - 1) / 2) * 70
       })
     })
   }

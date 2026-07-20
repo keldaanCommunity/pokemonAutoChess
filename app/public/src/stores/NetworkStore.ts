@@ -1,15 +1,15 @@
-import { User } from "@firebase/auth-types"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import type { User } from "@firebase/auth-types"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { CollectionUtils } from "../../../core/collection"
-import { Emotion, Title, Transfer } from "../../../types"
+import { type Emotion, type Title, Transfer } from "../../../types"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
-import { Language } from "../../../types/enum/Language"
-import {
+import type { Language } from "../../../types/enum/Language"
+import type {
   IPokemonCollectionItemUnpacked,
   IUserMetadataJSON,
   IUserMetadataUnpacked
 } from "../../../types/interfaces/UserMetadata"
-import { INotification } from "../../../types/notifications"
+import type { INotification } from "../../../types/notifications"
 import { getAvatarString } from "../../../utils/avatar"
 import { leaveAllRooms, rooms } from "../network.js"
 
@@ -84,25 +84,6 @@ export const networkSlice = createSlice({
         )
       rooms.lobby?.send(Transfer.CHANGE_AVATAR, action.payload)
     },
-    changeSelectedEmotion: (
-      state,
-      action: PayloadAction<{
-        index: string
-        emotion: Emotion | null
-        shiny: boolean
-      }>
-    ) => {
-      if (state.profile) {
-        const pokemonCollectionItem = state.profile.pokemonCollection.get(
-          action.payload.index
-        )
-        if (pokemonCollectionItem) {
-          pokemonCollectionItem.selectedEmotion = action.payload.emotion
-          pokemonCollectionItem.selectedShiny = action.payload.shiny
-        }
-      }
-      rooms.lobby?.send(Transfer.CHANGE_SELECTED_EMOTION, action.payload)
-    },
     setTitle: (state, action: PayloadAction<Title | "">) => {
       if (state.profile) state.profile.title = action.payload
       rooms.lobby?.send(Transfer.SET_TITLE, action.payload)
@@ -139,7 +120,6 @@ export const {
   clearNotification,
   changeName,
   changeAvatar,
-  changeSelectedEmotion,
   setTitle,
   selectLanguage,
   setConnectionStatus,

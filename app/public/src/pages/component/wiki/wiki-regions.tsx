@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
@@ -9,7 +10,11 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
-import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  type Pkm,
+  PkmFamily,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
@@ -89,8 +94,8 @@ export default function WikiRegions() {
         />
       </div>
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
-        <p>{t("region_hint1")}</p>
-        <p>{t("region_hint2")}</p>
+        <p>{t("wiki.regions.region_hint1")}</p>
+        <p>{t("wiki.regions.region_hint2")}</p>
       </div>
       <div style={{ flex: 1, minHeight: 0 }}>
         <AutoSizer
@@ -109,8 +114,7 @@ export default function WikiRegions() {
                 rowProps={{
                   regions: sortedRegions,
                   columnCount,
-                  pokemonsPerRegion,
-                  t
+                  pokemonsPerRegion
                 }}
               />
             )
@@ -126,7 +130,6 @@ type RegionRowData = {
   regions: DungeonPMDO[]
   columnCount: number
   pokemonsPerRegion: { [key in DungeonPMDO]?: Pkm[] }
-  t: (key: string) => string
 }
 
 function RegionRow({
@@ -134,8 +137,7 @@ function RegionRow({
   style,
   regions,
   columnCount,
-  pokemonsPerRegion,
-  t
+  pokemonsPerRegion
 }: {
   ariaAttributes: object
   index: number
@@ -143,6 +145,7 @@ function RegionRow({
 } & RegionRowData): React.ReactElement | null {
   const startIdx = index * columnCount
   const rowRegions = regions.slice(startIdx, startIdx + columnCount)
+  const { t } = useTranslation()
 
   return (
     <div style={{ ...style, paddingBottom: "0.5em" }}>

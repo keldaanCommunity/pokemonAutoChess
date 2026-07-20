@@ -1,12 +1,13 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { EloRankThreshold } from "../../../../../config"
-import { fetchMetaTypes } from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { EloRank } from "../../../../../types/enum/EloRank"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { ITypeStatistics } from "../../../../../types/meta"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import type { ITypeStatistics } from "../../../../../types/meta"
+import { fetchMetaTypes } from "../../../models/pokemons-statistic-v2"
 import SynergyStatistic from "./synergy-statistic"
 import "./synergy-report.css"
+import { keys } from "../../../../../utils/object"
 
 export function SynergyReport() {
   const [loading, setLoading] = useState<boolean>(true)
@@ -60,7 +61,7 @@ export function SynergyReport() {
             value={eloThreshold}
             onChange={(e) => setEloTreshold(e.target.value as EloRank)}
           >
-            {Object.keys(EloRank).map((r) => (
+            {keys(EloRank).map((r) => (
               <option value={r} key={r}>
                 {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
               </option>

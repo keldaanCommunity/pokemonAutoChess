@@ -1,10 +1,5 @@
 import { model, Schema } from "mongoose"
-
-export interface IReportMetadata {
-  created_at: string
-  count: number
-  time_limit: string
-}
+import type { IReportMetadata } from "../../types/models/report-metadata"
 
 const metadataSchema = new Schema({
   time_limit: {
@@ -19,7 +14,3 @@ const metadataSchema = new Schema({
 })
 
 export default model<IReportMetadata>("Metadata", metadataSchema, "metadata")
-
-export async function fetchMetadata(): Promise<IReportMetadata[]> {
-  return fetch("/meta/metadata").then((res) => res.json())
-}

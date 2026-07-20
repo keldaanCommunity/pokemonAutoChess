@@ -7,14 +7,14 @@ import {
 } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
-  AbilityAnimation,
-  AbilityAnimationArgs,
-  AbilityAnimationMaker,
-  AbilityAnimationOptions,
+  type AbilityAnimation,
+  type AbilityAnimationArgs,
+  type AbilityAnimationMaker,
+  type AbilityAnimationOptions,
   AnimationType,
   AttackSprite,
   AttackSpriteScale,
-  HitSprite
+  type HitSprite
 } from "../../../../types/Animation"
 import { Ability } from "../../../../types/enum/Ability"
 import {
@@ -26,7 +26,7 @@ import {
   Stat
 } from "../../../../types/enum/Game"
 import { Sweets } from "../../../../types/enum/Item"
-import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { Pillars, Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import { logger } from "../../../../utils/logger"
@@ -40,8 +40,8 @@ import {
 import { pickRandomIn, randomBetween } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
-import { DebugScene } from "../scenes/debug-scene"
-import GameScene from "../scenes/game-scene"
+import type { DebugScene } from "../scenes/debug-scene"
+import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */
@@ -453,7 +453,9 @@ export function addAbilitySprite(
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
   if (tint) sprite.setTint(tint)
-  if (tintFill) sprite.setTintFill(tintFill)
+  if (tintFill) {
+    sprite.setTint(tintFill).setTintMode(Phaser.TintModes.FILL)
+  }
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -642,12 +644,21 @@ const projectile: AbilityAnimationMaker<
     distance?: number
     easeX?: string | ((v: number) => number)
     easeY?: string | ((v: number) => number)
+    projectileSpeed?: number // manhattan distance travelled in one second
   }
 > =
   (options = {}) =>
   (args) => {
-    let { startCoords, endCoords, oriented, rotation, distance, orientation } =
-      options
+    let {
+      startCoords,
+      endCoords,
+      oriented,
+      rotation,
+      distance,
+      orientation,
+      projectileSpeed,
+      duration
+    } = options
 
     let endPosition: [number, number]
     if (distance !== undefined || orientation !== undefined) {
@@ -677,8 +688,8 @@ const projectile: AbilityAnimationMaker<
         dy = Math.sin(angleToTarget)
       }
       endPosition = transformEntityCoordinates(
-        ox + dx * (options.distance ?? 12),
-        oy + dy * (options.distance ?? 12),
+        ox + dx * (distance ?? 12),
+        oy + dy * (distance ?? 12),
         args.flip
       )
 
@@ -688,23 +699,26 @@ const projectile: AbilityAnimationMaker<
       }
     } else {
       // projectile stopping on target or certain coordinates
-      const [endRow, endCol, endFlip] = parseCoordinates(
+      const [endX, endY, endFlip] = parseCoordinates(
         endCoords ?? "target",
         args
       )
-      endPosition = transformEntityCoordinates(
-        endRow,
-        endCol,
-        endFlip ?? args.flip
-      )
+      const [ox, oy] = parseCoordinates(startCoords ?? "caster", args)
+      distance = distanceM(ox, oy, endX, endY)
+      endPosition = transformEntityCoordinates(endX, endY, endFlip ?? args.flip)
     }
 
     endPosition[0] += options.endPositionOffset?.[0] ?? 0
     endPosition[1] += options.endPositionOffset?.[1] ?? 0
 
+    if (projectileSpeed !== undefined && duration === undefined) {
+      duration = Math.round(((distance ?? 12) * 1000) / projectileSpeed)
+    }
+
     return tweenAnimation({
       ...options,
       oriented,
+      duration,
       rotation,
       startCoords,
       endCoords,
@@ -755,12 +769,16 @@ const poppingIcon: AbilityAnimationMaker<
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
+  ["PUFF_RED"]: onTargetScale2,
+  ["PUFF_PINK"]: onTargetScale2,
+  ["PUFF_GREEN"]: onTargetScale2,
+  ["PUFF_BROWN"]: onTargetScale2,
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
   [Ability.ENCORE]: onCaster({ ability: Ability.HELPING_HAND }),
   [Ability.FLORAL_HEALING]: onCasterScale2,
-  [Ability.ILLUSION]: onCasterScale2,
+  [Ability.CAMOUFLAGE]: onCasterScale2,
   [Ability.ROAR_OF_TIME]: onCasterScale2,
   [Ability.HAPPY_HOUR]: onCasterScale2,
   [Ability.TELEPORT]: onCasterScale2,
@@ -774,6 +792,8 @@ export const AbilitiesAnimations: {
   [Ability.LUNAR_BLESSING]: onCasterScale2,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
+  [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({
       oriented: true,
@@ -797,8 +817,72 @@ export const AbilitiesAnimations: {
   [Ability.SOFT_BOILED]: onCasterScale2,
   [Ability.FAKE_TEARS]: onCasterScale2,
   [Ability.TEA_TIME]: onCasterScale2,
-  [Ability.FUTURE_SIGHT]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
-  [Ability.PETAL_DANCE]: onCasterScale2,
+  [Ability.FUTURE_SIGHT]: onTarget({
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    animOptions: { repeat: 2 }
+  }),
+  ["FUTURE_SIGHT_HIT"]: onTarget({
+    scale: 2,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    tint: 0xbb90ff
+  }),
+  [Ability.DOOM_DESIRE]: onTarget({
+    depth: DEPTH.ABILITY_MAJOR,
+    scale: 1,
+    positionOffset: [0, -20]
+  }),
+  ["DOOM_DESIRE_HIT"]: onTarget({
+    depth: DEPTH.ABILITY_MAJOR,
+    scale: 1,
+    positionOffset: [0, -20]
+  }),
+  [Ability.PETAL_DANCE]: [
+    onCaster({ scale: 2, positionOffset: [0, -40] }),
+    ({ scene, positionX, positionY, flip, ap }) => {
+      const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+      const petalCount = 5
+
+      for (const r of [64, 96]) {
+        const petalGroup = scene.add.group()
+        const circle = new Phaser.Geom.Circle(x, y, 48)
+        for (let i = 0; i < petalCount; i++) {
+          const petalSprite = scene.add
+            .sprite(0, 0, "abilities", `PETAL_DANCE_PROJECTILE/000.png`)
+            ?.setScale(2 * (1 + ap / 200))
+          petalSprite.anims.play({
+            key: "PETAL_DANCE_PROJECTILE",
+            frameRate: 8
+          })
+          petalGroup.add(petalSprite)
+          scene.abilitiesVfxGroup?.add(petalSprite)
+        }
+
+        Phaser.Actions.PlaceOnCircle(petalGroup.getChildren(), circle)
+
+        scene.tweens.add({
+          targets: circle,
+          radius: r,
+          ease: Phaser.Math.Easing.Quartic.Out,
+          duration: 1200,
+          onUpdate: function (tween) {
+            Phaser.Actions.RotateAroundDistance(
+              petalGroup.getChildren(),
+              { x, y },
+              (r === 96 ? 1 : -1) * 0.04,
+              circle.radius
+            )
+          },
+          onComplete: function () {
+            petalGroup.destroy(true, true)
+          }
+        })
+      }
+    }
+  ],
+  ["PETAL_DANCE_PROJECTILE"]: projectile({
+    projectileSpeed: 10,
+    hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 })
+  }),
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
   [Ability.BRICK_BREAK]: onTargetScale2,
@@ -816,10 +900,22 @@ export const AbilitiesAnimations: {
   }),
   ["FIELD_DEATH"]: onCasterScale2,
   ["FAIRY_CRIT"]: onCasterScale2,
+  ["FAIRY_HIT"]: onTarget({
+    ability: "FAIRY/hit",
+    textureKey: "attacks"
+  }),
+  ["FAIRY_TUNNEL"]: projectile({
+    ability: Ability.PSYCHO_CUT,
+    distance: 8,
+    duration: 1000,
+    oriented: true,
+    rotation: +Math.PI / 2
+  }),
   ["POWER_LENS"]: onCasterScale2,
   ["STAR_DUST"]: onCasterScale2,
   ["HEAL_ORDER"]: onCasterScale2,
   ["ATTACK_ORDER"]: onCasterScale2,
+  ["DEFEND_ORDER"]: onCasterScale2,
   ["FOSSIL_RESURRECT"]: onCasterScale2,
   ["LANDS_WRATH/hit"]: onCasterScale2,
   [Ability.BUG_BUZZ]: onTargetScale2,
@@ -905,9 +1001,9 @@ export const AbilitiesAnimations: {
   [Ability.CROSS_POISON]: onTargetScale3,
   [Ability.FIERY_DANCE]: onTarget({ ability: Ability.FIRE_BLAST, scale: 2 }),
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
-  [Ability.DRACO_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DRAGON_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.GRUDGE_DIVE]: projectile({
-    ability: Ability.DRACO_ENERGY,
+    ability: Ability.DRAGON_ENERGY,
     tint: 0xcbc3e3
   }),
   [Ability.ROCK_WRECKER]: onSprite(({ casterSprite, ...args }) =>
@@ -934,7 +1030,7 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: +Math.PI / 2
   }),
-  [Ability.MYSTICAL_FIRE]: onTarget({ positionOffset: [0, -50] }),
+  [Ability.MYSTICAL_FIRE]: onTarget({ scale: 1.5 }),
   [Ability.FLAME_CHARGE]: onCaster({
     oriented: true,
     rotation: +Math.PI / 2,
@@ -1137,7 +1233,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.NASTY_PLOT]: onCaster({ positionOffset: [0, -50] }),
   [Ability.ROCK_TOMB]: onTarget({ origin: [0.5, 0.9], scale: 1 }),
-  [Ability.SLACK_OFF]: onCaster({ ability: Ability.ILLUSION, scale: 1 }),
+  [Ability.SLACK_OFF]: onCaster({ ability: Ability.CAMOUFLAGE, scale: 1 }),
   [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
   [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
@@ -1168,9 +1264,8 @@ export const AbilitiesAnimations: {
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: onTargetScale1,
-  [Ability.STEAM_ERUPTION]: onTargetScale3,
+  [Ability.STEAM_ERUPTION]: onTargetScale2,
   [Ability.SEARING_SHOT]: onCaster({
-    ability: Ability.STEAM_ERUPTION,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 3
   }),
@@ -1227,7 +1322,7 @@ export const AbilitiesAnimations: {
     positionOffset: [0, -20]
   }),
   [Ability.ATTRACT]: onCaster({ positionOffset: [0, -70] }),
-  [Ability.MAGNET_RISE]: onCaster({ ability: Ability.ELECTRO_BOOST }),
+  [Ability.MAGNET_RISE]: onCasterScale2,
   [Ability.FORCE_PALM]: onTarget({ ability: Ability.ANCHOR_SHOT }),
   [Ability.WATERFALL]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -1365,7 +1460,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.X_SCISSOR]: onTargetScale2,
-  [Ability.DEATH_WING]: onTargetScale2,
+  [Ability.OBLIVION_WING]: onTargetScale2,
   [Ability.GEOMANCY]: onCaster({
     positionOffset: [0, -50],
     depth: DEPTH.ABILITY_GROUND_LEVEL
@@ -2149,7 +2244,7 @@ export const AbilitiesAnimations: {
     duration: 250,
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
-  [Ability.DARK_LARIAT]: projectile({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DARKEST_LARIAT]: projectile({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.FIRESTARTER]: projectile({
     duration: 800,
     startCoords: "target",
@@ -2448,7 +2543,7 @@ export const AbilitiesAnimations: {
       ability: "SNIPE_SHOT/projectile",
       scale: 3,
       duration: 1000,
-      rotation: -targetAngle,
+      rotation: args.flip ? targetAngle : -targetAngle,
       endCoords: [
         args.positionX + Math.round(Math.cos(targetAngle) * 10),
         args.positionY + Math.round(Math.sin(targetAngle) * 10),
@@ -2684,10 +2779,7 @@ export const AbilitiesAnimations: {
       distanceE(args.positionX, args.positionY, args.targetX, args.targetY)
     )
     // orientation field is used to pass the type of the pillar
-    const pillarType =
-      [Pkm.PILLAR_WOOD, Pkm.PILLAR_IRON, Pkm.PILLAR_CONCRETE][
-        args.orientation
-      ] ?? Pkm.PILLAR_WOOD
+    const pillarType = Pillars[args.orientation] ?? Pkm.PILLAR_WOOD
     const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
     const frame = `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     return projectile({
@@ -2947,6 +3039,11 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
   }),
+  [Ability.AQUA_STEP]: onCaster({
+    ability: Ability.AQUA_STEP,
+    scale: 1,
+    positionOffset: [+5, -15]
+  }),
   [Ability.STATIC_SHOCK]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
@@ -3016,11 +3113,38 @@ export const AbilitiesAnimations: {
     hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 }),
     scale: 0.25
   }),
+  ["GREEN_ORB"]: onCaster({
+    ability: "GREEN_ORB",
+    oriented: false,
+    scale: 3,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
   ["GALARIAN_DARMANITAN_ZEN_BURN"]: onCaster({
     ability: "INFERNO",
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     scale: 2
-  })
+  }),
+  ["WARP_WAND"]: onSprite(({ targetSprite, ...args }) => {
+    onTarget({ ability: "WARP", scale: 1.5 })(args)
+    if (targetSprite) {
+      targetSprite.isTeleporting = true
+      setTimeout(() => {
+        targetSprite.isTeleporting = false
+      }, 1000)
+    }
+  }),
+  ["WHIRLWIND_WAND"]: projectile({
+    ability: Ability.WHIRLWIND,
+    duration: 1500,
+    distance: 8
+  }),
+  ["BALL"]: (args) =>
+    projectile({
+      delay: 0,
+      scale: 1,
+      duration: args.delay,
+      oriented: true
+    })(args)
 }
 
 export function displayAbility(args: AbilityAnimationArgs) {

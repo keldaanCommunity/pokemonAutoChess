@@ -1,5 +1,5 @@
-import { ArraySchema } from "@colyseus/schema"
-import { IPokemonRecord } from "../../../../../models/colyseus-models/game-record"
+import type { ArraySchema } from "@colyseus/schema"
+import type { IPokemonRecord } from "../../../../../models/colyseus-models/game-record"
 import PokemonPortrait from "../pokemon-portrait"
 import "./team.css"
 

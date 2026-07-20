@@ -19,7 +19,7 @@
 .region-stat {
   background-color: rgb(84, 89, 107);
   margin-bottom: 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
   overflow-x: auto;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
 
 /* Region name */
 .region-stat > span:nth-of-type(2) {
-  min-width: 200px;
+  min-width: 250px;
   flex-shrink: 0;
 }
 

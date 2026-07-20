@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 
 import { WeatherThreshold } from "../../../../../config"
@@ -19,8 +18,8 @@ export default function WikiWeather() {
   return (
     <div id="wiki-weather">
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
-        <p>{t("weather_dominant_hint")}</p>
-        <p>{t("weather_dominant_hint2")}</p>
+        <p>{t("wiki.weather.weather_dominant_hint")}</p>
+        <p>{t("wiki.weather.weather_dominant_hint2")}</p>
       </div>
       <ul>
         {Object.values(Weather).map((weather: Weather) => (
@@ -69,7 +68,7 @@ export default function WikiWeather() {
 }
 
 const pokemonsInfluencingWeather = new Map([
-  [Weather.ZENITH, [Pkm.SHAYMIN_SKY, Pkm.CASTFORM_SUN]],
+  [Weather.ZENITH, [Pkm.SHAYMIN_SKY, Pkm.CASTFORM_SUN, Pkm.SOLROCK]],
   [
     Weather.DROUGHT,
     [Pkm.PRIMAL_GROUDON, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]

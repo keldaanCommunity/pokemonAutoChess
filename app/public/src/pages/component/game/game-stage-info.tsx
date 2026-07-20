@@ -11,7 +11,7 @@ import {
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { min } from "../../../../../utils/number"
@@ -101,7 +101,7 @@ export default function GameStageInfo() {
                   <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}
                 <p className="player-name">
-                  {isPVE ? t(opponentName) : opponentName}
+                  {isPVE ? t(opponentName as `pkm.${Pkm}`) : opponentName}
                 </p>
               </div>
             </>

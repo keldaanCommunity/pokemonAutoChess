@@ -1,9 +1,15 @@
-import React, { Dispatch, SetStateAction, useMemo } from "react"
+import { type Dispatch, type SetStateAction, useMemo } from "react"
+import { BoosterPriceByRarity, getEmotionCost } from "../../../../../config"
+import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types/enum/Emotion"
+import { Rarity } from "../../../../../types/enum/Game"
 import { Pkm, PkmIndex, Unowns } from "../../../../../types/enum/Pokemon"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppSelector } from "../../../hooks"
-import { CollectionFilterState } from "./pokemon-collection"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
+import type { CollectionFilterState } from "./pokemon-collection"
 import PokemonCollectionItem from "./pokemon-collection-item"
 import "./unown-panel.css"
 
@@ -26,9 +32,27 @@ export default function UnownPanel(props: {
     .replace(/\s+$/gm, "")
     .split("")
 
-  const unowns = useMemo(
+  const [favorites] = useLocalStore<Pkm[]>(
+    LocalStoreKeys.FAVORITES,
+    [],
+    Infinity
+  )
+  const lastBoostersOpened = useAppSelector(
+    (state) => state.boosters.lastBoostersOpened
+  )
+
+  type CollectionItem = {
+    pkm: Pkm
+    item: IPokemonCollectionItemUnpacked
+    isNew: boolean
+    isFavorite: boolean
+    isUnlocked: boolean
+    isUnlockable: boolean
+  }
+
+  const unowns = useMemo<CollectionItem[]>(
     () =>
-      Unowns.flatMap((pkm: Pkm) => {
+      Unowns.map((pkm: Pkm) => {
         const item = pokemonCollection.get(PkmIndex[pkm]) ?? {
           dust: 0,
           emotions: [] as Emotion[],
@@ -38,17 +62,67 @@ export default function UnownPanel(props: {
           id: PkmIndex[pkm],
           played: 0
         }
+        const pokemonData = getPokemonData(pkm)
+        const availableEmotions = getAvailableEmotions(pokemonData.index, false)
+        const shinyAvailableEmotions = getAvailableEmotions(
+          pokemonData.index,
+          true
+        )
         const isUnlocked =
           item.emotions?.length > 0 || item.shinyEmotions?.length > 0
-        return [{ pkm, item: item, isUnlocked }]
-      }).sort((a, b) => {
-        if (props.filterState.sort === "index") {
-          return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
-        } else {
-          return (b.item?.dust ?? 0) - (a.item?.dust ?? 0)
-        }
+        const isNew = lastBoostersOpened.some((booster) =>
+          booster.some((card) => card.name === pkm && card.new)
+        )
+        const isFavorite = favorites.includes(pkm)
+        const isUnlockable =
+          props.filterState.mode !== "pokedex" &&
+          (availableEmotions.some(
+            (e) =>
+              !item.emotions.includes(e) &&
+              item.dust >= getEmotionCost(e, false) &&
+              props.filterState.mode !== "shiny"
+          ) ||
+            shinyAvailableEmotions.some(
+              (e) =>
+                !item.shinyEmotions.includes(e) &&
+                item.dust >= getEmotionCost(e, true) &&
+                !PokemonAnimations[pkm]?.shinyUnavailable
+            ))
+
+        return { pkm, item, isUnlocked, isNew, isFavorite, isUnlockable }
       }),
-    [props.filterState.sort, pokemonCollection]
+    [pokemonCollection, favorites, lastBoostersOpened, props.filterState.mode]
+  )
+
+  const filteredUnowns = useMemo<CollectionItem[]>(
+    () =>
+      unowns
+        .filter(({ item, isNew, isUnlocked, isFavorite, isUnlockable }) => {
+          const boosterCost = BoosterPriceByRarity[Rarity.SPECIAL]
+          if (
+            props.filterState.filter === "refundable" &&
+            item.dust < boosterCost
+          )
+            return false
+          if (props.filterState.filter === "new" && !isNew) return false
+          if (props.filterState.filter === "unlocked" && !isUnlocked)
+            return false
+          if (props.filterState.filter === "unlockable" && !isUnlockable)
+            return false
+          if (props.filterState.filter === "locked" && isUnlocked) return false
+          if (props.filterState.filter === "favorite" && !isFavorite)
+            return false
+
+          return true
+        })
+        .sort((a, b) => {
+          if (props.filterState.sort === "index") {
+            return PkmIndex[a.pkm].localeCompare(PkmIndex[b.pkm])
+          } else {
+            return (b.item?.dust ?? 0) - (a.item?.dust ?? 0)
+          }
+        }),
+    [props.filterState.sort, props.filterState.filter, props.filterState.mode]
   )
 
   return (
@@ -57,19 +131,20 @@ export default function UnownPanel(props: {
         {secretMessage.map((char, i) => renderChar(char, i, unowns))}
       </div>
       <div className="unown-collection-grid">
-        {unowns.map((unown) => {
-          if (!unown) return null
-          return (
-            <PokemonCollectionItem
-              key={PkmIndex[unown.pkm]}
-              name={unown.pkm}
-              index={PkmIndex[unown.pkm]}
-              item={unown.item}
-              setPokemon={props.setPokemon}
-              filterState={props.filterState}
-            />
-          )
-        })}
+        {filteredUnowns.map((unown) => (
+          <PokemonCollectionItem
+            key={PkmIndex[unown.pkm]}
+            name={unown.pkm}
+            index={PkmIndex[unown.pkm]}
+            item={unown.item}
+            setPokemon={props.setPokemon}
+            filterState={props.filterState}
+            isUnlocked={unown.isUnlocked}
+            isNew={unown.isNew}
+            isFavorite={unown.isFavorite}
+            isUnlockable={unown.isUnlockable}
+          />
+        ))}
       </div>
     </div>
   )
@@ -78,7 +153,10 @@ export default function UnownPanel(props: {
 function renderChar(
   c: string,
   index: number,
-  unowns: { pkm: Pkm; isUnlocked: boolean }[]
+  unowns: {
+    pkm: Pkm
+    isUnlocked: boolean
+  }[]
 ) {
   let unown
   switch (c) {

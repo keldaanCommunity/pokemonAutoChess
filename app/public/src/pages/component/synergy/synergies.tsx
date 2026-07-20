@@ -1,13 +1,17 @@
-import { SynergyTriggers } from "../../../../../config"
+import { useState } from "react"
+import ReactDOM from "react-dom"
+import { Tooltip } from "react-tooltip"
+import { SynergyTiersThresholds } from "../../../../../config"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyComponent from "./synergy-component"
-
+import SynergyDetailComponent from "./synergy-detail-component"
 import "./synergies.css"
 
 export default function Synergies(props: {
   synergies: [string, number][]
   tooltipPortal: boolean
 }) {
+  const [hoveredSynergy, setHoveredSynergy] = useState<Synergy | null>(null)
   const synergies = Object.keys(Synergy)
     .sort((a, b) => {
       const fa = props.synergies.find((e) => e[0] == a)
@@ -15,7 +19,7 @@ export default function Synergies(props: {
       const sa = fa ? fa : 0
       const sb = fb ? fb : 0
       if (sa[1] == sb[1]) {
-        if (sa[1] >= SynergyTriggers[a][0]) {
+        if (sa[1] >= SynergyTiersThresholds[a][0]) {
           return -1
         } else {
           return 1
@@ -29,6 +33,24 @@ export default function Synergies(props: {
       return s && s[1] > 0
     })
 
+  const tooltip = (
+    <Tooltip
+      id="detail-synergy"
+      hidden={hoveredSynergy === null}
+      className="custom-theme-tooltip"
+      place="right-start"
+      delayShow={100}
+      delayHide={0}
+    >
+      {hoveredSynergy && (
+        <SynergyDetailComponent
+          type={hoveredSynergy}
+          value={props.synergies.find((e) => e[0] == hoveredSynergy)![1]}
+        />
+      )}
+    </Tooltip>
+  )
+
   return (
     <div className="synergies-list">
       {synergies.map((type, index) => {
@@ -39,10 +61,14 @@ export default function Synergies(props: {
             type={type as Synergy}
             value={s[1]}
             index={index}
-            tooltipPortal={props.tooltipPortal}
+            onMouseEnter={() => setHoveredSynergy(type as Synergy)}
+            onMouseLeave={() => setHoveredSynergy(null)}
           />
         )
       })}
+      {props.tooltipPortal
+        ? ReactDOM.createPortal(tooltip, document.body)
+        : tooltip}
     </div>
   )
 }

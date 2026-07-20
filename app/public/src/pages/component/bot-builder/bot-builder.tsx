@@ -1,8 +1,7 @@
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router"
 import {
   DEFAULT_BOT_STATE,
   estimateElo,
@@ -18,14 +17,10 @@ import {
 } from "../../../../../core/bot-logic"
 import {
   computeSynergies,
-  getSynergyStep
+  getSynergyTier
 } from "../../../../../models/colyseus-models/synergies"
-import {
-  IBot,
-  IDetailledPokemon
-} from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { PkmWithCustom, Role } from "../../../../../types"
+import { type PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { getAvatarString } from "../../../../../utils/avatar"
@@ -33,6 +28,7 @@ import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
+import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
 import DiscordButton from "../buttons/discord-button"
 import { Modal } from "../modal/modal"
 import ImportBotModal from "./import-bot-modal"
@@ -120,7 +116,7 @@ export default function BotBuilder() {
   }
 
   function changeAvatar(pkm: PkmWithCustom) {
-    bot.name = pkm.name.toUpperCase()
+    bot.name = pkm.name
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
     completeBotInfo()
   }
@@ -216,12 +212,12 @@ export default function BotBuilder() {
   )
   const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
   const nbMaxScarvesOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.NORMAL),
+    () => getSynergyTier(synergies, Synergy.NORMAL),
     [board]
   )
   const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
   const nbMaxToolsOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.ARTIFICIAL),
+    () => getSynergyTier(synergies, Synergy.ARTIFICIAL),
     [board]
   )
   const powerScore = useMemo(() => getPowerScore(board), [board])

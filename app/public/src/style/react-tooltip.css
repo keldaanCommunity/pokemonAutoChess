@@ -3,14 +3,18 @@
   max-width: 95vw;
 }
 
+.react-tooltip > .react-tooltip-content-wrapper {
+  padding: 0;
+}
+
 .react-tooltip output {
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .react-tooltip .help {
   font-size: 90%;
   font-style: italic;
-  color: #e0e0e0;
+  color: var(--color-fg-secondary);
 }
 
 .react-tooltip p:last-child {

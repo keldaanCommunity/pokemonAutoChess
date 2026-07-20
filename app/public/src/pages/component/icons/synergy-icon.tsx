@@ -1,6 +1,5 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import "./synergy-icon.css"
 
 export default function SynergyIcon(props: {
@@ -13,7 +12,7 @@ export default function SynergyIcon(props: {
     <img
       src={"assets/types/" + props.type + ".svg"}
       alt={props.type}
-      title={t("synergy." + props.type)}
+      title={t(`synergy.${props.type}`)}
       className={`synergy-icon${props.className ? " " + props.className : ""}`}
       style={{
         width: props.size,

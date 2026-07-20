@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
-import { IPortal, ISynergySymbol } from "../../types"
+import type { IPortal, ISynergySymbol } from "../../types"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-import { Synergy } from "../../types/enum/Synergy"
+import type { Synergy } from "../../types/enum/Synergy"
 
 export class Portal extends Schema implements IPortal {
   @type("string") id: string

@@ -1,9 +1,14 @@
-import { Emotion, Role, Title } from ".."
-import { Language } from "../enum/Language"
+import type { Emotion, Role, Title } from ".."
+import type { Language } from "../enum/Language"
 
 interface IUserMetadata {
   uid: string
   displayName: string
+  twitchUserId?: string
+  twitchLogin?: string
+  twitchDisplayName?: string
+  twitchVerifiedAt?: Date | null
+  twitchVerificationRevokedAt?: Date | null
   language: Language | ""
   avatar: string
   games: number
@@ -37,7 +42,7 @@ export interface IUserMetadataMongo extends IUserMetadata {
 
 export interface IPokemonCollectionItemMongo extends IPokemonCollectionItem {
   // OPTIMIZED: Single field to store all unlocked emotions data in 5 bytes (40 bits used)
-  unlocked: Buffer
+  unlocked: Uint8Array
 }
 
 // When using .lean(), Mongoose returns BSON Binary objects instead of Buffer
@@ -45,7 +50,7 @@ export type IPokemonCollectionItemLean = Omit<
   IPokemonCollectionItemMongo,
   "unlocked"
 > & {
-  unlocked: Buffer | { buffer: ArrayBuffer } | undefined
+  unlocked: Uint8Array | { buffer: ArrayBuffer } | undefined
 }
 
 export type IUserMetadataLean = Omit<

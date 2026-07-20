@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IAfterGamePlayer } from "../../../types"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type { IAfterGamePlayer } from "../../../types"
 import { GameMode } from "../../../types/enum/Game"
 
 export interface IUserAfterState {
@@ -16,7 +16,7 @@ const initialState: IUserAfterState = {
   gameMode: GameMode.CUSTOM_LOBBY
 }
 
-export const afterSlice = createSlice({
+const afterSlice = createSlice({
   name: "after",
   initialState: initialState,
   reducers: {

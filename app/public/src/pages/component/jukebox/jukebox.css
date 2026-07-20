@@ -35,3 +35,9 @@
     transform: rotate(360deg);
   }
 }
+
+.game-jukebox-modal .credits {
+  color: var(--color-fg-secondary);
+  font-style: italic;
+  margin-bottom: 0.5em;
+}

@@ -37,5 +37,5 @@ export const ItemsStatistics = model<IItemsStatistic>(
 export default ItemsStatistics
 
 export async function fetchMetaItems(): Promise<IItemsStatistic[]> {
-  return fetch("/meta/items").then((res) => res.json())
+  return fetch(`/meta/items?t=${new Date().getUTCDate()}`).then((res) => res.json())
 }

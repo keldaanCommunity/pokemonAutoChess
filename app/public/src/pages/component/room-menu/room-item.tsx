@@ -1,9 +1,10 @@
-import { RoomAvailable } from "@colyseus/sdk"
-import React, { useState } from "react"
+import type { RoomAvailable } from "@colyseus/sdk"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { EloRankThreshold, MAX_PLAYERS_PER_GAME } from "../../../../../config"
-import { IPreparationMetadata, Role } from "../../../../../types"
-import { EloRank } from "../../../../../types/enum/EloRank"
+import { GADGETS } from "../../../../../config/game/gadgets"
+import { type IPreparationMetadata, Role } from "../../../../../types"
+import type { EloRank } from "../../../../../types/enum/EloRank"
 import { GameMode } from "../../../../../types/enum/Game"
 import { formatMinMaxRanks, getRank } from "../../../../../utils/elo"
 import { useAppSelector } from "../../../hooks"
@@ -28,10 +29,10 @@ export default function RoomItem(props: {
     disabledReason: string | null = null
   if (props.room.clients >= nbPlayersExpected) {
     canJoin = false
-    disabledReason = t("game_full")
+    disabledReason = t("room_menu.game_full")
   } else if (props.room.metadata?.gameStartedAt != null) {
     canJoin = false
-    disabledReason = t("game_already_started")
+    disabledReason = t("room_menu.game_already_started")
   } else if (
     props.room.metadata?.blacklist &&
     props.room.metadata.blacklist.length > 0 &&
@@ -39,7 +40,7 @@ export default function RoomItem(props: {
     props.room.metadata.blacklist.includes(user.uid) === true
   ) {
     canJoin = false
-    disabledReason = t("errors.USER_KICKED")
+    disabledReason = t("room_menu.blacklisted")
   } else if (
     props.room.metadata?.whitelist &&
     props.room.metadata.whitelist.length > 0 &&
@@ -53,7 +54,7 @@ export default function RoomItem(props: {
     (user?.elo ?? 0) < EloRankThreshold[props.room.metadata.minRank as EloRank]
   ) {
     canJoin = false
-    disabledReason = t("min_rank_not_reached")
+    disabledReason = t("room_menu.min_rank_not_reached")
   } else if (
     props.room.metadata?.maxRank != null &&
     user?.elo &&
@@ -61,7 +62,15 @@ export default function RoomItem(props: {
       EloRankThreshold[props.room.metadata?.maxRank as EloRank]
   ) {
     canJoin = false
-    disabledReason = t("max_rank_not_reached")
+    disabledReason = t("room_menu.max_rank_not_reached")
+  } else if (
+    props.room.metadata?.gameMode === GameMode.RANKED &&
+    (!user || user.level < GADGETS.certificate.levelRequired)
+  ) {
+    canJoin = false
+    disabledReason = t("room_menu.ranked_mode_locked", {
+      requiredLevel: GADGETS.certificate.levelRequired
+    })
   }
   if (user?.role === Role.ADMIN) {
     canJoin = true
@@ -111,7 +120,7 @@ export default function RoomItem(props: {
           title={
             t("minimum_rank") +
             ": " +
-            t("elorank." + props.room.metadata?.minRank)
+            t(`elorank.${props.room.metadata?.minRank}`)
           }
           className="rank icon"
           src={"/assets/ranks/" + props.room.metadata?.minRank + ".svg"}

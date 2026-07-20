@@ -1,26 +1,28 @@
-import { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
+import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
-import Dps from "../core/dps"
-import { Effect as EffectClass } from "../core/effects/effect"
-import { EvolutionRule } from "../core/evolution-rules"
-import { FlowerPot } from "../core/flower-pots"
-import Count from "../models/colyseus-models/count"
-import ExperienceManager from "../models/colyseus-models/experience-manager"
-import { IPokemonRecord } from "../models/colyseus-models/game-record"
-import HistoryItem from "../models/colyseus-models/history-item"
-import Player from "../models/colyseus-models/player"
-import { Pokemon } from "../models/colyseus-models/pokemon"
-import { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
-import Status from "../models/colyseus-models/status"
-import Synergies from "../models/colyseus-models/synergies"
-import { Effects } from "../models/effects"
-import GameRoom from "../rooms/game-room"
-import { AttackSprite } from "./Animation"
-import { Ability } from "./enum/Ability"
-import { DungeonPMDO } from "./enum/Dungeon"
-import { BoardEffect, EffectEnum } from "./enum/Effect"
-import { Emotion } from "./enum/Emotion"
-import {
+import type Dps from "../core/dps"
+import type { Effect as EffectClass } from "../core/effects/effect"
+import type Count from "../models/colyseus-models/count"
+import type ExperienceManager from "../models/colyseus-models/experience-manager"
+import type { IPokemonRecord } from "../models/colyseus-models/game-record"
+import type HistoryItem from "../models/colyseus-models/history-item"
+import type Player from "../models/colyseus-models/player"
+import type { PlayerChoice } from "../models/colyseus-models/player-choice"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
+import type { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
+import type Status from "../models/colyseus-models/status"
+import type Synergies from "../models/colyseus-models/synergies"
+import type { Effects } from "../models/effects"
+import type GameRoom from "../rooms/game-room"
+import type { AttackSprite } from "./Animation"
+import type { EvolutionRule } from "./EvolutionRules"
+import type { Ability } from "./enum/Ability"
+import type { DungeonPMDO } from "./enum/Dungeon"
+import type { BoardEffect, EffectEnum } from "./enum/Effect"
+import type { EloRank } from "./enum/EloRank"
+import type { Emotion } from "./enum/Emotion"
+import type { FlowerPot } from "./enum/FlowerPot"
+import type {
   GameMode,
   Orientation,
   PokemonActionState,
@@ -28,14 +30,16 @@ import {
   Stat,
   Team
 } from "./enum/Game"
-import { Item } from "./enum/Item"
-import { Passive } from "./enum/Passive"
-import { Pkm, PkmProposition } from "./enum/Pokemon"
-import { Synergy } from "./enum/Synergy"
-import { Weather } from "./enum/Weather"
-import { GameStats } from "./interfaces/GameStats"
+import type { Item } from "./enum/Item"
+import type { Passive } from "./enum/Passive"
+import type { Pkm } from "./enum/Pokemon"
+import type { Synergy } from "./enum/Synergy"
+import type { TradeStatus } from "./enum/TradeStatus"
+import type { Weather } from "./enum/Weather"
+import type { GameStats } from "./interfaces/GameStats"
 
 export * from "./enum/Emotion"
+export * from "./enum/FlowerPot"
 export * from "./enum/Item"
 
 export const CDN_URL =
@@ -60,13 +64,11 @@ export enum Transfer {
   DRAG_DROP_ITEM = "DRAG_DROP_ITEM",
   SWITCH_BENCH_AND_BOARD = "SWITCH_BENCH_AND_BOARD",
   SELL_POKEMON = "SELL_POKEMON",
+  USE_ITEM = "USE_ITEM",
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
-  CHANGE_SELECTED_EMOTION = "CHANGE_SELECTED_EMOTION",
   NEW_MESSAGE = "NEW_MESSAGE",
   CHANGE_NAME = "CHANGE_NAME",
   CHANGE_AVATAR = "CHANGE_AVATAR",
-  OPEN_BOOSTER = "OPEN_BOOSTER",
-  BUY_BOOSTER = "BUY_BOOSTER",
   ADD_BOT = "ADD_BOT",
   REMOVE_BOT = "REMOVE_BOT",
   TOGGLE_READY = "TOGGLE_READY",
@@ -76,7 +78,6 @@ export enum Transfer {
   LOCK = "LOCK",
   LEVEL_UP = "LEVEL_UP",
   SHOP = "SHOP",
-  ITEM = "ITEM",
   COOK = "COOK",
   DIG = "DIG",
   GAME_START = "GAME_START",
@@ -86,12 +87,11 @@ export enum Transfer {
   CHANGE_ROOM_PASSWORD = "CHANGE_ROOM_PASSWORD",
   CHANGE_ROOM_RANKS = "CHANGE_ROOM_RANKS",
   CHANGE_SPECIAL_RULE = "CHANGE_SPECIAL_RULE",
-  BUY_EMOTION = "BUY_EMOTION",
-  BOOSTER_CONTENT = "BOOSTER_CONTENT",
   USER = "USER",
   DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
+  DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
@@ -102,7 +102,7 @@ export enum Transfer {
   GIVE_BOOSTER = "GIVE_BOOSTER",
   SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
-  POKEMON_PROPOSITION = "POKEMON_PROPOSITION",
+  CHOICE = "CHOICE",
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
@@ -133,11 +133,15 @@ export enum Transfer {
   PRELOAD_MAPS = "PRELOAD_MAPS",
   NPC_DIALOG = "NPC_DIALOG",
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
-  HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
+  MAINTENANCE = "MAINTENANCE",
   RECONNECT_PROMPT = "RECONNECT_PROMPT",
   OVERWRITE_BOARD = "OVERWRITE_BOARD",
   NOTIFICATIONS = "NOTIFICATIONS",
-  NOTIFICATION_SEEN = "NOTIFICATION_SEEN"
+  NOTIFICATION_SEEN = "NOTIFICATION_SEEN",
+  DEV = "DEV",
+  CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
+  SELECT_PARTNER = "SELECT_PARTNER",
+  TRADE_ACCEPT = "TRADE_ACCEPT"
 }
 
 export enum ReadWriteMode {
@@ -190,7 +194,7 @@ export interface ISimplePlayer {
   id: string
   rank: number
   avatar: string
-  title: string
+  title: Title | ""
   role: Role
   pokemons: IPokemonRecord[] | ArraySchema<IPokemonRecord>
   synergies:
@@ -258,13 +262,17 @@ export interface IPlayer {
   shopFreeRolls: number
   streak: number
   interest: number
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
+  tradeStatus: TradeStatus
   opponentId: string
   opponentName: string
   opponentAvatar: string
-  opponentTitle: string
+  opponentTitle: Title | "WILD" | ""
   boardSize: number
   items: ArraySchema<Item>
   scarvesItems: ArraySchema<Item>
+  fairyWands: ArraySchema<Item>
   rank: number
   elo: number
   alive: boolean
@@ -272,8 +280,7 @@ export interface IPlayer {
   pokemonCustoms: PokemonCustoms
   title: Title | ""
   role: Role
-  itemsProposition: ArraySchema<Item>
-  pokemonsProposition: ArraySchema<PkmProposition>
+  choices: ArraySchema<PlayerChoice>
   loadingProgress: number
   berryTreesStages: number[]
   flowerPots: Pokemon[]
@@ -299,6 +306,7 @@ export interface IPlayer {
   titles: Set<Title>
   regions: DungeonPMDO[]
   gameStats: GameStats
+  groundHoles: number[]
 }
 
 export interface IPokemon {
@@ -608,8 +616,8 @@ export interface IPreparationMetadata {
   noElo: boolean
   type: "preparation"
   gameStartedAt: string | null
-  minRank: string | null
-  maxRank: string | null
+  minRank: EloRank | null
+  maxRank: EloRank | null
   gameMode: GameMode
   whitelist: string[]
   blacklist: string[]
@@ -733,7 +741,9 @@ export enum Title {
   EXPLORER = "EXPLORER",
   POSTMAN = "POSTMAN",
   SURVEY_CORPS = "SURVEY_CORPS",
-  GUILDMASTER = "GUILDMASTER"
+  GUILDMASTER = "GUILDMASTER",
+  LEGIONNAIRE = "LEGIONNAIRE",
+  FIVE_STARS = "FIVE_STARS"
 }
 
 export interface IBoardEvent {

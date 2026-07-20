@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   BoosterPriceByRarity,
@@ -8,16 +8,13 @@ import {
 import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Emotion } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { PokemonAnimations } from "../../../game/components/pokemon-animations"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { buyBooster, buyEmotion } from "../../../network"
-import {
-  changeAvatar,
-  changeSelectedEmotion
-} from "../../../stores/NetworkStore"
+import { buyBooster, buyEmotion, changeSelectedEmotion } from "../../../network"
+import { changeAvatar } from "../../../stores/NetworkStore"
 import { cc } from "../../utils/jsx"
 import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import { Modal } from "../modal/modal"
@@ -37,6 +34,15 @@ export default function PokemonEmotionsModal(props: {
       new Map<string, IPokemonCollectionItemUnpacked>()
   )
   const user = useAppSelector((state) => state.network.profile)
+  const [requestError, setRequestError] = useState<string | null>(null)
+  const onError = useCallback(
+    (error: unknown) => {
+      const message =
+        error instanceof Error ? error.message : t("errors.UNKNOWN_ERROR")
+      setRequestError(message)
+    },
+    [t]
+  )
 
   const [selectedVariant, setSelectedVariant] = useState<Pkm>(props.pokemon)
   useEffect(() => {
@@ -77,20 +83,20 @@ export default function PokemonEmotionsModal(props: {
       unlocked: boolean,
       update: { index: string; emotion: Emotion; shiny: boolean }
     ) => {
+      setRequestError(null)
       if (unlocked) {
-        dispatch(changeSelectedEmotion(update))
+        changeSelectedEmotion(update).catch(onError)
       } else {
-        buyEmotion(update)
+        buyEmotion(update).catch(onError)
       }
     },
-    [dispatch]
+    [t]
   )
 
   const resetEmotion = useCallback(() => {
-    dispatch(
-      changeSelectedEmotion({ index: index, emotion: null, shiny: false })
-    )
-  }, [dispatch])
+    setRequestError(null)
+    changeSelectedEmotion({ index, emotion: null, shiny: false }).catch(onError)
+  }, [index, t])
 
   const isCurrentAvatar =
     user &&
@@ -122,99 +128,74 @@ export default function PokemonEmotionsModal(props: {
 
   const isAltForm =
     PkmAltForms.includes(props.pokemon) || props.pokemon in PkmAltFormsByPkm
-  const altForms = isAltForm
+  const altForms: Pkm[] = isAltForm
     ? [props.pokemon, ...(PkmAltFormsByPkm[props.pokemon] || [])]
     : []
 
   return (
-    <Modal
-      show={true}
-      onClose={props.onClose}
-      className="pokemon-emotions-modal anchor-top"
-      header={
-        <>
-          <PokemonPortrait
-            portrait={{
-              index,
-              shiny: item.selectedShiny,
-              emotion: item.selectedEmotion ?? Emotion.NORMAL
-            }}
-            className={cc({ unlocked: item != null })}
-          />
-          <h2>
-            {t(`pkm.${selectedVariant}`)} #{PkmIndex[selectedVariant]} -{" "}
-            {t("played_times", { count: item.played ?? 0 })}
-          </h2>
-          <div className="spacer" />
-          {isAltForm && (
-            <div className="alt-forms-select">
-              <label>{t("alt_forms")}</label>
-              <select
-                onChange={(e) => setSelectedVariant(e.target.value as Pkm)}
-                value={selectedVariant}
-              >
-                {altForms.map((variant) => (
-                  <option key={variant} value={variant}>
-                    {t(`pkm.${variant}`)} ({variant})
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-          <p className="dust">
-            <img src={getPortraitSrc(index)} className="dust" alt="dust" />
-            {shards} {t("shards")}{" "}
-          </p>
-        </>
-      }
-      body={
-        <>
-          <section>
-            <p>{t("normal_emotions")}</p>
-            <div>
-              {availableEmotions.map((e) => {
-                return (
-                  <PokemonEmotion
-                    key={e}
-                    index={index}
-                    shiny={false}
-                    unlocked={item && item.emotions.includes(e)}
-                    selected={item.selectedEmotion === e && !item.selectedShiny}
-                    path={index.replace("-", "/")}
-                    emotion={e}
-                    dust={shards}
-                    onClick={() =>
-                      handlePokemonEmotionClick(
-                        item && item.emotions.includes(e),
-                        { index: index, emotion: e, shiny: false }
-                      )
-                    }
-                  />
-                )
-              })}
-            </div>
-          </section>
-          {shinyAvailable && (
+    <>
+      <Modal
+        show={true}
+        onClose={props.onClose}
+        className="pokemon-emotions-modal anchor-top"
+        header={
+          <>
+            <PokemonPortrait
+              portrait={{
+                index,
+                shiny: item.selectedShiny,
+                emotion: item.selectedEmotion ?? Emotion.NORMAL
+              }}
+              className={cc({ unlocked: item != null })}
+            />
+            <h2>
+              {t(`pkm.${selectedVariant}`)} #{PkmIndex[selectedVariant]} -{" "}
+              {t("played_times", { count: item.played ?? 0 })}
+            </h2>
+            <div className="spacer" />
+            {isAltForm && (
+              <div className="alt-forms-select">
+                <label>{t("alt_forms")}</label>
+                <select
+                  onChange={(e) => setSelectedVariant(e.target.value as Pkm)}
+                  value={selectedVariant}
+                >
+                  {altForms.map((variant) => (
+                    <option key={variant} value={variant}>
+                      {t(`pkm.${variant}`)} ({variant})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <p className="dust">
+              <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+              {shards} {t("shards")}{" "}
+            </p>
+          </>
+        }
+        body={
+          <>
             <section>
-              <p>{t("shiny_emotions")}</p>
+              <p>{t("collection.normal_emotions")}</p>
               <div>
-                {shinyAvailableEmotions.map((e) => {
+                {availableEmotions.map((e) => {
                   return (
                     <PokemonEmotion
                       key={e}
                       index={index}
-                      shiny={true}
-                      unlocked={item && item.shinyEmotions.includes(e)}
+                      shiny={false}
+                      unlocked={item && item.emotions.includes(e)}
                       selected={
-                        item.selectedEmotion === e && item.selectedShiny
+                        item.selectedEmotion === e && !item.selectedShiny
                       }
-                      path={`${index.replace("-", "/")}/0000/0001`}
+                      path={index.replace("-", "/")}
                       emotion={e}
                       dust={shards}
                       onClick={() =>
                         handlePokemonEmotionClick(
-                          item && item.shinyEmotions.includes(e),
-                          { index: index, emotion: e, shiny: true }
+                          item && item.emotions.includes(e),
+                          { index: index, emotion: e, shiny: false }
                         )
                       }
                     />
@@ -222,73 +203,118 @@ export default function PokemonEmotionsModal(props: {
                 })}
               </div>
             </section>
-          )}
-        </>
-      }
-      footer={
-        <>
-          <button
-            className="bubbly blue"
-            disabled={
-              (item.emotions.length === 0 && item.shinyEmotions.length === 0) ||
-              isCurrentAvatar
-            }
-            onClick={() =>
-              dispatch(
-                changeAvatar({
-                  index,
-                  emotion: item.selectedEmotion ?? Emotion.NORMAL,
-                  shiny: item.selectedShiny
-                })
-              )
-            }
-          >
-            {isCurrentAvatar ? t("chosen_as_avatar") : t("choose_as_avatar")}
-            &nbsp;
-            <PokemonPortrait
-              portrait={{
-                index,
-                shiny: item.selectedShiny,
-                emotion: item.selectedEmotion ?? Emotion.NORMAL
-              }}
-              alt="avatar"
-            />
-          </button>
-
-          <button
-            className="bubbly orange"
-            disabled={shards < boosterCost}
-            onClick={() => buyBooster({ index })}
-          >
-            {t("buy_booster", { cost: boosterCost })}
-            <img src={getPortraitSrc(index)} className="dust" alt="dust" />
-          </button>
-
-          {item.selectedEmotion != null &&
-            item.selectedEmotion != Emotion.NORMAL && (
-              <button className="bubbly blue" onClick={resetEmotion}>
-                {t("reset_emotion")}
-                &nbsp;
-                <PokemonPortrait
-                  portrait={{
-                    index,
-                    shiny: false,
-                    emotion: Emotion.NORMAL
-                  }}
-                  alt="avatar"
-                />
-              </button>
+            {shinyAvailable && (
+              <section>
+                <p>{t("collection.shiny_emotions")}</p>
+                <div>
+                  {shinyAvailableEmotions.map((e) => {
+                    return (
+                      <PokemonEmotion
+                        key={e}
+                        index={index}
+                        shiny={true}
+                        unlocked={item && item.shinyEmotions.includes(e)}
+                        selected={
+                          item.selectedEmotion === e && item.selectedShiny
+                        }
+                        path={`${index.replace("-", "/")}/0000/0001`}
+                        emotion={e}
+                        dust={shards}
+                        onClick={() =>
+                          handlePokemonEmotionClick(
+                            item && item.shinyEmotions.includes(e),
+                            { index: index, emotion: e, shiny: true }
+                          )
+                        }
+                      />
+                    )
+                  })}
+                </div>
+              </section>
             )}
+          </>
+        }
+        footer={
+          <>
+            <button
+              className="bubbly blue"
+              disabled={
+                (item.emotions.length === 0 &&
+                  item.shinyEmotions.length === 0) ||
+                isCurrentAvatar
+              }
+              onClick={() =>
+                dispatch(
+                  changeAvatar({
+                    index,
+                    emotion: item.selectedEmotion ?? Emotion.NORMAL,
+                    shiny: item.selectedShiny
+                  })
+                )
+              }
+            >
+              {isCurrentAvatar
+                ? t("collection.chosen_as_avatar")
+                : t("collection.choose_as_avatar")}
+              &nbsp;
+              <PokemonPortrait
+                portrait={{
+                  index,
+                  shiny: item.selectedShiny,
+                  emotion: item.selectedEmotion ?? Emotion.NORMAL
+                }}
+                alt="avatar"
+              />
+            </button>
 
-          <button
-            className={cc("bubbly", isFavorite ? "red" : "green")}
-            onClick={toggleFavorite}
-          >
-            ❤️&nbsp;
-            {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
-          </button>
-        </>
-      }
-    />
+            <button
+              className="bubbly orange"
+              disabled={shards < boosterCost}
+              onClick={() => {
+                setRequestError(null)
+                buyBooster({ index }).catch(onError)
+              }}
+            >
+              {t("collection.buy_booster", { cost: boosterCost })}
+              <img src={getPortraitSrc(index)} className="dust" alt="dust" />
+            </button>
+
+            {item.selectedEmotion != null &&
+              item.selectedEmotion != Emotion.NORMAL && (
+                <button className="bubbly blue" onClick={resetEmotion}>
+                  {t("collection.reset_emotion")}
+                  &nbsp;
+                  <PokemonPortrait
+                    portrait={{
+                      index,
+                      shiny: false,
+                      emotion: Emotion.NORMAL
+                    }}
+                    alt="avatar"
+                  />
+                </button>
+              )}
+
+            <button
+              className={cc("bubbly", isFavorite ? "red" : "green")}
+              onClick={toggleFavorite}
+            >
+              ❤️&nbsp;
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
+            </button>
+          </>
+        }
+      />
+
+      <Modal
+        show={requestError != null}
+        onClose={() => setRequestError(null)}
+        className="is-dark basic-modal-body"
+        header={t("errors.title")}
+        body={<p style={{ padding: "1em" }}>{requestError}</p>}
+      />
+    </>
   )
 }

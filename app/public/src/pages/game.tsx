@@ -1,45 +1,48 @@
-import { getStateCallbacks, Room } from "@colyseus/sdk"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
 import {
   getCurrentGameEvent,
   MinStageForGameToCount,
   RegionDetails
 } from "../../../config"
-import { IPokemonRecord } from "../../../models/colyseus-models/game-record"
-import { Wanderer } from "../../../models/colyseus-models/wanderer"
+import type { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import type { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
-import AfterGameState from "../../../rooms/states/after-game-state"
-import GameState from "../../../rooms/states/game-state"
+import type AfterGameState from "../../../rooms/states/after-game-state"
+import type GameState from "../../../rooms/states/game-state"
 import {
-  IAfterGamePlayer,
-  IBoardEvent,
-  IDps,
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
-  IExperienceManager,
-  IPlayer,
+  type IAfterGamePlayer,
+  type IBoardEvent,
+  type IDps,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
+  type IExperienceManager,
+  type IPlayer,
   Role,
   Transfer
 } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
 import { GamePhaseState, Team } from "../../../types/enum/Game"
-import { Item } from "../../../types/enum/Item"
+import type { Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
-import { Pkm } from "../../../types/enum/Pokemon"
-import { Synergy } from "../../../types/enum/Synergy"
+import type { Pkm } from "../../../types/enum/Pokemon"
+import type { Synergy } from "../../../types/enum/Synergy"
 import { GameEvent } from "../../../types/events"
 import type { NonFunctionPropNames } from "../../../types/HelperTypes"
+import type { DisplayText } from "../../../types/strings/DisplayText"
+import type { ErrorMessage } from "../../../types/strings/ErrorMessage"
 import { getAvatarString } from "../../../utils/avatar"
 import { logger } from "../../../utils/logger"
-import { values } from "../../../utils/schemas"
+import { schemaValues } from "../../../utils/schemas"
 import GameContainer from "../game/game-container"
-import GameScene from "../game/scenes/game-scene"
+import { isReplayRoom } from "../game/replay-room-id"
+import type GameScene from "../game/scenes/game-scene"
 import {
   selectConnectedPlayer,
   selectSpectatedPlayer,
@@ -47,6 +50,7 @@ import {
   useAppSelector
 } from "../hooks"
 import { authenticateUser, client, joinGame, rooms } from "../network"
+import { usePreference } from "../preferences"
 import store from "../stores"
 import {
   addDpsMeter,
@@ -61,7 +65,6 @@ import {
   setEmotesUnlocked,
   setGameMode,
   setInterest,
-  setItemsProposition,
   setLife,
   setLoadingProgress,
   setMaxInterest,
@@ -69,7 +72,6 @@ import {
   setNoELO,
   setPhase,
   setPodium,
-  setPokemonProposition,
   setRoundTime,
   setShopFreeRolls,
   setShopLocked,
@@ -84,13 +86,13 @@ import {
   setConnectionStatus,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
+import GameChoice from "./component/game/game-choice"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameExpeditions from "./component/game/game-expeditions"
 import GameFinalRank from "./component/game/game-final-rank"
-import GameItemsProposition from "./component/game/game-items-proposition"
 import GameLoadingScreen from "./component/game/game-loading-screen"
 import GamePlayers from "./component/game/game-players"
-import GamePokemonsProposition from "./component/game/game-pokemons-proposition"
+import { clearPortraitBase64Cache } from "./component/game/game-pokemon-portrait"
 import GameShop from "./component/game/game-shop"
 import GameSpectatePlayerInfo from "./component/game/game-spectate-player-info"
 import GameStageInfo from "./component/game/game-stage-info"
@@ -100,9 +102,23 @@ import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { transformEntityCoordinates } from "./utils/utils"
+import {
+  transformBoardCoordinates,
+  transformEntityCoordinates
+} from "./utils/utils"
 
 let gameContainer: GameContainer
+
+// re-attach hook for the replay viewer's seek (see reattachReplayRoom)
+let reattachReplayRoomImpl:
+  | ((room: Room<GameState>, spectatedPlayerId?: string) => void)
+  | null = null
+export function reattachReplayRoom(
+  room: Room<GameState>,
+  spectatedPlayerId?: string
+) {
+  reattachReplayRoomImpl?.(room, spectatedPlayerId)
+}
 
 export function getGameScene(): GameScene | undefined {
   return gameContainer?.game?.scene?.getScene<GameScene>("gameScene") as
@@ -115,7 +131,7 @@ export function getGameContainer(): GameContainer {
 }
 
 export function cyclePlayers(amt: number) {
-  const players = values(gameContainer.room?.state.players)
+  const players = schemaValues(gameContainer.room?.state.players)
   playerClick(
     players[
       (players.findIndex((p) => p === gameContainer.player) +
@@ -239,13 +255,17 @@ export default function Game() {
   )
 
   const leave = useCallback(async () => {
-    const afterPlayers = new Array<IAfterGamePlayer>()
-
-    const token = await firebase.auth().currentUser?.getIdToken()
-
     if (gameContainer && gameContainer.game) {
       gameContainer.game.destroy(true)
     }
+
+    if (isReplayRoom(room)) {
+      navigate("/lobby")
+      return
+    }
+    const afterPlayers = new Array<IAfterGamePlayer>()
+
+    const token = await firebase.auth().currentUser?.getIdToken()
 
     const nbPlayers = room?.state.players.size ?? 0
     const hasLeftBeforeEnd =
@@ -356,7 +376,21 @@ export default function Game() {
     }
     // when pressing back button, properly leave game
     window.addEventListener("popstate", confirmLeave)
+
+    // pause video background for performance
+    const videoBg = document.getElementById(
+      "videobg"
+    ) as HTMLVideoElement | null
+    if (videoBg) {
+      videoBg.pause()
+      videoBg.style.display = "none"
+    }
+
     return () => {
+      if (videoBg) {
+        videoBg.play()
+        videoBg.style.display = "block"
+      }
       window.removeEventListener("popstate", confirmLeave)
     }
   }, [])
@@ -388,6 +422,9 @@ export default function Game() {
   }, [])
 
   useEffect(() => {
+    // clear on entry: abnormal exits (ROOM_DELETED / USER_BANNED) navigate away without destroying the
+    // game, so the cache's destroy listener never fired for them
+    clearPortraitBase64Cache()
     const connect = () => {
       logger.debug("connecting to game")
       authenticateUser().then(async (user) => {
@@ -432,518 +469,618 @@ export default function Game() {
         gameContainer.onDragDropCombine(event)
       }) as EventListener)
 
-      room.onMessage(Transfer.LOADING_COMPLETE, () => {
-        setLoaded(true)
-      })
-      room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
-        setFinalRank(finalRank)
-        setFinalRankVisibility(FinalRankVisibility.VISIBLE)
-      })
-      room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
-        logger.info("preloading maps", maps)
-        const gameScene = getGameScene()
-        if (gameScene) {
-          await gameScene.preloadMaps(maps)
-          gameScene.load
-            .once("complete", () => {
-              if (room.state.phase !== GamePhaseState.TOWN) {
-                // map loaded after the end of the portal carousel stage, we swap it now. better later than never
-                gameContainer &&
-                  gameContainer.player &&
-                  gameScene.setMap(gameContainer.player.map)
-              }
-            })
-            .start()
-        }
-      })
-      room.onMessage(Transfer.SHOW_EMOTE, (message) => {
-        const g = getGameScene()
-        if (
-          g?.minigameManager?.pokemons?.size &&
-          g.minigameManager.pokemons.size > 0
-        ) {
-          // early return here to prevent showing animation twice
-          return g.minigameManager?.showEmote(message.id, message?.emote)
-        }
+      // per-room bindings, extracted so a seek can re-bind them to a fresh room without rebuilding the scene
+      const bindRoom = (room: Room<GameState>) => {
+        room.onMessage(Transfer.LOADING_COMPLETE, () => {
+          setLoaded(true)
+        })
 
-        if (g && g.board) {
-          g.board.showEmote(message.id, message?.emote)
-        }
-      })
-      room.onMessage(
-        Transfer.COOK,
-        async (message: { pokemonId: string; dishes: Item[] }) => {
-          const g = getGameScene()
-          if (g && g.board) {
-            const pokemon = g.board.pokemons.get(message.pokemonId)
-            if (pokemon) {
-              pokemon.cookAnimation(message.dishes)
-            }
+        room.onMessage(Transfer.FINAL_RANK, (finalRank) => {
+          setFinalRank(finalRank)
+          if (!isReplayRoom(room))
+            setFinalRankVisibility(FinalRankVisibility.VISIBLE)
+        })
+
+        room.onMessage(Transfer.PRELOAD_MAPS, async (maps) => {
+          logger.info("preloading maps", maps)
+          const gameScene = getGameScene()
+          if (gameScene) {
+            await gameScene.preloadMaps(maps)
+            gameScene.load
+              .once("complete", () => {
+                if (room.state.phase !== GamePhaseState.TOWN) {
+                  // map loaded after the end of the portal carousel stage, we swap it now. better later than never
+                  gameContainer &&
+                    gameContainer.player &&
+                    gameScene.setMap(gameContainer.player.map)
+                }
+              })
+              .start()
           }
-        }
-      )
+        })
 
-      room.onMessage(
-        Transfer.DIG,
-        async (message: { pokemonId: string; buriedItem: Item | null }) => {
-          setTimeout(() => {
+        room.onMessage(Transfer.SHOW_EMOTE, (message) => {
+          const g = getGameScene()
+          if (
+            g?.minigameManager?.pokemons?.size &&
+            g.minigameManager.pokemons.size > 0
+          ) {
+            // early return here to prevent showing animation twice
+            return g.minigameManager?.showEmote(message.id, message?.emote)
+          }
+
+          if (g && g.board) {
+            g.board.showEmote(message.id, message?.emote)
+          }
+        })
+
+        room.onMessage(
+          Transfer.COOK,
+          async (message: { pokemonId: string; dishes: Item[] }) => {
             const g = getGameScene()
             if (g && g.board) {
               const pokemon = g.board.pokemons.get(message.pokemonId)
               if (pokemon) {
-                pokemon.digAnimation(message.buriedItem)
+                pokemon.cookAnimation(message.dishes)
               }
             }
-          }, 500)
-        }
-      )
-
-      room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
-        gameContainer.handleDisplayDamage(message)
-      })
-
-      room.onMessage(Transfer.ABILITY, (message) => {
-        gameContainer.handleDisplayAbility(message)
-      })
-
-      room.onMessage(Transfer.POKEMON_HEAL, (message) => {
-        gameContainer.handleDisplayHeal(message)
-      })
-
-      room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
-        toast(
-          <div className="toast-player-damage">
-            <span style={{ verticalAlign: "middle" }}>-{value}</span>
-            <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
-          </div>,
-          { containerId: "toast-life" }
+          }
         )
-      })
 
-      room.onMessage(Transfer.PLAYER_INCOME, showMoneyToast)
-
-      room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g?.battle?.simulation?.id === event.simulationId) {
-            g.battle.displayBoardEvent(event)
-          }
-        }
-      })
-
-      room.onMessage(Transfer.CLEAR_BOARD_EVENT, (event: IBoardEvent) => {
-        //logger.debug("Received CLEAR_BOARD_EVENT", event)
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g?.battle?.simulation?.id === event.simulationId) {
-            g.battle.removeBoardEvent(event)
-          }
-        }
-      })
-
-      room.onMessage(
-        Transfer.CLEAR_BOARD,
-        (event: { simulationId: string }) => {
-          if (gameContainer.game) {
-            const g = getGameScene()
-            if (g?.battle?.simulation?.id === event.simulationId) {
-              g.battle.clearBoardEvents()
-            }
-          }
-        }
-      )
-
-      room.onMessage(Transfer.SIMULATION_STOP, () => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g && g.battle) {
-            g.battle.clear()
-          }
-        }
-      })
-
-      room.onMessage(Transfer.GAME_END, leave)
-
-      room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
-        gameContainer.handleDragDropCancel(message)
-      )
-
-      room.onMessage(
-        Transfer.DISPLAY_TEXT,
-        (message: { text: string; id: string; x: number; y: number }) => {
-          const g = getGameScene()
-          if (g?.battle?.simulation?.id === message.id && message.text) {
-            const coordinates = transformEntityCoordinates(
-              message.x,
-              message.y,
-              g?.battle?.flip
-            )
-            gameContainer.gameScene?.board?.displayText(
-              coordinates[0],
-              coordinates[1],
-              t(message.text).toUpperCase(),
-              true
-            )
-          }
-        }
-      )
-
-      room.onDrop((code) => {
-        if (code >= 1001 && code <= 1015) {
-          // Between 1001 and 1015 - Abnormal socket shutdown
-          if (connectionStatus === ConnectionStatus.CONNECTED) {
-            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
-          }
-        }
-      })
-
-      room.onReconnect(() => {
-        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
-      })
-
-      room.onLeave((code) => {
-        const shouldGoToLobby = [
-          CloseCodes.ROOM_DELETED,
-          CloseCodes.USER_BANNED
-        ].includes(code)
-        if (shouldGoToLobby) {
-          const errorMessage = CloseCodesMessages[code]
-          if (errorMessage) {
-            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
-          }
-
-          const scene = getGameScene()
-          if (scene?.music) scene.music.destroy()
-          navigate("/lobby")
-        } else {
-          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
-        }
-      })
-
-      const $ = getStateCallbacks(room)
-      const $state = $(room.state)
-
-      $state.listen("gameMode", (mode) => {
-        dispatch(setGameMode(mode))
-      })
-
-      $state.listen("roundTime", (value) => {
-        dispatch(setRoundTime(value))
-        const stageLevel = room.state.stageLevel ?? 0
-        if (
-          room.state.phase === GamePhaseState.PICK &&
-          stageLevel in PVEStages === false &&
-          value < 5 &&
-          gameContainer.gameScene?.board &&
-          !gameContainer.gameScene.board.portal
-        ) {
-          gameContainer.gameScene.board.addPortal()
-        }
-      })
-
-      $state.listen("phase", (newPhase, previousPhase) => {
-        if (gameContainer.game) {
-          const g = getGameScene()
-          if (g) {
-            g.updatePhase(newPhase, previousPhase)
-          }
-        }
-        dispatch(setPhase(newPhase))
-      })
-
-      $state.listen("stageLevel", (value) => {
-        dispatch(setStageLevel(value))
-      })
-
-      $state.listen("noElo", (value) => {
-        dispatch(setNoELO(value))
-      })
-
-      $state.listen("specialGameRule", (value) => {
-        dispatch(setSpecialGameRule(value))
-      })
-
-      $state.additionalPokemons.onChange(() => {
-        dispatch(setAdditionalPokemons(values(room.state.additionalPokemons)))
-      })
-
-      $state.simulations.onRemove(() => {
-        gameContainer.resetSimulation()
-      })
-
-      $state.simulations.onAdd((simulation) => {
-        gameContainer.initializeSimulation(simulation)
-        const $simulation = $(simulation)
-
-        $simulation.listen("weather", (value) => {
-          dispatch(setWeather({ id: simulation.id, value: value }))
-        })
-
-        const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
-        teams.forEach((team) => {
-          const $dpsMeter =
-            team === Team.BLUE_TEAM
-              ? $simulation.blueDpsMeter
-              : $simulation.redDpsMeter
-          $dpsMeter.onAdd((dps) => {
-            dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
-            const $dps = $(dps)
-            const fields = [
-              "id",
-              "name",
-              "physicalDamage",
-              "specialDamage",
-              "trueDamage",
-              "heal",
-              "shield",
-              "physicalDamageReduced",
-              "specialDamageReduced",
-              "shieldDamageTaken"
-            ] satisfies NonFunctionPropNames<IDps>[]
-            fields.forEach((field) => {
-              $dps.listen(field, (value) => {
-                dispatch(
-                  changeDpsMeter({
-                    id: dps.id,
-                    team,
-                    field: field,
-                    value: value,
-                    simulationId: simulation.id
-                  })
-                )
-              })
-            })
-          })
-
-          $dpsMeter.onRemove((dps) => {
-            dispatch(
-              removeDpsMeter({ id: dps.id, team, simulationId: simulation.id })
-            )
-          })
-        })
-      })
-
-      $state.players.onAdd((player) => {
-        dispatch(addPlayer(player))
-        gameContainer.initializePlayer(player)
-        const $player = $(player)
-
-        if (player.id == uid) {
-          dispatch(setInterest(player.interest))
-          dispatch(setMaxInterest(player.maxInterest))
-          dispatch(setStreak(player.streak))
-          dispatch(setShopLocked(player.shopLocked))
-          dispatch(setShopFreeRolls(player.shopFreeRolls))
-          dispatch(setEmotesUnlocked(player.emotesUnlocked))
-
-          $player.listen("interest", (value) => {
-            dispatch(setInterest(value))
-          })
-          $player.listen("maxInterest", (value) => {
-            dispatch(setMaxInterest(value))
-          })
-          $player.shop.onChange((pkm: Pkm, index: number) => {
-            dispatch(changeShop({ value: pkm, index }))
-          })
-          $player.listen("shopLocked", (value) => {
-            dispatch(setShopLocked(value))
-          })
-          $player.listen("shopFreeRolls", (value) => {
-            dispatch(setShopFreeRolls(value))
-          })
-          $player.listen("money", (value, previousValue) => {
-            dispatch(setMoney(value))
-            if (value - previousValue >= 30) {
-              // show income toast for significant income only
-              showMoneyToast(value - previousValue)
-            }
-          })
-          $player.listen("streak", (value) => {
-            dispatch(setStreak(value))
-          })
-        }
-        $player.listen("life", (value, previousValue) => {
-          dispatch(setLife({ id: player.id, value: value }))
-          if (
-            value <= 0 &&
-            value !== previousValue &&
-            player.id === uid &&
-            !spectate &&
-            finalRankVisibility === FinalRankVisibility.HIDDEN
-          ) {
-            setFinalRankVisibility(FinalRankVisibility.VISIBLE)
-            getGameScene()?.input.keyboard?.removeAllListeners()
-          }
-        })
-        $player.listen("experienceManager", (experienceManager) => {
-          const $experienceManager = $(experienceManager)
-          if (player.id === uid) {
-            dispatch(updateExperienceManager(experienceManager))
-            const fields = [
-              "experience",
-              "expNeeded",
-              "level"
-            ] satisfies NonFunctionPropNames<IExperienceManager>[]
-            fields.forEach((field) => {
-              $experienceManager.listen(field, (value) => {
-                dispatch(
-                  updateExperienceManager({
-                    ...experienceManager,
-                    [field]: value
-                  } as IExperienceManager)
-                )
-              })
-            })
-          }
-          $experienceManager.listen("level", (value) => {
-            if (value > 1) {
-              toast(
-                <p>
-                  {t("level")} {value}
-                </p>,
-                {
-                  containerId: player.rank.toString(),
-                  className: "toast-level-up"
+        room.onMessage(
+          Transfer.DIG,
+          async (message: { pokemonId: string; buriedItem: Item | null }) => {
+            setTimeout(() => {
+              const g = getGameScene()
+              if (g && g.board) {
+                const pokemon = g.board.pokemons.get(message.pokemonId)
+                if (pokemon) {
+                  pokemon.digAnimation(message.buriedItem)
                 }
-              )
-            }
-          })
-        })
-        $player.listen("loadingProgress", (value) => {
-          dispatch(setLoadingProgress({ id: player.id, value: value }))
-        })
-        $player.listen("map", (newMap) => {
-          if (player.id === store.getState().game.playerIdSpectated) {
-            const gameScene = getGameScene()
-            if (gameScene) {
-              gameScene.setMap(newMap)
-              const alreadyLoading = gameScene.load.isLoading()
-              if (!alreadyLoading) {
-                gameScene.load.reset()
               }
-              preloadMusic(gameScene, RegionDetails[newMap].music)
-              gameScene.load.once("complete", () =>
-                playMusic(gameScene, RegionDetails[newMap].music)
-              )
-              if (!alreadyLoading) {
-                gameScene.load.start()
-              }
-            }
+            }, 500)
           }
-          dispatch(changePlayer({ id: player.id, field: "map", value: newMap }))
+        )
+
+        room.onMessage(Transfer.POKEMON_DAMAGE, (message) => {
+          gameContainer.handleDisplayDamage(message)
         })
 
-        $player.listen("spectatedPlayerId", (spectatedPlayerId) => {
-          if (room?.state?.players) {
-            const spectatedPlayer = room?.state?.players.get(spectatedPlayerId)
-            if (spectatedPlayer && player.id === uid) {
-              gameContainer.setPlayer(spectatedPlayer)
-
-              const simulation = room.state.simulations.get(
-                spectatedPlayer.simulationId
-              )
-              if (simulation) {
-                gameContainer.setSimulation(simulation)
-              }
-            }
-
-            gameContainer.gameScene?.board?.updateScoutingAvatars()
-          }
+        room.onMessage(Transfer.ABILITY, (message) => {
+          gameContainer.handleDisplayAbility(message)
         })
 
-        const fields = [
-          "name",
-          "avatar",
-          "boardSize",
-          "experienceManager",
-          "money",
-          "history",
-          "life",
-          "opponentId",
-          "opponentName",
-          "opponentAvatar",
-          "opponentTitle",
-          "rank",
-          "regionalPokemons",
-          "streak",
-          "title",
-          "eggChance",
-          "goldenEggChance",
-          "cellBattery"
-        ] satisfies NonFunctionPropNames<IPlayer>[]
-
-        fields.forEach((field) => {
-          $player.listen(field, (value) => {
-            dispatch(
-              changePlayer({ id: player.id, field: field, value: value })
-            )
-          })
+        room.onMessage(Transfer.POKEMON_HEAL, (message) => {
+          gameContainer.handleDisplayHeal(message)
         })
 
-        $player.gameStats.onChange(() => {
-          dispatch(
-            changePlayer({
-              id: player.id,
-              field: "gameStats",
-              value: player.gameStats
-            })
+        room.onMessage(Transfer.PLAYER_DAMAGE, (value) => {
+          toast(
+            <div className="toast-player-damage">
+              <span style={{ verticalAlign: "middle" }}>-{value}</span>
+              <img className="icon-life" src="/assets/ui/heart.png" alt="❤" />
+            </div>,
+            { containerId: "toast-life" }
           )
         })
 
-        $player.synergies.onChange(() => {
-          dispatch(setSynergies({ id: player.id, value: player.synergies }))
-        })
+        room.onMessage(Transfer.PLAYER_INCOME, showMoneyToast)
 
-        $player.itemsProposition.onChange((value, index) => {
-          if (player.id == uid) {
-            dispatch(setItemsProposition(values(player.itemsProposition)))
-          }
-        })
-
-        $player.pokemonsProposition.onChange((value, index) => {
-          if (player.id == uid) {
-            dispatch(setPokemonProposition(values(player.pokemonsProposition)))
-          }
-        })
-
-        $player.groundHoles.onChange((value) => {
-          if (player.id === store.getState().game.playerIdSpectated) {
-            const gameScene = getGameScene()
-            if (gameScene?.board && room.state.phase === GamePhaseState.PICK) {
-              gameScene.board.renderGroundHoles()
-            }
-          }
-        })
-
-        $player.listen("mulch", (value) => {
-          dispatch(changePlayer({ id: player.id, field: "mulch", value }))
-          getGameScene()?.board?.updateMulchCount()
-        })
-        $player.listen("mulchCap", (value) => {
-          dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
-          getGameScene()?.board?.updateMulchCount()
-        })
-
-        $player.wanderers.onAdd((wanderer: Wanderer) => {
-          if (
-            gameContainer.game &&
-            player.id === store.getState().network.uid
-          ) {
+        room.onMessage(Transfer.BOARD_EVENT, (event: IBoardEvent) => {
+          if (gameContainer.game) {
             const g = getGameScene()
-            if (g && g.wandererManager) {
-              g.wandererManager.addWanderer(wanderer)
+            if (g?.battle?.simulation?.id === event.simulationId) {
+              g.battle.displayBoardEvent(event)
             }
           }
         })
-      })
 
-      $state.players.onRemove((player) => {
-        dispatch(removePlayer(player))
-      })
+        room.onMessage(Transfer.CLEAR_BOARD_EVENT, (event: IBoardEvent) => {
+          //logger.debug("Received CLEAR_BOARD_EVENT", event)
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g?.battle?.simulation?.id === event.simulationId) {
+              g.battle.removeBoardEvent(event)
+            }
+          }
+        })
 
-      $state.spectators.onAdd((uid) => {
-        gameContainer.initializeSpectactor(uid)
-      })
+        room.onMessage(
+          Transfer.CLEAR_BOARD,
+          (event: { simulationId: string }) => {
+            if (gameContainer.game) {
+              const g = getGameScene()
+              if (g?.battle?.simulation?.id === event.simulationId) {
+                g.battle.clearBoardEvents()
+              }
+            }
+          }
+        )
+
+        room.onMessage(Transfer.SIMULATION_STOP, () => {
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g && g.battle) {
+              g.battle.clear()
+            }
+          }
+        })
+
+        room.onMessage(
+          Transfer.DOUBLE_UP_REINFORCEMENT_SENT,
+          ({ partnerPlayerId }: { partnerPlayerId: string }) => {
+            const partnerPlayer = room.state.players.get(partnerPlayerId)
+            if (!partnerPlayer) return
+            const simulation = room.state.simulations.get(
+              partnerPlayer.simulationId
+            )
+            if (!simulation) return
+            getGameScene()?.battle?.clear()
+            gameContainer.setPlayer(partnerPlayer)
+            gameContainer.setSimulation(simulation)
+            room.send(Transfer.SPECTATE, partnerPlayerId)
+          }
+        )
+
+        room.onMessage(Transfer.TRADE_ACCEPT, (playerIds: string[]) => {
+          if (playerIds.includes(store.getState().game.playerIdSpectated)) {
+            getGameScene()?.board?.tradingPlatform?.showTradeAnimation()
+          }
+        })
+
+        room.onMessage(Transfer.DRAG_DROP_CANCEL, (message) =>
+          gameContainer.handleDragDropCancel(message)
+        )
+
+        room.onMessage(Transfer.GAME_END, () => {
+          // replay: GAME_END is a recorded frame, skip the live leave flow
+          if (isReplayRoom(room)) return
+          leave()
+        })
+
+        room.onMessage(
+          Transfer.DISPLAY_TEXT,
+          (message: {
+            text: DisplayText
+            id: string
+            x: number
+            y: number
+          }) => {
+            const g = getGameScene()
+            const isInBattle = g?.battle?.simulation?.id === message.id
+            if ((isInBattle || message.id === uid) && message.text) {
+              const flip = isInBattle && g?.battle?.flip === true
+              const coordinates = isInBattle
+                ? transformEntityCoordinates(message.x, message.y, flip)
+                : transformBoardCoordinates(message.x, message.y)
+              gameContainer.gameScene?.board?.displayText(
+                coordinates[0],
+                coordinates[1],
+                t(message.text).toUpperCase(),
+                true
+              )
+            }
+          }
+        )
+
+        room.onDrop((code) => {
+          if (code >= 1001 && code <= 1015) {
+            // Between 1001 and 1015 - Abnormal socket shutdown
+            if (connectionStatus === ConnectionStatus.CONNECTED) {
+              dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+            }
+          }
+        })
+
+        room.onReconnect(() => {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+        })
+
+        room.onLeave((code) => {
+          const shouldGoToLobby = [
+            CloseCodes.ROOM_DELETED,
+            CloseCodes.USER_BANNED
+          ].includes(code)
+          if (shouldGoToLobby) {
+            const errorMessage = CloseCodesMessages[code] as
+              | ErrorMessage
+              | undefined
+            if (errorMessage) {
+              dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+            }
+
+            const scene = getGameScene()
+            if (scene?.music) scene.music.destroy()
+            navigate("/lobby")
+          } else {
+            dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+          }
+        })
+
+        const $ = getStateCallbacks(room)
+        const $state = $(room.state)
+
+        $state.listen("gameMode", (mode) => {
+          dispatch(setGameMode(mode))
+        })
+
+        $state.listen("roundTime", (value) => {
+          dispatch(setRoundTime(value))
+          const stageLevel = room.state.stageLevel ?? 0
+          if (
+            room.state.phase === GamePhaseState.PICK &&
+            stageLevel in PVEStages === false &&
+            value < 5 &&
+            gameContainer.gameScene?.board &&
+            !gameContainer.gameScene.board.portal
+          ) {
+            gameContainer.gameScene.board.addPortal()
+          }
+        })
+
+        $state.listen("phase", (newPhase, previousPhase) => {
+          // if we were spectating partner's fight via reinforcements, go back to our own board
+          if (
+            newPhase === GamePhaseState.PICK &&
+            store.getState().game.playerIdSpectated !== gameContainer.uid &&
+            room.state.players.get(gameContainer.uid)?.alive
+          ) {
+            const myPlayer = room.state.players.get(gameContainer.uid)
+            if (myPlayer) {
+              gameContainer.setPlayer(myPlayer)
+              const simulation = room.state.simulations.get(
+                myPlayer.simulationId
+              )
+              if (simulation) gameContainer.setSimulation(simulation)
+              room.send(Transfer.SPECTATE, gameContainer.uid)
+            }
+          }
+          if (gameContainer.game) {
+            const g = getGameScene()
+            if (g) {
+              g.updatePhase(newPhase, previousPhase)
+            }
+          }
+          dispatch(setPhase(newPhase))
+        })
+
+        $state.listen("stageLevel", (value) => {
+          dispatch(setStageLevel(value))
+        })
+
+        $state.listen("noElo", (value) => {
+          dispatch(setNoELO(value))
+        })
+
+        $state.listen("specialGameRule", (value) => {
+          dispatch(setSpecialGameRule(value))
+        })
+
+        $state.additionalPokemons.onChange(() => {
+          dispatch(
+            setAdditionalPokemons(schemaValues(room.state.additionalPokemons))
+          )
+        })
+
+        $state.simulations.onRemove(() => {
+          gameContainer.resetSimulation()
+        })
+
+        $state.simulations.onAdd((simulation) => {
+          gameContainer.initializeSimulation(simulation)
+          const $simulation = $(simulation)
+
+          $simulation.listen("weather", (value) => {
+            dispatch(setWeather({ id: simulation.id, value: value }))
+          })
+
+          const teams = [Team.BLUE_TEAM, Team.RED_TEAM]
+          teams.forEach((team) => {
+            const $dpsMeter =
+              team === Team.BLUE_TEAM
+                ? $simulation.blueDpsMeter
+                : $simulation.redDpsMeter
+            $dpsMeter.onAdd((dps) => {
+              dispatch(addDpsMeter({ value: dps, id: simulation.id, team }))
+              const $dps = $(dps)
+              const fields = [
+                "id",
+                "name",
+                "physicalDamage",
+                "specialDamage",
+                "trueDamage",
+                "heal",
+                "shield",
+                "physicalDamageReduced",
+                "specialDamageReduced",
+                "shieldDamageTaken"
+              ] satisfies NonFunctionPropNames<IDps>[]
+              fields.forEach((field) => {
+                $dps.listen(field, (value) => {
+                  dispatch(
+                    changeDpsMeter({
+                      id: dps.id,
+                      team,
+                      field: field,
+                      value: value,
+                      simulationId: simulation.id
+                    })
+                  )
+                })
+              })
+            })
+
+            $dpsMeter.onRemove((dps) => {
+              dispatch(
+                removeDpsMeter({
+                  id: dps.id,
+                  team,
+                  simulationId: simulation.id
+                })
+              )
+            })
+          })
+        })
+
+        $state.players.onAdd((player) => {
+          dispatch(addPlayer(player))
+          gameContainer.initializePlayer(player)
+          const $player = $(player)
+
+          if (player.id == uid) {
+            dispatch(setInterest(player.interest))
+            dispatch(setMaxInterest(player.maxInterest))
+            dispatch(setStreak(player.streak))
+            dispatch(setShopLocked(player.shopLocked))
+            dispatch(setShopFreeRolls(player.shopFreeRolls))
+            dispatch(setEmotesUnlocked(player.emotesUnlocked))
+            // dispatch the current shop up-front: onChange below only sends later deltas, so binding to an
+            // already-populated shop (replay seek or mid-match reconnect) would otherwise render blank
+            player.shop.forEach((pkm, index) =>
+              dispatch(changeShop({ value: pkm, index }))
+            )
+
+            $player.listen("interest", (value) => {
+              dispatch(setInterest(value))
+            })
+            $player.listen("maxInterest", (value) => {
+              dispatch(setMaxInterest(value))
+            })
+            $player.shop.onChange((pkm: Pkm, index: number) => {
+              dispatch(changeShop({ value: pkm, index }))
+            })
+            $player.listen("shopLocked", (value) => {
+              dispatch(setShopLocked(value))
+            })
+            $player.listen("shopFreeRolls", (value) => {
+              dispatch(setShopFreeRolls(value))
+            })
+            $player.listen("money", (value, previousValue) => {
+              dispatch(setMoney(value))
+              if (value - previousValue >= 30) {
+                // show income toast for significant income only
+                showMoneyToast(value - previousValue)
+              }
+            })
+            $player.listen("streak", (value) => {
+              dispatch(setStreak(value))
+            })
+            $player.choices.onChange(() => {
+              dispatch(
+                changePlayer({
+                  id: player.id,
+                  field: "choices",
+                  value: schemaValues(player.choices)
+                })
+              )
+            })
+          }
+          $player.listen("life", (value, previousValue) => {
+            dispatch(setLife({ id: player.id, value: value }))
+            if (
+              value <= 0 &&
+              value !== previousValue &&
+              player.id === uid &&
+              !spectate &&
+              !isReplayRoom(room) &&
+              finalRankVisibility === FinalRankVisibility.HIDDEN
+            ) {
+              setFinalRankVisibility(FinalRankVisibility.VISIBLE)
+              getGameScene()?.input.keyboard?.removeAllListeners()
+            }
+          })
+
+          $player.listen("experienceManager", (experienceManager) => {
+            const $experienceManager = $(experienceManager)
+            if (player.id === uid) {
+              dispatch(updateExperienceManager(experienceManager))
+              const fields = [
+                "experience",
+                "expNeeded",
+                "level"
+              ] satisfies NonFunctionPropNames<IExperienceManager>[]
+              fields.forEach((field) => {
+                $experienceManager.listen(field, (value) => {
+                  dispatch(
+                    updateExperienceManager({
+                      ...experienceManager,
+                      [field]: value
+                    } as IExperienceManager)
+                  )
+                })
+              })
+            }
+            $experienceManager.listen("level", (value) => {
+              if (value > 1) {
+                toast(
+                  <p>
+                    {t("level")} {value}
+                  </p>,
+                  {
+                    containerId: player.rank.toString(),
+                    className: "toast-level-up"
+                  }
+                )
+              }
+            })
+          })
+
+          $player.listen("loadingProgress", (value) => {
+            dispatch(setLoadingProgress({ id: player.id, value: value }))
+          })
+
+          $player.listen("map", (newMap) => {
+            if (player.id === store.getState().game.playerIdSpectated) {
+              const gameScene = getGameScene()
+              if (gameScene) {
+                gameScene.setMap(newMap)
+                const alreadyLoading = gameScene.load.isLoading()
+                if (!alreadyLoading) {
+                  gameScene.load.reset()
+                }
+                preloadMusic(gameScene, RegionDetails[newMap].music)
+                gameScene.load.once("complete", () =>
+                  playMusic(gameScene, RegionDetails[newMap].music)
+                )
+                if (!alreadyLoading) {
+                  gameScene.load.start()
+                }
+              }
+            }
+            dispatch(
+              changePlayer({ id: player.id, field: "map", value: newMap })
+            )
+          })
+
+          $player.listen("spectatedPlayerId", (spectatedPlayerId) => {
+            if (room?.state?.players) {
+              const spectatedPlayer =
+                room?.state?.players.get(spectatedPlayerId)
+              const isReplay = isReplayRoom(room)
+              if (spectatedPlayer && player.id === uid && !isReplay) {
+                gameContainer.setPlayer(spectatedPlayer)
+
+                const simulation = room.state.simulations.get(
+                  spectatedPlayer.simulationId
+                )
+                if (simulation) {
+                  gameContainer.setSimulation(simulation)
+                }
+              }
+
+              gameContainer.gameScene?.board?.updateScoutingAvatars()
+            }
+          })
+
+          const fields = [
+            "name",
+            "avatar",
+            "boardSize",
+            "experienceManager",
+            "money",
+            "history",
+            "life",
+            "opponentId",
+            "opponentName",
+            "opponentAvatar",
+            "opponentTitle",
+            "rank",
+            "regionalPokemons",
+            "streak",
+            "title",
+            "eggChance",
+            "goldenEggChance",
+            "cellBattery",
+            "gameStats",
+            "scarvesItems",
+            "fairyWands",
+            "tradeStatus"
+          ] satisfies NonFunctionPropNames<IPlayer>[]
+
+          fields.forEach((field) => {
+            $player.listen(field, (value) => {
+              dispatch(
+                changePlayer({ id: player.id, field: field, value: value })
+              )
+            })
+          })
+
+          $player.synergies.onChange(() => {
+            dispatch(setSynergies({ id: player.id, value: player.synergies }))
+          })
+
+          $player.groundHoles.onChange((value) => {
+            if (player.id === store.getState().game.playerIdSpectated) {
+              const gameScene = getGameScene()
+              if (
+                gameScene?.board &&
+                room.state.phase === GamePhaseState.PICK
+              ) {
+                gameScene.board.renderGroundHoles()
+              }
+            }
+          })
+
+          $player.listen("mulch", (value) => {
+            dispatch(changePlayer({ id: player.id, field: "mulch", value }))
+            getGameScene()?.board?.updateMulchCount()
+          })
+          $player.listen("mulchCap", (value) => {
+            dispatch(changePlayer({ id: player.id, field: "mulchCap", value }))
+            getGameScene()?.board?.updateMulchCount()
+          })
+
+          $player.listen("tradeCooldown", (value) => {
+            const board = getGameScene()?.board
+            board?.tradingPlatform?.updateCooldown(value, board.mode)
+          })
+
+          $player.listen("tradeStatus", () => {
+            const board = getGameScene()?.board
+            setTimeout(() => board?.tradingPlatform?.updateTrade(board.mode), 1)
+          })
+
+          $player.wanderers.onAdd((wanderer: Wanderer) => {
+            if (
+              gameContainer.game &&
+              player.id === store.getState().network.uid
+            ) {
+              const g = getGameScene()
+              if (g && g.wandererManager) {
+                g.wandererManager.addWanderer(wanderer)
+              }
+            }
+          })
+        })
+
+        $state.players.onRemove((player) => {
+          dispatch(removePlayer(player))
+        })
+
+        $state.spectators.onAdd((uid) => {
+          gameContainer.initializeSpectactor(uid)
+        })
+      }
+
+      bindRoom(room)
+
+      // replay seek re-attach: re-point the GameContainer at a fresh room and restart its scene, keeping Phaser alive
+      reattachReplayRoomImpl = (
+        newRoom: Room<GameState>,
+        spectatedPlayerId?: string
+      ) => {
+        gameContainer.room = newRoom
+        gameContainer.$ = getStateCallbacks(newRoom)
+        gameContainer.initializeEvents()
+        bindRoom(newRoom)
+        // start on the board being watched (carried across the seek) so the rebuild doesn't flash players[0] before setPlayer() re-centres
+        gameContainer.game?.scene.start("gameScene", {
+          room: newRoom,
+          uid: gameContainer.uid,
+          spectate: gameContainer.spectate,
+          spectatedPlayerId
+        })
+      }
     }
   }, [
     connected,
@@ -957,6 +1094,11 @@ export default function Game() {
     connectToGame,
     leave
   ])
+
+  const [colorblindMode] = usePreference("colorblindMode")
+  useEffect(() => {
+    document.body.classList.toggle("colorblind-mode", colorblindMode)
+  }, [colorblindMode])
 
   return (
     <main id="game-wrapper" onContextMenu={(e) => e.preventDefault()}>
@@ -974,11 +1116,12 @@ export default function Game() {
           <GameStageInfo />
           <GamePlayers click={(id: string) => playerClick(id)} />
           <GameSynergies />
-          <GameItemsProposition />
-          <GamePokemonsProposition />
+          <GameChoice />
           <GameDpsMeter />
           <GameToasts />
-          {currentGameEvent === GameEvent.EXPEDITIONS && <GameExpeditions />}
+          {currentGameEvent === GameEvent.EXPEDITIONS && !spectate && (
+            <GameExpeditions />
+          )}
         </>
       ) : (
         <GameLoadingScreen connectError={connectError} />

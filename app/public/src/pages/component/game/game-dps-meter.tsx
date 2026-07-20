@@ -1,8 +1,8 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { GamePhaseState, Team } from "../../../../../types/enum/Game"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { DEPTH } from "../../../game/depths"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { usePreference } from "../../../preferences"
@@ -62,7 +62,7 @@ export default function GameDpsMeter() {
         <span style={{ fontSize: "2rem" }}>vs</span>
         <div>
           <PokemonPortrait avatar={opponentAvatar} />
-          <p>{isPVE ? t(opponentName) : opponentName}</p>
+          <p>{isPVE ? t(opponentName as `pkm.${Pkm}`) : opponentName}</p>
         </div>
       </header>
       <Tabs>

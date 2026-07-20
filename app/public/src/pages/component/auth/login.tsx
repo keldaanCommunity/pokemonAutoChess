@@ -1,8 +1,8 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { FIREBASE_CONFIG } from "../../../../../config"
 import { throttle } from "../../../../../utils/function"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
@@ -77,9 +77,9 @@ export default function Login() {
     return (
       <div id="play-panel">
         <p>
-          {t("authenticated_as")}:{" "}
+          {t("auth.authenticated_as")}:{" "}
           <span title={`${displayName}${email ? ` (${email})` : ""}`}>
-            {t("hover_to_reveal")}
+            {t("auth.hover_to_reveal")}
           </span>
         </p>
         <ul className="actions">
@@ -89,7 +89,7 @@ export default function Login() {
               onClick={preJoinLobby}
               disabled={prejoining}
             >
-              {prejoining ? t("connecting") : t("join_lobby")}
+              {prejoining ? t("auth.connecting") : t("auth.join_lobby")}
             </button>
           </li>
           <li>
@@ -106,7 +106,7 @@ export default function Login() {
                 }
               }}
             >
-              {loggingOut ? t("signing_out") : t("sign_out")}
+              {loggingOut ? t("auth.signing_out") : t("auth.sign_out")}
             </button>
           </li>
         </ul>

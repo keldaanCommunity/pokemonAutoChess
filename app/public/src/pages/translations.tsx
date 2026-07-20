@@ -1,5 +1,5 @@
-﻿import React, { useCallback, useEffect, useMemo, useState } from "react"
-import { useNavigate } from "react-router-dom"
+﻿import { useCallback, useEffect, useMemo, useState } from "react"
+import { useNavigate } from "react-router"
 import { Language } from "../../../types/enum/Language"
 import { LanguageNames } from "../../dist/client/locales"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
@@ -318,6 +318,15 @@ export default function TranslationsPage() {
                     />
                   )
                 }
+
+                const translatedCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) !== ""
+                ).length
+                const missingCount = Object.keys(value).filter(
+                  (k) => getTargetValue(`${key}.${k}`) === ""
+                ).length
+                const totalCount = Object.keys(value).length
+
                 return (
                   <TranslationSection
                     key={key}
@@ -331,6 +340,9 @@ export default function TranslationsPage() {
                     onEdit={onEdit}
                     onRevert={onRevert}
                     depth={0}
+                    translatedCount={translatedCount}
+                    missingCount={missingCount}
+                    totalCount={totalCount}
                   />
                 )
               })

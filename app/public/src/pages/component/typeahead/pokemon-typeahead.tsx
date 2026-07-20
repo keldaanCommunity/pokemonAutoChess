@@ -1,10 +1,10 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { PkmAltForms } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { values } from "../../../../../utils/object"
 import "./pokemon-typeahead.css"
 
 export function PokemonTypeahead({
@@ -13,13 +13,13 @@ export function PokemonTypeahead({
   options
 }: {
   value: string
-  options?: string[]
+  options?: Pkm[]
   onChange: (value: Pkm | "") => void
 }) {
   const { t } = useTranslation()
   const pokemonOptions =
     options ||
-    Object.values(Pkm)
+    values(Pkm)
       .filter((p) => {
         const pokemon = getPokemonData(p)
         return (
@@ -28,7 +28,7 @@ export function PokemonTypeahead({
           PkmAltForms.includes(pokemon.name as Pkm) === false
         )
       })
-      .sort((a, b) => t("pkm." + a).localeCompare(t("pkm." + b)))
+      .sort((a, b) => t(`pkm.${a}`).localeCompare(t(`pkm.${b}`)))
 
   return (
     <select
@@ -42,7 +42,7 @@ export function PokemonTypeahead({
       <option value="">{t("all")}</option>
       {pokemonOptions.map((p) => (
         <option key={p} value={p}>
-          {t("pkm." + p)}
+          {t(`pkm.${p}`)}
         </option>
       ))}
     </select>

@@ -1,0 +1,62 @@
+{
+	"textures": [
+		{
+			"image": "training_bag.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 47,
+				"h": 119
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "rack.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 4,
+						"w": 45,
+						"h": 66
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 45,
+						"h": 66
+					}
+				},
+				{
+					"filename": "bag.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 72
+					},
+					"spriteSourceSize": {
+						"x": 26,
+						"y": 18,
+						"w": 19,
+						"h": 49
+					},
+					"frame": {
+						"x": 1,
+						"y": 69,
+						"w": 19,
+						"h": 49
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:89790825440931f28bd5cd5a7cbb18fd:61f9b7822ff9f399f308cf837ac42776:3f5939735ad79ed22016d8884406ec8f$"
+	}
+}

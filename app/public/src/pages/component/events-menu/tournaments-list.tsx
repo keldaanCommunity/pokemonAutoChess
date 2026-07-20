@@ -1,6 +1,4 @@
-import React from "react"
-
-import { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
+import type { TournamentSchema } from "../../../../../models/colyseus-models/tournament"
 import { useAppSelector } from "../../../hooks"
 import TournamentItem from "../room-menu/tournament-item"
 import "./tournaments-list.css"

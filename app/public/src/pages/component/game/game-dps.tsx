@@ -1,13 +1,10 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
-import { IDps } from "../../../../../types"
-import { usePreference } from "../../../preferences"
+import type { IDps } from "../../../../../types"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
   const { t } = useTranslation()
-  const [colorblindMode] = usePreference("colorblindMode")
   return (
     <div className="game-dps-bar">
       <PokemonPortrait avatar={props.dps.name} />
@@ -19,9 +16,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
         </p>
         <ProgressBar className="my-progress is-primary">
           <ProgressBar
-            className={
-              colorblindMode ? "colorblind-pattern-vertical-stripes" : ""
-            }
+            className="colorblind-pattern-vertical-stripes"
             style={{ backgroundColor: "var(--color-physical)" }}
             max={props.maxDamage}
             now={props.dps.physicalDamage}
@@ -29,9 +24,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             title={`${t("game_stats.physical_damage_dealt")}: ${props.dps.physicalDamage}`}
           />
           <ProgressBar
-            className={
-              colorblindMode ? "colorblind-pattern-diagonal-stripes" : ""
-            }
+            className="colorblind-pattern-diagonal-stripes"
             style={{ backgroundColor: "var(--color-special)" }}
             max={props.maxDamage}
             now={props.dps.specialDamage}
@@ -39,7 +32,7 @@ export default function GameDps(props: { maxDamage: number; dps: IDps }) {
             title={`${t("game_stats.special_damage_dealt")}: ${props.dps.specialDamage}`}
           />
           <ProgressBar
-            className={colorblindMode ? "colorblind-pattern-dots" : ""}
+            className="colorblind-pattern-dots"
             style={{ backgroundColor: "var(--color-true)" }}
             max={props.maxDamage}
             now={props.dps.trueDamage}

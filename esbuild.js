@@ -51,7 +51,7 @@ context({
     "process.env.FIREBASE_MESSAGING_SENDER_ID": `"${process.env.FIREBASE_MESSAGING_SENDER_ID}"`,
     "process.env.FIREBASE_APP_ID": `"${process.env.FIREBASE_APP_ID}"`,
     "process.env.DISCORD_SERVER": `"${process.env.DISCORD_SERVER}"`,
-    "process.env.MIN_HUMAN_PLAYERS": `"${process.env.MIN_HUMAN_PLAYERS}"`,
+    "process.env.MIN_HUMAN_PLAYERS": `"${process.env.MIN_HUMAN_PLAYERS}"`
   }
 })
   .then((context) => {
@@ -70,6 +70,31 @@ context({
         }
         context.dispose()
       })
+    }
+  })
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+
+// Second entry: the match-recorder WebWorker (recorder.worker.ts), built to a STABLE, unhashed filename so
+// recorder.ts can load it from a fixed URL (/recorder.worker.js; dist/client is served at root). A classic
+// (iife) worker with no ESM at runtime, matching the main bundle's es2016 target. Watched in dev; one-shot in
+// --build. Self-contained (bundles opfs-replay-writer + replay-format + msgpackr); needs none of the env defines.
+context({
+  entryPoints: ["./app/public/src/game/recorder.worker.ts"],
+  outfile: "app/public/dist/client/recorder.worker.js",
+  bundle: true,
+  format: "iife",
+  target: "es2016",
+  minify: isProdBuild,
+  sourcemap: isProdBuild
+})
+  .then((workerContext) => {
+    if (isDev) {
+      workerContext.watch()
+    } else {
+      workerContext.rebuild().then(() => workerContext.dispose())
     }
   })
   .catch((error) => {

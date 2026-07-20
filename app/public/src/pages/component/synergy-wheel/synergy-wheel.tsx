@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react"
+import { type Dispatch, type SetStateAction, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import SynergyIcon from "../icons/synergy-icon"

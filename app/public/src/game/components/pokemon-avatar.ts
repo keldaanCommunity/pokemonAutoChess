@@ -1,15 +1,29 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AvatarEmotions, Emotion, IPokemonAvatar } from "../../../../types"
+import {
+  AvatarEmotions,
+  CollectionEmotions,
+  Emotion,
+  type IPokemonAvatar
+} from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { getAvatarSrc, getAvatarString } from "../../../../utils/avatar"
+import { Item } from "../../../../types/enum/Item"
+import {
+  type PlayerDialog,
+  PlayerDialogs
+} from "../../../../types/enum/PlayerDialog"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { isIn } from "../../../../utils/array"
+import { getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
 import { showEmote } from "../../network"
 import { playSound, SOUNDS } from "../../pages/utils/audio"
 import { preference } from "../../preferences"
 import store from "../../stores"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
+import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
 import PokemonSprite from "./pokemon"
@@ -227,14 +241,23 @@ export default class PokemonAvatar extends PokemonSprite {
     else this.showEmoteMenu()
   }
 
-  sendEmote(emotion: Emotion) {
+  sendEmote(emote: Emotion | Item | Pkm | PlayerDialog) {
     const state = store.getState()
-    if (state.game.emotesUnlocked.includes(emotion)) {
-      showEmote(
-        getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
-      )
-      this.hideEmoteMenu()
+    if (isIn(CollectionEmotions, emote)) {
+      if (state.game.emotesUnlocked.includes(emote)) {
+        showEmote(
+          getAvatarString(this.pokemon.index, this.pokemon.shiny, emote)
+        )
+      }
+    } else if (emote in Pkm) {
+      showEmote(getAvatarString(PkmIndex[emote], false, Emotion.NORMAL))
+    } else if (emote in Item) {
+      showEmote("item/" + emote)
+    } else if (isIn(PlayerDialogs, emote)) {
+      showEmote("player_dialog/" + emote)
     }
+
+    this.hideEmoteMenu()
   }
 
   playAnimation() {
@@ -261,23 +284,5 @@ export default class PokemonAvatar extends PokemonSprite {
     } else {
       this.playAnimation()
     }
-  }
-}
-
-export class EmoteBubble extends GameObjects.DOMElement {
-  dom: HTMLDivElement
-
-  constructor(scene: Phaser.Scene, emoteAvatar: string, isOpponent: boolean) {
-    super(scene, 0, 0)
-
-    this.dom = document.createElement("div")
-    this.dom.className =
-      "game-emote-bubble " + (isOpponent ? "opponent" : "current")
-
-    const emoteImg = document.createElement("img")
-    emoteImg.src = getAvatarSrc(emoteAvatar)
-
-    this.dom.appendChild(emoteImg)
-    this.setElement(this.dom)
   }
 }

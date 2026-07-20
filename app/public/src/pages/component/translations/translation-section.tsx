@@ -14,6 +14,9 @@ export interface TranslationSectionProps {
   onEdit: (path: string, value: string) => void
   onRevert: (path: string) => void
   depth: number
+  translatedCount: number
+  missingCount: number
+  totalCount: number
 }
 
 export const TranslationSection = React.memo(function TranslationSection({
@@ -26,7 +29,10 @@ export const TranslationSection = React.memo(function TranslationSection({
   getTargetValue,
   onEdit,
   onRevert,
-  depth
+  depth,
+  translatedCount,
+  missingCount,
+  totalCount
 }: TranslationSectionProps) {
   const isCollapsed = collapsedSections.has(path)
 
@@ -45,6 +51,14 @@ export const TranslationSection = React.memo(function TranslationSection({
       >
         <span className="section-arrow">{isCollapsed ? "▶" : "▼"}</span>
         <span className="section-label">{label}</span>
+        <span className="translations-stats">
+          <span className="stat-translated">{translatedCount} translated</span>
+          {", "}
+          <span className="stat-missing">{missingCount} missing</span>{" "}
+          <span>
+            ({((translatedCount / totalCount) * 100).toFixed(1)}% complete)
+          </span>
+        </span>
         {editedCount > 0 && (
           <span className="section-edit-badge">{editedCount} edited</span>
         )}
@@ -68,6 +82,15 @@ export const TranslationSection = React.memo(function TranslationSection({
                 />
               )
             }
+
+            const translatedCount = Object.keys(value).filter(
+              (k) => getTargetValue(`${childPath}.${k}`) !== ""
+            ).length
+            const missingCount = Object.keys(value).filter(
+              (k) => getTargetValue(`${childPath}.${k}`) === ""
+            ).length
+            const totalCount = Object.keys(value).length
+
             return (
               <TranslationSection
                 key={childPath}
@@ -81,6 +104,9 @@ export const TranslationSection = React.memo(function TranslationSection({
                 onEdit={onEdit}
                 onRevert={onRevert}
                 depth={depth + 1}
+                translatedCount={translatedCount}
+                missingCount={missingCount}
+                totalCount={totalCount}
               />
             )
           })}

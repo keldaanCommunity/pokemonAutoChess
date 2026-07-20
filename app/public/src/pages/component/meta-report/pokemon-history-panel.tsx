@@ -9,18 +9,18 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-
-import { IPokemonsStatisticV2 } from "../../../../../models/mongo-models/pokemons-statistic-v2"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
-import { EloRank } from "../../../../../types/enum/EloRank"
+import type { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import type { IPokemonsStatisticV2 } from "../../../models/pokemons-statistic-v2"
 import { formatDateShort } from "./history-utils"
 import "./pokemon-history-panel.css"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 
 const TOP_N_OPTIONS = [10, 20, 50] as const
 
@@ -51,7 +51,7 @@ function getPokemonPortraitPath(pokemonName: string): string {
   return getPortraitSrc(PkmIndex[pokemonName as Pkm])
 }
 
-function isInPool(pokemonName: Pkm, pool: string): boolean {
+function isInPool(pokemonName: Pkm, pool: PoolType | "all"): boolean {
   if (pool === "all") return true
   const data = getPokemonData(pokemonName)
   if (pool === "special") return data.rarity === Rarity.SPECIAL
@@ -131,7 +131,7 @@ interface PokemonHistoryPanelProps {
   metric: "count" | "rank"
   synergy?: Synergy | "all"
   rarity?: Rarity | "all"
-  pool?: string
+  pool?: PoolType | "all"
   tier?: string
   selectedPkm?: Pkm | ""
 }
@@ -143,7 +143,7 @@ function CustomTooltip({
   metric
 }: {
   active?: boolean
-  payload?: any[]
+  payload?: { value: number; name: Pkm; stroke?: string; color?: string }[]
   label?: string
   metric: "count" | "rank"
 }) {
@@ -154,7 +154,7 @@ function CustomTooltip({
   return (
     <div className="pokemon-history-tooltip">
       <div className="pokemon-history-tooltip-date">{label}</div>
-      {sorted.map((entry: any) => (
+      {sorted.map((entry) => (
         <div key={entry.name} className="pokemon-history-tooltip-row">
           <img
             src={getPokemonPortraitPath(entry.name)}
@@ -211,7 +211,7 @@ export function PokemonHistoryPanel({
 
     const allDates = new Set<string>()
     const validPokemons: {
-      name: string
+      name: Pkm
       history: { date: string; value: number }[]
     }[] = []
 
@@ -306,7 +306,7 @@ export function PokemonHistoryPanel({
         {TOP_N_OPTIONS.map((n) => (
           <button
             key={n}
-            className={`pokemon-history-topn-btn${topN === n ? " active" : ""}`}
+            className={`bubbly pokemon-history-topn-btn${topN === n ? " active" : ""}`}
             onClick={() => setTopN(n)}
           >
             {n}

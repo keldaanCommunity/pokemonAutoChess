@@ -1,7 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import { ExpTable } from "../../config"
-import { IExperienceManager } from "../../types"
-import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import type { IExperienceManager } from "../../types"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 
 export default class ExperienceManager
   extends Schema
@@ -10,7 +10,7 @@ export default class ExperienceManager
   @type("uint8") level: number
   @type("uint8") experience: number
   @type("uint8") expNeeded: number
-  maxLevel: number
+  @type("uint8") maxLevel: number
 
   constructor() {
     super()
@@ -24,25 +24,26 @@ export default class ExperienceManager
     return this.level < this.maxLevel
   }
 
-  addExperience(quantity: number) {
+  addExperience(quantity: number): number {
     let expToAdd = quantity
-    while (this.checkForLevelUp(expToAdd)) {
+    while (this.canLevelUpWithXP(expToAdd)) {
       expToAdd -= ExpTable[this.level]
       this.level += 1
-      this.expNeeded = ExpTable[this.level]
+      this.expNeeded = ExpTable[this.level] ?? 255
     }
+    if (this.level < this.maxLevel) {
+      this.experience += expToAdd
+      expToAdd = 0
+    }
+
+    return quantity - expToAdd // return xp actually gained
   }
 
-  checkForLevelUp(quantity: number) {
-    if (
+  canLevelUpWithXP(quantity: number): boolean {
+    return (
       this.experience + quantity >= ExpTable[this.level] &&
       this.level < this.maxLevel
-    ) {
-      return true
-    } else {
-      this.experience += quantity
-      return false
-    }
+    )
   }
 }
 

@@ -1,13 +1,14 @@
 import { t } from "i18next"
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import {
   OUTLAW_GOLD_REWARD,
   SHARDS_PER_SHINY_UNOWN_WANDERER,
   SHARDS_PER_UNOWN_WANDERER
 } from "../../../../config"
-import { Wanderer } from "../../../../models/colyseus-models/wanderer"
+import type { Wanderer } from "../../../../models/colyseus-models/wanderer"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Item, Transfer } from "../../../../types"
+import { type Item, Transfer } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { WandererBehavior, WandererType } from "../../../../types/enum/Wanderer"
@@ -15,7 +16,8 @@ import { getFreeSpaceOnBench } from "../../../../utils/board"
 import { clamp } from "../../../../utils/number"
 import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import { isReplayRoom } from "../replay-room-id"
+import type GameScene from "../scenes/game-scene"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
 
@@ -135,9 +137,10 @@ export default class WanderersManager {
           sprite.closeDetail()
         } else {
           sprite.openDetail()
-          setTimeout(() => {
+          // scene-clocked so a still-pending fuse dies with the scene (a replay seek restarts it)
+          this.scene.time.delayedCall(3000, () => {
             sprite.closeDetail()
-          }, 3000)
+          })
         }
         return false
       }
@@ -145,28 +148,49 @@ export default class WanderersManager {
 
     if (wanderer.pkm === Pkm.XATU && wanderer.data && this.scene.board) {
       const { chest, chestGroup } = this.scene.board.addChest(590, 450)
-      setTimeout(() => {
+      this.scene.time.delayedCall(5000, () => {
         this.scene.board?.openChest(
           chestGroup,
           chest,
           wanderer.data.split(";") as Item[]
         )
-      }, 5000)
-      setTimeout(() => {
+      })
+      this.scene.time.delayedCall(8000, () => {
         chestGroup.destroy(true, true)
-      }, 8000)
+      })
+    }
+
+    if (
+      wanderer.pkm === Pkm.KECLEON_PURPLE &&
+      wanderer.data &&
+      this.scene.board
+    ) {
+      const group = this.scene.add.group()
+      this.scene.time.delayedCall(5000, () => {
+        sprite.emoteAnimation()
+        this.scene.board?.showRewards(
+          group,
+          wanderer.data.split(";") as Item[],
+          sprite.x,
+          sprite.y,
+          DEPTH.ITEM_FOUND
+        )
+      })
+      this.scene.time.delayedCall(8000, () => {
+        group.destroy(true, true)
+      })
     }
 
     if (wanderer.pkm === Pkm.LAPRAS) {
-      setTimeout(() => {
+      this.scene.time.delayedCall(9000, () => {
         sprite.moveManager.setSpeed(350)
         sprite.moveManager.moveTo(15 * 48, -100)
         this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
-        setTimeout(() => {
+        this.scene.time.delayedCall(1200, () => {
           this.scene.cameras.main.fadeIn(1000, 0, 0, 0)
           sprite.destroy()
-        }, 1200)
-      }, 9000)
+        })
+      })
     }
   }
 
@@ -287,12 +311,16 @@ export default class WanderersManager {
     tweens.push(tween)
 
     sprite.draggable = false
-    sprite.sprite.setInteractive()
-    sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      if (caught || !onClick) return
-      caught = onClick(wanderer, sprite, pointer)
-      if (caught) tweens.forEach((tween) => tween.destroy())
-    })
+
+    const isReplay = isReplayRoom(this.scene.room)
+    if (!isReplay) {
+      sprite.sprite.setInteractive()
+      sprite.sprite.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+        if (caught || !onClick) return
+        caught = onClick(wanderer, sprite, pointer)
+        if (caught) tweens.forEach((tween) => tween.destroy())
+      })
+    }
 
     return sprite
   }
@@ -386,6 +414,12 @@ function getDialogsBySpecialWanderer(wanderer: Wanderer): {
   if (wanderer.pkm === Pkm.LAPRAS) {
     return {
       dialog: t("npc_dialog.lapras")
+    }
+  }
+  if (wanderer.pkm === Pkm.KECLEON_PURPLE) {
+    return {
+      dialog: t("npc_dialog.kecleon_preview"),
+      dialogTitle: t("npc_dialog.kecleon")
     }
   }
   return {}

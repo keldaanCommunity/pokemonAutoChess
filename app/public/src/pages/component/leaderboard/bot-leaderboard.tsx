@@ -1,5 +1,4 @@
-import React from "react"
-import { ILeaderboardBotInfo } from "../../../../../types/interfaces/LeaderboardInfo"
+import type { ILeaderboardBotInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import { useAppSelector } from "../../../hooks"
 import Leaderboard from "./leaderboard"
 

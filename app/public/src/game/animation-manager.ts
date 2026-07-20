@@ -1,3 +1,4 @@
+import type Phaser from "phaser"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { AnimationOriented, AnimationType } from "../../../types/Animation"
 import delays from "../../../types/delays.json"
@@ -8,14 +9,14 @@ import {
   PokemonTint,
   SpriteType
 } from "../../../types/enum/Game"
-import { Berries } from "../../../types/enum/Item"
+import { Berries, Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
 import durations from "../assets/pokemons/durations.json"
-import PokemonSprite from "./components/pokemon"
+import type PokemonSprite from "./components/pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
@@ -255,7 +256,7 @@ export default class AnimationManager {
   }
 
   createEnvironmentAnimations() {
-    Berries.forEach((berryName) => {
+    Berries.filter((b) => b !== Item.NANAB_BERRY).forEach((berryName) => {
       for (let step = 1; step <= 3; step++) {
         this.game.anims.create({
           key: `${berryName}_TREE_STEP_${step}`,
@@ -306,6 +307,7 @@ export default class AnimationManager {
       case PokemonActionState.HOP:
       case PokemonActionState.FISH:
       case PokemonActionState.BLOSSOM:
+      case PokemonActionState.NEST:
         return config.hop
       case PokemonActionState.HURT:
         return config.hurt
@@ -316,9 +318,12 @@ export default class AnimationManager {
       case PokemonActionState.WALK:
         return config.walk
       case PokemonActionState.ATTACK:
+      case PokemonActionState.TRAINING:
         return config.attack
       case PokemonActionState.EMOTE:
         return config.emote
+      case PokemonActionState.ABILITY:
+        return config.ability
       case PokemonActionState.IDLE:
       default:
         return config.idle
@@ -371,6 +376,10 @@ export default class AnimationManager {
         PokemonActionState.SLEEP,
         pokemonSprite
       )
+    }
+
+    if (action === PokemonActionState.TRAINING) {
+      pokemonSprite.orientation = Orientation.LEFT
     }
 
     try {

@@ -1,24 +1,22 @@
-import { RoomAvailable } from "@colyseus/sdk"
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import Message from "../../../models/colyseus-models/message"
-import {
+import type { RoomAvailable } from "@colyseus/sdk"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
+import type Message from "../../../models/colyseus-models/message"
+import type {
   TournamentBracketSchema,
   TournamentSchema
 } from "../../../models/colyseus-models/tournament"
-import {
+import type {
   IChatV2,
   IGameMetadata,
-  IPreparationMetadata,
-  ISuggestionUser
+  IPreparationMetadata
 } from "../../../types"
-import type { Booster } from "../../../types/Booster"
 import { Language } from "../../../types/enum/Language"
-import {
+import type {
   ILeaderboardBotInfo,
   ILeaderboardEventInfo,
   ILeaderboardInfo
 } from "../../../types/interfaces/LeaderboardInfo"
-import { IUserMetadataClient } from "../../../types/interfaces/UserMetadata"
+import type { IUserMetadataClient } from "../../../types/interfaces/UserMetadata"
 
 export interface IUserLobbyState {
   messages: IChatV2[]
@@ -31,8 +29,6 @@ export interface IUserLobbyState {
   tabIndex: number
   preparationRooms: RoomAvailable[]
   gameRooms: RoomAvailable[]
-  boosterContent: Booster
-  lastBoostersOpened: Booster[]
   language: Language
   tournaments: TournamentSchema[]
   ccu: number
@@ -40,8 +36,6 @@ export interface IUserLobbyState {
 
 const initialState: IUserLobbyState = {
   language: Language.en,
-  boosterContent: [],
-  lastBoostersOpened: [],
   messages: [],
   leaderboard: [],
   botLeaderboard: [],
@@ -123,13 +117,6 @@ export const lobbySlice = createSlice({
       action: PayloadAction<IUserMetadataClient | undefined>
     ) => {
       state.searchedUser = action.payload
-    },
-    setBoosterContent: (state, action: PayloadAction<Booster>) => {
-      state.boosterContent = action.payload
-      state.lastBoostersOpened.push([...action.payload])
-    },
-    resetLastBoostersOpened: (state) => {
-      state.lastBoostersOpened = []
     },
     resetLobby: () => initialState,
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
@@ -231,8 +218,6 @@ export const lobbySlice = createSlice({
 
 export const {
   removeMessage,
-  setBoosterContent,
-  resetLastBoostersOpened,
   pushMessage,
   setLeaderboard,
   setBotLeaderboard,

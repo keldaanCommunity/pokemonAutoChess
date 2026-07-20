@@ -1,13 +1,6 @@
 import { model, Schema } from "mongoose"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
-
-export interface IRegionStatistic {
-  name: DungeonPMDO
-  count: number
-  rank: number
-  elo: number
-  pokemons: string[]
-}
+import type { IRegionStatistic } from "../../types/models/regions-statistic"
 
 const regionStatisticSchema = new Schema({
   name: {
@@ -35,6 +28,3 @@ export default model<IRegionStatistic>(
   regionStatisticSchema,
   "regions-statistic"
 )
-export async function fetchMetaRegions(): Promise<IRegionStatistic[]> {
-  return fetch("/meta/regions").then((res) => res.json())
-}

@@ -1,6 +1,6 @@
 .moderation-panel {
   width: min(80vw, 900px);
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .moderation-panel .react-tabs__tab-panel--selected {
@@ -61,4 +61,39 @@
   display: flex;
   flex-direction: column;
   gap: 0.75em;
+}
+
+.moderation-blacklist-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.moderation-blacklist-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75em;
+  align-items: center;
+  border-bottom: 1px solid var(--color-bg-tertiary);
+  padding-bottom: 0.75em;
+}
+
+.moderation-blacklist-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.moderation-blacklist-info {
+  min-width: 0;
+}
+
+.moderation-blacklist-login {
+  margin: 0;
+  font-weight: 700;
+}
+
+.moderation-blacklist-reason {
+  margin: 0.25em 0;
+  color: var(--color-fg-secondary);
+  word-break: break-word;
 }

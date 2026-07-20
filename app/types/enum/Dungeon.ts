@@ -13,6 +13,7 @@ export enum DungeonMusic {
   BOULDER_QUARRY = "Boulder Quarry",
   BRINE_CAVE = "Brine Cave",
   BURIED_RELIC = "Buried Relic",
+  CARNIVAL_LUDICOLO = "Carnival Ludicolo",
   CAVE_AND_SIDE_PATH = "Cave and Side Path",
   CHASM_CAVE = "Chasm Cave",
   CONCEALED_RUINS = "Concealed Ruins",
@@ -64,7 +65,6 @@ export enum DungeonMusic {
   LIMESTONE_CAVERN = "Limestone Cavern",
   LIVING_SPIRIT = "Living Spirit",
   LOWER_BRINE_CAVE = "Lower Brine Cave",
-  LUDICOLO_DANCE = "Ludicolo Dance", // UNUSED
   MAGMA_CAVERN = "Magma Cavern",
   MAGMA_CAVERN_PIT = "Magma Cavern Pit",
   MAKUHITA_DOJO = "Makuhita Dojo",
@@ -139,7 +139,11 @@ export enum DungeonMusic {
   TREASURE_TOWN_STAGE_0 = "Treasure Town Stage 0",
   TREASURE_TOWN_STAGE_10 = "Treasure Town Stage 10",
   TREASURE_TOWN_STAGE_20 = "Treasure Town Stage 20",
+  TREASURE_TOWN_STAGE_0_ALT = "Treasure Town Stage 0 alt",
+  TREASURE_TOWN_STAGE_10_ALT = "Treasure Town Stage 10 alt",
+  TREASURE_TOWN_STAGE_20_ALT = "Treasure Town Stage 20 alt",
   TREESHROUD_FOREST = "Treeshroud Forest",
+  TROUBLE_IN_TOWN = "Trouble in Town",
   UPPER_STEAM_CAVE = "Upper Steam Cave",
   VAST_ICE_MOUNTAIN = "Vast Ice Mountain",
   VAST_ICE_MOUNTAIN_PEAK = "Vast Ice Mountain Peak",
@@ -296,4 +300,14 @@ export enum DungeonPMDO {
   ZeroIsleEast4 = "ZeroIsleEast4",
   ZeroIsleSouth1 = "ZeroIsleSouth1",
   ZeroIsleSouth2 = "ZeroIsleSouth2"
+}
+
+export const DungeonMusicCredits: { [key in DungeonMusic]?: string } = {
+  [DungeonMusic.TROUBLE_IN_TOWN]: "John Rei",
+  [DungeonMusic.TREASURE_TOWN_STAGE_0_ALT]: "John Rei",
+  [DungeonMusic.TREASURE_TOWN_STAGE_10_ALT]: "John Rei",
+  [DungeonMusic.TREASURE_TOWN_STAGE_20_ALT]: "John Rei",
+  [DungeonMusic.TREASURE_TOWN_STAGE_0]: "L'Improyable",
+  [DungeonMusic.TREASURE_TOWN_STAGE_10]: "L'Improyable",
+  [DungeonMusic.TREASURE_TOWN_STAGE_20]: "L'Improyable"
 }

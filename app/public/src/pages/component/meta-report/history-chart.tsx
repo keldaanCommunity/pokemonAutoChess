@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-import { IHistoryEntry } from "../../../../../models/mongo-models/pokemons-statistic-v2"
+import type { IHistoryEntry } from "../../../models/pokemons-statistic-v2"
 import { formatDateShort } from "./history-utils"
 import "./history-chart.css"
 
@@ -55,7 +55,7 @@ const PortraitEndDot = React.memo(function PortraitEndDot(props: {
 /** Full-width chart with label, for use inside expanded accordion sections */
 export function HistoryChart(props: {
   entries: IHistoryEntry[]
-  label?: string
+  label?: "count" | "average_place"
   color?: string
   invertY?: boolean
   portraitSrc?: string

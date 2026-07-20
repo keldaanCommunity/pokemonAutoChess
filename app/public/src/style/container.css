@@ -3,7 +3,7 @@
   background-color: var(--color-bg-primary);
   border: var(--border-thick);
   padding: 0.25em 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .my-box {
@@ -11,7 +11,7 @@
   border-radius: 12px;
   border: var(--border-thin);
   padding: 0.25em 0.5em;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .my-box.clickable,

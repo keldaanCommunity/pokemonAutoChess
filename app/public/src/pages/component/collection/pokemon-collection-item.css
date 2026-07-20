@@ -30,7 +30,7 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  background-color: gold;
+  background-color: var(--color-bg-gold);
   color: black;
   font-weight: bold;
   padding: 0px 4px;
@@ -44,7 +44,7 @@
   position: absolute;
   top: 56px;
   left: 2px;
-  color: red;
+  color: var(--color-fg-red);
   font-weight: bold;
   font-size: 16px;
   z-index: 1;
@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .pokemon-collection-item p > * {

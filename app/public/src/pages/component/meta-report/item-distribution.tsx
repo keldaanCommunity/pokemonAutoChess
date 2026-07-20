@@ -10,21 +10,26 @@ import {
   XAxis,
   YAxis
 } from "recharts"
-import { IItemsStatisticV2 } from "../../../../../models/mongo-models/items-statistic-v2"
-import { EloRank } from "../../../../../types/enum/EloRank"
-import { Item } from "../../../../../types/enum/Item"
+import type { EloRank } from "../../../../../types/enum/EloRank"
+import type { Item } from "../../../../../types/enum/Item"
+import type { IItemsStatisticV2 } from "../../../models/items-statistic-v2"
 
 function getItemImagePath(itemName: string): string {
   return `assets/item/${itemName}.png`
 }
 
-function CustomTooltip({
-  active,
-  payload
-}: {
+type ValueType = {
+  avgPlace: number
+  count: number
+  name: Item
+}
+
+interface CustomTooltipProps {
   active?: boolean
-  payload?: any[]
-}) {
+  payload?: Array<{ payload: ValueType }>
+}
+
+function CustomTooltip({ active, payload }: CustomTooltipProps) {
   if (active && payload && payload.length) {
     const data = payload[0].payload
     return (
@@ -91,7 +96,7 @@ export function ItemDistribution({
     if (!tierData) return []
 
     // Map every item to scatter plot coordinates
-    let items = Object.values(tierData.items).map((item) => ({
+    let items: ValueType[] = Object.values(tierData.items).map((item) => ({
       avgPlace: item.rank,
       count: item.count,
       name: item.name

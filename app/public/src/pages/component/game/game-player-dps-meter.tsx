@@ -1,6 +1,6 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { IDps } from "../../../../../types"
+import type { IDps } from "../../../../../types"
 import GameDps from "./game-dps"
 
 type GamePlayerDpsMeterInput = {

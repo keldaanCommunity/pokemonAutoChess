@@ -1,5 +1,5 @@
 #wiki-page {
-  color: white;
+  color: var(--color-fg-primary);
   width: min(95vw, 1800px);
   max-width: 100%;
 }
@@ -70,6 +70,10 @@
 
 #wiki-page .wiki-faq details {
   margin-bottom: 0.5em;
+}
+
+#wiki-page .wiki-faq details p {
+  white-space: pre-wrap;
 }
 
 #wiki-page .wiki-status,
@@ -269,6 +273,7 @@
 
 #wiki-ability .my-box p {
   font-size: 0.8em;
+  white-space: pre-wrap;
 }
 
 #wiki-ability img.item {
@@ -378,4 +383,40 @@
   #wiki-page .wiki-types li[role="tab"] {
     padding: 4px;
   }
+}
+
+#wiki-page .wiki-double-up {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+}
+
+#wiki-page .wiki-double-up h2 {
+  margin: 0 0 0.25em 0;
+}
+
+#wiki-page .wiki-double-up p {
+  margin: 0;
+}
+
+#wiki-page .wiki-double-up ul {
+  margin: 0.25em 0 0 1em;
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up li {
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0.25em 0;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items img.item {
+  width: 22px;
+  height: 22px;
 }

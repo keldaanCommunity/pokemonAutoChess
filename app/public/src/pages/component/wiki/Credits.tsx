@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { useCredits } from "../../../../../core/credits"
 
@@ -46,7 +45,7 @@ export default function Credits(props: {
       <dd>{credits.primary.length > 0 && findCredits(credits.primary)}</dd>
       {credits.secondary.length > 0 && (
         <>
-          <dt>{t("others")}</dt>
+          <dt>{t("wiki.credits.others")}</dt>
           <dd>
             <ul style={{ display: "inline-block" }}>
               {credits.secondary.map((s) => (

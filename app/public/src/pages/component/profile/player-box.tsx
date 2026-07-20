@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IGameRecord } from "../../../../../models/colyseus-models/game-record"
+import type { IGameRecord } from "../../../../../models/colyseus-models/game-record"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Role } from "../../../../../types"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import {
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import type {
   IUserMetadataClient,
   IUserMetadataUnpacked
 } from "../../../../../types/interfaces/UserMetadata"
@@ -25,6 +25,9 @@ export default function PlayerBox(props: {
   const pokemons: Pkm[] = []
   const [favoritePokemons, setFavoritePokemons] = useState<Pkm[]>([])
   const [favoriteSynergies, setFavoriteSynergies] = useState<Synergy[]>([])
+  const twitchUrl = props.user.twitchLogin
+    ? `https://www.twitch.tv/${props.user.twitchLogin}`
+    : null
 
   useEffect(() => {
     if (!props.history) return
@@ -71,6 +74,7 @@ export default function PlayerBox(props: {
             <div className="badge banned">{t("banned")}</div>
           )}
           <p
+            className="player-display-name"
             style={{
               overflow: "hidden",
               whiteSpace: "nowrap",
@@ -79,6 +83,18 @@ export default function PlayerBox(props: {
           >
             {props.user.displayName}
           </p>
+          {twitchUrl && (
+            <a
+              className="twitch-badge-link"
+              href={twitchUrl}
+              target="_blank"
+              rel="noreferrer"
+              title={`Watch ${props.user.twitchDisplayName ?? props.user.twitchLogin} on Twitch`}
+              aria-label={`Watch ${props.user.twitchDisplayName ?? props.user.twitchLogin} on Twitch`}
+            >
+              <img src="/assets/ui/twitch.png" alt="" aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
       <div
@@ -119,7 +135,7 @@ export default function PlayerBox(props: {
       </div>
       {(role === Role.ADMIN || role === Role.MODERATOR) && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
-          {t("user_id")}: {props.user.uid}
+          {t("profile.account.user_id")}: {props.user.uid}
         </p>
       )}
     </div>

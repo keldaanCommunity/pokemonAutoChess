@@ -1,6 +1,3 @@
-import { PokemonEntity } from "../../core/pokemon-entity"
-import { Stat, Team } from "./Game"
-
 export enum EffectEnum {
   INGRAIN = "INGRAIN",
   GROWTH = "GROWTH",
@@ -23,7 +20,7 @@ export enum EffectEnum {
   GUTS = "GUTS",
   STURDY = "STURDY",
   DEFIANT = "DEFIANT",
-  JUSTIFIED = "JUSTIFIED",
+  COACHING = "COACHING",
   PRECOGNITION = "PRECOGNITION",
   AURA = "AURA",
   TRANSCENDENCE = "TRANSCENDENCE",
@@ -98,6 +95,7 @@ export enum EffectEnum {
   GOLDEN_EGGS = "GOLDEN_EGGS",
   TELEPORT_NEXT_ATTACK = "TELEPORT_NEXT_ATTACK",
   SHADOW_PUNCH_NEXT_ATTACK = "SHADOW_PUNCH_NEXT_ATTACK",
+  ATTACK_ORDER_NEXT_ATTACK = "ATTACK_ORDER_NEXT_ATTACK",
   GRASSY_TERRAIN = "GRASSY_TERRAIN",
   PSYCHIC_TERRAIN = "PSYCHIC_TERRAIN",
   ELECTRIC_TERRAIN = "ELECTRIC_TERRAIN",
@@ -173,7 +171,7 @@ export enum EffectEnum {
   JAW_LOCK = "JAW_LOCK",
   BALM_MUSHROOM = "BALM_MUSHROOM",
   PARTING_SHOT = "PARTING_SHOT",
-  BANEFUL_BUNKER = "BANEFUL_BUNKER"
+  NO_PP_GAIN = "NO_PP_GAIN"
 }
 
 export const BoardEffects = [

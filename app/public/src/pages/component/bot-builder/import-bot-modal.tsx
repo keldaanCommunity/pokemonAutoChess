@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { IBot } from "../../../../../models/mongo-models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 import { Modal } from "../modal/modal"
 
 export default function ImportBotModal(props: {
@@ -31,7 +31,7 @@ export default function ImportBotModal(props: {
     setJsonError("")
     try {
       setTextArea(JSON.stringify(JSON.parse(newValue), null, 2))
-    } catch (e) {
+    } catch (e: any) {
       setJsonError(e.message)
     }
   }

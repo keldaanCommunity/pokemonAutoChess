@@ -1,7 +1,11 @@
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { precomputedPokemonsImplemented } from "../../../../../../gen/precomputed-pokemons"
-import { Pkm, PkmByIndex, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
+import {
+  type Pkm,
+  PkmByIndex,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { changeAvatar } from "../../../stores/NetworkStore"
@@ -41,8 +45,11 @@ export function AvatarTab() {
   return (
     <div>
       <h3 style={{ display: "flex" }}>
-        {t("change_avatar")} <div className="spacer"></div>{" "}
-        {t("avatars_unlocked", { count: nbUnlocked, total: nbTotal })}
+        {t("profile.avatar.change_avatar")} <div className="spacer"></div>{" "}
+        {t("profile.progress.avatars_unlocked", {
+          count: nbUnlocked,
+          total: nbTotal
+        })}
       </h3>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5em" }}>
         <PokemonTypeahead value={selectedPkm} onChange={setSelectedPkm} />
@@ -62,13 +69,17 @@ export function AvatarTab() {
               }}
             >
               ❤️&nbsp;
-              {isFavorite ? t("remove_from_favorites") : t("add_to_favorites")}
+              {isFavorite
+                ? t("collection.remove_from_favorites")
+                : t("collection.add_to_favorites")}
             </button>
           </>
         )}
       </div>
       <div>
-        {pokemonCollection.length === 0 && <p>{t("play_more_games_hint")}</p>}
+        {pokemonCollection.length === 0 && (
+          <p>{t("profile.avatar.play_more_games_hint")}</p>
+        )}
         {selectedPkm ? (
           <SelectedPokemonAvatars pokemon={selectedPkm} />
         ) : (
@@ -128,7 +139,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
     (pokemonCollectionItem.emotions.length === 0 &&
       pokemonCollectionItem.shinyEmotions.length === 0)
   )
-    return <p>{t("play_more_games_hint")}</p>
+    return <p>{t("profile.avatar.play_more_games_hint")}</p>
 
   return (
     <div className="emotions-grid">

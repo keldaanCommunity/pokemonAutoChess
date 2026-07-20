@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { MAX_LEVEL } from "../../../../../config"
@@ -14,7 +13,7 @@ export default function GameExperience() {
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
-  const isLevelMax = experienceManager.level >= MAX_LEVEL
+  const isLevelMax = experienceManager.level >= experienceManager.maxLevel
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const levelUpCost = getLevelUpCost(specialGameRule)
   const goldToLevelUp = isLevelMax

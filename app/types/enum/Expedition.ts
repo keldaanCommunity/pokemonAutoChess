@@ -1,8 +1,8 @@
-import { GameStat } from "../interfaces/GameStats"
-import { DungeonPMDO } from "./Dungeon"
-import { Item } from "./Item"
-import { Pkm } from "./Pokemon"
-import { Synergy } from "./Synergy"
+import type { GameStat } from "../interfaces/GameStats"
+import type { DungeonPMDO } from "./Dungeon"
+import type { Item } from "./Item"
+import type { Pkm } from "./Pokemon"
+import type { Synergy } from "./Synergy"
 
 export enum ExpeditionRank {
   E = "E",

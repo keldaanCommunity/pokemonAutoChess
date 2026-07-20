@@ -1,34 +1,33 @@
-import { Room } from "@colyseus/sdk"
-import firebase from "firebase/compat/app"
-import { GameObjects, Scene } from "phaser"
-import OutlinePlugin from "phaser3-rex-plugins/plugins/outlinepipeline-plugin"
+import type { Room } from "@colyseus/sdk"
+import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
   getRegionTint,
   RegionDetails
 } from "../../../../config"
-import { DesignTiled } from "../../../../core/design"
+import type { DesignTiled } from "../../../../core/design"
 import { FLOWER_POTS_POSITIONS_BLUE } from "../../../../core/flower-pots"
 import { canSell } from "../../../../core/pokemon-entity"
-import Player from "../../../../models/colyseus-models/player"
+import type Player from "../../../../models/colyseus-models/player"
 import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
-import GameState from "../../../../rooms/states/game-state"
+import type GameState from "../../../../rooms/states/game-state"
 import {
-  IDragDropCombineMessage,
-  IDragDropItemMessage,
-  IDragDropMessage,
+  type IDragDropCombineMessage,
+  type IDragDropItemMessage,
+  type IDragDropMessage,
   Transfer
 } from "../../../../types"
-import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
-import { Pkm } from "../../../../types/enum/Pokemon"
+import { Gifts } from "../../../../types/enum/GiftShop"
+import { type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
+import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { clamp } from "../../../../utils/number"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import { clearTitleNotificationIcon } from "../../../../utils/window"
 import { cyclePlayers, playerClick } from "../../pages/game"
 import { playMusic, playSound, SOUNDS } from "../../pages/utils/audio"
@@ -44,6 +43,7 @@ import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
 import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
+import { UseItemZone } from "../components/useitem-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
@@ -69,12 +69,14 @@ export default class GameScene extends Scene {
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
+  useItemZone: UseItemZone | undefined
   lastDragDropPokemon: PokemonSprite | undefined
   lastPokemonDetail: PokemonSprite | null = null
   minigameManager: MinigameManager | null = null
   loadingManager: LoadingManager | null = null
   started: boolean = false
   spectate: boolean = false
+  spectatedPlayerId: string | undefined = undefined
 
   constructor() {
     super({
@@ -83,12 +85,20 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data: { room: Room<GameState>; spectate: boolean }) {
+  init(data: {
+    room: Room<GameState>
+    uid: string
+    spectate: boolean
+    spectatedPlayerId?: string
+  }) {
     this.tilemaps = new Map()
     this.room = data.room
     this.spectate = data.spectate
-    this.uid = firebase.auth().currentUser?.uid
+    this.spectatedPlayerId = data.spectatedPlayerId
+    this.uid = data.uid
     this.started = false
+    globalThis.devcommand = (action: string, ...params: any[]) =>
+      this.room?.send(Transfer.DEV, { action, ...params })
   }
 
   preload() {
@@ -121,9 +131,9 @@ export default class GameScene extends Scene {
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = values(this.room.state.players).map((p) => p.id)
+      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
-        this.spectate ? playerUids[0] : this.uid
+        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
       ) as Player
 
       this.setMap(player.map)
@@ -171,9 +181,15 @@ export default class GameScene extends Scene {
           RegionDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
         )
       }
-      //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
+  }
+
+  toggleTilesetAnimation(paused: boolean) {
+    if (!this.map) return
+    this.map.layers.forEach((layer) => {
+      layer.tilemapLayer.setTimerPaused(paused)
+    })
   }
 
   update(time: number, delta: number) {
@@ -225,46 +241,53 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
-    this.input.keyboard!.on(
-      "keydown-" + keybindings.refresh,
-      throttle(() => {
-        playSound(SOUNDS.REFRESH, 0.5)
-        this.refreshShop()
-      }, 300)
-    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
-      this.room?.send(Transfer.LOCK)
-    })
+    if (!this.spectate) {
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.refresh,
+        throttle(() => {
+          playSound(SOUNDS.REFRESH, 0.5)
+          this.refreshShop()
+        }, 300)
+      )
 
-    this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
-      this.buyExperience()
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+        this.room?.send(Transfer.LOCK)
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
-      if (this.pokemonDragged != null) return
-      if (this.shopIndexHovered !== null) {
-        this.removeFromShop(this.shopIndexHovered)
-        this.shopIndexHovered = null
-      } else if (
-        this.pokemonHovered &&
-        this.pokemonHovered
-          .getBounds()
-          .contains(
-            this.input.activePointer.worldX,
-            this.input.activePointer.worldY
-          )
-      ) {
-        this.sellPokemon(this.pokemonHovered)
-        this.pokemonHovered = null
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+        this.buyExperience()
+      })
 
-    this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
-      if (this.pokemonHovered) {
-        this.switchBetweenBenchAndBoard(this.pokemonHovered)
-      }
-    })
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+        if (this.pokemonDragged != null) return
+        if (this.shopIndexHovered !== null) {
+          this.removeFromShop(this.shopIndexHovered)
+          this.shopIndexHovered = null
+        } else if (
+          this.pokemonHovered &&
+          this.pokemonHovered
+            .getBounds()
+            .contains(
+              this.input.activePointer.worldX,
+              this.input.activePointer.worldY
+            )
+        ) {
+          this.sellPokemon(this.pokemonHovered)
+          this.pokemonHovered = null
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+        if (this.pokemonHovered) {
+          this.switchBetweenBenchAndBoard(this.pokemonHovered)
+        }
+      })
+
+      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
+        playerClick(this.uid!)
+      })
+    }
 
     this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
       savePreferences({ cameraLocked: !preference("cameraLocked") })
@@ -276,10 +299,6 @@ export default class GameScene extends Scene {
 
     this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
       cyclePlayers(1)
-    })
-
-    this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-      playerClick(this.uid!)
     })
   }
 
@@ -300,6 +319,11 @@ export default class GameScene extends Scene {
   sellPokemon(pokemon: PokemonSprite) {
     if (!pokemon) return
     this.room?.send(Transfer.SELL_POKEMON, pokemon.id)
+  }
+
+  useitem(item: Item) {
+    if (!item) return
+    this.room?.send(Transfer.USE_ITEM, item)
   }
 
   removeFromShop(index: number) {
@@ -360,10 +384,6 @@ export default class GameScene extends Scene {
       this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-      const sys = this.sys as any
-      if (sys.animatedTiles) {
-        sys.animatedTiles.pause()
-      }
       return
     }
 
@@ -382,16 +402,15 @@ export default class GameScene extends Scene {
       tileset.image?.setFilter(Phaser.Textures.FilterMode.NEAREST)
       map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
     })
-    const sys = this.sys as any
-    if (sys.animatedTiles) {
-      sys.animatedTiles.init(map)
-      if (preference("disableAnimatedTilemap")) {
-        sys.animatedTiles.pause()
-      }
-    }
+    this.toggleTilesetAnimation(preference("disableAnimatedTilemap"))
 
     // update region tint on pokemons
     this.board?.pokemons.forEach((p) => {
+      p.sprite.setTint(
+        getRegionTint(this.mapName, preference("colorblindMode"))
+      )
+    })
+    this.battle?.pokemonSprites.forEach((p) => {
       p.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
       )
@@ -421,6 +440,7 @@ export default class GameScene extends Scene {
 
   setupMouseEvents() {
     this.sellZone = new SellZone(this)
+    this.useItemZone = new UseItemZone(this)
     this.dropSpots = []
 
     for (let y = 0; y < 4; y++) {
@@ -543,6 +563,9 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
+            this.useItemZone.showForItem(this.itemDragged.name)
+          }
         }
       }
     )
@@ -594,6 +617,7 @@ export default class GameScene extends Scene {
       ) => {
         this.dropSpots.forEach((spot) => spot.setVisible(false))
         this.sellZone?.hide()
+        this.useItemZone?.hide()
 
         if (gameObject instanceof PokemonSprite) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
@@ -644,10 +668,8 @@ export default class GameScene extends Scene {
           // Item -> POKEMON(board zone) = EQUIP
           else if (
             dropZone.name === "board-zone" &&
-            !(
-              this.room?.state.phase == GamePhaseState.FIGHT &&
-              dropZone.getData("y") != 0
-            )
+            (this.room?.state.phase == GamePhaseState.PICK ||
+              dropZone.getData("y") == 0)
           ) {
             this.dispatchEvent<IDragDropItemMessage>(Transfer.DRAG_DROP_ITEM, {
               zone: dropZone.name,
@@ -672,6 +694,10 @@ export default class GameScene extends Scene {
               id: gameObject.name
             })
           }
+          // Use Item zone
+          else if (dropZone.name == "useitem-zone") {
+            this.useitem(this.itemDragged.name)
+          }
           // RETURN TO ORIGINAL SPOT
           else {
             const player = this.room?.state.players.get(this.uid!)
@@ -685,6 +711,7 @@ export default class GameScene extends Scene {
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.sellZone?.hide()
+      this.useItemZone?.hide()
       this.dropSpots.forEach((spot) => spot.setVisible(false))
       if (!dropped && gameObject?.input) {
         gameObject.x = gameObject.input.dragStartX
@@ -772,6 +799,14 @@ export default class GameScene extends Scene {
           // pokemon dragged above sell zone: highlight the sell zone
           this.sellZone?.onDragEnter()
         }
+
+        if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          // pokemon dragged above sell zone: highlight the sell zone
+          this.useItemZone?.onDragEnter()
+        }
       },
       this
     )
@@ -801,6 +836,13 @@ export default class GameScene extends Scene {
         }
 
         if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          this.useItemZone?.onDragLeave()
+        }
+
+        if (
           dropZone.name === "board-zone" &&
           gameObject instanceof ItemContainer &&
           this.board?.pokemons
@@ -820,12 +862,10 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const flowerPot =
-              this.board?.flowerPokemonsInPots[dropZone.getData("index")]
-            if (flowerPot) {
-              this.clearHovered(flowerPot.sprite)
-            }
+          const flowerPot =
+            this.board?.flowerPokemonsInPots[dropZone.getData("index")]
+          if (flowerPot) {
+            this.clearHovered(flowerPot.sprite)
           }
         }
 
@@ -834,11 +874,9 @@ export default class GameScene extends Scene {
           gameObject instanceof ItemContainer &&
           isIn(Mulches, gameObject.name)
         ) {
-          {
-            const berryTree = this.board?.berryTrees[dropZone.getData("index")]
-            if (berryTree) {
-              this.clearHovered(berryTree.sprite)
-            }
+          const berryTree = this.board?.berryTrees[dropZone.getData("index")]
+          if (berryTree) {
+            this.clearHovered(berryTree.sprite)
           }
         }
       },
@@ -858,19 +896,27 @@ export default class GameScene extends Scene {
   }
 
   setHovered(sprite: Phaser.GameObjects.Sprite, thickness = 2) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
+    if (this.game.renderer.type !== Phaser.WEBGL) return // outline plugin doesnt work with canvas renderer
 
-    outline.add(sprite, {
+    sprite.enableFilters()
+    const existingOutline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
+    existingOutline?.destroy()
+
+    const outline = sprite.filters!.internal.addRexOutline({
       thickness,
       outlineColor: 0xffffff
     })
+    sprite.setData("rexOutlineController", outline)
   }
 
   clearHovered(sprite: Phaser.GameObjects.Sprite) {
-    const outline = <OutlinePlugin>this.plugins.get("rexOutline")
-    if (!outline) return // outline plugin doesnt work with canvas renderer
-    outline.remove(sprite)
+    const outline = sprite.getData("rexOutlineController") as
+      | Phaser.Filters.Controller
+      | undefined
+    outline?.destroy()
+    sprite.setData("rexOutlineController", null)
   }
 
   closeTooltips() {

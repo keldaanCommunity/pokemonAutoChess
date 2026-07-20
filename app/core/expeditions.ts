@@ -1,6 +1,10 @@
 import { t } from "i18next"
-import { precomputedPokemons } from "../../gen/precomputed-pokemons"
-import { RegionDetails, SynergyTriggers } from "../config"
+import {
+  getBaseAltForm,
+  RegionDetails,
+  SynergyTiersThresholds
+} from "../config"
+import { precomputedPokemons } from "../models/precomputed/precomputed-pokemons"
 import {
   CraftableItemsNoScarves,
   Item,
@@ -10,19 +14,20 @@ import {
 } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import {
-  BattleMissionData,
-  BattleMissionStat,
+  type BattleMissionData,
+  type BattleMissionStat,
   BattleMissionStats,
-  DeliveryMissionData,
-  Expedition,
-  ExpeditionData,
+  type DeliveryMissionData,
+  type Expedition,
+  type ExpeditionData,
   ExpeditionRank,
   ExpeditionType,
-  ExplorationMissionData,
-  RescueMissionData
+  type ExplorationMissionData,
+  type RescueMissionData
 } from "../types/enum/Expedition"
 import { Rarity } from "../types/enum/Game"
-import {
+import { Synergy } from "../types/enum/Synergy"
+import type {
   IUserMetadataClient,
   IUserMetadataMongo,
   IUserMetadataUnpacked
@@ -42,7 +47,7 @@ export function getPlayerExpeditions(
   const expeditions: Expedition[] = [...expeditionsTypes, ...expeditionsTypes]
     .slice(hash % expeditionsTypes.length, (hash % expeditionsTypes.length) + 3)
     .map((type, i) => ({
-      rank: getExpeditionTier(user.eventPoints - i),
+      rank: getExpeditionTier(user.eventPoints, i),
       type,
       hash
     }))
@@ -50,19 +55,57 @@ export function getPlayerExpeditions(
   return expeditions
 }
 
-export function getExpeditionTier(level: number): ExpeditionRank {
-  if (level < 3) {
-    return ExpeditionRank.E
-  } else if (level < 6) {
-    return ExpeditionRank.D
-  } else if (level < 10) {
-    return ExpeditionRank.C
-  } else if (level < 15) {
-    return ExpeditionRank.B
-  } else if (level < 20) {
-    return ExpeditionRank.A
-  } else {
-    return ExpeditionRank.S
+export function getExpeditionTier(
+  level: number,
+  index: number
+): ExpeditionRank {
+  switch (index) {
+    case 0: {
+      if (level < 3) {
+        return ExpeditionRank.E
+      } else if (level < 6) {
+        return ExpeditionRank.D
+      } else if (level < 10) {
+        return ExpeditionRank.C
+      } else if (level < 15) {
+        return ExpeditionRank.B
+      } else if (level < 20) {
+        return ExpeditionRank.A
+      } else {
+        return ExpeditionRank.S
+      }
+    }
+
+    case 1: {
+      if (level < 5) {
+        return ExpeditionRank.E
+      } else if (level < 10) {
+        return ExpeditionRank.D
+      } else if (level < 15) {
+        return ExpeditionRank.C
+      } else if (level < 20) {
+        return ExpeditionRank.B
+      } else if (level < 30) {
+        return ExpeditionRank.A
+      } else {
+        return ExpeditionRank.S
+      }
+    }
+
+    case 2:
+    default: {
+      if (level < 6) {
+        return ExpeditionRank.E
+      } else if (level < 12) {
+        return ExpeditionRank.D
+      } else if (level < 18) {
+        return ExpeditionRank.C
+      } else if (level < 25) {
+        return ExpeditionRank.B
+      } else {
+        return ExpeditionRank.A
+      }
+    }
   }
 }
 
@@ -138,22 +181,33 @@ export function getExpeditionData(
         Rarity.EPIC,
         Rarity.LEGENDARY
       ][rankIndex]
-      const pokemonsOfCategory = precomputedPokemons.filter(
-        (p) =>
-          p.stars === (expedition.rank === "E" ? 2 : 3) && p.rarity === rarity
-      )
+      const pokemonsOfCategory = precomputedPokemons
+        .filter(
+          (p) =>
+            p.stars === (expedition.rank === "E" ? 2 : 3) && p.rarity === rarity
+        )
+        .filter(
+          (p, index, arr) =>
+            arr.findIndex(
+              (p2) => getBaseAltForm(p2.name) === getBaseAltForm(p.name)
+            ) === index
+        ) // get only base alt forms
+
       const pokemonToRescue =
-        pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length]
-      return { pokemon: pokemonToRescue.name }
+        pokemonsOfCategory[expedition.hash % pokemonsOfCategory.length].name
+      return { pokemon: pokemonToRescue }
     }
 
     case ExpeditionType.EXPLORATION: {
       const regions = Object.values(DungeonPMDO)
       const region = regions[expedition.hash % regions.length]
-      const regionSynergies = RegionDetails[region].synergies
+      const regionSynergies = RegionDetails[region].synergies.filter(
+        (s) => s !== Synergy.BABY
+      )
       const synergy = regionSynergies[expedition.hash % regionSynergies.length]
-      const synergyTriggers = SynergyTriggers[synergy]
-      const level = synergyTriggers[max(synergyTriggers.length - 1)(rankIndex)]
+      const synergyThresholds = SynergyTiersThresholds[synergy]
+      const level =
+        synergyThresholds[max(synergyThresholds.length - 1)(rankIndex)]
       return {
         region,
         synergy,

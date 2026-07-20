@@ -1,9 +1,10 @@
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { SynergyTriggers } from "../../../../../config"
+import { SynergyTiersThresholds } from "../../../../../config"
 import { getDistance } from "../../../../../core/matchmaking"
-import { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../../../types"
 import { BattleResult } from "../../../../../types/enum/Game"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
@@ -14,7 +15,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
   const synergyList = useMemo(
     () =>
       [...props.player.synergies.entries()]
-        .filter(([syn, val]) => val >= SynergyTriggers[syn]?.[0])
+        .filter(([syn, val]) => val >= SynergyTiersThresholds[syn]?.[0])
         .sort((a, b) => b[1] - a[1])
         .map(([syn]) => syn),
     [props.player.synergies]
@@ -72,10 +73,10 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
                 src={getAvatarSrc(record.avatar)}
               />
               <p style={{ fontSize: "80%" }}>
-                {(record.id === "pve" ? t(record.name) : record.name).slice(
-                  0,
-                  5
-                )}
+                {(record.id === "pve"
+                  ? t(record.name as `pkm.${Pkm}`)
+                  : record.name
+                ).slice(0, 5)}
               </p>
             </div>
           )

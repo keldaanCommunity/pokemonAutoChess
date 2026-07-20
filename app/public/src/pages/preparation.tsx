@@ -1,12 +1,12 @@
-import { Client, getStateCallbacks, Room } from "@colyseus/sdk"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { MAX_LOADING_TIME } from "../../../config"
-import { GameUser } from "../../../models/colyseus-models/game-user"
-import GameState from "../../../rooms/states/game-state"
-import PreparationState from "../../../rooms/states/preparation-state"
+import type { GameUser } from "../../../models/colyseus-models/game-user"
+import type GameState from "../../../rooms/states/game-state"
+import type PreparationState from "../../../rooms/states/preparation-state"
 import { Transfer } from "../../../types"
 import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
 import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
@@ -174,7 +174,10 @@ export default function Preparation() {
 
         if (user.uid === uid) {
           dispatch(setUser(user))
-          if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+          if (
+            room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+            room.state.gameMode !== GameMode.DOUBLE_UP
+          ) {
             toggleReady(true) // automatically set users ready in non-classic game mode
           }
         } else if (!user.isBot) {
@@ -192,7 +195,11 @@ export default function Preparation() {
           "name",
           "role",
           "title",
-          "ready"
+          "ready",
+          "twitchLogin",
+          "twitchDisplayName",
+          "doubleUpPartnerId",
+          "doubleUpTeamId"
         ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {

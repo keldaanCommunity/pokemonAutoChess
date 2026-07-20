@@ -7,7 +7,7 @@ import { logger } from "../../app/utils/logger"
 
 const itemsToReplace = new Map<string, Item>([
   ["ORAN_BERRY", Item.KINGS_ROCK],
-  ["LEFTOVERS", Item.SOOTHE_BELL],
+  //["LEFTOVERS", Item.SOOTHE_BELL], // kept for history, but Soothe Bell does not exist anymore
   ["DELTA_ORB", Item.GREEN_ORB]
 ])
 

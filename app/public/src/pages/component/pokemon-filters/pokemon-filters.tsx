@@ -1,5 +1,9 @@
 import { useTranslation } from "react-i18next"
-import { IPreferencesState, usePreferences } from "../../../preferences"
+import {
+  type IPreferencesState,
+  type PreferenceKey,
+  usePreferences
+} from "../../../preferences"
 import { closeSiblingDetails } from "../../utils/toggle"
 import { Checkbox } from "../checkbox/checkbox"
 import "./pokemon-filters.css"
@@ -7,18 +11,26 @@ import { PkmAltForms } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
-import { NonPkm, Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import { NonPkm, type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 
 export function PokemonFilters() {
   const { t } = useTranslation()
   const [preferences, setPreferences] = usePreferences()
-  const pools: (keyof typeof preferences)[] = [
+  const pools = [
     "showRegularPool",
     "showAdditionalPool",
     "showRegionalPool",
     "showSpecialPool"
-  ]
+  ] satisfies PreferenceKey[]
+
+  const poolByPreference: Record<(typeof pools)[number], PoolType> = {
+    showRegularPool: "regular",
+    showAdditionalPool: "additional",
+    showRegionalPool: "regional",
+    showSpecialPool: "special"
+  }
+
   const isTheOnlyPoolSelected = (pool: keyof typeof preferences) => {
     const otherPools = pools.filter((p) => p !== pool)
     return (
@@ -39,9 +51,7 @@ export function PokemonFilters() {
             onToggle={(checked) => {
               setPreferences({ [pool]: checked })
             }}
-            label={t(
-              `pool.${pool.replace("show", "").replace("Pool", "").toLowerCase()}`
-            )}
+            label={t(`pool.${poolByPreference[pool]}`)}
             isDark
           />
         ))}
@@ -69,11 +79,17 @@ export function PokemonFilters() {
 export function filterPokemonsAccordingToPreferences(
   pokemons: Pkm[],
   preferences: IPreferencesState,
-  includesNonPkm = false
+  includesNonPkm = false,
+  includesPkm = true
 ) {
   const data = pokemons.map((p) => getPokemonData(p))
   return pokemons.filter((p) => {
-    if (NonPkm.includes(p) && !includesNonPkm) return false
+    if (NonPkm.includes(p)) {
+      if (!includesNonPkm) return false
+    } else {
+      if (!includesPkm) return false
+    }
+
     const { additional, regional, rarity, skill, stars } = getPokemonData(p)
     if (skill === Ability.DEFAULT && !includesNonPkm) return false // pokemons with no ability are not ready
     const special = rarity === Rarity.SPECIAL

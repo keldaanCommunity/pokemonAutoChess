@@ -4,7 +4,6 @@
 
 .pokemon-emotions-modal header {
   padding: 0;
-  color: white;
   text-transform: capitalize;
   display: flex;
   align-items: center;
@@ -30,7 +29,6 @@
 .pokemon-emotions-modal header .dust {
   display: flex;
   align-items: center;
-  color: white;
   font-size: 120%;
 }
 

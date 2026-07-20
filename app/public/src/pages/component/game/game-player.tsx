@@ -1,8 +1,7 @@
-import React from "react"
 import { CircularProgressbarWithChildren } from "react-circular-progressbar"
 import { Tooltip } from "react-tooltip"
 
-import { IPlayer } from "../../../../../types"
+import type { IPlayer } from "../../../../../types"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
@@ -16,6 +15,7 @@ export default function GamePlayer(props: {
   player: IPlayer
   click: (id: string) => void
   index: number
+  teamColor?: string
 }) {
   const spectatedPlayerId = useAppSelector(
     (state) => state.game.playerIdSpectated
@@ -23,7 +23,9 @@ export default function GamePlayer(props: {
   const connectedPlayerId = useAppSelector((state) => state.network.uid)
 
   function playerClick() {
-    props.click(props.player.id)
+    if (spectatedPlayerId !== props.player.id) {
+      props.click(props.player.id)
+    }
   }
 
   return (
@@ -42,7 +44,10 @@ export default function GamePlayer(props: {
         onClick={playerClick}
         data-tooltip-id={"detail-" + props.player.id}
       >
-        <CircularProgressbarWithChildren value={props.player.life} />
+        <CircularProgressbarWithChildren
+          value={props.player.life}
+          styles={{ path: { stroke: props.teamColor ?? "#f7d51d" } }}
+        />
         <div className="my-container life-text">{props.player.life}</div>
       </div>
       <Tooltip

@@ -1,0 +1,15 @@
+#wiki-glossary {
+  padding: 0 0.5em;
+}
+
+.glossary-term {
+  margin-bottom: 0.5em;
+}
+
+.glossary-term dt {
+  text-transform: capitalize;
+}
+
+.glossary-term dd::first-letter {
+  text-transform: uppercase;
+}

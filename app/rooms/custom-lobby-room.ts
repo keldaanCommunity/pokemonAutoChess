@@ -1,5 +1,11 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, IRoomCache, matchMaker, Room, subscribeLobby } from "colyseus"
+import {
+  type Client,
+  type IRoomCache,
+  matchMaker,
+  Room,
+  subscribeLobby
+} from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
 import {
@@ -17,33 +23,29 @@ import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
 import { notificationsService } from "../services/notifications"
-import { Emotion, Role, Title, Transfer } from "../types"
+import { type Emotion, Role, type Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
-import { GameMode } from "../types/enum/Game"
-import { Language } from "../types/enum/Language"
-import { ITournament } from "../types/interfaces/Tournament"
-import { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
+import type { GameMode } from "../types/enum/Game"
+import type { Language } from "../types/enum/Language"
+import { MaintenanceOrder } from "../types/enum/MaintenanceOrder"
+import type { ITournament } from "../types/interfaces/Tournament"
+import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
 import {
   BanUserCommand,
-  BuyBoosterCommand,
-  BuyEmotionCommand,
   ChangeAvatarCommand,
   ChangeNameCommand,
-  ChangeSelectedEmotionCommand,
   ChangeTitleCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
-  HeapSnapshotCommand,
   JoinOrOpenRoomCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
   OnSearchByIdCommand,
-  OpenBoosterCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -292,8 +294,11 @@ export default class CustomLobbyRoom extends Room {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
     })
 
-    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
+    this.onMessage(Transfer.MAINTENANCE, (client, order: MaintenanceOrder) => {
+      const u = this.users.get(client.auth.uid)
+      if (u && u.role === Role.ADMIN) {
+        this.presence.publish("maintenance", { userId: client.auth.uid, order })
+      }
     })
 
     this.onMessage(
@@ -302,10 +307,6 @@ export default class CustomLobbyRoom extends Room {
         this.dispatcher.dispatch(new GiveRoleCommand(), { client, uid, role })
       }
     )
-
-    this.onMessage(Transfer.OPEN_BOOSTER, (client) => {
-      this.dispatcher.dispatch(new OpenBoosterCommand(), { client })
-    })
 
     this.onMessage(Transfer.CHANGE_NAME, (client, message) => {
       this.dispatcher.dispatch(new ChangeNameCommand(), {
@@ -317,54 +318,6 @@ export default class CustomLobbyRoom extends Room {
     this.onMessage(Transfer.SET_TITLE, (client, title: Title | "") => {
       this.dispatcher.dispatch(new ChangeTitleCommand(), { client, title })
     })
-
-    this.onMessage(
-      Transfer.CHANGE_SELECTED_EMOTION,
-      (
-        client,
-        {
-          index,
-          emotion,
-          shiny
-        }: { index: string; emotion: Emotion | null; shiny: boolean }
-      ) => {
-        this.dispatcher.dispatch(new ChangeSelectedEmotionCommand(), {
-          client,
-          index,
-          emotion,
-          shiny
-        })
-      }
-    )
-
-    this.onMessage(
-      Transfer.BUY_EMOTION,
-      (
-        client,
-        {
-          index,
-          emotion,
-          shiny
-        }: { index: string; emotion: Emotion; shiny: boolean }
-      ) => {
-        this.dispatcher.dispatch(new BuyEmotionCommand(), {
-          client,
-          index,
-          emotion,
-          shiny
-        })
-      }
-    )
-
-    this.onMessage(
-      Transfer.BUY_BOOSTER,
-      (client, message: { index: string }) => {
-        this.dispatcher.dispatch(new BuyBoosterCommand(), {
-          client,
-          index: message.index
-        })
-      }
-    )
 
     this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
       this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
@@ -431,6 +384,29 @@ export default class CustomLobbyRoom extends Room {
 
     this.presence.subscribe("notification-added", (notif) =>
       notificationsService.onNotificationAdded(notif)
+    )
+
+    this.presence.subscribe(
+      "maintenance",
+      ({ userId, order }: { userId: string; order: MaintenanceOrder }) => {
+        const client = this.clients.find((c) => c.auth && c.auth.uid === userId)
+        const notify = (msg: string) =>
+          notificationsService.addNotification(userId, "info", msg, client)
+
+        if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+          notify("Heap snapshot written")
+        } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+          notify("Leaderboards refreshed")
+        } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+          notify("Meta reports refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+          notify("Sprite gap data refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+          notify("Twitch streams refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+          notify("Twitch streams blacklist refreshed")
+        }
+      }
     )
 
     this.initCronJobs()

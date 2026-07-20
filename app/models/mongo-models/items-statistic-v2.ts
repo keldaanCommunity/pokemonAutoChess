@@ -1,25 +1,7 @@
 import { model, Schema } from "mongoose"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
-
-export interface IHistoryEntry {
-  date: string
-  value: number
-}
-
-export interface IItemsStatisticV2 {
-  tier: string
-  items: Record<string, IItemV2>
-}
-
-export interface IItemV2 {
-  rank: number
-  count: number
-  name: Item
-  pokemons: Pkm[]
-  rank_history?: IHistoryEntry[]
-  count_history?: IHistoryEntry[]
-}
+import type { IItemsStatisticV2 } from "../../types/models/items-statistic-v2"
 
 const historyEntrySchema = new Schema(
   {
@@ -75,7 +57,3 @@ export default model<IItemsStatisticV2>(
   pokemonsStatistic,
   "items-statistic-v2"
 )
-
-export async function fetchMetaItems(): Promise<IItemsStatisticV2[]> {
-  return fetch("/meta/items").then((res) => res.json())
-}

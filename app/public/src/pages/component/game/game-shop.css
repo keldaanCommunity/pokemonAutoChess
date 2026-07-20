@@ -73,8 +73,8 @@
 .game-additional-pokemons,
 .game-regional-pokemons {
   padding: 0 !important;
-  color: white;
-  background-color: rgb(97, 115, 138);
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-primary);
   overflow: hidden;
 }
 
@@ -157,7 +157,7 @@
 }
 
 .game-experience > span {
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .buy-xp-button.bubbly {
@@ -176,7 +176,7 @@
 .game-experience .progress-bar > span {
   position: absolute;
   margin: 0px;
-  color: white;
+  color: var(--color-fg-primary);
   top: 0;
   bottom: 0;
   left: 0;
@@ -230,7 +230,7 @@
 }
 
 #toast-money .toast-player-income {
-  color: white;
+  color: var(--color-fg-primary);
   font-weight: bold;
 }
 
@@ -246,7 +246,7 @@
   padding: 0.001px 0.001px 0.001px 36px;
   display: flex;
   justify-content: end;
-  color: white;
+  color: var(--color-fg-primary);
   border-radius: 12px 12px 0 0;
   pointer-events: initial;
 }
@@ -264,6 +264,27 @@
 .game-shop .information .icon {
   width: 1em;
   height: 1em;
+}
+
+#game-streak-info > div {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  place-content: center;
+  text-shadow: 1px 1px 1px black;
+  pointer-events: initial;
+}
+
+#game-streak-info .streak-win {
+  background-image: url("assets/ui/streak_win.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#game-streak-info .streak-defeat {
+  background-image: url("assets/ui/streak_defeat.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @media (aspect-ratio < 4 / 3) {
@@ -321,9 +342,13 @@
 
 @media (aspect-ratio > 4 / 3) and (width <= 1280px) {
   #game-wrapper .game-shop {
-    transform: scale(0.8);
-    transform-origin: bottom left;
-    right: 0;
+    font-size: 75%;
+    right: 8px;
+  }
+
+  #game-streak-info > div {
+    width: 20px;
+    height: 20px;
   }
 }
 

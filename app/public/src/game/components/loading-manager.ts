@@ -1,14 +1,15 @@
 import { t } from "i18next"
-import { GameObjects } from "phaser"
-import AnimatedTiles from "phaser-animated-tiles-phaser3.5/dist/AnimatedTiles.min.js"
+import type Phaser from "phaser"
+import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
+import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
-import { DungeonMusic, DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
-import { values } from "../../../../utils/schemas"
+import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import GameScene from "../scenes/game-scene"
@@ -40,9 +41,10 @@ export default class LoadingManager {
 
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_0)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_10)
-    preloadMusic(scene, DungeonMusic.TREASURE_TOWN_STAGE_20)
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
+    preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
+    preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
     scene.load.image("sand", "/assets/environment/sand.png")
@@ -52,7 +54,8 @@ export default class LoadingManager {
     scene.load.image("sun", "/assets/environment/sun.png")
     scene.load.image("clouds", "/assets/environment/clouds.png")
     scene.load.image("distort", "/assets/environment/noise.png")
-    scene.load.multiatlas(
+    loadMultiAtlas(
+      scene,
       "snowflakes",
       "/assets/environment/snowflakes.json",
       "/assets/environment/"
@@ -84,9 +87,10 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      scene.load.multiatlas(
+      loadMultiAtlas(
+        scene,
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}-${pkg.version}.json`,
+        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
         `/assets/${pack}/`
       )
     }
@@ -94,7 +98,7 @@ export default class LoadingManager {
     loadEnvironmentMultiAtlas(this.scene)
 
     if (scene instanceof GameScene) {
-      const players = values(scene.room?.state.players!)
+      const players = schemaValues(scene.room?.state.players!)
       const player = players.find((p) => p.id === scene.uid) ?? players[0]
       await scene.preloadMaps(
         players
@@ -107,50 +111,68 @@ export default class LoadingManager {
 
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
-
-    scene.load.scenePlugin(
-      "animatedTiles",
-      AnimatedTiles,
-      "animatedTiles",
-      "animatedTiles"
-    )
   }
 }
 
+// phaser's duplicate-key check covers only the multiatlas json file, and the texture files it
+// references are queued on the fly; a replay seek re-running preload would re-download every
+// texture and error re-adding it
+function loadMultiAtlas(
+  scene: Phaser.Scene,
+  key: string,
+  url: string,
+  path: string
+) {
+  if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+}
+
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "portal",
     "/assets/environment/portal.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "chest",
     "/assets/environment/chest.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "shine",
     "/assets/environment/shine.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "berry_trees",
-    "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
+    "/assets/environment/berry_trees.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "flower_pots",
     "/assets/environment/flower_pots.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "ground_holes",
     "/assets/environment/ground_holes.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "loading_pokeball",
     "/assets/environment/loading_pokeball.json",
+    "/assets/environment/"
+  )
+  loadMultiAtlas(
+    scene,
+    "training_bag",
+    "/assets/environment/training_bag.json",
     "/assets/environment/"
   )
 }

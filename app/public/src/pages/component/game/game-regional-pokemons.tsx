@@ -1,9 +1,8 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { RarityColor, RarityCost } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { Pkm } from "../../../../../types/enum/Pokemon"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import {
   selectConnectedPlayer,
   selectSpectatedPlayer,

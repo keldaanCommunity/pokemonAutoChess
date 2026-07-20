@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
+import type { LoadingHint } from "../../../../../types/strings/LoadingHint"
 import { shuffleArray } from "../../../../../utils/random"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
@@ -16,7 +17,7 @@ export default function GameLoadingScreen(props: { connectError: string }) {
   )?.loadingProgress
   const statusMessage = getGameScene()?.loadingManager?.statusMessage
   const [toAuth, setToAuth] = useState<boolean>(false)
-  const [hint, setHint] = useState<string>("tab_out")
+  const [hint, setHint] = useState<LoadingHint>("tab_out")
 
   useEffect(() => {
     const loadingHints = [
@@ -32,8 +33,8 @@ export default function GameLoadingScreen(props: { connectError: string }) {
         "spriters",
         "wiki",
         "avatar"
-      ])
-    ]
+      ] satisfies LoadingHint[])
+    ] satisfies LoadingHint[]
 
     const interval = setInterval(() => {
       setHint(
@@ -78,7 +79,7 @@ export default function GameLoadingScreen(props: { connectError: string }) {
         )}
       </div>
       <div className="loading-hint">
-        <div className="speech-bubble">{t("loading_hints." + hint)}</div>
+        <div className="speech-bubble">{t(`loading_hints.${hint}`)}</div>
         <img src={"/assets/loading_hints/" + hint + ".webp"} />
       </div>
     </div>

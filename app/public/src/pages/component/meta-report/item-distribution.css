@@ -7,11 +7,11 @@
 }
 
 .item-distribution-tooltip {
-  background-color: rgb(84, 89, 107);
+  background-color: var(--color-bg-primary);
   padding: 0.5em;
   border: 1px solid black;
   border-radius: 12px;
-  color: #fff;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   gap: 0.5em;

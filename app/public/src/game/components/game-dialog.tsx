@@ -1,8 +1,7 @@
 import { GameObjects } from "phaser"
-import React from "react"
 import ReactDOM from "react-dom/client"
 import PokemonPortrait, {
-  PortraitOptions
+  type PortraitOptions
 } from "../../pages/component/pokemon-portrait"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 

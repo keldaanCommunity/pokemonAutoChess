@@ -3,32 +3,45 @@ import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
-import { IPokemon } from "../../types"
-import { Ability } from "../../types/enum/Ability"
+import type { IPokemon } from "../../types"
 import { AttackType, Rarity } from "../../types/enum/Game"
-import { Berries, Dishes, Item, ItemComponents } from "../../types/enum/Item"
-import { Pkm } from "../../types/enum/Pokemon"
+import {
+  Berries,
+  Dishes,
+  Item,
+  ItemComponents,
+  Sweets
+} from "../../types/enum/Item"
+import { Pkm, Unowns } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
+import { isIn } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
 import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
-import { PokemonEntity } from "../pokemon-entity"
-import { castAbility } from "./abilities"
+import { getHatchTime } from "../evolution-logic/hatch-time"
+import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
+import { castAbility } from "./cast"
+import { explosionStrategy } from "./explosion"
+import { meditateStrategy } from "./meditate"
+import { thunderShockStrategy } from "./thunder-shock"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   requiresTarget = false
-  copyable = false
   process(
-    unown: PokemonEntity,
+    pokemon: PokemonEntity,
     board: Board,
     target: null,
     crit: boolean
   ): void {
-    super.process(unown, board, target, crit)
-    unown.state.triggerDeath(unown, null, board, AttackType.TRUE)
+    super.process(pokemon, board, target, crit)
+    if (pokemon.player && !pokemon.isSpawn && isIn(Unowns, pokemon.name)) {
+      pokemon.player.unownReminiscences++
+      pokemon.player.board.delete(pokemon.refToBoardPokemon.id)
+    }
+    pokemon.state.triggerDeath(pokemon, null, board, AttackType.TRUE)
   }
 }
 
@@ -96,7 +109,7 @@ export class HiddenPowerEStrategy extends HiddenPowerStrategy {
     if (!unown.isGhostOpponent && unown.player) {
       const egg = giveRandomEgg(unown.player, false)
       if (!egg) return
-      egg.stacks = egg.evolutionRule.getHatchTime(egg, unown.player) - 1
+      egg.stacks = getHatchTime(egg, unown.player) - 1
     }
   }
 }
@@ -223,7 +236,7 @@ export class HiddenPowerNStrategy extends HiddenPowerStrategy {
           const target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
           if (target) {
             pokemon.addShield(50, unown, 1, false)
-            castAbility(Ability.EXPLOSION, pokemon, board, target, false)
+            castAbility(explosionStrategy, pokemon, board, target, false)
           }
         }
       }
@@ -237,7 +250,21 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
     if (pokemon.player) {
       pokemon.player.board.forEach((p: IPokemon) => {
         if (p.canEat) {
-          p.dishes = new SetSchema([pickRandomIn(Dishes as unknown as Item[])])
+          let randomDish = pickRandomIn(
+            Dishes.filter((d) => d !== Item.HERBA_MYSTICA)
+          )
+          if (randomDish === Item.SWEETS) {
+            randomDish = pickRandomIn(Sweets)
+          } else if (randomDish === Item.MUSHROOMS) {
+            randomDish =
+              randomWeighted({
+                [Item.TINY_MUSHROOM]: 77,
+                [Item.BIG_MUSHROOM]: 20,
+                [Item.BALM_MUSHROOM]: 3
+              }) ?? Item.TINY_MUSHROOM
+          }
+
+          p.dishes = new SetSchema([randomDish])
         }
       })
     }
@@ -348,7 +375,7 @@ export class HiddenPowerVStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team !== enemy.team) {
-        castAbility(Ability.THUNDER_SHOCK, unown, board, enemy, false)
+        castAbility(thunderShockStrategy, unown, board, enemy, false)
       }
     })
   }
@@ -426,7 +453,7 @@ export class HiddenPowerYStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && unown.team === ally.team) {
-        castAbility(Ability.MEDITATE, ally, board, ally, false)
+        castAbility(meditateStrategy, ally, board, ally, false)
       }
     })
   }

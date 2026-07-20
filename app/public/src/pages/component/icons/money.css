@@ -8,5 +8,5 @@
 }
 
 span.is-max {
-  color: #ffcc00;
+  color: var(--color-fg-gold);
 }

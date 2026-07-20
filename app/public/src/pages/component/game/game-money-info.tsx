@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { BattleResult } from "../../../../../types/enum/Game"
@@ -33,9 +32,9 @@ export function GameMoneyInfo() {
 
 export function GameMoneyDetail() {
   const { t } = useTranslation()
-  const streak = useAppSelector((state) => state.game.streak)
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const currentPlayer = useAppSelector(selectSpectatedPlayer)
+  const streak = useAppSelector((state) => state.game.streak)
   const lastPlayerBattle =
     currentPlayer && currentPlayer.history && currentPlayer.history.length > 0
       ? currentPlayer.history.filter((r) => r.id !== "pve").at(-1)
@@ -59,7 +58,7 @@ export function GameMoneyDetail() {
         />{" "}
         {lastBattleResult !== null && `(${streakLabel})`}
       </p>
-      <p className="help">{addIconsToDescription(t("victory_income_hint"))}</p>
+      <p className="help">{addIconsToDescription(t("streak_income_hint"))}</p>
       {specialGameRule !== SpecialGameRule.BLOOD_MONEY && (
         <>
           <p style={{ marginTop: "0.5em" }}>

@@ -6,13 +6,13 @@ import {
   SetSchema
 } from "@colyseus/schema"
 
-export function keys(schema: MapSchema): string[] {
+export function schemaKeys(schema: MapSchema): string[] {
   const keys: string[] = []
   schema.forEach((value, key) => keys.push(key))
   return keys
 }
 
-export function values<T>(
+export function schemaValues<T>(
   schema: MapSchema<T> | SetSchema<T> | CollectionSchema<T> | ArraySchema<T>
 ): T[] {
   const values: T[] = []
@@ -20,7 +20,7 @@ export function values<T>(
   return values
 }
 
-export function entries<V, K extends string>(
+export function schemaEntries<V, K extends string>(
   schema: MapSchema<V, K>
 ): [K, V][] {
   const entries: [K, V][] = []

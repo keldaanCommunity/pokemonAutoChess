@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useNavigate } from "react-router"
 import { Orientation } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
@@ -33,7 +33,7 @@ export function SpriteDebug() {
           <PokemonTypeahead
             value={pkm}
             options={Object.values(Pkm).sort((a, b) =>
-              t("pkm." + a).localeCompare(t("pkm." + b))
+              t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
             )}
             onChange={(pkm) => {
               if (pkm) {

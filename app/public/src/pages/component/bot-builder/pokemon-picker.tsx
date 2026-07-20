@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
-import { Emotion, PkmWithCustom } from "../../../../../types"
+import { Emotion, type PkmWithCustom } from "../../../../../types"
 import { Rarity } from "../../../../../types/enum/Game"
-import { Item } from "../../../../../types/enum/Item"
+import type { Item } from "../../../../../types/enum/Item"
 import {
   Pkm,
   PkmFamily,
@@ -16,8 +16,8 @@ import {
   PkmRegionalVariants
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
-import { Synergy } from "../../../../../types/enum/Synergy"
-import { IPokemonData } from "../../../../../types/interfaces/PokemonData"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import {
@@ -215,7 +215,13 @@ function PokemonPickerTab(props: {
     <>
       <div
         className="filters"
-        style={{ display: "flex", justifyContent: "end", gap: "1em" }}
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          gap: "1em",
+          float: "right",
+          marginLeft: "1em"
+        }}
       >
         {ingame && (
           <Checkbox
@@ -237,20 +243,8 @@ function PokemonPickerTab(props: {
           />
         )}
       </div>
-      <dl id="rarity-grid">
-        {(
-          [
-            Rarity.COMMON,
-            Rarity.UNIQUE,
-            Rarity.UNCOMMON,
-            Rarity.LEGENDARY,
-            Rarity.RARE,
-            Rarity.HATCH,
-            Rarity.EPIC,
-            Rarity.SPECIAL,
-            Rarity.ULTRA
-          ] as Rarity[]
-        ).map((rarity) => (
+      <dl>
+        {Object.values(Rarity).map((rarity) => (
           <React.Fragment key={rarity}>
             <dt
               style={{

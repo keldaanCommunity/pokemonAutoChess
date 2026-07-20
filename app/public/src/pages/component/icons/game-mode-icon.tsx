@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { GameMode } from "../../../../../types/enum/Game"
+import type { GameMode } from "../../../../../types/enum/Game"
 import { cc } from "../../utils/jsx"
 
 export function GameModeIcon(props: { gameMode: GameMode }) {

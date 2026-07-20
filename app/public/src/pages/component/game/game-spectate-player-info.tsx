@@ -1,11 +1,12 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
+import { DEPTH } from "../../../game/depths"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { Life } from "../icons/life"
 import { Money } from "../icons/money"
 import PokemonPortrait from "../pokemon-portrait"
 import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
+import { GameStreakInfo } from "./game-streak-info"
 import "./game-spectate-player-info.css"
 
 export default function GameSpectatePlayerInfo() {
@@ -18,7 +19,8 @@ export default function GameSpectatePlayerInfo() {
         style={{
           display: "flex",
           gap: "1em",
-          alignItems: "center"
+          alignItems: "center",
+          zIndex: DEPTH.SPECTATE_PLAYER_INFO
         }}
       >
         <GameAdditionalPokemonsIcon />
@@ -45,6 +47,7 @@ export default function GameSpectatePlayerInfo() {
             <span>
               <Money value={spectatedPlayer.money} />
             </span>
+            <GameStreakInfo />
           </div>
           <div
             style={{

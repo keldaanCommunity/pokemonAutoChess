@@ -1,6 +1,7 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
-import { ISynergySymbol } from "../../../../types"
-import { Synergy } from "../../../../types/enum/Synergy"
+import type { ISynergySymbol } from "../../../../types"
+import type { Synergy } from "../../../../types/enum/Synergy"
 import { DEPTH } from "../depths"
 
 export class Portal extends GameObjects.Container {

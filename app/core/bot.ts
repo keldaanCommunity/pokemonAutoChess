@@ -1,10 +1,20 @@
-import Player from "../models/colyseus-models/player"
-import { BotV2, IBot } from "../models/mongo-models/bot-v2"
+import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
+import type Player from "../models/colyseus-models/player"
+import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
-import { AbilityPerTM, Emotion, TMs } from "../types"
+import { AbilityPerTM, Emotion, Item, TMs } from "../types"
 import { PokemonActionState } from "../types/enum/Game"
+import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
+import type { IBot } from "../types/models/bot-v2"
+import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
+import { pickRandomIn } from "../utils/random"
+import {
+  OnChangePositionEffect,
+  OnSpotlightChangeEffect
+} from "./effects/effect"
+import { PassiveEffects } from "./effects/passives"
 
 export default class Bot {
   player: Player
@@ -24,6 +34,13 @@ export default class Bot {
       const data = await BotV2.findOne({ id: this.player.id }, ["steps"])
       if (data) {
         this.scenario = data
+        //TODO: allow to choose your wands in bot builder
+        this.player.fairyWands.push(
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2]),
+          pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3])
+        )
         this.updatePlayerTeam()
       }
     } catch (error) {
@@ -65,9 +82,42 @@ export default class Bot {
         )
         pkm.positionX = stepTeam.board[i].x
         pkm.positionY = stepTeam.board[i].y
+
+        if (pkm.passive !== Passive.NONE) {
+          const hasLightActive = this.player.synergies.hasSynergyActive(
+            Synergy.LIGHT
+          )
+          const inSpotlight =
+            hasLightActive &&
+            ((pkm.positionX === this.player.lightX &&
+              pkm.positionY === this.player.lightY) ||
+              pkm.items.has(Item.SHINY_STONE))
+
+          PassiveEffects[pkm.passive]?.forEach((effect) => {
+            if (effect instanceof OnChangePositionEffect) {
+              effect.apply({
+                pokemon: pkm,
+                player: this.player,
+                oldX: pkm.positionX,
+                oldY: pkm.positionY,
+                newX: pkm.positionX,
+                newY: pkm.positionY
+              })
+            }
+
+            if (effect instanceof OnSpotlightChangeEffect) {
+              effect.apply({
+                pokemon: pkm,
+                player: this.player,
+                inSpotlight
+              })
+            }
+          })
+        }
+
         if (stepTeam.board[i].items) {
           stepTeam.board[i].items.forEach((item) => {
-            if (TMs.includes(item)) {
+            if (isIn(TMs, item)) {
               const ability = AbilityPerTM[item]
               if (!ability || pkm.types.has(Synergy.HUMAN) === false)
                 return false // prevent equipping TMs on non-human pokemon

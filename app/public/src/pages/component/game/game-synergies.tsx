@@ -1,5 +1,5 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
+import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
 import { usePreference } from "../../../preferences"
 import DraggableWindow from "../modal/draggable-window"
@@ -17,6 +17,7 @@ export default function GameSynergies() {
       className="my-container synergies-container"
       initialPosition={synergiesPosition}
       onMove={(position) => setSynergiesPosition(position)}
+      style={{ zIndex: DEPTH.SYNERGIES_CONTAINER }}
     >
       <Synergies synergies={synergies} tooltipPortal={true} />
     </DraggableWindow>

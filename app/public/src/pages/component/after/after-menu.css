@@ -7,7 +7,7 @@
   max-width: 98vw;
   max-height: calc(100vh - 8vw);
   margin: auto;
-  color: white;
+  color: var(--color-fg-primary);
   padding: 0.5em 1em;
   overflow: auto;
 }
@@ -18,7 +18,7 @@
 
 .after-menu .player-rank {
   font-size: 4rem;
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 4px 4px 0 black;
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@
 .after-menu .player-elo,
 .after-menu .player-exp {
   font-size: 1.5 rem;
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 2px 2px 0 black;
 }
 
@@ -53,7 +53,7 @@
 
 .after-menu table td:first-child {
   font-size: 2rem;
-  color: white;
+  color: var(--color-fg-primary);
   text-shadow: 4px 4px 0 black;
   width: 80px;
 }

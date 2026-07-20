@@ -34,7 +34,7 @@
 
 .victory-road .button:hover {
   background-color: var(--color-bg-accent);
-  border-color: white;
+  border-color: var(--color-fg-primary);
 }
 
 .victory-road .button img {

@@ -1,5 +1,5 @@
 import { Pkm } from "../../types/enum/Pokemon"
-import { TownEncounter } from "../../types/enum/TownEncounter"
+import type { TownEncounter } from "../../types/enum/TownEncounter"
 import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
@@ -20,10 +20,10 @@ export const TownEncountersByStage: {
     [Pkm.DUSKULL]: 1 / 20,
     [Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
-    [Pkm.CELEBI]: 1 / 40,
     [Pkm.MAKUHITA]: 1 / 20,
-    [Pkm.MAGNEZONE]: 1 / 20,
-    [Pkm.LAPRAS]: 1 / 20
+    [Pkm.MAGNEZONE]: 1 / 40,
+    [Pkm.LAPRAS]: 1 / 20,
+    [Pkm.LUDICOLO]: 1 / 20
   },
   12: {
     [Pkm.KANGASKHAN]: 1 / 20,
@@ -45,7 +45,8 @@ export const TownEncountersByStage: {
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
-    [Pkm.LAPRAS]: 1 / 20
+    [Pkm.LAPRAS]: 1 / 20,
+    [Pkm.CHIMECHO]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,
@@ -55,7 +56,8 @@ export const TownEncountersByStage: {
     [Pkm.REGIROCK]: 1 / 20,
     [Pkm.MUNCHLAX]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20,
-    [Pkm.KINGAMBIT]: 1 / 20
+    [Pkm.KINGAMBIT]: 1 / 20,
+    [Pkm.CHIMECHO]: 1 / 20
   },
   27: {
     [Pkm.ELECTIVIRE]: 1 / 20,

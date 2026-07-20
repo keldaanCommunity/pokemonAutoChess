@@ -1,5 +1,5 @@
 import { Stat } from "../../types/enum/Game"
-import { Item, ItemsSoldAtTown } from "../../types/enum/Item"
+import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
@@ -26,7 +26,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.POKEMONOMICON]: { [Stat.AP]: 30, [Stat.ATK]: 3 },
   [Item.POWER_LENS]: { [Stat.SPE_DEF]: 10, [Stat.AP]: 10 },
   [Item.SHELL_BELL]: { [Stat.ATK]: 5, [Stat.SPE_DEF]: 5 },
-  [Item.HEAVY_DUTY_BOOTS]: { [Stat.AP]: 40, [Stat.DEF]: 12 },
+  [Item.HEAVY_DUTY_BOOTS]: { [Stat.AP]: 50, [Stat.DEF]: 12 },
   [Item.AQUA_EGG]: { [Stat.PP]: 30 },
   [Item.BLUE_ORB]: { [Stat.PP]: 15, [Stat.SPEED]: 10 },
   [Item.SCOPE_LENS]: { [Stat.PP]: 15, [Stat.CRIT_CHANCE]: 25 },
@@ -40,7 +40,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.CRIT_CHANCE]: 10,
     [Stat.CRIT_POWER]: 100
   },
-  [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 30 },
+  [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 20 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.HP]: 15 },
@@ -87,7 +87,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.LUCK]: 50,
     [Stat.CRIT_CHANCE]: 30
   },
-  [Item.COMET_SHARD]: { [Stat.ATK]: 15 },
+  [Item.STAR_PIECE]: {},
   [Item.SHINY_STONE]: { [Stat.AP]: 50 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
@@ -99,7 +99,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.FRIEND_BOW]: { [Stat.SHIELD]: 30 },
   [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 20 },
   [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 },
-  [Item.LUCKY_RIBBON]: { [Stat.DEF]: 10, [Stat.AP]: 50, [Stat.LUCK]: 30 },
+  [Item.LUCKY_RIBBON]: { [Stat.SHIELD]: 15, [Stat.AP]: 50, [Stat.LUCK]: 20 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
   [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
   [Item.BIG_EATER_BELT]: { [Stat.HP]: 50, [Stat.SHIELD]: 15 },

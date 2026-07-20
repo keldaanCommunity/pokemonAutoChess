@@ -1,15 +1,15 @@
 import * as d3 from "d3"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SYNERGY_COLORS } from "../../../../../config"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import type { Synergy } from "../../../../../types/enum/Synergy"
 import {
   fetchDendrogram,
-  IBranchProfile,
-  IClusterProfile,
-  IDendrogram
-} from "../../../../../models/mongo-models/dendrogram"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+  type IBranchProfile,
+  type IClusterProfile,
+  type IDendrogram
+} from "../../../models/dendrogram"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
 import "./dendrogram-chart.css"
@@ -397,7 +397,11 @@ export function DendrogramChart() {
                         type={hoveredBranch.synergy.toUpperCase() as Synergy}
                         size="32px"
                       />
-                      <span>{hoveredBranch.synergy}</span>
+                      <span>
+                        {t(
+                          `synergy.${hoveredBranch.synergy.toUpperCase() as Synergy}`
+                        )}
+                      </span>
                     </div>
                   </div>
                 )}

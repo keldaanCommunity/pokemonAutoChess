@@ -1,4 +1,4 @@
-import React from "react"
+import type React from "react"
 import { useTranslation } from "react-i18next"
 import {
   DUST_PER_BOOSTER,
@@ -6,7 +6,7 @@ import {
   RarityColor
 } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { BoosterCard } from "../../../../../types/Booster"
+import type { BoosterCard } from "../../../../../types/Booster"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"

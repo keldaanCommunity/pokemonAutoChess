@@ -1,9 +1,9 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import WikiAbility from "./wiki-ability"
 import WikiData from "./wiki-data"
 import WikiFaq from "./wiki-faq"
+import WikiGlossary from "./wiki-glossary"
 import WikiItems from "./wiki-items"
 import WikiPokemons from "./wiki-pokemons"
 import WikiRegions from "./wiki-regions"
@@ -19,26 +19,27 @@ import "./wiki.css"
 export default function Wiki({ inGame = false }: { inGame: boolean }) {
   const { t } = useTranslation()
   return (
-    <div id="wiki-page" onKeyDown={(e) => e.stopPropagation()}>
+    <div id="wiki-page">
       <Tabs>
         <TabList>
           {!inGame && (
             <>
-              <Tab key="title-faq">{t("faq.faq")}</Tab>
-              <Tab key="title-tutorials">{t("how_to_play")}</Tab>
+              <Tab key="title-faq">{t("wiki.faq.faq")}</Tab>
+              <Tab key="title-tutorials">{t("wiki.nav.how_to_play")}</Tab>
             </>
           )}
-          <Tab key="title-pokemon">{t("pokemons_label")}</Tab>
-          <Tab key="title-ability">{t("abilities_label")}</Tab>
-          <Tab key="title-items">{t("items_label")}</Tab>
-          <Tab key="title-types">{t("synergies_label")}</Tab>
-          <Tab key="title-statistic">{t("statistics_label")}</Tab>
+          <Tab key="title-pokemon">{t("wiki.nav.pokemons_label")}</Tab>
+          <Tab key="title-ability">{t("wiki.nav.abilities_label")}</Tab>
+          <Tab key="title-items">{t("wiki.nav.items_label")}</Tab>
+          <Tab key="title-types">{t("wiki.nav.synergies_label")}</Tab>
+          <Tab key="title-statistic">{t("wiki.nav.statistics_label")}</Tab>
           <Tab key="title-status">{t("status_label")}</Tab>
-          <Tab key="title-weather">{t("weather_label")}</Tab>
+          <Tab key="title-weather">{t("wiki.nav.weather_label")}</Tab>
           <Tab key="title-stages">{t("stages")}</Tab>
-          <Tab key="title-town">{t("town_label")}</Tab>
-          <Tab key="title-dungeon">{t("dungeon_label")}</Tab>
-          <Tab key="title-data">{t("data_label")}</Tab>
+          <Tab key="title-town">{t("wiki.nav.town_label")}</Tab>
+          <Tab key="title-dungeon">{t("wiki.nav.dungeon_label")}</Tab>
+          <Tab key="title-glossary">{t("wiki.nav.glossary_label")}</Tab>
+          <Tab key="title-data">{t("wiki.nav.data_label")}</Tab>
         </TabList>
 
         {!inGame && (
@@ -80,6 +81,9 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
         </TabPanel>
         <TabPanel key="dungeon">
           <WikiRegions />
+        </TabPanel>
+        <TabPanel key="glossary">
+          <WikiGlossary />
         </TabPanel>
         <TabPanel key="data">
           <WikiData />

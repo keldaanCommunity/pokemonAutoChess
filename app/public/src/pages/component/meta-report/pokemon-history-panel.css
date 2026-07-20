@@ -17,25 +17,7 @@
 }
 
 .pokemon-history-topn-btn {
-  background: rgb(84, 89, 107);
-  border: var(--border-thin);
-  border-radius: 4px;
-  color: #ccc;
-  cursor: var(--cursor-hover);
   font-size: 12px;
-  padding: 2px 8px;
-  line-height: 1.4;
-}
-
-.pokemon-history-topn-btn:hover {
-  background: rgb(100, 106, 128);
-  color: white;
-}
-
-.pokemon-history-topn-btn.active {
-  background: rgb(60, 65, 82);
-  color: white;
-  border-color: #aaa;
 }
 
 .pokemon-history-body {
@@ -76,7 +58,7 @@
 .pokemon-history-legend-item:hover,
 .pokemon-history-legend-item.highlighted {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: var(--color-fg-primary);
 }
 
 .pokemon-history-legend-color {
@@ -98,7 +80,7 @@
   padding: 0.5em;
   border: 1px solid black;
   border-radius: 12px;
-  color: #fff;
+  color: var(--color-fg-primary);
   display: flex;
   flex-direction: column;
   gap: 4px;

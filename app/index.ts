@@ -12,11 +12,18 @@ import { Encoder } from "@colyseus/schema"
 import { listen } from "@colyseus/tools"
 import { logger, matchMaker } from "colyseus"
 import { CronJob } from "cron"
+import { writeHeapSnapshot } from "v8"
 import { server as app } from "./app.config"
 import { initializeMetrics } from "./metrics"
 import { initCronJobs } from "./services/cronjobs"
 import { fetchLeaderboards } from "./services/leaderboard"
 import { fetchMetaReports } from "./services/meta"
+import {
+  refreshSpriteGapData,
+  warmupSpriteGapScanner
+} from "./services/sprite-gap-scanner"
+import { refreshTwitchBlacklist, refreshTwitchStreams } from "./services/twitch"
+import { MaintenanceOrder } from "./types/enum/MaintenanceOrder"
 
 /*
 Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
@@ -26,20 +33,25 @@ Encoder.BUFFER_SIZE = 512 * 1024
 
 async function main() {
   if (process.env.NODE_APP_INSTANCE) {
+    // multiple threads config
     const processNumber = Number(process.env.NODE_APP_INSTANCE ?? "0")
     const port = (Number(process.env.PORT) ?? 2569) + processNumber
     initializeMetrics()
     await listen(app)
-    if (port === 2569) {
-      // only the first thread of the first instance will create the lobby and init cron jobs
+    const isLobbyThread = port === 2569
+    if (isLobbyThread) {
+      // only the first thread of the first machine will create the lobby and init cron jobs
       await matchMaker.createRoom("lobby", {})
       checkLobby()
-      initCronJobs()
+      warmupSpriteGapScanner()
     }
+    initCronJobs(isLobbyThread)
   } else {
+    // single thread config
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
     await matchMaker.createRoom("lobby", {})
-    initCronJobs()
+    initCronJobs(true)
+    warmupSpriteGapScanner()
   }
 
   logger.info("Fetching leaderboards...")
@@ -47,10 +59,16 @@ async function main() {
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
   logger.info("Fetching meta reports...")
   fetchMetaReports()
-  setInterval(() => fetchMetaReports(), 1000 * 60 * 60 * 24) // refresh every 24 hours
+  logger.info("Fetching Twitch streams...")
+  refreshTwitchBlacklist()
+  setInterval(() => refreshTwitchBlacklist(), 1000 * 60)
+  refreshTwitchStreams()
+  setInterval(() => refreshTwitchStreams(), 1000 * 60 * 5) // refresh every 5 minutes
+  listenForMaintenanceOrders()
 }
 
 function checkLobby() {
+  // automatically recreate lobby room if its not found
   logger.info("checkLobby cron job")
   CronJob.from({
     cronTime: "* * * * *",
@@ -88,6 +106,29 @@ function checkLobby() {
     },
     start: true
   })
+}
+
+function listenForMaintenanceOrders() {
+  matchMaker.presence.subscribe(
+    "maintenance",
+    ({ order }: { userId: string; order: MaintenanceOrder }) => {
+      if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+        logger.info("Writing heap snapshot...")
+        writeHeapSnapshot()
+        logger.info("Heap snapshot written")
+      } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+        fetchLeaderboards()
+      } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+        fetchMetaReports()
+      } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+        refreshSpriteGapData(true)
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+        refreshTwitchStreams()
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+        refreshTwitchBlacklist()
+      }
+    }
+  )
 }
 
 main()

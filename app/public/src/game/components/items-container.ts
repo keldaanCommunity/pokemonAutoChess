@@ -1,10 +1,21 @@
-import { ArraySchema, SetSchema } from "@colyseus/schema"
+import type { ArraySchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
-import Player from "../../../../models/colyseus-models/player"
-import { Item } from "../../../../types/enum/Item"
-import { values } from "../../../../utils/schemas"
+import type Player from "../../../../models/colyseus-models/player"
+import {
+  Berries,
+  Dishes,
+  type Item,
+  ShinyItems,
+  SpecialItems,
+  TMs,
+  Tools,
+  Wands,
+  WeatherRocks
+} from "../../../../types/enum/Item"
+import { isIn } from "../../../../utils/array"
+import { schemaValues } from "../../../../utils/schemas"
 import { DEPTH } from "../depths"
-import GameScene from "../scenes/game-scene"
+import type GameScene from "../scenes/game-scene"
 import ItemContainer from "./item-container"
 
 export default class ItemsContainer extends GameObjects.Container {
@@ -35,17 +46,38 @@ export default class ItemsContainer extends GameObjects.Container {
 
     const itemSize = this.pokemonId === null ? 70 : 25
     const ITEMS_PER_COLUMN = 6
-    const items = values(inventory)
+    const items = schemaValues(inventory)
 
     this.items = []
-    items.forEach((item, i) => {
-      this.items.push(item)
-      const x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
-      const y = (i % ITEMS_PER_COLUMN) * itemSize
-      this.add(
-        new ItemContainer(this.scene, x, y, item, this.pokemonId, this.playerId)
-      )
-    })
+    items
+      .sort((a, b) => this.getOrderPriority(b) - this.getOrderPriority(a))
+      .forEach((item, i) => {
+        this.items.push(item)
+        const x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
+        const y = (i % ITEMS_PER_COLUMN) * itemSize
+        this.add(
+          new ItemContainer(
+            this.scene,
+            x,
+            y,
+            item,
+            this.pokemonId,
+            this.playerId
+          )
+        )
+      })
+  }
+
+  getOrderPriority(item: Item): number {
+    if (isIn(SpecialItems, item)) return 10
+    if (isIn(WeatherRocks, item)) return 3
+    if (isIn(TMs, item)) return 5
+    if (isIn(Wands, item)) return 4
+    if (isIn(ShinyItems, item)) return 2
+    if (isIn(Tools, item)) return 1
+    if (isIn(Dishes, item)) return -1
+    if (isIn(Berries, item)) return -2
+    return 0
   }
 
   closeTooltips() {

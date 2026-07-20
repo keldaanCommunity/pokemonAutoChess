@@ -10,6 +10,7 @@ const pkg = fs.readJSONSync("../../package.json")
 export default {
   entry: "../../app/public/src/assets",
   output: "../../app/public/dist/client/assets",
+  cache: true,
   plugins: {
     compressPng: compressPng(),
     compressJpg: compressJpg(),
@@ -44,7 +45,7 @@ export default {
       },
       resolutionOptions: {
         resolutions: { default: 1 },
-        template: `-${pkg.version}`
+        template: ``
       }
     }),
     texturePackIndexer: texturePackAtlas(),
@@ -68,9 +69,17 @@ function texturePackAtlas() {
         : null
 
       const previousVersion = existingAtlas?.version
-        ? Number(existingAtlas.version.split(".").pop())
-        : 0
-      const newVersion = pkg.version + "." + (previousVersion + 1)
+      const newDate = new Date().toISOString().split("T")[0]
+      let newBuild = 0
+      if (previousVersion) {
+        const [_major, _minor, _patch, previousDate, previousBuild] =
+          previousVersion.split(".")
+        const isSameDay = previousDate === newDate
+        newBuild = isSameDay ? Number(previousBuild) + 1 : 0
+      }
+      const newVersion = `${pkg.version}.${[newDate, newBuild].join(".")}`
+
+      pkg.assetsVersion = newVersion
       const atlas = {
         version: newVersion,
         packs: {}
@@ -125,7 +134,7 @@ function texturePackAtlas() {
       const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
       fs.writeFileSync(
         "../../app/public/dist/client/sw.js",
-        sw.replace(/CACHE v[\d\.]+/, `CACHE v${newVersion}`)
+        sw.replace(/CACHE v[\d\.\-]+/, `CACHE v${newVersion}`)
       )
 
       // Copy items individual sprites as we need them unpacked as well
@@ -134,6 +143,9 @@ function texturePackAtlas() {
         "../../app/public/dist/client/assets/item",
         { recursive: true }
       )
+
+      // save changes to package.json
+      fs.writeJSONSync("../../package.json", pkg, { spaces: 2 })
     }
   }
 }
