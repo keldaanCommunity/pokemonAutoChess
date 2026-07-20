@@ -23,12 +23,13 @@ import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
 import type GameState from "../../../../rooms/states/game-state"
 import {
   FlowerPots,
+  type IPlayer,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
 import { DungeonMusic } from "../../../../types/enum/Dungeon"
 import {
-  type GameMode,
+  GameMode,
   GamePhaseState,
   Orientation,
   PokemonActionState,
@@ -37,6 +38,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
@@ -67,6 +69,7 @@ import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
 import { Portal } from "./portal"
+import { TradingPlatform } from "./trading-platform"
 
 export enum BoardMode {
   PICK = "pick",
@@ -102,6 +105,7 @@ export default class BoardManager {
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
   specialGameRule: SpecialGameRule | null = null
+  tradingPlatform: TradingPlatform | null = null
 
   constructor(
     scene: GameScene,
@@ -135,8 +139,8 @@ export default class BoardManager {
       this.renderBoard(false)
       this.battleMode(false)
     } else if (state.phase === GamePhaseState.TOWN) {
-      this.renderBoard(false)
       this.minigameMode()
+      this.renderBoard(false) // render pokemons on bench when loading during a town phase
     } else {
       this.pickMode(false)
     }
@@ -245,6 +249,13 @@ export default class BoardManager {
 
     if (this.mode === BoardMode.PICK) {
       this.showLightCell()
+    }
+
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      this.mode !== BoardMode.TOWN
+    ) {
+      this.renderTradingPlatform()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -520,6 +531,16 @@ export default class BoardManager {
     })
   }
 
+  renderTradingPlatform() {
+    this.hideTradingPlatform()
+    this.tradingPlatform = new TradingPlatform(this, 1276, 746)
+  }
+
+  hideTradingPlatform() {
+    this.tradingPlatform?.destroy()
+    this.tradingPlatform = null
+  }
+
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
       fontSize: "24px",
@@ -751,9 +772,9 @@ export default class BoardManager {
   }
 
   battleMode(phaseJustChanged: boolean) {
-    // logger.debug('battleMode');
     this.mode = BoardMode.BATTLE
     this.hideLightCell()
+    this.tradingPlatform?.updateTrade(BoardMode.BATTLE)
     if (!phaseJustChanged) this.removePokemonsOnBoard() // remove immediately board sprites if arriving in battle mode
     this.scene.closeTooltips()
     this.scene.input.setDragState(this.scene.input.activePointer, 0)
@@ -798,7 +819,6 @@ export default class BoardManager {
   }
 
   pickMode(phaseJustChanged: boolean) {
-    // logger.debug('pickMode');
     this.mode = BoardMode.PICK
     this.scene.setMap(this.player.map)
     if (
@@ -839,6 +859,7 @@ export default class BoardManager {
     this.hideFlowerPots()
     this.hideGroundHoles()
     this.hideTrainingBag()
+    this.hideTradingPlatform()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -919,6 +940,7 @@ export default class BoardManager {
 
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
     pokemon: IPokemon,
+    player: IPlayer,
     field: F,
     value: IPokemon[F],
     previousValue?: IPokemon[F]
@@ -928,26 +950,6 @@ export default class BoardManager {
     if (pokemonSprite) {
       switch (field) {
         case "positionX":
-          coordinates = transformBoardCoordinates(
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          setTimeout(
-            () => {
-              pokemonSprite.x = coordinates[0]
-              pokemonSprite.y = coordinates[1]
-            },
-            this.scene.spectate ? 3000 : 0 // delay position update for spectators, see https://discord.com/channels/737230355039387749/1489057261593694318
-          )
-          store.dispatch(refreshShopUI(0))
-          this.showSupportItemsVfx(
-            schemaValues(pokemon.items),
-            pokemonSprite,
-            pokemon.positionX,
-            pokemon.positionY
-          )
-          break
-
         case "positionY": {
           coordinates = transformBoardCoordinates(
             pokemon.positionX,
@@ -980,6 +982,7 @@ export default class BoardManager {
               pokemon.positionY
             )
           }
+
           break
         }
 
@@ -1085,6 +1088,12 @@ export default class BoardManager {
           break
       }
     }
+
+    this.tradingPlatform?.updateTradeIfPokemonInvolved(
+      pokemon,
+      player,
+      this.mode
+    )
   }
 
   closeTooltips() {
@@ -1128,7 +1137,16 @@ export default class BoardManager {
     if (player) {
       this.animationManager.play(player, PokemonAnimations[player.name].emote)
 
-      if (emote) {
+      if (emote && emote.startsWith("player_dialog/")) {
+        this.scene.board?.displayText(
+          player.x,
+          player.y - 10,
+          t(
+            `player_dialog.${emote.substring("player_dialog/".length) as PlayerDialog}`
+          ),
+          true
+        )
+      } else if (emote) {
         player.drawSpeechBubble(emote, player === this.opponentAvatar)
       }
     } else {
@@ -1511,26 +1529,31 @@ export default class BoardManager {
     rewards: Item[]
   ) {
     chest.anims.play("open_chest")
+    this.showRewards(chestGroup, rewards, chest.x, chest.y, chest.depth + 1)
+  }
+
+  showRewards(
+    group: Phaser.GameObjects.Group,
+    rewards: Item[],
+    x: number,
+    y: number,
+    depth: number
+  ) {
     rewards.forEach((item, i) => {
-      const itemSprite = this.scene.add.sprite(
-        chest.x,
-        chest.y,
-        "item",
-        item + ".png"
-      )
-      itemSprite.setScale(0.5).setDepth(chest.depth + 1)
-      const shinyEffect = this.scene.add.sprite(chest.x, chest.y, "shine")
+      const itemSprite = this.scene.add.sprite(x, y, "item", item + ".png")
+      itemSprite.setScale(0.5).setDepth(depth + 1)
+      const shinyEffect = this.scene.add.sprite(x, y, "shine")
       shinyEffect
         .setScale(2)
-        .setDepth(chest.depth + 1)
+        .setDepth(depth + 1)
         .play("shine")
-      chestGroup?.addMultiple([itemSprite, shinyEffect])
+      group?.addMultiple([itemSprite, shinyEffect])
       this.scene.tweens.add({
         targets: [itemSprite, shinyEffect],
         ease: Phaser.Math.Easing.Quadratic.Out,
         duration: 1000,
-        y: chest.y - 48,
-        x: chest.x + (i - (rewards.length - 1) / 2) * 70
+        y: y - 48,
+        x: x + (i - (rewards.length - 1) / 2) * 70
       })
     })
   }

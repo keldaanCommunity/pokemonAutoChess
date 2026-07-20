@@ -26,6 +26,22 @@ import { fetchMetaReports } from "./meta"
 import { notificationsService } from "./notifications"
 import { refreshSpriteGapData } from "./sprite-gap-scanner"
 
+function getDeterministicSpriteGapSchedule(seed: string): {
+  hour: number
+  minute: number
+} {
+  let hash = 0
+
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+
+  return {
+    hour: hash % 24,
+    minute: Math.floor(hash / 24) % 60
+  }
+}
+
 export function initCronJobs(isMainThread: boolean) {
   logger.debug("init cron jobs")
 
@@ -75,15 +91,31 @@ export function initCronJobs(isMainThread: boolean) {
       onTick: () => resetEventScores(),
       start: true
     })
-  }
 
-  // These cronjobs should run on every single process because they retrieve data in each process memory
-  CronJob.from({
-    cronTime: "0 9 * * *", // every day at 9:00 AM UTC
-    timeZone: "UTC",
-    onTick: () => refreshSpriteGapData(),
-    start: true
-  })
+    // SpriteCollab endpoint refresh should be triggered once globally.
+    // We use deterministic jitter per server so community servers do not refresh at the same UTC time.
+    const spriteGapSeed =
+      process.env.SPRITE_GAP_REFRESH_SEED ??
+      process.env.SERVER_NAME ??
+      process.env.HOSTNAME ??
+      "default"
+    const spriteGapSchedule = getDeterministicSpriteGapSchedule(spriteGapSeed)
+
+    logger.info(
+      `[CRON] Sprite gap weekly refresh scheduled at ${spriteGapSchedule.hour
+        .toString()
+        .padStart(2, "0")}:${spriteGapSchedule.minute
+        .toString()
+        .padStart(2, "0")} UTC on Monday (seed=${spriteGapSeed})`
+    )
+
+    CronJob.from({
+      cronTime: `${spriteGapSchedule.minute} ${spriteGapSchedule.hour} * * 1`, // every Monday at jittered UTC time
+      timeZone: "UTC",
+      onTick: () => refreshSpriteGapData(),
+      start: true
+    })
+  }
 
   // see https://github.com/keldaanCommunity/pokemonAutoChessMetaReport/blob/main/.github/workflows/main.yml
   // Meta report generation task is launched at 1:00 AM UTC, so we expect meta report generation to be done by then (< 1 hour)

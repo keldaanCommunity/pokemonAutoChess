@@ -631,6 +631,21 @@ export class JoinOrOpenRoomCommand extends Command<
         }
         break
       }
+
+      case GameMode.DOUBLE_UP: {
+        const existingDoubleUp = this.room.rooms?.find(
+          (room) =>
+            room.name === "preparation" &&
+            room.metadata?.gameMode === GameMode.DOUBLE_UP &&
+            room.clients < MAX_PLAYERS_PER_GAME
+        )
+        if (existingDoubleUp) {
+          client.send(Transfer.REQUEST_ROOM, existingDoubleUp.roomId)
+        } else {
+          return [new OpenGameCommand().setPayload({ gameMode, client })]
+        }
+        break
+      }
     }
   }
 }
@@ -677,6 +692,9 @@ export class OpenGameCommand extends Command<
         .toUpperCase()
     } else if (gameMode === GameMode.CLASSIC) {
       roomName = "Classic"
+    } else if (gameMode === GameMode.DOUBLE_UP) {
+      roomName = "Double Up"
+      ownerId = user.uid
     }
 
     const newRoom = await matchMaker.createRoom("preparation", {

@@ -4,6 +4,7 @@ import { type Client, CloseCode, Room } from "colyseus"
 import admin from "firebase-admin"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
+  BOARD_WIDTH,
   ExpPlace,
   getCurrentGameEvent,
   MAX_LOADING_TIME,
@@ -25,6 +26,7 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
+import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
@@ -44,6 +46,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
+import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -64,6 +67,7 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
+import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -78,6 +82,8 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
+import { TradeStatus } from "../types/enum/TradeStatus"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
@@ -95,6 +101,7 @@ import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
+  OnCancelTradeOfferCommand,
   OnDevCommand,
   OnDragDropCombineCommand,
   OnDragDropItemCommand,
@@ -110,7 +117,8 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand
+  OnUpdateCommand,
+  OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
@@ -170,6 +178,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
     }
 
+    if (gameMode === GameMode.DOUBLE_UP) {
+      noElo = true
+    }
+
     this.setMetadata(<IGameMetadata>{
       name,
       ownerName,
@@ -183,6 +195,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       tournamentId,
       bracketId
     })
+
     // logger.debug(options);
     this.state = new GameState(
       preparationId,
@@ -289,6 +302,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
           )
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
+          player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
+          player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
         } else {
           const leanUser = await UserMetadata.findOne({ uid: id }).lean()
           const user = leanUser ? toLeanUserMetadata(leanUser) : null
@@ -310,6 +325,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
+            player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
+            player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
 
             if (
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
@@ -465,6 +482,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
 
+    this.onMessage(Transfer.USE_ITEM, (client, item: Item) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnUseItemCommand(), {
+            client,
+            item
+          })
+        } catch (error) {
+          logger.error("use item drop error", item)
+        }
+      }
+    })
+
     this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -551,6 +581,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     )
+    this.onMessage(Transfer.CANCEL_TRADE_OFFER, (client) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnCancelTradeOfferCommand(), {
+            playerId: client.auth.uid
+          })
+        } catch (e) {
+          logger.error("cancel trade offer error", e)
+        }
+      }
+    })
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -620,6 +661,24 @@ export default class GameRoom extends Room<{ state: GameState }> {
           this.dispatcher.dispatch(new OnDevCommand(), message)
         } catch (error) {
           logger.error("dev command error", message)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.TRADE_ACCEPT, (client, message: boolean) => {
+      if (!client.auth) return
+      const player = this.state.players.get(client.auth.uid)
+      if (player) {
+        const partner = this.state.players.get(player.doubleUpPartnerId)
+        player.tradeStatus =
+          message === true ? TradeStatus.ACCEPTED : TradeStatus.REFUSED
+        if (
+          player.tradeStatus === TradeStatus.ACCEPTED &&
+          partner?.tradeStatus === TradeStatus.ACCEPTED
+        ) {
+          this.tradePokemonWithPartner(player, partner)
+          player.tradeStatus = TradeStatus.PENDING
+          partner.tradeStatus = TradeStatus.PENDING
         }
       }
     })
@@ -875,10 +934,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     let shouldRefetchEventLeaderboard = false
-    const eligibleToELO = true //TEMP
-    /*!this.state.noElo &&
+    const eligibleToELO =
+      !this.state.noElo &&
       (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
-      humans.length >= 2*/
+      humans.length >= 2
 
     const rank = player.rank
     const exp = ExpPlace[rank - 1]
@@ -1233,6 +1292,14 @@ export default class GameRoom extends Room<{ state: GameState }> {
     )
       return
 
+    let cost = 0
+    if (choice.costs.length > 0) {
+      cost = choice.costs[choiceIndex] ?? 0
+      if (cost && player.money < cost) {
+        return // not enough gold to pick that choice
+      }
+    }
+
     if (choice.pokemons.length > 0) {
       const pkm = choice.pokemons[choiceIndex]
       let pokemonsObtained: Pokemon[] = (
@@ -1322,7 +1389,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      if (isIn(Wands, item)) {
+      if (isIn(Gifts, item)) {
+        this.pickGift(item, player)
+      } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
       } else {
@@ -1330,6 +1399,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
+    player.money -= cost
     removeInArray(player.choices, choice)
   }
 
@@ -1345,10 +1415,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       })
     }
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      damage = Math.ceil(stageLevel / 2)
+    }
     return damage
   }
 
   rankPlayers() {
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      return this.rankPlayersDoubleUp()
+    }
     const rankArray = new Array<{ id: string; life: number; level: number }>()
     this.state.players.forEach((player) => {
       if (!player.alive) {
@@ -1381,6 +1457,115 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.rank = index + 1
       }
     })
+  }
+
+  rankPlayersDoubleUp() {
+    const teamMap = new Map<
+      string,
+      {
+        life: number
+        level: number
+        ids: string[]
+        alive: boolean
+        eliminationRound: number
+      }
+    >()
+    this.state.players.forEach((player) => {
+      if (!teamMap.has(player.doubleUpTeamId)) {
+        teamMap.set(player.doubleUpTeamId, {
+          life: Infinity,
+          level: 0,
+          ids: [],
+          alive: false,
+          eliminationRound: 999
+        })
+      }
+      const entry = teamMap.get(player.doubleUpTeamId)!
+      entry.eliminationRound = Math.min(
+        entry.eliminationRound,
+        player.doubleUpEliminationRound
+      )
+      entry.life = Math.min(
+        entry.life === 0 && entry.ids.length === 0 ? Infinity : entry.life,
+        player.life
+      )
+      entry.level += player.experienceManager.level
+      entry.ids.push(player.id)
+      entry.alive = entry.alive || player.alive
+    })
+    const teamArray = [...teamMap.values()]
+    teamArray.sort((a, b) => {
+      if (a.alive !== b.alive) return a.alive ? -1 : 1
+      if (!a.alive && !b.alive) {
+        if (a.eliminationRound !== b.eliminationRound) {
+          return b.eliminationRound - a.eliminationRound // later death = better rank?
+        }
+      }
+      return b.life - a.life || b.level - a.level
+    })
+
+    teamArray.forEach((team, i) => {
+      team.ids.forEach((id) => {
+        const player = this.state.players.get(id)
+        if (player) player.rank = i + 1
+      })
+    })
+  }
+
+  pickGift(gift: Gift, player: Player) {
+    const partner = this.state.players.get(player.doubleUpPartnerId)
+    if (!partner || !partner.alive) return
+    player.giftsGiven.push(gift)
+
+    partner.spawnWanderingPokemon({
+      pkm: Pkm.KECLEON_PURPLE,
+      shiny: false,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE,
+      data: gift,
+      delay: 3000
+    })
+
+    setTimeout(() => openGift(gift, partner, player), 10000)
+  }
+
+  tradePokemonWithPartner(playerA: Player, playerB: Player) {
+    if (!playerA.alive || !playerB.alive) return
+
+    const pokemonToTradeA = schemaValues(playerA.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    const pokemonToTradeB = schemaValues(playerB.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    if (
+      !pokemonToTradeA ||
+      !pokemonToTradeB ||
+      !canBeTraded(pokemonToTradeA) ||
+      !canBeTraded(pokemonToTradeB)
+    )
+      return
+
+    // Switch Pokémon
+
+    playerA.board.delete(pokemonToTradeA.id)
+    playerA.board.set(pokemonToTradeB.id, pokemonToTradeB)
+    pokemonToTradeB.onAcquired(playerA)
+
+    playerB.board.delete(pokemonToTradeB.id)
+    playerB.board.set(pokemonToTradeA.id, pokemonToTradeA)
+    pokemonToTradeA.onAcquired(playerB)
+
+    this.checkEvolutionsAfterPokemonAcquired(playerA.id)
+    this.checkEvolutionsAfterPokemonAcquired(playerB.id)
+
+    this.broadcast(Transfer.TRADE_ACCEPT, [playerA.id, playerB.id])
+
+    // Update trading platform cooldown based on nb of items traded & pokemon rarity
+
+    const cooldown = computeTradeCooldown(pokemonToTradeA, pokemonToTradeB)
+    playerA.tradeCooldown = cooldown
+    playerB.tradeCooldown = cooldown
   }
 
   onRoomDeleted(roomId) {

@@ -6,11 +6,13 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { Role } from "../../../../../types"
+import { isReplayRoom } from "../../../game/replay-room-id"
 import {
   selectConnectedPlayer,
   useAppDispatch,
   useAppSelector
 } from "../../../hooks"
+import { rooms } from "../../../network"
 import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
@@ -131,6 +133,12 @@ export function MainSidebar(props: MainSidebarProps) {
     )
   )
   function onClickLeave() {
+    // a replay exits straight to the lobby (the live leave() would hit the /after flow)
+    if (isReplayRoom(rooms.game)) {
+      rooms.game.pause()
+      navigate("/lobby")
+      return
+    }
     if (player && player.life > 0 && playersAlive.length > 1) {
       setShowSurrenderConfirm(true)
     } else {
@@ -236,6 +244,15 @@ export function MainSidebar(props: MainSidebarProps) {
             {t("team_builder")}
           </NavLink>
         )}
+
+        {page !== "game" &&
+          ((!GADGETS.recorder.disabled &&
+            profileLevel >= GADGETS.recorder.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="compact-disc" onClick={() => navigate("/replay")}>
+              {t("replay.nav")}
+            </NavLink>
+          )}
 
         {page !== "game" &&
           ((!GADGETS.pokeguesser.disabled &&

@@ -2,6 +2,7 @@ import { t } from "i18next"
 import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Dishes, type PkmWithCustom } from "../../../../../types"
+import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   Berries,
   CraftableItems,
@@ -61,6 +62,12 @@ export default function ItemPicker(props: {
       label: t("wands"),
       key: "wands",
       items: Wands,
+      hidden: props.origin === "team-planner" || props.origin === "bot-builder"
+    },
+    {
+      label: t("gifts"),
+      key: "gifts",
+      items: Gifts,
       hidden: props.origin === "team-planner" || props.origin === "bot-builder"
     },
     {

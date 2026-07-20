@@ -147,6 +147,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
+  sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
 
   constructor(
     pokemon: IPokemon,
@@ -206,15 +207,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.shieldDamageTaken = 0
     this.healDone = 0
     this.shieldDone = 0
+
+    pokemon.types.forEach((type) => {
+      this.types.add(type)
+    })
+
     if (this.types.has(Synergy.DARK) && this.range === 1) {
       this.cooldown = 300 // ensure dark assassins move first
     } else {
       this.resetCooldown(500)
     }
-
-    pokemon.types.forEach((type) => {
-      this.types.add(type)
-    })
 
     this.passive = Passive.NONE
     this.changePassive(pokemon.passive)
@@ -284,6 +286,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get player(): Player | undefined {
+    if (this.sourcePlayer) return this.sourcePlayer
     const player =
       this.baseTeam === Team.BLUE_TEAM
         ? this.simulation.bluePlayer
@@ -1617,7 +1620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         break
       case Item.PECHA_BERRY:
         heal(100)
-        this.status.poisonOrigin = undefined
+        this.status.poisonOrigin = null
         this.status.poisonStacks = 0
         this.status.poisonDamageCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_POISON)

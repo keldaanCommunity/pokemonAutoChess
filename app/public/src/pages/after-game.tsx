@@ -1,6 +1,8 @@
 import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
+import { GADGETS } from "../../../config/game/gadgets"
 import type AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -14,12 +16,15 @@ import {
   setGameMode
 } from "../stores/AfterGameStore"
 import AfterMenu from "./component/after/after-menu"
+import RecorderEndGame from "./component/replay/recorder-endgame"
 import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
 
 export default function AfterGame() {
   const dispatch = useAppDispatch()
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
+  const profile = useAppSelector((state) => state.network.profile)
+  const { t } = useTranslation()
   const room: Room<AfterGameState> | undefined = rooms.after
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
@@ -109,20 +114,31 @@ export default function AfterGame() {
   } else {
     return (
       <div className="after-game">
-        <button
-          className="bubbly blue"
-          style={{ margin: "10px 0 0 10px" }}
-          onClick={() => {
-            if (room?.connection.isOpen) {
-              room.leave()
-            }
-            dispatch(leaveAfter())
-            localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
-            setToLobby(true)
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "1em",
+            gap: "1em"
           }}
         >
-          Back to Lobby
-        </button>
+          <button
+            className="bubbly blue"
+            onClick={() => {
+              if (room?.connection.isOpen) {
+                room.leave()
+              }
+              dispatch(leaveAfter())
+              localStore.delete(LocalStoreKeys.RECONNECTION_AFTER_GAME)
+              setToLobby(true)
+            }}
+          >
+            {t("back_to_lobby")}
+          </button>
+          {profile && profile.level >= GADGETS.recorder.levelRequired && (
+            <RecorderEndGame />
+          )}
+        </nav>
         <AfterMenu />
       </div>
     )
