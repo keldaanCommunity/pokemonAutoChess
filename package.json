@@ -28,7 +28,7 @@
   "main": "public/dist/server/app/index.js",
   "scripts": {
     "dev-client": "node esbuild.js --dev",
-    "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
+    "dev-server": "tsx watch ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx @biomejs/biome lint app/",
     "format": "npx @biomejs/biome format app/ --write",
@@ -121,7 +121,7 @@
     "knip": "^6.26.0",
     "npm-run-all2": "^8.0.0",
     "pm2": "^7.0.3",
-    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.23.1",
     "typescript": "^7.0.2"
   }
 }
