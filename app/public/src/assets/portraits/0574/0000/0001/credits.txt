@@ -1,0 +1,3 @@
+2022-05-15 22:22:21.001078	<@!593113130213572610>	CUR	PMDCollab_1	Normal,Joyous,Happy,Surprised,Dizzy
+2023-01-03 21:23:11.083250	<@!544245909639397378>	CUR	PMDCollab_1	Normal,Joyous,Happy,Surprised,Dizzy
+2023-01-24 03:11:48.768541	<@!576876006636519434>	CUR	PMDCollab_1	Normal,Joyous,Happy,Surprised,Dizzy

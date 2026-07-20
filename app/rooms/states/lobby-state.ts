@@ -1,21 +1,15 @@
-import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
-import { CronTime } from "cron"
-import { nanoid } from "nanoid"
-import LobbyUser from "../../models/colyseus-models/lobby-user"
+import { ArraySchema, Schema, type } from "@colyseus/schema"
 import Message from "../../models/colyseus-models/message"
+import { TournamentSchema } from "../../models/colyseus-models/tournament"
 import chatV2 from "../../models/mongo-models/chat-v2"
-import {
-  GREATBALL_RANKED_LOBBY_CRON,
-  SCRIBBLE_LOBBY_CRON,
-  ULTRABALL_RANKED_LOBBY_CRON
-} from "../../types/Config"
-import { SpecialLobbyType } from "../../types/enum/Game"
+import tournament from "../../models/mongo-models/tournament"
+import type { ITournament } from "../../types/interfaces/Tournament"
+import { logger } from "../../utils/logger"
 
 export default class LobbyState extends Schema {
   @type([Message]) messages = new ArraySchema<Message>()
-  @type({ map: LobbyUser }) users = new MapSchema<LobbyUser>()
-  @type("string") nextSpecialLobbyDate: string = ""
-  @type("string") nextSpecialLobbyType: SpecialLobbyType | "" = ""
+  @type([TournamentSchema]) tournaments = new ArraySchema<TournamentSchema>()
+  @type("number") ccu = 0
 
   addMessage(
     payload: string,
@@ -23,11 +17,12 @@ export default class LobbyState extends Schema {
     author: string,
     avatar: string
   ) {
-    const id = nanoid()
+    const id = crypto.randomUUID()
     const time = Date.now()
     const message = new Message(id, payload, authorId, author, avatar, time)
-    chatV2
-      .create({
+    this.messages.push(message)
+    if (author) {
+      chatV2.create({
         id: id,
         payload: payload,
         authorId: authorId,
@@ -35,9 +30,7 @@ export default class LobbyState extends Schema {
         avatar: avatar,
         time: time
       })
-      .then(() => {
-        this.messages.push(message)
-      })
+    }
   }
 
   removeMessage(id: string) {
@@ -53,7 +46,7 @@ export default class LobbyState extends Schema {
   removeMessages(authorId: string) {
     let i = this.messages.length
     while (i--) {
-      if (this.messages[i].authorId === authorId) {
+      if (this.messages[i]?.authorId === authorId) {
         this.messages.splice(i, 1)
       }
     }
@@ -64,27 +57,26 @@ export default class LobbyState extends Schema {
     this.addMessage(message, "server", "Server Announcement", "0294/Joyous")
   }
 
-  getNextSpecialLobbyDate() {
-    const getNextDate = (t: string) =>
-      new CronTime(t, "Europe/Paris").sendAt().toUnixInteger()
-    const nextGreatBallRanked = getNextDate(GREATBALL_RANKED_LOBBY_CRON)
-    const nextUltraBallRanked = getNextDate(ULTRABALL_RANKED_LOBBY_CRON)
-    const nextScribble = getNextDate(SCRIBBLE_LOBBY_CRON)
-    const nextSpecialLobbyDateInt = Math.min(
-      nextGreatBallRanked,
-      nextUltraBallRanked,
-      nextScribble
-    )
-    this.nextSpecialLobbyDate = new Date(
-      nextSpecialLobbyDateInt * 1000
-    ).toISOString()
+  async createTournament(name: string, startDate: string) {
+    const id = crypto.randomUUID()
+    logger.debug(`creating tournament id ${id}`)
+    return tournament.create({
+      id,
+      name,
+      startDate,
+      brackets: new Map(),
+      players: new Map(),
+      finished: false
+    } as unknown as Partial<ITournament>)
+  }
 
-    if (nextSpecialLobbyDateInt === nextGreatBallRanked) {
-      this.nextSpecialLobbyType = "GREATBALL_RANKED"
-    } else if (nextSpecialLobbyDateInt === nextUltraBallRanked) {
-      this.nextSpecialLobbyType = "ULTRABALL_RANKED"
-    } else if (nextSpecialLobbyDateInt === nextScribble) {
-      this.nextSpecialLobbyType = "SCRIBBLE"
-    }
+  removeTournament(id: string) {
+    tournament.findByIdAndDelete(id).then((result) => {
+      logger.debug(`deleted tournament id ${id}`)
+      const tournamentIndex = this.tournaments.findIndex((m) => m.id === id)
+      if (tournamentIndex !== -1) {
+        this.tournaments.splice(tournamentIndex, 1)
+      }
+    })
   }
 }

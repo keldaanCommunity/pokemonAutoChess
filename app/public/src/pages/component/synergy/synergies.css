@@ -1,22 +1,22 @@
-.synergies-container {
+.synergies-container .draggable-window-content {
   display: flex;
   flex-flow: column;
-  color: #fff;
-  background-color: #61738a;
+  color: var(--color-fg-primary);
   font-size: 1em;
   overflow-y: auto;
+  padding: 0;
 }
 
 #game-wrapper .synergies-container {
   position: absolute;
   left: 0.5%;
   top: 9%;
-  max-height: 73%;
   padding: 0;
+  max-height: 70%;
 }
 
-.synergies-header {
-  padding: 10px;
-  text-align: center;
-  font-size: 1.3vw;
+@media (aspect-ratio < 4 / 3) {
+  #game-wrapper .synergies-container {
+    max-height: 70%;
+  }
 }
