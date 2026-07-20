@@ -770,7 +770,13 @@ function ReplayLibrary({
                                 disabled={busy}
                                 onClick={() => watchStored(f.roomId)}
                               >
-                                ▶ {t("replay.library.watch")}
+                                <img
+                                  src="/assets/ui/play.svg"
+                                  alt="▶"
+                                  width={24}
+                                  height={24}
+                                />{" "}
+                                {t("replay.library.watch")}
                               </button>
                               <button
                                 className="bubbly replay-row-btn"
@@ -778,14 +784,25 @@ function ReplayLibrary({
                                 title={t("replay.library.download_tip")}
                                 onClick={() => download(f)}
                               >
-                                ⬇
+                                <img
+                                  src="/assets/ui/save.svg"
+                                  alt="⬇"
+                                  width={24}
+                                  height={24}
+                                />{" "}
+                                {t("replay.library.download_tip")}
                               </button>
                               <button
-                                className="bubbly replay-row-btn"
+                                className="bubbly red replay-row-btn"
                                 title={t("delete")}
                                 onClick={() => setConfirmDelete(f.roomId)}
                               >
-                                🗑
+                                <img
+                                  src="/assets/ui/trash.svg"
+                                  alt="🗑"
+                                  width={24}
+                                  height={24}
+                                />{" "}
                               </button>
                             </>
                           )
@@ -822,7 +839,13 @@ function ReplayLibrary({
                         className="bubbly blue replay-row-btn"
                         onClick={playPreview}
                       >
-                        ▶ {t("replay.library.watch")}
+                        <img
+                          src="/assets/ui/play.svg"
+                          alt="▶"
+                          width={24}
+                          height={24}
+                        />{" "}
+                        {t("replay.library.watch")}
                       </button>
                       <button
                         className="bubbly replay-row-btn"
