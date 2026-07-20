@@ -1,5 +1,4 @@
 import type { Room } from "@colyseus/sdk"
-import firebase from "firebase/compat/app"
 import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
@@ -21,6 +20,7 @@ import {
 } from "../../../../types"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
+import { Gifts } from "../../../../types/enum/GiftShop"
 import { type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
@@ -43,6 +43,7 @@ import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
 import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import { SellZone } from "../components/sell-zone"
+import { UseItemZone } from "../components/useitem-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
@@ -68,12 +69,14 @@ export default class GameScene extends Scene {
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
+  useItemZone: UseItemZone | undefined
   lastDragDropPokemon: PokemonSprite | undefined
   lastPokemonDetail: PokemonSprite | null = null
   minigameManager: MinigameManager | null = null
   loadingManager: LoadingManager | null = null
   started: boolean = false
   spectate: boolean = false
+  spectatedPlayerId: string | undefined = undefined
 
   constructor() {
     super({
@@ -82,11 +85,17 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data: { room: Room<GameState>; spectate: boolean }) {
+  init(data: {
+    room: Room<GameState>
+    uid: string
+    spectate: boolean
+    spectatedPlayerId?: string
+  }) {
     this.tilemaps = new Map()
     this.room = data.room
     this.spectate = data.spectate
-    this.uid = firebase.auth().currentUser?.uid
+    this.spectatedPlayerId = data.spectatedPlayerId
+    this.uid = data.uid
     this.started = false
     globalThis.devcommand = (action: string, ...params: any[]) =>
       this.room?.send(Transfer.DEV, { action, ...params })
@@ -124,7 +133,7 @@ export default class GameScene extends Scene {
 
       const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
       const player = this.room.state.players.get(
-        this.spectate ? playerUids[0] : this.uid
+        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
       ) as Player
 
       this.setMap(player.map)
@@ -312,6 +321,11 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.SELL_POKEMON, pokemon.id)
   }
 
+  useitem(item: Item) {
+    if (!item) return
+    this.room?.send(Transfer.USE_ITEM, item)
+  }
+
   removeFromShop(index: number) {
     this.room?.send(Transfer.REMOVE_FROM_SHOP, index)
   }
@@ -426,6 +440,7 @@ export default class GameScene extends Scene {
 
   setupMouseEvents() {
     this.sellZone = new SellZone(this)
+    this.useItemZone = new UseItemZone(this)
     this.dropSpots = []
 
     for (let y = 0; y < 4; y++) {
@@ -548,6 +563,9 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
+            this.useItemZone.showForItem(this.itemDragged.name)
+          }
         }
       }
     )
@@ -599,6 +617,7 @@ export default class GameScene extends Scene {
       ) => {
         this.dropSpots.forEach((spot) => spot.setVisible(false))
         this.sellZone?.hide()
+        this.useItemZone?.hide()
 
         if (gameObject instanceof PokemonSprite) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
@@ -675,6 +694,10 @@ export default class GameScene extends Scene {
               id: gameObject.name
             })
           }
+          // Use Item zone
+          else if (dropZone.name == "useitem-zone") {
+            this.useitem(this.itemDragged.name)
+          }
           // RETURN TO ORIGINAL SPOT
           else {
             const player = this.room?.state.players.get(this.uid!)
@@ -688,6 +711,7 @@ export default class GameScene extends Scene {
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.sellZone?.hide()
+      this.useItemZone?.hide()
       this.dropSpots.forEach((spot) => spot.setVisible(false))
       if (!dropped && gameObject?.input) {
         gameObject.x = gameObject.input.dragStartX
@@ -775,6 +799,14 @@ export default class GameScene extends Scene {
           // pokemon dragged above sell zone: highlight the sell zone
           this.sellZone?.onDragEnter()
         }
+
+        if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          // pokemon dragged above sell zone: highlight the sell zone
+          this.useItemZone?.onDragEnter()
+        }
       },
       this
     )
@@ -801,6 +833,13 @@ export default class GameScene extends Scene {
           gameObject instanceof PokemonSprite
         ) {
           this.sellZone?.onDragLeave()
+        }
+
+        if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          this.useItemZone?.onDragLeave()
         }
 
         if (

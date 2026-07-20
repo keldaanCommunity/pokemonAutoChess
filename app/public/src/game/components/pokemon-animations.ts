@@ -3319,6 +3319,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE
   },
+  [Pkm.KECLEON_PURPLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
   [Pkm.CARBINK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,

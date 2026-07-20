@@ -33,4 +33,22 @@
   --color-rarity-legendary: #e6cb49;
   --color-rarity-special: #e58ee5;
   --color-rarity-hatch: #b9915a;
+
+  --color-team1: #f9e07f;
+  --color-team2: #f4a7b9;
+  --color-team3: #a8e6e6;
+  --color-team4: #b8e6a0;
+  
+  /* replay event log per-category accents: filter chip fill and row type text */
+  --color-replay-cat-combat: #ff9a8f;
+  --color-replay-cat-status: #ff8fac;
+  --color-replay-cat-stats: #ffab7a;
+  --color-replay-cat-economy: var(--color-fg-gold);
+  --color-replay-cat-items: #e0a368;
+  --color-replay-cat-flow: #8fd0ff;
+  --color-replay-cat-synergy: #9be08f;
+  --color-replay-cat-flavor: #c9a3ff;
+  --color-replay-cat-positioning: #6fd6c4;
+  --color-replay-cat-moves: #7ab6d6;
+  --color-replay-cat-engine: #aab0b6;
 }

@@ -17,6 +17,7 @@ import {
   Flavors,
   HerbaMysticas,
   Item,
+  ItemComponents,
   ItemRecipe,
   MemoryDiscs,
   NonSpecialBerries,
@@ -591,18 +592,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect(({ attacker, target, board }) => {
-      target.handleDamage({
-        damage: Math.round(0.08 * target.maxHP),
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker,
-        shouldTargetGainMana: true
-      })
-    })
-  ],
-
   [Item.SHELL_BELL]: [
     new OnDamageDealtEffect(({ pokemon, damage, target }) => {
       if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
@@ -1172,6 +1161,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
+        } else if(isIn(ItemComponents, heldItem)){
+          player.items.push(heldItem)
+          pokemon.removeItem(heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
           removeInArray(player.scarvesItems, heldItem)

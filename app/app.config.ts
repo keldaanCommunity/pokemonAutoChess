@@ -299,6 +299,10 @@ export const server = defineServer({
       res.sendFile(viewsSrc)
     })
 
+    app.get("/replay", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
     app.get("/after", (req, res) => {
       res.sendFile(viewsSrc)
     })

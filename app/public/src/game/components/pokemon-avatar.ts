@@ -3,10 +3,18 @@ import { GameObjects } from "phaser"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
   AvatarEmotions,
-  type Emotion,
+  CollectionEmotions,
+  Emotion,
   type IPokemonAvatar
 } from "../../../../types"
 import { GamePhaseState } from "../../../../types/enum/Game"
+import { Item } from "../../../../types/enum/Item"
+import {
+  type PlayerDialog,
+  PlayerDialogs
+} from "../../../../types/enum/PlayerDialog"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { isIn } from "../../../../utils/array"
 import { getAvatarString } from "../../../../utils/avatar"
 import { throttle } from "../../../../utils/function"
 import { showEmote } from "../../network"
@@ -233,14 +241,23 @@ export default class PokemonAvatar extends PokemonSprite {
     else this.showEmoteMenu()
   }
 
-  sendEmote(emotion: Emotion) {
+  sendEmote(emote: Emotion | Item | Pkm | PlayerDialog) {
     const state = store.getState()
-    if (state.game.emotesUnlocked.includes(emotion)) {
-      showEmote(
-        getAvatarString(this.pokemon.index, this.pokemon.shiny, emotion)
-      )
-      this.hideEmoteMenu()
+    if (isIn(CollectionEmotions, emote)) {
+      if (state.game.emotesUnlocked.includes(emote)) {
+        showEmote(
+          getAvatarString(this.pokemon.index, this.pokemon.shiny, emote)
+        )
+      }
+    } else if (emote in Pkm) {
+      showEmote(getAvatarString(PkmIndex[emote], false, Emotion.NORMAL))
+    } else if (emote in Item) {
+      showEmote("item/" + emote)
+    } else if (isIn(PlayerDialogs, emote)) {
+      showEmote("player_dialog/" + emote)
     }
+
+    this.hideEmoteMenu()
   }
 
   playAnimation() {

@@ -371,7 +371,7 @@ export class DebugScene extends Phaser.Scene {
       if (status === Status.CURSE) {
         this.pokemonSprite.addCurse()
       }
-      if (status == Status.RUNE_PROTECT) {
+      if (status == Status.SAFEGUARD) {
         this.pokemonSprite.addRuneProtect()
       }
       if (status == Status.RAGE) {

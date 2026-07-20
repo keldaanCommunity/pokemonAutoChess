@@ -28,7 +28,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
-- New visual animations for Budew line
+- Buff Budew line: DEF/ SPE_DEF: 2 at all ranks → 2/4/6 ; ATK: 5/15/17 → 5/15/25
+- Rework Petal Dance (Budew): Release 3/4/5 petals spread equally among the closest enemy pokemon. New visual animation. Projectiles now have travel time.
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
 - Dondozo gains Monster synergy. HP: 250 → 220
@@ -48,6 +49,15 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
 - Buff Deoxys Speed Form: SPEED 90 → 100
 - Revert Articuno buff from 6.2; PP 110 → 120
+- Nerf all Eeveelutions: HP 180 → 150
+
+> Lapras can't enough nerfs. Back to 120PP for the third time.
+
+- Lapras DEF: 7 → 5 ; PP: 100 → 120
+- Change Entrainment (Audino): can no longer a target already entrained
+- Buff Ember board effect: BURN duration 1 second → 2 seconds
+- Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
+- Nerf Enamorus: ATK 26 → 23
 
 # Changes to Synergies
 
@@ -59,28 +69,39 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
-
-
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
+- RECYCLE_TICKET now also remove base components
+- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
+- PUNCHING_GLOVE additional damage is no longer applied as a separate instance of damage but added to the attack damage instead. This makes it better against FIGHTING comps.
 
 # UI
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
 - Add in Wiki > Pokémon a tab for units that are not Pokémon
+- Uxie XP gained is now indicated in their tooltip
 
 # Bugfix
 
+- Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
+- Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
+
 # Misc
 
+- Rune Protect status is renamed to Safeguard
 - New title: Five Stars
 - New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
 - Avatar emotes can now be used in lobby chat
 - Add symbols to tier list maker gadget and change layout
 - Add /unholdable-items GET endpoint
+- Improved colorblind patterns on pokemon portraits in shop
+- New gadget: Recorder ; unlocked at level 10, allows you to record your games in the background and watch and save replays. Thanks to brobinett for that huge work.
+- Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
+- Tier List Maker gadget is now unlocked at level 25 instead of level 50
+- Sprite Tracker gadget  is now unlocked at level 50 instead of level 60

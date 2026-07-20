@@ -1,5 +1,6 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
+import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   ArtificialItems,
   Berries,
@@ -365,6 +366,14 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} />
+        </ul>
+      </article>
+
+      <article className="double-up-items">
+        <h2>{t("wiki.items.gifts")}</h2>
+        <p>{t("wiki.items.gifts_description")}</p>
+        <ul className="gifts">
+          <ItemList items={Gifts} />
         </ul>
       </article>
 

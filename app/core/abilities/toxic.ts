@@ -10,12 +10,12 @@ export class ToxicStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const factor = 0.5
-    const baseDuration = [3000, 6000, 9000, 18000][pokemon.stars - 1] ?? 18000
+    const flatDuration = [1500, 3000, 4500, 9000][pokemon.stars - 1] ?? 9000
+    const durationWithAP = flatDuration * (2 + pokemon.ap / 100)
+    const critScalingFactor = 0.5
     const duration = Math.round(
-      baseDuration *
-        (1 + (pokemon.ap / 100) * factor) *
-        (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      durationWithAP *
+        (crit ? 1 + (pokemon.critPower - 1) * critScalingFactor : 1)
     )
     const count = [1, 2, 3, 4][pokemon.stars - 1] ?? 4
 

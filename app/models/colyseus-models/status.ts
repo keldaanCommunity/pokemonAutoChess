@@ -56,12 +56,12 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
   @type("boolean") tree = false
-  burnOrigin: PokemonEntity | undefined = undefined
-  poisonOrigin: PokemonEntity | undefined = undefined
-  silenceOrigin: PokemonEntity | undefined = undefined
-  woundOrigin: PokemonEntity | undefined = undefined
-  charmOrigin: PokemonEntity | undefined = undefined
-  possessedOrigin: PokemonEntity | undefined = undefined
+  burnOrigin: PokemonEntity | null = null
+  poisonOrigin: PokemonEntity | null = null
+  silenceOrigin: PokemonEntity | null = null
+  woundOrigin: PokemonEntity | null = null
+  charmOrigin: PokemonEntity | null = null
+  possessedOrigin: PokemonEntity | null = null
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -439,58 +439,56 @@ export default class Status extends Schema implements IStatus {
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
-      if (this.burnOrigin) {
-        let burnDamage = pkm.maxHP * 0.05
-        if (pkm.simulation.weather === Weather.DROUGHT) {
-          burnDamage *= 1.3
-          const nbHeatRocks = pkm.player
-            ? count(pkm.player.items, Item.HEAT_ROCK)
-            : 0
-          if (nbHeatRocks > 0) {
-            burnDamage *= 1 - 0.2 * nbHeatRocks
-          }
-        } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage *= 0.7
+      let burnDamage = pkm.maxHP * 0.05
+      if (pkm.simulation.weather === Weather.DROUGHT) {
+        burnDamage *= 1.3
+        const nbHeatRocks = pkm.player
+          ? count(pkm.player.items, Item.HEAT_ROCK)
+          : 0
+        if (nbHeatRocks > 0) {
+          burnDamage *= 1 - 0.2 * nbHeatRocks
         }
-
-        if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage *= 0.5
-        }
-
-        if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-          burnDamage *= 0.7
-        } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-          burnDamage *= 0.5
-        } else if (
-          pkm.effects.has(EffectEnum.WATER_VEIL) ||
-          pkm.effects.has(EffectEnum.SURGE_SURFER)
-        ) {
-          burnDamage *= 0.3
-        }
-
-        if (
-          pkm.passive === Passive.WELL_BAKED ||
-          pkm.items.has(Item.MAGMARIZER)
-        ) {
-          burnDamage = 0
-        }
-
-        if (pkm.items.has(Item.COOKING_POT)) {
-          pkm.addSpeed(10, pkm, 0, false)
-        }
-
-        burnDamage = Math.round(burnDamage)
-        if (burnDamage > 0) {
-          pkm.handleDamage({
-            damage: burnDamage,
-            board,
-            attackType: AttackType.TRUE,
-            attacker: this.burnOrigin,
-            shouldTargetGainMana: true
-          })
-        }
-        this.burnDamageCooldown = 1000
+      } else if (pkm.simulation.weather === Weather.RAIN) {
+        burnDamage *= 0.7
       }
+
+      if (pkm.items.has(Item.ASSAULT_VEST)) {
+        burnDamage *= 0.5
+      }
+
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        burnDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        burnDamage *= 0.5
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
+      ) {
+        burnDamage *= 0.3
+      }
+
+      if (
+        pkm.passive === Passive.WELL_BAKED ||
+        pkm.items.has(Item.MAGMARIZER)
+      ) {
+        burnDamage = 0
+      }
+
+      if (pkm.items.has(Item.COOKING_POT)) {
+        pkm.addSpeed(10, pkm, 0, false)
+      }
+
+      burnDamage = Math.round(burnDamage)
+      if (burnDamage > 0) {
+        pkm.handleDamage({
+          damage: burnDamage,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: this.burnOrigin,
+          shouldTargetGainMana: true
+        })
+      }
+      this.burnDamageCooldown = 1000
     } else {
       this.burnDamageCooldown -= dt
     }
@@ -505,7 +503,7 @@ export default class Status extends Schema implements IStatus {
   healBurn(pkm: PokemonEntity) {
     if (!this.burn) return
     this.burn = false
-    this.burnOrigin = undefined
+    this.burnOrigin = null
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
@@ -540,7 +538,7 @@ export default class Status extends Schema implements IStatus {
   updateSilence(dt: number) {
     if (this.silenceCooldown - dt <= 0) {
       this.silence = false
-      this.silenceOrigin = undefined
+      this.silenceOrigin = null
     } else {
       this.silenceCooldown -= dt
     }
@@ -671,7 +669,7 @@ export default class Status extends Schema implements IStatus {
 
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
-      this.poisonOrigin = undefined
+      this.poisonOrigin = null
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
@@ -866,7 +864,7 @@ export default class Status extends Schema implements IStatus {
   updateCharm(dt: number, pkm: PokemonEntity) {
     if (this.charmCooldown - dt <= 0) {
       this.charm = false
-      this.charmOrigin = undefined
+      this.charmOrigin = null
       pkm.setTarget(null) // force retargeting
     } else {
       this.charmCooldown -= dt
@@ -898,7 +896,7 @@ export default class Status extends Schema implements IStatus {
   updateWound(dt: number) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false
-      this.woundOrigin = undefined
+      this.woundOrigin = null
     } else {
       this.woundCooldown -= dt
     }
