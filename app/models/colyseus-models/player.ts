@@ -124,7 +124,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") tradeStatus: TradeStatus = TradeStatus.PENDING
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>(Item.RECYCLE_TICKET)
+  @type(["string"]) items = new ArraySchema<Item>()
   @type(["string"]) scarvesItems = new ArraySchema<Item>()
   @type(["string"]) fairyWands = new ArraySchema<Item>()
   @type("uint8") rank: number

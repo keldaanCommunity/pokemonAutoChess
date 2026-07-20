@@ -203,17 +203,7 @@ export default function GameChoice() {
                     fontSize: "1.5rem"
                   }}
                 >
-                  {choice.costs[index]}
-                  <img
-                    className="icon-money"
-                    src="/assets/icons/money.svg"
-                    alt="$"
-                    style={{
-                      marginLeft: "0.25em",
-                      width: "1.5rem",
-                      height: "1.5rem"
-                    }}
-                  />
+                  {addIconsToDescription(t("player_choices.cost_amount", { cost: choice.costs[index] }))}
                 </p>}
               </div>
             ))}

@@ -245,11 +245,14 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && (
-          <NavLink svg="compact-disc" onClick={() => navigate("/replay")}>
-            {t("replay.nav")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.recorder.disabled &&
+            profileLevel >= GADGETS.recorder.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="compact-disc" onClick={() => navigate("/replay")}>
+              {t("replay.nav")}
+            </NavLink>
+          )}
 
         {page !== "game" &&
           ((!GADGETS.pokeguesser.disabled &&

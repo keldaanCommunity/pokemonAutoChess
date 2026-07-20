@@ -1089,7 +1089,11 @@ export default class BoardManager {
       }
     }
 
-    this.tradingPlatform?.updateTradeIfPokemonInvolved(pokemon, player, this.mode)
+    this.tradingPlatform?.updateTradeIfPokemonInvolved(
+      pokemon,
+      player,
+      this.mode
+    )
   }
 
   closeTooltips() {
@@ -1525,26 +1529,31 @@ export default class BoardManager {
     rewards: Item[]
   ) {
     chest.anims.play("open_chest")
+    this.showRewards(chestGroup, rewards, chest.x, chest.y, chest.depth + 1)
+  }
+
+  showRewards(
+    group: Phaser.GameObjects.Group,
+    rewards: Item[],
+    x: number,
+    y: number,
+    depth: number
+  ) {
     rewards.forEach((item, i) => {
-      const itemSprite = this.scene.add.sprite(
-        chest.x,
-        chest.y,
-        "item",
-        item + ".png"
-      )
-      itemSprite.setScale(0.5).setDepth(chest.depth + 1)
-      const shinyEffect = this.scene.add.sprite(chest.x, chest.y, "shine")
+      const itemSprite = this.scene.add.sprite(x, y, "item", item + ".png")
+      itemSprite.setScale(0.5).setDepth(depth + 1)
+      const shinyEffect = this.scene.add.sprite(x, y, "shine")
       shinyEffect
         .setScale(2)
-        .setDepth(chest.depth + 1)
+        .setDepth(depth + 1)
         .play("shine")
-      chestGroup?.addMultiple([itemSprite, shinyEffect])
+      group?.addMultiple([itemSprite, shinyEffect])
       this.scene.tweens.add({
         targets: [itemSprite, shinyEffect],
         ease: Phaser.Math.Easing.Quadratic.Out,
         duration: 1000,
-        y: chest.y - 48,
-        x: chest.x + (i - (rewards.length - 1) / 2) * 70
+        y: y - 48,
+        x: x + (i - (rewards.length - 1) / 2) * 70
       })
     })
   }

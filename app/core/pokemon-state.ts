@@ -235,6 +235,10 @@ export default abstract class PokemonState {
         )
       }
 
+      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
+        physicalDamage += Math.round(0.08 * target.maxHP)
+      }
+
       const totalDamage = physicalDamage + specialDamage + trueDamage
 
       pokemon.getEffects(BeforeAttackEffect).forEach((effect) => {
@@ -247,7 +251,6 @@ export default abstract class PokemonState {
           trueDamage,
           totalDamage,
           isTripleAttack,
-          hasAttackKilled,
           crit
         })
       })
@@ -637,7 +640,11 @@ export default abstract class PokemonState {
           damageOnShield = reducedDamage
           residualDamage = 0
         }
-        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS)) {
+        if (
+          attacker &&
+          attacker.items.has(Item.PROTECTIVE_PADS) &&
+          pokemon.id !== attacker.id
+        ) {
           damageOnShield *= 2 // double damage on shield
         }
         if (damageOnShield >= pokemon.shield) {

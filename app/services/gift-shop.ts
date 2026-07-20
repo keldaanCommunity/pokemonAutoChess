@@ -1,4 +1,9 @@
-import { EvolutionTime, getBaseAltForm, PkmsWithAltForms } from "../config"
+import {
+  BOARD_WIDTH,
+  EvolutionTime,
+  getBaseAltForm,
+  PkmsWithAltForms
+} from "../config"
 import { giveRandomEgg } from "../core/eggs"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import type Player from "../models/colyseus-models/player"
@@ -12,6 +17,9 @@ import {
   Dishes,
   type IPokemon,
   Item,
+  ItemComponentsNoFossilOrScarf,
+  NonSpecialBerries,
+  ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
@@ -22,7 +30,7 @@ import type { Gift } from "../types/enum/GiftShop"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
-import { getFirstAvailablePositionInBench } from "../utils/board"
+import { getFirstAvailablePositionInBench, isOnBench } from "../utils/board"
 import { max } from "../utils/number"
 import {
   chance,
@@ -30,6 +38,7 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 
 const giftAmountOfItem =
   (amount: number, itemsSet: Item[]) => (toPlayer: Player) => {
@@ -223,10 +232,17 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
   toPlayer.items.push(Item.PICNIC_SET)
 }
 
+const giftXP = (amount: number) => (toPlayer: Player) => {
+  const xpActuallyGained = toPlayer.addExperience(24)
+  if (xpActuallyGained < amount) {
+    toPlayer.addMoney(amount - xpActuallyGained, true, null)
+  }
+}
+
 type GiftEffect = (toPlayer: Player, fromPlayer: Player) => void
 
 export const GiftEffects: {
-  [key in Gift]: GiftEffect
+  [key in Gift]: GiftEffect | GiftEffect[]
 } = {
   [Item.BERRIES_GIFT]: giftAmountOfItem(7, Berries),
   [Item.SWEETS_GIFT]: giftAmountOfItem(7, Sweets),
@@ -245,7 +261,16 @@ export const GiftEffects: {
   [Item.STAR_GIFT]: evolveRandomPokemonInBoard,
   [Item.GEMS_BUNDLE]: giftAmountOfItem(3, SynergyGems),
   [Item.POTION]: giftPotion,
-  [Item.DELUXE_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
+  [Item.FORAGE_BAG]: giftAmountOfItem(3, ItemComponentsNoFossilOrScarf),
+  [Item.COLLECTION_BOX]: [
+    giftAmountOfItem(1, [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE]),
+    giftAmountOfItem(1, [Item.SILK_SCARF]),
+    giftAmountOfItem(1, CraftableItemsNoScarves),
+    giftAmountOfItem(1, Tools),
+    giftAmountOfItem(2, NonSpecialBerries)
+  ],
+  [Item.PRETTY_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
+  [Item.DELUXE_BOX]: giftAmountOfItem(1, ShinyItems),
   [Item.TOOLBOX]: giftAmountOfItem(3, Tools),
   [Item.COMMON_GIFT]: giftRandomPokemonByRarity(Rarity.COMMON),
   [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
@@ -254,5 +279,33 @@ export const GiftEffects: {
   [Item.ULTRA_GIFT]: giftRandomPokemonByRarity(Rarity.ULTRA),
   [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
   [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
-  [Item.EXP_GIFT]: (player: Player) => player.addExperience(24)
+  [Item.SMALL_EXP_GIFT]: giftXP(8),
+  [Item.LARGE_EXP_GIFT]: giftXP(24)
+}
+
+export const openGift = (gift: Gift, toPlayer: Player, fromPlayer: Player) => {
+  const benchSpace =
+    BOARD_WIDTH - schemaValues(toPlayer.board).filter(isOnBench).length
+  if (
+    [
+      Item.DITTO_GIFT,
+      Item.COMMON_GIFT,
+      Item.UNCOMMON_GIFT,
+      Item.RARE_GIFT,
+      Item.EPIC_GIFT,
+      Item.LEGENDARY_GIFT,
+      Item.UNIQUE_GIFT,
+      Item.LEGENDARY_GIFT
+    ].includes(gift) &&
+    benchSpace === 0
+  ) {
+    toPlayer.items.push(gift) // player will open gift when they can
+  } else {
+    const giftEffect = GiftEffects[gift]
+    if (Array.isArray(giftEffect)) {
+      giftEffect.forEach((effect) => effect(toPlayer, fromPlayer))
+    } else {
+      giftEffect(toPlayer, fromPlayer)
+    }
+  }
 }

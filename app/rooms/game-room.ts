@@ -46,7 +46,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
-import { GiftEffects } from "../services/gift-shop"
+import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -67,7 +67,7 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { Gifts } from "../types/enum/GiftShop"
+import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
   UnholdableItemsToSaveForStats,
@@ -83,6 +83,7 @@ import {
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
 import { TradeStatus } from "../types/enum/TradeStatus"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
 import type { IDetailledPokemon } from "../types/models/bot-v2"
@@ -116,7 +117,8 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand
+  OnUpdateCommand,
+  OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
@@ -476,6 +478,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
           })
         } catch (error) {
           logger.error("sell drop error", pokemonId)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.USE_ITEM, (client, item: Item) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnUseItemCommand(), {
+            client,
+            item
+          })
+        } catch (error) {
+          logger.error("use item drop error", item)
         }
       }
     })
@@ -919,10 +934,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     let shouldRefetchEventLeaderboard = false
-    const eligibleToELO = true //TEMP
-    /*!this.state.noElo &&
+    const eligibleToELO =
+      !this.state.noElo &&
       (this.state.stageLevel >= MinStageForGameToCount || hasLeftBeforeEnd) &&
-      humans.length >= 2*/
+      humans.length >= 2
 
     const rank = player.rank
     const exp = ExpPlace[rank - 1]
@@ -1375,11 +1390,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
       if (isIn(Gifts, item)) {
-        const partner = this.state.players.get(player.doubleUpPartnerId)
-        if (!partner) return
-        const giftEffect = GiftEffects[item]
-        giftEffect(partner, player)
-        player.giftsGiven.push(item)
+        this.pickGift(item, player)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
@@ -1499,6 +1510,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (player) player.rank = i + 1
       })
     })
+  }
+
+  pickGift(gift: Gift, player: Player) {
+    const partner = this.state.players.get(player.doubleUpPartnerId)
+    if (!partner || !partner.alive) return
+    player.giftsGiven.push(gift)
+
+    partner.spawnWanderingPokemon({
+      pkm: Pkm.KECLEON_PURPLE,
+      shiny: false,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE,
+      data: gift,
+      delay: 3000
+    })
+
+    setTimeout(() => openGift(gift, partner, player), 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {

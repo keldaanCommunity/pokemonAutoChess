@@ -76,6 +76,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
 - RECYCLE_TICKET now also remove base components
+- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
+- PUNCHING_GLOVE additional damage is no longer applied as a separate instance of damage but added to the attack damage instead. This makes it better against FIGHTING comps.
 
 # UI
 
@@ -99,3 +101,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Add symbols to tier list maker gadget and change layout
 - Add /unholdable-items GET endpoint
 - Improved colorblind patterns on pokemon portraits in shop
+- New gadget: Recorder ; unlocked at level 10, allows you to record your games in the background and watch and save replays. Thanks to brobinett for that huge work.
+- Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
+- Tier List Maker gadget is now unlocked at level 25 instead of level 50
+- Sprite Tracker gadget  is now unlocked at level 50 instead of level 60

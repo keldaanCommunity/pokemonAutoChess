@@ -60,6 +60,7 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
+import { openGift } from "../../services/gift-shop"
 import {
   Emotion,
   type IClient,
@@ -84,10 +85,12 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  FreeGifts,
   type Gift,
   GiftShopPrices,
-  PaidGifts
+  Gifts,
+  GiftsTier1,
+  GiftsTier2,
+  GiftsTier3
 } from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
@@ -823,7 +826,7 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (isIn(UnholdableItems, item) && !ConsumableItems.includes(item)) {
-      // Unholdable and non-consummable items should have zero interaction on any Pokémon
+      // Unholdable and non-consumable items should have zero interaction on any Pokémon
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
@@ -984,6 +987,33 @@ export class OnSellPokemonCommand extends Command<
       if (partner) {
         partner.tradeStatus = TradeStatus.PENDING
       }
+    }
+  }
+}
+
+export class OnUseItemCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    item: Item
+  }
+> {
+  execute({ client, item }) {
+    const player = this.state.players.get(client.auth.uid)
+    if (!player || !player.alive || !player.doubleUpPartnerId) return
+
+    const fromPlayer = this.state.players.get(player?.doubleUpPartnerId)
+    if (!fromPlayer) return
+
+    let used = false
+
+    if (isIn(Gifts, item)) {
+      openGift(item, player, fromPlayer)
+      used = true
+    }
+
+    if (used) {
+      removeInArray(player.items, item)
     }
   }
 }
@@ -1521,29 +1551,40 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.gameMode === GameMode.DOUBLE_UP &&
       GiftShopStages.includes(this.state.stageLevel)
     ) {
-      const firstGroup: Player[] = []
-      const secondGroup: Player[] = []
+      const givers: Player[] = []
+      const receivers: Player[] = []
       // Make groups by user id
       this.state.players.forEach((p) => {
-        if (p.id < p.doubleUpPartnerId) firstGroup.push(p)
-        else secondGroup.push(p)
+        const partner = this.state.players.get(p.doubleUpPartnerId)
+        if (!partner) return
+        if (p.giftsGiven.length < partner.giftsGiven.length) {
+          givers.push(p)
+        }
+        if (p.giftsGiven.length > partner.giftsGiven.length) {
+          receivers.push(p)
+        } else if (p.life > partner.life) {
+          givers.push(p)
+        } else if (p.life < partner.life) {
+          receivers.push(p)
+        } else if (p.id < p.doubleUpPartnerId) {
+          givers.push(p)
+        } else {
+          receivers.push(p)
+        }
       })
-      const partnersToPrompt =
-        this.state.stageLevel === GiftShopStages[0] ||
-        this.state.stageLevel === GiftShopStages[2]
-          ? firstGroup
-          : secondGroup
 
-      partnersToPrompt.forEach((p) => {
-        const giftChoices: Gift[] = []
-        giftChoices.push(
-          pickRandomIn(FreeGifts.filter((gift) => !p.giftsGiven.includes(gift)))
-        )
-        const paidOptions = pickNRandomIn(
-          PaidGifts.filter((gift) => !p.giftsGiven.includes(gift)),
-          2
-        )
-        paidOptions.forEach((op) => giftChoices.push(op))
+      givers.forEach((p) => {
+        const giftChoices: [Gift, Gift, Gift] = [
+          pickRandomIn(
+            GiftsTier1.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier2.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier3.filter((gift) => !p.giftsGiven.includes(gift))
+          )
+        ]
 
         p.choices.push(
           new PlayerChoice({
@@ -1569,20 +1610,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         (this.state.specialGameRule === SpecialGameRule.SHINY_HUNTER &&
           pveStage.shinyChance !== undefined) ||
         chance(pveStage.shinyChance ?? 0)
-    }
-
-    if ([14, 24].includes(this.state.stageLevel)) {
-      this.state.players.forEach((player: Player) => {
-        if (player.alive && !player.isBot) {
-          player.spawnWanderingPokemon({
-            pkm: Pkm.KECLEON_PURPLE,
-            shiny: false,
-            type: WandererType.DIALOG,
-            behavior: WandererBehavior.SPECTATE,
-            data: ""
-          })
-        }
-      })
     }
 
     return commands
