@@ -282,6 +282,12 @@ async function resetEventScores() {
             "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
           )
           break
+        case GameEvent.POKEPALS:
+          matchMaker.presence.publish(
+            "announcement",
+            "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
+          )
+          break
       }
     }, 60 * 1000) // wait 1 minute to ensure the clock has ticked to the next month for all servers
   } catch (e) {

@@ -21,14 +21,7 @@ export function EventsMenu() {
   const currentGameEvent = getCurrentGameEvent()
 
   const hasTournamentTab = tournaments.length > 0
-  const hasExpeditionsTab = currentGameEvent === GameEvent.EXPEDITIONS
-  const hasVictoryRoadTab = currentGameEvent === GameEvent.VICTORY_ROAD
-  const tabCount =
-    1 +
-    Number(hasTournamentTab) +
-    Number(hasExpeditionsTab) +
-    Number(hasVictoryRoadTab) +
-    Number(showTwitchTab)
+  const tabCount = 2 + (hasTournamentTab ? 1 : 0) + (showTwitchTab ? 1 : 0)
 
   useEffect(() => {
     let isMounted = true
@@ -95,6 +88,11 @@ export function EventsMenu() {
             <span>{t("victory_road.title")}</span>
           </Tab>
         )}
+         {currentGameEvent === GameEvent.POKEPALS && (
+          <Tab>
+            <span>{t("pokepals.title")}</span>
+          </Tab>
+        )}
       </TabList>
       {showTwitchTab && (
         <TabPanel>
@@ -117,6 +115,11 @@ export function EventsMenu() {
       {currentGameEvent === GameEvent.VICTORY_ROAD && (
         <TabPanel>
           <VictoryRoad />
+        </TabPanel>
+      )}
+      {currentGameEvent === GameEvent.POKEPALS && (
+        <TabPanel>
+          <Pokepals />
         </TabPanel>
       )}
       {!user && <p className="subtitle">{t("loading")}</p>}

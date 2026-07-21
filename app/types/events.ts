@@ -1,9 +1,11 @@
 export enum GameEvent {
   VICTORY_ROAD = "VICTORY_ROAD",
-  EXPEDITIONS = "EXPEDITIONS"
+  EXPEDITIONS = "EXPEDITIONS",
+  POKEPALS = "POKEPALS"
 }
 
 export const GameEvents: GameEvent[] = [
-  GameEvent.VICTORY_ROAD,
-  GameEvent.EXPEDITIONS
+  GameEvent.EXPEDITIONS,
+  GameEvent.POKEPALS,
+  GameEvent.VICTORY_ROAD
 ]

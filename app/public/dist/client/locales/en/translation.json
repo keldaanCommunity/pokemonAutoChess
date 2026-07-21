@@ -5160,6 +5160,14 @@
 		"runners": "Runners",
 		"finishers": "Finishers"
 	},
+	"pokepals": {
+		"title": "Poképals",
+		"points": "{{points}} points",
+		"your_points": "Your points: {{points}}",
+		"instructions": "Play with your pal in Double Up mode !",
+		"help1": "Playing Double Up when teaming up with your designed partner grants you points based on your final rank",
+		"help2": "Get to the top of the leaderboard to receive exclusive titles !"
+	},
 	"events_reset_info": "All scores will be reset at midnight UTC on the first day of each month, that is in {{resetCountdown}}. The event leaderboard is refreshed every 10 minutes.",
 	"stage_type": {
 		"pve": "PvE Encounter",
