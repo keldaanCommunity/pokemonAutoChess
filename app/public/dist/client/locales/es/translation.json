@@ -292,7 +292,7 @@
 		"HYPERSPACE_FURY": "Cerco Dimensión",
 		"SNIPE_SHOT": "Disparo Certero",
 		"AIR_SLASH": "Tajo Aéreo",
-		"EGG_BOMB": "Huevoexplosión",
+		"EGG_BOMB": "Bomba Huevo",
 		"BODY_SLAM": "Golpe Cuerpo",
 		"FLORAL_HEALING": "Cura Floral",
 		"VINE_WHIP": "Látigo Cepa",
@@ -2888,7 +2888,18 @@
 		"EFFICIENT_BANDANNA": "Bandana Eficiente",
 		"NULLIFY_BANDANNA": "Pañuelo anulador",
 		"MACH_RIBBON": "Cinta Mach",
-		"WANTED_NOTICE": "Aviso de búsqueda"
+		"WANTED_NOTICE": "Aviso de búsqueda",
+		"BALL": "Bola",
+		"POTION": "Poción",
+		"AQUA_MONICA": "Acuamónica",
+		"ROCK_HORN": "Cuerno Roca",
+		"TERRA_CYMBAL": "Terracímbalo",
+		"SKY_MELODICA": "Aeromelódica",
+		"ICY_FLUTE": "Flauta Hielo",
+		"GRASS_CORNET": "Herbicorneta",
+		"FIERY_DRUM": "Tambor Fuego",
+		"LEADERS_CREST": "Cresta del Líder",
+		"LAPRAS_PASSPORT": "Pase de viaje de Lapras"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3205,7 +3216,20 @@
 		"TATSUGIRI_DROOPY": "Puede comandar a un Dondozo",
 		"TATSUGIRI_STRETCHY": "Puede comandar a un Dondozo",
 		"FIELD_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FIELD",
-		"MUSHROOMS": "Un conjunto de hongos que pueden ser vendidos por GOLD cuando vuelves a la ciudad."
+		"MUSHROOMS": "Un conjunto de hongos que pueden ser vendidos por GOLD cuando vuelves a la ciudad.",
+		"DRAGON_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo DRAGON",
+		"FLORA_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FLORA",
+		"ROTOM_CATALOG": "Un catálogo de dispositivos que le gustan a Rotom. Usa el catálogo en Rotom para cambiar su forma dependiendo del dispositivo listado dentro.",
+		"RICE": "Da 80 SHIELD. Si un Tatsugiri está en el tablero, también provee las estadísticas adicionales dadas por su forma.",
+		"TINY_MUSHROOM": "Da 30 de SPEED y reduce los HP máximos por 30% durante la próxima partida cuando es consumido. Será vendido por 1 GOLD cuando vuelvas a la ciudad.",
+		"BIG_MUSHROOM": "Da +30% de HP máximo durante la próxima pelea cuando es consumido. Será vendido por 2 GOLD cuando vuelvas a la ciudad.",
+		"BALM_MUSHROOM": "Cuando es consumido, gana SAFEGUARD, 30 SPEED y cura 10% del HP máximo por segundo durante la próxima pelea. Será vendido por 5 GOLD cuando vuelvas a la ciudad.",
+		"GOLDEN_PINAP_BERRY": "Se consume al estar por debajo del 50% HP. Cura 50% de los HP máximos y el jugador obtiene 3 SWEETS aleatorios.",
+		"GOLDEN_RAZZ_BERRY": "Se consume al estar por debajo del 50% HP. Cura 50% de los HP máximos y el jugador obtiene 6 rerolls.",
+		"GOLDEN_NANAB_BERRY": "Se consume al estar por debajo del 50% HP. Cura 50% de los HP máximos y el jugador obtiene 5 GOLD.",
+		"BALL": "Una bola hecha de una baya grande y dura. Cuando utiliza su habilidad, arroja la bola hacia el aliado FIELD más lejano para pasarle la BALL y 50 SHIELD. Si no hay un aliado FIELD con un espacio libre a la vista, arroja la bola hacia el enemigo más lejano, realizando [30,SP]% de la SPEED del usuario como PHYSICAL",
+		"BERRIES": "Busca una baya aleatoria para que el chef la equipe. Si no tiene espacios libres, va a tu inventario.",
+		"GOLD_MASK": "Al comienzo de la pelea, invoca a 3 Pokémon que comparten un tipo con el usuario. La rareza y sus estrellas depende de la etapa de juego."
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3381,7 +3405,28 @@
 		"BIVALVE": "Clamperl evolucionará en Huntail o Gorebyss dependiendo en tu sinergia dominante entre DARK y PSYCHIC",
 		"EISCUE_NOICE": "Cuando comienza una pelea bajo la SNOW, se tranforma en su forma de Cara de Hielo y consigue 100 SHIELD. Cuando inflige o cuando es infligido FREEZE vuelve a su forma de Cara de Hielo y gana 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Cuando utiliza su habilidad, su SHIELD actual es convertido a SPECIAL adicional. Cuanndo el SHIELD es destruido o después de usar su habilidad, Eiscue vuelve a su forma de Deshielo.",
-		"CHILLING_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un relincho gélido que incrementa su ATK en 5"
+		"CHILLING_NEIGH": "Cuando el Pokémon noquea a un enemigo, emite un relincho gélido que incrementa su ATK en 5",
+		"DROUGHT_OR_SANDSTORM": "Cambia el clima a DROUGHT or SANDSTORM basado en tu sinergia dominante entre FIRE y GROUND",
+		"DROUGHT_OR_ZENITH": "Cambia el clima a DROUGHT o ZENITH basado en tu sinergia dominante entre FIRE y LIGHT",
+		"RAIN_OR_STORM": "Cambia el clima a RAIN o STORM basado en tu sinergia dominate entre WATER y ELECTRIC",
+		"GALARIAN_DARMANITAN": "Cuando baja del 30% de sus HP, deja de ser agresivo y se transforma en su modo Zen",
+		"GALARIAN_DARMANITAN_ZEN": "En modo Zen no puede moverse ni atacar, pero cada segundo se cura [10,SP] HP, realiza [25,SP]% del ATK del usuario como SPECIAL a enemigos ADJACENT y los deja BURN.",
+		"DUNSPARCE": "Dunsparce evolucionará después de cavar 20 agujeros en la tierra",
+		"ROTOM": "Rotom puede cambiar de formas eligiendo un nuevo dispositivo que poseer del ROTOM_CATALOG.",
+		"TADBULB": "Cuando comienza la pelea bajo LIGHT o cuando recibe 50 de daño o más, se supercarga y realiza 10 SPECIAL a enemigos ADJACENT, los cuales son empujados hacia atrás (3 segundos de recarga). La primera supercarga le otorga 20 SPEED, 30 SHIELD y ELECTRIC_FIELD",
+		"PINCURCHIN": "Cuando es golpeado por SPECIAL, gana ELECTRIC_FIELD. Mientras está en ELECTRIC_FIELD, los ataques cuerpo a cuerpo recibidos le causan PARALYSIS por dos segundos al atacante.",
+		"STAMINA": "Cada 10 golpes recibidos, gana [20,SP] SHIELD",
+		"SPEWPA": "Los pokémon eclosionados evolucionan automáticamente después de 5 etapas. La evolución depende de tu sinergia dominante entre SOUND NORMAL GHOST ICE FOSSIL GRASS PSYCHIC FIELD WATER FIGHTING HUMAN ROCK AQUATIC STEEL ELECTRIC FIRE LIGHT POISON FAIRY ARTIFICIAL",
+		"GALE_WINGS": "Arroja brasas en el suelo cuando FLY_AWAY. BOARD_EFFECT: las brasas realizan 10 SPECIAL por segundo y dejan BURN a los pokémon que caminan sobre ellas, si no son FLYING o FIRE.",
+		"FINIZEN": "Se transforma en Palafin Héroe después de que 5 aliados sean derrotados (sin contar invocados), o si este Pokémon es el último en pie. Recupera todos sus HP cuando esto pasa.",
+		"COMMANDER": "Tatsugiri no puede llevar objetos. Al comienzo de la pelea, un Dondozo ADJACENT con un espacio libre para un objeto se traga a Tatsugiri. Tatsugiri provee estadísticas basado en su forma:\nForma Curvada: +8 ATK\nForma Lánguida: +8 DEF\nForma Recta: +25 SPEED",
+		"AVALUGG": "Puede llevar consigo hasta 4 $t(pkm.BERGMITE) en su espalda, tomados del banco al comienzo de la pelea.",
+		"WALL_OF_STONE": "Al comienzo de la pelea, Stakataka y todos sus alliados de ROCK en la misma fila ganan 50 SHIELD y son LOCKED hasta que su SHIELD se acabe.",
+		"VESPIQUEN": "El RANGE y la habilidad de Vespiquen difiere basado en la fila en la que empieza. La sinergia BUG no invoca otra combia de Vespiquen, sino que dos Combee.",
+		"STOUTLAND_SEARCH": "Stoutland lada cuando está parado arriba de una casilla con un objeto enterrado.",
+		"SUBSTITUTE": "Un disfraz creado para parecerse a un Pokémon",
+		"PASSIMIAN": "Passimian lleva una BALL como objeto equipado",
+		"UXIE": "XP ganado: {{stacks}}"
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -3398,7 +3443,8 @@
 		"MAX_PP": "PP máximo",
 		"AP": "Poder de habilidad",
 		"SHIELD": "Blindaje",
-		"LUCK": "Suerte"
+		"LUCK": "Suerte",
+		"XP": "XP"
 	},
 	"status": {
 		"BURN": "Quemado",
@@ -3623,7 +3669,8 @@
 		"RESCUE_TEAM_MEMBER": "Compañero de Rescate",
 		"LEGIONNAIRE": "Legionario ",
 		"POFFIN_MASTER": "Maestro del Poffin",
-		"GUILDMASTER": "Maestro del Gremio"
+		"GUILDMASTER": "Maestro del Gremio",
+		"FIVE_STARS": "★★★★★"
 	},
 	"title_description": {
 		"NOVICE": "Juega tu primera partida",
@@ -3714,7 +3761,14 @@
 		"AQUARIOPHILE": "Ten a $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) y a $t(pkm.BASCULIN_WHITE) en el mismo equipo",
 		"POFFIN_MASTER": "Cocina un POFFIN con 3 bayas doradas diferentes en él.",
 		"TOP_GUN": "Llegar a Mach 10 con un MACH_RIBBON.",
-		"SCOUT": "Equipa a tu equipo con por lo menos 5 objetos hechos con SILK_SCARF."
+		"SCOUT": "Equipa a tu equipo con por lo menos 5 objetos hechos con SILK_SCARF.",
+		"RESCUE_TEAM_MEMBER": "Completa una misión de rescate.",
+		"EXPLORER": "Completa una misión de exploración",
+		"POSTMAN": "Completa una misión de entrega",
+		"SURVEY_CORPS": "Completa una misión de batalla",
+		"GUILDMASTER": "Completa una misión de rango S",
+		"LEGIONNAIRE": "Haz una formación de Falinks con 8 soldados o más",
+		"FIVE_STARS": "Juega con un Pokémon de cinco estrellas en tu equipo"
 	},
 	"weather": {
 		"NEUTRAL": "Clima tranquilo",
@@ -4903,5 +4957,7 @@
 		"redsea": "Mar Rojo",
 		"deerling": "Deerling",
 		"origin": "Origen"
-	}
+	},
+	"game_count": "Juegos",
+	"total_games_30d": "Juegos (últimos 30 días)"
 }
