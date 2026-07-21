@@ -70,6 +70,7 @@ import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
+  RemovableItems,
   UnholdableItemsToSaveForStats,
   Wands
 } from "../types/enum/Item"
@@ -1545,6 +1546,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       !canBeTraded(pokemonToTradeB)
     )
       return
+
+    // Remove removable items
+    const itemsToRemoveA = schemaValues(pokemonToTradeA.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerA.items.push(...itemsToRemoveA)
+    pokemonToTradeA.removeItems(itemsToRemoveA, playerA)
+
+    const itemsToRemoveB = schemaValues(pokemonToTradeB.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerB.items.push(...itemsToRemoveB)
+    pokemonToTradeB.removeItems(itemsToRemoveB, playerB)
 
     // Switch Pokémon
 
