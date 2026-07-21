@@ -1992,7 +1992,7 @@
 		"HIDDEN_POWER_J": "Invoque 2 $t(pkm.SHARPEDO) avec un RAZOR_CLAW chacun.",
 		"HIDDEN_POWER_K": "Invoque un $t(pkm.HITMONLEE) avec un RED_ORB et ses PP au maximum.",
 		"HIDDEN_POWER_L": "Toute l'équipe adverse est LOCKED pendant 5 secondes.",
-		"HIDDEN_POWER_M": "Toute votre équipe obtient leur maximum de PP.",
+		"HIDDEN_POWER_M": "Toute votre équipe obtient 80 PP.",
 		"HIDDEN_POWER_N": "Toute votre équipe gagne [50,SP] SHIELD et lance la capacité $t(ability.EXPLOSION).",
 		"HIDDEN_POWER_O": "Cuisine un plat aléatoire pour tous vos Pokémon au prochain combat.",
 		"HIDDEN_POWER_P": "Invoque 5 Pokémon BUG STAR aléatoires.",
