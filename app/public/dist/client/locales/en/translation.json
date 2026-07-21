@@ -3968,7 +3968,7 @@
 			"loading": "Loading saved replays…",
 			"empty": "No replays are saved in this browser yet.",
 			"empty_on": "They'll appear here after you finish a game.",
-			"empty_off": "Recording is currently off, turn it on in the options menu.",
+			"empty_off": "Recording is currently off, turn it on by checking the checkbox at the top.",
 			"empty_unsupported": "Saving replays isn't supported in this browser.",
 			"other_build": "other build",
 			"delete_q": "Delete?",
