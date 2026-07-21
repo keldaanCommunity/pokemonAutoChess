@@ -1,4 +1,8 @@
 import React, { useRef, useState } from "react"
+import {
+  getDescriptionError,
+  resolveDescriptionPreview
+} from "../../utils/ability-description"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./translation-row.css"
 
@@ -25,6 +29,9 @@ export const TranslationRow = React.memo(function TranslationRow({
   const [previewBelow, setPreviewBelow] = useState(false)
   const enWrapRef = useRef<HTMLDivElement>(null)
   const targetWrapRef = useRef<HTMLDivElement>(null)
+  const enPreview = resolveDescriptionPreview(path, enValue)
+  const targetPreview = resolveDescriptionPreview(path, targetValue)
+  const descriptionError = getDescriptionError(path, targetValue, enValue)
 
   function handleFocus(field: "en" | "target") {
     const ref = field === "en" ? enWrapRef : targetWrapRef
@@ -47,7 +54,7 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "en" && enValue && (
           <div className="translation-preview">
-            {addIconsToDescription(enValue)}
+            {addIconsToDescription(enPreview)}
           </div>
         )}
         <textarea
@@ -67,17 +74,22 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "target" && targetValue && (
           <div className="translation-preview">
-            {addIconsToDescription(targetValue)}
+            {addIconsToDescription(targetPreview)}
           </div>
         )}
         <textarea
-          className="translation-target"
+          className={`translation-target${descriptionError ? " placeholder-error" : ""}`}
           value={targetValue}
           rows={1}
           onChange={(e) => onEdit(path, e.currentTarget.value)}
           onFocus={() => handleFocus("target")}
           onBlur={() => setFocused(null)}
         />
+        {descriptionError && (
+          <span className="translation-placeholder-error">
+            {descriptionError}
+          </span>
+        )}
       </div>
 
       <button
