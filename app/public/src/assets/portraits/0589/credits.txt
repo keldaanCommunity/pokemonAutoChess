@@ -1,0 +1,4 @@
+2020-11-05 21:16:15.543935	MUCRUSH	OLD	PMDCollab_1	Normal
+2022-08-11 17:20:40.015647	<@!702275233125630042>	OLD	PMDCollab_1	Normal,Happy,Surprised
+2023-10-26 18:39:19.499622	<@!544245909639397378>	CUR	PMDCollab_2	Normal
+2024-07-24 17:09:18.920526	<@!276369635304275968>	CUR	CC_BY-NC_4	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Special2,Worried,Determined

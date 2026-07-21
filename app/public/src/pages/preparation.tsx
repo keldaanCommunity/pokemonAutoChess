@@ -1,191 +1,279 @@
-import { Client, Room } from "colyseus.js"
+import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
-import { GameUser } from "../../../models/colyseus-models/game-user"
-import { IBot } from "../../../models/mongo-models/bot-v2"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
-import GameState from "../../../rooms/states/game-state"
-import PreparationState from "../../../rooms/states/preparation-state"
-import { NonFunctionPropNames, Transfer } from "../../../types"
+import { useNavigate } from "react-router"
+import { MAX_LOADING_TIME } from "../../../config"
+import type { GameUser } from "../../../models/colyseus-models/game-user"
+import type GameState from "../../../rooms/states/game-state"
+import type PreparationState from "../../../rooms/states/preparation-state"
+import { Transfer } from "../../../types"
+import { CloseCodes, CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import { ConnectionStatus } from "../../../types/enum/ConnectionStatus"
+import { GameMode } from "../../../types/enum/Game"
+import type { NonFunctionPropNames } from "../../../types/HelperTypes"
 import { logger } from "../../../utils/logger"
-import { PreloadingScene } from "../game/scenes/preloading-scene"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { joinPreparation, logIn, setProfile } from "../stores/NetworkStore"
+import {
+  authenticateUser,
+  client,
+  joinPreparation,
+  rooms,
+  toggleReady
+} from "../network"
+import {
+  setConnectionStatus,
+  setErrorAlertMessage
+} from "../stores/NetworkStore"
 import {
   addUser,
   changeUser,
-  leavePreparation,
   pushMessage,
+  removeMessage,
   removeUser,
-  setBotsList,
+  resetPreparation,
+  setBlackList,
+  setGameMode,
   setGameStarted,
-  setLobbyType,
+  setMaxRank,
+  setMinRank,
   setName,
   setNoELO,
   setOwnerId,
   setOwnerName,
   setPassword,
-  setSelectedMap,
-  setUser
+  setSpecialGameRule,
+  setUser,
+  setWhiteList
 } from "../stores/PreparationStore"
 import Chat from "./component/chat/chat"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
 import PreparationMenu from "./component/preparation/preparation-menu"
-import "./preparation.css"
-import { SOUNDS, playSound } from "./utils/audio"
+import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
+import { playSound, SOUNDS } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
-import { FIREBASE_CONFIG } from "./utils/utils"
+import "./preparation.css"
 
 export default function Preparation() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const client: Client = useAppSelector((state) => state.network.client)
-  const room: Room<PreparationState> | undefined = useAppSelector(
-    (state) => state.network.preparation
-  )
+  const room: Room<PreparationState> | undefined = rooms.preparation
+  const user = useAppSelector((state) => state.preparation.user)
   const initialized = useRef<boolean>(false)
-  const preloading = useRef<boolean>(false)
-  const [toGame, setToGame] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
-  const [toLobby, setToLobby] = useState<boolean>(false)
   const connectingToGame = useRef<boolean>(false)
-  const gameRef = useRef<Phaser.Game | null>(null)
-  const preloadingScene = useRef<PreloadingScene>()
-  const [preloadingMessage, setPreloadingMessage] = useState<string>(
-    t("preloading_start")
-  )
 
   useEffect(() => {
     const reconnect = async () => {
-      if (!firebase.apps.length) {
-        firebase.initializeApp(FIREBASE_CONFIG)
-      }
-
-      firebase.auth().onAuthStateChanged(async (user) => {
-        if (user) {
-          dispatch(logIn(user))
+      authenticateUser()
+        .then(async (user) => {
           try {
             if (!initialized.current) {
               initialized.current = true
-              const cachedReconnectionToken = localStore.get(
-                LocalStoreKeys.RECONNECTION_TOKEN
-              )
-              if (cachedReconnectionToken) {
-                const r: Room<PreparationState> = await client.reconnect(
-                  cachedReconnectionToken
-                )
-                localStore.set(
-                  LocalStoreKeys.RECONNECTION_TOKEN,
-                  r.reconnectionToken,
-                  30
-                )
-                await initialize(r, user.uid)
-                dispatch(joinPreparation(r))
+              let r: Room<PreparationState>
+
+              if (rooms.preparation?.connection.isOpen) {
+                r = rooms.preparation
+              } else {
+                const cachedReconnectionToken = localStore.get(
+                  LocalStoreKeys.RECONNECTION_PREPARATION
+                )?.reconnectionToken
+                if (cachedReconnectionToken) {
+                  try {
+                    r = await client.reconnect<PreparationState>(
+                      cachedReconnectionToken
+                    )
+                    if (r.name !== "preparation") {
+                      throw new Error(
+                        `Expected to join a preparation room but joined ${r.name} instead`
+                      )
+                    }
+                    dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
+                  } catch (error) {
+                    logger.error(error)
+                    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+                    dispatch(resetPreparation())
+                    navigate("/lobby")
+                    return
+                  }
+                  joinPreparation(r)
+                } else {
+                  navigate("/lobby")
+                  return
+                }
               }
+
+              await initialize(r, user.uid)
             }
           } catch (error) {
-            setToAuth(true)
             logger.error(error)
+            dispatch(setErrorAlertMessage(t("errors.UNKNOWN_ERROR", { error })))
+            navigate("/")
           }
-        } else {
-          setToAuth(true)
-        }
-      })
+        })
+        .catch((err) => {
+          dispatch(setErrorAlertMessage(t("errors.USER_NOT_AUTHENTICATED")))
+          navigate("/")
+        })
     }
 
-    const initialize = async (r: Room<PreparationState>, uid: string) => {
-      r.state.users.forEach((u) => {
-        dispatch(addUser(u))
-      })
+    const initialize = async (room: Room<PreparationState>, uid: string) => {
+      const $ = getStateCallbacks(room)
+      const $state = $(room.state)
 
-      r.state.listen("gameStarted", (value, previousValue) => {
+      $state.listen("gameStartedAt", (value, previousValue) => {
         dispatch(setGameStarted(value))
       })
 
-      r.state.listen("ownerId", (value, previousValue) => {
+      $state.listen("ownerId", (value, previousValue) => {
         dispatch(setOwnerId(value))
       })
 
-      r.state.listen("ownerName", (value, previousValue) => {
+      $state.listen("ownerName", (value, previousValue) => {
         dispatch(setOwnerName(value))
       })
 
-      r.state.listen("name", (value, previousValue) => {
+      $state.listen("name", (value, previousValue) => {
         dispatch(setName(value))
       })
 
-      r.state.listen("password", (value, previousValue) => {
+      $state.listen("password", (value, previousValue) => {
         dispatch(setPassword(value))
       })
 
-      r.state.listen("noElo", (value, previousValue) => {
+      $state.listen("noElo", (value, previousValue) => {
         dispatch(setNoELO(value))
       })
 
-      r.state.listen("selectedMap", (value, previousValue) => {
-        dispatch(setSelectedMap(value))
+      $state.listen("minRank", (value, previousValue) => {
+        dispatch(setMinRank(value))
       })
 
-      r.state.listen("lobbyType", (value, previousValue) => {
-        dispatch(setLobbyType(value))
+      $state.listen("maxRank", (value, previousValue) => {
+        dispatch(setMaxRank(value))
       })
 
-      r.state.users.onAdd((u) => {
-        dispatch(addUser(u))
+      $state.listen("whitelist", (value, previousValue) => {
+        dispatch(setWhiteList(value))
+      })
 
-        if (u.id === uid) {
-          dispatch(setUser(u))
-        } else if (!u.isBot) {
+      $state.listen("blacklist", (value, previousValue) => {
+        dispatch(setBlackList(value))
+      })
+
+      $state.listen("gameMode", (value, previousValue) => {
+        dispatch(setGameMode(value))
+      })
+
+      $state.listen("specialGameRule", (value, previousValue) => {
+        dispatch(setSpecialGameRule(value))
+      })
+
+      $state.users.onAdd((user) => {
+        dispatch(addUser(user))
+
+        if (user.uid === uid) {
+          dispatch(setUser(user))
+          if (
+            room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+            room.state.gameMode !== GameMode.DOUBLE_UP
+          ) {
+            toggleReady(true) // automatically set users ready in non-classic game mode
+          }
+        } else if (!user.isBot) {
           playSound(SOUNDS.JOIN_ROOM)
         }
 
-        const fields: NonFunctionPropNames<GameUser>[] = [
+        const $user = $(user)
+
+        const fields = [
           "anonymous",
           "avatar",
           "elo",
-          "id",
+          "uid",
           "isBot",
-          "map",
           "name",
           "role",
           "title",
-          "ready"
-        ]
+          "ready",
+          "twitchLogin",
+          "twitchDisplayName",
+          "doubleUpPartnerId",
+          "doubleUpTeamId"
+        ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {
-          u.listen(field, (value, previousValue) => {
+          $user.listen(field, (value, previousValue) => {
             if (field === "ready" && value) {
               playSound(SOUNDS.SET_READY)
             }
-            dispatch(changeUser({ id: u.id, field: field, value: value }))
+            dispatch(changeUser({ id: user.uid, field: field, value: value }))
           })
         })
       })
-      r.state.users.onRemove((u) => {
-        dispatch(removeUser(u.id))
-        if (!u.isBot && u.id !== uid && !connectingToGame.current) {
+      $state.users.onRemove((u) => {
+        dispatch(removeUser(u.uid))
+        if (!u.isBot && u.uid !== uid && !connectingToGame.current) {
           playSound(SOUNDS.LEAVE_ROOM)
         }
       })
-      r.onMessage(Transfer.MESSAGES, (message) => {
-        dispatch(pushMessage(message))
+
+      $state.messages.onAdd((m) => {
+        dispatch(pushMessage(m))
+      })
+      $state.messages.onRemove((m) => {
+        dispatch(removeMessage(m))
       })
 
-      r.onMessage(Transfer.KICK, async () => {
-        await r.leave(false)
-        localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
-        dispatch(leavePreparation())
-        setToLobby(true)
-        playSound(SOUNDS.LEAVE_ROOM)
+      room.onDrop((code) => {
+        const shouldReconnect =
+          code === CloseCodes.ABNORMAL_CLOSURE || code === CloseCodes.TIMEOUT
+        if (shouldReconnect) {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_LOST))
+          logger.log(
+            "Connection closed unexpectedly or timed out. Attempting reconnect."
+          )
+          // Restart the expiry timer of the reconnection token for reconnect
+          localStore.set(
+            LocalStoreKeys.RECONNECTION_PREPARATION,
+            { reconnectionToken: room.reconnectionToken, roomId: room.roomId },
+            30
+          )
+        }
       })
 
-      r.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
-        dispatch(setBotsList(bots))
+      room.onReconnect(() => {
+        dispatch(setConnectionStatus(ConnectionStatus.CONNECTED))
       })
 
-      r.onMessage(Transfer.GAME_START, async (roomId) => {
+      room.onLeave((code) => {
+        const shouldGoToLobby = [
+          CloseCodes.USER_KICKED,
+          CloseCodes.ROOM_DELETED,
+          CloseCodes.ROOM_FULL,
+          CloseCodes.ROOM_EMPTY,
+          CloseCodes.USER_BANNED,
+          CloseCodes.USER_RANK_TOO_LOW,
+          CloseCodes.USER_TIMEOUT
+        ].includes(code)
+
+        logger.info(`left preparation room with code ${code}`)
+        localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+        dispatch(resetPreparation())
+        if (shouldGoToLobby) {
+          const errorMessage =
+            CloseCodesMessages[code as CloseCodes] ?? "UNKNOWN_ERROR"
+          if (errorMessage) {
+            dispatch(setErrorAlertMessage(t(`errors.${errorMessage}`)))
+          }
+          navigate("/lobby")
+          playSound(SOUNDS.LEAVE_ROOM)
+        } else {
+          dispatch(setConnectionStatus(ConnectionStatus.CONNECTION_FAILED))
+        }
+      })
+
+      room.onMessage(Transfer.GAME_START, async (roomId) => {
         const token = await firebase.auth().currentUser?.getIdToken()
         if (token && !connectingToGame.current) {
           playSound(SOUNDS.START_GAME)
@@ -194,79 +282,53 @@ export default function Preparation() {
             idToken: token
           })
           localStore.set(
-            LocalStoreKeys.RECONNECTION_TOKEN,
-            game.reconnectionToken,
-            5 * 60
-          ) // 5 minutes allowed to start game
-          await r.leave()
-          game.connection.close()
-          dispatch(leavePreparation())
-          setToGame(true)
+            LocalStoreKeys.RECONNECTION_GAME,
+            { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
+            MAX_LOADING_TIME / 1000
+          ) // 3 minutes allowed to start game
+          await Promise.allSettled([
+            room.connection.isOpen && room.leave(),
+            game.connection.isOpen && game.leave(false)
+          ])
+          dispatch(resetPreparation())
+          navigate("/game")
         }
-      })
-
-      r.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-        dispatch(setProfile(user))
       })
     }
 
     if (!initialized.current) {
       reconnect()
     }
-  })
+  }, [initialized])
 
-  useEffect(() => {
-    if (!preloading.current) {
-      preloading.current = true
-      preloadingScene.current = new PreloadingScene(
-        () =>
-          setPreloadingMessage(
-            preloadingScene.current?.loadingManager.statusMessage ?? ""
-          ),
-        () => {
-          setPreloadingMessage(t("finished_preloading"))
-          gameRef.current?.destroy(true)
-          gameRef.current = null
-        }
-      )
-      gameRef.current = new Phaser.Game({
-        type: Phaser.AUTO,
-        scene: [preloadingScene.current],
-        backgroundColor: "#000000"
-      })
+  const leavePreparationRoom = useCallback(async () => {
+    if (room?.connection.isOpen) {
+      await room.leave(true)
     }
-  }, [preloading, t])
+    localStore.delete(LocalStoreKeys.RECONNECTION_PREPARATION)
+    dispatch(resetPreparation())
+    navigate("/lobby")
+    playSound(SOUNDS.LEAVE_ROOM)
+  }, [room])
 
-  if (toGame) {
-    return <Navigate to="/game" />
-  }
-  if (toAuth) {
-    return <Navigate to="/" />
-  }
-  if (toLobby) {
-    return <Navigate to="/lobby" />
-  } else {
-    return (
-      <div className="preparation-page">
-        <MainSidebar
-          page="preparation"
-          leaveLabel={t("leave_room")}
-          leave={async () => {
-            await room?.leave(true)
-            localStore.delete(LocalStoreKeys.RECONNECTION_TOKEN)
-            dispatch(leavePreparation())
-            setToLobby(true)
-            playSound(SOUNDS.LEAVE_ROOM)
-          }}
-        />
-        <main>
-          <PreparationMenu />
-          <Chat source="preparation" />
-        </main>
-        <footer>
-          <p id="preloading-message">{preloadingMessage}</p>
-        </footer>
-      </div>
-    )
-  }
+  return (
+    <div className="preparation-page">
+      <MainSidebar
+        page="preparation"
+        leaveLabel={t("leave_room")}
+        leave={leavePreparationRoom}
+      />
+      <main>
+        <PreparationMenu />
+        <div className="my-container custom-bg chat-container">
+          <h2>{user?.anonymous ? t("chat_disabled_anonymous") : t("chat")}</h2>
+          <Chat
+            source="preparation"
+            canWrite={user ? !user.anonymous : false}
+          />
+        </div>
+      </main>
+      <ConnectionStatusNotification />
+    </div>
+  )
 }

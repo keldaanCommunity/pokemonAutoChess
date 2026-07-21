@@ -1,0 +1,3 @@
+2020-10-07 17:58:44.547771	CHUNSOFT	CUR	Unspecified	Angry,Angry^,Crying,Crying^,Determined,Determined^,Dizzy,Dizzy^,Happy,Happy^,Inspired,Inspired^,Joyous,Joyous^,Normal,Normal^,Pain,Pain^,Sad,Sad^,Shouting,Shouting^,Sigh,Sigh^,Stunned,Stunned^,Surprised,Surprised^,Teary-Eyed,TearyEyed^,Worried,Worried^
+2021-06-20 10:22:07.994345	<@!356635814668664832>	OLD	PMDCollab_1	Angry,Angry^,Crying,Crying^,Determined,Determined^,Dizzy,Dizzy^,Happy,Happy^,Inspired,Inspired^,Joyous,Joyous^,Normal,Normal^,Pain,Pain^,Sad,Sad^,Shouting,Shouting^,Sigh,Sigh^,Stunned,Stunned^,Surprised,Surprised^,Teary-Eyed,Teary-Eyed^,Worried,Worried^
+2023-07-21 15:27:40.586337	CHUNSOFT	CUR	Unspecified	Teary-Eyed^

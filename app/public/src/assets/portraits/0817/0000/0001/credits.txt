@@ -1,0 +1,1 @@
+2021-09-29 06:57:04.110926	<@!356635814668664832>	CUR	PMDCollab_1	Normal,Normal^,Happy,Happy^,Pain,Pain^,Angry,Angry^,Worried,Worried^,Sad,Sad^,Crying,Crying^,Shouting,Shouting^,Teary-Eyed,Teary-Eyed^,Determined,Determined^,Joyous,Joyous^,Inspired,Inspired^,Surprised,Surprised^,Dizzy,Dizzy^,Special0,Special0^,Sigh,Sigh^,Stunned,Stunned^

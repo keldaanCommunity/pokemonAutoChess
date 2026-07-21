@@ -1,0 +1,696 @@
+/* the replay viewer's UI styles (controls, overlays, library), imported once by the /replay page;
+ * reuses the game's design tokens (colors.css) and shared classes (.my-container, .bubbly) */
+
+/* ── playback controls bar ─────────────────────────────────────────────────────────────────── */
+.replay-controls {
+  /* shared height for every control, in em so the whole bar tracks the game's responsive body font-size */
+  --replay-controls-ctrl-h: 2em;
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4em;
+  padding: 0.4em 0.6em 0.5em;
+  /* em-based width (52em) so it grows with the bar's font-size; 46vw caps it to ~half a wide screen */
+  width: min(46vw, 52em);
+  /* floor for usability, but never wider than the window itself (unofficial phone players) */
+  min-width: min(360px, calc(100vw - 16px));
+  font-size: 0.875em; /* slightly smaller than the surrounding ui but scales with it */
+  user-select: none;
+}
+
+/* 1fr/auto/1fr keeps the transport optically centered regardless of the side-group widths */
+.replay-controls .replay-controls-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5em;
+}
+.replay-controls .replay-controls-side {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  min-width: 0; /* let a 1fr side shrink instead of forcing the center off-middle */
+}
+.replay-controls .replay-controls-left {
+  justify-content: flex-start;
+}
+.replay-controls .replay-controls-right {
+  justify-content: flex-end;
+}
+.replay-controls .replay-controls-center {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.replay-controls .replay-controls-handle {
+  cursor: move;
+  color: var(--color-fg-secondary);
+  font-size: 1.3em;
+  line-height: 1;
+  padding: 0 0.15em;
+  letter-spacing: -2px;
+  flex: none;
+}
+
+.replay-controls .replay-controls-badge {
+  height: var(--replay-controls-ctrl-h);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.55em;
+  border: var(--border-thin);
+  border-radius: 8px;
+  background: var(--color-bg-secondary);
+  box-shadow: inset -3px -3px 0 0 var(--color-bg-tertiary);
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-fg-secondary);
+}
+.replay-controls .replay-controls-badge.replay-controls-time {
+  font-variant-numeric: tabular-nums;
+}
+.replay-controls .replay-controls-badge.replay-controls-pos.ended {
+  color: var(--color-fg-gold);
+}
+
+/* shrink .bubbly down to control-bar size; flex-center so icons and text sit centered regardless of glyph metrics */
+.replay-controls .bubbly {
+  font-size: 100%;
+  height: var(
+    --replay-controls-ctrl-h
+  ); /* fixed height so the frame-step and every icon button match */
+  box-sizing: border-box;
+  padding: 0 0.45em; /* no vertical padding; fixed height + flex-center owns the vertical metrics */
+  border-radius: 8px;
+  box-shadow:
+    inset -4px -4px 0px 0px var(--color-bg-tertiary),
+    var(--shadow-clickable);
+  min-width: 2.1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* size icons via width, not per-button font-size, so every button keeps the shared font-size and height */
+.replay-controls .replay-controls-icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+  display: block;
+}
+.replay-controls .bubbly.replay-controls-play .replay-controls-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+.replay-controls .bubbly.replay-controls-play {
+  min-width: 2.4em;
+}
+
+.replay-controls .bubbly.replay-controls-skip {
+  min-width: 1.8em;
+}
+.replay-controls .bubbly.replay-controls-skip:disabled {
+  opacity: 0.35;
+  cursor: default;
+  box-shadow: var(--shadow-clickable);
+}
+
+/* wraps the track so the hover tooltip can sit above it without being clipped by the track's overflow */
+.replay-controls .replay-controls-track-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.replay-controls .replay-controls-track {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  background: var(--color-bg-tertiary);
+  border: var(--border-thin);
+  border-radius: 7px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* hover preview: a guide line at the cursor + a tooltip above it (time + stage·phase or nearest event) */
+.replay-controls .replay-controls-hover-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-0.5px);
+  background: var(--color-fg-primary);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.replay-controls .replay-controls-hover-tip {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.45em;
+  align-items: baseline;
+  white-space: nowrap;
+  padding: 2px 7px;
+  font-size: 0.78em;
+  background: var(--color-bg-input);
+  border: var(--border-thin);
+  border-radius: 6px;
+  box-shadow: var(--shadow-clickable);
+  pointer-events: none;
+  z-index: 10;
+}
+.replay-controls .replay-controls-hover-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--color-fg-primary);
+}
+/* segment label colored to match the timeline bands, keyed by segmentBandKind so tooltip and band agree */
+.replay-controls .replay-controls-hover-seg {
+  color: var(--color-fg-secondary);
+}
+.replay-controls .replay-controls-hover-seg.fight {
+  color: var(--color-fg-red);
+}
+.replay-controls .replay-controls-hover-seg.portal {
+  color: var(--color-fg-gold);
+}
+.replay-controls .replay-controls-hover-seg.carousel {
+  color: var(--color-fg-green);
+}
+/* played-region overlay, translucent so the phase bands beneath stay visible */
+.replay-controls .replay-controls-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}
+
+/* stage-typed bands: portal towns yellow, carousels green, fights red, prep the neutral base track */
+.replay-controls .replay-controls-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.replay-controls .replay-controls-band.fight {
+  background: rgba(224, 32, 32, 0.42); /* combat red */
+}
+.replay-controls .replay-controls-band.carousel {
+  background: rgba(74, 165, 46, 0.5); /* wiki #4aa52e */
+}
+.replay-controls .replay-controls-band.portal {
+  background: rgba(230, 203, 73, 0.62); /* wiki #e6cb49 */
+}
+/* .prep intentionally has no band; it reads as the base track colour */
+
+/* playhead: white line with a thin black outline so it reads against the colored bands */
+.replay-controls .replay-controls-playhead {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 3px;
+  transform: translateX(-1.5px);
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* timeline markers: click-to-seek buttons with a wider-than-visible hit area (visible line is a centered ::before) */
+.replay-controls .replay-controls-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 7px;
+  transform: translateX(-50%);
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.replay-controls .replay-controls-mark::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  top: 30%;
+  bottom: 30%;
+  background: var(--color-fg-secondary);
+  opacity: 0.6;
+}
+.replay-controls .replay-controls-mark:hover::before {
+  opacity: 1;
+}
+.replay-controls .replay-controls-mark.stage::before {
+  width: 1px;
+  top: 0;
+  bottom: 0;
+  background: var(--color-fg-primary);
+  opacity: 0.3;
+}
+.replay-controls .replay-controls-mark.stage:hover::before {
+  opacity: 0.75;
+}
+
+/* speed dropdown styled like the .bubbly buttons; fixed width so the longest label (1/8×) never widens the bar */
+.replay-controls .replay-controls-speed-select {
+  font-size: 100%;
+  height: var(--replay-controls-ctrl-h); /* same fixed height as the buttons */
+  box-sizing: border-box;
+  color: #fff;
+  background: var(--color-bg-secondary);
+  border: var(--border-thin);
+  border-radius: 8px;
+  box-shadow:
+    inset -4px -4px 0 0 var(--color-bg-tertiary),
+    var(--shadow-clickable);
+  padding: 0 0.4em;
+  width: 4.2em;
+  text-align: center;
+  text-align-last: center;
+  text-shadow: 2px 2px 2px #00000040;
+  cursor: var(--cursor-hover);
+  font-variant-numeric: tabular-nums;
+}
+
+.replay-controls .replay-controls-step {
+  display: flex;
+  gap: 0.25em;
+}
+
+/* ── full-screen overlays (loading / seeking / error) + the file picker ─────────────────────── */
+/* dims the (re)booting scene; the card uses the game's own .my-container */
+.replay-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 24, 33, 0.82);
+}
+/* landing overlay stays vertically centered; `safe center` top-aligns an over-tall card, scrollbar-gutter avoids a width shift */
+.replay-landing-overlay {
+  align-items: safe center;
+  padding: 4vh 1.5em;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+.replay-overlay-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5em;
+  max-width: 460px;
+  padding: 1.5em 2em;
+}
+.replay-overlay-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--color-fg-primary);
+}
+.replay-overlay-sub {
+  color: var(--color-fg-secondary);
+}
+.replay-overlay-sub code {
+  background: var(--color-bg-input);
+  color: var(--color-fg-accent);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+}
+
+/* error-boundary fallback: reuses the .replay-overlay / .my-container / .bubbly shell; sits above the loading and seek overlays, the message can be a long unbroken error string */
+.replay-boundary {
+  z-index: 2000;
+}
+.replay-boundary-msg {
+  color: var(--color-fg-secondary);
+  font-size: 0.9em;
+  word-break: break-word;
+}
+.replay-boundary-actions {
+  display: flex;
+  gap: 0.6em;
+  justify-content: center;
+  margin-top: 0.5em;
+}
+
+/* limitations blurb under the file picker: what client-side single-POV replays do/don't capture */
+.replay-limitations {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.12));
+  text-align: left;
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: var(--color-fg-secondary);
+  max-width: 42em;
+}
+.replay-limitations-title {
+  /* counter the 0.85em fine-print scale so this matches the column headers at the card's base size */
+  font-size: calc(1em / 0.85);
+  font-weight: 700;
+  color: var(--color-fg-primary);
+  margin-bottom: 0.5em;
+}
+/* the lead heads-up gets more weight than the surrounding fine print */
+.replay-limitations-lead {
+  font-weight: 600;
+  color: var(--color-fg-primary);
+}
+.replay-limitations-subtitle {
+  font-weight: 600;
+  color: var(--color-fg-primary);
+  margin: 0.7em 0 0.2em;
+}
+.replay-limitations p {
+  margin: 0 0 0.5em;
+}
+.replay-limitations ul {
+  margin: 0 0 0.5em;
+  padding-left: 1.2em;
+}
+.replay-limitations li {
+  margin: 0.15em 0;
+}
+/* no trailing margin: the left column scrolls, and a bottom margin here reads as phantom overflow */
+.replay-limitations > :last-child {
+  margin-bottom: 0;
+}
+.replay-limitations strong {
+  color: var(--color-fg-primary);
+  font-weight: 600;
+}
+.replay-limitations em {
+  font-style: normal;
+  color: var(--color-fg-accent);
+}
+
+.replay-spinner {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 0.3em;
+  border: 4px solid var(--color-bg-tertiary);
+  border-top-color: var(--color-fg-accent);
+  border-radius: 50%;
+  animation: replay-spin 0.8s linear infinite;
+}
+@keyframes replay-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.replay-dropzone {
+  margin-top: 0.4em;
+  /* compact vertical padding so the dropzone's height matches a loaded preview / library row */
+  padding: 0.55em 1.6em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55em;
+  border: 3px dashed var(--color-bg-tertiary);
+  border-radius: 12px;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+.replay-dropzone.over {
+  border-color: var(--color-fg-accent);
+  background: rgba(17, 149, 236, 0.12);
+}
+.replay-file-label {
+  cursor: var(--cursor-hover);
+}
+.replay-file-label input[type="file"] {
+  display: none;
+}
+
+/* the external-file preview reuses the library row's presentation (.replay-row); no preview-specific styling needed */
+
+/* replays library: recordings stored in this browser (OPFS) with watch/download/delete + a retention control */
+.replay-library-card {
+  /* em-based so the card tracks the responsive body font-size (16px→22px across resolutions);
+     wide enough that a full team (≤9 portraits + "Top N") fits one line in both columns */
+  max-width: 84em;
+  width: min(84em, 95vw);
+  /* landscape aspect at this width; capped to the viewport so a short screen scrolls instead of clipping */
+  min-height: min(52em, 86vh);
+  /* cap height (not just a floor) so a long recordings list scrolls inside instead of growing the card off-page */
+  max-height: min(52em, 86vh);
+}
+/* even out .my-container's asymmetric padding (0.25em top/bottom vs 0.5em sides); qualifier wins by specificity */
+.replay-library-card.my-container {
+  padding: 0.5em;
+}
+
+/* /replay landing is two columns: dropzone + limitations left, the scrollable recordings list right */
+/* header: back-to-lobby button left + the title centered on the same line via 1fr auto 1fr */
+.replay-landing-header {
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: 25em 1fr 25em;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.6em;
+}
+/* same as the bot-builder's back button; only positioned in the grid */
+.replay-back-btn {
+  justify-self: start;
+  margin: 0;
+}
+.replay-landing-cols {
+  display: grid;
+  /* minmax(0,1fr) (not plain 1fr) forces the two columns to stay equal; a plain 1fr floors at min-content */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  /* one row at the grid height (minmax(0,1fr), not content-sized auto) so a tall list scrolls in the cell, not off-page */
+  grid-template-rows: minmax(0, 1fr);
+  gap: 1.8em;
+  width: 100%;
+  /* stretch so both columns share the taller one's height */
+  align-items: stretch;
+  text-align: left;
+  /* fill the card's remaining height, else the columns sit at content height and leave whitespace below */
+  flex: 1;
+  min-height: 0;
+}
+.replay-landing-left {
+  order: -1; /* renders in the left column (recordings come first in source) */
+  display: flex;
+  flex-direction: column;
+  /* no uniform gap; the header's shared margin lines the picker top up with the first library row */
+  justify-content: flex-start;
+  /* the column's content can outgrow the fixed-height card (the body font scales with resolution but
+     the viewport may not); scroll it inside the column instead of spilling out of the card */
+  min-height: 0;
+  overflow-y: auto;
+}
+/* keep natural heights so the column scrolls; flex would otherwise compress the picker over the blurb below */
+.replay-landing-left > * {
+  flex-shrink: 0;
+}
+.replay-landing-left .replay-dropzone {
+  margin-top: 0;
+}
+/* dropzone and loaded preview share this slot, floored to a library-row height so swapping them doesn't jitter */
+.replay-landing-left .replay-pick-slot {
+  display: flex;
+  flex-direction: column;
+  min-height: 101px;
+}
+.replay-landing-left .replay-pick-slot > .replay-dropzone {
+  flex: 1;
+}
+/* center the dropzone's content vertically in the slot (flex column, so this is the block axis) */
+.replay-landing-left .replay-dropzone {
+  justify-content: center;
+}
+/* recordings list fills the right column, scrolling internally; min-height:0 lets flex shrink below content to scroll */
+.replay-landing-right {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.replay-landing-right .replay-library-list {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+}
+/* limitations blurb fills the column width; drops the base 42em cap that would leave it narrower than the column */
+.replay-landing-left .replay-limitations {
+  max-width: none;
+  margin-top: 1.3em; /* separate the blurb from the picker (no uniform column gap) */
+}
+.replay-library {
+  width: 100%;
+  text-align: left;
+  /* fill the right column so the list (flex:1 below) can stretch to the card bottom */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.replay-library-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 0.5em;
+  /* both columns' heads share this height so the picker and the first recording row start on the same line */
+  min-height: 1.9em;
+}
+.replay-library-label {
+  font-weight: 700;
+  color: var(--color-fg-primary);
+}
+.replay-keep {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.82em;
+  color: var(--color-fg-secondary);
+  white-space: nowrap;
+}
+/* keep-count dropdown inherits the native select styling; only nudged compact for the inline header */
+.replay-keep select {
+  padding: 2px 10px 2px 6px;
+}
+.replay-library-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  max-height: 240px;
+  overflow-y: auto;
+}
+/* rows use the game's native .my-box look, like the profile game-history rows */
+.replay-row {
+  /* box chrome comes from .my-box; only the row's own layout lives here */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15em;
+  padding: 0.4em 0.6em;
+}
+.replay-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8em;
+  flex-wrap: wrap; /* on a narrow card the actions drop below the name instead of overflowing the box */
+}
+.replay-row-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* floor instead of 0: below it the actions wrap under the name rather than squeezing it to a sliver */
+  min-width: min(11em, 100%);
+}
+/* POV player name, the row's primary line; disambiguates whose game a recording is on a shared browser */
+.replay-row-name {
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--color-fg-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.replay-row-meta {
+  font-size: 0.76em;
+  color: var(--color-fg-secondary);
+}
+.replay-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  flex-shrink: 0;
+}
+/* rich row from the file's match-summary trailer: final placement + final-team portraits */
+.replay-row-summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  flex-wrap: nowrap; /* keep the team on one line; portraits shrink-to-fit rather than wrap */
+  min-width: 0;
+  /* reserve the team-portrait height even with no deployed team, so every row stays the same height */
+  min-height: 38px;
+}
+/* placement as plain "Top N" text, matching the profile match history, not a pill */
+.replay-rank {
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-fg-primary);
+  margin-right: 2px;
+}
+/* team portraits: 38px thumbnails, at most MAX_LEVEL=9 (app/config/game/experience.ts); shrink-to-fit rather
+   than wrap or truncate on a narrow card */
+.replay-row-summary .replay-row-portrait {
+  flex: 0 1 38px;
+  min-width: 0;
+  height: auto;
+  aspect-ratio: 1;
+  image-rendering: pixelated;
+}
+.replay-confirm-q {
+  font-size: 0.82em;
+  color: var(--color-fg-secondary);
+}
+/* shrink .bubbly down to row size (specificity beats the base rule) */
+.replay-row .bubbly {
+  font-size: 0.85em;
+}
+.replay-row .bubbly:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.replay-library-empty {
+  padding: 1em 0.5em;
+  text-align: left;
+  font-size: 0.9em;
+  color: var(--color-fg-secondary);
+}
+/* library row tag for a recording made on a different game build (reuses detectBuildSkew) */
+.replay-row-skew {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.05em 0.45em;
+  border-radius: 999px;
+  font-size: 0.92em;
+  font-weight: 600;
+  color: var(--color-fg-invert);
+  background: var(--color-fg-gold);
+  vertical-align: baseline;
+}
+
+/* build-skew notice in the loading overlay: recording on a different game build, so playback may be incomplete */
+.replay-overlay-skew {
+  max-width: 34em;
+  margin-top: 0.6em;
+  padding-top: 0.6em;
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.12));
+  color: var(--color-fg-gold);
+  font-size: 0.85em;
+  line-height: 1.45;
+}
+
+@media (width <= 1280px) {
+  .replay-landing-header {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.6em;
+  }
+}

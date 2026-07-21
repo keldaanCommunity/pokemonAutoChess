@@ -1,250 +1,134 @@
-import { monitor } from "@colyseus/monitor"
-import { WebSocketTransport } from "@colyseus/ws-transport"
-import * as bodyParser from "body-parser"
-import { RedisDriver, RedisPresence, Server, ServerOptions } from "colyseus"
-import compression from "compression"
-import cors from "cors"
-import dotenv from "dotenv"
-import express, { ErrorRequestHandler } from "express"
-import basicAuth from "express-basic-auth"
-import rateLimit from "express-rate-limit"
-import admin from "firebase-admin"
-import http from "http"
-import { connect } from "mongoose"
-import path from "path"
-import { initTilemap } from "./core/design"
-import ItemsStatistics from "./models/mongo-models/items-statistic"
-import Meta from "./models/mongo-models/meta"
-import PokemonsStatistics from "./models/mongo-models/pokemons-statistic"
-import TitleStatistic from "./models/mongo-models/title-statistic"
-import { PRECOMPUTED_POKEMONS_PER_TYPE } from "./models/precomputed"
-import AfterGameRoom from "./rooms/after-game-room"
-import CustomLobbyRoom from "./rooms/custom-lobby-room"
-import GameRoom from "./rooms/game-room"
-import PreparationRoom from "./rooms/preparation-room"
-import { DungeonPMDO, SynergyTriggers } from "./types/Config"
-import { Item } from "./types/enum/Item"
-import { Pkm } from "./types/enum/Pokemon"
-import { logger } from "./utils/logger"
-
-process.env.NODE_APP_INSTANCE
-  ? dotenv.config({ path: path.join(__dirname, "../../../../../.env") })
-  : dotenv.config()
-// console.log(path.join(__dirname, "../../../../../.env"))
-// console.log(process.env)
-
-let port = Number(process.env.PORT) || 9000
-if (process.env.NODE_APP_INSTANCE) {
-  port = Number(process.env.PORT) + Number(process.env.NODE_APP_INSTANCE) // pm2 mode
-}
-
-admin.initializeApp({
-  credential: admin.credential.cert({
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    projectId: process.env.FIREBASE_PROJECT_ID!,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
-  })
-})
-
-const app = express()
-const httpServer = http.createServer(app)
-
-// compress all responses
-app.use(compression())
-
-const properties: ServerOptions = {
-  transport: new WebSocketTransport({
-    server: httpServer
-  })
-}
-
-if (process.env.NODE_APP_INSTANCE) {
-  properties.publicAddress = `localhost:${port}`
-  properties.presence = new RedisPresence({ host: process.env.REDIS_URI })
-  properties.driver = new RedisDriver({ host: process.env.REDIS_URI })
-}
-const gameServer = new Server(properties)
-
-app.use(bodyParser.json())
-
-const viewsSrc = __dirname.includes("server")
-  ? path.join(__dirname, "..", "..", "..", "..", "views", "index.html")
-  : path.join(__dirname, "views", "index.html")
-const clientSrc = __dirname.includes("server")
-  ? path.join(__dirname, "..", "..", "client")
-  : path.join(__dirname, "public", "dist", "client")
-const apiSrc = __dirname.includes("server")
-  ? path.resolve(__dirname, "..", "..", "..", "..", "api-v1", "api-doc.yaml")
-  : path.resolve(__dirname, "api-v1", "api-doc.yaml")
+import { Encoder } from "@colyseus/schema"
+/**
+ * IMPORTANT:
+ * ---------
+ * Do not manually edit this file if you'd like to host your server on Colyseus Cloud
+ *
+ * If you're self-hosting (without Colyseus Cloud), you can manually
+ * instantiate a Colyseus Server as documented here:
+ *
+ * See: https://docs.colyseus.io/server/api/#constructor-options
+ */
+import { listen } from "@colyseus/tools"
+import { logger, matchMaker } from "colyseus"
+import { CronJob } from "cron"
+import { writeHeapSnapshot } from "v8"
+import { server as app } from "./app.config"
+import { initializeMetrics } from "./metrics"
+import { initCronJobs } from "./services/cronjobs"
+import { fetchLeaderboards } from "./services/leaderboard"
+import { fetchMetaReports } from "./services/meta"
+import {
+  refreshSpriteGapData,
+  warmupSpriteGapScanner
+} from "./services/sprite-gap-scanner"
+import { refreshTwitchBlacklist, refreshTwitchStreams } from "./services/twitch"
+import { MaintenanceOrder } from "./types/enum/MaintenanceOrder"
 
 /*
-initialize({
-  apiDoc: fs.readFileSync(apiSrc).toString(),
-  app,
-  operations: {
-    getGameById: [
-      function get(req: Request, res: Response) {
-        OperationHandler.getGameById(req, res)
-      }
-    ],
-    getGamesByName: [
-      function get(req: Request, res: Response) {
-        OperationHandler.getGamesByName(req, res)
-      }
-    ],
-    getGamesByTime: [
-      function get(req: Request, res: Response) {
-        OperationHandler.getGamesByTime(req, res)
-      }
-    ],
-    createGame: [
-      function get(req: Request, res: Response) {
-        OperationHandler.createGame(req, res)
-      }
-    ],
-    getGameStatus: [
-      function get(req: Request, res: Response) {
-        OperationHandler.getGameStatus(req, res)
-      }
-    ]
-  }
-})
-*/
+Changed buffer size to 512kb to avoid warnings from colyseus. We need to scale down the amount of data we're sending so it gets sent in multiple packets or increase the buffer size even more.
+I think the buffer size is a bit of a sanity check, the only time I've really seen it needed is if you have infra requirements for buffer sizes, for instance working with steamworks the max packet size is 512kb
+ */
+Encoder.BUFFER_SIZE = 512 * 1024
 
-app.use(((err, req, res, next) => {
-  res.status(err.status).json(err)
-}) as ErrorRequestHandler)
-
-app.use(cors())
-app.use(express.json())
-app.use(express.static(clientSrc))
-
-// set up rate limiter: maximum of five requests per minute
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 500, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false // Disable the `X-RateLimit-*` headers
-})
-
-// Apply the rate limiting middleware to all requests
-app.use(limiter)
-
-app.get("/", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/auth", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/lobby", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/preparation", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/game", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/after", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/bot-builder", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/bot-admin", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/sprite-viewer", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/map-viewer", (req, res) => {
-  res.sendFile(viewsSrc)
-})
-
-app.get("/pokemons", (req, res) => {
-  res.send(Pkm)
-})
-
-app.get("/types", (req, res) => {
-  res.send(PRECOMPUTED_POKEMONS_PER_TYPE)
-})
-
-app.get("/items", (req, res) => {
-  res.send(Item)
-})
-
-app.get("/types-trigger", (req, res) => {
-  res.send(SynergyTriggers)
-})
-
-app.get("/meta", async (req, res) => {
-  res.send(
-    await Meta.find({}, [
-      "cluster_id",
-      "count",
-      "ratio",
-      "winrate",
-      "mean_rank",
-      "types",
-      "pokemons",
-      "x",
-      "y"
-    ])
-  )
-})
-
-app.get("/titles", async (req, res) => {
-  res.send(await TitleStatistic.find())
-})
-
-app.get("/meta/items", async (req, res) => {
-  res.send(await ItemsStatistics.find())
-})
-
-app.get("/meta/pokemons", async (req, res) => {
-  res.send(await PokemonsStatistics.find())
-})
-
-app.get("/tilemap/:map", async (req, res) => {
-  const tilemap = initTilemap(req.params.map as DungeonPMDO)
-  res.send(tilemap)
-})
-
-const basicAuthMiddleware = basicAuth({
-  // list of users and passwords
-  users: {
-    admin: process.env.ADMIN_PASSWORD
-      ? process.env.ADMIN_PASSWORD
-      : "Default Admin Password"
-  },
-  challenge: true
-})
-
-app.use("/colyseus", basicAuthMiddleware, monitor())
-
-// Room
-
-gameServer.define("after-game", AfterGameRoom)
-gameServer.define("lobby", CustomLobbyRoom)
-gameServer.define("preparation", PreparationRoom).enableRealtimeListing()
-gameServer.define("game", GameRoom).enableRealtimeListing()
-
-// Start
 async function main() {
-  await connect(process.env.MONGO_URI!)
-  gameServer.listen(port)
-  logger.info(`Game server started, listening on port ${port}`)
+  if (process.env.NODE_APP_INSTANCE) {
+    // multiple threads config
+    const processNumber = Number(process.env.NODE_APP_INSTANCE ?? "0")
+    const port = (Number(process.env.PORT) ?? 2569) + processNumber
+    initializeMetrics()
+    await listen(app)
+    const isLobbyThread = port === 2569
+    if (isLobbyThread) {
+      // only the first thread of the first machine will create the lobby and init cron jobs
+      await matchMaker.createRoom("lobby", {})
+      checkLobby()
+      warmupSpriteGapScanner()
+    }
+    initCronJobs(isLobbyThread)
+  } else {
+    // single thread config
+    await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
+    await matchMaker.createRoom("lobby", {})
+    initCronJobs(true)
+    warmupSpriteGapScanner()
+  }
+
+  logger.info("Fetching leaderboards...")
+  fetchLeaderboards()
+  setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
+  logger.info("Fetching meta reports...")
+  fetchMetaReports()
+  logger.info("Fetching Twitch streams...")
+  refreshTwitchBlacklist()
+  setInterval(() => refreshTwitchBlacklist(), 1000 * 60)
+  refreshTwitchStreams()
+  setInterval(() => refreshTwitchStreams(), 1000 * 60 * 5) // refresh every 5 minutes
+  listenForMaintenanceOrders()
 }
+
+function checkLobby() {
+  // automatically recreate lobby room if its not found
+  logger.info("checkLobby cron job")
+  CronJob.from({
+    cronTime: "* * * * *",
+    timeZone: "Europe/Paris",
+    onTick: async () => {
+      const lobbies = await matchMaker.query({ name: "lobby" })
+      if (lobbies.length === 0) {
+        logger.warn(
+          `Lobby room has not been found, retrying 2 times before recreating...`
+        )
+
+        // Retry 2 times with 10 second wait between attempts
+        let retryCount = 0
+        const maxRetries = 2
+
+        while (retryCount < maxRetries) {
+          await new Promise((resolve) => setTimeout(resolve, 10000)) // Wait 10 seconds
+          retryCount++
+
+          const retriedLobbies = await matchMaker.query({ name: "lobby" })
+          if (retriedLobbies.length > 0) {
+            logger.info(`Lobby room found on retry attempt ${retryCount}`)
+            return
+          }
+          logger.warn(
+            `Retry attempt ${retryCount}/${maxRetries} failed, lobby still not found`
+          )
+        }
+
+        logger.warn(
+          `All retry attempts failed, automatically remaking lobby room`
+        )
+        matchMaker.createRoom("lobby", {})
+      }
+    },
+    start: true
+  })
+}
+
+function listenForMaintenanceOrders() {
+  matchMaker.presence.subscribe(
+    "maintenance",
+    ({ order }: { userId: string; order: MaintenanceOrder }) => {
+      if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+        logger.info("Writing heap snapshot...")
+        writeHeapSnapshot()
+        logger.info("Heap snapshot written")
+      } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+        fetchLeaderboards()
+      } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+        fetchMetaReports()
+      } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+        refreshSpriteGapData(true)
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+        refreshTwitchStreams()
+      } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+        refreshTwitchBlacklist()
+      }
+    }
+  )
+}
+
 main()

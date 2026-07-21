@@ -1,47 +1,68 @@
 import React, { Suspense } from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router"
+import { installRecorder } from "./game/recorder"
+import i18n from "./i18n"
 import AfterGame from "./pages/after-game"
 import Auth from "./pages/auth"
 import BotBuilder from "./pages/component/bot-builder/bot-builder"
 import { BotManagerPanel } from "./pages/component/bot-builder/bot-manager-panel"
 import MapViewer from "./pages/component/debug/map-viewer"
 import Game from "./pages/game"
+import { Gameboy } from "./pages/gameboy"
 import Lobby from "./pages/lobby"
 import Preparation from "./pages/preparation"
+import Replay from "./pages/replay"
 import { SpriteDebug } from "./pages/sprite-viewer"
-import { loadPreferences } from "./preferences"
+import TranslationsPage from "./pages/translations"
 import store from "./stores/index"
+import "./style/index.css"
+import "./theme"
 
-import "./i18n"
-import "./styles.css"
+// tap the inbound colyseus stream before any game room joins, so a match can be recorded and downloaded
+installRecorder()
 
-loadPreferences()
+// Redirect top window if running in an iframe
+if (window.top && window !== window.top) {
+  window.top.location.replace(window.location.href)
+}
+
+// Prevent the website to be opened from window.open()
+if (window.opener) {
+  window.opener.location.replace(window.location.href)
+}
+
 const container = document.getElementById("root")
 const root = createRoot(container!)
 
-root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <Suspense fallback="loading">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Auth />} />
-            <Route path="/lobby" element={<Lobby />} />
-            <Route path="/preparation" element={<Preparation />} />
-            <Route path="/game" element={<Game />} />
-            <Route path="/after" element={<AfterGame />} />
-            <Route path="/bot-builder" element={<BotBuilder />} />
-            <Route path="/bot-admin" element={<BotManagerPanel />} />
-            <Route path="/sprite-viewer" element={<SpriteDebug />} />
-            <Route path="/map-viewer" element={<MapViewer />} />
-          </Routes>
-        </BrowserRouter>
-      </Suspense>
-    </React.StrictMode>
-  </Provider>
-)
+i18n.on("initialized", () => {
+  root.render(
+    <Provider store={store}>
+      <React.StrictMode>
+        <Suspense fallback="loading">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Auth />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/lobby" element={<Lobby />} />
+              <Route path="/preparation" element={<Preparation />} />
+              <Route path="/game" element={<Game />} />
+              <Route path="/replay" element={<Replay />} />
+              <Route path="/after" element={<AfterGame />} />
+              <Route path="/bot-builder" element={<BotBuilder />} />
+              <Route path="/bot-admin" element={<BotManagerPanel />} />
+              <Route path="/sprite-viewer" element={<SpriteDebug />} />
+              <Route path="/map-viewer" element={<MapViewer />} />
+              <Route path="/gameboy" element={<Gameboy />} />
+              <Route path="/translations" element={<TranslationsPage />} />
+            </Routes>
+          </BrowserRouter>
+        </Suspense>
+      </React.StrictMode>
+    </Provider>
+  )
+})
 
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register("sw.js")

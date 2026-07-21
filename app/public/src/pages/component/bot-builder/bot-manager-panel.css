@@ -1,32 +1,63 @@
 #bot-manager-panel {
-  display: grid;
-  grid-template-columns: max-content 400px;
+  color: var(--color-fg-primary);
+  width: max-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: 100vh;
-  justify-content: center;
-  gap: 1em;
   padding: 1em;
-  color: white;
+  gap: 1em;
 }
 
 #bots-list {
   display: flex;
   flex-flow: column;
-  align-items: center;
-  overflow: scroll;
-  min-width: 1400px;
+  max-width: 100%;
   padding: 0;
+  flex: 1;
+  min-height: 0;
 }
 
-#bot-manager-panel table thead {
-  border-bottom: 4px solid white;
+#bot-manager-panel .controls {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
 }
 
-#bots-list td,
-#bots-list th {
+.bots-table-header,
+.bots-table-row {
+  display: grid;
+  grid-template-columns: 50px 250px 250px 60px 1fr 80px 400px;
+  align-items: center;
+  gap: 0 0.5em;
   padding: 0 0.5em;
   text-align: center;
 }
 
-#bot-manager-panel tr:nth-child(even) {
-  background-color: #54596b;
+.bots-table-header {
+  border-bottom: 4px solid white;
+  font-weight: bold;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.bots-table-row > span:first-child {
+  text-align: left;
+  padding: 0;
+}
+
+.bots-table-row > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bots-table-row.even {
+  background-color: var(--color-bg-secondary);
+}
+
+#bots-list button:not(:first-of-type) {
+  margin-left: 0.5em;
 }

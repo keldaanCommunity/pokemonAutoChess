@@ -1,0 +1,358 @@
+@import "./anims.css";
+@import "./buttons.css";
+@import "./colors.css";
+@import "./colorblind.css";
+@import "./container.css";
+@import "./cursor.css";
+@import "./custom-inputs.css";
+@import "./firebase-ui.css";
+@import "./fonts.css";
+@import "./react-tabs.css";
+@import "./react-tooltip.css";
+@import "./scrollbar.css";
+@import "./toastify.css";
+
+:root {
+  --sidebar-width: 60px;
+  --border-thick: 4px solid black;
+  --border-thin: 2px solid black;
+  --border-extra-thin: 1px solid black;
+  --shadow-clickable: #2d334b 2px 2px 0px;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--color-bg-secondary) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
+    ),
+    linear-gradient(
+      45deg,
+      var(--color-bg-secondary) 25%,
+      transparent 25%,
+      transparent 74.9%,
+      var(--color-bg-secondary) 75%,
+      var(--color-bg-secondary)
+    );
+  background-size: 240px 240px;
+  background-position:
+    0 0,
+    120px 120px;
+}
+
+a {
+  /* better contrast on dark background for accessibility */
+  color: var(--color-fg-accent);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.5em 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+dl,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+kbd {
+  padding: 0.2rem 0.4rem;
+  font-size: 87.5%;
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.2rem;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.custom-theme-tooltip {
+  padding: 5px !important;
+  border: var(--border-thick) !important;
+  border-radius: 12px !important;
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-fg-primary) !important;
+  z-index: 1060; /* 1050 comes from react-modal library */
+}
+
+.custom-bg {
+  background-image: url("assets/theme/default/custombg.jpg");
+  background-size: cover;
+  background-position-y: bottom;
+  background-attachment: fixed;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+#game {
+  height: 100vh;
+  width: calc(100vw - var(--sidebar-width));
+}
+
+#game-wrapper {
+  position: relative;
+  left: 60px;
+  width: calc(100vw - var(--sidebar-width));
+  user-select: none;
+}
+
+#game-wrapper .ps-sidebar-root {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--sidebar-width));
+  bottom: 0;
+}
+
+.multi-range {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.multi-range .thumb * {
+  display: inherit !important;
+  color: black !important;
+  border: var(--border-thin) !important;
+  border-radius: 0px !important;
+  background-color: white !important;
+  width: 60px !important;
+  box-shadow: none !important;
+}
+
+.game-emote-bubble {
+  position: relative;
+  background: var(--color-bg-primary);
+  border-radius: 0.4em;
+  padding: 4px;
+  animation: 3000ms forwards speech-bubble;
+}
+
+@keyframes speech-bubble {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.game-emote-bubble img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+}
+
+.game-emote-bubble.item-emote img {
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
+.game-emote-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+}
+
+.game-emote-bubble.current::after {
+  border-top-color: var(--color-bg-primary);
+  bottom: 0;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -10px;
+  margin-bottom: -19px;
+}
+
+.game-emote-bubble.opponent::after {
+  border-bottom-color: var(--color-bg-primary);
+  top: 0;
+  border-top: 0;
+  border-right: 0;
+  margin-right: -10px;
+  margin-top: -19px;
+}
+
+.game-dialog {
+  color: var(--color-fg-primary);
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.game-dialog .game-dialog-title {
+  background-color: var(--color-bg-secondary);
+  text-transform: capitalize;
+  padding: 0.25em 0.5em;
+  margin: -0.25em -0.5em 4px -0.5em;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-dialog.town-encounter-description {
+  max-width: 600px;
+  width: 600px;
+  text-align: center;
+}
+
+summary,
+.clickable {
+  cursor: var(--cursor-hover) !important;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+/*========================
+       MEDIA QUERIES
+  ======================== */
+
+@media (width >= 2500px) {
+  body {
+    font-size: 22px;
+  }
+}
+
+@media (2000px <= width <= 2500px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+@media (width <= 1280px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (width <= 1024px) {
+  body {
+    font-size: 14px;
+  }
+
+  :root {
+    --border-thick: 2px solid black;
+    --border-thin: 1px solid black;
+    --border-extra-thin: 1px solid black;
+  }
+}
+
+@media (width <= 640px) {
+  body {
+    font-size: 12px;
+  }
+
+  #root .my-container {
+    border-width: 2px;
+  }
+
+  .bubbly {
+    padding: 0.5em 1em;
+  }
+}
+
+.pokemon-portrait {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
+  position: relative;
+}
+
+.pokemon-portrait.additional:not(.regional)::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
+  background-size: cover;
+  image-rendering: pixelated;
+  filter: invert(1);
+}
+
+.pokemon-portrait.regional::after {
+  content: "R";
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  font-size: 14px;
+  color: black;
+  text-shadow:
+    1px 1px 1px white,
+    -1px 1px 1px white,
+    1px -1px 1px white,
+    -1px -1px 1px white;
+}
+
+.pokemon-portrait.acquired::before {
+  content: "✔";
+  position: absolute;
+  bottom: 4px;
+  right: 0px;
+  height: 12px;
+  width: 12px;
+  font-size: 14px;
+  color: black;
+  text-shadow:
+    1px 1px 1px white,
+    -1px 1px 1px white,
+    1px -1px 1px white,
+    -1px -1px 1px white;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
