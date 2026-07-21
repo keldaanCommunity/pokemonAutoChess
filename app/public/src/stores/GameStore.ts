@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction, type Slice } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -86,7 +86,7 @@ const initialState: GameStateStore = {
   podium: new Array<ILeaderboardInfo>()
 }
 
-export const gameSlice: Slice<GameStateStore> = createSlice({
+const gameSlice = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {

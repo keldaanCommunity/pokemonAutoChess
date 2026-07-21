@@ -7,7 +7,7 @@ import {
   Room
 } from "colyseus"
 import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import { MAX_PLAYERS_PER_GAME } from "../config"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { type IPreparationMetadata, Role, Transfer } from "../types"
@@ -30,9 +30,9 @@ import {
   OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
+  OnSelectPartnerCommand,
   OnToggleReadyCommand,
-  RemoveMessageCommand,
-  OnSelectPartnerCommand
+  RemoveMessageCommand
 } from "./commands/preparation-commands"
 import PreparationState from "./states/preparation-state"
 
@@ -284,11 +284,14 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
     this.onMessage(Transfer.SELECT_PARTNER, (client, partnerId: string) => {
       try {
-        this.dispatcher.dispatch(new OnSelectPartnerCommand(), { client, partnerId })
+        this.dispatcher.dispatch(new OnSelectPartnerCommand(), {
+          client,
+          partnerId
+        })
       } catch (error) {
         logger.error(error)
       }
-    })  
+    })
 
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       logger.info(Transfer.NEW_MESSAGE, this.roomName)
