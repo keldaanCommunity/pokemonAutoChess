@@ -343,7 +343,7 @@ export default function Game() {
     if (r.connection.isOpen) {
       await r.leave(false)
     }
-    dispatch(leaveGame(0))
+    dispatch(leaveGame())
     navigate("/after")
     if (room?.connection.isOpen) {
       room.leave()
