@@ -58,7 +58,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Ember board effect: BURN duration 1 second → 2 seconds
 - Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
 - Nerf Enamorus: ATK 26 → 23
-- Change Unown M ability: all team gains ~~max~~ 80 PP
+- Change Unown M ability: all team gains ~~max~~ 50 PP
 
 # Changes to Synergies
 

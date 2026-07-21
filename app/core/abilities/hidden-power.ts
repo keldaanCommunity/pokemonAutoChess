@@ -220,7 +220,7 @@ export class HiddenPowerMStrategy extends HiddenPowerStrategy {
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          pokemon.addPP(80, unown, 0, false)
+          pokemon.addPP(50, unown, 0, false)
         }
       }
     )
