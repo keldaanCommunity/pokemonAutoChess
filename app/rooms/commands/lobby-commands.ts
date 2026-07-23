@@ -111,6 +111,7 @@ export class OnJoinCommand extends Command<
           eventPoints: 0,
           maxEventPoints: 0,
           eventFinishTime: null,
+          eventData: {},
           pokemonCollection: starterCollection,
           booster: starterBoosters,
           titles: [],
@@ -514,6 +515,34 @@ export class SelectLanguageCommand extends Command<
           await user.save()
         }
         u.language = message
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class ChoosePalCommand extends Command<
+  CustomLobbyRoom,
+  { client: Client; playerUid: string | null }
+> {
+  async execute({ client, playerUid }: { client: Client; playerUid: string }) {
+    try {
+      const u = this.room.users.get(client.auth.uid)
+      if (client.auth.uid && u) {
+        let eventData = {}
+        const user = await UserMetadata.findOne({ uid: client.auth.uid })
+        if (user) {
+          eventData = { ...(user.eventData || {}), pal: playerUid }
+          user.eventData = eventData
+          await user.save()
+        }
+        u.eventData = eventData
+        const pal = this.room.clients.find((cli) => cli.auth.uid === playerUid)
+        if (pal) {
+          // if pal online, let them know they have been chosen
+          pal.send(Transfer.SELECT_PAL, client.auth.uid)
+        }
       }
     } catch (error) {
       logger.error(error)

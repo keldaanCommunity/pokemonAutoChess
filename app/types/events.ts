@@ -5,7 +5,11 @@ export enum GameEvent {
 }
 
 export const GameEvents: GameEvent[] = [
-  GameEvent.EXPEDITIONS,
   GameEvent.POKEPALS,
+  GameEvent.EXPEDITIONS,
   GameEvent.VICTORY_ROAD
 ]
+
+export type GameEventData = {
+  pal?: string
+}

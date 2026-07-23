@@ -7,6 +7,7 @@ import { GameEvent } from "../../../../../types/events"
 import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
 import { Expeditions } from "./expeditions"
+import { Pokepals } from "./pokepals"
 import { TournamentsList } from "./tournaments-list"
 import { TwitchStreams } from "./twitch-streams"
 import { VictoryRoad } from "./victory-road"
@@ -88,7 +89,7 @@ export function EventsMenu() {
             <span>{t("victory_road.title")}</span>
           </Tab>
         )}
-         {currentGameEvent === GameEvent.POKEPALS && (
+        {currentGameEvent === GameEvent.POKEPALS && (
           <Tab>
             <span>{t("pokepals.title")}</span>
           </Tab>

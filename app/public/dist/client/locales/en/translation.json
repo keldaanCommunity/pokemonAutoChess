@@ -5162,11 +5162,17 @@
 	},
 	"pokepals": {
 		"title": "Poképals",
+		"leaderboard": "Leaderboard",
 		"points": "{{points}} points",
-		"your_points": "Your points: {{points}}",
-		"instructions": "Play with your pal in Double Up mode !",
-		"help1": "Playing Double Up when teaming up with your designed partner grants you points based on your final rank",
-		"help2": "Get to the top of the leaderboard to receive exclusive titles !"
+		"team_score": "Team score: {{points}}",
+		"instructions": "Play with your pal in Double Up !",
+		"help1": "Playing Double Up game mode when teaming up with your designed partner grants you points based on your final rank",
+		"help2": "Get to the top of the leaderboard to receive exclusive titles !",
+		"your_pal": "Your pal",
+		"confirmed": "Your team is locked and ready to compete.",
+		"not_confirmed": "Your pal has to enter your name in return to lock the team.",
+		"enter_pal_name": "Enter the name of your pal",
+		"change_pal": "Change pal"
 	},
 	"events_reset_info": "All scores will be reset at midnight UTC on the first day of each month, that is in {{resetCountdown}}. The event leaderboard is refreshed every 10 minutes.",
 	"stage_type": {

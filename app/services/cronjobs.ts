@@ -258,7 +258,8 @@ async function resetEventScores() {
         $set: {
           eventPoints: 0,
           maxEventPoints: 0,
-          eventFinishTime: null
+          eventFinishTime: null,
+          eventData: {}
         }
       }
     )
