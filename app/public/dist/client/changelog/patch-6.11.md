@@ -72,6 +72,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
+- Change RAZOR_FANG: 100% → 50% CRIT_POWER; ~~Critical attacks~~ All attacks apply ARMOR_BREAK for 2 seconds.
+
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.

@@ -21,7 +21,6 @@ import { clamp, max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
-  BeforeAttackEffect,
   OnResurrectEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
@@ -241,19 +240,9 @@ export default abstract class PokemonState {
 
       const totalDamage = physicalDamage + specialDamage + trueDamage
 
-      pokemon.getEffects(BeforeAttackEffect).forEach((effect) => {
-        effect.apply({
-          pokemon,
-          target,
-          board,
-          physicalDamage,
-          specialDamage,
-          trueDamage,
-          totalDamage,
-          isTripleAttack,
-          crit
-        })
-      })
+      if (isAttackSuccessful && pokemon.items.has(Item.RAZOR_FANG)) {
+        target.status.triggerArmorReduction(2000, target)
+      }
 
       if (physicalDamage > 0) {
         // Apply attack physical damage

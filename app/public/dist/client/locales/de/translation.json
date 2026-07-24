@@ -2851,7 +2851,7 @@
 		"DEEP_SEA_TOOTH": "Die Angriffe des Trägers regenerieren zusätzliche 5 PP. Wenn ein Angriff ein Pokémon besiegt erhalte zusätzlich 15 PP.",
 		"SMOKE_BALL": "Sinken die max. HP des Träger erstmal unter 40% wird der SMOKE_BALL fallen gelassen, der träger erhält 70 SHIELD und springt ein Feld weiter. Alle ADJACENT Gegner werden für 4 Sekunden PARALYSIS und BLINDED.",
 		"XRAY_VISION": "Der Träger ist Immun gegen SLEEP und seine Angriffe können nicht mehr verfehlen.",
-		"RAZOR_FANG": "+100% CRIT_POWER. Kritische Treffer verursachen 2 Sekunden lang ARMOR_BREAK.",
+		"RAZOR_FANG": "Angriffe verursachen 2 Sekunden lang ARMOR_BREAK.",
 		"PROTECTIVE_PADS": "Der Träger verursacht 2x Schaden gegen Pokémon mit SHIELD und ist vor Rückstoßschaden & Vergeltungseffekten (Bsp. STICKY_BARB oder POWER_LENS) geschützt.",
 		"LOADED_DICE": "Angriffe haben eine [50%,LK] Chance, auch dem am Ziel ADJACENT Gegner mit den niedrigsten HP 75% des Schadens zuzufügen. Der zusätzliche Angriff löst Treffereffekte aus.",
 		"PUNCHING_GLOVE": "Angriffe verursachen 8% der max. HP des Ziels als zusätzlichen PHYSICAL (Treffereffekt).",

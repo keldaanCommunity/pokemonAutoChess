@@ -2919,7 +2919,7 @@
 		"DEEP_SEA_TOOTH": "장착 시 매 공격 당 PP +5 회복",
 		"SMOKE_BALL": "HP가 40% 이하가 되면 연막탄을 떨어뜨려 70의 SHIELD를 얻고 한 칸 떨어진 위치로 도약한다. 모든 ADJACENT 적은 4초 간 PARALYSIS와 BLINDED의 효과를 얻는다.",
 		"XRAY_VISION": "장착 시 SPEED +50, 공격 무조건 명중 ",
-		"RAZOR_FANG": "장착 시 CRIT_POWER +100%, 치명타 명중시 2초 동안 ARMOR_BREAK 부여",
+		"RAZOR_FANG": "공격은 ON_HIT 동안 2초 동안 ARMOR_BREAK를 적용합니다.",
 		"PROTECTIVE_PADS": "기본공격이 SHIELD 에 두 배의 피해를 입힌다. 착용자는 반동대미지 및 반사효과에 면역이 된다.",
 		"LOADED_DICE": "공격 시 [50,LK]% 확률로 타겟의 가장 체력이 낮은 ADJACENT 적에게 동일한 공격 피해를 입힘. 이 공격은 타격 효과도 발동",
 		"PUNCHING_GLOVE": "기본공격이 대상의 최대 HP 의 8%만큼 추가로 PHYSICAL 를 가한다.",

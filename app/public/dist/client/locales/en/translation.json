@@ -2964,7 +2964,7 @@
 		"DEEP_SEA_TOOTH": "Holder restore 5 additional PP ON_ATTACK. If the attack knocks out the target, restore 15 additional PP.",
 		"SMOKE_BALL": "Once below 40% max HP, drop the smoke ball, gain 70 SHIELD and jump to a tile away. Every ADJACENT enemy is PARALYSIS and BLINDED for 4 seconds.",
 		"XRAY_VISION": "Holder is immune to SLEEP and their attacks can no longer miss.",
-		"RAZOR_FANG": "+100% CRIT_POWER. Critical attacks apply ARMOR_BREAK for 2 seconds ON_HIT.",
+		"RAZOR_FANG": "Attacks apply ARMOR_BREAK for 2 seconds ON_HIT.",
 		"PROTECTIVE_PADS": "Holder deals double damage against units with  SHIELD, and is protected from recoil damage and retaliation effects.",
 		"LOADED_DICE": "Attacks have [50,LK]% chance to also hit the lowest health enemy ADJACENT to target for 75% of the damage, which also trigger ON_HIT effects.",
 		"PUNCHING_GLOVE": "Attacks deal 8 % of target max HP as additional PHYSICAL ON_HIT",

@@ -50,7 +50,6 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { getUnitScore } from "../unit-score"
 import {
-  BeforeAttackEffect,
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -59,7 +58,6 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   type OnDeathEffectArgs,
-  OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -1003,14 +1001,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.RAZOR_FANG]: [
-    new BeforeAttackEffect(({ target, crit }) => {
-      if (crit && target) {
-        target.status.triggerArmorReduction(2000, target)
-      }
-    })
-  ],
-
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -1161,7 +1151,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
-        } else if(isIn(ItemComponents, heldItem)){
+        } else if (isIn(ItemComponents, heldItem)) {
           player.items.push(heldItem)
           pokemon.removeItem(heldItem, player)
         }
