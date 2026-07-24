@@ -1,7 +1,10 @@
-import { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
+import { PokepalsPointsPerRank } from "../../../../../config/game/events"
 import type { ILeaderboardEventInfo } from "../../../../../types/interfaces/LeaderboardInfo"
 import type { IUserMetadataLean } from "../../../../../types/interfaces/UserMetadata"
+import { getRankLabel } from "../../../../../types/strings/Strings"
 import {
   useAppDispatch,
   useAppSelector,
@@ -45,7 +48,6 @@ export function Pokepals() {
     return () => clearInterval(interval)
   }, [])
 
-  
   useEffect(() => {
     // load pal info
     if (profile?.eventData?.pal) {
@@ -77,7 +79,9 @@ export function Pokepals() {
         <p>
           {t("pokepals.title")}
           <br />
-          {t("pokepals.team_score", { points: profile?.eventPoints ?? 0 })}
+          {t("pokepals.team_score", {
+            points: Math.max(profile?.eventPoints ?? 0, pal?.eventPoints ?? 0)
+          })}
         </p>
         <div className="help button" onClick={() => setShowHelp(!showHelp)}>
           <img src="/assets/ui/help.svg" alt={t("help")} title={t("help")} />
@@ -116,13 +120,22 @@ export function Pokepals() {
           {pairedLeaderboard.map((team, index) => (
             <div
               key={team.teamId}
+              style={{ fontSize: "80%" }}
               className={cc("leaderboard-item", {
                 me: team.idA === profile?.uid || team.idB === profile?.uid
               })}
             >
               <span className="rank">#{team.rank}</span>
-              <PokemonPortrait avatar={team.avatarA} />
-              <PokemonPortrait avatar={team.avatarB} />
+              <PokemonPortrait
+                avatar={team.avatarA}
+                data-tooltip-content={team.nameA}
+                data-tooltip-id="pokepals-leaderboard-tooltip"
+              />
+              <PokemonPortrait
+                avatar={team.avatarB}
+                data-tooltip-content={team.nameB}
+                data-tooltip-id="pokepals-leaderboard-tooltip"
+              />
               <span className="player-name">
                 {team.nameA}
                 {t("and")}
@@ -137,6 +150,10 @@ export function Pokepals() {
             <div className="no-data">{t("no_data_available")}</div>
           )}
         </div>
+        <Tooltip
+          id="pokepals-leaderboard-tooltip"
+          className="custom-theme-tooltip"
+        />
       </div>
 
       {showHelp && (
@@ -145,6 +162,24 @@ export function Pokepals() {
           <div className="help-content">
             <p>{t("pokepals.help1")}</p>
             <p>{t("pokepals.help2")}</p>
+            <dl>
+              {[1, 2, 3, 4].map((rank) => (
+                <React.Fragment key={rank}>
+                  <dt>{getRankLabel(rank)}</dt>
+                  <dd
+                    className={cc({
+                      positive: PokepalsPointsPerRank[rank - 1] > 0,
+                      negative: PokepalsPointsPerRank[rank - 1] < 0
+                    })}
+                  >
+                    {(PokepalsPointsPerRank[rank - 1] > 0 ? "+" : "") +
+                      t("pokepals.points", {
+                        points: PokepalsPointsPerRank[rank - 1]
+                      })}
+                  </dd>
+                </React.Fragment>
+              ))}
+            </dl>
             <p style={{ fontStyle: "italic" }}>
               {t("events_reset_info", {
                 resetCountdown: formatDuration(resetCountdown)
@@ -204,10 +239,4 @@ function pairLeaderboard(
       twitchLoginB: playerB.twitchLogin,
       twitchDisplayNameB: playerB.twitchDisplayName
     }))
-}
-
-type PalInfo = {
-  name: string
-  avatar: string
-  confirmed: boolean
 }

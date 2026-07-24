@@ -744,7 +744,8 @@ export enum Title {
   SURVEY_CORPS = "SURVEY_CORPS",
   GUILDMASTER = "GUILDMASTER",
   LEGIONNAIRE = "LEGIONNAIRE",
-  FIVE_STARS = "FIVE_STARS"
+  FIVE_STARS = "FIVE_STARS",
+  PAL = "PAL"
 }
 
 export interface IBoardEvent {

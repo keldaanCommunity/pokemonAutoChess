@@ -10,6 +10,7 @@ import {
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
+  PokepalsPointsPerRank,
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
   VICTORY_ROAD_MAX_EVENT_POINTS,
@@ -96,7 +97,7 @@ import {
 import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
-import { clamp } from "../utils/number"
+import { clamp, min } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
@@ -1065,6 +1066,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
           } catch (error) {
             logger.error("Error updating event points", error)
           }
+        }
+      }
+
+      if (
+        this.state.gameMode === GameMode.DOUBLE_UP &&
+        getCurrentGameEvent() === GameEvent.POKEPALS &&
+        usr.eventData?.pal &&
+        this.state.players.has(usr.eventData?.pal) &&
+        usr.eventData?.pal === player.doubleUpPartnerId
+      ) {
+        try {
+          const eventPointsGained = PokepalsPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          player.titles.add(Title.PAL)
+        } catch (error) {
+          logger.error("Error updating event points", error)
         }
       }
 
