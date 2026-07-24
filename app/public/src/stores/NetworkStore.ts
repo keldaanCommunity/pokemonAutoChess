@@ -116,7 +116,7 @@ export const networkSlice = createSlice({
       if (state.profile) {
         state.profile.eventData = {
           ...(state.profile.eventData || {}),
-          pal: action.payload
+          pal: action.payload || undefined
         }
       }
       rooms.lobby?.send(Transfer.SELECT_PAL, action.payload)
@@ -126,7 +126,11 @@ export const networkSlice = createSlice({
     },
     confirmPal: (state, action: PayloadAction<string>) => {
       const playerIdThatChoseYou = action.payload
-      if (state.pal && state.pal?.uid === playerIdThatChoseYou && state.profile) {
+      if (
+        state.pal &&
+        state.pal?.uid === playerIdThatChoseYou &&
+        state.profile
+      ) {
         state.pal.eventData = {
           ...(state.pal.eventData || {}),
           pal: state.profile.uid

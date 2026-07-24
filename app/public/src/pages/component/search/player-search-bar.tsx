@@ -13,7 +13,7 @@ export function PlayerSearchBar(props: {
   const { t } = useTranslation()
   const [suggestions, setSuggestions] = useState<ISuggestionUser[]>([])
 
-  const elementRef = useRef<HTMLElement>(null)
+  const elementRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
   const abortControllerRef = useRef<AbortController | null>(null)
