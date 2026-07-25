@@ -955,7 +955,10 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
-          if (pokemon.player?.items.includes(Item.LONG_WAND)) {
+          if (
+            pokemon.player?.items.includes(Item.LONG_WAND) &&
+            pokemon.range > 1
+          ) {
             pokemon.range += 1
           }
           if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
