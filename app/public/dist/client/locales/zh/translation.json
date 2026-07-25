@@ -2964,7 +2964,7 @@
 		"DEEP_SEA_TOOTH": "携带者ON_ATTACK额外恢复5点PP。此外，若攻击击倒了敌方宝可梦，额外恢复15点PP。",
 		"SMOKE_BALL": "携带者的HP第一次低于最大值的40%时，会抛下烟雾球，获得70点SHIELD并跳跃至1格外。所有ADJACENT的敌方宝可梦陷入PARALYSIS和BLINDED 4秒。",
 		"XRAY_VISION": "携带者免疫SLEEP，提升50点SPEED，且攻击不会落空。",
-		"RAZOR_FANG": "提升100%的CRIT_POWER。暴击ON_HIT使目标陷入ARMOR_BREAK 2秒。",
+		"RAZOR_FANG": "攻击会施加 ARMOR_BREAK，持续 2 秒 ON_HIT。",
 		"PROTECTIVE_PADS": "携带者的攻击对具有SHIELD的目标造成的伤害翻倍。携带者免疫反冲伤害和反击类效果。",
 		"LOADED_DICE": "击中目标时，有[50,LK]%的概率同时对目标的ADJACENT敌方宝可梦中HP最低者造成75%的伤害。此次伤害能够触发ON_HIT效果。",
 		"PUNCHING_GLOVE": "ON_HIT额外造成一次PHYSICAL，数值相当于目标最大HP的8%",

@@ -2,7 +2,7 @@ import { memoryUsage } from "node:process"
 import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
 import { type Client, matchMaker } from "colyseus"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import type { QueryFilter } from "mongoose"
 import {
   EloRankThreshold,

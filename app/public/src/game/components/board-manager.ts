@@ -973,7 +973,7 @@ export default class BoardManager {
             pokemonSprite.destroy()
             this.pokemons.delete(pokemonSprite.id)
           }
-          store.dispatch(refreshShopUI(0))
+          store.dispatch(refreshShopUI())
           if (!isOnBench(pokemon)) {
             this.showSupportItemsVfx(
               schemaValues(pokemon.items),

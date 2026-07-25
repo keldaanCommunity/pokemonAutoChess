@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction, type Slice } from "@reduxjs/toolkit"
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -51,6 +51,7 @@ export interface GameStateStore {
   emotesUnlocked: Emotion[]
   additionalPokemons: Pkm[]
   podium: ILeaderboardInfo[]
+  spectatorCount: number
 }
 
 const initialState: GameStateStore = {
@@ -83,10 +84,11 @@ const initialState: GameStateStore = {
   emotesUnlocked: [],
   additionalPokemons: new Array<Pkm>(),
   specialGameRule: null,
-  podium: new Array<ILeaderboardInfo>()
+  podium: new Array<ILeaderboardInfo>(),
+  spectatorCount: 0
 }
 
-export const gameSlice: Slice<GameStateStore> = createSlice({
+const gameSlice = createSlice({
   name: "game",
   initialState: initialState,
   reducers: {
@@ -113,14 +115,15 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
       state.specialGameRule = action.payload
     },
     addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      // idempotent by id: a replay seek re-fires onAdd, so replace rather than push (avoids duplicate players)
       const clone = JSON.parse(JSON.stringify(action.payload)) as IPlayer
       // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
+
       const index = state.players.findIndex((p) => p.id === clone.id)
       if (index >= 0) {
+        // a replay seek re-fires onAdd, so replace rather than push (avoids duplicate players)
         state.players[index] = clone
       } else {
         state.players.push(clone)
@@ -318,6 +321,10 @@ export const gameSlice: Slice<GameStateStore> = createSlice({
       state.podium = action.payload
     },
 
+    setSpectatorCount: (state, action: PayloadAction<number>) => {
+      state.spectatorCount = action.payload
+    },
+
     leaveGame: () => initialState
   }
 })
@@ -356,7 +363,8 @@ export const {
   changeShop,
   refreshShopUI,
   setItemsProposition,
-  setPodium
+  setPodium,
+  setSpectatorCount
 } = gameSlice.actions
 
 export default gameSlice.reducer

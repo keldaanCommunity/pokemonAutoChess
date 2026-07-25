@@ -38,7 +38,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.RAZOR_FANG]: {
     [Stat.SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 100
+    [Stat.CRIT_POWER]: 50
   },
   [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 20 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },

@@ -648,10 +648,7 @@
 }
 /* shrink .bubbly down to row size (specificity beats the base rule) */
 .replay-row .bubbly {
-  padding: 0.25em 0.6em;
-  font-size: 0.82em;
-  min-width: 0;
-  margin: 0;
+  font-size: 0.85em;
 }
 .replay-row .bubbly:disabled {
   opacity: 0.5;

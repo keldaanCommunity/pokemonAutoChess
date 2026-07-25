@@ -70,6 +70,7 @@ import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
+  RemovableItems,
   UnholdableItemsToSaveForStats,
   Wands
 } from "../types/enum/Item"
@@ -741,6 +742,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
     /*if (client && client.auth && client.auth.displayName) {
       logger.info(`${client.auth.displayName} has been disconnected`)
     }*/
+    if (
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    ) {
+      // a spectator disconnected: they have no game to reconnect to, so remove
+      // them from the spectators set immediately instead of holding a 5-minute
+      // reconnection window (which would keep the spectator count stale)
+      this.state.spectators.delete(client.auth.uid)
+      return
+    }
     try {
       // allow disconnected client to reconnect into this room until 5 minutes
       setPendingGame(this.presence, client.auth.uid, this.roomId)
@@ -760,6 +772,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onLeave(client: Client, code: number) {
     const consented = code === CloseCode.CONSENTED
+
+    if (
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    ) {
+      // a spectator (not one of the players) left the game
+      this.state.spectators.delete(client.auth.uid)
+      return
+    }
 
     if (client && client.auth && client.auth.displayName) {
       const pendingGame = await getPendingGame(this.presence, client.auth.uid)
@@ -1545,6 +1567,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       !canBeTraded(pokemonToTradeB)
     )
       return
+
+    // Remove removable items
+    const itemsToRemoveA = schemaValues(pokemonToTradeA.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerA.items.push(...itemsToRemoveA)
+    pokemonToTradeA.removeItems(itemsToRemoveA, playerA)
+
+    const itemsToRemoveB = schemaValues(pokemonToTradeB.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerB.items.push(...itemsToRemoveB)
+    pokemonToTradeB.removeItems(itemsToRemoveB, playerB)
 
     // Switch Pokémon
 

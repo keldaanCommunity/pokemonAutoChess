@@ -58,6 +58,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Ember board effect: BURN duration 1 second → 2 seconds
 - Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
 - Nerf Enamorus: ATK 26 → 23
+- Change Unown M ability: all team gains ~~max~~ 50 PP
 
 # Changes to Synergies
 
@@ -70,6 +71,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
+
+- Change RAZOR_FANG: 100% → 50% CRIT_POWER; ~~Critical attacks~~ All attacks apply ARMOR_BREAK for 2 seconds.
 
 # Gameplay
 
@@ -85,6 +88,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
 - Add in Wiki > Pokémon a tab for units that are not Pokémon
 - Uxie XP gained is now indicated in their tooltip
+- Added spectator count in game stage info bar (thanks to tegberen)
 
 # Bugfix
 
