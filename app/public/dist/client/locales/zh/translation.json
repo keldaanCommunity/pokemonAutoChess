@@ -3205,7 +3205,7 @@
 		"LUCKY_RIBBON": "携带者提升20点LUCK，并有[15,LK]%的概率闪避攻击。",
 		"COVER_BAND": "ADJACENT我方宝可梦即将受到致命伤害时，改为由携带者承受此伤害。",
 		"EFFICIENT_BANDANNA": "携带者与ADJACENT_IN_THE_SAME_ROW我方宝可梦的PP上限降低15%。",
-		"NULLIFY_BANDANNA": "携带者无法释放招式。携带者的AP转化为等量SHIELD，PP转化为在下次攻击时额外造成的SPECIAL。",
+		"NULLIFY_BANDANNA": "携带者无法释放招式。携带者的AP转化为等量ATK (10:3)，PP转化为在下次攻击时额外造成的SPECIAL。",
 		"WANTED_NOTICE": "悬赏：击倒或捉拿\n 赏金：10 GOLD",
 		"TATSUGIRI_CURLY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",
 		"TATSUGIRI_DROOPY": "米立龙作为发号施令的要员而被吃吼霸吞下去了。",

@@ -145,7 +145,7 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
-        specialDamage += clamp(pokemon.pp, 0, pokemon.maxPP)
+        specialDamage += pokemon.pp
         pokemon.pp = 0
       }
 

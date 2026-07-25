@@ -3041,7 +3041,7 @@
 		"BIG_EATER_BELT": "Aumenta tutti i potenziamenti alle statistiche dell'utilizzatore del 25% (arrotondati per difetto, non influenzano i PP) e permettigli di mangiare 2 piatti per round.",
 		"COVER_BAND": "Se un alleato ADJACENT sta per venire messo KO da del danno in arrivo, il possessore riceve invece quel danno.",
 		"EFFICIENT_BANDANNA": "Il possessore e tutti gli alleati ADJACENT_IN_THE_SAME_ROW hanno i loro PP massimi ridotti del 15%",
-		"NULLIFY_BANDANNA": "Il possessore non può più utilizzare la sua abilità. Il suo AP è convertito in SHIELD, e i suoi PP convertiti in SPECIAL bonus sul prossimo attacco.",
+		"NULLIFY_BANDANNA": "Il possessore non può più utilizzare la sua abilità. Il suo AP è convertito in ATK (10:3), e i suoi PP convertiti in SPECIAL bonus sul prossimo attacco.",
 		"WANTED_NOTICE": "Ricercato: Vivo o KO\nRicompensa: 10 GOLD"
 	},
 	"passive_description": {

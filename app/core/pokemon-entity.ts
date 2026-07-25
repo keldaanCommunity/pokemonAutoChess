@@ -620,7 +620,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addShield(value, caster, 0, false) // AP is gained as shield instead
+      this.addAttack(Math.round(0.3 * value), caster, 0, false) // AP is gained as Attack instead
     } else {
       update(this)
     }

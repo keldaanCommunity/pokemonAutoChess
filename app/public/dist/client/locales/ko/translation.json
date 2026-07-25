@@ -3163,7 +3163,7 @@
 		"BIG_EATER_BELT": "착용자가 받는 모든 스탯 버프를 25% 증가시킨다 (소수점은 버림, PP에는 영향을 주지 않음). 또한 매 라운드마다 2개의 시그니처 디쉬를 먹을 수 있게 된다.",
 		"COVER_BAND": "ADJACENT 아군이 받은 데미지로 인해 KO 당할 위기에 있을 경우, 착용자가 대신 그 데미지를 받는다.",
 		"EFFICIENT_BANDANNA": "착용자와 ADJACENT_IN_THE_SAME_ROW에 있는 아군의 최대 PP가 15% 감소한다.",
-		"NULLIFY_BANDANNA": "착용자는 더 이상 스킬을 사용할 수 없게 된다. 또한 AP는 SHIELD로 변환되고, PP는 다음 공격에 추가 SPECIAL로 적용된다.",
+		"NULLIFY_BANDANNA": "착용자는 더 이상 스킬을 사용할 수 없게 된다. 또한 AP는 ATK (10:3)로 변환되고, PP는 다음 공격에 추가 SPECIAL로 적용된다.",
 		"WANTED_NOTICE": "현상수배: 생사불문\n보상: 10 골드\n(간혹 보드를 돌아다니는 슬리프를 잡으세요.)",
 		"NANAB_BERRY": "HP이 50% 이하 시 소비, HP 50 회복 그리고 1 GOLD 획득",
 		"GOLDEN_PINAP_BERRY": "HP이 50% 이하 시 소비, 최대 HP의 50% 회복하고 SWEETS 3개를 무작위로 획득",

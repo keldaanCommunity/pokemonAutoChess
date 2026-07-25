@@ -3230,7 +3230,7 @@
 		"LUCKY_RIBBON": "Holder gets 20 LUCK and has [15,LK]% chance to dodge attacks.",
 		"COVER_BAND": "If an ADJACENT ally is about to get KO with some incoming damage, the wearer takes the damage instead.",
 		"EFFICIENT_BANDANNA": "The holder and allies ADJACENT_IN_THE_SAME_ROW have their max PP reduced by 15%.",
-		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to SHIELD, and PP are converted to bonus SPECIAL on next attack.",
+		"NULLIFY_BANDANNA": "Holder can no longer cast its ability. AP is converted to ATK (10:3), and PP are converted to bonus SPECIAL on next attack.",
 		"WANTED_NOTICE": "Wanted: Fainted or Alive\n Reward: 10 GOLD",
 		"TATSUGIRI_CURLY": "Can command a Dondozo.",
 		"TATSUGIRI_DROOPY": "Can command a Dondozo.",
