@@ -1899,7 +1899,7 @@
 		"SECRET_SWORD": "Fügt dem Ziel [50,100,150,300,SP] SPECIAL zu. Nachdem 20 Attacken mit einer FIGHTING - Synergie geblockt wurden, konvertiert den Angrifftyp zu TRUE.",
 		"METAL_BURST": "Füge dem Ziel [10,20,30,50,SP] TRUE zu. Erhöhe den Schaden um 10 % für jeden Angriff, der vom Benutzer FIGHTING blockiert wird",
 		"PSYCHIC": "Verursacht [40,80,160,320,SP] SPECIAL und verbrennt das Ziel und angrenzenden Feinden 15 PP",
-		"PSYBEAM": "Füge allen gegnerischen Pokémon hinter dem Ziel [25,50,100,200,SP] Spezialschaden zu, mit einer Chance von [50,LK]%, sie 4 Sekunden lang in CONFUSION zu versetzen",
+		"PSYBEAM": "Füge allen gegnerischen Pokémon hinter dem Ziel [25,50,100,200,SP] Spezialschaden zu, mit einer Chance von [50,LK]%, sie [2,3,4,5] Sekunden lang in CONFUSION zu versetzen",
 		"DIVE": "Taucht unter Wasser und erhält [15,30,60,120] SHIELD, taucht dann wieder in der Mitte des gegnerischen Teams auf und fügt allen benachbarten Einheiten [10,20,40,80,SP] SPECIAL zu",
 		"SPIKY_SHIELD": "Für [3,5,10,10] Sekunden erhalten Ziele, die dieses Pokémon im Nahkampf angreifen, eine WOUND und erhalten ein SPECIAL in Höhe von [60,80,100,200,SP] % der aktuellen DEF",
 		"FUTURE_SIGHT": "Fügt [3,4,5,6] Feinden [20,30,50,80,SP] SPECIAL zu",

@@ -59,6 +59,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
 - Nerf Enamorus: ATK 26 → 23
 - Change Unown M ability: all team gains ~~max~~ 50 PP
+- Psybeam (Staryu): CONFUSION duration 4 seconds at all ranks → 2/3/4/5 seconds
 
 # Changes to Synergies
 
