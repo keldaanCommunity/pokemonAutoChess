@@ -962,7 +962,7 @@ export default abstract class PokemonState {
     if (
       pokemon.items.has(Item.FLAME_ORB) &&
       !pokemon.status.burn &&
-      pokemon.action !== PokemonActionState.HOP
+      !pokemon.simulation.finished
     ) {
       pokemon.status.triggerBurn(60000, pokemon, pokemon)
     }

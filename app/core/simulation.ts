@@ -1442,7 +1442,7 @@ export default class Simulation extends Schema implements ISimulation {
           entity.resurrect()
         }
         if (!entity.status.tree) {
-          entity.action = PokemonActionState.HOP
+          setTimeout(() => entity.action = PokemonActionState.HOP, randomBetween(0,800);
         }
       })
     }
