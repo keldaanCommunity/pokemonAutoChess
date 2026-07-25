@@ -15,6 +15,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
+import { getDescriptionError } from "./utils/ability-description"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
@@ -207,6 +208,20 @@ export default function TranslationsPage() {
     async (token: string) => {
       if (!targetData) return
       const merged = applyEditsToObject(targetData, edits)
+      const descriptionErrors = allLeaves.flatMap(({ path, enValue }) => {
+        const error = getDescriptionError(
+          path,
+          getNestedValue(merged, path),
+          enValue
+        )
+        return error ? [`${path}: ${error}`] : []
+      })
+      if (descriptionErrors.length > 0) {
+        setPrError(
+          `Fix ability description placeholders and formatting before submitting:\n${descriptionErrors.join("\n")}`
+        )
+        return
+      }
       const content = JSON.stringify(merged, null, "\t")
       setPrSubmitting(true)
       setPrError("")
@@ -226,7 +241,7 @@ export default function TranslationsPage() {
         setPrSubmitting(false)
       }
     },
-    [targetData, edits, targetLang]
+    [targetData, edits, allLeaves, targetLang]
   )
 
   const handleDownload = useCallback(() => {

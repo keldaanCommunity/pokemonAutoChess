@@ -1,5 +1,36 @@
 import { Ability } from "../../types/enum/Ability"
 
+export type AbilityConfigValue = number | readonly number[]
+export type AbilityConfig = Readonly<Record<string, AbilityConfigValue>>
+
+export const AbilityConfigs = {
+  [Ability.AQUA_RING]: {
+    heal: [20, 40, 80, 160]
+  },
+  [Ability.BLIZZARD]: {
+    damage: [10, 20, 40, 80],
+    freezeDuration: 1.5,
+    radius: 4,
+    frozenTargetBonusPercent: 30
+  },
+  [Ability.FREEZING_GLARE]: {
+    damage: [20, 40, 80, 160],
+    freezeChance: 50,
+    freezeDuration: [3, 3, 3, 6]
+  },
+  [Ability.PROTECT]: {
+    duration: [0.5, 1.5, 2.5, 4]
+  },
+  [Ability.STRUGGLE_BUG]: {
+    damage: [10, 20, 30, 60],
+    abilityPowerReduction: 30
+  }
+} as const satisfies Partial<Record<Ability, AbilityConfig>>
+
+export function getAbilityConfig(ability: Ability): AbilityConfig | undefined {
+  return (AbilityConfigs as Partial<Record<Ability, AbilityConfig>>)[ability]
+}
+
 export const InimitableAbilities: Ability[] = [
   Ability.ASSIST,
   Ability.AURA_WHEEL,

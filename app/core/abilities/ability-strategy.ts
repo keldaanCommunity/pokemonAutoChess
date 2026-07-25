@@ -1,3 +1,4 @@
+import type { AbilityConfigValue } from "../../config/game/abilities"
 import { Team } from "../../types/enum/Game"
 import { min } from "../../utils/number"
 import type { Board } from "../board"
@@ -6,6 +7,15 @@ import type { PokemonEntity } from "../pokemon-entity"
 export class AbilityStrategy {
   requiresTarget = true // if false, can be casted from everywhere without having to walk up to a target at range
   canCritByDefault = false
+
+  protected computeValue(
+    value: AbilityConfigValue,
+    pokemon: PokemonEntity
+  ): number {
+    if (typeof value === "number") return value
+    return value[pokemon.stars - 1] ?? value[value.length - 1]
+  }
+
   process(
     pokemon: PokemonEntity,
     board: Board,
