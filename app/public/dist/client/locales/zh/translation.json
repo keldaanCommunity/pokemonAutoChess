@@ -4415,6 +4415,7 @@
 	"popular_pokemons": "常见宝可梦",
 	"example_teams": "队伍示例",
 	"components": "道具组件",
+	"gift": "礼品",
 	"craftable_items": "合成道具",
 	"consumable_item": "消耗品",
 	"unholdable_item": "非携带道具",
@@ -5032,7 +5033,8 @@
 			"craftable_items": "合成道具由两件道具组件合成而来。",
 			"consumable_item": "消耗品是在其效果被触发时会被移除的一次性道具。",
 			"unholdable_item": "非携带道具无法被宝可梦携带。其效果自动对全队生效。",
-			"removable_item": "可卸下道具在携带者返回备战区时会自动被移除。"
+			"removable_item": "可卸下道具在携带者返回备战区时会自动被移除。",
+			"gift": "礼品是双打模式下赠予队友的物品。"
 		},
 		"data": {
 			"data_description": "给数据党看的各种杂七杂八的数值",
