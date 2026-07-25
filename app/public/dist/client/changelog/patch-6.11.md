@@ -72,15 +72,23 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
 
+> Crit itemization ended up the most optimal for Fairy, because wands damage was able to scale on crit power and LUCK increase both crit chance and their wand effects. This change makes wand damage scale on ATK only and no longer on crit, but the three stats (ATK, SPEED, and CRIT_CHANCE/LUCK) all remain useful in their own way. We also make Razor Fang a more versatile utility item usable in other item builds than crit only.
+
 - Change RAZOR_FANG: 100% → 50% CRIT_POWER; ~~Critical attacks~~ All attacks apply ARMOR_BREAK for 2 seconds.
+- Change all Fairy Wands: Fairy attacks deal X % ~~of attack damage~~ → of ATK as additional SPECIAL ON_HIT
+- Compensation buff for BLAST_WAND: 40% → 50% ATK as SPECIAL if it's a critical hit
+- Buff TWO_EDGED_WAND: 40% → 50% ATK as SPECIAL
+- Nerf LONG_WAND: only ranged allies get +1 RANGE. (excludes Pokémon with a base RANGE of 1)
+
+- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
+- PUNCHING_GLOVE additional damage is no longer applied as a separate instance of damage but added to the attack damage instead. This makes it better against FIGHTING comps.
+- RECYCLE_TICKET now also remove base components
 
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
-- RECYCLE_TICKET now also remove base components
-- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
-- PUNCHING_GLOVE additional damage is no longer applied as a separate instance of damage but added to the attack damage instead. This makes it better against FIGHTING comps.
+- Nerf CONFUSION status: the chance to target allies or itself is halved and is reduced with Pokémon's LUCK.
 
 # UI
 

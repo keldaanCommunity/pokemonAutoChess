@@ -50,7 +50,8 @@ export default abstract class PokemonState {
       let critChance = pokemon.critChance / 100
       if (
         pokemon.player?.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY)
+        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.range > 1
       ) {
         const distance = distanceM(
           pokemon.positionX,
@@ -131,12 +132,7 @@ export default abstract class PokemonState {
       }
 
       if (isAttackSuccessful && pokemon.types.has(Synergy.FAIRY)) {
-        const { takenDamage, death } = applyWandEffects(
-          pokemon,
-          target,
-          damage,
-          crit
-        )
+        const { takenDamage, death } = applyWandEffects(pokemon, target, crit)
         totalTakenDamage += takenDamage
         if (death) hasAttackKilled = true
       }
@@ -1309,11 +1305,13 @@ export default abstract class PokemonState {
     let distance = pokemon.range + 1
     let candidates: PokemonEntity[] = []
 
+    const chanceToBypassConfusion = chance(0.5, pokemon)
+    const shouldAlsoTargetAllies = !chanceToBypassConfusion
     board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) => {
       if (
         pkm &&
         pkm.id !== pokemon.id &&
-        pkm.isTargettableBy(pokemon, true, true)
+        pkm.isTargettableBy(pokemon, true, shouldAlsoTargetAllies)
       ) {
         const candidateDistance = distanceM(
           pokemon.positionX,
@@ -1330,7 +1328,9 @@ export default abstract class PokemonState {
       }
     })
 
-    candidates.push(pokemon) // sometimes attack itself when confused
+    if (shouldAlsoTargetAllies) {
+      candidates.push(pokemon) // sometimes attack itself when confused
+    }
 
     if (candidates.length > 0) {
       return pickRandomIn(candidates)
