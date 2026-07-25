@@ -1515,8 +1515,8 @@ export default class BoardManager {
   addChest(x: number, y: number) {
     const chestGroup = this.scene.add.group()
     const chest = this.scene.add
-      .sprite(x, y, "chest", "1.png")
-      .setScale(2)
+      .sprite(x, y, "chest", "001.png")
+      .setScale(1.5)
       .setTint(getRegionTint(this.scene.mapName, preference("colorblindMode")))
     chestGroup.add(chest)
     chestGroup.setDepth(DEPTH.INANIMATE_OBJECTS)

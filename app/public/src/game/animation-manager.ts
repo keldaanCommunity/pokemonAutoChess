@@ -235,8 +235,9 @@ export default class AnimationManager {
     this.game.anims.create({
       key: "open_chest",
       frames: this.game.anims.generateFrameNames("chest", {
-        start: 1,
-        end: 4,
+        start: 0,
+        end: 8,
+        zeroPad: 3,
         suffix: ".png"
       }),
       duration: 600,
