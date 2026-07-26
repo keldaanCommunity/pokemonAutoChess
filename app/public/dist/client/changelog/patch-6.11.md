@@ -106,6 +106,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 - Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
 - Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
+- Fix some scenarios where HEAVY_DUTY_BOOTS were not preventing the board effect if the board effect spawns directly on their tile
 
 # Misc
 
