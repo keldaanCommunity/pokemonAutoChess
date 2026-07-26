@@ -1005,6 +1005,7 @@ export class OnUseItemCommand extends Command<
   execute({ client, item }) {
     const player = this.state.players.get(client.auth.uid)
     if (!player || !player.alive || !player.doubleUpPartnerId) return
+    if (!player.items.includes(item)) return
 
     const fromPlayer = this.state.players.get(player?.doubleUpPartnerId)
     if (!fromPlayer) return
