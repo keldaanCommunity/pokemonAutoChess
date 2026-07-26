@@ -15,12 +15,16 @@ import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Berries,
   ConsumableItems,
+  Dishes,
   Flavors,
   Item,
+  Mulches,
   type OgerponMasks,
   SpecialBerries,
+  Sweets,
   SynergyFlavors,
-  SynergyItems
+  SynergyItems,
+  TMs
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
@@ -1483,7 +1487,12 @@ export const PassiveEffects: Partial<
         return false
       } else if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30)
-        player.items.push(Item.TRASH)
+        if (isIn([...Dishes, ...Flavors, ...Sweets], item) === false) {
+          player.items.push(Item.TRASH)
+        }
+        if (isIn(TMs, item)) {
+          player.tms.splice(player.tms.indexOf(item), 1, Item.TRASH)
+        }
         removeInArray(player.items, item)
         return false
       }

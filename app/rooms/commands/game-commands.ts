@@ -785,17 +785,21 @@ export class OnDragDropItemCommand extends Command<
         (effect) => effect instanceof OnItemDroppedEffect
       ) ?? [])
     ]
+
+    let shouldEquipItem = true
     for (const onItemDroppedEffect of onItemDroppedEffects) {
-      const shouldEquipItem = onItemDroppedEffect.apply({
+      const didThatEffectAllowToEquipItem = onItemDroppedEffect.apply({
         pokemon,
         player,
         item,
         room: this.room
       })
-      if (shouldEquipItem === false) {
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
-      }
+      if (!didThatEffectAllowToEquipItem) shouldEquipItem = false
+    }
+
+    if (shouldEquipItem === false) {
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      return
     }
 
     if (isIn(Dishes, item)) {
