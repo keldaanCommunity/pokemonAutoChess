@@ -678,6 +678,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
           player.tradeStatus === TradeStatus.ACCEPTED &&
           partner?.tradeStatus === TradeStatus.ACCEPTED
         ) {
+          if (player.tradeCooldown > 0 || partner.tradeCooldown > 0) return
           this.tradePokemonWithPartner(player, partner)
           player.tradeStatus = TradeStatus.PENDING
           partner.tradeStatus = TradeStatus.PENDING
