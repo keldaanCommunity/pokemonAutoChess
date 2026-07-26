@@ -91,6 +91,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
 - Nerf CONFUSION status: the chance to target allies or itself is halved and is reduced with Pokémon's LUCK.
+- Crit reduction and negation (Rock, Rocky Helmet) no longer apply on the true damage part of the crit attack damage (Steel, Red Orb)
 
 # UI
 

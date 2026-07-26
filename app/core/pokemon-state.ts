@@ -3,12 +3,7 @@ import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
-import {
-  AttackType,
-  HealType,
-  PokemonActionState,
-  Team
-} from "../types/enum/Game"
+import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
@@ -17,7 +12,7 @@ import { Weather } from "../types/enum/Weather"
 import { count } from "../utils/array"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
-import { clamp, max, min } from "../utils/number"
+import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
@@ -62,39 +57,29 @@ export default abstract class PokemonState {
         critChance += 0.01 * distance
       }
       const crit = chance(critChance, pokemon)
+      let critReductionFactor = 1.0
 
       const nbBlackAugurite = target.player
         ? count(target.player.items, Item.BLACK_AUGURITE)
         : 0
 
       if (crit) {
-        if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let reductionFactor = 1.0
-          if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-            reductionFactor -= 0.3
-          } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-            reductionFactor -= 0.5
-          } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-            reductionFactor -= 0.7
-          }
-          reductionFactor -= 0.1 * nbBlackAugurite
+        const hasCritNegation = target.items.has(Item.ROCKY_HELMET) === true
+        if (hasCritNegation) {
+          critReductionFactor = 0
+        } else if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
+          critReductionFactor -= 0.3
+        } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
+          critReductionFactor -= 0.5
+        } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
+          critReductionFactor -= 0.7
+        }
+        critReductionFactor -= 0.1 * nbBlackAugurite
+        critReductionFactor = min(0)(critReductionFactor)
 
-          const damageWithoutCrit = damage
-          const damageAfterCrit = damage * pokemon.critPower
-          const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
-
-          damage = min(0)(
-            Math.round(
-              damageWithoutCrit + critPartOfTheDamage * reductionFactor
-            )
-          )
+        if (!hasCritNegation) {
           target.count.crit++
         }
-      }
-
-      let reductionFactor = 1 - 0.1 * nbBlackAugurite
-      if (target.items.has(Item.ROCKY_HELMET) === true) {
-        reductionFactor = 0
       }
 
       if (target.effects.has(EffectEnum.WONDER_ROOM)) {
@@ -177,7 +162,9 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(
           [15, 30, 60, 120][pokemon.stars - 1] *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
+            (abilityCrit
+              ? 1 + (pokemon.critPower - 1) * critReductionFactor
+              : 1)
         )
 
         pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
@@ -188,7 +175,9 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(
           ([30, 60, 120, 240][pokemon.stars - 1] ?? 240) *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
+            (abilityCrit
+              ? 1 + (pokemon.critPower - 1) * critReductionFactor
+              : 1)
         )
         pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
       }
@@ -206,15 +195,22 @@ export default abstract class PokemonState {
           (([20, 40, 60, 120][pokemon.stars - 1] ?? 120) +
             nbComfeeAllies * ([10, 20, 30, 60][pokemon.stars - 1] ?? 60)) *
             (1 + pokemon.ap / 100) *
-            (abilityCrit ? min(1)(pokemon.critPower * reductionFactor) : 1)
+            (abilityCrit
+              ? 1 + (pokemon.critPower - 1) * critReductionFactor
+              : 1)
         )
         pokemon.effects.delete(EffectEnum.ATTACK_ORDER_NEXT_ATTACK)
       }
 
       if (trueDamagePart > 0) {
         // Apply true damage part
-        trueDamage = Math.ceil(damage * trueDamagePart)
+        trueDamage = damage * trueDamagePart * (crit ? pokemon.critPower : 1)
         damage = min(0)(damage * (1 - trueDamagePart))
+      }
+
+      if (crit) {
+        // apply crit reduction AFTER true damage has been applied
+        damage *= 1 + (pokemon.critPower - 1) * critReductionFactor
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -225,15 +221,17 @@ export default abstract class PokemonState {
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
         const stoneEdgeMult = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
-        physicalDamage += Math.round(
-          pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
-        )
+        physicalDamage += pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
       }
 
       if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
-        physicalDamage += Math.round(0.08 * target.maxHP)
+        physicalDamage += 0.08 * target.maxHP
       }
 
+      // rounding damage after all computations done
+      physicalDamage = Math.round(physicalDamage)
+      specialDamage = Math.round(specialDamage)
+      trueDamage = Math.round(trueDamage)
       const totalDamage = physicalDamage + specialDamage + trueDamage
 
       if (isAttackSuccessful && pokemon.items.has(Item.RAZOR_FANG)) {

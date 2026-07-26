@@ -555,7 +555,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = applyBigEaterBeltStatBuff(this, value, caster, 2)
     value = applyTwistBandBuff(this, value, caster)
 
-    this.critPower = min(0)(this.critPower + value)
+    this.critPower = min(1)(this.critPower + value)
   }
 
   addMaxHP(
