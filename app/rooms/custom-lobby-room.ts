@@ -36,6 +36,7 @@ import {
   ChangeAvatarCommand,
   ChangeNameCommand,
   ChangeTitleCommand,
+  ChoosePalCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
   GiveBoostersCommand,
@@ -165,6 +166,16 @@ export default class CustomLobbyRoom extends Room {
         this.dispatcher.dispatch(new SelectLanguageCommand(), {
           client,
           message
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.SELECT_PAL,
+      async (client, playerUid: string | null) => {
+        this.dispatcher.dispatch(new ChoosePalCommand(), {
+          client,
+          playerUid
         })
       }
     )
