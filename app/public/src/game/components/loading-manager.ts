@@ -19,7 +19,7 @@ export default class LoadingManager {
   scene: Phaser.Scene
   loadingBar: GameObjects.Container | null = null
   statusMessage: string
-  ready: Promise<void>
+  preloadingPromise: Promise<void>
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
@@ -33,7 +33,7 @@ export default class LoadingManager {
       this.statusMessage = t("loading_complete")
     })
 
-    this.ready = this.preload()
+    this.preloadingPromise = this.preload()
   }
 
   async preload() {
@@ -115,6 +115,7 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       await new Promise<void>((resolve) => {
+        // start another Phaser loading queue after the fetch requests of preloadMaps have been awaited
         scene.load.once("complete", () => resolve())
         scene.load.start()
       })
