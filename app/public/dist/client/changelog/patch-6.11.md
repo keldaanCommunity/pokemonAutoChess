@@ -107,6 +107,13 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
 - Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
 
+# Elo adjustments
+
+> We are experiencing slow Elo deflation with the anti-smurfing measures and the decrease in the number of new players, so we're making small adjustments to counterbalance that. +0 never felt good anyway. We are also removing the overlaps which were initially intended to streamline lobby filling but ended up causing friction, as players in the overlap had an advantage over the others.
+
+- Minimum elo gain when you're on the upper part of the ranking (top 4 on a regular 8 player lobby with no disconnect) raised from +0 to +1 elo (same as first place)
+- Ranked games elo ranges adjusted to remove elo overlaps: 0-1099 → 0-1050 ; 1050-1200 → 1050-1150 ; 1150-1299 → 1150-1250
+
 # Misc
 
 - Rune Protect status is renamed to Safeguard
