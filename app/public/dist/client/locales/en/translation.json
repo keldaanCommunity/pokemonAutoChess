@@ -1190,7 +1190,11 @@
 		"SPIDOPS": "Spidops",
 		"BUG_NEST": "Bug Nest",
 		"SLITHER_WING": "Slither Wing",
-		"PASSIMIAN": "Passimian"
+		"PASSIMIAN": "Passimian",
+		"ORICORIO_BAILE": "Oricorio (Baile Style)",
+		"ORICORIO_PA_U": "Oricorio (Pa’u Style)",
+		"ORICORIO_POMPOM": "Oricorio (Pom-Pom Style)",
+		"ORICORIO_SENSU": "Oricorio (Sensu Style)"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1776,7 +1780,8 @@
 		"COIL": "Coil",
 		"SUBSTITUTE": "Substitute",
 		"SWARM": "Call of the Swarm",
-		"FLING": "Fling"
+		"FLING": "Fling",
+		"REVELATION_DANCE": "Revelation Dance"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2322,7 +2327,7 @@
 		"SHADOW_FORCE": "Teleport into the largest group of enemy Pokémon, dealing [30,45,60,120,SP] SPECIAL to ADJACENT enemies, breaking barriers like PROTECT and Reflect, and transforms into Origin Form.",
 		"SHADOW_CLAW": "Slash enemies in front of the user, dealing [20,40,60,120,SP] SPECIAL and healing HP for 25% of the damage dealt. If only one enemy is hit, deals [60,100,140,280,SP] SPECIAL.",
 		"GLACIAL_LANCE": "Rush to a safe spot in the backline and then throws a lance of ice to the farthest target. First enemy hit takes [300,300,300,600,SP]% of user's ATK as SPECIAL, and ADJACENT enemies take half of that damage.",
-		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, or [10,SP] LUCK.",
+		"FEATHER_DANCE": "Flies to the furthest ally, scattering 10 feathers along the path. Each feather grants a random stat buff to allies or inflicts a debuff to enemies: [20,SP] HP, [4,SP] ATK, [4,SP] DEF, [4,SP] SPE_DEF, [10,SP] SPEED, [10,SP] AP or [10,SP] LUCK.",
 		"ORDER_UP": "Deal [30,60,100,200,SP] SPECIAL to the target. If a Tatsugiri has been swallowed, gains the stats provided by it again. If no Tatsugiri is on board, one spawns on your bench, with a different form each round.",
 		"ICE_SPINNER": "Coats its feet in ice and spins into ADJACENT enemies, dealing [15,30,60,120,SP] SPECIAL, knocking them back, and clearing BOARD_EFFECT on ADJACENT tiles.",
 		"CEASELESS_EDGE": "Hits the 3 enemies in front of the user for [20,40,80,160,SP] SPECIAL, also leaving spikes under them. Can crit by default. BOARD_EFFECT: spikes deal 10 TRUE per second and inflict ARMOR_BREAK onto non FLYING or STEEL Pokémon that walk on it.",
@@ -2339,7 +2344,8 @@
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]",
 		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
 		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
-		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead"
+		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
+		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD"		
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2927,7 +2933,11 @@
 		"SMALL_EXP_GIFT": "Small Exp Gift",
 		"LARGE_EXP_GIFT": "Large Exp Gift",
 		"STAR_GIFT": "Star Gift",
-		"BANQUET": "Banquet"
+		"BANQUET": "Banquet",
+		"PINK_NECTAR": "Pink Nectar",
+		"PURPLE_NECTAR": "Purple Nectar",
+		"YELLOW_NECTAR": "Yellow Nectar",
+		"RED_NECTAR": "Red Nectar"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3283,7 +3293,11 @@
 		"SMALL_EXP_GIFT": "Your partner gains 8 XP. Excess XP at max level is given as GOLD.",
 		"LARGE_EXP_GIFT": "Your partner gains 24 XP. Excess XP at max level is given as GOLD.",
 		"STAR_GIFT": "Evolve one random Pokémon from your partner's board. If no Pokémon on the board can evolve, one of them will receive a big stat boost.",
-		"BANQUET": "Give a random dish to every Pokémon on your partner's board and bench. On top of that get one mushroom of each type and a picnic set. Bon appétit!"
+		"BANQUET": "Give a random dish to every Pokémon on your partner's board and bench. On top of that get one mushroom of each type and a picnic set. Bon appétit!",
+		"PINK_NECTAR": "Can be given to Oricorio to switch to Pa'U Style",
+		"PURPLE_NECTAR": "Can be given to Oricorio to switch to Sensu Style",
+		"YELLOW_NECTAR": "Can be given to Oricorio to switch to Pom Pom Style",
+		"RED_NECTAR": "Can be given to Oricorio to switch to Baile Style"
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -3480,7 +3494,8 @@
 		"STOUTLAND_SEARCH": "Stoutland barks when standing on a cell with a hidden item buried in the ground.",
 		"SUBSTITUTE": "A decoy created to look like a Pokémon",
 		"PASSIMIAN": "Passimian comes with a BALL as item held",
-		"UXIE": "XP gained: {{stacks}}"
+		"UXIE": "XP gained: {{stacks}}",
+		"NECTAR": "When a flower pot is fully grown, gain nectar based on its color."
 	},
 	"stat": {
 		"ATK": "Attack",

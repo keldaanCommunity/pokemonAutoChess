@@ -34,12 +34,15 @@ export const OrientationArray: Orientation[] = [
 ]
 
 export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
-  let angle = Math.atan2(y2 - y1, x2 - x1)
+  const angle = Math.atan2(y2 - y1, x2 - x1)
+  return getOrientationFromAngle(angle)
+}
+
+export function getOrientationFromAngle(angle: number){
   if (angle < 0) {
     angle += 2 * Math.PI
   }
   const quarterPi = Math.PI / 4
-  // logger.debug(angle);
   if (angle < quarterPi) {
     return Orientation.RIGHT
   } else if (angle < 2 * quarterPi) {

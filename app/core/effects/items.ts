@@ -1113,6 +1113,42 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.PINK_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_PA_U) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_PA_U)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.YELLOW_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_POMPOM) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_POMPOM)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.RED_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_BAILE) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_BAILE)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.PURPLE_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_SENSU) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_SENSU)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.TEAL_MASK]: [ogerponMaskEffect],
   [Item.WELLSPRING_MASK]: [ogerponMaskEffect],
   [Item.CORNERSTONE_MASK]: [ogerponMaskEffect],

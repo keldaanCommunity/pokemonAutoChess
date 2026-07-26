@@ -20795,6 +20795,124 @@ export class Passimian extends Pokemon {
   }
 }
 
+function giveNectarsAlreadyUnlocked(player: Player) {
+  const nectarsByPotIndex = [
+    Item.RED_NECTAR,
+    Item.YELLOW_NECTAR,
+    Item.PINK_NECTAR,
+    Item.PURPLE_NECTAR
+  ]
+  player.flowerPots.forEach((pkm, i) => {
+    if (
+      pkm.evolution === Pkm.DEFAULT &&
+      i in nectarsByPotIndex &&
+      player.items.includes(nectarsByPotIndex[i]) === false
+    ) {
+      player.items.push(nectarsByPotIndex[i])
+    }
+  })
+}
+
+export class OricorioBaile extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FIRE)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPomPom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ELECTRIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPaU extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.PSYCHIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioSensu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.GHOST)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21993,7 +22111,11 @@ export const PokemonClasses: Record<
   [Pkm.SPIDOPS]: Spidops,
   [Pkm.BUG_NEST]: BugNest,
   [Pkm.SLITHER_WING]: SlitherWing,
-  [Pkm.PASSIMIAN]: Passimian
+  [Pkm.PASSIMIAN]: Passimian,
+  [Pkm.ORICORIO_BAILE]: OricorioBaile,
+  [Pkm.ORICORIO_PA_U]: OricorioPaU,
+  [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
+  [Pkm.ORICORIO_SENSU]: OricorioSensu
 }
 
 // declare all the classes in colyseus schema TypeRegistry

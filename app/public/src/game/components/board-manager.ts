@@ -324,8 +324,8 @@ export default class BoardManager {
 
   getNbFlowerPots(): number {
     const floraTier = getSynergyTier(this.player.synergies, Synergy.FLORA)
-    const nbPotsPerTier = [0, 1, 2, 3, 4][floraTier] ?? 0
-    let nbPots = nbPotsPerTier[floraTier]
+    const nbPotsPerTier = [0, 1, 2, 3, 4]
+    let nbPots = nbPotsPerTier[floraTier] ?? 0
     if (
       floraTier >= 4 &&
       this.player.flowerPots.every((p) => p.evolution === Pkm.DEFAULT)

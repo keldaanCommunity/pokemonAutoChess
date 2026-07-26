@@ -722,6 +722,10 @@ export enum Pkm {
   OMASTAR = "OMASTAR",
   ONIX = "ONIX",
   ORBEETLE = "ORBEETLE",
+  ORICORIO_BAILE = "ORICORIO_BAILE",
+  ORICORIO_PA_U = "ORICORIO_PA_U",
+  ORICORIO_POMPOM = "ORICORIO_POMPOM",
+  ORICORIO_SENSU = "ORICORIO_SENSU",
   ORIGIN_GIRATINA = "ORIGIN_GIRATINA",
   ORTHWORM = "ORTHWORM",
   OSHAWOTT = "OSHAWOTT",
@@ -2129,7 +2133,10 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.VIKAVOLT]: "0738",
   [Pkm.CRABRAWLER]: "0739",
   [Pkm.CRABOMINABLE]: "0740",
-  //[Pkm.ORICORIO]: "0741",
+  [Pkm.ORICORIO_BAILE]: "0741",
+  [Pkm.ORICORIO_POMPOM]: "0741-0001",
+  [Pkm.ORICORIO_PA_U]: "0741-0002",
+  [Pkm.ORICORIO_SENSU]: "0741-0003",
   [Pkm.CUTIEFLY]: "0742",
   [Pkm.RIBOMBEE]: "0743",
   [Pkm.ROCKRUFF]: "0744",
@@ -3669,7 +3676,11 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.SPIDOPS]: Pkm.TAROUNTULA,
   [Pkm.BUG_NEST]: Pkm.BUG_NEST,
   [Pkm.SLITHER_WING]: Pkm.SLITHER_WING,
-  [Pkm.PASSIMIAN]: Pkm.PASSIMIAN
+  [Pkm.PASSIMIAN]: Pkm.PASSIMIAN,
+  [Pkm.ORICORIO_BAILE]: Pkm.ORICORIO_BAILE,
+  [Pkm.ORICORIO_PA_U]: Pkm.ORICORIO_BAILE,
+  [Pkm.ORICORIO_POMPOM]: Pkm.ORICORIO_BAILE,
+  [Pkm.ORICORIO_SENSU]: Pkm.ORICORIO_BAILE
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
