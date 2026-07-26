@@ -609,6 +609,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    if (this.items.has(Item.NULLIFY_BANDANNA)) {
+      this.addAttack(Math.round(0.2 * value), caster, 0, false) // AP is gained as Attack instead
+      return
+    }
+
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
@@ -619,12 +624,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.ap = min(-100)(target.ap + value)
     }
 
-    if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addAttack(Math.round(0.3 * value), caster, 0, false) // AP is gained as Attack instead
-    } else {
-      update(this)
-    }
-
+    update(this)
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }

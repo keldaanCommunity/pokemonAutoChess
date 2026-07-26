@@ -3194,7 +3194,7 @@
 		"LUCKY_RIBBON": "El usuario obtiene 20 LUCK y tiene [15,LK]% de probabilidad de esquivar ataques.",
 		"COVER_BAND": "Si un aliado ADJACENT está por ser derrotado por daño inminente, el usuario toma el daño en vez de él.",
 		"EFFICIENT_BANDANNA": "El usuario y los aliados ADJACENT_IN_THE_SAME_ROW tienen sus PP máximos reducidos en un 15%.",
-		"NULLIFY_BANDANNA": "El usuario ya no puede usar su habilidad. AP es convertido a ATK (10:3), y PP es convertido a SPECIAL adicional en el próximo ataque",
+		"NULLIFY_BANDANNA": "El usuario ya no puede usar su habilidad. AP es convertido a ATK (5:1), y PP es convertido a SPECIAL adicional en el próximo ataque",
 		"WANTED_NOTICE": "Se busca: Debilitado o Vivo\nRecompensa: 10 GOLD",
 		"CONFUSE_WAND": "Los ataques de hada realizan un 20% ATK de SPECIAL ON_HIT adicional y tienen un [5,LK]% de probabilidad de causar CONFUSION por 2 segundos y reducir su SPE_DEF por 3.",
 		"PETRIFY_WAND": "Los ataques de hada realizan un 20% ATK de SPECIAL ON_HIT adicional  y tienen un [5,LK]% de causar LOCKED por 2 segundos y reducir su DEF por 3.",
