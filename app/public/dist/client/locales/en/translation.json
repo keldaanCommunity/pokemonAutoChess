@@ -3723,6 +3723,7 @@
 		"POSTMAN": "Postman",
 		"SURVEY_CORPS": "Survey Corps",
 		"GUILDMASTER": "Guildmaster",
+		"PAL": "Pal",
 		"LEGIONNAIRE": "Legionnaire",
 		"FIVE_STARS": "★★★★★"
 	},
@@ -3821,6 +3822,7 @@
 		"POSTMAN": "Complete a Delivery mission expedition",
 		"SURVEY_CORPS": "Complete a Battle mission expedition",
 		"GUILDMASTER": "Complete a rank S expedition",
+		"PAL": "Play in Double Up with your pal during Poképals event",
 		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more",
 		"FIVE_STARS": "Play with a five stars Pokémon in your team"
 	},
@@ -5161,6 +5163,20 @@
 		"help2": "Be the first to reach 500 points to win the race and get an exclusive title !",
 		"runners": "Runners",
 		"finishers": "Finishers"
+	},
+	"pokepals": {
+		"title": "Poképals",
+		"leaderboard": "Leaderboard",
+		"points": "{{points}} points",
+		"team_score": "Team score: {{points}}",
+		"instructions": "Play with your pal in Double Up !",
+		"help1": "Playing Double Up game mode when teaming up with your designed partner grants you points based on your final rank",
+		"help2": "Teamwork will lead you to victory!",
+		"your_pal": "Your pal",
+		"confirmed": "Your team is locked and ready to compete.",
+		"not_confirmed": "Your pal has to enter your name in return to lock the team.",
+		"enter_pal_name": "Enter the name of your pal",
+		"change_pal": "Change pal"
 	},
 	"events_reset_info": "All scores will be reset at midnight UTC on the first day of each month, that is in {{resetCountdown}}. The event leaderboard is refreshed every 10 minutes.",
 	"stage_type": {
