@@ -39,5 +39,6 @@ export const InimitableAbilities: Ability[] = [
   Ability.SHADOW_FORCE,
   Ability.SKETCH,
   Ability.SKILL_SWAP,
-  Ability.SWARM
+  Ability.SWARM,
+  Ability.REVELATION_DANCE
 ]

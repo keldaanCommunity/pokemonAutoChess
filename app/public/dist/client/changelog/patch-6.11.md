@@ -2,6 +2,10 @@
 # New Pokemons:
 
 - Passimian
+- Oricorio (Baile Style)
+- Oricorio (Pom Pom Style)
+- Oricorio (Pa'U Style)
+- Oricorio (Sensu Style)
 
 # Changes to Pokemon & Abilities
 

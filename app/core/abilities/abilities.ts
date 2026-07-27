@@ -395,6 +395,7 @@ import { ReflectStrategy } from "./reflect"
 import { RelicSongStrategy } from "./relic-song"
 import { RetaliateStrategy } from "./retaliate"
 import { ReturnStrategy } from "./return"
+import { RevelationDanceStrategy } from "./revelation-dance";
 import { RoarStrategy } from "./roar"
 import { RoarOfTimeStrategy } from "./roar-of-time"
 import { RockArtilleryStrategy } from "./rock-artillery"
@@ -1112,6 +1113,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.RELIC_SONG]: new RelicSongStrategy(),
   [Ability.RETALIATE]: new RetaliateStrategy(),
   [Ability.RETURN]: new ReturnStrategy(),
+  [Ability.REVELATION_DANCE]: new RevelationDanceStrategy(),
   [Ability.ROAR]: new RoarStrategy(),
   [Ability.ROAR_OF_TIME]: new RoarOfTimeStrategy(),
   [Ability.ROCK_ARTILLERY]: new RockArtilleryStrategy(),

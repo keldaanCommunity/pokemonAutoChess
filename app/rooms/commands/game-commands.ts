@@ -63,6 +63,7 @@ import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
   Emotion,
+  FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
@@ -77,6 +78,7 @@ import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
+import { FlowerPots } from "../../types/enum/FlowerPot"
 import {
   BattleResult,
   GameMode,
@@ -750,6 +752,23 @@ export class OnDragDropItemCommand extends Command<
         player.flowerPots[index] = potEvolution
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
+
+        if (potEvolution.evolution === Pkm.DEFAULT) {
+          const oricorios = schemaValues(player.board).filter(
+            (p) => p.passive === Passive.NECTAR
+          )
+          oricorios.forEach(() => {
+            const nectar = {
+              [FlowerPot.BLUE]: Item.PURPLE_NECTAR,
+              [FlowerPot.PINK]: Item.RED_NECTAR,
+              [FlowerPot.WHITE]: Item.PINK_NECTAR,
+              [FlowerPot.YELLOW]: Item.YELLOW_NECTAR
+            }[FlowerPots[index]]
+            if (nectar && player.items.includes(nectar) === false) {
+              player.items.push(nectar)
+            }
+          })
+        }
         return
       }
     } else if (zone === "berry-tree-zone") {
