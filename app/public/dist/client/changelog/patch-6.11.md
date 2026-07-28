@@ -2,6 +2,10 @@
 # New Pokemons:
 
 - Passimian
+- Oricorio (Baile Style)
+- Oricorio (Pom Pom Style)
+- Oricorio (Pa'U Style)
+- Oricorio (Sensu Style)
 
 # Changes to Pokemon & Abilities
 
@@ -28,7 +32,8 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Tail Glow (Volbeat): AP buff 50 → 30
 
 - Falinks now values training your troopers with FIGHTING 8 effects. Change Passive: at the start of the battle, all troopers on your bench join Falinks Brass, ~~giving 30 SHIELD, 1 ATK and 1 DEF each~~ combining their base ATK and DEF and giving their base HP as SHIELD. Change Ability No Retreat: no longer gains ATK and SPEED.
-- New visual animations for Budew line
+- Buff Budew line: DEF/ SPE_DEF: 2 at all ranks → 2/4/6 ; ATK: 5/15/17 → 5/15/25
+- Rework Petal Dance (Budew): Release 3/4/5 petals spread equally among the closest enemy pokemon. New visual animation. Projectiles now have travel time.
 - Brave Bird (Staraptor) now procs the FLYING synergy effects when FLY_AWAY
 - New passive for Stoutland: Stoutland barks when standing on a cell with a hidden item buried in the ground.
 - Dondozo gains Monster synergy. HP: 250 → 220
@@ -45,38 +50,87 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Hyper Beam (TM): 50/100/150 → 65/130/250/500 SPECIAL
 - New TM Substitute (replaces TM Protect): spawns a Substitute at the location of the user with [25,25,25,50,SP]% of max HP of the user as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.
 
+- Buff Psycho-Boost (Deoxys Base Form): AP reduction per unit hit: 20 → 10
+- Buff Deoxys Speed Form: SPEED 90 → 100
+- Revert Articuno buff from 6.2; PP 110 → 120
+- Nerf all Eeveelutions: HP 180 → 150
+
+> Lapras can't enough nerfs. Back to 120PP for the third time.
+
+- Lapras DEF: 7 → 5 ; PP: 100 → 120
+- Change Entrainment (Audino): can no longer a target already entrained
+- Buff Ember board effect: BURN duration 1 second → 2 seconds
+- Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
+- Nerf Enamorus: ATK 26 → 23
+- Change Unown M ability: all team gains ~~max~~ 50 PP
+- Psybeam (Staryu): CONFUSION duration 4 seconds at all ranks → 2/3/4/5 seconds
+
 # Changes to Synergies
 
 - Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.
 - Change Monster 8: Monster Pokémon can no longer cast their abilities on allies, only do basic attacks. Monster Pokémon can target allies that have less than ~~10% of their max HP~~ 10 HP
 - Change Grass 9: ~~Once below 30% max HP, gain 50 AP~~ → When consuming a berry, gain 50 AP
+- Buff Dark: Crit Power 30/50/80 → 40/60/100%
 
 # Changes to Items
 
 - New shiny item: GOLD_MASK ; replaces White Flute, now spawns Pokemon that share a type with the holder (thanks to tegberen)
 - New shiny item: STAR_PIECE ; replaces Comet Shard, gives 1 additional STAR to the holder ; all abilities now have a fourth (fifth ?) tier
-
-
 - Change GOLD_DOJO_TICKET and SILVER_DOJO_TICKET: now requires 3 stages at the dojo instead of 4/5
+
+> Crit itemization ended up the most optimal for Fairy, because wands damage was able to scale on crit power and LUCK increase both crit chance and their wand effects. This change makes wand damage scale on ATK only and no longer on crit, but the three stats (ATK, SPEED, and CRIT_CHANCE/LUCK) all remain useful in their own way. We also make Razor Fang a more versatile utility item usable in other item builds than crit only.
+
+- Change RAZOR_FANG: 100% → 50% CRIT_POWER; ~~Critical attacks~~ All attacks apply ARMOR_BREAK for 2 seconds.
+- Change all Fairy Wands: Fairy attacks deal X % ~~of attack damage~~ → of ATK as additional SPECIAL ON_HIT
+- Compensation buff for BLAST_WAND: 40% → 50% ATK as SPECIAL if it's a critical hit
+- Buff TWO_EDGED_WAND: 40% → 50% ATK as SPECIAL
+- Nerf LONG_WAND: only ranged allies get +1 RANGE. (excludes Pokémon with a base RANGE of 1)
+
+- PROTECTIVE_PADS no longer double damage on shield when that damage is self-inflicted (with Flame Orb for example)
+- PUNCHING_GLOVE additional damage is no longer applied as a separate instance of damage but added to the attack damage instead. This makes it better against FIGHTING comps.
+- RECYCLE_TICKET now also remove base components
+- Change NULLIFY_BANDANNA: AP is converted to ~~SHIELD~~ ATK (1 ATK for 5 AP ratio)
 
 # Gameplay
 
 - Some abilities are now tagged as INIMITABLE ; meaning they can't be copied by other Pokémon and abilities like Sketch, Metronome, Assist, Encore, Knowledge Thief, Skill Swap... Most notably, Smeargle can no longer copy Unown abilities.
 - New effect for Drought weather: -3 PP per second
+- Nerf CONFUSION status: the chance to target allies or itself is halved and is reduced with Pokémon's LUCK.
+- Crit reduction and negation (Rock, Rocky Helmet) no longer apply on the true damage part of the crit attack damage (Steel, Red Orb)
 
 # UI
 
 - Add a glossary page in the wiki to explain various technical terms and game mechanics.
 - Values scaling by tier on abilities and passives are no longer visible in the Pokémon tooltips ingame ; only the current tier value is displayed to ease the reading. The list of all tiered values is still visible in the Wiki.
 - Add in Wiki > Pokémon a tab for units that are not Pokémon
+- Uxie XP gained is now indicated in their tooltip
+- Added spectator count in game stage info bar (thanks to tegberen)
 
 # Bugfix
 
+- Fix DARK melee Pokémon not receiving their intended shorter opening cooldown before jumping.
+- Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
+- Fix some scenarios where HEAVY_DUTY_BOOTS were not preventing the board effect if the board effect spawns directly on their tile
+- Fix Garbodor not being able to trash Mulch and TMs
+
+# Elo adjustments
+
+> We are experiencing slow Elo deflation with the anti-smurfing measures and the decrease in the number of new players, so we're making small adjustments to counterbalance that. +0 never felt good anyway. We are also removing the overlaps which were initially intended to streamline lobby filling but ended up causing friction, as players in the overlap had an advantage over the others.
+
+- Minimum elo gain when you're on the upper part of the ranking (top 4 on a regular 8 player lobby with no disconnect) raised from +0 to +1 elo (same as first place)
+- Ranked games elo ranges adjusted to remove elo overlaps: 0-1099 → 0-1050 ; 1050-1200 → 1050-1150 ; 1150-1299 → 1150-1250
+
 # Misc
 
+- Rune Protect status is renamed to Safeguard
 - New title: Five Stars
 - New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
 - Avatar emotes can now be used in lobby chat
 - Add symbols to tier list maker gadget and change layout
 - Add /unholdable-items GET endpoint
+- Improved colorblind patterns on pokemon portraits in shop
+- New gadget: Recorder ; unlocked at level 10, allows you to record your games in the background and watch and save replays. Thanks to brobinett for that huge work.
+- Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
+- Tier List Maker gadget is now unlocked at level 25 instead of level 50
+- Sprite Tracker gadget  is now unlocked at level 50 instead of level 60

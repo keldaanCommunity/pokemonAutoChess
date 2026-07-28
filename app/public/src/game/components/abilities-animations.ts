@@ -428,7 +428,7 @@ export function addAbilitySprite(
     scale,
     depth,
     tint,
-    tintFill,
+    tintMode,
     rotation,
     angle,
     alpha,
@@ -452,10 +452,8 @@ export function addAbilitySprite(
   )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
+  if (tintMode) sprite.setTintMode(tintMode)
   if (tint) sprite.setTint(tint)
-  if (tintFill) {
-    sprite.setTint(tintFill).setTintMode(Phaser.TintModes.FILL)
-  }
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -644,12 +642,21 @@ const projectile: AbilityAnimationMaker<
     distance?: number
     easeX?: string | ((v: number) => number)
     easeY?: string | ((v: number) => number)
+    projectileSpeed?: number // manhattan distance travelled in one second
   }
 > =
   (options = {}) =>
   (args) => {
-    let { startCoords, endCoords, oriented, rotation, distance, orientation } =
-      options
+    let {
+      startCoords,
+      endCoords,
+      oriented,
+      rotation,
+      distance,
+      orientation,
+      projectileSpeed,
+      duration
+    } = options
 
     let endPosition: [number, number]
     if (distance !== undefined || orientation !== undefined) {
@@ -679,8 +686,8 @@ const projectile: AbilityAnimationMaker<
         dy = Math.sin(angleToTarget)
       }
       endPosition = transformEntityCoordinates(
-        ox + dx * (options.distance ?? 12),
-        oy + dy * (options.distance ?? 12),
+        ox + dx * (distance ?? 12),
+        oy + dy * (distance ?? 12),
         args.flip
       )
 
@@ -690,23 +697,26 @@ const projectile: AbilityAnimationMaker<
       }
     } else {
       // projectile stopping on target or certain coordinates
-      const [endRow, endCol, endFlip] = parseCoordinates(
+      const [endX, endY, endFlip] = parseCoordinates(
         endCoords ?? "target",
         args
       )
-      endPosition = transformEntityCoordinates(
-        endRow,
-        endCol,
-        endFlip ?? args.flip
-      )
+      const [ox, oy] = parseCoordinates(startCoords ?? "caster", args)
+      distance = distanceM(ox, oy, endX, endY)
+      endPosition = transformEntityCoordinates(endX, endY, endFlip ?? args.flip)
     }
 
     endPosition[0] += options.endPositionOffset?.[0] ?? 0
     endPosition[1] += options.endPositionOffset?.[1] ?? 0
 
+    if (projectileSpeed !== undefined && duration === undefined) {
+      duration = Math.round(((distance ?? 12) * 1000) / projectileSpeed)
+    }
+
     return tweenAnimation({
       ...options,
       oriented,
+      duration,
       rotation,
       startCoords,
       endCoords,
@@ -867,6 +877,10 @@ export const AbilitiesAnimations: {
       }
     }
   ],
+  ["PETAL_DANCE_PROJECTILE"]: projectile({
+    projectileSpeed: 10,
+    hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 })
+  }),
   [Ability.AROMATHERAPY]: onCasterScale2,
   [Ability.BOUNCE]: onCasterScale2,
   [Ability.BRICK_BREAK]: onTargetScale2,
@@ -2527,7 +2541,7 @@ export const AbilitiesAnimations: {
       ability: "SNIPE_SHOT/projectile",
       scale: 3,
       duration: 1000,
-      rotation: -targetAngle,
+      rotation: args.flip ? targetAngle : -targetAngle,
       endCoords: [
         args.positionX + Math.round(Math.cos(targetAngle) * 10),
         args.positionY + Math.round(Math.sin(targetAngle) * 10),
@@ -2887,7 +2901,8 @@ export const AbilitiesAnimations: {
     onTarget({
       ability: Ability.MAGIC_POWDER,
       scale: 3,
-      tintFill: [0xd369c3, 0x41acf0, 0xe9ef4d, 0xfefff9][args.delay ?? 0],
+      tint: [0xd369c3, 0x41acf0, 0xe9ef4d, 0xfefff9][args.delay ?? 0],
+      tintMode: Phaser.TintModes.FILL,
       positionOffset: [randomBetween(-50, 50), randomBetween(-50, 50)],
       delay: randomBetween(0, 200)
     })(args),
@@ -3036,6 +3051,27 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DARK_VOID,
     scale: 2
+  }),
+  [Ability.REVELATION_DANCE]: onSprite(({ casterSprite, ...args }) => {
+    let color = 0xffffff
+    switch (casterSprite?.pokemon?.name) {
+      case Pkm.ORICORIO_BAILE:
+        color = 0xe8535e
+        break
+      case Pkm.ORICORIO_POMPOM:
+        color = 0xebe13f
+        break
+      case Pkm.ORICORIO_PA_U:
+        color = 0xec8099
+        break
+      case Pkm.ORICORIO_SENSU:
+        color = 0x9898cb
+        break
+    }
+    return onCaster({
+      scale: 2,
+      tint: color
+    })(args)
   }),
   ["WISP"]: projectile({
     duration: 1000,

@@ -8,6 +8,7 @@ import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
+import { resetActiveGameRoom } from "../game/recorder"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { client, joinGame, leaveRoom, rooms } from "../network"
 import { resetBoosters } from "../stores/BoostersStore"
@@ -49,6 +50,11 @@ export default function Lobby() {
       lobbyJoined.current = true
     }
   }, [lobbyJoined])
+
+  // back in the lobby, flush the finished game's in-memory tail to disk, then release the recorder's ref
+  useEffect(() => {
+    void resetActiveGameRoom()
+  }, [])
 
   const signOut = useCallback(async () => {
     leaveRoom("lobby")

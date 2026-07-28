@@ -10,7 +10,8 @@ export default function WikiGlossary() {
     "craftable_items",
     "consumable_item",
     "unholdable_item",
-    "removable_item"
+    "removable_item",
+    "gift"
   ] as const
 
   return (

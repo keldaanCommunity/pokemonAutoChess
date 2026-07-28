@@ -7,11 +7,12 @@ export class RelicSongStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     if (pokemon.count.ult % 3 === 0) {
-      const factor = 0.5
-    const sleepDuration = Math.round(
-         ([2000, 2000, 2000, 5000][pokemon.stars - 1] ?? 5000) *
-          (1 + (pokemon.ap / 100) * factor) *
-          (crit ? 1 + (pokemon.critPower - 1) * factor : 1)
+      const flatDuration = [1000, 1000, 1000, 2500][pokemon.stars - 1] ?? 2500
+      const durationWithAP = flatDuration * (2 + pokemon.ap / 100)
+      const critScalingFactor = 0.5
+      const sleepDuration = Math.round(
+        durationWithAP *
+          (crit ? 1 + (pokemon.critPower - 1) * critScalingFactor : 1)
       )
       board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
         if (tg && pokemon.team != tg.team) {
@@ -21,7 +22,12 @@ export class RelicSongStrategy extends AbilityStrategy {
     } else {
       board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
         if (tg && pokemon.team === tg.team) {
-          tg.addShield([10, 10, 10, 25][pokemon.stars - 1] ?? 25, pokemon, 1, crit)
+          tg.addShield(
+            [10, 10, 10, 25][pokemon.stars - 1] ?? 25,
+            pokemon,
+            1,
+            crit
+          )
         }
       })
     }

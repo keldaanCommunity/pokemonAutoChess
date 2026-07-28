@@ -124,6 +124,21 @@
   height: 1.5em;
 }
 
+#game-stage-info .spectators-information {
+  display: flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+#game-stage-info .spectators-information > img {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#game-stage-info .spectators-information .spectators-count {
+  font-weight: 600;
+}
+
 #detail-weather p,
 #detail-map p {
   white-space: pre-line;

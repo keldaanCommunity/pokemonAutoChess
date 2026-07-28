@@ -42,6 +42,8 @@ export interface IPreferencesState {
   renderer: number
   antialiasing: boolean
   colorblindMode: boolean
+  recordReplays: boolean
+  keepReplays: number
   theme: string
 }
 
@@ -70,6 +72,8 @@ const defaultPreferences: IPreferencesState = {
   renderer: Phaser.AUTO,
   antialiasing: true,
   colorblindMode: false,
+  recordReplays: true,
+  keepReplays: 5,
   theme: "default",
   keybindings: {
     sell: "E",

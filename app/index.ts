@@ -43,9 +43,9 @@ async function main() {
       // only the first thread of the first machine will create the lobby and init cron jobs
       await matchMaker.createRoom("lobby", {})
       checkLobby()
+      warmupSpriteGapScanner()
     }
     initCronJobs(isLobbyThread)
-    warmupSpriteGapScanner()
   } else {
     // single thread config
     await listen(app, process.env.PORT ? parseInt(process.env.PORT) : 9000)
@@ -59,8 +59,6 @@ async function main() {
   setInterval(() => fetchLeaderboards(), 1000 * 60 * 10) // refresh every 10 minutes
   logger.info("Fetching meta reports...")
   fetchMetaReports()
-  logger.info("Refreshing sprite gap scanner...")
-  setInterval(() => refreshSpriteGapData(), 1000 * 60 * 60 * 24) // refresh every 24 hours
   logger.info("Fetching Twitch streams...")
   refreshTwitchBlacklist()
   setInterval(() => refreshTwitchBlacklist(), 1000 * 60)
@@ -123,7 +121,7 @@ function listenForMaintenanceOrders() {
       } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
         fetchMetaReports()
       } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
-        refreshSpriteGapData()
+        refreshSpriteGapData(true)
       } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
         refreshTwitchStreams()
       } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {

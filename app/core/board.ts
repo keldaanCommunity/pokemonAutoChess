@@ -1,4 +1,4 @@
-import { type IPokemonEntity, Transfer } from "../types"
+import { type IPokemonEntity, Item, Transfer } from "../types"
 import { type BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { distanceC, distanceM } from "../utils/distance"
@@ -637,7 +637,7 @@ export class Board {
   ) {
     const previousEffects = this.boardEffects[y * this.columns + x]
     const entityOnCell = this.getEntityOnCell(x, y)
-    if (entityOnCell) {
+    if (entityOnCell && entityOnCell.items.has(Item.HEAVY_DUTY_BOOTS) === false) {
       entityOnCell.effects.add(effect)
     }
 

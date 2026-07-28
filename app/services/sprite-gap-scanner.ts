@@ -1,3 +1,4 @@
+import SpriteGapCache from "../models/mongo-models/sprite-gap-cache"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
@@ -124,7 +125,93 @@ interface CacheSnapshot {
 }
 
 let cache: CacheSnapshot | null = null
-const CACHE_TTL_MS = 24 * 60 * 60 * 1000 // 24 hours
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
+const MIN_REMOTE_REFRESH_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
+const CACHE_SNAPSHOT_ID = "global"
+const CACHE_HYDRATION_INTERVAL_MS = 60 * 1000
+let inFlightRefresh: Promise<SpriteGapScannerResult> | null = null
+let inFlightHydration: Promise<void> | null = null
+let lastHydrationAttempt = 0
+
+function isValidSnapshot(value: unknown): value is CacheSnapshot {
+  if (!value || typeof value !== "object") {
+    return false
+  }
+
+  const snapshot = value as CacheSnapshot
+  return Boolean(
+    snapshot.data &&
+      Array.isArray(snapshot.data.spriteOnly) &&
+      snapshot.data.stats &&
+      typeof snapshot.timestamp === "number"
+  )
+}
+
+async function hydrateCacheFromPersistence(force = false): Promise<void> {
+  const now = Date.now()
+
+  if (!force && now - lastHydrationAttempt < CACHE_HYDRATION_INTERVAL_MS) {
+    return
+  }
+
+  if (inFlightHydration) {
+    return inFlightHydration
+  }
+
+  lastHydrationAttempt = now
+
+  inFlightHydration = (async () => {
+    try {
+      const doc = await SpriteGapCache.findById(CACHE_SNAPSHOT_ID).lean()
+      if (!doc) {
+        return
+      }
+
+      const snapshot = {
+        data: doc.data as SpriteGapScannerResult,
+        timestamp: doc.timestamp
+      }
+
+      if (isValidSnapshot(snapshot)) {
+        if (!cache || snapshot.timestamp > cache.timestamp) {
+          cache = snapshot
+          logger.info(
+            "[SPRITE_GAP_SCANNER] Hydrated cache snapshot from MongoDB"
+          )
+        }
+      }
+    } catch (error) {
+      logger.warn(
+        "[SPRITE_GAP_SCANNER] Failed to hydrate cache snapshot from MongoDB",
+        error
+      )
+    } finally {
+      inFlightHydration = null
+    }
+  })()
+
+  return inFlightHydration
+}
+
+function queueHydrateCacheFromPersistence(): void {
+  void hydrateCacheFromPersistence()
+}
+
+async function persistCacheSnapshot(snapshot: CacheSnapshot): Promise<void> {
+  try {
+    await SpriteGapCache.updateOne(
+      { _id: CACHE_SNAPSHOT_ID },
+      {
+        _id: CACHE_SNAPSHOT_ID,
+        timestamp: snapshot.timestamp,
+        data: snapshot.data
+      },
+      { upsert: true }
+    )
+  } catch (error) {
+    logger.warn("[SPRITE_GAP_SCANNER] Failed to persist cache snapshot", error)
+  }
+}
 
 /**
  * Normalize SpriteCollab fullPath to PAC dashed index format
@@ -329,76 +416,104 @@ function compareIndexes(
 
 /**
  * Refresh sprite gap scanner data from remote GraphQL endpoint
- * Called on schedule (daily cron) and lazily if cache is stale
+ * Called on schedule (daily cron), startup warmup and manual maintenance command
  */
-async function refreshSpriteGapDataInternal(): Promise<SpriteGapScannerResult> {
-  const startTime = Date.now()
+async function refreshSpriteGapDataInternal(
+  force = false
+): Promise<SpriteGapScannerResult> {
+  await hydrateCacheFromPersistence()
+  const now = Date.now()
 
-  try {
-    logger.info("[SPRITE_GAP_SCANNER] Starting data refresh...")
-
-    const mons = await fetchSpriteCollabMons()
+  if (
+    !force &&
+    cache &&
+    now - cache.timestamp < MIN_REMOTE_REFRESH_INTERVAL_MS
+  ) {
     logger.info(
-      `[SPRITE_GAP_SCANNER] Fetched ${mons.length} monsters from SpriteCollab`
+      "[SPRITE_GAP_SCANNER] Skipping remote refresh because it ran recently"
     )
+    return cache.data
+  }
 
-    const spriteIndexMap = parseMonsForms(mons)
-    const result = compareIndexes(spriteIndexMap)
+  if (inFlightRefresh) {
+    return inFlightRefresh
+  }
 
-    result.stats.refreshDurationMs = Date.now() - startTime
+  const startTime = now
 
-    // Update cache
-    cache = {
-      data: result,
-      timestamp: Date.now()
-    }
+  inFlightRefresh = (async () => {
+    try {
+      logger.info("[SPRITE_GAP_SCANNER] Starting data refresh...")
 
-    logger.info(
-      `[SPRITE_GAP_SCANNER] Refresh complete in ${result.stats.refreshDurationMs}ms: ` +
-        `${result.spriteOnly.length} sprite-only`
-    )
+      const mons = await fetchSpriteCollabMons()
+      logger.info(
+        `[SPRITE_GAP_SCANNER] Fetched ${mons.length} monsters from SpriteCollab`
+      )
 
-    return result
-  } catch (error) {
-    logger.error(
-      "[SPRITE_GAP_SCANNER] Refresh failed",
-      error,
-      "returning stale cache or empty result"
-    )
+      const spriteIndexMap = parseMonsForms(mons)
+      const result = compareIndexes(spriteIndexMap)
 
-    // If cache exists, return stale data with error flag
-    if (cache) {
-      return {
-        ...cache.data,
-        stats: {
-          ...cache.data.stats,
-          lastRefresh: cache.timestamp
+      result.stats.refreshDurationMs = Date.now() - startTime
+
+      // Update cache
+      cache = {
+        data: result,
+        timestamp: Date.now()
+      }
+      await persistCacheSnapshot(cache)
+
+      logger.info(
+        `[SPRITE_GAP_SCANNER] Refresh complete in ${result.stats.refreshDurationMs}ms: ` +
+          `${result.spriteOnly.length} sprite-only`
+      )
+
+      return result
+    } catch (error) {
+      logger.error(
+        "[SPRITE_GAP_SCANNER] Refresh failed",
+        error,
+        "returning stale cache or empty result"
+      )
+
+      // If cache exists, return stale data with error flag
+      if (cache) {
+        return {
+          ...cache.data,
+          stats: {
+            ...cache.data.stats,
+            lastRefresh: cache.timestamp
+          }
         }
       }
-    }
 
-    // If no cache, return empty result
-    return {
-      spriteOnly: [],
-      stats: {
-        totalSpriteCollab: 0,
-        lastRefresh: Date.now(),
-        refreshDurationMs: Date.now() - startTime
+      // If no cache, return empty result
+      return {
+        spriteOnly: [],
+        stats: {
+          totalSpriteCollab: 0,
+          lastRefresh: Date.now(),
+          refreshDurationMs: Date.now() - startTime
+        }
       }
+    } finally {
+      inFlightRefresh = null
     }
-  }
+  })()
+
+  return inFlightRefresh
 }
 
-export function refreshSpriteGapData(): void {
-  refreshSpriteGapDataInternal()
+export function refreshSpriteGapData(force = false): void {
+  void refreshSpriteGapDataInternal(force)
 }
 
 /**
  * Get cached sprite gap scanner data
- * Returns cached data if valid (< 24h old), otherwise triggers async refresh
- * and returns previously cached data or empty result
+ * Returns cached data if valid (< 24h old), otherwise returns stale data or empty result
+ * and asynchronously tries to hydrate in-memory cache from MongoDB.
  */
 export function getCachedSpriteGapData(): SpriteGapScannerResult {
+  queueHydrateCacheFromPersistence()
   const now = Date.now()
 
   // Cache is valid
@@ -406,12 +521,10 @@ export function getCachedSpriteGapData(): SpriteGapScannerResult {
     return cache.data
   }
 
-  // Cache is stale or missing - trigger async refresh but return current state
+  // Cache is stale or missing - do not trigger remote refresh from API traffic.
+  // Refreshes are managed by startup, cron and maintenance commands.
   if (!cache) {
-    logger.debug("[SPRITE_GAP_SCANNER] Cache miss, queuing refresh")
-    // Trigger async refresh without awaiting
-    refreshSpriteGapData()
-    // Return empty result until cache is populated
+    logger.debug("[SPRITE_GAP_SCANNER] Cache miss, returning empty state")
     return {
       spriteOnly: [],
       stats: {
@@ -422,9 +535,8 @@ export function getCachedSpriteGapData(): SpriteGapScannerResult {
     }
   }
 
-  // Cache exists but is stale, queue refresh and return stale data
-  logger.debug("[SPRITE_GAP_SCANNER] Cache stale, queuing refresh")
-  refreshSpriteGapData()
+  // Cache exists but is stale, return stale data.
+  logger.debug("[SPRITE_GAP_SCANNER] Cache stale, returning stale state")
 
   return {
     ...cache.data,

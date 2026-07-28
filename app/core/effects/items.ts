@@ -16,6 +16,7 @@ import {
   Flavors,
   HerbaMysticas,
   Item,
+  ItemComponents,
   ItemRecipe,
   MemoryDiscs,
   NonSpecialBerries,
@@ -49,7 +50,6 @@ import { DelayedCommand } from "../simulation-command"
 import { getSynergyTier } from "../synergies"
 import { getUnitScore } from "../unit-score"
 import {
-  BeforeAttackEffect,
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -58,7 +58,6 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   type OnDeathEffectArgs,
-  OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
@@ -591,18 +590,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect(({ attacker, target, board }) => {
-      target.handleDamage({
-        damage: Math.round(0.08 * target.maxHP),
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker,
-        shouldTargetGainMana: true
-      })
-    })
-  ],
-
   [Item.SHELL_BELL]: [
     new OnDamageDealtEffect(({ pokemon, damage, target }) => {
       if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
@@ -1014,14 +1001,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.RAZOR_FANG]: [
-    new BeforeAttackEffect(({ target, crit }) => {
-      if (crit && target) {
-        target.status.triggerArmorReduction(2000, target)
-      }
-    })
-  ],
-
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -1134,6 +1113,42 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.PINK_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_PA_U) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_PA_U)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.YELLOW_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_POMPOM) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_POMPOM)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.RED_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_BAILE) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_BAILE)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.PURPLE_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_SENSU) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_SENSU)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.TEAL_MASK]: [ogerponMaskEffect],
   [Item.WELLSPRING_MASK]: [ogerponMaskEffect],
   [Item.CORNERSTONE_MASK]: [ogerponMaskEffect],
@@ -1172,6 +1187,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
+        } else if (isIn(ItemComponents, heldItem)) {
+          player.items.push(heldItem)
+          pokemon.removeItem(heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
           removeInArray(player.scarvesItems, heldItem)

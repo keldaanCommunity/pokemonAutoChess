@@ -11,9 +11,11 @@ export class TauntStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    // Gain 25% (AP scaling=0.5) of max HP as shield, and force adjacent enemies to choose you as target
-    const shield = ([25, 25, 25, 50][pokemon.stars - 1] ?? 50) / 100 * pokemon.maxHP
-    pokemon.addShield(shield, pokemon, 0.5, crit)
+    const flatShieldPercent =
+      [0.125, 0.125, 0.125, 0.25][pokemon.stars - 1] ?? 0.25
+    const flatShield = flatShieldPercent * pokemon.maxHP
+    const shieldWithAP = flatShield * (2 + pokemon.ap / 100)
+    pokemon.addShield(shieldWithAP, pokemon, 0, crit)
     const enemiesTaunted = board.cells.filter(
       (enemy): enemy is PokemonEntity =>
         enemy != null &&

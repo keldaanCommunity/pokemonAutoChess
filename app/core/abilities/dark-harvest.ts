@@ -12,6 +12,13 @@ class DarkHarvestEffect extends PeriodicEffect {
   constructor(duration: number, pokemon: PokemonEntity) {
     super(
       (pokemon) => {
+        this.duration -= this.intervalMs
+        if (this.duration <= 0) {
+          pokemon.effectsSet.delete(this)
+          pokemon.effects.delete(EffectEnum.DARK_HARVEST)
+          return
+        }
+
         if (
           pokemon.status.resurrecting ||
           pokemon.status.freeze ||
@@ -46,20 +53,13 @@ class DarkHarvestEffect extends PeriodicEffect {
               )
             }
           })
-
-        if (this.duration <= 0) {
-          pokemon.effectsSet.delete(this)
-          pokemon.effects.delete(EffectEnum.DARK_HARVEST)
-        } else {
-          this.duration -= this.intervalMs
-        }
       },
       EffectEnum.DARK_HARVEST,
       1000
     )
 
     this.timer = 0 // delay the first tick
-    this.duration = duration + this.intervalMs
+    this.duration = duration + 200 // to ensure the effect ticks 3 times exactly, 200ms is a good margin for 3 event loops
 
     if (pokemon.effects.has(EffectEnum.DARK_HARVEST)) {
       pokemon.effectsSet.delete(this)
@@ -89,7 +89,6 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         board
       )
     const effectDuration = 3000
-    const marginDuration = 200 // to ensure the effect ticks 3 times exactly, 200ms is a good margin for 3 event loops
 
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
@@ -98,14 +97,8 @@ export class DarkHarvestStrategy extends AbilityStrategy {
         board,
         false
       )
-      pokemon.effectsSet.add(
-        new DarkHarvestEffect(effectDuration + marginDuration, pokemon)
-      )
-      pokemon.status.triggerSilence(
-        effectDuration + marginDuration,
-        pokemon,
-        pokemon
-      )
+      pokemon.effectsSet.add(new DarkHarvestEffect(effectDuration, pokemon))
+      pokemon.status.triggerSilence(effectDuration, pokemon, pokemon)
     }
   }
 }

@@ -334,7 +334,35 @@ export enum Item {
   SKY_MELODICA = "SKY_MELODICA",
   TERRA_CYMBAL = "TERRA_CYMBAL",
   SOOTHE_BELL = "SOOTHE_BELL",
-  BALL = "BALL"
+  BALL = "BALL",
+  BERRIES_GIFT = "BERRIES_GIFT",
+  SWEETS_GIFT = "SWEETS_GIFT",
+  DITTO_GIFT = "DITTO_GIFT",
+  TICKET_BUNDLE = "TICKET_BUNDLE",
+  HATCH_BUNDLE = "HATCH_BUNDLE",
+  REGIONAL_TOUR = "REGIONAL_TOUR",
+  BANQUET = "BANQUET",
+  GEMS_BUNDLE = "GEMS_BUNDLE",
+  POTION = "POTION",
+  FORAGE_BAG = "FORAGE_BAG",
+  COLLECTION_BOX = "COLLECTION_BOX",
+  PRETTY_BOX = "PRETTY_BOX",
+  DELUXE_BOX = "DELUXE_BOX",
+  TOOLBOX = "TOOLBOX",
+  SMALL_EXP_GIFT = "SMALL_EXP_GIFT",
+  LARGE_EXP_GIFT = "LARGE_EXP_GIFT",
+  STAR_GIFT = "STAR_GIFT",
+  COMMON_GIFT = "COMMON_GIFT",
+  UNCOMMON_GIFT = "UNCOMMON_GIFT",
+  RARE_GIFT = "RARE_GIFT",
+  EPIC_GIFT = "EPIC_GIFT",
+  ULTRA_GIFT = "ULTRA_GIFT",
+  UNIQUE_GIFT = "UNIQUE_GIFT",
+  LEGENDARY_GIFT = "LEGENDARY_GIFT",
+  PURPLE_NECTAR = "PURPLE_NECTAR",
+  RED_NECTAR = "RED_NECTAR",
+  PINK_NECTAR = "PINK_NECTAR",
+  YELLOW_NECTAR = "YELLOW_NECTAR"
 }
 
 export const MemoryDiscs = [
@@ -399,6 +427,13 @@ export const MemoryDiscsBySynergy: {
   [Synergy.STELLAR]: Item.STELLAR_MEMORY
 }
 
+export const Nectars = [
+  Item.RED_NECTAR,
+  Item.PURPLE_NECTAR,
+  Item.YELLOW_NECTAR,
+  Item.PINK_NECTAR
+] satisfies Item[]
+
 export const MissionOrders = [
   Item.MISSION_ORDER_PINK,
   Item.MISSION_ORDER_RED,
@@ -439,52 +474,6 @@ export const TownItems = [
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT
-] satisfies Item[]
-
-// should be excluded from carousels
-export const SpecialItems: Item[] = [
-  ...TownItems,
-  Item.COIN,
-  Item.NUGGET,
-  Item.BIG_NUGGET,
-  Item.TRASH,
-  Item.FIRE_SHARD,
-  Item.CELL_BATTERY,
-  Item.OLD_ROD,
-  Item.GOOD_ROD,
-  Item.SUPER_ROD,
-  Item.CHEF_HAT,
-  Item.VANILLA_FLAVOR,
-  Item.RUBY_FLAVOR,
-  Item.MATCHA_FLAVOR,
-  Item.MINT_FLAVOR,
-  Item.LEMON_FLAVOR,
-  Item.SALTED_FLAVOR,
-  Item.RUBY_SWIRL_FLAVOR,
-  Item.CARAMEL_SWIRL_FLAVOR,
-  Item.RAINBOW_SWIRL_FLAVOR,
-  Item.RICH_MULCH,
-  Item.AMAZE_MULCH,
-  Item.ROTOM_CATALOG,
-  Item.TEAL_MASK,
-  Item.WELLSPRING_MASK,
-  Item.CORNERSTONE_MASK,
-  Item.HEARTHFLAME_MASK,
-  Item.ZYGARDE_CUBE,
-  Item.METEORITE,
-  Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR,
-  Item.RUSTED_SWORD,
-  Item.SCROLL_OF_WATERS,
-  Item.SCROLL_OF_DARKNESS,
-  Item.MEMORY_DISCS,
-  ...MemoryDiscs,
-  Item.COMFEY,
-  Item.TATSUGIRI_CURLY,
-  Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY,
-  Item.MYSTERY_BOX,
-  Item.BALL
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -1204,3 +1193,42 @@ export const UnholdableItemsToSaveForStats = [
   ...SevenTreasures,
   ...WeatherRocks
 ] satisfies UnholdableItem[]
+
+// should be excluded from carousels
+export const SpecialItems: Item[] = [
+  ...TownItems,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
+  Item.TRASH,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
+  Item.CHEF_HAT,
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH,
+  Item.ROTOM_CATALOG,
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK,
+  Item.ZYGARDE_CUBE,
+  Item.METEORITE,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.MYSTERY_BOX,
+  Item.RUSTED_SWORD,
+  Item.SCROLL_OF_WATERS,
+  Item.SCROLL_OF_DARKNESS,
+  Item.MEMORY_DISCS,
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY,
+  Item.BALL,
+  ...Flavors,
+  ...Nectars
+] satisfies Item[]

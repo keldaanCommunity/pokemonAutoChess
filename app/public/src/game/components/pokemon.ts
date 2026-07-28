@@ -51,6 +51,7 @@ import {
 } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
+import { isReplayRoom } from "../replay-room-id"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import {
@@ -72,6 +73,7 @@ const spriteCountPerPokemon = new Map<string, number>()
 
 export function resetSpriteCounts() {
   spriteCountPerPokemon.clear()
+  for (const index in lazyLoadingRequests) delete lazyLoadingRequests[index]
 }
 
 const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
@@ -269,7 +271,11 @@ export default class PokemonSprite extends DraggableObject {
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
+    if (
+      isGameScene(this.scene) &&
+      this.scene.lastPokemonDetail &&
+      !isReplayRoom(this.scene.room)
+    ) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
     }
@@ -1432,9 +1438,9 @@ export default class PokemonSprite extends DraggableObject {
   addRuneProtect() {
     if (!this.runeProtect) {
       this.runeProtect = this.scene.add
-        .sprite(0, -40, "status", "RUNE_PROTECT/000.png")
+        .sprite(0, -40, "status", "SAFEGUARD/000.png")
         .setScale(2)
-      this.runeProtect.anims.play("RUNE_PROTECT")
+      this.runeProtect.anims.play("SAFEGUARD")
       this.add(this.runeProtect)
     }
   }
@@ -1723,6 +1729,13 @@ export function loadCompressedAtlas(
     return lazyLoadingRequests[index]
   }
   lazyLoadingRequests[index] = new Promise((resolve) => {
+    const onError = (file: Phaser.Loader.File) => {
+      if (file.key !== `pokemon-atlas-${index}` && file.key !== index) return
+      scene.load.off("loaderror", onError)
+      delete lazyLoadingRequests[index]
+      resolve(index)
+    }
+    scene.load.on("loaderror", onError)
     scene.load.once(
       `filecomplete-json-pokemon-atlas-${index}`,
       (key, type, data) => {
@@ -1791,6 +1804,7 @@ export function loadCompressedAtlas(
         const index = image.replace(".png", "")
 
         scene.textures.once(`addtexture-${index}`, () => {
+          scene.load.off("loaderror", onError)
           delete lazyLoadingRequests[index]
           resolve(index)
         })

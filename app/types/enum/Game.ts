@@ -15,7 +15,8 @@ export enum GameMode {
   CLASSIC = "CLASSIC",
   RANKED = "RANKED",
   SCRIBBLE = "SCRIBBLE",
-  TOURNAMENT = "TOURNAMENT"
+  TOURNAMENT = "TOURNAMENT",
+  DOUBLE_UP = "DOUBLE_UP"
 }
 
 export enum GamePhaseState {

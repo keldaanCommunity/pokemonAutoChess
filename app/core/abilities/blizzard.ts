@@ -11,7 +11,7 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const freezeDuration = 2000
+    const freezeDuration = 1500
     const damage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)

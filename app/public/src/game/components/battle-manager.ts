@@ -126,7 +126,7 @@ export default class BattleManager {
         pokemon.name === Pkm.FALINKS_BRASS ||
         pokemon.passive === Passive.AVALUGG
       ) {
-        this.addTroopers(pokemon, pokemonUI, simulationId)
+        this.addTroopers(pokemon, pokemonUI, simulationId, playerId)
       }
       if (pokemon.action === PokemonActionState.BLOSSOM) {
         pokemonUI.blossomAnimation()
@@ -1342,7 +1342,8 @@ export default class BattleManager {
   addTroopers(
     trooperChief: IPokemonEntity,
     trooperChiefSprite: PokemonSprite,
-    simulationId: string
+    simulationId: string,
+    playerId: string
   ) {
     const trooperName =
       trooperChief.name === Pkm.FALINKS_BRASS
@@ -1353,7 +1354,7 @@ export default class BattleManager {
     if (trooperName === null) return
 
     const troopersBenchSprites = [...this.scene.board!.pokemons.values()]
-      .filter((p) => p.name === trooperName && isOnBench(p))
+      .filter((p) => p.name === trooperName && isOnBench(p) && p.playerId === playerId)
       .slice(0, MaxTroopersPerPkm[trooperChief.name])
 
     if (trooperChiefSprite.troopers) {

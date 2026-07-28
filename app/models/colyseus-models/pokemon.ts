@@ -1507,8 +1507,8 @@ export class Roselia extends Pokemon {
   hp = 130
   atk = 15
   speed = 54
-  def = 2
-  speDef = 2
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
@@ -1519,10 +1519,10 @@ export class Roserade extends Pokemon {
   rarity = Rarity.EPIC
   stars = 3
   hp = 230
-  atk = 17
+  atk = 25
   speed = 54
-  def = 2
-  speDef = 2
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.PETAL_DANCE
@@ -5650,7 +5650,7 @@ export class Articuno extends Pokemon {
   speed = 52
   def = 6
   speDef = 6
-  maxPP = 110
+  maxPP = 120
   range = 2
   skill = Ability.BLIZZARD
   passive = Passive.SNOW
@@ -6137,7 +6137,7 @@ export class Vaporeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6151,7 +6151,7 @@ export class Jolteon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 8
   speed = 83
   def = 6
@@ -6165,7 +6165,7 @@ export class Flareon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FIRE, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6179,7 +6179,7 @@ export class Espeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 8
   speed = 70
   def = 6
@@ -6193,7 +6193,7 @@ export class Umbreon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6207,7 +6207,7 @@ export class Leafeon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 9
   speed = 61
   def = 6
@@ -6221,7 +6221,7 @@ export class Sylveon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FAIRY, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6235,7 +6235,7 @@ export class Glaceon extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FIELD])
   rarity = Rarity.SPECIAL
   stars = 2
-  hp = 180
+  hp = 150
   atk = 12
   speed = 43
   def = 6
@@ -6377,6 +6377,21 @@ export class Kecleon extends Pokemon {
   range = 1
   skill = Ability.CAMOUFLAGE
   passive = Passive.PROTEAN2
+}
+
+export class KecleonPurple extends Pokemon {
+  types = new SetSchema<Synergy>([])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  hp = 200
+  atk = 22
+  speed = 38
+  def = 6
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.CAMOUFLAGE
+  regional = true
 }
 
 function updateCastform(pokemon: Pokemon, weather: Weather, player: Player) {
@@ -6573,7 +6588,7 @@ export class Enamorus extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 250
-  atk = 26
+  atk = 23
   speed = 59
   def = 6
   speDef = 6
@@ -6963,9 +6978,9 @@ export class Lapras extends Pokemon {
   hp = 225
   atk = 12
   speed = 38
-  def = 7
+  def = 5
   speDef = 9
-  maxPP = 100
+  maxPP = 120
   range = 1
   skill = Ability.DIVE
 }
@@ -7012,6 +7027,7 @@ export class Uxie extends Pokemon {
   maxPP = 90
   range = 3
   skill = Ability.KNOWLEDGE_THIEF
+  passive = Passive.UXIE
 }
 
 export class Mesprit extends Pokemon {
@@ -7323,7 +7339,7 @@ export class DeoxysSpeed extends Pokemon {
   stars = 3
   hp = 250
   atk = 15
-  speed = 90
+  speed = 100
   def = 6
   speDef = 6
   maxPP = 60
@@ -20793,6 +20809,124 @@ export class Passimian extends Pokemon {
   }
 }
 
+function giveNectarsAlreadyUnlocked(player: Player) {
+  const nectarsByPotIndex = [
+    Item.RED_NECTAR,
+    Item.YELLOW_NECTAR,
+    Item.PINK_NECTAR,
+    Item.PURPLE_NECTAR
+  ]
+  player.flowerPots.forEach((pkm, i) => {
+    if (
+      pkm.evolution === Pkm.DEFAULT &&
+      i in nectarsByPotIndex &&
+      player.items.includes(nectarsByPotIndex[i]) === false
+    ) {
+      player.items.push(nectarsByPotIndex[i])
+    }
+  })
+}
+
+export class OricorioBaile extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FIRE)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPomPom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ELECTRIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPaU extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.PSYCHIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioSensu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.GHOST)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21285,6 +21419,7 @@ export const PokemonClasses: Record<
   [Pkm.BUIZEL]: Buizel,
   [Pkm.FLOATZEL]: Floatzel,
   [Pkm.KECLEON]: Kecleon,
+  [Pkm.KECLEON_PURPLE]: KecleonPurple,
   [Pkm.CARBINK]: Carbink,
   [Pkm.CHATOT]: Chatot,
   [Pkm.GOOMY]: Goomy,
@@ -21990,7 +22125,11 @@ export const PokemonClasses: Record<
   [Pkm.SPIDOPS]: Spidops,
   [Pkm.BUG_NEST]: BugNest,
   [Pkm.SLITHER_WING]: SlitherWing,
-  [Pkm.PASSIMIAN]: Passimian
+  [Pkm.PASSIMIAN]: Passimian,
+  [Pkm.ORICORIO_BAILE]: OricorioBaile,
+  [Pkm.ORICORIO_PA_U]: OricorioPaU,
+  [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
+  [Pkm.ORICORIO_SENSU]: OricorioSensu
 }
 
 // declare all the classes in colyseus schema TypeRegistry

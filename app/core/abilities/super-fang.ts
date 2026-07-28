@@ -11,12 +11,11 @@ export class SuperFangStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const fangPercent = [0.2, 0.3, 0.5, 0.7][pokemon.stars - 1] ?? 0.7
-    const damage = Math.ceil(
-      fangPercent * target.maxHP * (1 + (0.5 * pokemon.ap) / 100)
-    )
+    const flatDamagePercent = [0.1, 0.15, 0.25, 0.35][pokemon.stars - 1] ?? 0.35
+    const flatDamage = flatDamagePercent * target.maxHP
+    const damageWithAP = Math.ceil(flatDamage * (2 + pokemon.ap / 100))
     target.handleSpecialDamage(
-      damage,
+      damageWithAP,
       board,
       AttackType.TRUE,
       pokemon,

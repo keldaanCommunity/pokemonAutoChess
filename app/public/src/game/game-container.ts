@@ -57,6 +57,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
+import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
 
 class GameContainer {
@@ -73,7 +74,8 @@ class GameContainer {
     this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    this.spectate = false
+    // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }
 
@@ -312,6 +314,7 @@ class GameContainer {
     this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
+      uid: this.uid,
       spectate: this.spectate
     })
     this.game.scale.on("resize", this.resize, this)
@@ -465,9 +468,14 @@ class GameContainer {
       const $pokemon = this.$<Pokemon>(pokemon)
       fields.forEach((field) => {
         $pokemon.listen(field, (value, previousValue) => {
-          if (field && player.id === this.playerIdSpectated) {
+          if (
+            field &&
+            (player.id === this.playerIdSpectated ||
+              player.doubleUpPartnerId === this.uid)
+          ) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               field,
               value as IPokemon[typeof field],
               previousValue as IPokemon[typeof field]
@@ -482,6 +490,7 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
               pokemon.hp + ItemStats[item][Stat.HP]!,
               pokemon.hp
@@ -501,11 +510,22 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
-              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp - ItemStats[item][Stat.HP]!,
               pokemon.hp
             )
           }
+        }
+      })
+
+      $pokemon.items.onChange(() => {
+        const board = this.gameScene?.board
+        if (
+          board?.tradingPlatform?.pokemonToTrade?.id === pokemon.id ||
+          board?.tradingPlatform?.partnerPokemonToTrade?.id === pokemon.id
+        ) {
+          board?.tradingPlatform.updateTrade(board.mode)
         }
       })
 
@@ -532,7 +552,7 @@ class GameContainer {
           null
         )
         toast(i, {
-          containerId: player.rank.toString(),
+          containerId: player.id,
           className: "toast-new-pokemon"
         })
       }
@@ -545,6 +565,14 @@ class GameContainer {
       if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
+
+      if (player.doubleUpPartnerId) {
+        this.gameScene?.board?.tradingPlatform?.updateTradeIfPokemonInvolved(
+          pokemon,
+          player,
+          this.gameScene.board.mode
+        )
+      }
     })
 
     $player.board.onChange((pokemon, key) => {
@@ -555,7 +583,6 @@ class GameContainer {
 
     $player.items.onChange((value, key) => {
       if (player.id === this.playerIdSpectated) {
-        //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })

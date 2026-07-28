@@ -504,7 +504,6 @@ export const bugSwarmSpawnEffect = new OnStageStartEffect(
 export function applyWandEffects(
   pokemon: PokemonEntity,
   target: PokemonEntity,
-  attackDamage: number,
   crit: boolean
 ): { takenDamage: number; death: boolean } {
   const board = pokemon.simulation.board
@@ -548,7 +547,7 @@ export function applyWandEffects(
       }
       case Item.BLAST_WAND: {
         if (crit) {
-          specialDamageFactor += 0.2
+          specialDamageFactor += 0.3
           pokemon.broadcastAbility({ skill: "PUFF_PINK" })
         }
         break
@@ -592,13 +591,13 @@ export function applyWandEffects(
         break
       }
       case Item.TWO_EDGED_WAND: {
-        specialDamageFactor += 0.2
+        specialDamageFactor += 0.3
         break
       }
     }
   }
 
-  const specialDamage = specialDamageFactor * attackDamage
+  const specialDamage = specialDamageFactor * pokemon.atk
   let { takenDamage, death } = target.handleSpecialDamage(
     specialDamage,
     board,
