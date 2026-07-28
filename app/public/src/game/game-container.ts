@@ -655,6 +655,7 @@ class GameContainer {
               this.room.state.gameMode
             )[0] ?? players[0]
           if (spectated) {
+            this.room.send(Transfer.SPECTATE, spectated.id)
             this.setPlayer(spectated)
             const simulation = this.room.state.simulations.get(
               spectated.simulationId
