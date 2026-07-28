@@ -649,16 +649,16 @@ class GameContainer {
       if (this.room.state.players.size > 0) {
         if (!this.player) {
           const players = schemaValues(this.room.state.players)
-          const spectated =
+          const playerToSpectate =
             sortPlayersByRankAndTeam(
               players.filter((p) => p.alive),
               this.room.state.gameMode
             )[0] ?? players[0]
-          if (spectated) {
-            this.room.send(Transfer.SPECTATE, spectated.id)
-            this.setPlayer(spectated)
+          if (playerToSpectate) {
+            this.room.send(Transfer.SPECTATE, playerToSpectate.id)
+            this.setPlayer(playerToSpectate)
             const simulation = this.room.state.simulations.get(
-              spectated.simulationId
+              playerToSpectate.simulationId
             )
             if (simulation) {
               this.setSimulation(simulation)
