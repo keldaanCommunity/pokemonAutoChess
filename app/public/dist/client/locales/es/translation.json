@@ -583,7 +583,8 @@
 		"DEFAULT": "Sin Habilidad",
 		"EAR_DIG": "Cavaoreja",
 		"SWARM": "Llamada del Enjambre",
-		"FLING": "Lanzamiento"
+		"FLING": "Lanzamiento",
+		"REVELATION_DANCE": "Danza Revelación"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1776,7 +1777,11 @@
 		"TATSUGIRI_CURLY": "Tatsugiri (Curvado)",
 		"TATSUGIRI_DROOPY": "Tatsugiri (Curvado)",
 		"TATSUGIRI_STRETCHY": "Tatsugiri (Recto)",
-		"SLITHER_WING": "Reptalada"
+		"SLITHER_WING": "Reptalada",
+		"ORICORIO_BAILE": "Oricorio (Estilo Apasionado)",
+		"ORICORIO_PA_U": "Oricorio (Estilo Animado)",
+		"ORICORIO_POMPOM": "Oricorio (Estilo Plácido)",
+		"ORICORIO_SENSU": "Oricorio (Estilo Refinado)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,160,SP] SHIELD a todos los aliados.",
@@ -2339,7 +2344,8 @@
 		"STUFF_CHEEKS": "Si el usuario tiene alguna baya, come una de ellas y obtiene [100,SP]% del HP que cura la misma como SHIELD. Si no tiene una, busca y equipa una baya aleatoria que será conservada para batallas futuras si es posible.",
 		"SILK_TRAP": "El usuario hace una trampa de seda, ganando PROTECT por 1.5 segundos. Cualquier ataque cuerpo a cuerpo recibido reducirá la SPEED del atacante por [5,10,15,30,SP] e inflige PARALYSIS por [1.5,SP,ND=1] segundos.",
 		"SKITTER_SMACK": "Se escabulle detrás del objetivo para golpearlo, realizando [15,30,60,120,SP] SPECIAL. Esto disminuye el AP del objetivo en 20.",
-		"FLING": "Cuando arroja la pelota, todos los enemigos entre el usuario y el recibidor reciben [30,30,30,100,SP]% de la SPEED como SPECIAL. Si no tiene una BALL, salta hacia una esquina del tablero y obtiene una nueva BALL."
+		"FLING": "Cuando arroja la pelota, todos los enemigos entre el usuario y el recibidor reciben [30,30,30,100,SP]% de la SPEED como SPECIAL. Si no tiene una BALL, salta hacia una esquina del tablero y obtiene una nueva BALL.",
+		"REVELATION_DANCE": "Realiza una danza que proyecta plumas en casillas ADJACENT. Los enemigos reciben [15,30,50,80,SP] SPECIAL y los aliados ganan un bonus dependiendo del estilo:\n-Estilo Apasionado: [3,6,10,15,SP] SPEED\n-Estilo Animado: [2,4,6,10,SP] ATK\n-Estilo Plácido:   [2,4,6,10,SP] SPE_DEF\n-Estilo Refinado:  [15,30,50,80,SP] SHIELD"
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
@@ -2899,7 +2905,12 @@
 		"GRASS_CORNET": "Herbicorneta",
 		"FIERY_DRUM": "Tambor Fuego",
 		"LEADERS_CREST": "Cresta del Líder",
-		"LAPRAS_PASSPORT": "Pase de viaje de Lapras"
+		"LAPRAS_PASSPORT": "Pase de viaje de Lapras",
+		"SWEETS_GIFT": "Dulces",
+		"PINK_NECTAR": "Néctar Rosa",
+		"PURPLE_NECTAR": "Néctar Púrpura",
+		"YELLOW_NECTAR": "Néctar Amarillo",
+		"RED_NECTAR": "Néctar Rojo"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3229,7 +3240,11 @@
 		"GOLDEN_NANAB_BERRY": "Se consume al estar por debajo del 50% HP. Cura 50% de los HP máximos y el jugador obtiene 5 GOLD.",
 		"BALL": "Una bola hecha de una baya grande y dura. Cuando utiliza su habilidad, arroja la bola hacia el aliado FIELD más lejano para pasarle la BALL y 50 SHIELD. Si no hay un aliado FIELD con un espacio libre a la vista, arroja la bola hacia el enemigo más lejano, realizando [30,SP]% de la SPEED del usuario como PHYSICAL",
 		"BERRIES": "Busca una baya aleatoria para que el chef la equipe. Si no tiene espacios libres, va a tu inventario.",
-		"GOLD_MASK": "Al comienzo de la pelea, invoca a 3 Pokémon que comparten un tipo con el usuario. La rareza y sus estrellas depende de la etapa de juego."
+		"GOLD_MASK": "Al comienzo de la pelea, invoca a 3 Pokémon que comparten un tipo con el usuario. La rareza y sus estrellas depende de la etapa de juego.",
+		"PINK_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Refinado",
+		"PURPLE_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Plácido",
+		"YELLOW_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Animado\t",
+		"RED_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Apasionado"
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3426,7 +3441,8 @@
 		"STOUTLAND_SEARCH": "Stoutland lada cuando está parado arriba de una casilla con un objeto enterrado.",
 		"SUBSTITUTE": "Un disfraz creado para parecerse a un Pokémon",
 		"PASSIMIAN": "Passimian lleva una BALL como objeto equipado",
-		"UXIE": "XP ganado: {{stacks}}"
+		"UXIE": "XP ganado: {{stacks}}",
+		"NECTAR": "Cuando un Pokémon de maceta haya crecido del todo, consigues néctar en función de su color."
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -3670,7 +3686,8 @@
 		"LEGIONNAIRE": "Legionario ",
 		"POFFIN_MASTER": "Maestro del Poffin",
 		"GUILDMASTER": "Maestro del Gremio",
-		"FIVE_STARS": "★★★★★"
+		"FIVE_STARS": "★★★★★",
+		"PAL": "Compañero"
 	},
 	"title_description": {
 		"NOVICE": "Juega tu primera partida",
@@ -3768,7 +3785,8 @@
 		"SURVEY_CORPS": "Completa una misión de batalla",
 		"GUILDMASTER": "Completa una misión de rango S",
 		"LEGIONNAIRE": "Haz una formación de Falinks con 8 soldados o más",
-		"FIVE_STARS": "Juega con un Pokémon de cinco estrellas en tu equipo"
+		"FIVE_STARS": "Juega con un Pokémon de cinco estrellas en tu equipo",
+		"PAL": "Juega en Dobles con tu compañero durante el evento Poképals"
 	},
 	"weather": {
 		"NEUTRAL": "Clima tranquilo",
@@ -3856,7 +3874,11 @@
 		"shiny_emotions": "Emociones variocolor",
 		"reset_emotion": "Restaurar el retrato por defecto",
 		"buy_booster": "Compra un nuevo sobre por {{cost}}",
-		"choose_as_avatar": "Elige como avatar de jugador"
+		"choose_as_avatar": "Elige como avatar de jugador",
+		"add_to_favorites": "Añadir a favoritos",
+		"show_favorites": "Mostrar favoritos",
+		"chosen_as_avatar": "✓ Elegido como avatar",
+		"remove_from_favorites": "Remover de favoritos"
 	},
 	"show_evolutions": "Mostrar evoluciones",
 	"bot_builder": "Constructor de BOT",
@@ -4084,7 +4106,15 @@
 	"player_choices": {
 		"choose_add_pick": "Elige un Pokémon adicional. Estará disponible para todos.",
 		"choose_first_partner": "Elige tu inicial. Tendrás una copia de este en cada etapa hasta la número 10",
-		"free_slot_hint": "Debe tener un espacio libre en el banquillo, o dos para Duos"
+		"free_slot_hint": "Debe tener un espacio libre en el banquillo, o dos para Duos",
+		"choose_mission_order": "Elige tu misión",
+		"choose_unique": "Elige un pokémon Único. Sólo puedes elegir una vez, haz que cuente!",
+		"choose_legendary": "Elige un Legendario para tu equipo. Sólo puedes elegir una vez, haz que cuente!",
+		"choose_wand": "Elige una varita para darle efectos adicionales a los ataques de tus Pokémon Hada.",
+		"choose_gift": "Elige un regalo para darle a tu compañero",
+		"cost_amount": "Cost: {{cost}} GOLD",
+		"choose_starter": "Elige tu Pokémon inicial",
+		"choose_item": "Elige un objeto de entre los siguientes"
 	},
 	"hide": "Ocultar",
 	"show": "Mostrar",
@@ -4266,7 +4296,9 @@
 		"pokeguesser": "PokéGuessr",
 		"pokeguesser_desc": "Adivina de qué Pokémon se trata mientras se prepara la partida para empezar.",
 		"synergy_wheel": "Rueda de sinergias",
-		"palette_desc": "Personaliza el tema y los colores del juego en Opciones → Interface"
+		"palette_desc": "Personaliza el tema y los colores del juego en Opciones → Interface",
+		"certificate_desc": "Desbloquea el modo clasificatorio y los torneos.",
+		"palette": "Paleta de Smeargle"
 	},
 	"level_required": "Nivel exigido",
 	"map": {
@@ -4456,7 +4488,11 @@
 		"lapras": "Listo para ir? Entonces todos a bordo!",
 		"magnemite": "Has visto al fugitivo?",
 		"magnezone": "Escucha, deja que la policía haga su trabajo, apenas tenga más información dejaré que seas el primero en saber.",
-		"xatu": "Permiteme abrir esta caja del tesoro para tí..."
+		"xatu": "Permiteme abrir esta caja del tesoro para tí...",
+		"good_job": "Buen trabajo!",
+		"here_are_your_reward": "Aquí están tus recompensas:\n{{reward}}",
+		"kecleon": "Kecleon",
+		"kecleon_preview": "Tu compañero te mandó un regalo, kec kec kec!"
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "¡Todos estan aquí!",
@@ -4596,7 +4632,9 @@
 			"pull_requests": "las pull requests están abiertas",
 			"faq": "PREGUNTAS MÁS FRECUENTES",
 			"reconnect": "Me desconecté de un juego/sala en marcha, cómo me reconecto?",
-			"reconnect_answer": "Intenta recargar (tecla F5). Si eso no funciona, vuelve a <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reautentificá si es necesario y ve al lobby principal, e intenta encontrar tu juego en la pestaña \"En Juego\" o en el modo de juego correspondiente. Ahí debería haber un botón verde que dice \"Reconectar\" junto a tu sala."
+			"reconnect_answer": "Intenta recargar (tecla F5). Si eso no funciona, vuelve a <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reautentificá si es necesario y ve al lobby principal, e intenta encontrar tu juego en la pestaña \"En Juego\" o en el modo de juego correspondiente. Ahí debería haber un botón verde que dice \"Reconectar\" junto a tu sala.",
+			"double_up": "Cómo funciona el modo dobles?",
+			"double_up_answer": "Iniciás eligiendo un compañero. Cuando ambos jugadores en un equipo hacen click en \"Listo\" se confirma el dúo y no pueden cambiar de equipo otra vez.\nDurante el juego, tu vida se comparte con la de tu compañero. Tomas la mitad del daño normal por ronda, pero este daño corresponde al que peor le fue entre los dos.\nSi derrotás a tu oponente mientras tu compañero está luchando, tus Pokémon se unirán a la batalla como refuerzos después de 3 segundos. Las sinergias activas, objetos y estadísticas permanentes de tu equipo se mantendrán. Tus Pokémon no contribuirán o ganarán ningún efecto de las sinergias del tablero de tu aliado. Los efectos afectando al jugador se aplicarán al jugador original incluso cundo están combatiendo en el tablero del compañero.\nEl espacio a la derecha de tu banco puede ser usado para intercambiar Pokémon y sus items sostenidos con tu compañero. Los items removibles son removidos antes del intercambio. Una vez que tu y tu compañero hayan puesto un Pokémon en el mismo y hayan confirmado el intercambio, habrá un período de enfriamiento hasta que pueda ser usado otra vez; esta duración incrementa basada en la rareza, las estrellas y el número de objetos intercambiados.\nFinalmente, en las etapas 15-16 y 25-26 tendrás la oportunidad de darle un regalo a tu compañero."
 		},
 		"tutorials": {
 			"thanks_to": "Gracias a",
@@ -4959,5 +4997,30 @@
 		"origin": "Origen"
 	},
 	"game_count": "Juegos",
-	"total_games_30d": "Juegos (últimos 30 días)"
+	"total_games_30d": "Juegos (últimos 30 días)",
+	"replay": {
+		"seeking": "Buscando...",
+		"loading_sub": "Preparando la partida",
+		"loading": "Cargando replay...",
+		"resume": "Continuar",
+		"reload": "Recargar",
+		"eventlog": {
+			"cat": {
+				"combat": "Combate",
+				"economy": "Economía",
+				"positioning": "Posicionamiento",
+				"moves": "Movimiento de combate"
+			}
+		},
+		"library": {
+			"download_tip": "Descargar",
+			"watch": "Ver",
+			"delete_q": "Borrar?"
+		}
+	},
+	"choose_partner": "Compañeros?",
+	"thanks_for_playing": "Gracias por jugar nuestro juego!",
+	"pokepals": {
+		"points": "{{points}} puntos"
+	}
 }
