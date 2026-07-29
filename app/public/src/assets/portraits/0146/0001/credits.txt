@@ -1,0 +1,4 @@
+2020-12-16 22:56:14.727141	<@!183561486893842432>	OLD	PMDCollab_1	Normal
+2021-10-12 23:56:40.352772	EZERART	CUR	PMDCollab_1	Normal
+2021-10-14 14:36:34.929524	<@!533406104256905257>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Pain,Sad,Shouting,Sigh,Special0,Special2,Special3,Stunned,Surprised,Teary-Eyed,Worried
+2024-02-25 02:49:42.508431	<@!533406104256905257>	CUR	CC_BY-NC_4	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Special2,Worried,Determined,Special0,Special3

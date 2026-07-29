@@ -1,0 +1,42 @@
+.synergy-overlaps {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.synergy-overlaps > div {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  z-index: 2;
+  background: var(--color-bg-secondary);
+  padding: 0.5em;
+  border: var(--border-thin);
+  border-radius: 12px;
+  min-width: 200px;
+}
+
+.synergy-overlaps ul {
+  display: grid;
+  max-width: 300px;
+  grid-template-columns: repeat(auto-fit, 80px);
+  gap: 0.5em;
+}
+
+.synergy-overlaps li {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: var(--color-bg-tertiary);
+  border: var(--border-extra-thin);
+  cursor: var(--cursor-hover);
+}
+
+.synergy-overlaps li.active {
+  background-color: var(--color-bg-accent);
+}
+
+.synergy-overlaps li > img:nth-child(2) {
+  margin-left: -25px;
+  z-index: 2;
+}

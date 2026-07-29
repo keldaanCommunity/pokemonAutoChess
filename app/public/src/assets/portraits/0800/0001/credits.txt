@@ -1,0 +1,2 @@
+2023-04-15 05:23:02.016577	<@!356635814668664832>	CUR	PMDCollab_1	Normal,Normal^
+2024-05-20 02:27:23.541965	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Normal^,Happy,Inspired,Happy^,Inspired^,Pain,Pain^

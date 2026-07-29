@@ -1,0 +1,2 @@
+2023-10-07 07:29:04.065764	<@!350050109741858829>	CUR	PMDCollab_2	Normal,Stunned,Angry,Worried
+2024-01-05 07:57:16.009062	<@!833717817445974046>	CUR	PMDCollab_2	Sad,Happy,Inspired,Angry,Determined

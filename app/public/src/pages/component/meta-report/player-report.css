@@ -1,0 +1,117 @@
+#player-report {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  height: 100%;
+  padding: 0.25em 0;
+  box-sizing: border-box;
+}
+
+#player-report header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+#player-report h2 {
+  margin: 0;
+}
+
+#player-report .meta {
+  color: var(--color-fg-secondary);
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  font-size: 0.95em;
+}
+
+#player-report .chart-shell {
+  flex: 1;
+  min-height: 300px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5em;
+  position: relative;
+}
+
+#player-report .rank-bands {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#player-report .rank-band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-right: 1px dashed rgba(255, 255, 255, 0.08);
+  overflow: visible;
+}
+
+#player-report .chart-shell .recharts-responsive-container {
+  position: relative;
+  z-index: 1;
+}
+
+#player-report .rank-chip {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#player-report .rank-chip img {
+  width: 42px;
+  height: 42px;
+}
+
+#player-report .error {
+  color: #ff8b8b;
+}
+
+.player-report-tooltip {
+  background: #1e1f29;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 0.5em 0.75em;
+  min-width: 200px;
+}
+
+.player-report-tooltip h3 {
+  margin: 0 0 0.4em;
+  font-size: 0.95em;
+}
+
+.player-report-tooltip p {
+  margin: 0.15em 0;
+  color: #d8d8d8;
+  font-size: 0.9em;
+}
+
+.player-report-top-label {
+  fill: #cfd8e3;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  #player-report .chart-shell {
+    min-height: 240px;
+  }
+
+  #player-report .rank-chip img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .player-report-top-label {
+    font-size: 10px;
+  }
+}

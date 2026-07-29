@@ -1,0 +1,4 @@
+2025-06-16 03:06:38.574621	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Special1,Normal^,Sad^,Joyous^,Special1^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Special0,Worried^,Determined^,Special0^
+2025-06-16 03:11:08.614255	<@!544245909639397378>	CUR	CC_BY-NC_4	Normal^
+2025-06-16 03:17:31.118829	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal^,Sad^,Joyous^,Special1^,Happy,Happy^,Crying^,Inspired^,Sigh^,Pain^,Shouting^,Surprised^,Stunned^,Angry^,Teary-Eyed^,Dizzy^,Worried^,Determined^,Special0^
+2025-06-16 03:18:51.537693	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal^,Sad^,Joyous^,Special1^,Happy,Happy^,Crying^,Inspired^,Sigh^,Pain^,Shouting^,Surprised^,Stunned^,Angry^,Teary-Eyed^,Dizzy^,Worried^,Determined^,Special0^

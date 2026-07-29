@@ -1,0 +1,14 @@
+2021-05-26 19:47:08.006350	<@!593113130213572610>	OLD	PMDCollab_1	Normal
+2021-06-01 15:44:49.312467	<@!593113130213572610>	OLD	PMDCollab_1	Normal
+2021-06-10 20:10:14.842585	<@!593113130213572610>	OLD	PMDCollab_1	Normal,Normal^
+2021-06-11 16:13:18.625199	<@!273958644788363265>	CUR	PMDCollab_1	Normal,Normal^
+2021-06-16 05:35:55.495076	<@!273958644788363265>	CUR	PMDCollab_1	Normal,Normal^
+2021-07-06 12:34:26.165261	<@!273958644788363265>	CUR	PMDCollab_1	Normal,Normal^
+2021-08-10 21:11:09.517394	<@!237286997645983744>	OLD	PMDCollab_1	Normal,Normal^,Special1,Special1^
+2022-10-02 10:24:13.285330	<@!291732421332697098>	CUR	PMDCollab_1	Sad,Joyous,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
+2022-12-26 06:06:18.441075	<@!291732421332697098>	CUR	PMDCollab_1	Sad,Joyous,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
+2023-01-02 20:10:25.086825	<@!291732421332697098>	CUR	PMDCollab_1	Crying^,Inspired^,Sigh^,Shouting^,Dizzy^,Worried^
+2023-08-04 20:46:34.406105	<@!593113130213572610>	OLD	PMDCollab_2	Normal,Sad,Joyous,Special1,Normal^,Sad^,Joyous^,Special1^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
+2023-08-06 05:19:10.216675	<@!593113130213572610>	OLD	PMDCollab_2	Normal,Sad,Joyous,Special1,Normal^,Sad^,Joyous^,Special1^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Worried^,Determined^
+2024-04-21 03:56:04.206161	<@!417445868694667264>	CUR	CC_BY-NC_4	Special1,Normal^,Sad^,Joyous^,Special1^,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain^,Shouting^,Surprised^,Stunned^,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Determined,Worried^,Determined^
+2024-04-21 06:33:07.745918	<@!417445868694667264>	CUR	CC_BY-NC_4	Sad,Crying,Inspired,Pain,Shouting,Stunned,Angry,Teary-Eyed,Worried,Determined

@@ -1,32 +1,35 @@
 .wiki-pokemon-detail {
   display: grid;
-  grid-template-columns: calc(320px + 1em) 16em 14em 1fr;
+  grid-template-columns: calc(320px + 1em) 20em 16em 1fr;
   gap: 1em;
+  padding: 0.5em 0;
 }
 
 .wiki-pokemon-detail .game-pokemon-detail-tooltip {
-  border-color: #000;
-  border-style: solid;
-  border-width: 4px;
-  border-radius: 12px;
-  background-color: #61738a;
-  color: #fff;
+  background-color: var(--color-bg-primary);
+  color: var(--color-fg-primary);
   padding: 5px;
   align-self: start;
-  margin: 1em 0 1em 1em;
+  margin: 0;
+  max-width: 330px;
+}
+
+.wiki-pokemon-detail dl {
+  display: grid;
+  grid-template-columns: 150px auto;
+  height: fit-content;
 }
 
 .wiki-pokemon-detail dt {
   display: inline-block;
-  vertical-align: top;
-  width: 12ch;
   text-align: right;
-  color: #a0a0a0;
+  color: var(--color-fg-secondary);
 }
 
 .wiki-pokemon-detail dd {
-  display: inline;
+  text-align: left;
   white-space: pre-line;
+  margin: 0;
 }
 
 .wiki-pokemon-detail dt::after {
@@ -39,11 +42,20 @@
   display: block;
 }
 
+.wiki-pokemon-detail dl:nth-child(3) {
+  grid-template-columns: 200px auto;
+}
+
 .wiki-pokemon-detail dl:nth-child(3) dt {
-  width: 16ch;
   text-align: left;
 }
 
-.wiki-pokemon-detail dl:nth-child(3) dt img {
-  vertical-align: -0.3em;
+.wiki-pokemon-detail dd ul {
+  margin: 0;
+}
+
+@media (width <= 640px) {
+  .wiki-pokemon-detail {
+    display: block;
+  }
 }

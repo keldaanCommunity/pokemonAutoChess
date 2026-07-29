@@ -1,0 +1,4 @@
+2021-07-07 20:13:13.807843	EZERART	OLD	PMDCollab_1	Normal
+2023-05-31 01:43:05.722060	<@!350050109741858829>	CUR	PMDCollab_2	Normal,Happy
+2025-01-17 20:31:20.893829	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal,Happy
+2025-07-09 22:56:26.109611	<@!1377429093997477928>	CUR	CC_BY-NC_4	Sad,Joyous,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined

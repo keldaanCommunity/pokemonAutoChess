@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose"
-import { Pkm } from "../../types/enum/Pokemon"
-import { Synergy } from "../../types/enum/Synergy"
+import { model, Schema } from "mongoose"
+import type { Pkm } from "../../types/enum/Pokemon"
+import type { Synergy } from "../../types/enum/Synergy"
 
 export interface ITeam {
   cluster_id: string
@@ -63,5 +63,5 @@ const metaSchema = new Schema({
 export default model<IMeta>("Meta", metaSchema, "meta")
 
 export async function fetchMeta(): Promise<IMeta[]> {
-  return fetch("/meta").then((res) => res.json())
+  return fetch(`/meta?t=${new Date().getUTCDate()}`).then((res) => res.json())
 }

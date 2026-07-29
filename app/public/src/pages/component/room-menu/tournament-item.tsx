@@ -1,0 +1,231 @@
+import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import { TOURNAMENT_REGISTRATION_TIME } from "../../../../../config"
+import { GADGETS } from "../../../../../config/game/gadgets"
+import { getTournamentStage } from "../../../../../core/tournament-logic"
+import type {
+  TournamentPlayerSchema,
+  TournamentSchema
+} from "../../../../../models/colyseus-models/tournament"
+import { average } from "../../../../../utils/number"
+import { schemaEntries, schemaValues } from "../../../../../utils/schemas"
+import { useAppSelector } from "../../../hooks"
+import { participateInTournament } from "../../../network"
+import { formatDate } from "../../utils/date"
+import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
+import { EloBadge } from "../profile/elo-badge"
+import "./tournament-item.css"
+
+export default function TournamentItem(props: {
+  tournament: TournamentSchema
+}) {
+  const { t } = useTranslation()
+  const user = useAppSelector((state) => state.network.profile)
+  const uid: string = useAppSelector((state) => state.network.uid)
+  const participating = props.tournament.players.has(uid)
+  const startTime = new Date(props.tournament.startDate).getTime()
+  const tournamentFinished = props.tournament.finished
+  const tournamentStarted = Date.now() > startTime && !tournamentFinished
+  const registrationsOpen =
+    Date.now() > startTime - TOURNAMENT_REGISTRATION_TIME && !tournamentStarted
+  const players = schemaValues(props.tournament.players)
+  const brackets = schemaValues(props.tournament.brackets)
+  const remainingPlayers = players.filter((p) => !p.eliminated)
+  const nbStages = Math.max(...players.map((p) => p.ranks.length))
+
+  const sortedPlayers = schemaEntries(props.tournament.players).sort(
+    ([idA, a], [idB, b]) => {
+      if (a.eliminated !== b.eliminated) return a.eliminated ? +1 : -1
+      if (a.ranks.length !== b.ranks.length)
+        return b.ranks.length - a.ranks.length
+      if (tournamentFinished && a.ranks.length === nbStages) {
+        // sort finalists by last rank
+        return (
+          (a.ranks[a.ranks.length - 1] ?? 8) -
+          (b.ranks[b.ranks.length - 1] ?? 8)
+        )
+      }
+      return (
+        average(...schemaValues(a.ranks)) - average(...schemaValues(b.ranks))
+      )
+    }
+  )
+
+  return (
+    <div className="tournament-item my-box">
+      <span className="tournament-name">
+        <img
+          width="32"
+          height="32"
+          src="assets/ui/tournament.svg"
+          style={{ marginRight: "0.5em", verticalAlign: "text-bottom" }}
+        />
+        {props.tournament.name}
+      </span>
+      {tournamentFinished ? (
+        <div>{getTournamentStage(props.tournament)}</div>
+      ) : tournamentStarted ? (
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>{getTournamentStage(props.tournament)}</span>
+          <span>
+            {t("tournament.players_remaining")}: {remainingPlayers.length}
+          </span>
+        </div>
+      ) : (
+        <p>
+          {t("tournament.starts_at")}{" "}
+          {formatDate(new Date(props.tournament.startDate), {
+            dateStyle: "long"
+          })}
+        </p>
+      )}
+      {!tournamentStarted && !tournamentFinished && (
+        <>
+          {user && user.level < GADGETS.certificate.levelRequired && (
+            <p>
+              {t("tournament.tournament_mode_locked", {
+                requiredLevel: GADGETS.certificate.levelRequired
+              })}
+            </p>
+          )}
+          <div className="actions">
+            {participating ? (
+              <button
+                className="participate-btn bubbly green"
+                title={t("tournament.cancel_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: false
+                  })
+                }}
+              >
+                {t("tournament.participating")}
+              </button>
+            ) : registrationsOpen ? (
+              <button
+                className="participate-btn bubbly blue"
+                title={t("tournament.register_tournament_participation")}
+                disabled={
+                  !registrationsOpen ||
+                  (user && user.level < GADGETS.certificate.levelRequired)
+                }
+                onClick={() => {
+                  participateInTournament({
+                    tournamentId: props.tournament.id,
+                    participate: true
+                  })
+                }}
+              >
+                {t("tournament.participate")}
+              </button>
+            ) : null}
+          </div>
+        </>
+      )}
+      <Tabs>
+        <TabList>
+          {tournamentStarted && <Tab>{t("tournament.brackets")}</Tab>}
+          {(tournamentStarted || tournamentFinished) && (
+            <Tab>{t("tournament.ranking")}</Tab>
+          )}
+          {(registrationsOpen || tournamentStarted) && (
+            <Tab>
+              {t("tournament.participants")} ({players.length})
+            </Tab>
+          )}
+        </TabList>
+        {!registrationsOpen && !tournamentStarted && (
+          <p>{t("tournament.registrations_open_info")}</p>
+        )}
+        {tournamentStarted && (
+          <TabPanel className="brackets">
+            {brackets.map((bracket) => (
+              <div className="bracket" key={bracket.name}>
+                <p>{bracket.name}</p>
+                <ul>
+                  {schemaValues(bracket.playersId).map((id, i) => (
+                    <TournamentPlayer
+                      key={"player" + i}
+                      playerId={id}
+                      player={props.tournament.players.get(id)!}
+                      rank={i + 1}
+                      showScore={false}
+                    />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </TabPanel>
+        )}
+        {(tournamentStarted || tournamentFinished) && (
+          <TabPanel className="ranking">
+            <ul>
+              {sortedPlayers.map(([id, player], i) => (
+                <TournamentPlayer
+                  key={"player" + i}
+                  playerId={id}
+                  player={player}
+                  rank={i + 1}
+                  showScore={true}
+                />
+              ))}
+            </ul>
+          </TabPanel>
+        )}
+        {(registrationsOpen || tournamentStarted) && (
+          <TabPanel className="participants">
+            <ul>
+              {schemaEntries(props.tournament.players).map(
+                ([id, player], i) => (
+                  <TournamentPlayer
+                    key={"player" + i}
+                    playerId={id}
+                    player={player}
+                    rank={i + 1}
+                    showScore={false}
+                  />
+                )
+              )}
+            </ul>
+          </TabPanel>
+        )}
+      </Tabs>
+    </div>
+  )
+}
+
+export function TournamentPlayer(props: {
+  playerId: string
+  player: TournamentPlayerSchema
+  rank: number
+  showScore: boolean
+}) {
+  const uid: string = useAppSelector((state) => state.network.uid)
+  return (
+    <li
+      className={cc("player-box", {
+        myself: props.playerId === uid,
+        eliminated: props.showScore && props.player.eliminated
+      })}
+    >
+      {props.showScore && <span className="player-rank">{props.rank}</span>}
+      <PokemonPortrait avatar={props.player.avatar} />
+      <p>
+        <span className="player-name">{props.player.name}</span>
+      </p>
+      {props.showScore ? (
+        <span className="player-ranks">
+          {props.player.ranks.length > 0 ? props.player.ranks.join(", ") : "-"}
+        </span>
+      ) : (
+        <EloBadge elo={props.player.elo} />
+      )}
+    </li>
+  )
+}

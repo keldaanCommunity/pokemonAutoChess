@@ -1,12 +1,16 @@
-import React, { Dispatch, SetStateAction, useState } from "react"
-import { Modal } from "react-bootstrap"
+import type React from "react"
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Dungeon } from "../../../../../types/Config"
-import { preferences, savePreferences } from "../../../preferences"
+import {
+  DungeonMusic,
+  DungeonMusicCredits
+} from "../../../../../types/enum/Dungeon"
+import { pickRandomIn } from "../../../../../utils/random"
+import { usePreference } from "../../../preferences"
 import { getGameScene } from "../../game"
-import { playMusic } from "../../utils/audio"
+import { playMusic, preloadMusic } from "../../utils/audio"
 import { cc } from "../../utils/jsx"
-
+import { Modal } from "../modal/modal"
 import "./jukebox.css"
 
 export default function Jukebox(props: {
@@ -15,40 +19,50 @@ export default function Jukebox(props: {
 }) {
   const { t } = useTranslation()
 
-  const MUSICS: string[] = Object.values(Dungeon)
+  const MUSICS: DungeonMusic[] = Object.values(DungeonMusic)
 
-  const [music, setMusic] = useState<string>(
-    getGameScene()?.music?.key?.replace("music_", "") ?? ""
-  )
+  const musicPlaying = getGameScene()?.music?.key?.replace(
+    "music_",
+    ""
+  ) as DungeonMusic
+  const [music, setMusic] = useState<DungeonMusic>(musicPlaying)
   const [loading, setLoading] = useState<boolean>(false)
-  const [volume, setVolume] = useState<number>(preferences.musicVolume)
+  const [volume, setVolume] = usePreference("musicVolume")
 
-  function changeMusic(name: string) {
+  useEffect(() => {
+    if (musicPlaying !== music && !loading) {
+      setMusic(musicPlaying)
+    }
+  }, [music, musicPlaying, loading])
+
+  const credits = DungeonMusicCredits[musicPlaying] ?? null
+
+  function changeMusic(name: DungeonMusic) {
     setMusic(name)
     const gameScene = getGameScene()
     if (gameScene) {
       gameScene.music?.destroy()
-      setLoading(true)
-      gameScene.load.reset()
-      gameScene.load.audio("music_" + name, [
-        `https://raw.githubusercontent.com/keldaanCommunity/pokemonAutoChessMusic/main/music/${name}.mp3`
-      ])
-      gameScene.load.once("complete", () => {
+      const musicKey = "music_" + name
+      if (gameScene.cache.audio.exists(musicKey)) {
         playMusic(gameScene, name)
         setLoading(false)
-      })
-      gameScene.load.start()
+      } else {
+        setLoading(true)
+        gameScene.cache.audio.events.on("add", (cache, key) => {
+          if (key === musicKey) {
+            playMusic(gameScene, name)
+            setLoading(false)
+          }
+        })
+        preloadMusic(gameScene, name)
+        gameScene.load.start()
+      }
     }
   }
 
-  function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const newVolume = Number(e.target.value)
+  function handleVolumeChange(e: React.InputEvent<HTMLInputElement>) {
+    const newVolume = Number(e.currentTarget.value)
     setVolume(newVolume)
-    savePreferences({ musicVolume: newVolume })
-    const gameScene = getGameScene()
-    if (gameScene && gameScene.music) {
-      gameScene.music.setVolume(newVolume / 100)
-    }
   }
 
   function nextMusic(delta: number) {
@@ -57,46 +71,87 @@ export default function Jukebox(props: {
     changeMusic(MUSICS[newIndex])
   }
 
-  return (
-    <Modal show={props.show} onHide={props.handleClose} width={800}>
-      <Modal.Header>
-        <Modal.Title>{t("jukebox")}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body className="game-jukebox-modal-body">
-        <p className="actions">
-          <button className="bubbly blue" onClick={() => nextMusic(-1)}>
-            ◄
-          </button>
-          <div className={cc("compact-disc", { loading })}>
-            <img src="/assets/ui/compact-disc.svg" />
-            <span>{loading && t("loading")}</span>
-          </div>
-          <button className="bubbly blue" onClick={() => nextMusic(+1)}>
-            ►
-          </button>
-        </p>
+  function randomizeMusic() {
+    const newMusic = pickRandomIn(MUSICS.filter((m) => m !== music))
+    changeMusic(newMusic)
+  }
 
-        <select value={music} onChange={(e) => changeMusic(e.target.value)}>
+  return (
+    <Modal
+      show={props.show}
+      onClose={props.handleClose}
+      className="game-jukebox-modal"
+      header={t("gadget.jukebox")}
+    >
+      <div className="actions" style={{ marginBottom: "0.5em" }}>
+        <button
+          className="bubbly blue"
+          onClick={() => nextMusic(-1)}
+          title={t("jukebox.previous_music")}
+        >
+          ◄
+        </button>
+        <div className={cc("compact-disc", { loading })}>
+          <img src="/assets/ui/compact-disc.svg" />
+          <span>{loading && t("loading")}</span>
+        </div>
+        <button
+          className="bubbly blue"
+          onClick={() => nextMusic(+1)}
+          title={t("jukebox.next_music")}
+        >
+          ►
+        </button>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "0.5em",
+          marginBottom: "0.5em"
+        }}
+      >
+        <select
+          value={music}
+          onChange={(e) => changeMusic(e.target.value as DungeonMusic)}
+          className="is-light"
+        >
           {MUSICS.map((m) => (
             <option key={m} value={m}>
               {m}
             </option>
           ))}
         </select>
+        <button
+          className="bubbly blue"
+          onClick={() => randomizeMusic()}
+          title={t("jukebox.random_music")}
+        >
+          <img src="/assets/ui/randomize.svg" style={{ marginRight: 0 }} />
+        </button>
+      </div>
 
-        <p>
-          <label className="full-width">
-            {t("music_volume")}: {volume} %
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={volume}
-              onInput={handleVolumeChange}
-            ></input>
-          </label>
+      {credits ? (
+        <p className="credits">
+          {t("jukebox.music_credits")}: {credits}
         </p>
-      </Modal.Body>
+      ) : (
+        <></>
+      )}
+
+      <p>
+        <label className="full-width">
+          {t("jukebox.music_volume")}: {volume} %
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={volume}
+            onInput={handleVolumeChange}
+          ></input>
+        </label>
+      </p>
     </Modal>
   )
 }

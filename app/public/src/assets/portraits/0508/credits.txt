@@ -1,0 +1,2 @@
+2026-05-30 01:28:44.032904	<@!276369635304275968>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Special1,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special0
+2026-05-30 01:50:55.802557	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Special1,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special0

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "tags": ["-lintignore"],
+  "entry": [
+    "app/index.ts",
+    "app/public/src/index.tsx",
+    "app/public/dist/client/sw.js",
+    "db-commands/**/*.ts",
+    "edit/*.ts",
+    "edit/assetpack/.assetpack.js",
+    "gen/*.ts",
+    "export/*.ts",
+    "app/types/i18next.d.ts"
+  ],
+  "ignore": [
+    "edit/assetpack/assetpack-cli-fork/**",
+    "edit/assetpack/plugin-texture-packer-fork/**",
+    "app/public/dist/client/pokechess/**"
+  ]
+}

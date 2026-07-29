@@ -1,359 +1,210 @@
-import { Client, Room, RoomAvailable } from "colyseus.js"
+import type { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Navigate } from "react-router-dom"
-import { Modal } from "react-bootstrap"
-import LobbyUser from "../../../models/colyseus-models/lobby-user"
-import PokemonConfig from "../../../models/colyseus-models/pokemon-config"
-import { IBot } from "../../../models/mongo-models/bot-v2"
-import {
-  ICustomLobbyState,
-  ISuggestionUser,
-  NonFunctionPropNames,
-  PkmWithConfig,
-  Transfer
-} from "../../../types"
+import { useNavigate } from "react-router"
+import { MAX_LOADING_TIME } from "../../../config"
+import type GameState from "../../../rooms/states/game-state"
+import { Transfer } from "../../../types"
+import { throttle } from "../../../utils/function"
+import { joinLobbyRoom } from "../game/lobby-logic"
+import { resetActiveGameRoom } from "../game/recorder"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import i18n from "../i18n"
-import store from "../stores"
+import { client, joinGame, leaveRoom, rooms } from "../network"
+import { resetBoosters } from "../stores/BoostersStore"
+import { resetLobby } from "../stores/LobbyStore"
 import {
-  addPokemonConfig,
-  addRoom,
-  addUser,
-  changePokemonConfig,
-  changeUser,
-  leaveLobby,
-  pushBotLog,
-  pushMessage,
-  removeMessage,
-  removeRoom,
-  removeUser,
-  setBoosterContent,
-  setBotData,
-  setBotLeaderboard,
-  setBotList,
-  setLanguage,
-  setLeaderboard,
-  setLevelLeaderboard,
-  setNextSpecialLobbyDate,
-  setNextSpecialLobbyType,
-  setPastebinUrl,
-  setSearchedUser,
-  setSuggestions,
-  setUser
-} from "../stores/LobbyStore"
-import {
-  joinLobby,
-  logIn,
+  clearNotification,
   logOut,
-  requestBotLeaderboard,
-  requestLeaderboard,
-  requestLevelLeaderboard,
-  setProfile
+  setErrorAlertMessage,
+  setPendingGameId
 } from "../stores/NetworkStore"
-import RoomMenu from "./component/available-room-menu/room-menu"
-import CurrentUsers from "./component/available-user-menu/current-users"
-import Chat from "./component/chat/chat"
-import TabMenu from "./component/lobby-menu/tab-menu"
+import { EventsMenu } from "./component/events-menu/events-menu"
+import LeaderboardMenu from "./component/leaderboard/leaderboard-menu"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
-import { FIREBASE_CONFIG } from "./utils/utils"
-import { IUserMetadata } from "../../../models/mongo-models/user-metadata"
-import { logger } from "../../../utils/logger"
-import { localStore, LocalStoreKeys } from "./utils/store"
+import { Modal } from "./component/modal/modal"
+import { NotificationModal } from "./component/notifications/notification-modal"
+import RoomMenu from "./component/room-menu/room-menu"
+import { cc } from "./utils/jsx"
+import { LocalStoreKeys, localStore } from "./utils/store"
 import "./lobby.css"
 
 export default function Lobby() {
   const dispatch = useAppDispatch()
-  const lobby = useAppSelector((state) => state.network.lobby)
-
-  const lobbyJoined = useRef<boolean>(false)
-  const [reconnectionToken, setReconnectionToken] = useState<string | null>(
-    localStore.get(LocalStoreKeys.RECONNECTION_TOKEN)
+  const navigate = useNavigate()
+  const networkError = useAppSelector((state) => state.network.error)
+  const pendingGameId = useAppSelector((state) => state.network.pendingGameId)
+  const notifications = useAppSelector((state) => state.network.notifications)
+  const gameRooms: RoomAvailable[] = useAppSelector(
+    (state) => state.lobby.gameRooms
   )
+  const showGameReconnect =
+    pendingGameId != null && gameRooms.some((r) => r.roomId === pendingGameId)
 
-  const [toPreparation, setToPreparation] = useState<boolean>(false)
-  const [toGame, setToGame] = useState<boolean>(false)
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const { t } = useTranslation()
 
+  const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
-    const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
-        logger.error(err)
-        setToAuth(true)
-      })
+      joinLobbyRoom(dispatch, navigate)
       lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch])
+  }, [lobbyJoined])
+
+  // back in the lobby, flush the finished game's in-memory tail to disk, then release the recorder's ref
+  useEffect(() => {
+    void resetActiveGameRoom()
+  }, [])
 
   const signOut = useCallback(async () => {
-    await lobby?.leave()
+    leaveRoom("lobby")
     await firebase.auth().signOut()
-    dispatch(leaveLobby())
+    dispatch(resetLobby())
+    dispatch(resetBoosters())
     dispatch(logOut())
-    setToAuth(true)
-  }, [dispatch, lobby])
+    navigate("/")
+  }, [dispatch])
 
-  if (toAuth) {
-    return <Navigate to={"/"} />
+  const handleNotificationClose = (notificationId: string) => {
+    // Send acknowledgment to server
+    rooms.lobby?.send(Transfer.NOTIFICATION_SEEN, notificationId)
+    // Remove from local state
+    dispatch(clearNotification(notificationId))
   }
 
-  if (toPreparation) {
-    return <Navigate to="/preparation"></Navigate>
-  }
-
-  if (toGame) {
-    return <Navigate to="/game"></Navigate>
-  }
+  const reconnectToGame = throttle(async function reconnectToGame() {
+    const idToken = await firebase.auth().currentUser?.getIdToken()
+    if (idToken && pendingGameId) {
+      const game = await client.joinById<GameState>(pendingGameId, {
+        idToken
+      })
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_GAME,
+        { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
+        30
+      )
+      joinGame(game, MAX_LOADING_TIME / 1000)
+      dispatch(resetLobby())
+      dispatch(resetBoosters())
+      navigate("/game")
+    }
+  }, 1000)
 
   return (
     <main className="lobby">
       <MainSidebar
         page="main_lobby"
         leave={signOut}
-        leaveLabel={t("sign_out")}
+        leaveLabel={t("auth.sign_out")}
       />
       <div className="lobby-container">
-        <MainLobby
-          toPreparation={toPreparation}
-          setToPreparation={setToPreparation}
-        />
+        <MainLobby />
       </div>
-      <Modal show={reconnectionToken != null}>
-        <Modal.Header>
-          <Modal.Title>{t("game-reconnect-modal-title")}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="game-reconnect-modal-body">
-          {t("game-reconnect-modal-body")}
-        </Modal.Body>
-        <Modal.Footer style={{ justifyContent: "space-evenly" }}>
-          <button className="bubbly green" onClick={() => setToGame(true)}>
-            {t("yes")}
-          </button>
-          <button
-            className="bubbly red"
-            onClick={() => {
-              setReconnectionToken(null)
-            }}
-          >
-            {t("no")}
-          </button>
-        </Modal.Footer>
-      </Modal>
+      <Modal
+        show={showGameReconnect}
+        header={t("game-reconnect-modal-title")}
+        body={t("game-reconnect-modal-body")}
+        footer={
+          <>
+            <button className="bubbly green" onClick={reconnectToGame}>
+              {t("yes")}
+            </button>
+            <button
+              className="bubbly red"
+              onClick={() => {
+                dispatch(setPendingGameId(null))
+              }}
+            >
+              {t("no")}
+            </button>
+          </>
+        }
+      ></Modal>
+      <NotificationModal
+        notifications={notifications}
+        onClose={handleNotificationClose}
+      />
+      <Modal
+        show={networkError != null}
+        onClose={() => {
+          dispatch(setErrorAlertMessage(null))
+        }}
+        className="is-dark basic-modal-body"
+        body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
     </main>
   )
 }
 
-function MainLobby({ toPreparation, setToPreparation }) {
+function MainLobby() {
+  const [activeSection, setActive] = useState<string>("leaderboard")
+  const { t } = useTranslation()
   return (
     <div className="main-lobby">
-      <TabMenu />
-      <RoomMenu
-        toPreparation={toPreparation}
-        setToPreparation={setToPreparation}
-      />
-      <div className="news-chat">
+      <nav className="main-lobby-nav">
+        <ul>
+          <li
+            onClick={() => setActive("leaderboard")}
+            className={cc({ active: activeSection === "leaderboard" })}
+          >
+            <img width={32} height={32} src={`assets/ui/leaderboard.svg`} />
+            {t("leaderboard")}
+          </li>
+          <li
+            onClick={() => setActive("rooms")}
+            className={cc({ active: activeSection === "rooms" })}
+          >
+            <img width={32} height={32} src={`assets/ui/room.svg`} />
+            {t("rooms")}
+          </li>
+          {/*<li
+            onClick={() => setActive("game_rooms")}
+            className={cc({ active: activeSection === "game_rooms" })}
+          >
+            <img width={32} height={32} src={`assets/ui/spectate.svg`} />
+            {t("in_game")}
+          </li>
+          <li
+            onClick={() => setActive("online")}
+            className={cc({ active: activeSection === "online" })}
+          >
+            <img width={32} height={32} src={`assets/ui/players.svg`} />
+            {t("online")}
+          </li>*/}
+          <li
+            onClick={() => setActive("events")}
+            className={cc({ active: activeSection === "events" })}
+          >
+            <img width={32} height={32} src={`assets/ui/chat.svg`} />
+            {t("events")}
+          </li>
+        </ul>
+      </nav>
+      <section
+        className={cc("leaderboard", {
+          active: activeSection === "leaderboard"
+        })}
+      >
+        <LeaderboardMenu />
+      </section>
+      <section className={cc("rooms", { active: activeSection === "rooms" })}>
+        <RoomMenu />
+      </section>
+      {/*<section
+        className={cc("game_rooms", { active: activeSection === "game_rooms" })}
+      >
+        <GameRoomsMenu />
+      </section>
+      <section className={cc("online", { active: activeSection === "online" })}>
         <CurrentUsers />
-        <Chat source="lobby" />
-      </div>
+      </section>*/}
+      <section
+        className={cc("events", {
+          active: activeSection === "events"
+        })}
+      >
+        <EventsMenu />
+      </section>
     </div>
   )
-}
-
-export async function joinLobbyRoom(
-  dispatch,
-  client: Client
-): Promise<Room<ICustomLobbyState>> {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(FIREBASE_CONFIG)
-  }
-  return new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        dispatch(logIn(user))
-        try {
-          const token = await user.getIdToken()
-
-          const lobby = store.getState().network.lobby
-          if (lobby) {
-            await lobby.leave()
-          }
-          const room: Room<ICustomLobbyState> = await client.joinOrCreate(
-            "lobby",
-            { idToken: token }
-          )
-          room.state.messages.onAdd((m) => {
-            dispatch(pushMessage(m))
-          })
-          room.state.messages.onRemove((m) => {
-            dispatch(removeMessage(m))
-          })
-
-          room.state.users.onAdd((u) => {
-            dispatch(addUser(u))
-
-            if (u.id == user.uid) {
-              u.pokemonCollection.onAdd((p) => {
-                const pokemonConfig = p as PokemonConfig
-                dispatch(addPokemonConfig(pokemonConfig))
-                const fields: NonFunctionPropNames<PokemonConfig>[] = [
-                  "dust",
-                  "emotions",
-                  "id",
-                  "selectedEmotion",
-                  "selectedShiny",
-                  "shinyEmotions"
-                ]
-
-                fields.forEach((field) => {
-                  pokemonConfig.listen(
-                    field,
-                    (value, previousValue) => {
-                      if (previousValue !== undefined) {
-                        dispatch(
-                          changePokemonConfig({
-                            id: pokemonConfig.id,
-                            field: field,
-                            value: value
-                          })
-                        )
-                      }
-                    },
-                    false
-                  )
-                })
-              }, false)
-              dispatch(setUser(u))
-              setSearchedUser(u)
-
-              u.listen("language", (value) => {
-                if (value) {
-                  dispatch(setLanguage(value))
-                  i18n.changeLanguage(value)
-                }
-              })
-            }
-            const fields: NonFunctionPropNames<LobbyUser>[] = [
-              "id",
-              "name",
-              "avatar",
-              "elo",
-              "wins",
-              "exp",
-              "level",
-              "donor",
-              "honors",
-              "history",
-              "booster",
-              "titles",
-              "title",
-              "role",
-              "anonymous"
-            ]
-
-            fields.forEach((field) => {
-              u.listen(field, (value) => {
-                dispatch(changeUser({ id: u.id, field: field, value: value }))
-              })
-            })
-          })
-
-          room.state.listen("nextSpecialLobbyDate", (date) => {
-            dispatch(setNextSpecialLobbyDate(date))
-          })
-
-          room.state.listen("nextSpecialLobbyType", (type) => {
-            dispatch(setNextSpecialLobbyType(type))
-          })
-
-          room.state.users.onRemove((u) => {
-            dispatch(removeUser(u.id))
-          })
-
-          room.onMessage(Transfer.REQUEST_LEADERBOARD, (l) => {
-            dispatch(setLeaderboard(l))
-          })
-
-          room.onMessage(Transfer.REQUEST_BOT_LEADERBOARD, (l) => {
-            dispatch(setBotLeaderboard(l))
-          })
-
-          room.onMessage(Transfer.REQUEST_LEVEL_LEADERBOARD, (l) => {
-            dispatch(setLevelLeaderboard(l))
-          })
-
-          room.onMessage(Transfer.BAN, () => reject("banned"))
-
-          room.onMessage(Transfer.BANNED, (message) => {
-            alert(message)
-          })
-
-          room.onMessage(Transfer.BOT_DATABASE_LOG, (message) => {
-            dispatch(pushBotLog(message))
-          })
-
-          room.onMessage(Transfer.PASTEBIN_URL, (json: { url: string }) => {
-            dispatch(setPastebinUrl(json.url))
-          })
-
-          room.onMessage(Transfer.ROOMS, (rooms: RoomAvailable[]) => {
-            rooms.forEach((room) => dispatch(addRoom(room)))
-          })
-
-          room.onMessage(Transfer.REQUEST_BOT_LIST, (bots: IBot[]) => {
-            dispatch(setBotList(bots))
-          })
-
-          room.onMessage(Transfer.ADD_ROOM, ([, room]) => {
-            if (room.name === "preparation" || room.name === "game") {
-              dispatch(addRoom(room))
-            }
-          })
-
-          room.onMessage(Transfer.REMOVE_ROOM, (roomId: string) =>
-            dispatch(removeRoom(roomId))
-          )
-
-          room.onMessage(Transfer.USER_PROFILE, (user: IUserMetadata) => {
-            dispatch(setProfile(user))
-          })
-
-          room.onMessage(Transfer.USER, (user: LobbyUser) =>
-            dispatch(setSearchedUser(user))
-          )
-
-          room.onMessage(Transfer.REQUEST_BOT_DATA, (data: IBot) => {
-            dispatch(setBotData(data))
-          })
-
-          room.onMessage(
-            Transfer.BOOSTER_CONTENT,
-            (boosterContent: PkmWithConfig[]) => {
-              dispatch(setBoosterContent(boosterContent))
-            }
-          )
-
-          room.onMessage(
-            Transfer.SUGGESTIONS,
-            (suggestions: ISuggestionUser[]) => {
-              dispatch(setSuggestions(suggestions))
-            }
-          )
-
-          dispatch(joinLobby(room))
-          dispatch(requestLeaderboard())
-          dispatch(requestBotLeaderboard())
-          dispatch(requestLevelLeaderboard())
-
-          resolve(room)
-        } catch (error) {
-          reject(error)
-        }
-      } else {
-        reject("not authenticated")
-      }
-    })
-  })
 }

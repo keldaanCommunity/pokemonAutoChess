@@ -1,27 +1,50 @@
-import React from "react"
-import { Typeahead } from "react-bootstrap-typeahead"
-
-import { TypeaheadProps } from "./types"
-
 import { useTranslation } from "react-i18next"
+import { PkmAltForms } from "../../../../../config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../../../../../types/enum/Ability"
+import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm } from "../../../../../types/enum/Pokemon"
+import { values } from "../../../../../utils/object"
 import "./pokemon-typeahead.css"
 
-export function PokemonTypeahead({ onChange, value }: TypeaheadProps<Pkm>) {
-  const pokemonOptions = Object.values(Pkm)
+export function PokemonTypeahead({
+  onChange,
+  value,
+  options
+}: {
+  value: string
+  options?: Pkm[]
+  onChange: (value: Pkm | "") => void
+}) {
   const { t } = useTranslation()
+  const pokemonOptions =
+    options ||
+    values(Pkm)
+      .filter((p) => {
+        const pokemon = getPokemonData(p)
+        return (
+          (pokemon.skill !== Ability.DEFAULT ||
+            pokemon.passive !== Passive.NONE) &&
+          PkmAltForms.includes(pokemon.name as Pkm) === false
+        )
+      })
+      .sort((a, b) => t(`pkm.${a}`).localeCompare(t(`pkm.${b}`)))
 
   return (
-    <Typeahead
-      id="pokemon-typeahead"
+    <select
+      value={value}
+      onChange={(e) => onChange((e.target?.value as Pkm) ?? "")}
       className="pokemon-typeahead"
-      defaultInputValue={value}
-      options={pokemonOptions}
-      placeholder={t("select_pokemon")}
-      onChange={(option) => {
-        const val = option[0] as Pkm
-        onChange(val)
-      }}
-    />
+    >
+      <option value="" disabled>
+        {t("search_pokemon")}
+      </option>
+      <option value="">{t("all")}</option>
+      {pokemonOptions.map((p) => (
+        <option key={p} value={p}>
+          {t(`pkm.${p}`)}
+        </option>
+      ))}
+    </select>
   )
 }

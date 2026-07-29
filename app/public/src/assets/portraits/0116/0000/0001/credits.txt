@@ -1,0 +1,2 @@
+2023-09-08 17:31:46.274587	<@!356635814668664832>	CUR	PMDCollab_2	Normal
+2025-01-16 04:55:04.500649	<@!108260609241423872>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined

@@ -1,0 +1,97 @@
+.game-history-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.game-history-list h2 {
+  margin: 0.5em 0;
+  text-align: center;
+}
+
+.game-history.my-box {
+  display: grid;
+  align-items: center;
+  gap: 0 0.5em;
+  grid-template-areas:
+    "top elo syn team"
+    "date date items team";
+  grid-template-columns: 8ch 7ch 160px 1fr;
+  background-color: var(--color-bg-secondary);
+  margin: 0 0 0.5em 0;
+  padding: 0.25em;
+  justify-items: center;
+  border: var(--border-thin);
+}
+
+.game-history .player-team-pokemons {
+  padding-left: 0;
+  padding-bottom: 10px;
+  grid-area: team;
+  align-self: start;
+  justify-self: start;
+}
+
+.game-history .gamemode.icon {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+
+.game-history .top {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+.game-history .elo {
+  grid-area: elo;
+}
+
+.game-history .date {
+  grid-area: date;
+  color: var(--color-fg-secondary);
+  font-size: 0.8em;
+  margin: 0;
+}
+
+.game-history .synergies {
+  grid-area: syn;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.game-history .synergies > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-history .synergies > li > span {
+  line-height: 80%;
+}
+
+.game-history .player-items {
+  grid-area: items;
+  display: flex;
+  flex-wrap: wrap;
+  justify-self: center;
+  gap: 2px;
+}
+
+@media (width <= 640px) {
+  .game-history.my-box {
+    grid-template-areas:
+      "top elo date"
+      "syn syn syn"
+      "items items items"
+      "team team team";
+    grid-template-columns: 5ch 7ch 1fr;
+  }
+}

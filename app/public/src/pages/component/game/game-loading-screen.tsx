@@ -1,10 +1,12 @@
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
+import type { LoadingHint } from "../../../../../types/strings/LoadingHint"
+import { shuffleArray } from "../../../../../utils/random"
 import { useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
-import "./game-loading-screen.css"
 import GamePlayerLoading from "./game-player-loading"
+import "./game-loading-screen.css"
 
 export default function GameLoadingScreen(props: { connectError: string }) {
   const { t } = useTranslation()
@@ -15,6 +17,34 @@ export default function GameLoadingScreen(props: { connectError: string }) {
   )?.loadingProgress
   const statusMessage = getGameScene()?.loadingManager?.statusMessage
   const [toAuth, setToAuth] = useState<boolean>(false)
+  const [hint, setHint] = useState<LoadingHint>("tab_out")
+
+  useEffect(() => {
+    const loadingHints = [
+      "tab_out",
+      ...shuffleArray([
+        "max_loading_time",
+        "disconnection_time",
+        "translation_project",
+        "discord",
+        "bug_report",
+        "moderation",
+        "berry_tree",
+        "spriters",
+        "wiki",
+        "avatar"
+      ] satisfies LoadingHint[])
+    ] satisfies LoadingHint[]
+
+    const interval = setInterval(() => {
+      setHint(
+        (hint) =>
+          loadingHints[(loadingHints.indexOf(hint) + 1) % loadingHints.length]
+      )
+    }, 20000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   if (toAuth) {
     return <Navigate to={"/"} />
@@ -37,11 +67,7 @@ export default function GameLoadingScreen(props: { connectError: string }) {
         })}
       </ul>
       <div className="loading-bar">
-        <progress
-          className="nes-progress"
-          value={progress}
-          max="100"
-        ></progress>
+        <progress className="my-progress" value={progress} max="100"></progress>
         <p id="status-message">{statusMessage}</p>
         {props.connectError && (
           <>
@@ -52,7 +78,10 @@ export default function GameLoadingScreen(props: { connectError: string }) {
           </>
         )}
       </div>
-      <footer>{t("players_disconnected_hint")}</footer>
+      <div className="loading-hint">
+        <div className="speech-bubble">{t(`loading_hints.${hint}`)}</div>
+        <img src={"/assets/loading_hints/" + hint + ".webp"} />
+      </div>
     </div>
   )
 }

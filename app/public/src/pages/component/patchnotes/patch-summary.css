@@ -1,0 +1,27 @@
+.patch-summary {
+  text-align: left;
+}
+
+.midpatch-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.midpatch-shortcuts a {
+  color: var(--color-accent, var(--color-fg-primary));
+}
+
+.midpatch-section {
+  margin-top: 1rem;
+}
+
+.full-patch-notes {
+  font-weight: normal;
+}
+
+.patch-summary p > img {
+  max-height: 40px;
+}

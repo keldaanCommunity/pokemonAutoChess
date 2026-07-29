@@ -1,4 +1,4 @@
-import locales from "./locales"
+import type locales from "./locales"
 
 declare module "i18next" {
   interface CustomTypeOptions {

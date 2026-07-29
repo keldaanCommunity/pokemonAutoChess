@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   list-style: none;
   gap: 8px;
-  margin: 0 0 0.5em 0;
+  margin: 0;
 }
 
 .player-team-pokemons li {
@@ -11,7 +11,6 @@
 }
 
 .player-team-pokemons .pokemon-portrait {
-  box-shadow: #2d334b 2px 2px 4px;
   width: 60px;
   height: 60px;
   margin: 10px 0;
@@ -24,8 +23,8 @@
   display: flex;
 }
 
+.player-items img,
 .player-team-pokemons .pokemon-items img {
   width: 20px;
   height: 20px;
-  image-rendering: pixelated;
 }

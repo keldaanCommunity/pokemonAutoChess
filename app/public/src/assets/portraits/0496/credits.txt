@@ -1,0 +1,6 @@
+2020-10-14 23:24:43.023062	<@!319945906600411179>	OLD	PMDCollab_1	Normal
+2021-07-19 15:36:29.906814	<@!401608319762038794>	OLD	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
+2023-08-27 22:08:55.620870	<@!576876006636519434>	OLD	PMDCollab_2	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined
+2024-01-24 19:21:10.040565	<@!157796074457661440>	CUR	PMDCollab_2	Normal,Sad
+2024-01-26 03:29:59.044894	<@!157796074457661440>	CUR	PMDCollab_2	Sad,Happy,Inspired,Sigh,Teary-Eyed,Determined
+2024-01-26 11:40:30.373162	<@!157796074457661440>	CUR	PMDCollab_2	Joyous,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special0

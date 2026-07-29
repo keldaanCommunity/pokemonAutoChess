@@ -1,0 +1,30 @@
+diff --git a/node_modules/@assetpack/core/dist/cjs/index.js b/node_modules/@assetpack/core/dist/cjs/index.js
+index 11a1037..4b9750b 100644
+--- a/node_modules/@assetpack/core/dist/cjs/index.js
++++ b/node_modules/@assetpack/core/dist/cjs/index.js
+@@ -733,8 +733,8 @@ class AssetPack {
+         // create .assetpack folder if it doesn't exist
+         fs.ensureDirSync('.assetpack/');
+         // creates a file name that is valid for windows and mac
+-        const folderTag = (`${this.config.entry}-${this.config.output}`).split('/').join('-');
+-        this._cacheTreePath = `.assetpack/${folderTag}}`;
++        const folderTag = 'pac-cache';
++        this._cacheTreePath = `.assetpack/${folderTag}`;
+         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+         const { plugins, ...configWithoutPlugins } = this.config;
+         this._signature = hash(configWithoutPlugins);
+diff --git a/node_modules/@assetpack/core/dist/es/index.js b/node_modules/@assetpack/core/dist/es/index.js
+index 85df7da..8e9b4e6 100644
+--- a/node_modules/@assetpack/core/dist/es/index.js
++++ b/node_modules/@assetpack/core/dist/es/index.js
+@@ -731,8 +731,8 @@ class AssetPack {
+         // create .assetpack folder if it doesn't exist
+         fs.ensureDirSync('.assetpack/');
+         // creates a file name that is valid for windows and mac
+-        const folderTag = (`${this.config.entry}-${this.config.output}`).split('/').join('-');
+-        this._cacheTreePath = `.assetpack/${folderTag}}`;
++        const folderTag = 'pac-cache';
++        this._cacheTreePath = `.assetpack/${folderTag}`;
+         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+         const { plugins, ...configWithoutPlugins } = this.config;
+         this._signature = hash(configWithoutPlugins);

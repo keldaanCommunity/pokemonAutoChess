@@ -1,164 +1,114 @@
 import { MapSchema } from "@colyseus/schema"
-import { Emotion, IPlayer } from "../types"
-import { HatchList, RarityCost } from "../types/Config"
-import { Effect } from "../types/enum/Effect"
-import { PokemonActionState, Rarity } from "../types/enum/Game"
-import {
-  Pkm,
-  PkmDuos,
-  PkmFamily,
-  PkmIndex,
-  Unowns
-} from "../types/enum/Pokemon"
-import { Synergy } from "../types/enum/Synergy"
+import { Emotion, type IPlayer, type PkmCustom } from "../types"
+import type { Stat } from "../types/enum/Game"
+import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { type TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
+
 import { logger } from "../utils/logger"
-import { pickRandomIn } from "../utils/random"
-import Player from "./colyseus-models/player"
-import { Egg, Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import {
-  getPokemonData,
-  PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY
-} from "./precomputed"
-import { PVEStage } from "./pve-stages"
+import type Player from "./colyseus-models/player"
+import { Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
+import { getPkmWithCustom } from "./colyseus-models/pokemon-customs"
+import type { PVEStage } from "./pve-stages"
 
 export default class PokemonFactory {
   static makePveBoard(
     pveStage: PVEStage,
-    shinyEncounter: boolean
+    shinyEncounter: boolean,
+    townEncounter: TownEncounter | null
   ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
-    pveStage.board.forEach(([pkm, x, y]) => {
+    pveStage.board.forEach(([pkm, x, y], index) => {
       const pokemon = PokemonFactory.createPokemonFromName(pkm, {
-        selectedEmotion: pveStage.emotion ?? Emotion.NORMAL,
-        selectedShiny: shinyEncounter
+        emotion: pveStage.emotion ?? Emotion.NORMAL,
+        shiny: shinyEncounter
       })
       pokemon.positionX = x
       pokemon.positionY = y
+      for (const stat in pveStage.statBoosts) {
+        pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
+      }
+      if (
+        townEncounter === TownEncounters.MAROWAK &&
+        pveStage.marowakItems &&
+        index in pveStage.marowakItems
+      ) {
+        pveStage.marowakItems[index]!.forEach((item) => pokemon.items.add(item))
+      }
       pokemons.set(pokemon.id, pokemon)
     })
     return pokemons
   }
 
-  // transforms a pokemon into another pokemon,
-  // transferring its items and position to
-  // the new pokemon
-  static transformPokemon(before: Pokemon, afterName: Pkm, player?: IPlayer) {
-    const transformation = this.createPokemonFromName(afterName, player)
-    transformation.positionX = before.positionX
-    transformation.positionY = before.positionY
-    transformation.items = before.items
-    return transformation
-  }
-
-  static getPokemonBaseEvolution(name: Pkm) {
-    switch (name) {
-      case Pkm.VAPOREON:
-      case Pkm.JOLTEON:
-      case Pkm.FLAREON:
-      case Pkm.ESPEON:
-      case Pkm.UMBREON:
-      case Pkm.LEAFEON:
-      case Pkm.SYLVEON:
-      case Pkm.GLACEON:
-        return Pkm.EEVEE
-      default:
-        return PkmFamily[name]
-    }
-  }
-
   static createPokemonFromName(
     name: Pkm,
-    config?: IPlayer | { selectedShiny?: boolean; selectedEmotion?: Emotion }
+    custom?: PkmCustom | Player
   ): Pokemon {
-    if (config && "pokemonCollection" in config) {
-      config = config.pokemonCollection.get(PkmIndex[name])
+    let shiny = false
+    let emotion = Emotion.NORMAL
+    if (custom && "pokemonCustoms" in custom) {
+      const pkmWithCustom = getPkmWithCustom(
+        PkmIndex[name],
+        (custom as IPlayer).pokemonCustoms
+      )
+      shiny = pkmWithCustom.shiny ?? false
+      emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
+    } else if (custom) {
+      shiny = custom.shiny ?? false
+      emotion = custom.emotion ?? Emotion.NORMAL
     }
-    const shiny = config && config.selectedShiny ? true : false
-    const emotion =
-      config && config.selectedEmotion ? config.selectedEmotion : Emotion.NORMAL
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
-      return new PokemonClass(shiny, emotion)
+      const pokemon = new PokemonClass(name, shiny, emotion)
+      pokemon.postConstructor()      
+      return pokemon
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)
-      return new Pokemon(shiny, emotion)
-    }
-  }
-
-  static createRandomEgg(): Egg {
-    const egg = PokemonFactory.createPokemonFromName(Pkm.EGG)
-    egg.action = PokemonActionState.SLEEP
-    egg.evolution = pickRandomIn(HatchList)
-    return egg as Egg
-  }
-
-  static getRandomFossil(board: MapSchema<Pokemon>) {
-    const currentFossils = new Array<Pkm>()
-    board.forEach((p) => {
-      if (p.types.has(Synergy.FOSSIL)) {
-        currentFossils.push(PkmFamily[p.name])
-      }
-    })
-    const possibleFossils = (
-      PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[Synergy.FOSSIL]
-        .pokemons as Pkm[]
-    ).filter((p) => {
-      const pokemon = PokemonFactory.createPokemonFromName(p)
-      return (
-        currentFossils.includes(p) === false &&
-        [Rarity.UNIQUE, Rarity.LEGENDARY].includes(pokemon.rarity) === false
-      )
-    })
-
-    if (possibleFossils.length > 0) {
-      return pickRandomIn(possibleFossils)
-    } else {
-      return Pkm.CARBINK
-    }
-  }
-
-  static getSellPrice(name: Pkm, player?: Player): number {
-    const pokemonData = getPokemonData(name)
-    const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
-
-    if (name === Pkm.EGG) {
-      return player && player.effects.has(Effect.GOLDEN_EGGS) ? 10 : 2
-    } else if (name == Pkm.DITTO) {
-      return 5
-    } else if (name === Pkm.MAGIKARP) {
-      return 0
-    } else if (name === Pkm.FEEBAS) {
-      return 1
-    } else if (name === Pkm.GYARADOS || name === Pkm.MILOTIC) {
-      return 10
-    } else if (Unowns.includes(name)) {
-      return 1
-    } else if (pokemonData.rarity === Rarity.HATCH) {
-      return [3, 4, 5][pokemonData.stars - 1] ?? 5
-    } else if (pokemonData.rarity === Rarity.UNIQUE) {
-      return duo ? 8 : 15
-    } else if (pokemonData.rarity === Rarity.LEGENDARY) {
-      return duo ? 10 : 20
-    } else if (PokemonFactory.getPokemonBaseEvolution(name) == Pkm.EEVEE) {
-      return RarityCost[pokemonData.rarity]
-    } else if (duo) {
-      return Math.ceil((RarityCost[pokemonData.rarity] * pokemonData.stars) / 2)
-    } else {
-      return RarityCost[pokemonData.rarity] * pokemonData.stars
-    }
-  }
-
-  static getBuyPrice(name: Pkm): number {
-    if (name === Pkm.DITTO) {
-      return 5
-    } else if (Unowns.includes(name)) {
-      return 1
-    } else {
-      return RarityCost[getPokemonData(name).rarity]
+      return new Pokemon(Pkm.DEFAULT, shiny, emotion)
     }
   }
 }
 
-export function isAdditionalPick(pkm: Pkm): boolean {
-  return getPokemonData(pkm).additional
+export function getPokemonBaseline(name: Pkm) {
+  switch (name) {
+    case Pkm.VAPOREON:
+    case Pkm.JOLTEON:
+    case Pkm.FLAREON:
+    case Pkm.ESPEON:
+    case Pkm.UMBREON:
+    case Pkm.LEAFEON:
+    case Pkm.SYLVEON:
+    case Pkm.GLACEON:
+      return Pkm.EEVEE
+    case Pkm.SHEDINJA:
+      return Pkm.NINCADA
+    case Pkm.WORMADAM_PLANT:
+      return Pkm.BURMY_PLANT
+    case Pkm.WORMADAM_SANDY:
+      return Pkm.BURMY_SANDY
+    case Pkm.WORMADAM_TRASH:
+      return Pkm.BURMY_TRASH
+    case Pkm.FLABEBE_BLUE:
+    case Pkm.FLABEBE_ORANGE:
+    case Pkm.FLABEBE_YELLOW:
+    case Pkm.FLABEBE_WHITE:
+    case Pkm.FLOETTE_BLUE:
+    case Pkm.FLOETTE_ORANGE:
+    case Pkm.FLOETTE_YELLOW:
+    case Pkm.FLOETTE_WHITE:
+    case Pkm.FLORGES_BLUE:
+    case Pkm.FLORGES_ORANGE:
+    case Pkm.FLORGES_YELLOW:
+    case Pkm.FLORGES_WHITE:
+      return Pkm.FLABEBE
+
+    default:
+      if (PkmFamily[name] === Pkm.UNOWN_A) {
+        return name
+      }
+      return PkmFamily[name]
+  }
+}
+
+export function isSameFamily(pkm1: Pkm, pkm2: Pkm): boolean {
+  return getPokemonBaseline(pkm1) === getPokemonBaseline(pkm2)
 }

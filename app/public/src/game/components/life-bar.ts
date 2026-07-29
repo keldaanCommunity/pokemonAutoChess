@@ -1,52 +1,153 @@
-import { Team } from "../../../../types/enum/Game"
-import Bar from "./bar"
+import type Phaser from "phaser"
+import { GameObjects } from "phaser"
+import type { Team } from "../../../../types/enum/Game"
+import { max } from "../../../../utils/number"
+import { DEPTH } from "../depths"
 
-const ALLY_COLOR = "#76c442"
-const ENEMY_COLOR = "#e76e55"
+export default class LifeBar extends GameObjects.Graphics {
+  maxHp: number
+  hp: number
+  shield: number
+  pp?: number
+  maxPP?: number
+  team: Team
+  flip: boolean
 
-export default class LifeBar extends Bar {
-  shieldProgress: HTMLDivElement
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
-    width: number,
-    max: number,
-    maxShield: number,
+    maxHP: number,
+    hp: number,
+    shield: number,
     team: Team,
     flip: boolean
   ) {
-    super(
-      scene,
-      x,
-      y,
-      width,
-      7,
-      max,
-      max,
-      team === (flip ? 1 : 0) ? ALLY_COLOR : ENEMY_COLOR
-    )
+    super(scene, { x, y })
 
-    this.shieldProgress = document.createElement("div")
-    this.shieldProgress.className = "progress-bar"
-    this.shieldProgress.ariaRoleDescription = "progressbar"
-    this.shieldProgress.ariaValueNow = maxShield.toString()
-    this.shieldProgress.ariaValueMin = "0"
-    this.shieldProgress.ariaValueMax = maxShield.toString()
-    this.shieldProgress.style.backgroundColor = "#696969"
-    this.wrap.style.borderBottom = "none"
-    this.dom.appendChild(this.shieldProgress)
+    this.maxHp = maxHP
+    this.hp = hp
+    this.shield = shield
+    this.team = team
+    this.flip = flip
+
+    this.setDepth(DEPTH.POKEMON_HP_BAR)
   }
 
-  setShieldAmount(value: number) {
-    this.shieldProgress.ariaValueNow = value.toString()
-    this.shieldProgress.style.width = `${(value * 100) / this.max}%`
+  draw() {
+    const barWidth = 70
+    const innerBarWidth = barWidth - 2
+    const lifeBarBgColor = 0x303030
+    const ppBarBgColor = 0x282828
+    const allyLifeColor = 0x76c442
+    const enemyLifeColor = 0xe76e55
+    const shieldColor = 0xe0e0e0
+    const ppColor = 0x209cee
+    const hpPerSegment = 25
+
+    this.clear()
+    this.clearMask()
+
+    this.translateCanvas(-barWidth / 2, 0)
+
+    // hp bar
+    this.fillStyle(0x000000)
+    this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
+
+    // hp and shield amount
+    if (this.hp > 0) {
+      const totalLife = Math.max(this.maxHp, this.hp + this.shield) // if hp + shield exceeds maxHP, the amount of segments should expand accordingly
+      const lifePercentage = this.hp / totalLife
+      const shieldPercentage = this.shield / totalLife
+
+      this.save()
+      this.translateCanvas(1, 1)
+
+      this.fillStyle(lifeBarBgColor, 1)
+      this.fillRect(0, 0, innerBarWidth, 6)
+
+      const color =
+        this.team === (this.flip ? 1 : 0) ? allyLifeColor : enemyLifeColor
+      this.fillStyle(color, 1)
+      this.fillRect(0, 0, lifePercentage * innerBarWidth, 6)
+      if (this.shield > 0) {
+        this.fillStyle(shieldColor)
+        this.fillRect(
+          lifePercentage * innerBarWidth,
+          0,
+          shieldPercentage * 68,
+          6
+        )
+      }
+
+      // hp segmentation
+      const segmentSize = (hpPerSegment / totalLife) * innerBarWidth
+      const numberOfSegments = ((totalLife - 0.1) / hpPerSegment) >> 0 // -0.1 to remove final segment on perfect intervals
+      this.lineStyle(1, lifeBarBgColor)
+      this.beginPath()
+      for (let i = 1; i <= numberOfSegments; i++) {
+        this.moveTo(i * segmentSize, 0)
+        this.lineTo(i * segmentSize, 4)
+      }
+      this.closePath()
+      this.strokePath()
+
+      this.restore()
+    }
+
+    // PP
+    if (this.pp !== undefined && this.maxPP !== undefined && this.maxPP > 0) {
+      const ppPercentage = max(1)(this.pp / this.maxPP)
+
+      this.fillStyle(ppBarBgColor, 1)
+      this.fillRect(1, 9, innerBarWidth, 3)
+
+      this.fillStyle(ppColor)
+      this.fillRect(1, 9, ppPercentage * innerBarWidth, 3)
+    }
+  }
+
+  setHp(value: number) {
+    this.scene.tweens.add({
+      targets: this,
+      hp: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: "Sine.easeOut"
+    })
+  }
+
+  setShield(value: number) {
+    this.scene.tweens.add({
+      targets: this,
+      shield: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: "Sine.easeOut"
+    })
+  }
+
+  setMaxHp(value: number) {
+    this.maxHp = value
+  }
+
+  setPP(value: number) {
+    this.scene.tweens.add({
+      targets: this,
+      pp: value,
+      duration: 150,
+      onUpdate: this.draw.bind(this),
+      ease: "Sine.easeOut"
+    })
+  }
+
+  setMaxPP(value: number) {
+    this.maxPP = value
+    if (this.pp === undefined) this.pp = 0
   }
 
   setTeam(team: number, flip: boolean) {
-    this.color = team === (flip ? 1 : 0) ? ALLY_COLOR : ENEMY_COLOR
-    if (this.progress) {
-      this.progress.style.backgroundColor = this.color
-    }
+    this.team = team
+    this.flip = flip
   }
 }

@@ -1,27 +1,39 @@
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
-import { Item } from "../../../../types/enum/Item"
+import {
+  Berries,
+  Dishes,
+  type Item,
+  ShinyItems,
+  SpecialItems,
+  TMs,
+  Tools,
+  Wands,
+  WeatherRocks
+} from "../../../../types/enum/Item"
+import { isIn } from "../../../../utils/array"
 import { getGameScene } from "../../pages/game"
-import { preferences } from "../../preferences"
+import { preference } from "../../preferences"
+import { DEPTH } from "../depths"
+import type GameScene from "../scenes/game-scene"
 import DraggableObject from "./draggable-object"
 import ItemDetail from "./item-detail"
-import ItemsContainer from "./items-container"
 
 export default class ItemContainer extends DraggableObject {
+  scene: GameScene
   detail: ItemDetail | undefined
   sprite: GameObjects.Image
   tempDetail: ItemDetail | undefined
   tempSprite: GameObjects.Image | undefined
   countText: GameObjects.Text | undefined
-  circle?: GameObjects.Ellipse
+  circle?: GameObjects.Image
   name: Item
-  parentContainer: ItemsContainer
-  scene: Phaser.Scene
   pokemonId: string | null
   playerId: string
-  mouseoutTimeout: ReturnType<typeof setTimeout>
+  mouseoutTimeout: NodeJS.Timeout | null = null
 
   constructor(
-    scene: Phaser.Scene,
+    scene: GameScene,
     x: number,
     y: number,
     item: Item,
@@ -31,36 +43,43 @@ export default class ItemContainer extends DraggableObject {
     const currentPlayerUid = getGameScene()?.uid
     const itemSize = pokemonId === null ? 60 : 25
     super(scene, x, y, itemSize, itemSize, playerId !== currentPlayerUid)
+    this.name = item
     this.scene = scene
     this.pokemonId = pokemonId
     this.playerId = playerId
-    this.circle = new GameObjects.Ellipse(
+    this.circle = scene.add.image(0, 0, "cell", this.cellIndex * 3)
+    this.draggable =
+      this.pokemonId === null &&
+      playerId === currentPlayerUid &&
+      (scene as GameScene).spectate === false
+    if (pokemonId) {
+      this.circle.setFrame(this.cellIndex * 3 + 2).setScale(0.45)
+    } else {
+      this.circle.setFrame(this.cellIndex * 3 + (this.draggable ? 0 : 2))
+    }
+    this.add(this.circle)
+    this.sprite = new GameObjects.Image(
       scene,
       0,
       0,
-      itemSize,
-      itemSize,
-      0x61738a,
-      1
-    )
-    if (pokemonId === null) {
-      this.circle.setStrokeStyle(
-        2,
-        playerId === currentPlayerUid ? 0x000000 : 0x666666,
-        1
-      )
-      this.circle.setAlpha(playerId === currentPlayerUid ? 1 : 0.7)
-    }
-    this.add(this.circle)
-    this.sprite = new GameObjects.Image(scene, 0, 0, "item", item).setScale(
-      pokemonId === null ? 0.5 : 0.25
-    )
+      "item",
+      item + ".png"
+    ).setScale(pokemonId === null ? 0.5 : 0.25)
 
-    this.name = item
     this.add(this.sprite)
     this.setInteractive()
     this.updateDropZone(true)
-    this.draggable = this.pokemonId === null && playerId === currentPlayerUid
+  }
+
+  get cellIndex() {
+    if (isIn(ShinyItems, this.name)) return 1
+    if (isIn(Berries, this.name)) return 2
+    if (isIn(Tools, this.name)) return 3
+    if (isIn(WeatherRocks, this.name)) return 4
+    if (isIn(SpecialItems, this.name)) return 5
+    if (isIn(TMs, this.name) || isIn(Wands, this.name)) return 6
+    if (isIn(Dishes, this.name)) return 7
+    return 0
   }
 
   updateDropZone(value: boolean) {
@@ -71,13 +90,13 @@ export default class ItemContainer extends DraggableObject {
 
   onPointerOver(pointer) {
     super.onPointerOver(pointer)
-    if (preferences.showDetailsOnHover && !this.detail?.visible) {
-      clearTimeout(this.mouseoutTimeout)
+    if (preference("showDetailsOnHover") && !this.detail?.visible) {
+      this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
       this.openDetail()
     }
     this.updateDropZone(false)
     if (this.draggable) {
-      this.circle?.setFillStyle(0x68829e)
+      this.circle?.setFrame(this.cellIndex * 3 + 1)
     }
   }
 
@@ -87,9 +106,9 @@ export default class ItemContainer extends DraggableObject {
       this.updateDropZone(true)
     }
     if (this.draggable) {
-      this.circle?.setFillStyle(0x61738a)
+      this.circle?.setFrame(this.cellIndex * 3)
     }
-    if (preferences.showDetailsOnHover) {
+    if (preference("showDetailsOnHover")) {
       this.mouseoutTimeout = setTimeout(
         () => {
           if (this.detail?.visible) {
@@ -101,10 +120,14 @@ export default class ItemContainer extends DraggableObject {
     }
   }
 
-  onPointerDown(pointer: Phaser.Input.Pointer) {
-    super.onPointerDown(pointer)
+  onPointerDown(
+    pointer: Phaser.Input.Pointer,
+    event: Phaser.Types.Input.EventData
+  ) {
+    super.onPointerDown(pointer, event)
     this.parentContainer.bringToTop(this)
-    if (pointer.rightButtonDown() && !preferences.showDetailsOnHover) {
+    event.stopPropagation()
+    if (pointer.rightButtonDown() && !preference("showDetailsOnHover")) {
       if (!this.detail?.visible) {
         this.openDetail()
         this.updateDropZone(false)
@@ -122,21 +145,21 @@ export default class ItemContainer extends DraggableObject {
 
   openDetail() {
     if (this.parentContainer.visible) {
-      this.parentContainer.closeDetails() // close other open item tooltips
+      this.scene.closeTooltips() // close other open tooltips
 
       if (this.detail === undefined) {
         this.detail = new ItemDetail(this.scene, 0, 0, this.name)
-        this.detail.setDepth(100)
+        this.detail.setDepth(DEPTH.TOOLTIP)
         this.detail.setPosition(
           this.detail.width * 0.5 + 40,
           this.detail.height * 0.5
         )
         this.detail.setVisible(false)
         this.detail.dom.addEventListener("mouseenter", () => {
-          clearTimeout(this.mouseoutTimeout)
+          this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
         })
         this.detail.dom.addEventListener("mouseleave", () => {
-          if (preferences.showDetailsOnHover) {
+          if (preference("showDetailsOnHover")) {
             this.mouseoutTimeout = setTimeout(
               () => {
                 if (this.detail?.visible) {
@@ -176,10 +199,10 @@ export default class ItemContainer extends DraggableObject {
       0,
       0,
       "item",
-      item
+      item + ".png"
     ).setScale(this.pokemonId === null ? 0.5 : 0.25)
-    this.tempDetail = new ItemDetail(this.scene, 0, 0, item)
-    this.tempDetail.setDepth(100)
+    this.tempDetail = new ItemDetail(this.scene, 0, 0, item as any)
+    this.tempDetail.setDepth(DEPTH.TOOLTIP)
     this.tempDetail.setPosition(
       this.tempDetail.width * 0.5 + 40,
       this.tempDetail.height * 0.5 + 40
@@ -193,7 +216,7 @@ export default class ItemContainer extends DraggableObject {
     if (this.countText === undefined) {
       const textStyle = {
         fontSize: "16px",
-        fontFamily: "brandonGrotesque",
+        fontFamily: "Jost",
         color: "#FFFFFF",
         align: "center",
         strokeThickness: 2,

@@ -1,36 +1,40 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import firebase from "firebase/compat/app"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { useNavigate } from "react-router"
-import { Navigate, useSearchParams } from "react-router-dom"
-import {
-  IBot,
-  IDetailledPokemon
-} from "../../../../../models/mongo-models/bot-v2"
-import { ModalMode, PkmWithConfig, Role } from "../../../../../types"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { logger } from "../../../../../utils/logger"
-import { max, min } from "../../../../../utils/number"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import store from "../../../stores"
-import { requestBotData, requestBotList } from "../../../stores/NetworkStore"
-import { getAvatarString } from "../../../utils"
-import { joinLobbyRoom } from "../../lobby"
-import DiscordButton from "../buttons/discord-button"
-import "./bot-builder.css"
+import { useNavigate, useSearchParams } from "react-router"
 import {
   DEFAULT_BOT_STATE,
-  MAX_BOTS_STAGE,
   estimateElo,
   getMaxItemComponents,
   getNbComponentsOnBoard,
+  getNbScarvesOnBoard,
+  getNbToolsOnBoard,
   getPowerEvaluation,
   getPowerScore,
+  MAX_BOTS_STAGE,
   rewriteBotRoundsRequiredto1,
   validateBoard
-} from "./bot-logic"
-import ImportExportBotModal from "./import-export-bot-modal"
+} from "../../../../../core/bot-logic"
+import {
+  computeSynergies,
+  getSynergyTier
+} from "../../../../../models/colyseus-models/synergies"
+import PokemonFactory from "../../../../../models/pokemon-factory"
+import { type PkmWithCustom, Role } from "../../../../../types"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { getAvatarString } from "../../../../../utils/avatar"
+import { logger } from "../../../../../utils/logger"
+import { max, min } from "../../../../../utils/number"
+import { joinLobbyRoom } from "../../../game/lobby-logic"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
+import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import DiscordButton from "../buttons/discord-button"
+import { Modal } from "../modal/modal"
+import ImportBotModal from "./import-bot-modal"
 import ScoreIndicator from "./score-indicator"
 import TeamBuilder from "./team-builder"
+import "./bot-builder.css"
 
 export default function BotBuilder() {
   const { t } = useTranslation()
@@ -39,15 +43,13 @@ export default function BotBuilder() {
   const [queryParams, setQueryParams] = useSearchParams()
   const [currentStage, setStage] = useState<number>(1)
   const [bot, setBot] = useState<IBot>(DEFAULT_BOT_STATE)
-  const [modalMode, setModalMode] = useState<ModalMode>(ModalMode.IMPORT)
-  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [currentModal, setCurrentModal] = useState<"import" | "export" | null>(
+    null
+  )
   const [violation, setViolation] = useState<string>()
-
-  const pastebinUrl: string = useAppSelector((state) => state.lobby.pastebinUrl)
-  const botData: IBot = useAppSelector((state) => state.lobby.botData)
-  const bots = useAppSelector((state) => state.lobby.botList)
-  const displayName = useAppSelector((state) => state.lobby.user?.name)
-  const lobby = useAppSelector((state) => state.lobby)
+  const user = useAppSelector((state) => state.network.profile)
+  const isBotManager =
+    user?.role === Role.BOT_MANAGER || user?.role === Role.ADMIN
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -60,37 +62,27 @@ export default function BotBuilder() {
     }
   })
 
-  const [toAuth, setToAuth] = useState<boolean>(false)
   const lobbyJoined = useRef<boolean>(false)
   useEffect(() => {
-    const client = store.getState().network.client
     if (!lobbyJoined.current) {
-      joinLobbyRoom(dispatch, client).catch((err) => {
-        logger.error(err)
-        setToAuth(true)
-      })
+      joinLobbyRoom(dispatch, navigate)
       lobbyJoined.current = true
     }
-  }, [lobbyJoined, dispatch])
+  }, [lobbyJoined])
 
   useEffect(() => {
     const botId = queryParams.get("bot")
-    if (botId && lobby) {
-      if (botData && botData.id === botId) {
-        // import by query param
-        setBot(rewriteBotRoundsRequiredto1(structuredClone(botData)))
-        logger.debug(`bot ${botId} imported`)
-      } else if (!modalVisible) {
-        logger.debug(`loading bot ${botId}`)
-        // query param but no matching bot data, so we request it
-        dispatch(requestBotData(botId))
-      }
+    if (botId && (!bot || bot.id !== botId)) {
+      logger.debug(`loading bot ${botId}`)
+      // query param but no matching bot data, so we request it
+      fetch(`/bots/${botId}`)
+        .then((r) => r.json())
+        .then((botData) => {
+          setBot(rewriteBotRoundsRequiredto1(structuredClone(botData)))
+          logger.debug(`bot ${botId} imported`)
+        })
     }
-  }, [lobby, queryParams, botData])
-
-  if (toAuth) {
-    return <Navigate to={"/"} />
-  }
+  }, [queryParams])
 
   const prevStep = useCallback(
     () => setStage(min(1)(currentStage - 1)),
@@ -110,40 +102,34 @@ export default function BotBuilder() {
       // automatically copy from last step
       updateStep(structuredClone(bot.steps[currentStage - 1].board))
     }
-  }, [currentStage])
-
-  useEffect(() => {
-    if (lobby && bots.length === 0) {
-      dispatch(requestBotList())
-    }
-  }, [bots, lobby])
+  }, [currentStage, bot.steps])
 
   function importBot(text: string) {
     try {
       const b: IBot = JSON.parse(text)
       setBot(rewriteBotRoundsRequiredto1(b))
-      setModalVisible(false)
+      setCurrentModal(null)
       setQueryParams({ bot: b.id })
     } catch (e) {
       alert(e)
     }
   }
 
-  function changeAvatar(pkm: PkmWithConfig) {
-    bot.name = pkm.name.toUpperCase()
+  function changeAvatar(pkm: PkmWithCustom) {
+    bot.name = pkm.name
     bot.avatar = getAvatarString(PkmIndex[pkm.name], pkm.shiny, pkm.emotion)
     completeBotInfo()
   }
 
   function completeBotInfo() {
-    if (bot.id) {
+    if (bot.id && !isBotManager) {
       // fork existing bot
       setQueryParams({})
       bot.id = ""
     }
     setBot({
       ...bot,
-      author: displayName ?? "Anonymous",
+      author: user?.displayName ?? "Anonymous",
       elo: estimateElo(bot)
     })
   }
@@ -153,10 +139,69 @@ export default function BotBuilder() {
     completeBotInfo()
   }
 
+  function saveFile() {
+    // save board to local JSON file
+    const blob = new Blob([JSON.stringify(bot)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "bot.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function loadFile() {
+    // load from local JSON file
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = "application/json"
+    input.addEventListener("change", async (e) => {
+      if (!input.files) return
+      const file = input.files![0]
+      const reader = new FileReader()
+      reader.onload = async (e) => {
+        if (!e.target) return
+        try {
+          const data: IBot = JSON.parse(e.target.result as string)
+          if (!data) {
+            throw new Error("Invalid file content")
+          } else {
+            setBot(rewriteBotRoundsRequiredto1(data))
+          }
+        } catch (e) {
+          console.error("Failed to load bot from file:", e)
+          alert("Invalid file")
+        }
+      }
+      reader.readAsText(file)
+    })
+    input.click()
+  }
+
   const board = useMemo(
     () => bot.steps[currentStage]?.board ?? [],
     [bot, currentStage]
   )
+
+  const synergies = useMemo(
+    () =>
+      computeSynergies(
+        board.map((p) => {
+          const pkm = PokemonFactory.createPokemonFromName(p.name, {
+            emotion: p.emotion,
+            shiny: p.shiny
+          })
+          pkm.positionX = p.x
+          pkm.positionY = p.y
+          p.items.forEach((item) => {
+            pkm.items.add(item)
+          })
+          return pkm
+        })
+      ),
+    [board]
+  )
+
   const nbComponentsOnBoard = useMemo(
     () => getNbComponentsOnBoard(board),
     [board]
@@ -165,18 +210,26 @@ export default function BotBuilder() {
     () => getMaxItemComponents(currentStage),
     [currentStage]
   )
+  const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
+  const nbMaxScarvesOnBoard = useMemo(
+    () => getSynergyTier(synergies, Synergy.NORMAL),
+    [board]
+  )
+  const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
+  const nbMaxToolsOnBoard = useMemo(
+    () => getSynergyTier(synergies, Synergy.ARTIFICIAL),
+    [board]
+  )
   const powerScore = useMemo(() => getPowerScore(board), [board])
   const powerEvaluation = useMemo(
     () => getPowerEvaluation(powerScore, currentStage),
-    [board, currentStage]
+    [powerScore, currentStage]
   )
-
-  const user = useAppSelector((state) => state.lobby.user)
 
   useEffect(() => {
     setViolation(undefined)
     try {
-      validateBoard(board, currentStage)
+      validateBoard(board, currentStage, synergies)
     } catch (err: any) {
       if (err instanceof Error) {
         setViolation(err.message)
@@ -191,35 +244,42 @@ export default function BotBuilder() {
           {t("back_to_lobby")}
         </button>
         <div className="spacer"></div>
-        {(user?.role === Role.ADMIN ||
-          user?.role === Role.MODERATOR ||
-          user?.role === Role.BOT_MANAGER) && (
+        {isBotManager && (
           <button onClick={() => navigate("/bot-admin")} className="bubbly red">
+            <img src="assets/ui/bot.svg" />
             {t("bot_admin")}
           </button>
         )}
+        <button className="bubbly dark" onClick={saveFile}>
+          <img src="assets/ui/save.svg" /> {t("save")}
+        </button>
+        <button className="bubbly dark" onClick={loadFile}>
+          <img src="assets/ui/load.svg" /> {t("load")}
+        </button>
         <button
           onClick={() => {
-            setModalMode(ModalMode.IMPORT)
-            setModalVisible(true)
+            setCurrentModal("import")
           }}
           className="bubbly orange"
         >
-          {t("import")}/{t("load")}
+          {t("import")}
         </button>
         <button
           onClick={() => {
             completeBotInfo()
-            setModalMode(ModalMode.EXPORT)
-            setModalVisible(true)
+            setCurrentModal("export")
           }}
-          className="bubbly orange"
+          className="bubbly green"
         >
-          {t("export")}
+          {t("submit")}
         </button>
-        <DiscordButton channel="bot-creation" />
+        <DiscordButton
+          url={
+            "https://discord.com/channels/737230355039387749/914503292875325461"
+          }
+        />
       </header>
-      <div className="step-info nes-container">
+      <div className="step-info my-container">
         <div className="step-control">
           <button onClick={prevStep} disabled={currentStage <= 0}>
             <img src="assets/ui/arrow-left.svg" alt="←" />
@@ -239,6 +299,22 @@ export default function BotBuilder() {
           {t("item_components")}: {nbComponentsOnBoard} /{" "}
           {nbMaxComponentsOnBoard}
         </span>
+        {(nbScarvesOnBoard > 0 || nbMaxScarvesOnBoard > 0) && (
+          <span
+            className={
+              nbScarvesOnBoard > nbMaxScarvesOnBoard ? "invalid" : "valid"
+            }
+          >
+            {t("scarves")}: {nbScarvesOnBoard} / {nbMaxScarvesOnBoard}
+          </span>
+        )}
+        {(nbToolsOnBoard > 0 || nbMaxToolsOnBoard > 0) && (
+          <span
+            className={nbToolsOnBoard > nbMaxToolsOnBoard ? "invalid" : "valid"}
+          >
+            {t("tools")}: {nbToolsOnBoard} / {nbMaxToolsOnBoard}
+          </span>
+        )}
         <span>
           {t("board_power")}: {powerScore}
         </span>
@@ -254,16 +330,88 @@ export default function BotBuilder() {
         error={violation}
       />
 
-      <ImportExportBotModal
-        visible={modalVisible}
+      <ImportBotModal
+        visible={currentModal === "import"}
         bot={bot}
         hideModal={() => {
-          setModalVisible(false)
+          setCurrentModal(null)
         }}
-        modalMode={modalMode}
         importBot={importBot}
-        pasteBinUrl={pastebinUrl}
+      />
+
+      <SubmitBotModal
+        visible={currentModal === "export"}
+        bot={bot}
+        hideModal={() => {
+          setCurrentModal(null)
+        }}
       />
     </div>
+  )
+}
+
+export function SubmitBotModal(props: {
+  bot: IBot
+  hideModal: () => void
+  visible: boolean
+}) {
+  const { t } = useTranslation()
+
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const [success, setSuccess] = useState<boolean>(false)
+
+  async function submitBot() {
+    if (loading) return
+    setLoading(true)
+    setError("")
+    setSuccess(false)
+    try {
+      const token = await firebase.auth().currentUser?.getIdToken()
+      const res = await fetch("/bots", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(props.bot)
+      })
+      if (res.ok) {
+        setSuccess(true)
+      } else {
+        setError(res.statusText)
+      }
+    } catch (err: any) {
+      setError(err.message)
+    }
+    setLoading(false)
+  }
+
+  return (
+    <Modal
+      show={props.visible}
+      onClose={props.hideModal}
+      className="bot-export-modal"
+      header={t("submit_your_bot")}
+      body={
+        <>
+          <p>{t("bot_ready_submission")}</p>
+        </>
+      }
+      footer={
+        <>
+          {!success && !loading && !error && (
+            <button className="bubbly green" onClick={submitBot}>
+              {t("submit_your_bot")}
+            </button>
+          )}
+          {loading && <p>{t("loading")}</p>}
+          {!loading && error && (
+            <p className="error">{t("bot_submission_failed", { error })}</p>
+          )}
+          {success && <p>{t("bot_submitted_success")}</p>}
+        </>
+      }
+    />
   )
 }

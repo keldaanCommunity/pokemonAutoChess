@@ -1,49 +1,79 @@
 import { t } from "i18next"
+import type Phaser from "phaser"
 import { GameObjects } from "phaser"
-import { transformCoordinate } from "../../pages/utils/utils"
+import { getSellPrice } from "../../../../models/shop"
+import { transformBoardCoordinates } from "../../pages/utils/utils"
+import { DEPTH } from "../depths"
+import type GameScene from "../scenes/game-scene"
+import type PokemonSprite from "./pokemon"
 
 export class SellZone extends GameObjects.Container {
-  graphic: Phaser.GameObjects.Graphics
-  zone: Phaser.GameObjects.Zone
+  scene: GameScene
+  rectangle: Phaser.GameObjects.Rectangle
   text: Phaser.GameObjects.Text
+  bgColor = 0x61738a
+  hoveredBgColor = 0x6b8bb2
 
-  constructor(scene: Phaser.Scene) {
-    const sellZoneCoord = transformCoordinate(4, 5.5)
+  constructor(scene: GameScene) {
+    const sellZoneCoord = transformBoardCoordinates(4, 5.5)
     super(scene, sellZoneCoord[0] - 48, sellZoneCoord[1] + 24)
+    this.scene = scene
 
     const sellZone = scene.add.zone(0, 0, 8 * 96, 240)
     sellZone.setRectangleDropZone(8 * 96, 240)
     sellZone.setName("sell-zone")
     this.add(sellZone)
 
-    this.graphic = scene.add
-      .graphics()
-      .fillStyle(0x61738a, 1)
-      .fillRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
+    this.rectangle = scene.add
+      .rectangle(
+        sellZone.x,
+        sellZone.y,
         sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
+        sellZone.input!.hitArea.height,
+        this.bgColor,
+        1
       )
-      .lineStyle(2, 0x000000, 1)
-      .strokeRect(
-        sellZone.x - sellZone.input!.hitArea.width / 2,
-        sellZone.y - sellZone.input!.hitArea.height / 2,
-        sellZone.input!.hitArea.width,
-        sellZone.input!.hitArea.height
-      )
-    this.add(this.graphic)
+      .setStrokeStyle(2, 0x000000, 1)
+      .setAlpha(0.8)
 
-    this.text = scene.add.text(0, 0, t("drop_here_to_sell"), {
-      fontSize: "35px",
-      fontFamily: "brandonGrotesque",
-      color: "black",
+    this.add(this.rectangle)
+    sellZone.setData({ rectangle: this.rectangle })
+
+    this.text = scene.add.text(0, -80, t("drop_here_to_sell"), {
+      font: "600 24px Jost",
+      color: "white",
       align: "center"
     })
-    this.text.setOrigin(0.5)
+    this.text.setOrigin(0.5, 0.5)
     this.add(this.text)
 
     this.setVisible(false)
+    this.setDepth(DEPTH.SELL_ZONE)
     this.scene.add.existing(this)
+  }
+
+  showForPokemon(pkm: PokemonSprite) {
+    const specialGameRule = this.scene.room?.state.specialGameRule
+    const pokemon = this.scene.board?.player.board.get(pkm.id)
+    if (!pokemon) return
+    const price = getSellPrice(pokemon, specialGameRule)
+    this.text.setText(
+      `${t("drop_here_to_sell")} ${t("for_price_gold", { price })}`
+    )
+    this.rectangle.setFillStyle(this.bgColor)
+    this.setVisible(true)
+  }
+
+  hide() {
+    this.rectangle.setFillStyle(this.bgColor).setAlpha(0.8)
+    this.setVisible(false)
+  }
+
+  onDragEnter() {
+    this.rectangle.setFillStyle(this.hoveredBgColor).setAlpha(0.9)
+  }
+
+  onDragLeave() {
+    this.rectangle.setFillStyle(this.bgColor).setAlpha(0.8)
   }
 }

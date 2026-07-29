@@ -1,30 +1,151 @@
 import React from "react"
 import { useTranslation } from "react-i18next"
-import "./auth.css"
+import pkg from "../../../../package.json"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import { fetchProfile } from "../network"
+import { setErrorAlertMessage } from "../stores/NetworkStore"
 import Login from "./component/auth/login"
-import Media from "./component/auth/media"
+import DiscordButton from "./component/buttons/discord-button"
+import GithubButton from "./component/buttons/github-button"
+import PolicyButton from "./component/buttons/policy-button"
+import TermsButton from "./component/buttons/terms-button"
+import { Modal } from "./component/modal/modal"
+import ServersList from "./component/servers/servers-list"
+import Wiki from "./component/wiki/wiki"
+import "./auth.css"
 
 export default function Auth() {
   const { t } = useTranslation()
   const isSupposedlyMobile =
     navigator.maxTouchPoints > 0 &&
     window.matchMedia("(orientation: portrait)").matches
+  const [modal, setModal] = React.useState<string | null>(null)
+  const [twitchCallbackMessage, setTwitchCallbackMessage] = React.useState<{
+    kind: "success" | "error"
+    body: string
+  } | null>(null)
+  const [shouldRefreshProfile, setShouldRefreshProfile] = React.useState(false)
+  const dispatch = useAppDispatch()
+  const networkError = useAppSelector((state) => state.network.error)
+  const uid = useAppSelector((state) => state.network.uid)
+  const discordUrl = process.env.DISCORD_SERVER
+
+  React.useEffect(() => {
+    const url = new URL(window.location.href)
+    const twitchVerify = url.searchParams.get("twitchVerify")
+    if (!twitchVerify) {
+      return
+    }
+
+    if (twitchVerify === "success") {
+      setTwitchCallbackMessage({
+        kind: "success",
+        body: "Your Twitch account has been linked successfully."
+      })
+      setShouldRefreshProfile(true)
+    } else {
+      setTwitchCallbackMessage({
+        kind: "error",
+        body: twitchVerify.replace(/\+/g, " ")
+      })
+    }
+
+    url.searchParams.delete("twitchVerify")
+    window.history.replaceState({}, "", url.toString())
+  }, [])
+
+  React.useEffect(() => {
+    if (!shouldRefreshProfile || !uid) {
+      return
+    }
+
+    fetchProfile(true)
+      .catch((error) => {
+        dispatch(
+          setErrorAlertMessage(
+            error instanceof Error ? error.message : "Unable to refresh profile"
+          )
+        )
+      })
+      .finally(() => {
+        setShouldRefreshProfile(false)
+      })
+  }, [dispatch, shouldRefreshProfile, uid])
 
   return (
     <div className="auth-page">
       {isSupposedlyMobile && (
-        <p className="mobile-warning">{t("mobile_warning")}</p>
+        <p className="mobile-warning">{t("auth.mobile_warning")}</p>
       )}
-      <main>
-        <h1>{t("pokemon_auto_chess")}</h1>
-        <div className="nintendo">
-          <p>{t("nintendo_warning")}</p>
+      <img className="logo" src="assets/ui/pokemon_autochess_final.svg" />
+      <header>
+        <h1>{t("auth.pokemon_auto_chess")}</h1>
+        <div className="disclaimer">
+          <p>{t("auth.nintendo_warning")}</p>
         </div>
-
+      </header>
+      <main>
         <Login />
       </main>
-      <img className="logo" src="assets/ui/pokemon_autochess_final.svg" />
-      <Media />
+      <div className="media">
+        <DiscordButton url={discordUrl} />
+        <GithubButton />
+        <PolicyButton />
+        <TermsButton />
+        <button className="bubbly blue" onClick={() => setModal("wiki")}>
+          <img width={32} height={32} src={`assets/ui/wiki.svg`} />
+          {t("wiki.title")}
+        </button>
+        <button className="bubbly pink" onClick={() => setModal("servers")}>
+          <img width={32} height={32} src={`assets/ui/players.svg`} />
+          {t("servers_list.title")}
+        </button>
+        <span>V{pkg.version}</span>
+        <p>
+          {t("auth.made_for_fans")}
+          <br />
+          {t("auth.non_profit")} / {t("auth.open_source")}
+          <br />
+          {t("auth.copyright")}
+        </p>
+      </div>
+      <Modal
+        onClose={() => setModal(null)}
+        show={modal === "wiki"}
+        className="wiki-modal"
+        header={t("wiki.title")}
+      >
+        <Wiki inGame={false} />
+      </Modal>
+      <Modal
+        onClose={() => setModal(null)}
+        show={modal === "servers"}
+        className="servers-modal"
+        header={t("servers_list.title")}
+      >
+        <ServersList />
+      </Modal>
+      <Modal
+        show={networkError != null}
+        onClose={() => {
+          dispatch(setErrorAlertMessage(null))
+        }}
+        className="is-dark basic-modal-body"
+        body={<p style={{ padding: "1em" }}>{networkError}</p>}
+      />
+      <Modal
+        show={twitchCallbackMessage != null}
+        onClose={() => {
+          setTwitchCallbackMessage(null)
+        }}
+        className="is-dark basic-modal-body"
+        header={
+          twitchCallbackMessage?.kind === "success"
+            ? "Twitch Linked"
+            : "Twitch Verification Error"
+        }
+        body={<p style={{ padding: "1em" }}>{twitchCallbackMessage?.body}</p>}
+      />
     </div>
   )
 }

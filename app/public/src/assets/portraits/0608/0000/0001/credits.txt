@@ -1,0 +1,1 @@
+2021-07-09 09:11:40.557500	<@!356635814668664832>	CUR	PMDCollab_1	Normal,Happy,Pain,Angry,Worried,Sad,Crying,Shouting,Teary-Eyed,Determined,Joyous,Inspired,Surprised,Dizzy,Sigh,Stunned

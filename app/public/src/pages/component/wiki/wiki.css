@@ -1,6 +1,13 @@
 #wiki-page {
-  width: 1880px;
+  color: var(--color-fg-primary);
+  width: min(95vw, 1800px);
   max-width: 100%;
+}
+
+#wiki-page h2 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 #wiki-page ul {
@@ -20,19 +27,16 @@
   margin: -6px -12px;
 }
 
-#wiki-page .synergies-tabs li[role="tab"] {
-  padding: 4px 6px;
+#wiki-page .wiki-types li[role="tab"] {
+  padding: 4px;
   line-height: 40px;
+  min-width: 48px;
+  text-align: center;
 }
 
-#wiki-page > .nes-container {
-  color: white;
-  background-color: #54596b;
-}
-
-#wiki-page > .nes-container > .react-tabs > .react-tabs__tab-panel {
+#wiki-page > .react-tabs > .react-tabs__tab-panel {
   height: 75vh;
-  padding-bottom: 40px;
+  padding: 0.5em 0 0 0;
   overflow-y: auto;
 }
 
@@ -40,8 +44,7 @@
   text-transform: capitalize;
 }
 
-#wiki-page .pokemon-portrait {
-  display: inline-block;
+#wiki-page .wiki-types .pokemon-portrait {
   margin: 2px;
 }
 
@@ -50,20 +53,34 @@
   border-radius: 2px;
 }
 
-#wiki-page .wiki-pokemons .pokemon-typeahead {
+#wiki-page .filters {
   float: right;
+  display: flex;
+  gap: 0.5em;
+  font-size: 90%;
 }
 
 #wiki-page p.description {
   line-height: 1.2em;
 }
 
+#wiki-page .wiki-faq summary {
+  color: var(--color-fg-green);
+}
+
+#wiki-page .wiki-faq details {
+  margin-bottom: 0.5em;
+}
+
+#wiki-page .wiki-faq details p {
+  white-space: pre-wrap;
+}
+
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  gap: 1em;
-  padding: 0;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-status li {
@@ -72,6 +89,16 @@
   grid-template: auto 1fr / 30% 1fr;
   padding: 0.5em;
   min-height: calc(122px + 1em);
+  column-gap: 0.5em;
+}
+
+#wiki-page .wiki-status h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#wiki-page .wiki-stat h2 {
+  margin: 0;
 }
 
 #wiki-page .wiki-stat li {
@@ -82,120 +109,216 @@
 
 #wiki-page .wiki-status li > img,
 #wiki-page .wiki-stat li > img {
-  grid-row: 1/3;
+  grid-row: 1 / 3;
   width: 100%;
+}
+
+#wiki-page .wiki-status li > img {
+  border-radius: 8px;
+  border: 2px solid #000000;
+}
+
+#wiki-page .wiki-stat li > img {
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
 }
 
 #wiki-page .wiki-status li .status-label {
   white-space: initial;
 }
 
-#wiki-page .wiki-stat p:first-of-type {
-  font-size: 120%;
-  margin: 0.25em 0;
-}
-
-#wiki-page .wiki-tutorials {
-  padding: 1em;
-}
-
 #wiki-page .wiki-tutorials ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 0.5em;
   padding: 0;
 }
 
-#wiki-weather > ul {
+#wiki-page .wiki-tutorials h3 {
+  margin: 0;
+}
+
+#wiki-page .wiki-tutorials iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+}
+
+#wiki-page .wiki-types .pokemon-portrait {
+  display: inline-block;
+}
+
+#wiki-pokemons-all section {
+  border-top: 4px solid currentColor;
+}
+
+#wiki-types-all section {
+  border-top: 4px solid #40404080;
+}
+
+#wiki-pokemons-all section ul,
+#wiki-types-all section ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#wiki-weather > ul,
+#wiki-town > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+  gap: 0.5em;
 }
 
-#wiki-weather .nes-container {
-  padding: 0.5em;
-  margin: 0.5em;
-}
-
-#wiki-ability .nes-container {
-  padding: 0.5em;
-  margin: 0.5em;
-}
-
-#wiki-ability > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-}
-#wiki-weather > ul > .nes-container {
-  padding: 0.5em 1em 0;
+#wiki-weather > ul > .my-box,
+#wiki-town > ul > .my-box {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
 
-#wiki-ability > ul > .nes-container {
-  padding: 0.5em 1em 0;
+#wiki-ability h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#wiki-ability {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#wiki-ability > ul > .my-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#wiki-regions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#wiki-regions > ul > .my-box {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  position: relative;
 }
 
-#wiki-weather .nes-container header {
+#wiki-regions > ul > .my-box > img {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #00000060;
+  image-rendering: pixelated;
+  height: 250px;
+  object-fit: cover;
+}
+
+#wiki-regions .my-box h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+#wiki-regions .wiki-regional-mons {
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  right: 1em;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap-reverse;
+}
+
+#wiki-weather .my-box header,
+#wiki-town .my-box header {
   display: flex;
   align-items: center;
   gap: 0.5em;
 }
 
-#wiki-weather .nes-container h2 {
+#wiki-weather .my-box h2,
+#wiki-town .my-box h2 {
   flex: 1;
   margin: 0;
+  font-size: 2rem;
 }
 
-#wiki-weather .nes-container header .weather-icon {
+#wiki-weather .my-box header .weather-icon {
+  aspect-ratio: 1 / 1;
   height: 40px;
 }
 
-#wiki-weather .nes-container p {
+#wiki-weather .my-box p,
+#wiki-town .my-box p {
   margin: 0;
   white-space: pre-line;
 }
 
-#wiki-weather .nes-container ul {
+#wiki-weather .my-box ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  padding: 0;
+  margin: 0;
+}
+
+#wiki-ability .my-box ul {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
   padding: 0;
 }
 
-#wiki-ability .nes-container ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  padding: 0;
+#wiki-ability .my-box p {
+  font-size: 0.8em;
+  white-space: pre-wrap;
+}
+
+#wiki-ability img.item {
+  width: 45px;
+  height: 45px;
 }
 
 #wiki-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
   justify-content: space-evenly;
+}
+
+#wiki-items article {
+  padding: 1em;
+}
+
+#wiki-items h2 {
+  margin-bottom: 0.25em;
 }
 
 #wiki-items ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5em;
+  gap: 0;
   padding: 0;
+  margin: 0;
+}
+
+#wiki-items .craftable table {
+  margin: 1em;
 }
 
 #wiki-items .berries {
-  max-width: 400px;
+  grid-column: 1 / 3;
 }
 
-#wiki-items .artificial {
-  max-width: 290px;
+#wiki-items article:nth-child(n + 3) {
+  grid-column: 1 / 3;
 }
 
 #wiki-items img.item {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   cursor: var(--cursor-hover);
   margin: 8px;
 }
@@ -203,15 +326,97 @@
 #wiki-items img.tree {
   image-rendering: pixelated;
   width: 50px;
-  margin: -8px 8px 30px 8px;
+  margin: -8px 8px 0 8px;
 }
 
 #wiki-items th,
 #wiki-items td:first-child {
-  background-color: #61738a;
+  background-color: var(--color-bg-secondary);
 }
 
 #wiki-items tr:nth-child(odd),
 #wiki-items td:nth-child(n + 2) {
-  background-color: #54596b;
+  background-color: var(--color-bg-primary);
+}
+
+#wiki-data {
+  padding: 0 0.5em;
+}
+
+#wiki-data table {
+  text-align: center;
+  table-layout: fixed;
+  background-color: var(--color-bg-secondary);
+}
+
+#wiki-data thead {
+  border-bottom: 2px solid currentColor;
+}
+
+#wiki-data th,
+#wiki-data td {
+  padding: 0 0.5em;
+}
+
+#wiki-data-tiers-by-level th,
+#wiki-data-booster-rarity-probability th {
+  width: 10ch;
+}
+
+#wiki-page input[type="search"] {
+  display: block;
+  margin: 0.5em 0 0.5em auto;
+  width: auto;
+}
+
+@media (width <= 960px) {
+  #wiki-items {
+    display: block;
+  }
+
+  #wiki-items img.item {
+    width: 24px;
+    height: 24px;
+    margin: 4px;
+  }
+
+  #wiki-page .wiki-types li[role="tab"] {
+    padding: 4px;
+  }
+}
+
+#wiki-page .wiki-double-up {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+}
+
+#wiki-page .wiki-double-up h2 {
+  margin: 0 0 0.25em 0;
+}
+
+#wiki-page .wiki-double-up p {
+  margin: 0;
+}
+
+#wiki-page .wiki-double-up ul {
+  margin: 0.25em 0 0 1em;
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up li {
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0.25em 0;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items img.item {
+  width: 22px;
+  height: 22px;
 }

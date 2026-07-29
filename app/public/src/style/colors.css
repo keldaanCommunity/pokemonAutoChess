@@ -1,0 +1,54 @@
+:root {
+  --color-bg-primary: #61738a;
+  --color-bg-secondary: #54596b;
+  --color-bg-tertiary: #464c5c;
+  --color-bg-accent: #1195ec;
+  --color-bg-positive: #34a00c;
+  --color-bg-negative: #742424;
+  --color-bg-gold: #c9a000;
+  --color-bg-input: #262626;
+
+  --color-fg-primary: #ffffff;
+  --color-fg-secondary: #c3cddf;
+  --color-fg-accent: #69b7eb;
+  --color-fg-green: #8ede1d;
+  --color-fg-red: #f74f4f;
+  --color-fg-gold: #ffc107;
+  --color-fg-invert: #000000;
+  --color-fg-positive: #a9f5ad;
+  --color-fg-negative: #f5a9a9;
+  --color-shadow: #2d334b;
+
+  --color-physical: #e76e55;
+  --color-special: hsl(215, 100%, 75%);
+  --color-true: #f7d51d;
+  --color-shield: #8d8d8d;
+
+  --color-rarity-common: #a0a0a0;
+  --color-rarity-uncommon: #3bc95e;
+  --color-rarity-rare: #41bfcc;
+  --color-rarity-epic: #927fff;
+  --color-rarity-ultra: #e53b3b;
+  --color-rarity-unique: #ffffff;
+  --color-rarity-legendary: #e6cb49;
+  --color-rarity-special: #e58ee5;
+  --color-rarity-hatch: #b9915a;
+
+  --color-team1: #f9e07f;
+  --color-team2: #f4a7b9;
+  --color-team3: #a8e6e6;
+  --color-team4: #b8e6a0;
+  
+  /* replay event log per-category accents: filter chip fill and row type text */
+  --color-replay-cat-combat: #ff9a8f;
+  --color-replay-cat-status: #ff8fac;
+  --color-replay-cat-stats: #ffab7a;
+  --color-replay-cat-economy: var(--color-fg-gold);
+  --color-replay-cat-items: #e0a368;
+  --color-replay-cat-flow: #8fd0ff;
+  --color-replay-cat-synergy: #9be08f;
+  --color-replay-cat-flavor: #c9a3ff;
+  --color-replay-cat-positioning: #6fd6c4;
+  --color-replay-cat-moves: #7ab6d6;
+  --color-replay-cat-engine: #aab0b6;
+}

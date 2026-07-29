@@ -1,0 +1,12 @@
+.connection-status-notification {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 9999;
+}
+
+.connection-status-notification img {
+  width: 48px;
+  height: 48px;
+  margin-right: 0.5em;
+}

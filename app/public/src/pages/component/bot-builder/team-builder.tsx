@@ -1,14 +1,23 @@
-import React, { useEffect, useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { useLocation } from "react-router"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
-import {
-  IBot,
-  IDetailledPokemon
-} from "../../../../../models/mongo-models/bot-v2"
 import PokemonFactory from "../../../../../models/pokemon-factory"
-import { Emotion, PkmWithConfig } from "../../../../../types"
+import {
+  Emotion,
+  type PkmWithCustom,
+  Role,
+  Transfer
+} from "../../../../../types"
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { Synergy } from "../../../../../types/enum/Synergy"
+import type { Synergy } from "../../../../../types/enum/Synergy"
+import { isOnBench } from "../../../../../utils/board"
+import { schemaValues } from "../../../../../utils/schemas"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import { rooms } from "../../../network"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
 import ItemPicker from "./item-picker"
@@ -19,18 +28,26 @@ import "./team-builder.css"
 
 export default function TeamBuilder(props: {
   bot?: IBot
-  onChangeAvatar?: (pkm: PkmWithConfig) => void
+  onChangeAvatar?: (pkm: PkmWithCustom) => void
   board: IDetailledPokemon[]
   updateBoard: (board: IDetailledPokemon[]) => void
   error?: string
 }) {
-  const [selection, setSelection] = useState<Item | PkmWithConfig>({
+  const { t } = useTranslation()
+  const [selection, setSelection] = useState<Item | PkmWithCustom>({
     name: Pkm.MAGIKARP,
     shiny: false,
     emotion: Emotion.NORMAL
   })
 
+  const ingame = useLocation().pathname === "/game"
+  const inBotBuilder = useLocation().pathname.startsWith("/bot-builder")
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const [board, setBoard] = useState<IDetailledPokemon[]>(props.board ?? [])
+  const isAdmin = useAppSelector(
+    (state) => state.network.profile?.role === Role.ADMIN
+  )
+
   useEffect(() => {
     if (props.board) setBoard(props.board) // keep local state in sync with parent prop
   }, [props.board])
@@ -46,8 +63,8 @@ export default function TeamBuilder(props: {
     const map = computeSynergies(
       board.map((p) => {
         const pkm = PokemonFactory.createPokemonFromName(p.name, {
-          selectedEmotion: p.emotion,
-          selectedShiny: p.shiny
+          emotion: p.emotion,
+          shiny: p.shiny
         })
         pkm.positionX = p.x
         pkm.positionY = p.y
@@ -60,7 +77,7 @@ export default function TeamBuilder(props: {
     return [...map.entries()]
   }, [board])
 
-  function addPokemon(x: number, y: number, pkm: PkmWithConfig) {
+  function addPokemon(x: number, y: number, pkm: PkmWithCustom) {
     let existingItems
     const i = board.findIndex((p) => p.x === x && p.y === y)
     if (i >= 0) {
@@ -113,19 +130,19 @@ export default function TeamBuilder(props: {
     } else if (pokemonOnCell) {
       setSelection(pokemonOnCell)
       setSelectedPokemon(pokemonOnCell)
-    } else if (Object.values(Pkm).includes((selection as PkmWithConfig).name)) {
-      addPokemon(x, y, selection as PkmWithConfig)
+    } else if (Object.values(Pkm).includes((selection as PkmWithCustom).name)) {
+      addPokemon(x, y, selection as PkmWithCustom)
     } else if (Object.keys(Item).includes(selection as Item)) {
       addItem(x, y, selection as Item)
     }
   }
 
   function handleDrop(x: number, y: number, e: React.DragEvent) {
-    if (e.dataTransfer.getData("cell") != "") {
-      const [originX, originY] = e.dataTransfer
-        .getData("cell")
-        .split(",")
-        .map(Number)
+    e.stopPropagation()
+    e.preventDefault()
+    const data = e.dataTransfer.getData("text/plain")
+    if (data.startsWith("cell")) {
+      const [type, originX, originY] = data.split(",").map(Number)
       const pkm = board.find((p) => p.x === originX && p.y === originY)
       const otherPokemonOnCell = board.find((p) => p.x === x && p.y === y)
       if (pkm) {
@@ -137,22 +154,41 @@ export default function TeamBuilder(props: {
         pkm.y = y
         updateBoard([...board])
       }
-    } else if (e.dataTransfer.getData("pokemon") != "") {
-      const pkm: PkmWithConfig = {
-        name: e.dataTransfer.getData("pokemon") as Pkm,
+    } else if (data.startsWith("pokemon")) {
+      const [type, name] = data.split(",") as [string, Pkm]
+      const pkm: PkmWithCustom = {
+        name,
         emotion: Emotion.NORMAL,
         shiny: false
       }
       addPokemon(x, y, pkm)
       setSelection(pkm)
-    } else if (e.dataTransfer.getData("item") != "") {
-      const item = e.dataTransfer.getData("item") as Item
+    } else if (data.startsWith("item")) {
+      const [type, item] = data.split(",") as [string, Item]
       addItem(x, y, item)
       setSelection(item)
     }
   }
 
-  function updateSelectedPokemon(pkm: PkmWithConfig) {
+  function getFirstEmptyCell(): { x: number; y: number } | null {
+    for (let y = 1; y <= 3; y++) {
+      for (let x = 0; x < 8; x++) {
+        if (board.find((p) => p.x === x && p.y === y) === undefined) {
+          return { x, y }
+        }
+      }
+    }
+    return null
+  }
+
+  function addPokemonOnFirstEmptyCell(entity: PkmWithCustom) {
+    const firstEmptyCell = getFirstEmptyCell()
+    if (firstEmptyCell) {
+      addPokemon(firstEmptyCell.x, firstEmptyCell.y, entity)
+    }
+  }
+
+  function updateSelectedPokemon(pkm: PkmWithCustom) {
     setSelection(pkm)
     if (selectedPokemon != null) {
       selectedPokemon.emotion = pkm.emotion
@@ -165,23 +201,130 @@ export default function TeamBuilder(props: {
     if (
       selection &&
       props.onChangeAvatar &&
-      Object.values(Pkm).includes((selection as PkmWithConfig).name)
+      Object.values(Pkm).includes((selection as PkmWithCustom).name)
     ) {
-      props.onChangeAvatar(selection as PkmWithConfig)
+      props.onChangeAvatar(selection as PkmWithCustom)
     }
   }
 
+  function snapshot() {
+    try {
+      if (!spectatedPlayer) return
+      updateBoard(
+        schemaValues(spectatedPlayer.board)
+          .filter((pokemon) => !isOnBench(pokemon))
+          .map((p) => {
+            return {
+              name: p.name,
+              emotion: p.emotion,
+              shiny: p.shiny,
+              items: schemaValues(p.items),
+              x: p.positionX,
+              y: p.positionY
+            }
+          })
+      )
+    } catch (e) {
+      console.error("Failed to snapshot board:", e)
+    }
+  }
+
+  function reset() {
+    updateBoard([])
+  }
+
+  function saveFile() {
+    // save board to local JSON file
+    const blob = new Blob([JSON.stringify(board)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "board.json"
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function loadFile() {
+    // load from local JSON file
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = "application/json"
+    input.addEventListener("change", async (e) => {
+      if (!input.files) return
+      const file = input.files![0]
+      const reader = new FileReader()
+      reader.onload = async (e) => {
+        if (!e.target) return
+        try {
+          const data = JSON.parse(e.target.result as string)
+          if (!data || !Array.isArray(data)) {
+            throw new Error("Invalid file content")
+          } else {
+            updateBoard(data)
+          }
+        } catch (e) {
+          alert("Invalid file")
+        }
+      }
+      reader.readAsText(file)
+    })
+    input.click()
+  }
+
+  function overwriteBoard() {
+    rooms.game?.send(Transfer.OVERWRITE_BOARD, board)
+  }
+
   return (
-    <div id="team-builder" className="nes-container">
-      <Synergies synergies={synergies} />
+    <div id="team-builder">
+      <div className="synergies-container my-box">
+        <Synergies synergies={synergies} tooltipPortal={false} />
+      </div>
+      <div className="actions">
+        {ingame && isAdmin && (
+          <details>
+            <summary>Admin</summary>
+            <button className="bubbly blue" onClick={overwriteBoard}>
+              Overwrite game board
+            </button>
+          </details>
+        )}
+        {ingame && (
+          <button className="bubbly blue" onClick={snapshot}>
+            <img src="assets/ui/photo.svg" /> {t("snapshot")}
+          </button>
+        )}
+        {!inBotBuilder && (
+          <button className="bubbly dark" onClick={saveFile}>
+            <img src="assets/ui/save.svg" /> {t("save")}
+          </button>
+        )}
+        {!inBotBuilder && (
+          <button className="bubbly dark" onClick={loadFile}>
+            <img src="assets/ui/load.svg" /> {t("load")}
+          </button>
+        )}
+        <button className="bubbly red" onClick={reset}>
+          <img src="assets/ui/trash.svg" /> {t("reset")}
+        </button>
+      </div>
       <TeamEditor
         board={board}
         handleEditorClick={handleEditorClick}
         handleDrop={handleDrop}
+        showBench={inBotBuilder}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} />
-      <PokemonPicker selectEntity={setSelection} />
+      <ItemPicker
+        selectEntity={setSelection}
+        selected={selection}
+        origin={inBotBuilder ? "bot-builder" : "team-planner"}
+      />
+      <PokemonPicker
+        selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}
+        addEntity={addPokemonOnFirstEmptyCell}
+        selected={selection}
+      />
       {props.bot && props.onChangeAvatar && (
         <BotAvatar
           bot={props.bot}

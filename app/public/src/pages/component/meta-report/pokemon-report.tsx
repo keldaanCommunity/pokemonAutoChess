@@ -1,20 +1,38 @@
 import { t } from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
-import {
-  IPokemonsStatistic,
-  fetchMetaPokemons
-} from "../../../../../models/mongo-models/pokemons-statistic"
+import { useEffect, useMemo, useState } from "react"
+import { EloRankThreshold, RarityColor } from "../../../../../config"
+import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import {
+  fetchMetaPokemons,
+  type IPokemonStatV2,
+  type IPokemonsStatisticV2
+} from "../../../models/pokemons-statistic-v2"
+import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
+import { PokemonDistribution } from "./pokemon-distribution"
+import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
+import "./pokemon-report.css"
+import type { PoolType } from "../../../../../types/enum/PoolType"
+import { keys } from "../../../../../utils/object"
+import { cc } from "../../utils/jsx"
+
+type ViewMode = "distribution" | "count-history" | "rank-history"
 
 export function PokemonReport() {
   const [pokemonRankingBy, setPokemonRanking] = useState<string>("count")
   const [synergy, setSynergy] = useState<Synergy | "all">("all")
   const [rarity, setRarity] = useState<Rarity | "all">("all")
+  const [pool, setPool] = useState<PoolType | "all">("all")
+  const [tier, setTier] = useState<string>("all")
   const [loading, setLoading] = useState<boolean>(true)
+  const [eloThreshold, setEloTreshold] = useState<EloRank>(EloRank.LEVEL_BALL)
+  const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
+  const [viewMode, setViewMode] = useState<ViewMode>("distribution")
 
-  const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatistic[]>([])
+  const [metaPokemons, setMetaPokemons] = useState<IPokemonsStatisticV2[]>([])
   useEffect(() => {
     fetchMetaPokemons().then((res) => {
       setMetaPokemons(res)
@@ -23,74 +41,207 @@ export function PokemonReport() {
   }, [])
 
   const sortedMetaPokemons = useMemo(() => {
-    return [...metaPokemons].sort((a, b) => {
-      const order =
-        pokemonRankingBy === "count" || pokemonRankingBy === "item_count"
-          ? -1
-          : 1
-      return (a[pokemonRankingBy] - b[pokemonRankingBy]) * order
-    })
+    return [...metaPokemons].map((m) => ({
+      tier: m.tier,
+      pokemons: (Object.values(m.pokemons) || []).sort((a, b) => {
+        const order =
+          pokemonRankingBy === "count" || pokemonRankingBy === "item_count"
+            ? -1
+            : 1
+        return (a[pokemonRankingBy] - b[pokemonRankingBy]) * order
+      })
+    }))
   }, [metaPokemons, pokemonRankingBy])
+
+  const pools = ["regular", "additional", "regional"] satisfies PoolType[]
 
   return (
     <div id="pokemon-report">
       <header>
         <h2>{t("best_pokemons")}</h2>
-        <select
-          value={pokemonRankingBy}
-          onChange={(e) => setPokemonRanking(e.target.value)}
-          className="my-select"
-        >
-          <option value="count">
-            {t("rank")} {t("by_popularity")}
-          </option>
-          <option value="rank">
-            {t("rank")} {t("by_average_place")}
-          </option>
-          <option value="item_count">
-            {t("rank")} {t("by_average_held_items")}
-          </option>
-        </select>
-        <select
-          value={synergy}
-          onChange={(e) => {
-            setSynergy(e.target.value as any)
-          }}
-          className="my-select"
-        >
-          <option value={"all"}>
-            {t("ALL")} {t("synergies")}
-          </option>
-          {Object.keys(Synergy).map((s) => (
-            <option value={s} key={s}>
-              {t(`synergy.${s}`)}
+        <div className="filters">
+          <select
+            value={pokemonRankingBy}
+            onChange={(e) => setPokemonRanking(e.target.value)}
+          >
+            <option value="count">
+              {t("rank")} {t("by_popularity")}
             </option>
-          ))}
-        </select>
-        <select
-          value={rarity}
-          onChange={(e) => setRarity(e.target.value as any)}
-          className="my-select"
-        >
-          <option value={"all"}>
-            {t("rarity_label")}: {t("ALL")}
-          </option>
-          {Object.keys(Rarity).map((r) => (
-            <option value={r} key={r}>
-              {t(`rarity.${r}`)}
+            <option value="rank">
+              {t("rank")} {t("by_average_place")}
             </option>
-          ))}
-        </select>
+            <option value="item_count">
+              {t("rank")} {t("by_average_held_items")}
+            </option>
+          </select>
+          <select
+            value={synergy}
+            onChange={(e) => {
+              setSynergy(e.target.value as Synergy | "all")
+            }}
+          >
+            <option value={"all"}>
+              {t("all")} {t("synergies")}
+            </option>
+            {keys(Synergy).map((s) => (
+              <option value={s} key={s}>
+                {t(`synergy.${s}`)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={rarity}
+            onChange={(e) => setRarity(e.target.value as Rarity | "all")}
+          >
+            <option value={"all"}>
+              {t("rarity_label")}: {t("all")}
+            </option>
+            {keys(Rarity).map((r) => (
+              <option
+                value={r}
+                key={r}
+                style={{ color: RarityColor[r as Rarity] }}
+              >
+                {t(`rarity.${r}`)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={pool}
+            onChange={(e) => setPool(e.target.value as PoolType | "all")}
+          >
+            <option value={"all"}>
+              {t("pool_label")}: {t("all")}
+            </option>
+            {pools.map((p) => (
+              <option value={p} key={p}>
+                {t(`pool.${p}`)}
+              </option>
+            ))}
+            <option value={"special"} key={"special"}>
+              {t(`rarity.SPECIAL`)}
+            </option>
+          </select>
+          <select value={tier} onChange={(e) => setTier(e.target.value)}>
+            <option value={"all"}>
+              {t("tier")}: {t("all")}
+            </option>
+            {[1, 2, 3, 4].map((p) => (
+              <option value={p} key={p}>
+                {`⭐`.repeat(p)}
+              </option>
+            ))}
+          </select>
+          <select
+            value={eloThreshold}
+            onChange={(e) => setEloTreshold(e.target.value as EloRank)}
+          >
+            {keys(EloRank).map((r) => (
+              <option value={r} key={r}>
+                {t(`elorank.${r}`)} ({t("elo")} {">"} {EloRankThreshold[r]})
+              </option>
+            ))}
+          </select>
+        </div>
+        <PokemonTypeahead
+          value={selectedPkm ?? ""}
+          onChange={(pkm) => setSelectedPkm(pkm)}
+        />
       </header>
       {loading && <p>{t("loading")}</p>}
-      {
-        <PokemonStatistic
-          pokemons={sortedMetaPokemons}
-          rankingBy={pokemonRankingBy}
-          synergy={synergy}
-          rarity={rarity}
-        />
-      }
+      {!loading && (
+        <div className="pokemon-report-content">
+          <div className="pokemon-statistics-list">
+            <PokemonStatistic
+              pokemons={
+                sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
+                  ?.pokemons || new Array<IPokemonStatV2>()
+              }
+              rankingBy={pokemonRankingBy}
+              synergy={synergy}
+              rarity={rarity}
+              pool={pool}
+              tier={tier}
+              selectedPkm={selectedPkm}
+            />
+          </div>
+          <div className="pokemon-distribution-chart">
+            <div className="view-switcher">
+              <button
+                className={cc("bubbly", {
+                  active: viewMode === "distribution"
+                })}
+                onClick={() => setViewMode("distribution")}
+              >
+                {t("overview")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 400 })}
+                </span>
+              </button>
+              <button
+                className={cc("bubbly", {
+                  active: viewMode === "count-history"
+                })}
+                onClick={() => setViewMode("count-history")}
+              >
+                {t("popularity_over_time")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 50 })}
+                </span>
+              </button>
+              <button
+                className={cc("bubbly", {
+                  active: viewMode === "rank-history"
+                })}
+                onClick={() => setViewMode("rank-history")}
+              >
+                {t("placement_over_time")}
+                <span className="view-limit-hint">
+                  {t("top_n", { count: 50 })}
+                </span>
+              </button>
+            </div>
+            {viewMode === "distribution" && (
+              <PokemonDistribution
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
+            {viewMode === "count-history" && (
+              <PokemonHistoryPanel
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                metric="count"
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
+            {viewMode === "rank-history" && (
+              <PokemonHistoryPanel
+                metaPokemons={metaPokemons}
+                eloThreshold={eloThreshold}
+                loading={loading}
+                metric="rank"
+                synergy={synergy}
+                rarity={rarity}
+                pool={pool}
+                tier={tier}
+                selectedPkm={selectedPkm}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

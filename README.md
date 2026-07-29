@@ -1,47 +1,48 @@
 # Pokemon Auto Chess
 
-Non profit game. For fans, by fans.
+Open-source, non-profit game. For fans, by fans.
 
-## All rights to the Pokemon Company. Pokemon Auto Chess can stop at any time, whenever The Pokemon Company wants.
-
-[![translation badge](https://inlang.com/badge?url=github.com/keldaanCommunity/pokemonAutoChess)](https://inlang.com/editor/github.com/keldaanCommunity/pokemonAutoChess?ref=badge)
-
-<a href="https://discord.gg/6JMS7tr">
-<img src="https://img.shields.io/discord/737230355039387749.svg?style=for-the-badge&colorB=7581dc&logo=discord&logoColor=white">
-</a>
+## All rights to The Pokemon Company. Pokemon Auto Chess can stop at any time, whenever The Pokemon Company wants.
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 Play: [https://pokemon-auto-chess.com](https://pokemon-auto-chess.com/)
 
-Support: [https://en.tipeee.com/pokemon-auto-chess](https://en.tipeee.com/pokemon-auto-chess)
-
-Discord: [https://discord.com/invite/6JMS7tr](https://discord.com/invite/6JMS7tr)
-
 Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.com/keldaanCommunity/pokemonAutoChess)
 
 ## Getting started
 
-Install [Node LTS](https://nodejs.org/en).
+Install [Node LTS](https://nodejs.org/en). (It's recommended to use [nvm](https://github.com/nvm-sh/nvm) to install Node with the proper version)
 
-Main libs used
+Install project dependencies:
+```
+npm install
+```
 
-Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` at the root of the repository.
+Download the music files and pack all the game assets:
+```
+npm run download-music
+npm run assetpack
+```
+
+Game files are ready, now you need to configure two things: the database (MongoDB), and the authentication provider (Firebase).
+
+Pokemon Auto Chess use mongoDB to store its data and Firebase for authentication. Those 2 dependencies requires credentials to use. Credentials will be stored in a `.env` file in the root folder of the repository. If you do not have a `.env` file in your root repository, make one now and open it in notepad.
 
 ### MongoDB
 
-You can either setup using the cloud based [MongoDB Atlas](https://www.mongodb.com/atlas/database) or using the [local installation](https://www.mongodb.com/try/download/community).
+You can either setup the mongo database using the cloud based [MongoDB Atlas](https://www.mongodb.com/atlas/database) or using the [local installation](https://www.mongodb.com/try/download/community).
 
-In order to play against bots, you will need to load bots data into your newly created database.
+In both cases, create a database named `dev` with an empty collection named `botv2`. Then retrieve the URI connection. 
 
-In both cases, create a database named `dev` with an empty collection named `botV2`. Then retrieve de URI connection.
+If you are using MongoDB Cloud, you may need to create an admin user under Database Access > Create a New User. Make sure to Add Built-in Role > Atlas admin.
 
 - A cloud uri will look like smth `mongodb+srv://admin:<password>@<cluster>.mongodb.net/dev?retryWrites=true&w=majority`.
 - The local uri will look smth like `mongodb://localhost:27017/dev`.
 
-In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botV2` empty collection.
+In order to play against bots, you will need to load bots data into your newly created database. In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botv2` empty collection.
 
-In the `.env` at the root repository, add the mongoDB URI:
+In the `.env` file at the root folder, add the mongoDB URI:
 
 ```
 MONGO_URI=mongodb://localhost:27017/dev
@@ -49,7 +50,7 @@ MONGO_URI=mongodb://localhost:27017/dev
 
 ### Firebase
 
-Pokemon Auto Chess use the Firebase authentication module to connect to the game.
+Pokemon Auto Chess uses the Firebase authentication module to let players create accounts and login to the game.
 
 First create an account and a firebase project at [https://console.firebase.google.com/](https://console.firebase.google.com/).
 
@@ -66,11 +67,11 @@ FIREBASE_MESSAGING_SENDER_ID=<firebase_messaging_sender_id>
 FIREBASE_APP_ID=<firebase_app_id>
 ```
 
-Then setup the authentication module. In sign in methods, only choose mail/password and anonymous.
+Then setup the authentication module. In sign in methods, only choose mail/password and anonymous. 
 
 You need to generate a SDK Admin Firebase private key for the server to be able to connect as administrator of the firebase project.
 
-This option is available in parameters project / service account
+This option is available in Project settings > Service accounts
 
 The private key is a json that contain those informations:
 
@@ -97,35 +98,45 @@ FIREBASE_CLIENT_EMAIL=<client_email>
 FIREBASE_PRIVATE_KEY=<private_key>
 ```
 
-And you are done for the configuration part.
+And you are done for the configuration part. Now you should be able to run the game locally ! 
 
-To start the development,
+### Run the game
+
+Make sure you did all the previous steps correctly.
+
+To start the development server on your machine:
 
 ```
-npm install
 npm run dev
 ```
 
-Game runs locally on port [http://localhost:9000/](http://localhost:9000/)
+Game should run locally on port [http://localhost:9000/](http://localhost:9000/)
+
+Development server is useful to quickly test your configuration and work on modifications to the game code. But it's not fully optimized for production.
+
+To make the project production ready, first build the project with:
+
+```
+npm run build
+```
+
+This task is typically done in Continuous Integration tools.
+
+Then deploy the built files and run the project on your production machine with this command:
+```
+npm run start
+```
 
 ### Administration rights
 
-You might want to have full access right on your local version. To do so, you can set your role to `ADMIN` by editing your player rights in the `usermetadatas` table.
-
-# Extensions
-
-With VS Code, use Prettier, Eslint, Inlang.
+You might want to have full access rights on your local version. To do so, you can set your role to `ADMIN` by editing your player rights in the `usermetadatas` table.
 
 # Development
 
 - Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
 - The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
+- We recommend VSCode and the extension Biome for formatting and linting
 
-## Internationalisation
+## How to deploy your own Pokemon Auto Chess
 
-- In VSCode, use the inlang (i18n) extension
-- Bind the Inlang: Extract Message on a keyboard touch, for example (²)
-- Select the string you want to translate. Press ², a prompt will ask the id you want for this string. It'll add the corresponding entry in the english translation file.
-- Once you are finished, you can run npm run translate to machine translate the missing translations
-
-Please note that we only support the english language. Other languages are managed by the community.
+See this [README](https://github.com/keldaanCommunity/pokemonAutoChess/blob/master/deployment/README.md)

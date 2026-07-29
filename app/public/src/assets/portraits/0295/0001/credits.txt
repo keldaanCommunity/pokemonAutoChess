@@ -1,0 +1,2 @@
+2021-01-20 23:02:59.880265	<@!283571466891427841>	CUR	PMDCollab_1	Normal
+2021-01-21 19:36:09.915567	<@!283571466891427841>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special0,Special1,Stunned,Surprised,Teary-Eyed,Worried

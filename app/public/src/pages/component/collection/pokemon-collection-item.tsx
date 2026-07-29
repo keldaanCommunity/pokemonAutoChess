@@ -1,73 +1,57 @@
-import React, { Dispatch, SetStateAction } from "react"
-import { IPokemonConfig } from "../../../../../models/mongo-models/user-metadata"
-import { PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX } from "../../../../../models/precomputed"
-import { getEmotionCost } from "../../../../../types/Config"
+import type { Dispatch, SetStateAction } from "react"
+import { getAvailableEmotions } from "../../../../../models/precomputed/precomputed-emotions"
 import { Emotion } from "../../../../../types/enum/Emotion"
-import { Pkm } from "../../../../../types/enum/Pokemon"
-import { getPortraitSrc } from "../../../utils"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import type { IPokemonCollectionItemUnpacked } from "../../../../../types/interfaces/UserMetadata"
+import { getPortraitSrc } from "../../../../../utils/avatar"
 import { cc } from "../../utils/jsx"
+import PokemonPortrait from "../pokemon-portrait"
+import type { CollectionFilterState } from "./pokemon-collection"
 import "./pokemon-collection-item.css"
 
 export default function PokemonCollectionItem(props: {
   name: Pkm
   index: string
-  config: IPokemonConfig | undefined
-  filter: string
-  shinyOnly: boolean
-  setPokemon: Dispatch<SetStateAction<Pkm | undefined>>
+  item: IPokemonCollectionItemUnpacked | undefined
+  isNew: boolean
+  isFavorite: boolean
+  isUnlocked: boolean
+  isUnlockable: boolean
+  filterState: CollectionFilterState
+  setPokemon: Dispatch<SetStateAction<Pkm | "">>
 }) {
-  if (
-    props.index in PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX === false ||
-    PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index].includes(1) === false
-  ) {
+  if (getAvailableEmotions(props.index, false).length === 0) {
     return null
   }
 
-  const { dust, emotions, shinyEmotions } = props.config ?? {
-    dust: 0,
-    emotions: [] as Emotion[],
-    shinyEmotions: [] as Emotion[]
-  }
-  const isUnlocked =
-    (!props.shinyOnly && emotions?.length > 0) || shinyEmotions?.length > 0
-  const availableEmotions = Object.values(Emotion).filter(
-    (e, i) => PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX[props.index]?.[i] === 1
-  )
-
-  const canUnlock = availableEmotions.some(
-    (e) =>
-      (emotions.includes(e) === false &&
-        dust >= getEmotionCost(e, false) &&
-        !props.shinyOnly) ||
-      (shinyEmotions.includes(e) === false && dust >= getEmotionCost(e, true))
-  )
-
-  if (props.filter === "unlocked" && !isUnlocked) return null
-  if (props.filter === "unlockable" && !canUnlock) return null
-  if (props.filter === "locked" && isUnlocked) return null
-
   return (
     <div
-      className={cc("nes-container", "pokemon-collection-item", {
-        unlocked: isUnlocked,
-        unlockable: canUnlock,
-        shimmer: canUnlock
+      className={cc("my-box", "clickable", "pokemon-collection-item", {
+        unlocked: props.isUnlocked,
+        unlockable: props.isUnlockable,
+        new: props.isNew,
+        favorite: props.isFavorite,
+        shimmer: props.isNew
       })}
       onClick={() => {
         props.setPokemon(props.name)
       }}
     >
-      <img
-        src={getPortraitSrc(
-          props.index,
-          props.config?.selectedShiny,
-          props.config?.selectedEmotion
-        )}
+      <PokemonPortrait
+        portrait={{
+          index: props.index,
+          shiny: props.item?.selectedShiny ?? false,
+          emotion: props.item?.selectedEmotion ?? Emotion.NORMAL
+        }}
       />
-      <p>
-        <span>{props.config ? props.config.dust : 0}</span>
-        <img src={getPortraitSrc(props.index)} />
-      </p>
+      {props.filterState.mode === "pokedex" ? (
+        <p>{props.item?.played ?? 0}</p>
+      ) : (
+        <p className="dust">
+          <span>{props.item?.dust ?? 0}</span>
+          <img src={getPortraitSrc(props.index)} />
+        </p>
+      )}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react"
+import type { MouseEventHandler } from "react"
 
 export function RemoveButton(props: {
   onClick: MouseEventHandler
@@ -11,7 +11,7 @@ export function RemoveButton(props: {
       onClick={props.onClick}
       style={{
         padding: 0,
-        fontSize: "1vw",
+        fontSize: "1em",
         height: "2em",
         width: "2em"
       }}

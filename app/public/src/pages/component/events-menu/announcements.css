@@ -1,0 +1,26 @@
+.announcements-container {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.announcements .tournaments {
+  flex: 0;
+  padding: 0;
+
+  & > li {
+    list-style: none;
+    margin: 0.5em 0;
+  }
+}
+
+.announcements .user-chat {
+  min-height: 250px;
+}
+
+.announcements .tournaments li .tournament-item {
+  max-height: 50vh;
+}

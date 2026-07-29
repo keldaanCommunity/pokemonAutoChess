@@ -4,29 +4,29 @@ import { BotV2 } from "../app/models/mongo-models/bot-v2"
 import { Pkm } from "../app/types/enum/Pokemon"
 import { logger } from "../app/utils/logger"
 
+type PkmFromOlderVersion = Pkm
+
 async function main() {
   dotenv.config()
 
   try {
     logger.info("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
-    const bots = await BotV2.find()
+    const bots = await BotV2.find().exec()
     for (let i = 0; i < bots.length; i++) {
       let modified = false
       const bot = bots[i]
-      console.log(bot.name)
-      if (bot.name === "SHEDNINJA") {
-        bot.name = Pkm.SHEDINJA
+      if (bot.name === ("MEGA_SCIZOR" as PkmFromOlderVersion)) {
+        bot.name = Pkm.SCIZOR
         modified = true
         console.log(bot.name)
       }
       bot.steps.forEach((step) => {
         step.board.forEach((p) => {
-          if (p.name === ("SHEDNINJA" as Pkm)) {
-            p.name = Pkm.SHEDINJA
+          if (p.name === ("MEGA_SCIZOR" as PkmFromOlderVersion)) {
+            p.name = Pkm.SCIZOR
             modified = true
-            console.log(p.name)
+            console.log(p.name, "in BOT", bot.name, "by ", bot.author)
           }
         })
       })

@@ -1,0 +1,24 @@
+.room-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+.room-item .room-name,
+.room-item .room-info {
+  flex: 1;
+}
+
+.room-item .room-name {
+  word-break: break-word;
+}
+
+.room-item .icon {
+  width: 2em;
+  height: 2em;
+
+  &.gamemode {
+    border-radius: 50%;
+  }
+}

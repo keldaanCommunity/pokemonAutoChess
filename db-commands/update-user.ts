@@ -8,7 +8,6 @@ async function main() {
 
   try {
     logger.info("connect to db ...")
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const db = await connect(process.env.MONGO_URI!)
     const users = await userMetadata.find({})
     for (let i = 0; i < users.length; i++) {

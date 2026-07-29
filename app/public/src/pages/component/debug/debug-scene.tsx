@@ -1,16 +1,18 @@
 import Phaser from "phaser"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import { Status } from "../../../../../types/enum/Status"
+import type { Status } from "../../../../../types/enum/Status"
 import { DebugScene } from "../../../game/scenes/debug-scene"
+import { preference } from "../../../preferences"
 import "./debug-scene.css"
 
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
   orientation = Orientation.DOWNLEFT,
   animationType = "Idle",
+  shiny,
   status,
   height = 100,
   width = 100
@@ -18,12 +20,13 @@ export default function DebugSceneContainer({
   pkm?: Pkm
   orientation?: Orientation
   animationType?: string
+  shiny: boolean
   status: Status | ""
   height?: number
   width?: number
 }) {
-  const gameRef = useRef<Phaser.Game>()
-  const debugScene = useRef<DebugScene>()
+  const gameRef = useRef<Phaser.Game>(null)
+  const debugScene = useRef<DebugScene>(null)
 
   const initialized = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
@@ -35,8 +38,14 @@ export default function DebugSceneContainer({
 
   const onComplete = useCallback(() => {
     setLoaded(true)
-    debugScene.current?.updateSprite(pkm, orientation, animationType, status)
-  }, [animationType, orientation, pkm, status])
+    debugScene.current?.updateSprite(
+      pkm,
+      orientation,
+      animationType,
+      status,
+      shiny
+    )
+  }, [animationType, orientation, pkm, status, shiny])
 
   useEffect(() => {
     if (!initialized.current) {
@@ -44,7 +53,7 @@ export default function DebugSceneContainer({
       debugScene.current = new DebugScene(height, width, onProgress, onComplete)
 
       gameRef.current = new Phaser.Game({
-        type: Phaser.AUTO,
+        type: +(preference("renderer") ?? Phaser.AUTO),
         parent: "debug-scene",
         pixelArt: true,
         width,
@@ -66,9 +75,15 @@ export default function DebugSceneContainer({
 
   useEffect(() => {
     if (initialized.current === true && loaded === true) {
-      debugScene.current?.updateSprite(pkm, orientation, animationType, status)
+      debugScene.current?.updateSprite(
+        pkm,
+        orientation,
+        animationType,
+        status,
+        shiny
+      )
     }
-  }, [pkm, orientation, animationType, status, loaded])
+  }, [pkm, orientation, animationType, status, loaded, shiny])
 
   return (
     <div id="debug-scene">

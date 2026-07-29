@@ -1,10 +1,10 @@
 .game-item-detail {
   min-width: 200px;
-  max-width: 400px;
-  color: white;
-  font-size: 1vw;
+  max-width: 440px;
+  color: var(--color-fg-primary);
   display: grid;
-  grid-template-columns: 50px 1fr;
+  font-size: 1.2rem;
+  grid-template-columns: 55px 1fr;
   grid-template-areas:
     "icon name"
     "icon stats"
@@ -12,9 +12,14 @@
     "combinations combinations";
 }
 
+.item-detail-tooltip.my-container {
+  padding: 5px;
+}
+
 .game-item-detail-icon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
+  align-self: center;
   image-rendering: pixelated;
   object-fit: contain;
   grid-area: icon;
@@ -24,6 +29,19 @@
   grid-area: name;
   margin: 0;
   white-space: nowrap;
+  font-weight: 500;
+}
+
+.game-item-recipe {
+  float: right;
+  margin-left: 0.5em;
+}
+
+.game-item-recipe img {
+  width: 22.5px;
+  height: 22.5px;
+  image-rendering: pixelated;
+  object-fit: contain;
 }
 
 .game-item-detail-stats {
@@ -34,6 +52,12 @@
   margin: 0 0 0.5em 0;
   align-items: center;
   line-height: 1;
+  min-height: 15px;
+}
+
+.game-item-detail-stats > i {
+  color: #a0a0a0;
+  font-style: italic;
 }
 
 .game-item-detail-stats > div {
@@ -48,13 +72,20 @@
 
 .game-item-detail-description {
   grid-area: description;
-  background-color: #4f5160;
+  background-color: var(--color-bg-tertiary);
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
   padding: 0.25em 0.5em;
   margin: 0 -5px 4px -5px;
-  font-size: 80%;
+  font-size: 0.8em;
   z-index: 2;
+  white-space: pre-line;
 }
+
+.technical-term:first-child
+  .technical-term-label {
+  text-transform: capitalize;
+}
+
 
 .game-item-detail-description:last-child,
 .react-tooltip .game-item-detail-description:last-child {
@@ -67,7 +98,6 @@
   justify-content: space-between;
   grid-area: combinations;
   gap: 0.5em;
-  min-width: 320px;
 }
 
 .game-item-detail-combination {
@@ -86,9 +116,4 @@
 .game-item-detail-combination > img {
   width: 20px;
   height: 20px;
-}
-
-.react-tooltip.item-detail-tooltip {
-  padding: 5px;
-  font-size: 1vw;
 }
