@@ -494,7 +494,7 @@
 		"FLOATZEL": "Floatzel",
 		"MAWILE": "Mawile",
 		"KECLEON": "Kecleon",
-    	"KECLEON_PURPLE": "Kecleon (Purple)",
+		"KECLEON_PURPLE": "Kecleon (Purple)",
 		"CARBINK": "Carbink",
 		"DIANCIE": "Diancie",
 		"CHATOT": "Chatot",
@@ -1183,8 +1183,8 @@
 		"SKWOVET": "Skwovet",
 		"GREEDENT": "Greedent",
 		"QUAXLY": "Quaxly",
-    	"QUAXWELL": "Quaxwell",
-    	"QUAQUAVAL": "Quaquaval",
+		"QUAXWELL": "Quaxwell",
+		"QUAQUAVAL": "Quaquaval",
 		"KOMALA": "Komala",
 		"TAROUNTULA": "Tarountula",
 		"SPIDOPS": "Spidops",
@@ -2345,7 +2345,7 @@
 		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
 		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
-		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD"		
+		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD"
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2691,7 +2691,7 @@
 		"SHINY_STONE": "Shiny Stone",
 		"RARE_CANDY": "Rare Candy",
 		"EVIOLITE": "Eviolite",
-    	"GOLD_MASK": "Gold Mask",
+		"GOLD_MASK": "Gold Mask",
 		"GOLD_BOTTLE_CAP": "Gold Bottle Cap",
 		"ABSORB_BULB": "Absorb Bulb",
 		"SACRED_ASH": "Sacred Ash",
@@ -3273,9 +3273,9 @@
 		"POTION": "A potion that heals 10 player HP of the team",
 		"FORAGE_BAG": "Gift 3 random item components",
 		"COLLECTION_BOX": "Gift 1 SILK_SCARF, 1 random craftable item, 1 random tool, 2 berries and an apple.",
-		"PRETTY_BOX" : "Gift 2 random completed items to your partner.",
-		"DELUXE_BOX" : "Gift 1 random Shiny Item to your partner.",
-		"TOOLBOX" : "Gift 3 random tools to your partner.",
+		"PRETTY_BOX": "Gift 2 random completed items to your partner.",
+		"DELUXE_BOX": "Gift 1 random Shiny Item to your partner.",
+		"TOOLBOX": "Gift 3 random tools to your partner.",
 		"BERRIES_GIFT": "Gift 7 random $t(item.BERRIES) to your partner.",
 		"SWEETS_GIFT": "Gift 7 random $t(item.SWEETS) to your partner.",
 		"HATCH_BUNDLE": "Gift 2 random Hatch Pokémon to your partner. 5% chance to receive a Golden Egg instead.",
@@ -3567,7 +3567,7 @@
 		"ELECTRIC_FIELD": "Increase damage dealt by ELECTRIC Pokémon by 20%",
 		"PSYCHIC_FIELD": "Increase damage dealt by PSYCHIC Pokémon by 20%",
 		"GRASS_FIELD": "Increase damage dealt by GRASS Pokémon by 20%",
-		"FAIRY_FIELD": "Increase damage dealt by FAIRY Pokémon by 20%"		
+		"FAIRY_FIELD": "Increase damage dealt by FAIRY Pokémon by 20%"
 	},
 	"synergy": {
 		"NORMAL": "Normal",
@@ -4116,7 +4116,7 @@
 	"bench": "Bench",
 	"synergies": "Synergies",
 	"join_as_guest": "Join as Guest",
-	"welcome": "Welcome",	
+	"welcome": "Welcome",
 	"stage": "Stage",
 	"spectate": "Spectate",
 	"spectating": "Spectating {{ name }}",
@@ -4146,7 +4146,7 @@
 	"games_in_progress_other": "{{count}} games in progress",
 	"events": "Events",
 	"custom_room_short": "Custom",
-	"loading": "Loading...",	
+	"loading": "Loading...",
 	"no_data_available": "No data available",
 	"no_bots_found": "No bots found !",
 	"leaderboard": "Leaderboard",
@@ -4219,9 +4219,9 @@
 	"shiny_hunter": "Shiny Hunter",
 	"pokedex": "Pokédex",
 	"alt_forms": "Alternative Forms",
-	"unlocked": "Unlocked",	
+	"unlocked": "Unlocked",
 	"show_evolutions": "Show evolutions",
-	"show_alt_forms": "Show alternative forms",	
+	"show_alt_forms": "Show alternative forms",
 	"show_only_available_picks": "Show only available add picks / regionals",
 	"close": "Close",
 	"additional_pokemon_hint": "Each player picked additional Pokémon to be available in all players shop for this game.",
@@ -4475,7 +4475,7 @@
 	"add_bot": "Add Bot",
 	"bot_difficulty": {
 		"BEGINNER": "Beginner (<850)",
-		"EASY":  "Easy (850-999)",
+		"EASY": "Easy (850-999)",
 		"MEDIUM": "Medium (1000-1149)",
 		"HARD": "Hard (1150-1299)",
 		"EXTREME": "Extreme (1300-1449)",
@@ -4495,7 +4495,7 @@
 	"invalid": "Invalid",
 	"not_pokemons": "Not Pokémon",
 	"all": "All",
-	"status_label": "Status",	
+	"status_label": "Status",
 	"help": "Help",
 	"bot_admin": "Bot Admin",
 	"change": "Change",
@@ -4783,7 +4783,7 @@
 	},
 	"player_dialog": {
 		"YES": "YES",
-  		"NO": "NO",
+		"NO": "NO",
 		"QM": "?",
 		"OK": "OK",
 		"ME": "ME",
@@ -4819,7 +4819,8 @@
 		"GO_BIG_OR_GO_HOME": "Go big or go home",
 		"FAMILY_OUTING": "Family Outing",
 		"UNOWN_SPELL": "Unown Spell",
-		"CHOSEN_ONES": "The Chosen Ones"
+		"CHOSEN_ONES": "The Chosen Ones",
+		"BENCH_IS_LAVA": "The Bench is Lava"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -4841,7 +4842,8 @@
 		"GO_BIG_OR_GO_HOME": "Units gain 5 max HP and grow in size at every stage.",
 		"FAMILY_OUTING": "Pokémon from the same family all count towards synergy levels.",
 		"UNOWN_SPELL": "Unowns are spectating your fights and are casting spells on both teams each round.",
-		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats."
+		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats.",
+		"BENCH_IS_LAVA": "During fights, your bench becomes lava that can eliminate all Pokémon on it after a while"
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon sells Synergy items for {{cost}} GOLD",
@@ -4988,8 +4990,8 @@
 			"wands_description": "Wands give additional effects to FAIRY Pokémon attacks.",
 			"cell_battery_description": "After reaching max level in ELECTRIC synergy, your Pokémon charge CELL_BATTERY with their attacks, that you can consume to supercharge an ELECTRIC Pokémon for the next fight.",
 			"fire_shard_description": "After reaching max level in FIRE synergy, every round you can use FIRE_SHARD to sacrifice your player HP and buff a FIRE Pokémon.",
-      		"gifts": "Gifts",
-      		"gifts_description": "Gifts can be given to your partner in the Double Up game mode"
+			"gifts": "Gifts",
+			"gifts_description": "Gifts can be given to your partner in the Double Up game mode"
 		},
 		"statistics": {
 			"stat_description": {
@@ -5251,14 +5253,14 @@
 		"SCRIBBLE": "Smeargle's Scribble",
 		"CUSTOM_LOBBY": "Custom room",
 		"TOURNAMENT": "Tournament",
-    	"DOUBLE_UP": "Double Up"
+		"DOUBLE_UP": "Double Up"
 	},
 	"game_modes_descriptions": {
 		"CLASSIC": "The casual PAC Experience !\n8 players, Elo disabled, open to everyone.",
 		"RANKED": "For competitors ! 8 players, Elo enabled\nRestricted to players close to your rank",
 		"SCRIBBLE": "Play for fun ! 8 players, Elo disabled\nA new special rule is added for this game.",
 		"CUSTOM_LOBBY": "Create a private room to play with your friends or with bots",
-    	"DOUBLE_UP": "Team up with a partner and outlast every other duo!",
+		"DOUBLE_UP": "Team up with a partner and outlast every other duo!",
 		"TOURNAMENT": "This match is part of a tournament. Check Discord for upcoming events."
 	},
 	"dendrogram": {
@@ -5294,7 +5296,7 @@
 		"count": "Count"
 	},
 	"notification": {
-		"info_title": "Information",		
+		"info_title": "Information",
 		"level_up_title": "Level Up!",
 		"level_up_message": "Congratulations!\nYou've reached level {{level}} and earned a booster pack!",
 		"new_title_title": "New Title Unlocked!",

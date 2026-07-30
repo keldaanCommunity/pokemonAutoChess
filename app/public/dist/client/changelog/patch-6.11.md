@@ -134,3 +134,4 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
 - Tier List Maker gadget is now unlocked at level 25 instead of level 50
 - Sprite Tracker gadget  is now unlocked at level 50 instead of level 60
+- 1 new scribble

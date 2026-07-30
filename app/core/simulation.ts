@@ -1,5 +1,10 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_SIDE_HEIGHT,
+  BOARD_WIDTH,
+  Troopers
+} from "../config"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -38,6 +43,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
@@ -45,7 +51,7 @@ import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { max } from "../utils/number"
+import { max, min } from "../utils/number"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -77,6 +83,7 @@ import {
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
+import { DelayedCommand, type SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -109,6 +116,7 @@ export default class Simulation extends Schema implements ISimulation {
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
+  commands = new Array<SimulationCommand>()
 
   constructor(
     id: string,
@@ -252,6 +260,36 @@ export default class Simulation extends Schema implements ISimulation {
           })
         })
       })
+    }
+
+    if (this.room.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA) {
+      for (const player of [this.redPlayer, this.bluePlayer]) {
+        if (player) {
+          player.board.forEach((p, id) => {
+            p.hp = p.maxHP
+          })
+        }
+      }
+
+      const lavaTick = () => {
+        this.commands.push(
+          new DelayedCommand(() => {
+            for (const player of [this.redPlayer, this.bluePlayer]) {
+              if (player) {
+                player.board.forEach((p, id) => {
+                  if (isOnBench(p) && !isIn(Troopers, p.name)) {
+                    p.hp = min(0)(p.hp - Math.round(0.05 * p.maxHP))
+                    if (p.hp === 0) player.board.delete(id)
+                  }
+                })
+              }
+            }
+            lavaTick()
+          }, 1000)
+        )
+      }
+
+      lavaTick()
     }
   }
 
@@ -1298,6 +1336,9 @@ export default class Simulation extends Schema implements ISimulation {
   update(dt: number) {
     if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
       this.onFinish()
+    } else {
+      this.commands.forEach((command) => command.update(dt))
+      this.commands = this.commands.filter((command) => !command.executed)
     }
 
     this.blueTeam.forEach((pkm, key) => {

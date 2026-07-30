@@ -169,7 +169,6 @@ export class OnBuyPokemonCommand extends Command<
     const player = this.state.players.get(playerId)
     const name = player?.shop[index]
     if (!player || !player.alive || !name || name === Pkm.DEFAULT) return
-    if (this.state.phase === GamePhaseState.FIGHT) return // can't buy pokemon during fight phase
 
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
@@ -590,7 +589,6 @@ export class OnDragDropCombineCommand extends Command<
     const player = this.state.players.get(playerId)
 
     if (!player || !player.alive) return
-    if (this.state.phase === GamePhaseState.FIGHT) return // can't combine items during fight phase
 
     message.updateBoard = false
     message.updateItems = true
@@ -710,7 +708,6 @@ export class OnDragDropItemCommand extends Command<
     }
     const player = this.state.players.get(playerId)
     if (!player || !player.alive) return
-    if (this.state.phase === GamePhaseState.FIGHT) return // can't equip items during fight phase
 
     message.updateBoard = false
     message.updateItems = true
@@ -1049,7 +1046,6 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
   execute(id) {
     const player = this.state.players.get(id)
     if (!player || !player.alive) return
-    if (this.state.phase === GamePhaseState.FIGHT) return // can't reroll shop during fight phase
     const rollCost = player.shopFreeRolls > 0 ? 0 : 1
     const canRoll = (player?.money ?? 0) >= rollCost
 
@@ -1101,7 +1097,6 @@ export class OnLevelUpCommand extends Command<
   execute(id) {
     const player = this.state.players.get(id)
     if (!player || !player.alive) return
-    if (this.state.phase === GamePhaseState.FIGHT) return // can't level up during fight phase
 
     const cost = getLevelUpCost(this.state.specialGameRule)
     if (player.money >= cost && player.experienceManager.canLevelUp()) {
