@@ -48,6 +48,7 @@ import type { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { schemaValues } from "../../../utils/schemas"
+import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -315,7 +316,8 @@ class GameContainer {
     this.game.scene.start("gameScene", {
       room: this.room,
       uid: this.uid,
-      spectate: this.spectate
+      spectate: this.spectate,
+      spectatedPlayerId: this.player?.id
     })
     this.game.scale.on("resize", this.resize, this)
     if (this.game.renderer.type === Phaser.WEBGL) {
@@ -645,6 +647,24 @@ class GameContainer {
     if (this.uid === uid) {
       this.spectate = true
       if (this.room.state.players.size > 0) {
+        if (!this.player) {
+          const players = schemaValues(this.room.state.players)
+          const playerToSpectate =
+            sortPlayersByRankAndTeam(
+              players.filter((p) => p.alive),
+              this.room.state.gameMode
+            )[0] ?? players[0]
+          if (playerToSpectate) {
+            this.room.send(Transfer.SPECTATE, playerToSpectate.id)
+            this.setPlayer(playerToSpectate)
+            const simulation = this.room.state.simulations.get(
+              playerToSpectate.simulationId
+            )
+            if (simulation) {
+              this.setSimulation(simulation)
+            }
+          }
+        }
         this.initializeGame()
       }
     }
