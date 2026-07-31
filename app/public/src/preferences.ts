@@ -33,7 +33,6 @@ export interface IPreferencesState {
   showRegularPool: boolean
   showAdditionalPool: boolean
   showRegionalPool: boolean
-  showSpecialPool: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
@@ -64,7 +63,6 @@ const defaultPreferences: IPreferencesState = {
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
-  showSpecialPool: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,

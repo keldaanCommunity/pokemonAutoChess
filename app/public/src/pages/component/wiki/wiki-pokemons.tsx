@@ -121,7 +121,6 @@ export function WikiPokemon(props: {
       props.rarity,
       preferences.showAdditionalPool,
       preferences.showRegionalPool,
-      preferences.showSpecialPool,
       preferences.showRegularPool,
       preferences.showEvolutions,
       preferences.showAltForms

@@ -1457,6 +1457,10 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.THUNDERCLAP_PRESS]: onTarget({
+    ability: Ability.WONDER_GUARD,
+    scale: 2
+  }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: onTargetScale2,
   [Ability.GEOMANCY]: onCaster({

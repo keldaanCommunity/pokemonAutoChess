@@ -6,6 +6,7 @@
 - Oricorio (Pom Pom Style)
 - Oricorio (Pa'U Style)
 - Oricorio (Sensu Style)
+- Pikachu Libre
 
 # Changes to Pokemon & Abilities
 

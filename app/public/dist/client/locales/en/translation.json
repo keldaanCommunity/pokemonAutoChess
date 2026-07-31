@@ -84,6 +84,7 @@
 		"PICHU": "Pichu",
 		"PIKACHU": "Pikachu",
 		"PIKACHU_SURFER": "Surfing Pikachu",
+		"PIKACHU_LIBRE": "Libre Pikachu",
 		"RAICHU": "Raichu",
 		"MACHOP": "Machop",
 		"MACHOKE": "Machoke",
@@ -1781,7 +1782,8 @@
 		"SUBSTITUTE": "Substitute",
 		"SWARM": "Call of the Swarm",
 		"FLING": "Fling",
-		"REVELATION_DANCE": "Revelation Dance"
+		"REVELATION_DANCE": "Revelation Dance",
+		"THUNDERCLAP_PRESS": "Thunderclap Press"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2345,7 +2347,8 @@
 		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
 		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
-		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD"
+		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD",
+		"THUNDERCLAP_PRESS": "The target is hit with an electric bodyslam and pushed away. It and the enemy collided on the way are PARALYSIS for 4 seconds and take [20,40,80,160,SP] SPECIAL."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3455,6 +3458,7 @@
 		"SLAKING": "When waking up after being SLEEP, $t(pkm.SLAKING) gains RAGE for 3 seconds.",
 		"STANTLER": "Evolves into $t(pkm.WYRDEER) when changing region at stage 20.",
 		"PIKACHU_SURFER": "Surfing Pikachu's power swells with the waves. Gain 50 SHIELD and 3 ATK for each AQUATIC synergy step reached, and fill PP bar when a wave approaches.",
+		"PIKACHU_LIBRE": "When FIGHTING is active, get RAGE for 2 seconds every 10 hits blocked.",
 		"ESPURR": "Will evolve into Meowstic Male or Female based on the dominant synergy between PSYCHIC and FIELD.",
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by staying one stage on the bench, which reset its DEF and SPEED stats. When groomed at max stacks, get a SILK_SCARF.",
 		"ACCELERATION": "Acceleration: gain 15 SPEED every tile you move (jumps and dashes count for one)",

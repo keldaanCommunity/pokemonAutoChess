@@ -1752,6 +1752,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (s) => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id
         )
         if (!substitute) return
+        if (p.pokemon.name === Pkm.PIKACHU) {
+          p.pokemon = player.transformPokemon(p.pokemon, Pkm.PIKACHU_LIBRE)
+        }
         p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.maxHP += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0

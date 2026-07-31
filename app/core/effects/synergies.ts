@@ -314,6 +314,15 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     super(undefined, effect)
   }
   apply({ pokemon, board, isRetaliation }: OnDamageReceivedEffectArgs) {
+    // Fighting knockback for Pikachu Libre
+    if (
+      pokemon.passive === Passive.PIKACHU_LIBRE &&
+      pokemon.count.fightingBlockCount > 0 &&
+      pokemon.count.fightingBlockCount % 10 === 0
+    ) {
+      pokemon.status.triggerRage(2000, pokemon)
+    }
+
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
