@@ -2260,7 +2260,7 @@
 		"DRILL_PECK": "Charge à travers la cible comme une foreuse, infligeant [30,60,120,240,SP] SPECIAL et échangeant leur position. S'il y a une autre cible derrière dans la même direction, lance immédiatement à nouveau la capacité sur cette cible.",
 		"ROCK_ARTILLERY": "Jette [10,15,25,50] rochers sur des ennemis aléatoires, qui atterrissent au hasard sur leur cible ou sur une case ADJACENT en infligeant [20,30,40,80,SP] SPECIAL",
 		"ZING_ZAP": "Roule derrière la cible, infligeant [30,60,90,180,SP] SPECIAL et FLINCH pendant 3 secondes. Si la cible subit PARALYSIS, le lanceur gagne [10,20,40,80,SP] SHIELD.",
-		"NO_RETREAT": "Gagnez 1 DEF et 1 SPE_DEF par Hexadron dans votre équipe. Les cadets charge la cible pour [20,20,20,40,SP] SPECIAL chacun.",
+		"NO_RETREAT": "Gagnez 1 ATK, 1 DEF, 1 SPE_DEF et 5 SPEED par Hexadron dans votre équipe. Les cadets charge la cible pour [20,20,20,40,SP] SPECIAL chacun.",
 		"TACKLE": "Inflige [20,40,60,120,SP] SPECIAL à la cible.",
 		"STATIC_SHOCK": "Inflige [30,50,70,100,SP] SPECIAL à la cible et gagne [10,20,30,60,SP] SHIELD par Pokémon ELECTRIC ADJACENT, soigne [10,20,30,60,SP] HP par Pokémon FAIRY ADJACENT.",
 		"SAND_SPIT": "Crache du sable sur les 3 Pokémon ennemis qui font face au lanceur, infligeant [30,60,120,240,SP] SPECIAL et BLINDED pendant 2 secondes.",
