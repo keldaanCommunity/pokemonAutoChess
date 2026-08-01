@@ -56,7 +56,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Revert Articuno buff from 6.2; PP 110 → 120
 - Nerf all Eeveelutions: HP 180 → 150
 
-> Lapras can't enough nerfs. Back to 120PP for the third time.
+> Lapras can't get enough nerfs. Back to 120PP for the third time.
 
 - Lapras DEF: 7 → 5 ; PP: 100 → 120
 - Change Entrainment (Audino): can no longer a target already entrained
@@ -126,16 +126,16 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 
 # Misc
 
-- Rune Protect status is renamed to Safeguard
+- Rune Protect status is renamed Safeguard
 - New title: Five Stars
 - New town encounter: Chimecho
 - Bots elo ranges have been updated to be more widespread
 - Avatar emotes can now be used in lobby chat
-- Add symbols to tier list maker gadget and change layout
-- Add /unholdable-items GET endpoint
+- Add symbols to tier list maker gadget and change the layout of this screen
+- Add unholdable items in meta report
 - Improved colorblind patterns on pokemon portraits in shop
 - New gadget: Recorder ; unlocked at level 10, allows you to record your games in the background and watch and save replays. Thanks to brobinett for that huge work.
 - Certificate gadget that allows you to play Ranked games is now unlocked at level 5 instead of level 10
 - Tier List Maker gadget is now unlocked at level 25 instead of level 50
-- Sprite Tracker gadget  is now unlocked at level 50 instead of level 60
+- Sprite Tracker gadget is now unlocked at level 50 instead of level 60
 - 1 new scribble
