@@ -3951,6 +3951,7 @@
 	},
 	"rank": "Rank",
 	"replay": {
+		"leave_replay": "Leave replay",
 		"loading": "Loading replay…",
 		"loading_sub": "preparing the match",
 		"seeking": "Seeking…",
@@ -3973,7 +3974,7 @@
 			"speed": "Playback speed (↑/↓)",
 			"ended": "Replay ended",
 			"badge": "REPLAY",
-			"pos": "S{{stage}} · {{phase}}",
+			"pos": "Stage {{stage}} · {{phase}}",
 			"events": "Event log"
 		},
 		"endgame": {

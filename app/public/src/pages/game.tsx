@@ -261,6 +261,7 @@ export default function Game() {
     }
 
     if (isReplayRoom(room)) {
+      gameContainer.gameScene?.music?.destroy()
       navigate("/lobby")
       return
     }

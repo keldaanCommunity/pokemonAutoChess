@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { phaseWord } from "../../../game/replay-event-format"
 import {
   nextPhase,
   nextStage,
   prevPhase,
   prevStage,
+  type ReplayIndex,
   segmentAt,
-  segmentBandKind,
-  type ReplayIndex
+  segmentBandKind
 } from "../../../game/replay-index"
-import { phaseWord } from "../../../game/replay-event-format"
 import type { ReplayRoom } from "../../../game/replay-room"
 
 // overlay controls for the replay viewer: play/pause, scrub, speed, skip-by-phase/stage, timeline, frame-step.
