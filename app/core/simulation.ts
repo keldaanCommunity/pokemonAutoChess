@@ -278,7 +278,16 @@ export default class Simulation extends Schema implements ISimulation {
               if (player) {
                 player.board.forEach((p, id) => {
                   if (isOnBench(p) && !isIn(Troopers, p.name)) {
-                    p.hp = min(0)(p.hp - Math.round(0.05 * p.maxHP))
+                    let burnDamage = Math.round(0.05 * p.maxHP)
+                    if (
+                      p.items.has(Item.MAGMARIZER) ||
+                      p.items.has(Item.SAFETY_GOGGLES)
+                    ) {
+                      burnDamage = 0
+                    } else if (p.items.has(Item.ASSAULT_VEST)) {
+                      burnDamage = Math.floor(burnDamage * 0.5)
+                    }
+                    p.hp = min(0)(p.hp - burnDamage)
                     if (p.hp === 0) player.board.delete(id)
                   }
                 })
