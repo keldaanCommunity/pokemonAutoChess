@@ -323,95 +323,99 @@ export default class GameScene extends Scene {
 
   /** Sell the pokemon currently dragged/carried, or the hovered one / shop slot. */
   sellSelectedPokemon() {
-    if (this.pokemonDragged != null) {
-      if (
-        !canSell(
-          this.pokemonDragged.name as Pkm,
-          this.room?.state.specialGameRule
-        )
-      ) {
-        return
-      }
+    if (this.trySellDraggedPokemon()) return
+    if (this.tryRemoveHoveredShopPokemon()) return
+    this.trySellHoveredPokemon()
+  }
 
-      const wasClickCarry = this.isClickCarrying
-      this.soldDuringDrag = !wasClickCarry
-      this.sellPokemon(this.pokemonDragged)
-      this.clearPokemonCarryState()
-      if (!wasClickCarry) {
-        this.input.setDragState(this.input.activePointer, 0)
-      }
-      return
+  private trySellDraggedPokemon(): boolean {
+    const dragged = this.pokemonDragged
+    if (!dragged) return false
+    if (!canSell(dragged.name as Pkm, this.room?.state.specialGameRule)) {
+      return true
     }
 
-    if (this.shopIndexHovered !== null) {
-      this.removeFromShop(this.shopIndexHovered)
-      this.shopIndexHovered = null
-    } else if (
-      this.pokemonHovered &&
-      this.pokemonHovered
-        .getBounds()
-        .contains(
-          this.input.activePointer.worldX,
-          this.input.activePointer.worldY
-        )
-    ) {
-      this.sellPokemon(this.pokemonHovered)
-      this.pokemonHovered = null
-    }
+    const wasClickCarry = this.isClickCarrying
+    this.soldDuringDrag = !wasClickCarry
+    this.sellPokemon(dragged)
+    this.clearPokemonCarryState()
+    if (wasClickCarry) return true
+
+    this.input.setDragState(this.input.activePointer, 0)
+    return true
+  }
+
+  private tryRemoveHoveredShopPokemon(): boolean {
+    if (this.shopIndexHovered === null) return false
+    this.removeFromShop(this.shopIndexHovered)
+    this.shopIndexHovered = null
+    return true
+  }
+
+  private trySellHoveredPokemon(): boolean {
+    const hovered = this.pokemonHovered
+    if (!hovered) return false
+
+    const { worldX, worldY } = this.input.activePointer
+    if (!hovered.getBounds().contains(worldX, worldY)) return false
+
+    this.sellPokemon(hovered)
+    this.pokemonHovered = null
+    return true
+  }
+
+  private canShowDropSpot(spot: Phaser.GameObjects.Image): boolean {
+    return (
+      this.room?.state.phase === GamePhaseState.PICK ||
+      spot.getData("y") === 0
+    )
+  }
+
+  private isDropSpotVisibleForPokemon(
+    spot: Phaser.GameObjects.Image,
+    pokemon: { canBeBenched: boolean }
+  ): boolean {
+    if (spot.getData("y") === 0) return pokemon.canBeBenched
+    return this.room?.state.phase === GamePhaseState.PICK
   }
 
   private showPokemonDragUI(pokemon: PokemonSprite) {
-    this.dropSpots.forEach((spot) => {
-      if (
-        this.room?.state.phase === GamePhaseState.PICK ||
-        spot.getData("y") === 0
-      ) {
-        spot.setFrame(0).setVisible(true)
-      }
-    })
+    this.dropSpots
+      .filter((spot) => this.canShowDropSpot(spot))
+      .forEach((spot) => spot.setFrame(0).setVisible(true))
 
-    if (
-      this.sellZone &&
-      canSell(pokemon.name as Pkm, this.room?.state.specialGameRule)
-    ) {
-      this.sellZone.showForPokemon(pokemon)
-    }
+    if (!this.sellZone) return
+    if (!canSell(pokemon.name as Pkm, this.room?.state.specialGameRule)) return
+    this.sellZone.showForPokemon(pokemon)
   }
 
   private hidePokemonDragUI() {
     this.sellZone?.hide()
     this.useItemZone?.hide()
     this.dropSpots.forEach((spot) => spot.setVisible(false))
-    if (this.lastClickCarryDropZone?.name === "board-zone") {
-      this.lastClickCarryDropZone.getData("sprite")?.setFrame(0)
-    }
+    this.clearClickCarryDropHighlight(this.lastClickCarryDropZone)
     this.lastClickCarryDropZone = null
   }
 
   private updatePokemonDragVisibility() {
     if (!this.pokemonDragged) return
+
     const pkm = <Pkm>this.pokemonDragged.name
     const pokemon = new PokemonClasses[pkm](pkm)
-
     this.dropSpots.forEach((spot) => {
-      const inBench = spot.getData("y") === 0
-      let visible = false
-      if (inBench) {
-        visible = pokemon.canBeBenched
-      } else if (this.room?.state.phase === GamePhaseState.PICK) {
-        visible = true
-      }
-      spot.setVisible(visible)
+      spot.setVisible(this.isDropSpotVisibleForPokemon(spot, pokemon))
     })
+
+    if (this.sellZone?.visible !== false) return
     if (
-      this.sellZone?.visible === false &&
-      canSell(
+      !canSell(
         this.pokemonDragged.name as Pkm,
         this.room?.state.specialGameRule
       )
     ) {
-      this.sellZone.setVisible(true)
+      return
     }
+    this.sellZone.setVisible(true)
   }
 
   private clearPokemonCarryState() {
@@ -434,15 +438,18 @@ export default class GameScene extends Scene {
     document.body.classList.add("grabbing")
   }
 
-  private cancelPokemonClickCarry() {
-    if (!this.isClickCarrying || !this.pokemonDragged) return
-    const pokemon = this.pokemonDragged
+  private returnPokemonToBoardCell(pokemon: PokemonSprite) {
     const [x, y] = transformBoardCoordinates(
       pokemon.positionX,
       pokemon.positionY
     )
     pokemon.setPosition(x, y)
     pokemon.setDepth(DEPTH.POKEMON)
+  }
+
+  private cancelPokemonClickCarry() {
+    if (!this.isClickCarrying || !this.pokemonDragged) return
+    this.returnPokemonToBoardCell(this.pokemonDragged)
     this.clearPokemonCarryState()
   }
 
@@ -450,40 +457,52 @@ export default class GameScene extends Scene {
     pointer: Phaser.Input.Pointer
   ): Phaser.GameObjects.Zone | null {
     const carried = this.pokemonDragged
-    if (carried?.input) {
-      carried.input.enabled = false
-    }
+    const wasEnabled = carried?.input?.enabled ?? true
+    if (carried?.input) carried.input.enabled = false
+
     const hits = this.input.hitTestPointer(pointer)
-    if (carried?.input) {
-      carried.input.enabled = true
-    }
+    if (carried?.input) carried.input.enabled = wasEnabled
 
     const zones = hits.filter(
       (obj): obj is Phaser.GameObjects.Zone =>
         obj instanceof Phaser.GameObjects.Zone &&
         (obj.name === "sell-zone" || obj.name === "board-zone")
     )
-    return (
-      zones.find((zone) => zone.name === "sell-zone") ?? zones[0] ?? null
-    )
+    return zones.find((zone) => zone.name === "sell-zone") ?? zones[0] ?? null
+  }
+
+  private clearClickCarryDropHighlight(
+    zone: Phaser.GameObjects.Zone | null
+  ) {
+    if (!zone) return
+    if (zone.name === "sell-zone") {
+      this.sellZone?.onDragLeave()
+      return
+    }
+    if (zone.name === "board-zone") {
+      zone.getData("sprite")?.setFrame(0)
+    }
+  }
+
+  private applyClickCarryDropHighlight(
+    zone: Phaser.GameObjects.Zone | null
+  ) {
+    if (!zone) return
+    if (zone.name === "sell-zone") {
+      this.sellZone?.onDragEnter()
+      return
+    }
+    if (zone.name === "board-zone") {
+      zone.getData("sprite")?.setFrame(1)
+    }
   }
 
   private updateClickCarryDropHighlight(pointer: Phaser.Input.Pointer) {
     const zone = this.findDropZoneAt(pointer)
     if (zone === this.lastClickCarryDropZone) return
 
-    if (this.lastClickCarryDropZone?.name === "sell-zone") {
-      this.sellZone?.onDragLeave()
-    } else if (this.lastClickCarryDropZone?.name === "board-zone") {
-      this.lastClickCarryDropZone.getData("sprite")?.setFrame(0)
-    }
-
-    if (zone?.name === "sell-zone") {
-      this.sellZone?.onDragEnter()
-    } else if (zone?.name === "board-zone") {
-      zone.getData("sprite")?.setFrame(1)
-    }
-
+    this.clearClickCarryDropHighlight(this.lastClickCarryDropZone)
+    this.applyClickCarryDropHighlight(zone)
     this.lastClickCarryDropZone = zone
   }
 
@@ -500,15 +519,36 @@ export default class GameScene extends Scene {
 
     if (dropZone) {
       this.input.emit("drop", pointer, pokemon, dropZone)
-    } else {
-      const [x, y] = transformBoardCoordinates(
-        pokemon.positionX,
-        pokemon.positionY
-      )
-      pokemon.setPosition(x, y)
-      pokemon.setDepth(DEPTH.POKEMON)
-      this.pokemonDragged = null
+      return
     }
+
+    this.returnPokemonToBoardCell(pokemon)
+    this.pokemonDragged = null
+  }
+
+  private handleClickCarryPointerDown(pointer: Phaser.Input.Pointer): boolean {
+    if (!this.isClickCarrying) return false
+    if (pointer.rightButtonDown()) {
+      this.cancelPokemonClickCarry()
+      return true
+    }
+    if (pointer.leftButtonDown()) {
+      this.tryDropClickCarriedPokemon(pointer)
+    }
+    return true
+  }
+
+  private canStartPokemonClickCarry(
+    gameObject: Phaser.GameObjects.GameObject
+  ): gameObject is PokemonSprite {
+    if (this.skipNextPokemonPickup) {
+      this.skipNextPokemonPickup = false
+      return false
+    }
+    if (this.dragStartedThisPress) return false
+    if (this.isClickCarrying) return false
+    if (this.pokemonDragged || this.itemDragged) return false
+    return gameObject instanceof PokemonSprite && gameObject.draggable
   }
 
   useitem(item: Item) {
@@ -672,15 +712,7 @@ export default class GameScene extends Scene {
 
     this.input.on("pointerdown", (pointer) => {
       this.dragStartedThisPress = false
-
-      if (this.isClickCarrying) {
-        if (pointer.rightButtonDown()) {
-          this.cancelPokemonClickCarry()
-        } else if (pointer.leftButtonDown()) {
-          this.tryDropClickCarriedPokemon(pointer)
-        }
-        return
-      }
+      if (this.handleClickCarryPointerDown(pointer)) return
 
       if (
         pointer.leftButtonDown() &&
@@ -746,21 +778,8 @@ export default class GameScene extends Scene {
       Phaser.Input.Events.GAMEOBJECT_POINTER_UP,
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
         if (pointer.rightButtonReleased() || this.spectate) return
-        if (this.skipNextPokemonPickup) {
-          this.skipNextPokemonPickup = false
-          return
-        }
-        if (
-          this.dragStartedThisPress ||
-          this.isClickCarrying ||
-          this.pokemonDragged ||
-          this.itemDragged
-        ) {
-          return
-        }
-        if (gameObject instanceof PokemonSprite && gameObject.draggable) {
-          this.startPokemonClickCarry(gameObject, pointer)
-        }
+        if (!this.canStartPokemonClickCarry(gameObject)) return
+        this.startPokemonClickCarry(gameObject, pointer)
       }
     )
 
