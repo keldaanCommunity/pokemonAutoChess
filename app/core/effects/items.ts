@@ -63,7 +63,7 @@ import {
   OnItemRemovedEffect,
   OnKillEffect,
   OnMoveEffect,
-  OnResurrectEffect,
+  OnResurrectingEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
@@ -850,7 +850,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         true
       )
     }, Item.COMFEY),
-    new OnResurrectEffect(dropComfey, Item.COMFEY),
+    new OnResurrectingEffect(dropComfey, Item.COMFEY),
     new OnDeathEffect(dropComfey, Item.COMFEY)
   ],
 
@@ -1115,7 +1115,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.PINK_NECTAR]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_PA_U) {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_PA_U
+      ) {
         player.transformPokemon(pokemon, Pkm.ORICORIO_PA_U)
       }
       return false // prevent item from being equipped
@@ -1124,7 +1127,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.YELLOW_NECTAR]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_POMPOM) {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_POMPOM
+      ) {
         player.transformPokemon(pokemon, Pkm.ORICORIO_POMPOM)
       }
       return false // prevent item from being equipped
@@ -1133,7 +1139,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RED_NECTAR]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_BAILE) {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_BAILE
+      ) {
         player.transformPokemon(pokemon, Pkm.ORICORIO_BAILE)
       }
       return false // prevent item from being equipped
@@ -1142,7 +1151,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.PURPLE_NECTAR]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon?.passive === Passive.NECTAR && pokemon.name !== Pkm.ORICORIO_SENSU) {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_SENSU
+      ) {
         player.transformPokemon(pokemon, Pkm.ORICORIO_SENSU)
       }
       return false // prevent item from being equipped

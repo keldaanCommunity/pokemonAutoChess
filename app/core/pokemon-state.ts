@@ -16,7 +16,7 @@ import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
-  OnResurrectEffect,
+  OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
 } from "./effects/effect"
@@ -781,7 +781,7 @@ export default abstract class PokemonState {
         if (pokemon.status.resurrection) {
           pokemon.status.triggerResurrection(pokemon, board)
           pokemon
-            .getEffects(OnResurrectEffect)
+            .getEffects(OnResurrectingEffect)
             .forEach((effect) => effect.apply({ pokemon, board, attacker }))
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {

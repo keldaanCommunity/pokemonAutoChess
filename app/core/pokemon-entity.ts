@@ -65,6 +65,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnResurrectionEffect,
   OnSpawnEffect
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
@@ -1547,6 +1548,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.hp = this.maxHP
     this.pp = 0
     this.shield = 0
+
+    this.getEffects(OnResurrectionEffect).forEach((effect) =>
+      effect.apply({ pokemon: this, board: this.simulation.board })
+    )
   }
 
   eatBerry(

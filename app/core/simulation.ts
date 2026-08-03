@@ -262,7 +262,7 @@ export default class Simulation extends Schema implements ISimulation {
       })
     }
 
-    if (this.room.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA) {
+    if (this.room?.state?.specialGameRule === SpecialGameRule.BENCH_IS_LAVA) {
       for (const player of [this.redPlayer, this.bluePlayer]) {
         if (player) {
           player.board.forEach((p, id) => {

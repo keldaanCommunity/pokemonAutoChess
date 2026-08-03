@@ -63,7 +63,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Buff Ember board effect: BURN duration 1 second → 2 seconds
 - Nerf Blizzard (Articuno): Freeze duration: 2 seconds → 1.5 seconds
 - Nerf Enamorus: ATK 26 → 23
-- Change Unown M ability: all team gains ~~max~~ 50 PP
+- Change Unown M ability: all allies PP is set to max PP → all allies gain 50 PP (with PP overflow allowed). 
 - Psybeam (Staryu): CONFUSION duration 4 seconds at all ranks → 2/3/4/5 seconds
 
 # Changes to Synergies
@@ -116,6 +116,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
 - Fix some scenarios where HEAVY_DUTY_BOOTS were not preventing the board effect if the board effect spawns directly on their tile
 - Fix Garbodor not being able to trash Mulch and TMs
+- On resurrection, Pokémon having done a mid-fight transformation that changes their stats will now keep those stat changes after resurrection. This includes: Palafin Hero, Mimikyu Busted, Hoopa Unbound, Darmanitan Zen, Galarian Darmanitan Zen, Aegislash Blade Form.
 
 # Elo adjustments
 

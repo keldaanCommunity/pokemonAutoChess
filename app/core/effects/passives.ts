@@ -18,7 +18,6 @@ import {
   Dishes,
   Flavors,
   Item,
-  Mulches,
   type OgerponMasks,
   SpecialBerries,
   Sweets,
@@ -58,7 +57,8 @@ import {
   OnItemDroppedEffect,
   OnKillEffect,
   OnMoveEffect,
-  OnResurrectEffect,
+  OnResurrectingEffect,
+  OnResurrectionEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnSpawnEffect,
@@ -338,33 +338,51 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
   })
 }, Passive.WATER_SPRING)
 
-const MimikuBustedTransformEffect = new OnDamageReceivedEffect(
-  ({ pokemon }) => {
+const transformToBustedMimikyu = (pokemon: PokemonEntity) => {
+  pokemon.name = Pkm.MIMIKYU_BUSTED
+  pokemon.changePassive(Passive.MIMIKYU_BUSTED)
+  pokemon.addAttack(8, pokemon, 0, false)
+}
+
+const MimikuBustedTransformEffects = [
+  new OnDamageReceivedEffect(({ pokemon }) => {
     if (pokemon.hp / pokemon.maxHP < 0.5) {
       pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
-      pokemon.name = Pkm.MIMIKYU_BUSTED
-      pokemon.changePassive(Passive.MIMIKYU_BUSTED)
-      pokemon.addAttack(8, pokemon, 0, false)
+      transformToBustedMimikyu(pokemon)
       pokemon.status.triggerProtect(1500)
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
       }
     }
-  },
-  Passive.MIMIKYU
-)
+  }, Passive.MIMIKYU),
+  new OnResurrectionEffect(({ pokemon }) => {
+    if (pokemon.index === Pkm.MIMIKYU_BUSTED) {
+      transformToBustedMimikyu(pokemon) // reapply busted mimikyu buffs on resurrect
+    }
+  }, Passive.MIMIKYU)
+]
 
-const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
-  ({ pokemon, board }) => {
+const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
+  pokemon.name = Pkm.DARMANITAN_ZEN
+  pokemon.changePassive(Passive.DARMANITAN_ZEN)
+  pokemon.skill = Ability.TRANSE
+  pokemon.pp = 0
+  pokemon.addAttack(-10, pokemon, 0, false)
+  pokemon.addSpeed(-20, pokemon, 0, false)
+  pokemon.addDefense(6, pokemon, 0, false)
+  pokemon.addSpecialDefense(6, pokemon, 0, false)
+  pokemon.range += 4
+  pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
+  pokemon.toIdleState()
+}
+
+const DarmanitanZenTransformEffects = [
+  new OnDamageReceivedEffect(({ pokemon, board }) => {
     if (
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.DARMANITAN
     ) {
       pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
-      pokemon.name = Pkm.DARMANITAN_ZEN
-      pokemon.changePassive(Passive.DARMANITAN_ZEN)
-      pokemon.skill = Ability.TRANSE
-      pokemon.pp = 0
       const destination = board.getTeleportationCell(
         pokemon.positionX,
         pokemon.positionY,
@@ -372,51 +390,58 @@ const DarmanitanZenTransformEffect = new OnDamageReceivedEffect(
       )
       if (destination)
         pokemon.moveTo(destination.x, destination.y, board, false)
-      pokemon.toIdleState()
-      pokemon.addAttack(-10, pokemon, 0, false)
-      pokemon.addSpeed(-20, pokemon, 0, false)
-      pokemon.addDefense(6, pokemon, 0, false)
-      pokemon.addSpecialDefense(6, pokemon, 0, false)
-      pokemon.range += 4
-      pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
+
+      transformToDarmanitanZen(pokemon)
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
       }
     }
-  },
-  Passive.DARMANITAN
-)
+  }, Passive.DARMANITAN),
+  new OnResurrectionEffect(({ pokemon }) => {
+    if (pokemon.index === PkmIndex[Pkm.DARMANITAN_ZEN]) {
+      transformToDarmanitanZen(pokemon)
+    }
+  }, Passive.DARMANITAN)
+]
 
-const GalarianDarmanitanZenTransformEffect = new OnDamageReceivedEffect(
-  ({ pokemon }) => {
+const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
+  pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
+  pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
+  pokemon.skill = Ability.TRANSE
+  pokemon.pp = 0
+  pokemon.status.tree = true
+  pokemon.status.untargettable = true
+  pokemon.commands.push(
+    new DelayedCommand(() => {
+      pokemon.status.untargettable = false
+    }, 1500)
+  )
+
+  pokemon.toIdleState()
+  pokemon.addAttack(6, pokemon, 0, false)
+  pokemon.addSpeed(-60, pokemon, 0, false)
+}
+
+const GalarianDarmanitanZenTransformEffects = [
+  new OnDamageReceivedEffect(({ pokemon }) => {
     if (
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.GALARIAN_DARMANITAN
     ) {
       pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
-      pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
-      pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
-      pokemon.skill = Ability.TRANSE
-      pokemon.pp = 0
-      pokemon.status.tree = true
-      pokemon.status.untargettable = true
-      pokemon.commands.push(
-        new DelayedCommand(() => {
-          pokemon.status.untargettable = false
-        }, 1500)
-      )
-
-      pokemon.toIdleState()
-      pokemon.addAttack(6, pokemon, 0, false)
-      pokemon.addSpeed(-60, pokemon, 0, false)
+      transformToGalarianDarmanitanZen(pokemon)
 
       if (pokemon.player) {
         pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
       }
     }
-  },
-  Passive.GALARIAN_DARMANITAN
-)
+  }, Passive.GALARIAN_DARMANITAN),
+  new OnResurrectionEffect(({ pokemon }) => {
+    if (pokemon.index === PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]) {
+      transformToGalarianDarmanitanZen(pokemon)
+    }
+  }, Passive.GALARIAN_DARMANITAN)
+]
 
 const DarmanitanZenOnHitEffect = new OnHitEffect(
   ({ attacker, totalTakenDamage }) => {
@@ -1277,10 +1302,10 @@ export const PassiveEffects: Partial<
   [Passive.ACCELERATION]: [
     () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ],
-  [Passive.MIMIKYU]: [MimikuBustedTransformEffect],
-  [Passive.DARMANITAN]: [DarmanitanZenTransformEffect],
+  [Passive.MIMIKYU]: MimikuBustedTransformEffects,
+  [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
-  [Passive.GALARIAN_DARMANITAN]: [GalarianDarmanitanZenTransformEffect],
+  [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
   [Passive.GALARIAN_DARMANITAN_ZEN]: [GalarianDarmanitanBurnEffect, treeEffect],
   [Passive.GLIMMORA]: [ToxicSpikesEffect],
   [Passive.FUR_COAT]: [FurCoatEffect],
@@ -1511,7 +1536,7 @@ export const PassiveEffects: Partial<
     }, Passive.BAD_LUCK)
   ],
   [Passive.PRIMEAPE]: [
-    new OnResurrectEffect(addPrimeapeStack, Passive.PRIMEAPE),
+    new OnResurrectingEffect(addPrimeapeStack, Passive.PRIMEAPE),
     new OnDeathEffect(addPrimeapeStack, Passive.PRIMEAPE)
   ],
   [Passive.GEARS]: [
@@ -1619,6 +1644,14 @@ export const PassiveEffects: Partial<
       if (nbAllies === 0) {
         transformToHero()
       }
+
+      entity.effectsSet.add(
+        new OnResurrectionEffect(() => {
+          if (transformed) {
+            transformToHero() // reapply transformation if Finizen is resurrected in Hero form
+          }
+        })
+      )
     })
   ],
   [Passive.EISCUE_NOICE]: [
@@ -1784,6 +1817,17 @@ export const PassiveEffects: Partial<
           x: pokemon.positionX,
           y: pokemon.positionY
         })
+      }
+    })
+  ],
+
+  [Passive.AEGISLASH]: [
+    new OnResurrectionEffect(({ pokemon }) => {
+      if (pokemon.index === PkmIndex[Pkm.AEGISLASH_BLADE]) {
+        // preserve the stat changes of blade form when resurrecting
+        pokemon.addAttack(10, pokemon, 0, false)
+        pokemon.addDefense(-5, pokemon, 0, false)
+        pokemon.addSpecialDefense(-5, pokemon, 0, false)
       }
     })
   ]
