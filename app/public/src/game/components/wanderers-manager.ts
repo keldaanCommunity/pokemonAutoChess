@@ -18,6 +18,7 @@ import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
 import { isReplayRoom } from "../replay-room-id"
 import type GameScene from "../scenes/game-scene"
+import { loadPortrait } from "./loading-manager"
 import PokemonSprite from "./pokemon"
 import PokemonSpecial from "./pokemon-special"
 
@@ -335,11 +336,6 @@ export default class WanderersManager {
       stroke: "#000"
     }
 
-    const image = this.scene.add.existing(
-      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
-        .setScale(0.5, 0.5)
-        .setOrigin(0, 0)
-    )
     const text = this.scene.add.existing(
       new GameObjects.Text(
         this.scene,
@@ -352,7 +348,6 @@ export default class WanderersManager {
         textStyle
       )
     )
-    image.setDepth(DEPTH.TEXT_MINOR)
     text.setDepth(DEPTH.TEXT)
 
     const container = this.scene.add.existing(
@@ -360,9 +355,19 @@ export default class WanderersManager {
         this.scene,
         coordinates[0],
         coordinates[1] - 50,
-        [text, image]
+        [text]
       )
     )
+
+    loadPortrait(this.scene, index).then((loaded) => {
+      if (!loaded || !container.scene) return // popup already faded out
+      container.add(
+        new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
+          .setScale(0.5, 0.5)
+          .setOrigin(0, 0)
+          .setDepth(DEPTH.TEXT_MINOR)
+      )
+    })
 
     this.scene.add.tween({
       targets: [container],

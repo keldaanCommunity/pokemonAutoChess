@@ -37,6 +37,7 @@ import type AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility, displayHit } from "./abilities-animations"
+import { loadPortrait } from "./loading-manager"
 import PokemonSprite from "./pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
@@ -1275,15 +1276,9 @@ export default class BattleManager {
     }
     const dy = Math.round(50 * (Math.random() - 0.5))
 
-    const image = this.scene.add.existing(
-      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
-        .setScale(0.5, 0.5)
-        .setOrigin(0, 0)
-    )
     const text = this.scene.add.existing(
       new GameObjects.Text(this.scene, 25, 0, amount.toFixed(0), textStyle)
     )
-    image.setDepth(DEPTH.DAMAGE_PORTRAIT)
     text.setDepth(DEPTH.DAMAGE_TEXT)
 
     const container = this.scene.add.existing(
@@ -1291,9 +1286,19 @@ export default class BattleManager {
         this.scene,
         coordinates[0] + 30,
         coordinates[1] + dy,
-        [text, image]
+        [text]
       )
     )
+
+    loadPortrait(this.scene, index).then((loaded) => {
+      if (!loaded || !container.scene) return // popup already faded out
+      container.add(
+        new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
+          .setScale(0.5, 0.5)
+          .setOrigin(0, 0)
+          .setDepth(DEPTH.DAMAGE_PORTRAIT)
+      )
+    })
 
     this.scene.add.tween({
       targets: [container],
