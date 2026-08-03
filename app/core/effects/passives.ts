@@ -18,7 +18,6 @@ import {
   Dishes,
   Flavors,
   Item,
-  Mulches,
   type OgerponMasks,
   SpecialBerries,
   Sweets,
@@ -1785,6 +1784,21 @@ export const PassiveEffects: Partial<
           y: pokemon.positionY
         })
       }
+    })
+  ],
+
+  [Passive.STEELY_SPIRIT]: [
+    new OnSimulationStartEffect(({ simulation, entity }) => {
+      simulation.board.forEach((x, y, pkm) => {
+        if (
+          pkm &&
+          pkm.team === entity.team &&
+          y === entity.positionY &&
+          Math.abs(x - entity.positionX) <= 1
+        ) {
+          pkm.effects.add(EffectEnum.STEELY_SPIRIT_BONUS)
+        }
+      })
     })
   ]
 }
