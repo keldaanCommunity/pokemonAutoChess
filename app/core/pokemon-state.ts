@@ -151,6 +151,9 @@ export default abstract class PokemonState {
       if (pokemon.items.has(Item.RED_ORB)) {
         trueDamagePart += 0.25
       }
+      if (pokemon.effects.has(EffectEnum.STEELY_SPIRIT_BONUS)) {
+        trueDamagePart += 0.1
+      }
       if (pokemon.effects.has(EffectEnum.LOCK_ON)) {
         trueDamagePart +=
           ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)

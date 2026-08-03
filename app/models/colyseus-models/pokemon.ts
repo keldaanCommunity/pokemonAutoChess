@@ -442,6 +442,40 @@ export class Egg extends Pokemon {
   canHoldItems = false
 }
 
+export class GalarMeowth extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.WILD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PERRSERKER
+  hp = 90
+  atk = 9
+  speed = 32
+  def = 7
+  speDef = 6
+  maxPP = 70
+  range = 1
+  skill = Ability.METAL_CLAW
+  regional = true
+  additional = true
+}
+
+export class Perrserker extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.WILD])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 240
+  atk = 23
+  speed = 32
+  def = 9
+  speDef = 6
+  maxPP = 70
+  range = 1
+  skill = Ability.METAL_CLAW
+  regional = true
+  additional = true
+  passive = Passive.STEELY_SPIRIT
+}
+
 export class Electrike extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.RARE
@@ -21239,6 +21273,8 @@ export const PokemonClasses: Record<
   [Pkm.PERSIAN]: Persian,
   [Pkm.ALOLAN_MEOWTH]: AlolanMeowth,
   [Pkm.ALOLAN_PERSIAN]: AlolanPersian,
+  [Pkm.GALAR_MEOWTH]: GalarMeowth,
+  [Pkm.PERRSERKER]: Perrserker,
   [Pkm.DEINO]: Deino,
   [Pkm.ZWEILOUS]: Zweilous,
   [Pkm.HYDREIGON]: Hydreigon,
