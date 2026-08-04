@@ -625,32 +625,46 @@ export default class CustomLobbyRoom extends Room {
             unlisted: false
           })
 
+          const listedRoomIds = new Set(query.map((r) => r.roomId))
+
           query.forEach((data) => {
             if (!this.rooms?.map((r) => r.roomId).includes(data.roomId)) {
               // if the query room was not in this.rooms, add it
               this.addRoom(data.roomId, data)
             }
           })
-          this.rooms?.forEach(async (room, roomIndex) => {
+
+          // iterate backwards: removeRoom splices this.rooms, so a forward loop skips elements
+          const rooms = this.rooms ?? []
+          for (let roomIndex = rooms.length - 1; roomIndex >= 0; roomIndex--) {
+            const room = rooms[roomIndex]
             const { type, gameStartedAt } = room.metadata ?? {}
-            if (
-              (type === "preparation" &&
-                gameStartedAt != null &&
-                new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
-              !query.map((r) => r.roomId).includes(room.roomId)
-            ) {
-              this.presence.hdel("roomcaches", room.roomId)
-              this.removeRoom(roomIndex, room.roomId)
-            }
-            if (
-              type === "game" &&
+            const startedBefore = (ms: number) =>
               gameStartedAt != null &&
-              new Date(gameStartedAt).getTime() < Date.now() - 86400000
+              new Date(gameStartedAt).getTime() < Date.now() - ms
+
+            if (!listedRoomIds.has(room.roomId)) {
+              // no hdel: query is a snapshot, and a room re-listed since is live
+              this.removeRoom(roomIndex, room.roomId)
+              continue // one removal per room per tick
+            }
+
+            if (
+              (type === "preparation" && startedBefore(60000)) ||
+              (type === "game" && startedBefore(86400000))
             ) {
-              this.presence.hdel("roomcaches", room.roomId)
+              // not awaited: an await would let the lobby subscription splice this.rooms
+              this.presence
+                .hdel("roomcaches", room.roomId)
+                .catch((error) =>
+                  logger.error(
+                    `could not drop the listing of ${room.roomId}`,
+                    error
+                  )
+                )
               this.removeRoom(roomIndex, room.roomId)
             }
-          })
+          }
         },
         start: true
       })
