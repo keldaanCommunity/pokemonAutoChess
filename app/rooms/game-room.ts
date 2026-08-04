@@ -1,6 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import type { MapSchema } from "@colyseus/schema"
-import { type Client, CloseCode, Room } from "colyseus"
+import { type Client, CloseCode, matchMaker, Room } from "colyseus"
 import admin from "firebase-admin"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
@@ -686,6 +686,20 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     })
+
+    // reconnect() looks the room up by listing, so an unlisted game cannot be rejoined
+    this.clock.setInterval(async () => {
+      try {
+        if (!(await matchMaker.driver.has(this.roomId))) {
+          logger.warn(
+            `room listing for ${this.roomId} went missing, re-publishing it`
+          )
+          await this.setMetadata({})
+        }
+      } catch (error) {
+        logger.error(`could not check the listing of ${this.roomId}`, error)
+      }
+    }, 30000)
   }
 
   startGame() {
