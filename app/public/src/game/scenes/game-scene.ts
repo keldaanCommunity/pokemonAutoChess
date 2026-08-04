@@ -65,6 +65,8 @@ export default class GameScene extends Scene {
   music: Phaser.Sound.WebAudioSound | undefined
   pokemonHovered: PokemonSprite | null = null
   pokemonDragged: PokemonSprite | null = null
+  /** Pokemon stays attached to the cursor after a click (no button hold). */
+  isClickCarrying = false
   shopIndexHovered: number | null = null
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Image[] = []
@@ -77,6 +79,10 @@ export default class GameScene extends Scene {
   started: boolean = false
   spectate: boolean = false
   spectatedPlayerId: string | undefined = undefined
+  private dragStartedThisPress = false
+  private skipNextPokemonPickup = false
+  private soldDuringDrag = false
+  private lastClickCarryDropZone: Phaser.GameObjects.Zone | null = null
 
   constructor() {
     super({
@@ -231,6 +237,13 @@ export default class GameScene extends Scene {
     })
 
     this.input.on("pointermove", (pointer) => {
+      if (this.isClickCarrying && this.pokemonDragged) {
+        this.pokemonDragged.x = pointer.worldX
+        this.pokemonDragged.y = pointer.worldY
+        this.updatePokemonDragVisibility()
+        this.updateClickCarryDropHighlight(pointer)
+        return
+      }
       if (!pointer.isDown || this.itemDragged || this.pokemonDragged) return
       const cam = this.cameras.main
       if (cam.zoom === 1 || preference("cameraLocked")) return
@@ -261,23 +274,8 @@ export default class GameScene extends Scene {
         this.buyExperience()
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
-        if (this.pokemonDragged != null) return
-        if (this.shopIndexHovered !== null) {
-          this.removeFromShop(this.shopIndexHovered)
-          this.shopIndexHovered = null
-        } else if (
-          this.pokemonHovered &&
-          this.pokemonHovered
-            .getBounds()
-            .contains(
-              this.input.activePointer.worldX,
-              this.input.activePointer.worldY
-            )
-        ) {
-          this.sellPokemon(this.pokemonHovered)
-          this.pokemonHovered = null
-        }
+      this.input.keyboard!.on("keydown-" + keybindings.sell, () => {
+        this.sellSelectedPokemon()
       })
 
       this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
@@ -321,6 +319,236 @@ export default class GameScene extends Scene {
   sellPokemon(pokemon: PokemonSprite) {
     if (!pokemon) return
     this.room?.send(Transfer.SELL_POKEMON, pokemon.id)
+  }
+
+  /** Sell the pokemon currently dragged/carried, or the hovered one / shop slot. */
+  sellSelectedPokemon() {
+    if (this.trySellDraggedPokemon()) return
+    if (this.tryRemoveHoveredShopPokemon()) return
+    this.trySellHoveredPokemon()
+  }
+
+  private trySellDraggedPokemon(): boolean {
+    const dragged = this.pokemonDragged
+    if (!dragged) return false
+    if (!canSell(dragged.name as Pkm, this.room?.state.specialGameRule)) {
+      return true
+    }
+
+    const wasClickCarry = this.isClickCarrying
+    this.soldDuringDrag = !wasClickCarry
+    this.sellPokemon(dragged)
+    this.clearPokemonCarryState()
+    if (wasClickCarry) return true
+
+    this.input.setDragState(this.input.activePointer, 0)
+    return true
+  }
+
+  private tryRemoveHoveredShopPokemon(): boolean {
+    if (this.shopIndexHovered === null) return false
+    this.removeFromShop(this.shopIndexHovered)
+    this.shopIndexHovered = null
+    return true
+  }
+
+  private trySellHoveredPokemon(): boolean {
+    const hovered = this.pokemonHovered
+    if (!hovered) return false
+
+    const { worldX, worldY } = this.input.activePointer
+    if (!hovered.getBounds().contains(worldX, worldY)) return false
+
+    this.sellPokemon(hovered)
+    this.pokemonHovered = null
+    return true
+  }
+
+  private canShowDropSpot(spot: Phaser.GameObjects.Image): boolean {
+    return (
+      this.room?.state.phase === GamePhaseState.PICK ||
+      spot.getData("y") === 0
+    )
+  }
+
+  private isDropSpotVisibleForPokemon(
+    spot: Phaser.GameObjects.Image,
+    pokemon: { canBeBenched: boolean }
+  ): boolean {
+    if (spot.getData("y") === 0) return pokemon.canBeBenched
+    return this.room?.state.phase === GamePhaseState.PICK
+  }
+
+  private showPokemonDragUI(pokemon: PokemonSprite) {
+    this.dropSpots
+      .filter((spot) => this.canShowDropSpot(spot))
+      .forEach((spot) => spot.setFrame(0).setVisible(true))
+
+    if (!this.sellZone) return
+    if (!canSell(pokemon.name as Pkm, this.room?.state.specialGameRule)) return
+    this.sellZone.showForPokemon(pokemon)
+  }
+
+  private hidePokemonDragUI() {
+    this.sellZone?.hide()
+    this.useItemZone?.hide()
+    this.dropSpots.forEach((spot) => spot.setVisible(false))
+    this.clearClickCarryDropHighlight(this.lastClickCarryDropZone)
+    this.lastClickCarryDropZone = null
+  }
+
+  private updatePokemonDragVisibility() {
+    if (!this.pokemonDragged) return
+
+    const pkm = <Pkm>this.pokemonDragged.name
+    const pokemon = new PokemonClasses[pkm](pkm)
+    this.dropSpots.forEach((spot) => {
+      spot.setVisible(this.isDropSpotVisibleForPokemon(spot, pokemon))
+    })
+
+    if (this.sellZone?.visible !== false) return
+    if (
+      !canSell(
+        this.pokemonDragged.name as Pkm,
+        this.room?.state.specialGameRule
+      )
+    ) {
+      return
+    }
+    this.sellZone.setVisible(true)
+  }
+
+  private clearPokemonCarryState() {
+    this.hidePokemonDragUI()
+    this.isClickCarrying = false
+    this.pokemonDragged = null
+    document.body.classList.remove("grabbing")
+  }
+
+  private startPokemonClickCarry(
+    pokemon: PokemonSprite,
+    pointer: Phaser.Input.Pointer
+  ) {
+    this.isClickCarrying = true
+    this.pokemonDragged = pokemon
+    pokemon.setDepth(DEPTH.DRAGGED_POKEMON)
+    pokemon.x = pointer.worldX
+    pokemon.y = pointer.worldY
+    this.showPokemonDragUI(pokemon)
+    document.body.classList.add("grabbing")
+  }
+
+  private returnPokemonToBoardCell(pokemon: PokemonSprite) {
+    const [x, y] = transformBoardCoordinates(
+      pokemon.positionX,
+      pokemon.positionY
+    )
+    pokemon.setPosition(x, y)
+    pokemon.setDepth(DEPTH.POKEMON)
+  }
+
+  private cancelPokemonClickCarry() {
+    if (!this.isClickCarrying || !this.pokemonDragged) return
+    this.returnPokemonToBoardCell(this.pokemonDragged)
+    this.clearPokemonCarryState()
+  }
+
+  private findDropZoneAt(
+    pointer: Phaser.Input.Pointer
+  ): Phaser.GameObjects.Zone | null {
+    const carried = this.pokemonDragged
+    const wasEnabled = carried?.input?.enabled ?? true
+    if (carried?.input) carried.input.enabled = false
+
+    const hits = this.input.hitTestPointer(pointer)
+    if (carried?.input) carried.input.enabled = wasEnabled
+
+    const zones = hits.filter(
+      (obj): obj is Phaser.GameObjects.Zone =>
+        obj instanceof Phaser.GameObjects.Zone &&
+        (obj.name === "sell-zone" || obj.name === "board-zone")
+    )
+    return zones.find((zone) => zone.name === "sell-zone") ?? zones[0] ?? null
+  }
+
+  private clearClickCarryDropHighlight(
+    zone: Phaser.GameObjects.Zone | null
+  ) {
+    if (!zone) return
+    if (zone.name === "sell-zone") {
+      this.sellZone?.onDragLeave()
+      return
+    }
+    if (zone.name === "board-zone") {
+      zone.getData("sprite")?.setFrame(0)
+    }
+  }
+
+  private applyClickCarryDropHighlight(
+    zone: Phaser.GameObjects.Zone | null
+  ) {
+    if (!zone) return
+    if (zone.name === "sell-zone") {
+      this.sellZone?.onDragEnter()
+      return
+    }
+    if (zone.name === "board-zone") {
+      zone.getData("sprite")?.setFrame(1)
+    }
+  }
+
+  private updateClickCarryDropHighlight(pointer: Phaser.Input.Pointer) {
+    const zone = this.findDropZoneAt(pointer)
+    if (zone === this.lastClickCarryDropZone) return
+
+    this.clearClickCarryDropHighlight(this.lastClickCarryDropZone)
+    this.applyClickCarryDropHighlight(zone)
+    this.lastClickCarryDropZone = zone
+  }
+
+  private tryDropClickCarriedPokemon(pointer: Phaser.Input.Pointer) {
+    if (!this.isClickCarrying || !this.pokemonDragged) return
+
+    const pokemon = this.pokemonDragged
+    const dropZone = this.findDropZoneAt(pointer)
+
+    this.skipNextPokemonPickup = true
+    this.isClickCarrying = false
+    document.body.classList.remove("grabbing")
+    this.hidePokemonDragUI()
+
+    if (dropZone) {
+      this.input.emit("drop", pointer, pokemon, dropZone)
+      return
+    }
+
+    this.returnPokemonToBoardCell(pokemon)
+    this.pokemonDragged = null
+  }
+
+  private handleClickCarryPointerDown(pointer: Phaser.Input.Pointer): boolean {
+    if (!this.isClickCarrying) return false
+    if (pointer.rightButtonDown()) {
+      this.cancelPokemonClickCarry()
+      return true
+    }
+    if (pointer.leftButtonDown()) {
+      this.tryDropClickCarriedPokemon(pointer)
+    }
+    return true
+  }
+
+  private canStartPokemonClickCarry(
+    gameObject: Phaser.GameObjects.GameObject
+  ): gameObject is PokemonSprite {
+    if (this.skipNextPokemonPickup) {
+      this.skipNextPokemonPickup = false
+      return false
+    }
+    if (this.dragStartedThisPress) return false
+    if (this.isClickCarrying) return false
+    if (this.pokemonDragged || this.itemDragged) return false
+    return gameObject instanceof PokemonSprite && gameObject.draggable
   }
 
   useitem(item: Item) {
@@ -420,6 +648,10 @@ export default class GameScene extends Scene {
   }
 
   resetDragState() {
+    if (this.isClickCarrying) {
+      this.cancelPokemonClickCarry()
+      return
+    }
     if (this.pokemonDragged) {
       this.input.emit(
         "dragend",
@@ -479,6 +711,9 @@ export default class GameScene extends Scene {
     }
 
     this.input.on("pointerdown", (pointer) => {
+      this.dragStartedThisPress = false
+      if (this.handleClickCarryPointerDown(pointer)) return
+
       if (
         pointer.leftButtonDown() &&
         this.minigameManager &&
@@ -540,29 +775,23 @@ export default class GameScene extends Scene {
     )
 
     this.input.on(
+      Phaser.Input.Events.GAMEOBJECT_POINTER_UP,
+      (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+        if (pointer.rightButtonReleased() || this.spectate) return
+        if (!this.canStartPokemonClickCarry(gameObject)) return
+        this.startPokemonClickCarry(gameObject, pointer)
+      }
+    )
+
+    this.input.on(
       "dragstart",
       (pointer, gameObject: Phaser.GameObjects.GameObject) => {
+        if (this.isClickCarrying) return
+        this.dragStartedThisPress = true
         if (gameObject instanceof PokemonSprite) {
           this.pokemonDragged = gameObject
           this.pokemonDragged.setDepth(DEPTH.DRAGGED_POKEMON)
-          this.dropSpots.forEach((spot) => {
-            if (
-              this.room?.state.phase === GamePhaseState.PICK ||
-              spot.getData("y") === 0
-            ) {
-              spot.setFrame(0).setVisible(true)
-            }
-          })
-
-          if (
-            this.sellZone &&
-            canSell(
-              this.pokemonDragged.name as Pkm,
-              this.room?.state.specialGameRule
-            )
-          ) {
-            this.sellZone.showForPokemon(this.pokemonDragged)
-          }
+          this.showPokemonDragUI(this.pokemonDragged)
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
           if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
@@ -580,32 +809,12 @@ export default class GameScene extends Scene {
         dragX: number,
         dragY: number
       ) => {
+        if (this.isClickCarrying) return
         const g = <Phaser.GameObjects.Container>gameObject
         g.x = dragX
         g.y = dragY
         if (g && this.pokemonDragged != null) {
-          const pkm = <Pkm>this.pokemonDragged!.name
-          const pokemon = new PokemonClasses[pkm](pkm)
-
-          this.dropSpots.forEach((spot) => {
-            const inBench = spot.getData("y") === 0
-            let visible = false
-            if (inBench) {
-              visible = pokemon.canBeBenched
-            } else if (this.room?.state.phase === GamePhaseState.PICK) {
-              visible = true
-            }
-            spot.setVisible(visible)
-          })
-          if (
-            this.sellZone?.visible === false &&
-            canSell(
-              this.pokemonDragged.name as Pkm,
-              this.room?.state.specialGameRule
-            )
-          ) {
-            this.sellZone.setVisible(true)
-          }
+          this.updatePokemonDragVisibility()
         }
       }
     )
@@ -712,6 +921,14 @@ export default class GameScene extends Scene {
     )
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
+      if (this.soldDuringDrag) {
+        this.soldDuringDrag = false
+        this.hidePokemonDragUI()
+        this.pokemonDragged = null
+        this.itemDragged = null
+        return
+      }
+      if (this.isClickCarrying) return
       this.sellZone?.hide()
       this.useItemZone?.hide()
       this.dropSpots.forEach((spot) => spot.setVisible(false))
