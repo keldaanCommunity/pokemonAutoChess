@@ -423,6 +423,20 @@ export default class CustomLobbyRoom extends Room {
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
+
+    // 10s so two attempts fit checkLobby's 20s of retries before it makes a second lobby (#3304)
+    this.clock.setInterval(async () => {
+      try {
+        if (!(await matchMaker.driver.has(this.roomId))) {
+          logger.warn(
+            `lobby listing for ${this.roomId} went missing, re-publishing it`
+          )
+          await this.setMetadata({})
+        }
+      } catch (error) {
+        logger.error(`could not check the listing of ${this.roomId}`, error)
+      }
+    }, 10000)
   }
 
   async onAuth(
