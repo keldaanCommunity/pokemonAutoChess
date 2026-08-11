@@ -244,15 +244,24 @@ export function GamePokemonDetail(props: {
 
   return (
     <div className="game-pokemon-detail">
-      <PokemonPortrait
-        className="game-pokemon-detail-portrait"
-        style={{ borderColor: RarityColor[pokemon.rarity] }}
-        portrait={{
-          index: pokemon.index,
-          shiny: props.shiny ?? pokemon.shiny,
-          emotion: props.emotion ?? pokemon.emotion
-        }}
-      />
+      <div className="game-pokemon-detail-portrait-wrap">
+        <PokemonPortrait
+          className="game-pokemon-detail-portrait"
+          style={{ borderColor: RarityColor[pokemon.rarity] }}
+          portrait={{
+            index: pokemon.index,
+            shiny: props.shiny ?? pokemon.shiny,
+            emotion: props.emotion ?? pokemon.emotion
+          }}
+        />
+        {getPokemonData(pokemon.name).regional && (
+          <img
+            src="assets/ui/pinpoint.svg"
+            alt=""
+            className="game-pokemon-detail-regional-icon"
+          />
+        )}
+      </div>
       {pokemon.index === PkmIndex[Pkm.EGG] &&
         "evolution" in pokemon &&
         pokemon.evolution != null && (
