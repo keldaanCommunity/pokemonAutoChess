@@ -119,6 +119,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Fix BURN damage not being applied when the source of the status is not a Pokémon, like embers board effect (thanks Thomas)
 - Fix some scenarios where HEAVY_DUTY_BOOTS were not preventing the board effect if the board effect spawns directly on their tile
 - Fix Garbodor not being able to trash Mulch and TMs
+- Fix Great Tusk's Headlong Rush so the main target always receives the intended damage even when other enemies are hit on the rush path.
 - On resurrection, Pokémon having done a mid-fight transformation that changes their stats will now keep those stat changes after resurrection. This includes: Palafin Hero, Mimikyu Busted, Hoopa Unbound, Darmanitan Zen, Galarian Darmanitan Zen, Aegislash Blade Form.
 
 # Elo adjustments
