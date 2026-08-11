@@ -111,6 +111,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Add in Wiki > Pokémon a tab for units that are not Pokémon
 - Uxie XP gained is now indicated in their tooltip
 - Added spectator count in game stage info bar (thanks to tegberen)
+- Added a regional marking for regional pokemon portraits
 
 # Bugfix
 

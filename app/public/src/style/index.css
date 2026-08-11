@@ -322,19 +322,16 @@ summary,
 }
 
 .pokemon-portrait.regional::after {
-  content: "R";
+  content: "";
   position: absolute;
-  top: -2px;
+  top: 0px;
   right: 0px;
-  height: 12px;
-  width: 12px;
-  font-size: 14px;
-  color: black;
-  text-shadow:
-    1px 1px 1px white,
-    -1px 1px 1px white,
-    1px -1px 1px white,
-    -1px -1px 1px white;
+  height: 16px;
+  width: 16px;
+  background-image: url("assets/ui/pinpoint.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .pokemon-portrait.acquired::before {

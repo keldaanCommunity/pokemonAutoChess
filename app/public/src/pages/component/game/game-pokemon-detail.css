@@ -45,6 +45,20 @@
   box-sizing: content-box;
 }
 
+.game-pokemon-detail-portrait-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.game-pokemon-detail-regional-icon {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  width: 25px;
+  height: 25px;
+}
+
 .game-pokemon-detail-portrait-hint {
   width: 60px;
   height: 60px;
