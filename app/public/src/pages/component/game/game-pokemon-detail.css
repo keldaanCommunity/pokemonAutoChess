@@ -53,8 +53,8 @@
 
 .game-pokemon-detail-regional-icon {
   position: absolute;
-  top: -1px;
-  right: -2px;
+  top: 0px;
+  left: 0px;
   width: 25px;
   height: 25px;
 }

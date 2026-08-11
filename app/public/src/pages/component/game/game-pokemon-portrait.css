@@ -53,7 +53,7 @@
   top: -1px;
   content: "";
   position: absolute;
-  right: calc(100% - var(--portrait-size) - 1px);
+  left: 0px;
   width: 1.4vw;
   height: 1.4vw;
   background-image: url("assets/ui/pinpoint.svg");
@@ -103,7 +103,7 @@
 .game-pokemon-portrait-planned-icon {
   position: absolute;
   top: 4px;
-  left: 4px;
+  right: calc(100% - var(--portrait-size) - 1px);
 }
 
 .game-pokemon-portrait-evolution-icon {
@@ -124,8 +124,8 @@
 }
 
 .game-pokemon-portrait-planned-icon {
-  width: 1.4vw;
-  height: 1.4vw;
+  width: 1vw;
+  height: 1vw;
   animation: rotateY 1s linear infinite;
 }
 

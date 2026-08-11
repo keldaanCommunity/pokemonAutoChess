@@ -312,7 +312,7 @@ summary,
   content: "";
   position: absolute;
   top: 2px;
-  right: 0px;
+  left: 0px;
   height: 12px;
   width: 12px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
@@ -325,7 +325,7 @@ summary,
   content: "";
   position: absolute;
   top: 0px;
-  right: 0px;
+  left: 0px;
   height: 16px;
   width: 16px;
   background-image: url("assets/ui/pinpoint.svg");
