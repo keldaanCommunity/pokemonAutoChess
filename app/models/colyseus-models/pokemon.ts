@@ -13689,7 +13689,7 @@ export class Tandemaus extends Pokemon {
   evolution = Pkm.MAUSHOLD_THREE
   evolutionRule = {
     type: EvolutionRuleType.STATE,
-    condition: (pokemon, player, state) => state && state.stageLevel >= 14
+    condition: (pokemon, player, state) => state && state.stageLevel >= 15
   } satisfies StateEvolutionRule
   passive = Passive.FAMILY
 }
