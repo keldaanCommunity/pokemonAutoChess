@@ -5253,7 +5253,7 @@ export class Gyarados extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.HYDRO_PUMP
+  skill = Ability.DRAGON_RAGE
   onAcquired(player: Player) {
     player.titles.add(Title.FISHERMAN)
   }

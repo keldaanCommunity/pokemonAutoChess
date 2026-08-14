@@ -122,6 +122,7 @@ import { DragonClawStrategy } from "./dragon-claw"
 import { DragonDartsStrategy } from "./dragon-darts"
 import { DragonEnergyStrategy } from "./dragon-energy"
 import { DragonPulseStrategy } from "./dragon-pulse"
+import { DragonRageStrategy } from "./dragon-rage"
 import { DragonTailStrategy } from "./dragon-tail"
 import { DrainPunchStrategy } from "./drain-punch"
 import { DreamEaterStrategy } from "./dream-eater"
@@ -839,6 +840,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAGON_DARTS]: new DragonDartsStrategy(),
   [Ability.DRAGON_ENERGY]: new DragonEnergyStrategy(),
   [Ability.DRAGON_PULSE]: new DragonPulseStrategy(),
+  [Ability.DRAGON_RAGE]: new DragonRageStrategy(),
   [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.DREAM_EATER]: new DreamEaterStrategy(),
