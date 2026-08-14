@@ -68,6 +68,10 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Change Unown M ability: all allies PP is set to max PP → all allies gain 50 PP (with PP overflow allowed). 
 - Psybeam (Staryu): CONFUSION duration 4 seconds at all ranks → 2/3/4/5 seconds
 
+> In our never ending quest of improving the abilities in the game, we give new tools for Gary. Hydro pump was always a very weird choice for Gyarados.
+
+- New ability for Gyarados Dragon Rage Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value.
+
 # Changes to Synergies
 
 - Change Bug 8: Get ~~5~~ → 4 copies of BUG Pokémon. New: Get a Bug Nest. If you have space on bench, a copy of your lowest rarity and not fully evolved BUG Pokémon will spawn each round.

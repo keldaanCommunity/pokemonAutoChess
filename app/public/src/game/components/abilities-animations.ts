@@ -1783,6 +1783,11 @@ export const AbilitiesAnimations: {
     scale: 2,
     ability: Ability.DARK_HARVEST
   }),
+  [Ability.DRAGON_RAGE]: projectile({
+    duration: 300,
+    scale: 2,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
+  }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
   [Ability.SOLAR_BEAM]: projectile({
     oriented: true,
