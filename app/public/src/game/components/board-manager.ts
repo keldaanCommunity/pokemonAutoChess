@@ -1004,6 +1004,7 @@ export default class BoardManager {
         }
 
         case "action":
+          pokemonSprite.action = value as IPokemon["action"]
           this.animationManager.animatePokemon(
             pokemonSprite,
             value as IPokemon["action"],

@@ -3467,7 +3467,7 @@
 		"FUR_COAT": "Its fur grows, giving +2 DEF and -5 SPEED each stage. Can get groomed by staying one stage on the bench, which reset its DEF and SPEED stats. When groomed at max stacks, get a SILK_SCARF.",
 		"ACCELERATION": "Acceleration: gain 15 SPEED every tile you move (jumps and dashes count for one)",
 		"MELTAN": "When used on $t(pkm.MELMETAL), merges with it to give it 50 permanent max HP. If Meltan was holding items, they are dropped.",
-		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 3 GOLD each, up to 6 troopers.\nAt the start of the battle, all troopers on your bench join Falinks Brass, combining their base ATK and DEF and giving their base HP as SHIELD.",
+		"FALINKS": "Falinks Troopers now have a [4,LK]% chance to show up in your shop, costing 3 GOLD each, up to 6 troopers.\nAt the start of the battle, all troopers on your bench not training join Falinks Brass, combining their base ATK and DEF and giving their base HP as SHIELD.",
 		"FLABEBE_COLOR": "Their color indicates the first FLORA bud to blossom",
 		"DUNSPARCE": "Dunsparce will evolve after digging 20 times in the ground",
 		"PACHIRISU": "Has [30,LK]% chance to find a buried SITRUS_BERRY after each fight",

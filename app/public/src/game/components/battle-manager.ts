@@ -1354,7 +1354,13 @@ export default class BattleManager {
     if (trooperName === null) return
 
     const troopersBenchSprites = [...this.scene.board!.pokemons.values()]
-      .filter((p) => p.name === trooperName && isOnBench(p) && p.playerId === playerId)
+      .filter(
+        (p) =>
+          p.name === trooperName &&
+          isOnBench(p) &&
+          p.playerId === playerId &&
+          p.pokemon.action !== PokemonActionState.TRAINING
+      )
       .slice(0, MaxTroopersPerPkm[trooperChief.name])
 
     if (trooperChiefSprite.troopers) {
