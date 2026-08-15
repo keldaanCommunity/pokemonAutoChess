@@ -4943,6 +4943,8 @@
 			"missing_points_answer": "Only Ranked game mode enables elo gains and losses.",
 			"damage": "What are the special damages and physical damages ?",
 			"damage_answer": "Auto attacks mostly deal Physical damage, while Abilities mostly deal Special damage. Some abilities however can deal true damage or physical damage.",
+			"elimination_rank": "Why am I below a player who got eliminated before me ?",
+			"elimination_rank_answer": "Final placement is based on players' life totals after round damage is applied, not on which fight ends first. The game ranks players by highest remaining life, with level used as a tie-breaker. Players are marked as eliminated afterward, so if multiple players are eliminated in the same round, the player with the higher final life total can finish above someone whose fight ended earlier. Battle duration and elimination timing do not determine the ranking.",
 			"shiny": "How do you get shiny Pokémon ?",
 			"shiny_answer": "By unlocking or buying a shiny Pokémon emotion in your collection. Select that shiny emotion, then you will get that one Pokémon as a shiny ingame.",
 			"support": "How can i support the game ?",
