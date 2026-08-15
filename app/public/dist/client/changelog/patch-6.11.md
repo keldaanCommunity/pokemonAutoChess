@@ -116,6 +116,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Uxie XP gained is now indicated in their tooltip
 - Added spectator count in game stage info bar (thanks to tegberen)
 - Added a regional marking for regional pokemon portraits
+- Added a FAQ entry for the game logic when 2 players lose in the same turn
 
 # Bugfix
 
