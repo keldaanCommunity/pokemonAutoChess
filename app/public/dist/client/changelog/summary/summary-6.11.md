@@ -16,11 +16,11 @@
 
 ## Reach for the stars
 
-The new Star Piece item grants an extra star. Abilities now scale across an additional power tier.
+The new Star Piece shiny item grants an extra star. Abilities can now scale across an additional power tier.
 
 ## Take the field
 
-Bug, Monster, Grass, and Dark synergies have been reworked to open up new strategies.
+Bug 8 and Razor Fang have been reworked to open up new strategies.
 
 ## Save your matches
 
