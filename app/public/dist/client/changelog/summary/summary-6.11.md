@@ -16,7 +16,7 @@
 
 ## Reach for the stars
 
-Abilities now scale across an additional power tier, to get more consistency on some edge cases. Also, the new Star Piece item grants an extra star.
+The new Star Piece item grants an extra star. Abilities now scale across an additional power tier.
 
 ## Take the field
 
