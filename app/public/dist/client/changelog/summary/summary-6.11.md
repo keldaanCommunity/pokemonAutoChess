@@ -16,11 +16,11 @@
 
 ## Reach for the stars
 
-Abilities now scale across an additional power tier, making every star level matter even more. The new Star Piece item grants an extra star and unlocks the highest ability tier.
+Abilities now scale across an additional power tier, to get more consistency on some edge cases. Also, the new Star Piece item grants an extra star.
 
 ## Take the field
 
-Bug, Monster, Grass, and Dark synergies have been reworked to open up new strategies. New tools such as Substitute, Gold Mask, and revamped Fairy Wands also bring fresh options to the board.
+Bug, Monster, Grass, and Dark synergies have been reworked to open up new strategies.
 
 ## Save your matches
 
