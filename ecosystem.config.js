@@ -2,6 +2,16 @@
 const os = require("os")
 require("dotenv").config()
 
+const deployHosts = process.env.DEPLOY_HOSTS?.split(",") || []
+const deploymentDefaults = {
+  user: "root",
+  ref: "origin/prod",
+  repo: "https://github.com/keldaanCommunity/pokemonAutoChess.git",
+  path: "/home/deploy",
+  "post-deploy":
+    "source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm ci --include=dev && npm run assetpack && npm run build"
+}
+
 module.exports = {
   apps: [
     {
@@ -18,15 +28,10 @@ module.exports = {
       interpreter: "node@24.19.0"
     }
   ],
-  deploy: {
-    production: {
-      user: "root",
-      host: process.env.DEPLOY_HOSTS?.split(",") || [],
-      ref: "origin/prod",
-      repo: "https://github.com/keldaanCommunity/pokemonAutoChess.git",
-      path: "/home/deploy",
-      "post-deploy":
-        "source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm ci --include=dev && npm run assetpack && npm run build"
-    }
-  }
+  deploy: Object.fromEntries(
+    deployHosts.map((host, index) => [
+      `production-${index + 1}`,
+      { ...deploymentDefaults, host }
+    ])
+  )
 }
