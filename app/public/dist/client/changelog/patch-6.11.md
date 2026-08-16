@@ -31,6 +31,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Mystical Fire (Fennekin): AP reduction 20 → 15/20/25/50
 - Nutrients: healing 40 → 20/30/40/80 ; DEF/SPE_DEF buff: 2 → 1/2/3/6
 - Origin Pulse (Kyogre): 100 SPECIAL → 50/75/100/120/150 ; Primal Kyogre PP 90 → 100
+- Precipice Blades (Groudon): 25/50/100/120 SPECIAL → 25/50/100/120/200
 - Prismatic Laser (Necrozma): 60 SPECIAL → 30/40/50/60/120 SPECIAL
 - Quiver Dance (Burmy): ATK & SPE_DEF buff 5 → 3/4/5/10, SPEED buff 10 → 10/10/10/15
 - Struggle Bug (Illumise): AP reduction 50 → 30
