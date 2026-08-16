@@ -716,7 +716,6 @@ export class OnToggleReadyCommand extends Command<
 
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
-        this.state.gameMode !== GameMode.DOUBLE_UP &&
         this.state.users.size === nbExpectedPlayers &&
         schemaValues(this.state.users).every((user) => user.ready)
       ) {
