@@ -14,6 +14,10 @@
 ![Perrserker](/assets/portraits/0863/Normal.png)
 ![Pikachu Libre](/assets/portraits/0025/0006/Normal.png)
 
+## Work as a team
+
+The new Double Up game mode let you team up with a partner and battle against other duos.
+
 ## Reach for the stars
 
 The new Star Piece shiny item grants an extra star. Abilities can now scale across an additional power tier.
