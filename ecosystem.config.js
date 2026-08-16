@@ -9,7 +9,7 @@ const deploymentDefaults = {
   repo: "https://github.com/keldaanCommunity/pokemonAutoChess.git",
   path: "/home/deploy",
   "post-deploy":
-    "source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm ci --include=dev && npm run build-prod" // && npm run assetpack
+    "source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm run build-prod" // && npm ci --include=dev && npm run assetpack
 }
 
 module.exports = {
