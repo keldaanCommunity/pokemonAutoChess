@@ -12,6 +12,7 @@ import {
   getAltFormForPlayer,
   RegionDetails
 } from "../../config"
+import { InimitableAbilities } from "../../config/game/abilities"
 import { SynergyTiers } from "../../config/game/synergies"
 import type Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
@@ -59,7 +60,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
@@ -14172,11 +14173,15 @@ export class Smeargle extends Pokemon {
 
   onSpawn({ entity }) {
     if (entity.player) {
-      const allyOnTheLeft = entity.player.getPokemonAt(
+      const allyOnTheLeft: IPokemon | null = entity.player.getPokemonAt(
         this.positionX - 1,
         this.positionY
       )
-      if (allyOnTheLeft && entity.skill === Ability.SKETCH) {
+      if (
+        allyOnTheLeft &&
+        entity.skill === Ability.SKETCH &&
+        !isIn(InimitableAbilities, allyOnTheLeft.skill)
+      ) {
         entity.maxPP = allyOnTheLeft.maxPP
         entity.skill = allyOnTheLeft.skill
         entity.stars = allyOnTheLeft.stars
