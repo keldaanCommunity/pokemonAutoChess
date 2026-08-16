@@ -1752,7 +1752,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos os efeitos de status e concede [20,40,80,160,SP] de SHIELD para cada aliado",
-		"PRECIPICE_BLADES": "Inflige [25,50,100,200,SP] de SPECIAL a todas as unidades inimigas na mesma coluna ou linha do atacante",
+		"PRECIPICE_BLADES": "Inflige [25,50,100,200,400,SP] de SPECIAL a todas as unidades inimigas na mesma coluna ou linha do atacante",
 		"SONG_OF_DESIRE": "Aplica CHARM em [1,1,2,3] oponentes na linha de fundo por 3 segundos e reduz seus ATK em [3,SP]",
 		"CONFUSING_MIND": "Aplica CONFUSION em [1,2,3,5] oponentes na linha de fundo por [3,SP] segundos",
 		"KNOWLEDGE_THIEF": "Lançar a habilidade do alvo. O jogador aliado ganha [1,1,1,2,3] XP.",

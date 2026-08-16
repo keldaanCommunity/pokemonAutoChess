@@ -1790,7 +1790,7 @@
 	"ability_description": {
 		"DEFAULT": "",
 		"SOFT_BOILED": "移除所有我方宝可梦的全部异常状态，并使他们获得[20,40,80,160,SP]点SHIELD。",
-		"PRECIPICE_BLADES": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[25,50,100,200,SP]点SPECIAL。",
+		"PRECIPICE_BLADES": "对与使用者处于同一横排或纵列上的所有敌方宝可梦造成[25,50,100,200,400,SP]点SPECIAL。",
 		"SONG_OF_DESIRE": "使敌方后排的[1,1,2,3]只宝可梦陷入CHARM 3秒，并降低其[3,SP]点ATK。",
 		"CONFUSING_MIND": "使敌方后排的[1,2,3,5]只宝可梦陷入CONFUSION [3,SP]秒。",
 		"KNOWLEDGE_THIEF": "释放目标的招式（除非其INIMITABLE）。玩家获得[1,1,1,2,3]点局内XP。",

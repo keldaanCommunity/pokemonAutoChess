@@ -11,7 +11,7 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
+    const damage = [25, 50, 100, 200, 400][pokemon.stars - 1] ?? 400
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
         (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
