@@ -1785,7 +1785,8 @@
 		"SWARM": "虫群呼唤",
 		"FLING": "投掷",
 		"REVELATION_DANCE": "觉醒之舞",
-		"THUNDERCLAP_PRESS": "雷霆重压"
+		"THUNDERCLAP_PRESS": "雷霆重压",
+		"DRAGON_RAGE": "龙之怒"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2350,7 +2351,8 @@
 		"SWARM": "从虫巢中召唤场上的一只我方BUG宝可梦的复制。每次释放此招式时，提升被召唤宝可梦的稀有度上限。",
 		"FLING": "若携带着BALL，本次投球时使用者和接球者之间的所有敌方宝可梦受到SPECIAL，数值相当于使用者[30,30,30,100,SP]%的SPEED。若未携带BALL，则改为跳至战场一角并获得一个新的BALL。",
 		"REVELATION_DANCE": "跳舞，在ADJACENT格子上生成羽毛。被羽毛击中的敌方宝可梦受到[15,30,50,80,SP]点SPECIAL，我方宝可梦根据此宝可梦的风格获得以下增幅——\n热辣热辣风格：提升[3,6,10,15,SP]点SPEED\n啪滋啪滋风格：提升[2,4,6,10,SP]点ATK\n呼拉呼拉风格：提升[2,4,6,10,SP]点SPE_DEF\n轻盈轻盈风格：获得[15,30,50,80,SP]点SHIELD",
-		"THUNDERCLAP_PRESS": "用带电的身体压制目标，将其击退。其和击退路径上的敌方宝可梦陷入PARALYSIS 4秒，并受到[20,40,80,160,SP]点SPECIAL。"
+		"THUNDERCLAP_PRESS": "用带电的身体压制目标，将其击退。其和击退路径上的敌方宝可梦陷入PARALYSIS 4秒，并受到[20,40,80,160,SP]点SPECIAL。",
+		"DRAGON_RAGE": "获得[15,30,45,60,SP]点SHIELD。接下来的6秒内，每秒再获得[5,10,15,20]点SHIELD，并对ADJACENT敌方宝可梦造成[5,10,15,20,SP]点SPECIAL。此招式效果结束时，消耗剩余的SHIELD，恢复HP，数值相当于40%的消耗量。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3465,7 +3467,7 @@
 		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战区停留一轮以进行修剪，重置DEF和SPEED修正。若修剪前修正层数达到了上限，还会获得一条SILK_SCARF。",
 		"ACCELERATION": "加速：每移动1格，提升15点SPEED（跳跃或冲刺等位移行为仅算作1格）。",
 		"MELTAN": "拖动至$t(pkm.MELMETAL)的位置松开可将其融合，永久提升其50点最大HP。",
-		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为3 GOLD，至多拥有6只。\n每轮战斗开始时，备战区上的所有跟班会加入头头的战斗，每只跟班为头头提供自身的基础ATK和DEF，并使其获得SHIELD，数值相当于各跟班的基础HP。",
+		"FALINKS": "商店中现在有[4,LK]%的概率刷出列阵兵跟班，其价格为3 GOLD，至多拥有6只。\n每轮战斗开始时，备战区上的所有未在训练的跟班会加入头头的战斗，每只跟班为头头提供自身的基础ATK和DEF，并使其获得SHIELD，数值相当于各跟班的基础HP。",
 		"FLABEBE_COLOR": "她们的颜色据说和第一朵开放的FLORA花朵有关……",
 		"DUNSPARCE": "土龙弟弟在进行20次挖掘后进化。",
 		"PACHIRISU": "每轮战斗后有[30,LK]%的概率从战场上挖出一枚SITRUS_BERRY。",
@@ -4049,7 +4051,7 @@
 			},
 			"row": {
 				"phase": "第{{stage}}轮： {{phase}}",
-				"elimination": "{{player}}被淘汰",
+				"elimination": "{{player}}出局",
 				"round_win": "对战{{opponent}}：胜利",
 				"round_loss": "对战{{opponent}}：失败",
 				"round_draw": "对战{{opponent}}：平局",
@@ -4941,6 +4943,8 @@
 			"missing_points_answer": "只有排位模式能够影响elo分数。",
 			"damage": "物理伤害和特殊伤害是什么？",
 			"damage_answer": "普通攻击通常造成物理伤害，招式大多造成特殊伤害。部分招式可能造成物理或真实伤害。",
+			"elimination_rank": "为什么有人比我先出局，名次却比我高？",
+			"elimination_rank_answer": "名次是根据玩家在战斗轮结束后的最终生命值决定的。生命值相同的情况下，会比较局内等级。战斗轮完全结束后才会记录本轮出局玩家，因此多名玩家在同一轮内出局时，生命值较高者的名次会高于较早出局者。战斗时长和出局的具体时间点和名次没有关联。",
 			"shiny": "如何获得闪光宝可梦？",
 			"shiny_answer": "可以打开补充包解锁或在收藏页面购买闪光宝可梦表情。选择那个闪光表情，即可在游戏中将那只宝可梦闪光化。",
 			"support": "如何支持这个游戏？",
