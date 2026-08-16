@@ -422,7 +422,6 @@ export class Substitute extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.SUBSTITUTE
-  canHoldItems = false
 }
 
 export class Egg extends Pokemon {
