@@ -1,6 +1,6 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Orientation } from "../../types/enum/Game"
-import { min } from "../../utils/number"
+import { max } from "../../utils/number"
 import { OrientationVector } from "../../utils/orientation"
 import type { Board } from "../board"
 import { PeriodicEffect } from "../effects/effect"
@@ -19,7 +19,7 @@ class DragonRageEffect extends PeriodicEffect {
         if (this.ticksRemaining < 0) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DRAGON_RAGE)
-          const shieldToConvert = min(this.shieldGiven)(pokemon.shield)
+          const shieldToConvert = max(pokemon.shield)(this.shieldGiven)
           pokemon.addShield(-shieldToConvert, pokemon, 0, false)
           pokemon.handleHeal(
             Math.round(shieldToConvert * 0.4),
