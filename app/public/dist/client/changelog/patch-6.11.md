@@ -1,5 +1,9 @@
 
-# New Pokemons:
+# Double Up game mode and Poképals event
+
+A new 2v2v2v2 game mode has been added, based on tegberen's work on the "John Auto Chess" community server. You can now team up with a partner to face off against 3 other duos. This mode does not affect players' Elo ratings, but a new monthly event "Poképals" will determine the best duo of the server !
+
+# New Pokemons
 
 - Passimian
 - Oricorio (Baile Style)
