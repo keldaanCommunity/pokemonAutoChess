@@ -2199,7 +2199,7 @@
 		"VISE_GRIP": "将目标从两侧夹住，对其造成[30,60,100,200,SP]点SPECIAL。使用者与目标均陷入LOCKED 4秒，且在此期间使用者提升DEF和SPE_DEF，数值相当于目标对应属性的[100,SP]%。",
 		"BURN_UP": "使用者自身陷入BURN 3秒，并对目标造成[50,100,200,SP]点SPECIAL。",
 		"LANDS_WRATH": "大地破裂，对目标和ADJACENT敌方宝可梦造成SPECIAL，数值相当于[20,30,40,80,SP]加[100,100,100,200,SP]%的ATK，然后降低他们[5,5,5,10,SP]点DEF和SPE_DEF。",
-		"THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[40,50,60,100,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
+		"THOUSAND_ARROWS": "发射33支攻击随机格子的能量箭，对击中的目标造成[20,40,60,80,160,SP]点SPECIAL。被击中的敌人还会陷入LOCKED 1秒。",
 		"CORE_ENFORCER": "对目标周围的Z形区域造成[40,60,80,160,SP]点SPECIAL，并使击中的敌方宝可梦陷入SILENCE 3秒。",
 		"POWER_HUG": "对目标造成[40,80,160,320,SP]点SPECIAL，并使其陷入LOCKED和PARALYSIS [3,3,6,10,SP]秒。",
 		"MORTAL_SPIN": "击退任何正在攻击使用者且与之距离不超过1的宝可梦，对他们造成[20,40,80,160,SP]点SPECIAL，并使他们陷入POISONNED [4,4,8,16,SP]秒。",

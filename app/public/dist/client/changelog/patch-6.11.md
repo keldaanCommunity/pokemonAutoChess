@@ -20,6 +20,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
 - After You (Indeedee): SPEED buff: 10 → 5/10/15/20
 - Behemoth Blade (Zacian): 100 SPECIAL at all tiers → 30/60/90/120/240 SPECIAL
+- Core Enforcer (Zygarde 100%): 80 SPECIAL at all tiers → 20/40/60/80/160 SPECIAL
 - Crunch (Totodile, Guzzlord): 40/80/150 → 40/80/160/320 SPECIAL
 - Flame Wheel (Cyndaquil): 10/20/30 → 10/20/40/80 SPECIAL
 - Hyper Drill (Dunsparce): 50 SPECIAL at all tiers → 10/20/40/50/100 SPECIAL
