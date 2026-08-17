@@ -1,4 +1,5 @@
-import { Passive } from "../../types/enum/Passive";
+import { Passive } from "../../types/enum/Passive"
+import { max } from "../../utils/number"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -19,10 +20,19 @@ export class TimeTravelStrategy extends AbilityStrategy {
       pokemon.player &&
       !pokemon.isGhostOpponent &&
       pokemon.player.life < 100 &&
-      pokemon.passive === Passive.CELEBI
+      pokemon.passive === Passive.CELEBI &&
+      (!pokemon.player.doubleUpPartnerId || pokemon.count.ult === 1)
     ) {
       pokemon.player.life += 1
       pokemon.addStack()
+      if (pokemon.player.doubleUpPartnerId) {
+        const partner = pokemon.simulation.room.state.players.get(
+          pokemon.player.doubleUpPartnerId
+        )
+        if (partner) {
+          partner.life = max(100)(partner.life + 1)
+        }
+      }
     }
   }
 }
