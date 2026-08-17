@@ -68,7 +68,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
 
     player.board.forEach((pkm, id) => {
       if (
-        pkm.index == pokemon.index &&
+        pkm.name === pokemon.name &&
         !pkm.items.has(Item.EVIOLITE) &&
         pokemonsBeforeEvolution.length < this.numberRequired
       ) {

@@ -2240,7 +2240,7 @@ export class Poliwhirl extends Pokemon {
       if (
         Math.max(
           ...schemaValues(player.board)
-            .filter((pkm) => pkm.index === this.index)
+            .filter((pkm) => pkm.name === this.name)
             .map((v) => v.positionY)
         ) === 3
       ) {
@@ -15119,9 +15119,8 @@ export const burmyDivergentEvolutionRule = (
 ): StateEvolutionRule => ({
   type: EvolutionRuleType.STATE,
   condition: (pokemon: IPokemon, player: IPlayer, state: GameState) => {
-    //TOFIX: how to get stage level here ?
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     if (copies.length >= 3) return true
     return (
@@ -15132,7 +15131,7 @@ export const burmyDivergentEvolutionRule = (
   },
   divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     if (copies.length >= 3) return wormadam
     return Pkm.MOTHIM
