@@ -206,6 +206,10 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           targetX: secondHitTarget.positionX,
           targetY: secondHitTarget.positionY
         })
+
+        if (pokemon.items.has(Item.RAZOR_FANG)) {
+          secondHitTarget.status.triggerArmorReduction(2000, secondHitTarget)
+        }
       }
     }
   }
