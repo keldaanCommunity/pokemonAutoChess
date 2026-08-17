@@ -5246,11 +5246,11 @@ export class Gyarados extends Pokemon {
   ])
   rarity = Rarity.SPECIAL
   stars = 3
-  hp = 290
+  hp = 300
   atk = 28
   speed = 51
-  def = 9
-  speDef = 2
+  def = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_RAGE

@@ -76,7 +76,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 > In our never ending quest of improving the abilities in the game, we give new tools for Gary. Hydro pump was always a very weird choice for Gyarados.
 
 - New ability for Gyarados Dragon Rage Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value.
-- Nerf -10 HP & -1 DEF
+- Gyarados Def: 9 → 6 ; Spe. Def: 2 → 5 ; on Stage 9 PvE fight only, AP -50
 
 # Changes to Synergies
 
