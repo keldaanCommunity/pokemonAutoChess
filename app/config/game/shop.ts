@@ -112,6 +112,7 @@ export const SellPrices = {
   WISHIWASHI_SCHOOL: 10,
   REMORAID: 2,
   OCTILLERY: 7,
+  PIKACHU: 3,
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,
