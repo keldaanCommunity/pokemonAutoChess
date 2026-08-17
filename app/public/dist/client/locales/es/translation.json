@@ -2096,7 +2096,7 @@
 		"MULTI_ATTACK": "Inflige [7,10,13,20,SP] de SPECIAL a los enemigos que lo rodeen, multiplicado por la suma de los niveles de sinergia de $t(pkm.SILVALLY)",
 		"STICKY_WEB": "Inflige [20,35,70,140,SP] de SPECIAL al objetivo y proyecta una red a su alrededor. Pokémon que caminen en la red quedan PARALYSIS por 2 segundos.",
 		"ACCELEROCK": "Salta al enemigo más lejano y lo ataca inmediatamente, infligiendo [100,125,250,SP]% de ATK como SPECIAL. Reduce la DEF del usuario en 2 y aumenta su SPEED en un 5 hasta [5,SP] veces.",
-		"PETAL_BLIZZARD": "Hace [10,20,30,50,SP] de SPECIAL a los enemigos que lo rodeen y gana 10 AP",
+		"PETAL_BLIZZARD": "Hace [30,SP] de SPECIAL a los enemigos que lo rodeen y gana 10 AP",
 		"SUNSTEEL_STRIKE": "Salta y aterriza al medio del equipo enemigo con el poder de un meteoro, infligiendo [40,60,80,150,SP] de SPECIAL a los enemigos adyacentes",
 		"MOONGEIST_BEAM": "Hace [60,80,100,200,SP] de SPECIAL a todos los Pokémon enemigos en una línea recta y los deja PARALYSIS por 3 segundos. Aliados en el rayo ganan [60,80,100,200,SP] de SHIELD.",
 		"FLEUR_CANNON": "Manda un devastador rayo laser que inflige [50,75,100,200,SP] de SPECIAL a todos los enemigos en el rayo. Reduce el AP del emisor en 20",

@@ -2087,7 +2087,7 @@
 		"MULTI_ATTACK": "Fügt umstehenden Feinden [7,10,13,20,SP] SPECIAL zu, multipliziert mit der Summe der Synergiestufen von $t(pkm.SILVALLY)",
 		"STICKY_WEB": "Fügt dem Ziel [20,35,70,140,SP] SPECIAL zu und projiziert ein Netz um es herum. Pokémon, die auf dem Netz laufen, sind 2 Sekunden lang PARALYSIS.",
 		"ACCELEROCK": "Springt neben den am weitesten entfernten Gegner und greift ihn sofort an, wobei er [100,125,250,SP]% der ATK als SPECIAL verursacht. Reduziert die DEF des Benutzers um 2 und erhöht seine SPEED um 5 bis zum [5,SP]-fachen.",
-		"PETAL_BLIZZARD": "Verursacht [10,20,30,50,SP] SPECIAL an umstehenden Feinden und erhält 10 AP",
+		"PETAL_BLIZZARD": "Verursacht [30,SP] SPECIAL an umstehenden Feinden und erhält 10 AP",
 		"SUNSTEEL_STRIKE": "Springt und landet mit der Kraft eines Meteors in der Mitte des gegnerischen Teams und fügt benachbarten Feinden [40,60,80,150,SP] SPECIAL",
 		"MOONGEIST_BEAM": "Fügt allen gegnerischen Pokémon in einer geraden Linie [60,80,100,200,SP] SPECIAL zu und macht sie für 3 Sekunden PARALYSIS. Verbündete im Strahl erhalten [60,80,100,200,SP] SHIELD.",
 		"FLEUR_CANNON": "Sendet einen verheerenden Laserstrahl aus, der allen Feinden im Strahl [100,SP] SPECIAL zufügt. Verringert die AP des Zaubernden um 20",

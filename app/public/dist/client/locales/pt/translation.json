@@ -2069,7 +2069,7 @@
 		"MULTI_ATTACK": "Cause [7,10,13,20,SP] SPECIAL a Pokémon inimigos ADJACENT, multiplicado pela soma dos níveis de todas as sinergias $t(pkm.SILVALLY).",
 		"STICKY_WEB": "Cause [20,35,70,140,SP] SPECIAL ao alvo e projete uma teia ao redor dele. BOARD_EFFECT: Pokémon que caminharem sobre a teia sofrem PARALYSIS por 2 segundos.",
 		"ACCELEROCK": "Pule para perto do inimigo mais distante e cause [100,125,250,SP]% de ATK como SPECIAL a ele. Reduza imediatamente a DEF do usuário em 2 e aumente sua SPEED em 5 até [5,SP] vezes.",
-		"PETAL_BLIZZARD": "Cause [10,20,30,50,SP] SPECIAL a todos os Pokémon inimigos ADJACENT e ganhe 10 AP.",
+		"PETAL_BLIZZARD": "Cause [30,SP] SPECIAL a todos os Pokémon inimigos ADJACENT e ganhe 10 AP.",
 		"SUNSTEEL_STRIKE": "Pule e pouse no meio da equipe inimiga com o poder de um meteoro, causando [40,60,80,150,SP] SPECIAL a todos os Pokémon inimigos ADJACENT.",
 		"MOONGEIST_BEAM": "Cause [60,80,100,200,SP] SPECIAL a todos os Pokémon inimigos em uma linha atrás do alvo e inflija-lhes PARALYSIS por 3 segundos. Pokémon aliados no feixe ganham [60,80,100,200,SP] SHIELD.",
 		"FLEUR_CANNON": "Lance um feixe de laser devastador, causando [50,75,100,200,SP] SPECIAL a todos os Pokémon inimigos no caminho e reduza o AP do usuário em 20.",

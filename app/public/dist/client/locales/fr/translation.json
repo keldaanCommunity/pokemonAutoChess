@@ -2099,7 +2099,7 @@
 		"MULTI_ATTACK": "Inflige [7,10,13,20,SP] SPECIAL aux ennemis ADJACENT, multiplié par la somme des niveaux de synergies de $t(pkm.SILVALLY).",
 		"STICKY_WEB": "Inflige [20,35,70,140,SP] SPECIAL à la cible et projette une toile autour d'elle. BOARD_EFFECT : Les Pokémon marchant sur la toile subissent PARALYSIS pendant 2 secondes.",
 		"ACCELEROCK": "Saute à côté de l'ennemi le plus éloigné et l'attaque, lui infligeant [100,125,250,SP]% de l'ATK en SPECIAL. Réduit immédiatement la DEF du lanceur de 2 et augmente sa SPEED de 5 jusqu'à [5,SP] fois.",
-		"PETAL_BLIZZARD": "Inflige [10,20,30,50,SP] SPECIAL à tous les ennemis ADJACENT et gagne 10 de AP.",
+		"PETAL_BLIZZARD": "Inflige [30,SP] SPECIAL à tous les ennemis ADJACENT et gagne 10 de AP.",
 		"SUNSTEEL_STRIKE": "S'envole et atterrit au milieu de l'équipe adverse avec la puissance d'un météore, infligeant [40,60,80,150,SP] SPECIAL à tous les ennemis ADJACENT.",
 		"MOONGEIST_BEAM": "Inflige [60,80,100,200,SP] SPECIAL et PARALYSIS pendant 3 secondes à tous les ennemis alignés derrière la cible. Les alliés pris dans le rayon gagnent [60,80,100,200,SP] SHIELD.",
 		"FLEUR_CANNON": "Un rayon laser dévastateur inflige [50,75,100,200,SP] SPECIAL à tous les ennemis sur son chemin. Réduit la AP du lanceur de 20 après chaque tir.",
