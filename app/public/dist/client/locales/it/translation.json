@@ -1965,7 +1965,7 @@
 		"NATURAL_GIFT": "Cura [30,60,90,150,SP] HP al Pokèmon alleato più ferito e riceve SAFEGUARD per [1,2,3,6] secondi.",
 		"NIGHT_SHADE": "Infliggi il [12.5,16.5,25,35,ND=1]% + [12.5,16.5,25,35,SP,ND=1]% dei HP massimi del bersaglio come TRUE.",
 		"CHARGE_BEAM": "Spara un fascio di elettricità concentrato che si propaga ad un massimo di 3 bersagli adiacenti, infliggendo ad ognuno [15,30,60,120,SP] SPECIAL.",
-		"POPULATION_BOMB": "Infliggi 10 SPECIALI per [4,8,12,16,20,SP] volte.",
+		"POPULATION_BOMB": "Infliggi 10 SPECIALI per [4,8,12,16,32,SP] volte.",
 		"SCREECH": "Riduci la DEF di ogni nemico adiacente di [2,4,8,16].",
 		"SAND_TOMB": "Infliggi [10,20,40,80,SP] SPECIAL e causa SILENCE e PARALYSIS per [3,5,8,16,SP] secondi.",
 		"WHIRLWIND": "Infliggi [40,80,120,240,SP] SPECIAL e fai volare via il bersaglio.",

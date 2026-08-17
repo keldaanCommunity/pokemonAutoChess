@@ -2040,7 +2040,7 @@
 		"NATURAL_GIFT": "Cura [30,60,90,150,SP] de HP al aliado mas dañado y le otorga SAFEGUARD por [1,2,3,6] segundos",
 		"NIGHT_SHADE": "Inflige [12.5,16.5,25,35,ND=1]% + [12.5,16.5,25,35,SP,ND=1]% del HP máximo del objetivo como TRUE",
 		"CHARGE_BEAM": "Dispara electricidad concentrada que se propaga hasta un máximo de 3 Pokémon enemigos en una casilla ADJACENT entre sí, causando [15,30,60,120,SP] de SPECIAL a cada uno.",
-		"POPULATION_BOMB": "Inflige 10 de SPECIAL [4,8,12,16,20,SP] veces al objetivo.",
+		"POPULATION_BOMB": "Inflige 10 de SPECIAL [4,8,12,16,32,SP] veces al objetivo.",
 		"SCREECH": "Reduce la DEF de todos los enemigos en un rango de 2 casillas en [2,4,8,16,SP].",
 		"SAND_TOMB": "Inflige [10,20,40,80,SP] de SPECIAL, causa SILENCE y PARALYSIS por [3,5,8,16] segundos",
 		"WHIRLWIND": "Inflige [40,80,120,240,SP] de SPECIAL y hace volar por los aires al objetivo",

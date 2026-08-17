@@ -2060,7 +2060,7 @@
 		"NATURAL_GIFT": "Heal the most damaged allied Pokémon for [30,60,90,150,SP] HP and grant them SAFEGUARD for [1,2,3,6] seconds.",
 		"NIGHT_SHADE": "Deal [12.5,16.5,25,35,ND=1]% + [12.5,16.5,25,35,SP,ND=1]% of target's max HP as TRUE.",
 		"CHARGE_BEAM": "Fire a concentrated bundle of electricity that propagates to a maximum of 3 ADJACENT enemy Pokémon, dealing [15,30,60,120,SP] SPECIAL to each.",
-		"POPULATION_BOMB": "Deal 10 SPECIAL [4,8,12,16,20,SP] times to the target.",
+		"POPULATION_BOMB": "Deal 10 SPECIAL [4,8,12,16,32,SP] times to the target.",
 		"SCREECH": "Reduce DEF of all enemies in a 2-range radius by [2,4,8,16,SP].",
 		"SAND_TOMB": "Deal [10,20,40,80,SP] SPECIAL to the target and inflict them with SILENCE and PARALYSIS for [3,5,8,16] seconds.",
 		"WHIRLWIND": "Deal [40,80,120,240,SP] SPECIAL to the target and make them FLY_AWAY.",

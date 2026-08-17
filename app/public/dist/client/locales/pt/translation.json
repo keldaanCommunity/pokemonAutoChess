@@ -2014,7 +2014,7 @@
 		"NATURAL_GIFT": "Cura o Pokémon aliado mais danificado em [30,60,90,150,SP] HP e concede a eles SAFEGUARD por [1,2,3,6] segundos.",
 		"NIGHT_SHADE": "Causa [12.5,16.5,25,35,ND=1]% + [12.5,16.5,25,35,SP,ND=1]% do HP máximo do alvo como TRUE.",
 		"CHARGE_BEAM": "Dispara um feixe concentrado de eletricidade que se propaga para no máximo 3 Pokémon inimigos ADJACENT, causando [15,30,60,120,SP] SPECIAL a cada um.",
-		"POPULATION_BOMB": "Causa 10 SPECIAL [4,8,12,16,20,SP] vezes ao alvo.",
+		"POPULATION_BOMB": "Causa 10 SPECIAL [4,8,12,16,32,SP] vezes ao alvo.",
 		"SCREECH": "Reduz a DEF de todos os inimigos em um raio de alcance 2 em [2,4,8,16,SP].",
 		"SAND_TOMB": "Causa [10,20,40,80,SP] SPECIAL ao alvo e inflige SILENCE e PARALYSIS por [3,5,8,16] segundos.",
 		"WHIRLWIND": "Causa [40,80,120,240,SP] SPECIAL ao alvo e faz com que ele voe para longe.",

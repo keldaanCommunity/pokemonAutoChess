@@ -2059,7 +2059,7 @@
 		"NATURAL_GIFT": "为受伤最严重的我方宝可梦恢复[30,60,90,150,SP]点HP，并使其获得SAFEGUARD [1,2,3,6]秒。",
 		"NIGHT_SHADE": "对目标造成TRUE，数值相当于其最大HP的[12.5,16.5,25,35,ND=1]%加[12.5,16.5,25,35,SP,ND=1]%。",
 		"CHARGE_BEAM": "发射一道电力集束，弹射至至多3个ADJACENT的敌方宝可梦，对每个击中的目标造成[15,30,60,120,SP]点SPECIAL。",
-		"POPULATION_BOMB": "对目标造成10点SPECIAL [4,8,12,16,20,SP]次。",
+		"POPULATION_BOMB": "对目标造成10点SPECIAL [4,8,12,16,32,SP]次。",
 		"SCREECH": "所有半径2格之内的敌方宝可梦降低[2,4,8,16,SP]点DEF。",
 		"SAND_TOMB": "对目标造成[10,20,40,80,SP]点SPECIAL，并使其陷入SILENCE和PARALYSIS [3,5,8,16]秒。",
 		"WHIRLWIND": "对目标造成[40,80,120,240,SP]点SPECIAL，并迫使其FLY_AWAY。",

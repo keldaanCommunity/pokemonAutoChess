@@ -2043,7 +2043,7 @@
 		"NATURAL_GIFT": "Soigne [30,60,90,150,SP] HP de l'allié le plus blessé et lui donne SAFEGUARD pendant [1,2,3,6] secondes.",
 		"NIGHT_SHADE": "Inflige [12.5,16.5,25,35,ND=1]% + [12.5,16.5,25,35,SP,ND=1]% des HP max de la cible en TRUE.",
 		"CHARGE_BEAM": "Libère un arc électrique qui se propage jusqu'à max 3 ennemis ADJACENT, infligeant [15,30,60,120,SP] SPECIAL à chacun.",
-		"POPULATION_BOMB": "Inflige [4,8,12,16,20,SP] fois 10 SPECIAL à la cible.",
+		"POPULATION_BOMB": "Inflige [4,8,12,16,32,SP] fois 10 SPECIAL à la cible.",
 		"SCREECH": "Réduit la DEF de tous les ennemis dans un rayon de 2 cases de [2,4,8,16].",
 		"SAND_TOMB": "Inflige [10,20,40,80,SP] SPECIAL ainsi que SILENCE et PARALYSIS pendant [3,5,8,16] secondes.",
 		"WHIRLWIND": "Inflige [40,80,120,240,SP] SPECIAL et envoie la cible voler au loin.",
