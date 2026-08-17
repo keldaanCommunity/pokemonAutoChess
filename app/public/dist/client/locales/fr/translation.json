@@ -1833,7 +1833,7 @@
 		"METRONOME": "Lance une capacité au hasard dont la puissance dépend de la LUCK.",
 		"SOAK": "Inflige [20,40,80,160,SP] SPECIAL à la cible et donne 10 PP à tous les Pokémon alliés.",
 		"ORIGIN_PULSE": "Une vague se déplace horizontalement sur le champ de bataille en infligeant [50,75,100,120,150,SP] SPECIAL à tous Pokémon adverses sur son chemin.",
-		"SEED_FLARE": "Émet une onde de choc qui inflige [20,25,30,60,SP] SPECIAL à tous les ennemis dans un rayon de 5 cases tout en diminuant leur SPE_DEF de [3,3,3,6].",
+		"SEED_FLARE": "Émet une onde de choc qui inflige [20,25,30,35,70,SP] SPECIAL à tous les ennemis dans un rayon de 5 cases tout en diminuant leur SPE_DEF de [3,3,3,3,6].",
 		"IRON_TAIL": "Balance sa queue massive, frappant les 3 ennemis en face, les projetant en arrière et infligeant [100,100,100,200,SP]% de la DEF du lanceur en SPECIAL.",
 		"BLAST_BURN": "Inflige [30,60,120,240,SP] SPECIAL à tous les ennemis ADJACENT.",
 		"CHARGE": "Jusqu'à la fin du combat, les attaques infligent [100,100,100,200,SP]% de SPECIAL supplémentaires (cumulable).",

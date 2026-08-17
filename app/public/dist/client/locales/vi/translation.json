@@ -1245,7 +1245,7 @@
 		"METRONOME": "Sử dụng một chiêu ngẫu nhiên",
 		"SOAK": "Gây [20,40,80,160,SP] SPECIAL lên mục tiêu và hồi phục 10 PP cho toàn bộ Pokémon đồng minh",
 		"ORIGIN_PULSE": "Làn sóng quét ngang toàn bộ chiến trường gây nên [50,75,100,120,150,SP] SPECIAL tới toàn bộ Pokémon đối thủ trúng phải",
-		"SEED_FLARE": "Cơ thể Shaymin tạo ra sóng xung kích gây nên [20,25,30,60,SP] SPECIAL cho toàn bộ Pokémon đối thủ trong bán kính 5 ô và giảm [3,3,3,6] chỉ số SPE_DEF",
+		"SEED_FLARE": "Cơ thể Shaymin tạo ra sóng xung kích gây nên [20,25,30,35,70,SP] SPECIAL cho toàn bộ Pokémon đối thủ trong bán kính 5 ô và giảm [3,3,3,3,6] chỉ số SPE_DEF",
 		"BLAST_BURN": "Gây nên [30,60,120,240,SP] SPECIAL cho khu vực quanh bản thân",
 		"DISCHARGE": "Gây [25,50,100,200,SP] SPECIAL lên Pokémon ở gần và khiến chúng PARALYSIS trong 5 giây",
 		"BITE": "Gây [40,80,120,200,SP] SPECIAL lên mục tiêu và hồi phục cho bản thân lượng máu bằng 30% sát thương đã gây ra. FLINCH mục tiêu trong 5 giây",

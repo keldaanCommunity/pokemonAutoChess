@@ -35,6 +35,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Precipice Blades (Groudon): 25/50/100/120 SPECIAL → 25/50/100/120/200
 - Prismatic Laser (Necrozma): 60 SPECIAL → 30/40/50/60/120 SPECIAL
 - Quiver Dance (Burmy): ATK & SPE_DEF buff 5 → 3/4/5/10, SPEED buff 10 → 10/10/10/15
+- Seed Flare (Shaymin): 20/25/30/30 SPECIAL → 20/25/30/35/70 SPECIAL
 - Struggle Bug (Illumise): AP reduction 50 → 30
 - Super Fang (Bidoof): 25% → 20/30/50/70% max HP as TRUE
 - Sweet Scent (Chikorita, Swirlix): SPE_DEF debuff: 6 → 4/6/8/10 ; SPEED debuff: 12 → 10/12/15/20

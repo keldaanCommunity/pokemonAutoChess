@@ -960,7 +960,7 @@
 		"METRONOME": "Gebruik een willekeurige vaardigheid",
 		"SOAK": "Breng [20,40,80,160,SP] SPECIAL aan het doelwit en herstelt 10 PP voor alle vriendelijke Pokémon",
 		"ORIGIN_PULSE": "Een golf beweegt horizontaal over het slagveld en brengt [50,75,100,120,150,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
-		"SEED_FLARE": "Shaymin zendt een schokgolf uit, brengt [20,25,30,60,SP] SPECIAL toe aan alle vijandelijke Pokémon en verlaagt hun SPE_DEF met [3,3,3,6]",
+		"SEED_FLARE": "Shaymin zendt een schokgolf uit, brengt [20,25,30,35,70,SP] SPECIAL toe aan alle vijandelijke Pokémon en verlaagt hun SPE_DEF met [3,3,3,3,6]",
 		"BLAST_BURN": "Brengt [30,60,120,240,SP] SPECIAL toe in een gebied rond de gebruiker",
 		"DISCHARGE": "Breng [25,50,100,200,SP] SPECIAL toe aan dichtbijzijnde vijandelijke Pokémon en pas de PARALYSYS status op ze toe voor 5 seconden",
 		"BITE": "Brengt [40,80,120,200,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 30% van de schade. FLINCH doel gedurende 5 seconden",

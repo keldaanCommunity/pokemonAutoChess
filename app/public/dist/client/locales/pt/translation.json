@@ -1795,7 +1795,7 @@
 		"METRONOME": "Use uma habilidade aleatória cuja força depende de LUCK.",
 		"SOAK": "Inflige [20,40,80,SP] de SPECIAL no alvo e restaura 10 PP de todos os aliados.",
 		"ORIGIN_PULSE": "Uma onda viaja horizontalmente pelo campo de batalha causando [50,75,100,120,150,SP] de SPECIAL em todos os inimigos no caminho.",
-		"SEED_FLARE": "O corpo de Shaymin emite uma onda de choque, causando [20,25,30,60,SP] de SPECIAL a todos os inimigos em uma alcance de 5 espaços e diminuindo suas SPE_DEF em [3,3,3,6]",
+		"SEED_FLARE": "O corpo de Shaymin emite uma onda de choque, causando [20,25,30,35,70,SP] de SPECIAL a todos os inimigos em uma alcance de 5 espaços e diminuindo suas SPE_DEF em [3,3,3,3,6]",
 		"BLAST_BURN": "Inflinge [30,60,120,240,SP] de SPECIAL a todos os inimigos ADJACENT.",
 		"DISCHARGE": "Inflige [25,50,100,200,SP] de SPECIAL a todos os inimigoos ADJACENT e aplica PARALYSIS por 5 segundos",
 		"BITE": "Inflige [40,80,120,200,SP] de SPECIAL ao alvo e cura oo usuário em 30% do dano causado. Aplica FLINCH no alvo por 5 segundos",
