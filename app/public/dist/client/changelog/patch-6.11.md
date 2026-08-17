@@ -22,6 +22,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Behemoth Blade (Zacian): 100 SPECIAL at all tiers → 30/60/90/120/240 SPECIAL
 - Crunch (Totodile, Guzzlord): 40/80/150 → 40/80/160/320 SPECIAL
 - Flame Wheel (Cyndaquil): 10/20/30 → 10/20/40/80 SPECIAL
+- Hyper Drill (Dunsparce): 50 SPECIAL at all tiers → 10/20/40/50/100 SPECIAL
 - Jet Punch (Palafin): 100% of SPEED as SPECIAL → 100/100/100/150/300%
 - Leaf's blade (Trecko, Galarian Farfetched, Kartana): 100% → 100/125/150/250% of ATK as TRUE
 - Luster Purge (Latios): 25 SPECIAL → 10/20/30/60 SPECIAL
