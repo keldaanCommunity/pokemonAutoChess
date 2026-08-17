@@ -2151,7 +2151,7 @@
 		"BITTER_BLADE": "Concentra i suoi demoni interiori in una sferzata, infliggendo [50,60,70,140,SP] SPECIAL a tutti i nemici ADJACENT. L'utilizzatore si cura del 10% dei suoi HP massimi per ogni nemico colpito.",
 		"SUCTION_HEAL": "Succhia via la vita dai bersagli, infliggendo [15,30,60,120,SP] SPECIAL in un cono dal raggio di 2 caselle e curandosi del 50% dei danni inflitti.",
 		"ROOST": "Vola via, rimanendo SLEEP per 1 secondo e guadagnando [20,40,80,160,SP] di SHIELD.",
-		"BEHEMOTH_BLADE": "Salta dietro al bersaglio e lo colpisce con un taglio potente, infliggendogli, [100,SP] + [100,SP]% ATK come SPECIAL",
+		"BEHEMOTH_BLADE": "Salta dietro al bersaglio e lo colpisce con un taglio potente, infliggendogli, [30,60,90,120,240,SP] + [100,SP]% ATK come SPECIAL",
 		"HEAT_CRASH": "Si schianta contro il bersaglio, spingendolo all'indietro e infliggendogli [40,60,80,160,SP] SPECIAL. Più l' ATK dell'utilizzatore è maggiore rispetto a quello del bersaglio, più potente è l'attacco.",
 		"LASER_BLADE": "Alterna tra:\n1. Roteare la propria lama intorno a sé, muovendosi dietro al bersaglio e guadgnando [25,25,25,50,SP] di SHIELD, infliggendo [25,25,25,50,SP] SPECIAL ai nemici ADJACENT nel cammino.\n2. Effettua un colpo roteante di fronte a sé, infliggendo 2 volte [25,25,25,50,SP] + ATK come SPECIAL.",
 		"ICICLE_MISSILE": "Lancia [1,2,3,5] ghiaccioli missile ai nemici nelle retrovie, infliggendo [50,SP] SPECIAL e FREEZE per 2 secondi",
