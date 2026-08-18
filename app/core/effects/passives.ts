@@ -7,6 +7,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -1844,6 +1845,40 @@ export const PassiveEffects: Partial<
           pkm.effects.add(EffectEnum.STEELY_SPIRIT_BONUS)
         }
       })
+    })
+  ],
+
+  [Passive.MYTHOSIS]: [
+    new OnDeathEffect(({ pokemon }) => {
+      const prevolution = Object.values(Pkm).find((pkm) => {
+        const data = getPokemonData(pkm)
+        return (
+          data.evolution === pokemon.name ||
+          data.evolutions?.includes(pokemon.name)
+        )
+      })
+      if (pokemon.simulation && prevolution) {
+        for (let i = 0; i < 2; i++) {
+          const freeCell = pokemon.simulation.getClosestFreeCellToPokemonEntity(
+            pokemon,
+            pokemon.team
+          )
+          if (freeCell) {
+            const copy = PokemonFactory.createPokemonFromName(prevolution, {
+              shiny: pokemon.shiny
+            })
+            copy.pp = Math.floor(pokemon.pp / 2)
+
+            pokemon.simulation.addPokemon(
+              copy,
+              freeCell.x,
+              freeCell.y,
+              pokemon.team,
+              true
+            )
+          }
+        }
+      }
     })
   ]
 }
