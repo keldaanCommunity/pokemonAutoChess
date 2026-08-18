@@ -15,18 +15,11 @@ class DragonRageEffect extends PeriodicEffect {
   constructor(pokemon: PokemonEntity, crit: boolean, initialShield: number) {
     super(
       (pokemon: PokemonEntity, board: Board) => {
-        this.ticksRemaining--
+        this.ticksRemaining--        
         if (this.ticksRemaining < 0) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DRAGON_RAGE)
-          const shieldToConvert = max(pokemon.shield)(this.shieldGiven)
-          pokemon.addShield(-shieldToConvert, pokemon, 0, false)
-          pokemon.handleHeal(
-            Math.round(shieldToConvert * 0.4),
-            pokemon,
-            0,
-            false
-          )
+          this.consumeShield(pokemon)
           return
         }
         const shield = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
@@ -67,6 +60,13 @@ class DragonRageEffect extends PeriodicEffect {
     this.shieldGiven = initialShield
     pokemon.effects.add(EffectEnum.DRAGON_RAGE)
   }
+
+  consumeShield(pokemon: PokemonEntity) {
+    const shieldToConvert = max(pokemon.shield)(this.shieldGiven)
+    pokemon.addShield(-shieldToConvert, pokemon, 0, false)
+    pokemon.handleHeal(Math.round(shieldToConvert * 0.4), pokemon, 0, false)
+    this.shieldGiven = 0
+  }
 }
 
 export class DragonRageStrategy extends AbilityStrategy {
@@ -79,6 +79,7 @@ export class DragonRageStrategy extends AbilityStrategy {
         (effect) => effect instanceof DragonRageEffect
       )
       if (dragonRageEffect) {
+        dragonRageEffect.consumeShield(pokemon)
         dragonRageEffect.ticksRemaining = 6
       }
     } else {
