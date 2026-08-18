@@ -1867,15 +1867,15 @@ export const PassiveEffects: Partial<
             const copy = PokemonFactory.createPokemonFromName(prevolution, {
               shiny: pokemon.shiny
             })
-            copy.pp = Math.floor(pokemon.pp / 2)
 
-            pokemon.simulation.addPokemon(
+            const entity = pokemon.simulation.addPokemon(
               copy,
               freeCell.x,
               freeCell.y,
               pokemon.team,
               true
             )
+            entity.pp = Math.floor(pokemon.pp / 2)
           }
         }
       }
