@@ -2234,7 +2234,7 @@
 		"TACKLE": "Inflinge [20,40,60,120,SP] de SPECIAL ao alvo.",
 		"STATIC_SHOCK": "Causa [30,50,70,100,SP] de SPECIAL ao alvo e ganha [10,20,30,60,SP] de SHIELD para cada Pokémon ELECTRIC ADJACENT, cura [10,20,30,60,SP] de HP para cada Pokémon FAIRY ADJACENT.",
 		"SAND_SPIT": "Cospe areia nos 3 Pokémon inimigos à frente do usuário, causando [30,60,120,240,SP] de SPECIAL e aplicando BLINDED por 2 segundos.",
-		"HYPER_DRILL": "Inflinge [10,20,40,50,100] de TRUE que pode remover PROTECT, e cava mais fundo no solo sob o alvo, destruindo quaisquer itens enterrados no processo. Dano dobrado se o alvo já estiver em um buraco totalmente cavado.",
+		"HYPER_DRILL": "Inflinge [10,20,40,50,100,SP] de TRUE que pode remover PROTECT, e cava mais fundo no solo sob o alvo, destruindo quaisquer itens enterrados no processo. Dano dobrado se o alvo já estiver em um buraco totalmente cavado.",
 		"TERRAIN_PULSE": "Se o usuário não tiver um efeito de campo, recebe GRASS_FIELD.\nOs efeitos de campo em sua equipe se propagam para aliados ADJACENT e, em seguida, ativam um efeito:\nGRASS_FIELD: cura [5,7,10,15,SP]% do HP máximo\nELECTRIC_FIELD: recebe [10,12,15,20,SP] de SPEED\nPSYCHIC_FIELD: recebe [10,12,15,20,SP] de PP\nFAIRY_FIELD: recebe [5,7,10,15,SP]% do HP máximo como SHIELD",
 		"AXE_KICK": "Salta para o inimigo com o maior PP, inflinge [25,50,100,200,SP] de SPECIAL e queima [15,15,30,60,SP] de PP. Tem [30,LK]% de chance de aplicar CONFUSION por 3 segundos.",
 		"EXPANDING_FORCE": "O usuário recebe PSYCHIC_FIELD ou o espalha para um aliado próximo. Então, sua energia psíquica reverbera em todos os aliados em um PSYCHIC_FIELD, causando [10,20,40,80,SP] de SPECIAL aos inimigos ADJACENT.",
