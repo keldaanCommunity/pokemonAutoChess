@@ -2005,7 +2005,7 @@
 		"THUNDER": "Raios atingem até 3 inimigos aleatórios, infligindo [25,50,100,200,SP] de SPECIAL com [30,LK]% de chance de aplicar PARALYSIS por 3 segundos.",
 		"WISH": "Conceda [30,60,120,240,SP] de SHIELD e aplica PROTECT por 1,5 segundos ao aliado com menor % de HP.",
 		"IRON_HEAD": "Aumenta a DEF e SPE_DEF do usuário em [5,10,15,30,SP] e então atinge o alvo com uma cabeçada poderosa, causando [100,SP]% de (DEF + SPE_DEF) como SPECIAL.",
-		"IRON_TAIL": "Balança sua cauda enorme, atingindo 3 Pokémon inimigos à frente, empurrando-os para trás e causando [100,100,100,200,SP]% da DEF do usuário como SPECIAL.",
+		"IRON_TAIL": "Balança sua cauda enorme, atingindo 3 Pokémon inimigos à frente, empurrando-os para trás e causando [100,100,200,400,SP]% da DEF do usuário como SPECIAL.",
 		"CHARGE": "Até o fim do combate, ataques causam [100,100,100,200,SP]% de SPECIAL adicional (acumulável).",
 		"SHOCKWAVE": "Inflige [30,60,120,240,SP] de SPECIAL a todos os inimigos em um alcance de 2 de espaços, +1 de alcance se o usuário estiver em um ELECTRIC_FIELD, -20% de dano por espaço de distância do usuário.",
 		"INGRAIN": "Inflige [15,30,60,120,SP] de SPECIAL a todos os Pokémon inimigos ADJACENT e aplica LOCKED por 4 segundos. Cure o usuário e os Pokémons aliados ADJACENT em [15,30,60,120,SP] HP.",
