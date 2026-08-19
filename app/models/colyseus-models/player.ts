@@ -328,7 +328,7 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
-      newPokemon.addItem(item, this)
+      setTimeout(() => newPokemon.addItem(item, this), 1) // delay to prevent infinite loop with Necrozma and Shiny stone
       if (item === Item.SHINY_CHARM) {
         newPokemon.shiny = true
       }
