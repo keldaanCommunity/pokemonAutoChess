@@ -2111,7 +2111,7 @@
 		"MOON_DREAM": "Coloque o alvo para SLEEP por [3,6,9,18] segundos e conceda [10,20,30,60,SP] SHIELD aos 3 Pokémon aliados mais próximos do alvo.",
 		"STONE_AXE": "Cause [30,40,50,100,SP] TRUE ao alvo e espalhe pedras afiadas ao redor dele. BOARD_EFFECT: as pedras causam 10 PHYSICAL por segundo e aplicam WOUND em Pokémon que não sejam ROCK que caminharem sobre elas.",
 		"FLASH": "Oponentes em um raio de 3 quadrados ficam BLINDED por [2,4,6,12,SP,ND=1] segundos.",
-		"CRUSH_CLAW": "Reduza a DEF do alvo em [5,10,15,20] e, em seguida, realize dois ataques rápidos, cada um causando [100,100,100,200,SP]% de ATK como PHYSICAL.",
+		"CRUSH_CLAW": "Reduza a DEF do alvo em [5,10,15,20] e, em seguida, realize dois ataques rápidos, cada um causando [100,100,200,400,SP]% de ATK como PHYSICAL.",
 		"FIRE_LASH": "Aplique ARMOR_BREAK por 4 segundos e cause [30,60,120,240,SP] SPECIAL ao alvo.",
 		"FAIRY_LOCK": "Espalhe [50,70,90,180,SP] SPECIAL uniformemente entre o alvo e os Pokémon inimigos ADJACENT. O alvo fica LOCKED por 5 segundos.",
 		"DRAIN_PUNCH": "Cause [200,200,300,400,SP]% de ATK como SPECIAL e cure por 200% do dano causado.",

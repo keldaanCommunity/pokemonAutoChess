@@ -12,7 +12,7 @@ export class CrushClawStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const defLoss = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
-    const damageFactor = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+    const damageFactor = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
     target.addDefense(-defLoss, pokemon, 0, false)
     for (let i = 0; i < 2; i++) {
       target.handleSpecialDamage(

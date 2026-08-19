@@ -14714,7 +14714,7 @@ export class Taillow extends Pokemon {
   speed = 80
   def = 6
   speDef = 5
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.AIR_SLASH
 }
@@ -14728,7 +14728,7 @@ export class Swellow extends Pokemon {
   speed = 80
   def = 11
   speDef = 9
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.AIR_SLASH
 }
@@ -15431,7 +15431,7 @@ export class Phanpy extends Pokemon {
   evolution = Pkm.DONPHAN
   stars = 1
   hp = 80
-  atk = 5
+  atk = 6
   speed = 41
   def = 8
   speDef = 4
@@ -15444,8 +15444,8 @@ export class Donphan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
-  hp = 180
-  atk = 10
+  hp = 200
+  atk = 14
   speed = 41
   def = 12
   speDef = 8
@@ -15799,7 +15799,7 @@ export class Rufflet extends Pokemon {
   speed = 51
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true
@@ -15814,7 +15814,7 @@ export class Braviary extends Pokemon {
   speed = 51
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true

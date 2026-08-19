@@ -2157,7 +2157,7 @@
 		"MOON_DREAM": "使目标陷入SLEEP [3,6,9,18]秒，并使离其最近的3个我方宝可梦获得[10,20,30,60,SP]点SHIELD。",
 		"STONE_AXE": "造成[30,40,50,100,SP]点TRUE，并在目标周围设下尖锐的岩石。BOARD_EFFECT：这些岩石对在其中移动的非ROCK宝可梦每秒造成10点PHYSICAL，并使其陷入WOUND。",
 		"FLASH": "半径3格内的敌方宝可梦陷入BLINDED [2,4,6,12,SP,ND=1]秒。",
-		"CRUSH_CLAW": "降低目标[5,10,15,20]点DEF，随后对其快速发起两次攻击，造成PHYSICAL，数值相当于使用者[100,100,100,200,SP]%的ATK。",
+		"CRUSH_CLAW": "降低目标[5,10,15,20]点DEF，随后对其快速发起两次攻击，造成PHYSICAL，数值相当于使用者[100,100,200,400,SP]%的ATK。",
 		"FIRE_LASH": "使目标陷入ARMOR_BREAK 4秒，并对其造成[30,60,120,240,SP]点SPECIAL。",
 		"FAIRY_LOCK": "使目标陷入LOCKED 5秒，其和ADJACENT敌方宝可梦分摊[50,70,90,180,SP]点SPECIAL。",
 		"DRAIN_PUNCH": "对目标造成SPECIAL，数值相当于[200,200,300,400,SP]%的ATK，使用者自身恢复造成伤害的200%。",

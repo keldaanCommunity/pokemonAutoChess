@@ -6,6 +6,9 @@
 - Double Up Golden egg trade cooldown: +3 turns
 - Unown D moved from stages 1-19 to stage 20+
 - Nerf Porygon: Def: 12/16/16 → 8/12/12, SpeDef: 12/16/16 → 8/12/12
+- Buff Phanpy line: Atk 5/10 → 6/14, HP 80/180 → 80/200
+- Buff Rufflet line: PP 100 → 80
+- Buff Taillow line: PP 100 → 80
 
 # Bugfixes
 
