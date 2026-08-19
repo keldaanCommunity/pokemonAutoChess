@@ -3341,7 +3341,7 @@ export class Igglybuff extends Pokemon {
   speed = 39
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -3356,7 +3356,7 @@ export class Jigglypuff extends Pokemon {
   speed = 39
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -3370,7 +3370,7 @@ export class Wigglytuff extends Pokemon {
   speed = 39
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -11957,7 +11957,7 @@ export class Chingling extends Pokemon {
   speed = 46
   def = 5
   speDef = 6
-  maxPP = 80
+  maxPP = 75
   range = 2
   skill = Ability.ECHO
   passive = Passive.CHINGLING
@@ -11972,7 +11972,7 @@ export class Chimecho extends Pokemon {
   speed = 46
   def = 8
   speDef = 9
-  maxPP = 80
+  maxPP = 75
   range = 2
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -19421,8 +19421,8 @@ export class BasculinRed extends Pokemon {
   hp = 160
   atk = 15
   speed = 56
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.BARED_FANGS
@@ -19437,8 +19437,8 @@ export class BasculinBlue extends Pokemon {
   hp = 160
   atk = 15
   speed = 56
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.BARED_FANGS
