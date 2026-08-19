@@ -11,7 +11,6 @@ export const EvolutionTime = {
 export const UnownsStage1 = [
   Pkm.UNOWN_A,
   Pkm.UNOWN_C,
-  Pkm.UNOWN_D,
   Pkm.UNOWN_E,
   Pkm.UNOWN_F,
   Pkm.UNOWN_G,
@@ -27,7 +26,6 @@ export const UnownsStage2 = [
   Pkm.UNOWN_A,
   Pkm.UNOWN_B,
   Pkm.UNOWN_C,
-  Pkm.UNOWN_D,
   Pkm.UNOWN_G,
   Pkm.UNOWN_H,
   Pkm.UNOWN_I,
@@ -53,6 +51,7 @@ export const UnownsStage2 = [
 
 export const UnownsStage3 = [
   Pkm.UNOWN_B,
+  Pkm.UNOWN_D,
   Pkm.UNOWN_H,
   Pkm.UNOWN_J,
   Pkm.UNOWN_K,
