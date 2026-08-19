@@ -45,6 +45,10 @@ export default function WikiFaq() {
         <p>{t("wiki.faq.items_answer")}</p>
       </details>
       <details className="my-box">
+        <summary>{t("wiki.faq.double_up")}</summary>
+        <p>{t("wiki.faq.double_up_answer")}</p>
+      </details>
+      <details className="my-box">
         <summary>{t("wiki.faq.reconnect")}</summary>
         <p
           dangerouslySetInnerHTML={{ __html: t("wiki.faq.reconnect_answer") }}
@@ -69,6 +73,10 @@ export default function WikiFaq() {
       <details className="my-box">
         <summary>{t("wiki.faq.damage")}</summary>
         <p>{t("wiki.faq.damage_answer")}</p>
+      </details>
+      <details className="my-box">
+        <summary>{t("wiki.faq.elimination_rank")}</summary>
+        <p>{t("wiki.faq.elimination_rank_answer")}</p>
       </details>
       <details className="my-box">
         <summary>{t("wiki.faq.shiny")}</summary>

@@ -178,9 +178,7 @@ export default function GameOptionsModal(props: {
                 setPreferences({ disableAnimatedTilemap: checked })
                 const gameScene = getGameScene()
                 if (gameScene) {
-                  const animatedTiles = (gameScene?.sys as any).animatedTiles
-                  if (checked) animatedTiles.pause()
-                  else animatedTiles.resume()
+                  gameScene.toggleTilesetAnimation(checked)
                 }
               }}
               label={t("options.disable_animated_tilemap")}

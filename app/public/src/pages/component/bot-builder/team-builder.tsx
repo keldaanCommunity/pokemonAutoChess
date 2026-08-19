@@ -315,7 +315,11 @@ export default function TeamBuilder(props: {
         showBench={inBotBuilder}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} selected={selection} />
+      <ItemPicker
+        selectEntity={setSelection}
+        selected={selection}
+        origin={inBotBuilder ? "bot-builder" : "team-planner"}
+      />
       <PokemonPicker
         selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}
         addEntity={addPokemonOnFirstEmptyCell}

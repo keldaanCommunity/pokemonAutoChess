@@ -9,12 +9,12 @@ export type {
 } from "../../../types/models/pokemons-statistic-v2"
 
 export async function fetchMetaPokemons(): Promise<IPokemonsStatisticV2[]> {
-  return fetch("/meta/pokemons").then((res) => res.json())
+  return fetch(`/meta/pokemons?t=${new Date().getUTCDate()}`).then((res) => res.json())
 }
 
 export async function fetchMetaTypes(): Promise<ITypeStatistics> {
   const token = await firebase.auth().currentUser?.getIdToken()
-  return fetch("/meta/types", {
+  return fetch(`/meta/types?t=${new Date().getUTCDate()}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

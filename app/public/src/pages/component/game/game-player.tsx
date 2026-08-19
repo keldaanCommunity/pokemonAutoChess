@@ -15,6 +15,7 @@ export default function GamePlayer(props: {
   player: IPlayer
   click: (id: string) => void
   index: number
+  teamColor?: string
 }) {
   const spectatedPlayerId = useAppSelector(
     (state) => state.game.playerIdSpectated
@@ -43,7 +44,10 @@ export default function GamePlayer(props: {
         onClick={playerClick}
         data-tooltip-id={"detail-" + props.player.id}
       >
-        <CircularProgressbarWithChildren value={props.player.life} />
+        <CircularProgressbarWithChildren
+          value={props.player.life}
+          styles={{ path: { stroke: props.teamColor ?? "#f7d51d" } }}
+        />
         <div className="my-container life-text">{props.player.life}</div>
       </div>
       <Tooltip

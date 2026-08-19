@@ -32,21 +32,28 @@ export const iconRegExp = new RegExp(
     ...Items,
     ...TechnicalTerms,
     "GOLD",
-    "STAR"
+    "STAR",
+    "XP"
   ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
   "g"
 )
 
 export function addIconsToDescription(
   description: string,
-  stats?: { ap: number; luck: number; stars: number; stages?: number }
+  params?: {
+    ap: number
+    luck: number
+    stars: number
+    stages?: number
+    showAbilityTiers?: boolean
+  }
 ) {
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
-  return descriptionParts.map((f, i) => {
+  return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
-    let d: ReactElement | null = null
+    let icon: ReactElement | null = null
     const isAtStartOfSentence =
       i === 0 || descriptionParts[i - 1].trim().endsWith(".")
     const capitalize = (s: string) =>
@@ -54,7 +61,7 @@ export function addIconsToDescription(
 
     if (token) {
       if (token === "GOLD") {
-        d = (
+        icon = (
           <img
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
@@ -62,15 +69,22 @@ export function addIconsToDescription(
           />
         )
       } else if (token === "STAR") {
-        d = (
+        icon = (
           <img
             className="description-icon icon-star"
             src="/assets/ui/star.svg"
             alt="⭐"
           />
         )
+      } else if (token === "XP") {
+        icon = (
+          <span className="description-icon stat">
+            <img src={`assets/icons/${token}.png`} />
+            <span className="stat-label">{t(`stat.${token}`)}</span>
+          </span>
+        )
       } else if (isIn(DamageTypes, token)) {
-        d = (
+        icon = (
           <span
             className={
               token === Damage.PHYSICAL
@@ -84,14 +98,14 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Stats, token)) {
-        d = (
+        icon = (
           <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
         )
       } else if (isIn(DocumentedStatuses, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon status"
             title={t(`status_description.${token}`)}
@@ -107,7 +121,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Weathers, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon weather"
             title={t(`weather_description.${token}`)}
@@ -117,7 +131,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Items, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon item"
             title={t(`item_description.${token}`)}
@@ -127,14 +141,14 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Synergies, token)) {
-        d = (
+        icon = (
           <span className="description-icon synergy">
             <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
       } else if (isIn(TechnicalTerms, token)) {
-        d = (
+        icon = (
           <span
             className="description-icon technical-term"
             title={t(`technical_terms_definitions.${token}`)}
@@ -161,7 +175,14 @@ export function addIconsToDescription(
           scaleFactor = Number(array.pop()?.replace("LK=", "")) || 1
         }
 
-        d = (
+        const tier = params?.stars
+        const maxTier = params?.stages ? params.stages + 1 : 5
+        const tierValues =
+          params?.stars && !params?.showAbilityTiers
+            ? [array[params.stars - 1]] // only show relevant tier
+            : array.slice(0, maxTier) // show tier scaling
+
+        icon = (
           <span
             className={cc("description-icon", {
               "scales-ap": scaleType === "AP",
@@ -182,34 +203,32 @@ export function addIconsToDescription(
                 title="Scales with Luck"
               ></img>
             )}
-            {array.slice(0, stats?.stages).map((v, j) => {
-              const separator =
-                j < Math.min(stats?.stages ?? 4, array.length) - 1 ? "/" : ""
+            {tierValues.map((v, j) => {
+              const separator = j < tierValues.length - 1 ? "/" : ""
               let value: number | string = roundToNDigits(Number(v), nbDigits)
               if (Number.isNaN(value)) {
                 // In case of non-numeric value, just return as is
                 value = v
               } else if (scaleType === "AP") {
                 value = roundToNDigits(
-                  Number(v) * (1 + ((stats?.ap ?? 0) * scaleFactor) / 100),
+                  Number(v) * (1 + ((params?.ap ?? 0) * scaleFactor) / 100),
                   nbDigits
                 )
               } else if (scaleType === "LUCK") {
                 value = roundToNDigits(
                   max(100)(
-                    Math.pow(Number(v) / 100, 1 - (stats?.luck ?? 0) / 100) *
+                    Math.pow(Number(v) / 100, 1 - (params?.luck ?? 0) / 100) *
                       100
                   ),
                   nbDigits
                 )
               }
 
-              const tier = stats?.stars
               const active =
                 tier === undefined ||
                 array.length === 1 ||
                 j === tier - 1 ||
-                (tier > array.length && j === array.length - 1)
+                (tier > tierValues.length && j === tierValues.length - 1)
               return (
                 <span key={j} className="ability-value">
                   <span className={cc({ active })}>{value}</span>
@@ -222,10 +241,24 @@ export function addIconsToDescription(
       }
     }
 
+    const boldParts = part.split(/\*\*(.+?)\*\*/g)
+    const content =
+      boldParts.length > 1
+        ? boldParts.map((part, j) =>
+            j % 2 === 1 ? (
+              <strong key={j} className="description-important">
+                {part}
+              </strong>
+            ) : (
+              part
+            )
+          )
+        : part
+
     return (
       <React.Fragment key={i}>
-        {d}
-        {f}
+        {icon}
+        {content}
       </React.Fragment>
     )
   })
@@ -261,6 +294,11 @@ export function addIconsToHtml(
         } else if (token === "STAR") {
           iconHTML =
             '<img class="description-icon icon-star" src="/assets/ui/star.svg" alt="⭐" />'
+        } else if (token === "XP") {
+          iconHTML = `<span className="description-icon stat">
+            <img src={${`assets/icons/${token}.png`}} />
+            <span className="stat-label">{${t(`stat.${token}`)}}</span>
+          </span>`
         } else if (isIn(DamageTypes, token)) {
           const className =
             token === Damage.PHYSICAL
@@ -308,7 +346,8 @@ export function addIconsToHtml(
 
           if (array.at(-1)?.includes("ND")) {
             nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
-          } else if (array.at(-1)?.includes("SP")) {
+          }
+          if (array.at(-1)?.includes("SP")) {
             scaleType = "AP"
             scaleFactor = Number(array.pop()?.replace("SP=", "")) || 1
           } else if (array.at(-1)?.includes("LK")) {

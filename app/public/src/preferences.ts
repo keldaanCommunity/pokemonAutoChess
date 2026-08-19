@@ -33,7 +33,6 @@ export interface IPreferencesState {
   showRegularPool: boolean
   showAdditionalPool: boolean
   showRegionalPool: boolean
-  showSpecialPool: boolean
   filterAvailableAddsAndRegionals: boolean
   disableAnimatedTilemap: boolean
   disableCameraShake: boolean
@@ -42,6 +41,8 @@ export interface IPreferencesState {
   renderer: number
   antialiasing: boolean
   colorblindMode: boolean
+  recordReplays: boolean
+  keepReplays: number
   theme: string
 }
 
@@ -62,7 +63,6 @@ const defaultPreferences: IPreferencesState = {
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
-  showSpecialPool: true,
   filterAvailableAddsAndRegionals: false,
   disableAnimatedTilemap: false,
   disableCameraShake: true,
@@ -70,6 +70,8 @@ const defaultPreferences: IPreferencesState = {
   renderer: Phaser.AUTO,
   antialiasing: true,
   colorblindMode: false,
+  recordReplays: true,
+  keepReplays: 5,
   theme: "default",
   keybindings: {
     sell: "E",
