@@ -2012,8 +2012,8 @@ export class Porygon extends Pokemon {
   hp = 100
   atk = 13
   speed = 54
-  def = 12
-  speDef = 12
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2028,8 +2028,8 @@ export class Porygon2 extends Pokemon {
   hp = 200
   atk = 23
   speed = 54
-  def = 16
-  speDef = 16
+  def = 12
+  speDef = 12
   maxPP = 80
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2043,8 +2043,8 @@ export class PorygonZ extends Pokemon {
   hp = 300
   atk = 33
   speed = 54
-  def = 16
-  speDef = 16
+  def = 12
+  speDef = 12
   maxPP = 60
   range = 2
   skill = Ability.TRI_ATTACK
