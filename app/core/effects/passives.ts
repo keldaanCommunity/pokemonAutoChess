@@ -1715,6 +1715,9 @@ export const PassiveEffects: Partial<
   ],
   [Passive.PRISM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.items.has(Item.SHINY_STONE)) {
+        inSpotlight = true
+      }
       if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
       } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
