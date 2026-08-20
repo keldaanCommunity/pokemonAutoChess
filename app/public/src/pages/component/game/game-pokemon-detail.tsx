@@ -24,6 +24,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
+import { isEntity } from "../../../game/components/pokemon"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { AbilityTooltip } from "../ability/ability-tooltip"
@@ -134,9 +135,6 @@ export function GamePokemonDetail(props: {
     props.origin
   ])
 
-  const isEntity = (
-    obj: IPokemonEntity | IPokemon | Pkm | null | undefined
-  ): obj is IPokemonEntity => obj != null && obj.hasOwnProperty("simulation")
   const isInFight = isEntity(props.pokemon)
 
   const getStatWithItemBonus = (stat: Stat): number | undefined => {
