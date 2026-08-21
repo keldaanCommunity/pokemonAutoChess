@@ -17,3 +17,5 @@
 # Bugfix
 
 # Misc
+
+- The post game screen has new victory jingles made by John Rei
