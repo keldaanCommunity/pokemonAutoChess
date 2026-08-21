@@ -20412,7 +20412,7 @@ export class Dondozo extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 220
   atk = 15
   speed = 30
   def = 20
