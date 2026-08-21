@@ -2351,7 +2351,7 @@
 		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
 		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD",
-		"THUNDERCLAP_PRESS": "The target is hit with an electric bodyslam and pushed away. It and the enemy collided on the way are PARALYSIS for 4 seconds and take [20,40,80,160,SP] SPECIAL.",
+		"THUNDERCLAP_PRESS": "The target is hit with an electric bodyslam and pushed away. Then the target and the enemy collided on the way get PARALYSIS for 4 seconds and take [20,40,80,160,SP] SPECIAL.",
 		"DRAGON_RAGE": "Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value."
 	},
 	"effect": {
