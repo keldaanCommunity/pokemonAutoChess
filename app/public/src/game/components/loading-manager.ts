@@ -4,10 +4,8 @@ import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
-import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
-import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
@@ -107,7 +105,6 @@ export default class LoadingManager {
           .filter<DungeonPMDO>((map): map is DungeonPMDO => map !== "town")
       )
       preloadMusic(scene, RegionDetails[player.map].music)
-      preloadPortraits(this.scene, player)
     }
 
     // load missingno as default pokemon texture if not found
@@ -186,12 +183,34 @@ export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
   )
 }
 
-export function preloadPortraits(scene: Phaser.Scene, player: Player) {
-  Object.values(PkmIndex).forEach((index) => {
-    const pokemonCustom = getPkmWithCustom(index, player.pokemonCustoms)
-    scene.load.image(
-      `portrait-${index}`,
-      getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
-    )
+const portraitLoadingRequests = new Map<string, Promise<boolean>>()
+
+export function loadPortrait(
+  scene: GameScene,
+  index: string
+): Promise<boolean> {
+  const key = `portrait-${index}`
+  if (scene.textures.exists(key)) return Promise.resolve(true)
+  const pending = portraitLoadingRequests.get(key)
+  if (pending) return pending
+
+  const request = new Promise<boolean>((resolve) => {
+    scene.load.once("complete", () => {
+      portraitLoadingRequests.delete(key)
+      resolve(scene.textures.exists(key)) // false if the file failed to load
+    })
+    const roster = scene.room?.state.players
+    const players = roster ? schemaValues(roster) : []
+    const player = players.find((p) => p.id === scene.uid) ?? players[0]
+    const pokemonCustom = getPkmWithCustom(index, player?.pokemonCustoms)
+    scene.load
+      .image(
+        key,
+        getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
+      )
+      .start()
   })
+
+  portraitLoadingRequests.set(key, request)
+  return request
 }
