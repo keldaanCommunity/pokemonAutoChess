@@ -1976,7 +1976,7 @@
 		"MIST_BALL": "Lanza una burbuja de niebla en línea recta que inflige [10,20,30,60,SP] SPECIAL dos veces y reduce el AP de todos los enemigos golpeados en un 30",
 		"MUD_BUBBLE": "Cura al usuario por [10,20,40,80,SP] HP",
 		"LINK_CABLE": "Se mueve hacia un nuevo lugar, luego activa un arco eléctrico entre Plusle y Minun que causa [40,40,40,80,SP] de SPECIAL. Si Plusle o Minun están solos, inflige este daño a los enemigos adyacentes.",
-		"MAGIC_BOUNCE": "Durante 5 segundos, cada vez que este Pokémon es golpeado por una habilidad, bloquea el daño y refleja [50,100,200,400,SP]% de SPECIAL al atacante.",
+		"MAGIC_BOUNCE": "Durante 4 segundos, cada vez que este Pokémon es golpeado por una habilidad, bloquea el daño y refleja [50,100,200,400,SP]% de SPECIAL al atacante.",
 		"REFLECT": "Durante [3,3,3,5] segundos, cada vez que el usuario reciba PHYSICAL, bloquea el daño y devuelve [50,75,100,150,SP]% de SPECIAL al atacante.",
 		"HIDDEN_POWER_A": "Invoca 4 Abra en cada esquina del tablero",
 		"HIDDEN_POWER_B": "Deja BURN al equipo oponente por 30 segundos",

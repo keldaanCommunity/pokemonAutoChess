@@ -26,6 +26,7 @@ import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { useKeyPress } from "../../utils/keyboard"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
@@ -56,6 +57,7 @@ export function GamePokemonDetail(props: {
   isAlly?: boolean
 }) {
   const { t } = useTranslation()
+  const ctrlKeyPressed = useKeyPress("Ctrl")
   const pokemon = useMemo<IPokemon | IPokemonEntity | null>(() => {
     if (!props.pokemon) {
       return null
@@ -394,7 +396,7 @@ export function GamePokemonDetail(props: {
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
                 stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki"
+                showAbilityTiers: props.origin === "wiki" || ctrlKeyPressed
               }}
               key={pokemon.id}
             />
