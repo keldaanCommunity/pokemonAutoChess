@@ -127,16 +127,19 @@ export default class GameScene extends Scene {
     })
   }
 
+  getPlayerToSpectate(): Player | undefined {
+    const players = schemaValues(this.room?.state.players!)
+    const uid = this.spectate ? this.spectatedPlayerId : this.uid
+    return players.find((p) => p.id === uid) ?? players[0]
+  }
+
   startGame() {
     if (this.uid && this.room) {
       this.registerKeys()
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
-      const player = this.room.state.players.get(
-        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
-      ) as Player
+      const player = this.getPlayerToSpectate() as Player
 
       this.setMap(player.map)
       this.setupMouseEvents()
