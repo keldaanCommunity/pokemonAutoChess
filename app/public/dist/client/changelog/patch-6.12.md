@@ -5,6 +5,7 @@
 - New passive to Duosion and Reuniclus: Mythosis. Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.
 - Pirouette Meloetta no longer transforms to Aria Meloetta when put on bench
 - Nerf Magic Bounce (Xatu): user gets SILENCE during the effect. Duration: 5 → 4 seconds
+- Poison Gas Board effect change: POISON Pokémon are now immune
 
 # Changes to Synergies
 
