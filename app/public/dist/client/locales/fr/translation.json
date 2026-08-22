@@ -1978,7 +1978,7 @@
 		"MIST_BALL": "Lancez une bulle de brume en ligne droite, qui rebondit après avoir parcouru 4 cases, infligeant [10,20,30,60,SP] SPECIAL et réduisant leur AP de 30 à chaque fois qu'elle traverse un ennemi.",
 		"MUD_BUBBLE": "Soigne le lanceur de [10,20,40,80,SP] HP.",
 		"LINK_CABLE": "Fonce vers l'ennemi le plus éloigné, puis déclenche un arc électrique entre $t(pkm.PLUSLE) et $t(pkm.MINUN) qui inflige [40,40,40,80,SP] SPECIAL. Si $t(pkm.PLUSLE) ou $t(pkm.MINUN) se retrouve seul, inflige la moitié de ces dégâts aux ennemis ADJACENT à la place.",
-		"MAGIC_BOUNCE": "Pendant 5 secondes, chaque fois que le lanceur est touché par une capacité, bloque les dégâts et renvoie [50,100,200,400,SP]% SPECIAL au lanceur.",
+		"MAGIC_BOUNCE": "Pendant 4 secondes, chaque fois que le lanceur est touché par une capacité, bloque les dégâts et renvoie [50,100,200,400,SP]% SPECIAL au lanceur de cette capacité. Subit SILENCE pendant la durée de l'effet.",
 		"REFLECT": "Pendant [3,3,3,5] secondes, chaque fois que le lanceur reçoit des PHYSICAL, bloque les dégâts et renvoie [50,75,100,150,SP]% des dégâts en SPECIAL à l'attaquant.",
 		"HIDDEN_POWER_A": "Invoque 4 $t(pkm.ABRA) à chaque coin du champ de bataille.",
 		"HIDDEN_POWER_B": "Inflige BURN à toute l'équipe adverse pendant 30 secondes.",
