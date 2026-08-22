@@ -15,6 +15,7 @@
 # UI
 
 - The values for all tiers in ability descriptions can be shown during the game by pressing the Ctrl key
+- You can now save teams from your game history as local files to load them later into your team planner
 
 # Bugfix
 
