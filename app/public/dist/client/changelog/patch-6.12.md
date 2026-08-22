@@ -3,6 +3,7 @@
 # Changes to Pokemon & Abilities
 
 - New passive to Duosion and Reuniclus: Mythosis. Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.
+- Pirouette Meloetta no longer transforms to Aria Meloetta when put on bench
 
 # Changes to Synergies
 
