@@ -10,6 +10,8 @@
 
 # Changes to Items
 
+- Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
+
 # Gameplay
 
 # UI
