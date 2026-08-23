@@ -17,6 +17,7 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import type GameRoom from "../rooms/game-room"
 import {
+  BoardEffectDpsId,
   type IPokemon,
   type IPokemonEntity,
   type ISimulation,
@@ -85,6 +86,10 @@ import {
 import { PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
+
+// these rows add up over a whole team and a whole fight, so they can overflow
+// the uint16 Dps fields and wrap to a tiny number once synced
+const capUint16 = max(65535)
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -316,6 +321,45 @@ export default class Simulation extends Schema implements ISimulation {
       : playerId === this.redPlayer?.id
         ? this.redDpsMeter
         : undefined
+  }
+
+  getBoardEffectDps(team: Team, id: BoardEffectDpsId): Dps {
+    const meter = team === Team.BLUE_TEAM ? this.blueDpsMeter : this.redDpsMeter
+    let dps = meter.get(id)
+    if (!dps) {
+      dps = new Dps(id, id)
+      meter.set(id, dps)
+    }
+    return dps
+  }
+
+  // board effect damage has no attacker, so nothing else records it. credit it to
+  // the team opposing the victim, and send the damage number handleDamage skipped
+  creditBoardEffectDamage(
+    victim: PokemonEntity,
+    id: BoardEffectDpsId,
+    attackType: AttackType,
+    amount: number
+  ) {
+    if (amount <= 0) return
+    const team =
+      victim.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+    const dps = this.getBoardEffectDps(team, id)
+    if (attackType === AttackType.PHYSICAL)
+      dps.physicalDamage = capUint16(dps.physicalDamage + amount)
+    else if (attackType === AttackType.SPECIAL)
+      dps.specialDamage = capUint16(dps.specialDamage + amount)
+    else dps.trueDamage = capUint16(dps.trueDamage + amount)
+
+    this.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
+      index: "",
+      sourceId: id,
+      type: attackType,
+      amount: Math.round(amount),
+      x: victim.positionX,
+      y: victim.positionY,
+      id: this.id
+    })
   }
 
   getTeam(playerId: string) {
@@ -1410,13 +1454,19 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
           } else {
-            pokemonOnCell.handleDamage({
+            const { takenDamage } = pokemonOnCell.handleDamage({
               damage: 100,
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,
               shouldTargetGainMana: false
             })
+            this.creditBoardEffectDamage(
+              pokemonOnCell,
+              BoardEffectDpsId.STORM,
+              AttackType.SPECIAL,
+              takenDamage
+            )
           }
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
@@ -1786,21 +1836,40 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
-              pokemonHit.handleHeal(
+              const { healReceived } = pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
                 pokemonHit,
                 0,
                 false
               )
+              if (healReceived > 0) {
+                // handleHeal just credited the Pokémon for healing itself. move
+                // it to the Tidal Wave row. healDone is a uint16, so keep it >= 0
+                pokemonHit.healDone = Math.max(
+                  0,
+                  pokemonHit.healDone - healReceived
+                )
+                const waveDps = this.getBoardEffectDps(
+                  team,
+                  BoardEffectDpsId.TIDAL_WAVE
+                )
+                waveDps.heal = capUint16(waveDps.heal + healReceived)
+              }
             }
           } else {
-            pokemonHit.handleDamage({
+            const { takenDamage } = pokemonHit.handleDamage({
               damage: tidalWaveLevel * 0.05 * pokemonHit.maxHP,
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
               shouldTargetGainMana: false
             })
+            this.creditBoardEffectDamage(
+              pokemonHit,
+              BoardEffectDpsId.TIDAL_WAVE,
+              AttackType.TRUE,
+              takenDamage
+            )
             let newY = y
             if (isRed) {
               while (

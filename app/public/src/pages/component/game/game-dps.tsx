@@ -2,12 +2,23 @@ import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
+import { getBoardEffectDpsDisplay } from "./board-effect-dps"
 
 export default function GameDps(props: { maxDamage: number; dps: IDps }) {
   const { t } = useTranslation()
+  const boardEffect = getBoardEffectDpsDisplay(props.dps.id)
   return (
     <div className="game-dps-bar">
-      <PokemonPortrait avatar={props.dps.name} />
+      {boardEffect ? (
+        <img
+          src={boardEffect.iconPath}
+          className="pokemon-portrait"
+          title={t(boardEffect.labelKey)}
+          alt={t(boardEffect.labelKey)}
+        />
+      ) : (
+        <PokemonPortrait avatar={props.dps.name} />
+      )}
       <div className="game-dps-progress-wrapper">
         <p>
           {props.dps.physicalDamage +

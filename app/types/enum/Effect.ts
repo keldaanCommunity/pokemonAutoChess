@@ -191,3 +191,23 @@ export const BoardEffects = [
 ] as const
 
 export type BoardEffect = (typeof BoardEffects)[number]
+
+// tokens that render as an icon in descriptions and get a wiki glossary entry.
+// SANDSTORM_DAMAGE and CURSE_DAMAGE are suffixed because SANDSTORM already names
+// a Weather and CURSE a Status, and a token can only mean one thing
+export const DocumentedBoardEffects = [
+  EffectEnum.EMBER,
+  EffectEnum.HAIL,
+  EffectEnum.SPIKES,
+  EffectEnum.STEALTH_ROCKS,
+  EffectEnum.POISON_GAS,
+  EffectEnum.TOXIC_SPIKES,
+  EffectEnum.LIGHTNING_STRIKE,
+  "TIDAL_WAVE",
+  "SANDSTORM_DAMAGE",
+  "CURSE_DAMAGE",
+  "WEB_TILE",
+  "COTTON_TILE",
+  "STRANGE_STEAM_TILE",
+  "SMOKE_TILE"
+] as const

@@ -11,6 +11,11 @@ import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
+import {
+  boardEffectDpsIds,
+  boardEffectIconPath,
+  boardEffectTextureKey
+} from "../../pages/component/game/board-effect-dps"
 import { preloadMusic } from "../../pages/utils/audio"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
@@ -64,6 +69,16 @@ export default class LoadingManager {
 
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
+    // icons for the damage numbers board effects put on screen. load.svg, not
+    // load.image, or the tint fills an opaque box instead of the shape
+    for (const id of boardEffectDpsIds) {
+      scene.load.svg(
+        boardEffectTextureKey(id),
+        `/${boardEffectIconPath(id)}`,
+        { width: 64, height: 64 }
+      )
+    }
 
     scene.load.spritesheet({
       key: "cell",

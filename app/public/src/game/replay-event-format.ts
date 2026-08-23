@@ -7,6 +7,7 @@ import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 import { getRankLabel } from "../../../types/strings/Strings"
+import { getBoardEffectDpsDisplay } from "../pages/component/game/board-effect-dps"
 import { statusName } from "./replay-combat-scan"
 
 // SCREAMING_SNAKE enum value to Title Case (ICE_SPINNER becomes "Ice Spinner"); derived so it survives a bump
@@ -369,12 +370,21 @@ export function formatMessageRow(
       case Transfer.POKEMON_DAMAGE: {
         const o = p as {
           index?: string
+          sourceId?: string
           amount?: number
           type?: number
           x?: number
           y?: number
         }
-        const src = o?.index ? pkmName(t, PkmByIndex[o.index]) : "?"
+        // board effects have no attacker to name, so they send a sourceId instead
+        const boardEffect = o?.sourceId
+          ? getBoardEffectDpsDisplay(o.sourceId)
+          : undefined
+        const src = o?.index
+          ? pkmName(t, PkmByIndex[o.index])
+          : boardEffect
+            ? t(boardEffect.labelKey)
+            : "?"
         const target = info?.target
           ? pkmName(t, info.target)
           : `(${o?.x},${o?.y})`

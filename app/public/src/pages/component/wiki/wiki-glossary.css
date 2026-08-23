@@ -13,3 +13,21 @@
 .glossary-term dd::first-letter {
   text-transform: uppercase;
 }
+
+.glossary-note {
+  margin: -0.25em 0 0.5em;
+  color: var(--color-fg-secondary);
+  font-style: italic;
+}
+
+.glossary-tag {
+  display: inline-block;
+  margin-left: 0.5em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-fg-secondary);
+  font-size: 75%;
+  font-weight: 700;
+  vertical-align: middle;
+}

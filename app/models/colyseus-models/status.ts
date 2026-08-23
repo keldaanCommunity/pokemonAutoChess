@@ -4,6 +4,7 @@ import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import type { PokemonEntity } from "../../core/pokemon-entity"
 import {
+  BoardEffectDpsId,
   type IPokemonEntity,
   type ISimulation,
   type IStatus,
@@ -414,6 +415,11 @@ export default class Status extends Schema implements IStatus {
         this.burnCooldown = duration
         if (origin) {
           this.burnOrigin = origin
+        } else {
+          // no origin means the ember tile is burning them. hand it ownership
+          // once its refresh is what keeps the burn alive, or the first burner
+          // keeps the credit for the rest of the fight
+          this.burnOrigin = null
         }
       }
 
@@ -481,13 +487,21 @@ export default class Status extends Schema implements IStatus {
 
       burnDamage = Math.round(burnDamage)
       if (burnDamage > 0) {
-        pkm.handleDamage({
+        const { takenDamage } = pkm.handleDamage({
           damage: burnDamage,
           board,
           attackType: AttackType.TRUE,
           attacker: this.burnOrigin,
           shouldTargetGainMana: true
         })
+        if (this.burnOrigin === null && pkm.effects.has(EffectEnum.EMBER)) {
+          pkm.simulation.creditBoardEffectDamage(
+            pkm,
+            BoardEffectDpsId.EMBER,
+            AttackType.TRUE,
+            takenDamage
+          )
+        }
       }
       this.burnDamageCooldown = 1000
     } else {
@@ -585,6 +599,10 @@ export default class Status extends Schema implements IStatus {
         if (origin.effects.has(EffectEnum.TOXIC)) {
           maxStacks = 5
         }
+      } else {
+        // no origin means a tile is poisoning them. hand it ownership, or the
+        // first poisoner keeps the credit for every tick the tile refreshes
+        this.poisonOrigin = null
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
@@ -649,13 +667,31 @@ export default class Status extends Schema implements IStatus {
       if (poisonDamage < 0) {
         pkm.handleHeal(Math.round(-poisonDamage), pkm, 0, false)
       } else if (poisonDamage > 0) {
-        pkm.handleDamage({
+        const { takenDamage } = pkm.handleDamage({
           damage: min(1)(Math.round(poisonDamage)),
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
           shouldTargetGainMana: false
         })
+        // no origin means a tile is refreshing the poison, so the tick is its own
+        if (this.poisonOrigin === null) {
+          if (pkm.effects.has(EffectEnum.POISON_GAS)) {
+            pkm.simulation.creditBoardEffectDamage(
+              pkm,
+              BoardEffectDpsId.POISON_GAS,
+              AttackType.TRUE,
+              takenDamage
+            )
+          } else if (pkm.effects.has(EffectEnum.TOXIC_SPIKES)) {
+            pkm.simulation.creditBoardEffectDamage(
+              pkm,
+              BoardEffectDpsId.TOXIC_SPIKES,
+              AttackType.TRUE,
+              takenDamage
+            )
+          }
+        }
       }
 
       if (
@@ -1089,13 +1125,20 @@ export default class Status extends Schema implements IStatus {
     this.curseCooldown -= dt
     if (this.curseCooldown <= 0) {
       this.curse = false
-      pokemon.handleDamage({
+      const { takenDamage } = pokemon.handleDamage({
         damage: 9999,
         board,
         attacker: null,
         attackType: AttackType.TRUE,
         shouldTargetGainMana: false
       })
+      // 9999 is overkill damage; takenDamage is the HP actually removed
+      pokemon.simulation.creditBoardEffectDamage(
+        pokemon,
+        BoardEffectDpsId.CURSE,
+        AttackType.TRUE,
+        takenDamage
+      )
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: "CURSE_EFFECT",

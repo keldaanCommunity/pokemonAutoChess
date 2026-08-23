@@ -2,15 +2,26 @@ import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
+import { getBoardEffectDpsDisplay } from "./board-effect-dps"
 
 export default function GameDpsHeal(props: {
   maxHeal: number
   dpsMeter: IDps
 }) {
   const { t } = useTranslation()
+  const boardEffect = getBoardEffectDpsDisplay(props.dpsMeter.id)
   return (
     <div className="game-dps-bar">
-      <PokemonPortrait avatar={props.dpsMeter.name} />
+      {boardEffect ? (
+        <img
+          src={boardEffect.iconPath}
+          className="pokemon-portrait"
+          title={t(boardEffect.labelKey)}
+          alt={t(boardEffect.labelKey)}
+        />
+      ) : (
+        <PokemonPortrait avatar={props.dpsMeter.name} />
+      )}
       <div className="game-dps-progress-wrapper">
         <p>{props.dpsMeter.heal + props.dpsMeter.shield}</p>
         <ProgressBar className="my-progress is-primary">
