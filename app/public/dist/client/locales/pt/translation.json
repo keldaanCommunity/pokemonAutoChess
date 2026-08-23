@@ -580,13 +580,13 @@
 		"SKITTER_SMACK": "Golpe Rasteiro",
 		"NIGHT_DAZE": "Ofuscamento Noturno",
 		"BITTER_MALICE": "Malícia Amarga",
-		"COIL": "Bobina",
-		"SUBSTITUTE": "Substittuto",
-		"SWARM": "Chamado do Enxame ",
-		"FLING": "Peteleco ",
-		"REVELATION_DANCE": "Dança Reveladora",
-		"THUNDERCLAP_PRESS": "Prensa Trovão",
-		"DRAGON_RAGE": "Fúria Dracônica"
+		"COIL": "Enrosco",
+		"SUBSTITUTE": "Substituto",
+		"SWARM": "Chamado do Enxame",
+		"FLING": "Lançamento",
+		"REVELATION_DANCE": "Dança da Revelação",
+		"THUNDERCLAP_PRESS": "Golpe Trovejante",
+		"DRAGON_RAGE": "Fúria Dracónica"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1781,10 +1781,10 @@
 		"BUG_NEST": "Ninho de Insetos ",
 		"SLITHER_WING": "Asa Rastejante",
 		"PASSIMIAN": "Passimian",
-		"ORICORIO_BAILE": "Oricorio (Estilo Baile)",
-		"ORICORIO_PA_U": "Oricorio (Estilo Pa'u)",
-		"ORICORIO_POMPOM": "Oricorio (Estilo Pom-Pom)",
-		"ORICORIO_SENSU": "Oricorio (Estilo Sensu)",
+		"ORICORIO_BAILE": "Oricorio (Estilo Apaixonado)",
+		"ORICORIO_PA_U": "Oricorio (Estilo Tranquilo)",
+		"ORICORIO_POMPOM": "Oricorio (Estilo Animado)",
+		"ORICORIO_SENSU": "Oricorio (Estilo Refinado)",
 		"GALAR_MEOWTH": "Meowth de Galar",
 		"PERRSERKER": "Perrserker"
 	},
@@ -2351,7 +2351,8 @@
 		"SWARM": "Uma cópia de um Pokémon BUG do seu tabuleiro salta para fora do ninho. A raridade aumenta a cada uso.",
 		"FLING": "Ao lançar a BALL, todos os inimigos entre o usuário e o receptor recebem [30,30,30,100,SP]% da SPEED do usuário como SPECIAL. Se não estiver com uma BALL equipada, salta para um canto do tabuleiro e recebe uma nova BALL",
 		"REVELATION_DANCE": "Realiza uma dança que projeta penas em células ADJACENT. Os inimigos atingidos recebem [15,30,50,80,SP] de SPECIAL e os aliados ganham um bônus dependendo do estilo:\n- Estilo Apaixonado: [3,6,10,15,SP] SPEED\n- Estilo Animado: [2,4,6,10,SP] ATK\n- Estilo Tranquilo: [2,4,6,10,SP] SPE_DEF\n- Estilo Refinado: [15,30,50,80,SP] SHIELD",
-		"THUNDERCLAP_PRESS": "O alvo é atingido por um golpe elétrico de corpo e empurrado para trás. Ele e o inimigo atingido no caminho recebem PARALYSIS por 4 segundos e sofrem [20,40,80,160,SP] de SPECIAL."
+		"THUNDERCLAP_PRESS": "O alvo é atingido por um golpe elétrico de corpo e empurrado para trás. Ele e o inimigo atingido no caminho recebem PARALYSIS por 4 segundos e sofrem [20,40,80,160,SP] de SPECIAL.",
+		"DRAGON_RAGE": "O usuário recebe [15,30,45,60,SP] de SHIELD a cada segundo, pelos próximos 6 segundos recebe [5,10,15,20] de SHIELD e causa [5,10,15,20,SP] de SPECIAL para inimigos ADJACENT . Quando a habilidade acaba, consome o escudo remanescente e cura 40% do seu valor"
 	},
 	"effect": {
 		"STAMINA": "Vigor",
@@ -3502,7 +3503,8 @@
 		"SUBSTITUTE": "Um chamariz criado para se parecer com um Pokémon",
 		"PASSIMIAN": "Passimian já vem com uma BALL equipada",
 		"UXIE": "XP ganho: {{stacks}}",
-		"NECTAR": "Quando um vaso de flores estiver totalmente crescido, receba néctar de acordo com sua cor."
+		"NECTAR": "Quando um vaso de flores estiver totalmente crescido, receba néctar de acordo com sua cor.",
+		"STEELY_SPIRIT": "Aliados ADJACENT_IN_THE_SAME_ROW causam 10% do seu ATK como TRUE"
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -4650,7 +4652,9 @@
 			"double_up": "Como funciona o modo Dobles?",
 			"double_up_answer": "Você começa escolhendo um parceiro. Quando os dois jogadores de uma equipe clicam em Pronto, eles ficam travados e não podem mais trocar de equipe.\nDurante a partida, sua vida é compartilhada com seu parceiro. Você recebe metade do dano normal da rodada, mas esse dano corresponde à pior derrota entre vocês dois.\nSe você derrotar seu oponente enquanto seu parceiro ainda estiver lutando, seus Pokémon se juntarão à batalha dele como reforços após 3 segundos. Sinergias ativas, itens e status permanentes da sua equipe serão mantidos. Seus Pokémon não contribuirão nem ganharão nenhum novo efeito de sinergia da equipe do seu parceiro. Efeitos que afetam o jogador se aplicam ao jogador original, mesmo quando lutando no tabuleiro do parceiro.\nO espaço na extremidade direita do seu banco pode ser usado para trocar Pokémon e seus itens equipados com seu parceiro. Itens removíveis são retirados antes da troca. Depois que você e seu parceiro colocarem um Pokémon nele e confirmarem a troca, haverá um período de espera antes que ele possa ser usado novamente; essa duração aumenta com base na raridade, nas estrelas e no número de itens trocados.\nPor fim, nos estágios 15–16 e 25–26, você terá a oportunidade de comprar um presente para seu parceiro.",
 			"reconnect": "Fui desconectado de uma partida/sala em andamento, como faço para reconectar?",
-			"reconnect_answer": "Tente recarregar a página (tecla F5). Se isso não funcionar, volte para <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reautentique-se se necessário e volte para o lobby principal, e tente procurar sua partida na aba \"Em Jogo\" ou no modo de jogo correspondente. Deve haver um botão verde \"Reconectar\" ao lado da sua sala de jogo."
+			"reconnect_answer": "Tente recarregar a página (tecla F5). Se isso não funcionar, volte para <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a>, reautentique-se se necessário e volte para o lobby principal, e tente procurar sua partida na aba \"Em Jogo\" ou no modo de jogo correspondente. Deve haver um botão verde \"Reconectar\" ao lado da sua sala de jogo.",
+			"elimination_rank": "Por que estou abaixo de um jogador que foi eliminado antes de mim ?",
+			"elimination_rank_answer": "Posicionamento final é baseado na vida total remanescente após o dano da rodada ter sido aplicado, não em quem termina a batalha primeiro, o jogo ranqueia jogadores baseado na vida restante, com o nível sendo usado como critério de desempate. Jogadores são eliminados após, então se múltiplos jogadores são eliminados na mesma rodada, o jogador com a maior vida total final fica em uma classificação melhor de quem perdeu a rodada antes, duração de batalha e tempo de eliminação não determina o ranqueamento."
 		},
 		"tutorials": {
 			"thanks_to": "Graças a",
