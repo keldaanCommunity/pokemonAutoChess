@@ -1,11 +1,11 @@
 import type { MapSchema } from "@colyseus/schema"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import type PokemonSprite from "../public/src/game/components/pokemon"
-import type { IPokemon } from "../types"
+import type { IPokemon, IPokemonEntity } from "../types"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { schemaValues } from "./schemas"
 
-export function isOnBench(pokemon: IPokemon | PokemonSprite) {
+export function isOnBench(pokemon: IPokemon | IPokemonEntity | PokemonSprite) {
   return pokemon.positionY === 0
 }
 

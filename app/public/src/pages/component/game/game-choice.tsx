@@ -9,10 +9,10 @@ import {
   PkmFamily
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
-import type { IDetailledPokemon } from "../../../models/bot-v2"
 import { pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
@@ -86,6 +86,8 @@ export default function GameChoice() {
     message = t("player_choices.choose_item")
   } else if (choice.type === "wand") {
     message = t("player_choices.choose_wand")
+  } else if (choice.type === "gifts") {
+    message = t("player_choices.choose_gift")
   }
 
   return (
@@ -95,6 +97,11 @@ export default function GameChoice() {
         style={{ visibility: visible ? "visible" : "hidden" }}
       >
         {message && <h2>{message}</h2>}
+        {choices.length > 1 && (
+          <p style={{ textAlign: "center", opacity: 0.7, fontSize: "0.9em" }}>
+            {t("player_choices.more_choices", { count: choices.length - 1 })}
+          </p>
+        )}
 
         {choice.pokemons.length > 0 ? (
           <div className="game-choice-pokemons-list">
@@ -189,6 +196,21 @@ export default function GameChoice() {
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`item_description.${item}`))}
                 </p>
+                {choice.costs[index] > 0 && (
+                  <p
+                    style={{
+                      marginBottom: "0.5em",
+                      fontWeight: "bold",
+                      fontSize: "1.5rem"
+                    }}
+                  >
+                    {addIconsToDescription(
+                      t("player_choices.cost_amount", {
+                        cost: choice.costs[index]
+                      })
+                    )}
+                  </p>
+                )}
               </div>
             ))}
           </div>

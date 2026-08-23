@@ -7,6 +7,7 @@ import type { Language } from "../../../types/enum/Language"
 import type {
   IPokemonCollectionItemUnpacked,
   IUserMetadataJSON,
+  IUserMetadataLean,
   IUserMetadataUnpacked
 } from "../../../types/interfaces/UserMetadata"
 import type { INotification } from "../../../types/notifications"
@@ -22,6 +23,7 @@ export interface INetwork {
   connectionStatus: ConnectionStatus
   error: string | null
   notifications: INotification[]
+  pal: IUserMetadataLean | null
 }
 
 const initalState: INetwork = {
@@ -32,7 +34,8 @@ const initalState: INetwork = {
   pendingGameId: null,
   error: null,
   connectionStatus: ConnectionStatus.PENDING,
-  notifications: []
+  notifications: [],
+  pal: null
 }
 
 export const networkSlice = createSlice({
@@ -108,6 +111,31 @@ export const networkSlice = createSlice({
       state.notifications = state.notifications.filter(
         (n) => n.id !== action.payload
       )
+    },
+    selectPal: (state, action: PayloadAction<string | null>) => {
+      if (state.profile) {
+        state.profile.eventData = {
+          ...(state.profile.eventData || {}),
+          pal: action.payload || undefined
+        }
+      }
+      rooms.lobby?.send(Transfer.SELECT_PAL, action.payload)
+    },
+    setPal: (state, action: PayloadAction<IUserMetadataLean | null>) => {
+      state.pal = action.payload
+    },
+    confirmPal: (state, action: PayloadAction<string>) => {
+      const playerIdThatChoseYou = action.payload
+      if (
+        state.pal &&
+        state.pal?.uid === playerIdThatChoseYou &&
+        state.profile
+      ) {
+        state.pal.eventData = {
+          ...(state.pal.eventData || {}),
+          pal: state.profile.uid
+        }
+      }
     }
   }
 })
@@ -124,7 +152,10 @@ export const {
   selectLanguage,
   setConnectionStatus,
   setErrorAlertMessage,
-  setPendingGameId
+  setPendingGameId,
+  selectPal,
+  setPal,
+  confirmPal
 } = networkSlice.actions
 
 export default networkSlice.reducer
