@@ -92,9 +92,10 @@
   column-gap: 0.5em;
 }
 
-#wiki-page .wiki-status h2 {
-  margin: 0;
-  font-size: 2rem;
+#wiki-page .wiki-board-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-stat h2 {
@@ -219,6 +220,11 @@
 #wiki-regions .my-box h2 {
   margin: 0;
   font-size: 1.5rem;
+}
+
+#wiki-regions .react-tabs__tab-panel {
+  flex: 1;
+  min-height: 0;
 }
 
 #wiki-regions .wiki-regional-mons {

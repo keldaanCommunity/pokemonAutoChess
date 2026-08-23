@@ -112,11 +112,11 @@ export default class GameScene extends Scene {
     this.loadingManager!.preloadingPromise
       .catch((err) => logger.error("loading error", err))
       .then(() => {
-        logger.debug("Loading complete")
-        if (!this.started) {
-          this.room?.send(Transfer.LOADING_COMPLETE)
-        }
-      })
+      logger.debug("Loading complete")
+      if (!this.started) {
+        this.room?.send(Transfer.LOADING_COMPLETE)
+      }
+    })
 
     this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
       if (!this.started) {
@@ -127,16 +127,19 @@ export default class GameScene extends Scene {
     })
   }
 
+  getPlayerToSpectate(): Player | undefined {
+    const players = schemaValues(this.room?.state.players!)
+    const uid = this.spectate ? this.spectatedPlayerId : this.uid
+    return players.find((p) => p.id === uid) ?? players[0]
+  }
+
   startGame() {
     if (this.uid && this.room) {
       this.registerKeys()
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
-      const player = this.room.state.players.get(
-        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
-      ) as Player
+      const player = this.getPlayerToSpectate() as Player
 
       this.setMap(player.map)
       this.setupMouseEvents()
@@ -565,6 +568,7 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          gameObject.closeDetail()
           if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
             this.useItemZone.showForItem(this.itemDragged.name)
           }
