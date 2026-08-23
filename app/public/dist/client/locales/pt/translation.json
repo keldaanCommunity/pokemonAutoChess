@@ -2585,6 +2585,20 @@
 		"AROMATIC_MIST": "Escolha uma entre três varinhas dentre BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
 		"FAIRY_AURA": "Escolha uma entre três varinhas dentre CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
 		"PIXILATE": "Escolha uma entre três varinhas dentre GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
+		"MOON_FORCE": "Escolha uma entre três varinhas dentre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Pokémon FAIRY ganham 5 LUCK.",
+		"SMOKE": "Infringe BLINDED ao Pokémon sobre ele.",
+		"STRANGE_STEAM": "Faz o Pokémon sobre ele causar e sofrer 20% a mais de SPECIAL.",
+		"COTTON_BALL": "Infringe SLEEP por 1 segundo ao primeiro Pokémon a andar sobre ele, e então desaparece.",
+		"CURSE": "CURSE executa Pokémon quanto o tempo acaba.",
+		"STICKY_WEB": "Infringe PARALYSIS por 2 segundos ao Pokémon sobre ele.",
+		"SANDSTORM": "Durante SANDSTORM, causa 5 de SPECIAL por segundo à todos os Pokémon. (Pokémon do tipo GROUND são imune) ",
+		"TIDAL_WAVE": "Onda que limpa status negativos e BOARD_EFFECT, cura aliados do tipo AQUATIC, empurra e atinge inimigos. ",
+		"LIGHTNING_STRIKE": "Durante STORM. pode acertar um espaço no tabuleiro, causando 100 de SPECIAL ao Pokémon no espaço. (Pokémon do tipo ELECTRIC são imune)",
+		"TOXIC_SPIKES": "Infringe POISONNED por 1 segundo ao Pokémon sobre ele. (Pokémon do tipo POISON são imune)",
+		"STEALTH_ROCKS": "Causa 10 de PHYSICAL por segundo e infringe WOUND por 1 segundo ao Pokémon sobre ele. (Pokémon do tipo ROCK são imune)",
+		"SPIKES": "Causa 10 de TRUE por segundo e infringe ARMOR_BREAK por 1 segundo ao Pokémon sobre ele. (Pokémon do tipo STEEL e FLYING são imune)",
+		"HAIL": "Causa 10 de SPECIAL e infringe FREEZE por 1 segundo ao Pokémon sobre aquele espaço. (Pokémon do tipo ICE são imune)",
+		"EMBER": "causa 10 de SPECIAL e infringe BURN ao Pokémon sobre aquele espaço. (Pokémon do tipo FIRE e FLYING são imunes)"
 		"MOON_FORCE": "Escolha uma entre três varinhas dentre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Pokémon FAIRY ganham 5 LUCK."
 	},
 	"item": {
@@ -4101,6 +4115,8 @@
 			"meta_report": "Abrir/fechar relatório da meta"
 		},
 		"record_replays": "Gravar replays das partidas automaticamente em segundo plano",
+		"theme": "Tema",
+		"theme_info": "Alguns temas podem ser obtidos ao desbloquear títulos específicos."
 		"theme": "Tema"
 	},
 	"jukebox": {
@@ -4795,6 +4811,10 @@
 			"unholdable_item": "Itens não equipáveis são itens que não podem ser equipados por um Pokémon. Seu efeito ainda se aplica a toda a sua equipe.",
 			"removable_item": "Itens removíveis são itens que podem ser retirados de um Pokémon ao colocá-lo no banco.",
 			"gift": "Presentes são itens dados ao seu parceiro de equipe quando você os escolhe"
+		},
+		"status": {
+			"board_effects": "Efeito de Tabuleiro",
+			"statuses": "Status"
 		}
 	},
 	"errors": {
