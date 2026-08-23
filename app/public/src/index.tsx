@@ -18,6 +18,7 @@ import { SpriteDebug } from "./pages/sprite-viewer"
 import TranslationsPage from "./pages/translations"
 import store from "./stores/index"
 import "./style/index.css"
+import "./custom-cursors"
 import "./theme"
 
 // tap the inbound colyseus stream before any game room joins, so a match can be recorded and downloaded

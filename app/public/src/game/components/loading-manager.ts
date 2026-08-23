@@ -7,6 +7,7 @@ import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../../../types/enum/Effect"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
@@ -64,6 +65,19 @@ export default class LoadingManager {
 
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
+    // icons for the damage numbers board effects put on screen.
+    // load.svg and not load.image, otherwise the tint fills an opaque box instead of the shape
+    for (const effect of EnvironmentalEffects) {
+      scene.load.svg(
+        `effect-${effect}`,
+        `/assets/icons/effects/${effect}.svg`,
+        {
+          width: 64,
+          height: 64
+        }
+      )
+    }
 
     scene.load.spritesheet({
       key: "cell",

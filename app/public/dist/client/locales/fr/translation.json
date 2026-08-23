@@ -583,7 +583,10 @@
 		"COIL": "Enroulement",
 		"SUBSTITUTE": "Clonage",
 		"FLING": "Dégommage",
-		"SWARM": "Appel de l'Essaim"
+		"SWARM": "Appel de l'Essaim",
+		"REVELATION_DANCE": "Danse Éveil",
+		"THUNDERCLAP_PRESS": "Flying Thunder Press",
+		"DRAGON_RAGE": "Draco-Rage"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1776,7 +1779,14 @@
 		"SLITHER_WING": "Rampe-Ailes",
 		"BUG_NEST": "Nids d’insectes",
 		"PASSIMIAN": "Quartermac",
-		"KECLEON_PURPLE": "Kecleon (Violet)"
+		"KECLEON_PURPLE": "Kecleon (Violet)",
+		"PIKACHU_LIBRE": "Pikachu Catcheur",
+		"GALAR_MEOWTH": "Miaouss de Galar",
+		"PERRSERKER": "Berserkatt",
+		"ORICORIO_BAILE": "Plumeline (Style Flamenco)",
+		"ORICORIO_POMPOM": "Plumeline (Style Pom-Pom)",
+		"ORICORIO_PA_U": "Plumeline (Style Hula)",
+		"ORICORIO_SENSU": "Plumeline (Style Buyō)"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Soigne tous les effets de statut et octroie [20,40,80,160,SP] SHIELD à tous les alliés.",
@@ -2338,7 +2348,11 @@
 		"BITTER_MALICE": "Inflige [25,50,100,200,SP] SPECIAL à la cible et FATIGUE pendant [3,SP] secondes. Si le lanceur est déguisé, la capacité affecte aussi les ennemis ADJACENT à la cible, puis le lanceur perd son déguisement.",
 		"COIL": "Ligotte la cible avec sa queue, infligeant LOCKED et PARALYSIS pendant 3 secondes. Le lanceur augmente également son ATK et sa DEF de [3,5,10,20,SP]",
 		"SWARM": "Une copie d'un Pokémon BUG sort du nid pour rejoindre votre banc. La rareté du Pokémon augmente à chaque fois que cela se produit.",
-		"FLING": "Lors du lancer de BALL, tous les ennemis entre le lanceur et le receveur reçoivent [30,30,30,100,SP]% de la SPEED du lanceur en SPECIAL. S'il n'a pas la balle, le lanceur saute dans un coin du terrain et obtient une nouvelle BALL."
+		"FLING": "Lors du lancer de BALL, tous les ennemis entre le lanceur et le receveur reçoivent [30,30,30,100,SP]% de la SPEED du lanceur en SPECIAL. S'il n'a pas la balle, le lanceur saute dans un coin du terrain et obtient une nouvelle BALL.",
+		"DEFAULT": " ",
+		"REVELATION_DANCE": "Réalise une danse qui envoie des plumes sur les emplacements ADJACENT. Les ennemis touchés subissent [15,30,50,80,SP] SPECIAL et les alliés reçoivent un bonus dépendant du style du pokémon:\n- Style Flamenco: [3,6,10,15,SP] SPEED\n- Style Pom-Pom: [2,4,6,10,SP] ATK\n- Style Hula: [2,4,6,10,SP] SPE_DEF\n- Style Buyō: [15,30,50,80,SP] SHIELD ",
+		"THUNDERCLAP_PRESS": "La cible subit un plaquage électrique et est repoussée au loin. Pikachu et la cible de l'attaque subissent ensuite PARALYSIS pendant 4 secondes et [20,40,80,160,SP] SPECIAL.",
+		"DRAGON_RAGE": "Obtient [15,30,45,60,SP] SHIELD. Chaque seconde durant les 6 prochaines secondes, reçoit [5,10,15,20] SHIELD de plus et inflige [5,10,15,20,SP] SPECIAL aux ennemis ADJACENT. Quand la capacité arrive à son terme, consomme le SHIELD restant et soigne le pokemon de 40% de ce montant."
 	},
 	"effect": {
 		"STAMINA": "Endurance",
@@ -2417,8 +2431,8 @@
 		"CURSE_OF_TORMENT": "Malédiction du Tourment",
 		"CURSE_OF_FATE": "Malédiction du Destin",
 		"AROMATIC_MIST": "Brume Capiteuse",
-		"FAIRY_WIND": "Vent Féerique",
-		"STRANGE_STEAM": "Vapeur Féerique",
+		"FAIRY_AURA": "Vent Féerique",
+		"PIXILATE": "Vapeur Féerique",
 		"MOON_FORCE": "Pouvoir Lunaire",
 		"CHILLY": "Frileux",
 		"FROSTY": "Givré",
@@ -2534,8 +2548,8 @@
 		"CURSE_OF_TORMENT": "De plus, l'ennemi avec la AP la plus élevée en perd 30 et subit FATIGUE",
 		"CURSE_OF_FATE": "De plus, l'ennemi le STRONGEST subit CURSE et sera mis KO au bout de 8 secondes",
 		"AROMATIC_MIST": "Choisissez une baguette parmi 3 dans cet ensemble: BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
-		"FAIRY_WIND": "Choisissez une baguette parmi 3 dans cet ensemble: CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
-		"STRANGE_STEAM": "Choisissez une baguette parmi 3 dans cet ensemble: GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
+		"FAIRY_AURA": "Choisissez une baguette parmi 3 dans cet ensemble: CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
+		"PIXILATE": "Choisissez une baguette parmi 3 dans cet ensemble: GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
 		"MOON_FORCE": "Choisissez une baguette parmi 3 dans cet ensemble: WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Vos Pokémon FAIRY gagnent 5 LUCK.",
 		"CHILLY": "+4 SPE_DEF",
 		"FROSTY": "+12 SPE_DEF",
@@ -2926,7 +2940,11 @@
 		"SMALL_EXP_GIFT": "Petit cadeau Exp",
 		"LARGE_EXP_GIFT": "Gros cadeau Exp",
 		"STAR_GIFT": "Cadeau Etoile",
-		"BANQUET": "Festin"
+		"BANQUET": "Festin",
+		"PINK_NECTAR": "Nectar Rose",
+		"PURPLE_NECTAR": "Nectar Mauve",
+		"YELLOW_NECTAR": "Nectar Jaune ",
+		"RED_NECTAR": "Nectar Rouge"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fossile d'un Pokémon ayant vécu à l'époque préhistorique",
@@ -3282,7 +3300,11 @@
 		"SMALL_EXP_GIFT": "Votre partenaire gagne 8 XP. L'excédent au delà du niveau max est donné en GOLD à la place.",
 		"LARGE_EXP_GIFT": "Votre partenaire gagne 24 XP. L'excédent au delà du niveau max est donné en GOLD à la place.",
 		"STAR_GIFT": "Fait évoluer un Pokémon aléatoire dans l'équipe de votre partenaire. Si aucun Pokémon ne peut évoluer, l'un d'entre eux recevra un gros boost de statistiques à la place.",
-		"BANQUET": "Donne un plat aléatoire à chaque Pokémon de l'équipe de votre partenaire. Il reçoit également 3 MUSHROOMS ainsi qu'un PICNIC_SET"
+		"BANQUET": "Donne un plat aléatoire à chaque Pokémon de l'équipe de votre partenaire. Il reçoit également 3 MUSHROOMS ainsi qu'un PICNIC_SET",
+		"PINK_NECTAR": "Peut être donné à Plumeline pour lui donner le style Hula",
+		"PURPLE_NECTAR": "Peut être donné à Plumeline pour lui donner le style Buyō",
+		"YELLOW_NECTAR": "Peut être donné à Plumeline pour lui donner le style Pom-Pom",
+		"RED_NECTAR": "Peut être donné à Plumeline pour lui donner le style Flamenco"
 	},
 	"passive_description": {
 		"NONE": "Pas de passif",
@@ -3475,7 +3497,14 @@
 		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé.",
 		"COMATOSE": "Subit toujours l'altération SLEEP. Est immunisé à la BURN, l'altération POISONNED, FREEZE ou PARALYSIS. Quand un Pokémon partageant la synergie SOUND essaie de le réveiller par ses cris, $t(pkm.KOMALA) plonge encore plus profondément dans ses rêves, et gagne 5 AP.",
 		"VESPIQUEN": "La portée d' $t(pkm.VESPIQUEEN) et sa capacité diffèrent en fonction de la rangée sur la laquelle est le Pokémon. La synergie BUG ne copie plus $t(pkm.VESPIQUEEN), mais 2 $t(pkm.COMBEE) à la place.",
-		"UXIE": "XP gagnée: {{stacks}}"
+		"UXIE": "XP gagnée: {{stacks}}",
+		"PIKACHU_LIBRE": "Quand la synergie FIGHTING est active, subit RAGE pendant 2 secondes tous les 10 coups bloqués.",
+		"ILLUSION": "Copie l'apparence de l'allié à sa gauche",
+		"STOUTLAND_SEARCH": "Mastouffe aboie dès qu'il se situe au-dessus d'un objet enfoui dans le sol.",
+		"SUBSTITUTE": "Une décoration conçue pour ressembler à un Pokémon.",
+		"PASSIMIAN": "Quartermac vient en tenant une BALL en tant qu'objet porté.",
+		"NECTAR": "Dès qu'un pot abrite une fleur arrivée à maturité, recevez un nectar de même couleur que le pot.",
+		"STEELY_SPIRIT": "Les Alliés ADJACENT_IN_THE_SAME_ROW infligent 10% de leur ATK en tant que TRUE."
 	},
 	"stat": {
 		"ATK": "Attaque",
@@ -3492,7 +3521,8 @@
 		"MAX_PP": "Max PP",
 		"AP": "Puissance",
 		"SHIELD": "Bouclier",
-		"LUCK": "Chance"
+		"LUCK": "Chance",
+		"XP": "XP"
 	},
 	"status": {
 		"BURN": "Brûlure",
@@ -3717,7 +3747,9 @@
 		"POSTMAN": "Facteur",
 		"SURVEY_CORPS": "Corps d'exploration",
 		"GUILDMASTER": "Maître de Guilde",
-		"LEGIONNAIRE": "Légionnaire"
+		"LEGIONNAIRE": "Légionnaire",
+		"PAL": "Équipier",
+		"FIVE_STARS": "★★★★★"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3814,7 +3846,9 @@
 		"POSTMAN": "Compléter une expédition de livraison",
 		"SURVEY_CORPS": "Compléter une expédition d'exploit de bataille",
 		"GUILDMASTER": "Compléter une expédition de rang S",
-		"LEGIONNAIRE": "Réaliser une formation composée d'un Hexadron et de 8 troupes ou plus."
+		"LEGIONNAIRE": "Réaliser une formation composée d'un Hexadron et de 8 troupes ou plus.",
+		"PAL": "Jouez une Partie de Double Up avec votre Équipier durant un évènement Pokéquipiers.",
+		"FIVE_STARS": "Jouez avec un Pokémon ayant 5 étoiles dans votre équipe."
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
@@ -4074,6 +4108,7 @@
 		"disable_animated_tilemap": "Désactiver les animations en arrière-plan",
 		"disable_camera_shake": "Désactiver les tremblements et flashs de l'écran",
 		"antialiasing": "Activer l'anti-aliasing",
+		"custom_cursors": "Activer les curseurs personnalisés",
 		"colorblind_mode": "Mode daltonien",
 		"renderer": "Moteur de rendu",
 		"renderer_info": "WebGL est plus rapide mais peut causer des bugs visuels chez certains. Canvas est plus lent mais plus largement compatible.",
@@ -4102,7 +4137,9 @@
 			"team_planner": "Ouvrir/fermer le planificateur d'équipe",
 			"meta_report": "Ouvrir/Fermer les rapports faits sur la méta"
 		},
-		"theme": "Thème"
+		"theme": "Thème",
+		"record_replays": "Enregistre des parties automatiquement en arrière plan",
+		"theme_info": "Certains thèmes peuvent être obtenus en débloquant des titres spécifiques."
 	},
 	"jukebox": {
 		"music_volume": "Volume de la musique",
@@ -4125,7 +4162,10 @@
 		"choose_unique": "Choisissez un Pokémon Unique pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
 		"choose_legendary": "Choisissez un Pokémon Légendaire pour votre équipe. Vous ne pouvez en choisir qu'un seul, choisissez bien !",
 		"free_slot_hint": "Vous devez avoir un emplacement libre sur le banc, ou deux pour les Duos",
-		"choose_wand": "Choisissez une branche pour conférer des effets additionnels aux attaques de vos Pokémon FAIRY."
+		"choose_wand": "Choisissez une branche pour conférer des effets additionnels aux attaques de vos Pokémon FAIRY.",
+		"choose_gift": "Choisissez un cadeau à offrir à votre partenaire.",
+		"more_choices": "{{count}} choix supplémentaire après celui-ci!",
+		"cost_amount": "Coût: {{cost}} GOLD"
 	},
 	"hide": "Cacher",
 	"show": "Montrer",
@@ -4166,7 +4206,8 @@
 		"refresh_leaderboards": "Recharger le classement des leaders",
 		"refresh_sprite_gap_data": "Recharger les données relatives aux différences des visuels",
 		"refresh_twitch_streams": "Recharger les flux Twitch",
-		"refresh_twitch_blacklist": "Recharger les listes noires de Twitch"
+		"refresh_twitch_blacklist": "Recharger les listes noires de Twitch",
+		"heap_snapshot": "Enregistrer un heap snapshot"
 	},
 	"banned": "Banni",
 	"ban_user": "Bannir le joueur",
@@ -4330,7 +4371,9 @@
 		"palette": "Palette de Queulorior ",
 		"palette_desc": "Pour ajuster le thème et les couleurs de l'interface, sélectionnez Options → Interface ",
 		"sprite_tracker": "Traqueur de visuels",
-		"sprite_tracker_desc": "Recherche les Pokémon disponibles sur SpriteCollab et les compare avec les Pokémon de Pokémon Auto Chess."
+		"sprite_tracker_desc": "Recherche les Pokémon disponibles sur SpriteCollab et les compare avec les Pokémon de Pokémon Auto Chess.",
+		"recorder": "Enregistreur",
+		"recorder_desc": "Enregistrez vos parties and regardez des rediffusions."
 	},
 	"level_required": "Niveau requis",
 	"map": {
@@ -4522,7 +4565,9 @@
 		"magnemite": "Avez-vous vu le fugitif ?",
 		"magnezone": "Écoutez, laissez la police faire son travail, dès que j’aurais de plus amples informations, croyez bien que vous en serez les premiers informés.",
 		"xatu": "Permettez-moi d'ouvrir ce coffre au trésor pour vous...",
-		"lapras": "Prêt à partir ? Alors tous à bord !"
+		"lapras": "Prêt à partir ? Alors tous à bord !",
+		"kecleon_preview": "Ton partenaire t'a envoyé un cadeau, kec kec kec!",
+		"kecleon": "Kecleon"
 	},
 	"scribble": {
 		"EVERYONE_IS_HERE": "Tout le monde est là !",
@@ -4544,7 +4589,8 @@
 		"GO_BIG_OR_GO_HOME": "Voit grand ou abandonne",
 		"FAMILY_OUTING": "Ballade en famille",
 		"UNOWN_SPELL": "Le Sort des Zarbi",
-		"CHOSEN_ONES": "Les Élus"
+		"CHOSEN_ONES": "Les Élus",
+		"BENCH_IS_LAVA": "Le Banc est désormais de la lave"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémon additionnels sont disponibles immédiatement",
@@ -4566,7 +4612,8 @@
 		"GO_BIG_OR_GO_HOME": "Les unités gagnent 5 HP max et grossissent en taille à chaque tour.",
 		"FAMILY_OUTING": "Les Pokémon de la même famille comptent tous dans le niveau de vos synergies.",
 		"UNOWN_SPELL": "Les Zarbi observent vos combats et lancent des sorts sur les deux équipes à chaque manche.",
-		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus."
+		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus.",
+		"BENCH_IS_LAVA": "Pendant les combats, votre banc deviendra de la lave qui brûlera progressivement les Pokémons se trouvant par mégarde dessus et éliminera ces derniers après un bout de temps."
 	},
 	"town_encounter_description": {
 		"KECLEON": "$t(pkm.KECLEON) vend des objets à synergies pour {{cost}} GOLD",
@@ -4590,7 +4637,8 @@
 		"MAGNEZONE": "Magnézone recherche un hors-la-loi et offre une récompense pour le retrouver.",
 		"KINGAMBIT": "Scalpereur a offert l'LEADERS_CREST au joueur en première place. Battez-le au combat pour gagner de l'GOLD supplémentaire !",
 		"LAPRAS": "Lapras vous offre un voyage vers une autre région.",
-		"LUDICOLO": "Ludicolo célèbre l'arrivée du carnaval et offre des instruments aux joueurs pour qu'ils puissent également participer aux festivités."
+		"LUDICOLO": "Ludicolo célèbre l'arrivée du carnaval et offre des instruments aux joueurs pour qu'ils puissent également participer aux festivités.",
+		"CHIMECHO": "Éoko peut convoquer une assemblée avec le SOOTHE_BELL"
 	},
 	"loading_hints": {
 		"tab_out": "Ne changez pas d'onglet ! Le chargement est mis en pause si cette fenêtre est inactive.",
@@ -4662,7 +4710,11 @@
 			"pull_requests": "les pull requests sont ouvertes",
 			"faq": "FAQ.",
 			"reconnect": "J'ai été déconnecté d'une partie/salon, comment permettre la reconnexion? ",
-			"reconnect_answer": "Essayez de relancer la connexion (Touche F5). Si cela ne marche pas, entrez à nouveau <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a> en tant qu'URL pour votre navigateur, réauthentifiez-vous si besoin et retournez dans le salon principal, puis essayez de retrouver votre partie sous le menu \"En jeu\" ou à l'endroit approprié au mode de votre partie. Vous devriez retrouver un bouton vert sur lequel il est écrit \"Reconnexion\", à côté du salon de votre précédente partie."
+			"reconnect_answer": "Essayez de relancer la connexion (Touche F5). Si cela ne marche pas, entrez à nouveau <a target=\"_blank\" href=\"https://pokemon-auto-chess.com/\">pokemon-auto-chess.com</a> en tant qu'URL pour votre navigateur, réauthentifiez-vous si besoin et retournez dans le salon principal, puis essayez de retrouver votre partie sous le menu \"En jeu\" ou à l'endroit approprié au mode de votre partie. Vous devriez retrouver un bouton vert sur lequel il est écrit \"Reconnexion\", à côté du salon de votre précédente partie.",
+			"double_up": "Comment fonctionne le mode Duo?",
+			"double_up_answer": "Vous commencez par choisir un partenaire. Lorsque les deux joueurs d’une équipe cliquent sur « Prêt », leur choix est définitif et ils ne peuvent plus changer d’équipe.\nPendant le combat, votre barre de santé est partagée avec votre partenaire. Vous subissez la moitié des dégâts habituels par manche, mais ces dégâts correspondent à la défaite pouvant vous faire perdre le plus de points de vie.\nSi vous battez votre adversaire alors que votre partenaire est encore en combat, vos Pokémons encore en jeu rejoindront son combat en renfort au bout de 3 secondes. Les synergies actives, les objets et les statistiques permanentes de votre équipe seront conservés. Vos Pokémon ne contribueront pas aux effets de synergie de l’équipe de votre partenaire et n’en bénéficieront pas non plus. Les effets affectant le joueur s’appliqueront au joueur d’origine même lorsqu’il combat sur le plateau de son partenaire.\nL’emplacement situé à l’extrême droite de votre banc peut être utilisé pour échanger des Pokémon et les objets qu’ils portent avec votre partenaire. Les objets retirables sont retirés avant l’échange. Une fois que vous et votre partenaire avez placé un Pokémon sur cet emplacement et confirmé l’échange, un temps de recharge s’appliquera avant qu’il ne puisse être réutilisé ; cette durée augmente en fonction de la rareté, des niveaux et du nombre d’objets échangés.\nEnfin, aux étapes 15-16 et 25-26, vous aurez la possibilité d’acheter un cadeau pour votre partenaire.",
+			"elimination_rank": "Pourquoi ai-je un moins bon classement qu'un adversaire éliminé avant moi?",
+			"elimination_rank_answer": "Le classement final est déterminé en fonction des points de vie restants des joueurs après l'application des dégâts du tour, et non en fonction du combat qui s'est terminé en premier. Le jeu classe les joueurs selon le nombre de points de vie restants le plus élevé, le niveau servant de critère de départage en cas d'égalité. Les joueurs sont marqués comme éliminés après coup ; ainsi, si plusieurs joueurs sont éliminés au cours d'un même tour, celui qui dispose du plus grand nombre de points de vie restants peut se classer devant un autre dont le combat s'est terminé plus tôt. La durée du combat et le moment de l'élimination n'influencent pas le classement."
 		},
 		"tutorials": {
 			"thanks_to": "Merci à",
@@ -4709,7 +4761,9 @@
 			"cell_battery_description": "Une fois le niveau maximum de synergie ELECTRIC atteint, vos Pokémon chargent une CELL_BATTERY avec leurs attaques. Vous pouvez l'utiliser pour surcharger un Pokémon ELECTRIC pendant le prochain combat.",
 			"fire_shard_description": "Une fois le niveau maximum de synergie FIRE atteint, à chaque tour vous pouvez utiliser un FIRE_SHARD pour renforcer un Pokémon FIRE en sacrifiant les HP de votre joueur.",
 			"wands": "Baguettes",
-			"wands_description": "Les baguettes ajoutent des effets aux attaques des Pokémon FAIRY. "
+			"wands_description": "Les baguettes ajoutent des effets aux attaques des Pokémon FAIRY. ",
+			"gifts": "Cadeaux",
+			"gifts_description": "Les cadeaux peuvent être offerts à votre partenaire pendant une partie dont le mode est Duo"
 		},
 		"statistics": {
 			"stat_description": {
@@ -4799,7 +4853,8 @@
 			"craftable_items": "Les objets fabricables sont créés par la combinaison de deux composants.",
 			"consumable_item": "Les objets consommables sont des objets à usage unique qui peuvent être retirés quand leurs effets sont appliqués.",
 			"unholdable_item": "Objet ne pouvant pas être porté par un Pokémon. Les effets de tels objets s'appliquent par défaut à l'intégralité de votre équipe.",
-			"removable_item": "Les Objets retirables sont des objets qui peuvent être retirés d'un Pokémon par le simple fait de le poser sur le banc."
+			"removable_item": "Les Objets retirables sont des objets qui peuvent être retirés d'un Pokémon par le simple fait de le poser sur le banc.",
+			"gift": "Les cadeaux sont des objets qui sont donnés à votre partenaire une fois sélectionnés."
 		}
 	},
 	"errors": {
@@ -4852,7 +4907,9 @@
 		"BOARD_EFFECT": "Effet de Plateau",
 		"title": "Termes techniques",
 		"ON_ATTACK": "d'attaque",
-		"ON_HIT": "de coup"
+		"ON_HIT": "de coup",
+		"FLY_AWAY": "Voler au loin",
+		"INIMITABLE": "Inimitable"
 	},
 	"technical_terms_definitions": {
 		"STRONGEST": "Le plus fort est défini comme suit, par ordre de priorité : 1. Nombre d'objets tenus, 2. Tier de l'unité, 3. Rareté de l'unité",
@@ -4861,7 +4918,9 @@
 		"CONE": "tir dans un angle de 90 degrés devant l'unité, centré sur la cible",
 		"BOARD_EFFECT": "Un Effet de Plateau est un effet posé sur une case du plateau qui affecte toutes les unités qui se tiennent dessus, quelle que soit leur équipe, et qui reste jusqu'à la fin du combat. Les effets de plateau peuvent être dissipés par certaines capacités.",
 		"ON_ATTACK": "Les effets d'attaque s'appliquent après qu'une unité a réalisé une attaque classique (et non une capacité consommant des PP) sur une unité encore en vie, à condition que l'attaque soit considérée comme ayant touché sa cible, que celle-ci ait esquivé ou non.",
-		"ON_HIT": "Les effets de coup sont appliqués quand une unité est touchée par une attaque ou une capacité. Ils sont appliqués même si la cible est dotée de SHIELD, mais toutefois pas si cette dernière esquive l'attaque ou la capacité, ou bien si la cible a le statut PROTECT."
+		"ON_HIT": "Les effets de coup sont appliqués quand une unité est touchée par une attaque ou une capacité. Ils sont appliqués même si la cible est dotée de SHIELD, mais toutefois pas si cette dernière esquive l'attaque ou la capacité, ou bien si la cible a le statut PROTECT.",
+		"FLY_AWAY": "Se déplace vers l'emplacement le plus sécurisé tout en restant à RANGE d'un ennemi.",
+		"INIMITABLE": "Une capacité est inimitable si elle ne peut être copiée par un autre Pokémon."
 	},
 	"victory_road": {
 		"title": "Route Victoire",
@@ -4921,21 +4980,24 @@
 		"share_on_discord": "Partager sur Discord",
 		"move_row_up": "Déplacer la ligne vers le haut",
 		"move_row_down": "Déplacer la ligne vers le bas",
-		"delete_row": "Supprimer la ligne"
+		"delete_row": "Supprimer la ligne",
+		"symbols": "Symboles"
 	},
 	"game_modes": {
 		"CLASSIC": "Partie classique",
 		"RANKED": "Match Classé",
 		"SCRIBBLE": "Gribouilles de Queulorior",
 		"CUSTOM_LOBBY": "Salon personnalisé",
-		"TOURNAMENT": "Tournoi"
+		"TOURNAMENT": "Tournoi",
+		"DOUBLE_UP": "Duo"
 	},
 	"game_modes_descriptions": {
 		"CLASSIC": "Une partie classique sans enjeux, parfait pour les joueurs occasionnels.\n8 joueurs, Elo désactivé, ouvert à tous.",
 		"RANKED": "Pour les compétiteurs ! 8 joueurs, Elo activé\nRestreint aux joueurs de votre rang actuel",
 		"SCRIBBLE": "Jouez pour le fun ! 8 joueurs, Elo désactivé\nUne nouvelle règle spéciale est ajoutée à cette partie.",
 		"CUSTOM_LOBBY": "Créer un salon privé pour jouer avec vos amis ou des bots",
-		"TOURNAMENT": "Match de tournoi. Consultez Discord pour les événements à venir."
+		"TOURNAMENT": "Match de tournoi. Consultez Discord pour les événements à venir.",
+		"DOUBLE_UP": "Coopérez and surpassez tous les autres binômes!"
 	},
 	"dendrogram": {
 		"title": "Hiérarchie des clusters",
@@ -5071,7 +5133,12 @@
 		"filter_beta": "Bétas ({{count}})",
 		"filter_cutscene": "Cinématiques ({{count}})",
 		"failed_to_fetch_data": "Données introuvables",
-		"error_label": "Erreur"
+		"error_label": "Erreur",
+		"summary_line": "SpriteCollab: {{totalSpriteCollab}} visuels | Non encore dans PAC: {{missingInPac}} visuels — Dernière mise à jour: {{lastUpdated}} (a pris {{refreshDurationMs}} ms)",
+		"criteria_title": "Comment les dossiers de Pokémon sont-ils sélectionnés? ",
+		"criteria_line_1": "La liste n'inclut que les dossiers que Pokémon Auto Chess peut utiliser actuellement.",
+		"criteria_line_2": "Pour être valable, un dossier doit avoir au minimum un portrait et toutes les animations requises, telles que Statique, Marche, Repos, Attaque ou Saut.",
+		"criteria_line_3": "Les formes Chromatiques suivent les règles de PAC, et la liste finale ne montre que les dossiers disponibles sur SpriteCollab mais manquants dans PAC."
 	},
 	"game_count": "Parties",
 	"total_games_30d": "Parties (sur les 30 derniers jours)",
@@ -5262,6 +5329,48 @@
 			"version": "Cette rediffusion a été enregistrée sur la version de jeu {{recorded}}; vous êtes actuellement en version {{running}}. Certaines parties peuvent mal s'afficher.",
 			"serializer": "Cette rediffusion a été enregistrée dans un format ({{recorded}} différent de celui actuellement utilisé: {{running}}). Certains bugs peuvent survenir.",
 			"build": "Cette rediffusion a été enregistrée sur la version de jeu {{version}} ({{recorded}} ; vous êtes actuellement en version {{running}}. Certaines parties peuvent mal s'afficher."
-		}
+		},
+		"leave_replay": "Quitter la rediffusion."
+	},
+	"spectators_watching_one": "{{count}} spectateur est en train d'observer la partie",
+	"spectators_watching_other": "{{count}} spectateurs sont en train d'observer la partie",
+	"gift": "Cadeau",
+	"gifts": "Cadeaux",
+	"inimitable": "Inimitable",
+	"choose_partner": "Partenaire?",
+	"team_name": "Equipe {{name}}",
+	"not_pokemons": "N'est pas un Pokémon",
+	"drop_here_to_open": "Posez ici pour ouvrir votre cadeau. Assurez-vous d'avoir un emplacement de disponible sur votre banc.",
+	"player_dialog": {
+		"YES": "OUI",
+		"NO": "NON",
+		"QM": "?",
+		"OK": "OK",
+		"ME": "MOI",
+		"YOU": "TOI",
+		"TRADE": "⇌ ÉCHANGE ? ",
+		"HELP": "AU SECOURS!"
+	},
+	"board_tooltips_titles": {
+		"player_tile": "Zone de transfert",
+		"partner_tile": "Zone de transfert du partenaire"
+	},
+	"board_tooltips": {
+		"player_tile": "Si vous et votre partenaire avez mis un Pokémon dans vos zones de transfert respectives, vous pourrez échanger ces Pokémons et leurs objets tenus. Les objects retirables sont retirés avant l'échange.",
+		"partner_tile": "Vous verrez quel Pokémon a été mis par votre partenaire dans sa zone de transfert."
+	},
+	"pokepals": {
+		"title": "Pokéquipiers",
+		"leaderboard": "Tête de classement",
+		"points": "{{points}} points",
+		"team_score": "Score de l'équipe: {{points}}",
+		"instructions": "Jouez avec votre Équipier en Duo!",
+		"help1": "Jouer une partie en Duo en coopération avec un partenaire vous donne un montant de points basé sur votre classement final.",
+		"help2": "Coopérer est la clé de la victoire!",
+		"your_pal": "Votre Équipier",
+		"confirmed": "Votre équipe est verrouillée et prête à en découdre! ",
+		"not_confirmed": "Votre Équipier doit entrer votre nom en retour pour verrouiller l'équipe. ",
+		"enter_pal_name": "Entrer le nom de votre Équipier.",
+		"change_pal": "Changer d'équipier"
 	}
 }
