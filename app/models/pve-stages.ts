@@ -102,7 +102,8 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     shinyChance: 1 / 40,
     rewards: [...ItemComponentsNoFossilOrScarf, Item.RED_SCALE],
     getRewards(_player: Player, shinyEncounter: boolean) {
-      if (shinyEncounter) return [Item.RED_SCALE]
+      if (shinyEncounter)
+        return [Item.RED_SCALE, pickRandomIn(ItemComponentsNoFossilOrScarf)]
       else return pickNRandomIn(ItemComponentsNoFossilOrScarf, 1)
     }
   },
@@ -168,7 +169,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.DEF]: 5,
       [Stat.SPE_DEF]: 5
     },
-    marowakItems: [[Item.COMET_SHARD], [Item.SACRED_ASH]],
+    marowakItems: [[Item.STAR_PIECE], [Item.SACRED_ASH]],
     rewards: ItemComponentsNoFossilOrScarf,
     getRewards(player: Player) {
       const componentsWeights = ItemComponentsNoFossilOrScarf.reduce((o, i) => {

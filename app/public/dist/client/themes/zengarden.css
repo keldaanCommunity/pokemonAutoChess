@@ -41,3 +41,7 @@
 #wiki-page .wiki-faq summary {
   color: var(--color-fg-gold);
 }
+
+.boosters-modal {
+  background: var(--color-bg-primary);
+}

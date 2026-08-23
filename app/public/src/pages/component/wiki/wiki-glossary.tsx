@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { TechnicalTerms } from "../../../../../types/strings/TechnicalTerm"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -11,7 +10,8 @@ export default function WikiGlossary() {
     "craftable_items",
     "consumable_item",
     "unholdable_item",
-    "removable_item"
+    "removable_item",
+    "gift"
   ] as const
 
   return (
@@ -50,11 +50,7 @@ export default function WikiGlossary() {
         {itemCategories.map((category) => (
           <div key={category} className="my-box glossary-term">
             <dt>{t(category)}</dt>
-            <dd>
-              {addIconsToDescription(
-                t(`wiki.glossary.${category}`)
-              )}
-            </dd>
+            <dd>{addIconsToDescription(t(`wiki.glossary.${category}`))}</dd>
           </div>
         ))}
       </dl>

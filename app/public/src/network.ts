@@ -502,3 +502,7 @@ export function unban(params: { uid: string; reason: string }) {
 export function createTournament(params: { name: string; startDate: string }) {
   rooms.lobby?.send(Transfer.NEW_TOURNAMENT, params)
 }
+
+export function selectPartner(partnerId: string) {
+  rooms.preparation?.send(Transfer.SELECT_PARTNER, partnerId)
+}

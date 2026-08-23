@@ -32,5 +32,5 @@
 }
 
 .boosters-modal {
-  background: var(--color-bg-primary);
+  background: color-mix(in hsl, var(--color-bg-primary) 90%, transparent 10%);
 }

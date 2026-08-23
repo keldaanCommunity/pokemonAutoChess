@@ -56,7 +56,7 @@ export const EvolutionManager = {
   ): void | Pokemon {
     const handler = this.getHandler(pokemon.evolutionRule)
     if (handler.canEvolve(pokemon, player, ...additionalArgs)) {
-      const pokemonEvolved = handler.evolve(pokemon, player, ...additionalArgs)
+      const pokemonEvolved = this.evolve(pokemon, player, ...additionalArgs)
       return pokemonEvolved
     }
   },
@@ -98,7 +98,7 @@ export const EvolutionManager = {
       ) {
         pokemon.addMaxHP(10)
         pokemon.stacks++
-        this.tryEvolve(pokemon, player, ...additionalArgs)
+        this.tryEvolve(pokemon, player)
       }
     })
 

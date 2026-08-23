@@ -81,11 +81,11 @@
   white-space: pre-line;
 }
 
-.game-item-detail-description
-  .technical-term:first-child
+.technical-term:first-child
   .technical-term-label {
   text-transform: capitalize;
 }
+
 
 .game-item-detail-description:last-child,
 .react-tooltip .game-item-detail-description:last-child {

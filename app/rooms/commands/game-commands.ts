@@ -6,6 +6,7 @@ import {
   BOARD_SIDE_HEIGHT,
   BOARD_WIDTH,
   FIGHTING_PHASE_DURATION,
+  GiftShopStages,
   GOLDEN_BERRY_TREE_TYPES,
   getAltFormForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
@@ -20,7 +21,6 @@ import {
   SHARDS_PER_UNOWN_WANDERER,
   SHINY_UNOWN_ENCOUNTER_CHANCE,
   StageDuration,
-  SynergyTriggers,
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
@@ -28,27 +28,30 @@ import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import {
   OnChangePositionEffect,
-  OnGroundDiggingEffect,
   OnItemDroppedEffect,
   OnSpotlightChangeEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
 import { ItemEffects } from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
+import { SynergyEffects } from "../../core/effects/synergies"
 import { giveRandomEgg } from "../../core/eggs"
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { getFlowerPotsUnlocked } from "../../core/flower-pots"
-import { selectMatchups } from "../../core/matchmaking"
+import { selectDoubleUpMatchups, selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import type Player from "../../models/colyseus-models/player"
-import { PlayerChoice } from "../../models/colyseus-models/player-choice"
+import {
+  PlayerChoice,
+  type PlayerChoiceType
+} from "../../models/colyseus-models/player-choice"
 import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyStep } from "../../models/colyseus-models/synergies"
+import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
   getPokemonBaseline
@@ -57,8 +60,10 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
+import { openGift } from "../../services/gift-shop"
 import {
   Emotion,
+  FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
@@ -73,12 +78,22 @@ import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
+import { FlowerPots } from "../../types/enum/FlowerPot"
 import {
   BattleResult,
+  GameMode,
   GamePhaseState,
   PokemonActionState,
   Team
 } from "../../types/enum/Game"
+import {
+  type Gift,
+  GiftShopPrices,
+  Gifts,
+  GiftsTier1,
+  GiftsTier2,
+  GiftsTier3
+} from "../../types/enum/GiftShop"
 import {
   ConsumableItems,
   CraftableItemsNoScarves,
@@ -93,8 +108,6 @@ import {
   Mulches,
   Scarves,
   Sweets,
-  SynergyGems,
-  SynergyGivenByGem,
   SynergyGivenByItem,
   SynergyStones,
   Tools,
@@ -111,8 +124,9 @@ import {
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
+import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import type { IDetailledPokemon } from "../../types/models/bot-v2"
+import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
@@ -285,6 +299,16 @@ export class OnPokemonCatchCommand extends Command<
     }
   }
 }
+export class OnCancelTradeOfferCommand extends Command<
+  GameRoom,
+  { playerId: string }
+> {
+  execute({ playerId }) {
+    const player = this.state.players.get(playerId)
+    if (!player?.doubleUpPartnerId) return
+    // TODO
+  }
+}
 
 export class OnDragDropPokemonCommand extends Command<
   GameRoom,
@@ -451,7 +475,8 @@ export class OnDragDropPokemonCommand extends Command<
         oldX,
         oldY,
         player,
-        state: this.state
+        state: this.state,
+        room: this.room
       })
     }
     const oldX = pokemon.positionX
@@ -465,7 +490,8 @@ export class OnDragDropPokemonCommand extends Command<
       oldX,
       oldY,
       player,
-      state: this.state
+      state: this.state,
+      room: this.room
     })
   }
 }
@@ -517,7 +543,8 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           oldX,
           oldY,
           player,
-          state: this.state
+          state: this.state,
+          room: this.room
         })
       }
     } else {
@@ -535,7 +562,8 @@ export class OnSwitchBenchAndBoardCommand extends Command<
           oldX: oldX,
           oldY: oldY,
           player,
-          state: this.state
+          state: this.state,
+          room: this.room
         })
       }
     }
@@ -641,7 +669,7 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyStep(
+        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
           player.synergies,
           Synergy.NORMAL
         )
@@ -721,13 +749,27 @@ export class OnDragDropItemCommand extends Command<
         player.flowerPots[index] = potEvolution
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
+
+        if (potEvolution.evolution === Pkm.DEFAULT) {
+          const oricorios = schemaValues(player.board).filter(
+            (p) => p.passive === Passive.NECTAR
+          )
+          oricorios.forEach(() => {
+            const nectar = {
+              [FlowerPot.BLUE]: Item.PURPLE_NECTAR,
+              [FlowerPot.PINK]: Item.RED_NECTAR,
+              [FlowerPot.WHITE]: Item.PINK_NECTAR,
+              [FlowerPot.YELLOW]: Item.YELLOW_NECTAR
+            }[FlowerPots[index]]
+            if (nectar && player.items.includes(nectar) === false) {
+              player.items.push(nectar)
+            }
+          })
+        }
         return
       }
     } else if (zone === "berry-tree-zone") {
-      const grassLevel = player.synergies.get(Synergy.GRASS) ?? 0
-      const nbTrees = SynergyTriggers[Synergy.GRASS].filter(
-        (n) => n <= grassLevel
-      ).length
+      const nbTrees = getSynergyTier(player.synergies, Synergy.GRASS)
 
       if (item === Item.RICH_MULCH && index < nbTrees) {
         player.berryTreesStages[index] = 3
@@ -762,17 +804,21 @@ export class OnDragDropItemCommand extends Command<
         (effect) => effect instanceof OnItemDroppedEffect
       ) ?? [])
     ]
+
+    let shouldEquipItem = true
     for (const onItemDroppedEffect of onItemDroppedEffects) {
-      const shouldEquipItem = onItemDroppedEffect.apply({
+      const didThatEffectAllowToEquipItem = onItemDroppedEffect.apply({
         pokemon,
         player,
         item,
         room: this.room
       })
-      if (shouldEquipItem === false) {
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
-      }
+      if (!didThatEffectAllowToEquipItem) shouldEquipItem = false
+    }
+
+    if (shouldEquipItem === false) {
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      return
     }
 
     if (isIn(Dishes, item)) {
@@ -802,15 +848,15 @@ export class OnDragDropItemCommand extends Command<
       }
     }
 
-    if (UnholdableItems.includes(item) && !ConsumableItems.includes(item)) {
-      // Unholdable and non-consummable items should have zero interaction on any Pokémon
+    if (isIn(UnholdableItems, item) && !ConsumableItems.includes(item)) {
+      // Unholdable and non-consumable items should have zero interaction on any Pokémon
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
     }
 
     if (
       pokemon.canHoldItems === false &&
-      !(UnholdableItems.includes(item) && isIn(ConsumableItems, item)) // unholdable consumable items like dishes or dojo tickets can still be used on pokemon that can't hold items, since they are consumed right away and don't actually get held by the pokemon
+      !(isIn(UnholdableItems, item) && isIn(ConsumableItems, item)) // unholdable consumable items like dishes or dojo tickets can still be used on pokemon that can't hold items, since they are consumed right away and don't actually get held by the pokemon
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
@@ -825,7 +871,7 @@ export class OnDragDropItemCommand extends Command<
     if (
       pokemon.items.size >= 3 &&
       !(isBasicItem && existingBasicItemToCombine) &&
-      UnholdableItems.includes(item) === false
+      !isIn(UnholdableItems, item)
     ) {
       client.send(Transfer.DRAG_DROP_CANCEL, {
         ...message,
@@ -860,7 +906,7 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (recipe[1].includes(Item.SILK_SCARF)) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyStep(
+        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
           player.synergies,
           Synergy.NORMAL
         )
@@ -952,6 +998,47 @@ export class OnSellPokemonCommand extends Command<
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
     pokemon.afterSell(player)
+
+    if (
+      player.doubleUpPartnerId &&
+      pokemon.positionY === 0 &&
+      pokemon.positionX === BOARD_WIDTH - 1
+    ) {
+      //cancel trade
+      player.tradeStatus = TradeStatus.PENDING
+      const partner = this.state.players.get(player.doubleUpPartnerId)
+      if (partner) {
+        partner.tradeStatus = TradeStatus.PENDING
+      }
+    }
+  }
+}
+
+export class OnUseItemCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    item: Item
+  }
+> {
+  execute({ client, item }) {
+    const player = this.state.players.get(client.auth.uid)
+    if (!player || !player.alive || !player.doubleUpPartnerId) return
+    if (!player.items.includes(item)) return
+
+    const fromPlayer = this.state.players.get(player?.doubleUpPartnerId)
+    if (!fromPlayer) return
+
+    let used = false
+
+    if (isIn(Gifts, item)) {
+      openGift(item, player, fromPlayer)
+      used = true
+    }
+
+    if (used) {
+      removeInArray(player.items, item)
+    }
   }
 }
 
@@ -1032,7 +1119,7 @@ export class OnPickBerryCommand extends Command<
     if (player.berryTreesStages[berryIndex] >= 3) {
       player.berryTreesStages[berryIndex] = 0
       const type =
-        getSynergyStep(player.synergies, Synergy.GRASS) === 4
+        getSynergyTier(player.synergies, Synergy.GRASS) === 4
           ? GOLDEN_BERRY_TREE_TYPES[berryIndex]
           : player.berryTreesType[berryIndex]
       player.items.push(type)
@@ -1093,6 +1180,9 @@ export class OnUpdateCommand extends Command<
           }
         })
 
+        if (this.state.gameMode === GameMode.DOUBLE_UP) {
+          this.checkDoubleUpReinforcements()
+        }
         if (everySimulationFinished && !this.state.updatePhaseNeeded) {
           // wait for 3 seconds victory anim before moving to next stage
           this.state.time = 3000
@@ -1105,6 +1195,140 @@ export class OnUpdateCommand extends Command<
         return [new OnUpdatePhaseCommand()]
       }
     }
+  }
+  checkDoubleUpReinforcements() {
+    this.state.simulations.forEach((sim) => {
+      if (!sim.finished || sim.reinforcementsSent) return
+      if (Date.now() - sim.finishedAt < 3000) return
+      if (!sim.winnerId) return // draw, no reinforcements
+
+      // Ghost battle where the ghost side wins → no reinforcements
+      if (sim.isGhostBattle && sim.winnerId === sim.redPlayerId) return
+
+      const winnerIsBlue = sim.winnerId === sim.bluePlayerId
+      const winnerPlayer = winnerIsBlue ? sim.bluePlayer : sim.redPlayer
+      if (!winnerPlayer) return // PVE fight
+
+      // Find partner's running sim via doubleUpPartnerId on the Player
+      const partnerPlayer = this.state.players.get(
+        winnerPlayer.doubleUpPartnerId
+      )
+      if (!partnerPlayer?.alive) return
+
+      const partnerSim = this.state.simulations.get(partnerPlayer.simulationId)
+      if (!partnerSim || partnerSim.finished || !partnerSim.started) return
+
+      sim.reinforcementsSent = true
+      this.sendReinforcements(sim, partnerSim)
+    })
+  }
+
+  sendReinforcements(source: Simulation, target: Simulation) {
+    const winnerIsBlue = source.winnerId === source.bluePlayerId
+    const winnerPlayer = winnerIsBlue ? source.bluePlayer : source.redPlayer
+    if (!winnerPlayer) return
+
+    const partnerIsBlue =
+      target.bluePlayer?.id === winnerPlayer.doubleUpPartnerId
+    const partnerTeam = partnerIsBlue ? Team.BLUE_TEAM : Team.RED_TEAM
+
+    if (
+      !partnerIsBlue &&
+      target.redPlayer?.id !== winnerPlayer.doubleUpPartnerId
+    ) {
+      return
+    }
+
+    const winningTeam = winnerIsBlue ? source.blueTeam : source.redTeam
+    const survivors: PokemonEntity[] = schemaValues(winningTeam).filter(
+      (e) => e.hp > 0
+    )
+    if (survivors.length === 0) return
+
+    for (const entity of survivors) {
+      const coord = target.getFirstFreeCell(partnerTeam)
+      if (!coord) {
+        // logger.warn(`[DoubleUp] No free cell for reinforcement — stopping`)
+        break
+      }
+      const reinforcement = target.addPokemon(
+        entity.refToBoardPokemon as Pokemon,
+        coord.x,
+        coord.y,
+        partnerTeam,
+        true,
+        true // skip synergy effects from partner
+      )
+      reinforcement.sourcePlayer = winnerPlayer
+      // e.g. comfey will be attached here
+      reinforcement.items.clear()
+      entity.items.forEach((item) => reinforcement.items.add(item))
+      // negative status effects are not carried over, therefore do not bring over (most) positive status effects
+      // positive effects we ignore: spikeArmor, magigBounce, reflect, pokerus, rage
+
+      // bring over light status and exception for these two positive status effects: runeProtect, resurrection
+      reinforcement.status.light = entity.status.light
+      reinforcement.status.resurrection = entity.status.resurrection
+      reinforcement.status.runeProtect = entity.status.runeProtect
+      reinforcement.status.runeProtectCooldown =
+        entity.status.runeProtectCooldown
+
+      // bring over current active fields (debatable, since technically positie status in wiki)
+      reinforcement.status.grassField = entity.status.grassField
+      reinforcement.status.fairyField = entity.status.fairyField
+      reinforcement.status.psychicField = entity.status.psychicField
+      reinforcement.status.electricField = entity.status.electricField
+
+      // bring over current stats
+      reinforcement.atk = entity.atk
+      reinforcement.def = entity.def
+      reinforcement.speDef = entity.speDef
+      reinforcement.ap = entity.ap
+      reinforcement.speed = entity.speed
+      reinforcement.critChance = entity.critChance
+      reinforcement.critPower = entity.critPower
+      reinforcement.range = entity.range
+      reinforcement.luck = entity.luck
+      reinforcement.dodge = entity.dodge
+      reinforcement.shield = entity.shield
+      reinforcement.maxHP = entity.maxHP
+      reinforcement.hp = Math.min(entity.hp, reinforcement.maxHP)
+      reinforcement.pp = 0
+
+      // bring over item stack counts to prevent double-stacking from current stats
+      // TODO: after merge, add JAC specifig item counts: WIDE_LENS, GRIP_CLAW, EXP_CHARM
+      reinforcement.count.muscleBandCount = entity.count.muscleBandCount
+      reinforcement.count.machRibbonCount = entity.count.machRibbonCount
+      reinforcement.count.upgradeCount = entity.count.upgradeCount
+      reinforcement.count.soulDewCount = entity.count.soulDewCount
+      reinforcement.count.soundCryCount = entity.count.soundCryCount
+
+      // overwrite with players synergy effects
+      reinforcement.effects.clear()
+      entity.effects.forEach((e) => reinforcement.effects.add(e))
+      reinforcement.effectsSet = new Set(entity.effectsSet)
+    }
+    // apply ghost curses, outside the loop to avoid multiple applications
+    const opponentTeam =
+      partnerTeam === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+    const ghostCurseEffects = [
+      EffectEnum.CURSE_OF_VULNERABILITY,
+      EffectEnum.CURSE_OF_WEAKNESS,
+      EffectEnum.CURSE_OF_TORMENT,
+      EffectEnum.CURSE_OF_FATE
+    ]
+    ghostCurseEffects.forEach((curse) => {
+      if (survivors.some((e) => e.effects.has(curse))) {
+        target.applyCurse(curse, opponentTeam)
+      }
+    })
+
+    const winnerClient = this.room.clients.find(
+      (cli) => cli.auth.uid === winnerPlayer.id
+    )
+    winnerClient?.send(Transfer.DOUBLE_UP_REINFORCEMENT_SENT, {
+      partnerPlayerId: winnerPlayer.doubleUpPartnerId
+    })
   }
 }
 
@@ -1144,6 +1368,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkEndGame(): boolean {
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      return this.checkEndGameDoubleUp()
+    }
+
     const playersAlive = schemaValues(this.state.players).filter((p) => p.alive)
 
     if (playersAlive.length <= 1) {
@@ -1166,6 +1394,28 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         this.room.disconnect()
       }, 30 * 1000)
 
+      return true
+    }
+
+    return false
+  }
+
+  checkEndGameDoubleUp(): boolean {
+    const playersAlive = schemaValues(this.state.players).filter((p) => p.alive)
+    const aliveTeams = new Set(playersAlive.map((p) => p.doubleUpTeamId))
+
+    if (aliveTeams.size <= 1) {
+      this.state.gameFinished = true
+      playersAlive.forEach((winner) => {
+        const client = this.room.clients.find(
+          (cli) => cli.auth.uid === winner.id
+        )
+        if (client) client.send(Transfer.FINAL_RANK, 1)
+      })
+      this.clock.setTimeout(() => {
+        this.room.broadcast(Transfer.GAME_END)
+        this.room.disconnect()
+      }, 30 * 1000)
       return true
     }
 
@@ -1212,6 +1462,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   checkDeath() {
+    const newlyDead: Player[] = []
+
+    // Pass 1: mark all dead, release shop/board
     this.state.players.forEach((player: Player) => {
       if (player.life <= 0 && player.alive) {
         if (!player.isBot) {
@@ -1223,13 +1476,22 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           })
         }
         player.alive = false
-        player.spectatedPlayerId = player.id // spectate self to not show KO players on another player side
-        const client = this.room.clients.find(
-          (cli) => cli.auth.uid === player.id
-        )
-        if (client) {
-          client.send(Transfer.FINAL_RANK, player.rank)
-        }
+        player.doubleUpEliminationRound = this.state.stageLevel
+        player.spectatedPlayerId = player.id
+        newlyDead.push(player)
+      }
+    })
+
+    // Pass 2: rank all dead together
+    if (newlyDead.length > 0 && this.state.gameMode === GameMode.DOUBLE_UP) {
+      this.room.rankPlayers()
+    }
+
+    // Pass 3: send correct rank to each
+    newlyDead.forEach((player) => {
+      const client = this.room.clients.find((cli) => cli.auth.uid === player.id)
+      if (client) {
+        client.send(Transfer.FINAL_RANK, player.rank)
       }
     })
   }
@@ -1309,6 +1571,55 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.players.forEach((p) => p.updateRegionalPool(this.state, false))
     }
 
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      GiftShopStages.includes(this.state.stageLevel)
+    ) {
+      const givers: Player[] = []
+      const receivers: Player[] = []
+      // Make groups by user id
+      this.state.players.forEach((p) => {
+        const partner = this.state.players.get(p.doubleUpPartnerId)
+        if (!partner) return
+        if (p.giftsGiven.length < partner.giftsGiven.length) {
+          givers.push(p)
+        }
+        if (p.giftsGiven.length > partner.giftsGiven.length) {
+          receivers.push(p)
+        } else if (p.life > partner.life) {
+          givers.push(p)
+        } else if (p.life < partner.life) {
+          receivers.push(p)
+        } else if (p.id < p.doubleUpPartnerId) {
+          givers.push(p)
+        } else {
+          receivers.push(p)
+        }
+      })
+
+      givers.forEach((p) => {
+        const giftChoices: [Gift, Gift, Gift] = [
+          pickRandomIn(
+            GiftsTier1.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier2.filter((gift) => !p.giftsGiven.includes(gift))
+          ),
+          pickRandomIn(
+            GiftsTier3.filter((gift) => !p.giftsGiven.includes(gift))
+          )
+        ]
+
+        p.choices.push(
+          new PlayerChoice({
+            type: "gifts",
+            items: giftChoices,
+            costs: giftChoices.map((gift) => GiftShopPrices[gift] ?? 0)
+          })
+        )
+      })
+    }
+
     const commands = new Array<Command>()
 
     this.state.players.forEach((p) => this.updatePlayerBetweenStages(p))
@@ -1331,14 +1642,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   updatePlayerBetweenStages(player: Player) {
     const board = schemaValues(player.board)
 
-    if (
-      getSynergyStep(player.synergies, Synergy.FIRE) === 4 &&
-      player.items.includes(Item.FIRE_SHARD) === false &&
-      player.life > 2
-    ) {
-      player.items.push(Item.FIRE_SHARD)
-    }
-
+    // Encounter effects
     if (
       player.items.includes(Item.TREASURE_BOX) &&
       player.life <= TREASURE_BOX_LIFE_THRESHOLD
@@ -1401,93 +1705,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       }, 10000)
     }
 
-    const nbTrees = getSynergyStep(player.synergies, Synergy.GRASS)
-    for (let i = 0; i < nbTrees; i++) {
-      player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
-    }
-
-    if (getSynergyStep(player.synergies, Synergy.GROUND) > 0) {
-      player.board.forEach((pokemon, pokemonId) => {
-        if (
-          pokemon.types.has(Synergy.GROUND) &&
-          !isOnBench(pokemon) &&
-          !(
-            pokemon.items.has(Item.CHEF_HAT) &&
-            player.synergies.hasSynergyActive(Synergy.GOURMET)
-          )
-        ) {
-          const index =
-            (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
-          const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
-          const isReachingMaxDepth = player.groundHoles[index] === 4
-          if (!hasAlreadyReachedMaxDepth) {
-            let buriedItem = isReachingMaxDepth
-              ? player.buriedItems[index]
-              : null
-            if (
-              pokemon.items.has(Item.EXPLORER_KIT) &&
-              isReachingMaxDepth &&
-              !buriedItem
-            ) {
-              if (chance(0.1, pokemon)) {
-                buriedItem = Item.BIG_NUGGET
-              } else if (chance(0.5, pokemon)) {
-                buriedItem = Item.NUGGET
-              } else {
-                buriedItem = Item.COIN
-              }
-            }
-            this.room.broadcast(Transfer.DIG, {
-              pokemonId,
-              buriedItem
-            })
-            this.room.clock.setTimeout(() => {
-              player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
-              PassiveEffects[pokemon.passive]?.forEach((effect) => {
-                if (effect instanceof OnGroundDiggingEffect) {
-                  effect.apply({ pokemon, player })
-                }
-              })              
-              player.board.forEach((pokemon) => {
-                // Condition based evolutions on ground hole dig
-                if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
-                  EvolutionManager.tryEvolve(pokemon, player, this.state)
-                } else if (
-                  pokemon.evolutionRule.type === EvolutionRuleType.STACK
-                ) {
-                  EvolutionManager.tryEvolve(pokemon, player, pokemon.stacks)
-                }
-              })
-            }, 1000)
-
-            if (buriedItem) {
-              this.room.clock.setTimeout(() => {
-                if (buriedItem === Item.COIN) {
-                  player.addMoney(1, true, null)
-                } else if (buriedItem === Item.NUGGET) {
-                  player.addMoney(3, true, null)
-                } else if (buriedItem === Item.BIG_NUGGET) {
-                  player.addMoney(10, true, null)
-                } else if (buriedItem === Item.TREASURE_BOX) {
-                  player.items.push(...pickNRandomIn(ItemComponents, 2))
-                } else if (isIn(SynergyGems, buriedItem)) {
-                  const type = SynergyGivenByGem[buriedItem]
-                  player.bonusSynergies.set(
-                    type,
-                    (player.bonusSynergies.get(type) ?? 0) + 1
-                  )
-                  player.items.push(buriedItem)
-                  player.updateSynergies()
-                } else {
-                  player.items.push(buriedItem)
-                }
-              }, 2500)
-            }
-          }
-        }
-      })
-    }
-
     const rottingItems: Map<Item, Item> = new Map([
       // order matters to not convert several times in a row
       [Item.SIRUPY_APPLE, Item.LEFTOVERS],
@@ -1535,6 +1752,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (s) => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id
         )
         if (!substitute) return
+        if (p.pokemon.name === Pkm.PIKACHU) {
+          p.pokemon = player.transformPokemon(p.pokemon, Pkm.PIKACHU_LIBRE)
+        }
         p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.maxHP += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0
@@ -1556,6 +1776,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
     }
 
+    // Synergy effects on stage start
+    player.synergies
+      .getActiveSynergyTiers()
+      .flatMap((synergyTier: EffectEnum) => SynergyEffects[synergyTier])
+      .filter((p) => p instanceof OnStageStartEffect)
+      .forEach((effect) => effect.apply({ player, room: this.room }))
+
+    // Pokemon effects on stage start
     board.forEach((pokemon) => {
       // Passives updating every stage
       const passiveEffects =
@@ -1576,7 +1804,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+      if (
+        pokemon.evolutionRule.type === EvolutionRuleType.STATE ||
+        pokemon.evolutionRule.type === EvolutionRuleType.STACK
+      ) {
         EvolutionManager.tryEvolve(pokemon, player, this.state)
       }
     })
@@ -1625,7 +1856,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
                 oldX,
                 oldY,
                 player,
-                state: this.state
+                state: this.state,
+                room: this.room
               })
             }
           }
@@ -1641,13 +1873,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   stopPickingPhase() {
     this.state.players.forEach((player) => {
       // auto pick choices if player did not choose in time
+      const autoPickChoices: PlayerChoiceType[] = [
+        "addPick",
+        "item",
+        "starter",
+        "unique",
+        "legendary"
+      ]
       player.choices
-        .filter(
-          (choice) =>
-            choice.type === "addPick" ||
-            choice.type === "item" ||
-            choice.type === "unique"
-        )
+        .filter((choice) => autoPickChoices.includes(choice.type))
         .forEach((choice) => {
           const randomPick = randomBetween(
             0,
@@ -1667,6 +1901,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (!simulation.finished) {
         simulation.onFinish()
       }
+    })
+
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      this.applyDoubleUpRoundDamage()
+      this.syncTeamLife()
+      this.room.rankPlayers()
+
+      // Double Up: update trading platform cooldown
+      this.state.players.forEach((player: Player) => {
+        if (player.alive && player.tradeCooldown > 0) {
+          player.tradeCooldown -= 1
+        }
+      })
+    }
+
+    // stop all simulations
+    this.state.simulations.forEach((simulation) => {
       simulation.stop()
     })
 
@@ -1736,6 +1987,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             } else {
               this.state.shop.refillShop(player, this.state)
               player.shopLocked = false
+              player.unownReminiscences = 0
             }
           }
         }
@@ -1743,6 +1995,47 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Update Bots after unown deletion so unown in bot boards are not deleted
       this.state.botManager.updateBots()
     }
+  }
+  applyDoubleUpRoundDamage() {
+    this.state.simulations.forEach((sim) => {
+      if (sim.isGhostBattle) return
+      if (sim.redPlayerId === "pve") return
+
+      const loserIsBlue = sim.winnerId === sim.redPlayerId
+      const loserIsRed = sim.winnerId === sim.bluePlayerId
+      if (!loserIsBlue && !loserIsRed) return // draw
+
+      const losingPlayer = loserIsBlue ? sim.bluePlayer : sim.redPlayer
+      const winningTeam = loserIsBlue ? sim.redTeam : sim.blueTeam
+      if (!losingPlayer || !losingPlayer.alive) return
+
+      const damage = this.room.computeRoundDamage(
+        winningTeam,
+        this.state.stageLevel
+      )
+      losingPlayer.life -= damage
+      if (damage > 0) {
+        const client = this.room.clients.find(
+          (c) => c.auth.uid === losingPlayer.id
+        )
+        client?.send(Transfer.PLAYER_DAMAGE, damage)
+      }
+    })
+  }
+
+  syncTeamLife() {
+    const teams = new Map<string, Player[]>()
+    this.state.players.forEach((p) => {
+      if (!p.doubleUpTeamId || !p.alive) return
+      if (!teams.has(p.doubleUpTeamId)) teams.set(p.doubleUpTeamId, [])
+      teams.get(p.doubleUpTeamId)!.push(p)
+    })
+    teams.forEach((players) => {
+      const minLife = Math.min(...players.map((p) => p.life))
+      players.forEach((p) => {
+        p.life = minLife
+      })
+    })
   }
 
   stopTownPhase() {
@@ -1798,6 +2091,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.state.time = FIGHTING_PHASE_DURATION
     this.state.roundTime = Math.round(this.state.time / 1000)
     updateLobby(this.room)
+
     this.state.players.forEach((player: Player) => {
       if (player.alive) {
         player.registerPlayedPokemons()
@@ -1851,7 +2145,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
       })
     } else {
-      const matchups = selectMatchups(this.state)
+      const matchups =
+        this.state.gameMode === GameMode.DOUBLE_UP
+          ? selectDoubleUpMatchups(this.state)
+          : selectMatchups(this.state)
       this.state.simulationPaused = true // 2 seconds pause for portal transition animation
 
       matchups.forEach((matchup) => {
@@ -2133,11 +2430,19 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
       pokemon.positionX = p.x
       pokemon.positionY = p.y
-      p.items.forEach((item) => pokemon.items.add(item))
+      pokemon.addItems(p.items, player)
       player.board.set(pokemon.id, pokemon)
     })
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
+  }
+}
+
+export class OnDevCommand extends Command<GameRoom> {
+  execute(msg: { action: string }) {
+    if (msg.action === "skipStage") {
+      this.room.state.time = 0
+    }
   }
 }
 
@@ -2149,6 +2454,7 @@ export function onPokemonChangePosition({
   oldX,
   oldY,
   state,
+  room,
   doNotRemoveItems = false
 }: {
   pokemon: Pokemon
@@ -2158,14 +2464,32 @@ export function onPokemonChangePosition({
   oldX: number
   oldY: number
   state: GameState
+  room: GameRoom
   doNotRemoveItems?: boolean
 }) {
   // called after manually changing position of the pokemon on board
 
+  if (newY === 0 && !doNotRemoveItems) {
+    const itemsToRemove = schemaValues(pokemon.items).filter((item) => {
+      return (
+        isIn(RemovableItems, item) ||
+        (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
+          item !== Item.RARE_CANDY)
+      )
+    })
+    player.items.push(...itemsToRemove)
+    pokemon.removeItems(itemsToRemove, player)
+
+    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+      player.items.push(TMPerAbility.get(pokemon.tm)!)
+      pokemon.tm = Ability.DEFAULT
+      pokemon.skill = pokemon.baseSkill
+      pokemon.maxPP = pokemon.baseMaxPP
+    }
+  }
+
   if (pokemon.passive !== Passive.NONE) {
-    const hasLight =
-      (player.synergies.get(Synergy.LIGHT) ?? 0) >=
-      SynergyTriggers[Synergy.LIGHT][0]
+    const hasLight = player.synergies.hasSynergyActive(Synergy.LIGHT)
     const inSpotlight =
       hasLight &&
       ((newX === player.lightX && newY === player.lightY) ||
@@ -2177,6 +2501,7 @@ export function onPokemonChangePosition({
           pokemon,
           player,
           state,
+          room,
           oldX,
           oldY,
           newX,
@@ -2203,22 +2528,15 @@ export function onPokemonChangePosition({
     }
   }
 
-  if (newY === 0 && !doNotRemoveItems) {
-    const itemsToRemove = schemaValues(pokemon.items).filter((item) => {
-      return (
-        isIn(RemovableItems, item) ||
-        (state?.specialGameRule === SpecialGameRule.SLAMINGO &&
-          item !== Item.RARE_CANDY)
-      )
-    })
-    player.items.push(...itemsToRemove)
-    pokemon.removeItems(itemsToRemove, player)
-
-    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
-      player.items.push(TMPerAbility.get(pokemon.tm)!)
-      pokemon.tm = Ability.DEFAULT
-      pokemon.skill = pokemon.baseSkill
-      pokemon.maxPP = pokemon.baseMaxPP
+  if (
+    (player.doubleUpPartnerId && newY === 0 && newX === BOARD_WIDTH - 1) ||
+    (oldY === 0 && oldX === BOARD_WIDTH - 1)
+  ) {
+    //cancel trade
+    player.tradeStatus = TradeStatus.PENDING
+    const partner = state.players.get(player.doubleUpPartnerId)
+    if (partner) {
+      partner.tradeStatus = TradeStatus.PENDING
     }
   }
 }
