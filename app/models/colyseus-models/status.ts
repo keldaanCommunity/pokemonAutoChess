@@ -412,14 +412,7 @@ export default class Status extends Schema implements IStatus {
 
       if (duration > this.burnCooldown) {
         this.burnCooldown = duration
-        if (origin) {
-          this.burnOrigin = origin
-        } else {
-          // no origin means the ember tile is burning them. hand it ownership
-          // once its refresh is what keeps the burn alive, or the first burner
-          // keeps the credit for the rest of the fight
-          this.burnOrigin = null
-        }
+        this.burnOrigin = origin
       }
 
       if (
@@ -586,18 +579,14 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
+      this.poisonOrigin = origin ?? null
       if (origin) {
-        this.poisonOrigin = origin
         if (origin.effects.has(EffectEnum.VENOMOUS)) {
           maxStacks = 4
         }
         if (origin.effects.has(EffectEnum.TOXIC)) {
           maxStacks = 5
         }
-      } else {
-        // no origin means a tile is poisoning them. hand it ownership, or the
-        // first poisoner keeps the credit for every tick the tile refreshes
-        this.poisonOrigin = null
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
@@ -1118,7 +1107,7 @@ export default class Status extends Schema implements IStatus {
         effect: EffectEnum.CURSE,
         shouldTargetGainMana: false
       })
-      // 9999 is overkill damage; takenDamage is the HP actually removed     
+      // 9999 is overkill damage; takenDamage is the HP actually removed
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: "CURSE_EFFECT",

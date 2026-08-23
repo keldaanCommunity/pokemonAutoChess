@@ -1249,7 +1249,10 @@ export default class BattleManager {
     if (this.simulation?.id === id) {
       const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
-      this.displayTween(color, coordinates, `portrait-${index}`, amount)
+      // board effect damage has no caster, so it shows its own icon instead of a portrait
+      const isEffectIcon = isIn(EnvironmentalEffects, index)
+      const textureKey = isEffectIcon ? `effect-${index}` : `portrait-${index}`
+      this.displayTween(color, coordinates, textureKey, amount)
     }
   }
 

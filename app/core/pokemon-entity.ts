@@ -23,7 +23,7 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   Orientation,
@@ -336,8 +336,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity | null,
-    effect?: EffectEnum,
+    attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }) {
@@ -405,8 +405,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (
         this.effects.has(EffectEnum.STRANGE_STEAM) ||
-        (attacker &&
-          attacker.effects.has(EffectEnum.STRANGE_STEAM))
+        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
         specialDamage *= 1.2
       }
@@ -454,11 +453,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   handleHeal(
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ) {
-    return this.state.handleHeal(this, heal, caster, apBoost, crit)
+    return this.state.handleHeal(this, heal, origin, apBoost, crit)
   }
 
   changeState(state: PokemonState) {

@@ -399,7 +399,11 @@ export function formatMessageRow(
           x?: number
           y?: number
         }
-        const src = o?.index ? pkmName(t, PkmByIndex[o.index]) : "?"
+        const src = isIn(EnvironmentalEffects, o.index)
+          ? t(`effect.${o.index}`)
+          : o?.index
+            ? pkmName(t, PkmByIndex[o.index])
+            : "?"
         const target = info?.target
           ? pkmName(t, info.target)
           : `(${o?.x},${o?.y})`

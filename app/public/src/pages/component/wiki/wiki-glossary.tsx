@@ -33,7 +33,6 @@ export default function WikiGlossary() {
         </div>
       </dl>
 
-
       <h3>{t("technical_terms.title")}</h3>
       <dl>
         {TechnicalTerms.map((term) => (

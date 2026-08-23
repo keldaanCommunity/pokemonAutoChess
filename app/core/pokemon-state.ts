@@ -2,7 +2,11 @@ import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
-import { EffectEnum, EnvironmentalEffects } from "../types/enum/Effect"
+import {
+  EffectEnum,
+  type EnvironmentalEffect,
+  EnvironmentalEffects
+} from "../types/enum/Effect"
 import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
@@ -308,7 +312,7 @@ export default abstract class PokemonState {
   handleHeal(
     pokemon: PokemonEntity,
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ): { healReceived: number; overheal: number } {
@@ -331,10 +335,12 @@ export default abstract class PokemonState {
       return { healReceived: 0, overheal: 0 }
     }
     if (pokemon.hp > 0 && !pokemon.status.protect) {
-      if (apBoost > 0) {
+      const caster =
+        origin && !isIn(EnvironmentalEffects, origin) ? origin : null
+      if (apBoost > 0 && caster) {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
-      if (crit) {
+      if (crit && caster) {
         heal *= caster.critPower
       }
       if (pokemon.effects.has(EffectEnum.BUFF_HEAL_RECEIVED)) {
@@ -356,10 +362,10 @@ export default abstract class PokemonState {
       const overheal = min(0)(heal - missingHP)
       pokemon.hp += healReceived
 
-      if (caster && healReceived > 0) {
+      if (origin && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
-            index: caster.index,
+            index: caster?.index ?? origin,
             type: HealType.HEAL,
             amount: Math.round(healReceived),
             x: pokemon.positionX,
@@ -367,7 +373,12 @@ export default abstract class PokemonState {
             id: pokemon.simulation.id
           })
         }
-        caster.healDone += healReceived
+        if (caster) {
+          caster.healDone += healReceived
+        } else if (isIn(EnvironmentalEffects, origin)) {
+          const dps = pokemon.simulation.getEffectDps(pokemon.team, origin)
+          dps.heal = capUint16(dps.heal + healReceived)
+        }
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {

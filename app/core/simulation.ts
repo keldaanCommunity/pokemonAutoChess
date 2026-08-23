@@ -51,7 +51,7 @@ import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { capUint16, max, min } from "../utils/number"
+import { max, min } from "../utils/number"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -1797,22 +1797,12 @@ export default class Simulation extends Schema implements ISimulation {
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
-              const { healReceived } = pokemonHit.handleHeal(
+              pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
-                pokemonHit,
+                EffectEnum.TIDAL_WAVE,
                 0,
                 false
               )
-              if (healReceived > 0) {
-                // handleHeal just credited the Pokémon for healing itself. move
-                // it to the Tidal Wave row. healDone is a uint16, so keep it >= 0
-                pokemonHit.healDone = Math.max(
-                  0,
-                  pokemonHit.healDone - healReceived
-                )
-                const waveDps = this.getEffectDps(team, EffectEnum.TIDAL_WAVE)
-                waveDps.heal = capUint16(waveDps.heal + healReceived)
-              }
             }
           } else {
             pokemonHit.handleDamage({
