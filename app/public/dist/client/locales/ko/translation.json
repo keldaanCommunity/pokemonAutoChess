@@ -2415,8 +2415,8 @@
 		"CURSE_OF_TORMENT": "고통의저주",
 		"CURSE_OF_FATE": "운명의저주",
 		"AROMATIC_MIST": "아로마미스트",
-		"FAIRY_WIND": "요정의바람",
-		"STRANGE_STEAM": "원더스팀",
+		"FAIRY_AURA": "요정의바람",
+		"PIXILATE": "원더스팀",
 		"MOON_FORCE": "문포스",
 		"CHILLY": "냉기",
 		"FROSTY": "서리",
@@ -2572,8 +2572,8 @@
 		"OVERGROW": "베리 섭취 시 AP 50 획득, 황금 나무열매가 열림",
 		"COACHING": "12데미지 감소, 샌드백 획득. 대기실에 있는 FIGHTING 포켓몬을 샌드백 옆에 두면 단련하며 4 ATK과 10%의 최대 HP 영구 획득",
 		"AROMATIC_MIST": "BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND 중 한 가지 지팡이 선택",
-		"FAIRY_WIND": "CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND 중 한 가지 지팡이 선택",
-		"STRANGE_STEAM": "GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND 중 한 가지 지팡이 선택",
+		"FAIRY_AURA": "CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND 중 한 가지 지팡이 선택",
+		"PIXILATE": "GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND 중 한 가지 지팡이 선택",
 		"MOON_FORCE": "WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND 중 한 가지 선택, FAIRY 포켓몬은 LUCK 5 획득"
 	},
 	"item": {
