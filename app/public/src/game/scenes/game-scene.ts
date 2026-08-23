@@ -112,11 +112,11 @@ export default class GameScene extends Scene {
     this.loadingManager!.preloadingPromise
       .catch((err) => logger.error("loading error", err))
       .then(() => {
-        logger.debug("Loading complete")
-        if (!this.started) {
-          this.room?.send(Transfer.LOADING_COMPLETE)
-        }
-      })
+      logger.debug("Loading complete")
+      if (!this.started) {
+        this.room?.send(Transfer.LOADING_COMPLETE)
+      }
+    })
 
     this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
       if (!this.started) {
@@ -568,6 +568,7 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          gameObject.closeDetail()
           if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
             this.useItemZone.showForItem(this.itemDragged.name)
           }

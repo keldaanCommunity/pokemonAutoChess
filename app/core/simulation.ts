@@ -24,7 +24,7 @@ import {
   Transfer
 } from "../types"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
@@ -316,6 +316,16 @@ export default class Simulation extends Schema implements ISimulation {
       : playerId === this.redPlayer?.id
         ? this.redDpsMeter
         : undefined
+  }
+
+  getEffectDps(team: Team, effect: EnvironmentalEffect): Dps {
+    const meter = team === Team.BLUE_TEAM ? this.blueDpsMeter : this.redDpsMeter
+    let dps = meter.get(effect)
+    if (!dps) {
+      dps = new Dps(effect, effect)
+      meter.set(effect, dps)
+    }
+    return dps
   }
 
   getTeam(playerId: string) {
@@ -997,8 +1007,8 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.AROMATIC_MIST:
-      case EffectEnum.FAIRY_WIND:
-      case EffectEnum.STRANGE_STEAM:
+      case EffectEnum.FAIRY_AURA:
+      case EffectEnum.PIXILATE:
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
@@ -1415,6 +1425,7 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,
+              effect: EffectEnum.LIGHTNING_STRIKE,
               shouldTargetGainMana: false
             })
           }
@@ -1788,7 +1799,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
-                pokemonHit,
+                EffectEnum.TIDAL_WAVE,
                 0,
                 false
               )
@@ -1799,8 +1810,10 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
+              effect: EffectEnum.TIDAL_WAVE,
               shouldTargetGainMana: false
             })
+
             let newY = y
             if (isRed) {
               while (
