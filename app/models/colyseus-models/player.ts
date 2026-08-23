@@ -198,6 +198,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  extraScarves: number = 0
   unownReminiscences: number = 0
   doubleUpEliminationRound: number = 999
 
@@ -500,7 +501,8 @@ export default class Player extends Schema implements IPlayer {
     const scarves: Item[] = []
     while (n > 0) {
       const scarf = this.scarvesItems[i] ?? Item.SILK_SCARF
-      n -= scarf === Item.NULLIFY_BANDANNA ? 2 : 1
+      const nbOfNullifyBandannas = scarves.filter(item => item === Item.NULLIFY_BANDANNA).length;
+      n -= ((scarf === Item.NULLIFY_BANDANNA) && ( (this.extraScarves % 2 === 0) || (nbOfNullifyBandannas > 0) )) ? 2 : 1
       if (n >= 0) {
         scarves.push(scarf)
         i++
