@@ -4277,6 +4277,7 @@
 		"renderer": "Renderer",
 		"renderer_info": "WebGL is faster but may cause visual glitches on some devices. Canvas is slower but more compatible.",
 		"theme": "Theme",
+		"theme_info": "Some themes can be unlocked by obtaining specific titles.",
 		"preloading_start": "Preloading game...",
 		"finished_preloading": "Finished preloading",
 		"game_version": "Game Version",

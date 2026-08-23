@@ -1,5 +1,5 @@
 .game-options-modal {
-  width: min(95vw, 500px);
+  width: min(95vw, 600px);
 }
 
 .game-options-modal .modal-body {
@@ -15,4 +15,16 @@
   font-size: 80%;
   line-height: 1.1;
   margin: 0.5em 0;
+}
+
+.game-options-modal fieldset {
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: none;
+}
+
+.game-options-modal .react-tabs__tab-panel--selected {
+  padding: 0.5em 0;
 }

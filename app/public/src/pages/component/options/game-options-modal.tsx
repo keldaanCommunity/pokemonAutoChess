@@ -53,38 +53,44 @@ export default function GameOptionsModal(props: {
         </TabList>
 
         <TabPanel>
-          <label style={{ width: "100%" }}>
-            {t("jukebox.music_volume")}: {preferences.musicVolume} %
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={preferences.musicVolume}
-              onInput={(e) =>
-                setPreferences({
-                  musicVolume: Number.parseFloat(
-                    (e.target as HTMLInputElement).value
-                  )
-                })
-              }
-            ></input>
-          </label>
-          <label style={{ width: "100%" }}>
-            {t("options.sfx_volume")}: {preferences.sfxVolume} %
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={preferences.sfxVolume}
-              onInput={(e) =>
-                setPreferences({
-                  sfxVolume: Number.parseFloat(
-                    (e.target as HTMLInputElement).value
-                  )
-                })
-              }
-            ></input>
-          </label>
+          <fieldset>
+            <label style={{ width: "100%" }}>
+              {t("jukebox.music_volume")}: {preferences.musicVolume} %
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={preferences.musicVolume}
+                onInput={(e) =>
+                  setPreferences({
+                    musicVolume: Number.parseFloat(
+                      (e.target as HTMLInputElement).value
+                    )
+                  })
+                }
+              ></input>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <label style={{ width: "100%" }}>
+              {t("options.sfx_volume")}: {preferences.sfxVolume} %
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={preferences.sfxVolume}
+                onInput={(e) =>
+                  setPreferences({
+                    sfxVolume: Number.parseFloat(
+                      (e.target as HTMLInputElement).value
+                    )
+                  })
+                }
+              ></input>
+            </label>
+          </fieldset>
+
           <p>
             <Checkbox
               isDark
@@ -99,7 +105,7 @@ export default function GameOptionsModal(props: {
 
         <TabPanel>
           {props.page === "main_lobby" && (
-            <>
+            <fieldset>
               <label>
                 {t("options.language")}:&nbsp;
                 <select
@@ -126,11 +132,11 @@ export default function GameOptionsModal(props: {
                   Discord
                 </a>
               </p>
-            </>
+            </fieldset>
           )}
 
           {profile && profileLevel >= GADGETS.palette.levelRequired && (
-            <p>
+            <fieldset>
               <label>
                 {t("options.theme")}:&nbsp;
                 <select
@@ -147,10 +153,20 @@ export default function GameOptionsModal(props: {
                   ))}
                 </select>
               </label>
-            </p>
+              <p className="info">
+                {t("options.theme_info")}
+              </p>
+            </fieldset>
           )}
 
-          <p>
+          <fieldset
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5em",
+              padding: "0.5em 1em"
+            }}
+          >
             <Checkbox
               isDark
               checked={preferences.showDetailsOnHover}
@@ -159,8 +175,6 @@ export default function GameOptionsModal(props: {
               }
               label={t("options.show_details_on_hover")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.showDamageNumbers}
@@ -169,8 +183,6 @@ export default function GameOptionsModal(props: {
               }
               label={t("options.show_damage_numbers")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.disableAnimatedTilemap}
@@ -183,8 +195,6 @@ export default function GameOptionsModal(props: {
               }}
               label={t("options.disable_animated_tilemap")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.disableCameraShake}
@@ -193,24 +203,18 @@ export default function GameOptionsModal(props: {
               }}
               label={t("options.disable_camera_shake")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.antialiasing}
               onToggle={(checked) => setPreferences({ antialiasing: checked })}
               label={t("options.antialiasing")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.customCursors}
               onToggle={(checked) => setPreferences({ customCursors: checked })}
               label={t("options.custom_cursors")}
             />
-          </p>
-          <p>
             <Checkbox
               isDark
               checked={preferences.colorblindMode}
@@ -219,9 +223,10 @@ export default function GameOptionsModal(props: {
               }
               label={t("options.colorblind_mode")}
             />
-          </p>
+          </fieldset>
+
           {props.page === "main_lobby" && (
-            <div>
+            <fieldset>
               <label>
                 {t("options.renderer")}:&nbsp;
                 <select
@@ -242,7 +247,7 @@ export default function GameOptionsModal(props: {
                 </select>
                 <p className="info">{t("options.renderer_info")}</p>
               </label>
-            </div>
+            </fieldset>
           )}
         </TabPanel>
 
