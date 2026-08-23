@@ -2533,7 +2533,7 @@
 		"SHEER_COLD": "+50 SPE_DEF, inimigos afetados por FREEZE recebem 30% de dano adicional",
 		"ANCIENT_POWER": "Recebe 40% do HP máximo base como SHIELD e +40% de ATK base",
 		"ELDER_POWER": "Recebe 70% do HP máximo base como SHIELD e +70% de ATK base",
-		"FORGOTTEN_POWER": "Recebe 100% do HP máximo base como SHIELD e +1000% de ATK base",
+		"FORGOTTEN_POWER": "Recebe 100% do HP máximo base como SHIELD e +100% de ATK base",
 		"LARGO": "Aliados recebem +2 de ATK",
 		"ALLEGRO": "Aliados recebem +1 ATK e +5 SPEED",
 		"PRESTO": "Aliados recebem +1 ATK, +5 SPEED e 3 PP",
