@@ -92,9 +92,10 @@
   column-gap: 0.5em;
 }
 
-#wiki-page .wiki-status h2 {
-  margin: 0;
-  font-size: 2rem;
+#wiki-page .wiki-board-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-stat h2 {

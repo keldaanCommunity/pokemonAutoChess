@@ -16,12 +16,15 @@
 
 # Gameplay
 
+- Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
+
 # UI
 
 - The values for all tiers in ability descriptions can be shown during the game by pressing the Ctrl key
 - You can now save teams from your game history as local files to load them later into your team planner
 - Wiki Regions has been updated to allow filtering regions by synergy
 - Added an option to disable custom cursors
+- Added board effects descriptions in Wiki > Statuses
 
 # Bugfix
 
