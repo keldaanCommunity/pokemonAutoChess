@@ -1693,7 +1693,7 @@ export const PassiveEffects: Partial<
       if (newY === 3 && pokemon.name === Pkm.MELOETTA) {
         player.transformPokemon(pokemon, Pkm.PIROUETTE_MELOETTA)
       }
-      if (newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
+      if (newY > 0 && newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
         player.transformPokemon(pokemon, Pkm.MELOETTA)
       }
     })

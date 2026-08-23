@@ -26,6 +26,7 @@ import {
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../types/enum/Effect"
 import {
   BattleResult,
   PokemonActionState,
@@ -1015,7 +1016,10 @@ export default class Player extends Schema implements IPlayer {
 
     const dps = simulation.getDpsMeter(this.id)
     if (dps) {
-      const dpsList = schemaValues(dps)
+      // these are per-Pokémon records, and board effect rows are team-wide totals
+      const dpsList = schemaValues(dps).filter(
+        (d) => !isIn(EnvironmentalEffects, d.id)
+      )
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,
         ...dpsList.map((d) => d.heal)

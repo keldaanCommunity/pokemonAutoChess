@@ -9,10 +9,10 @@ import {
   PkmFamily
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { isIn } from "../../../../../utils/array"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
-import type { IDetailledPokemon } from "../../../models/bot-v2"
 import { pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
@@ -196,15 +196,21 @@ export default function GameChoice() {
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`item_description.${item}`))}
                 </p>
-                {choice.costs[index] > 0 && <p
-                  style={{
-                    marginBottom: "0.5em",
-                    fontWeight: "bold",
-                    fontSize: "1.5rem"
-                  }}
-                >
-                  {addIconsToDescription(t("player_choices.cost_amount", { cost: choice.costs[index] }))}
-                </p>}
+                {choice.costs[index] > 0 && (
+                  <p
+                    style={{
+                      marginBottom: "0.5em",
+                      fontWeight: "bold",
+                      fontSize: "1.5rem"
+                    }}
+                  >
+                    {addIconsToDescription(
+                      t("player_choices.cost_amount", {
+                        cost: choice.costs[index]
+                      })
+                    )}
+                  </p>
+                )}
               </div>
             ))}
           </div>
