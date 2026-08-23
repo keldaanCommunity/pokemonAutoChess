@@ -390,28 +390,6 @@ export interface ISimulationCommand {
   execute(): void
 }
 
-// row ids for the board effects that get their own Battle Stats line. they share
-// the meter with Pokémon rows but are team-wide totals, not entity ids
-export const BoardEffectDpsId = {
-  TIDAL_WAVE: "tidal-wave",
-  CURSE: "curse",
-  SANDSTORM: "sandstorm",
-  STORM: "storm",
-  SPIKES: "spikes",
-  STEALTH_ROCKS: "stealth-rocks",
-  HAIL: "hail",
-  EMBER: "ember",
-  POISON_GAS: "poison-gas",
-  TOXIC_SPIKES: "toxic-spikes"
-} as const
-
-export type BoardEffectDpsId =
-  (typeof BoardEffectDpsId)[keyof typeof BoardEffectDpsId]
-
-export const BOARD_EFFECT_DPS_IDS: ReadonlySet<string> = new Set(
-  Object.values(BoardEffectDpsId)
-)
-
 export interface IDps {
   update(
     physicalDamage: number,

@@ -336,7 +336,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     damage: number
     board: Board
     attackType: AttackType
-    attacker: PokemonEntity | null
+    attacker: PokemonEntity | null,
+    effect?: EffectEnum,
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }) {
@@ -403,9 +404,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
       if (
-        this.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT) ||
+        this.effects.has(EffectEnum.STRANGE_STEAM) ||
         (attacker &&
-          attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
+          attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
         specialDamage *= 1.2
       }

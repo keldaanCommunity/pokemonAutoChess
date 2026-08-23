@@ -3,11 +3,12 @@
 // the replay.eventlog.row.* templates; game-data nouns route through the game's own locale keys, so a bump needs no new strings for them
 import type { TFunction } from "i18next"
 import { Transfer } from "../../../types"
+import { EnvironmentalEffects } from "../../../types/enum/Effect"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 import { getRankLabel } from "../../../types/strings/Strings"
-import { getBoardEffectDpsDisplay } from "../pages/component/game/board-effect-dps"
+import { isIn } from "../../../utils/array"
 import { statusName } from "./replay-combat-scan"
 
 // SCREAMING_SNAKE enum value to Title Case (ICE_SPINNER becomes "Ice Spinner"); derived so it survives a bump
@@ -370,20 +371,15 @@ export function formatMessageRow(
       case Transfer.POKEMON_DAMAGE: {
         const o = p as {
           index?: string
-          sourceId?: string
           amount?: number
           type?: number
           x?: number
           y?: number
         }
-        // board effects have no attacker to name, so they send a sourceId instead
-        const boardEffect = o?.sourceId
-          ? getBoardEffectDpsDisplay(o.sourceId)
-          : undefined
-        const src = o?.index
-          ? pkmName(t, PkmByIndex[o.index])
-          : boardEffect
-            ? t(boardEffect.labelKey)
+        const src = isIn(EnvironmentalEffects, o.index)
+          ? t(`effect.${o.index}`)
+          : o?.index
+            ? pkmName(t, PkmByIndex[o.index])
             : "?"
         const target = info?.target
           ? pkmName(t, info.target)

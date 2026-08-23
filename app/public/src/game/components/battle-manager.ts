@@ -14,7 +14,7 @@ import type Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import type { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
-import { EffectEnum } from "../../../../types/enum/Effect"
+import { EffectEnum, EnvironmentalEffects } from "../../../../types/enum/Effect"
 import {
   AttackType,
   HealType,
@@ -27,11 +27,11 @@ import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
+import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
 import { pickRandomIn } from "../../../../utils/random"
-import { boardEffectTextureKey } from "../../pages/component/game/board-effect-dps"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import type AnimationManager from "../animation-manager"
@@ -1005,7 +1005,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === EffectEnum.STRANGE_STEAM_BOARD_EFFECT) {
+    if (event.effect === EffectEnum.STRANGE_STEAM) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1198,8 +1198,7 @@ export default class BattleManager {
     amount,
     type,
     index,
-    id,
-    sourceId
+    id
   }: {
     x: number
     y: number
@@ -1207,7 +1206,6 @@ export default class BattleManager {
     type: AttackType
     index: string
     id: string
-    sourceId?: string
   }) {
     if (this.simulation?.id === id) {
       const coordinates = transformEntityCoordinates(x, y, this.flip)
@@ -1218,13 +1216,10 @@ export default class BattleManager {
             ? "#5f9ff9" // should be the same than var(--color-special) but phaser cant use css variables
             : "#f7d51d" // should be the same than var(--color-true) but phaser cant use css variables
       // board effect damage has no attacker, so it shows its own icon instead of a portrait
-      this.displayTween(
-        color,
-        coordinates,
-        sourceId ? boardEffectTextureKey(sourceId) : `portrait-${index}`,
-        amount,
-        sourceId !== undefined
-      )
+      const isEffectIcon = isIn(EnvironmentalEffects, index)
+      const textureKey = isEffectIcon ? `effect-${index}` : `portrait-${index}`
+
+      this.displayTween(color, coordinates, textureKey, amount, isEffectIcon)
       displayHit(
         this.scene,
         PokemonAnimations[PkmByIndex[index]]?.hitSprite ??

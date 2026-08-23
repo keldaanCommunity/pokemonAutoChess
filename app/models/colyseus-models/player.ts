@@ -17,7 +17,6 @@ import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
 import type GameState from "../../rooms/states/game-state"
 import {
-  BOARD_EFFECT_DPS_IDS,
   type FlowerPot,
   FlowerPots,
   type IPlayer,
@@ -27,6 +26,7 @@ import {
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../types/enum/Effect"
 import {
   BattleResult,
   PokemonActionState,
@@ -1018,7 +1018,7 @@ export default class Player extends Schema implements IPlayer {
     if (dps) {
       // these are per-Pokémon records, and board effect rows are team-wide totals
       const dpsList = schemaValues(dps).filter(
-        (d) => !BOARD_EFFECT_DPS_IDS.has(d.id)
+        (d) => !isIn(EnvironmentalEffects, d.id)
       )
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,

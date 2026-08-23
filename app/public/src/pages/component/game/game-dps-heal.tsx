@@ -1,23 +1,26 @@
 import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
+import {
+  type EnvironmentalEffect,
+  EnvironmentalEffects
+} from "../../../../../types/enum/Effect"
+import { isIn } from "../../../../../utils/array"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
-import { getBoardEffectDpsDisplay } from "./board-effect-dps"
 
 export default function GameDpsHeal(props: {
   maxHeal: number
   dpsMeter: IDps
 }) {
   const { t } = useTranslation()
-  const boardEffect = getBoardEffectDpsDisplay(props.dpsMeter.id)
   return (
     <div className="game-dps-bar">
-      {boardEffect ? (
+      {isIn(EnvironmentalEffects, props.dpsMeter.id) ? (
         <img
-          src={boardEffect.iconPath}
+          src={`assets/icons/effects/${props.dpsMeter.id as EnvironmentalEffect}.svg`}
           className="pokemon-portrait"
-          title={t(boardEffect.labelKey)}
-          alt={t(boardEffect.labelKey)}
+          title={t(`effect.${props.dpsMeter.id as EnvironmentalEffect}`)}
+          alt={t(`effect.${props.dpsMeter.id as EnvironmentalEffect}`)}
         />
       ) : (
         <PokemonPortrait avatar={props.dpsMeter.name} />

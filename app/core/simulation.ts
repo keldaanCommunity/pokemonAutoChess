@@ -17,7 +17,6 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../models/precomputed/precomputed-types"
 import type GameRoom from "../rooms/game-room"
 import {
-  BoardEffectDpsId,
   type IPokemon,
   type IPokemonEntity,
   type ISimulation,
@@ -25,7 +24,7 @@ import {
   Transfer
 } from "../types"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
@@ -52,7 +51,7 @@ import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { max, min } from "../utils/number"
+import { capUint16, max, min } from "../utils/number"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -86,10 +85,6 @@ import {
 import { PokemonEntity } from "./pokemon-entity"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
-
-// these rows add up over a whole team and a whole fight, so they can overflow
-// the uint16 Dps fields and wrap to a tiny number once synced
-const capUint16 = max(65535)
 
 export default class Simulation extends Schema implements ISimulation {
   @type("string") weather: Weather = Weather.NEUTRAL
@@ -323,43 +318,14 @@ export default class Simulation extends Schema implements ISimulation {
         : undefined
   }
 
-  getBoardEffectDps(team: Team, id: BoardEffectDpsId): Dps {
+  getEffectDps(team: Team, effect: EnvironmentalEffect): Dps {
     const meter = team === Team.BLUE_TEAM ? this.blueDpsMeter : this.redDpsMeter
-    let dps = meter.get(id)
+    let dps = meter.get(effect)
     if (!dps) {
-      dps = new Dps(id, id)
-      meter.set(id, dps)
+      dps = new Dps(effect, effect)
+      meter.set(effect, dps)
     }
     return dps
-  }
-
-  // board effect damage has no attacker, so nothing else records it. credit it to
-  // the team opposing the victim, and send the damage number handleDamage skipped
-  creditBoardEffectDamage(
-    victim: PokemonEntity,
-    id: BoardEffectDpsId,
-    attackType: AttackType,
-    amount: number
-  ) {
-    if (amount <= 0) return
-    const team =
-      victim.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
-    const dps = this.getBoardEffectDps(team, id)
-    if (attackType === AttackType.PHYSICAL)
-      dps.physicalDamage = capUint16(dps.physicalDamage + amount)
-    else if (attackType === AttackType.SPECIAL)
-      dps.specialDamage = capUint16(dps.specialDamage + amount)
-    else dps.trueDamage = capUint16(dps.trueDamage + amount)
-
-    this.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
-      index: "",
-      sourceId: id,
-      type: attackType,
-      amount: Math.round(amount),
-      x: victim.positionX,
-      y: victim.positionY,
-      id: this.id
-    })
   }
 
   getTeam(playerId: string) {
@@ -1041,8 +1007,8 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.AROMATIC_MIST:
-      case EffectEnum.FAIRY_WIND:
-      case EffectEnum.STRANGE_STEAM:
+      case EffectEnum.FAIRY_AURA:
+      case EffectEnum.PIXILATE:
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
@@ -1454,19 +1420,14 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
           } else {
-            const { takenDamage } = pokemonOnCell.handleDamage({
+            pokemonOnCell.handleDamage({
               damage: 100,
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,
+              effect: EffectEnum.LIGHTNING_STRIKE,
               shouldTargetGainMana: false
             })
-            this.creditBoardEffectDamage(
-              pokemonOnCell,
-              BoardEffectDpsId.STORM,
-              AttackType.SPECIAL,
-              takenDamage
-            )
           }
         }
         this.room.broadcast(Transfer.BOARD_EVENT, {
@@ -1849,27 +1810,20 @@ export default class Simulation extends Schema implements ISimulation {
                   0,
                   pokemonHit.healDone - healReceived
                 )
-                const waveDps = this.getBoardEffectDps(
-                  team,
-                  BoardEffectDpsId.TIDAL_WAVE
-                )
+                const waveDps = this.getEffectDps(team, EffectEnum.TIDAL_WAVE)
                 waveDps.heal = capUint16(waveDps.heal + healReceived)
               }
             }
           } else {
-            const { takenDamage } = pokemonHit.handleDamage({
+            pokemonHit.handleDamage({
               damage: tidalWaveLevel * 0.05 * pokemonHit.maxHP,
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
+              effect: EffectEnum.TIDAL_WAVE,
               shouldTargetGainMana: false
             })
-            this.creditBoardEffectDamage(
-              pokemonHit,
-              BoardEffectDpsId.TIDAL_WAVE,
-              AttackType.TRUE,
-              takenDamage
-            )
+
             let newY = y
             if (isRed) {
               while (

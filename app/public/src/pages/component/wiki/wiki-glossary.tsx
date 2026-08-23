@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { DocumentedBoardEffects } from "../../../../../types/enum/Effect"
 import { TechnicalTerms } from "../../../../../types/strings/TechnicalTerm"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { BOARD_EFFECTS_IN_BATTLE_STATS } from "../game/board-effect-dps"
 import "./wiki-glossary.css"
 
 export default function WikiGlossary() {
@@ -35,25 +33,6 @@ export default function WikiGlossary() {
         </div>
       </dl>
 
-      <h3>{t("wiki.glossary.board_effects")}</h3>
-      <p className="glossary-note">{t("wiki.glossary.board_effects_note")}</p>
-      <dl>
-        {DocumentedBoardEffects.map((effect) => (
-          <div key={effect} className="my-box glossary-term">
-            <dt>
-              {addIconsToDescription(effect)}
-              {BOARD_EFFECTS_IN_BATTLE_STATS.has(effect) && (
-                <span className="glossary-tag">
-                  {t("wiki.glossary.battle_stats_tag")}
-                </span>
-              )}
-            </dt>
-            <dd>
-              {addIconsToDescription(t(`effect_description.${effect}`))}
-            </dd>
-          </div>
-        ))}
-      </dl>
 
       <h3>{t("technical_terms.title")}</h3>
       <dl>

@@ -2414,8 +2414,8 @@
 		"CURSE_OF_TORMENT": "Maldição do Tormento",
 		"CURSE_OF_FATE": "Maldição do Destino",
 		"AROMATIC_MIST": "Névoa Aromática",
-		"FAIRY_WIND": "Vento das Fadas",
-		"STRANGE_STEAM": "Vapor Estranho",
+		"FAIRY_AURA": "Vento das Fadas",
+		"PIXILATE": "Vapor Estranho",
 		"MOON_FORCE": "Força Lunar",
 		"CHILLY": "Frio",
 		"FROSTY": "Gelado",
@@ -2579,8 +2579,8 @@
 		"BANQUET": "Ganhe um segundo CHEF_HAT.",
 		"COACHING": "Bloqueia 12 de dano. Receba um Saco de Treino. Em cada estágio, Pokémon FIGHTING no banco com um saco de treino ou um pilar à esquerda treinarão e ganharão 4 ATK e 10% do HP máximo base permanentemente.",
 		"AROMATIC_MIST": "Escolha uma entre três varinhas dentre BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
-		"FAIRY_WIND": "Escolha uma entre três varinhas dentre CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
-		"STRANGE_STEAM": "Escolha uma entre três varinhas dentre GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
+		"FAIRY_AURA": "Escolha uma entre três varinhas dentre CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
+		"PIXILATE": "Escolha uma entre três varinhas dentre GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
 		"MOON_FORCE": "Escolha uma entre três varinhas dentre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Pokémon FAIRY ganham 5 LUCK."
 	},
 	"item": {

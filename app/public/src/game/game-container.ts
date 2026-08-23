@@ -736,7 +736,6 @@ class GameContainer {
     y: number
     index: string
     amount: number
-    sourceId?: string
   }) {
     if (document.hidden) return // do not display damage when the tab is not focused
     if (preference("showDamageNumbers")) {
