@@ -205,6 +205,14 @@ export default function GameOptionsModal(props: {
           <p>
             <Checkbox
               isDark
+              checked={preferences.customCursors}
+              onToggle={(checked) => setPreferences({ customCursors: checked })}
+              label={t("options.custom_cursors")}
+            />
+          </p>
+          <p>
+            <Checkbox
+              isDark
               checked={preferences.colorblindMode}
               onToggle={(checked) =>
                 setPreferences({ colorblindMode: checked })

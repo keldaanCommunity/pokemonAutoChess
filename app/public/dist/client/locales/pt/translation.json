@@ -4069,6 +4069,7 @@
 		"disable_animated_tilemap": "Desativar animação para o mapa de quadrículas (fundo)",
 		"disable_camera_shake": "Sem balanço de câmera ou flashes",
 		"antialiasing": "Ativar anti-serrilhamento",
+		"custom_cursors": "Ativar cursores personalizados",
 		"colorblind_mode": "Modo daltônico",
 		"renderer": "Renderizador",
 		"renderer_info": "WebGL é mais rápido, mas pode causar problemas visuais em alguns dispositivos. Canvas é mais lento, mas mais compatível.",
