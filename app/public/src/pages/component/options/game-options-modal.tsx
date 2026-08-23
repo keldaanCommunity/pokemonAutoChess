@@ -153,9 +153,7 @@ export default function GameOptionsModal(props: {
                   ))}
                 </select>
               </label>
-              <p className="info">
-                {t("options.theme_info")}
-              </p>
+              <p className="info">{t("options.theme_info")}</p>
             </fieldset>
           )}
 
@@ -164,7 +162,7 @@ export default function GameOptionsModal(props: {
               display: "flex",
               flexDirection: "column",
               gap: "0.5em",
-              padding: "0.5em 1em"
+              padding: "0.5em 0"
             }}
           >
             <Checkbox
