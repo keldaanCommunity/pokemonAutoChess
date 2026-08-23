@@ -4271,6 +4271,7 @@
 		"disable_animated_tilemap": "禁用背景动画",
 		"disable_camera_shake": "禁用屏幕振动和闪光",
 		"antialiasing": "启用抗锯齿",
+		"custom_cursors": "启用自定义光标",
 		"colorblind_mode": "色盲友好模式",
 		"record_replays": "自动录制游戏回放",
 		"renderer": "渲染器",

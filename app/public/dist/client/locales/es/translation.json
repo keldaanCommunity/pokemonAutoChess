@@ -4067,6 +4067,7 @@
 		"disable_animated_tilemap": "Deshabilitar las animaciones del fondo",
 		"disable_camera_shake": "Sin temblor de pantalla",
 		"antialiasing": "Activar anti-aliasing",
+		"custom_cursors": "Activar cursores personalizados",
 		"renderer": "Renderizador",
 		"renderer_info": "WebGL es más rápido pero puede causar errores visuales en algunos dispositivos. Canvas es más lento pero más compatible.",
 		"preloading_start": "Precargando juego...",

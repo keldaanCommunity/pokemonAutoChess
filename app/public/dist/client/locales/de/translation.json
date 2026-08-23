@@ -3768,6 +3768,7 @@
 		"disable_animated_tilemap": "Deaktiviere Hintergrund Animationen",
 		"disable_camera_shake": "Kein Kameraruckeln",
 		"antialiasing": "Aktiviere anti-aliasing",
+		"custom_cursors": "Aktiviere benutzerdefinierte Cursor",
 		"renderer": "Renderer",
 		"renderer_info": "WebGL ist schneller, kann aber visuelle glitches auf manchen Geräten verursachen. Canvas ist langsamer, bietet jedoch eine bessere kompatibilität.",
 		"preloading_start": "Spiel wird vorab geladen...",

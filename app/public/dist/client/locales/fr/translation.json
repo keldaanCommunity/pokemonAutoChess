@@ -4074,6 +4074,7 @@
 		"disable_animated_tilemap": "Désactiver les animations en arrière-plan",
 		"disable_camera_shake": "Désactiver les tremblements et flashs de l'écran",
 		"antialiasing": "Activer l'anti-aliasing",
+		"custom_cursors": "Activer les curseurs personnalisés",
 		"colorblind_mode": "Mode daltonien",
 		"renderer": "Moteur de rendu",
 		"renderer_info": "WebGL est plus rapide mais peut causer des bugs visuels chez certains. Canvas est plus lent mais plus largement compatible.",

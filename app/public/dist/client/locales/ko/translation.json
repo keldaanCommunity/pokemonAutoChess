@@ -3975,6 +3975,7 @@
 		"show_damage_numbers": "피해량을 숫자로 표기",
 		"disable_animated_tilemap": "배경 애니메이션 제거",
 		"antialiasing": "안티앨리어싱 활성화",
+		"custom_cursors": "커스텀 커서 활성화",
 		"renderer": "렌더링 엔진",
 		"renderer_info": "webGL은 빠르지만 일부 기기에선 시각적으로 버그가 발생할 수 있습니다. Canvas는 느리지만 보다 더 다양한 기기에서 호환됩니다.",
 		"preloading_start": "로딩 준비중...",
