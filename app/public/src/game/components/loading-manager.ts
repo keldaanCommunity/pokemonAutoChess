@@ -100,7 +100,7 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       const players = schemaValues(scene.room?.state.players!)
-      const player = players.find((p) => p.id === scene.uid) ?? players[0]
+      const player = scene.getPlayerToSpectate()! // must match what startGame plays, or the music isn't preloaded
       await scene.preloadMaps(
         players
           .map((p) => p.map)

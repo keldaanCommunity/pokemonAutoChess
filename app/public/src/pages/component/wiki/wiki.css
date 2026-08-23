@@ -221,6 +221,11 @@
   font-size: 1.5rem;
 }
 
+#wiki-regions .react-tabs__tab-panel {
+  flex: 1;
+  min-height: 0;
+}
+
 #wiki-regions .wiki-regional-mons {
   position: absolute;
   bottom: 1em;

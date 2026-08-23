@@ -30,6 +30,7 @@ export default class ItemContainer extends DraggableObject {
   name: Item
   pokemonId: string | null
   playerId: string
+  mouseenterTimeout: NodeJS.Timeout | null = null
   mouseoutTimeout: NodeJS.Timeout | null = null
 
   constructor(
@@ -92,7 +93,7 @@ export default class ItemContainer extends DraggableObject {
     super.onPointerOver(pointer)
     if (preference("showDetailsOnHover") && !this.detail?.visible) {
       this.mouseoutTimeout && clearTimeout(this.mouseoutTimeout)
-      this.openDetail()
+      this.mouseenterTimeout = setTimeout(() => this.openDetail(), 100)
     }
     this.updateDropZone(false)
     if (this.draggable) {
@@ -109,6 +110,7 @@ export default class ItemContainer extends DraggableObject {
       this.circle?.setFrame(this.cellIndex * 3)
     }
     if (preference("showDetailsOnHover")) {
+      this.mouseenterTimeout && clearTimeout(this.mouseenterTimeout)
       this.mouseoutTimeout = setTimeout(
         () => {
           if (this.detail?.visible) {
@@ -160,6 +162,7 @@ export default class ItemContainer extends DraggableObject {
         })
         this.detail.dom.addEventListener("mouseleave", () => {
           if (preference("showDetailsOnHover")) {
+            this.mouseenterTimeout && clearTimeout(this.mouseenterTimeout)
             this.mouseoutTimeout = setTimeout(
               () => {
                 if (this.detail?.visible) {

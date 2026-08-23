@@ -40,6 +40,7 @@ export interface IPreferencesState {
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
+  customCursors: boolean
   colorblindMode: boolean
   recordReplays: boolean
   keepReplays: number
@@ -69,6 +70,7 @@ const defaultPreferences: IPreferencesState = {
   cameraLocked: false,
   renderer: Phaser.AUTO,
   antialiasing: true,
+  customCursors: true,
   colorblindMode: false,
   recordReplays: true,
   keepReplays: 5,

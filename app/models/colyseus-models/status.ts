@@ -194,7 +194,8 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
-      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
+      pokemon.types.has(Synergy.POISON) === false
     ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
