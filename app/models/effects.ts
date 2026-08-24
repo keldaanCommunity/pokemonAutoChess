@@ -1,6 +1,6 @@
 import { type MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTriggers } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { SynergyTiersThresholds } from "../config"
+import { SynergyTiers } from "../config/game/synergies"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum } from "../types/enum/Effect"
@@ -14,11 +14,11 @@ export class Effects extends SetSchema<EffectEnum> {
   update(synergies: Synergies, board: MapSchema<Pokemon>) {
     this.clear()
     SynergyArray.forEach((synergy) => {
-      for (let i = SynergyTriggers[synergy].length; i >= 0; i--) {
-        const v = SynergyTriggers[synergy][i]
+      for (let i = SynergyTiersThresholds[synergy].length; i >= 0; i--) {
+        const v = SynergyTiersThresholds[synergy][i]
         const s = synergies.get(synergy)
         if (s && s >= v) {
-          this.add(SynergyEffects[synergy][i])
+          this.add(SynergyTiers[synergy][i])
           break
         }
       }

@@ -115,11 +115,11 @@ export enum Item {
   RARE_CANDY = "RARE_CANDY",
   EVIOLITE = "EVIOLITE",
   RED_SCALE = "RED_SCALE",
-  WHITE_FLUTE = "WHITE_FLUTE",
+  GOLD_MASK = "GOLD_MASK",
   GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
   ABSORB_BULB = "ABSORB_BULB",
   SACRED_ASH = "SACRED_ASH",
-  COMET_SHARD = "COMET_SHARD",
+  STAR_PIECE = "STAR_PIECE",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
   DAMP_ROCK = "DAMP_ROCK",
@@ -180,7 +180,7 @@ export enum Item {
   TM_PAYDAY = "TM_PAYDAY",
   TM_FOCUS_PUNCH = "TM_FOCUS_PUNCH",
   TM_HYPER_BEAM = "TM_HYPER_BEAM",
-  TM_PROTECT = "TM_PROTECT",
+  TM_SUBSTITUTE = "TM_SUBSTITUTE",
   TM_SKILL_SWAP = "TM_SKILL_SWAP",
   CHEF_HAT = "CHEF_HAT",
   PICNIC_SET = "PICNIC_SET",
@@ -330,7 +330,37 @@ export enum Item {
   ICY_FLUTE = "ICY_FLUTE",
   ROCK_HORN = "ROCK_HORN",
   SKY_MELODICA = "SKY_MELODICA",
-  TERRA_CYMBAL = "TERRA_CYMBAL"
+  TERRA_CYMBAL = "TERRA_CYMBAL",
+  SOOTHE_BELL = "SOOTHE_BELL",
+  BALL = "BALL",
+  BERRIES_GIFT = "BERRIES_GIFT",
+  SWEETS_GIFT = "SWEETS_GIFT",
+  DITTO_GIFT = "DITTO_GIFT",
+  TICKET_BUNDLE = "TICKET_BUNDLE",
+  HATCH_BUNDLE = "HATCH_BUNDLE",
+  REGIONAL_TOUR = "REGIONAL_TOUR",
+  BANQUET = "BANQUET",
+  GEMS_BUNDLE = "GEMS_BUNDLE",
+  POTION = "POTION",
+  FORAGE_BAG = "FORAGE_BAG",
+  COLLECTION_BOX = "COLLECTION_BOX",
+  PRETTY_BOX = "PRETTY_BOX",
+  DELUXE_BOX = "DELUXE_BOX",
+  TOOLBOX = "TOOLBOX",
+  SMALL_EXP_GIFT = "SMALL_EXP_GIFT",
+  LARGE_EXP_GIFT = "LARGE_EXP_GIFT",
+  STAR_GIFT = "STAR_GIFT",
+  COMMON_GIFT = "COMMON_GIFT",
+  UNCOMMON_GIFT = "UNCOMMON_GIFT",
+  RARE_GIFT = "RARE_GIFT",
+  EPIC_GIFT = "EPIC_GIFT",
+  ULTRA_GIFT = "ULTRA_GIFT",
+  UNIQUE_GIFT = "UNIQUE_GIFT",
+  LEGENDARY_GIFT = "LEGENDARY_GIFT",
+  PURPLE_NECTAR = "PURPLE_NECTAR",
+  RED_NECTAR = "RED_NECTAR",
+  PINK_NECTAR = "PINK_NECTAR",
+  YELLOW_NECTAR = "YELLOW_NECTAR"
 }
 
 export const MemoryDiscs = [
@@ -393,6 +423,13 @@ export const MemoryDiscsBySynergy: {
   [Synergy.FLORA]: Item.FLORA_MEMORY
 }
 
+export const Nectars = [
+  Item.RED_NECTAR,
+  Item.PURPLE_NECTAR,
+  Item.YELLOW_NECTAR,
+  Item.PINK_NECTAR
+] satisfies Item[]
+
 export const MissionOrders = [
   Item.MISSION_ORDER_PINK,
   Item.MISSION_ORDER_RED,
@@ -433,51 +470,6 @@ export const TownItems = [
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT
-] satisfies Item[]
-
-// should be excluded from carousels
-export const SpecialItems: Item[] = [
-  ...TownItems,
-  Item.COIN,
-  Item.NUGGET,
-  Item.BIG_NUGGET,
-  Item.TRASH,
-  Item.FIRE_SHARD,
-  Item.CELL_BATTERY,
-  Item.OLD_ROD,
-  Item.GOOD_ROD,
-  Item.SUPER_ROD,
-  Item.CHEF_HAT,
-  Item.VANILLA_FLAVOR,
-  Item.RUBY_FLAVOR,
-  Item.MATCHA_FLAVOR,
-  Item.MINT_FLAVOR,
-  Item.LEMON_FLAVOR,
-  Item.SALTED_FLAVOR,
-  Item.RUBY_SWIRL_FLAVOR,
-  Item.CARAMEL_SWIRL_FLAVOR,
-  Item.RAINBOW_SWIRL_FLAVOR,
-  Item.RICH_MULCH,
-  Item.AMAZE_MULCH,
-  Item.ROTOM_CATALOG,
-  Item.TEAL_MASK,
-  Item.WELLSPRING_MASK,
-  Item.CORNERSTONE_MASK,
-  Item.HEARTHFLAME_MASK,
-  Item.ZYGARDE_CUBE,
-  Item.METEORITE,
-  Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR,
-  Item.MYSTERY_BOX,
-  Item.RUSTED_SWORD,
-  Item.SCROLL_OF_WATERS,
-  Item.SCROLL_OF_DARKNESS,
-  Item.MEMORY_DISCS,
-  ...MemoryDiscs,
-  Item.COMFEY,
-  Item.TATSUGIRI_CURLY,
-  Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -653,11 +645,11 @@ export const ShinyItems = [
   Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.EVIOLITE,
-  Item.WHITE_FLUTE,
+  Item.GOLD_MASK,
   Item.GOLD_BOTTLE_CAP,
   Item.ABSORB_BULB,
   Item.SACRED_ASH,
-  Item.COMET_SHARD,
+  Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.RED_SCALE
@@ -915,7 +907,7 @@ export const CraftableNoStonesOrScarves: Item[] =
     (item) => SynergyGivenByItem.hasOwnProperty(item) === false
   )
 
-export const Wands: Item[] = [
+export const Wands = [
   Item.BLAST_WAND,
   Item.HP_SWAP_WAND,
   Item.SPIRIT_WAND,
@@ -932,7 +924,7 @@ export const Wands: Item[] = [
   Item.SWITCHER_WAND,
   Item.WHIRLWIND_WAND,
   Item.TUNNEL_WAND
-]
+] satisfies Item[]
 
 export const OgerponMasks: Item[] = [
   Item.TEAL_MASK,
@@ -946,23 +938,23 @@ export const TMsBronze = [
   Item.TM_RETURN,
   Item.TM_COUNTER,
   Item.TM_DISABLE
-]
+] satisfies Item[]
 
 export const TMsSilver = [
   Item.TM_BULK_UP,
   Item.TM_CHARGE,
   Item.TM_REFLECT,
   Item.TM_PAYDAY
-]
+] satisfies Item[]
 
 export const TMsGold = [
   Item.TM_FOCUS_PUNCH,
   Item.TM_HYPER_BEAM,
-  Item.TM_PROTECT,
+  Item.TM_SUBSTITUTE,
   Item.TM_SKILL_SWAP
-]
+] satisfies Item[]
 
-export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold]
+export const TMs = [...TMsBronze, ...TMsSilver, ...TMsGold] satisfies Item[]
 
 export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_RAGE]: Ability.RAGE,
@@ -975,11 +967,11 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_PAYDAY]: Ability.PAYDAY,
   [Item.TM_FOCUS_PUNCH]: Ability.FOCUS_PUNCH,
   [Item.TM_HYPER_BEAM]: Ability.HYPER_BEAM,
-  [Item.TM_PROTECT]: Ability.PROTECT,
+  [Item.TM_SUBSTITUTE]: Ability.SUBSTITUTE,
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
-export const TMPerAbility = reverseMap(
+export const TMPerAbility: Map<Ability, Item> = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
 
@@ -1155,6 +1147,8 @@ export const UnholdableItems = [
   Item.RED_SCALE
 ] satisfies Item[]
 
+export type UnholdableItem = (typeof UnholdableItems)[number]
+
 export const ConsumableItems = [
   ...TMs,
   ...Dishes,
@@ -1171,7 +1165,8 @@ export const ConsumableItems = [
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR
+  Item.MALICIOUS_ARMOR,
+  Item.SOOTHE_BELL
 ] satisfies Item[]
 
 export const RemovableItems = [
@@ -1180,4 +1175,51 @@ export const RemovableItems = [
   ...Tools,
   ...Scarves,
   ...MemoryDiscs
+] satisfies Item[]
+
+export const UnholdableItemsToSaveForStats = [
+  Item.GIMMIGHOUL_COIN,
+  ...Wands,
+  ...SynergyGems,
+  ...SevenTreasures,
+  ...WeatherRocks
+] satisfies UnholdableItem[]
+
+// should be excluded from carousels
+export const SpecialItems: Item[] = [
+  ...TownItems,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
+  Item.TRASH,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
+  Item.CHEF_HAT,
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH,
+  Item.ROTOM_CATALOG,
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK,
+  Item.ZYGARDE_CUBE,
+  Item.METEORITE,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.MYSTERY_BOX,
+  Item.RUSTED_SWORD,
+  Item.SCROLL_OF_WATERS,
+  Item.SCROLL_OF_DARKNESS,
+  Item.MEMORY_DISCS,
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY,
+  Item.BALL,
+  ...Flavors,
+  ...Nectars
 ] satisfies Item[]

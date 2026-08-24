@@ -22,7 +22,8 @@
 }
 
 .game-spectate-player-info .icon-life,
-.game-spectate-player-info .icon-money {
+.game-spectate-player-info .icon-money,
+.game-spectate-player-info .icon-streak {
   width: 1.5em;
   height: 1.5em;
 }

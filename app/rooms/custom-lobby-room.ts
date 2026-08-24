@@ -8,7 +8,6 @@ import {
 } from "colyseus"
 import { CronJob } from "cron"
 import admin from "firebase-admin"
-import { writeHeapSnapshot } from "v8"
 import {
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
@@ -23,14 +22,7 @@ import Tournament from "../models/mongo-models/tournament"
 import UserMetadata, {
   toLeanUserMetadata
 } from "../models/mongo-models/user-metadata"
-import { fetchLeaderboards } from "../services/leaderboard"
-import { fetchMetaReports } from "../services/meta"
 import { notificationsService } from "../services/notifications"
-import { refreshSpriteGapData } from "../services/sprite-gap-scanner"
-import {
-  refreshTwitchBlacklist,
-  refreshTwitchStreams
-} from "../services/twitch"
 import { type Emotion, Role, type Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { GameMode } from "../types/enum/Game"
@@ -44,6 +36,7 @@ import {
   ChangeAvatarCommand,
   ChangeNameCommand,
   ChangeTitleCommand,
+  ChoosePalCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
   GiveBoostersCommand,
@@ -173,6 +166,16 @@ export default class CustomLobbyRoom extends Room {
         this.dispatcher.dispatch(new SelectLanguageCommand(), {
           client,
           message
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.SELECT_PAL,
+      async (client, playerUid: string | null) => {
+        this.dispatcher.dispatch(new ChoosePalCommand(), {
+          client,
+          playerUid
         })
       }
     )
@@ -402,23 +405,16 @@ export default class CustomLobbyRoom extends Room {
           notificationsService.addNotification(userId, "info", msg, client)
 
         if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
-          logger.info("writing heap snapshot")
-          writeHeapSnapshot()
           notify("Heap snapshot written")
         } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
-          fetchLeaderboards()
           notify("Leaderboards refreshed")
         } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
-          fetchMetaReports()
           notify("Meta reports refreshed")
         } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
-          refreshSpriteGapData()
           notify("Sprite gap data refreshed")
         } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
-          refreshTwitchStreams()
           notify("Twitch streams refreshed")
         } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
-          refreshTwitchBlacklist()
           notify("Twitch streams blacklist refreshed")
         }
       }

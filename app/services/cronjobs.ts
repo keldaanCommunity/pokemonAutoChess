@@ -2,7 +2,7 @@ import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
@@ -21,55 +21,101 @@ import { GameMode } from "../types/enum/Game"
 import { GameEvent } from "../types/events"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
+import { logPreviousDayBoosterCreationStats } from "./booster-monitor"
 import { fetchMetaReports } from "./meta"
 import { notificationsService } from "./notifications"
 import { refreshSpriteGapData } from "./sprite-gap-scanner"
 
-export function initCronJobs() {
+function getDeterministicSpriteGapSchedule(seed: string): {
+  hour: number
+  minute: number
+} {
+  let hash = 0
+
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+
+  return {
+    hour: hash % 24,
+    minute: Math.floor(hash / 24) % 60
+  }
+}
+
+export function initCronJobs(isMainThread: boolean) {
   logger.debug("init cron jobs")
 
-  // CronJob.from({
-  //   cronTime: "0 8 * * *", // every day at 8am
-  //   timeZone: "Europe/Paris",
-  //   onTick: () => deleteOldAnonymousAccounts(),
-  //   start: true
-  // })
-  CronJob.from({
-    cronTime: "15 8 * * *", // every day at 8:15am
-    timeZone: "Europe/Paris",
-    onTick: () => deleteOldHistory(),
-    start: true
-  })
-  CronJob.from({
-    cronTime: "30 8 * * *", // every day at 8:30am
-    timeZone: "Europe/Paris",
-    onTick: () => eloDecay(),
-    start: true
-  })
-  CronJob.from({
-    cronTime: "45 8 * * *", // every day at 8:45am
-    timeZone: "Europe/Paris",
-    onTick: () => titleStats(),
-    start: true
-  })
-  CronJob.from({
-    cronTime: "50 8 * * *", // every day at 8:50am
-    timeZone: "Europe/Paris",
-    onTick: () => notificationsService.cleanupOldNotifications(),
-    start: true
-  })
-  CronJob.from({
-    cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
-    timeZone: "UTC",
-    onTick: () => resetEventScores(),
-    start: true
-  })
-  CronJob.from({
-    cronTime: "0 9 * * *", // every day at 9:00 AM UTC
-    timeZone: "UTC",
-    onTick: () => refreshSpriteGapData(),
-    start: true
-  })
+  if (isMainThread) {
+    // These cron jobs should only be trigged once no matter the amount of processes the server runs on,
+    // because they update the same database used by all processes
+
+    // CronJob.from({
+    //   cronTime: "0 8 * * *", // every day at 8am
+    //   timeZone: "Europe/Paris",
+    //   onTick: () => deleteOldAnonymousAccounts(),
+    //   start: true
+    // })
+    CronJob.from({
+      cronTime: "15 8 * * *", // every day at 8:15am
+      timeZone: "Europe/Paris",
+      onTick: () => deleteOldHistory(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "30 8 * * *", // every day at 8:30am
+      timeZone: "Europe/Paris",
+      onTick: () => eloDecay(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "45 8 * * *", // every day at 8:45am
+      timeZone: "Europe/Paris",
+      onTick: () => titleStats(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "50 8 * * *", // every day at 8:50am
+      timeZone: "Europe/Paris",
+      onTick: () => notificationsService.cleanupOldNotifications(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "10 0 * * *", // every day at 00:10 UTC
+      timeZone: "UTC",
+      onTick: () => logPreviousDayBoosterCreationStats(),
+      start: true
+    })
+    CronJob.from({
+      cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
+      timeZone: "UTC",
+      onTick: () => resetEventScores(),
+      start: true
+    })
+
+    // SpriteCollab endpoint refresh should be triggered once globally.
+    // We use deterministic jitter per server so community servers do not refresh at the same UTC time.
+    const spriteGapSeed =
+      process.env.SPRITE_GAP_REFRESH_SEED ??
+      process.env.SERVER_NAME ??
+      process.env.HOSTNAME ??
+      "default"
+    const spriteGapSchedule = getDeterministicSpriteGapSchedule(spriteGapSeed)
+
+    logger.info(
+      `[CRON] Sprite gap weekly refresh scheduled at ${spriteGapSchedule.hour
+        .toString()
+        .padStart(2, "0")}:${spriteGapSchedule.minute
+        .toString()
+        .padStart(2, "0")} UTC on Monday (seed=${spriteGapSeed})`
+    )
+
+    CronJob.from({
+      cronTime: `${spriteGapSchedule.minute} ${spriteGapSchedule.hour} * * 1`, // every Monday at jittered UTC time
+      timeZone: "UTC",
+      onTick: () => refreshSpriteGapData(),
+      start: true
+    })
+  }
 
   // see https://github.com/keldaanCommunity/pokemonAutoChessMetaReport/blob/main/.github/workflows/main.yml
   // Meta report generation task is launched at 1:00 AM UTC, so we expect meta report generation to be done by then (< 1 hour)
@@ -212,7 +258,8 @@ async function resetEventScores() {
         $set: {
           eventPoints: 0,
           maxEventPoints: 0,
-          eventFinishTime: null
+          eventFinishTime: null,
+          eventData: {}
         }
       }
     )
@@ -234,6 +281,12 @@ async function resetEventScores() {
           matchMaker.presence.publish(
             "announcement",
             "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
+          )
+          break
+        case GameEvent.POKEPALS:
+          matchMaker.presence.publish(
+            "announcement",
+            "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
           )
           break
       }

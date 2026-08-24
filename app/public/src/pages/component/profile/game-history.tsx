@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import { SynergyTriggers } from "../../../../../config"
+import { BOARD_WIDTH, SynergyTiersThresholds } from "../../../../../config"
 import type {
   IGameRecord,
   IPokemonRecord
@@ -12,8 +12,12 @@ import type {
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import type { Synergy } from "../../../../../types/enum/Synergy"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
+import { getPokemonCustomFromAvatar } from "../../../../../utils/avatar"
+import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
+import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
 import { EloBadge } from "./elo-badge"
@@ -99,7 +103,7 @@ export default function GameHistory(props: {
   return (
     <article className="game-history-list">
       <h2>{t("game_history")}</h2>
-      <div style={{ flex: 1, minHeight: 0 }}>
+      <div style={{ flex: 1, minHeight: 0, overflowY: "auto" }}>
         {(!gameHistory || gameHistory.length === 0) && (
           <p>{t("no_history_found")}</p>
         )}
@@ -123,6 +127,8 @@ export default function GameHistory(props: {
           />
         )}
       </div>
+      <GamePokemonDetailTooltip origin="history" />
+      <ItemDetailTooltip />
     </article>
   )
 }
@@ -161,6 +167,25 @@ function GameHistoryRow({
         </ul>
         <p className="date">{formatDate(r.time)}</p>
         <Team team={r.pokemons}></Team>
+        <div className="player-items">
+          {r.unholdableItems.map((item, i) => (
+            <img
+              key={i}
+              src={"/assets/item/" + item + ".png"}
+              data-tooltip-id="item-detail-tooltip"
+              data-tooltip-content={item}
+            />
+          ))}
+        </div>
+        <div className="actions">
+          <button
+            className="bubbly dark xs"
+            title={t("save")}
+            onClick={() => saveFile(r)}
+          >
+            <img src="assets/ui/save.svg" />
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -184,16 +209,38 @@ function getTopSynergies(
     .sort((a, b) => {
       const [typeA, valueA] = a
       const [typeB, valueB] = b
-      const aTriggerReached = SynergyTriggers[typeA].filter(
+      const aTier = SynergyTiersThresholds[typeA].filter(
         (n) => valueA >= n
       ).length
-      const bTriggerReached = SynergyTriggers[typeB].filter(
+      const bTier = SynergyTiersThresholds[typeB].filter(
         (n) => valueB >= n
       ).length
-      return aTriggerReached !== bTriggerReached
-        ? bTriggerReached - aTriggerReached
-        : valueB - valueA
+      return aTier !== bTier ? bTier - aTier : valueB - valueA
     })
     .slice(0, 4)
   return topSynergies
+}
+
+function saveFile(data: IGameRecord) {
+  // NOTE: positionning is not saved in game record
+  const board: IDetailledPokemon[] = data.pokemons.map((p, i) => {
+    const { emotion, shiny } = getPokemonCustomFromAvatar(p.avatar)
+    return {
+      name: p.name,
+      x: i % BOARD_WIDTH,
+      y: 3 - Math.floor(i / BOARD_WIDTH),
+      items: p.items,
+      emotion,
+      shiny
+    }
+  })
+
+  // save board to local JSON file
+  const blob = new Blob([JSON.stringify(board)], { type: "application/json" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = "board.json"
+  a.click()
+  URL.revokeObjectURL(url)
 }

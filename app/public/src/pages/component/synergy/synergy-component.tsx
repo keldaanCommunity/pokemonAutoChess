@@ -1,29 +1,28 @@
-import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
-import { Tooltip } from "react-tooltip"
-import { SynergyTriggers } from "../../../../../config"
+import { SynergyTiersThresholds } from "../../../../../config"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
 import SynergyIcon from "../icons/synergy-icon"
-import SynergyDetailComponent from "./synergy-detail-component"
 
 export default function SynergyComponent(props: {
   type: Synergy
   value: number
   index: number
-  tooltipPortal: boolean
+  onMouseEnter: () => void
+  onMouseLeave: () => void
 }) {
   const { t } = useTranslation()
-  const levelReached = SynergyTriggers[props.type]
-    .filter((n) => n <= props.value)
-    .at(-1)
+  const thresholdReached =
+    SynergyTiersThresholds[props.type].filter((n) => n <= props.value).at(-1) ??
+    0
+  const isActive = thresholdReached > 0
 
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const highlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
-    if (!spectatedPlayer?.board) return
+    if (!spectatedPlayer?.board?.forEach) return
     spectatedPlayer.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
@@ -37,6 +36,7 @@ export default function SynergyComponent(props: {
   const removeHighlightSynergy = (type: Synergy) => {
     const scene = getGameScene()
     if (!scene) return
+    if (!spectatedPlayer?.board?.forEach) return
     spectatedPlayer?.board.forEach((p) => {
       if (p.types.has(type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
@@ -47,18 +47,6 @@ export default function SynergyComponent(props: {
     })
   }
 
-  const tooltip = (
-    <Tooltip
-      id={"detail-" + props.type}
-      className="custom-theme-tooltip"
-      place="right-start"
-      delayShow={100}
-      delayHide={0}
-    >
-      <SynergyDetailComponent type={props.type} value={props.value} />
-    </Tooltip>
-  )
-
   return (
     <div
       style={{
@@ -66,31 +54,25 @@ export default function SynergyComponent(props: {
         gridTemplateColumns: "40px 2ch 1fr",
         alignItems: "center",
         justifyContent: "space-around",
-        backgroundColor:
-          props.value >= SynergyTriggers[props.type][0]
-            ? "var(--color-bg-secondary)"
-            : "rgba(84, 89, 107,0)",
+        backgroundColor: isActive
+          ? "var(--color-bg-secondary)"
+          : "rgba(84, 89, 107,0)",
         margin: "4px",
         borderRadius: "12px",
         padding: "2px 0",
-        border:
-          props.value >= SynergyTriggers[props.type][0]
-            ? "var(--border-thin)"
-            : "none",
+        border: isActive ? "var(--border-thin)" : "none",
         cursor: "var(--cursor-hover)"
       }}
-      data-tooltip-id={"detail-" + props.type}
+      data-tooltip-id="detail-synergy"
       onMouseEnter={() => {
         highlightSynergy(props.type)
+        props.onMouseEnter()
       }}
       onMouseLeave={() => {
         removeHighlightSynergy(props.type)
+        props.onMouseLeave()
       }}
     >
-      {props.tooltipPortal
-        ? ReactDOM.createPortal(tooltip, document.body)
-        : tooltip}
-
       <SynergyIcon type={props.type} />
       <span
         style={{
@@ -98,7 +80,7 @@ export default function SynergyComponent(props: {
           textShadow: "2px 2px 2px #000000c0",
           textAlign: "center",
           marginRight: "4px",
-          color: levelReached ? "#ffffff" : "#b8b8b8"
+          color: thresholdReached > 0 ? "#ffffff" : "#b8b8b8"
         }}
       >
         {props.value}
@@ -116,13 +98,13 @@ export default function SynergyComponent(props: {
             justifyContent: "space-evenly"
           }}
         >
-          {SynergyTriggers[props.type].map((t) => {
+          {SynergyTiersThresholds[props.type].map((t) => {
             return (
               <span
                 key={t}
                 style={{
                   color:
-                    levelReached === t
+                    thresholdReached === t
                       ? "var(--color-fg-gold)"
                       : props.value >= t
                         ? "var(--color-fg-primary)"

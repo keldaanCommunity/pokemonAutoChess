@@ -34,6 +34,7 @@ import type { Item } from "./enum/Item"
 import type { Passive } from "./enum/Passive"
 import type { Pkm } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
+import type { TradeStatus } from "./enum/TradeStatus"
 import type { Weather } from "./enum/Weather"
 import type { GameStats } from "./interfaces/GameStats"
 
@@ -63,6 +64,7 @@ export enum Transfer {
   DRAG_DROP_ITEM = "DRAG_DROP_ITEM",
   SWITCH_BENCH_AND_BOARD = "SWITCH_BENCH_AND_BOARD",
   SELL_POKEMON = "SELL_POKEMON",
+  USE_ITEM = "USE_ITEM",
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   NEW_MESSAGE = "NEW_MESSAGE",
   CHANGE_NAME = "CHANGE_NAME",
@@ -89,6 +91,7 @@ export enum Transfer {
   DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
+  DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
   SEARCH_BY_ID = "SEARCH_BY_ID",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
@@ -125,6 +128,7 @@ export enum Transfer {
   SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
+  SELECT_PAL = "SELECT_PAL",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   PRELOAD_MAPS = "PRELOAD_MAPS",
@@ -134,7 +138,11 @@ export enum Transfer {
   RECONNECT_PROMPT = "RECONNECT_PROMPT",
   OVERWRITE_BOARD = "OVERWRITE_BOARD",
   NOTIFICATIONS = "NOTIFICATIONS",
-  NOTIFICATION_SEEN = "NOTIFICATION_SEEN"
+  NOTIFICATION_SEEN = "NOTIFICATION_SEEN",
+  DEV = "DEV",
+  CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
+  SELECT_PARTNER = "SELECT_PARTNER",
+  TRADE_ACCEPT = "TRADE_ACCEPT"
 }
 
 export enum ReadWriteMode {
@@ -255,6 +263,9 @@ export interface IPlayer {
   shopFreeRolls: number
   streak: number
   interest: number
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
+  tradeStatus: TradeStatus
   opponentId: string
   opponentName: string
   opponentAvatar: string
@@ -732,7 +743,9 @@ export enum Title {
   POSTMAN = "POSTMAN",
   SURVEY_CORPS = "SURVEY_CORPS",
   GUILDMASTER = "GUILDMASTER",
-  LEGIONNAIRE = "LEGIONNAIRE"
+  LEGIONNAIRE = "LEGIONNAIRE",
+  FIVE_STARS = "FIVE_STARS",
+  PAL = "PAL"
 }
 
 export interface IBoardEvent {

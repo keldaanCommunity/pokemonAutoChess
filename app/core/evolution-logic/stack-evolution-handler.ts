@@ -3,15 +3,15 @@ import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Item } from "../../types/enum/Item"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class StackEvolutionHandler extends EvolutionHandler<[number]> {
-  canEvolve(pokemon: Pokemon, player: Player, stacks: number): boolean {
+export class StackEvolutionHandler extends EvolutionHandler {
+  canEvolve(pokemon: Pokemon, player: Player): boolean {
     if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
-    return stacks >= pokemon.stacksRequired
+    return pokemon.stacks >= pokemon.stacksRequired
   }
 
-  evolve(pokemon: Pokemon, player: Player, stacks: number): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, stacks)
+  evolve(pokemon: Pokemon, player: Player): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

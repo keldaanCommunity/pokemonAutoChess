@@ -164,7 +164,8 @@
 
 .tier-list-pokemon-icon,
 .tier-list-item-icon,
-.tier-list-synergy-icon {
+.tier-list-synergy-icon,
+.tier-list-symbol-icon {
   width: 48px;
   height: 48px;
   object-fit: contain;
