@@ -3,7 +3,7 @@ import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
-import { Title, Transfer } from "../../types"
+import { Title, TMPerAbility, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -538,6 +538,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
+          if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
+            // give back the previous TM
+            player.items.push(TMPerAbility.get(pokemon.tm)!)
+          }
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
