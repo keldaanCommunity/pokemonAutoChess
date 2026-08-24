@@ -221,6 +221,22 @@ export default function GameOptionsModal(props: {
               }
               label={t("options.colorblind_mode")}
             />
+            <label style={{ width: "100%", padding: "0 0.5em" }}>
+              {t("options.fps_limit")}: {preferences.fpsLimit}
+              <input
+                type="range"
+                min="1"
+                max="144"
+                value={preferences.fpsLimit}
+                onInput={(e) =>
+                  setPreferences({
+                    fpsLimit: Number.parseFloat(
+                      (e.target as HTMLInputElement).value
+                    )
+                  })
+                }
+              ></input>
+            </label>
           </fieldset>
 
           {props.page === "main_lobby" && (
