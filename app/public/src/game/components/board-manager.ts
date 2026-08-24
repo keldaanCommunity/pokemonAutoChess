@@ -11,6 +11,7 @@ import {
   Troopers
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
+import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons
@@ -856,8 +857,11 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (this.state.townEncounter === TownEncounters.LUDICOLO) {
-      playMusic(this.scene, DungeonMusic.CARNIVAL_LUDICOLO)
+    if (
+      this.state.townEncounter &&
+      this.state.townEncounter in MusicByTownEncounter
+    ) {
+      playMusic(this.scene, MusicByTownEncounter[this.state.townEncounter]!)
       this.scene.music?.once("looped", () => {
         playMusic(
           this.scene,

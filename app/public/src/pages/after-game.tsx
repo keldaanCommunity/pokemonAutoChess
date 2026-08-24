@@ -5,6 +5,7 @@ import { Navigate } from "react-router"
 import { GADGETS } from "../../../config/game/gadgets"
 import type AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
+import { DungeonMusic } from "../../../types/enum/Dungeon"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { authenticateUser, client, joinAfter, rooms } from "../network"
 import { preference } from "../preferences"
@@ -29,6 +30,9 @@ export default function AfterGame() {
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
+  const endMusic = useRef<HTMLAudioElement>(
+    new Audio(`assets/musics/ogg/${DungeonMusic.AT_THE_END_OF_THE_DAY}.ogg`)
+  )
 
   useEffect(() => {
     const reconnect = async () => {
@@ -84,9 +88,13 @@ export default function AfterGame() {
       $state.players.onAdd((player) => {
         dispatch(addPlayer(player))
         if (player.id === currentPlayerId) {
-          playSound(
+          const jingle = playSound(
             SOUNDS[("FINISH" + player.rank) as keyof typeof SOUNDS],
             preference("musicVolume") / 100
+          )
+          endMusic.current.volume = preference("musicVolume") / 300
+          jingle?.addEventListener("ended", () =>
+            setTimeout(() => endMusic.current.play(), 1000)
           )
         }
       })
@@ -103,6 +111,10 @@ export default function AfterGame() {
 
     if (!initialized.current) {
       reconnect()
+    }
+
+    return () => {
+      endMusic.current?.pause()
     }
   })
 

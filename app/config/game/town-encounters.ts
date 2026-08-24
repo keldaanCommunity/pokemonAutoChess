@@ -1,5 +1,9 @@
+import { DungeonMusic } from "../../types/enum/Dungeon"
 import { Pkm } from "../../types/enum/Pokemon"
-import type { TownEncounter } from "../../types/enum/TownEncounter"
+import {
+  type TownEncounter,
+  TownEncounters
+} from "../../types/enum/TownEncounter"
 import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
@@ -100,4 +104,15 @@ export function getTreasureBoxReward(): TreasureBoxReward {
       goldBow: 0.05
     }) ?? "itemComponents"
   )
+}
+
+export const MusicByTownEncounter: {
+  [encounter in TownEncounter]?: DungeonMusic
+} = {
+  [TownEncounters.LUDICOLO]: DungeonMusic.CARNIVAL_LUDICOLO,
+  [TownEncounters.MAGNEZONE]: DungeonMusic.TROUBLE_IN_TOWN,
+  [TownEncounters.MAROWAK]: DungeonMusic.THE_TERRABLE_JUNGLE,
+  [TownEncounters.WIGGLYTUFF]: DungeonMusic.SKY_PEAK_CAVE,
+  [TownEncounters.SPINDA]: DungeonMusic.SPINDA_CAFE,
+  [TownEncounters.WOBBUFFET]: DungeonMusic.SPINDA_CAFE
 }
