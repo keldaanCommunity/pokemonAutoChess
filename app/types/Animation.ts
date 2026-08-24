@@ -255,6 +255,7 @@ export type PokemonAnimationConfig = {
 }
 
 export enum AttackSprite {
+  BALL_RANGE = "BALL/range",
   BUG_MELEE = "BUG/melee",
   BUG_RANGE = "BUG/range",
   DARK_MELEE = "DARK/melee",
@@ -323,6 +324,7 @@ export enum HitSprite {
 export const AttackSpriteScale: {
   [sprite in AttackSprite | HitSprite]: [number, number]
 } = {
+  "BALL/range": [0.5, 0.5],
   "BUG/melee": [1.5, 1.5],
   "BUG/range": [2, 2],
   "BUG/hit": [2, 2],
@@ -398,7 +400,7 @@ export interface AbilityAnimationOptions {
   origin?: [number, number]
   depth?: number
   tint?: number
-  tintFill?: number
+  tintMode?: Phaser.TintModes
   alpha?: number
   destroyOnComplete?: boolean
   animOptions?: Omit<Phaser.Types.Animations.PlayAnimationConfig, "key">

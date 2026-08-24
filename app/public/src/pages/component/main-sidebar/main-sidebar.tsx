@@ -6,15 +6,18 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { Role } from "../../../../../types"
+import { isReplayRoom } from "../../../game/replay-room-id"
 import {
   selectConnectedPlayer,
   useAppDispatch,
   useAppSelector
 } from "../../../hooks"
+import { rooms } from "../../../network"
 import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
 import { cc } from "../../utils/jsx"
+import AdminPanel from "../admin/admin-panel"
 import Booster from "../booster/booster"
 import TeamBuilderModal from "../bot-builder/team-builder-modal"
 import PokemonCollection from "../collection/pokemon-collection"
@@ -31,10 +34,10 @@ import ServersList from "../servers/servers-list"
 import SpriteTrackerModal from "../sprite-tracker/sprite-tracker-modal"
 import SynergyWheelModal from "../synergy-wheel/synergy-wheel"
 import TierListMakerModal from "../tier-list/tier-list-maker-modal"
-import { TournamentsAdmin } from "../tournaments-admin/tournaments-admin"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
+import { getGameScene } from "../../game"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -138,6 +141,15 @@ export function MainSidebar(props: MainSidebarProps) {
     }
   }
 
+  function onClickLeaveReplay() {
+    // a replay exits straight to the lobby (the live leave() would hit the /after flow)
+    if (isReplayRoom(rooms.game)) {
+      rooms.game.pause()
+    }
+    getGameScene()?.music?.destroy()
+    navigate("/lobby")
+  }
+
   return (
     <Sidebar
       collapsed={collapsed}
@@ -238,6 +250,15 @@ export function MainSidebar(props: MainSidebarProps) {
         )}
 
         {page !== "game" &&
+          ((!GADGETS.recorder.disabled &&
+            profileLevel >= GADGETS.recorder.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="recorder" onClick={() => navigate("/replay")}>
+              {t("replay.nav")}
+            </NavLink>
+          )}
+
+        {page !== "game" &&
           ((!GADGETS.pokeguesser.disabled &&
             profileLevel >= GADGETS.pokeguesser.levelRequired) ||
             profile?.role === Role.ADMIN) && (
@@ -318,6 +339,9 @@ export function MainSidebar(props: MainSidebarProps) {
 
         {page !== "game" && profile?.role === Role.ADMIN && (
           <>
+            <NavLink svg="admin" location="admin" handleClick={changeModal}>
+              {t("admin_panel.title")}
+            </NavLink>
             <NavLink
               svg="pokemon-sprite"
               onClick={() => navigate("/sprite-viewer")}
@@ -326,13 +350,6 @@ export function MainSidebar(props: MainSidebarProps) {
             </NavLink>
             <NavLink svg="map" onClick={() => navigate("/map-viewer")}>
               Map Viewer
-            </NavLink>
-            <NavLink
-              svg="tournament"
-              location="tournaments"
-              handleClick={changeModal}
-            >
-              Tournaments
             </NavLink>
           </>
         )}
@@ -343,7 +360,7 @@ export function MainSidebar(props: MainSidebarProps) {
             location="jukebox"
             handleClick={changeModal}
           >
-            Jukebox
+            {t("gadget.jukebox")}
           </NavLink>
         )}
 
@@ -380,9 +397,23 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        <NavLink svg="exit-door" className="red logout" onClick={onClickLeave}>
-          {leaveLabel}
-        </NavLink>
+        {isReplayRoom(rooms.game) ? (
+          <NavLink
+            svg="exit-door"
+            className="red logout"
+            onClick={onClickLeaveReplay}
+          >
+            {t("replay.leave_replay")}
+          </NavLink>
+        ) : (
+          <NavLink
+            svg="exit-door"
+            className="red logout"
+            onClick={onClickLeave}
+          >
+            {leaveLabel}
+          </NavLink>
+        )}
       </Menu>
 
       <Modals modal={modal} setModal={setModal} page={page} />
@@ -472,6 +503,7 @@ export type Modals =
   | "announcement"
   | "booster"
   | "moderation"
+  | "admin"
   | "collection"
   | "jukebox"
   | "keybinds"
@@ -485,7 +517,6 @@ export type Modals =
   | "synergy-wheel"
   | "team-builder"
   | "tier-list"
-  | "tournaments"
   | "wiki"
 
 function Modals({
@@ -523,7 +554,6 @@ function Modals({
       <Modal
         onClose={() => {
           closeModal()
-          console.log("Resetting searched user on close modal profile")
           dispatch(setSearchedUser(undefined))
         }}
         show={modal === "profile"}
@@ -542,7 +572,7 @@ function Modals({
       <Modal
         onClose={closeModal}
         show={modal === "booster"}
-        className="custom-bg"
+        className="custom-bg boosters-modal"
       >
         <Booster />
       </Modal>
@@ -584,17 +614,13 @@ function Modals({
       />
       <Modal
         onClose={closeModal}
-        show={modal === "tournaments"}
-        header="Tournaments"
-      >
-        <TournamentsAdmin />
-      </Modal>
-      <Modal
-        onClose={closeModal}
         show={modal === "moderation"}
         header="Moderation"
       >
         <ModerationPanel />
+      </Modal>
+      <Modal onClose={closeModal} show={modal === "admin"} header="Admin">
+        <AdminPanel />
       </Modal>
       <Jukebox show={modal === "jukebox"} handleClose={closeModal} />
       <PokeGuesser show={modal === "pokeguesser"} handleClose={closeModal} />
