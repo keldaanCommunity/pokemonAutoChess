@@ -972,7 +972,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
-export const TMPerAbility = reverseMap(
+export const TMPerAbility: Map<Ability, Item> = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
 
