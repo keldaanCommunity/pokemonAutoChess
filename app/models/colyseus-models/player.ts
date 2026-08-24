@@ -497,12 +497,12 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getScarvesItemsWithNbScarves(n: number): Item[] {
+    n=n+this.extraScarves
     let i = 0
     const scarves: Item[] = []
     while (n > 0) {
       const scarf = this.scarvesItems[i] ?? Item.SILK_SCARF
-      const nbOfNullifyBandannas = scarves.filter(item => item === Item.NULLIFY_BANDANNA).length;
-      n -= ((scarf === Item.NULLIFY_BANDANNA) && ( (this.extraScarves % 2 === 0) || (nbOfNullifyBandannas > 0) )) ? 2 : 1
+      n -= scarf === Item.NULLIFY_BANDANNA ? 2 : 1
       if (n >= 0) {
         scarves.push(scarf)
         i++
@@ -525,7 +525,7 @@ export default class Player extends Schema implements IPlayer {
     )
     const newNbNormalScarves = getSynergyTier(updatedSynergies, Synergy.NORMAL)
     const newScarves = this.getScarvesItemsWithNbScarves(newNbNormalScarves)
-
+      
     if (newScarves.length > previousScarves.length) {
       // some scarves are gained
       const gainedScarves = newScarves.slice(
