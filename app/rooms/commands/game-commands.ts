@@ -669,13 +669,7 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
-          player.synergies,
-          Synergy.NORMAL
-        )
-        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
-          player.scarvesItems.push(result)
-        }
+        player.scarvesItems.push(result)
       }
 
       player.items.push(result)

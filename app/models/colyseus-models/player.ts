@@ -198,6 +198,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  extraScarves: number = 0
   unownReminiscences: number = 0
   doubleUpEliminationRound: number = 999
 
@@ -496,6 +497,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getScarvesItemsWithNbScarves(n: number): Item[] {
+    n=n+this.extraScarves
     let i = 0
     const scarves: Item[] = []
     while (n > 0) {
@@ -523,7 +525,7 @@ export default class Player extends Schema implements IPlayer {
     )
     const newNbNormalScarves = getSynergyTier(updatedSynergies, Synergy.NORMAL)
     const newScarves = this.getScarvesItemsWithNbScarves(newNbNormalScarves)
-
+      
     if (newScarves.length > previousScarves.length) {
       // some scarves are gained
       const gainedScarves = newScarves.slice(
