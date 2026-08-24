@@ -2469,7 +2469,19 @@
 		"ETHEREAL": "Ethéré",
 		"APPETIZER": "Apéritif",
 		"LUNCH_BREAK": "Pause déjeuner",
-		"BANQUET": "Festin"
+		"BANQUET": "Festin",
+		"EMBER": "Flammes",
+		"HAIL": "Givre",
+		"SPIKES": "Picots",
+		"STEALTH_ROCKS": "Piège de Roc",
+		"TOXIC_SPIKES": "Pics Toxik",
+		"LIGHTNING_STRIKE": "Foudre",
+		"STICKY_WEB": "Toile Gluante",
+		"TIDAL_WAVE": "Raz-de-marée",
+		"SANDSTORM": "Tempête de Sable",
+		"CURSE": "Malédiction",
+		"COTTON_BALL": "Boule de coton ",
+		"STRANGE_STEAM": "Vapeur Féerique"
 	},
 	"effect_description": {
 		"STAMINA": "Gagne 15 SHIELD. Obtenez un SILK_SCARF.",
@@ -2585,7 +2597,20 @@
 		"ETHEREAL": "L'équipe gagne 5 SPEED et 10 HP par synergie unique active",
 		"APPETIZER": "Obtenez une CHEF_HAT. Cuisinez un Plat Signature après chaque manche et nourrissez l'allié ADJACENT le STRONGEST",
 		"LUNCH_BREAK": "Le Chef cuisine deux plats et nourrit les deux alliés ADJACENT les STRONGEST après chaque tour",
-		"BANQUET": "Gagnez une deuxième CHEF_HAT."
+		"BANQUET": "Gagnez une deuxième CHEF_HAT.",
+		"EMBER": "Inflige 10 SPECIAL par seconde et inflige BURN à tout Pokémon pris dedans. (Les Pokémons partageant la synergie FIRE ou FLYING en sont immunisés)",
+		"HAIL": "Inflige 10 SPECIAL et FREEZE pendant 1 seconde à tout Pokémon se tenant dessus. (Les Pokémons partageant la synergie ICE en sont immunisés)",
+		"SPIKES": "Inflige 10 TRUE par seconde et inflige ARMOR_BREAK pendant 1 seconde à tout Pokémon se tenant dessus. (Les Pokémons partageant la synergie STEEL ou FLYING en sont immunisés)",
+		"STEALTH_ROCKS": "Inflige 10 PHYSICAL par seconde et inflige WOUND pendant 1 seconde à tout Pokémon se tenant dedans. (Les Pokémons partageant la synergie ROCK en sont immunisés)",
+		"TOXIC_SPIKES": "Inflige POISONNED à tout Pokémon se tenant dessus. (Les Pokémons partageant la synergie POISON en sont immunisés)",
+		"LIGHTNING_STRIKE": "Pendant la STORM, la foudre peut frapper n'importe quelle case sur le plateau, infligeant 100 SPECIAL à tout Pokémon se tenant sur la dite case. (Les Pokémons partageant la synergie ELECTRIC en sont immunisés)",
+		"TIDAL_WAVE": "Les vagues nettoyant les statuts négatifs et tout BOARD_EFFECT soignent aussi les Pokémons de synergie AQUATIC alliés, tout en repoussant et blessant les Pokémons ennemis.",
+		"SANDSTORM": "Pendant la SANDSTORM, inflige 5 SPECIAL par seconde à tous Pokémons. (Les Pokémons partageant la synergie GROUND en sont immunisés)",
+		"STICKY_WEB": "Inflige paralysie pendant 2 secondes à tout Pokémon pris dans la toile gluante.",
+		"CURSE": "La CURSE élimine tout Pokémon quand son compte à rebours arrive à échéance.",
+		"COTTON_BALL": "Les boules de coton infligent SLEEP pendant 1 seconde à tout Pokémon marchant dessus. Un simple contact les fait disparaître.",
+		"STRANGE_STEAM": "Tout Pokémon pris dans la vapeur féérique inflige et reçoit 20% de SPECIAL en plus.",
+		"SMOKE": "Tout Pokémon pris dans la fumée devient BLINDED."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossile Dome",
@@ -4855,6 +4880,10 @@
 			"unholdable_item": "Objet ne pouvant pas être porté par un Pokémon. Les effets de tels objets s'appliquent par défaut à l'intégralité de votre équipe.",
 			"removable_item": "Les Objets retirables sont des objets qui peuvent être retirés d'un Pokémon par le simple fait de le poser sur le banc.",
 			"gift": "Les cadeaux sont des objets qui sont donnés à votre partenaire une fois sélectionnés."
+		},
+		"status": {
+			"statuses": "Statuts",
+			"board_effects": "Effets de terrain"
 		}
 	},
 	"errors": {
