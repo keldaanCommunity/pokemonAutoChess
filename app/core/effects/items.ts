@@ -538,9 +538,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
-          if(pokemon.tm !== Ability.DEFAULT && pokemon.tm in TMPerAbility){
+          if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
             // give back the previous TM
-            player.items.push(TMPerAbility[pokemon.tm])
+            player.items.push(TMPerAbility.get(pokemon.tm)!)
           }
           pokemon.tm = ability
           pokemon.skill = ability
