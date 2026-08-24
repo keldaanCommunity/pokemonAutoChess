@@ -57,7 +57,7 @@ export enum DungeonMusic {
   ICICLE_FOREST = "Icicle Forest",
   ILLUSION_STONE_CHAMBER = "Illusion Stone Chamber",
   IN_THE_FUTURE = "In the Future",
-  IN_THE_HANDS_OF_FATE = "In the Hands of Fate", // UNUSED
+  IN_THE_HANDS_OF_FATE = "In the Hands of Fate",
   IN_THE_NIGHTMARE = "In the Nightmare",
   JOB_CLEAR = "Job Clear!",
   KECLEONS_SHOP = "Kecleon's Shop",

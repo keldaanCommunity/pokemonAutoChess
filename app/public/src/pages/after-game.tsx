@@ -30,9 +30,7 @@ export default function AfterGame() {
   const initialized = useRef<boolean>(false)
   const [toLobby, setToLobby] = useState<boolean>(false)
   const [toAuth, setToAuth] = useState<boolean>(false)
-  const endMusic = useRef<HTMLAudioElement>(
-    new Audio(`assets/musics/ogg/${DungeonMusic.AT_THE_END_OF_THE_DAY}.ogg`)
-  )
+  const endMusic = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     const reconnect = async () => {
@@ -92,9 +90,15 @@ export default function AfterGame() {
             SOUNDS[("FINISH" + player.rank) as keyof typeof SOUNDS],
             preference("musicVolume") / 100
           )
+
+          const music =
+            player.rank <= 4
+              ? DungeonMusic.AT_THE_END_OF_THE_DAY
+              : DungeonMusic.IN_THE_HANDS_OF_FATE
+          endMusic.current = new Audio(`assets/musics/ogg/${music}.ogg`)
           endMusic.current.volume = preference("musicVolume") / 300
           jingle?.addEventListener("ended", () =>
-            setTimeout(() => endMusic.current.play(), 1000)
+            setTimeout(() => endMusic.current?.play(), 1000)
           )
         }
       })
