@@ -25,6 +25,7 @@ import {
   SynergyGivenByGem,
   Tools
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
 import type { Gift } from "../types/enum/GiftShop"
 import { Pkm } from "../types/enum/Pokemon"
@@ -187,7 +188,8 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   const otherPokemon: Pokemon[] = []
   toPlayer.board.forEach((pkm: Pokemon) => {
     if (
-      EvolutionManager.getHandler(pkm.evolutionRule).canEvolve(pkm, toPlayer)
+      pkm.evolutionRule.type === EvolutionRuleType.COUNT &&
+      EvolutionManager.canEvolve(pkm, toPlayer)
     ) {
       pokemonThatCanEvolve.push(pkm)
     } else otherPokemon.push(pkm)
