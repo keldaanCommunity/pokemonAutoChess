@@ -2599,7 +2599,6 @@
 		"SPIKES": "Causa 10 de TRUE por segundo e infringe ARMOR_BREAK por 1 segundo ao Pokémon sobre ele. (Pokémon do tipo STEEL e FLYING são imune)",
 		"HAIL": "Causa 10 de SPECIAL e infringe FREEZE por 1 segundo ao Pokémon sobre aquele espaço. (Pokémon do tipo ICE são imune)",
 		"EMBER": "causa 10 de SPECIAL e infringe BURN ao Pokémon sobre aquele espaço. (Pokémon do tipo FIRE e FLYING são imunes)"
-		"MOON_FORCE": "Escolha uma entre três varinhas dentre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Pokémon FAIRY ganham 5 LUCK."
 	},
 	"item": {
 		"FOSSIL_STONE": "Pedra Fóssil",
@@ -4117,7 +4116,6 @@
 		"record_replays": "Gravar replays das partidas automaticamente em segundo plano",
 		"theme": "Tema",
 		"theme_info": "Alguns temas podem ser obtidos ao desbloquear títulos específicos."
-		"theme": "Tema"
 	},
 	"jukebox": {
 		"music_volume": "Volume da Música",
