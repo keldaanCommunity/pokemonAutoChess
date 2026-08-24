@@ -396,7 +396,10 @@ export function GamePokemonDetail(props: {
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
                 stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki" || ctrlKeyPressed
+                showAbilityTiers:
+                  props.origin === "wiki" ||
+                  props.origin === "planner" ||
+                  ctrlKeyPressed
               }}
               key={pokemon.id}
             />
