@@ -428,7 +428,7 @@ export function addAbilitySprite(
     scale,
     depth,
     tint,
-    tintFill,
+    tintMode,
     rotation,
     angle,
     alpha,
@@ -452,10 +452,8 @@ export function addAbilitySprite(
   )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
+  if (tintMode) sprite.setTintMode(tintMode)
   if (tint) sprite.setTint(tint)
-  if (tintFill) {
-    sprite.setTint(tintFill).setTintMode(Phaser.TintModes.FILL)
-  }
   if (rotation !== undefined) sprite.setRotation(rotation)
   if (angle !== undefined) sprite.setAngle(angle)
   if (alpha !== undefined) sprite.setAlpha(alpha)
@@ -1459,6 +1457,10 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.THUNDERCLAP_PRESS]: onTarget({
+    ability: Ability.WONDER_GUARD,
+    scale: 2
+  }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: onTargetScale2,
   [Ability.GEOMANCY]: onCaster({
@@ -1780,6 +1782,11 @@ export const AbilitiesAnimations: {
     duration: 750,
     scale: 2,
     ability: Ability.DARK_HARVEST
+  }),
+  [Ability.DRAGON_RAGE]: projectile({
+    duration: 300,
+    scale: 2,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
   [Ability.SOLAR_BEAM]: projectile({
@@ -2903,7 +2910,8 @@ export const AbilitiesAnimations: {
     onTarget({
       ability: Ability.MAGIC_POWDER,
       scale: 3,
-      tintFill: [0xd369c3, 0x41acf0, 0xe9ef4d, 0xfefff9][args.delay ?? 0],
+      tint: [0xd369c3, 0x41acf0, 0xe9ef4d, 0xfefff9][args.delay ?? 0],
+      tintMode: Phaser.TintModes.FILL,
       positionOffset: [randomBetween(-50, 50), randomBetween(-50, 50)],
       delay: randomBetween(0, 200)
     })(args),
@@ -3052,6 +3060,27 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DARK_VOID,
     scale: 2
+  }),
+  [Ability.REVELATION_DANCE]: onSprite(({ casterSprite, ...args }) => {
+    let color = 0xffffff
+    switch (casterSprite?.pokemon?.name) {
+      case Pkm.ORICORIO_BAILE:
+        color = 0xe8535e
+        break
+      case Pkm.ORICORIO_POMPOM:
+        color = 0xebe13f
+        break
+      case Pkm.ORICORIO_PA_U:
+        color = 0xec8099
+        break
+      case Pkm.ORICORIO_SENSU:
+        color = 0x9898cb
+        break
+    }
+    return onCaster({
+      scale: 2,
+      tint: color
+    })(args)
   }),
   ["WISP"]: projectile({
     duration: 1000,

@@ -47,7 +47,7 @@ export default function GameSpectatePlayerInfo() {
             <span>
               <Money value={spectatedPlayer.money} />
             </span>
-            <GameStreakInfo />
+            <GameStreakInfo variant="inline" />
           </div>
           <div
             style={{

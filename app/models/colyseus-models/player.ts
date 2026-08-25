@@ -26,6 +26,7 @@ import {
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../types/enum/Effect"
 import {
   BattleResult,
   PokemonActionState,
@@ -124,7 +125,7 @@ export default class Player extends Schema implements IPlayer {
   @type("uint8") tradeStatus: TradeStatus = TradeStatus.PENDING
   @type("string") spectatedPlayerId: string
   @type("uint8") boardSize: number = 0
-  @type(["string"]) items = new ArraySchema<Item>(Item.RECYCLE_TICKET)
+  @type(["string"]) items = new ArraySchema<Item>()
   @type(["string"]) scarvesItems = new ArraySchema<Item>()
   @type(["string"]) fairyWands = new ArraySchema<Item>()
   @type("uint8") rank: number
@@ -197,6 +198,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  extraScarves: number = 0 // scarves obtained though other ways than normal synergy
   unownReminiscences: number = 0
   doubleUpEliminationRound: number = 999
 
@@ -495,6 +497,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getScarvesItemsWithNbScarves(n: number): Item[] {
+    n = n + this.extraScarves
     let i = 0
     const scarves: Item[] = []
     while (n > 0) {
@@ -1015,7 +1018,10 @@ export default class Player extends Schema implements IPlayer {
 
     const dps = simulation.getDpsMeter(this.id)
     if (dps) {
-      const dpsList = schemaValues(dps)
+      // these are per-Pokémon records, and board effect rows are team-wide totals
+      const dpsList = schemaValues(dps).filter(
+        (d) => !isIn(EnvironmentalEffects, d.id)
+      )
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,
         ...dpsList.map((d) => d.heal)

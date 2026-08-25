@@ -194,7 +194,8 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
-      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
+      pokemon.types.has(Synergy.POISON) === false
     ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
@@ -411,9 +412,7 @@ export default class Status extends Schema implements IStatus {
 
       if (duration > this.burnCooldown) {
         this.burnCooldown = duration
-        if (origin) {
-          this.burnOrigin = origin
-        }
+        this.burnOrigin = origin
       }
 
       if (
@@ -485,6 +484,10 @@ export default class Status extends Schema implements IStatus {
           board,
           attackType: AttackType.TRUE,
           attacker: this.burnOrigin,
+          effect:
+            this.burnOrigin === null && pkm.effects.has(EffectEnum.EMBER)
+              ? EffectEnum.EMBER
+              : undefined,
           shouldTargetGainMana: true
         })
       }
@@ -576,8 +579,8 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
+      this.poisonOrigin = origin ?? null
       if (origin) {
-        this.poisonOrigin = origin
         if (origin.effects.has(EffectEnum.VENOMOUS)) {
           maxStacks = 4
         }
@@ -653,11 +656,22 @@ export default class Status extends Schema implements IStatus {
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
+          effect:
+            this.poisonOrigin === null
+              ? pkm.effects.has(EffectEnum.POISON_GAS)
+                ? EffectEnum.POISON_GAS
+                : pkm.effects.has(EffectEnum.TOXIC_SPIKES)
+                  ? EffectEnum.TOXIC_SPIKES
+                  : undefined
+              : undefined,
           shouldTargetGainMana: false
         })
       }
 
-      if (pkm.effects.has(EffectEnum.POISON_GAS)) {
+      if (
+        pkm.effects.has(EffectEnum.POISON_GAS) &&
+        pkm.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      ) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
       }
@@ -1090,8 +1104,10 @@ export default class Status extends Schema implements IStatus {
         board,
         attacker: null,
         attackType: AttackType.TRUE,
+        effect: EffectEnum.CURSE,
         shouldTargetGainMana: false
       })
+      // 9999 is overkill damage; takenDamage is the HP actually removed
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: "CURSE_EFFECT",
@@ -1169,7 +1185,8 @@ export default class Status extends Schema implements IStatus {
       if (
         pokemon.player &&
         pokemon.player.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY)
+        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.baseRange > 1
       ) {
         range += 1
       }

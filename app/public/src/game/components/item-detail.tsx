@@ -54,7 +54,7 @@ export function ItemDetailTooltipContent({
   }
 
   const itemCategoryLabel = useMemo(() => {
-    if (Gifts.includes(item)) return t("gift")
+    if (isIn(Gifts, item)) return t("gift")
     if (ConsumableItems.includes(item)) return t("consumable_item")
     if (isIn(UnholdableItems, item)) return t("unholdable_item")
     if (isIn(RemovableItems, item)) return t("removable_item")

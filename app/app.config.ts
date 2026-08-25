@@ -76,6 +76,7 @@ import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
 import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
+import type { IUserMetadataLean } from "./types/interfaces/UserMetadata"
 import { logger } from "./utils/logger"
 
 const clientSrc = __dirname.includes("server")
@@ -676,6 +677,17 @@ export const server = defineServer({
         res.status(500).json({ error: "Error fetching players" })
       }
     })
+
+    app.get(
+      "/players/:playerUid",
+      async (req, res): Promise<IUserMetadataLean> => {
+        const { playerUid } = req.params
+        const user = await UserMetadata.findOne({ uid: playerUid })
+        if (user === null) return res.status(404).text("Player not found")
+        const { pokemonCollection, ...userLean } = user.toObject()
+        return res.status(200).json(userLean)
+      }
+    )
 
     app.get("/bots", async (req, res) => {
       const approved =

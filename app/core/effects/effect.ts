@@ -95,7 +95,7 @@ interface OnChangePositionEffectArgs {
   pokemon: Pokemon
   player: Player
   state?: GameState // can be undefined for bots updatePlayerTeam method
-  room?: GameRoom   // can be undefined for bots updatePlayerTeam method
+  room?: GameRoom // can be undefined for bots updatePlayerTeam method
   oldX: number
   oldY: number
   newX: number
@@ -230,10 +230,28 @@ export class OnDeathEffect extends Effect {
   }
 }
 
-export class OnResurrectEffect extends Effect {
+// applied when a pokemon start the resurrecting animation
+
+export class OnResurrectingEffect extends Effect {
   apply(args: OnDeathEffectArgs) {}
   constructor(
     effect?: (args: OnDeathEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export interface OnResurrectionEffectArgs {
+  pokemon: PokemonEntity
+  board: Board
+}
+
+// applied after a pokemon is resurrected
+export class OnResurrectionEffect extends Effect {
+  apply(args: OnResurrectionEffectArgs) {}
+  constructor(
+    effect?: (args: OnResurrectionEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -298,16 +316,6 @@ interface OnAttackEffectArgs {
   crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
-}
-
-export class BeforeAttackEffect extends Effect {
-  override apply(args: OnAttackEffectArgs) {}
-  constructor(
-    effect?: (args: OnAttackEffectArgs) => void,
-    origin?: EffectOrigin
-  ) {
-    super(effect, origin)
-  }
 }
 
 export class OnAttackEffect extends Effect {

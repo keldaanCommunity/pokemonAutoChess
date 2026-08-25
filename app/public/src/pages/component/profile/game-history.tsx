@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import { SynergyTiersThresholds } from "../../../../../config"
+import { BOARD_WIDTH, SynergyTiersThresholds } from "../../../../../config"
 import type {
   IGameRecord,
   IPokemonRecord
@@ -12,6 +12,8 @@ import type {
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import type { Synergy } from "../../../../../types/enum/Synergy"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
+import { getPokemonCustomFromAvatar } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { formatDate } from "../../utils/date"
 import Team from "../after/team"
@@ -175,6 +177,15 @@ function GameHistoryRow({
             />
           ))}
         </div>
+        <div className="actions">
+          <button
+            className="bubbly dark xs"
+            title={t("save")}
+            onClick={() => saveFile(r)}
+          >
+            <img src="assets/ui/save.svg" />
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -208,4 +219,28 @@ function getTopSynergies(
     })
     .slice(0, 4)
   return topSynergies
+}
+
+function saveFile(data: IGameRecord) {
+  // NOTE: positionning is not saved in game record
+  const board: IDetailledPokemon[] = data.pokemons.map((p, i) => {
+    const { emotion, shiny } = getPokemonCustomFromAvatar(p.avatar)
+    return {
+      name: p.name,
+      x: i % BOARD_WIDTH,
+      y: 3 - Math.floor(i / BOARD_WIDTH),
+      items: p.items,
+      emotion,
+      shiny
+    }
+  })
+
+  // save board to local JSON file
+  const blob = new Blob([JSON.stringify(board)], { type: "application/json" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = "board.json"
+  a.click()
+  URL.revokeObjectURL(url)
 }

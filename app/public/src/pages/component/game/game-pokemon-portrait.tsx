@@ -198,6 +198,7 @@ export default function GamePokemonPortrait(props: {
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
+        regional: pokemon.regional,
         planned: props.inPlanner ?? false
       })}
       style={{

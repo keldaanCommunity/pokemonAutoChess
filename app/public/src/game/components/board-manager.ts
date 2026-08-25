@@ -7,7 +7,8 @@ import {
   getRegionTint,
   ItemStats,
   PortalCarouselStages,
-  RegionDetails
+  RegionDetails,
+  Troopers
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import {
@@ -40,11 +41,12 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
+import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
@@ -63,7 +65,7 @@ import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
-import { displayBoost } from "./abilities-animations"
+import { addAbilitySprite, displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
@@ -136,8 +138,8 @@ export default class BoardManager {
     this.flowerPokemonsInPots = []
 
     if (state.phase == GamePhaseState.FIGHT) {
-      this.renderBoard(false)
       this.battleMode(false)
+      this.renderBoard(false)
     } else if (state.phase === GamePhaseState.TOWN) {
       this.minigameMode()
       this.renderBoard(false) // render pokemons on bench when loading during a town phase
@@ -207,7 +209,7 @@ export default class BoardManager {
       pokemon.positionX,
       pokemon.positionY
     )
-    const pokemonUI = new PokemonSprite(
+    const pokemonSprite = new PokemonSprite(
       this.scene,
       coordinates[0],
       coordinates[1],
@@ -217,17 +219,18 @@ export default class BoardManager {
       false
     )
 
-    this.animationManager.animatePokemon(pokemonUI, pokemon.action, false)
-    this.pokemons.get(pokemonUI.id)?.destroy()
-    this.pokemons.set(pokemonUI.id, pokemonUI)
+    this.animationManager.animatePokemon(pokemonSprite, pokemon.action, false)
+    this.pokemons.get(pokemonSprite.id)?.destroy()
+    this.pokemons.set(pokemonSprite.id, pokemonSprite)
+    this.addLavaBenchPokemonAnimation(pokemonSprite)
 
-    return pokemonUI
+    return pokemonSprite
   }
 
   removePokemon(pokemonToRemove: IPokemon) {
-    const pokemonUI = this.pokemons.get(pokemonToRemove.id)
-    if (pokemonUI) {
-      pokemonUI.destroy()
+    const pokemonSprite = this.pokemons.get(pokemonToRemove.id)
+    if (pokemonSprite) {
+      pokemonSprite.destroy()
     }
     this.pokemons.delete(pokemonToRemove.id)
   }
@@ -256,6 +259,13 @@ export default class BoardManager {
       this.mode !== BoardMode.TOWN
     ) {
       this.renderTradingPlatform()
+    }
+
+    if (
+      this.mode === BoardMode.BATTLE &&
+      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
+    ) {
+      this.addLavaBenchAnimation()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -324,8 +334,8 @@ export default class BoardManager {
 
   getNbFlowerPots(): number {
     const floraTier = getSynergyTier(this.player.synergies, Synergy.FLORA)
-    const nbPotsPerTier = [0, 1, 2, 3, 4][floraTier] ?? 0
-    let nbPots = nbPotsPerTier[floraTier]
+    const nbPotsPerTier = [0, 1, 2, 3, 4]
+    let nbPots = nbPotsPerTier[floraTier] ?? 0
     if (
       floraTier >= 4 &&
       this.player.flowerPots.every((p) => p.evolution === Pkm.DEFAULT)
@@ -801,6 +811,13 @@ export default class BoardManager {
         }
       }
     }, 0) // need to wait for next event loop for state to be up to date
+
+    if (
+      phaseJustChanged &&
+      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
+    ) {
+      this.addLavaBenchAnimation()
+    }
   }
 
   removePokemonsOnBoard() {
@@ -973,7 +990,7 @@ export default class BoardManager {
             pokemonSprite.destroy()
             this.pokemons.delete(pokemonSprite.id)
           }
-          store.dispatch(refreshShopUI(0))
+          store.dispatch(refreshShopUI())
           if (!isOnBench(pokemon)) {
             this.showSupportItemsVfx(
               schemaValues(pokemon.items),
@@ -987,6 +1004,7 @@ export default class BoardManager {
         }
 
         case "action":
+          pokemonSprite.action = value as IPokemon["action"]
           this.animationManager.animatePokemon(
             pokemonSprite,
             value as IPokemon["action"],
@@ -1009,8 +1027,12 @@ export default class BoardManager {
           )
           const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
           pokemonSprite.sprite.setScale(scale)
-          if (previousValue != null && value && value > previousValue)
+          if (previousValue != null && value && value > previousValue) {
             pokemonSprite.displayBoost(Stat.HP)
+          }
+          if (pokemonSprite.lifebar) {
+            pokemonSprite.lifebar.setHp(hp)
+          }
           break
         }
 
@@ -1515,8 +1537,8 @@ export default class BoardManager {
   addChest(x: number, y: number) {
     const chestGroup = this.scene.add.group()
     const chest = this.scene.add
-      .sprite(x, y, "chest", "1.png")
-      .setScale(2)
+      .sprite(x, y, "chest", "001.png")
+      .setScale(1.5)
       .setTint(getRegionTint(this.scene.mapName, preference("colorblindMode")))
     chestGroup.add(chest)
     chestGroup.setDepth(DEPTH.INANIMATE_OBJECTS)
@@ -1594,5 +1616,43 @@ export default class BoardManager {
         }
       }
     })
+  }
+
+  addLavaBenchAnimation() {
+    for (let x = 0; x < BOARD_WIDTH; x++) {
+      addAbilitySprite(
+        this.scene,
+        "LAVA",
+        0,
+        transformBoardCoordinates(x, -0.75),
+        {
+          animOptions: { repeat: 30 },
+          depth: DEPTH.ABILITY_GROUND_LEVEL,
+          scale: 2
+        }
+      )
+    }
+    this.pokemons.forEach((sprite) => this.addLavaBenchPokemonAnimation(sprite))
+  }
+
+  addLavaBenchPokemonAnimation(pokemonSprite: PokemonSprite) {
+    if (
+      this.mode === BoardMode.BATTLE &&
+      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA &&
+      isOnBench(pokemonSprite.pokemon) &&
+      !isIn(Troopers, pokemonSprite.pokemon.name)
+    ) {
+      pokemonSprite.setLifeBar(pokemonSprite.pokemon, this.scene)
+      addAbilitySprite(
+        this.scene,
+        "BURN_UP",
+        0,
+        [pokemonSprite.x, pokemonSprite.y],
+        {
+          animOptions: { repeat: 48 },
+          scale: 2
+        }
+      )
+    }
   }
 }

@@ -1,5 +1,10 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_SIDE_HEIGHT,
+  BOARD_WIDTH,
+  Troopers
+} from "../config"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -19,7 +24,7 @@ import {
   Transfer
 } from "../types"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
@@ -38,6 +43,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
+import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
@@ -45,7 +51,7 @@ import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { max } from "../utils/number"
+import { max, min } from "../utils/number"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -77,6 +83,7 @@ import {
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
+import { DelayedCommand, type SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
@@ -109,6 +116,7 @@ export default class Simulation extends Schema implements ISimulation {
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
+  commands = new Array<SimulationCommand>()
 
   constructor(
     id: string,
@@ -253,6 +261,45 @@ export default class Simulation extends Schema implements ISimulation {
         })
       })
     }
+
+    if (this.room?.state?.specialGameRule === SpecialGameRule.BENCH_IS_LAVA) {
+      for (const player of [this.redPlayer, this.bluePlayer]) {
+        if (player) {
+          player.board.forEach((p, id) => {
+            p.hp = p.maxHP
+          })
+        }
+      }
+
+      const lavaTick = () => {
+        this.commands.push(
+          new DelayedCommand(() => {
+            for (const player of [this.redPlayer, this.bluePlayer]) {
+              if (player) {
+                player.board.forEach((p, id) => {
+                  if (isOnBench(p) && !isIn(Troopers, p.name)) {
+                    let burnDamage = Math.round(0.05 * p.maxHP)
+                    if (
+                      p.items.has(Item.MAGMARIZER) ||
+                      p.items.has(Item.SAFETY_GOGGLES)
+                    ) {
+                      burnDamage = 0
+                    } else if (p.items.has(Item.ASSAULT_VEST)) {
+                      burnDamage = Math.floor(burnDamage * 0.5)
+                    }
+                    p.hp = min(0)(p.hp - burnDamage)
+                    if (p.hp === 0) player.board.delete(id)
+                  }
+                })
+              }
+            }
+            lavaTick()
+          }, 1000)
+        )
+      }
+
+      lavaTick()
+    }
   }
 
   getEffects(playerId: string) {
@@ -269,6 +316,16 @@ export default class Simulation extends Schema implements ISimulation {
       : playerId === this.redPlayer?.id
         ? this.redDpsMeter
         : undefined
+  }
+
+  getEffectDps(team: Team, effect: EnvironmentalEffect): Dps {
+    const meter = team === Team.BLUE_TEAM ? this.blueDpsMeter : this.redDpsMeter
+    let dps = meter.get(effect)
+    if (!dps) {
+      dps = new Dps(effect, effect)
+      meter.set(effect, dps)
+    }
+    return dps
   }
 
   getTeam(playerId: string) {
@@ -757,7 +814,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.HONE_CLAWS:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(30, pokemon, 0, false)
-          pokemon.addCritPower(30, pokemon, 0, false)
+          pokemon.addCritPower(40, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.HONE_CLAWS)
         }
         break
@@ -765,7 +822,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.ASSURANCE:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(40, pokemon, 0, false)
-          pokemon.addCritPower(50, pokemon, 0, false)
+          pokemon.addCritPower(60, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.ASSURANCE)
         }
         break
@@ -773,7 +830,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.BEAT_UP:
         if (types.has(Synergy.DARK)) {
           pokemon.addCritChance(50, pokemon, 0, false)
-          pokemon.addCritPower(80, pokemon, 0, false)
+          pokemon.addCritPower(100, pokemon, 0, false)
           pokemon.effects.add(EffectEnum.BEAT_UP)
         }
         break
@@ -950,12 +1007,15 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.AROMATIC_MIST:
-      case EffectEnum.FAIRY_WIND:
-      case EffectEnum.STRANGE_STEAM:
+      case EffectEnum.FAIRY_AURA:
+      case EffectEnum.PIXILATE:
       case EffectEnum.MOON_FORCE:
         if (types.has(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
-          if (pokemon.player?.items.includes(Item.LONG_WAND)) {
+          if (
+            pokemon.player?.items.includes(Item.LONG_WAND) &&
+            pokemon.range > 1
+          ) {
             pokemon.range += 1
           }
           if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
@@ -1295,6 +1355,9 @@ export default class Simulation extends Schema implements ISimulation {
   update(dt: number) {
     if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
       this.onFinish()
+    } else {
+      this.commands.forEach((command) => command.update(dt))
+      this.commands = this.commands.filter((command) => !command.executed)
     }
 
     this.blueTeam.forEach((pkm, key) => {
@@ -1362,6 +1425,7 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,
+              effect: EffectEnum.LIGHTNING_STRIKE,
               shouldTargetGainMana: false
             })
           }
@@ -1439,7 +1503,10 @@ export default class Simulation extends Schema implements ISimulation {
           entity.resurrect()
         }
         if (!entity.status.tree) {
-          entity.action = PokemonActionState.HOP
+          setTimeout(
+            () => (entity.action = PokemonActionState.HOP),
+            randomBetween(0, 800)
+          )
         }
       })
     }
@@ -1732,7 +1799,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
-                pokemonHit,
+                EffectEnum.TIDAL_WAVE,
                 0,
                 false
               )
@@ -1743,8 +1810,10 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
+              effect: EffectEnum.TIDAL_WAVE,
               shouldTargetGainMana: false
             })
+
             let newY = y
             if (isRed) {
               while (

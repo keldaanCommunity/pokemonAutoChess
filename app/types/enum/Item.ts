@@ -356,7 +356,11 @@ export enum Item {
   EPIC_GIFT = "EPIC_GIFT",
   ULTRA_GIFT = "ULTRA_GIFT",
   UNIQUE_GIFT = "UNIQUE_GIFT",
-  LEGENDARY_GIFT = "LEGENDARY_GIFT"
+  LEGENDARY_GIFT = "LEGENDARY_GIFT",
+  PURPLE_NECTAR = "PURPLE_NECTAR",
+  RED_NECTAR = "RED_NECTAR",
+  PINK_NECTAR = "PINK_NECTAR",
+  YELLOW_NECTAR = "YELLOW_NECTAR"
 }
 
 export const MemoryDiscs = [
@@ -419,6 +423,13 @@ export const MemoryDiscsBySynergy: {
   [Synergy.FLORA]: Item.FLORA_MEMORY
 }
 
+export const Nectars = [
+  Item.RED_NECTAR,
+  Item.PURPLE_NECTAR,
+  Item.YELLOW_NECTAR,
+  Item.PINK_NECTAR
+] satisfies Item[]
+
 export const MissionOrders = [
   Item.MISSION_ORDER_PINK,
   Item.MISSION_ORDER_RED,
@@ -459,52 +470,6 @@ export const TownItems = [
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT
-] satisfies Item[]
-
-// should be excluded from carousels
-export const SpecialItems: Item[] = [
-  ...TownItems,
-  Item.COIN,
-  Item.NUGGET,
-  Item.BIG_NUGGET,
-  Item.TRASH,
-  Item.FIRE_SHARD,
-  Item.CELL_BATTERY,
-  Item.OLD_ROD,
-  Item.GOOD_ROD,
-  Item.SUPER_ROD,
-  Item.CHEF_HAT,
-  Item.VANILLA_FLAVOR,
-  Item.RUBY_FLAVOR,
-  Item.MATCHA_FLAVOR,
-  Item.MINT_FLAVOR,
-  Item.LEMON_FLAVOR,
-  Item.SALTED_FLAVOR,
-  Item.RUBY_SWIRL_FLAVOR,
-  Item.CARAMEL_SWIRL_FLAVOR,
-  Item.RAINBOW_SWIRL_FLAVOR,
-  Item.RICH_MULCH,
-  Item.AMAZE_MULCH,
-  Item.ROTOM_CATALOG,
-  Item.TEAL_MASK,
-  Item.WELLSPRING_MASK,
-  Item.CORNERSTONE_MASK,
-  Item.HEARTHFLAME_MASK,
-  Item.ZYGARDE_CUBE,
-  Item.METEORITE,
-  Item.AUSPICIOUS_ARMOR,
-  Item.MALICIOUS_ARMOR,
-  Item.MYSTERY_BOX,
-  Item.RUSTED_SWORD,
-  Item.SCROLL_OF_WATERS,
-  Item.SCROLL_OF_DARKNESS,
-  Item.MEMORY_DISCS,
-  ...MemoryDiscs,
-  Item.COMFEY,
-  Item.TATSUGIRI_CURLY,
-  Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY,
-  Item.BALL
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -1006,7 +971,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
-export const TMPerAbility = reverseMap(
+export const TMPerAbility: Map<Ability, Item> = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
 
@@ -1219,3 +1184,42 @@ export const UnholdableItemsToSaveForStats = [
   ...SevenTreasures,
   ...WeatherRocks
 ] satisfies UnholdableItem[]
+
+// should be excluded from carousels
+export const SpecialItems: Item[] = [
+  ...TownItems,
+  Item.COIN,
+  Item.NUGGET,
+  Item.BIG_NUGGET,
+  Item.TRASH,
+  Item.FIRE_SHARD,
+  Item.CELL_BATTERY,
+  Item.OLD_ROD,
+  Item.GOOD_ROD,
+  Item.SUPER_ROD,
+  Item.CHEF_HAT,
+  Item.RICH_MULCH,
+  Item.AMAZE_MULCH,
+  Item.ROTOM_CATALOG,
+  Item.TEAL_MASK,
+  Item.WELLSPRING_MASK,
+  Item.CORNERSTONE_MASK,
+  Item.HEARTHFLAME_MASK,
+  Item.ZYGARDE_CUBE,
+  Item.METEORITE,
+  Item.AUSPICIOUS_ARMOR,
+  Item.MALICIOUS_ARMOR,
+  Item.MYSTERY_BOX,
+  Item.RUSTED_SWORD,
+  Item.SCROLL_OF_WATERS,
+  Item.SCROLL_OF_DARKNESS,
+  Item.MEMORY_DISCS,
+  ...MemoryDiscs,
+  Item.COMFEY,
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY,
+  Item.BALL,
+  ...Flavors,
+  ...Nectars
+] satisfies Item[]

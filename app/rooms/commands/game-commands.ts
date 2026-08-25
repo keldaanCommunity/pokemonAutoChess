@@ -60,8 +60,10 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PVEStages } from "../../models/pve-stages"
 import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
+import { openGift } from "../../services/gift-shop"
 import {
   Emotion,
+  FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
@@ -76,6 +78,7 @@ import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
+import { FlowerPots } from "../../types/enum/FlowerPot"
 import {
   BattleResult,
   GameMode,
@@ -86,6 +89,7 @@ import {
 import {
   type Gift,
   GiftShopPrices,
+  Gifts,
   GiftsTier1,
   GiftsTier2,
   GiftsTier3
@@ -122,7 +126,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import type { IDetailledPokemon } from "../../types/models/bot-v2"
+import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
@@ -665,13 +669,7 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
-          player.synergies,
-          Synergy.NORMAL
-        )
-        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
-          player.scarvesItems.push(result)
-        }
+        player.scarvesItems.push(result)
       }
 
       player.items.push(result)
@@ -745,6 +743,23 @@ export class OnDragDropItemCommand extends Command<
         player.flowerPots[index] = potEvolution
         removeInArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
+
+        if (potEvolution.evolution === Pkm.DEFAULT) {
+          const oricorios = schemaValues(player.board).filter(
+            (p) => p.passive === Passive.NECTAR
+          )
+          oricorios.forEach(() => {
+            const nectar = {
+              [FlowerPot.BLUE]: Item.PURPLE_NECTAR,
+              [FlowerPot.PINK]: Item.RED_NECTAR,
+              [FlowerPot.WHITE]: Item.PINK_NECTAR,
+              [FlowerPot.YELLOW]: Item.YELLOW_NECTAR
+            }[FlowerPots[index]]
+            if (nectar && player.items.includes(nectar) === false) {
+              player.items.push(nectar)
+            }
+          })
+        }
         return
       }
     } else if (zone === "berry-tree-zone") {
@@ -783,17 +798,21 @@ export class OnDragDropItemCommand extends Command<
         (effect) => effect instanceof OnItemDroppedEffect
       ) ?? [])
     ]
+
+    let shouldEquipItem = true
     for (const onItemDroppedEffect of onItemDroppedEffects) {
-      const shouldEquipItem = onItemDroppedEffect.apply({
+      const didThatEffectAllowToEquipItem = onItemDroppedEffect.apply({
         pokemon,
         player,
         item,
         room: this.room
       })
-      if (shouldEquipItem === false) {
-        client.send(Transfer.DRAG_DROP_CANCEL, message)
-        return
-      }
+      if (!didThatEffectAllowToEquipItem) shouldEquipItem = false
+    }
+
+    if (shouldEquipItem === false) {
+      client.send(Transfer.DRAG_DROP_CANCEL, message)
+      return
     }
 
     if (isIn(Dishes, item)) {
@@ -985,6 +1004,34 @@ export class OnSellPokemonCommand extends Command<
       if (partner) {
         partner.tradeStatus = TradeStatus.PENDING
       }
+    }
+  }
+}
+
+export class OnUseItemCommand extends Command<
+  GameRoom,
+  {
+    client: Client
+    item: Item
+  }
+> {
+  execute({ client, item }) {
+    const player = this.state.players.get(client.auth.uid)
+    if (!player || !player.alive || !player.doubleUpPartnerId) return
+    if (!player.items.includes(item)) return
+
+    const fromPlayer = this.state.players.get(player?.doubleUpPartnerId)
+    if (!fromPlayer) return
+
+    let used = false
+
+    if (isIn(Gifts, item)) {
+      openGift(item, player, fromPlayer)
+      used = true
+    }
+
+    if (used) {
+      removeInArray(player.items, item)
     }
   }
 }
@@ -1527,16 +1574,17 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       // Make groups by user id
       this.state.players.forEach((p) => {
         const partner = this.state.players.get(p.doubleUpPartnerId)
-        if(!partner) return
-        if(p.giftsGiven.length < partner.giftsGiven.length){
+        if (!partner) return
+        if (p.giftsGiven.length < partner.giftsGiven.length) {
           givers.push(p)
-        } if(p.giftsGiven.length > partner.giftsGiven.length){
+        }
+        if (p.giftsGiven.length > partner.giftsGiven.length) {
           receivers.push(p)
-        } else if(p.life > partner.life){
-           givers.push(p)
-        } else if(p.life < partner.life){
+        } else if (p.life > partner.life) {
+          givers.push(p)
+        } else if (p.life < partner.life) {
           receivers.push(p)
-        } else if(p.id < p.doubleUpPartnerId){
+        } else if (p.id < p.doubleUpPartnerId) {
           givers.push(p)
         } else {
           receivers.push(p)
@@ -1698,6 +1746,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           (s) => s.name === Pkm.SUBSTITUTE && s.id === p.pokemon.id
         )
         if (!substitute) return
+        if (p.pokemon.name === Pkm.PIKACHU) {
+          p.pokemon = player.transformPokemon(p.pokemon, Pkm.PIKACHU_LIBRE)
+        }
         p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.maxHP += [50, 100, 150][p.ticketLevel - 1] ?? 0
         p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0

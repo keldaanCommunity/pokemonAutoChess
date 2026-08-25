@@ -1,15 +1,17 @@
 import { Room, SchemaSerializer } from "@colyseus/sdk"
 import pkg from "../../../../package.json"
+import type GameState from "../../../rooms/states/game-state"
+import { Transfer } from "../../../types"
+import { Passive } from "../../../types/enum/Passive"
 import { rooms } from "../network"
 import { preference, subscribeToPreference } from "../preferences"
 import store from "../stores"
+import type { ReplayWriterMeta } from "./opfs-replay-writer"
 import {
   type CapturedFrame,
   createFlushController
 } from "./recorder-flush-core"
-import type { ReplayWriterMeta } from "./opfs-replay-writer"
 import type { ReplayFileInfo } from "./recorder-worker-core"
-import { isReplayRoom } from "./replay-room-id"
 import {
   deriveFinalRank,
   ensureReplayTrailer,
@@ -18,9 +20,7 @@ import {
   type ReplayManifest,
   type ReplaySummary
 } from "./replay-format"
-import type GameState from "../../../rooms/states/game-state"
-import { Transfer } from "../../../types"
-import { Passive } from "../../../types/enum/Passive"
+import { isReplayRoom } from "./replay-room-id"
 
 export type { ReplayFileInfo } from "./recorder-worker-core"
 

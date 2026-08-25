@@ -37,6 +37,7 @@ import TierListMakerModal from "../tier-list/tier-list-maker-modal"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
+import { getGameScene } from "../../game"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
@@ -133,17 +134,20 @@ export function MainSidebar(props: MainSidebarProps) {
     )
   )
   function onClickLeave() {
-    // a replay exits straight to the lobby (the live leave() would hit the /after flow)
-    if (isReplayRoom(rooms.game)) {
-      rooms.game.pause()
-      navigate("/lobby")
-      return
-    }
     if (player && player.life > 0 && playersAlive.length > 1) {
       setShowSurrenderConfirm(true)
     } else {
       leave()
     }
+  }
+
+  function onClickLeaveReplay() {
+    // a replay exits straight to the lobby (the live leave() would hit the /after flow)
+    if (isReplayRoom(rooms.game)) {
+      rooms.game.pause()
+    }
+    getGameScene()?.music?.destroy()
+    navigate("/lobby")
   }
 
   return (
@@ -245,11 +249,14 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" && (
-          <NavLink svg="compact-disc" onClick={() => navigate("/replay")}>
-            {t("replay.nav")}
-          </NavLink>
-        )}
+        {page !== "game" &&
+          ((!GADGETS.recorder.disabled &&
+            profileLevel >= GADGETS.recorder.levelRequired) ||
+            profile?.role === Role.ADMIN) && (
+            <NavLink svg="recorder" onClick={() => navigate("/replay")}>
+              {t("replay.nav")}
+            </NavLink>
+          )}
 
         {page !== "game" &&
           ((!GADGETS.pokeguesser.disabled &&
@@ -390,9 +397,23 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        <NavLink svg="exit-door" className="red logout" onClick={onClickLeave}>
-          {leaveLabel}
-        </NavLink>
+        {isReplayRoom(rooms.game) ? (
+          <NavLink
+            svg="exit-door"
+            className="red logout"
+            onClick={onClickLeaveReplay}
+          >
+            {t("replay.leave_replay")}
+          </NavLink>
+        ) : (
+          <NavLink
+            svg="exit-door"
+            className="red logout"
+            onClick={onClickLeave}
+          >
+            {leaveLabel}
+          </NavLink>
+        )}
       </Menu>
 
       <Modals modal={modal} setModal={setModal} page={page} />

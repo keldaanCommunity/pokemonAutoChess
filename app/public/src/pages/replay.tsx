@@ -34,9 +34,10 @@ import {
 import { ReplayRoom } from "../game/replay-room"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { rooms } from "../network"
-import { usePreference } from "../preferences"
+import { usePreference, usePreferences } from "../preferences"
 import { leaveGame, setPlayer } from "../stores/GameStore"
 import { logIn } from "../stores/NetworkStore"
+import { Checkbox } from "./component/checkbox/checkbox"
 import PokemonPortrait from "./component/pokemon-portrait"
 import ReplayControls from "./component/replay/replay-controls"
 import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
@@ -596,6 +597,7 @@ function ReplayLibrary({
 }) {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const [preferences, setPreferences] = usePreferences()
   const [files, setFiles] = useState<ReplayFileInfo[] | null>(null) // null while still listing
   const [busy, setBusy] = useState(false) // a watch/download is in flight; disable row actions
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null) // roomId pending inline confirm
@@ -683,6 +685,12 @@ function ReplayLibrary({
           <div className="replay-overlay-title">
             {t("replay.library.title")}
           </div>
+          <Checkbox
+            isDark
+            checked={preferences.recordReplays}
+            onToggle={(checked) => setPreferences({ recordReplays: checked })}
+            label={t("options.record_replays")}
+          />
         </div>
 
         <div className="replay-landing-cols">
@@ -762,7 +770,13 @@ function ReplayLibrary({
                                 disabled={busy}
                                 onClick={() => watchStored(f.roomId)}
                               >
-                                ▶ {t("replay.library.watch")}
+                                <img
+                                  src="/assets/ui/play.svg"
+                                  alt="▶"
+                                  width={24}
+                                  height={24}
+                                />{" "}
+                                {t("replay.library.watch")}
                               </button>
                               <button
                                 className="bubbly replay-row-btn"
@@ -770,14 +784,25 @@ function ReplayLibrary({
                                 title={t("replay.library.download_tip")}
                                 onClick={() => download(f)}
                               >
-                                ⬇
+                                <img
+                                  src="/assets/ui/save.svg"
+                                  alt="⬇"
+                                  width={24}
+                                  height={24}
+                                />{" "}
+                                {t("replay.library.download_tip")}
                               </button>
                               <button
-                                className="bubbly replay-row-btn"
+                                className="bubbly red replay-row-btn"
                                 title={t("delete")}
                                 onClick={() => setConfirmDelete(f.roomId)}
                               >
-                                🗑
+                                <img
+                                  src="/assets/ui/trash.svg"
+                                  alt="🗑"
+                                  width={24}
+                                  height={24}
+                                />{" "}
                               </button>
                             </>
                           )
@@ -814,7 +839,13 @@ function ReplayLibrary({
                         className="bubbly blue replay-row-btn"
                         onClick={playPreview}
                       >
-                        ▶ {t("replay.library.watch")}
+                        <img
+                          src="/assets/ui/play.svg"
+                          alt="▶"
+                          width={24}
+                          height={24}
+                        />{" "}
+                        {t("replay.library.watch")}
                       </button>
                       <button
                         className="bubbly replay-row-btn"

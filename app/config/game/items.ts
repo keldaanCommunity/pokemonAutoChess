@@ -38,7 +38,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.RAZOR_FANG]: {
     [Stat.SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 100
+    [Stat.CRIT_POWER]: 50
   },
   [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 20 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
@@ -97,7 +97,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 },
   [Item.SILK_SCARF]: { [Stat.SHIELD]: 15 },
   [Item.FRIEND_BOW]: { [Stat.SHIELD]: 30 },
-  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 20 },
+  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 30 },
   [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 },
   [Item.LUCKY_RIBBON]: { [Stat.SHIELD]: 15, [Stat.AP]: 50, [Stat.LUCK]: 20 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },

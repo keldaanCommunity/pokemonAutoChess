@@ -10,6 +10,7 @@ import {
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
+  PokepalsPointsPerRank,
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
   VICTORY_ROAD_MAX_EVENT_POINTS,
@@ -46,7 +47,7 @@ import {
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
 import { updatePlayerTitlesAfterGame } from "../models/titles"
-import { GiftEffects } from "../services/gift-shop"
+import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -70,6 +71,7 @@ import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
   type Item,
+  RemovableItems,
   UnholdableItemsToSaveForStats,
   Wands
 } from "../types/enum/Item"
@@ -85,8 +87,8 @@ import type { Synergy } from "../types/enum/Synergy"
 import { TradeStatus } from "../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
+import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -96,7 +98,7 @@ import {
 import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
-import { clamp } from "../utils/number"
+import { clamp, min } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
@@ -117,7 +119,8 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand
+  OnUpdateCommand,
+  OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
@@ -481,6 +484,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
 
+    this.onMessage(Transfer.USE_ITEM, (client, item: Item) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnUseItemCommand(), {
+            client,
+            item
+          })
+        } catch (error) {
+          logger.error("use item drop error", item)
+        }
+      }
+    })
+
     this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -662,6 +678,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
           player.tradeStatus === TradeStatus.ACCEPTED &&
           partner?.tradeStatus === TradeStatus.ACCEPTED
         ) {
+          if (player.tradeCooldown > 0 || partner.tradeCooldown > 0) return
           this.tradePokemonWithPartner(player, partner)
           player.tradeStatus = TradeStatus.PENDING
           partner.tradeStatus = TradeStatus.PENDING
@@ -727,6 +744,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
     /*if (client && client.auth && client.auth.displayName) {
       logger.info(`${client.auth.displayName} has been disconnected`)
     }*/
+    if (
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    ) {
+      // a spectator disconnected: they have no game to reconnect to, so remove
+      // them from the spectators set immediately instead of holding a 5-minute
+      // reconnection window (which would keep the spectator count stale)
+      this.state.spectators.delete(client.auth.uid)
+      return
+    }
     try {
       // allow disconnected client to reconnect into this room until 5 minutes
       setPendingGame(this.presence, client.auth.uid, this.roomId)
@@ -746,6 +774,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onLeave(client: Client, code: number) {
     const consented = code === CloseCode.CONSENTED
+
+    if (
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    ) {
+      // a spectator (not one of the players) left the game
+      this.state.spectators.delete(client.auth.uid)
+      return
+    }
 
     if (client && client.auth && client.auth.displayName) {
       const pendingGame = await getPendingGame(this.presence, client.auth.uid)
@@ -1051,6 +1089,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
           } catch (error) {
             logger.error("Error updating event points", error)
           }
+        }
+      }
+
+      if (
+        this.state.gameMode === GameMode.DOUBLE_UP &&
+        getCurrentGameEvent() === GameEvent.POKEPALS &&
+        usr.eventData?.pal &&
+        this.state.players.has(usr.eventData?.pal) &&
+        usr.eventData?.pal === player.doubleUpPartnerId
+      ) {
+        try {
+          const eventPointsGained = PokepalsPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          player.titles.add(Title.PAL)
+        } catch (error) {
+          logger.error("Error updating event points", error)
         }
       }
 
@@ -1512,14 +1567,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       delay: 3000
     })
 
-    setTimeout(() => {
-      const giftEffect = GiftEffects[gift]
-      if (Array.isArray(giftEffect)) {
-        giftEffect.forEach((effect) => effect(partner, player))
-      } else {
-        giftEffect(partner, player)
-      }
-    }, 10000)
+    setTimeout(() => openGift(gift, partner, player), 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {
@@ -1538,6 +1586,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       !canBeTraded(pokemonToTradeB)
     )
       return
+
+    // Remove removable items
+    const itemsToRemoveA = schemaValues(pokemonToTradeA.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerA.items.push(...itemsToRemoveA)
+    pokemonToTradeA.removeItems(itemsToRemoveA, playerA)
+
+    const itemsToRemoveB = schemaValues(pokemonToTradeB.items).filter((item) =>
+      isIn(RemovableItems, item)
+    )
+    playerB.items.push(...itemsToRemoveB)
+    pokemonToTradeB.removeItems(itemsToRemoveB, playerB)
 
     // Switch Pokémon
 

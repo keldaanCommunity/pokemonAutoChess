@@ -26,6 +26,7 @@ import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { useKeyPress } from "../../utils/keyboard"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
@@ -56,6 +57,7 @@ export function GamePokemonDetail(props: {
   isAlly?: boolean
 }) {
   const { t } = useTranslation()
+  const ctrlKeyPressed = useKeyPress("Ctrl")
   const pokemon = useMemo<IPokemon | IPokemonEntity | null>(() => {
     if (!props.pokemon) {
       return null
@@ -244,15 +246,24 @@ export function GamePokemonDetail(props: {
 
   return (
     <div className="game-pokemon-detail">
-      <PokemonPortrait
-        className="game-pokemon-detail-portrait"
-        style={{ borderColor: RarityColor[pokemon.rarity] }}
-        portrait={{
-          index: pokemon.index,
-          shiny: props.shiny ?? pokemon.shiny,
-          emotion: props.emotion ?? pokemon.emotion
-        }}
-      />
+      <div className="game-pokemon-detail-portrait-wrap">
+        <PokemonPortrait
+          className="game-pokemon-detail-portrait"
+          style={{ borderColor: RarityColor[pokemon.rarity] }}
+          portrait={{
+            index: pokemon.index,
+            shiny: props.shiny ?? pokemon.shiny,
+            emotion: props.emotion ?? pokemon.emotion
+          }}
+        />
+        {getPokemonData(pokemon.name).regional && (
+          <img
+            src="assets/ui/pinpoint.svg"
+            alt=""
+            className="game-pokemon-detail-regional-icon"
+          />
+        )}
+      </div>
       {pokemon.index === PkmIndex[Pkm.EGG] &&
         "evolution" in pokemon &&
         pokemon.evolution != null && (
@@ -385,7 +396,10 @@ export function GamePokemonDetail(props: {
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
                 stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki"
+                showAbilityTiers:
+                  props.origin === "wiki" ||
+                  props.origin === "planner" ||
+                  ctrlKeyPressed
               }}
               key={pokemon.id}
             />

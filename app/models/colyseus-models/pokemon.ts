@@ -442,6 +442,40 @@ export class Egg extends Pokemon {
   canHoldItems = false
 }
 
+export class GalarMeowth extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.WILD])
+  rarity = Rarity.RARE
+  stars = 1
+  evolution = Pkm.PERRSERKER
+  hp = 90
+  atk = 9
+  speed = 32
+  def = 7
+  speDef = 6
+  maxPP = 70
+  range = 1
+  skill = Ability.METAL_CLAW
+  regional = true
+  additional = true
+}
+
+export class Perrserker extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STEEL, Synergy.WILD])
+  rarity = Rarity.RARE
+  stars = 2
+  hp = 240
+  atk = 23
+  speed = 32
+  def = 9
+  speDef = 6
+  maxPP = 70
+  range = 1
+  skill = Ability.METAL_CLAW
+  regional = true
+  additional = true
+  passive = Passive.STEELY_SPIRIT
+}
+
 export class Electrike extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.ELECTRIC, Synergy.FIELD])
   rarity = Rarity.RARE
@@ -5219,7 +5253,7 @@ export class Gyarados extends Pokemon {
   speDef = 2
   maxPP = 100
   range = 1
-  skill = Ability.HYDRO_PUMP
+  skill = Ability.DRAGON_RAGE
   onAcquired(player: Player) {
     player.titles.add(Title.FISHERMAN)
   }
@@ -5247,6 +5281,25 @@ export class PikachuSurfer extends Pokemon {
       player.transformPokemon(this, Pkm.PIKACHU)
     }
   }
+}
+
+export class PikachuLibre extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.FIGHTING,
+    Synergy.FAIRY
+  ])
+  rarity = Rarity.SPECIAL
+  stars = 3
+  hp = 120
+  atk = 8
+  speed = 54
+  def = 4
+  speDef = 6
+  maxPP = 100
+  range = 1
+  skill = Ability.THUNDERCLAP_PRESS
+  passive = Passive.PIKACHU_LIBRE
 }
 
 export class Rattata extends Pokemon {
@@ -12439,7 +12492,7 @@ export class Carnivine extends Pokemon {
   stars = 3
   hp = 180
   atk = 21
-  speed = 29
+  speed = 40
   def = 6
   speDef = 6
   maxPP = 100
@@ -13636,7 +13689,7 @@ export class Tandemaus extends Pokemon {
   evolution = Pkm.MAUSHOLD_THREE
   evolutionRule = {
     type: EvolutionRuleType.STATE,
-    condition: (pokemon, player, state) => state && state.stageLevel >= 14
+    condition: (pokemon, player, state) => state && state.stageLevel >= 15
   } satisfies StateEvolutionRule
   passive = Passive.FAMILY
 }
@@ -16994,7 +17047,7 @@ export class Fletchling extends Pokemon {
   speed = 65
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -17010,7 +17063,7 @@ export class Fletchinder extends Pokemon {
   speed = 65
   def = 10
   speDef = 10
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -17025,7 +17078,7 @@ export class Talonflame extends Pokemon {
   speed = 65
   def = 14
   speDef = 14
-  maxPP = 100
+  maxPP = 85
   range = 2
   skill = Ability.FIRESTARTER
   passive = Passive.GALE_WINGS
@@ -17257,7 +17310,7 @@ export class Litten extends Pokemon {
   speed = 44
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARKEST_LARIAT
 }
@@ -17272,7 +17325,7 @@ export class Torracat extends Pokemon {
   speed = 44
   def = 12
   speDef = 12
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARKEST_LARIAT
 }
@@ -17286,7 +17339,7 @@ export class Incineroar extends Pokemon {
   speed = 44
   def = 16
   speDef = 16
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.DARKEST_LARIAT
 }
@@ -20795,6 +20848,124 @@ export class Passimian extends Pokemon {
   }
 }
 
+function giveNectarsAlreadyUnlocked(player: Player) {
+  const nectarsByPotIndex = [
+    Item.RED_NECTAR,
+    Item.YELLOW_NECTAR,
+    Item.PINK_NECTAR,
+    Item.PURPLE_NECTAR
+  ]
+  player.flowerPots.forEach((pkm, i) => {
+    if (
+      pkm.evolution === Pkm.DEFAULT &&
+      i in nectarsByPotIndex &&
+      player.items.includes(nectarsByPotIndex[i]) === false
+    ) {
+      player.items.push(nectarsByPotIndex[i])
+    }
+  })
+}
+
+export class OricorioBaile extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.FIRE])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.FIRE)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPomPom extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.ELECTRIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.ELECTRIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioPaU extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.FLORA,
+    Synergy.SOUND,
+    Synergy.PSYCHIC
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.PSYCHIC)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
+export class OricorioSensu extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLORA, Synergy.SOUND, Synergy.GHOST])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 175
+  atk = 15
+  speed = 60
+  def = 7
+  speDef = 7
+  maxPP = 100
+  range = 2
+  skill = Ability.REVELATION_DANCE
+  passive = Passive.NECTAR
+  regional = true
+  isInRegion(map: DungeonPMDO): boolean {
+    const regionSynergies = RegionDetails[map]?.synergies
+    return regionSynergies?.includes(Synergy.GHOST)
+  }
+  onAcquired(player: Player) {
+    giveNectarsAlreadyUnlocked(player)
+  }
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -21102,6 +21273,8 @@ export const PokemonClasses: Record<
   [Pkm.PERSIAN]: Persian,
   [Pkm.ALOLAN_MEOWTH]: AlolanMeowth,
   [Pkm.ALOLAN_PERSIAN]: AlolanPersian,
+  [Pkm.GALAR_MEOWTH]: GalarMeowth,
+  [Pkm.PERRSERKER]: Perrserker,
   [Pkm.DEINO]: Deino,
   [Pkm.ZWEILOUS]: Zweilous,
   [Pkm.HYDREIGON]: Hydreigon,
@@ -21846,6 +22019,7 @@ export const PokemonClasses: Record<
   [Pkm.MINCCINO]: Minccino,
   [Pkm.CINCCINO]: Cinccino,
   [Pkm.PIKACHU_SURFER]: PikachuSurfer,
+  [Pkm.PIKACHU_LIBRE]: PikachuLibre,
   [Pkm.ESPURR]: Espurr,
   [Pkm.MEOWSTIC_MALE]: MeowsticMale,
   [Pkm.MEOWSTIC_FEMALE]: MeowsticFemale,
@@ -21993,7 +22167,11 @@ export const PokemonClasses: Record<
   [Pkm.SPIDOPS]: Spidops,
   [Pkm.BUG_NEST]: BugNest,
   [Pkm.SLITHER_WING]: SlitherWing,
-  [Pkm.PASSIMIAN]: Passimian
+  [Pkm.PASSIMIAN]: Passimian,
+  [Pkm.ORICORIO_BAILE]: OricorioBaile,
+  [Pkm.ORICORIO_PA_U]: OricorioPaU,
+  [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
+  [Pkm.ORICORIO_SENSU]: OricorioSensu
 }
 
 // declare all the classes in colyseus schema TypeRegistry

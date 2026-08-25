@@ -2,7 +2,7 @@ import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
 import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
@@ -258,7 +258,8 @@ async function resetEventScores() {
         $set: {
           eventPoints: 0,
           maxEventPoints: 0,
-          eventFinishTime: null
+          eventFinishTime: null,
+          eventData: {}
         }
       }
     )
@@ -280,6 +281,12 @@ async function resetEventScores() {
           matchMaker.presence.publish(
             "announcement",
             "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
+          )
+          break
+        case GameEvent.POKEPALS:
+          matchMaker.presence.publish(
+            "announcement",
+            "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
           )
           break
       }

@@ -2,6 +2,7 @@ import { getStateCallbacks, type Room } from "@colyseus/sdk"
 import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Navigate } from "react-router"
+import { GADGETS } from "../../../config/game/gadgets"
 import type AfterGameState from "../../../rooms/states/after-game-state"
 import { CloseCodes } from "../../../types/enum/CloseCodes"
 import { useAppDispatch, useAppSelector } from "../hooks"
@@ -22,6 +23,7 @@ import { LocalStoreKeys, localStore } from "./utils/store"
 export default function AfterGame() {
   const dispatch = useAppDispatch()
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
+  const profile = useAppSelector((state) => state.network.profile)
   const { t } = useTranslation()
   const room: Room<AfterGameState> | undefined = rooms.after
   const initialized = useRef<boolean>(false)
@@ -133,7 +135,9 @@ export default function AfterGame() {
           >
             {t("back_to_lobby")}
           </button>
-          <RecorderEndGame />
+          {profile && profile.level >= GADGETS.recorder.levelRequired && (
+            <RecorderEndGame />
+          )}
         </nav>
         <AfterMenu />
       </div>

@@ -7,6 +7,7 @@ import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../../../types/enum/Effect"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
@@ -19,6 +20,7 @@ export default class LoadingManager {
   scene: Phaser.Scene
   loadingBar: GameObjects.Container | null = null
   statusMessage: string
+  preloadingPromise: Promise<void>
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
@@ -32,7 +34,7 @@ export default class LoadingManager {
       this.statusMessage = t("loading_complete")
     })
 
-    this.preload()
+    this.preloadingPromise = this.preload()
   }
 
   async preload() {
@@ -63,6 +65,19 @@ export default class LoadingManager {
 
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
+    // icons for the damage numbers board effects put on screen.
+    // load.svg and not load.image, otherwise the tint fills an opaque box instead of the shape
+    for (const effect of EnvironmentalEffects) {
+      scene.load.svg(
+        `effect-${effect}`,
+        `/assets/icons/effects/${effect}.svg`,
+        {
+          width: 64,
+          height: 64
+        }
+      )
+    }
 
     scene.load.spritesheet({
       key: "cell",
@@ -99,7 +114,7 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       const players = schemaValues(scene.room?.state.players!)
-      const player = players.find((p) => p.id === scene.uid) ?? players[0]
+      const player = scene.getPlayerToSpectate()! // must match what startGame plays, or the music isn't preloaded
       await scene.preloadMaps(
         players
           .map((p) => p.map)
@@ -111,6 +126,14 @@ export default class LoadingManager {
 
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
+
+    if (scene instanceof GameScene) {
+      await new Promise<void>((resolve) => {
+        // start another Phaser loading queue after the fetch requests of preloadMaps have been awaited
+        scene.load.once("complete", () => resolve())
+        scene.load.start()
+      })
+    }
   }
 }
 

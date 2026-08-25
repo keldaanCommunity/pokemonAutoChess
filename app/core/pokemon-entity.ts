@@ -23,7 +23,7 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   Orientation,
@@ -65,6 +65,7 @@ import {
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
+  OnResurrectionEffect,
   OnSpawnEffect
 } from "./effects/effect"
 import { ItemEffects } from "./effects/items"
@@ -336,6 +337,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }) {
@@ -402,9 +404,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
       if (
-        this.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT) ||
-        (attacker &&
-          attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
+        this.effects.has(EffectEnum.STRANGE_STEAM) ||
+        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
         specialDamage *= 1.2
       }
@@ -452,11 +453,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   handleHeal(
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ) {
-    return this.state.handleHeal(this, heal, caster, apBoost, crit)
+    return this.state.handleHeal(this, heal, origin, apBoost, crit)
   }
 
   changeState(state: PokemonState) {
@@ -555,7 +556,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     value = applyBigEaterBeltStatBuff(this, value, caster, 2)
     value = applyTwistBandBuff(this, value, caster)
 
-    this.critPower = min(0)(this.critPower + value)
+    this.critPower = min(1)(this.critPower + value)
   }
 
   addMaxHP(
@@ -609,6 +610,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    if (this.items.has(Item.NULLIFY_BANDANNA)) {
+      this.addAttack(Math.round(0.2 * value), caster, 0, false) // AP is gained as Attack instead
+      return
+    }
+
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
@@ -619,12 +625,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       target.ap = min(-100)(target.ap + value)
     }
 
-    if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addShield(value, caster, 0, false) // AP is gained as shield instead
-    } else {
-      update(this)
-    }
-
+    update(this)
     if (permanent && !this.isGhostOpponent) {
       update(this.refToBoardPokemon)
     }
@@ -1547,6 +1548,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.hp = this.maxHP
     this.pp = 0
     this.shield = 0
+
+    this.getEffects(OnResurrectionEffect).forEach((effect) =>
+      effect.apply({ pokemon: this, board: this.simulation.board })
+    )
   }
 
   eatBerry(

@@ -7139,6 +7139,13 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
+  [Pkm.PIKACHU_LIBRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
   [Pkm.ESPURR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
@@ -8084,5 +8091,49 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BALL_RANGE,
     hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.ORICORIO_BAILE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.FIRE_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.ORICORIO_PA_U]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.PSYCHIC_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.ORICORIO_POMPOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ORICORIO_SENSU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.GHOST_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.GALAR_MEOWTH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.PERRSERKER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE
   }
 }

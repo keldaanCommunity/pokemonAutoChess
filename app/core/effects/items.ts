@@ -3,7 +3,7 @@ import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
-import { Title, Transfer } from "../../types"
+import { Title, TMPerAbility, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -50,7 +50,6 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { getUnitScore } from "../unit-score"
 import {
-  BeforeAttackEffect,
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -59,13 +58,12 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   type OnDeathEffectArgs,
-  OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemRemovedEffect,
   OnKillEffect,
   OnMoveEffect,
-  OnResurrectEffect,
+  OnResurrectingEffect,
   OnShieldDepletedEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
@@ -540,6 +538,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
+          if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
+            // give back the previous TM
+            player.items.push(TMPerAbility.get(pokemon.tm)!)
+          }
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
@@ -589,18 +591,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           break
         }
       }
-    })
-  ],
-
-  [Item.PUNCHING_GLOVE]: [
-    new OnHitEffect(({ attacker, target, board }) => {
-      target.handleDamage({
-        damage: Math.round(0.08 * target.maxHP),
-        board,
-        attackType: AttackType.PHYSICAL,
-        attacker,
-        shouldTargetGainMana: true
-      })
     })
   ],
 
@@ -864,7 +854,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         true
       )
     }, Item.COMFEY),
-    new OnResurrectEffect(dropComfey, Item.COMFEY),
+    new OnResurrectingEffect(dropComfey, Item.COMFEY),
     new OnDeathEffect(dropComfey, Item.COMFEY)
   ],
 
@@ -1015,14 +1005,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.RAZOR_FANG]: [
-    new BeforeAttackEffect(({ target, crit }) => {
-      if (crit && target) {
-        target.status.triggerArmorReduction(2000, target)
-      }
-    })
-  ],
-
   [Item.STAR_DUST]: [
     new OnAbilityCastEffect((pokemon) => {
       pokemon.addShield(Math.round(0.5 * pokemon.maxPP), pokemon, 0, false)
@@ -1135,6 +1117,54 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.PINK_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_PA_U
+      ) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_PA_U)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.YELLOW_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_POMPOM
+      ) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_POMPOM)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.RED_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_BAILE
+      ) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_BAILE)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.PURPLE_NECTAR]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (
+        pokemon?.passive === Passive.NECTAR &&
+        pokemon.name !== Pkm.ORICORIO_SENSU
+      ) {
+        player.transformPokemon(pokemon, Pkm.ORICORIO_SENSU)
+      }
+      return false // prevent item from being equipped
+    })
+  ],
+
   [Item.TEAL_MASK]: [ogerponMaskEffect],
   [Item.WELLSPRING_MASK]: [ogerponMaskEffect],
   [Item.CORNERSTONE_MASK]: [ogerponMaskEffect],
@@ -1173,7 +1203,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           player.items.push(...recipe)
           pokemon.removeItem(heldItem, player)
           consummed = true
-        } else if(isIn(ItemComponents, heldItem)){
+        } else if (isIn(ItemComponents, heldItem)) {
           player.items.push(heldItem)
           pokemon.removeItem(heldItem, player)
         }
