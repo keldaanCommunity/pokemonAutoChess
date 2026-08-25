@@ -48,6 +48,7 @@ import type { DisplayText } from "../../../types/strings/DisplayText"
 import { logger } from "../../../utils/logger"
 import { clamp, max } from "../../../utils/number"
 import { schemaValues } from "../../../utils/schemas"
+import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
@@ -57,6 +58,7 @@ import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
 import { DEPTH } from "./depths"
+import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
 
 class GameContainer {
@@ -73,7 +75,8 @@ class GameContainer {
     this.$ = getStateCallbacks(room)
     this.div = div
     this.uid = uid
-    this.spectate = false
+    // replay is a spectate session: startGame keys "self" off the signed-in user, not the recorded pov
+    this.spectate = isReplayRoom(room)
     this.initializeEvents()
   }
 
@@ -312,7 +315,9 @@ class GameContainer {
     this.game.domContainer.style.zIndex = DEPTH.PHASER_DOM_CONTAINER.toString()
     this.game.scene.start("gameScene", {
       room: this.room,
-      spectate: this.spectate
+      uid: this.uid,
+      spectate: this.spectate,
+      spectatedPlayerId: this.player?.id
     })
     this.game.scale.on("resize", this.resize, this)
     if (this.game.renderer.type === Phaser.WEBGL) {
@@ -465,9 +470,14 @@ class GameContainer {
       const $pokemon = this.$<Pokemon>(pokemon)
       fields.forEach((field) => {
         $pokemon.listen(field, (value, previousValue) => {
-          if (field && player.id === this.playerIdSpectated) {
+          if (
+            field &&
+            (player.id === this.playerIdSpectated ||
+              player.doubleUpPartnerId === this.uid)
+          ) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               field,
               value as IPokemon[typeof field],
               previousValue as IPokemon[typeof field]
@@ -482,6 +492,7 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
               pokemon.hp + ItemStats[item][Stat.HP]!,
               pokemon.hp
@@ -501,11 +512,22 @@ class GameContainer {
           if (ItemStats[item]?.hasOwnProperty(Stat.HP)) {
             this.gameScene?.board?.changePokemon(
               pokemon,
+              player,
               "hp",
-              pokemon.hp + ItemStats[item][Stat.HP]!,
+              pokemon.hp - ItemStats[item][Stat.HP]!,
               pokemon.hp
             )
           }
+        }
+      })
+
+      $pokemon.items.onChange(() => {
+        const board = this.gameScene?.board
+        if (
+          board?.tradingPlatform?.pokemonToTrade?.id === pokemon.id ||
+          board?.tradingPlatform?.partnerPokemonToTrade?.id === pokemon.id
+        ) {
+          board?.tradingPlatform.updateTrade(board.mode)
         }
       })
 
@@ -532,7 +554,7 @@ class GameContainer {
           null
         )
         toast(i, {
-          containerId: player.rank.toString(),
+          containerId: player.id,
           className: "toast-new-pokemon"
         })
       }
@@ -545,6 +567,14 @@ class GameContainer {
       if (player.id === this.playerIdSpectated) {
         this.gameScene?.board?.removePokemon(pokemon)
       }
+
+      if (player.doubleUpPartnerId) {
+        this.gameScene?.board?.tradingPlatform?.updateTradeIfPokemonInvolved(
+          pokemon,
+          player,
+          this.gameScene.board.mode
+        )
+      }
     })
 
     $player.board.onChange((pokemon, key) => {
@@ -555,7 +585,6 @@ class GameContainer {
 
     $player.items.onChange((value, key) => {
       if (player.id === this.playerIdSpectated) {
-        //logger.debug("changed", value, key, player.items)
         this.gameScene?.itemsContainer?.render(player.items)
       }
     })
@@ -618,6 +647,24 @@ class GameContainer {
     if (this.uid === uid) {
       this.spectate = true
       if (this.room.state.players.size > 0) {
+        if (!this.player) {
+          const players = schemaValues(this.room.state.players)
+          const playerToSpectate =
+            sortPlayersByRankAndTeam(
+              players.filter((p) => p.alive),
+              this.room.state.gameMode
+            )[0] ?? players[0]
+          if (playerToSpectate) {
+            this.room.send(Transfer.SPECTATE, playerToSpectate.id)
+            this.setPlayer(playerToSpectate)
+            const simulation = this.room.state.simulations.get(
+              playerToSpectate.simulationId
+            )
+            if (simulation) {
+              this.setSimulation(simulation)
+            }
+          }
+        }
         this.initializeGame()
       }
     }
@@ -724,6 +771,8 @@ class GameContainer {
       if (!pokemonUI) return
       if (pokemon.action === PokemonActionState.FISH) {
         pokemonUI.fishingAnimation()
+      } else if (pokemon.action === PokemonActionState.NEST) {
+        pokemonUI.nestAnimation(false)
       } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(

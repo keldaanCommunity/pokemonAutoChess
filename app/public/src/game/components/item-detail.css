@@ -81,6 +81,12 @@
   white-space: pre-line;
 }
 
+.technical-term:first-child
+  .technical-term-label {
+  text-transform: capitalize;
+}
+
+
 .game-item-detail-description:last-child,
 .react-tooltip .game-item-detail-description:last-child {
   margin-bottom: -5px;
