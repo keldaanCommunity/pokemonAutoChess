@@ -1608,9 +1608,8 @@ export const PassiveEffects: Partial<
       let nbAllies = 0
       let transformed = false
 
-      const transformToHero = () => {
+      const transformToHero = (shouldEvolveBoardPokemon: boolean) => {
         transformed = true
-        const isFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
         entity.addAttack(18, entity, 0, false)
@@ -1618,19 +1617,25 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player && !entity.isGhostOpponent && isFinizenOnBoard) {
+        if (
+          entity.player &&
+          !entity.isGhostOpponent &&
+          entity.refToBoardPokemon.name === Pkm.FINIZEN &&
+          shouldEvolveBoardPokemon
+        ) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
-          entity.player.transformPokemon(
+          const newPokemon = entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,
             Pkm.PALAFIN
           )
+          entity.refToBoardPokemon = newPokemon
         }
       }
 
       const transformToHeroOnDeathEffect = new OnDeathEffect(() => {
         nbAlliesKo++
         if (!transformed && (nbAlliesKo >= 5 || nbAlliesKo >= nbAllies)) {
-          transformToHero()
+          transformToHero(true)
         }
       })
 
@@ -1643,13 +1648,13 @@ export const PassiveEffects: Partial<
 
       // edge case no allies: transform immediately
       if (nbAllies === 0) {
-        transformToHero()
+        transformToHero(true)
       }
 
       entity.effectsSet.add(
         new OnResurrectionEffect(() => {
           if (transformed) {
-            transformToHero() // reapply transformation if Finizen is resurrected in Hero form
+            transformToHero(false) // reapply transformation if Finizen is resurrected in Hero form
           }
         })
       )
