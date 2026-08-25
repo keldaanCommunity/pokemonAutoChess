@@ -14,8 +14,9 @@ export class ProtectStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const durationWithAP =
-      this.computeValue(this.config.duration, pokemon) * 1000
+    const { duration: durationInSeconds } =
+      this.computeConfigWithScaling(pokemon)
+    const durationWithAP = durationInSeconds * 1000
     const critScalingFactor = 0.5
     const duration = Math.round(
       durationWithAP *

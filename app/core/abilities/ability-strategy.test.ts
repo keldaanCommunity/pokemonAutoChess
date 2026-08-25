@@ -5,8 +5,18 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 class TestAbilityStrategy extends AbilityStrategy {
+  readonly config = {
+    damage: "[10,20,40,80,SP]",
+    chance: "[50,LK]",
+    radius: 4
+  } as const
+
   compute(value: AbilityConfigValue, pokemon: Partial<PokemonEntity>) {
     return this.computeValue(value, pokemon as PokemonEntity)
+  }
+
+  computeConfig(pokemon: Partial<PokemonEntity>) {
+    return this.computeConfigWithScaling(pokemon as PokemonEntity)
   }
 }
 
@@ -38,4 +48,14 @@ test("computeValue supports Luck and explicit AP factors", () => {
     }),
     6.4
   )
+})
+
+test("computeConfigWithScaling resolves every config field", () => {
+  const config = strategy.computeConfig({ stars: 2, ap: 50, luck: 50 })
+
+  assert.deepEqual(config, {
+    damage: 30,
+    chance: Math.sqrt(0.5) * 100,
+    radius: 4
+  })
 })

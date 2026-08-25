@@ -1,3 +1,5 @@
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import { chance } from "../../utils/random"
 import type { Board } from "../board"
@@ -5,6 +7,8 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class FieryWrathStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.FIERY_WRATH]
+
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -12,22 +16,24 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30,40,50,80][pokemon.stars - 1]
+    const { damage, radius, flinchChance, flinchDuration } =
+      this.computeConfigWithScaling(pokemon)
 
     board
-      .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, radius, false)
       .forEach((cell) => {
         const unit = cell.value
         if (unit && pokemon.team !== unit.team) {
-          if (chance(0.5, pokemon)) {
-            unit.status.triggerFlinch(4000, unit, pokemon)
+          if (chance(flinchChance / 100)) {
+            unit.status.triggerFlinch(flinchDuration * 1000, unit, pokemon)
           }
           unit.handleSpecialDamage(
             damage,
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit
+            crit,
+            false
           )
         }
       })

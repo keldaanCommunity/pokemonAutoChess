@@ -1,4 +1,7 @@
-import type { AbilityConfigValue } from "../../config/game/abilities"
+import type {
+  AbilityConfig,
+  AbilityConfigValue
+} from "../../config/game/abilities"
 import { Team } from "../../types/enum/Game"
 import { min } from "../../utils/number"
 import type { Board } from "../board"
@@ -33,6 +36,18 @@ export class AbilityStrategy {
 
       return total + result
     }, 0)
+  }
+
+  protected computeConfigWithScaling<T extends AbilityConfig>(
+    this: AbilityStrategy & { readonly config: T },
+    pokemon: PokemonEntity
+  ): { [K in keyof T]: number } {
+    return Object.fromEntries(
+      Object.entries(this.config).map(([key, value]) => [
+        key,
+        this.computeValue(value, pokemon)
+      ])
+    ) as { [K in keyof T]: number }
   }
 
   process(

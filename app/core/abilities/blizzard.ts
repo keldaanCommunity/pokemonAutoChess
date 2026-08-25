@@ -15,22 +15,16 @@ export class BlizzardStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = this.computeValue(this.config.damage, pokemon)
+    const { damage, freezeDuration, radius, frozenTargetBonusPercent } =
+      this.computeConfigWithScaling(pokemon)
     board
-      .getCellsInRadius(
-        pokemon.positionX,
-        pokemon.positionY,
-        this.config.radius,
-        false
-      )
+      .getCellsInRadius(pokemon.positionX, pokemon.positionY, radius, false)
       .forEach((cell) => {
         if (cell.value && pokemon.team != cell.value.team) {
           const enemy = cell.value
           enemy.handleSpecialDamage(
             enemy.status.freeze
-              ? Math.round(
-                  damage * (1 + this.config.frozenTargetBonusPercent / 100)
-                )
+              ? Math.round(damage * (1 + frozenTargetBonusPercent / 100))
               : damage,
             board,
             AttackType.SPECIAL,
@@ -38,11 +32,7 @@ export class BlizzardStrategy extends AbilityStrategy {
             crit,
             false
           )
-          enemy.status.triggerFreeze(
-            this.config.freezeDuration * 1000,
-            enemy,
-            pokemon
-          )
+          enemy.status.triggerFreeze(freezeDuration * 1000, enemy, pokemon)
         }
       })
   }

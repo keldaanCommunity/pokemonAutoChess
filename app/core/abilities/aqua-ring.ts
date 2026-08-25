@@ -10,7 +10,7 @@ export class AquaRingStrategy extends AbilityStrategy {
 
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const heal = this.computeValue(this.config.heal, pokemon)
+    const { heal } = this.computeConfigWithScaling(pokemon)
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(
         pokemon.team,

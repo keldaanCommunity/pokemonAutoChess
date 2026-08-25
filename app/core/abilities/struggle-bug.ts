@@ -20,14 +20,11 @@ export class StruggleBugStrategy extends AbilityStrategy {
 
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.addAbilityPower(
-          -this.config.abilityPowerReduction,
-          pokemon,
-          0,
-          false
-        )
+        const { damage, abilityPowerReduction } =
+          this.computeConfigWithScaling(pokemon)
+        cell.value.addAbilityPower(-abilityPowerReduction, pokemon, 0, false)
         cell.value.handleSpecialDamage(
-          this.computeValue(this.config.damage, pokemon),
+          damage,
           board,
           AttackType.SPECIAL,
           pokemon,

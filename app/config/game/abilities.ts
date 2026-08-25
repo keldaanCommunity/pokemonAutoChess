@@ -8,22 +8,40 @@ export const AbilityConfigs = {
     heal: "[20,40,80,160,SP]"
   },
   [Ability.BLIZZARD]: {
-    damage: "[10,20,40,80,SP]",
+    damage: "[10,20,40,80,SP]", 
     freezeDuration: 1.5,
     radius: 4,
     frozenTargetBonusPercent: 30
+  },
+  [Ability.FIERY_WRATH]: {
+    damage: "[30,40,50,80,SP]",
+    radius: 4,
+    flinchChance: "[50,LK]",
+    flinchDuration: 4
   },
   [Ability.FREEZING_GLARE]: {
     damage: "[20,40,80,160,SP]",
     freezeChance: "[50,LK]",
     freezeDuration: "[3,3,3,6]"
   },
+  [Ability.NATURAL_GIFT]: {
+    heal: "[30,60,90,150,SP]",
+    safeguardDuration: "[1,2,3,6]"
+  },
   [Ability.PROTECT]: {
     duration: "[0.5,1.5,2.5,4,ND=1] + [0.5,1.5,2.5,4,SP,ND=1]"
+  },
+  [Ability.SING]: {
+    targetCount: "[1,2,3,5]",
+    sleepDuration: "[2,2,2,4,SP,ND=1]"
   },
   [Ability.STRUGGLE_BUG]: {
     damage: "[10,20,30,60,SP]",
     abilityPowerReduction: 30
+  },
+  [Ability.TAIL_GLOW]: {
+    damage: "[10,20,30,60,SP]",
+    abilityPowerIncrease: 30
   }
 } as const satisfies Partial<Record<Ability, AbilityConfig>>
 
