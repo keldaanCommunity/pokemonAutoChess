@@ -13,7 +13,26 @@ export class AbilityStrategy {
     pokemon: PokemonEntity
   ): number {
     if (typeof value === "number") return value
-    return value[pokemon.stars - 1] ?? value[value.length - 1]
+
+    return value.split(" + ").reduce((total, term) => {
+      const tokens = term.slice(1, -1).split(",")
+      const tierValues = tokens.map(Number).filter(Number.isFinite)
+      let result =
+        tierValues[pokemon.stars - 1] ?? tierValues[tierValues.length - 1]!
+
+      const apModifier = tokens.find((token) => token.startsWith("SP"))
+      if (apModifier) {
+        const factor = Number(apModifier.split("=")[1] ?? 1)
+        result *= 1 + (pokemon.ap * factor) / 100
+      } else if (tokens.includes("LK")) {
+        result = Math.min(
+          100,
+          Math.pow(result / 100, 1 - pokemon.luck / 100) * 100
+        )
+      }
+
+      return total + result
+    }, 0)
   }
 
   process(

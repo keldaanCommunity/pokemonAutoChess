@@ -35,7 +35,8 @@ export class BlizzardStrategy extends AbilityStrategy {
             board,
             AttackType.SPECIAL,
             pokemon,
-            crit
+            crit,
+            false
           )
           enemy.status.triggerFreeze(
             this.config.freezeDuration * 1000,

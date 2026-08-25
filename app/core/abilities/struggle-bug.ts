@@ -31,7 +31,8 @@ export class StruggleBugStrategy extends AbilityStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit
+          crit,
+          false
         )
       }
     })

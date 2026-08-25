@@ -40,7 +40,7 @@ export class AquaRingStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
           cell.value.status.clearNegativeStatus(cell.value, pokemon)
-          cell.value.handleHeal(heal, pokemon, 1, crit)
+          cell.value.handleHeal(heal, pokemon, 0, crit)
         }
       })
     }

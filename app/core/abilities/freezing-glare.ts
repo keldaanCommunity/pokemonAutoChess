@@ -19,6 +19,7 @@ export class FreezingGlareStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = this.computeValue(this.config.damage, pokemon)
+    const freezeChance = this.computeValue(this.config.freezeChance, pokemon)
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
@@ -26,9 +27,10 @@ export class FreezingGlareStrategy extends AbilityStrategy {
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit
+          crit,
+          false
         )
-        if (chance(this.config.freezeChance / 100, pokemon)) {
+        if (chance(freezeChance / 100)) {
           const freezeDuration = this.computeValue(
             this.config.freezeDuration,
             pokemon

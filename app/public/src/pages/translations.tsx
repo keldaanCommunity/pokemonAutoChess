@@ -208,12 +208,8 @@ export default function TranslationsPage() {
     async (token: string) => {
       if (!targetData) return
       const merged = applyEditsToObject(targetData, edits)
-      const descriptionErrors = allLeaves.flatMap(({ path, enValue }) => {
-        const error = getDescriptionError(
-          path,
-          getNestedValue(merged, path),
-          enValue
-        )
+      const descriptionErrors = allLeaves.flatMap(({ path }) => {
+        const error = getDescriptionError(path, getNestedValue(merged, path))
         return error ? [`${path}: ${error}`] : []
       })
       if (descriptionErrors.length > 0) {

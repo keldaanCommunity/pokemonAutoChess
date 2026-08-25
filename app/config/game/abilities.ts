@@ -1,28 +1,28 @@
 import { Ability } from "../../types/enum/Ability"
 
-export type AbilityConfigValue = number | readonly number[]
+export type AbilityConfigValue = number | string
 export type AbilityConfig = Readonly<Record<string, AbilityConfigValue>>
 
 export const AbilityConfigs = {
   [Ability.AQUA_RING]: {
-    heal: [20, 40, 80, 160]
+    heal: "[20,40,80,160,SP]"
   },
   [Ability.BLIZZARD]: {
-    damage: [10, 20, 40, 80],
+    damage: "[10,20,40,80,SP]",
     freezeDuration: 1.5,
     radius: 4,
     frozenTargetBonusPercent: 30
   },
   [Ability.FREEZING_GLARE]: {
-    damage: [20, 40, 80, 160],
-    freezeChance: 50,
-    freezeDuration: [3, 3, 3, 6]
+    damage: "[20,40,80,160,SP]",
+    freezeChance: "[50,LK]",
+    freezeDuration: "[3,3,3,6]"
   },
   [Ability.PROTECT]: {
-    duration: [0.5, 1.5, 2.5, 4]
+    duration: "[0.5,1.5,2.5,4,ND=1] + [0.5,1.5,2.5,4,SP,ND=1]"
   },
   [Ability.STRUGGLE_BUG]: {
-    damage: [10, 20, 30, 60],
+    damage: "[10,20,30,60,SP]",
     abilityPowerReduction: 30
   }
 } as const satisfies Partial<Record<Ability, AbilityConfig>>
