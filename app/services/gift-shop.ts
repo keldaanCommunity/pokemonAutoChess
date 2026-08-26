@@ -130,7 +130,9 @@ const giftRandomPokemonByRarity = (rarity: Rarity) => (toPlayer: Player) => {
 
   const nbOfSynergies =
     rarity === Rarity.ULTRA || rarity === Rarity.LEGENDARY ? 2 : 1
-  let wantedSynergies = toPlayer.synergies.getTopSynergies(nbOfSynergies)
+  let wantedSynergies = toPlayer.synergies
+    .getTopSynergies(nbOfSynergies)
+    .filter((type) => toPlayer.synergies.hasSynergyActive(type)) // only consider active types
   if (wantedSynergies.includes(Synergy.BABY)) {
     wantedSynergies = toPlayer.synergies.getTopSynergies(nbOfSynergies + 1)
     wantedSynergies.splice(wantedSynergies.indexOf(Synergy.BABY), 1)
@@ -161,8 +163,9 @@ const giftRandomPokemonByRarity = (rarity: Rarity) => (toPlayer: Player) => {
     return wantedSynergies.some((type) => types.includes(type))
   })
 
-  if (pkmByRarityWithWantedSyns.length === 0)
-    pkmByRarityWithWantedSyns.push(Pkm.UNOWN_A) //Fallback if no Pokémon satisfy the filter
+  if (pkmByRarityWithWantedSyns.length === 0) {
+    pkmByRarityWithWantedSyns.push(...pkmByRarity[rarity]) //Fallback if no Pokémon satisfy the filter
+  }
   const pkm = pickRandomIn(pkmByRarityWithWantedSyns) ?? Pkm.DITTO
   const replacement = PokemonFactory.createPokemonFromName(
     getPokemonData(pkm).name,
@@ -187,7 +190,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   const otherPokemon: Pokemon[] = []
   toPlayer.board.forEach((pkm: Pokemon) => {
     if (pkm.hasEvolution) pokemonThatCanEvolve.push(pkm)
-    else if(!isOnBench(pkm)) otherPokemon.push(pkm)
+    else if (!isOnBench(pkm)) otherPokemon.push(pkm)
   })
 
   if (pokemonThatCanEvolve.length > 0) {
