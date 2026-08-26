@@ -1,12 +1,16 @@
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class AquaRingStrategy extends AbilityStrategy {
   requiresTarget = false
+  readonly config = AbilityConfigs[Ability.AQUA_RING]
+
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const heal = [20, 40, 80, 160][pokemon.stars - 1] ?? 160
+    const { heal } = this.computeConfigWithScaling(pokemon)
     const mostSurroundedCoordinate =
       pokemon.state.getMostSurroundedCoordinateAvailablePlace(
         pokemon.team,
@@ -36,7 +40,7 @@ export class AquaRingStrategy extends AbilityStrategy {
       cells.forEach((cell) => {
         if (cell.value && cell.value.team === pokemon.team) {
           cell.value.status.clearNegativeStatus(cell.value, pokemon)
-          cell.value.handleHeal(heal, pokemon, 1, crit)
+          cell.value.handleHeal(heal, pokemon, 0, crit)
         }
       })
     }

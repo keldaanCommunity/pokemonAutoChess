@@ -1,8 +1,12 @@
+import { AbilityConfigs } from "../../config/game/abilities"
+import { Ability } from "../../types/enum/Ability"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class NaturalGiftStrategy extends AbilityStrategy {
+  readonly config = AbilityConfigs[Ability.NATURAL_GIFT]
+
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
@@ -12,13 +16,12 @@ export class NaturalGiftStrategy extends AbilityStrategy {
         (cell) => cell && cell.team === pokemon.team
       ) as PokemonEntity[]
     ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
-    const heal = [30, 60, 90, 150][pokemon.stars - 1] ?? 150
+    const { heal, safeguardDuration } = this.computeConfigWithScaling(pokemon)
 
     if (lowestHealthAlly) {
-      lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
-      const runeProtectDuration = [1000,2000,3000,6000][pokemon.stars - 1] ?? 6000
+      lowestHealthAlly.handleHeal(heal, pokemon, 0, crit)
       lowestHealthAlly.status.triggerRuneProtect(
-        runeProtectDuration,
+        safeguardDuration * 1000,
         lowestHealthAlly,
         pokemon
       )
