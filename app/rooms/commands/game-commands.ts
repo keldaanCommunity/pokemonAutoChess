@@ -1267,6 +1267,9 @@ export class OnUpdateCommand extends Command<
       reinforcement.status.runeProtectCooldown =
         entity.status.runeProtectCooldown
 
+      // bring other tree status
+      reinforcement.status.tree = entity.status.tree
+
       // bring over current active fields (debatable, since technically positie status in wiki)
       reinforcement.status.grassField = entity.status.grassField
       reinforcement.status.fairyField = entity.status.fairyField
