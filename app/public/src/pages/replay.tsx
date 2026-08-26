@@ -8,7 +8,7 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../package.json"
 import { FIREBASE_CONFIG } from "../../../config"
 import type GameState from "../../../rooms/states/game-state"
-import { GamePhaseState } from "../../../types/enum/Game"
+import { GameMode, GamePhaseState } from "../../../types/enum/Game"
 import {
   deleteStoredReplay,
   downloadStoredReplay,
@@ -38,6 +38,7 @@ import { usePreference, usePreferences } from "../preferences"
 import { leaveGame, setPlayer } from "../stores/GameStore"
 import { logIn } from "../stores/NetworkStore"
 import { Checkbox } from "./component/checkbox/checkbox"
+import { GameModeIcon } from "./component/icons/game-mode-icon"
 import PokemonPortrait from "./component/pokemon-portrait"
 import ReplayControls from "./component/replay/replay-controls"
 import ReplayErrorBoundary from "./component/replay/replay-error-boundary"
@@ -528,6 +529,10 @@ function RowSummary({ summary }: { summary: ReplaySummary }) {
   )
 }
 
+// summaries are read from files, so the value can be anything
+const isGameMode = (m: unknown): m is GameMode =>
+  (Object.values(GameMode) as unknown[]).includes(m)
+
 // one recording's summary, shown the same in a library row and the file-picker preview; only the actions differ (passed as `actions`)
 function RecordingSummary({
   name,
@@ -552,10 +557,12 @@ function RecordingSummary({
 }) {
   const { t } = useTranslation()
   const skew = game ? detectBuildSkew(game, RUNNING_BUILD) : null
+  const gameMode = summary?.gameMode
   return (
     <div className="replay-row my-box">
       {/* team portraits go on their own full-width line below so they don't compete with the actions for width */}
       <div className="replay-row-top">
+        {isGameMode(gameMode) && <GameModeIcon gameMode={gameMode} />}
         <div className="replay-row-info">
           {typeof name === "string" && name && (
             <span className="replay-row-name">{name}</span>

@@ -88,6 +88,7 @@ function captureSummary(): ReplaySummary | undefined {
     if (rank) summary.rank = rank
     if (team.length) summary.team = team
     if (player.name) summary.name = player.name
+    if (state?.gameMode) summary.gameMode = state.gameMode
     return summary.rank || summary.team || summary.name ? summary : undefined
   } catch {
     return undefined
