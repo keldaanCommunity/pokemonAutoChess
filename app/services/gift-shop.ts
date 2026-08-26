@@ -187,7 +187,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   const otherPokemon: Pokemon[] = []
   toPlayer.board.forEach((pkm: Pokemon) => {
     if (pkm.hasEvolution) pokemonThatCanEvolve.push(pkm)
-    else otherPokemon.push(pkm)
+    else if(!isOnBench(pkm)) otherPokemon.push(pkm)
   })
 
   if (pokemonThatCanEvolve.length > 0) {
