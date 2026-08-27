@@ -215,6 +215,38 @@ export class OnJoinCommand extends Command<
           )
         }
       }
+
+      // Ready up cooldown
+      const nbExpectedPlayers = MAX_PLAYERS_PER_GAME
+      if (
+        this.state.gameMode === GameMode.DOUBLE_UP &&
+        this.state.users.size === nbExpectedPlayers
+      ) {
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `You have 2 minutes to form the teams. Click Ready to lock your team slot.`
+        })
+        this.state.readyUpCooldown = this.clock.setTimeout(
+          () => {
+            this.state.users.forEach((user, uid) => {
+              if (!user.ready) {
+                this.state.users.delete(uid)
+                const client = this.room.clients.find(
+                  (c) => c.auth?.uid === uid
+                )
+                client?.leave(CloseCodes.USER_KICKED) // kick double up players that dont ready up in 2 minutes
+                this.room.state.addMessage({
+                  authorId: "server",
+                  avatar: user.avatar,
+                  payload: `${user.name} has been kicked for not readying on time.`
+                })
+              }
+            })
+            this.state.readyUpCooldown = null
+          },
+          2 * 60 * 1000
+        )
+      }
     } catch (error) {
       logger.error(error)
     }
@@ -321,6 +353,7 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStartedAt = new Date().toISOString()
+        this.state.readyUpCooldown?.clear()
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
 
@@ -677,6 +710,11 @@ export class OnLeaveCommand extends Command<
               })
             }
           }
+
+          if (this.state.readyUpCooldown) {
+            this.state.readyUpCooldown.clear()
+            this.state.readyUpCooldown = null
+          }
         }
       }
     } catch (error) {
@@ -716,7 +754,6 @@ export class OnToggleReadyCommand extends Command<
 
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
-        this.state.gameMode !== GameMode.DOUBLE_UP &&
         this.state.users.size === nbExpectedPlayers &&
         schemaValues(this.state.users).every((user) => user.ready)
       ) {
