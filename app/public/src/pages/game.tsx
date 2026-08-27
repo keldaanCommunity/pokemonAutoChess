@@ -10,6 +10,7 @@ import {
   RegionDetails
 } from "../../../config"
 import type { IPokemonRecord } from "../../../models/colyseus-models/game-record"
+import type Player from "../../../models/colyseus-models/player"
 import type { Wanderer } from "../../../models/colyseus-models/wanderer"
 import { PVEStages } from "../../../models/pve-stages"
 import type AfterGameState from "../../../rooms/states/after-game-state"
@@ -49,6 +50,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from "../hooks"
+import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { authenticateUser, client, joinGame, rooms } from "../network"
 import { usePreference } from "../preferences"
 import store from "../stores"
@@ -131,16 +133,32 @@ export function getGameContainer(): GameContainer {
   return gameContainer
 }
 
-export function cyclePlayers(amt: number) {
+export function cyclePlayers(delta: number, byRank = false) {
   const players = schemaValues(gameContainer.room?.state.players)
-  playerClick(
-    players[
-      (players.findIndex((p) => p === gameContainer.player) +
-        amt +
-        players.length) %
-        players.length
-    ].id
-  )
+  let newPlayer: Player
+  if (byRank) {
+    const playersByRank = [...players].sort((a, b) => b.rank - a.rank)
+    newPlayer =
+      playersByRank[
+        (playersByRank.findIndex(
+          (p) => p.id === gameContainer.playerIdSpectated
+        ) +
+          delta +
+          playersByRank.length) %
+          playersByRank.length
+      ]
+  } else {
+    newPlayer =
+      players[
+        (players.findIndex((p) => p.id === gameContainer.playerIdSpectated) +
+          delta +
+          players.length) %
+          players.length
+      ]
+  }
+  if (newPlayer) {
+    playerClick(newPlayer.id)
+  }
 }
 
 export function playerClick(id: string) {

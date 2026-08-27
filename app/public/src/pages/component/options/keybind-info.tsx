@@ -115,6 +115,16 @@ export default function KeybindInfo() {
         </dt>
         <dd>{t("options.key_description.next_player")}</dd>
 
+         <dt>
+          <RemappableKey keyId="prev_player_by_rank" />
+        </dt>
+        <dd>{t("options.key_description.prev_player_by_rank")}</dd>
+
+        <dt>
+          <RemappableKey keyId="next_player_by_rank" />
+        </dt>
+        <dd>{t("options.key_description.next_player_by_rank")}</dd>
+
         <dt>
           <RemappableKey keyId="board_return" />
         </dt>

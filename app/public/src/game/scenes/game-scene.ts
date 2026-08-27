@@ -246,6 +246,7 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
+    this.input.keyboard?.enableGlobalCapture()
 
     if (!this.spectate) {
       this.input.keyboard!.on(
@@ -264,7 +265,8 @@ export default class GameScene extends Scene {
         this.buyExperience()
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonDragged != null) return
         if (this.shopIndexHovered !== null) {
           this.removeFromShop(this.shopIndexHovered)
@@ -304,6 +306,14 @@ export default class GameScene extends Scene {
 
     this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
       cyclePlayers(1)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.prev_player_by_rank, () => {
+      cyclePlayers(-1, true)
+    })
+
+    this.input.keyboard!.on("keydown-" + keybindings.next_player_by_rank, () => {
+      cyclePlayers(1, true)
     })
   }
 

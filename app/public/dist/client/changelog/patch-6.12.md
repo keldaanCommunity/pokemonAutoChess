@@ -24,6 +24,7 @@
 - You can now save teams from your game history as local files to load them later into your team planner
 - Wiki Regions has been updated to allow filtering regions by synergy
 - Added an option to disable custom cursors
+- Added new keybindings to cycle between players by rank
 - Added board effects descriptions in Wiki > Statuses
 
 # Bugfix
