@@ -15,7 +15,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
-import { getDescriptionError } from "./utils/ability-description"
+import { getDescriptionError } from "./utils/description-config"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
@@ -214,7 +214,7 @@ export default function TranslationsPage() {
       })
       if (descriptionErrors.length > 0) {
         setPrError(
-          `Fix ability description placeholders and formatting before submitting:\n${descriptionErrors.join("\n")}`
+          `Fix description placeholders before submitting:\n${descriptionErrors.join("\n")}`
         )
         return
       }

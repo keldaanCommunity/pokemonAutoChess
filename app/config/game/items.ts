@@ -1,5 +1,20 @@
 import { Stat } from "../../types/enum/Game"
 import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import type { BalanceConfig } from "./balance"
+
+export const ItemConfigs = {
+  [Item.LOADED_DICE]: {
+    triggerChance: {
+      valuePerTier: [50],
+      luckScaling: true
+    },
+    repeatedDamagePercent: 75
+  }
+} as const satisfies Partial<Record<Item, BalanceConfig>>
+
+export function getItemConfig(item: Item): BalanceConfig | undefined {
+  return (ItemConfigs as Partial<Record<Item, BalanceConfig>>)[item]
+}
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },

@@ -2,7 +2,10 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { RarityColor, SynergyTiersThresholds } from "../../../../../config"
-import { SynergyTiers } from "../../../../../config/game/synergies"
+import {
+  getSynergyConfig,
+  SynergyTiers
+} from "../../../../../config/game/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -97,7 +100,8 @@ export function WikiType(props: { type: Synergy }) {
       </h2>
       <p>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo: "" })
+          t(`synergy_description.${props.type}`, { additionalInfo: "" }),
+          { config: getSynergyConfig(props.type) }
         )}
       </p>
       {synergyTiers.map((tier: (typeof synergyTiers)[number], i) => {

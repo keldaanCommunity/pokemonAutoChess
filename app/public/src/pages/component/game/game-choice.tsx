@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { getItemConfig } from "../../../../../config/game/items"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
@@ -168,7 +169,9 @@ export default function GameChoice() {
                         src={"assets/item/" + item + ".png"}
                       />
                       <p>
-                        {addIconsToDescription(t(`item_description.${item}`))}
+                        {addIconsToDescription(t(`item_description.${item}`), {
+                          config: getItemConfig(item)
+                        })}
                       </p>
                     </div>
                   )}
@@ -194,7 +197,9 @@ export default function GameChoice() {
                 />
                 <h3 style={{ margin: "0.25em 0" }}>{t(`item.${item}`)}</h3>
                 <p style={{ marginBottom: "0.5em" }}>
-                  {addIconsToDescription(t(`item_description.${item}`))}
+                  {addIconsToDescription(t(`item_description.${item}`), {
+                    config: getItemConfig(item)
+                  })}
                 </p>
                 {choice.costs[index] > 0 && (
                   <p

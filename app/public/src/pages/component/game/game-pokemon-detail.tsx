@@ -7,6 +7,8 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
 import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { DishByPkm } from "../../../../../config/game/dishes"
+import { getItemConfig } from "../../../../../config/game/items"
+import { getPassiveConfig } from "../../../../../config/game/passives"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import type { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
@@ -349,7 +351,11 @@ export function GamePokemonDetail(props: {
             alt={dish}
             title={t(`item.${dish}`)}
           />
-          <p>{addIconsToDescription(t(`item_description.${dish}`))}</p>
+          <p>
+            {addIconsToDescription(t(`item_description.${dish}`), {
+              config: getItemConfig(dish)
+            })}
+          </p>
         </div>
       )}
       {pokemon.passive !== Passive.NONE && (
@@ -360,11 +366,14 @@ export function GamePokemonDetail(props: {
                 stacks: pokemon.stacks
               }),
               {
-                ap: pokemon.ap,
-                luck: pokemon.luck,
-                stars,
-                stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki"
+                stats: {
+                  ap: pokemon.ap,
+                  luck: pokemon.luck,
+                  stars,
+                  stages: getPokemonData(pokemon.name).stages,
+                  showAbilityTiers: props.origin === "wiki"
+                },
+                config: getPassiveConfig(pokemon.passive)
               }
             )}
           </p>

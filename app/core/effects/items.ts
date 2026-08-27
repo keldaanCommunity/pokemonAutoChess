@@ -1,5 +1,7 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { computeBalance } from "../../config/game/balance"
 import { DishByPkm } from "../../config/game/dishes"
+import { ItemConfigs } from "../../config/game/items"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -124,7 +126,9 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
     specialDamage,
     trueDamage
   }) => {
-    if (totalDamage > 0 && target && chance(0.5, pokemon)) {
+    const config = ItemConfigs[Item.LOADED_DICE]
+    const triggerChance = computeBalance(config.triggerChance, pokemon) / 100
+    if (totalDamage > 0 && target && chance(triggerChance)) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const candidateTargets = cells
         .filter((cell) => cell.value && pokemon.team != cell.value.team)
@@ -132,9 +136,14 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
       const nbBounces = 1
-      const secondHitPhysicalDamage = Math.round(physicalDamage * 0.75)
-      const secondHitSpecialDamage = Math.round(specialDamage * 0.75)
-      const secondHitTrueDamage = Math.round(trueDamage * 0.75)
+      const repeatedDamageRatio = config.repeatedDamagePercent / 100
+      const secondHitPhysicalDamage = Math.round(
+        physicalDamage * repeatedDamageRatio
+      )
+      const secondHitSpecialDamage = Math.round(
+        specialDamage * repeatedDamageRatio
+      )
+      const secondHitTrueDamage = Math.round(trueDamage * repeatedDamageRatio)
       for (let i = 0; i < nbBounces; i++) {
         const secondHitTarget = candidateTargets.shift()
         if (!secondHitTarget) break

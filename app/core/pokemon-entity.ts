@@ -7,7 +7,10 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
-import { SynergyTiers } from "../config/game/synergies"
+import { AbilityConfigs } from "../config/game/abilities"
+import { computeBalance } from "../config/game/balance"
+import { EffectConfigs } from "../config/game/effects"
+import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -372,9 +375,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
               (this.effects.has(EffectEnum.ABILITY_CRIT) &&
                 chance(this.critChance / 100, this))
             const bounceDamage = Math.round(
-              ([0.5, 1, 2, 4][this.stars - 1] ?? 4) *
+              (computeBalance(
+                AbilityConfigs[Ability.MAGIC_BOUNCE].reflectedDamagePercent,
+                this
+              ) /
+                100) *
                 damage *
-                (1 + this.ap / 100) *
                 (bounceCrit ? this.critPower : 1)
             )
             this.broadcastAbility({
@@ -1023,8 +1029,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
-      const burnChance = 0.3
-      if (chance(burnChance, this)) {
+      const config = EffectConfigs[EffectEnum.FLAME_BODY]
+      const burnChance = computeBalance(config.burnChance, this) / 100
+      if (chance(burnChance)) {
         target.status.triggerBurn(3000, target, this)
       }
     }
@@ -1037,8 +1044,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      const silenceChance = 0.15
-      if (chance(silenceChance, this)) {
+      const silenceChance =
+        computeBalance(SynergyConfigs[Synergy.GHOST].effectChance, this) / 100
+      if (chance(silenceChance)) {
         target.status.triggerSilence(2000, target, this)
       }
     }

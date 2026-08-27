@@ -1,46 +1,100 @@
 import { Ability } from "../../types/enum/Ability"
+import type { BalanceConfig } from "./balance"
 
-export type AbilityConfigValue = number | string
-export type AbilityConfig = Readonly<Record<string, AbilityConfigValue>>
+export type AbilityConfig = BalanceConfig
 
 export const AbilityConfigs = {
   [Ability.AQUA_RING]: {
-    heal: "[20,40,80,160,SP]"
+    heal: {
+      valuePerTier: [20, 40, 80, 160],
+      apScaling: 1
+    }
   },
   [Ability.BLIZZARD]: {
-    damage: "[10,20,40,80,SP]", 
+    damage: {
+      valuePerTier: [10, 20, 40, 80],
+      apScaling: 1
+    },
     freezeDuration: 1.5,
     radius: 4,
     frozenTargetBonusPercent: 30
   },
   [Ability.FIERY_WRATH]: {
-    damage: "[30,40,50,80,SP]",
+    damage: {
+      valuePerTier: [30, 40, 50, 80],
+      apScaling: 1
+    },
     radius: 4,
-    flinchChance: "[50,LK]",
+    flinchChance: {
+      valuePerTier: [50],
+      luckScaling: true
+    },
     flinchDuration: 4
   },
   [Ability.FREEZING_GLARE]: {
-    damage: "[20,40,80,160,SP]",
-    freezeChance: "[50,LK]",
-    freezeDuration: "[3,3,3,6]"
+    damage: {
+      valuePerTier: [20, 40, 80, 160],
+      apScaling: 1
+    },
+    freezeChance: {
+      valuePerTier: [50],
+      luckScaling: true
+    },
+    freezeDuration: {
+      valuePerTier: [3, 3, 3, 6]
+    }
+  },
+  [Ability.MAGIC_BOUNCE]: {
+    reflectedDamagePercent: {
+      valuePerTier: [50, 75, 150],
+      apScaling: 1
+    },
+    duration: 4
   },
   [Ability.NATURAL_GIFT]: {
-    heal: "[30,60,90,150,SP]",
-    safeguardDuration: "[1,2,3,6]"
+    heal: {
+      valuePerTier: [30, 60, 90, 150],
+      apScaling: 1
+    },
+    safeguardDuration: {
+      valuePerTier: [1, 2, 3, 6]
+    }
   },
   [Ability.PROTECT]: {
-    duration: "[0.5,1.5,2.5,4,ND=1] + [0.5,1.5,2.5,4,SP,ND=1]"
+    duration: [
+      {
+        valuePerTier: [0.5, 1.5, 2.5, 4],
+        nbDecimals: 1
+      },
+      {
+        valuePerTier: [0.5, 1.5, 2.5, 4],
+        apScaling: 1,
+        nbDecimals: 1
+      }
+    ]
   },
   [Ability.SING]: {
-    targetCount: "[1,2,3,5]",
-    sleepDuration: "[2,2,2,4,SP,ND=1]"
+    targetCount: {
+      valuePerTier: [1, 2, 3, 5]
+    },
+    sleepDuration: {
+      valuePerTier: [2, 2, 2, 4],
+      apScaling: 1,
+      nbDecimals: 1
+    }
   },
   [Ability.STRUGGLE_BUG]: {
-    damage: "[10,20,30,60,SP]",
+    damage: {
+      valuePerTier: [10, 20, 30, 60],
+      apScaling: 1
+    },
     abilityPowerReduction: 30
   },
   [Ability.TAIL_GLOW]: {
-    damage: "[10,20,30,60,SP]",
+    damage: {
+      valuePerTier: [10, 20, 30, 60],
+      apScaling: 1
+    },
     abilityPowerIncrease: 30
   }
 } as const satisfies Partial<Record<Ability, AbilityConfig>>

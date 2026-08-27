@@ -8,6 +8,7 @@ import {
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
+  SynergyConfigs,
   SynergyTiers
 } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
@@ -1260,7 +1261,9 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.CURSE_OF_FATE:
         if (pokemon.types.has(Synergy.GHOST)) {
           pokemon.effects.add(effect)
-          pokemon.addDodgeChance(0.15, pokemon, 0, false)
+          const dodgeChance =
+            SynergyConfigs[Synergy.GHOST].effectChance.valuePerTier[0] / 100
+          pokemon.addDodgeChance(dodgeChance, pokemon, 0, false)
         }
         break
 

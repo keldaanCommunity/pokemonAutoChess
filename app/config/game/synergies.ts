@@ -2,6 +2,20 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { Rarity } from "../../types/enum/Game"
 import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
+import type { BalanceConfig } from "./balance"
+
+export const SynergyConfigs = {
+  [Synergy.GHOST]: {
+    effectChance: {
+      valuePerTier: [15],
+      luckScaling: true
+    }
+  }
+} as const satisfies Partial<Record<Synergy, BalanceConfig>>
+
+export function getSynergyConfig(synergy: Synergy): BalanceConfig | undefined {
+  return (SynergyConfigs as Partial<Record<Synergy, BalanceConfig>>)[synergy]
+}
 
 export const SynergyTiers = {
   [Synergy.NORMAL]: [

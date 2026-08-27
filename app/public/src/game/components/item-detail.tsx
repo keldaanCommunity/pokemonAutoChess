@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
+import { getItemConfig } from "../../../../config/game/items"
 import { Stat } from "../../../../types/enum/Game"
 import { Gifts } from "../../../../types/enum/GiftShop"
 import {
@@ -104,7 +105,9 @@ export function ItemDetailTooltipContent({
         ))}
       </div>
       <p className="game-item-detail-description">
-        {addIconsToDescription(t(`item_description.${item}`))}
+        {addIconsToDescription(t(`item_description.${item}`), {
+          config: getItemConfig(item)
+        })}
       </p>
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">

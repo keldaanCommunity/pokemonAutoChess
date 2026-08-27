@@ -1,4 +1,6 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
+import { computeBalance } from "../config/game/balance"
+import { PassiveConfigs } from "../config/game/passives"
 import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
@@ -139,7 +141,11 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
-        specialDamage += 1 * damage * (1 + pokemon.ap / 100)
+        const additionalDamagePercent = computeBalance(
+          PassiveConfigs[Passive.SPOT_PANDA].additionalDamagePercent,
+          pokemon
+        )
+        specialDamage += (damage * additionalDamagePercent) / 100
       }
 
       let trueDamagePart = 0

@@ -3,7 +3,10 @@ import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
-import { InimitableAbilities } from "../../../../../config/game/abilities"
+import {
+  getAbilityConfig,
+  InimitableAbilities
+} from "../../../../../config/game/abilities"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -17,7 +20,6 @@ import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
-import { translateAbilityDescription } from "../../utils/ability-description"
 import { addIconsToDescription } from "../../utils/descriptions"
 import jsxTextContent, { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
@@ -73,7 +75,8 @@ export default function WikiAbility() {
         (!searchQuery.trim() ||
           jsxTextContent(
             addIconsToDescription(
-              `${t(`ability.${a}`)} ${translateAbilityDescription(a)}`
+              `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`,
+              { config: getAbilityConfig(a) }
             )
           )
             .toLowerCase()
@@ -174,7 +177,9 @@ function AbilityRow({
                 </p>
               )}
               <p>
-                {addIconsToDescription(translateAbilityDescription(ability))}
+                {addIconsToDescription(t(`ability_description.${ability}`), {
+                  config: getAbilityConfig(ability)
+                })}
               </p>
             </div>
             <div>

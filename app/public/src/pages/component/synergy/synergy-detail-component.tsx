@@ -5,6 +5,7 @@ import {
   SynergyTiersThresholds
 } from "../../../../../config"
 import {
+  getSynergyConfig,
   type SynergyTier,
   SynergyTiers
 } from "../../../../../config/game/synergies"
@@ -156,7 +157,8 @@ export default function SynergyDetailComponent(props: {
       </div>
       <p style={{ whiteSpace: "pre-wrap" }}>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo })
+          t(`synergy_description.${props.type}`, { additionalInfo }),
+          { config: getSynergyConfig(props.type) }
         )}
       </p>
 

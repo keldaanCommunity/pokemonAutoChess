@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react"
 import {
-  getDescriptionError,
-  resolveDescriptionPreview
-} from "../../utils/ability-description"
+  getDescriptionConfig,
+  getDescriptionError
+} from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./translation-row.css"
 
@@ -29,8 +29,7 @@ export const TranslationRow = React.memo(function TranslationRow({
   const [previewBelow, setPreviewBelow] = useState(false)
   const enWrapRef = useRef<HTMLDivElement>(null)
   const targetWrapRef = useRef<HTMLDivElement>(null)
-  const enPreview = resolveDescriptionPreview(path, enValue)
-  const targetPreview = resolveDescriptionPreview(path, targetValue)
+  const descriptionConfig = getDescriptionConfig(path)
   const descriptionError = getDescriptionError(path, targetValue)
 
   function handleFocus(field: "en" | "target") {
@@ -54,7 +53,7 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "en" && enValue && (
           <div className="translation-preview">
-            {addIconsToDescription(enPreview)}
+            {addIconsToDescription(enValue, { config: descriptionConfig })}
           </div>
         )}
         <textarea
@@ -74,7 +73,9 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "target" && targetValue && (
           <div className="translation-preview">
-            {addIconsToDescription(targetPreview)}
+            {addIconsToDescription(targetValue, {
+              config: descriptionConfig
+            })}
           </div>
         )}
         <textarea

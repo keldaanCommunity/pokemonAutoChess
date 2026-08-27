@@ -1,5 +1,6 @@
+import { t } from "i18next"
+import { getAbilityConfig } from "../../../../../config/game/abilities"
 import type { Ability } from "../../../../../types/enum/Ability"
-import { translateAbilityDescription } from "../../utils/ability-description"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./ability-tooltip.css"
 
@@ -13,10 +14,13 @@ export function AbilityTooltip(props: {
     showAbilityTiers?: boolean
   }
 }) {
-  const description = translateAbilityDescription(props.ability)
+  const description = t(`ability_description.${props.ability}`)
   return (
     <p className="ability-description">
-      {addIconsToDescription(description, props.stats)}
+      {addIconsToDescription(description, {
+        stats: props.stats,
+        config: getAbilityConfig(props.ability)
+      })}
     </p>
   )
 }

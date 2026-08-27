@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { getEffectConfig } from "../../../../../config/game/effects"
 import { BoardEffects } from "../../../../../types/enum/Effect"
 import { DocumentedStatuses } from "../../../../../types/enum/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -26,7 +27,11 @@ export default function WikiStatus() {
         {BoardEffects.map((effect) => (
           <div key={effect} className="my-box">
             <dt>{addIconsToDescription(effect)}</dt>
-            <dd>{addIconsToDescription(t(`effect_description.${effect}`))}</dd>
+            <dd>
+              {addIconsToDescription(t(`effect_description.${effect}`), {
+                config: getEffectConfig(effect)
+              })}
+            </dd>
           </div>
         ))}
       </dl>

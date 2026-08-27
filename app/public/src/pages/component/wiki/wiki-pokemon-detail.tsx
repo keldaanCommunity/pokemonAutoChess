@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { RarityColor } from "../../../../../config"
+import { getPassiveConfig } from "../../../../../config/game/passives"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -176,7 +177,8 @@ export default function WikiPokemonDetail(props: {
             <dd>
               <p>
                 {addIconsToDescription(
-                  t(`passive_description.${pokemonData.passive}`)
+                  t(`passive_description.${pokemonData.passive}`),
+                  { config: getPassiveConfig(pokemonData.passive) }
                 )}
               </p>
             </dd>

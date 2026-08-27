@@ -1,5 +1,6 @@
 import { t } from "i18next"
-import React, { type ReactElement } from "react"
+import React, { type ReactNode } from "react"
+import type { BalanceConfig } from "../../../../config/game/balance"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -15,6 +16,7 @@ import { isIn } from "../../../../utils/array"
 import { max, roundToNDigits } from "../../../../utils/number"
 import { keys } from "../../../../utils/object"
 import SynergyIcon from "../component/icons/synergy-icon"
+import { type DescriptionStats, renderBalance } from "./balance-display"
 import { cc } from "./jsx"
 
 const DamageTypes = keys(Damage)
@@ -23,46 +25,59 @@ const Weathers = keys(Weather)
 const Synergies = keys(Synergy)
 const Items = keys(Item)
 
-export const iconRegExp = new RegExp(
-  `(?<=\\W|^)(?:${[
-    ...DamageTypes,
-    ...Stats,
-    ...DocumentedStatuses,
-    ...BoardEffects,
-    ...Weathers,
-    ...Synergies,
-    ...Items,
-    ...TechnicalTerms,
-    "GOLD",
-    "STAR",
-    "XP"
-  ].join("|")}|\\[[^\\]]+\\])(?=\\W|$)`,
+const iconPattern = [
+  ...DamageTypes,
+  ...Stats,
+  ...DocumentedStatuses,
+  ...BoardEffects,
+  ...Weathers,
+  ...Synergies,
+  ...Items,
+  ...TechnicalTerms,
+  "GOLD",
+  "STAR",
+  "XP"
+].join("|")
+const iconRegExp = new RegExp(`(?<=\\W|^)(?:${iconPattern})(?=\\W|$)`, "g")
+const patchNoteRegExp = new RegExp(
+  `${iconRegExp.source}|(?<=\\W|^)\\[[^\\]]+\\](?=\\W|$)`,
   "g"
 )
 
+const configValuePattern = String.raw`\{\{\s*[^{},\s]+\s*\}\}`
+const configValueRegExp = /{{\s*([^{},\s]+)\s*}}/
+const descriptionRegExp = new RegExp(
+  `${iconRegExp.source}|${configValuePattern}`,
+  "g"
+)
+
+type DescriptionOptions = {
+  stats?: DescriptionStats
+  config?: BalanceConfig
+}
+
 export function addIconsToDescription(
   description: string,
-  params?: {
-    ap: number
-    luck: number
-    stars: number
-    stages?: number
-    showAbilityTiers?: boolean
-  }
+  { stats, config }: DescriptionOptions = {}
 ) {
-  const matchIcon = description.match(iconRegExp)
+  const matchIcon = description.match(descriptionRegExp)
   if (matchIcon === null) return description
-  const descriptionParts = description.split(iconRegExp)
+  const descriptionParts = description.split(descriptionRegExp)
   return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
-    let icon: ReactElement | null = null
+    let icon: ReactNode = null
     const isAtStartOfSentence =
       i === 0 || descriptionParts[i - 1].trim().endsWith(".")
     const capitalize = (s: string) =>
       isAtStartOfSentence ? s.charAt(0).toUpperCase() + s.slice(1) : s
 
     if (token) {
-      if (token === "GOLD") {
+      const configValueName = token.match(configValueRegExp)?.[1]
+      if (configValueName) {
+        const configValue = config?.[configValueName]
+        icon =
+          configValue === undefined ? token : renderBalance(configValue, stats)
+      } else if (token === "GOLD") {
         icon = (
           <img
             className="description-icon icon-money"
@@ -129,9 +144,7 @@ export function addIconsToDescription(
             title={t(`effect_description.${token}`)}
           >
             <img src={`assets/icons/effects/${token}.svg`} />
-            <span className="board-effect-label">
-              {t(`effect.${token}`)}
-            </span>
+            <span className="board-effect-label">{t(`effect.${token}`)}</span>
           </span>
         )
       } else if (isIn(Weathers, token)) {
@@ -173,85 +186,6 @@ export function addIconsToDescription(
             </i>
           </span>
         )
-      } else if (/\[[^\]]+\]/.test(token)) {
-        const array = token.slice(1, -1).split(",")
-        let scaleType: "AP" | "LUCK" | null = null
-        let scaleFactor = 1
-        let nbDigits = 0
-        if (array.at(-1)?.includes("ND")) {
-          nbDigits = Number(array.pop()?.replace("ND=", "")) || 0
-        }
-        if (array.at(-1)?.includes("SP")) {
-          scaleType = "AP"
-          scaleFactor = Number(array.pop()?.replace("SP=", "")) || 1
-        } else if (array.at(-1)?.includes("LK")) {
-          scaleType = "LUCK"
-          scaleFactor = Number(array.pop()?.replace("LK=", "")) || 1
-        }
-
-        const tier = params?.stars
-        const maxTier = params?.stages ? params.stages + 1 : 5
-        const tierValues =
-          params?.stars && !params?.showAbilityTiers
-            ? [array[params.stars - 1]] // only show relevant tier
-            : array.slice(0, maxTier) // show tier scaling
-
-        icon = (
-          <span
-            className={cc("description-icon", {
-              "scales-ap": scaleType === "AP",
-              "scales-luck": scaleType === "LUCK"
-            })}
-          >
-            {scaleType === "AP" && (
-              <img
-                src="assets/icons/AP.png"
-                alt="Ability Power"
-                title="Scales with Ability Power"
-              ></img>
-            )}
-            {scaleType === "LUCK" && (
-              <img
-                src="assets/icons/LUCK.png"
-                alt="Luck"
-                title="Scales with Luck"
-              ></img>
-            )}
-            {tierValues.map((v, j) => {
-              const separator = j < tierValues.length - 1 ? "/" : ""
-              let value: number | string = roundToNDigits(Number(v), nbDigits)
-              if (Number.isNaN(value)) {
-                // In case of non-numeric value, just return as is
-                value = v
-              } else if (scaleType === "AP") {
-                value = roundToNDigits(
-                  Number(v) * (1 + ((params?.ap ?? 0) * scaleFactor) / 100),
-                  nbDigits
-                )
-              } else if (scaleType === "LUCK") {
-                value = roundToNDigits(
-                  max(100)(
-                    Math.pow(Number(v) / 100, 1 - (params?.luck ?? 0) / 100) *
-                      100
-                  ),
-                  nbDigits
-                )
-              }
-
-              const active =
-                tier === undefined ||
-                array.length === 1 ||
-                j === tier - 1 ||
-                (tier > tierValues.length && j === tierValues.length - 1)
-              return (
-                <span key={j} className="ability-value">
-                  <span className={cc({ active })}>{value}</span>
-                  {separator}
-                </span>
-              )
-            })}
-          </span>
-        )
       }
     }
 
@@ -290,11 +224,11 @@ export function addIconsToHtml(
   // Function to process text nodes and add icon markup
   const processTextNode = (textNode: Text) => {
     const text = textNode.textContent || ""
-    const matchIcon = text.match(iconRegExp)
+    const matchIcon = text.match(patchNoteRegExp)
 
     if (!matchIcon) return
 
-    const descriptionParts = text.split(iconRegExp)
+    const descriptionParts = text.split(patchNoteRegExp)
     let newHTML = ""
 
     descriptionParts.forEach((part, i) => {
