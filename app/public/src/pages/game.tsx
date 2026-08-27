@@ -50,7 +50,6 @@ import {
   useAppDispatch,
   useAppSelector
 } from "../hooks"
-import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { authenticateUser, client, joinGame, rooms } from "../network"
 import { usePreference } from "../preferences"
 import store from "../stores"
@@ -137,7 +136,7 @@ export function cyclePlayers(delta: number, byRank = false) {
   const players = schemaValues(gameContainer.room?.state.players)
   let newPlayer: Player
   if (byRank) {
-    const playersByRank = [...players].sort((a, b) => b.rank - a.rank)
+    const playersByRank = [...players].sort((a, b) => a.rank - b.rank)
     newPlayer =
       playersByRank[
         (playersByRank.findIndex(

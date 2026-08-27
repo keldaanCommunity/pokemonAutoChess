@@ -20,7 +20,12 @@ import {
 } from "../../../../types"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { Gifts, type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
+import {
+  Gifts,
+  type Item,
+  ItemRecipe,
+  Mulches
+} from "../../../../types/enum/Item"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
@@ -108,9 +113,9 @@ export default class GameScene extends Scene {
       this.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
-    this.loadingManager!.preloadingPromise
-      .catch((err) => logger.error("loading error", err))
-      .then(() => {
+    this.loadingManager!.preloadingPromise.catch((err) =>
+      logger.error("Loading error", err)
+    ).then(() => {
       logger.debug("Loading complete")
       if (!this.started) {
         this.room?.send(Transfer.LOADING_COMPLETE)
@@ -245,22 +250,24 @@ export default class GameScene extends Scene {
     const keybindings = preference("keybindings")
 
     this.input.keyboard!.removeAllListeners()
-    this.input.keyboard?.enableGlobalCapture()
 
     if (!this.spectate) {
       this.input.keyboard!.on(
         "keydown-" + keybindings.refresh,
-        throttle(() => {
+        throttle((e: Event) => {
+          e.preventDefault()
           playSound(SOUNDS.REFRESH, 0.5)
           this.refreshShop()
         }, 300)
       )
 
-      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.lock, (e: Event) => {
+        e.preventDefault()
         this.room?.send(Transfer.LOCK)
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, (e: Event) => {
+        e.preventDefault()
         this.buyExperience()
       })
 
@@ -284,36 +291,61 @@ export default class GameScene extends Scene {
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.switch, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonHovered) {
           this.switchBetweenBenchAndBoard(this.pokemonHovered)
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-        playerClick(this.uid!)
-      })
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.board_return,
+        (e: Event) => {
+          e.preventDefault()
+          playerClick(this.uid!)
+        }
+      )
     }
 
-    this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
-      savePreferences({ cameraLocked: !preference("cameraLocked") })
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.camera_lock,
+      (e: Event) => {
+        e.preventDefault()
+        savePreferences({ cameraLocked: !preference("cameraLocked") })
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
-      cyclePlayers(-1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1)
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
-      cyclePlayers(1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1)
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.prev_player_by_rank, () => {
-      cyclePlayers(-1, true)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1, true)
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.next_player_by_rank, () => {
-      cyclePlayers(1, true)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1, true)
+      }
+    )
   }
 
   refreshShop() {
