@@ -1113,6 +1113,35 @@ export const Sweets = [
 
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
+export const Gifts = [
+  Item.BERRIES_GIFT,
+  Item.SWEETS_GIFT,
+  Item.DITTO_GIFT,
+  Item.TICKET_BUNDLE,
+  Item.HATCH_BUNDLE,
+  Item.REGIONAL_TOUR,
+  Item.BANQUET,
+  Item.SMALL_EXP_GIFT,
+  Item.GEMS_BUNDLE,
+  Item.POTION,
+  Item.FORAGE_BAG,
+  Item.PRETTY_BOX,
+  Item.COLLECTION_BOX,
+  Item.LARGE_EXP_GIFT,
+  Item.UNCOMMON_GIFT,
+  Item.RARE_GIFT,
+  Item.COMMON_GIFT,
+  Item.EPIC_GIFT,
+  Item.ULTRA_GIFT,
+  Item.UNIQUE_GIFT,
+  Item.LEGENDARY_GIFT,
+  Item.STAR_GIFT,
+  Item.TOOLBOX,
+  Item.DELUXE_BOX
+] satisfies Item[]
+
+export type Gift = (typeof Gifts)[number]
+
 export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
@@ -1124,6 +1153,7 @@ export const UnholdableItems = [
   ...Mulches,
   ...MissionOrders,
   ...SevenTreasures,
+  ...Gifts,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,
