@@ -68,8 +68,9 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
+  type Gift,
+  Gifts,
   type Item,
   RemovableItems,
   UnholdableItemsToSaveForStats,

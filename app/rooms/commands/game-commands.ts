@@ -87,9 +87,7 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  type Gift,
   GiftShopPrices,
-  Gifts,
   GiftsTier1,
   GiftsTier2,
   GiftsTier3
@@ -99,6 +97,8 @@ import {
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
+  type Gift,
+  Gifts,
   Item,
   ItemComponents,
   ItemComponentsNoFossilOrScarf,
