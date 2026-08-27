@@ -762,7 +762,7 @@ export default class Player extends Schema implements IPlayer {
     const hasBugNest = getSynergyTier(this.synergies, Synergy.BUG) >= 4
     let nest = schemaValues(this.board).find((p) => p.name === Pkm.BUG_NEST)
     if (hasBugNest && !nest) {
-      const freeSpace = getFirstAvailablePositionOnBoard(this.board, 1)
+      const freeSpace = getFirstAvailablePositionOnBoard(this.board, 3)
       if (freeSpace) {
         nest = PokemonFactory.createPokemonFromName(Pkm.BUG_NEST, this)
         nest.positionX = freeSpace[0]
