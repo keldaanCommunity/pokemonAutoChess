@@ -39,6 +39,14 @@ h2 .description-icon > img {
   cursor: help;
 }
 
+.technical-term:first-child .technical-term-label {
+  text-transform: capitalize;
+}
+
+.technical-term-label::first-letter {
+  text-transform: uppercase;
+}
+
 .ability-description {
   white-space: pre-line;
 }
@@ -86,4 +94,9 @@ h2 .description-icon > img {
 .item-label {
   color: var(--color-fg-secondary);
   font-weight: 500;
+}
+
+.description-important {
+  font-weight: bold;
+  color: var(--color-fg-red);
 }

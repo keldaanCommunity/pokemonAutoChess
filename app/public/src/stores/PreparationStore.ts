@@ -62,6 +62,9 @@ export const preparationSlice = createSlice({
       )
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
+      if (state.users.find((u) => u.uid == action.payload.uid)) {
+        return
+      }
       const u: IGameUser = structuredClone(action.payload)
       state.users.push(u)
     },

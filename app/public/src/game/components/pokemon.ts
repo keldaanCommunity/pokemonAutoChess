@@ -34,6 +34,7 @@ import {
   Team
 } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
+import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import { min } from "../../../../utils/number"
 import {
@@ -43,9 +44,13 @@ import {
 import { randomBetween } from "../../../../utils/random"
 import { schemaValues } from "../../../../utils/schemas"
 import { GamePokemonDetailDOMWrapper } from "../../pages/component/game/game-pokemon-detail"
-import { transformEntityCoordinates } from "../../pages/utils/utils"
+import {
+  transformBoardCoordinates,
+  transformEntityCoordinates
+} from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
+import { isReplayRoom } from "../replay-room-id"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
 import {
@@ -54,6 +59,7 @@ import {
   displayBoost
 } from "./abilities-animations"
 import DraggableObject from "./draggable-object"
+import { EmoteBubble } from "./emote-bubble"
 import type { GameDialog } from "./game-dialog"
 import ItemsContainer from "./items-container"
 import Lifebar from "./life-bar"
@@ -66,6 +72,7 @@ const spriteCountPerPokemon = new Map<string, number>()
 
 export function resetSpriteCounts() {
   spriteCountPerPokemon.clear()
+  for (const index in lazyLoadingRequests) delete lazyLoadingRequests[index]
 }
 
 const isGameScene = (scene: Phaser.Scene): scene is GameScene =>
@@ -130,6 +137,7 @@ export default class PokemonSprite extends DraggableObject {
   floatingTween?: Phaser.Tweens.Tween
   troopers?: PokemonSprite[]
   isTeleporting: boolean = false
+  emoteBubble: EmoteBubble | null
 
   constructor(
     scene: GameScene | DebugScene,
@@ -161,6 +169,7 @@ export default class PokemonSprite extends DraggableObject {
     this.id = pokemon.id
     this.targetX = null
     this.targetY = null
+    this.emoteBubble = null
     this.attackSprite =
       PokemonAnimations[pokemon.name]?.attackSprite ??
       DEFAULT_POKEMON_ANIMATION_CONFIG.attackSprite
@@ -191,7 +200,7 @@ export default class PokemonSprite extends DraggableObject {
           (acc, item) => acc + (ItemStats[item]?.[Stat.HP] ?? 0),
           pokemon.maxHP
         )
-    const scale = 2 * Math.sqrt(1 + (pokemon.maxHP - baseHP) / baseHP)
+    const scale = 2 * Math.sqrt(1 + (maxHP - baseHP) / baseHP)
     this.sprite
       .setScale(scale)
       .setDepth(DEPTH.POKEMON)
@@ -257,7 +266,11 @@ export default class PokemonSprite extends DraggableObject {
     this.setDepth(DEPTH.POKEMON)
 
     // prevents persisting details between game transitions
-    if (isGameScene(this.scene) && this.scene.lastPokemonDetail) {
+    if (
+      isGameScene(this.scene) &&
+      this.scene.lastPokemonDetail &&
+      !isReplayRoom(this.scene.room)
+    ) {
       this.scene.lastPokemonDetail.closeDetail()
       this.scene.lastPokemonDetail = null
     }
@@ -692,6 +705,47 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
+  nestAnimation(inBattle: boolean) {
+    const scene = <GameScene>this.scene
+    let nest: PokemonSprite | undefined
+    if (scene.battle && inBattle) {
+      nest = [...scene.battle.pokemonSprites.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    } else if (scene.board && !inBattle) {
+      nest = [...scene.board.pokemons.values()].find(
+        (p) => p.name === Pkm.BUG_NEST
+      )
+    }
+    if (nest) {
+      this.moveManager.setEnable(false)
+
+      const [x, y] = inBattle
+        ? transformEntityCoordinates(this.positionX, this.positionY, this.flip)
+        : transformBoardCoordinates(this.positionX, this.positionY)
+
+      this.setScale(0.2)
+      this.setPosition(nest.x, nest.y)
+
+      scene.animationManager?.animatePokemon(
+        this,
+        PokemonActionState.HOP,
+        this.flip,
+        false
+      )
+      scene.tweens.add({
+        targets: this,
+        x,
+        y,
+        duration: 1000,
+        scale: 1,
+        onComplete: () => {
+          this.moveManager.setEnable(true)
+        }
+      })
+    }
+  }
+
   emoteAnimation() {
     const g = <GameScene>this.scene
     if (!g.animationManager) return
@@ -856,7 +910,10 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  setLifeBar(pokemon: IPokemonEntity, scene: GameScene | DebugScene) {
+  setLifeBar(
+    pokemon: IPokemonEntity | IPokemon,
+    scene: GameScene | DebugScene
+  ) {
     if (pokemon.hp !== undefined) {
       this.lifebar = new Lifebar(
         scene,
@@ -865,13 +922,18 @@ export default class PokemonSprite extends DraggableObject {
         pokemon.maxHP,
         pokemon.hp,
         pokemon.shield,
-        pokemon.team as Team,
+        isEntity(pokemon) ? pokemon.team : Team.BLUE_TEAM,
         this.flip
       )
       this.lifebar.setShield(pokemon.shield)
       this.add(this.lifebar)
 
-      if (pokemon.pp !== undefined && pokemon.maxPP > 0)
+      if (
+        pokemon.pp !== undefined &&
+        pokemon.maxPP !== undefined &&
+        pokemon.maxPP > 0 &&
+        isEntity(pokemon)
+      )
         this.lifebar.setMaxPP(pokemon.maxPP)
     }
   }
@@ -937,7 +999,7 @@ export default class PokemonSprite extends DraggableObject {
     if (pokemon.status.resurrection) {
       this.addResurrection()
     }
-    if (pokemon.status.runeProtect) {
+    if (pokemon.status.runeProtect && pokemon.passive !== Passive.INANIMATE) {
       this.addRuneProtect()
     }
     if (pokemon.status.spikeArmor) {
@@ -1379,9 +1441,9 @@ export default class PokemonSprite extends DraggableObject {
   addRuneProtect() {
     if (!this.runeProtect) {
       this.runeProtect = this.scene.add
-        .sprite(0, -40, "status", "RUNE_PROTECT/000.png")
+        .sprite(0, -40, "status", "SAFEGUARD/000.png")
         .setScale(2)
-      this.runeProtect.anims.play("RUNE_PROTECT")
+      this.runeProtect.anims.play("SAFEGUARD")
       this.add(this.runeProtect)
     }
   }
@@ -1600,6 +1662,22 @@ export default class PokemonSprite extends DraggableObject {
   displayBoost(stat: Stat, debug?: boolean) {
     displayBoost(this, stat, 0, 0, debug)
   }
+
+  drawSpeechBubble(emoteAvatar: string, isOpponent: boolean) {
+    this.emoteBubble = new EmoteBubble(this.scene, emoteAvatar, isOpponent)
+    this.add(this.emoteBubble)
+
+    const x = isOpponent ? -40 : +40
+    const y = isOpponent ? +100 : -120
+    this.emoteBubble.setPosition(x, y)
+
+    setTimeout(() => {
+      if (this.emoteBubble) {
+        this.emoteBubble.destroy()
+        this.emoteBubble = null
+      }
+    }, 3000)
+  }
 }
 
 export const isEntity = (
@@ -1618,6 +1696,13 @@ export function loadCompressedAtlas(
     return lazyLoadingRequests[index]
   }
   lazyLoadingRequests[index] = new Promise((resolve) => {
+    const onError = (file: Phaser.Loader.File) => {
+      if (file.key !== `pokemon-atlas-${index}` && file.key !== index) return
+      scene.load.off("loaderror", onError)
+      delete lazyLoadingRequests[index]
+      resolve(index)
+    }
+    scene.load.on("loaderror", onError)
     scene.load.once(
       `filecomplete-json-pokemon-atlas-${index}`,
       (key, type, data) => {
@@ -1685,8 +1770,8 @@ export function loadCompressedAtlas(
 
         const index = image.replace(".png", "")
 
-        //console.log("load multiatlas " + index)
         scene.textures.once(`addtexture-${index}`, () => {
+          scene.load.off("loaderror", onError)
           delete lazyLoadingRequests[index]
           resolve(index)
         })

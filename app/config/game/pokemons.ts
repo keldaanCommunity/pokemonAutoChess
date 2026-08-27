@@ -440,6 +440,8 @@ export type PkmWithTroopers =
   | Pkm.AVALUGG
   | Pkm.HISUI_AVALUGG
 
+export const Troopers = [Pkm.FALINKS_TROOPER, Pkm.BERGMITE] as const
+
 export const MaxTroopersPerPkm: { [key in PkmWithTroopers]: number } = {
   [Pkm.FALINKS_BRASS]: 8,
   [Pkm.AVALUGG]: 4,

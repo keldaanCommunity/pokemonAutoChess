@@ -49,6 +49,19 @@
   filter: contrast(0.8) brightness(0.8);
 }
 
+.game-pokemon-portrait.regional::after {
+  top: -1px;
+  content: "";
+  position: absolute;
+  left: 0px;
+  width: 1.4vw;
+  height: 1.4vw;
+  background-image: url("assets/ui/pinpoint.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .game-pokemon-portrait-cost {
   position: absolute;
   left: 5px;
@@ -90,7 +103,7 @@
 .game-pokemon-portrait-planned-icon {
   position: absolute;
   top: 4px;
-  left: 4px;
+  right: calc(100% - var(--portrait-size) - 1px);
 }
 
 .game-pokemon-portrait-evolution-icon {
@@ -111,8 +124,8 @@
 }
 
 .game-pokemon-portrait-planned-icon {
-  width: 1.4vw;
-  height: 1.4vw;
+  width: 1vw;
+  height: 1vw;
   animation: rotateY 1s linear infinite;
 }
 

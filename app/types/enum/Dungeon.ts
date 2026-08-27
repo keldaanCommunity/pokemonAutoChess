@@ -126,6 +126,7 @@ export enum DungeonMusic {
   TEMPORAL_PINNACLE = "Temporal Pinnacle",
   TEMPORAL_SPIRE = "Temporal Spire",
   TEMPORAL_TOWER = "Temporal Tower",
+  THE_TERRABLE_JUNGLE = "The Terrable Jungle",
   THE_LEGEND_OF_NINETALES = "The Legend of Ninetales",
   THE_POWER_OF_DARKNESS = "The Power of Darkness",
   THERES_TROUBLE = "There's Trouble!",
@@ -304,6 +305,7 @@ export enum DungeonPMDO {
 
 export const DungeonMusicCredits: { [key in DungeonMusic]?: string } = {
   [DungeonMusic.TROUBLE_IN_TOWN]: "John Rei",
+  [DungeonMusic.THE_TERRABLE_JUNGLE]: "John Rei",
   [DungeonMusic.TREASURE_TOWN_STAGE_0_ALT]: "John Rei",
   [DungeonMusic.TREASURE_TOWN_STAGE_10_ALT]: "John Rei",
   [DungeonMusic.TREASURE_TOWN_STAGE_20_ALT]: "John Rei",
