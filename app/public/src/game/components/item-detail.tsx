@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
-import { Gifts } from "../../../../types/enum/GiftShop"
 import {
   ConsumableItems,
+  Gifts,
   Item,
   ItemComponents,
   ItemRecipe,

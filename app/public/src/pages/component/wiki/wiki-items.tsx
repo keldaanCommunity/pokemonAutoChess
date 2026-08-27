@@ -1,11 +1,11 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   ArtificialItems,
   Berries,
   Dishes,
   FishingRods,
+  Gifts,
   Item,
   ItemComponentsNoScarf,
   ItemRecipe,
