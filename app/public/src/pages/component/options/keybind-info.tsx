@@ -36,10 +36,12 @@ export default function KeybindInfo() {
       if (gameScene) gameScene.registerKeys() // update key listeners
     }
 
-    window.addEventListener("keydown", onKeydown)
+    const modal = document.querySelector(".game-options-modal")
+    if (!modal) return
+    modal.addEventListener("keydown", onKeydown as EventListener)
     //clean up event listener when destroyed
     return () => {
-      window.removeEventListener("keydown", onKeydown)
+      modal.removeEventListener("keydown", onKeydown as EventListener)
     }
   }, [currentlyRemapping])
 
@@ -115,7 +117,7 @@ export default function KeybindInfo() {
         </dt>
         <dd>{t("options.key_description.next_player")}</dd>
 
-         <dt>
+        <dt>
           <RemappableKey keyId="prev_player_by_rank" />
         </dt>
         <dd>{t("options.key_description.prev_player_by_rank")}</dd>
