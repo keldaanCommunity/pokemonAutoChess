@@ -30,6 +30,7 @@ export default function GameStageInfo() {
   const weather = useAppSelector((state) => state.game.weather)
 
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const players = useAppSelector((state) => state.game.players)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const gameMode = useAppSelector((state) => state.game.gameMode)
   const spectatorCount = useAppSelector((state) => state.game.spectatorCount)
@@ -46,6 +47,8 @@ export default function GameStageInfo() {
     phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentAvatar : ""
   const opponentTitle =
     phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentTitle : ""
+  const opponentIsBot =
+    players.find((p) => p.name === opponentName)?.isBot ?? false
 
   return (
     <>
@@ -91,7 +94,9 @@ export default function GameStageInfo() {
           <div className="player-information">
             <PokemonPortrait avatar={avatar} />
             {title && <p className="player-title">{t(`title.${title}`)}</p>}
-            <p className="player-name">{name}</p>
+            <p className="player-name">
+              {spectatedPlayer.isBot ? t(`pkm.${name as Pkm}`) : name}
+            </p>
           </div>
           {opponentName && (
             <>
@@ -102,7 +107,11 @@ export default function GameStageInfo() {
                   <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}
                 <p className="player-name">
-                  {isPVE ? t(opponentName as `pkm.${Pkm}`) : opponentName}
+                  {isPVE
+                    ? t(opponentName as `pkm.${Pkm}`)
+                    : opponentIsBot
+                      ? t(`pkm.${name as Pkm}`)
+                      : opponentName}
                 </p>
               </div>
             </>

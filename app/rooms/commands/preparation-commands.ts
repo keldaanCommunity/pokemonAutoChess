@@ -475,7 +475,8 @@ export class OnRoomNameCommand extends Command<
       if (
         this.state.name != roomName &&
         (client.auth?.uid == this.state.ownerId ||
-          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)))
+          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))) &&
+        roomName.trim().length > 0
       ) {
         this.room.setName(roomName)
         this.state.name = roomName
