@@ -15,6 +15,7 @@ import {
   Berries,
   CraftableItemsNoScarves,
   Dishes,
+  type Gift,
   type IPokemon,
   Item,
   ItemComponentsNoFossilOrScarf,
@@ -26,7 +27,6 @@ import {
   Tools
 } from "../types"
 import { Rarity } from "../types/enum/Game"
-import type { Gift } from "../types/enum/GiftShop"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"

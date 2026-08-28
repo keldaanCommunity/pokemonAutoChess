@@ -33,10 +33,10 @@ import {
   Rarity,
   Team
 } from "../../types/enum/Game"
-import type { Gift } from "../../types/enum/GiftShop"
 import {
   AbilityPerTM,
   ArtificialItems,
+  type Gift,
   Item,
   ItemComponentsNoFossilOrScarf,
   type MissionOrder,
