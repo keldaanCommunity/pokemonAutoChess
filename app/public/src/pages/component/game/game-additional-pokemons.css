@@ -33,7 +33,6 @@
     gap: 5px;
     margin: 5px;
     width: 700px;
-    height: 360px;
 
     & > p {
       grid-row: 1 / 5;
