@@ -6,6 +6,7 @@ import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
+import "./game-additional-pokemons.css"
 
 export function GameAdditionalPokemonsIcon() {
   return (
@@ -38,21 +39,23 @@ export function GameAdditionalPokemons() {
 
   if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
-      <div className="game-additional-pokemons">
+      <div className="wrapper">
         <p>{t("scribble.EVERYONE_IS_HERE")}</p>
       </div>
     )
   } else if (!additionalPokemons || additionalPokemons.length === 0) {
     return (
-      <div className="game-additional-pokemons">
+      <div className="wrapper">
         <p className="help">{t("additional_pokemon_hint")}</p>
       </div>
     )
   } else {
     return (
-      <div className="game-additional-pokemons">
-        <h2>{t("additional_picks")}</h2>
-        <p className="help">{t("additional_pokemon_hint")}</p>
+      <div className="wrapper">
+        <header>
+          <span>{t("additional_picks")}</span>
+          <p className="help">{t("additional_pokemon_hint")}</p>
+        </header>
         <div className="grid">
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)

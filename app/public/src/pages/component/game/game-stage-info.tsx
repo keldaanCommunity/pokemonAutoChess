@@ -5,8 +5,7 @@ import { Tooltip } from "react-tooltip"
 import {
   AdditionalPicksStages,
   ItemCarouselStages,
-  PortalCarouselStages,
-  RegionDetails
+  PortalCarouselStages
 } from "../../../../../config"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
@@ -53,6 +52,26 @@ export default function GameStageInfo() {
   return (
     <>
       <div id="game-stage-info" className="my-container">
+        {gameMode && (
+          <div
+            className="game-mode-information"
+            data-tooltip-id="detail-game-mode"
+          >
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-game-mode"
+                className="custom-theme-tooltip"
+                place="bottom"
+              >
+                <p>{t(`game_modes.${gameMode}`)}</p>
+                <p>{t(`game_modes_descriptions.${gameMode}`)}</p>
+              </Tooltip>,
+              document.body
+            )}
+            <GameModeIcon gameMode={gameMode} />
+          </div>
+        )}
+
         <div className="stage-information" data-tooltip-id="detail-stage">
           {ReactDOM.createPortal(
             <Tooltip
@@ -110,36 +129,13 @@ export default function GameStageInfo() {
                   {isPVE
                     ? t(opponentName as `pkm.${Pkm}`)
                     : opponentIsBot
-                      ? t(`pkm.${name as Pkm}`)
+                      ? t(`pkm.${opponentName as Pkm}`)
                       : opponentName}
                 </p>
               </div>
             </>
           )}
         </div>
-
-        {spectatedPlayer.map && (
-          <div className="map-information" data-tooltip-id="detail-map">
-            {ReactDOM.createPortal(
-              <Tooltip
-                id="detail-map"
-                className="custom-theme-tooltip"
-                place="bottom"
-              >
-                <div style={{ display: "flex", alignContent: "center" }}>
-                  {RegionDetails[spectatedPlayer.map].synergies.map(
-                    (synergy) => (
-                      <SynergyIcon type={synergy} key={"map_type_" + synergy} />
-                    )
-                  )}
-                  <p>{t(`map.${spectatedPlayer.map}`)}</p>
-                </div>
-              </Tooltip>,
-              document.body
-            )}
-            <img src={`/assets/ui/map.svg`} />
-          </div>
-        )}
 
         {opponentName != "" && (
           <div className="weather-information" data-tooltip-id="detail-weather">
@@ -162,26 +158,6 @@ export default function GameStageInfo() {
               document.body
             )}
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
-          </div>
-        )}
-
-        {gameMode && (
-          <div
-            className="game-mode-information"
-            data-tooltip-id="detail-game-mode"
-          >
-            {ReactDOM.createPortal(
-              <Tooltip
-                id="detail-game-mode"
-                className="custom-theme-tooltip"
-                place="bottom"
-              >
-                <p>{t(`game_modes.${gameMode}`)}</p>
-                <p>{t(`game_modes_descriptions.${gameMode}`)}</p>
-              </Tooltip>,
-              document.body
-            )}
-            <GameModeIcon gameMode={gameMode} />
           </div>
         )}
 
