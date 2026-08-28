@@ -2,6 +2,7 @@ import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { computeBalance } from "../../config/game/balance"
 import { DishByPkm } from "../../config/game/dishes"
 import { ItemConfigs } from "../../config/game/items"
+import { StatusConfigs } from "../../config/game/statuses"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -32,6 +33,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
+import { Status } from "../../types/enum/Status"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { isIn, removeInArray } from "../../utils/array"
@@ -171,8 +173,12 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
             secondHitTarget.items.has(Item.POWER_LENS) &&
             !pokemon.items.has(Item.PROTECTIVE_PADS)
           ) {
+            const armorEffectiveness =
+              1 -
+              StatusConfigs[Status.ARMOR_BREAK].effectivenessReductionPercent /
+                100
             const speDef = secondHitTarget.status.armorReduction
-              ? Math.round(secondHitTarget.speDef / 2)
+              ? Math.round(secondHitTarget.speDef * armorEffectiveness)
               : secondHitTarget.speDef
             const damageAfterReduction =
               secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)

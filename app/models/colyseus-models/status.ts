@@ -1,5 +1,9 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
+import { StatusConfigs } from "../../config/game/statuses"
+import { getActiveSynergyTier } from "../../config/game/synergies"
+import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import type { PokemonEntity } from "../../core/pokemon-entity"
@@ -13,6 +17,7 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
+import { Status as StatusEnum } from "../../types/enum/Status"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
@@ -84,11 +89,11 @@ export default class Status extends Schema implements IStatus {
   reflectCooldown = 0
   resurrectingCooldown = 0
   curseCooldown = 0
-  pokerusCooldown = 3000
+  pokerusCooldown = StatusConfigs[StatusEnum.POKERUS].intervalSeconds * 1000
   possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
-  enrageDelay = 35000
+  enrageDelay = StatusConfigs[StatusEnum.RAGE].automaticDelaySeconds * 1000
   ccCooldown = 0
   untargettable = false
 
@@ -364,7 +369,12 @@ export default class Status extends Schema implements IStatus {
     if (!this.enraged) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(80, pokemon, 0, false)
+      pokemon.addSpeed(
+        StatusConfigs[StatusEnum.RAGE].speedBonus,
+        pokemon,
+        0,
+        false
+      )
       this.enrageCooldown = duration
       this.sleepCooldown = Math.floor(this.sleepCooldown * 0.5) // Rage reduces sleep duration by half
       this.freezeCooldown = Math.floor(this.freezeCooldown * 0.5) // Rage reduces freeze duration by half
@@ -381,14 +391,24 @@ export default class Status extends Schema implements IStatus {
     ) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(80, pokemon, 0, false)
+      pokemon.addSpeed(
+        StatusConfigs[StatusEnum.RAGE].speedBonus,
+        pokemon,
+        0,
+        false
+      )
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
       this.enrageDelay - dt > 0
     ) {
       this.enraged = false
-      pokemon.addSpeed(-80, pokemon, 0, false)
+      pokemon.addSpeed(
+        -StatusConfigs[StatusEnum.RAGE].speedBonus,
+        pokemon,
+        0,
+        false
+      )
     }
 
     this.enrageDelay -= dt
@@ -438,9 +458,11 @@ export default class Status extends Schema implements IStatus {
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
-      let burnDamage = pkm.maxHP * 0.05
+      let burnDamage =
+        pkm.maxHP * (StatusConfigs[StatusEnum.BURN].maxHpDamagePercent / 100)
       if (pkm.simulation.weather === Weather.DROUGHT) {
-        burnDamage *= 1.3
+        burnDamage *=
+          1 + WeatherConfigs[Weather.DROUGHT].statusModifierPercent / 100
         const nbHeatRocks = pkm.player
           ? count(pkm.player.items, Item.HEAT_ROCK)
           : 0
@@ -448,7 +470,8 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 1 - 0.2 * nbHeatRocks
         }
       } else if (pkm.simulation.weather === Weather.RAIN) {
-        burnDamage *= 0.7
+        burnDamage *=
+          1 - WeatherConfigs[Weather.RAIN].damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
@@ -523,7 +546,8 @@ export default class Status extends Schema implements IStatus {
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
       if (pkm.simulation.weather === Weather.MURKY) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.MURKY].silenceDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -578,17 +602,23 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
-      let maxStacks = 3
+      const poisonEffect = getActiveSynergyTier(Synergy.POISON, origin?.effects)
+      const poisonConfig = poisonEffect
+        ? EffectConfigs[poisonEffect]
+        : undefined
+      const maxStacksBonus =
+        poisonConfig && "maxStacksBonus" in poisonConfig
+          ? poisonConfig.maxStacksBonus
+          : 0
+      const maxStacks =
+        StatusConfigs[StatusEnum.POISONNED].maxStacks + maxStacksBonus
       this.poisonOrigin = origin ?? null
-      if (origin) {
-        if (origin.effects.has(EffectEnum.VENOMOUS)) {
-          maxStacks = 4
-        }
-        if (origin.effects.has(EffectEnum.TOXIC)) {
-          maxStacks = 5
-        }
-      }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
+
+      if (pkm.simulation.weather === Weather.SMOG) {
+        duration *=
+          1 + WeatherConfigs[Weather.SMOG].poisonDurationBonusPercent / 100
+      }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
 
@@ -619,14 +649,21 @@ export default class Status extends Schema implements IStatus {
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
+      let poisonDamage =
+        pkm.maxHP *
+        (StatusConfigs[StatusEnum.POISONNED].maxHpDamagePercent / 100) *
+        this.poisonStacks
 
       if (pkm.passive === Passive.GLISCOR) {
-        poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
+        poisonDamage =
+          pkm.maxHP *
+          (StatusConfigs[StatusEnum.POISONNED].maxHpDamagePercent / 100) *
+          (this.poisonStacks - 2)
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage *= 0.7
+        poisonDamage *=
+          1 - WeatherConfigs[Weather.RAIN].damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
@@ -711,7 +748,8 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.SNOW].freezeDurationBonusPercent / 100
         const nbIcyRocks = pkm.player
           ? count(pkm.player.items, Item.ICY_ROCK)
           : 0
@@ -719,7 +757,8 @@ export default class Status extends Schema implements IStatus {
           duration *= 1 - 0.2 * nbIcyRocks
         }
       } else if (pkm.simulation.weather === Weather.DROUGHT) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs[Weather.DROUGHT].statusModifierPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -748,7 +787,8 @@ export default class Status extends Schema implements IStatus {
       this.freeze = false
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
-      this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
+      const burnReduction = StatusConfigs[StatusEnum.BURN].reductionPercent
+      this.freezeCooldown -= dt * (this.burn ? 100 / (100 - burnReduction) : 1)
     }
   }
 
@@ -777,9 +817,11 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.NIGHT].sleepDurationBonusPercent / 100
       } else if (pkm.simulation.weather === Weather.ZENITH) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs[Weather.ZENITH].sleepDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -827,7 +869,9 @@ export default class Status extends Schema implements IStatus {
     ) {
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.SANDSTORM) {
-        duration *= 1.3
+        duration *=
+          1 +
+          WeatherConfigs[Weather.SANDSTORM].confusionDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -863,7 +907,8 @@ export default class Status extends Schema implements IStatus {
     if (!this.charm && !this.runeProtect) {
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.MISTY) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.MISTY].charmDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -893,7 +938,8 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.wound = true
       if (pkm.simulation.weather === Weather.BLOODMOON) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.BLOODMOON].woundDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -928,7 +974,8 @@ export default class Status extends Schema implements IStatus {
       }
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.STORM) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs[Weather.STORM].paralysisDurationBonusPercent / 100
         const nbElectricQuartz = pkm.player
           ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
           : 0
@@ -1127,8 +1174,18 @@ export default class Status extends Schema implements IStatus {
 
   updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (this.pokerusCooldown - dt <= 0) {
-      pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.addAbilityPower(10, pokemon, 0, false)
+      pokemon.addAttack(
+        StatusConfigs[StatusEnum.POKERUS].attackGain,
+        pokemon,
+        0,
+        false
+      )
+      pokemon.addAbilityPower(
+        StatusConfigs[StatusEnum.POKERUS].abilityPowerGain,
+        pokemon,
+        0,
+        false
+      )
       let infectCount = 0
       const cells = board.getAdjacentCells(
         pokemon.positionX,
@@ -1136,7 +1193,10 @@ export default class Status extends Schema implements IStatus {
         false
       )
       cells.forEach((cell) => {
-        if (infectCount < 2 && cell.value !== undefined) {
+        if (
+          infectCount < StatusConfigs[StatusEnum.POKERUS].adjacentAllies &&
+          cell.value !== undefined
+        ) {
           if (
             cell.value.team === pokemon.team &&
             cell.value.status.pokerus === false
@@ -1146,7 +1206,8 @@ export default class Status extends Schema implements IStatus {
           }
         }
       })
-      this.pokerusCooldown = 3000
+      this.pokerusCooldown =
+        StatusConfigs[StatusEnum.POKERUS].intervalSeconds * 1000
     } else {
       this.pokerusCooldown -= dt
     }
@@ -1168,10 +1229,10 @@ export default class Status extends Schema implements IStatus {
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
-      if (pkm.range != 1) {
+      if (pkm.range != StatusConfigs[StatusEnum.LOCKED].range) {
         pkm.toMovingState() // force retargetting if the current range is not 1
       }
-      pkm.range = 1
+      pkm.range = StatusConfigs[StatusEnum.LOCKED].range
     }
   }
 

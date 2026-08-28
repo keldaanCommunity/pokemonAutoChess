@@ -1,7 +1,9 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { computeBalance } from "../config/game/balance"
 import { PassiveConfigs } from "../config/game/passives"
+import { StatusConfigs } from "../config/game/statuses"
 import { SynergyTiers } from "../config/game/synergies"
+import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import {
@@ -13,6 +15,7 @@ import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
+import { Status } from "../types/enum/Status"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count, isIn } from "../utils/array"
@@ -100,7 +103,8 @@ export default abstract class PokemonState {
       let hasAttackKilled = false
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
-        dodgeChance += 0.5
+        dodgeChance +=
+          StatusConfigs[Status.BLINDED].accuracyReductionPercent / 100
       }
 
       if (
@@ -353,13 +357,13 @@ export default abstract class PokemonState {
         heal *= 1.3
       }
       if (pokemon.status.burn) {
-        heal *= 0.5
+        heal *= 1 - StatusConfigs[Status.BURN].reductionPercent / 100
       }
       if (pokemon.status.enraged) {
         heal *= 0.5
       }
       if (pokemon.simulation.weather === Weather.ZENITH) {
-        heal *= 1.2
+        heal *= 1 + WeatherConfigs[Weather.ZENITH].healingBonusPercent / 100
       }
 
       heal = Math.round(heal)
@@ -480,19 +484,21 @@ export default abstract class PokemonState {
       takenDamage = 0
     } else {
       if (attacker && attacker.status.electricField) {
-        damage *= 1.2
+        damage *=
+          1 + StatusConfigs[Status.ELECTRIC_FIELD].damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.psychicField) {
-        damage *= 1.2
+        damage *=
+          1 + StatusConfigs[Status.PSYCHIC_FIELD].damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.grassField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs[Status.GRASS_FIELD].damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.fairyField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs[Status.FAIRY_FIELD].damageBonusPercent / 100
       }
 
       if (
@@ -507,14 +513,16 @@ export default abstract class PokemonState {
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        damage *= 1.2
+        damage *=
+          1 + WeatherConfigs[Weather.MISTY].specialDamageBonusPercent / 100
       }
 
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
         attackType === AttackType.PHYSICAL
       ) {
-        damage *= 1.2
+        damage *=
+          1 + WeatherConfigs[Weather.BLOODMOON].physicalDamageBonusPercent / 100
       }
 
       if (
@@ -525,11 +533,14 @@ export default abstract class PokemonState {
         damage *= 1.3
       }
 
+      const armorEffectiveness =
+        1 -
+        StatusConfigs[Status.ARMOR_BREAK].effectivenessReductionPercent / 100
       let def = pokemon.status.armorReduction
-        ? Math.round(pokemon.def / 2)
+        ? Math.round(pokemon.def * armorEffectiveness)
         : pokemon.def
       let speDef = pokemon.status.armorReduction
-        ? Math.round(pokemon.speDef / 2)
+        ? Math.round(pokemon.speDef * armorEffectiveness)
         : pokemon.speDef
 
       if (pokemon.effects.has(EffectEnum.WONDER_ROOM)) {
@@ -639,8 +650,10 @@ export default abstract class PokemonState {
       if (pokemon.shield > 0) {
         let damageOnShield
         if (pokemon.status.flinch) {
-          damageOnShield = Math.ceil(reducedDamage * 0.5)
-          residualDamage = Math.ceil(reducedDamage * 0.5)
+          const shieldBypass =
+            StatusConfigs[Status.FLINCH].shieldBypassPercent / 100
+          damageOnShield = Math.ceil(reducedDamage * (1 - shieldBypass))
+          residualDamage = Math.ceil(reducedDamage * shieldBypass)
         } else {
           damageOnShield = reducedDamage
           residualDamage = 0
@@ -958,7 +971,7 @@ export default abstract class PokemonState {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
-        let sandstormDamage = 5
+        let sandstormDamage = WeatherConfigs[Weather.SANDSTORM].damagePerSecond
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
           sandstormDamage -= nbSmoothRocks
@@ -1003,9 +1016,9 @@ export default abstract class PokemonState {
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
     let passivePPGain = 10
     if (pokemon.simulation.weather === Weather.RAIN) {
-      passivePPGain += 3
+      passivePPGain += WeatherConfigs[Weather.RAIN].ppPerSecond
     } else if (pokemon.simulation.weather === Weather.DROUGHT) {
-      passivePPGain -= 3
+      passivePPGain -= WeatherConfigs[Weather.DROUGHT].ppPerSecond
     }
 
     pokemon.addPP(passivePPGain, pokemon, 0, false)

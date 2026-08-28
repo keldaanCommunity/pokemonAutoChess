@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { getEffectConfig } from "../../../../../config/game/effects"
+import { getStatusConfig } from "../../../../../config/game/statuses"
 import { BoardEffects } from "../../../../../types/enum/Effect"
 import { DocumentedStatuses } from "../../../../../types/enum/Status"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -16,7 +17,9 @@ export default function WikiStatus() {
             <img src={`assets/status/demo/${status}.gif`} alt={status} />
             <h2>{addIconsToDescription(status)}</h2>
             <p className="description">
-              {addIconsToDescription(t(`status_description.${status}`))}
+              {addIconsToDescription(t(`status_description.${status}`), {
+                config: getStatusConfig(status)
+              })}
             </p>
           </li>
         ))}

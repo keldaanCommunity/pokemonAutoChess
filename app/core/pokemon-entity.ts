@@ -10,7 +10,12 @@ import {
 import { AbilityConfigs } from "../config/game/abilities"
 import { computeBalance } from "../config/game/balance"
 import { EffectConfigs } from "../config/game/effects"
-import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
+import { StatusConfigs } from "../config/game/statuses"
+import {
+  getActiveSynergyTier,
+  SynergyConfigs,
+  SynergyTiers
+} from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -45,6 +50,7 @@ import {
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
+import { Status as StatusEnum } from "../types/enum/Status"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count, isIn } from "../utils/array"
@@ -439,8 +445,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
+        const armorEffectiveness =
+          1 -
+          StatusConfigs[StatusEnum.ARMOR_BREAK].effectivenessReductionPercent /
+            100
         const speDef = this.status.armorReduction
-          ? Math.round(this.speDef / 2)
+          ? Math.round(this.speDef * armorEffectiveness)
           : this.speDef
         const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
         const damageBlocked = min(0)(specialDamage - damageAfterReduction)
@@ -506,7 +516,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       baseValue *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
+        (this.status.fatigue && baseValue > 0
+          ? 1 - StatusConfigs[StatusEnum.FATIGUE].ppGainReductionPercent / 100
+          : 1)
     )
 
     value = applyTwistBandBuff(this, value, caster)
@@ -1052,16 +1064,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.hasSynergyEffect(Synergy.POISON)) {
-      let poisonChance = 0
-      if (this.effects.has(EffectEnum.POISONOUS)) {
-        poisonChance = 0.3
-      }
-      if (this.effects.has(EffectEnum.VENOMOUS)) {
-        poisonChance = 0.6
-      }
-      if (this.effects.has(EffectEnum.TOXIC)) {
-        poisonChance = 1.0
-      }
+      const poisonEffect = getActiveSynergyTier(Synergy.POISON, this.effects)
+      const poisonConfig = poisonEffect
+        ? EffectConfigs[poisonEffect]
+        : undefined
+      // Smelly Clay modifies the base chance before Luck is applied by chance().
+      let poisonChance = poisonConfig
+        ? computeBalance(poisonConfig.poisonChance, {
+            stars: this.stars,
+            ap: this.ap,
+            luck: 0
+          }) / 100
+        : 0
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -= nbSmellyClays * 0.15

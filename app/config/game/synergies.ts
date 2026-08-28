@@ -190,6 +190,16 @@ export const SynergyTiers = {
 export type SynergyTier<T extends Synergy = Synergy> =
   (typeof SynergyTiers)[T][number]
 
+type EffectCollection = Pick<ReadonlySet<EffectEnum>, "has">
+
+export function getActiveSynergyTier<T extends Synergy>(
+  synergy: T,
+  effects?: EffectCollection
+): SynergyTier<T> | undefined {
+  if (!effects) return undefined
+  return SynergyTiers[synergy].findLast((effect) => effects.has(effect))
+}
+
 export const SynergyTiersThresholds: { [key in Synergy]: number[] } = {
   [Synergy.NORMAL]: [3, 5, 7, 9],
   [Synergy.GRASS]: [3, 5, 7, 9],

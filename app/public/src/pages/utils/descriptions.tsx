@@ -1,6 +1,8 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
 import type { BalanceConfig } from "../../../../config/game/balance"
+import { getStatusConfig } from "../../../../config/game/statuses"
+import { getWeatherConfig } from "../../../../config/game/weathers"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -125,7 +127,9 @@ export function addIconsToDescription(
         icon = (
           <span
             className="description-icon status"
-            title={t(`status_description.${token}`)}
+            title={t(`status_description.${token}`, {
+              ...getStatusConfig(token as Status)
+            })}
           >
             <img src={`assets/icons/${token}.svg`} />
             <span
@@ -151,7 +155,9 @@ export function addIconsToDescription(
         icon = (
           <span
             className="description-icon weather"
-            title={t(`weather_description.${token}`)}
+            title={t(`weather_description.${token}`, {
+              ...getWeatherConfig(token as Weather)
+            })}
           >
             <img src={`assets/icons/weather/${token.toLowerCase()}.svg`} />
             <span className="weather-label">{t(`weather.${token}`)}</span>
@@ -262,7 +268,7 @@ export function addIconsToHtml(
           </span>`
         } else if (isIn(DocumentedStatuses, token)) {
           const isPositive = PositiveStatuses.includes(token as Status)
-          iconHTML = `<span class="description-icon status" title="${t(`status_description.${token}`)}">
+          iconHTML = `<span class="description-icon status" title="${t(`status_description.${token}`, { ...getStatusConfig(token as Status) })}">
             <img src="assets/icons/${token}.svg" />
             <span class="status-label${isPositive ? " positive" : ""}">${t(`status.${token}`)}</span>
           </span>`
@@ -272,7 +278,7 @@ export function addIconsToHtml(
             <span class="board-effect-label">${t(`effect.${token}`)}</span>
           </span>`
         } else if (isIn(Weathers, token)) {
-          iconHTML = `<span class="description-icon weather" title="${t(`weather_description.${token}`)}">
+          iconHTML = `<span class="description-icon weather" title="${t(`weather_description.${token}`, { ...getWeatherConfig(token as Weather) })}">
             <img src="assets/icons/weather/${token.toLowerCase()}.svg" />
             <span class="weather-label">${t(`weather.${token}`)}</span>
           </span>`

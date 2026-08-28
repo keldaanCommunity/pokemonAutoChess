@@ -8,6 +8,7 @@ import {
   PortalCarouselStages,
   RegionDetails
 } from "../../../../../config"
+import { getWeatherConfig } from "../../../../../config/game/weathers"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
 import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
@@ -147,7 +148,9 @@ export default function GameStageInfo() {
                   {t(`weather.${weather}`)}
                 </span>
                 <p>
-                  {addIconsToDescription(t(`weather_description.${weather}`))}
+                  {addIconsToDescription(t(`weather_description.${weather}`), {
+                    config: getWeatherConfig(weather)
+                  })}
                 </p>
               </Tooltip>,
               document.body

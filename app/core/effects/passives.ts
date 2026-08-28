@@ -1,4 +1,5 @@
 import { BOARD_WIDTH } from "../../config"
+import { StatusConfigs } from "../../config/game/statuses"
 import { SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
@@ -28,6 +29,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
+import { Status } from "../../types/enum/Status"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { isIn, removeInArray } from "../../utils/array"
@@ -71,7 +73,10 @@ import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
-  const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
+  const speed = pokemon.status.paralysis
+    ? pokemon.speed *
+      (1 - StatusConfigs[Status.PARALYSIS].speedReductionPercent / 100)
+    : pokemon.speed
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
     // CAST ABILITY

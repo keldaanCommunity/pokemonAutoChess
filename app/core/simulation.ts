@@ -11,6 +11,7 @@ import {
   SynergyConfigs,
   SynergyTiers
 } from "../config/game/synergies"
+import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -1287,7 +1288,10 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         pokemon.addSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
+          (pokemon.types.has(Synergy.FLYING)
+            ? WeatherConfigs[Weather.WINDY].flyingSpeedBonus
+            : WeatherConfigs[Weather.WINDY].speedBonus) +
+            nbFloatStones * 10,
           "environment",
           0,
           false
@@ -1297,7 +1301,12 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.SNOW:
         if (pokemon.types.has(Synergy.ICE) === false) {
-          pokemon.addSpeed(-10, "environment", 0, false)
+          pokemon.addSpeed(
+            -WeatherConfigs[Weather.SNOW].speedReduction,
+            "environment",
+            0,
+            false
+          )
         }
         break
 
@@ -1308,7 +1317,8 @@ export default class Simulation extends Schema implements ISimulation {
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
         pokemon.addDodgeChance(
-          0.15 - 0.05 * nbSmellyClays,
+          WeatherConfigs[Weather.SMOG].accuracyReductionPercent / 100 -
+            0.05 * nbSmellyClays,
           "environment",
           0,
           false
@@ -1321,7 +1331,13 @@ export default class Simulation extends Schema implements ISimulation {
           ? count(player.items, Item.BLACK_AUGURITE)
           : 0
 
-        pokemon.addCritChance(10 + 5 * nbBlackAugurite, "environment", 0, false)
+        pokemon.addCritChance(
+          WeatherConfigs[Weather.NIGHT].critChanceBonusPercent +
+            5 * nbBlackAugurite,
+          "environment",
+          0,
+          false
+        )
         break
       }
 
@@ -1336,7 +1352,10 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
         const luckDebuff =
-          10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
+          10 * nbOddStones -
+          (pokemon.types.has(Synergy.GHOST)
+            ? 0
+            : WeatherConfigs[Weather.MURKY].luckReduction)
         pokemon.addLuck(luckDebuff, "environment", 0, false)
         break
       }
@@ -1424,7 +1443,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
           } else {
             pokemonOnCell.handleDamage({
-              damage: 100,
+              damage: WeatherConfigs[Weather.STORM].lightningDamage,
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,

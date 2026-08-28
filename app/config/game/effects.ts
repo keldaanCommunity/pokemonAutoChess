@@ -7,6 +7,26 @@ export const EffectConfigs = {
       valuePerTier: [30],
       luckScaling: true
     }
+  },
+  [EffectEnum.POISONOUS]: {
+    poisonChance: {
+      valuePerTier: [30],
+      luckScaling: true
+    }
+  },
+  [EffectEnum.VENOMOUS]: {
+    poisonChance: {
+      valuePerTier: [60],
+      luckScaling: true
+    },
+    maxStacksBonus: 1
+  },
+  [EffectEnum.TOXIC]: {
+    poisonChance: {
+      valuePerTier: [100],
+      luckScaling: true
+    },
+    maxStacksBonus: 2
   }
 } as const satisfies Partial<Record<EffectEnum, BalanceConfig>>
 

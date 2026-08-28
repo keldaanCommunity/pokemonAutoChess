@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import { WeatherThreshold } from "../../../../../config"
+import { getWeatherConfig } from "../../../../../config/game/weathers"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
@@ -38,7 +39,9 @@ export default function WikiWeather() {
               </span>
             </header>
             <p className="description">
-              {addIconsToDescription(t(`weather_description.${weather}`))}
+              {addIconsToDescription(t(`weather_description.${weather}`), {
+                config: getWeatherConfig(weather)
+              })}
             </p>
             <ul>
               {(pokemonsInfluencingWeather.get(weather) ?? [])

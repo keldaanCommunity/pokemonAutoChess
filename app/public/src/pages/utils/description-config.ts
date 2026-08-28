@@ -3,7 +3,9 @@ import type { BalanceConfig } from "../../../../config/game/balance"
 import { EffectConfigs } from "../../../../config/game/effects"
 import { ItemConfigs } from "../../../../config/game/items"
 import { PassiveConfigs } from "../../../../config/game/passives"
+import { StatusConfigs } from "../../../../config/game/statuses"
 import { SynergyConfigs } from "../../../../config/game/synergies"
+import { WeatherConfigs } from "../../../../config/game/weathers"
 
 const INTERPOLATION_VARIABLE_REGEXP = /{{\s*([^{},\s]+)\s*}}/g
 const DescriptionConfigs: Record<
@@ -13,8 +15,10 @@ const DescriptionConfigs: Record<
   ability_description: AbilityConfigs,
   item_description: ItemConfigs,
   passive_description: PassiveConfigs,
+  status_description: StatusConfigs,
   synergy_description: SynergyConfigs,
-  effect_description: EffectConfigs
+  effect_description: EffectConfigs,
+  weather_description: WeatherConfigs
 }
 
 export function getDescriptionError(
