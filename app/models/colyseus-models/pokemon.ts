@@ -12,6 +12,7 @@ import {
   getAltFormForPlayer,
   RegionDetails
 } from "../../config"
+import { InimitableAbilities } from "../../config/game/abilities"
 import { SynergyTiers } from "../../config/game/synergies"
 import type Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
@@ -59,7 +60,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { removeInArray } from "../../utils/array"
+import { isIn, removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
@@ -422,7 +423,6 @@ export class Substitute extends Pokemon {
   range = 1
   skill = Ability.DEFAULT
   passive = Passive.SUBSTITUTE
-  canHoldItems = false
 }
 
 export class Egg extends Pokemon {
@@ -2012,8 +2012,8 @@ export class Porygon extends Pokemon {
   hp = 100
   atk = 13
   speed = 54
-  def = 12
-  speDef = 12
+  def = 8
+  speDef = 8
   maxPP = 100
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2028,8 +2028,8 @@ export class Porygon2 extends Pokemon {
   hp = 200
   atk = 23
   speed = 54
-  def = 16
-  speDef = 16
+  def = 12
+  speDef = 12
   maxPP = 80
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2043,8 +2043,8 @@ export class PorygonZ extends Pokemon {
   hp = 300
   atk = 33
   speed = 54
-  def = 16
-  speDef = 16
+  def = 12
+  speDef = 12
   maxPP = 60
   range = 2
   skill = Ability.TRI_ATTACK
@@ -2240,7 +2240,7 @@ export class Poliwhirl extends Pokemon {
       if (
         Math.max(
           ...schemaValues(player.board)
-            .filter((pkm) => pkm.index === this.index)
+            .filter((pkm) => pkm.name === this.name)
             .map((v) => v.positionY)
         ) === 3
       ) {
@@ -3341,7 +3341,7 @@ export class Igglybuff extends Pokemon {
   speed = 39
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -3356,7 +3356,7 @@ export class Jigglypuff extends Pokemon {
   speed = 39
   def = 4
   speDef = 4
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -3370,7 +3370,7 @@ export class Wigglytuff extends Pokemon {
   speed = 39
   def = 6
   speDef = 6
-  maxPP = 90
+  maxPP = 100
   range = 2
   skill = Ability.SING
 }
@@ -5249,8 +5249,8 @@ export class Gyarados extends Pokemon {
   hp = 300
   atk = 28
   speed = 51
-  def = 10
-  speDef = 2
+  def = 6
+  speDef = 5
   maxPP = 100
   range = 1
   skill = Ability.DRAGON_RAGE
@@ -11957,7 +11957,7 @@ export class Chingling extends Pokemon {
   speed = 46
   def = 5
   speDef = 6
-  maxPP = 80
+  maxPP = 75
   range = 2
   skill = Ability.ECHO
   passive = Passive.CHINGLING
@@ -11972,7 +11972,7 @@ export class Chimecho extends Pokemon {
   speed = 46
   def = 8
   speDef = 9
-  maxPP = 80
+  maxPP = 75
   range = 2
   skill = Ability.ECHO
   passive = Passive.CHIMECHO
@@ -14173,11 +14173,15 @@ export class Smeargle extends Pokemon {
 
   onSpawn({ entity }) {
     if (entity.player) {
-      const allyOnTheLeft = entity.player.getPokemonAt(
+      const allyOnTheLeft: IPokemon | null = entity.player.getPokemonAt(
         this.positionX - 1,
         this.positionY
       )
-      if (allyOnTheLeft && entity.skill === Ability.SKETCH) {
+      if (
+        allyOnTheLeft &&
+        entity.skill === Ability.SKETCH &&
+        !isIn(InimitableAbilities, allyOnTheLeft.skill)
+      ) {
         entity.maxPP = allyOnTheLeft.maxPP
         entity.skill = allyOnTheLeft.skill
         entity.stars = allyOnTheLeft.stars
@@ -14710,7 +14714,7 @@ export class Taillow extends Pokemon {
   speed = 80
   def = 6
   speDef = 5
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.AIR_SLASH
 }
@@ -14724,7 +14728,7 @@ export class Swellow extends Pokemon {
   speed = 80
   def = 11
   speDef = 9
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.AIR_SLASH
 }
@@ -15115,9 +15119,8 @@ export const burmyDivergentEvolutionRule = (
 ): StateEvolutionRule => ({
   type: EvolutionRuleType.STATE,
   condition: (pokemon: IPokemon, player: IPlayer, state: GameState) => {
-    //TOFIX: how to get stage level here ?
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     if (copies.length >= 3) return true
     return (
@@ -15128,7 +15131,7 @@ export const burmyDivergentEvolutionRule = (
   },
   divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     if (copies.length >= 3) return wormadam
     return Pkm.MOTHIM
@@ -15428,7 +15431,7 @@ export class Phanpy extends Pokemon {
   evolution = Pkm.DONPHAN
   stars = 1
   hp = 80
-  atk = 5
+  atk = 6
   speed = 41
   def = 8
   speDef = 4
@@ -15441,8 +15444,8 @@ export class Donphan extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.GROUND])
   rarity = Rarity.RARE
   stars = 2
-  hp = 180
-  atk = 10
+  hp = 200
+  atk = 14
   speed = 41
   def = 12
   speDef = 8
@@ -15796,7 +15799,7 @@ export class Rufflet extends Pokemon {
   speed = 51
   def = 4
   speDef = 4
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true
@@ -15811,7 +15814,7 @@ export class Braviary extends Pokemon {
   speed = 51
   def = 8
   speDef = 8
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.CRUSH_CLAW
   regional = true
@@ -19418,8 +19421,8 @@ export class BasculinRed extends Pokemon {
   hp = 160
   atk = 15
   speed = 56
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.BARED_FANGS
@@ -19434,8 +19437,8 @@ export class BasculinBlue extends Pokemon {
   hp = 160
   atk = 15
   speed = 56
-  def = 4
-  speDef = 3
+  def = 6
+  speDef = 5
   maxPP = 80
   range = 1
   skill = Ability.BARED_FANGS
@@ -20409,7 +20412,7 @@ export class Dondozo extends Pokemon {
   ])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 250
+  hp = 220
   atk = 15
   speed = 30
   def = 20

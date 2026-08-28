@@ -1681,9 +1681,9 @@ export default class PokemonSprite extends DraggableObject {
 }
 
 export const isEntity = (
-  pokemon: IPokemon | IPokemonEntity
+  pokemon: IPokemon | IPokemonEntity | Pkm | null | undefined
 ): pokemon is IPokemonEntity => {
-  return "status" in pokemon
+  return pokemon != null && typeof pokemon === "object" && "status" in pokemon
 }
 
 const lazyLoadingRequests = {}

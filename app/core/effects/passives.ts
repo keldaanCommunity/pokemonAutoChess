@@ -340,23 +340,23 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
 
 const transformToBustedMimikyu = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.MIMIKYU_BUSTED
+  pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
   pokemon.changePassive(Passive.MIMIKYU_BUSTED)
   pokemon.addAttack(8, pokemon, 0, false)
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+  }
 }
 
 const MimikuBustedTransformEffects = [
   new OnDamageReceivedEffect(({ pokemon }) => {
     if (pokemon.hp / pokemon.maxHP < 0.5) {
-      pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       transformToBustedMimikyu(pokemon)
       pokemon.status.triggerProtect(1500)
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
-      }
     }
   }, Passive.MIMIKYU),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === Pkm.MIMIKYU_BUSTED) {
+    if (pokemon.name === Pkm.MIMIKYU_BUSTED) {
       transformToBustedMimikyu(pokemon) // reapply busted mimikyu buffs on resurrect
     }
   }, Passive.MIMIKYU)
@@ -364,6 +364,7 @@ const MimikuBustedTransformEffects = [
 
 const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.DARMANITAN_ZEN
+  pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
   pokemon.changePassive(Passive.DARMANITAN_ZEN)
   pokemon.skill = Ability.TRANSE
   pokemon.pp = 0
@@ -374,6 +375,9 @@ const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.range += 4
   pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
   pokemon.toIdleState()
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
+  }
 }
 
 const DarmanitanZenTransformEffects = [
@@ -382,7 +386,6 @@ const DarmanitanZenTransformEffects = [
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.DARMANITAN
     ) {
-      pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
       const destination = board.getTeleportationCell(
         pokemon.positionX,
         pokemon.positionY,
@@ -392,13 +395,10 @@ const DarmanitanZenTransformEffects = [
         pokemon.moveTo(destination.x, destination.y, board, false)
 
       transformToDarmanitanZen(pokemon)
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
-      }
     }
   }, Passive.DARMANITAN),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === PkmIndex[Pkm.DARMANITAN_ZEN]) {
+    if (pokemon.name === Pkm.DARMANITAN_ZEN) {
       transformToDarmanitanZen(pokemon)
     }
   }, Passive.DARMANITAN)
@@ -406,6 +406,7 @@ const DarmanitanZenTransformEffects = [
 
 const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
+  pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
   pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
   pokemon.skill = Ability.TRANSE
   pokemon.pp = 0
@@ -420,6 +421,9 @@ const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.toIdleState()
   pokemon.addAttack(6, pokemon, 0, false)
   pokemon.addSpeed(-60, pokemon, 0, false)
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
+  }
 }
 
 const GalarianDarmanitanZenTransformEffects = [
@@ -428,16 +432,11 @@ const GalarianDarmanitanZenTransformEffects = [
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.GALARIAN_DARMANITAN
     ) {
-      pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
       transformToGalarianDarmanitanZen(pokemon)
-
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
-      }
     }
   }, Passive.GALARIAN_DARMANITAN),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]) {
+    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
       transformToGalarianDarmanitanZen(pokemon)
     }
   }, Passive.GALARIAN_DARMANITAN)
@@ -670,13 +669,13 @@ class ZygardeCellsEffect extends PeriodicEffect {
             pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
             if (this.cellsCount >= 95) {
               pokemon.handleHeal(0.2 * pokemon.maxHP, pokemon, 0, false)
-              if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+              if (pokemon.name === Pkm.ZYGARDE_10) {
                 pokemon.addDefense(2, pokemon, 0, false)
                 pokemon.addSpecialDefense(2, pokemon, 0, false)
                 pokemon.addMaxHP(5, pokemon, 0, false)
                 pokemon.addSpeed(-12, pokemon, 0, false)
                 pokemon.range = min(1)(pokemon.range + 1)
-              } else if (pokemon.index === PkmIndex[Pkm.ZYGARDE_50]) {
+              } else if (pokemon.name === Pkm.ZYGARDE_50) {
                 pokemon.addAttack(5, pokemon, 0, false)
                 pokemon.addDefense(5, pokemon, 0, false)
                 pokemon.addSpecialDefense(5, pokemon, 0, false)
@@ -1722,6 +1721,9 @@ export const PassiveEffects: Partial<
   ],
   [Passive.PRISM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.items.has(Item.SHINY_STONE)) {
+        inSpotlight = true
+      }
       if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
       } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
@@ -1829,7 +1831,7 @@ export const PassiveEffects: Partial<
 
   [Passive.AEGISLASH]: [
     new OnResurrectionEffect(({ pokemon }) => {
-      if (pokemon.index === PkmIndex[Pkm.AEGISLASH_BLADE]) {
+      if (pokemon.name === Pkm.AEGISLASH_BLADE) {
         // preserve the stat changes of blade form when resurrecting
         pokemon.addAttack(10, pokemon, 0, false)
         pokemon.addDefense(-5, pokemon, 0, false)

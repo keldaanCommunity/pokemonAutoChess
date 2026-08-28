@@ -634,6 +634,10 @@ export default class BattleManager {
             max(pokemon.maxPP)(value as IPokemonEntity["pp"])
           )
           break
+        case "maxPP": {
+          pkmSprite.lifebar?.setMaxPP(pokemon.maxPP)
+          break
+        }
         case "atk":
           if (previousValue != null && value && value > previousValue) {
             pkmSprite.displayBoost(Stat.ATK)

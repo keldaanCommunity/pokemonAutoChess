@@ -13,7 +13,7 @@ export class PopulationBombStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = 10
     const numberOfAttacks = Math.round(
-      ([4, 8, 12, 16, 20][pokemon.stars - 1] ?? 20) * (1 + pokemon.ap / 100)
+      ([4, 8, 12, 16, 32][pokemon.stars - 1] ?? 32) * (1 + pokemon.ap / 100)
     )
     for (let i = 0; i < numberOfAttacks; i++) {
       target.handleSpecialDamage(

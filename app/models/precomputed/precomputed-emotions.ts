@@ -8,6 +8,7 @@ export const PRECOMPUTED_EMOTIONS_PER_POKEMON_INDEX =
   }
 
 export function getAvailableEmotions(index: string, shiny: boolean): Emotion[] {
+  if (!index) return []
   if (shiny) {
     const shinyPad = index.length === 4 ? "-0000-0001" : "-0001"
     index += shinyPad

@@ -192,7 +192,7 @@ export function addIconsToDescription(
         const tier = params?.stars
         const maxTier = params?.stages ? params.stages + 1 : 5
         const tierValues =
-          params?.stars && !params?.showAbilityTiers
+          params?.stars && !params?.showAbilityTiers && array.length > 1
             ? [array[params.stars - 1]] // only show relevant tier
             : array.slice(0, maxTier) // show tier scaling
 

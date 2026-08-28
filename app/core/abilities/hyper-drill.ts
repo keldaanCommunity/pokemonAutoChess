@@ -12,7 +12,7 @@ export class HyperDrillStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [10, 30, 50, 100][pokemon.stars - 1] ?? 100
+    const damage = [10, 20, 40, 50, 100][pokemon.stars - 1] ?? 100
     const boardPlayer = target.simulation.bluePlayer
     let doubleDamage = false
     if (boardPlayer) {

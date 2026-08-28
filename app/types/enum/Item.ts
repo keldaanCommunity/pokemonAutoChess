@@ -469,7 +469,8 @@ export const TownItems = [
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
-  Item.LAPRAS_PASSPORT
+  Item.LAPRAS_PASSPORT,
+  Item.SOOTHE_BELL
 ] satisfies Item[]
 
 export const FishingRods = [
