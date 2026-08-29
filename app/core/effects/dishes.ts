@@ -73,7 +73,10 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       }
     }),
     new OnHitEffect(({ attacker, target }) => {
-      if (attacker.effects.has(EffectEnum.BLACK_SLUDGE) || chance(0.3, attacker)) {
+      if (
+        attacker.effects.has(EffectEnum.BLACK_SLUDGE) ||
+        chance(0.3, attacker)
+      ) {
         target.status.triggerPoison(5000, target, attacker)
         attacker.effects.delete(EffectEnum.BLACK_SLUDGE)
       }
@@ -101,6 +104,12 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.FRUIT_JUICE]: [
     new OnSpawnEffect((entity) => {
       entity.addSpeed(50, entity, 0, false)
+    })
+  ],
+  [Item.LUCKY_EGG]: [
+    new OnSpawnEffect((entity) => {
+      entity.addLuck(30, entity, 0, false)
+      entity.addAbilityPower(30, entity, 0, false)
     })
   ],
   [Item.HEARTY_STEW]: [

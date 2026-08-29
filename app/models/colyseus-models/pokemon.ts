@@ -6980,7 +6980,7 @@ export class Absol extends Pokemon {
 }
 
 export class Delibird extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING, Synergy.FIELD])
+  types = new SetSchema<Synergy>([Synergy.ICE, Synergy.FLYING, Synergy.GOURMET])
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200

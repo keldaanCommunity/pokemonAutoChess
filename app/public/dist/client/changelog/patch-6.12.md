@@ -7,6 +7,7 @@
 - Nerf Magic Bounce (Xatu): user gets SILENCE during the effect. Duration: 5 → 4 seconds
 - Poison Gas Board effect change: POISON Pokémon are now immune
 - Buff Carnivine: partial revert of the 6.8 nerf; Speed: 29 → 40
+- Delibird is now ICE/FLYING/GOURMET instead of ICE/FLYING/FIELD ; New dish: LUCKY_EGG
 
 # Changes to Synergies
 
