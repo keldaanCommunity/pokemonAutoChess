@@ -2969,7 +2969,8 @@
 		"RED_NECTAR": "다홍꿀",
 		"YELLOW_NECTAR": "진노랑꿀",
 		"PINK_NECTAR": "연분홍꿀",
-		"PURPLE_NECTAR": "보라꿀"
+		"PURPLE_NECTAR": "보라꿀",
+		"LUCKY_EGG": "행복의알"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "선사시대에 살았던 포켓몬의 화석이다.",
@@ -3329,7 +3330,8 @@
 		"BIG_MUSHROOM": "다음 전투에서 먹으면 최대 HP가 30% 증가한다. 타운으로 돌아갈 때 까지 갖고 있으면 2 GOLD에 팔린다.",
 		"TINY_MUSHROOM": "다음 전투에서 먹으면 SPEED가 30 증가하지만 최대 HP가 30% 감소한다. 타운으로 돌아갈 때 까지 갖고 있으면 1 GOLD에 팔린다.",
 		"GOLD_MASK": "전투가 시작되면 지니게 한 포켓몬과 타입을 공유하는 포켓몬 3마리가 소환된다. 희귀도와 단계는 스테이지를 넘어갈 수록 높아진다.",
-		"STAR_PIECE": "지니게 하면 STAR이 늘어나 기술의 위력이 증가한다."
+		"STAR_PIECE": "지니게 하면 STAR이 늘어나 기술의 위력이 증가한다.",
+		"LUCKY_EGG": "LUCK과 AP이 30 증가한다."
 	},
 	"passive_description": {
 		"NONE": "특성 없음",
@@ -4162,7 +4164,9 @@
 			"board_return": "자신의 보드로 돌아가기",
 			"wiki": "위키 열기",
 			"meta_report": "메타 열기",
-			"team_planner": "팀 플래너 열기"
+			"team_planner": "팀 플래너 열기",
+			"prev_player_by_rank": "이전 플레이어의 보드(등수 순)",
+			"next_player_by_rank": "다음 플레이어의 보드(등수 순)"
 		},
 		"disable_camera_shake": "카메라 흔들림 및 반짝임 제거",
 		"colorblind_mode": "색약 보정 모드",
@@ -4640,7 +4644,8 @@
 		"CHOSEN_ONES": "선택받은 자",
 		"UNOWN_SPELL": "모노두 안농 핫삼",
 		"GO_BIG_OR_GO_HOME": "거다이맥스 어드벤처",
-		"FAMILY_OUTING": "온가족 나들이"
+		"FAMILY_OUTING": "온가족 나들이",
+		"BENCH_IS_LAVA": "대기석 저리가라!"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "처음부터 추가되는 포켓몬이 활성화됩니다.",
@@ -4662,7 +4667,8 @@
 		"UNOWN_SPELL": "매 라운드마다 안농들이 곁에서 양 팀에게 주문을 겁니다.",
 		"GO_BIG_OR_GO_HOME": "매 스테이지마다 포켓몬들의 최대 HP가 5 상승하며 덩치가 커집니다.",
 		"FAMILY_OUTING": "같은 계통의 포켓몬이라면 모두 시너지 레벨에 반영됩니다.",
-		"CHOSEN_ONES": "추가 포켓몬으로 선택된 포켓몬이 즉시 진화하고 추가 능력치를 얻습니다."
+		"CHOSEN_ONES": "추가 포켓몬으로 선택된 포켓몬이 즉시 진화하고 추가 능력치를 얻습니다.",
+		"BENCH_IS_LAVA": "전투 도중에, 대기석이 모든 포켓몬들을 불태워 영구적으로 없앨 수 있는 용암이 되어버립니다."
 	},
 	"town_encounter_description": {
 		"KECLEON": "켈리몬이 시너지 도구를 {{cost}} GOLD 에 판매합니다.",
