@@ -295,21 +295,21 @@ export class RunningShoesOnMoveEffect extends OnMoveEffect {
   }
 }
 
-const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
-        cell.value.status.triggerBlinded(4000, cell.value, pokemon)
-      }
-    })
-    pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
-    pokemon.removeItem(Item.SMOKE_BALL)
+const smokeBallEffect = ({ pokemon, board }) => {
+  const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+  cells.forEach((cell) => {
+    if (cell.value && cell.value.team !== pokemon.team) {
+      cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+      cell.value.status.triggerBlinded(4000, cell.value, pokemon)
+    }
+  })
+  pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
+  pokemon.removeItem(Item.SMOKE_BALL)
+  if (pokemon.hp > 0) {
     pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board, false, false)
   }
-})
+}
 
 const ogerponMaskEffect = new OnItemDroppedEffect(
   ({ pokemon, player, item }) => {
@@ -831,7 +831,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.SMOKE_BALL]: [smokeBallEffect],
+  [Item.SMOKE_BALL]: [
+    new OnDamageReceivedEffect(({ pokemon, board }) => {
+      if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
+        smokeBallEffect({ pokemon, board })
+      }
+    }),
+    new OnDeathEffect(({ pokemon, board }) => {
+      if (pokemon.items.has(Item.SMOKE_BALL)) {
+        smokeBallEffect({ pokemon, board })
+      }
+    })
+  ],
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {

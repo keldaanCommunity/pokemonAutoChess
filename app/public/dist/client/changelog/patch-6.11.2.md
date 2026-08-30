@@ -1,6 +1,7 @@
-# Balance
+# Balance & Gameplay
 
 - Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
+- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
 
 # Bugfixes
 
