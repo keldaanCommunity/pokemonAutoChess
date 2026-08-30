@@ -13,6 +13,7 @@
 
 # Changes to Items
 
+- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
 - Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
