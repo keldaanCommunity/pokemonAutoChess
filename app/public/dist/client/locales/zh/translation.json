@@ -1995,7 +1995,7 @@
 		"MIST_BALL": "发射一个直线飞行的迷雾泡，对击中的敌方宝可梦造成[10,20,30,60,SP]点SPECIAL并降低他们30点AP。迷雾泡飞行4格后会往回移动。",
 		"MUD_BUBBLE": "使用者恢复[10,20,40,80,SP]点HP。",
 		"LINK_CABLE": "突进至最远的可触及敌方宝可梦的邻位，随后在正电拍拍和负电拍拍之间创造一道电弧，对击中的敌方宝可梦造成[40,40,40,80,SP]点SPECIAL。若正电拍拍或负电拍拍单独在场，改为对ADJACENT敌方宝可梦造成伤害。",
-		"MAGIC_BOUNCE": "在接下来的4秒内，每当使用者被招式击中时，格挡此伤害并将[50,100,200,400,SP]%的SPECIAL反弹给招式的使用者。在此期间，使用者陷入SILENCE",
+		"MAGIC_BOUNCE": "在接下来的4秒内，每当使用者被招式击中时，格挡此伤害并将[50,100,200,400,SP]%的SPECIAL反弹给招式的使用者。在此期间，使用者陷入SILENCE。",
 		"REFLECT": "在接下来的[3,3,3,5]秒内，每当使用者受到PHYSICAL时，格挡此伤害并将[50,75,100,150,SP]%的SPECIAL反弹给伤害来源。",
 		"HIDDEN_POWER_A": "召唤4只凯西，战场上每一角1只。",
 		"HIDDEN_POWER_B": "使所有敌方宝可梦陷入BURN 30秒。",
@@ -2777,6 +2777,7 @@
 		"CASTELIACONE": "飞云冰淇淋",
 		"WHIPPED_DREAM": "泡沫奶油",
 		"BERRY_JUICE": "树果汁",
+		"LUCKY_EGG": "幸运蛋",
 		"NANAB_BERRY": "蕉香果",
 		"TART_APPLE": "酸酸苹果",
 		"SWEET_APPLE": "甜甜苹果",
@@ -3139,6 +3140,7 @@
 		"WHIPPED_DREAM": "仅在下一轮战斗中，攻击ON_HIT有[30,LK]%的概率使敌方宝可梦陷入CHARM 2秒。第一次攻击必定触发此效果。",
 		"BLACK_SLUDGE": "食用的宝可梦陷入POISONNED。若为POISON，改为每2秒恢复5%的最大HP。仅在下一轮战斗中，攻击ON_HIT有[30,LK]%的概率使敌方宝可梦陷入POISONNED 5秒。第一次攻击必定触发此效果。",
 		"BERRY_JUICE": "仅在下一轮战斗中，战斗开始时以及每次食用树果时获得100点SHIELD。",
+		"LUCKY_EGG": "仅在下一轮战斗中，提升30点LUCK和30点AP",
 		"TART_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点DEF。一轮结束后，会变为SWEET_APPLE。",
 		"SWEET_APPLE": "仅在下一轮战斗中，食用者的每次攻击会减少目标2点SPE_DEF。一轮结束后，会变为SIRUPY_APPLE。",
 		"SIRUPY_APPLE": "仅在下一轮战斗中，食用者的每次攻击有[30,LK]%的概率使目标陷入PARALYSIS 1秒。一轮结束后，会变为LEFTOVERS。",
@@ -3504,7 +3506,8 @@
 		"PASSIMIAN": "投掷猴自身携带着一枚BALL。",
 		"UXIE": "你已通过此宝可梦的招式获得了{{stacks}}点XP",
 		"NECTAR": "花盆中的宝可梦完全长成时，根据其颜色获得对应的花蜜。",
-		"STEELY_SPIRIT": "ADJACENT_IN_THE_SAME_ROW我方宝可梦的攻击伤害的10%改为TRUE。"
+		"STEELY_SPIRIT": "ADJACENT_IN_THE_SAME_ROW我方宝可梦的攻击伤害的10%改为TRUE。",
+		"MYTHOSIS": "被击倒时，此宝可梦会分裂为两只前一进化等级的复制体。这些复制体不携带任何道具，初始PP为此宝可梦被击倒时PP值的一半。"
 	},
 	"stat": {
 		"ATK": "攻击",
