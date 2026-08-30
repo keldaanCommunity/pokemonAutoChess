@@ -7,8 +7,8 @@
 ![shuckle](/assets/portraits/0213/Normal.png)
 ![phione](/assets/portraits/0489/Normal.png)
 ![combee](/assets/portraits/0415/Normal.png)
-![vespiqueen](/assets/portraits/0416/Normal.png)
-Phione, Shuckle, Combee and Vespiqueen
+![vespiquen](/assets/portraits/0416/Normal.png)
+Phione, Shuckle, Combee and Vespiquen
 
 Phione will evolve into a manaphy if you give him an aqua egg.
 

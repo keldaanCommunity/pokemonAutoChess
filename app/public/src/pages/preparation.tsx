@@ -174,7 +174,10 @@ export default function Preparation() {
 
         if (user.uid === uid) {
           dispatch(setUser(user))
-          if (room.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+          if (
+            room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+            room.state.gameMode !== GameMode.DOUBLE_UP
+          ) {
             toggleReady(true) // automatically set users ready in non-classic game mode
           }
         } else if (!user.isBot) {
@@ -194,7 +197,9 @@ export default function Preparation() {
           "title",
           "ready",
           "twitchLogin",
-          "twitchDisplayName"
+          "twitchDisplayName",
+          "doubleUpPartnerId",
+          "doubleUpTeamId"
         ] satisfies NonFunctionPropNames<GameUser>[]
 
         fields.forEach((field) => {

@@ -72,6 +72,10 @@
   margin-bottom: 0.5em;
 }
 
+#wiki-page .wiki-faq details p {
+  white-space: pre-wrap;
+}
+
 #wiki-page .wiki-status,
 #wiki-page .wiki-stat {
   display: grid;
@@ -88,9 +92,10 @@
   column-gap: 0.5em;
 }
 
-#wiki-page .wiki-status h2 {
-  margin: 0;
-  font-size: 2rem;
+#wiki-page .wiki-board-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-stat h2 {
@@ -217,6 +222,11 @@
   font-size: 1.5rem;
 }
 
+#wiki-regions .react-tabs__tab-panel {
+  flex: 1;
+  min-height: 0;
+}
+
 #wiki-regions .wiki-regional-mons {
   position: absolute;
   bottom: 1em;
@@ -269,6 +279,7 @@
 
 #wiki-ability .my-box p {
   font-size: 0.8em;
+  white-space: pre-wrap;
 }
 
 #wiki-ability img.item {
@@ -378,4 +389,40 @@
   #wiki-page .wiki-types li[role="tab"] {
     padding: 4px;
   }
+}
+
+#wiki-page .wiki-double-up {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+}
+
+#wiki-page .wiki-double-up h2 {
+  margin: 0 0 0.25em 0;
+}
+
+#wiki-page .wiki-double-up p {
+  margin: 0;
+}
+
+#wiki-page .wiki-double-up ul {
+  margin: 0.25em 0 0 1em;
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up li {
+  list-style: disc;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0.25em 0;
+}
+
+#wiki-page .wiki-double-up .double-up-tradable-items img.item {
+  width: 22px;
+  height: 22px;
 }
