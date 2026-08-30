@@ -2015,7 +2015,7 @@
 		"HIDDEN_POWER_P": "随机召唤5只星级为STAR的BUG宝可梦。",
 		"HIDDEN_POWER_Q": "立刻结束当前战斗，本场视为平局。",
 		"HIDDEN_POWER_R": "玩家获得6次免费的商店刷新次数。",
-		"HIDDEN_POWER_S": "BOARD_EFFECT一道席卷全场的TIDAL_WAVE清除负面状态和场地效果，为所有我方宝可梦恢复20%的HP，并击退敌方宝可梦且对他们造成TRUE，数值相当于其10%的最大HP。",
+		"HIDDEN_POWER_S": "BOARD_EFFECT：一道席卷全场的TIDAL_WAVE清除负面状态和场地效果，为所有我方宝可梦恢复20%的HP，并击退敌方宝可梦且对他们造成TRUE，数值相当于其10%的最大HP。",
 		"HIDDEN_POWER_T": "玩家随机获得3枚树果。",
 		"HIDDEN_POWER_U": "召唤一只携带AQUA_EGG且PP已满的由克希。",
 		"HIDDEN_POWER_V": "对所有敌方宝可梦各释放一次$t(ability.THUNDER_SHOCK)。",
