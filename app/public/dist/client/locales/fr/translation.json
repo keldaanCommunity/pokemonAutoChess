@@ -4614,8 +4614,7 @@
 		"GO_BIG_OR_GO_HOME": "Voit grand ou abandonne",
 		"FAMILY_OUTING": "Ballade en famille",
 		"UNOWN_SPELL": "Le Sort des Zarbi",
-		"CHOSEN_ONES": "Les Élus",
-		"BENCH_IS_LAVA": "Le Banc est désormais de la lave"
+		"CHOSEN_ONES": "Les Élus"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Tous les Pokémon additionnels sont disponibles immédiatement",
@@ -4637,8 +4636,7 @@
 		"GO_BIG_OR_GO_HOME": "Les unités gagnent 5 HP max et grossissent en taille à chaque tour.",
 		"FAMILY_OUTING": "Les Pokémon de la même famille comptent tous dans le niveau de vos synergies.",
 		"UNOWN_SPELL": "Les Zarbi observent vos combats et lancent des sorts sur les deux équipes à chaque manche.",
-		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus.",
-		"BENCH_IS_LAVA": "Pendant les combats, votre banc deviendra de la lave qui brûlera progressivement les Pokémons se trouvant par mégarde dessus et éliminera ces derniers après un bout de temps."
+		"CHOSEN_ONES": "Les choix additionnels que vous sélectionnez évoluent immédiatement et gagnent des statistiques bonus."
 	},
 	"town_encounter_description": {
 		"KECLEON": "$t(pkm.KECLEON) vend des objets à synergies pour {{cost}} GOLD",

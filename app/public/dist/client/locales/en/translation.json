@@ -4860,8 +4860,7 @@
 		"GO_BIG_OR_GO_HOME": "Go big or go home",
 		"FAMILY_OUTING": "Family Outing",
 		"UNOWN_SPELL": "Unown Spell",
-		"CHOSEN_ONES": "The Chosen Ones",
-		"BENCH_IS_LAVA": "The Bench is Lava"
+		"CHOSEN_ONES": "The Chosen Ones"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "All the additional picks are available immediately",
@@ -4883,8 +4882,7 @@
 		"GO_BIG_OR_GO_HOME": "Units gain 5 max HP and grow in size at every stage.",
 		"FAMILY_OUTING": "Pokémon from the same family all count towards synergy levels.",
 		"UNOWN_SPELL": "Unowns are spectating your fights and are casting spells on both teams each round.",
-		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats.",
-		"BENCH_IS_LAVA": "During fights, your bench becomes lava that BURN all Pokémon on it and can eliminate them permanently after a while."
+		"CHOSEN_ONES": "The add picks you choose evolve immediately and gain bonus stats."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon sells Synergy items for {{cost}} GOLD",

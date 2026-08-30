@@ -36,3 +36,4 @@
 # Misc
 
 - The post game screen has new victory jingles made by John Rei
+- Removed Bench is Lava scribble

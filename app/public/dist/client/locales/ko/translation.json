@@ -4640,8 +4640,7 @@
 		"CHOSEN_ONES": "선택받은 자",
 		"UNOWN_SPELL": "모노두 안농 핫삼",
 		"GO_BIG_OR_GO_HOME": "거다이맥스 어드벤처",
-		"FAMILY_OUTING": "온가족 나들이",
-		"BENCH_IS_LAVA": "대기석 저리가라!"
+		"FAMILY_OUTING": "온가족 나들이"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "처음부터 추가되는 포켓몬이 활성화됩니다.",
@@ -4663,8 +4662,7 @@
 		"UNOWN_SPELL": "매 라운드마다 안농들이 곁에서 양 팀에게 주문을 겁니다.",
 		"GO_BIG_OR_GO_HOME": "매 스테이지마다 포켓몬들의 최대 HP가 5 상승하며 덩치가 커집니다.",
 		"FAMILY_OUTING": "같은 계통의 포켓몬이라면 모두 시너지 레벨에 반영됩니다.",
-		"CHOSEN_ONES": "추가 포켓몬으로 선택된 포켓몬이 즉시 진화하고 추가 능력치를 얻습니다.",
-		"BENCH_IS_LAVA": "전투 도중에, 대기석이 모든 포켓몬들을 불태워 영구적으로 없앨 수 있는 용암이 되어버립니다."
+		"CHOSEN_ONES": "추가 포켓몬으로 선택된 포켓몬이 즉시 진화하고 추가 능력치를 얻습니다."
 	},
 	"town_encounter_description": {
 		"KECLEON": "켈리몬이 시너지 도구를 {{cost}} GOLD 에 판매합니다.",

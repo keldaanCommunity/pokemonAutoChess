@@ -4830,8 +4830,7 @@
 		"GO_BIG_OR_GO_HOME": "坚 持 锻 炼",
 		"FAMILY_OUTING": "全 家 出 动",
 		"UNOWN_SPELL": "图 腾 神 力",
-		"CHOSEN_ONES": "钦 定 之 选",
-		"BENCH_IS_LAVA": "岩 浆 板 凳"
+		"CHOSEN_ONES": "钦 定 之 选"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "所有附加宝可梦在游戏开始时立即可选。",
@@ -4853,8 +4852,7 @@
 		"GO_BIG_OR_GO_HOME": "所有宝可梦每轮提升5点最大HP，体型也会相应变大。",
 		"FAMILY_OUTING": "同一进化线上的宝可梦可以同时参与共鸣计数。",
 		"UNOWN_SPELL": "未知图腾会围观每轮对战，并向双方队伍释放招式。",
-		"CHOSEN_ONES": "你选择的附加宝可梦会立即进化，且会获得额外的属性值。",
-		"BENCH_IS_LAVA": "战斗过程中，备战区的地面会变为岩浆，使所有位于此处的宝可梦陷入BURN。如果战斗时间足够长，来自岩浆的BURN伤害可以将那些宝可梦永久消灭。"
+		"CHOSEN_ONES": "你选择的附加宝可梦会立即进化，且会获得额外的属性值。"
 	},
 	"town_encounter_description": {
 		"KECLEON": "变隐龙会以每块{{cost}} GOLD的价格出售共鸣赋予道具。",

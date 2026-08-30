@@ -4543,8 +4543,7 @@
 		"GO_BIG_OR_GO_HOME": "Ou vai ou racha",
 		"FAMILY_OUTING": "Passeio em Família",
 		"UNOWN_SPELL": "Magia dos Unowns",
-		"CHOSEN_ONES": "Os Escolhidos",
-		"BENCH_IS_LAVA": "O Banco é Lava"
+		"CHOSEN_ONES": "Os Escolhidos"
 	},
 	"scribble_description": {
 		"EVERYONE_IS_HERE": "Todas as opções adicionais estão disponíveis imediatamente",
@@ -4566,8 +4565,7 @@
 		"FAMILY_OUTING": "Pokémons da mesma família contam para os níveis de sinergia.",
 		"UNOWN_SPELL": "Os Unowns estão assistindo às suas lutas e lançando habilidades em ambas as equipes a cada rodada.",
 		"CHOSEN_ONES": "Os Pokémons adicionais que você escolher evoluem imediatamente e ganham atributos bônus.",
-		"BLOOD_MONEY": "Cada nocaute concede 1 GOLD (exceto clones e invocações). Sem renda extra de juros.",
-		"BENCH_IS_LAVA": "Durante as lutas, seu banco se transforma em lava que aplica BURN em todos os Pokémon nele e pode eliminá-los permanentemente após um tempo."
+		"BLOOD_MONEY": "Cada nocaute concede 1 GOLD (exceto clones e invocações). Sem renda extra de juros."
 	},
 	"town_encounter_description": {
 		"KECLEON": "Kecleon vende Pedras de Sinergia por {{cost}} GOLD",
