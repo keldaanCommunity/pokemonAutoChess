@@ -2,7 +2,10 @@ import type { Iterator } from "@colyseus/schema"
 import { SchemaSerializer } from "@colyseus/sdk"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config/game/board"
 import { PortalCarouselStages } from "../../../config/game/stages"
-import { SynergyTiersThresholds } from "../../../config/game/synergies"
+import {
+  SynergyConfigs,
+  SynergyTiersThresholds
+} from "../../../config/game/synergies"
 import { getLevelUpCost } from "../../../models/colyseus-models/experience-manager"
 import type Player from "../../../models/colyseus-models/player"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
@@ -306,7 +309,8 @@ function digSite(
   const y = unit.positionY
   const holes = player?.groundHoles
   const before = holes ? (holes[(y - 1) * BOARD_WIDTH + x] ?? 0) : 0
-  return { x, y, depth: Math.min(before + 1, 5) }
+  const maxDepth = SynergyConfigs[Synergy.GROUND].maxDepth
+  return { x, y, depth: Math.min(before + 1, maxDepth) }
 }
 
 // per-player previous frame the diff compares against (refreshed each state frame); shop is empty for non-pov players (@view), so shop branches skip them

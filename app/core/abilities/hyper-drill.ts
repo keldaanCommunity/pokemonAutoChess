@@ -1,5 +1,7 @@
 import { BOARD_WIDTH } from "../../config"
+import { SynergyConfigs } from "../../config/game/synergies"
 import { AttackType } from "../../types/enum/Game"
+import { Synergy } from "../../types/enum/Synergy"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -17,7 +19,8 @@ export class HyperDrillStrategy extends AbilityStrategy {
     let doubleDamage = false
     if (boardPlayer) {
       const index = target.positionY * BOARD_WIDTH + target.positionX
-      if (boardPlayer.groundHoles[index] === 5) {
+      const maxDepth = SynergyConfigs[Synergy.GROUND].maxDepth
+      if (boardPlayer.groundHoles[index] === maxDepth) {
         doubleDamage = true
       } else {
         boardPlayer.groundHoles[index] =

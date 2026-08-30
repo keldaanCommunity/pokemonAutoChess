@@ -24,6 +24,16 @@ import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
 
+function getAquaticReductionPercent(pkm: IPokemonEntity): number {
+  const effect = getActiveSynergyTier(Synergy.AQUATIC, pkm.effects)
+  if (!effect) return 0
+  const config =
+    effect === EffectEnum.SURGE_SURFER
+      ? EffectConfigs[EffectEnum.WATER_VEIL]
+      : EffectConfigs[effect]
+  return config.statusReductionPercent
+}
+
 export default class Status extends Schema implements IStatus {
   @type("boolean") burn = false
   @type("boolean") silence = false
@@ -218,7 +228,9 @@ export default class Status extends Schema implements IStatus {
       !this.paralysis &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerParalysis(2000, pokemon, null)
+      const paralysisDuration =
+        EffectConfigs[EffectEnum.STICKY_WEB].paralysisDuration
+      this.triggerParalysis(paralysisDuration * 1000, pokemon, null)
     }
 
     if (
@@ -226,7 +238,8 @@ export default class Status extends Schema implements IStatus {
       !this.sleep &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerSleep(1000, pokemon)
+      const sleepDuration = EffectConfigs[EffectEnum.COTTON_BALL].sleepDuration
+      this.triggerSleep(sleepDuration * 1000, pokemon)
       pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
@@ -478,16 +491,7 @@ export default class Status extends Schema implements IStatus {
         burnDamage *= 0.5
       }
 
-      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        burnDamage *= 0.7
-      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        burnDamage *= 0.5
-      } else if (
-        pkm.effects.has(EffectEnum.WATER_VEIL) ||
-        pkm.effects.has(EffectEnum.SURGE_SURFER)
-      ) {
-        burnDamage *= 0.3
-      }
+      burnDamage *= 1 - getAquaticReductionPercent(pkm) / 100
 
       if (
         pkm.passive === Passive.WELL_BAKED ||
@@ -673,16 +677,7 @@ export default class Status extends Schema implements IStatus {
         poisonDamage *= 0.5
       }
 
-      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        poisonDamage *= 0.7
-      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        poisonDamage *= 0.5
-      } else if (
-        pkm.effects.has(EffectEnum.WATER_VEIL) ||
-        pkm.effects.has(EffectEnum.SURGE_SURFER)
-      ) {
-        poisonDamage *= 0.3
-      }
+      poisonDamage *= 1 - getAquaticReductionPercent(pkm) / 100
       poisonDamage = Math.round(poisonDamage)
 
       if (poisonDamage < 0) {
@@ -1358,16 +1353,9 @@ export default class Status extends Schema implements IStatus {
     duration: number,
     pkm: IPokemonEntity
   ): number {
-    if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * 0.7)
-    } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.5)
-    } else if (
-      pkm.effects.has(EffectEnum.WATER_VEIL) ||
-      pkm.effects.has(EffectEnum.SURGE_SURFER)
-    ) {
-      duration = Math.round(duration * 0.3)
-    }
+    duration = Math.round(
+      duration * (1 - getAquaticReductionPercent(pkm) / 100)
+    )
 
     const nbOddStones = pkm.player
       ? count(pkm.player.items, Item.ODD_KEYSTONE)

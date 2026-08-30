@@ -5,8 +5,10 @@ import {
   BOARD_WIDTH,
   FAIRY_WANDS_BY_SYNERGY_LEVEL,
   RegionDetails,
+  SynergyTiers,
   SynergyTiersThresholds
 } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
@@ -26,7 +28,7 @@ import {
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
-import { EnvironmentalEffects } from "../../types/enum/Effect"
+import { EffectEnum, EnvironmentalEffects } from "../../types/enum/Effect"
 import {
   BattleResult,
   PokemonActionState,
@@ -564,7 +566,11 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const nbWeatherRocks = getSynergyTier(this.synergies, Synergy.ROCK)
+    const rockLevel = getSynergyTier(this.synergies, Synergy.ROCK)
+    const rockEffect = SynergyTiers[Synergy.ROCK][rockLevel - 1]
+    const nbWeatherRocks = rockEffect
+      ? EffectConfigs[rockEffect].maxWeatherRocks
+      : 0
 
     let weatherRockInInventory
     do {
@@ -630,7 +636,12 @@ export default class Player extends Schema implements IPlayer {
 
   updateChefsHats() {
     const gourmetLevel = getSynergyTier(this.synergies, Synergy.GOURMET)
-    const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
+    const gourmetEffect = SynergyTiers[Synergy.GOURMET][gourmetLevel - 1]
+    const chefHatEffect =
+      gourmetEffect === EffectEnum.LUNCH_BREAK
+        ? EffectEnum.APPETIZER
+        : gourmetEffect
+    const newNbHats = chefHatEffect ? EffectConfigs[chefHatEffect].chefHats : 0
     const hatHolders = schemaValues(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
     )
@@ -685,10 +696,15 @@ export default class Player extends Schema implements IPlayer {
         i++
       ) {
         if (i in FAIRY_WANDS_BY_SYNERGY_LEVEL) {
+          const fairyEffect = SynergyTiers[Synergy.FAIRY][i]
+          const wandChoices = fairyEffect
+            ? EffectConfigs[fairyEffect].wandChoices
+            : 0
+          const availableWands = FAIRY_WANDS_BY_SYNERGY_LEVEL[i]
           this.choices.push(
             new PlayerChoice({
               type: "wand",
-              items: pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[i], 3)
+              items: pickNRandomIn(availableWands, wandChoices)
             })
           )
         }

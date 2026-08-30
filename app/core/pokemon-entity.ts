@@ -291,7 +291,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
           attacker.id !== this.id &&
-          this.hp <= 10))
+          this.hp <= EffectConfigs[EffectEnum.MERCILESS].allyHpThreshold))
     )
   }
 
@@ -419,7 +419,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.effects.has(EffectEnum.STRANGE_STEAM) ||
         (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
-        specialDamage *= 1.2
+        const damageModifier =
+          EffectConfigs[EffectEnum.STRANGE_STEAM].damageModifierPercent
+        specialDamage *= 1 + damageModifier / 100
       }
       if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
         const nbBlackAugurite = this.player
@@ -1034,9 +1036,17 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      const freezeChance = 0.2 + nbIcyRocks * 0.05
+      const config = SynergyConfigs[Synergy.ICE]
+      const freezeChance =
+        computeBalance(config.freezeChance, {
+          stars: this.stars,
+          ap: this.ap,
+          luck: 0
+        }) /
+          100 +
+        nbIcyRocks * 0.05
       if (chance(freezeChance, this)) {
-        target.status.triggerFreeze(2000, target, this)
+        target.status.triggerFreeze(config.freezeDuration * 1000, target, this)
       }
     }
 
@@ -1044,14 +1054,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const config = EffectConfigs[EffectEnum.FLAME_BODY]
       const burnChance = computeBalance(config.burnChance, this) / 100
       if (chance(burnChance)) {
-        target.status.triggerBurn(3000, target, this)
+        target.status.triggerBurn(config.burnDuration * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.MONSTER)) {
-      const flinchChance = 0.3
+      const flinchConfig = EffectConfigs[EffectEnum.PURSUIT].flinchChance
+      const flinchChance =
+        computeBalance(flinchConfig, {
+          stars: this.stars,
+          ap: this.ap,
+          luck: 0
+        }) / 100
       if (chance(flinchChance, this)) {
-        target.status.triggerFlinch(3000, target, this)
+        const flinchDuration = SynergyConfigs[Synergy.MONSTER].flinchDuration
+        target.status.triggerFlinch(flinchDuration * 1000, target, this)
       }
     }
 
@@ -1081,14 +1098,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         poisonChance -= nbSmellyClays * 0.15
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
-        target.status.triggerPoison(4000, target, this)
+        const poisonDuration = SynergyConfigs[Synergy.POISON].poisonDuration
+        target.status.triggerPoison(poisonDuration * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.WILD)) {
-      const woundChance = 0.25
+      const config = SynergyConfigs[Synergy.WILD]
+      const woundChance =
+        computeBalance(config.woundChance, {
+          stars: this.stars,
+          ap: this.ap,
+          luck: 0
+        }) / 100
       if (chance(woundChance, this)) {
-        target.status.triggerWound(3000, target, this)
+        target.status.triggerWound(config.woundDuration * 1000, target, this)
       }
     }
 
@@ -1354,7 +1378,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         })
     }
 
-    if (shouldProtect) this.status.triggerProtect(2000)
+    const protectDuration =
+      EffectConfigs[EffectEnum.FEATHER_DANCE].protectDuration
+    if (shouldProtect) this.status.triggerProtect(protectDuration * 1000)
     if (shouldSkydive && flyAwayCell?.target) {
       this.broadcastAbility({
         skill: "FLYING_TAKEOFF",
@@ -1377,8 +1403,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.commands.push(
         new DelayedCommand(() => {
           if (flyAwayCell.target?.hp > 0) {
+            const landingDamage =
+              (EffectConfigs[EffectEnum.SKYDIVE].landingDamagePercent / 100) *
+              this.atk
             flyAwayCell.target.handleSpecialDamage(
-              1.5 * this.atk,
+              landingDamage,
               board,
               AttackType.PHYSICAL,
               this,
@@ -1732,7 +1761,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.has(EffectEnum.OVERGROW)) {
-      this.addAbilityPower(50, this, 0, false)
+      const abilityPower = EffectConfigs[EffectEnum.OVERGROW].abilityPower
+      this.addAbilityPower(abilityPower, this, 0, false)
     }
   }
 

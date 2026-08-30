@@ -11,6 +11,7 @@ import {
   Troopers
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
+import { SynergyConfigs } from "../../../../config/game/synergies"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons
@@ -453,6 +454,7 @@ export default class BoardManager {
   }
 
   renderGroundHoles() {
+    const maxDepth = SynergyConfigs[Synergy.GROUND].maxDepth
     this.groundHoles.forEach((hole) => hole.destroy())
     this.groundHoles = []
     for (let row = 0; row < BOARD_HEIGHT / 2; row++) {
@@ -461,7 +463,7 @@ export default class BoardManager {
         const index = col + row * BOARD_WIDTH
         while (
           col + trenchWidth < BOARD_WIDTH &&
-          this.player.groundHoles[index + trenchWidth] === 5
+          this.player.groundHoles[index + trenchWidth] === maxDepth
         ) {
           trenchWidth++
         }

@@ -1,3 +1,4 @@
+import { EffectConfigs } from "../../config/game/effects"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
@@ -32,11 +33,15 @@ export class DarkestLariatStrategy extends AbilityStrategy {
                 crit
               )
               if (pokemon.effects.has(EffectEnum.WILDFIRE)) {
-                pokemon.addAttack(1, pokemon, 0, false)
+                const attack = EffectConfigs[EffectEnum.WILDFIRE].attackPerHit
+                pokemon.addAttack(attack, pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.BLAZE)) {
-                pokemon.addAttack(2, pokemon, 0, false)
+                const attack = EffectConfigs[EffectEnum.BLAZE].attackPerHit
+                pokemon.addAttack(attack, pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
-                pokemon.addAttack(3, pokemon, 0, false)
+                const attack =
+                  EffectConfigs[EffectEnum.DESOLATE_LAND].attackPerHit
+                pokemon.addAttack(attack, pokemon, 0, false)
               }
             }
           },

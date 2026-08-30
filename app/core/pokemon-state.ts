@@ -1,8 +1,13 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { computeBalance } from "../config/game/balance"
+import { EffectConfigs } from "../config/game/effects"
 import { PassiveConfigs } from "../config/game/passives"
 import { StatusConfigs } from "../config/game/statuses"
-import { SynergyTiers } from "../config/game/synergies"
+import {
+  getActiveSynergyTier,
+  SynergyConfigs,
+  SynergyTiers
+} from "../config/game/synergies"
 import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
@@ -77,11 +82,18 @@ export default abstract class PokemonState {
         if (hasCritNegation) {
           critReductionFactor = 0
         } else if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-          critReductionFactor -= 0.3
+          const reduction =
+            EffectConfigs[EffectEnum.BATTLE_ARMOR].critDamageReductionPercent
+          critReductionFactor -= reduction / 100
         } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-          critReductionFactor -= 0.5
+          const reduction =
+            EffectConfigs[EffectEnum.MOUTAIN_RESISTANCE]
+              .critDamageReductionPercent
+          critReductionFactor -= reduction / 100
         } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-          critReductionFactor -= 0.7
+          const reduction =
+            EffectConfigs[EffectEnum.DIAMOND_STORM].critDamageReductionPercent
+          critReductionFactor -= reduction / 100
         }
         critReductionFactor -= 0.1 * nbBlackAugurite
         critReductionFactor = min(0)(critReductionFactor)
@@ -154,13 +166,18 @@ export default abstract class PokemonState {
 
       let trueDamagePart = 0
       if (pokemon.effects.has(EffectEnum.STEEL_SURGE)) {
-        trueDamagePart += 0.33
+        const percent = EffectConfigs[EffectEnum.STEEL_SURGE].trueDamagePercent
+        trueDamagePart += percent / 100
       } else if (pokemon.effects.has(EffectEnum.STEEL_SPIKE)) {
-        trueDamagePart += 0.66
+        const percent = EffectConfigs[EffectEnum.STEEL_SPIKE].trueDamagePercent
+        trueDamagePart += percent / 100
       } else if (pokemon.effects.has(EffectEnum.CORKSCREW_CRASH)) {
-        trueDamagePart += 1.0
+        const percent =
+          EffectConfigs[EffectEnum.CORKSCREW_CRASH].trueDamagePercent
+        trueDamagePart += percent / 100
       } else if (pokemon.effects.has(EffectEnum.MAX_MELTDOWN)) {
-        trueDamagePart += 1.25
+        const percent = EffectConfigs[EffectEnum.MAX_MELTDOWN].trueDamagePercent
+        trueDamagePart += percent / 100
       }
       if (pokemon.items.has(Item.RED_ORB)) {
         trueDamagePart += 0.25
@@ -392,7 +409,10 @@ export default abstract class PokemonState {
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
-        pokemon.addMaxHP(0.4 * overheal, pokemon, 0, false, false)
+        const conversionPercent =
+          SynergyConfigs[Synergy.GRASS].overhealConversionPercent
+        const maxHpGain = (conversionPercent / 100) * overheal
+        pokemon.addMaxHP(maxHpGain, pokemon, 0, false, false)
       }
 
       return { healReceived, overheal }
@@ -530,7 +550,9 @@ export default abstract class PokemonState {
         attacker &&
         attacker.effects.has(EffectEnum.SHEER_COLD)
       ) {
-        damage *= 1.3
+        const bonusPercent =
+          EffectConfigs[EffectEnum.SHEER_COLD].frozenDamageBonusPercent
+        damage *= 1 + bonusPercent / 100
       }
 
       const armorEffectiveness =
@@ -607,13 +629,13 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.DEFIANT) ||
           pokemon.effects.has(EffectEnum.COACHING)
         ) {
-          const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
-            ? 12
-            : pokemon.effects.has(EffectEnum.DEFIANT)
-              ? 9
-              : pokemon.effects.has(EffectEnum.STURDY)
-                ? 6
-                : 3
+          const fightingEffect = getActiveSynergyTier(
+            Synergy.FIGHTING,
+            pokemon.effects
+          )
+          const damageBlocked = fightingEffect
+            ? EffectConfigs[fightingEffect].damageBlocked
+            : 0
           reducedDamage = reducedDamage - damageBlocked
           pokemon.count.fightingBlockCount++
         }
@@ -694,21 +716,16 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= 0.3 * pokemon.maxHP
+        pokemon.hp - residualDamage <=
+          (SynergyConfigs[Synergy.FOSSIL].activationThresholdPercent / 100) *
+            pokemon.maxHP
       ) {
-        const shield = Math.round(
-          pokemon.maxHP *
-            (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-              ? 1
-              : pokemon.effects.has(EffectEnum.ELDER_POWER)
-                ? 0.7
-                : 0.4)
-        )
-        const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-          ? 1
-          : pokemon.effects.has(EffectEnum.ELDER_POWER)
-            ? 0.7
-            : 0.4
+        const fossilEffect = getActiveSynergyTier(
+          Synergy.FOSSIL,
+          pokemon.effects
+        )!
+        const config = EffectConfigs[fossilEffect]
+        const shield = Math.round(pokemon.maxHP * (config.shieldPercent / 100))
         pokemon.addShield(shield, pokemon, 0, false)
 
         //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
@@ -719,7 +736,8 @@ export default abstract class PokemonState {
         pokemon.shield -= damageOnShield
         residualDamage = 0
 
-        pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+        const attackBonus = pokemon.baseAtk * (config.attackPercent / 100)
+        pokemon.addAttack(attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
         pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
         SynergyTiers[Synergy.FOSSIL].forEach((e) => {
@@ -952,15 +970,16 @@ export default abstract class PokemonState {
 
     if (pokemon.hasSynergyEffect(Synergy.GRASS)) {
       if (pokemon.grassHealCooldown - dt <= 0) {
-        const heal =
-          pokemon.effects.has(EffectEnum.SPORE) ||
-          pokemon.effects.has(EffectEnum.OVERGROW)
-            ? 25
-            : pokemon.effects.has(EffectEnum.GROWTH)
-              ? 15
-              : 5
-        pokemon.handleHeal(heal, pokemon, 0, false)
-        pokemon.grassHealCooldown = 2000
+        const grassEffect = getActiveSynergyTier(
+          Synergy.GRASS,
+          pokemon.effects
+        )!
+        const config =
+          grassEffect === EffectEnum.OVERGROW
+            ? EffectConfigs[EffectEnum.SPORE]
+            : EffectConfigs[grassEffect]
+        pokemon.handleHeal(config.heal, pokemon, 0, false)
+        pokemon.grassHealCooldown = config.interval * 1000
         pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
@@ -1023,13 +1042,16 @@ export default abstract class PokemonState {
 
     pokemon.addPP(passivePPGain, pokemon, 0, false)
     if (pokemon.effects.has(EffectEnum.RAIN_DANCE)) {
-      pokemon.addPP(4, pokemon, 0, false)
+      const ppPerSecond = EffectConfigs[EffectEnum.RAIN_DANCE].ppPerSecond
+      pokemon.addPP(ppPerSecond, pokemon, 0, false)
     }
     if (pokemon.effects.has(EffectEnum.DRIZZLE)) {
-      pokemon.addPP(8, pokemon, 0, false)
+      const ppPerSecond = EffectConfigs[EffectEnum.DRIZZLE].ppPerSecond
+      pokemon.addPP(ppPerSecond, pokemon, 0, false)
     }
     if (pokemon.effects.has(EffectEnum.PRIMORDIAL_SEA)) {
-      pokemon.addPP(12, pokemon, 0, false)
+      const ppPerSecond = EffectConfigs[EffectEnum.PRIMORDIAL_SEA].ppPerSecond
+      pokemon.addPP(ppPerSecond, pokemon, 0, false)
     }
 
     if (pokemon.simulation.weather === Weather.RAIN) {
@@ -1066,7 +1088,8 @@ export default abstract class PokemonState {
       pokemon.effects.has(EffectEnum.ETERNAL_LIGHT) ||
       pokemon.effects.has(EffectEnum.MAX_ILLUMINATION)
     ) {
-      pokemon.addPP(8, pokemon, 0, false)
+      const ppPerSecond = EffectConfigs[EffectEnum.LIGHT_PULSE].ppPerSecond
+      pokemon.addPP(ppPerSecond, pokemon, 0, false)
     }
 
     if (pokemon.items.has(Item.METRONOME)) {
@@ -1079,14 +1102,16 @@ export default abstract class PokemonState {
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
-        damage: 10,
+        damage: EffectConfigs[EffectEnum.STEALTH_ROCKS].damagePerSecond,
         board,
         attackType: AttackType.PHYSICAL,
         attacker: null,
         effect: EffectEnum.STEALTH_ROCKS,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerWound(1000, pokemon, undefined)
+      const woundDuration =
+        EffectConfigs[EffectEnum.STEALTH_ROCKS].woundDuration
+      pokemon.status.triggerWound(woundDuration * 1000, pokemon, undefined)
     }
 
     if (
@@ -1096,14 +1121,16 @@ export default abstract class PokemonState {
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
-        damage: 10,
+        damage: EffectConfigs[EffectEnum.SPIKES].damagePerSecond,
         board,
         attackType: AttackType.TRUE,
         attacker: null,
         effect: EffectEnum.SPIKES,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerArmorReduction(1000, pokemon)
+      const armorBreakDuration =
+        EffectConfigs[EffectEnum.SPIKES].armorBreakDuration
+      pokemon.status.triggerArmorReduction(armorBreakDuration * 1000, pokemon)
     }
 
     if (
@@ -1111,7 +1138,9 @@ export default abstract class PokemonState {
       !pokemon.types.has(Synergy.POISON) &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      pokemon.status.triggerPoison(1000, pokemon, undefined)
+      const poisonDuration =
+        EffectConfigs[EffectEnum.TOXIC_SPIKES].poisonDuration
+      pokemon.status.triggerPoison(poisonDuration * 1000, pokemon, undefined)
     }
 
     if (
@@ -1120,14 +1149,15 @@ export default abstract class PokemonState {
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
-        damage: 10,
+        damage: EffectConfigs[EffectEnum.HAIL].damage,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
         effect: EffectEnum.HAIL,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon, undefined)
+      const freezeDuration = EffectConfigs[EffectEnum.HAIL].freezeDuration
+      pokemon.status.triggerFreeze(freezeDuration * 1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 
@@ -1137,7 +1167,7 @@ export default abstract class PokemonState {
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
       pokemon.handleDamage({
-        damage: 10,
+        damage: EffectConfigs[EffectEnum.EMBER].damagePerSecond,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,

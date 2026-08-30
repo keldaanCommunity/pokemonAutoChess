@@ -1,23 +1,10 @@
 import type { MapSchema } from "@colyseus/schema"
+import { BOARD_HEIGHT, BOARD_WIDTH, RarityCost } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  FIELD_HEAL_PER_SYNERGY_TIER,
-  FIELD_SPEED_BUFF_PER_SYNERGY_TIER,
-  MONSTER_AP_BUFF_PER_SYNERGY_TIER,
-  MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER,
-  MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER,
-  RarityCost
-} from "../../config"
-import {
-  FIRE_ATK_BUFF_PER_SYNERGY_TIER,
-  GROUND_ATK_BUFF_PER_SYNERGY_TIER,
-  GROUND_DEF_BUFF_PER_SYNERGY_TIER,
-  SOUND_ATK_BUFF_PER_SYNERGY_TIER,
-  SOUND_PP_GAIN_PER_SYNERGY_TIER,
-  SOUND_SPEED_BUFF_PER_SYNERGY_TIER,
-  type SynergyTier,
-  SynergyTiers
+  getActiveSynergyTier,
+  SynergyConfigs,
+  type SynergyTier
 } from "../../config/game/synergies"
 import type Player from "../../models/colyseus-models/player"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
@@ -40,7 +27,7 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pillars, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { isIn } from "../../utils/array"
+import { count, isIn } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -77,21 +64,19 @@ import { PassiveEffects } from "./passives"
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
   count: number = 0
-  synergyTier: number
+  tier: SynergyTier<Synergy.MONSTER>
   constructor(tier: SynergyTier<Synergy.MONSTER>) {
     super(undefined, tier)
-    this.synergyTier = SynergyTiers[Synergy.MONSTER].indexOf(tier) + 1
+    this.tier = tier
   }
 
   apply({ attacker, target }: OnKillEffectArgs) {
-    const attackBoost =
-      MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
-    const apBoost = MONSTER_AP_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
-    const hpGain =
-      MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[this.synergyTier] ?? 0
-    const lifeBoost = hpGain * target.maxHP
-    attacker.addAttack(attackBoost, attacker, 0, false)
-    attacker.addAbilityPower(apBoost, attacker, 0, false)
+    const effect =
+      this.tier === EffectEnum.MERCILESS ? EffectEnum.POWER_TRIP : this.tier
+    const config = EffectConfigs[effect]
+    const lifeBoost = (config.maxHpPerKoPercent / 100) * target.maxHP
+    attacker.addAttack(config.attackPerKo, attacker, 0, false)
+    attacker.addAbilityPower(config.abilityPowerPerKo, attacker, 0, false)
     attacker.addMaxHP(lifeBoost, attacker, 0, false)
     this.hpBoosted += lifeBoost
     this.count += 1
@@ -102,25 +87,30 @@ export class MonsterKillEffect extends OnKillEffect {
 }
 export class GroundHoleEffect extends OnSpawnEffect {
   constructor(effect: SynergyTier<Synergy.GROUND>) {
-    const synergyTier = SynergyTiers[Synergy.GROUND].indexOf(effect) + 1
     super((pokemon, player) => {
+      const config =
+        effect === EffectEnum.DEEP_MINER
+          ? EffectConfigs[EffectEnum.DRILLER]
+          : EffectConfigs[effect]
       const y =
         player?.team === Team.RED_TEAM
           ? BOARD_HEIGHT - 1 - pokemon.positionY
           : pokemon.positionY
       const index = y * BOARD_WIDTH + pokemon.positionX
       const holeLevel = player?.groundHoles[index] ?? 0
-      let defBuff = holeLevel * GROUND_DEF_BUFF_PER_SYNERGY_TIER[synergyTier]
-      let atkBuff =
-        holeLevel === 5 ? GROUND_ATK_BUFF_PER_SYNERGY_TIER[synergyTier] : 0
-      if (synergyTier === 4) {
+      const maxDepth = SynergyConfigs[Synergy.GROUND].maxDepth
+      const defenseForDepth = holeLevel * config.defensePerDepth
+      let defBuff = Math.min(defenseForDepth, config.maxDefense)
+      let atkBuff = holeLevel === maxDepth ? config.attackAtMaxDepth : 0
+      if (effect === EffectEnum.DEEP_MINER) {
+        const deepMinerConfig = EffectConfigs[EffectEnum.DEEP_MINER]
         const nbFullyDugRows = [0, 8, 16].reduce((count, startIdx) => {
           const row = player?.groundHoles.slice(startIdx, startIdx + 8) ?? []
-          return count + (row.every((hole) => hole === 5) ? 1 : 0)
+          return count + (row.every((hole) => hole === maxDepth) ? 1 : 0)
         }, 0)
-        defBuff += nbFullyDugRows * 5
+        defBuff += nbFullyDugRows * deepMinerConfig.defensePerFullRow
         if (nbFullyDugRows === 3) {
-          atkBuff += 8
+          atkBuff += deepMinerConfig.attackAtFullBoard
           player?.titles.add(Title.MOLE)
         }
       }
@@ -135,16 +125,16 @@ export class GroundHoleEffect extends OnSpawnEffect {
 
 export class FireHitEffect extends OnAttackEffect {
   count: number = 0
-  synergyTier: number
+  attackPerHit: number
   constructor(effect: SynergyTier<Synergy.FIRE>) {
     super(undefined, effect)
-    this.synergyTier = SynergyTiers[Synergy.FIRE].indexOf(effect) + 1
+    this.attackPerHit =
+      effect === EffectEnum.FLAME_BODY ? 0 : EffectConfigs[effect].attackPerHit
   }
 
   apply({ pokemon }) {
-    const atkBuff = FIRE_ATK_BUFF_PER_SYNERGY_TIER[this.synergyTier]
-    if (atkBuff) {
-      pokemon.addAttack(atkBuff, pokemon, 0, false)
+    if (this.attackPerHit) {
+      pokemon.addAttack(this.attackPerHit, pokemon, 0, false)
     }
     this.count += 1
   }
@@ -153,16 +143,20 @@ export class FireHitEffect extends OnAttackEffect {
 export const electricTripleAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board, isTripleAttack }) => {
     if (isTripleAttack) return // ignore the effect of the 2nd and 3d attacks of triple attacks
-    let shouldTriggerTripleAttack = false,
-      isSupercharged = false
-    if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % 4 === 0
-    } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
-    } else if (pokemon.effects.has(EffectEnum.SUPERCHARGED)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % 3 === 0
-      isSupercharged = true
-    }
+    const effect = pokemon.effects.has(EffectEnum.RISING_VOLTAGE)
+      ? EffectEnum.RISING_VOLTAGE
+      : pokemon.effects.has(EffectEnum.POWER_SURGE)
+        ? EffectEnum.POWER_SURGE
+        : pokemon.effects.has(EffectEnum.SUPERCHARGED)
+          ? EffectEnum.SUPERCHARGED
+          : undefined
+    if (!effect) return
+    const intervalEffect =
+      effect === EffectEnum.SUPERCHARGED ? EffectEnum.POWER_SURGE : effect
+    const attackInterval = EffectConfigs[intervalEffect].attackInterval
+    const shouldTriggerTripleAttack =
+      pokemon.count.attackCount % attackInterval === 0
+    const isSupercharged = effect === EffectEnum.SUPERCHARGED
     if (shouldTriggerTripleAttack) {
       pokemon.count.tripleAttackCount++
 
@@ -177,10 +171,11 @@ export const electricTripleAttackEffect = new OnAttackEffect(
       pokemon.state.attack(pokemon, board, target, true)
       pokemon.state.attack(pokemon, board, target, true)
       if (isSupercharged && target) {
-        target.addPP(-10, pokemon, 0, false)
+        const config = EffectConfigs[EffectEnum.SUPERCHARGED]
+        target.addPP(-config.ppBurn, pokemon, 0, false)
         target.count.manaBurnCount++
         if (pokemon.player && !pokemon.isGhostOpponent) {
-          pokemon.player.chargeCellBattery(5)
+          pokemon.player.chargeCellBattery(config.batteryChargePercent)
         }
       }
     }
@@ -189,19 +184,24 @@ export const electricTripleAttackEffect = new OnAttackEffect(
 
 export class SoundCryEffect extends OnAbilityCastEffect {
   count: number = 0
-  synergyTier: number = 0
+  effect?: SynergyTier<Synergy.SOUND>
   constructor(effect?: SynergyTier<Synergy.SOUND>) {
     super(undefined, effect)
-    if (effect) {
-      this.synergyTier = SynergyTiers[Synergy.SOUND].indexOf(effect) + 1
-    }
+    this.effect = effect
   }
 
   apply(pokemon: PokemonEntity, board: Board) {
     pokemon.broadcastAbility({ skill: Ability.ECHO })
-    const attackBuff = SOUND_ATK_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
-    const speedBuff = SOUND_SPEED_BUFF_PER_SYNERGY_TIER[this.synergyTier] ?? 0
-    const ppGain = SOUND_PP_GAIN_PER_SYNERGY_TIER[this.synergyTier] ?? 0
+    const config = this.effect ? EffectConfigs[this.effect] : undefined
+    const attackBuff = config?.attackPerCry ?? 0
+    const speedBuff =
+      this.effect === EffectEnum.ALLEGRO || this.effect === EffectEnum.PRESTO
+        ? EffectConfigs[this.effect].speedPerCry
+        : 0
+    const ppGain =
+      this.effect === EffectEnum.PRESTO
+        ? EffectConfigs[this.effect].ppPerCry
+        : 0
 
     const chimecho = board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
@@ -235,15 +235,10 @@ export const humanHealEffect = new OnDamageDealtEffect(
   ({ pokemon, target, damage, isRetaliation }: OnDamageDealtEffectArgs) => {
     if (isRetaliation) return // don't lifesteal on retaliation dammage from items
     if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
-    let lifesteal = 0
-    if (pokemon.effects.has(EffectEnum.MEDITATE)) {
-      lifesteal = 0.25
-    } else if (pokemon.effects.has(EffectEnum.FOCUS_ENERGY)) {
-      lifesteal = 0.35
-    } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
-      lifesteal = 0.5
-    }
-    pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
+    const effect = getActiveSynergyTier(Synergy.HUMAN, pokemon.effects)
+    const lifestealPercent = effect ? EffectConfigs[effect].lifestealPercent : 0
+    const heal = Math.ceil((lifestealPercent / 100) * damage)
+    pokemon.handleHeal(heal, pokemon, 0, false)
   },
   EffectEnum.MEDITATE
 )
@@ -251,9 +246,7 @@ export const humanHealEffect = new OnDamageDealtEffect(
 export class OnFieldDeathEffect extends OnDeathEffect {
   constructor(effect: SynergyTier<Synergy.FIELD>) {
     super(({ pokemon, board }) => {
-      const synergyTier = SynergyTiers[Synergy.FIELD].indexOf(effect) + 1
-      const heal = FIELD_HEAL_PER_SYNERGY_TIER[synergyTier] ?? 0
-      const speedBoost = FIELD_SPEED_BUFF_PER_SYNERGY_TIER[synergyTier] ?? 0
+      const config = EffectConfigs[effect]
       pokemon.simulation.room.clock.setTimeout(() => {
         board.forEach((x, y, value) => {
           if (
@@ -262,8 +255,8 @@ export class OnFieldDeathEffect extends OnDeathEffect {
             value.types.has(Synergy.FIELD)
           ) {
             value.count.fieldCount++
-            value.handleHeal(heal, pokemon, 0, false)
-            value.addSpeed(speedBoost, value, 0, false)
+            value.handleHeal(config.heal, pokemon, 0, false)
+            value.addSpeed(config.speed, value, 0, false)
           }
         })
       }, 16) // delay to next tick, targeting 60 ticks per second
@@ -274,8 +267,13 @@ export class OnFieldDeathEffect extends OnDeathEffect {
 export class FlyingProtectionEffect extends OnDamageReceivedEffect {
   priority = -1
   flyingProtection: number = 0
+  lowHpThresholdPercent: number
   constructor(effect: EffectEnum) {
     super(undefined, effect)
+    this.lowHpThresholdPercent =
+      effect === EffectEnum.MAX_AIRSTREAM || effect === EffectEnum.SKYDIVE
+        ? EffectConfigs[EffectEnum.MAX_AIRSTREAM].secondHpThresholdPercent
+        : EffectConfigs[EffectEnum.TAILWIND].hpThresholdPercent
     if (effect === EffectEnum.FEATHER_DANCE || effect === EffectEnum.TAILWIND) {
       this.flyingProtection = 1
     } else if (
@@ -299,8 +297,13 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
         pokemon.effects.has(EffectEnum.SKYDIVE)
 
       if (
-        (this.flyingProtection === 1 && pcHp < 0.2) ||
-        (shouldProcAt50 && this.flyingProtection === 2 && pcHp < 0.5)
+        (this.flyingProtection === 1 &&
+          pcHp < this.lowHpThresholdPercent / 100) ||
+        (shouldProcAt50 &&
+          this.flyingProtection === 2 &&
+          pcHp <
+            EffectConfigs[EffectEnum.MAX_AIRSTREAM].firstHpThresholdPercent /
+              100)
       ) {
         this.flyingProtection--
         pokemon.flyAway(board)
@@ -314,11 +317,12 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     super(undefined, effect)
   }
   apply({ pokemon, board, isRetaliation }: OnDamageReceivedEffectArgs) {
+    const knockbackHitCount = SynergyConfigs[Synergy.FIGHTING].knockbackHitCount
     // Fighting knockback for Pikachu Libre
     if (
       pokemon.passive === Passive.PIKACHU_LIBRE &&
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount % 10 === 0
+      pokemon.count.fightingBlockCount % knockbackHitCount === 0
     ) {
       pokemon.status.triggerRage(2000, pokemon)
     }
@@ -326,7 +330,7 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount % 10 === 0 &&
+      pokemon.count.fightingBlockCount % knockbackHitCount === 0 &&
       !isRetaliation &&
       distanceC(
         pokemon.positionX,
@@ -437,23 +441,26 @@ export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
 
 export const wildBerserkEffect = new OnDamageReceivedEffect(
   ({ pokemon }: OnDamageReceivedEffectArgs) => {
-    if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
-      pokemon.addSpeed(40, pokemon, 0, false)
-      pokemon.addAttack(Math.ceil(0.4 * pokemon.baseAtk), pokemon, 0, false)
-      pokemon.addShield(30, pokemon, 0, false)
+    const berserkConfig = EffectConfigs[EffectEnum.BERSERK]
+    const hustleConfig = EffectConfigs[EffectEnum.HUSTLE]
+    const attackBonus = Math.ceil(
+      (hustleConfig.baseAttackBonusPercent / 100) * pokemon.baseAtk
+    )
+    if (
+      pokemon.hp > 0 &&
+      pokemon.hp < (berserkConfig.hpThresholdPercent / 100) * pokemon.maxHP
+    ) {
+      pokemon.addSpeed(hustleConfig.speed, pokemon, 0, false)
+      pokemon.addAttack(attackBonus, pokemon, 0, false)
+      pokemon.addShield(berserkConfig.shield, pokemon, 0, false)
       // Remove the effect to avoid multiple triggers
       pokemon.effectsSet.delete(wildBerserkEffect)
       // Remove after 3 seconds
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addSpeed(-40, pokemon, 0, false)
-          pokemon.addAttack(
-            -Math.ceil(0.4 * pokemon.baseAtk),
-            pokemon,
-            0,
-            false
-          )
-        }, 3000)
+          pokemon.addSpeed(-hustleConfig.speed, pokemon, 0, false)
+          pokemon.addAttack(-attackBonus, pokemon, 0, false)
+        }, berserkConfig.duration * 1000)
       )
     }
   }
@@ -463,20 +470,23 @@ export const normalShieldEffect = new OnSimulationStartEffect(
   ({ entity, simulation }) => {
     let shieldBonus = 0
     if (entity.effects.has(EffectEnum.STAMINA)) {
-      shieldBonus = 15
+      shieldBonus = EffectConfigs[EffectEnum.STAMINA].shield
     }
     if (entity.effects.has(EffectEnum.STRENGTH)) {
-      shieldBonus += 20
+      shieldBonus += EffectConfigs[EffectEnum.STRENGTH].shield
     }
     if (entity.effects.has(EffectEnum.ENDURE)) {
-      shieldBonus += 25
+      shieldBonus += EffectConfigs[EffectEnum.ENDURE].shield
     }
     if (entity.effects.has(EffectEnum.PURE_POWER)) {
-      shieldBonus += 30
+      const config = EffectConfigs[EffectEnum.PURE_POWER]
+      shieldBonus += config.shield
       if (schemaValues(entity.items).some((item) => Scarves.includes(item))) {
-        // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
-        entity.addAttack(Math.round(0.3 * entity.baseAtk), entity, 0, false)
-        entity.addAbilityPower(30, entity, 0, false)
+        const attackBonus = Math.round(
+          (config.baseAttackBonusPercent / 100) * entity.baseAtk
+        )
+        entity.addAttack(attackBonus, entity, 0, false)
+        entity.addAbilityPower(config.abilityPower, entity, 0, false)
       }
     }
     if (shieldBonus >= 0) {
@@ -849,19 +859,8 @@ export const cloneBugs = ({
   })
   bugTeam.sort((a, b) => getUnitScore(b) - getUnitScore(a))
 
-  let numberOfBugsToClone = 0
-  if (effects.has(EffectEnum.COCOON)) {
-    numberOfBugsToClone = 1
-  }
-  if (effects.has(EffectEnum.INFESTATION)) {
-    numberOfBugsToClone = 2
-  }
-  if (effects.has(EffectEnum.HORDE)) {
-    numberOfBugsToClone = 3
-  }
-  if (effects.has(EffectEnum.HEART_OF_THE_SWARM)) {
-    numberOfBugsToClone = 4
-  }
+  const bugEffect = getActiveSynergyTier(Synergy.BUG, effects)
+  let numberOfBugsToClone = bugEffect ? EffectConfigs[bugEffect].copies : 0
   numberOfBugsToClone = Math.min(numberOfBugsToClone, bugTeam.length)
 
   for (let i = 0; i < numberOfBugsToClone; i++) {
@@ -919,9 +918,10 @@ export const cloneBugs = ({
 }
 
 const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
+  const maxFireShards = EffectConfigs[EffectEnum.DESOLATE_LAND].maxFireShards
   if (
     getSynergyTier(player.synergies, Synergy.FIRE) === 4 &&
-    player.items.includes(Item.FIRE_SHARD) === false &&
+    count(player.items, Item.FIRE_SHARD) < maxFireShards &&
     player.life > 2
   ) {
     player.items.push(Item.FIRE_SHARD)
@@ -947,8 +947,9 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
         )
       ) {
         const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
-        const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
-        const isReachingMaxDepth = player.groundHoles[index] === 4
+        const maxDepth = SynergyConfigs[Synergy.GROUND].maxDepth
+        const hasAlreadyReachedMaxDepth = player.groundHoles[index] === maxDepth
+        const isReachingMaxDepth = player.groundHoles[index] === maxDepth - 1
         if (!hasAlreadyReachedMaxDepth) {
           let buriedItem = isReachingMaxDepth ? player.buriedItems[index] : null
           if (
@@ -969,7 +970,9 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
             buriedItem
           })
           room.clock.setTimeout(() => {
-            player.groundHoles[index] = max(5)(player.groundHoles[index] + 1)
+            player.groundHoles[index] = max(maxDepth)(
+              player.groundHoles[index] + 1
+            )
             PassiveEffects[pokemon.passive]?.forEach((effect) => {
               if (effect instanceof OnGroundDiggingEffect) {
                 effect.apply({ pokemon, player })

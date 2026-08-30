@@ -5,11 +5,34 @@ import { Synergy } from "../../types/enum/Synergy"
 import type { BalanceConfig } from "./balance"
 
 export const SynergyConfigs = {
+  [Synergy.GRASS]: { overhealConversionPercent: 40 },
+  [Synergy.FIGHTING]: { knockbackHitCount: 10 },
+  [Synergy.STEEL]: { teamDefense: 3 },
+  [Synergy.GROUND]: { maxDepth: 5 },
+  [Synergy.POISON]: { poisonDuration: 4 },
+  [Synergy.MONSTER]: { flinchDuration: 3 },
+  [Synergy.AQUATIC]: { firstWaveDelay: 7 },
   [Synergy.GHOST]: {
     effectChance: {
       valuePerTier: [15],
       luckScaling: true
     }
+  },
+  [Synergy.ICE]: {
+    freezeChance: {
+      valuePerTier: [20],
+      luckScaling: true
+    },
+    freezeDuration: 2
+  },
+  [Synergy.FOSSIL]: { activationThresholdPercent: 30 },
+  [Synergy.WILD]: {
+    pveEncounterChancePercent: 6,
+    woundChance: {
+      valuePerTier: [25],
+      luckScaling: true
+    },
+    woundDuration: 3
   }
 } as const satisfies Partial<Record<Synergy, BalanceConfig>>
 
@@ -261,27 +284,6 @@ export const FishRarityProbability: {
     [Rarity.EPIC]: 0.1
   }
 }
-
-export const MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER = [0, 3, 6, 10, 10]
-export const MONSTER_AP_BUFF_PER_SYNERGY_TIER = [0, 10, 20, 30, 30]
-export const MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER = [
-  0, 0.2, 0.4, 0.6, 0.6
-]
-
-export const FIELD_HEAL_PER_SYNERGY_TIER = [0, 30, 40, 50]
-export const FIELD_SPEED_BUFF_PER_SYNERGY_TIER = [0, 15, 20, 25]
-
-export const AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER = [0, 1, 3, 5]
-export const AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER = [0, 3, 6, 10]
-
-export const GROUND_DEF_BUFF_PER_SYNERGY_TIER = [0, 1, 2, 3, 3]
-export const GROUND_ATK_BUFF_PER_SYNERGY_TIER = [0, 3, 5, 8, 8]
-
-export const FIRE_ATK_BUFF_PER_SYNERGY_TIER = [0, 0, 1, 2, 3]
-
-export const SOUND_ATK_BUFF_PER_SYNERGY_TIER = [0, 2, 1, 1]
-export const SOUND_SPEED_BUFF_PER_SYNERGY_TIER = [0, 0, 5, 5]
-export const SOUND_PP_GAIN_PER_SYNERGY_TIER = [0, 0, 0, 3]
 
 export const FAIRY_WANDS_BY_SYNERGY_LEVEL = [
   [Item.LONG_WAND, Item.SPIRIT_WAND, Item.HP_SWAP_WAND, Item.BLAST_WAND],

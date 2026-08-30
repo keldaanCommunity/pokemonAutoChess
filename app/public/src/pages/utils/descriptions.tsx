@@ -1,9 +1,10 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
 import type { BalanceConfig } from "../../../../config/game/balance"
+import { getEffectConfig } from "../../../../config/game/effects"
 import { getStatusConfig } from "../../../../config/game/statuses"
 import { getWeatherConfig } from "../../../../config/game/weathers"
-import { BoardEffects } from "../../../../types/enum/Effect"
+import { type BoardEffect, BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
 import {
@@ -145,7 +146,9 @@ export function addIconsToDescription(
         icon = (
           <span
             className="description-icon board-effect"
-            title={t(`effect_description.${token}`)}
+            title={t(`effect_description.${token}`, {
+              ...getEffectConfig(token as BoardEffect)
+            })}
           >
             <img src={`assets/icons/effects/${token}.svg`} />
             <span className="board-effect-label">{t(`effect.${token}`)}</span>
@@ -273,7 +276,7 @@ export function addIconsToHtml(
             <span class="status-label${isPositive ? " positive" : ""}">${t(`status.${token}`)}</span>
           </span>`
         } else if (isIn(BoardEffects, token)) {
-          iconHTML = `<span class="description-icon board-effect" title="${t(`effect_description.${token}`)}">
+          iconHTML = `<span class="description-icon board-effect" title="${t(`effect_description.${token}`, { ...getEffectConfig(token as BoardEffect) })}">
             <img src="assets/icons/effects/${token}.svg" />
             <span class="board-effect-label">${t(`effect.${token}`)}</span>
           </span>`

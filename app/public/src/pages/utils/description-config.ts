@@ -28,17 +28,17 @@ export function getDescriptionError(
   const descriptionConfig = getDescriptionConfig(path)
   if (!descriptionConfig || !targetTemplate) return undefined
 
-  const expected = Object.keys(descriptionConfig).sort()
-  const actual = [
-    ...new Set(
-      Array.from(
-        targetTemplate.matchAll(INTERPOLATION_VARIABLE_REGEXP),
-        (match) => match[1]!.trim()
-      )
+  const placeholders = new Set(
+    Array.from(
+      targetTemplate.matchAll(INTERPOLATION_VARIABLE_REGEXP),
+      (match) => match[1]!.trim()
     )
-  ].sort()
-  if (expected.join("|") !== actual.join("|")) {
-    return `Placeholders must match config: ${expected.map((name) => `{{${name}}}`).join(", ")}`
+  )
+  const missing = Object.keys(descriptionConfig)
+    .filter((name) => !placeholders.has(name))
+    .sort()
+  if (missing.length > 0) {
+    return `Missing config placeholders: ${missing.map((name) => `{{${name}}}`).join(", ")}`
   }
 
   return undefined

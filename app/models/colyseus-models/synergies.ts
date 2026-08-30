@@ -1,7 +1,12 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTiers, SynergyTiersThresholds } from "../../config"
+import {
+  SynergyConfigs,
+  SynergyTiers,
+  SynergyTiersThresholds
+} from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import type { IPlayer, IPokemon } from "../../types"
-import type { EffectEnum } from "../../types/enum/Effect"
+import { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
@@ -309,12 +314,17 @@ export function getSynergyTier(
 export function getWildChance(player: IPlayer, stageLevel: number): number {
   const isPVE = stageLevel === 0 || stageLevel in PVEStages
   const wildLevel = getSynergyTier(player.synergies, Synergy.WILD)
-  // 6% base chance in PvE stage or if Wild is active
-  const baseChance = isPVE || wildLevel > 0 ? 6 : 0
-  // each star of a pokemon with wild synergy gives 0.5% wild chance
+  const wildConfig = SynergyConfigs[Synergy.WILD]
+  const quickFeetConfig = EffectConfigs[EffectEnum.QUICK_FEET]
+  const baseChance = isPVE
+    ? wildConfig.pveEncounterChancePercent
+    : wildLevel > 0
+      ? quickFeetConfig.shopBaseChancePercent
+      : 0
   const nbWildStars = schemaValues(player.board)
     .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
     .reduce((total, p) => total + p.stars, 0)
-  const bonusChance = wildLevel > 0 ? nbWildStars * 0.5 : 0
+  const bonusChance =
+    wildLevel > 0 ? nbWildStars * quickFeetConfig.shopChancePerStarPercent : 0
   return (baseChance + bonusChance) / 100
 }

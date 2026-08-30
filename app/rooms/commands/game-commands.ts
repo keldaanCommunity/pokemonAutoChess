@@ -24,6 +24,7 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import {
@@ -1960,8 +1961,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
 
             if (pokemon.action === PokemonActionState.TRAINING) {
-              pokemon.addAttack(4)
-              pokemon.addMaxHP(Math.ceil(0.1 * getPokemonData(pokemon.name).hp))
+              const config = EffectConfigs[EffectEnum.COACHING]
+              const maxHpGain = Math.ceil(
+                (config.trainingMaxHpPercent / 100) *
+                  getPokemonData(pokemon.name).hp
+              )
+              pokemon.addAttack(config.trainingAttack)
+              pokemon.addMaxHP(maxHpGain)
               pokemon.action = PokemonActionState.IDLE
             }
           })
@@ -2327,12 +2333,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       (p) => p.name === Pkm.EGG
     )
     const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
+    const maxGoldenEggs = EffectConfigs[EffectEnum.GOLDEN_EGGS].maxGoldenEggs
     let nbEggsFound = 0
     let goldenEggFound = false
 
     if (hasLostLastBattle && hasBabyActive) {
-      const EGG_CHANCE = 0.1
-      const GOLDEN_EGG_CHANCE = 0.05
+      const babyConfig = EffectConfigs[EffectEnum.HATCHER]
+      const goldenEggConfig = EffectConfigs[EffectEnum.GOLDEN_EGGS]
+      const eggChance = babyConfig.eggChance.valuePerTier[0] / 100
+      const goldenEggChance =
+        goldenEggConfig.goldenEggChance.valuePerTier[0] / 100
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = schemaValues(player.board).filter(
@@ -2342,25 +2352,23 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       for (const baby of babies) {
         if (
           player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-          nbOfGoldenEggsOnBench === 0 &&
-          chance(GOLDEN_EGG_CHANCE, baby)
+          nbOfGoldenEggsOnBench < maxGoldenEggs &&
+          chance(goldenEggChance, baby)
         ) {
           nbEggsFound++
           goldenEggFound = true
-        } else if (chance(EGG_CHANCE, baby)) {
+        } else if (chance(eggChance, baby)) {
           nbEggsFound++
         }
         if (player.effects.has(EffectEnum.GOLDEN_EGGS) && !goldenEggFound) {
           player.goldenEggChance += max(0.1)(
-            Math.pow(GOLDEN_EGG_CHANCE, 1 - baby.luck / 200)
+            Math.pow(goldenEggChance, 1 - baby.luck / 200)
           )
         } else if (
           player.effects.has(EffectEnum.HATCHER) &&
           nbEggsFound === 0
         ) {
-          player.eggChance += max(0.2)(
-            Math.pow(EGG_CHANCE, 1 - baby.luck / 100)
-          )
+          player.eggChance += max(0.2)(Math.pow(eggChance, 1 - baby.luck / 100))
         }
       }
 
@@ -2376,7 +2384,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (
         goldenEggFound === false &&
         player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-        nbOfGoldenEggsOnBench === 0 &&
+        nbOfGoldenEggsOnBench < maxGoldenEggs &&
         chance(playerGoldenEggChanceStacked)
       ) {
         goldenEggFound = true
@@ -2397,7 +2405,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     for (let i = 0; i < nbEggsFound; i++) {
       if (getFreeSpaceOnBench(player.board) === 0) continue
       const isGoldenEgg =
-        goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
+        goldenEggFound && i === 0 && nbOfGoldenEggsOnBench < maxGoldenEggs
       giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(EffectEnum.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance

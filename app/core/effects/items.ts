@@ -1,8 +1,10 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { computeBalance } from "../../config/game/balance"
 import { DishByPkm } from "../../config/game/dishes"
+import { EffectConfigs } from "../../config/game/effects"
 import { ItemConfigs } from "../../config/game/items"
 import { StatusConfigs } from "../../config/game/statuses"
+import { SynergyTiers } from "../../config/game/synergies"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -400,7 +402,12 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
   const chef = pokemon
 
   const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
-  const nbDishes = [0, 1, 2, 2][gourmetTier] ?? 2
+  const gourmetEffect = SynergyTiers[Synergy.GOURMET][gourmetTier - 1]
+  const dishEffect =
+    gourmetEffect === EffectEnum.BANQUET
+      ? EffectEnum.LUNCH_BREAK
+      : gourmetEffect
+  const nbDishes = dishEffect ? EffectConfigs[dishEffect].dishesCooked : 0
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW

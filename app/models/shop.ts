@@ -35,11 +35,9 @@ import {
   SKY_MELODICA_CHANCE,
   SynergyTiersThresholds,
   TERRA_CYMBAL_CHANCE,
-  UNOWN_PSY3_NB_SHOPS_INTERVAL,
-  UNOWN_PSY5_NB_SHOPS_INTERVAL,
-  UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
+import { EffectConfigs } from "../config/game/effects"
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"
@@ -347,7 +345,8 @@ export default class Shop {
       hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
+          player.shopsSinceLastUnownShop ===
+            EffectConfigs[EffectEnum.TRANSCENDENCE].rerollInterval))
 
     if (shouldBeUnownShop) {
       // Unown shop
@@ -616,11 +615,14 @@ export default class Shop {
 
     if (shopIndex === 5 && !noSpecial) {
       const totalRerolls = player.gameStats.rerollCount + state.stageLevel
+      const precognitionInterval =
+        EffectConfigs[EffectEnum.PRECOGNITION].shopInterval
+      const auraInterval = EffectConfigs[EffectEnum.AURA].shopInterval
       if (
         (player.effects.has(EffectEnum.PRECOGNITION) &&
-          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+          totalRerolls % precognitionInterval === 0) ||
         (player.effects.has(EffectEnum.AURA) &&
-          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+          totalRerolls % auraInterval === 0)
       ) {
         const unowns = getUnownsPoolPerStage(state.stageLevel)
         return pickRandomIn(unowns)
