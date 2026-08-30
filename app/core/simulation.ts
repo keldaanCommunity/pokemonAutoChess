@@ -261,45 +261,6 @@ export default class Simulation extends Schema implements ISimulation {
         })
       })
     }
-
-    if (this.room?.state?.specialGameRule === SpecialGameRule.BENCH_IS_LAVA) {
-      for (const player of [this.redPlayer, this.bluePlayer]) {
-        if (player) {
-          player.board.forEach((p, id) => {
-            p.hp = p.maxHP
-          })
-        }
-      }
-
-      const lavaTick = () => {
-        this.commands.push(
-          new DelayedCommand(() => {
-            for (const player of [this.redPlayer, this.bluePlayer]) {
-              if (player) {
-                player.board.forEach((p, id) => {
-                  if (isOnBench(p) && !isIn(Troopers, p.name)) {
-                    let burnDamage = Math.round(0.05 * p.maxHP)
-                    if (
-                      p.items.has(Item.MAGMARIZER) ||
-                      p.items.has(Item.SAFETY_GOGGLES)
-                    ) {
-                      burnDamage = 0
-                    } else if (p.items.has(Item.ASSAULT_VEST)) {
-                      burnDamage = Math.floor(burnDamage * 0.5)
-                    }
-                    p.hp = min(0)(p.hp - burnDamage)
-                    if (p.hp === 0) player.board.delete(id)
-                  }
-                })
-              }
-            }
-            lavaTick()
-          }, 1000)
-        )
-      }
-
-      lavaTick()
-    }
   }
 
   getEffects(playerId: string) {
