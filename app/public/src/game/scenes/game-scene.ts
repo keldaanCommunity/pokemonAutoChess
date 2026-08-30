@@ -20,8 +20,12 @@ import {
 } from "../../../../types"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { Gifts } from "../../../../types/enum/GiftShop"
-import { type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
+import {
+  Gifts,
+  type Item,
+  ItemRecipe,
+  Mulches
+} from "../../../../types/enum/Item"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
@@ -109,14 +113,14 @@ export default class GameScene extends Scene {
       this.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
-    this.loadingManager!.preloadingPromise
-      .catch((err) => logger.error("loading error", err))
-      .then(() => {
-        logger.debug("Loading complete")
-        if (!this.started) {
-          this.room?.send(Transfer.LOADING_COMPLETE)
-        }
-      })
+    this.loadingManager!.preloadingPromise.catch((err) =>
+      logger.error("Loading error", err)
+    ).then(() => {
+      logger.debug("Loading complete")
+      if (!this.started) {
+        this.room?.send(Transfer.LOADING_COMPLETE)
+      }
+    })
 
     this.room!.onMessage(Transfer.LOADING_COMPLETE, () => {
       if (!this.started) {
@@ -127,16 +131,19 @@ export default class GameScene extends Scene {
     })
   }
 
+  getPlayerToSpectate(): Player | undefined {
+    const players = schemaValues(this.room?.state.players!)
+    const uid = this.spectate ? this.spectatedPlayerId : this.uid
+    return players.find((p) => p.id === uid) ?? players[0]
+  }
+
   startGame() {
     if (this.uid && this.room) {
       this.registerKeys()
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
-      const player = this.room.state.players.get(
-        this.spectate ? (this.spectatedPlayerId ?? playerUids[0]) : this.uid
-      ) as Player
+      const player = this.getPlayerToSpectate() as Player
 
       this.setMap(player.map)
       this.setupMouseEvents()
@@ -247,21 +254,25 @@ export default class GameScene extends Scene {
     if (!this.spectate) {
       this.input.keyboard!.on(
         "keydown-" + keybindings.refresh,
-        throttle(() => {
+        throttle((e: Event) => {
+          e.preventDefault()
           playSound(SOUNDS.REFRESH, 0.5)
           this.refreshShop()
         }, 300)
       )
 
-      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.lock, (e: Event) => {
+        e.preventDefault()
         this.room?.send(Transfer.LOCK)
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, (e: Event) => {
+        e.preventDefault()
         this.buyExperience()
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonDragged != null) return
         if (this.shopIndexHovered !== null) {
           this.removeFromShop(this.shopIndexHovered)
@@ -280,28 +291,61 @@ export default class GameScene extends Scene {
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.switch, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonHovered) {
           this.switchBetweenBenchAndBoard(this.pokemonHovered)
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-        playerClick(this.uid!)
-      })
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.board_return,
+        (e: Event) => {
+          e.preventDefault()
+          playerClick(this.uid!)
+        }
+      )
     }
 
-    this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
-      savePreferences({ cameraLocked: !preference("cameraLocked") })
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.camera_lock,
+      (e: Event) => {
+        e.preventDefault()
+        savePreferences({ cameraLocked: !preference("cameraLocked") })
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
-      cyclePlayers(-1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1)
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
-      cyclePlayers(1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1)
+      }
+    )
+
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1, true)
+      }
+    )
+
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1, true)
+      }
+    )
   }
 
   refreshShop() {
@@ -565,6 +609,7 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          gameObject.closeDetail()
           if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
             this.useItemZone.showForItem(this.itemDragged.name)
           }

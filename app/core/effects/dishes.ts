@@ -57,6 +57,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   [Item.BLACK_SLUDGE]: [
     new OnSpawnEffect((entity) => {
+      entity.effects.add(EffectEnum.BLACK_SLUDGE)
       if (entity.types.has(Synergy.POISON)) {
         entity.effectsSet.add(
           new PeriodicEffect(
@@ -70,6 +71,15 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       } else {
         entity.status.triggerPoison(30000, entity, entity)
       }
+    }),
+    new OnHitEffect(({ attacker, target }) => {
+      if (
+        attacker.effects.has(EffectEnum.BLACK_SLUDGE) ||
+        chance(0.3, attacker)
+      ) {
+        target.status.triggerPoison(5000, target, attacker)
+        attacker.effects.delete(EffectEnum.BLACK_SLUDGE)
+      }
     })
   ],
   [Item.CASTELIACONE]: [
@@ -77,8 +87,11 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.effects.add(EffectEnum.CASTELIACONE)
     }),
     new OnHitEffect(({ attacker, target }) => {
-      if (attacker.effects.has(EffectEnum.CASTELIACONE)) {
-        target.status.triggerFreeze(5000, target, attacker)
+      if (
+        attacker.effects.has(EffectEnum.CASTELIACONE) ||
+        chance(0.3, attacker)
+      ) {
+        target.status.triggerFreeze(2000, target, attacker)
         attacker.effects.delete(EffectEnum.CASTELIACONE)
       }
     })
@@ -91,6 +104,12 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.FRUIT_JUICE]: [
     new OnSpawnEffect((entity) => {
       entity.addSpeed(50, entity, 0, false)
+    })
+  ],
+  [Item.LUCKY_EGG]: [
+    new OnSpawnEffect((entity) => {
+      entity.addLuck(30, entity, 0, false)
+      entity.addAbilityPower(30, entity, 0, false)
     })
   ],
   [Item.HEARTY_STEW]: [
@@ -322,8 +341,11 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.effects.add(EffectEnum.WHIPPED_DREAM)
     }),
     new OnHitEffect(({ attacker, target }) => {
-      if (attacker.effects.has(EffectEnum.WHIPPED_DREAM)) {
-        target.status.triggerCharm(5000, target, attacker)
+      if (
+        attacker.effects.has(EffectEnum.WHIPPED_DREAM) ||
+        chance(0.3, attacker)
+      ) {
+        target.status.triggerCharm(2000, target, attacker)
         attacker.effects.delete(EffectEnum.WHIPPED_DREAM)
       }
     })

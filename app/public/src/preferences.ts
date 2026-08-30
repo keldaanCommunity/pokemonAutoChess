@@ -13,6 +13,8 @@ export type Keybindings = {
   emote: string
   prev_player: string
   next_player: string
+  prev_player_by_rank: string;
+  next_player_by_rank: string;
   board_return: string
   wiki: string
   team_planner: string
@@ -40,6 +42,7 @@ export interface IPreferencesState {
   keybindings: Keybindings
   renderer: number
   antialiasing: boolean
+  customCursors: boolean
   colorblindMode: boolean
   recordReplays: boolean
   keepReplays: number
@@ -69,6 +72,7 @@ const defaultPreferences: IPreferencesState = {
   cameraLocked: false,
   renderer: Phaser.AUTO,
   antialiasing: true,
+  customCursors: true,
   colorblindMode: false,
   recordReplays: true,
   keepReplays: 5,
@@ -83,6 +87,8 @@ const defaultPreferences: IPreferencesState = {
     emote: "A",
     prev_player: "PAGE_UP",
     next_player: "PAGE_DOWN",
+    prev_player_by_rank: "UP",
+    next_player_by_rank: "DOWN",
     board_return: "HOME",
     wiki: "W",
     meta_report: "M",

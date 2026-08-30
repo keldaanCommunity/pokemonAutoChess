@@ -14,7 +14,7 @@ import type Status from "../../../../models/colyseus-models/status"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import type { IBoardEvent, IPokemonEntity } from "../../../../types"
 import { Ability } from "../../../../types/enum/Ability"
-import { EffectEnum } from "../../../../types/enum/Effect"
+import { EffectEnum, EnvironmentalEffects } from "../../../../types/enum/Effect"
 import {
   AttackType,
   HealType,
@@ -27,6 +27,7 @@ import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
+import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
@@ -633,6 +634,10 @@ export default class BattleManager {
             max(pokemon.maxPP)(value as IPokemonEntity["pp"])
           )
           break
+        case "maxPP": {
+          pkmSprite.lifebar?.setMaxPP(pokemon.maxPP)
+          break
+        }
         case "atk":
           if (previousValue != null && value && value > previousValue) {
             pkmSprite.displayBoost(Stat.ATK)
@@ -1004,7 +1009,7 @@ export default class BattleManager {
       })
     }
 
-    if (event.effect === EffectEnum.STRANGE_STEAM_BOARD_EFFECT) {
+    if (event.effect === EffectEnum.STRANGE_STEAM) {
       const sprite = this.scene.add.sprite(
         coordinates[0],
         coordinates[1],
@@ -1214,7 +1219,11 @@ export default class BattleManager {
           : type === AttackType.SPECIAL
             ? "#5f9ff9" // should be the same than var(--color-special) but phaser cant use css variables
             : "#f7d51d" // should be the same than var(--color-true) but phaser cant use css variables
-      this.displayTween(color, coordinates, index, amount)
+      // board effect damage has no attacker, so it shows its own icon instead of a portrait
+      const isEffectIcon = isIn(EnvironmentalEffects, index)
+      const textureKey = isEffectIcon ? `effect-${index}` : `portrait-${index}`
+
+      this.displayTween(color, coordinates, textureKey, amount, isEffectIcon)
       displayHit(
         this.scene,
         PokemonAnimations[PkmByIndex[index]]?.hitSprite ??
@@ -1244,15 +1253,19 @@ export default class BattleManager {
     if (this.simulation?.id === id) {
       const coordinates = transformEntityCoordinates(x, y, this.flip)
       const color = type === HealType.HEAL ? "#92cc41" : "#8d8d8d"
-      this.displayTween(color, coordinates, index, amount)
+      // board effect damage has no caster, so it shows its own icon instead of a portrait
+      const isEffectIcon = isIn(EnvironmentalEffects, index)
+      const textureKey = isEffectIcon ? `effect-${index}` : `portrait-${index}`
+      this.displayTween(color, coordinates, textureKey, amount)
     }
   }
 
   displayTween(
     color: string,
     coordinates: number[],
-    index: string,
-    amount: number
+    textureKey: string,
+    amount: number,
+    isBoardEffectIcon = false
   ) {
     if (!this.scene.sys.displayList) return // prevents an exception
     const fontSize =
@@ -1275,23 +1288,36 @@ export default class BattleManager {
     }
     const dy = Math.round(50 * (Math.random() - 0.5))
 
-    const image = this.scene.add.existing(
-      new GameObjects.Image(this.scene, 0, 0, `portrait-${index}`)
-        .setScale(0.5, 0.5)
-        .setOrigin(0, 0)
-    )
     const text = this.scene.add.existing(
       new GameObjects.Text(this.scene, 25, 0, amount.toFixed(0), textStyle)
     )
-    image.setDepth(DEPTH.DAMAGE_PORTRAIT)
     text.setDepth(DEPTH.DAMAGE_TEXT)
+    const children: GameObjects.GameObject[] = [text]
+
+    if (this.scene.textures.exists(textureKey)) {
+      const image = this.scene.add.existing(
+        new GameObjects.Image(this.scene, 0, 0, textureKey).setOrigin(0, 0)
+      )
+      if (isBoardEffectIcon) {
+        // effect icons are monochrome svgs that rasterize much larger than a
+        // portrait, so clamp the size and recolor them to match the damage type
+        image
+          .setDisplaySize(24, 24)
+          .setTint(Number.parseInt(color.slice(1), 16))
+          .setTintMode(Phaser.TintModes.FILL)
+      } else {
+        image.setScale(0.5, 0.5)
+      }
+      image.setDepth(DEPTH.DAMAGE_PORTRAIT)
+      children.push(image)
+    }
 
     const container = this.scene.add.existing(
       new GameObjects.Container(
         this.scene,
         coordinates[0] + 30,
         coordinates[1] + dy,
-        [text, image]
+        children
       )
     )
 

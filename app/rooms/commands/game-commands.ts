@@ -87,9 +87,7 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  type Gift,
   GiftShopPrices,
-  Gifts,
   GiftsTier1,
   GiftsTier2,
   GiftsTier3
@@ -99,6 +97,8 @@ import {
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
+  type Gift,
+  Gifts,
   Item,
   ItemComponents,
   ItemComponentsNoFossilOrScarf,
@@ -126,7 +126,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import type { IDetailledPokemon } from "../../types/models/bot-v2"
+import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeInArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
@@ -669,13 +669,7 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
-          player.synergies,
-          Synergy.NORMAL
-        )
-        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
-          player.scarvesItems.push(result)
-        }
+        player.scarvesItems.push(result)
       }
 
       player.items.push(result)
@@ -1272,6 +1266,9 @@ export class OnUpdateCommand extends Command<
       reinforcement.status.runeProtect = entity.status.runeProtect
       reinforcement.status.runeProtectCooldown =
         entity.status.runeProtectCooldown
+
+      // bring other tree status
+      reinforcement.status.tree = entity.status.tree
 
       // bring over current active fields (debatable, since technically positie status in wiki)
       reinforcement.status.grassField = entity.status.grassField

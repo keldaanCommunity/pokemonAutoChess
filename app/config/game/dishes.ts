@@ -13,6 +13,7 @@ export const DishByPkm: { [pkm in Pkm]?: Item | null } = {
   [Pkm.VANILLUXE]: Item.CASTELIACONE,
   [Pkm.SWIRLIX]: Item.WHIPPED_DREAM,
   [Pkm.SLURPUFF]: Item.WHIPPED_DREAM,
+  [Pkm.DELIBIRD]: Item.LUCKY_EGG,
   [Pkm.APPLIN]: Item.TART_APPLE,
   [Pkm.FLAPPLE]: Item.TART_APPLE,
   [Pkm.APPLETUN]: Item.SWEET_APPLE,

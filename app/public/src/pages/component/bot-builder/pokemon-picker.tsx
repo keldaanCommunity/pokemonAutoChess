@@ -51,7 +51,8 @@ export default function PokemonPicker(props: {
           Pkm.PILLAR_WOOD,
           Pkm.PILLAR_IRON,
           Pkm.PILLAR_CONCRETE,
-          Pkm.EGG
+          Pkm.EGG,
+          Pkm.BUG_NEST
         ]
       : PRECOMPUTED_POKEMONS_PER_TYPE[t]
   )

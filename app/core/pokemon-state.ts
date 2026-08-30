@@ -2,17 +2,21 @@ import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
-import { EffectEnum } from "../types/enum/Effect"
+import {
+  EffectEnum,
+  type EnvironmentalEffect,
+  EnvironmentalEffects
+} from "../types/enum/Effect"
 import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
-import { count } from "../utils/array"
+import { count, isIn } from "../utils/array"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
-import { max, min } from "../utils/number"
+import { capUint16, max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
@@ -308,7 +312,7 @@ export default abstract class PokemonState {
   handleHeal(
     pokemon: PokemonEntity,
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ): { healReceived: number; overheal: number } {
@@ -331,10 +335,12 @@ export default abstract class PokemonState {
       return { healReceived: 0, overheal: 0 }
     }
     if (pokemon.hp > 0 && !pokemon.status.protect) {
-      if (apBoost > 0) {
+      const caster =
+        origin && !isIn(EnvironmentalEffects, origin) ? origin : null
+      if (apBoost > 0 && caster) {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
-      if (crit) {
+      if (crit && caster) {
         heal *= caster.critPower
       }
       if (pokemon.effects.has(EffectEnum.BUFF_HEAL_RECEIVED)) {
@@ -356,10 +362,10 @@ export default abstract class PokemonState {
       const overheal = min(0)(heal - missingHP)
       pokemon.hp += healReceived
 
-      if (caster && healReceived > 0) {
+      if (origin && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
-            index: caster.index,
+            index: caster?.index ?? origin,
             type: HealType.HEAL,
             amount: Math.round(healReceived),
             x: pokemon.positionX,
@@ -367,7 +373,12 @@ export default abstract class PokemonState {
             id: pokemon.simulation.id
           })
         }
-        caster.healDone += healReceived
+        if (caster) {
+          caster.healDone += healReceived
+        } else if (isIn(EnvironmentalEffects, origin)) {
+          const dps = pokemon.simulation.getEffectDps(pokemon.team, origin)
+          dps.heal = capUint16(dps.heal + healReceived)
+        }
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
@@ -425,6 +436,7 @@ export default abstract class PokemonState {
     board,
     attackType,
     attacker,
+    effect,
     shouldTargetGainMana,
     isRetaliation = false
   }: {
@@ -433,6 +445,7 @@ export default abstract class PokemonState {
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }): { death: boolean; takenDamage: number } {
@@ -751,26 +764,36 @@ export default abstract class PokemonState {
           })
           if (pokemon !== attacker) {
             // do not count self damage
-            switch (attackType) {
-              case AttackType.PHYSICAL:
-                attacker.physicalDamage += takenDamage
-                break
-
-              case AttackType.SPECIAL:
-                attacker.specialDamage += takenDamage
-                break
-
-              case AttackType.TRUE:
-                attacker.trueDamage += takenDamage
-                break
-
-              default:
-                break
+            if (attackType === AttackType.PHYSICAL) {
+              attacker.physicalDamage = capUint16(
+                attacker.physicalDamage + takenDamage
+              )
+            } else if (attackType === AttackType.SPECIAL) {
+              attacker.specialDamage = capUint16(
+                attacker.specialDamage + takenDamage
+              )
+            } else if (attackType === AttackType.TRUE) {
+              attacker.trueDamage = capUint16(attacker.trueDamage + takenDamage)
             }
           }
+        } else if (isIn(EnvironmentalEffects, effect)) {
+          // board effect damage has no attacker, so nothing else records it.
+          // credit it to the team opposing the victim, and update dps directly
+          const team =
+            pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+          const dps = pokemon.simulation.getEffectDps(team, effect)
+          if (attackType === AttackType.PHYSICAL) {
+            dps.physicalDamage = capUint16(dps.physicalDamage + takenDamage)
+          } else if (attackType === AttackType.SPECIAL) {
+            dps.specialDamage = capUint16(dps.specialDamage + takenDamage)
+          } else if (attackType === AttackType.TRUE) {
+            dps.trueDamage = capUint16(dps.trueDamage + takenDamage)
+          }
+        }
 
+        if (attacker || effect) {
           pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
-            index: attacker.index,
+            index: attacker ? attacker.index : effect!,
             type: attackType,
             amount: Math.round(takenDamage),
             x: pokemon.positionX,
@@ -813,6 +836,7 @@ export default abstract class PokemonState {
     board: Board,
     attackType: AttackType
   ) {
+    pokemon.hp = 0 // prevent in-flight damage from killing the unit a second time
     pokemon.team = pokemon.baseTeam
     pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
@@ -943,6 +967,7 @@ export default abstract class PokemonState {
             board,
             attackType: AttackType.SPECIAL,
             attacker: null,
+            effect: EffectEnum.SANDSTORM,
             shouldTargetGainMana: false
           })
         }
@@ -1039,6 +1064,7 @@ export default abstract class PokemonState {
         board,
         attackType: AttackType.PHYSICAL,
         attacker: null,
+        effect: EffectEnum.STEALTH_ROCKS,
         shouldTargetGainMana: true
       })
       pokemon.status.triggerWound(1000, pokemon, undefined)
@@ -1055,6 +1081,7 @@ export default abstract class PokemonState {
         board,
         attackType: AttackType.TRUE,
         attacker: null,
+        effect: EffectEnum.SPIKES,
         shouldTargetGainMana: true
       })
       pokemon.status.triggerArmorReduction(1000, pokemon)
@@ -1078,6 +1105,7 @@ export default abstract class PokemonState {
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
+        effect: EffectEnum.HAIL,
         shouldTargetGainMana: true
       })
       pokemon.status.triggerFreeze(1000, pokemon, undefined)
@@ -1094,6 +1122,7 @@ export default abstract class PokemonState {
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
+        effect: EffectEnum.EMBER,
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(2200, pokemon, null)

@@ -7,8 +7,7 @@ import {
   getRegionTint,
   ItemStats,
   PortalCarouselStages,
-  RegionDetails,
-  Troopers
+  RegionDetails
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import {
@@ -41,12 +40,11 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
-import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
@@ -65,7 +63,7 @@ import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayBoost } from "./abilities-animations"
+import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
@@ -222,7 +220,6 @@ export default class BoardManager {
     this.animationManager.animatePokemon(pokemonSprite, pokemon.action, false)
     this.pokemons.get(pokemonSprite.id)?.destroy()
     this.pokemons.set(pokemonSprite.id, pokemonSprite)
-    this.addLavaBenchPokemonAnimation(pokemonSprite)
 
     return pokemonSprite
   }
@@ -259,13 +256,6 @@ export default class BoardManager {
       this.mode !== BoardMode.TOWN
     ) {
       this.renderTradingPlatform()
-    }
-
-    if (
-      this.mode === BoardMode.BATTLE &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
-    ) {
-      this.addLavaBenchAnimation()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -811,13 +801,6 @@ export default class BoardManager {
         }
       }
     }, 0) // need to wait for next event loop for state to be up to date
-
-    if (
-      phaseJustChanged &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
-    ) {
-      this.addLavaBenchAnimation()
-    }
   }
 
   removePokemonsOnBoard() {
@@ -1616,43 +1599,5 @@ export default class BoardManager {
         }
       }
     })
-  }
-
-  addLavaBenchAnimation() {
-    for (let x = 0; x < BOARD_WIDTH; x++) {
-      addAbilitySprite(
-        this.scene,
-        "LAVA",
-        0,
-        transformBoardCoordinates(x, -0.75),
-        {
-          animOptions: { repeat: 30 },
-          depth: DEPTH.ABILITY_GROUND_LEVEL,
-          scale: 2
-        }
-      )
-    }
-    this.pokemons.forEach((sprite) => this.addLavaBenchPokemonAnimation(sprite))
-  }
-
-  addLavaBenchPokemonAnimation(pokemonSprite: PokemonSprite) {
-    if (
-      this.mode === BoardMode.BATTLE &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA &&
-      isOnBench(pokemonSprite.pokemon) &&
-      !isIn(Troopers, pokemonSprite.pokemon.name)
-    ) {
-      pokemonSprite.setLifeBar(pokemonSprite.pokemon, this.scene)
-      addAbilitySprite(
-        this.scene,
-        "BURN_UP",
-        0,
-        [pokemonSprite.x, pokemonSprite.y],
-        {
-          animOptions: { repeat: 48 },
-          scale: 2
-        }
-      )
-    }
   }
 }

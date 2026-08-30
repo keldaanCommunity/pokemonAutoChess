@@ -69,13 +69,14 @@ export enum EffectEnum {
   BATTLE_ARMOR = "BATTLE_ARMOR",
   MOUTAIN_RESISTANCE = "MOUTAIN_RESISTANCE",
   DIAMOND_STORM = "DIAMOND_STORM",
+  CURSE = "CURSE",
   CURSE_OF_VULNERABILITY = "CURSE_OF_VULNERABILITY",
   CURSE_OF_WEAKNESS = "CURSE_OF_WEAKNESS",
   CURSE_OF_TORMENT = "CURSE_OF_TORMENT",
   CURSE_OF_FATE = "CURSE_OF_FATE",
   AROMATIC_MIST = "AROMATIC_MIST",
-  FAIRY_WIND = "FAIRY_WIND",
-  STRANGE_STEAM = "STRANGE_STEAM",
+  FAIRY_AURA = "FAIRY_AURA",
+  PIXILATE = "PIXILATE",
   MOON_FORCE = "MOON_FORCE",
   CHILLY = "CHILLY",
   FROSTY = "FROSTY",
@@ -114,7 +115,7 @@ export enum EffectEnum {
   SMOG = "SMOG",
   SMOKE = "SMOKE",
   POISON_GAS = "POISON_GAS",
-  STRANGE_STEAM_BOARD_EFFECT = "STRANGE_STEAM_BOARD_EFFECT",
+  STRANGE_STEAM = "STRANGE_STEAM",
   SHINING_RAY = "SHINING_RAY",
   LIGHT_PULSE = "LIGHT_PULSE",
   ETERNAL_LIGHT = "ETERNAL_LIGHT",
@@ -141,6 +142,7 @@ export enum EffectEnum {
   COTTON_BALL = "COTTON_BALL",
   HAIL = "HAIL",
   EMBER = "EMBER",
+  TIDAL_WAVE = "TIDAL_WAVE",
   FLUID = "FLUID",
   SHAPELESS = "SHAPELESS",
   ETHEREAL = "ETHEREAL",
@@ -156,6 +158,7 @@ export enum EffectEnum {
   BANQUET = "BANQUET",
   CASTELIACONE = "CASTELIACONE",
   WHIPPED_DREAM = "WHIPPED_DREAM",
+  BLACK_SLUDGE = "BLACK_SLUDGE",
   BERRY_JUICE = "BERRY_JUICE",
   BINDING_MOCHI = "BINDING_MOCHI",
   ABILITY_CRIT = "ABILITY_CRIT",
@@ -177,17 +180,22 @@ export enum EffectEnum {
 }
 
 export const BoardEffects = [
-  EffectEnum.LIGHTNING_STRIKE,
-  EffectEnum.SMOKE,
-  EffectEnum.POISON_GAS,
-  EffectEnum.STRANGE_STEAM_BOARD_EFFECT,
-  EffectEnum.STEALTH_ROCKS,
-  EffectEnum.SPIKES,
-  EffectEnum.TOXIC_SPIKES,
-  EffectEnum.STICKY_WEB,
   EffectEnum.COTTON_BALL,
+  EffectEnum.EMBER,
   EffectEnum.HAIL,
-  EffectEnum.EMBER
+  EffectEnum.LIGHTNING_STRIKE,
+  EffectEnum.POISON_GAS,
+  EffectEnum.SANDSTORM,
+  EffectEnum.SMOKE,
+  EffectEnum.SPIKES,
+  EffectEnum.STEALTH_ROCKS,
+  EffectEnum.STICKY_WEB,
+  EffectEnum.STRANGE_STEAM,
+  EffectEnum.TIDAL_WAVE,
+  EffectEnum.TOXIC_SPIKES
 ] as const
 
 export type BoardEffect = (typeof BoardEffects)[number]
+
+export const EnvironmentalEffects = [...BoardEffects, EffectEnum.CURSE] as const
+export type EnvironmentalEffect = (typeof EnvironmentalEffects)[number]

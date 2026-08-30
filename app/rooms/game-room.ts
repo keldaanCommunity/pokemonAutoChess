@@ -68,8 +68,9 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
+  type Gift,
+  Gifts,
   type Item,
   RemovableItems,
   UnholdableItemsToSaveForStats,
@@ -87,8 +88,8 @@ import type { Synergy } from "../types/enum/Synergy"
 import { TradeStatus } from "../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
+import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
