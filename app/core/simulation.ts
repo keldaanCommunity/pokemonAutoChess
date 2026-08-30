@@ -1,10 +1,5 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import {
-  BOARD_HEIGHT,
-  BOARD_SIDE_HEIGHT,
-  BOARD_WIDTH,
-  Troopers
-} from "../config"
+import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -43,7 +38,6 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Pkm } from "../types/enum/Pokemon"
-import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
@@ -51,7 +45,7 @@ import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
-import { max, min } from "../utils/number"
+import { max } from "../utils/number"
 import { pickRandomIn, randomBetween, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { AbilityStrategies } from "./abilities/abilities"
@@ -83,7 +77,7 @@ import {
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
-import { DelayedCommand, type SimulationCommand } from "./simulation-command"
+import type { SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {

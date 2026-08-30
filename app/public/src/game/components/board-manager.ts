@@ -7,8 +7,7 @@ import {
   getRegionTint,
   ItemStats,
   PortalCarouselStages,
-  RegionDetails,
-  Troopers
+  RegionDetails
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import {
@@ -46,7 +45,6 @@ import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
-import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
@@ -65,7 +63,7 @@ import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayBoost } from "./abilities-animations"
+import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
