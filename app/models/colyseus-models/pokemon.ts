@@ -20427,7 +20427,7 @@ export class TatsugiriCurly extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 80
+  hp = 50
   atk = 18
   speed = 50
   def = 2
@@ -20443,7 +20443,7 @@ export class TatsugiriDroopy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 80
+  hp = 50
   atk = 10
   speed = 50
   def = 10
@@ -20459,7 +20459,7 @@ export class TatsugiriStretchy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.GOURMET])
   rarity = Rarity.SPECIAL
   stars = 1
-  hp = 80
+  hp = 50
   atk = 10
   speed = 75
   def = 2

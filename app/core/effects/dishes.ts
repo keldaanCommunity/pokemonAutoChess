@@ -388,7 +388,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   [Item.RICE]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addShield(80, entity, 0, false)
+      entity?.addMaxHP(50, entity, 0, false)
+      entity?.effects.add(EffectEnum.RICE)
       if (!player) return
       const tatsugiriOnBoard = schemaValues(player.board).find(
         (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
