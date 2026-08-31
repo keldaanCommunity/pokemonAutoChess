@@ -1,6 +1,6 @@
 import type { MapSchema } from "@colyseus/schema"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
-import type PokemonSprite from "../public/src/game/components/pokemon"
+import type PokemonSprite from "../public/src/game/components/pokemon-sprite"
 import type { IPokemon, IPokemonEntity } from "../types"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { schemaValues } from "./schemas"

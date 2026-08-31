@@ -26,7 +26,7 @@ import type GameScene from "../scenes/game-scene"
 import { EmoteBubble } from "./emote-bubble"
 import EmoteMenu from "./emote-menu"
 import LifeBar from "./life-bar"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 export default class PokemonAvatar extends PokemonSprite {
   scene: GameScene

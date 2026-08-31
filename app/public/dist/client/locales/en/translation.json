@@ -4479,6 +4479,7 @@
 	"consumable_item": "Consumable",
 	"unholdable_item": "Unholdable",
 	"removable_item": "Removable",
+	"absorbed_item": "Absorbed",
 	"food": "Food",
 	"signature_dish": "Signature Dish",
 	"tool": "Tool",
@@ -5099,6 +5100,7 @@
 			"consumable_item": "Consumable items are one-time use items that are removed when their effect is used.",
 			"unholdable_item": "Unholdable items are items that cannot be held by a Pokémon. Their effect still applies on your whole team.",
 			"removable_item": "Removable items are items that can be removed from a Pokémon by putting them on the bench.",
+			"absorbed_item": "Absorbed items are items that are not put in regular item slots and cannot be dropped or stolen during battle. Only one item can be absorbed at a time.",
 			"gift": "Gifts are items given to your team partner when you pick them"
 		},
 		"data": {
