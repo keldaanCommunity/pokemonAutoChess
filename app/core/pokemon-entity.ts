@@ -15,6 +15,7 @@ import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
+    AbsorbedItems,
   Emotion,
   type IPokemon,
   type IPokemonEntity,
@@ -781,14 +782,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addItem(item: Item, permanent = false) {
     const type = SynergyGivenByItem[item]
-    if (
-      this.items.size >= 3 ||
-      (isIn(SynergyStones, item) && this.types.has(type)) ||
-      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
+    if(isIn(AbsorbedItems, item)){
+      if(Array.from(this.items).some(i => isIn(AbsorbedItems, i))) return // can only absorb one item
+    } else if (this.items.size >= 3){
+      return; // cannot hold more than 3 items
+    }
+
+    if (isIn(SynergyStones, item) && this.types.has(type)){
+      return; // cannot hold a synergy stone of a type already obtained - prevents a noob trap
+    }
+    
+    if(((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
         !this.refToBoardPokemon.hasEvolution) ||
       (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
     ) {
-      return
+      return // handle cases where eviolite and rare candy cannot be given
     }
 
     if (this.items.has(item) == false) {
@@ -814,12 +822,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  removeItem(item: Item, permanent = false) {
+  removeItem(item: Item, permanent = false): boolean {
+    if(isIn(AbsorbedItems, item)) return false
     this.items.delete(item)
     this.removeItemEffect(item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.delete(item)
     }
+    return true
   }
 
   applyItemEffect(item: Item) {

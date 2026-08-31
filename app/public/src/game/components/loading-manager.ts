@@ -14,7 +14,7 @@ import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
 import GameScene from "../scenes/game-scene"
-import { loadCompressedAtlas } from "./pokemon"
+import { loadCompressedAtlas } from "./pokemon-sprite"
 
 export default class LoadingManager {
   scene: Phaser.Scene

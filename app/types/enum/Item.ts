@@ -1256,3 +1256,9 @@ export const SpecialItems: Item[] = [
   ...Flavors,
   ...Nectars
 ] satisfies Item[]
+
+export const AbsorbedItems = [
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY,
+] satisfies Item[]

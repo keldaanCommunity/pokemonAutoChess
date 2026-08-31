@@ -15,7 +15,7 @@ import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
 import durations from "../assets/pokemons/durations.json"
-import type PokemonSprite from "./components/pokemon"
+import type PokemonSprite from "./components/pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
