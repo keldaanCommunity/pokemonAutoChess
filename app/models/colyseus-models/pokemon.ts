@@ -56,6 +56,7 @@ import {
   PkmFamily,
   PkmIndex,
   PkmRegionalVariants,
+  Tatsugiris,
   Unowns
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -161,7 +162,7 @@ export class Pokemon extends Schema implements IPokemon {
   get canEat(): boolean {
     return (
       this.passive !== Passive.INANIMATE &&
-      !Unowns.includes(this.name) &&
+      ![...Unowns, ...Tatsugiris].includes(this.name) &&
       (this.dishes.size === 0 ||
         (this.items.has(Item.BIG_EATER_BELT) && this.dishes.size === 1))
     )

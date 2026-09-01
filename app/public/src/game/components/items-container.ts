@@ -2,7 +2,7 @@ import type { ArraySchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
 import type Player from "../../../../models/colyseus-models/player"
 import {
-    AbsorbedItems,
+  AbsorbedItems,
   Berries,
   Dishes,
   type Item,
@@ -48,8 +48,8 @@ export default class ItemsContainer extends GameObjects.Container {
     const itemSize = this.pokemonId === null ? 70 : 25
     const itemsPerColumn = this.pokemonId === null ? 6 : 3
     let items = schemaValues(inventory)
-    const absorbedItem = items.find(i => isIn(AbsorbedItems, i))
-    items = items.filter(i => !isIn(AbsorbedItems, i))
+    const absorbedItem = items.find((i) => isIn(AbsorbedItems, i))
+    items = items.filter((i) => !isIn(AbsorbedItems, i))
 
     this.items = []
     items
@@ -70,20 +70,20 @@ export default class ItemsContainer extends GameObjects.Container {
         )
       })
 
-    if(absorbedItem){
-        this.items.push(absorbedItem)
-        const x = -1 * itemSize
-        const y = 1 * itemSize
-        this.add(
-          new ItemContainer(
-            this.scene,
-            x,
-            y,
-            absorbedItem,
-            this.pokemonId,
-            this.playerId
-          )
+    if (absorbedItem) {
+      this.items.push(absorbedItem)
+      const x = -1.5 * itemSize
+      const y = 0
+      this.add(
+        new ItemContainer(
+          this.scene,
+          x,
+          y,
+          absorbedItem,
+          this.pokemonId,
+          this.playerId
         )
+      )
     }
   }
 

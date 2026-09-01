@@ -8,7 +8,13 @@
 - Poison Gas Board effect change: POISON Pokémon are now immune
 - Buff Carnivine: partial revert of the 6.8 nerf; Speed: 29 → 40
 - Delibird is now ICE/FLYING/GOURMET instead of ICE/FLYING/FIELD ; New dish: LUCKY_EGG
-- Buff Dondozo and Tatusigiri: Tatsugiri now also provides 80 max HP in addition to its other stats buffs that depend on its form. RICE now gives 50 max HP instead of 80 SHIELD. Change Order Up ability: If a Tatsugiri has been swallowed, Dondozo **and the allies who have eaten RICE** gain the stats provided by it again.
+- Rework Dondozo and Tatusigiri: 
+    - When swallowed by Dondozo, Tatsugiri now also provides 50 max HP in addition to its other stats buffs that depend on its form.
+    - Tatsugiri HP: 80 → 50
+    - Tatsugiri can no longer eat dishes
+    - Tatsugiri no longer takes an item slot when swallowed by Dondozo. Instead it is addes as an *absorbed* item. Absorbed items cannot be stolen or dropped during battle.
+    - RICE now gives 50 max HP instead of 80 SHIELD 
+    - Change Order Up ability: Dondozo **and the allies who have eaten RICE** gain the bonus stats provided by its commander. 
 
 # Changes to Synergies
 
