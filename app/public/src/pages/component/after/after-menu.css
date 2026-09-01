@@ -39,6 +39,40 @@
   text-shadow: 2px 2px 0 black;
 }
 
+.after-menu .after-row {
+  opacity: 0;
+  animation: after-row-reveal 0.4s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger, 0.3s));
+}
+
+@keyframes after-row-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.after-menu .after-header-reveal {
+  opacity: 0;
+  animation: after-rank-reveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 2.6s;
+}
+
+@keyframes after-rank-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .after-menu .player-rank img {
   height: 48px;
 }

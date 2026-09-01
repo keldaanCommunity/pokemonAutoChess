@@ -7,12 +7,12 @@ import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../../../types/enum/Effect"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
 import atlas from "../../assets/atlas.json"
 import { preloadMusic } from "../../pages/utils/audio"
-import AnimatedTilesPlugin from "../plugins/animated-tiles-plugin"
 import GameScene from "../scenes/game-scene"
 import { loadCompressedAtlas } from "./pokemon"
 
@@ -20,6 +20,7 @@ export default class LoadingManager {
   scene: Phaser.Scene
   loadingBar: GameObjects.Container | null = null
   statusMessage: string
+  preloadingPromise: Promise<void>
 
   constructor(scene: Phaser.Scene) {
     this.scene = scene
@@ -33,12 +34,13 @@ export default class LoadingManager {
       this.statusMessage = t("loading_complete")
     })
 
-    this.preload()
+    this.preloadingPromise = this.preload()
   }
 
   async preload() {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
+
     scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
     scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
@@ -54,7 +56,8 @@ export default class LoadingManager {
     scene.load.image("sun", "/assets/environment/sun.png")
     scene.load.image("clouds", "/assets/environment/clouds.png")
     scene.load.image("distort", "/assets/environment/noise.png")
-    scene.load.multiatlas(
+    loadMultiAtlas(
+      scene,
       "snowflakes",
       "/assets/environment/snowflakes.json",
       "/assets/environment/"
@@ -62,6 +65,19 @@ export default class LoadingManager {
 
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
+    // icons for the damage numbers board effects put on screen.
+    // load.svg and not load.image, otherwise the tint fills an opaque box instead of the shape
+    for (const effect of EnvironmentalEffects) {
+      scene.load.svg(
+        `effect-${effect}`,
+        `/assets/icons/effects/${effect}.svg`,
+        {
+          width: 64,
+          height: 64
+        }
+      )
+    }
 
     scene.load.spritesheet({
       key: "cell",
@@ -86,7 +102,8 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      scene.load.multiatlas(
+      loadMultiAtlas(
+        scene,
         atlas.packs[pack].name,
         `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
         `/assets/${pack}/`
@@ -97,7 +114,7 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       const players = schemaValues(scene.room?.state.players!)
-      const player = players.find((p) => p.id === scene.uid) ?? players[0]
+      const player = scene.getPlayerToSpectate()! // must match what startGame plays, or the music isn't preloaded
       await scene.preloadMaps(
         players
           .map((p) => p.map)
@@ -110,52 +127,73 @@ export default class LoadingManager {
     // load missingno as default pokemon texture if not found
     loadCompressedAtlas(scene, "0000")
 
-    scene.load.scenePlugin(
-      "animatedTiles",
-      AnimatedTilesPlugin,
-      "animatedTiles",
-      "animatedTiles"
-    )
+    if (scene instanceof GameScene) {
+      await new Promise<void>((resolve) => {
+        // start another Phaser loading queue after the fetch requests of preloadMaps have been awaited
+        scene.load.once("complete", () => resolve())
+        scene.load.start()
+      })
+    }
   }
 }
 
+// phaser's duplicate-key check covers only the multiatlas json file, and the texture files it
+// references are queued on the fly; a replay seek re-running preload would re-download every
+// texture and error re-adding it
+function loadMultiAtlas(
+  scene: Phaser.Scene,
+  key: string,
+  url: string,
+  path: string
+) {
+  if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+}
+
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "portal",
     "/assets/environment/portal.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "chest",
     "/assets/environment/chest.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "shine",
     "/assets/environment/shine.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "berry_trees",
-    "/assets/environment/berry_trees.json?tempcacheburst=68", //TEMP
+    "/assets/environment/berry_trees.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "flower_pots",
     "/assets/environment/flower_pots.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "ground_holes",
     "/assets/environment/ground_holes.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "loading_pokeball",
     "/assets/environment/loading_pokeball.json",
     "/assets/environment/"
   )
-  scene.load.multiatlas(
+  loadMultiAtlas(
+    scene,
     "training_bag",
     "/assets/environment/training_bag.json",
     "/assets/environment/"

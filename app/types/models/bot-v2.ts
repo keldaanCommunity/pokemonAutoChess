@@ -1,15 +1,5 @@
-import type { Emotion, PkmWithCustom } from ".."
-import type { Item } from "../enum/Item"
 import type { Pkm } from "../enum/Pokemon"
-
-export interface IDetailledPokemon extends PkmWithCustom {
-  name: Pkm
-  x: number
-  y: number
-  items: Item[]
-  emotion?: Emotion
-  shiny?: boolean
-}
+import type { IDetailledPokemon } from "../interfaces/IDetailledPokemon"
 
 export interface IStep {
   board: IDetailledPokemon[]

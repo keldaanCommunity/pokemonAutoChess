@@ -1,5 +1,9 @@
 import { t } from "i18next"
-import { getBaseAltForm, RegionDetails, SynergyTriggers } from "../config"
+import {
+  getBaseAltForm,
+  RegionDetails,
+  SynergyTiersThresholds
+} from "../config"
 import { precomputedPokemons } from "../models/precomputed/precomputed-pokemons"
 import {
   CraftableItemsNoScarves,
@@ -201,8 +205,9 @@ export function getExpeditionData(
         (s) => s !== Synergy.BABY
       )
       const synergy = regionSynergies[expedition.hash % regionSynergies.length]
-      const synergyTriggers = SynergyTriggers[synergy]
-      const level = synergyTriggers[max(synergyTriggers.length - 1)(rankIndex)]
+      const synergyThresholds = SynergyTiersThresholds[synergy]
+      const level =
+        synergyThresholds[max(synergyThresholds.length - 1)(rankIndex)]
       return {
         region,
         synergy,

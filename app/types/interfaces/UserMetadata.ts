@@ -1,5 +1,6 @@
 import type { Emotion, Role, Title } from ".."
 import type { Language } from "../enum/Language"
+import type { GameEventData } from "../events"
 
 interface IUserMetadata {
   uid: string
@@ -20,6 +21,7 @@ interface IUserMetadata {
   eventPoints: number
   maxEventPoints: number
   eventFinishTime: Date | null
+  eventData?: GameEventData
   booster: number
   titles: Title[]
   title: "" | Title
