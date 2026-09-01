@@ -1021,33 +1021,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
           )
         }
 
-        const dbrecord = this.transformToSimplePlayer(player)
-        const synergiesMap = new Map<Synergy, number>()
-        player.synergies.forEach((v, k) => {
-          v > 0 && synergiesMap.set(k, v)
-        })
-        DetailledStatistic.create({
-          time: Date.now(),
-          name: dbrecord.name,
-          pokemons: dbrecord.pokemons.map((pokemon) => ({
-            ...pokemon,
-            items: Array.from(pokemon.items ?? []).map(
-              (item) => item.toString() as Item
-            )
-          })),
-          rank: dbrecord.rank,
-          nbplayers: humans.length + bots.length,
-          avatar: dbrecord.avatar,
-          playerId: dbrecord.id,
-          elo: elo,
-          synergies: synergiesMap,
-          gameMode: this.state.gameMode,
-          regions: player.regions,
-          unholdableItems: schemaValues(player.items).filter((item) =>
-            isIn(UnholdableItemsToSaveForStats, item)
-          )
-        })
-
         if (
           usr.eventFinishTime == null &&
           getCurrentGameEvent() === GameEvent.VICTORY_ROAD
@@ -1109,6 +1082,34 @@ export default class GameRoom extends Room<{ state: GameState }> {
           logger.error("Error updating event points", error)
         }
       }
+
+      // add game to player game history
+      const dbrecord = this.transformToSimplePlayer(player)
+      const synergiesMap = new Map<Synergy, number>()
+      player.synergies.forEach((v, k) => {
+        v > 0 && synergiesMap.set(k, v)
+      })
+      DetailledStatistic.create({
+        time: Date.now(),
+        name: dbrecord.name,
+        pokemons: dbrecord.pokemons.map((pokemon) => ({
+          ...pokemon,
+          items: Array.from(pokemon.items ?? []).map(
+            (item) => item.toString() as Item
+          )
+        })),
+        rank: dbrecord.rank,
+        nbplayers: humans.length + bots.length,
+        avatar: dbrecord.avatar,
+        playerId: dbrecord.id,
+        elo: usr.elo,
+        synergies: synergiesMap,
+        gameMode: this.state.gameMode,
+        regions: player.regions,
+        unholdableItems: schemaValues(player.items).filter((item) =>
+          isIn(UnholdableItemsToSaveForStats, item)
+        )
+      })
 
       // update all pokemons played count
       player.pokemonsPlayed.forEach((pkm) => {
