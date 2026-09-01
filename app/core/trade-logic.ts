@@ -1,6 +1,6 @@
 import { type IPokemon, ItemComponents, ShinyItems } from "../types"
 import { Rarity } from "../types/enum/Game"
-import { NonPkm } from "../types/enum/Pokemon"
+import { NonPkm, Pkm } from "../types/enum/Pokemon"
 import { isIn } from "../utils/array"
 import { schemaValues } from "../utils/schemas"
 
@@ -29,9 +29,17 @@ export function computeTradeCooldown(
   const starCooldown =
     starCooldowns[pokemonA.stars - 1] + starCooldowns[pokemonB.stars - 1]
 
-  return Math.round(
+  let totalCooldown = Math.round(
     (baseCooldown + itemsCooldown + rarityCooldown + starCooldown) / 2
   )
+
+  for (const pokemon of [pokemonA, pokemonB]) {
+    if (pokemon.name === Pkm.EGG && pokemon.shiny) {
+      totalCooldown += 3
+    }
+  }
+
+  return totalCooldown
 }
 
 export const rarityCooldowns: Record<Rarity, number> = {
@@ -46,4 +54,4 @@ export const rarityCooldowns: Record<Rarity, number> = {
   [Rarity.LEGENDARY]: 10
 }
 
-export const starCooldowns = [0, 1, 2, 3, 5]
+export const starCooldowns = [0, 1, 3, 4, 5]

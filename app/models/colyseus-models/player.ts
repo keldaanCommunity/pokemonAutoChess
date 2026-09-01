@@ -26,16 +26,17 @@ import {
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../types/enum/Effect"
 import {
   BattleResult,
   PokemonActionState,
   Rarity,
   Team
 } from "../../types/enum/Game"
-import type { Gift } from "../../types/enum/GiftShop"
 import {
   AbilityPerTM,
   ArtificialItems,
+  type Gift,
   Item,
   ItemComponentsNoFossilOrScarf,
   type MissionOrder,
@@ -162,15 +163,21 @@ export default class Player extends Schema implements IPlayer {
   @type(GameStatsSchema) gameStats: GameStats = new GameStatsSchema({
     ...initialGameStats
   })
+  @type("boolean") isBot: boolean
   commonRegionalPool: Pkm[] = new Array<Pkm>()
   uncommonRegionalPool: Pkm[] = new Array<Pkm>()
   rareRegionalPool: Pkm[] = new Array<Pkm>()
   epicRegionalPool: Pkm[] = new Array<Pkm>()
   ultraRegionalPool: Pkm[] = new Array<Pkm>()
-  isBot: boolean
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
+  fairyWandsOptions = [
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0], 3),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1], 3),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2], 3),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3], 3)
+  ]
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: Item[] = [
     pickRandomIn(TMsBronze),
@@ -197,6 +204,7 @@ export default class Player extends Schema implements IPlayer {
   specialGameRule: SpecialGameRule | null = null // its easier to duplicate this here and in gamestate than passing gamestate everywhere we need it
   shopsSinceLastUnownShop: number = 0
   regions: DungeonPMDO[] = []
+  extraScarves: number = 0 // scarves obtained though other ways than normal synergy
   unownReminiscences: number = 0
   doubleUpEliminationRound: number = 999
 
@@ -495,6 +503,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   getScarvesItemsWithNbScarves(n: number): Item[] {
+    n = n + this.extraScarves
     let i = 0
     const scarves: Item[] = []
     while (n > 0) {
@@ -685,7 +694,7 @@ export default class Player extends Schema implements IPlayer {
           this.choices.push(
             new PlayerChoice({
               type: "wand",
-              items: pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[i], 3)
+              items: this.fairyWandsOptions[i]
             })
           )
         }
@@ -759,7 +768,7 @@ export default class Player extends Schema implements IPlayer {
     const hasBugNest = getSynergyTier(this.synergies, Synergy.BUG) >= 4
     let nest = schemaValues(this.board).find((p) => p.name === Pkm.BUG_NEST)
     if (hasBugNest && !nest) {
-      const freeSpace = getFirstAvailablePositionOnBoard(this.board, 1)
+      const freeSpace = getFirstAvailablePositionOnBoard(this.board, 3)
       if (freeSpace) {
         nest = PokemonFactory.createPokemonFromName(Pkm.BUG_NEST, this)
         nest.positionX = freeSpace[0]
@@ -1015,7 +1024,10 @@ export default class Player extends Schema implements IPlayer {
 
     const dps = simulation.getDpsMeter(this.id)
     if (dps) {
-      const dpsList = schemaValues(dps)
+      // these are per-Pokémon records, and board effect rows are team-wide totals
+      const dpsList = schemaValues(dps).filter(
+        (d) => !isIn(EnvironmentalEffects, d.id)
+      )
       this.gameStats.maxHeal = Math.max(
         this.gameStats.maxHeal,
         ...dpsList.map((d) => d.heal)

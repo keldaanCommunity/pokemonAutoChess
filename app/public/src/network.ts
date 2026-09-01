@@ -233,7 +233,9 @@ export function gameStartRequest(token: string) {
 }
 
 export function changeRoomName(name: string) {
-  rooms.preparation?.send(Transfer.CHANGE_ROOM_NAME, name)
+  if (name.trim().length > 0) {
+    rooms.preparation?.send(Transfer.CHANGE_ROOM_NAME, name)
+  }
 }
 
 export function changeRoomPassword(password: string | null) {

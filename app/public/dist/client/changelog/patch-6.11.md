@@ -20,8 +20,10 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Accelerock (Lycanroc): 100% ATK as SPECIAL → 100/125/250% ATK as SPECIAL
 - After You (Indeedee): SPEED buff: 10 → 5/10/15/20
 - Behemoth Blade (Zacian): 100 SPECIAL at all tiers → 30/60/90/120/240 SPECIAL
+- Core Enforcer (Zygarde 100%): 80 SPECIAL at all tiers → 20/40/60/80/160 SPECIAL
 - Crunch (Totodile, Guzzlord): 40/80/150 → 40/80/160/320 SPECIAL
 - Flame Wheel (Cyndaquil): 10/20/30 → 10/20/40/80 SPECIAL
+- Hyper Drill (Dunsparce): 50 SPECIAL at all tiers → 10/20/40/50/100 SPECIAL
 - Jet Punch (Palafin): 100% of SPEED as SPECIAL → 100/100/100/150/300%
 - Leaf's blade (Trecko, Galarian Farfetched, Kartana): 100% → 100/125/150/250% of ATK as TRUE
 - Luster Purge (Latios): 25 SPECIAL → 10/20/30/60 SPECIAL
@@ -31,8 +33,10 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 - Mystical Fire (Fennekin): AP reduction 20 → 15/20/25/50
 - Nutrients: healing 40 → 20/30/40/80 ; DEF/SPE_DEF buff: 2 → 1/2/3/6
 - Origin Pulse (Kyogre): 100 SPECIAL → 50/75/100/120/150 ; Primal Kyogre PP 90 → 100
+- Precipice Blades (Groudon): 25/50/100/120 SPECIAL → 25/50/100/120/200
 - Prismatic Laser (Necrozma): 60 SPECIAL → 30/40/50/60/120 SPECIAL
 - Quiver Dance (Burmy): ATK & SPE_DEF buff 5 → 3/4/5/10, SPEED buff 10 → 10/10/10/15
+- Seed Flare (Shaymin): 20/25/30/30 SPECIAL → 20/25/30/35/70 SPECIAL
 - Struggle Bug (Illumise): AP reduction 50 → 30
 - Super Fang (Bidoof): 25% → 20/30/50/70% max HP as TRUE
 - Sweet Scent (Chikorita, Swirlix): SPE_DEF debuff: 6 → 4/6/8/10 ; SPEED debuff: 12 → 10/12/15/20
@@ -75,6 +79,7 @@ Added a fourth tier (or fifth tier ?) of ability power per unit star level to al
 > In our never ending quest of improving the abilities in the game, we give new tools for Gary. Hydro pump was always a very weird choice for Gyarados.
 
 - New ability for Gyarados Dragon Rage Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value.
+- Gyarados Def: 9 → 6 ; Spe. Def: 2 → 5 ; on Stage 9 PvE fight only, AP -50
 
 # Changes to Synergies
 

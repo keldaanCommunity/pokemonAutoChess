@@ -2,11 +2,12 @@ import { t } from "i18next"
 import type Phaser from "phaser"
 import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
-import { RegionDetails } from "../../../../config"
+import { MusicByTownEncounter, RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
+import { EnvironmentalEffects } from "../../../../types/enum/Effect"
 import { PkmIndex } from "../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../utils/avatar"
 import { schemaValues } from "../../../../utils/schemas"
@@ -34,6 +35,7 @@ export default class LoadingManager {
     })
 
     this.preloadingPromise = this.preload()
+    this.preloadingPromise.then(() => setTimeout(() => this.postload(), 5000))
   }
 
   async preload() {
@@ -45,7 +47,6 @@ export default class LoadingManager {
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
-    preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
     scene.load.image("sand", "/assets/environment/sand.png")
@@ -64,6 +65,19 @@ export default class LoadingManager {
 
     scene.load.image("money", "/assets/icons/money.svg")
     scene.load.image("arrowDown", "/assets/ui/arrowDown.png")
+
+    // icons for the damage numbers board effects put on screen.
+    // load.svg and not load.image, otherwise the tint fills an opaque box instead of the shape
+    for (const effect of EnvironmentalEffects) {
+      scene.load.svg(
+        `effect-${effect}`,
+        `/assets/icons/effects/${effect}.svg`,
+        {
+          width: 64,
+          height: 64
+        }
+      )
+    }
 
     scene.load.spritesheet({
       key: "cell",
@@ -100,7 +114,7 @@ export default class LoadingManager {
 
     if (scene instanceof GameScene) {
       const players = schemaValues(scene.room?.state.players!)
-      const player = players.find((p) => p.id === scene.uid) ?? players[0]
+      const player = scene.getPlayerToSpectate()! // must match what startGame plays, or the music isn't preloaded
       await scene.preloadMaps(
         players
           .map((p) => p.map)
@@ -120,6 +134,14 @@ export default class LoadingManager {
         scene.load.start()
       })
     }
+  }
+
+  async postload() {
+    // those files can be loaded in the background after game start
+    const scene = this.scene
+    Object.values(MusicByTownEncounter).forEach((encounterMusic) => {
+      preloadMusic(scene, encounterMusic)
+    })
   }
 }
 

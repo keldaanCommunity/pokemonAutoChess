@@ -23,7 +23,7 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   Orientation,
@@ -337,6 +337,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }) {
@@ -403,18 +404,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
       if (
-        this.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT) ||
-        (attacker &&
-          attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
+        this.effects.has(EffectEnum.STRANGE_STEAM) ||
+        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
         specialDamage *= 1.2
       }
-      if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
-        const nbBlackAugurite = this.player
-          ? count(this.player.items, Item.BLACK_AUGURITE)
-          : 0
-        const reductionFactor = 1 - 0.1 * nbBlackAugurite
-        specialDamage *= attacker.critPower * reductionFactor
+      if (crit && attacker) {
+        let critReductionFactor = 1.0
+        const hasCritNegation =
+          this.items.has(Item.ROCKY_HELMET) && attackType !== AttackType.TRUE
+
+        if (hasCritNegation) {
+          critReductionFactor = 0
+        } else {
+          this.count.crit++
+        }
+
+        if (attackType !== AttackType.TRUE) {
+          const nbBlackAugurite = this.player
+            ? count(this.player.items, Item.BLACK_AUGURITE)
+            : 0
+          critReductionFactor -= 0.1 * nbBlackAugurite
+        }
+
+        critReductionFactor = min(0)(critReductionFactor)
+
+        specialDamage *= 1 + (attacker.critPower - 1) * critReductionFactor
       }
 
       const damageResult = this.state.handleDamage({
@@ -453,11 +468,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   handleHeal(
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ) {
-    return this.state.handleHeal(this, heal, caster, apBoost, crit)
+    return this.state.handleHeal(this, heal, origin, apBoost, crit)
   }
 
   changeState(state: PokemonState) {

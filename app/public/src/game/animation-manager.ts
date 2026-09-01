@@ -1,4 +1,3 @@
-import type Phaser from "phaser"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { AnimationOriented, AnimationType } from "../../../types/Animation"
 import delays from "../../../types/delays.json"
@@ -11,7 +10,7 @@ import {
 } from "../../../types/enum/Game"
 import { Berries, Item } from "../../../types/enum/Item"
 import { Passive } from "../../../types/enum/Passive"
-import { PkmByIndex } from "../../../types/enum/Pokemon"
+import { PkmByIndex, PkmIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
@@ -21,6 +20,8 @@ import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./components/pokemon-animations"
+import type { DebugScene } from "./scenes/debug-scene"
+import type GameScene from "./scenes/game-scene"
 
 const FPS_EFFECTS = 20
 const FPS_POKEMON_ANIMS = 36
@@ -36,9 +37,9 @@ export const isAnimationOriented = (action: AnimationType, index: string) => {
 }
 
 export default class AnimationManager {
-  game: Phaser.Scene
+  game: GameScene | DebugScene
 
-  constructor(game: Phaser.Scene) {
+  constructor(game: GameScene | DebugScene) {
     this.game = game
 
     for (const pack in atlas.packs) {
@@ -402,6 +403,15 @@ export default class AnimationManager {
         trooper.orientation = pokemonSprite.orientation
         this.animatePokemon(trooper, action, flip, loop)
       })
+    }
+
+    if (pokemonSprite.pokemon.passive === Passive.ILLUSION) {
+      pokemonSprite.sprite.setAlpha(
+        pokemonSprite.pokemon.index !== PkmIndex[pokemonSprite.pokemon.name] &&
+          pokemonSprite.playerId === this.game.uid
+          ? 0.5
+          : 1
+      )
     }
   }
 

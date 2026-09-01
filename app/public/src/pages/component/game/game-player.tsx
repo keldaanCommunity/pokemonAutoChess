@@ -46,7 +46,7 @@ export default function GamePlayer(props: {
       >
         <CircularProgressbarWithChildren
           value={props.player.life}
-          styles={{ path: { stroke: props.teamColor ?? "#f7d51d" } }}
+          styles={{ path: { stroke: props.teamColor } }}
         />
         <div className="my-container life-text">{props.player.life}</div>
       </div>
