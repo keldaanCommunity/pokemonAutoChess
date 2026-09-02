@@ -293,7 +293,7 @@ export default function PreparationMenu() {
       <select
         value={botDifficulty}
         onChange={(e) => {
-          setBotDifficulty(parseInt(e.target.value, 10))
+          setBotDifficulty(e.target.value as BotDifficulty)
         }}
       >
         <option value={BotDifficulty.BEGINNER}>

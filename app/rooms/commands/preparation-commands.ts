@@ -884,34 +884,32 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
             elo = { $lt: 850 }
             break
           case BotDifficulty.EASY:
-            elo = { $gte: 850, $lt: 999 }
+            elo = { $gte: 850, $lt: 1000 }
             break
           case BotDifficulty.MEDIUM:
-            elo = { $gte: 1000, $lt: 1149 }
+            elo = { $gte: 1000, $lt: 1150 }
             break
           case BotDifficulty.HARD:
-            elo = { $gte: 1150, $lt: 1299 }
+            elo = { $gte: 1150, $lt: 1300 }
             break
           case BotDifficulty.EXTREME:
-            elo = { $gte: 1300, $lt: 1449 }
+            elo = { $gte: 1300, $lt: 1450 }
             break
           case BotDifficulty.MASTER:
             elo = { $gte: 1450 }
             break
         }
 
-        const existingBots = new Array<string>()
-        this.state.users.forEach((value: GameUser, key: string) => {
-          if (value.isBot) {
-            existingBots.push(key)
-          }
-        })
+        const existingBots = schemaEntries(this.state.users)
+          .filter(([id, user]) => user.isBot)
+          .map(([id, user]) => id)
 
         const bots = await BotV2.find(
           { id: { $nin: existingBots }, elo, approved: true },
           ["avatar", "elo", "name", "id"]
         )
 
+        console.log("bot difficulty", difficulty, "found", bots.length, "bots")
         if (bots.length <= 0) {
           this.room.state.addMessage({
             authorId: "server",
