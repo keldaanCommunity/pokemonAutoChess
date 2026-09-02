@@ -19,7 +19,7 @@ export class StuffCheeksStrategy extends AbilityStrategy {
       schemaValues(pokemon.items).filter((item) => isIn(Berries, item))
     )
     if (heldBerry) {
-      pokemon.eatBerry(heldBerry, undefined, true, pokemon.ap, crit)
+      pokemon.eatBerry(heldBerry, undefined, true, 1, crit)
     } else {
       const berry = pickRandomIn(NonSpecialBerries)
       pokemon.addItem(berry, true)
