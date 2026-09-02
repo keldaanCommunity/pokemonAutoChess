@@ -2398,7 +2398,7 @@
 		"CALM_MIND": "Cura HP pari al 50% del danno inflitto.",
 		"SWIFT_SWIM": "-30% della durata dello status alterato. L'onda cura il 10% dei HP e infligge il 5% di TRUE.",
 		"HYDRATION": "-50% della durata dello status alterato. L'onda cura il 20% dei HP e infligge il 10% di TRUE.",
-		"WATER_VEIL": "-70% della durata dello status alterato. L'onda cura il 30% dei HP e infligge il 15% di TRUE. Una seconda ondata colpisce dopo 16 secondi.",
+		"WATER_VEIL": "-70% della durata dello status alterato. L'onda cura il 30% dei HP e infligge il 15% di TRUE. Una seconda ondata colpisce dopo 14 secondi.",
 		"SURGE_SURFER": "Provoca un'onda ogni 7 secondi di combattimento. Dopo la prima onda, un Pikachu Surf ti assiste in battaglia.",
 		"COCOON": "Copia 1 Pokèmon BUG",
 		"INFESTATION": "Copia 2 Pokèmon BUG",

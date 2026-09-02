@@ -2515,7 +2515,7 @@
 		"CALM_MIND": "Cure 50% do HP do dano. Recebe um TM aleatório de tier Ouro.",
 		"SWIFT_SWIM": "-30% de dano e duração de condições negativas. A onda cura 10% do HP máximo e inflige 5% do HP máximo como TRUE.",
 		"HYDRATION": "-50% de dano e duração de condições negativas. A onda cura 20% do HP máximo e inflige 10% do HP máximo como TRUE.",
-		"WATER_VEIL": "-70% de dano e duração de condições negativas. A onda cura 30% do HP máximo e inflige 15% do HP máximo como TRUE. Uma segunda onda surge após 16 segundos.",
+		"WATER_VEIL": "-70% de dano e duração de condições negativas. A onda cura 30% do HP máximo e inflige 15% do HP máximo como TRUE. Uma segunda onda surge após 14 segundos.",
 		"COCOON": "Clona 1 pokémon BUG",
 		"INFESTATION": "Clona 2 pokémon BUG",
 		"HORDE": "Clona 3 pokémons BUG",
