@@ -57,9 +57,9 @@ export function addIconsToDescription(
     const token = matchIcon![i - 1]
     let icon: ReactElement | null = null
     const isAtStartOfSentence =
-      i === 0 || descriptionParts[i - 1].trim().endsWith(".")
-    const capitalize = (s: string) =>
-      isAtStartOfSentence ? s.charAt(0).toUpperCase() + s.slice(1) : s
+      i === 0 ||
+      descriptionParts[i - 1].trim().endsWith(".") ||
+      descriptionParts[i - 1].length === 0
 
     if (token) {
       if (token === "GOLD") {
@@ -129,9 +129,7 @@ export function addIconsToDescription(
             title={t(`effect_description.${token}`)}
           >
             <img src={`assets/icons/effects/${token}.svg`} />
-            <span className="board-effect-label">
-              {t(`effect.${token}`)}
-            </span>
+            <span className="board-effect-label">{t(`effect.${token}`)}</span>
           </span>
         )
       } else if (isIn(Weathers, token)) {
@@ -164,12 +162,14 @@ export function addIconsToDescription(
       } else if (isIn(TechnicalTerms, token)) {
         icon = (
           <span
-            className="description-icon technical-term"
+            className={cc("description-icon", "technical-term", {
+              capitalized: isAtStartOfSentence
+            })}
             title={t(`technical_terms_definitions.${token}`)}
           >
             <img src={`assets/ui/${token.toLowerCase()}.svg`} />
             <i className="technical-term-label">
-              {capitalize(t(`technical_terms.${token}`))}
+              {t(`technical_terms.${token}`)}
             </i>
           </span>
         )

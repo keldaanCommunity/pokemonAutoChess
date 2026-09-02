@@ -2,7 +2,7 @@ import { t } from "i18next"
 import type Phaser from "phaser"
 import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
-import { RegionDetails } from "../../../../config"
+import { MusicByTownEncounter, RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
 import type Player from "../../../../models/colyseus-models/player"
 import { getPkmWithCustom } from "../../../../models/colyseus-models/pokemon-customs"
@@ -35,6 +35,7 @@ export default class LoadingManager {
     })
 
     this.preloadingPromise = this.preload()
+    this.preloadingPromise.then(() => setTimeout(() => this.postload(), 5000))
   }
 
   async preload() {
@@ -46,7 +47,6 @@ export default class LoadingManager {
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
-    preloadMusic(scene, DungeonMusic.CARNIVAL_LUDICOLO)
 
     scene.load.image("rain", "/assets/environment/rain.png")
     scene.load.image("sand", "/assets/environment/sand.png")
@@ -134,6 +134,14 @@ export default class LoadingManager {
         scene.load.start()
       })
     }
+  }
+
+  async postload() {
+    // those files can be loaded in the background after game start
+    const scene = this.scene
+    Object.values(MusicByTownEncounter).forEach((encounterMusic) => {
+      preloadMusic(scene, encounterMusic)
+    })
   }
 }
 

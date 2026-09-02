@@ -5046,12 +5046,12 @@
 		"DELIVERY": "배달",
 		"EXPLORATION": "탐험",
 		"BATTLE": "배틀",
-		"RESCUE_DESCRIPTION": "최종 팀에 $t(pkm.{{pokemon}})을(를) 포함시켜주세요!",
-		"EXPLORATION_DESCRIPTION": "$t(map.{{region}}) ({{regionSynergies}})로 가서 {{synergy}}의 시너지 레벨을 {{level}} 혹은 이상으로 만들어주세요!",
-		"BATTLE_WIN_STREAK_DESCRIPTION": "{{amount}}연승, 혹은 그 이상을 하세요!",
-		"DELIVERY_DESCRIPTION": "{{quantity}} {{item}}을 만들거나 포켓몬에게 지니게 한 채로 게임을 끝내세요!",
+		"RESCUE_DESCRIPTION": "최종 팀에 $t(pkm.{{pokemon}})을/를 포함시켜 주세요!",
+		"EXPLORATION_DESCRIPTION": "$t(map.{{region}}) ({{regionSynergies}})(으)로 가서 {{synergy}} 시너지 레벨을 {{level}} 혹은 그 이상으로 만들어주세요!",
+		"BATTLE_WIN_STREAK_DESCRIPTION": "{{amount}}연승, 혹은 그 이상을 달성해주세요!",
+		"DELIVERY_DESCRIPTION": "{{item}}을/를 {{quantity}}개 만들거나 포켓몬에게 지니게 한 채로 게임을 끝내주세요!",
 		"reward": "사례: {{points}} XP",
-		"BATTLE_DESCRIPTION": "포켓몬의 {{amount}}을 {{gameStat}} 혹은 그 이상으로 달성하세요!",
+		"BATTLE_DESCRIPTION": "포켓몬의 {{amount}}을/ {{gameStat}} 혹은 그 이상으로 달성해주세요!",
 		"help4": "한 게임에 다양한 의뢰를 해결할 수 있으나, 갱신은 의뢰를 해결한 후에 가능합니다."
 	},
 	"notification": {
@@ -5192,14 +5192,14 @@
 		"leaderboard": "리더보드",
 		"points": "{{points}}점",
 		"team_score": "팀의 점수: {{points}}",
-		"instructions": "더블 업 모드에서 친구와 함께하자!",
+		"instructions": "더블 업 모드에서 파트너와 함께하자!",
 		"help1": "파트너와 함께 더블 업 모드를 계속 플레이하면 최종 등수에 따라 점수가 부여됩니다.",
 		"help2": "팀워크만이 살 길!",
-		"your_pal": "당신의 친구",
+		"your_pal": "당신의 파트너",
 		"confirmed": "팀이 고정되어 참여할 수 있습니다.",
-		"not_confirmed": "친구가 당신의 이름을 작성해야 팀을 고정시킬 수 있습니다",
-		"enter_pal_name": "친구의 이름을 입력하세요",
-		"change_pal": "친구를 바꾼다"
+		"not_confirmed": "파트너가 당신의 이름을 작성해야 팀을 고정시킬 수 있습니다",
+		"enter_pal_name": "파트너의 이름을 입력하세요",
+		"change_pal": "파트너를 바꾼다"
 	},
 	"replay": {
 		"leave_replay": "리플레이 나가기",
