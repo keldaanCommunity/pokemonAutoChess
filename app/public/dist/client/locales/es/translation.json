@@ -2518,7 +2518,7 @@
 		"SWIFT_SWIM": "-30% de duración de problemas de estado. La ola cura un 10% de los HP máximos e inflige un 5% de los HP máximos como TRUE.",
 		"HYDRATION": "-50% de duración de problemas de estado. La ola cura un 20% de los HP máximos e inflige un 10% de los HP máximos como TRUE.",
 		"WATER_VEIL": "-70% de duración de problemas de estado. La ola cura un 30% de los HP máximos e inflige un 15% de los HP máximos como TRUE. Una segunda ola golpea el tablero después de 16 segundos.",
-		"SURGE_SURFER": "Las olas golpean el tablero cada 8 segundos durante el resto del combate. Después de la primera ola, un Pikachu Surf se une a tu equipo durante la batalla.",
+		"SURGE_SURFER": "Las olas golpean el tablero cada 7 segundos durante el resto del combate. Después de la primera ola, un Pikachu Surf se une a tu equipo durante la batalla.",
 		"COCOON": "Copia 1 Pokémon de tipo BUG",
 		"INFESTATION": "Copia 2 Pokémon de tipo BUG",
 		"HORDE": "Copia 3 Pokémon de tipo BUG",

@@ -2415,7 +2415,7 @@
 		"SWIFT_SWIM": "-30% negative Statusdauer. Die Welle heilt 10 % HP und verursacht 5 % TRUE.",
 		"HYDRATION": "-50% negative Statusdauer. Die Welle heilt 20 % HP und verursacht 10 % TRUE.",
 		"WATER_VEIL": "-70% negative Statusdauer. Die Welle heilt 30 % HP und verursacht 15 % TRUE. Nach 16 Sekunden trifft eine zweite Welle ein.",
-		"SURGE_SURFER": "Wellen treffen das Schlachfeld alle 8 Sekunden für den rest des Kampfes. Nach der ersten Welle reitet ein Surfendes Pikachu dir zur Hilfe.",
+		"SURGE_SURFER": "Wellen treffen das Schlachfeld alle 7 Sekunden für den rest des Kampfes. Nach der ersten Welle reitet ein Surfendes Pikachu dir zur Hilfe.",
 		"COCOON": "Kopiere 1 BUG Pokémon",
 		"INFESTATION": "Kopiere 2 BUG Pokémon",
 		"HORDE": "Kopiere 3 BUG Pokemons",
