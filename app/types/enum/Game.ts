@@ -116,13 +116,13 @@ export enum BattleResult {
 }
 
 export enum BotDifficulty {
-  BEGINNER,
-  EASY,
-  MEDIUM,
-  HARD,
-  EXTREME,
-  MASTER,
-  CUSTOM
+  BEGINNER = "BEGINNER",
+  EASY = "EASY",
+  MEDIUM = "MEDIUM",
+  HARD = "HARD",
+  EXTREME = "EXTREME",
+  MASTER = "MASTER",
+  CUSTOM = "CUSTOM"
 }
 
 export enum PokemonTint {
