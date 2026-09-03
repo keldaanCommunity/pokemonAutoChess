@@ -15,6 +15,12 @@
     - Tatsugiri no longer takes an item slot when swallowed by Dondozo. Instead it is addes as an *absorbed* item. Absorbed items cannot be stolen or dropped during battle.
     - RICE now gives 50 max HP instead of 80 SHIELD 
     - Change Order Up ability: Dondozo **and the allies who have eaten RICE** gain the bonus stats provided by its commander. 
+- Rework Lycanroc: 
+    - Lycanroc Day Form becomes the base form of Lycanroc when evolving Rockruff
+    - Lycanroc can transform back to Day form on ZENITH weather
+    - Lycanroc also transforms to Night Form on BLOODMOON in addition to NIGHT
+    - Lycanroc transforms into Dusk Form on DROUGHT
+    - Add FIRE type to Lycanroc Dusk Form
 
 # Changes to Synergies
 

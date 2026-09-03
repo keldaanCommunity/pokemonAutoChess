@@ -3415,7 +3415,6 @@
 		"MIMIKYU_BUSTED": "목이 부러져 모습이 드러났다. 따라큐는 인형탈을 부숴버린 상대를 살아있는 한 절대로 잊지 않는다.",
 		"HUNGER_SWITCH": "$t(pkm.MORPEKO)는 배부른 모양과 배고픈 모양으로 모습을 바꾼다.\n배부른 모양의 3연타 공격은 2초 동안 PARALYSIS 상태로 만든다.\n배고픈 모양의 3연타 공격은 4초 동안 WOUND 상태로 만든다.",
 		"WATER_BUBBLE": "이 포켓몬은 BURN 상태가 되지 않는다.",
-		"LYCANROC": "$t(pkm.LYCANROC_DUSK)은 NIGHT 동안 한밤중의 모습으로, ZENITH 상태일 동안 한낮의 모습으로 변한다.",
 		"COSMOG": "$t(pkm.COSMOG)은 별의 에너지를 먹고 성장한다. 포켓몬을 진화시킬 때마다 영구적으로 최대 HP가 10 증가하며, 8번 진화하면 따라서 진화한다.",
 		"COSMOEM": "$t(pkm.COSMOEM)은 별의 에너지를 먹고 성장한다. 포켓몬을 진화시킬 때마다 영구적으로 최대 HP가 10 증가하며, 8번 진화하면 따라서 진화한다. 스포트라이트를 받고 있을 경우 $t(pkm.SOLGALEO)로, 그렇지 않다면 $t(pkm.LUNALA)로 진화한다.",
 		"SOUL_HEART": "상대를 기절 시키면 AP이 10 증가하고 PP를 10 회복한다.",
