@@ -3129,7 +3129,6 @@
 		"MIMIKYU_BUSTED": "Il suo collo si è afflosciato. Mimikyu non dimenticherà mai il nemico che ha danneggiato il suo straccio finchè vivrà.",
 		"HUNGER_SWITCH": "$t(pkm.MORPEKO) si alterna tra la sua forma Panciapiena e Panciavuota.\nPanciapiena: ogni attacco triplo infligge PARALYSIS per 2 secondi\nPanciavuota: ogni attacco triplo infligge WOUND per 4 secondi",
 		"WATER_BUBBLE": "Questo Pokèmon è immune allo status BURN",
-		"LYCANROC": "$t(pkm.LYCANROC_DUSK) si trasforma nella sua forma notte se c'è la NIGHT e nella sua forma giorno se c'è il ZENITH",
 		"COSMOG": "$t(pkm.COSMOG) si sta nutrendo con l'energia delle stelle. Guadagna 10 HP massimi permanenti ogni volta che evolvi un'unità. Si evolve dopo 8 volte che questa passiva si attiva.",
 		"COSMOEM": "$t(pkm.COSMOEM) si sta nutrendo con l'energia delle stelle. Guadagna 10 HP massimi permanenti ogni volta che evolvi un'unità. Si evolve dopo 8 volte che questa passiva si attiva in $t(pkm.SOLGALEO) se su un punto illuminato o in caso contrario in $t(pkm.LUNALA)",
 		"SOUL_HEART": "Ogni volta che l'utilizzatore mette KO un avversario, guadagna 10 AP e 10 PP",

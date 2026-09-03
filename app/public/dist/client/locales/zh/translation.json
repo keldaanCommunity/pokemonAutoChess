@@ -3420,7 +3420,6 @@
 		"MIMIKYU_BUSTED": "画皮被打破了。只要那只宝可梦还活着，谜拟Ｑ一定会记着它。",
 		"HUNGER_SWITCH": "$t(pkm.MORPEKO)会在满腹和空腹花纹之间切换。\n满腹花纹的三连击使目标陷入PARALYSIS 2秒，\n空腹花纹的三连击使目标陷入WOUND 4秒。",
 		"WATER_BUBBLE": "此宝可梦免疫BURN。",
-		"LYCANROC": "$t(pkm.LYCANROC_DUSK)在NIGHT中变为黑夜的样子，在ZENITH中变为白昼的样子。",
 		"COSMOG": "$t(pkm.COSMOG)正在和群星的能量共鸣。每次有我方宝可梦进化时永久提升10点最大HP，在8次提升后进化。",
 		"COSMOEM": "$t(pkm.COSMOEM)正在和群星的能量共鸣。每次有我方宝可梦进化时永久提升10点最大HP，在8次提升后进化。若此时此宝可梦正在被LIGHT共鸣的聚光灯照射，则会进化为$t(pkm.SOLGALEO)，否则进化为$t(pkm.LUNALA)。",
 		"SOUL_HEART": "每当此宝可梦击倒敌方宝可梦时，恢复10点PP并提升10点AP。",
