@@ -1297,6 +1297,43 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
   }
 
+  givePokemons(
+    pokemonsObtained: Pokemon[],
+    player: Player,
+    sellIfNoSpace = false
+  ): boolean {
+    return pokemonsObtained.every((pokemon) => {
+      const freeSpace = getFreeSpaceOnBench(player.board)
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
+      const isEvolution =
+        pokemon.evolutionRule &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
+
+      if (freeSpace < pokemonsObtained.length && !sellIfNoSpace && !isEvolution)
+        return false // prevent if not enough space on bench
+
+      if (isEvolution) {
+        pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      } else if (freeCellX !== null) {
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+      } else {
+        // sell picked pokemon if no more space on bench
+        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+        player.addMoney(sellPrice, true, null)
+      }
+
+      return true
+    })
+  }
+
   getNumberOfPlayersAlive(players: MapSchema<Player>) {
     let numberOfPlayersAlive = 0
     players.forEach((player, key) => {
@@ -1323,7 +1360,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     playerId: string,
     choiceId: string,
     choiceIndex: number,
-    bypassLackOfSpace = false
+    sellIfNoSpace = false
   ) {
     const player = this.state.players.get(playerId)
     if (!player) return
@@ -1348,21 +1385,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       let pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
       ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-
-      const pokemon = pokemonsObtained[0]
-      const isEvolution =
-        pokemon.evolutionRule &&
-        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
-        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
-
-      const freeSpace = getFreeSpaceOnBench(player.board)
-
-      if (
-        freeSpace < pokemonsObtained.length &&
-        !bypassLackOfSpace &&
-        !isEvolution
-      )
-        return false // prevent picking if not enough space on bench
 
       if (choice.type === "addPick") {
         if (pokemonsObtained[0]?.regional) {
@@ -1409,25 +1431,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.firstPartner = pokemonsObtained[0].name
       }
 
-      pokemonsObtained.forEach((pokemon) => {
-        const freeCellX = getFirstAvailablePositionInBench(player.board)
-        if (isEvolution) {
-          pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-          this.checkEvolutionsAfterPokemonAcquired(playerId)
-        } else if (freeCellX !== null) {
-          pokemon.positionX = freeCellX
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-        } else {
-          // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
-          const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-          player.addMoney(sellPrice, true, null)
-        }
-      })
+      this.givePokemons(pokemonsObtained, player, sellIfNoSpace)
     }
 
     if (choice.items.length > 0) {
@@ -1569,7 +1573,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       delay: 3000
     })
 
-    setTimeout(() => openGift(gift, partner, player), 10000)
+    setTimeout(() => openGift(gift, partner, player, this), 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {

@@ -1,9 +1,5 @@
-import {
-  BOARD_WIDTH,
-  EvolutionTime,
-  getBaseAltForm,
-  PkmsWithAltForms
-} from "../config"
+import { EvolutionTime, getBaseAltForm, PkmsWithAltForms } from "../config"
+import { LegendaryPool, UniquePool } from "../config/game/pools"
 import { giveRandomEgg } from "../core/eggs"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import type Player from "../models/colyseus-models/player"
@@ -11,6 +7,7 @@ import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
+import type GameRoom from "../rooms/game-room"
 import {
   Berries,
   CraftableItemsNoScarves,
@@ -28,10 +25,14 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
-import { Pkm } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, type PkmProposition } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
-import { getFirstAvailablePositionInBench, isOnBench } from "../utils/board"
+import {
+  getFirstAvailablePositionInBench,
+  getFreeSpaceOnBench,
+  isOnBench
+} from "../utils/board"
 import { max } from "../utils/number"
 import {
   chance,
@@ -39,7 +40,6 @@ import {
   pickRandomIn,
   randomWeighted
 } from "../utils/random"
-import { schemaValues } from "../utils/schemas"
 
 const giftAmountOfItem =
   (amount: number, itemsSet: Item[]) => (toPlayer: Player) => {
@@ -107,79 +107,85 @@ const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
   }
 }
 
-const giftRandomPokemonByRarity = (rarity: Rarity) => (toPlayer: Player) => {
-  let wantedStars: number
-  let shouldBeRegionalOrAdditional = false
+const giftRandomPokemonByRarity =
+  (rarity: Rarity) =>
+  (toPlayer: Player, fromPlayer: Player, room: GameRoom) => {
+    let wantedStars: number
+    let shouldBeRegionalOrAdditional = false
 
-  switch (rarity) {
-    case Rarity.COMMON:
-    case Rarity.UNIQUE:
-    case Rarity.LEGENDARY:
-      wantedStars = 3
-      break
-    case Rarity.UNCOMMON:
-    case Rarity.RARE:
-    case Rarity.EPIC:
-      wantedStars = 2
-      shouldBeRegionalOrAdditional = true
-      break
-    case Rarity.ULTRA:
-    default:
-      wantedStars = 1
-      break
+    switch (rarity) {
+      case Rarity.COMMON:
+      case Rarity.UNIQUE:
+      case Rarity.LEGENDARY:
+        wantedStars = 3
+        break
+      case Rarity.UNCOMMON:
+      case Rarity.RARE:
+      case Rarity.EPIC:
+        wantedStars = 2
+        shouldBeRegionalOrAdditional = true
+        break
+      case Rarity.ULTRA:
+      default:
+        wantedStars = 1
+        break
+    }
+
+    const nbOfSynergies =
+      rarity === Rarity.ULTRA || rarity === Rarity.LEGENDARY ? 2 : 1
+    let wantedSynergies = toPlayer.synergies
+      .getTopSynergies(nbOfSynergies)
+      .filter((type) => toPlayer.synergies.hasSynergyActive(type)) // only consider active types
+    if (wantedSynergies.includes(Synergy.BABY)) {
+      wantedSynergies = toPlayer.synergies.getTopSynergies(nbOfSynergies + 1)
+      wantedSynergies.splice(wantedSynergies.indexOf(Synergy.BABY), 1)
+    }
+
+    const pool: PkmProposition[] =
+      rarity === Rarity.LEGENDARY
+        ? LegendaryPool
+        : rarity === Rarity.UNIQUE
+          ? UniquePool
+          : PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+
+    const poolWithWantedSyns = pool.filter((proposition) => {
+      const p: Pkm =
+        proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
+      const pkmData = getPokemonData(p)
+      if (PkmsWithAltForms.includes(p) && getBaseAltForm(p) !== p) return false
+      if (pkmData.stars !== wantedStars) return false
+      if (
+        shouldBeRegionalOrAdditional &&
+        !(pkmData.additional || pkmData.regional)
+      )
+        return false
+      if (
+        !shouldBeRegionalOrAdditional &&
+        (pkmData.additional || pkmData.regional)
+      )
+        return false
+      if (
+        shouldBeRegionalOrAdditional &&
+        pkmData.regional &&
+        !toPlayer.regionalPokemons.includes(p)
+      )
+        return false
+      const types = pkmData.types
+      return wantedSynergies.some((type) => types.includes(type))
+    })
+
+    const candidates =
+      poolWithWantedSyns.length === 0 ? pool : poolWithWantedSyns //Fallback if no Pokémon satisfy the filter
+    const selectedProposition = pickRandomIn(candidates) ?? Pkm.DITTO
+
+    const pokemonsObtained: Pokemon[] = (
+      selectedProposition in PkmDuos
+        ? PkmDuos[selectedProposition]
+        : [selectedProposition]
+    ).map((p) => PokemonFactory.createPokemonFromName(p, toPlayer))
+
+    room.givePokemons(pokemonsObtained, toPlayer, true)
   }
-
-  const nbOfSynergies =
-    rarity === Rarity.ULTRA || rarity === Rarity.LEGENDARY ? 2 : 1
-  let wantedSynergies = toPlayer.synergies
-    .getTopSynergies(nbOfSynergies)
-    .filter((type) => toPlayer.synergies.hasSynergyActive(type)) // only consider active types
-  if (wantedSynergies.includes(Synergy.BABY)) {
-    wantedSynergies = toPlayer.synergies.getTopSynergies(nbOfSynergies + 1)
-    wantedSynergies.splice(wantedSynergies.indexOf(Synergy.BABY), 1)
-  }
-
-  const pkmByRarity = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
-  const pkmByRarityWithWantedSyns = pkmByRarity.filter((p) => {
-    const pkmData = getPokemonData(p)
-    if (PkmsWithAltForms.includes(p) && getBaseAltForm(p) !== p) return false
-    if (pkmData.stars !== wantedStars) return false
-    if (
-      shouldBeRegionalOrAdditional &&
-      !(pkmData.additional || pkmData.regional)
-    )
-      return false
-    if (
-      !shouldBeRegionalOrAdditional &&
-      (pkmData.additional || pkmData.regional)
-    )
-      return false
-    if (
-      shouldBeRegionalOrAdditional &&
-      pkmData.regional &&
-      !toPlayer.regionalPokemons.includes(p)
-    )
-      return false
-    const types = pkmData.types
-    return wantedSynergies.some((type) => types.includes(type))
-  })
-
-  if (pkmByRarityWithWantedSyns.length === 0) {
-    pkmByRarityWithWantedSyns.push(...pkmByRarity[rarity]) //Fallback if no Pokémon satisfy the filter
-  }
-  const pkm = pickRandomIn(pkmByRarityWithWantedSyns) ?? Pkm.DITTO
-  const replacement = PokemonFactory.createPokemonFromName(
-    getPokemonData(pkm).name,
-    toPlayer
-  )
-  const freeCellX = getFirstAvailablePositionInBench(toPlayer.board)
-
-  if (freeCellX === null) return
-  replacement.positionX = freeCellX
-  replacement.positionY = 0
-  toPlayer.board.set(replacement.id, replacement)
-  replacement.onAcquired(toPlayer)
-}
 
 const giftPotion = (toPlayer: Player, fromPlayer: Player) => {
   toPlayer.life = max(100)(toPlayer.life + 10)
@@ -249,7 +255,7 @@ const giftXP = (amount: number) => (toPlayer: Player) => {
   }
 }
 
-type GiftEffect = (toPlayer: Player, fromPlayer: Player) => void
+type GiftEffect = (toPlayer: Player, fromPlayer: Player, room: GameRoom) => void
 
 export const GiftEffects: {
   [key in Gift]: GiftEffect | GiftEffect[]
@@ -293,9 +299,13 @@ export const GiftEffects: {
   [Item.LARGE_EXP_GIFT]: giftXP(24)
 }
 
-export const openGift = (gift: Gift, toPlayer: Player, fromPlayer: Player) => {
-  const benchSpace =
-    BOARD_WIDTH - schemaValues(toPlayer.board).filter(isOnBench).length
+export const openGift = (
+  gift: Gift,
+  toPlayer: Player,
+  fromPlayer: Player,
+  room: GameRoom
+) => {
+  const benchSpace = getFreeSpaceOnBench(toPlayer.board)
   if (
     [
       Item.DITTO_GIFT,
@@ -313,9 +323,9 @@ export const openGift = (gift: Gift, toPlayer: Player, fromPlayer: Player) => {
   } else {
     const giftEffect = GiftEffects[gift]
     if (Array.isArray(giftEffect)) {
-      giftEffect.forEach((effect) => effect(toPlayer, fromPlayer))
+      giftEffect.forEach((effect) => effect(toPlayer, fromPlayer, room))
     } else {
-      giftEffect(toPlayer, fromPlayer)
+      giftEffect(toPlayer, fromPlayer, room)
     }
   }
 }

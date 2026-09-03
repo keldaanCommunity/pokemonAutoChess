@@ -1026,7 +1026,7 @@ export class OnUseItemCommand extends Command<
     let used = false
 
     if (isIn(Gifts, item)) {
-      openGift(item, player, fromPlayer)
+      openGift(item, player, fromPlayer, this.room)
       used = true
     }
 
