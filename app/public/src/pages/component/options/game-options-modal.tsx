@@ -4,13 +4,11 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { isThemeUnlocked, THEMES } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
-import { Language } from "../../../../../types/enum/Language"
-import { LanguageNames } from "../../../../dist/client/locales"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useAppSelector } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
-import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
+import LanguageSelect from "../language-select"
 import type { Page } from "../main-sidebar/main-sidebar"
 import { Modal } from "../modal/modal"
 import GameFiles from "./game-files"
@@ -23,11 +21,7 @@ export default function GameOptionsModal(props: {
   page: Page
 }) {
   const [preferences, setPreferences] = usePreferences()
-  const { t, i18n } = useTranslation()
-  const dispatch = useAppDispatch()
-  const language = useAppSelector(
-    (state) => state.network.profile?.language ?? i18n.language
-  )
+  const { t } = useTranslation()
   const profile = useAppSelector((state) => state.network.profile)
   const profileLevel = profile?.level ?? 0
 
@@ -106,23 +100,7 @@ export default function GameOptionsModal(props: {
         <TabPanel>
           {props.page === "main_lobby" && (
             <fieldset>
-              <label>
-                {t("options.language")}:&nbsp;
-                <select
-                  className="is-light"
-                  value={language}
-                  onChange={(e) => {
-                    dispatch(selectLanguage(e.target.value as Language))
-                    i18n.changeLanguage(e.target.value as Language)
-                  }}
-                >
-                  {Object.keys(Language).map((lng) => (
-                    <option key={lng} value={lng}>
-                      {LanguageNames[lng]}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <LanguageSelect showLabel />
               <p className="info">
                 {t("options.community_translations")}{" "}
                 <a
