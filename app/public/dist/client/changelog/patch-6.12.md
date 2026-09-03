@@ -24,6 +24,8 @@
 
 # UI
 
+- Teams displayed in post-game screen and game history are now ordered from strongest to weakest units
+
 # Bugfix
 
 # Misc
