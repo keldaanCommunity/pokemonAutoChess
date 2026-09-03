@@ -2242,7 +2242,7 @@
 		"LASER_BLADE": "Alterna entre:\n1. Gira a lâmina laser, movendo-se para trás do alvo, ganhando [25,25,25,50,SP] de SHIELD e causando [25,25,25,50,SP] de SPECIAL ao alvo e aos inimigos ADJACENT no caminho.\n2. Gira a lâmina laser em frente ao alvo, causando 2 vezes [25,25,25,50,SP] + ATK como SPECIAL.",
 		"ICICLE_MISSILE": "Lança [1,2,3,5] mísseis de gelo em inimigos na retaguarda, causando [50,SP] de SPECIAL e aplicando FREEZE por 2 segundos.",
 		"ARM_THRUST": "Ataca [LK] de 2 a 5 vezes, causando [100,100,200,400,SP]% do ATK como PHYSICAL a cada ataque. Cada acerto pode ser crítico independentemente, com base na CRIT_CHANCE.",
-		"DRUM_BEATING": "Alterna entre:\n1. Bloco de madeira: concede [10,20,40,80,SP] de SHIELD para toda a equipe\n2. Rufar de tambores: inflinge [10,20,40,80,SP] de SPECIAL a todos os inimigos\n3. Aumentar o ritmo: concede [10,20,40,80,SP] de SPEED para toda a equipe",
+		"DRUM_BEATING": "Alterna entre:\n1. Bloco de madeira: concede [10,20,40,80,SP] de SHIELD para toda a equipe\n2. Rufar de tambores: inflinge [10,20,40,80,SP] de SPECIAL a todos os inimigos\n3. Aumentar o ritmo: concede [10,20,40,80] de SPEED para toda a equipe",
 		"PSYCHO_CUT": "Três lâminas psíquicas cortam e perfuram os inimigos em linha reta atrás do alvo, cada uma causando [10, 20, 40, 80, SP] de SPECIAL a todos os inimigos atingidos. Pode causar acerto crítico por padrão.",
 		"WICKED_BLOW": "Cause [30,45,60,120,SP] de TRUE ao alvo. O acerto é sempre crítico.",
 		"SURGING_STRIKES": "Ataca o alvo com um movimento fluido 3 vezes seguidas, causando [100,100,100,200,SP]% do ATK como SPECIAL cada vez. Sempre causa acertos críticos.",

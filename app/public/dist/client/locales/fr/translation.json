@@ -2244,7 +2244,7 @@
 		"LASER_BLADE": "Alterne entre :\n1. Fait tournoyer une Lame Laser qui peut se déplacer derrière sa cible, le lanceur gagne [25,25,25,50,SP] SHIELD et inflige [25,25,25,50,SP] SPECIAL à la cible et à tous les ennemis ADJACENT sur son chemin.\n2. Fait tournoyer une Lame Laser devant eux, infligeant 2 fois [25,25,25,50,SP] + ATK comme SPECIAL.",
 		"ICICLE_MISSILE": "Lance [1,2,3,5] stalactites sur les ennemis de la rangée arrière, infligeant [50,SP] SPECIAL et FREEZE pendant 2 secondes.",
 		"ARM_THRUST": "Frappe de [LK] 2 à 5 fois, infligeant [100,100,200,400,SP]% d'ATK comme PHYSICAL à chaque fois. Chaque coup indépendamment peut causer un coup critique par défaut basé sur la CRIT_CHANCE du lanceur.",
-		"DRUM_BEATING": "Boucle entre :\n1. Wood-block : donne [10,20,40,80,SP] SHIELD à toute votre équipe\n2. Roulement de tambours : inflige [10,20,40,80,SP] SPECIAL à tous les ennemis\n3. Accélère le rythme : donne [10,20,40,80,SP] SPEED à toute votre équipe.",
+		"DRUM_BEATING": "Boucle entre :\n1. Wood-block : donne [10,20,40,80,SP] SHIELD à toute votre équipe\n2. Roulement de tambours : inflige [10,20,40,80,SP] SPECIAL à tous les ennemis\n3. Accélère le rythme : donne [10,20,40,80] SPEED à toute votre équipe.",
 		"PSYCHO_CUT": "3 épées psychiques qui coupent et percent tous les ennemis alignés derrière la cible, chacune inflige [10,20,40,80,SP] SPECIAL à tous les ennemis touchés. Peut infliger un coup critique par défaut.",
 		"WICKED_BLOW": "Inflige [30,45,60,120,SP] TRUE à la cible. Inflige systématiquement un coup critique.",
 		"SURGING_STRIKES": "Frappe la cibble d'un mouvement fluide 3 fois de suite, infligeant [100,100,100,200,SP]% d'ATK chacun comme SPECIAL. Inflige systématiquement des coups critiques.",

@@ -2156,7 +2156,7 @@
 		"LASER_BLADE": "Alterna tra:\n1. Roteare la propria lama intorno a sé, muovendosi dietro al bersaglio e guadgnando [25,25,25,50,SP] di SHIELD, infliggendo [25,25,25,50,SP] SPECIAL ai nemici ADJACENT nel cammino.\n2. Effettua un colpo roteante di fronte a sé, infliggendo 2 volte [25,25,25,50,SP] + ATK come SPECIAL.",
 		"ICICLE_MISSILE": "Lancia [1,2,3,5] ghiaccioli missile ai nemici nelle retrovie, infliggendo [50,SP] SPECIAL e FREEZE per 2 secondi",
 		"ARM_THRUST": "Attacca [LK] dalle 2 alle 5 volte, infliggendo [100,100,200,400,SP]% dell' ATK come PHYSICAL ad ogni attacco. Ogni colpo può fare autonomamente colpo critico, influenzato dalla CRIT_CHANCE.",
-		"DRUM_BEATING": "Alterna tra:\n1. Wood Block: dai [10,20,40,80,SP] SHIELD a tutti gli alleati\n2. Rullo di Tamburi: infliggi [10,20,40,80,SP] SPECIAL a tutti i nemici\n3. Alza il Ritmo: dai [10,20,40,80,SP] SPEED a tutti gli alleati",
+		"DRUM_BEATING": "Alterna tra:\n1. Wood Block: dai [10,20,40,80,SP] SHIELD a tutti gli alleati\n2. Rullo di Tamburi: infliggi [10,20,40,80,SP] SPECIAL a tutti i nemici\n3. Alza il Ritmo: dai [10,20,40,80] SPEED a tutti gli alleati",
 		"PSYCHO_CUT": "Tre lame psichice sferzano e trapassano i nemici in linea retta dietro al bersaglio, ognuna infliggendo [10,20,40,80,SP] SPECIAL a tutti i nemici colpiti. Può fare colpo critico di default.",
 		"WICKED_BLOW": "Infliggi Deal [30,45,60,120,SP] TRUE al bersaglio. Fai sempre colpo critico.",
 		"SURGING_STRIKES": "Tempesta di colpi il bersaglio in un movimento fluido, infliggendo 3 volte di fila il [100,100,100,200,SP]% dell' ATK come SPECIAL. Fai sempre colpo critico",

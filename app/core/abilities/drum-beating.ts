@@ -17,7 +17,7 @@ export class DrumBeatingStrategy extends AbilityStrategy {
         const speed = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
         board.forEach((x, y, entity) => {
           if (entity && entity.team === pokemon.team) {
-            entity.addSpeed(speed, pokemon, 1, crit)
+            entity.addSpeed(speed, pokemon, 0, false)
           }
         })
         break

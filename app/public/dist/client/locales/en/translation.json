@@ -2251,7 +2251,7 @@
 		"LASER_BLADE": "Alternates between:\n1. Spins laser blade around, moving behind their target, gaining [25,25,25,50,SP] SHIELD and dealing [25,25,25,50,SP] SPECIAL to target and ADJACENT enemies on the path.\n2. Spins laser blade in front of them, dealing 2 times [25,25,25,50,SP] + ATK as SPECIAL.",
 		"ICICLE_MISSILE": "Launches [1,2,3,5] icicle missiles on enemies in the backline, dealing [50,SP] SPECIAL and inflicting FREEZE for 2 seconds.",
 		"ARM_THRUST": "Strikes [LK] 2 to 5 times, dealing [100,100,200,400,SP]% of ATK as PHYSICAL each time. Each hit may crit independently by default based on CRIT_CHANCE.",
-		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,80,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,80,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,80,SP] SPEED to the entire team",
+		"DRUM_BEATING": "Cycles through:\n1. Wood block: give [10,20,40,80,SP] SHIELD to the entire team\n2. Drum roll: deal [10,20,40,80,SP] SPECIAL to all enemies\n3. Raise the tempo: give [10,20,40,80] SPEED to the entire team",
 		"PSYCHO_CUT": "Three psychic blades cut and pierce enemies in a line behind the target, each dealing [10,20,40,80,SP] SPECIAL to all enemies hit. Can crit by default.",
 		"WICKED_BLOW": "Deal [30,45,60,120,SP] TRUE to the target. Always deal a critical hit.",
 		"SURGING_STRIKES": "Strikes the target with a flowing motion 3 times in a row, dealing [100,100,100,200,SP]% of ATK each as SPECIAL. Always deal critical hits.",

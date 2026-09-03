@@ -15,6 +15,7 @@
     - Tatsugiri no longer takes an item slot when swallowed by Dondozo. Instead it is addes as an *absorbed* item. Absorbed items cannot be stolen or dropped during battle.
     - RICE now gives 50 max HP instead of 80 SHIELD 
     - Change Order Up ability: Dondozo **and the allies who have eaten RICE** gain the bonus stats provided by its commander. 
+- Nerf Drum Beating (Grookey): removed AP scaling and ability crit on the team-wide speed buff part of the ability.
 
 # Changes to Synergies
 
