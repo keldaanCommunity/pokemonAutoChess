@@ -3384,7 +3384,6 @@
 		"METEOR": "$t(pkm.MINIOR) alterna entre suas formas de meteoro e núcleo. A forma de meteoro concede [4,SP] SPEED por ataque.\nOs ataques de forma central aplicam efeitos adicionais ao alvo e aos inimigos adjacentes:\nAzul: Causa [100,100,100,200,SP]% SPECIAL\nVermelho: Causa [150,150,150,300,SP]% PHYSICAL\nLaranja: Causa [50,50,50,100]% TRUE\nVerde: O dano de ataque cura aliados adjacentes",
 		"MIMIKYU": "Quando atingido com menos de 50% de HP, Mimikyu muda para sua forma Busted, ganhando 8 de ATK e PROTECT por 1.5 segundos.",
 		"WATER_BUBBLE": "O Pokémon é imune à BURN",
-		"LYCANROC": "Lycanroc se transforma na sua forma noturna durante NIGHT e sua forma diurna durante ZENITH",
 		"WALL_OF_STONE": "No início da luta, Stakataka e todos os aliados ROCK na mesma fileira recebem 50 SHIELD e recebem LOCKED até que seu SHIELD se esgote.",
 		"EISCUE_ICE_FACE": "Ao usar sua habilidade, seu SHIELD atual é convertido em SPECIAL adicional. Quando o SHIELD se esgota ou após usar sua habilidade, Eiscue assume sua forma Legal.",
 		"EISCUE_NOICE": "Ao iniciar uma luta sob a influência de SNOW, assume sua Face Gélida e recebe 100 SHIELD. Ao infligir ou ser afetado por FREEZE, retorna à Face Gélida e ganha 50 SHIELD.",

@@ -14769,7 +14769,7 @@ export class Rockruff extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK])
   rarity = Rarity.EPIC
   stars = 1
-  evolution = Pkm.LYCANROC_DUSK
+  evolution = Pkm.LYCANROC_DAY
   hp = 90
   atk = 12
   speed = 61
@@ -14782,10 +14782,12 @@ export class Rockruff extends Pokemon {
 
 function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
   let weatherForm
-  if (weather === Weather.NIGHT) {
+  if (weather === Weather.NIGHT || weather === Weather.BLOODMOON) {
     weatherForm = Pkm.LYCANROC_NIGHT
   } else if (weather === Weather.ZENITH) {
     weatherForm = Pkm.LYCANROC_DAY
+  } else if (weather === Weather.DROUGHT) {
+     weatherForm = Pkm.LYCANROC_DUSK
   }
 
   if (!weatherForm || pokemon.name === weatherForm) return
@@ -14793,7 +14795,7 @@ function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
 }
 
 export class LycanrocDusk extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.WILD, Synergy.ROCK, Synergy.FIRE])
   rarity = Rarity.EPIC
   stars = 2
   hp = 190
@@ -14804,7 +14806,7 @@ export class LycanrocDusk extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ACCELEROCK
-  passive = Passive.LYCANROC
+  passive = Passive.LYCANROC_DUSK
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
@@ -14823,7 +14825,7 @@ export class LycanrocNight extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ACCELEROCK
-  passive = Passive.LYCANROC
+  passive = Passive.LYCANROC_NIGHT
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
@@ -14842,7 +14844,7 @@ export class LycanrocDay extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.ACCELEROCK
-  passive = Passive.LYCANROC
+  passive = Passive.LYCANROC_DAY
 
   beforeSimulationStart({ weather, player }) {
     updateLycanroc(this, weather, player)
