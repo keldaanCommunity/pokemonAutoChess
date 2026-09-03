@@ -836,13 +836,18 @@ const commanderPassive = new OnSimulationStartEffect(
   ({ simulation, team, entity }) => {
     const dondozo = simulation.board
       .getAdjacentCells(entity.positionX, entity.positionY)
+      .map((cell) => cell.value)
       .find(
-        (cell) =>
-          cell.value &&
-          cell.value.name === Pkm.DONDOZO &&
-          cell.value.team === entity.team &&
-          cell.value.items.size < 3
-      )?.value
+        (p) =>
+          p &&
+          p.name === Pkm.DONDOZO &&
+          p.team === entity.team &&
+          [
+            Item.TATSUGIRI_CURLY,
+            Item.TATSUGIRI_DROOPY,
+            Item.TATSUGIRI_STRETCHY
+          ].every((commander) => p.items.has(commander) === false)
+      )
 
     if (dondozo) {
       // delete tatsugiri

@@ -26,7 +26,7 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
-import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations

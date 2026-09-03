@@ -18,7 +18,7 @@ import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
 import { isReplayRoom } from "../replay-room-id"
 import type GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 import PokemonSpecial from "./pokemon-special"
 
 const DEFAULT_WANDERER_SPEED = 0.25

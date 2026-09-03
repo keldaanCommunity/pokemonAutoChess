@@ -3231,7 +3231,7 @@
 		"DRAGON_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo DRAGON",
 		"FLORA_MEMORY": "Puede llevarlo $t(pkm.SILVALLY) para obtener el tipo FLORA",
 		"ROTOM_CATALOG": "Un catálogo de dispositivos que le gustan a Rotom. Usa el catálogo en Rotom para cambiar su forma dependiendo del dispositivo listado dentro.",
-		"RICE": "Da 80 SHIELD. Si un Tatsugiri está en el tablero, también provee las estadísticas adicionales dadas por su forma.",
+		"RICE": "Da 50 HP. Si un Tatsugiri está en el tablero, también provee las estadísticas adicionales dadas por su forma.",
 		"TINY_MUSHROOM": "Da 30 de SPEED y reduce los HP máximos por 30% durante la próxima partida cuando es consumido. Será vendido por 1 GOLD cuando vuelvas a la ciudad.",
 		"BIG_MUSHROOM": "Da +30% de HP máximo durante la próxima pelea cuando es consumido. Será vendido por 2 GOLD cuando vuelvas a la ciudad.",
 		"BALM_MUSHROOM": "Cuando es consumido, gana SAFEGUARD, 30 SPEED y cura 10% del HP máximo por segundo durante la próxima pelea. Será vendido por 5 GOLD cuando vuelvas a la ciudad.",

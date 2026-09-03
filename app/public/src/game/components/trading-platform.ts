@@ -14,7 +14,7 @@ import type GameScene from "../scenes/game-scene"
 import type BoardManager from "./board-manager"
 import { BoardMode } from "./board-manager"
 import { GameDialog } from "./game-dialog"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 export class TradingPlatform extends GameObjects.Container {
   scene: GameScene

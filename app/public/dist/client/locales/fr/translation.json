@@ -3270,7 +3270,7 @@
 		"NULLIFY_BANDANNA": "Le porteur ne peut plus utiliser sa capacité. La AP est convertie en ATK (5:1), et les PP sont convertis en SPECIAL bonus sur la prochaine attaque.",
 		"WANTED_NOTICE": "Recherché KO ou Vif\nRécompense: 10 GOLD",
 		"RED_SCALE": "Augmente votre revenu passif de 5 GOLD par manche",
-		"RICE": "Octroie 80 SHIELD. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
+		"RICE": "Octroie 50 HP max supplémentaires. Si un Nigirigon est aux commandes, octroie également les bonus de statistiques fournis par sa forme.",
 		"TATSUGIRI_CURLY": "Peut commander un Oyacata",
 		"TATSUGIRI_DROOPY": "Peut commander un Oyacata",
 		"TATSUGIRI_STRETCHY": "Peut commander un Oyacata",
