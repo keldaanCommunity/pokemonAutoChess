@@ -755,7 +755,7 @@ export default class Status extends Schema implements IStatus {
   triggerProtect(duration: number) {
     if (this.protect && duration > this.protectCooldown) {
       this.protectCooldown = duration
-    } else if (!this.enraged) {
+    } else if (!this.enraged && !this.protect) {
       this.protect = true
       this.protectCooldown = duration
     }
