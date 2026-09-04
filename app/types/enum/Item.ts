@@ -761,6 +761,14 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.AMORPHOUS_GEM
 ] satisfies SynergyGem[]
 
+export const BuriedTrash: Item[] = [
+  Item.TRASH,
+  Item.LEFTOVERS,
+  Item.COIN,
+  Item.NUGGET,
+  Item.FOSSIL_STONE
+] satisfies Item[]
+
 export const ToolsBuried: Tool[] = [
   Item.PROTECTOR,
   Item.METAL_COAT,
@@ -774,6 +782,12 @@ export const ToolsBuried: Tool[] = [
   Item.EXP_SHARE,
   Item.DRAGON_SCALE
 ]
+
+export const BuriedTreasures: Item[] = [
+  ...ToolsBuried,
+  Item.TREASURE_BOX,
+  Item.BIG_NUGGET
+] satisfies Item[]
 
 export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
@@ -1260,5 +1274,5 @@ export const SpecialItems: Item[] = [
 export const AbsorbedItems = [
   Item.TATSUGIRI_CURLY,
   Item.TATSUGIRI_DROOPY,
-  Item.TATSUGIRI_STRETCHY,
+  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
