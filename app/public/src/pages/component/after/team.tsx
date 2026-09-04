@@ -1,14 +1,20 @@
 import type { ArraySchema } from "@colyseus/schema"
-import type { IPokemonRecord } from "../../../../../models/colyseus-models/game-record"
+import { getUnitScore } from "../../../../../core/unit-score"
+import {
+  type IPokemonRecord,
+  pokemonFromRecord
+} from "../../../../../models/colyseus-models/game-record"
 import PokemonPortrait from "../pokemon-portrait"
 import "./team.css"
 
 export default function Team(props: {
   team: IPokemonRecord[] | ArraySchema<IPokemonRecord>
 }) {
+  const sortByStrongest = (a: IPokemonRecord, b: IPokemonRecord) =>
+    getUnitScore(pokemonFromRecord(b)) - getUnitScore(pokemonFromRecord(a))
   return (
     <ul className="player-team-pokemons">
-      {props.team.map((p, index) => {
+      {props.team.sort(sortByStrongest).map((p, index) => {
         return (
           <li key={index}>
             <PokemonPortrait

@@ -1,6 +1,7 @@
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
 import { RegionDetails } from "../../../../../config"
@@ -15,6 +16,8 @@ import {
   PkmFamily,
   PkmIndex
 } from "../../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../../types/enum/Synergy"
+import { isIn } from "../../../../../utils/array"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import PokemonPortrait from "../pokemon-portrait"
@@ -80,8 +83,7 @@ export default function WikiRegions() {
   )
 
   const dynamicRowHeight = useDynamicRowHeight({
-    defaultRowHeight: ROW_HEIGHT,
-    key: sortedRegions.length
+    defaultRowHeight: ROW_HEIGHT
   })
 
   return (
@@ -97,30 +99,64 @@ export default function WikiRegions() {
         <p>{t("wiki.regions.region_hint1")}</p>
         <p>{t("wiki.regions.region_hint2")}</p>
       </div>
-      <div style={{ flex: 1, minHeight: 0 }}>
-        <AutoSizer
-          renderProp={({ height, width }) => {
-            if (height === undefined || width === undefined) return null
-            const columnCount = Math.max(1, Math.floor(width / MIN_COL_WIDTH))
-            const rowCount = Math.ceil(sortedRegions.length / columnCount)
-
+      <Tabs
+        className="wiki-types"
+        style={{
+          flex: 1,
+          minHeight: 0,
+          display: "flex",
+          flexDirection: "column"
+        }}
+      >
+        <TabList>
+          <Tab key="title-all">{t("all")}</Tab>
+          {(Object.keys(Synergy) as Synergy[]).map((type) => {
             return (
-              <List<RegionRowData>
-                key={columnCount}
-                style={{ height, width }}
-                rowCount={rowCount}
-                rowHeight={dynamicRowHeight}
-                rowComponent={RegionRow}
-                rowProps={{
-                  regions: sortedRegions,
-                  columnCount,
-                  pokemonsPerRegion
+              <Tab key={"title-" + type}>
+                <SynergyIcon type={type} />
+              </Tab>
+            )
+          })}
+        </TabList>
+
+        {["all", ...Object.keys(Synergy)].map((type) => {
+          const filteredRegions = sortedRegions.filter(
+            (r) => type === "all" || isIn(RegionDetails[r].synergies, type)
+          )
+          return (
+            <TabPanel key={type}>
+              <AutoSizer
+                renderProp={({ height, width }) => {
+                  if (height === undefined || width === undefined) return null
+                  const columnCount = Math.max(
+                    1,
+                    Math.floor(width / MIN_COL_WIDTH)
+                  )
+                  const rowCount = Math.ceil(
+                    filteredRegions.length / columnCount
+                  )
+
+                  return (
+                    <List<RegionRowData>
+                      key={columnCount}
+                      style={{ height, width }}
+                      rowCount={rowCount}
+                      rowHeight={dynamicRowHeight}
+                      rowComponent={RegionRow}
+                      rowProps={{
+                        regions: filteredRegions,
+                        columnCount,
+                        pokemonsPerRegion
+                      }}
+                    />
+                  )
                 }}
               />
-            )
-          }}
-        />
-      </div>
+            </TabPanel>
+          )
+        })}
+      </Tabs>
+
       <GamePokemonDetailTooltip origin="wiki" />
     </div>
   )

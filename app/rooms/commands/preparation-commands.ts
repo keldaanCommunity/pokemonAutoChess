@@ -2,13 +2,14 @@ import { memoryUsage } from "node:process"
 import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
 import { type Client, matchMaker } from "colyseus"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import type { QueryFilter } from "mongoose"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
 } from "../../config"
+import { GADGETS } from "../../config/game/gadgets"
 import {
   getPendingGame,
   isPlayerTimeout,
@@ -30,9 +31,35 @@ import { getRank } from "../../utils/elo"
 import { logger } from "../../utils/logger"
 import { max } from "../../utils/number"
 import { cleanProfanity } from "../../utils/profanity-filter"
-import { pickRandomIn } from "../../utils/random"
+import { pickRandomIn, shuffleArray } from "../../utils/random"
 import { schemaEntries, schemaValues } from "../../utils/schemas"
 import type PreparationRoom from "../preparation-room"
+
+function autoAssignPartner(state: PreparationRoom["state"], uid: string) {
+  if (state.gameMode !== GameMode.DOUBLE_UP) return
+  const newUser = state.users.get(uid)
+  if (!newUser) return
+  const unpaired = schemaValues(state.users).find(
+    (p) => p.uid !== uid && p.doubleUpPartnerId === ""
+  )
+  if (!unpaired) {
+    newUser.doubleUpPartnerId = ""
+    newUser.doubleUpTeamId = ""
+    return
+  }
+  const allTeamIds = new Set(
+    schemaValues(state.users)
+      .map((p) => p.doubleUpTeamId)
+      .filter((id) => id !== "")
+  )
+  let teamIndex = 0
+  while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+  const teamId = `team-${teamIndex}`
+  newUser.doubleUpPartnerId = unpaired.uid
+  newUser.doubleUpTeamId = teamId
+  unpaired.doubleUpPartnerId = uid
+  unpaired.doubleUpTeamId = teamId
+}
 
 export class OnJoinCommand extends Command<
   PreparationRoom,
@@ -108,6 +135,14 @@ export class OnJoinCommand extends Command<
           return
         }
 
+        if (
+          this.state.gameMode === GameMode.RANKED &&
+          u.level < GADGETS.certificate.levelRequired
+        ) {
+          client.leave(CloseCodes.USER_RANK_TOO_LOW)
+          return
+        }
+
         this.state.users.set(
           client.auth.uid,
           new GameUser(
@@ -127,6 +162,11 @@ export class OnJoinCommand extends Command<
         )
         this.room.updatePlayersInfo()
 
+        // auto-pair in Double Up mode
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, u.uid)
+        }
+
         if (u.uid == this.state.ownerId) {
           // logger.debug(user.displayName);
           this.state.ownerName = u.displayName
@@ -135,7 +175,10 @@ export class OnJoinCommand extends Command<
           })
         }
 
-        if (this.state.gameMode !== GameMode.CUSTOM_LOBBY) {
+        if (
+          this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+          this.state.gameMode !== GameMode.DOUBLE_UP
+        ) {
           this.clock.setTimeout(() => {
             if (
               this.state.users.has(u.uid) &&
@@ -171,6 +214,38 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
+      }
+
+      // Ready up cooldown
+      const nbExpectedPlayers = MAX_PLAYERS_PER_GAME
+      if (
+        this.state.gameMode === GameMode.DOUBLE_UP &&
+        this.state.users.size === nbExpectedPlayers
+      ) {
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `You have 2 minutes to form the teams. Click Ready to lock your team slot.`
+        })
+        this.state.readyUpCooldown = this.clock.setTimeout(
+          () => {
+            this.state.users.forEach((user, uid) => {
+              if (!user.ready) {
+                this.state.users.delete(uid)
+                const client = this.room.clients.find(
+                  (c) => c.auth?.uid === uid
+                )
+                client?.leave(CloseCodes.USER_KICKED) // kick double up players that dont ready up in 2 minutes
+                this.room.state.addMessage({
+                  authorId: "server",
+                  avatar: user.avatar,
+                  payload: `${user.name} has been kicked for not readying on time.`
+                })
+              }
+            })
+            this.state.readyUpCooldown = null
+          },
+          2 * 60 * 1000
+        )
       }
     } catch (error) {
       logger.error(error)
@@ -219,7 +294,11 @@ export class OnGameStartRequestCommand extends Command<
         return
       }
 
-      if (!allUsersReady && this.state.gameMode === GameMode.CUSTOM_LOBBY) {
+      if (
+        !allUsersReady &&
+        (this.state.gameMode === GameMode.CUSTOM_LOBBY ||
+          this.state.gameMode === GameMode.DOUBLE_UP)
+      ) {
         this.state.addMessage({
           authorId: "Server",
           payload: `Not all players are ready.`,
@@ -274,8 +353,42 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStartedAt = new Date().toISOString()
+        this.state.readyUpCooldown?.clear()
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
+
+        if (this.state.gameMode === GameMode.DOUBLE_UP) {
+          const userList = schemaValues(this.state.users)
+          const paired: Set<string> = new Set()
+          let teamIndex = 0
+
+          // honor lobby selections first
+          userList.forEach((a) => {
+            if (paired.has(a.uid) || !a.doubleUpPartnerId) return
+            const b = this.state.users.get(a.doubleUpPartnerId)
+            if (!b || paired.has(b.uid)) return
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpTeamId = teamId
+            b.doubleUpTeamId = teamId
+            paired.add(a.uid)
+            paired.add(b.uid)
+          })
+
+          // randomly pair remaining unpaired users
+          const unpaired = shuffleArray(
+            userList.filter((u) => !paired.has(u.uid))
+          )
+          for (let i = 0; i < unpaired.length - 1; i += 2) {
+            const a = unpaired[i],
+              b = unpaired[i + 1]
+            const teamId = `team-${teamIndex++}`
+            a.doubleUpPartnerId = b.uid
+            a.doubleUpTeamId = teamId
+            b.doubleUpPartnerId = a.uid
+            b.doubleUpTeamId = teamId
+          }
+        }
+
         const gameRoom = await matchMaker.createRoom("game", {
           users: Object.fromEntries(schemaEntries(this.state.users)),
           name: this.state.name,
@@ -362,7 +475,8 @@ export class OnRoomNameCommand extends Command<
       if (
         this.state.name != roomName &&
         (client.auth?.uid == this.state.ownerId ||
-          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)))
+          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))) &&
+        roomName.trim().length > 0
       ) {
         this.room.setName(roomName)
         this.state.name = roomName
@@ -566,7 +680,16 @@ export class OnLeaveCommand extends Command<
             payload: `${user.name} left.`,
             avatar: user.avatar
           })
+          const partnerIdBeforeLeave = user.doubleUpPartnerId
           this.state.users.delete(client.auth.uid)
+          if (partnerIdBeforeLeave) {
+            const partner = this.state.users.get(partnerIdBeforeLeave)
+            if (partner) {
+              partner.doubleUpPartnerId = ""
+              partner.doubleUpTeamId = ""
+              autoAssignPartner(this.state, partnerIdBeforeLeave)
+            }
+          }
 
           if (client.auth.uid === this.state.ownerId) {
             const newOwner = schemaValues(this.state.users).find(
@@ -588,6 +711,11 @@ export class OnLeaveCommand extends Command<
               })
             }
           }
+
+          if (this.state.readyUpCooldown) {
+            this.state.readyUpCooldown.clear()
+            this.state.readyUpCooldown = null
+          }
         }
       }
     } catch (error) {
@@ -606,7 +734,11 @@ export class OnToggleReadyCommand extends Command<
   execute({ client, ready }) {
     try {
       // cannot toggle ready in classic / ranked / tournament game mode
-      if (this.room.state.gameMode !== GameMode.CUSTOM_LOBBY && ready !== true)
+      if (
+        this.room.state.gameMode !== GameMode.CUSTOM_LOBBY &&
+        this.room.state.gameMode !== GameMode.DOUBLE_UP &&
+        ready !== true
+      )
         return
 
       // logger.debug(this.state.users.get(client.auth.uid).ready);
@@ -708,6 +840,9 @@ export class InitializeBotsCommand extends Command<
                 false
               )
             )
+            if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+              autoAssignPartner(this.state, bot.id)
+            }
           })
         }
         this.room.updatePlayersInfo()
@@ -745,32 +880,36 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         let elo: QueryFilter<IBot>["elo"] | undefined
 
         switch (difficulty) {
+          case BotDifficulty.BEGINNER:
+            elo = { $lt: 850 }
+            break
           case BotDifficulty.EASY:
-            elo = { $lt: 800 }
+            elo = { $gte: 850, $lt: 1000 }
             break
           case BotDifficulty.MEDIUM:
-            elo = { $gte: 800, $lt: 1100 }
+            elo = { $gte: 1000, $lt: 1150 }
             break
           case BotDifficulty.HARD:
-            elo = { $gte: 1100, $lt: 1400 }
+            elo = { $gte: 1150, $lt: 1300 }
             break
           case BotDifficulty.EXTREME:
-            elo = { $gte: 1400 }
+            elo = { $gte: 1300, $lt: 1450 }
+            break
+          case BotDifficulty.MASTER:
+            elo = { $gte: 1450 }
             break
         }
 
-        const existingBots = new Array<string>()
-        this.state.users.forEach((value: GameUser, key: string) => {
-          if (value.isBot) {
-            existingBots.push(key)
-          }
-        })
+        const existingBots = schemaEntries(this.state.users)
+          .filter(([id, user]) => user.isBot)
+          .map(([id, user]) => id)
 
         const bots = await BotV2.find(
           { id: { $nin: existingBots }, elo, approved: true },
           ["avatar", "elo", "name", "id"]
         )
 
+        console.log("bot difficulty", difficulty, "found", bots.length, "bots")
         if (bots.length <= 0) {
           this.room.state.addMessage({
             authorId: "server",
@@ -809,6 +948,9 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
         )
 
         this.room.updatePlayersInfo()
+        if (this.room.state.gameMode === GameMode.DOUBLE_UP) {
+          autoAssignPartner(this.state, bot.id)
+        }
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${bot.name} added.`
@@ -830,11 +972,116 @@ export class OnRemoveBotCommand extends Command<
   execute({ target, user }) {
     try {
       const name = this.state.users.get(target)?.name
+      const bot = this.state.users.get(target)
+      if (bot?.doubleUpPartnerId) {
+        const partner = this.state.users.get(bot.doubleUpPartnerId)
+        if (partner) {
+          partner.doubleUpPartnerId = ""
+          partner.doubleUpTeamId = ""
+        }
+      }
       if (name && this.state.users.delete(target)) {
         this.room.state.addMessage({
           authorId: "server",
           payload: `Bot ${name} removed.`
         })
+      }
+      if (bot?.doubleUpPartnerId) {
+        autoAssignPartner(this.state, bot.doubleUpPartnerId)
+      }
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+}
+
+export class OnSelectPartnerCommand extends Command<
+  PreparationRoom,
+  {
+    client: Client
+    partnerId: string
+  }
+> {
+  execute({ client, partnerId }) {
+    try {
+      const uid = client.auth?.uid
+      if (!uid) return
+      const user = this.state.users.get(uid)
+      if (!user) return
+      if (user.doubleUpPartnerId === partnerId) {
+        const oldPartner = this.state.users.get(partnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+        user.doubleUpPartnerId = ""
+        user.doubleUpTeamId = ""
+        if (!user.isBot) user.ready = false
+        return // just return, no auto-assign
+      }
+
+      const target = this.state.users.get(partnerId)
+      if (!target) return
+      if (target.ready || user.ready) return
+
+      // save old partner ids before clearing
+      const userOldPartnerId = user.doubleUpPartnerId
+      const targetOldPartnerId = target.doubleUpPartnerId
+
+      // clear previous partners
+      if (userOldPartnerId) {
+        const oldPartner = this.state.users.get(userOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+      }
+      if (targetOldPartnerId) {
+        const oldPartner = this.state.users.get(targetOldPartnerId)
+        if (oldPartner) {
+          oldPartner.doubleUpPartnerId = ""
+          oldPartner.doubleUpTeamId = ""
+          if (!oldPartner.isBot) oldPartner.ready = false
+        }
+      }
+
+      // find lowest available team index for new pair
+      const allTeamIds = new Set(
+        schemaValues(this.state.users)
+          .map((u) => u.doubleUpTeamId)
+          .filter((id) => id !== "")
+      )
+      let teamIndex = 0
+      while (allTeamIds.has(`team-${teamIndex}`)) teamIndex++
+      const teamId = `team-${teamIndex}`
+      allTeamIds.add(teamId) // mark as taken before orphan search
+
+      user.doubleUpPartnerId = partnerId
+      user.doubleUpTeamId = teamId
+      target.doubleUpPartnerId = uid
+      target.doubleUpTeamId = teamId
+
+      // pair orphans with each other if both had partners
+      if (userOldPartnerId && targetOldPartnerId) {
+        const orphanA = this.state.users.get(userOldPartnerId)
+        const orphanB = this.state.users.get(targetOldPartnerId)
+        if (orphanA && orphanB) {
+          let ti = 0
+          while (allTeamIds.has(`team-${ti}`)) ti++
+          orphanA.doubleUpPartnerId = targetOldPartnerId
+          orphanA.doubleUpTeamId = `team-${ti}`
+          orphanB.doubleUpPartnerId = userOldPartnerId
+          orphanB.doubleUpTeamId = `team-${ti}`
+        }
+      } else {
+        if (userOldPartnerId) {
+          autoAssignPartner(this.state, userOldPartnerId)
+        }
+        if (targetOldPartnerId) {
+          autoAssignPartner(this.state, targetOldPartnerId)
+        }
       }
     } catch (error) {
       logger.error(error)

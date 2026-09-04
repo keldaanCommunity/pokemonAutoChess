@@ -30,7 +30,10 @@ export default class AttackingState extends PokemonState {
         pokemon.simulation.blueTeam.get(pokemon.targetEntityId) ||
         pokemon.simulation.redTeam.get(pokemon.targetEntityId)
 
-      if (pokemon.effects.has(EffectEnum.MERCILESS)) {
+      if (
+        pokemon.effects.has(EffectEnum.MERCILESS) &&
+        pokemon.pp < pokemon.maxPP
+      ) {
         const candidates = this.getTargetsAtRange(pokemon, board)
         let minLife = Infinity
         for (const candidate of candidates) {
@@ -139,5 +142,6 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   )
   const travelTime =
     (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
+
   return { delayBeforeShoot, travelTime, attackDuration }
 }

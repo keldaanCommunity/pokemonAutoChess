@@ -62,7 +62,8 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   6: [0.25, 0.4, 0.3, 0.05, 0],
   7: [0.16, 0.33, 0.35, 0.15, 0.01],
   8: [0.11, 0.27, 0.35, 0.22, 0.05],
-  9: [0.05, 0.2, 0.35, 0.3, 0.1]
+  9: [0.05, 0.2, 0.35, 0.3, 0.1],
+  10: [0, 0.05, 0.3, 0.4, 0.25]
 }
 
 /* Special Pokemon rates */
@@ -111,6 +112,7 @@ export const SellPrices = {
   WISHIWASHI_SCHOOL: 10,
   REMORAID: 2,
   OCTILLERY: 7,
+  PIKACHU: 3,
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,

@@ -67,3 +67,20 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.preparation-menu-users.double-up {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.double-up-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.5em;
+}
+
+.double-up-pair.unpaired::after {
+  content: "";
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
