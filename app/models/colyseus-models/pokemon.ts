@@ -12243,12 +12243,13 @@ export class Wurmple extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.ENTANGLING_THREAD
+  passive = Passive.WURMPLE
   evolutions = [Pkm.SILCOON, Pkm.CASCOON]
   evolutionRule = {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
-      if (player.regionalPokemons.includes(Pkm.CASCOON)) return Pkm.CASCOON
+      if (player.synergies.hasSynergyActive(Synergy.POISON)) return Pkm.CASCOON
       else return Pkm.SILCOON
     }
   } satisfies CountEvolutionRule
@@ -12296,11 +12297,6 @@ export class Cascoon extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.SPIKY_SHIELD
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.POISON)
-  }
 }
 
 export class Dustox extends Pokemon {
@@ -12315,11 +12311,6 @@ export class Dustox extends Pokemon {
   maxPP = 60
   range = 1
   skill = Ability.POISON_POWDER
-  regional = true
-  isInRegion(map: DungeonPMDO, state: GameState) {
-    const regionSynergies = RegionDetails[map]?.synergies
-    return regionSynergies.includes(Synergy.POISON)
-  }
 }
 
 export class Tinkatink extends Pokemon {
@@ -14787,7 +14778,7 @@ function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
   } else if (weather === Weather.ZENITH) {
     weatherForm = Pkm.LYCANROC_DAY
   } else if (weather === Weather.DROUGHT) {
-     weatherForm = Pkm.LYCANROC_DUSK
+    weatherForm = Pkm.LYCANROC_DUSK
   }
 
   if (!weatherForm || pokemon.name === weatherForm) return

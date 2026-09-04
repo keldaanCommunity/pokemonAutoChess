@@ -3534,7 +3534,8 @@
 		"UXIE": "XP gained: {{stacks}}",
 		"NECTAR": "When a flower pot is fully grown, gain nectar based on its color.",
 		"STEELY_SPIRIT": "Allies ADJACENT_IN_THE_SAME_ROW deal 10% of their ATK as TRUE.",
-		"MYTHOSIS": "Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP."
+		"MYTHOSIS": "Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.",
+		"WURMPLE": "Wurmple evolves into Cascoon if POISON synergy is active, or into Silcoon instead."
 	},
 	"stat": {
 		"ATK": "Attack",
