@@ -325,7 +325,8 @@ class GameContainer {
       this.game.plugins.install("rexOutline", OutlinePlugin, true)
     }
     const unsubscribeToPreferences = subscribeToPreferences(
-      ({ antialiasing }) => {
+      ({ antialiasing, fpsLimit }) => {
+        this.game.loop.setFPSLimit(fpsLimit)
         if (!this.game?.canvas) return
         this.game.canvas.style.imageRendering = antialiasing ? "" : "pixelated"
       },

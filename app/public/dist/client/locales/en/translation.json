@@ -4300,6 +4300,7 @@
 		"show_damage_numbers": "Show damage numbers",
 		"disable_animated_tilemap": "No background animations",
 		"disable_camera_shake": "No camera shake or flashes",
+		"fps_limit": "FPS limit",
 		"antialiasing": "Enable anti-aliasing",
 		"custom_cursors": "Enable custom cursors",
 		"colorblind_mode": "Colorblind mode",

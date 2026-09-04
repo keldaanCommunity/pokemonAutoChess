@@ -47,6 +47,7 @@ export interface IPreferencesState {
   recordReplays: boolean
   keepReplays: number
   theme: string
+  fpsLimit: number
 }
 
 export type PreferenceKey = keyof IPreferencesState
@@ -77,6 +78,7 @@ const defaultPreferences: IPreferencesState = {
   recordReplays: true,
   keepReplays: 5,
   theme: "default",
+  fpsLimit: 144,
   keybindings: {
     sell: "E",
     buy_xp: "F",
