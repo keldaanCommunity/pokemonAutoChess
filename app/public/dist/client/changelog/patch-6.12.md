@@ -22,6 +22,7 @@
     - Lycanroc transforms into Dusk Form on DROUGHT
     - Add FIRE type to Lycanroc Dusk Form
 - Nerf Drum Beating (Grookey): removed AP scaling and ability crit on the team-wide speed buff part of the ability.
+- Cascoon is no longer regional. Wurmple evolves into Cascoon if POISON synergy is active, or into Silcoon instead.
 
 # Changes to Synergies
 
@@ -40,7 +41,7 @@
 - Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
-- Rework Black Sludge: POISONNED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONNED for 5 seconds ON_HIT. The first attack always inflicts POISONNED.**
+- Rework Black Sludge: POISONED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONED for 5 seconds ON_HIT. The first attack always inflicts POISONED.**
 
 # Gameplay
 

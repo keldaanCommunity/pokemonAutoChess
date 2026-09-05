@@ -55,14 +55,14 @@ const damageType = (t: TFunction, n: number | undefined): string =>
   typedT(t)(`damage.${AttackType[n ?? AttackType.PHYSICAL] ?? "PHYSICAL"}`)
 
 // camelCase status field to the game's Status enum value (also its status.* label key); typed to Status so a renamed
-// member fails tsc. names diverge from fields (armorReduction is ARMOR_BREAK, poisonStacks is POISONNED, enraged is
+// member fails tsc. names diverge from fields (armorReduction is ARMOR_BREAK, poisonStacks is POISONED, enraged is
 // RAGE). the other ~11 fields have no status.* label key (some, like spikeArmor/magicBounce/reflect, have a Status
 // member but no label string) and fall back to statusName()
 const STATUS_LOCALE_KEY: Record<string, Status> = {
   burn: Status.BURN,
   silence: Status.SILENCE,
   fatigue: Status.FATIGUE,
-  poisonStacks: Status.POISONNED,
+  poisonStacks: Status.POISONED,
   freeze: Status.FREEZE,
   protect: Status.PROTECT,
   sleep: Status.SLEEP,

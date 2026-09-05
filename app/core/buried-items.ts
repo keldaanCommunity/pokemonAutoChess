@@ -1,4 +1,5 @@
 import { Item, SynergyGemsBuried, ToolsBuried } from "../types";
+import { BuriedTrash } from "../types/enum/Item";
 import { chance, pickRandomIn, shuffleArray } from "../utils/random";
 
 export function initBuriedItems() {
@@ -11,13 +12,7 @@ export function initBuriedItems() {
 
   // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
   for (let i = 3; i < 7; i++) {
-    buriedItems[i] = pickRandomIn([
-      Item.TRASH,
-      Item.LEFTOVERS,
-      Item.COIN,
-      Item.NUGGET,
-      Item.FOSSIL_STONE
-    ])
+    buriedItems[i] = pickRandomIn(BuriedTrash)
   }
 
   // 1 precious (tool, treasure box, big nugget)

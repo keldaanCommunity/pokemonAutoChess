@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next"
 import {
   ArtificialItems,
   Berries,
+  BuriedTrash,
+  BuriedTreasures,
   Dishes,
   FishingRods,
   Gifts,
@@ -42,18 +44,12 @@ function ItemList(props: { items: readonly Item[]; icon?: string }) {
 
 export default function WikiItems() {
   const { t } = useTranslation()
-  const otherBuriedItems = [
-    Item.TRASH,
-    Item.LEFTOVERS,
-    Item.COIN,
-    Item.NUGGET,
-    Item.BIG_NUGGET
-  ]
   const specialItems = useMemo(() => {
     const specialItemsToExclude: Item[] = [
       ...MemoryDiscs,
       ...TownItems,
-      ...otherBuriedItems,
+      ...BuriedTrash,
+      Item.BIG_NUGGET,
       ...FishingRods,
       ...Mulches,
       Item.CHEF_HAT,
@@ -252,9 +248,20 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.GROUND} /> {t("wiki.items.gems")}
+          <SynergyIcon type={Synergy.GROUND} /> {t("wiki.items.buried_items")}
         </h3>
-        <p>{addIconsToDescription(t("wiki.items.gems_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.buried_items_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.buried_treasures_description"))}
+        </p>
+        <ul>
+          <ItemList items={BuriedTreasures} />
+        </ul>
+        <p>{addIconsToDescription(t("wiki.items.buried_trash_description"))}</p>
+        <ul>
+          <ItemList items={BuriedTrash} />
+        </ul>
+        <p>{addIconsToDescription(t("wiki.items.gems_buried_description"))}</p>
         <ul>
           <ItemList items={SynergyGemsBuried} />
         </ul>
@@ -267,14 +274,6 @@ export default function WikiItems() {
               (gem) => SynergyGemsBuried.includes(gem) === false
             )}
           />
-        </ul>
-        <p>
-          {addIconsToDescription(
-            t("wiki.items.you_may_also_find_in_the_ground")
-          )}
-        </p>
-        <ul>
-          <ItemList items={otherBuriedItems} />
         </ul>
 
         <h3>

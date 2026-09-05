@@ -26,11 +26,11 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
-import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "../components/pokemon-animations"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 
@@ -317,7 +317,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeGrassField()
       this.pokemonSprite.removeFairyField()
 
-      if (status === Status.POISONNED) {
+      if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
       }
       if (status === "POISONNED_BADLY") {
