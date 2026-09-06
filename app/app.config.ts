@@ -278,6 +278,13 @@ export const server = defineServer({
 
     app.use(cors())
     app.use(express.json())
+    // portraits use the browser's http cache instead of the service worker
+    app.use(
+      "/assets/portraits",
+      express.static(path.join(clientSrc, "assets", "portraits"), {
+        maxAge: isDevelopment ? 0 : "31d"
+      })
+    )
     app.use(express.static(clientSrc))
 
     app.get("/", (req, res) => {
