@@ -93,6 +93,6 @@ export function getPokemonCustomFromAvatar(avatar: string): PkmWithCustom {
   return {
     emotion: emotion,
     shiny: shiny,
-    name: PkmByIndex[index]
+    name: PkmByIndex[index] ?? Pkm.RATTATA // fallback for legacy/invalid avatar indexes no longer in PkmIndex
   }
 }

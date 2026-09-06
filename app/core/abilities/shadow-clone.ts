@@ -1,5 +1,6 @@
 import PokemonFactory from "../../models/pokemon-factory"
-import type { Item } from "../../types/enum/Item"
+import { AbsorbedItems, type Item } from "../../types/enum/Item"
+import { isIn } from "../../utils/array";
 import { min } from "../../utils/number"
 import { pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
@@ -27,7 +28,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
       })
       let itemStolen: Item | null = null
       if (target.items.size > 0) {
-        itemStolen = pickRandomIn(schemaValues(target.items))
+        itemStolen = pickRandomIn(schemaValues(target.items).filter(item => !isIn(AbsorbedItems, item)))
         target.removeItem(itemStolen)
       }
 

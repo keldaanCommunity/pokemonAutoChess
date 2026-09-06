@@ -68,8 +68,9 @@ import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { type Gift, Gifts } from "../types/enum/GiftShop"
 import {
+  type Gift,
+  Gifts,
   type Item,
   RemovableItems,
   UnholdableItemsToSaveForStats,
@@ -867,7 +868,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     // we skip elo compute/game history if game is not finished
     // that is at least two players including one human are still alive
     if (playersAlive.length >= 2 && humansAlive.length >= 1) {
-      if (humansAlive.length > 1) {
+      const humansAliveLimit =
+        this.state.gameMode === GameMode.DOUBLE_UP ? 2 : 1
+      if (humansAlive.length > humansAliveLimit) {
         // this can happen if all players disconnect before the end
         // or if there's another technical issue
         // adding a log just in case
@@ -1020,33 +1023,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
           )
         }
 
-        const dbrecord = this.transformToSimplePlayer(player)
-        const synergiesMap = new Map<Synergy, number>()
-        player.synergies.forEach((v, k) => {
-          v > 0 && synergiesMap.set(k, v)
-        })
-        DetailledStatistic.create({
-          time: Date.now(),
-          name: dbrecord.name,
-          pokemons: dbrecord.pokemons.map((pokemon) => ({
-            ...pokemon,
-            items: Array.from(pokemon.items ?? []).map(
-              (item) => item.toString() as Item
-            )
-          })),
-          rank: dbrecord.rank,
-          nbplayers: humans.length + bots.length,
-          avatar: dbrecord.avatar,
-          playerId: dbrecord.id,
-          elo: elo,
-          synergies: synergiesMap,
-          gameMode: this.state.gameMode,
-          regions: player.regions,
-          unholdableItems: schemaValues(player.items).filter((item) =>
-            isIn(UnholdableItemsToSaveForStats, item)
-          )
-        })
-
         if (
           usr.eventFinishTime == null &&
           getCurrentGameEvent() === GameEvent.VICTORY_ROAD
@@ -1108,6 +1084,34 @@ export default class GameRoom extends Room<{ state: GameState }> {
           logger.error("Error updating event points", error)
         }
       }
+
+      // add game to player game history
+      const dbrecord = this.transformToSimplePlayer(player)
+      const synergiesMap = new Map<Synergy, number>()
+      player.synergies.forEach((v, k) => {
+        v > 0 && synergiesMap.set(k, v)
+      })
+      DetailledStatistic.create({
+        time: Date.now(),
+        name: dbrecord.name,
+        pokemons: dbrecord.pokemons.map((pokemon) => ({
+          ...pokemon,
+          items: Array.from(pokemon.items ?? []).map(
+            (item) => item.toString() as Item
+          )
+        })),
+        rank: dbrecord.rank,
+        nbplayers: humans.length + bots.length,
+        avatar: dbrecord.avatar,
+        playerId: dbrecord.id,
+        elo: usr.elo,
+        synergies: synergiesMap,
+        gameMode: this.state.gameMode,
+        regions: player.regions,
+        unholdableItems: schemaValues(player.items).filter((item) =>
+          isIn(UnholdableItemsToSaveForStats, item)
+        )
+      })
 
       // update all pokemons played count
       player.pokemonsPlayed.forEach((pkm) => {
@@ -1295,6 +1299,43 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
   }
 
+  givePokemons(
+    pokemonsObtained: Pokemon[],
+    player: Player,
+    sellIfNoSpace = false
+  ): boolean {
+    return pokemonsObtained.every((pokemon) => {
+      const freeSpace = getFreeSpaceOnBench(player.board)
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
+      const isEvolution =
+        pokemon.evolutionRule &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
+
+      if (freeSpace < pokemonsObtained.length && !sellIfNoSpace && !isEvolution)
+        return false // prevent if not enough space on bench
+
+      if (isEvolution) {
+        pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      } else if (freeCellX !== null) {
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+      } else {
+        // sell picked pokemon if no more space on bench
+        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
+        player.addMoney(sellPrice, true, null)
+      }
+
+      return true
+    })
+  }
+
   getNumberOfPlayersAlive(players: MapSchema<Player>) {
     let numberOfPlayersAlive = 0
     players.forEach((player, key) => {
@@ -1321,7 +1362,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     playerId: string,
     choiceId: string,
     choiceIndex: number,
-    bypassLackOfSpace = false
+    sellIfNoSpace = false
   ) {
     const player = this.state.players.get(playerId)
     if (!player) return
@@ -1346,21 +1387,6 @@ export default class GameRoom extends Room<{ state: GameState }> {
       let pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
       ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-
-      const pokemon = pokemonsObtained[0]
-      const isEvolution =
-        pokemon.evolutionRule &&
-        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
-        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
-
-      const freeSpace = getFreeSpaceOnBench(player.board)
-
-      if (
-        freeSpace < pokemonsObtained.length &&
-        !bypassLackOfSpace &&
-        !isEvolution
-      )
-        return false // prevent picking if not enough space on bench
 
       if (choice.type === "addPick") {
         if (pokemonsObtained[0]?.regional) {
@@ -1407,25 +1433,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.firstPartner = pokemonsObtained[0].name
       }
 
-      pokemonsObtained.forEach((pokemon) => {
-        const freeCellX = getFirstAvailablePositionInBench(player.board)
-        if (isEvolution) {
-          pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-          this.checkEvolutionsAfterPokemonAcquired(playerId)
-        } else if (freeCellX !== null) {
-          pokemon.positionX = freeCellX
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-        } else {
-          // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
-          const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-          player.addMoney(sellPrice, true, null)
-        }
-      })
+      this.givePokemons(pokemonsObtained, player, sellIfNoSpace)
     }
 
     if (choice.items.length > 0) {
@@ -1567,7 +1575,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       delay: 3000
     })
 
-    setTimeout(() => openGift(gift, partner, player), 10000)
+    setTimeout(() => openGift(gift, partner, player, this), 10000)
   }
 
   tradePokemonWithPartner(playerA: Player, playerB: Player) {

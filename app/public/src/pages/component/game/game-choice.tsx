@@ -21,6 +21,9 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-choice.css"
+import { ItemStats } from "../../../../../config"
+import { Stat } from "../../../../../types/enum/Game"
+import { entries } from "../../../../../utils/object"
 
 function isPokemonChoice(choice: PlayerChoice): boolean {
   return choice.pokemons.length > 0
@@ -45,6 +48,17 @@ export default function GameChoice() {
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
     localStore.get(LocalStoreKeys.TEAM_PLANNER)
   )
+
+  const formatStat = (stat: Stat, value: number) => {
+    let output = value.toString()
+    if ([Stat.CRIT_CHANCE, Stat.CRIT_POWER].includes(stat)) {
+      output += "%"
+    }
+    if (value >= 0) {
+      output = "+" + output
+    }
+    return output
+  }
 
   useEffect(() => {
     const updateTeamPlanner = (event: StorageEvent) => {
@@ -193,6 +207,18 @@ export default function GameChoice() {
                   src={"assets/item/" + item + ".png"}
                 />
                 <h3 style={{ margin: "0.25em 0" }}>{t(`item.${item}`)}</h3>
+                <div className="item-stats">
+                  {entries(ItemStats[item] ?? {}).map(([stat, value]) => (
+                    <div key={stat}>
+                      <img
+                        src={`assets/icons/${stat}.png`}
+                        alt={stat}
+                        title={t(`stat.${stat}`)}
+                      />
+                      <span>{formatStat(stat as Stat, value ?? 0)}</span>
+                    </div>
+                  ))}
+                </div>
                 <p style={{ marginBottom: "0.5em" }}>
                   {addIconsToDescription(t(`item_description.${item}`))}
                 </p>

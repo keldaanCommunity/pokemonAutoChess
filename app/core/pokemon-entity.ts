@@ -15,6 +15,7 @@ import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
+    AbsorbedItems,
   Emotion,
   type IPokemon,
   type IPokemonEntity,
@@ -23,7 +24,7 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   Orientation,
@@ -337,6 +338,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }) {
@@ -403,18 +405,32 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
       if (
-        this.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT) ||
-        (attacker &&
-          attacker.effects.has(EffectEnum.STRANGE_STEAM_BOARD_EFFECT))
+        this.effects.has(EffectEnum.STRANGE_STEAM) ||
+        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
       ) {
         specialDamage *= 1.2
       }
-      if (crit && attacker && this.items.has(Item.ROCKY_HELMET) === false) {
-        const nbBlackAugurite = this.player
-          ? count(this.player.items, Item.BLACK_AUGURITE)
-          : 0
-        const reductionFactor = 1 - 0.1 * nbBlackAugurite
-        specialDamage *= attacker.critPower * reductionFactor
+      if (crit && attacker) {
+        let critReductionFactor = 1.0
+        const hasCritNegation =
+          this.items.has(Item.ROCKY_HELMET) && attackType !== AttackType.TRUE
+
+        if (hasCritNegation) {
+          critReductionFactor = 0
+        } else {
+          this.count.crit++
+        }
+
+        if (attackType !== AttackType.TRUE) {
+          const nbBlackAugurite = this.player
+            ? count(this.player.items, Item.BLACK_AUGURITE)
+            : 0
+          critReductionFactor -= 0.1 * nbBlackAugurite
+        }
+
+        critReductionFactor = min(0)(critReductionFactor)
+
+        specialDamage *= 1 + (attacker.critPower - 1) * critReductionFactor
       }
 
       const damageResult = this.state.handleDamage({
@@ -453,11 +469,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   handleHeal(
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ) {
-    return this.state.handleHeal(this, heal, caster, apBoost, crit)
+    return this.state.handleHeal(this, heal, origin, apBoost, crit)
   }
 
   changeState(state: PokemonState) {
@@ -766,14 +782,21 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addItem(item: Item, permanent = false) {
     const type = SynergyGivenByItem[item]
-    if (
-      this.items.size >= 3 ||
-      (isIn(SynergyStones, item) && this.types.has(type)) ||
-      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
+    if(isIn(AbsorbedItems, item)){
+      if(Array.from(this.items).some(i => isIn(AbsorbedItems, i))) return // can only absorb one item
+    } else if (this.items.size >= 3){
+      return; // cannot hold more than 3 items
+    }
+
+    if (isIn(SynergyStones, item) && this.types.has(type)){
+      return; // cannot hold a synergy stone of a type already obtained - prevents a noob trap
+    }
+    
+    if(((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
         !this.refToBoardPokemon.hasEvolution) ||
       (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
     ) {
-      return
+      return // handle cases where eviolite and rare candy cannot be given
     }
 
     if (this.items.has(item) == false) {
@@ -799,12 +822,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
   }
 
-  removeItem(item: Item, permanent = false) {
+  removeItem(item: Item, permanent = false): boolean {
+    if(isIn(AbsorbedItems, item)) return false
     this.items.delete(item)
     this.removeItemEffect(item)
     if (permanent && !this.isGhostOpponent) {
       this.refToBoardPokemon.items.delete(item)
     }
+    return true
   }
 
   applyItemEffect(item: Item) {

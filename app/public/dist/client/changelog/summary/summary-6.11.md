@@ -10,7 +10,7 @@
 ![Oricorio (Pom Pom Style)](/assets/portraits/0741/0001/Normal.png)
 ![Oricorio (Pa'u Style)](/assets/portraits/0741/0002/Normal.png)
 ![Oricorio (Sensu Style)](/assets/portraits/0741/0003/Normal.png)
-![Galarian Meowth](/assets/portraits/0052/0001/Normal.png)
+![Galarian Meowth](/assets/portraits/0052/0002/Normal.png)
 ![Perrserker](/assets/portraits/0863/Normal.png)
 ![Pikachu Libre](/assets/portraits/0025/0006/Normal.png)
 

@@ -42,7 +42,8 @@ self.addEventListener("fetch", async (event) => {
   const url = event.request.url
   if (
     event.request.method === "GET" &&
-    (url.includes("/assets/") || url.includes("/SpriteCollab/"))
+    (url.includes("/assets/") || url.includes("/SpriteCollab/")) &&
+    !url.includes("/assets/portraits/") // portraits are left to the browser's http cache
   )
     cacheFirst(event)
 })

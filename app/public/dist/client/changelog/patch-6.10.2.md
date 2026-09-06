@@ -2,8 +2,8 @@
 
 # Changes to Pokemon & Abilities
 
-- Nerf Alcremie Rainbow Swirl: 60 → 50 PP
-- Buff Alcremie Matcha: 40 → 60 max HP
+- Nerf Alcremie Rainbow Swirl Decoration: 60 → 50 PP
+- Buff Alcremie Matcha Decoration: 40 → 60 max HP
 - Buff Litten line: PP 100 → 80
 - Buff Fletchling line: PP: 100 → 85
 - Buff Venipede line: PP: 100 → 85

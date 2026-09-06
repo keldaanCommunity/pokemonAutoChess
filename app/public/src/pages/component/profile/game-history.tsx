@@ -11,6 +11,7 @@ import type {
 } from "../../../../../models/colyseus-models/game-record"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
+import { type Item, SynergyGivenByGem } from "../../../../../types"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { getPokemonCustomFromAvatar } from "../../../../../utils/avatar"
@@ -158,12 +159,14 @@ function GameHistoryRow({
         </span>
         <EloBadge elo={r.elo} />
         <ul className="synergies">
-          {getTopSynergies(r.pokemons).map(([type, value]) => (
-            <li key={r.time + type}>
-              <SynergyIcon type={type} />
-              <span>{value}</span>
-            </li>
-          ))}
+          {getTopSynergies(r.pokemons, r.unholdableItems).map(
+            ([type, value]) => (
+              <li key={r.time + type}>
+                <SynergyIcon type={type} />
+                <span>{value}</span>
+              </li>
+            )
+          )}
         </ul>
         <p className="date">{formatDate(r.time)}</p>
         <Team team={r.pokemons}></Team>
@@ -192,7 +195,8 @@ function GameHistoryRow({
 }
 
 function getTopSynergies(
-  team: IPokemonRecord[] | ArraySchema<IPokemonRecord>
+  team: IPokemonRecord[] | ArraySchema<IPokemonRecord>,
+  unholdableItems: Item[]
 ): [Synergy, number][] {
   const synergies = computeSynergies(
     team.map((pkmRecord) => {
@@ -204,6 +208,13 @@ function getTopSynergies(
       return pkm
     })
   )
+
+  for (const item of unholdableItems) {
+    const type = SynergyGivenByGem[item]
+    if (type) {
+      synergies.set(type, (synergies.get(type) ?? 0) + 1)
+    }
+  }
 
   const topSynergies = [...synergies.entries()]
     .sort((a, b) => {

@@ -123,8 +123,8 @@ export const SynergyTiers = {
   ],
   [Synergy.FAIRY]: [
     EffectEnum.AROMATIC_MIST,
-    EffectEnum.FAIRY_WIND,
-    EffectEnum.STRANGE_STEAM,
+    EffectEnum.FAIRY_AURA,
+    EffectEnum.PIXILATE,
     EffectEnum.MOON_FORCE
   ],
   [Synergy.ICE]: [

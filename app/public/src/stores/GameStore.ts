@@ -120,6 +120,8 @@ const gameSlice = createSlice({
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
+      // the json-clone flattens the board MapSchema to a plain object
+      if (action.payload.board) clone.board = action.payload.board
 
       const index = state.players.findIndex((p) => p.id === clone.id)
       if (index >= 0) {

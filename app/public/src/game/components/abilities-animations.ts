@@ -42,7 +42,7 @@ import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */
 const FeatherBaseAngles: Record<string, number> = {

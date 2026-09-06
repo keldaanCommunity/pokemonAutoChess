@@ -4,7 +4,7 @@ export enum DungeonMusic {
   A_NEW_WORLD = "A New World",
   APPLE_WOODS = "Apple Woods",
   AT_THE_SNOWY_MOUNTAIN = "At the Snowy Mountain",
-  AT_THE_END_OF_THE_DAY = "At the End of the Day", // UNUSED
+  AT_THE_END_OF_THE_DAY = "At the End of the Day",
   BARREN_VALLEY = "Barren Valley",
   BATTLE_WITH_RAYQUAZA = "Battle with Rayquaza",
   BEACH_CAVE = "Beach Cave",
@@ -57,7 +57,7 @@ export enum DungeonMusic {
   ICICLE_FOREST = "Icicle Forest",
   ILLUSION_STONE_CHAMBER = "Illusion Stone Chamber",
   IN_THE_FUTURE = "In the Future",
-  IN_THE_HANDS_OF_FATE = "In the Hands of Fate", // UNUSED
+  IN_THE_HANDS_OF_FATE = "In the Hands of Fate",
   IN_THE_NIGHTMARE = "In the Nightmare",
   JOB_CLEAR = "Job Clear!",
   KECLEONS_SHOP = "Kecleon's Shop",
@@ -102,7 +102,7 @@ export enum DungeonMusic {
   SHAYMIN_VILLAGE = "Shaymin Village",
   SILENT_CHASM = "Silent Chasm",
   SINISTER_WOODS = "Sinister Woods",
-  SKY_PEAK_CAVE = "Sky Peak Cave", // UNUSED
+  SKY_PEAK_CAVE = "Sky Peak Cave",
   SKY_PEAK_COAST = "Sky Peak Coast",
   SKY_PEAK_FINAL_PASS = "Sky Peak Final Pass",
   SKY_PEAK_FOREST = "Sky Peak Forest",
@@ -112,7 +112,7 @@ export enum DungeonMusic {
   SKY_TOWER_SUMMIT = "Sky Tower Summit",
   SOUTHERN_JUNGLE = "Southern Jungle",
   SPACIAL_CLIFFS = "Spacial Cliffs",
-  SPINDA_CAFE = "Spinda's Cafe", // UNUSED
+  SPINDA_CAFE = "Spinda's Cafe",
   SPRING_CAVE = "Spring Cave",
   SPRING_CAVE_DEPTHS = "Spring Cave Depths",
   STAFF_ROLL = "Staff Roll",

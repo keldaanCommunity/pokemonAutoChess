@@ -24,6 +24,7 @@ import { Synergy } from "../../../../../types/enum/Synergy"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
+import { isEntity } from "../../../game/components/pokemon-sprite"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { useKeyPress } from "../../utils/keyboard"
@@ -136,9 +137,6 @@ export function GamePokemonDetail(props: {
     props.origin
   ])
 
-  const isEntity = (
-    obj: IPokemonEntity | IPokemon | Pkm | null | undefined
-  ): obj is IPokemonEntity => obj != null && obj.hasOwnProperty("simulation")
   const isInFight = isEntity(props.pokemon)
 
   const getStatWithItemBonus = (stat: Stat): number | undefined => {
@@ -396,7 +394,10 @@ export function GamePokemonDetail(props: {
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
                 stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki" || ctrlKeyPressed
+                showAbilityTiers:
+                  props.origin === "wiki" ||
+                  props.origin === "planner" ||
+                  ctrlKeyPressed
               }}
               key={pokemon.id}
             />

@@ -1,4 +1,4 @@
-import { Item } from "./Item"
+import { Gift, Item } from "./Item"
 
 export const GiftsTier1 = [
   Item.BERRIES_GIFT,
@@ -9,7 +9,7 @@ export const GiftsTier1 = [
   Item.REGIONAL_TOUR,
   Item.BANQUET,
   Item.SMALL_EXP_GIFT
-] satisfies Item[]
+] satisfies Gift[]
 
 export const GiftsTier2 = [
   Item.GEMS_BUNDLE,
@@ -20,7 +20,7 @@ export const GiftsTier2 = [
   Item.LARGE_EXP_GIFT,
   Item.UNCOMMON_GIFT,
   Item.RARE_GIFT
-] satisfies Item[]
+] satisfies Gift[]
 
 export const GiftsTier3 = [
   Item.COMMON_GIFT,
@@ -31,10 +31,7 @@ export const GiftsTier3 = [
   Item.STAR_GIFT,
   Item.TOOLBOX,
   Item.DELUXE_BOX
-] satisfies Item[]
-
-export const Gifts = [...GiftsTier1, ...GiftsTier2, ...GiftsTier3] as const
-export type Gift = (typeof Gifts)[number]
+] satisfies Gift[]
 
 export const GiftShopPrices: { [key in Gift]: number } = {
   [Item.BERRIES_GIFT]: 0,

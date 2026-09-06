@@ -49,13 +49,7 @@ export default function GameSpectatePlayerInfo() {
             </span>
             <GameStreakInfo variant="inline" />
           </div>
-          <div
-            style={{
-              display: "flex",
-              gap: "1em",
-              alignItems: "center"
-            }}
-          >
+          <div className="game-spectate-player-stats">
             <span>{t("total")}</span>
             <span title={t("game_stats.total_money_earned")}>
               <img

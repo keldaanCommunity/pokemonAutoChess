@@ -11,6 +11,7 @@ export default function WikiGlossary() {
     "consumable_item",
     "unholdable_item",
     "removable_item",
+    "absorbed_item",
     "gift"
   ] as const
 
