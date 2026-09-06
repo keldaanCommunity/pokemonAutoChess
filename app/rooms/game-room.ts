@@ -867,7 +867,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     // we skip elo compute/game history if game is not finished
     // that is at least two players including one human are still alive
     if (playersAlive.length >= 2 && humansAlive.length >= 1) {
-      if (humansAlive.length > 1) {
+      const humansAliveLimit =
+        this.state.gameMode === GameMode.DOUBLE_UP ? 2 : 1
+      if (humansAlive.length > humansAliveLimit) {
         // this can happen if all players disconnect before the end
         // or if there's another technical issue
         // adding a log just in case
