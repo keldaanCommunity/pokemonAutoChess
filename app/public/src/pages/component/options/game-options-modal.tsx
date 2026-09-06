@@ -7,7 +7,7 @@ import { GADGETS } from "../../../../../config/game/gadgets"
 import { Language } from "../../../../../types/enum/Language"
 import { LanguageNames } from "../../../../dist/client/locales"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { usePreferences } from "../../../preferences"
+import { MAX_CONFIG_FPS, usePreferences } from "../../../preferences"
 import { selectLanguage } from "../../../stores/NetworkStore"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
@@ -222,12 +222,15 @@ export default function GameOptionsModal(props: {
               label={t("options.colorblind_mode")}
             />
             <label style={{ width: "100%", padding: "0 0.5em" }}>
-              {t("options.fps_limit")}: {preferences.fpsLimit}
+              {t("options.fps_limit")}:{" "}
+              {preferences.fpsLimit > MAX_CONFIG_FPS
+                ? t("options.fps_limit_unlimited")
+                : preferences.fpsLimit}
               <input
                 type="range"
                 min="1"
-                max="144"
                 value={preferences.fpsLimit}
+                max={MAX_CONFIG_FPS + 1}
                 onInput={(e) =>
                   setPreferences({
                     fpsLimit: Number.parseFloat(
