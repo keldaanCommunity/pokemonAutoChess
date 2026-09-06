@@ -239,7 +239,7 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
 }
 
 const giftXP = (amount: number) => (toPlayer: Player) => {
-  const xpActuallyGained = toPlayer.addExperience(24)
+  const xpActuallyGained = toPlayer.addExperience(amount)
   if (xpActuallyGained < amount) {
     toPlayer.addMoney(amount - xpActuallyGained, true, null)
   }
