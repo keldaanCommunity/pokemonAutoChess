@@ -3,7 +3,7 @@ import { DishByPkm } from "../../config/game/dishes"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
-import { Title, Transfer } from "../../types"
+import { Title, TMPerAbility, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -206,6 +206,10 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
           targetX: secondHitTarget.positionX,
           targetY: secondHitTarget.positionY
         })
+
+        if (pokemon.items.has(Item.RAZOR_FANG)) {
+          secondHitTarget.status.triggerArmorReduction(2000, secondHitTarget)
+        }
       }
     }
   }
@@ -291,21 +295,21 @@ export class RunningShoesOnMoveEffect extends OnMoveEffect {
   }
 }
 
-const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    cells.forEach((cell) => {
-      if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerParalysis(4000, cell.value, pokemon)
-        cell.value.status.triggerBlinded(4000, cell.value, pokemon)
-      }
-    })
-    pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
-    pokemon.removeItem(Item.SMOKE_BALL)
+const smokeBallEffect = ({ pokemon, board }) => {
+  const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+  cells.forEach((cell) => {
+    if (cell.value && cell.value.team !== pokemon.team) {
+      cell.value.status.triggerParalysis(4000, cell.value, pokemon)
+      cell.value.status.triggerBlinded(4000, cell.value, pokemon)
+    }
+  })
+  pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
+  pokemon.removeItem(Item.SMOKE_BALL)
+  if (pokemon.hp > 0) {
     pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board, false, false)
   }
-})
+}
 
 const ogerponMaskEffect = new OnItemDroppedEffect(
   ({ pokemon, player, item }) => {
@@ -538,6 +542,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.types.has(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
+          if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
+            // give back the previous TM
+            player.items.push(TMPerAbility.get(pokemon.tm)!)
+          }
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
@@ -823,7 +831,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.SMOKE_BALL]: [smokeBallEffect],
+  [Item.SMOKE_BALL]: [
+    new OnDamageReceivedEffect(({ pokemon, board }) => {
+      if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
+        smokeBallEffect({ pokemon, board })
+      }
+    }),
+    new OnDeathEffect(({ pokemon, board }) => {
+      if (pokemon.items.has(Item.SMOKE_BALL)) {
+        smokeBallEffect({ pokemon, board })
+      }
+    })
+  ],
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
@@ -1167,12 +1186,19 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.HEARTHFLAME_MASK]: [ogerponMaskEffect],
 
   [Item.FIRE_SHARD]: [
-    new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      if (pokemon.types.has(Synergy.FIRE) && player.life > 3) {
+    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
+      const lifeLost = player.doubleUpPartnerId ? 1 : 3
+      if (pokemon.types.has(Synergy.FIRE) && player.life > lifeLost) {
         pokemon.atk += 3
         pokemon.speed += 3
-        player.life = min(1)(player.life - 3)
+        player.life = min(1)(player.life - lifeLost)
         removeInArray(player.items, item)
+        if (player.doubleUpPartnerId) {
+          const partner = room.state.players.get(player.doubleUpPartnerId)
+          if (partner) {
+            partner.life = min(1)(partner.life - lifeLost)
+          }
+        }
       }
 
       return false // prevent item from being equipped

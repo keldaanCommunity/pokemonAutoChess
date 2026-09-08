@@ -6,6 +6,7 @@ export class MagicBounceStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    pokemon.status.triggerMagicBounce(5000)
+    pokemon.status.triggerMagicBounce(4000)
+    pokemon.status.triggerSilence(4000, pokemon, pokemon)
   }
 }

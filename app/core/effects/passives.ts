@@ -7,6 +7,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -340,23 +341,23 @@ export const WaterSpringEffect = new OnAbilityCastEffect((pokemon, board) => {
 
 const transformToBustedMimikyu = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.MIMIKYU_BUSTED
+  pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
   pokemon.changePassive(Passive.MIMIKYU_BUSTED)
   pokemon.addAttack(8, pokemon, 0, false)
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
+  }
 }
 
 const MimikuBustedTransformEffects = [
   new OnDamageReceivedEffect(({ pokemon }) => {
     if (pokemon.hp / pokemon.maxHP < 0.5) {
-      pokemon.index = PkmIndex[Pkm.MIMIKYU_BUSTED]
       transformToBustedMimikyu(pokemon)
       pokemon.status.triggerProtect(1500)
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.MIMIKYU_BUSTED)
-      }
     }
   }, Passive.MIMIKYU),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === Pkm.MIMIKYU_BUSTED) {
+    if (pokemon.name === Pkm.MIMIKYU_BUSTED) {
       transformToBustedMimikyu(pokemon) // reapply busted mimikyu buffs on resurrect
     }
   }, Passive.MIMIKYU)
@@ -364,6 +365,7 @@ const MimikuBustedTransformEffects = [
 
 const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.DARMANITAN_ZEN
+  pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
   pokemon.changePassive(Passive.DARMANITAN_ZEN)
   pokemon.skill = Ability.TRANSE
   pokemon.pp = 0
@@ -374,6 +376,9 @@ const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.range += 4
   pokemon.effects.add(EffectEnum.SPECIAL_ATTACKS)
   pokemon.toIdleState()
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
+  }
 }
 
 const DarmanitanZenTransformEffects = [
@@ -382,7 +387,6 @@ const DarmanitanZenTransformEffects = [
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.DARMANITAN
     ) {
-      pokemon.index = PkmIndex[Pkm.DARMANITAN_ZEN]
       const destination = board.getTeleportationCell(
         pokemon.positionX,
         pokemon.positionY,
@@ -392,13 +396,10 @@ const DarmanitanZenTransformEffects = [
         pokemon.moveTo(destination.x, destination.y, board, false)
 
       transformToDarmanitanZen(pokemon)
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.DARMANITAN_ZEN)
-      }
     }
   }, Passive.DARMANITAN),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === PkmIndex[Pkm.DARMANITAN_ZEN]) {
+    if (pokemon.name === Pkm.DARMANITAN_ZEN) {
       transformToDarmanitanZen(pokemon)
     }
   }, Passive.DARMANITAN)
@@ -406,6 +407,7 @@ const DarmanitanZenTransformEffects = [
 
 const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
+  pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
   pokemon.changePassive(Passive.GALARIAN_DARMANITAN_ZEN)
   pokemon.skill = Ability.TRANSE
   pokemon.pp = 0
@@ -420,6 +422,9 @@ const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.toIdleState()
   pokemon.addAttack(6, pokemon, 0, false)
   pokemon.addSpeed(-60, pokemon, 0, false)
+  if (pokemon.player) {
+    pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
+  }
 }
 
 const GalarianDarmanitanZenTransformEffects = [
@@ -428,16 +433,11 @@ const GalarianDarmanitanZenTransformEffects = [
       pokemon.hp < 0.3 * pokemon.maxHP &&
       pokemon.passive === Passive.GALARIAN_DARMANITAN
     ) {
-      pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]
       transformToGalarianDarmanitanZen(pokemon)
-
-      if (pokemon.player) {
-        pokemon.player.pokemonsPlayed.add(Pkm.GALARIAN_DARMANITAN_ZEN)
-      }
     }
   }, Passive.GALARIAN_DARMANITAN),
   new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.index === PkmIndex[Pkm.GALARIAN_DARMANITAN_ZEN]) {
+    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
       transformToGalarianDarmanitanZen(pokemon)
     }
   }, Passive.GALARIAN_DARMANITAN)
@@ -559,6 +559,7 @@ const FurCoatEffect = new OnStageStartEffect(({ pokemon, player }) => {
     if (pokemon.stacks >= pokemon.stacksRequired && player) {
       pokemon.stacks = 0
       player.items.push(Item.SILK_SCARF)
+      player.extraScarves += 1
     }
     pokemon.stacks = 0
   } else if (pokemon.stacks < pokemon.stacksRequired) {
@@ -669,13 +670,13 @@ class ZygardeCellsEffect extends PeriodicEffect {
             pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
             if (this.cellsCount >= 95) {
               pokemon.handleHeal(0.2 * pokemon.maxHP, pokemon, 0, false)
-              if (pokemon.index === PkmIndex[Pkm.ZYGARDE_10]) {
+              if (pokemon.name === Pkm.ZYGARDE_10) {
                 pokemon.addDefense(2, pokemon, 0, false)
                 pokemon.addSpecialDefense(2, pokemon, 0, false)
                 pokemon.addMaxHP(5, pokemon, 0, false)
                 pokemon.addSpeed(-12, pokemon, 0, false)
                 pokemon.range = min(1)(pokemon.range + 1)
-              } else if (pokemon.index === PkmIndex[Pkm.ZYGARDE_50]) {
+              } else if (pokemon.name === Pkm.ZYGARDE_50) {
                 pokemon.addAttack(5, pokemon, 0, false)
                 pokemon.addDefense(5, pokemon, 0, false)
                 pokemon.addSpecialDefense(5, pokemon, 0, false)
@@ -835,13 +836,18 @@ const commanderPassive = new OnSimulationStartEffect(
   ({ simulation, team, entity }) => {
     const dondozo = simulation.board
       .getAdjacentCells(entity.positionX, entity.positionY)
+      .map((cell) => cell.value)
       .find(
-        (cell) =>
-          cell.value &&
-          cell.value.name === Pkm.DONDOZO &&
-          cell.value.team === entity.team &&
-          cell.value.items.size < 3
-      )?.value
+        (p) =>
+          p &&
+          p.name === Pkm.DONDOZO &&
+          p.team === entity.team &&
+          [
+            Item.TATSUGIRI_CURLY,
+            Item.TATSUGIRI_DROOPY,
+            Item.TATSUGIRI_STRETCHY
+          ].every((commander) => p.items.has(commander) === false)
+      )
 
     if (dondozo) {
       // delete tatsugiri
@@ -1607,9 +1613,8 @@ export const PassiveEffects: Partial<
       let nbAllies = 0
       let transformed = false
 
-      const transformToHero = () => {
+      const transformToHero = (shouldEvolveBoardPokemon: boolean) => {
         transformed = true
-        const isFinizenOnBoard = entity.refToBoardPokemon.name === Pkm.FINIZEN
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
         entity.addAttack(18, entity, 0, false)
@@ -1617,19 +1622,25 @@ export const PassiveEffects: Partial<
         entity.addDefense(5, entity, 0, false)
         entity.addSpecialDefense(5, entity, 0, false)
         entity.hp = entity.maxHP
-        if (entity.player && !entity.isGhostOpponent && isFinizenOnBoard) {
+        if (
+          entity.player &&
+          !entity.isGhostOpponent &&
+          entity.refToBoardPokemon.name === Pkm.FINIZEN &&
+          shouldEvolveBoardPokemon
+        ) {
           entity.player.pokemonsPlayed.add(Pkm.PALAFIN_HERO)
-          entity.player.transformPokemon(
+          const newPokemon = entity.player.transformPokemon(
             entity.refToBoardPokemon as Pokemon,
             Pkm.PALAFIN
           )
+          entity.refToBoardPokemon = newPokemon
         }
       }
 
       const transformToHeroOnDeathEffect = new OnDeathEffect(() => {
         nbAlliesKo++
         if (!transformed && (nbAlliesKo >= 5 || nbAlliesKo >= nbAllies)) {
-          transformToHero()
+          transformToHero(true)
         }
       })
 
@@ -1642,13 +1653,13 @@ export const PassiveEffects: Partial<
 
       // edge case no allies: transform immediately
       if (nbAllies === 0) {
-        transformToHero()
+        transformToHero(true)
       }
 
       entity.effectsSet.add(
         new OnResurrectionEffect(() => {
           if (transformed) {
-            transformToHero() // reapply transformation if Finizen is resurrected in Hero form
+            transformToHero(false) // reapply transformation if Finizen is resurrected in Hero form
           }
         })
       )
@@ -1693,7 +1704,7 @@ export const PassiveEffects: Partial<
       if (newY === 3 && pokemon.name === Pkm.MELOETTA) {
         player.transformPokemon(pokemon, Pkm.PIROUETTE_MELOETTA)
       }
-      if (newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
+      if (newY > 0 && newY !== 3 && pokemon.name === Pkm.PIROUETTE_MELOETTA) {
         player.transformPokemon(pokemon, Pkm.MELOETTA)
       }
     })
@@ -1716,6 +1727,9 @@ export const PassiveEffects: Partial<
   ],
   [Passive.PRISM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.items.has(Item.SHINY_STONE)) {
+        inSpotlight = true
+      }
       if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
       } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
@@ -1823,7 +1837,7 @@ export const PassiveEffects: Partial<
 
   [Passive.AEGISLASH]: [
     new OnResurrectionEffect(({ pokemon }) => {
-      if (pokemon.index === PkmIndex[Pkm.AEGISLASH_BLADE]) {
+      if (pokemon.name === Pkm.AEGISLASH_BLADE) {
         // preserve the stat changes of blade form when resurrecting
         pokemon.addAttack(10, pokemon, 0, false)
         pokemon.addDefense(-5, pokemon, 0, false)
@@ -1844,6 +1858,40 @@ export const PassiveEffects: Partial<
           pkm.effects.add(EffectEnum.STEELY_SPIRIT_BONUS)
         }
       })
+    })
+  ],
+
+  [Passive.MYTHOSIS]: [
+    new OnDeathEffect(({ pokemon }) => {
+      const prevolution = Object.values(Pkm).find((pkm) => {
+        const data = getPokemonData(pkm)
+        return (
+          data.evolution === pokemon.name ||
+          data.evolutions?.includes(pokemon.name)
+        )
+      })
+      if (pokemon.simulation && prevolution) {
+        for (let i = 0; i < 2; i++) {
+          const freeCell = pokemon.simulation.getClosestFreeCellToPokemonEntity(
+            pokemon,
+            pokemon.team
+          )
+          if (freeCell) {
+            const copy = PokemonFactory.createPokemonFromName(prevolution, {
+              shiny: pokemon.shiny
+            })
+
+            const entity = pokemon.simulation.addPokemon(
+              copy,
+              freeCell.x,
+              freeCell.y,
+              pokemon.team,
+              true
+            )
+            entity.pp = Math.floor(pokemon.pp / 2)
+          }
+        }
+      }
     })
   ]
 }

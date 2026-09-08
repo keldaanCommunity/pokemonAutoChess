@@ -3814,6 +3814,12 @@ export const UnownsForScribble: Pkm[] = [
   Pkm.UNOWN_QUESTION
 ]
 
+export const Tatsugiris: Pkm[] = [
+  Pkm.TATSUGIRI_CURLY,
+  Pkm.TATSUGIRI_DROOPY,
+  Pkm.TATSUGIRI_STRETCHY
+]
+
 export const Pillars = [
   Pkm.PILLAR_WOOD,
   Pkm.PILLAR_IRON,

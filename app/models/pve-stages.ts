@@ -105,6 +105,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       if (shinyEncounter)
         return [Item.RED_SCALE, pickRandomIn(ItemComponentsNoFossilOrScarf)]
       else return pickNRandomIn(ItemComponentsNoFossilOrScarf, 1)
+    },
+    statBoosts: {
+      [Stat.AP]: -50
     }
   },
 

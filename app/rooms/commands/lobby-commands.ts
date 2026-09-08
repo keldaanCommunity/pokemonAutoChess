@@ -528,6 +528,7 @@ export class ChoosePalCommand extends Command<
 > {
   async execute({ client, playerUid }: { client: Client; playerUid: string }) {
     try {
+      if(playerUid === client.auth.uid) return; // can't choose yourself as pal
       const u = this.room.users.get(client.auth.uid)
       if (client.auth.uid && u) {
         let eventData = {}

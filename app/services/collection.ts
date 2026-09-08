@@ -78,9 +78,22 @@ export async function buyEmotionForUser(
   const cost = getEmotionCost(emotion, shiny)
   const shardIndex = PkmIndex[getBaseAltForm(PkmByIndex[index])]
 
-  const mongoItem = mongoUser.pokemonCollection.get(index)
+  let mongoItem = mongoUser.pokemonCollection.get(index)
   const mongoShardItem = mongoUser.pokemonCollection.get(shardIndex)
-  if (!mongoItem || !mongoShardItem) return null
+  if (!mongoShardItem) return null // not supposed to happen, the item should be in collection so you have shards to buy the emotion
+  if (!mongoItem) {
+    // This alt form is not yet in collection, create new collection item
+    const newCollectionItem: IPokemonCollectionItemMongo = {
+      id: index,
+      unlocked: Buffer.alloc(5, 0),
+      dust: 0,
+      selectedEmotion: Emotion.NORMAL,
+      selectedShiny: false,
+      played: 0
+    }
+    mongoUser.pokemonCollection.set(index, newCollectionItem)
+    mongoItem = newCollectionItem
+  }
 
   if (CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)) {
     return { userDoc: mongoUser }

@@ -1,5 +1,10 @@
 import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
+import {
+  type EnvironmentalEffect,
+  EnvironmentalEffects
+} from "../../../../../types/enum/Effect"
+import { isIn } from "../../../../../utils/array"
 import PokemonPortrait from "../pokemon-portrait"
 import ProgressBar from "../progress-bar/progress-bar"
 
@@ -10,7 +15,16 @@ export default function GameDpsHeal(props: {
   const { t } = useTranslation()
   return (
     <div className="game-dps-bar">
-      <PokemonPortrait avatar={props.dpsMeter.name} />
+      {isIn(EnvironmentalEffects, props.dpsMeter.id) ? (
+        <img
+          src={`assets/icons/effects/${props.dpsMeter.id as EnvironmentalEffect}.svg`}
+          className="pokemon-portrait"
+          title={t(`effect.${props.dpsMeter.id as EnvironmentalEffect}`)}
+          alt={t(`effect.${props.dpsMeter.id as EnvironmentalEffect}`)}
+        />
+      ) : (
+        <PokemonPortrait avatar={props.dpsMeter.name} />
+      )}
       <div className="game-dps-progress-wrapper">
         <p>{props.dpsMeter.heal + props.dpsMeter.shield}</p>
         <ProgressBar className="my-progress is-primary">

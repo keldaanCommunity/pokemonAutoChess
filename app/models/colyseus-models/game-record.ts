@@ -3,11 +3,16 @@ import { Emotion } from "../../types"
 import { GameMode } from "../../types/enum/Game"
 import type { Item } from "../../types/enum/Item"
 import { type Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { getPokemonCustomFromAvatar } from "../../utils/avatar"
+import PokemonFactory from "../pokemon-factory"
+import type { Pokemon } from "./pokemon"
+
 export interface IPokemonRecord {
   name: Pkm
   items: Item[] | ArraySchema<Item>
   avatar: string
 }
+
 export class PokemonRecord extends Schema implements IPokemonRecord {
   @type("string") name: Pkm
   @type("string") avatar: string
@@ -62,4 +67,14 @@ export class GameRecord extends Schema implements IGameRecord {
       this.pokemons.push(new PokemonRecord(pokemon))
     })
   }
+}
+
+export const pokemonFromRecord = (record: IPokemonRecord): Pokemon => {
+  const pokemon = PokemonFactory.createPokemonFromName(record.name)
+  record.items.forEach((item) => {
+    pokemon.items.add(item)
+  })
+  const { shiny } = getPokemonCustomFromAvatar(record.avatar)
+  pokemon.shiny = shiny ?? false
+  return pokemon
 }

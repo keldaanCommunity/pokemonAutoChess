@@ -1,5 +1,5 @@
 import type Phaser from "phaser"
-import type PokemonSprite from "../public/src/game/components/pokemon"
+import type PokemonSprite from "../public/src/game/components/pokemon-sprite"
 import type { DebugScene } from "../public/src/game/scenes/debug-scene"
 import type GameScene from "../public/src/game/scenes/game-scene"
 import type { Ability } from "./enum/Ability"

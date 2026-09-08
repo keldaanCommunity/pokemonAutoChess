@@ -11,7 +11,7 @@ export class IronTailStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(([1, 1, 1, 2][pokemon.stars - 1] ?? 2) * pokemon.def)
+    const damage = Math.round(([1, 1, 2, 4][pokemon.stars - 1] ?? 4) * pokemon.def)
     const cellsHit = board.getCellsInFront(pokemon, target, 1)
 
     for (const cell of cellsHit) {

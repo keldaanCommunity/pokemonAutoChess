@@ -160,6 +160,7 @@ class GameContainer {
       "maxHP",
       "shield",
       "pp",
+      "maxPP",
       "atk",
       "def",
       "speDef",

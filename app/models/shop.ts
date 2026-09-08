@@ -118,6 +118,8 @@ export function getSellPrice(
     price = SellPrices.FALINKS_TROOPER
   } else if (name == Pkm.MELTAN) {
     price = SellPrices.MELTAN
+  } else if (name === Pkm.PIKACHU_LIBRE || name === Pkm.PIKACHU_SURFER) {
+    price = SellPrices.PIKACHU
   } else if (name === Pkm.MAGIKARP) {
     price = SellPrices.MAGIKARP
   } else if (name === Pkm.FEEBAS) {

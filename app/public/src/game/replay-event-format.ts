@@ -3,10 +3,12 @@
 // the replay.eventlog.row.* templates; game-data nouns route through the game's own locale keys, so a bump needs no new strings for them
 import type { TFunction } from "i18next"
 import { Transfer } from "../../../types"
+import { EnvironmentalEffects } from "../../../types/enum/Effect"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 import { getRankLabel } from "../../../types/strings/Strings"
+import { isIn } from "../../../utils/array"
 import { statusName } from "./replay-combat-scan"
 
 // SCREAMING_SNAKE enum value to Title Case (ICE_SPINNER becomes "Ice Spinner"); derived so it survives a bump
@@ -53,14 +55,14 @@ const damageType = (t: TFunction, n: number | undefined): string =>
   typedT(t)(`damage.${AttackType[n ?? AttackType.PHYSICAL] ?? "PHYSICAL"}`)
 
 // camelCase status field to the game's Status enum value (also its status.* label key); typed to Status so a renamed
-// member fails tsc. names diverge from fields (armorReduction is ARMOR_BREAK, poisonStacks is POISONNED, enraged is
+// member fails tsc. names diverge from fields (armorReduction is ARMOR_BREAK, poisonStacks is POISONED, enraged is
 // RAGE). the other ~11 fields have no status.* label key (some, like spikeArmor/magicBounce/reflect, have a Status
 // member but no label string) and fall back to statusName()
 const STATUS_LOCALE_KEY: Record<string, Status> = {
   burn: Status.BURN,
   silence: Status.SILENCE,
   fatigue: Status.FATIGUE,
-  poisonStacks: Status.POISONNED,
+  poisonStacks: Status.POISONED,
   freeze: Status.FREEZE,
   protect: Status.PROTECT,
   sleep: Status.SLEEP,
@@ -374,7 +376,11 @@ export function formatMessageRow(
           x?: number
           y?: number
         }
-        const src = o?.index ? pkmName(t, PkmByIndex[o.index]) : "?"
+        const src = isIn(EnvironmentalEffects, o.index)
+          ? t(`effect.${o.index}`)
+          : o?.index
+            ? pkmName(t, PkmByIndex[o.index])
+            : "?"
         const target = info?.target
           ? pkmName(t, info.target)
           : `(${o?.x},${o?.y})`
@@ -393,7 +399,11 @@ export function formatMessageRow(
           x?: number
           y?: number
         }
-        const src = o?.index ? pkmName(t, PkmByIndex[o.index]) : "?"
+        const src = isIn(EnvironmentalEffects, o.index)
+          ? t(`effect.${o.index}`)
+          : o?.index
+            ? pkmName(t, PkmByIndex[o.index])
+            : "?"
         const target = info?.target
           ? pkmName(t, info.target)
           : `(${o?.x},${o?.y})`

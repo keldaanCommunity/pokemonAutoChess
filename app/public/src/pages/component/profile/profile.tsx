@@ -138,7 +138,7 @@ function OtherProfileActions(props: {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the ban:`)
-          ban({ uid: user.uid, reason: reason ?? "" })
+          if (reason) ban({ uid: user.uid, reason })
         }}
       >
         {t("ban_user")}
@@ -151,7 +151,7 @@ function OtherProfileActions(props: {
         className="bubbly red"
         onClick={() => {
           const reason = prompt(`Reason for the unban:`)
-          unban({ uid: user.uid, reason: reason ?? "" })
+          if (reason) unban({ uid: user.uid, reason })
         }}
       >
         {t("unban_user")}

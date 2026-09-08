@@ -46,7 +46,7 @@ export default function AfterMenu() {
       <div className="my-container is-centered">
         {playerRank && (
           <>
-            <div className="player-rank">
+            <div className="player-rank after-header-reveal">
               {playerRank <= 3 && (
                 <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
               )}
@@ -56,7 +56,7 @@ export default function AfterMenu() {
               <GameModeIcon gameMode={gameMode} />
               {t(`game_modes.${gameMode}`)}
             </p>
-            <div className="player-gains">
+            <div className="player-gains after-header-reveal">
               {shouldShowElo && (
                 <p className="player-elo">
                   ELO {newElo} (
@@ -83,9 +83,18 @@ export default function AfterMenu() {
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => {
+            {players.map((player, index) => {
               return (
-                <tr key={player.id}>
+                <tr
+                  key={player.id}
+                  className="after-row"
+                  style={
+                    {
+                      "--i": players.length - 1 - index,
+                      "--stagger": `${2.4 / players.length}s`
+                    } as React.CSSProperties
+                  }
+                >
                   <td>{player.rank}</td>
                   <td>
                     <Avatar
@@ -121,13 +130,6 @@ export default function AfterMenu() {
                       />{" "}
                       {player.gameStats.rerollCount}
                     </p>
-                    <Tooltip
-                      id={`stats-tooltip-${player.id}`}
-                      className="custom-theme-tooltip"
-                      place="right"
-                    >
-                      <PlayerStatsTooltip player={player} />
-                    </Tooltip>
                   </td>
                   <td>
                     <Team team={player.pokemons} />
@@ -150,6 +152,15 @@ export default function AfterMenu() {
       </div>
       <GamePokemonDetailTooltip origin="after" />
       <ItemDetailTooltip />
+      {players.map((player) => (
+        <Tooltip
+          id={`stats-tooltip-${player.id}`}
+          className="custom-theme-tooltip"
+          place="right"
+        >
+          <PlayerStatsTooltip player={player} />
+        </Tooltip>
+      ))}
     </div>
   )
 }

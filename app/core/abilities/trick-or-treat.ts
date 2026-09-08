@@ -1,5 +1,8 @@
 import { Ability } from "../../types/enum/Ability"
+import { AbsorbedItems } from "../../types/enum/Item";
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
+import { isIn } from "../../utils/array";
+import { pickRandomIn } from "../../utils/random";
 import { schemaValues } from "../../utils/schemas"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -16,9 +19,9 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     if (target.items.size > 0) {
-      const item = schemaValues(target.items)[0]!
-      target.removeItem(item)
-      pokemon.addItem(item)
+      const item = pickRandomIn(schemaValues(target.items).filter(item => !isIn(AbsorbedItems, item)))
+      const removed = target.removeItem(item)
+      if(removed) pokemon.addItem(item)
     } else {
       // transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill

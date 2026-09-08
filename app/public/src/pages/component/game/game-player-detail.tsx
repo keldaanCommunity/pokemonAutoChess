@@ -27,6 +27,10 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
       ? getDistance(props.player, connectedPlayer, false)
       : null
 
+  const playerName = props.player.isBot
+    ? t(`pkm.${props.player.name as Pkm}`)
+    : props.player.name
+
   return (
     <div>
       <div
@@ -36,7 +40,7 @@ export default function GamePlayerDetail(props: { player: IPlayer }) {
           alignItems: "center"
         }}
       >
-        <span className="player-name">{props.player.name}</span>
+        <span className="player-name">{playerName}</span>
         <span>
           {t("lvl")} {props.player.experienceManager.level}
         </span>
