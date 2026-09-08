@@ -199,6 +199,6 @@ export enum Passive {
   UXIE = "UXIE",
   NECTAR = "NECTAR",
   STEELY_SPIRIT = "STEELY_SPIRIT",
-  MYTHOSIS = "MYTHOSIS",
+  MITOSIS = "MITOSIS",
   WURMPLE = "WURMPLE"
 }

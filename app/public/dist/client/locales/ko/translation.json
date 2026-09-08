@@ -3531,7 +3531,7 @@
 		"PASSIMIAN": "내던숭이는 BALL을 가진 채로 싸운다.",
 		"NECTAR": "화분이 성장을 완료하면 그 색에 맞는 꿀을 얻을 수 있다.",
 		"STEELY_SPIRIT": "ADJACENT_IN_THE_SAME_ROW 같은 편은 ATK의 10%를 TRUE로 입힌다.",
-		"MYTHOSIS": "이 포켓몬은 기절하고 나서 진화 전 단계 2마리로 분할된다. 각 개체는 도구를 지니지 않고 현재 PP의 절반을 보유한다.",
+		"MITOSIS": "이 포켓몬은 기절하고 나서 진화 전 단계 2마리로 분할된다. 각 개체는 도구를 지니지 않고 현재 PP의 절반을 보유한다.",
 		"LYCANROC_DUSK": "$t(pkm.LYCANROC_DUSK)은 NIGHT과 BLOODMOON일 때 한낮의 모습으로, ZENITH일 때 한낮의 모습으로 변한다.",
 		"WURMPLE": "개무소는 POISON 시너지가 활성화되어 있다면 카스쿤으로, 그렇지 않다면 실쿤으로 진화한다.",
 		"LYCANROC_NIGHT": "$t(pkm.LYCANROC_NIGHT)은 DROUGHT일 때 황혼의 모습으로, ZENITH일 때 한낮의 모습으로 변한다.",

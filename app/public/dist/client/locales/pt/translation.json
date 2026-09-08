@@ -3534,7 +3534,7 @@
 		"LYCANROC_DUSK": "$t(pkm.LYCANROC_DUSK) se transforma para a forma noturna durante a NIGHT e BLOODMOON ou forma diurna durante ZENITH",
 		"LYCANROC_NIGHT": "$t(pkm.LYCANROC_NIGHT) se transforma na forma crepuscular durante DROUGHT ou forma diurna durante ZENITH",
 		"LYCANROC_DAY": "$t(pkm.LYCANROC_DAY se transforma na forma crepuscular durante DROUGHT ou  para a forma noturna durante a NIGHT e BLOODMOON",
-		"MYTHOSIS": "Quando KO, o Pokémon se divide em duas cópias da sua forma evolutiva prévia, sem itens e com a metade do PP atual "
+		"MITOSIS": "Quando KO, o Pokémon se divide em duas cópias da sua forma evolutiva prévia, sem itens e com a metade do PP atual "
 	},
 	"stat": {
 		"ATK": "Ataque",

@@ -2361,7 +2361,7 @@ export class Duosion extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.PSYCHIC
-  passive = Passive.MYTHOSIS
+  passive = Passive.MITOSIS
 }
 
 export class Reuniclus extends Pokemon {
@@ -2376,7 +2376,7 @@ export class Reuniclus extends Pokemon {
   maxPP = 90
   range = 2
   skill = Ability.PSYCHIC
-  passive = Passive.MYTHOSIS
+  passive = Passive.MITOSIS
 }
 
 export class Shinx extends Pokemon {

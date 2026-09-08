@@ -1861,7 +1861,7 @@ export const PassiveEffects: Partial<
     })
   ],
 
-  [Passive.MYTHOSIS]: [
+  [Passive.MITOSIS]: [
     new OnDeathEffect(({ pokemon }) => {
       const prevolution = Object.values(Pkm).find((pkm) => {
         const data = getPokemonData(pkm)
