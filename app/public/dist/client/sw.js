@@ -1,7 +1,7 @@
 /* Change this cache name every time you want to force players 
   to invalidate their cache and download all assets again */
 
-const CACHE_NAME = "CACHE v6.9.0.2026-05-15.2"
+const CACHE_NAME = "CACHE v6.11.2026-08-21.0"
 
 // Cache-first strategy
 const cacheFirst = (event) => {
@@ -42,7 +42,8 @@ self.addEventListener("fetch", async (event) => {
   const url = event.request.url
   if (
     event.request.method === "GET" &&
-    (url.includes("/assets/") || url.includes("/SpriteCollab/"))
+    (url.includes("/assets/") || url.includes("/SpriteCollab/")) &&
+    !url.includes("/assets/portraits/") // portraits are left to the browser's http cache
   )
     cacheFirst(event)
 })

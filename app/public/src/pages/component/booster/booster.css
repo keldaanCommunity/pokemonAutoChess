@@ -3,6 +3,7 @@
   height: 90vh;
   width: 1800px;
   max-width: 95vw;
+  padding: 1em;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -19,7 +20,7 @@
 #boosters-page .actions {
   text-align: center;
   position: relative;
-  bottom: 1em;
+  bottom: 0;
   color: var(--color-fg-primary);
   display: flex;
   align-items: center;

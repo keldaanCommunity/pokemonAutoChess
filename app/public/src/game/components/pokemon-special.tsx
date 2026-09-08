@@ -5,7 +5,7 @@ import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import type GameScene from "../scenes/game-scene"
 import { GameDialog } from "./game-dialog"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 export default class PokemonSpecial extends PokemonSprite {
   detail: GameDialog | null = null

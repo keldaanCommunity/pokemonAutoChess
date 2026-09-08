@@ -2,6 +2,7 @@ import type { ArraySchema, SetSchema } from "@colyseus/schema"
 import { GameObjects } from "phaser"
 import type Player from "../../../../models/colyseus-models/player"
 import {
+  AbsorbedItems,
   Berries,
   Dishes,
   type Item,
@@ -45,16 +46,18 @@ export default class ItemsContainer extends GameObjects.Container {
     this.removeAll(true)
 
     const itemSize = this.pokemonId === null ? 70 : 25
-    const ITEMS_PER_COLUMN = 6
-    const items = schemaValues(inventory)
+    const itemsPerColumn = this.pokemonId === null ? 6 : 3
+    let items = schemaValues(inventory)
+    const absorbedItem = items.find((i) => isIn(AbsorbedItems, i))
+    items = items.filter((i) => !isIn(AbsorbedItems, i))
 
     this.items = []
     items
       .sort((a, b) => this.getOrderPriority(b) - this.getOrderPriority(a))
       .forEach((item, i) => {
         this.items.push(item)
-        const x = -1 * itemSize * Math.floor(i / ITEMS_PER_COLUMN)
-        const y = (i % ITEMS_PER_COLUMN) * itemSize
+        const x = -1 * itemSize * Math.floor(i / itemsPerColumn)
+        const y = (i % itemsPerColumn) * itemSize
         this.add(
           new ItemContainer(
             this.scene,
@@ -66,6 +69,22 @@ export default class ItemsContainer extends GameObjects.Container {
           )
         )
       })
+
+    if (absorbedItem) {
+      this.items.push(absorbedItem)
+      const x = -1.5 * itemSize
+      const y = 0
+      this.add(
+        new ItemContainer(
+          this.scene,
+          x,
+          y,
+          absorbedItem,
+          this.pokemonId,
+          this.playerId
+        )
+      )
+    }
   }
 
   getOrderPriority(item: Item): number {

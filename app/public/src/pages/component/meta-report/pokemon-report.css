@@ -35,6 +35,12 @@
   flex-direction: column;
 }
 
+@media (max-width: 799px) {
+  #pokemon-report .pokemon-distribution-chart {
+    display: none;
+  }
+}
+
 .view-switcher {
   display: flex;
   gap: 4px;
