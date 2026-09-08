@@ -2469,7 +2469,19 @@
 		"APPETIZER": "Aperitivo",
 		"LUNCH_BREAK": "Hora do Almoço",
 		"BANQUET": "Banquete",
-		"COACHING": "Treinamento"
+		"COACHING": "Treinamento",
+		"STRANGE_STEAM": "Vapor estranho ",
+		"COTTON_BALL": "Bola de Lã",
+		"CURSE": "Maldição",
+		"SANDSTORM": "Tempestade de areia",
+		"TIDAL_WAVE": "Maremoto",
+		"STICKY_WEB": "Teia grudenta",
+		"LIGHTNING_STRIKE": "Raio",
+		"TOXIC_SPIKES": "Espinhos tóxicos",
+		"STEALTH_ROCKS": "Rochas Furtivas",
+		"SPIKES": "Espinhos",
+		"HAIL": "Nevasca",
+		"EMBER": "Brasa"
 	},
 	"effect_description": {
 		"STAMINA": "Ganhe 15 de SHIELD. Receba um SILK_SCARF",
@@ -2957,7 +2969,8 @@
 		"PINK_NECTAR": "Néctar Rosa",
 		"PURPLE_NECTAR": "Néctar Púrpura",
 		"YELLOW_NECTAR": "Néctar Amarelo",
-		"RED_NECTAR": "Néctar Vermelho"
+		"RED_NECTAR": "Néctar Vermelho",
+		"LUCKY_EGG": "Ovo da sorte"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Um fóssil de um Pokémon que viveu em tempos pré-históricos",
@@ -3317,7 +3330,8 @@
 		"PINK_NECTAR": "Pode ser dado a Oricorio para trocá-lo para o Estilo Tranquilo",
 		"PURPLE_NECTAR": "Pode ser dado a Oricorio para trocá-lo para o Estilo Refinado",
 		"YELLOW_NECTAR": "Pode ser dado a Oricorio para trocá-lo para o Estilo Animado",
-		"RED_NECTAR": "Pode ser dado a Oricorio para trocá-lo para o Estilo Apaixonado"
+		"RED_NECTAR": "Pode ser dado a Oricorio para trocá-lo para o Estilo Apaixonado",
+		"LUCKY_EGG": "Recebe 30 de LUCK e 30 de AP"
 	},
 	"passive_description": {
 		"NONE": "Sem passiva",
@@ -3516,7 +3530,11 @@
 		"PASSIMIAN": "Passimian já vem com uma BALL equipada",
 		"UXIE": "XP ganho: {{stacks}}",
 		"NECTAR": "Quando um vaso de flores estiver totalmente crescido, receba néctar de acordo com sua cor.",
-		"STEELY_SPIRIT": "Aliados ADJACENT_IN_THE_SAME_ROW causam 10% do seu ATK como TRUE"
+		"STEELY_SPIRIT": "Aliados ADJACENT_IN_THE_SAME_ROW causam 10% do seu ATK como TRUE",
+		"LYCANROC_DUSK": "$t(pkm.LYCANROC_DUSK) se transforma para a forma noturna durante a NIGHT e BLOODMOON ou forma diurna durante ZENITH",
+		"LYCANROC_NIGHT": "$t(pkm.LYCANROC_NIGHT) se transforma na forma crepuscular durante DROUGHT ou forma diurna durante ZENITH",
+		"LYCANROC_DAY": "$t(pkm.LYCANROC_DAY se transforma na forma crepuscular durante DROUGHT ou  para a forma noturna durante a NIGHT e BLOODMOON",
+		"MYTHOSIS": "Quando KO, o Pokémon se divide em duas cópias da sua forma evolutiva prévia, sem itens e com a metade do PP atual "
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -4808,7 +4826,8 @@
 			"consumable_item": "Itens consumíveis são itens de uso único que são removidos quando seu efeito é utilizado.",
 			"unholdable_item": "Itens não equipáveis são itens que não podem ser equipados por um Pokémon. Seu efeito ainda se aplica a toda a sua equipe.",
 			"removable_item": "Itens removíveis são itens que podem ser retirados de um Pokémon ao colocá-lo no banco.",
-			"gift": "Presentes são itens dados ao seu parceiro de equipe quando você os escolhe"
+			"gift": "Presentes são itens dados ao seu parceiro de equipe quando você os escolhe",
+			"absorbed_item": "Itens Absortos não podem ser colocados no espaço regular de itens, não podem ser roubados ou derrubados durante a luta, apenas um item poder ser Absorto por vez"
 		},
 		"status": {
 			"board_effects": "Efeito de Tabuleiro",
@@ -5389,5 +5408,6 @@
 		"not_confirmed": "Seu parceiro precisa inserir seu nome em troca para confirmar a equipe.",
 		"enter_pal_name": "Digite o nome do seu parceiro",
 		"change_pal": "Trocar parceiro"
-	}
+	},
+	"absorbed_item": "Absorto"
 }
