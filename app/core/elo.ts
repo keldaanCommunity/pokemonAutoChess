@@ -1,5 +1,5 @@
 import type { ISimplePlayer } from "../types"
-import { GameMode } from "../types/enum/Game"
+import type { GameMode } from "../types/enum/Game"
 import { average, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"
 
@@ -33,15 +33,8 @@ export function computeElo(
 
   let newElo = min(0)(Math.floor(average(...eloGains)))
   //logger.debug("mean gain", meanGain)
-  if (
-    rank <= Math.floor(players.length / 2) &&
-    newElo < previousElo &&
-    !isBot
-  ) {
-    newElo = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
-  }
-  if (rank === 1 && gameMode === GameMode.RANKED) {
-    newElo = min(previousElo + 1)(newElo) // ensure you get minimum +1 if finishing first
+  if (rank <= Math.floor(players.length / 2) && !isBot) {
+    newElo = min(previousElo + 1)(newElo) // ensure you get minimum +1 if you're on the upper part of the ranking
   }
 
   if (

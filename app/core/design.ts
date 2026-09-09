@@ -157,6 +157,9 @@ export default class Design {
 
     // smeargle slot
     this.terrain[8][31] = TerrainType.GROUND
+
+    // partner trade tile slot
+    this.drawGroundRect(31, 16, 2, 2, false)
   }
 
   drawGroundRect(

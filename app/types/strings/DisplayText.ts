@@ -9,3 +9,4 @@ export type DisplayText =
   | "not_hungry"
   | "full"
   | "already_held"
+  | "bark"

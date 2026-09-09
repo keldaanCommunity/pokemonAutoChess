@@ -96,6 +96,7 @@ export async function fetchEventLeaderboard() {
       "avatar",
       "eventPoints",
       "eventFinishTime",
+      "eventData",
       "uid",
       "twitchLogin",
       "twitchDisplayName"
@@ -110,6 +111,7 @@ export async function fetchEventLeaderboard() {
       avatar: user.avatar,
       value: user.eventPoints,
       eventFinishTime: user.eventFinishTime,
+      eventData: user.eventData,
       id: user.uid,
       twitchLogin: user.twitchLogin,
       twitchDisplayName: user.twitchDisplayName

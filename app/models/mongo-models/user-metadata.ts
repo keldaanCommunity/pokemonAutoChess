@@ -79,6 +79,10 @@ const userMetadataSchema = new Schema({
     type: Date,
     sparse: true
   },
+  eventData: {
+    type: Schema.Types.Mixed,
+    default: {}
+  },
   booster: {
     type: Number,
     default: 0

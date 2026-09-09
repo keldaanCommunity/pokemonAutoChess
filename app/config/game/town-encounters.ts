@@ -1,5 +1,9 @@
+import { DungeonMusic } from "../../types/enum/Dungeon"
 import { Pkm } from "../../types/enum/Pokemon"
-import type { TownEncounter } from "../../types/enum/TownEncounter"
+import {
+  type TownEncounter,
+  TownEncounters
+} from "../../types/enum/TownEncounter"
 import { randomWeighted } from "../../utils/random"
 
 export const TownEncounterSellPrice: { [encounter in TownEncounter]?: number } =
@@ -21,7 +25,7 @@ export const TownEncountersByStage: {
     [Pkm.CINCCINO]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
-    [Pkm.MAGNEZONE]: 1 / 20,
+    [Pkm.MAGNEZONE]: 1 / 40,
     [Pkm.LAPRAS]: 1 / 20,
     [Pkm.LUDICOLO]: 1 / 20
   },
@@ -45,7 +49,8 @@ export const TownEncountersByStage: {
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
-    [Pkm.LAPRAS]: 1 / 20
+    [Pkm.LAPRAS]: 1 / 20,
+    [Pkm.CHIMECHO]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,
@@ -55,7 +60,8 @@ export const TownEncountersByStage: {
     [Pkm.REGIROCK]: 1 / 20,
     [Pkm.MUNCHLAX]: 1 / 20,
     [Pkm.WOBBUFFET]: 1 / 20,
-    [Pkm.KINGAMBIT]: 1 / 20
+    [Pkm.KINGAMBIT]: 1 / 20,
+    [Pkm.CHIMECHO]: 1 / 20
   },
   27: {
     [Pkm.ELECTIVIRE]: 1 / 20,
@@ -98,4 +104,15 @@ export function getTreasureBoxReward(): TreasureBoxReward {
       goldBow: 0.05
     }) ?? "itemComponents"
   )
+}
+
+export const MusicByTownEncounter: {
+  [encounter in TownEncounter]?: DungeonMusic
+} = {
+  [TownEncounters.LUDICOLO]: DungeonMusic.CARNIVAL_LUDICOLO,
+  [TownEncounters.MAGNEZONE]: DungeonMusic.TROUBLE_IN_TOWN,
+  [TownEncounters.MAROWAK]: DungeonMusic.THE_TERRABLE_JUNGLE,
+  [TownEncounters.WIGGLYTUFF]: DungeonMusic.SKY_PEAK_CAVE,
+  [TownEncounters.SPINDA]: DungeonMusic.SPINDA_CAFE,
+  [TownEncounters.WOBBUFFET]: DungeonMusic.SPINDA_CAFE
 }

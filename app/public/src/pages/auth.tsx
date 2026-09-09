@@ -9,6 +9,7 @@ import DiscordButton from "./component/buttons/discord-button"
 import GithubButton from "./component/buttons/github-button"
 import PolicyButton from "./component/buttons/policy-button"
 import TermsButton from "./component/buttons/terms-button"
+import LanguageSelect from "./component/language-select"
 import { Modal } from "./component/modal/modal"
 import ServersList from "./component/servers/servers-list"
 import Wiki from "./component/wiki/wiki"
@@ -101,6 +102,9 @@ export default function Auth() {
           {t("servers_list.title")}
         </button>
         <span>V{pkg.version}</span>
+        <div className="language-select">
+          <LanguageSelect />
+        </div>
         <p>
           {t("auth.made_for_fans")}
           <br />

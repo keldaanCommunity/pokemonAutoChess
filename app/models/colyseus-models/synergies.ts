@@ -1,6 +1,7 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTriggers } from "../../config"
+import { SynergyTiers, SynergyTiersThresholds } from "../../config"
 import type { IPlayer, IPokemon } from "../../types"
+import type { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
@@ -19,21 +20,44 @@ export default class Synergies extends MapSchema<number, Synergy> {
   }
 
   hasSynergyActive(type: Synergy): boolean {
-    return (this.get(type) ?? 0) >= SynergyTriggers[type][0]
+    return (this.get(type) ?? 0) >= SynergyTiersThresholds[type][0]
   }
 
   hasSynergyTriggerOrMore(type: Synergy, level: number): boolean {
-    return (this.get(type) ?? 0) >= SynergyTriggers[type][level - 1]
+    return (this.get(type) ?? 0) >= SynergyTiersThresholds[type][level - 1]
   }
 
-  countActiveSynergies() {
+  countActiveSynergies(): number {
     let count = 0
     this.forEach((value, synergy) => {
-      if (value >= SynergyTriggers[synergy][0]) {
+      if (value >= SynergyTiersThresholds[synergy][0]) {
         count++
       }
     })
     return count
+  }
+
+  getActiveSynergies(): Synergy[] {
+    const activeSynergies: Synergy[] = []
+    this.forEach((value, synergy) => {
+      if (value >= SynergyTiersThresholds[synergy][0]) {
+        activeSynergies.push(synergy)
+      }
+    })
+    return activeSynergies
+  }
+
+  getActiveSynergyTiers(): EffectEnum[] {
+    const synergyTiers: EffectEnum[] = []
+    this.forEach((value, synergy) => {
+      const level = SynergyTiersThresholds[synergy].filter(
+        (n) => value >= n
+      ).length
+      if (level > 0 && level - 1 in SynergyTiers[synergy]) {
+        synergyTiers.push(SynergyTiers[synergy][level - 1])
+      }
+    })
+    return synergyTiers
   }
 
   getTopSynergies(amount?: number): Synergy[] {
@@ -45,8 +69,8 @@ export default class Synergies extends MapSchema<number, Synergy> {
       if (v2 === v1) {
         // if equal level, prioritize the highest amount of synergy steps reached
         return (
-          SynergyTriggers[s2].filter((n) => n <= v2).length -
-          SynergyTriggers[s1].filter((n) => n <= v1).length
+          SynergyTiersThresholds[s2].filter((n) => n <= v2).length -
+          SynergyTiersThresholds[s1].filter((n) => n <= v1).length
         )
       }
       return v2 - v1
@@ -131,7 +155,8 @@ export function computeSynergies(
   }
 
   if (
-    (synergies.get(Synergy.DRAGON) ?? 0) >= SynergyTriggers[Synergy.DRAGON][0]
+    (synergies.get(Synergy.DRAGON) ?? 0) >=
+    SynergyTiersThresholds[Synergy.DRAGON][0]
   ) {
     applyDragonDoubleTypes()
   }
@@ -168,13 +193,13 @@ export function computeSynergies(
           if (type === Synergy.DRAGON) {
             if (
               synergies.get(Synergy.DRAGON) ===
-              SynergyTriggers[Synergy.DRAGON][0]
+              SynergyTiersThresholds[Synergy.DRAGON][0]
             ) {
               // Arceus/Kecleon just activated Dragon 3, so we need to apply the double synergies to all pokemons
               shouldComputeDragonDoubleTypeAgain = true
             } else if (
               synergies.get(Synergy.DRAGON)! >
-              SynergyTriggers[Synergy.DRAGON][0]
+              SynergyTiersThresholds[Synergy.DRAGON][0]
             ) {
               // Dragon 3 was already activated, so we just need to double the synergy of Arceus/Kecleon
               const doubledType = synergiesSorted[1]
@@ -272,17 +297,18 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
   })
 }
 
-export function getSynergyStep(
+export function getSynergyTier(
   synergies: Map<Synergy, number> | MapSchema<number, Synergy>,
   type: Synergy
 ): number {
-  return SynergyTriggers[type].filter((n) => (synergies.get(type) ?? 0) >= n)
-    .length
+  return SynergyTiersThresholds[type].filter(
+    (n) => (synergies.get(type) ?? 0) >= n
+  ).length
 }
 
 export function getWildChance(player: IPlayer, stageLevel: number): number {
   const isPVE = stageLevel === 0 || stageLevel in PVEStages
-  const wildLevel = getSynergyStep(player.synergies, Synergy.WILD)
+  const wildLevel = getSynergyTier(player.synergies, Synergy.WILD)
   // 6% base chance in PvE stage or if Wild is active
   const baseChance = isPVE || wildLevel > 0 ? 6 : 0
   // each star of a pokemon with wild synergy gives 0.5% wild chance

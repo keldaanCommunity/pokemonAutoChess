@@ -17,18 +17,19 @@ import {
 } from "../../../../../core/bot-logic"
 import {
   computeSynergies,
-  getSynergyStep
+  getSynergyTier
 } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 import DiscordButton from "../buttons/discord-button"
 import { Modal } from "../modal/modal"
 import ImportBotModal from "./import-bot-modal"
@@ -212,12 +213,12 @@ export default function BotBuilder() {
   )
   const nbScarvesOnBoard = useMemo(() => getNbScarvesOnBoard(board), [board])
   const nbMaxScarvesOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.NORMAL),
+    () => getSynergyTier(synergies, Synergy.NORMAL),
     [board]
   )
   const nbToolsOnBoard = useMemo(() => getNbToolsOnBoard(board), [board])
   const nbMaxToolsOnBoard = useMemo(
-    () => getSynergyStep(synergies, Synergy.ARTIFICIAL),
+    () => getSynergyTier(synergies, Synergy.ARTIFICIAL),
     [board]
   )
   const powerScore = useMemo(() => getPowerScore(board), [board])

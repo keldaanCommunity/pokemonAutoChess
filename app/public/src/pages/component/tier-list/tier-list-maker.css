@@ -2,12 +2,12 @@
   width: 100%;
   display: grid;
   grid-template-areas: "actions actions" "tierlist tierlist" "pokemons items";
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 1fr 480px;
   grid-template-rows: min-content 1fr 420px;
   min-width: 1400px;
   gap: 5px;
   padding: 5px;
-  height: 75vh;
+  height: 90vh;
   overflow-y: auto;
   position: relative;
 }

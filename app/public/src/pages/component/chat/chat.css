@@ -109,3 +109,64 @@
 .server-message {
   background-color: var(--color-bg-accent);
 }
+
+.chat-input-area {
+  position: relative;
+}
+
+.user-chat .emote-menu {
+  position: absolute;
+  bottom: 100%;
+  left: auto;
+  right: 0;
+  margin: 0 0 4px 0;
+  padding: 0.25em;
+}
+
+.emote-menu > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+}
+
+.chat-emote-menu li {
+  display: block;
+  list-style: none;
+  position: relative;
+}
+
+.chat-emote-menu li img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px #00000060;
+}
+
+.chat-emote-menu li img.locked {
+  filter: grayscale(1) contrast(0.5);
+}
+
+.chat-emote-menu li img:not(.locked) {
+  cursor: var(--cursor-hover);
+}
+
+.emote-button {
+  flex: 0;
+  font-size: 1.2em;
+  padding: 0 0.5em;
+}
+
+.chat-message-container.emote-message {
+  width: fit-content;
+  min-width: unset;
+}
+
+.chat-emote-message {
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
+}
