@@ -1,8 +1,9 @@
 # Balance & Gameplay
 
 - Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
-- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
+- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
+- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
 
 # Bugfixes
 

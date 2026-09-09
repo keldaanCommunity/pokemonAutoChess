@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../network"
