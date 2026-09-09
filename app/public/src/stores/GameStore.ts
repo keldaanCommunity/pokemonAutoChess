@@ -34,7 +34,7 @@ export interface GameStateStore {
   playerIdSpectated: string
   simulationIdSpectated: string
   teamSpectated: Team
-  synergiesSpectated: [string, number][]
+  synergiesSpectated: [Synergy, number][]
   money: number
   interest: number
   maxInterest: number
