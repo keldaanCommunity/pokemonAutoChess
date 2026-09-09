@@ -32,6 +32,10 @@
 
 # Gameplay
 
+> A Lucky Ultra at level 7 with 2 dittos on bench had an excessive impact on the game, so we are removing Ultra odds at level 7.
+
+- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
+
 # UI
 
 - Teams displayed in post-game screen and game history are now ordered from strongest to weakest units

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
-  MAX_LEVEL,
   RarityColor,
   RarityProbabilityPerLevel
 } from "../../../../../config"
