@@ -1,10 +1,14 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTiers, SynergyTiersThresholds } from "../../config"
+import {
+  ArceusFormPerSynergy,
+  SynergyTiers,
+  SynergyTiersThresholds
+} from "../../config"
 import type { IPlayer, IPokemon } from "../../types"
 import type { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
-import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
+import { PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy } from "../../types/enum/Synergy"
 import { isOnBench } from "../../utils/board"
@@ -61,20 +65,9 @@ export default class Synergies extends MapSchema<number, Synergy> {
   }
 
   getTopSynergies(amount?: number): Synergy[] {
-    const synergiesSortedByLevel: [Synergy, number][] = []
-    this.forEach((value, key) => {
-      synergiesSortedByLevel.push([key as Synergy, value])
-    })
-    synergiesSortedByLevel.sort(([s1, v1], [s2, v2]) => {
-      if (v2 === v1) {
-        // if equal level, prioritize the highest amount of synergy steps reached
-        return (
-          SynergyTiersThresholds[s2].filter((n) => n <= v2).length -
-          SynergyTiersThresholds[s1].filter((n) => n <= v1).length
-        )
-      }
-      return v2 - v1
-    })
+    const synergiesSortedByLevel: [Synergy, number][] = sortSynergies(
+      this.toMap()
+    )
     if (amount) {
       return synergiesSortedByLevel.slice(0, amount).map(([s, v]) => s)
     }
@@ -168,9 +161,7 @@ export function computeSynergies(
       (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
     ) {
       const nbDynamicSynergies = pkm.passive === Passive.PROTEAN3 ? 3 : 2
-      const synergiesSorted = [...synergies.keys()].sort(
-        (a, b) => +synergies.get(b)! - +synergies.get(a)!
-      )
+      const synergiesSorted = sortSynergies(synergies).map(([s, v]) => s)
 
       if (
         synergiesSorted.slice(0, nbDynamicSynergies).includes(Synergy.DRAGON)
@@ -214,74 +205,46 @@ export function computeSynergies(
       }
 
       if (pkm.name.startsWith("ARCEUS")) {
-        switch (schemaValues(pkm.types)[0]) {
-          case Synergy.BUG:
-            pkm.index = PkmIndex[Pkm.ARCEUS_BUG]
-            break
-          case Synergy.DARK:
-            pkm.index = PkmIndex[Pkm.ARCEUS_DARK]
-            break
-          case Synergy.DRAGON:
-          case Synergy.FOSSIL:
-            pkm.index = PkmIndex[Pkm.ARCEUS_DRAGON]
-            break
-          case Synergy.ELECTRIC:
-            pkm.index = PkmIndex[Pkm.ARCEUS_ELECTRIC]
-            break
-          case Synergy.FIGHTING:
-          case Synergy.WILD:
-            pkm.index = PkmIndex[Pkm.ARCEUS_FIGHTING]
-            break
-          case Synergy.FIRE:
-          case Synergy.GOURMET:
-            pkm.index = PkmIndex[Pkm.ARCEUS_FIRE]
-            break
-          case Synergy.FLYING:
-            pkm.index = PkmIndex[Pkm.ARCEUS_FLYING]
-            break
-          case Synergy.GHOST:
-            pkm.index = PkmIndex[Pkm.ARCEUS_GHOST]
-            break
-          case Synergy.GRASS:
-          case Synergy.FLORA:
-            pkm.index = PkmIndex[Pkm.ARCEUS_GRASS]
-            break
-          case Synergy.GROUND:
-          case Synergy.FIELD:
-            pkm.index = PkmIndex[Pkm.ARCEUS_GROUND]
-            break
-          case Synergy.ICE:
-            pkm.index = PkmIndex[Pkm.ARCEUS_ICE]
-            break
-          case Synergy.POISON:
-          case Synergy.MONSTER:
-            pkm.index = PkmIndex[Pkm.ARCEUS_POISON]
-            break
-          case Synergy.PSYCHIC:
-          case Synergy.SOUND:
-            pkm.index = PkmIndex[Pkm.ARCEUS_PSYCHIC]
-            break
-          case Synergy.ROCK:
-            pkm.index = PkmIndex[Pkm.ARCEUS_ROCK]
-            break
-          case Synergy.STEEL:
-          case Synergy.ARTIFICIAL:
-            pkm.index = PkmIndex[Pkm.ARCEUS_STEEL]
-            break
-          case Synergy.WATER:
-          case Synergy.AQUATIC:
-            pkm.index = PkmIndex[Pkm.ARCEUS_WATER]
-            break
-          case Synergy.FAIRY:
-          case Synergy.AMORPHOUS:
-            pkm.index = PkmIndex[Pkm.ARCEUS_FAIRY]
-            break
-        }
+        const firstType = schemaValues(pkm.types)[0]
+        pkm.index = PkmIndex[ArceusFormPerSynergy[firstType]!]
       }
     }
   })
 
   return synergies
+}
+
+export function sortSynergies(
+  synergies: Map<Synergy, number>
+): [Synergy, number][] {
+  // sort by synergy level, then by number of synergy thresholds reached tier, then by order in the Synergies enum
+  return [...synergies.entries()].sort(([s1, v1], [s2, v2]) => {
+    if (v2 === v1) {
+      // if equal level, prioritize the highest amount of synergy steps reached
+      const tier1 = SynergyTiersThresholds[s1].filter((n) => n <= v1).length
+      const tier2 = SynergyTiersThresholds[s2].filter((n) => n <= v2).length
+      if (tier2 === tier1) {
+        return (
+          Object.keys(Synergy).indexOf(s2) - Object.keys(Synergy).indexOf(s1)
+        )
+      }
+      return tier2 - tier1
+    }
+    return v2 - v1
+  })
+}
+
+export function getDominantSynergy(
+  synergies: Map<Synergy, number>,
+  choices = Object.keys(Synergy)
+): Synergy | null {
+  const sorted = sortSynergies(synergies)
+  for (const [synergy, _] of sorted) {
+    if (choices.includes(synergy)) {
+      return synergy
+    }
+  }
+  return null
 }
 
 export function addSynergiesGivenByItems(pkm: IPokemon) {

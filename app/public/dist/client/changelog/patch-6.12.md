@@ -26,6 +26,8 @@
 
 # Changes to Synergies
 
+- Synergies now have a more consistent order accross all places where they are displayed (synergy menu, game history, post-game screen, etc.). The order is based on the synergy level, then in case of tie on the synergy tier, then in case of tie on the amount of Pokémon representing that synergy. This order is also used to clarify the determination of some divergent evolutions (e.g. Meowstic, Gallade/Gardevoir) and some passives (Arceus, Kecleon).
+
 # Changes to Items
 
 # Gameplay

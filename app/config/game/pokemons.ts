@@ -1,3 +1,4 @@
+import { sortSynergies } from "../../models/colyseus-models/synergies"
 import { FlowerPot, type IPlayer } from "../../types"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -115,51 +116,19 @@ export function getAltFormForPlayer(pkm: Pkm, player: IPlayer): Pkm {
           return Pkm.FLORGES_ORANGE
         case FlowerPot.BLUE:
           return Pkm.FLORGES_BLUE
-        case FlowerPot.WHITE:
+        case FlowerPot.WHITE: 
           return Pkm.FLORGES_WHITE
       }
       return Pkm.FLORGES
     }
 
     case Pkm.VIVILLON: {
-      const synergyVivillon: { synergy: Synergy; form: Pkm; count: number }[] =
-        [
-          { synergy: Synergy.SOUND, form: Pkm.VIVILLON, count: 0 },
-          { synergy: Synergy.NORMAL, form: Pkm.VIVILLON_ICY_SNOW, count: 0 },
-          { synergy: Synergy.GHOST, form: Pkm.VIVILLON_POLAR, count: 0 },
-          { synergy: Synergy.ICE, form: Pkm.VIVILLON_TUNDRA, count: 0 },
-          { synergy: Synergy.FOSSIL, form: Pkm.VIVILLON_CONTINENTAL, count: 0 },
-          { synergy: Synergy.GRASS, form: Pkm.VIVILLON_GARDEN, count: 0 },
-          { synergy: Synergy.PSYCHIC, form: Pkm.VIVILLON_ELEGANT, count: 0 },
-          { synergy: Synergy.FIELD, form: Pkm.VIVILLON_MODERN, count: 0 },
-          { synergy: Synergy.WATER, form: Pkm.VIVILLON_MARINE, count: 0 },
-          {
-            synergy: Synergy.FIGHTING,
-            form: Pkm.VIVILLON_ARCHIPELAGO,
-            count: 0
-          },
-          { synergy: Synergy.HUMAN, form: Pkm.VIVILLON_HIGH_PLAINS, count: 0 },
-          { synergy: Synergy.ROCK, form: Pkm.VIVILLON_SANDSTORM, count: 0 },
-          { synergy: Synergy.AQUATIC, form: Pkm.VIVILLON_RIVER, count: 0 },
-          { synergy: Synergy.STEEL, form: Pkm.VIVILLON_MONSOON, count: 0 },
-          { synergy: Synergy.ELECTRIC, form: Pkm.VIVILLON_SAVANNA, count: 0 },
-          { synergy: Synergy.FIRE, form: Pkm.VIVILLON_SUN, count: 0 },
-          { synergy: Synergy.LIGHT, form: Pkm.VIVILLON_OCEAN, count: 0 },
-          { synergy: Synergy.POISON, form: Pkm.VIVILLON_JUNGLE, count: 0 },
-          { synergy: Synergy.FAIRY, form: Pkm.VIVILLON_FANCY, count: 0 },
-          {
-            synergy: Synergy.ARTIFICIAL,
-            form: Pkm.VIVILLON_POKE_BALL,
-            count: 0
-          }
-        ]
-
-      for (const s of synergyVivillon) {
-        s.count = player.synergies.get(s.synergy) || 0
-      }
-
-      synergyVivillon.sort((a, b) => b.count - a.count)
-      return synergyVivillon[0].form
+      const synergiesSorted = sortSynergies(player.synergies.toMap())
+      const synergyVivillon =
+        synergiesSorted
+          .map(([type]) => type)
+          .find((type) => type in VivillonFormPerSynergy) ?? Synergy.NORMAL
+      return VivillonFormPerSynergy[synergyVivillon]
     }
 
     default:
@@ -449,3 +418,61 @@ export const MaxTroopersPerPkm: { [key in PkmWithTroopers]: number } = {
   [Pkm.AVALUGG]: 4,
   [Pkm.HISUI_AVALUGG]: 4
 }
+
+export const VivillonFormPerSynergy = {
+  [Synergy.SOUND]: Pkm.VIVILLON,
+  [Synergy.NORMAL]: Pkm.VIVILLON_ICY_SNOW,
+  [Synergy.GHOST]: Pkm.VIVILLON_POLAR,
+  [Synergy.ICE]: Pkm.VIVILLON_TUNDRA,
+  [Synergy.FOSSIL]: Pkm.VIVILLON_CONTINENTAL,
+  [Synergy.GRASS]: Pkm.VIVILLON_GARDEN,
+  [Synergy.PSYCHIC]: Pkm.VIVILLON_ELEGANT,
+  [Synergy.FIELD]: Pkm.VIVILLON_MODERN,
+  [Synergy.WATER]: Pkm.VIVILLON_MARINE,
+  [Synergy.FIGHTING]: Pkm.VIVILLON_ARCHIPELAGO,
+  [Synergy.HUMAN]: Pkm.VIVILLON_HIGH_PLAINS,
+  [Synergy.ROCK]: Pkm.VIVILLON_SANDSTORM,
+  [Synergy.AQUATIC]: Pkm.VIVILLON_RIVER,
+  [Synergy.STEEL]: Pkm.VIVILLON_MONSOON,
+  [Synergy.ELECTRIC]: Pkm.VIVILLON_SAVANNA,
+  [Synergy.FIRE]: Pkm.VIVILLON_SUN,
+  [Synergy.LIGHT]: Pkm.VIVILLON_OCEAN,
+  [Synergy.POISON]: Pkm.VIVILLON_JUNGLE,
+  [Synergy.FAIRY]: Pkm.VIVILLON_FANCY,
+  [Synergy.ARTIFICIAL]: Pkm.VIVILLON_POKE_BALL
+} satisfies { [key in Synergy]?: Pkm }
+
+
+export const ArceusFormPerSynergy = {
+  [Synergy.BUG]: Pkm.ARCEUS_BUG,
+  [Synergy.DARK]: Pkm.ARCEUS_DARK,
+  [Synergy.DRAGON]: Pkm.ARCEUS_DRAGON,
+  [Synergy.FOSSIL]: Pkm.ARCEUS_DRAGON,
+  [Synergy.ELECTRIC]: Pkm.ARCEUS_ELECTRIC,
+  [Synergy.FIGHTING]: Pkm.ARCEUS_FIGHTING,
+  [Synergy.WILD]: Pkm.ARCEUS_FIGHTING,
+  [Synergy.FIRE]: Pkm.ARCEUS_FIRE,
+  [Synergy.GOURMET]: Pkm.ARCEUS_FIRE,
+  [Synergy.FLYING]: Pkm.ARCEUS_FLYING,
+  [Synergy.GHOST]: Pkm.ARCEUS_GHOST,
+  [Synergy.GRASS]: Pkm.ARCEUS_GRASS,
+  [Synergy.FLORA]: Pkm.ARCEUS_GRASS,
+  [Synergy.GROUND]: Pkm.ARCEUS_GROUND,
+  [Synergy.FIELD]: Pkm.ARCEUS_GROUND,
+  [Synergy.ICE]: Pkm.ARCEUS_ICE,
+  [Synergy.POISON]: Pkm.ARCEUS_POISON,
+  [Synergy.MONSTER]: Pkm.ARCEUS_POISON,
+  [Synergy.PSYCHIC]: Pkm.ARCEUS_PSYCHIC,
+  [Synergy.SOUND]: Pkm.ARCEUS_PSYCHIC,
+  [Synergy.ROCK]: Pkm.ARCEUS_ROCK,
+  [Synergy.STEEL]: Pkm.ARCEUS_STEEL,
+  [Synergy.ARTIFICIAL]: Pkm.ARCEUS_STEEL,
+  [Synergy.WATER]: Pkm.ARCEUS_WATER,
+  [Synergy.AQUATIC]: Pkm.ARCEUS_WATER,
+  [Synergy.FAIRY]: Pkm.ARCEUS_FAIRY,
+  [Synergy.AMORPHOUS]: Pkm.ARCEUS_FAIRY,
+  [Synergy.HUMAN]: Pkm.ARCEUS,
+  [Synergy.LIGHT]: Pkm.ARCEUS,
+  [Synergy.BABY]: Pkm.ARCEUS,
+  [Synergy.NORMAL]: Pkm.ARCEUS
+} satisfies { [key in Synergy]: Pkm }

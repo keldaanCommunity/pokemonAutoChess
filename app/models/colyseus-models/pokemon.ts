@@ -68,6 +68,7 @@ import { clamp, min } from "../../utils/number"
 import { schemaValues } from "../../utils/schemas"
 import type Player from "./player"
 import { getPkmWithCustom } from "./pokemon-customs"
+import { getDominantSynergy } from "./synergies"
 
 export class Pokemon extends Schema implements IPokemon {
   @type("string") id: string
@@ -1410,9 +1411,12 @@ export class Kirlia extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon, player) => {
-      const fairyCount = player.synergies.get(Synergy.FAIRY) ?? 0
-      const fightingCount = player.synergies.get(Synergy.FIGHTING) ?? 0
-      return fightingCount >= fairyCount ? Pkm.GALLADE : Pkm.GARDEVOIR
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.FIGHTING,
+        Synergy.FAIRY
+      ]) === Synergy.FIGHTING
+        ? Pkm.GALLADE
+        : Pkm.GARDEVOIR
     }
   } satisfies CountEvolutionRule
   hp = 130
@@ -4252,9 +4256,12 @@ export class Slowpoke extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
-      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
-      const waterCount = player.synergies.get(Synergy.WATER) ?? 0
-      return psychicCount >= waterCount ? Pkm.SLOWKING : Pkm.SLOWBRO
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.PSYCHIC,
+        Synergy.WATER
+      ]) === Synergy.PSYCHIC
+        ? Pkm.SLOWKING
+        : Pkm.SLOWBRO
     }
   } satisfies CountEvolutionRule
   hp = 80
@@ -4308,9 +4315,10 @@ export class GalarianSlowpoke extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
-      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
-      const waterCount = player.synergies.get(Synergy.POISON) ?? 0
-      return psychicCount >= waterCount
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.PSYCHIC,
+        Synergy.POISON
+      ]) === Synergy.PSYCHIC
         ? Pkm.GALARIAN_SLOWKING
         : Pkm.GALARIAN_SLOWBRO
     }
@@ -8243,9 +8251,12 @@ export class Clamperl extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon, player) => {
-      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
-      const darkCount = player.synergies.get(Synergy.DARK) ?? 0
-      return darkCount >= psychicCount ? Pkm.HUNTAIL : Pkm.GOREBYSS
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.PSYCHIC,
+        Synergy.DARK
+      ]) === Synergy.DARK
+        ? Pkm.HUNTAIL
+        : Pkm.GOREBYSS
     }
   } satisfies CountEvolutionRule
 }
@@ -18514,9 +18525,10 @@ export class Espurr extends Pokemon {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3,
     divergentEvolution: (pokemon, player) => {
-      const psychicCount = player.synergies.get(Synergy.PSYCHIC) ?? 0
-      const fieldCount = player.synergies.get(Synergy.FIELD) ?? 0
-      return psychicCount >= fieldCount
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.PSYCHIC,
+        Synergy.FIELD
+      ]) === Synergy.PSYCHIC
         ? Pkm.MEOWSTIC_MALE
         : Pkm.MEOWSTIC_FEMALE
     }
