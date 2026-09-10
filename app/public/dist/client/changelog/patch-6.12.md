@@ -60,3 +60,4 @@
 - The post game screen has new victory jingles made by John Rei
 - Removed Bench is Lava scribble
 - Add "Base" to the glossary of technical terms
+- New title: Bodybuilder. Get a FIGHTING Pokémon to +40 ATK after training on the bench.

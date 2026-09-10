@@ -1966,6 +1966,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               pokemon.addAttack(4)
               pokemon.addMaxHP(Math.ceil(0.1 * getPokemonData(pokemon.name).hp))
               pokemon.action = PokemonActionState.IDLE
+              if (pokemon.atk >= pokemon.baseAtk + 40) {
+                player.titles.add(Title.BODYBUILDER)
+              }
             }
           })
 

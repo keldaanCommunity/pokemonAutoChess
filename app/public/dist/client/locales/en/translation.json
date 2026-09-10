@@ -3780,7 +3780,9 @@
 		"GUILDMASTER": "Guildmaster",
 		"PAL": "Pal",
 		"LEGIONNAIRE": "Legionnaire",
-		"FIVE_STARS": "★★★★★"
+		"FIVE_STARS": "★★★★★",
+		"BODYBUILDER": "Bodybuilder"
+
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",
@@ -3879,7 +3881,8 @@
 		"GUILDMASTER": "Complete a rank S expedition",
 		"PAL": "Play in Double Up with your pal during Poképals event",
 		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more",
-		"FIVE_STARS": "Play with a five stars Pokémon in your team"
+		"FIVE_STARS": "Play with a five stars Pokémon in your team",
+		"BODYBUILDER": "Get a FIGHTING Pokémon to +40 ATK after training on the bench."
 	},
 	"weather": {
 		"NEUTRAL": "Calm weather",

@@ -120,6 +120,7 @@ export class Pokemon extends Schema implements IPokemon {
   canBeSold = true
   baseSkill: Ability = Ability.DEFAULT
   baseMaxPP: number = 100
+  baseAtk: number = 1
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
@@ -134,6 +135,7 @@ export class Pokemon extends Schema implements IPokemon {
     // called after subclass constructor called, used to set properties that depend on subclass values
     this.maxHP = this.hp
     this.baseMaxPP = this.maxPP
+    this.baseAtk = this.atk
     this.baseSkill = this.skill
   }
 
