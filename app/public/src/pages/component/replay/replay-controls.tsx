@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { phaseWord } from "../../../game/replay-event-format"
 import {
@@ -18,7 +18,40 @@ import type { ReplayRoom } from "../../../game/replay-room"
 // dropdown playback speeds (matches replay.tsx's keyboard-cycle SPEEDS); capped at 4×, higher can't be sustained (render-bound) and a silently-throttling control is worse than none
 const SPEEDS = [0.125, 0.25, 0.5, 1, 2, 4]
 const POS_KEY = "replay.controls.pos"
+const LAYOUT_KEY = "replay.controls.layout" // not POS_KEY: older builds read any object there as a position
 const DOCK_GAP = 8 // px gap between the bar's bottom edge and the shop's top when default-docked
+const MIN_TRACK_H = 8
+const MAX_TRACK_H = 96
+const AXIS_DEADZONE = 3 // px, so jitter on a vertical drag doesn't pin the width
+
+// the children can't wrap, so their measured widths are already their minimums
+const contentWidth = (el: Element) => {
+  const kids = [...el.children]
+  const gap = Number.parseFloat(getComputedStyle(el).columnGap) || 0
+  return (
+    kids.reduce((sum, k) => sum + k.getBoundingClientRect().width, 0) +
+    gap * Math.max(0, kids.length - 1)
+  )
+}
+
+// measured, not a constant: it moves with the font-size and the translated labels
+const rowFloor = (bar: HTMLElement) => {
+  const row = bar.querySelector(".replay-controls-bar")
+  if (!row) return 0
+  const tracks = [...row.children].map(contentWidth)
+  if (tracks.length !== 3) return 0
+  const gap = Number.parseFloat(getComputedStyle(row).columnGap) || 0
+  const cs = getComputedStyle(bar)
+  return Math.ceil(
+    2 * Math.max(tracks[0], tracks[2]) + // the 1fr sides are equal, so the wider one sets both
+      tracks[1] +
+      2 * gap +
+      Number.parseFloat(cs.paddingLeft) +
+      Number.parseFloat(cs.paddingRight) +
+      Number.parseFloat(cs.borderLeftWidth) +
+      Number.parseFloat(cs.borderRightWidth)
+  )
+}
 
 const fmt = (ms: number) => {
   const s = Math.max(0, Math.floor(ms / 1000))
@@ -29,12 +62,42 @@ const speedLabel = (s: number) => (s < 1 ? `1/${Math.round(1 / s)}×` : `${s}×`
 const clamp = (v: number, lo: number, hi: number) =>
   Math.max(lo, Math.min(hi, v))
 
-const loadPos = (): { x: number; y: number } | null => {
+type SavedBox = {
+  x?: number
+  y?: number
+  w?: number
+  trackH?: number
+  minimized?: boolean
+}
+const readKey = (key: string): SavedBox => {
   try {
-    const s = localStorage.getItem(POS_KEY)
-    return s ? JSON.parse(s) : null
+    const b = JSON.parse(localStorage.getItem(key) || "null")
+    return b && typeof b === "object" && !Array.isArray(b) ? b : {}
   } catch {
-    return null
+    return {}
+  }
+}
+const readBox = (): SavedBox => {
+  const { x, y } = readKey(POS_KEY)
+  return { ...readKey(LAYOUT_KEY), x, y }
+}
+const finite = (v: unknown) =>
+  typeof v === "number" && Number.isFinite(v) ? v : null
+const trackHeight = (v: unknown) => {
+  const h = finite(v)
+  return h === null ? null : clamp(h, MIN_TRACK_H, MAX_TRACK_H)
+}
+const saveBox = ({ x, y, ...layout }: SavedBox) => {
+  try {
+    if (x !== undefined && y !== undefined)
+      localStorage.setItem(POS_KEY, JSON.stringify({ x, y }))
+    if (Object.keys(layout).length > 0)
+      localStorage.setItem(
+        LAYOUT_KEY,
+        JSON.stringify({ ...readKey(LAYOUT_KEY), ...layout })
+      )
+  } catch {
+    /* ignore quota/availability errors */
   }
 }
 
@@ -87,27 +150,62 @@ export default function ReplayControls({
 }) {
   const { t } = useTranslation()
   const [, force] = useState(0)
-  useEffect(() => {
-    const id = setInterval(() => force((n) => (n + 1) % 1e6), 150)
-    return () => clearInterval(id)
-  }, [])
 
   // scrubber hover preview: re-based time + stage·phase at the cursor (index data only, no render); seeking reboots, so aim first
   const [hover, setHover] = useState<{ xPct: number; ms: number } | null>(null)
 
   // draggable position; null docks just above the shop (between shop and bench)
   const barRef = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState<{ x: number; y: number } | null>(loadPos)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const resizing = useRef(false)
+  // high-water, so the bar doesn't twitch as the stage chip's text changes
+  const floorRef = useRef(0)
+  const floorFont = useRef("")
+  const [floor, setFloor] = useState(0)
+  const saved = useMemo(readBox, [])
+  const [pos, setPos] = useState(() => {
+    const x = finite(saved.x)
+    const y = finite(saved.y)
+    return x !== null && y !== null ? { x, y } : null
+  })
+  const [size, setSize] = useState({
+    w: finite(saved.w),
+    trackH: trackHeight(saved.trackH)
+  })
+  const [minimized, setMinimized] = useState(saved.minimized === true)
+  const toggleMinimized = (next: boolean) => {
+    setMinimized(next)
+    saveBox({ minimized: next })
+    if (next && eventLogOpen) onToggleEventLog() // the log shows times too, and the pill has no ☰
+  }
+
+  useEffect(() => {
+    if (minimized) return
+    const id = setInterval(() => force((n) => (n + 1) % 1e6), 150)
+    return () => clearInterval(id)
+  }, [minimized])
 
   // default dock just above the shop: measure the live `.game-shop` + bar width, anchor the bar's upper-left over it.
-  // `left` freezes on the first good measure (never recenters, only re-clamps into the viewport); `bottom` re-tracks the shop each measure; a user drag switches to a persisted px position and stops the auto-dock
-  const [dock, setDock] = useState<{ left: number; bottom: number } | null>(
-    null
-  )
+  // `left` settles once per bar width and thereafter only re-clamps into the viewport; `bottom` re-tracks the shop each measure; a user drag or resize switches to a persisted px position and stops the auto-dock
+  const [dock, setDock] = useState<{
+    left: number
+    bottom: number
+    forWidth: number
+  } | null>(null)
   useEffect(() => {
     const measure = () => {
-      const bar = barRef.current?.getBoundingClientRect()
-      if (!bar || bar.width === 0) return
+      if (resizing.current) return // re-clamping mid-resize walks the bar out from under the cursor
+      const el = barRef.current
+      const bar = el?.getBoundingClientRect()
+      if (!el || !bar || bar.width === 0) return
+      const f = rowFloor(el)
+      const font = getComputedStyle(el).fontSize
+      // 0 while collapsed; the high-water only holds within one font-size
+      if (f > 0 && (f > floorRef.current || font !== floorFont.current)) {
+        floorRef.current = f
+        floorFont.current = font
+        setFloor(f)
+      }
       if (pos) {
         // a dragged position persisted on a bigger window can sit off-screen here; pull it back in reach
         const x = clamp(pos.x, 0, Math.max(0, window.innerWidth - bar.width))
@@ -121,11 +219,14 @@ export default function ReplayControls({
         setDock((d) => ({
           // clamp every measure (not just the first) so shrinking the window keeps the bar on-screen
           left: clamp(
-            d?.left ?? shop.left + (shop.width - bar.width) / 2,
+            d && Math.abs(d.forWidth - bar.width) < 1 // recentre when collapse or restore changes the width
+              ? d.left
+              : shop.left + (shop.width - bar.width) / 2,
             8,
             Math.max(8, window.innerWidth - bar.width - 8)
           ),
-          bottom
+          bottom,
+          forWidth: bar.width
         }))
       }
     }
@@ -136,7 +237,7 @@ export default function ReplayControls({
       window.removeEventListener("resize", measure)
       clearInterval(id)
     }
-  }, [pos])
+  }, [pos, minimized]) // minimized changes the bar's width, so re-measure on the toggle
 
   const onHandleDown = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -153,13 +254,71 @@ export default function ReplayControls({
       window.removeEventListener("mousemove", onMove)
       window.removeEventListener("mouseup", onUp)
       const r = barRef.current?.getBoundingClientRect()
-      if (r) {
-        try {
-          localStorage.setItem(POS_KEY, JSON.stringify({ x: r.left, y: r.top }))
-        } catch {
-          /* ignore quota/availability errors */
-        }
+      if (r) saveBox({ x: r.left, y: r.top })
+    }
+    window.addEventListener("mousemove", onMove)
+    window.addEventListener("mouseup", onUp)
+  }
+
+  const onResizeDown = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const bar = barRef.current!
+    const rect = bar.getBoundingClientRect()
+    const startW = rect.width
+    const startH = trackRef.current!.getBoundingClientRect().height
+    // narrower than the row's content, the side badges paint over the transport
+    const minW = Math.min(
+      window.innerWidth - 16,
+      Math.max(
+        Math.min(360, window.innerWidth - 16),
+        Math.max(rowFloor(bar), floorRef.current)
+      )
+    )
+    const startX = e.clientX
+    const startY = e.clientY
+    // seeded from the overrides, so an axis the drag never moves keeps its css default
+    const box: { w: number | null; trackH: number | null } = {
+      w: size.w,
+      trackH: size.trackH
+    }
+    let moved = false
+    let axisX = false
+    let axisY = false
+    const onMove = (ev: MouseEvent) => {
+      if (ev.buttons === 0) return onUp() // released outside the window, so mouseup never fired
+      const dx = ev.clientX - startX
+      const dy = ev.clientY - startY
+      if (!axisX && Math.abs(dx) >= AXIS_DEADZONE) axisX = true
+      if (!axisY && Math.abs(dy) >= AXIS_DEADZONE) axisY = true
+      if (!axisX && !axisY) return
+      if (!moved) {
+        moved = true
+        resizing.current = true
+        if (!pos) setPos({ x: rect.left, y: rect.top }) // docked is bottom-anchored, so growing would move the top
       }
+      if (axisX) {
+        const maxW = Math.max(0, window.innerWidth - rect.left - 8)
+        box.w = clamp(startW + dx, Math.min(minW, startW, maxW), maxW) // never snap up to the floor
+      }
+      if (axisY) box.trackH = clamp(startH + dy, MIN_TRACK_H, MAX_TRACK_H)
+      setSize({ ...box })
+    }
+    const onUp = () => {
+      window.removeEventListener("mousemove", onMove)
+      window.removeEventListener("mouseup", onUp)
+      resizing.current = false
+      if (!moved) return // a bare click must not freeze the css defaults into px
+      const patch: SavedBox = {}
+      if (box.w !== null) patch.w = box.w
+      if (box.trackH !== null) patch.trackH = box.trackH
+      // the resize pinned the position, so persist it too or a reload moves the bar
+      const r = barRef.current?.getBoundingClientRect()
+      if (r) {
+        patch.x = r.left
+        patch.y = r.top
+      }
+      saveBox(patch)
     }
     window.addEventListener("mousemove", onMove)
     window.addEventListener("mouseup", onUp)
@@ -176,6 +335,41 @@ export default function ReplayControls({
     : dock
       ? { left: dock.left, bottom: dock.bottom }
       : { left: "50%", top: 58, transform: "translateX(-50%)" }
+  const boxStyle = {
+    ...posStyle,
+    ...(minimized
+      ? {}
+      : {
+          ...(size.w != null ? { width: Math.max(size.w, floor) } : {}),
+          ...(size.trackH != null
+            ? { "--replay-controls-track-h": `${size.trackH}px` }
+            : {})
+        })
+  } as React.CSSProperties
+
+  // collapsed: no timeline, clock or stage chip, so nothing gives away the result
+  if (minimized)
+    return (
+      <div
+        ref={barRef}
+        className="replay-controls my-container minimized"
+        style={boxStyle}
+      >
+        <span className="replay-controls-handle" onMouseDown={onHandleDown}>
+          ⠿
+        </span>
+        <span className="replay-controls-badge">
+          {t("replay.controls.badge")}
+        </span>
+        <button
+          className="bubbly replay-controls-minimize"
+          title={t("maximize")}
+          onClick={() => toggleMinimized(false)}
+        >
+          ➕
+        </button>
+      </div>
+    )
 
   // skip-button targets from the index; navigate from the in-flight seek target (navMs) while a seek rebuilds, so rapid skips / a held arrow accumulate instead of recomputing from a frozen position (null means at the end, disabled)
   const navNow = navMs()
@@ -205,10 +399,11 @@ export default function ReplayControls({
   }
 
   return (
-    <div ref={barRef} className="replay-controls my-container" style={posStyle}>
+    <div ref={barRef} className="replay-controls my-container" style={boxStyle}>
       {/* row 1: timeline spans full width; everything else sits centered below */}
       <div className="replay-controls-track-wrap">
         <div
+          ref={trackRef}
           className="replay-controls-track"
           onMouseMove={index ? onTrackHover : undefined}
           onMouseLeave={() => setHover(null)}
@@ -412,8 +607,22 @@ export default function ReplayControls({
           >
             ☰
           </button>
+
+          <button
+            className="bubbly replay-controls-minimize"
+            title={t("minimize")}
+            onClick={() => toggleMinimized(true)}
+          >
+            ➖
+          </button>
         </div>
       </div>
+
+      <span
+        className="replay-controls-resize"
+        aria-hidden="true"
+        onMouseDown={onResizeDown}
+      />
     </div>
   )
 }

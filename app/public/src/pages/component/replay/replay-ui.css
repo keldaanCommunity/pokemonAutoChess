@@ -5,6 +5,7 @@
 .replay-controls {
   /* shared height for every control, in em so the whole bar tracks the game's responsive body font-size */
   --replay-controls-ctrl-h: 2em;
+  --replay-controls-track-h: 1em; /* set in px by the resize grip in replay-controls.tsx */
   position: fixed;
   z-index: 1000;
   display: flex;
@@ -12,10 +13,12 @@
   align-items: stretch;
   gap: 0.4em;
   padding: 0.4em 0.6em 0.5em;
-  /* em-based width (52em) so it grows with the bar's font-size; 46vw caps it to ~half a wide screen */
-  width: min(46vw, 52em);
+  /* em-based width (52em) so it grows with the bar's font-size; a vw cap would squeeze the button row */
+  width: 52em;
   /* floor for usability, but never wider than the window itself (unofficial phone players) */
   min-width: min(360px, calc(100vw - 16px));
+  /* caps a resized width without discarding it */
+  max-width: calc(100vw - 16px);
   font-size: 0.875em; /* slightly smaller than the surrounding ui but scales with it */
   user-select: none;
 }
@@ -129,10 +132,10 @@
 .replay-controls .replay-controls-track {
   position: relative;
   width: 100%;
-  height: 14px;
+  height: var(--replay-controls-track-h);
   background: var(--color-bg-tertiary);
   border: var(--border-thin);
-  border-radius: 7px;
+  border-radius: calc(var(--replay-controls-track-h) / 2);
   cursor: pointer;
   overflow: hidden;
 }
@@ -257,6 +260,35 @@
 }
 .replay-controls .replay-controls-mark.stage:hover::before {
   opacity: 0.75;
+}
+
+/* not css resize: that needs a non-visible overflow, which would clip the hover tooltip */
+.replay-controls .replay-controls-resize {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 0.85em;
+  height: 0.85em;
+  cursor: nwse-resize;
+  opacity: 0.4;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 2px,
+    var(--color-fg-secondary) 2px 3px
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.replay-controls .replay-controls-resize:hover {
+  opacity: 0.85;
+}
+
+.replay-controls.minimized {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4em;
+  width: auto;
+  min-width: 0;
+  padding: 0.4em 0.5em;
 }
 
 /* speed dropdown styled like the .bubbly buttons; fixed width so the longest label (1/8×) never widens the bar */
