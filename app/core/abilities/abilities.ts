@@ -659,7 +659,8 @@ export class MetronomeStrategy extends AbilityStrategy {
       rarity = Rarity.COMMON
     }
 
-    const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+    // copy: the push below would mutate the shared precomputed array
+    const pokemonOptions = [...PRECOMPUTED_POKEMONS_PER_RARITY[rarity]]
     if (rarity === Rarity.SPECIAL) {
       pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
     }
