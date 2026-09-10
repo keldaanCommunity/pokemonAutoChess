@@ -10,7 +10,7 @@ import {
 } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
-import { TechnicalTerms } from "../../../../types/strings/TechnicalTerm"
+import { TechnicalTerms, TechnicalTermsWithoutIcons } from "../../../../types/strings/TechnicalTerm"
 import { isIn } from "../../../../utils/array"
 import { max, roundToNDigits } from "../../../../utils/number"
 import { keys } from "../../../../utils/object"
@@ -167,7 +167,7 @@ export function addIconsToDescription(
             })}
             title={t(`technical_terms_definitions.${token}`)}
           >
-            <img src={`assets/ui/${token.toLowerCase()}.svg`} />
+            {TechnicalTermsWithoutIcons.includes(token) ? null : <img src={`assets/ui/${token.toLowerCase()}.svg`} />}
             <i className="technical-term-label">
               {t(`technical_terms.${token}`)}
             </i>

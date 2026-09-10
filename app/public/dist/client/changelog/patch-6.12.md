@@ -30,19 +30,6 @@
 
 # Changes to Items
 
-# Gameplay
-
-> A Lucky Ultra at level 7 with 2 dittos on bench had an excessive impact on the game, so we are removing Ultra odds at level 7.
-
-- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
-
-# UI
-
-- Teams displayed in post-game screen and game history are now ordered from strongest to weakest units
-
-# Bugfix
-
-# Misc
 - Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
 - Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
@@ -51,10 +38,14 @@
 
 # Gameplay
 
+> A Lucky Ultra at level 7 with 2 dittos on bench had an excessive impact on the game, so we are removing Ultra odds at level 7.
+
+- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
 
 # UI
 
+- Teams displayed in post-game screen and game history are now ordered from strongest to weakest units
 - The values for all tiers in ability descriptions can be shown during the game by pressing the Ctrl key
 - You can now save teams from your game history as local files to load them later into your team planner
 - Wiki Regions has been updated to allow filtering regions by synergy
@@ -68,3 +59,4 @@
 
 - The post game screen has new victory jingles made by John Rei
 - Removed Bench is Lava scribble
+- Add "Base" to the glossary of technical terms
