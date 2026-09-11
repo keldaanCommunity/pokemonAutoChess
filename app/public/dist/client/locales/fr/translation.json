@@ -3998,6 +3998,7 @@
 		"total_games_30d": "Parties (sur les 30 derniers jours)",
 		"held_items": "Objets tenus",
 		"by_average_held_items": "par nb d'objets tenus",
+		"best_regions": "Meilleures régions",
 		"cluster_map": {
 			"title": "Carte des clusters",
 			"description": "Cette carte illustre les clusters de compositions d'équipes en fonction de la similarité de leurs synergies. Chaque point représente un cluster de builds d'équipes similaires.",
@@ -4031,7 +4032,6 @@
 			"matches": "correspondances"
 		}
 	},
-	"best_regions": "Meilleures régions",
 	"back_to_lobby": "Retour au lobby",
 	"boosters": "Boosters",
 	"rank_labels": {

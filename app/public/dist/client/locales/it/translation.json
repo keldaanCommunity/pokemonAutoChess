@@ -3661,9 +3661,9 @@
 		"popular_pokemons": "Pokémon popolari",
 		"example_teams": "Team campione",
 		"held_items": "Oggetti tenuti",
-		"by_average_held_items": "in media Oggetti tenuti"
+		"by_average_held_items": "in media Oggetti tenuti",
+		"best_regions": "Migliori regioni:"
 	},
-	"best_regions": "Migliori regioni:",
 	"back_to_lobby": "Torniamo alla Lobby",
 	"boosters": "Booster",
 	"rank_labels": {

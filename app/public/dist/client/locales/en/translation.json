@@ -3979,7 +3979,6 @@
 	},
 	"bot_builder": "Bot Builder",
 	"meta": "Meta",
-	"best_regions": "Best regions",
 	"back_to_lobby": "Back to Lobby",
 	"boosters": "Boosters",
 	"rank_labels": {
@@ -5144,7 +5143,8 @@
 		"popular_holders": "Popular holders",
 		"popular_items": "Popular items",
 		"popular_pokemons": "Popular pokémons",
-		"example_teams": "Example teams",
+		"example_teams": "Example teams",		
+		"best_regions": "Best regions",
 		"cluster_map": {
 			"title": "Cluster Map",
 			"description": "This map shows team composition clusters based on synergy similarity. Each point represents a cluster of similar team builds.",

@@ -4219,6 +4219,7 @@
 		"total_games_30d": "Partidas (últimos 30 dias)",
 		"held_items": "Itens segurados",
 		"by_average_held_items": "pela média de itens segurados",
+		"best_regions": "Melhores regiões",
 		"cluster_map": {
 			"title": "Mapa de Grupo",
 			"description": "Esse mapa mostra a composição de um grupo baseado em sinergias similares. Cada ponto representa um grupo com construções similares de times.",
@@ -5000,7 +5001,6 @@
 		"new_theme_title": "Novo Tema Desbloqueado!",
 		"new_theme_message": "Você desbloqueou um novo tema: {{theme}}.\nVá até as opções do jogo para selecioná-lo!"
 	},
-	"best_regions": "Melhores regiões",
 	"stats": "Estatísticas",
 	"bench": "Banco",
 	"spectating": "Assistindo {{ name }}",

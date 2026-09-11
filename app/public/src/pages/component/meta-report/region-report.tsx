@@ -34,7 +34,7 @@ export function RegionReport() {
   return (
     <div id="region-report">
       <header>
-        <h2>{t("best_regions")}</h2>
+        <h2>{t("meta_report.best_regions")}</h2>
         <div className="filters">
           <select
             value={regionRankingBy}
@@ -43,10 +43,10 @@ export function RegionReport() {
             }}
           >
             <option value="count">
-              {t("rank")} {t("by_popularity")}
+              {t("rank")} {t("meta_report.by_popularity")}
             </option>
             <option value="rank">
-              {t("rank")} {t("by_average_place")}
+              {t("rank")} {t("meta_report.by_average_place")}
             </option>
           </select>
         </div>

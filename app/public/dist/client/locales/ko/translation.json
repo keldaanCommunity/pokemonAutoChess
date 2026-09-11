@@ -5114,6 +5114,7 @@
 		"generation_info": "{{report_date}}부터 {{time_limit}}까지 - {{count}}게임의 데이터를 분석했습니다",
 		"held_items": "지닌물건",
 		"by_average_held_items": "도구를 지닌 갯수들의 평균",
+		"best_regions": "가장 선호되는 지역",
 		"cluster_map": {
 			"title": "클러스터맵",
 			"description": "시너지 유사도를 기반으로 팀이 구성된 것을 클러스터 맵으로 보여줍니다. 포인트는 팀 빌드 클러스터의 유사도를 나타냅니다.",
@@ -5147,7 +5148,6 @@
 			"hovered_cluster": "올려짐"
 		}
 	},
-	"best_regions": "가장 선호되는 지역",
 	"gold_needed_to_level_up": "레벨업 하기 위해 필요한 GOLD: ",
 	"clicks_one": "{{count}}회 클릭",
 	"clicks_other": "{{count}}회 클릭",

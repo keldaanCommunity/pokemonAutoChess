@@ -4000,6 +4000,7 @@
 		"example_teams": "队伍示例",
 		"held_items": "携带道具",
 		"by_average_held_items": "平均携带",
+		"best_regions": "最优地区",
 		"cluster_map": {
 			"title": "聚类图",
 			"description": "这张聚类图显示了共鸣近似的队伍形成的聚点。每个聚点表示一类近似的队伍构成。",
@@ -4033,7 +4034,6 @@
 			"matches": "游戏局数"
 		}
 	},
-	"best_regions": "最优地区",
 	"back_to_lobby": "返回大厅",
 	"boosters": "补充包",
 	"rank_labels": {
