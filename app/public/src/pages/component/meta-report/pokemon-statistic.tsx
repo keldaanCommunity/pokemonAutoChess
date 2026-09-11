@@ -265,14 +265,14 @@ function PokemonFamilyCard(props: {
               <div className="pokemon-member-charts-row">
                 <HistoryChart
                   entries={pokemon.rank_history ?? []}
-                  label="average_place"
+                  label={t("meta_report.average_place")}
                   color="#e8a838"
                   invertY={true}
                   portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
                 />
                 <HistoryChart
                   entries={pokemon.count_history ?? []}
-                  label="count"
+                  label={t("meta_report.count")}
                   color="#76c893"
                   portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
                 />

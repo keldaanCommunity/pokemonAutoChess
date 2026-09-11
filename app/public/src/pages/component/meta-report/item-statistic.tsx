@@ -55,11 +55,11 @@ export default function ItemStatistic(props: { item: IItemV2; rank: number }) {
         <div className="pokemon-history-charts">
           <HistoryChart
             entries={rankHistory}
-            label="average_place"
+            label={t("meta_report.average_place")}
             color="#e8a838"
             invertY={true}
           />
-          <HistoryChart entries={countHistory} label="count" color="#76c893" />
+          <HistoryChart entries={countHistory} label={t("meta_report.count")} color="#76c893" />
         </div>
       )}
     </div>
