@@ -71,7 +71,7 @@ export function ItemReport() {
   return (
     <div id="item-report">
       <header>
-        <h2>{t("best_items")}</h2>
+        <h2>{t("meta_report.best_items")}</h2>
         <select
           value={itemRankingBy}
           onChange={(e) => {
@@ -79,10 +79,10 @@ export function ItemReport() {
           }}
         >
           <option value="count">
-            {t("rank")} {t("by_popularity")}
+            {t("rank")} {t("meta_report.by_popularity")}
           </option>
           <option value="rank">
-            {t("rank")} {t("by_average_place")}
+            {t("rank")} {t("meta_report.by_average_place")}
           </option>
         </select>
         <select

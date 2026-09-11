@@ -64,3 +64,4 @@
 - Removed Bench is Lava scribble
 - Add "Base" to the glossary of technical terms
 - New title: Bodybuilder. Get a FIGHTING Pokémon to +40 ATK after training on the bench.
+- Synergy meta report is now public

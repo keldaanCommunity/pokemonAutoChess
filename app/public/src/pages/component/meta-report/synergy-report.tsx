@@ -4,10 +4,10 @@ import { EloRankThreshold } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import type { ITypeStatistics } from "../../../../../types/meta"
+import { keys } from "../../../../../utils/object"
 import { fetchMetaTypes } from "../../../models/pokemons-statistic-v2"
 import SynergyStatistic from "./synergy-statistic"
 import "./synergy-report.css"
-import { keys } from "../../../../../utils/object"
 
 export function SynergyReport() {
   const [loading, setLoading] = useState<boolean>(true)
@@ -45,16 +45,19 @@ export function SynergyReport() {
     <div id="synergy-report">
       <header>
         <h2>{t("synergies")}</h2>
+        <div className="my-box" style={{ marginBottom: "0.5em" }}>
+          <p>{t("meta_report.synergy_report_note")}</p>
+        </div>
         <div className="filters">
           <select
             value={synergyRankingBy}
             onChange={(e) => setSynergyRanking(e.target.value)}
           >
             <option value="count">
-              {t("rank")} {t("by_popularity")}
+              {t("rank")} {t("meta_report.by_popularity")}
             </option>
             <option value="average_rank">
-              {t("rank")} {t("by_average_place")}
+              {t("rank")} {t("meta_report.by_average_place")}
             </option>
           </select>
           <select

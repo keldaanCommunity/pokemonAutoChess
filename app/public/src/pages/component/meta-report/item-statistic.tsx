@@ -35,17 +35,17 @@ export default function ItemStatistic(props: { item: IItemV2; rank: number }) {
         ></img>
         <span>{t(`item.${props.item.name}`)}</span>
         <span className="item-stat-metric">
-          <label>{t("average_place")}:</label>
+          <label>{t("meta_report.average_place")}:</label>
           <span>{props.item.rank}</span>
           <HistoryDelta entries={rankHistory} invertY={true} />
         </span>
         <span className="item-stat-metric">
-          <label>{t("count")}:</label>
+          <label>{t("meta_report.count")}:</label>
           <span>{props.item.count}</span>
           <HistoryDelta entries={countHistory} />
         </span>
         <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
-          <label>{t("popular_holders")}:</label>
+          <label>{t("meta_report.popular_holders")}:</label>
           {props.item.pokemons.map((pokemon) => (
             <PokemonPortrait portrait={PkmIndex[pokemon]} key={pokemon} />
           ))}
