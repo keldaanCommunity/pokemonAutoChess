@@ -963,7 +963,7 @@
 		"SEED_FLARE": "Shaymin zendt een schokgolf uit, brengt [20,25,30,35,70,SP] SPECIAL toe aan alle vijandelijke Pokémon en verlaagt hun SPE_DEF met [3,3,3,3,6]",
 		"BLAST_BURN": "Brengt [30,60,120,240,SP] SPECIAL toe in een gebied rond de gebruiker",
 		"DISCHARGE": "Breng [25,50,100,200,SP] SPECIAL toe aan dichtbijzijnde vijandelijke Pokémon en pas de PARALYSYS status op ze toe voor 5 seconden",
-		"BITE": "Brengt [40,80,120,200,SP] SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor 30% van de schade. FLINCH doel gedurende 5 seconden",
+		"BITE": "Brengt [300,400,500,1000]% van de ATK van de gebruiker als SPECIAL toe aan het doelwit en herstelt de gebruiker's HP voor [50,SP]% van de schade. FLINCH doel gedurende 5 seconden",
 		"DRAGON_TAIL": "Breng [30,60,100,150,SP] SPECIAL toe aan het doelwit en verbeter de gebruiker's DEF en SPE_DEF met [2,4,6,10,SP]",
 		"DRAGON_BREATH": "Breng [25,50,100,200,SP] SPECIAL toe aan alle vijandelijke Pokémon achter het doelwit",
 		"ICICLE_CRASH": "Brengt [20,40,80,160,SP] SPECIAL toe in een gebied rond het doelwit",

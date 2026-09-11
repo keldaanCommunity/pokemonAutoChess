@@ -21,8 +21,7 @@ export class SkitterSmackStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      target
+      pokemon
     )
     const [dx, dy] = OrientationVector[pokemon.orientation]
 

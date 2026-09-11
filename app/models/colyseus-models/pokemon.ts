@@ -1776,7 +1776,7 @@ export class Larvitar extends Pokemon {
   speDef = 4
   maxPP = 90
   range = 1
-  skill = Ability.BITE
+  skill = Ability.PURSUIT
 }
 
 export class Pupitar extends Pokemon {
@@ -1791,7 +1791,7 @@ export class Pupitar extends Pokemon {
   speDef = 8
   maxPP = 90
   range = 1
-  skill = Ability.BITE
+  skill = Ability.PURSUIT
 }
 
 export class Tyranitar extends Pokemon {
@@ -1805,7 +1805,7 @@ export class Tyranitar extends Pokemon {
   speDef = 10
   maxPP = 90
   range = 1
-  skill = Ability.BITE
+  skill = Ability.PURSUIT
 }
 
 export class JangmoO extends Pokemon {
@@ -4628,7 +4628,7 @@ export class Totodile extends Pokemon {
   speDef = 4
   maxPP = 100
   range = 1
-  skill = Ability.CRUNCH
+  skill = Ability.BITE
 }
 
 export class Croconaw extends Pokemon {
@@ -4647,7 +4647,7 @@ export class Croconaw extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 1
-  skill = Ability.CRUNCH
+  skill = Ability.BITE
 }
 
 export class Feraligatr extends Pokemon {
@@ -4665,7 +4665,7 @@ export class Feraligatr extends Pokemon {
   speDef = 10
   maxPP = 100
   range = 1
-  skill = Ability.CRUNCH
+  skill = Ability.BITE
 }
 
 export class Azurill extends Pokemon {

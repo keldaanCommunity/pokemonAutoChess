@@ -1763,7 +1763,7 @@
 		"CHARGE": "Fino alla fine del combattimento, gli attacchi infliggono [100,100,100,200,SP]% di SPECIAL addizionale (cumulativo).",
 		"DISCHARGE": "Infliggi [25,50,100,200,SP] SPECIAL a Pokèmon nemici adiacenti e infliggili PARALYSIS per 5 secondi.",
 		"SHOCKWAVE": "Infliggi [30,60,120,240,SP] SPECIAL a tutti i nemici in un raggio di 2 caselle, +1 gittata se l'utilizzatore è sotto l'effetto del ELECTRIC_FIELD, -20% di danni per tessera da parte dell'utente.",
-		"BITE": "Infligge [40,80,120,200,SP] SPECIAL, guarisce l'utilizzatore per il 30% del danno inflitto e provoca al bersaglio FLINCH per 5 secondi",
+		"BITE": "Infligge al bersaglio [300,400,500,1000]% dell'ATK dell'utente come SPECIAL e cura l'utente di [50,SP]% del danno inflitto. Provoca un FLINCH al bersaglio per 5 secondi.",
 		"AQUA_TAIL": "Infliggi [30,60,100,200,SP] SPECIAL e ricevi [30,60,100,200,SP] SHIELD.",
 		"DRAGON_TAIL": "Infliggi [30,60,100,150,SP] SPECIAL e potenzia la DEF e SPE_DEF dell'utilizzatore di [2,4,6,10,SP].",
 		"DRAGON_BREATH": "Infligge [25,50,100,200,SP] SPECIAL a tutti i Pokèmon nemici dietro il bersaglio.",

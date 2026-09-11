@@ -24,8 +24,7 @@ export class ShadowPunchStrategy extends AbilityStrategy {
           coord.y,
           pokemon.positionX,
           pokemon.positionY,
-          pokemon,
-          lowestHealthEnemy
+          pokemon
         )
         pokemon.moveTo(coord.x, coord.y, board, false)
       }

@@ -288,8 +288,8 @@ export class RunningShoesOnMoveEffect extends OnMoveEffect {
   stacks = 0
 
   constructor() {
-    super((pkm) => {
-      pkm.addSpeed(5, pkm, 0, false)
+    super(({ pokemon }) => {
+      pokemon.addSpeed(5, pokemon, 0, false)
       this.stacks += 1
     })
   }

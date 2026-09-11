@@ -414,24 +414,19 @@ export class OnDamageDealtEffect extends Effect {
   }
 }
 
+export interface OnMoveEffectArgs {
+  pokemon: PokemonEntity
+  board: Board
+  oldX: number
+  oldY: number
+  newX: number
+  newY: number
+}
+
 export class OnMoveEffect extends Effect {
-  override apply(
-    pokemon: PokemonEntity,
-    board: Board,
-    oldX: number,
-    oldY: number,
-    newX: number,
-    newY: number
-  ) {}
+  override apply(args: OnMoveEffectArgs) {}
   constructor(
-    effect?: (
-      pokemon: PokemonEntity,
-      board: Board,
-      oldX: number,
-      oldY: number,
-      newX: number,
-      newY: number
-    ) => void,
+    effect?: (args: OnMoveEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

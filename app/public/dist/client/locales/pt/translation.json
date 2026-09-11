@@ -1836,7 +1836,7 @@
 		"SEED_FLARE": "O corpo de Shaymin emite uma onda de choque, causando [20,25,30,35,70,SP] de SPECIAL a todos os inimigos em uma alcance de 5 espaços e diminuindo suas SPE_DEF em [3,3,3,3,6]",
 		"BLAST_BURN": "Inflinge [30,60,120,240,SP] de SPECIAL a todos os inimigos ADJACENT.",
 		"DISCHARGE": "Inflige [25,50,100,200,SP] de SPECIAL a todos os inimigoos ADJACENT e aplica PARALYSIS por 5 segundos",
-		"BITE": "Inflige [40,80,120,200,SP] de SPECIAL ao alvo e cura oo usuário em 30% do dano causado. Aplica FLINCH no alvo por 5 segundos",
+		"BITE": "Inflige [300,400,500,1000]% do ATK do utilizado como SPECIAL ao alvo e cura oo usuário em [50,SP]% do dano causado. Aplica FLINCH no alvo por 5 segundos",
 		"AQUA_TAIL": "Inflige [30,60,100,200,SP] de SPECIAL no alvo e ganha [30,60,100,200,SP] de SHIELD",
 		"DRAGON_TAIL": "Inflige [30,60,100,150,SP] de SPECIAL no alvo e recebe [2,4,6,10,SP] de DEF e SPE_DEF.",
 		"DRAGON_BREATH": "Inflige [25,50,100,200,SP] de SPECIAL no alvo e em um inimigo logo atrás dele.",

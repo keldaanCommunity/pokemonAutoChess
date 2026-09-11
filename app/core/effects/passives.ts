@@ -1213,8 +1213,7 @@ const superchargeTadbulb = (
           pokemon.positionY,
           cell.value.positionX,
           cell.value.positionY,
-          pokemon,
-          undefined
+          pokemon
         )
         const destination = board.getKnockBackPlace(
           cell.value.positionX,
@@ -1402,7 +1401,7 @@ export const PassiveEffects: Partial<
     })
   ],
   [Passive.STENCH]: [
-    new OnMoveEffect((pokemon, board, oldX, oldY) => {
+    new OnMoveEffect(({ pokemon, board, oldX, oldY }) => {
       if (pokemon.simulation && board) {
         board.addBoardEffect(
           oldX,

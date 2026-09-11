@@ -22,8 +22,7 @@ export class ShadowClawStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      target
+      pokemon
     )
     pokemon.broadcastAbility({
       positionX: pokemon.positionX,

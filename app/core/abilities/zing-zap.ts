@@ -16,7 +16,12 @@ export class ZingZapStrategy extends AbilityStrategy {
     target.status.triggerFlinch(3000, target, pokemon)
 
     if (target.status.paralysis) {
-      pokemon.addShield([10, 20, 40, 80][pokemon.stars - 1] ?? 80, pokemon, 1, crit)
+      pokemon.addShield(
+        [10, 20, 40, 80][pokemon.stars - 1] ?? 80,
+        pokemon,
+        1,
+        crit
+      )
     }
 
     const orientation = board.orientation(
@@ -24,8 +29,7 @@ export class ZingZapStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      undefined
+      pokemon
     )
 
     const destination = board.getKnockBackPlace(

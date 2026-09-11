@@ -384,6 +384,7 @@ import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
+import { PursuitStrategy } from "./pursuit";
 import { PyroBallStrategy } from "./pyro-ball"
 import { QuiverDanceStrategy } from "./quiver-dance"
 import { RageStrategy } from "./rage"
@@ -1105,6 +1106,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.PURIFY]: new PurifyStrategy(),
+  [Ability.PURSUIT]: new PursuitStrategy(),
   [Ability.PYRO_BALL]: new PyroBallStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.RAGE]: new RageStrategy(),

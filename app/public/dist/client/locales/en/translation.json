@@ -1786,7 +1786,8 @@
 		"FLING": "Fling",
 		"REVELATION_DANCE": "Revelation Dance",
 		"THUNDERCLAP_PRESS": "Thunderclap Press",
-		"DRAGON_RAGE": "Dragon Rage"
+		"DRAGON_RAGE": "Dragon Rage",
+		"PURSUIT": "Pursuit"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1851,7 +1852,7 @@
 		"CHARGE": "Until the end of the fight, attacks deal [100,100,100,200,SP]% additional SPECIAL (stackable).",
 		"DISCHARGE": "Deal [25,50,100,200,SP] SPECIAL to all ADJACENT enemy Pokémon and inflict them with PARALYSIS for 5 seconds.",
 		"SHOCKWAVE": "Deal [30,60,120,240,SP] SPECIAL to all enemies in a 2-range radius, +1 range if user is in an ELECTRIC_FIELD, -20% damage per tile from the user.",
-		"BITE": "Deal [40,80,120,200,SP] SPECIAL to the target and heal the user for 30% of the damage dealt. Cause the target to FLINCH for 5 seconds.",
+		"BITE": "Deal [300,400,500,1000]% of user ATK as SPECIAL to the target and heal the user for [50,SP]% of the damage dealt. Cause the target to FLINCH for 5 seconds.",
 		"AQUA_TAIL": "Deal [30,60,100,200,SP] SPECIAL to the target and gain [30,60,100,200,SP] SHIELD.",
 		"DRAGON_TAIL": "Deal [30,60,100,150,SP] SPECIAL to the target and increase the user's DEF and SPE_DEF by [2,4,6,10,SP].",
 		"DRAGON_BREATH": "Deal [25,50,100,200,SP] SPECIAL to the target and an enemy directly behind it.",
@@ -1965,7 +1966,7 @@
 		"VESPIQUEN_ORDERS": "Vespiquen will change its ability based on the row it starts in:\n- Front row: $t(ability.DEFEND_ORDER)\n- Middle row: $t(ability.HEAL_ORDER)\n- Back row: $t(ability.ATTACK_ORDER)",
 		"DEFEND_ORDER": "Spawn a Combee nearby then gives [10,20,30,50,SP] SHIELD to user and all Combee allies. User gets [10,20,30,SP] additional SHIELD per Combee ally on the board.",
 		"ATTACK_ORDER": "Spawn a Combee nearby then all Combee allies get RAGE for 3 seconds. The next attack of the user deals [20,40,60,120,SP] additional SPECIAL + [10,20,30,60,SP] per Combee ally on the board.",
-		"BUG_BITE": " Deal [20,40,80,160,SP] SPECIAL to the target and steal and eat one of their berries if it holds one.",
+		"BUG_BITE": "Deal [20,40,80,160,SP] SPECIAL to the target and steal and eat one of their berries if it holds one.",
 		"SHELL_TRAP": "The user's SHIELD explodes, dealing [50,50,50,100,SP] SPECIAL + current SHIELD to all ADJACENT enemy Pokémon. If the user has no SHIELD, gain [25,50,75,150,SP] SHIELD instead.",
 		"DIG": "Dig underground and reappear next to the farthest enemy Pokémon, dealing [10,20,40,80,SP] SPECIAL to all enemy Pokémon in the path.",
 		"FIRE_SPIN": "Deal [25,50,100,200,SP] SPECIAL and BURN for 3 seconds the target and enemy Pokémon ADJACENT to them.",
@@ -2352,7 +2353,8 @@
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
 		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD",
 		"THUNDERCLAP_PRESS": "The target is hit with an electric bodyslam and pushed away. Then the target and the enemy collided on the way get PARALYSIS for 4 seconds and take [20,40,80,160,SP] SPECIAL.",
-		"DRAGON_RAGE": "Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value."
+		"DRAGON_RAGE": "Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value.",
+		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3782,7 +3784,6 @@
 		"LEGIONNAIRE": "Legionnaire",
 		"FIVE_STARS": "★★★★★",
 		"BODYBUILDER": "Bodybuilder"
-
 	},
 	"title_description": {
 		"NOVICE": "Play your first game",

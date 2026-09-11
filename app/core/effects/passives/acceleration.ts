@@ -5,8 +5,8 @@ export class AccelerationEffect extends OnMoveEffect {
   accelerationStacks = 0
 
   constructor() {
-    super((pkm) => {
-      pkm.addSpeed(15, pkm, 0, false)
+    super(({ pokemon }) => {
+      pokemon.addSpeed(15, pokemon, 0, false)
       this.accelerationStacks += 1
     }, Passive.ACCELERATION)
   }

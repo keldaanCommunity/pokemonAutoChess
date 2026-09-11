@@ -8,7 +8,6 @@ import { findPath } from "../utils/pathfind"
 import { AbilityStrategies } from "./abilities/abilities"
 import { castAbility } from "./abilities/cast"
 import type { Board } from "./board"
-import { OnMoveEffect } from "./effects/effect"
 import { drumBeat, partingShot, stenchJump } from "./effects/passives"
 import { getMoveSpeed } from "./move-speed"
 import type { PokemonEntity } from "./pokemon-entity"
@@ -109,8 +108,8 @@ export default class MovingState extends PokemonState {
         // logger.debug(`pokemon ${pokemon.name} jumped from (${pokemon.positionX},${pokemon.positionY}) to (${x},${y}), (desired direction (${coordinates.x}, ${coordinates.y})), orientation: ${pokemon.orientation}`);
         const oldX = pokemon.positionX
         const oldY = pokemon.positionY
+        pokemon.orientation = board.orientation(oldX, oldY, x, y, pokemon)
         board.swapCells(oldX, oldY, x, y)
-        this.onMove(pokemon, board, oldX, oldY, x, y)
       }
     } else {
       // Using pathfinding to get optimal path
@@ -146,33 +145,10 @@ export default class MovingState extends PokemonState {
         const oldX = pokemon.positionX
         const oldY = pokemon.positionY
         pokemon.action = PokemonActionState.WALK
+        pokemon.orientation = board.orientation(oldX, oldY, x, y, pokemon)
         board.swapCells(oldX, oldY, x, y)
-        this.onMove(pokemon, board, oldX, oldY, x, y)
       }
     }
-  }
-
-  onMove(
-    pokemon: PokemonEntity,
-    board: Board,
-    oldX: number,
-    oldY: number,
-    newX: number,
-    newY: number
-  ) {
-    // update orientation
-    pokemon.orientation = board.orientation(
-      oldX,
-      oldY,
-      newX,
-      newY,
-      pokemon,
-      undefined
-    )
-
-    pokemon.getEffects(OnMoveEffect).forEach((effect) => {
-      effect.apply(pokemon, board, oldX, oldY, newX, newY)
-    })
   }
 
   onEnter(pokemon: PokemonEntity) {

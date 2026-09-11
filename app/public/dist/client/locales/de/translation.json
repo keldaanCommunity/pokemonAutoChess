@@ -1836,7 +1836,7 @@
 		"BLAST_BURN": "Flächenangriff, der [30,60,120,240,SP] SPECIAL verursacht",
 		"CHARGE": "Bis zum Ende des Kampfes fügen Attacken [100,100,100,200,SP]% zusätzlichen SPECIAL (stapelbar).",
 		"DISCHARGE": "Schocken Sie Gegner in der Nähe mit [25,50,100,200,SP] SPECIAL und paralysieren Sie sie für 5 Sekunden",
-		"BITE": "Fügt dem Ziel [40,80,120,200,SP] SPECIAL Schaden zu und heilt ihn um 30 % des Schadens. FLINCH das Ziel 5 Sekunden lang",
+		"BITE": "Fügt dem Ziel [300,400,500,1000,SP] % des ATK des Anwenders als SPECIAL zu und heilt ihn um 50 % des Schadens. FLINCH das Ziel 5 Sekunden lang",
 		"AQUA_TAIL": "Füge dem Gegner [30.60,100,200,SP] SPECIAL zu und erhalte [30,60,100,200,SP] SHIELD",
 		"DRAGON_TAIL": "Attacke, die [30,60,100,150,SP] SPECIAL am Ziel verursacht und DEF und SPE_DEF um [2,4,6,10,SP] verstärkt.",
 		"DRAGON_BREATH": "Fügt dem Ziel und einem Gegnern dahinter [25,50,100,200,SP] SPECIAL zu.",

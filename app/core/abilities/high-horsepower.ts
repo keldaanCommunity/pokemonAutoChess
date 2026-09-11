@@ -21,8 +21,7 @@ export class HighHorsepowerStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      undefined
+      pokemon
     )
 
     // Find potential knockback position for target
