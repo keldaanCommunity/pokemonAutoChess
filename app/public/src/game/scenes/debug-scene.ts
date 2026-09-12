@@ -285,7 +285,7 @@ export class DebugScene extends Phaser.Scene {
   }
 
   applyStatusAnimation(
-    status: Status | Boost | "BALM_MUSHROOM" | "POISONNED_BADLY" | ""
+    status: Status | Boost | "BALM_MUSHROOM" | "POISONED_BADLY" | ""
   ) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
@@ -320,7 +320,7 @@ export class DebugScene extends Phaser.Scene {
       if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
       }
-      if (status === "POISONNED_BADLY") {
+      if (status === "POISONED_BADLY") {
         this.pokemonSprite.addPoison(3)
       }
       if (status === Status.SLEEP) {
