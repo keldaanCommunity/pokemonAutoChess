@@ -13,19 +13,15 @@ export class TickleStrategy extends AbilityStrategy {
     const attackLost = 3
     const defLost = 3
     const nbMaxEnemiesHit = [1, 2, 3, 5][pokemon.stars - 1] ?? 5
-    let nbEnemiesHit = 0
-    board
-      .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-      .forEach((cell) => {
-        if (
-          cell.value &&
-          cell.value.team !== pokemon.team &&
-          nbEnemiesHit < nbMaxEnemiesHit
-        ) {
-          nbEnemiesHit++
-          cell.value.addAttack(-attackLost, pokemon, 1, crit)
-          cell.value.addDefense(-defLost, pokemon, 1, crit)
-        }
-      })
+    const closestEnemies = board.getClosestEnemies(
+      pokemon.positionX,
+      pokemon.positionY,
+      target.team
+    )
+    const enemiesHit = closestEnemies.slice(0, nbMaxEnemiesHit)
+    enemiesHit.forEach((enemy) => {
+      enemy.addAttack(-attackLost, pokemon, 1, crit)
+      enemy.addDefense(-defLost, pokemon, 1, crit)
+    })
   }
 }
