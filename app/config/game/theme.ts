@@ -7,13 +7,14 @@ export const THEMES = [
   "default",
   "super",
   "lilac",
+  "rainbow",
   "unown",
+  "origin",
   "umbra",
   "autumn",
   "redsea",
   "zengarden",
-  "deerling",
-  "origin"
+  "deerling"
 ] as const
 
 export type Theme = (typeof THEMES)[number]
@@ -28,6 +29,7 @@ export const VIDEO_BG_THEMES: Theme[] = [
 
 export const TITLE_BY_THEME = {
   unown: Title.ARCHEOLOGIST,
+  rainbow: Title.HARLEQUIN,
   autumn: Title.POKEMON_RANGER,
   umbra: Title.DELINQUENT,
   redsea: Title.FISHERMAN,

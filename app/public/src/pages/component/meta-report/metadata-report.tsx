@@ -27,15 +27,8 @@ const MetadataReport = () => {
   }
 
   return (
-    <p
-      id="metadata-report"
-      title={t("meta_report_info", {
-        report_date: formatDate(new Date(createdAt), { dateStyle: "long" }),
-        time_limit: formatDate(new Date(timeLimit), { dateStyle: "long" }),
-        count
-      })}
-    >
-      {t("meta_report_info", {
+    <p id="metadata-report">
+      {t("meta_report.generation_info", {
         report_date: formatDate(new Date(createdAt), { dateStyle: "medium" }),
         time_limit: formatDate(new Date(timeLimit), { dateStyle: "medium" }),
         count

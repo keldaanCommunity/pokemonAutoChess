@@ -16,6 +16,7 @@
   align-items: center;
   gap: 1vw;
   padding: 4px 8px;
+  flex-wrap: wrap;
 }
 
 #pokemon-collection header p {

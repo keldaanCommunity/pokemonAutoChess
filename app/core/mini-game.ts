@@ -20,7 +20,7 @@ import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
-import { getSynergyStep } from "../models/colyseus-models/synergies"
+import { getSynergyTier } from "../models/colyseus-models/synergies"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
 import {
@@ -419,6 +419,10 @@ export class MiniGame {
       this.alivePlayers.forEach((player) => {
         player.items.push(Item.LAPRAS_PASSPORT)
       })
+    } else if (state.townEncounter === TownEncounters.CHIMECHO) {
+      this.alivePlayers.forEach((player) => {
+        player.items.push(Item.SOOTHE_BELL)
+      })
     }
   }
 
@@ -618,7 +622,7 @@ export class MiniGame {
         const index = items.findIndex((i) => isIn(SynergyStones, i))
         items[index] = pickRandomIn(CraftableNoStonesOrScarves)
       }
-    } else if (itemsSet === ItemComponentsNoFossilOrScarf && chance(0.4)) {
+    } else if (itemsSet === ItemComponentsNoFossilOrScarf && chance(0.8)) {
       // max 1 random fossil stone, added with 40% chance
       items.push(Item.FOSSIL_STONE)
     }
@@ -644,30 +648,28 @@ export class MiniGame {
           if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
           return true
         })
-        const synergiesTriggerLevels: [Synergy, number][] = Array.from(
-          player.synergies
-        )
+        const synergiesTiers: [Synergy, number][] = Array.from(player.synergies)
           .filter(([type, value]) => synergiesUsable.includes(type))
           .map(([type, value]) => {
-            let levelReached = getSynergyStep(player.synergies, type)
-            // lowering down low triggers synergies
+            let tier = getSynergyTier(player.synergies, type)
+            // lowering down low thresholds synergies
             if (type === Synergy.LIGHT) {
-              levelReached = [0, 1, 1, 2, 3][levelReached]
+              tier = [0, 1, 1, 2, 3][tier]
             }
             if (type === Synergy.FLORA) {
-              levelReached = [0, 1, 2, 3, 3][levelReached]
+              tier = [0, 1, 2, 3, 3][tier]
             }
             if (stageLevel === 20 && type === Synergy.GOURMET) {
               // not enough legendaries of that type
-              levelReached = max(2)(levelReached)
+              tier = max(2)(tier)
             }
-            return [type, levelReached] as [Synergy, number]
+            return [type, tier] as [Synergy, number]
           })
-          .sort(([typeA, stepA], [typeB, stepB]) => {
+          .sort(([typeA, tierA], [typeB, tierB]) => {
             const levelA = player.synergies.get(typeA) ?? 0
             const levelB = player.synergies.get(typeB) ?? 0
-            if (stepA !== stepB) {
-              return stepB - stepA
+            if (tierA !== tierB) {
+              return tierB - tierA
             } else if (levelA !== levelB) {
               return levelB - levelA
             } else {
@@ -688,7 +690,7 @@ export class MiniGame {
         const getNbOfType = (type: Synergy) =>
           candidatesSymbols.filter((t) => t === type).length
 
-        synergiesTriggerLevels.forEach(([type, level]) => {
+        synergiesTiers.forEach(([type, level]) => {
           // add as many symbols as synergy levels reached
           if (getNbOfType(type) >= MAX_SYMBOLS_OF_THE_SAME_TYPE) return
           candidatesSymbols.push(...new Array(level).fill(type))
@@ -696,7 +698,7 @@ export class MiniGame {
         //logger.debug("symbols from synergies", candidatesSymbols)
         if (candidatesSymbols.length < MIN_SYMBOLS_POOL_SIZE) {
           // complete with random other incomplete synergies
-          const incompleteSynergies = synergiesTriggerLevels
+          const incompleteSynergies = synergiesTiers
             .filter(
               ([type, level]) =>
                 level === 0 &&
@@ -885,6 +887,9 @@ export class MiniGame {
             player.updateSynergies()
           } else {
             player.items.push(item.name)
+            if (item.name === Item.SILK_SCARF) {
+              player.extraScarves += 1
+            }
           }
         }
       }
@@ -941,11 +946,14 @@ export class MiniGame {
     }
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
+      const candidateMissions = MissionOrders.filter((m) =>
+        state.shinyEncounter ? m !== Item.MISSION_ORDER_GOLD : true
+      )
       this.alivePlayers.forEach((player) => {
         player.choices.push(
           new PlayerChoice({
             type: "mission_order",
-            items: pickNRandomIn(MissionOrders, 3)
+            items: pickNRandomIn(candidateMissions, 3)
           })
         )
       })

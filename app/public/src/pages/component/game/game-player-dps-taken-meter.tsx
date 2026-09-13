@@ -1,6 +1,8 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
+import { EnvironmentalEffects } from "../../../../../types/enum/Effect"
+import { isIn } from "../../../../../utils/array"
 import GameDpsTaken from "./game-dps-taken"
 
 export default function GamePlayerDpsTakenMeter({
@@ -11,16 +13,19 @@ export default function GamePlayerDpsTakenMeter({
   const { t } = useTranslation()
   const sortedDamageTaken = useMemo(
     () =>
-      [...dpsMeter].sort((a, b) => {
-        return (
-          b.physicalDamageReduced +
-          b.specialDamageReduced +
-          b.shieldDamageTaken -
-          (a.physicalDamageReduced +
-            a.specialDamageReduced +
-            a.shieldDamageTaken)
-        )
-      }),
+      // board effects are not units on the board, so they never take damage
+      dpsMeter
+        .filter((d) => !isIn(EnvironmentalEffects, d.id))
+        .sort((a, b) => {
+          return (
+            b.physicalDamageReduced +
+            b.specialDamageReduced +
+            b.shieldDamageTaken -
+            (a.physicalDamageReduced +
+              a.specialDamageReduced +
+              a.shieldDamageTaken)
+          )
+        }),
     [dpsMeter]
   )
 

@@ -1,9 +1,7 @@
-import firebase from "firebase/compat/app"
 import React, { useCallback, useRef, useState } from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { USERNAME_REGEXP } from "../../../../../config"
 import type { IChatV2, ISuggestionUser } from "../../../../../types"
-import { debounce } from "../../../../../utils/function"
 import {
   getTwitchBlacklist,
   removeTwitchBlacklist,
@@ -14,7 +12,9 @@ import {
 } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import ChatHistory from "../chat/chat-history"
-import SearchResults from "../profile/search-results"
+import {
+  PlayerSearchBar
+} from "../search/player-search-bar"
 import "./moderation-panel.css"
 
 export default function ModerationPanel() {
@@ -201,59 +201,14 @@ function SearchByMessageContent() {
 }
 
 function RenameAccounts() {
-  const [query, setQuery] = useState("")
-  const [suggestions, setSuggestions] = useState<ISuggestionUser[]>([])
-  const [searchLoading, setSearchLoading] = useState(false)
-  const [searchError, setSearchError] = useState<string | null>(null)
-  const abortRef = useRef<AbortController | null>(null)
-
   const [selected, setSelected] = useState<ISuggestionUser | null>(null)
   const [newName, setNewName] = useState("")
   const [renaming, setRenaming] = useState(false)
   const [renameError, setRenameError] = useState<string | null>(null)
   const [renameSuccess, setRenameSuccess] = useState<string | null>(null)
 
-  async function fetchSuggestions(q: string) {
-    abortRef.current = new AbortController()
-    setSearchLoading(true)
-    setSearchError(null)
-    try {
-      const token = await firebase.auth().currentUser?.getIdToken()
-      const res = await fetch(`/players?name=${encodeURIComponent(q)}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        signal: abortRef.current.signal
-      })
-      if (!res.ok) throw new Error(res.statusText)
-      setSuggestions(await res.json())
-    } catch (e: any) {
-      if (e?.name !== "AbortError")
-        setSearchError(e?.message ?? "Search failed")
-    } finally {
-      setSearchLoading(false)
-    }
-  }
-
-  const debouncedFetch = useRef(debounce(fetchSuggestions, 400)).current
-
-  function onQueryChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const q = e.target.value
-    setQuery(q)
-    setSelected(null)
-    setNewName("")
-    setRenameError(null)
-    setRenameSuccess(null)
-    abortRef.current?.abort()
-    if (q.trim().length >= 2) {
-      debouncedFetch(q.trim())
-    } else {
-      setSuggestions([])
-    }
-  }
-
   function selectUser(user: ISuggestionUser) {
     setSelected(user)
-    setSuggestions([])
-    setQuery(user.name)
     setNewName("")
     setRenameError(null)
     setRenameSuccess(null)
@@ -285,29 +240,7 @@ function RenameAccounts() {
 
   return (
     <div className="moderation-search moderation-rename">
-      <div className="moderation-search-bar">
-        <input
-          type="text"
-          className="moderation-search-input"
-          placeholder="Search username…"
-          value={query}
-          onChange={onQueryChange}
-        />
-        {searchLoading && <span className="moderation-hint">Searching…</span>}
-      </div>
-
-      {searchError && <p className="moderation-error">{searchError}</p>}
-
-      {suggestions.length > 0 && (
-        <div className="moderation-results">
-          <SearchResults suggestions={suggestions} onSelect={selectUser} />
-        </div>
-      )}
-      {suggestions.length === 0 &&
-        query.trim().length >= 2 &&
-        !searchLoading &&
-        !selected && <p className="moderation-no-results">No users found.</p>}
-
+      <PlayerSearchBar onSelect={selectUser} />
       {selected && (
         <div className="moderation-rename-form my-box">
           <p className="moderation-hint">

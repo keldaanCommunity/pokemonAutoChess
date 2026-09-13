@@ -8,7 +8,8 @@ import ReportMetadata from "../models/mongo-models/report-metadata"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import type { EloRank } from "../types/enum/EloRank"
-import type { Synergy } from "../types/enum/Synergy"
+import { Rarity } from "../types/enum/Game"
+import { Synergy } from "../types/enum/Synergy"
 import type { ITypeStatistics } from "../types/meta"
 import type { IDendrogram } from "../types/models/dendrogram"
 import type {
@@ -302,21 +303,24 @@ export function computeSynergyAverages() {
       }
 
       const pokemon = getPokemonData(pkm.name)
-      for (const synergy of pokemon.types) {
+      const types = [...pokemon.types]
+
+      if (pokemon.rarity === Rarity.HATCH) {
+        types.push(Synergy.BABY)
+      }
+
+      for (const type of types) {
         const count = pkm.count
         const rank = pkm.rank
 
         const ranksPerSynergy = rankPerTierAndSynergy.get(tier)!
         const countsPerSynergy = countPerTierAndSynergy.get(tier)!
-        if (!ranksPerSynergy.has(synergy)) {
-          ranksPerSynergy.set(synergy, 0)
-          countsPerSynergy.set(synergy, 0)
+        if (!ranksPerSynergy.has(type)) {
+          ranksPerSynergy.set(type, 0)
+          countsPerSynergy.set(type, 0)
         }
-        ranksPerSynergy.set(
-          synergy,
-          ranksPerSynergy.get(synergy)! + rank * count
-        )
-        countsPerSynergy.set(synergy, countsPerSynergy.get(synergy)! + count)
+        ranksPerSynergy.set(type, ranksPerSynergy.get(type)! + rank * count)
+        countsPerSynergy.set(type, countsPerSynergy.get(type)! + count)
       }
     })
   })

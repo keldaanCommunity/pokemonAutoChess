@@ -187,7 +187,7 @@ There are extra server environment variables that you can add in your `.env` / C
 
 ### Adding bots
 
-In MongoDB Compass, you can import bots data (`./db-commmands/botv2.json`) in the `botV2` empty collection.
+In MongoDB Compass, you can import bots data (`./db-commmands/botv2.json`) in the `botv2` empty collection.
 
 ### IaaS Multi process VS PaaS Single process
 
