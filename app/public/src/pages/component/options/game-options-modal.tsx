@@ -5,7 +5,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { isThemeUnlocked, THEMES } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { useAppSelector } from "../../../hooks"
-import { usePreferences } from "../../../preferences"
+import { MAX_CONFIG_FPS, usePreferences } from "../../../preferences"
 import { getGameScene } from "../../game"
 import { Checkbox } from "../checkbox/checkbox"
 import LanguageSelect from "../language-select"
@@ -199,6 +199,25 @@ export default function GameOptionsModal(props: {
               }
               label={t("options.colorblind_mode")}
             />
+            <label style={{ width: "100%", padding: "0 0.5em" }}>
+              {t("options.fps_limit")}:{" "}
+              {preferences.fpsLimit > MAX_CONFIG_FPS
+                ? t("options.fps_limit_unlimited")
+                : preferences.fpsLimit}
+              <input
+                type="range"
+                min="1"
+                value={preferences.fpsLimit}
+                max={MAX_CONFIG_FPS + 1}
+                onInput={(e) =>
+                  setPreferences({
+                    fpsLimit: Number.parseFloat(
+                      (e.target as HTMLInputElement).value
+                    )
+                  })
+                }
+              ></input>
+            </label>
           </fieldset>
 
           {props.page === "main_lobby" && (
