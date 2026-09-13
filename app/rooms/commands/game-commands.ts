@@ -2432,6 +2432,7 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       pokemon.positionY = p.y
       pokemon.addItems(p.items, player)
       player.board.set(pokemon.id, pokemon)
+      pokemon.onAcquired(player)
     })
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)

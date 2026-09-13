@@ -1,5 +1,6 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
+import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
@@ -1081,16 +1082,22 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.METEORITE]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
+      const DeoxysForms = [
+        Pkm.DEOXYS,
+        Pkm.DEOXYS_ATTACK,
+        Pkm.DEOXYS_DEFENSE,
+        Pkm.DEOXYS_SPEED
+      ] satisfies Pkm[]
       if (pokemon?.passive === Passive.ALIEN_DNA) {
-        if (pokemon.name === Pkm.DEOXYS) {
-          player.transformPokemon(pokemon, Pkm.DEOXYS_ATTACK)
-        } else if (pokemon.name === Pkm.DEOXYS_ATTACK) {
-          player.transformPokemon(pokemon, Pkm.DEOXYS_DEFENSE)
-        } else if (pokemon.name === Pkm.DEOXYS_DEFENSE) {
-          player.transformPokemon(pokemon, Pkm.DEOXYS_SPEED)
-        } else if (pokemon.name === Pkm.DEOXYS_SPEED) {
-          player.transformPokemon(pokemon, Pkm.DEOXYS)
-        }
+        player.choices.push(
+          new PlayerChoice({
+            type: "form_change",
+            pokemons: DeoxysForms,
+            onChoice: (choiceIndex) => {
+              player.transformPokemon(pokemon, DeoxysForms[choiceIndex])
+            }
+          })
+        )
       }
       return false // prevent item from being equipped
     })
@@ -1098,22 +1105,25 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.ROTOM_CATALOG]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
+      const RotomForms = [
+        Pkm.ROTOM,
+        Pkm.ROTOM_HEAT,
+        Pkm.ROTOM_WASH,
+        Pkm.ROTOM_FROST,
+        Pkm.ROTOM_FAN,
+        Pkm.ROTOM_MOW,
+        Pkm.ROTOM_DRONE
+      ] satisfies Pkm[]
       if (pokemon?.passive === Passive.ROTOM) {
-        if (pokemon.name === Pkm.ROTOM) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_HEAT)
-        } else if (pokemon.name === Pkm.ROTOM_HEAT) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_WASH)
-        } else if (pokemon.name === Pkm.ROTOM_WASH) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_FROST)
-        } else if (pokemon.name === Pkm.ROTOM_FROST) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_FAN)
-        } else if (pokemon.name === Pkm.ROTOM_FAN) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_MOW)
-        } else if (pokemon.name === Pkm.ROTOM_MOW) {
-          player.transformPokemon(pokemon, Pkm.ROTOM_DRONE)
-        } else if (pokemon.name === Pkm.ROTOM_DRONE) {
-          player.transformPokemon(pokemon, Pkm.ROTOM)
-        }
+        player.choices.push(
+          new PlayerChoice({
+            type: "form_change",
+            pokemons: RotomForms,
+            onChoice: (choiceIndex) => {
+              player.transformPokemon(pokemon, RotomForms[choiceIndex])
+            }
+          })
+        )
       }
       return false // prevent item from being equipped
     })

@@ -1382,7 +1382,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
-    if (choice.pokemons.length > 0) {
+    if(choice.onChoice){
+      choice.onChoice(choiceIndex)
+    }
+
+    if (choice.pokemons.length > 0 && choice.type !== "form_change") {
       const pkm = choice.pokemons[choiceIndex]
       let pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
