@@ -8,7 +8,7 @@ A new 2v2v2v2 game mode has been added, based on tegberen's work on the "John Au
 - Passimian
 - Oricorio (Baile Style)
 - Oricorio (Pom Pom Style)
-- Oricorio (Pa'U Style)
+- Oricorio (Pa'u Style)
 - Oricorio (Sensu Style)
 - Galarian Meowth
 - Perrserker
