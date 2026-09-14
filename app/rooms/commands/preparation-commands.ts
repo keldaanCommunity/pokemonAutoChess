@@ -774,6 +774,9 @@ export class OnToggleReadyCommand extends Command<
 export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
   async execute() {
     try {
+      if (this.state.abortOnPlayerLeave) {
+        this.state.abortOnPlayerLeave.abort()
+      }
       this.state.abortOnPlayerLeave = new AbortController()
       const signal = this.state.abortOnPlayerLeave.signal
 
