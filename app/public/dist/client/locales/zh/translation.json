@@ -4303,6 +4303,8 @@
 		"show_damage_numbers": "显示伤害数字",
 		"disable_animated_tilemap": "禁用背景动画",
 		"disable_camera_shake": "禁用屏幕振动和闪光",
+		"fps_limit": "帧率上限",
+		"fps_limit_unlimited": "无限制",
 		"antialiasing": "启用抗锯齿",
 		"custom_cursors": "启用自定义光标",
 		"colorblind_mode": "色盲友好模式",
@@ -4374,6 +4376,7 @@
 		"choose_legendary": "选择一只传说宝可梦加入队伍。这是唯一的选择机会，务必慎重！",
 		"choose_wand": "选择一根魔杖，为我方FAIRY宝可梦的攻击附加额外效果",
 		"choose_gift": "选择一份礼物赠予你的搭档",
+		"choose_form": "选择你想要转化的形态",
 		"free_slot_hint": "需要至少有一个空余的备战区位置才能选择并获取宝可梦。若选择了一对，需要两个空位。",
 		"more_choices": "还可选择{{count}}次！",
 		"cost_amount": "价格：{{cost}} GOLD"
