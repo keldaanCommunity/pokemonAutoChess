@@ -10,6 +10,8 @@ export class UnboundStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.index = PkmIndex[Pkm.HOOPA_UNBOUND]
+    pokemon.name = Pkm.HOOPA_UNBOUND
+    pokemon.stars++
     this.transformToHoopaUnbound(pokemon)
     pokemon.effectsSet.add(
       new OnResurrectionEffect(({ pokemon }: { pokemon: PokemonEntity }) => {
