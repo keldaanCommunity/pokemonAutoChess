@@ -607,9 +607,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.BLACK_BELT]: [
-    new OnAttackEffect(({ pokemon, totalDamage, crit }) => {
+    new OnAttackEffect(({ pokemon, totalTakenDamage, crit }) => {
       if (crit) {
-        pokemon.addShield(Math.ceil(0.33 * totalDamage), pokemon, 0, false)
+        pokemon.addShield(Math.ceil(0.33 * totalTakenDamage), pokemon, 0, false)
       }
     })
   ],
