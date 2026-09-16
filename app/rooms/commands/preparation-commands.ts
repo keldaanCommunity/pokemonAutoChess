@@ -171,6 +171,7 @@ export class OnJoinCommand extends Command<
           // logger.debug(user.displayName);
           this.state.ownerName = u.displayName
           this.room.setMetadata({
+            ...this.room.metadata,
             ownerName: this.state.ownerName
           })
         }
@@ -643,6 +644,7 @@ export class OnKickPlayerCommand extends Command<
               })
               this.state.users.delete(userId)
               this.room.setMetadata({
+                ...this.room.metadata,
                 blacklist: this.room.metadata.blacklist.concat(userId)
               })
               cli.leave(CloseCodes.USER_KICKED)
@@ -698,7 +700,10 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
-              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setMetadata({
+                ...this.room.metadata,
+                ownerName: this.state.ownerName
+              })
               this.room.setName(
                 `${newOwner.name}'${
                   newOwner.name.endsWith("s") ? "" : "s"

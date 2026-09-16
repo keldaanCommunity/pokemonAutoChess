@@ -1132,7 +1132,7 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
       const connectedPlayer = players.find((p) => p.id === client.auth.uid)
       if (connectedPlayer) {
         /*logger.info(
-          `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
+          `${client.auth.displayName} (${client.sessionId}) joined game room ${this.room.roomId}`
         )*/
         client.view.add(connectedPlayer)
         if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
@@ -1924,7 +1924,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.room.setMetadata({ stageLevel: this.state.stageLevel })
+      this.room.setMetadata({ ...this.room.metadata, stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         player.wanderers.clear()
