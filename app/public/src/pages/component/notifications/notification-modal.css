@@ -18,3 +18,8 @@
   font-size: 2rem;
   white-space: pre-wrap;
 }
+
+.notification-modal.info p {
+  padding: 2rem;
+  text-align: center;
+}

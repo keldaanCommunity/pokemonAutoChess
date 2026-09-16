@@ -47,6 +47,7 @@ import {
   updateTournament
 } from "../stores/LobbyStore"
 import {
+  confirmPal,
   setConnectionStatus,
   setErrorAlertMessage,
   setNotifications,
@@ -268,6 +269,13 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER, (user: IUserMetadataClient) =>
             dispatch(setSearchedUser(user))
+          )
+
+          room.onMessage(
+            Transfer.SELECT_PAL,
+            (playerIdThatChoseYou: string) => {
+              dispatch(confirmPal(playerIdThatChoseYou))
+            }
           )
 
           joinLobby(room) // lobby room is now fully initialized and accessible

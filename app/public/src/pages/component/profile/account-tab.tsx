@@ -1,12 +1,10 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { USERNAME_REGEXP } from "../../../../../config"
-import { Role } from "../../../../../types"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import {
   deleteAccount,
   fetchProfile,
-  heapSnapshot,
   startTwitchVerification,
   unlinkTwitchVerification
 } from "../../../network"
@@ -42,14 +40,6 @@ export function AccountTab() {
       <button className="bubbly red" onClick={() => promptDeleteAccount()}>
         {t("profile.account.delete_account")}
       </button>
-      {user.role === Role.ADMIN && (
-        <>
-          <h3>{t("heap_snapshot")}</h3>
-          <button className="bubbly red" onClick={() => heapSnapshot()}>
-            {t("heap_snapshot")}
-          </button>
-        </>
-      )}
     </div>
   ) : null
 }

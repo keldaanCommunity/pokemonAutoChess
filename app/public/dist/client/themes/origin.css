@@ -47,7 +47,7 @@ html {
 body {
   background-image: url("/assets/theme/origin/custombg.jpg");
   background-size: cover;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .custom-bg {
@@ -69,7 +69,7 @@ select {
 }
 
 .bubbly {
-  padding: 0.5em 2em;
+  padding: 0.5em 1em;
 }
 
 .pokemon-portrait {

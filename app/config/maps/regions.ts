@@ -154,7 +154,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.ROCK_SALT
   },
   [DungeonPMDO.DeepSealedRuin]: {
-    synergies: [Synergy.AMORPHOUS, Synergy.GHOST, Synergy.MONSTER],
+    synergies: [Synergy.AMORPHOUS, Synergy.GHOST, Synergy.FOSSIL],
     music: DungeonMusic.SEALED_RUIN_PIT,
     regionalSpeciality: Item.LEFTOVERS,
     tint: 0xeeeeff
@@ -427,7 +427,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.HERBA_MYSTICA_SPICY
   },
   [DungeonPMDO.NorthernRange1]: {
-    synergies: [Synergy.POISON, Synergy.AQUATIC, Synergy.STEEL],
+    synergies: [Synergy.POISON, Synergy.WILD, Synergy.STEEL],
     music: DungeonMusic.FORTUNE_RAVINE,
     regionalSpeciality: Item.POFFIN
   },
@@ -652,7 +652,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.BIG_MUSHROOM
   },
   [DungeonPMDO.TinyMeadow]: {
-    synergies: [Synergy.GRASS, Synergy.BABY, Synergy.AMORPHOUS],
+    synergies: [Synergy.BUG, Synergy.BABY, Synergy.AMORPHOUS],
     music: DungeonMusic.FRIEND_AREA_GRASSLANDS,
     regionalSpeciality: Item.MOOMOO_MILK
   },
@@ -662,12 +662,12 @@ export const RegionDetails: {
     regionalSpeciality: Item.SWEET_APPLE
   },
   [DungeonPMDO.TreeshroudForest1]: {
-    synergies: [Synergy.GOURMET, Synergy.WATER, Synergy.BUG],
+    synergies: [Synergy.GOURMET, Synergy.FLORA, Synergy.BUG],
     music: DungeonMusic.TREESHROUD_FOREST,
     regionalSpeciality: Item.TART_APPLE
   },
   [DungeonPMDO.TreeshroudForest2]: {
-    synergies: [Synergy.GRASS, Synergy.AQUATIC, Synergy.BABY],
+    synergies: [Synergy.GRASS, Synergy.POISON, Synergy.BABY],
     music: DungeonMusic.FRIEND_AREA_WILDS,
     regionalSpeciality: Item.TART_APPLE
   },
@@ -682,7 +682,7 @@ export const RegionDetails: {
     regionalSpeciality: Item.BALM_MUSHROOM
   },
   [DungeonPMDO.UnusedWaterfallPond]: {
-    synergies: [Synergy.AQUATIC, Synergy.BUG, Synergy.WILD],
+    synergies: [Synergy.AQUATIC, Synergy.BUG, Synergy.BABY],
     music: DungeonMusic.DEEP_STAR_CAVE,
     regionalSpeciality: Item.CLOVER_SWEET
   },

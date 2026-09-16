@@ -7,6 +7,7 @@ import { PokemonActionState } from "../types/enum/Game"
 import { Pkm } from "../types/enum/Pokemon"
 import { getFirstAvailablePositionInBench } from "../utils/board"
 import { pickRandomIn } from "../utils/random"
+import { getHatchTime } from "./evolution-logic/hatch-time"
 
 export function createRandomEgg(player: Player, shiny: boolean): Egg {
   const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
@@ -14,7 +15,7 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
   )
   const egg = PokemonFactory.createPokemonFromName(Pkm.EGG, { shiny }) as Egg
   egg.action = PokemonActionState.SLEEP
-  egg.stacksRequired = egg.evolutionRule.getHatchTime(egg, player)
+  egg.stacksRequired = getHatchTime(egg, player)
 
   if (player) {
     const remainingEggs = hatchList.filter(

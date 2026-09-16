@@ -51,6 +51,15 @@ dialog {
   text-shadow: none;
 }
 
+.timer-bar {
+  left: -2px;
+  right: -2px;
+}
+
+.boosters-modal {
+  background: color-mix(in hsl, var(--color-bg-primary) 90%, transparent 10%);
+}
+
 #videobg {
   position: fixed;
   top: 0;
@@ -59,4 +68,8 @@ dialog {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+}
+
+.scales-ap .ability-value {
+  color: #861eff;
 }
