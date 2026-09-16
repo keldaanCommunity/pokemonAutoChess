@@ -313,6 +313,7 @@ interface OnAttackEffectArgs {
   specialDamage: number
   trueDamage: number
   totalDamage: number
+  totalTakenDamage: number
   crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
