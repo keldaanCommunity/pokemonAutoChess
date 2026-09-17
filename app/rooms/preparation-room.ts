@@ -367,7 +367,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
           logger.warn(
             `room listing for ${this.roomId} went missing, re-publishing it`
           )
-          await this.setMetadata({})
+          await this.setMetadata(this.metadata)
         }
       } catch (error) {
         // the clock does not catch rejections, and an unhandled one exits the process

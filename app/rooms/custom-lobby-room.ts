@@ -431,7 +431,7 @@ export default class CustomLobbyRoom extends Room {
           logger.warn(
             `lobby listing for ${this.roomId} went missing, re-publishing it`
           )
-          await this.setMetadata({})
+          await this.setMetadata(this.metadata)
         }
       } catch (error) {
         logger.error(`could not check the listing of ${this.roomId}`, error)
