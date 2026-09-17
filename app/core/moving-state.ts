@@ -83,7 +83,8 @@ export default class MovingState extends PokemonState {
       pokemon.types.has(Synergy.DARK) &&
       pokemon.range === 1 &&
       pokemon.passive !== Passive.GUZZLORD &&
-      !pokemon.status.locked
+      !pokemon.status.locked &&
+      !pokemon.status.charm
     ) {
       // dark jump
       const farthestCoordinate =
