@@ -648,22 +648,20 @@ export default class CustomLobbyRoom extends Room {
             }
           })
 
-          // iterate backwards: removeRoom splices this.rooms, so a forward loop skips elements
-          const rooms = this.rooms ?? []
-          for (let roomIndex = rooms.length - 1; roomIndex >= 0; roomIndex--) {
-            const room = rooms[roomIndex]
+          // a copy: removeRoom splices this.rooms, which would shift the rooms still to visit
+          const rooms = [...(this.rooms ?? [])]
+          rooms.forEach((room) => {
             const { type, gameStartedAt } = room.metadata ?? {}
             const startedBefore = (ms: number) =>
               gameStartedAt != null &&
               new Date(gameStartedAt).getTime() < Date.now() - ms
+            const roomIndex =
+              this.rooms?.findIndex((r) => r.roomId === room.roomId) ?? -1
 
             if (!listedRoomIds.has(room.roomId)) {
               // no hdel: query is a snapshot, and a room re-listed since is live
               this.removeRoom(roomIndex, room.roomId)
-              continue // one removal per room per tick
-            }
-
-            if (
+            } else if (
               (type === "preparation" && startedBefore(60000)) ||
               (type === "game" && startedBefore(86400000))
             ) {
@@ -678,7 +676,7 @@ export default class CustomLobbyRoom extends Room {
                 )
               this.removeRoom(roomIndex, room.roomId)
             }
-          }
+          })
         },
         start: true
       })
