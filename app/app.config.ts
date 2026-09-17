@@ -49,6 +49,7 @@ import {
   changeSelectedEmotionForUser,
   migrateShardsOfAltForms
 } from "./services/collection"
+import { checkDuplicateRoom } from "./services/duplicate-rooms"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
@@ -213,8 +214,12 @@ export const server = defineServer({
   rooms: {
     "after-game": defineRoom(AfterGameRoom),
     lobby: defineRoom(CustomLobbyRoom),
-    preparation: defineRoom(PreparationRoom).enableRealtimeListing(),
-    game: defineRoom(GameRoom).enableRealtimeListing()
+    preparation: defineRoom(PreparationRoom)
+      .enableRealtimeListing()
+      .on("create", checkDuplicateRoom), // runs once listed; onCreate is too early
+    game: defineRoom(GameRoom)
+      .enableRealtimeListing()
+      .on("create", checkDuplicateRoom)
   },
 
   express: (app) => {

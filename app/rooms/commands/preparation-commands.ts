@@ -1,7 +1,7 @@
 import { memoryUsage } from "node:process"
 import { setTimeout } from "node:timers/promises"
 import { Command } from "@colyseus/command"
-import { type Client, matchMaker } from "colyseus"
+import type { Client } from "colyseus"
 import type { UserRecord } from "firebase-admin/auth"
 import type { QueryFilter } from "mongoose"
 import {
@@ -21,6 +21,7 @@ import {
 } from "../../models/colyseus-models/game-user"
 import { BotV2 } from "../../models/mongo-models/bot-v2"
 import UserMetadata from "../../models/mongo-models/user-metadata"
+import { createRoomWithDuplicateCheck } from "../../services/duplicate-rooms"
 import { Role } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import type { EloRank } from "../../types/enum/EloRank"
@@ -389,7 +390,7 @@ export class OnGameStartRequestCommand extends Command<
           }
         }
 
-        const gameRoom = await matchMaker.createRoom("game", {
+        const gameRoom = await createRoomWithDuplicateCheck("game", {
           users: Object.fromEntries(schemaEntries(this.state.users)),
           name: this.state.name,
           ownerName: this.state.ownerName,

@@ -1,5 +1,5 @@
 import { Command } from "@colyseus/command"
-import { type Client, matchMaker } from "colyseus"
+import type { Client } from "colyseus"
 import { GADGETS } from "../../config/game/gadgets"
 import {
   getRemainingPlayers,
@@ -12,6 +12,7 @@ import {
 } from "../../models/colyseus-models/tournament"
 import { Tournament } from "../../models/mongo-models/tournament"
 import UserMetadata from "../../models/mongo-models/user-metadata"
+import { createRoomWithDuplicateCheck } from "../../services/duplicate-rooms"
 import { notificationsService } from "../../services/notifications"
 import { type IPlayer, Role, Title, Transfer } from "../../types"
 import { GameMode } from "../../types/enum/Game"
@@ -240,7 +241,7 @@ export class CreateTournamentLobbiesCommand extends Command<
           new TournamentBracketSchema(bracket.name, bracket.playersId)
         )
 
-        await matchMaker.createRoom("preparation", {
+        await createRoomWithDuplicateCheck("preparation", {
           gameMode: GameMode.TOURNAMENT,
           noElo: true,
           ownerId: null,
@@ -304,7 +305,7 @@ export class RemakeTournamentLobbyCommand extends Command<
         new TournamentBracketSchema(bracket.name, bracket.playersId)
       )
 
-      await matchMaker.createRoom("preparation", {
+      await createRoomWithDuplicateCheck("preparation", {
         gameMode: GameMode.TOURNAMENT,
         noElo: true,
         ownerId: null,

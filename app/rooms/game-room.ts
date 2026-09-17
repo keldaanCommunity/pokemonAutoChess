@@ -131,6 +131,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
   miniGame: MiniGame
+  deleted = false
+  creationId?: string
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
@@ -152,7 +154,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     minRank,
     maxRank,
     tournamentId,
-    bracketId
+    bracketId,
+    creationId
   }: {
     users: Record<string, IGameUser>
     preparationId: string
@@ -165,8 +168,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
     maxRank: EloRank | null
     tournamentId: string | null
     bracketId: string | null
+    creationId?: string
   }) {
     logger.info("Create Game ", this.roomId)
+    this.creationId = creationId
 
     this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
@@ -718,6 +723,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
         throw new Error(
           "No display name for this account. Please report this error."
         )
+      }
+
+      if (this.deleted) {
+        client.leave(CloseCodes.ROOM_DELETED)
+        return
       }
 
       return user
@@ -1636,6 +1646,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   onRoomDeleted(roomId) {
     if (this.roomId === roomId) {
+      this.deleted = true
       this.disconnect(CloseCodes.ROOM_DELETED)
     }
   }
