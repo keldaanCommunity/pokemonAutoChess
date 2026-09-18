@@ -27,6 +27,7 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
+import type { PokemonEntity } from "../core/pokemon-entity"
 import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
@@ -58,7 +59,6 @@ import {
   type IGameHistorySimplePlayer,
   type IGameMetadata,
   type IPokemon,
-  type IPokemonEntity,
   type ISimplePlayer,
   Role,
   Title,
@@ -1382,7 +1382,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
-    if(choice.onChoice){
+    if (choice.onChoice) {
       choice.onChoice(choiceIndex)
     }
 
@@ -1457,7 +1457,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   computeRoundDamage(
-    opponentTeam: MapSchema<IPokemonEntity>,
+    opponentTeam: MapSchema<PokemonEntity>,
     stageLevel: number
   ) {
     let damage = Math.ceil(stageLevel / 2)

@@ -4,12 +4,17 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
   AdditionalPicksStages,
+  GiftShopStages,
   ItemCarouselStages,
   PortalCarouselStages
 } from "../../../../../config"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
-import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
+import {
+  BattleResult,
+  GameMode,
+  GamePhaseState
+} from "../../../../../types/enum/Game"
 import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
 import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
@@ -200,6 +205,7 @@ export function StagePath() {
   const history = [...(spectatedPlayer?.history ?? [])]
   const phase = useAppSelector((state) => state.game.phase)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const gameMode = useAppSelector((state) => state.game.gameMode)
   const startStage = min(1)(stageLevel - 3)
   let level = startStage
   let path: PathStep[] = []
@@ -238,6 +244,17 @@ export function StagePath() {
         level,
         icon: "/assets/ui/additional-pick.svg",
         title: t("additional_pick")
+      })
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
+      }
+    }
+
+    if (GiftShopStages.includes(level) && gameMode === GameMode.DOUBLE_UP) {
+      path.push({
+        level,
+        icon: "/assets/ui/gift.svg",
+        title: t("gift")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1

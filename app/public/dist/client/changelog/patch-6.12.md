@@ -56,6 +56,7 @@
 - Added an option to disable custom cursors
 - Added new keybindings to cycle between players by rank
 - Added board effects descriptions in Wiki > Statuses
+- Added Gift Shop stage description in Wiki > Stages
 
 # Bugfix
 

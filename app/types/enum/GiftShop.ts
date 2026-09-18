@@ -1,4 +1,4 @@
-import { Gift, Item } from "./Item"
+import { type Gift, Item } from "./Item"
 
 export const GiftsTier1 = [
   Item.BERRIES_GIFT,
