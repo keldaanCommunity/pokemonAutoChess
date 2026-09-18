@@ -16162,9 +16162,9 @@ export class Mantyke extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.PLACEMENT,
     condition: (
-      pokemon: IPokemon,
+      pokemon: Pokemon,
       player: IPlayer,
-      board: MapSchema<IPokemon>
+      board: MapSchema<Pokemon>
     ) => {
       for (const p of board.values()) {
         if (

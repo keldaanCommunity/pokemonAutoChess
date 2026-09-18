@@ -27,6 +27,7 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
+import type { PokemonEntity } from "../core/pokemon-entity"
 import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
@@ -58,7 +59,6 @@ import {
   type IGameHistorySimplePlayer,
   type IGameMetadata,
   type IPokemon,
-  type IPokemonEntity,
   type ISimplePlayer,
   Role,
   Title,
@@ -186,6 +186,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     this.setMetadata(<IGameMetadata>{
+      ...this.metadata,
       name,
       ownerName,
       gameMode,
@@ -691,7 +692,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   startGame() {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
-    this.setSimulationInterval((deltaTime: number) => {
+    this.setTimestep((deltaTime: number) => {
       /* in case of lag spikes, the game should feel slower, 
       but this max simulation dt helps preserving the correctness of simulation result */
       deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
@@ -826,6 +827,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         */
         this.state.players.delete(client.auth.uid)
         this.setMetadata({
+          ...this.metadata,
           playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
         })
 
@@ -1382,7 +1384,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     }
 
-    if(choice.onChoice){
+    if (choice.onChoice) {
       choice.onChoice(choiceIndex)
     }
 
@@ -1457,7 +1459,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   computeRoundDamage(
-    opponentTeam: MapSchema<IPokemonEntity>,
+    opponentTeam: MapSchema<PokemonEntity>,
     stageLevel: number
   ) {
     let damage = Math.ceil(stageLevel / 2)

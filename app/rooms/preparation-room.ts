@@ -51,6 +51,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   async setName(name: string) {
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       name: name.slice(0, 30),
       type: "preparation"
     })
@@ -59,6 +60,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   async setPassword(password: string | null) {
     const hasPassword = password && password.trim().length > 0
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       passwordProtected: hasPassword,
       type: "preparation"
     })
@@ -66,18 +68,22 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   }
 
   async setNoElo(noElo: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{ noElo })
+    await this.setMetadata(<IPreparationMetadata>{ ...this.metadata, noElo })
   }
 
   async setMinMaxRanks(minRank: EloRank, maxRank: EloRank) {
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       minRank: minRank,
       maxRank: maxRank
     })
   }
 
   async setGameStarted(gameStartedAt: string) {
-    await this.setMetadata(<IPreparationMetadata>{ gameStartedAt })
+    await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
+      gameStartedAt
+    })
   }
 
   onCreate(options: {
@@ -105,6 +111,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     this.state = new PreparationState(options)
     this.setPassword(options.password ?? null)
     this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       name: options.roomName.slice(0, 30),
       ownerName: options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
       minRank: options.minRank ?? null,
@@ -419,7 +426,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   ) {
     if (auth) {
       /*logger.info(
-        `${auth.displayName} ${client.id} join preparation room`
+        `${auth.displayName} ${client.sessionId} join preparation room`
       )*/
       await this.dispatcher.dispatch(new OnJoinCommand(), {
         client,
@@ -433,7 +440,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     try {
       /*if (client.auth && client.auth.displayName) {
         logger.info(
-          `${client.auth.displayName} ${client.id} is leaving preparation room`
+          `${client.auth.displayName} ${client.sessionId} is leaving preparation room`
         )
       }*/
       this.state.abortOnPlayerLeave?.abort()
@@ -450,7 +457,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     const consented = code === CloseCode.CONSENTED
     /*if (client.auth && client.auth.displayName) {
         logger.info(
-          `${client.auth.displayName} ${client.id} leave preparation room`
+          `${client.auth.displayName} ${client.sessionId} leave preparation room`
         )
       }*/
     if (this.state.gameStartedAt === null) {
@@ -497,6 +504,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   updatePlayersInfo() {
     this.setMetadata({
+      ...this.metadata,
       playersInfo: [...this.state.users.values()].map(
         (u) => `${u.name} [${u.elo}]`
       )

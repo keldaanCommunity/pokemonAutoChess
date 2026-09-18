@@ -20,6 +20,7 @@ import {
   SynergyTiers
 } from "../../config/game/synergies"
 import type Player from "../../models/colyseus-models/player"
+import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory, {
   getPokemonBaseline
@@ -835,7 +836,7 @@ export const cloneBugs = ({
   effects,
   simulation
 }: {
-  board: MapSchema<IPokemon, string>
+  board: MapSchema<Pokemon, string>
   teamIndex: number
   player: Player | undefined
   effects: Set<EffectEnum>
