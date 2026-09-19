@@ -462,6 +462,8 @@ class GameContainer {
         "action",
         "hp",
         "maxHP",
+        "pp",
+        "maxPP",
         "atk",
         "ap",
         "def",

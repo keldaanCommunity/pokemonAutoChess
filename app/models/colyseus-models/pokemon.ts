@@ -121,6 +121,7 @@ export class Pokemon extends Schema implements IPokemon {
   baseSkill: Ability = Ability.DEFAULT
   baseMaxPP: number = 100
   baseAtk: number = 1
+  cookInterval?: Delayed
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()

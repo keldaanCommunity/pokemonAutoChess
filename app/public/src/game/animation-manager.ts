@@ -15,11 +15,11 @@ import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
 import atlas from "../assets/atlas.json"
 import durations from "../assets/pokemons/durations.json"
-import type PokemonSprite from "./components/pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./components/pokemon-animations"
+import type PokemonSprite from "./components/pokemon-sprite"
 import type { DebugScene } from "./scenes/debug-scene"
 import type GameScene from "./scenes/game-scene"
 
@@ -318,6 +318,7 @@ export default class AnimationManager {
       case PokemonActionState.EAT:
         return config.eat
       case PokemonActionState.WALK:
+      case PokemonActionState.COOK:
         return config.walk
       case PokemonActionState.ATTACK:
       case PokemonActionState.TRAINING:
@@ -378,10 +379,6 @@ export default class AnimationManager {
         PokemonActionState.SLEEP,
         pokemonSprite
       )
-    }
-
-    if (action === PokemonActionState.TRAINING) {
-      pokemonSprite.orientation = Orientation.LEFT
     }
 
     try {

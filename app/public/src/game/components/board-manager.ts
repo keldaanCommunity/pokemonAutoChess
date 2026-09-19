@@ -66,9 +66,9 @@ import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
-import PokemonSprite from "./pokemon-sprite"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
+import PokemonSprite from "./pokemon-sprite"
 import { Portal } from "./portal"
 import { TradingPlatform } from "./trading-platform"
 
@@ -990,20 +990,30 @@ export default class BoardManager {
           break
         }
 
-        case "action":
-          pokemonSprite.action = value as IPokemon["action"]
-          this.animationManager.animatePokemon(
-            pokemonSprite,
-            value as IPokemon["action"],
-            false
-          )
-          if (
-            value === PokemonActionState.TRAINING &&
-            pokemon.positionX === 0
-          ) {
-            this.animateTrainingBag()
+        case "action": {
+          const action = value as IPokemon["action"]
+          pokemonSprite.action = action
+
+          if (action === PokemonActionState.TRAINING) {
+            pokemonSprite.orientation = Orientation.LEFT
+            if (pokemon.positionX === 0) {
+              this.animateTrainingBag() // make training bag swing when a pokemon is training on it
+            }
+          } else if (action === PokemonActionState.COOK) {
+            pokemonSprite.orientation = Orientation.DOWN
+            pokemonSprite.addLifeBar({
+              scene: this.scene,
+              showHP: false,
+              showPP: true
+            })
+            pokemonSprite.addCookingPot()
+          } else {
+            pokemonSprite.orientation = Orientation.DOWNLEFT
           }
+
+          this.animationManager.animatePokemon(pokemonSprite, action, false)
           break
+        }
 
         case "hp":
         case "maxHP": {
@@ -1019,6 +1029,26 @@ export default class BoardManager {
           }
           if (pokemonSprite.lifebar) {
             pokemonSprite.lifebar.setHp(hp)
+          }
+          break
+        }
+
+        case "pp": {
+          console.log(
+            "update pp",
+            pokemonSprite.name,
+            value,
+            pokemonSprite.lifebar
+          )
+          if (pokemonSprite.lifebar) {
+            pokemonSprite.lifebar.setPP(value as number)
+          }
+          break
+        }
+
+        case "maxPP": {
+          if (pokemonSprite.lifebar) {
+            pokemonSprite.lifebar.setMaxPP(value as number)
           }
           break
         }

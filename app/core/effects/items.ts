@@ -1,9 +1,12 @@
-import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { ARMOR_FACTOR, RegionDetails, StageDuration } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
+import type Player from "../../models/colyseus-models/player"
 import { PlayerChoice } from "../../models/colyseus-models/player-choice"
+import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
+import type GameRoom from "../../rooms/game-room"
 import { Title, TMPerAbility, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
@@ -385,8 +388,15 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   }
 }
 
-const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
-  if (!pokemon) return
+const cookDish = ({
+  pokemon,
+  player,
+  room
+}: {
+  pokemon: Pokemon
+  player: Player
+  room: GameRoom
+}) => {
   const chef = pokemon
 
   const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
@@ -431,62 +441,88 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
     if (dish === Item.SWEETS) {
       dishes = pickNRandomIn(Sweets, nbDishes)
     }
-    room.clock.setTimeout(async () => {
-      room.broadcast(Transfer.COOK, {
-        pokemonId: chef.id,
-        dishes
-      })
-      room.clock.setTimeout(() => {
-        dishes.forEach((dish, i) => {
-          if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
-            if (pokemon.items.size < 3) {
-              pokemon.addItem(dish, player)
-            } else {
-              player.items.push(dish)
-            }
-          } else if (isIn(DishesGoingToInventory, dish)) {
-            player.items.push(dish)
-          } else {
-            let candidates = schemaValues(player.board).filter(
-              (p) =>
-                p.canEat &&
-                !p.dishes.has(dish) &&
-                isOnBench(chef) === isOnBench(p) &&
-                distanceC(
-                  chef.positionX,
-                  chef.positionY,
-                  p.positionX,
-                  p.positionY
-                ) === 1
-            )
-            if (dish === Item.HERBA_MYSTICA) {
-              candidates = candidates.filter((p) =>
-                HerbaMysticas.every((herba) => p.dishes.has(herba) === false)
-              )
-            }
-            candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
-            const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
-            if (!pokemon.canEat) return
-            if (dish === Item.HERBA_MYSTICA) {
-              const flavors: Dish[] = []
-              if (pokemon.types.has(Synergy.FAIRY))
-                flavors.push(Item.HERBA_MYSTICA_SWEET)
-              if (pokemon.types.has(Synergy.PSYCHIC))
-                flavors.push(Item.HERBA_MYSTICA_SPICY)
-              if (pokemon.types.has(Synergy.ELECTRIC))
-                flavors.push(Item.HERBA_MYSTICA_SOUR)
-              if (pokemon.types.has(Synergy.GRASS))
-                flavors.push(Item.HERBA_MYSTICA_BITTER)
-              if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
-              dish = pickRandomIn(flavors)
-            }
-            pokemon.dishes.add(dish)
-            pokemon.action = PokemonActionState.EAT
-          }
+
+    const ellapsedTime =
+      StageDuration[room.state.stageLevel] - room.state.roundTime
+
+    const cookDuration = min(0)(
+      ((StageDuration[room.state.stageLevel] ?? StageDuration.DEFAULT) / 2 -
+        ellapsedTime) *
+        1000
+    )
+
+    let t = 0
+    pokemon.cookInterval = room.clock.setInterval(() => {
+      chef.action = PokemonActionState.COOK
+      t += 1000
+      if (t >= cookDuration) {
+        pokemon.cookInterval.clear()
+        chef.pp = chef.maxPP
+        room.broadcast(Transfer.COOK, {
+          pokemonId: chef.id,
+          dishes,
+          cookDuration
         })
-      }, 2000)
+        room.clock.setTimeout(() => {
+          dishes.forEach((dish, i) => {
+            if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
+              if (pokemon.items.size < 3) {
+                pokemon.addItem(dish, player)
+              } else {
+                player.items.push(dish)
+              }
+            } else if (isIn(DishesGoingToInventory, dish)) {
+              player.items.push(dish)
+            } else {
+              let candidates = schemaValues(player.board).filter(
+                (p) =>
+                  p.canEat &&
+                  !p.dishes.has(dish) &&
+                  isOnBench(chef) === isOnBench(p) &&
+                  distanceC(
+                    chef.positionX,
+                    chef.positionY,
+                    p.positionX,
+                    p.positionY
+                  ) === 1
+              )
+              if (dish === Item.HERBA_MYSTICA) {
+                candidates = candidates.filter((p) =>
+                  HerbaMysticas.every((herba) => p.dishes.has(herba) === false)
+                )
+              }
+              candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+              const pokemon = candidates[0] ?? chef // idx 0 equals the strongest unit
+              if (!pokemon.canEat) return
+              if (dish === Item.HERBA_MYSTICA) {
+                const flavors: Dish[] = []
+                if (pokemon.types.has(Synergy.FAIRY))
+                  flavors.push(Item.HERBA_MYSTICA_SWEET)
+                if (pokemon.types.has(Synergy.PSYCHIC))
+                  flavors.push(Item.HERBA_MYSTICA_SPICY)
+                if (pokemon.types.has(Synergy.ELECTRIC))
+                  flavors.push(Item.HERBA_MYSTICA_SOUR)
+                if (pokemon.types.has(Synergy.GRASS))
+                  flavors.push(Item.HERBA_MYSTICA_BITTER)
+                if (flavors.length === 0) flavors.push(Item.HERBA_MYSTICA_SALTY)
+                dish = pickRandomIn(flavors)
+              }
+              pokemon.dishes.add(dish)
+              pokemon.action = PokemonActionState.EAT
+            }
+          })
+          chef.action = PokemonActionState.IDLE
+        }, 2000)
+      } else {
+        chef.pp = Math.round((t / cookDuration) * chef.maxPP)
+      }
     }, 1000)
   }
+}
+
+const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
+  if (!pokemon) return
+  cookDish({ pokemon, player, room })
 })
 
 export class FishingRodEffect extends OnStageStartEffect {
@@ -1272,10 +1308,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.CHEF_HAT]: [
     chefCookEffect,
-    new OnItemDroppedEffect(({ pokemon }) => {
+    new OnItemDroppedEffect(({ pokemon, player, room }) => {
       const canEquip = pokemon.types.has(Synergy.GOURMET)
+      if (!canEquip) return false // prevent item from being equipped if not gourmet
+
+      cookDish({ pokemon, player, room })
       return canEquip
-    })
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      if(pokemon.cookInterval) pokemon.cookInterval.clear()
+      pokemon.action = PokemonActionState.IDLE
+      // TODO: remove dishes from pokemon and player
+      // beware of dishes that go to inventory like mushrooms, need to remember that we already cooked this stage
+      // needs an OnRemovableItemRemoved effect 
+    }
   ],
 
   [Item.EVIOLITE]: [
