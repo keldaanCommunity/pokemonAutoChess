@@ -730,6 +730,7 @@ export default function Game() {
             room.state.phase === GamePhaseState.PICK &&
             stageLevel in PVEStages === false &&
             value < 5 &&
+            gameContainer.gameScene?.room === room &&
             gameContainer.gameScene?.board &&
             !gameContainer.gameScene.board.portal
           ) {
