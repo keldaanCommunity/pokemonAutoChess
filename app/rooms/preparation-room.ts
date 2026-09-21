@@ -385,11 +385,11 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
         (u) => !u.isBot
       ).length
 
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
-        client.leave(CloseCodes.ROOM_FULL)
-        return
-      } else if (this.deleted) {
+      if (this.deleted) {
         client.leave(CloseCodes.ROOM_DELETED)
+        return
+      } else if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
+        client.leave(CloseCodes.ROOM_FULL)
         return
       } else if (isAlreadyInRoom) {
         client.leave(CloseCodes.USER_ALREADY_JOINED)

@@ -20,6 +20,7 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  MAX_LOADING_TIME,
   SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
@@ -79,6 +80,15 @@ import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import type { IUserMetadataLean } from "./types/interfaces/UserMetadata"
 import { logger } from "./utils/logger"
+
+const GAME_CHECK = {
+  interval: 3000,
+  timeout: MAX_LOADING_TIME // a copy force starts here and clears everyone's pending game
+}
+const PREPARATION_CHECK = {
+  interval: 3000, // a copy dies before anyone can fill and ready it
+  timeout: 9 * 60 * 1000 // under the 10 min autoStartDelayInSeconds tournament lobbies use
+}
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -216,10 +226,11 @@ export const server = defineServer({
     lobby: defineRoom(CustomLobbyRoom),
     preparation: defineRoom(PreparationRoom)
       .enableRealtimeListing()
-      .on("create", checkDuplicateRoom), // runs once listed; onCreate is too early
+      // runs once listed; onCreate is too early
+      .on("create", (room) => checkDuplicateRoom(room, PREPARATION_CHECK)),
     game: defineRoom(GameRoom)
       .enableRealtimeListing()
-      .on("create", checkDuplicateRoom)
+      .on("create", (room) => checkDuplicateRoom(room, GAME_CHECK))
   },
 
   express: (app) => {

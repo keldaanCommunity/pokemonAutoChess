@@ -4,9 +4,7 @@ import type PreparationRoom from "../rooms/preparation-room"
 import { logger } from "../utils/logger"
 
 const ROOM_CREATION = "room_creation"
-const ROOM_CREATION_TTL = 6 * 60 * 60 // a stall longer than this goes unchecked
-const DUPLICATE_CHECK_INTERVAL = 3000 // under CheckAutoStartRoom's 5 s
-const DUPLICATE_CHECK_TIMEOUT = 3 * 60 * 1000
+const ROOM_CREATION_TTL = 6 * 60 * 60 // outlives the windows set in app.config.ts
 
 export async function createRoomWithDuplicateCheck(
   roomName: string,
@@ -14,34 +12,49 @@ export async function createRoomWithDuplicateCheck(
 ) {
   const creationId = crypto.randomUUID()
   const room = await matchMaker.createRoom(roomName, { ...options, creationId })
-  await matchMaker.presence.setex(
+  // resolves with the error on redis, returns nothing locally
+  const error = await matchMaker.presence.setex(
     `${ROOM_CREATION}:${creationId}`,
     room.roomId,
     ROOM_CREATION_TTL
   )
+  if (error) logger.error(error)
   return room
 }
 
-export function checkDuplicateRoom(room: GameRoom | PreparationRoom) {
+export function checkDuplicateRoom(
+  room: GameRoom | PreparationRoom,
+  { interval, timeout }: { interval: number; timeout: number }
+) {
   const { creationId } = room
   if (!creationId) return
   const startedAt = Date.now()
+  let reading = false
   const check = room.clock.setInterval(async () => {
-    if (Date.now() - startedAt > DUPLICATE_CHECK_TIMEOUT) {
-      check.clear() // this last tick still reads
-    }
+    if (reading) return // one read at a time, however slow presence is
+    reading = true
     try {
       const createdId = await room.presence.get(
         `${ROOM_CREATION}:${creationId}`
       )
-      if (!createdId) return // the creator may record the room after this copy exists
-      check.clear()
-      if (createdId !== room.roomId) {
-        logger.warn("Disposing duplicate room", room.roomId, "of", createdId)
-        room.onRoomDeleted(room.roomId)
+      // until the creator records the room, there is nothing to compare against
+      if (createdId) {
+        check.clear()
+        if (createdId !== room.roomId) {
+          logger.warn("Disposing duplicate room", room.roomId, "of", createdId)
+          room.onRoomDeleted(room.roomId)
+        }
+        return
       }
     } catch (error) {
       logger.error(error)
+    } finally {
+      reading = false
     }
-  }, DUPLICATE_CHECK_INTERVAL)
+    // after a read, so a process that was stalled past the window still looks
+    if (Date.now() - startedAt > timeout) {
+      check.clear()
+      logger.warn("Gave up checking room", room.roomId, "for duplicates")
+    }
+  }, interval)
 }
