@@ -756,7 +756,8 @@ export default function Game() {
           }
           if (gameContainer.game) {
             const g = getGameScene()
-            if (g) {
+            // on a replay seek, listen() fires immediately while g is still the outgoing scene
+            if (g && g.room === room) {
               g.updatePhase(newPhase, previousPhase)
             }
           }
