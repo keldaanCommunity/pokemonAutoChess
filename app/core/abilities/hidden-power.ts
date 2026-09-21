@@ -264,7 +264,7 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
               }) ?? Item.TINY_MUSHROOM
           }
 
-          p.dishes = new SetSchema([randomDish])
+          p.dishes = new SetSchema<Item>([randomDish])
         }
       })
     }

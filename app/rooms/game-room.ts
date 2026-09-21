@@ -186,6 +186,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     this.setMetadata(<IGameMetadata>{
+      ...this.metadata,
       name,
       ownerName,
       gameMode,
@@ -691,7 +692,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   startGame() {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
-    this.setSimulationInterval((deltaTime: number) => {
+    this.setTimestep((deltaTime: number) => {
       /* in case of lag spikes, the game should feel slower, 
       but this max simulation dt helps preserving the correctness of simulation result */
       deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
@@ -826,6 +827,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         */
         this.state.players.delete(client.auth.uid)
         this.setMetadata({
+          ...this.metadata,
           playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
         })
 

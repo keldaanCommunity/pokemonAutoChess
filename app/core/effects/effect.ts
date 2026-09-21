@@ -3,7 +3,6 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameRoom from "../../rooms/game-room"
 import type GameState from "../../rooms/states/game-state"
-import type { IPokemonEntity } from "../../types"
 import type { Ability } from "../../types/enum/Ability"
 import type { EffectEnum } from "../../types/enum/Effect"
 import type { AttackType } from "../../types/enum/Game"
@@ -160,7 +159,7 @@ export class OnBenchedDuringFightEffect extends Effect {
 interface OnSimulationStartEffectArgs {
   simulation: Simulation
   player?: Player
-  team: MapSchema<IPokemonEntity>
+  team: MapSchema<PokemonEntity>
   entity: PokemonEntity
 }
 
