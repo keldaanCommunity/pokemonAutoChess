@@ -584,7 +584,10 @@
 		"EAR_DIG": "Cavaoreja",
 		"SWARM": "Llamada del Enjambre",
 		"FLING": "Lanzamiento",
-		"REVELATION_DANCE": "Danza Revelación"
+		"REVELATION_DANCE": "Danza Revelación",
+		"DRAGON_RAGE": "Furia Dragón",
+		"PURSUIT": "Persecución",
+		"THUNDERCLAP_PRESS": "Prensa de Trueno"
 	},
 	"pkm": {
 		"DEFAULT": "MissingNo.",
@@ -1781,7 +1784,10 @@
 		"ORICORIO_BAILE": "Oricorio (Estilo Apasionado)",
 		"ORICORIO_PA_U": "Oricorio (Estilo Animado)",
 		"ORICORIO_POMPOM": "Oricorio (Estilo Plácido)",
-		"ORICORIO_SENSU": "Oricorio (Estilo Refinado)"
+		"ORICORIO_SENSU": "Oricorio (Estilo Refinado)",
+		"GALAR_MEOWTH": "Meowth de Galar",
+		"PERRSERKER": "Perrserker",
+		"PIKACHU_LIBRE": "Pikachu Libre"
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Cura todos los efectos de estado y otorga [20,40,80,160,SP] SHIELD a todos los aliados.",
@@ -2345,7 +2351,10 @@
 		"SILK_TRAP": "El usuario hace una trampa de seda, ganando PROTECT por 1.5 segundos. Cualquier ataque cuerpo a cuerpo recibido reducirá la SPEED del atacante por [5,10,15,30,SP] e inflige PARALYSIS por [1.5,SP,ND=1] segundos.",
 		"SKITTER_SMACK": "Se escabulle detrás del objetivo para golpearlo, realizando [15,30,60,120,SP] SPECIAL. Esto disminuye el AP del objetivo en 20.",
 		"FLING": "Cuando arroja la pelota, todos los enemigos entre el usuario y el recibidor reciben [30,30,30,100,SP]% de la SPEED como SPECIAL. Si no tiene una BALL, salta hacia una esquina del tablero y obtiene una nueva BALL.",
-		"REVELATION_DANCE": "Realiza una danza que proyecta plumas en casillas ADJACENT. Los enemigos reciben [15,30,50,80,SP] SPECIAL y los aliados ganan un bonus dependiendo del estilo:\n-Estilo Apasionado: [3,6,10,15,SP] SPEED\n-Estilo Animado: [2,4,6,10,SP] ATK\n-Estilo Plácido:   [2,4,6,10,SP] SPE_DEF\n-Estilo Refinado:  [15,30,50,80,SP] SHIELD"
+		"REVELATION_DANCE": "Realiza una danza que proyecta plumas en casillas ADJACENT. Los enemigos reciben [15,30,50,80,SP] SPECIAL y los aliados ganan un bonus dependiendo del estilo:\n-Estilo Apasionado: [3,6,10,15,SP] SPEED\n-Estilo Animado: [2,4,6,10,SP] ATK\n-Estilo Plácido:   [2,4,6,10,SP] SPE_DEF\n-Estilo Refinado:  [15,30,50,80,SP] SHIELD",
+		"THUNDERCLAP_PRESS": "El objetivo es golpeado con un derribo eléctrico y empujado hacia atrás. Luego el objetivo y el enemigo golpeado por el mismo son PARALYSIS por 4 segundos y toman [20,40,80,160,SP] SPECIAL.",
+		"DRAGON_RAGE": "Gana [15,30,45,60,SP] SHIELD. Cada segundo por los próximos 6 segundos gana [5,10,15,20] más de SHIELD y realiza [5,10,15,20,SP] a enemigos ADJACENT. Cuando esta habilidad termina, consume el SHIELD restante y se cura por 40% de su valor.",
+		"PURSUIT": "Realiza [35,70,140,280,SP] SPECIAL al objetivo y lo marca. Si el objetivo salta, se teletransporta o FLY_AWAY, salta junto a el y usa su habilidad de nuevo."
 	},
 	"effect": {
 		"STAMINA": "Firmeza",
@@ -2462,7 +2471,19 @@
 		"OVERGROW": "Espesura",
 		"FLAME_BODY": "Cuerpo de Llama",
 		"WILDFIRE": "Incendio",
-		"COACHING": "Entrenamiento"
+		"COACHING": "Entrenamiento",
+		"EMBER": "Ascuas",
+		"HAIL": "Granizo",
+		"SPIKES": "Púas",
+		"STEALTH_ROCKS": "Trampa Rocas",
+		"TOXIC_SPIKES": "Púas Tóxicas",
+		"LIGHTNING_STRIKE": "Relámpago",
+		"STICKY_WEB": "Red Viscosa",
+		"SANDSTORM": "Tormenta de Arena",
+		"CURSE": "Maldición",
+		"COTTON_BALL": "Bolas de Algodón",
+		"STRANGE_STEAM": "Vapor Extraño",
+		"TIDAL_WAVE": "Oleada"
 	},
 	"effect_description": {
 		"STAMINA": "Gana 15 SHIELD",
@@ -2578,7 +2599,20 @@
 		"AROMATIC_MIST": "Elige una de tres varitas entre BLAST_WAND, HP_SWAP_WAND, SPIRIT_WAND, LONG_WAND",
 		"FAIRY_AURA": "Elige una de tres varitas entre CONFUSE_WAND, PETRIFY_WAND, SLOW_WAND, SLUMBER_WAND",
 		"PIXILATE": "Elige una de tres varitas entre GUIDING_WAND, SURROUND_WAND, POUNCE_WAND, TWO_EDGED_WAND",
-		"MOON_FORCE": "Elige una de tres varitas entre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Los Pokémon FAIRY ganan 5 de LUCK."
+		"MOON_FORCE": "Elige una de tres varitas entre WARP_WAND, SWITCHER_WAND, WHIRLWIND_WAND, TUNNEL_WAND. Los Pokémon FAIRY ganan 5 de LUCK.",
+		"EMBER": "Realiza 10 de SPECIAL por segundo e inflige BURN a Pokémon parados en esa casilla. (Los pokémon FIRE y FLYING son inmunes)",
+		"HAIL": "Realiza 10 SPECIAL e inflige FREEZE por 1 segundo a los Pokémon parados en esa casilla. (Los Pokémon ICE son inmunes)",
+		"SPIKES": "Realiza 10 TRUE e inflige ARMOR_BREAK por 1 segundo a los Pokémon parados en esa casilla. (Los pokémon STEEL y FLYING son inmunes)",
+		"STEALTH_ROCKS": "Realiza 10 PHYSICAL por segundo e inflige WOUND por 1 segundo a los Pokémon parados sobre esa casilla. (Los Pokémon ROCK son inmunes)",
+		"TOXIC_SPIKES": "Inflige POISONED por un segundo a los Pokémon parados sobre ellas. (Los pokémon POISON son inmunes)",
+		"LIGHTNING_STRIKE": "Durante STORM, puede impactar un rayo en el tablero, infligiendo 100 SPECIAL a los pokémon en esa casilla. (Excepto a los Pokémon ELECTRIC, que son sobrecargados)",
+		"TIDAL_WAVE": "Ola que limpia los efectos de estado negativos y los BOARD_EFFECT, cura a los aliados AQUATIC y empuja y daña a los enemigos.",
+		"SANDSTORM": "Durante una SANDSTORM realiza 5 SPECIAL por segundo a todos los Pokémon. (Los Pokémon GROUND son inmunes)",
+		"STICKY_WEB": "Inflige PARALYSIS por 2 segundos a los Pokémon parados sobre ella.",
+		"CURSE": "CURSE ejecuta Pokémon cuando se termina su timer.",
+		"COTTON_BALL": "Inflige SLEEP por un segundo al primer Pokémon que camina sobre esta, luego desaparece.",
+		"STRANGE_STEAM": "Hace que los Pokémon parados sobre este hagan y reciban 20% más SPECIAL.",
+		"SMOKE": "Inflige BLINDED a los pokémon parados en él."
 	},
 	"item": {
 		"FOSSIL_STONE": "Piedra Fósil",
@@ -2910,7 +2944,8 @@
 		"PINK_NECTAR": "Néctar Rosa",
 		"PURPLE_NECTAR": "Néctar Púrpura",
 		"YELLOW_NECTAR": "Néctar Amarillo",
-		"RED_NECTAR": "Néctar Rojo"
+		"RED_NECTAR": "Néctar Rojo",
+		"LUCKY_EGG": "Huevo Suerte"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "Un fósil de un Pokémon que vivió en la prehistoria",
@@ -3244,7 +3279,20 @@
 		"PINK_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Refinado",
 		"PURPLE_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Plácido",
 		"YELLOW_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Animado\t",
-		"RED_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Apasionado"
+		"RED_NECTAR": "Puede ser dado a Oricorio para cambiarlo a su estilo Apasionado",
+		"FORAGE_BAG": "Regala 3 componentes ",
+		"COLLECTION_BOX": "Regala un SILK_SCARF, 1 Objeto, una herramienta aleatoria, dos bayas y una manzana.",
+		"PRETTY_BOX": "Regala dos Objetos aletorios a tu compañero.",
+		"DELUXE_BOX": "Regala un Objeto Variocolor aleatorio a tu compañero.",
+		"TOOLBOX": "Regala 3 herramientas aleatorias a tu compañero.",
+		"BERRIES_GIFT": "Regala 7 $t(item.BERRIES) aleatorias a tu compañero.",
+		"SWEETS_GIFT": "Regala 7 random $t(item.SWEETS) a tu compañero.",
+		"HATCH_BUNDLE": "Regala dos Pokémon Eclosionados a tu compañero. 5% de probabilidad de recibir un Huevo Dorado en vez de eso.",
+		"TICKET_BUNDLE": "Regala un paquete que contiene un $t(item.EXCHANGE_TICKET), un $t(item.RECYCLE_TICKET) y un $t(item.BRONZE_DOJO_TICKET) a tu compañero ",
+		"DITTO_GIFT": "Regala un Ditto a tu compañero. Tu compañero necesita tener por lo menos un espacio libre en su banco.",
+		"GEMS_BUNDLE": "Regala 3 gemas de sinergia aleatorias a tu compañero.",
+		"COMMON_GIFT": "Regala 3 Pokémon comunes de 3 STAR a tu compañero. Compartiran la sinergia más alta activa de tu compañero.",
+		"UNCOMMON_GIFT": "Regala un Pokémon Adicional o Regional Poco Común de dos STAR a tu compañero. Compartirá la sinergia más alta activa de tu compañero."
 	},
 	"passive_description": {
 		"NONE": "Sin pasiva",
@@ -3441,7 +3489,14 @@
 		"SUBSTITUTE": "Un disfraz creado para parecerse a un Pokémon",
 		"PASSIMIAN": "Passimian lleva una BALL como objeto equipado",
 		"UXIE": "XP ganado: {{stacks}}",
-		"NECTAR": "Cuando un Pokémon de maceta haya crecido del todo, consigues néctar en función de su color."
+		"NECTAR": "Cuando un Pokémon de maceta haya crecido del todo, consigues néctar en función de su color.",
+		"LYCANROC_DUSK": "$t(pkm.LYCANROC_DUSK) se transforma en la forma Noche durante la NIGHT y BLOODMOON y en forma Día durante el ZENITH.",
+		"LYCANROC_NIGHT": "$t(pkm.LYCANROC_NIGHT) se transforma en la forma Ocaso durante DROUGHT y en la forma Día durante ZENITH.",
+		"LYCANROC_DAY": "$t(pkm.LYCANROC_DAY) se transforma en la forma Ocaso durante DROUGHT y en la forma Noche durante la NIGHT y BLOODMOON.",
+		"PIKACHU_LIBRE": "Cuando FIGHTING está activo, se vuelve RAGE por 2 segundos por cada 10 golpes bloqueados.",
+		"STEELY_SPIRIT": "Los aliados ADJACENT_IN_THE_SAME_ROW realizan 10% de su ATK como TRUE.",
+		"MITOSIS": "Por cada KO, el Pokémon se separa en dos copias de su etapa evolutiva previa sin items y la mitad de sus PP actuales.",
+		"WURMPLE": "Wurmple evoluciona a Cascoon si la sinergia POISON está activa, o a Silcoon si no es el caso."
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -3686,7 +3741,8 @@
 		"POFFIN_MASTER": "Maestro del Poffin",
 		"GUILDMASTER": "Maestro del Gremio",
 		"FIVE_STARS": "★★★★★",
-		"PAL": "Compañero"
+		"PAL": "Compañero",
+		"BODYBUILDER": "Físicoculturista"
 	},
 	"title_description": {
 		"NOVICE": "Juega tu primera partida",
@@ -3785,7 +3841,8 @@
 		"GUILDMASTER": "Completa una misión de rango S",
 		"LEGIONNAIRE": "Haz una formación de Falinks con 8 soldados o más",
 		"FIVE_STARS": "Juega con un Pokémon de cinco estrellas en tu equipo",
-		"PAL": "Juega en Dobles con tu compañero durante el evento Poképals"
+		"PAL": "Juega en Dobles con tu compañero durante el evento Poképals",
+		"BODYBUILDER": "Consigue un Pokémon FIGHTING a +40 de ATK después de entrenar en la banca."
 	},
 	"weather": {
 		"NEUTRAL": "Clima tranquilo",
