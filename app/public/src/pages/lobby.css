@@ -10,42 +10,62 @@
   width: 100%;
 }
 
-.lobby nav {
+.lobby-subtitle {
+  color: var(--color-fg-primary);
+}
+
+#lobby-logo {
+  height: 90px;
+}
+
+.lobby-title {
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+  font-size: 2.5vw;
+  color: var(--color-fg-primary);
+}
+
+.lobby section {
   height: 100%;
+  width: 25%;
 }
 
-.lobby nav a:hover {
-  text-decoration: none;
-}
-
-.lobby nav .bubbly {
-  position: relative;
-  padding: 0.25em 0.5em;
+.lobby section.rooms {
+  width: 50%;
 }
 
 .lobby .user-menu {
   grid-area: user;
   height: 100%;
-  width: 25%;
   display: flex;
   flex-direction: column;
 }
 
+.lobby .react-tabs__tab img {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: text-bottom;
+  margin-right: 0.5em;
+  border-radius: 50%;
+}
+
 .lobby .user-menu .react-tabs,
-.lobby .user-menu .react-tabs__tab-panel--selected {
+.lobby .user-menu .react-tabs__tab-panel--selected,
+.lobby .room-menu .react-tabs__tab-panel--selected,
+.lobby .events-menu .react-tabs__tab-panel--selected {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  padding-left: 0;
+  padding-right: 2px;
 }
 
-.lobby .user-menu .react-tabs__tab-panel--selected {
-  overflow-y: auto;
-}
-
-.lobby .room-menu {
+.lobby .room-menu,
+.lobby .events-menu {
+  position: relative;
   height: 100%;
-  width: 25%;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-lobby ul.react-tabs__tab-list {
@@ -53,10 +73,14 @@
   font-size: 16px;
   overflow-x: auto;
   overflow-y: hidden;
+  flex: 0 0 auto;
+}
+
+.main-lobby .react-tabs__tab {
+  font-size: 1rem;
 }
 
 .lobby .current-users-menu {
-  width: 100%;
   height: 100%;
 }
 
@@ -65,24 +89,20 @@
   flex-direction: column;
 }
 
-.lobby .user-chat {
-  overflow-y: auto;
+.lobby .announcements {
   height: 100%;
-  width: 100%;
-}
-
-.lobby .news {
-  height: 100%;
-}
-
-.lobby h1 {
-  text-align: center;
-  color: white;
-  font-size: 1.5vw;
-  margin: 0.25em 0;
+  display: flex;
+  flex-flow: column nowrap;
+  background-image: url("assets/ui/test.png");
+  background-size: 456px 912px;
+  background-position-x: 0;
+  background-position-y: 0;
 }
 
 .lobby h2 {
+  text-align: center;
+  color: var(--color-fg-primary);
+  margin: 0.25em 0;
   font-size: 1.25vw;
 }
 
@@ -93,28 +113,56 @@
   gap: 4px;
 }
 
-.main-lobby .news-chat {
+.main-lobby-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+  right: 0;
+  height: 60px;
+  z-index: 2;
+  background: var(--color-bg-primary);
+}
+
+.main-lobby-nav ul {
   display: flex;
-  gap: 4px;
-  width: 50%;
+  padding-left: 64px;
+  border-top: var(--border-thin);
 }
 
-@media (max-width: 1400px) {
-  .main-lobby .news-chat {
-    flex-direction: column;
+.main-lobby-nav li {
+  color: var(--color-fg-primary);
+  flex: 1;
+  list-style: none;
+  display: grid;
+  place-content: center;
+  height: 60px;
+  border-left: var(--border-thin);
+}
+
+.main-lobby-nav li.active {
+  background-color: var(--color-bg-secondary);
+}
+
+.main-lobby-nav li img {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (width <= 960px) {
+  #lobby-logo {
+    display: none;
   }
-}
 
-@media (max-width: 640px) {
   .lobby nav {
     flex-wrap: wrap;
   }
 
-  .lobby h1 {
+  .lobby h2 {
     font-size: 4vw;
   }
 
-  .lobby > .nes-container {
+  .lobby > .my-container {
     margin-top: 1em;
     max-height: 80vh;
   }
@@ -124,12 +172,29 @@
   }
 
   .main-lobby {
-    flex-direction: column;
-    overflow-y: scroll;
+    display: block;
+    overflow-y: auto;
   }
 
-  .main-lobby.main-lobby > div {
-    width: 100%;
-    min-height: 300px;
+  #root .main-lobby section {
+    width: auto;
+    height: calc(100vh - 68px);
+    margin: 4px;
+  }
+
+  .main-lobby section:not(.active) {
+    display: none;
+  }
+
+  .lobby .user-menu {
+    width: auto;
+  }
+
+  .main-lobby-nav {
+    display: block;
+  }
+
+  .custom-bg {
+    background-position-x: center;
   }
 }

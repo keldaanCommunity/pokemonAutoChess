@@ -2,55 +2,81 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import {
+  AdditionalPicksStages,
+  GiftShopStages,
+  ItemCarouselStages,
+  PortalCarouselStages
+} from "../../../../../config"
 import { PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
 import {
-  AdditionalPicksStages,
-  ItemCarouselStages,
-  PortalCarouselStages
-} from "../../../../../types/Config"
-import { BattleResult, GamePhaseState } from "../../../../../types/enum/Game"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+  BattleResult,
+  GameMode,
+  GamePhaseState
+} from "../../../../../types/enum/Game"
+import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { SynergyAssociatedToWeather } from "../../../../../types/enum/Weather"
+import { getAvatarSrc, getPortraitSrc } from "../../../../../utils/avatar"
 import { min } from "../../../../../utils/number"
-import { useAppSelector } from "../../../hooks"
-import { getAvatarSrc, getPortraitSrc } from "../../../utils"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { GameModeIcon } from "../icons/game-mode-icon"
 import SynergyIcon from "../icons/synergy-icon"
-import "./game-stage-info.css"
+import PokemonPortrait from "../pokemon-portrait"
 import TimerBar from "./game-timer-bar"
+import "./game-stage-info.css"
 
 export default function GameStageInfo() {
   const { t } = useTranslation()
   const phase = useAppSelector((state) => state.game.phase)
-  const name = useAppSelector((state) => state.game.currentPlayerName)
-  const title = useAppSelector((state) => state.game.currentPlayerTitle)
-  const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
   const weather = useAppSelector((state) => state.game.weather)
 
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const players = useAppSelector((state) => state.game.players)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const isPVE = stageLevel in PVEStages
-  const currentPlayerOpponentName = useAppSelector(
-    (state) => state.game.currentPlayerOpponentName
-  )
-  const currentPlayerOpponentAvatar = useAppSelector(
-    (state) => state.game.currentPlayerOpponentAvatar
-  )
-  const currentPlayerOpponentTitle = useAppSelector(
-    (state) => state.game.currentPlayerOpponentTitle
-  )
+  const gameMode = useAppSelector((state) => state.game.gameMode)
+  const spectatorCount = useAppSelector((state) => state.game.spectatorCount)
 
+  if (!spectatedPlayer) return null
+
+  const isPVE = stageLevel in PVEStages
+  const name = spectatedPlayer.name
+  const title = spectatedPlayer.title
+  const avatar = spectatedPlayer.avatar
   const opponentName =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentName : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentName : ""
   const opponentAvatar =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentAvatar : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentAvatar : ""
   const opponentTitle =
-    phase === GamePhaseState.FIGHT ? currentPlayerOpponentTitle : ""
+    phase === GamePhaseState.FIGHT ? spectatedPlayer.opponentTitle : ""
+  const opponentIsBot =
+    players.find((p) => p.name === opponentName)?.isBot ?? false
 
   return (
     <>
-      <div id="game-stage-info" className="nes-container">
+      <div id="game-stage-info" className="my-container">
+        {gameMode && (
+          <div
+            className="game-mode-information"
+            data-tooltip-id="detail-game-mode"
+          >
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-game-mode"
+                className="custom-theme-tooltip"
+                place="bottom"
+              >
+                <p>{t(`game_modes.${gameMode}`)}</p>
+                <p>{t(`game_modes_descriptions.${gameMode}`)}</p>
+              </Tooltip>,
+              document.body
+            )}
+            <GameModeIcon gameMode={gameMode} />
+          </div>
+        )}
+
         <div className="stage-information" data-tooltip-id="detail-stage">
           {ReactDOM.createPortal(
             <Tooltip
@@ -90,23 +116,26 @@ export default function GameStageInfo() {
           })}
         >
           <div className="player-information">
-            <img src={getAvatarSrc(avatar)} className="pokemon-portrait" />
+            <PokemonPortrait avatar={avatar} />
             {title && <p className="player-title">{t(`title.${title}`)}</p>}
-            <p className="player-name">{name}</p>
+            <p className="player-name">
+              {spectatedPlayer.isBot ? t(`pkm.${name as Pkm}`) : name}
+            </p>
           </div>
           {opponentName && (
             <>
               <span>vs</span>
               <div className="player-information">
-                <img
-                  src={getAvatarSrc(opponentAvatar)}
-                  className="pokemon-portrait"
-                />
+                <PokemonPortrait avatar={opponentAvatar} />
                 {opponentTitle && (
                   <p className="player-title">{t(`title.${opponentTitle}`)}</p>
                 )}
                 <p className="player-name">
-                  {isPVE ? t(opponentName) : opponentName}
+                  {isPVE
+                    ? t(opponentName as `pkm.${Pkm}`)
+                    : opponentIsBot
+                      ? t(`pkm.${opponentName as Pkm}`)
+                      : opponentName}
                 </p>
               </div>
             </>
@@ -121,7 +150,7 @@ export default function GameStageInfo() {
                 className="custom-theme-tooltip"
                 place="bottom"
               >
-                <span>
+                <span style={{ verticalAlign: "middle" }}>
                   <SynergyIcon
                     type={SynergyAssociatedToWeather.get(weather)!}
                   />
@@ -136,8 +165,29 @@ export default function GameStageInfo() {
             <img src={`/assets/icons/weather/${weather.toLowerCase()}.svg`} />
           </div>
         )}
+
+        {spectatorCount > 0 && (
+          <div
+            className="spectators-information"
+            data-tooltip-id="detail-spectators"
+          >
+            {ReactDOM.createPortal(
+              <Tooltip
+                id="detail-spectators"
+                className="custom-theme-tooltip"
+                place="bottom"
+              >
+                <p>{t("spectators_watching", { count: spectatorCount })}</p>
+              </Tooltip>,
+              document.body
+            )}
+            <img src={`/assets/ui/spectate.svg`} />
+            <span className="spectators-count">{spectatorCount}</span>
+          </div>
+        )}
+
+        <TimerBar />
       </div>
-      <TimerBar />
     </>
   )
 }
@@ -151,12 +201,11 @@ type PathStep = {
 
 export function StagePath() {
   const { t } = useTranslation()
-  const currentPlayer = useAppSelector((state) =>
-    state.game.players.find((p) => p.id === state.game.currentPlayerId)
-  )
-  const history = [...(currentPlayer?.history ?? [])]
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const history = [...(spectatedPlayer?.history ?? [])]
   const phase = useAppSelector((state) => state.game.phase)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const gameMode = useAppSelector((state) => state.game.gameMode)
   const startStage = min(1)(stageLevel - 3)
   let level = startStage
   let path: PathStep[] = []
@@ -177,7 +226,7 @@ export function StagePath() {
         icon: "/assets/ui/carousel.svg",
         title: t("carousel")
       })
-      if (level === stageLevel && phase === GamePhaseState.MINIGAME) {
+      if (level === stageLevel && phase === GamePhaseState.TOWN) {
         currentLevelPathIndex = path.length - 1
       }
     }
@@ -195,6 +244,17 @@ export function StagePath() {
         level,
         icon: "/assets/ui/additional-pick.svg",
         title: t("additional_pick")
+      })
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
+      }
+    }
+
+    if (GiftShopStages.includes(level) && gameMode === GameMode.DOUBLE_UP) {
+      path.push({
+        level,
+        icon: "/assets/ui/gift.svg",
+        title: t("gift")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1

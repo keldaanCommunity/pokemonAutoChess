@@ -1,0 +1,2 @@
+2020-10-07 17:58:44.157254	CHUNSOFT	CUR	Unspecified	Normal
+2024-06-27 06:24:29.416617	<@!276369635304275968>	CUR	CC_BY-NC_4	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined

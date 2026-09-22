@@ -1,13 +1,16 @@
 import Phaser from "phaser"
-import MoveToPlugin from "phaser3-rex-plugins/plugins/moveto-plugin"
-import React, { useCallback, useEffect, useRef, useState } from "react"
-import { DungeonPMDO } from "../../../../../types/Config"
+import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
+import { Weather } from "../../../../../types/enum/Weather"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import "./debug-scene.css"
 
 export default function MapViewerContainer() {
-  const gameRef = useRef<Phaser.Game>()
-  const debugScene = useRef<DebugScene>()
+  const gameRef = useRef<Phaser.Game>(null)
+  const debugScene = useRef<DebugScene>(null)
+  const { t } = useTranslation()
 
   const width = 1950
   const height = 1000
@@ -17,7 +20,14 @@ export default function MapViewerContainer() {
 
   const [statusMessage, setStatusMessage] = useState<string>("")
   const maps = Object.values(DungeonPMDO)
-  const [map, setMap] = useState<DungeonPMDO>(maps[0])
+  const [map, setMap] = useState<DungeonPMDO | "town">("town")
+
+  const [colorFilter, setColorFilter] = useState({
+    red: 255,
+    green: 255,
+    blue: 255,
+    alpha: 0
+  })
 
   const onProgress = () =>
     setStatusMessage(debugScene?.current?.loadingManager?.statusMessage ?? "")
@@ -44,7 +54,7 @@ export default function MapViewerContainer() {
         },
         disableContextMenu: true,
         scene: [debugScene.current],
-        backgroundColor: "#61738a",
+        backgroundColor: "var(--color-bg-primary)",
         plugins: {
           global: [
             {
@@ -64,19 +74,99 @@ export default function MapViewerContainer() {
     }
   }, [map])
 
+  useEffect(() => {
+    if (initialized.current === true && loaded === true) {
+      debugScene.current?.updateColorFilter(colorFilter)
+    }
+  }, [colorFilter])
+
   return (
     <div id="debug-scene" className="map-viewer">
       {!loaded && <p id="status-message">{statusMessage}</p>}
       <div id="debug-scene-controls">
         <select
-          onChange={(event) => setMap(event?.target.value as DungeonPMDO)}
+          onChange={(event) =>
+            setMap(event?.target.value as DungeonPMDO | "town")
+          }
         >
+          <option key="town" value="town">
+            Treasure Town
+          </option>
           {maps.map((m) => (
             <option key={m} value={m}>
               {m}
             </option>
           ))}
         </select>
+
+        <select
+          onChange={(e) => {
+            debugScene.current?.setWeather(
+              e.target.value as Weather | "dawn" | "sunset" | "nighttime"
+            )
+          }}
+        >
+          <option value="dawn">Dawn (Stage 0)</option>
+          <option value="sunset">Sunset (Stage 20)</option>
+          <option value="nighttime">Town at Night (Stage 21+)</option>
+          {Object.values(Weather).map((weather) => (
+            <option key={weather} value={weather}>
+              {t(`weather.${weather}`)}
+            </option>
+          ))}
+        </select>
+
+        <details>
+          <summary>Color filter</summary>
+          <label>
+            Red {colorFilter.red}{" "}
+            <input
+              type="range"
+              min="0"
+              max="255"
+              value={colorFilter.red}
+              onChange={(e) =>
+                setColorFilter({ ...colorFilter, red: +e.target.value })
+              }
+            />
+          </label>
+          <label>
+            Green {colorFilter.green}{" "}
+            <input
+              type="range"
+              min="0"
+              max="255"
+              value={colorFilter.green}
+              onChange={(e) =>
+                setColorFilter({ ...colorFilter, green: +e.target.value })
+              }
+            />
+          </label>
+          <label>
+            Blue {colorFilter.blue}{" "}
+            <input
+              type="range"
+              min="0"
+              max="255"
+              value={colorFilter.blue}
+              onChange={(e) =>
+                setColorFilter({ ...colorFilter, blue: +e.target.value })
+              }
+            />
+          </label>
+          <label>
+            Alpha {colorFilter.alpha}{" "}
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={colorFilter.alpha}
+              onChange={(e) =>
+                setColorFilter({ ...colorFilter, alpha: +e.target.value })
+              }
+            />
+          </label>
+        </details>
       </div>
     </div>
   )

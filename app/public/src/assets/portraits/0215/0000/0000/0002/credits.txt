@@ -1,0 +1,8 @@
+2020-10-07 17:58:43.990654	CHUNSOFT	CUR	Unspecified	Normal,Normal^
+2020-12-15 06:01:43.080123	<@!702275233125630042>	OLD	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
+2020-12-15 15:57:50.683575	<@!702275233125630042>	OLD	PMDCollab_1	Angry^,Crying^,Determined^,Dizzy^,Happy^,Inspired^,Joyous^,Normal^,Pain^,Sad^,Shouting^,Sigh^,Stunned^,Surprised^,Teary-Eyed^,Worried^
+2020-12-19 01:13:00.910268	<@!702275233125630042>	OLD	PMDCollab_1	Special0,Special0^
+2022-04-28 03:22:56.016388	<@!593113130213572610>	CUR	PMDCollab_1	Normal,Normal^
+2022-04-28 03:23:02.364454	<@!593113130213572610>	CUR	PMDCollab_1	Angry,Crying,Crying^,Determined,Determined^,Dizzy,Dizzy^,Happy,Happy^,Inspired,Inspired^,Joyous,Joyous^,Normal,Normal^,Pain,Pain^,Sad,Sad^,Shouting,Shouting^,Sigh,Sigh^,Special0,Special0^,Stunned,Stunned^,Surprised,Surprised^,Teary-Eyed,Teary-Eyed^,Worried,Worried^
+2022-09-15 20:21:25.060800	<@!593113130213572610>	CUR	PMDCollab_1	Sad,Joyous,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Angry^,Teary-Eyed^,Dizzy^,Worried,Determined,Special0,Worried^,Determined^,Special0^
+2023-06-02 22:06:27.873130	<@!593113130213572610>	CUR	PMDCollab_2	Stunned^

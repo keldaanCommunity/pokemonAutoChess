@@ -1,11 +1,14 @@
-import { Schema, model } from "mongoose"
+import { model, Schema } from "mongoose"
+import { DungeonPMDO } from "../../types/enum/Dungeon"
+import type { GameMode } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
+import type { Synergy } from "../../types/enum/Synergy"
 
 export interface Pokemon {
   name: string
   avatar: string
-  items: string[]
+  items: Item[]
 }
 
 export interface IDetailledStatistic {
@@ -14,8 +17,13 @@ export interface IDetailledStatistic {
   time: number
   name: string
   rank: number
+  nbplayers: number
   avatar: string
   pokemons: Pokemon[]
+  synergies: Map<Synergy, number>
+  regions: DungeonPMDO[]
+  gameMode: GameMode
+  unholdableItems: Item[]
 }
 
 const pokemon = new Schema({
@@ -50,10 +58,32 @@ const statisticSchema = new Schema({
   rank: {
     type: Number
   },
+  nbplayers: {
+    type: Number
+  },
   avatar: {
     type: String
   },
-  pokemons: [pokemon]
+  pokemons: [pokemon],
+  synergies: {
+    type: Map,
+    of: Number
+  },
+  regions: [
+    {
+      type: String,
+      enum: DungeonPMDO
+    }
+  ],
+  gameMode: {
+    type: String
+  },
+  unholdableItems: [
+    {
+      type: String,
+      enum: Item
+    }
+  ]
 })
 
 export default model<IDetailledStatistic>(

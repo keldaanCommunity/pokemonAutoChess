@@ -8,7 +8,6 @@
   border-radius: 50%;
   image-rendering: pixelated;
   box-shadow: inset 0 0 0 0.8vh black;
-  z-index: 30;
 }
 
 .game-player .CircularProgressbar {
@@ -23,7 +22,7 @@
 }
 
 .game-player .CircularProgressbar-trail {
-  stroke: #2d334b;
+  stroke: var(--color-shadow);
 }
 
 .game-player.spectated {
@@ -52,7 +51,7 @@
   margin: -0.2em auto;
   z-index: -1;
   text-align: center;
-  color: white;
+  color: var(--color-fg-primary);
   padding: 0;
   line-height: 1em;
   transition: margin 100ms ease-out;

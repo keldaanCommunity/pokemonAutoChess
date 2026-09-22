@@ -1,0 +1,23 @@
+.pokemon-filters {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pokemon-filters > div {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  z-index: 2;
+  background: var(--color-bg-secondary);
+  padding: 0.5em;
+  border: var(--border-thin);
+  border-radius: 12px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemon-filters .checkbox-container {
+  margin: 0.5em 0;
+}

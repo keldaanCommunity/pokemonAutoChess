@@ -24,7 +24,7 @@
 - Adjust Tri Attack: can now apply either Freeze for 2 seconds, Burn for 5 seconds or Paralysis for 5 seconds. Ability damage changed: ~~25/50/100~~ 30/50/70
 - Buff Tornadus: Attack ~~15~~ 20 ; PP ~~100~~ 70
 - Nincada is now an additional Epic. Evolve in both Sheninja and Ninjask
-- Rework Lock-On (Genesect): Lock on the target. The next attack cannot miss, deal 100% (scales with AP) True Damage and apply Armor Reduction for 3 seconds
+- Rework Lock-On (Genesect): Lock on the target. The next attack cannot miss, deal 100% (scales with AP) True Damage and apply Armor Break for 3 seconds
 - Unown-T is now TREE: gives 3 random berries
 - Slowbro now needs a King's Rock to evolve to Slowking
 - Pokemons with "tree" status (Sudowoodo, Wobbuffet) cannot be silenced or lose PP until their bar is full
@@ -89,7 +89,7 @@
 # Gameplay
 
 - New status: Flinch: all incoming damage bypass Shield
-- Like poison, the following status can now have their duration extended if applied again before the end of their initial duration: Armor Reduction, Burn, Silence, Wound, Paralysis, Rune Protect, Spike Armor, Magic Bounce.
+- Like poison, the following status can now have their duration extended if applied again before the end of their initial duration: Armor Break, Burn, Silence, Wound, Paralysis, Rune Protect, Spike Armor, Magic Bounce.
 - Negative status are cleared when the opposite team is eliminated
 - The number of pokemons required to change these weathers has been reduced to 6: Snow, Storm, Sandstorm
 

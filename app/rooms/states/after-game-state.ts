@@ -1,20 +1,25 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
-import SimplePlayer from "../../models/colyseus-models/simple-player"
+import AfterGamePlayer from "../../models/colyseus-models/after-game-player"
+import { GameMode } from "../../types/enum/Game"
 
 export default class AfterGameState extends Schema {
-  @type({ map: SimplePlayer }) players = new MapSchema<SimplePlayer>()
-  @type("boolean") elligibleToELO = false
-  @type("boolean") elligibleToXP = false
+  @type({ map: AfterGamePlayer }) players = new MapSchema<AfterGamePlayer>()
+  @type("boolean") eligibleToELO = false
+  @type("boolean") eligibleToXP = false
+  @type("string") gameMode = GameMode.CUSTOM_LOBBY
 
   constructor({
-    elligibleToELO,
-    elligibleToXP
+    eligibleToELO,
+    eligibleToXP,
+    gameMode
   }: {
-    elligibleToELO: boolean
-    elligibleToXP: boolean
+    eligibleToELO: boolean
+    eligibleToXP: boolean
+    gameMode: GameMode
   }) {
     super()
-    this.elligibleToXP = elligibleToXP
-    this.elligibleToELO = elligibleToELO
+    this.eligibleToXP = eligibleToXP
+    this.eligibleToELO = eligibleToELO
+    this.gameMode = gameMode
   }
 }

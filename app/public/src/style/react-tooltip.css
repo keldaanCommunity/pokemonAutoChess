@@ -1,0 +1,28 @@
+.react-tooltip {
+  font-size: 1rem;
+  max-width: 95vw;
+}
+
+.react-tooltip > .react-tooltip-content-wrapper {
+  padding: 0;
+}
+
+.react-tooltip output {
+  color: var(--color-fg-primary);
+}
+
+.react-tooltip .help {
+  font-size: 90%;
+  font-style: italic;
+  color: var(--color-fg-secondary);
+}
+
+.react-tooltip p:last-child {
+  margin-bottom: 0;
+}
+
+:root {
+  --rt-opacity: 1 !important;
+  --rt-transition-show-delay: 0s !important;
+  --rt-transition-closing-delay: 0s !important;
+}

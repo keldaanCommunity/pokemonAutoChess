@@ -1,4 +1,3 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 import { useCredits } from "../../../../../core/credits"
 
@@ -9,13 +8,13 @@ export default function Credits(props: {
   const { t } = useTranslation()
   const { spriteCredits, creditsNames } = useCredits()
 
-  if (!spriteCredits || !spriteCredits.hasOwnProperty(props.index)) return null
+  if (!spriteCredits || !(props.index in spriteCredits)) return null
 
   let credits
   if (props.for === "portrait") {
-    credits = spriteCredits[props.index]?.portrait_credit
+    credits = spriteCredits[props.index].portrait_credit
   } else {
-    credits = spriteCredits[props.index]?.sprite_credit
+    credits = spriteCredits[props.index].sprite_credit
   }
 
   if (!credits) return null
@@ -24,22 +23,21 @@ export default function Credits(props: {
     let contact = ""
     let name = ""
     if (creditsNames) {
-      const user = creditsNames.find((user) => user.Discord === id)
+      const user = creditsNames.find((user) => user.discord === id)
       if (user != null) {
-        contact = user.Contact
-        name = user.Name
+        contact = user.contact
+        name = user.name
       }
     }
-    return (
-      <a
-        className="nes-text is-primary"
-        style={{ marginRight: "0.5em" }}
-        key={id}
-        href={contact}
-      >
+    return contact ? (
+      <a style={{ marginRight: "0.5em" }} key={id} href={contact}>
         {name}
       </a>
-    )
+    ) : name ? (
+      <span style={{ marginRight: "0.5em" }} key={id}>
+        {name}
+      </span>
+    ) : null
   }
 
   return (
@@ -47,7 +45,7 @@ export default function Credits(props: {
       <dd>{credits.primary.length > 0 && findCredits(credits.primary)}</dd>
       {credits.secondary.length > 0 && (
         <>
-          <dt>{t("others")}</dt>
+          <dt>{t("wiki.credits.others")}</dt>
           <dd>
             <ul style={{ display: "inline-block" }}>
               {credits.secondary.map((s) => (

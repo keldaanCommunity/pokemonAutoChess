@@ -1,0 +1,1 @@
+2023-09-24 19:43:09.429569	<@!544245909639397378>	CUR	PMDCollab_2	Normal,Happy,Pain,Surprised,Angry,Worried

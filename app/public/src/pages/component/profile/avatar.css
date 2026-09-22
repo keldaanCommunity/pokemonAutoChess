@@ -1,4 +1,4 @@
-.avatar.player-box {
+.avatar.player.my-box {
   display: flex;
   align-items: center;
   padding: 0;
@@ -36,6 +36,10 @@
 .player-title-role .player-title {
   margin: 0;
   font-size: 1rem;
+}
+
+.player-title {
+  color: var(--color-fg-gold);
 }
 
 .avatar .elo {

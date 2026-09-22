@@ -1,14 +1,14 @@
 import { Dispatcher } from "@colyseus/command"
-import { Client, Room } from "colyseus"
+import { type Client, Room } from "colyseus"
 import admin from "firebase-admin"
-import SimplePlayer from "../models/colyseus-models/simple-player"
-import BannedUser from "../models/mongo-models/banned-user"
+import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import { Transfer } from "../types"
+import type { IAfterGamePlayer } from "../types"
+import type { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import AfterGameState from "./states/after-game-state"
 
-export default class AfterGameRoom extends Room<AfterGameState> {
+export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
   dispatcher: Dispatcher<this>
   constructor() {
     super()
@@ -16,46 +16,50 @@ export default class AfterGameRoom extends Room<AfterGameState> {
   }
 
   onCreate(options: {
-    players: SimplePlayer[]
+    players: IAfterGamePlayer[]
     idToken: string
-    elligibleToXP: boolean
-    elligibleToELO: boolean
+    eligibleToXP: boolean
+    eligibleToELO: boolean
+    gameMode: GameMode
   }) {
-    //logger.info("create after game", this.roomId)
+    logger.info("Create AfterGame ", this.roomId)
 
-    this.setState(new AfterGameState(options))
+    this.state = new AfterGameState(options)
     // logger.debug('before', this.state.players);
     if (options.players) {
-      options.players.forEach((plyr: SimplePlayer) => {
-        const player = new SimplePlayer(
+      options.players.forEach((plyr: IAfterGamePlayer) => {
+        const player = new AfterGamePlayer(
           plyr.id,
           plyr.name,
           plyr.avatar,
           plyr.rank,
           plyr.pokemons,
-          plyr.exp,
           plyr.title,
           plyr.role,
           plyr.synergies,
-          plyr.elo
+          plyr.elo,
+          plyr.games,
+          plyr.gameStats
         )
         this.state.players.set(player.id, player)
       })
     }
+    this.clock.setTimeout(() => {
+      // dispose the room automatically after 120 second
+      this.disconnect()
+    }, 120 * 1000)
   }
 
-  async onAuth(client: Client, options, request) {
+  async onAuth(client: Client, options, context) {
     try {
-      super.onAuth(client, options, request)
+      super.onAuth(client, options, context)
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
-      const isBanned = await BannedUser.findOne({ uid: user.uid })
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
-      client.send(Transfer.USER_PROFILE, userProfile)
 
       if (!user.displayName) {
         throw "No display name"
-      } else if (isBanned) {
+      } else if (userProfile?.banned) {
         throw "User banned"
       } else {
         return user
@@ -69,23 +73,26 @@ export default class AfterGameRoom extends Room<AfterGameState> {
     //logger.info(`${client.auth.email} join after game`)
   }
 
-  async onLeave(client: Client, consented: boolean) {
+  async onDrop(client: Client, code: number) {
     try {
-      if (consented) {
-        throw new Error("consented leave")
-      }
-
       // allow disconnected client to reconnect into this room until 20 seconds
       await this.allowReconnection(client, 20)
     } catch (e) {
       /*if (client && client.auth && client.auth.displayName) {
-        logger.info(`${client.auth.displayName} leave after game room`)
+        logger.info(`${client.auth.displayName} left after game room`)
       }*/
     }
   }
 
+  async onLeave(client: Client, code: number) {
+    // player not coming back
+    /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} leave after game room`)
+    }*/
+  }
+
   onDispose() {
-    //logger.info("dispose after game")
+    logger.info("dispose AfterGame ", this.roomId)
     this.dispatcher.stop()
   }
 }

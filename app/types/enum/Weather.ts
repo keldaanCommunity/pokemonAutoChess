@@ -1,36 +1,55 @@
 import { reverseMap } from "../../utils/map"
-import { Effect } from "./Effect"
+import { EffectEnum } from "./Effect"
 import { Passive } from "./Passive"
 import { Synergy } from "./Synergy"
 
 export enum Weather {
-  SUN = "SUN",
-  NIGHT = "NIGHT",
   WINDY = "WINDY",
-  MISTY = "MISTY",
-  RAIN = "RAIN",
-  SNOW = "SNOW",
-  STORM = "STORM",
+  NIGHT = "NIGHT",
   SANDSTORM = "SANDSTORM",
+  ZENITH = "ZENITH",
+  RAIN = "RAIN",
+  SMOG = "SMOG",
+  MISTY = "MISTY",
+  DROUGHT = "DROUGHT",
+  MURKY = "MURKY",
+  BLOODMOON = "BLOODMOON",
+  STORM = "STORM",
+  SNOW = "SNOW",
   NEUTRAL = "NEUTRAL"
 }
 
-export const WeatherPassives: Map<Passive, Weather> = new Map([
-  [Passive.SUN, Weather.SUN],
-  [Passive.RAIN, Weather.RAIN],
-  [Passive.SANDSTORM, Weather.SANDSTORM],
-  [Passive.MISTY, Weather.MISTY],
-  [Passive.SNOW, Weather.SNOW],
-  [Passive.STORM, Weather.STORM],
-  [Passive.NIGHT, Weather.NIGHT],
-  [Passive.WINDY, Weather.WINDY],
-  [Passive.AIRLOCK, Weather.NEUTRAL]
+export const WeatherEffects: ReadonlyMap<Weather, EffectEnum> = new Map([
+  [Weather.WINDY, EffectEnum.WINDY],
+  [Weather.SNOW, EffectEnum.SNOW],
+  [Weather.SMOG, EffectEnum.SMOG],
+  [Weather.NIGHT, EffectEnum.NIGHT],
+  [Weather.MISTY, EffectEnum.MISTY],
+  [Weather.MURKY, EffectEnum.MURKY],
+  [Weather.DROUGHT, EffectEnum.DROUGHT],
+  [Weather.RAIN, EffectEnum.RAIN],
+  [Weather.ZENITH, EffectEnum.ZENITH],
+  [Weather.SANDSTORM, EffectEnum.SANDSTORM],
+  [Weather.BLOODMOON, EffectEnum.BLOODMOON],
+  [Weather.STORM, EffectEnum.STORM]
 ])
 
-export const PassiveAssociatedToWeather = reverseMap(WeatherPassives)
+export const PassivesAssociatedToWeather: Map<Weather, Passive[]> = new Map([
+  [Weather.RAIN, [Passive.RAIN]],
+  [Weather.DROUGHT, [Passive.DROUGHT]],
+  [Weather.ZENITH, [Passive.ZENITH]],
+  [Weather.SANDSTORM, [Passive.SANDSTORM]],
+  [Weather.MISTY, [Passive.MISTY]],
+  [Weather.SNOW, [Passive.SNOW]],
+  [Weather.STORM, [Passive.STORM]],
+  [Weather.NIGHT, [Passive.NIGHT]],
+  [Weather.WINDY, [Passive.WINDY]],
+  [Weather.NEUTRAL, [Passive.AIRLOCK]]
+])
 
 export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
-  [Synergy.FIRE, Weather.SUN],
+  [Synergy.GRASS, Weather.ZENITH],
+  [Synergy.FIRE, Weather.DROUGHT],
   [Synergy.WATER, Weather.RAIN],
   [Synergy.GROUND, Weather.SANDSTORM],
   [Synergy.FAIRY, Weather.MISTY],
@@ -38,18 +57,10 @@ export const WeatherAssociatedToSynergy: Map<Synergy, Weather> = new Map([
   [Synergy.ELECTRIC, Weather.STORM],
   [Synergy.DARK, Weather.NIGHT],
   [Synergy.FLYING, Weather.WINDY],
+  [Synergy.WILD, Weather.BLOODMOON],
+  [Synergy.POISON, Weather.SMOG],
+  [Synergy.GHOST, Weather.MURKY],
   [Synergy.NORMAL, Weather.NEUTRAL]
 ])
 
 export const SynergyAssociatedToWeather = reverseMap(WeatherAssociatedToSynergy)
-
-export const WeatherEffects: Map<Weather, Effect> = new Map([
-  [Weather.SUN, Effect.SUN],
-  [Weather.RAIN, Effect.RAIN],
-  [Weather.SANDSTORM, Effect.SANDSTORM],
-  [Weather.MISTY, Effect.MISTY],
-  [Weather.SNOW, Effect.SNOW],
-  [Weather.STORM, Effect.STORM],
-  [Weather.NIGHT, Effect.NIGHT],
-  [Weather.WINDY, Effect.WINDY]
-])

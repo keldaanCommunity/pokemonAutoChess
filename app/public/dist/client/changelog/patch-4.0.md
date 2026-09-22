@@ -1,7 +1,3 @@
----
-patch announcement
----
-
 > August, 26th
 
 # Patch 4.0: Portal away !

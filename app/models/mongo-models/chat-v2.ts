@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose"
-import { IChatV2 } from "../../types/index"
+import { model, Schema } from "mongoose"
+import type { IChatV2 } from "../../types/index"
 
 const chatSchema = new Schema({
   id: {
@@ -24,9 +24,10 @@ const chatSchema = new Schema({
     required: true
   },
   time: {
-    type: Number,
-    required: true,
-    default: Date.now()
+    type: Date,
+    expires: 7 * 24 * 60 * 60, // stored for 7 days
+    default: Date.now,
+    required: true
   }
 })
 

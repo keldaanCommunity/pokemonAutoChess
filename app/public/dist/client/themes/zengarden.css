@@ -1,0 +1,47 @@
+:root {
+  --color-bg-primary: #3d5d3a;
+  --color-bg-secondary: #547a54;
+  --color-bg-tertiary: #304529;
+  --color-bg-accent: #b89d40;
+
+  --color-special: #80b4fd;
+}
+
+.custom-bg {
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.leaderboard [data-react-window-index]:nth-child(odd) .my-box {
+  background: color-mix(in srgb, var(--color-bg-secondary) 90%, transparent);
+}
+
+.leaderboard [data-react-window-index]:nth-child(even) .my-box {
+  background: color-mix(in srgb, var(--color-bg-primary) 90%, transparent);
+}
+
+#videobg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.auth-page .logo {
+  width: 30%;
+}
+
+.after-menu .my-container {
+  background: color-mix(in srgb, var(--color-bg-primary) 50%, transparent);
+}
+
+#wiki-page .wiki-faq summary {
+  color: var(--color-fg-gold);
+}
+
+.boosters-modal {
+  background: var(--color-bg-primary);
+}

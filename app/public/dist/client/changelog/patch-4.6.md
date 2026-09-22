@@ -59,7 +59,7 @@
   - (2) Shining Ray: Increase AP and Atttack by 30%
   - (3) Light Pulse: Also give +10 PP per second
   - (4) Eternal Light: Also give 30% Attack Speed and Rune Protect for 10 seconds
-  - (5) Max Illumination: Also give 100 Shield and Resurection
+  - (5) Max Illumination: Also give 100 Shield and Resurrection
 - Add Ground 8, removed ground effect cap, changed Sandstorm threshold to 8 units
 - Psy 6 Eerie Spell also give the same chance to find Unown in shop as Psy 4 Light Screen
 - Buff Normal: ~~10/25/35/55~~ 15/25/40/55 shield
@@ -72,7 +72,7 @@ Added artificial items, obtained through Artificial synergy:
 - Magmarizer: +8 Attack ; Every successful attack increase ATK by 1 and inflicts BURN for 4 seconds
 - Exp Share: Get the best values of Attack, Defense and Special Defense from adjacent allies in the same row
 - Macho Brace: +15 Attack, -25% attack speed; gives Fighting synergy
-- Light Ball: +75% AP, gives Light synergy
+- Light Ball: +75 AP, gives Light synergy
 - Toxic Orb: +100% Attack, gives Poison synergy, holder is poisonned for the whole fight
 - Metronome: Gives SOUND synergy. Every second, the holder gains 5 PP
 - Metal Coat: Gives STEEL synergy. Reduce incoming damage by 20%

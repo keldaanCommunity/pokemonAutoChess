@@ -1,0 +1,12 @@
+export type LoadingHint =
+  | "tab_out"
+  | "max_loading_time"
+  | "disconnection_time"
+  | "translation_project"
+  | "discord"
+  | "bug_report"
+  | "moderation"
+  | "berry_tree"
+  | "spriters"
+  | "wiki"
+  | "avatar"

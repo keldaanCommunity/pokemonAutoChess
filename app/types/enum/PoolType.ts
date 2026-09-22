@@ -1,0 +1,1 @@
+export type PoolType = "regular" | "additional" | "regional" | "special"

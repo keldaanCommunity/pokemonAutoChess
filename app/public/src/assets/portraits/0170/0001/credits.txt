@@ -1,0 +1,2 @@
+2024-02-22 01:38:02.786586	<@!544245909639397378>	CUR	CC_BY-NC_4	Normal,Happy
+2024-05-12 03:34:02.371279	<@!544245909639397378>	CUR	CC_BY-NC_4	Normal,Joyous,Sigh,Pain,Surprised,Angry,Worried,Determined

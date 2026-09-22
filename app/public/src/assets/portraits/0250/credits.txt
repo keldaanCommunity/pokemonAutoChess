@@ -1,0 +1,5 @@
+2020-10-07 17:58:44.169783	CHUNSOFT	CUR	Unspecified	Normal
+2020-12-19 02:23:01.471563	<@!533406104256905257>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
+2021-01-09 16:51:58.104518	<@!533406104256905257>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
+2021-01-10 19:14:01.454636	<@!533406104256905257>	CUR	PMDCollab_1	Special3
+2022-02-24 06:55:49.793553	<@!533406104256905257>	CUR	PMDCollab_1	Normal,Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Pain,Sad,Shouting,Sigh,Special3,Stunned,Surprised,Teary-Eyed,Worried

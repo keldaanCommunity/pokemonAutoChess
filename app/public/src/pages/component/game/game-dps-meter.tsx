@@ -1,100 +1,113 @@
-import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { PVEStages } from "../../../../../models/pve-stages"
-import { useAppSelector } from "../../../hooks"
-import { preferences, savePreferences } from "../../../preferences"
-import { getAvatarSrc } from "../../../utils"
-import "./game-dps-meter.css"
+import { GamePhaseState, Team } from "../../../../../types/enum/Game"
+import type { Pkm } from "../../../../../types/enum/Pokemon"
+import { DEPTH } from "../../../game/depths"
+import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import { usePreference } from "../../../preferences"
+import DraggableWindow from "../modal/draggable-window"
+import PokemonPortrait from "../pokemon-portrait"
 import GamePlayerDpsMeter from "./game-player-dps-meter"
+import GamePlayerDpsTakenMeter from "./game-player-dps-taken-meter"
 import GamePlayerHpsMeter from "./game-player-hps-meter"
+import "./game-dps-meter.css"
 
 export default function GameDpsMeter() {
   const { t } = useTranslation()
-  const opponentName = useAppSelector(
-    (state) => state.game.currentPlayerOpponentName
-  )
-  const opponentAvatar = useAppSelector(
-    (state) => state.game.currentPlayerOpponentAvatar
-  )
+  const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
+  const team = useAppSelector((state) => state.game.teamSpectated)
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
+  const phase = useAppSelector((state) => state.game.phase)
+  const [showDpsMeter, setShowDpsMeter] = usePreference("showDpsMeter")
+  const [dpsMeterPosition, setDpsMeterPosition] =
+    usePreference("dpsMeterPosition")
 
-  const teamIndex = useAppSelector(
-    (state) => state.game.currentSimulationTeamIndex
-  )
   const blueDpsMeter = useAppSelector((state) => state.game.blueDpsMeter)
   const redDpsMeter = useAppSelector((state) => state.game.redDpsMeter)
-  const myDpsMeter = teamIndex === 0 ? blueDpsMeter : redDpsMeter
-  const opponentDpsMeter = teamIndex === 0 ? redDpsMeter : blueDpsMeter
+  const myDpsMeter = team === Team.BLUE_TEAM ? blueDpsMeter : redDpsMeter
+  const opponentDpsMeter = team === Team.BLUE_TEAM ? redDpsMeter : blueDpsMeter
 
-  const blueHpsMeter = useAppSelector((state) => state.game.blueHealDpsMeter)
-  const redHpsMeter = useAppSelector((state) => state.game.redHealDpsMeter)
-  const myHpsMeter = teamIndex === 0 ? blueHpsMeter : redHpsMeter
-  const opponentHpsMeter = teamIndex === 0 ? redHpsMeter : blueHpsMeter
+  if (!spectatedPlayer) return null
 
-  const avatar = useAppSelector((state) => state.game.currentPlayerAvatar)
-  const name = useAppSelector((state) => state.game.currentPlayerName)
-  const [isOpen, setOpen] = useState(preferences.showDpsMeter)
+  const isPVE =
+    phase === GamePhaseState.FIGHT
+      ? stageLevel in PVEStages
+      : stageLevel - 1 in PVEStages
 
-  const isPVE = useAppSelector((state) => state.game.stageLevel in PVEStages)
-
-  function toggleOpen() {
-    setOpen(!isOpen)
-    savePreferences({ showDpsMeter: !isOpen })
-  }
+  const name = spectatedPlayer.name
+  const avatar = spectatedPlayer.avatar
+  const opponentName = spectatedPlayer.opponentName
+  const opponentAvatar = spectatedPlayer.opponentAvatar
 
   if (opponentAvatar == "") {
     return null
   }
 
   return (
-    <>
-      <div
-        id="game-dps-icon"
-        className="nes-container clickable"
-        title={`${isOpen ? "Hide" : "Show"} battle stats`}
-        onClick={toggleOpen}
-      >
-        <img src="/assets/ui/dpsmeter.svg" />
-      </div>
-      <div
-        className="nes-container hidden-scrollable game-dps-meter"
-        hidden={!isOpen}
-      >
-        <header>
-          <div>
-            <img src={getAvatarSrc(avatar)} className="pokemon-portrait"></img>
-            <p>{name}</p>
-          </div>
-          <h2>Vs</h2>
-          <div>
+    <DraggableWindow
+      title={t("game_stats.title")}
+      className="my-container game-dps-meter"
+      style={{ zIndex: DEPTH.DPS_METER }}
+      defaultMinimized={!showDpsMeter}
+      initialPosition={dpsMeterPosition}
+      onToggleMinimize={(minimized) => setShowDpsMeter(!minimized)}
+      onMove={(position) => setDpsMeterPosition(position)}
+    >
+      <header>
+        <div>
+          <PokemonPortrait avatar={avatar} />
+          <p>{name}</p>
+        </div>
+        <span style={{ fontSize: "2rem" }}>vs</span>
+        <div>
+          <PokemonPortrait avatar={opponentAvatar} />
+          <p>{isPVE ? t(opponentName as `pkm.${Pkm}`) : opponentName}</p>
+        </div>
+      </header>
+      <Tabs>
+        <TabList>
+          <Tab key="damage_dealt">
             <img
-              src={getAvatarSrc(opponentAvatar)}
-              className="pokemon-portrait"
+              src="assets/icons/ATK.png"
+              title={t("game_stats.damage_dealt")}
+              alt={t("game_stats.damage_dealt")}
             ></img>
-            <p>{isPVE ? t(opponentName) : opponentName}</p>
-          </div>
-        </header>
-        <Tabs>
-          <TabList>
-            <Tab key="damage_label">
-              <p>{t("damage_label")}</p>
-            </Tab>
-            <Tab key="heal">
-              <p>{t("heal")}</p>
-            </Tab>
-          </TabList>
+          </Tab>
+          <Tab key="damage_blocked">
+            <img
+              src="assets/icons/SHIELD.png"
+              title={t("game_stats.damage_blocked")}
+              alt={t("game_stats.damage_blocked")}
+            ></img>
+          </Tab>
+          <Tab key="heal">
+            <img
+              src="assets/icons/HP.png"
+              title={t("game_stats.heal_shield")}
+              alt={t("game_stats.heal_shield")}
+            ></img>
+          </Tab>
+        </TabList>
 
-          <TabPanel>
-            <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
-            <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
-          </TabPanel>
+        <TabPanel>
+          <p>{t("game_stats.damage_dealt")}</p>
+          <GamePlayerDpsMeter dpsMeter={myDpsMeter} />
+          <GamePlayerDpsMeter dpsMeter={opponentDpsMeter} />
+        </TabPanel>
 
-          <TabPanel>
-            <GamePlayerHpsMeter hpsMeter={myHpsMeter} />
-            <GamePlayerHpsMeter hpsMeter={opponentHpsMeter} />
-          </TabPanel>
-        </Tabs>
-      </div>
-    </>
+        <TabPanel>
+          <p>{t("game_stats.damage_blocked")}</p>
+          <GamePlayerDpsTakenMeter dpsMeter={myDpsMeter} />
+          <GamePlayerDpsTakenMeter dpsMeter={opponentDpsMeter} />
+        </TabPanel>
+
+        <TabPanel>
+          <p>{t("game_stats.heal_shield")}</p>
+          <GamePlayerHpsMeter dpsMeter={myDpsMeter} />
+          <GamePlayerHpsMeter dpsMeter={opponentDpsMeter} />
+        </TabPanel>
+      </Tabs>
+    </DraggableWindow>
   )
 }

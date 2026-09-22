@@ -1,0 +1,2 @@
+2020-10-07 17:58:43.408213	CHUNSOFT	CUR	Unspecified	Normal
+2024-07-08 03:31:23.032133	<@!330751862590406656>	CUR	CC_BY-NC_4	Joyous,Shouting,Surprised,Angry,Dizzy

@@ -9,7 +9,7 @@
   height: 24px;
   display: flex;
   position: relative;
-  border: 4px solid black;
+  border: var(--border-thin);
 }
 
 .score-indicator .cursor {

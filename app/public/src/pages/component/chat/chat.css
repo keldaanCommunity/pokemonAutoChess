@@ -3,10 +3,11 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  flex: 1;
+  overflow-y: auto;
 }
 
-#root .user-chat h1 {
-  color: white;
+.user-chat h2 {
   text-align: center;
 }
 
@@ -33,13 +34,12 @@
 }
 
 .chat-history .date {
-  color: white;
+  color: var(--color-fg-primary);
   width: 100%;
   text-align: center;
 }
 
 .chat button {
-  padding: 0.25em;
   align-self: start;
 }
 
@@ -47,21 +47,16 @@
   line-height: 1.2em;
 }
 
-.chat {
+.chat-message-container {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
   margin: 0.25em 0;
   border-radius: 8px;
   font-size: 1.25rem;
-  border: solid;
-  border-color: black;
-  background: rgba(97, 115, 138, 0.815);
-  color: white;
+  border: var(--border-thin);
+  background: var(--color-bg-secondary);
+  color: var(--color-fg-primary);
   cursor: var(--cursor-hover);
-}
-
-.pokemon-portrait {
-  align-self: start;
 }
 
 .chat-message-container {
@@ -74,9 +69,9 @@
   display: flex;
   gap: 8px;
   padding: 6px;
-  background-color: #54596b;
-  border-bottom: 2px solid black;
-  border-radius: 4px;
+  background-color: var(--color-bg-secondary);
+  border-bottom: var(--border-thin);
+  border-radius: 4px 4px 0 0;
 }
 
 .chat-message {
@@ -96,7 +91,7 @@
 }
 
 .chat-message-author {
-  color: #ffc107;
+  color: var(--color-fg-gold);
 }
 
 .chat-message-time {
@@ -108,9 +103,70 @@
 }
 
 .same-user {
-  background-color: rgba(17, 148, 236, 0.604);
+  background-color: var(--color-bg-accent);
 }
 
 .server-message {
-  background-color: #1195ec;
+  background-color: var(--color-bg-accent);
+}
+
+.chat-input-area {
+  position: relative;
+}
+
+.user-chat .emote-menu {
+  position: absolute;
+  bottom: 100%;
+  left: auto;
+  right: 0;
+  margin: 0 0 4px 0;
+  padding: 0.25em;
+}
+
+.emote-menu > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+}
+
+.chat-emote-menu li {
+  display: block;
+  list-style: none;
+  position: relative;
+}
+
+.chat-emote-menu li img {
+  width: 80px;
+  height: 80px;
+  image-rendering: pixelated;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-shadow: 2px 2px #00000060;
+}
+
+.chat-emote-menu li img.locked {
+  filter: grayscale(1) contrast(0.5);
+}
+
+.chat-emote-menu li img:not(.locked) {
+  cursor: var(--cursor-hover);
+}
+
+.emote-button {
+  flex: 0;
+  font-size: 1.2em;
+  padding: 0 0.5em;
+}
+
+.chat-message-container.emote-message {
+  width: fit-content;
+  min-width: unset;
+}
+
+.chat-emote-message {
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
 }

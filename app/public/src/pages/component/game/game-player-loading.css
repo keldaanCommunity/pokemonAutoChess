@@ -25,7 +25,7 @@
 }
 
 .game-player-loading-icon .CircularProgressbar-trail {
-  stroke: #2d334b;
+  stroke: var(--color-shadow);
 }
 
 .game-player-loading p {

@@ -1,0 +1,1 @@
+2023-04-20 14:49:55.758882	CHUNSOFT	CUR	Unspecified	Normal,Sad,Happy,Pain,Surprised,Angry

@@ -1,0 +1,104 @@
+import type React from "react"
+import { useTranslation } from "react-i18next"
+import { PkmAltForms } from "../../../../../config"
+import { GADGETS } from "../../../../../config/game/gadgets"
+import { precomputedPokemonsImplemented } from "../../../../../models/precomputed/precomputed-pokemons"
+import { Title } from "../../../../../types"
+import { NonPkm } from "../../../../../types/enum/Pokemon"
+import { isIn } from "../../../../../utils/array"
+import { useAppSelector } from "../../../hooks"
+import "./progress-tab.css"
+
+export function ProgressTab() {
+  const { t } = useTranslation()
+
+  const listPokemons = precomputedPokemonsImplemented.filter(
+    (pokemon) =>
+      PkmAltForms.includes(pokemon.name) === false &&
+      NonPkm.includes(pokemon.name) === false
+  )
+
+  const pokemonCollection = useAppSelector((state) => [
+    ...(state.network.profile?.pokemonCollection?.values() ?? [])
+  ])
+  const user = useAppSelector((state) => state.network.profile)
+  const nbAvatarsUnlocked = listPokemons.filter((pkm) => {
+    const item = pokemonCollection.find((p) => p.id === pkm.index)
+    return item && (item.emotions.length > 0 || item.shinyEmotions.length > 0)
+  }).length
+  const nbPokemonsPlayed = listPokemons.filter((pkm) => {
+    const item = pokemonCollection.find((p) => p.id === pkm.index)
+    return item && item.played > 0
+  }).length
+  const nbPokemonsTotal = listPokemons.length
+  const nbTitlesUnlocked = user
+    ? Object.keys(Title).filter((title) => isIn(user.titles, title)).length
+    : 0
+  const nbTitlesTotal = Object.keys(Title).length
+  const level = user?.level ?? 0
+  const gadgets = Object.values(GADGETS).filter((g) => !g.disabled)
+  const nbGadgetsUnlocked = gadgets.filter(
+    (g) => g.levelRequired <= level
+  ).length
+
+  return (
+    <div>
+      <div className="progress-grid">
+        <ProgressBox
+          label={t("profile.progress.avatars_unlocked", {
+            count: nbAvatarsUnlocked,
+            total: nbPokemonsTotal
+          })}
+          count={nbAvatarsUnlocked}
+          total={nbPokemonsTotal}
+        />
+        <ProgressBox
+          label={t("profile.progress.pokemons_played", {
+            count: nbPokemonsPlayed,
+            total: nbPokemonsTotal
+          })}
+          count={nbPokemonsPlayed}
+          total={nbPokemonsTotal}
+        />
+        <ProgressBox
+          label={t("profile.progress.titles_unlocked", {
+            count: nbTitlesUnlocked,
+            total: nbTitlesTotal
+          })}
+          count={nbTitlesUnlocked}
+          total={nbTitlesTotal}
+        />
+        <ProgressBox
+          label={t("profile.progress.gadgets_unlocked", {
+            count: nbGadgetsUnlocked,
+            total: gadgets.length
+          })}
+          count={nbGadgetsUnlocked}
+          total={gadgets.length}
+        />
+        {/*<ProgessBox label={"Max rank reached: 5/11"} count={5} total={11} />*/}
+      </div>
+    </div>
+  )
+}
+
+export function ProgressBox(props: {
+  label: string
+  count: number
+  total: number
+}) {
+  const { label, count, total } = props
+
+  return (
+    <div
+      className="progress-box"
+      style={
+        {
+          "--pc": `${((100 * count) / total).toFixed(3)}%`
+        } as React.CSSProperties
+      }
+    >
+      {label}
+    </div>
+  )
+}

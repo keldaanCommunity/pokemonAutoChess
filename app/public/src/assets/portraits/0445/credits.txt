@@ -1,0 +1,3 @@
+2020-10-07 17:58:44.712330	CHUNSOFT	CUR	Unspecified	Normal
+2022-07-10 08:03:13.042238	<@!276369635304275968>	CUR	PMDCollab_1	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special3
+2025-08-13 10:35:50.614129	<@!350050109741858829>	CUR	CC_BY-NC_4	Happy,Inspired,Surprised,Stunned,Dizzy,Special3

@@ -1,19 +1,15 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
-import { lockClick } from "../../../stores/NetworkStore"
+import { useAppSelector } from "../../../hooks"
+import { lockShop } from "../../../network"
 
 export default function GameLock() {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const shopLocked = useAppSelector((state) => state.game.shopLocked)
 
   return (
     <button
       className={`bubbly lock-icon ${shopLocked ? "red" : "green"}`}
-      onClick={() => {
-        dispatch(lockClick())
-      }}
+      onClick={() => lockShop()}
       title={`${shopLocked ? t("unlock") : t("lock")} ${t(
         "current_shop_for_next_turn"
       )}`}

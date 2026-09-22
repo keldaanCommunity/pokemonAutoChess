@@ -1,15 +1,16 @@
 import { readJsonSync } from "fs-extra"
 import {
   DTEF_TILESET_WIDTH,
-  DtefTileset,
-  DungeonPMDO,
-  Mask,
+  type DtefTileset,
+  type Mask,
   MaskCoordinate,
-  TerrainType,
-  TilesetExchangeFile
-} from "../types/Config"
+  type TerrainType,
+  type TilesetExchangeFile
+} from "../config"
+import type { DungeonPMDO } from "../types/enum/Dungeon"
+import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
-import { TileMapping } from "./design"
+import type { TileMapping } from "./design"
 
 export type TilesetTiled = {
   image: string
@@ -49,9 +50,7 @@ export type FrameTiled = {
   tileid: number
 }
 
-const src = process.env.NODE_APP_INSTANCE
-  ? "../../client/assets/tilesets"
-  : "app/public/dist/client/assets/tilesets"
+const src = "app/public/dist/client/assets/tilesets"
 
 export default class Tileset {
   id: DungeonPMDO
@@ -59,6 +58,10 @@ export default class Tileset {
 
   constructor(id: DungeonPMDO) {
     this.id = id
+    if (!id) {
+      logger.error("Invalid dungeon ID provided to Tileset constructor", { id })
+      throw new Error("Invalid dungeon ID provided to Tileset constructor")
+    }
     this.metadata = readJsonSync(`${src}/${this.id}/metadata.json`)
   }
 
@@ -101,7 +104,7 @@ export default class Tileset {
         }
       )
     } else {
-      console.log("error with layer id", layerId)
+      logger.warn("error with layer id", layerId)
     }
 
     return mappedAnimations

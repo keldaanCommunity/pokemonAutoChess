@@ -1,0 +1,3 @@
+2024-06-02 22:50:57.742122	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal
+2024-07-28 06:35:20.191058	<@!356635814668664832>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined,Special0
+2024-08-04 04:02:54.092613	<@!356635814668664832>	CUR	CC_BY-NC_4	Special2

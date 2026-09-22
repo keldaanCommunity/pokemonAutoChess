@@ -1,0 +1,2 @@
+2020-10-07 17:58:43.551829	CHUNSOFT	CUR	Unspecified	Angry,Joyous,Normal,Surprised
+2022-03-29 15:58:28.451645	<@!283571466891427841>	CUR	PMDCollab_1	Angry,Joyous,Normal,Pain,Surprised,Worried

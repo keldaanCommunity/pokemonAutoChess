@@ -1,5 +1,6 @@
-import React, { useMemo } from "react"
-import { IDps } from "../../../../../types"
+import { useMemo } from "react"
+import { useTranslation } from "react-i18next"
+import type { IDps } from "../../../../../types"
 import GameDps from "./game-dps"
 
 type GamePlayerDpsMeterInput = {
@@ -9,6 +10,7 @@ type GamePlayerDpsMeterInput = {
 export default function GamePlayerDpsMeter({
   dpsMeter = []
 }: GamePlayerDpsMeterInput) {
+  const { t } = useTranslation()
   const sortedDps = useMemo(
     () =>
       [...dpsMeter].sort((a, b) => {
@@ -46,7 +48,11 @@ export default function GamePlayerDpsMeter({
       {sortedDps.map((p) => {
         return <GameDps key={p.id} dps={p} maxDamage={maxDamage} />
       })}
-      {sortedDps.length > 0 && <div>Total: {totalDamage}</div>}
+      {sortedDps.length > 0 && (
+        <div>
+          {t("total")}: {totalDamage}
+        </div>
+      )}
     </div>
   )
 }

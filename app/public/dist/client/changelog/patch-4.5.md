@@ -55,7 +55,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Buff Wobbuffet line, Def/SpeDef: ~~1/2~~ 2/4
 - Buff Claydol HP ~~150~~ 180
 - Buff Combee:  Attack ~~8~~ 9
-- Buff Vespiqueen: HP ~~210~~ 280
+- Buff Vespiquen: HP ~~210~~ 280
 - Buff Mismagius: Attack ~~18~~ 26
 -
 
@@ -66,7 +66,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Buff Monster:
   - increased Flinch duration to 3 seconds
   - add AP scaling on kill
-  - increase Monster 6 bonuses: when knocking down its target, gain 10 Attack, 30% AP and 100 max HP
+  - increase Monster 6 bonuses: when knocking out its target, gain 10 Attack, 30 AP and 100 max HP
 - Bug: Your ~~most HP~~ strongest units are cloned. Strongest is defined by 1) number of items 2) unit tier 3) unit rarity
 
 # Changes to Items
@@ -78,7 +78,7 @@ All berries are eaten when below 50% HP, and heal at least 20HP when eaten:
 - aspear: consumed when being freeze or under 50%, + heal 20HP and +15% attack speed
 - apicot: + heal 20HP
 - cheri: consumed when being paralyzed or under 50%, + heal 20HP and +10 attack
-- chesto: consumed when being Asleep or under 50%, + heal 20HP and +15% AP
+- chesto: consumed when being Asleep or under 50%, + heal 20HP and +15 AP
 - ganlon: + heal 20HP
 - jaboca: + heal 20HP
 - lansat: + heal 20HP

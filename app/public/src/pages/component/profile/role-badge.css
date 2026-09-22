@@ -1,0 +1,39 @@
+:root {
+  --color-role-admin: #28a745;
+  --color-role-moderator: #007bff;
+  --color-role-basic: #6c757d;
+  --color-role-bot: #6c757d;
+  --color-role-bot-manager: #dc3545;
+  --color-role-banned: red;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.badge.admin {
+  background-color: var(--color-role-admin);
+}
+.badge.moderator {
+  background-color: var(--color-role-moderator);
+}
+.badge.basic {
+  background-color: var(--color-role-basic);
+}
+.badge.bot {
+  background-color: var(--color-role-bot);
+}
+.badge.bot-manager {
+  background-color: var(--color-role-bot-manager);
+}
+.badge.banned {
+  background-color: var(--color-role-banned);
+}

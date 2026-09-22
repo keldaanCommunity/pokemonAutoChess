@@ -1,6 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
-import { BattleResult } from "../../types/enum/Game"
-import { Weather } from "../../types/enum/Weather"
+import type { BattleResult } from "../../types/enum/Game"
+import type { Weather } from "../../types/enum/Weather"
 
 export default class HistoryItem extends Schema {
   @type("string") id: string

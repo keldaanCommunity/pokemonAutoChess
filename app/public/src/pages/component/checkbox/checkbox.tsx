@@ -1,4 +1,5 @@
-import React, { useCallback } from "react"
+import type React from "react"
+import { useCallback } from "react"
 import { cc } from "../../utils/jsx"
 
 import "./checkbox.css"
@@ -8,7 +9,7 @@ interface CheckboxProps {
   onToggle?: (value: boolean) => void
   label: string
   isDark?: boolean
-  readOnly?: boolean
+  disabled?: boolean
   title?: string
 }
 
@@ -17,7 +18,7 @@ export function Checkbox({
   onToggle,
   label,
   isDark = false,
-  readOnly,
+  disabled,
   title
 }: CheckboxProps) {
   const handleChange = useCallback(
@@ -32,10 +33,10 @@ export function Checkbox({
     <label className="checkbox-container" title={title}>
       <input
         type="checkbox"
-        className={cc("nes-checkbox", { "is-dark": isDark })}
+        className={cc("my-checkbox", { "is-dark": isDark })}
         checked={checked}
         onChange={handleChange}
-        readOnly={readOnly}
+        disabled={disabled}
       />
       <span>{label}</span>
     </label>

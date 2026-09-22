@@ -1,7 +1,9 @@
-.pokemon-collection-item {
+.pokemon-collection-item.my-box {
   cursor: var(--cursor-hover);
-  padding: 5px;
-  background-color: #54596b;
+  padding: 0;
+  background-color: var(--color-bg-secondary);
+  width: 80px;
+  box-sizing: content-box;
 }
 
 .pokemon-collection-item > img {
@@ -9,6 +11,7 @@
   height: 80px;
   image-rendering: pixelated;
   border-radius: 8px 8px 0 0;
+  border: none;
 }
 
 .pokemon-collection-item:not(.unlocked, .unlockable) {
@@ -22,24 +25,50 @@
   filter: grayscale(1) contrast(1);
 }
 
+.pokemon-collection-item.new::before {
+  content: "NEW";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: var(--color-bg-gold);
+  color: black;
+  font-weight: bold;
+  padding: 0px 4px;
+  border-radius: 8px;
+  font-size: 0.5em;
+  z-index: 1;
+}
+
+.pokemon-collection-item.favorite::after {
+  content: "❤️";
+  position: absolute;
+  top: 56px;
+  left: 2px;
+  color: var(--color-fg-red);
+  font-weight: bold;
+  font-size: 16px;
+  z-index: 1;
+}
+
 .pokemon-collection-item > p {
   text-align: center;
-  line-height: 1em;
   border-radius: 0 0 8px 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-fg-primary);
 }
 
 .pokemon-collection-item p > * {
   vertical-align: middle;
-  color: white;
 }
 
-.pokemon-collection-item.unlockable p {
-  color: black;
-}
-
-.pokemon-collection-item p > img {
+.pokemon-collection-item .dust > img {
   width: 20px;
   height: 20px;
   image-rendering: pixelated;
-  margin-left: 0.5em;
+  margin: 2px 2px 2px calc(2px + 0.25em);
+  border-radius: 50%;
+  border: 1px solid black;
 }

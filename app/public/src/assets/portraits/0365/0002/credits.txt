@@ -1,0 +1,2 @@
+2024-09-22 19:25:41.005144	<@!276369635304275968>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined
+2024-09-23 03:13:28.039983	<@!276369635304275968>	CUR	CC_BY-NC_4	Teary-Eyed

@@ -1,1 +1,0 @@
-ts-node precompute-all.ts

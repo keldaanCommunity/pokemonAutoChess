@@ -1,35 +1,35 @@
-import CSS from "csstype"
-import React from "react"
+import { GameMode } from "../../../../../types/enum/Game"
+import { DEPTH } from "../../../game/depths"
 import { useAppSelector } from "../../../hooks"
+import { sortPlayersByRankAndTeam } from "../../../models/sort-players"
 import GamePlayer from "./game-player"
-
-const style: CSS.Properties = {
-  position: "absolute",
-  height: "100%",
-  width: "70px",
-  right: "0.5%",
-  top: "4px"
-}
+import "./game-players.css"
 
 export default function GamePlayers(props: { click: (id: string) => void }) {
   const players = useAppSelector((state) => state.game.players)
-  const sortedPlayers = [...players]
+  const gameMode = useAppSelector((state) => state.game.gameMode)
+  const isDoubleUp = gameMode === GameMode.DOUBLE_UP
+
+  const teamColorMap = new Map<string, string>()
+
+  if (isDoubleUp) {
+    const teams = [...new Set(players.map(p => p.doubleUpTeamId))]
+    teams.forEach((team, i) => teamColorMap.set(team, `var(--color-team${i+1})`))
+  }
+
+  const sortedPlayers = sortPlayersByRankAndTeam(players, gameMode)
+
   return (
-    <div style={style}>
-      {sortedPlayers
-        .sort((a, b) => {
-          return a.rank - b.rank
-        })
-        .map((p, i) => {
-          return (
-            <GamePlayer
-              key={p.id}
-              player={p}
-              click={(id: string) => props.click(id)}
-              index={i}
-            />
-          )
-        })}
+    <div id="game-players" style={{ zIndex: DEPTH.PLAYER_ICON }}>
+      {sortedPlayers.map((p, i) => (
+        <GamePlayer
+          key={p.id}
+          player={p}
+          click={(id: string) => props.click(id)}
+          index={i}
+          teamColor={teamColorMap.get(p.doubleUpTeamId)}
+        />
+      ))}
     </div>
   )
 }

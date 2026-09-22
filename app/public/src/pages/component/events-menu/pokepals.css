@@ -1,0 +1,56 @@
+.pokepals.my-container {
+  padding: 0;
+  position: relative;
+}
+
+.pokepals header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em;
+  text-align: center;
+}
+
+.pokepals header p {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.pokepals .button {
+  padding: 8px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 50%;
+  cursor: var(--cursor-hover);
+  border: 2px solid black;
+}
+
+.pokepals .button:hover {
+  background-color: var(--color-bg-accent);
+  border-color: var(--color-fg-primary);
+}
+
+.pokepals .button img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.pokepals-help-container {
+  margin: 1em;
+  background-color: var(--color-bg-primary);
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  position: absolute;
+  top: 135px;
+  left: 1em;
+  right: 1em;
+  z-index: 20;
+}
+
+.pokepals-leaderboard-container {
+  margin: 0.5em;
+}
+
+.pokepals-pal-info-container {
+  padding: 0.5em;
+}

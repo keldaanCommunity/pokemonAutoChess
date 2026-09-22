@@ -1,0 +1,3 @@
+2021-02-21 10:52:07.916515	<@!217899432652308480>	CUR	PMDCollab_1	Normal,Normal^
+2021-02-22 09:44:52.245682	<@!217899432652308480>	CUR	PMDCollab_1	Angry,Angry^,Crying,Crying^,Determined,Determined^,Dizzy,Dizzy^,Happy,Happy^,Inspired,Inspired^,Joyous,Joyous^,Pain,Pain^,Sad,Sad^,Shouting,Shouting^,Sigh,Sigh^,Stunned,Stunned^,Surprised,Surprised^,Teary-Eyed,Teary-Eyed^,Worried,Worried^
+2021-02-22 15:09:18.771564	<@!217899432652308480>	CUR	PMDCollab_1	Sad^,Teary-Eyed^
