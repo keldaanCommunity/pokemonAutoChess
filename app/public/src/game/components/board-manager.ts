@@ -1000,7 +1000,7 @@ export default class BoardManager {
               this.animateTrainingBag() // make training bag swing when a pokemon is training on it
             }
           } else if (action === PokemonActionState.COOK) {
-            pokemonSprite.orientation = Orientation.DOWN
+            pokemonSprite.orientation = Orientation.DOWN           
             pokemonSprite.addLifeBar({
               scene: this.scene,
               showHP: false,
@@ -1009,6 +1009,10 @@ export default class BoardManager {
             pokemonSprite.addCookingPot()
           } else {
             pokemonSprite.orientation = Orientation.DOWNLEFT
+            if (previousValue === PokemonActionState.COOK) {
+              pokemonSprite.cookingPot?.destroy()
+              pokemonSprite.lifebar?.destroy()
+            }
           }
 
           this.animationManager.animatePokemon(pokemonSprite, action, false)
@@ -1034,13 +1038,7 @@ export default class BoardManager {
         }
 
         case "pp": {
-          console.log(
-            "update pp",
-            pokemonSprite.name,
-            value,
-            pokemonSprite.lifebar
-          )
-          if (pokemonSprite.lifebar) {
+          if (pokemonSprite.lifebar?.scene) {
             pokemonSprite.lifebar.setPP(value as number)
           }
           break

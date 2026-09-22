@@ -7,9 +7,11 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
+import { NB_DISHES_PER_GOURMET_SYNERGY, NB_HATS_PER_GOURMET_SYNERGY } from "../../config/game/synergies"
 import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
+import { equipItem, unequipItem } from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
 import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
@@ -36,6 +38,7 @@ import {
 import {
   AbilityPerTM,
   ArtificialItems,
+  DishesGoingToInventory,
   type Gift,
   Item,
   ItemComponentsNoFossilOrScarf,
@@ -336,7 +339,7 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
-      newPokemon.addItem(item, this)
+      equipItem(newPokemon, item, this)
       if (item === Item.SHINY_CHARM) {
         newPokemon.shiny = true
       }
@@ -417,7 +420,7 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies.get(Synergy.GOURMET) !==
       updatedSynergies.get(Synergy.GOURMET)
     ) {
-      this.updateChefsHats()
+      this.updateChefsHats(getSynergyTier(previousSynergies, Synergy.GOURMET))
     }
 
     if (
@@ -483,7 +486,7 @@ export default class Player extends Schema implements IPlayer {
         const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
-            pokemon.removeItem(item, this)
+            unequipItem(pokemon, item, this)
 
             if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
               needsRecomputingSynergiesAgain = true
@@ -550,7 +553,7 @@ export default class Player extends Schema implements IPlayer {
         const pokemons = schemaValues(this.board)
         for (const pokemon of pokemons) {
           if (pokemon.items.has(item)) {
-            pokemon.removeItem(item, this)
+            unequipItem(pokemon, item, this)
 
             if (item in SynergyGivenByItem && !isOnBench(pokemon)) {
               needsRecomputingSynergiesAgain = true
@@ -634,9 +637,9 @@ export default class Player extends Schema implements IPlayer {
       this.items.push(Item.SUPER_ROD)
   }
 
-  updateChefsHats() {
-    const gourmetLevel = getSynergyTier(this.synergies, Synergy.GOURMET)
-    const newNbHats = [0, 1, 1, 2][gourmetLevel] ?? 0
+  updateChefsHats(previousGourmetTier: number) {
+    const newGourmetTier = getSynergyTier(this.synergies, Synergy.GOURMET)
+    const newNbHats = NB_HATS_PER_GOURMET_SYNERGY[newGourmetTier] ?? 0
     const hatHolders = schemaValues(this.board).filter((p) =>
       p.items.has(Item.CHEF_HAT)
     )
@@ -653,12 +656,77 @@ export default class Player extends Schema implements IPlayer {
           removeInArray<Item>(this.items, Item.CHEF_HAT)
           currentNbHats--
         } else {
-          hatHolders.at(-1)?.removeItem(Item.CHEF_HAT, this)
+          const chef = hatHolders.at(-1)!
+          unequipItem(chef, Item.CHEF_HAT, this)
+
+          if (chef.cook && chef.cook.dishesMade.length > 0) {
+            // chef lost its hat, remove all dishes made
+            chef.cook.dishesMade.forEach((dishToRemove, i) => {
+              if (
+                isIn(DishesGoingToInventory, dishToRemove) &&
+                this.items.includes(dishToRemove)
+              ) {
+                removeInArray(this.items, dishToRemove)
+              } else if (chef.cook!.fedPokemonsId[i]) {
+                const pokemonEating = this.board.get(
+                  chef.cook!.fedPokemonsId[1]
+                )
+                if (pokemonEating) {
+                  pokemonEating.dishes.delete(dishToRemove)
+                  pokemonEating.action = PokemonActionState.IDLE
+                }
+              }
+            })
+          }
+
           hatHolders.pop()
           currentNbHats--
         }
       }
     } while (newNbHats !== currentNbHats)
+
+    // hats have been updated, now update dishes made by chefs if needed
+    const previousNbDishes =
+      NB_DISHES_PER_GOURMET_SYNERGY[previousGourmetTier] ?? 0
+    const newNbDishes = NB_DISHES_PER_GOURMET_SYNERGY[newGourmetTier] ?? 0
+    if (previousNbDishes !== newNbDishes && hatHolders.length > 0) {
+      hatHolders.forEach((chef) => {
+        if (chef.cook && chef.cook.dishesMade.length > 0) {
+          if (newNbDishes === 1 && chef.cook?.dishesMade.length === 2) {
+            // if after cooking, gourmet goes from 4 to 3, needs to remove one of the two dishes
+            const dishToRemove = chef.cook.dishesMade[1]!
+            if (
+              isIn(DishesGoingToInventory, dishToRemove) &&
+              this.items.includes(dishToRemove)
+            ) {
+              removeInArray(this.items, dishToRemove)
+            } else if (chef.cook.fedPokemonsId.length === 2) {
+              const pokemonEating = this.board.get(chef.cook.fedPokemonsId[1])
+              if (pokemonEating) {
+                pokemonEating.dishes.delete(dishToRemove)
+                pokemonEating.action = PokemonActionState.IDLE
+              }
+            }
+          } else if (
+            previousNbDishes === 1 &&
+            newNbDishes === 2 &&
+            chef.cook?.dishesMade.length === 2
+          ) {
+            // if going back to 4 gourmet after removing a dish, needs to give back the dish
+            const dishToAddBack = chef.cook.dishesMade[1]!
+            if (isIn(DishesGoingToInventory, dishToAddBack)) {
+              this.items.push(dishToAddBack)
+            } else if (chef.cook.fedPokemonsId.length === 2) {
+              const pokemonEating = this.board.get(chef.cook.fedPokemonsId[1])
+              if (pokemonEating && pokemonEating.canEat) {
+                pokemonEating?.dishes.add(dishToAddBack)
+                pokemonEating.action = PokemonActionState.EAT
+              }
+            }
+          }
+        }
+      })
+    }
   }
 
   updateFairyWands() {

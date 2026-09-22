@@ -17,6 +17,7 @@ import {
   VictoryRoadPointsPerRank
 } from "../config"
 import { GADGETS } from "../config/game/gadgets"
+import { unequipItems } from "../core/effects/items"
 import { computeElo } from "../core/elo"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
@@ -1604,13 +1605,13 @@ export default class GameRoom extends Room<{ state: GameState }> {
       isIn(RemovableItems, item)
     )
     playerA.items.push(...itemsToRemoveA)
-    pokemonToTradeA.removeItems(itemsToRemoveA, playerA)
+    unequipItems(pokemonToTradeA, itemsToRemoveA, playerA)
 
     const itemsToRemoveB = schemaValues(pokemonToTradeB.items).filter((item) =>
       isIn(RemovableItems, item)
     )
     playerB.items.push(...itemsToRemoveB)
-    pokemonToTradeB.removeItems(itemsToRemoveB, playerB)
+    unequipItems(pokemonToTradeB, itemsToRemoveB, playerB)
 
     // Switch Pokémon
 

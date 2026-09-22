@@ -15,7 +15,7 @@ import Status from "../models/colyseus-models/status"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
-    AbsorbedItems,
+  AbsorbedItems,
   Emotion,
   type IPokemon,
   type IPokemonEntity,
@@ -64,7 +64,7 @@ import {
   OnDeathEffect,
   OnHitEffect,
   OnItemGainedEffect,
-  OnItemRemovedEffect,
+  OnItemLostInCombatEffect,
   OnKillEffect,
   OnResurrectionEffect,
   OnSpawnEffect
@@ -782,17 +782,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addItem(item: Item, permanent = false) {
     const type = SynergyGivenByItem[item]
-    if(isIn(AbsorbedItems, item)){
-      if(Array.from(this.items).some(i => isIn(AbsorbedItems, i))) return // can only absorb one item
-    } else if (this.items.size >= 3){
-      return; // cannot hold more than 3 items
+    if (isIn(AbsorbedItems, item)) {
+      if (Array.from(this.items).some((i) => isIn(AbsorbedItems, i))) return // can only absorb one item
+    } else if (this.items.size >= 3) {
+      return // cannot hold more than 3 items
     }
 
-    if (isIn(SynergyStones, item) && this.types.has(type)){
-      return; // cannot hold a synergy stone of a type already obtained - prevents a noob trap
+    if (isIn(SynergyStones, item) && this.types.has(type)) {
+      return // cannot hold a synergy stone of a type already obtained - prevents a noob trap
     }
-    
-    if(((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
+
+    if (
+      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
         !this.refToBoardPokemon.hasEvolution) ||
       (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
     ) {
@@ -823,7 +824,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   removeItem(item: Item, permanent = false): boolean {
-    if(isIn(AbsorbedItems, item)) return false
+    if (isIn(AbsorbedItems, item)) return false
     this.items.delete(item)
     this.removeItemEffect(item)
     if (permanent && !this.isGhostOpponent) {
@@ -843,8 +844,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         : effectOrEffectFn
       if (effect instanceof OnItemGainedEffect) {
         effect.apply(this, item) // OnItemGainedEffect from ItemEffects are applied immediately and not added to effectsSet
-      } else if (effect instanceof OnItemRemovedEffect) {
-        return // OnItemRemovedEffect from ItemEffects are handled separately in removeItemEffect when removing items and not added to effectsSet
+      } else if (effect instanceof OnItemLostInCombatEffect) {
+        return // OnItemLostInCombatEffect from ItemEffects are handled separately in removeItemEffect when removing items and not added to effectsSet
       } else {
         this.effectsSet.add(effect)
       }
@@ -876,8 +877,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const effect: Effect = isPlainFunction(effectOrEffectFn)
         ? effectOrEffectFn()
         : effectOrEffectFn
-      if (effect instanceof OnItemRemovedEffect)
-        effect.apply(this, item) // OnItemRemovedEffect from ItemEffects are applied here because they are not added to effectsSet
+      if (effect instanceof OnItemLostInCombatEffect)
+        effect.apply(this, item) // OnItemLostInCombatEffect from ItemEffects are applied here because they are not added to effectsSet
       else if (effectOrEffectFn instanceof EffectClass)
         this.effectsSet.delete(effect)
       else if (isPlainFunction(effectOrEffectFn)) {
@@ -891,8 +892,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     })
 
-    // apply the other OnItemRemovedEffects that could be present from other sources (passives, synergies, ...)
-    this.getEffects(OnItemRemovedEffect).forEach((effect) => {
+    // apply the other OnItemLostInCombatEffect that could be present from other sources (passives, synergies, ...)
+    this.getEffects(OnItemLostInCombatEffect).forEach((effect) => {
       effect.apply(this, item)
     })
   }

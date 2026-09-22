@@ -783,6 +783,7 @@ export default class PokemonSprite extends DraggableObject {
     this.pokemon.action = PokemonActionState.IDLE
     this.orientation = Orientation.DOWNLEFT
     this.cookingPot?.destroy()
+    this.lifebar?.destroy()
     this.emoteAnimation()
     dishes.forEach((item, i) => {
       const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")

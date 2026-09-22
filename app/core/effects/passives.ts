@@ -67,6 +67,7 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { unequipItems } from "./items";
 import { AccelerationEffect } from "./passives/acceleration"
 import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
@@ -1721,7 +1722,7 @@ export const PassiveEffects: Partial<
           )
         })
         player.items.push(...itemsToRemove)
-        pokemon.removeItems(itemsToRemove, player)
+        unequipItems(pokemon, itemsToRemove, player)
       }
     })
   ],

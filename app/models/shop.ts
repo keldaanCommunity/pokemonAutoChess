@@ -8,7 +8,6 @@ import {
   FIERY_DRUM_CHANCE,
   FishRarityProbability,
   GRASS_CORNET_CHANCE,
-  getAltFormForPlayer,
   getUnownsPoolPerStage,
   HIGH_ROLLER_CHANCE,
   HONEY_CHANCE,
@@ -40,6 +39,7 @@ import {
   UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
+import { getAltFormForPlayer } from "../core/alt-form-logic";
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"

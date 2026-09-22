@@ -65,7 +65,7 @@ export class OnItemGainedEffect extends Effect {
 }
 
 // item effect applied when item is removed during a fight (stolen, destroyed, consummed...)
-export class OnItemRemovedEffect extends Effect {
+export class OnItemLostInCombatEffect extends Effect {
   constructor(effect?: (pokemon: PokemonEntity, item: Item) => void) {
     super(effect)
   }
@@ -189,6 +189,22 @@ export class OnItemDroppedEffect extends Effect {
   }
   constructor(
     effect?: (args: OnItemDroppedEffectArgs) => boolean,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+interface OnItemUnequippedEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  item: Item
+}
+
+export class OnItemUnequippedEffect extends Effect {
+  apply(args: OnItemUnequippedEffectArgs) {}
+  constructor(
+    effect?: (args: OnItemUnequippedEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
