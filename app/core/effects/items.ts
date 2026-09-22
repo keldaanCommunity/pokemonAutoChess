@@ -631,7 +631,15 @@ const cookWhenGivenHatEffect = new OnItemDroppedEffect(
         if (isIn(DishesGoingToInventory, dishToAddBack)) {
           player.items.push(dishToAddBack)
         } else if (pokemon.cook!.fedPokemonsId[i]) {
-          const pokemonEating = player.board.get(pokemon.cook!.fedPokemonsId[i])
+          let pokemonEating = player.board.get(pokemon.cook!.fedPokemonsId[i])
+          if (!pokemonEating || !pokemonEating.canEat) {
+            // find another pokemon to give the dish to
+            const candidates = schemaValues(player.board).filter(
+              (p) => p.canEat && !p.dishes.has(dishToAddBack)
+            )
+            candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+            pokemonEating = candidates[0]
+          }
           if (pokemonEating && pokemonEating.canEat) {
             pokemonEating?.dishes.add(dishToAddBack)
             pokemonEating.action = PokemonActionState.EAT
