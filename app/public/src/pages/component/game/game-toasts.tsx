@@ -1,32 +1,33 @@
 import { memo } from "react"
 import { ToastContainer } from "react-toastify"
+import { useAppSelector } from "../../../hooks"
+import { sortPlayersByRankAndTeam } from "../../../models/sort-players"
 
 function GameToasts() {
+  const players = useAppSelector((state) => state.game.players)
+  const gameMode = useAppSelector((state) => state.game.gameMode)
+
+  const sortedPlayers = sortPlayersByRankAndTeam(players, gameMode)
+
   return (
     <div>
-      {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+      {sortedPlayers.map((p, i) => (
         <ToastContainer
-          key={i.toString()}
-          className={`toast toast-${i}`}
-          containerId={`${i}`}
+          key={p.id}
+          className="toast toast-new-pokemon"
+          containerId={p.id}
           position="top-right"
           autoClose={500}
           hideProgressBar
           newestOnTop
           closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
           pauseOnHover
           limit={1}
           closeButton={false}
-          style={{
-            top: `${2 + (i - 1) * 12.5}%`
-          }}
+          style={{ top: `${2 + i * 12.5}%` }}
         />
       ))}
     </div>
   )
 }
-
 export default memo(GameToasts)

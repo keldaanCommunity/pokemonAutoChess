@@ -52,3 +52,6 @@ export function angleBetween(
   const dy = pointB[1] - pointA[1]
   return Math.atan2(dy, dx)
 }
+
+// prevent overflow uint16 values
+export const capUint16 = max(65535)

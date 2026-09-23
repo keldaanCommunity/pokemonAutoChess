@@ -1,7 +1,7 @@
 import type React from "react"
 import { useTranslation } from "react-i18next"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import type { IDetailledPokemon } from "../../../models/bot-v2"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function TeamEditor(props: {

@@ -30,10 +30,11 @@ export default function DraggableWindow({
   onMove
 }: DraggableWindowProps) {
   const [isMinimized, setMinimized] = useState(defaultMinimized)
-  const { position, isDragging, handleMouseDown, containerRef } = useDraggable({
-    initialPosition,
-    margin: 8
-  })
+  const { position, isDragging, handlePointerDown, containerRef } =
+    useDraggable({
+      initialPosition,
+      margin: 8
+    })
   useEffect(() => {
     onToggleMinimize?.(isMinimized)
   }, [isMinimized, onToggleMinimize])
@@ -53,10 +54,13 @@ export default function DraggableWindow({
     >
       <div
         className="draggable-window-header"
-        onMouseDown={(e) =>
-          handleMouseDown(e, ".draggable-window-header-button")
+        onPointerDown={(e) =>
+          handlePointerDown(e, ".draggable-window-header-button")
         }
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+        style={{
+          cursor: isDragging ? "grabbing" : "grab",
+          touchAction: "none"
+        }}
       >
         <h3 className="draggable-window-title">{title}</h3>
         <button

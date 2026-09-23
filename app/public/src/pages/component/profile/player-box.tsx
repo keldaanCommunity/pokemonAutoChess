@@ -7,6 +7,7 @@ import { type Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import type {
   IUserMetadataClient,
+  IUserMetadataLean,
   IUserMetadataUnpacked
 } from "../../../../../types/interfaces/UserMetadata"
 import { useAppSelector } from "../../../hooks"
@@ -16,7 +17,7 @@ import { EloBadge } from "./elo-badge"
 import { RoleBadge } from "./role-badge"
 
 export default function PlayerBox(props: {
-  user: IUserMetadataClient | IUserMetadataUnpacked
+  user: IUserMetadataClient | IUserMetadataUnpacked | IUserMetadataLean
   history?: IGameRecord[]
 }) {
   const { t } = useTranslation()
@@ -114,25 +115,27 @@ export default function PlayerBox(props: {
           {t("wins")}: {props.user.wins}
         </p>
       </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}
-      >
-        <p> {t("favorites")}:</p>
-        <p>
-          {favoriteSynergies.map((type) => (
-            <SynergyIcon type={type} key={"fav_" + type} />
-          ))}
-        </p>
-        <p>
-          {favoritePokemons.map((name) => (
-            <PokemonPortrait key={name} avatar={PkmIndex[name] + "/Normal"} />
-          ))}
-        </p>
-      </div>
+      {props.history && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
+          }}
+        >
+          <p> {t("favorites")}:</p>
+          <p>
+            {favoriteSynergies.map((type) => (
+              <SynergyIcon type={type} key={"fav_" + type} />
+            ))}
+          </p>
+          <p>
+            {favoritePokemons.map((name) => (
+              <PokemonPortrait key={name} avatar={PkmIndex[name] + "/Normal"} />
+            ))}
+          </p>
+        </div>
+      )}
       {(role === Role.ADMIN || role === Role.MODERATOR) && (
         <p style={{ color: "#aaa", fontSize: "60%" }}>
           {t("profile.account.user_id")}: {props.user.uid}

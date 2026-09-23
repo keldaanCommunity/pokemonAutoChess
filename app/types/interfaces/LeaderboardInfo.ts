@@ -1,4 +1,5 @@
 import type { Pkm } from "../enum/Pokemon"
+import type { GameEventData } from "../events"
 
 export interface ILeaderboardInfo {
   id: string
@@ -20,4 +21,5 @@ export interface ILeaderboardBotInfo {
 
 export interface ILeaderboardEventInfo extends ILeaderboardInfo {
   eventFinishTime: Date | null
+  eventData?: GameEventData
 }

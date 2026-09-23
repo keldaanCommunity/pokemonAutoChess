@@ -71,13 +71,55 @@ function completeMatchupCombination(
         remainingPlayers.includes(m.redPlayer)
     )
     if (remainingMatchups.length === 0) {
-      // no more matchups, need to complete with a ghost matchup
-      return completeMatchupCombination([...combination], matchups, players)
+      /* 
+       No more matchups but at least 2 players without matchup
+       this case should only happen in double up mode,
+       when you got AB-CD-EF as player teams and get into the case AD-BC-EF matchup combination.
+       E and F are in the same team so zero matchups remain and 2 players still have no match 
+       returning empty array to the flatMap excludes that branch of matchups completely
+       */
+      return []
     }
     return remainingMatchups.flatMap((m) =>
       completeMatchupCombination([...combination, m], matchups, players)
     )
   }
+}
+
+export function selectDoubleUpMatchups(state: GameState): Matchup[] {
+  const players = shuffleArray(
+    schemaValues(state.players).filter((p) => p.alive)
+  )
+  if (players.length <= 1) return []
+
+  // Same pipeline as selectMatchups, but teammates are never paired
+  const matchups = getAllPossibleMatchups(players).filter(
+    (m) => m.bluePlayer.doubleUpTeamId !== m.redPlayer.doubleUpTeamId
+  )
+
+  const matchupCombinations: Matchup[][] = completeMatchupCombination(
+    [],
+    matchups,
+    players
+  )
+
+  const matchupCombinationsCount = matchupCombinations.map((combination) =>
+    sum(combination.map((m) => m.count))
+  )
+  const lowestTotalCount = Math.min(...matchupCombinationsCount)
+  const lowestTotalCountMatchupCombinations = matchupCombinations.filter(
+    (matchups, index) => matchupCombinationsCount[index] === lowestTotalCount
+  )
+
+  const matchupCombinationsDistance = lowestTotalCountMatchupCombinations.map(
+    (combination) => sum(combination.map((m) => m.distance))
+  )
+  const maxDistance = Math.max(...matchupCombinationsDistance)
+  const mostDistantMatchups = lowestTotalCountMatchupCombinations.filter(
+    (matchups, index) => matchupCombinationsDistance[index] === maxDistance
+  )
+
+  return pickRandomIn(mostDistantMatchups)
 }
 
 export function selectMatchups(state: GameState): Matchup[] {

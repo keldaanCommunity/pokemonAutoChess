@@ -12,6 +12,7 @@ import {
   Transfer
 } from "../../../../types"
 import { Orientation, PokemonActionState } from "../../../../types/enum/Game"
+import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import {
@@ -565,9 +566,17 @@ export default class MinigameManager {
 
     const kingambit = new PokemonSpecial({
       scene: this.scene,
-      x: encounter === TownEncounters.KINGAMBIT ? cx : 44.5 * 48,
-      y: encounter === TownEncounters.KINGAMBIT ? cy : 5 * 48,
-      name: Pkm.KINGAMBIT
+      x: encounter === TownEncounters.KINGAMBIT ? cx : 47.5 * 48,
+      y: encounter === TownEncounters.KINGAMBIT ? cy : 10.5 * 48,
+      name: Pkm.KINGAMBIT,
+      orientation:
+        encounter === TownEncounters.KINGAMBIT
+          ? Orientation.DOWN
+          : Orientation.RIGHT,
+      animation:
+        encounter === TownEncounters.KINGAMBIT
+          ? PokemonActionState.IDLE
+          : PokemonActionState.ATTACK
     })
 
     const lapras = new PokemonSpecial({
@@ -575,11 +584,21 @@ export default class MinigameManager {
       x: encounter === TownEncounters.LAPRAS ? cx : 0 * 48,
       y: encounter === TownEncounters.LAPRAS ? cy : 3.75 * 48,
       name: Pkm.LAPRAS,
-      animation: PokemonActionState.WALK,
+      animation:
+        encounter === TownEncounters.LAPRAS
+          ? PokemonActionState.IDLE
+          : PokemonActionState.WALK,
       orientation:
         encounter === TownEncounters.LAPRAS
           ? Orientation.DOWN
           : Orientation.RIGHT
+    })
+
+    const chimecho = new PokemonSpecial({
+      scene: this.scene,
+      x: encounter === TownEncounters.CHIMECHO ? cx : 44.5 * 48,
+      y: encounter === TownEncounters.CHIMECHO ? cy : 7 * 48,
+      name: Pkm.CHIMECHO
     })
 
     if (encounter !== TownEncounters.LAPRAS) {
@@ -630,6 +649,7 @@ export default class MinigameManager {
       magnezone,
       kingambit,
       lapras,
+      chimecho,
       ...podiumPokemons
     )
 
@@ -658,7 +678,7 @@ export default class MinigameManager {
     }
   }
 
-  showEmote(id: string, emote: Emotion) {
+  showEmote(id: string, emote: string) {
     const pokemonAvatar = this.pokemons.get(id)
     if (pokemonAvatar) {
       pokemonAvatar.action = PokemonActionState.EMOTE
@@ -668,7 +688,18 @@ export default class MinigameManager {
         false,
         false
       )
-      pokemonAvatar.drawSpeechBubble(emote, false)
+      if (emote.startsWith("player_dialog/")) {
+        this.scene.board?.displayText(
+          pokemonAvatar.x,
+          pokemonAvatar.y - 10,
+          t(
+            `player_dialog.${emote.substring("player_dialog/".length) as PlayerDialog}`
+          ),
+          true
+        )
+      } else {
+        pokemonAvatar.drawSpeechBubble(emote, false)
+      }
     }
   }
 

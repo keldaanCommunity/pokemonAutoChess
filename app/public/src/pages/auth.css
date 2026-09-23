@@ -55,6 +55,10 @@
   flex: 1;
 }
 
+.auth-page .media .language-select {
+  text-shadow: none;
+}
+
 .mobile-warning {
   background: #e76e55;
   color: var(--color-fg-primary);
