@@ -4380,7 +4380,7 @@
 			"booster_rarity_probability": "Booster-Seltenheitswahrscheinlichkeit",
 			"booster_rarity_probability_description": "Die Wahrscheinlichkeit, ein Pokémon in einem Boosterpack zu finden, hängt von seiner Seltenheit ab.",
 			"special_pokemons_rate": "Besondere Pokémon",
-			"ditto_rate": "Chance, Ditto im Shop zu finden",
+			"ditto_rate": "Chance, Ditto im Shop zu finden: {{base}} + {{perReroll}} pro Reroll seit dem letzten gefundenen Ditto",
 			"kecleon_rate": "Chance, Kekleon in den Picks der Ebene 10 zu finden",
 			"arceus_rate": "Chance, Arceus in den Picks der Ebene 20 zu finden",
 			"fishing_rarity_rate": "Angelrarität nach Rutenqualität",
