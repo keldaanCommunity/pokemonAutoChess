@@ -2027,7 +2027,7 @@
 		"WHIRLPOOL": "Cible l'ennemi le plus éloigné et déchaîne 4 tourbillons vers lui. Chacun inflige [100,100,100,200,SP]% d'ATK en SPECIAL au premier ennemi touché sur leur chemin.",
 		"SMOKE_SCREEN": "Passe sous terre pour réapparaître au milieu de l'équipe adverse, infligeant [10,20,40,80,SP] SPECIAL à tous les ennemis ADJACENT et en enfumant la rangée arrière pour réduire leur précision en les rendant BLINDED",
 		"PRESENT": "Peut soit infliger [20,40,80,160,SP], [50,100,150,300,SP], [100,200,300,600,SP] SPECIAL à la cible, soit la soigner de 50 HP, en fonction de votre LUCK.",
-		"LEAF_BLADE": "La prochaine attaque est un coup critique garanti infligeant [100,125,150,250,SP]% ATK en TRUE.",
+		"LEAF_BLADE": "Frappe avec un feuillage tranchant, infligeant [100,125,150,250,SP]% d'ATK en TRUE. Cette attaque inflige toujours un coup critique.",
 		"ANCHOR_SHOT": "Attrape le Pokémon adverse le plus éloigné et lui inflige [20,40,80,160,SP] SPECIAL.",
 		"MAGNET_RISE": "Donne PROTECT pendant 2 secondes et [10,10,10,20,SP]% de chances d'esquive au lanceur et à [2,4,6,8] Pokémon alliés ADJACENT qui ont les HP les plus bas.",
 		"ATTRACT": "Rend CHARM [1,2,3,5] Pokémon adverses choisis au hasard pendant [1,SP] secondes.",
