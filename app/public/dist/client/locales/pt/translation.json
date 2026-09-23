@@ -4834,7 +4834,7 @@
 			"booster_rarity_probability": "Probabilidade da raridade do booster",
 			"booster_rarity_probability_description": "As chances de encontrar um Pokémon em um booster depende da sua raridade.",
 			"special_pokemons_rate": "Pokémon especial",
-			"ditto_rate": "Chance de encontrar Ditto na loja:",
+			"ditto_rate": "Chance de encontrar Ditto na loja: {{base}} + {{perReroll}} por reexecução desde o último Ditto encontrado",
 			"kecleon_rate": "Chance de encontrar Kecleon na fase 10 determinadas partidas:",
 			"arceus_rate": "Chance de encontrar Arceus na fase 20 determinadas partidas:",
 			"fishing_rarity_rate": "Raridade da pesca pela qualidade da vara de pescar",

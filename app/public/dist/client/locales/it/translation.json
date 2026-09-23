@@ -4462,7 +4462,7 @@
 			"booster_rarity_probability": "Probabilità di rare nei Booster",
 			"booster_rarity_probability_description": "La probabilità di trovare un Pokèmon dentro un booster dipende dalla sua rarità.",
 			"special_pokemons_rate": "Pokèmon Speciali",
-			"ditto_rate": "Probabilità di trovare Ditto nel negozio",
+			"ditto_rate": "Probabilità di trovare Ditto nel negozio: {{base}} + {{perReroll}} per rilancio da quando è stato trovato l'ultimo Ditto",
 			"kecleon_rate": "Probabilità di trovare Kecleon tra le scelte del livello 10",
 			"arceus_rate": "Probabilità di trovare Arceus tra le scelte del livello 20",
 			"fishing_rarity_rate": "Qualità pesca basata sulla qualità dell'amo",

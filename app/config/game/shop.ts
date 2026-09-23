@@ -67,7 +67,8 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
 }
 
 /* Special Pokemon rates */
-export const DITTO_RATE = 0.005
+export const DITTO_BASE_RATE = 0.005
+export const DITTO_RATE_PER_REROLL = 0.0001
 export const MIN_STAGE_FOR_DITTO = 6
 export const EEVEE_RATE = 1 / 20
 export const KECLEON_RATE = 1 / 400

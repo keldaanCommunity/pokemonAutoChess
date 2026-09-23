@@ -5100,7 +5100,7 @@
 			"booster_rarity_probability": "补充包的掉率",
 			"booster_rarity_probability_description": "补充包中发现宝可梦的概率根据其稀有度决定。",
 			"special_pokemons_rate": "特殊的宝可梦",
-			"ditto_rate": "商店刷出百变怪概率",
+			"ditto_rate": "商店刷出百变怪概率 {{base}} + {{perReroll}} 每次重新开始后",
 			"kecleon_rate": "第10轮的传送门中出现变隐龙的概率",
 			"arceus_rate": "第20轮的传送门中出现阿尔宙斯的概率",
 			"fishing_rarity_rate": "鱼竿对应的钓鱼出率",

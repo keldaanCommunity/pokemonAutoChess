@@ -46,6 +46,7 @@
 
 - Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
+- The chance to find a Ditto in the shop has been increased: 0.5% → 0.5% + 0.01% per reroll since last Ditto found.
 
 # UI
 

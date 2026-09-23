@@ -4874,7 +4874,7 @@
 			"booster_rarity_probability": "부스터팩 희귀도 확률",
 			"booster_rarity_probability_description": "특정 포켓몬을 부스터팩에서 찾을 확률은 희귀도에 따라 다릅니다.",
 			"special_pokemons_rate": "특별한 포켓몬",
-			"ditto_rate": "메타몽 출현 확률",
+			"ditto_rate": "메타몽 출현 확률: {{base}} + {{perReroll}} 마지막 메타몽 발견 이후 리롤(재시도)당",
 			"kecleon_rate": "10 스테이지 선택지에 켈리몬이 등장할 확률",
 			"arceus_rate": "20 스테이지 선택지에 아르세우스가 등장할 확률",
 			"fishing_rarity_rate": "낚싯대에 따른 희귀도",

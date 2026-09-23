@@ -1521,7 +1521,7 @@
 			"booster_rarity_probability": "โอกาสของการสุ่มบูสเตอร์",
 			"booster_rarity_probability_description": "โอกาสในการเจอโปเกมอนในบูสเตอร์แพคนั้นขึ้นอยู่กับความหายากของตัวโปเกมอนเอง",
 			"special_pokemons_rate": "โปเกมอนพิเศษ",
-			"ditto_rate": "โอกาสที่จะเจอ Ditto ในร้านค้า",
+			"ditto_rate": "โอกาสที่จะเจอ Ditto ในร้านค้า: {{base}} + {{perReroll}} ต่อการรีโรลตั้งแต่ครั้งสุดท้ายที่เจอ Ditto",
 			"kecleon_rate": "โอกาสที่จะเจอ Kecleon ในการเลือกรอบที่ 10",
 			"arceus_rate": "โอกาสที่จะเจอ Arceus ในการเลือกรอบที่ 20",
 			"fishing_rarity_rate": "ระดับของการตกปลาตามระดับของเบ็ดตกปลา",

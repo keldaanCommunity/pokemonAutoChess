@@ -1045,6 +1045,7 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
 
     if (canRoll) {
       player.gameStats.rerollCount++
+      player.gameStats.rerollCountSinceLastDitto++
       player.money -= rollCost
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--

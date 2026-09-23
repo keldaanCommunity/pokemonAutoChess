@@ -4883,7 +4883,7 @@
 			"booster_rarity_probability": "Rareté des Pokémon dans les boosters",
 			"booster_rarity_probability_description": "Les chances de trouver un certain Pokémon dans un booster dépendent de sa rareté.",
 			"special_pokemons_rate": "Pokémon spéciaux",
-			"ditto_rate": "Chance de trouver $t(pkm.DITTO) dans le magasin",
+			"ditto_rate": "Chance de trouver $t(pkm.DITTO) dans le magasin: {{base}} + {{perReroll}} par reroll depuis le dernier Ditto trouvé",
 			"kecleon_rate": "Chance de trouver $t(pkm.KECLEON) dans les propositions du tour 10",
 			"arceus_rate": "Chance de trouver $t(pkm.ARCEUS) dans les propositions du tour 20",
 			"fishing_rarity_rate": "Rareté des Pokémon péchés en fonction de la qualité de la canne à pêche",

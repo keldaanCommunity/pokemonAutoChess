@@ -4800,7 +4800,7 @@
 			"booster_rarity_probability": "Probabilidad de rareza en potenciadores",
 			"booster_rarity_probability_description": "Las probabilidades de encontrar un Pokémon en un potenciador dependen de su rareza.",
 			"special_pokemons_rate": "Pokémon especiales",
-			"ditto_rate": "Probabilidad de encontrar a Ditto en la tienda",
+			"ditto_rate": "Probabilidad de encontrar a Ditto en la tienda: {{base}} + {{perReroll}} por reroll desde el último Ditto encontrado",
 			"kecleon_rate": "Probabilidad de encontrar a Kecleon en la ronda 10",
 			"arceus_rate": "Probabilidad de encontrar a Arceus en la ronda 20",
 			"fishing_rarity_rate": "Rareza de pesca según la calidad de la caña de pescar",

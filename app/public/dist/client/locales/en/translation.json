@@ -5101,7 +5101,7 @@
 			"booster_rarity_probability": "Booster rarity probability",
 			"booster_rarity_probability_description": "The chances to find a Pokémon in a booster pack depends on its rarity.",
 			"special_pokemons_rate": "Special Pokémon",
-			"ditto_rate": "Chance to find Ditto in shop",
+			"ditto_rate": "Chance to find Ditto in shop: {{base}} + {{perReroll}} per reroll since last Ditto found",
 			"kecleon_rate": "Chance to find Kecleon in stage 10 propositions",
 			"arceus_rate": "Chance to find Arceus in stage 20 propositions",
 			"fishing_rarity_rate": "Fishing rarity by rod quality",
