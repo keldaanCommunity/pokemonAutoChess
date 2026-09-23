@@ -66,5 +66,7 @@
 - Removed Bench is Lava scribble
 - Add "Base" to the glossary of technical terms
 - New title: Bodybuilder. Get a FIGHTING Pokémon to +40 ATK after training on the bench.
+- New title: Guild Hero. Finish first on the Expeditions leaderboard at the end of the event.
+- New title: Bestie. Finish first on Poképals leaderboard with your pal at the end of the event.
 - Synergy meta report is now public
 - Add FPS limiter option to settings
