@@ -11127,7 +11127,7 @@ export class UnownD extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 50
   range = 9
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
@@ -11287,7 +11287,7 @@ export class UnownN extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 9
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
@@ -11415,7 +11415,7 @@ export class UnownV extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN

@@ -4,6 +4,7 @@ import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
 import type { IPokemon } from "../../types"
+import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import {
   Berries,
@@ -18,15 +19,13 @@ import { isIn } from "../../utils/array"
 import { getFirstAvailablePositionInBench } from "../../utils/board"
 import { clamp, min } from "../../utils/number"
 import { pickNRandomIn, pickRandomIn, randomWeighted } from "../../utils/random"
+import { schemaValues } from "../../utils/schemas"
 import type { Board } from "../board"
 import { giveRandomEgg } from "../eggs"
 import { getHatchTime } from "../evolution-logic/hatch-time"
 import type { PokemonEntity } from "../pokemon-entity"
+import { getStrongestUnit } from "../unit-score"
 import { AbilityStrategy } from "./ability-strategy"
-import { castAbility } from "./cast"
-import { explosionStrategy } from "./explosion"
-import { meditateStrategy } from "./meditate"
-import { thunderShockStrategy } from "./thunder-shock"
 
 export class HiddenPowerStrategy extends AbilityStrategy {
   requiresTarget = false
@@ -90,16 +89,23 @@ export class HiddenPowerCStrategy extends HiddenPowerStrategy {
 export class HiddenPowerDStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    const player = unown.player
-    if (player && !unown.isGhostOpponent) {
-      const x = getFirstAvailablePositionInBench(player.board)
-      if (x !== null) {
-        const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
-        ditto.positionX = x
-        ditto.positionY = 0
-        player.board.set(ditto.id, ditto)
-      }
-    }
+    const strongestAlly = unown.player
+      ? getStrongestUnit(schemaValues(unown.player.board))
+      : getStrongestUnit(
+          board.cells.filter(
+            (cell): cell is PokemonEntity =>
+              cell != null && cell.team === unown.team
+          )
+        )
+    const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
+    if (!coord || !strongestAlly) return
+    unown.simulation.addPokemon(
+      PokemonFactory.createPokemonFromName(strongestAlly.name, unown.player),
+      coord.x,
+      coord.y,
+      unown.team,
+      true
+    )
   }
 }
 
@@ -230,13 +236,35 @@ export class HiddenPowerMStrategy extends HiddenPowerStrategy {
 export class HiddenPowerNStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
+    const damage = 50
+    const shield = 50
     board.forEach(
       (x: number, y: number, pokemon: PokemonEntity | undefined) => {
         if (pokemon && unown.team === pokemon.team) {
-          const target = board.getEntityOnCell(pokemon.targetX, pokemon.targetY)
-          if (target) {
-            pokemon.addShield(50, unown, 1, false)
-            castAbility(explosionStrategy, pokemon, board, target, false)
+          pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
+          pokemon.addShield(shield, unown, 1, crit)
+
+          const cells = board.getAdjacentCells(x, y)
+          cells.forEach((cell) => {
+            if (cell.value && pokemon.team != cell.value.team) {
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          })
+
+          if (!pokemon.items.has(Item.PROTECTIVE_PADS)) {
+            pokemon.handleSpecialDamage(
+              damage,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              crit
+            )
           }
         }
       }
@@ -373,9 +401,21 @@ export class HiddenPowerUStrategy extends HiddenPowerStrategy {
 export class HiddenPowerVStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
+    const damage = 30
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && unown.team !== enemy.team) {
-        castAbility(thunderShockStrategy, unown, board, enemy, false)
+        enemy.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          unown,
+          crit
+        )
+        unown.broadcastAbility({
+          skill: Ability.THUNDER_SHOCK,
+          targetX: x,
+          targetY: y
+        })
       }
     })
   }
@@ -451,9 +491,11 @@ export class HiddenPowerXStrategy extends HiddenPowerStrategy {
 export class HiddenPowerYStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
+    const atkBuffFactor = 1
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (ally && unown.team === ally.team) {
-        castAbility(meditateStrategy, ally, board, ally, false)
+        ally.addAttack(atkBuffFactor * ally.baseAtk, unown, 1, crit)
+        ally.broadcastAbility({ skill: Ability.MEDITATE })
       }
     })
   }
