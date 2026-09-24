@@ -26,6 +26,7 @@
 - Rework Bite: Deal [300,400,500,1000]% of user ATK as SPECIAL to the target and heal the user for [50,SP]% of the damage dealt
 - Change ability of Totodile line to Bite instead of Crunch.
 - Change ability of Larvitar line to Pursuit instead of Bite. Pursuit: Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.
+- Buff Bounsweet line: PP 120 → 90
 
 # Changes to Synergies
 
