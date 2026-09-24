@@ -608,12 +608,16 @@ const cookDish = ({
 const cookWhenStageStartsEffect = new OnStageStartEffect(
   ({ pokemon, player, room }) => {
     if (!pokemon) return
-    cookDish({
-      pokemon,
-      player,
-      room,
-      cookDuration: GOURMET_COOK_DEFAULT_DURATION
-    })
+    room.clock.setTimeout(
+      () =>
+        cookDish({
+          pokemon,
+          player,
+          room,
+          cookDuration: GOURMET_COOK_DEFAULT_DURATION
+        }),
+      2000
+    )
   }
 )
 

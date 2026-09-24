@@ -938,14 +938,7 @@ const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
 const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   if (getSynergyTier(player.synergies, Synergy.GROUND) > 0) {
     player.board.forEach((pokemon, pokemonId) => {
-      if (
-        pokemon.types.has(Synergy.GROUND) &&
-        !isOnBench(pokemon) &&
-        !(
-          pokemon.items.has(Item.CHEF_HAT) &&
-          player.synergies.hasSynergyActive(Synergy.GOURMET)
-        )
-      ) {
+      if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon)) {
         const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
         const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
         const isReachingMaxDepth = player.groundHoles[index] === 4
