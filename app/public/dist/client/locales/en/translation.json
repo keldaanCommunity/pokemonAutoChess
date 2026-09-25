@@ -3400,7 +3400,7 @@
 		"STENCH": "BOARD_EFFECT: leaves behind a stinky POISON_GAS that POISONED any unit that breathes it",
 		"AQUA_VEIL": "Give SAFEGUARD under RAIN",
 		"MOXIE": "Every time an enemy Pokémon is KO, it gains ATK equal to its stars",
-		"ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other member of their species alive on the board",
+		"ILLUMISE_VOLBEAT": "Illumise and Volbeat gain 5 PP per second for each other Illumise and Volbeat alive on the board",
 		"PRISM": "Necrozma switches between its Ultra form and Normal form depending on its exposure to LIGHT",
 		"BLOSSOM": "Cherrim switches between its Sunlight form and Normal form depending on its exposure to LIGHT",
 		"SPECIAL_ATTACK": "Basic attacks deal SPECIAL and scale with AP",
