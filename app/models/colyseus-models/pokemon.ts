@@ -182,10 +182,6 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  onItemGiven(item: Item, player: Player) {
-    // called after giving an item to the mon
-  }
-
   onItemRemoved(item: Item, player: Player) {
     // called after an item is unequipped from the mon
   }
@@ -259,7 +255,6 @@ export class Pokemon extends Schema implements IPokemon {
     if (this.canHoldItems === false) return
     for (const item of items) {
       this.items.add(item)
-      this.onItemGiven(item, player)
     }
     player.updateSynergies()
   }
@@ -3251,11 +3246,6 @@ export class Pikachu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  onItemGiven(item: Item, player: Player): void {
-    if (item === Item.SURFBOARD) {
-      player.transformPokemon(this, Pkm.PIKACHU_SURFER)
-    }
-  }
 }
 
 export class Raichu extends Pokemon {
@@ -13110,12 +13100,6 @@ export class Necrozma extends Pokemon {
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
-    }
-  }
 }
 
 export class UltraNecrozma extends Pokemon {
@@ -13190,12 +13174,6 @@ export class Cherrim extends Pokemon {
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
   regional = true
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
-    }
-  }
 }
 
 export class CherrimSunlight extends Pokemon {

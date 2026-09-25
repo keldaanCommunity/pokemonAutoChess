@@ -249,7 +249,7 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {page !== "game" &&
+        {page === "main_lobby" &&
           ((!GADGETS.recorder.disabled &&
             profileLevel >= GADGETS.recorder.levelRequired) ||
             profile?.role === Role.ADMIN) && (
