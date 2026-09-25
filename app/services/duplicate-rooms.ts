@@ -37,9 +37,9 @@ export function checkDuplicateRoom(
       const createdId = await room.presence.get(
         `${ROOM_CREATION}:${creationId}`
       )
-      // until the creator records the room, there is nothing to compare against
+      // we check again on a regular interval until the process creating the room records the room creation in Redis, that is when createdId is defined
       if (createdId) {
-        check.clear()
+        check.clear() // we know which process created the room, no need to check again for duplicates for this proces
         if (createdId !== room.roomId) {
           logger.warn("Disposing duplicate room", room.roomId, "of", createdId)
           room.onRoomDeleted(room.roomId)

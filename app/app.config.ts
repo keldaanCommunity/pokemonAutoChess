@@ -83,11 +83,11 @@ import { logger } from "./utils/logger"
 
 const GAME_CHECK = {
   interval: 3000,
-  timeout: MAX_LOADING_TIME // a copy force starts here and clears everyone's pending game
+  timeout: MAX_LOADING_TIME // a duplicate game room force starts its game after MAX_LOADING_TIME and clears the pending game of all players, so it needs to be removed before that
 }
 const PREPARATION_CHECK = {
-  interval: 3000, // a copy dies before anyone can fill and ready it
-  timeout: 9 * 60 * 1000 // under the 10 min autoStartDelayInSeconds tournament lobbies use
+  interval: 3000, // if there is a duplicate preparation room, 3 seconds is short enough that this duplicate is removed before anyone can join and start game
+  timeout: 9 * 60 * 1000 // needs to be under the 10 min which is the autoStartDelayInSeconds tournament lobbies use, to prevent a duplicate room to autostart
 }
 
 const clientSrc = __dirname.includes("server")
