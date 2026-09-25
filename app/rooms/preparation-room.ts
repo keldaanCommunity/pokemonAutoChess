@@ -4,6 +4,7 @@ import {
   type ClientArray,
   CloseCode,
   type Delayed,
+  matchMaker,
   Room
 } from "colyseus"
 import admin from "firebase-admin"
@@ -41,6 +42,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   clients!: ClientArray<Client<{ auth: UserRecord }>>
   private roomPassword: string | null
   autoStartTimeout: Delayed | null = null
+  relistInterval: Delayed | null = null
 
   constructor() {
     super()
@@ -122,6 +124,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
       ),
       type: "preparation"
     })
+
     this.maxClients = 8
     if (options.gameMode === GameMode.TOURNAMENT) {
       this.autoDispose = false
@@ -355,6 +358,22 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     this.presence.subscribe("game-started", this.onGameStart)
     this.onRoomDeleted = this.onRoomDeleted.bind(this)
     this.presence.subscribe("room-deleted", this.onRoomDeleted)
+
+    // the matchmaker drops the room caches of a process that misses a health check
+    // armed last: the listing only exists once onCreate returns
+    this.relistInterval = this.clock.setInterval(async () => {
+      try {
+        if (!(await matchMaker.driver.has(this.roomId))) {
+          logger.warn(
+            `room listing for ${this.roomId} went missing, re-publishing it`
+          )
+          await this.setMetadata(this.metadata)
+        }
+      } catch (error) {
+        // the clock does not catch rejections, and an unhandled one exits the process
+        logger.error(`could not check the listing of ${this.roomId}`, error)
+      }
+    }, 30000)
   }
 
   async onAuth(client: Client, options, context) {
@@ -482,6 +501,9 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   }) {
     if (this.roomId === preparationId) {
       this.lock()
+      // the lobby cron removes started prep rooms
+      this.relistInterval?.clear()
+      this.relistInterval = null
       this.setGameStarted(new Date().toISOString())
       //logger.debug("game start", game.roomId)
       this.broadcast(Transfer.GAME_START, gameId)

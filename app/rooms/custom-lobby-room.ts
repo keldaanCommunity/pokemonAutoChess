@@ -423,6 +423,20 @@ export default class CustomLobbyRoom extends Room {
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
+
+    // 10s so two attempts fit checkLobby's 20s of retries before it makes a second lobby (#3304)
+    this.clock.setInterval(async () => {
+      try {
+        if (!(await matchMaker.driver.has(this.roomId))) {
+          logger.warn(
+            `lobby listing for ${this.roomId} went missing, re-publishing it`
+          )
+          await this.setMetadata(this.metadata)
+        }
+      } catch (error) {
+        logger.error(`could not check the listing of ${this.roomId}`, error)
+      }
+    }, 10000)
   }
 
   async onAuth(
@@ -625,29 +639,41 @@ export default class CustomLobbyRoom extends Room {
             unlisted: false
           })
 
+          const listedRoomIds = new Set(query.map((r) => r.roomId))
+
           query.forEach((data) => {
             if (!this.rooms?.map((r) => r.roomId).includes(data.roomId)) {
               // if the query room was not in this.rooms, add it
               this.addRoom(data.roomId, data)
             }
           })
-          this.rooms?.forEach(async (room, roomIndex) => {
+
+          // a copy: removeRoom splices this.rooms, which would shift the rooms still to visit
+          const rooms = [...(this.rooms ?? [])]
+          rooms.forEach((room) => {
             const { type, gameStartedAt } = room.metadata ?? {}
-            if (
-              (type === "preparation" &&
-                gameStartedAt != null &&
-                new Date(gameStartedAt).getTime() < Date.now() - 60000) ||
-              !query.map((r) => r.roomId).includes(room.roomId)
-            ) {
-              this.presence.hdel("roomcaches", room.roomId)
-              this.removeRoom(roomIndex, room.roomId)
-            }
-            if (
-              type === "game" &&
+            const startedBefore = (ms: number) =>
               gameStartedAt != null &&
-              new Date(gameStartedAt).getTime() < Date.now() - 86400000
+              new Date(gameStartedAt).getTime() < Date.now() - ms
+            const roomIndex =
+              this.rooms?.findIndex((r) => r.roomId === room.roomId) ?? -1
+
+            if (!listedRoomIds.has(room.roomId)) {
+              // no hdel: query is a snapshot, and a room re-listed since is live
+              this.removeRoom(roomIndex, room.roomId)
+            } else if (
+              (type === "preparation" && startedBefore(60000)) ||
+              (type === "game" && startedBefore(86400000))
             ) {
-              this.presence.hdel("roomcaches", room.roomId)
+              // not awaited: an await would let the lobby subscription splice this.rooms
+              this.presence
+                .hdel("roomcaches", room.roomId)
+                .catch((error) =>
+                  logger.error(
+                    `could not drop the listing of ${room.roomId}`,
+                    error
+                  )
+                )
               this.removeRoom(roomIndex, room.roomId)
             }
           })
