@@ -40,6 +40,8 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   dispatcher: Dispatcher<this>
   clients!: ClientArray<Client<{ auth: UserRecord }>>
   private roomPassword: string | null
+  deleted = false
+  creationId?: string
   autoStartTimeout: Delayed | null = null
 
   constructor() {
@@ -93,8 +95,10 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     blacklist?: string[]
     tournamentId?: string
     bracketId?: string
+    creationId?: string
   }) {
     logger.info("create Preparation ", this.roomId)
+    this.creationId = options.creationId
     // logger.debug(options);
     //logger.info(`create ${options.roomName}`)
 
@@ -381,7 +385,10 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
         (u) => !u.isBot
       ).length
 
-      if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
+      if (this.deleted) {
+        client.leave(CloseCodes.ROOM_DELETED)
+        return
+      } else if (numberOfHumanPlayers >= MAX_PLAYERS_PER_GAME && !isAdmin) {
         client.leave(CloseCodes.ROOM_FULL)
         return
       } else if (isAlreadyInRoom) {
@@ -490,6 +497,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   onRoomDeleted(roomId) {
     if (this.roomId === roomId) {
+      this.deleted = true
       this.autoStartTimeout?.clear()
       this.disconnect(CloseCodes.ROOM_DELETED)
     }

@@ -20,6 +20,7 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
+  MAX_LOADING_TIME,
   SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
@@ -49,6 +50,7 @@ import {
   changeSelectedEmotionForUser,
   migrateShardsOfAltForms
 } from "./services/collection"
+import { checkDuplicateRoom } from "./services/duplicate-rooms"
 import { getLeaderboard } from "./services/leaderboard"
 import {
   computeSynergyAverages,
@@ -78,6 +80,15 @@ import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
 import type { IUserMetadataLean } from "./types/interfaces/UserMetadata"
 import { logger } from "./utils/logger"
+
+const GAME_CHECK = {
+  interval: 3000,
+  timeout: MAX_LOADING_TIME // a duplicate game room force starts its game after MAX_LOADING_TIME and clears the pending game of all players, so it needs to be removed before that
+}
+const PREPARATION_CHECK = {
+  interval: 3000, // if there is a duplicate preparation room, 3 seconds is short enough that this duplicate is removed before anyone can join and start game
+  timeout: 9 * 60 * 1000 // needs to be under the 10 min which is the autoStartDelayInSeconds tournament lobbies use, to prevent a duplicate room to autostart
+}
 
 const clientSrc = __dirname.includes("server")
   ? path.join(__dirname, "..", "..", "client")
@@ -213,8 +224,13 @@ export const server = defineServer({
   rooms: {
     "after-game": defineRoom(AfterGameRoom),
     lobby: defineRoom(CustomLobbyRoom),
-    preparation: defineRoom(PreparationRoom).enableRealtimeListing(),
-    game: defineRoom(GameRoom).enableRealtimeListing()
+    preparation: defineRoom(PreparationRoom)
+      .enableRealtimeListing()
+      // runs once listed; onCreate is too early
+      .on("create", (room) => checkDuplicateRoom(room, PREPARATION_CHECK)),
+    game: defineRoom(GameRoom)
+      .enableRealtimeListing()
+      .on("create", (room) => checkDuplicateRoom(room, GAME_CHECK))
   },
 
   express: (app) => {
