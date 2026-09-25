@@ -29,6 +29,7 @@ export class ElectroShotStrategy extends AbilityStrategy {
     pokemon.commands.push(
       new DelayedCommand(
         () => {
+          if (pokemon.status.resurrecting || pokemon.status.silence) return // cancel ability if pokemon is resurrecting or silenced
           const damage = [80, 100, 120, 240][pokemon.stars - 1] ?? 240
           const apBoost = 40
           pokemon.addAbilityPower(apBoost, pokemon, 0, false)
