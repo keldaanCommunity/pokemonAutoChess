@@ -334,7 +334,7 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
-      setTimeout(() => newPokemon.addItem(item, this), 1) // delay to prevent infinite loop and duplicates with light spot transforms
+      newPokemon.addItem(item, this)
       if (item === Item.SHINY_CHARM) {
         newPokemon.shiny = true
       }
