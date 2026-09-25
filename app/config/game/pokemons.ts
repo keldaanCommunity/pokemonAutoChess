@@ -25,6 +25,7 @@ export const UnownsStage2 = [
   Pkm.UNOWN_A,
   Pkm.UNOWN_B,
   Pkm.UNOWN_C,
+  Pkm.UNOWN_D,
   Pkm.UNOWN_G,
   Pkm.UNOWN_H,
   Pkm.UNOWN_I,

@@ -13,6 +13,7 @@ export interface GameStats {
   maxWinStreak: number
   dittosUsed: number
   rerollCount: number
+  rerollCountSinceLastDitto: number
   totalMoneyEarned: number
   totalPlayerDamageDealt: number
 }
@@ -34,6 +35,7 @@ export const initialGameStats: GameStats = {
   maxWinStreak: 0,
   dittosUsed: 0,
   rerollCount: 0,
+  rerollCountSinceLastDitto: 0,
   totalMoneyEarned: 0,
   totalPlayerDamageDealt: 0
 }
