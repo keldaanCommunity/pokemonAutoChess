@@ -66,6 +66,8 @@
 
 # Bugfix
 
+- Grookey line now works properly with Electric triple attack effects
+
 # Misc
 
 - The post game screen has new victory jingles made by John Rei

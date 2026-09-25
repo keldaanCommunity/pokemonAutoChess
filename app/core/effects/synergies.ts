@@ -72,7 +72,7 @@ import {
   OnSpawnEffect,
   OnStageStartEffect
 } from "./effect"
-import { PassiveEffects } from "./passives"
+import { drumBeat, PassiveEffects } from "./passives"
 
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
@@ -174,8 +174,22 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.status.triggerWound(4000, target, pokemon)
       }
 
-      pokemon.state.attack(pokemon, board, target, true)
-      pokemon.state.attack(pokemon, board, target, true)
+      if (
+        pokemon.passive === Passive.DRUMMER &&
+        board.cells.some(
+          (entity) =>
+            entity?.team === pokemon.team &&
+            entity?.passive !== Passive.DRUMMER &&
+            entity?.passive !== Passive.INANIMATE
+        )
+      ) {
+        drumBeat(pokemon, board)
+        drumBeat(pokemon, board)
+      } else {
+        pokemon.state.attack(pokemon, board, target, true)
+        pokemon.state.attack(pokemon, board, target, true)
+      }
+
       if (isSupercharged && target) {
         target.addPP(-10, pokemon, 0, false)
         target.count.manaBurnCount++
