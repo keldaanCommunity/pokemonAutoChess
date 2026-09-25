@@ -38,11 +38,11 @@ import type AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility, displayHit } from "./abilities-animations"
-import PokemonSprite from "./pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./pokemon-animations"
+import PokemonSprite from "./pokemon-sprite"
 
 export default class BattleManager {
   group: GameObjects.Group

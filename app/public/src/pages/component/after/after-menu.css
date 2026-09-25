@@ -41,8 +41,8 @@
 
 .after-menu .after-row {
   opacity: 0;
-  animation: after-row-reveal 0.4s ease-out forwards;
-  animation-delay: calc(var(--i, 0) * var(--stagger, 0.3s));
+  animation: after-row-reveal 0.25s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger, 0.1s));
 }
 
 @keyframes after-row-reveal {
@@ -58,8 +58,8 @@
 
 .after-menu .after-header-reveal {
   opacity: 0;
-  animation: after-rank-reveal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: 2.6s;
+  animation: after-rank-reveal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 2.2s;
 }
 
 @keyframes after-rank-reveal {

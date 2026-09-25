@@ -52,7 +52,11 @@ import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
-import { MAX_CONFIG_FPS, preference, subscribeToPreferences } from "../preferences"
+import {
+  MAX_CONFIG_FPS,
+  preference,
+  subscribeToPreferences
+} from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
@@ -462,6 +466,8 @@ class GameContainer {
         "action",
         "hp",
         "maxHP",
+        "pp",
+        "maxPP",
         "atk",
         "ap",
         "def",

@@ -41,6 +41,8 @@ import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { castAbility } from "../abilities/cast"
 import type { Board, Cell } from "../board"
+import { registerOnEvolutionHook } from "../evolution-logic/evolution-hooks"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { getStrongestUnit } from "../unit-score"
@@ -67,6 +69,7 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { unequipItems } from "./items"
 import { AccelerationEffect } from "./passives/acceleration"
 import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
@@ -1721,7 +1724,7 @@ export const PassiveEffects: Partial<
           )
         })
         player.items.push(...itemsToRemove)
-        pokemon.removeItems(itemsToRemove, player)
+        unequipItems(pokemon, itemsToRemove, player)
       }
     })
   ],
@@ -1895,3 +1898,28 @@ export const PassiveEffects: Partial<
     })
   ]
 }
+
+registerOnEvolutionHook((pokemonEvolved, player) => {
+  if (pokemonEvolved.passive in PassiveEffects) {
+    PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
+      if (effect instanceof OnEvolutionEffect) {
+        effect.apply({ pokemonEvolved, player })
+      }
+    })
+  }
+})
+
+registerOnEvolutionHook((pokemonEvolved, player) => {
+  player.board.forEach((pokemon) => {
+    if (
+      (pokemon.passive === Passive.COSMOG ||
+        pokemon.passive === Passive.COSMOEM) &&
+      pokemonEvolved.passive !== Passive.COSMOG &&
+      pokemonEvolved.passive !== Passive.COSMOEM
+    ) {
+      pokemon.addMaxHP(10)
+      pokemon.stacks++
+      EvolutionManager.tryEvolve(pokemon, player)
+    }
+  })
+})

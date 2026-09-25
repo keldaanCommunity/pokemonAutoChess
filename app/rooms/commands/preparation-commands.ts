@@ -912,7 +912,6 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
           ["avatar", "elo", "name", "id"]
         )
 
-        console.log("bot difficulty", difficulty, "found", bots.length, "bots")
         if (bots.length <= 0) {
           this.room.state.addMessage({
             authorId: "server",

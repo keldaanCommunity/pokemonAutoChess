@@ -1,10 +1,25 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
+import {
+  GOURMET_COOK_DEFAULT_DURATION,
+  NB_DISHES_PER_GOURMET_SYNERGY
+} from "../../config/game/synergies"
+import type Player from "../../models/colyseus-models/player"
 import { PlayerChoice } from "../../models/colyseus-models/player-choice"
+import {
+  type Pokemon,
+  PokemonClasses
+} from "../../models/colyseus-models/pokemon"
 import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { PVEStages } from "../../models/pve-stages"
-import { Title, TMPerAbility, Transfer } from "../../types"
+import type GameRoom from "../../rooms/game-room"
+import {
+  MemoryDiscsBySynergy,
+  Title,
+  TMPerAbility,
+  Transfer
+} from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -36,7 +51,7 @@ import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { isIn, removeInArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
-import { max, min } from "../../utils/number"
+import { clamp, max, min } from "../../utils/number"
 import {
   chance,
   pickNRandomIn,
@@ -61,7 +76,8 @@ import {
   type OnDeathEffectArgs,
   OnItemDroppedEffect,
   OnItemGainedEffect,
-  OnItemRemovedEffect,
+  OnItemLostInCombatEffect,
+  OnItemUnequippedEffect,
   OnKillEffect,
   OnMoveEffect,
   OnResurrectingEffect,
@@ -70,6 +86,64 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+
+export function equipItem(pokemon: Pokemon, item: Item, player: Player) {
+  equipItems(pokemon, [item], player)
+}
+
+export function equipItems(pokemon: Pokemon, items: Item[], player: Player) {
+  if (pokemon.canHoldItems === false) return
+  for (const item of items) {
+    pokemon.items.add(item)
+    pokemon.onItemGiven(item, player)
+  }
+  player.updateSynergies()
+}
+
+export function unequipItem(pokemon: Pokemon, item: Item, player: Player) {
+  unequipItems(pokemon, [item], player)
+}
+
+export function unequipItems(pokemon: Pokemon, items: Item[], player: Player) {
+  /* onItemUnequipped effects need to be called after removing all items in case they trigger transformations (Pikachu Surfer, etc.)
+     in order:
+     1) remove items from the pokemon
+     2) check if any synergy should be removed
+     3) call onItemUnequipped effects for each item removed
+    */
+  for (const item of items) {
+    pokemon.items.delete(item)
+  }
+
+  const nativeTypes = new PokemonClasses[pokemon.name](pokemon.name).types
+  for (const item of items) {
+    const synergyRemoved = SynergyGivenByItem[item]
+    const otherSynergyItemsHeld = schemaValues(pokemon.items).filter(
+      (i) => SynergyGivenByItem[i] === synergyRemoved
+    )
+
+    if (synergyRemoved && otherSynergyItemsHeld.length === 0) {
+      if (nativeTypes.has(synergyRemoved) === false) {
+        pokemon.types.delete(synergyRemoved)
+      }
+      if (pokemon.passive === Passive.RKS_SYSTEM) {
+        const memory = MemoryDiscsBySynergy[synergyRemoved]
+        if (player.items.includes(memory) === false && memory) {
+          player.items.push(memory)
+        }
+      }
+    }
+  }
+
+  for (const item of items) {
+    const itemEffects =
+      ItemEffects[item]?.filter((p) => p instanceof OnItemUnequippedEffect) ??
+      []
+    itemEffects.forEach((effect) => {
+      effect.apply({ pokemon, player, item })
+    })
+  }
+}
 
 export const blueOrbOnAttackEffect = new OnAttackEffect(
   ({ pokemon, target, board }) => {
@@ -331,16 +405,16 @@ const ogerponMaskEffect = new OnItemDroppedEffect(
       }
 
       if (item === Item.TEAL_MASK) {
-        pokemon.addItem(Item.TEAL_MASK, player)
+        equipItem(pokemon, Item.TEAL_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_TEAL_MASK)
       } else if (item === Item.WELLSPRING_MASK) {
-        pokemon.addItem(Item.WELLSPRING_MASK, player)
+        equipItem(pokemon, Item.WELLSPRING_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_WELLSPRING_MASK)
       } else if (item === Item.HEARTHFLAME_MASK) {
-        pokemon.addItem(Item.HEARTHFLAME_MASK, player)
+        equipItem(pokemon, Item.HEARTHFLAME_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_HEARTHFLAME_MASK)
       } else if (item === Item.CORNERSTONE_MASK) {
-        pokemon.addItem(Item.CORNERSTONE_MASK, player)
+        equipItem(pokemon, Item.CORNERSTONE_MASK, player)
         player.transformPokemon(pokemon, Pkm.OGERPON_CORNERSTONE_MASK)
       }
       return true
@@ -359,8 +433,8 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         player
       )
       const items = schemaValues(pokemon.items)
-      substitute.addItems(items, player)
-      pokemon.removeItems(items, player)
+      equipItems(substitute, items, player)
+      unequipItems(pokemon, items, player)
       const pokemonLeaving =
         player.getPokemonAt(pokemon.positionX, pokemon.positionY) || pokemon // re-fetch pokemon in case it has been transformed
       substitute.id = pokemonLeaving.id
@@ -385,12 +459,19 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
   }
 }
 
-const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
-  if (!pokemon) return
+const cookDish = ({
+  pokemon,
+  player,
+  room,
+  cookDuration
+}: {
+  pokemon: Pokemon
+  player: Player
+  room: GameRoom
+  cookDuration: number
+}) => {
   const chef = pokemon
 
-  const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
-  const nbDishes = [0, 1, 2, 2][gourmetTier] ?? 2
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
@@ -409,43 +490,56 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
     }
   }
 
-  if (dish && nbDishes > 0) {
-    let dishes = Array.from({ length: nbDishes }, () => dish!)
-    if (dish === Item.BERRIES) {
-      dishes = pickNRandomIn(
-        NonSpecialBerries.filter((i) => pokemon.items.has(i) === false),
-        nbDishes
-      )
-    }
-    if (dish === Item.MUSHROOMS) {
-      dishes = Array.from(
-        { length: nbDishes },
-        () =>
-          randomWeighted({
-            [Item.TINY_MUSHROOM]: 77,
-            [Item.BIG_MUSHROOM]: 20,
-            [Item.BALM_MUSHROOM]: 3
-          }) ?? Item.TINY_MUSHROOM
-      )
-    }
-    if (dish === Item.SWEETS) {
-      dishes = pickNRandomIn(Sweets, nbDishes)
-    }
-    room.clock.setTimeout(async () => {
-      room.broadcast(Transfer.COOK, {
-        pokemonId: chef.id,
-        dishes
-      })
-      room.clock.setTimeout(() => {
+  if (dish) {
+    let t = 0
+    const cookInterval = room.clock.setInterval(() => {
+      chef.action = PokemonActionState.COOK
+      t += 500
+      if (t >= cookDuration) {
+        cookInterval.clear()
+        chef.pp = chef.maxPP
+
+        // check again the gourmet tier in case it changed during cooking
+        const gourmetTier = getSynergyTier(player.synergies, Synergy.GOURMET)
+        const nbDishes = NB_DISHES_PER_GOURMET_SYNERGY[gourmetTier] ?? 2
+        let dishes: Item[] = Array.from({ length: nbDishes }, () => dish!)
+        if (dish === Item.BERRIES) {
+          dishes = pickNRandomIn(
+            NonSpecialBerries.filter((i) => pokemon.items.has(i) === false),
+            nbDishes
+          )
+        }
+        if (dish === Item.MUSHROOMS) {
+          dishes = Array.from(
+            { length: nbDishes },
+            () =>
+              randomWeighted({
+                [Item.TINY_MUSHROOM]: 77,
+                [Item.BIG_MUSHROOM]: 20,
+                [Item.BALM_MUSHROOM]: 3
+              }) ?? Item.TINY_MUSHROOM
+          )
+        }
+        if (dish === Item.SWEETS) {
+          dishes = pickNRandomIn(Sweets, nbDishes)
+        }
+
+        room.broadcast(Transfer.COOK, {
+          pokemonId: chef.id,
+          dishes,
+          cookDuration
+        })
+
         dishes.forEach((dish, i) => {
           if (pokemon.name === Pkm.SKWOVET || pokemon.name === Pkm.GREEDENT) {
             if (pokemon.items.size < 3) {
-              pokemon.addItem(dish, player)
+              equipItem(pokemon, dish, player)
             } else {
               player.items.push(dish)
             }
           } else if (isIn(DishesGoingToInventory, dish)) {
             player.items.push(dish)
+            chef.cook!.dishesMade.push(dish)
           } else {
             let candidates = schemaValues(player.board).filter(
               (p) =>
@@ -482,12 +576,122 @@ const chefCookEffect = new OnStageStartEffect(({ pokemon, player, room }) => {
             }
             pokemon.dishes.add(dish)
             pokemon.action = PokemonActionState.EAT
+            if (chef.cook) {
+              chef.cook.fedPokemonsId.push(pokemon.id)
+              chef.cook.dishesMade.push(dish)
+            } else {
+              console.warn(
+                `chef.cook is undefined for ${chef.name} (${chef.id})`
+              )
+            }
           }
         })
-      }, 2000)
-    }, 1000)
+        room.clock.setTimeout(() => {
+          chef.action =
+            chef.dishes.size > 0
+              ? PokemonActionState.EAT
+              : PokemonActionState.IDLE
+        }, 2000)
+      } else {
+        chef.pp = Math.round((t / cookDuration) * chef.maxPP)
+      }
+    }, 500)
+
+    chef.cook = {
+      dishesMade: [],
+      fedPokemonsId: [],
+      cookingProcess: cookInterval
+    }
   }
-})
+}
+
+const cookWhenStageStartsEffect = new OnStageStartEffect(
+  ({ pokemon, player, room }) => {
+    if (!pokemon) return
+    room.clock.setTimeout(
+      () =>
+        cookDish({
+          pokemon,
+          player,
+          room,
+          cookDuration: GOURMET_COOK_DEFAULT_DURATION
+        }),
+      2000
+    )
+  }
+)
+
+const cookWhenGivenHatEffect = new OnItemDroppedEffect(
+  ({ pokemon, player, room }) => {
+    const canEquip = pokemon.types.has(Synergy.GOURMET)
+    if (!canEquip) return false // prevent item from being equipped if not gourmet
+    if (pokemon.cook && pokemon.cook.dishesMade.length > 0) {
+      const nbDishes =
+        NB_DISHES_PER_GOURMET_SYNERGY[
+          getSynergyTier(player.synergies, Synergy.GOURMET)
+        ] ?? 0
+      pokemon.cook.dishesMade.forEach((dishToAddBack, i) => {
+        if (i >= nbDishes) return // gourmet tier decreased, don't give more dishes than allowed
+        if (isIn(DishesGoingToInventory, dishToAddBack)) {
+          player.items.push(dishToAddBack)
+        } else if (pokemon.cook!.fedPokemonsId[i]) {
+          let pokemonEating = player.board.get(pokemon.cook!.fedPokemonsId[i])
+          if (!pokemonEating || !pokemonEating.canEat) {
+            // find another pokemon to give the dish to
+            const candidates = schemaValues(player.board).filter(
+              (p) => p.canEat && !p.dishes.has(dishToAddBack)
+            )
+            candidates.sort((a, b) => getUnitScore(b) - getUnitScore(a))
+            pokemonEating = candidates[0]
+          }
+          if (pokemonEating && pokemonEating.canEat) {
+            pokemonEating?.dishes.add(dishToAddBack)
+            pokemonEating.action = PokemonActionState.EAT
+          }
+        }
+      })
+    } else {
+      const cookDuration = clamp(
+        room.state.roundTime * 1000 - 2000,
+        0,
+        GOURMET_COOK_DEFAULT_DURATION
+      )
+      cookDish({ pokemon, player, room, cookDuration })
+    }
+    return canEquip
+  }
+)
+
+const cancelCookWhenHatUnequippedEffect = new OnItemUnequippedEffect(
+  ({ pokemon, player }) => {
+    if (pokemon.cook) {
+      pokemon.cook.cookingProcess.clear()
+      if (pokemon.action === PokemonActionState.COOK) {
+        pokemon.action =
+          pokemon.dishes.size > 0
+            ? PokemonActionState.EAT
+            : PokemonActionState.IDLE
+      }
+      pokemon.cook.dishesMade.forEach((dish) => {
+        if (isIn(DishesGoingToInventory, dish) && player.items.includes(dish)) {
+          removeInArray(player.items, dish)
+        } else {
+          const pokemonsEating = schemaValues(player.board).filter((pkm) =>
+            pkm.dishes.has(dish)
+          )
+          for (const pkm of pokemonsEating) {
+            pkm.dishes.delete(dish)
+            pkm.action =
+              pkm.dishes.size > 0
+                ? PokemonActionState.EAT
+                : PokemonActionState.IDLE
+          }
+        }
+      })
+    }
+    pokemon.action = PokemonActionState.IDLE
+  }
+)
 
 export class FishingRodEffect extends OnStageStartEffect {
   constructor(rod: FishingRod) {
@@ -561,7 +765,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.addAttack(pokemon.baseAtk * 0.5, pokemon, 0, false)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk * 0.5, pokemon, 0, false)
     }),
     new OnDeathEffect(({ pokemon, board }) => {
@@ -587,7 +791,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new SoulDewEffect())
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof SoulDewEffect) {
           pokemon.addAbilityPower(-5 * effect.count, pokemon, 0, false)
@@ -618,7 +822,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.addResurrection(pokemon)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.status.resurrection = false
     })
   ],
@@ -628,7 +832,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.addDodgeChance(0.1, pokemon, 0, false)
       pokemon.effects.add(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addDodgeChance(-0.1, pokemon, 0, false)
       pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     })
@@ -644,7 +848,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon as PokemonEntity
       )
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.burnCooldown = 0
     })
@@ -673,7 +877,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.status.runeProtectCooldown = 0
     })
   ],
@@ -688,7 +892,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.addMaxHP(2 * pokemon.baseHP, pokemon, 0, false)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addMaxHP(-2 * pokemon.baseHP, pokemon, 0, false)
     })
   ],
@@ -697,7 +901,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.addCritPower(pokemon.player?.money ?? 0, pokemon, 0, false)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
     }),
     new OnKillEffect(({ attacker, target, board }) => {
@@ -731,7 +935,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.addShield(repeatBallValue * 2, pokemon, 0, false)
       pokemon.addSpeed(repeatBallValue, pokemon, 0, false)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       const repeatBallValue = Math.floor(
         ((pokemon.player?.gameStats.rerollCount ?? 0) +
           pokemon.simulation.stageLevel) /
@@ -746,7 +950,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.status.addResurrection(pokemon)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.status.resurrection = false
     })
   ],
@@ -756,7 +960,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.addSpeed(5, pokemon, 0, false)
       pokemon.count.upgradeCount++
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addSpeed(-5 * pokemon.count.upgradeCount, pokemon, 0, false)
       pokemon.count.upgradeCount = 0
     })
@@ -773,7 +977,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       }
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       const stacks = Math.floor(pokemon.count.muscleBandCount / 2)
       pokemon.addAttack(-stacks, pokemon, 0, false)
       pokemon.addDefense(-2 * stacks, pokemon, 0, false)
@@ -786,7 +990,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new MachRibbonEffect())
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof MachRibbonEffect) {
           pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
@@ -802,7 +1006,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemGainedEffect((pokemon) => {
       pokemon.effectsSet.add(new GreenOrbEffect())
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof GreenOrbEffect) {
           pokemon.effectsSet.delete(effect)
@@ -853,7 +1057,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.addDefense(comfey.def, pokemon, 0, false)
       pokemon.addSpecialDefense(comfey.speDef, pokemon, 0, false)
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       const comfey = PokemonFactory.createPokemonFromName(Pkm.COMFEY)
       pokemon.addMaxHP(-comfey.maxHP, pokemon, 0, false)
       pokemon.addAttack(-comfey.atk, pokemon, 0, false)
@@ -946,7 +1150,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RUNNING_SHOES]: [
     () => new RunningShoesOnMoveEffect(), // needs new instance of effect for each pokemon due to internal stack counter
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       const stacks =
         Object.values(pokemon.effectsSet).find(
           (effect) => effect instanceof RunningShoesOnMoveEffect
@@ -962,7 +1166,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.addCritPower(50, pokemon, 0, false)
       }
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.effects.delete(EffectEnum.ABILITY_CRIT)
       if (AbilityStrategies[pokemon.skill].canCritByDefault) {
         pokemon.addCritPower(-50, pokemon, 0, false)
@@ -1233,11 +1437,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         const recipe = ItemRecipe[heldItem]
         if (recipe) {
           player.items.push(...recipe)
-          pokemon.removeItem(heldItem, player)
+          unequipItem(pokemon, heldItem, player)
           consummed = true
         } else if (isIn(ItemComponents, heldItem)) {
           player.items.push(heldItem)
-          pokemon.removeItem(heldItem, player)
+          unequipItem(pokemon, heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
           removeInArray(player.scarvesItems, heldItem)
@@ -1271,11 +1475,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.CHEF_HAT]: [
-    chefCookEffect,
-    new OnItemDroppedEffect(({ pokemon }) => {
-      const canEquip = pokemon.types.has(Synergy.GOURMET)
-      return canEquip
-    })
+    cookWhenStageStartsEffect,
+    cookWhenGivenHatEffect,
+    cancelCookWhenHatUnequippedEffect
   ],
 
   [Item.EVIOLITE]: [
@@ -1367,6 +1569,14 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     ])
   ),
 
+  [Item.SURFBOARD]: [
+    new OnItemUnequippedEffect(({ pokemon, player }) => {
+      if (pokemon.name === Pkm.PIKACHU_SURFER) {
+        player.transformPokemon(pokemon, Pkm.PIKACHU)
+      }
+    })
+  ],
+
   [Item.MALICIOUS_ARMOR]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       return pokemon.passive === Passive.CHARCADET // is then consummed by ItemEvolutionRule
@@ -1450,7 +1660,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.player.titles.add(Title.FIVE_STARS)
       }
     }),
-    new OnItemRemovedEffect((pokemon) => {
+    new OnItemLostInCombatEffect((pokemon) => {
       pokemon.stars = min(1)(pokemon.stars - 1)
     })
   ],

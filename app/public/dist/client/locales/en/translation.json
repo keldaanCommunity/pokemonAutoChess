@@ -3156,7 +3156,7 @@
 		"TM_HYPER_BEAM": "$t(item_description.TM)\n$t(ability.HYPER_BEAM): $t(ability_description.HYPER_BEAM)",
 		"TM_SUBSTITUTE": "$t(item_description.TM)\n$t(ability.SUBSTITUTE): $t(ability_description.SUBSTITUTE)",
 		"TM_SKILL_SWAP": "$t(item_description.TM)\n$t(ability.SKILL_SWAP): $t(ability_description.SKILL_SWAP)",
-		"CHEF_HAT": "The holder will cook their Signature Dish between rounds.",
+		"CHEF_HAT": "The holder will cook their Signature Dish between rounds. Dishes made are removed if the hat is removed.",
 		"PICNIC_SET": "Immediately consumed when given. Give a SANDWICH to the holder and all ADJACENT allies. SANDWICH gives stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"SANDWICH": "Gives various stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",

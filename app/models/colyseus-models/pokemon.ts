@@ -9,11 +9,11 @@ import {
   DEFAULT_CRIT_CHANCE,
   DEFAULT_CRIT_POWER,
   DEFAULT_SPEED,
-  getAltFormForPlayer,
   RegionDetails
 } from "../../config"
 import { InimitableAbilities } from "../../config/game/abilities"
 import { SynergyTiers } from "../../config/game/synergies"
+import { getAltFormForPlayer } from "../../core/alt-form-logic"
 import type Simulation from "../../core/simulation"
 import type GameState from "../../rooms/states/game-state"
 import {
@@ -44,7 +44,6 @@ import {
   Item,
   ItemComponents,
   ItemRecipe,
-  MemoryDiscsBySynergy,
   OgerponMasks,
   SynergyGivenByItem,
   SynergyItems,
@@ -61,6 +60,7 @@ import {
 } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
+import type { Cook } from "../../types/interfaces/cook"
 import { isIn, removeInArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -121,6 +121,7 @@ export class Pokemon extends Schema implements IPokemon {
   baseSkill: Ability = Ability.DEFAULT
   baseMaxPP: number = 100
   baseAtk: number = 1
+  cook?: Cook
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()
@@ -186,10 +187,6 @@ export class Pokemon extends Schema implements IPokemon {
     // called after giving an item to the mon
   }
 
-  onItemRemoved(item: Item, player: Player) {
-    // called after an item is unequipped from the mon
-  }
-
   onAcquired(player: Player) {
     // called after buying or picking the mon
   }
@@ -249,59 +246,6 @@ export class Pokemon extends Schema implements IPokemon {
     }
 
     return regionSynergies.some((s) => this.types.has(s))
-  }
-
-  addItem(item: Item, player: Player) {
-    this.addItems([item], player)
-  }
-
-  addItems(items: Item[], player: Player) {
-    if (this.canHoldItems === false) return
-    for (const item of items) {
-      this.items.add(item)
-      this.onItemGiven(item, player)
-    }
-    player.updateSynergies()
-  }
-
-  removeItem(item: Item, player: Player) {
-    this.removeItems([item], player)
-  }
-
-  removeItems(items: Item[], player: Player) {
-    /* onItemRemoved effects need to be called after removing all items in case they trigger transformations (Pikachu Surfer, etc.)
-     in order:
-     1) remove items from the pokemon
-     2) check if any synergy should be removed
-     3) call onItemRemoved effects for each item removed
-    */
-    for (const item of items) {
-      this.items.delete(item)
-    }
-
-    const nativeTypes = new PokemonClasses[this.name](this.name).types
-    for (const item of items) {
-      const synergyRemoved = SynergyGivenByItem[item]
-      const otherSynergyItemsHeld = schemaValues(this.items).filter(
-        (i) => SynergyGivenByItem[i] === synergyRemoved
-      )
-
-      if (synergyRemoved && otherSynergyItemsHeld.length === 0) {
-        if (nativeTypes.has(synergyRemoved) === false) {
-          this.types.delete(synergyRemoved)
-        }
-        if (this.passive === Passive.RKS_SYSTEM) {
-          const memory = MemoryDiscsBySynergy[synergyRemoved]
-          if (player.items.includes(memory) === false && memory) {
-            player.items.push(memory)
-          }
-        }
-      }
-    }
-
-    for (const item of items) {
-      this.onItemRemoved(item, player)
-    }
   }
 
   applyStat(stat: Stat, value: number) {
@@ -5289,11 +5233,6 @@ export class PikachuSurfer extends Pokemon {
   range = 1
   skill = Ability.SURF
   passive = Passive.PIKACHU_SURFER
-  onItemRemoved(item: Item, player: Player): void {
-    if (item === Item.SURFBOARD) {
-      player.transformPokemon(this, Pkm.PIKACHU)
-    }
-  }
 }
 
 export class PikachuLibre extends Pokemon {
