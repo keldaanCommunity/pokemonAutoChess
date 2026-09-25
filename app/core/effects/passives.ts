@@ -1728,6 +1728,9 @@ export const PassiveEffects: Partial<
 
   [Passive.BLOSSOM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
+      if (pokemon.items.has(Item.SHINY_STONE)) {
+        inSpotlight = true
+      }
       if (pokemon.name === Pkm.CHERRIM && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
       } else if (pokemon.name === Pkm.CHERRIM_SUNLIGHT && !inSpotlight) {
