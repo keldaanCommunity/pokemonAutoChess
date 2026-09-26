@@ -288,7 +288,6 @@ export default abstract class PokemonState {
         specialDamage,
         trueDamage,
         totalDamage,
-        totalTakenDamage,
         isTripleAttack,
         hasAttackKilled,
         crit
