@@ -40,7 +40,6 @@ import {
   OrientationVector
 } from "../../../../utils/orientation"
 import { pickRandomIn, randomBetween } from "../../../../utils/random"
-import { durations } from "../../assets/pokemons/durations.json"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
@@ -4010,6 +4009,70 @@ export const AbilitiesAnimations: {
       depth: DEPTH.ABILITY_BELOW_POKEMON
     })
   ],
+
+  [Ability.SHATTERED_PSYCHE]: (args) => {
+    const mirrors: [{ x: number; y: number; reflectedPokemonId: string }] =
+      args.data?.mirrors ?? []
+    mirrors.forEach((mirror, i) => {
+      const [px, py] = transformEntityCoordinates(mirror.x, mirror.y, args.flip)
+      const mirrorContainer = args.scene.add.container(px, py)
+      const mirrorSprite = addAbilitySprite(
+        args.scene,
+        Ability.SHATTERED_PSYCHE,
+        args.ap,
+        [0, 0],
+        { scale: 1, animOptions: { repeat: -1 } }
+      )
+      const reflectedPokemon = args.pokemonsOnBoard.find(
+        (p) => p.pokemon?.id === mirror.reflectedPokemonId
+      )
+      if (mirrorSprite) mirrorContainer.add(mirrorSprite)
+
+      if (reflectedPokemon) {
+        const { index, shiny } = reflectedPokemon.pokemon
+        const frame = `${shiny ? PokemonTint.SHINY : PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
+        const reflectImage = args.scene.add.rexShatterImage(0, 0, index, frame)
+
+        mirrorContainer.add(reflectImage as any)
+        mirrorContainer.setScale(2).setAlpha(0.5).setDepth(DEPTH.ABILITY_MAJOR)
+        reflectImage.shatter()        
+        args.scene.add.tween({
+          targets: (reflectImage as any).faces,
+          alpha: 0,
+          localOffsetY: function () {
+            return -30 + Math.random() * 60
+          },
+          localOffsetX: function () {
+            return -30 + Math.random() * 60
+          },
+          ease: "Cubic",
+          duration: 1000,
+          delay: 500 + i * 500,
+          onStart: () => {
+            mirrorSprite?.destroy()
+          },
+          onComplete: () => {
+            mirrorContainer?.destroy()
+          }
+        })
+      }
+
+      setTimeout(
+        () =>
+          projectile({
+            ability: Ability.AURASPHERE,
+            scale: 2,
+            startCoords:
+              i === 0
+                ? "caster"
+                : [mirrors[i - 1].x, mirrors[i - 1].y, args.flip],
+            endCoords: [mirror.x, mirror.y, args.flip],
+            duration: 500
+          })(args),
+        i * 500
+      )
+    })
+  },
 
   ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
     const pokemon = pokemonsOnBoard.find(

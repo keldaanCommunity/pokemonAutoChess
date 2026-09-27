@@ -1809,7 +1809,8 @@
 		"HYDRO_VORTEX": "Hydro Vortex",
 		"INFERNO_OVERDRIVE": "Inferno Overdrive",
 		"FURIOUS_STAMPEDE": "Furious Stampede",
-		"NEVER_ENDING_NIGHTMARE": "Never-Ending Nightmare"
+		"NEVER_ENDING_NIGHTMARE": "Never-Ending Nightmare",
+		"SHATTERED_PSYCHE": "Shattered Psyche"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2398,7 +2399,8 @@
 		"HYDRO_VORTEX": "A vortex of water forms at the center of the enemy team for 3 seconds, pulling all enemies within a 2-tile radius to its center and dealing [15,30,60,100,200,SP] SPECIAL every 500ms with 30% DAMAGE_REDUCTION_OVER_DISTANCE.",
 		"INFERNO_OVERDRIVE": "Breathes a stream of intense fire toward the target, causing an explosion that deals [50,100,150,200,300,SP] SPECIAL to all enemies in a 2-tile radius and inflicts BURN for 5 seconds. Damage becomes TRUE if the enemy hit is already BURN.",
 		"FURIOUS_STAMPEDE": "A group of [8,12,16,20,24,SP] wild Tauros traverse the board on random rows, inflicting FLINCH for 3 seconds and dealing [20,25,40,65,100,SP] SPECIAL to all enemies in their path.",
-		"NEVER_ENDING_NIGHTMARE": "A dark aura surrounds the user in a 4-tile radius, inflicting SILENCE for 5 seconds. During that time, 5 phantom hands strike randomly at enemies in the area, dealing [30,60,100,150,200,SP] SPECIAL. Cursed enemies are more likely to be targeted and receive 30% more damage."
+		"NEVER_ENDING_NIGHTMARE": "A dark aura surrounds the user in a 4-tile radius, inflicting SILENCE for 5 seconds. During that time, 5 phantom hands strike randomly at enemies in the area, dealing [30,60,100,150,200,SP] SPECIAL. Cursed enemies are more likely to be targeted and receive 30% more damage.",
+		"SHATTERED_PSYCHE": "Spawns 3 mirrors around the enemy team, each one reflecting one random enemy. Then throws a psychic energy wave that bounces between the mirrors and shatter them. Enemies traversed by the wave take [10,20,40,80,150,SP] SPECIAL. Enemies reflected in the shattered mirrors take [20,40,80,150,300,SP] additional SPECIAL and get CONFUSION for 5 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3392,7 +3394,7 @@
 		"PETROLIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"PHOTONIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.LIGHT_THAT_BURNS_THE_SKY)",
 		"POISONIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.ACID_DOWNPOUR)",
-		"PSYCHIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"PSYCHIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SHATTERED_PSYCHE)",
 		"ROCKIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"SLIMIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"STEELIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",

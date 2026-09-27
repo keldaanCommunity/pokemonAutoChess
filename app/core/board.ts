@@ -543,7 +543,8 @@ export class Board {
 
   getClosestAvailablePlace(
     targetX: number,
-    targetY: number
+    targetY: number,
+    excludingCells: { x: number; y: number }[] = []
   ): { x: number; y: number; distance: number } | null {
     const candidateCells = new Array<{
       distance: number
@@ -552,7 +553,10 @@ export class Board {
     }>()
 
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value === undefined) {
+      if (
+        value === undefined &&
+        !excludingCells.some((cell) => cell.x === x && cell.y === y)
+      ) {
         candidateCells.push({
           x,
           y,
@@ -637,7 +641,10 @@ export class Board {
   ) {
     const previousEffects = this.boardEffects[y * this.columns + x]
     const entityOnCell = this.getEntityOnCell(x, y)
-    if (entityOnCell && entityOnCell.items.has(Item.HEAVY_DUTY_BOOTS) === false) {
+    if (
+      entityOnCell &&
+      entityOnCell.items.has(Item.HEAVY_DUTY_BOOTS) === false
+    ) {
       entityOnCell.effects.add(effect)
     }
 

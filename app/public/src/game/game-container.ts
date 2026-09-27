@@ -4,6 +4,7 @@ import { t } from "i18next"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin"
+import ShatterPlugin from "phaser4-rex-plugins/plugins/shatterimage-plugin"
 import React from "react"
 import { toast } from "react-toastify"
 import { ItemStats } from "../../../config"
@@ -322,6 +323,7 @@ class GameContainer {
     this.game.scale.on("resize", this.resize, this)
     if (this.game.renderer.type === Phaser.WEBGL) {
       this.game.plugins.install("rexOutline", OutlinePlugin, true)
+      this.game.plugins.install("rexShatter", ShatterPlugin, true)
     }
     const unsubscribeToPreferences = subscribeToPreferences(
       ({ antialiasing }) => {

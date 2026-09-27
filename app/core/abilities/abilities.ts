@@ -447,6 +447,7 @@ import { ShadowCloneStrategy } from "./shadow-clone"
 import { ShadowForceStrategy } from "./shadow-force"
 import { ShadowPunchStrategy } from "./shadow-punch"
 import { ShadowSneakStrategy } from "./shadow-sneak"
+import { ShatteredPsycheStrategy } from "./shattered-psyche"
 import { ShedTailStrategy } from "./shed-tail"
 import { SheerColdStrategy } from "./sheer-cold"
 import { ShellSideArmStrategy } from "./shell-side-arm"
@@ -1190,6 +1191,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHADOW_FORCE]: new ShadowForceStrategy(),
   [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy(),
   [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
+  [Ability.SHATTERED_PSYCHE]: new ShatteredPsycheStrategy(),
   [Ability.SHED_TAIL]: new ShedTailStrategy(),
   [Ability.SHEER_COLD]: new SheerColdStrategy(),
   [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
