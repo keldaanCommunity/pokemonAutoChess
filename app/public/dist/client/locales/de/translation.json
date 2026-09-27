@@ -1953,7 +1953,7 @@
 		"SILVER_WIND": "Stürme in die gegnerische Hinterlinie und füge jedem Feind auf dem Weg [20,40,80,160,SP] SPECIAL zu. Dann erhältst du 1 ATK, 1 DEF, 1 SPE_DEF, 10 AP und 10 SPEED",
 		"POISON_POWDER": "Stürme in die gegnerische Hinterlinie, verursache [20,40,80,160,SP] und verursache [3,3,3,6,SP] Sekunden lang POISONED auf jeden Feind auf dem Weg",
 		"ICY_WIND": "Verursacht [25,50,100,200,SP] SPECIAL an allen Zielen in einer Reihe und verringert deren SPEED um [10,20,40,80].",
-		"GIGATON_HAMMER": "Verursacht [100.200.400,800,SP] SPECIAL, bringt sich aber selbst für 6 Sekunden zum FATIGUE",
+		"GIGATON_HAMMER": "Verursacht [100,200,400,800,SP] SPECIAL, bringt sich aber selbst für 6 Sekunden zum FATIGUE",
 		"ACROBATICS": "Gib [20,40,80,160,SP] SPECIAL aus und bewege dich zu einer Zelle in ausreichender Entfernung vom Ziel. Bewege dich weiter weg, wenn du keinen Gegenstand hältst",
 		"ABSORB": "Fügt benachbarten Verbündeten [30,60,120,240,SP] SPECIAL zu und heilt [3,6,12,24,SP] HP.",
 		"ROLLOUT": "Verstärke die DEF um [2,5,10,20,SP] und verteile das 2-fache der DEF als SPECIAL",
