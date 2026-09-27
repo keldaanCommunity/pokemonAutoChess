@@ -1249,16 +1249,20 @@ export default class BoardManager {
     })
   }
 
-  addPortal() {
+  addPortal(animate = true) {
     if (this.portal) this.portal.destroy()
     const [x, y] = transformBoardCoordinates(3.5, 5)
-    this.portal = new Portal(this.scene, "portal", x, y).setScale(0)
-    this.scene.tweens.add({
-      targets: this.portal,
-      scale: 1.5,
-      duration: 5000,
-      ease: Phaser.Math.Easing.Sine.Out
-    })
+    this.portal = new Portal(this.scene, "portal", x, y).setScale(
+      animate ? 0 : 1.5
+    )
+    if (animate) {
+      this.scene.tweens.add({
+        targets: this.portal,
+        scale: 1.5,
+        duration: 5000,
+        ease: Phaser.Math.Easing.Sine.Out
+      })
+    }
   }
 
   portalTransition(isRedPlayer: boolean) {
@@ -1270,6 +1274,8 @@ export default class BoardManager {
       logger.error("No opponent found for portal transition")
       return
     }
+    // the sequencing below hangs off the portal's tween, and a board built mid-pick has none
+    if (!this.portal) this.addPortal(false)
 
     if (isRedPlayer) {
       // avatar goes first in the portal
