@@ -93,6 +93,19 @@ export class OnJoinCommand extends Command<
       }
 
       const u = await UserMetadata.findOne({ uid: auth.uid })
+        .select({
+          uid: 1,
+          displayName: 1,
+          elo: 1,
+          games: 1,
+          avatar: 1,
+          title: 1,
+          role: 1,
+          level: 1,
+          twitchLogin: 1,
+          twitchDisplayName: 1
+        })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -548,6 +561,8 @@ export class OnRoomChangeSpecialRule extends Command<
   async execute({ client, specialRule }) {
     try {
       const u = await UserMetadata.findOne({ uid: client.auth?.uid })
+        .select({ role: 1 })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -816,6 +831,8 @@ export class InitializeBotsCommand extends Command<
   async execute({ ownerId }) {
     try {
       const user = await UserMetadata.findOne({ uid: ownerId })
+        .select({ elo: 1 })
+        .lean()
       if (user) {
         const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 

@@ -62,6 +62,35 @@ export type IUserMetadataLean = Omit<
   pokemonCollection: Record<string, IPokemonCollectionItemLean>
 }
 
+/*
+ * Narrow projection for a single collection entry used when hydrating a Player.
+ * Used in GameRoom to feed PokemonCustoms and to compute avatar emotes.
+ * Only these fields are actually needed; dust/played/id are dropped to shrink the payload.
+ */
+export type IPokemonCollectionItemForPlayer = Pick<
+  IPokemonCollectionItemMongo,
+  "selectedEmotion" | "selectedShiny" | "unlocked"
+>
+
+/*
+ * Lean variant of the above. Used with IUserMetadataForPlayer
+ */
+export type IPokemonCollectionItemForPlayerLean = Pick<
+  IPokemonCollectionItemLean,
+  "selectedEmotion" | "selectedShiny" | "unlocked"
+>
+
+/*
+ * Narrow projection of UserMetadata used exclusively for Player in GameRoom
+ * remove all non-essential pokemonCollection subfields for smaller payloads
+ */
+export type IUserMetadataForPlayer = Pick<
+  IUserMetadataMongo,
+  "uid" | "displayName" | "elo" | "games" | "avatar" | "title" | "role"
+> & {
+  pokemonCollection: Record<string, IPokemonCollectionItemForPlayerLean>
+}
+
 // used in JSON responses and client-side before unpacking
 export interface IUserMetadataClient extends IUserMetadata {
   pokemonCollection: Map<string, IPokemonCollectionItemClient>

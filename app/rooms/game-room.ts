@@ -37,7 +37,7 @@ import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
   giveUserExp,
-  toLeanUserMetadata
+  toPlayerCollection
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -89,7 +89,10 @@ import { TradeStatus } from "../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
-import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type {
+  IPokemonCollectionItemMongo,
+  IUserMetadataForPlayer
+} from "../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -308,8 +311,22 @@ export default class GameRoom extends Room<{ state: GameState }> {
           player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
           player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
         } else {
-          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
-          const user = leanUser ? toLeanUserMetadata(leanUser) : null
+          const leanUser = await UserMetadata.findOne({ uid: id })
+            .select({
+              // Player only needs each entry's selectedEmotion/selectedShiny and the
+              // avatar entry's unlocked mask, so drop the rest of the collection
+              // (~1100 entries on end-game accounts) from the query.
+              "pokemonCollection.dust": 0,
+              "pokemonCollection.id": 0,
+              "pokemonCollection.played": 0,
+              "pokemonCollection._id": 0,
+              eventData: 0,
+              titles: 0
+            })
+            .lean<IUserMetadataForPlayer>()
+          const user = leanUser
+            ? { ...leanUser, pokemonCollection: toPlayerCollection(leanUser) }
+            : null
           if (user) {
             // init player
             const player = new Player(
@@ -728,6 +745,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onJoin(client: Client) {
     const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+      .select({ banned: 1 })
+      .lean()
     if (userProfile?.banned) {
       throw "Account banned"
     }

@@ -450,8 +450,12 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onJoin(client: Client) {
-    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
-    const user = leanUser ? toLeanUserMetadata(leanUser) : null
+    // onReconnect replays this hook. The room already holds the user's document from
+    // the original join (cleared again by OnLeaveCommand), so reuse it rather than
+    // re-fetching the full profile - pokemonCollection included - on every refresh.
+    const user =
+      this.users.get(client.auth.uid) ??
+      (await this.loadUserMetadata(client.auth.uid))
     try {
       if (user?.banned) {
         throw new Error("Account banned")
@@ -472,6 +476,13 @@ export default class CustomLobbyRoom extends Room {
     }
 
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
+  }
+
+  private async loadUserMetadata(
+    uid: string
+  ): Promise<IUserMetadataMongo | null> {
+    const leanUser = await UserMetadata.findOne({ uid }).lean()
+    return leanUser ? toLeanUserMetadata(leanUser) : null
   }
 
   async onDrop(client: Client, code: number) {

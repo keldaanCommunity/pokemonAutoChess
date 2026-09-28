@@ -5,7 +5,9 @@ import { CollectionUtils } from "../../core/collection"
 import { notificationsService } from "../../services/notifications"
 import { Emotion, Role, Title } from "../../types"
 import type {
+  IPokemonCollectionItemForPlayer,
   IPokemonCollectionItemMongo,
+  IUserMetadataForPlayer,
   IUserMetadataJSON,
   IUserMetadataLean,
   IUserMetadataMongo
@@ -138,6 +140,7 @@ userMetadataSchema.index(
   { displayName: 1 },
   { collation: { locale: "en", strength: 2 } }
 )
+userMetadataSchema.index({ uid: 1 })
 userMetadataSchema.index({ elo: 1 })
 userMetadataSchema.index({ titles: 1 })
 userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
@@ -157,17 +160,41 @@ export function toLeanUserMetadata(
   for (const [key, item] of collectionEntries) {
     pokemonCollection.set(key, {
       ...item,
-      unlocked: Buffer.isBuffer(item?.unlocked)
-        ? item.unlocked
-        : item?.unlocked?.buffer
-          ? Buffer.from(item.unlocked.buffer)
-          : Buffer.alloc(5, 0)
+      unlocked: toUnlockedBuffer(item?.unlocked)
     })
   }
   return {
     ...user,
     pokemonCollection
   } as IUserMetadataMongo
+}
+
+/**
+ * Build the collection map handed to the Player constructor from a projected
+ * (dust/played/id-stripped) document. Missing entries are filled with the same
+ * defaults the mongoose schema would have applied, so a sparse projection reads
+ * identically to a full one.
+ */
+export function toPlayerCollection(
+  user: IUserMetadataForPlayer
+): Map<string, IPokemonCollectionItemForPlayer> {
+  const pokemonCollection = new Map<string, IPokemonCollectionItemForPlayer>()
+  for (const [key, item] of Object.entries(user.pokemonCollection ?? {})) {
+    pokemonCollection.set(key, {
+      selectedEmotion: item?.selectedEmotion ?? null,
+      selectedShiny: item?.selectedShiny ?? false,
+      unlocked: toUnlockedBuffer(item?.unlocked)
+    })
+  }
+  return pokemonCollection
+}
+
+function toUnlockedBuffer(
+  unlocked: Uint8Array | { buffer: ArrayBuffer } | undefined
+): Uint8Array {
+  if (Buffer.isBuffer(unlocked)) return unlocked
+  if (unlocked?.buffer) return Buffer.from(unlocked.buffer)
+  return Buffer.alloc(5, 0)
 }
 
 export function toUserMetadataJSON(user): IUserMetadataJSON {

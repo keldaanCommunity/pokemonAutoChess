@@ -2,6 +2,7 @@ import { CollectionEmotions, Emotion, type PkmWithCustom } from "../types"
 import { PkmIndex } from "../types/enum/Pokemon"
 import type {
   IPokemonCollectionItemClient,
+  IPokemonCollectionItemForPlayer,
   IPokemonCollectionItemMongo,
   IPokemonCollectionItemUnpacked
 } from "../types/interfaces/UserMetadata"
@@ -129,7 +130,10 @@ export class CollectionUtils {
    * Get list of emotions from emotion 5 bytes mask on MongoDB
    */
   static getEmotionsUnlocked(
-    item?: IPokemonCollectionItemMongo | IPokemonCollectionItemClient
+    item?:
+      | IPokemonCollectionItemMongo
+      | IPokemonCollectionItemClient
+      | IPokemonCollectionItemForPlayer
   ): {
     emotions: Emotion[]
     shinyEmotions: Emotion[]
