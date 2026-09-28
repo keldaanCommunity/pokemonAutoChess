@@ -366,6 +366,7 @@ export enum Item {
   ROCKIUM_Z = "ROCKIUM_Z",
   SLIMIUM_Z = "SLIMIUM_Z",
   STEELIUM_Z = "STEELIUM_Z",
+  STELLARIUM_Z = "STELLARIUM_Z",
   WATERIUM_Z = "WATERIUM_Z",
   BERRIES_GIFT = "BERRIES_GIFT",
   SWEETS_GIFT = "SWEETS_GIFT",
@@ -396,40 +397,6 @@ export enum Item {
   PINK_NECTAR = "PINK_NECTAR",
   YELLOW_NECTAR = "YELLOW_NECTAR"
 }
-
-export const ZCrystals = [
-  Item.ALUMINIUM_Z,
-  Item.ANTHROPIUM_Z,
-  Item.AQUARIUM_Z,
-  Item.BUGINIUM_Z,
-  Item.COLOSSIUM_Z,
-  Item.CONCERTIUM_Z,
-  Item.DARKIUM_Z,
-  Item.DELICIUM_Z,
-  Item.DIAPERIUM_Z,
-  Item.DRAGONIUM_Z,
-  Item.ELECTRIUM_Z,
-  Item.FAIRIUM_Z,
-  Item.FERALIUM_Z,
-  Item.FIELDIUM_Z,
-  Item.FIGHTIUM_Z,
-  Item.FIRIUM_Z,
-  Item.FLYNIUM_Z,
-  Item.GHOSTIUM_Z,
-  Item.GRASSIUM_Z,
-  Item.GROUNDIUM_Z,
-  Item.ICIUM_Z,
-  Item.NORMALIUM_Z,
-  Item.PETALIUM_Z,
-  Item.PETROLIUM_Z,
-  Item.PHOTONIUM_Z,
-  Item.POISONIUM_Z,
-  Item.PSYCHIUM_Z,
-  Item.ROCKIUM_Z,
-  Item.SLIMIUM_Z,
-  Item.STEELIUM_Z,
-  Item.WATERIUM_Z
-] satisfies Item[]
 
 export const MemoryDiscs = [
   Item.FIRE_MEMORY,
@@ -723,6 +690,7 @@ export const ShinyItems = [
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.TERA_ORB,
+  Item.Z_RING,
   Item.RED_SCALE
 ] satisfies Item[]
 
@@ -1048,6 +1016,80 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
 export const TMPerAbility = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
+
+export const ZCrystals = [
+  Item.ALUMINIUM_Z,
+  Item.ANTHROPIUM_Z,
+  Item.AQUARIUM_Z,
+  Item.BUGINIUM_Z,
+  Item.COLOSSIUM_Z,
+  Item.CONCERTIUM_Z,
+  Item.DARKIUM_Z,
+  Item.DELICIUM_Z,
+  Item.DIAPERIUM_Z,
+  Item.DRAGONIUM_Z,
+  Item.ELECTRIUM_Z,
+  Item.FAIRIUM_Z,
+  Item.FERALIUM_Z,
+  Item.FIELDIUM_Z,
+  Item.FIGHTIUM_Z,
+  Item.FIRIUM_Z,
+  Item.FLYNIUM_Z,
+  Item.GHOSTIUM_Z,
+  Item.GRASSIUM_Z,
+  Item.GROUNDIUM_Z,
+  Item.ICIUM_Z,
+  Item.NORMALIUM_Z,
+  Item.PETALIUM_Z,
+  Item.PETROLIUM_Z,
+  Item.PHOTONIUM_Z,
+  Item.POISONIUM_Z,
+  Item.PSYCHIUM_Z,
+  Item.ROCKIUM_Z,
+  Item.SLIMIUM_Z,
+  Item.STEELIUM_Z,
+  Item.STELLARIUM_Z,
+  Item.WATERIUM_Z
+] satisfies Item[]
+
+export type ZCrystal = (typeof ZCrystals)[number]
+
+export const ZCrystalsBySynergy: {
+  [s in Synergy]: ZCrystal
+} = {
+  [Synergy.NORMAL]: Item.NORMALIUM_Z,
+  [Synergy.GRASS]: Item.GRASSIUM_Z,
+  [Synergy.FIRE]: Item.FIRIUM_Z,
+  [Synergy.WATER]: Item.WATERIUM_Z,
+  [Synergy.ELECTRIC]: Item.ELECTRIUM_Z,
+  [Synergy.FIGHTING]: Item.FIGHTIUM_Z,
+  [Synergy.PSYCHIC]: Item.PSYCHIUM_Z,
+  [Synergy.DARK]: Item.DARKIUM_Z,
+  [Synergy.STEEL]: Item.STEELIUM_Z,
+  [Synergy.GROUND]: Item.GROUNDIUM_Z,
+  [Synergy.POISON]: Item.POISONIUM_Z,
+  [Synergy.DRAGON]: Item.DRAGONIUM_Z,
+  [Synergy.FIELD]: Item.FIELDIUM_Z,
+  [Synergy.MONSTER]: Item.COLOSSIUM_Z,
+  [Synergy.HUMAN]: Item.ANTHROPIUM_Z,
+  [Synergy.AQUATIC]: Item.AQUARIUM_Z,
+  [Synergy.BUG]: Item.BUGINIUM_Z,
+  [Synergy.FLYING]: Item.FLYNIUM_Z,
+  [Synergy.FLORA]: Item.PETALIUM_Z,
+  [Synergy.ROCK]: Item.ROCKIUM_Z,
+  [Synergy.GHOST]: Item.GHOSTIUM_Z,
+  [Synergy.FAIRY]: Item.FAIRIUM_Z,
+  [Synergy.ICE]: Item.ICIUM_Z,
+  [Synergy.FOSSIL]: Item.PETROLIUM_Z,
+  [Synergy.SOUND]: Item.CONCERTIUM_Z,
+  [Synergy.ARTIFICIAL]: Item.ALUMINIUM_Z,
+  [Synergy.LIGHT]: Item.PHOTONIUM_Z,
+  [Synergy.WILD]: Item.FERALIUM_Z,
+  [Synergy.BABY]: Item.DIAPERIUM_Z,
+  [Synergy.AMORPHOUS]: Item.SLIMIUM_Z,
+  [Synergy.GOURMET]: Item.DELICIUM_Z,
+  [Synergy.STELLAR]: Item.STELLARIUM_Z
+}
 
 export const Dishes = [
   Item.OLIVE_OIL,

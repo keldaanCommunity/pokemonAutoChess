@@ -1,0 +1,67 @@
+import { Ability } from "./Ability"
+import { Item, type ZCrystal } from "./Item"
+
+export const ZMoves = [
+  Ability.DEFAULT, // TODO: remove when all z-moves are implemented
+  Ability.ACID_DOWNPOUR,
+  Ability.ALL_OUT_PUMMELING,
+  Ability.BABY_BOOM,
+  Ability.BLACK_HOLE_ECLIPSE,
+  Ability.BLOOM_DOOM,
+  Ability.BREAKNECK_BLITZ,
+  Ability.CALL_OF_THE_WILD,
+  Ability.DEVASTATING_DRAKE,
+  Ability.FOOD_FIGHT,
+  Ability.FURIOUS_STAMPEDE,
+  Ability.GIANT_RAFFLESIA,
+  Ability.GIGAVOLT_HAVOC,
+  Ability.HYDRO_VORTEX,
+  Ability.INFERNO_OVERDRIVE,
+  Ability.KAIJU_ATTACK,
+  Ability.LIGHT_THAT_BURNS_THE_SKY,
+  Ability.NEVER_ENDING_NIGHTMARE,
+  Ability.OCEANIC_OPERETTA,
+  Ability.STOKED_SPARKSURFER,
+  Ability.SAVAGE_SPIN_OUT,
+  Ability.SHATTERED_PSYCHE,
+  Ability.SUPERSONIC_SKYSTRIKE,
+  Ability.TECTONIC_RAGE,
+  Ability.TWINKLE_TACKLE
+] satisfies Ability[]
+
+export type ZMove = (typeof ZMoves)[number]
+
+export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
+  [Item.ALUMINIUM_Z]: Ability.DEFAULT,
+  [Item.ANTHROPIUM_Z]: Ability.DEFAULT,
+  [Item.AQUARIUM_Z]: Ability.STOKED_SPARKSURFER,
+  [Item.BUGINIUM_Z]: Ability.SAVAGE_SPIN_OUT,
+  [Item.COLOSSIUM_Z]: Ability.KAIJU_ATTACK,
+  [Item.CONCERTIUM_Z]: Ability.OCEANIC_OPERETTA,
+  [Item.DARKIUM_Z]: Ability.BLACK_HOLE_ECLIPSE,
+  [Item.DELICIUM_Z]: Ability.FOOD_FIGHT,
+  [Item.DIAPERIUM_Z]: Ability.BABY_BOOM,
+  [Item.DRAGONIUM_Z]: Ability.DEVASTATING_DRAKE,
+  [Item.ELECTRIUM_Z]: Ability.GIGAVOLT_HAVOC,
+  [Item.FAIRIUM_Z]: Ability.TWINKLE_TACKLE,
+  [Item.FERALIUM_Z]: Ability.CALL_OF_THE_WILD,
+  [Item.FIELDIUM_Z]: Ability.FURIOUS_STAMPEDE,
+  [Item.FIGHTIUM_Z]: Ability.ALL_OUT_PUMMELING,
+  [Item.FIRIUM_Z]: Ability.INFERNO_OVERDRIVE,
+  [Item.FLYNIUM_Z]: Ability.SUPERSONIC_SKYSTRIKE,
+  [Item.GHOSTIUM_Z]: Ability.NEVER_ENDING_NIGHTMARE,
+  [Item.GRASSIUM_Z]: Ability.BLOOM_DOOM,
+  [Item.GROUNDIUM_Z]: Ability.TECTONIC_RAGE,
+  [Item.ICIUM_Z]: Ability.DEFAULT,
+  [Item.NORMALIUM_Z]: Ability.BREAKNECK_BLITZ,
+  [Item.PETALIUM_Z]: Ability.GIANT_RAFFLESIA,
+  [Item.PETROLIUM_Z]: Ability.DEFAULT,
+  [Item.PHOTONIUM_Z]: Ability.LIGHT_THAT_BURNS_THE_SKY,
+  [Item.POISONIUM_Z]: Ability.ACID_DOWNPOUR,
+  [Item.PSYCHIUM_Z]: Ability.SHATTERED_PSYCHE,
+  [Item.ROCKIUM_Z]: Ability.DEFAULT,
+  [Item.SLIMIUM_Z]: Ability.DEFAULT,
+  [Item.STELLARIUM_Z]: Ability.DEFAULT,
+  [Item.STEELIUM_Z]: Ability.DEFAULT,
+  [Item.WATERIUM_Z]: Ability.HYDRO_VORTEX
+}

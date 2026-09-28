@@ -88,6 +88,8 @@ export default function GameChoice() {
     message = t("player_choices.choose_wand")
   } else if (choice.type === "gifts") {
     message = t("player_choices.choose_gift")
+  } else if (choice.type === "zmoves") {
+    message = t("player_choices.choose_zmove")
   }
 
   return (

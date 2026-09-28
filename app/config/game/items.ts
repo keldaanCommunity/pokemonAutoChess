@@ -126,3 +126,5 @@ export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
   [Item.BIG_MUSHROOM]: 2,
   [Item.BALM_MUSHROOM]: 5
 }
+
+export const ZMOVE_MAX_PP = 200

@@ -73,7 +73,8 @@ import {
   type Item,
   RemovableItems,
   UnholdableItemsToSaveForStats,
-  Wands
+  Wands,
+  ZCrystals
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
@@ -1432,6 +1433,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const item = choice.items[choiceIndex]
       if (isIn(Gifts, item)) {
         this.pickGift(item, player)
+      } else if (isIn(ZCrystals, item)) {
+        player.pickZMove(item)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()

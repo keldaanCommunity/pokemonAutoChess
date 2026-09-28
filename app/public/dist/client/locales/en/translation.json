@@ -3397,6 +3397,7 @@
 		"PSYCHIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SHATTERED_PSYCHE)",
 		"ROCKIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"SLIMIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"STELLARIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.TERA_BLAST)",
 		"STEELIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"WATERIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.HYDRO_VORTEX)",
 		"POTION": "A potion that heals 10 player HP of the team",
@@ -4464,6 +4465,7 @@
 		"choose_legendary": "Choose one Legendary for your team. You only get to choose once, make it count!",
 		"choose_wand": "Choose one Wand to give additional effects to your Fairy Pokémon attacks",
 		"choose_gift": "Choose one gift to send to your partner",
+		"choose_zmove": "Choose the desired Z-Move for your Pokémon",
 		"free_slot_hint": "You must have one free slot on the bench, or two for Duos",
 		"more_choices": "{{count}} more choice(s) after this one!",
 		"cost_amount": "Cost: {{cost}} GOLD"

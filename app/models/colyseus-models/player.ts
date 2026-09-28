@@ -7,6 +7,7 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
+import { ZMOVE_MAX_PP } from "../../config/game/items"
 import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
@@ -22,7 +23,8 @@ import {
   FlowerPots,
   type IPlayer,
   type Role,
-  Title
+  Title,
+  TMPerAbility
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
@@ -47,7 +49,8 @@ import {
   TMsGold,
   TMsSilver,
   Wands,
-  WeatherRocks
+  WeatherRocks,
+  type ZCrystal
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -63,6 +66,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { ZMoves, ZMovesByCrystal } from "../../types/enum/ZMoves"
 import {
   type GameStats,
   initialGameStats
@@ -1075,6 +1079,21 @@ export default class Player extends Schema implements IPlayer {
       this.wanderers.set(id, wanderer)
     }, delay)
     return wanderer
+  }
+
+  pickZMove(crystal: ZCrystal) {
+    const zMove = ZMovesByCrystal[crystal]
+    if (!zMove) return null
+    const pokemonWithZRing = schemaValues(this.board).find(
+      (p) => p.items.has(Item.Z_RING) && !isIn(ZMoves, p.skill)
+    )
+    if (pokemonWithZRing) {
+      if(pokemonWithZRing.tm !== Ability.DEFAULT) {
+        this.items.push(TMPerAbility[pokemonWithZRing.tm])
+      }
+      pokemonWithZRing.skill = zMove
+      pokemonWithZRing.maxPP = ZMOVE_MAX_PP
+    }
   }
 }
 

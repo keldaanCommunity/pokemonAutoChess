@@ -1,6 +1,8 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
+import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../../models/pve-stages"
 import { Title, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
@@ -25,7 +27,8 @@ import {
   Sweets,
   SynergyGivenByItem,
   SynergyStones,
-  TMs
+  TMs,
+  ZCrystalsBySynergy
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
@@ -1613,5 +1616,30 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
       }
     })
+  ],
+
+  [Item.Z_RING]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      player.choices.push(
+        new PlayerChoice({
+          type: "zmoves",
+          items: schemaValues(pokemon.types).map(
+            (type) => ZCrystalsBySynergy[type]
+          )
+        })
+      )
+      return true
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      const baseData = getPokemonData(pokemon.name)
+      pokemon.skill = baseData.skill
+      pokemon.maxPP = baseData.pp
+    })
+    // TODO: after merging master
+    /*new OnItemUnequippedEffect((pokemon) => {
+      const baseData = getPokemonData(pokemon.name)
+      pokemon.skill = baseData.skill
+      pokemon.maxPP = baseData.pp
+    })*/
   ]
 }
