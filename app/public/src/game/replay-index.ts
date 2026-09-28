@@ -145,8 +145,8 @@ export interface ReplayIndex {
   durationMs: number
   segments: ReplaySegment[] // phase-within-stage boundaries, anchored at/after gameStartMs
   stages: ReplayStageMark[] // first t per distinct stage
-  events: ReplayEvent[] // eliminations sorted by t; drive the scrubber's event markers
-  // per-player actions (reroll/buy/sell/…) sorted by t, each carries uid (town/rule rows uid-less); separate from events so they don't flood the scrubber
+  events: ReplayEvent[] // eliminations sorted by t; shown in the event log
+  // per-player actions sorted by t, kept apart from events so the log can filter them
   actions: ReplayEvent[]
   // in-game name per uid (per-player log column / tab labels)
   playerNames: Record<string, string>
@@ -770,7 +770,7 @@ export function buildReplayIndex(
   let durationMs = 0
 
   const segments: ReplaySegment[] = []
-  const events: ReplayEvent[] = [] // eliminations only (scrubber markers + log)
+  const events: ReplayEvent[] = [] // eliminations only (event log)
   const actions: ReplayEvent[] = [] // pov reroll/buy/sell/level/pick (log only)
   const combatUnits: Record<
     number,
