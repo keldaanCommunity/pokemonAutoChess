@@ -146,7 +146,12 @@ userMetadataSchema.index({ titles: 1 })
 userMetadataSchema.index({ twitchUserId: 1 }, { unique: true, sparse: true })
 userMetadataSchema.index({ twitchLogin: 1 }, { unique: true, sparse: true })
 
-export default model<IUserMetadataMongo>("UserMetadata", userMetadataSchema)
+const UserMetadataModel = model<IUserMetadataMongo>(
+  "UserMetadata",
+  userMetadataSchema
+)
+
+export default UserMetadataModel
 
 export function toLeanUserMetadata(
   user: IUserMetadataLean | IUserMetadataMongo
@@ -195,6 +200,39 @@ function toUnlockedBuffer(
   if (Buffer.isBuffer(unlocked)) return unlocked
   if (unlocked?.buffer) return Buffer.from(unlocked.buffer)
   return Buffer.alloc(5, 0)
+}
+
+/**
+ * Indexes of the collection entries that have been played at least once.
+ *
+ * COLLECTOR is the only title that depends on the collection,
+ * so we use a dedicated query to check it
+ * so the entire collection doesn't have to be loaded into memory
+ *
+ * Must be called after the played counters have been incremented, otherwise the game
+ * that completes a set would not count towards it.
+ */
+export async function getPlayedPokemonIndexes(
+  uid: string
+): Promise<Set<string>> {
+  // pokemonCollection is a BSON document, so $objectToArray turns it into {k, v} rows
+  // and all we need are the keys of the entries whose played counter is above zero.
+  const rows = await UserMetadataModel.collection
+    .aggregate<{ index: string }>([
+      { $match: { uid } },
+      {
+        $project: {
+          _id: 0,
+          entries: { $objectToArray: { $ifNull: ["$pokemonCollection", {}] } }
+        }
+      },
+      { $unwind: "$entries" },
+      { $match: { "entries.v.played": { $gt: 0 } } },
+      { $project: { _id: 0, index: "$entries.k" } }
+    ])
+    .toArray()
+
+  return new Set(rows.map((row) => row.index))
 }
 
 export function toUserMetadataJSON(user): IUserMetadataJSON {

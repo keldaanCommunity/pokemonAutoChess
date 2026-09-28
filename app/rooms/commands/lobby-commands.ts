@@ -75,19 +75,16 @@ export class OnJoinCommand extends Command<
         const randomName = generateRandomName(starterPokemon)
         const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
         const starterCollection = new Map<string, IPokemonCollectionItemMongo>()
+        const starterUnlocked = Buffer.alloc(5, 0)
         const starterCollectionItem: IPokemonCollectionItemMongo = {
           id: PkmIndex[starterPokemon],
-          unlocked: Buffer.alloc(5, 0),
+          unlocked: starterUnlocked,
           dust: 0,
           selectedEmotion: Emotion.NORMAL,
           selectedShiny: false,
           played: 0
         }
-        CollectionUtils.unlockEmotion(
-          starterCollectionItem.unlocked,
-          Emotion.NORMAL,
-          false
-        )
+        CollectionUtils.unlockEmotion(starterUnlocked, Emotion.NORMAL, false)
         starterCollection.set(PkmIndex[starterPokemon], starterCollectionItem)
 
         await UserMetadata.create({
@@ -372,6 +369,7 @@ export class ChangeAvatarCommand extends Command<
       const collectionItem = mongoUser.pokemonCollection.get(index)
       if (
         !collectionItem ||
+        !collectionItem.unlocked ||
         !CollectionUtils.hasUnlocked(collectionItem.unlocked, emotion, shiny)
       )
         return

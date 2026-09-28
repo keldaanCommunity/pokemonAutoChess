@@ -62,7 +62,6 @@ import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
-  Emotion,
   FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
@@ -258,23 +257,14 @@ export class OnPokemonCatchCommand extends Command<
         const shardsGained = wanderer.shiny
           ? SHARDS_PER_SHINY_UNOWN_WANDERER
           : SHARDS_PER_UNOWN_WANDERER
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (u) {
-          const c = u.pokemonCollection.get(unownIndex)
-          if (c) {
-            c.dust += shardsGained
-          } else {
-            u.pokemonCollection.set(unownIndex, {
-              id: unownIndex,
-              unlocked: Buffer.alloc(5, 0),
-              dust: shardsGained,
-              selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false,
-              played: 0
-            })
-          }
-          u.save()
-        }
+        // $inc instead of loading the whole user document to read dust, add to it and
+        // save it back. It cannot lose a concurrent update, it transfers nothing, and it
+        // creates a thin { dust } entry for a pokemon the user does not own yet - which
+        // the collection readers treat as 0 dust and no unlocked emotion.
+        await UserMetadata.updateOne(
+          { uid: client.auth.uid },
+          { $inc: { [`pokemonCollection.${unownIndex}.dust`]: shardsGained } }
+        )
       }
     } else if (wanderer.type === WandererType.CATCHABLE) {
       const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)

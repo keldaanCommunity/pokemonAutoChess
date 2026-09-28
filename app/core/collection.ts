@@ -7,7 +7,16 @@ import type {
   IPokemonCollectionItemUnpacked
 } from "../types/interfaces/UserMetadata"
 
-// Utility functions for working with collection and the optimized unlocked field
+/*
+Utility functions for working with collection and the optimized unlocked field.
+
+A collection entry is not guaranteed to carry every field. An $inc on a single counter
+writes a bare entry holding only that counter - `{ played: n }` for the settlement
+counter, `{ dust: n }` for Wanderer shards - so a pokemon the player has only played,
+or only caught shards for, has no unlocked mask, no id and none of the other fields.
+Every helper here therefore treats a missing field as its default (no emotion unlocked,
+0 dust, 0 played) rather than assuming the full shape.
+*/
 export class CollectionUtils {
   private static readonly EMOTION_VALUES = CollectionEmotions
 
@@ -28,6 +37,7 @@ export class CollectionUtils {
       return false
     }
     const collectionItem = collection.get(index)!
+    if (!collectionItem.unlocked) return false
     return CollectionUtils.hasUnlocked(
       collectionItem.unlocked,
       card.emotion ?? Emotion.NORMAL,
@@ -49,10 +59,10 @@ export class CollectionUtils {
   ): IPokemonCollectionItemClient {
     return {
       id: item.id,
-      dust: item.dust,
-      played: item.played,
-      selectedShiny: item.selectedShiny,
-      selectedEmotion: item.selectedEmotion,
+      dust: item.dust ?? 0,
+      played: item.played ?? 0,
+      selectedShiny: item.selectedShiny ?? false,
+      selectedEmotion: item.selectedEmotion ?? null,
       unlockedb64: item.unlocked
         ? CollectionUtils.encodeBase64(item.unlocked)
         : ""
@@ -138,15 +148,18 @@ export class CollectionUtils {
     emotions: Emotion[]
     shinyEmotions: Emotion[]
   } {
-    const emotions: Emotion[] = []
-    const shinyEmotions: Emotion[] = []
-
-    if (!item) return { emotions, shinyEmotions }
+    if (!item) return { emotions: [], shinyEmotions: [] }
 
     const mask =
       "unlockedb64" in item
         ? CollectionUtils.decodeBase64(item.unlockedb64)
         : item.unlocked
+
+    // no mask = no emotion unlocked
+    if (!mask) return { emotions: [], shinyEmotions: [] }
+
+    const emotions: Emotion[] = []
+    const shinyEmotions: Emotion[] = []
 
     // Extract normal emotions (bits 0-19)
     for (let i = 0; i < 20; i++) {
