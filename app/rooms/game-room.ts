@@ -1004,7 +1004,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     // The collection is excluded entirely: nothing here mutates it, and COLLECTOR - the
-    // only thing that needs it - is resolved by its own query after the save below.
+    // only thing that needs it - is resolved with its own query below.
     const usr = await UserMetadata.findOne({ uid: player.id }).select({
       pokemonCollection: 0
     })
