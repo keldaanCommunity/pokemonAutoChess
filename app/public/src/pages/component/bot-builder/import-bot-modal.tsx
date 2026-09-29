@@ -44,7 +44,7 @@ export default function ImportBotModal(props: {
       header={t("import")}
       body={
         <>
-          <p>{t("import_bot")}</p>
+          <p>{t("bot_builder.import_bot")}</p>
           <div
             style={{
               display: "flex",
@@ -53,7 +53,7 @@ export default function ImportBotModal(props: {
               marginBottom: "0.5em"
             }}
           >
-            <label htmlFor="bot_select">{t("existing_bot")}</label>
+            <label htmlFor="bot_select">{t("bot_builder.existing_bot")}</label>
             <select
               id="bot_select"
               defaultValue=""
