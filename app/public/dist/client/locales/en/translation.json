@@ -5093,7 +5093,7 @@
 			"gift": "Gifts are items given to your team partner when you pick them"
 		},
 		"data": {
-			"data_description": "Various data about the game for the geeks",
+			"data_description": "Reference tables for the rates and formulas used by the game.",
 			"tiers_by_level_title": "Tiers by level",
 			"tiers_by_level_description": "The odds of getting a certain rarity of Pokémon in your shop changes with your player level. The higher the level, the higher the rarity and the cost in the shop.",
 			"experience_by_rank": "Experience by rank",
