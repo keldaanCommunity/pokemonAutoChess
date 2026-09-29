@@ -371,7 +371,7 @@ export default class Player extends Schema implements IPlayer {
       updatedSynergies
     )
     let needsRecomputing = artifNeedsRecomputing || normalNeedsRecomputing
-    while (needsRecomputing) {
+    for (let i = 0; needsRecomputing && i < 10; i++) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item or a scarf, since many edgecases may need to be 
       adressed when losing a type (Axew double dragon + artif item for example) ;
