@@ -288,7 +288,7 @@ export function MainSidebar(props: MainSidebarProps) {
             profileLevel >= GADGETS.bot_builder.levelRequired) ||
             profile?.role === Role.ADMIN) && (
             <NavLink svg="bot" onClick={() => navigate("/bot-builder")}>
-              {t("bot_builder")}
+              {t("gadget.bot_builder")}
             </NavLink>
           )}
 
