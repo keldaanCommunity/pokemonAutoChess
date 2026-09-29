@@ -32,6 +32,7 @@
 - Change Unown-V (VOLT): No longer consume PP and trigger on-cast effects for each thunder shock. Clarified description. PP 90 → 60
 - Change Unown-Y (YOGA): No longer consume PP and trigger on-cast effects. Clarified description.
 - Nerf Attack Order (Vespiqueen): base damage [20,40,60,120] → [10,20,30,60] SPECIAL
+- Buff Wartortle: DEF/SPE_DEF 3 → 4 ; Buff Blastoise: DEF/SPE_DEF 4 → 6, ATK 20 → 23
 
 # Changes to Synergies
 
