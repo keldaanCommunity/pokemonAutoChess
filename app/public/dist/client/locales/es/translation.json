@@ -1799,7 +1799,7 @@
 		"U_TURN": "Otorga [15,30,50,100,SP] SHIELD, intercambia posición con el objetivo que está CHARM durante 1 segundo.",
 		"EXPLOSION": "Otorga [50,100,200,400,SP] de SPECIAL a todos los enemigos en una casilla ADJACENT. También daña al usuario.",
 		"CHLOROBLAST": "Inflige [50,100,200,400,SP] SPECIAL a todos los Pokémon enemigos en una casilla ADJACENT. El usuario pierde un 50% de sus HP máximos.",
-		"NIGHTMARE": "Deja FATIGUE a todo el equipo enemigo durante [2,4,6,10,ND=1] segundos. Cualquier enemigo que sufra una maldición GHOST recibe [25,50,100,200,SP] SPECIAL.",
+		"NIGHTMARE": "Deja FATIGUE a todo el equipo enemigo durante [2,4,6,10,ND=1] segundos. Cualquier enemigo que sufra un estado negativo recibe [25,50,100,200,SP] SPECIAL.",
 		"CLANGOROUS_SOUL": "Se mejora a sí mismo y a los aliados en una casilla ADJACENT en ATK, DEF y SPE_DEF [2,4,8,16,SP].",
 		"BONEMERANG": "Lanza un boomerang de hueso a través del equipo enemigo, infligiendo 2x[15,30,60,120,SP] de SPECIAL a aquellos Pokémon enemigos en su camino.",
 		"SHADOW_BONE": "Tira un hueso que contiene un espíritu, realizando [30,60,120,240,SP] SPECIAL a cada Pokémon en su camino con un [50,LK]% de reducir la DEF en [6,SP].",

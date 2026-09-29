@@ -1799,7 +1799,7 @@
 		"U_TURN": "[15,30,50,100,SP]의 SHIELD를 얻고, 대상과 위치를 바꾸어 1초 동안 CHARM 상태로 만든다.",
 		"EXPLOSION": "자신을 포함한 ADJACENT 상대에게 [50,100,200,400,SP]의 SPECIAL를 입힌다.",
 		"CHLOROBLAST": "ADJACENT 상대에게 [50,100,200,400,SP]의 SPECIAL를 입힌다. 자신은 최대 HP의 50%만큼 피해를 받는다.",
-		"NIGHTMARE": "[2,4,6,10,SP]초 동안 모든 상대를 FATIGUE 상태로 만든다. GHOST 저주에 걸린 상대는 [25,50,100,200,SP]의 SPECIAL를 추가로 받는다.",
+		"NIGHTMARE": "[2,4,6,10,SP]초 동안 모든 상대를 FATIGUE 상태로 만든다. 부정적인 상태이상에 걸린 상대는 [25,50,100,200,SP]의 SPECIAL를 추가로 받는다.",
 		"CLANGOROUS_SOUL": "자신을 포함해 ADJACENT 같은 편의 ATK, DEF, SPE_DEF를 [2,4,8,16,SP] 올린다.",
 		"BONEMERANG": "상대를 향해 뼈를 부메랑처럼 던진다. 뼈에 맞은 경로상의 상대는 [15,30,60,120,SP]의 SPECIAL를 두 번 입는다.",
 		"SHADOW_BONE": "영력이 담긴 뼈를 던져 경로 상의 모든 상대에게 [30,60,120,240,SP]의 SPECIAL를 입히고, [50,LK]%의 확률로 DEF를 [6,SP] 하락시킬 수 있다.",

@@ -1796,7 +1796,7 @@
 		"KNOWLEDGE_THIEF": "Utiliza a habilidade do alvo, caso não seja INIMITABLE, o jogador recebe [1,1,1,2,3]  de XP.",
 		"KING_SHIELD": "Aplica PROTECT no usuário por 1,5 segundos, concede [10,20,40,80,SP] de SHIELD e troca de posição com o inimigo mais distante",
 		"EXPLOSION": "Inflige [50,100,200,400,SP] de SPECIAL a todos os inimigos ADJACENT. Causa a mesma quantidade de dano no usuário.",
-		"NIGHTMARE": "Aplica FATIGUE em todo o time inimigo por [2,4,6,10,ND=1] segundos. Qualquer inimigo que sofra de uma maldição GHOST recebe [25,50,100,200,SP] de SPECIAL.",
+		"NIGHTMARE": "Aplica FATIGUE em todo o time inimigo por [2,4,6,10,ND=1] segundos. Qualquer inimigo que sofra de um status negativo recebe [25,50,100,200,SP] de SPECIAL.",
 		"CLANGOROUS_SOUL": "Aumenta o ATK, DEF e SPE_DEF de si mesmo e dos aliados ADJACENT em [2,4,8,16,SP]",
 		"BONEMERANG": "Jogue um osso de bumerangue no time inimigo, causando 2 vezes 2x[15,30,60,120,SP] de SPECIAL em cada inimigo no caminho",
 		"GROWL": "Aplica FLINCH nos inimigos ADJACENT por 3 segundos e reduz o ATK em [3,5,7,14,SP]",

@@ -1798,7 +1798,7 @@
 		"U_TURN": "Gagne [15,30,50,100,SP] SHIELD, échange sa position avec la cible qui est CHARM pendant 1 seconde.",
 		"EXPLOSION": "Inflige [50,100,200,400,SP] SPECIAL à tous les ennemis ADJACENT. Inflige les mêmes dégâts au lanceur.",
 		"CHLOROBLAST": "Inflige [50,100,200,400,SP] SPECIAL à tous les ennemis ADJACENT. Le lanceur perd 50% de ses HP max.",
-		"NIGHTMARE": "Inflige FATIGUE à toute l'équipe adverse pendant [2,4,6,10,ND=1] secondes. Tout ennemi subissant une malédiction de la synergie GHOST prend [25,50,100,200,SP] SPECIAL.",
+		"NIGHTMARE": "Inflige FATIGUE à toute l'équipe adverse pendant [2,4,6,10,ND=1] secondes. Tout ennemi subissant une altération de statut négative prend [25,50,100,200,SP] SPECIAL.",
 		"CLANGOROUS_SOUL": "Le lanceur et ses alliés ADJACENT gagnent [2,4,8,16,SP] en ATK, DEF et SPE_DEF.",
 		"BONEMERANG": "Lance un os qui revient comme un boomerang à travers l'équipe adverse, infligeant 2 fois [15,30,60,120,SP] SPECIAL à tous les ennemis sur son chemin.",
 		"SHADOW_BONE": "Lance un os à travers l'équipe adverse, infligeant [30,60,120,240,SP] SPECIAL à tous les ennemis sur son chemin avec [50,LK]% de chance de réduire la DEF de [6,SP].",
