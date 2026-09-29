@@ -1,3 +1,7 @@
+# Balance
+
+- Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
+
 # Bugfixes
 
 - Fixed BLACK_BELT SHIELD being based on pre-mitigation damage instead of post-mitigation (taking into account target defenses)
