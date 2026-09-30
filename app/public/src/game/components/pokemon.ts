@@ -245,7 +245,9 @@ export default class PokemonSprite extends DraggableObject {
       }
     }
     if (pokemon.items.has(Item.BERSERK_GENE)) {
-      this.addBerserkEffect()
+      this.changeSkinColor(Item.BERSERK_GENE)
+    } else if (pokemon.items.has(Item.DIRE_HIT)) {
+      this.changeSkinColor(Item.DIRE_HIT)
     }
     if (pokemon.items.has(Item.AIR_BALLOON)) {
       this.addFloatingAnimation()
@@ -1629,19 +1631,25 @@ export default class PokemonSprite extends DraggableObject {
     }
   }
 
-  removeRageEffect(hasBerserkGene: boolean = false) {
-    if (hasBerserkGene) {
-      this.addBerserkEffect()
+  removeRageEffect() {
+    if (this.pokemon.items.has(Item.BERSERK_GENE)) {
+      this.changeSkinColor(Item.BERSERK_GENE)
+    } else if (this.pokemon.items.has(Item.DIRE_HIT)) {
+      this.changeSkinColor(Item.DIRE_HIT)
     } else {
-      this.sprite.clearTint()
+      this.removeSkinColorChange()
     }
   }
 
-  addBerserkEffect() {
-    this.sprite.setTint(0x00ff00)
+  changeSkinColor(item: Item) {
+    if (item === Item.BERSERK_GENE) this.sprite.setTint(0x00ff00)
+    else if (item === Item.DIRE_HIT) {
+      const randomColor = Phaser.Display.Color.RandomRGB(128, 255).color
+      this.sprite.setTint(randomColor)
+    }
   }
 
-  removeBerserkEffect() {
+  removeSkinColorChange() {
     this.sprite.clearTint()
   }
 

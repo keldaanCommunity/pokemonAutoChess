@@ -1810,7 +1810,8 @@
 		"INFERNO_OVERDRIVE": "Inferno Overdrive",
 		"FURIOUS_STAMPEDE": "Furious Stampede",
 		"NEVER_ENDING_NIGHTMARE": "Never-Ending Nightmare",
-		"SHATTERED_PSYCHE": "Shattered Psyche"
+		"SHATTERED_PSYCHE": "Shattered Psyche",
+		"GIZMOS_AND_GADGETS": "Gizmos and Gadgets"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2400,7 +2401,8 @@
 		"INFERNO_OVERDRIVE": "Breathes a stream of intense fire toward the target, causing an explosion that deals [50,100,150,200,300,SP] SPECIAL to all enemies in a 2-tile radius and inflicts BURN for 5 seconds. Damage becomes TRUE if the enemy hit is already BURN.",
 		"FURIOUS_STAMPEDE": "A group of [8,12,16,20,24,SP] wild Tauros traverse the board on random rows, inflicting FLINCH for 3 seconds and dealing [20,25,40,65,100,SP] SPECIAL to all enemies in their path.",
 		"NEVER_ENDING_NIGHTMARE": "A dark aura surrounds the user in a 4-tile radius, inflicting SILENCE for 5 seconds. During that time, 5 phantom hands strike randomly at enemies in the area, dealing [30,60,100,150,200,SP] SPECIAL. Cursed enemies are more likely to be targeted and receive 30% more damage.",
-		"SHATTERED_PSYCHE": "Spawns 3 mirrors around the enemy team, each one reflecting one random enemy. Then throws a psychic energy wave that bounces between the mirrors and shatter them. Enemies traversed by the wave take [10,20,40,80,150,SP] SPECIAL. Enemies reflected in the shattered mirrors take [20,40,80,150,300,SP] additional SPECIAL and get CONFUSION for 5 seconds."
+		"SHATTERED_PSYCHE": "Spawns 3 mirrors around the enemy team, each one reflecting one random enemy. Then throws a psychic energy wave that bounces between the mirrors and shatter them. Enemies traversed by the wave take [10,20,40,80,150,SP] SPECIAL. Enemies reflected in the shattered mirrors take [20,40,80,150,300,SP] additional SPECIAL and get CONFUSION for 5 seconds.",
+		"GIZMOS_AND_GADGETS": "Distributes 4 random dubious gadgets to allies with free item slots. Each item given gives [50,SP] SHIELD to the ally receiving it. If not enough free item slots, random other items are dropped."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3032,7 +3034,14 @@
 		"PINK_NECTAR": "Pink Nectar",
 		"PURPLE_NECTAR": "Purple Nectar",
 		"YELLOW_NECTAR": "Yellow Nectar",
-		"RED_NECTAR": "Red Nectar"
+		"RED_NECTAR": "Red Nectar",
+		"DIRE_HIT": "Dire Hit",
+		"DUBIOUS_DISC": "Dubious Disc",
+		"EJECT_BUTTON": "Eject Button",
+		"GRIP_CLAW": "Grip Claw",
+		"LUCKY_PUNCH": "Lucky Punch",
+		"PROGRESS_DEVICE": "Buggy Progress Device",
+		"UTILITY_UMBRELLA": "Utility Umbrella"
 	},
 	"item_description": {
 		"FOSSIL_STONE": "A fossil of a Pokémon that lived in prehistoric times",
@@ -3368,7 +3377,7 @@
 		"SOOTHE_BELL": "Use it on a Pokémon to refresh your shop with Pokémon sharing a type with this Pokémon",
 		"BALL": "A ball made of a large hard berry. When casting ability, throws the ball to the furthest FIELD ally to pass them the BALL and 50 SHIELD. If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead, dealing [30,SP]% of user's SPEED as PHYSICAL",
 		"Z_RING": "Allows the holder to equip Z-Crystals and gather the Z-Power required to perform Z-Moves.",
-		"ALUMINIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"ALUMINIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.GIZMOS_AND_GADGETS)",
 		"ANTHROPIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
 		"AQUARIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.STOKED_SPARKSURFER)",
 		"BUGINIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SAVAGE_SPIN_OUT)",
@@ -3427,7 +3436,14 @@
 		"PINK_NECTAR": "Can be given to Oricorio to switch to Pa'U Style",
 		"PURPLE_NECTAR": "Can be given to Oricorio to switch to Sensu Style",
 		"YELLOW_NECTAR": "Can be given to Oricorio to switch to Pom Pom Style",
-		"RED_NECTAR": "Can be given to Oricorio to switch to Baile Style"
+		"RED_NECTAR": "Can be given to Oricorio to switch to Baile Style",
+		"DIRE_HIT": "A powerful steroid with some side effects, such as changing skin color.",
+		"DUBIOUS_DISC": "Holder gains one of those bonuses randomly ON_ATTACK: +5 SPEED, +3 ATK, +5% CRIT_CHANCE, +10% CRIT_POWER",
+		"EJECT_BUTTON": "Once below 30% HP, holder is ejected in the sky and falls on the furthest enemy, dealing [100,SP] SPECIAL",
+		"GRIP_CLAW": "Holder has [30,LK]% chance to inflict LOCKED for 5 seconds to both the attacker and the target ON_ATTACK at close range.",
+		"LUCKY_PUNCH": "ON_ATTACK, holder has [5,LK]% chance to trigger a super attack that can kick the target out of the board.",
+		"PROGRESS_DEVICE": "Every 5 seconds and up to 5 times, restore the HP of the holder to the amount they had when they received this item.",
+		"UTILITY_UMBRELLA": "Holder is immune to all negative status effects and sandstorm damage. When being attacked, the attacker has [5,LK]% chance of being struck by lightning, receiving [100,SP] SPECIAL."
 	},
 	"passive_description": {
 		"NONE": "No passive",
@@ -5112,6 +5128,7 @@
 			"scarves_description": "NORMAL synergy gives you SILK_SCARF that can be combined with other item components for exclusive items. These items are removed when NORMAL synergy is lost or lowered. Scarves can be removed by benching the unit.",
 			"tools_description": "ARTIFICIAL synergy gives you three tools randomly picked each game for each player. Tools can be removed by benching the unit.",
 			"other_tools_description": "Some other tools are exclusive to certain merchants encountered in town or to certain rewards:",
+			"dubious_gadgets_description": "Finally, these tools are defective and have been withdrawn from the market:",
 			"gems": "Gems",
 			"gems_description": "Gems can be found in the GROUND and increase synergy levels.",
 			"gems_not_buried_description": "Some other gems are exclusive to certain merchants encountered in town or to certain rewards:",

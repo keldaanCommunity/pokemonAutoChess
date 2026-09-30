@@ -9,7 +9,12 @@ import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
+import {
+  AttackType,
+  Orientation,
+  PokemonActionState,
+  Team
+} from "../../types/enum/Game"
 import {
   AbilityPerTM,
   type Dish,
@@ -42,10 +47,12 @@ import {
   chance,
   pickNRandomIn,
   pickRandomIn,
+  randomBetween,
   randomWeighted
 } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
+import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -283,6 +290,30 @@ export class GreenOrbEffect extends PeriodicEffect {
   }
 }
 
+export class ProgressDeviceEffect extends PeriodicEffect {
+  savedHP: number = 0
+  stacks: number = 0
+  constructor() {
+    super(
+      (pokemon) => {
+        if (this.savedHP === 0) {
+          this.savedHP = pokemon.hp
+        } else if (this.stacks < 5) {
+          this.stacks++
+          const hpDiff = this.savedHP - pokemon.hp
+          if (hpDiff > 0) {
+            pokemon.broadcastAbility({ skill: "EVOLUTION" })
+            pokemon.handleHeal(hpDiff, pokemon, 0, false)
+          }
+        }
+      },
+      Item.PROGRESS_DEVICE,
+      5000,
+      true
+    )
+  }
+}
+
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
   stacks = 0
 
@@ -307,6 +338,51 @@ const smokeBallEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
     pokemon.removeItem(Item.SMOKE_BALL)
     pokemon.addShield(50, pokemon, 0, false)
     pokemon.flyAway(board, false, false)
+  }
+})
+
+const ejectButtonEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
+  if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
+    const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
+    if (destination) {
+      pokemon.broadcastAbility({
+        skill: Ability.ULTRA_THRUSTERS,
+        orientation: Orientation.UP
+      })
+      pokemon.removeItem(Item.EJECT_BUTTON)
+      pokemon.status.triggerProtect(2000)
+      pokemon.broadcastAbility({
+        skill: "FLYING_TAKEOFF",
+        targetX: destination.target.positionX,
+        targetY: destination.target.positionY
+      })
+      pokemon.skydiveTo(destination.x, destination.y, board)
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          pokemon.broadcastAbility({
+            skill: "FLYING_SKYDIVE",
+            positionX: destination.x,
+            positionY: destination.y,
+            targetX: destination.target.positionX,
+            targetY: destination.target.positionY
+          })
+        }, 500)
+      )
+
+      pokemon.commands.push(
+        new DelayedCommand(() => {
+          if (destination.target && destination.target.hp > 0) {
+            destination.target.handleSpecialDamage(
+              100,
+              board,
+              AttackType.SPECIAL,
+              pokemon,
+              false
+            )
+          }
+        }, 1000)
+      )
+    }
   }
 })
 
@@ -665,9 +741,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SAFETY_GOGGLES]: [
     new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_WEATHER)
       pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
     }),
     new OnItemRemovedEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_WEATHER)
       pokemon.status.runeProtectCooldown = 0
     })
   ],
@@ -756,6 +834,25 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
+  [Item.DUBIOUS_DISC]: [
+    new OnAttackEffect(({ pokemon }) => {
+      switch (randomBetween(1, 4)) {
+        case 1:
+          pokemon.addAttack(3, pokemon, 0, false)
+          break
+        case 2:
+          pokemon.addSpeed(5, pokemon, 0, false)
+          break
+        case 3:
+          pokemon.addCritChance(5, pokemon, 0, false)
+          break
+        case 4:
+          pokemon.addCritPower(10, pokemon, 0, false)
+          break
+      }
+    })
+  ],
+
   [Item.MUSCLE_BAND]: [
     new OnDamageReceivedEffect(({ pokemon, damage }) => {
       if (pokemon.count.muscleBandCount < 20 && damage > 0) {
@@ -827,6 +924,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.SMOKE_BALL]: [smokeBallEffect],
+
+  [Item.EJECT_BUTTON]: [ejectButtonEffect],
 
   [Item.COMFEY]: [
     new OnItemGainedEffect((pokemon) => {
@@ -1641,5 +1740,117 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       pokemon.skill = baseData.skill
       pokemon.maxPP = baseData.pp
     })*/
+  ],
+
+  [Item.GRIP_CLAW]: [
+    new OnAttackEffect(({ pokemon, target }) => {
+      // ON_ATTACK at close range, holder has [30,LK]% chance to inflict LOCKED for 5 seconds to both the attacker and the target.
+      if (
+        target &&
+        chance(0.3, pokemon) &&
+        distanceC(
+          pokemon.positionX,
+          pokemon.positionY,
+          target.positionX,
+          target.positionY
+        ) <= 1
+      ) {
+        target.status.triggerLocked(5000, target)
+        pokemon.status.triggerLocked(5000, pokemon)
+      }
+    })
+  ],
+
+  [Item.LUCKY_PUNCH]: [
+    // ON_ATTACK, holder has [5,LK]% chance to trigger a super attack that can kick the target out of the board.
+    new OnAttackEffect(({ pokemon, target, board }) => {
+      if (!target) return
+      let farthestEmptyCell: Cell | null = null
+      let blocked = false
+      effectInOrientation(board, pokemon, target, (cell) => {
+        if (cell.value && cell.value.id !== target.id) {
+          blocked = true
+        } else {
+          farthestEmptyCell = cell
+        }
+      })
+      pokemon.broadcastAbility({ skill: "FOCUS_PUNCH" })
+
+      const canBeMoved = farthestEmptyCell != null && target.canBeMoved
+      const willEject =
+        canBeMoved &&
+        !blocked &&
+        !target.status.resurrection &&
+        !target.status.magicBounce &&
+        !target.status.protect
+
+      if (willEject) {
+        // eject from the board
+        pokemon.broadcastAbility({ skill: "BOARD_EJECT_ORIENTED" })
+        target.cooldown = 9999
+        const { death } = target.handleSpecialDamage(
+          9999,
+          board,
+          AttackType.TRUE,
+          pokemon,
+          false
+        )
+        if (!death) {
+          // force death even with shiny charm
+          pokemon.state.triggerDeath(target, pokemon, board, AttackType.TRUE)
+        }
+      } else {
+        // push as far as possible
+        if (canBeMoved && farthestEmptyCell) {
+          const { x, y } = farthestEmptyCell as Cell
+          const initialTargetX = target.positionX
+          const initialTargetY = target.positionY
+          target.moveTo(x, y, board, true)
+          pokemon.moveTo(initialTargetX, initialTargetY, board, true)
+        }
+      }
+    })
+  ],
+
+  [Item.PROGRESS_DEVICE]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new ProgressDeviceEffect())
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof ProgressDeviceEffect) {
+          pokemon.effectsSet.delete(effect)
+          break
+        }
+      }
+    })
+  ],
+
+  [Item.UTILITY_UMBRELLA]: [
+    // Holder is immune to all negative status effects and sandstorm damage. When receiving a hit, the attacker has [5,LK]% chance of being struck by lightning, receiving [100,SP] SPECIAL.
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_WEATHER)
+      pokemon.status.triggerRuneProtect(60000, pokemon, pokemon)
+    }),
+    new OnItemRemovedEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_WEATHER)
+      pokemon.status.runeProtectCooldown = 0
+    }),
+    new OnDamageReceivedEffect(({ pokemon, attacker, board }) => {
+      if (attacker && chance(0.05, pokemon)) {
+        pokemon.broadcastAbility({
+          skill: Ability.THUNDER_SHOCK,
+          targetX: attacker.positionX,
+          targetY: attacker.positionY
+        })
+        attacker.handleSpecialDamage(
+          100,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          false
+        )
+      }
+    })
   ]
 }

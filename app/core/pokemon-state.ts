@@ -936,7 +936,7 @@ export default abstract class PokemonState {
         }
         if (
           pokemon.hasSynergy(Synergy.GROUND) === false &&
-          pokemon.items.has(Item.SAFETY_GOGGLES) === false
+          pokemon.effects.has(EffectEnum.IMMUNITY_WEATHER) === false
         ) {
           pokemon.handleDamage({
             damage: sandstormDamage,

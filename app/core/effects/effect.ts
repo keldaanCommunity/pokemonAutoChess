@@ -266,11 +266,12 @@ export class PeriodicEffect extends Effect {
   constructor(
     effect: (entity: PokemonEntity, board: Board, ...others: any[]) => void,
     origin: EffectOrigin,
-    intervalMs: number
+    intervalMs: number,
+    callImmediately: boolean = false
   ) {
     super(effect, origin)
     this.intervalMs = intervalMs
-    this.timer = intervalMs
+    this.timer = callImmediately ? 0 : intervalMs
     this.count = 0
   }
 

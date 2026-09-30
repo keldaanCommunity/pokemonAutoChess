@@ -200,6 +200,7 @@ import { GeomancyStrategy } from "./geomancy"
 import { GiantRafflesiaStrategy } from "./giant-rafflesia"
 import { GigatonHammerStrategy } from "./gigaton-hammer"
 import { GigavoltHavocStrategy } from "./gigavolt-havoc"
+import { GizmosAndGadgetsStrategy } from "./gizmos-and-gadgets";
 import { GlacialLanceStrategy } from "./glacial-lance"
 import { GlaciateStrategy } from "./glaciate"
 import { GlaiveRushStrategy } from "./glaive-rush"
@@ -943,6 +944,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.GIANT_RAFFLESIA]: new GiantRafflesiaStrategy(),
   [Ability.GIGATON_HAMMER]: new GigatonHammerStrategy(),
   [Ability.GIGAVOLT_HAVOC]: new GigavoltHavocStrategy(),
+  [Ability.GIZMOS_AND_GADGETS]: new GizmosAndGadgetsStrategy(),
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
   [Ability.GLACIATE]: new GlaciateStrategy(),
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),

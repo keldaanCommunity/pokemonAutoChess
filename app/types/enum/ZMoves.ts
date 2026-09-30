@@ -15,6 +15,7 @@ export const ZMoves = [
   Ability.FURIOUS_STAMPEDE,
   Ability.GIANT_RAFFLESIA,
   Ability.GIGAVOLT_HAVOC,
+  Ability.GIZMOS_AND_GADGETS,
   Ability.HYDRO_VORTEX,
   Ability.INFERNO_OVERDRIVE,
   Ability.KAIJU_ATTACK,
@@ -32,7 +33,7 @@ export const ZMoves = [
 export type ZMove = (typeof ZMoves)[number]
 
 export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
-  [Item.ALUMINIUM_Z]: Ability.DEFAULT,
+  [Item.ALUMINIUM_Z]: Ability.GIZMOS_AND_GADGETS,
   [Item.ANTHROPIUM_Z]: Ability.DEFAULT,
   [Item.AQUARIUM_Z]: Ability.STOKED_SPARKSURFER,
   [Item.BUGINIUM_Z]: Ability.SAVAGE_SPIN_OUT,

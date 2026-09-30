@@ -395,7 +395,14 @@ export enum Item {
   PURPLE_NECTAR = "PURPLE_NECTAR",
   RED_NECTAR = "RED_NECTAR",
   PINK_NECTAR = "PINK_NECTAR",
-  YELLOW_NECTAR = "YELLOW_NECTAR"
+  YELLOW_NECTAR = "YELLOW_NECTAR",
+  DIRE_HIT = "DIRE_HIT",
+  DUBIOUS_DISC = "DUBIOUS_DISC",
+  EJECT_BUTTON = "EJECT_BUTTON",
+  GRIP_CLAW = "GRIP_CLAW",
+  LUCKY_PUNCH = "LUCKY_PUNCH",
+  PROGRESS_DEVICE = "PROGRESS_DEVICE",
+  UTILITY_UMBRELLA = "UTILITY_UMBRELLA"
 }
 
 export const MemoryDiscs = [
@@ -676,6 +683,16 @@ export const ArtificialItems = [
   Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
 ] satisfies Tool[]
+
+export const DubiousGadgets = [
+  Item.DIRE_HIT,
+  Item.DUBIOUS_DISC,
+  Item.EJECT_BUTTON,
+  Item.GRIP_CLAW,
+  Item.LUCKY_PUNCH,
+  Item.PROGRESS_DEVICE,
+  Item.UTILITY_UMBRELLA
+] satisfies Item[]
 
 export const ShinyItems = [
   Item.DYNAMAX_BAND,

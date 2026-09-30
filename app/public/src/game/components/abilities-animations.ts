@@ -6,7 +6,7 @@ import {
   CELL_WIDTH
 } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Dishes, type IPokemonEntity } from "../../../../types"
+import { Dishes, type IPokemonEntity, type Item } from "../../../../types"
 import {
   type AbilityAnimation,
   type AbilityAnimationArgs,
@@ -4035,7 +4035,7 @@ export const AbilitiesAnimations: {
 
         mirrorContainer.add(reflectImage as any)
         mirrorContainer.setScale(2).setAlpha(0.5).setDepth(DEPTH.ABILITY_MAJOR)
-        reflectImage.shatter()        
+        reflectImage.shatter()
         args.scene.add.tween({
           targets: (reflectImage as any).faces,
           alpha: 0,
@@ -4073,6 +4073,22 @@ export const AbilitiesAnimations: {
       )
     })
   },
+
+  [Ability.GIZMOS_AND_GADGETS]: [
+    (args) => {
+      const item: Item = args.data?.item
+      args.ability = ""
+      parabolicProjectile({
+        duration: 800,
+        ability: undefined,
+        textureKey: "item",
+        frame: `${item}.png`,
+        scale: 0.35,
+        tweenProps: { angle: 480 },
+        peakHeight: 150
+      })(args)
+    }
+  ],
 
   ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
     const pokemon = pokemonsOnBoard.find(

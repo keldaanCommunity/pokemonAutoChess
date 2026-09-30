@@ -118,7 +118,14 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
   [Item.TATSUGIRI_CURLY]: { [Stat.ATK]: 8 },
   [Item.TATSUGIRI_DROOPY]: { [Stat.DEF]: 8 },
-  [Item.TATSUGIRI_STRETCHY]: { [Stat.SPEED]: 25 }
+  [Item.TATSUGIRI_STRETCHY]: { [Stat.SPEED]: 25 },
+  [Item.DIRE_HIT]: { [Stat.ATK]: 10, [Stat.CRIT_CHANCE]: 30 },
+  [Item.DUBIOUS_DISC]: {},
+  [Item.EJECT_BUTTON]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
+  [Item.GRIP_CLAW]: { [Stat.ATK]: 10, [Stat.DEF]: 10 },
+  [Item.LUCKY_PUNCH]: { [Stat.ATK]: 5, [Stat.CRIT_CHANCE]: 30 },
+  [Item.PROGRESS_DEVICE]: { [Stat.HP]: 50 },
+  [Item.UTILITY_UMBRELLA]: { [Stat.SPE_DEF]: 30 }
 }
 
 export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {

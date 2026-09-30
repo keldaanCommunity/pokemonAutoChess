@@ -929,11 +929,11 @@ export default class BoardManager {
           pkm?.addLight()
         }
       }
-      if (item === Item.BERSERK_GENE) {
+      if (item === Item.BERSERK_GENE || item === Item.DIRE_HIT) {
         if (removed) {
-          pkm?.removeBerserkEffect()
+          pkm?.removeSkinColorChange()
         } else {
-          pkm?.addBerserkEffect()
+          pkm?.changeSkinColor(item)
         }
       }
       if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {

@@ -5,6 +5,7 @@ import {
   ArtificialItems,
   Berries,
   Dishes,
+  DubiousGadgets,
   FishingRods,
   Item,
   ItemComponentsNoScarf,
@@ -249,6 +250,12 @@ export default function WikiItems() {
         <ul>
           <ItemList
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
+          />
+        </ul>
+        <p>{addIconsToDescription(t("wiki.items.dubious_gadgets_description"))}</p>
+        <ul>
+          <ItemList
+            items={DubiousGadgets}
           />
         </ul>
 

@@ -6,6 +6,7 @@ import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   Berries,
   CraftableItems,
+  DubiousGadgets,
   Item,
   ItemComponents,
   MemoryDiscs,
@@ -47,7 +48,7 @@ export default function ItemPicker(props: {
       items: [Item.CHEF_HAT, ...Berries, ...Dishes]
     },
 
-    { label: t("tools"), key: "tools", items: Tools },
+    { label: t("tools"), key: "tools", items: [...Tools, ...DubiousGadgets] },
     {
       label: t("shiny_items"),
       key: "shiny_items",
