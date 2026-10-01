@@ -204,17 +204,20 @@ export default class PokemonAvatar extends PokemonSprite {
   }
 
   drawLifebar() {
-    this.lifebar = new LifeBar(
-      this.scene,
-      0,
-      28,
-      100,
-      100,
-      0,
-      this.isCurrentPlayerAvatar ? 0 : 1,
-      false
-    )
+    this.lifebar = new LifeBar({
+      scene: this.scene,
+      x: 0,
+      y: 0,
+      maxHP: 100,
+      hp: 100,
+      shield: 0,
+      team: this.isCurrentPlayerAvatar ? 0 : 1,
+      flip: false,
+      showHP: true,
+      showPP: false
+    })
     this.add(this.lifebar)
+    this.lifebar.draw()
   }
 
   showEmoteMenu() {

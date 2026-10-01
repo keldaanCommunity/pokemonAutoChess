@@ -8,7 +8,6 @@ import {
   FIGHTING_PHASE_DURATION,
   GiftShopStages,
   GOLDEN_BERRY_TREE_TYPES,
-  getAltFormForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemSellPricesAtTown,
@@ -26,13 +25,19 @@ import {
 } from "../../config"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
+import { getAltFormForPlayer } from "../../core/alt-form-logic"
 import {
   OnChangePositionEffect,
   OnItemDroppedEffect,
   OnSpotlightChangeEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
-import { ItemEffects } from "../../core/effects/items"
+import {
+  equipItem,
+  equipItems,
+  ItemEffects,
+  unequipItems
+} from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
 import { SynergyEffects } from "../../core/effects/synergies"
 import { giveRandomEgg } from "../../core/eggs"
@@ -913,7 +918,7 @@ export class OnDragDropItemCommand extends Command<
         // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
         player.items.push(itemCombined)
       } else {
-        pokemon.addItem(itemCombined, player)
+        equipItem(pokemon, itemCombined, player)
       }
     } else {
       if (
@@ -924,7 +929,7 @@ export class OnDragDropItemCommand extends Command<
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
-      pokemon.addItem(item, player)
+      equipItem(pokemon, item, player)
       removeInArray(player.items, item)
     }
 
@@ -1284,7 +1289,6 @@ export class OnUpdateCommand extends Command<
       reinforcement.pp = 0
 
       // bring over item stack counts to prevent double-stacking from current stats
-      // TODO: after merge, add JAC specifig item counts: WIDE_LENS, GRIP_CLAW, EXP_CHARM
       reinforcement.count.muscleBandCount = entity.count.muscleBandCount
       reinforcement.count.machRibbonCount = entity.count.machRibbonCount
       reinforcement.count.upgradeCount = entity.count.upgradeCount
@@ -1754,7 +1758,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         /* Set schemas needs to be reset to fix reactivity issues ; bug on Colyseus Schema ? */
         p.pokemon.types = new SetSchema<Synergy>(schemaValues(p.pokemon.types))
         p.pokemon.items = new SetSchema<Item>()
-        p.pokemon.addItems(schemaValues(substitute.items), player)
+        equipItems(p.pokemon, schemaValues(substitute.items), player)
         substitute.items.clear()
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(
@@ -1879,6 +1883,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           this.room.pickChoice(player.id, choice.id, randomPick, true)
         })
+
+      player.board.forEach((pokemon) => {
+        if (pokemon.cook) {
+          pokemon.cook.cookingProcess?.clear()
+          delete pokemon.cook
+        }
+      })
     })
   }
 
@@ -2421,7 +2432,7 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
       pokemon.positionX = p.x
       pokemon.positionY = p.y
-      pokemon.addItems(p.items, player)
+      equipItems(pokemon, p.items, player)
       player.board.set(pokemon.id, pokemon)
       pokemon.onAcquired(player)
     })
@@ -2470,7 +2481,7 @@ export function onPokemonChangePosition({
       )
     })
     player.items.push(...itemsToRemove)
-    pokemon.removeItems(itemsToRemove, player)
+    unequipItems(pokemon, itemsToRemove, player)
 
     if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
       player.items.push(TMPerAbility.get(pokemon.tm)!)

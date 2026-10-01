@@ -17,7 +17,6 @@ class PursuitEffect extends OnMoveEffect {
         pursuier.canMove &&
         distanceC(oldX, oldY, newX, newY) > 1
       ) {
-        // TODO: jump and cast again
         const freeCellAround = board.getClosestAvailablePlace(newX, newY)
         if (!freeCellAround) return
         pursuier.orientation = board.orientation(

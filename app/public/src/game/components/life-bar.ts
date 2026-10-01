@@ -5,32 +5,53 @@ import { max } from "../../../../utils/number"
 import { DEPTH } from "../depths"
 
 export default class LifeBar extends GameObjects.Graphics {
-  maxHp: number
-  hp: number
-  shield: number
-  pp?: number
-  maxPP?: number
+  maxHp: number = 1
+  hp: number = 1
+  shield: number = 0
+  pp?: number = 0
+  maxPP?: number = 100
   team: Team
   flip: boolean
+  showHP: boolean
+  showPP: boolean
 
-  constructor(
-    scene: Phaser.Scene,
-    x: number,
-    y: number,
-    maxHP: number,
-    hp: number,
-    shield: number,
-    team: Team,
+  constructor({
+    scene,
+    x,
+    y,
+    maxHP,
+    hp,
+    shield,
+    maxPP,
+    pp,
+    team,
+    flip,
+    showHP = true,
+    showPP = true
+  }: {
+    scene: Phaser.Scene
+    x: number
+    y: number
+    maxHP: number
+    hp: number
+    shield: number
+    maxPP?: number
+    pp?: number
+    team: Team
     flip: boolean
-  ) {
+    showHP: boolean
+    showPP: boolean
+  }) {
     super(scene, { x, y })
-
     this.maxHp = maxHP
     this.hp = hp
     this.shield = shield
+    this.maxPP = maxPP
+    this.pp = pp
     this.team = team
     this.flip = flip
-
+    this.showHP = showHP
+    this.showPP = showPP
     this.setDepth(DEPTH.POKEMON_HP_BAR)
   }
 
@@ -50,19 +71,18 @@ export default class LifeBar extends GameObjects.Graphics {
 
     this.translateCanvas(-barWidth / 2, 0)
 
-    // hp bar
-    this.fillStyle(0x000000)
-    this.fillRoundedRect(0, 0, barWidth, this.maxPP === undefined ? 8 : 14, 2)
-
     // hp and shield amount
-    if (this.hp > 0) {
+    if (this.showHP) {
       const totalLife = Math.max(this.maxHp, this.hp + this.shield) // if hp + shield exceeds maxHP, the amount of segments should expand accordingly
       const lifePercentage = this.hp / totalLife
       const shieldPercentage = this.shield / totalLife
 
       this.save()
-      this.translateCanvas(1, 1)
 
+      this.fillStyle(0x000000)
+      this.fillRoundedRect(0, 0, barWidth, 8, 2)
+
+      this.translateCanvas(1, 1)
       this.fillStyle(lifeBarBgColor, 1)
       this.fillRect(0, 0, innerBarWidth, 6)
 
@@ -96,8 +116,16 @@ export default class LifeBar extends GameObjects.Graphics {
     }
 
     // PP
-    if (this.pp !== undefined && this.maxPP !== undefined && this.maxPP > 0) {
+    if (
+      this.showPP &&
+      this.pp !== undefined &&
+      this.maxPP !== undefined &&
+      this.maxPP > 0
+    ) {
       const ppPercentage = max(1)(this.pp / this.maxPP)
+
+      this.fillStyle(0x000000)
+      this.fillRoundedRect(0, 8, barWidth, 6, 2)
 
       this.fillStyle(ppBarBgColor, 1)
       this.fillRect(1, 9, innerBarWidth, 3)

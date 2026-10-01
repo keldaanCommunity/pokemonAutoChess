@@ -28,14 +28,14 @@ export const DEPTH = {
   BOOST_FRONT: 26,
   POKEMON_HP_BAR: 29,
 
-  // 31-40: ability sfx over pokemon
+  // 31-40: ability sfx over pokemon  
   ABILITY_MINOR: 34,
   ABILITY: 35,
   ABILITY_MAJOR: 36,
   BOARD_EFFECT_AIR_LEVEL: 38,
 
-  // 41-50: weather / environment
-  WEATHER_FX: 40,
+  // 41-50: weather / environment  
+  WEATHER_FX: 41,
 
   // 51-60: Ingame texts/indicators
   DAMAGE_PORTRAIT: 51,
