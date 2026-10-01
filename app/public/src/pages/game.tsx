@@ -362,10 +362,21 @@ export default function Game() {
     if (r.connection.isOpen) {
       await r.leave(false)
     }
+    const game = rooms.game // not `room`: the back button holds a leave() from before the room was set
+    if (
+      game?.connection.isOpen &&
+      !isReplayRoom(game) &&
+      !game.state.gameFinished
+    ) {
+      // without it the server holds our seat for reconnection instead of surrendering
+      await game
+        .request("surrender", undefined, { timeout: 3000 })
+        .catch(() => {})
+    }
     dispatch(leaveGame())
     navigate("/after")
-    if (room?.connection.isOpen) {
-      room.leave()
+    if (game?.connection.isOpen) {
+      game.leave()
     }
   }, [client, dispatch, room])
 

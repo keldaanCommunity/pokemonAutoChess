@@ -399,6 +399,17 @@ export default class CustomLobbyRoom extends Room {
     )
 
     this.presence.subscribe(
+      "pending-game-changed",
+      ({ userId, gameId }: { userId: string; gameId: string | null }) => {
+        this.clients.forEach((c) => {
+          if (c.auth?.uid === userId) {
+            c.send(Transfer.RECONNECT_PROMPT, gameId)
+          }
+        })
+      }
+    )
+
+    this.presence.subscribe(
       "maintenance",
       ({ userId, order }: { userId: string; order: MaintenanceOrder }) => {
         const client = this.clients.find((c) => c.auth && c.auth.uid === userId)
