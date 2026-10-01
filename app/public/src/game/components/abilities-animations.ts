@@ -32,7 +32,7 @@ import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
 import { wait } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
-import { angleBetween, max, min } from "../../../../utils/number"
+import { angleBetween, clamp, max, min } from "../../../../utils/number"
 import {
   getOrientation,
   OrientationAngle,
@@ -4089,6 +4089,91 @@ export const AbilitiesAnimations: {
       })(args)
     }
   ],
+
+  [Ability.SUBZERO_SLAMMER]: [
+    async (args) => {
+      const pillarSprite = (await onCaster({
+        scale: 2,
+        positionOffset: [0, -20],
+        depth: DEPTH.ABILITY_BELOW_POKEMON,
+        destroyOnComplete: false,
+        animOptions: {
+          repeat: 0,
+          hideOnComplete: false
+        }
+      })(args)) as GameObjects.Sprite
+
+      // stay on its last frame here for 4 secon,ds
+      args.scene.time.delayedCall(4800, () => {
+        pillarSprite.destroy()
+      })
+    },
+    onSprite(({ casterSprite, ...args }) => {
+      if (!casterSprite) return
+      const originalY = casterSprite.y
+      args.scene.tweens.chain({
+        targets: casterSprite,
+        tweens: [
+          {
+            y: originalY - 50,
+            duration: 500,
+            ease: Phaser.Math.Easing.Sine.InOut
+          },
+          {
+            y: originalY,
+            delay: 4400,
+            duration: 500,
+            ease: Phaser.Math.Easing.Sine.InOut,
+            onComplete: () => {
+              casterSprite.moveManager.setEnable(true)
+            }
+          }
+        ]
+      })
+    })
+  ],
+
+  ["SUBZERO_SLAMMER_LASER"]: [
+    onSprite(({ casterSprite, targetSprite, ...args }) => {
+      if (!casterSprite || !targetSprite) {
+        return onCaster({
+          scale: 2,
+          origin: [0, 0.5],
+          oriented: true
+        })(args)
+      }
+      const distance = distanceE(
+        casterSprite.x,
+        casterSprite.y,
+        targetSprite.x,
+        targetSprite.y
+      )
+      const scale = clamp(distance * 0.01, 1.5, 5)
+      const rotation = angleBetween(
+        [casterSprite.x, casterSprite.y],
+        [targetSprite.x, targetSprite.y]
+      )
+      staticAnimation({
+        ability: "SUBZERO_SLAMMER_LASER",
+        x: casterSprite.x,
+        y: casterSprite.y,
+        scale: [scale, 2],
+        origin: [0, 0.5],
+        animOptions: { repeat: 1 },
+        rotation
+      })(args)
+    }),
+    onTarget({
+      ability: "SHEER_COLD",
+      scale: 1.5,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
+
+  ["SUBZERO_SLAMMER_EXPLOSION"]: onTarget({
+    scale: 3,
+    positionOffset: [0, -20]
+  }),
 
   ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
     const pokemon = pokemonsOnBoard.find(

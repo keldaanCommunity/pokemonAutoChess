@@ -25,6 +25,7 @@ export const ZMoves = [
   Ability.STOKED_SPARKSURFER,
   Ability.SAVAGE_SPIN_OUT,
   Ability.SHATTERED_PSYCHE,
+  Ability.SUBZERO_SLAMMER,
   Ability.SUPERSONIC_SKYSTRIKE,
   Ability.TECTONIC_RAGE,
   Ability.TWINKLE_TACKLE
@@ -53,7 +54,7 @@ export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
   [Item.GHOSTIUM_Z]: Ability.NEVER_ENDING_NIGHTMARE,
   [Item.GRASSIUM_Z]: Ability.BLOOM_DOOM,
   [Item.GROUNDIUM_Z]: Ability.TECTONIC_RAGE,
-  [Item.ICIUM_Z]: Ability.DEFAULT,
+  [Item.ICIUM_Z]: Ability.SUBZERO_SLAMMER,
   [Item.NORMALIUM_Z]: Ability.BREAKNECK_BLITZ,
   [Item.PETALIUM_Z]: Ability.GIANT_RAFFLESIA,
   [Item.PETROLIUM_Z]: Ability.DEFAULT,

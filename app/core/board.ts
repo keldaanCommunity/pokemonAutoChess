@@ -748,7 +748,10 @@ export class Board {
     const closestEnemy = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity != null && entity.team === enemyTeam && entity.hp > 0
+          entity != null &&
+          entity.team === enemyTeam &&
+          entity.hp > 0 &&
+          !entity.status.resurrecting
       )
       .sort(
         (a, b) =>

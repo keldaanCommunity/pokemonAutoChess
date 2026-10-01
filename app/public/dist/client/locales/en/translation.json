@@ -1811,7 +1811,8 @@
 		"FURIOUS_STAMPEDE": "Furious Stampede",
 		"NEVER_ENDING_NIGHTMARE": "Never-Ending Nightmare",
 		"SHATTERED_PSYCHE": "Shattered Psyche",
-		"GIZMOS_AND_GADGETS": "Gizmos and Gadgets"
+		"GIZMOS_AND_GADGETS": "Gizmos and Gadgets",
+		"SUBZERO_SLAMMER": "Subzero Slammer"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2402,7 +2403,8 @@
 		"FURIOUS_STAMPEDE": "A group of [8,12,16,20,24,SP] wild Tauros traverse the board on random rows, inflicting FLINCH for 3 seconds and dealing [20,25,40,65,100,SP] SPECIAL to all enemies in their path.",
 		"NEVER_ENDING_NIGHTMARE": "A dark aura surrounds the user in a 4-tile radius, inflicting SILENCE for 5 seconds. During that time, 5 phantom hands strike randomly at enemies in the area, dealing [30,60,100,150,200,SP] SPECIAL. Cursed enemies are more likely to be targeted and receive 30% more damage.",
 		"SHATTERED_PSYCHE": "Spawns 3 mirrors around the enemy team, each one reflecting one random enemy. Then throws a psychic energy wave that bounces between the mirrors and shatter them. Enemies traversed by the wave take [10,20,40,80,150,SP] SPECIAL. Enemies reflected in the shattered mirrors take [20,40,80,150,300,SP] additional SPECIAL and get CONFUSION for 5 seconds.",
-		"GIZMOS_AND_GADGETS": "Distributes 4 random dubious gadgets to allies with free item slots. Each item given gives [50,SP] SHIELD to the ally receiving it. If not enough free item slots, random other items are dropped."
+		"GIZMOS_AND_GADGETS": "Distributes 4 random dubious gadgets to allies with free item slots. Each item given gives [50,SP] SHIELD to the ally receiving it. If not enough free item slots, random other items are dropped.",
+		"SUBZERO_SLAMMER": "An ice pillar forms beneath the caster, granting them [25,50,100,150,250] SHIELD. The caster then fires an ice beam that deals [10,20,30,50,100,SP] SPECIAL every 250 ms for 4 seconds, switching targets on KO. After 4 seconds, an ice explosion deals [15,30,60,100,200,SP] SPECIAL to the current target and ADJACENT enemies."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

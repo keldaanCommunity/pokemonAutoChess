@@ -200,7 +200,7 @@ import { GeomancyStrategy } from "./geomancy"
 import { GiantRafflesiaStrategy } from "./giant-rafflesia"
 import { GigatonHammerStrategy } from "./gigaton-hammer"
 import { GigavoltHavocStrategy } from "./gigavolt-havoc"
-import { GizmosAndGadgetsStrategy } from "./gizmos-and-gadgets";
+import { GizmosAndGadgetsStrategy } from "./gizmos-and-gadgets"
 import { GlacialLanceStrategy } from "./glacial-lance"
 import { GlaciateStrategy } from "./glaciate"
 import { GlaiveRushStrategy } from "./glaive-rush"
@@ -513,6 +513,7 @@ import { StruggleBugStrategy } from "./struggle-bug"
 import { StuffCheeksStrategy } from "./stuff-cheeks"
 import { StunSporeStrategy } from "./stun-spore"
 import { SubstituteStrategy } from "./substitute"
+import { SubzeroSlammerStrategy } from "./subzero-slammer"
 import { SuctionHealStrategy } from "./suction-heal"
 import { SunsteelStrikeStrategy } from "./sunsteel-strike"
 import { SuperFangStrategy } from "./super-fang"
@@ -1259,6 +1260,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STUFF_CHEEKS]: new StuffCheeksStrategy(),
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
   [Ability.SUBSTITUTE]: new SubstituteStrategy(),
+  [Ability.SUBZERO_SLAMMER]: new SubzeroSlammerStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.SUPER_FANG]: new SuperFangStrategy(),
