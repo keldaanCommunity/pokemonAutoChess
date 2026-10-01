@@ -67,7 +67,7 @@ import {
   type GameStats,
   initialGameStats
 } from "../../types/interfaces/GameStats"
-import type { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
+import type { IPokemonCollectionItemForPlayer } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import {
@@ -216,7 +216,7 @@ export default class Player extends Schema implements IPlayer {
     avatar: string,
     isBot: boolean,
     rank: number,
-    pokemonCollection: Map<string, IPokemonCollectionItemMongo>,
+    pokemonCollection: Map<string, IPokemonCollectionItemForPlayer>,
     title: Title | "",
     role: Role,
     state: GameState

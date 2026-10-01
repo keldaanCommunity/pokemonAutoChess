@@ -362,6 +362,8 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
+        .select({ role: 1, banned: 1 })
+        .lean()
       const isAdmin = userProfile?.role === Role.ADMIN
 
       // Check password protection - room owner, admins and moderators bypass password protection

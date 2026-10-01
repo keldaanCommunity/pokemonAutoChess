@@ -36,8 +36,9 @@ import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
+  getPlayedPokemonIndexes,
   giveUserExp,
-  toLeanUserMetadata
+  toPlayerCollection
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -47,7 +48,10 @@ import {
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import { getSellPrice } from "../models/shop"
-import { updatePlayerTitlesAfterGame } from "../models/titles"
+import {
+  updatePlayerCollectorTitle,
+  updatePlayerTitlesAfterGame
+} from "../models/titles"
 import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
@@ -89,7 +93,10 @@ import { TradeStatus } from "../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
-import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
+import type {
+  IPokemonCollectionItemForPlayer,
+  IUserMetadataForPlayer
+} from "../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -286,8 +293,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     await Promise.all(
-      Object.keys(users).map(async (id) => {
-        const user = users[id]
+      Object.keys(users).map(async (uid) => {
+        const user = users[uid]
         //logger.debug(`init player`, user)
         if (user.isBot) {
           const player = new Player(
@@ -298,18 +305,31 @@ export default class GameRoom extends Room<{ state: GameState }> {
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonCollectionItemMongo>(),
+            new Map<string, IPokemonCollectionItemForPlayer>(),
             "",
             Role.BOT,
             this.state
           )
           this.state.players.set(user.uid, player)
           this.state.botManager.addBot(player)
-          player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
-          player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
+          player.doubleUpPartnerId = user.doubleUpPartnerId ?? ""
+          player.doubleUpTeamId = user.doubleUpTeamId ?? ""
         } else {
-          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
-          const user = leanUser ? toLeanUserMetadata(leanUser) : null
+          const leanUser = await UserMetadata.findOne({ uid })
+            .select({
+              // Player only needs each entry's selectedEmotion/selectedShiny and the
+              // avatar entry's unlocked mask, so drop the rest of the collection
+              "pokemonCollection.dust": 0,
+              "pokemonCollection.id": 0,
+              "pokemonCollection.played": 0,
+              "pokemonCollection._id": 0,
+              eventData: 0,
+              titles: 0
+            })
+            .lean<IUserMetadataForPlayer>()
+          const user = leanUser
+            ? { ...leanUser, pokemonCollection: toPlayerCollection(leanUser) }
+            : null
           if (user) {
             // init player
             const player = new Player(
@@ -328,8 +348,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
-            player.doubleUpPartnerId = users[id].doubleUpPartnerId ?? ""
-            player.doubleUpTeamId = users[id].doubleUpTeamId ?? ""
+            player.doubleUpPartnerId = users[uid].doubleUpPartnerId ?? ""
+            player.doubleUpTeamId = users[uid].doubleUpTeamId ?? ""
 
             if (
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
@@ -728,6 +748,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onJoin(client: Client) {
     const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+      .select({ banned: 1 })
+      .lean()
     if (userProfile?.banned) {
       throw "Account banned"
     }
@@ -969,221 +991,231 @@ export default class GameRoom extends Room<{ state: GameState }> {
     const rank = player.rank
     const exp = ExpPlace[rank - 1]
 
-    const usr = await UserMetadata.findOne({ uid: player.id })
-    if (usr) {
-      // Track previous values for notifications
-      const previousElo = usr.elo
-      const previousRank = getRank(previousElo)
-
-      if (eligibleToXP) {
-        giveUserExp(usr, exp)
+    // update pokemons played counter in user collection before checking for collector title
+    if (player.pokemonsPlayed.size > 0) {
+      const inc: Record<string, number> = {}
+      for (const pkm of player.pokemonsPlayed) {
+        const index = PkmIndex[pkm]
+        inc[`pokemonCollection.${index}.played`] = 1
       }
 
-      usr.games += 1
-      if (rank === 1) {
-        usr.wins += 1
-        if (this.state.gameMode === GameMode.RANKED) {
-          player.titles.add(Title.VANQUISHER)
-          const minElo = Math.min(
-            ...schemaValues(this.state.players).map((p) => p.elo)
-          )
-          if (usr.elo === minElo && humans.length >= 8) {
-            player.titles.add(Title.OUTSIDER)
-          }
-        }
-      }
+      // will create a { played: 1 } blank entry for any pokemon that the user has never played before
+      await UserMetadata.updateOne({ uid: player.id }, { $inc: inc })
+    }
 
-      if (usr.elo != null && eligibleToELO) {
-        let elo = computeElo(
-          this.transformToSimplePlayer(player),
-          rank,
-          usr.elo,
-          humans.map((p) => this.transformToSimplePlayer(p)),
-          this.state.gameMode,
-          false
+    // The collection is excluded entirely: nothing here mutates it, and COLLECTOR - the
+    // only thing that needs it - is resolved with its own query below.
+    const usr = await UserMetadata.findOne({ uid: player.id }).select({
+      pokemonCollection: 0
+    })
+    if (!usr) {
+      logger.warn(
+        `UserMetadata not found for player ${player.name} (${player.id})`
+      )
+      return
+    }
+
+    // Track previous values for notifications
+    const previousElo = usr.elo
+    const previousRank = getRank(previousElo)
+
+    if (eligibleToXP) {
+      giveUserExp(usr, exp)
+    }
+
+    usr.games += 1
+    if (rank === 1) {
+      usr.wins += 1
+      if (this.state.gameMode === GameMode.RANKED) {
+        player.titles.add(Title.VANQUISHER)
+        const minElo = Math.min(
+          ...schemaValues(this.state.players).map((p) => p.elo)
         )
-
-        if (!elo || isNaN(elo)) {
-          logger.error(
-            `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
-          )
-          elo = usr.elo
+        if (usr.elo === minElo && humans.length >= 8) {
+          player.titles.add(Title.OUTSIDER)
         }
+      }
+    }
 
-        usr.elo = elo
-        usr.maxElo = Math.max(usr.maxElo, elo)
+    if (usr.elo != null && eligibleToELO) {
+      let elo = computeElo(
+        this.transformToSimplePlayer(player),
+        rank,
+        usr.elo,
+        humans.map((p) => this.transformToSimplePlayer(p)),
+        this.state.gameMode,
+        false
+      )
 
-        // Check if elo rank changed
-        const newRank = getRank(elo)
-        if (newRank !== previousRank) {
-          notificationsService.addNotification(
-            player.id,
-            "elo_rank_change",
-            newRank
-          )
-        }
+      if (!elo || isNaN(elo)) {
+        logger.error(
+          `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
+        )
+        elo = usr.elo
+      }
 
-        if (
-          usr.eventFinishTime == null &&
-          getCurrentGameEvent() === GameEvent.VICTORY_ROAD
-        ) {
-          try {
-            const eventPointsGained =
-              VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
-            usr.eventPoints = clamp(
-              usr.eventPoints + eventPointsGained,
-              0,
-              VICTORY_ROAD_MAX_EVENT_POINTS
-            )
-            usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-            if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
-              usr.eventFinishTime = new Date()
-              usr.markModified("eventFinishTime")
+      usr.elo = elo
+      usr.maxElo = Math.max(usr.maxElo, elo)
 
-              const nbFinishers = await UserMetadata.countDocuments({
-                eventFinishTime: { $exists: true, $ne: null }
-              })
-              if (nbFinishers === 0) {
-                player.titles.add(Title.VICTORIOUS)
-                this.presence.publish(
-                  "announcement",
-                  `${player.name} won the Victory Road race !`
-                )
-              }
-              player.titles.add(Title.FINISHER)
-              notificationsService.addNotification(
-                player.id,
-                "victory_road_finished",
-                `${nbFinishers + 1}`
-              )
-              shouldRefetchEventLeaderboard = true
-            }
-
-            if (usr.maxEventPoints >= 100) {
-              player.titles.add(Title.RUNNER)
-            }
-          } catch (error) {
-            logger.error("Error updating event points", error)
-          }
-        }
+      // Check if elo rank changed
+      const newRank = getRank(elo)
+      if (newRank !== previousRank) {
+        notificationsService.addNotification(
+          player.id,
+          "elo_rank_change",
+          newRank
+        )
       }
 
       if (
-        this.state.gameMode === GameMode.DOUBLE_UP &&
-        getCurrentGameEvent() === GameEvent.POKEPALS &&
-        usr.eventData?.pal &&
-        this.state.players.has(usr.eventData?.pal) &&
-        usr.eventData?.pal === player.doubleUpPartnerId
+        usr.eventFinishTime == null &&
+        getCurrentGameEvent() === GameEvent.VICTORY_ROAD
       ) {
         try {
-          const eventPointsGained = PokepalsPointsPerRank[clamp(rank - 1, 0, 7)]
-          usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+          const eventPointsGained =
+            VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = clamp(
+            usr.eventPoints + eventPointsGained,
+            0,
+            VICTORY_ROAD_MAX_EVENT_POINTS
+          )
           usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-          player.titles.add(Title.PAL)
+          if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+            usr.markModified("eventFinishTime")
+
+            const nbFinishers = await UserMetadata.countDocuments({
+              eventFinishTime: { $exists: true, $ne: null }
+            })
+            if (nbFinishers === 0) {
+              player.titles.add(Title.VICTORIOUS)
+              this.presence.publish(
+                "announcement",
+                `${player.name} won the Victory Road race !`
+              )
+            }
+            player.titles.add(Title.FINISHER)
+            notificationsService.addNotification(
+              player.id,
+              "victory_road_finished",
+              `${nbFinishers + 1}`
+            )
+            shouldRefetchEventLeaderboard = true
+          }
+
+          if (usr.maxEventPoints >= 100) {
+            player.titles.add(Title.RUNNER)
+          }
         } catch (error) {
           logger.error("Error updating event points", error)
         }
       }
+    }
 
-      // add game to player game history
-      const dbrecord = this.transformToSimplePlayer(player)
-      const synergiesMap = new Map<Synergy, number>()
-      player.synergies.forEach((v, k) => {
-        v > 0 && synergiesMap.set(k, v)
-      })
-      DetailledStatistic.create({
-        time: Date.now(),
-        name: dbrecord.name,
-        pokemons: dbrecord.pokemons.map((pokemon) => ({
-          ...pokemon,
-          items: Array.from(pokemon.items ?? []).map(
-            (item) => item.toString() as Item
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      getCurrentGameEvent() === GameEvent.POKEPALS &&
+      usr.eventData?.pal &&
+      this.state.players.has(usr.eventData?.pal) &&
+      usr.eventData?.pal === player.doubleUpPartnerId
+    ) {
+      try {
+        const eventPointsGained = PokepalsPointsPerRank[clamp(rank - 1, 0, 7)]
+        usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+        usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+        player.titles.add(Title.PAL)
+      } catch (error) {
+        logger.error("Error updating event points", error)
+      }
+    }
+
+    // add game to player game history
+    const dbrecord = this.transformToSimplePlayer(player)
+    const synergiesMap = new Map<Synergy, number>()
+    player.synergies.forEach((v, k) => {
+      v > 0 && synergiesMap.set(k, v)
+    })
+    DetailledStatistic.create({
+      time: Date.now(),
+      name: dbrecord.name,
+      pokemons: dbrecord.pokemons.map((pokemon) => ({
+        ...pokemon,
+        items: Array.from(pokemon.items ?? []).map(
+          (item) => item.toString() as Item
+        )
+      })),
+      rank: dbrecord.rank,
+      nbplayers: humans.length + bots.length,
+      avatar: dbrecord.avatar,
+      playerId: dbrecord.id,
+      elo: usr.elo,
+      synergies: synergiesMap,
+      gameMode: this.state.gameMode,
+      regions: player.regions,
+      unholdableItems: schemaValues(player.items).filter((item) =>
+        isIn(UnholdableItemsToSaveForStats, item)
+      )
+    })
+
+    if (
+      getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
+      eligibleToXP &&
+      this.state.gameMode !== GameMode.CUSTOM_LOBBY
+    ) {
+      const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
+        player,
+        usr
+      )
+      if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+    }
+
+    updatePlayerTitlesAfterGame(player, usr, rank)
+
+    if (usr.titles === undefined) {
+      usr.titles = []
+    }
+
+    // COLLECTOR is the only title that depends on the collection, which is excluded from
+    // the read above, so it is resolved with its own query. Done before the save below so
+    // the title rides along in that single write.
+    if (!usr.titles.includes(Title.COLLECTOR)) {
+      const playedPokemonIndexes = await getPlayedPokemonIndexes(player.id)
+      updatePlayerCollectorTitle(player, playedPokemonIndexes)
+    }
+
+    const newTitlesEarned: Title[] = []
+    player.titles.forEach((t) => {
+      if (!usr.titles.includes(t)) {
+        //logger.info("title added ", t)
+        usr.titles.push(t)
+        newTitlesEarned.push(t)
+      }
+    })
+
+    // Add notification for new titles
+    if (newTitlesEarned.length > 0) {
+      newTitlesEarned.forEach((title) => {
+        notificationsService.addNotification(player.id, "new_title", title)
+        if (
+          isIn(TITLES_UNLOCKING_THEMES, title) &&
+          usr.level >= GADGETS.palette.levelRequired
+        ) {
+          notificationsService.addNotification(
+            player.id,
+            "new_theme",
+            THEME_BY_TITLE[title]!
           )
-        })),
-        rank: dbrecord.rank,
-        nbplayers: humans.length + bots.length,
-        avatar: dbrecord.avatar,
-        playerId: dbrecord.id,
-        elo: usr.elo,
-        synergies: synergiesMap,
-        gameMode: this.state.gameMode,
-        regions: player.regions,
-        unholdableItems: schemaValues(player.items).filter((item) =>
-          isIn(UnholdableItemsToSaveForStats, item)
-        )
-      })
-
-      // update all pokemons played count
-      player.pokemonsPlayed.forEach((pkm) => {
-        const index = PkmIndex[pkm]
-        const pokemonCollectionItem = usr.pokemonCollection.get(index)
-        if (pokemonCollectionItem) {
-          pokemonCollectionItem.played = pokemonCollectionItem.played + 1
-          usr.markModified(`pokemonCollection.${index}.played`)
-        } else {
-          const newConfig: IPokemonCollectionItemMongo = {
-            dust: 0,
-            id: index,
-            unlocked: Buffer.alloc(5, 0),
-            selectedEmotion: null,
-            selectedShiny: false,
-            played: 1
-          }
-          usr.pokemonCollection.set(index, newConfig)
         }
       })
+    }
 
-      if (
-        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
-        eligibleToXP &&
-        this.state.gameMode !== GameMode.CUSTOM_LOBBY
-      ) {
-        const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
-          player,
-          usr
-        )
-        if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
-      }
+    //logger.debug(usr);
+    //usr.markModified('metadata');
+    await usr.save()
 
-      updatePlayerTitlesAfterGame(player, usr, rank)
-
-      if (usr.titles === undefined) {
-        usr.titles = []
-      }
-
-      const newTitlesEarned: Title[] = []
-      player.titles.forEach((t) => {
-        if (!usr.titles.includes(t)) {
-          //logger.info("title added ", t)
-          usr.titles.push(t)
-          newTitlesEarned.push(t)
-        }
-      })
-
-      // Add notification for new titles
-      if (newTitlesEarned.length > 0) {
-        newTitlesEarned.forEach((title) => {
-          notificationsService.addNotification(player.id, "new_title", title)
-          if (
-            isIn(TITLES_UNLOCKING_THEMES, title) &&
-            usr.level >= GADGETS.palette.levelRequired
-          ) {
-            notificationsService.addNotification(
-              player.id,
-              "new_theme",
-              THEME_BY_TITLE[title]!
-            )
-          }
-        })
-      }
-
-      //logger.debug(usr);
-      //usr.markModified('metadata');
-      await usr.save()
-      if (shouldRefetchEventLeaderboard) {
-        await fetchEventLeaderboard()
-        //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
-      }
+    if (shouldRefetchEventLeaderboard) {
+      await fetchEventLeaderboard()
+      //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
     }
   }
 
