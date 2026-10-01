@@ -2,6 +2,7 @@ import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
 import type Dps from "../core/dps"
 import type { Effect as EffectClass } from "../core/effects/effect"
+import type { PokemonEntity } from "../core/pokemon-entity"
 import type Count from "../models/colyseus-models/count"
 import type ExperienceManager from "../models/colyseus-models/experience-manager"
 import type { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -92,7 +93,6 @@ export enum Transfer {
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
   DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
-  SEARCH_BY_ID = "SEARCH_BY_ID",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   NEW_TOURNAMENT = "NEW_TOURNAMENT",
@@ -374,8 +374,8 @@ export interface ISimulation {
   redPlayer: IPlayer | undefined
   blueEffects: Set<EffectEnum>
   redEffects: Set<EffectEnum>
-  blueTeam: MapSchema<IPokemonEntity>
-  redTeam: MapSchema<IPokemonEntity>
+  blueTeam: MapSchema<PokemonEntity>
+  redTeam: MapSchema<PokemonEntity>
   blueDpsMeter: MapSchema<Dps>
   redDpsMeter: MapSchema<Dps>
   bluePlayerId: string

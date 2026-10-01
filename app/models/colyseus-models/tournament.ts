@@ -67,8 +67,8 @@ export class TournamentSchema extends Schema implements ITournament {
     id: string,
     name: string,
     startDate: string,
-    players: MapSchema<ITournamentPlayer, string>,
-    brackets: MapSchema<ITournamentBracket, string>,
+    players: MapSchema<TournamentPlayerSchema, string>,
+    brackets: MapSchema<TournamentBracketSchema, string>,
     finished: boolean = false
   ) {
     super()

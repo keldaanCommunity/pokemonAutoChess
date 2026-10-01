@@ -46,7 +46,7 @@ export class OnJoinCommand extends Command<
     user: IUserMetadataMongo | null
   }) {
     try {
-      //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      //logger.info(`${client.auth.displayName} ${client.sessionId} join lobby room`)
       client.send(Transfer.ROOMS, this.room.rooms)
       client.userData = { joinedAt: Date.now() }
 
@@ -130,7 +130,7 @@ export class OnLeaveCommand extends Command<
   execute({ client }: { client: Client }) {
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
+        //logger.info(`${client.auth.displayName} ${client.sessionId} leave lobby`)
         this.room.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -385,22 +385,6 @@ export class ChangeAvatarCommand extends Command<
   }
 }
 
-export class OnSearchByIdCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; uid: string }
-> {
-  async execute({ client, uid }: { client: Client; uid: string }) {
-    try {
-      const user = await UserMetadata.findOne({ uid: uid })
-      if (user) {
-        client.send(Transfer.USER, user)
-      }
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
 export class BanUserCommand extends Command<
   CustomLobbyRoom,
   { client: Client; uid: string; reason: string }
@@ -526,7 +510,7 @@ export class ChoosePalCommand extends Command<
 > {
   async execute({ client, playerUid }: { client: Client; playerUid: string }) {
     try {
-      if(playerUid === client.auth.uid) return; // can't choose yourself as pal
+      if (playerUid === client.auth.uid) return // can't choose yourself as pal
       const u = this.room.users.get(client.auth.uid)
       if (client.auth.uid && u) {
         let eventData = {}
