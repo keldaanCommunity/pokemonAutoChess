@@ -82,24 +82,24 @@ export async function openBoosterForUser(
         const unlocked = updateOperations[`pokemonCollection.${index}`].unlocked
         CollectionUtils.unlockEmotion(unlocked, card.emotion, card.shiny)
       } else {
+        const unlocked = Buffer.alloc(5, 0)
         const newCollectionItem: IPokemonCollectionItemMongo = {
           id: index,
-          unlocked: Buffer.alloc(5, 0),
+          unlocked,
           dust: 0,
           selectedEmotion: Emotion.NORMAL,
           selectedShiny: false,
           played: 0
         }
-        CollectionUtils.unlockEmotion(
-          newCollectionItem.unlocked,
-          card.emotion,
-          card.shiny
-        )
+        CollectionUtils.unlockEmotion(unlocked, card.emotion, card.shiny)
         updateOperations[`pokemonCollection.${index}`] = newCollectionItem
       }
     } else {
+      // A thin entry - created for a pokemon that was playedbut never owned 
+      // has no mask to update, so start from a fresh one.
+      const mask = existingItem.unlocked ?? Buffer.alloc(5, 0)
       const hasUnlocked = CollectionUtils.hasUnlocked(
-        existingItem.unlocked,
+        mask,
         card.emotion,
         card.shiny
       )
@@ -110,13 +110,9 @@ export async function openBoosterForUser(
         updateOperations.$inc = updateOperations.$inc || {}
         updateOperations.$inc[`pokemonCollection.${shardIndex}.dust`] = dustGain
       } else {
-        CollectionUtils.unlockEmotion(
-          existingItem.unlocked,
-          card.emotion,
-          card.shiny
-        )
+        CollectionUtils.unlockEmotion(mask, card.emotion, card.shiny)
         updateOperations[`pokemonCollection.${index}.unlocked`] =
-          Buffer.copyBytesFrom(existingItem.unlocked, 0, 5)
+          Buffer.copyBytesFrom(mask, 0, 5)
       }
     }
   }

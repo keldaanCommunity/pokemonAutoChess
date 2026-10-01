@@ -1,4 +1,4 @@
-import { getSellPrice } from "../models/shop"
+import { RarityCost } from "../config/game/shop"
 import type { IPokemon, IPokemonEntity } from "../types"
 import { pickRandomIn } from "../utils/random"
 
@@ -6,7 +6,7 @@ export function getUnitScore(pokemon: IPokemonEntity | IPokemon) {
   let score = 0
   score += 100 * pokemon.items.size
   score += 10 * pokemon.stars
-  score += getSellPrice(pokemon, null, true)
+  score += RarityCost[pokemon.rarity]
   return score
 }
 

@@ -183,10 +183,6 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  onItemGiven(item: Item, player: Player) {
-    // called after giving an item to the mon
-  }
-
   onAcquired(player: Player) {
     // called after buying or picking the mon
   }
@@ -3195,11 +3191,6 @@ export class Pikachu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  onItemGiven(item: Item, player: Player): void {
-    if (item === Item.SURFBOARD) {
-      player.transformPokemon(this, Pkm.PIKACHU_SURFER)
-    }
-  }
 }
 
 export class Raichu extends Pokemon {
@@ -4391,8 +4382,8 @@ export class Wartortle extends Pokemon {
   hp = 120
   atk = 9
   speed = 50
-  def = 3
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -4403,10 +4394,10 @@ export class Blastoise extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 23
   speed = 50
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -13049,12 +13040,6 @@ export class Necrozma extends Pokemon {
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
-    }
-  }
 }
 
 export class UltraNecrozma extends Pokemon {
@@ -13129,12 +13114,6 @@ export class Cherrim extends Pokemon {
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
   regional = true
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
-    }
-  }
 }
 
 export class CherrimSunlight extends Pokemon {
@@ -16101,9 +16080,9 @@ export class Mantyke extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.PLACEMENT,
     condition: (
-      pokemon: IPokemon,
+      pokemon: Pokemon,
       player: IPlayer,
-      board: MapSchema<IPokemon>
+      board: MapSchema<Pokemon>
     ) => {
       for (const p of board.values()) {
         if (

@@ -588,6 +588,12 @@
   gap: 0.8em;
   flex-wrap: wrap; /* on a narrow card the actions drop below the name instead of overflowing the box */
 }
+.replay-row .gamemode.icon {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 .replay-row-info {
   display: flex;
   flex-direction: column;

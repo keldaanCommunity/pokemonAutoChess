@@ -62,7 +62,8 @@ export async function changeSelectedEmotionForUser(
 
   if (
     emotion !== null &&
-    !CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)
+    (!mongoItem.unlocked ||
+      !CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny))
   ) {
     return null
   }
@@ -105,18 +106,26 @@ export async function buyEmotionForUser(
     mongoItem = newCollectionItem
   }
 
-  if (CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)) {
+  if (
+    mongoItem.unlocked &&
+    CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)
+  ) {
     return { userDoc: mongoUser }
   }
 
-  if (mongoShardItem.dust < cost) return null
+  if ((mongoShardItem.dust ?? 0) < cost) return null
 
-  CollectionUtils.unlockEmotion(mongoItem.unlocked, emotion, shiny)
+  // A thin stored entry - created by the settlement $inc for a pokemon that was played
+  // but never owned - has no mask. Create one, otherwise the shards would be spent on
+  // an unlock that is never recorded.
+  const mask = mongoItem.unlocked ?? Buffer.alloc(5, 0)
+  mongoItem.unlocked = mask
+  CollectionUtils.unlockEmotion(mask, emotion, shiny)
   mongoItem.selectedEmotion = emotion
   mongoItem.selectedShiny = shiny
   mongoUser.markModified(`pokemonCollection.${index}`)
 
-  mongoShardItem.dust -= cost
+  mongoShardItem.dust = (mongoShardItem.dust ?? 0) - cost
 
   checkTitlesAfterEmotionUnlocked(mongoUser, [
     { name: PkmByIndex[index], emotion, shiny }
@@ -133,17 +142,17 @@ export async function migrateShardsOfAltForms(
 
   for (const [index, item] of mongoUser.pokemonCollection) {
     const pkm = PkmByIndex[index]
-    if (PkmAltForms.includes(pkm) && item.dust > 0) {
+    const dustToMigrate = item.dust ?? 0
+    if (PkmAltForms.includes(pkm) && dustToMigrate > 0) {
       const basePkm = getBaseAltForm(pkm)
       const baseIndex = PkmIndex[basePkm]
       const baseItem = mongoUser.pokemonCollection.get(baseIndex)
-      const dustToMigrate = item.dust
       if (!baseItem) {
         // Base form is not in collection, create new collection item
         const newCollectionItem: IPokemonCollectionItemMongo = {
           id: index,
           unlocked: Buffer.alloc(5, 0),
-          dust: item.dust,
+          dust: dustToMigrate,
           selectedEmotion: Emotion.NORMAL,
           selectedShiny: false,
           played: 0
@@ -151,7 +160,7 @@ export async function migrateShardsOfAltForms(
         mongoUser.pokemonCollection.set(baseIndex, newCollectionItem)
       } else {
         // Base form exists, add dust
-        baseItem.dust += dustToMigrate
+        baseItem.dust = (baseItem.dust ?? 0) + dustToMigrate
         item.dust = 0
       }
       logger.info(

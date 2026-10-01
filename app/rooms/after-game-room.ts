@@ -56,6 +56,8 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
+        .select({ banned: 1 })
+        .lean()
 
       if (!user.displayName) {
         throw "No display name"

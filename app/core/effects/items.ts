@@ -95,7 +95,6 @@ export function equipItems(pokemon: Pokemon, items: Item[], player: Player) {
   if (pokemon.canHoldItems === false) return
   for (const item of items) {
     pokemon.items.add(item)
-    pokemon.onItemGiven(item, player)
   }
   player.updateSynergies()
 }
@@ -1570,6 +1569,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ),
 
   [Item.SURFBOARD]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon.name === Pkm.PIKACHU) {
+        const transform = player.transformPokemon(pokemon, Pkm.PIKACHU_SURFER)
+        transform.items.add(Item.SURFBOARD)
+      }
+      return true
+    }),
     new OnItemUnequippedEffect(({ pokemon, player }) => {
       if (pokemon.name === Pkm.PIKACHU_SURFER) {
         player.transformPokemon(pokemon, Pkm.PIKACHU)
@@ -1682,6 +1688,19 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         removeInArray(player.items, item)
       }
       return false // prevent item from being equipped
+    })
+  ],
+
+  [Item.SHINY_STONE]: [
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon.passive === Passive.PRISM) {
+        const transform = player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
+        transform.items.add(Item.SHINY_STONE)
+      } else if (pokemon.passive === Passive.BLOSSOM) {
+        const transform = player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
+        transform.items.add(Item.SHINY_STONE)
+      }
+      return true
     })
   ],
 

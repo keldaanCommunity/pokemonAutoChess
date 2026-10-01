@@ -2,6 +2,7 @@ import { Room, SchemaSerializer } from "@colyseus/sdk"
 import pkg from "../../../../package.json"
 import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
+import { GameMode } from "../../../types/enum/Game"
 import { Passive } from "../../../types/enum/Passive"
 import { rooms } from "../network"
 import { preference, subscribeToPreference } from "../preferences"
@@ -77,14 +78,17 @@ function captureSummary(): ReplaySummary | undefined {
     })
     const summary: ReplaySummary = {}
     // player.rank is stale for a POV who left before elimination, so derive placement from the alive count
-    let aliveCount = 0
+    // double up ranks teams, not players
+    const isDoubleUp = state?.gameMode === GameMode.DOUBLE_UP
+    const alive = new Set<string>()
     state?.players?.forEach((p) => {
-      if (p.alive) aliveCount++
+      if (p.alive) alive.add(isDoubleUp ? p.doubleUpTeamId : p.id)
     })
-    const rank = deriveFinalRank(player.rank, player.alive, aliveCount)
+    const rank = deriveFinalRank(player.rank, player.alive, alive.size)
     if (rank) summary.rank = rank
     if (team.length) summary.team = team
     if (player.name) summary.name = player.name
+    if (state?.gameMode) summary.gameMode = state.gameMode
     return summary.rank || summary.team || summary.name ? summary : undefined
   } catch {
     return undefined

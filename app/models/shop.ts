@@ -151,8 +151,12 @@ export function getSellPrice(
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
   } else if (name === Pkm.MOTHIM) {
     price = RarityCost[pokemon.rarity] * 1
+  } else if (stars === 1) {
+    price = RarityCost[pokemon.rarity]
   } else {
-    price = RarityCost[pokemon.rarity] * stars
+    price = Math.ceil(
+      RarityCost[pokemon.rarity] * Math.pow(3, stars - 1) * 0.75
+    )
   }
 
   return price

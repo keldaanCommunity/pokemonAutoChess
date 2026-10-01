@@ -730,6 +730,7 @@ export default function Game() {
             room.state.phase === GamePhaseState.PICK &&
             stageLevel in PVEStages === false &&
             value < 5 &&
+            gameContainer.gameScene?.room === room &&
             gameContainer.gameScene?.board &&
             !gameContainer.gameScene.board.portal
           ) {
@@ -756,7 +757,8 @@ export default function Game() {
           }
           if (gameContainer.game) {
             const g = getGameScene()
-            if (g) {
+            // on a replay seek, listen() fires immediately while g is still the outgoing scene
+            if (g && g.room === room) {
               g.updatePhase(newPhase, previousPhase)
             }
           }

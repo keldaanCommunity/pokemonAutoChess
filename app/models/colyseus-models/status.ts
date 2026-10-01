@@ -162,7 +162,11 @@ export default class Status extends Schema implements IStatus {
       this.curse ||
       this.locked ||
       this.blinded ||
-      this.possessed
+      this.possessed ||
+      this.curseVulnerability ||
+      this.curseWeakness ||
+      this.curseTorment ||
+      this.curseFate
     )
   }
 

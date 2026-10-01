@@ -9,6 +9,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
 } from "../../config"
+import { getEloRangeByBotDifficulty } from "../../config/game/bots"
 import { GADGETS } from "../../config/game/gadgets"
 import {
   getPendingGame,
@@ -24,7 +25,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import type { EloRank } from "../../types/enum/EloRank"
-import { BotDifficulty, GameMode } from "../../types/enum/Game"
+import { type BotDifficulty, GameMode } from "../../types/enum/Game"
 import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IBot } from "../../types/models/bot-v2"
 import { getRank } from "../../utils/elo"
@@ -93,6 +94,19 @@ export class OnJoinCommand extends Command<
       }
 
       const u = await UserMetadata.findOne({ uid: auth.uid })
+        .select({
+          uid: 1,
+          displayName: 1,
+          elo: 1,
+          games: 1,
+          avatar: 1,
+          title: 1,
+          role: 1,
+          level: 1,
+          twitchLogin: 1,
+          twitchDisplayName: 1
+        })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -171,6 +185,7 @@ export class OnJoinCommand extends Command<
           // logger.debug(user.displayName);
           this.state.ownerName = u.displayName
           this.room.setMetadata({
+            ...this.room.metadata,
             ownerName: this.state.ownerName
           })
         }
@@ -548,6 +563,8 @@ export class OnRoomChangeSpecialRule extends Command<
   async execute({ client, specialRule }) {
     try {
       const u = await UserMetadata.findOne({ uid: client.auth?.uid })
+        .select({ role: 1 })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -643,6 +660,7 @@ export class OnKickPlayerCommand extends Command<
               })
               this.state.users.delete(userId)
               this.room.setMetadata({
+                ...this.room.metadata,
                 blacklist: this.room.metadata.blacklist.concat(userId)
               })
               cli.leave(CloseCodes.USER_KICKED)
@@ -698,7 +716,10 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
-              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setMetadata({
+                ...this.room.metadata,
+                ownerName: this.state.ownerName
+              })
               this.room.setName(
                 `${newOwner.name}'${
                   newOwner.name.endsWith("s") ? "" : "s"
@@ -816,6 +837,8 @@ export class InitializeBotsCommand extends Command<
   async execute({ ownerId }) {
     try {
       const user = await UserMetadata.findOne({ uid: ownerId })
+        .select({ elo: 1 })
+        .lean()
       if (user) {
         const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 
@@ -880,29 +903,8 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       } else {
         // pick a random bot per difficulty
         const difficulty = type
-        let elo: QueryFilter<IBot>["elo"] | undefined
-
-        switch (difficulty) {
-          case BotDifficulty.BEGINNER:
-            elo = { $lt: 850 }
-            break
-          case BotDifficulty.EASY:
-            elo = { $gte: 850, $lt: 1000 }
-            break
-          case BotDifficulty.MEDIUM:
-            elo = { $gte: 1000, $lt: 1150 }
-            break
-          case BotDifficulty.HARD:
-            elo = { $gte: 1150, $lt: 1300 }
-            break
-          case BotDifficulty.EXTREME:
-            elo = { $gte: 1300, $lt: 1450 }
-            break
-          case BotDifficulty.MASTER:
-            elo = { $gte: 1450 }
-            break
-        }
-
+        const [minElo, maxElo] = getEloRangeByBotDifficulty(difficulty)
+        const elo: QueryFilter<IBot>["elo"] = { $gte: minElo, $lt: maxElo }
         const existingBots = schemaEntries(this.state.users)
           .filter(([id, user]) => user.isBot)
           .map(([id, user]) => id)

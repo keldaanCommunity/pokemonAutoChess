@@ -70,7 +70,7 @@ import {
   type GameStats,
   initialGameStats
 } from "../../types/interfaces/GameStats"
-import type { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
+import type { IPokemonCollectionItemForPlayer } from "../../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import {
@@ -219,7 +219,7 @@ export default class Player extends Schema implements IPlayer {
     avatar: string,
     isBot: boolean,
     rank: number,
-    pokemonCollection: Map<string, IPokemonCollectionItemMongo>,
+    pokemonCollection: Map<string, IPokemonCollectionItemForPlayer>,
     title: Title | "",
     role: Role,
     state: GameState
@@ -373,13 +373,30 @@ export default class Player extends Schema implements IPlayer {
       previousSynergies,
       updatedSynergies
     )
-    if (artifNeedsRecomputing || normalNeedsRecomputing) {
+    let needsRecomputing = artifNeedsRecomputing || normalNeedsRecomputing
+    for (let i = 0; needsRecomputing && i < 10; i++) {
       /* NOTE: computing twice is costly in performance but the safest way to get the synergies
       right after losing an artificial item or a scarf, since many edgecases may need to be 
       adressed when losing a type (Axew double dragon + artif item for example) ;
       it's not as easy as just decrementing by 1 in updatedSynergies map count
       */
-      updatedSynergies = computeSynergies(pokemons, this.bonusSynergies)
+      const synergiesBeforeRecompute = updatedSynergies
+      updatedSynergies = computeSynergies(
+        pokemons,
+        this.bonusSynergies,
+        this.specialGameRule
+      )
+      // the recompute can move the Normal or Artificial tier again
+      const normalNeedsRecomputingAgain = this.updateScarves(
+        synergiesBeforeRecompute,
+        updatedSynergies
+      )
+      const artifNeedsRecomputingAgain = this.updateArtificialItems(
+        synergiesBeforeRecompute,
+        updatedSynergies
+      )
+      needsRecomputing =
+        normalNeedsRecomputingAgain || artifNeedsRecomputingAgain
     }
 
     const previousLight = previousSynergies.get(Synergy.LIGHT) ?? 0
