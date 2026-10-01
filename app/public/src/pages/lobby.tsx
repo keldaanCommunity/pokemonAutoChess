@@ -46,11 +46,7 @@ export default function Lobby() {
   const reconnecting = useRef<boolean>(false)
   useEffect(() => {
     if (!lobbyJoined.current) {
-      // leave the game before joining, so the lobby sees its reconnection hold and prompts for it
-      const timeout = new Promise((resolve) => setTimeout(resolve, 2000)) // a stalled socket can take a minute to close
-      Promise.race([leaveRoom("game", true), timeout]).finally(() => {
-        joinLobbyRoom(dispatch, navigate)
-      })
+      joinLobbyRoom(dispatch, navigate)
       lobbyJoined.current = true
     }
   }, [lobbyJoined])
@@ -77,11 +73,12 @@ export default function Lobby() {
   }
 
   const reconnectToGame = throttle(async function reconnectToGame() {
-    // the throttle's flag is re-created on every render
-    if (pendingGameId && !reconnecting.current) {
-      reconnecting.current = true
+    const idToken = await firebase.auth().currentUser?.getIdToken()
+    if (!idToken) {
+      navigate("/auth")
+    } else if (pendingGameId && !reconnecting.current) {
+      reconnecting.current = true // the throttle's flag is re-created on every render
       try {
-        const idToken = await firebase.auth().currentUser?.getIdToken()
         const game = await client.joinById<GameState>(pendingGameId, {
           idToken
         })

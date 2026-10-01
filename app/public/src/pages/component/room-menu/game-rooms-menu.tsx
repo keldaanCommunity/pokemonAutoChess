@@ -88,11 +88,12 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const connectToGame = throttle(async function connectToGame(
     selectedRoom: RoomAvailable<IGameMetadata>
   ) {
-    // a ref, since state would be read from the render closure this click was made in
-    if (rooms.lobby && !joining.current) {
-      joining.current = true
+    const token = await firebase.auth().currentUser?.getIdToken()
+    if (!token) {
+      navigate("/auth")
+    } else if (rooms.lobby && !joining.current) {
+      joining.current = true // a ref, since state would be read from the render closure this click was made in
       try {
-        const token = await firebase.auth().currentUser?.getIdToken()
         const game = await client.joinById<GameState>(selectedRoom.roomId, {
           idToken: token
         })

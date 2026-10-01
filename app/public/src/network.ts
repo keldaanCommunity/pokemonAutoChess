@@ -16,7 +16,6 @@ import type { MaintenanceOrder } from "../../types/enum/MaintenanceOrder"
 import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
-import { isReplayRoom } from "./game/replay-room-id"
 import type { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
@@ -119,9 +118,6 @@ export async function leaveRoom(
   const room = rooms[roomName]
   if (room) {
     rooms[roomName] = undefined
-    if (!isReplayRoom(room)) {
-      room.reconnection.enabled = false // or the sdk re-establishes the room we just left
-    }
     if (room.connection.isOpen) {
       return await room.leave(!allowReconnect)
     }
@@ -133,7 +129,7 @@ export async function leaveAllRooms() {
   return await Promise.allSettled([
     leaveRoom("lobby"),
     leaveRoom("preparation"),
-    leaveRoom("game", true), // a room switch, not a surrender
+    leaveRoom("game"),
     leaveRoom("after")
   ])
 }
