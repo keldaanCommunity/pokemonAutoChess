@@ -3780,7 +3780,9 @@
 		"POSTMAN": "Postman",
 		"SURVEY_CORPS": "Survey Corps",
 		"GUILDMASTER": "Guildmaster",
+		"GUILD_HERO": "Guild Hero",
 		"PAL": "Pal",
+		"BESTIE": "Bestie",
 		"LEGIONNAIRE": "Legionnaire",
 		"FIVE_STARS": "★★★★★",
 		"BODYBUILDER": "Bodybuilder"
@@ -3880,7 +3882,9 @@
 		"POSTMAN": "Complete a Delivery mission expedition",
 		"SURVEY_CORPS": "Complete a Battle mission expedition",
 		"GUILDMASTER": "Complete a rank S expedition",
+		"GUILD_HERO": "Finish first on the Expeditions leaderboard at the end of the event",
 		"PAL": "Play in Double Up with your pal during Poképals event",
+		"BESTIE": "Finish first on Poképals leaderboard with your pal at the end of the event",
 		"LEGIONNAIRE": "Make a Falinks formation with 8 troopers or more",
 		"FIVE_STARS": "Play with a five stars Pokémon in your team",
 		"BODYBUILDER": "Get a FIGHTING Pokémon to +40 ATK after training on the bench."
