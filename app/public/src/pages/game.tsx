@@ -363,11 +363,7 @@ export default function Game() {
       await r.leave(false)
     }
     const game = rooms.game // not `room`: the back button holds a leave() from before the room was set
-    if (
-      game?.connection.isOpen &&
-      !isReplayRoom(game) &&
-      !game.state.gameFinished
-    ) {
+    if (game?.connection.isOpen && !isReplayRoom(game)) {
       // without it the server holds our seat for reconnection instead of surrendering
       await game
         .request("surrender", undefined, { timeout: 3000 })
