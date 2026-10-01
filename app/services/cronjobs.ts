@@ -18,7 +18,8 @@ import UserMetadata from "../models/mongo-models/user-metadata"
 import { Title } from "../types"
 import { EloRank } from "../types/enum/EloRank"
 import { GameMode } from "../types/enum/Game"
-import { GameEvent } from "../types/events"
+import { GameEvent, GameEvents } from "../types/events"
+import { wait } from "../utils/function"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 import { logPreviousDayBoosterCreationStats } from "./booster-monitor"
@@ -88,7 +89,10 @@ export function initCronJobs(isMainThread: boolean) {
     CronJob.from({
       cronTime: "0 0 1 * *", // at midnight UTC on the first day of each month
       timeZone: "UTC",
-      onTick: () => resetEventScores(),
+      onTick: async () => {
+        await changeMonthlyEvent()
+        await resetEventScores()
+      },
       start: true
     })
 
@@ -241,6 +245,44 @@ async function deleteOldHistory() {
   logger.info(`${deleteResults.deletedCount} detailed statistics deleted`)
 }
 
+async function changeMonthlyEvent() {
+  const monthLastWeek = new Date()
+  monthLastWeek.setDate(monthLastWeek.getDate() - 7)
+  const previousEvent =
+    GameEvents[monthLastWeek.getUTCMonth() % GameEvents.length]
+
+  try {
+    logger.info(`[CRON] Cloturing event ${previousEvent}...`)
+
+    if (previousEvent === GameEvent.POKEPALS) {
+      // give the title Bestie to the two players of the winning team (that have the highest eventPoints)
+      const winners = await awardTitleToTopEventPlayers(Title.BESTIE)
+      if (winners.length > 0) {
+        // publish an announcement with the names of the players that won the Poképals event
+        matchMaker.presence.publish(
+          "announcement",
+          `Congratulations to ${winners.join(
+            " and "
+          )} for winning the Poképals contest and earning the Bestie title!`
+        )
+      }
+    } else if (previousEvent === GameEvent.EXPEDITIONS) {
+      // give the title Guild Hero to the players with the highest eventPoints
+      const winners = await awardTitleToTopEventPlayers(Title.GUILD_HERO)
+      if (winners.length > 0) {
+        matchMaker.presence.publish(
+          "announcement",
+          `Congratulations to ${winners.join(
+            " and "
+          )} for winning the Expeditions season and earning the Guild Hero title!`
+        )
+      }
+    }
+  } catch (e) {
+    logger.error("Error during cloturing event:", e)
+  }
+}
+
 async function resetEventScores() {
   try {
     logger.info("[CRON] Starting event scores reset...")
@@ -268,30 +310,56 @@ async function resetEventScores() {
       `Event reset completed! Reset event data for ${result.modifiedCount} users`
     )
 
-    setTimeout(() => {
-      const newEvent = getCurrentGameEvent()
-      switch (newEvent) {
-        case GameEvent.VICTORY_ROAD:
-          matchMaker.presence.publish(
-            "announcement",
-            "Victory Road has started! Be the first to reach the finish line!"
-          )
-          break
-        case GameEvent.EXPEDITIONS:
-          matchMaker.presence.publish(
-            "announcement",
-            "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
-          )
-          break
-        case GameEvent.POKEPALS:
-          matchMaker.presence.publish(
-            "announcement",
-            "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
-          )
-          break
-      }
-    }, 60 * 1000) // wait 1 minute to ensure the clock has ticked to the next month for all servers
+    await wait(60 * 1000) // wait 1 minute to ensure the clock has ticked to the next month for all servers
+
+    const newEvent = getCurrentGameEvent()
+    switch (newEvent) {
+      case GameEvent.VICTORY_ROAD:
+        matchMaker.presence.publish(
+          "announcement",
+          "Victory Road has started! Be the first to reach the finish line!"
+        )
+        break
+      case GameEvent.EXPEDITIONS:
+        matchMaker.presence.publish(
+          "announcement",
+          "Expeditions season has started! Earn bonus experience points by accomplishing various challenges!"
+        )
+        break
+      case GameEvent.POKEPALS:
+        matchMaker.presence.publish(
+          "announcement",
+          "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
+        )
+        break
+    }
   } catch (e) {
     logger.error("Error during event reset scores:", e)
   }
+}
+
+async function awardTitleToTopEventPlayers(title: Title): Promise<string[]> {
+  const topPlayer = await UserMetadata.findOne(
+    { eventPoints: { $gt: 0 } },
+    { eventPoints: 1 }
+  )
+    .sort({ eventPoints: -1 })
+    .lean()
+
+  if (!topPlayer) {
+    return []
+  }
+
+  const topEventPoints = topPlayer.eventPoints
+  const winners = await UserMetadata.find(
+    { eventPoints: topEventPoints },
+    { displayName: 1 }
+  ).lean()
+
+  await UserMetadata.updateMany(
+    { eventPoints: topEventPoints },
+    { $addToSet: { titles: title } }
+  )
+
+  return winners.map((winner) => winner.displayName)
 }

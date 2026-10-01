@@ -1,5 +1,6 @@
 .bot-select-modal {
   height: 90vh;
+  width: 1540px;
   overflow-y: auto;
   z-index: 20;
   display: grid;
@@ -20,22 +21,8 @@
   gap: 8px;
 }
 
-.bot-select-modal ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, auto));
-  grid-auto-rows: min-content;
-  padding: 0;
-  overflow: auto;
-  width: 1500px;
-  max-width: 100%;
-  gap: 8px;
-}
-
 .bot-select-grid {
-  width: 1500px;
-  max-width: 100%;
   flex: 1;
-  min-height: 0;
 }
 
 .bot-select-modal li:hover {
@@ -45,4 +32,8 @@
 
 .bot-select-modal li.selected {
   background-color: #109fff;
+}
+
+.bot-select-modal .player-name {
+  font-size: 80%;
 }

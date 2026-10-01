@@ -139,6 +139,7 @@ export class TradingPlatform extends GameObjects.Container {
       this.clockText
     ])
     this.scene.add.existing(this)
+    this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.updateTrade(board.mode)
   }
 

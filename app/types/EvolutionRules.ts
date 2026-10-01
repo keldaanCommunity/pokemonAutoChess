@@ -1,4 +1,5 @@
 import type { MapSchema } from "@colyseus/schema"
+import type { Pokemon } from "../models/colyseus-models/pokemon"
 import type GameState from "../rooms/states/game-state"
 import type { IPlayer, IPokemon } from "."
 import type { Item } from "./enum/Item"
@@ -44,9 +45,9 @@ export type StateEvolutionRule = EvolutionRuleCommon & {
 export type PlacementEvolutionRule = EvolutionRuleCommon & {
   type: EvolutionRuleType.PLACEMENT
   condition: (
-    pokemon: IPokemon,
+    pokemon: Pokemon,
     player: IPlayer,
-    board: MapSchema<IPokemon>
+    board: MapSchema<Pokemon>
   ) => boolean
 }
 

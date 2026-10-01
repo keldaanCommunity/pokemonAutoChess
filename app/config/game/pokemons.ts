@@ -27,6 +27,7 @@ export const UnownsStage2 = [
   Pkm.UNOWN_A,
   Pkm.UNOWN_B,
   Pkm.UNOWN_C,
+  Pkm.UNOWN_D,
   Pkm.UNOWN_G,
   Pkm.UNOWN_H,
   Pkm.UNOWN_I,
@@ -116,7 +117,7 @@ export function getAltFormForPlayer(pkm: Pkm, player: IPlayer): Pkm {
           return Pkm.FLORGES_ORANGE
         case FlowerPot.BLUE:
           return Pkm.FLORGES_BLUE
-        case FlowerPot.WHITE: 
+        case FlowerPot.WHITE:
           return Pkm.FLORGES_WHITE
       }
       return Pkm.FLORGES
@@ -441,7 +442,6 @@ export const VivillonFormPerSynergy = {
   [Synergy.FAIRY]: Pkm.VIVILLON_FANCY,
   [Synergy.ARTIFICIAL]: Pkm.VIVILLON_POKE_BALL
 } satisfies { [key in Synergy]?: Pkm }
-
 
 export const ArceusFormPerSynergy = {
   [Synergy.BUG]: Pkm.ARCEUS_BUG,

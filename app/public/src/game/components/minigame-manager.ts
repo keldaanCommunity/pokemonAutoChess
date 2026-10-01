@@ -2,6 +2,12 @@ import type { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
 import Phaser from "phaser"
 import { TownEncounterSellPrice } from "../../../../config"
+import type { FloatingItem } from "../../../../models/colyseus-models/floating-item"
+import type { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
+import type {
+  Portal as PortalSchema,
+  SynergySymbol as SynergySymbolSchema
+} from "../../../../models/colyseus-models/portal"
 import type GameState from "../../../../rooms/states/game-state"
 import {
   Emotion,
@@ -111,7 +117,7 @@ export default class MinigameManager {
     this.symbols.forEach(interpolatePosition(0.02, 0.25, 50))
   }
 
-  buildPokemons(avatars: MapSchema<IPokemonAvatar, string>) {
+  buildPokemons(avatars: MapSchema<PokemonAvatarModel, string>) {
     avatars.forEach((pkm) => {
       if (pkm.portalId === "") {
         // we dont show pokemon if it has already taken a portal
@@ -120,16 +126,16 @@ export default class MinigameManager {
     })
   }
 
-  buildItems(items: MapSchema<IFloatingItem, string>) {
+  buildItems(items: MapSchema<FloatingItem, string>) {
     items.forEach((item) => {
       this.addItem(item)
     })
   }
 
   buildPortals(
-    portals: MapSchema<IPortal, string>,
-    symbols: MapSchema<ISynergySymbol, string>,
-    avatars: MapSchema<IPokemonAvatar, string>
+    portals: MapSchema<PortalSchema, string>,
+    symbols: MapSchema<SynergySymbolSchema, string>,
+    avatars: MapSchema<PokemonAvatarModel, string>
   ) {
     const portalsTaken = new Set<string>()
     avatars.forEach((avatar) => {

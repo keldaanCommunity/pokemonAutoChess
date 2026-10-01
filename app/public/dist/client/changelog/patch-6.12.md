@@ -26,6 +26,14 @@
 - Rework Bite: Deal [300,400,500,1000]% of user ATK as SPECIAL to the target and heal the user for [50,SP]% of the damage dealt
 - Change ability of Totodile line to Bite instead of Crunch.
 - Change ability of Larvitar line to Pursuit instead of Bite. Pursuit: Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.
+- Buff Bounsweet line: PP 120 → 90
+- Rework Unown-D (DUPE): Transform into a copy of your STRONGEST ally without its items and permanent buffs. PP 100 → 50
+- Change Unown-N (NUKE): No longer consume PP and trigger on-cast effects. Fixed SHIELD amount given not increasing with CRIT_POWER on crit. Clarified description. PP 100 → 80
+- Change Unown-V (VOLT): No longer consume PP and trigger on-cast effects for each thunder shock. Clarified description. PP 90 → 60
+- Change Unown-Y (YOGA): No longer consume PP and trigger on-cast effects. Clarified description.
+- Nerf Attack Order (Vespiqueen): base damage [20,40,60,120] → [10,20,30,60] SPECIAL
+- Buff Wartortle: DEF/SPE_DEF 3 → 4 ; Buff Blastoise: DEF/SPE_DEF 4 → 6, ATK 20 → 23
+- Rework Nightmare (Ghastly): now applies damage to all enemies suffering from a negative status condition instead of just GHOST curse.
 
 # Changes to Synergies
 
@@ -46,6 +54,8 @@
 
 - Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
+- The chance to find a Ditto in the shop has been increased: 0.5% → 0.5% + 0.01% per reroll since last Ditto found.
+- Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
 
 # UI
 
@@ -60,11 +70,15 @@
 
 # Bugfix
 
+- Grookey line now works properly with Electric triple attack effects
+
 # Misc
 
 - The post game screen has new victory jingles made by John Rei
 - Removed Bench is Lava scribble
 - Add "Base" to the glossary of technical terms
 - New title: Bodybuilder. Get a FIGHTING Pokémon to +40 ATK after training on the bench.
+- New title: Guild Hero. Finish first on the Expeditions leaderboard at the end of the event.
+- New title: Bestie. Finish first on Poképals leaderboard with your pal at the end of the event.
 - Synergy meta report is now public
 - Add FPS limiter option to settings

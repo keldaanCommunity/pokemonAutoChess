@@ -1,8 +1,10 @@
 import type React from "react"
 import { useTranslation } from "react-i18next"
+import { getBotDifficultyByElo } from "../../../../../config/game/bots"
 import { validateBot } from "../../../../../core/bot-logic"
 import { Emotion, type PkmWithCustom } from "../../../../../types"
-import type { Pkm } from "../../../../../types/enum/Pokemon"
+import { BotDifficulty } from "../../../../../types/enum/Game"
+import { Pkm } from "../../../../../types/enum/Pokemon"
 import { getAvatarSrc } from "../../../../../utils/avatar"
 import type { IBot } from "../../../models/bot-v2"
 
@@ -33,6 +35,26 @@ export default function BotAvatar(props: {
   }
 
   const errors = validateBot(props.bot)
+  const botDifficulty = getBotDifficultyByElo(props.bot.elo)
+
+  function getColorByEloRange(elo: number): string {
+    switch (botDifficulty) {
+      case BotDifficulty.BEGINNER:
+        return "var(--color-rarity-common)"
+      case BotDifficulty.EASY:
+        return "var(--color-rarity-uncommon)"
+      case BotDifficulty.MEDIUM:
+        return "var(--color-rarity-rare)"
+      case BotDifficulty.HARD:
+        return "var(--color-rarity-epic)"
+      case BotDifficulty.EXTREME:
+        return "var(--color-rarity-ultra)"
+      case BotDifficulty.MASTER:
+        return "var(--color-rarity-legendary)"
+      default:
+        return "var(--color-rarity-common)"
+    }
+  }
 
   return (
     <div id="bot-info" className="my-box">
@@ -43,21 +65,39 @@ export default function BotAvatar(props: {
         onDrop={handleDrop}
         onClick={props.onClick}
       />
+      {props.bot.name === Pkm.DEFAULT ? (
+        <p
+          style={{ color: "var(--color-fg-negative)", whiteSpace: "pre-line" }}
+        >
+          {t("bot_builder.default_name_warning")}
+        </p>
+      ) : (
+        <p>
+          {props.bot.name} {props.bot.author && "by " + props.bot.author}
+        </p>
+      )}
       <p>
-        {props.bot.name} {props.bot.author && "by " + props.bot.author}
+        {t("elo")}:{" "}
+        <span
+          style={{
+            fontWeight: "bold",
+            color: getColorByEloRange(props.bot.elo)
+          }}
+        >
+          {props.bot.elo} - {t(`bot_difficulty.${botDifficulty}`)}
+        </span>
       </p>
-      <p>ELO: {props.bot.elo}</p>
       <p>
         {errors.length > 0 ? (
           <span
             style={{ color: "var(--color-fg-negative)" }}
             title={errors.join("\n")}
           >
-            {t("invalid")}
+            {t("bot_builder.invalid")}
           </span>
         ) : (
           <span style={{ color: "var(--color-fg-positive)" }}>
-            {t("valid")}
+            {t("bot_builder.valid")}
           </span>
         )}
       </p>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { Grid } from "react-window"
+import { Role } from "../../../../../types"
 import type { IBot } from "../../../models/bot-v2"
 import { addBot } from "../../../network"
 import { cc } from "../../utils/jsx"
@@ -11,8 +12,8 @@ import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
 import "./bot-select-modal.css"
 
-const MIN_COL_WIDTH = 360
-const ROW_HEIGHT = 58
+const MIN_COL_WIDTH = 400
+const ROW_HEIGHT = 60
 
 export function BotSelectModal(props: {
   botsSelected: string[]
@@ -51,7 +52,11 @@ export function BotSelectModal(props: {
       (bot) =>
         !props.botsSelected || props.botsSelected.includes(bot.id) === false
     )
-    .filter((bot) => bot.name.toLowerCase().includes(queryBot.toLowerCase()))
+    .filter(
+      (bot) =>
+        bot.name.toLowerCase().includes(queryBot.toLowerCase()) ||
+        bot.author.toLowerCase().includes(queryBot.toLowerCase())
+    )
     .sort(
       (a, b) =>
         (a[sortBotsCriteria] < b[sortBotsCriteria] ? -1 : 1) *
@@ -69,8 +74,8 @@ export function BotSelectModal(props: {
           <div className="spacer"></div>
           <input
             type="search"
-            style={{ maxWidth: "20ch" }}
-            placeholder="Search by name"
+            style={{ maxWidth: "30ch" }}
+            placeholder={t("search_by_name_or_author")}
             value={queryBot}
             onInput={(e) => setQueryBot((e.target as HTMLInputElement).value)}
           />
@@ -90,6 +95,14 @@ export function BotSelectModal(props: {
           >
             {t("sort_by_name")}
           </button>
+          <button
+            onClick={() => {
+              sortBy("author")
+            }}
+            className="bubbly dark"
+          >
+            {t("sort_by_author")}
+          </button>
         </>
       }
       body={
@@ -107,7 +120,7 @@ export function BotSelectModal(props: {
                     1,
                     Math.floor(width / MIN_COL_WIDTH)
                   )
-                  const columnWidth = Math.floor(width / columnCount)
+                  const columnWidth = Math.floor(width / columnCount) - 3
                   const rowCount = Math.ceil(
                     botsListSorted.length / columnCount
                   )
@@ -199,7 +212,12 @@ function BotCell({
         }}
       >
         <EloBadge elo={bot.elo} />
-        <InlineAvatar avatar={bot.avatar} name={bot.name} />
+        <InlineAvatar
+          avatar={bot.avatar}
+          name={bot.name}
+          role={Role.BOT}
+          author={bot.author}
+        />
       </li>
     </div>
   )

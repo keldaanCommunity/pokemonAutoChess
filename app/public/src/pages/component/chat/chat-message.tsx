@@ -1,11 +1,11 @@
 import { type IChatV2, Role } from "../../../../../types"
+import { Emotion } from "../../../../../types/enum/Emotion"
+import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { getPokemonCustomFromAvatar } from "../../../../../utils/avatar"
 import { useAppSelector } from "../../../hooks"
 import { type ChatRoom, removeMessage, searchById } from "../../../network"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
-import { Emotion } from "../../../../../types/enum/Emotion"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
-import { getPokemonCustomFromAvatar } from "../../../../../utils/avatar"
 
 export default function ChatMessage(props: {
   message: IChatV2
@@ -17,8 +17,12 @@ export default function ChatMessage(props: {
     timeStyle: "short"
   })
   const isServerMessage = props.message.authorId === "server"
-  const isEmote = Object.values(Emotion).includes(props.message.payload as Emotion)
-  const emoteData = isEmote ? getPokemonCustomFromAvatar(props.message.avatar) : null
+  const isEmote = Object.values(Emotion).includes(
+    props.message.payload as Emotion
+  )
+  const emoteData = isEmote
+    ? getPokemonCustomFromAvatar(props.message.avatar)
+    : null
 
   return (
     <div className={cc("chat-message-container", { "emote-message": isEmote })}>
@@ -58,7 +62,11 @@ export default function ChatMessage(props: {
       )}
       {isEmote && emoteData ? (
         <PokemonPortrait
-          portrait={{ index: PkmIndex[emoteData.name], shiny: emoteData.shiny, emotion: props.message.payload as Emotion }}
+          portrait={{
+            index: PkmIndex[emoteData.name],
+            shiny: emoteData.shiny,
+            emotion: props.message.payload as Emotion
+          }}
           className="chat-emote-message"
         />
       ) : (

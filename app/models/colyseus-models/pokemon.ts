@@ -182,10 +182,6 @@ export class Pokemon extends Schema implements IPokemon {
     )
   }
 
-  onItemGiven(item: Item, player: Player) {
-    // called after giving an item to the mon
-  }
-
   onItemRemoved(item: Item, player: Player) {
     // called after an item is unequipped from the mon
   }
@@ -259,7 +255,6 @@ export class Pokemon extends Schema implements IPokemon {
     if (this.canHoldItems === false) return
     for (const item of items) {
       this.items.add(item)
-      this.onItemGiven(item, player)
     }
     player.updateSynergies()
   }
@@ -833,7 +828,7 @@ export class Bounsweet extends Pokemon {
   speed = 48
   def = 8
   speDef = 8
-  maxPP = 120
+  maxPP = 90
   range = 1
   skill = Ability.TROP_KICK
 }
@@ -852,7 +847,7 @@ export class Steenee extends Pokemon {
   speed = 48
   def = 10
   speDef = 10
-  maxPP = 120
+  maxPP = 90
   range = 1
   skill = Ability.TROP_KICK
 }
@@ -870,7 +865,7 @@ export class Tsareena extends Pokemon {
   speed = 48
   def = 12
   speDef = 12
-  maxPP = 120
+  maxPP = 90
   range = 1
   skill = Ability.TROP_KICK
 }
@@ -3251,11 +3246,6 @@ export class Pikachu extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.NUZZLE
-  onItemGiven(item: Item, player: Player): void {
-    if (item === Item.SURFBOARD) {
-      player.transformPokemon(this, Pkm.PIKACHU_SURFER)
-    }
-  }
 }
 
 export class Raichu extends Pokemon {
@@ -4447,8 +4437,8 @@ export class Wartortle extends Pokemon {
   hp = 120
   atk = 9
   speed = 50
-  def = 3
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -4459,10 +4449,10 @@ export class Blastoise extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 23
   speed = 50
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -11127,7 +11117,7 @@ export class UnownD extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 50
   range = 9
   skill = Ability.HIDDEN_POWER_D
   passive = Passive.UNOWN
@@ -11287,7 +11277,7 @@ export class UnownN extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 80
   range = 9
   skill = Ability.HIDDEN_POWER_N
   passive = Passive.UNOWN
@@ -11415,7 +11405,7 @@ export class UnownV extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 90
+  maxPP = 60
   range = 9
   skill = Ability.HIDDEN_POWER_V
   passive = Passive.UNOWN
@@ -13110,12 +13100,6 @@ export class Necrozma extends Pokemon {
   range = 1
   skill = Ability.PRISMATIC_LASER
   passive = Passive.PRISM
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.ULTRA_NECROZMA)
-    }
-  }
 }
 
 export class UltraNecrozma extends Pokemon {
@@ -13190,12 +13174,6 @@ export class Cherrim extends Pokemon {
   skill = Ability.NATURAL_GIFT
   passive = Passive.BLOSSOM
   regional = true
-
-  onItemGiven(item: Item, player: Player) {
-    if (item === Item.SHINY_STONE) {
-      player.transformPokemon(this, Pkm.CHERRIM_SUNLIGHT)
-    }
-  }
 }
 
 export class CherrimSunlight extends Pokemon {
@@ -16162,9 +16140,9 @@ export class Mantyke extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.PLACEMENT,
     condition: (
-      pokemon: IPokemon,
+      pokemon: Pokemon,
       player: IPlayer,
-      board: MapSchema<IPokemon>
+      board: MapSchema<Pokemon>
     ) => {
       for (const p of board.values()) {
         if (

@@ -1,4 +1,5 @@
 import { pack, unpack } from "@colyseus/msgpackr"
+import type { GameMode } from "../../../types/enum/Game"
 
 // .colreplay = "CLRP" container: header + length-prefixed frame records + optional match-summary footer. each frame
 // stores raw inbound Colyseus bytes (handshake/state/patch) or a re-encoded ROOM_DATA message, so playback feeds
@@ -195,6 +196,7 @@ export interface ReplaySummary {
   rank?: number // final placement, 1 (winner) … 8
   team?: ReplaySummaryUnit[] // POV final board, for portrait thumbnails
   name?: string
+  gameMode?: GameMode // read at close: the header can be written before the first state sync
 }
 
 // derive the POV's final placement for the trailer. player.rank (game-room.ts rankPlayers) is authoritative once the

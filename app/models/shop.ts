@@ -2,7 +2,8 @@ import {
   AQUA_MONICA_CHANCE,
   ARCEUS_RATE,
   BuyPrices,
-  DITTO_RATE,
+  DITTO_BASE_RATE,
+  DITTO_RATE_PER_REROLL,
   EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FIERY_DRUM_CHANCE,
@@ -150,8 +151,12 @@ export function getSellPrice(
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
   } else if (name === Pkm.MOTHIM) {
     price = RarityCost[pokemon.rarity] * 1
+  } else if (stars === 1) {
+    price = RarityCost[pokemon.rarity]
   } else {
-    price = RarityCost[pokemon.rarity] * stars
+    price = Math.ceil(
+      RarityCost[pokemon.rarity] * Math.pow(3, stars - 1) * 0.75
+    )
   }
 
   return price
@@ -607,12 +612,16 @@ export default class Shop {
     noSpecial = false,
     specificTypes?: Synergy[]
   ): Pkm {
+    const dittoRate =
+      DITTO_BASE_RATE +
+      DITTO_RATE_PER_REROLL * player.gameStats.rerollCountSinceLastDitto
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
-      chance(DITTO_RATE) &&
+      chance(dittoRate) &&
       state.stageLevel >= MIN_STAGE_FOR_DITTO &&
       !noSpecial
     ) {
+      player.gameStats.rerollCountSinceLastDitto = 0
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 

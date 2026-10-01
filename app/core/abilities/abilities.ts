@@ -144,7 +144,7 @@ import { EntanglingThreadStrategy } from "./entangling-thread"
 import { EntrainmentStrategy } from "./entrainment"
 import { EruptionStrategy } from "./eruption"
 import { ExpandingForceStrategy } from "./expanding-force"
-import { explosionStrategy } from "./explosion"
+import { ExplosionStrategy } from "./explosion"
 import { ExtremeSpeedStrategy } from "./extreme-speed"
 import { FacadeStrategy } from "./facade"
 import { FairyLockStrategy } from "./fairy-lock"
@@ -307,7 +307,7 @@ import { MakeItRainStrategy } from "./make-it-rain"
 import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
 import { MawashiGeriStrategy } from "./mawashi-geri"
-import { meditateStrategy } from "./meditate"
+import { MeditateStrategy } from "./meditate"
 import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"
@@ -384,7 +384,7 @@ import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
-import { PursuitStrategy } from "./pursuit";
+import { PursuitStrategy } from "./pursuit"
 import { PyroBallStrategy } from "./pyro-ball"
 import { QuiverDanceStrategy } from "./quiver-dance"
 import { RageStrategy } from "./rage"
@@ -520,7 +520,7 @@ import { ThrashStrategy } from "./thrash"
 import { ThunderStrategy } from "./thunder"
 import { ThunderCageStrategy } from "./thunder-cage"
 import { ThunderFangStrategy } from "./thunder-fang"
-import { thunderShockStrategy } from "./thunder-shock"
+import { ThunderShockStrategy } from "./thunder-shock"
 import { ThunderclapPressStrategy } from "./thunderclap-press"
 import { ThunderousKickStrategy } from "./thunderous-kick"
 import { TickleStrategy } from "./tickle"
@@ -865,7 +865,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
   [Ability.ERUPTION]: new EruptionStrategy(),
   [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy(),
-  [Ability.EXPLOSION]: explosionStrategy,
+  [Ability.EXPLOSION]: new ExplosionStrategy(),
   [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
   [Ability.FACADE]: new FacadeStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
@@ -1027,7 +1027,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
-  [Ability.MEDITATE]: meditateStrategy,
+  [Ability.MEDITATE]: new MeditateStrategy(),
   [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
@@ -1243,7 +1243,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
-  [Ability.THUNDER_SHOCK]: thunderShockStrategy,
+  [Ability.THUNDER_SHOCK]: new ThunderShockStrategy(),
   [Ability.THUNDERCLAP_PRESS]: new ThunderclapPressStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.TICKLE]: new TickleStrategy(),
