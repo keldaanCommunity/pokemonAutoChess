@@ -62,7 +62,6 @@ import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
-  Emotion,
   FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
@@ -258,23 +257,14 @@ export class OnPokemonCatchCommand extends Command<
         const shardsGained = wanderer.shiny
           ? SHARDS_PER_SHINY_UNOWN_WANDERER
           : SHARDS_PER_UNOWN_WANDERER
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (u) {
-          const c = u.pokemonCollection.get(unownIndex)
-          if (c) {
-            c.dust += shardsGained
-          } else {
-            u.pokemonCollection.set(unownIndex, {
-              id: unownIndex,
-              unlocked: Buffer.alloc(5, 0),
-              dust: shardsGained,
-              selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false,
-              played: 0
-            })
-          }
-          u.save()
-        }
+        // $inc instead of loading the whole user document to read dust, add to it and
+        // save it back. It cannot lose a concurrent update, it transfers nothing, and it
+        // creates a thin { dust } entry for a pokemon the user does not own yet - which
+        // the collection readers treat as 0 dust and no unlocked emotion.
+        await UserMetadata.updateOne(
+          { uid: client.auth.uid },
+          { $inc: { [`pokemonCollection.${unownIndex}.dust`]: shardsGained } }
+        )
       }
     } else if (wanderer.type === WandererType.CATCHABLE) {
       const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)
@@ -1133,7 +1123,7 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
       const connectedPlayer = players.find((p) => p.id === client.auth.uid)
       if (connectedPlayer) {
         /*logger.info(
-          `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
+          `${client.auth.displayName} (${client.sessionId}) joined game room ${this.room.roomId}`
         )*/
         client.view.add(connectedPlayer)
         if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
@@ -1925,7 +1915,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.room.setMetadata({ stageLevel: this.state.stageLevel })
+      this.room.setMetadata({ ...this.room.metadata, stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         player.wanderers.clear()

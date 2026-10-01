@@ -364,6 +364,10 @@
   padding: 0 0.5em;
 }
 
+#wiki-data tr:nth-child(odd) {
+  background-color: var(--color-bg-tertiary);
+}
+
 #wiki-data-tiers-by-level th,
 #wiki-data-booster-rarity-probability th {
   width: 10ch;

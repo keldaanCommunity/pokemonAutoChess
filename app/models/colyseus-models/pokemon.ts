@@ -4437,8 +4437,8 @@ export class Wartortle extends Pokemon {
   hp = 120
   atk = 9
   speed = 50
-  def = 3
-  speDef = 3
+  def = 4
+  speDef = 4
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -4449,10 +4449,10 @@ export class Blastoise extends Pokemon {
   rarity = Rarity.COMMON
   stars = 3
   hp = 200
-  atk = 20
+  atk = 23
   speed = 50
-  def = 4
-  speDef = 4
+  def = 6
+  speDef = 6
   maxPP = 100
   range = 3
   skill = Ability.HYDRO_PUMP
@@ -16140,9 +16140,9 @@ export class Mantyke extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.PLACEMENT,
     condition: (
-      pokemon: IPokemon,
+      pokemon: Pokemon,
       player: IPlayer,
-      board: MapSchema<IPokemon>
+      board: MapSchema<Pokemon>
     ) => {
       for (const p of board.values()) {
         if (

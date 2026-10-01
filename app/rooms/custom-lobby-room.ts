@@ -46,7 +46,6 @@ import {
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
-  OnSearchByIdCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -74,6 +73,12 @@ export default class CustomLobbyRoom extends Room {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
+  }
+
+  messages = {
+    "search-by-id": async (client: Client, uid: string) => {
+      return await UserMetadata.findOne({ uid })
+    }
   }
 
   removeRoom(index: number, roomId: string) {
@@ -328,10 +333,6 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(Transfer.SET_TITLE, (client, title: Title | "") => {
       this.dispatcher.dispatch(new ChangeTitleCommand(), { client, title })
-    })
-
-    this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
-      this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
     })
 
     // Handle notification acknowledgment from client

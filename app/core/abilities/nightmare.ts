@@ -12,12 +12,7 @@ export class NightmareStrategy extends AbilityStrategy {
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {
-        if (
-          enemy.status.curseFate ||
-          enemy.status.curseTorment ||
-          enemy.status.curseVulnerability ||
-          enemy.status.curseWeakness
-        ) {
+        if (enemy.status.hasNegativeStatus()) {
           enemy.handleSpecialDamage(
             damage,
             board,

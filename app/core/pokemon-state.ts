@@ -10,7 +10,6 @@ import {
 import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
-import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count, isIn } from "../utils/array"
@@ -162,51 +161,6 @@ export default abstract class PokemonState {
         trueDamagePart +=
           ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
-      }
-
-      if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
-        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        specialDamage += Math.ceil(
-          [15, 30, 60, 120][pokemon.stars - 1] *
-            (1 + pokemon.ap / 100) *
-            (abilityCrit
-              ? 1 + (pokemon.critPower - 1) * critReductionFactor
-              : 1)
-        )
-
-        pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
-      }
-
-      if (pokemon.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
-        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        specialDamage += Math.ceil(
-          ([30, 60, 120, 240][pokemon.stars - 1] ?? 240) *
-            (1 + pokemon.ap / 100) *
-            (abilityCrit
-              ? 1 + (pokemon.critPower - 1) * critReductionFactor
-              : 1)
-        )
-        pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
-      }
-
-      if (pokemon.effects.has(EffectEnum.ATTACK_ORDER_NEXT_ATTACK)) {
-        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        const nbComfeeAllies = board.cells.reduce((count, ally) => {
-          if (ally && ally.team === pokemon.team && ally.name === Pkm.COMBEE) {
-            return count + 1
-          }
-          return count
-        }, 0)
-
-        specialDamage += Math.ceil(
-          (([20, 40, 60, 120][pokemon.stars - 1] ?? 120) +
-            nbComfeeAllies * ([10, 20, 30, 60][pokemon.stars - 1] ?? 60)) *
-            (1 + pokemon.ap / 100) *
-            (abilityCrit
-              ? 1 + (pokemon.critPower - 1) * critReductionFactor
-              : 1)
-        )
-        pokemon.effects.delete(EffectEnum.ATTACK_ORDER_NEXT_ATTACK)
       }
 
       if (trueDamagePart > 0) {

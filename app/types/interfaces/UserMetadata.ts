@@ -30,12 +30,17 @@ interface IUserMetadata {
   pokemonCollection: Map<string, IPokemonCollectionItem>
 }
 
+/*
+ * A collection entry is not guaranteed to be complete.
+ * Can just be a bare `{ played: n }` entry for a pokemon the player has never owned,
+ * or a bare `{ dust: n }` one for a Unown they caught but never played or owned
+ */
 interface IPokemonCollectionItem {
   id: string
-  selectedEmotion: Emotion | null
-  selectedShiny: boolean
-  dust: number
-  played: number
+  selectedEmotion?: Emotion | null
+  selectedShiny?: boolean
+  dust?: number
+  played?: number
 }
 
 export interface IUserMetadataMongo extends IUserMetadata {
@@ -44,7 +49,7 @@ export interface IUserMetadataMongo extends IUserMetadata {
 
 export interface IPokemonCollectionItemMongo extends IPokemonCollectionItem {
   // OPTIMIZED: Single field to store all unlocked emotions data in 5 bytes (40 bits used)
-  unlocked: Uint8Array
+  unlocked?: Uint8Array
 }
 
 // When using .lean(), Mongoose returns BSON Binary objects instead of Buffer
@@ -67,18 +72,23 @@ export type IUserMetadataLean = Omit<
  * Used in GameRoom to feed PokemonCustoms and to compute avatar emotes.
  * Only these fields are actually needed; dust/played/id are dropped to shrink the payload.
  */
-export type IPokemonCollectionItemForPlayer = Pick<
-  IPokemonCollectionItemMongo,
-  "selectedEmotion" | "selectedShiny" | "unlocked"
->
+export type IPokemonCollectionItemForPlayer = {
+  selectedEmotion: Emotion | null
+  selectedShiny: boolean
+  unlocked: Uint8Array
+}
 
 /*
- * Lean variant of the above. Used with IUserMetadataForPlayer
+ * Lean variant of the above: what actually comes back from the projected query.
+ * Optional because a thin stored entry really can be missing these, and .lean()
+ * hands back a BSON Binary rather than a Buffer for `unlocked`.
+ * toPlayerCollection() normalises this into IPokemonCollectionItemForPlayer.
  */
-export type IPokemonCollectionItemForPlayerLean = Pick<
-  IPokemonCollectionItemLean,
-  "selectedEmotion" | "selectedShiny" | "unlocked"
->
+export type IPokemonCollectionItemForPlayerLean = {
+  selectedEmotion?: Emotion | null
+  selectedShiny?: boolean
+  unlocked: Uint8Array | { buffer: ArrayBuffer } | undefined
+}
 
 /*
  * Narrow projection of UserMetadata used exclusively for Player in GameRoom
@@ -96,13 +106,22 @@ export interface IUserMetadataClient extends IUserMetadata {
   pokemonCollection: Map<string, IPokemonCollectionItemClient>
 }
 
-export interface IPokemonCollectionItemClient extends IPokemonCollectionItem {
+// used in JSON responses and client-side before unpacking.
+// Always complete: toCollectionItemClient() fills in the defaults a thin stored
+// entry may be missing, so this deliberately does not extend the possibly-thin
+// IPokemonCollectionItem.
+export interface IPokemonCollectionItemClient {
+  id: string
+  selectedEmotion: Emotion | null
+  selectedShiny: boolean
+  dust: number
+  played: number
   unlockedb64: string // 40 bits encoded as base64 string
 }
 
 // used after unpacking the base64 string into emotions and shinyEmotions
 export type IPokemonCollectionItemUnpacked = Omit<
-  IPokemonCollectionItem,
+  IPokemonCollectionItemClient,
   "unlockedb64"
 > & {
   emotions: Emotion[]
