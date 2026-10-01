@@ -5,7 +5,10 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
-import { CloseCodesMessages } from "../../../types/enum/CloseCodes"
+import {
+  type CloseCodes,
+  CloseCodesMessages
+} from "../../../types/enum/CloseCodes"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { resetActiveGameRoom } from "../game/recorder"
@@ -77,7 +80,7 @@ export default function Lobby() {
     if (!idToken) {
       navigate("/auth")
     } else if (pendingGameId && !reconnecting.current) {
-      reconnecting.current = true // the throttle's flag is re-created on every render
+      reconnecting.current = true // throttle() alone does not hold: its timer is re-created on every render
       try {
         const game = await client.joinById<GameState>(pendingGameId, {
           idToken
@@ -90,8 +93,7 @@ export default function Lobby() {
       } catch (error: any) {
         reconnecting.current = false // let them try again
         const message =
-          CloseCodesMessages[error?.code as keyof typeof CloseCodesMessages] ??
-          "UNKNOWN_ERROR"
+          CloseCodesMessages[error?.code as CloseCodes] ?? "UNKNOWN_ERROR"
         dispatch(
           setErrorAlertMessage(
             t(`errors.${message}`, { error: error?.message })

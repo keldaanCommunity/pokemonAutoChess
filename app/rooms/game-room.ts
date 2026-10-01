@@ -791,13 +791,13 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
     const player = this.state.players.get(client.auth?.uid)
     if (!player || player.hasLeftGame) return // nothing left to reconnect to
-    await this.holdSeat(client)
+    await this.waitForReconnection(client)
   }
 
   // allow a client that left to reconnect into this room until 5 minutes
-  async holdSeat(client: Client): Promise<boolean> {
+  async waitForReconnection(client: Client): Promise<boolean> {
     setPendingGame(this.presence, client.auth.uid, this.roomId)
-    // not while loading: every client drops once at game start, to reconnect from the game page
+    // no prompt while loading: every client drops once at game start, to reconnect from the game page
     if (this.state.gameLoaded && !this.hasOtherClient(client)) {
       this.publishPendingGame(client.auth.uid, this.roomId)
     }
@@ -805,6 +805,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
       return true
     } catch (e) {
+      /*if (client && client.auth && client.auth.displayName) {
+        logger.info(`${client.auth.displayName} left game room`)
+      }*/
       return false
     }
   }
@@ -845,13 +848,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (!player || player.hasLeftGame) return
       // a session closing while another session of this player is still connected is not them leaving
       if (this.isPlaying(player) && this.hasOtherClient(client)) return
-      if (code === CloseCode.FAILED_TO_RECONNECT) return // onReconnect has cleared the pending game and no new hold can be taken
+      // a reconnection that failed halfway is not the player leaving either: onReconnect already cleared their pending game
+      if (code === CloseCode.FAILED_TO_RECONNECT) return
 
       let reconnectionTimedOut = code !== CloseCode.CONSENTED
       if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
         // only a surrender request surrenders: a consented leave gets the same 5 minutes as a disconnect
-        client.leave(code) // colyseus would only close this socket once onLeave resolves
-        if (await this.holdSeat(client)) return
+        // colyseus closes the socket only once onLeave resolves, so close it now or the client's leave() waits the 5 minutes too
+        client.leave(code)
+        if (await this.waitForReconnection(client)) return
         reconnectionTimedOut = true
         player = this.state.players.get(client.auth.uid)
         if (!player || player.hasLeftGame) return

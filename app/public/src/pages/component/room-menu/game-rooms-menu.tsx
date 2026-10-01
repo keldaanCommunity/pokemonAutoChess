@@ -6,7 +6,10 @@ import { useNavigate } from "react-router"
 import { MAX_LOADING_TIME } from "../../../../../config"
 import type GameState from "../../../../../rooms/states/game-state"
 import { type IGameMetadata, Role, Transfer } from "../../../../../types"
-import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
+import {
+  type CloseCodes,
+  CloseCodesMessages
+} from "../../../../../types/enum/CloseCodes"
 import type { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
@@ -104,8 +107,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
       } catch (error: any) {
         joining.current = false // or the list stays unclickable
         const message =
-          CloseCodesMessages[error?.code as keyof typeof CloseCodesMessages] ??
-          "UNKNOWN_ERROR"
+          CloseCodesMessages[error?.code as CloseCodes] ?? "UNKNOWN_ERROR"
         dispatch(
           setErrorAlertMessage(
             t(`errors.${message}`, { error: error?.message })
