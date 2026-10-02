@@ -26,6 +26,7 @@ export class PetalDanceStrategy extends AbilityStrategy {
       }))
       .sort((a, b) => a.distance - b.distance)
 
+    if (enemies.length === 0) return
     const projectileSpeed = 10
 
     for (let i = 0; i < count; i++) {
