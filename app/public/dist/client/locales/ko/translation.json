@@ -1934,7 +1934,7 @@
 		"SLUDGE_WAVE": "대상과 ADJACENT 상대에게 오물을 던져 [10,20,40,80,SP]의 SPECIAL를 입히고 [2,3,4,8,SP] 초 동안 POISONED 상태로 만든다.",
 		"SMOG": "BOARD_EFFECT\n바로 앞의 세 칸에 SMOKE을 뿜어내고 [10,20,40,80,SP]의 SPECIAL를 입힌다.",
 		"LAVA_PLUME": "BOARD_EFFECT\n바로 앞의 세 칸에 EMBER를 뿌려 [20,40,80,160,SP]의 SPECIAL를 입힌다.",
-		"ACID_ARMOR": "자신의 DEF를 [3,6,12,25,SP] 올리고, 4번 동안 공격당하면 공격한 포켓몬의 DEF를 1 하락시킨다.",
+		"ACID_ARMOR": "자신의 DEF를 [3,6,12,25,SP] 올리고, 4번 동안 공격당하면 공격한 포켓몬의 DEF를 1 떨어뜨린다.",
 		"SHELTER": "BOARD_EFFECT\n자신의 DEF를 [3,6,12,24,SP] 올리고 전방 3칸에 SMOKE을 뿜어낸다.",
 		"AURORA_BEAM": "직선으로 뻗어나가는 광선을 발사한다. 광선에 맞은 모든 상대는 [25,50,100,200,SP]의 SPECIAL를 입으며 [50,LK]%의 확률로 FREEZE 상태가 될 수 있다.",
 		"AGILITY": "SPEED를 [10,20,30,60,SP] 올린다.",
@@ -2048,7 +2048,7 @@
 		"MAGICAL_LEAF": "가장 멀리 있는 상대를 노리는 잎사귀를 날려 경로에 있는 모든 상대에게  [10,20,40,80,SP]의 SPECIAL를 입히고 3초 동안 ARMOR_BREAK 상태로 만든다.",
 		"STEALTH_ROCKS": "BOARD_EFFECT\n[1,2,3,3]칸 앞의 CONE 범위에 뾰족한 STEALTH_ROCKS을 심어 범위 안의 상대에게 [30,40,50,80,SP]의 SPECIAL를 입힌다. ",
 		"TAIL_GLOW": "상대에게 [10,20,30,60,SP]의 SPECIAL를 입히고 자신의 AP을 30 올린다.",
-		"STRUGGLE_BUG": "상대에게 [10,20,30,60,SP]의 SPECIAL를 입히고 AP을 30 하락시킨다.",
+		"STRUGGLE_BUG": "상대에게 [10,20,30,60,SP]의 SPECIAL를 입히고 AP을 30 떨어뜨린다.",
 		"PRISMATIC_LASER": "3칸 너비의 프리즘 레이저를 수직으로 발사해 [30,40,50,60,120,SP]의 SPECIAL를 입히고 그 안의 상대를 밀어낸다.",
 		"NATURAL_GIFT": "가장 체력이 낮은 같은 편의 HP를 [30,60,90,150,SP] 회복시키고 [1,2,3,6]초 동안 SAFEGUARD 상태로 만든다.",
 		"NIGHT_SHADE": "상대의 최대 HP의 [12.5,16.5,25,35,SP,ND=1]% + [12.5,16.5,25,35,ND=1]%만큼 TRUE를 입힌다.",
@@ -2112,7 +2112,7 @@
 		"SUNSTEEL_STRIKE": "운석의 힘으로 상대의 중앙에 뛰어들어 ADJACENT 상대에게 [40,60,80,150,SP]의 SPECIAL를 입힌다.",
 		"MOONGEIST_BEAM": "대상과 그 뒤에 있는 상대에게 [60,80,100,200,SP]의 SPECIAL를 입히고 3초 동안 PARALYSIS 상태로 만든다. 광선의 범위 안의 같은 편은 [60,80,100,200,SP]의 SHIELD를 얻는다.",
 		"FLEUR_CANNON": "경로 상의 모든 상대에게 [50,75,100,200,SP]의 SPECIAL를 입히는 레이저 빔을 발사한다. 자신의 AP을 20 **떨어뜨린다**.",
-		"SPIRIT_BREAK": "상대에게 [20,40,80,160,SP]의 SPECIAL를 입히고 AP을 [20,20,20,40,SP] 하락시킨다.",
+		"SPIRIT_BREAK": "상대에게 [20,40,80,160,SP]의 SPECIAL를 입히고 AP을 [20,20,20,40,SP] 떨어뜨린다.",
 		"SHEER_COLD": "절대 영도의 추위로 상대에게 [50,100,200,400,SP]의 SPECIAL를 입히며, [10,20,30,60]%의 확률로 처형할 수 있다. 자신의 HP가 상대보다 높을수록 확률이 높아진다. FREEZE 상태의 상대는 즉시 처형하며, ICE 포켓몬은 이 기술로 처형할 수 없다.",
 		"EXTREME_SPEED": "가장 먼 상대를 향해 돌진하며, 경로상의 모든 상대에게 [20,30,40,80,SP]의 SPECIAL를 입힌다.",
 		"ZAP_CANNON": "대포처럼 전기를 발사한다. 상대는 [25,50,100,200,SP]의 SPECIAL를 입으며 [1,2,4]초 동안 PARALYSIS 와 ARMOR_BREAK 상태가 된다.",
@@ -2129,7 +2129,7 @@
 		"FIRE_FANG": "상대에게 [30,60,120,240,SP]의 SPECIAL를 입히고 2초 동안 BURN 상태로 만든다.",
 		"ICE_FANG": "상대에게 [30,60,120,240,SP]의 SPECIAL를 입히고 [1,1.5,2,2.5,ND=1]초 동안 FREEZE 상태로 만든다.",
 		"THUNDER_FANG": "상대에게 [30,60,120,240,SP]의 SPECIAL를 입히고 3초 동안 PARALYSIS 상태로 만든다.",
-		"TAIL_WHIP": "상대의 DEF를 [20,30,40,50,SP]% 하락시킨다.",
+		"TAIL_WHIP": "상대의 DEF를 [20,30,40,50,SP]% 떨어뜨린다.",
 		"PSYSHIELD_BASH": "가장 멀리 있는 상대를 향해 돌진하여, 부딪힌 상대는 [30,40,50,60,120,SP]의 SPECIAL를 입고 자신은 1초 동안 PROTECT 상태가 된다.",
 		"QUIVER_DANCE": "ATK이 [3,4,5,10,SP], SPE_DEF가 [3,4,5,10,SP], SPEED가 [10,10,10,15,SP], 그리고 AP이 20 오른다.",
 		"TORCH_SONG": "무작위의 상대에게 [4,SP]개의 불꽃을 날린다. 각각의 불꽃은 ATK의 50%만큼 SPECIAL를 입히며, [30,LK]% 확률로 2초 동안 BURN 상태로 만들 수 있고, 자신의 AP을 [1,2,3,6,SP] 올린다.",
@@ -2161,7 +2161,7 @@
 		"SCHOOLING": "대상과 ADJACENT 상대에게 HP의 [15,15,15,30,SP]%만큼 SPECIAL를 입힌다. 대기석에 약어리가 있다면, 어군에 합류해 영구적으로 최대 HP가 50 증가한다.",
 		"DOUBLE_SHOCK": "강력한 전격을 방출해 상대에게 [50,100,200,400,SP]의 SPECIAL를 입히면서 자신은 3초 동안 PARALYSIS 상태가 된다.",
 		"PURIFY": "부정적인 상태이상을 치유하고 자신과 ADJACENT 같은 편의 HP를 [15,30,60,120,SP] 회복한다.",
-		"CHARM": "상대를 3초 동안 CHARM 상태로 만들면서 ATK을 [2,3,4,8,SP] 하락시킨다. (최소 1)",
+		"CHARM": "상대를 3초 동안 CHARM 상태로 만들면서 ATK을 [2,3,4,8,SP] 떨어뜨린다. (최소 1)",
 		"ENTRAINMENT": "이상한 리듬에 춤을 춰 PP를 [10,10,10,30,SP] 회복하고, 상대의 기술도 동료만들기가 된다. 상대를 이미 동료로 만들었다면 주변의 다른 상대를 노린다.",
 		"OCTAZOOKA": "ATK의 [300,300,300,600,SP]%만큼 SPECIAL를 입히는 공격을 발사해 상대를 4초 동안 BLINDED 상태로 만드는 먹물을 남긴다.",
 		"PSYCHO_SHIFT": "대상과 가장 멀리 있는 상대의 위치를 바꾸고 둘에게 [20,40,60,120,SP]의 SPECIAL를 입힌다.",
@@ -2353,7 +2353,8 @@
 		"THUNDERCLAP_PRESS": "전격으로 둘러싸인 채로 몸통을 들이받아 밀쳐낸다. 밀려난 상대와 부딪힌 상대는 4초 동안 PARALYSIS 상태가 되며 [20,40,80,160,SP]의 SPECIAL를 입는다.",
 		"DRAGON_RAGE": "[15,30,45,60,SP]의 SHIELD를 얻는다. 6초 동안 매 초마다 SHIELD를 [5,10,15,20]만큼 더 얻으면서 ADJACENT 상대에게 [5,10,15,20,SP]의 SPECIAL를 입힌다. 기술이 끝나고 남은 SHIELD는 전부 사라지고 40% 만큼 HP를 회복한다.",
 		"DEFAULT": " ",
-		"PURSUIT": "상대에게 [35,70,140,280,SP]의 SPECIAL를 입히고 마킹한다. 마킹한 상대가 도약, 순간이동, FLY_AWAY을 했다면 바로 옆으로 도약해 기술을 다시 사용한다."
+		"PURSUIT": "상대에게 [35,70,140,280,SP]의 SPECIAL를 입히고 마킹한다. 마킹한 상대가 도약, 순간이동, FLY_AWAY을 했다면 바로 옆으로 도약해 기술을 다시 사용한다.",
+		"HIDDEN_POWER_D": "STRONGEST 같은 편 포켓몬으로, 도구나 영구적인 능력치 상승 없이 변신한다."
 	},
 	"effect": {
 		"STAMINA": "지구력",
@@ -3529,7 +3530,7 @@
 		"ILLUSION": "왼쪽에 있는 같은 편의 모습으로 바꾼다.",
 		"STOUTLAND_SEARCH": "바랜드는 뭔가가 파묻혀 있는 땅 위에 서 있으면 짖는다.",
 		"SUBSTITUTE": "포켓몬을 닮은 인형이다.",
-		"PASSIMIAN": "내던숭이는 BALL을 가진 채로 싸운다.",
+		"PASSIMIAN": "내던숭이는 BALL을 지닌 채로 싸운다.",
 		"NECTAR": "화분이 성장을 완료하면 그 색에 맞는 꿀을 얻을 수 있다.",
 		"STEELY_SPIRIT": "ADJACENT_IN_THE_SAME_ROW 같은 편은 ATK의 10%를 TRUE로 입힌다.",
 		"MITOSIS": "이 포켓몬은 기절하고 나서 진화 전 단계 2마리로 분할된다. 각 개체는 도구를 지니지 않고 현재 PP의 절반을 보유한다.",
@@ -3782,7 +3783,9 @@
 		"no_title": "칭호 없음",
 		"FIVE_STARS": "★★★★★",
 		"PAL": "우리는 모두 친구",
-		"BODYBUILDER": "보디빌더"
+		"BODYBUILDER": "보디빌더",
+		"GUILD_HERO": "길드의 영웅",
+		"BESTIE": "베스트프렌드"
 	},
 	"title_description": {
 		"NOVICE": "첫 게임을 플레이하기",
@@ -3882,7 +3885,9 @@
 		"LEGIONNAIRE": "대여르를 8마리 이상 뭉치게 하기",
 		"FIVE_STARS": "팀에 5성 포켓몬 배치하기",
 		"PAL": "파트너와 함께 포켓단즈 이벤트에 참여하기",
-		"BODYBUILDER": "FIGHTING 포켓몬을 대기석에서 수련시켜 ATK을 40 올리기"
+		"BODYBUILDER": "FIGHTING 포켓몬을 대기석에서 수련시켜 ATK을 40 올리기",
+		"GUILD_HERO": "탐험 리더보드를 1위로 마무리하기",
+		"BESTIE": "파트너와 함께 포켓단즈 리더보드에서 1위로 마무리하기"
 	},
 	"weather": {
 		"NEUTRAL": "평범한 날씨",
@@ -4088,7 +4093,11 @@
 		"valid": "유효",
 		"invalid": "무효",
 		"bot_submitted_success": "봇이 성공적으로 제출되었습니다. 제출한 봇은 디스코드 채널 #bot-creation에서 진행 사항과 문의를 할 수 있습니다.",
-		"bot_submission_failed": "봇을 제출하는 도중 에러가 발생했습니다. 에러: {{error}}\n나중에 다시 시도하십시오. 같은 현상이 발생했다면 디스코드 #bug-report에 기록해주시기 바랍니다."
+		"bot_submission_failed": "봇을 제출하는 도중 에러가 발생했습니다. 에러: {{error}}\n나중에 다시 시도하십시오. 같은 현상이 발생했다면 디스코드 #bug-report에 기록해주시기 바랍니다.",
+		"bot_creation_discord_channel": "🤖 봇 제작 디스코드 채널",
+		"default_name_warning": "업로드 하기 전\n아바타를 변경하세요",
+		"bot_not_ready_submission": "준비가 되지 않은 봇입니다. 유효한 아바타가 있어야 하며 모든 스테이지를 채워야 합니다.",
+		"guidelines": "가이드, 도움, 업로드 한 봇의 진행도를 파악하고 싶다면 디스코드의 👷┃bot-builders 채널을 이용하세요"
 	},
 	"cancel": "취소",
 	"import": "가져오기",
@@ -5419,5 +5428,7 @@
 	"minimize": "최소화",
 	"maximize": "최대화",
 	"type_fluid": "타입 플루이드",
-	"absorbed_item": "흡수됨"
+	"absorbed_item": "흡수됨",
+	"sort_by_author": "제작자 순",
+	"search_by_name_or_author": "이름이나 제작자 순"
 }
