@@ -720,6 +720,7 @@ export class SkillSwapStrategy extends AbilityStrategy {
         )
       ) {
         pokemon.refToBoardPokemon.skill = target.skill
+        pokemon.refToBoardPokemon.maxPP = target.maxPP
       }
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     }

@@ -7,7 +7,10 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
-import { NB_DISHES_PER_GOURMET_SYNERGY, NB_HATS_PER_GOURMET_SYNERGY } from "../../config/game/synergies"
+import {
+  NB_DISHES_PER_GOURMET_SYNERGY,
+  NB_HATS_PER_GOURMET_SYNERGY
+} from "../../config/game/synergies"
 import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
@@ -628,9 +631,8 @@ export default class Player extends Schema implements IPlayer {
         )
         if (pokemonWithThisTm) {
           pokemonWithThisTm.tm = Ability.DEFAULT
-          const baseData = getPokemonData(pokemonWithThisTm.name)
-          pokemonWithThisTm.skill = baseData.skill
-          pokemonWithThisTm.maxPP = baseData.pp
+          pokemonWithThisTm.skill = pokemonWithThisTm.baseSkill
+          pokemonWithThisTm.maxPP = pokemonWithThisTm.baseMaxPP
         }
       })
     }
