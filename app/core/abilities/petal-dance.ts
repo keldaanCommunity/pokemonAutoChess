@@ -33,7 +33,7 @@ export class PetalDanceStrategy extends AbilityStrategy {
       const { entity: enemy, distance } = enemies[i % enemies.length]
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (enemy.hp > 0) {
+          if (enemy && enemy.hp > 0) {
             enemy.handleSpecialDamage(
               damage,
               board,
