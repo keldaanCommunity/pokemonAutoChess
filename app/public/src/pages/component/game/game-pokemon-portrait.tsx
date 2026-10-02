@@ -1,8 +1,9 @@
+import type Phaser from "phaser"
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
 import { Tooltip } from "react-tooltip"
 import { RarityColor } from "../../../../../config"
-import { CountEvolutionRule } from "../../../../../core/evolution-rules"
+import { EvolutionManager } from "../../../../../core/evolution-logic/evolution-manager"
 import type { Pokemon } from "../../../../../models/colyseus-models/pokemon"
 import {
   getPkmWithCustom,
@@ -10,6 +11,7 @@ import {
 } from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
+import { EvolutionRuleType } from "../../../../../types/EvolutionRules"
 import { type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { schemaValues } from "../../../../../utils/schemas"
@@ -24,17 +26,42 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
+import { Rarity } from "../../../../../types/enum/Game"
 
+// getBase64() is an expensive canvas readback and every portrait re-runs it on each state change, so cache
+// by index. customs bake into the texture, which the TextureManager drops when its game is destroyed, so
+// the cache registers a destroy listener on the game it reads from and clears itself with it
+const portraitBase64Cache = new Map<string, string>()
+let cacheSourceGame: Phaser.Game | null = null
 export function getCachedPortrait(
   index: string,
   customs?: PokemonCustoms
 ): string {
+  const cached = portraitBase64Cache.get(index)
+  if (cached !== undefined) return cached
+  // only read back a loaded texture: getBase64 returns "" for an absent key and the old `??` passed that
+  // through as a broken url(""). an absent texture falls back to the portrait url and stays uncached, so a
+  // later render caches the real base64 once the texture loads
   const scene = getGameScene()
+  if (scene?.textures.exists(`portrait-${index}`)) {
+    // tie the cache's lifetime to the game whose textures it mirrors
+    if (cacheSourceGame !== scene.game) {
+      cacheSourceGame = scene.game
+      scene.game.events.once("destroy", clearPortraitBase64Cache)
+    }
+    const base64 = scene.textures.getBase64(`portrait-${index}`)
+    portraitBase64Cache.set(index, base64)
+    return base64
+  }
   const pokemonCustom = getPkmWithCustom(index, customs)
-  return (
-    scene?.textures.getBase64(`portrait-${index}`) ??
-    getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
-  )
+  return getPortraitSrc(index, pokemonCustom.shiny, pokemonCustom.emotion)
+}
+
+// drop every cached portrait base64; fired by the source game's destroy event. also called on game entry
+// because an abnormal exit (ROOM_DELETED / USER_BANNED) navigates away without destroying the game
+export function clearPortraitBase64Cache() {
+  portraitBase64Cache.clear()
+  cacheSourceGame = null
 }
 
 export default function GamePokemonPortrait(props: {
@@ -104,29 +131,40 @@ export default function GamePokemonPortrait(props: {
   const customs = spectatedPlayer?.pokemonCustoms
   const pokemonCustom = getPkmWithCustom(pokemon.index, customs)
   const rarityColor = RarityColor[pokemon.rarity]
+  const colorblindPatternPerRarity: Record<Rarity, string> = {
+    [Rarity.COMMON]: "",
+    [Rarity.UNCOMMON]: "colorblind-pattern-dots",
+    [Rarity.RARE]: "colorblind-pattern-horizontal-stripes",
+    [Rarity.EPIC]: "colorblind-pattern-diagonal-stripes",
+    [Rarity.ULTRA]: "colorblind-pattern-zigzag",
+    [Rarity.SPECIAL]: "colorblind-pattern-waves",
+    [Rarity.HATCH]: "",
+    [Rarity.UNIQUE]: "",
+    [Rarity.LEGENDARY]: ""
+  }
 
   const evolutionName = spectatedPlayer
-    ? pokemon.evolutionRule.getEvolution(pokemon, spectatedPlayer)
+    ? EvolutionManager.getEvolution(pokemon, spectatedPlayer)
     : (pokemon.evolutions[0] ?? pokemon.evolution)
   let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
-    pokemon.evolutionRule instanceof CountEvolutionRule &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     count === pokemon.evolutionRule.numberRequired - 1
 
   const shouldShimmer =
-    pokemon.evolutionRule instanceof CountEvolutionRule &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     ((count > 0 && pokemon.hasEvolution) ||
       (countEvol > 0 && pokemonEvolution.hasEvolution))
 
   if (
-    pokemon.evolutionRule instanceof CountEvolutionRule &&
+    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     count === pokemon.evolutionRule.numberRequired - 1 &&
     countEvol === pokemon.evolutionRule.numberRequired - 1 &&
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = spectatedPlayer
-      ? pokemonEvolution.evolutionRule.getEvolution(
+      ? EvolutionManager.getEvolution(
           pokemonEvolution,
           spectatedPlayer,
           stageLevel
@@ -160,6 +198,8 @@ export default function GamePokemonPortrait(props: {
       className={cc("my-box", "clickable", "game-pokemon-portrait", {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
+        regional: pokemon.regional,
+        additional: pokemon.additional,
         planned: props.inPlanner ?? false
       })}
       style={{
@@ -212,7 +252,15 @@ export default function GamePokemonPortrait(props: {
           <Money value={cost} />
         </div>
       )}
-      <ul className="game-pokemon-portrait-types">
+      {props.origin === "shop" && (pokemon.regional || pokemon.additional) && (
+        <div className="game-pokemon-portrait-pool-indicator"></div>
+      )}
+      <ul
+        className={cc(
+          "game-pokemon-portrait-types",
+          colorblindPatternPerRarity[pokemon.rarity]
+        )}
+      >
         {Array.from(pokemonInPortrait.types.values()).map((type) => {
           return (
             <li

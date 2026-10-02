@@ -59,7 +59,7 @@ export default class PokemonFactory {
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
       const pokemon = new PokemonClass(name, shiny, emotion)
-      pokemon.maxHP = pokemon.hp
+      pokemon.postConstructor()      
       return pokemon
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)

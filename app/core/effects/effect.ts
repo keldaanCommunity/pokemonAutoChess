@@ -2,7 +2,7 @@ import type { MapSchema } from "@colyseus/schema"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameRoom from "../../rooms/game-room"
-import type { IPokemonEntity } from "../../types"
+import type GameState from "../../rooms/states/game-state"
 import type { Ability } from "../../types/enum/Ability"
 import type { EffectEnum } from "../../types/enum/Effect"
 import type { AttackType } from "../../types/enum/Game"
@@ -63,7 +63,8 @@ export class OnItemGainedEffect extends Effect {
   override apply(pokemon: PokemonEntity, item: Item) {}
 }
 
-export class OnItemRemovedEffect extends Effect {
+// item effect applied when item is removed during a fight (stolen, destroyed, consummed...)
+export class OnItemLostInCombatEffect extends Effect {
   constructor(effect?: (pokemon: PokemonEntity, item: Item) => void) {
     super(effect)
   }
@@ -87,6 +88,57 @@ export class OnStageStartEffect extends Effect {
   apply(args: OnStageStartEffectArgs) {}
 }
 
+// applied when pokemon is moved to another position on the board during pick phases
+
+interface OnChangePositionEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  state?: GameState // can be undefined for bots updatePlayerTeam method
+  room?: GameRoom // can be undefined for bots updatePlayerTeam method
+  oldX: number
+  oldY: number
+  newX: number
+  newY: number
+}
+
+export class OnChangePositionEffect extends Effect {
+  constructor(
+    effect?: (args: OnChangePositionEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: OnChangePositionEffectArgs) {}
+}
+
+// applied after evolution
+
+export class OnEvolutionEffect extends Effect {
+  constructor(
+    effect?: (args: { pokemonEvolved: Pokemon; player: Player }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemonEvolved: Pokemon; player: Player }) {}
+}
+
+// applied when a pokemon enters or leaves the spotlight
+
+export class OnSpotlightChangeEffect extends Effect {
+  constructor(
+    effect?: (args: {
+      pokemon: Pokemon
+      player: Player
+      inSpotlight: boolean
+    }) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+  apply(args: { pokemon: Pokemon; player: Player; inSpotlight: boolean }) {}
+}
+
 // applied when a pokemon is benched during a fight
 interface OnBenchedDuringFightEffectArgs {
   pokemon: Pokemon
@@ -107,7 +159,7 @@ export class OnBenchedDuringFightEffect extends Effect {
 interface OnSimulationStartEffectArgs {
   simulation: Simulation
   player?: Player
-  team: MapSchema<IPokemonEntity>
+  team: MapSchema<PokemonEntity>
   entity: PokemonEntity
 }
 
@@ -136,6 +188,22 @@ export class OnItemDroppedEffect extends Effect {
   }
   constructor(
     effect?: (args: OnItemDroppedEffectArgs) => boolean,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+interface OnItemUnequippedEffectArgs {
+  pokemon: Pokemon
+  player: Player
+  item: Item
+}
+
+export class OnItemUnequippedEffect extends Effect {
+  apply(args: OnItemUnequippedEffectArgs) {}
+  constructor(
+    effect?: (args: OnItemUnequippedEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -177,10 +245,28 @@ export class OnDeathEffect extends Effect {
   }
 }
 
-export class OnResurrectEffect extends Effect {
+// applied when a pokemon start the resurrecting animation
+
+export class OnResurrectingEffect extends Effect {
   apply(args: OnDeathEffectArgs) {}
   constructor(
     effect?: (args: OnDeathEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export interface OnResurrectionEffectArgs {
+  pokemon: PokemonEntity
+  board: Board
+}
+
+// applied after a pokemon is resurrected
+export class OnResurrectionEffect extends Effect {
+  apply(args: OnResurrectionEffectArgs) {}
+  constructor(
+    effect?: (args: OnResurrectionEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -242,19 +328,10 @@ interface OnAttackEffectArgs {
   specialDamage: number
   trueDamage: number
   totalDamage: number
+  totalTakenDamage: number
   crit: boolean
   isTripleAttack?: boolean
   hasAttackKilled?: boolean
-}
-
-export class BeforeAttackEffect extends Effect {
-  override apply(args: OnAttackEffectArgs) {}
-  constructor(
-    effect?: (args: OnAttackEffectArgs) => void,
-    origin?: EffectOrigin
-  ) {
-    super(effect, origin)
-  }
 }
 
 export class OnAttackEffect extends Effect {
@@ -353,24 +430,19 @@ export class OnDamageDealtEffect extends Effect {
   }
 }
 
+export interface OnMoveEffectArgs {
+  pokemon: PokemonEntity
+  board: Board
+  oldX: number
+  oldY: number
+  newX: number
+  newY: number
+}
+
 export class OnMoveEffect extends Effect {
-  override apply(
-    pokemon: PokemonEntity,
-    board: Board,
-    oldX: number,
-    oldY: number,
-    newX: number,
-    newY: number
-  ) {}
+  override apply(args: OnMoveEffectArgs) {}
   constructor(
-    effect?: (
-      pokemon: PokemonEntity,
-      board: Board,
-      oldX: number,
-      oldY: number,
-      newX: number,
-      newY: number
-    ) => void,
+    effect?: (args: OnMoveEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
@@ -389,6 +461,18 @@ export class OnShieldDepletedEffect extends Effect {
   override apply(args: OnShieldDepletedEffectArgs) {}
   constructor(
     effect?: (args: OnShieldDepletedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+// applied after a Ground Pokémon digs the ground between rounds
+
+export class OnGroundDiggingEffect extends Effect {
+  override apply(args: { pokemon: Pokemon; player: Player }) {}
+  constructor(
+    effect?: (args: { pokemon: Pokemon; player: Player }) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

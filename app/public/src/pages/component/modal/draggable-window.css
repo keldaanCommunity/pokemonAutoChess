@@ -25,7 +25,7 @@
 
 .draggable-window-title {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
 .draggable-window-header-button {
@@ -47,4 +47,10 @@
   padding: 10px;
   overflow-y: auto;
   border-radius: 0 0 8px 8px;
+}
+
+@media (width <= 1280px) {
+  #game-wrapper .draggable-window {
+    font-size: 75%;
+  }
 }

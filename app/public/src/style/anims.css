@@ -37,3 +37,16 @@
   background-repeat: no-repeat;
   cursor: var(--cursor-hover);
 }
+
+.colorblind-mode .shimmer::after {
+  background-image: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 20%,
+    #ffffff80 20%,
+    #ffffe0ff 40%,
+    #ffffff80 70%,
+    transparent 80%,
+    transparent 100%
+  );
+}

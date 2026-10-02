@@ -45,6 +45,20 @@
   box-sizing: content-box;
 }
 
+.game-pokemon-detail-portrait-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.game-pokemon-detail-regional-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 25px;
+  height: 25px;
+}
+
 .game-pokemon-detail-portrait-hint {
   width: 60px;
   height: 60px;
@@ -171,6 +185,17 @@
   margin: 0 -5px 4px -5px;
   font-size: 1.2em;
   box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+  display: flex;
+  align-items: center;
+}
+
+.game-pokemon-detail-ult .ability-name > span {
+  flex: 1;
+}
+
+.game-pokemon-detail-ult .ability-name > img {
+  flex: 0;
+  justify-self: end;
 }
 
 .game-pokemon-detail-ult .ability-name img {

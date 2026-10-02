@@ -4,11 +4,12 @@
   margin: 0.5em;
   display: flex;
   gap: 1em;
+  flex-wrap: wrap;
 }
 
 .room-selection-menu li {
   text-align: center;
-  flex: 1;
+  flex: 1 1 240px;
   padding: 1em 0.5em;
 }
 

@@ -2,7 +2,7 @@ import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
 import type { Board } from "../core/board"
 import type Dps from "../core/dps"
 import type { Effect as EffectClass } from "../core/effects/effect"
-import type { EvolutionRule } from "../core/evolution-rules"
+import type { PokemonEntity } from "../core/pokemon-entity"
 import type Count from "../models/colyseus-models/count"
 import type ExperienceManager from "../models/colyseus-models/experience-manager"
 import type { IPokemonRecord } from "../models/colyseus-models/game-record"
@@ -16,6 +16,7 @@ import type Synergies from "../models/colyseus-models/synergies"
 import type { Effects } from "../models/effects"
 import type GameRoom from "../rooms/game-room"
 import type { AttackSprite } from "./Animation"
+import type { EvolutionRule } from "./EvolutionRules"
 import type { Ability } from "./enum/Ability"
 import type { DungeonPMDO } from "./enum/Dungeon"
 import type { BoardEffect, EffectEnum } from "./enum/Effect"
@@ -34,12 +35,15 @@ import type { Item } from "./enum/Item"
 import type { Passive } from "./enum/Passive"
 import type { Pkm } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
+import type { Title } from "./enum/Title"
+import type { TradeStatus } from "./enum/TradeStatus"
 import type { Weather } from "./enum/Weather"
 import type { GameStats } from "./interfaces/GameStats"
 
 export * from "./enum/Emotion"
 export * from "./enum/FlowerPot"
 export * from "./enum/Item"
+export * from "./enum/Title"
 
 export const CDN_URL =
   "https://raw.githubusercontent.com/keldaanCommunity/SpriteCollab/master"
@@ -63,6 +67,7 @@ export enum Transfer {
   DRAG_DROP_ITEM = "DRAG_DROP_ITEM",
   SWITCH_BENCH_AND_BOARD = "SWITCH_BENCH_AND_BOARD",
   SELL_POKEMON = "SELL_POKEMON",
+  USE_ITEM = "USE_ITEM",
   REMOVE_FROM_SHOP = "REMOVE_FROM_SHOP",
   NEW_MESSAGE = "NEW_MESSAGE",
   CHANGE_NAME = "CHANGE_NAME",
@@ -89,7 +94,7 @@ export enum Transfer {
   DRAG_DROP_CANCEL = "DRAG_DROP_CANCEL",
   SHOW_EMOTE = "SHOW_EMOTE",
   FINAL_RANK = "FINAL_RANK",
-  SEARCH_BY_ID = "SEARCH_BY_ID",
+  DOUBLE_UP_REINFORCEMENT_SENT = "DOUBLE_UP_REINFORCEMENT_SENT",
   SET_TITLE = "SET_TITLE",
   REMOVE_MESSAGE = "REMOVE_MESSAGE",
   NEW_TOURNAMENT = "NEW_TOURNAMENT",
@@ -125,16 +130,21 @@ export enum Transfer {
   SIMULATION_STOP = "SIMULATION_STOP",
   ABILITY = "ABILITY",
   SELECT_LANGUAGE = "SELECT_LANGUAGE",
+  SELECT_PAL = "SELECT_PAL",
   USER_PROFILE = "USER_PROFILE",
   PICK_BERRY = "PICK_BERRY",
   PRELOAD_MAPS = "PRELOAD_MAPS",
   NPC_DIALOG = "NPC_DIALOG",
   DELETE_ACCOUNT = "DELETE_ACCOUNT",
-  HEAP_SNAPSHOT = "HEAP_SNAPSHOT",
+  MAINTENANCE = "MAINTENANCE",
   RECONNECT_PROMPT = "RECONNECT_PROMPT",
   OVERWRITE_BOARD = "OVERWRITE_BOARD",
   NOTIFICATIONS = "NOTIFICATIONS",
-  NOTIFICATION_SEEN = "NOTIFICATION_SEEN"
+  NOTIFICATION_SEEN = "NOTIFICATION_SEEN",
+  DEV = "DEV",
+  CANCEL_TRADE_OFFER = "CANCEL_TRADE_OFFER",
+  SELECT_PARTNER = "SELECT_PARTNER",
+  TRADE_ACCEPT = "TRADE_ACCEPT"
 }
 
 export enum ReadWriteMode {
@@ -255,6 +265,9 @@ export interface IPlayer {
   shopFreeRolls: number
   streak: number
   interest: number
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
+  tradeStatus: TradeStatus
   opponentId: string
   opponentName: string
   opponentAvatar: string
@@ -296,6 +309,7 @@ export interface IPlayer {
   titles: Set<Title>
   regions: DungeonPMDO[]
   gameStats: GameStats
+  groundHoles: number[]
 }
 
 export interface IPokemon {
@@ -362,8 +376,8 @@ export interface ISimulation {
   redPlayer: IPlayer | undefined
   blueEffects: Set<EffectEnum>
   redEffects: Set<EffectEnum>
-  blueTeam: MapSchema<IPokemonEntity>
-  redTeam: MapSchema<IPokemonEntity>
+  blueTeam: MapSchema<PokemonEntity>
+  redTeam: MapSchema<PokemonEntity>
   blueDpsMeter: MapSchema<Dps>
   redDpsMeter: MapSchema<Dps>
   bluePlayerId: string
@@ -634,104 +648,6 @@ export interface ISuggestionUser {
   id: string
   avatar: string
   banned?: boolean
-}
-
-export enum Title {
-  NOVICE = "NOVICE",
-  ROOKIE = "ROOKIE",
-  AMATEUR = "AMATEUR",
-  VETERAN = "VETERAN",
-  PRO = "PRO",
-  EXPERT = "EXPERT",
-  ELITE = "ELITE",
-  MASTER = "MASTER",
-  GRAND_MASTER = "GRAND_MASTER",
-  BIRD_KEEPER = "BIRD_KEEPER",
-  BLACK_BELT = "BLACK_BELT",
-  BUG_MANIAC = "BUG_MANIAC",
-  CUTE_MANIAC = "CUTE_MANIAC",
-  DELINQUENT = "DELINQUENT",
-  DRAGON_TAMER = "DRAGON_TAMER",
-  FIREFIGHTER = "FIREFIGHTER",
-  TEAM_ROCKET_GRUNT = "TEAM_ROCKET_GRUNT",
-  HIKER = "HIKER",
-  LONE_WOLF = "LONE_WOLF",
-  KINDLER = "KINDLER",
-  GARDENER = "GARDENER",
-  MUSEUM_DIRECTOR = "MUSEUM_DIRECTOR",
-  ENGINEER = "ENGINEER",
-  TELEKINESIST = "TELEKINESIST",
-  ELECTRICIAN = "ELECTRICIAN",
-  GEOLOGIST = "GEOLOGIST",
-  MYTH_TRAINER = "MYTH_TRAINER",
-  SURFER = "SURFER",
-  POKEMON_RANGER = "POKEMON_RANGER",
-  CAMPER = "CAMPER",
-  RIVAL = "RIVAL",
-  SKIER = "SKIER",
-  POKEFAN = "POKEFAN",
-  HEX_MANIAC = "HEX_MANIAC",
-  MUSICIAN = "MUSICIAN",
-  BABYSITTER = "BABYSITTER",
-  ALCHEMIST = "ALCHEMIST",
-  BERSERKER = "BERSERKER",
-  BLOB = "BLOB",
-  CHEF = "CHEF",
-  HARLEQUIN = "HARLEQUIN",
-  TACTICIAN = "TACTICIAN",
-  STRATEGIST = "STRATEGIST",
-  NURSE = "NURSE",
-  GARDIAN = "GARDIAN",
-  COLLECTOR = "COLLECTOR",
-  DUKE = "DUKE",
-  DUCHESS = "DUCHESS",
-  CHAMPION = "CHAMPION",
-  ELITE_FOUR_MEMBER = "ELITE_FOUR_MEMBER",
-  GYM_LEADER = "GYM_LEADER",
-  GYM_CHALLENGER = "GYM_CHALLENGER",
-  GYM_TRAINER = "GYM_TRAINER",
-  ACE_TRAINER = "ACE_TRAINER",
-  TYRANT = "TYRANT",
-  SURVIVOR = "SURVIVOR",
-  GAMBLER = "GAMBLER",
-  NATURAL = "NATURAL",
-  BOT_BUILDER = "BOT_BUILDER",
-  SHINY_SEEKER = "SHINY_SEEKER",
-  ARCHEOLOGIST = "ARCHEOLOGIST",
-  PRIMAL = "PRIMAL",
-  DENTIST = "DENTIST",
-  FISHERMAN = "FISHERMAN",
-  MOLE = "MOLE",
-  BLOSSOMED = "BLOSSOMED",
-  SIREN = "SIREN",
-  FEARSOME = "FEARSOME",
-  GOLDEN = "GOLDEN",
-  LUCKY = "LUCKY",
-  GIANT = "GIANT",
-  DECURION = "DECURION",
-  LEGEND = "LEGEND",
-  CHOSEN_ONE = "CHOSEN_ONE",
-  ANNIHILATOR = "ANNIHILATOR",
-  VANQUISHER = "VANQUISHER",
-  OUTSIDER = "OUTSIDER",
-  GLUTTON = "GLUTTON",
-  PICNICKER = "PICNICKER",
-  STARGAZER = "STARGAZER",
-  BLOODY = "BLOODY",
-  ETERNAL = "ETERNAL",
-  RUNNER = "RUNNER",
-  FINISHER = "FINISHER",
-  VICTORIOUS = "VICTORIOUS",
-  AQUARIOPHILE = "AQUARIOPHILE",
-  POFFIN_MASTER = "POFFIN_MASTER",
-  TOP_GUN = "TOP_GUN",
-  SCOUT = "SCOUT",
-  RESCUE_TEAM_MEMBER = "RESCUE_TEAM_MEMBER",
-  EXPLORER = "EXPLORER",
-  POSTMAN = "POSTMAN",
-  SURVEY_CORPS = "SURVEY_CORPS",
-  GUILDMASTER = "GUILDMASTER",
-  LEGIONNAIRE = "LEGIONNAIRE"
 }
 
 export interface IBoardEvent {

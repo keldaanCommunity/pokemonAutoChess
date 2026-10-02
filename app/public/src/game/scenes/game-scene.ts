@@ -1,5 +1,4 @@
 import type { Room } from "@colyseus/sdk"
-import firebase from "firebase/compat/app"
 import Phaser, { GameObjects, Scene } from "phaser"
 import {
   BERRY_TREE_POSITIONS,
@@ -21,7 +20,12 @@ import {
 } from "../../../../types"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import { type Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
+import {
+  Gifts,
+  type Item,
+  ItemRecipe,
+  Mulches
+} from "../../../../types/enum/Item"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
@@ -41,8 +45,9 @@ import ItemContainer from "../components/item-container"
 import ItemsContainer from "../components/items-container"
 import LoadingManager from "../components/loading-manager"
 import MinigameManager from "../components/minigame-manager"
-import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import { SellZone } from "../components/sell-zone"
+import { UseItemZone } from "../components/useitem-zone"
 import WanderersManager from "../components/wanderers-manager"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
@@ -68,12 +73,14 @@ export default class GameScene extends Scene {
   itemDragged: ItemContainer | null = null
   dropSpots: Phaser.GameObjects.Image[] = []
   sellZone: SellZone | undefined
+  useItemZone: UseItemZone | undefined
   lastDragDropPokemon: PokemonSprite | undefined
   lastPokemonDetail: PokemonSprite | null = null
   minigameManager: MinigameManager | null = null
   loadingManager: LoadingManager | null = null
   started: boolean = false
   spectate: boolean = false
+  spectatedPlayerId: string | undefined = undefined
 
   constructor() {
     super({
@@ -82,12 +89,20 @@ export default class GameScene extends Scene {
     })
   }
 
-  init(data: { room: Room<GameState>; spectate: boolean }) {
+  init(data: {
+    room: Room<GameState>
+    uid: string
+    spectate: boolean
+    spectatedPlayerId?: string
+  }) {
     this.tilemaps = new Map()
     this.room = data.room
     this.spectate = data.spectate
-    this.uid = firebase.auth().currentUser?.uid
+    this.spectatedPlayerId = data.spectatedPlayerId
+    this.uid = data.uid
     this.started = false
+    globalThis.devcommand = (action: string, ...params: any[]) =>
+      this.room?.send(Transfer.DEV, { action, ...params })
   }
 
   preload() {
@@ -98,7 +113,9 @@ export default class GameScene extends Scene {
       this.room?.send(Transfer.LOADING_PROGRESS, value * 100)
     })
 
-    this.load.once("complete", () => {
+    this.loadingManager!.preloadingPromise.catch((err) =>
+      logger.error("Loading error", err)
+    ).then(() => {
       logger.debug("Loading complete")
       if (!this.started) {
         this.room?.send(Transfer.LOADING_COMPLETE)
@@ -114,16 +131,19 @@ export default class GameScene extends Scene {
     })
   }
 
+  getPlayerToSpectate(): Player | undefined {
+    const players = schemaValues(this.room?.state.players!)
+    const uid = this.spectate ? this.spectatedPlayerId : this.uid
+    return players.find((p) => p.id === uid) ?? players[0]
+  }
+
   startGame() {
     if (this.uid && this.room) {
       this.registerKeys()
       this.setupCamera()
       this.input.dragDistanceThreshold = 1
 
-      const playerUids = schemaValues(this.room.state.players).map((p) => p.id)
-      const player = this.room.state.players.get(
-        this.spectate ? playerUids[0] : this.uid
-      ) as Player
+      const player = this.getPlayerToSpectate() as Player
 
       this.setMap(player.map)
       this.setupMouseEvents()
@@ -170,9 +190,15 @@ export default class GameScene extends Scene {
           RegionDetails[player.map].music ?? DungeonMusic.TREASURE_TOWN
         )
       }
-      //;(this.sys as any).animatedTiles.init(this.map)
       clearTitleNotificationIcon()
     }
+  }
+
+  toggleTilesetAnimation(paused: boolean) {
+    if (!this.map) return
+    this.map.layers.forEach((layer) => {
+      layer.tilemapLayer.setTimerPaused(paused)
+    })
   }
 
   update(time: number, delta: number) {
@@ -228,21 +254,25 @@ export default class GameScene extends Scene {
     if (!this.spectate) {
       this.input.keyboard!.on(
         "keydown-" + keybindings.refresh,
-        throttle(() => {
+        throttle((e: Event) => {
+          e.preventDefault()
           playSound(SOUNDS.REFRESH, 0.5)
           this.refreshShop()
         }, 300)
       )
 
-      this.input.keyboard!.on("keydown-" + keybindings.lock, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.lock, (e: Event) => {
+        e.preventDefault()
         this.room?.send(Transfer.LOCK)
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.buy_xp, (e: Event) => {
+        e.preventDefault()
         this.buyExperience()
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.sell, (e) => {
+      this.input.keyboard!.on("keydown-" + keybindings.sell, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonDragged != null) return
         if (this.shopIndexHovered !== null) {
           this.removeFromShop(this.shopIndexHovered)
@@ -261,28 +291,61 @@ export default class GameScene extends Scene {
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.switch, () => {
+      this.input.keyboard!.on("keydown-" + keybindings.switch, (e: Event) => {
+        e.preventDefault()
         if (this.pokemonHovered) {
           this.switchBetweenBenchAndBoard(this.pokemonHovered)
         }
       })
 
-      this.input.keyboard!.on("keydown-" + keybindings.board_return, () => {
-        playerClick(this.uid!)
-      })
+      this.input.keyboard!.on(
+        "keydown-" + keybindings.board_return,
+        (e: Event) => {
+          e.preventDefault()
+          playerClick(this.uid!)
+        }
+      )
     }
 
-    this.input.keyboard!.on("keydown-" + keybindings.camera_lock, () => {
-      savePreferences({ cameraLocked: !preference("cameraLocked") })
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.camera_lock,
+      (e: Event) => {
+        e.preventDefault()
+        savePreferences({ cameraLocked: !preference("cameraLocked") })
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.prev_player, () => {
-      cyclePlayers(-1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1)
+      }
+    )
 
-    this.input.keyboard!.on("keydown-" + keybindings.next_player, () => {
-      cyclePlayers(1)
-    })
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1)
+      }
+    )
+
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.prev_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(-1, true)
+      }
+    )
+
+    this.input.keyboard!.on(
+      "keydown-" + keybindings.next_player_by_rank,
+      (e: Event) => {
+        e.preventDefault()
+        cyclePlayers(1, true)
+      }
+    )
   }
 
   refreshShop() {
@@ -302,6 +365,11 @@ export default class GameScene extends Scene {
   sellPokemon(pokemon: PokemonSprite) {
     if (!pokemon) return
     this.room?.send(Transfer.SELL_POKEMON, pokemon.id)
+  }
+
+  useitem(item: Item) {
+    if (!item) return
+    this.room?.send(Transfer.USE_ITEM, item)
   }
 
   removeFromShop(index: number) {
@@ -362,10 +430,6 @@ export default class GameScene extends Scene {
       this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
       this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-      const sys = this.sys as any
-      if (sys.animatedTiles) {
-        sys.animatedTiles.pause()
-      }
       return
     }
 
@@ -384,13 +448,7 @@ export default class GameScene extends Scene {
       tileset.image?.setFilter(Phaser.Textures.FilterMode.NEAREST)
       map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
     })
-    const sys = this.sys as any
-    if (sys.animatedTiles) {
-      sys.animatedTiles.init(map)
-      if (preference("disableAnimatedTilemap")) {
-        sys.animatedTiles.pause()
-      }
-    }
+    this.toggleTilesetAnimation(preference("disableAnimatedTilemap"))
 
     // update region tint on pokemons
     this.board?.pokemons.forEach((p) => {
@@ -428,6 +486,7 @@ export default class GameScene extends Scene {
 
   setupMouseEvents() {
     this.sellZone = new SellZone(this)
+    this.useItemZone = new UseItemZone(this)
     this.dropSpots = []
 
     for (let y = 0; y < 4; y++) {
@@ -550,6 +609,10 @@ export default class GameScene extends Scene {
           }
         } else if (gameObject instanceof ItemContainer) {
           this.itemDragged = gameObject
+          gameObject.closeDetail()
+          if (this.useItemZone && isIn(Gifts, this.itemDragged.name)) {
+            this.useItemZone.showForItem(this.itemDragged.name)
+          }
         }
       }
     )
@@ -601,6 +664,7 @@ export default class GameScene extends Scene {
       ) => {
         this.dropSpots.forEach((spot) => spot.setVisible(false))
         this.sellZone?.hide()
+        this.useItemZone?.hide()
 
         if (gameObject instanceof PokemonSprite) {
           // POKEMON -> BOARD-ZONE = PLACE POKEMON
@@ -677,6 +741,10 @@ export default class GameScene extends Scene {
               id: gameObject.name
             })
           }
+          // Use Item zone
+          else if (dropZone.name == "useitem-zone") {
+            this.useitem(this.itemDragged.name)
+          }
           // RETURN TO ORIGINAL SPOT
           else {
             const player = this.room?.state.players.get(this.uid!)
@@ -690,6 +758,7 @@ export default class GameScene extends Scene {
 
     this.input.on("dragend", (pointer, gameObject, dropped) => {
       this.sellZone?.hide()
+      this.useItemZone?.hide()
       this.dropSpots.forEach((spot) => spot.setVisible(false))
       if (!dropped && gameObject?.input) {
         gameObject.x = gameObject.input.dragStartX
@@ -777,6 +846,14 @@ export default class GameScene extends Scene {
           // pokemon dragged above sell zone: highlight the sell zone
           this.sellZone?.onDragEnter()
         }
+
+        if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          // pokemon dragged above sell zone: highlight the sell zone
+          this.useItemZone?.onDragEnter()
+        }
       },
       this
     )
@@ -803,6 +880,13 @@ export default class GameScene extends Scene {
           gameObject instanceof PokemonSprite
         ) {
           this.sellZone?.onDragLeave()
+        }
+
+        if (
+          dropZone.name === "useitem-zone" &&
+          gameObject instanceof ItemContainer
+        ) {
+          this.useItemZone?.onDragLeave()
         }
 
         if (

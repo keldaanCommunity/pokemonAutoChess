@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next"
 import type { IGameUser } from "../../../../../models/colyseus-models/game-user"
 import { Role } from "../../../../../types"
+import { GameMode } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
-import { kick, removeBot } from "../../../network"
+import { kick, removeBot, selectPartner } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import { EloBadge } from "../profile/elo-badge"
 import { InlineAvatar } from "../profile/inline-avatar"
 import "./preparation-menu-user.css"
-import { preference } from "../../../preferences"
 
 export default function PreparationMenuUser(props: {
   key: string
@@ -35,6 +35,14 @@ export default function PreparationMenuUser(props: {
       title={t("kick_user")}
     />
   ) : null
+  const gameMode = useAppSelector((state) => state.preparation.gameMode)
+  const users = useAppSelector((state) => state.preparation.users)
+  const myUid = user?.uid
+  const isDoubleUp = gameMode === GameMode.DOUBLE_UP
+  const isMe = props.user.uid === myUid
+  const myPartner = users.find((u) => u.uid === myUid)?.doubleUpPartnerId
+  const isPaired = myPartner === props.user.uid
+  const myReady = users.find((u) => u.uid === myUid)?.ready
 
   return (
     <div
@@ -51,7 +59,20 @@ export default function PreparationMenuUser(props: {
         twitchLogin={props.user?.twitchLogin || undefined}
         twitchDisplayName={props.user?.twitchDisplayName || undefined}
       />
-      {preference("colorblindMode") && props.user.ready && t("ready")}
+
+      {isDoubleUp && !isMe && !myReady && !isPaired && (
+        <button
+          className="bubbly orange"
+          onClick={() => !props.user.ready && selectPartner(props.user.uid)}
+          style={
+            props.user.ready
+              ? { opacity: 0.5, cursor: "not-allowed" }
+              : undefined
+          }
+        >
+          {t("choose_partner")}
+        </button>
+      )}
       {removeButton}
     </div>
   )

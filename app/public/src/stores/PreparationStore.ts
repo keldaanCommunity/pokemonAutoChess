@@ -1,8 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import type {
-  GameUser,
-  IGameUser
-} from "../../../models/colyseus-models/game-user"
+import type { IGameUser } from "../../../models/colyseus-models/game-user"
 import type Message from "../../../models/colyseus-models/message"
 import type { IChatV2 } from "../../../types"
 import type { EloRank } from "../../../types/enum/EloRank"
@@ -20,7 +17,7 @@ export interface IUserPreparationState {
   noElo: boolean
   minRank: EloRank | null
   maxRank: EloRank | null
-  user: GameUser | undefined
+  user: IGameUser | undefined
   gameMode: GameMode
   specialGameRule: SpecialGameRule | null
   whitelist: string[]
@@ -49,8 +46,8 @@ export const preparationSlice = createSlice({
   name: "preparation",
   initialState: initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<GameUser>) => {
-      const u: GameUser = structuredClone(action.payload)
+    setUser: (state, action: PayloadAction<IGameUser>) => {
+      const u: IGameUser = structuredClone(action.payload)
       state.user = u
     },
     pushMessage: (state, action: PayloadAction<Message>) => {
@@ -62,6 +59,9 @@ export const preparationSlice = createSlice({
       )
     },
     addUser: (state, action: PayloadAction<IGameUser>) => {
+      if (state.users.find((u) => u.uid == action.payload.uid)) {
+        return
+      }
       const u: IGameUser = structuredClone(action.payload)
       state.users.push(u)
     },

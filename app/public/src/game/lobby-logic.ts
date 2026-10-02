@@ -47,6 +47,7 @@ import {
   updateTournament
 } from "../stores/LobbyStore"
 import {
+  confirmPal,
   setConnectionStatus,
   setErrorAlertMessage,
   setNotifications,
@@ -58,8 +59,8 @@ import { resetPreparation } from "../stores/PreparationStore"
 export async function joinLobbyRoom(
   dispatch: AppDispatch,
   navigate: NavigateFunction
-): Promise<Room<{ state: LobbyState }>> {
-  const promise: Promise<Room<{ state: LobbyState }>> = new Promise(
+): Promise<Room<any, LobbyState>> {
+  const promise: Promise<Room<any, LobbyState>> = new Promise(
     (resolve, reject) => {
       if (rooms.lobby?.connection.isOpen) {
         // already connected to a lobby room fully initialized
@@ -68,7 +69,7 @@ export async function joinLobbyRoom(
 
       authenticateUser().then(async (user) => {
         try {
-          let room: Room<{ state: LobbyState }> | undefined = undefined
+          let room: Room<any, LobbyState> | undefined = undefined
 
           const reconnectToken: string = localStore.get(
             LocalStoreKeys.RECONNECTION_LOBBY
@@ -268,6 +269,13 @@ export async function joinLobbyRoom(
 
           room.onMessage(Transfer.USER, (user: IUserMetadataClient) =>
             dispatch(setSearchedUser(user))
+          )
+
+          room.onMessage(
+            Transfer.SELECT_PAL,
+            (playerIdThatChoseYou: string) => {
+              dispatch(confirmPal(playerIdThatChoseYou))
+            }
           )
 
           joinLobby(room) // lobby room is now fully initialized and accessible

@@ -47,7 +47,7 @@ export function Modal(props: ModalProps) {
   useEffect(() => {
     if (show) {
       const dialog = ref.current!
-      dialog.addEventListener("click", function (event) {
+      dialog.addEventListener("mousedown", function (event) {
         const rect = dialog.getBoundingClientRect()
         const isInDialog =
           (rect.top <= event.clientY &&
@@ -63,6 +63,7 @@ export function Modal(props: ModalProps) {
   }, [show])
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
+    event.stopPropagation()
     if (event.key === "Escape") {
       close()
     }

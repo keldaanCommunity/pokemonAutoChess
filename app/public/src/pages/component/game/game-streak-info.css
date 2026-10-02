@@ -1,0 +1,22 @@
+#game-streak-info {
+  background-size: 70px 40px;
+}
+
+.streak-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.streak-count {
+  vertical-align: middle;
+  flex: 1;
+  font-weight: 600;
+}
+
+.icon-streak {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+}

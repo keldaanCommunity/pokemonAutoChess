@@ -1,6 +1,8 @@
 import type Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
+import { AbilityStrategies } from "./abilities/abilities"
+import { castAbility } from "./abilities/cast"
 import type { Board } from "./board"
 import type { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -17,6 +19,13 @@ export class IdleState extends PokemonState {
       pokemon.pp >= pokemon.maxPP
     ) {
       pokemon.status.tree = false
+    } else if (
+      pokemon.passive === Passive.INANIMATE &&
+      pokemon.maxPP > 0 &&
+      pokemon.pp >= pokemon.maxPP
+    ) {
+      // CAST ABILITY FOR INANIMATE ENTITIES THAT HAVE A PP BAR
+      castAbility(AbilityStrategies[pokemon.skill], pokemon, board, null)
     }
 
     if (pokemon.canMove) {

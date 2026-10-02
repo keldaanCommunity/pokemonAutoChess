@@ -104,6 +104,10 @@ export default function RoomMenu() {
           <span>{t(`game_modes.${GameMode.SCRIBBLE}`)}</span>
         </Tab>
         <Tab>
+          <GameModeIcon gameMode={GameMode.DOUBLE_UP} />
+          <span>{t(`game_modes.${GameMode.DOUBLE_UP}`)}</span>
+        </Tab>
+        <Tab>
           <GameModeIcon gameMode={GameMode.CUSTOM_LOBBY} />
           <span>{t(`game_modes.${GameMode.CUSTOM_LOBBY}`)}</span>
         </Tab>
@@ -130,6 +134,9 @@ export default function RoomMenu() {
       </TabPanel>
       <TabPanel>
         <IngameRoomsList gameMode={GameMode.SCRIBBLE} />
+      </TabPanel>
+      <TabPanel>
+        <IngameRoomsList gameMode={GameMode.DOUBLE_UP} />
       </TabPanel>
       <TabPanel>
         <IngameRoomsList gameMode={GameMode.CUSTOM_LOBBY} />

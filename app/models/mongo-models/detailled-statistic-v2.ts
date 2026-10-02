@@ -8,7 +8,7 @@ import type { Synergy } from "../../types/enum/Synergy"
 export interface Pokemon {
   name: string
   avatar: string
-  items: string[]
+  items: Item[]
 }
 
 export interface IDetailledStatistic {
@@ -23,6 +23,7 @@ export interface IDetailledStatistic {
   synergies: Map<Synergy, number>
   regions: DungeonPMDO[]
   gameMode: GameMode
+  unholdableItems: Item[]
 }
 
 const pokemon = new Schema({
@@ -76,7 +77,13 @@ const statisticSchema = new Schema({
   ],
   gameMode: {
     type: String
-  }
+  },
+  unholdableItems: [
+    {
+      type: String,
+      enum: Item
+    }
+  ]
 })
 
 export default model<IDetailledStatistic>(

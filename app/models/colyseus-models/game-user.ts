@@ -14,6 +14,8 @@ export interface IGameUser {
   anonymous: boolean
   twitchLogin: string
   twitchDisplayName: string
+  doubleUpPartnerId: string
+  doubleUpTeamId: string
 }
 export class GameUser extends Schema implements IGameUser {
   @type("string") uid: string
@@ -28,6 +30,8 @@ export class GameUser extends Schema implements IGameUser {
   @type("boolean") anonymous: boolean
   @type("string") twitchLogin: string
   @type("string") twitchDisplayName: string
+  @type("string") doubleUpPartnerId: string = ""
+  @type("string") doubleUpTeamId: string = ""
 
   constructor(
     uid: string,
@@ -56,5 +60,7 @@ export class GameUser extends Schema implements IGameUser {
     this.anonymous = anonymous
     this.twitchLogin = twitchLogin
     this.twitchDisplayName = twitchDisplayName
+    this.doubleUpPartnerId = ""
+    this.doubleUpTeamId = ""
   }
 }

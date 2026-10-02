@@ -27,6 +27,7 @@ import { type Emotion, Role, type Title, Transfer } from "../types"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { GameMode } from "../types/enum/Game"
 import type { Language } from "../types/enum/Language"
+import { MaintenanceOrder } from "../types/enum/MaintenanceOrder"
 import type { ITournament } from "../types/interfaces/Tournament"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { logger } from "../utils/logger"
@@ -35,17 +36,16 @@ import {
   ChangeAvatarCommand,
   ChangeNameCommand,
   ChangeTitleCommand,
+  ChoosePalCommand,
   DeleteAccountCommand,
   DeleteRoomCommand,
   GiveBoostersCommand,
   GiveRoleCommand,
   GiveTitleCommand,
-  HeapSnapshotCommand,
   JoinOrOpenRoomCommand,
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
-  OnSearchByIdCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -73,6 +73,12 @@ export default class CustomLobbyRoom extends Room {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
+  }
+
+  messages = {
+    "search-by-id": async (client: Client, uid: string) => {
+      return await UserMetadata.findOne({ uid })
+    }
   }
 
   removeRoom(index: number, roomId: string) {
@@ -165,6 +171,16 @@ export default class CustomLobbyRoom extends Room {
         this.dispatcher.dispatch(new SelectLanguageCommand(), {
           client,
           message
+        })
+      }
+    )
+
+    this.onMessage(
+      Transfer.SELECT_PAL,
+      async (client, playerUid: string | null) => {
+        this.dispatcher.dispatch(new ChoosePalCommand(), {
+          client,
+          playerUid
         })
       }
     )
@@ -294,8 +310,11 @@ export default class CustomLobbyRoom extends Room {
       this.dispatcher.dispatch(new DeleteAccountCommand(), { client })
     })
 
-    this.onMessage(Transfer.HEAP_SNAPSHOT, (client) => {
-      this.dispatcher.dispatch(new HeapSnapshotCommand(), { client })
+    this.onMessage(Transfer.MAINTENANCE, (client, order: MaintenanceOrder) => {
+      const u = this.users.get(client.auth.uid)
+      if (u && u.role === Role.ADMIN) {
+        this.presence.publish("maintenance", { userId: client.auth.uid, order })
+      }
     })
 
     this.onMessage(
@@ -314,10 +333,6 @@ export default class CustomLobbyRoom extends Room {
 
     this.onMessage(Transfer.SET_TITLE, (client, title: Title | "") => {
       this.dispatcher.dispatch(new ChangeTitleCommand(), { client, title })
-    })
-
-    this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
-      this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
     })
 
     // Handle notification acknowledgment from client
@@ -383,6 +398,29 @@ export default class CustomLobbyRoom extends Room {
       notificationsService.onNotificationAdded(notif)
     )
 
+    this.presence.subscribe(
+      "maintenance",
+      ({ userId, order }: { userId: string; order: MaintenanceOrder }) => {
+        const client = this.clients.find((c) => c.auth && c.auth.uid === userId)
+        const notify = (msg: string) =>
+          notificationsService.addNotification(userId, "info", msg, client)
+
+        if (order === MaintenanceOrder.HEAP_SNAPSHOT) {
+          notify("Heap snapshot written")
+        } else if (order === MaintenanceOrder.FETCH_LEADERBOARDS) {
+          notify("Leaderboards refreshed")
+        } else if (order === MaintenanceOrder.FETCH_META_REPORTS) {
+          notify("Meta reports refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_SPRITE_GAP_DATA) {
+          notify("Sprite gap data refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_STREAMS) {
+          notify("Twitch streams refreshed")
+        } else if (order === MaintenanceOrder.REFRESH_TWITCH_BLACKLIST) {
+          notify("Twitch streams blacklist refreshed")
+        }
+      }
+    )
+
     this.initCronJobs()
     //this.fetchChat()
     this.fetchTournaments()
@@ -413,8 +451,12 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onJoin(client: Client) {
-    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
-    const user = leanUser ? toLeanUserMetadata(leanUser) : null
+    // onReconnect replays this hook. The room already holds the user's document from
+    // the original join (cleared again by OnLeaveCommand), so reuse it rather than
+    // re-fetching the full profile - pokemonCollection included - on every refresh.
+    const user =
+      this.users.get(client.auth.uid) ??
+      (await this.loadUserMetadata(client.auth.uid))
     try {
       if (user?.banned) {
         throw new Error("Account banned")
@@ -435,6 +477,13 @@ export default class CustomLobbyRoom extends Room {
     }
 
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
+  }
+
+  private async loadUserMetadata(
+    uid: string
+  ): Promise<IUserMetadataMongo | null> {
+    const leanUser = await UserMetadata.findOne({ uid }).lean()
+    return leanUser ? toLeanUserMetadata(leanUser) : null
   }
 
   async onDrop(client: Client, code: number) {

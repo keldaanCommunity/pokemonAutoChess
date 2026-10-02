@@ -14,7 +14,7 @@
   left: 0;
   height: 12px;
   background: #f7d51d;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 6px 6px;
   border: var(--border-thick);
   transition: all linear 1s;
 }

@@ -13,10 +13,11 @@ import {
 import { Item } from "../../../../../types/enum/Item"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import type { Synergy } from "../../../../../types/enum/Synergy"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { isOnBench } from "../../../../../utils/board"
 import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
-import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 import { rooms } from "../../../network"
 import Synergies from "../synergy/synergies"
 import BotAvatar from "./bot-avatar"
@@ -315,7 +316,11 @@ export default function TeamBuilder(props: {
         showBench={inBotBuilder}
       />
       <SelectedEntity entity={selection} onChange={updateSelectedPokemon} />
-      <ItemPicker selectEntity={setSelection} selected={selection} />
+      <ItemPicker
+        selectEntity={setSelection}
+        selected={selection}
+        origin={inBotBuilder ? "bot-builder" : "team-planner"}
+      />
       <PokemonPicker
         selectEntity={(e) => setSelection(e as PkmWithCustom | Item)}
         addEntity={addPokemonOnFirstEmptyCell}
