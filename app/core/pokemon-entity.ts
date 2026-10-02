@@ -1789,6 +1789,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       oldPassiveEffects.forEach((effect) => {
         if (effect instanceof EffectClass) {
           this.effectsSet.delete(effect)
+        } else if (isPlainFunction(effect)) {
+          // effects declared as functions have their own class, see removeItemEffect
+          const effectClass = effect().constructor
+          this.effectsSet.forEach((e) => {
+            if (e.constructor === effectClass) this.effectsSet.delete(e)
+          })
         }
       })
     }

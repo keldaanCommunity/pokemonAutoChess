@@ -454,35 +454,39 @@ const DarmanitanZenOnHitEffect = new OnHitEffect(
   Passive.DARMANITAN_ZEN
 )
 
-const GalarianDarmanitanBurnEffect = new PeriodicEffect(
-  (pokemon, board) => {
-    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
-      // inflict special damage and burn adjacent enemies
-      pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
-      const crit =
-        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(10, pokemon, 1, crit)
-      const damage = 0.25 * pokemon.atk
-      board
-        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
-        .forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-            cell.value.status.triggerBurn(2000, pokemon, cell.value)
-          }
-        })
-    }
-  },
-  Passive.GALARIAN_DARMANITAN_ZEN,
-  1000
-)
+class GalarianDarmanitanBurnEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon, board) => {
+        if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
+          // inflict special damage and burn adjacent enemies
+          pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
+          const crit =
+            pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+            chance(pokemon.critChance / 100, pokemon)
+          pokemon.handleHeal(10, pokemon, 1, crit)
+          const damage = 0.25 * pokemon.atk
+          board
+            .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+            .forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+                cell.value.status.triggerBurn(2000, pokemon, cell.value)
+              }
+            })
+        }
+      },
+      Passive.GALARIAN_DARMANITAN_ZEN,
+      1000
+    )
+  }
+}
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
@@ -1146,15 +1150,19 @@ const chinglingCountCastsEffect = new OnSimulationStartEffect(
   Passive.CHINGLING
 )
 
-const SudowoodoGainAttackEffect = new PeriodicEffect(
-  (pokemon) => {
-    if (pokemon.status.tree) {
-      pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
-    }
-  },
-  Passive.SUDOWOODO,
-  1000
-)
+class SudowoodoGainAttackEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        if (pokemon.status.tree) {
+          pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
+        }
+      },
+      Passive.SUDOWOODO,
+      1000
+    )
+  }
+}
 
 const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
@@ -1315,7 +1323,10 @@ export const PassiveEffects: Partial<
   [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
   [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
-  [Passive.GALARIAN_DARMANITAN_ZEN]: [GalarianDarmanitanBurnEffect, treeEffect],
+  [Passive.GALARIAN_DARMANITAN_ZEN]: [
+    () => new GalarianDarmanitanBurnEffect(), // needs new instance of effect for each pokemon due to internal timer
+    treeEffect
+  ],
   [Passive.GLIMMORA]: [ToxicSpikesEffect],
   [Passive.FUR_COAT]: [FurCoatEffect],
   [Passive.CREAM]: [MilceryFlavorEffect],
@@ -1434,7 +1445,10 @@ export const PassiveEffects: Partial<
     treeEffect
   ],
   [Passive.WOBBUFFET]: [treeEffect],
-  [Passive.SUDOWOODO]: [treeEffect, SudowoodoGainAttackEffect],
+  [Passive.SUDOWOODO]: [
+    treeEffect,
+    () => new SudowoodoGainAttackEffect() // needs new instance of effect for each pokemon due to internal timer
+  ],
   [Passive.INANIMATE]: [inanimateObjectEffect],
   [Passive.SKARMORY]: [skarmorySpikesOnSimulationStartEffect],
   [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
