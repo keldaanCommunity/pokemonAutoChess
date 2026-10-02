@@ -14,7 +14,7 @@ export class ThiefStrategy extends AbilityStrategy {
     const damage = [15, 30, 60, 120][pokemon.stars - 1] ?? 120
 
     // stealing from itself would delete and re-add the same item while iterating the set: endless loop
-    if (target !== pokemon) {
+    if (target.id !== pokemon.id) {
       target.items.forEach((item) => {
         const removed = target.removeItem(item)
         if(removed) pokemon.addItem(item)
