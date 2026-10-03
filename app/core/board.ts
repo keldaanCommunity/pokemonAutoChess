@@ -101,7 +101,7 @@ export class Board {
     y0: number,
     x1: number,
     y1: number,
-    pokemon: IPokemonEntity,
+    pokemon: { positionX: number; positionY: number } | IPokemonEntity,
     target: IPokemonEntity | undefined
   ) {
     const dx = x1 - x0
@@ -116,7 +116,7 @@ export class Board {
       }
     } else if (dx == 0) {
       if (dy == 0) {
-        if (pokemon.status.confusion) {
+        if ("status" in pokemon && pokemon.status.confusion) {
           return pickRandomIn(Orientation)
         }
         logger.error("failed to get pokemon orientation", {
@@ -124,7 +124,7 @@ export class Board {
           y0,
           x1,
           y1,
-          pokemon: pokemon.name,
+          pokemon: "name" in pokemon ? pokemon.name : "unknown",
           pokemonPosX: pokemon.positionX,
           pokemonPosY: pokemon.positionY,
           target: target?.name,
@@ -819,7 +819,7 @@ export class Board {
 
 export function effectInOrientation(
   board: Board,
-  pokemon: PokemonEntity,
+  pokemon: { positionX: number; positionY: number; team: Team },
   target: PokemonEntity | Orientation,
   effect: (cell: Cell) => void,
   maxRange?: number

@@ -4175,6 +4175,55 @@ export const AbilitiesAnimations: {
     positionOffset: [0, -20]
   }),
 
+  [Ability.CONTINENTAL_CRUSH]: (args) => {
+    const {
+      targetX,
+      targetY,
+      flip,
+      data: { delay }
+    } = args
+
+    // draw shadow ellipsis at position then tween scale up and fade out
+    const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
+    const shadow = args.scene.add
+      .ellipse(x, y, 100, 50, 0x000000, 0.5)
+      .setScale(0.5)
+      .setOrigin(0.5, 0.5)
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    args.scene.tweens.add({
+      targets: shadow,
+      scale: 3,
+      alpha: 1,
+      duration: delay,
+      onComplete: () => {
+        shadow.destroy()
+      }
+    })
+
+    projectile({
+      ability: "CONTINENTAL_CRUSH",
+      scale: 4,
+      startCoords: [args.targetX, 50, false],
+      endCoords: "target",
+      duration: delay,
+      hitAnim: Array.from({ length: 9 }, (_, i) =>
+        onTarget({
+          ability: "CONTINENTAL_CRUSH_EXPLOSION",
+          scale: 2,
+          positionOffset: [(Math.floor(i / 3) - 1) * 64, ((i % 3) - 1) * 64],
+          delay: randomBetween(0, 100),
+          depth: DEPTH.ABILITY_MAJOR
+        })
+      ).concat(
+        onTarget({
+          ability: "HEAVY_SLAM",
+          scale: 4,
+          depth: DEPTH.ABILITY_MAJOR
+        })
+      )
+    })(args)
+  },
+
   ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
     const pokemon = pokemonsOnBoard.find(
       (p) => p.positionX === positionX && p.positionY === positionY
