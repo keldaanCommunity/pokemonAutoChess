@@ -90,8 +90,9 @@ import { CoilStrategy } from "./coil"
 import { ColumnCrushStrategy } from "./column-crush"
 import { ConfusingMindStrategy } from "./confusing-mind"
 import { ConfusionStrategy } from "./confusion"
-import { ContinentalCrushStrategy } from "./continental-crush";
+import { ContinentalCrushStrategy } from "./continental-crush"
 import { CoreEnforcerStrategy } from "./core-enforcer"
+import { CorscrewCrashStrategy } from "./corscrew-crash"
 import { CosmicPowerMoonStrategy } from "./cosmic-power-moon"
 import { CosmicPowerSunStrategy } from "./cosmic-power-sun"
 import { CottonGuardStrategy } from "./cotton-guard"
@@ -836,6 +837,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.CONFUSION]: new ConfusionStrategy(),
   [Ability.CONTINENTAL_CRUSH]: new ContinentalCrushStrategy(),
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
+  [Ability.CORSCREW_CRASH]: new CorscrewCrashStrategy(),
   [Ability.COSMIC_POWER_MOON]: new CosmicPowerMoonStrategy(),
   [Ability.COSMIC_POWER_SUN]: new CosmicPowerSunStrategy(),
   [Ability.COTTON_GUARD]: new CottonGuardStrategy(),

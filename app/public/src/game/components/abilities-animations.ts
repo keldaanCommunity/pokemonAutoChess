@@ -3481,6 +3481,106 @@ export const AbilitiesAnimations: {
     })
   ],
 
+  [Ability.CORSCREW_CRASH]: [
+    onSprite(({ casterSprite, ...args }) => {
+      const MAX_NB_ENEMIES_HIT = 6
+      let orientation = args.orientation
+      let lastX = args.positionX,
+        lastY = args.positionY
+
+      if (!casterSprite) return
+
+      casterSprite.setVisible(false)
+
+      const points: [number, number][] = []
+      points.push([casterSprite.x, casterSprite.y])
+
+      const enemies = args.pokemonsOnBoard.filter(
+        (p) =>
+          p.pokemon &&
+          isEntity(p.pokemon) &&
+          p.pokemon.team !== (casterSprite.pokemon as IPokemonEntity).team
+      )
+      const remainingTargets = new Set(enemies)
+
+      while (remainingTargets.size > 0 && points.length < MAX_NB_ENEMIES_HIT) {
+        const distances = [...remainingTargets].map((e) =>
+          distanceM(lastX, lastY, e.pokemon.positionX, e.pokemon.positionY)
+        )
+        const minDistance = Math.min(...distances)
+        const enemiesAtMinDistance = [...remainingTargets].filter(
+          (_, i) => distances[i] === minDistance
+        )
+        let nextEnemy: PokemonSprite
+
+        if (enemiesAtMinDistance.length > 0) {
+          // search again the closest while taking the current orientation into account
+          const movementVector = OrientationVector[orientation]
+          const x2 = lastX + movementVector[0]
+          const y2 = lastY + movementVector[1]
+          const distances = [...remainingTargets].map((e) =>
+            distanceM(x2, y2, e.pokemon.positionX, e.pokemon.positionY)
+          )
+          const minDistance = Math.min(...distances)
+          const enemiesAtMinDistance = [...remainingTargets].filter(
+            (_, i) => distances[i] === minDistance
+          )
+          nextEnemy = enemiesAtMinDistance[0]
+        } else {
+          nextEnemy = enemiesAtMinDistance[0]
+        }
+
+        remainingTargets.delete(nextEnemy)
+        orientation = getOrientation(
+          lastX,
+          lastY,
+          nextEnemy.positionX,
+          nextEnemy.positionY
+        )
+        points.push([nextEnemy.x, nextEnemy.y])
+        lastX = nextEnemy.positionX
+        lastY = nextEnemy.positionY
+      }
+
+      const [lastPX] = transformEntityCoordinates(lastX, lastY, args.flip)
+      points.push([lastPX, -50])
+
+      const path = new Phaser.Curves.Spline(points)
+
+      return pathAnimation({
+        ability: Ability.HYPER_DRILL,
+        path,
+        scale: 3,
+        oriented: true,
+        duration: enemies.length * 300 + 300
+      })(args)
+    })
+  ],
+
+  ["CORSCREW_CRASH_FINAL"]: [
+    skyfall({
+      ability: Ability.HYPER_DRILL,
+      rotation: Math.PI / 2,
+      scale: 3,
+      duration: 500,
+      hitAnim: onTarget({ ability: Ability.SUPERSONIC_SKYSTRIKE, scale: 3 })
+    }),
+    onSprite(({ casterSprite, ...args }) => {
+      const [x, y] = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
+        args.flip
+      )
+      casterSprite?.moveManager.setEnable(false)
+      casterSprite?.setPosition(x, y)
+      setTimeout(() => {
+        if (!casterSprite) return
+        casterSprite.setVisible(true)
+        casterSprite?.moveManager.setEnable(true)
+      }, 500)
+    })
+  ],
+
   [Ability.TECTONIC_RAGE]: [
     (args) => {
       const cx = args.targetX
@@ -4219,7 +4319,8 @@ export const AbilitiesAnimations: {
           ability: "HEAVY_SLAM",
           scale: 4,
           depth: DEPTH.ABILITY_MAJOR
-        })
+        }),
+        shakeCamera({ duration: 500, intensity: 0.02 })
       )
     })(args)
   },

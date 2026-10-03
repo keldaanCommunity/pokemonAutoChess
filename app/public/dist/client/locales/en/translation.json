@@ -1813,7 +1813,8 @@
 		"SHATTERED_PSYCHE": "Shattered Psyche",
 		"GIZMOS_AND_GADGETS": "Gizmos and Gadgets",
 		"SUBZERO_SLAMMER": "Subzero Slammer",
-		"CONTINENTAL_CRUSH": "Continental Crush"
+		"CONTINENTAL_CRUSH": "Continental Crush",
+		"CORSCREW_CRASH": "Corscrew Crash"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2406,7 +2407,8 @@
 		"SHATTERED_PSYCHE": "Spawns 3 mirrors around the enemy team, each one reflecting one random enemy. Then throws a psychic energy wave that bounces between the mirrors and shatter them. Enemies traversed by the wave take [10,20,40,80,150,SP] SPECIAL. Enemies reflected in the shattered mirrors take [20,40,80,150,300,SP] additional SPECIAL and get CONFUSION for 5 seconds.",
 		"GIZMOS_AND_GADGETS": "Distributes 4 random dubious gadgets to allies with free item slots. Each item given gives [50,SP] SHIELD to the ally receiving it. If not enough free item slots, random other items are dropped.",
 		"SUBZERO_SLAMMER": "An ice pillar forms beneath the caster, granting them [25,50,100,150,250] SHIELD. The caster then fires an ice beam that deals [10,20,30,50,100,SP] SPECIAL every 250 ms for 4 seconds, switching targets on KO. After 4 seconds, an ice explosion deals [15,30,60,100,200,SP] SPECIAL to the current target and ADJACENT enemies.",
-		"CONTINENTAL_CRUSH": "Summons a huge rock mountain for 5 seconds, a delay reduced by 10% for each ROCK ally on the board. The mountain then crashes in the middle of the enemy team, dealing [100,200,300,400,800,SP] SPECIAL to all enemies directly in the 3x3 zone below. Other enemies in a 3-tile radius are knocked back and take [20,40,80,160,SP] SPECIAL."
+		"CONTINENTAL_CRUSH": "Summons a huge rock mountain for 5 seconds, a delay reduced by 10% for each ROCK ally on the board. The mountain then crashes in the middle of the enemy team, dealing [100,200,300,400,800,SP] SPECIAL to all enemies directly in the 3x3 zone below. Other enemies in a 3-tile radius are knocked back and take [20,40,80,160,SP] SPECIAL.",
+		"CORSCREW_CRASH": "The user spins very fast and rams into the enemy team, dealing [20,40,80,120,200,SP] TRUE to up to 6 enemies before performing a final attack on the highest HP enemy for [50,100,150,200,300,SP] TRUE."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
