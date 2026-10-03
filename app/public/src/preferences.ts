@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 import { useCallback, useEffect, useState } from "react"
-import { removeInArray } from "../../utils/array"
+import { removeFromArray } from "../../utils/array"
 import { LocalStoreKeys, localStore } from "./pages/utils/store"
 
 export type Keybindings = {
@@ -177,7 +177,7 @@ export function subscribeToPreference<T extends keyof IPreferencesState>(
 }
 
 export function unsubscribeToPreferences(fn: Subscription) {
-  removeInArray(subscriptions, fn)
+  removeFromArray(subscriptions, fn)
 }
 
 export function preference<T extends keyof IPreferencesState>(

@@ -72,7 +72,7 @@ import {
   initialGameStats
 } from "../../types/interfaces/GameStats"
 import type { IPokemonCollectionItemMongo } from "../../types/interfaces/UserMetadata"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -490,7 +490,7 @@ export default class Player extends Schema implements IPlayer {
         }
 
         // if not found check player item bench
-        removeInArray<Item>(this.items, item)
+        removeFromArray<Item>(this.items, item)
       }
 
       lostArtificialItems.forEach(removeArtificialItem)
@@ -540,7 +540,7 @@ export default class Player extends Schema implements IPlayer {
     } else if (newScarves.length < previousScarves.length) {
       // some scarves are lost
       const lostScarves = [...previousScarves]
-      newScarves.forEach((s) => removeInArray(lostScarves, s))
+      newScarves.forEach((s) => removeFromArray(lostScarves, s))
       const removeScarf = (item: ScarfItem) => {
         // first check held items
         const pokemons = schemaValues(this.board)
@@ -556,7 +556,7 @@ export default class Player extends Schema implements IPlayer {
         }
 
         // if not found check player item bench
-        removeInArray<Item>(this.items, item)
+        removeFromArray<Item>(this.items, item)
       }
 
       lostScarves.forEach(removeScarf)
@@ -598,7 +598,7 @@ export default class Player extends Schema implements IPlayer {
       // some TMs are lost, we need to remove them from the inventory and from the pokemons that hold them
       const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
       lostTMs.forEach((tm) => {
-        removeInArray(this.items, tm)
+        removeFromArray(this.items, tm)
         const pokemonWithThisTm = schemaValues(this.board).find(
           (p) => p.tm === AbilityPerTM[tm]
         )
@@ -616,11 +616,11 @@ export default class Player extends Schema implements IPlayer {
     const fishingLevel = getSynergyTier(this.synergies, Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
-      removeInArray<Item>(this.items, Item.OLD_ROD)
+      removeFromArray<Item>(this.items, Item.OLD_ROD)
     if (this.items.includes(Item.GOOD_ROD) && fishingLevel !== 2)
-      removeInArray<Item>(this.items, Item.GOOD_ROD)
+      removeFromArray<Item>(this.items, Item.GOOD_ROD)
     if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
-      removeInArray<Item>(this.items, Item.SUPER_ROD)
+      removeFromArray<Item>(this.items, Item.SUPER_ROD)
 
     if (this.items.includes(Item.OLD_ROD) === false && fishingLevel === 1)
       this.items.push(Item.OLD_ROD)
@@ -646,7 +646,7 @@ export default class Player extends Schema implements IPlayer {
         currentNbHats++
       } else if (newNbHats < currentNbHats) {
         if (this.items.includes(Item.CHEF_HAT)) {
-          removeInArray<Item>(this.items, Item.CHEF_HAT)
+          removeFromArray<Item>(this.items, Item.CHEF_HAT)
           currentNbHats--
         } else {
           hatHolders.at(-1)?.removeItem(Item.CHEF_HAT, this)
@@ -717,7 +717,7 @@ export default class Player extends Schema implements IPlayer {
       // some wands are lost, we need to remove them from the inventory
       const lostWands = this.fairyWands.slice(newNbWands, currentNbWands)
       lostWands.forEach((wand) => {
-        removeInArray(this.items, wand)
+        removeFromArray(this.items, wand)
       })
     }
   }
@@ -968,7 +968,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   completeMissionOrder(missionOrder: MissionOrder) {
-    removeInArray<Item>(this.items, missionOrder)
+    removeFromArray<Item>(this.items, missionOrder)
     this.spawnWanderingPokemon({
       shiny: false,
       pkm: Pkm.CHATOT,
@@ -1088,7 +1088,7 @@ export default class Player extends Schema implements IPlayer {
       (p) => p.items.has(Item.Z_RING) && !isIn(ZMoves, p.skill)
     )
     if (pokemonWithZRing) {
-      if(pokemonWithZRing.tm !== Ability.DEFAULT) {
+      if (pokemonWithZRing.tm !== Ability.DEFAULT) {
         this.items.push(TMPerAbility[pokemonWithZRing.tm])
       }
       pokemonWithZRing.skill = zMove

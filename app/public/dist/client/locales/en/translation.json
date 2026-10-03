@@ -1782,6 +1782,7 @@
 		"BITTER_MALICE": "Bitter Malice",
 		"COIL": "Coil",
 		"SUBSTITUTE": "Substitute",
+		"AMALGAMATE": "Amalgamate",
 		"SWARM": "Call of the Swarm",
 		"FLING": "Fling",
 		"REVELATION_DANCE": "Revelation Dance",
@@ -1814,7 +1815,8 @@
 		"GIZMOS_AND_GADGETS": "Gizmos and Gadgets",
 		"SUBZERO_SLAMMER": "Subzero Slammer",
 		"CONTINENTAL_CRUSH": "Continental Crush",
-		"CORKSCREW_CRASH": "Corkscrew Crash"
+		"CORKSCREW_CRASH": "Corkscrew Crash",
+		"PURPLE_RAIN": "Purple Rain"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2376,6 +2378,7 @@
 		"BITTER_MALICE": "Deal [25,50,100,200,SP] SPECIAL to the target and inflict FATIGUE for [3,SP] seconds. If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.",
 		"COIL": "Ensnares the target with it's powerful tail, inflicting LOCKED and PARALYSIS for 3 seconds. User also buffs its ATK and DEF by [3,5,10,20,SP]",
 		"SUBSTITUTE": "Spawns a Substitute at the location of the user with [25,25,25,50,SP]% of user's max HP as bonus HP. The user moves to a free cell nearby and all aggro is redirected to the Substitute.",
+		"AMALGAMATE": "Merge with the one ADJACENT other Ditto ally on board, combining their max HP, current HP, ATK, DEF and SPE_DEF. Performs a regular attack if no Ditto ally is found.",
 		"SWARM": "A copy of a BUG Pokémon on your board hops out of the nest. Rarity increases with every cast.",
 		"FLING": "When throwing the BALL, all enemies in between user and receiver take [30,30,30,100,SP]% of user's SPEED as SPECIAL. If not holding a BALL, jump in a corner of the board and get a new BALL instead",
 		"REVELATION_DANCE": "Performs a dance which projects feathers on ADJACENT tiles. Enemies hit take [15,30,50,80,SP] SPECIAL and allies gain a bonus dependent of the style:\n- Baile Style: [3,6,10,15,SP] SPEED\n- Pom-Pom Style: [2,4,6,10,SP] ATK\n- Pa’u Style: [2,4,6,10,SP] SPE_DEF\n- Sensu Style: [15,30,50,80,SP] SHIELD",
@@ -2408,7 +2411,8 @@
 		"GIZMOS_AND_GADGETS": "Distributes 4 random dubious gadgets to allies with free item slots. Each item given gives [50,SP] SHIELD to the ally receiving it. If not enough free item slots, random other items are dropped.",
 		"SUBZERO_SLAMMER": "An ice pillar forms beneath the caster, granting them [25,50,100,150,250] SHIELD. The caster then fires an ice beam that deals [10,20,30,50,100,SP] SPECIAL every 250 ms for 4 seconds, switching targets on KO. After 4 seconds, an ice explosion deals [15,30,60,100,200,SP] SPECIAL to the current target and ADJACENT enemies.",
 		"CONTINENTAL_CRUSH": "Summons a huge rock mountain for 5 seconds, a delay reduced by 10% for each ROCK ally on the board. The mountain then crashes in the middle of the enemy team, dealing [100,200,300,400,800,SP] SPECIAL to all enemies directly in the 3x3 zone below. Other enemies in a 3-tile radius are knocked back and take [20,40,80,160,SP] SPECIAL.",
-		"CORKSCREW_CRASH": "The user spins very fast and rams into the enemy team, dealing [20,40,80,120,200,SP] TRUE to up to 6 enemies before performing a final attack on the highest HP enemy for [50,100,150,200,300,SP] TRUE."
+		"CORKSCREW_CRASH": "The user spins very fast and rams into the enemy team, dealing [20,40,80,120,200,SP] TRUE to up to 6 enemies before performing a final attack on the highest HP enemy for [50,100,150,200,300,SP] TRUE.",
+		"PURPLE_RAIN": "It rains Ditto for 3 seconds on random spots of the board ([4,6,8,10,12,SP] Ditto in total). Their ability is replaced with $t(ability.AMALGAMATE), which cause them to merge with the closest other Ditto ally, combining their stats."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3411,9 +3415,9 @@
 		"POISONIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.ACID_DOWNPOUR)",
 		"PSYCHIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SHATTERED_PSYCHE)",
 		"ROCKIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.CONTINENTAL_CRUSH)",
-		"SLIMIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"SLIMIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.PURPLE_RAIN)",
 		"STELLARIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.TERA_BLAST)",
-		"STEELIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"STEELIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.CORKSCREW_CRASH)",
 		"WATERIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.HYDRO_VORTEX)",
 		"POTION": "A potion that heals 10 player HP of the team",
 		"FORAGE_BAG": "Gift 3 random item components",

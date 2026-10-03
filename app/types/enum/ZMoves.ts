@@ -24,6 +24,7 @@ export const ZMoves = [
   Ability.LIGHT_THAT_BURNS_THE_SKY,
   Ability.NEVER_ENDING_NIGHTMARE,
   Ability.OCEANIC_OPERETTA,
+  Ability.PURPLE_RAIN,
   Ability.STOKED_SPARKSURFER,
   Ability.SAVAGE_SPIN_OUT,
   Ability.SHATTERED_PSYCHE,
@@ -64,7 +65,7 @@ export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
   [Item.POISONIUM_Z]: Ability.ACID_DOWNPOUR,
   [Item.PSYCHIUM_Z]: Ability.SHATTERED_PSYCHE,
   [Item.ROCKIUM_Z]: Ability.CONTINENTAL_CRUSH,
-  [Item.SLIMIUM_Z]: Ability.DEFAULT,
+  [Item.SLIMIUM_Z]: Ability.PURPLE_RAIN,
   [Item.STELLARIUM_Z]: Ability.DEFAULT,
   [Item.STEELIUM_Z]: Ability.CORKSCREW_CRASH,
   [Item.WATERIUM_Z]: Ability.HYDRO_VORTEX

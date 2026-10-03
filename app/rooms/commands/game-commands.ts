@@ -128,7 +128,7 @@ import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -295,7 +295,7 @@ export class OnPokemonCatchCommand extends Command<
       }
     } else if (wanderer.type === WandererType.OUTLAW) {
       player.addMoney(OUTLAW_GOLD_REWARD, true, null)
-      removeInArray(player.items, Item.WANTED_NOTICE)
+      removeFromArray(player.items, Item.WANTED_NOTICE)
     }
   }
 }
@@ -642,10 +642,10 @@ export class OnDragDropCombineCommand extends Command<
         return
       }
       if (Scarves.includes(recycledItem)) {
-        removeInArray(player.scarvesItems, recycledItem)
+        removeFromArray(player.scarvesItems, recycledItem)
       }
-      removeInArray(player.items, itemA)
-      removeInArray(player.items, itemB)
+      removeFromArray(player.items, itemA)
+      removeFromArray(player.items, itemB)
       player.items.push(recipe[0])
       player.items.push(recipe[1])
       player.updateSynergies()
@@ -679,8 +679,8 @@ export class OnDragDropCombineCommand extends Command<
       }
 
       player.items.push(result)
-      removeInArray(player.items, itemA)
-      removeInArray(player.items, itemB)
+      removeFromArray(player.items, itemA)
+      removeFromArray(player.items, itemB)
     }
 
     player.updateSynergies()
@@ -747,7 +747,7 @@ export class OnDragDropItemCommand extends Command<
         )
         potEvolution.action = PokemonActionState.SLEEP
         player.flowerPots[index] = potEvolution
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
 
         if (potEvolution.evolution === Pkm.DEFAULT) {
@@ -773,7 +773,7 @@ export class OnDragDropItemCommand extends Command<
 
       if (item === Item.RICH_MULCH && index < nbTrees) {
         player.berryTreesStages[index] = 3
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       } else if (item === Item.AMAZE_MULCH && index < nbTrees) {
         player.berryTreesType[index] = pickRandomIn(
           GOLDEN_BERRY_TREE_TYPES.filter(
@@ -781,7 +781,7 @@ export class OnDragDropItemCommand extends Command<
           )
         )
         player.berryTreesStages[index] = 3
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
@@ -825,7 +825,7 @@ export class OnDragDropItemCommand extends Command<
       if (pokemon.canEat && !pokemon.dishes.has(item)) {
         pokemon.dishes.add(item)
         pokemon.action = PokemonActionState.EAT
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         pokemon.items.add(item) // add the item just in time for the evolution
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
@@ -916,7 +916,7 @@ export class OnDragDropItemCommand extends Command<
       }
 
       pokemon.items.delete(existingBasicItemToCombine)
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
 
       if (pokemon.items.has(itemCombined)) {
         // pokemon already has the combined item so the second one pops off and go to player inventory
@@ -941,7 +941,7 @@ export class OnDragDropItemCommand extends Command<
         return
       }
       pokemon.addItem(item, player)
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
     }
 
     if (pokemon.items.has(Item.SHINY_CHARM)) {
@@ -1037,7 +1037,7 @@ export class OnUseItemCommand extends Command<
     }
 
     if (used) {
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
     }
   }
 }
@@ -1647,7 +1647,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.items.includes(Item.TREASURE_BOX) &&
       player.life <= TREASURE_BOX_LIFE_THRESHOLD
     ) {
-      removeInArray(player.items, Item.TREASURE_BOX)
+      removeFromArray(player.items, Item.TREASURE_BOX)
 
       let rewards: Item[] = []
       let rewardsIcons: Item[] | undefined = undefined
@@ -2073,7 +2073,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         itemsToSell.forEach((item) => {
           player.money += ItemSellPricesAtTown[item] ?? 0
           totalMoneyGained += ItemSellPricesAtTown[item] ?? 0
-          removeInArray<Item>(player.items, item)
+          removeFromArray<Item>(player.items, item)
         })
         if (totalMoneyGained > 0) {
           const client = this.room.clients.find(
@@ -2294,7 +2294,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
             }
           } else if (this.state.stageLevel > this.state.outlawStage) {
-            removeInArray(player.items, Item.WANTED_NOTICE)
+            removeFromArray(player.items, Item.WANTED_NOTICE)
           }
         }
 

@@ -20,6 +20,7 @@ import { AfterYouStrategy } from "./after-you"
 import { AgilityStrategy } from "./agility"
 import { AirSlashStrategy } from "./air-slash"
 import { AllOutPummelingStrategy } from "./all-out-pummeling"
+import { AmalgamateStrategy } from "./amalgamate"
 import { AnchorShotStrategy } from "./anchor-shot"
 import { AncientPowerStrategy } from "./ancient-power"
 import { AppleAcidStrategy } from "./apple-acid"
@@ -405,6 +406,7 @@ import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
+import { PurpleRainStrategy } from "./purple-rain"
 import { PyroBallStrategy } from "./pyro-ball"
 import { QuiverDanceStrategy } from "./quiver-dance"
 import { RageStrategy } from "./rage"
@@ -764,6 +766,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
   [Ability.ALL_OUT_PUMMELING]: new AllOutPummelingStrategy(),
+  [Ability.AMALGAMATE]: new AmalgamateStrategy(),
   [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
@@ -1153,6 +1156,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.PURIFY]: new PurifyStrategy(),
+  [Ability.PURPLE_RAIN]: new PurpleRainStrategy(),
   [Ability.PYRO_BALL]: new PyroBallStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.RAGE]: new RageStrategy(),

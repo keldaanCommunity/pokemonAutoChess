@@ -39,7 +39,7 @@ import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
 import { max, min } from "../../utils/number"
@@ -452,7 +452,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
         ticketLevel,
         returnStage: room.state.stageLevel + 3
       })
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
       player.updateSynergies()
       return false // prevent item from being equipped
     })
@@ -620,7 +620,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
-          removeInArray(player.items, item)
+          removeFromArray(player.items, item)
           return false
         })
       ]
@@ -1274,7 +1274,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.atk += 3
         pokemon.speed += 3
         player.life = min(1)(player.life - 3)
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
 
       return false // prevent item from being equipped
@@ -1285,7 +1285,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.hasSynergy(Synergy.ELECTRIC) && !pokemon.supercharged) {
         pokemon.supercharged = true
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
 
       return false // prevent item from being equipped
@@ -1306,12 +1306,12 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.removeItem(heldItem, player)
         }
         if (Scarves.includes(heldItem)) {
-          removeInArray(player.scarvesItems, heldItem)
+          removeFromArray(player.scarvesItems, heldItem)
         }
       })
 
       if (consummed) {
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
 
       return false // prevent item from being equipped
@@ -1331,7 +1331,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         room.state,
         schemaValues(pokemon.types)
       )
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
       return false // prevent item from being equipped
     })
   ],
@@ -1371,7 +1371,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
             nbSandwiches++
           }
         })
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         if (nbSandwiches >= 9) {
           player.titles.add(Title.PICNICKER)
         }
@@ -1417,7 +1417,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         player.updateRegionalPool(room.state, true, previousMap)
       }, 10000)
 
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
       return false // prevent item from being equipped
     })
   ],
@@ -1498,7 +1498,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       )
 
       pokemonEvolved.items.add(item)
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
       if (pokemonEvolved.items.has(Item.SHINY_CHARM)) {
         pokemonEvolved.shiny = true
       }
@@ -1535,7 +1535,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       if (FlowerPotMons.includes(pokemon.name)) {
         pokemon.addMaxHP(50)
         pokemon.ap += 30
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
       return false // prevent item from being equipped
     })

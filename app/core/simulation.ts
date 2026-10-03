@@ -47,7 +47,7 @@ import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
-import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
+import { count, deduplicateArray, isIn, removeFromArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
@@ -1590,7 +1590,7 @@ export default class Simulation extends Schema implements ISimulation {
           player.addMoney(moneyGain, true, null)
           client?.send(Transfer.PLAYER_INCOME, moneyGain)
           if (hasLeadersCrest && opponentPlayer) {
-            removeInArray(opponentPlayer.items, Item.LEADERS_CREST)
+            removeFromArray(opponentPlayer.items, Item.LEADERS_CREST)
             player.items.push(Item.LEADERS_CREST)
           }
         }

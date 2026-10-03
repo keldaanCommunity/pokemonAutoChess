@@ -90,7 +90,7 @@ import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
 import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
 import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
-import { isIn, removeInArray } from "../utils/array"
+import { isIn, removeFromArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -826,7 +826,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         */
         this.state.players.delete(client.auth.uid)
         this.setMetadata({
-          playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
+          playerIds: removeFromArray(this.metadata.playerIds, client.auth.uid)
         })
 
         /*logger.info(
@@ -1444,7 +1444,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     player.money -= cost
-    removeInArray(player.choices, choice)
+    removeFromArray(player.choices, choice)
   }
 
   computeRoundDamage(
