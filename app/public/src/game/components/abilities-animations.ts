@@ -3481,7 +3481,7 @@ export const AbilitiesAnimations: {
     })
   ],
 
-  [Ability.CORSCREW_CRASH]: [
+  [Ability.CORKSCREW_CRASH]: [
     onSprite(({ casterSprite, ...args }) => {
       const MAX_NB_ENEMIES_HIT = 6
       let orientation = args.orientation
@@ -3557,7 +3557,7 @@ export const AbilitiesAnimations: {
     })
   ],
 
-  ["CORSCREW_CRASH_FINAL"]: [
+  ["CORKSCREW_CRASH_FINAL"]: [
     skyfall({
       ability: Ability.HYPER_DRILL,
       rotation: Math.PI / 2,

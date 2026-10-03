@@ -11,7 +11,7 @@ export const ZMoves = [
   Ability.BREAKNECK_BLITZ,
   Ability.CALL_OF_THE_WILD,
   Ability.CONTINENTAL_CRUSH,
-  Ability.CORSCREW_CRASH,
+  Ability.CORKSCREW_CRASH,
   Ability.DEVASTATING_DRAKE,
   Ability.FOOD_FIGHT,
   Ability.FURIOUS_STAMPEDE,
@@ -66,6 +66,6 @@ export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
   [Item.ROCKIUM_Z]: Ability.CONTINENTAL_CRUSH,
   [Item.SLIMIUM_Z]: Ability.DEFAULT,
   [Item.STELLARIUM_Z]: Ability.DEFAULT,
-  [Item.STEELIUM_Z]: Ability.CORSCREW_CRASH,
+  [Item.STEELIUM_Z]: Ability.CORKSCREW_CRASH,
   [Item.WATERIUM_Z]: Ability.HYDRO_VORTEX
 }

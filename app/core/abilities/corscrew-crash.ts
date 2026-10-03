@@ -8,7 +8,7 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 
-export class CorscrewCrashStrategy extends AbilityStrategy {
+export class CorkscrewCrashStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
@@ -106,7 +106,7 @@ export class CorscrewCrashStrategy extends AbilityStrategy {
         finalY = highestHpEnemy.positionY
       }
       pokemon.broadcastAbility({
-        skill: "CORSCREW_CRASH_FINAL",
+        skill: "CORKSCREW_CRASH_FINAL",
         targetX: finalX,
         targetY: finalY
       })
