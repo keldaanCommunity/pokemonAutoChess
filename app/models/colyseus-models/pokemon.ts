@@ -14796,9 +14796,9 @@ export class Cosmog extends Pokemon {
   rarity = Rarity.UNIQUE
   evolution = Pkm.COSMOEM
   evolutionRule = { type: EvolutionRuleType.STACK } satisfies StackEvolutionRule
-  stacksRequired = 8
+  stacksRequired = 10
   stars = 1
-  hp = 140
+  hp = 100
   atk = 5
   speed = 37
   def = 8
@@ -14826,14 +14826,14 @@ export class Cosmoem extends Pokemon {
       else return Pkm.LUNALA
     }
   } satisfies StackEvolutionRule
-  stacksRequired = 8
+  stacksRequired = 10
   onAcquired(player: Player) {
     this.stacks = -1 // because cosmoem will proc the passive as well after evolution
     this.hp -= 10
-    this.hp -= 80 // revert hp buffs of cosmog
+    this.hp -= 100 // revert hp buffs of cosmog
     this.maxHP = this.hp
   }
-  hp = 220
+  hp = 200
   atk = 5
   speed = 37
   def = 16
@@ -14861,7 +14861,7 @@ export class Solgaleo extends Pokemon {
   range = 1
   skill = Ability.SUNSTEEL_STRIKE
   onAcquired(player: Player) {
-    this.hp -= 80 // revert hp buffs of cosmoem
+    this.hp -= 100 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
@@ -14884,7 +14884,7 @@ export class Lunala extends Pokemon {
   range = 4
   skill = Ability.MOONGEIST_BEAM
   onAcquired(player: Player) {
-    this.hp -= 80 // revert hp buffs of cosmoem
+    this.hp -= 100 // revert hp buffs of cosmoem
     this.maxHP = this.hp
     player.titles.add(Title.STARGAZER)
   }
