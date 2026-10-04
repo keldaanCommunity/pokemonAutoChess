@@ -1816,7 +1816,10 @@
 		"SUBZERO_SLAMMER": "Subzero Slammer",
 		"CONTINENTAL_CRUSH": "Continental Crush",
 		"CORKSCREW_CRASH": "Corkscrew Crash",
-		"PURPLE_RAIN": "Purple Rain"
+		"PURPLE_RAIN": "Purple Rain",
+		"PALAEO_COLLAPSE": "Palaeo Collapse",
+		"KNOWLEDGE_IS_POWER": "Knowledge is Power",
+		"TERA_BLAST": "Tera Blast"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2412,7 +2415,10 @@
 		"SUBZERO_SLAMMER": "An ice pillar forms beneath the caster, granting them [25,50,100,150,250] SHIELD. The caster then fires an ice beam that deals [10,20,30,50,100,SP] SPECIAL every 250 ms for 4 seconds, switching targets on KO. After 4 seconds, an ice explosion deals [15,30,60,100,200,SP] SPECIAL to the current target and ADJACENT enemies.",
 		"CONTINENTAL_CRUSH": "Summons a huge rock mountain for 5 seconds, a delay reduced by 10% for each ROCK ally on the board. The mountain then crashes in the middle of the enemy team, dealing [100,200,300,400,800,SP] SPECIAL to all enemies directly in the 3x3 zone below. Other enemies in a 3-tile radius are knocked back and take [20,40,80,160,SP] SPECIAL.",
 		"CORKSCREW_CRASH": "The user spins very fast and rams into the enemy team, dealing [20,40,80,120,200,SP] TRUE to up to 6 enemies before performing a final attack on the highest HP enemy for [50,100,150,200,300,SP] TRUE.",
-		"PURPLE_RAIN": "It rains Ditto for 3 seconds on random spots of the board ([4,6,8,10,12,SP] Ditto in total). Their ability is replaced with $t(ability.AMALGAMATE), which cause them to merge with the closest other Ditto ally, combining their stats."
+		"PURPLE_RAIN": "It rains Ditto for 3 seconds on random spots of the board ([4,6,8,10,12,SP] Ditto in total). Their ability is replaced with $t(ability.AMALGAMATE), which cause them to merge with the closest other Ditto ally, combining their stats.",
+		"PALAEO_COLLAPSE": "A meteorite slams into the board, targeting the biggest cluster of enemies. It deals [100,200,300,400,800,SP] SPECIAL to all enemies in a 3-tile radius with 20% DAMAGE_REDUCTION_OVER_DISTANCE. All FOSSIL allies in the impact zone trigger their FOSSIL primordial power immediately if not already triggered.",
+		"KNOWLEDGE_IS_POWER": "Changes its Z-Crystal to a random type and casts the Z-Move of that type. The new Z-Crystal persists between fights and can be reset by benching the user. Gain 4 XP every time the Z-Crystal is changed.",
+		"TERA_BLAST": "Projects 8 TERA_SHARD in every direction. Each shard has a type taken randomly from user's active synergies and traverse enemies and allies, dealing [20,40,80,160,SP] SPECIAL to enemies and applying their specific effect to allies."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3015,6 +3021,7 @@
 		"PSYCHIUM_Z": "Psychium Z",
 		"ROCKIUM_Z": "Rockium Z",
 		"SLIMIUM_Z": "Slimium Z",
+		"STELLARIUM_Z": "Stellarium Z",
 		"STEELIUM_Z": "Steelium Z",
 		"WATERIUM_Z": "Waterium Z",
 		"POTION": "Potion",
@@ -3388,7 +3395,7 @@
 		"BALL": "A ball made of a large hard berry. When casting ability, throws the ball to the furthest FIELD ally to pass them the BALL and 50 SHIELD. If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead, dealing [30,SP]% of user's SPEED as PHYSICAL",
 		"Z_RING": "Allows the holder to equip Z-Crystals and gather the Z-Power required to perform Z-Moves.",
 		"ALUMINIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.GIZMOS_AND_GADGETS)",
-		"ANTHROPIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"ANTHROPIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.KNOWLEDGE_IS_POWER)",
 		"AQUARIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.STOKED_SPARKSURFER)",
 		"BUGINIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SAVAGE_SPIN_OUT)",
 		"COLOSSIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.KAIJU_ATTACK)",
@@ -3407,10 +3414,10 @@
 		"GHOSTIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.NEVER_ENDING_NIGHTMARE)",
 		"GRASSIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.BLOOM_DOOM)",
 		"GROUNDIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.TECTONIC_RAGE)",
-		"ICIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"ICIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SUBZERO_SLAMMER)",
 		"NORMALIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.BREAKNECK_BLITZ)",
 		"PETALIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.GIANT_RAFFLESIA)",
-		"PETROLIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to ?????",
+		"PETROLIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.PALAEO_COLLAPSE)",
 		"PHOTONIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.LIGHT_THAT_BURNS_THE_SKY)",
 		"POISONIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.ACID_DOWNPOUR)",
 		"PSYCHIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SHATTERED_PSYCHE)",
@@ -5160,6 +5167,11 @@
 			"fire_shard_description": "After reaching max level in FIRE synergy, every round you can use FIRE_SHARD to sacrifice your player HP and buff a FIRE Pokémon.",
 			"gifts": "Gifts",
 			"gifts_description": "Gifts can be given to your partner in the Double Up game mode"
+		},
+		"abilities": {
+			"zmove": "Z-Move",
+			"zmove_description": "Z-Moves are very powerful abilities unlocked with the Z-Ring.",
+			"learned_ability_description": "This ability has been learned by the Pokémon. You can reset it to its default ability by benching the Pokémon."
 		},
 		"statistics": {
 			"stat_description": {

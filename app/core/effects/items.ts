@@ -617,6 +617,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           const ability = AbilityPerTM[item]
           if (!ability || pokemon.hasSynergy(Synergy.HUMAN) === false)
             return false // prevent equipping TMs on non-human pokemon
+          if (pokemon.items.has(Item.Z_RING)) return false // prevent equipping TMs on pokemon with a Z-Move
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100

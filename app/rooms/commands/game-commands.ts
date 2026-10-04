@@ -126,6 +126,7 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
+import { ZMoves } from "../../types/enum/ZMoves"
 import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { isIn, removeFromArray } from "../../utils/array"
@@ -2480,7 +2481,12 @@ export function onPokemonChangePosition({
     player.items.push(...itemsToRemove)
     pokemon.removeItems(itemsToRemove, player)
 
-    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+    if (pokemon.items.has(Item.Z_RING) && isIn(ZMoves, pokemon.tm)) {
+      // Knowledge is power, remove TM
+      pokemon.tm = Ability.DEFAULT
+    }
+
+    if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
       player.items.push(TMPerAbility.get(pokemon.tm)!)
       pokemon.tm = Ability.DEFAULT
       pokemon.skill = pokemon.baseSkill

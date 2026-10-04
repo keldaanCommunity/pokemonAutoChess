@@ -4,6 +4,7 @@ import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precom
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { Rarity, Team } from "../../types/enum/Game"
+import { ZMoves } from "../../types/enum/ZMoves"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { pickRandomIn } from "../../utils/random"
 import type { Board } from "../board"
@@ -366,6 +367,7 @@ import { OriginPulseStrategy } from "./origin-pulse"
 import { OutrageStrategy } from "./outrage"
 import { OverdriveStrategy } from "./overdrive"
 import { OverheatStrategy } from "./overheat"
+import { PalaeoCollapseStrategy } from "./palaeo-collapse"
 import { ParabolicChargeStrategy } from "./parabolic-charge"
 import { PastelVeilStrategy } from "./pastel-veil"
 import { PaydayStrategy } from "./payday"
@@ -541,6 +543,7 @@ import { TeaTimeStrategy } from "./tea-time"
 import { TectonicRageStrategy } from "./tectonic-rage"
 import { TeeterDanceStrategy } from "./teeter-dance"
 import { TeleportStrategy } from "./teleport"
+import { TeraBlastStrategy } from "./tera-blast"
 import { TerrainPulseStrategy } from "./terrain-pulse"
 import { ThiefStrategy } from "./thief"
 import { ThousandArrowsStrategy } from "./thousand-arrows"
@@ -751,6 +754,31 @@ export class SkillSwapStrategy extends AbilityStrategy {
       }
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     }
+  }
+}
+
+export class KnowledgeIsPowerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const randomZMove = pickRandomIn(
+      ZMoves.filter((skill) => skill !== Ability.KNOWLEDGE_IS_POWER)
+    )
+    // use TM field to store the information about the random Z-Move ; it can't logically have both a TM and Knowledge Is Power ability at the same time
+    pokemon.skill = randomZMove
+    pokemon.tm = randomZMove
+    if (pokemon.refToBoardPokemon) {
+      pokemon.refToBoardPokemon.tm = randomZMove
+      pokemon.refToBoardPokemon.skill = randomZMove
+    }
+    if (pokemon.player) {
+      pokemon.player.experienceManager.addExperience(4)
+    }
+    AbilityStrategies[randomZMove].process(pokemon, board, target, crit)
   }
 }
 
@@ -1044,6 +1072,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.KAIJU_ATTACK]: new KaijuAttackStrategy(),
   [Ability.KING_SHIELD]: new KingShieldStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy(),
+  [Ability.KNOWLEDGE_IS_POWER]: new KnowledgeIsPowerStrategy(),
   [Ability.KNOWLEDGE_THIEF]: new KnowledgeThiefStrategy(),
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
@@ -1116,6 +1145,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OUTRAGE]: new OutrageStrategy(),
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.OVERHEAT]: new OverheatStrategy(),
+  [Ability.PALAEO_COLLAPSE]: new PalaeoCollapseStrategy(),
   [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy(),
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.PAYDAY]: new PaydayStrategy(),
@@ -1292,6 +1322,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TECTONIC_RAGE]: new TectonicRageStrategy(),
   [Ability.TEETER_DANCE]: new TeeterDanceStrategy(),
   [Ability.TELEPORT]: new TeleportStrategy(),
+  [Ability.TERA_BLAST]: new TeraBlastStrategy(),
   [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
   [Ability.THIEF]: new ThiefStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),

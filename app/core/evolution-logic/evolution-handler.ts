@@ -1,7 +1,7 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
-import type { IPlayer } from "../../types"
+import { type IPlayer, TMPerAbility } from "../../types"
 import type {
   DivergentEvolution,
   EvolutionRule
@@ -9,7 +9,8 @@ import type {
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
 import type { Pkm } from "../../types/enum/Pokemon"
-import { sum } from "../../utils/array"
+import { ZMoves } from "../../types/enum/ZMoves"
+import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 
 export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
@@ -73,12 +74,28 @@ export function carryOverPermanentStats(
     }
     pokemonEvolved.applyStat(statMapping[stat], sumOfPermaStatsModifier) // can be negative or positive
   }
+}
 
-  // carry over TM
+export function carryOverChangedAbilities(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[],
+  player: Player
+) {
+  // carry over TM and Z-Moves
   const existingTms = pokemonsBeforeEvolution
     .map((p) => p.tm)
     .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
-  if (existingTms.length > 0) {
+  const existingZMoves = pokemonsBeforeEvolution
+    .map((p) => p.skill)
+    .filter((skill) => isIn(ZMoves, skill))
+  if (existingZMoves.length > 0) {
+    pokemonEvolved.skill = pickRandomIn(existingZMoves)
+    if (existingTms.length > 0) {
+      // give back TM if taking the Z-Move
+      pokemonEvolved.tm = Ability.DEFAULT
+      player.items.push(...existingTms.map((tm) => TMPerAbility[tm]))
+    }
+  } else if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     if (pokemonEvolved.tm === Ability.SKILL_SWAP) {
       // keep the ability learnt with skill swap if there is one

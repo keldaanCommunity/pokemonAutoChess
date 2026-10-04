@@ -21,9 +21,11 @@ export const ZMoves = [
   Ability.HYDRO_VORTEX,
   Ability.INFERNO_OVERDRIVE,
   Ability.KAIJU_ATTACK,
+  Ability.KNOWLEDGE_IS_POWER,
   Ability.LIGHT_THAT_BURNS_THE_SKY,
   Ability.NEVER_ENDING_NIGHTMARE,
   Ability.OCEANIC_OPERETTA,
+  Ability.PALAEO_COLLAPSE,
   Ability.PURPLE_RAIN,
   Ability.STOKED_SPARKSURFER,
   Ability.SAVAGE_SPIN_OUT,
@@ -31,6 +33,7 @@ export const ZMoves = [
   Ability.SUBZERO_SLAMMER,
   Ability.SUPERSONIC_SKYSTRIKE,
   Ability.TECTONIC_RAGE,
+  Ability.TERA_BLAST,
   Ability.TWINKLE_TACKLE
 ] satisfies Ability[]
 
@@ -38,7 +41,7 @@ export type ZMove = (typeof ZMoves)[number]
 
 export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
   [Item.ALUMINIUM_Z]: Ability.GIZMOS_AND_GADGETS,
-  [Item.ANTHROPIUM_Z]: Ability.DEFAULT,
+  [Item.ANTHROPIUM_Z]: Ability.KNOWLEDGE_IS_POWER,
   [Item.AQUARIUM_Z]: Ability.STOKED_SPARKSURFER,
   [Item.BUGINIUM_Z]: Ability.SAVAGE_SPIN_OUT,
   [Item.COLOSSIUM_Z]: Ability.KAIJU_ATTACK,
@@ -60,13 +63,13 @@ export const ZMovesByCrystal: Record<ZCrystal, ZMove> = {
   [Item.ICIUM_Z]: Ability.SUBZERO_SLAMMER,
   [Item.NORMALIUM_Z]: Ability.BREAKNECK_BLITZ,
   [Item.PETALIUM_Z]: Ability.GIANT_RAFFLESIA,
-  [Item.PETROLIUM_Z]: Ability.DEFAULT,
+  [Item.PETROLIUM_Z]: Ability.PALAEO_COLLAPSE,
   [Item.PHOTONIUM_Z]: Ability.LIGHT_THAT_BURNS_THE_SKY,
   [Item.POISONIUM_Z]: Ability.ACID_DOWNPOUR,
   [Item.PSYCHIUM_Z]: Ability.SHATTERED_PSYCHE,
   [Item.ROCKIUM_Z]: Ability.CONTINENTAL_CRUSH,
   [Item.SLIMIUM_Z]: Ability.PURPLE_RAIN,
-  [Item.STELLARIUM_Z]: Ability.DEFAULT,
+  [Item.STELLARIUM_Z]: Ability.TERA_BLAST,
   [Item.STEELIUM_Z]: Ability.CORKSCREW_CRASH,
   [Item.WATERIUM_Z]: Ability.HYDRO_VORTEX
 }
