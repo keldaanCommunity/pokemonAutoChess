@@ -3581,6 +3581,28 @@ export const AbilitiesAnimations: {
     })
   ],
 
+  [Ability.PALAEO_COLLAPSE]: [
+    projectile({
+      ability: Ability.SUNSTEEL_STRIKE,
+      startCoords: [7, 9, false],
+      rotation: Math.PI / 5,
+      duration: 500,
+      scale: 1,
+      hitAnim: [
+        shakeCamera({ duration: 300, intensity: 0.02 }),
+        onTarget({
+          ability: Ability.PALAEO_COLLAPSE,
+          scale: 3,
+          positionOffset: [0, -150]
+        }),
+        onTarget({
+          ability: Ability.COUNTER,
+          scale: 3
+        })
+      ]
+    })
+  ],
+
   [Ability.TECTONIC_RAGE]: [
     (args) => {
       const cx = args.targetX

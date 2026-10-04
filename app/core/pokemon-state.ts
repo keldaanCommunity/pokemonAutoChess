@@ -1,5 +1,4 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
-import { SynergyTiers } from "../config/game/synergies"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -16,6 +15,7 @@ import { max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
+  BeforeTakingDamageEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
@@ -648,6 +648,23 @@ export default abstract class PokemonState {
 
       takenDamage += Math.min(residualDamage, pokemon.hp)
 
+      pokemon.getEffects(BeforeTakingDamageEffect).forEach((effect) => {
+        const { newDeath, newTakenDamage, newResidualDamage } =
+          effect.apply({
+            pokemon,
+            attacker,
+            board,
+            residualDamage,
+            takenDamage,
+            damageBeforeReduction: damage,
+            attackType,
+            isRetaliation
+          }) ?? {}
+        if (newDeath !== undefined) death = newDeath
+        if (newTakenDamage !== undefined) takenDamage = newTakenDamage
+        if (newResidualDamage !== undefined) residualDamage = newResidualDamage
+      })
+
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
         pokemon.hp - residualDamage < 0.3 * pokemon.maxHP
@@ -658,41 +675,6 @@ export default abstract class PokemonState {
         pokemon.addPP(50, pokemon, 0, false)
         pokemon.status.triggerProtect(1500)
         pokemon.removeItem(Item.SHINY_CHARM)
-      }
-
-      if (
-        pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= 0.3 * pokemon.maxHP
-      ) {
-        const shield = Math.round(
-          pokemon.maxHP *
-            (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-              ? 1
-              : pokemon.effects.has(EffectEnum.ELDER_POWER)
-                ? 0.7
-                : 0.4)
-        )
-        const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-          ? 1
-          : pokemon.effects.has(EffectEnum.ELDER_POWER)
-            ? 0.7
-            : 0.4
-        pokemon.addShield(shield, pokemon, 0, false)
-
-        //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
-        const damageOnShield = max(0.5 * shield)(residualDamage)
-
-        pokemon.shieldDamageTaken += damageOnShield
-        takenDamage += damageOnShield
-        pokemon.shield -= damageOnShield
-        residualDamage = 0
-
-        pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
-        pokemon.resetCooldown(500)
-        pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
-        SynergyTiers[Synergy.FOSSIL].forEach((e) => {
-          pokemon.effects.delete(e)
-        })
       }
 
       if (

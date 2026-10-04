@@ -71,6 +71,7 @@ import {
   FightingKnockbackEffect,
   FireHitEffect,
   FlyingProtectionEffect,
+  FossilPowerEffect,
   fightingTrainingEffect,
   GroundHoleEffect,
   humanHealEffect,
@@ -829,6 +830,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FORGOTTEN_POWER:
         if (pokemon.hasSynergy(Synergy.FOSSIL)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FossilPowerEffect(effect))
         }
         break
 
