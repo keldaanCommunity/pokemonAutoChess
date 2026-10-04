@@ -3407,7 +3407,7 @@
 		"ELECTRIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.GIGAVOLT_HAVOC)",
 		"FAIRIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.TWINKLE_TACKLE)",
 		"FERALIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.CALL_OF_THE_WILD)",
-		"FIELDIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t (ability.FURIOUS_STAMPEDE)",
+		"FIELDIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.FURIOUS_STAMPEDE)",
 		"FIGHTIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.ALL_OUT_PUMMELING)",
 		"FIRIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.INFERNO_OVERDRIVE)",
 		"FLYNIUM_Z": "Given to a Z_RING holder, change their max PP to 200 and their ability to $t(ability.SUPERSONIC_SKYSTRIKE)",

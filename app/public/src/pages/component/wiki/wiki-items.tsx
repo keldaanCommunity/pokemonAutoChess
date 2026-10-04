@@ -22,8 +22,7 @@ import {
   Tools,
   TownItems,
   Wands,
-  WeatherRocks,
-  ZCrystals
+  WeatherRocks
 } from "../../../../../types/enum/Item"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { isIn } from "../../../../../utils/array"
@@ -252,11 +251,11 @@ export default function WikiItems() {
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
           />
         </ul>
-        <p>{addIconsToDescription(t("wiki.items.dubious_gadgets_description"))}</p>
+        <p>
+          {addIconsToDescription(t("wiki.items.dubious_gadgets_description"))}
+        </p>
         <ul>
-          <ItemList
-            items={DubiousGadgets}
-          />
+          <ItemList items={DubiousGadgets} />
         </ul>
 
         <h3>
@@ -374,14 +373,6 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} />
-        </ul>
-      </article>
-
-      <article>
-        <h3>Z Crystals</h3>
-        <p>For Z Moves</p>
-        <ul>
-          <ItemList items={ZCrystals} />
         </ul>
       </article>
 

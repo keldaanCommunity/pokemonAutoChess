@@ -707,8 +707,7 @@ export const ShinyItems = [
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.TERA_ORB,
-  Item.Z_RING,
-  Item.RED_SCALE
+  Item.Z_RING
 ] satisfies Item[]
 
 export type ShinyItem = (typeof ShinyItems)[number]
@@ -1356,5 +1355,5 @@ export const SpecialItems: Item[] = [
   Item.BALL,
   ...Flavors,
   ...Nectars,
-  Item.Z_RING
+  Item.RED_SCALE
 ] satisfies Item[]
