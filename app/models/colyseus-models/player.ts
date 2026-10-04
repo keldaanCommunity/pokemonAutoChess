@@ -333,17 +333,18 @@ export default class Player extends Schema implements IPlayer {
   transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
+    newPokemon.dishes = pokemon.dishes
+    newPokemon.positionX = pokemon.positionX
+    newPokemon.positionY = pokemon.positionY
+    this.board.delete(pokemon.id)
+    this.board.set(newPokemon.id, newPokemon)
+    // items must be given after replacing the pokemon on board so that synergy items use the new pokemon reference for updateSynergies
     pokemon.items.forEach((item) => {
       newPokemon.addItem(item, this)
       if (item === Item.SHINY_CHARM) {
         newPokemon.shiny = true
       }
     })
-    newPokemon.dishes = pokemon.dishes
-    newPokemon.positionX = pokemon.positionX
-    newPokemon.positionY = pokemon.positionY
-    this.board.delete(pokemon.id)
-    this.board.set(newPokemon.id, newPokemon)
     newPokemon.onAcquired(this)
     this.updateSynergies()
     this.pokemonsPlayed.add(newPokemon.name)
