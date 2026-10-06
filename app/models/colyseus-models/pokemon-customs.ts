@@ -8,9 +8,15 @@ Schema used to expose in a compressed way (binary uint8) the player customizatio
 */
 
 export class PokemonCustoms extends MapSchema<number> {
-  constructor(pokemonCollection: Map<string, IPokemonCollectionItemForPlayer>) {
+  constructor(
+    pokemonCollection: Map<string, IPokemonCollectionItemForPlayer | number>
+  ) {
     super()
     pokemonCollection.forEach((item, index) => {
+      if (typeof item === "number") {
+        this.set(index, item)
+        return
+      }
       const shiny = item.selectedShiny ? 1 : 0
       let emotionIndex = CollectionEmotions.indexOf(
         item.selectedEmotion ?? Emotion.NORMAL

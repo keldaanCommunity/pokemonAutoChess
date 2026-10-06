@@ -3,6 +3,7 @@ import { StageDuration } from "../../../config"
 import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import type Player from "../../../models/colyseus-models/player"
+import { PokemonCustoms } from "../../../models/colyseus-models/pokemon-customs"
 import Synergies from "../../../models/colyseus-models/synergies"
 import type {
   Emotion,
@@ -117,7 +118,12 @@ const gameSlice = createSlice({
     },
     addPlayer: (state, action: PayloadAction<Player>) => {
       const clone = JSON.parse(JSON.stringify(action.payload)) as Player
-      // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
+      // the json-clone drops Synergies' MapSchema methods; rebuild them
+      clone.pokemonCustoms = new PokemonCustoms(
+        new Map(
+          Object.entries(clone.pokemonCustoms ?? {}) as [string, number][]
+        )
+      )
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
