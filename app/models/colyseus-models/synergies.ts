@@ -13,7 +13,6 @@ import { PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { schemaValues } from "../../utils/schemas"
-import { getPokemonData } from "../precomputed/precomputed-pokemon-data"
 import type { Pokemon } from "./pokemon"
 
 export default class Synergies extends MapSchema<number, Synergy> {
@@ -284,7 +283,8 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
         pkm.types = new SetSchema<Synergy>([synergy, ...pkm.types])
       } else if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {
         // remove native types if stellar
-        const nativeTypes = getPokemonData(pkm.name).types.filter(
+        const types = schemaValues(pkm.types)
+        const nativeTypes = types.filter(
           (type) =>
             !schemaValues(pkm.items).some(
               (item) => SynergyGivenByItem[item] === type
@@ -292,9 +292,7 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
         )
         pkm.types = new SetSchema<Synergy>([
           synergy,
-          ...schemaValues(pkm.types).filter(
-            (type) => !nativeTypes.includes(type)
-          )
+          ...types.filter((type) => !nativeTypes.includes(type))
         ])
       } else {
         pkm.types.add(synergy)
