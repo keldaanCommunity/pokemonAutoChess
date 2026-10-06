@@ -7,16 +7,17 @@ import {
   getRegionTint,
   ItemStats,
   PortalCarouselStages,
-  RegionDetails,
-  Troopers
+  RegionDetails
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
+import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons
 } from "../../../../core/flower-pots"
 import { getSynergyTier } from "../../../../core/synergies"
 import type Player from "../../../../models/colyseus-models/player"
+import type { Pokemon } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
@@ -24,7 +25,6 @@ import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
 import type GameState from "../../../../rooms/states/game-state"
 import {
   FlowerPots,
-  type IPlayer,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
@@ -41,12 +41,11 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
-import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
+import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { TownEncounters } from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
-import { isIn } from "../../../../utils/array"
 import { isOnBench } from "../../../../utils/board"
 import { logger } from "../../../../utils/logger"
 import { randomBetween } from "../../../../utils/random"
@@ -65,11 +64,11 @@ import type AnimationManager from "../animation-manager"
 import { PokemonAnimations } from "../components/pokemon-animations"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
-import { addAbilitySprite, displayBoost } from "./abilities-animations"
+import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
-import PokemonSprite from "./pokemon"
 import PokemonAvatar from "./pokemon-avatar"
 import PokemonSpecial from "./pokemon-special"
+import PokemonSprite from "./pokemon-sprite"
 import { Portal } from "./portal"
 import { TradingPlatform } from "./trading-platform"
 
@@ -222,7 +221,6 @@ export default class BoardManager {
     this.animationManager.animatePokemon(pokemonSprite, pokemon.action, false)
     this.pokemons.get(pokemonSprite.id)?.destroy()
     this.pokemons.set(pokemonSprite.id, pokemonSprite)
-    this.addLavaBenchPokemonAnimation(pokemonSprite)
 
     return pokemonSprite
   }
@@ -259,13 +257,6 @@ export default class BoardManager {
       this.mode !== BoardMode.TOWN
     ) {
       this.renderTradingPlatform()
-    }
-
-    if (
-      this.mode === BoardMode.BATTLE &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
-    ) {
-      this.addLavaBenchAnimation()
     }
 
     this.player.board.forEach((pokemon) => {
@@ -811,13 +802,6 @@ export default class BoardManager {
         }
       }
     }, 0) // need to wait for next event loop for state to be up to date
-
-    if (
-      phaseJustChanged &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA
-    ) {
-      this.addLavaBenchAnimation()
-    }
   }
 
   removePokemonsOnBoard() {
@@ -856,8 +840,11 @@ export default class BoardManager {
   minigameMode() {
     this.mode = BoardMode.TOWN
     this.scene.setMap("town")
-    if (this.state.townEncounter === TownEncounters.LUDICOLO) {
-      playMusic(this.scene, DungeonMusic.CARNIVAL_LUDICOLO)
+    if (
+      this.state.townEncounter &&
+      this.state.townEncounter in MusicByTownEncounter
+    ) {
+      playMusic(this.scene, MusicByTownEncounter[this.state.townEncounter]!)
       this.scene.music?.once("looped", () => {
         playMusic(
           this.scene,
@@ -963,8 +950,8 @@ export default class BoardManager {
   }
 
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
-    pokemon: IPokemon,
-    player: IPlayer,
+    pokemon: Pokemon,
+    player: Player,
     field: F,
     value: IPokemon[F],
     previousValue?: IPokemon[F]
@@ -1010,20 +997,34 @@ export default class BoardManager {
           break
         }
 
-        case "action":
-          pokemonSprite.action = value as IPokemon["action"]
-          this.animationManager.animatePokemon(
-            pokemonSprite,
-            value as IPokemon["action"],
-            false
-          )
-          if (
-            value === PokemonActionState.TRAINING &&
-            pokemon.positionX === 0
-          ) {
-            this.animateTrainingBag()
+        case "action": {
+          const action = value as IPokemon["action"]
+          pokemonSprite.action = action
+
+          if (action === PokemonActionState.TRAINING) {
+            pokemonSprite.orientation = Orientation.LEFT
+            if (pokemon.positionX === 0) {
+              this.animateTrainingBag() // make training bag swing when a pokemon is training on it
+            }
+          } else if (action === PokemonActionState.COOK) {
+            pokemonSprite.orientation = Orientation.DOWN
+            pokemonSprite.addLifeBar({
+              scene: this.scene,
+              showHP: false,
+              showPP: true
+            })
+            pokemonSprite.addCookingPot()
+          } else {
+            pokemonSprite.orientation = Orientation.DOWNLEFT
+            if (previousValue === PokemonActionState.COOK) {
+              pokemonSprite.cookingPot?.destroy()
+              pokemonSprite.lifebar?.destroy()
+            }
           }
+
+          this.animationManager.animatePokemon(pokemonSprite, action, false)
           break
+        }
 
         case "hp":
         case "maxHP": {
@@ -1039,6 +1040,20 @@ export default class BoardManager {
           }
           if (pokemonSprite.lifebar) {
             pokemonSprite.lifebar.setHp(hp)
+          }
+          break
+        }
+
+        case "pp": {
+          if (pokemonSprite.lifebar?.scene) {
+            pokemonSprite.lifebar.setPP(value as number)
+          }
+          break
+        }
+
+        case "maxPP": {
+          if (pokemonSprite.lifebar) {
+            pokemonSprite.lifebar.setMaxPP(value as number)
           }
           break
         }
@@ -1269,16 +1284,20 @@ export default class BoardManager {
     })
   }
 
-  addPortal() {
+  addPortal(animate = true) {
     if (this.portal) this.portal.destroy()
     const [x, y] = transformBoardCoordinates(3.5, 5)
-    this.portal = new Portal(this.scene, "portal", x, y).setScale(0)
-    this.scene.tweens.add({
-      targets: this.portal,
-      scale: 1.5,
-      duration: 5000,
-      ease: Phaser.Math.Easing.Sine.Out
-    })
+    this.portal = new Portal(this.scene, "portal", x, y).setScale(
+      animate ? 0 : 1.5
+    )
+    if (animate) {
+      this.scene.tweens.add({
+        targets: this.portal,
+        scale: 1.5,
+        duration: 5000,
+        ease: Phaser.Math.Easing.Sine.Out
+      })
+    }
   }
 
   portalTransition(isRedPlayer: boolean) {
@@ -1290,6 +1309,8 @@ export default class BoardManager {
       logger.error("No opponent found for portal transition")
       return
     }
+    // the sequencing below hangs off the portal's tween, and a board built mid-pick has none
+    if (!this.portal) this.addPortal(false)
 
     if (isRedPlayer) {
       // avatar goes first in the portal
@@ -1623,43 +1644,5 @@ export default class BoardManager {
         }
       }
     })
-  }
-
-  addLavaBenchAnimation() {
-    for (let x = 0; x < BOARD_WIDTH; x++) {
-      addAbilitySprite(
-        this.scene,
-        "LAVA",
-        0,
-        transformBoardCoordinates(x, -0.75),
-        {
-          animOptions: { repeat: 30 },
-          depth: DEPTH.ABILITY_GROUND_LEVEL,
-          scale: 2
-        }
-      )
-    }
-    this.pokemons.forEach((sprite) => this.addLavaBenchPokemonAnimation(sprite))
-  }
-
-  addLavaBenchPokemonAnimation(pokemonSprite: PokemonSprite) {
-    if (
-      this.mode === BoardMode.BATTLE &&
-      this.state.specialGameRule === SpecialGameRule.BENCH_IS_LAVA &&
-      isOnBench(pokemonSprite.pokemon) &&
-      !isIn(Troopers, pokemonSprite.pokemon.name)
-    ) {
-      pokemonSprite.setLifeBar(pokemonSprite.pokemon, this.scene)
-      addAbilitySprite(
-        this.scene,
-        "BURN_UP",
-        0,
-        [pokemonSprite.x, pokemonSprite.y],
-        {
-          animOptions: { repeat: 48 },
-          scale: 2
-        }
-      )
-    }
   }
 }

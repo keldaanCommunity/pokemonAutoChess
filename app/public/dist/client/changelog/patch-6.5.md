@@ -74,7 +74,7 @@
 - New items: Synergy gems ; synergy gems increase the level of a synergy but are unholdable
 - Buff Float Stone: 5 → 10 speed
 - Buff Black Augurite: 5 → 10% less critical damage
-- Buff Smelly Clay: 10 → 15% less chance to be poisonned
+- Buff Smelly Clay: 10 → 15% less chance to be poisoned
 - Buff Kings Rock: 100 + ~~30~~ 35 % of max HP as shield
 - Buff Star Dust: base shield 15 → 50
 - Nerf Shiny Charm: protect duration 2 → 1.5 second

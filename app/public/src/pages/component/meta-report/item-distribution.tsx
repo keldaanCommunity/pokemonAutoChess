@@ -40,13 +40,13 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
         </div>
         <div className="item-distribution-tooltip-row">
           <label className="item-distribution-tooltip-label">
-            {t("average_place")}:
+            {t("meta_report.average_place")}:
           </label>
           <span>{data.avgPlace?.toFixed(2)}</span>
         </div>
         <div className="item-distribution-tooltip-row">
           <label className="item-distribution-tooltip-label">
-            {t("count")}:
+            {t("meta_report.count")}:
           </label>
           <span>{data.count}</span>
         </div>

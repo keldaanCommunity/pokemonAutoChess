@@ -92,9 +92,10 @@
   column-gap: 0.5em;
 }
 
-#wiki-page .wiki-status h2 {
-  margin: 0;
-  font-size: 2rem;
+#wiki-page .wiki-board-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 #wiki-page .wiki-stat h2 {
@@ -361,6 +362,10 @@
 #wiki-data th,
 #wiki-data td {
   padding: 0 0.5em;
+}
+
+#wiki-data tr:nth-child(odd) {
+  background-color: var(--color-bg-tertiary);
 }
 
 #wiki-data-tiers-by-level th,

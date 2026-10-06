@@ -85,8 +85,7 @@ export default class AttackingState extends PokemonState {
           pokemon.positionY,
           pokemon.targetX,
           pokemon.targetY,
-          pokemon,
-          target
+          pokemon
         )
 
         if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {

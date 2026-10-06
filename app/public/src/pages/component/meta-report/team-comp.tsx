@@ -106,20 +106,20 @@ export default function TeamComp(props: { team: IMetaV2; rank: number }) {
             </div>
             <div className="header-info">
               <span>
-                <label>{t("average_place")}:</label>
+                <label>{t("meta_report.average_place")}:</label>
                 {props.team.mean_rank.toFixed(2)}
               </span>
               <span>
-                <label>{t("winrate")}:</label>
+                <label>{t("meta_report.winrate")}:</label>
                 {props.team.winrate.toFixed(2)} %
               </span>
               <span>
-                <label>{t("count")}:</label>
+                <label>{t("meta_report.count")}:</label>
                 {props.team.count}
               </span>
             </div>
           </div>
-          <div className="popular-pokemons-header">{t("popular_pokemons")}</div>
+          <div className="popular-pokemons-header">{t("meta_report.popular_pokemons")}</div>
           <div className="player-team-pokemons">
             {sortedPokemons.map((pokemon) => {
               const pokemonData = props.team.mean_team.pokemons[pokemon]
@@ -146,7 +146,7 @@ export default function TeamComp(props: { team: IMetaV2; rank: number }) {
         </div>
         {props.team.mean_items && props.team.mean_items.length > 0 && (
           <div className="top-items-list">
-            <div className="items-header">{t("popular_items")}</div>
+            <div className="items-header">{t("meta_report.popular_items")}</div>
             <div className="items-group">
               {props.team.mean_items.slice(0, 5).map((itemData, idx) => (
                 <div key={idx} className="item-entry">
@@ -189,7 +189,7 @@ export default function TeamComp(props: { team: IMetaV2; rank: number }) {
         )}
         {props.team.top_teams && props.team.top_teams.length > 0 && (
           <div className="top-teams-list">
-            <div className="teams-header">{t("example_teams")}</div>
+            <div className="teams-header">{t("meta_report.example_teams")}</div>
             {props.team.top_teams.slice(0, 3).map((topTeam, idx) => (
               <div key={idx} className="top-team-entry">
                 <div className="team-rank">

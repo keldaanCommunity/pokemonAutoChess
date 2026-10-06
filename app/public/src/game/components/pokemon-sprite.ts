@@ -127,6 +127,7 @@ export default class PokemonSprite extends DraggableObject {
   curseTorment: GameObjects.Sprite | undefined
   curseFate: GameObjects.Sprite | undefined
   light: GameObjects.Sprite | undefined
+  cookingPot: GameObjects.Sprite | undefined
   playerId: string
   shouldShowTooltip: boolean
   flip: boolean
@@ -258,7 +259,7 @@ export default class PokemonSprite extends DraggableObject {
     this.add(this.itemsContainer)
 
     if (isEntity(pokemon)) {
-      this.setLifeBar(pokemon, scene)
+      this.addLifeBar({ scene })
     } else {
       if (pokemon.dishes.size > 0) {
         this.updateDishes(schemaValues(pokemon.dishes))
@@ -787,6 +788,10 @@ export default class PokemonSprite extends DraggableObject {
   }
 
   cookAnimation(dishes: Item[]) {
+    this.pokemon.action = PokemonActionState.IDLE
+    this.orientation = Orientation.DOWNLEFT
+    this.cookingPot?.destroy()
+    this.lifebar?.destroy()
     this.emoteAnimation()
     dishes.forEach((item, i) => {
       const shinyEffect = this.scene.add.sprite(this.x, this.y, "shine")
@@ -810,6 +815,10 @@ export default class PokemonSprite extends DraggableObject {
             itemSprite.destroy()
             shinyEffect.destroy()
           }, 1000)
+          if (this.lifebar) {
+            this.lifebar.destroy()
+            delete this.lifebar
+          }
         }
       })
     })
@@ -918,32 +927,32 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  setLifeBar(
-    pokemon: IPokemonEntity | IPokemon,
+  addLifeBar({
+    scene,
+    showHP = true,
+    showPP = this.pokemon.maxPP !== undefined
+  }: {
     scene: GameScene | DebugScene
-  ) {
-    if (pokemon.hp !== undefined) {
-      this.lifebar = new Lifebar(
-        scene,
-        0,
-        25,
-        pokemon.maxHP,
-        pokemon.hp,
-        pokemon.shield,
-        isEntity(pokemon) ? pokemon.team : Team.BLUE_TEAM,
-        this.flip
-      )
-      this.lifebar.setShield(pokemon.shield)
-      this.add(this.lifebar)
-
-      if (
-        pokemon.pp !== undefined &&
-        pokemon.maxPP !== undefined &&
-        pokemon.maxPP > 0 &&
-        isEntity(pokemon)
-      )
-        this.lifebar.setMaxPP(pokemon.maxPP)
-    }
+    showHP?: boolean
+    showPP?: boolean
+  }) {
+    if (!this.pokemon) return
+    this.lifebar = new Lifebar({
+      scene,
+      x: 0,
+      y: 25,
+      maxHP: this.pokemon.maxHP,
+      hp: this.pokemon.hp,
+      shield: this.pokemon.shield,
+      maxPP: this.pokemon.maxPP,
+      pp: this.pokemon.pp,
+      team: isEntity(this.pokemon) ? this.pokemon.team : Team.BLUE_TEAM,
+      flip: this.flip,
+      showHP,
+      showPP
+    })
+    this.add(this.lifebar)
+    this.lifebar.draw()
   }
 
   addStatusEffectsSprites(pokemon: IPokemonEntity) {
@@ -1728,12 +1737,25 @@ export default class PokemonSprite extends DraggableObject {
       }
     }, 3000)
   }
+
+  addCookingPot() {
+    if (!this.cookingPot) {
+      this.cookingPot = this.scene.add
+        .sprite(-2, 20, "cooking_pot")
+        .setScale(0.3)
+      this.cookingPot.setDepth(DEPTH.POKEMON_ITEM)
+      this.add(this.cookingPot)
+      if (this.lifebar) {
+        this.bringToTop(this.lifebar)
+      }
+    }
+  }
 }
 
 export const isEntity = (
-  pokemon: IPokemon | IPokemonEntity
+  pokemon: IPokemon | IPokemonEntity | Pkm | null | undefined
 ): pokemon is IPokemonEntity => {
-  return "status" in pokemon
+  return pokemon != null && typeof pokemon === "object" && "status" in pokemon
 }
 
 const lazyLoadingRequests = {}

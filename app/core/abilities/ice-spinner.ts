@@ -34,8 +34,7 @@ export class IceSpinnerStrategy extends AbilityStrategy {
               pokemon.positionY,
               cell.value.positionX,
               cell.value.positionY,
-              pokemon,
-              undefined
+              pokemon
             )
             const knockbackCell = board.getKnockBackPlace(
               cell.value.positionX,

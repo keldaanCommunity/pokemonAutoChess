@@ -26,7 +26,6 @@ import {
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
   type IDragDropMessage,
-  type IPlayer,
   type IPokemon,
   type IPokemonEntity,
   Transfer
@@ -53,7 +52,11 @@ import { sortPlayersByRankAndTeam } from "../models/sort-players"
 import { getCachedPortrait } from "../pages/component/game/game-pokemon-portrait"
 import { playSound, SOUNDS } from "../pages/utils/audio"
 import { transformBoardCoordinates } from "../pages/utils/utils"
-import { preference, subscribeToPreferences } from "../preferences"
+import {
+  MAX_CONFIG_FPS,
+  preference,
+  subscribeToPreferences
+} from "../preferences"
 import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
@@ -161,6 +164,7 @@ class GameContainer {
       "maxHP",
       "shield",
       "pp",
+      "maxPP",
       "atk",
       "def",
       "speDef",
@@ -326,7 +330,11 @@ class GameContainer {
       this.game.plugins.install("rexShatter", ShatterPlugin, true)
     }
     const unsubscribeToPreferences = subscribeToPreferences(
-      ({ antialiasing }) => {
+      ({ antialiasing, fpsLimit }) => {
+        if (this.game?.loop) {
+          // A value of 0 indicates unlimited FPS
+          this.game.loop.setFPSLimit(fpsLimit > MAX_CONFIG_FPS ? 0 : fpsLimit)
+        }
         if (!this.game?.canvas) return
         this.game.canvas.style.imageRendering = antialiasing ? "" : "pixelated"
       },
@@ -459,6 +467,8 @@ class GameContainer {
         "action",
         "hp",
         "maxHP",
+        "pp",
+        "maxPP",
         "atk",
         "ap",
         "def",
@@ -763,7 +773,7 @@ class GameContainer {
 
   /* Board pokemons */
 
-  handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
+  handleBoardPokemonAdd(player: Player, pokemon: Pokemon) {
     const board = this.gameScene?.board
     if (
       board &&

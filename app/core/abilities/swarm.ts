@@ -14,8 +14,10 @@ export class SwarmStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     if (!pokemon.player) return
-    const units = schemaValues(pokemon.player.board) 
-    const nest = board.cells.find((p) => p?.name === Pkm.BUG_NEST)
+    const units = schemaValues(pokemon.player.board)
+    const nest = board.cells.find(
+      (p) => p?.name === Pkm.BUG_NEST && p?.team === pokemon.team
+    )
     if (!nest) return
 
     const bugs = units

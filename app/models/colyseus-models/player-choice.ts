@@ -12,6 +12,7 @@ export type PlayerChoiceType =
   | "wand"
   | "gifts"
   | "zmoves"
+  | "form_change"
 
 export class PlayerChoice extends Schema {
   @type("string") id: string
@@ -19,16 +20,19 @@ export class PlayerChoice extends Schema {
   @type(["string"]) items: Item[] = []
   @type(["string"]) pokemons: PkmProposition[] = []
   @type(["number"]) costs: number[] = []
+  onChoice?: (choiceIndex: number) => void
 
   constructor(args: {
     type: PlayerChoiceType
     items?: Item[]
     pokemons?: PkmProposition[]
-    costs?: number[]
+    costs?: number[],
+    onChoice?: (choiceIndex: number) => void
   }) {
     super()
     this.id = crypto.randomUUID()
     this.type = args.type
+    this.onChoice = args.onChoice
     if (args.items) this.items = args.items
     if (args.pokemons) this.pokemons = args.pokemons
     if (args.costs) this.costs = args.costs

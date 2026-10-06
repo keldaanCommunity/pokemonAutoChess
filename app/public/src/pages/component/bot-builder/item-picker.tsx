@@ -2,11 +2,11 @@ import { t } from "i18next"
 import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Dishes, type PkmWithCustom } from "../../../../../types"
-import { Gifts } from "../../../../../types/enum/GiftShop"
 import {
   Berries,
   CraftableItems,
   DubiousGadgets,
+  Gifts,
   Item,
   ItemComponents,
   MemoryDiscs,

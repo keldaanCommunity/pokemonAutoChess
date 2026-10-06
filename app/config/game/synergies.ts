@@ -123,8 +123,8 @@ export const SynergyTiers = {
   ],
   [Synergy.FAIRY]: [
     EffectEnum.AROMATIC_MIST,
-    EffectEnum.FAIRY_WIND,
-    EffectEnum.STRANGE_STEAM,
+    EffectEnum.FAIRY_AURA,
+    EffectEnum.PIXILATE,
     EffectEnum.MOON_FORCE
   ],
   [Synergy.ICE]: [
@@ -284,6 +284,10 @@ export const UNOWN_ENCOUNTER_CHANCE = 0.033
 export const SHINY_UNOWN_ENCOUNTER_CHANCE = 0.05
 export const SHARDS_PER_UNOWN_WANDERER = 50
 export const SHARDS_PER_SHINY_UNOWN_WANDERER = 250
+
+export const GOURMET_COOK_DEFAULT_DURATION = 8000
+export const NB_DISHES_PER_GOURMET_SYNERGY = [0, 1, 2, 2]
+export const NB_HATS_PER_GOURMET_SYNERGY = [0, 1, 1, 2]
 
 export const GOLDEN_BERRY_TREE_TYPES = [
   Item.GOLDEN_RAZZ_BERRY,

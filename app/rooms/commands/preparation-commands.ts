@@ -9,6 +9,7 @@ import {
   MAX_PLAYERS_PER_GAME,
   MIN_HUMAN_PLAYERS
 } from "../../config"
+import { getEloRangeByBotDifficulty } from "../../config/game/bots"
 import { GADGETS } from "../../config/game/gadgets"
 import {
   getPendingGame,
@@ -24,7 +25,7 @@ import UserMetadata from "../../models/mongo-models/user-metadata"
 import { Role } from "../../types"
 import { CloseCodes } from "../../types/enum/CloseCodes"
 import type { EloRank } from "../../types/enum/EloRank"
-import { BotDifficulty, GameMode } from "../../types/enum/Game"
+import { type BotDifficulty, GameMode } from "../../types/enum/Game"
 import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IBot } from "../../types/models/bot-v2"
 import { getRank } from "../../utils/elo"
@@ -93,6 +94,19 @@ export class OnJoinCommand extends Command<
       }
 
       const u = await UserMetadata.findOne({ uid: auth.uid })
+        .select({
+          uid: 1,
+          displayName: 1,
+          elo: 1,
+          games: 1,
+          avatar: 1,
+          title: 1,
+          role: 1,
+          level: 1,
+          twitchLogin: 1,
+          twitchDisplayName: 1
+        })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -171,6 +185,7 @@ export class OnJoinCommand extends Command<
           // logger.debug(user.displayName);
           this.state.ownerName = u.displayName
           this.room.setMetadata({
+            ...this.room.metadata,
             ownerName: this.state.ownerName
           })
         }
@@ -214,6 +229,38 @@ export class OnJoinCommand extends Command<
             `There is more than 8 players in the lobby which was not supposed to happen`
           )
         }
+      }
+
+      // Ready up cooldown
+      const nbExpectedPlayers = MAX_PLAYERS_PER_GAME
+      if (
+        this.state.gameMode === GameMode.DOUBLE_UP &&
+        this.state.users.size === nbExpectedPlayers
+      ) {
+        this.room.state.addMessage({
+          authorId: "server",
+          payload: `You have 2 minutes to form the teams. Click Ready to lock your team slot.`
+        })
+        this.state.readyUpCooldown = this.clock.setTimeout(
+          () => {
+            this.state.users.forEach((user, uid) => {
+              if (!user.ready) {
+                this.state.users.delete(uid)
+                const client = this.room.clients.find(
+                  (c) => c.auth?.uid === uid
+                )
+                client?.leave(CloseCodes.USER_KICKED) // kick double up players that dont ready up in 2 minutes
+                this.room.state.addMessage({
+                  authorId: "server",
+                  avatar: user.avatar,
+                  payload: `${user.name} has been kicked for not readying on time.`
+                })
+              }
+            })
+            this.state.readyUpCooldown = null
+          },
+          2 * 60 * 1000
+        )
       }
     } catch (error) {
       logger.error(error)
@@ -321,6 +368,7 @@ export class OnGameStartRequestCommand extends Command<
         })
       } else {
         this.state.gameStartedAt = new Date().toISOString()
+        this.state.readyUpCooldown?.clear()
         this.room.lock()
         this.room.autoDispose = true // re-enable auto dispose for tournament games
 
@@ -442,7 +490,8 @@ export class OnRoomNameCommand extends Command<
       if (
         this.state.name != roomName &&
         (client.auth?.uid == this.state.ownerId ||
-          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role)))
+          (user && [Role.ADMIN, Role.MODERATOR].includes(user.role))) &&
+        roomName.trim().length > 0
       ) {
         this.room.setName(roomName)
         this.state.name = roomName
@@ -514,6 +563,8 @@ export class OnRoomChangeSpecialRule extends Command<
   async execute({ client, specialRule }) {
     try {
       const u = await UserMetadata.findOne({ uid: client.auth?.uid })
+        .select({ role: 1 })
+        .lean()
       if (!u) {
         client.leave(CloseCodes.USER_NOT_AUTHENTICATED)
         return
@@ -609,6 +660,7 @@ export class OnKickPlayerCommand extends Command<
               })
               this.state.users.delete(userId)
               this.room.setMetadata({
+                ...this.room.metadata,
                 blacklist: this.room.metadata.blacklist.concat(userId)
               })
               cli.leave(CloseCodes.USER_KICKED)
@@ -664,7 +716,10 @@ export class OnLeaveCommand extends Command<
             if (newOwner) {
               this.state.ownerId = newOwner.uid
               this.state.ownerName = newOwner.name
-              this.room.setMetadata({ ownerName: this.state.ownerName })
+              this.room.setMetadata({
+                ...this.room.metadata,
+                ownerName: this.state.ownerName
+              })
               this.room.setName(
                 `${newOwner.name}'${
                   newOwner.name.endsWith("s") ? "" : "s"
@@ -676,6 +731,11 @@ export class OnLeaveCommand extends Command<
                 avatar: newOwner.avatar
               })
             }
+          }
+
+          if (this.state.readyUpCooldown) {
+            this.state.readyUpCooldown.clear()
+            this.state.readyUpCooldown = null
           }
         }
       }
@@ -716,7 +776,6 @@ export class OnToggleReadyCommand extends Command<
 
       if (
         this.state.gameMode !== GameMode.CUSTOM_LOBBY &&
-        this.state.gameMode !== GameMode.DOUBLE_UP &&
         this.state.users.size === nbExpectedPlayers &&
         schemaValues(this.state.users).every((user) => user.ready)
       ) {
@@ -737,6 +796,9 @@ export class OnToggleReadyCommand extends Command<
 export class CheckAutoStartRoom extends Command<PreparationRoom, void> {
   async execute() {
     try {
+      if (this.state.abortOnPlayerLeave) {
+        this.state.abortOnPlayerLeave.abort()
+      }
       this.state.abortOnPlayerLeave = new AbortController()
       const signal = this.state.abortOnPlayerLeave.signal
 
@@ -775,6 +837,8 @@ export class InitializeBotsCommand extends Command<
   async execute({ ownerId }) {
     try {
       const user = await UserMetadata.findOne({ uid: ownerId })
+        .select({ elo: 1 })
+        .lean()
       if (user) {
         const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 
@@ -839,35 +903,11 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
       } else {
         // pick a random bot per difficulty
         const difficulty = type
-        let elo: QueryFilter<IBot>["elo"] | undefined
-
-        switch (difficulty) {
-          case BotDifficulty.BEGINNER:
-            elo = { $lt: 850 }
-            break
-          case BotDifficulty.EASY:
-            elo = { $gte: 850, $lt: 999 }
-            break
-          case BotDifficulty.MEDIUM:
-            elo = { $gte: 1000, $lt: 1149 }
-            break
-          case BotDifficulty.HARD:
-            elo = { $gte: 1150, $lt: 1299 }
-            break
-          case BotDifficulty.EXTREME:
-            elo = { $gte: 1300, $lt: 1449 }
-            break
-          case BotDifficulty.MASTER:
-            elo = { $gte: 1450 }
-            break
-        }
-
-        const existingBots = new Array<string>()
-        this.state.users.forEach((value: GameUser, key: string) => {
-          if (value.isBot) {
-            existingBots.push(key)
-          }
-        })
+        const [minElo, maxElo] = getEloRangeByBotDifficulty(difficulty)
+        const elo: QueryFilter<IBot>["elo"] = { $gte: minElo, $lt: maxElo }
+        const existingBots = schemaEntries(this.state.users)
+          .filter(([id, user]) => user.isBot)
+          .map(([id, user]) => id)
 
         const bots = await BotV2.find(
           { id: { $nin: existingBots }, elo, approved: true },

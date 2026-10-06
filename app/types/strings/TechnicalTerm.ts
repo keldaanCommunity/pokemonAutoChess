@@ -1,6 +1,7 @@
 export enum TechnicalTerm {
   ADJACENT = "ADJACENT",
   ADJACENT_IN_THE_SAME_ROW = "ADJACENT_IN_THE_SAME_ROW",
+  BASE = "BASE",
   BOARD_EFFECT = "BOARD_EFFECT",
   CONE = "CONE",
   DAMAGE_REDUCTION_OVER_DISTANCE = "DAMAGE_REDUCTION_OVER_DISTANCE",
@@ -12,3 +13,5 @@ export enum TechnicalTerm {
 }
 
 export const TechnicalTerms = Object.values(TechnicalTerm)
+
+export const TechnicalTermsWithoutIcons: TechnicalTerm[] = [TechnicalTerm.BASE]

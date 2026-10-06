@@ -3,6 +3,9 @@ import { useCallback, useEffect, useState } from "react"
 import { removeFromArray } from "../../utils/array"
 import { LocalStoreKeys, localStore } from "./pages/utils/store"
 
+// To allow a smooth transition to "uncapped", we save the FPS cap as this value + 1, despite Phaser definining uncapped as 0
+export const MAX_CONFIG_FPS = 144
+
 export type Keybindings = {
   sell: string
   buy_xp: string
@@ -13,6 +16,8 @@ export type Keybindings = {
   emote: string
   prev_player: string
   next_player: string
+  prev_player_by_rank: string;
+  next_player_by_rank: string;
   board_return: string
   wiki: string
   team_planner: string
@@ -45,6 +50,7 @@ export interface IPreferencesState {
   recordReplays: boolean
   keepReplays: number
   theme: string
+  fpsLimit: number
 }
 
 export type PreferenceKey = keyof IPreferencesState
@@ -75,6 +81,7 @@ const defaultPreferences: IPreferencesState = {
   recordReplays: true,
   keepReplays: 5,
   theme: "default",
+  fpsLimit: MAX_CONFIG_FPS + 1,
   keybindings: {
     sell: "E",
     buy_xp: "F",
@@ -85,6 +92,8 @@ const defaultPreferences: IPreferencesState = {
     emote: "A",
     prev_player: "PAGE_UP",
     next_player: "PAGE_DOWN",
+    prev_player_by_rank: "UP",
+    next_player_by_rank: "DOWN",
     board_return: "HOME",
     wiki: "W",
     meta_report: "M",

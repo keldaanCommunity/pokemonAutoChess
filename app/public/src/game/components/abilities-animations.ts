@@ -45,7 +45,7 @@ import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import PokemonSprite, { isEntity } from "./pokemon"
+import PokemonSprite, { isEntity } from "./pokemon-sprite"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */
 const FeatherBaseAngles: Record<string, number> = {
@@ -239,7 +239,7 @@ const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_D,
-    [Pkm.UNOWN_D, Pkm.UNOWN_I, Pkm.UNOWN_T, Pkm.UNOWN_O]
+    [Pkm.UNOWN_D, Pkm.UNOWN_U, Pkm.UNOWN_P, Pkm.UNOWN_E]
   ],
   [
     Ability.HIDDEN_POWER_E,

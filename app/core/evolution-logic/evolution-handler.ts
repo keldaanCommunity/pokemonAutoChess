@@ -2,7 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
-import { type IPlayer, SynergyGivenByItem, TMPerAbility } from "../../types"
+import { SynergyGivenByItem, TMPerAbility } from "../../types"
 import type {
   DivergentEvolution,
   EvolutionRule
@@ -36,7 +36,7 @@ export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
 
   getEvolution(
     pokemon: Pokemon,
-    player: IPlayer,
+    player: Player,
     ...additionalArgs: AdditionalArgs
   ): Pkm {
     if (this.divergentEvolution) {

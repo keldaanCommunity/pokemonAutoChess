@@ -1,7 +1,7 @@
-import type { MapSchema } from "@colyseus/schema"
+import type { MapSchema, SetSchema } from "@colyseus/schema"
 import { SynergyTiersThresholds } from "../config/game/synergies"
 import { PVEStages } from "../models/pve-stages"
-import type { IPlayer, IPokemon, IPokemonEntity } from "../types"
+import type { IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
 import { isOnBench } from "../utils/board"
 import { schemaValues } from "../utils/schemas"
@@ -29,7 +29,7 @@ export function getWildChance(player: IPlayer, stageLevel: number): number {
 }
 
 export function hasSynergy(
-  pokemon: IPokemon | IPokemonEntity,
+  pokemon: { types: Set<Synergy> | SetSchema<Synergy> },
   synergy: Synergy
 ) {
   return pokemon.types.has(synergy) || pokemon.types.has(Synergy.STELLAR)

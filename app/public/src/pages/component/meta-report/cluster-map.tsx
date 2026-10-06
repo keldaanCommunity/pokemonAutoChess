@@ -33,7 +33,7 @@ export function ClusterMap() {
   return (
     <div className="cluster-map-container">
       {loading ? (
-        <div className="cluster-map-loading">{t("cluster_map.loading")}</div>
+        <div className="cluster-map-loading">{t("meta_report.cluster_map.loading")}</div>
       ) : (
         <>
           <div className="cluster-map-chart-wrapper">
@@ -45,17 +45,17 @@ export function ClusterMap() {
             />
           </div>
           <div className="cluster-map-info-panel">
-            <h3>{t("cluster_map.title")}</h3>
+            <h3>{t("meta_report.cluster_map.title")}</h3>
             <p className="cluster-map-info-text">
-              {t("cluster_map.description")}
+              {t("meta_report.cluster_map.description")}
             </p>
             <div className="cluster-map-stats">
               <div className="stat-item">
-                <label>{t("cluster_map.total_clusters")}:</label>
+                <label>{t("meta_report.cluster_map.total_clusters")}:</label>
                 <span>{meta.length}</span>
               </div>
               <div className="stat-item">
-                <label>{t("cluster_map.total_matches")}:</label>
+                <label>{t("meta_report.cluster_map.total_matches")}:</label>
                 <span>{meta.reduce((sum, m) => sum + m.count, 0)}</span>
               </div>
             </div>
@@ -64,9 +64,9 @@ export function ClusterMap() {
               <div className="cluster-detail-panel">
                 <h4>
                   {hoveredCluster
-                    ? t("cluster_map.hovered_cluster")
-                    : t("cluster_map.selected_cluster")}{" "}
-                  {t("cluster_map.cluster")} #{displayedCluster.cluster_id}
+                    ? t("meta_report.cluster_map.hovered_cluster")
+                    : t("meta_report.cluster_map.selected_cluster")}{" "}
+                  {t("meta_report.cluster_map.cluster")} #{displayedCluster.cluster_id}
                 </h4>
                 {displayedCluster.synergies && (
                   <div className="synergies-container">
@@ -86,19 +86,19 @@ export function ClusterMap() {
                 )}
                 <div className="cluster-stats">
                   <div className="stat-item">
-                    <label>{t("cluster_map.rank")}:</label>
+                    <label>{t("meta_report.cluster_map.rank")}:</label>
                     <span>{displayedCluster.mean_rank.toFixed(2)}</span>
                   </div>
                   <div className="stat-item">
-                    <label>{t("cluster_map.winrate")}:</label>
+                    <label>{t("meta_report.cluster_map.winrate")}:</label>
                     <span>{displayedCluster.winrate.toFixed(2)}%</span>
                   </div>
                   <div className="stat-item">
-                    <label>{t("cluster_map.popularity")}:</label>
+                    <label>{t("meta_report.cluster_map.popularity")}:</label>
                     <span>{displayedCluster.ratio.toFixed(2)}%</span>
                   </div>
                   <div className="stat-item">
-                    <label>{t("cluster_map.count")}:</label>
+                    <label>{t("meta_report.cluster_map.count")}:</label>
                     <span>{displayedCluster.count}</span>
                   </div>
                 </div>

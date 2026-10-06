@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
-import { Gifts } from "../../../../types/enum/GiftShop"
 import {
+    AbsorbedItems,
   ConsumableItems,
+  Gifts,
   Item,
   ItemComponents,
   ItemRecipe,
@@ -58,6 +59,7 @@ export function ItemDetailTooltipContent({
     if (ConsumableItems.includes(item)) return t("consumable_item")
     if (isIn(UnholdableItems, item)) return t("unholdable_item")
     if (isIn(RemovableItems, item)) return t("removable_item")
+    if (isIn(AbsorbedItems, item)) return t("absorbed_item")
     if (isIn(ItemComponents, item)) return t("item_component")
     if (isIn(ShinyItems, item)) return t("shiny")
     return null

@@ -199,6 +199,7 @@ export default function GamePokemonPortrait(props: {
         shimmer: shouldShimmer,
         disabled: !canBuy && props.origin === "shop",
         regional: pokemon.regional,
+        additional: pokemon.additional,
         planned: props.inPlanner ?? false
       })}
       style={{
@@ -250,6 +251,9 @@ export default function GamePokemonPortrait(props: {
         <div className="game-pokemon-portrait-cost">
           <Money value={cost} />
         </div>
+      )}
+      {props.origin === "shop" && (pokemon.regional || pokemon.additional) && (
+        <div className="game-pokemon-portrait-pool-indicator"></div>
       )}
       <ul
         className={cc(

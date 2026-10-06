@@ -46,7 +46,6 @@ import {
   OnJoinCommand,
   OnLeaveCommand,
   OnNewMessageCommand,
-  OnSearchByIdCommand,
   RemoveMessageCommand,
   SelectLanguageCommand,
   UnbanUserCommand
@@ -74,6 +73,12 @@ export default class CustomLobbyRoom extends Room {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
+  }
+
+  messages = {
+    "search-by-id": async (client: Client, uid: string) => {
+      return await UserMetadata.findOne({ uid })
+    }
   }
 
   removeRoom(index: number, roomId: string) {
@@ -330,10 +335,6 @@ export default class CustomLobbyRoom extends Room {
       this.dispatcher.dispatch(new ChangeTitleCommand(), { client, title })
     })
 
-    this.onMessage(Transfer.SEARCH_BY_ID, (client, uid: string) => {
-      this.dispatcher.dispatch(new OnSearchByIdCommand(), { client, uid })
-    })
-
     // Handle notification acknowledgment from client
     this.onMessage(
       Transfer.NOTIFICATION_SEEN,
@@ -450,8 +451,12 @@ export default class CustomLobbyRoom extends Room {
   }
 
   async onJoin(client: Client) {
-    const leanUser = await UserMetadata.findOne({ uid: client.auth.uid }).lean()
-    const user = leanUser ? toLeanUserMetadata(leanUser) : null
+    // onReconnect replays this hook. The room already holds the user's document from
+    // the original join (cleared again by OnLeaveCommand), so reuse it rather than
+    // re-fetching the full profile - pokemonCollection included - on every refresh.
+    const user =
+      this.users.get(client.auth.uid) ??
+      (await this.loadUserMetadata(client.auth.uid))
     try {
       if (user?.banned) {
         throw new Error("Account banned")
@@ -472,6 +477,13 @@ export default class CustomLobbyRoom extends Room {
     }
 
     this.dispatcher.dispatch(new OnJoinCommand(), { client, user })
+  }
+
+  private async loadUserMetadata(
+    uid: string
+  ): Promise<IUserMetadataMongo | null> {
+    const leanUser = await UserMetadata.findOne({ uid }).lean()
+    return leanUser ? toLeanUserMetadata(leanUser) : null
   }
 
   async onDrop(client: Client, code: number) {

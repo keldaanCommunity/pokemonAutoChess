@@ -30,8 +30,7 @@ export class OceanicOperettaStrategy extends AbilityStrategy {
             pokemon.positionY,
             p.positionX,
             p.positionY,
-            pokemon,
-            undefined
+            pokemon
           )
           const destination = board.getKnockBackPlace(
             p.positionX,

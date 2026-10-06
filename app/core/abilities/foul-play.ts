@@ -11,7 +11,7 @@ export class FoulPlayStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = ([2, 4, 6, 12][pokemon.stars] ?? 12) * target.atk
+    const damage = ([2, 4, 6, 12][pokemon.stars - 1] ?? 12) * target.atk
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

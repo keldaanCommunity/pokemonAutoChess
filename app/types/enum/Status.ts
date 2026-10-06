@@ -2,7 +2,7 @@ export enum Status {
   BURN = "BURN",
   SILENCE = "SILENCE",
   FATIGUE = "FATIGUE",
-  POISONNED = "POISONNED",
+  POISONED = "POISONED",
   FREEZE = "FREEZE",
   PROTECT = "PROTECT",
   SLEEP = "SLEEP",
@@ -48,7 +48,7 @@ export const PositiveStatuses = [
 // some statuses are technically implemented as such but not documented in wiki or mentionned in abilities descriptions
 export const DocumentedStatuses = [
   Status.BURN,
-  Status.POISONNED,
+  Status.POISONED,
   Status.PARALYSIS,
   Status.FREEZE,
   Status.SLEEP,

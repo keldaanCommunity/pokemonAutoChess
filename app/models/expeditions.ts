@@ -2,7 +2,7 @@ import { getBaseAltForm } from "../config"
 import { ExpPerExpeditionRank } from "../config/game/expeditions"
 import { getExpeditionData, getPlayerExpeditions } from "../core/expeditions"
 import { notificationsService } from "../services/notifications"
-import { type IPlayer, Title } from "../types"
+import { Title } from "../types"
 import {
   type BattleMissionData,
   type DeliveryMissionData,
@@ -14,10 +14,11 @@ import {
 } from "../types/enum/Expedition"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { schemaValues } from "../utils/schemas"
+import type Player from "./colyseus-models/player"
 import { giveUserExp } from "./mongo-models/user-metadata"
 
 export function updatePlayerExpeditionsAfterGame(
-  player: IPlayer,
+  player: Player,
   usr: IUserMetadataMongo
 ): boolean {
   const expeditions = getPlayerExpeditions(usr)
@@ -58,7 +59,7 @@ export function updatePlayerExpeditionsAfterGame(
 }
 
 export function checkExpeditionCompletion(
-  player: IPlayer,
+  player: Player,
   expedition: Expedition
 ): boolean {
   switch (expedition.type) {

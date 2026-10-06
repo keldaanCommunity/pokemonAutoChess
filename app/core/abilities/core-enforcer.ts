@@ -18,7 +18,7 @@ export class CoreEnforcerStrategy extends AbilityStrategy {
         (cell) => cell.y !== target.positionY || cell.x === target.positionX
       ) // Z shape
 
-    const damage = [40, 60, 80, 160][pokemon.stars - 1] ?? 160
+    const damage = [20, 40, 60, 80, 160][pokemon.stars - 1] ?? 160
     cellsHit.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.status.triggerSilence(3000, cell.value)

@@ -211,7 +211,7 @@
 		"HIDDEN_POWER_A": "Ukryta moc (ABRA)",
 		"HIDDEN_POWER_B": "Ukryta moc (BURN)",
 		"HIDDEN_POWER_C": "Ukryta moc (COIN)",
-		"HIDDEN_POWER_D": "Ukryta moc (DITTO)",
+		"HIDDEN_POWER_D": "Ukryta moc (DUPE)",
 		"HIDDEN_POWER_E": "Ukryta moc (EGGS)",
 		"HIDDEN_POWER_F": "Ukryta moc (FISH)",
 		"HIDDEN_POWER_G": "Ukryta moc (GOLD)",
@@ -794,7 +794,7 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Leczy wszystkie efekty statusu i zapewnia [20,40,80,SP] SHIELD każdemu sojuszniczemu Pokémonowi",
-		"PRECIPICE_BLADES": "Zadaj [25,50,100,200,SP] OBRAŻEŃ SPECIAL wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
+		"PRECIPICE_BLADES": "Zadaj [25,50,100,120,200,SP] OBRAŻEŃ SPECIAL wszystkim wrogim Pokémonom w tej samej kolumnie, co użytkownik",
 		"SONG_OF_DESIRE": "2 przeciwników w tylnej linii staje sie CHARM na 3 sekund i zmniejsz ich ATK o [3,SP]",
 		"CONFUSING_MIND": "Make [1,2,3,5] opponents in the backline CONFUSION for [3,SP] seconds",
 		"KNOWLEDGE_THIEF": "Użyj zdolności celu. Gracz otrzymuje [1,1,1,2,3] XP.",

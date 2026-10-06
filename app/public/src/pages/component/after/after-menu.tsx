@@ -157,6 +157,7 @@ export default function AfterMenu() {
           id={`stats-tooltip-${player.id}`}
           className="custom-theme-tooltip"
           place="right"
+          key={"tooltip" + player.id}
         >
           <PlayerStatsTooltip player={player} />
         </Tooltip>

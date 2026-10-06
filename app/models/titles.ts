@@ -6,6 +6,7 @@ import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
 import { schemaValues } from "../utils/schemas"
+import type Player from "./colyseus-models/player"
 
 export function updatePlayerTitlesAfterFight(
   player: IPlayer,
@@ -159,7 +160,7 @@ export function updatePlayerTitlesAfterFight(
 }
 
 export function updatePlayerTitlesAfterGame(
-  player: IPlayer,
+  player: Player,
   usr: IUserMetadataMongo,
   rank: number
 ) {
@@ -205,30 +206,6 @@ export function updatePlayerTitlesAfterGame(
     player.titles.add(Title.NATURAL)
   }
 
-  if (
-    player.titles.has(Title.COLLECTOR) === false &&
-    Object.values(Pkm)
-      .filter((p) => NonPkm.includes(p) === false)
-      .every((pkm) => {
-        const baseForm = getBaseAltForm(pkm)
-        const accepted: Pkm[] =
-          baseForm in PkmAltFormsByPkm
-            ? [
-                baseForm,
-                ...PkmAltFormsByPkm[baseForm as keyof typeof PkmAltFormsByPkm]
-              ]
-            : [baseForm]
-        return accepted.some((form) => {
-          const pokemonCollectionItem = usr.pokemonCollection.get(
-            PkmIndex[form]
-          )
-          return pokemonCollectionItem && pokemonCollectionItem.played > 0
-        })
-      })
-  ) {
-    player.titles.add(Title.COLLECTOR)
-  }
-
   if (usr.elo >= 1100) {
     player.titles.add(Title.GYM_TRAINER)
   }
@@ -241,5 +218,34 @@ export function updatePlayerTitlesAfterGame(
 
   if (player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
+  }
+}
+
+/**
+ * COLLECTOR requires having played every pokemon, which makes it the only title that
+ * depends on the collection's played counters. It is therefore checked on its own.
+ */
+export function updatePlayerCollectorTitle(
+  player: Player,
+  playedIndexes: Set<string>
+) {
+  if (player.titles.has(Title.COLLECTOR)) return
+
+  const hasPlayedEveryPkm = Object.values(Pkm)
+    .filter((p) => NonPkm.includes(p) === false)
+    .every((pkm) => {
+      const baseForm = getBaseAltForm(pkm)
+      const accepted: Pkm[] =
+        baseForm in PkmAltFormsByPkm
+          ? [
+              baseForm,
+              ...PkmAltFormsByPkm[baseForm as keyof typeof PkmAltFormsByPkm]
+            ]
+          : [baseForm]
+      return accepted.some((form) => playedIndexes.has(PkmIndex[form]))
+    })
+
+  if (hasPlayedEveryPkm) {
+    player.titles.add(Title.COLLECTOR)
   }
 }

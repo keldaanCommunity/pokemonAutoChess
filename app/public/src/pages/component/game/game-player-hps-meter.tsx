@@ -1,6 +1,8 @@
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import type { IDps } from "../../../../../types"
+import { EnvironmentalEffects } from "../../../../../types/enum/Effect"
+import { isIn } from "../../../../../utils/array"
 import GameDpsHeal from "./game-dps-heal"
 
 export default function GamePlayerHpsMeter({
@@ -11,9 +13,11 @@ export default function GamePlayerHpsMeter({
   const { t } = useTranslation()
   const sortedHps = useMemo(
     () =>
-      [...dpsMeter].sort((a, b) => {
-        return b.shield + b.heal - (a.shield + a.heal)
-      }),
+      dpsMeter
+        .filter((d) => !isIn(EnvironmentalEffects, d.id) || d.heal + d.shield > 0)
+        .sort((a, b) => {
+          return b.shield + b.heal - (a.shield + a.heal)
+        }),
     [dpsMeter]
   )
 

@@ -8,7 +8,6 @@ import {
   FIGHTING_PHASE_DURATION,
   GiftShopStages,
   GOLDEN_BERRY_TREE_TYPES,
-  getAltFormForPlayer,
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemSellPricesAtTown,
@@ -26,13 +25,19 @@ import {
 } from "../../config"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
+import { getAltFormForPlayer } from "../../core/alt-form-logic"
 import {
   OnChangePositionEffect,
   OnItemDroppedEffect,
   OnSpotlightChangeEffect,
   OnStageStartEffect
 } from "../../core/effects/effect"
-import { ItemEffects } from "../../core/effects/items"
+import {
+  equipItem,
+  equipItems,
+  ItemEffects,
+  unequipItems
+} from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
 import { SynergyEffects } from "../../core/effects/synergies"
 import { giveRandomEgg } from "../../core/eggs"
@@ -62,7 +67,6 @@ import { getBuyPrice, getSellPrice } from "../../models/shop"
 import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
-  Emotion,
   FlowerPot,
   type IClient,
   type IDragDropCombineMessage,
@@ -87,9 +91,7 @@ import {
   Team
 } from "../../types/enum/Game"
 import {
-  type Gift,
   GiftShopPrices,
-  Gifts,
   GiftsTier1,
   GiftsTier2,
   GiftsTier3
@@ -99,6 +101,8 @@ import {
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Dishes,
+  type Gift,
+  Gifts,
   Item,
   ItemComponents,
   ItemComponentsNoFossilOrScarf,
@@ -259,23 +263,14 @@ export class OnPokemonCatchCommand extends Command<
         const shardsGained = wanderer.shiny
           ? SHARDS_PER_SHINY_UNOWN_WANDERER
           : SHARDS_PER_UNOWN_WANDERER
-        const u = await UserMetadata.findOne({ uid: client.auth.uid })
-        if (u) {
-          const c = u.pokemonCollection.get(unownIndex)
-          if (c) {
-            c.dust += shardsGained
-          } else {
-            u.pokemonCollection.set(unownIndex, {
-              id: unownIndex,
-              unlocked: Buffer.alloc(5, 0),
-              dust: shardsGained,
-              selectedEmotion: Emotion.NORMAL,
-              selectedShiny: false,
-              played: 0
-            })
-          }
-          u.save()
-        }
+        // $inc instead of loading the whole user document to read dust, add to it and
+        // save it back. It cannot lose a concurrent update, it transfers nothing, and it
+        // creates a thin { dust } entry for a pokemon the user does not own yet - which
+        // the collection readers treat as 0 dust and no unlocked emotion.
+        await UserMetadata.updateOne(
+          { uid: client.auth.uid },
+          { $inc: { [`pokemonCollection.${unownIndex}.dust`]: shardsGained } }
+        )
       }
     } else if (wanderer.type === WandererType.CATCHABLE) {
       const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)
@@ -670,13 +665,7 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       if (itemA === Item.SILK_SCARF || itemB === Item.SILK_SCARF) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
-          player.synergies,
-          Synergy.NORMAL
-        )
-        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
-          player.scarvesItems.push(result)
-        }
+        player.scarvesItems.push(result)
       }
 
       player.items.push(result)
@@ -930,7 +919,7 @@ export class OnDragDropItemCommand extends Command<
         // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
         player.items.push(itemCombined)
       } else {
-        pokemon.addItem(itemCombined, player)
+        equipItem(pokemon, itemCombined, player)
       }
     } else {
       if (
@@ -941,7 +930,7 @@ export class OnDragDropItemCommand extends Command<
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
-      pokemon.addItem(item, player)
+      equipItem(pokemon, item, player)
       removeFromArray(player.items, item)
     }
 
@@ -1033,7 +1022,7 @@ export class OnUseItemCommand extends Command<
     let used = false
 
     if (isIn(Gifts, item)) {
-      openGift(item, player, fromPlayer)
+      openGift(item, player, fromPlayer, this.room)
       used = true
     }
 
@@ -1052,6 +1041,7 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
 
     if (canRoll) {
       player.gameStats.rerollCount++
+      player.gameStats.rerollCountSinceLastDitto++
       player.money -= rollCost
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
@@ -1139,7 +1129,7 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
       const connectedPlayer = players.find((p) => p.id === client.auth.uid)
       if (connectedPlayer) {
         /*logger.info(
-          `${client.auth.displayName} (${client.id}) joined game room ${this.room.roomId}`
+          `${client.auth.displayName} (${client.sessionId}) joined game room ${this.room.roomId}`
         )*/
         client.view.add(connectedPlayer)
         if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
@@ -1274,6 +1264,9 @@ export class OnUpdateCommand extends Command<
       reinforcement.status.runeProtectCooldown =
         entity.status.runeProtectCooldown
 
+      // bring other tree status
+      reinforcement.status.tree = entity.status.tree
+
       // bring over current active fields (debatable, since technically positie status in wiki)
       reinforcement.status.grassField = entity.status.grassField
       reinforcement.status.fairyField = entity.status.fairyField
@@ -1297,7 +1290,6 @@ export class OnUpdateCommand extends Command<
       reinforcement.pp = 0
 
       // bring over item stack counts to prevent double-stacking from current stats
-      // TODO: after merge, add JAC specifig item counts: WIDE_LENS, GRIP_CLAW, EXP_CHARM
       reinforcement.count.muscleBandCount = entity.count.muscleBandCount
       reinforcement.count.machRibbonCount = entity.count.machRibbonCount
       reinforcement.count.upgradeCount = entity.count.upgradeCount
@@ -1767,7 +1759,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         /* Set schemas needs to be reset to fix reactivity issues ; bug on Colyseus Schema ? */
         p.pokemon.types = new SetSchema<Synergy>(schemaValues(p.pokemon.types))
         p.pokemon.items = new SetSchema<Item>()
-        p.pokemon.addItems(schemaValues(substitute.items), player)
+        equipItems(p.pokemon, schemaValues(substitute.items), player)
         substitute.items.clear()
         this.room.checkEvolutionsAfterPokemonAcquired(player.id)
         player.pokemonsTrainingInDojo.splice(
@@ -1892,6 +1884,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           )
           this.room.pickChoice(player.id, choice.id, randomPick, true)
         })
+
+      player.board.forEach((pokemon) => {
+        if (pokemon.cook) {
+          pokemon.cook.cookingProcess?.clear()
+          delete pokemon.cook
+        }
+      })
     })
   }
 
@@ -1928,7 +1927,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.room.setMetadata({ stageLevel: this.state.stageLevel })
+      this.room.setMetadata({ ...this.room.metadata, stageLevel: this.state.stageLevel })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         player.wanderers.clear()
@@ -1970,6 +1969,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               pokemon.addAttack(4)
               pokemon.addMaxHP(Math.ceil(0.1 * getPokemonData(pokemon.name).hp))
               pokemon.action = PokemonActionState.IDLE
+              if (pokemon.atk >= pokemon.baseAtk + 40) {
+                player.titles.add(Title.BODYBUILDER)
+              }
             }
           })
 
@@ -2431,8 +2433,9 @@ export class OnOverwriteBoardCommand extends Command<GameRoom> {
       const pokemon = PokemonFactory.createPokemonFromName(p.name, p)
       pokemon.positionX = p.x
       pokemon.positionY = p.y
-      pokemon.addItems(p.items, player)
+      equipItems(pokemon, p.items, player)
       player.board.set(pokemon.id, pokemon)
+      pokemon.onAcquired(player)
     })
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
@@ -2479,7 +2482,7 @@ export function onPokemonChangePosition({
       )
     })
     player.items.push(...itemsToRemove)
-    pokemon.removeItems(itemsToRemove, player)
+    unequipItems(pokemon, itemsToRemove, player)
 
     if (pokemon.items.has(Item.Z_RING) && isIn(ZMoves, pokemon.tm)) {
       // Knowledge is power, remove TM

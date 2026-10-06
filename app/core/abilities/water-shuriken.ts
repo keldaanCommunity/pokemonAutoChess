@@ -20,8 +20,7 @@ export class WaterShurikenStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      target
+      pokemon
     )
 
     const orientations = [

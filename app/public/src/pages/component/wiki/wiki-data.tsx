@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next"
 import {
   ARCEUS_RATE,
   BoosterRarityProbability,
-  DITTO_RATE,
+  DITTO_BASE_RATE,
+  DITTO_RATE_PER_REROLL,
   ExpPlace,
   ExpTable,
   FishRarityProbability,
@@ -162,7 +163,7 @@ export default function WikiData() {
 
       <h2>{t("wiki.data.special_pokemons_rate")}</h2>
       <p>
-        {t("wiki.data.ditto_rate")}: {percentage.format(DITTO_RATE)}
+        {t("wiki.data.ditto_rate", { base: percentage.format(DITTO_BASE_RATE), perReroll: percentage.format(DITTO_RATE_PER_REROLL) })}
       </p>
       <p>
         {t("wiki.data.kecleon_rate")}: {percentage.format(KECLEON_RATE)}

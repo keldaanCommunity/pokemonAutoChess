@@ -590,7 +590,7 @@ export class MiniGame {
         Item.SKY_MELODICA,
         Item.TERRA_CYMBAL
       )
-      nbItemsToPick -= 3
+      nbItemsToPick -= 1
     }
 
     if (encounter === TownEncounters.SABLEYE) {
@@ -881,6 +881,9 @@ export class MiniGame {
             player.updateSynergies()
           } else {
             player.items.push(item.name)
+            if (item.name === Item.SILK_SCARF) {
+              player.extraScarves += 1
+            }
           }
         }
       }
