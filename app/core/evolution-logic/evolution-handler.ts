@@ -1,17 +1,20 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
-import { type IPlayer, TMPerAbility } from "../../types"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { type IPlayer, SynergyGivenByItem, TMPerAbility } from "../../types"
 import type {
   DivergentEvolution,
   EvolutionRule
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
+import { SynergyItems } from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { ZMoves } from "../../types/enum/ZMoves"
 import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
+import { schemaValues } from "../../utils/schemas"
 
 export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
   abstract canEvolve(
@@ -106,5 +109,27 @@ export function carryOverChangedAbilities(
       pokemonEvolved.skill = pokemonEvolved.tm
     }
     pokemonEvolved.maxPP = 100
+  }
+}
+
+export function carryOverTeraShards(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[]
+) {
+  const baseTypes = getPokemonData(pokemonEvolved.name).types
+  const typesGivenByItems = pokemonsBeforeEvolution.map((p) =>
+    schemaValues(p.items)
+      .filter((item) => isIn(SynergyItems, item))
+      .map((item) => SynergyGivenByItem[item])
+  )
+  const teraTypes = pokemonsBeforeEvolution
+    .map((p, i) =>
+      schemaValues(p.types).filter(
+        (type) => !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
+      )
+    )
+    .flat()
+  for (const type of teraTypes.flat()) {
+    pokemonEvolved.types.add(type)
   }
 }

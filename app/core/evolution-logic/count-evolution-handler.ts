@@ -8,7 +8,7 @@ import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
 import { shuffleArray } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { carryOverChangedAbilities, carryOverPermanentStats, EvolutionHandler } from "./evolution-handler"
+import { carryOverChangedAbilities, carryOverPermanentStats, carryOverTeraShards, EvolutionHandler } from "./evolution-handler"
 
 export class CountEvolutionHandler extends EvolutionHandler {
   numberRequired: number
@@ -114,6 +114,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
     carryOverChangedAbilities(pokemonEvolved, pokemonsBeforeEvolution, player)
+    carryOverTeraShards(pokemonEvolved, pokemonsBeforeEvolution)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
     shuffleArray(itemsCompleteOnBench)

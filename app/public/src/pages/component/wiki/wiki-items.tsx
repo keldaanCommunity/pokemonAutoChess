@@ -16,6 +16,7 @@ import {
   SpecialItems,
   SynergyGems,
   SynergyGemsBuried,
+  TeraShards,
   TMsBronze,
   TMsGold,
   TMsSilver,
@@ -373,6 +374,14 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} />
+        </ul>
+
+        <h3>
+          <SynergyIcon type={Synergy.STELLAR} /> {t("wiki.items.tera_shards")}
+        </h3>
+        <p>{addIconsToDescription(t("wiki.items.tera_shards_description"))}</p>
+        <ul>
+          <ItemList items={TeraShards} />
         </ul>
       </article>
 

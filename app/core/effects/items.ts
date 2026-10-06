@@ -4,7 +4,7 @@ import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PVEStages } from "../../models/pve-stages"
-import { Title, Transfer } from "../../types"
+import { SynergyByTeraShards, TeraShards, Title, Transfer } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
@@ -32,6 +32,7 @@ import {
   Sweets,
   SynergyGivenByItem,
   SynergyStones,
+  type TeraShard,
   TMs,
   ZCrystalsBySynergy
 } from "../../types/enum/Item"
@@ -621,6 +622,24 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon.tm = ability
           pokemon.skill = ability
           pokemon.maxPP = 100
+          removeFromArray(player.items, item)
+          return false
+        })
+      ]
+    ])
+  ),
+
+  ...Object.fromEntries(
+    TeraShards.map((shard: TeraShard) => [
+      shard,
+      [
+        new OnItemDroppedEffect(({ pokemon, player, item }) => {
+          const shardType = SynergyByTeraShards.get(shard)
+          if (!shardType) return false
+          if (pokemon.types.has(shardType)) {
+            return false // prevent consumming Tera Shards on pokemon that already have this type
+          }
+          pokemon.types.add(shardType)
           removeFromArray(player.items, item)
           return false
         })

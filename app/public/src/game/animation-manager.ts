@@ -14,6 +14,7 @@ import { Passive } from "../../../types/enum/Passive"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
 import { logger } from "../../../utils/logger"
 import { fpsToDuration } from "../../../utils/number"
+import { OrientationArray } from "../../../utils/orientation"
 import atlas from "../assets/atlas.json"
 import durations from "../assets/pokemons/durations.json"
 import type PokemonSprite from "./components/pokemon"
@@ -97,7 +98,7 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray = isAnimationOriented(action, index)
-          ? Object.values(Orientation)
+          ? OrientationArray
           : [Orientation.DOWN]
         directionArray.forEach((direction) => {
           const durationArray: number[] =
@@ -177,7 +178,7 @@ export default class AnimationManager {
         : [SpriteType.ANIM, SpriteType.SHADOW]
       spriteTypes.forEach((mode) => {
         const directionArray = isAnimationOriented(action, index)
-          ? Object.values(Orientation)
+          ? OrientationArray
           : [Orientation.DOWN]
         directionArray.forEach((direction) => {
           this.game.anims.remove(

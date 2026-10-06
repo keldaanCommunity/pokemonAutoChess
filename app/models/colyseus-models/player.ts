@@ -12,7 +12,11 @@ import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
 import { PassiveEffects } from "../../core/effects/passives"
-import { carryOverChangedAbilities, carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
+import {
+  carryOverChangedAbilities,
+  carryOverPermanentStats,
+  carryOverTeraShards
+} from "../../core/evolution-logic/evolution-handler"
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
@@ -333,6 +337,7 @@ export default class Player extends Schema implements IPlayer {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
     carryOverChangedAbilities(newPokemon, [pokemon], this)
+    carryOverTeraShards(newPokemon, [pokemon])
     pokemon.items.forEach((item) => {
       newPokemon.addItem(item, this)
       if (item === Item.SHINY_CHARM) {

@@ -3645,6 +3645,28 @@ export const AbilitiesAnimations: {
     shakeCamera({ duration: 300, intensity: 0.015 })
   ],
 
+  ["TERASTALIZE"]: onCasterScale2,
+
+  [Ability.TERA_BLAST]: [
+    onCaster({ ability: "TERASTALIZE", scale: 2 }),
+    (args) => {
+      const shards = args.data.shards as Item[]
+      OrientationArray.map((orientation, i) =>
+        projectile({
+          orientation,
+          distance: 8,
+          ability: undefined,
+          scale: 0.5,
+          textureKey: "item",
+          frame: `${shards[i]}.png`,
+          oriented: true,
+          rotation: (-7 * Math.PI) / 4,
+          duration: 1000
+        })({ ...args, ability: "" })
+      )
+    }
+  ],
+
   [Ability.GIGAVOLT_HAVOC]: [
     onTarget({ scale: 5, positionOffset: [-32, -32], apScaling: false }),
     tweenAnimation({
@@ -3798,7 +3820,6 @@ export const AbilitiesAnimations: {
 
   [Ability.FOOD_FIGHT]: (args) => {
     const dish = Dishes[args.delay ?? 0]
-    args.ability = ""
     projectile({
       ability: undefined,
       textureKey: "item",
@@ -3812,7 +3833,7 @@ export const AbilitiesAnimations: {
         textureKey: "attacks",
         tint: 0xffff80
       })
-    })(args)
+    })({ ...args, ability: "" })
   },
 
   [Ability.TWINKLE_TACKLE]: onCasterScale4,
@@ -4199,7 +4220,6 @@ export const AbilitiesAnimations: {
   [Ability.GIZMOS_AND_GADGETS]: [
     (args) => {
       const item: Item = args.data?.item
-      args.ability = ""
       parabolicProjectile({
         duration: 800,
         ability: undefined,
@@ -4208,7 +4228,7 @@ export const AbilitiesAnimations: {
         scale: 0.35,
         tweenProps: { angle: 480 },
         peakHeight: 150
-      })(args)
+      })({ ...args, ability: "" })
     }
   ],
 
