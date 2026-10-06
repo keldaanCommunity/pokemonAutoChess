@@ -114,6 +114,7 @@ export const networkSlice = createSlice({
     },
     selectPal: (state, action: PayloadAction<string | null>) => {
       if (state.profile) {
+        if(state.profile.uid === action.payload) return; // can't select yourself as pal
         state.profile.eventData = {
           ...(state.profile.eventData || {}),
           pal: action.payload || undefined

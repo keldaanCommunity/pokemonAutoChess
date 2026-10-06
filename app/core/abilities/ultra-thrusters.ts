@@ -50,8 +50,7 @@ export class UltraThrustersStrategy extends AbilityStrategy {
         corner.y,
         pokemon.positionX,
         pokemon.positionY,
-        pokemon,
-        target
+        pokemon
       )
       pokemon.moveTo(corner.x, corner.y, board, false)
       pokemon.resetCooldown(600)

@@ -19,7 +19,7 @@ import {
   Transfer
 } from "../types"
 import { Ability } from "../types/enum/Ability"
-import { EffectEnum } from "../types/enum/Effect"
+import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
   AttackType,
   BattleResult,
@@ -77,20 +77,21 @@ import {
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
+import type { SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
-  @type("string") weather: Weather = Weather.NEUTRAL
-  @type("string") winnerId = ""
-  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
-  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
-  @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
-  @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("string") id: string
   @type("string") bluePlayerId: string
   @type("string") redPlayerId: string
   @type("boolean") isGhostBattle: boolean
+  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
+  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
+  @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
+  @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("boolean") started: boolean
+  @type("string") weather: Weather = Weather.NEUTRAL
+  @type("string") winnerId = ""
   room: GameRoom
   blueEffects = new Set<EffectEnum>()
   redEffects = new Set<EffectEnum>()
@@ -109,6 +110,7 @@ export default class Simulation extends Schema implements ISimulation {
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
+  commands = new Array<SimulationCommand>()
 
   constructor(
     id: string,
@@ -269,6 +271,16 @@ export default class Simulation extends Schema implements ISimulation {
       : playerId === this.redPlayer?.id
         ? this.redDpsMeter
         : undefined
+  }
+
+  getEffectDps(team: Team, effect: EnvironmentalEffect): Dps {
+    const meter = team === Team.BLUE_TEAM ? this.blueDpsMeter : this.redDpsMeter
+    let dps = meter.get(effect)
+    if (!dps) {
+      dps = new Dps(effect, effect)
+      meter.set(effect, dps)
+    }
+    return dps
   }
 
   getTeam(playerId: string) {
@@ -442,7 +454,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClosestFreeCellToPokemonEntity(
-    pokemon: IPokemonEntity,
+    pokemon: PokemonEntity,
     team: Team = pokemon.team
   ): { x: number; y: number } | null {
     return this.getClosestFreeCellTo(pokemon.positionX, pokemon.positionY, team)
@@ -614,21 +626,21 @@ export default class Simulation extends Schema implements ISimulation {
             pickSpawn(Rarity.RARE, 1)
             pickSpawn(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 25) {
-            pickSpawn(Rarity.UNCOMMON, 3)
-            pickSpawn(Rarity.RARE, 2)
+            pickSpawn(Rarity.UNCOMMON, 2)
+            pickSpawn(Rarity.RARE, 1)
             pickSpawn(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 30) {
-            pickSpawn(Rarity.UNCOMMON, 3)
-            pickSpawn(Rarity.RARE, 3)
-            pickSpawn(Rarity.EPIC, 2)
+            pickSpawn(Rarity.RARE, 2)
+            pickSpawn(Rarity.EPIC, 1)
+            pickSpawn(Rarity.EPIC, 1)
           } else if (this.stageLevel <= 35) {
-            pickSpawn(Rarity.UNCOMMON, 3)
-            pickSpawn(Rarity.RARE, 3)
-            pickSpawn(Rarity.EPIC, 3)
-          } else {
+            pickSpawn(Rarity.RARE, 2)
+            pickSpawn(Rarity.EPIC, 2)
             pickSpawn(Rarity.UNIQUE, 3)
-            pickSpawn(Rarity.ULTRA, 3)
-            pickSpawn(Rarity.LEGENDARY, 3)
+          } else {
+            pickSpawn(Rarity.EPIC, 2)
+            pickSpawn(Rarity.UNIQUE, 3)
+            pickSpawn(Rarity.ULTRA, 2)
           }
 
           spawns.forEach((spawn) => {
@@ -949,8 +961,8 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.AROMATIC_MIST:
-      case EffectEnum.FAIRY_WIND:
-      case EffectEnum.STRANGE_STEAM:
+      case EffectEnum.FAIRY_AURA:
+      case EffectEnum.PIXILATE:
       case EffectEnum.MOON_FORCE:
         if (pokemon.hasSynergy(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
@@ -1297,6 +1309,9 @@ export default class Simulation extends Schema implements ISimulation {
   update(dt: number) {
     if (this.blueTeam.size === 0 || this.redTeam.size === 0) {
       this.onFinish()
+    } else {
+      this.commands.forEach((command) => command.update(dt))
+      this.commands = this.commands.filter((command) => !command.executed)
     }
 
     this.blueTeam.forEach((pkm, key) => {
@@ -1364,6 +1379,7 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,
+              effect: EffectEnum.LIGHTNING_STRIKE,
               shouldTargetGainMana: false
             })
           }
@@ -1737,7 +1753,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (pokemonHit.hasSynergy(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel * 0.1 * pokemonHit.maxHP,
-                pokemonHit,
+                EffectEnum.TIDAL_WAVE,
                 0,
                 false
               )
@@ -1748,8 +1764,10 @@ export default class Simulation extends Schema implements ISimulation {
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
+              effect: EffectEnum.TIDAL_WAVE,
               shouldTargetGainMana: false
             })
+
             let newY = y
             if (isRed) {
               while (

@@ -122,6 +122,7 @@ import { DragonClawStrategy } from "./dragon-claw"
 import { DragonDartsStrategy } from "./dragon-darts"
 import { DragonEnergyStrategy } from "./dragon-energy"
 import { DragonPulseStrategy } from "./dragon-pulse"
+import { DragonRageStrategy } from "./dragon-rage"
 import { DragonTailStrategy } from "./dragon-tail"
 import { DrainPunchStrategy } from "./drain-punch"
 import { DreamEaterStrategy } from "./dream-eater"
@@ -143,7 +144,7 @@ import { EntanglingThreadStrategy } from "./entangling-thread"
 import { EntrainmentStrategy } from "./entrainment"
 import { EruptionStrategy } from "./eruption"
 import { ExpandingForceStrategy } from "./expanding-force"
-import { explosionStrategy } from "./explosion"
+import { ExplosionStrategy } from "./explosion"
 import { ExtremeSpeedStrategy } from "./extreme-speed"
 import { FacadeStrategy } from "./facade"
 import { FairyLockStrategy } from "./fairy-lock"
@@ -306,7 +307,7 @@ import { MakeItRainStrategy } from "./make-it-rain"
 import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
 import { MawashiGeriStrategy } from "./mawashi-geri"
-import { meditateStrategy } from "./meditate"
+import { MeditateStrategy } from "./meditate"
 import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"
@@ -383,6 +384,7 @@ import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
+import { PursuitStrategy } from "./pursuit"
 import { PyroBallStrategy } from "./pyro-ball"
 import { QuiverDanceStrategy } from "./quiver-dance"
 import { RageStrategy } from "./rage"
@@ -395,7 +397,7 @@ import { ReflectStrategy } from "./reflect"
 import { RelicSongStrategy } from "./relic-song"
 import { RetaliateStrategy } from "./retaliate"
 import { ReturnStrategy } from "./return"
-import { RevelationDanceStrategy } from "./revelation-dance";
+import { RevelationDanceStrategy } from "./revelation-dance"
 import { RoarStrategy } from "./roar"
 import { RoarOfTimeStrategy } from "./roar-of-time"
 import { RockArtilleryStrategy } from "./rock-artillery"
@@ -518,7 +520,8 @@ import { ThrashStrategy } from "./thrash"
 import { ThunderStrategy } from "./thunder"
 import { ThunderCageStrategy } from "./thunder-cage"
 import { ThunderFangStrategy } from "./thunder-fang"
-import { thunderShockStrategy } from "./thunder-shock"
+import { ThunderShockStrategy } from "./thunder-shock"
+import { ThunderclapPressStrategy } from "./thunderclap-press"
 import { ThunderousKickStrategy } from "./thunderous-kick"
 import { TickleStrategy } from "./tickle"
 import { TimeTravelStrategy } from "./time-travel"
@@ -657,7 +660,8 @@ export class MetronomeStrategy extends AbilityStrategy {
       rarity = Rarity.COMMON
     }
 
-    const pokemonOptions = PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
+    // copy: the push below would mutate the shared precomputed array
+    const pokemonOptions = [...PRECOMPUTED_POKEMONS_PER_RARITY[rarity]]
     if (rarity === Rarity.SPECIAL) {
       pokemonOptions.push(...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.HATCH])
     }
@@ -716,6 +720,7 @@ export class SkillSwapStrategy extends AbilityStrategy {
         )
       ) {
         pokemon.refToBoardPokemon.skill = target.skill
+        pokemon.refToBoardPokemon.maxPP = target.maxPP
       }
       AbilityStrategies[target.skill].process(pokemon, board, target, crit)
     }
@@ -838,6 +843,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DRAGON_DARTS]: new DragonDartsStrategy(),
   [Ability.DRAGON_ENERGY]: new DragonEnergyStrategy(),
   [Ability.DRAGON_PULSE]: new DragonPulseStrategy(),
+  [Ability.DRAGON_RAGE]: new DragonRageStrategy(),
   [Ability.DRAGON_TAIL]: new DragonTailStrategy(),
   [Ability.DRAIN_PUNCH]: new DrainPunchStrategy(),
   [Ability.DREAM_EATER]: new DreamEaterStrategy(),
@@ -860,7 +866,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ENTRAINMENT]: new EntrainmentStrategy(),
   [Ability.ERUPTION]: new EruptionStrategy(),
   [Ability.EXPANDING_FORCE]: new ExpandingForceStrategy(),
-  [Ability.EXPLOSION]: explosionStrategy,
+  [Ability.EXPLOSION]: new ExplosionStrategy(),
   [Ability.EXTREME_SPEED]: new ExtremeSpeedStrategy(),
   [Ability.FACADE]: new FacadeStrategy(),
   [Ability.FAIRY_LOCK]: new FairyLockStrategy(),
@@ -1022,7 +1028,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
-  [Ability.MEDITATE]: meditateStrategy,
+  [Ability.MEDITATE]: new MeditateStrategy(),
   [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
@@ -1101,6 +1107,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.PURIFY]: new PurifyStrategy(),
+  [Ability.PURSUIT]: new PursuitStrategy(),
   [Ability.PYRO_BALL]: new PyroBallStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
   [Ability.RAGE]: new RageStrategy(),
@@ -1237,7 +1244,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.THUNDER]: new ThunderStrategy(),
   [Ability.THUNDER_CAGE]: new ThunderCageStrategy(),
   [Ability.THUNDER_FANG]: new ThunderFangStrategy(),
-  [Ability.THUNDER_SHOCK]: thunderShockStrategy,
+  [Ability.THUNDER_SHOCK]: new ThunderShockStrategy(),
+  [Ability.THUNDERCLAP_PRESS]: new ThunderclapPressStrategy(),
   [Ability.THUNDEROUS_KICK]: new ThunderousKickStrategy(),
   [Ability.TICKLE]: new TickleStrategy(),
   [Ability.TIME_TRAVEL]: new TimeTravelStrategy(),

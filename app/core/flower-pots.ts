@@ -1,4 +1,5 @@
-import { type IPlayer, Title } from "../types"
+import type Player from "../models/colyseus-models/player"
+import { Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { FlowerPot } from "../types/enum/FlowerPot"
 import { Pkm } from "../types/enum/Pokemon"
@@ -27,7 +28,7 @@ export const FlowerMonByPot: Record<FlowerPot, Pkm[]> = {
   [FlowerPot.ORANGE]: [Pkm.BELLOSSOM]
 }
 
-export function getFlowerPotsUnlocked(player: IPlayer): FlowerPot[] {
+export function getFlowerPotsUnlocked(player: Player): FlowerPot[] {
   const hasAllEvolutions = player.flowerPots.every(
     (pot) => pot.evolution === Pkm.DEFAULT
   )

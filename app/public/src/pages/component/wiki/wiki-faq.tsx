@@ -75,6 +75,10 @@ export default function WikiFaq() {
         <p>{t("wiki.faq.damage_answer")}</p>
       </details>
       <details className="my-box">
+        <summary>{t("wiki.faq.elimination_rank")}</summary>
+        <p>{t("wiki.faq.elimination_rank_answer")}</p>
+      </details>
+      <details className="my-box">
         <summary>{t("wiki.faq.shiny")}</summary>
         <p>{t("wiki.faq.shiny_answer")}</p>
       </details>

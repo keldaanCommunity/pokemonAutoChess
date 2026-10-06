@@ -46,7 +46,7 @@ export class OnJoinCommand extends Command<
     user: IUserMetadataMongo | null
   }) {
     try {
-      //logger.info(`${client.auth.displayName} ${client.id} join lobby room`)
+      //logger.info(`${client.auth.displayName} ${client.sessionId} join lobby room`)
       client.send(Transfer.ROOMS, this.room.rooms)
       client.userData = { joinedAt: Date.now() }
 
@@ -75,19 +75,16 @@ export class OnJoinCommand extends Command<
         const randomName = generateRandomName(starterPokemon)
         const starterAvatar = PkmIndex[starterPokemon] + "/Normal"
         const starterCollection = new Map<string, IPokemonCollectionItemMongo>()
+        const starterUnlocked = Buffer.alloc(5, 0)
         const starterCollectionItem: IPokemonCollectionItemMongo = {
           id: PkmIndex[starterPokemon],
-          unlocked: Buffer.alloc(5, 0),
+          unlocked: starterUnlocked,
           dust: 0,
           selectedEmotion: Emotion.NORMAL,
           selectedShiny: false,
           played: 0
         }
-        CollectionUtils.unlockEmotion(
-          starterCollectionItem.unlocked,
-          Emotion.NORMAL,
-          false
-        )
+        CollectionUtils.unlockEmotion(starterUnlocked, Emotion.NORMAL, false)
         starterCollection.set(PkmIndex[starterPokemon], starterCollectionItem)
 
         await UserMetadata.create({
@@ -133,7 +130,7 @@ export class OnLeaveCommand extends Command<
   execute({ client }: { client: Client }) {
     try {
       if (client && client.auth && client.auth.displayName && client.auth.uid) {
-        //logger.info(`${client.auth.displayName} ${client.id} leave lobby`)
+        //logger.info(`${client.auth.displayName} ${client.sessionId} leave lobby`)
         this.room.users.delete(client.auth.uid)
       }
     } catch (error) {
@@ -372,6 +369,7 @@ export class ChangeAvatarCommand extends Command<
       const collectionItem = mongoUser.pokemonCollection.get(index)
       if (
         !collectionItem ||
+        !collectionItem.unlocked ||
         !CollectionUtils.hasUnlocked(collectionItem.unlocked, emotion, shiny)
       )
         return
@@ -381,22 +379,6 @@ export class ChangeAvatarCommand extends Command<
       user.avatar = portrait
       mongoUser.avatar = portrait
       mongoUser.save()
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-}
-
-export class OnSearchByIdCommand extends Command<
-  CustomLobbyRoom,
-  { client: Client; uid: string }
-> {
-  async execute({ client, uid }: { client: Client; uid: string }) {
-    try {
-      const user = await UserMetadata.findOne({ uid: uid })
-      if (user) {
-        client.send(Transfer.USER, user)
-      }
     } catch (error) {
       logger.error(error)
     }
@@ -528,6 +510,7 @@ export class ChoosePalCommand extends Command<
 > {
   async execute({ client, playerUid }: { client: Client; playerUid: string }) {
     try {
+      if (playerUid === client.auth.uid) return // can't choose yourself as pal
       const u = this.room.users.get(client.auth.uid)
       if (client.auth.uid && u) {
         let eventData = {}

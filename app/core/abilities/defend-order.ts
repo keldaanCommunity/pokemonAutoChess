@@ -12,8 +12,8 @@ export class DefendOrderStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    // Spawn a Combee nearby then gives [10,20,30,50] SHIELD to user and all Combee on board.
-    // User gets [10,20,30,50] additional SHIELD per Combee ally on the board.
+    // Spawn a Combee nearby then gives [10,20,30,60] SHIELD to user and all Combee on board.
+    // User gets [10,20,30,60] additional SHIELD per Combee ally on the board.
     super.process(pokemon, board, target, crit, true)
 
     const combee = PokemonFactory.createPokemonFromName(
@@ -35,7 +35,7 @@ export class DefendOrderStrategy extends AbilityStrategy {
       )
     }
 
-    const shield = [10, 20, 30, 50][pokemon.stars - 1] ?? 50
+    const shield = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
     let nbCombeeAllies = 0
     board.forEach((x, y, p) => {
       if (p && p.team === pokemon.team && p.name === Pkm.COMBEE) {

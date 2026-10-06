@@ -42,7 +42,7 @@ import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */
 const FeatherBaseAngles: Record<string, number> = {
@@ -236,7 +236,7 @@ const UNOWNS_PER_ABILITY = new Map([
   ],
   [
     Ability.HIDDEN_POWER_D,
-    [Pkm.UNOWN_D, Pkm.UNOWN_I, Pkm.UNOWN_T, Pkm.UNOWN_O]
+    [Pkm.UNOWN_D, Pkm.UNOWN_U, Pkm.UNOWN_P, Pkm.UNOWN_E]
   ],
   [
     Ability.HIDDEN_POWER_E,
@@ -1457,6 +1457,10 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.WONDER_GUARD]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.THUNDERCLAP_PRESS]: onTarget({
+    ability: Ability.WONDER_GUARD,
+    scale: 2
+  }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: onTargetScale2,
   [Ability.GEOMANCY]: onCaster({
@@ -1778,6 +1782,11 @@ export const AbilitiesAnimations: {
     duration: 750,
     scale: 2,
     ability: Ability.DARK_HARVEST
+  }),
+  [Ability.DRAGON_RAGE]: projectile({
+    duration: 300,
+    scale: 2,
+    depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.FUSION_BOLT]: projectile({ duration: 750, scale: 3 }),
   [Ability.SOLAR_BEAM]: projectile({

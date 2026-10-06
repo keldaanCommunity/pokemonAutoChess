@@ -19,7 +19,8 @@ import {
   PkmIndex
 } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
-import type { IBot, IDetailledPokemon, IStep } from "../types/models/bot-v2"
+import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
+import type { IBot, IStep } from "../types/models/bot-v2"
 import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
@@ -32,10 +33,10 @@ export const DEFAULT_BOT_STATE = {
     roundsRequired: 1,
     board: []
   })) as IStep[],
-  avatar: PkmIndex[Pkm.DITTO] + "/Normal",
+  avatar: PkmIndex[Pkm.SUBSTITUTE] + "/Normal",
   author: "",
   elo: 1200,
-  name: Pkm.DITTO,
+  name: Pkm.DEFAULT,
   id: "",
   approved: false
 }
@@ -123,7 +124,26 @@ export function getCategory(pkm: Pkm): string {
   ) {
     category += p.stages === 2 ? " 2S" : " 3S"
   }
-  category += ` T${p.stars}`
+  let stars = p.stars
+  if (
+    [
+      Pkm.DUDUNSPARCE,
+      Pkm.OVERQWIL,
+      Pkm.WYRDEER,
+      Pkm.MEGA_SABLEYE,
+      Pkm.HYDRAPPLE,
+      Pkm.MAUSHOLD_FOUR,
+      Pkm.PRIMAL_KYOGRE,
+      Pkm.PRIMAL_GROUDON,
+      Pkm.MEGA_RAYQUAZA,
+      Pkm.SHAYMIN_SKY,
+      Pkm.ULTRA_NECROZMA,
+      Pkm.ZACIAN_CROWNED
+    ].includes(pkm)
+  ) {
+    stars = 3 // these evos are typically free/do not cost more gold, so should not be increasing the board power
+  }
+  category += ` T${stars}`
   if (Object.values(PkmDuos).some((duo) => duo.includes(pkm))) {
     category += " DUO"
   }
@@ -145,6 +165,7 @@ export function getPowerScore(board: IDetailledPokemon[]): number {
 
 export function getUnitPowerScore(pkm: Pkm): number {
   if (NonPkm.includes(pkm)) return 0
+  if (PkmFamily[pkm] === Pkm.EEVEE) return 1.5
   return POWER_SCORE_BY_CATEGORY[getCategory(pkm)] ?? 1
 }
 

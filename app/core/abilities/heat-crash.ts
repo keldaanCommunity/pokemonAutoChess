@@ -21,8 +21,7 @@ export class HeatCrashStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      target
+      pokemon
     )
     const knockbackCell = board.getKnockBackPlace(
       target.positionX,

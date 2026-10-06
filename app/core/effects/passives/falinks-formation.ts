@@ -1,4 +1,5 @@
 import { Title } from "../../../types"
+import { PokemonActionState } from "../../../types/enum/Game"
 import { Passive } from "../../../types/enum/Passive"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { schemaValues } from "../../../utils/schemas"
@@ -12,10 +13,13 @@ export class FalinksFormationEffect extends OnSpawnEffect {
       if (!pkm.player) return
       const troopers = schemaValues(pkm.player.board).filter(
         (p) =>
-          p.name === Pkm.FALINKS_TROOPER && p.positionY === 0 && p.id !== pkm.id
+          p.name === Pkm.FALINKS_TROOPER &&
+          p.positionY === 0 &&
+          p.id !== pkm.id &&
+          p.action !== PokemonActionState.TRAINING
       )
       this.stacks = troopers.length
-      troopers.forEach(trooper => {
+      troopers.forEach((trooper) => {
         pkm.addAttack(trooper.atk, pkm, 0, false)
         pkm.addDefense(trooper.def, pkm, 0, false)
         pkm.addShield(trooper.maxHP, pkm, 0, false)

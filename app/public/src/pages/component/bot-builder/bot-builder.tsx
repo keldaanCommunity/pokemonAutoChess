@@ -19,14 +19,15 @@ import { getSynergyTier } from "../../../../../core/synergies"
 import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { getAvatarString } from "../../../../../utils/avatar"
 import { logger } from "../../../../../utils/logger"
 import { max, min } from "../../../../../utils/number"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
-import type { IBot, IDetailledPokemon } from "../../../models/bot-v2"
+import type { IBot } from "../../../models/bot-v2"
 import DiscordButton from "../buttons/discord-button"
 import { Modal } from "../modal/modal"
 import ImportBotModal from "./import-bot-modal"
@@ -241,6 +242,12 @@ export default function BotBuilder() {
         <button onClick={() => navigate("/lobby")} className="bubbly blue">
           {t("back_to_lobby")}
         </button>
+        <p>{t("bot_builder.guidelines")}</p>
+        <DiscordButton
+          url={
+            "https://discord.com/channels/737230355039387749/914503292875325461"
+          }
+        />
         <div className="spacer"></div>
         {isBotManager && (
           <button onClick={() => navigate("/bot-admin")} className="bubbly red">
@@ -271,11 +278,6 @@ export default function BotBuilder() {
         >
           {t("submit")}
         </button>
-        <DiscordButton
-          url={
-            "https://discord.com/channels/737230355039387749/914503292875325461"
-          }
-        />
       </header>
       <div className="step-info my-container">
         <div className="step-control">
@@ -314,7 +316,7 @@ export default function BotBuilder() {
           </span>
         )}
         <span>
-          {t("board_power")}: {powerScore}
+          {t("bot_builder.board_power")}: {powerScore}
         </span>
         <div>
           <ScoreIndicator value={powerEvaluation} />
@@ -359,6 +361,14 @@ export function SubmitBotModal(props: {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<boolean>(false)
 
+  const canSubmit = useMemo(() => {
+    if (!props.bot.name || props.bot.name === Pkm.DEFAULT) return false
+    if (!props.bot.avatar) return false
+    if (!props.bot.steps || props.bot.steps.length < MAX_BOTS_STAGE)
+      return false
+    return true
+  }, [props.bot])
+
   async function submitBot() {
     if (loading) return
     setLoading(true)
@@ -390,24 +400,43 @@ export function SubmitBotModal(props: {
       show={props.visible}
       onClose={props.hideModal}
       className="bot-export-modal"
-      header={t("submit_your_bot")}
+      header={t("bot_builder.submit_your_bot")}
       body={
-        <>
-          <p>{t("bot_ready_submission")}</p>
-        </>
+        canSubmit ? (
+          <>
+            <p>{t("bot_builder.bot_ready_submission")}</p>
+            <p>
+              <a
+                href="https://discord.com/channels/737230355039387749/914503292875325461"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("bot_builder.bot_creation_discord_channel")}
+              </a>
+            </p>
+          </>
+        ) : (
+          <p>{t("bot_builder.bot_not_ready_submission")}</p>
+        )
       }
       footer={
         <>
           {!success && !loading && !error && (
-            <button className="bubbly green" onClick={submitBot}>
-              {t("submit_your_bot")}
+            <button
+              className="bubbly green"
+              onClick={submitBot}
+              disabled={!canSubmit}
+            >
+              {t("bot_builder.submit_your_bot")}
             </button>
           )}
           {loading && <p>{t("loading")}</p>}
           {!loading && error && (
-            <p className="error">{t("bot_submission_failed", { error })}</p>
+            <p className="error">
+              {t("bot_builder.bot_submission_failed", { error })}
+            </p>
           )}
-          {success && <p>{t("bot_submitted_success")}</p>}
+          {success && <p>{t("bot_builder.bot_submitted_success")}</p>}
         </>
       }
     />

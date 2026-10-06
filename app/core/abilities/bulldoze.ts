@@ -26,8 +26,7 @@ export class BulldozeStrategy extends AbilityStrategy {
           pokemon.positionY,
           cell.value.positionX,
           cell.value.positionY,
-          pokemon,
-          undefined
+          pokemon
         )
         const destination = board.getKnockBackPlace(
           cell.value.positionX,

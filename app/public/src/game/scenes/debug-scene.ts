@@ -26,11 +26,11 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import LoadingManager from "../components/loading-manager"
-import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "../components/pokemon-animations"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
 
@@ -285,13 +285,7 @@ export class DebugScene extends Phaser.Scene {
   }
 
   applyStatusAnimation(
-    status:
-      | Status
-      | Boost
-      | "BALM_MUSHROOM"
-      | "STELLAR"
-      | "POISONNED_BADLY"
-      | ""
+    status: Status | Boost | "BALM_MUSHROOM" | "STELLAR" | "POISONED_BADLY" | ""
   ) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
@@ -324,10 +318,10 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeFairyField()
       this.pokemonSprite.removeStellarEffect()
 
-      if (status === Status.POISONNED) {
+      if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
       }
-      if (status === "POISONNED_BADLY") {
+      if (status === "POISONED_BADLY") {
         this.pokemonSprite.addPoison(3)
       }
       if (status === Status.SLEEP) {

@@ -13,10 +13,13 @@ export class ThiefStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [15, 30, 60, 120][pokemon.stars - 1] ?? 120
 
-    target.items.forEach((item) => {
-      pokemon.addItem(item)
-      target.removeItem(item)
-    })
+    // stealing from itself would delete and re-add the same item while iterating the set: endless loop
+    if (target.id !== pokemon.id) {
+      target.items.forEach((item) => {
+        const removed = target.removeItem(item)
+        if(removed) pokemon.addItem(item)
+      })
+    }
 
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }

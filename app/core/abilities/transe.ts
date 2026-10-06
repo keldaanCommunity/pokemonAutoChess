@@ -15,7 +15,6 @@ export class TranseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    pokemon.skill = Ability.HEADBUTT
     if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
       pokemon.index = PkmIndex[Pkm.GALARIAN_DARMANITAN]
       pokemon.name = Pkm.GALARIAN_DARMANITAN

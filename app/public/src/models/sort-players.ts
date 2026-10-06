@@ -1,10 +1,10 @@
 import type { IPlayer } from "../../../types"
 import { GameMode } from "../../../types/enum/Game"
 
-export function sortPlayersByRankAndTeam(
-  players: IPlayer[],
+export function sortPlayersByRankAndTeam<T extends IPlayer>(
+  players: T[],
   gameMode: string
-): IPlayer[] {
+): T[] {
   return [...players].sort((a, b) => {
     if (gameMode === GameMode.DOUBLE_UP) {
       const aAlive = a.life > 0

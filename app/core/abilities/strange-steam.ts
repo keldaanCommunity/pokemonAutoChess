@@ -23,7 +23,7 @@ export class StrangeSteamStrategy extends AbilityStrategy {
         board.addBoardEffect(
           cell.x,
           cell.y,
-          EffectEnum.STRANGE_STEAM_BOARD_EFFECT,
+          EffectEnum.STRANGE_STEAM,
           pokemon.simulation
         )
         if (cell.value && cell.value.team !== pokemon.team) {

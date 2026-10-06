@@ -19,8 +19,8 @@ export default function SynergyStatistic(props: {
       <div className="synergy-grid">
         <div className="synergy-header">
           <span>{t("synergies")}</span>
-          <span>{t("count")}</span>
-          <span>{t("average_place")}</span>
+          <span>{t("meta_report.count")}</span>
+          <span>{t("meta_report.average_place")}</span>
         </div>
         {props.synergies.map((synergy, index) => (
           <div key={synergy.name} className="synergy-row">

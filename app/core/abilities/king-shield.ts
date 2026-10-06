@@ -1,3 +1,4 @@
+import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -25,12 +26,15 @@ export class KingShieldStrategy extends AbilityStrategy {
         true
       )
     }
-    if (pokemon.name === Pkm.AEGISLASH) {
+    if (
+      pokemon.passive === Passive.AEGISLASH &&
+      pokemon.name === Pkm.AEGISLASH
+    ) {
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addAttack(10, pokemon, 1, crit)
-          pokemon.addDefense(-5, pokemon, 1, crit)
-          pokemon.addSpecialDefense(-5, pokemon, 1, crit)
+          pokemon.addAttack(10, pokemon, 0, false)
+          pokemon.addDefense(-5, pokemon, 0, false)
+          pokemon.addSpecialDefense(-5, pokemon, 0, false)
           pokemon.name = Pkm.AEGISLASH_BLADE
           pokemon.index = PkmIndex[Pkm.AEGISLASH_BLADE]
           if (pokemon.player) {
@@ -38,12 +42,15 @@ export class KingShieldStrategy extends AbilityStrategy {
           }
         }, 1500)
       )
-    } else if (pokemon.name === Pkm.AEGISLASH_BLADE) {
+    } else if (
+      pokemon.passive === Passive.AEGISLASH &&
+      pokemon.name === Pkm.AEGISLASH_BLADE
+    ) {
       pokemon.commands.push(
         new DelayedCommand(() => {
-          pokemon.addAttack(-10, pokemon, 1, crit)
-          pokemon.addDefense(5, pokemon, 1, crit)
-          pokemon.addSpecialDefense(5, pokemon, 1, crit)
+          pokemon.addAttack(-10, pokemon, 0, false)
+          pokemon.addDefense(5, pokemon, 0, false)
+          pokemon.addSpecialDefense(5, pokemon, 0, false)
           pokemon.name = Pkm.AEGISLASH
           pokemon.index = PkmIndex[Pkm.AEGISLASH]
         }, 1500)

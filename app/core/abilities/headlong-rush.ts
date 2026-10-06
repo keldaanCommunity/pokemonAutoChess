@@ -16,7 +16,8 @@ export class HeadlongRushStrategy extends AbilityStrategy {
     const damageOnThePath = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
-    const targetsHit: Set<PokemonEntity> = new Set()
+    const mainTarget = farthestCoordinate?.target ?? target
+    const targetsHit: Set<PokemonEntity> = new Set([mainTarget])
 
     if (farthestCoordinate) {
       pokemon.broadcastAbility({
@@ -31,16 +32,9 @@ export class HeadlongRushStrategy extends AbilityStrategy {
       )
       cells.forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          targetsHit.add(cell.value)
-          cell.value.handleSpecialDamage(
-            cell.value.id === farthestCoordinate.target.id
-              ? finalTargetDamage
-              : damageOnThePath,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
+          if (!targetsHit.has(cell.value)) {
+            targetsHit.add(cell.value)
+          }
 
           // Lose 1 def and spe def per enemy hit
           pokemon.addDefense(-1, pokemon, 0, false)
@@ -73,15 +67,14 @@ export class HeadlongRushStrategy extends AbilityStrategy {
       pokemon.moveTo(farthestCoordinate.x, farthestCoordinate.y, board, false)
     }
 
-    if (targetsHit.size === 0) {
-      // ensure to at least hit the target
-      target.handleSpecialDamage(
-        finalTargetDamage,
+    targetsHit.forEach((targetEntity) => {
+      targetEntity.handleSpecialDamage(
+        targetEntity.id === mainTarget.id ? finalTargetDamage : damageOnThePath,
         board,
         AttackType.SPECIAL,
         pokemon,
         crit
       )
-    }
+    })
   }
 }

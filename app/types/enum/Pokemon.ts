@@ -384,6 +384,7 @@ export enum Pkm {
   GALARIAN_YAMASK = "GALARIAN_YAMASK",
   GALARIAN_ZAPDOS = "GALARIAN_ZAPDOS",
   GALARIAN_ZIGZAGOON = "GALARIAN_ZIGZAGOON",
+  GALAR_MEOWTH = "GALAR_MEOWTH",
   GALLADE = "GALLADE",
   GALVANTULA = "GALVANTULA",
   GARBODOR = "GARBODOR",
@@ -749,6 +750,7 @@ export enum Pkm {
   PAWNIARD = "PAWNIARD",
   PECHARUNT = "PECHARUNT",
   PELIPPER = "PELIPPER",
+  PERRSERKER = "PERRSERKER",
   PERSIAN = "PERSIAN",
   PETILIL = "PETILIL",
   PHANPY = "PHANPY",
@@ -762,6 +764,7 @@ export enum Pkm {
   PIDOVE = "PIDOVE",
   PIGNITE = "PIGNITE",
   PIKACHU = "PIKACHU",
+  PIKACHU_LIBRE = "PIKACHU_LIBRE",
   PIKACHU_SURFER = "PIKACHU_SURFER",
   //PIKIPEK = "PIKIPEK",
   PILLAR_WOOD = "PILLAR_WOOD",
@@ -1229,6 +1232,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.EKANS]: "0023",
   [Pkm.ARBOK]: "0024",
   [Pkm.PIKACHU]: "0025",
+  [Pkm.PIKACHU_LIBRE]: "0025-0006",
   [Pkm.PIKACHU_SURFER]: "0025-9999",
   [Pkm.RAICHU]: "0026",
   [Pkm.ALOLAN_RAICHU]: "0026-0001",
@@ -1267,6 +1271,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.PERSIAN]: "0053",
   [Pkm.ALOLAN_MEOWTH]: "0052-0001",
   [Pkm.ALOLAN_PERSIAN]: "0053-0001",
+  [Pkm.GALAR_MEOWTH]: "0052-0002",
   [Pkm.PSYDUCK]: "0054",
   [Pkm.GOLDUCK]: "0055",
   [Pkm.MANKEY]: "0056",
@@ -2286,7 +2291,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.MORGREM]: "0860",
   [Pkm.GRIMMSNARL]: "0861",
   [Pkm.OBSTAGOON]: "0862",
-  //[Pkm.PERRSERKER]: "0863",
+  [Pkm.PERRSERKER]: "0863",
   [Pkm.CURSOLA]: "0864",
   //[Pkm.SIRFETCHD]: "0865",
   //[Pkm.MR_RIME]: "0866",
@@ -2571,6 +2576,7 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.NIDOKING]: Pkm.NIDORANM,
   [Pkm.PICHU]: Pkm.PICHU,
   [Pkm.PIKACHU]: Pkm.PICHU,
+  [Pkm.PIKACHU_LIBRE]: Pkm.PICHU,
   [Pkm.PIKACHU_SURFER]: Pkm.PICHU,
   [Pkm.RAICHU]: Pkm.PICHU,
   [Pkm.MACHOP]: Pkm.MACHOP,
@@ -2786,6 +2792,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.PERSIAN]: Pkm.MEOWTH,
   [Pkm.ALOLAN_MEOWTH]: Pkm.ALOLAN_MEOWTH,
   [Pkm.ALOLAN_PERSIAN]: Pkm.ALOLAN_MEOWTH,
+  [Pkm.GALAR_MEOWTH]: Pkm.GALAR_MEOWTH,
+  [Pkm.PERRSERKER]: Pkm.GALAR_MEOWTH,
   [Pkm.DEINO]: Pkm.DEINO,
   [Pkm.ZWEILOUS]: Pkm.DEINO,
   [Pkm.HYDREIGON]: Pkm.DEINO,
@@ -3693,7 +3701,7 @@ export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
   [Pkm.GRIMER]: [Pkm.ALOLAN_GRIMER],
   [Pkm.NIDORANM]: [Pkm.NIDORANF],
   [Pkm.SNEASEL]: [Pkm.HISUI_SNEASEL],
-  [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH],
+  [Pkm.MEOWTH]: [Pkm.ALOLAN_MEOWTH, Pkm.GALAR_MEOWTH],
   [Pkm.PONYTA]: [Pkm.GALARIAN_PONYTA],
   [Pkm.VOLTORB]: [Pkm.HISUI_VOLTORB],
   [Pkm.SANDSHREW]: [Pkm.ALOLAN_SANDSHREW],
@@ -3804,6 +3812,12 @@ export const UnownsForScribble: Pkm[] = [
   Pkm.UNOWN_Z,
   Pkm.UNOWN_EXCLAMATION,
   Pkm.UNOWN_QUESTION
+]
+
+export const Tatsugiris: Pkm[] = [
+  Pkm.TATSUGIRI_CURLY,
+  Pkm.TATSUGIRI_DROOPY,
+  Pkm.TATSUGIRI_STRETCHY
 ]
 
 export const Pillars = [

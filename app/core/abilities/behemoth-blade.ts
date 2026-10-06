@@ -20,8 +20,7 @@ export class BehemothBladeStrategy extends AbilityStrategy {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      undefined
+      pokemon
     )
 
     const destination = board.getKnockBackPlace(

@@ -1,13 +1,14 @@
-import { SchemaSerializer } from "@colyseus/sdk"
 import type { Iterator } from "@colyseus/schema"
-import type GameState from "../../../rooms/states/game-state"
-import type Player from "../../../models/colyseus-models/player"
-import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
-import { getLevelUpCost } from "../../../models/colyseus-models/experience-manager"
-import { PVEStages } from "../../../models/pve-stages"
+import { SchemaSerializer } from "@colyseus/sdk"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config/game/board"
 import { PortalCarouselStages } from "../../../config/game/stages"
 import { SynergyTiersThresholds } from "../../../config/game/synergies"
+import { getLevelUpCost } from "../../../models/colyseus-models/experience-manager"
+import type Player from "../../../models/colyseus-models/player"
+import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
+import { PVEStages } from "../../../models/pve-stages"
+import type GameState from "../../../rooms/states/game-state"
+import { Transfer } from "../../../types"
 import {
   BattleResult,
   GamePhaseState,
@@ -18,14 +19,13 @@ import { ItemRecipe } from "../../../types/enum/Item"
 import { Pkm, PkmDuos } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
-import { Transfer } from "../../../types"
-import type { ReplayFrame } from "./replay-format"
 import {
   type CombatFrameState,
   type EntitySnap,
   scanFrameCombat
 } from "./replay-combat-scan"
 import type { PickOption, ReplayEventArgs } from "./replay-event-format"
+import type { ReplayFrame } from "./replay-format"
 
 // derived phase/stage/event index over a throwaway decode (raw .colreplay untouched); computed once per manifest (replay.tsx), not per seek
 
@@ -145,8 +145,8 @@ export interface ReplayIndex {
   durationMs: number
   segments: ReplaySegment[] // phase-within-stage boundaries, anchored at/after gameStartMs
   stages: ReplayStageMark[] // first t per distinct stage
-  events: ReplayEvent[] // eliminations sorted by t; drive the scrubber's event markers
-  // per-player actions (reroll/buy/sell/…) sorted by t, each carries uid (town/rule rows uid-less); separate from events so they don't flood the scrubber
+  events: ReplayEvent[] // eliminations sorted by t; shown in the event log
+  // per-player actions sorted by t, kept apart from events so the log can filter them
   actions: ReplayEvent[]
   // in-game name per uid (per-player log column / tab labels)
   playerNames: Record<string, string>
@@ -176,10 +176,7 @@ const propositionConstituents = (p: string): string[] =>
 type ChoiceSlate = { type: string; pokemons: string[]; items: string[] }
 
 // eliminated the frame life first crosses from positive to <= 0; pure so the crossing logic is unit-testable
-function isElimination(
-  prevLife: number | undefined,
-  life: number
-): boolean {
+function isElimination(prevLife: number | undefined, life: number): boolean {
   return typeof prevLife === "number" && prevLife > 0 && life <= 0
 }
 
@@ -773,7 +770,7 @@ export function buildReplayIndex(
   let durationMs = 0
 
   const segments: ReplaySegment[] = []
-  const events: ReplayEvent[] = [] // eliminations only (scrubber markers + log)
+  const events: ReplayEvent[] = [] // eliminations only (event log)
   const actions: ReplayEvent[] = [] // pov reroll/buy/sell/level/pick (log only)
   const combatUnits: Record<
     number,
@@ -876,7 +873,10 @@ export function buildReplayIndex(
           // fail-hidden: an unresolved owner must not fall through to the pov (would attribute another player's emote), so hide the frame
           if (id) combatUnits[i] = { owner: id }
           else foreignFrames.push(i)
-        } else if (hasState && (f.type === Transfer.DIG || f.type === Transfer.COOK)) {
+        } else if (
+          hasState &&
+          (f.type === Transfer.DIG || f.type === Transfer.COOK)
+        ) {
           const pid = (f.payload as { pokemonId?: string })?.pokemonId
           const owner = pid ? playerOwningUnit(ser.getState(), pid) : undefined
           if (owner) {

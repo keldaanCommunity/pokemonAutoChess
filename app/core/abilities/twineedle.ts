@@ -13,7 +13,7 @@ export class TwineedleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    // Deals [25,50,160,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [50,LK]% chance to apply POISONNED for 4 seconds.
+    // Deals [25,50,160,80,SP] SPECIAL to the target twice. The first hit can crit by default, and the second hit has [50,LK]% chance to apply POISONED for 4 seconds.
     const damage = [25, 50, 80, 160][pokemon.stars - 1] ?? 160
     target.handleSpecialDamage(
       damage,

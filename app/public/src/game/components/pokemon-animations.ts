@@ -7139,6 +7139,13 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
   },
+  [Pkm.PIKACHU_LIBRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
   [Pkm.ESPURR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
@@ -8115,5 +8122,18 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.FLORA_RANGE,
     hitSprite: HitSprite.GHOST_HIT,
     shinyUnavailable: true
+  },
+  [Pkm.GALAR_MEOWTH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.PERRSERKER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE
   }
 }

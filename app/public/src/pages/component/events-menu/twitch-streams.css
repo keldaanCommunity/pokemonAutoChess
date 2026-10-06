@@ -73,8 +73,12 @@
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.25;
-  overflow-wrap: anywhere;
-  min-height: 1.25em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: calc(2em * 1.25);
 }
 
 .twitch-stream-meta {
@@ -143,11 +147,5 @@
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
-  }
-
-  .twitch-stream-content p {
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    min-height: calc(2em * 1.25);
   }
 }

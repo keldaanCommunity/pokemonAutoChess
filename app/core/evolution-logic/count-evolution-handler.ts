@@ -32,7 +32,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     return copies.length >= this.numberRequired
   }
@@ -51,7 +51,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.index === pokemon.index && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
     )
     return copies.length === this.numberRequired - 1
   }
@@ -68,7 +68,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
 
     player.board.forEach((pkm, id) => {
       if (
-        pkm.index == pokemon.index &&
+        pkm.name === pokemon.name &&
         !pkm.items.has(Item.EVIOLITE) &&
         pokemonsBeforeEvolution.length < this.numberRequired
       ) {
@@ -165,7 +165,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
       }
     }
 
-    if(pokemonsBeforeEvolution.some(p => p.supercharged)) {
+    if (pokemonsBeforeEvolution.some((p) => p.supercharged)) {
       pokemonEvolved.supercharged = true // preserve supercharged state on evolution
     }
 

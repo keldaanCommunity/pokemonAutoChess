@@ -1,4 +1,10 @@
 import { useTranslation } from "react-i18next"
+import { PkmAltForms } from "../../../../../config"
+import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../../../../../types/enum/Ability"
+import { Rarity } from "../../../../../types/enum/Game"
+import { NonPkm, type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 import {
   type IPreferencesState,
   type PreferenceKey,
@@ -7,12 +13,6 @@ import {
 import { closeSiblingDetails } from "../../utils/toggle"
 import { Checkbox } from "../checkbox/checkbox"
 import "./pokemon-filters.css"
-import { PkmAltForms } from "../../../../../config"
-import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
-import { Ability } from "../../../../../types/enum/Ability"
-import { Rarity } from "../../../../../types/enum/Game"
-import { NonPkm, type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
-import type { PoolType } from "../../../../../types/enum/PoolType"
 
 export function PokemonFilters() {
   const { t } = useTranslation()
@@ -20,15 +20,13 @@ export function PokemonFilters() {
   const pools = [
     "showRegularPool",
     "showAdditionalPool",
-    "showRegionalPool",
-    "showSpecialPool"
+    "showRegionalPool"
   ] satisfies PreferenceKey[]
 
   const poolByPreference: Record<(typeof pools)[number], PoolType> = {
     showRegularPool: "regular",
     showAdditionalPool: "additional",
-    showRegionalPool: "regional",
-    showSpecialPool: "special"
+    showRegionalPool: "regional"
   }
 
   const isTheOnlyPoolSelected = (pool: keyof typeof preferences) => {
@@ -95,7 +93,6 @@ export function filterPokemonsAccordingToPreferences(
     const special = rarity === Rarity.SPECIAL
     if (!preferences.showAdditionalPool && additional) return false
     if (!preferences.showRegionalPool && regional) return false
-    if (!preferences.showSpecialPool && special) return false
     if (!preferences.showRegularPool && !(additional || regional || special))
       return false
 

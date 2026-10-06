@@ -102,8 +102,12 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     shinyChance: 1 / 40,
     rewards: [...ItemComponentsNoFossilOrScarf, Item.RED_SCALE],
     getRewards(_player: Player, shinyEncounter: boolean) {
-      if (shinyEncounter) return [Item.RED_SCALE]
+      if (shinyEncounter)
+        return [Item.RED_SCALE, pickRandomIn(ItemComponentsNoFossilOrScarf)]
       else return pickNRandomIn(ItemComponentsNoFossilOrScarf, 1)
+    },
+    statBoosts: {
+      [Stat.AP]: -50
     }
   },
 

@@ -73,7 +73,7 @@ import {
   OnSpawnEffect,
   OnStageStartEffect
 } from "./effect"
-import { PassiveEffects } from "./passives"
+import { drumBeat, PassiveEffects } from "./passives"
 
 export class MonsterKillEffect extends OnKillEffect {
   hpBoosted: number = 0
@@ -175,8 +175,22 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.status.triggerWound(4000, target, pokemon)
       }
 
-      pokemon.state.attack(pokemon, board, target, true)
-      pokemon.state.attack(pokemon, board, target, true)
+      if (
+        pokemon.passive === Passive.DRUMMER &&
+        board.cells.some(
+          (entity) =>
+            entity?.team === pokemon.team &&
+            entity?.passive !== Passive.DRUMMER &&
+            entity?.passive !== Passive.INANIMATE
+        )
+      ) {
+        drumBeat(pokemon, board)
+        drumBeat(pokemon, board)
+      } else {
+        pokemon.state.attack(pokemon, board, target, true)
+        pokemon.state.attack(pokemon, board, target, true)
+      }
+
       if (isSupercharged && target) {
         target.addPP(-10, pokemon, 0, false)
         target.count.manaBurnCount++
@@ -315,6 +329,15 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     super(undefined, effect)
   }
   apply({ pokemon, board, isRetaliation }: OnDamageReceivedEffectArgs) {
+    // Fighting knockback for Pikachu Libre
+    if (
+      pokemon.passive === Passive.PIKACHU_LIBRE &&
+      pokemon.count.fightingBlockCount > 0 &&
+      pokemon.count.fightingBlockCount % 10 === 0
+    ) {
+      pokemon.status.triggerRage(2000, pokemon)
+    }
+
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
@@ -930,14 +953,7 @@ const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
 const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   if (getSynergyTier(player.synergies, Synergy.GROUND) > 0) {
     player.board.forEach((pokemon, pokemonId) => {
-      if (
-        pokemon.hasSynergy(Synergy.GROUND) &&
-        !isOnBench(pokemon) &&
-        !(
-          pokemon.items.has(Item.CHEF_HAT) &&
-          player.synergies.hasSynergyActive(Synergy.GOURMET)
-        )
-      ) {
+      if (pokemon.hasSynergy(Synergy.GROUND) && !isOnBench(pokemon)) {
         const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
         const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
         const isReachingMaxDepth = player.groundHoles[index] === 4

@@ -14,9 +14,9 @@
   align-items: center;
   gap: 0 0.5em;
   grid-template-areas:
-    "top elo syn team"
-    "date date items team";
-  grid-template-columns: 8ch 7ch 160px 1fr;
+    "top elo syn team actions"
+    "date date items team actions";
+  grid-template-columns: 8ch 7ch 160px 1fr min-content;
   background-color: var(--color-bg-secondary);
   margin: 0 0 0.5em 0;
   padding: 0.25em;
@@ -83,6 +83,19 @@
   flex-wrap: wrap;
   justify-self: center;
   gap: 2px;
+}
+
+.game-history .actions {
+  grid-area: actions;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.game-history:hover .actions {
+  opacity: 1;
 }
 
 @media (width <= 640px) {

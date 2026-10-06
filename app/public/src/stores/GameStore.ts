@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import type Simulation from "../../../core/simulation"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
+import type Player from "../../../models/colyseus-models/player"
 import Synergies from "../../../models/colyseus-models/synergies"
 import type {
   Emotion,
@@ -26,7 +27,7 @@ export interface GameStateStore {
   phaseDuration: number
   roundTime: number
   phase: GamePhaseState
-  players: IPlayer[]
+  players: Player[]
   simulations: ISimulation[]
   stageLevel: number
   noElo: boolean
@@ -34,7 +35,7 @@ export interface GameStateStore {
   playerIdSpectated: string
   simulationIdSpectated: string
   teamSpectated: Team
-  synergiesSpectated: [string, number][]
+  synergiesSpectated: [Synergy, number][]
   money: number
   interest: number
   maxInterest: number
@@ -60,8 +61,8 @@ const initialState: GameStateStore = {
   phaseDuration: StageDuration[1],
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
-  players: new Array<IPlayer>(),
-  simulations: new Array<ISimulation>(),
+  players: new Array<Player>(),
+  simulations: new Array<Simulation>(),
   stageLevel: 0,
   weather: Weather.NEUTRAL,
   noElo: false,
@@ -114,12 +115,14 @@ const gameSlice = createSlice({
     ) => {
       state.specialGameRule = action.payload
     },
-    addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      const clone = JSON.parse(JSON.stringify(action.payload)) as IPlayer
+    addPlayer: (state, action: PayloadAction<Player>) => {
+      const clone = JSON.parse(JSON.stringify(action.payload)) as Player
       // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
+      // the json-clone flattens the board MapSchema to a plain object
+      if (action.payload.board) clone.board = action.payload.board
 
       const index = state.players.findIndex((p) => p.id === clone.id)
       if (index >= 0) {
@@ -258,7 +261,7 @@ const gameSlice = createSlice({
         })
       }
     },
-    setPlayer: (state, action: PayloadAction<IPlayer>) => {
+    setPlayer: (state, action: PayloadAction<Player>) => {
       state.playerIdSpectated = action.payload.id
       state.simulationIdSpectated = action.payload.simulationId
       state.teamSpectated = action.payload.team

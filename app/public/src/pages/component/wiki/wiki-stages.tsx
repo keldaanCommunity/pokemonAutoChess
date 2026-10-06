@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   AdditionalPicksStages,
+  GiftShopStages,
   ItemCarouselStages,
   PortalCarouselStages,
   TownEncountersByStage
@@ -10,6 +11,7 @@ import { getAdditionalsTier1 } from "../../../../../models/precomputed/precomput
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../../../../models/precomputed/precomputed-rarity"
 import { type PVEStage, PVEStages } from "../../../../../models/pve-stages"
 import { Emotion } from "../../../../../types"
+import { GameMode } from "../../../../../types/enum/Game"
 import {
   CraftableItemsNoScarves,
   type Item,
@@ -24,17 +26,25 @@ import { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import PokemonPortrait from "../pokemon-portrait"
 import "./wiki-stages.css"
+import {
+  GiftsTier1,
+  GiftsTier2,
+  GiftsTier3
+} from "../../../../../types/enum/GiftShop"
 
 type StageInfo = {
   level: number
   icon: string
   title?: string
-  type: "pve" | "carousel" | "additional" | "portal" | "battle"
+  type: "pve" | "carousel" | "additional" | "portal" | "battle" | "gift"
   stageData?: PVEStage
 }
 
 export default function WikiStages() {
   const { t } = useTranslation()
+  const [selectedGameMode, setSelectedGameMode] = useState<GameMode>(
+    GameMode.CLASSIC
+  )
   const [selectedStage, setSelectedStage] = useState<number | null>(null)
   const [hoveredLegendType, setHoveredLegendType] = useState<string | null>(
     null
@@ -86,6 +96,18 @@ export default function WikiStages() {
         })
       }
 
+      // Double up Gift shop stages
+      if (
+        GiftShopStages.includes(level) &&
+        selectedGameMode === GameMode.DOUBLE_UP
+      ) {
+        stages.push({
+          level,
+          icon: "/assets/ui/gift.svg",
+          type: "gift"
+        })
+      }
+
       // Check for PvE stages
       const pveStage = PVEStages[level]
       if (pveStage) {
@@ -124,6 +146,20 @@ export default function WikiStages() {
       <div className="wiki-stage-path-container my-box">
         <div className="stage-header">
           <h2>{t("stages")}</h2>
+          <div className="spacer"></div>
+          <div>
+            <select
+              id="gamemode-select"
+              onChange={(e) => setSelectedGameMode(e.target.value as GameMode)}
+              defaultValue={selectedGameMode}
+            >
+              {Object.values(GameMode).map((mode) => (
+                <option key={mode} value={mode}>
+                  {t(`game_modes.${mode}`)}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="stage-legend">
             <div
               className="legend-item pve"
@@ -176,7 +212,7 @@ export default function WikiStages() {
         </div>
         <div className="wiki-stage-path">
           {allStages.map((stage) => (
-            <React.Fragment key={`stage-${stage.level}`}>
+            <React.Fragment key={`stage-${stage.level}-${stage.type}`}>
               <div
                 className={cc("wiki-stage-path-item", {
                   selected: selectedStage === stage.level,
@@ -361,7 +397,7 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
 
           <h4>{t("wiki.stages.item_pool")}</h4>
           <div className="stage-rewards">
-            <ul className="">
+            <ul>
               {(stageInfo.level >= 20
                 ? CraftableItemsNoScarves
                 : ItemComponentsNoScarf
@@ -420,6 +456,27 @@ function StageDetail({ stageInfo }: { stageInfo: StageInfo }) {
       {stageInfo.type === "battle" && (
         <div className="battle-stage-details">
           <p>{t("wiki.stages.battle_description")}</p>
+        </div>
+      )}
+
+      {stageInfo.type === "gift" && (
+        <div className="gift-stage-details">
+          <p>{t("wiki.stages.gift_shop_description")}</p>
+          <ul>
+            {(GiftsTier1 as Item[]).map((item) => (
+              <li key={item}>{itemDetail(item)}</li>
+            ))}
+          </ul>
+          <ul>
+            {(GiftsTier2 as Item[]).map((item) => (
+              <li key={item}>{itemDetail(item)}</li>
+            ))}
+          </ul>
+          <ul>
+            {(GiftsTier3 as Item[]).map((item) => (
+              <li key={item}>{itemDetail(item)}</li>
+            ))}
+          </ul>
         </div>
       )}
 

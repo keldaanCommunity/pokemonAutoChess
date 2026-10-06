@@ -3,7 +3,8 @@ import Phaser, { GameObjects } from "phaser"
 import { BOARD_WIDTH } from "../../../../config"
 import { canBeTraded } from "../../../../core/trade-logic"
 import type Player from "../../../../models/colyseus-models/player"
-import { type IPlayer, type IPokemon, Transfer } from "../../../../types"
+import type { Pokemon } from "../../../../models/colyseus-models/pokemon"
+import { type IPokemon, Transfer } from "../../../../types"
 import { TradeStatus } from "../../../../types/enum/TradeStatus"
 import { schemaValues } from "../../../../utils/schemas"
 import { addOutlineOnHover } from "../../pages/utils/outline"
@@ -14,7 +15,7 @@ import type GameScene from "../scenes/game-scene"
 import type BoardManager from "./board-manager"
 import { BoardMode } from "./board-manager"
 import { GameDialog } from "./game-dialog"
-import PokemonSprite from "./pokemon"
+import PokemonSprite from "./pokemon-sprite"
 
 export class TradingPlatform extends GameObjects.Container {
   scene: GameScene
@@ -139,6 +140,7 @@ export class TradingPlatform extends GameObjects.Container {
       this.clockText
     ])
     this.scene.add.existing(this)
+    this.setDepth(DEPTH.INANIMATE_OBJECTS)
     this.updateTrade(board.mode)
   }
 
@@ -251,8 +253,8 @@ export class TradingPlatform extends GameObjects.Container {
   }
 
   updateTradeIfPokemonInvolved(
-    pokemon: IPokemon,
-    player: IPlayer,
+    pokemon: Pokemon,
+    player: Player,
     boardMode: BoardMode
   ) {
     if (

@@ -195,6 +195,7 @@ export enum Item {
   BERRY_JUICE = "BERRY_JUICE",
   NANAB_BERRY = "NANAB_BERRY",
   OLIVE_OIL = "OLIVE_OIL",
+  LUCKY_EGG = "LUCKY_EGG",
   TART_APPLE = "TART_APPLE",
   SWEET_APPLE = "SWEET_APPLE",
   SIRUPY_APPLE = "SIRUPY_APPLE",
@@ -473,7 +474,8 @@ export const TownItems = [
   Item.PICNIC_SET,
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
-  Item.LAPRAS_PASSPORT
+  Item.LAPRAS_PASSPORT,
+  Item.SOOTHE_BELL
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -764,6 +766,14 @@ export const SynergyGemsBuried: SynergyGem[] = [
   Item.AMORPHOUS_GEM
 ] satisfies SynergyGem[]
 
+export const BuriedTrash: Item[] = [
+  Item.TRASH,
+  Item.LEFTOVERS,
+  Item.COIN,
+  Item.NUGGET,
+  Item.FOSSIL_STONE
+] satisfies Item[]
+
 export const ToolsBuried: Tool[] = [
   Item.PROTECTOR,
   Item.METAL_COAT,
@@ -777,6 +787,12 @@ export const ToolsBuried: Tool[] = [
   Item.EXP_SHARE,
   Item.DRAGON_SCALE
 ]
+
+export const BuriedTreasures: Item[] = [
+  ...ToolsBuried,
+  Item.TREASURE_BOX,
+  Item.BIG_NUGGET
+] satisfies Item[]
 
 export const SynergyItemsNoSpecial = [
   Item.OLD_AMBER,
@@ -979,7 +995,7 @@ export const AbilityPerTM: { [item in Item]?: Ability } = {
   [Item.TM_SKILL_SWAP]: Ability.SKILL_SWAP
 }
 
-export const TMPerAbility = reverseMap(
+export const TMPerAbility: Map<Ability, Item> = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
 
@@ -1011,6 +1027,7 @@ export const Dishes = [
   Item.MOOMOO_MILK,
   Item.SMOKED_FILET,
   Item.SPINDA_COCKTAIL,
+  Item.LUCKY_EGG,
   Item.BERRY_JUICE,
   Item.BINDING_MOCHI,
   Item.STRAWBERRY_SWEET,
@@ -1122,6 +1139,35 @@ export const Sweets = [
 
 export const Mulches = [Item.RICH_MULCH, Item.AMAZE_MULCH] satisfies Item[]
 
+export const Gifts = [
+  Item.BERRIES_GIFT,
+  Item.SWEETS_GIFT,
+  Item.DITTO_GIFT,
+  Item.TICKET_BUNDLE,
+  Item.HATCH_BUNDLE,
+  Item.REGIONAL_TOUR,
+  Item.BANQUET,
+  Item.SMALL_EXP_GIFT,
+  Item.GEMS_BUNDLE,
+  Item.POTION,
+  Item.FORAGE_BAG,
+  Item.PRETTY_BOX,
+  Item.COLLECTION_BOX,
+  Item.LARGE_EXP_GIFT,
+  Item.UNCOMMON_GIFT,
+  Item.RARE_GIFT,
+  Item.COMMON_GIFT,
+  Item.EPIC_GIFT,
+  Item.ULTRA_GIFT,
+  Item.UNIQUE_GIFT,
+  Item.LEGENDARY_GIFT,
+  Item.STAR_GIFT,
+  Item.TOOLBOX,
+  Item.DELUXE_BOX
+] satisfies Item[]
+
+export type Gift = (typeof Gifts)[number]
+
 export const UnholdableItems = [
   ...WeatherRocks,
   ...FishingRods,
@@ -1133,6 +1179,7 @@ export const UnholdableItems = [
   ...Mulches,
   ...MissionOrders,
   ...SevenTreasures,
+  ...Gifts,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
   Item.MYSTERY_BOX,
@@ -1231,4 +1278,10 @@ export const SpecialItems: Item[] = [
   Item.BALL,
   ...Flavors,
   ...Nectars
+] satisfies Item[]
+
+export const AbsorbedItems = [
+  Item.TATSUGIRI_CURLY,
+  Item.TATSUGIRI_DROOPY,
+  Item.TATSUGIRI_STRETCHY
 ] satisfies Item[]
