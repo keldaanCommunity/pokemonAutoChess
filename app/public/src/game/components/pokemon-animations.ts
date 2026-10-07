@@ -7137,7 +7137,8 @@ export const PokemonAnimations: {
   [Pkm.PIKACHU_SURFER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot
+    emote: AnimationType.Shoot,
+    shinyUnavailable: true
   },
   [Pkm.PIKACHU_LIBRE]: {
     attack: AnimationType.Attack,
@@ -7713,8 +7714,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.BUG_RANGE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.BUG_RANGE
   },
   [Pkm.VIVILLON]: {
     attack: AnimationType.Shoot,
@@ -7916,15 +7916,13 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.POISON_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.POISON_MELEE
   },
   [Pkm.DUCKLETT]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.FLYING_RANGE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.FLYING_RANGE
   },
   [Pkm.SWANNA]: {
     attack: AnimationType.Attack,
@@ -7978,15 +7976,13 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Emit,
-    attackSprite: AttackSprite.ICE_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.ICE_MELEE
   },
   [Pkm.HISUI_AVALUGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Emit,
-    attackSprite: AttackSprite.ROCK_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.ROCK_MELEE
   },
   [Pkm.KARRABLAST]: {
     attack: AnimationType.Attack,
@@ -8097,8 +8093,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Dance,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FLORA_RANGE,
-    hitSprite: HitSprite.FIRE_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.FIRE_HIT
   },
   [Pkm.ORICORIO_PA_U]: {
     attack: AnimationType.Attack,
