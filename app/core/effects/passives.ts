@@ -88,7 +88,7 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
 
   pokemon.count.attackCount++
   pokemon.targetY = -1
-  const ppGained = [2, 3, 5][pokemon.stars - 1] ?? 5
+  const ppGained = [2, 3, 5, 7][pokemon.stars - 1] ?? 7
   board
     .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
     .forEach((cell) => {
