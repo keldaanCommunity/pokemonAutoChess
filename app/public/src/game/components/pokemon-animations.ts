@@ -7137,8 +7137,7 @@ export const PokemonAnimations: {
   [Pkm.PIKACHU_SURFER]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
-    emote: AnimationType.Shoot,
-    shinyUnavailable: true
+    emote: AnimationType.Shoot
   },
   [Pkm.PIKACHU_LIBRE]: {
     attack: AnimationType.Attack,
