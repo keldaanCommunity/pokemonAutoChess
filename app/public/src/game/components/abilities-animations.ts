@@ -6,6 +6,7 @@ import {
   CELL_WIDTH
 } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
+import { Dishes, type IPokemonEntity, type Item } from "../../../../types"
 import {
   type AbilityAnimation,
   type AbilityAnimationArgs,
@@ -26,11 +27,12 @@ import {
   Stat
 } from "../../../../types/enum/Game"
 import { Sweets } from "../../../../types/enum/Item"
-import { Pillars, Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
+import { Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
+import { wait } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
-import { angleBetween, max, min } from "../../../../utils/number"
+import { angleBetween, clamp, max, min } from "../../../../utils/number"
 import {
   getOrientation,
   OrientationAngle,
@@ -39,10 +41,11 @@ import {
 } from "../../../../utils/orientation"
 import { pickRandomIn, randomBetween } from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
+import { preference } from "../../preferences"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
 import type GameScene from "../scenes/game-scene"
-import PokemonSprite from "./pokemon-sprite"
+import PokemonSprite, { isEntity } from "./pokemon-sprite"
 
 /** Fixed base angle (degrees) per feather type so each stat feather has a distinct tilt */
 const FeatherBaseAngles: Record<string, number> = {
@@ -444,11 +447,12 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
+  const apScaling = options.apScaling !== false ? 1 + ap / 200 : 1
   const scaleX = max(10)(
-    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * apScaling
   )
   const scaleY = max(10)(
-    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * apScaling
   )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
@@ -470,7 +474,7 @@ export function addAbilitySprite(
 }
 
 const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
-  (options) => (args) => {
+  (options) => async (args) => {
     let rotation = options.rotation
     if (options?.oriented) {
       const coordinates = transformEntityCoordinates(
@@ -487,18 +491,17 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
     }
 
     const delay = options.delay ?? args.delay ?? 0
-    setTimeout(() => {
-      addAbilitySprite(
-        args.scene,
-        options.ability ?? args.ability,
-        args.ap,
-        [
-          options.x + (options?.positionOffset?.[0] ?? 0),
-          options.y + (options?.positionOffset?.[1] ?? 0)
-        ],
-        { ...options, rotation }
-      )
-    }, delay)
+    await wait(delay)
+    return addAbilitySprite(
+      args.scene,
+      options.ability ?? args.ability,
+      args.ap,
+      [
+        options.x + (options?.positionOffset?.[0] ?? 0),
+        options.y + (options?.positionOffset?.[1] ?? 0)
+      ],
+      { ...options, rotation }
+    )
   }
 
 const onCaster: AbilityAnimationMaker = (options) => (args) => {
@@ -554,7 +557,7 @@ type AbilityCoordinates = [number, number, boolean?] | "target" | "caster"
 type TweenAnimationMakerOptions = {
   duration?: number
   ease?: string | ((v: number) => number)
-  hitAnim?: AbilityAnimation
+  hitAnim?: AbilityAnimation | AbilityAnimation[]
   tweenProps?: Record<string, any>
   startCoords?: AbilityCoordinates
   endCoords?: AbilityCoordinates
@@ -627,7 +630,11 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         ease: options.ease || "linear",
         onComplete: () => {
           if (options.destroyOnTweenComplete !== false) sprite?.destroy()
-          if (options.hitAnim) options.hitAnim(args)
+          if (options.hitAnim) {
+            if (Array.isArray(options.hitAnim)) {
+              options.hitAnim.forEach((anim) => anim(args))
+            } else options.hitAnim(args)
+          }
         },
         ...(options.tweenProps ?? {})
       }
@@ -734,12 +741,154 @@ const projectile: AbilityAnimationMaker<
     })(args)
   }
 
+const parabolicProjectile: AbilityAnimationMaker<
+  TweenAnimationMakerOptions & {
+    peakHeight?: number
+  }
+> =
+  (options = {}) =>
+  async (args) => {
+    const { scene, ap, positionX, positionY, targetX, targetY, flip } = args
+    if (options.delay) await wait(options.delay)
+    let [startX, startY] = transformEntityCoordinates(
+      positionX,
+      positionY,
+      flip
+    )
+    startX += options.startPositionOffset?.[0] ?? 0
+    startY += options.startPositionOffset?.[1] ?? 0
+
+    let [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
+    endX += options.endPositionOffset?.[0] ?? 0
+    endY += options.endPositionOffset?.[1] ?? 0
+
+    const projectile = addAbilitySprite(
+      scene,
+      options.ability ?? args.ability,
+      ap,
+      [startX, startY],
+      {
+        destroyOnComplete: false,
+        ...options
+      }
+    )
+    if (!projectile) return null
+
+    const peakHeight = 150
+    scene.tweens.addCounter({
+      from: 0,
+      to: 1,
+      duration: options.duration || 1000,
+      ease: options.ease || "linear",
+      onUpdate: (tween) => {
+        const t = tween.getValue()! // Progress from 0 to 1
+
+        // Linear interpolation for X
+        projectile.x = startX + (endX - startX) * t
+
+        // Parabolic formula for Y: y = startY + displacement + arc height
+        // The term (4 * peakHeight * t * (1 - t)) creates a perfect parabola peak at t = 0.5
+        const heightOffset = 4 * peakHeight * t * (1 - t)
+        projectile.y =
+          Phaser.Math.Interpolation.Linear([startY, endY], t) - heightOffset
+
+        if (options.tweenProps?.rotation) {
+          projectile.rotation = Phaser.Math.Interpolation.Linear(
+            [0, options.tweenProps.rotation],
+            t
+          )
+        }
+      },
+      onComplete: () => {
+        if (options.destroyOnTweenComplete !== false) projectile?.destroy()
+        if (options.hitAnim) {
+          if (Array.isArray(options.hitAnim)) {
+            options.hitAnim.forEach((anim) => anim(args))
+          } else options.hitAnim(args)
+        }
+      },
+      ...(options.tweenProps ?? {})
+    })
+  }
+
 const skyfall: AbilityAnimationMaker<TweenAnimationMakerOptions> =
   (options) => (args) => {
     return projectile({
-      ...options,
-      startCoords: [args.targetX, 9, false]
+      startCoords: [args.targetX, 9, false],
+      ...options
     })(args)
+  }
+
+type PathAnimationMakerOptions = {
+  duration?: number
+  ease?: string | ((v: number) => number)
+  sprite?: GameObjects.Sprite
+  finishAnim?: AbilityAnimation | AbilityAnimation[]
+  tweenProps?: Record<string, any>
+  path: Phaser.Curves.Curve
+  destroyOnTweenComplete?: boolean
+  initSprite?: (sprite: GameObjects.Sprite) => void
+}
+
+const pathAnimation: AbilityAnimationMaker<PathAnimationMakerOptions> =
+  (options) => (args) => {
+    const { scene } = args
+    let { rotation } = options
+    const delay = options.delay ?? args.delay ?? 0
+    setTimeout(() => {
+      const follower = { t: 0, vec: new Phaser.Math.Vector2() }
+      const { x: startX, y: startY } = options.path.getStartPoint()
+      let lastX = startX,
+        lastY = startY
+
+      const sprite =
+        options.sprite ??
+        addAbilitySprite(
+          scene,
+          options.ability ?? args.ability,
+          args.ap,
+          [startX, startY],
+          {
+            destroyOnComplete: false,
+            ...options,
+            rotation
+          }
+        )
+      if (!sprite) return null
+      if (options.initSprite) options.initSprite(sprite)
+
+      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
+        targets: follower,
+        duration: options.duration || 500,
+        ease: options.ease || "linear",
+        t: 1,
+        onUpdate: () => {
+          options.path.getPointAt(follower.t, follower.vec)
+          sprite.setPosition(follower.vec.x, follower.vec.y)
+          if (options?.oriented) {
+            rotation =
+              angleBetween([lastX, lastY], [follower.vec.x, follower.vec.y]) +
+              (options.rotation ?? 0)
+            sprite.setRotation(rotation)
+          }
+          lastX = follower.vec.x
+          lastY = follower.vec.y
+        },
+        onComplete: () => {
+          if (options.destroyOnTweenComplete !== false) sprite?.destroy()
+          if (options.finishAnim) {
+            if (Array.isArray(options.finishAnim)) {
+              options.finishAnim.forEach((anim) => anim(args))
+            } else {
+              options.finishAnim(args)
+            }
+          }
+        },
+        ...(options.tweenProps ?? {})
+      }
+
+      scene.tweens.add(tweenConfig)
+    }, delay)
   }
 
 const shakeCamera: AbilityAnimationMaker<{
@@ -748,7 +897,7 @@ const shakeCamera: AbilityAnimationMaker<{
 }> =
   (options) =>
   ({ scene }) =>
-    scene.shakeCamera(options)
+    setTimeout(() => scene.shakeCamera(options), options.delay ?? 0)
 
 const poppingIcon: AbilityAnimationMaker<
   TweenAnimationMakerOptions & { maxScale: number }
@@ -908,6 +1057,10 @@ export const AbilitiesAnimations: {
     duration: 1000,
     oriented: true,
     rotation: +Math.PI / 2
+  }),
+  ["BUG_HIT"]: onTarget({
+    ability: "BUG/hit",
+    textureKey: "attacks"
   }),
   ["POWER_LENS"]: onCasterScale2,
   ["STAR_DUST"]: onCasterScale2,
@@ -1723,14 +1876,16 @@ export const AbilitiesAnimations: {
     scale: 1,
     tint: 0xffc0c0
   }),
-  ["FOCUS_PUNCH_EJECT"]: onSprite(
+  ["BOARD_EJECT_ORIENTED"]: onSprite(
     ({ targetSprite, orientation, positionX, positionY, scene, flip }) => {
+      if (!targetSprite) return
       const [dx, dy] = OrientationVector[orientation]
       const [x, y] = transformEntityCoordinates(
         positionX + dx * 8,
         positionY + dy * 8,
         flip
       )
+      targetSprite.moveManager.setEnable(false)
       scene.tweens.add({
         targets: targetSprite,
         duration: 1000,
@@ -1740,6 +1895,22 @@ export const AbilitiesAnimations: {
       })
     }
   ),
+  ["BOARD_EJECT"]: onSprite(({ targetSprite, casterSprite, scene }) => {
+    if (!targetSprite || !casterSprite) return
+    targetSprite.moveManager.setEnable(false)
+    const angle = Math.atan2(
+      targetSprite.y - casterSprite.y,
+      targetSprite.x - casterSprite.x
+    )
+    const dx = Math.cos(angle)
+    const dy = Math.sin(angle)
+    scene.tweens.add({
+      targets: targetSprite,
+      duration: 1000,
+      x: casterSprite.x + dx * 1000,
+      y: casterSprite.y + dy * 1000
+    })
+  }),
   [Ability.STONE_EDGE]: onCaster({ ability: Ability.TORMENT }),
   [Ability.MAGNET_PULL]: onCaster({
     ability: Ability.THUNDER_CAGE,
@@ -1878,6 +2049,23 @@ export const AbilitiesAnimations: {
     onTarget({ ability: Ability.HEAVY_SLAM, scale: 1, delay: 300 })
   ],
   [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}), scale: 1 }),
+  [Ability.SUPERSONIC_SKYSTRIKE]: skyfall({
+    ability: "FLYING_SKYDIVE",
+    scale: 3,
+    hitAnim: [
+      shakeCamera({ duration: 500, intensity: 0.02 }),
+      onTarget({
+        ability: "SUPERSONIC_SKYSTRIKE",
+        apScaling: false,
+        scale: 8
+      }),
+      onTarget({
+        ability: "SUPERSONIC_SKYSTRIKE_LANDING",
+        apScaling: false,
+        scale: 8
+      })
+    ]
+  }),
   ["COMET_CRASH"]: skyfall({
     ability: Ability.SUNSTEEL_STRIKE,
     scale: 0.5,
@@ -1931,7 +2119,17 @@ export const AbilitiesAnimations: {
     duration: 1000
   }),
   [Ability.PSYSTRIKE]: projectile({ duration: 1000 }),
-  [Ability.EGG_BOMB]: projectile({ duration: 800, scale: 3 }),
+  [Ability.EGG_BOMB]: parabolicProjectile({
+    duration: 800,
+    animOptions: { repeat: -1 },
+    scale: 2,
+    peakHeight: 150,
+    tweenProps: { rotation: Math.PI * 7 },
+    hitAnim: onTarget({
+      ability: "EGG_BOMB_HIT",
+      scale: 2
+    })
+  }),
   [Ability.SPARK]: projectile({ duration: 250 }),
   [Ability.SUCTION_HEAL]: projectile({
     scale: 3,
@@ -2498,9 +2696,9 @@ export const AbilitiesAnimations: {
   [Ability.AFTER_YOU]: poppingIcon({ maxScale: 1, tweenProps: { yoyo: true } }),
 
   [Ability.HYPERSPACE_FURY]: (args) => {
-    let nbHits = Number(args.orientation)
+    let nbHits = args.data.nbHits
     if (isNaN(nbHits) || nbHits < 1 || nbHits > 12) {
-      nbHits = 4 // default to 4 hits if orientation is not a valid number
+      nbHits = 4 // default to 4 hits if not a valid number
     }
     for (let i = 0; i < nbHits; i++) {
       onTarget({
@@ -2785,8 +2983,7 @@ export const AbilitiesAnimations: {
     const distance = min(1)(
       distanceE(args.positionX, args.positionY, args.targetX, args.targetY)
     )
-    // orientation field is used to pass the type of the pillar
-    const pillarType = Pillars[args.orientation] ?? Pkm.PILLAR_WOOD
+    const pillarType = args.data.pillarType ?? Pkm.PILLAR_WOOD
     const animKey = `${PkmIndex[pillarType]}/${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}`
     const frame = `${PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
     return projectile({
@@ -3119,6 +3316,1057 @@ export const AbilitiesAnimations: {
       })
     })
   ],
+
+  ALL_OUT_PUMMELING_PUNCH: [
+    projectile({
+      scale: 2,
+      oriented: false,
+      startCoords: "target",
+      startPositionOffset: [100, -100],
+      depth: DEPTH.HIT_FX_ABOVE_POKEMON
+    })
+  ],
+
+  ALL_OUT_PUMMELING_PUNCH2: [
+    projectile({
+      scale: 2,
+      oriented: false,
+      startCoords: "target",
+      startPositionOffset: [-100, 100],
+      depth: DEPTH.HIT_FX_ABOVE_POKEMON
+    })
+  ],
+
+  ALL_OUT_PUMMELING_KICK: [
+    projectile({
+      scale: 2,
+      oriented: false,
+      startCoords: "target",
+      startPositionOffset: [100, 100],
+      depth: DEPTH.HIT_FX_ABOVE_POKEMON
+    })
+  ],
+
+  ALL_OUT_PUMMELING_KICK2: [
+    projectile({
+      scale: 2,
+      oriented: false,
+      startCoords: "target",
+      startPositionOffset: [-100, -100],
+      depth: DEPTH.HIT_FX_ABOVE_POKEMON
+    })
+  ],
+
+  [Ability.ALL_OUT_PUMMELING]: (args) => {
+    const orientation =
+      args.positionY < args.targetY
+        ? Orientation.UP
+        : args.positionY > args.targetY
+          ? Orientation.DOWN
+          : Orientation.UP
+
+    return [
+      projectile({
+        ability: Ability.HYPERSPACE_FURY,
+        distance: 5,
+        scale: 3,
+        orientation,
+        depth: DEPTH.ABILITY_MAJOR,
+        rotation:
+          orientation === (args.flip ? Orientation.UP : Orientation.DOWN)
+            ? (-3 / 4) * Math.PI
+            : (1 / 4) * Math.PI
+      })(args),
+
+      projectile({
+        ability: Ability.SUNSTEEL_STRIKE,
+        distance: 4,
+        scale: 1,
+        tint: 0xddffff,
+        orientation,
+        rotation:
+          orientation === (args.flip ? Orientation.UP : Orientation.DOWN)
+            ? 0
+            : Math.PI,
+        depth: DEPTH.ABILITY_BELOW_POKEMON
+      })(args)
+    ]
+  },
+
+  [Ability.DEVASTATING_DRAKE]: [
+    onSprite(({ casterSprite, ...args }) => {
+      const MAX_NB_ENEMIES_HIT = 6
+      let orientation = args.orientation
+      let lastX = args.positionX,
+        lastY = args.positionY
+
+      if (!casterSprite) return
+
+      const points: [number, number][] = []
+      points.push([casterSprite.x, casterSprite.y])
+
+      const enemies = args.pokemonsOnBoard.filter(
+        (p) =>
+          p.pokemon &&
+          isEntity(p.pokemon) &&
+          p.pokemon.team !== (casterSprite.pokemon as IPokemonEntity).team
+      )
+      const remainingTargets = new Set(enemies)
+
+      while (remainingTargets.size > 0 && points.length < MAX_NB_ENEMIES_HIT) {
+        const distances = [...remainingTargets].map((e) =>
+          distanceM(lastX, lastY, e.pokemon.positionX, e.pokemon.positionY)
+        )
+        const minDistance = Math.min(...distances)
+        const enemiesAtMinDistance = [...remainingTargets].filter(
+          (_, i) => distances[i] === minDistance
+        )
+        let nextEnemy: PokemonSprite
+
+        if (enemiesAtMinDistance.length > 0) {
+          // search again the closest while taking the current orientation into account
+          const movementVector = OrientationVector[orientation]
+          const x2 = lastX + movementVector[0]
+          const y2 = lastY + movementVector[1]
+          const distances = [...remainingTargets].map((e) =>
+            distanceM(x2, y2, e.pokemon.positionX, e.pokemon.positionY)
+          )
+          const minDistance = Math.min(...distances)
+          const enemiesAtMinDistance = [...remainingTargets].filter(
+            (_, i) => distances[i] === minDistance
+          )
+          nextEnemy = enemiesAtMinDistance[0]
+        } else {
+          nextEnemy = enemiesAtMinDistance[0]
+        }
+
+        remainingTargets.delete(nextEnemy)
+        orientation = getOrientation(
+          lastX,
+          lastY,
+          nextEnemy.positionX,
+          nextEnemy.positionY
+        )
+        points.push([nextEnemy.x, nextEnemy.y])
+        lastX = nextEnemy.positionX
+        lastY = nextEnemy.positionY
+      }
+
+      const path = new Phaser.Curves.Spline(points)
+      const [explosionX, explosionY] = transformEntityCoordinates(
+        lastX,
+        lastY,
+        args.flip
+      )
+      return pathAnimation({
+        path,
+        scale: 3,
+        oriented: true,
+        rotation: -Math.PI / 2,
+        duration: enemies.length * 300,
+        initSprite(sprite) {
+          sprite.enableFilters()
+          sprite.filters?.internal.addGlow(0xff00ff, 6, 1, 0.5)
+        },
+        finishAnim: [
+          shakeCamera({ duration: 400, intensity: 0.01 }),
+          staticAnimation({
+            ability: "DEVASTATING_DRAKE_HIT",
+            x: explosionX,
+            y: explosionY,
+            scale: 4
+          })
+        ]
+      })(args)
+    })
+  ],
+
+  [Ability.CORKSCREW_CRASH]: [
+    onSprite(({ casterSprite, ...args }) => {
+      const MAX_NB_ENEMIES_HIT = 6
+      let orientation = args.orientation
+      let lastX = args.positionX,
+        lastY = args.positionY
+
+      if (!casterSprite) return
+
+      casterSprite.setVisible(false)
+
+      const points: [number, number][] = []
+      points.push([casterSprite.x, casterSprite.y])
+
+      const enemies = args.pokemonsOnBoard.filter(
+        (p) =>
+          p.pokemon &&
+          isEntity(p.pokemon) &&
+          p.pokemon.team !== (casterSprite.pokemon as IPokemonEntity).team
+      )
+      const remainingTargets = new Set(enemies)
+
+      while (remainingTargets.size > 0 && points.length < MAX_NB_ENEMIES_HIT) {
+        const distances = [...remainingTargets].map((e) =>
+          distanceM(lastX, lastY, e.pokemon.positionX, e.pokemon.positionY)
+        )
+        const minDistance = Math.min(...distances)
+        const enemiesAtMinDistance = [...remainingTargets].filter(
+          (_, i) => distances[i] === minDistance
+        )
+        let nextEnemy: PokemonSprite
+
+        if (enemiesAtMinDistance.length > 0) {
+          // search again the closest while taking the current orientation into account
+          const movementVector = OrientationVector[orientation]
+          const x2 = lastX + movementVector[0]
+          const y2 = lastY + movementVector[1]
+          const distances = [...remainingTargets].map((e) =>
+            distanceM(x2, y2, e.pokemon.positionX, e.pokemon.positionY)
+          )
+          const minDistance = Math.min(...distances)
+          const enemiesAtMinDistance = [...remainingTargets].filter(
+            (_, i) => distances[i] === minDistance
+          )
+          nextEnemy = enemiesAtMinDistance[0]
+        } else {
+          nextEnemy = enemiesAtMinDistance[0]
+        }
+
+        remainingTargets.delete(nextEnemy)
+        orientation = getOrientation(
+          lastX,
+          lastY,
+          nextEnemy.positionX,
+          nextEnemy.positionY
+        )
+        points.push([nextEnemy.x, nextEnemy.y])
+        lastX = nextEnemy.positionX
+        lastY = nextEnemy.positionY
+      }
+
+      const [lastPX] = transformEntityCoordinates(lastX, lastY, args.flip)
+      points.push([lastPX, -50])
+
+      const path = new Phaser.Curves.Spline(points)
+
+      return pathAnimation({
+        ability: Ability.HYPER_DRILL,
+        path,
+        scale: 3,
+        oriented: true,
+        duration: enemies.length * 300 + 300
+      })(args)
+    })
+  ],
+
+  ["CORKSCREW_CRASH_FINAL"]: [
+    skyfall({
+      ability: Ability.HYPER_DRILL,
+      rotation: Math.PI / 2,
+      scale: 3,
+      duration: 500,
+      hitAnim: onTarget({ ability: Ability.SUPERSONIC_SKYSTRIKE, scale: 3 })
+    }),
+    onSprite(({ casterSprite, ...args }) => {
+      const [x, y] = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
+        args.flip
+      )
+      casterSprite?.moveManager.setEnable(false)
+      casterSprite?.setPosition(x, y)
+      setTimeout(() => {
+        if (!casterSprite) return
+        casterSprite.setVisible(true)
+        casterSprite?.moveManager.setEnable(true)
+      }, 500)
+    })
+  ],
+
+  [Ability.PALAEO_COLLAPSE]: [
+    projectile({
+      ability: Ability.SUNSTEEL_STRIKE,
+      startCoords: [7, 9, false],
+      rotation: Math.PI / 5,
+      duration: 500,
+      scale: 1,
+      hitAnim: [
+        shakeCamera({ duration: 300, intensity: 0.02 }),
+        onTarget({
+          ability: Ability.PALAEO_COLLAPSE,
+          scale: 3,
+          positionOffset: [0, -150]
+        }),
+        onTarget({
+          ability: Ability.COUNTER,
+          scale: 3
+        })
+      ]
+    })
+  ],
+
+  [Ability.TECTONIC_RAGE]: [
+    (args) => {
+      const cx = args.targetX
+      const cy = args.targetY
+      const minRadiusSquared = 2 * 2
+      const maxRadiusSquared = 3 * 3
+      for (let y = cy - 4; y <= cy + 4; y++) {
+        for (let x = cx - 4; x < cx + 4; x++) {
+          const dy = cy - y
+          const dx = cx - x
+          const distanceSquared = dy * dy + dx * dx
+          if (
+            distanceSquared >= minRadiusSquared &&
+            distanceSquared <= maxRadiusSquared
+          ) {
+            const distanceToAttacker = distanceE(
+              args.positionX,
+              args.positionY,
+              x,
+              y
+            )
+            const distanceToEpicenter = distanceE(cx, cy, x, y)
+            const delay = 100 * distanceToAttacker + 40 * distanceToEpicenter
+            const [px, py] = transformEntityCoordinates(x, y, args.flip)
+
+            staticAnimation({
+              x: px,
+              y: py,
+              delay
+            })(args)
+          }
+        }
+      }
+    }
+  ],
+
+  ["TECTONIC_RAGE_FINAL"]: [
+    onTargetScale2,
+    onTarget({ ability: "ERUPTION", scale: 3, delay: 150 }),
+    shakeCamera({ duration: 300, intensity: 0.015 })
+  ],
+
+  ["TERASTALIZE"]: onCasterScale2,
+
+  [Ability.TERA_BLAST]: [
+    onCaster({ ability: "TERASTALIZE", scale: 2 }),
+    (args) => {
+      const shards = args.data.shards as Item[]
+      OrientationArray.map((orientation, i) =>
+        projectile({
+          orientation,
+          distance: 8,
+          ability: undefined,
+          scale: 0.5,
+          textureKey: "item",
+          frame: `${shards[i]}.png`,
+          oriented: true,
+          rotation: (-7 * Math.PI) / 4,
+          duration: 1000
+        })({ ...args, ability: "" })
+      )
+    }
+  ],
+
+  [Ability.GIGAVOLT_HAVOC]: [
+    onTarget({ scale: 5, positionOffset: [-32, -32], apScaling: false }),
+    tweenAnimation({
+      ability: "GIGAVOLT_HAVOC_ZONE",
+      apScaling: false,
+      scale: 5,
+      startCoords: "target",
+      startPositionOffset: [-32, -32],
+      duration: 1900,
+      delay: 100,
+      alpha: 0,
+      tweenProps: {
+        alpha: [0, 1, 1, 1, 1, 1, 0],
+        interpolation: "bezier"
+      }
+    })
+  ],
+
+  [Ability.BLACK_HOLE_ECLIPSE]: [
+    tweenAnimation({
+      startCoords: "target",
+      endCoords: "target",
+      ability: "portal",
+      scale: 0.1,
+      tweenProps: { scale: 3 },
+      duration: 1500,
+      textureKey: "portal",
+      animOptions: { repeat: 3 },
+      frame: "000"
+    }),
+    onTarget({ scale: 3, animOptions: { frameRate: 30 } })
+  ],
+
+  ["BLACK_HOLE_ECLIPSE_SUCK"]: [
+    onSprite((args) => {
+      args.casterSprite?.moveManager.setEnable(false)
+      const [x, y] = transformEntityCoordinates(
+        args.targetX,
+        args.targetY,
+        args.flip
+      )
+      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
+        targets: args.casterSprite,
+        x,
+        y,
+        duration: 1000,
+        ease: Phaser.Math.Easing.Bounce.Out,
+        onComplete: () => {
+          args.casterSprite?.moveManager.setEnable(true)
+        }
+      }
+
+      args.scene.tweens.add(tweenConfig)
+    })
+  ],
+
+  [Ability.HYDRO_VORTEX]: [
+    tweenAnimation({
+      startCoords: "target",
+      endCoords: "target",
+      scale: 0.1,
+      tweenProps: {
+        scale: [0.1, 2, 2.1, 2, 2.1, 0.1],
+        interpolation: "bezier"
+      },
+      duration: 3000,
+      animOptions: { repeat: 10 },
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
+
+  ["LIGHT_THAT_BURNS_THE_SKY_CHARGE"]: onCaster({
+    scale: 3,
+    animOptions: { repeat: 1 }
+  }),
+  [Ability.LIGHT_THAT_BURNS_THE_SKY]: [
+    onCasterScale4,
+    shakeCamera({ duration: 500, intensity: 0.02 }),
+    (args) => {
+      if (!preference("disableCameraShake")) args.scene.cameras.main.flash(250)
+    }
+  ],
+
+  [Ability.ACID_DOWNPOUR]: [
+    projectile({
+      ability: "ACID_DOWNPOUR_DROP",
+      startCoords: "target",
+      startPositionOffset: [0, -512],
+      scale: 1
+    }),
+    (args) =>
+      onTarget({
+        scale: 1,
+        delay: 500 + (args.delay ?? 0),
+        depth: DEPTH.ABILITY_BELOW_POKEMON
+      })(args)
+  ],
+
+  [Ability.BLOOM_DOOM]: [
+    onTarget({
+      ability: "DRAGON_ENERGY",
+      tint: 0xa0ffc0,
+      scale: 4,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    (args) => {
+      for (let i = 0; i < 10; i++) {
+        setTimeout(
+          () => {
+            const r = 128 + randomBetween(-32, 32)
+            onTarget({
+              ability: "MAGICAL_LEAF_CHARGE",
+              positionOffset: [
+                Math.round(Math.cos((i / 10) * Math.PI * 2) * r),
+                Math.round(Math.sin((i / 10) * Math.PI * 2) * r)
+              ]
+            })(args)
+          },
+          100 + i * 50
+        )
+      }
+    }
+  ],
+
+  [Ability.GIANT_RAFFLESIA]: [
+    onCaster({
+      scale: 3,
+      depth: DEPTH.ABILITY_GROUND_LEVEL
+    }),
+    onCaster({
+      scale: 3,
+      ability: "GIANT_RAFFLESIA_DIG",
+      positionOffset: [-4, 20],
+      depth: DEPTH.ABILITY_GROUND_LEVEL
+    })
+  ],
+
+  ["GIANT_RAFFLESIA_PROJECTILE"]: [
+    parabolicProjectile({
+      startPositionOffset: [0, -20],
+      animOptions: { repeat: -1 },
+      scale: 1,
+      peakHeight: 150,
+      hitAnim: onTarget({
+        ability: "GIANT_RAFFLESIA_PROJECTILE_HIT",
+        scale: 1.5,
+        depth: DEPTH.ABILITY_GROUND_LEVEL
+      })
+    })
+  ],
+
+  [Ability.FOOD_FIGHT]: (args) => {
+    const dish = Dishes[args.delay ?? 0]
+    projectile({
+      ability: undefined,
+      textureKey: "item",
+      frame: `${dish}.png`,
+      scale: 0.35,
+      tweenProps: { angle: 480 },
+      duration: 500,
+      hitAnim: onTarget({
+        ability: "WILD/hit",
+        scale: 3,
+        textureKey: "attacks",
+        tint: 0xffff80
+      })
+    })({ ...args, ability: "" })
+  },
+
+  [Ability.TWINKLE_TACKLE]: onCasterScale4,
+  ["TWINKLE_STAR"]: (args) =>
+    skyfall({
+      startCoords: [args.positionX, 9, false],
+      endCoords: "caster",
+      rotation: Math.PI,
+      oriented: false,
+      scale: 2,
+      duration: 800,
+      hitAnim: [
+        onCaster({
+          ability: "TWINKLE_EXPLOSION",
+          tint: 0xffc0c0,
+          scale: 4
+        }),
+        shakeCamera({ duration: 500, intensity: 0.02 })
+      ]
+    })(args),
+
+  [Ability.SAVAGE_SPIN_OUT]: [
+    (args) =>
+      onSprite(async ({ targetSprite, casterSprite }) => {
+        const nbRotations = 3
+        const duration = 1000
+        const scale =
+          distanceE(
+            args.positionX,
+            args.positionY,
+            args.targetX,
+            args.targetY
+          ) * 1.9
+        const cocoon: GameObjects.Sprite = await onCaster({
+          oriented: true,
+          origin: [0.5, 0],
+          rotation: -Math.PI / 2,
+          alpha: 0,
+          scale: [scale, 0],
+          destroyOnComplete: false
+        })(args)
+
+        args.scene.tweens.add({
+          targets: cocoon,
+          ease: Phaser.Math.Easing.Quadratic.Out,
+          alpha: 1,
+          scaleY: scale,
+          duration: 300,
+          onComplete: () => {
+            args.scene.tweens.add({
+              targets: cocoon,
+              ease: Phaser.Math.Easing.Quadratic.In,
+              rotation: Math.PI * 2 * nbRotations,
+              duration,
+              onComplete() {
+                cocoon.destroy()
+              }
+            })
+
+            if (casterSprite && targetSprite) {
+              const startAngle =
+                angleBetween(
+                  [casterSprite.x, casterSprite.y],
+                  [targetSprite.x, targetSprite.y]
+                ) * Phaser.Math.RAD_TO_DEG
+              const circularPath = new Phaser.Curves.Ellipse(
+                casterSprite.x,
+                casterSprite.y,
+                scale * 54,
+                scale * 54,
+                startAngle,
+                startAngle + 360,
+                false
+              )
+              const pathFollower = { t: 0 }
+              const startPoint = circularPath.getPoint(0)
+              targetSprite.moveManager.setEnable(false)
+              targetSprite.setPosition(startPoint.x, startPoint.y)
+
+              args.scene.tweens.add({
+                targets: pathFollower,
+                t: nbRotations,
+                ease: Phaser.Math.Easing.Quadratic.In,
+                duration: duration * 1.02,
+                onUpdate: () => {
+                  // Get point along the path at progress 't' and apply to orbiting sprite
+                  const point = circularPath.getPoint(pathFollower.t)
+                  targetSprite.setPosition(point.x, point.y)
+                },
+                onComplete() {
+                  targetSprite.moveManager.setEnable(true)
+                }
+              })
+            }
+          }
+        })
+      })(args)
+  ],
+
+  [Ability.STOKED_SPARKSURFER]: [
+    onSprite(({ casterSprite, ...args }) => {
+      if (!casterSprite || !args.data?.rows) return
+      const [startX, startY] = transformEntityCoordinates(-1, 0, args.flip)
+      //casterSprite.moveManager.moveTo(startX, startY)
+
+      const points: [number, number][] = []
+      const rows = args.data.rows
+      points.push([startX, startY])
+
+      rows.forEach((row, i) => {
+        const leftPos = transformEntityCoordinates(0, row, args.flip)
+        const rightPos = transformEntityCoordinates(7, row, args.flip)
+        if (i % 2) {
+          points.push(leftPos)
+          points.push(rightPos)
+        } else {
+          points.push(rightPos)
+          points.push(leftPos)
+        }
+
+        /*setTimeout(() => {
+          const enemiesInRow = args.pokemonsOnBoard.filter(
+            (p) =>
+              p.pokemon &&
+              isEntity(p.pokemon) &&
+              p.pokemon.team !==
+                (casterSprite.pokemon as IPokemonEntity).team &&
+              p.positionY === row
+          )
+          for(const enemy of enemiesInRow){
+            onTarget(enemy
+          }
+        }, i * 500)*/
+      })
+
+      args.scene.animationManager?.animatePokemon(
+        casterSprite,
+        PokemonActionState.IDLE,
+        args.flip
+      )
+
+      const path = new Phaser.Curves.Spline(points)
+      return pathAnimation({
+        path,
+        scale: 2,
+        oriented: true,
+        rotation: 0,
+        duration: 2000
+      })(args)
+    })
+  ],
+
+  [Ability.OCEANIC_OPERETTA]: [
+    onCaster({
+      ability: "WATER_PULSE",
+      scale: 3,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    }),
+    onCaster({ ability: "CHATTER", scale: 2, depth: DEPTH.ABILITY_MAJOR })
+  ],
+
+  [Ability.BABY_BOOM]: (args) =>
+    parabolicProjectile({
+      duration: 1000,
+      delay: args.delay ?? 0,
+      animOptions: { repeat: -1 },
+      tweenProps: { rotation: Math.PI * 7 },
+      ability: args.data?.golden ? "EGG_BOMB_GOLDEN" : "EGG_BOMB",
+      scale: 2,
+      peakHeight: 150,
+      hitAnim: onTarget({
+        ability: "EGG_BOMB_HIT",
+        scale: 2
+      })
+    })(args),
+
+  [Ability.KAIJU_ATTACK]: [
+    onSprite(({ casterSprite }) => casterSprite?.emoteAnimation()),
+    onCaster({ rotation: Math.PI, scale: 4 })
+  ],
+
+  KAIJU_ATTACK_PROJECTILE: [
+    parabolicProjectile({
+      peakHeight: 150,
+      scale: 2,
+      animOptions: { repeat: -1 },
+      tweenProps: { rotation: Math.PI * 2 },
+      duration: 400,
+      delay: 100,
+      hitAnim: [
+        onTarget({
+          ability: "KAIJU_ATTACK_EXPLOSION",
+          scale: 2,
+          positionOffset: [0, -100]
+        }),
+        shakeCamera({ duration: 300, intensity: 0.01 })
+      ]
+    })
+  ],
+
+  [Ability.BREAKNECK_BLITZ]: [
+    onCaster({
+      ability: "HYPER_BEAM_CHARGE",
+      scale: 2,
+      tint: 0xf0f0ff
+    })
+  ],
+
+  ["BREAKNECK_BLITZ_HIT"]: [
+    onTargetScale4,
+    shakeCamera({ duration: 500, intensity: 0.02 })
+  ],
+
+  [Ability.INFERNO_OVERDRIVE]: [
+    projectile({
+      ability: Ability.ARMOR_CANNON,
+      animOptions: { repeat: -1 },
+      scale: 3,
+      duration: 500,
+      hitAnim: [
+        onTarget({
+          ability: "INFERNO",
+          scale: 3,
+          animOptions: { frameRate: 30 }
+        }),
+        onTarget({
+          ability: "KAIJU_ATTACK_EXPLOSION",
+          scale: 2,
+          positionOffset: [0, -100]
+        })
+      ]
+    })
+  ],
+
+  [Ability.FURIOUS_STAMPEDE]: [
+    (args) => {
+      const taurosForm = pickRandomIn([
+        Pkm.TAUROS,
+        Pkm.TAUROS_AQUA_BREED,
+        Pkm.TAUROS_BLAZE_BREED,
+        Pkm.TAUROS_COMBAT_BREED
+      ])
+
+      const spawnTauros = (row: number, delay: number) => {
+        const [_, y] = transformEntityCoordinates(0, row, args.flip)
+        const tauros = new PokemonSprite(
+          args.scene,
+          -50,
+          y,
+          PokemonFactory.createPokemonFromName(taurosForm),
+          "furious_stampede",
+          false,
+          args.flip
+        )
+        tauros.action = PokemonActionState.WALK
+        tauros.orientation = Orientation.RIGHT
+        args.scene.animationManager?.animatePokemon(
+          tauros,
+          PokemonActionState.WALK,
+          args.flip,
+          true,
+          { frameRate: 50 }
+        )
+
+        args.scene.add.tween({
+          targets: tauros,
+          x: args.scene.scale.width + 50,
+          ease: Phaser.Math.Easing.Linear,
+          duration: 2500,
+          delay,
+          onComplete: () => {
+            tauros.destroy()
+          }
+        })
+
+        for (let t = 0; t < 3000; t += 100) {
+          setTimeout(() => {
+            addAbilitySprite(
+              args.scene,
+              "FURIOUS_STAMPEDE_SMOKE",
+              0,
+              [tauros.x - 25, tauros.y],
+              { alpha: 0.5, scale: 2, depth: DEPTH.ABILITY_BELOW_POKEMON }
+            )
+          }, t)
+        }
+      }
+
+      const rows = args.data?.rows ?? []
+      rows.forEach((row, i) => {
+        spawnTauros(row, i * 100)
+      })
+    }
+  ],
+
+  [Ability.NEVER_ENDING_NIGHTMARE]: Array.from({ length: 4 }).map((_, i) =>
+    tweenAnimation({
+      startCoords: "caster",
+      scale: 2,
+      depth: DEPTH.ABILITY_BELOW_POKEMON,
+      delay: i * 250,
+      animOptions: { repeat: -1 },
+      tweenProps: {
+        scale: [2, 10, 12, 10, 8],
+        alpha: [0.5, 0.5, 0.5, 0.5, 0],
+        duration: 5000,
+        interpolation: "bezier"
+      }
+    })
+  ),
+
+  ["NEVER_ENDING_NIGHTMARE_ARM"]: [
+    onTarget({
+      scale: 2,
+      positionOffset: [0, -50],
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
+
+  [Ability.SHATTERED_PSYCHE]: (args) => {
+    const mirrors: [{ x: number; y: number; reflectedPokemonId: string }] =
+      args.data?.mirrors ?? []
+    mirrors.forEach((mirror, i) => {
+      const [px, py] = transformEntityCoordinates(mirror.x, mirror.y, args.flip)
+      const mirrorContainer = args.scene.add.container(px, py)
+      const mirrorSprite = addAbilitySprite(
+        args.scene,
+        Ability.SHATTERED_PSYCHE,
+        args.ap,
+        [0, 0],
+        { scale: 1, animOptions: { repeat: -1 } }
+      )
+      const reflectedPokemon = args.pokemonsOnBoard.find(
+        (p) => p.pokemon?.id === mirror.reflectedPokemonId
+      )
+      if (mirrorSprite) mirrorContainer.add(mirrorSprite)
+
+      if (reflectedPokemon) {
+        const { index, shiny } = reflectedPokemon.pokemon
+        const frame = `${shiny ? PokemonTint.SHINY : PokemonTint.NORMAL}/${AnimationType.Idle}/${SpriteType.ANIM}/${Orientation.DOWN}/0000`
+        const reflectImage = args.scene.add.rexShatterImage(0, 0, index, frame)
+
+        mirrorContainer.add(reflectImage as any)
+        mirrorContainer.setScale(2).setAlpha(0.5).setDepth(DEPTH.ABILITY_MAJOR)
+        reflectImage.shatter()
+        args.scene.add.tween({
+          targets: (reflectImage as any).faces,
+          alpha: 0,
+          localOffsetY: function () {
+            return -30 + Math.random() * 60
+          },
+          localOffsetX: function () {
+            return -30 + Math.random() * 60
+          },
+          ease: "Cubic",
+          duration: 1000,
+          delay: 500 + i * 500,
+          onStart: () => {
+            mirrorSprite?.destroy()
+          },
+          onComplete: () => {
+            mirrorContainer?.destroy()
+          }
+        })
+      }
+
+      setTimeout(
+        () =>
+          projectile({
+            ability: Ability.AURASPHERE,
+            scale: 2,
+            startCoords:
+              i === 0
+                ? "caster"
+                : [mirrors[i - 1].x, mirrors[i - 1].y, args.flip],
+            endCoords: [mirror.x, mirror.y, args.flip],
+            duration: 500
+          })(args),
+        i * 500
+      )
+    })
+  },
+
+  [Ability.GIZMOS_AND_GADGETS]: [
+    (args) => {
+      const item: Item = args.data?.item
+      parabolicProjectile({
+        duration: 800,
+        ability: undefined,
+        textureKey: "item",
+        frame: `${item}.png`,
+        scale: 0.35,
+        tweenProps: { angle: 480 },
+        peakHeight: 150
+      })({ ...args, ability: "" })
+    }
+  ],
+
+  [Ability.SUBZERO_SLAMMER]: [
+    async (args) => {
+      const pillarSprite = (await onCaster({
+        scale: 2,
+        positionOffset: [0, -20],
+        depth: DEPTH.ABILITY_BELOW_POKEMON,
+        destroyOnComplete: false,
+        animOptions: {
+          repeat: 0,
+          hideOnComplete: false
+        }
+      })(args)) as GameObjects.Sprite
+
+      // stay on its last frame here for 4 secon,ds
+      args.scene.time.delayedCall(4800, () => {
+        pillarSprite.destroy()
+      })
+    },
+    onSprite(({ casterSprite, ...args }) => {
+      if (!casterSprite) return
+      const originalY = casterSprite.y
+      args.scene.tweens.chain({
+        targets: casterSprite,
+        tweens: [
+          {
+            y: originalY - 50,
+            duration: 500,
+            ease: Phaser.Math.Easing.Sine.InOut
+          },
+          {
+            y: originalY,
+            delay: 4400,
+            duration: 500,
+            ease: Phaser.Math.Easing.Sine.InOut,
+            onComplete: () => {
+              casterSprite.moveManager.setEnable(true)
+            }
+          }
+        ]
+      })
+    })
+  ],
+
+  ["SUBZERO_SLAMMER_LASER"]: [
+    onSprite(({ casterSprite, targetSprite, ...args }) => {
+      if (!casterSprite || !targetSprite) {
+        return onCaster({
+          scale: 2,
+          origin: [0, 0.5],
+          oriented: true
+        })(args)
+      }
+      const distance = distanceE(
+        casterSprite.x,
+        casterSprite.y,
+        targetSprite.x,
+        targetSprite.y
+      )
+      const scale = clamp(distance * 0.01, 1.5, 5)
+      const rotation = angleBetween(
+        [casterSprite.x, casterSprite.y],
+        [targetSprite.x, targetSprite.y]
+      )
+      staticAnimation({
+        ability: "SUBZERO_SLAMMER_LASER",
+        x: casterSprite.x,
+        y: casterSprite.y,
+        scale: [scale, 2],
+        origin: [0, 0.5],
+        animOptions: { repeat: 1 },
+        rotation
+      })(args)
+    }),
+    onTarget({
+      ability: "SHEER_COLD",
+      scale: 1.5,
+      depth: DEPTH.ABILITY_BELOW_POKEMON
+    })
+  ],
+
+  ["SUBZERO_SLAMMER_EXPLOSION"]: onTarget({
+    scale: 3,
+    positionOffset: [0, -20]
+  }),
+
+  [Ability.CONTINENTAL_CRUSH]: (args) => {
+    const {
+      targetX,
+      targetY,
+      flip,
+      data: { delay }
+    } = args
+
+    // draw shadow ellipsis at position then tween scale up and fade out
+    const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
+    const shadow = args.scene.add
+      .ellipse(x, y, 100, 50, 0x000000, 0.5)
+      .setScale(0.5)
+      .setOrigin(0.5, 0.5)
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    args.scene.tweens.add({
+      targets: shadow,
+      scale: 3,
+      alpha: 1,
+      duration: delay,
+      onComplete: () => {
+        shadow.destroy()
+      }
+    })
+
+    projectile({
+      ability: "CONTINENTAL_CRUSH",
+      scale: 4,
+      startCoords: [args.targetX, 50, false],
+      endCoords: "target",
+      duration: delay,
+      hitAnim: Array.from({ length: 9 }, (_, i) =>
+        onTarget({
+          ability: "CONTINENTAL_CRUSH_EXPLOSION",
+          scale: 2,
+          positionOffset: [(Math.floor(i / 3) - 1) * 64, ((i % 3) - 1) * 64],
+          delay: randomBetween(0, 100),
+          depth: DEPTH.ABILITY_MAJOR
+        })
+      ).concat(
+        onTarget({
+          ability: "HEAVY_SLAM",
+          scale: 4,
+          depth: DEPTH.ABILITY_MAJOR
+        }),
+        shakeCamera({ duration: 500, intensity: 0.02 })
+      )
+    })(args)
+  },
+
   ["SUPERCHARGE"]: ({ scene, pokemonsOnBoard, positionX, positionY }) => {
     const pokemon = pokemonsOnBoard.find(
       (p) => p.positionX === positionX && p.positionY === positionY

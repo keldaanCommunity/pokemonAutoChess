@@ -1,7 +1,7 @@
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Orientation } from "../../types/enum/Game"
+import { AttackType } from "../../types/enum/Game"
 import { max } from "../../utils/number"
-import { OrientationVector } from "../../utils/orientation"
+import { OrientationArray, OrientationVector } from "../../utils/orientation"
 import type { Board } from "../board"
 import { PeriodicEffect } from "../effects/effect"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -15,7 +15,7 @@ class DragonRageEffect extends PeriodicEffect {
   constructor(pokemon: PokemonEntity, crit: boolean, initialShield: number) {
     super(
       (pokemon: PokemonEntity, board: Board) => {
-        this.ticksRemaining--        
+        this.ticksRemaining--
         if (this.ticksRemaining < 0) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DRAGON_RAGE)
@@ -27,7 +27,7 @@ class DragonRageEffect extends PeriodicEffect {
         pokemon.addShield(shield, pokemon, 1, crit)
         this.shieldGiven += shield
 
-        Object.values(Orientation).forEach((orientation, index) => {
+        OrientationArray.forEach((orientation, index) => {
           pokemon.commands.push(
             new DelayedCommand(() => {
               pokemon.broadcastAbility({

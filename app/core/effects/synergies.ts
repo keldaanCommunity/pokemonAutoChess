@@ -11,6 +11,8 @@ import {
 } from "../../config"
 import {
   FIRE_ATK_BUFF_PER_SYNERGY_TIER,
+  FOSSIL_ATK_BUFF_PER_SYNERGY_TIER,
+  FOSSIL_SHIELD_PER_SYNERGY_TIER,
   GROUND_ATK_BUFF_PER_SYNERGY_TIER,
   GROUND_DEF_BUFF_PER_SYNERGY_TIER,
   SOUND_ATK_BUFF_PER_SYNERGY_TIER,
@@ -55,6 +57,7 @@ import { DelayedCommand } from "../simulation-command"
 import { getSynergyTier } from "../synergies"
 import { getUnitScore } from "../unit-score"
 import {
+  BeforeTakingDamageEffect,
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -514,7 +517,9 @@ export const bugSwarmSpawnEffect = new OnStageStartEffect(
   ({ player, room }) => {
     if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
       const bugsNotFinal = [...player.board.values()]
-        .filter((p) => p.hasSynergy(Synergy.BUG) && !p.final)
+        .filter(
+          (p) => p.hasSynergy(Synergy.BUG) && !EvolutionManager.isFinal(p)
+        )
         .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
       if (bugsNotFinal.length > 0) {
         const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
@@ -1024,6 +1029,51 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   }
 })
 
+export class FossilPowerEffect extends BeforeTakingDamageEffect {
+  synergyTier: number
+  constructor(effect: SynergyTier<Synergy.FOSSIL>) {
+    super(undefined, effect)
+    this.synergyTier = SynergyTiers[Synergy.FOSSIL].indexOf(effect) + 1
+  }
+
+  apply({ pokemon, residualDamage, takenDamage }) {
+    if (
+      pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
+      pokemon.hp - residualDamage <= 0.3 * pokemon.maxHP
+    ) {
+      const shield = Math.round(
+        pokemon.maxHP *
+          (FOSSIL_SHIELD_PER_SYNERGY_TIER[this.synergyTier - 1] ?? 1)
+      )
+      const attackBonus =
+        FOSSIL_ATK_BUFF_PER_SYNERGY_TIER[this.synergyTier - 1] ?? 1
+      pokemon.addShield(shield, pokemon, 0, false)
+
+      //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
+      const damageOnShield = max(0.5 * shield)(residualDamage)
+
+      pokemon.shieldDamageTaken += damageOnShield
+      takenDamage += damageOnShield
+      pokemon.shield -= damageOnShield
+      residualDamage = 0
+
+      pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+      pokemon.resetCooldown(500)
+      pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
+      SynergyTiers[Synergy.FOSSIL].forEach((e) => {
+        pokemon.effects.delete(e)
+      })
+      pokemon.effectsSet.delete(this)
+
+      return {
+        newResidualDamage: residualDamage,
+        newTakenDamage: takenDamage
+      }
+    }
+  }
+}
+
+//TODO: move more synergy effects from applyEffect to here
 export const SynergyEffects: Partial<
   Record<EffectEnum, (Effect | (() => Effect))[]>
 > = {

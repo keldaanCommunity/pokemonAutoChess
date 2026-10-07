@@ -281,11 +281,12 @@ export class PeriodicEffect extends Effect {
   constructor(
     effect: (entity: PokemonEntity, board: Board, ...others: any[]) => void,
     origin: EffectOrigin,
-    intervalMs: number
+    intervalMs: number,
+    callImmediately: boolean = false
   ) {
     super(effect, origin)
     this.intervalMs = intervalMs
-    this.timer = intervalMs
+    this.timer = callImmediately ? 0 : intervalMs
     this.count = 0
   }
 
@@ -359,6 +360,37 @@ export class OnAbilityCastEffect extends Effect {
       target: PokemonEntity | null,
       crit: boolean
     ) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+// applied when receiving the damage, just before applying the damage
+
+export interface BeforeTakingDamageEffectArgs {
+  pokemon: PokemonEntity
+  attacker: PokemonEntity | null
+  board: Board
+  takenDamage: number // damage taken so far including shield damage and damage not applied yet
+  residualDamage: number // damage not applied yet after damage reduction
+  damageBeforeReduction: number // initial damage before any reduction
+  attackType?: AttackType
+  isRetaliation: boolean
+}
+
+export type BeforeTakingDamageEffectReturn = {
+  newDeath?: boolean
+  newResidualDamage?: number
+  newTakenDamage?: number
+} | void
+
+export class BeforeTakingDamageEffect extends Effect {
+  apply(args: BeforeTakingDamageEffectArgs): BeforeTakingDamageEffectReturn {}
+  constructor(
+    effect?: (
+      args: BeforeTakingDamageEffectArgs
+    ) => BeforeTakingDamageEffectReturn,
     origin?: EffectOrigin
   ) {
     super(effect, origin)

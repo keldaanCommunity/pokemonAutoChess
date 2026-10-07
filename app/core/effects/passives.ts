@@ -30,7 +30,7 @@ import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -607,7 +607,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   })
   const flavor = SynergyFlavors[maxSynergy]
   Flavors.forEach((f) => {
-    removeInArray(player.items, f)
+    removeFromArray(player.items, f)
   })
   player.items.push(flavor)
 }, Passive.CREAM)
@@ -1531,7 +1531,7 @@ export const PassiveEffects: Partial<
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
         pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15)
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30)
@@ -1541,7 +1541,7 @@ export const PassiveEffects: Partial<
         if (isIn(TMs, item)) {
           player.tms.splice(player.tms.indexOf(item), 1, Item.TRASH)
         }
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         return false
       }
       return true

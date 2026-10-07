@@ -1072,6 +1072,17 @@ export default function Game() {
               }
             }
           })
+          $player.wanderers.onRemove((wanderer: Wanderer) => {
+             if (
+              gameContainer.game &&
+              player.id === store.getState().network.uid
+            ) {
+              const g = getGameScene()
+              if (g && g.wandererManager) {
+                g.wandererManager.removeWanderer(wanderer)
+              }
+            }
+          })
         })
 
         $state.players.onRemove((player) => {

@@ -63,7 +63,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { removeInArray } from "../utils/array"
+import { removeFromArray } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 import {
@@ -530,7 +530,7 @@ export default class Shop {
         selected = Pkm.ARCEUS
       }
 
-      removeInArray(allCandidates, selected)
+      removeFromArray(allCandidates, selected)
       pokemonsProposed.push(selected)
     }
 

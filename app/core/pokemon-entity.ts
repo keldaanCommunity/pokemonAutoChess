@@ -82,7 +82,7 @@ import MovingState from "./moving-state"
 import type PokemonState from "./pokemon-state"
 import type Simulation from "./simulation"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
-import { hasSynergy } from "./synergies";
+import { hasSynergy } from "./synergies"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -1775,16 +1775,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     orientation = this.orientation,
     targetX = this.targetX,
     targetY = this.targetY,
-    delay
+    delay,
+    data
   }: {
     skill?: Ability | string
     ap?: number
     positionX?: number
     positionY?: number
-    orientation?: Orientation | number
+    orientation?: Orientation
     targetX?: number
     targetY?: number
     delay?: number
+    data?: { [key: string]: any }
   } = {}) {
     if (!this.simulation || !this.simulation.room) {
       return
@@ -1798,7 +1800,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       orientation,
       targetX,
       targetY,
-      delay
+      delay,
+      data
     })
   }
 

@@ -63,11 +63,7 @@ export class ColumnCrushStrategy extends AbilityStrategy {
               positionY: pillar.positionY,
               targetX: enemyHit.positionX,
               targetY: enemyHit.positionY,
-              orientation: [
-                Pkm.PILLAR_WOOD,
-                Pkm.PILLAR_IRON,
-                Pkm.PILLAR_CONCRETE
-              ].indexOf(pillarType)
+              data: { pillarType }
             })
 
             pokemon.commands.push(

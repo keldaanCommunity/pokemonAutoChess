@@ -407,6 +407,7 @@ export interface AbilityAnimationOptions {
   delay?: number
   flipX?: boolean
   flipY?: boolean
+  apScaling?: boolean
 }
 
 export type AbilityAnimationArgs = {
@@ -421,6 +422,7 @@ export type AbilityAnimationArgs = {
   flip: boolean
   delay?: number
   ap: number
+  data: { [key: string]: any }
 }
 
 export type AbilityAnimation = (args: AbilityAnimationArgs) => any

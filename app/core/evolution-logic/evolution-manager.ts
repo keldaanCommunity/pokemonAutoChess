@@ -1,5 +1,6 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
+import type { IPokemon } from "../../types"
 import {
   type CountEvolutionRule,
   type EvolutionRule,
@@ -11,6 +12,7 @@ import {
   type StateEvolutionRule
 } from "../../types/EvolutionRules"
 import { PokemonActionState } from "../../types/enum/Game"
+import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
@@ -129,5 +131,18 @@ export const EvolutionManager = {
         pokemon.action = PokemonActionState.IDLE
       }
     }
+  },
+
+  isFinal(pokemon: IPokemon): boolean {
+    /* true if should be excluded from shops when obtained */
+    if (
+      pokemon.passive === Passive.CORSOLA ||
+      pokemon.passive === Passive.AVALUGG
+    )
+      return false
+    return (
+      !pokemon.hasEvolution ||
+      pokemon.evolutionRule.type !== EvolutionRuleType.COUNT
+    )
   }
 }

@@ -75,6 +75,7 @@
 
 # Bugfix
 
+- Black Belt shield on damage dealt is now correctly using the damage post-mitigation instead of pre-mitigation, which was causing it to be stronger than intended against high defense Pokémon (thanks Felosion)
 - Grookey line now works properly with Electric triple attack effects
 - Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
 

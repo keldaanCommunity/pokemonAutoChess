@@ -4,6 +4,7 @@ import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../../models/precomputed/precom
 import { Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { Rarity, Team } from "../../types/enum/Game"
+import { ZMoves } from "../../types/enum/ZMoves"
 import type { DisplayText } from "../../types/strings/DisplayText"
 import { pickRandomIn } from "../../utils/random"
 import type { Board } from "../board"
@@ -12,12 +13,15 @@ import { AbilityStrategy } from "./ability-strategy"
 import { AbsorbStrategy } from "./absorb"
 import { AccelerockStrategy } from "./accelerock"
 import { AcidArmorStrategy } from "./acid-armor"
+import { AcidDownpourStrategy } from "./acid-downpour"
 import { AcidSprayStrategy } from "./acid-spray"
 import { AcrobaticsStrategy } from "./acrobatics"
 import { AerialAceStrategy } from "./aerial-ace"
 import { AfterYouStrategy } from "./after-you"
 import { AgilityStrategy } from "./agility"
 import { AirSlashStrategy } from "./air-slash"
+import { AllOutPummelingStrategy } from "./all-out-pummeling"
+import { AmalgamateStrategy } from "./amalgamate"
 import { AnchorShotStrategy } from "./anchor-shot"
 import { AncientPowerStrategy } from "./ancient-power"
 import { AppleAcidStrategy } from "./apple-acid"
@@ -37,6 +41,7 @@ import { AuraWheelStrategy } from "./aura-wheel"
 import { AuroraBeamStrategy } from "./aurora-beam"
 import { AuroraVeilStrategy } from "./aurora-veil"
 import { AxeKickStrategy } from "./axe-kick"
+import { BabyBoomStrategy } from "./baby-boom"
 import { BanefulBunkerStrategy } from "./baneful-bunker"
 import { BarbBarrageStrategy } from "./barb-barrage"
 import { BaredFangsStrategy } from "./bared-fangs"
@@ -46,11 +51,13 @@ import { BideStrategy } from "./bide"
 import { BiteStrategy } from "./bite"
 import { BitterBladeStrategy } from "./bitter-blade"
 import { BitterMaliceStrategy } from "./bitter-malice"
+import { BlackHoleEclipseStrategy } from "./black-hole-eclipse"
 import { BlastBurnStrategy } from "./blast-burn"
 import { BlazeKickStrategy } from "./blaze-kick"
 import { BleakwindStormStrategy } from "./bleakwind-storm"
 import { BlizzardStrategy } from "./blizzard"
 import { BloodMoonStrategy } from "./blood-moon"
+import { BloomDoomStrategy } from "./bloom-doom"
 import { BlueFlareStrategy } from "./blue-flare"
 import { BodySlamStrategy } from "./body-slam"
 import { BoltBeakStrategy } from "./bolt-beak"
@@ -59,6 +66,7 @@ import { BonemerangStrategy } from "./bonemerang"
 import { BoomBurstStrategy } from "./boomburst"
 import { BounceStrategy } from "./bounce"
 import { BraveBirdStrategy } from "./brave-bird"
+import { BreakneckBlitzStrategy } from "./breakneck-blitz"
 import { BrickBreakStrategy } from "./brick-break"
 import { BugBiteStrategy } from "./bug-bite"
 import { BugBuzzStrategy } from "./bug-buzz"
@@ -67,6 +75,7 @@ import { BulldozeStrategy } from "./bulldoze"
 import { BulletPunchStrategy } from "./bullet-punch"
 import { BurnUpStrategy } from "./burn-up"
 import { BurningJealousyStrategy } from "./burning-jealousy"
+import { CallOfTheWildStrategy } from "./call-of-the-wild"
 import { CamouflageStrategy } from "./camouflage"
 import { CavernousChompStrategy } from "./cavernous-chomp"
 import { CeaselessEdgeStrategy } from "./ceaseless-edge"
@@ -83,7 +92,9 @@ import { CoilStrategy } from "./coil"
 import { ColumnCrushStrategy } from "./column-crush"
 import { ConfusingMindStrategy } from "./confusing-mind"
 import { ConfusionStrategy } from "./confusion"
+import { ContinentalCrushStrategy } from "./continental-crush"
 import { CoreEnforcerStrategy } from "./core-enforcer"
+import { CorkscrewCrashStrategy } from "./corscrew-crash"
 import { CosmicPowerMoonStrategy } from "./cosmic-power-moon"
 import { CosmicPowerSunStrategy } from "./cosmic-power-sun"
 import { CottonGuardStrategy } from "./cotton-guard"
@@ -104,6 +115,7 @@ import { DeepFreezeStrategy } from "./deep-freeze"
 import { DefendOrderStrategy } from "./defend-order"
 import { DefenseCurlStrategy } from "./defense-curl"
 import { DetectStrategy } from "./detect"
+import { DevastatingDrakeStrategy } from "./devastating-drake"
 import { DiamondStormStrategy } from "./diamond-storm"
 import { DigStrategy } from "./dig"
 import { DireClawStrategy } from "./dire-claw"
@@ -176,18 +188,23 @@ import { FlyStrategy } from "./fly"
 import { FlyingPressStrategy } from "./flying-press"
 import { FocusPunchStrategy } from "./focus-punch"
 import { FollowMeStrategy } from "./follow-me"
+import { FoodFightStrategy } from "./food-fight"
 import { ForcePalmStrategy } from "./force-palm"
 import { ForecastStrategy } from "./forecast"
 import { FoulPlayStrategy } from "./foul-play"
 import { FreezeDryStrategy } from "./freeze-dry"
 import { FreezingGlareStrategy } from "./freezing-glare"
 import { FrostBreathStrategy } from "./frost-breath"
+import { FuriousStampedeStrategy } from "./furious-stampede"
 import { FurySwipesStrategy } from "./fury-swipes"
 import { FusionBoltStrategy } from "./fusion-bolt"
 import { FutureSightStrategy } from "./future-sight"
 import { GearGrindStrategy } from "./gear-grind"
 import { GeomancyStrategy } from "./geomancy"
+import { GiantRafflesiaStrategy } from "./giant-rafflesia"
 import { GigatonHammerStrategy } from "./gigaton-hammer"
+import { GigavoltHavocStrategy } from "./gigavolt-havoc"
+import { GizmosAndGadgetsStrategy } from "./gizmos-and-gadgets"
 import { GlacialLanceStrategy } from "./glacial-lance"
 import { GlaciateStrategy } from "./glaciate"
 import { GlaiveRushStrategy } from "./glaive-rush"
@@ -254,6 +271,7 @@ import { HornLeechStrategy } from "./horn-leech"
 import { HurricaneStrategy } from "./hurricane"
 import { HydroPumpStrategy } from "./hydro-pump"
 import { HydroSteamStrategy } from "./hydro-steam"
+import { HydroVortexStrategy } from "./hydro-vortex"
 import { HyperBeamStrategy } from "./hyper-beam"
 import { HyperDrillStrategy } from "./hyper-drill"
 import { HyperVoiceStrategy } from "./hyper-voice"
@@ -267,6 +285,7 @@ import { IcicleCrashStrategy } from "./icicle-crash"
 import { IcicleMissileStrategy } from "./icicle-missile"
 import { IcyWindStrategy } from "./icy-wind"
 import { InfernalParadeStrategy } from "./infernal-parade"
+import { InfernoOverdriveStrategy } from "./inferno-overdrive"
 import { InfestationStrategy } from "./infestation"
 import { IngrainStrategy } from "./ingrain"
 import { IronDefenseStrategy } from "./iron-defense"
@@ -276,6 +295,7 @@ import { IvyCudgelStrategy } from "./ivy-cudgel"
 import { JawLockStrategy } from "./jaw-lock"
 import { JetPunchStrategy } from "./jet-punch"
 import { JudgementStrategy } from "./judgement"
+import { KaijuAttackStrategy } from "./kaiju-attack"
 import { KingShieldStrategy } from "./king-shield"
 import { KnockOffStrategy } from "./knock-off"
 import { KowtowCleaveStrategy } from "./kowtow-cleave"
@@ -287,6 +307,7 @@ import { LeafBladeStrategy } from "./leaf-blade"
 import { LeechLifeStrategy } from "./leech-life"
 import { LeechSeedStrategy } from "./leech-seed"
 import { LickStrategy } from "./lick"
+import { LightThatBurnsTheSkyStrategy } from "./light-that-burns-the-sky"
 import { LingeringAromaStrategy } from "./lingering-aroma"
 import { LinkCableStrategy } from "./link-cable"
 import { LiquidationStrategy } from "./liquidation"
@@ -328,6 +349,7 @@ import { MultiAttackStrategy } from "./multi-attack"
 import { MysticalFireStrategy } from "./mystical-fire"
 import { NastyPlotStrategy } from "./nasty-plot"
 import { NaturalGiftStrategy } from "./natural-gift"
+import { NeverEndingNightmareStrategy } from "./never-ending-nightmare"
 import { NightDazeStrategy } from "./night-daze"
 import { NightShadeStrategy } from "./night-shade"
 import { NightSlashStrategy } from "./night-slash"
@@ -337,6 +359,7 @@ import { NutrientsStrategy } from "./nutrients"
 import { NuzzleStrategy } from "./nuzzle"
 import { OblivionWingStrategy } from "./oblivion-wing"
 import { ObstructStrategy } from "./obstruct"
+import { OceanicOperettaStrategy } from "./oceanic-operetta"
 import { OctazookaStrategy } from "./octazooka"
 import { OctolockStrategy } from "./octolock"
 import { OrderUpStrategy } from "./order-up"
@@ -344,6 +367,7 @@ import { OriginPulseStrategy } from "./origin-pulse"
 import { OutrageStrategy } from "./outrage"
 import { OverdriveStrategy } from "./overdrive"
 import { OverheatStrategy } from "./overheat"
+import { PalaeoCollapseStrategy } from "./palaeo-collapse"
 import { ParabolicChargeStrategy } from "./parabolic-charge"
 import { PastelVeilStrategy } from "./pastel-veil"
 import { PaydayStrategy } from "./payday"
@@ -384,6 +408,7 @@ import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
+import { PurpleRainStrategy } from "./purple-rain"
 import { PursuitStrategy } from "./pursuit"
 import { PyroBallStrategy } from "./pyro-ball"
 import { QuiverDanceStrategy } from "./quiver-dance"
@@ -415,6 +440,7 @@ import { SaltCureStrategy } from "./salt-cure"
 import { SandSpitStrategy } from "./sand-spit"
 import { SandTombStrategy } from "./sand-tomb"
 import { SandsearStormStrategy } from "./sandsear-storm"
+import { SavageSpinOutStrategy } from "./savage-spin-out"
 import { ScaleShotStrategy } from "./scale-shot"
 import { SchoolingStrategy } from "./schooling"
 import { ScreechStrategy } from "./screech"
@@ -429,6 +455,7 @@ import { ShadowCloneStrategy } from "./shadow-clone"
 import { ShadowForceStrategy } from "./shadow-force"
 import { ShadowPunchStrategy } from "./shadow-punch"
 import { ShadowSneakStrategy } from "./shadow-sneak"
+import { ShatteredPsycheStrategy } from "./shattered-psyche"
 import { ShedTailStrategy } from "./shed-tail"
 import { SheerColdStrategy } from "./sheer-cold"
 import { ShellSideArmStrategy } from "./shell-side-arm"
@@ -481,6 +508,7 @@ import { SteamrollerStrategy } from "./steamroller"
 import { SteelWingStrategy } from "./steel-wing"
 import { StickyWebStrategy } from "./sticky-web"
 import { StockpileStrategy } from "./stockpile"
+import { StokedSparksurferStrategy } from "./stoked-sparksurfer"
 import { StompStrategy } from "./stomp"
 import { StoneAxeStrategy } from "./stone-axe"
 import { StoneEdgeStrategy } from "./stone-edge"
@@ -492,11 +520,13 @@ import { StruggleBugStrategy } from "./struggle-bug"
 import { StuffCheeksStrategy } from "./stuff-cheeks"
 import { StunSporeStrategy } from "./stun-spore"
 import { SubstituteStrategy } from "./substitute"
+import { SubzeroSlammerStrategy } from "./subzero-slammer"
 import { SuctionHealStrategy } from "./suction-heal"
 import { SunsteelStrikeStrategy } from "./sunsteel-strike"
 import { SuperFangStrategy } from "./super-fang"
 import { SuperHeatStrategy } from "./super-heat"
 import { SupercellSlamStrategy } from "./supercell-slam"
+import { SupersonicSkystrikeStrategy } from "./supersonic-skystrike"
 import { SurfStrategy } from "./surf"
 import { SurgingStrikesStrategy } from "./surging-strikes"
 import { SwaggerStrategy } from "./swagger"
@@ -511,8 +541,10 @@ import { TailwindStrategy } from "./tailwind"
 import { TakeHeartStrategy } from "./take-heart"
 import { TauntStrategy } from "./taunt"
 import { TeaTimeStrategy } from "./tea-time"
+import { TectonicRageStrategy } from "./tectonic-rage"
 import { TeeterDanceStrategy } from "./teeter-dance"
 import { TeleportStrategy } from "./teleport"
+import { TeraBlastStrategy } from "./tera-blast"
 import { TerrainPulseStrategy } from "./terrain-pulse"
 import { ThiefStrategy } from "./thief"
 import { ThousandArrowsStrategy } from "./thousand-arrows"
@@ -539,6 +571,7 @@ import { TripleKickStrategy } from "./triple-kick"
 import { TropKickStrategy } from "./trop-kick"
 import { TwinBeamStrategy } from "./twin-beam"
 import { TwineedleStrategy } from "./twineedle"
+import { TwinkleTackleStrategy } from "./twinkle-tackle"
 import { TwisterStrategy } from "./twister"
 import { UTurnStrategy } from "./u-turn"
 import { UltraThrustersStrategy } from "./ultra-thrusters"
@@ -727,16 +760,44 @@ export class SkillSwapStrategy extends AbilityStrategy {
   }
 }
 
+export class KnowledgeIsPowerStrategy extends AbilityStrategy {
+  process(
+    pokemon: PokemonEntity,
+    board: Board,
+    target: PokemonEntity,
+    crit: boolean
+  ) {
+    super.process(pokemon, board, target, crit)
+    const randomZMove = pickRandomIn(
+      ZMoves.filter((skill) => skill !== Ability.KNOWLEDGE_IS_POWER)
+    )
+    // use TM field to store the information about the random Z-Move ; it can't logically have both a TM and Knowledge Is Power ability at the same time
+    pokemon.skill = randomZMove
+    pokemon.tm = randomZMove
+    if (pokemon.refToBoardPokemon) {
+      pokemon.refToBoardPokemon.tm = randomZMove
+      pokemon.refToBoardPokemon.skill = randomZMove
+    }
+    if (pokemon.player) {
+      pokemon.player.experienceManager.addExperience(4)
+    }
+    AbilityStrategies[randomZMove].process(pokemon, board, target, crit)
+  }
+}
+
 export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ABSORB]: new AbsorbStrategy(),
   [Ability.ACCELEROCK]: new AccelerockStrategy(),
   [Ability.ACID_ARMOR]: new AcidArmorStrategy(),
+  [Ability.ACID_DOWNPOUR]: new AcidDownpourStrategy(),
   [Ability.ACID_SPRAY]: new AcidSprayStrategy(),
   [Ability.ACROBATICS]: new AcrobaticsStrategy(),
   [Ability.AERIAL_ACE]: new AerialAceStrategy(),
   [Ability.AFTER_YOU]: new AfterYouStrategy(),
   [Ability.AGILITY]: new AgilityStrategy(),
   [Ability.AIR_SLASH]: new AirSlashStrategy(),
+  [Ability.ALL_OUT_PUMMELING]: new AllOutPummelingStrategy(),
+  [Ability.AMALGAMATE]: new AmalgamateStrategy(),
   [Ability.ANCHOR_SHOT]: new AnchorShotStrategy(),
   [Ability.ANCIENT_POWER]: new AncientPowerStrategy(),
   [Ability.APPLE_ACID]: new AppleAcidStrategy(),
@@ -757,6 +818,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.AURORA_BEAM]: new AuroraBeamStrategy(),
   [Ability.AURORA_VEIL]: new AuroraVeilStrategy(),
   [Ability.AXE_KICK]: new AxeKickStrategy(),
+  [Ability.BABY_BOOM]: new BabyBoomStrategy(),
   [Ability.BANEFUL_BUNKER]: new BanefulBunkerStrategy(),
   [Ability.BARB_BARRAGE]: new BarbBarrageStrategy(),
   [Ability.BARED_FANGS]: new BaredFangsStrategy(),
@@ -766,11 +828,13 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BITE]: new BiteStrategy(),
   [Ability.BITTER_BLADE]: new BitterBladeStrategy(),
   [Ability.BITTER_MALICE]: new BitterMaliceStrategy(),
+  [Ability.BLACK_HOLE_ECLIPSE]: new BlackHoleEclipseStrategy(),
   [Ability.BLAST_BURN]: new BlastBurnStrategy(),
   [Ability.BLAZE_KICK]: new BlazeKickStrategy(),
   [Ability.BLEAKWIND_STORM]: new BleakwindStormStrategy(),
   [Ability.BLIZZARD]: new BlizzardStrategy(),
   [Ability.BLOOD_MOON]: new BloodMoonStrategy(),
+  [Ability.BLOOM_DOOM]: new BloomDoomStrategy(),
   [Ability.BLUE_FLARE]: new BlueFlareStrategy(),
   [Ability.BODY_SLAM]: new BodySlamStrategy(),
   [Ability.BOLT_BEAK]: new BoltBeakStrategy(),
@@ -779,6 +843,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BOOMBURST]: new BoomBurstStrategy(),
   [Ability.BOUNCE]: new BounceStrategy(),
   [Ability.BRAVE_BIRD]: new BraveBirdStrategy(),
+  [Ability.BREAKNECK_BLITZ]: new BreakneckBlitzStrategy(),
   [Ability.BRICK_BREAK]: new BrickBreakStrategy(),
   [Ability.BUG_BITE]: new BugBiteStrategy(),
   [Ability.BUG_BUZZ]: new BugBuzzStrategy(),
@@ -787,6 +852,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.BULLET_PUNCH]: new BulletPunchStrategy(),
   [Ability.BURN_UP]: new BurnUpStrategy(),
   [Ability.BURNING_JEALOUSY]: new BurningJealousyStrategy(),
+  [Ability.CALL_OF_THE_WILD]: new CallOfTheWildStrategy(),
   [Ability.CAMOUFLAGE]: new CamouflageStrategy(),
   [Ability.CAVERNOUS_CHOMP]: new CavernousChompStrategy(),
   [Ability.CEASELESS_EDGE]: new CeaselessEdgeStrategy(),
@@ -803,7 +869,9 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.COLUMN_CRUSH]: new ColumnCrushStrategy(),
   [Ability.CONFUSING_MIND]: new ConfusingMindStrategy(),
   [Ability.CONFUSION]: new ConfusionStrategy(),
+  [Ability.CONTINENTAL_CRUSH]: new ContinentalCrushStrategy(),
   [Ability.CORE_ENFORCER]: new CoreEnforcerStrategy(),
+  [Ability.CORKSCREW_CRASH]: new CorkscrewCrashStrategy(),
   [Ability.COSMIC_POWER_MOON]: new CosmicPowerMoonStrategy(),
   [Ability.COSMIC_POWER_SUN]: new CosmicPowerSunStrategy(),
   [Ability.COTTON_GUARD]: new CottonGuardStrategy(),
@@ -825,6 +893,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DEFEND_ORDER]: new DefendOrderStrategy(),
   [Ability.DEFENSE_CURL]: new DefenseCurlStrategy(),
   [Ability.DETECT]: new DetectStrategy(),
+  [Ability.DEVASTATING_DRAKE]: new DevastatingDrakeStrategy(),
   [Ability.DIAMOND_STORM]: new DiamondStormStrategy(),
   [Ability.DIG]: new DigStrategy(),
   [Ability.DIRE_CLAW]: new DireClawStrategy(),
@@ -898,18 +967,23 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.FLYING_PRESS]: new FlyingPressStrategy(),
   [Ability.FOCUS_PUNCH]: new FocusPunchStrategy(),
   [Ability.FOLLOW_ME]: new FollowMeStrategy(),
+  [Ability.FOOD_FIGHT]: new FoodFightStrategy(),
   [Ability.FORCE_PALM]: new ForcePalmStrategy(),
   [Ability.FORECAST]: new ForecastStrategy(),
   [Ability.FOUL_PLAY]: new FoulPlayStrategy(),
   [Ability.FREEZE_DRY]: new FreezeDryStrategy(),
   [Ability.FREEZING_GLARE]: new FreezingGlareStrategy(),
   [Ability.FROST_BREATH]: new FrostBreathStrategy(),
+  [Ability.FURIOUS_STAMPEDE]: new FuriousStampedeStrategy(),
   [Ability.FURY_SWIPES]: new FurySwipesStrategy(),
   [Ability.FUSION_BOLT]: new FusionBoltStrategy(),
   [Ability.FUTURE_SIGHT]: new FutureSightStrategy(),
   [Ability.GEAR_GRIND]: new GearGrindStrategy(),
   [Ability.GEOMANCY]: new GeomancyStrategy(),
+  [Ability.GIANT_RAFFLESIA]: new GiantRafflesiaStrategy(),
   [Ability.GIGATON_HAMMER]: new GigatonHammerStrategy(),
+  [Ability.GIGAVOLT_HAVOC]: new GigavoltHavocStrategy(),
+  [Ability.GIZMOS_AND_GADGETS]: new GizmosAndGadgetsStrategy(),
   [Ability.GLACIAL_LANCE]: new GlacialLanceStrategy(),
   [Ability.GLACIATE]: new GlaciateStrategy(),
   [Ability.GLAIVE_RUSH]: new GlaiveRushStrategy(),
@@ -974,6 +1048,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.HURRICANE]: new HurricaneStrategy(),
   [Ability.HYDRO_PUMP]: new HydroPumpStrategy(),
   [Ability.HYDRO_STEAM]: new HydroSteamStrategy(),
+  [Ability.HYDRO_VORTEX]: new HydroVortexStrategy(),
   [Ability.HYPER_BEAM]: new HyperBeamStrategy(),
   [Ability.HYPER_DRILL]: new HyperDrillStrategy(),
   [Ability.HYPER_VOICE]: new HyperVoiceStrategy(),
@@ -987,6 +1062,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ICICLE_MISSILE]: new IcicleMissileStrategy(),
   [Ability.ICY_WIND]: new IcyWindStrategy(),
   [Ability.INFERNAL_PARADE]: new InfernalParadeStrategy(),
+  [Ability.INFERNO_OVERDRIVE]: new InfernoOverdriveStrategy(),
   [Ability.INFESTATION]: new InfestationStrategy(),
   [Ability.INGRAIN]: new IngrainStrategy(),
   [Ability.IRON_DEFENSE]: new IronDefenseStrategy(),
@@ -996,8 +1072,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.JAW_LOCK]: new JawLockStrategy(),
   [Ability.JET_PUNCH]: new JetPunchStrategy(),
   [Ability.JUDGEMENT]: new JudgementStrategy(),
+  [Ability.KAIJU_ATTACK]: new KaijuAttackStrategy(),
   [Ability.KING_SHIELD]: new KingShieldStrategy(),
   [Ability.KNOCK_OFF]: new KnockOffStrategy(),
+  [Ability.KNOWLEDGE_IS_POWER]: new KnowledgeIsPowerStrategy(),
   [Ability.KNOWLEDGE_THIEF]: new KnowledgeThiefStrategy(),
   [Ability.KOWTOW_CLEAVE]: new KowtowCleaveStrategy(),
   [Ability.LANDS_WRATH]: new LandsWrathStrategy(),
@@ -1008,6 +1086,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.LEECH_LIFE]: new LeechLifeStrategy(),
   [Ability.LEECH_SEED]: new LeechSeedStrategy(),
   [Ability.LICK]: new LickStrategy(),
+  [Ability.LIGHT_THAT_BURNS_THE_SKY]: new LightThatBurnsTheSkyStrategy(),
   [Ability.LINGERING_AROMA]: new LingeringAromaStrategy(),
   [Ability.LINK_CABLE]: new LinkCableStrategy(),
   [Ability.LIQUIDATION]: new LiquidationStrategy(),
@@ -1051,6 +1130,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MYSTICAL_FIRE]: new MysticalFireStrategy(),
   [Ability.NASTY_PLOT]: new NastyPlotStrategy(),
   [Ability.NATURAL_GIFT]: new NaturalGiftStrategy(),
+  [Ability.NEVER_ENDING_NIGHTMARE]: new NeverEndingNightmareStrategy(),
   [Ability.NIGHT_DAZE]: new NightDazeStrategy(),
   [Ability.NIGHT_SHADE]: new NightShadeStrategy(),
   [Ability.NIGHT_SLASH]: new NightSlashStrategy(),
@@ -1060,6 +1140,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.NUZZLE]: new NuzzleStrategy(),
   [Ability.OBLIVION_WING]: new OblivionWingStrategy(),
   [Ability.OBSTRUCT]: new ObstructStrategy(),
+  [Ability.OCEANIC_OPERETTA]: new OceanicOperettaStrategy(),
   [Ability.OCTAZOOKA]: new OctazookaStrategy(),
   [Ability.OCTOLOCK]: new OctolockStrategy(),
   [Ability.ORDER_UP]: new OrderUpStrategy(),
@@ -1067,6 +1148,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.OUTRAGE]: new OutrageStrategy(),
   [Ability.OVERDRIVE]: new OverdriveStrategy(),
   [Ability.OVERHEAT]: new OverheatStrategy(),
+  [Ability.PALAEO_COLLAPSE]: new PalaeoCollapseStrategy(),
   [Ability.PARABOLIC_CHARGE]: new ParabolicChargeStrategy(),
   [Ability.PASTEL_VEIL]: new PastelVeilStrategy(),
   [Ability.PAYDAY]: new PaydayStrategy(),
@@ -1107,6 +1189,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.PURIFY]: new PurifyStrategy(),
+  [Ability.PURPLE_RAIN]: new PurpleRainStrategy(),
   [Ability.PURSUIT]: new PursuitStrategy(),
   [Ability.PYRO_BALL]: new PyroBallStrategy(),
   [Ability.QUIVER_DANCE]: new QuiverDanceStrategy(),
@@ -1138,6 +1221,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SAND_SPIT]: new SandSpitStrategy(),
   [Ability.SAND_TOMB]: new SandTombStrategy(),
   [Ability.SANDSEAR_STORM]: new SandsearStormStrategy(),
+  [Ability.SAVAGE_SPIN_OUT]: new SavageSpinOutStrategy(),
   [Ability.SCALE_SHOT]: new ScaleShotStrategy(),
   [Ability.SCHOOLING]: new SchoolingStrategy(),
   [Ability.SCREECH]: new ScreechStrategy(),
@@ -1152,6 +1236,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.SHADOW_FORCE]: new ShadowForceStrategy(),
   [Ability.SHADOW_PUNCH]: new ShadowPunchStrategy(),
   [Ability.SHADOW_SNEAK]: new ShadowSneakStrategy(),
+  [Ability.SHATTERED_PSYCHE]: new ShatteredPsycheStrategy(),
   [Ability.SHED_TAIL]: new ShedTailStrategy(),
   [Ability.SHEER_COLD]: new SheerColdStrategy(),
   [Ability.SHELL_SIDE_ARM]: new ShellSideArmStrategy(),
@@ -1205,6 +1290,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STEEL_WING]: new SteelWingStrategy(),
   [Ability.STICKY_WEB]: new StickyWebStrategy(),
   [Ability.STOCKPILE]: new StockpileStrategy(),
+  [Ability.STOKED_SPARKSURFER]: new StokedSparksurferStrategy(),
   [Ability.STOMP]: new StompStrategy(),
   [Ability.STONE_AXE]: new StoneAxeStrategy(),
   [Ability.STONE_EDGE]: new StoneEdgeStrategy(),
@@ -1216,11 +1302,13 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.STUFF_CHEEKS]: new StuffCheeksStrategy(),
   [Ability.STUN_SPORE]: new StunSporeStrategy(),
   [Ability.SUBSTITUTE]: new SubstituteStrategy(),
+  [Ability.SUBZERO_SLAMMER]: new SubzeroSlammerStrategy(),
   [Ability.SUCTION_HEAL]: new SuctionHealStrategy(),
   [Ability.SUNSTEEL_STRIKE]: new SunsteelStrikeStrategy(),
   [Ability.SUPER_FANG]: new SuperFangStrategy(),
   [Ability.SUPER_HEAT]: new SuperHeatStrategy(),
   [Ability.SUPERCELL_SLAM]: new SupercellSlamStrategy(),
+  [Ability.SUPERSONIC_SKYSTRIKE]: new SupersonicSkystrikeStrategy(),
   [Ability.SURF]: new SurfStrategy(),
   [Ability.SURGING_STRIKES]: new SurgingStrikesStrategy(),
   [Ability.SWAGGER]: new SwaggerStrategy(),
@@ -1235,8 +1323,10 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TAKE_HEART]: new TakeHeartStrategy(),
   [Ability.TAUNT]: new TauntStrategy(),
   [Ability.TEA_TIME]: new TeaTimeStrategy(),
+  [Ability.TECTONIC_RAGE]: new TectonicRageStrategy(),
   [Ability.TEETER_DANCE]: new TeeterDanceStrategy(),
   [Ability.TELEPORT]: new TeleportStrategy(),
+  [Ability.TERA_BLAST]: new TeraBlastStrategy(),
   [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
   [Ability.THIEF]: new ThiefStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),
@@ -1263,6 +1353,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TROP_KICK]: new TropKickStrategy(),
   [Ability.TWIN_BEAM]: new TwinBeamStrategy(),
   [Ability.TWINEEDLE]: new TwineedleStrategy(),
+  [Ability.TWINKLE_TACKLE]: new TwinkleTackleStrategy(),
   [Ability.TWISTER]: new TwisterStrategy(),
   [Ability.U_TURN]: new UTurnStrategy(),
   [Ability.ULTRA_THRUSTERS]: new UltraThrustersStrategy(),

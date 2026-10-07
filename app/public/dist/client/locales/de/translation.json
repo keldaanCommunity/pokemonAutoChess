@@ -2063,7 +2063,7 @@
 		"CRUSH_GRIP": "Das Ziel wird mit großer Kraft zerquetscht. Je mehr HP das Ziel noch hat, desto größer ist der Schaden: zwischen [15,25,50,100,SP] und [65,125,250,500,SP] SPECIAL.",
 		"AURASPHERE": "Verströmt eine Aura und projiziert Energie in einer Linie, die jedem getroffenen Gegner 3 Sekunden lang [25,50,100,200,SP] SPECIAL und SILENCE zufügt",
 		"SKETCH": "Kopiert die Fähigkeit, die maximalen PP und den STAR des Verbündeten zu seiner Linken zu Beginn des Kampfes",
-		"OVERDRIVE": "Verursacht [120,120,150,300,SP]% der ATK als SPECIAL in einem Radius von 3 Zellen, indem er eine E-Gitarre zupft und ein großes Echo und starke Vibrationen verursacht. Der Schaden wird mit der Entfernung reduziert, 20% pro Zelle.",
+		"OVERDRIVE": "Verursacht [120,120,150,300,SP]% der ATK als SPECIAL in einem Radius von 3 Zellen, indem er eine E-Gitarre zupft und ein großes Echo und starke Vibrationen verursacht. 20% DAMAGE_REDUCTION_OVER_DISTANCE.",
 		"LOVELY_KISS": "Küsst den Feind mit einem furchterregenden Ausdruck. Versetzt den Feind für [2,4,6,12,SP] Sekunden in den SLEEP. Wenn Sie bereits schlafen, geben Sie stattdessen [50,100,150,300,SP] SPECIAL.",
 		"TRANSFORM": "Übernimmt das Aussehen und die Statistiken seines Ziels (außer HP)",
 		"PSYCHIC_FANGS": "Fügt [20,40,80,160,SP] SPECIAL zu und entfernt alle ATK-, DEF- und SPE_DEF-Buffs des Ziels",

@@ -7,6 +7,7 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
+import { ZMOVE_MAX_PP } from "../../config/game/items"
 import {
   NB_DISHES_PER_GOURMET_SYNERGY,
   NB_HATS_PER_GOURMET_SYNERGY
@@ -16,7 +17,11 @@ import { CollectionUtils } from "../../core/collection"
 import { OnSpotlightChangeEffect } from "../../core/effects/effect"
 import { equipItem, unequipItem } from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
-import { carryOverPermanentStats } from "../../core/evolution-logic/evolution-handler"
+import {
+  carryOverChangedAbilities,
+  carryOverPermanentStats,
+  carryOverTeraShards
+} from "../../core/evolution-logic/evolution-handler"
 import { EvolutionManager } from "../../core/evolution-logic/evolution-manager"
 import { MulchStockCaps } from "../../core/flower-pots"
 import type { PokemonEntity } from "../../core/pokemon-entity"
@@ -27,7 +32,8 @@ import {
   FlowerPots,
   type IPlayer,
   type Role,
-  Title
+  Title,
+  TMPerAbility
 } from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
@@ -54,7 +60,8 @@ import {
   TMsGold,
   TMsSilver,
   Wands,
-  WeatherRocks
+  WeatherRocks,
+  type ZCrystal
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -70,12 +77,13 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
 import { Weather } from "../../types/enum/Weather"
+import { ZMoves, ZMovesByCrystal } from "../../types/enum/ZMoves"
 import {
   type GameStats,
   initialGameStats
 } from "../../types/interfaces/GameStats"
 import type { IPokemonCollectionItemForPlayer } from "../../types/interfaces/UserMetadata"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getPokemonCustomFromAvatar } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -342,6 +350,8 @@ export default class Player extends Schema implements IPlayer {
   transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
     carryOverPermanentStats(newPokemon, [pokemon])
+    carryOverChangedAbilities(newPokemon, [pokemon], this)
+    carryOverTeraShards(newPokemon, [pokemon])
     newPokemon.dishes = pokemon.dishes
     newPokemon.positionX = pokemon.positionX
     newPokemon.positionY = pokemon.positionY
@@ -518,7 +528,7 @@ export default class Player extends Schema implements IPlayer {
         }
 
         // if not found check player item bench
-        removeInArray<Item>(this.items, item)
+        removeFromArray<Item>(this.items, item)
       }
 
       lostArtificialItems.forEach(removeArtificialItem)
@@ -569,7 +579,7 @@ export default class Player extends Schema implements IPlayer {
     } else if (newScarves.length < previousScarves.length) {
       // some scarves are lost
       const lostScarves = [...previousScarves]
-      newScarves.forEach((s) => removeInArray(lostScarves, s))
+      newScarves.forEach((s) => removeFromArray(lostScarves, s))
       const removeScarf = (item: ScarfItem) => {
         // first check held items
         const pokemons = schemaValues(this.board)
@@ -585,7 +595,7 @@ export default class Player extends Schema implements IPlayer {
         }
 
         // if not found check player item bench
-        removeInArray<Item>(this.items, item)
+        removeFromArray<Item>(this.items, item)
       }
 
       lostScarves.forEach(removeScarf)
@@ -627,7 +637,7 @@ export default class Player extends Schema implements IPlayer {
       // some TMs are lost, we need to remove them from the inventory and from the pokemons that hold them
       const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
       lostTMs.forEach((tm) => {
-        removeInArray(this.items, tm)
+        removeFromArray(this.items, tm)
         const pokemonWithThisTm = schemaValues(this.board).find(
           (p) => p.tm === AbilityPerTM[tm]
         )
@@ -644,11 +654,11 @@ export default class Player extends Schema implements IPlayer {
     const fishingLevel = getSynergyTier(this.synergies, Synergy.WATER)
 
     if (this.items.includes(Item.OLD_ROD) && fishingLevel !== 1)
-      removeInArray<Item>(this.items, Item.OLD_ROD)
+      removeFromArray<Item>(this.items, Item.OLD_ROD)
     if (this.items.includes(Item.GOOD_ROD) && fishingLevel !== 2)
-      removeInArray<Item>(this.items, Item.GOOD_ROD)
+      removeFromArray<Item>(this.items, Item.GOOD_ROD)
     if (this.items.includes(Item.SUPER_ROD) && fishingLevel !== 3)
-      removeInArray<Item>(this.items, Item.SUPER_ROD)
+      removeFromArray<Item>(this.items, Item.SUPER_ROD)
 
     if (this.items.includes(Item.OLD_ROD) === false && fishingLevel === 1)
       this.items.push(Item.OLD_ROD)
@@ -674,7 +684,7 @@ export default class Player extends Schema implements IPlayer {
         currentNbHats++
       } else if (newNbHats < currentNbHats) {
         if (this.items.includes(Item.CHEF_HAT)) {
-          removeInArray<Item>(this.items, Item.CHEF_HAT)
+          removeFromArray<Item>(this.items, Item.CHEF_HAT)
           currentNbHats--
         } else {
           const chef = hatHolders.at(-1)!
@@ -687,7 +697,7 @@ export default class Player extends Schema implements IPlayer {
                 isIn(DishesGoingToInventory, dishToRemove) &&
                 this.items.includes(dishToRemove)
               ) {
-                removeInArray(this.items, dishToRemove)
+                removeFromArray(this.items, dishToRemove)
               } else if (chef.cook!.fedPokemonsId[i]) {
                 const pokemonEating = this.board.get(
                   chef.cook!.fedPokemonsId[1]
@@ -720,7 +730,7 @@ export default class Player extends Schema implements IPlayer {
               isIn(DishesGoingToInventory, dishToRemove) &&
               this.items.includes(dishToRemove)
             ) {
-              removeInArray(this.items, dishToRemove)
+              removeFromArray(this.items, dishToRemove)
             } else if (chef.cook.fedPokemonsId.length === 2) {
               const pokemonEating = this.board.get(chef.cook.fedPokemonsId[1])
               if (pokemonEating) {
@@ -810,7 +820,7 @@ export default class Player extends Schema implements IPlayer {
       // some wands are lost, we need to remove them from the inventory
       const lostWands = this.fairyWands.slice(newNbWands, currentNbWands)
       lostWands.forEach((wand) => {
-        removeInArray(this.items, wand)
+        removeFromArray(this.items, wand)
       })
     }
   }
@@ -1044,11 +1054,11 @@ export default class Player extends Schema implements IPlayer {
     if (this.specialGameRule === SpecialGameRule.FAMILY_OUTING) return new Set() // in family outing mode, do not remove finished lines from shop
     const finals = new Set(
       schemaValues(this.board)
-        .filter((pokemon) => pokemon.final)
+        .filter((pokemon) => EvolutionManager.isFinal(pokemon))
         .map((pokemon) => getPokemonBaseline(pokemon.name))
     )
     this.pokemonsTrainingInDojo.forEach((pokemonInDojo) => {
-      if (pokemonInDojo.pokemon.final) {
+      if (EvolutionManager.isFinal(pokemonInDojo.pokemon)) {
         finals.add(getPokemonBaseline(pokemonInDojo.pokemon.name))
       }
     })
@@ -1061,7 +1071,7 @@ export default class Player extends Schema implements IPlayer {
   }
 
   completeMissionOrder(missionOrder: MissionOrder) {
-    removeInArray<Item>(this.items, missionOrder)
+    removeFromArray<Item>(this.items, missionOrder)
     this.spawnWanderingPokemon({
       shiny: false,
       pkm: Pkm.CHATOT,
@@ -1175,6 +1185,21 @@ export default class Player extends Schema implements IPlayer {
       this.wanderers.set(id, wanderer)
     }, delay)
     return wanderer
+  }
+
+  pickZMove(crystal: ZCrystal) {
+    const zMove = ZMovesByCrystal[crystal]
+    if (!zMove) return null
+    const pokemonWithZRing = schemaValues(this.board).find(
+      (p) => p.items.has(Item.Z_RING) && !isIn(ZMoves, p.skill)
+    )
+    if (pokemonWithZRing) {
+      if (pokemonWithZRing.tm !== Ability.DEFAULT) {
+        this.items.push(TMPerAbility[pokemonWithZRing.tm])
+      }
+      pokemonWithZRing.skill = zMove
+      pokemonWithZRing.maxPP = ZMOVE_MAX_PP
+    }
   }
 }
 

@@ -11,6 +11,7 @@ export type PlayerChoiceType =
   | "mission_order"
   | "wand"
   | "gifts"
+  | "zmoves"
   | "form_change"
 
 export class PlayerChoice extends Schema {

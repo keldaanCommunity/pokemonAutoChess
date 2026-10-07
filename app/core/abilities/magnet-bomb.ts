@@ -97,7 +97,7 @@ export class MagnetBombStrategy extends AbilityStrategy {
     mappingAttractCell.forEach((cell) => {
       const attractedEnemies = cell.from
         .map(([x, y]) => board.getEntityOnCell(x, y))
-        .filter((enemy) => enemy && enemy.team === target.team)
+        .filter((enemy) => enemy && enemy.team === target.team && enemy.canBeMoved)
       const [destX, destY] = cell.to
       if (
         attractedEnemies.length > 0 &&

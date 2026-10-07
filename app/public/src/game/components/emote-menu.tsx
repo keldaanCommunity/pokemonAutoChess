@@ -2,6 +2,7 @@ import { GameObjects } from "phaser"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { getBaseAltForm } from "../../../../config"
+import { EvolutionManager } from "../../../../core/evolution-logic/evolution-manager"
 import { getUnitScore } from "../../../../core/unit-score"
 import { getAvailableEmotions } from "../../../../models/precomputed/precomputed-emotions"
 import type { IPlayer } from "../../../../types"
@@ -36,7 +37,7 @@ export function EmoteMenuComponent(props: {
   )
 
   const pkmEmotes = schemaValues(props.player.board)
-    .filter((p) => !p.final)
+    .filter((p) => !EvolutionManager.isFinal(p))
     .sort((a, b) => getUnitScore(b) - getUnitScore(a))
     .map((p) => getBaseAltForm(p.name))
     .slice(0, 8)

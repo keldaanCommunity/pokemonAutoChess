@@ -1,15 +1,20 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import { SynergyGivenByItem, TMPerAbility } from "../../types"
 import type {
   DivergentEvolution,
   EvolutionRule
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
+import { SynergyItems } from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
-import { sum } from "../../utils/array"
+import { ZMoves } from "../../types/enum/ZMoves"
+import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
+import { schemaValues } from "../../utils/schemas"
 
 export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
   abstract canEvolve(
@@ -72,12 +77,28 @@ export function carryOverPermanentStats(
     }
     pokemonEvolved.applyStat(statMapping[stat], sumOfPermaStatsModifier) // can be negative or positive
   }
+}
 
-  // carry over TM
+export function carryOverChangedAbilities(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[],
+  player: Player
+) {
+  // carry over TM and Z-Moves
   const existingTms = pokemonsBeforeEvolution
     .map((p) => p.tm)
     .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
-  if (existingTms.length > 0) {
+  const existingZMoves = pokemonsBeforeEvolution
+    .map((p) => p.skill)
+    .filter((skill) => isIn(ZMoves, skill))
+  if (existingZMoves.length > 0) {
+    pokemonEvolved.skill = pickRandomIn(existingZMoves)
+    if (existingTms.length > 0) {
+      // give back TM if taking the Z-Move
+      pokemonEvolved.tm = Ability.DEFAULT
+      player.items.push(...existingTms.map((tm) => TMPerAbility[tm]))
+    }
+  } else if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     if (pokemonEvolved.tm === Ability.SKILL_SWAP) {
       // keep the ability learnt with skill swap if there is one
@@ -88,5 +109,27 @@ export function carryOverPermanentStats(
       pokemonEvolved.skill = pokemonEvolved.tm
     }
     pokemonEvolved.maxPP = 100
+  }
+}
+
+export function carryOverTeraShards(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[]
+) {
+  const baseTypes = getPokemonData(pokemonEvolved.name).types
+  const typesGivenByItems = pokemonsBeforeEvolution.map((p) =>
+    schemaValues(p.items)
+      .filter((item) => isIn(SynergyItems, item))
+      .map((item) => SynergyGivenByItem[item])
+  )
+  const teraTypes = pokemonsBeforeEvolution
+    .map((p, i) =>
+      schemaValues(p.types).filter(
+        (type) => !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
+      )
+    )
+    .flat()
+  for (const type of teraTypes.flat()) {
+    pokemonEvolved.types.add(type)
   }
 }

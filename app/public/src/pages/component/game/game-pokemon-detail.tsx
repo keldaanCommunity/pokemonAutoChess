@@ -22,6 +22,8 @@ import {
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { ZMoves } from "../../../../../types/enum/ZMoves"
+import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
@@ -219,6 +221,7 @@ export function GamePokemonDetail(props: {
         src={icon}
         className="game-pokemon-detail-ability-icon"
         alt={t("tm")}
+        title={t("wiki.abilities.learned_ability_description")}
       />
     )
   }, [pokemon?.tm, pokemon?.skill])
@@ -235,6 +238,18 @@ export function GamePokemonDetail(props: {
       />
     ) : null
   }, [pokemon?.tm, pokemon?.skill])
+
+  const zmoveIcon = useMemo(() => {
+    if (!pokemon) return null
+    return isIn(ZMoves, pokemon.skill) ? (
+      <img
+        src="assets/item/Z_RING.png"
+        className="game-pokemon-detail-ability-icon"
+        alt={t("wiki.abilities.zmove")}
+        title={t("wiki.abilities.zmove_description")}
+      />
+    ) : null
+  }, [pokemon?.skill])
 
   if (!pokemon) {
     return null
@@ -385,6 +400,7 @@ export function GamePokemonDetail(props: {
           <div className="ability-name">
             <span>{t(`ability.${pokemon.skill}`)}</span>
             {tmIcon}
+            {zmoveIcon}
             {inimitableIcon}
           </div>
           <div>

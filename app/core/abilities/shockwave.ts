@@ -14,6 +14,7 @@ export class ShockwaveStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const damage = [30, 60, 120, 240][pokemon.stars - 1] ?? 240
     const range = 2 + (pokemon.status.electricField ? 1 : 0)
+    const damageReductionPerTile = 0.2
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, range, false)
       .forEach((cell) => {
@@ -23,8 +24,8 @@ export class ShockwaveStrategy extends AbilityStrategy {
             pokemon.positionY,
             cell.x,
             cell.y
-          )
-          const damageMultiplier = 1 - 0.2 * distance
+          ) - 1
+          const damageMultiplier = 1 - damageReductionPerTile * distance
           cell.value.handleSpecialDamage(
             Math.round(damage * damageMultiplier),
             board,

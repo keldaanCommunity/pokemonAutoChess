@@ -146,10 +146,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     },
     getRewardsPropositions(_player: Player, shinyEncounter: boolean) {
       if (shinyEncounter) {
-        return pickNRandomIn(
-          ShinyItems.filter((o) => o !== Item.RED_SCALE),
-          3
-        )
+        return pickNRandomIn(ShinyItems, 3)
       } else {
         return pickNRandomIn(
           [...ItemComponentsNoFossilOrScarf, Item.FOSSIL_STONE],

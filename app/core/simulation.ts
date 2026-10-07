@@ -41,7 +41,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
-import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
+import { count, deduplicateArray, isIn, removeFromArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
@@ -65,6 +65,7 @@ import {
   FightingKnockbackEffect,
   FireHitEffect,
   FlyingProtectionEffect,
+  FossilPowerEffect,
   fightingTrainingEffect,
   GroundHoleEffect,
   humanHealEffect,
@@ -605,7 +606,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (randomSpawn) {
               spawns.push(randomSpawn)
             } else {
-              logger.info("no pokemon found for white flute call", rarity, tier)
+              logger.info("no pokemon found for gold mask", rarity, tier)
             }
           }
 
@@ -794,6 +795,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FORGOTTEN_POWER:
         if (pokemon.hasSynergy(Synergy.FOSSIL)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FossilPowerEffect(effect))
         }
         break
 
@@ -1556,7 +1558,7 @@ export default class Simulation extends Schema implements ISimulation {
           player.addMoney(moneyGain, true, null)
           client?.send(Transfer.PLAYER_INCOME, moneyGain)
           if (hasLeadersCrest && opponentPlayer) {
-            removeInArray(opponentPlayer.items, Item.LEADERS_CREST)
+            removeFromArray(opponentPlayer.items, Item.LEADERS_CREST)
             player.items.push(Item.LEADERS_CREST)
           }
         }

@@ -6,6 +6,7 @@ import {
   BuriedTrash,
   BuriedTreasures,
   Dishes,
+  DubiousGadgets,
   FishingRods,
   Gifts,
   Item,
@@ -17,6 +18,7 @@ import {
   SpecialItems,
   SynergyGems,
   SynergyGemsBuried,
+  TeraShards,
   TMsBronze,
   TMsGold,
   TMsSilver,
@@ -246,6 +248,12 @@ export default function WikiItems() {
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
           />
         </ul>
+        <p>
+          {addIconsToDescription(t("wiki.items.dubious_gadgets_description"))}
+        </p>
+        <ul>
+          <ItemList items={DubiousGadgets} />
+        </ul>
 
         <h3>
           <SynergyIcon type={Synergy.GROUND} /> {t("wiki.items.buried_items")}
@@ -365,6 +373,14 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
         <ul>
           <ItemList items={[Item.FIRE_SHARD]} />
+        </ul>
+
+        <h3>
+          <SynergyIcon type={Synergy.STELLAR} /> {t("wiki.items.tera_shards")}
+        </h3>
+        <p>{addIconsToDescription(t("wiki.items.tera_shards_description"))}</p>
+        <ul>
+          <ItemList items={TeraShards} />
         </ul>
       </article>
 

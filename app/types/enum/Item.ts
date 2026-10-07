@@ -165,7 +165,38 @@ export enum Item {
   WILD_GEM = "WILD_GEM",
   AMORPHOUS_GEM = "AMORPHOUS_GEM",
   GOURMET_GEM = "GOURMET_GEM",
+  NORMAL_SHARD = "NORMAL_SHARD",
   FIRE_SHARD = "FIRE_SHARD",
+  WATER_SHARD = "WATER_SHARD",
+  GRASS_SHARD = "GRASS_SHARD",
+  ELECTRIC_SHARD = "ELECTRIC_SHARD",
+  ICE_SHARD = "ICE_SHARD",
+  FIGHTING_SHARD = "FIGHTING_SHARD",
+  POISON_SHARD = "POISON_SHARD",
+  GROUND_SHARD = "GROUND_SHARD",
+  FLYING_SHARD = "FLYING_SHARD",
+  PSYCHIC_SHARD = "PSYCHIC_SHARD",
+  BUG_SHARD = "BUG_SHARD",
+  ROCK_SHARD = "ROCK_SHARD",
+  GHOST_SHARD = "GHOST_SHARD",
+  DRAGON_SHARD = "DRAGON_SHARD",
+  DARK_SHARD = "DARK_SHARD",
+  STEEL_SHARD = "STEEL_SHARD",
+  FAIRY_SHARD = "FAIRY_SHARD",
+  FIELD_SHARD = "FIELD_SHARD",
+  MONSTER_SHARD = "MONSTER_SHARD",
+  HUMAN_SHARD = "HUMAN_SHARD",
+  AQUATIC_SHARD = "AQUATIC_SHARD",
+  FLORA_SHARD = "FLORA_SHARD",
+  WILD_SHARD = "WILD_SHARD",
+  AMORPHOUS_SHARD = "AMORPHOUS_SHARD",
+  ARTIFICIAL_SHARD = "ARTIFICIAL_SHARD",
+  LIGHT_SHARD = "LIGHT_SHARD",
+  GOURMET_SHARD = "GOURMET_SHARD",
+  BABY_SHARD = "BABY_SHARD",
+  FOSSIL_SHARD = "FOSSIL_SHARD",
+  SOUND_SHARD = "SOUND_SHARD",
+  STELLAR_SHARD = "STELLAR_SHARD",
   TEAL_MASK = "TEAL_MASK",
   WELLSPRING_MASK = "WELLSPRING_MASK",
   CORNERSTONE_MASK = "CORNERSTONE_MASK",
@@ -336,6 +367,39 @@ export enum Item {
   TERRA_CYMBAL = "TERRA_CYMBAL",
   SOOTHE_BELL = "SOOTHE_BELL",
   BALL = "BALL",
+  Z_RING = "Z_RING",
+  ALUMINIUM_Z = "ALUMINIUM_Z",
+  ANTHROPIUM_Z = "ANTHROPIUM_Z",
+  AQUARIUM_Z = "AQUARIUM_Z",
+  BUGINIUM_Z = "BUGINIUM_Z",
+  COLOSSIUM_Z = "COLOSSIUM_Z",
+  CONCERTIUM_Z = "CONCERTIUM_Z",
+  DARKIUM_Z = "DARKIUM_Z",
+  DELICIUM_Z = "DELICIUM_Z",
+  DIAPERIUM_Z = "DIAPERIUM_Z",
+  DRAGONIUM_Z = "DRAGONIUM_Z",
+  ELECTRIUM_Z = "ELECTRIUM_Z",
+  FAIRIUM_Z = "FAIRIUM_Z",
+  FERALIUM_Z = "FERALIUM_Z",
+  FIELDIUM_Z = "FIELDIUM_Z",
+  FIGHTIUM_Z = "FIGHTIUM_Z",
+  FIRIUM_Z = "FIRIUM_Z",
+  FLYNIUM_Z = "FLYNIUM_Z",
+  GHOSTIUM_Z = "GHOSTIUM_Z",
+  GRASSIUM_Z = "GRASSIUM_Z",
+  GROUNDIUM_Z = "GROUNDIUM_Z",
+  ICIUM_Z = "ICIUM_Z",
+  NORMALIUM_Z = "NORMALIUM_Z",
+  PETALIUM_Z = "PETALIUM_Z",
+  PETROLIUM_Z = "PETROLIUM_Z",
+  PHOTONIUM_Z = "PHOTONIUM_Z",
+  POISONIUM_Z = "POISONIUM_Z",
+  PSYCHIUM_Z = "PSYCHIUM_Z",
+  ROCKIUM_Z = "ROCKIUM_Z",
+  SLIMIUM_Z = "SLIMIUM_Z",
+  STEELIUM_Z = "STEELIUM_Z",
+  STELLARIUM_Z = "STELLARIUM_Z",
+  WATERIUM_Z = "WATERIUM_Z",
   BERRIES_GIFT = "BERRIES_GIFT",
   SWEETS_GIFT = "SWEETS_GIFT",
   DITTO_GIFT = "DITTO_GIFT",
@@ -363,7 +427,14 @@ export enum Item {
   PURPLE_NECTAR = "PURPLE_NECTAR",
   RED_NECTAR = "RED_NECTAR",
   PINK_NECTAR = "PINK_NECTAR",
-  YELLOW_NECTAR = "YELLOW_NECTAR"
+  YELLOW_NECTAR = "YELLOW_NECTAR",
+  DIRE_HIT = "DIRE_HIT",
+  DUBIOUS_DISC = "DUBIOUS_DISC",
+  EJECT_BUTTON = "EJECT_BUTTON",
+  GRIP_CLAW = "GRIP_CLAW",
+  LUCKY_PUNCH = "LUCKY_PUNCH",
+  PROGRESS_DEVICE = "PROGRESS_DEVICE",
+  UTILITY_UMBRELLA = "UTILITY_UMBRELLA"
 }
 
 export const MemoryDiscs = [
@@ -606,6 +677,82 @@ export const Berries = [...NonSpecialBerries, ...SpecialBerries]
 
 export type Berry = (typeof Berries)[number]
 
+export const TeraShards = [
+  Item.NORMAL_SHARD,
+  Item.FIRE_SHARD,
+  Item.WATER_SHARD,
+  Item.GRASS_SHARD,
+  Item.ELECTRIC_SHARD,
+  Item.ICE_SHARD,
+  Item.FIGHTING_SHARD,
+  Item.POISON_SHARD,
+  Item.GROUND_SHARD,
+  Item.FLYING_SHARD,
+  Item.PSYCHIC_SHARD,
+  Item.BUG_SHARD,
+  Item.ROCK_SHARD,
+  Item.GHOST_SHARD,
+  Item.DRAGON_SHARD,
+  Item.DARK_SHARD,
+  Item.STEEL_SHARD,
+  Item.FAIRY_SHARD,
+  Item.FIELD_SHARD,
+  Item.MONSTER_SHARD,
+  Item.HUMAN_SHARD,
+  Item.AQUATIC_SHARD,
+  Item.FLORA_SHARD,
+  Item.WILD_SHARD,
+  Item.AMORPHOUS_SHARD,
+  Item.ARTIFICIAL_SHARD,
+  Item.LIGHT_SHARD,
+  Item.GOURMET_SHARD,
+  Item.BABY_SHARD,
+  Item.FOSSIL_SHARD,
+  Item.SOUND_SHARD,
+  Item.STELLAR_SHARD
+]
+
+export type TeraShard = (typeof TeraShards)[number]
+
+export const TeraShardsBySynergy: { [key in Synergy]: TeraShard } = {
+  [Synergy.NORMAL]: Item.NORMAL_SHARD,
+  [Synergy.FIRE]: Item.FIRE_SHARD,
+  [Synergy.WATER]: Item.WATER_SHARD,
+  [Synergy.GRASS]: Item.GRASS_SHARD,
+  [Synergy.ELECTRIC]: Item.ELECTRIC_SHARD,
+  [Synergy.ICE]: Item.ICE_SHARD,
+  [Synergy.FIGHTING]: Item.FIGHTING_SHARD,
+  [Synergy.POISON]: Item.POISON_SHARD,
+  [Synergy.GROUND]: Item.GROUND_SHARD,
+  [Synergy.FLYING]: Item.FLYING_SHARD,
+  [Synergy.PSYCHIC]: Item.PSYCHIC_SHARD,
+  [Synergy.BUG]: Item.BUG_SHARD,
+  [Synergy.ROCK]: Item.ROCK_SHARD,
+  [Synergy.GHOST]: Item.GHOST_SHARD,
+  [Synergy.DRAGON]: Item.DRAGON_SHARD,
+  [Synergy.DARK]: Item.DARK_SHARD,
+  [Synergy.STEEL]: Item.STEEL_SHARD,
+  [Synergy.FAIRY]: Item.FAIRY_SHARD,
+  [Synergy.FIELD]: Item.FIELD_SHARD,
+  [Synergy.MONSTER]: Item.MONSTER_SHARD,
+  [Synergy.HUMAN]: Item.HUMAN_SHARD,
+  [Synergy.AQUATIC]: Item.AQUATIC_SHARD,
+  [Synergy.FLORA]: Item.FLORA_SHARD,
+  [Synergy.WILD]: Item.WILD_SHARD,
+  [Synergy.AMORPHOUS]: Item.AMORPHOUS_SHARD,
+  [Synergy.ARTIFICIAL]: Item.ARTIFICIAL_SHARD,
+  [Synergy.LIGHT]: Item.LIGHT_SHARD,
+  [Synergy.GOURMET]: Item.GOURMET_SHARD,
+  [Synergy.BABY]: Item.BABY_SHARD,
+  [Synergy.FOSSIL]: Item.FOSSIL_SHARD,
+  [Synergy.SOUND]: Item.SOUND_SHARD,
+  [Synergy.STELLAR]: Item.STELLAR_SHARD
+}
+
+export const SynergyByTeraShards: Map<TeraShard, Synergy> = reverseMap(
+  objToMap(TeraShardsBySynergy)
+)
+
 export const Tools = [
   Item.LIGHT_BALL,
   Item.PROTECTOR,
@@ -646,6 +793,16 @@ export const ArtificialItems = [
   Item.TERRAIN_EXTENDER
 ] satisfies Tool[]
 
+export const DubiousGadgets = [
+  Item.DIRE_HIT,
+  Item.DUBIOUS_DISC,
+  Item.EJECT_BUTTON,
+  Item.GRIP_CLAW,
+  Item.LUCKY_PUNCH,
+  Item.PROGRESS_DEVICE,
+  Item.UTILITY_UMBRELLA
+] satisfies Item[]
+
 export const ShinyItems = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
@@ -659,7 +816,7 @@ export const ShinyItems = [
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
   Item.TERA_ORB,
-  Item.RED_SCALE
+  Item.Z_RING
 ] satisfies Item[]
 
 export type ShinyItem = (typeof ShinyItems)[number]
@@ -999,6 +1156,80 @@ export const TMPerAbility: Map<Ability, Item> = reverseMap(
   objToMap(AbilityPerTM as Record<Item, Ability>)
 )
 
+export const ZCrystals = [
+  Item.ALUMINIUM_Z,
+  Item.ANTHROPIUM_Z,
+  Item.AQUARIUM_Z,
+  Item.BUGINIUM_Z,
+  Item.COLOSSIUM_Z,
+  Item.CONCERTIUM_Z,
+  Item.DARKIUM_Z,
+  Item.DELICIUM_Z,
+  Item.DIAPERIUM_Z,
+  Item.DRAGONIUM_Z,
+  Item.ELECTRIUM_Z,
+  Item.FAIRIUM_Z,
+  Item.FERALIUM_Z,
+  Item.FIELDIUM_Z,
+  Item.FIGHTIUM_Z,
+  Item.FIRIUM_Z,
+  Item.FLYNIUM_Z,
+  Item.GHOSTIUM_Z,
+  Item.GRASSIUM_Z,
+  Item.GROUNDIUM_Z,
+  Item.ICIUM_Z,
+  Item.NORMALIUM_Z,
+  Item.PETALIUM_Z,
+  Item.PETROLIUM_Z,
+  Item.PHOTONIUM_Z,
+  Item.POISONIUM_Z,
+  Item.PSYCHIUM_Z,
+  Item.ROCKIUM_Z,
+  Item.SLIMIUM_Z,
+  Item.STEELIUM_Z,
+  Item.STELLARIUM_Z,
+  Item.WATERIUM_Z
+] satisfies Item[]
+
+export type ZCrystal = (typeof ZCrystals)[number]
+
+export const ZCrystalsBySynergy: {
+  [s in Synergy]: ZCrystal
+} = {
+  [Synergy.NORMAL]: Item.NORMALIUM_Z,
+  [Synergy.GRASS]: Item.GRASSIUM_Z,
+  [Synergy.FIRE]: Item.FIRIUM_Z,
+  [Synergy.WATER]: Item.WATERIUM_Z,
+  [Synergy.ELECTRIC]: Item.ELECTRIUM_Z,
+  [Synergy.FIGHTING]: Item.FIGHTIUM_Z,
+  [Synergy.PSYCHIC]: Item.PSYCHIUM_Z,
+  [Synergy.DARK]: Item.DARKIUM_Z,
+  [Synergy.STEEL]: Item.STEELIUM_Z,
+  [Synergy.GROUND]: Item.GROUNDIUM_Z,
+  [Synergy.POISON]: Item.POISONIUM_Z,
+  [Synergy.DRAGON]: Item.DRAGONIUM_Z,
+  [Synergy.FIELD]: Item.FIELDIUM_Z,
+  [Synergy.MONSTER]: Item.COLOSSIUM_Z,
+  [Synergy.HUMAN]: Item.ANTHROPIUM_Z,
+  [Synergy.AQUATIC]: Item.AQUARIUM_Z,
+  [Synergy.BUG]: Item.BUGINIUM_Z,
+  [Synergy.FLYING]: Item.FLYNIUM_Z,
+  [Synergy.FLORA]: Item.PETALIUM_Z,
+  [Synergy.ROCK]: Item.ROCKIUM_Z,
+  [Synergy.GHOST]: Item.GHOSTIUM_Z,
+  [Synergy.FAIRY]: Item.FAIRIUM_Z,
+  [Synergy.ICE]: Item.ICIUM_Z,
+  [Synergy.FOSSIL]: Item.PETROLIUM_Z,
+  [Synergy.SOUND]: Item.CONCERTIUM_Z,
+  [Synergy.ARTIFICIAL]: Item.ALUMINIUM_Z,
+  [Synergy.LIGHT]: Item.PHOTONIUM_Z,
+  [Synergy.WILD]: Item.FERALIUM_Z,
+  [Synergy.BABY]: Item.DIAPERIUM_Z,
+  [Synergy.AMORPHOUS]: Item.SLIMIUM_Z,
+  [Synergy.GOURMET]: Item.DELICIUM_Z,
+  [Synergy.STELLAR]: Item.STELLARIUM_Z
+}
+
 export const Dishes = [
   Item.OLIVE_OIL,
   Item.RAGE_CANDY_BAR,
@@ -1179,6 +1410,7 @@ export const UnholdableItems = [
   ...Mulches,
   ...MissionOrders,
   ...SevenTreasures,
+  ...TeraShards,
   ...Gifts,
   Item.METEORITE,
   Item.ROTOM_CATALOG,
@@ -1189,7 +1421,6 @@ export const UnholdableItems = [
   Item.SCROLL_OF_WATERS,
   Item.AUSPICIOUS_ARMOR,
   Item.MALICIOUS_ARMOR,
-  Item.FIRE_SHARD,
   Item.CELL_BATTERY,
   Item.GIMMIGHOUL_COIN,
   Item.EGG_FOR_SELL,
@@ -1213,10 +1444,10 @@ export const ConsumableItems = [
   ...Sweets,
   ...DojoTickets,
   ...Berries,
+  ...TeraShards,
   Item.EXCHANGE_TICKET,
   Item.RECYCLE_TICKET,
   Item.PICNIC_SET,
-  Item.FIRE_SHARD,
   Item.CELL_BATTERY,
   Item.SCROLL_OF_DARKNESS,
   Item.SCROLL_OF_WATERS,
@@ -1248,7 +1479,6 @@ export const SpecialItems: Item[] = [
   Item.NUGGET,
   Item.BIG_NUGGET,
   Item.TRASH,
-  Item.FIRE_SHARD,
   Item.CELL_BATTERY,
   Item.OLD_ROD,
   Item.GOOD_ROD,
@@ -1277,7 +1507,8 @@ export const SpecialItems: Item[] = [
   Item.TATSUGIRI_STRETCHY,
   Item.BALL,
   ...Flavors,
-  ...Nectars
+  ...Nectars,
+  Item.RED_SCALE
 ] satisfies Item[]
 
 export const AbsorbedItems = [

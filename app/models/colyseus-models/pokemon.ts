@@ -62,7 +62,7 @@ import {
 import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import type { Cook } from "../../types/interfaces/cook"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
@@ -139,15 +139,6 @@ export class Pokemon extends Schema implements IPokemon {
     this.baseMaxPP = this.maxPP
     this.baseAtk = this.atk
     this.baseSkill = this.skill
-  }
-
-  get final(): boolean {
-    /* true if should be excluded from shops when obtained */
-    if (this.passive === Passive.CORSOLA || this.passive === Passive.AVALUGG)
-      return false
-    return (
-      !this.hasEvolution || this.evolutionRule.type !== EvolutionRuleType.COUNT
-    )
   }
 
   get canBePlaced(): boolean {
@@ -4973,7 +4964,8 @@ export class Pidgeot extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 2
-  skill = Ability.HURRICANE
+  //skill = Ability.HURRICANE
+  skill = Ability.SUPERSONIC_SKYSTRIKE // TEMP
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     return Object.keys(DungeonPMDO).indexOf(map) % 3 === 0
@@ -5729,7 +5721,7 @@ export class Melmetal extends Pokemon {
     }
   }
   afterSell(player: Player) {
-    removeInArray(player.items, Item.MYSTERY_BOX)
+    removeFromArray(player.items, Item.MYSTERY_BOX)
   }
 }
 
@@ -6728,7 +6720,7 @@ export class Rotom extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6755,7 +6747,7 @@ export class RotomHeat extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6782,7 +6774,7 @@ export class RotomWash extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6809,7 +6801,7 @@ export class RotomFrost extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6836,7 +6828,7 @@ export class RotomFan extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6863,7 +6855,7 @@ export class RotomMow extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -6890,7 +6882,7 @@ export class RotomDrone extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.ROTOM_CATALOG)
+    removeFromArray(player.items, Item.ROTOM_CATALOG)
   }
 }
 
@@ -7259,7 +7251,7 @@ export class Deoxys extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.METEORITE)
+    removeFromArray(player.items, Item.METEORITE)
   }
 }
 
@@ -7286,7 +7278,7 @@ export class DeoxysDefense extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.METEORITE)
+    removeFromArray(player.items, Item.METEORITE)
   }
 }
 
@@ -7313,7 +7305,7 @@ export class DeoxysAttack extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.METEORITE)
+    removeFromArray(player.items, Item.METEORITE)
   }
 }
 
@@ -7340,7 +7332,7 @@ export class DeoxysSpeed extends Pokemon {
     }
   }
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.METEORITE)
+    removeFromArray(player.items, Item.METEORITE)
   }
 }
 
@@ -16347,13 +16339,13 @@ function ogerponOnAcquired(
     }
   })
   if (currentMask && player.items.includes(currentMask)) {
-    removeInArray(player.items, currentMask)
+    removeFromArray(player.items, currentMask)
   }
 }
 
 function ogerponOnSell(player: Player) {
   OgerponMasks.forEach((mask) => {
-    removeInArray(player.items, mask)
+    removeFromArray(player.items, mask)
   })
 }
 
@@ -17583,7 +17575,7 @@ function alcremieOnAcquired(this: IPokemonEntity, player: Player) {
   const flavor = Object.keys(alcremieByFlavor).find(
     (flavor) => alcremieByFlavor[flavor] === this.name
   ) as Item
-  removeInArray(player.items, flavor)
+  removeFromArray(player.items, flavor)
   this.items.delete(flavor)
 }
 
@@ -17909,8 +17901,8 @@ export class Charcadet extends Pokemon {
   skill = Ability.FLAME_CHARGE
   passive = Passive.CHARCADET
   afterSell(player: Player): void {
-    removeInArray(player.items, Item.MALICIOUS_ARMOR)
-    removeInArray(player.items, Item.AUSPICIOUS_ARMOR)
+    removeFromArray(player.items, Item.MALICIOUS_ARMOR)
+    removeFromArray(player.items, Item.AUSPICIOUS_ARMOR)
   }
 }
 
@@ -18201,8 +18193,8 @@ export class UrshifuRapid extends Pokemon {
   range = 1
   skill = Ability.SURGING_STRIKES
   onAcquired(player: Player): void {
-    removeInArray(player.items, Item.SCROLL_OF_WATERS)
-    removeInArray(player.items, Item.SCROLL_OF_DARKNESS)
+    removeFromArray(player.items, Item.SCROLL_OF_WATERS)
+    removeFromArray(player.items, Item.SCROLL_OF_DARKNESS)
     this.items.delete(Item.SCROLL_OF_WATERS)
   }
 }
@@ -18220,8 +18212,8 @@ export class UrshifuSingle extends Pokemon {
   range = 1
   skill = Ability.WICKED_BLOW
   onAcquired(player: Player): void {
-    removeInArray(player.items, Item.SCROLL_OF_WATERS)
-    removeInArray(player.items, Item.SCROLL_OF_DARKNESS)
+    removeFromArray(player.items, Item.SCROLL_OF_WATERS)
+    removeFromArray(player.items, Item.SCROLL_OF_DARKNESS)
     this.items.delete(Item.SCROLL_OF_DARKNESS)
   }
 }

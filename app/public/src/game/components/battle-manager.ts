@@ -408,7 +408,7 @@ export default class BattleManager {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
         } else if (previousValue === true) {
-          pkm.removeRageEffect(pokemon.items.has(Item.BERSERK_GENE))
+          pkm.removeRageEffect()
         }
       }
     }
@@ -891,6 +891,7 @@ export default class BattleManager {
     targetX?: number
     targetY?: number
     delay?: number
+    data?: { [key: string]: any }
   }) {
     if (this.simulation?.id === args.id && args.skill) {
       displayAbility({
@@ -904,7 +905,8 @@ export default class BattleManager {
         targetX: args.targetX ?? -1,
         targetY: args.targetY ?? -1,
         flip: this.flip,
-        delay: args.delay ?? -1
+        delay: args.delay ?? -1,
+        data: args.data ?? {}
       })
     }
   }
@@ -920,7 +922,8 @@ export default class BattleManager {
       positionY: pkmSprite.positionY,
       targetX: pkmSprite.targetX ?? -1,
       targetY: pkmSprite.targetY ?? -1,
-      flip: this.flip
+      flip: this.flip,
+      data: {}
     })
   }
 

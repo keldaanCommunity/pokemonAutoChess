@@ -31,6 +31,7 @@ List of wanderers:
 
 export default class WanderersManager {
   scene: GameScene
+  wandererSpritesById: Map<string, PokemonSprite> = new Map()
 
   constructor(scene: GameScene) {
     this.scene = scene
@@ -51,6 +52,10 @@ export default class WanderersManager {
     } else if (wanderer.type === WandererType.OUTLAW) {
       this.addOutlawWanderer(wanderer)
     }
+  }
+
+  removeWanderer(wanderer: Wanderer) {
+    this.wandererSpritesById.get(wanderer.id)?.destroy()
   }
 
   addWanderingUnown(wanderer: Wanderer) {
@@ -230,12 +235,14 @@ export default class WanderersManager {
         wanderer.type === WandererType.DIALOG ||
         wanderer.type === WandererType.UNOWN_SPELL
           ? 500
-          : 300 + Math.round(Math.random() * 200)
+          : 200 + Math.round(Math.random() * 300)
       duration = 4000
     }
 
     if (wanderer.behavior === WandererBehavior.RUN_THROUGH) {
       endY = 100 + Math.round(Math.random() * 500)
+    } else if (wanderer.type === WandererType.CATCHABLE) {
+      endY = 300 + Math.round(Math.random() * 200)
     }
 
     const sprite =
@@ -322,6 +329,8 @@ export default class WanderersManager {
       })
     }
 
+    this.wandererSpritesById.set(wanderer.id, sprite)
+    sprite.once("destroy", () => this.wandererSpritesById.delete(wanderer.id))
     return sprite
   }
 

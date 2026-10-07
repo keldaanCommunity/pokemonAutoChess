@@ -509,11 +509,12 @@ export class DebugScene extends Phaser.Scene {
         targetX: this.pokemonSprite!.targetX ?? -1,
         targetY: this.pokemonSprite!.targetY ?? -1,
         flip: this.pokemonSprite!.flip,
-        ap: 0
+        ap: 0,
+        data: {}
       })
     }
     showAbilityAnim()
-    this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
+    this.attackAnimInterval = setInterval(showAbilityAnim, 3000)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
