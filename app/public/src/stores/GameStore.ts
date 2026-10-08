@@ -122,6 +122,10 @@ const gameSlice = createSlice({
       )
       // the json-clone flattens the board MapSchema to a plain object
       if (action.payload.board) clone.board = action.payload.board
+      // the json-clone also flattens PokemonCustoms' MapSchema
+      if (action.payload.pokemonCustoms) {
+        clone.pokemonCustoms = action.payload.pokemonCustoms
+      }
 
       const index = state.players.findIndex((p) => p.id === clone.id)
       if (index >= 0) {
