@@ -72,6 +72,7 @@
 - Added new keybindings to cycle between players by rank
 - Added board effects descriptions in Wiki > Statuses
 - Added Gift Shop stage description in Wiki > Stages
+- Wiki now opens at the last tab you were on when you closed it
 
 # Bugfix
 
