@@ -9124,7 +9124,7 @@ export class Paras extends Pokemon {
   speDef = 4
   maxPP = 110
   range = 1
-  skill = Ability.ABSORB
+  skill = Ability.TOXIC_SPORE
   additional = true
 }
 
@@ -9139,7 +9139,7 @@ export class Parasect extends Pokemon {
   speDef = 6
   maxPP = 110
   range = 1
-  skill = Ability.ABSORB
+  skill = Ability.TOXIC_SPORE
   additional = true
 }
 

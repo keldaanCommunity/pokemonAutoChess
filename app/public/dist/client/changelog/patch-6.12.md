@@ -35,6 +35,7 @@
 - Buff Wartortle: DEF/SPE_DEF 3 → 4 ; Buff Blastoise: DEF/SPE_DEF 4 → 6, ATK 20 → 23
 - Rework Nightmare (Ghastly): now applies damage to all enemies suffering from a negative status condition instead of just GHOST curse.
 - Revert Cosmog and Cosmoem buffs from 6.7.5 and 6.8 HP : 100 → 140 ; Cosmoem HP: 200 → 220 ; evolutiion stacks required: 8 → 10 ; this is due to the increase of selling prices of evolved Pokémon.
+- New ability for Paras: Scatters 3 spores around the nearest non POISONED enemy. After 2 seconds, it explodes on nearby ADJACENT enemies dealing [10,20,40,80,SP] SPECIAL, inflicting POISONED for 3s.
 
 
 # Changes to Synergies

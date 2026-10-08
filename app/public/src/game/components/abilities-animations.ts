@@ -764,6 +764,106 @@ const poppingIcon: AbilityAnimationMaker<
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
   })(args)
 
+const toxicSporeAnimation: AbilityAnimation = (args) => {
+  const { scene, positionX, positionY, targetX, targetY, flip, ap } = args
+  const launch = () => {
+    const [startX, startY] = transformEntityCoordinates(
+      positionX,
+      positionY,
+      flip
+    )
+    const [landX, landY] = transformEntityCoordinates(targetX, targetY, flip)
+    const spore = addAbilitySprite(
+      scene,
+      Ability.TOXIC_SPORE,
+      ap,
+      [startX, startY - 18],
+      {
+        scale: 2,
+        depth: DEPTH.ABILITY,
+        destroyOnComplete: false
+      }
+    )
+    if (!spore) return
+
+    spore.anims.stop()
+    spore.setFrame(`${Ability.TOXIC_SPORE}/000.png`)
+
+    scene.tweens.add({
+      targets: spore,
+      x: (startX + landX) / 2,
+      y: Math.min(startY, landY) - 48,
+      duration: 200,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => {
+        scene.tweens.add({
+          targets: spore,
+          x: landX,
+          y: landY,
+          duration: 200,
+          ease: Phaser.Math.Easing.Quadratic.In,
+          onComplete: () => spore.setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+        })
+      }
+    })
+
+    scene.time.delayedCall(400, () => {
+      if (!spore.active) return
+
+      let frame = 0
+      scene.time.addEvent({
+        delay: 300,
+        repeat: 4,
+        callback: () => {
+          if (!spore.active) return
+          frame = 1 - frame
+          spore.setFrame(
+            `${Ability.TOXIC_SPORE}/${String(frame).padStart(3, "0")}.png`
+          )
+        }
+      })
+    })
+
+    scene.time.delayedCall(2000, () => {
+      if (spore.active) spore.destroy()
+
+      for (let i = 0; i < 8; i++) {
+        const angle = randomBetween(0, Math.PI * 2)
+        const delay = randomBetween(0, 120)
+
+        scene.time.delayedCall(delay, () => {
+          const smoke = addAbilitySprite(
+            scene,
+            "SMOKE_PURPLE",
+            ap,
+            [landX, landY],
+            {
+              scale: 2,
+              alpha: 1,
+              depth: DEPTH.ABILITY_GROUND_LEVEL,
+              destroyOnComplete: false
+            }
+          )
+          if (!smoke) return
+
+          scene.tweens.add({
+            targets: smoke,
+            x: landX + Math.cos(angle) * 60,
+            y: landY + Math.sin(angle) * 60,
+            alpha: 0.8,
+            scale: 2,
+            duration: 450,
+            ease: Phaser.Math.Easing.Quadratic.Out,
+            onComplete: () => smoke.destroy()
+          })
+        })
+      }
+    })
+  }
+
+  scene.time.delayedCall(args.delay ?? 0, launch)
+}
+
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
@@ -2141,6 +2241,7 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
+  [Ability.TOXIC_SPORE]: toxicSporeAnimation,
   [Ability.TORCH_SONG]: projectile({ oriented: true, rotation: -Math.PI / 2 }),
   ["CURSE_EFFECT"]: tweenAnimation({
     textureKey: "status",
