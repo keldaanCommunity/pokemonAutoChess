@@ -529,6 +529,7 @@ import { TopsyTurvyStrategy } from "./topsy-turvy"
 import { TorchSongStrategy } from "./torch-song"
 import { TormentStrategy } from "./torment"
 import { ToxicStrategy } from "./toxic"
+import { ToxicSporeStrategy } from "./toxic-spore"
 import { TranseStrategy } from "./transe"
 import { TransformStrategy } from "./transform"
 import { TriAttackStrategy } from "./tri-attack"
@@ -1253,6 +1254,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TORCH_SONG]: new TorchSongStrategy(),
   [Ability.TORMENT]: new TormentStrategy(),
   [Ability.TOXIC]: new ToxicStrategy(),
+  [Ability.TOXIC_SPORE]: new ToxicSporeStrategy(),
   [Ability.TRANSE]: new TranseStrategy(),
   [Ability.TRANSFORM]: new TransformStrategy(),
   [Ability.TRI_ATTACK]: new TriAttackStrategy(),

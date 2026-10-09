@@ -29,6 +29,7 @@ import { Sweets } from "../../../../types/enum/Item"
 import { Pillars, Pkm, PkmIndex } from "../../../../types/enum/Pokemon"
 import { range } from "../../../../utils/array"
 import { distanceE, distanceM } from "../../../../utils/distance"
+import { wait } from "../../../../utils/function"
 import { logger } from "../../../../utils/logger"
 import { angleBetween, max, min } from "../../../../utils/number"
 import {
@@ -634,6 +635,86 @@ const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
 
       scene.tweens.add(tweenConfig)
     }, delay)
+  }
+
+const parabolicProjectile: AbilityAnimationMaker<
+  TweenAnimationMakerOptions & {
+    peakHeight?: number
+    onProjectileLand?: (
+      projectile: GameObjects.Sprite,
+      args: AbilityAnimationArgs
+    ) => void
+  }
+> =
+  (options = {}) =>
+  async (args) => {
+    const { onProjectileLand, ...projectileOptions } = options
+    const { scene, ap, positionX, positionY, targetX, targetY, flip } = args
+    const delay = projectileOptions.delay ?? args.delay ?? 0
+    if (delay) await wait(delay)
+    let [startX, startY] = transformEntityCoordinates(
+      positionX,
+      positionY,
+      flip
+    )
+    startX += projectileOptions.startPositionOffset?.[0] ?? 0
+    startY += projectileOptions.startPositionOffset?.[1] ?? 0
+
+    let [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
+    endX += projectileOptions.endPositionOffset?.[0] ?? 0
+    endY += projectileOptions.endPositionOffset?.[1] ?? 0
+
+    const projectile = addAbilitySprite(
+      scene,
+      projectileOptions.ability ?? args.ability,
+      ap,
+      [startX, startY],
+      {
+        destroyOnComplete: false,
+        ...projectileOptions
+      }
+    )
+    if (!projectile) return null
+
+    const peakHeight = projectileOptions.peakHeight ?? 150
+    scene.tweens.addCounter({
+      from: 0,
+      to: 1,
+      duration: projectileOptions.duration || 1000,
+      ease: projectileOptions.ease || "linear",
+      onUpdate: (tween) => {
+        const t = tween.getValue()! // Progress from 0 to 1
+
+        // Linear interpolation for X
+        projectile.x = startX + (endX - startX) * t
+
+        // Parabolic formula for Y: y = startY + displacement + arc height
+        // The term (4 * peakHeight * t * (1 - t)) creates a perfect parabola peak at t = 0.5
+        const heightOffset = 4 * peakHeight * t * (1 - t)
+        projectile.y =
+          Phaser.Math.Interpolation.Linear([startY, endY], t) - heightOffset
+
+        if (projectileOptions.tweenProps?.rotation) {
+          projectile.rotation = Phaser.Math.Interpolation.Linear(
+            [0, projectileOptions.tweenProps.rotation],
+            t
+          )
+        }
+      },
+      onComplete: () => {
+        if (projectileOptions.destroyOnTweenComplete !== false) {
+          projectile.destroy()
+        }
+        onProjectileLand?.(projectile, args)
+        if (projectileOptions.hitAnim) {
+          if (Array.isArray(projectileOptions.hitAnim)) {
+            projectileOptions.hitAnim.forEach((anim) => anim(args))
+          } else projectileOptions.hitAnim(args)
+        }
+      },
+      ...(projectileOptions.tweenProps ?? {})
+    })
+    return projectile
   }
 
 const projectile: AbilityAnimationMaker<
@@ -2141,6 +2222,69 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
+  [Ability.TOXIC_SPORE]: [
+    parabolicProjectile({
+      duration: 400,
+      peakHeight: 48,
+      startPositionOffset: [0, -18],
+      scale: 2,
+      depth: DEPTH.ABILITY,
+      destroyOnTweenComplete: false,
+      onProjectileLand: (spore, { scene, ability, ap }) => {
+        spore.anims.stop()
+        spore.setFrame(`${ability}/000.png`)
+        spore.setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+
+        let frame = 0
+        scene.time.addEvent({
+          delay: 300,
+          repeat: 4,
+          callback: () => {
+            if (!spore.active) return
+            frame = 1 - frame
+            spore.setFrame(`${ability}/${String(frame).padStart(3, "0")}.png`)
+          }
+        })
+
+        scene.time.delayedCall(1600, () => {
+          if (!spore.active) return
+          const { x, y } = spore
+          spore.destroy()
+
+          for (let i = 0; i < 8; i++) {
+            const angle = randomBetween(0, Math.PI * 2)
+            const delay = randomBetween(0, 120)
+
+            scene.time.delayedCall(delay, () => {
+              const smoke = addAbilitySprite(
+                scene,
+                "SMOKE_PURPLE",
+                ap,
+                [x, y],
+                {
+                  scale: 2,
+                  alpha: 1,
+                  depth: DEPTH.ABILITY_GROUND_LEVEL,
+                  destroyOnComplete: false
+                }
+              )
+              if (!smoke) return
+
+              scene.tweens.add({
+                targets: smoke,
+                x: x + Math.cos(angle) * 60,
+                y: y + Math.sin(angle) * 60,
+                alpha: 0.7,
+                duration: 450,
+                ease: Phaser.Math.Easing.Quadratic.Out,
+                onComplete: () => smoke.destroy()
+              })
+            })
+          }
+        })
+      }
+    })
+  ],
   [Ability.TORCH_SONG]: projectile({ oriented: true, rotation: -Math.PI / 2 }),
   ["CURSE_EFFECT"]: tweenAnimation({
     textureKey: "status",
