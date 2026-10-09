@@ -66,18 +66,26 @@ export default function WikiAbility() {
   )
 
   const filteredAbilities = (Object.keys(Ability) as Ability[])
-    .filter(
-      (a) =>
-        a !== Ability.DEFAULT &&
-        (!searchQuery.trim() ||
-          jsxTextContent(
-            addIconsToDescription(
-              `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
-            )
-          )
-            .toLowerCase()
-            .includes(searchQuery.trim().toLowerCase()))
-    )
+    .filter((a) => {
+      if (a === Ability.DEFAULT) return false
+      const trimmedQuery = searchQuery.trim()
+      if (!trimmedQuery) return true
+
+      const searchableText = jsxTextContent(
+        addIconsToDescription(
+          `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+        )
+      ).toLowerCase()
+
+      // Split query by word separators (spaces, punctuation, etc.)
+      const tokens = trimmedQuery
+        .toLowerCase()
+        .split(/\W+/)
+        .filter((token) => token.length > 0)
+
+      // All tokens must match (AND logic)
+      return tokens.every((token) => searchableText.includes(token))
+    })
     .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
 
   const dynamicRowHeight = useDynamicRowHeight({
