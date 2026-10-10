@@ -1,3 +1,4 @@
+import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { distanceE } from "../../utils/distance"
 import type { Board } from "../board"
@@ -21,6 +22,14 @@ export function rockyPayloadEffect({
 }) {
   const baseDamage = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
   const defFactor = 1
+
+  if (pokemon.effects.has(EffectEnum.ROCKY_PAYLOAD_COOLDOWN)) return
+  pokemon.effects.add(EffectEnum.ROCKY_PAYLOAD_COOLDOWN)
+  pokemon.commands.push(
+    new DelayedCommand(() => {
+      pokemon.effects.delete(EffectEnum.ROCKY_PAYLOAD_COOLDOWN)
+    }, 250)
+  )
 
   const cells = board.getCellsBetween(
     departure[0],
@@ -107,6 +116,7 @@ export class RockyPayloadStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     const flyAwayCell = pokemon.flyAway(board, false)
+    pokemon.effects
     if (flyAwayCell) {
       rockyPayloadEffect({
         pokemon,

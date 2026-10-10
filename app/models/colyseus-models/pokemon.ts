@@ -5501,7 +5501,7 @@ export class Bombirdier extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.DARK, Synergy.ROCK])
   rarity = Rarity.UNIQUE
   stars = 3
-  hp = 200
+  hp = 170
   atk = 18
   speed = 52
   def = 8
