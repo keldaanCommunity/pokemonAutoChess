@@ -58,10 +58,10 @@ export class DreamEaterStrategy extends AbilityStrategy {
           ([3000, 4000, 5000, 6000][pokemon.stars - 1] ?? 6000) *
             (1 + pokemon.ap / 100)
         )
-        target.status.triggerSleep(duration, target)
+        targetThatCanSleep.status.triggerSleep(duration, targetThatCanSleep)
         pokemon.broadcastAbility({
-          targetX: target.positionX,
-          targetY: target.positionY
+          targetX: targetThatCanSleep.positionX,
+          targetY: targetThatCanSleep.positionY
         })
         pokemon.pp = pokemon.maxPP
       }
