@@ -2077,7 +2077,7 @@
 		"TAILWIND": "HP20%以下になると飛び去る",
 		"FEATHER_DANCE": "飛び去った後2秒間のPROTECTを取得",
 		"MAX_AIRSTREAM": "HP50%以下とHP20%以下で2回飛び去る",
-		"SKYDIVE": "着地時にPHYSICAL ATK 150%のダメージを与えるスカイダイブ攻撃を行う。",
+		"SKYDIVE": "着地時にPHYSICAL ATK 200%のダメージを与えるスカイダイブ攻撃を行う。",
 		"BATTLE_ARMOR": "DEFが10増加し、受けるクリティカルダメージ-30%",
 		"MOUTAIN_RESISTANCE": "DEFが25増加し、受けるクリティカルダメージ-50%",
 		"DIAMOND_STORM": "DEFが50増加し、受けるクリティカルダメージ-70%",

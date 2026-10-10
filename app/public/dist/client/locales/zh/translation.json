@@ -2549,7 +2549,7 @@
 		"TAILWIND": "在HP低于20%时会FLY_AWAY一次。",
 		"FEATHER_DANCE": "FLY_AWAY后，获得PROTECT 2秒。",
 		"MAX_AIRSTREAM": "在HP低于50%或20%时会各FLY_AWAY一次。",
-		"SKYDIVE": "改为在FLY_AWAY的终点发动俯冲攻击，落地时对目标造成PHYSICAL，数值相当于150%的ATK。",
+		"SKYDIVE": "改为在FLY_AWAY的终点发动俯冲攻击，落地时对目标造成PHYSICAL，数值相当于200%的ATK。",
 		"COTTONWEED": "获得一个毽子草花盆。",
 		"FLYCATCHER": "获得一个喇叭芽花盆。",
 		"FRAGRANT": "获得一个菊草叶花盆。",
