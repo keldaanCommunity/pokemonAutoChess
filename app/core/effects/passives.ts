@@ -40,6 +40,7 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { castAbility } from "../abilities/cast"
+import { rockyPayloadEffect } from "../abilities/rocky-payload"
 import type { Board, Cell } from "../board"
 import { registerOnEvolutionHook } from "../evolution-logic/evolution-hooks"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
@@ -1911,6 +1912,21 @@ export const PassiveEffects: Partial<
             entity.pp = Math.floor(pokemon.pp / 2)
           }
         }
+      }
+    })
+  ],
+
+  [Passive.BOMBIRDIER]: [
+    new OnMoveEffect(({ pokemon, board, oldX, oldY, newX, newY }) => {
+      if (distanceC(oldX, oldY, newX, newY) > 1) {
+        // dash or fly away
+        rockyPayloadEffect({
+          pokemon,
+          board,
+          departure: [oldX, oldY],
+          destination: [newX, newY],
+          crit: false
+        })
       }
     })
   ]

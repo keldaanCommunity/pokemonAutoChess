@@ -1751,7 +1751,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     orientation = this.orientation,
     targetX = this.targetX,
     targetY = this.targetY,
-    delay
+    delay,
+    data
   }: {
     skill?: Ability | string
     ap?: number
@@ -1761,6 +1762,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     targetX?: number
     targetY?: number
     delay?: number
+    data?: { [key: string]: any }
   } = {}) {
     if (!this.simulation || !this.simulation.room) {
       return
@@ -1774,7 +1776,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       orientation,
       targetX,
       targetY,
-      delay
+      delay,
+      data
     })
   }
 

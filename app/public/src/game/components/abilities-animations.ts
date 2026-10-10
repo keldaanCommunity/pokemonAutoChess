@@ -2285,6 +2285,16 @@ export const AbilitiesAnimations: {
       }
     })
   ],
+  [Ability.ROCKY_PAYLOAD]: [
+    projectile({
+      startCoords: "target",
+      startPositionOffset: [0, -48],
+      scale: 1,
+      duration: 300,
+      tweenProps: { angle: 270 },
+      hitAnim: onTarget({ ability: "PUFF_BROWN", scale: 2 })
+    })
+  ],
   [Ability.TORCH_SONG]: projectile({ oriented: true, rotation: -Math.PI / 2 }),
   ["CURSE_EFFECT"]: tweenAnimation({
     textureKey: "status",

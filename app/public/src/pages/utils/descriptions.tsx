@@ -10,7 +10,10 @@ import {
 } from "../../../../types/enum/Status"
 import { Synergy } from "../../../../types/enum/Synergy"
 import { Weather } from "../../../../types/enum/Weather"
-import { TechnicalTerms, TechnicalTermsWithoutIcons } from "../../../../types/strings/TechnicalTerm"
+import {
+  TechnicalTerms,
+  TechnicalTermsWithoutIcons
+} from "../../../../types/strings/TechnicalTerm"
 import { isIn } from "../../../../utils/array"
 import { max, roundToNDigits } from "../../../../utils/number"
 import { keys } from "../../../../utils/object"
@@ -53,6 +56,7 @@ export function addIconsToDescription(
   const matchIcon = description.match(iconRegExp)
   if (matchIcon === null) return description
   const descriptionParts = description.split(iconRegExp)
+  const capitalize = (str) => str[0].toUpperCase() + str.substring(1)
   return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
     let icon: ReactElement | null = null
@@ -162,14 +166,16 @@ export function addIconsToDescription(
       } else if (isIn(TechnicalTerms, token)) {
         icon = (
           <span
-            className={cc("description-icon", "technical-term", {
-              capitalized: isAtStartOfSentence
-            })}
+            className="description-icon technical-term"
             title={t(`technical_terms_definitions.${token}`)}
           >
-            {TechnicalTermsWithoutIcons.includes(token) ? null : <img src={`assets/ui/${token.toLowerCase()}.svg`} />}
+            {TechnicalTermsWithoutIcons.includes(token) ? null : (
+              <img src={`assets/ui/${token.toLowerCase()}.svg`} />
+            )}
             <i className="technical-term-label">
-              {t(`technical_terms.${token}`)}
+              {isAtStartOfSentence
+                ? capitalize(t(`technical_terms.${token}`))
+                : t(`technical_terms.${token}`)}
             </i>
           </span>
         )

@@ -5497,6 +5497,21 @@ export class Zeraora extends Pokemon {
   skill = Ability.PLASMA_FIST
 }
 
+export class Bombirdier extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.FLYING, Synergy.DARK, Synergy.ROCK])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 18
+  speed = 52
+  def = 8
+  speDef = 8
+  maxPP = 80
+  range = 1
+  skill = Ability.ROCKY_PAYLOAD
+  passive = Passive.BOMBIRDIER
+}
+
 export class Stantler extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WILD, Synergy.PSYCHIC, Synergy.FIELD])
   rarity = Rarity.UNIQUE
@@ -22102,7 +22117,8 @@ export const PokemonClasses: Record<
   [Pkm.ORICORIO_BAILE]: OricorioBaile,
   [Pkm.ORICORIO_PA_U]: OricorioPaU,
   [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
-  [Pkm.ORICORIO_SENSU]: OricorioSensu
+  [Pkm.ORICORIO_SENSU]: OricorioSensu,
+  [Pkm.BOMBIRDIER]: Bombirdier
 }
 
 // declare all the classes in colyseus schema TypeRegistry

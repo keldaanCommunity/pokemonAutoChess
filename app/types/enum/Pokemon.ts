@@ -117,6 +117,7 @@ export enum Pkm {
   BLISSEY = "BLISSEY",
   BOLDORE = "BOLDORE",
   BOLTUND = "BOLTUND",
+  BOMBIRDIER = "BOMBIRDIER",
   BONSLEY = "BONSLEY",
   BOUNSWEET = "BOUNSWEET",
   BRAIXEN = "BRAIXEN",
@@ -2413,7 +2414,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   [Pkm.TINKATON]: "0959",
   [Pkm.WIGLETT]: "0960",
   [Pkm.WUGTRIO]: "0961",
-  //[Pkm.BOMBIRDIER]: "0962",
+  [Pkm.BOMBIRDIER]: "0962",
   [Pkm.FINIZEN]: "0963",
   [Pkm.PALAFIN]: "0964",
   [Pkm.PALAFIN_HERO]: "0964-0001",
@@ -3688,7 +3689,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ORICORIO_BAILE]: Pkm.ORICORIO_BAILE,
   [Pkm.ORICORIO_PA_U]: Pkm.ORICORIO_BAILE,
   [Pkm.ORICORIO_POMPOM]: Pkm.ORICORIO_BAILE,
-  [Pkm.ORICORIO_SENSU]: Pkm.ORICORIO_BAILE
+  [Pkm.ORICORIO_SENSU]: Pkm.ORICORIO_BAILE,
+  [Pkm.BOMBIRDIER]: Pkm.BOMBIRDIER
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {
