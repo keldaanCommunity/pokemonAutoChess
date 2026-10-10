@@ -19,7 +19,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       const item = schemaValues(target.items)[0]!
       target.removeItem(item)
       pokemon.addItem(item)
-    } else {
+    } else if(pokemon.index === PkmIndex[pokemon.name]) {
       // transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill
       const originalAttack = target.atk
