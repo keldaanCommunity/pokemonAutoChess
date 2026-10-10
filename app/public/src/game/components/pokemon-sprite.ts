@@ -643,6 +643,7 @@ export default class PokemonSprite extends DraggableObject {
       targetY: this.targetY ?? -1,
       flip: this.flip,
       ap: this.pokemon.ap,
+      data: {},
       ...args
     })
   }

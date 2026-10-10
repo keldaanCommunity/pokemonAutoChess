@@ -8129,5 +8129,13 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_MELEE
+  },
+  [Pkm.BOMBIRDIER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLYING_MELEE,
+    hitSprite: HitSprite.ROCK_HIT,
+    shinyUnavailable: true
   }
 }

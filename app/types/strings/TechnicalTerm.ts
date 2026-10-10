@@ -4,8 +4,10 @@ export enum TechnicalTerm {
   BASE = "BASE",
   BOARD_EFFECT = "BOARD_EFFECT",
   CONE = "CONE",
+  DASH = "DASH",
   FLY_AWAY = "FLY_AWAY",
   INIMITABLE = "INIMITABLE",
+  ON_CAST = "ON_CAST",
   ON_HIT = "ON_HIT",
   ON_ATTACK = "ON_ATTACK",
   STRONGEST = "STRONGEST"
