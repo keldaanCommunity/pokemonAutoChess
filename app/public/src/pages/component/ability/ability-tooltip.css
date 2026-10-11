@@ -39,10 +39,6 @@ h2 .description-icon > img {
   cursor: help;
 }
 
-.technical-term.capitalized .technical-term-label::first-letter {
-  text-transform: uppercase;
-}
-
 .ability-description {
   white-space: pre-line;
 }

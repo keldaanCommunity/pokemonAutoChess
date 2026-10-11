@@ -175,7 +175,8 @@ export enum EffectEnum {
   PARTING_SHOT = "PARTING_SHOT",
   NO_PP_GAIN = "NO_PP_GAIN",
   STEELY_SPIRIT_BONUS = "STEELY_SPIRIT_BONUS",
-  RICE = "RICE"
+  RICE = "RICE",
+  ROCKY_PAYLOAD_COOLDOWN = "ROCKY_PAYLOAD_COOLDOWN"
 }
 
 export const BoardEffects = [

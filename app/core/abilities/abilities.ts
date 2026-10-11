@@ -406,6 +406,7 @@ import { RockSlideStrategy } from "./rock-slide"
 import { RockSmashStrategy } from "./rock-smash"
 import { RockTombStrategy } from "./rock-tomb"
 import { RockWreckerStrategy } from "./rock-wrecker"
+import { RockyPayloadStrategy } from "./rocky-payload";
 import { RolloutStrategy } from "./rollout"
 import { RoostStrategy } from "./roost"
 import { SacredSwordCavernStrategy } from "./sacred-sword-cavern"
@@ -1130,6 +1131,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ROCK_SMASH]: new RockSmashStrategy(),
   [Ability.ROCK_TOMB]: new RockTombStrategy(),
   [Ability.ROCK_WRECKER]: new RockWreckerStrategy(),
+  [Ability.ROCKY_PAYLOAD]: new RockyPayloadStrategy(),
   [Ability.ROLLOUT]: new RolloutStrategy(),
   [Ability.ROOST]: new RoostStrategy(),
   [Ability.SACRED_SWORD_CAVERN]: new SacredSwordCavernStrategy(),
