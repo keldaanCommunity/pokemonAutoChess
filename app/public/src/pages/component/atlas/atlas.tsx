@@ -6,7 +6,12 @@ import {
   TransformWrapper,
   useControls
 } from "react-zoom-pan-pinch"
-import { AtlasTree } from "../../../../../core/atlas"
+import {
+  ATLAS_INITIAL_SCALE,
+  ATLAS_MAX_SCALE,
+  ATLAS_MIN_SCALE,
+  AtlasTree
+} from "../../../../../core/atlas"
 import type { Emera, TreeNode } from "../../../../../types/atlas"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
@@ -49,9 +54,11 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
     <div id="atlas-container">
       <div className="atlas-mask">
         <TransformWrapper
-          initialScale={origin === "wiki" ? 3 : 5}
-          minScale={2.5}
-          maxScale={8}
+          initialScale={
+            origin === "wiki" ? ATLAS_MIN_SCALE : ATLAS_INITIAL_SCALE
+          }
+          minScale={ATLAS_MIN_SCALE}
+          maxScale={ATLAS_MAX_SCALE}
           smooth={true}
           centerOnInit={true}
           centerZoomedOut={true}
@@ -76,7 +83,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
             <svg
               width="100%"
               height="100%"
-              viewBox="-750 -750 1500 1500" // Centers the (0,0) coordinate
+              viewBox="-1000 -1000 2000 2000" // Centers the (0,0) coordinate
             >
               {/* DEFINE ASSETS (Background patterns, borders) */}
               <defs>
@@ -110,7 +117,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
                       x2={toNode.position[0]}
                       y2={toNode.position[1]}
                       stroke={COLOR_GLOW}
-                      strokeWidth={isAllocated ? 6 : 2}
+                      strokeWidth={isAllocated ? 8 : 2}
                     />
                   )
                 })}

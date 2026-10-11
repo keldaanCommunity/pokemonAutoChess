@@ -2,12 +2,9 @@ import type { Item } from "./enum/Item"
 import type { TownEncounter } from "./enum/TownEncounter"
 
 export type KeystoneEmera =
-  | "fusion"
   | "mega"
   | "gigantamax"
-  | "stellar"
   | "legendary"
-  | "zmove"
   | "awakening"
 
 export type Emera =

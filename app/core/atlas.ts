@@ -2,771 +2,462 @@ import type { Tree } from "../types/atlas"
 import { Item } from "../types/enum/Item"
 import { TownEncounters } from "../types/enum/TownEncounter"
 
+const D = 20 // distance factor
+
+export const ATLAS_INITIAL_SCALE = 5
+export const ATLAS_MIN_SCALE = 2
+export const ATLAS_MAX_SCALE = 8
+
 export const AtlasTree: Tree = {
   nodes: [
     { id: "root", position: [0, 0], type: "start" },
-    // root - legendary1 path
+    // inner circle 1
     {
-      id: "step_1_root_legendary1",
-      type: "step",
-      position: rotToXY(-120, 90)
-    },
-    {
-      id: "encounter_lapras",
+      id: "croagunk",
       type: "encounter",
-      position: rotToXY(-120, 150),
-      encounter: TownEncounters.LAPRAS
+      encounter: TownEncounters.CROAGUNK,
+      position: rotToXY(-150, 10 * D)
     },
     {
-      id: "step_2_root_legendary1",
-      type: "step",
-      position: rotToXY(-120, 210)
+      id: "meowth",
+      type: "encounter",
+      encounter: TownEncounters.MEOWTH,
+      position: rotToXY(-30, 10 * D)
     },
+    {
+      id: "lapras",
+      type: "encounter",
+      encounter: TownEncounters.LAPRAS,
+      position: rotToXY(90, 10 * D)
+    },
+
+    // inner circle 2
+    {
+      id: "makuhita",
+      type: "encounter",
+      encounter: TownEncounters.MAKUHITA,
+      position: rotToXY(0, 17 * D)
+    },
+    {
+      id: "marowak",
+      type: "encounter",
+      encounter: TownEncounters.MAROWAK,
+      position: rotToXY(60, 17 * D)
+    },
+    {
+      id: "duskull",
+      type: "encounter",
+      encounter: TownEncounters.DUSKULL,
+      position: rotToXY(120, 17 * D)
+    },
+    {
+      id: "kecleon",
+      type: "encounter",
+      encounter: TownEncounters.KECLEON,
+      position: rotToXY(180, 17 * D)
+    },
+    {
+      id: "wobbuffet",
+      type: "encounter",
+      encounter: TownEncounters.WOBBUFFET,
+      position: rotToXY(240, 17 * D)
+    },
+    {
+      id: "kingambit",
+      type: "encounter",
+      encounter: TownEncounters.KINGAMBIT,
+      position: rotToXY(300, 17 * D)
+    },
+
+    // legendaries
     {
       id: "legendary1",
       type: "keystone",
-      position: rotToXY(-120, 300),
-      emera: "legendary"
-    },
-    // root - legendary2 path
-    {
-      id: "step_1_root_legendary2",
-      type: "step",
-      position: rotToXY(-60, 90)
-    },
-    {
-      id: "encounter_meowth",
-      type: "encounter",
-      position: rotToXY(-60, 150),
-      encounter: TownEncounters.MEOWTH
-    },
-    {
-      id: "step_2_root_legendary2",
-      type: "step",
-      position: rotToXY(-60, 210)
+      emera: "legendary",
+      position: rotToXY(0, 27 * D)
     },
     {
       id: "legendary2",
       type: "keystone",
-      position: rotToXY(-60, 300),
-      emera: "legendary"
+      emera: "legendary",
+      position: rotToXY(60, 27 * D)
+    },
+    {
+      id: "legendary3",
+      type: "keystone",
+      emera: "legendary",
+      position: rotToXY(120, 27 * D)
+    },
+    {
+      id: "legendary4",
+      type: "keystone",
+      emera: "legendary",
+      position: rotToXY(180, 27 * D)
+    },
+    {
+      id: "legendary5",
+      type: "keystone",
+      emera: "legendary",
+      position: rotToXY(240, 27 * D)
+    },
+    {
+      id: "legendary6",
+      type: "keystone",
+      emera: "legendary",
+      position: rotToXY(300, 27 * D)
     },
 
-    // fusion
+    // inner circle 3
     {
-      id: "condition_fusion",
-      position: rotToXY(-90, 260),
-      type: "condition",
-      condition: "fusion"
-    },
-    {
-      id: "fusion",
-      position: rotToXY(-90, 350),
-      type: "keystone",
-      emera: "fusion"
-    },
-    /*{
-      id: "condition_primal",
-      position: rotToXY(-90, 260),
-      type: "condition",
-      condition: "primal"
-    },
-    {
-      id: "primal",
-      position: rotToXY(-90, 180),
-      type: "keystone",
-      emera: "primal"
-    },*/
-
-    // legendary1 - star piece
-    {
-      id: "step1_legendary1_starpiece",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(-60, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_magnezone",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(-60, 150)),
+      id: "spinda",
       type: "encounter",
-      encounter: TownEncounters.MAGNEZONE
+      encounter: TownEncounters.SPINDA,
+      position: rotToXY(20, 27 * D)
     },
     {
-      id: "step2_legendary1_starpiece",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(-60, 210)),
-      type: "step"
+      id: "regirock",
+      type: "encounter",
+      encounter: TownEncounters.REGIROCK,
+      position: rotToXY(40, 27 * D)
     },
     {
-      id: "starpiece",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(-60, 300)),
+      id: "chansey",
+      type: "encounter",
+      encounter: TownEncounters.CHANSEY,
+      position: rotToXY(80, 27 * D)
+    },
+    {
+      id: "electivire",
+      type: "encounter",
+      encounter: TownEncounters.ELECTIVIRE,
+      position: rotToXY(100, 27 * D)
+    },
+    {
+      id: "ludicolo",
+      type: "encounter",
+      encounter: TownEncounters.LUDICOLO,
+      position: rotToXY(140, 27 * D)
+    },
+    {
+      id: "sableye",
+      type: "encounter",
+      encounter: TownEncounters.SABLEYE,
+      position: rotToXY(160, 27 * D)
+    },
+    {
+      id: "xatu",
+      type: "encounter",
+      encounter: TownEncounters.XATU,
+      position: rotToXY(200, 27 * D)
+    },
+    {
+      id: "celebi",
+      type: "encounter",
+      encounter: TownEncounters.CELEBI,
+      position: rotToXY(220, 27 * D)
+    },
+    {
+      id: "munchlax",
+      type: "encounter",
+      encounter: TownEncounters.MUNCHLAX,
+      position: rotToXY(260, 27 * D)
+    },
+    {
+      id: "kangaskhan",
+      type: "encounter",
+      encounter: TownEncounters.KANGASKHAN,
+      position: rotToXY(280, 27 * D)
+    },
+    {
+      id: "cinccino",
+      type: "encounter",
+      encounter: TownEncounters.CINCCINO,
+      position: rotToXY(320, 27 * D)
+    },
+    {
+      id: "wigglytuff",
+      type: "encounter",
+      encounter: TownEncounters.WIGGLYTUFF,
+      position: rotToXY(340, 27 * D)
+    },
+
+    {
+      id: "branch1",
+      type: "step",
+      position: rotToXY(0, 36 * D)
+    },
+    {
+      id: "atlas_item1",
       type: "item",
-      item: Item.STAR_PIECE
+      item: Item.RARE_CANDY,
+      position: rotToXY(0, 45 * D)
     },
 
-    // legendary2 - star piece
     {
-      id: "step1_legendary2_starpiece",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(-120, 90)),
-      type: "step"
+      id: "branch2",
+      type: "step",
+      position: rotToXY(30, 36 * D)
     },
     {
-      id: "encounter_grovyle",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(-120, 150)),
-      type: "encounter",
-      encounter: TownEncounters.GROVYLE
-    },
-    {
-      id: "step2_legendary2_starpiece",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(-120, 210)),
-      type: "step"
-    },
-
-    // stellar path
-    {
-      id: "step1_root_stellar",
-      position: rotToXY(180, 90),
-      type: "step"
-    },
-    {
-      id: "encounter_kecleon",
-      type: "encounter",
-      position: rotToXY(180, 150),
-      encounter: TownEncounters.KECLEON
-    },
-    {
-      id: "step2_root_stellar",
-      position: rotToXY(180, 210),
-      type: "step"
-    },
-    {
-      id: "stellar",
-      position: rotToXY(180, 300),
+      id: "atlas_item2",
       type: "keystone",
-      emera: "stellar"
+      emera: "awakening",
+      position: rotToXY(30, 45 * D)
     },
 
-    // Z-move left path
     {
-      id: "step1_root_zmove",
-      position: rotToXY(120, 90),
-      type: "step"
+      id: "branch3",
+      type: "condition",
+      condition: "mega",
+      position: rotToXY(60, 36 * D)
     },
     {
-      id: "encounter_croagunk",
-      type: "encounter",
-      position: rotToXY(120, 150),
-      encounter: TownEncounters.CROAGUNK
-    },
-    {
-      id: "step2_root_zmove",
-      position: rotToXY(120, 210),
-      type: "step"
-    },
-    {
-      id: "zmove",
-      position: rotToXY(120, 300),
-      type: "keystone",
-      emera: "zmove"
+      id: "atlas_item3",
+      type: "item",
+      item: Item.MEGA_STONE,
+      position: rotToXY(60, 45 * D)
     },
 
-    // Awakening path
-    {
-      id: "step1_root_awakening",
-      position: rotToXY(60, 90),
-      type: "step"
-    },
-    {
-      id: "encounter_wobbuffet",
-      type: "encounter",
-      position: rotToXY(60, 150),
-      encounter: TownEncounters.WOBBUFFET
-    },
-    {
-      id: "step2_root_awakening",
-      position: rotToXY(60, 210),
-      type: "step"
-    },
-    {
-      id: "awakening",
-      position: rotToXY(60, 300),
-      type: "keystone",
-      emera: "awakening"
-    },
-
-    // looplet
-
-    {
-      id: "step1_looplet",
-      position: rotToXY(-60, 390),
-      type: "step"
-    },
     {
       id: "looplet",
-      position: rotToXY(-60, 480),
       type: "item",
-      item: Item.LOOPLET
+      item: Item.LOOPLET,
+      position: rotToXY(90, 36 * D)
     },
     {
       id: "looplet_pink_buff",
-      position: sumVectors(rotToXY(-60, 480), rotToXY(-120, 90)),
+      position: sumVectors(rotToXY(90, 36 * D), rotToXY(150, 90)),
       type: "buff",
       buff: "pink"
     },
     {
       id: "looplet_red_buff",
-      position: sumVectors(rotToXY(-60, 480), rotToXY(-90, 90)),
+      position: sumVectors(rotToXY(90, 36 * D), rotToXY(120, 90)),
       type: "buff",
       buff: "red"
     },
     {
       id: "looplet_gold_buff",
-      position: sumVectors(rotToXY(-60, 480), rotToXY(-60, 90)),
+      position: sumVectors(rotToXY(90, 36 * D), rotToXY(90, 90)),
       type: "buff",
       buff: "yellow"
     },
     {
       id: "looplet_green_buff",
-      position: sumVectors(rotToXY(-60, 480), rotToXY(-30, 90)),
+      position: sumVectors(rotToXY(90, 36 * D), rotToXY(60, 90)),
       type: "buff",
       buff: "green"
     },
     {
       id: "looplet_blue_buff",
-      position: sumVectors(rotToXY(-60, 480), rotToXY(0, 90)),
+      position: sumVectors(rotToXY(90, 36 * D), rotToXY(30, 90)),
       type: "buff",
       buff: "blue"
     },
 
-    // legendary1 - gold bow
     {
-      id: "step1_legendary1_goldbow",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(180, 90)),
-      type: "step"
+      id: "branch5",
+      type: "step",
+      position: rotToXY(120, 36 * D)
     },
     {
-      id: "encounter_chansey",
-      type: "encounter",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(180, 150)),
-      encounter: TownEncounters.CHANSEY
-    },
-    {
-      id: "step2_legendary1_goldbow",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(180, 210)),
-      type: "step"
-    },
-    {
-      id: "goldbow",
-      position: sumVectors(rotToXY(-120, 300), rotToXY(180, 300)),
+      id: "atlas_item5",
       type: "item",
-      item: Item.GOLD_BOW
+      item: Item.EVIOLITE,
+      position: rotToXY(120, 45 * D)
     },
 
-    // gold bow - stellar
     {
-      id: "step1_stellar_goldbow",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-120, 90)),
-      type: "step"
+      id: "branch6",
+      type: "step",
+      position: rotToXY(150, 36 * D)
     },
     {
-      id: "encounter_electivire",
-      type: "encounter",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-120, 150)),
-      encounter: TownEncounters.ELECTIVIRE
-    },
-    {
-      id: "step2_stellar_goldbow",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-120, 210)),
-      type: "step"
+      id: "atlas_item6",
+      type: "item",
+      item: Item.TERA_ORB,
+      position: rotToXY(150, 45 * D)
     },
 
-    // stellar - legendary 1
     {
-      id: "step1_stellar_legendary1",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-60, 90)),
-      type: "step"
+      id: "branch7",
+      type: "step",
+      position: rotToXY(180, 36 * D)
     },
     {
-      id: "encounter_sableye",
-      type: "encounter",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-60, 150)),
-      encounter: TownEncounters.SABLEYE
-    },
-    {
-      id: "step2_stellar_legendary1",
-      position: sumVectors(rotToXY(180, 300), rotToXY(-60, 210)),
-      type: "step"
+      id: "atlas_item7",
+      type: "item",
+      item: Item.GOLD_BOW,
+      position: rotToXY(180, 45 * D)
     },
 
-    // stellar - tera orb
     {
-      id: "condition_tera_orb",
-      position: rotToXY(180, 390),
+      id: "branch8",
+      type: "step",
+      position: rotToXY(210, 36 * D)
+    },
+    {
+      id: "atlas_item8",
+      type: "item",
+      item: Item.Z_RING,
+      position: rotToXY(210, 45 * D)
+    },
+
+    {
+      id: "branch9",
       type: "condition",
-      condition: "stellar"
+      condition: "mega",
+      position: rotToXY(240, 36 * D)
     },
     {
-      id: "step1_tera_orb",
-      position: rotToXY(180, 450),
-      type: "step"
-    },
-    {
-      id: "tera_orb",
-      position: rotToXY(180, 540),
+      id: "atlas_item9",
       type: "item",
-      item: Item.TERA_ORB
+      item: Item.MEGA_STONE,
+      position: rotToXY(240, 45 * D)
     },
 
-    // stellar - gold mask
     {
-      id: "step1_stellar_goldmask",
-      position: sumVectors(rotToXY(180, 300), rotToXY(120, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_ludicolo",
+      id: "grovyle",
       type: "encounter",
-      position: sumVectors(rotToXY(180, 300), rotToXY(120, 150)),
-      encounter: TownEncounters.LUDICOLO
+      encounter: TownEncounters.GROVYLE,
+      position: rotToXY(270, 36 * D)
     },
     {
-      id: "step2_stellar_goldmask",
-      position: sumVectors(rotToXY(180, 300), rotToXY(120, 210)),
-      type: "step"
-    },
-    {
-      id: "goldmask",
-      position: sumVectors(rotToXY(180, 300), rotToXY(120, 300)),
+      id: "atlas_item10",
       type: "item",
-      item: Item.GOLD_MASK
+      item: Item.STAR_PIECE,
+      position: rotToXY(270, 45 * D)
     },
 
-    // zmove - gold mask
     {
-      id: "step1_zmove_goldmask",
-      position: sumVectors(rotToXY(120, 300), rotToXY(180, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_kangaskhan",
+      id: "magnezone",
       type: "encounter",
-      position: sumVectors(rotToXY(120, 300), rotToXY(180, 150)),
-      encounter: TownEncounters.KANGASKHAN
+      encounter: TownEncounters.MAGNEZONE,
+      position: rotToXY(300, 36 * D)
     },
     {
-      id: "step2_zmove_goldmask",
-      position: sumVectors(rotToXY(120, 300), rotToXY(180, 210)),
-      type: "step"
-    },
-
-    // stellar - zmove
-    {
-      id: "step1_stellar_zmove",
-      position: sumVectors(rotToXY(180, 300), rotToXY(60, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_celebi",
-      type: "encounter",
-      position: sumVectors(rotToXY(180, 300), rotToXY(60, 150)),
-      encounter: TownEncounters.CELEBI
-    },
-    {
-      id: "step2_stellar_zmove",
-      position: sumVectors(rotToXY(180, 300), rotToXY(60, 210)),
-      type: "step"
-    },
-
-    // zmove - awakening
-    {
-      id: "step1_zmove_awakening",
-      position: sumVectors(rotToXY(120, 300), rotToXY(0, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_chimecho",
-      type: "encounter",
-      position: sumVectors(rotToXY(120, 300), rotToXY(0, 150)),
-      encounter: TownEncounters.CHIMECHO
-    },
-    {
-      id: "step2_zmove_awakening",
-      position: sumVectors(rotToXY(120, 300), rotToXY(0, 210)),
-      type: "step"
-    },
-
-    // zmove - eviolite
-    {
-      id: "step1_zmove_eviolite",
-      position: sumVectors(rotToXY(120, 300), rotToXY(60, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_spinda",
-      type: "encounter",
-      position: sumVectors(rotToXY(120, 300), rotToXY(60, 150)),
-      encounter: TownEncounters.SPINDA
-    },
-    {
-      id: "step2_zmove_eviolite",
-      position: sumVectors(rotToXY(120, 300), rotToXY(60, 210)),
-      type: "step"
-    },
-    {
-      id: "eviolite",
-      position: sumVectors(rotToXY(120, 300), rotToXY(60, 300)),
+      id: "atlas_item11",
       type: "item",
-      item: Item.EVIOLITE
+      item: Item.GOLD_MASK,
+      position: rotToXY(300, 45 * D)
     },
 
-    // awakening - eviolite
     {
-      id: "step1_awakening_eviolite",
-      position: sumVectors(rotToXY(60, 300), rotToXY(120, 90)),
-      type: "step"
+      id: "branch12",
+      type: "step",
+      position: rotToXY(330, 36 * D)
     },
     {
-      id: "encounter_xatu",
-      type: "encounter",
-      position: sumVectors(rotToXY(60, 300), rotToXY(120, 150)),
-      encounter: TownEncounters.XATU
-    },
-    {
-      id: "step2_awakening_eviolite",
-      position: sumVectors(rotToXY(60, 300), rotToXY(120, 210)),
-      type: "step"
-    },
-
-    // root - dynamax path
-    {
-      id: "step1_root_dynamax",
-      position: rotToXY(0, 90),
-      type: "step"
-    },
-    {
-      id: "encounter_kingambit",
-      type: "encounter",
-      position: rotToXY(0, 150),
-      encounter: TownEncounters.KINGAMBIT
-    },
-    {
-      id: "step2_root_dynamax",
-      position: rotToXY(0, 210),
-      type: "step"
-    },
-    {
-      id: "encounter_makuhita",
-      type: "encounter",
-      position: rotToXY(0, 300),
-      encounter: TownEncounters.MAKUHITA
-    },
-    {
-      id: "dynamax",
-      position: rotToXY(0, 390),
+      id: "atlas_item12",
       type: "item",
-      item: Item.DYNAMAX_BAND
-    },
-    {
-      id: "condition_gigantamax",
-      position: rotToXY(0, 470),
-      type: "condition",
-      condition: "gigantamax"
-    },
+      item: Item.DYNAMAX_BAND,
+      position: rotToXY(330, 45 * D)
+    }
+    /*
     {
       id: "gigantamax",
-      position: rotToXY(0, 550),
       type: "keystone",
-      emera: "gigantamax"
-    },
-
-    // mega paths
-    {
-      id: "condition_mega_1",
-      position: rotToXY(-120, 400),
-      type: "condition",
-      condition: "mega"
-    },
-    {
-      id: "mega_1",
-      position: rotToXY(-120, 500),
-      type: "keystone",
-      emera: "mega"
-    },
-
-    {
-      id: "condition_mega_2",
-      position: rotToXY(60, 400),
-      type: "condition",
-      condition: "mega"
-    },
-    {
-      id: "mega_2",
-      position: rotToXY(60, 500),
-      type: "keystone",
-      emera: "mega"
-    },
-
-    // makuhita - legendary2
-    {
-      id: "step1_makuhita_legendary2",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-120, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_regirock",
-      type: "encounter",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-120, 150)),
-      encounter: TownEncounters.REGIROCK
-    },
-    {
-      id: "step2_makuhita_legendary2",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-120, 210)),
-      type: "step"
-    },
-
-    // makuhita - awakening
-    {
-      id: "step1_makuhita_awakening",
-      position: sumVectors(rotToXY(0, 300), rotToXY(120, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_cinccino",
-      type: "encounter",
-      position: sumVectors(rotToXY(0, 300), rotToXY(120, 150)),
-      encounter: TownEncounters.CINCCINO
-    },
-    {
-      id: "step2_makuhita_awakening",
-      position: sumVectors(rotToXY(0, 300), rotToXY(120, 210)),
-      type: "step"
-    },
-
-    // legendary2 - sacred ash
-    {
-      id: "step1_legendary2_sacredash",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(0, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_wigglytuff",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(0, 150)),
-      type: "encounter",
-      encounter: TownEncounters.WIGGLYTUFF
-    },
-    {
-      id: "step2_legendary2_sacredash",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(0, 210)),
-      type: "step"
-    },
-    {
-      id: "sacred_ash",
-      type: "item",
-      position: sumVectors(rotToXY(-60, 300), rotToXY(0, 300)),
-      item: Item.SACRED_ASH
-    },
-
-    // makuhita - sacred ash
-    {
-      id: "step1_makuhita_sacredash",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-60, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_munchlax",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-60, 150)),
-      type: "encounter",
-      encounter: TownEncounters.MUNCHLAX
-    },
-    {
-      id: "step2_makuhita_sacredash",
-      position: sumVectors(rotToXY(0, 300), rotToXY(-60, 210)),
-      type: "step"
-    },
-
-    // makuhita - rare candy
-    {
-      id: "step1_makuhita_candy",
-      position: sumVectors(rotToXY(0, 300), rotToXY(60, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_marowak",
-      position: sumVectors(rotToXY(0, 300), rotToXY(60, 150)),
-      type: "encounter",
-      encounter: TownEncounters.MAROWAK
-    },
-    {
-      id: "step2_makuhita_candy",
-      position: sumVectors(rotToXY(0, 300), rotToXY(60, 210)),
-      type: "step"
-    },
-    {
-      id: "rare_candy",
-      position: sumVectors(rotToXY(0, 300), rotToXY(60, 300)),
-      type: "item",
-      item: Item.RARE_CANDY
-    },
-
-    // awakening - rare candy
-    {
-      id: "step1_awakening_candy",
-      position: sumVectors(rotToXY(60, 300), rotToXY(0, 90)),
-      type: "step"
-    },
-    {
-      id: "encounter_duskull",
-      position: sumVectors(rotToXY(60, 300), rotToXY(0, 150)),
-      type: "encounter",
-      encounter: TownEncounters.DUSKULL
-    },
-    {
-      id: "step2_awakening_candy",
-      position: sumVectors(rotToXY(60, 300), rotToXY(0, 210)),
-      type: "step"
+      emera: "gigantamax",
+      position: rotToXY(330, 45 * D)
     }
+    */
   ],
   connections: [
-    { from: "root", to: "step_1_root_legendary1" },
-    { from: "step_1_root_legendary1", to: "encounter_lapras" },
-    { from: "encounter_lapras", to: "step_2_root_legendary1" },
-    { from: "step_2_root_legendary1", to: "legendary1" },
+    { from: "root", to: "croagunk" },
+    { from: "root", to: "meowth" },
+    { from: "root", to: "lapras" },
 
-    { from: "root", to: "step_1_root_legendary2" },
-    { from: "step_1_root_legendary2", to: "encounter_meowth" },
-    { from: "encounter_meowth", to: "step_2_root_legendary2" },
-    { from: "step_2_root_legendary2", to: "legendary2" },
+    { from: "meowth", to: "kingambit" },
+    { from: "meowth", to: "makuhita" },
 
-    { from: "legendary1", to: "condition_fusion" },
-    { from: "legendary2", to: "condition_fusion" },
-    { from: "condition_fusion", to: "fusion" },
-    /*{ from: "legendary1", to: "condition_primal" },
-    { from: "legendary2", to: "condition_primal" },
-    { from: "condition_primal", to: "primal" },*/
+    { from: "lapras", to: "marowak" },
+    { from: "lapras", to: "duskull" },
 
-    { from: "legendary1", to: "step1_legendary1_starpiece" },
-    { from: "step1_legendary1_starpiece", to: "encounter_magnezone" },
-    { from: "encounter_magnezone", to: "step2_legendary1_starpiece" },
-    { from: "step2_legendary1_starpiece", to: "starpiece" },
+    { from: "croagunk", to: "kecleon" },
+    { from: "croagunk", to: "wobbuffet" },
 
-    { from: "legendary2", to: "step1_legendary2_starpiece" },
-    { from: "step1_legendary2_starpiece", to: "encounter_grovyle" },
-    { from: "encounter_grovyle", to: "step2_legendary2_starpiece" },
-    { from: "step2_legendary2_starpiece", to: "starpiece" },
+    { from: "makuhita", to: "wigglytuff" },
+    { from: "makuhita", to: "legendary1" },
+    { from: "makuhita", to: "spinda" },
 
-    { from: "root", to: "step1_root_stellar" },
-    { from: "step1_root_stellar", to: "encounter_kecleon" },
-    { from: "encounter_kecleon", to: "step2_root_stellar" },
-    { from: "step2_root_stellar", to: "stellar" },
+    { from: "marowak", to: "regirock" },
+    { from: "marowak", to: "legendary2" },
+    { from: "marowak", to: "chansey" },
 
-    { from: "root", to: "step1_root_zmove" },
-    { from: "step1_root_zmove", to: "encounter_croagunk" },
-    { from: "encounter_croagunk", to: "step2_root_zmove" },
-    { from: "step2_root_zmove", to: "zmove" },
+    { from: "duskull", to: "electivire" },
+    { from: "duskull", to: "legendary3" },
+    { from: "duskull", to: "ludicolo" },
 
-    { from: "root", to: "step1_root_awakening" },
-    { from: "step1_root_awakening", to: "encounter_wobbuffet" },
-    { from: "encounter_wobbuffet", to: "step2_root_awakening" },
-    { from: "step2_root_awakening", to: "awakening" },
+    { from: "kecleon", to: "sableye" },
+    { from: "kecleon", to: "legendary4" },
+    { from: "kecleon", to: "xatu" },
 
-    { from: "legendary1", to: "step1_legendary1_goldbow" },
-    { from: "step1_legendary1_goldbow", to: "encounter_chansey" },
-    { from: "encounter_chansey", to: "step2_legendary1_goldbow" },
-    { from: "step2_legendary1_goldbow", to: "goldbow" },
+    { from: "wobbuffet", to: "celebi" },
+    { from: "wobbuffet", to: "legendary5" },
+    { from: "wobbuffet", to: "munchlax" },
 
-    { from: "stellar", to: "step1_stellar_goldbow" },
-    { from: "step1_stellar_goldbow", to: "encounter_electivire" },
-    { from: "encounter_electivire", to: "step2_stellar_goldbow" },
-    { from: "step2_stellar_goldbow", to: "goldbow" },
+    { from: "kingambit", to: "kangaskhan" },
+    { from: "kingambit", to: "legendary6" },
+    { from: "kingambit", to: "cinccino" },
 
-    { from: "stellar", to: "step1_stellar_legendary1" },
-    { from: "step1_stellar_legendary1", to: "encounter_sableye" },
-    { from: "encounter_sableye", to: "step2_stellar_legendary1" },
-    { from: "step2_stellar_legendary1", to: "legendary1" },
+    { from: "spinda", to: "regirock" },
+    { from: "chansey", to: "electivire" },
+    { from: "ludicolo", to: "sableye" },
+    { from: "xatu", to: "celebi" },
+    { from: "munchlax", to: "kangaskhan" },
+    { from: "cinccino", to: "wigglytuff" },
 
-    { from: "stellar", to: "step1_stellar_goldmask" },
-    { from: "step1_stellar_goldmask", to: "encounter_ludicolo" },
-    { from: "encounter_ludicolo", to: "step2_stellar_goldmask" },
-    { from: "step2_stellar_goldmask", to: "goldmask" },
+    { from: "wigglytuff", to: "branch1" },
+    { from: "spinda", to: "branch1" },
+    { from: "branch1", to: "atlas_item1" },
 
-    { from: "zmove", to: "step1_zmove_goldmask" },
-    { from: "step1_zmove_goldmask", to: "encounter_kangaskhan" },
-    { from: "encounter_kangaskhan", to: "step2_zmove_goldmask" },
-    { from: "step2_zmove_goldmask", to: "goldmask" },
+    { from: "spinda", to: "branch2" },
+    { from: "regirock", to: "branch2" },
+    { from: "branch2", to: "atlas_item2" },
 
-    { from: "stellar", to: "step1_stellar_zmove" },
-    { from: "step1_stellar_zmove", to: "encounter_celebi" },
-    { from: "encounter_celebi", to: "step2_stellar_zmove" },
-    { from: "step2_stellar_zmove", to: "zmove" },
+    { from: "regirock", to: "branch3" },
+    { from: "chansey", to: "branch3" },
+    { from: "branch3", to: "atlas_item3" },
 
-    { from: "stellar", to: "condition_tera_orb" },
-    { from: "condition_tera_orb", to: "step1_tera_orb" },
-    { from: "step1_tera_orb", to: "tera_orb" },
-
-    { from: "zmove", to: "step1_zmove_awakening" },
-    { from: "step1_zmove_awakening", to: "encounter_chimecho" },
-    { from: "encounter_chimecho", to: "step2_zmove_awakening" },
-    { from: "step2_zmove_awakening", to: "awakening" },
-
-    { from: "zmove", to: "step1_zmove_eviolite" },
-    { from: "step1_zmove_eviolite", to: "encounter_spinda" },
-    { from: "encounter_spinda", to: "step2_zmove_eviolite" },
-    { from: "step2_zmove_eviolite", to: "eviolite" },
-
-    { from: "awakening", to: "step1_awakening_eviolite" },
-    { from: "step1_awakening_eviolite", to: "encounter_xatu" },
-    { from: "encounter_xatu", to: "step2_awakening_eviolite" },
-    { from: "step2_awakening_eviolite", to: "eviolite" },
-
-    { from: "root", to: "step1_root_dynamax" },
-    { from: "step1_root_dynamax", to: "encounter_kingambit" },
-    { from: "encounter_kingambit", to: "step2_root_dynamax" },
-    { from: "step2_root_dynamax", to: "encounter_makuhita" },
-    { from: "encounter_makuhita", to: "dynamax" },
-    { from: "dynamax", to: "condition_gigantamax" },
-    { from: "condition_gigantamax", to: "gigantamax" },
-
-    { from: "encounter_makuhita", to: "step1_makuhita_legendary2" },
-    { from: "step1_makuhita_legendary2", to: "encounter_regirock" },
-    { from: "encounter_regirock", to: "step2_makuhita_legendary2" },
-    { from: "step2_makuhita_legendary2", to: "legendary2" },
-
-    { from: "encounter_makuhita", to: "step1_makuhita_awakening" },
-    { from: "step1_makuhita_awakening", to: "encounter_cinccino" },
-    { from: "encounter_cinccino", to: "step2_makuhita_awakening" },
-    { from: "step2_makuhita_awakening", to: "awakening" },
-
-    { from: "legendary1", to: "condition_mega_1" },
-    { from: "condition_mega_1", to: "mega_1" },
-
-    { from: "awakening", to: "condition_mega_2" },
-    { from: "condition_mega_2", to: "mega_2" },
-
-    { from: "legendary2", to: "step1_legendary2_sacredash" },
-    { from: "step1_legendary2_sacredash", to: "encounter_wigglytuff" },
-    { from: "encounter_wigglytuff", to: "step2_legendary2_sacredash" },
-    { from: "step2_legendary2_sacredash", to: "sacred_ash" },
-
-    { from: "encounter_makuhita", to: "step1_makuhita_sacredash" },
-    { from: "step1_makuhita_sacredash", to: "encounter_munchlax" },
-    { from: "encounter_munchlax", to: "step2_makuhita_sacredash" },
-    { from: "step2_makuhita_sacredash", to: "sacred_ash" },
-
-    { from: "encounter_makuhita", to: "step1_makuhita_candy" },
-    { from: "step1_makuhita_candy", to: "encounter_marowak" },
-    { from: "encounter_marowak", to: "step2_makuhita_candy" },
-    { from: "step2_makuhita_candy", to: "rare_candy" },
-
-    { from: "awakening", to: "step1_awakening_candy" },
-    { from: "step1_awakening_candy", to: "encounter_duskull" },
-    { from: "encounter_duskull", to: "step2_awakening_candy" },
-    { from: "step2_awakening_candy", to: "rare_candy" },
-
-    { from: "legendary2", to: "step1_looplet" },
-    { from: "step1_looplet", to: "looplet" },
+    { from: "chansey", to: "looplet" },
+    { from: "electivire", to: "looplet" },
     { from: "looplet", to: "looplet_pink_buff" },
     { from: "looplet", to: "looplet_red_buff" },
     { from: "looplet", to: "looplet_gold_buff" },
     { from: "looplet", to: "looplet_green_buff" },
-    { from: "looplet", to: "looplet_blue_buff" }
+    { from: "looplet", to: "looplet_blue_buff" },
+
+    { from: "electivire", to: "branch5" },
+    { from: "ludicolo", to: "branch5" },
+    { from: "branch5", to: "atlas_item5" },
+
+    { from: "ludicolo", to: "branch6" },
+    { from: "sableye", to: "branch6" },
+    { from: "branch6", to: "atlas_item6" },
+
+    { from: "sableye", to: "branch7" },
+    { from: "xatu", to: "branch7" },
+    { from: "branch7", to: "atlas_item7" },
+
+    { from: "xatu", to: "branch8" },
+    { from: "celebi", to: "branch8" },
+    { from: "branch8", to: "atlas_item8" },
+
+    { from: "celebi", to: "branch9" },
+    { from: "munchlax", to: "branch9" },
+    { from: "branch9", to: "atlas_item9" },
+
+    { from: "munchlax", to: "grovyle" },
+    { from: "kangaskhan", to: "grovyle" },
+    { from: "grovyle", to: "atlas_item10" },
+
+    { from: "kangaskhan", to: "magnezone" },
+    { from: "cinccino", to: "magnezone" },
+    { from: "magnezone", to: "atlas_item11" },
+
+    { from: "cinccino", to: "branch12" },
+    { from: "wigglytuff", to: "branch12" },
+    { from: "branch12", to: "atlas_item12" }
   ]
 }
 

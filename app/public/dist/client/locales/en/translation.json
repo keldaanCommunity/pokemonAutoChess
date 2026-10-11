@@ -2551,8 +2551,8 @@
 		"LUNCH_BREAK": "Lunch Break",
 		"BANQUET": "Banquet",
 		"TERASTAL": "Terastal",
-		"TERA_BLAST": "Tera Blast",
-		"TERA_STAR_STORM": "Tera Star Storm"
+		"TERA_RAID": "Tera Raid",
+		"TERASTAL_FESTIVAL": "Terastal Festival"
 	},
 	"effect_description": {
 		"STAMINA": "Gain 15 SHIELD. Get a SILK_SCARF.",
@@ -2683,8 +2683,8 @@
 		"LUNCH_BREAK": "The Chef cook two dishes and feed the two STRONGEST ADJACENT allies after every round.",
 		"BANQUET": "Gain a second CHEF_HAT.",
 		"TERASTAL": "+1 to all active synergies levels",
-		"TERA_BLAST": "+2 to all active synergies levels",
-		"TERA_STAR_STORM": "Activates all synergies to their full potential."
+		"TERA_RAID": "+2 to all active synergies levels",
+		"TERASTAL_FESTIVAL": "Activates all synergies to their full potential."
 	},
 	"item": {
 		"FOSSIL_STONE": "Fossil Stone",
@@ -2806,6 +2806,7 @@
 		"GOLD_BOW": "Gold Bow",
 		"TERA_ORB": "Tera Orb",
 		"LOOPLET": "Looplet",
+		"MEGA_STONE": "Mega Key Stone",
 		"RED_SCALE": "Red Scale",
 		"DAMP_ROCK": "Damp Rock",
 		"ICY_ROCK": "Icy Rock",
@@ -3238,6 +3239,7 @@
 		"SACRED_ASH": "Gives RESURRECTION. After resurrecting, up to 3 allies KO are resurrected as well, but without items.",
 		"STAR_PIECE": "Gives the holder one additional STAR, which increases the power of their ability.",
 		"LOOPLET": "Each EMERA set in a looplet through the Atlas grants additional stats and effects to the holder. Gain 1 EMERA when acquired.",
+		"MEGA_STONE": "Allows you to mega evolve a pokémon. $t(atlas.pokemon_that_can_mega_evolve)",
 		"REPEAT_BALL": "Each time you spend gold on a reroll, gain 1 free reroll. For every 2 shop rerolls, gain 1 SPEED and 2 SHIELD. After lots of rerolls, you may encounter powerful Pokémon in your shop.",
 		"GOLD_BOW": "The holder does not count for team size limit.",
 		"TERA_ORB": "The holder replaces their base types with the STELLAR type.",
@@ -5683,50 +5685,41 @@
 		"emera": "Emera",
 		"encounter": {
 			"KECLEON": "Pick 1 of 3 synergy stones",
-			"CHANSEY": "All your Hatch Pokémon gain 50 HP, 50 AP and +50% base ATK",
+			"CHANSEY": "All your Hatch Pokémon gain 50 HP, 30% base ATK and 30 AP",
 			"ELECTIVIRE": "Pick 1 of 3 tools",
 			"XATU": "Get a random reward from a TREASURE_BOX",
 			"KANGASKHAN": "Pick 1 of 3 craftable items",
 			"DUSKULL": "Gain 1 GOLD for each 10 GOLD you earned so far in this game",
 			"MEOWTH": "Gain 10 GOLD",
-			"MAROWAK": "Next PvE fight is more difficult but brings extra rewards if you win",
+			"MAROWAK": "Next PvE fight is more difficult for you but brings extra rewards if you win",
 			"WOBBUFFET": "Get 3 RECYCLE_TICKET",
 			"SPINDA": "Activate and get the reward of another random encounter in the atlas",
 			"REGIROCK": "Heal 15 player HP",
-			"MUNCHLAX": "Get a PICNIC_SET",
+			"MUNCHLAX": "Get 5 random dishes that you can use at any time",
 			"SABLEYE": "Pick 1 of 3 synergy gems",
-			"CELEBI": "Heal 5 player HP immediately, then 5 player HP after every fight",
+			"CELEBI": "Heal 5 player HP immediately, then 1 player HP after every fight",
 			"MAKUHITA": "Get a GOLD_DOJO_TICKET. Pokémon now only spend one stage at the dojo before coming back.",
 			"CROAGUNK": "Get 3 EXCHANGE_TICKET",
-			"WIGGLYTUFF": "Your Pokémon gain 20 max HP per encounter activated in the atlas, including this one",
-			"CINCCINO": "Pick 1 of 3 SILK_SCARF made item",
+			"WIGGLYTUFF": "Your Pokémon gain 10 max HP per encounter activated in the atlas, including this one",
+			"CINCCINO": "Pick 1 of 3 SILK_SCARF made items",
 			"CHIMECHO": "Get a SOOTHE_BELL",
 			"KINGAMBIT": "Gain 5 GOLD, or 15 GOLD and a LEADERS_CREST if you are currently leading",
-			"LAPRAS": "Get a LAPRAS_PASSPORT and 10 free shop rerolls",
-			"LUDICOLO": "Pick 1 of 7 music instruments. Music instruments increase their associated synergy level by 1.",
-			"MAGNEZONE": "Prevents you from losing HP upon your next defeat",
+			"LAPRAS": "Get a LAPRAS_PASSPORT. Your legendaries choices will be rerolled based on the new region you travel to.",
+			"LUDICOLO": "Ludicolo cheers on your team with music. All your team gains 1 SPEED each second.",
+			"MAGNEZONE": "Increase damage inflicted to other players by 3 after a win",
 			"GROVYLE": "Gain 1 more EMERA after every fight"
 		},
 		"keystone": {
-			"fusion": "Fusion Emera",
-			"mega": "Mega Emera",
 			"gigantamax": "Gigantamax Emera",
 			"stellar": "Terastal Emera",
 			"legendary": "Legendary Emera",
-			"zmove": "Z-Power Emera",
 			"awakening": "Awakening Emera"
 		},
 		"keystone_description": {
-			"fusion": "Get DNA_SPLICERS which allows you to combine two Legendaries into one. $t(atlas.pokemon_that_can_be_combined)",
-			"mega": "Get a MEGA_STONE which allows you to mega evolve a pokémon. $t(atlas.pokemon_that_can_mega_evolve)",
-			"gigantamax": "Pokémon that can gigantamax and hold a DYNAMAX_BAND will increase their HP by 400% instead of 200%, and change their ability to a new G-Max one.",
-			"stellar": "Get a STELLAR_GEM which increases the level of all your active synergies by 1.",
-			"legendary": "Pick 1 of 6 Legendary Pokémon. For each symbol, you are guaranteed to get one proposal of that type.",
-			"zmove": "Get a Z_POWER_RING and pick 1 Z-Move among the ones matching with your portal symbols.",
-			"awakening": "Allow to reach level 10. All common and uncommon 1 STAR Pokémon on your board evolve immediately."
+			"legendary": "A random legendary will be put in this node, based on the portal you took at stage 20, your region and your dominant synergies.",
+			"awakening": "Allow two reach level 10. All common and uncommon 1 STAR Pokémon on your board evolve immediately."
 		},
 		"condition": {
-			"fusion": "This node is locked until you get two Pokémon on your board that can be combined together. $t(atlas.pokemon_that_can_be_combined)",
 			"mega": "This node is locked until you get a Pokémon on your board that can mega evolve. $t(atlas.pokemon_that_can_mega_evolve)",
 			"gigantamax": "This node is locked until you get a Pokémon on your board that can gigantamax. $t(atlas.pokemon_that_can_gigantamax)",
 			"stellar": "This node is locked until you get at least 10 different active synergies"
@@ -5741,8 +5734,7 @@
 		},
 		"connection_orb": "Connection Orb",
 		"connection_orb_description": "The start of your journey. You can only activate nodes connected to already activated nodes.",
-		"pokemon_that_can_be_combined": "Pokémon that can be combined are:\n- Kyurem and Reshiram\n- Kyurem and Zekrom\n- Necrozma and Solgaleo\n- Necrozma and Lunala",
-		"pokemon_that_can_mega_evolve": "Pokémon that can mega evolve have the Mega Emera symbol on their portrait.",
-		"pokemon_that_can_gigantamax": "Pokémon that can gigantamax have the Gigantamax Emera symbol on their portrait."
+		"pokemon_that_can_mega_evolve": "Pokémon that can mega evolve have the MEGA_STONE symbol on their portrait.",
+		"pokemon_that_can_gigantamax": "Pokémon that can gigantamax have the DYNAMAX_BAND symbol on their portrait."
 	}
 }

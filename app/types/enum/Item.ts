@@ -121,6 +121,8 @@ export enum Item {
   SACRED_ASH = "SACRED_ASH",
   STAR_PIECE = "STAR_PIECE",
   LOOPLET = "LOOPLET",
+  Z_RING = "Z_RING",
+  MEGA_STONE = "MEGA_STONE",
   REPEAT_BALL = "REPEAT_BALL",
   GOLD_BOW = "GOLD_BOW",
   TERA_ORB = "TERA_ORB",
@@ -368,7 +370,6 @@ export enum Item {
   TERRA_CYMBAL = "TERRA_CYMBAL",
   SOOTHE_BELL = "SOOTHE_BELL",
   BALL = "BALL",
-  Z_RING = "Z_RING",
   ALUMINIUM_Z = "ALUMINIUM_Z",
   ANTHROPIUM_Z = "ANTHROPIUM_Z",
   AQUARIUM_Z = "AQUARIUM_Z",
@@ -818,7 +819,8 @@ export const AtlasItems = [
   Item.GOLD_BOW,
   Item.TERA_ORB,
   Item.LOOPLET,
-  Item.Z_RING
+  Item.Z_RING,
+  Item.MEGA_STONE
 ] satisfies Item[]
 
 export type AtlasItem = (typeof AtlasItems)[number]

@@ -173,8 +173,8 @@ export const SynergyTiers = {
   ],
   [Synergy.STELLAR]: [
     EffectEnum.TERASTAL,
-    EffectEnum.TERA_BLAST,
-    EffectEnum.TERA_STAR_STORM
+    EffectEnum.TERA_RAID,
+    EffectEnum.TERASTAL_FESTIVAL
   ]
 } satisfies { [key in Synergy]: readonly EffectEnum[] }
 

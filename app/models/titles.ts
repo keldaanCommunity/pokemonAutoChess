@@ -64,7 +64,7 @@ export function updatePlayerTitlesAfterFight(
         case EffectEnum.CALM_MIND:
           player.titles.add(Title.RIVAL)
           break
-        case EffectEnum.TERA_STAR_STORM:
+        case EffectEnum.TERASTAL_FESTIVAL:
           player.titles.add(Title.TERASTAL)
           break
         case EffectEnum.SURGE_SURFER:

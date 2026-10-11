@@ -106,11 +106,14 @@
   }
 }
 
+.atlas-node.keystone .atlas-node-bg,
 .atlas-node.item .atlas-node-bg {
   fill: #8b8356;
 }
 
+.atlas-node.keystone.allocated .atlas-node-bg,
 .atlas-node.item.allocated .atlas-node-bg,
+.atlas-node.keystone.allocatable:hover .atlas-node-bg,
 .atlas-node.item.allocatable:hover .atlas-node-bg {
   fill: var(--color-bg-gold);
 }
