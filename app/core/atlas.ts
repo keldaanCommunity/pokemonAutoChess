@@ -2,9 +2,9 @@ import type { Tree } from "../types/atlas"
 import { Item } from "../types/enum/Item"
 import { TownEncounters } from "../types/enum/TownEncounter"
 
-const D = 20 // distance factor
+const D = 19 // distance factor
 
-export const ATLAS_INITIAL_SCALE = 5
+export const ATLAS_INITIAL_SCALE = 4
 export const ATLAS_MIN_SCALE = 2
 export const ATLAS_MAX_SCALE = 8
 

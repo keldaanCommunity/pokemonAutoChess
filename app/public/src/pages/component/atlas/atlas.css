@@ -1,12 +1,13 @@
 #game-atlas {
   position: absolute;
-  bottom: 8vw;
+  bottom: 10vw;
   right: 4vw;
 }
 
 #atlas-container {
-  width: 800px;
-  height: 800px;
+  --atlas-size: 30vw;
+  width: var(--atlas-size);
+  height: var(--atlas-size);
   margin: auto;
   aspect-ratio: 1 / 1;
   overflow: hidden;
@@ -20,12 +21,12 @@
 }
 
 .atlas-mask {
-  width: 800px;
-  height: 800px;
+  width: var(--atlas-size);
+  height: var(--atlas-size);
   overflow: hidden;
   mask-image: radial-gradient(
     rgba(0, 0, 0, var(--atlas-mask-opening-t))
-      calc(50% * var(--atlas-mask-opening-t)),
+      calc(60% * var(--atlas-mask-opening-t)),
     transparent 70%
   );
 }
