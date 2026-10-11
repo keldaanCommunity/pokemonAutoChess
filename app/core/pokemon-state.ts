@@ -19,6 +19,7 @@ import { capUint16, max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
+  BeforeTakingDamageEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
@@ -615,6 +616,23 @@ export default abstract class PokemonState {
       }
 
       takenDamage += Math.min(residualDamage, pokemon.hp)
+
+      pokemon.getEffects(BeforeTakingDamageEffect).forEach((effect) => {
+        const { newDeath, newTakenDamage, newResidualDamage } =
+          effect.apply({
+            pokemon,
+            attacker,
+            board,
+            residualDamage,
+            takenDamage,
+            damageBeforeReduction: damage,
+            attackType,
+            isRetaliation
+          }) ?? {}
+        if (newDeath !== undefined) death = newDeath
+        if (newTakenDamage !== undefined) takenDamage = newTakenDamage
+        if (newResidualDamage !== undefined) residualDamage = newResidualDamage
+      })
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&

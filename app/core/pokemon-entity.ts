@@ -1385,7 +1385,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         new DelayedCommand(() => {
           if (flyAwayCell.target?.hp > 0) {
             flyAwayCell.target.handleSpecialDamage(
-              1.5 * this.atk,
+              2 * this.atk,
               board,
               AttackType.PHYSICAL,
               this,

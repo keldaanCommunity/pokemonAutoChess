@@ -2534,7 +2534,7 @@
 		"TAILWIND": "Voe para longe uma vez quando estiver abaixo de 20% HP",
 		"FEATHER_DANCE": "Receba PROTECT por 2 segundos depois de voar para longe",
 		"MAX_AIRSTREAM": "Voe para longe duas vezes, quando estiver abaixo de 50% HP e abaixo 20% HP",
-		"SKYDIVE": "Agora executa ataques de mergulho aéreo, inflingindo 150% do ATK como PHYSICAL ao pousar no alvo.",
+		"SKYDIVE": "Agora executa ataques de mergulho aéreo, inflingindo 200% do ATK como PHYSICAL ao pousar no alvo.",
 		"BATTLE_ARMOR": "Receba 10 DEF, receba -30% de dano crítico. Coleta uma pedra de clima quando presenciar uma mudança de clima",
 		"MOUTAIN_RESISTANCE": "Receba 25 DEF, receba -50% de dano crítico. Coleta até duas pedras de clima",
 		"DIAMOND_STORM": "Receba 50 DEF, receba -70% de dano crítico. Coleta até três pedra de clima",

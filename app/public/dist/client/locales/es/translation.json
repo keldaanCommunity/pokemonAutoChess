@@ -2546,7 +2546,7 @@
 		"TAILWIND": "Vuela la primera vez que la salud es menor al 20% de los HP máximos",
 		"FEATHER_DANCE": "Obtén PROTECT durante 2 segundos después de volar",
 		"MAX_AIRSTREAM": "Vuela dos veces cuando estés por debajo del 50 % de los HP máximos y del 20 % de los HP máximos",
-		"SKYDIVE": "Ahora realiza ataques en picado, que causan un 150% del ATK como PHYSICAL al aterrizar sobre su objetivo",
+		"SKYDIVE": "Ahora realiza ataques en picado, que causan un 200% del ATK como PHYSICAL al aterrizar sobre su objetivo",
 		"COTTONWEED": "Consigue una maceta de Hoppip",
 		"FLYCATCHER": "Consigue una maceta de Bellsprout",
 		"FRAGRANT": "Consigue una maceta de Chikorita",

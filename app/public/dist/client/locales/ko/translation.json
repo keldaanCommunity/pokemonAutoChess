@@ -2547,7 +2547,7 @@
 		"TAILWIND": "HP가 20% 미만이 될 때 FLY_AWAY",
 		"FEATHER_DANCE": "FLY_AWAY 후 2초 동안 PROTECT 상태가 됨",
 		"MAX_AIRSTREAM": "HP가 50%, 20% 상태 될 시 FLY_AWAY",
-		"SKYDIVE": "FLY_AWAY 후, 착지 지점의 상대에게 ATK의 150%만큼 PHYSICAL를 입히는 강하 공격을 사용",
+		"SKYDIVE": "FLY_AWAY 후, 착지 지점의 상대에게 ATK의 200%만큼 PHYSICAL를 입히는 강하 공격을 사용",
 		"COTTONWEED": "통통코 화분 획득",
 		"FLYCATCHER": "모다피 화분 획득",
 		"FRAGRANT": "치코리타 화분 획득",
