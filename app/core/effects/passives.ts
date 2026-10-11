@@ -1925,7 +1925,9 @@ export const PassiveEffects: Partial<
           board,
           departure: [oldX, oldY],
           destination: [newX, newY],
-          crit: false
+          crit: pokemon.effects.has(EffectEnum.ABILITY_CRIT)
+            ? chance(pokemon.critChance / 100, pokemon)
+            : false
         })
       }
     })
