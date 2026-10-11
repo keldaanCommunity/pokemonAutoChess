@@ -3543,7 +3543,7 @@
 		"STEELY_SPIRIT": "Allies ADJACENT_IN_THE_SAME_ROW deal 10% of their ATK as TRUE.",
 		"MITOSIS": "Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.",
 		"WURMPLE": "Wurmple evolves into Cascoon if POISON synergy is active, or into Silcoon instead.",
-		"BOMBIRDIER": "Drops a boulder every time it DASH or FLY_AWAY. Does not trigger ON_CAST effects."
+		"BOMBIRDIER": "Drops a boulder every time it DASH or FLY_AWAY, replicating ability without triggering ON_CAST effects."
 	},
 	"stat": {
 		"ATK": "Attack",
