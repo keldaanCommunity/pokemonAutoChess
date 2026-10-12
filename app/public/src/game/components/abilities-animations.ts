@@ -38,7 +38,11 @@ import {
   OrientationArray,
   OrientationVector
 } from "../../../../utils/orientation"
-import { pickRandomIn, randomBetween } from "../../../../utils/random"
+import {
+  pickRandomIn,
+  randomBetween,
+  shuffleArray
+} from "../../../../utils/random"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { DEPTH } from "../depths"
 import type { DebugScene } from "../scenes/debug-scene"
@@ -844,6 +848,70 @@ const poppingIcon: AbilityAnimationMaker<
     scale: options.scale ?? 0.25,
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
   })(args)
+
+const aquaSwirlAnimation: AbilityAnimation = ({
+  scene,
+  ability,
+  ap,
+  positionX,
+  positionY,
+  flip
+}) => {
+  const impactOffsets = shuffleArray([
+    [-1, -1],
+    [0, -1],
+    [1, -1],
+    [-1, 0],
+    [0, 0],
+    [1, 0],
+    [-1, 1],
+    [0, 1],
+    [1, 1]
+  ])
+  const [centerX] = transformEntityCoordinates(positionX, positionY, flip)
+
+  for (let i = 0; i < 18; i++) {
+    const [offsetX, offsetY] = impactOffsets[i % impactOffsets.length]
+    const [impactX, impactY] = transformEntityCoordinates(
+      positionX + offsetX,
+      positionY + offsetY,
+      flip
+    )
+    const landingX = impactX + randomBetween(-10, 10)
+    const landingY = impactY + randomBetween(-10, 10)
+    const startX =
+      landingX +
+      (impactX - centerX) * randomBetween(0.35, 0.65) +
+      randomBetween(-12, 12)
+    const startY = landingY - randomBetween(130, 200)
+    const rotation = randomBetween(0, Math.PI * 2)
+
+    scene.time.delayedCall(i * 140 + randomBetween(0, 70), () => {
+      const droplet = addAbilitySprite(scene, ability, ap, [startX, startY], {
+        scale: 2,
+        rotation,
+        depth: DEPTH.ABILITY,
+        destroyOnComplete: false
+      })
+      if (!droplet) return
+
+      scene.tweens.add({
+        targets: droplet,
+        x: landingX,
+        y: landingY,
+        duration: randomBetween(350, 550),
+        ease: Phaser.Math.Easing.Quadratic.In,
+        onComplete: () => {
+          droplet.destroy()
+          addAbilitySprite(scene, "RING_PINK", ap, [landingX, landingY], {
+            scale: 2,
+            depth: DEPTH.ABILITY_GROUND_LEVEL
+          })
+        }
+      })
+    })
+  }
+}
 
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
@@ -2295,6 +2363,7 @@ export const AbilitiesAnimations: {
       hitAnim: onTarget({ ability: "PUFF_BROWN", scale: 2 })
     })
   ],
+  [Ability.AQUA_SWIRL]: aquaSwirlAnimation,
   [Ability.TORCH_SONG]: projectile({ oriented: true, rotation: -Math.PI / 2 }),
   ["CURSE_EFFECT"]: tweenAnimation({
     textureKey: "status",

@@ -1790,7 +1790,8 @@
 		"THUNDERCLAP_PRESS": "Thunderclap Press",
 		"DRAGON_RAGE": "Dragon Rage",
 		"PURSUIT": "Pursuit",
-		"ROCKY_PAYLOAD": "Rocky Payload"
+		"ROCKY_PAYLOAD": "Rocky Payload",
+		"AQUA_SWIRL": "Aqua Swirl"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2359,7 +2360,8 @@
 		"THUNDERCLAP_PRESS": "The target is hit with an electric bodyslam and pushed away. Then the target and the enemy collided on the way get PARALYSIS for 4 seconds and take [20,40,80,160,SP] SPECIAL.",
 		"DRAGON_RAGE": "Gain [15,30,45,60,SP] SHIELD. Each second for the next 6 seconds, gain [5,10,15,20] more SHIELD and deal [5,10,15,20,SP] SPECIAL to ADJACENT enemies. When this ability ends, consume the remaining SHIELD and heal for 40% of its value.",
 		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.",
-		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL "
+		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL ",
+		"AQUA_SWIRL": "Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second."
 	},
 	"effect": {
 		"STAMINA": "Stamina",

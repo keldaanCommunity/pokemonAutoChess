@@ -14256,9 +14256,9 @@ export class Milotic extends Pokemon {
   speed = 51
   def = 8
   speDef = 14
-  maxPP = 80
+  maxPP = 140
   range = 2
-  skill = Ability.ATTRACT
+  skill = Ability.AQUA_SWIRL
   onAcquired(player: Player) {
     player.titles.add(Title.SIREN)
   }
