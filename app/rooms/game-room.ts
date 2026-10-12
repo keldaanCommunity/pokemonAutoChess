@@ -847,20 +847,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       let player = this.state.players.get(client.auth.uid)
       if (!player || player.hasLeftGame) return
       // a session closing while another session of this player is still connected is not them leaving
-      if (this.isPlaying(player) && this.hasOtherClient(client)) return
+      if (this.hasOtherClient(client)) return
       // a reconnection that failed halfway is not the player leaving either: onReconnect already cleared their pending game
       if (code === CloseCode.FAILED_TO_RECONNECT) return
 
       let reconnectionTimedOut = code !== CloseCode.CONSENTED
       if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
         // only a surrender request surrenders: a consented leave gets the same 5 minutes as a disconnect
-        // colyseus closes the socket only once onLeave resolves, so close it now or the client's leave() waits the 5 minutes too
-        client.leave(code)
+        client.leave(code) // colyseus only closes the socket once onLeave resolves, so close it before waiting
         if (await this.waitForReconnection(client)) return
         reconnectionTimedOut = true
         player = this.state.players.get(client.auth.uid)
         if (!player || player.hasLeftGame) return
-        if (this.isPlaying(player) && this.hasOtherClient(client)) return
+        if (this.hasOtherClient(client)) return
       }
 
       const pendingGame = await getPendingGame(this.presence, client.auth.uid)
