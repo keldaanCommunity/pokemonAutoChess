@@ -40,7 +40,10 @@ import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { castAbility } from "../abilities/cast"
+import { rockyPayloadEffect } from "../abilities/rocky-payload"
 import type { Board, Cell } from "../board"
+import { registerOnEvolutionHook } from "../evolution-logic/evolution-hooks"
+import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { getStrongestUnit } from "../unit-score"
@@ -67,6 +70,7 @@ import {
   OnStageStartEffect,
   PeriodicEffect
 } from "./effect"
+import { unequipItems } from "./items"
 import { AccelerationEffect } from "./passives/acceleration"
 import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
@@ -85,7 +89,7 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
 
   pokemon.count.attackCount++
   pokemon.targetY = -1
-  const ppGained = [2, 3, 5][pokemon.stars - 1] ?? 5
+  const ppGained = [2, 3, 5, 7][pokemon.stars - 1] ?? 7
   board
     .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
     .forEach((cell) => {
@@ -451,35 +455,39 @@ const DarmanitanZenOnHitEffect = new OnHitEffect(
   Passive.DARMANITAN_ZEN
 )
 
-const GalarianDarmanitanBurnEffect = new PeriodicEffect(
-  (pokemon, board) => {
-    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
-      // inflict special damage and burn adjacent enemies
-      pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
-      const crit =
-        pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(pokemon.critChance / 100, pokemon)
-      pokemon.handleHeal(10, pokemon, 1, crit)
-      const damage = 0.25 * pokemon.atk
-      board
-        .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
-        .forEach((cell) => {
-          if (cell.value && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-            cell.value.status.triggerBurn(2000, pokemon, cell.value)
-          }
-        })
-    }
-  },
-  Passive.GALARIAN_DARMANITAN_ZEN,
-  1000
-)
+class GalarianDarmanitanBurnEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon, board) => {
+        if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
+          // inflict special damage and burn adjacent enemies
+          pokemon.broadcastAbility({ skill: "GALARIAN_DARMANITAN_ZEN_BURN" })
+          const crit =
+            pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
+            chance(pokemon.critChance / 100, pokemon)
+          pokemon.handleHeal(10, pokemon, 1, crit)
+          const damage = 0.25 * pokemon.atk
+          board
+            .getAdjacentCells(pokemon.positionX, pokemon.positionY, false)
+            .forEach((cell) => {
+              if (cell.value && cell.value.team !== pokemon.team) {
+                cell.value.handleSpecialDamage(
+                  damage,
+                  board,
+                  AttackType.SPECIAL,
+                  pokemon,
+                  crit
+                )
+                cell.value.status.triggerBurn(2000, pokemon, cell.value)
+              }
+            })
+        }
+      },
+      Passive.GALARIAN_DARMANITAN_ZEN,
+      1000
+    )
+  }
+}
 
 const PikachuSurferBuffEffect = new OnSpawnEffect((pkm) => {
   if (!pkm.player) return
@@ -1143,15 +1151,19 @@ const chinglingCountCastsEffect = new OnSimulationStartEffect(
   Passive.CHINGLING
 )
 
-const SudowoodoGainAttackEffect = new PeriodicEffect(
-  (pokemon) => {
-    if (pokemon.status.tree) {
-      pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
-    }
-  },
-  Passive.SUDOWOODO,
-  1000
-)
+class SudowoodoGainAttackEffect extends PeriodicEffect {
+  constructor() {
+    super(
+      (pokemon) => {
+        if (pokemon.status.tree) {
+          pokemon.addAttack(pokemon.stars === 1 ? 1 : 2, pokemon, 0, false)
+        }
+      },
+      Passive.SUDOWOODO,
+      1000
+    )
+  }
+}
 
 const PoipoleOnKillEffect = new OnKillEffect(({ attacker, board }) => {
   const familyMembers: PokemonEntity[] = board.cells.filter<PokemonEntity>(
@@ -1312,7 +1324,10 @@ export const PassiveEffects: Partial<
   [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
   [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
-  [Passive.GALARIAN_DARMANITAN_ZEN]: [GalarianDarmanitanBurnEffect, treeEffect],
+  [Passive.GALARIAN_DARMANITAN_ZEN]: [
+    () => new GalarianDarmanitanBurnEffect(), // needs new instance of effect for each pokemon due to internal timer
+    treeEffect
+  ],
   [Passive.GLIMMORA]: [ToxicSpikesEffect],
   [Passive.FUR_COAT]: [FurCoatEffect],
   [Passive.CREAM]: [MilceryFlavorEffect],
@@ -1431,7 +1446,10 @@ export const PassiveEffects: Partial<
     treeEffect
   ],
   [Passive.WOBBUFFET]: [treeEffect],
-  [Passive.SUDOWOODO]: [treeEffect, SudowoodoGainAttackEffect],
+  [Passive.SUDOWOODO]: [
+    treeEffect,
+    () => new SudowoodoGainAttackEffect() // needs new instance of effect for each pokemon due to internal timer
+  ],
   [Passive.INANIMATE]: [inanimateObjectEffect],
   [Passive.SKARMORY]: [skarmorySpikesOnSimulationStartEffect],
   [Passive.DRY_SKIN]: [drySkinOnSpawnEffect],
@@ -1721,7 +1739,7 @@ export const PassiveEffects: Partial<
           )
         })
         player.items.push(...itemsToRemove)
-        pokemon.removeItems(itemsToRemove, player)
+        unequipItems(pokemon, itemsToRemove, player)
       }
     })
   ],
@@ -1896,5 +1914,47 @@ export const PassiveEffects: Partial<
         }
       }
     })
+  ],
+
+  [Passive.BOMBIRDIER]: [
+    new OnMoveEffect(({ pokemon, board, oldX, oldY, newX, newY }) => {
+      if (distanceC(oldX, oldY, newX, newY) > 1) {
+        // dash or fly away
+        rockyPayloadEffect({
+          pokemon,
+          board,
+          departure: [oldX, oldY],
+          destination: [newX, newY],
+          crit: pokemon.effects.has(EffectEnum.ABILITY_CRIT)
+            ? chance(pokemon.critChance / 100, pokemon)
+            : false
+        })
+      }
+    })
   ]
 }
+
+registerOnEvolutionHook((pokemonEvolved, player) => {
+  if (pokemonEvolved.passive in PassiveEffects) {
+    PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
+      if (effect instanceof OnEvolutionEffect) {
+        effect.apply({ pokemonEvolved, player })
+      }
+    })
+  }
+})
+
+registerOnEvolutionHook((pokemonEvolved, player) => {
+  player.board.forEach((pokemon) => {
+    if (
+      (pokemon.passive === Passive.COSMOG ||
+        pokemon.passive === Passive.COSMOEM) &&
+      pokemonEvolved.passive !== Passive.COSMOG &&
+      pokemonEvolved.passive !== Passive.COSMOEM
+    ) {
+      pokemon.addMaxHP(10)
+      pokemon.stacks++
+      EvolutionManager.tryEvolve(pokemon, player)
+    }
+  })
+})

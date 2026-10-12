@@ -26,13 +26,14 @@ export class PetalDanceStrategy extends AbilityStrategy {
       }))
       .sort((a, b) => a.distance - b.distance)
 
+    if (enemies.length === 0) return
     const projectileSpeed = 10
 
     for (let i = 0; i < count; i++) {
       const { entity: enemy, distance } = enemies[i % enemies.length]
       pokemon.commands.push(
         new DelayedCommand(() => {
-          if (enemy.hp > 0) {
+          if (enemy && enemy.hp > 0) {
             enemy.handleSpecialDamage(
               damage,
               board,

@@ -38,11 +38,11 @@ import type AnimationManager from "../animation-manager"
 import { DEPTH } from "../depths"
 import type GameScene from "../scenes/game-scene"
 import { displayAbility, displayHit } from "./abilities-animations"
-import PokemonSprite from "./pokemon-sprite"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "./pokemon-animations"
+import PokemonSprite from "./pokemon-sprite"
 
 export default class BattleManager {
   group: GameObjects.Group
@@ -891,6 +891,7 @@ export default class BattleManager {
     targetX?: number
     targetY?: number
     delay?: number
+    data?: { [key: string]: any }
   }) {
     if (this.simulation?.id === args.id && args.skill) {
       displayAbility({
@@ -904,7 +905,8 @@ export default class BattleManager {
         targetX: args.targetX ?? -1,
         targetY: args.targetY ?? -1,
         flip: this.flip,
-        delay: args.delay ?? -1
+        delay: args.delay ?? -1,
+        data: args.data ?? {}
       })
     }
   }
@@ -920,7 +922,8 @@ export default class BattleManager {
       positionY: pkmSprite.positionY,
       targetX: pkmSprite.targetX ?? -1,
       targetY: pkmSprite.targetY ?? -1,
-      flip: this.flip
+      flip: this.flip,
+      data: {}
     })
   }
 

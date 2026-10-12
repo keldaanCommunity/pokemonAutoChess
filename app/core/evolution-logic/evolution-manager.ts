@@ -14,10 +14,9 @@ import {
 import { PokemonActionState } from "../../types/enum/Game"
 import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
-import { OnEvolutionEffect } from "../effects/effect"
-import { PassiveEffects } from "../effects/passives"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
+import { triggerOnEvolutionHooks } from "./evolution-hooks"
 import { HatchEvolutionHandler } from "./hatch-evolution-handler"
 import { getHatchTime } from "./hatch-time"
 import { ItemEvolutionHandler } from "./item-evolution-handler"
@@ -81,26 +80,7 @@ export const EvolutionManager = {
     player.updateSynergies()
     if (pokemonBeforeEvolution.supercharged) pokemonEvolved.supercharged = true // preserve supercharged state on evolution
 
-    if (pokemonEvolved.passive in PassiveEffects) {
-      PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
-        if (effect instanceof OnEvolutionEffect) {
-          effect.apply({ pokemonEvolved, player })
-        }
-      })
-    }
-
-    player.board.forEach((pokemon) => {
-      if (
-        (pokemon.passive === Passive.COSMOG ||
-          pokemon.passive === Passive.COSMOEM) &&
-        pokemonEvolved.passive !== Passive.COSMOG &&
-        pokemonEvolved.passive !== Passive.COSMOEM
-      ) {
-        pokemon.addMaxHP(10)
-        pokemon.stacks++
-        this.tryEvolve(pokemon, player)
-      }
-    })
+    triggerOnEvolutionHooks(pokemonEvolved, player)
 
     // check evolutions again if it can evolve twice in a row
     this.tryEvolve(pokemonEvolved, player, ...additionalArgs)

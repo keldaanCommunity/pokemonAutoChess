@@ -1,9 +1,9 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
+import { ArceusFormPerSynergy } from "../../config/game/pokemons"
 import {
-  ArceusFormPerSynergy,
   SynergyTiers,
   SynergyTiersThresholds
-} from "../../config"
+} from "../../config/game/synergies"
 import type { IPlayer, IPokemon } from "../../types"
 import type { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"

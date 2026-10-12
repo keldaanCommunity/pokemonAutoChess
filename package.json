@@ -1,7 +1,7 @@
 {
   "name": "pokemon-auto-chess",
   "version": "6.11",
-  "assetsVersion": "6.11.2026-08-21.0",
+  "assetsVersion": "6.11.2026-10-10.0",
   "translationsVersion": "6.11-2026-06-04.0",
   "description": "Pokemon Auto Chess Game. Made by fans for fans. Open source, non profit. All rights to the Pokemon Company.",
   "keywords": [],
@@ -134,7 +134,7 @@
     "degit": "^3.10.0",
     "esbuild": "^0.28.2",
     "knip": "^6.35.1",
-    "npm-run-all2": "^8.0.0",
+    "npm-run-all2": "^9.0.3",
     "pm2": "^7.0.4",
     "rimraf": "^6.1.3",
     "tsx": "^4.23.13",

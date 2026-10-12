@@ -868,7 +868,7 @@ export function effectInOrientation(
       break
 
     case Orientation.RIGHT:
-      for (let x = pokemon.positionX + 1; x < board.rows; x++) {
+      for (let x = pokemon.positionX + 1; x < board.columns; x++) {
         applyEffect(x, pokemon.positionY)
       }
       break

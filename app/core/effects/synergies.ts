@@ -55,6 +55,8 @@ import type Simulation from "../simulation"
 import { DelayedCommand } from "../simulation-command"
 import { getUnitScore } from "../unit-score"
 import {
+  BeforeTakingDamageEffect,
+  type BeforeTakingDamageEffectArgs,
   type Effect,
   OnAbilityCastEffect,
   OnAttackEffect,
@@ -286,8 +288,8 @@ export class OnFieldDeathEffect extends OnDeathEffect {
   }
 }
 
-export class FlyingProtectionEffect extends OnDamageReceivedEffect {
-  priority = -1
+export class FlyingProtectionEffect extends BeforeTakingDamageEffect {
+  priority = 1
   flyingProtection: number = 0
   constructor(effect: EffectEnum) {
     super(undefined, effect)
@@ -300,7 +302,7 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
       this.flyingProtection = 2
     }
   }
-  apply({ pokemon, board }: OnDamageReceivedEffectArgs) {
+  apply({ pokemon, board }: BeforeTakingDamageEffectArgs) {
     // Flying protection
     if (
       this.flyingProtection > 0 &&
@@ -319,6 +321,12 @@ export class FlyingProtectionEffect extends OnDamageReceivedEffect {
       ) {
         this.flyingProtection--
         pokemon.flyAway(board)
+        pokemon.count.dodgeCount++
+        return {
+          newDeath: false,
+          newTakenDamage: 0,
+          newResidualDamage: 0
+        }
       }
     }
   }
@@ -953,14 +961,7 @@ const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
 const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   if (getSynergyTier(player.synergies, Synergy.GROUND) > 0) {
     player.board.forEach((pokemon, pokemonId) => {
-      if (
-        pokemon.types.has(Synergy.GROUND) &&
-        !isOnBench(pokemon) &&
-        !(
-          pokemon.items.has(Item.CHEF_HAT) &&
-          player.synergies.hasSynergyActive(Synergy.GOURMET)
-        )
-      ) {
+      if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon)) {
         const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
         const hasAlreadyReachedMaxDepth = player.groundHoles[index] === 5
         const isReachingMaxDepth = player.groundHoles[index] === 4

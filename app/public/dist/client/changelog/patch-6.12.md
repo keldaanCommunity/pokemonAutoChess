@@ -1,5 +1,7 @@
 # New Pokemons:
 
+- Bombirdier
+
 # Changes to Pokemon & Abilities
 
 - New passive to Duosion and Reuniclus: Mythosis. Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.
@@ -34,10 +36,17 @@
 - Nerf Attack Order (Vespiqueen): base damage [20,40,60,120] → [10,20,30,60] SPECIAL
 - Buff Wartortle: DEF/SPE_DEF 3 → 4 ; Buff Blastoise: DEF/SPE_DEF 4 → 6, ATK 20 → 23
 - Rework Nightmare (Ghastly): now applies damage to all enemies suffering from a negative status condition instead of just GHOST curse.
+- Revert Cosmog and Cosmoem buffs from 6.7.5 and 6.8 HP : 100 → 140 ; Cosmoem HP: 200 → 220 ; evolutiion stacks required: 8 → 10 ; this is due to the increase of selling prices of evolved Pokémon.
+- New ability for Paras: Scatters 3 spores around the nearest non POISONED enemy. After 2 seconds, it explodes on nearby ADJACENT enemies dealing [10,20,40,80,SP] SPECIAL, inflicting POISONED for 3s.
+
 
 # Changes to Synergies
 
 - Synergies now have a more consistent order accross all places where they are displayed (synergy menu, game history, post-game screen, etc.). The order is based on the synergy level, then in case of tie on the synergy tier, then in case of tie on the amount of Pokémon representing that synergy. This order is also used to clarify the determination of some divergent evolutions (e.g. Meowstic, Gallade/Gardevoir) and some passives (Arceus, Kecleon).
+
+- GOURMET cooking mechanic has been revisited. The cooking process now takes up to 8 seconds to complete, giving you time to move your chef around to properly distribute the dishes to your allies. If the battle is about to start, the cooking time will be reduced and even be instant on the last seconds of the preparation phase. Your chefs now cook immediately when receiving the CHEF_HAT. Dishes made this stage are now removed if the chef loses their hat by deactivating GOURMET synergy or benching the chef. This allows you to freely switch dishes between rounds without having to think one stage ahead.
+- A GOURMET GROUND Pokémon can now dig and cook in the same stage. The cooking will be delayed until the Pokémon is done digging.
+- Buff FLYING: now dodges the damage that would have dropped them below the HP threshold. Flying 8 Skydive damage: 150 → 200% of ATK
 
 # Changes to Items
 
@@ -67,10 +76,12 @@
 - Added new keybindings to cycle between players by rank
 - Added board effects descriptions in Wiki > Statuses
 - Added Gift Shop stage description in Wiki > Stages
+- Wiki now opens at the last tab you were on when you closed it
 
 # Bugfix
 
 - Grookey line now works properly with Electric triple attack effects
+- Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
 
 # Misc
 
