@@ -587,7 +587,8 @@
 		"REVELATION_DANCE": "잠재댄스",
 		"DRAGON_RAGE": "용의분노",
 		"THUNDERCLAP_PRESS": "질풍신뢰프레스",
-		"PURSUIT": "따라가때리기"
+		"PURSUIT": "따라가때리기",
+		"TOXIC_SPORE": "독포자"
 	},
 	"pkm": {
 		"DEFAULT": "미싱노",
@@ -2354,7 +2355,8 @@
 		"DRAGON_RAGE": "[15,30,45,60,SP]의 SHIELD를 얻는다. 6초 동안 매 초마다 SHIELD를 [5,10,15,20]만큼 더 얻으면서 ADJACENT 상대에게 [5,10,15,20,SP]의 SPECIAL를 입힌다. 기술이 끝나고 남은 SHIELD는 전부 사라지고 40% 만큼 HP를 회복한다.",
 		"DEFAULT": " ",
 		"PURSUIT": "상대에게 [35,70,140,280,SP]의 SPECIAL를 입히고 마킹한다. 마킹한 상대가 도약, 순간이동, FLY_AWAY을 했다면 바로 옆으로 도약해 기술을 다시 사용한다.",
-		"HIDDEN_POWER_D": "STRONGEST 같은 편 포켓몬으로, 도구나 영구적인 능력치 상승 없이 변신한다."
+		"HIDDEN_POWER_D": "STRONGEST 같은 편 포켓몬으로, 도구나 영구적인 능력치 상승 없이 변신한다.",
+		"TOXIC_SPORE": "POISONED 상태가 아닌 상대 근처에 3개의 포자를 뿌린다. 2초 후 폭발해 ADJACENT 상대에게 [10,20,40,80,SP]의 SPECIAL를 입히고 3초 동안 POISONED 상태로 만든다."
 	},
 	"effect": {
 		"STAMINA": "지구력",
@@ -2547,7 +2549,7 @@
 		"TAILWIND": "HP가 20% 미만이 될 때 FLY_AWAY",
 		"FEATHER_DANCE": "FLY_AWAY 후 2초 동안 PROTECT 상태가 됨",
 		"MAX_AIRSTREAM": "HP가 50%, 20% 상태 될 시 FLY_AWAY",
-		"SKYDIVE": "FLY_AWAY 후, 착지 지점의 상대에게 ATK의 200%만큼 PHYSICAL를 입히는 강하 공격을 사용",
+		"SKYDIVE": "FLY_AWAY 후, 착지 지점의 상대에게 ATK의 150%만큼 PHYSICAL를 입히는 강하 공격을 사용",
 		"COTTONWEED": "통통코 화분 획득",
 		"FLYCATCHER": "모다피 화분 획득",
 		"FRAGRANT": "치코리타 화분 획득",
