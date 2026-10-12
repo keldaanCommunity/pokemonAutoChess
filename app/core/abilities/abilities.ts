@@ -24,6 +24,7 @@ import { AppleAcidStrategy } from "./apple-acid"
 import { AquaJetStrategy } from "./aqua-jet"
 import { AquaRingStrategy } from "./aqua-ring"
 import { AquaStepStrategy } from "./aqua-step"
+import { AquaSwirlStrategy } from "./aqua-swirl"
 import { AquaTailStrategy } from "./aqua-tail"
 import { ArmThrustStrategy } from "./arm-thrust"
 import { ArmorCannonStrategy } from "./armor-cannon"
@@ -1296,5 +1297,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.X_SCISSOR]: new XScissorStrategy(),
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
-  [Ability.ZING_ZAP]: new ZingZapStrategy()
+  [Ability.ZING_ZAP]: new ZingZapStrategy(),
+  [Ability.AQUA_SWIRL]: new AquaSwirlStrategy()
 }

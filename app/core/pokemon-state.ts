@@ -1241,7 +1241,7 @@ export default abstract class PokemonState {
   }
 
   getMostSurroundedCoordinateAvailablePlace(
-    team: Team,
+    team: Team | undefined,
     board: Board
   ): { x: number; y: number } | undefined {
     let x: number | undefined = undefined
@@ -1252,7 +1252,7 @@ export default abstract class PokemonState {
         const cells = board.getAdjacentCells(x, y)
         let n = 0
         cells.forEach((cell) => {
-          if (cell.value && cell.value.team === team) {
+          if (cell.value && (team === undefined || cell.value.team === team)) {
             n++
           }
         })
