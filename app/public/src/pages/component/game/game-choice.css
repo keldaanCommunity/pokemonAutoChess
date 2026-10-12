@@ -53,6 +53,32 @@
   text-align: center;
 }
 
+.game-choice-items-list .item-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 1em;
+  font-size: 80%;
+  margin: 0 0 0.5em 0;
+  align-items: center;
+  line-height: 1;
+  min-height: 15px;
+
+  & > i {
+    color: #a0a0a0;
+    font-style: italic;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  & img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 .game-choice-pokemons-list .game-pokemon-portrait {
   margin: 0 auto;
 }

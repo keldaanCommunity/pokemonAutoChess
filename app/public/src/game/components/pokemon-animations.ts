@@ -1662,9 +1662,9 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.FAIRY_HIT
   },
   [Pkm.KELDEO]: {
-    attack: AnimationType.Swing,
-    ability: AnimationType.RearUp,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.RearUp,
     attackSprite: AttackSprite.FIGHTING_MELEE,
     hitSprite: HitSprite.WATER_HIT
   },
@@ -2271,22 +2271,22 @@ export const PokemonAnimations: {
   },
   [Pkm.BUDEW]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.DeepBreath,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSELIA]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.ROSERADE]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Swing,
-    emote: AnimationType.Shoot,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
@@ -3319,6 +3319,12 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.NORMAL_MELEE
   },
+  [Pkm.KECLEON_PURPLE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.NORMAL_MELEE
+  },
   [Pkm.CARBINK]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
@@ -4293,7 +4299,7 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.BUG_MELEE,
     hitSprite: HitSprite.BUG_HIT
   },
-  [Pkm.VESPIQUEEN]: {
+  [Pkm.VESPIQUEN]: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot,
@@ -6575,6 +6581,14 @@ export const PokemonAnimations: {
     shinyUnavailable: true,
     noShadow: true
   },
+  [Pkm.BUG_NEST]: {
+    attack: AnimationType.Idle,
+    ability: AnimationType.Idle,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    shinyUnavailable: true,
+    noShadow: true
+  },
   [Pkm.ELGYEM]: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
@@ -7124,6 +7138,13 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot
+  },
+  [Pkm.PIKACHU_LIBRE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shock,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FIGHTING_MELEE,
+    hitSprite: HitSprite.FIGHTING_HIT
   },
   [Pkm.ESPURR]: {
     attack: AnimationType.Attack,
@@ -7692,8 +7713,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.BUG_RANGE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.BUG_RANGE
   },
   [Pkm.VIVILLON]: {
     attack: AnimationType.Shoot,
@@ -7895,15 +7915,13 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.POISON_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.POISON_MELEE
   },
   [Pkm.DUCKLETT]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.FLYING_RANGE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.FLYING_RANGE
   },
   [Pkm.SWANNA]: {
     attack: AnimationType.Attack,
@@ -7957,15 +7975,13 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Emit,
-    attackSprite: AttackSprite.ICE_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.ICE_MELEE
   },
   [Pkm.HISUI_AVALUGG]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Emit,
-    attackSprite: AttackSprite.ROCK_MELEE,
-    shinyUnavailable: true
+    attackSprite: AttackSprite.ROCK_MELEE
   },
   [Pkm.KARRABLAST]: {
     attack: AnimationType.Attack,
@@ -8063,5 +8079,63 @@ export const PokemonAnimations: {
     ability: AnimationType.Swing,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.BUG_MELEE
+  },
+  [Pkm.PASSIMIAN]: {
+    attack: AnimationType.SpAttack,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.BALL_RANGE,
+    hitSprite: HitSprite.FIGHTING_HIT
+  },
+  [Pkm.ORICORIO_BAILE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Dance,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.FIRE_HIT
+  },
+  [Pkm.ORICORIO_PA_U]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.PSYCHIC_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.ORICORIO_POMPOM]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Strike,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT
+  },
+  [Pkm.ORICORIO_SENSU]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLORA_RANGE,
+    hitSprite: HitSprite.GHOST_HIT,
+    shinyUnavailable: true
+  },
+  [Pkm.GALAR_MEOWTH]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE,
+    shinyUnavailable: true
+  },
+  [Pkm.PERRSERKER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.STEEL_MELEE
+  },
+  [Pkm.BOMBIRDIER]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Hover,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.FLYING_MELEE,
+    hitSprite: HitSprite.ROCK_HIT,
+    shinyUnavailable: true
   }
 }

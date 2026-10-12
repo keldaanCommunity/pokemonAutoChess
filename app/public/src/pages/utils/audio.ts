@@ -64,13 +64,15 @@ function setupSounds() {
 preloadSounds()
 setupSounds()
 
-export function playSound(key: Soundkey, volume = 1) {
+export function playSound(key: Soundkey, volume = 1): HTMLAudioElement | null {
   const sound = AUDIO_ELEMENTS[key]
   if (sound) {
     sound.currentTime = 0
     sound.volume = (volume * preference("sfxVolume")) / 100
     sound.play()
+    return sound
   }
+  return null
 }
 
 interface SceneWithMusic extends Phaser.Scene {

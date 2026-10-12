@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../network"
@@ -13,7 +12,7 @@ export default function GameExperience() {
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
-  const isLevelMax = experienceManager.level >= MAX_LEVEL
+  const isLevelMax = experienceManager.level >= experienceManager.maxLevel
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const levelUpCost = getLevelUpCost(specialGameRule)
   const goldToLevelUp = isLevelMax

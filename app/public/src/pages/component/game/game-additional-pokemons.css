@@ -1,0 +1,58 @@
+#game-additional-pokemons {
+  & .react-tooltip-content-wrapper {
+    margin: -5px;
+    overflow: hidden;
+  }
+
+  & .wrapper {
+    padding: 0;
+    color: var(--color-fg-primary);
+    background-color: var(--color-bg-primary);
+    overflow: hidden;
+  }
+
+  & header {
+    background-color: var(--color-bg-secondary);
+    padding: 0.8em 1em 0.4em 1em;
+    margin: -0.5em -0.5em 0.5em -0.5em;
+    overflow: visible;
+
+    & span {
+      font-size: 140%;
+    }
+  }
+
+  & p.help {
+    margin: 0 auto;
+  }
+
+  & .grid {
+    display: grid;
+    grid-template: repeat(4, 1fr) / repeat(6, 1fr);
+    grid-auto-flow: column;
+    gap: 5px;
+    margin: 5px;
+    width: 700px;
+
+    & > p {
+      grid-row: 1 / 5;
+      grid-column: 1 / 7;
+      display: grid;
+      place-content: center;
+      padding: 1em;
+    }
+  }
+
+  & .game-pokemon-portrait {
+    width: 112px;
+    height: 90px;
+    min-height: 0;
+    min-width: 0;
+    border: 2px solid #333;
+
+    & .synergy-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

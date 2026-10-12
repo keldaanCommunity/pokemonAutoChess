@@ -1,3 +1,4 @@
+import type { Delayed } from "@colyseus/core"
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema"
 import { GameUser } from "../../models/colyseus-models/game-user"
 import Message from "../../models/colyseus-models/message"
@@ -36,6 +37,7 @@ export default class PreparationState
   @type(["string"]) whitelist: string[]
   @type(["string"]) blacklist: string[]
   abortOnPlayerLeave?: AbortController
+  readyUpCooldown: Delayed | null
 
   constructor(params: {
     ownerId?: string
@@ -63,6 +65,7 @@ export default class PreparationState
     this.specialGameRule = params.specialGameRule ?? null
     this.whitelist = params.whitelist ?? []
     this.blacklist = params.blacklist ?? []
+    this.readyUpCooldown = null
   }
 
   addMessage(params: {

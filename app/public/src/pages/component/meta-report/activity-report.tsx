@@ -64,11 +64,15 @@ export function ActivityReport() {
   return (
     <div id="activity-report">
       <header>
-        <h2>{t("game_activity", { defaultValue: "Game Activity" })}</h2>
+        <h2>
+          {t("meta_report.game_activity", { defaultValue: "Game Activity" })}
+        </h2>
         <div className="meta">
           <span>
-            {t("total_games_30d", { defaultValue: "Games (last 30 days)" })}:{" "}
-            {totalGames.toLocaleString()}
+            {t("meta_report.total_games_30d", {
+              defaultValue: "Games (last 30 days)"
+            })}
+            : {totalGames.toLocaleString()}
           </span>
           <span>
             {t("last_updated", { defaultValue: "Last updated" })}:{" "}

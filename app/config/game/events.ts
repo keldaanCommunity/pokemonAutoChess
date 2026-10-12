@@ -13,6 +13,13 @@ export const VictoryRoadPointsPerRank = [
   -8 // 8th
 ]
 
+export const PokepalsPointsPerRank = [
+  +10, // 1st
+  +3, // 2nd
+  -1, // 3rd
+  -5 // 4th
+]
+
 export const TOURNAMENT_REGISTRATION_TIME = 60 * 60 * 1000 // 1 hour
 export const TOURNAMENT_CLEANUP_DELAY = 24 * 60 * 60 * 1000 // 1 day
 

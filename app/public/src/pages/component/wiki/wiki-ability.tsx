@@ -3,6 +3,7 @@ import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { AutoSizer } from "react-virtualized-auto-sizer"
 import { List, useDynamicRowHeight } from "react-window"
+import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { PRECOMPUTED_POKEMONS_PER_ABILITY } from "../../../../../models/precomputed/precomputed-ability"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
@@ -13,6 +14,7 @@ import {
   TMsSilver
 } from "../../../../../types/enum/Item"
 import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -64,18 +66,26 @@ export default function WikiAbility() {
   )
 
   const filteredAbilities = (Object.keys(Ability) as Ability[])
-    .filter(
-      (a) =>
-        a !== Ability.DEFAULT &&
-        (!searchQuery.trim() ||
-          jsxTextContent(
-            addIconsToDescription(
-              `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
-            )
-          )
-            .toLowerCase()
-            .includes(searchQuery.trim().toLowerCase()))
-    )
+    .filter((a) => {
+      if (a === Ability.DEFAULT) return false
+      const trimmedQuery = searchQuery.trim()
+      if (!trimmedQuery) return true
+
+      const searchableText = jsxTextContent(
+        addIconsToDescription(
+          `${t(`ability.${a}`)} ${t(`ability_description.${a}`)}`
+        )
+      ).toLowerCase()
+
+      // Split query by word separators (spaces, punctuation, etc.)
+      const tokens = trimmedQuery
+        .toLowerCase()
+        .split(/\W+/)
+        .filter((token) => token.length > 0)
+
+      // All tokens must match (AND logic)
+      return tokens.every((token) => searchableText.includes(token))
+    })
     .sort((a, b) => t(`ability.${a}`).localeCompare(t(`ability.${b}`)))
 
   const dynamicRowHeight = useDynamicRowHeight({
@@ -165,6 +175,11 @@ function AbilityRow({
           >
             <div>
               <h2>{t(`ability.${ability}`)}</h2>
+              {InimitableAbilities.includes(ability) && (
+                <p style={{ marginBottom: "0.5em" }}>
+                  {addIconsToDescription("INIMITABLE")}
+                </p>
+              )}
               <p>
                 {addIconsToDescription(t(`ability_description.${ability}`))}
               </p>
@@ -191,7 +206,7 @@ function AbilityRow({
                     data-tooltip-content={tmPerAbility[ability]}
                   >
                     <img
-                      src={`assets/item/${TMsBronze.includes(tmPerAbility[ability]!) ? "TM_BRONZE" : TMsSilver.includes(tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
+                      src={`assets/item/${isIn(TMsBronze, tmPerAbility[ability]!) ? "TM_BRONZE" : isIn(TMsSilver, tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
                       className="item"
                     />
                   </li>

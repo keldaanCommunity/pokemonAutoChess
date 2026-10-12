@@ -1,10 +1,41 @@
-import { getBaseAltForm, getEmotionCost } from "../config"
+import type { HydratedDocument } from "mongoose"
+import {
+  BoosterRarityProbability,
+  EmotionCost,
+  getBaseAltForm,
+  getEmotionCost,
+  PkmAltForms,
+  PkmAltFormsByPkm
+} from "../config"
 import { CollectionUtils } from "../core/collection"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import type { Emotion } from "../types"
-import { PkmByIndex, PkmIndex } from "../types/enum/Pokemon"
-import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
-import { checkTitlesAfterEmotionUnlocked } from "./booster"
+import { getAvailableEmotions } from "../models/precomputed/precomputed-emotions"
+import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
+import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
+import { PokemonAnimations } from "../public/src/game/components/pokemon-animations"
+import {
+  CollectionEmotions,
+  Emotion,
+  type PkmWithCustom,
+  Title
+} from "../types"
+import type { Booster, BoosterCard } from "../types/Booster"
+import { Ability } from "../types/enum/Ability"
+import { Rarity } from "../types/enum/Game"
+import {
+  NonPkm,
+  Pkm,
+  PkmByIndex,
+  PkmIndex,
+  Unowns
+} from "../types/enum/Pokemon"
+import type {
+  IPokemonCollectionItemMongo,
+  IUserMetadataMongo
+} from "../types/interfaces/UserMetadata"
+import { logger } from "../utils/logger"
+import { chance, pickRandomIn, randomWeighted } from "../utils/random"
+import { recordBoosterCreation } from "./booster-monitor"
 
 export type CollectionMutationResult = {
   userDoc: IUserMetadataMongo
@@ -31,7 +62,8 @@ export async function changeSelectedEmotionForUser(
 
   if (
     emotion !== null &&
-    !CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)
+    (!mongoItem.unlocked ||
+      !CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny))
   ) {
     return null
   }
@@ -57,22 +89,43 @@ export async function buyEmotionForUser(
   const cost = getEmotionCost(emotion, shiny)
   const shardIndex = PkmIndex[getBaseAltForm(PkmByIndex[index])]
 
-  const mongoItem = mongoUser.pokemonCollection.get(index)
+  let mongoItem = mongoUser.pokemonCollection.get(index)
   const mongoShardItem = mongoUser.pokemonCollection.get(shardIndex)
-  if (!mongoItem || !mongoShardItem) return null
+  if (!mongoShardItem) return null // not supposed to happen, the item should be in collection so you have shards to buy the emotion
+  if (!mongoItem) {
+    // This alt form is not yet in collection, create new collection item
+    const newCollectionItem: IPokemonCollectionItemMongo = {
+      id: index,
+      unlocked: Buffer.alloc(5, 0),
+      dust: 0,
+      selectedEmotion: Emotion.NORMAL,
+      selectedShiny: false,
+      played: 0
+    }
+    mongoUser.pokemonCollection.set(index, newCollectionItem)
+    mongoItem = newCollectionItem
+  }
 
-  if (CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)) {
+  if (
+    mongoItem.unlocked &&
+    CollectionUtils.hasUnlocked(mongoItem.unlocked, emotion, shiny)
+  ) {
     return { userDoc: mongoUser }
   }
 
-  if (mongoShardItem.dust < cost) return null
+  if ((mongoShardItem.dust ?? 0) < cost) return null
 
-  CollectionUtils.unlockEmotion(mongoItem.unlocked, emotion, shiny)
+  // A thin stored entry - created by the settlement $inc for a pokemon that was played
+  // but never owned - has no mask. Create one, otherwise the shards would be spent on
+  // an unlock that is never recorded.
+  const mask = mongoItem.unlocked ?? Buffer.alloc(5, 0)
+  mongoItem.unlocked = mask
+  CollectionUtils.unlockEmotion(mask, emotion, shiny)
   mongoItem.selectedEmotion = emotion
   mongoItem.selectedShiny = shiny
   mongoUser.markModified(`pokemonCollection.${index}`)
 
-  mongoShardItem.dust -= cost
+  mongoShardItem.dust = (mongoShardItem.dust ?? 0) - cost
 
   checkTitlesAfterEmotionUnlocked(mongoUser, [
     { name: PkmByIndex[index], emotion, shiny }
@@ -80,4 +133,243 @@ export async function buyEmotionForUser(
   await mongoUser.save()
 
   return { userDoc: mongoUser }
+}
+
+export async function migrateShardsOfAltForms(
+  mongoUser: HydratedDocument<IUserMetadataMongo>
+) {
+  let modified = false
+
+  for (const [index, item] of mongoUser.pokemonCollection) {
+    const pkm = PkmByIndex[index]
+    const dustToMigrate = item.dust ?? 0
+    if (PkmAltForms.includes(pkm) && dustToMigrate > 0) {
+      const basePkm = getBaseAltForm(pkm)
+      const baseIndex = PkmIndex[basePkm]
+      const baseItem = mongoUser.pokemonCollection.get(baseIndex)
+      if (!baseItem) {
+        // Base form is not in collection, create new collection item
+        const newCollectionItem: IPokemonCollectionItemMongo = {
+          id: index,
+          unlocked: Buffer.alloc(5, 0),
+          dust: dustToMigrate,
+          selectedEmotion: Emotion.NORMAL,
+          selectedShiny: false,
+          played: 0
+        }
+        mongoUser.pokemonCollection.set(baseIndex, newCollectionItem)
+      } else {
+        // Base form exists, add dust
+        baseItem.dust = (baseItem.dust ?? 0) + dustToMigrate
+        item.dust = 0
+      }
+      logger.info(
+        `Migrated ${dustToMigrate} shards from ${pkm} to its base form ${basePkm} for user ${mongoUser.uid}`
+      )
+      modified = true
+    }
+  }
+
+  if (modified) {
+    return await mongoUser.save()
+  }
+}
+
+export function createBooster(user: IUserMetadataMongo): Booster {
+  const NB_PER_BOOSTER = 10
+  const boosterContent: BoosterCard[] = []
+  const alreadyTaken = new Set<string>()
+  const godPack = chance(1 / 1000)
+
+  for (let i = 0; i < NB_PER_BOOSTER; i++) {
+    const guaranteedUnique = i === NB_PER_BOOSTER - 1
+    let card: BoosterCard
+    let attempts = 0
+    const maxAttempts = 50 // Prevent infinite loops
+
+    do {
+      card = pickRandomPokemonBooster(user, guaranteedUnique, godPack)
+      attempts++
+    } while (
+      attempts < maxAttempts &&
+      alreadyTaken.has(`${card.name}-${card.shiny}-${card.emotion}`)
+    )
+
+    // If we couldn't find a unique combination after maxAttempts, use the last generated card anyway
+    // This ensures the booster always has the expected number of cards
+    boosterContent.push(card)
+    alreadyTaken.add(`${card.name}-${card.shiny}-${card.emotion}`)
+  }
+
+  recordBoosterCreation(boosterContent)
+
+  return boosterContent
+}
+
+export function pickRandomPokemonBooster(
+  user: IUserMetadataMongo,
+  guaranteedUnique: boolean,
+  godPack: boolean
+): BoosterCard {
+  let name = Pkm.MAGIKARP
+  const rarity =
+    randomWeighted<Rarity>(BoosterRarityProbability) ?? Rarity.COMMON
+
+  if (godPack || guaranteedUnique) {
+    name = pickRandomIn(
+      [
+        ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.UNIQUE],
+        ...PRECOMPUTED_POKEMONS_PER_RARITY[Rarity.LEGENDARY]
+      ].filter((p) => getBaseAltForm(p) === p)
+    ) as Pkm
+  } else {
+    const candidates: Pkm[] = (
+      PRECOMPUTED_POKEMONS_PER_RARITY[rarity] ?? []
+    ).filter(
+      (p) =>
+        Unowns.includes(p) === false &&
+        getPokemonData(p).skill !== Ability.DEFAULT &&
+        getBaseAltForm(p) === p
+    )
+    name = pickRandomIn(candidates)
+    if (name === undefined) {
+      name = Pkm.MAGIKARP
+      logger.warn(
+        `No candidates found for booster card rarity ${rarity}, defaulting to MAGIKARP`
+      )
+    }
+  }
+
+  if (name in PkmAltFormsByPkm) {
+    // If the selected Pokemon has alt forms, pick one of them randomly
+    name = pickRandomIn([name, ...PkmAltFormsByPkm[name]!])
+  }
+
+  const shiny =
+    (godPack || chance(0.05)) &&
+    PokemonAnimations[name]?.shinyUnavailable !== true
+
+  const availableEmotions = getAvailableEmotions(PkmIndex[name], shiny)
+  let emotion =
+    randomWeighted<Emotion>(
+      availableEmotions.reduce(
+        (o, e) => ({ ...o, [e]: 1 / EmotionCost[e] }),
+        {}
+      )
+    ) ?? Emotion.NORMAL
+
+  if (godPack) {
+    const emotionsNotUnlocked = availableEmotions.filter(
+      (emotion) =>
+        !CollectionUtils.hasUnlockedCustom(user.pokemonCollection, {
+          name,
+          shiny,
+          emotion
+        })
+    )
+    if (emotionsNotUnlocked.length > 0) {
+      emotion = pickRandomIn(emotionsNotUnlocked)
+    }
+  }
+
+  const hasAlreadyUnlocked = CollectionUtils.hasUnlockedCustom(
+    user.pokemonCollection,
+    {
+      name,
+      shiny,
+      emotion
+    }
+  )
+
+  return { name, shiny, emotion, new: !hasAlreadyUnlocked }
+}
+
+export function checkTitlesAfterEmotionUnlocked(
+  mongoUser: IUserMetadataMongo,
+  unlocked: PkmWithCustom[]
+) {
+  const newTitles: Title[] = []
+  if (!mongoUser.titles.includes(Title.SHINY_SEEKER)) {
+    let numberOfShinies = 0
+    mongoUser.pokemonCollection.forEach((c) => {
+      const { shinyEmotions } = CollectionUtils.getEmotionsUnlocked(c)
+      numberOfShinies += shinyEmotions.length
+    })
+    if (numberOfShinies >= 30) {
+      newTitles.push(Title.SHINY_SEEKER)
+    }
+  }
+
+  if (!mongoUser.titles.includes(Title.DUKE)) {
+    if (
+      Object.values(Pkm)
+        .filter(
+          (p) =>
+            NonPkm.includes(p) === false && PkmAltForms.includes(p) === false
+        )
+        .every((pkm) => {
+          const baseForm = getBaseAltForm(pkm)
+          const accepted: Pkm[] =
+            baseForm in PkmAltFormsByPkm
+              ? [baseForm, ...PkmAltFormsByPkm[baseForm]]
+              : [baseForm]
+          return accepted.some((form) => {
+            const item = mongoUser.pokemonCollection.get(PkmIndex[form])
+            if (!item) return false
+            const { emotions, shinyEmotions } =
+              CollectionUtils.getEmotionsUnlocked(item)
+            return emotions.length > 0 || shinyEmotions.length > 0
+          })
+        })
+    ) {
+      newTitles.push(Title.DUKE)
+    }
+  }
+
+  if (
+    unlocked.some((p) => p.emotion === Emotion.ANGRY && p.name === Pkm.ARBOK) &&
+    !mongoUser.titles.includes(Title.DENTIST)
+  ) {
+    newTitles.push(Title.DENTIST)
+  }
+
+  if (
+    !mongoUser.titles.includes(Title.ARCHEOLOGIST) &&
+    Unowns.some((unown) => unlocked.map((p) => p.name).includes(unown)) &&
+    Unowns.every((name) => {
+      const unownIndex = PkmIndex[name]
+      const item = mongoUser.pokemonCollection.get(unownIndex)
+      const isBeingUnlockedRightNow = unlocked.some((p) => p.name === name)
+      let isAlreadyUnlocked = false
+      if (item) {
+        const { emotions, shinyEmotions } =
+          CollectionUtils.getEmotionsUnlocked(item)
+        isAlreadyUnlocked = emotions.length > 0 || shinyEmotions.length > 0
+      }
+      return isAlreadyUnlocked || isBeingUnlockedRightNow
+    })
+  ) {
+    newTitles.push(Title.ARCHEOLOGIST)
+  }
+
+  if (!mongoUser.titles.includes(Title.DUCHESS)) {
+    if (
+      unlocked.some((p) => {
+        const item = mongoUser.pokemonCollection.get(PkmIndex[p.name])
+        if (!item) return false
+        const { emotions, shinyEmotions } =
+          CollectionUtils.getEmotionsUnlocked(item)
+        return (
+          shinyEmotions.length >= CollectionEmotions.length &&
+          emotions.length >= CollectionEmotions.length
+        )
+      })
+    ) {
+      newTitles.push(Title.DUCHESS)
+    }
+  }
+
+  if (newTitles.length > 0) {
+    mongoUser.titles.push(...newTitles)
+  }
 }
