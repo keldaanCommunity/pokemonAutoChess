@@ -1414,6 +1414,7 @@
 		"GIGATON_HAMMER": "巨力锤",
 		"ACROBATICS": "杂技",
 		"ABSORB": "吸取",
+		"TOXIC_SPORE": "毒之孢子",
 		"ROLLOUT": "滚动",
 		"ICE_BALL": "冰球",
 		"THRASH": "大闹一番",
@@ -1787,7 +1788,9 @@
 		"REVELATION_DANCE": "觉醒之舞",
 		"THUNDERCLAP_PRESS": "雷霆重压",
 		"DRAGON_RAGE": "龙之怒",
-		"PURSUIT": "追打"
+		"PURSUIT": "追打",
+		"ROCKY_PAYLOAD": "Rocky Payload",
+		"AQUA_SWIRL": "水之漩涡"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1983,6 +1986,7 @@
 		"GIGATON_HAMMER": "对目标造成[100,200,400,800,SP]点SPECIAL，但使用者自身陷入FATIGUE 6秒。",
 		"ACROBATICS": "对目标造成[20,40,80,160,SP]点SPECIAL，并移动至与目标有一定距离的单元格。若使用者没有携带任何道具，与目标的距离会进一步提升。",
 		"ABSORB": "对目标造成[30,60,120,240,SP]点SPECIAL，并为ADJACENT我方宝可梦恢复[3,6,12,24,SP]点HP。",
+		"TOXIC_SPORE": "在最近的未陷入POISONED的敌方宝可梦周围洒出3团毒孢子。2秒后，孢子爆发，对ADJACENT敌方宝可梦造成[10,20,40,80,SP]点SPECIAL，并使他们陷入POISONED 3秒。",
 		"ROLLOUT": "提升[2,5,10,20,SP]点DEF，随后对目标造成SPECIAL，数值相当于使用者[200,SP]%的DEF。",
 		"ICE_BALL": "提升使用者10点SPE_DEF，随后对目标造成SPECIAL，数值相当于[50,100,150,300,SP]%的SPE_DEF加[10,20,30,60,SP]。",
 		"THRASH": "提升[100,100,120,150,SP]%的BASE ATK，但陷入CONFUSION 3秒。",
@@ -2354,7 +2358,9 @@
 		"REVELATION_DANCE": "跳舞，在ADJACENT格子上生成羽毛。被羽毛击中的敌方宝可梦受到[15,30,50,80,SP]点SPECIAL，我方宝可梦根据此宝可梦的风格获得以下增幅——\n热辣热辣风格：提升[3,6,10,15,SP]点SPEED\n啪滋啪滋风格：提升[2,4,6,10,SP]点ATK\n呼拉呼拉风格：提升[2,4,6,10,SP]点SPE_DEF\n轻盈轻盈风格：获得[15,30,50,80,SP]点SHIELD",
 		"THUNDERCLAP_PRESS": "用带电的身体压制目标，将其击退。其和击退路径上的敌方宝可梦陷入PARALYSIS 4秒，并受到[20,40,80,160,SP]点SPECIAL。",
 		"DRAGON_RAGE": "获得[15,30,45,60,SP]点SHIELD。接下来的6秒内，每秒再获得[5,10,15,20]点SHIELD，并对ADJACENT敌方宝可梦造成[5,10,15,20,SP]点SPECIAL。此招式效果结束时，消耗剩余的SHIELD，恢复HP，数值相当于40%的消耗量。",
-		"PURSUIT": "对目标造成[35,70,140,280,SP]点SPECIAL，并将其标记。若目标随后进行跳跃、传送或FLY_AWAY，跳跃至其相邻位置，然后立即重复此招式。"
+		"PURSUIT": "对目标造成[35,70,140,280,SP]点SPECIAL，并将其标记。若目标随后进行跳跃、传送或FLY_AWAY，跳跃至其相邻位置，然后立即重复此招式。",
+		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL ",
+		"AQUA_SWIRL": "在敌方宝可梦最密集的位置产生一个3x3的海潮漩涡。漩涡每0.5秒为范围内的我方宝可梦恢复[5,10,15,20,SP]点HP，对敌方宝可梦造成[3,6,9,12,SP]点SPECIAL，持续3秒。持续时间结束后，漩涡消散，使范围内的敌方宝可梦陷入CHARM 1秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -3458,7 +3464,7 @@
 		"AEGISLASH": "释放招式时会在盾牌形态和刀剑形态之间切换。",
 		"DARMANITAN": "HP低于30%时，跳跃至一个安全的位置，并进入达摩模式。",
 		"GALARIAN_DARMANITAN": "HP低于30%时，迫使敌方宝可梦转移攻击目标，并进入达摩模式。",
-		"DARMANITAN_ZEN": "达摩模式下的普通攻击造成能被AP提升的SPECIAL，且自身回复所造成伤害的100%。HP恢复至满后会变回普通模式。",
+		"DARMANITAN_ZEN": "达摩模式下的普通攻击造成能被AP提升的SPECIAL，且自身恢复所造成伤害的100%。HP恢复至满后会变回普通模式。",
 		"GALARIAN_DARMANITAN_ZEN": "达摩模式下无法移动或攻击，但每秒恢复[10,SP]点HP，并每秒对ADJACENT敌方宝可梦造成SPECIAL，数值相当于使用者[25,SP]%的ATK，同时使他们陷入BURN。",
 		"BAD_LUCK": "降低所有敌方宝可梦20点LUCK。",
 		"GOOD_LUCK": "提升所有我方宝可梦20点LUCK。",
@@ -3492,7 +3498,7 @@
 		"VIGOROTH": "$t(pkm.VIGOROTH)免疫SLEEP",
 		"SLAKING": "从SLEEP中醒来时，$t(pkm.SLAKING)陷入RAGE 3秒",
 		"STANTLER": "在第20轮更换地区后进化为$t(pkm.WYRDEER)。",
-		"PIKACHU_SURFER": "$t(pkm.PIKACHU_SURFER)的能力随着海浪增强而提升，每级激活的AQUATIC共鸣使之获得50点SHIELD和3点ATK。此外，海浪逼近时，$t(pkm.PIKACHU_SURFER)会回复PP。",
+		"PIKACHU_SURFER": "$t(pkm.PIKACHU_SURFER)的能力随着海浪增强而提升，每级激活的AQUATIC共鸣使之获得50点SHIELD和3点ATK。此外，海浪逼近时，$t(pkm.PIKACHU_SURFER)会恢复PP。",
 		"PIKACHU_LIBRE": "若FIGHTING共鸣已激活，每格挡10次便会陷入RAGE 2秒。",
 		"ESPURR": "根据PSYCHIC和FIELD共鸣中等级较高的一方决定进化的性别。",
 		"FUR_COAT": "每轮战斗后体毛会长长，提升2点DEF并降低5点SPEED。在备战区停留一轮以进行修剪，重置DEF和SPEED修正。若修剪前修正层数达到了上限，还会获得一条SILK_SCARF。",
@@ -3663,7 +3669,7 @@
 		"HUMAN": "HUMAN宝可梦能在用攻击和招式造成伤害时按一定百分比恢复HP，还能通过招式学习器学习新的招式。",
 		"AQUATIC": "AQUATIC宝可梦能降低所有我方宝可梦受到状态异常的影响。开战7秒后，会有一道席卷全场的TIDAL_WAVE清除异常状态和BOARD_EFFECT，治疗我方AQUATIC宝可梦，并击退敌方宝可梦且对他们造成伤害。",
 		"BUG": "战斗开始时，复制我方STRONGEST BUG宝可梦。",
-		"FLYING": "FLYING宝可梦在HP低于阈值时会FLY_AWAY，除非他们处于PARALYSIS，FREEZE，LOCKED或SLEEP。",
+		"FLYING": "FLYING宝可梦在HP即将低于阈值时会FLY_AWAY并闪避此次伤害，除非他们处于PARALYSIS，FREEZE，LOCKED或SLEEP。",
 		"FLORA": "当我方FLORA宝可梦倒下时，花盆中的花朵会开放，同时玩家能收集RICH_MULCH。STAR较多的宝可梦能提供更多肥料，肥料可以用来进化花盆中的宝可梦。",
 		"ROCK": "ROCK宝可梦能提升DEF，抵抗暴击普攻以及适应天气。",
 		"GHOST": "GHOST宝可梦能向敌方宝可梦施加多种多样的诅咒。GHOST共鸣激活时，GHOST宝可梦有[15,LK]%的概率闪避攻击，且ON_HIT有相同概率使其陷入SILENCE。",
