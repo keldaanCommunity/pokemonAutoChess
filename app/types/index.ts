@@ -101,6 +101,7 @@ export enum Transfer {
   SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
   CHOICE = "CHOICE",
+  ATLAS_NODE = "ATLAS_NODE",
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
@@ -361,6 +362,11 @@ export interface IExperienceManager {
   experience: number
   expNeeded: number
   maxLevel: number
+}
+
+export interface IAtlasManager {
+  emera: number
+  unlockedNodes: SetSchema<string>
 }
 
 export interface ISimulation {

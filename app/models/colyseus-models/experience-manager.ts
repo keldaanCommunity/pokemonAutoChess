@@ -11,7 +11,6 @@ export default class ExperienceManager
   @type("uint8") experience: number
   @type("uint8") expNeeded: number
   @type("uint8") maxLevel: number
-  @type("uint8") emera: number
 
   constructor() {
     super()
@@ -19,7 +18,6 @@ export default class ExperienceManager
     this.experience = 0
     this.expNeeded = ExpTable[2]
     this.maxLevel = 9
-    this.emera = 0
   }
 
   canLevelUp() {

@@ -1,11 +1,7 @@
 import type { Item } from "./enum/Item"
 import type { TownEncounter } from "./enum/TownEncounter"
 
-export type KeystoneEmera =
-  | "mega"
-  | "gigantamax"
-  | "legendary"
-  | "awakening"
+export type KeystoneEmera = "legendary" | "awakening" | "gigantamax"
 
 export type Emera =
   | KeystoneEmera
@@ -49,7 +45,7 @@ export type EncounterNode = BaseTreeNode & {
 
 export type ConditionNode = BaseTreeNode & {
   type: "condition"
-  condition: "fusion" | "mega" | "gigantamax" | "stellar"
+  condition: "mega" | "gigantamax"
 }
 
 export type ItemNode = BaseTreeNode & {

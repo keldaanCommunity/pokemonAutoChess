@@ -1,3 +1,4 @@
+import type { SetSchema } from "@colyseus/schema"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -11,11 +12,13 @@ import {
   ATLAS_MAX_SCALE,
   ATLAS_MIN_SCALE,
   AtlasTree
-} from "../../../../../core/atlas"
+} from "../../../../../config/game/atlas"
 import type { Emera, TreeNode } from "../../../../../types/atlas"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
+import { useAppSelector } from "../../../hooks"
+import { pickAtlasNode } from "../../../network"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -23,28 +26,52 @@ import PokemonPortrait from "../pokemon-portrait"
 import "./atlas.css"
 
 export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
-  const [allocatedNodes, setAllocatedNodes] = useState<Set<string>>(
+  const [demoUnlockedNodes, setDemoUnlockedNodes] = useState<Set<string>>(
     new Set(["root"])
   )
+  const atlasManager = useAppSelector((state) => state.game.atlasManager)
 
-  const canUnallocateNodes = origin === "wiki"
+  const unlockedNodes =
+    origin === "game" && atlasManager
+      ? atlasManager.unlockedNodes
+      : demoUnlockedNodes
+
+  const emera = origin === "game" && atlasManager ? atlasManager.emera : 0
+
+  const canRemoveNodes = origin === "wiki"
 
   const handleNodeClick = (node: TreeNode) => {
-    if (allocatedNodes.has(node.id)) {
-      if (canUnallocateNodes && node.id !== "root") {
-        setAllocatedNodes((prev) => {
+    if (unlockedNodes.has(node.id)) {
+      if (canRemoveNodes && node.id !== "root") {
+        setDemoUnlockedNodes((prev) => {
           const newSet = new Set(prev)
           newSet.delete(node.id)
           return newSet
         })
       }
-    } else if (isConnectedAndAllocatable(node.id, allocatedNodes)) {
+    } else if (isConnectedAndUnlockable(node.id, unlockedNodes)) {
+      if (emera <= 0 && origin !== "wiki") {
+        const orb = document.getElementById("game-connection-orb")
+        orb?.classList.add("is-flashing")
+        orb?.addEventListener(
+          "animationend",
+          () => {
+            orb?.classList.remove("is-flashing")
+          },
+          { once: true }
+        )
+        return
+      }
       playSound(
         node.type === "keystone" || node.type === "item"
           ? SOUNDS.EMERA_KEYSTONE
           : SOUNDS.EMERA
       )
-      setAllocatedNodes((prev) => new Set([...prev, node.id]))
+      if (origin === "wiki") {
+        setDemoUnlockedNodes((prev) => new Set([...prev, node.id]))
+      } else {
+        pickAtlasNode(node.id)
+      }
     }
   }
 
@@ -87,7 +114,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
             >
               {/* DEFINE ASSETS (Background patterns, borders) */}
               <defs>
-                <radialGradient id="allocatedGlow" cx="50%" cy="50%" r="50%">
+                <radialGradient id="unlockedGlow" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stopColor={COLOR_GLOW} stopOpacity="0.4" />
                   <stop offset="100%" stopColor={COLOR_GLOW} stopOpacity="0" />
                 </radialGradient>
@@ -100,8 +127,8 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
                     (n) => n.id === conn.from
                   )
                   const toNode = AtlasTree.nodes.find((n) => n.id === conn.to)
-                  const isAllocated =
-                    allocatedNodes.has(conn.from) && allocatedNodes.has(conn.to)
+                  const isUnlocked =
+                    unlockedNodes.has(conn.from) && unlockedNodes.has(conn.to)
                   if (!fromNode || !toNode) {
                     console.error(
                       `Connection references non-existent node: ${conn.from} or ${conn.to}`
@@ -117,7 +144,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
                       x2={toNode.position[0]}
                       y2={toNode.position[1]}
                       stroke={COLOR_GLOW}
-                      strokeWidth={isAllocated ? 8 : 2}
+                      strokeWidth={isUnlocked ? 8 : 2}
                     />
                   )
                 })}
@@ -126,18 +153,20 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
               {/* 2. RENDER NODES */}
               <g id="nodes">
                 {AtlasTree.nodes.map((node) => {
-                  const isAllocated = allocatedNodes.has(node.id)
-                  const isAllocatable = isConnectedAndAllocatable(
+                  const isUnlocked = unlockedNodes.has(node.id)
+                  const isUnlockable = isConnectedAndUnlockable(
                     node.id,
-                    allocatedNodes
+                    unlockedNodes
                   )
+                  const isAffordable = emera > 0 || origin === "wiki"
 
                   return (
                     <AtlasNode
                       key={node.id}
                       node={node}
-                      isAllocated={isAllocated}
-                      isAllocatable={isAllocatable}
+                      isUnlocked={isUnlocked}
+                      isUnlockable={isUnlockable}
+                      isAffordable={isAffordable}
                       onClick={handleNodeClick}
                     />
                   )
@@ -159,13 +188,15 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
 
 function AtlasNode({
   node,
-  isAllocated,
-  isAllocatable,
+  isUnlocked,
+  isUnlockable,
+  isAffordable,
   onClick
 }: {
   node: TreeNode
-  isAllocated: boolean
-  isAllocatable: boolean
+  isUnlocked: boolean
+  isUnlockable: boolean
+  isAffordable: boolean
   onClick: (node: TreeNode) => any
 }) {
   const size = NodeSizes[node.type] || 12
@@ -181,8 +212,9 @@ function AtlasNode({
   return (
     <g
       className={cc("atlas-node", node.type, {
-        allocatable: isAllocatable,
-        allocated: isAllocated
+        unlockable: isUnlockable,
+        unlocked: isUnlocked,
+        affordable: isAffordable
       })}
       transform={`translate(${node.position[0]}, ${node.position[1]})`}
       onClick={(e) => handleClick(e)}
@@ -190,8 +222,8 @@ function AtlasNode({
       data-tooltip-content={node.id}
     >
       {/* Glow Effect if Active */}
-      {isAllocated && (
-        <circle r={size * 2} fill="url(#allocatedGlow)" pointerEvents="none" />
+      {isUnlocked && (
+        <circle r={size * 2} fill="url(#unlockedGlow)" pointerEvents="none" />
       )}
 
       {/* Node background & inactive border */}
@@ -226,7 +258,7 @@ function AtlasNode({
           height="60"
           width="60"
           transform="translate(-30 -30)"
-          opacity={isAllocated ? 1 : 0.5}
+          opacity={isUnlocked ? 1 : 0.5}
         />
       )}
 
@@ -237,12 +269,12 @@ function AtlasNode({
           height="60"
           width="60"
           transform="translate(-30 -30)"
-          opacity={isAllocated ? 1 : 0.5}
+          opacity={isUnlocked ? 1 : 0.5}
         />
       )}
 
       {/* Node Step Icon */}
-      {node.type === "step" && isAllocated && (
+      {node.type === "step" && isUnlocked && (
         <image
           href={EmeraIcons["blank"]}
           height="30"
@@ -258,12 +290,12 @@ function AtlasNode({
           height="30"
           width="30"
           transform="translate(-15 -15)"
-          opacity={isAllocated ? 1 : 0.5}
+          opacity={isUnlocked ? 1 : 0.5}
         />
       )}
 
       {/* Node active border frame */}
-      {isAllocated && (
+      {isUnlocked && (
         <image
           href={"/assets/atlas/unlocked.png"}
           height={size * 2}
@@ -347,27 +379,22 @@ const EmeraIcons: Record<Emera, string> = {
   yellow: "/assets/atlas/YELLOW_EMERA.png",
   green: "/assets/atlas/GREEN_EMERA.png",
   blue: "/assets/atlas/BLUE_EMERA.png",
-  fusion: "/assets/atlas/FUSION_EMERA.png",
-  //primal: "/assets/atlas/PRIMAL_EMERA.png",
-  mega: "/assets/atlas/MEGA_EMERA.png",
   gigantamax: "/assets/atlas/MAX_EMERA.png",
-  stellar: "/assets/atlas/TERA_EMERA.png",
   legendary: "/assets/atlas/LEGENDARY_EMERA.png",
-  zmove: "/assets/atlas/Z_EMERA.png",
   awakening: "/assets/atlas/AWAKENING_EMERA.png"
 }
 
-function isConnectedAndAllocatable(
+function isConnectedAndUnlockable(
   nodeId: string,
-  allocatedNodes: Set<string>
+  unlockedNodes: Set<string> | SetSchema<string>
 ) {
-  // Logic to check if adjacent node is allocated
+  // Logic to check if adjacent node is unlocked
   return (
-    allocatedNodes.has(nodeId) === false &&
+    unlockedNodes.has(nodeId) === false &&
     AtlasTree.connections.some(
       (conn) =>
-        (conn.from === nodeId && allocatedNodes.has(conn.to)) ||
-        (conn.to === nodeId && allocatedNodes.has(conn.from))
+        (conn.from === nodeId && unlockedNodes.has(conn.to)) ||
+        (conn.to === nodeId && unlockedNodes.has(conn.from))
     )
   )
 }

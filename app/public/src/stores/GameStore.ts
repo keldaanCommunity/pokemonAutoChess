@@ -1,12 +1,15 @@
+import { SetSchema } from "@colyseus/schema"
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
 import type Simulation from "../../../core/simulation"
+import AtlasManager from "../../../models/colyseus-models/atlas-manager"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
 import type Player from "../../../models/colyseus-models/player"
 import { PokemonCustoms } from "../../../models/colyseus-models/pokemon-customs"
 import Synergies from "../../../models/colyseus-models/synergies"
 import type {
   Emotion,
+  IAtlasManager,
   IDps,
   IExperienceManager,
   IPlayer,
@@ -19,7 +22,7 @@ import type { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import type { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import type { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
-import { schemaEntries } from "../../../utils/schemas"
+import { schemaEntries, schemaValues } from "../../../utils/schemas"
 import { getGameScene } from "../pages/game"
 
 export interface GameStateStore {
@@ -44,6 +47,7 @@ export interface GameStateStore {
   shopFreeRolls: number
   shopLocked: boolean
   experienceManager: IExperienceManager
+  atlasManager: IAtlasManager
   shop: Pkm[]
   itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
@@ -79,6 +83,7 @@ const initialState: GameStateStore = {
   shopFreeRolls: 0,
   shopLocked: false,
   experienceManager: new ExperienceManager(),
+  atlasManager: new AtlasManager(),
   shop: new Array<Pkm>(),
   itemsProposition: new Array<Item>(),
   pokemonsProposition: new Array<Pkm>(),
@@ -119,8 +124,12 @@ const gameSlice = createSlice({
       state.specialGameRule = action.payload
     },
     addPlayer: (state, action: PayloadAction<Player>) => {
+      // There are reactivity issues when using directly the Colyseus Schema classes within React
+      // the json-clone calls toJSON() on the schemas, which converts some SetSchemas to arrays and MapSchemas to plain objects
+      // This is not ideal but at least reactivity works. This needs to be further investigated.
       const clone = JSON.parse(JSON.stringify(action.payload)) as Player
-      // the json-clone drops Synergies' MapSchema methods; rebuild them
+
+      // rebuild custom classes to have access to the methods
       clone.pokemonCustoms = new PokemonCustoms(
         new Map(
           Object.entries(clone.pokemonCustoms ?? {}) as [string, number][]
@@ -129,8 +138,13 @@ const gameSlice = createSlice({
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
-      // the json-clone flattens the board MapSchema to a plain object
+
       if (action.payload.board) clone.board = action.payload.board
+      if (action.payload.atlasManager.unlockedNodes) {
+        clone.atlasManager.unlockedNodes = new SetSchema<string>(
+          schemaValues(clone.atlasManager.unlockedNodes)
+        )
+      }
 
       const index = state.players.findIndex((p) => p.id === clone.id)
       if (index >= 0) {
@@ -171,6 +185,13 @@ const gameSlice = createSlice({
         expNeeded: action.payload.expNeeded,
         level: action.payload.level,
         maxLevel: action.payload.maxLevel
+      }
+    },
+    updateAtlasManager: (state, action: PayloadAction<IAtlasManager>) => {
+      state.atlasManager = {
+        ...state.atlasManager,
+        emera: action.payload.emera,
+        unlockedNodes: action.payload.unlockedNodes
       }
     },
     changePlayer: (
@@ -368,6 +389,7 @@ export const {
   addPlayer,
   removePlayer,
   updateExperienceManager,
+  updateAtlasManager,
   setStreak,
   setInterest,
   setMaxInterest,

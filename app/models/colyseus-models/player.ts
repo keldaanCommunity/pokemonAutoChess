@@ -104,6 +104,7 @@ import {
   getPokemonData,
   PRECOMPUTED_REGIONAL_MONS
 } from "../precomputed/precomputed-pokemon-data"
+import AtlasManager from "./atlas-manager"
 import ExperienceManager from "./experience-manager"
 import { GameStatsSchema } from "./game-stats"
 import HistoryItem from "./history-item"
@@ -122,6 +123,7 @@ export default class Player extends Schema implements IPlayer {
   @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
   @view() @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
+  @type(AtlasManager) atlasManager = new AtlasManager()
   @type({ map: "uint8" }) synergies = new Synergies()
   @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
   @type("int16") life = 100

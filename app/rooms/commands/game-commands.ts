@@ -23,6 +23,7 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
+import { STAGE_ATLAS_UNLOCKED } from "../../config/game/atlas"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import { getAltFormForPlayer } from "../../core/alt-form-logic"
@@ -1927,7 +1928,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.room.setMetadata({ ...this.room.metadata, stageLevel: this.state.stageLevel })
+      this.room.setMetadata({
+        ...this.room.metadata,
+        stageLevel: this.state.stageLevel
+      })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         player.wanderers.clear()
@@ -1955,6 +1959,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               )
               player.pveRewardsPropositions.clear()
             }
+          }
+
+          if (this.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
+            player.atlasManager.emera += 1
           }
 
           this.spawnBabyEggs(player, isPVE)

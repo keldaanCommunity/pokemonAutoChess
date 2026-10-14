@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { ItemStats } from "../../../../../config"
 import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
+import { Stat } from "../../../../../types/enum/Game"
 import type { Item } from "../../../../../types/enum/Item"
 import {
   type Pkm,
@@ -10,6 +12,7 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
+import { entries } from "../../../../../utils/object"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { pickChoice } from "../../../network"
@@ -20,9 +23,6 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-choice.css"
-import { ItemStats } from "../../../../../config"
-import { Stat } from "../../../../../types/enum/Game"
-import { entries } from "../../../../../utils/object"
 
 function isPokemonChoice(choice: PlayerChoice): boolean {
   return choice.pokemons.length > 0

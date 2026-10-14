@@ -67,6 +67,19 @@ export default function GameShop() {
         closeButton={false}
         style={{ left: `calc(var(--sidebar-width) + 11.5vw)`, bottom: `9vw` }}
       />
+      <ToastContainer
+        className="toast"
+        toastClassName="toast-shop"
+        containerId="toast-emera"
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        limit={1}
+        closeButton={false}
+        style={{ left: `calc(var(--sidebar-width) + 80vw)`, bottom: `9vw` }}
+      />
     </>
   )
 }

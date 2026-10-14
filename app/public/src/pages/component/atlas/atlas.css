@@ -76,8 +76,10 @@
   }
 }
 
-.atlas-node.allocatable {
-  cursor: var(--cursor-hover);
+.atlas-node.unlockable {
+  &.affordable {
+    cursor: var(--cursor-hover);
+  }
 
   & .atlas-node-bg {
     fill: var(--color-bg-secondary);
@@ -91,12 +93,12 @@
     fill: var(--color-bg-accent);
   }
 
-  &:hover .atlas-node-border {
+  &.affordable:hover .atlas-node-border {
     fill: #fff;
   }
 }
 
-.atlas-node.allocated {
+.atlas-node.unlocked {
   & .atlas-node-bg {
     fill: var(--color-bg-accent);
   }
@@ -112,14 +114,14 @@
   fill: #8b8356;
 }
 
-.atlas-node.keystone.allocated .atlas-node-bg,
-.atlas-node.item.allocated .atlas-node-bg,
-.atlas-node.keystone.allocatable:hover .atlas-node-bg,
-.atlas-node.item.allocatable:hover .atlas-node-bg {
+.atlas-node.keystone.unlocked .atlas-node-bg,
+.atlas-node.item.unlocked .atlas-node-bg,
+.atlas-node.keystone.unlockable:hover .atlas-node-bg,
+.atlas-node.item.unlockable:hover .atlas-node-bg {
   fill: var(--color-bg-gold);
 }
 
-.atlas-node.condition:not(.allocated) .atlas-node-bg {
+.atlas-node.condition:not(.unlocked) .atlas-node-bg {
   fill: #a56060;
 }
 

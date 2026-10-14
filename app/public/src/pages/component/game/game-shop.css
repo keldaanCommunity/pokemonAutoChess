@@ -162,6 +162,61 @@
   padding-left: 1.5em;
 }
 
+@keyframes alarm-pulse {
+  0% {
+    box-shadow:
+      0 0 5px rgba(255, 0, 0, 0.4),
+      0 0 10px rgba(255, 0, 0, 0.2);
+  }
+  50% {
+    /* Peak of the pulse: bright, wide, intense red glow */
+    box-shadow:
+      0 0 20px rgba(255, 0, 0, 0.9),
+      0 0 40px rgba(255, 0, 0, 0.6),
+      0 0 60px rgba(255, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 5px rgba(255, 0, 0, 0.4),
+      0 0 10px rgba(255, 0, 0, 0.2);
+  }
+}
+
+@keyframes blink-text-red {
+  0%,
+  49% {
+    color: red;
+  }
+  50%,
+  100% {
+    color: inherit;
+  }
+}
+
+@keyframes tint-red {
+  0%,
+  49% {
+    filter: brightness(0.25) sepia(1) hue-rotate(315deg) saturate(5);
+  }
+  50%,
+  100% {
+    filter: brightness(1) sepia(0) hue-rotate(0deg) saturate(1);
+  }
+}
+
+#game-connection-orb.is-flashing {
+  --flash-duration: 500ms;
+  animation: alarm-pulse var(--flash-duration) ease-in-out;
+
+  & img {
+    animation: tint-red var(--flash-duration) linear;
+  }
+
+  & span {
+    animation: blink-text-red var(--flash-duration) linear;
+  }
+}
+
 #game-connection-orb-icon {
   width: 3em;
   height: 3em;
@@ -191,20 +246,23 @@
 }
 
 #toast-life .toast-shop,
-#toast-money .toast-shop {
+#toast-money .toast-shop,
+#toast-emera .toast-shop {
   width: var(--toastify-toast-width);
   min-height: var(--toastify-toast-min-height);
   max-height: var(--toastify-toast-max-height);
   padding: var(--toastify-toast-padding);
 }
 
-#toast-money .toast-player-income {
+#toast-money .toast-player-income,
+#toast-emera .toast-player-income {
   color: var(--color-fg-primary);
   font-weight: bold;
 }
 
 #toast-life img,
-#toast-money img {
+#toast-money img,
+#toast-emera img {
   width: 24px;
   height: 24px;
   object-fit: contain;

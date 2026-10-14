@@ -5717,12 +5717,12 @@
 		},
 		"keystone_description": {
 			"legendary": "A random legendary will be put in this node, based on the portal you took at stage 20, your region and your dominant synergies.",
-			"awakening": "Allow two reach level 10. All common and uncommon 1 STAR Pokémon on your board evolve immediately."
+			"awakening": "Allow two reach level 10. All common and uncommon 1 STAR Pokémon on your board evolve immediately.",
+			"gigantamax": "Pokémon that can gigantamax and hold a DYNAMAX_BAND will increase their HP by 400% instead of 200%"
 		},
 		"condition": {
 			"mega": "This node is locked until you get a Pokémon on your board that can mega evolve. $t(atlas.pokemon_that_can_mega_evolve)",
-			"gigantamax": "This node is locked until you get a Pokémon on your board that can gigantamax. $t(atlas.pokemon_that_can_gigantamax)",
-			"stellar": "This node is locked until you get at least 10 different active synergies"
+			"gigantamax": "This node is locked until you get a Pokémon on your board that can gigantamax. $t(atlas.pokemon_that_can_gigantamax)"
 		},
 		"buff": {
 			"looplet": "Additional effect for the LOOPLET:\n",
