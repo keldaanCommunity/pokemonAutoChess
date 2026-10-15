@@ -29,7 +29,7 @@ import type {
 } from "./enum/Game"
 import type { Item } from "./enum/Item"
 import type { Passive } from "./enum/Passive"
-import type { Pkm } from "./enum/Pokemon"
+import type { Pkm, PkmProposition } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
 import type { Title } from "./enum/Title"
 import type { TradeStatus } from "./enum/TradeStatus"
@@ -367,6 +367,7 @@ export interface IExperienceManager {
 export interface IAtlasManager {
   emera: number
   unlockedNodes: SetSchema<string>
+  legendaries: ArraySchema<PkmProposition>
 }
 
 export interface ISimulation {

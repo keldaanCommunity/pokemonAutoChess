@@ -16,7 +16,7 @@ import {
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
-import { STAGE_ATLAS_UNLOCKED } from "../config/game/atlas"
+import { type AtlasNodeId, STAGE_ATLAS_UNLOCKED } from "../config/game/atlas"
 import { GADGETS } from "../config/game/gadgets"
 import { unequipItems } from "../core/effects/items"
 import { computeElo } from "../core/elo"
@@ -424,7 +424,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     this.onMessage(
       Transfer.ATLAS_NODE,
-      (client, message: { nodeId: string }) => {
+      (client, message: { nodeId: AtlasNodeId }) => {
         if (
           !this.state.gameFinished &&
           client.auth &&
@@ -433,7 +433,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
           const player = this.state.players.get(client.auth.uid)
           if (player) {
             try {
-              player.atlasManager.unlockNode(message.nodeId)
+              player.atlasManager.unlockNode(message.nodeId, player, this)
             } catch (error) {
               logger.error(error)
             }

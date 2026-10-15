@@ -11,9 +11,10 @@ import {
   ATLAS_INITIAL_SCALE,
   ATLAS_MAX_SCALE,
   ATLAS_MIN_SCALE,
+  type AtlasNodeId,
   AtlasTree
 } from "../../../../../config/game/atlas"
-import type { Emera, TreeNode } from "../../../../../types/atlas"
+import type { AtlasNode, Emera } from "../../../../../types/atlas"
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
@@ -24,9 +25,10 @@ import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import PokemonPortrait from "../pokemon-portrait"
 import "./atlas.css"
+import { entries } from "../../../../../utils/object"
 
 export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
-  const [demoUnlockedNodes, setDemoUnlockedNodes] = useState<Set<string>>(
+  const [demoUnlockedNodes, setDemoUnlockedNodes] = useState<Set<AtlasNodeId>>(
     new Set(["root"])
   )
   const atlasManager = useAppSelector((state) => state.game.atlasManager)
@@ -40,16 +42,16 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
 
   const canRemoveNodes = origin === "wiki"
 
-  const handleNodeClick = (node: TreeNode) => {
-    if (unlockedNodes.has(node.id)) {
-      if (canRemoveNodes && node.id !== "root") {
+  const handleNodeClick = (nodeId: AtlasNodeId) => {
+    if (unlockedNodes.has(nodeId)) {
+      if (canRemoveNodes && nodeId !== "root") {
         setDemoUnlockedNodes((prev) => {
           const newSet = new Set(prev)
-          newSet.delete(node.id)
+          newSet.delete(nodeId)
           return newSet
         })
       }
-    } else if (isConnectedAndUnlockable(node.id, unlockedNodes)) {
+    } else if (isConnectedAndUnlockable(nodeId, unlockedNodes)) {
       if (emera <= 0 && origin !== "wiki") {
         playSound(SOUNDS.EMERA_ERROR, 0.8)
         const orb = document.getElementById("game-connection-orb")
@@ -63,15 +65,16 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
         )
         return
       }
+      const node = AtlasTree.nodes[nodeId]
       playSound(
         node.type === "keystone" || node.type === "item"
           ? SOUNDS.EMERA_KEYSTONE
           : SOUNDS.EMERA
       )
       if (origin === "wiki") {
-        setDemoUnlockedNodes((prev) => new Set([...prev, node.id]))
+        setDemoUnlockedNodes((prev) => new Set([...prev, nodeId]))
       } else {
-        pickAtlasNode(node.id)
+        pickAtlasNode(nodeId)
       }
     }
   }
@@ -124,10 +127,8 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
               {/* 1. RENDER CONNECTIONS */}
               <g id="connections">
                 {AtlasTree.connections.map((conn, index) => {
-                  const fromNode = AtlasTree.nodes.find(
-                    (n) => n.id === conn.from
-                  )
-                  const toNode = AtlasTree.nodes.find((n) => n.id === conn.to)
+                  const fromNode = AtlasTree.nodes[conn.from]
+                  const toNode = AtlasTree.nodes[conn.to]
                   const isUnlocked =
                     unlockedNodes.has(conn.from) && unlockedNodes.has(conn.to)
                   if (!fromNode || !toNode) {
@@ -153,18 +154,19 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
 
               {/* 2. RENDER NODES */}
               <g id="nodes">
-                {AtlasTree.nodes.map((node) => {
-                  const isUnlocked = unlockedNodes.has(node.id)
+                {entries(AtlasTree.nodes).map(([nodeId, node]) => {
+                  const isUnlocked = unlockedNodes.has(nodeId)
                   const isUnlockable = isConnectedAndUnlockable(
-                    node.id,
+                    nodeId,
                     unlockedNodes
                   )
                   const isAffordable = emera > 0 || origin === "wiki"
 
                   return (
-                    <AtlasNode
-                      key={node.id}
+                    <Node
+                      key={nodeId}
                       node={node}
+                      nodeId={nodeId}
                       isUnlocked={isUnlocked}
                       isUnlockable={isUnlockable}
                       isAffordable={isAffordable}
@@ -181,24 +183,28 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
         id="atlas-node-detail-tooltip"
         className="custom-theme-tooltip"
         float
-        render={({ content }) => <AtlasNodeDetail nodeId={content as string} />}
+        render={({ content }) => (
+          <AtlasNodeDetail nodeId={content as AtlasNodeId} />
+        )}
       />
     </div>
   )
 }
 
-function AtlasNode({
+function Node({
   node,
+  nodeId,
   isUnlocked,
   isUnlockable,
   isAffordable,
   onClick
 }: {
-  node: TreeNode
+  node: AtlasNode
+  nodeId: AtlasNodeId
   isUnlocked: boolean
   isUnlockable: boolean
   isAffordable: boolean
-  onClick: (node: TreeNode) => any
+  onClick: (nodeId: AtlasNodeId) => any
 }) {
   const size = NodeSizes[node.type] || 12
   const shouldShowTooltip = node.type !== "step"
@@ -207,7 +213,7 @@ function AtlasNode({
   function handleClick(e: React.MouseEvent<SVGGElement, MouseEvent>) {
     e.preventDefault()
     zoomToElement(e.target as HTMLElement, 5, 200, "easeOutCubic")
-    onClick(node)
+    onClick(nodeId)
   }
 
   return (
@@ -220,7 +226,7 @@ function AtlasNode({
       transform={`translate(${node.position[0]}, ${node.position[1]})`}
       onClick={(e) => handleClick(e)}
       data-tooltip-id={shouldShowTooltip ? "atlas-node-detail-tooltip" : null}
-      data-tooltip-content={node.id}
+      data-tooltip-content={nodeId}
     >
       {/* Glow Effect if Active */}
       {isUnlocked && (
@@ -318,9 +324,9 @@ function AtlasNode({
   )
 }
 
-function AtlasNodeDetail({ nodeId }: { nodeId: string }) {
+function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
   const { t } = useTranslation()
-  const node = AtlasTree.nodes.find((n) => n.id === nodeId)
+  const node = AtlasTree.nodes[nodeId]
   if (!node) return null
   if (node.type === "item") {
     return <ItemDetailTooltipContent item={node.item} />
@@ -363,7 +369,7 @@ function AtlasNodeDetail({ nodeId }: { nodeId: string }) {
   )
 }
 
-const NodeSizes: Record<TreeNode["type"], number> = {
+const NodeSizes: Record<AtlasNode["type"], number> = {
   start: 50,
   keystone: 45,
   item: 45,

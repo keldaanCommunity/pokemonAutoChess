@@ -1,15 +1,21 @@
-import { Schema, SetSchema, type } from "@colyseus/schema"
-import { AtlasTree } from "../../config/game/atlas"
+import { ArraySchema, Schema, SetSchema, type } from "@colyseus/schema"
+import { type AtlasNodeId, AtlasTree } from "../../config/game/atlas"
+import { activateAtlasNode } from "../../core/atlas"
+import type GameRoom from "../../rooms/game-room"
 import type { IAtlasManager } from "../../types"
+import type { PkmProposition } from "../../types/enum/Pokemon"
+import type Player from "./player"
 
 export default class AtlasManager extends Schema implements IAtlasManager {
-  @type("uint8") emera = 0
+  @type("uint8") emera = 20 //TEMP 0
   @type({ set: "string" }) unlockedNodes = new SetSchema<string>(["root"])
+  @type(["string"]) legendaries = new ArraySchema<PkmProposition>()
 
-  unlockNode(nodeId: string) {
+  unlockNode(nodeId: AtlasNodeId, player: Player, room: GameRoom) {
     if (this.canUnlockNode(nodeId)) {
       this.emera--
       this.unlockedNodes.add(nodeId)
+      activateAtlasNode(nodeId, player, room)
     }
   }
 

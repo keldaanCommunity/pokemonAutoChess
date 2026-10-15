@@ -20,46 +20,45 @@ export type Emera =
   | "green"
   | "blue"
 
-export type AtlasNode = {
-  id: string
+type Node = {
   type: AtlasNodeType
   position: [number, number]
 }
 
-export type StartNode = AtlasNode & {
+export type StartNode = Node & {
   type: "start"
 }
 
-export type StepNode = AtlasNode & {
+export type StepNode = Node & {
   type: "step"
 }
 
-export type KeystoneNode = AtlasNode & {
+export type KeystoneNode = Node & {
   type: "keystone"
   emera: AtlasKeystone
 }
 
-export type EncounterNode = AtlasNode & {
+export type EncounterNode = Node & {
   type: "encounter"
   encounter: TownEncounter
 }
 
-export type ConditionNode = AtlasNode & {
+export type ConditionNode = Node & {
   type: "condition"
   condition: "mega" | "gigantamax"
 }
 
-export type ItemNode = AtlasNode & {
+export type ItemNode = Node & {
   type: "item"
   item: Item
 }
 
-export type BuffNode = AtlasNode & {
+export type BuffNode = Node & {
   type: "buff"
   buff: "red" | "blue" | "pink" | "yellow" | "green"
 }
 
-export type TreeNode =
+export type AtlasNode =
   | StartNode
   | KeystoneNode
   | EncounterNode
@@ -68,12 +67,12 @@ export type TreeNode =
   | ItemNode
   | BuffNode
 
-export type TreeConnection = {
+export type AtlasNodeConnection = {
   from: string
   to: string
 }
 
-export type Tree = {
-  nodes: TreeNode[]
-  connections: TreeConnection[]
+export type TAtlasTree = {
+  nodes: { [nodeId: string]: AtlasNode },
+  connections: AtlasNodeConnection[]
 }

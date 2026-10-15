@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import { STAGE_ATLAS_UNLOCKED } from "../../../../../config/game/atlas"
 import { useAppSelector } from "../../../hooks"
 import store from "../../../stores"
 import { setAtlasVisible } from "../../../stores/GameStore"
@@ -7,8 +8,11 @@ import { cc } from "../../utils/jsx"
 
 export function GameConnectionOrb() {
   const { t } = useTranslation()
+  const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const atlasVisible = useAppSelector((state) => state.game.atlasVisible)
   const emera = useAppSelector((state) => state.game.atlasManager.emera)
+
+  if (stageLevel < STAGE_ATLAS_UNLOCKED) return null
 
   return (
     <div id="game-connection-orb" className="my-container information">
