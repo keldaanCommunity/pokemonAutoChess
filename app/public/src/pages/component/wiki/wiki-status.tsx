@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { BoardEffects } from "../../../../../types/enum/Effect"
 import { DocumentedStatuses } from "../../../../../types/enum/Status"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 
 export default function WikiStatus() {
@@ -23,12 +24,16 @@ export default function WikiStatus() {
 
       <h3>{t("wiki.status.board_effects")}</h3>
       <dl className="wiki-board-effects">
-        {BoardEffects.map((effect) => (
-          <div key={effect} className="my-box">
-            <dt>{addIconsToDescription(effect)}</dt>
-            <dd>{addIconsToDescription(t(`effect_description.${effect}`))}</dd>
-          </div>
-        ))}
+        {BoardEffects.map((effect) => {
+          const path = `effect_description.${effect}` as const
+          const config = getDescriptionConfig(path)
+          return (
+            <div key={effect} className="my-box">
+              <dt>{addIconsToDescription(effect)}</dt>
+              <dd>{addIconsToDescription(t(path), { config })}</dd>
+            </div>
+          )
+        })}
       </dl>
     </>
   )

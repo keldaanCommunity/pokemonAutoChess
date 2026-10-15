@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import type { PokemonEntity } from "../../core/pokemon-entity"
@@ -444,7 +445,7 @@ export default class Status extends Schema implements IStatus {
     if (this.burnDamageCooldown - dt <= 0) {
       let burnDamage = pkm.maxHP * 0.05
       if (pkm.simulation.weather === Weather.DROUGHT) {
-        burnDamage *= 1.3
+        burnDamage *= 1 + WeatherConfigs.DROUGHT.burnDamageBonusPercent / 100
         const nbHeatRocks = pkm.player
           ? count(pkm.player.items, Item.HEAT_ROCK)
           : 0
@@ -452,7 +453,7 @@ export default class Status extends Schema implements IStatus {
           burnDamage *= 1 - 0.2 * nbHeatRocks
         }
       } else if (pkm.simulation.weather === Weather.RAIN) {
-        burnDamage *= 0.7
+        burnDamage *= 1 - WeatherConfigs.RAIN.damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
@@ -527,7 +528,7 @@ export default class Status extends Schema implements IStatus {
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
       if (pkm.simulation.weather === Weather.MURKY) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.MURKY.silenceDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -594,6 +595,10 @@ export default class Status extends Schema implements IStatus {
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
 
+      if (pkm.simulation.weather === Weather.SMOG) {
+        duration *= 1 + WeatherConfigs.SMOG.poisonDurationBonusPercent / 100
+      }
+
       duration = this.applyStatusDurationReductions(duration, pkm)
 
       if (duration > this.poisonCooldown) {
@@ -630,7 +635,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage *= 0.7
+        poisonDamage *= 1 - WeatherConfigs.RAIN.damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
@@ -715,7 +720,7 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.SNOW.freezeDurationBonusPercent / 100
         const nbIcyRocks = pkm.player
           ? count(pkm.player.items, Item.ICY_ROCK)
           : 0
@@ -723,7 +728,8 @@ export default class Status extends Schema implements IStatus {
           duration *= 1 - 0.2 * nbIcyRocks
         }
       } else if (pkm.simulation.weather === Weather.DROUGHT) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs.DROUGHT.freezeDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -782,9 +788,10 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.NIGHT.sleepDurationBonusPercent / 100
       } else if (pkm.simulation.weather === Weather.ZENITH) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs.ZENITH.sleepDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -832,7 +839,8 @@ export default class Status extends Schema implements IStatus {
     ) {
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.SANDSTORM) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs.SANDSTORM.confusionDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -868,7 +876,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.charm && !this.runeProtect) {
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.MISTY) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.MISTY.charmDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -898,7 +906,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.wound = true
       if (pkm.simulation.weather === Weather.BLOODMOON) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.BLOODMOON.woundDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -933,7 +941,7 @@ export default class Status extends Schema implements IStatus {
       }
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.STORM) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.STORM.paralysisDurationBonusPercent / 100
         const nbElectricQuartz = pkm.player
           ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
           : 0

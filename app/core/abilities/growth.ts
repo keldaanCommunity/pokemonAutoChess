@@ -11,8 +11,8 @@ export class GrowthStrategy extends AbilityStrategy {
     let attackBuff = [3, 5, 7, 14][pokemon.stars - 1] ?? 14
     let hpBuff = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
     if (pokemon.simulation.weather === Weather.ZENITH) {
-      attackBuff *= 2 // grows twice as fast if zenith weather
-      hpBuff *= 2
+      attackBuff *= 1.3
+      hpBuff *= 1.3
     }
     pokemon.addAttack(attackBuff, pokemon, 1, crit)
     pokemon.addMaxHP(hpBuff, pokemon, 1, crit)

@@ -1868,7 +1868,7 @@
 		"HYPNOSIS": "敵1体を後列に[1,1.75,3,6,ND=2] + [1,1.75,3,6,SP,ND=2]秒間睡眠させる",
 		"MIMIC": "現在のターゲットの能力をコピーします",
 		"HEX": "対象に[20,40,80,160,SP]のSPECIALを与える。対象がマイナス状態の場合、ダメージが2倍になる。",
-		"GROWTH": "最大HPが[10,20,40,80,SP]増加し、ATKが[3,5,7,14,SP]増加します。天候がSUNの場合、成長速度が2倍になります。",
+		"GROWTH": "最大HPが[10,20,40,80,SP]増加し、ATKが[3,5,7,14,SP]増加します。天候がZENITHの場合、効果が30%増加します。",
 		"HEAL_ORDER": "隣接する敵に[25,45,65,130,SP]のSPECIALを与え、隣接する味方に[25,45,65,130,SP]を回復する",
 		"DIG": "地下を掘り、最も遠い敵の隣に再出現し、途中の敵全員に[10,20,40,80,SP]の特殊ダメージを与える",
 		"FIRE_SPIN": "対象周囲の範囲攻撃で[25,50,100,200,SP]のSPECIALを与え、命中した敵全員を3秒間炎上させる",
@@ -2619,15 +2619,15 @@
 	},
 	"weather_description": {
 		"NEUTRAL": "通常の天気。効果はありません。",
-		"DROUGHT": "火傷ダメージ+30%\nフリーズ持続時間 -30%",
-		"WINDY": "+10 SPEED（FLYINGの場合は+20）",
-		"RAIN": "1秒あたり+3マナ\n-30% 火傷および毒ダメージ",
-		"NIGHT": "+10% CRIT_CHANCE\n+30% 睡眠時間",
-		"STORM": "稲妻がランダムにボードに落ち、100 SPECIALを与える(電気は無効になる)\n+30% 麻痺持続時間",
-		"MISTY": "+20%スペシャル\n+30% 沈黙時間",
-		"SNOW": "-10 SPEED\n+30% フリーズ持続時間",
-		"SANDSTORM": "5 SPECIAL/秒 (GROUND は影響を受けません)\n 混乱持続時間 +30%",
-		"SMOG": "精度 -15%\n毒持続時間 +30%"
+		"DROUGHT": "火傷ダメージ+{{burnDamageBonusPercent}}%\nフリーズ持続時間 -{{freezeDurationReductionPercent}}%\n1秒あたり-{{ppPerSecond}} PP",
+		"WINDY": "+{{speedBonus}} SPEED（FLYINGの場合は+{{flyingSpeedBonus}}）",
+		"RAIN": "1秒あたり+{{ppPerSecond}} PP\n-{{damageReductionPercent}}% BURNおよびPOISONEDのダメージ",
+		"NIGHT": "+{{critChanceBonusPercent}}% CRIT_CHANCE\n+{{sleepDurationBonusPercent}}% 睡眠時間",
+		"STORM": "LIGHTNING_STRIKEがボードのランダムなマスに落ち、{{lightningDamage}} SPECIALを与える（ELECTRICは代わりにスーパーチャージされる）\n+{{paralysisDurationBonusPercent}}% PARALYSISの持続時間",
+		"MISTY": "+{{specialDamageBonusPercent}}% SPECIAL\n+{{charmDurationBonusPercent}}% CHARMの持続時間",
+		"SNOW": "-{{speedReduction}} SPEED（ICEには無効）\n+{{freezeDurationBonusPercent}}% フリーズ持続時間",
+		"SANDSTORM": "{{damagePerSecond}} SPECIAL/秒 (GROUND は影響を受けません)\n 混乱持続時間 +{{confusionDurationBonusPercent}}%",
+		"SMOG": "精度 -{{accuracyReductionPercent}}%\n毒持続時間 +{{poisonDurationBonusPercent}}%"
 	},
 	"emotion": {
 		"Normal": "普通",

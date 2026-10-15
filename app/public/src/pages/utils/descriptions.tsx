@@ -1,5 +1,6 @@
 import { t } from "i18next"
-import React, { type ReactElement } from "react"
+import React, { type ReactNode } from "react"
+import { getWeatherConfig } from "../../../../config/game/weathers"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -18,11 +19,12 @@ import { isIn } from "../../../../utils/array"
 import { max, roundToNDigits } from "../../../../utils/number"
 import { keys } from "../../../../utils/object"
 import SynergyIcon from "../component/icons/synergy-icon"
+import { getDescriptionConfig, placeholderRegExp } from "./description-config"
 import { cc } from "./jsx"
 
 const DamageTypes = keys(Damage)
 const Stats = keys(Stat)
-const Weathers = keys(Weather)
+const Weathers = Object.values(Weather)
 const Synergies = keys(Synergy)
 const Items = keys(Item)
 
@@ -43,30 +45,38 @@ export const iconRegExp = new RegExp(
   "g"
 )
 
+const descriptionPattern = `${placeholderRegExp.source}|${iconRegExp.source}`
+const descriptionRegExp = new RegExp(descriptionPattern, "g")
+
 export function addIconsToDescription(
   description: string,
   params?: {
-    ap: number
-    luck: number
-    stars: number
+    ap?: number
+    luck?: number
+    stars?: number
     stages?: number
     showAbilityTiers?: boolean
+    config?: Readonly<Record<string, number>>
   }
 ) {
-  const matchIcon = description.match(iconRegExp)
+  const pattern = params?.config ? descriptionRegExp : iconRegExp
+  const matchIcon = description.match(pattern)
   if (matchIcon === null) return description
-  const descriptionParts = description.split(iconRegExp)
+  const descriptionParts = description.split(pattern)
   const capitalize = (str) => str[0].toUpperCase() + str.substring(1)
   return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
-    let icon: ReactElement | null = null
+    let icon: ReactNode = null
     const isAtStartOfSentence =
       i === 0 ||
       descriptionParts[i - 1].trim().endsWith(".") ||
       descriptionParts[i - 1].length === 0
 
     if (token) {
-      if (token === "GOLD") {
+      if (token.startsWith("{{")) {
+        const value = params?.config?.[token.slice(2, -2).trim()]
+        icon = typeof value === "number" ? value : token
+      } else if (token === "GOLD") {
         icon = (
           <img
             className="description-icon icon-money"
@@ -127,10 +137,12 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(BoardEffects, token)) {
+        const path = `effect_description.${token}` as const
+        const title = t(path, getDescriptionConfig(path))
         icon = (
           <span
             className="description-icon board-effect"
-            title={t(`effect_description.${token}`)}
+            title={title}
           >
             <img src={`assets/icons/effects/${token}.svg`} />
             <span className="board-effect-label">{t(`effect.${token}`)}</span>
@@ -140,7 +152,7 @@ export function addIconsToDescription(
         icon = (
           <span
             className="description-icon weather"
-            title={t(`weather_description.${token}`)}
+            title={t(`weather_description.${token}`, getWeatherConfig(token))}
           >
             <img src={`assets/icons/weather/${token.toLowerCase()}.svg`} />
             <span className="weather-label">{t(`weather.${token}`)}</span>
@@ -339,12 +351,14 @@ export function addIconsToHtml(
             <span class="status-label${isPositive ? " positive" : ""}">${t(`status.${token}`)}</span>
           </span>`
         } else if (isIn(BoardEffects, token)) {
-          iconHTML = `<span class="description-icon board-effect" title="${t(`effect_description.${token}`)}">
+          const path = `effect_description.${token}` as const
+          const title = t(path, getDescriptionConfig(path))
+          iconHTML = `<span class="description-icon board-effect" title="${title}">
             <img src="assets/icons/effects/${token}.svg" />
             <span class="board-effect-label">${t(`effect.${token}`)}</span>
           </span>`
         } else if (isIn(Weathers, token)) {
-          iconHTML = `<span class="description-icon weather" title="${t(`weather_description.${token}`)}">
+          iconHTML = `<span class="description-icon weather" title="${t(`weather_description.${token}`, getWeatherConfig(token))}">
             <img src="assets/icons/weather/${token.toLowerCase()}.svg" />
             <span class="weather-label">${t(`weather.${token}`)}</span>
           </span>`
