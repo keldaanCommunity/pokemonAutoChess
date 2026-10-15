@@ -162,7 +162,7 @@
   padding-left: 1.5em;
 }
 
-@keyframes alarm-pulse {
+@keyframes flash-red {
   0% {
     box-shadow:
       0 0 5px rgba(255, 0, 0, 0.4),
@@ -204,9 +204,9 @@
   }
 }
 
-#game-connection-orb.is-flashing {
+#game-connection-orb.unaffordable-flash {
   --flash-duration: 500ms;
-  animation: alarm-pulse var(--flash-duration) ease-in-out;
+  animation: flash-red var(--flash-duration) ease-in-out;
 
   & img {
     animation: tint-red var(--flash-duration) linear;
@@ -232,6 +232,24 @@
       drop-shadow(0px -20px 20px rgb(0, 166, 255, 1))
       drop-shadow(0px -40px 30px rgb(0, 166, 255, 1))
       drop-shadow(0px -60px 50px rgb(0, 166, 255, 1));
+  }
+
+  &:not(.active).usable {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    animation: white-glow-pulse 1s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes white-glow-pulse {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 30px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 50px rgba(255, 255, 255, 0.4));
   }
 }
 

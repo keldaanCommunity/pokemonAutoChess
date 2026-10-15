@@ -80,6 +80,9 @@
   &.affordable {
     cursor: var(--cursor-hover);
   }
+  &:not(.affordable) {
+    filter: contrast(0.75);
+  }
 
   & .atlas-node-bg {
     fill: var(--color-bg-secondary);
@@ -90,7 +93,7 @@
   }
 
   & .atlas-node-border {
-    fill: var(--color-bg-accent);
+    fill: black;
   }
 
   &.affordable:hover .atlas-node-border {

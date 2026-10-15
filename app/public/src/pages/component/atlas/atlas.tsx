@@ -51,12 +51,13 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
       }
     } else if (isConnectedAndUnlockable(node.id, unlockedNodes)) {
       if (emera <= 0 && origin !== "wiki") {
+        playSound(SOUNDS.EMERA_ERROR, 0.8)
         const orb = document.getElementById("game-connection-orb")
-        orb?.classList.add("is-flashing")
+        orb?.classList.add("unaffordable-flash")
         orb?.addEventListener(
           "animationend",
           () => {
-            orb?.classList.remove("is-flashing")
+            orb?.classList.remove("unaffordable-flash")
           },
           { once: true }
         )

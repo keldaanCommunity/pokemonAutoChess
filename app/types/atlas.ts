@@ -1,10 +1,18 @@
 import type { Item } from "./enum/Item"
 import type { TownEncounter } from "./enum/TownEncounter"
 
-export type KeystoneEmera = "legendary" | "awakening" | "gigantamax"
+export type AtlasNodeType =
+  | "start"
+  | "step"
+  | "keystone"
+  | "encounter"
+  | "condition"
+  | "item"
+  | "buff"
+export type AtlasKeystone = "legendary" | "awakening" | "gigantamax"
 
 export type Emera =
-  | KeystoneEmera
+  | AtlasKeystone
   | "blank"
   | "pink"
   | "red"
@@ -12,48 +20,41 @@ export type Emera =
   | "green"
   | "blue"
 
-export type BaseTreeNode = {
+export type AtlasNode = {
   id: string
-  type:
-    | "start"
-    | "step"
-    | "keystone"
-    | "encounter"
-    | "condition"
-    | "item"
-    | "buff"
+  type: AtlasNodeType
   position: [number, number]
 }
 
-export type StartNode = BaseTreeNode & {
+export type StartNode = AtlasNode & {
   type: "start"
 }
 
-export type StepNode = BaseTreeNode & {
+export type StepNode = AtlasNode & {
   type: "step"
 }
 
-export type KeystoneNode = BaseTreeNode & {
+export type KeystoneNode = AtlasNode & {
   type: "keystone"
-  emera: KeystoneEmera
+  emera: AtlasKeystone
 }
 
-export type EncounterNode = BaseTreeNode & {
+export type EncounterNode = AtlasNode & {
   type: "encounter"
   encounter: TownEncounter
 }
 
-export type ConditionNode = BaseTreeNode & {
+export type ConditionNode = AtlasNode & {
   type: "condition"
   condition: "mega" | "gigantamax"
 }
 
-export type ItemNode = BaseTreeNode & {
+export type ItemNode = AtlasNode & {
   type: "item"
   item: Item
 }
 
-export type BuffNode = BaseTreeNode & {
+export type BuffNode = AtlasNode & {
   type: "buff"
   buff: "red" | "blue" | "pink" | "yellow" | "green"
 }

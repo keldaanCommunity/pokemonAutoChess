@@ -4964,8 +4964,7 @@ export class Pidgeot extends Pokemon {
   speDef = 6
   maxPP = 100
   range = 2
-  //skill = Ability.HURRICANE
-  skill = Ability.SUPERSONIC_SKYSTRIKE // TEMP
+  skill = Ability.HURRICANE
   regional = true
   isInRegion(map: DungeonPMDO, state?: GameState) {
     return Object.keys(DungeonPMDO).indexOf(map) % 3 === 0

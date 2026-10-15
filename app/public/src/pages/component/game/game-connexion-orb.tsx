@@ -3,6 +3,7 @@ import { Tooltip } from "react-tooltip"
 import { useAppSelector } from "../../../hooks"
 import store from "../../../stores"
 import { setAtlasVisible } from "../../../stores/GameStore"
+import { cc } from "../../utils/jsx"
 
 export function GameConnectionOrb() {
   const { t } = useTranslation()
@@ -23,7 +24,7 @@ export function GameConnectionOrb() {
           id="game-connection-orb-icon"
           onClick={() => store.dispatch(setAtlasVisible(!atlasVisible))}
           src="/assets/ui/connection_orb.png"
-          className={atlasVisible ? "active" : ""}
+          className={cc({ active: atlasVisible, usable: emera > 0 })}
         />
         <span>{emera}</span>
         <img

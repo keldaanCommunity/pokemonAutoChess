@@ -9,6 +9,7 @@ export const SOUNDS = {
   BUTTON_HOVER: "buttonhover.ogg",
   CAROUSEL_UNLOCK: "carouselunlock.ogg",
   EMERA: "emera.ogg",
+  EMERA_ERROR: "emera_error.ogg",
   EMERA_KEYSTONE: "emera_major.ogg",
   EVOLUTION_T2: "evolutiont2.ogg",
   EVOLUTION_T3: "evolutiont3.ogg",
