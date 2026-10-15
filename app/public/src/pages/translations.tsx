@@ -15,6 +15,7 @@ import {
   applyEditsToObject,
   getNestedValue
 } from "./component/translations/types"
+import { getDescriptionError } from "./utils/description-config"
 import { LocalStoreKeys, localStore } from "./utils/store"
 import "./translations.css"
 
@@ -205,7 +206,15 @@ export default function TranslationsPage() {
 
   const handleSubmitPR = useCallback(
     async (token: string) => {
-      if (!targetData) return
+      if (!targetData || !enData) return
+      for (const [path, value] of Object.entries(edits)) {
+        const english = getNestedValue(enData, path)
+        const error = getDescriptionError(path, value, english)
+        if (error) {
+          setPrError(`${path}: ${error}`)
+          return
+        }
+      }
       const merged = applyEditsToObject(targetData, edits)
       const content = JSON.stringify(merged, null, "\t")
       setPrSubmitting(true)
@@ -226,7 +235,7 @@ export default function TranslationsPage() {
         setPrSubmitting(false)
       }
     },
-    [targetData, edits, targetLang]
+    [targetData, edits, targetLang, enData]
   )
 
   const handleDownload = useCallback(() => {

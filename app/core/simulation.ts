@@ -5,6 +5,7 @@ import {
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
   SynergyTiers
 } from "../config/game/synergies"
+import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
@@ -182,7 +183,8 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.finished = false
     this.winnerId = ""
-    this.stormLightningTimer = randomBetween(4000, 8000)
+    const storm = WeatherConfigs.STORM
+    this.stormLightningTimer = randomBetween(storm.initialDelayMinMs, storm.initialDelayMaxMs)
     if (
       SynergyTiers[Synergy.AQUATIC].some(
         (e) => this.blueEffects.has(e) || this.redEffects.has(e)
@@ -1238,20 +1240,21 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
-        pokemon.addSpeed(
-          (pokemon.types.has(Synergy.FLYING) ? 20 : 10) + nbFloatStones * 10,
-          "environment",
-          0,
-          false
-        )
+        const config = WeatherConfigs.WINDY
+        const speed = pokemon.types.has(Synergy.FLYING)
+          ? config.flyingSpeedBonus
+          : config.speedBonus
+        pokemon.addSpeed(speed + nbFloatStones * 10, "environment", 0, false)
         break
       }
 
-      case EffectEnum.SNOW:
+      case EffectEnum.SNOW: {
         if (pokemon.types.has(Synergy.ICE) === false) {
-          pokemon.addSpeed(-10, "environment", 0, false)
+          const speed = -WeatherConfigs.SNOW.speedReduction
+          pokemon.addSpeed(speed, "environment", 0, false)
         }
         break
+      }
 
       case EffectEnum.SMOG: {
         const opponentPlayer =
@@ -1259,12 +1262,10 @@ export default class Simulation extends Schema implements ISimulation {
         const nbSmellyClays = opponentPlayer
           ? count(opponentPlayer.items, Item.SMELLY_CLAY)
           : 0
-        pokemon.addDodgeChance(
-          0.15 - 0.05 * nbSmellyClays,
-          "environment",
-          0,
-          false
-        )
+        const dodge =
+          WeatherConfigs.SMOG.accuracyReductionPercent / 100 -
+          0.05 * nbSmellyClays
+        pokemon.addDodgeChance(dodge, "environment", 0, false)
         break
       }
 
@@ -1273,7 +1274,9 @@ export default class Simulation extends Schema implements ISimulation {
           ? count(player.items, Item.BLACK_AUGURITE)
           : 0
 
-        pokemon.addCritChance(10 + 5 * nbBlackAugurite, "environment", 0, false)
+        const critChance =
+          WeatherConfigs.NIGHT.critChanceBonusPercent + 5 * nbBlackAugurite
+        pokemon.addCritChance(critChance, "environment", 0, false)
         break
       }
 
@@ -1287,8 +1290,10 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MURKY: {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
-        const luckDebuff =
-          10 * nbOddStones - (pokemon.types.has(Synergy.GHOST) ? 0 : 30)
+        const reduction = pokemon.types.has(Synergy.GHOST)
+          ? 0
+          : WeatherConfigs.MURKY.luckReduction
+        const luckDebuff = 10 * nbOddStones - reduction
         pokemon.addLuck(luckDebuff, "environment", 0, false)
         break
       }
@@ -1350,9 +1355,10 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (this.weather === Weather.STORM) {
+      const storm = WeatherConfigs.STORM
       this.stormLightningTimer -= dt
       if (this.stormLightningTimer <= 0 && !this.finished) {
-        this.stormLightningTimer = randomBetween(2000, 6000)
+        this.stormLightningTimer = randomBetween(storm.intervalMinMs, storm.intervalMaxMs)
         // trigger lightning
         const x = randomBetween(0, this.board.columns - 1)
         const y = randomBetween(0, this.board.rows - 1)
@@ -1376,7 +1382,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
           } else {
             pokemonOnCell.handleDamage({
-              damage: 100,
+              damage: storm.lightningDamage,
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,

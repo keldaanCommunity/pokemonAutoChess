@@ -1,5 +1,6 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { SynergyTiers } from "../config/game/synergies"
+import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
 import {
@@ -309,7 +310,7 @@ export default abstract class PokemonState {
         heal *= 0.5
       }
       if (pokemon.simulation.weather === Weather.ZENITH) {
-        heal *= 1.2
+        heal *= 1 + WeatherConfigs.ZENITH.healingBonusPercent / 100
       }
 
       heal = Math.round(heal)
@@ -457,14 +458,14 @@ export default abstract class PokemonState {
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        damage *= 1.2
+        damage *= 1 + WeatherConfigs.MISTY.specialDamageBonusPercent / 100
       }
 
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
         attackType === AttackType.PHYSICAL
       ) {
-        damage *= 1.2
+        damage *= 1 + WeatherConfigs.BLOODMOON.physicalDamageBonusPercent / 100
       }
 
       if (
@@ -925,7 +926,7 @@ export default abstract class PokemonState {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
-        let sandstormDamage = 5
+        let sandstormDamage: number = WeatherConfigs.SANDSTORM.damagePerSecond
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
           sandstormDamage -= nbSmoothRocks
@@ -970,9 +971,9 @@ export default abstract class PokemonState {
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
     let passivePPGain = 10
     if (pokemon.simulation.weather === Weather.RAIN) {
-      passivePPGain += 3
+      passivePPGain += WeatherConfigs.RAIN.ppPerSecond
     } else if (pokemon.simulation.weather === Weather.DROUGHT) {
-      passivePPGain -= 3
+      passivePPGain -= WeatherConfigs.DROUGHT.ppPerSecond
     }
 
     pokemon.addPP(passivePPGain, pokemon, 0, false)

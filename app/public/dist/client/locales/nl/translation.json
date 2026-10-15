@@ -1652,15 +1652,15 @@
 	},
 	"weather_description": {
 		"NEUTRAL": "Normaal weer. Geen effecten.",
-		"DROUGHT": "BURN schade +30%\nFREEZE duur -30%",
-		"WINDY": "+10 SPEED (+20 indien FLYING)",
-		"RAIN": "+3 PP per seconde\n-30% BURN en POISONED schade",
-		"NIGHT": "+10% CRIT_CHANCE\n+30% SLAAPduur",
-		"STORM": "Bliksem slaat willekeurig op het bord en deelt 100 SPECIAL (ELECTRIC is immuun)\n+30% duur van de verlamming",
-		"MISTY": "+20% SPECIAL\n+30% SILENCE duur",
-		"SNOW": "-10 SPEED\n+30% FREEZE duur",
-		"SANDSTORM": "5SPECIAL per seconde (GROUND is immuun)\n CONFUSION duur +30%",
-		"SMOG": "-15% nauwkeurigheid\n+30% POISONED duur"
+		"DROUGHT": "BURN schade +{{burnDamageBonusPercent}}%\nFREEZE duur -{{freezeDurationReductionPercent}}%",
+		"WINDY": "+{{speedBonus}} SPEED (+{{flyingSpeedBonus}} indien FLYING)",
+		"RAIN": "+{{ppPerSecond}} PP per seconde\n-{{damageReductionPercent}}% BURN en POISONED schade",
+		"NIGHT": "+{{critChanceBonusPercent}}% CRIT_CHANCE\n+{{sleepDurationBonusPercent}}% SLAAPduur",
+		"STORM": "Bliksem slaat willekeurig op het bord en deelt {{lightningDamage}} SPECIAL (ELECTRIC is immuun)\n+{{paralysisDurationBonusPercent}}% duur van de verlamming",
+		"MISTY": "+{{specialDamageBonusPercent}}% SPECIAL\n+{{charmDurationBonusPercent}}% SILENCE duur",
+		"SNOW": "-{{speedReduction}} SPEED\n+{{freezeDurationBonusPercent}}% FREEZE duur",
+		"SANDSTORM": "{{damagePerSecond}}SPECIAL per seconde (GROUND is immuun)\n CONFUSION duur +{{confusionDurationBonusPercent}}%",
+		"SMOG": "-{{accuracyReductionPercent}}% nauwkeurigheid\n+{{poisonDurationBonusPercent}}% POISONED duur"
 	},
 	"emotion": {
 		"Normal": "Normaal",

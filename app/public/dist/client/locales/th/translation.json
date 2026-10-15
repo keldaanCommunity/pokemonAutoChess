@@ -954,16 +954,16 @@
 	},
 	"weather_description": {
 		"NEUTRAL": "สภาพอากาศทั่วไป. ไม่มีอะไรเป็นพิเศษ.",
-		"DROUGHT": "BURN ความเสียหาย +30%\nFREEZE ระยะเวลา -30%",
-		"WINDY": "+10 SPEED (+20 ถ้า FLYING)",
-		"RAIN": "+3 PP ต่อวินาที\\n-30% ความเสียหาย BURN และ POISONED",
-		"NIGHT": "+10% CRIT_CHANCE\n+30% ระยะเวลาสถานะ SLEEP",
-		"STORM": "สุ่มสายฟ้าฟาดลงบนสนาม, สร้างความเสียหาย 100 SPECIAL (ประเภท ELECTRIC จะไม่ได้รับผล)\n+30% ระยะเวลาสถานะ PARALYSIS",
-		"MISTY": "+20% SPECIAL\n+30% ระยะเวลาสถานะ CHARM",
-		"SNOW": "-10 SPEED\n+30% ระยะเวลาสถานะ FREEZE",
-		"SANDSTORM": "สร้างความเสียหาย 5 SPECIAL ต่อวินาที (ประเภท GROUND จะไม่ได้รับผล)\n+30% ระยะเวลาสถานะ CONFUSION",
-		"BLOODMOON": "+20% PHYSICAL\n30% ระยะเวลาสถานะ WOUND",
-		"SMOG": "-15% ความแม่นยำ\n+30% ระยะเวลา POISONED"
+		"DROUGHT": "BURN ความเสียหาย +{{burnDamageBonusPercent}}%\nFREEZE ระยะเวลา -{{freezeDurationReductionPercent}}%",
+		"WINDY": "+{{speedBonus}} SPEED (+{{flyingSpeedBonus}} ถ้า FLYING)",
+		"RAIN": "+{{ppPerSecond}} PP ต่อวินาที\\n-{{damageReductionPercent}}% ความเสียหาย BURN และ POISONED",
+		"NIGHT": "+{{critChanceBonusPercent}}% CRIT_CHANCE\n+{{sleepDurationBonusPercent}}% ระยะเวลาสถานะ SLEEP",
+		"STORM": "สุ่มสายฟ้าฟาดลงบนสนาม, สร้างความเสียหาย {{lightningDamage}} SPECIAL (ประเภท ELECTRIC จะไม่ได้รับผล)\n+{{paralysisDurationBonusPercent}}% ระยะเวลาสถานะ PARALYSIS",
+		"MISTY": "+{{specialDamageBonusPercent}}% SPECIAL\n+{{charmDurationBonusPercent}}% ระยะเวลาสถานะ CHARM",
+		"SNOW": "-{{speedReduction}} SPEED\n+{{freezeDurationBonusPercent}}% ระยะเวลาสถานะ FREEZE",
+		"SANDSTORM": "สร้างความเสียหาย {{damagePerSecond}} SPECIAL ต่อวินาที (ประเภท GROUND จะไม่ได้รับผล)\n+{{confusionDurationBonusPercent}}% ระยะเวลาสถานะ CONFUSION",
+		"BLOODMOON": "+{{physicalDamageBonusPercent}}% PHYSICAL\n{{woundDurationBonusPercent}}% ระยะเวลาสถานะ WOUND",
+		"SMOG": "-{{accuracyReductionPercent}}% ความแม่นยำ\n+{{poisonDurationBonusPercent}}% ระยะเวลา POISONED"
 	},
 	"emotion": {
 		"Normal": "เฉยๆ",
