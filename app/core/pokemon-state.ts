@@ -926,10 +926,10 @@ export default abstract class PokemonState {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
-        let sandstormDamage: number = WeatherConfigs.SANDSTORM.damagePerSecond
+        let sandstormDamage = WeatherConfigs.SANDSTORM.damagePerSecond
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
-          sandstormDamage -= nbSmoothRocks
+          sandstormDamage -= sandstormDamage * (20 / 100) * nbSmoothRocks
           pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (

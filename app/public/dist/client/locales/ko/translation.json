@@ -2609,7 +2609,7 @@
 		"TOXIC_SPIKES": "이 칸 위에 있으면 1초 동안 POISONED 상태가 된다. (POISON 포켓몬에게는 통하지 않음)",
 		"LIGHTNING_STRIKE": "STORM일 때, 보드의 한 칸에 무작위로 떨어지며, 그 위에 있는 포켓몬은 {{lightningDamage}} SPECIAL를 입는다. (ELECTRIC 포켓몬이 맞으면 충전)",
 		"TIDAL_WAVE": "파도가 부정적인 상태이상과 BOARD_EFFECT를 치우고, 같은 편의 AQUATIC 포켓몬을 회복시키며 상대를 밀쳐내고 데미지를 준다.",
-		"SANDSTORM": "SANDSTORM이 일어나는 동안 모든 포켓몬이 {{damagePerSecond}} SPECIAL를 입는다. (GROUND 포켓몬에게는 통하지 않음)",
+		"SANDSTORM": "SANDSTORM이 일어나는 동안 모든 포켓몬이 초당 {{damagePerSecond}} SPECIAL를 입는다. (GROUND 포켓몬에게는 통하지 않음)",
 		"STICKY_WEB": "이 칸 위에 있으면 2초 동안 PARALYSIS 상태가 된다.",
 		"CURSE": "CURSE에 걸린 포켓몬은 시간이 지나면 처형된다.",
 		"COTTON_BALL": "이 칸 위에 있으면 1초 동안 SLEEP 상태가 되며, 효과가 발동한 다음 사라진다.",

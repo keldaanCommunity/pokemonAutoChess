@@ -1330,7 +1330,7 @@
 		"HYPNOSIS": "Khiến 1 đối thủ ở hậu tuyến SLEEP trong [1,1.75,3,6,ND=2] + [1,1.75,3,6,SP,ND=2] giây",
 		"MIMIC": "Sao chép chiêu thức của mục tiêu hiện tại",
 		"HEX": "Gây [20,40,80,160,SP] SPECIAL cho mục tiêu. Gây gấp đôi sát thương nếu mục tiêu chịu trạng thái tiêu cực.",
-		"GROWTH": "Tăng HP tối đa thêm [10,20,40,80,SP] và ATK thêm [3,5,7,14,SP]. Tăng gấp đôi nếu thời tiết là ZENITH",
+		"GROWTH": "Tăng HP tối đa thêm [10,20,40,80,SP] và ATK thêm [3,5,7,14,SP]. Hiệu ứng tăng thêm 30% nếu thời tiết là ZENITH",
 		"HEAL_ORDER": "Gây [25,45,65,130,SP] SPECIAL lên đối thủ ở gần và hồi [25,45,65,130,SP] cho đồng minh ở gần",
 		"DIG": "Đào dưới đất và xuất hiện ở vị trí kẻ thù xa nhất, gây [10,20,40,80,SP] SPECIAL lên toàn bộ đối thủ trên đường đi",
 		"PECK": "Gây [10,30,50,100,SP] SPECIAL lên mục tiêu",

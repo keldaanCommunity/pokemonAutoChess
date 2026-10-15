@@ -183,8 +183,8 @@ export default class Simulation extends Schema implements ISimulation {
 
     this.finished = false
     this.winnerId = ""
-    const storm = WeatherConfigs.STORM
-    this.stormLightningTimer = randomBetween(storm.initialDelayMinMs, storm.initialDelayMaxMs)
+    const { initialDelayMinMs, initialDelayMaxMs } = WeatherConfigs.STORM
+    this.stormLightningTimer = randomBetween(initialDelayMinMs, initialDelayMaxMs)
     if (
       SynergyTiers[Synergy.AQUATIC].some(
         (e) => this.blueEffects.has(e) || this.redEffects.has(e)
@@ -1240,18 +1240,16 @@ export default class Simulation extends Schema implements ISimulation {
 
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
-        const config = WeatherConfigs.WINDY
-        const speed = pokemon.types.has(Synergy.FLYING)
-          ? config.flyingSpeedBonus
-          : config.speedBonus
-        pokemon.addSpeed(speed + nbFloatStones * 10, "environment", 0, false)
+        const { flyingSpeedBonus, speedBonus } = WeatherConfigs.WINDY
+        const speedBuff = pokemon.types.has(Synergy.FLYING) ? flyingSpeedBonus : speedBonus
+        pokemon.addSpeed(speedBuff + nbFloatStones * 10, "environment", 0, false)
         break
       }
 
       case EffectEnum.SNOW: {
         if (pokemon.types.has(Synergy.ICE) === false) {
-          const speed = -WeatherConfigs.SNOW.speedReduction
-          pokemon.addSpeed(speed, "environment", 0, false)
+          const speedDebuff = WeatherConfigs.SNOW.speedReduction
+          pokemon.addSpeed(-1 * speedDebuff, "environment", 0, false)
         }
         break
       }
@@ -1355,10 +1353,10 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (this.weather === Weather.STORM) {
-      const storm = WeatherConfigs.STORM
+      const { intervalMinMs, intervalMaxMs, lightningDamage } = WeatherConfigs.STORM
       this.stormLightningTimer -= dt
       if (this.stormLightningTimer <= 0 && !this.finished) {
-        this.stormLightningTimer = randomBetween(storm.intervalMinMs, storm.intervalMaxMs)
+        this.stormLightningTimer = randomBetween(intervalMinMs, intervalMaxMs)
         // trigger lightning
         const x = randomBetween(0, this.board.columns - 1)
         const y = randomBetween(0, this.board.rows - 1)
@@ -1382,7 +1380,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
           } else {
             pokemonOnCell.handleDamage({
-              damage: storm.lightningDamage,
+              damage: lightningDamage,
               board: this.board,
               attackType: AttackType.SPECIAL,
               attacker: null,

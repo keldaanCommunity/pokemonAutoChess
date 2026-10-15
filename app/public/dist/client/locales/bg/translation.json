@@ -2167,14 +2167,14 @@
 	},
 	"weather_description": {
 		"NEUTRAL": "Нормално време. Никакви ефекти.",
-		"DROUGHT": "BURN на щети +{{burnDamageBonusPercent}}%\nПродължителност на ЗАМРАЗЯВАНЕ -{{freezeDurationReductionPercent}}%",
+		"DROUGHT": "BURN щети +{{burnDamageBonusPercent}}%\nПродължителност на FREEZE -{{freezeDurationReductionPercent}}%\n-{{ppPerSecond}} PP в секунда",
 		"WINDY": "+{{speedBonus}} SPEED (+{{flyingSpeedBonus}} ако FLYING)",
 		"RAIN": "+{{ppPerSecond}} PP за секунда\n-{{damageReductionPercent}}% щети от BURN и POISONED",
 		"NIGHT": "+{{critChanceBonusPercent}}% CRIT_CHANCE\n+{{sleepDurationBonusPercent}}% продължителност на SLEEP",
-		"STORM": "Светкавица удря произволно върху дъската, нанасяйки {{lightningDamage}} SPECIAL (ELECTRIC са имунизирани)\n+{{paralysisDurationBonusPercent}}% продължителност на ПАРАЛИЗАТА",
+		"STORM": "LIGHTNING_STRIKE удря произволно върху дъската, нанасяйки {{lightningDamage}} SPECIAL (ELECTRIC получават свръхзаряд вместо това)\n+{{paralysisDurationBonusPercent}}% продължителност на PARALYSIS",
 		"MISTY": "+{{specialDamageBonusPercent}}% SPECIAL\n+{{charmDurationBonusPercent}}% продължителност на CHARM",
-		"SNOW": "-{{speedReduction}} SPEED\n+{{freezeDurationBonusPercent}}% продължителност на ЗАМРАЗЯВАНЕ",
-		"SANDSTORM": "{{damagePerSecond}} SPECIAL в секунда (ЗЕМЯТА е имунизирана)\n продължителност на CONFUSION +{{confusionDurationBonusPercent}}%",
+		"SNOW": "-{{speedReduction}} SPEED (ICE са имунизирани)\n+{{freezeDurationBonusPercent}}% продължителност на FREEZE",
+		"SANDSTORM": "{{damagePerSecond}} SPECIAL в секунда (GROUND са имунизирани)\nПродължителност на CONFUSION +{{confusionDurationBonusPercent}}%",
 		"SMOG": "-{{accuracyReductionPercent}}% точност\n+{{poisonDurationBonusPercent}}% продължителност на POISONED"
 	},
 	"emotion": {
