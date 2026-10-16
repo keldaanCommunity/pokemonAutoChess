@@ -326,10 +326,13 @@ export class FlyingProtectionEffect extends BeforeTakingDamageEffect {
       ) {
         this.flyingProtection--
         pokemon.flyAway(board)
-        if (
-          attacker?.items.has(Item.XRAY_VISION) &&
-          (attackType === AttackType.PHYSICAL || attackType === AttackType.TRUE)
-        ) {
+        const isAttack =
+          attackType === AttackType.PHYSICAL || attackType === AttackType.TRUE
+        const dodgePrevented =
+          isAttack &&
+          (attacker?.items.has(Item.XRAY_VISION) ||
+            pokemon.effects.has(EffectEnum.VICTINI_PASSIVE))
+        if (dodgePrevented) {
           return {} // triggers the fly away but doesn't dodge the damage because of X-ray vision
         }
         pokemon.count.dodgeCount++
