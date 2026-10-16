@@ -1,17 +1,19 @@
 import type { RoomAvailable } from "@colyseus/sdk"
 import firebase from "firebase/compat/app"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
 import { MAX_LOADING_TIME } from "../../../../../config"
 import type GameState from "../../../../../rooms/states/game-state"
 import { type IGameMetadata, Role, Transfer } from "../../../../../types"
+import { CloseCodesMessages } from "../../../../../types/enum/CloseCodes"
 import type { GameMode } from "../../../../../types/enum/Game"
 import { throttle } from "../../../../../utils/function"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { client, joinGame, rooms } from "../../../network"
 import { resetBoosters } from "../../../stores/BoostersStore"
 import { resetLobby } from "../../../stores/LobbyStore"
+import { setErrorAlertMessage } from "../../../stores/NetworkStore"
 import GameRoomItem from "./game-room-item"
 
 export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
@@ -21,7 +23,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
     (state) => state.lobby.gameRooms
   ).filter((r) => !gameMode || r.metadata.gameMode === gameMode)
   const navigate = useNavigate()
-  const [isJoining, setJoining] = useState<boolean>(false)
+  const joining = useRef<boolean>(false)
   const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const user = useAppSelector((state) => state.network.profile)
@@ -86,16 +88,29 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
   const connectToGame = throttle(async function connectToGame(
     selectedRoom: RoomAvailable<IGameMetadata>
   ) {
-    const token = await firebase.auth().currentUser?.getIdToken()
-    if (rooms.lobby && !isJoining && token) {
-      setJoining(true)
-      const game = await client.joinById<GameState>(selectedRoom.roomId, {
-        idToken: token
-      })
-      joinGame(game, MAX_LOADING_TIME / 1000)
-      dispatch(resetLobby())
-      dispatch(resetBoosters())
-      navigate("/game")
+    // a ref, since state would be read from the render closure this click was made in
+    if (rooms.lobby && !joining.current) {
+      joining.current = true
+      try {
+        const token = await firebase.auth().currentUser?.getIdToken()
+        const game = await client.joinById<GameState>(selectedRoom.roomId, {
+          idToken: token
+        })
+        joinGame(game, MAX_LOADING_TIME / 1000)
+        dispatch(resetLobby())
+        dispatch(resetBoosters())
+        navigate("/game")
+      } catch (error: any) {
+        joining.current = false // or the list stays unclickable
+        const message =
+          CloseCodesMessages[error?.code as keyof typeof CloseCodesMessages] ??
+          "UNKNOWN_ERROR"
+        dispatch(
+          setErrorAlertMessage(
+            t(`errors.${message}`, { error: error?.message })
+          )
+        )
+      }
     }
   }, 1000)
 

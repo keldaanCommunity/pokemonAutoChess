@@ -811,10 +811,18 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     if (client && client.auth && client.auth.displayName) {
+      // a drop while another session of this player is still connected is not them leaving
+      if (
+        !consented &&
+        this.clients.some((c) => c.auth?.uid === client.auth.uid)
+      )
+        return
+
       const pendingGame = await getPendingGame(this.presence, client.auth.uid)
       if (!pendingGame && !consented)
         return // user has reconnected through other ways (new browser/machine/session)
       else if (
+        !consented &&
         pendingGame &&
         isValidDate(pendingGame.reconnectionDeadline) &&
         pendingGame.reconnectionDeadline.getTime() > Date.now()
