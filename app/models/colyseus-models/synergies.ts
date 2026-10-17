@@ -67,7 +67,7 @@ export default class Synergies extends MapSchema<number, Synergy> {
   getTopSynergies(amount?: number): Synergy[] {
     const synergiesSortedByLevel: [Synergy, number][] = sortSynergies(
       this.toMap()
-    )
+    ).filter(([s,v]) => s !== Synergy.STELLAR)
     if (amount) {
       return synergiesSortedByLevel.slice(0, amount).map(([s, v]) => s)
     }

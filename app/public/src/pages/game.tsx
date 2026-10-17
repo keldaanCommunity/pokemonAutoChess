@@ -955,7 +955,9 @@ export default function Game() {
               dispatch(updateAtlasManager(atlasManager))
               const fields = [
                 "emera",
-                "unlockedNodes"
+                "unlockedNodes",
+                "legendaries",
+                "symbols"
               ] satisfies NonFunctionPropNames<IAtlasManager>[]
               fields.forEach((field) => {
                 $atlasManager.listen(field, (value) => {

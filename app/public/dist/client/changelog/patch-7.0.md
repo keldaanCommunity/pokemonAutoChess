@@ -22,6 +22,8 @@ This special synergy is only given through special items and Pokémon. Its effec
 
 # Gameplay
 
+- Starters now have 20% chance to be of Uncommon rarity, and 10% of Rare rarity
+
 # Town
 
 - New town encounter at stage 17: Grovyle. Grovyle stole the Time Gears ! The next two stages are skipped.

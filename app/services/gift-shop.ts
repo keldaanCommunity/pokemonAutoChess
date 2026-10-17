@@ -25,7 +25,11 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
-import { Pkm, PkmDuos, type PkmProposition } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  type PkmProposition,
+  pkmsFromProposition
+} from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
 import {
@@ -149,8 +153,7 @@ const giftRandomPokemonByRarity =
           : PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
 
     const poolWithWantedSyns = pool.filter((proposition) => {
-      const p: Pkm =
-        proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
+      const p = pkmsFromProposition(proposition)[0]
       const pkmData = getPokemonData(p)
       if (PkmsWithAltForms.includes(p) && getBaseAltForm(p) !== p) return false
       if (pkmData.stars !== wantedStars) return false
@@ -178,11 +181,9 @@ const giftRandomPokemonByRarity =
       poolWithWantedSyns.length === 0 ? pool : poolWithWantedSyns //Fallback if no Pokémon satisfy the filter
     const selectedProposition = pickRandomIn(candidates) ?? Pkm.DITTO
 
-    const pokemonsObtained: Pokemon[] = (
-      selectedProposition in PkmDuos
-        ? PkmDuos[selectedProposition]
-        : [selectedProposition]
-    ).map((p) => PokemonFactory.createPokemonFromName(p, toPlayer))
+    const pokemonsObtained = pkmsFromProposition(selectedProposition).map((p) =>
+      PokemonFactory.createPokemonFromName(p, toPlayer)
+    )
 
     room.givePokemons(pokemonsObtained, toPlayer, true)
   }

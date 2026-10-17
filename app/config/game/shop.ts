@@ -1,8 +1,6 @@
 import { Rarity } from "../../types/enum/Game"
 
 export const SHOP_SIZE = 6
-export const NB_STARTERS = 3
-export const NB_UNIQUE_PROPOSITIONS = 6
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,

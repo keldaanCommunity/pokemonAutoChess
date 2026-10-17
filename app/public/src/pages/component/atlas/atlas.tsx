@@ -1,5 +1,5 @@
 import type { SetSchema } from "@colyseus/schema"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import {
@@ -14,23 +14,40 @@ import {
   type AtlasNodeId,
   AtlasTree
 } from "../../../../../config/game/atlas"
-import type { AtlasNode, Emera } from "../../../../../types/atlas"
-import { PkmIndex } from "../../../../../types/enum/Pokemon"
+import {
+  type AtlasNode,
+  type Emera,
+  isLegendaryNode
+} from "../../../../../types/atlas"
+import {
+  isPkmDuo,
+  type Pkm,
+  PkmDuos,
+  PkmIndex
+} from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { entries } from "../../../../../utils/object"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
 import { useAppSelector } from "../../../hooks"
 import { pickAtlasNode } from "../../../network"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
+import { GamePokemonDetail } from "../game/game-pokemon-detail"
 import PokemonPortrait from "../pokemon-portrait"
 import "./atlas.css"
-import { entries } from "../../../../../utils/object"
+
+const ROOT_POSITION = AtlasTree.nodes.root.position
+const LEGENDARY_POSITIONS = entries(AtlasTree.nodes)
+  .filter(([, node]) => node.type === "legendary")
+  .map(([, node]) => node.position)
+const REVEAL_ORBIT_RADIUS = 120
 
 export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
   const [demoUnlockedNodes, setDemoUnlockedNodes] = useState<Set<AtlasNodeId>>(
     new Set(["root"])
   )
+  const atlasVisible = useAppSelector((state) => state.game.atlasVisible)
   const atlasManager = useAppSelector((state) => state.game.atlasManager)
 
   const unlockedNodes =
@@ -39,6 +56,20 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
       : demoUnlockedNodes
 
   const emera = origin === "game" && atlasManager ? atlasManager.emera : 0
+  const legendaries = atlasManager.legendaries
+  const symbols = atlasManager.symbols
+  const [isLegendariesRevealed, setIsRevealed] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (
+      !isLegendariesRevealed &&
+      legendaries.length > 0 &&
+      symbols.length > 0 &&
+      atlasVisible
+    ) {
+      setIsRevealed(true)
+    }
+  }, [symbols, legendaries, isLegendariesRevealed, atlasVisible])
 
   const canRemoveNodes = origin === "wiki"
 
@@ -82,7 +113,13 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
   const COLOR_GLOW = "#ffffff"
 
   return (
-    <div id="atlas-container">
+    <div
+      id="atlas-container"
+      className={cc({
+        "has-legendaries": legendaries.length > 0,
+        revealing: isLegendariesRevealed
+      })}
+    >
       <div className="atlas-mask">
         <TransformWrapper
           initialScale={
@@ -154,27 +191,71 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
 
               {/* 2. RENDER NODES */}
               <g id="nodes">
-                {entries(AtlasTree.nodes).map(([nodeId, node]) => {
-                  const isUnlocked = unlockedNodes.has(nodeId)
-                  const isUnlockable = isConnectedAndUnlockable(
-                    nodeId,
-                    unlockedNodes
-                  )
-                  const isAffordable = emera > 0 || origin === "wiki"
+                {entries(AtlasTree.nodes).map(
+                  ([nodeId, node]: [AtlasNodeId, AtlasNode]) => {
+                    const isUnlocked = unlockedNodes.has(nodeId)
+                    const isUnlockable = isConnectedAndUnlockable(
+                      nodeId,
+                      unlockedNodes
+                    )
+                    const isAffordable = emera > 0 || origin === "wiki"
+                    if (node.type === "legendary" && legendaries.length > 0) {
+                      const index = Number(nodeId.at(-1)) - 1
+                      node = { ...node, pokemon: legendaries[index] }
+                    }
 
-                  return (
-                    <Node
-                      key={nodeId}
-                      node={node}
-                      nodeId={nodeId}
-                      isUnlocked={isUnlocked}
-                      isUnlockable={isUnlockable}
-                      isAffordable={isAffordable}
-                      onClick={handleNodeClick}
-                    />
-                  )
-                })}
+                    return (
+                      <Node
+                        key={nodeId}
+                        node={node}
+                        nodeId={nodeId}
+                        isUnlocked={isUnlocked}
+                        isUnlockable={isUnlockable}
+                        isAffordable={isAffordable}
+                        onClick={handleNodeClick}
+                      />
+                    )
+                  }
+                )}
               </g>
+
+              {/* 3. LEGENDARY REVEAL ANIMATION */}
+              {isLegendariesRevealed && (
+                <g id="atlas-reveal">
+                  {[...symbols].map((symbol, index) => {
+                    const target = LEGENDARY_POSITIONS[index] ?? ROOT_POSITION
+                    const angle =
+                      (Math.atan2(target[1], target[0]) * 180) / Math.PI
+                    const targetRadius = Math.hypot(target[0], target[1])
+                    return (
+                      <g
+                        key={`${symbol}-${index}`}
+                        className="atlas-reveal-symbol"
+                        style={
+                          {
+                            "--origin-x": `${ROOT_POSITION[0]}px`,
+                            "--origin-y": `${ROOT_POSITION[1]}px`,
+                            "--angle": `${angle}deg`,
+                            "--orbit-radius": `${REVEAL_ORBIT_RADIUS}px`,
+                            "--target-radius": `${targetRadius}px`
+                          } as React.CSSProperties
+                        }
+                      >
+                        <g className="atlas-reveal-orbit">
+                          <g className="atlas-reveal-fly">
+                            <image
+                              className="atlas-reveal-icon"
+                              href={`assets/types/${symbol}.svg`}
+                              width={64}
+                              height={64}
+                            />
+                          </g>
+                        </g>
+                      </g>
+                    )
+                  })}
+                </g>
+              )}
             </svg>
           </TransformComponent>
         </TransformWrapper>
@@ -209,6 +290,14 @@ function Node({
   const size = NodeSizes[node.type] || 12
   const shouldShowTooltip = node.type !== "step"
   const { zoomToElement } = useControls()
+
+  const legendaries = useAppSelector(
+    (state) => state.game.atlasManager.legendaries
+  )
+  if (node.type === "legendary" && legendaries.length > 0) {
+    const index = Number(nodeId.at(-1)) - 1
+    node = { ...node, pokemon: legendaries[index] }
+  }
 
   function handleClick(e: React.MouseEvent<SVGGElement, MouseEvent>) {
     e.preventDefault()
@@ -257,6 +346,52 @@ function Node({
           transform="translate(-50 -50)"
         />
       )}
+
+      {/* Node for Legendary */}
+      {node.type === "legendary" &&
+        (node.pokemon && isPkmDuo(node.pokemon) ? (
+          <>
+            <image
+              className="atlas-legendary-pokemon"
+              href={getPortraitSrc(PkmIndex[PkmDuos[node.pokemon][0]])}
+              height="80"
+              width="80"
+              transform="translate(-40 -40)"
+              style={{
+                borderRadius: "50%",
+                clipPath: "polygon(0% 0%, 100% 100%, 0% 100%)"
+              }}
+            />
+            <image
+              className="atlas-legendary-pokemon"
+              href={getPortraitSrc(PkmIndex[PkmDuos[node.pokemon][1]])}
+              height="80"
+              width="80"
+              transform="translate(-40 -40)"
+              style={{
+                borderRadius: "50%",
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%)"
+              }}
+            />
+          </>
+        ) : node.pokemon ? (
+          <image
+            className="atlas-legendary-pokemon"
+            href={getPortraitSrc(PkmIndex[node.pokemon])}
+            height="80"
+            width="80"
+            transform="translate(-40 -40)"
+            style={{ clipPath: "circle(40px)" }}
+          />
+        ) : (
+          <image
+            href={EmeraIcons["legendary"]}
+            height="60"
+            width="60"
+            transform="translate(-30 -30)"
+            opacity={isUnlocked ? 1 : 0.5}
+          />
+        ))}
 
       {/* Node Emera Icon */}
       {node.type === "keystone" && (
@@ -327,9 +462,37 @@ function Node({
 function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
   const { t } = useTranslation()
   const node = AtlasTree.nodes[nodeId]
+  const legendaries = useAppSelector(
+    (state) => state.game.atlasManager.legendaries
+  )
+
   if (!node) return null
   if (node.type === "item") {
     return <ItemDetailTooltipContent item={node.item} />
+  }
+
+  if (isLegendaryNode(node)) {
+    const index = Number(nodeId.at(-1)) - 1
+    const pokemon = legendaries[index]
+
+    if (isPkmDuo(pokemon)) {
+      const duo: Pkm[] = PkmDuos[pokemon]
+      return (
+        <>
+          <GamePokemonDetail
+            origin="atlas"
+            pokemon={duo[0]}
+          ></GamePokemonDetail>
+          <GamePokemonDetail
+            origin="atlas"
+            pokemon={duo[1]}
+          ></GamePokemonDetail>
+        </>
+      )
+    }
+    return (
+      <GamePokemonDetail origin="atlas" pokemon={pokemon}></GamePokemonDetail>
+    )
   }
 
   let portrait,
@@ -345,6 +508,9 @@ function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
   } else if (node.type === "keystone") {
     title = t(`atlas.keystone.${node.emera}`)
     description = t(`atlas.keystone_description.${node.emera}`)
+  } else if (node.type === "legendary") {
+    title = t(`atlas.keystone.${node.type}`)
+    description = t(`atlas.keystone_description.${node.type}`)
   } else if (node.type === "condition") {
     description = t(`atlas.condition.${node.condition}`)
   } else if (node.type === "buff") {
@@ -372,6 +538,7 @@ function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
 const NodeSizes: Record<AtlasNode["type"], number> = {
   start: 50,
   keystone: 45,
+  legendary: 45,
   item: 45,
   encounter: 24,
   condition: 20,

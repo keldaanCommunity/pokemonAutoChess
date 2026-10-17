@@ -1,10 +1,8 @@
 import {
   AQUA_MONICA_CHANCE,
-  ARCEUS_RATE,
   BuyPrices,
   DITTO_BASE_RATE,
   DITTO_RATE_PER_REROLL,
-  EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FIERY_DRUM_CHANCE,
   FishRarityProbability,
@@ -14,15 +12,10 @@ import {
   HONEY_CHANCE,
   ICY_FLUTE_CHANCE,
   INCENSE_CHANCE,
-  KECLEON_RATE,
   LegendaryPool,
   MIN_STAGE_FOR_DITTO,
-  NB_STARTERS,
-  NB_UNIQUE_PROPOSITIONS,
-  PkmAltFormsByPkm,
   PkmsWithAltForms,
   PoolSize,
-  PortalCarouselStages,
   RarityCost,
   RarityProbabilityPerLevel,
   REMORAID_RATE,
@@ -40,45 +33,35 @@ import {
   UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
-import { getAltFormForPlayer } from "../core/alt-form-logic";
-import { pickFirstPartners } from "../core/scribbles"
+import { getAltFormForPlayer } from "../core/alt-form-logic"
 import { getWildChance } from "../core/synergies"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
+import { type FishingRod, Item } from "../types/enum/Item"
 import {
-  type FishingRod,
-  Item,
-  ItemComponentsNoFossilOrScarf
-} from "../types/enum/Item"
-import {
-  isRegionalVariant,
+  isPkmDuo,
   Pkm,
   PkmDuos,
   PkmFamily,
   type PkmProposition,
   PkmRegionalVariants,
+  pkmsFromProposition,
   Unowns
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
-import { removeFromArray } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
 import {
   chance,
-  pickNRandomIn,
   pickRandomIn,
   randomWeighted,
   shuffleArray
 } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import type Player from "./colyseus-models/player"
-import {
-  PlayerChoice,
-  type PlayerChoiceType
-} from "./colyseus-models/player-choice"
 import { type Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
 import { getPokemonBaseline } from "./pokemon-factory"
 import {
@@ -246,8 +229,7 @@ export default class Shop {
   }
 
   addAdditionalPokemon(pkmProposition: PkmProposition, state: GameState) {
-    const pkm: Pkm =
-      pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
+    const pkm: Pkm = pkmsFromProposition(pkmProposition)[0]
     if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
     state.additionalPokemons.push(pkm)
     const { rarity, stages } = getPokemonData(pkm)
@@ -385,162 +367,6 @@ export default class Shop {
     for (let i = 0; i < SHOP_SIZE; i++) {
       player.shop[i] = this.pickPokemon(player, state, i, true, specificTypes)
     }
-  }
-
-  assignUniquePropositions(
-    player: Player,
-    state: GameState,
-    portalSynergies: Synergy[]
-  ) {
-    const stageLevel = state.stageLevel
-    const typeByStage: { [stage: number]: PlayerChoiceType } = {
-      [PortalCarouselStages[0]]: "starter",
-      [PortalCarouselStages[1]]: "unique",
-      [PortalCarouselStages[2]]: "legendary"
-    }
-    const type = typeByStage[stageLevel]
-
-    const poolByType: {
-      [type in "starter" | "unique" | "legendary"]: PkmProposition[]
-    } = {
-      starter: [...this.commonPool],
-      unique: [...UniquePool],
-      legendary: [...LegendaryPool]
-    }
-
-    let allCandidates: PkmProposition[] = poolByType[type] || []
-
-    if (stageLevel === 0) {
-      if (state.specialGameRule === SpecialGameRule.UNIQUE_STARTER) {
-        allCandidates = [...UniquePool]
-      } else if (state.specialGameRule === SpecialGameRule.FIRST_PARTNER) {
-        allCandidates = pickFirstPartners(player, state)
-      }
-    }
-
-    // ensure we have at least one synergy per proposition
-    if (portalSynergies.length > NB_UNIQUE_PROPOSITIONS) {
-      portalSynergies = pickNRandomIn(portalSynergies, NB_UNIQUE_PROPOSITIONS)
-    }
-
-    const nbPropositions =
-      stageLevel === PortalCarouselStages[0]
-        ? NB_STARTERS
-        : NB_UNIQUE_PROPOSITIONS
-    const pokemonsProposed: PkmProposition[] = []
-    const itemsProposed: Item[] = []
-
-    for (let i = 0; i < nbPropositions; i++) {
-      let synergyWanted: Synergy | undefined = portalSynergies[i]
-
-      function filterCandidates(proposition: PkmProposition): boolean {
-        const pkm: Pkm =
-          proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
-        const { types, regional } = getPokemonData(pkm)
-
-        const hasSynergyWanted =
-          synergyWanted === undefined || types.includes(synergyWanted)
-
-        if (!hasSynergyWanted) return false
-
-        if (regional) {
-          const pokemon = new PokemonClasses[pkm](pkm)
-          if (!pokemon.isInRegion(player.map)) {
-            // skip regional pokemons not in their region
-            return false
-          }
-        }
-
-        if (
-          pokemonsProposed.some((prop) => {
-            const p: Pkm = prop in PkmDuos ? PkmDuos[prop][0] : prop
-            return PkmFamily[p] === PkmFamily[pkm] || isRegionalVariant(p, pkm)
-          })
-        ) {
-          // avoid proposing two pokemons of the same family or regional variants
-          return false
-        }
-
-        if (
-          pkm in PkmRegionalVariants &&
-          PkmRegionalVariants[pkm]?.some((p) => {
-            const variant = new PokemonClasses[p](p)
-            const lostTypes = types.filter((type) => !variant.hasSynergy(type))
-            return (
-              variant.isInRegion(player.map) &&
-              synergyWanted &&
-              lostTypes.includes(synergyWanted)
-            )
-          })
-        ) {
-          // avoid proposing pokemon whose regional variants would lose the wanted synergy
-          return false
-        }
-
-        return true
-      }
-
-      let candidates = allCandidates.filter(filterCandidates)
-      const initialCandidatesEmpty = candidates.length === 0
-      if (initialCandidatesEmpty) {
-        synergyWanted = undefined
-        candidates = allCandidates.filter(filterCandidates)
-      }
-      let selected = pickRandomIn(candidates)
-
-      if (selected in PkmRegionalVariants) {
-        const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
-          new PokemonClasses[p](p).isInRegion(player.map)
-        )
-        if (regionalVariants.length > 0)
-          selected = pickRandomIn(regionalVariants)
-      }
-      if (selected in PkmAltFormsByPkm) {
-        selected = getAltFormForPlayer(selected as Pkm, player)
-      }
-
-      if (stageLevel === PortalCarouselStages[0]) {
-        itemsProposed[i] = pickRandomIn(
-          ItemComponentsNoFossilOrScarf.filter(
-            (c) => itemsProposed.includes(c) === false
-          )
-        )
-      }
-
-      if (
-        stageLevel === PortalCarouselStages[0] &&
-        pokemonsProposed.includes(Pkm.EEVEE) === false &&
-        (chance(EEVEE_RATE) || initialCandidatesEmpty) &&
-        state.specialGameRule !== SpecialGameRule.FIRST_PARTNER &&
-        state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
-      ) {
-        selected = Pkm.EEVEE
-        itemsProposed[i] = Item.FOSSIL_STONE
-      } else if (
-        stageLevel === PortalCarouselStages[1] &&
-        pokemonsProposed.includes(Pkm.KECLEON) === false &&
-        chance(KECLEON_RATE)
-      ) {
-        selected = Pkm.KECLEON
-      } else if (
-        stageLevel === PortalCarouselStages[2] &&
-        pokemonsProposed.includes(Pkm.ARCEUS) === false &&
-        chance(ARCEUS_RATE)
-      ) {
-        selected = Pkm.ARCEUS
-      }
-
-      removeFromArray(allCandidates, selected)
-      pokemonsProposed.push(selected)
-    }
-
-    player.choices.push(
-      new PlayerChoice({
-        type,
-        pokemons: pokemonsProposed,
-        items: itemsProposed
-      })
-    )
   }
 
   getRandomPokemonFromPool(
@@ -783,7 +609,7 @@ export default class Shop {
       default:
         return Pkm.MAGIKARP
     }
-    let candidates: Pkm[] = pool.filter<Pkm>((p): p is Pkm => !(p in PkmDuos))
+    let candidates: Pkm[] = pool.filter<Pkm>((p): p is Pkm => !isPkmDuo(p))
     shuffleArray(candidates)
     candidates = candidates.filter(
       (p, index) =>

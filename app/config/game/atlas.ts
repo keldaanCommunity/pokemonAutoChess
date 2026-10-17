@@ -63,33 +63,27 @@ const nodes = {
 
   // legendaries
   legendary1: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(0, 27 * D)
   },
   legendary2: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(60, 27 * D)
   },
   legendary3: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(120, 27 * D)
   },
   legendary4: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(180, 27 * D)
   },
   legendary5: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(240, 27 * D)
   },
   legendary6: {
-    type: "keystone",
-    emera: "legendary",
+    type: "legendary",
     position: rotToXY(300, 27 * D)
   },
 

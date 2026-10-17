@@ -56,6 +56,7 @@ export function GamePokemonDetail(props: {
     | "patchnotes"
     | "after"
     | "history"
+    | "atlas"
   shiny?: boolean
   emotion?: Emotion
   isAlly?: boolean

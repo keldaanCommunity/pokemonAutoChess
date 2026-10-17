@@ -1,18 +1,21 @@
 import type { Item } from "./enum/Item"
+import type { PkmProposition } from "./enum/Pokemon"
 import type { TownEncounter } from "./enum/TownEncounter"
 
 export type AtlasNodeType =
   | "start"
   | "step"
   | "keystone"
+  | "legendary"
   | "encounter"
   | "condition"
   | "item"
   | "buff"
-export type AtlasKeystone = "legendary" | "awakening" | "gigantamax"
+export type AtlasKeystone = "awakening" | "gigantamax"
 
 export type Emera =
   | AtlasKeystone
+  | "legendary"
   | "blank"
   | "pink"
   | "red"
@@ -38,6 +41,11 @@ export type KeystoneNode = Node & {
   emera: AtlasKeystone
 }
 
+export type LegendaryNode = Node & {
+  type: "legendary"
+  pokemon?: PkmProposition
+}
+
 export type EncounterNode = Node & {
   type: "encounter"
   encounter: TownEncounter
@@ -61,6 +69,7 @@ export type BuffNode = Node & {
 export type AtlasNode =
   | StartNode
   | KeystoneNode
+  | LegendaryNode
   | EncounterNode
   | ConditionNode
   | StepNode
@@ -73,6 +82,8 @@ export type AtlasNodeConnection = {
 }
 
 export type TAtlasTree = {
-  nodes: { [nodeId: string]: AtlasNode },
+  nodes: { [nodeId: string]: AtlasNode }
   connections: AtlasNodeConnection[]
 }
+
+export const isLegendaryNode = (node: AtlasNode): node is LegendaryNode => node.type === "legendary"

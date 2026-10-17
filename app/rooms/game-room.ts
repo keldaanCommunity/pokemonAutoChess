@@ -86,9 +86,9 @@ import {
 import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
-  PkmDuos,
   PkmIndex,
-  PkmRegionalVariants
+  PkmRegionalVariants,
+  pkmsFromProposition
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
@@ -1445,9 +1445,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     if (choice.pokemons.length > 0 && choice.type !== "form_change") {
       const pkm = choice.pokemons[choiceIndex]
-      let pokemonsObtained: Pokemon[] = (
-        pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
-      ).map((p) => PokemonFactory.createPokemonFromName(p, player))
+      let pokemonsObtained: Pokemon[] = pkmsFromProposition(pkm).map((p) =>
+        PokemonFactory.createPokemonFromName(p, player)
+      )
 
       if (choice.type === "addPick") {
         if (pokemonsObtained[0]?.regional) {

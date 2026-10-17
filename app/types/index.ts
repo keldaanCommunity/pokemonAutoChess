@@ -368,6 +368,7 @@ export interface IAtlasManager {
   emera: number
   unlockedNodes: SetSchema<string>
   legendaries: ArraySchema<PkmProposition>
+  symbols: ArraySchema<Synergy>
 }
 
 export interface ISimulation {

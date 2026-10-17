@@ -146,3 +146,114 @@
 .atlas-node-detail .atlas-node-detail-description {
   white-space: pre-line;
 }
+
+#atlas-reveal {
+  --reveal-orbit-duration: 2000ms;
+  --reveal-orbit-spin: 180deg;
+  pointer-events: none;
+}
+
+/* The view-box reference box is a 2000x2000 box whose top-left is at the
+   user-space origin (0,0), so a length in px maps directly to user units.
+   Anchor the rotation on the root node position set in --origin vars */
+.atlas-reveal-symbol,
+.atlas-reveal-orbit {
+  transform-box: view-box;
+  transform-origin: var(--origin-x) var(--origin-y);
+}
+
+.atlas-reveal-symbol {
+  transform: rotate(var(--angle));
+}
+
+.atlas-reveal-orbit {
+  animation: atlas-reveal-orbit var(--reveal-orbit-duration) linear forwards;
+}
+
+.atlas-reveal-fly {
+  animation: atlas-reveal-fly 2000ms ease-in-out forwards;
+}
+
+.atlas-reveal-icon {
+  /* keep the symbol upright: rotate about its own centre and counter the
+     static --angle plus the orbit spin applied by the ancestors, so the
+     icon itself never appears to rotate */
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    atlas-reveal-counter var(--reveal-orbit-duration) linear forwards,
+    atlas-reveal-icon 2000ms ease-in-out forwards;
+}
+
+@keyframes atlas-reveal-counter {
+  from {
+    transform: translate(-32px, -32px) rotate(calc(-1 * var(--angle) + 180deg));
+  }
+
+  to {
+    transform: translate(-32px, -32px)
+      rotate(calc(-1 * var(--angle) - var(--reveal-orbit-spin) + 180deg));
+  }
+}
+
+@keyframes atlas-reveal-orbit {
+  from {
+    transform: rotate(calc(-1 * var(--reveal-orbit-spin)));
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes atlas-reveal-fly {
+  0%,
+  75% {
+    transform: translateX(var(--orbit-radius));
+  }
+
+  100% {
+    transform: translateX(var(--target-radius));
+  }
+}
+
+@keyframes atlas-reveal-icon {
+  0%,
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Pokemon is revealed once its symbol has reached the legendary node */
+#atlas-container.has-legendaries
+  .atlas-node.legendary
+  .atlas-legendary-pokemon {
+  opacity: 0;
+}
+
+#atlas-container.has-legendaries.revealing
+  .atlas-node.legendary
+  .atlas-legendary-pokemon {
+  animation: atlas-legendary-appear 400ms 1900ms both;
+}
+
+@keyframes atlas-legendary-appear {
+  0% {
+    filter: brightness(1);
+    opacity: 0;
+  }
+
+  50% {
+    filter: brightness(2);
+    opacity: 1;
+  }
+
+  100% {
+    filter: brightness(1);
+    opacity: 1;
+  }
+}

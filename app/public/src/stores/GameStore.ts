@@ -191,7 +191,9 @@ const gameSlice = createSlice({
       state.atlasManager = {
         ...state.atlasManager,
         emera: action.payload.emera,
-        unlockedNodes: action.payload.unlockedNodes
+        unlockedNodes: action.payload.unlockedNodes,
+        legendaries: action.payload.legendaries,
+        symbols: action.payload.symbols
       }
     },
     changePlayer: (

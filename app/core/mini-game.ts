@@ -55,6 +55,7 @@ import {
 } from "../utils/random"
 import { schemaKeys, schemaValues } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
+import { assignStarters, assignUniquePropositions } from "./pools"
 import { spawnDIAYAvatar } from "./scribbles"
 import { getSynergyTier } from "./synergies"
 
@@ -913,8 +914,13 @@ export class MiniGame {
           const avatar = spawnDIAYAvatar(player)
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
+        } else if (state.stageLevel === PortalCarouselStages[2]) {
+          player.atlasManager.assignLegendaries(player, portalSynergies)
+        } else if (state.stageLevel === PortalCarouselStages[1]) {
+          assignUniquePropositions(player, portalSynergies)
         } else {
-          state.shop.assignUniquePropositions(player, state, portalSynergies)
+          assignStarters(player, state, portalSynergies)
+          player.atlasManager.assignLegendaries(player, portalSynergies) // TEMP
         }
       }
 

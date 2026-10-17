@@ -5,9 +5,9 @@ import type { PlayerChoice } from "../../../../../models/colyseus-models/player-
 import { Stat } from "../../../../../types/enum/Game"
 import type { Item } from "../../../../../types/enum/Item"
 import {
+  isPkmDuo,
   type Pkm,
   PkmDuo,
-  PkmDuos,
   PkmFamily
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
@@ -134,7 +134,7 @@ export default function GameChoice() {
                     pickChoice(choice.id, index)
                   }}
                 >
-                  {proposition in PkmDuos ? (
+                  {isPkmDuo(proposition) ? (
                     <GamePokemonDuoPortrait
                       key={`proposition-${choice.id}-${index}`}
                       origin="proposition"
@@ -155,13 +155,9 @@ export default function GameChoice() {
                       index={index}
                       pokemon={proposition as Pkm}
                       inPlanner={
-                        teamPlanner?.some((pokemon) => {
-                          if (proposition in PkmDuos) {
-                            return PkmDuos[proposition].includes(pokemon.name)
-                          }
-
-                          return PkmFamily[pokemon.name] === proposition
-                        }) ?? false
+                        teamPlanner?.some(
+                          (pokemon) => PkmFamily[pokemon.name] === proposition
+                        ) ?? false
                       }
                     />
                   )}
