@@ -1,3 +1,4 @@
+import { StatusConfigs } from "../../config/game/statuses"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
@@ -12,7 +13,7 @@ export class PoisonStingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let maxStacks = 3
+    let maxStacks = StatusConfigs.POISONED.maxStacks
     if (pokemon.effects.has(EffectEnum.VENOMOUS)) {
       maxStacks = 4
     }
