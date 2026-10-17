@@ -8137,5 +8137,13 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.FLYING_MELEE,
     hitSprite: HitSprite.ROCK_HIT,
     shinyUnavailable: true
+  },
+  [Pkm.SANDY_SHOCKS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
+    attackSprite: AttackSprite.STEEL_RANGE,
+    hitSprite: HitSprite.ELECTRIC_HIT,
+    shinyUnavailable: true
   }
 }

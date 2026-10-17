@@ -863,6 +863,7 @@ export enum Pkm {
   SANDSHREW = "SANDSHREW",
   SANDSLASH = "SANDSLASH",
   SANDYGAST = "SANDYGAST",
+  SANDY_SHOCKS = "SANDY_SHOCKS",
   SAWSBUCK_SPRING = "SAWSBUCK_SPRING",
   SAWSBUCK_SUMMER = "SAWSBUCK_SUMMER",
   SAWSBUCK_AUTUMN = "SAWSBUCK_AUTUMN",
@@ -2444,7 +2445,7 @@ export const PkmIndex: { [key in Pkm]: string } = {
   //[Pkm.BRUTE_BONNET]: "0986",
   [Pkm.FLUTTER_MANE]: "0987",
   [Pkm.SLITHER_WING]: "0988",
-  //[Pkm.SANDY_SHOCKS]: "0989",
+  [Pkm.SANDY_SHOCKS]: "0989",
   //[Pkm.IRON_THREADS]: "0990",
   [Pkm.IRON_BUNDLE]: "0991",
   [Pkm.IRON_HANDS]: "0992",
@@ -3690,7 +3691,8 @@ export const PkmFamily: { [key in Pkm]: Pkm } = {
   [Pkm.ORICORIO_PA_U]: Pkm.ORICORIO_BAILE,
   [Pkm.ORICORIO_POMPOM]: Pkm.ORICORIO_BAILE,
   [Pkm.ORICORIO_SENSU]: Pkm.ORICORIO_BAILE,
-  [Pkm.BOMBIRDIER]: Pkm.BOMBIRDIER
+  [Pkm.BOMBIRDIER]: Pkm.BOMBIRDIER,
+  [Pkm.SANDY_SHOCKS]: Pkm.SANDY_SHOCKS
 }
 
 export const PkmRegionalVariants: { [key in Pkm]?: readonly Pkm[] } = {

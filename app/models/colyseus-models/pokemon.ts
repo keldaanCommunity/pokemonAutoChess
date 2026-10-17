@@ -20912,6 +20912,24 @@ export class OricorioSensu extends Pokemon {
   }
 }
 
+export class SandyShocks extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.STEEL,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 15
+  speed = 57
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.MAGNETIC_ABSORPTION
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -22118,7 +22136,8 @@ export const PokemonClasses: Record<
   [Pkm.ORICORIO_PA_U]: OricorioPaU,
   [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
   [Pkm.ORICORIO_SENSU]: OricorioSensu,
-  [Pkm.BOMBIRDIER]: Bombirdier
+  [Pkm.BOMBIRDIER]: Bombirdier,
+  [Pkm.SANDY_SHOCKS]: SandyShocks
 }
 
 // declare all the classes in colyseus schema TypeRegistry
