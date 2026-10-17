@@ -7,6 +7,7 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
+import { StatusConfigs } from "../config/game/statuses"
 import { SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
@@ -449,8 +450,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
+        const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
         const speDef = this.status.armorReduction
-          ? Math.round(this.speDef / 2)
+          ? Math.round(this.speDef * armorFactor)
           : this.speDef
         const damageAfterReduction = specialDamage / (1 + ARMOR_FACTOR * speDef)
         const damageBlocked = min(0)(specialDamage - damageAfterReduction)
@@ -512,11 +514,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     apBoost: number,
     crit: boolean
   ) {
+    const { ppGainReductionPercent } = StatusConfigs.FATIGUE
+    const fatigueFactor = this.status.fatigue && baseValue > 0 ? 1 - ppGainReductionPercent / 100 : 1
     let value = Math.round(
       baseValue *
         (1 + (apBoost * caster.ap) / 100) *
         (crit ? caster.critPower : 1) *
-        (this.status.fatigue && baseValue > 0 ? 0.5 : 1)
+        fatigueFactor
     )
 
     value = applyTwistBandBuff(this, value, caster)
@@ -1224,12 +1228,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     // Reduce sleep duration
     if (this.status.sleepCooldown > 0) {
-      this.status.sleepCooldown -= 300
+      this.status.sleepCooldown -= StatusConfigs.SLEEP.damageDurationReductionMs
     }
 
     // Reduce charm duration
     if (this.status.charmCooldown > 0 && attacker === this.status.charmOrigin) {
-      this.status.charmCooldown -= 500
+      this.status.charmCooldown -= StatusConfigs.CHARM.damageDurationReductionMs
     }
 
     // Other effects
