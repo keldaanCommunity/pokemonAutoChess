@@ -1,8 +1,11 @@
+import { EffectEnum } from "../../types/enum/Effect"
 import { Stat } from "../../types/enum/Game"
 import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import { EffectConfigs } from "./effects"
 import { StatusConfigs } from "./statuses"
 
 export const ItemConfigs = {
+  [Item.CELL_BATTERY]: EffectConfigs[EffectEnum.SUPERCHARGE],
   [Item.POKERUS_VIAL]: StatusConfigs.POKERUS
 } satisfies Partial<Record<Item, Readonly<Record<string, number>>>>
 

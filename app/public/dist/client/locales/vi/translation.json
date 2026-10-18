@@ -1366,7 +1366,7 @@
 		"HIDDEN_POWER_P": "Tạo ra 5 con STAR BUG Pokémon ngẫu nhiên",
 		"HIDDEN_POWER_Q": "Ngay lập tức kết thúc trận đấu với một trận hòa",
 		"HIDDEN_POWER_R": "Nhận 6 lần đổi cửa hàng miễn phí",
-		"HIDDEN_POWER_S": "FREEZE tất cả đối thủ trong 2 giây",
+		"HIDDEN_POWER_S": "BOARD_EFFECT: một TIDAL_WAVE loại bỏ trạng thái bất lợi và hiệu ứng trên bàn đấu, hồi {{healingPercent}}% HP cho toàn đội, đẩy lùi đối thủ và gây TRUE bằng {{damagePercent}}% HP của chúng.",
 		"HIDDEN_POWER_T": "Nhận được 3 quả berry ngẫu nhiên"
 	},
 	"effect": {

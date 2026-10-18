@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import { StatusConfigs } from "../../config/game/statuses"
 import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
@@ -203,7 +204,8 @@ export default class Status extends Schema implements IStatus {
       pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
       pokemon.types.has(Synergy.POISON) === false
     ) {
-      this.triggerPoison(1500, pokemon, undefined)
+      const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000
+      this.triggerPoison(duration, pokemon, undefined)
     }
 
     if (
@@ -211,7 +213,8 @@ export default class Status extends Schema implements IStatus {
       !this.blinded &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerBlinded(1000, pokemon, null)
+      const duration = EffectConfigs.SMOKE.durationSeconds * 1000
+      this.triggerBlinded(duration, pokemon, null)
     }
 
     if (
@@ -219,7 +222,8 @@ export default class Status extends Schema implements IStatus {
       !this.paralysis &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerParalysis(2000, pokemon, null)
+      const duration = EffectConfigs.STICKY_WEB.durationSeconds * 1000
+      this.triggerParalysis(duration, pokemon, null)
     }
 
     if (
@@ -227,7 +231,8 @@ export default class Status extends Schema implements IStatus {
       !this.sleep &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerSleep(1000, pokemon)
+      const duration = EffectConfigs.COTTON_BALL.durationSeconds * 1000
+      this.triggerSleep(duration, pokemon)
       pokemon.effects.delete(EffectEnum.COTTON_BALL)
     }
 
@@ -689,7 +694,8 @@ export default class Status extends Schema implements IStatus {
         pkm.items.has(Item.HEAVY_DUTY_BOOTS) === false
       ) {
         // reapply poison stack on every poison tick if in poison gas
-        this.triggerPoison(1500, pkm, undefined)
+        const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000
+        this.triggerPoison(duration, pkm, undefined)
       }
 
       this.poisonDamageCooldown = intervalSeconds * 1000
