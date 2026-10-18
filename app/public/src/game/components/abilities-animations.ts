@@ -2372,6 +2372,11 @@ export const AbilitiesAnimations: {
     endPositionOffset: [0, -80]
   }),
   [Ability.MAGNET_BOMB]: projectile({ duration: 400 }),
+  [Ability.MAGNETIC_ABSORPTION]: onCaster({
+    ability: Ability.MAGNET_BOMB,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    animOptions: { repeat: 2 }
+  }),
   ["ELECTRO_SHOT_CHARGE"]: onCaster({
     ability: Ability.MAGNET_BOMB,
     depth: DEPTH.ABILITY_BELOW_POKEMON,

@@ -1,6 +1,7 @@
 # New Pokemons:
 
 - Bombirdier
+- Sandy Shocks
 
 # Changes to Pokemon & Abilities
 
