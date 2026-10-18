@@ -72,6 +72,7 @@
 - Added board effects descriptions in Wiki > Statuses
 - Added Gift Shop stage description in Wiki > Stages
 - Wiki now opens at the last tab you were on when you closed it
+- Special, Unique and Legendary Pokémon in the shop now have the shimmer animation to be more noticeable
 
 # Bugfix
 

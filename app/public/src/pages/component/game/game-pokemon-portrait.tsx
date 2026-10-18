@@ -152,10 +152,15 @@ export default function GamePokemonPortrait(props: {
     pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     count === pokemon.evolutionRule.numberRequired - 1
 
-  const shouldShimmer =
+  const isSpecial =
+    props.origin === "shop" &&
+    [Rarity.SPECIAL, Rarity.UNIQUE, Rarity.LEGENDARY].includes(pokemon.rarity)
+  const usableForCountEvol =
     pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
     ((count > 0 && pokemon.hasEvolution) ||
       (countEvol > 0 && pokemonEvolution.hasEvolution))
+
+  const shouldShimmer = usableForCountEvol || isSpecial
 
   if (
     pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
