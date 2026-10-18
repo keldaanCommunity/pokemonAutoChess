@@ -19,6 +19,7 @@ import {
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
 import { entries } from "../../../../utils/object"
+import { getDescriptionConfig } from "../../pages/utils/description-config"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
 
@@ -67,6 +68,9 @@ export function ItemDetailTooltipContent({
 
   if (isIn(Object.values(Item), item) === false) return null
 
+  const descriptionPath = `item_description.${item}` as const
+  const config = getDescriptionConfig(descriptionPath)
+
   return (
     <div className="game-item-detail">
       <img
@@ -106,7 +110,7 @@ export function ItemDetailTooltipContent({
         ))}
       </div>
       <p className="game-item-detail-description">
-        {addIconsToDescription(t(`item_description.${item}`))}
+        {addIconsToDescription(t(descriptionPath), { config })}
       </p>
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">

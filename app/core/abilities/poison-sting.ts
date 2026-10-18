@@ -1,3 +1,5 @@
+import { EffectConfigs } from "../../config/game/effects"
+import { StatusConfigs } from "../../config/game/statuses"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
@@ -12,12 +14,12 @@ export class PoisonStingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let maxStacks = 3
+    let maxStacks = StatusConfigs.POISONED.maxStacks
     if (pokemon.effects.has(EffectEnum.VENOMOUS)) {
-      maxStacks = 4
+      maxStacks += EffectConfigs.VENOMOUS.maxStacksBonus
     }
     if (pokemon.effects.has(EffectEnum.TOXIC)) {
-      maxStacks = 5
+      maxStacks = StatusConfigs.POISONED.maxStacks + EffectConfigs.TOXIC.maxStacksBonus
     }
 
     const nbStacksToApply = [2, 3, 4, 5][pokemon.stars - 1] ?? 5

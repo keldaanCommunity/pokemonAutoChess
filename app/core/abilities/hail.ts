@@ -1,4 +1,5 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { randomBetween } from "../../utils/random"
@@ -33,7 +34,8 @@ export class HailStrategy extends AbilityStrategy {
           crit
         )
         enemyHit.effects.add(EffectEnum.HAIL)
-        enemyHit.status.triggerFreeze(1000, enemyHit, pokemon)
+        const duration = EffectConfigs.HAIL.durationSeconds * 1000
+        enemyHit.status.triggerFreeze(duration, enemyHit, pokemon)
       }
       pokemon.broadcastAbility({
         skill: "HAIL_PROJECTILE",

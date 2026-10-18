@@ -1,5 +1,7 @@
 import { BOARD_WIDTH } from "../../config"
-import { SynergyTiers } from "../../config/game/synergies"
+import { EffectConfigs } from "../../config/game/effects"
+import { StatusConfigs } from "../../config/game/statuses"
+import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
   type Pokemon,
@@ -76,7 +78,8 @@ import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
-  const speed = pokemon.status.paralysis ? pokemon.speed / 2 : pokemon.speed
+  const speedFactor = 1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
+  const speed = pokemon.status.paralysis ? pokemon.speed * speedFactor : pokemon.speed
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
     // CAST ABILITY
@@ -655,7 +658,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
         const delay = 1800
 
         for (let i = 0; i < 24; i++)
-          if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
+          if (pokemon.player.groundHoles[i] === SynergyConfigs.GROUND.maxDepth) fullyDugHolesIndexes.push(i)
 
         for (const index of fullyDugHolesIndexes) {
           if (this.cellsCount < 95) {
@@ -926,17 +929,19 @@ const conversionEffect = new OnSimulationStartEffect(
         effect === EffectEnum.DRAGON_SCALES ||
         effect === EffectEnum.DRAGON_DANCE
       ) {
-        entity.addShield(dragonLevel * 5, entity, 0, false)
+        const shield = dragonLevel * EffectConfigs.DRAGON_SCALES.shieldPerStar
+        entity.addShield(shield, entity, 0, false)
       }
       if (effect === EffectEnum.DRAGON_DANCE) {
-        entity.addAbilityPower(dragonLevel, entity, 0, false)
-        entity.addSpeed(dragonLevel, entity, 0, false)
+        const { abilityPowerPerStar, speedPerStar } = EffectConfigs.DRAGON_DANCE
+        entity.addAbilityPower(dragonLevel * abilityPowerPerStar, entity, 0, false)
+        entity.addSpeed(dragonLevel * speedPerStar, entity, 0, false)
       }
     }
 
     // when converting to ghost, get Dodge chance
     if (synergyCopied === Synergy.GHOST) {
-      entity.addDodgeChance(0.15, entity, 0, false)
+      entity.addDodgeChance(SynergyConfigs.GHOST.effectChance.valuePerTier[0] / 100, entity, 0, false)
     }
 
     // when converting to gourmet, get a Chef hat. Useless but funny
@@ -946,7 +951,7 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to ground, fully dig a hole at their position
     if (synergyCopied === Synergy.GROUND) {
-      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = SynergyConfigs.GROUND.maxDepth
     }
 
     // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
@@ -1212,9 +1217,10 @@ const superchargeTadbulb = (
   pokemon.lastSuperchargeTime = Date.now()
 
   if (pokemon.status.electricField === false) {
+    const { speedBonus, shield } = EffectConfigs[EffectEnum.SUPERCHARGE]
     pokemon.status.electricField = true
-    pokemon.addSpeed(20, pokemon, 0, false)
-    pokemon.addShield(30, pokemon, 0, false)
+    pokemon.addSpeed(speedBonus, pokemon, 0, false)
+    pokemon.addShield(shield, pokemon, 0, false)
     pokemon.broadcastAbility({ skill: "SUPERCHARGE" })
   }
   board
@@ -1840,7 +1846,7 @@ export const PassiveEffects: Partial<
   [Passive.STOUTLAND_SEARCH]: [
     new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
       const index = (newY - 1) * BOARD_WIDTH + newX
-      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+      if (room && player.buriedItems[index] && player.groundHoles[index] < SynergyConfigs.GROUND.maxDepth) {
         // BARK
         room.broadcast(Transfer.SHOW_EMOTE, {
           id: pokemon.id,

@@ -7,9 +7,11 @@ import {
   RegionDetails,
   SynergyTiersThresholds
 } from "../../config"
+import { EffectConfigs } from "../../config/game/effects"
 import {
   NB_DISHES_PER_GOURMET_SYNERGY,
-  NB_HATS_PER_GOURMET_SYNERGY
+  NB_HATS_PER_GOURMET_SYNERGY,
+  SynergyTiers
 } from "../../config/game/synergies"
 import { initBuriedItems } from "../../core/buried-items"
 import { CollectionUtils } from "../../core/collection"
@@ -179,10 +181,10 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   fairyWandsOptions = [
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0], 3),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1], 3),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2], 3),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3], 3)
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0], EffectConfigs.AROMATIC_MIST.wandChoices),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1], EffectConfigs.FAIRY_AURA.wandChoices),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2], EffectConfigs.PIXILATE.wandChoices),
+    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3], EffectConfigs.MOON_FORCE.wandChoices)
   ]
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: Item[] = [
@@ -594,7 +596,8 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const nbWeatherRocks = getSynergyTier(this.synergies, Synergy.ROCK)
+    const tier = SynergyTiers[Synergy.ROCK][getSynergyTier(this.synergies, Synergy.ROCK) - 1]
+    const nbWeatherRocks = tier ? EffectConfigs[tier].maxWeatherRocks : 0
 
     let weatherRockInInventory
     do {

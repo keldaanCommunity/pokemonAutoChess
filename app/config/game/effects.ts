@@ -1,7 +1,192 @@
 import { EffectEnum } from "../../types/enum/Effect"
+import type { BalanceConfig } from "./balance"
+import { SellPrices } from "./shop"
+import { StatusConfigs } from "./statuses"
+import {
+  AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
+  AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
+  FIELD_HEAL_PER_SYNERGY_TIER,
+  FIELD_SPEED_BUFF_PER_SYNERGY_TIER,
+  FIRE_ATK_BUFF_PER_SYNERGY_TIER,
+  GROUND_ATK_BUFF_PER_SYNERGY_TIER,
+  GROUND_DEF_BUFF_PER_SYNERGY_TIER,
+  MONSTER_AP_BUFF_PER_SYNERGY_TIER,
+  MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER,
+  MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER,
+  NB_DISHES_PER_GOURMET_SYNERGY,
+  NB_HATS_PER_GOURMET_SYNERGY,
+  SOUND_ATK_BUFF_PER_SYNERGY_TIER,
+  SOUND_PP_GAIN_PER_SYNERGY_TIER,
+  SOUND_SPEED_BUFF_PER_SYNERGY_TIER,
+  SynergyConfigs
+} from "./synergies"
 import { WeatherConfigs } from "./weathers"
 
+const tidalWave = { healingPercentPerLevel: 10, damagePercentPerLevel: 5, knockbackDelayMs: 500 }
+
 export const EffectConfigs = {
+  [EffectEnum.STAMINA]: { shield: 15 },
+  [EffectEnum.STRENGTH]: { shield: 20 },
+  [EffectEnum.ENDURE]: { shield: 25 },
+  [EffectEnum.PURE_POWER]: { shield: 30, baseAttackBonusPercent: 30, abilityPower: 30 },
+  [EffectEnum.INGRAIN]: { heal: 5, intervalSeconds: SynergyConfigs.GRASS.healIntervalSeconds },
+  [EffectEnum.GROWTH]: { heal: 15, intervalSeconds: SynergyConfigs.GRASS.healIntervalSeconds },
+  [EffectEnum.SPORE]: { heal: 25, intervalSeconds: SynergyConfigs.GRASS.healIntervalSeconds },
+  [EffectEnum.OVERGROW]: { abilityPower: 50 },
+  [EffectEnum.FLAME_BODY]: { burnChance: { valuePerTier: [30], luckScaling: true }, burnDurationSeconds: 3 },
+  [EffectEnum.WILDFIRE]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[2] },
+  [EffectEnum.BLAZE]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[3] },
+  [EffectEnum.DESOLATE_LAND]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[4], maxFireShards: 1 },
+  [EffectEnum.RAIN_DANCE]: { ppPerSecond: 4 },
+  [EffectEnum.DRIZZLE]: { ppPerSecond: 8 },
+  [EffectEnum.PRIMORDIAL_SEA]: { ppPerSecond: 12 },
+  [EffectEnum.RISING_VOLTAGE]: { attackInterval: 4 },
+  [EffectEnum.POWER_SURGE]: { attackInterval: 3 },
+  [EffectEnum.SUPERCHARGED]: { ppBurn: 10, batteryChargePercent: 5 },
+  [EffectEnum.GUTS]: { damageBlocked: 3 },
+  [EffectEnum.STURDY]: { damageBlocked: 6 },
+  [EffectEnum.DEFIANT]: { damageBlocked: 9 },
+  [EffectEnum.COACHING]: { damageBlocked: 12, trainingAttack: 4, trainingMaxHpPercent: 10 },
+  [EffectEnum.PRECOGNITION]: { abilityPower: 50, shopInterval: 5 },
+  [EffectEnum.AURA]: { abilityPower: 100, shopInterval: 3 },
+  [EffectEnum.TRANSCENDENCE]: { abilityPower: 150, rerollInterval: 10 },
+  [EffectEnum.HONE_CLAWS]: { critChancePercent: 30, critPowerPercent: 40 },
+  [EffectEnum.ASSURANCE]: { critChancePercent: 40, critPowerPercent: 60 },
+  [EffectEnum.BEAT_UP]: { critChancePercent: 50, critPowerPercent: 100 },
+  [EffectEnum.STEEL_SURGE]: { trueDamagePercent: 33 },
+  [EffectEnum.STEEL_SPIKE]: { trueDamagePercent: 66 },
+  [EffectEnum.CORKSCREW_CRASH]: { trueDamagePercent: 100 },
+  [EffectEnum.MAX_MELTDOWN]: { trueDamagePercent: 125 },
+  [EffectEnum.TILLER]: {
+    defensePerDepth: GROUND_DEF_BUFF_PER_SYNERGY_TIER[1],
+    maxDefense: GROUND_DEF_BUFF_PER_SYNERGY_TIER[1] * SynergyConfigs.GROUND.maxDepth,
+    attackAtMaxDepth: GROUND_ATK_BUFF_PER_SYNERGY_TIER[1]
+  },
+  [EffectEnum.DIGGER]: {
+    defensePerDepth: GROUND_DEF_BUFF_PER_SYNERGY_TIER[2],
+    maxDefense: GROUND_DEF_BUFF_PER_SYNERGY_TIER[2] * SynergyConfigs.GROUND.maxDepth,
+    attackAtMaxDepth: GROUND_ATK_BUFF_PER_SYNERGY_TIER[2]
+  },
+  [EffectEnum.DRILLER]: {
+    defensePerDepth: GROUND_DEF_BUFF_PER_SYNERGY_TIER[3],
+    maxDefense: GROUND_DEF_BUFF_PER_SYNERGY_TIER[3] * SynergyConfigs.GROUND.maxDepth,
+    attackAtMaxDepth: GROUND_ATK_BUFF_PER_SYNERGY_TIER[3]
+  },
+  [EffectEnum.DEEP_MINER]: { defensePerFullRow: 5, attackAtFullBoard: 8 },
+  [EffectEnum.POISONOUS]: { poisonChance: { valuePerTier: [30], luckScaling: true } },
+  [EffectEnum.VENOMOUS]: { poisonChance: { valuePerTier: [60], luckScaling: true }, maxStacksBonus: 1 },
+  [EffectEnum.TOXIC]: { poisonChance: { valuePerTier: [100], luckScaling: true }, maxStacksBonus: 2 },
+  [EffectEnum.DRAGON_SCALES]: { shieldPerStar: 5 },
+  [EffectEnum.DRAGON_DANCE]: { speedPerStar: 1, abilityPowerPerStar: 1 },
+  [EffectEnum.BULK_UP]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[1], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[1] },
+  [EffectEnum.RAGE]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[2], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[2] },
+  [EffectEnum.ANGER_POINT]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[3], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[3] },
+  [EffectEnum.PURSUIT]: {
+    flinchChance: { valuePerTier: [30], luckScaling: true },
+    attackPerKo: MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[1],
+    abilityPowerPerKo: MONSTER_AP_BUFF_PER_SYNERGY_TIER[1],
+    maxHpPerKoPercent: MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[1] * 100
+  },
+  [EffectEnum.BRUTAL_SWING]: {
+    attackPerKo: MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[2],
+    abilityPowerPerKo: MONSTER_AP_BUFF_PER_SYNERGY_TIER[2],
+    maxHpPerKoPercent: MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[2] * 100
+  },
+  [EffectEnum.POWER_TRIP]: {
+    attackPerKo: MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[3],
+    abilityPowerPerKo: MONSTER_AP_BUFF_PER_SYNERGY_TIER[3],
+    maxHpPerKoPercent: MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[3] * 100
+  },
+  [EffectEnum.MERCILESS]: { allyHpThreshold: 10 },
+  [EffectEnum.MEDITATE]: { lifestealPercent: 25 },
+  [EffectEnum.FOCUS_ENERGY]: { lifestealPercent: 35 },
+  [EffectEnum.CALM_MIND]: { lifestealPercent: 50 },
+  [EffectEnum.SWIFT_SWIM]: {
+    statusReductionPercent: 30,
+    waveHealPercent: tidalWave.healingPercentPerLevel, waveDamagePercent: tidalWave.damagePercentPerLevel
+  },
+  [EffectEnum.HYDRATION]: {
+    statusReductionPercent: 50,
+    waveHealPercent: tidalWave.healingPercentPerLevel * 2, waveDamagePercent: tidalWave.damagePercentPerLevel * 2
+  },
+  [EffectEnum.WATER_VEIL]: {
+    statusReductionPercent: 70,
+    waveHealPercent: tidalWave.healingPercentPerLevel * 3,
+    waveDamagePercent: tidalWave.damagePercentPerLevel * 3,
+    secondWaveTimeSeconds: SynergyConfigs.AQUATIC.firstWaveDelaySeconds + SynergyConfigs.AQUATIC.waveIntervalSeconds
+  },
+  [EffectEnum.SURGE_SURFER]: { waveIntervalSeconds: SynergyConfigs.AQUATIC.waveIntervalSeconds },
+  [EffectEnum.COCOON]: { copies: 1 },
+  [EffectEnum.INFESTATION]: { copies: 2 },
+  [EffectEnum.HORDE]: { copies: 3 },
+  [EffectEnum.HEART_OF_THE_SWARM]: { copies: 4 },
+  [EffectEnum.TAILWIND]: { hpThresholdPercent: 20 },
+  [EffectEnum.FEATHER_DANCE]: { protectDurationSeconds: 2 },
+  [EffectEnum.MAX_AIRSTREAM]: { firstHpThresholdPercent: 50, secondHpThresholdPercent: 20 },
+  [EffectEnum.SKYDIVE]: { landingDamagePercent: 200 },
+  [EffectEnum.BATTLE_ARMOR]: { defense: 10, critDamageReductionPercent: 30, maxWeatherRocks: 1 },
+  [EffectEnum.MOUTAIN_RESISTANCE]: { defense: 25, critDamageReductionPercent: 50, maxWeatherRocks: 2 },
+  [EffectEnum.DIAMOND_STORM]: { defense: 50, critDamageReductionPercent: 70, maxWeatherRocks: 3 },
+  [EffectEnum.CURSE_OF_VULNERABILITY]: { defenseReduction: 5 },
+  [EffectEnum.CURSE_OF_WEAKNESS]: { attackReductionPercent: 20 },
+  [EffectEnum.CURSE_OF_TORMENT]: { abilityPowerReduction: 30 },
+  [EffectEnum.CURSE_OF_FATE]: { koDelaySeconds: 8 },
+  [EffectEnum.AROMATIC_MIST]: { wandChoices: 3 },
+  [EffectEnum.FAIRY_AURA]: { wandChoices: 3 },
+  [EffectEnum.PIXILATE]: { wandChoices: 3 },
+  [EffectEnum.MOON_FORCE]: { wandChoices: 3, luck: 5 },
+  [EffectEnum.CHILLY]: { specialDefense: 4 },
+  [EffectEnum.FROSTY]: { specialDefense: 12 },
+  [EffectEnum.FREEZING]: { specialDefense: 25 },
+  [EffectEnum.SHEER_COLD]: { specialDefense: 50, frozenDamageBonusPercent: 30 },
+  [EffectEnum.ANCIENT_POWER]: { shieldPercent: 40, attackPercent: 40 },
+  [EffectEnum.ELDER_POWER]: { shieldPercent: 70, attackPercent: 70 },
+  [EffectEnum.FORGOTTEN_POWER]: { shieldPercent: 100, attackPercent: 100 },
+  [EffectEnum.LARGO]: { attackPerCry: SOUND_ATK_BUFF_PER_SYNERGY_TIER[1] },
+  [EffectEnum.ALLEGRO]: { attackPerCry: SOUND_ATK_BUFF_PER_SYNERGY_TIER[2], speedPerCry: SOUND_SPEED_BUFF_PER_SYNERGY_TIER[2] },
+  [EffectEnum.PRESTO]: {
+    attackPerCry: SOUND_ATK_BUFF_PER_SYNERGY_TIER[3],
+    speedPerCry: SOUND_SPEED_BUFF_PER_SYNERGY_TIER[3],
+    ppPerCry: SOUND_PP_GAIN_PER_SYNERGY_TIER[3]
+  },
+  [EffectEnum.LINK_CABLE]: { itemBonusPercent: 5 },
+  [EffectEnum.GOOGLE_SPECS]: { itemBonusPercent: 10 },
+  [EffectEnum.HATCHER]: { eggChance: { valuePerTier: [10], luckScaling: true } },
+  [EffectEnum.BREEDER]: { hatchStagesEarlier: 1 },
+  [EffectEnum.GOLDEN_EGGS]: {
+    goldenEggChance: { valuePerTier: [5], luckScaling: true },
+    maxGoldenEggs: 1, sellGold: SellPrices.SHINY_EGG
+  },
+  [EffectEnum.APPETIZER]: { chefHats: NB_HATS_PER_GOURMET_SYNERGY[1], dishesCooked: NB_DISHES_PER_GOURMET_SYNERGY[1] },
+  [EffectEnum.LUNCH_BREAK]: { dishesCooked: NB_DISHES_PER_GOURMET_SYNERGY[2] },
+  [EffectEnum.BANQUET]: { chefHats: NB_HATS_PER_GOURMET_SYNERGY[3] },
+  [EffectEnum.SHINING_RAY]: { abilityPower: 20, baseAttackBonusPercent: 20 },
+  [EffectEnum.LIGHT_PULSE]: { ppPerSecond: 8 },
+  [EffectEnum.ETERNAL_LIGHT]: { defenseBonusPercent: 50, safeguardDurationSeconds: 8 },
+  [EffectEnum.MAX_ILLUMINATION]: { shield: 100 },
+  [EffectEnum.QUICK_FEET]: { speed: 20, shopBaseChancePercent: SynergyConfigs.WILD.pveEncounterChancePercent, shopChancePerStarPercent: 0.5 },
+  [EffectEnum.RUN_AWAY]: { speed: 40 },
+  [EffectEnum.HUSTLE]: { speed: 40, baseAttackBonusPercent: 40 },
+  [EffectEnum.BERSERK]: { hpThresholdPercent: 30, shield: 30, durationSeconds: 3 },
+  [EffectEnum.FLUID]: { speedPerSynergy: AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER[1], hpPerSynergy: AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER[1] },
+  [EffectEnum.SHAPELESS]: { speedPerSynergy: AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER[2], hpPerSynergy: AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER[2] },
+  [EffectEnum.ETHEREAL]: { speedPerSynergy: AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER[3], hpPerSynergy: AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER[3] },
+  [EffectEnum.COTTON_BALL]: { durationSeconds: 1 },
+  [EffectEnum.ELECTRIC_TERRAIN]: StatusConfigs.ELECTRIC_FIELD,
+  [EffectEnum.EMBER]: { damagePerSecond: 10, durationSeconds: 2.2 },
+  [EffectEnum.GRASSY_TERRAIN]: StatusConfigs.GRASS_FIELD,
+  [EffectEnum.HAIL]: { damage: 10, durationSeconds: 1 },
   [EffectEnum.LIGHTNING_STRIKE]: WeatherConfigs.STORM,
-  [EffectEnum.SANDSTORM]: WeatherConfigs.SANDSTORM
-} as const
+  [EffectEnum.MISTY_TERRAIN]: StatusConfigs.FAIRY_FIELD,
+  [EffectEnum.POISON_GAS]: { durationSeconds: 1.5 },
+  [EffectEnum.PSYCHIC_TERRAIN]: StatusConfigs.PSYCHIC_FIELD,
+  [EffectEnum.SANDSTORM]: WeatherConfigs.SANDSTORM,
+  [EffectEnum.SMOKE]: { durationSeconds: 1 },
+  [EffectEnum.SPIKES]: { damagePerSecond: 10, durationSeconds: 1 },
+  [EffectEnum.STEALTH_ROCKS]: { damagePerSecond: 10, durationSeconds: 1 },
+  [EffectEnum.STICKY_WEB]: { durationSeconds: 2 },
+  [EffectEnum.STRANGE_STEAM]: { damageBonusPercent: 20 },
+  [EffectEnum.SUPERCHARGE]: { speedBonus: 20, shield: 30 },
+  [EffectEnum.TIDAL_WAVE]: tidalWave,
+  [EffectEnum.TOXIC_SPIKES]: { durationSeconds: 1 }
+} satisfies Partial<Record<EffectEnum, BalanceConfig>>

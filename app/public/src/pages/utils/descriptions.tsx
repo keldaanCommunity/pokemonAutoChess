@@ -1,5 +1,6 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
+import type { BalanceConfig } from "../../../../config/game/balance"
 import { getWeatherConfig } from "../../../../config/game/weathers"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
@@ -56,7 +57,7 @@ export function addIconsToDescription(
     stars?: number
     stages?: number
     showAbilityTiers?: boolean
-    config?: Readonly<Record<string, number>>
+    config?: BalanceConfig
   }
 ) {
   const pattern = params?.config ? descriptionRegExp : iconRegExp
@@ -74,8 +75,20 @@ export function addIconsToDescription(
 
     if (token) {
       if (token.startsWith("{{")) {
-        const value = params?.config?.[token.slice(2, -2).trim()]
-        icon = typeof value === "number" ? value : token
+        const key = token.slice(2, -2).trim()
+        const config = params?.config
+        const value = config && Object.hasOwn(config, key) ? config[key] : undefined
+        if (typeof value === "number") {
+          icon = value
+        } else if (value) {
+          const values: (number | string)[] = [...value.valuePerTier]
+          if (value.apScaling !== undefined) values.push(`SP=${value.apScaling}`)
+          else if (value.luckScaling) values.push("LK")
+          if (value.nbDecimals !== undefined) values.push(`ND=${value.nbDecimals}`)
+          icon = addIconsToDescription(`[${values.join(",")}]`, params)
+        } else {
+          icon = token
+        }
       } else if (token === "GOLD") {
         icon = (
           <img
@@ -121,10 +134,11 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(DocumentedStatuses, token)) {
+        const path = `status_description.${token}` as const
         icon = (
           <span
             className="description-icon status"
-            title={t(`status_description.${token}`)}
+            title={t(path, getDescriptionConfig(path))}
           >
             <img src={`assets/icons/${token}.svg`} />
             <span
@@ -159,10 +173,11 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Items, token)) {
+        const path = `item_description.${token}` as const
         icon = (
           <span
             className="description-icon item"
-            title={t(`item_description.${token}`)}
+            title={t(path, getDescriptionConfig(path))}
           >
             <img src={`assets/item/${token}.png`} />
             <span className="item-label">{t(`item.${token}`)}</span>
@@ -346,7 +361,8 @@ export function addIconsToHtml(
           </span>`
         } else if (isIn(DocumentedStatuses, token)) {
           const isPositive = PositiveStatuses.includes(token as Status)
-          iconHTML = `<span class="description-icon status" title="${t(`status_description.${token}`)}">
+          const path = `status_description.${token}` as const
+          iconHTML = `<span class="description-icon status" title="${t(path, getDescriptionConfig(path))}">
             <img src="assets/icons/${token}.svg" />
             <span class="status-label${isPositive ? " positive" : ""}">${t(`status.${token}`)}</span>
           </span>`
@@ -363,7 +379,8 @@ export function addIconsToHtml(
             <span class="weather-label">${t(`weather.${token}`)}</span>
           </span>`
         } else if (isIn(Items, token)) {
-          iconHTML = `<span class="description-icon item" title="${t(`item_description.${token}`)}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
+          const path = `item_description.${token}` as const
+          iconHTML = `<span class="description-icon item" title="${t(path, getDescriptionConfig(path))}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
             <img src="assets/item/${token}.png" />
             <span class="item-label">${t(`item.${token}`)}</span>
           </span>`

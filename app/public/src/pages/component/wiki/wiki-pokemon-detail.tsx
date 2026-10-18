@@ -8,6 +8,7 @@ import { Stat } from "../../../../../types/enum/Game"
 import { Passive } from "../../../../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { AbilityTooltip } from "../ability/ability-tooltip"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
@@ -29,6 +30,8 @@ export default function WikiPokemonDetail(props: {
     () => getPokemonData(props.pokemon),
     [props.pokemon]
   )
+  const passivePath = `passive_description.${pokemonData.passive}` as const
+  const passiveConfig = getDescriptionConfig(passivePath)
   const evolutions = pokemonData.evolution
     ? [pokemonData.evolution]
     : pokemonData.evolutions
@@ -175,9 +178,7 @@ export default function WikiPokemonDetail(props: {
             <dt>{t("wiki.pokemons.passive")}</dt>
             <dd>
               <p>
-                {addIconsToDescription(
-                  t(`passive_description.${pokemonData.passive}`)
-                )}
+                {addIconsToDescription(t(passivePath), { config: passiveConfig })}
               </p>
             </dd>
           </>
