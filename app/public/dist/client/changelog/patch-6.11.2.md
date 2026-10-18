@@ -17,3 +17,4 @@
 - Fixed a timer bug on Sudowoodo and Galarian Darmanitan zen passives
 - Fixed Thief infinite loop when self-targeting when confused
 - Fixed a possible crash when Petal Dance was casted without enemies left on the board
+- Fixed some bots at specific elo numbers not being found
