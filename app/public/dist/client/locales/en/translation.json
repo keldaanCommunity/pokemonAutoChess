@@ -5363,6 +5363,7 @@
 		"delete_row": "Delete row",
 		"symbols": "Symbols"
 	},
+	"game_mode": "Game mode",
 	"game_modes": {
 		"CLASSIC": "Classic",
 		"RANKED": "Ranked Match",

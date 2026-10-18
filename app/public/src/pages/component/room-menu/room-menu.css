@@ -11,6 +11,14 @@
   margin-top: 1em;
 }
 
+.room-menu .controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .room-menu .tab-tournament.react-tabs__tab-panel--selected {
   padding: 0.5em 0;
 }

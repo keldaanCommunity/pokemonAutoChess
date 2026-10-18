@@ -4445,6 +4445,7 @@
 		"additional": "Zusätzliche Auswahl",
 		"battle": "Spielerkampf"
 	},
+	"game_mode": "Spielmodus",
 	"game_modes": {
 		"CLASSIC": "Klassisches",
 		"RANKED": "Rangmatch",

@@ -69,6 +69,8 @@
 
 # UI
 
+- Added game mode filters to Open rooms and In Game
+- Game mode and sort order are now remembered after reloading
 - Teams displayed in post-game screen and game history are now ordered from strongest to weakest units
 - The values for all tiers in ability descriptions can be shown during the game by pressing the Ctrl key
 - You can now save teams from your game history as local files to load them later into your team planner

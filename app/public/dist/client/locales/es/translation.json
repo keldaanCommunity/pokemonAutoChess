@@ -4905,6 +4905,7 @@
 		"additional": "Selección adicional",
 		"battle": "Combate de jugadores"
 	},
+	"game_mode": "Modo de juego",
 	"game_modes": {
 		"CLASSIC": "Partida clásica",
 		"RANKED": "Partida Clasificatoria",

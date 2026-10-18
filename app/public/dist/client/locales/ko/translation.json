@@ -4992,6 +4992,7 @@
 		"battle": "플레이어 배틀",
 		"gift": "기프트숍"
 	},
+	"game_mode": "게임 모드",
 	"game_modes": {
 		"CLASSIC": "클래식",
 		"RANKED": "랭크매치",

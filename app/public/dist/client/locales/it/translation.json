@@ -4572,6 +4572,7 @@
 		"move_row_down": "Muovi riga giù",
 		"delete_row": "Cancella riga"
 	},
+	"game_mode": "Modalità di gioco",
 	"game_modes": {
 		"CLASSIC": "Clásico",
 		"RANKED": "Partita classificata",
