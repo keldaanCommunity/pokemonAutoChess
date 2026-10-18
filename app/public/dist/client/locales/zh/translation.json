@@ -5362,6 +5362,7 @@
 		"delete_row": "删除行",
 		"symbols": "插入符号"
 	},
+	"game_mode": "游戏模式",
 	"game_modes": {
 		"CLASSIC": "经典模式",
 		"RANKED": "排位赛",

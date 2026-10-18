@@ -5039,6 +5039,7 @@
 		"delete_row": "Supprimer la ligne",
 		"symbols": "Symboles"
 	},
+	"game_mode": "Mode de jeu",
 	"game_modes": {
 		"CLASSIC": "Partie classique",
 		"RANKED": "Match Classé",

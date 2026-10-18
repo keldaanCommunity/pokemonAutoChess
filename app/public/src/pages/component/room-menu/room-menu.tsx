@@ -9,7 +9,9 @@ import { block, throttle } from "../../../../../utils/function"
 import { joinExistingPreparationRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { rooms } from "../../../network"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
 import { GameModeIcon } from "../icons/game-mode-icon"
+import { GameModeFilter } from "./game-mode-filter"
 import { IngameRoomsList } from "./game-rooms-menu"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
@@ -29,6 +31,10 @@ export default function RoomMenu() {
   const user = useAppSelector((state) => state.network.profile)
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] =
     useState<boolean>(false)
+  const [gameMode, setGameMode] = useLocalStore<GameMode | "">(
+    LocalStoreKeys.ROOM_GAME_MODE,
+    ""
+  )
 
   const requestRoom = throttle(async function (gameMode: GameMode) {
     if (rooms.lobby) {
@@ -118,13 +124,18 @@ export default function RoomMenu() {
           </Tab>
         )}
       </TabList>
-      {!user && <p className="subtitle">{t("loading")}</p>}
-
       <TabPanel>
-        <RoomList onRoomAction={onRoomAction} />
+        <RoomList
+          gameMode={gameMode}
+          onGameModeChange={setGameMode}
+          onRoomAction={onRoomAction}
+        />
       </TabPanel>
       <TabPanel>
-        <IngameRoomsList />
+        <IngameRoomsList
+          selectedGameMode={gameMode}
+          onGameModeChange={setGameMode}
+        />
       </TabPanel>
       <TabPanel>
         <IngameRoomsList gameMode={GameMode.CLASSIC} />
@@ -164,25 +175,37 @@ export default function RoomMenu() {
 
 export function RoomList({
   gameMode,
+  onGameModeChange,
   onRoomAction
 }: {
-  gameMode?: GameMode
+  gameMode: GameMode | ""
+  onGameModeChange: (gameMode: GameMode | "") => void
   onRoomAction: (room: RoomAvailable, action: string) => void
 }) {
+  const { t } = useTranslation()
   const preparationRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.preparationRooms
   )
-  //preparationRooms.push(...mockRooms)
+  const user = useAppSelector((state) => state.network.profile)
+  const filteredRooms = preparationRooms.filter(
+    (r) => !gameMode || r.metadata.gameMode === gameMode
+  )
 
   return (
-    <ul className="room-list hidden-scrollable">
-      {preparationRooms
-        .filter((r) => !gameMode || r.metadata.gameMode === gameMode)
-        .map((r) => (
+    <div>
+      <div className="controls">
+        <p>{t("rooms", { count: filteredRooms.length })}</p>
+        <div className="spacer"></div>
+        <GameModeFilter gameMode={gameMode} onChange={onGameModeChange} />
+      </div>
+      {!user && <p className="subtitle">{t("loading")}</p>}
+      <ul className="room-list hidden-scrollable">
+        {filteredRooms.map((r) => (
           <li key={r.roomId}>
             <RoomItem room={r} click={(action) => onRoomAction(r, action)} />
           </li>
         ))}
-    </ul>
+      </ul>
+    </div>
   )
 }

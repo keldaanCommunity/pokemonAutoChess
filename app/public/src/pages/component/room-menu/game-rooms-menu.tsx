@@ -12,19 +12,44 @@ import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { client, joinGame, rooms } from "../../../network"
 import { resetBoosters } from "../../../stores/BoostersStore"
 import { resetLobby } from "../../../stores/LobbyStore"
+import { LocalStoreKeys, useLocalStore } from "../../utils/store"
+import { GameModeFilter } from "./game-mode-filter"
 import GameRoomItem from "./game-room-item"
 
-export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
+type RoomSort = "stage" | "elo" | "name"
+type RoomFilters = { sortBy?: RoomSort }
+
+export function IngameRoomsList({
+  gameMode,
+  selectedGameMode = "",
+  onGameModeChange
+}: {
+  gameMode?: GameMode
+  selectedGameMode?: GameMode | ""
+  onGameModeChange?: (gameMode: GameMode | "") => void
+}) {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
+  const mode = gameMode || selectedGameMode
   const gameRooms: RoomAvailable[] = useAppSelector(
     (state) => state.lobby.gameRooms
-  ).filter((r) => !gameMode || r.metadata.gameMode === gameMode)
+  ).filter((r) => !mode || r.metadata.gameMode === mode)
   const navigate = useNavigate()
   const [isJoining, setJoining] = useState<boolean>(false)
-  const [sortBy, setSortBy] = useState<"stage" | "elo" | "name">("stage")
   const [searchQuery, setSearchQuery] = useState<string>("")
+  const [filters, setFilters] = useLocalStore<
+    Partial<Record<GameMode | "all", RoomFilters>>
+  >(LocalStoreKeys.ROOM_FILTERS, {})
+  const filterKey = gameMode ?? "all"
+  const sortBy = filters[filterKey]?.sortBy ?? "stage"
   const user = useAppSelector((state) => state.network.profile)
+
+  function updateFilters(update: RoomFilters) {
+    setFilters({
+      ...filters,
+      [filterKey]: { ...filters[filterKey], ...update }
+    })
+  }
 
   // Function to extract elo from playersInfo strings like "PlayerName [1450]"
   const extractEloFromPlayerInfo = (playerInfo: string): number => {
@@ -110,22 +135,22 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
 
   return (
     <div>
-      <div
-        className="controls"
-        style={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "center",
-          marginBottom: "10px"
-        }}
-      >
+      <div className="controls">
         <p>{t("games_in_progress", { count: filteredGameRooms.length })}</p>
         <div className="spacer"></div>
+        {onGameModeChange && (
+          <GameModeFilter
+            gameMode={selectedGameMode}
+            onChange={onGameModeChange}
+          />
+        )}
         <label htmlFor="sort-select">Sort by:</label>
         <select
           id="sort-select"
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value as "stage" | "elo")}
+          onChange={(e) =>
+            updateFilters({ sortBy: e.target.value as RoomSort })
+          }
           style={{ padding: "4px 8px" }}
         >
           <option value="stage">{t("stage")}</option>
@@ -142,6 +167,7 @@ export function IngameRoomsList({ gameMode }: { gameMode?: GameMode }) {
           style={{ padding: "4px 8px", minWidth: "150px", maxWidth: "300px" }}
         />
       </div>
+      {!user && <p className="subtitle">{t("loading")}</p>}
       <ul className="hidden-scrollable room-list">
         {filteredGameRooms.map((r) => (
           <li key={r.roomId}>

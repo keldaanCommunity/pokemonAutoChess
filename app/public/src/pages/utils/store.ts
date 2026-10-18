@@ -103,6 +103,8 @@ export enum LocalStoreKeys {
   TIER_LIST = "tier_list",
   LAST_PATCH_READ = "last_patch_read",
   COLLECTION_FILTER = "collection_filter",
+  ROOM_GAME_MODE = "room_game_mode",
+  ROOM_FILTERS = "room_filters",
   TRANSLATION_EDITS = "translation_edits",
   LAST_TAB_OPENED_PICKER = "last_tab_opened_picker",
   LAST_TAB_OPENED_WIKI = "last_tab_opened_wiki"

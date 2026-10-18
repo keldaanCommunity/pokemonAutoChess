@@ -4965,6 +4965,7 @@
 		"title": "Minha nova Tier List",
 		"symbols": "Símbolos"
 	},
+	"game_mode": "Modo de jogo",
 	"game_modes": {
 		"CLASSIC": "Clássico",
 		"RANKED": "Jogo Rankeado",
