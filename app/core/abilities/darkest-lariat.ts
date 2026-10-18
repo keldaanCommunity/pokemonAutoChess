@@ -1,3 +1,4 @@
+import { FIRE_ATK_BUFF_PER_SYNERGY_TIER } from "../../config/game/synergies"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
@@ -32,11 +33,11 @@ export class DarkestLariatStrategy extends AbilityStrategy {
                 crit
               )
               if (pokemon.effects.has(EffectEnum.WILDFIRE)) {
-                pokemon.addAttack(1, pokemon, 0, false)
+                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[2], pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.BLAZE)) {
-                pokemon.addAttack(2, pokemon, 0, false)
+                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[3], pokemon, 0, false)
               } else if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
-                pokemon.addAttack(3, pokemon, 0, false)
+                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[4], pokemon, 0, false)
               }
             }
           },

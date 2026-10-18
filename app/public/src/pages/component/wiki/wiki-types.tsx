@@ -12,6 +12,7 @@ import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
@@ -97,7 +98,8 @@ export function WikiType(props: { type: Synergy }) {
       </h2>
       <p>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo: "" })
+          t(`synergy_description.${props.type}`, { additionalInfo: "" }),
+          { config: getDescriptionConfig(`synergy_description.${props.type}`) }
         )}
       </p>
       {synergyTiers.map((tier: (typeof synergyTiers)[number], i) => {

@@ -471,14 +471,14 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        burnDamage *= 0.7
+        burnDamage *= (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        burnDamage *= 0.5
+        burnDamage *= (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
       } else if (
         pkm.effects.has(EffectEnum.WATER_VEIL) ||
         pkm.effects.has(EffectEnum.SURGE_SURFER)
       ) {
-        burnDamage *= 0.3
+        burnDamage *= (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
       }
 
       if (
@@ -597,10 +597,10 @@ export default class Status extends Schema implements IStatus {
       this.poisonOrigin = origin ?? null
       if (origin) {
         if (origin.effects.has(EffectEnum.VENOMOUS)) {
-          maxStacks = 4
+          maxStacks += EffectConfigs.VENOMOUS.maxStacksBonus
         }
         if (origin.effects.has(EffectEnum.TOXIC)) {
-          maxStacks = 5
+          maxStacks = StatusConfigs.POISONED.maxStacks + EffectConfigs.TOXIC.maxStacksBonus
         }
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
@@ -658,14 +658,14 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        poisonDamage *= 0.7
+        poisonDamage *= (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        poisonDamage *= 0.5
+        poisonDamage *= (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
       } else if (
         pkm.effects.has(EffectEnum.WATER_VEIL) ||
         pkm.effects.has(EffectEnum.SURGE_SURFER)
       ) {
-        poisonDamage *= 0.3
+        poisonDamage *= (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
       }
       poisonDamage = Math.round(poisonDamage)
 
@@ -1327,14 +1327,14 @@ export default class Status extends Schema implements IStatus {
     pkm: IPokemonEntity
   ): number {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * 0.7)
+      duration = Math.round(duration * ((100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100))
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.5)
+      duration = Math.round(duration * ((100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100))
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * 0.3)
+      duration = Math.round(duration * ((100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100))
     }
 
     const nbOddStones = pkm.player

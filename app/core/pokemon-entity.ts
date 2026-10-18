@@ -9,7 +9,7 @@ import {
 } from "../config"
 import { EffectConfigs } from "../config/game/effects"
 import { StatusConfigs } from "../config/game/statuses"
-import { SynergyTiers } from "../config/game/synergies"
+import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
@@ -144,7 +144,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   specialDamageReduced: number
   shieldDamageTaken: number
   shieldDone: number
-  grassHealCooldown = 2000
+  grassHealCooldown = SynergyConfigs.GRASS.healIntervalSeconds * 1000
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
   isSpawn = false
@@ -285,7 +285,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         (targetEnemies && this.team !== attacker.team) ||
         (attacker.effects.has(EffectEnum.MERCILESS) &&
           attacker.id !== this.id &&
-          this.hp <= 10))
+          this.hp <= EffectConfigs.MERCILESS.allyHpThreshold))
     )
   }
 
@@ -1045,62 +1045,64 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     if (this.hasSynergyEffect(Synergy.ICE) && this.types.has(Synergy.ICE)) {
+      const { freezeChance, freezeDurationSeconds } = SynergyConfigs.ICE
       const nbIcyRocks =
         this.player && this.simulation.weather === Weather.SNOW
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      const freezeChance = 0.2 + nbIcyRocks * 0.05
-      if (chance(freezeChance, this)) {
-        target.status.triggerFreeze(2000, target, this)
+      const chanceToFreeze = freezeChance.valuePerTier[0] / 100 + nbIcyRocks * 0.05
+      if (chance(chanceToFreeze, this)) {
+        target.status.triggerFreeze(freezeDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
-      const burnChance = 0.3
-      if (chance(burnChance, this)) {
-        target.status.triggerBurn(3000, target, this)
+      const { burnChance, burnDurationSeconds } = EffectConfigs.FLAME_BODY
+      if (chance(burnChance.valuePerTier[0] / 100, this)) {
+        target.status.triggerBurn(burnDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.MONSTER)) {
-      const flinchChance = 0.3
+      const flinchChance = EffectConfigs.PURSUIT.flinchChance.valuePerTier[0] / 100
+      const { flinchDurationSeconds } = SynergyConfigs.MONSTER
       if (chance(flinchChance, this)) {
-        target.status.triggerFlinch(3000, target, this)
+        target.status.triggerFlinch(flinchDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
-      const silenceChance = 0.15
-      if (chance(silenceChance, this)) {
-        target.status.triggerSilence(2000, target, this)
+      const { effectChance, silenceDurationSeconds } = SynergyConfigs.GHOST
+      if (chance(effectChance.valuePerTier[0] / 100, this)) {
+        target.status.triggerSilence(silenceDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.POISON)) {
       let poisonChance = 0
       if (this.effects.has(EffectEnum.POISONOUS)) {
-        poisonChance = 0.3
+        poisonChance = EffectConfigs.POISONOUS.poisonChance.valuePerTier[0] / 100
       }
       if (this.effects.has(EffectEnum.VENOMOUS)) {
-        poisonChance = 0.6
+        poisonChance = EffectConfigs.VENOMOUS.poisonChance.valuePerTier[0] / 100
       }
       if (this.effects.has(EffectEnum.TOXIC)) {
-        poisonChance = 1.0
+        poisonChance = EffectConfigs.TOXIC.poisonChance.valuePerTier[0] / 100
       }
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -= nbSmellyClays * 0.15
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
-        target.status.triggerPoison(4000, target, this)
+        target.status.triggerPoison(SynergyConfigs.POISON.poisonDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.WILD)) {
-      const woundChance = 0.25
-      if (chance(woundChance, this)) {
-        target.status.triggerWound(3000, target, this)
+      const { woundChance, woundDurationSeconds } = SynergyConfigs.WILD
+      if (chance(woundChance.valuePerTier[0] / 100, this)) {
+        target.status.triggerWound(woundDurationSeconds * 1000, target, this)
       }
     }
 
@@ -1366,7 +1368,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         })
     }
 
-    if (shouldProtect) this.status.triggerProtect(2000)
+    if (shouldProtect) {
+      const { protectDurationSeconds } = EffectConfigs.FEATHER_DANCE
+      this.status.triggerProtect(protectDurationSeconds * 1000)
+    }
     if (shouldSkydive && flyAwayCell?.target) {
       this.broadcastAbility({
         skill: "FLYING_TAKEOFF",
@@ -1390,7 +1395,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         new DelayedCommand(() => {
           if (flyAwayCell.target?.hp > 0) {
             flyAwayCell.target.handleSpecialDamage(
-              2 * this.atk,
+              (EffectConfigs.SKYDIVE.landingDamagePercent / 100) * this.atk,
               board,
               AttackType.PHYSICAL,
               this,
@@ -1744,7 +1749,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.has(EffectEnum.OVERGROW)) {
-      this.addAbilityPower(50, this, 0, false)
+      this.addAbilityPower(EffectConfigs.OVERGROW.abilityPower, this, 0, false)
     }
   }
 

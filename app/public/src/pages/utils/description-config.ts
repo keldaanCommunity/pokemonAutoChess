@@ -3,6 +3,7 @@ import { EffectConfigs } from "../../../../config/game/effects"
 import { ItemConfigs } from "../../../../config/game/items"
 import { PassiveConfigs } from "../../../../config/game/passives"
 import { getStatusConfig } from "../../../../config/game/statuses"
+import { SynergyConfigs } from "../../../../config/game/synergies"
 import { getWeatherConfig } from "../../../../config/game/weathers"
 import { Status } from "../../../../types/enum/Status"
 import { Weather } from "../../../../types/enum/Weather"
@@ -22,6 +23,9 @@ export function getDescriptionConfig(path: string) {
   }
   if (category === "ability_description" && isIn(keys(AbilityConfigs), key)) {
     return AbilityConfigs[key]
+  }
+  if (category === "synergy_description" && isIn(keys(SynergyConfigs), key)) {
+    return SynergyConfigs[key]
   }
   if (category === "effect_description" && Object.hasOwn(EffectConfigs, key)) {
     return EffectConfigs[key as keyof typeof EffectConfigs]

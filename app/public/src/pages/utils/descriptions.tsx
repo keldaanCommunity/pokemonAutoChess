@@ -1,5 +1,6 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
+import type { BalanceConfig } from "../../../../config/game/balance"
 import { getWeatherConfig } from "../../../../config/game/weathers"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
@@ -56,7 +57,7 @@ export function addIconsToDescription(
     stars?: number
     stages?: number
     showAbilityTiers?: boolean
-    config?: Readonly<Record<string, number>>
+    config?: BalanceConfig
   }
 ) {
   const pattern = params?.config ? descriptionRegExp : iconRegExp
@@ -74,8 +75,20 @@ export function addIconsToDescription(
 
     if (token) {
       if (token.startsWith("{{")) {
-        const value = params?.config?.[token.slice(2, -2).trim()]
-        icon = typeof value === "number" ? value : token
+        const key = token.slice(2, -2).trim()
+        const config = params?.config
+        const value = config && Object.hasOwn(config, key) ? config[key] : undefined
+        if (typeof value === "number") {
+          icon = value
+        } else if (value) {
+          const values: (number | string)[] = [...value.valuePerTier]
+          if (value.apScaling !== undefined) values.push(`SP=${value.apScaling}`)
+          else if (value.luckScaling) values.push("LK")
+          if (value.nbDecimals !== undefined) values.push(`ND=${value.nbDecimals}`)
+          icon = addIconsToDescription(`[${values.join(",")}]`, params)
+        } else {
+          icon = token
+        }
       } else if (token === "GOLD") {
         icon = (
           <img

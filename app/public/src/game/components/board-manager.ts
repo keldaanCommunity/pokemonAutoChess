@@ -10,6 +10,7 @@ import {
   RegionDetails
 } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"
+import { SynergyConfigs } from "../../../../config/game/synergies"
 import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
@@ -452,7 +453,7 @@ export default class BoardManager {
         const index = col + row * BOARD_WIDTH
         while (
           col + trenchWidth < BOARD_WIDTH &&
-          this.player.groundHoles[index + trenchWidth] === 5
+          this.player.groundHoles[index + trenchWidth] === SynergyConfigs.GROUND.maxDepth
         ) {
           trenchWidth++
         }
