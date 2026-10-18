@@ -5,7 +5,6 @@ import GameExperience from "./game-experience"
 import { GameLifeInfo } from "./game-life-info"
 import GameLock from "./game-lock"
 import { GameMoneyInfo } from "./game-money-info"
-import GameRarityPercentage from "./game-rarity-percentage"
 import GameRefresh from "./game-refresh"
 import { GameRegionalPokemonsIcon } from "./game-regional-pokemons"
 import GameStore from "./game-store"
@@ -27,8 +26,7 @@ export default function GameShop() {
           <div className="spacer"></div>
           <GameTeamInfo />
         </div>
-        <div className="game-shop-actions">
-          <GameRarityPercentage />
+        <div className="game-shop-actions">          
           <GameLock />
           <GameRefresh />
         </div>
