@@ -25,6 +25,7 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
 import { isEntity } from "../../../game/components/pokemon-sprite"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { useKeyPress } from "../../utils/keyboard"
@@ -241,6 +242,7 @@ export function GamePokemonDetail(props: {
 
   const stars =
     pokemon.stars + (pokemon.items.has(Item.STAR_PIECE) && !isInFight ? 1 : 0)
+  const passivePath = `passive_description.${pokemon.passive}` as const
 
   return (
     <div className="game-pokemon-detail">
@@ -354,7 +356,7 @@ export function GamePokemonDetail(props: {
         <div className="game-pokemon-detail-passive">
           <p>
             {addIconsToDescription(
-              t(`passive_description.${pokemon.passive}`, {
+              t(passivePath, {
                 stacks: pokemon.stacks
               }),
               {
@@ -362,7 +364,8 @@ export function GamePokemonDetail(props: {
                 luck: pokemon.luck,
                 stars,
                 stages: getPokemonData(pokemon.name).stages,
-                showAbilityTiers: props.origin === "wiki"
+                showAbilityTiers: props.origin === "wiki",
+                config: getDescriptionConfig(passivePath)
               }
             )}
           </p>

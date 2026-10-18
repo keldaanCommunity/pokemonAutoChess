@@ -16,6 +16,7 @@ import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { pickChoice } from "../../../network"
 import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
@@ -184,7 +185,9 @@ export default function GameChoice() {
                         src={"assets/item/" + item + ".png"}
                       />
                       <p>
-                        {addIconsToDescription(t(`item_description.${item}`))}
+                        {addIconsToDescription(t(`item_description.${item}`), {
+                          config: getDescriptionConfig(`item_description.${item}`)
+                        })}
                       </p>
                     </div>
                   )}
@@ -222,7 +225,9 @@ export default function GameChoice() {
                   ))}
                 </div>
                 <p style={{ marginBottom: "0.5em" }}>
-                  {addIconsToDescription(t(`item_description.${item}`))}
+                  {addIconsToDescription(t(`item_description.${item}`), {
+                    config: getDescriptionConfig(`item_description.${item}`)
+                  })}
                 </p>
                 {choice.costs[index] > 0 && (
                   <p
