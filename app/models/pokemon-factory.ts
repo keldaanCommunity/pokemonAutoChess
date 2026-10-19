@@ -2,7 +2,6 @@ import { MapSchema } from "@colyseus/schema"
 import { Emotion, type IPlayer, type PkmCustom } from "../types"
 import type { Stat } from "../types/enum/Game"
 import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
-import { type TownEncounter, TownEncounters } from "../types/enum/TownEncounter"
 
 import { logger } from "../utils/logger"
 import type Player from "./colyseus-models/player"
@@ -14,7 +13,7 @@ export default class PokemonFactory {
   static makePveBoard(
     pveStage: PVEStage,
     shinyEncounter: boolean,
-    townEncounter: TownEncounter | null
+    marowak: boolean
   ): MapSchema<Pokemon> {
     const pokemons = new MapSchema<Pokemon>()
     pveStage.board.forEach(([pkm, x, y], index) => {
@@ -27,11 +26,7 @@ export default class PokemonFactory {
       for (const stat in pveStage.statBoosts) {
         pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
       }
-      if (
-        townEncounter === TownEncounters.MAROWAK &&
-        pveStage.marowakItems &&
-        index in pveStage.marowakItems
-      ) {
+      if (marowak && pveStage.marowakItems && index in pveStage.marowakItems) {
         pveStage.marowakItems[index]!.forEach((item) => pokemon.items.add(item))
       }
       pokemons.set(pokemon.id, pokemon)
@@ -59,7 +54,7 @@ export default class PokemonFactory {
     if (name in PokemonClasses) {
       const PokemonClass = PokemonClasses[name]
       const pokemon = new PokemonClass(name, shiny, emotion)
-      pokemon.postConstructor()      
+      pokemon.postConstructor()
       return pokemon
     } else {
       logger.warn(`No pokemon with name "${name}" found, return MissingNo`)

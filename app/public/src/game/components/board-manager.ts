@@ -1232,7 +1232,8 @@ export default class BoardManager {
         pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
       }
       if (
-        this.state.townEncounter === TownEncounters.MAROWAK &&
+        (this.state.townEncounter === TownEncounters.MAROWAK ||
+          this.player.atlasManager.unlockedNodes.has("marowak")) &&
         pveStage.marowakItems &&
         i in pveStage.marowakItems
       ) {

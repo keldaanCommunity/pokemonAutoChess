@@ -5,6 +5,7 @@ import {
   GOURMET_COOK_DEFAULT_DURATION,
   NB_DISHES_PER_GOURMET_SYNERGY
 } from "../../config/game/synergies"
+import type { TreasureBoxReward } from "../../config/game/town-encounters"
 import type Player from "../../models/colyseus-models/player"
 import { PlayerChoice } from "../../models/colyseus-models/player-choice"
 import {
@@ -35,6 +36,7 @@ import {
 } from "../../types/enum/Game"
 import {
   AbilityPerTM,
+  CraftableNoStonesOrScarves,
   type Dish,
   DishesGoingToInventory,
   type FishingRod,
@@ -2142,4 +2144,63 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       }
     })
   ]
+}
+
+export function openTreasureChest(
+  player: Player,
+  room: GameRoom,
+  reward: TreasureBoxReward
+) {
+  let rewards: Item[] = []
+  let rewardsIcons: Item[] | undefined = undefined
+  switch (reward) {
+    case "sweets":
+      rewardsIcons = [Item.SWEETS]
+      rewards = pickNRandomIn(Sweets, 5)
+      break
+    case "itemComponents":
+      rewards = pickNRandomIn(ItemComponents, 4)
+      break
+    case "componentsAndTickets":
+      rewards = [
+        ...pickNRandomIn(ItemComponents, 2),
+        Item.RECYCLE_TICKET,
+        Item.EXCHANGE_TICKET
+      ]
+      break
+    case "craftableItems":
+      rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
+      break
+    case "mushrooms":
+      rewardsIcons = [Item.MUSHROOMS]
+      rewards = [Item.TINY_MUSHROOM, Item.BIG_MUSHROOM, Item.BALM_MUSHROOM]
+      break
+    case "goldBow":
+      rewards = [Item.GOLD_BOW]
+      break
+    case "gold":
+    default:
+      rewards = [Item.BIG_NUGGET]
+      break
+  }
+
+  player.spawnWanderingPokemon({
+    pkm: Pkm.XATU,
+    shiny: false,
+    type: WandererType.DIALOG,
+    behavior: WandererBehavior.SPECTATE,
+    data: (rewardsIcons ?? rewards).join(";"),
+    delay: 3000
+  })
+
+  setTimeout(() => {
+    if (rewards[0] === Item.BIG_NUGGET) {
+      const moneyGained = 10
+      player.addMoney(moneyGained, true, null)
+      const client = room.clients.find((cli) => cli.auth.uid === player.id)
+      client?.send(Transfer.PLAYER_INCOME, moneyGained)
+    } else {
+      player.items.push(...rewards)
+    }
+  }, 10000)
 }
