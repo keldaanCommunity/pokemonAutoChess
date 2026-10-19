@@ -78,6 +78,7 @@
 
 - Grookey line now works properly with Electric triple attack effects
 - Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
+- Cherubi pool size has been corrected to match the pool size of Pokémon with 2 stages of evolution
 
 # Misc
 
