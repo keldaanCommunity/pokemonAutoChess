@@ -849,6 +849,25 @@ const poppingIcon: AbilityAnimationMaker<
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
   })(args)
 
+const starShieldAnimation: AbilityAnimation = (args) => {
+  for (const direction of Object.values(Orientation)) {
+    const directionVector = OrientationVector[direction]
+    const burstArgs = {
+      ...args,
+      positionX: args.targetX,
+      positionY: args.targetY,
+      targetX: args.targetX + directionVector[0],
+      targetY: args.targetY + directionVector[1]
+    }
+
+    parabolicProjectile({
+      duration: 500,
+      scale: 2,
+      peakHeight: 48
+    })(burstArgs)
+  }
+}
+
 const aquaSwirlAnimation: AbilityAnimation = ({
   scene,
   ability,
@@ -2388,12 +2407,20 @@ export const AbilitiesAnimations: {
     oriented: true,
     animOptions: { repeat: 3 }
   }),
+  [Ability.STAR_SHIELD]: (args) =>
+    projectile({
+      startCoords: [args.targetX - 12, 12, false],
+      endCoords: [args.targetX, args.targetY, args.flip],
+      scale: 3,
+      hitAnim: starShieldAnimation,
+      duration: 1500
+    })(args),
   [Ability.GUNK_SHOT]: projectile({
     duration: 700,
     ease: "Power2",
     hitAnim: onTarget({
       ability: Ability.DIVE,
-      scale: 1.5,
+      scale: 2,
       tint: 0xf060a0,
       depth: DEPTH.ABILITY_GROUND_LEVEL
     })

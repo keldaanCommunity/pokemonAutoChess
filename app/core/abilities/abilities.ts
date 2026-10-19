@@ -477,6 +477,7 @@ import { SpiritShackleStrategy } from "./spirit-shackle"
 import { SpiteStrategy } from "./spite"
 import { SplashStrategy } from "./splash"
 import { SpringtideStormStrategy } from "./springtide-storm"
+import { StarShieldStrategy } from "./star-shield"
 import { StaticShockStrategy } from "./static-shock"
 import { StealthRocksStrategy } from "./stealth-rocks"
 import { SteamEruptionStrategy } from "./steam-eruption"
@@ -1300,5 +1301,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
-  [Ability.AQUA_SWIRL]: new AquaSwirlStrategy()
+  [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
+  [Ability.STAR_SHIELD]: new StarShieldStrategy()
 }
