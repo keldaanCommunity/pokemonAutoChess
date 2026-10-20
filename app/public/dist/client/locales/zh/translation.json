@@ -3599,7 +3599,7 @@
 		"POISONED": "每{{intervalSeconds}}秒受到TRUE，数值相当于最大HP的{{maxHpDamagePercent}}%乘以状态层数。如无特别说明，可叠加{{maxStacks}}层。",
 		"FREEZE": "无法移动，闪避或发起攻击。",
 		"PROTECT": "无法受到任何形式的伤害，但也不能恢复HP和PP。敌方宝可梦会避免指定守住的宝可梦为目标。",
-		"SLEEP": "无法移动，闪避或发起攻击。受到攻击会降低持续时间。",
+		"SLEEP": "无法移动，闪避或发起攻击。受到伤害会降低持续时间。",
 		"CONFUSION": "强制随时切换目标，[有时,LK]还会是自身或我方宝可梦。",
 		"WOUND": "无法受到任何来源的治疗。",
 		"RAGE": "造成{{damageMultiplier}}倍伤害，提升{{speedBonus}}点SPEED，所受治疗、获得的SHIELD以及FREEZE和SLEEP的持续时间降低{{reductionPercent}}%，并失去PROTECT。所有宝可梦战斗{{automaticDelaySeconds}}秒后自动陷入RAGE。",

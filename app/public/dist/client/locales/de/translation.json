@@ -3241,7 +3241,7 @@
 		"POISONED": "Fügt alle {{intervalSeconds}}s {{maxHpDamagePercent}}% der max. HP pro Stapel als TRUE zu. Kann standardmäßig bis zu {{maxStacks}}-mal gestapelt werden.",
 		"FREEZE": "Verhindert Bewegung, Ausweichen und Angreifen.",
 		"PROTECT": "Schützt vor allem Schaden, aber verhindert auch das Erhalten von PP.",
-		"SLEEP": "Verhindert Bewegung, Ausweichen und Angreifen. Erlittene Treffer reduzieren die Dauer des Effekts.",
+		"SLEEP": "Verhindert Bewegung, Ausweichen und Angreifen. Erlittener Schaden reduziert die Dauer des Effekts.",
 		"CONFUSION": "Zwingt dazu, ständig das Ziel zu wechseln und fügt sich manchmal selbst Schaden zu",
 		"WOUND": "Verhindert jegliche Regeneration der HP.",
 		"RAGE": "Verursacht {{damageMultiplier}}× Schaden und gibt +{{speedBonus}} SPEED. Reduziert Heilung, erhaltenen SHIELD sowie die Dauer von FREEZE und SLEEP um {{reductionPercent}}% und entfernt PROTECT. Alle Einheiten werden nach {{automaticDelaySeconds}} Sekunden Kampf RAGE.",

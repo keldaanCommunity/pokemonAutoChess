@@ -3585,7 +3585,7 @@
 		"POISONED": "Inflige {{maxHpDamagePercent}}% des HP max par cumul comme TRUE toutes les {{intervalSeconds}} s. Peut être cumulé jusqu'à {{maxStacks}} fois par défaut.",
 		"FREEZE": "Empêche de bouger, d'esquiver ou d'attaquer",
 		"PROTECT": "Protège de toute source de dégâts, mais empêche le gain de PP ou de HP. Les ennemis éviteront de cibler une unité protégée.",
-		"SLEEP": "Empêche de bouger, d'esquiver ou d'attaquer. Recevoir des attaques réduit la durée de l'effet.",
+		"SLEEP": "Empêche de bouger, d'esquiver ou d'attaquer. Subir des dégâts réduit la durée de l'effet.",
 		"CONFUSION": "Force à changer de cible tout le temps et parfois à s'auto-infliger des dégâts",
 		"WOUND": "Empêche d'être soigné, toutes sources confondues",
 		"RAGE": "Multiplie tous les dégâts par {{damageMultiplier}}, gagne +{{speedBonus}} de SPEED. Réduit les soins, le SHIELD reçu et la durée du FREEZE et du SLEEP de {{reductionPercent}}%, et retire PROTECT. Toutes les unités deviennent RAGE après {{automaticDelaySeconds}} secondes de combat.",

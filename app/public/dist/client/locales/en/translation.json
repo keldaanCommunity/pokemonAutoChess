@@ -3602,7 +3602,7 @@
 		"POISONED": "Deals {{maxHpDamagePercent}}% of max HP per stack as TRUE every {{intervalSeconds}}s. Can stack up to {{maxStacks}} times by default.",
 		"FREEZE": "Prevents moving, dodging or attacking",
 		"PROTECT": "Protects from any source of damage, but prevents healing and PP gain.",
-		"SLEEP": "Prevents moving, dodging or attacking. Receiving attacks reduces the duration of the effect.",
+		"SLEEP": "Prevents moving, dodging or attacking. Taking damage reduces the duration of the effect.",
 		"CONFUSION": "Force to change target all the time and [sometimes,LK] target allies or itself",
 		"WOUND": "Prevents healing from any source",
 		"RAGE": "Deal {{damageMultiplier}}× damage and gain +{{speedBonus}} SPEED. Reduce healing, SHIELD gained, and FREEZE and SLEEP durations by {{reductionPercent}}%, and lose PROTECT. All units become RAGE after {{automaticDelaySeconds}} seconds of fight.",
