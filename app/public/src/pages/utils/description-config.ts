@@ -1,5 +1,9 @@
 import { EffectConfigs } from "../../../../config/game/effects"
+import { ItemConfigs } from "../../../../config/game/items"
+import { PassiveConfigs } from "../../../../config/game/passives"
+import { getStatusConfig } from "../../../../config/game/statuses"
 import { getWeatherConfig } from "../../../../config/game/weathers"
+import { Status } from "../../../../types/enum/Status"
 import { Weather } from "../../../../types/enum/Weather"
 
 export const placeholderRegExp = /\{\{[^{}]*\}\}/g
@@ -7,11 +11,20 @@ export const placeholderRegExp = /\{\{[^{}]*\}\}/g
 export function getDescriptionConfig(path: string) {
   const [category, key] = path.split(".")
   if (!key) return
+  if (category === "status_description" && Object.hasOwn(Status, key)) {
+    return getStatusConfig(key as Status)
+  }
   if (category === "weather_description" && Object.hasOwn(Weather, key)) {
     return getWeatherConfig(key as Weather)
   }
   if (category === "effect_description" && Object.hasOwn(EffectConfigs, key)) {
     return EffectConfigs[key as keyof typeof EffectConfigs]
+  }
+  if (category === "passive_description" && Object.hasOwn(PassiveConfigs, key)) {
+    return PassiveConfigs[key as keyof typeof PassiveConfigs]
+  }
+  if (category === "item_description" && Object.hasOwn(ItemConfigs, key)) {
+    return ItemConfigs[key as keyof typeof ItemConfigs]
   }
 }
 

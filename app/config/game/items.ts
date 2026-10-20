@@ -1,5 +1,10 @@
 import { Stat } from "../../types/enum/Game"
 import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import { StatusConfigs } from "./statuses"
+
+export const ItemConfigs = {
+  [Item.POKERUS_VIAL]: StatusConfigs.POKERUS
+} satisfies Partial<Record<Item, Readonly<Record<string, number>>>>
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
