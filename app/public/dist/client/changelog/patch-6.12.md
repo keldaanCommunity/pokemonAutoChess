@@ -40,6 +40,7 @@
 - Revert Cosmog and Cosmoem buffs from 6.7.5 and 6.8 HP : 100 → 140 ; Cosmoem HP: 200 → 220 ; evolutiion stacks required: 8 → 10 ; this is due to the increase of selling prices of evolved Pokémon.
 - New ability for Paras: Scatters 3 spores around the nearest non POISONED enemy. After 2 seconds, it explodes on nearby ADJACENT enemies dealing [10,20,40,80,SP] SPECIAL, inflicting POISONED for 3s.
 - New ability for Milotic: Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.
+- New ability for Jirachi: Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds.
 
 
 # Changes to Synergies

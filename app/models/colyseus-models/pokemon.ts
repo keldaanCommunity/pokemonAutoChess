@@ -7222,9 +7222,9 @@ export class Jirachi extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 80
+  maxPP = 110
   range = 3
-  skill = Ability.DOOM_DESIRE
+  skill = Ability.STAR_SHIELD
   passive = Passive.GOOD_LUCK
   beforeSimulationStart({ teamEffects }: { teamEffects: Set<EffectEnum> }) {
     teamEffects.add(EffectEnum.GOOD_LUCK)

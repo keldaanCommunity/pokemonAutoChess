@@ -1793,7 +1793,8 @@
 		"PURSUIT": "Pursuit",
 		"ROCKY_PAYLOAD": "Rocky Payload",
 		"AQUA_SWIRL": "Aqua Swirl",
-		"MAGNETIC_ABSORPTION": "Magnetic Absorption"
+		"MAGNETIC_ABSORPTION": "Magnetic Absorption",
+		"STAR_SHIELD": "Star Shield"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2364,7 +2365,8 @@
 		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.",
 		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL ",
 		"AQUA_SWIRL": "Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.",
-		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally."
+		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally.",
+		"STAR_SHIELD": "Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
