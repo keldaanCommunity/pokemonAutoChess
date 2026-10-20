@@ -1,6 +1,7 @@
 # New Pokemons:
 
 - Bombirdier
+- Sandy Shocks
 
 # Changes to Pokemon & Abilities
 
@@ -51,8 +52,6 @@
 
 # Changes to Items
 
-- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
-- Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
 - Rework Black Sludge: POISONED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONED for 5 seconds ON_HIT. The first attack always inflicts POISONED.**
@@ -60,12 +59,7 @@
 
 # Gameplay
 
-> A Lucky Ultra at level 7 with 2 dittos on bench had an excessive impact on the game, so we are removing Ultra odds at level 7.
-
-- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
-- The chance to find a Ditto in the shop has been increased: 0.5% → 0.5% + 0.01% per reroll since last Ditto found.
-- Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
 
 # UI
 
@@ -78,11 +72,13 @@
 - Added board effects descriptions in Wiki > Statuses
 - Added Gift Shop stage description in Wiki > Stages
 - Wiki now opens at the last tab you were on when you closed it
+- Special, Unique and Legendary Pokémon in the shop now have the shimmer animation to be more noticeable
 
 # Bugfix
 
 - Grookey line now works properly with Electric triple attack effects
 - Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
+- Cherubi pool size has been corrected to match the pool size of Pokémon with 2 stages of evolution
 
 # Misc
 

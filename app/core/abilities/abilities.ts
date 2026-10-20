@@ -304,6 +304,7 @@ import { MagmaStormStrategy } from "./magma-storm"
 import { MagnetBombStrategy } from "./magnet-bomb"
 import { MagnetPullStrategy } from "./magnet-pull"
 import { MagnetRiseStrategy } from "./magnet-rise"
+import { MagneticAbsorptionStrategy } from "./magnetic-absorption"
 import { MakeItRainStrategy } from "./make-it-rain"
 import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
@@ -407,7 +408,7 @@ import { RockSlideStrategy } from "./rock-slide"
 import { RockSmashStrategy } from "./rock-smash"
 import { RockTombStrategy } from "./rock-tomb"
 import { RockWreckerStrategy } from "./rock-wrecker"
-import { RockyPayloadStrategy } from "./rocky-payload";
+import { RockyPayloadStrategy } from "./rocky-payload"
 import { RolloutStrategy } from "./rollout"
 import { RoostStrategy } from "./roost"
 import { SacredSwordCavernStrategy } from "./sacred-sword-cavern"
@@ -1027,6 +1028,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAGNET_BOMB]: new MagnetBombStrategy(),
   [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
   [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
+  [Ability.MAGNETIC_ABSORPTION]: new MagneticAbsorptionStrategy(),
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),

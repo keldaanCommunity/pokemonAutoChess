@@ -1,0 +1,22 @@
+#detail-game-rarity-percentage {
+  text-align: left;
+
+  & table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    text-align: center;
+  }
+  & :is(th, td) {
+    width: 8ch;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+
+  & tr:first-child th:first-of-type {
+    background: none;
+  }
+
+  & th {
+    letter-spacing: -1px;
+  }
+}

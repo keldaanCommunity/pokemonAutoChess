@@ -10,11 +10,63 @@
 }
 
 .game-shop-actions {
-  display: grid;
-  grid-template: 1fr 1fr / 3vw 1fr;
+  display: flex;
+  flex-direction: column;
   padding: 5px;
   gap: 0.5em;
+  align-items: stretch;
+}
+
+.game-shop-actions button {
+  font-size: 1em;
+  white-space: nowrap;
+  padding: 0.25em 0.5em;
+  min-height: 2.5em;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: 200px;
+}
+
+.game-shop-actions button > img:first-child {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.game-shop-actions button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-additional-pools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 5px;
+}
+
+.game-pokemons-store {
+  display: flex;
+  flex: 1;
+  list-style: none;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.game-experience {
+  width: 12vw;
+  display: grid;
+  grid-template: 32px 1fr 1fr / 3vw 1fr;
+  gap: 0.25em 0.5em;
+  align-items: center;
+  text-align: center;
+}
+
+.game-experience > span {
+  color: var(--color-fg-primary);
 }
 
 .game-rarity-percentage.my-box {
@@ -40,65 +92,6 @@
 
 .game-rarity-percentage > div:last-of-type {
   border-radius: 0 8px 8px 0;
-}
-
-.game-shop-actions .refresh-button {
-  font-size: 1em;
-  white-space: nowrap;
-  padding: 0.25em 0.5em;
-  min-height: 2.5em;
-  position: relative;
-}
-
-.game-shop-actions .refresh-button > img:first-child {
-  vertical-align: middle;
-  width: 1.25em;
-  height: 1.25em;
-}
-
-.game-shop-actions .lock-icon {
-  padding: 0;
-  display: grid;
-  place-content: center;
-  height: 2.5em;
-  font-size: 1em;
-}
-
-.game-shop-actions .lock-icon > img:only-child {
-  width: 1.5em;
-  height: 1.5em;
-  margin: 0.25em;
-}
-
-.game-additional-pools {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 5px;
-}
-
-.game-pokemons-store {
-  display: flex;
-  flex: 1;
-  list-style: none;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-}
-
-.game-experience {
-  width: 12vw;
-  display: grid;
-  grid-template: 1fr 1fr / 3vw 1fr;
-  padding: 5px;
-  gap: 0.5em;
-  align-items: center;
-  text-align: center;
-}
-
-.game-experience > span {
-  color: var(--color-fg-primary);
 }
 
 .buy-xp-button.bubbly {

@@ -127,7 +127,7 @@ export function getExpeditionLabel(expedition: Expedition): string {
         maxTrueDamage: t(`game_stats.true_damage_dealt`),
         maxShield: t(`game_stats.shield_given`),
         maxHeal: t(`game_stats.hp_healed`),
-        maxWinStreak: t(`streak`)
+        maxWinStreak: t(`shop.streak`)
       }
       return t(`expeditions.BATTLE_DESCRIPTION`, {
         ...data,
