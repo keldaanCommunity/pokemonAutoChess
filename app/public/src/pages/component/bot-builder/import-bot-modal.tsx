@@ -72,7 +72,7 @@ export default function ImportBotModal(props: {
               </option>
               {botList.map((bot) => (
                 <option key={bot.id} value={bot.id}>
-                  {bot.name} {t("by")} {bot.author}
+                  {t(`pkm.${bot.name}`)} {t("by")} {bot.author}
                 </option>
               ))}
             </select>
