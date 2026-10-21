@@ -1,3 +1,4 @@
+import { SetSchema } from "@colyseus/schema"
 import { type AtlasNodeId, AtlasTree } from "../config/game/atlas"
 import { getTreasureBoxReward } from "../config/game/town-encounters"
 import type Player from "../models/colyseus-models/player"
@@ -162,8 +163,8 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     )
   },
 
-  wigglytuff: () => {
-    // handled in simulation.start()
+  ampharos: () => {
+    // handled in simulation applyPostEffects
   },
 
   cinccino: (player) => {
@@ -201,10 +202,38 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
   },
 
   magnezone: (player) => {
-    //TODO
+    // handled in simulation onFinish
   },
 
   grovyle: (player) => {
+    // handled in stopFightingPhase
+  },
+
+  dusknoir: (player) => {
+    player.atlasManager.unlockedNodes = new SetSchema<AtlasNodeId>(["dusknoir"])
+  },
+
+  azurill: (player) => {
+    // handled in simulation applyPostEffects
+  },
+
+  bidoof: (player) => {
+    // handled in simulation applyPostEffects
+  },
+
+  chatot: (player) => {
+    // handled in simulation applyPostEffects
+  },
+
+  omanyte: (player) => {
     //TODO
+  },
+
+  wigglytuff: (player, room) => {
+    player.items.push(Item.MISSION_ORDER_BLACK)
+    const playersAlive = schemaValues(room.state.players).filter((p) => p.alive)
+    if (playersAlive.length <= 2) {
+      player.completeMissionOrder(Item.MISSION_ORDER_BLACK)
+    }
   }
 }

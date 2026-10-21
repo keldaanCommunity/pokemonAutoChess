@@ -559,8 +559,8 @@ const EmeraIcons: Record<Emera, string> = {
 }
 
 function isConnectedAndUnlockable(
-  nodeId: string,
-  unlockedNodes: Set<string> | SetSchema<string>
+  nodeId: AtlasNodeId,
+  unlockedNodes: Set<AtlasNodeId> | SetSchema<AtlasNodeId>
 ) {
   // Logic to check if adjacent node is unlocked
   return (

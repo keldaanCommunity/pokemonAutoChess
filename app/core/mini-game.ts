@@ -946,8 +946,10 @@ export class MiniGame {
     }
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
-      const candidateMissions = MissionOrders.filter((m) =>
-        state.shinyEncounter ? m !== Item.MISSION_ORDER_GOLD : true
+      const candidateMissions = MissionOrders.filter(
+        (m) =>
+          m !== Item.MISSION_ORDER_BLACK &&
+          (!state.shinyEncounter || m !== Item.MISSION_ORDER_GOLD)
       )
       this.alivePlayers.forEach((player) => {
         player.choices.push(

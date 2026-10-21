@@ -93,9 +93,9 @@ const nodes = {
     encounter: TownEncounters.SPINDA,
     position: rotToXY(20, 27 * D)
   },
-  regirock: {
+  azurill: {
     type: "encounter",
-    encounter: TownEncounters.REGIROCK,
+    encounter: TownEncounters.AZURILL,
     position: rotToXY(40, 27 * D)
   },
   chansey: {
@@ -149,8 +149,9 @@ const nodes = {
     position: rotToXY(340, 27 * D)
   },
 
-  branch1: {
-    type: "step",
+  bidoof: {
+    type: "encounter",
+    encounter: TownEncounters.BIDOOF,
     position: rotToXY(0, 36 * D)
   },
   atlas_item1: {
@@ -159,8 +160,9 @@ const nodes = {
     position: rotToXY(0, 45 * D)
   },
 
-  branch2: {
-    type: "step",
+  regirock: {
+    type: "encounter",
+    encounter: TownEncounters.REGIROCK,
     position: rotToXY(30, 36 * D)
   },
   atlas_item2: {
@@ -211,8 +213,9 @@ const nodes = {
     buff: "blue"
   },
 
-  branch5: {
-    type: "step",
+  omanyte: {
+    type: "encounter",
+    encounter: TownEncounters.OMANYTE,
     position: rotToXY(120, 36 * D)
   },
   atlas_item5: {
@@ -221,8 +224,9 @@ const nodes = {
     position: rotToXY(120, 45 * D)
   },
 
-  branch6: {
-    type: "step",
+  ampharos: {
+    type: "encounter",
+    encounter: TownEncounters.AMPHAROS,
     position: rotToXY(150, 36 * D)
   },
   atlas_item6: {
@@ -231,8 +235,9 @@ const nodes = {
     position: rotToXY(150, 45 * D)
   },
 
-  branch7: {
-    type: "step",
+  dusknoir: {
+    type: "encounter",
+    encounter: TownEncounters.DUSKNOIR,
     position: rotToXY(180, 36 * D)
   },
   atlas_item7: {
@@ -241,8 +246,9 @@ const nodes = {
     position: rotToXY(180, 45 * D)
   },
 
-  branch8: {
-    type: "step",
+  wigglytuff: {
+    type: "encounter",
+    encounter: TownEncounters.WIGGLYTUFF,
     position: rotToXY(210, 36 * D)
   },
   atlas_item8: {
@@ -284,10 +290,10 @@ const nodes = {
     position: rotToXY(300, 45 * D)
   },
 
-  wigglytuff: {
+  chatot: {
     type: "encounter",
     position: rotToXY(330, 36 * D),
-    encounter: TownEncounters.WIGGLYTUFF
+    encounter: TownEncounters.CHATOT
   },
   atlas_item12: {
     type: "item",
@@ -321,7 +327,7 @@ const connections = [
   { from: "makuhita", to: "legendary1" },
   { from: "makuhita", to: "spinda" },
 
-  { from: "marowak", to: "regirock" },
+  { from: "marowak", to: "azurill" },
   { from: "marowak", to: "legendary2" },
   { from: "marowak", to: "chansey" },
 
@@ -348,15 +354,15 @@ const connections = [
   { from: "munchlax", to: "kangaskhan" },
   { from: "cinccino", to: "chimecho" },
 
-  { from: "chimecho", to: "branch1" },
-  { from: "spinda", to: "branch1" },
-  { from: "branch1", to: "atlas_item1" },
+  { from: "chimecho", to: "bidoof" },
+  { from: "spinda", to: "bidoof" },
+  { from: "bidoof", to: "atlas_item1" },
 
-  { from: "spinda", to: "branch2" },
-  { from: "regirock", to: "branch2" },
-  { from: "branch2", to: "atlas_item2" },
+  { from: "spinda", to: "azurill" },
+  { from: "azurill", to: "regirock" },
+  { from: "regirock", to: "atlas_item2" },
 
-  { from: "regirock", to: "branch3" },
+  { from: "azurill", to: "branch3" },
   { from: "chansey", to: "branch3" },
   { from: "branch3", to: "atlas_item3" },
 
@@ -368,21 +374,21 @@ const connections = [
   { from: "looplet", to: "looplet_green_buff" },
   { from: "looplet", to: "looplet_blue_buff" },
 
-  { from: "electivire", to: "branch5" },
-  { from: "ludicolo", to: "branch5" },
-  { from: "branch5", to: "atlas_item5" },
+  { from: "electivire", to: "omanyte" },
+  { from: "ludicolo", to: "omanyte" },
+  { from: "omanyte", to: "atlas_item5" },
 
-  { from: "ludicolo", to: "branch6" },
-  { from: "sableye", to: "branch6" },
-  { from: "branch6", to: "atlas_item6" },
+  { from: "ludicolo", to: "ampharos" },
+  { from: "sableye", to: "ampharos" },
+  { from: "ampharos", to: "atlas_item6" },
 
-  { from: "sableye", to: "branch7" },
-  { from: "xatu", to: "branch7" },
-  { from: "branch7", to: "atlas_item7" },
+  { from: "sableye", to: "dusknoir" },
+  { from: "xatu", to: "dusknoir" },
+  { from: "dusknoir", to: "atlas_item7" },
 
-  { from: "xatu", to: "branch8" },
-  { from: "celebi", to: "branch8" },
-  { from: "branch8", to: "atlas_item8" },
+  { from: "xatu", to: "wigglytuff" },
+  { from: "celebi", to: "wigglytuff" },
+  { from: "wigglytuff", to: "atlas_item8" },
 
   { from: "celebi", to: "branch9" },
   { from: "munchlax", to: "branch9" },
@@ -396,9 +402,9 @@ const connections = [
   { from: "cinccino", to: "magnezone" },
   { from: "magnezone", to: "atlas_item11" },
 
-  { from: "cinccino", to: "wigglytuff" },
-  { from: "chimecho", to: "wigglytuff" },
-  { from: "wigglytuff", to: "atlas_item12" }
+  { from: "cinccino", to: "chatot" },
+  { from: "chimecho", to: "chatot" },
+  { from: "chatot", to: "atlas_item12" }
 ] satisfies { from: keyof typeof nodes; to: keyof typeof nodes }[]
 
 export const AtlasTree = {

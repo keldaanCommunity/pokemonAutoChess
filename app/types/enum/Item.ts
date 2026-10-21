@@ -328,6 +328,7 @@ export enum Item {
   MISSION_ORDER_BLUE = "MISSION_ORDER_BLUE",
   MISSION_ORDER_GREEN = "MISSION_ORDER_GREEN",
   MISSION_ORDER_GOLD = "MISSION_ORDER_GOLD",
+  MISSION_ORDER_BLACK = "MISSION_ORDER_BLACK",
   LEADERS_CREST = "LEADERS_CREST",
   LAPRAS_PASSPORT = "LAPRAS_PASSPORT",
   CELL_BATTERY = "CELL_BATTERY",
@@ -513,7 +514,8 @@ export const MissionOrders = [
   Item.MISSION_ORDER_RED,
   Item.MISSION_ORDER_BLUE,
   Item.MISSION_ORDER_GREEN,
-  Item.MISSION_ORDER_GOLD
+  Item.MISSION_ORDER_GOLD,
+  Item.MISSION_ORDER_BLACK
 ] satisfies Item[]
 
 export type MissionOrder = (typeof MissionOrders)[number]
@@ -541,7 +543,7 @@ export const TownItems = [
   Item.EXCHANGE_TICKET,
   Item.RECYCLE_TICKET,
   ...DojoTickets,
-  ...MissionOrders,
+  ...MissionOrders.filter((i) => i !== Item.MISSION_ORDER_BLACK),
   ...SevenTreasures,
   Item.EGG_FOR_SELL,
   Item.PICNIC_SET,

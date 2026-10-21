@@ -3010,6 +3010,7 @@
 		"MISSION_ORDER_GREEN": "Mission Order - Diversify!",
 		"MISSION_ORDER_GOLD": "Mission Order - Prosper!",
 		"MISSION_ORDER_PINK": "Mission Order - Evolve!",
+		"MISSION_ORDER_BLACK": "Final Mission Order",
 		"LEADERS_CREST": "Leader's Crest",
 		"LAPRAS_PASSPORT": "Lapras Travel Pass",
 		"SILK_SCARF": "Silk Scarf",
@@ -3446,6 +3447,7 @@
 		"MISSION_ORDER_BLUE": "Complete this mission to earn 30 GOLD:\n reach level 9",
 		"MISSION_ORDER_GREEN": "Complete this mission to earn 30 GOLD:\n reach 8 different active synergies",
 		"MISSION_ORDER_GOLD": "Complete this mission to earn 30 GOLD:\n earn 200 GOLD in total during the game",
+		"MISSION_ORDER_BLACK": "Complete this mission to earn 30 GOLD:\n be one of the last two players alive",
 		"LEADERS_CREST": "When another player beats you in battle, they get an additional 4 GOLD and take the LEADERS_CREST.",
 		"LAPRAS_PASSPORT": "Lapras offers a ride to go to a different region. Use the passport on a Pokémon to influence the destination based on its synergies.",
 		"SILK_SCARF": "Combine it with other item components to make all kinds of scarves, bands and bows. Those items will be removed if you lower down NORMAL synergy level.",
@@ -5132,7 +5134,8 @@
 		"LAPRAS": "Lapras offers a ride to go to a different region.",
 		"LUDICOLO": "Ludicolo celebrates the carnival and offers instruments to join in the festivities.",
 		"CHIMECHO": "Chimecho can convene an assembly with the SOOTHE_BELL",
-		"GROVYLE": "Grovyle stole the Time Gears ! The next two stages are skipped."
+		"GROVYLE": "Grovyle stole the Time Gears ! The next two stages are skipped.",
+		"OMANYTE": "Omanyte dug up some old fossils"
 	},
 	"loading_hints": {
 		"tab_out": "Don't tab out! Loading is paused when this browser window is inactive.",
@@ -5700,14 +5703,20 @@
 			"CELEBI": "Go back in time to restore the HP the player had at the start of the previous stage.",
 			"MAKUHITA": "Get a GOLD_DOJO_TICKET. Pokémon now only spend one stage at the dojo before coming back.",
 			"CROAGUNK": "Get 3 EXCHANGE_TICKET",
-			"WIGGLYTUFF": "At the start of fights, your Pokémon gain 10 SHIELD per encounter activated in the atlas, including this one.",
+			"AMPHAROS": "At the start of fights, your Pokémon gain 10 SHIELD per encounter activated in the atlas, including this one.",
+			"WIGGLYTUFF": "Complete this final mission to get 30 GOLD: be one of the last two remaining players alive",
 			"CINCCINO": "Pick 1 of 3 SILK_SCARF made items",
 			"CHIMECHO": "Get a SOOTHE_BELL",
 			"KINGAMBIT": "Gain 5 GOLD, or 15 GOLD and a LEADERS_CREST if you are currently leading",
 			"LAPRAS": "Get a LAPRAS_PASSPORT. Your legendaries choices will be rerolled based on the new region you travel to.",
 			"LUDICOLO": "Ludicolo cheers on your team with music. All your Pokémon gain 1 SPEED each second in fight.",
 			"MAGNEZONE": "Increase damage inflicted to other players by 3 after a win",
-			"GROVYLE": "Gain 1 more EMERA after every fight won"
+			"GROVYLE": "Gain 1 more EMERA after every fight lost",
+			"OMANYTE": "Pick 1 of 3 special fossil stones and get 1 Ditto.",
+			"AZURILL": "All your Common Pokémon gain 30 HP, 3 ATK and 10 AP per STAR level.",
+			"BIDOOF": "All your Uncommon Pokémon gain 30 HP, 3 ATK and 10 AP per STAR level.",
+			"CHATOT": "All your Rare Pokémon gain 30 HP, 3 ATK and 10 AP per STAR level.",
+			"DUSKNOIR": "Removes all Atlas connections, that can be activated a second time."
 		},
 		"keystone": {
 			"gigantamax": "Gigantamax Emera",

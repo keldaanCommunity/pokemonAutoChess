@@ -113,7 +113,6 @@ import {
   ItemsSoldAtTown,
   Mulches,
   Scarves,
-  Sweets,
   SynergyGivenByItem,
   SynergyStones,
   Tools,
@@ -1392,6 +1391,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       return true
     }
 
+    if(playersAlive.length <= 2){
+      playersAlive.forEach(player => {
+        if(player.items.includes(Item.MISSION_ORDER_BLACK)){
+          player.completeMissionOrder(Item.MISSION_ORDER_BLACK)
+        }
+      })
+    }
+
     return false
   }
 
@@ -1915,6 +1922,15 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           if (this.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
             player.atlasManager.emera += 1
+            if (player.atlasManager.unlockedNodes.has("grovyle")) {
+              const lastResult = player.history.at(-1)?.result
+              if (
+                lastResult === BattleResult.DEFEAT ||
+                lastResult === BattleResult.DRAW
+              ) {
+                player.atlasManager.emera += 1
+              }
+            }
           }
 
           this.spawnBabyEggs(player, isPVE)

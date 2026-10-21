@@ -660,12 +660,24 @@ export default class Simulation extends Schema implements ISimulation {
     for (const team of [this.blueTeam, this.redTeam]) {
       team.forEach((pokemon) => {
         const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
-        if (player?.atlasManager.unlockedNodes.has("wigglytuff")) {
+        if (player?.atlasManager.unlockedNodes.has("ampharos")) {
           const encountersUnlocked = schemaValues(
             player.atlasManager.unlockedNodes
           ).filter((nodeId) => AtlasTree.nodes[nodeId].type === "encounter")
           pokemon.addShield(10 * encountersUnlocked.length, pokemon, 0, false)
-        }        
+        }
+        if (
+          (player?.atlasManager.unlockedNodes.has("azurill") &&
+            pokemon.rarity === Rarity.COMMON) ||
+          (player?.atlasManager.unlockedNodes.has("bidoof") &&
+            pokemon.rarity === Rarity.UNCOMMON) ||
+          (player?.atlasManager.unlockedNodes.has("chatot") &&
+            pokemon.rarity === Rarity.RARE)
+        ) {
+          pokemon.addMaxHP(30 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAttack(3 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAbilityPower(10 * pokemon.stars, pokemon, 0, false)
+        }
       })
     }
 
@@ -1581,10 +1593,17 @@ export default class Simulation extends Schema implements ISimulation {
         }
       } else {
         // LOSE
-        const playerDamage = this.room.computeRoundDamage(
+        let playerDamage = this.room.computeRoundDamage(
           opponentTeam,
           this.stageLevel
         )
+
+        if (
+          opponentPlayer &&
+          opponentPlayer.atlasManager.unlockedNodes.has("magnezone")
+        ) {
+          playerDamage += 3
+        }
 
         if (
           !isGhostPlayer &&

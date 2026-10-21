@@ -24,7 +24,13 @@ export const TownEncounters = {
   [Pkm.LAPRAS]: Pkm.LAPRAS,
   [Pkm.LUDICOLO]: Pkm.LUDICOLO,
   [Pkm.CHIMECHO]: Pkm.CHIMECHO,
-  [Pkm.GROVYLE]: Pkm.GROVYLE
+  [Pkm.GROVYLE]: Pkm.GROVYLE,
+  [Pkm.OMANYTE]: Pkm.OMANYTE,
+  [Pkm.AMPHAROS]: Pkm.AMPHAROS,
+  [Pkm.DUSKNOIR]: Pkm.DUSKNOIR,
+  [Pkm.CHATOT]: Pkm.CHATOT,
+  [Pkm.BIDOOF]: Pkm.BIDOOF,
+  [Pkm.AZURILL]: Pkm.AZURILL
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
