@@ -9,11 +9,17 @@ import {
   CraftableItemsNoScarves,
   DubiousGadgets,
   Item,
+  Scarves,
+  SynergyGems,
   SynergyStones
 } from "../types"
 import { Rarity } from "../types/enum/Game"
+import { Dishes } from "../types/enum/Item"
 import { pkmsFromProposition } from "../types/enum/Pokemon"
-import { pickNRandomIn } from "../utils/random"
+import { max } from "../utils/number"
+import { entries } from "../utils/object"
+import { pickNRandomIn, pickRandomIn } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 import { openTreasureChest } from "./effects/items"
 
 export function activateAtlasNode(
@@ -96,16 +102,56 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     )
   },
 
+  meowth: (player) => {
+    player.addMoney(10, true, null)
+  },
+
   marowak() {
     // handled in makePveBoard function
   },
 
-  lapras: (player) => {
-    player.items.push(Item.LAPRAS_PASSPORT)
+  wobbuffet: (player) => {
+    player.items.push(Item.RECYCLE_TICKET, Item.RECYCLE_TICKET)
   },
 
-  meowth: (player) => {
-    player.addMoney(10, true, null)
+  spinda: (player, room) => {
+    const availableEncounterNodes = entries(AtlasTree.nodes)
+      .filter(
+        ([nodeId, node]) =>
+          node.type === "encounter" &&
+          player.atlasManager.unlockedNodes.has(nodeId) === false
+      )
+      .map(([nodeId]) => nodeId)
+    if (availableEncounterNodes.length === 0) return
+    activateAtlasNode(pickRandomIn(availableEncounterNodes), player, room)
+  },
+
+  regirock: (player) => {
+    player.life = max(100)(player.life + 15)
+  },
+
+  munchlax: (player) => {
+    player.items.push(...pickNRandomIn(Dishes, 5))
+  },
+
+  sableye: (player) => {
+    player.choices.push(
+      new PlayerChoice({
+        type: "item",
+        items: pickNRandomIn(SynergyGems, 6)
+      })
+    )
+  },
+
+  celebi: (player, room) => {
+    player.life =
+      player.lifeByStage[room.state.stageLevel - 1] ??
+      player.lifeByStage[0] ??
+      100
+  },
+
+  makuhita: (player) => {
+    player.items.push(Item.GOLD_DOJO_TICKET)
   },
 
   croagunk: (player) => {
@@ -114,5 +160,51 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
       Item.EXCHANGE_TICKET,
       Item.EXCHANGE_TICKET
     )
+  },
+
+  wigglytuff: () => {
+    // handled in simulation.start()
+  },
+
+  cinccino: (player) => {
+    player.choices.push(
+      new PlayerChoice({
+        type: "item",
+        items: pickNRandomIn(Scarves, 3)
+      })
+    )
+  },
+
+  chimecho: (player) => {
+    player.items.push(Item.SOOTHE_BELL)
+  },
+
+  kingambit: (player, room) => {
+    const maxHP = Math.max(
+      ...schemaValues(room.state.players).map((p) => p.life)
+    )
+    if (player.life === maxHP) {
+      player.addMoney(15, true, null)
+      player.items.push(Item.LEADERS_CREST)
+    } else {
+      player.addMoney(5, true, null)
+    }
+  },
+
+  lapras: (player) => {
+    player.items.push(Item.LAPRAS_PASSPORT)
+    // TODO: reroll legendaries
+  },
+
+  ludicolo: (player) => {
+    // handled in updateEachSecond
+  },
+
+  magnezone: (player) => {
+    //TODO
+  },
+
+  grovyle: (player) => {
+    //TODO
   }
 }

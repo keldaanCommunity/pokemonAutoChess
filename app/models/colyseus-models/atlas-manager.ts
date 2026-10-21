@@ -11,7 +11,7 @@ import type Player from "./player"
 
 export default class AtlasManager extends Schema implements IAtlasManager {
   @type("uint8") emera = 20 //TEMP 0
-  @type({ set: "string" }) unlockedNodes = new SetSchema<string>(["root"])
+  @type({ set: "string" }) unlockedNodes = new SetSchema<AtlasNodeId>(["root"])
   @type(["string"]) legendaries = new ArraySchema<PkmProposition>()
   @type(["string"]) symbols = new ArraySchema<Synergy>()
 
@@ -23,11 +23,11 @@ export default class AtlasManager extends Schema implements IAtlasManager {
     }
   }
 
-  canUnlockNode(nodeId: string): boolean {
+  canUnlockNode(nodeId: AtlasNodeId): boolean {
     return this.emera > 0 && this.isConnectedAndUnlockable(nodeId)
   }
 
-  isConnectedAndUnlockable(nodeId: string) {
+  isConnectedAndUnlockable(nodeId: AtlasNodeId) {
     // Logic to check if adjacent node is unlocked
     return (
       this.unlockedNodes.has(nodeId) === false &&

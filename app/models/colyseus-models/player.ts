@@ -224,6 +224,7 @@ export default class Player extends Schema implements IPlayer {
   extraScarves: number = 0 // scarves obtained though other ways than normal synergy
   unownReminiscences: number = 0
   doubleUpEliminationRound: number = 999
+  lifeByStage: number[] = []
 
   constructor(
     id: string,

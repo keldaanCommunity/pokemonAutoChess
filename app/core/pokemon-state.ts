@@ -1066,6 +1066,13 @@ export default abstract class PokemonState {
       })
       pokemon.status.triggerBurn(2200, pokemon, null)
     }
+
+    if (
+      pokemon.player &&
+      pokemon.player.atlasManager.unlockedNodes.has("ludicolo")
+    ) {
+      pokemon.addSpeed(1, pokemon, 0, false)
+    }
   }
 
   onEnter(pokemon: PokemonEntity) {}

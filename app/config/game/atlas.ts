@@ -143,9 +143,9 @@ const nodes = {
     encounter: TownEncounters.CINCCINO,
     position: rotToXY(320, 27 * D)
   },
-  wigglytuff: {
+  chimecho: {
     type: "encounter",
-    encounter: TownEncounters.WIGGLYTUFF,
+    encounter: TownEncounters.CHIMECHO,
     position: rotToXY(340, 27 * D)
   },
 
@@ -284,9 +284,10 @@ const nodes = {
     position: rotToXY(300, 45 * D)
   },
 
-  branch12: {
-    type: "step",
-    position: rotToXY(330, 36 * D)
+  wigglytuff: {
+    type: "encounter",
+    position: rotToXY(330, 36 * D),
+    encounter: TownEncounters.WIGGLYTUFF
   },
   atlas_item12: {
     type: "item",
@@ -316,7 +317,7 @@ const connections = [
   { from: "croagunk", to: "kecleon" },
   { from: "croagunk", to: "wobbuffet" },
 
-  { from: "makuhita", to: "wigglytuff" },
+  { from: "makuhita", to: "chimecho" },
   { from: "makuhita", to: "legendary1" },
   { from: "makuhita", to: "spinda" },
 
@@ -345,9 +346,9 @@ const connections = [
   { from: "ludicolo", to: "sableye" },
   { from: "xatu", to: "celebi" },
   { from: "munchlax", to: "kangaskhan" },
-  { from: "cinccino", to: "wigglytuff" },
+  { from: "cinccino", to: "chimecho" },
 
-  { from: "wigglytuff", to: "branch1" },
+  { from: "chimecho", to: "branch1" },
   { from: "spinda", to: "branch1" },
   { from: "branch1", to: "atlas_item1" },
 
@@ -395,9 +396,9 @@ const connections = [
   { from: "cinccino", to: "magnezone" },
   { from: "magnezone", to: "atlas_item11" },
 
-  { from: "cinccino", to: "branch12" },
-  { from: "wigglytuff", to: "branch12" },
-  { from: "branch12", to: "atlas_item12" }
+  { from: "cinccino", to: "wigglytuff" },
+  { from: "chimecho", to: "wigglytuff" },
+  { from: "wigglytuff", to: "atlas_item12" }
 ] satisfies { from: keyof typeof nodes; to: keyof typeof nodes }[]
 
 export const AtlasTree = {

@@ -5,7 +5,7 @@ import {
   DEFAULT_CRIT_POWER,
   ItemStats,
   MAX_SPEED,
-  ON_ATTACK_MANA
+  PP_ON_ATTACK
 } from "../config"
 import { SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
@@ -966,7 +966,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     hasAttackKilled: boolean
     crit: boolean
   }) {
-    this.addPP(ON_ATTACK_MANA, this, 0, false)
+    this.addPP(PP_ON_ATTACK, this, 0, false)
 
     if (target.effects.has(EffectEnum.OBSTRUCT)) {
       this.addDefense(-2, target, 0, false)

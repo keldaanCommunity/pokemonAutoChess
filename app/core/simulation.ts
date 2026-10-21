@@ -1,5 +1,6 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
+import { AtlasTree } from "../config/game/atlas"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -570,6 +571,7 @@ export default class Simulation extends Schema implements ISimulation {
     /*
     in order:
     - spawns (bug, rotom, white flute, etc)
+    - atlas effects
     - support items effects (exp share, gracidea etc)
     - target selection effects (ghost curse, comet shard etc)
     */
@@ -651,6 +653,19 @@ export default class Simulation extends Schema implements ISimulation {
             this.addPokemon(mon, coord.x, coord.y, teamIndex, true)
           })
         }
+      })
+    }
+
+    // ATLAS EFFECTS
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
+        const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
+        if (player?.atlasManager.unlockedNodes.has("wigglytuff")) {
+          const encountersUnlocked = schemaValues(
+            player.atlasManager.unlockedNodes
+          ).filter((nodeId) => AtlasTree.nodes[nodeId].type === "encounter")
+          pokemon.addShield(10 * encountersUnlocked.length, pokemon, 0, false)
+        }        
       })
     }
 
@@ -1559,7 +1574,9 @@ export default class Simulation extends Schema implements ISimulation {
           client?.send(Transfer.PLAYER_INCOME, moneyGain)
           if (hasLeadersCrest && opponentPlayer) {
             removeFromArray(opponentPlayer.items, Item.LEADERS_CREST)
-            player.items.push(Item.LEADERS_CREST)
+            if (player.items.includes(Item.LEADERS_CREST) === false) {
+              player.items.push(Item.LEADERS_CREST)
+            }
           }
         }
       } else {

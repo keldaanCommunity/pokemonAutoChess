@@ -538,10 +538,13 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.positionY = pokemonLeaving.positionY
       player.board.delete(pokemonLeaving.id)
       player.board.set(substitute.id, substitute)
+      const trainingDuration = player.atlasManager.unlockedNodes.has("makuhita")
+        ? 1
+        : 3
       player.pokemonsTrainingInDojo.push({
         pokemon: pokemonLeaving,
         ticketLevel,
-        returnStage: room.state.stageLevel + 3
+        returnStage: room.state.stageLevel + trainingDuration
       })
       removeFromArray(player.items, item)
       player.updateSynergies()

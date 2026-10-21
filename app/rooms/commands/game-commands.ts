@@ -1635,6 +1635,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   updatePlayerBetweenStages(player: Player) {
+    player.lifeByStage[this.room.state.stageLevel] = player.life
     const board = schemaValues(player.board)
 
     // Encounter effects

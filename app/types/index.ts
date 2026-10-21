@@ -1,4 +1,5 @@
 import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
+import type { AtlasNodeId } from "../config/game/atlas"
 import type Dps from "../core/dps"
 import type { Effect as EffectClass } from "../core/effects/effect"
 import type { PokemonEntity } from "../core/pokemon-entity"
@@ -366,7 +367,7 @@ export interface IExperienceManager {
 
 export interface IAtlasManager {
   emera: number
-  unlockedNodes: SetSchema<string>
+  unlockedNodes: SetSchema<AtlasNodeId>
   legendaries: ArraySchema<PkmProposition>
   symbols: ArraySchema<Synergy>
 }
