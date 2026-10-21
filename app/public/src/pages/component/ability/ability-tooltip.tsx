@@ -5,7 +5,13 @@ import "./ability-tooltip.css"
 
 export function AbilityTooltip(props: {
   ability: Ability
-  stats?: { stars: number; stages: number; ap: number; luck: number }
+  stats?: {
+    stars: number
+    stages: number
+    ap: number
+    luck: number
+    showAbilityTiers?: boolean
+  }
 }) {
   const { t } = useTranslation()
   const description = t(`ability_description.${props.ability}`)

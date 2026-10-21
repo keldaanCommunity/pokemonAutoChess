@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import type { PokemonEntity } from "../../core/pokemon-entity"
@@ -13,6 +14,7 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
+import { Synergy } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
 import { count } from "../../utils/array"
 import { max, min } from "../../utils/number"
@@ -55,12 +57,12 @@ export default class Status extends Schema implements IStatus {
   @type("boolean") enraged = false
   @type("boolean") skydiving = false
   @type("boolean") tree = false
-  burnOrigin: PokemonEntity | undefined = undefined
-  poisonOrigin: PokemonEntity | undefined = undefined
-  silenceOrigin: PokemonEntity | undefined = undefined
-  woundOrigin: PokemonEntity | undefined = undefined
-  charmOrigin: PokemonEntity | undefined = undefined
-  possessedOrigin: PokemonEntity | undefined = undefined
+  burnOrigin: PokemonEntity | null = null
+  poisonOrigin: PokemonEntity | null = null
+  silenceOrigin: PokemonEntity | null = null
+  woundOrigin: PokemonEntity | null = null
+  charmOrigin: PokemonEntity | null = null
+  possessedOrigin: PokemonEntity | null = null
   burnCooldown = 0
   burnDamageCooldown = 1000
   silenceCooldown = 0
@@ -161,14 +163,18 @@ export default class Status extends Schema implements IStatus {
       this.curse ||
       this.locked ||
       this.blinded ||
-      this.possessed
+      this.possessed ||
+      this.curseVulnerability ||
+      this.curseWeakness ||
+      this.curseTorment ||
+      this.curseFate
     )
   }
 
   transferNegativeStatus(from: PokemonEntity, to: PokemonEntity) {
     if (this.burn) to.status.triggerBurn(this.burnCooldown, to, from)
     if (this.silence) to.status.triggerSilence(this.silenceCooldown, to, from)
-    if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to)
+    if (this.fatigue) to.status.triggerFatigue(this.fatigueCooldown, to, from)
     if (this.poisonStacks > 0)
       to.status.triggerPoison(this.poisonCooldown, to, from)
     if (this.freeze) to.status.triggerFreeze(this.freezeCooldown, to, from)
@@ -184,7 +190,7 @@ export default class Status extends Schema implements IStatus {
       to.status.triggerArmorReduction(this.armorReductionCooldown, to)
     if (this.curse) to.status.triggerCurse(this.curseCooldown, to)
     if (this.locked) to.status.triggerLocked(this.lockedCooldown, to)
-    if (this.blinded) to.status.triggerBlinded(this.blindCooldown, to)
+    if (this.blinded) to.status.triggerBlinded(this.blindCooldown, to, from)
     if (this.possessed)
       to.status.triggerPossessed(this.possessedCooldown, to, from)
   }
@@ -193,7 +199,8 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
-      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
+      pokemon.types.has(Synergy.POISON) === false
     ) {
       this.triggerPoison(1500, pokemon, undefined)
     }
@@ -203,7 +210,7 @@ export default class Status extends Schema implements IStatus {
       !this.blinded &&
       !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
     ) {
-      this.triggerBlinded(1000, pokemon)
+      this.triggerBlinded(1000, pokemon, null)
     }
 
     if (
@@ -330,7 +337,7 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pokemon.status.curseTorment && !pokemon.status.fatigue) {
-      this.triggerFatigue(30000, pokemon)
+      this.triggerFatigue(30000, pokemon, null)
     }
 
     if (pokemon.status.curseFate && !pokemon.status.curse) {
@@ -396,7 +403,7 @@ export default class Status extends Schema implements IStatus {
   triggerBurn(
     duration: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | null
   ) {
     const alreadyBurning = this.burn
     if (
@@ -410,9 +417,7 @@ export default class Status extends Schema implements IStatus {
 
       if (duration > this.burnCooldown) {
         this.burnCooldown = duration
-        if (origin) {
-          this.burnOrigin = origin
-        }
+        this.burnOrigin = origin
       }
 
       if (
@@ -438,58 +443,60 @@ export default class Status extends Schema implements IStatus {
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
-      if (this.burnOrigin) {
-        let burnDamage = pkm.maxHP * 0.05
-        if (pkm.simulation.weather === Weather.DROUGHT) {
-          burnDamage *= 1.3
-          const nbHeatRocks = pkm.player
-            ? count(pkm.player.items, Item.HEAT_ROCK)
-            : 0
-          if (nbHeatRocks > 0) {
-            burnDamage *= 1 - 0.2 * nbHeatRocks
-          }
-        } else if (pkm.simulation.weather === Weather.RAIN) {
-          burnDamage *= 0.7
+      let burnDamage = pkm.maxHP * 0.05
+      if (pkm.simulation.weather === Weather.DROUGHT) {
+        burnDamage *= 1 + WeatherConfigs.DROUGHT.burnDamageBonusPercent / 100
+        const nbHeatRocks = pkm.player
+          ? count(pkm.player.items, Item.HEAT_ROCK)
+          : 0
+        if (nbHeatRocks > 0) {
+          burnDamage *= 1 - 0.2 * nbHeatRocks
         }
-
-        if (pkm.items.has(Item.ASSAULT_VEST)) {
-          burnDamage *= 0.5
-        }
-
-        if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-          burnDamage *= 0.7
-        } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-          burnDamage *= 0.5
-        } else if (
-          pkm.effects.has(EffectEnum.WATER_VEIL) ||
-          pkm.effects.has(EffectEnum.SURGE_SURFER)
-        ) {
-          burnDamage *= 0.3
-        }
-
-        if (
-          pkm.passive === Passive.WELL_BAKED ||
-          pkm.items.has(Item.MAGMARIZER)
-        ) {
-          burnDamage = 0
-        }
-
-        if (pkm.items.has(Item.COOKING_POT)) {
-          pkm.addSpeed(10, pkm, 0, false)
-        }
-
-        burnDamage = Math.round(burnDamage)
-        if (burnDamage > 0) {
-          pkm.handleDamage({
-            damage: burnDamage,
-            board,
-            attackType: AttackType.TRUE,
-            attacker: this.burnOrigin,
-            shouldTargetGainMana: true
-          })
-        }
-        this.burnDamageCooldown = 1000
+      } else if (pkm.simulation.weather === Weather.RAIN) {
+        burnDamage *= 1 - WeatherConfigs.RAIN.damageReductionPercent / 100
       }
+
+      if (pkm.items.has(Item.ASSAULT_VEST)) {
+        burnDamage *= 0.5
+      }
+
+      if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
+        burnDamage *= 0.7
+      } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
+        burnDamage *= 0.5
+      } else if (
+        pkm.effects.has(EffectEnum.WATER_VEIL) ||
+        pkm.effects.has(EffectEnum.SURGE_SURFER)
+      ) {
+        burnDamage *= 0.3
+      }
+
+      if (
+        pkm.passive === Passive.WELL_BAKED ||
+        pkm.items.has(Item.MAGMARIZER)
+      ) {
+        burnDamage = 0
+      }
+
+      if (pkm.items.has(Item.COOKING_POT)) {
+        pkm.addSpeed(10, pkm, 0, false)
+      }
+
+      burnDamage = Math.round(burnDamage)
+      if (burnDamage > 0) {
+        pkm.handleDamage({
+          damage: burnDamage,
+          board,
+          attackType: AttackType.TRUE,
+          attacker: this.burnOrigin,
+          effect:
+            this.burnOrigin === null && pkm.effects.has(EffectEnum.EMBER)
+              ? EffectEnum.EMBER
+              : undefined,
+          shouldTargetGainMana: true
+        })
+      }
+      this.burnDamageCooldown = 1000
     } else {
       this.burnDamageCooldown -= dt
     }
@@ -504,7 +511,7 @@ export default class Status extends Schema implements IStatus {
   healBurn(pkm: PokemonEntity) {
     if (!this.burn) return
     this.burn = false
-    this.burnOrigin = undefined
+    this.burnOrigin = null
     this.burnDamageCooldown = 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
@@ -521,7 +528,7 @@ export default class Status extends Schema implements IStatus {
   triggerSilence(duration: number, pkm: PokemonEntity, origin?: PokemonEntity) {
     if (!this.runeProtect && !this.tree) {
       if (pkm.simulation.weather === Weather.MURKY) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.MURKY.silenceDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -539,19 +546,25 @@ export default class Status extends Schema implements IStatus {
   updateSilence(dt: number) {
     if (this.silenceCooldown - dt <= 0) {
       this.silence = false
-      this.silenceOrigin = undefined
+      this.silenceOrigin = null
     } else {
       this.silenceCooldown -= dt
     }
   }
 
-  triggerFatigue(duration: number, pkm: PokemonEntity) {
+  triggerFatigue(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
     if (!this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       duration = this.applyStatusDurationReductions(duration, pkm)
 
       this.fatigue = true
       if (duration > this.fatigueCooldown) {
-        this.fatigueCooldown = duration
+        this.fatigueCooldown = Math.round(duration)
       }
     }
   }
@@ -571,8 +584,8 @@ export default class Status extends Schema implements IStatus {
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = 3
+      this.poisonOrigin = origin ?? null
       if (origin) {
-        this.poisonOrigin = origin
         if (origin.effects.has(EffectEnum.VENOMOUS)) {
           maxStacks = 4
         }
@@ -581,6 +594,10 @@ export default class Status extends Schema implements IStatus {
         }
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
+
+      if (pkm.simulation.weather === Weather.SMOG) {
+        duration *= 1 + WeatherConfigs.SMOG.poisonDurationBonusPercent / 100
+      }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
 
@@ -618,7 +635,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {
-        poisonDamage *= 0.7
+        poisonDamage *= 1 - WeatherConfigs.RAIN.damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
@@ -648,11 +665,22 @@ export default class Status extends Schema implements IStatus {
           board,
           attackType: AttackType.TRUE,
           attacker: this.poisonOrigin ?? null,
+          effect:
+            this.poisonOrigin === null
+              ? pkm.effects.has(EffectEnum.POISON_GAS)
+                ? EffectEnum.POISON_GAS
+                : pkm.effects.has(EffectEnum.TOXIC_SPIKES)
+                  ? EffectEnum.TOXIC_SPIKES
+                  : undefined
+              : undefined,
           shouldTargetGainMana: false
         })
       }
 
-      if (pkm.effects.has(EffectEnum.POISON_GAS)) {
+      if (
+        pkm.effects.has(EffectEnum.POISON_GAS) &&
+        pkm.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      ) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
       }
@@ -664,7 +692,7 @@ export default class Status extends Schema implements IStatus {
 
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
-      this.poisonOrigin = undefined
+      this.poisonOrigin = null
       this.poisonDamageCooldown = 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
@@ -692,7 +720,7 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.SNOW.freezeDurationBonusPercent / 100
         const nbIcyRocks = pkm.player
           ? count(pkm.player.items, Item.ICY_ROCK)
           : 0
@@ -700,7 +728,8 @@ export default class Status extends Schema implements IStatus {
           duration *= 1 - 0.2 * nbIcyRocks
         }
       } else if (pkm.simulation.weather === Weather.DROUGHT) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs.DROUGHT.freezeDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -733,11 +762,12 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerProtect(timer: number) {
-    if (!this.protect && !this.enraged) {
-      // protect cannot be stacked
+  triggerProtect(duration: number) {
+    if (this.protect && duration > this.protectCooldown) {
+      this.protectCooldown = duration
+    } else if (!this.enraged && !this.protect) {
       this.protect = true
-      this.protectCooldown = timer
+      this.protectCooldown = duration
     }
   }
 
@@ -758,9 +788,10 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.NIGHT.sleepDurationBonusPercent / 100
       } else if (pkm.simulation.weather === Weather.ZENITH) {
-        duration *= 0.7
+        duration *=
+          1 - WeatherConfigs.ZENITH.sleepDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
         duration = duration / 2
@@ -806,10 +837,10 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect &&
       !pkm.effects.has(EffectEnum.IMMUNITY_CONFUSION)
     ) {
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.SANDSTORM) {
-        duration *= 1.3
+        duration *=
+          1 + WeatherConfigs.SANDSTORM.confusionDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -843,10 +874,9 @@ export default class Status extends Schema implements IStatus {
     apBoost = false
   ) {
     if (!this.charm && !this.runeProtect) {
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.MISTY) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.MISTY.charmDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -861,7 +891,7 @@ export default class Status extends Schema implements IStatus {
   updateCharm(dt: number, pkm: PokemonEntity) {
     if (this.charmCooldown - dt <= 0) {
       this.charm = false
-      this.charmOrigin = undefined
+      this.charmOrigin = null
       pkm.setTarget(null) // force retargeting
     } else {
       this.charmCooldown -= dt
@@ -876,7 +906,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.runeProtect) {
       this.wound = true
       if (pkm.simulation.weather === Weather.BLOODMOON) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.BLOODMOON.woundDurationBonusPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -893,7 +923,7 @@ export default class Status extends Schema implements IStatus {
   updateWound(dt: number) {
     if (this.woundCooldown - dt <= 0) {
       this.wound = false
-      this.woundOrigin = undefined
+      this.woundOrigin = null
     } else {
       this.woundCooldown -= dt
     }
@@ -909,10 +939,9 @@ export default class Status extends Schema implements IStatus {
       if (!this.paralysis) {
         this.paralysis = true
       }
-      const boost = apBoost && origin ? (duration * origin.ap) / 100 : 0
-      duration = duration + boost
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
       if (pkm.simulation.weather === Weather.STORM) {
-        duration *= 1.3
+        duration *= 1 + WeatherConfigs.STORM.paralysisDurationBonusPercent / 100
         const nbElectricQuartz = pkm.player
           ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
           : 0
@@ -1088,8 +1117,10 @@ export default class Status extends Schema implements IStatus {
         board,
         attacker: null,
         attackType: AttackType.TRUE,
+        effect: EffectEnum.CURSE,
         shouldTargetGainMana: false
       })
+      // 9999 is overkill damage; takenDamage is the HP actually removed
       pokemon.simulation.room.broadcast(Transfer.ABILITY, {
         id: pokemon.simulation.id,
         skill: "CURSE_EFFECT",
@@ -1160,11 +1191,20 @@ export default class Status extends Schema implements IStatus {
   updateLocked(dt: number, pokemon: PokemonEntity) {
     if (this.lockedCooldown - dt <= 0) {
       this.locked = false
-      pokemon.range =
-        pokemon.baseRange +
-        (pokemon.items.has(Item.WIDE_LENS)
-          ? (ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0)
-          : 0)
+      let range = pokemon.baseRange
+      if (pokemon.items.has(Item.WIDE_LENS)) {
+        range += ItemStats[Item.WIDE_LENS]?.[Stat.RANGE] ?? 0
+      }
+      if (
+        pokemon.player &&
+        pokemon.player.items.includes(Item.LONG_WAND) &&
+        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.baseRange > 1
+      ) {
+        range += 1
+      }
+      pokemon.range = range
+
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
       this.lockedCooldown -= dt
@@ -1238,8 +1278,15 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  triggerBlinded(duration: number, pkm: PokemonEntity) {
+  triggerBlinded(
+    duration: number,
+    pkm: PokemonEntity,
+    origin: PokemonEntity | null,
+    apBoost = false
+  ) {
     if (!this.blinded && !this.runeProtect) {
+      duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
+
       if (pkm.status.enraged) {
         duration = duration / 2
       }

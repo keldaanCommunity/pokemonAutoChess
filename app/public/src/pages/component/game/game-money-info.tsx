@@ -7,6 +7,8 @@ import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { Money } from "../icons/money"
+import "./game-money-info.css"
+import { Box } from "../box/box"
 
 export function GameMoneyInfo() {
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
@@ -44,37 +46,62 @@ export function GameMoneyDetail() {
   const maxInterest = useAppSelector((state) => state.game.maxInterest)
   let streakLabel = "Draw"
   if (lastBattleResult === BattleResult.WIN) {
-    streakLabel = t("victory_count", { count: streak + 1 })
+    streakLabel = t("shop.victory_count", { count: streak + 1 })
   } else if (lastBattleResult === BattleResult.DEFEAT) {
-    streakLabel = t("defeat_count", { count: streak + 1 })
+    streakLabel = t("shop.defeat_count", { count: streak + 1 })
   }
 
+  const total = 5 + interest + max(5)(streak)
+
   return (
-    <div className="game-money-detail">
-      <p className="help">{addIconsToDescription(t("passive_income_hint"))}</p>
-      <p style={{ marginTop: "0.5em" }}>
-        <Money
-          value={`${t("streak")}: ${streak === 0 ? 0 : "+" + max(5)(streak)}`}
-        />{" "}
-        {lastBattleResult !== null && `(${streakLabel})`}
-      </p>
-      <p className="help">{addIconsToDescription(t("streak_income_hint"))}</p>
-      {specialGameRule !== SpecialGameRule.BLOOD_MONEY && (
-        <>
-          <p style={{ marginTop: "0.5em" }}>
-            <Money value={t("interest", { interest })} />(
-            {addIconsToDescription(t("max_interest", { maxInterest }))})
-          </p>
+    <Box className="game-money-detail" tooltip>
+      <Box.Header title={t("shop.income")}>
+        <p className="help">
+          {addIconsToDescription(t("shop.passive_income_hint"))}
+        </p>
+        <p className="help">{addIconsToDescription(t("shop.streak_income_hint"))}</p>
+        {specialGameRule !== SpecialGameRule.BLOOD_MONEY && (
           <p className="help">
             {addIconsToDescription(
-              t("additional_income_hint", {
+              t("shop.additional_income_hint", {
                 maxInterest,
                 maxInterestGolds: maxInterest * 10
               })
             )}
           </p>
-        </>
-      )}
-    </div>
+        )}
+      </Box.Header>
+      <Box.Content className="game-money-next-round">
+        <div>
+          <output>
+            <Money value={5} />
+          </output>
+          <p>{t("shop.income")}</p>
+        </div>
+        +
+        <div>
+          <output>
+            <Money value={interest} />
+          </output>
+          <p>{addIconsToDescription(t("shop.interest", { maxInterest }))}</p>
+        </div>
+        +
+        <div>
+          <output>
+            <Money value={streak === 0 ? 0 : "+" + max(5)(streak)} />
+          </output>
+          <p>
+            {t("shop.streak")} {lastBattleResult !== null && `(${streakLabel})`}
+          </p>
+        </div>
+        =
+        <div className="total">
+          <output>
+            <Money value={total} />
+          </output>
+          <p>{t("total")}</p>
+        </div>
+      </Box.Content>
+    </Box>
   )
 }

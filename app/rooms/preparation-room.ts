@@ -7,7 +7,7 @@ import {
   Room
 } from "colyseus"
 import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/lib/auth/user-record"
+import type { UserRecord } from "firebase-admin/auth"
 import { MAX_PLAYERS_PER_GAME } from "../config"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { type IPreparationMetadata, Role, Transfer } from "../types"
@@ -30,6 +30,7 @@ import {
   OnRoomChangeSpecialRule,
   OnRoomNameCommand,
   OnRoomPasswordCommand,
+  OnSelectPartnerCommand,
   OnToggleReadyCommand,
   RemoveMessageCommand
 } from "./commands/preparation-commands"
@@ -50,6 +51,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   async setName(name: string) {
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       name: name.slice(0, 30),
       type: "preparation"
     })
@@ -58,6 +60,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   async setPassword(password: string | null) {
     const hasPassword = password && password.trim().length > 0
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       passwordProtected: hasPassword,
       type: "preparation"
     })
@@ -65,18 +68,22 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   }
 
   async setNoElo(noElo: boolean) {
-    await this.setMetadata(<IPreparationMetadata>{ noElo })
+    await this.setMetadata(<IPreparationMetadata>{ ...this.metadata, noElo })
   }
 
   async setMinMaxRanks(minRank: EloRank, maxRank: EloRank) {
     await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       minRank: minRank,
       maxRank: maxRank
     })
   }
 
   async setGameStarted(gameStartedAt: string) {
-    await this.setMetadata(<IPreparationMetadata>{ gameStartedAt })
+    await this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
+      gameStartedAt
+    })
   }
 
   onCreate(options: {
@@ -104,6 +111,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     this.state = new PreparationState(options)
     this.setPassword(options.password ?? null)
     this.setMetadata(<IPreparationMetadata>{
+      ...this.metadata,
       name: options.roomName.slice(0, 30),
       ownerName: options.gameMode === GameMode.CLASSIC ? null : options.ownerId,
       minRank: options.minRank ?? null,
@@ -281,6 +289,17 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
       }
     })
 
+    this.onMessage(Transfer.SELECT_PARTNER, (client, partnerId: string) => {
+      try {
+        this.dispatcher.dispatch(new OnSelectPartnerCommand(), {
+          client,
+          partnerId
+        })
+      } catch (error) {
+        logger.error(error)
+      }
+    })
+
     this.onMessage(Transfer.NEW_MESSAGE, (client, message) => {
       logger.info(Transfer.NEW_MESSAGE, this.roomName)
       try {
@@ -350,6 +369,8 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
       const token = await admin.auth().verifyIdToken(options.idToken)
       const user = await admin.auth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
+        .select({ role: 1, banned: 1 })
+        .lean()
       const isAdmin = userProfile?.role === Role.ADMIN
 
       // Check password protection - room owner, admins and moderators bypass password protection
@@ -407,7 +428,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
   ) {
     if (auth) {
       /*logger.info(
-        `${auth.displayName} ${client.id} join preparation room`
+        `${auth.displayName} ${client.sessionId} join preparation room`
       )*/
       await this.dispatcher.dispatch(new OnJoinCommand(), {
         client,
@@ -421,7 +442,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     try {
       /*if (client.auth && client.auth.displayName) {
         logger.info(
-          `${client.auth.displayName} ${client.id} is leaving preparation room`
+          `${client.auth.displayName} ${client.sessionId} is leaving preparation room`
         )
       }*/
       this.state.abortOnPlayerLeave?.abort()
@@ -438,7 +459,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
     const consented = code === CloseCode.CONSENTED
     /*if (client.auth && client.auth.displayName) {
         logger.info(
-          `${client.auth.displayName} ${client.id} leave preparation room`
+          `${client.auth.displayName} ${client.sessionId} leave preparation room`
         )
       }*/
     if (this.state.gameStartedAt === null) {
@@ -485,6 +506,7 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   updatePlayersInfo() {
     this.setMetadata({
+      ...this.metadata,
       playersInfo: [...this.state.users.values()].map(
         (u) => `${u.name} [${u.elo}]`
       )

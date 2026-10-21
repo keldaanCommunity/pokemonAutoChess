@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { MAX_LEVEL } from "../../../../../config"
 import { getLevelUpCost } from "../../../../../models/colyseus-models/experience-manager"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { levelClick } from "../../../network"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { Money } from "../icons/money"
+import GameRarityPercentage from "./game-rarity-percentage"
 
 export default function GameExperience() {
   const { t } = useTranslation()
@@ -13,7 +13,7 @@ export default function GameExperience() {
   const experienceManager = useAppSelector(
     (state) => state.game.experienceManager
   )
-  const isLevelMax = experienceManager.level >= MAX_LEVEL
+  const isLevelMax = experienceManager.level >= experienceManager.maxLevel
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
   const levelUpCost = getLevelUpCost(specialGameRule)
   const goldToLevelUp = isLevelMax
@@ -28,17 +28,18 @@ export default function GameExperience() {
 
   return (
     <div className="game-experience">
+      <GameRarityPercentage />
       <span>
         {t("lvl")} {experienceManager.level}
       </span>
       <button
         className="bubbly orange buy-xp-button"
-        title={t("buy_xp_tooltip", { cost: levelUpCost })}
+        title={t("shop.buy_xp_tooltip", { cost: levelUpCost })}
         onClick={() => {
           levelClick()
         }}
       >
-        <Money value={t("buy_xp", { cost: levelUpCost })} />
+        <Money value={t("shop.buy_xp", { cost: levelUpCost })} />
       </button>
       <div className="progress-bar" data-tooltip-id="gold-to-levelup-tooltip">
         <progress
@@ -59,10 +60,10 @@ export default function GameExperience() {
       >
         <p className="help">
           {isLevelMax ? (
-            t("max_level_reached")
+            t("shop.max_level_reached")
           ) : (
             <>
-              {t("gold_needed_to_level_up")}
+              {t("shop.gold_needed_to_level_up")}
               <b
                 style={{
                   color: canLevelup
@@ -72,7 +73,7 @@ export default function GameExperience() {
               >
                 {addIconsToDescription(`${goldToLevelUp} GOLD`)}
               </b>
-              ({t("clicks", { count: goldToLevelUp! / levelUpCost })})
+              ({t("shop.clicks", { count: goldToLevelUp! / levelUpCost })})
             </>
           )}
         </p>

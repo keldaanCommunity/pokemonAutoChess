@@ -3,7 +3,7 @@ import { connect } from "mongoose"
 import { BotV2 } from "../../app/models/mongo-models/bot-v2"
 import DetailledStatistic from "../../app/models/mongo-models/detailled-statistic-v2"
 import Meta from "../../app/models/mongo-models/meta"
-import { Pkm } from "../../app/types/enum/Pokemon"
+import type { Pkm } from "../../app/types/enum/Pokemon"
 import { logger } from "../../app/utils/logger"
 
 async function main() {
