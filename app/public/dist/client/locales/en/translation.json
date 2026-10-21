@@ -5326,7 +5326,7 @@
 			"region_hint2": "You can travel to a different region by taking a portal at stages 0, 10 and 20. The portal symbols will influence the destination."
 		},
 		"atlas": {
-			"atlas_hint": "The Atlas is unlocked at stage 20 when player is given the Connection Orb. It allows you to use EMERA to unlock great rewards and call upon Pokémon from Treasure Town to help you. Each node in the atlas is activated by sealing one EMERA. After stage 20, one EMERA is given after every fight. Some special effects can also help you to obtain EMERA."
+			"atlas_hint": "The Atlas is unlocked at stage 20 when player is given the Connection Orb. It allows you to use EMERA to unlock great rewards and call upon Pokémon from Treasure Town to help you. Each node in the atlas is activated by sealing one EMERA. After stage 20, one EMERA is given after every PvP fight."
 		},
 		"status": {
 			"statuses": "Statuses",

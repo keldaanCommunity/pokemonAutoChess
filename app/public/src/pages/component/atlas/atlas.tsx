@@ -265,7 +265,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
         className="custom-theme-tooltip"
         float
         render={({ content }) => (
-          <AtlasNodeDetail nodeId={content as AtlasNodeId} />
+          <AtlasNodeDetail nodeId={content as AtlasNodeId} origin={origin} />
         )}
       />
     </div>
@@ -459,7 +459,13 @@ function Node({
   )
 }
 
-function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
+function AtlasNodeDetail({
+  nodeId,
+  origin
+}: {
+  nodeId: AtlasNodeId
+  origin?: "game" | "wiki"
+}) {
   const { t } = useTranslation()
   const node = AtlasTree.nodes[nodeId]
   const legendaries = useAppSelector(
@@ -471,7 +477,7 @@ function AtlasNodeDetail({ nodeId }: { nodeId: AtlasNodeId }) {
     return <ItemDetailTooltipContent item={node.item} />
   }
 
-  if (isLegendaryNode(node)) {
+  if (isLegendaryNode(node) && origin === "game") {
     const index = Number(nodeId.at(-1)) - 1
     const pokemon = legendaries[index]
 
