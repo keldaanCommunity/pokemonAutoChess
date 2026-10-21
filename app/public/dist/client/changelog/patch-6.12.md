@@ -91,3 +91,4 @@
 - New title: Bestie. Finish first on Poképals leaderboard with your pal at the end of the event.
 - Synergy meta report is now public
 - Add FPS limiter option to settings
+- Added Turkish translation (thanks to badblli)
