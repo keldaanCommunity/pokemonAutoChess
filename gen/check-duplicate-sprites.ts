@@ -33,38 +33,43 @@ const crossGroup = duplicates.filter(
   (files) => new Set(files.map(groupOf)).size > 1
 )
 
-console.log(`Scanned ${total} sprites in ${ROOT}`)
+console.log(`Scanned ${total} PNG files in ${ROOT}`)
 
-if (duplicates.length === 0) {
-  console.log("No duplicate sprites found")
+if (crossGroup.length === 0) {
+  console.log("No shared PNGs found across ability folders.")
 } else {
-  // summarize which folders (abilities) share identical images
-  const pairs = new Map<string, number>()
+  const groupsByFolders = new Map<string, string[][]>()
   for (const files of crossGroup) {
     const key = [...new Set(files.map(groupOf))].sort().join(" <-> ")
-    pairs.set(key, (pairs.get(key) ?? 0) + 1)
+    const groups = groupsByFolders.get(key)
+    if (groups) groups.push(files)
+    else groupsByFolders.set(key, [files])
   }
-  if (pairs.size > 0) {
-    console.warn(
-      `\n⚠ WARNING: ${crossGroup.length} identical sprite(s) shared between different folders:`
-    )
-    for (const [key, count] of [...pairs].sort((a, b) => b[1] - a[1])) {
-      console.warn(`  ${key}: ${count} shared sprite(s)`)
-    }
-    console.warn("\nDetails:")
-    for (const files of crossGroup) console.warn(`  - ${files.join(", ")}`)
-  }
-  const intra = duplicates.length - crossGroup.length
-  if (intra > 0) {
-    console.warn(
-      `\n⚠ WARNING: ${intra} group(s) of identical sprites inside a single folder:`
-    )
-    for (const files of duplicates.filter(
-      (f) => new Set(f.map(groupOf)).size === 1
-    ))
-      console.warn(`  - ${files.join(", ")}`)
-  }
-  console.warn(
-    `\n⚠ ${duplicates.length} duplicate group(s) found in total, consider reusing the same sprite`
+
+  const sortedGroups = [...groupsByFolders.entries()].sort(
+    ([firstKey, firstGroups], [secondKey, secondGroups]) =>
+      secondGroups.length - firstGroups.length || firstKey.localeCompare(secondKey)
   )
+  console.log(
+    `\nFound ${crossGroup.length} shared PNG groups across ${sortedGroups.length} ability-folder combinations:`
+  )
+  for (const [folders, groups] of sortedGroups) {
+    console.log(`\n${folders} (${groups.length})`)
+    for (const files of groups.sort((first, second) =>
+      first.join(" ").localeCompare(second.join(" "))
+    )) {
+      const sortedFiles = [...files].sort()
+      let line = `  ${sortedFiles[0]}`
+      for (const file of sortedFiles.slice(1)) {
+        const next = ` = ${file}`
+        if (line.length + next.length > 100) {
+          console.log(line)
+          line = `    = ${file}`
+        } else {
+          line += next
+        }
+      }
+      console.log(line)
+    }
+  }
 }
