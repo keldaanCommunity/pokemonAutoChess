@@ -48,7 +48,8 @@ if (crossGroup.length === 0) {
 
   const sortedGroups = [...groupsByFolders.entries()].sort(
     ([firstKey, firstGroups], [secondKey, secondGroups]) =>
-      secondGroups.length - firstGroups.length || firstKey.localeCompare(secondKey)
+      secondGroups.length - firstGroups.length ||
+      firstKey.localeCompare(secondKey)
   )
   console.log(
     `\nFound ${crossGroup.length} shared PNG groups across ${sortedGroups.length} ability-folder combinations:`
