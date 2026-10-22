@@ -1013,10 +1013,10 @@ export const AbilitiesAnimations: {
         const circle = new Phaser.Geom.Circle(x, y, 48)
         for (let i = 0; i < petalCount; i++) {
           const petalSprite = scene.add
-            .sprite(0, 0, "abilities", `PETAL_DANCE_PROJECTILE/000.png`)
+            .sprite(0, 0, "abilities", `FLOWER_TRICK/000.png`)
             ?.setScale(2 * (1 + ap / 200))
           petalSprite.anims.play({
-            key: "PETAL_DANCE_PROJECTILE",
+            key: "FLOWER_TRICK",
             frameRate: 8
           })
           petalGroup.add(petalSprite)
@@ -1046,6 +1046,7 @@ export const AbilitiesAnimations: {
     }
   ],
   ["PETAL_DANCE_PROJECTILE"]: projectile({
+    ability: "FLOWER_TRICK",
     projectileSpeed: 10,
     hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 })
   }),
