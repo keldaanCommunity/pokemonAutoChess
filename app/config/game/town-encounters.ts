@@ -39,19 +39,20 @@ export const TownEncountersByStage: {
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
+    [Pkm.OMANYTE]: 1 / 20,
     [Pkm.CELEBI]: 1 / 40
   },
   17: {
     [Pkm.WOBBUFFET]: 1 / 20,
     [Pkm.CROAGUNK]: 1 / 20,
     [Pkm.ELECTIVIRE]: 1 / 20,
-    [Pkm.XATU]: 1 / 20,
     [Pkm.MAROWAK]: 1 / 20,
     [Pkm.SABLEYE]: 1 / 20,
     [Pkm.MAKUHITA]: 1 / 20,
     [Pkm.LAPRAS]: 1 / 20,
     [Pkm.CHIMECHO]: 1 / 20,
-    [Pkm.GROVYLE]: 1 / 20
+    [Pkm.GROVYLE]: 1 / 20,
+    [Pkm.DUSKNOIR]: 1 / 20
   },
   22: {
     [Pkm.KECLEON]: 1 / 20,

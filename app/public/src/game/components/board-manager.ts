@@ -9,6 +9,7 @@ import {
   PortalCarouselStages,
   RegionDetails
 } from "../../../../config"
+import { AtlasTree } from "../../../../config/game/atlas"
 import { getMusicAlt } from "../../../../config/game/music"
 import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
 import {
@@ -43,7 +44,10 @@ import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
-import { TownEncounters } from "../../../../types/enum/TownEncounter"
+import {
+  type TownEncounter,
+  TownEncounters
+} from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
@@ -67,7 +71,7 @@ import type GameScene from "../scenes/game-scene"
 import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonAvatar from "./pokemon-avatar"
-import PokemonSpecial from "./pokemon-special"
+import PokemonNPC from "./pokemon-npc"
 import PokemonSprite from "./pokemon-sprite"
 import { Portal } from "./portal"
 import { TradingPlatform } from "./trading-platform"
@@ -105,6 +109,7 @@ export default class BoardManager {
   trainingRack: Phaser.GameObjects.Sprite | null = null
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
+  npcs: PokemonSprite[] = []
   specialGameRule: SpecialGameRule | null = null
   tradingPlatform: TradingPlatform | null = null
 
@@ -271,6 +276,11 @@ export default class BoardManager {
         this.smeargle = null
       }
       this.addSmeargle(this.specialGameRule)
+    }
+
+    if (this.gameMode !== GameMode.DOUBLE_UP) {
+      // we take the npc space for the trading platform in double up
+      this.updateNpcs()
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
@@ -542,6 +552,11 @@ export default class BoardManager {
     this.tradingPlatform = null
   }
 
+  removeNPCs() {
+    this.npcs.forEach((npc) => npc.destroy())
+    this.npcs = []
+  }
+
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
       fontSize: "24px",
@@ -754,6 +769,16 @@ export default class BoardManager {
     })
   }
 
+  updateNpcs() {
+    this.removeNPCs()
+    this.player.atlasManager.unlockedNodes.forEach((nodeId) => {
+      const node = AtlasTree.nodes[nodeId]
+      if (node.type === "encounter") {
+        this.addAtlasEncounter(node.encounter)
+      }
+    })
+  }
+
   updateAvatarLife(playerId: string, value: number) {
     if (
       this.playerAvatar &&
@@ -835,6 +860,7 @@ export default class BoardManager {
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+    this.updateNpcs()
   }
 
   minigameMode() {
@@ -864,6 +890,7 @@ export default class BoardManager {
     this.hideGroundHoles()
     this.hideTrainingBag()
     this.hideTradingPlatform()
+    this.removeNPCs()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -1209,7 +1236,7 @@ export default class BoardManager {
   }
 
   addSmeargle(specialGameRule: SpecialGameRule) {
-    this.smeargle = new PokemonSpecial({
+    this.smeargle = new PokemonNPC({
       scene: this.scene,
       x: 1512,
       y: 396,
@@ -1218,6 +1245,21 @@ export default class BoardManager {
       dialog: t(`scribble_description.${specialGameRule}`),
       dialogTitle: t(`scribble.${specialGameRule}`)
     })
+  }
+
+  addAtlasEncounter(encounter: TownEncounter) {
+    const x = 30 + Math.floor(this.npcs.length / 3)
+    const y = 16 + (this.npcs.length % 3)
+    this.npcs.push(
+      new PokemonNPC({
+        scene: this.scene,
+        x: x * 48,
+        y: y * 48,
+        name: encounter,
+        orientation: Orientation.UPLEFT,
+        dialog: t(`atlas.encounter_dialog.${encounter}`)
+      })
+    )
   }
 
   addPvePokemons(pveStage: PVEStage, immediately: boolean) {

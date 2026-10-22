@@ -290,10 +290,10 @@ const nodes = {
     position: rotToXY(300, 45 * D)
   },
 
-  chatot: {
+  loudred: {
     type: "encounter",
     position: rotToXY(330, 36 * D),
-    encounter: TownEncounters.CHATOT
+    encounter: TownEncounters.LOUDRED
   },
   atlas_item12: {
     type: "item",
@@ -402,9 +402,9 @@ const connections = [
   { from: "cinccino", to: "magnezone" },
   { from: "magnezone", to: "atlas_item11" },
 
-  { from: "cinccino", to: "chatot" },
-  { from: "chimecho", to: "chatot" },
-  { from: "chatot", to: "atlas_item12" }
+  { from: "cinccino", to: "loudred" },
+  { from: "chimecho", to: "loudred" },
+  { from: "loudred", to: "atlas_item12" }
 ] satisfies { from: keyof typeof nodes; to: keyof typeof nodes }[]
 
 export const AtlasTree = {

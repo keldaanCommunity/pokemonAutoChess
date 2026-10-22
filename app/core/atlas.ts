@@ -210,7 +210,10 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
   },
 
   dusknoir: (player) => {
-    player.atlasManager.unlockedNodes = new SetSchema<AtlasNodeId>(["dusknoir"])
+    player.atlasManager.unlockedNodes = new SetSchema<AtlasNodeId>([
+      "root",
+      "dusknoir"
+    ])
   },
 
   azurill: (player) => {
@@ -221,7 +224,7 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     // handled in simulation applyPostEffects
   },
 
-  chatot: (player) => {
+  loudred: (player) => {
     // handled in simulation applyPostEffects
   },
 

@@ -969,6 +969,9 @@ export default function Game() {
                   )
                 })
               })
+              $atlasManager.unlockedNodes.onChange(() => {
+                gameContainer.gameScene?.board?.updateNpcs()
+              })
 
               $atlasManager.listen("emera", (value, previousValue) => {
                 if (value > 0 && value > previousValue) {

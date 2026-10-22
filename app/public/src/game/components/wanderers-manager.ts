@@ -18,8 +18,8 @@ import { chance } from "../../../../utils/random"
 import { DEPTH } from "../depths"
 import { isReplayRoom } from "../replay-room-id"
 import type GameScene from "../scenes/game-scene"
+import PokemonNPC from "./pokemon-npc"
 import PokemonSprite from "./pokemon-sprite"
-import PokemonSpecial from "./pokemon-special"
 
 const DEFAULT_WANDERER_SPEED = 0.25
 
@@ -125,7 +125,7 @@ export default class WanderersManager {
   }
 
   addDialogWanderer(wanderer: Wanderer) {
-    const sprite = new PokemonSpecial({
+    const sprite = new PokemonNPC({
       scene: this.scene,
       x: -100,
       y: 350,

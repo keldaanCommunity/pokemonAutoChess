@@ -7,7 +7,7 @@ import type GameScene from "../scenes/game-scene"
 import { GameDialog } from "./game-dialog"
 import PokemonSprite from "./pokemon-sprite"
 
-export default class PokemonSpecial extends PokemonSprite {
+export default class PokemonNPC extends PokemonSprite {
   detail: GameDialog | null = null
   scene: GameScene
   dialog?: string
