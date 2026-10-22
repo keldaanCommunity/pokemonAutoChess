@@ -2585,7 +2585,11 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_QM]: hiddenPowerAnimation,
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
   [Ability.ICY_WIND]: projectile({ duration: 2000, distance: 12 }),
-  [Ability.POWDER_SNOW]: projectile({ duration: 1600, distance: 12 }),
+  [Ability.POWDER_SNOW]: projectile({
+    ability: Ability.SHEER_COLD,
+    duration: 1600,
+    distance: 12
+  }),
   [Ability.EERIE_SPELL]: projectile({
     duration: 400,
     ability: Ability.FISSURE,
