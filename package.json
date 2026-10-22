@@ -49,6 +49,7 @@
     "assetpack": "cd edit/assetpack && npm run assetpack",
     "postassetpack": "cd gen && tsx check-duplicate-sprites.ts",
     "check-duplicate-sprites": "cd gen && tsx check-duplicate-sprites.ts",
+    "check-folder-sprites": "cd gen && tsx check-folder-sprites.ts",
     "csv-export": "cd gen && tsx csv-export.ts",
     "check-labels": "cd gen && tsx check-labels.ts",
     "add-pokemon": "cd edit && tsx add-pokemon.ts",
