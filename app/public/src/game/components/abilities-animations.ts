@@ -1615,7 +1615,10 @@ export const AbilitiesAnimations: {
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),
   [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
-  [Ability.SONG_OF_DESIRE]: onTarget({ positionOffset: [0, -60] }),
+  [Ability.SONG_OF_DESIRE]: onTarget({
+    positionOffset: [0, -60],
+    ability: Ability.ATTRACT
+  }),
   [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.FIRE_LASH]: onCaster({
