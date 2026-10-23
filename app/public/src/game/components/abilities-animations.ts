@@ -1147,7 +1147,7 @@ export const AbilitiesAnimations: {
   [Ability.SOAK]: onTargetScale2,
   [Ability.IRON_TAIL]: onTargetScale2,
   [Ability.ICICLE_CRASH]: onTargetScale2,
-  [Ability.DRAIN_PUNCH]: onTargetScale2,
+  [Ability.DRAIN_PUNCH]: onTarget({ ability: Ability.FOCUS_PUNCH, scale: 2 }),
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
@@ -1615,7 +1615,10 @@ export const AbilitiesAnimations: {
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),
   [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
-  [Ability.SONG_OF_DESIRE]: onTarget({ positionOffset: [0, -60] }),
+  [Ability.SONG_OF_DESIRE]: onTarget({
+    positionOffset: [0, -60],
+    ability: Ability.ATTRACT
+  }),
   [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.FIRE_LASH]: onCaster({
@@ -1697,7 +1700,10 @@ export const AbilitiesAnimations: {
         scale: 4
       }
     ),
-  [Ability.PETAL_BLIZZARD]: onCasterScale3,
+  [Ability.PETAL_BLIZZARD]: onCaster({
+    scale: 3,
+    ability: Ability.AROMATHERAPY
+  }),
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
@@ -1885,7 +1891,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
   [Ability.WONDER_ROOM]: onTargetScale4,
-  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.DRAIN_PUNCH }),
+  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.FOCUS_PUNCH }),
   [Ability.FOCUS_PUNCH]: onTargetScale2,
   ["FOCUS_PUNCH_CHARGE"]: onCaster({
     ability: "HYPER_BEAM_CHARGE",
@@ -2206,6 +2212,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2
     })(args),
   [Ability.DRAGON_DARTS]: projectile({
+    ability: Ability.VENOSHOCK,
     scale: 1,
     oriented: true,
     positionOffset: [0, -30],
