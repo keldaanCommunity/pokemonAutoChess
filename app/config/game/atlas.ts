@@ -2,7 +2,7 @@ import type { AtlasNode, TAtlasTree } from "../../types/atlas"
 import { Item } from "../../types/enum/Item"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 
-export const STAGE_ATLAS_UNLOCKED = 0 //TEMP 20
+export const STAGE_ATLAS_UNLOCKED = 20
 
 const D = 19 // distance factor
 

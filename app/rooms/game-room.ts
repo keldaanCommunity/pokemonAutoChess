@@ -92,6 +92,7 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
+import { TownEncounters } from "../types/enum/TownEncounter"
 import { TradeStatus } from "../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
@@ -131,6 +132,7 @@ import {
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
   OnUpdateCommand,
+  OnUpdatePhaseCommand,
   OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
@@ -748,7 +750,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
     this.state.botManager.updateBots()
-    this.miniGame.initialize(this.state, this)
+    this.dispatcher.dispatch(new OnUpdatePhaseCommand())
   }
 
   async onAuth(client: Client, options, context) {
@@ -1492,6 +1494,16 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
       if (choice.type === "starter") {
         player.firstPartner = pokemonsObtained[0].name
+        if (
+          this.state.townEncounter === TownEncounters.AZURILL &&
+          pokemonsObtained[0].evolution
+        ) {
+          const evolution = PokemonFactory.createPokemonFromName(
+            pokemonsObtained[0].evolution,
+            player
+          )
+          this.givePokemons([evolution], player, true)
+        }
       }
 
       this.givePokemons(pokemonsObtained, player, sellIfNoSpace)

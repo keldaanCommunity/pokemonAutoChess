@@ -26,7 +26,7 @@ This special synergy is only given through special items and Pokémon. Its effec
 
 # Town
 
-- New town encounter at stage 17: Grovyle. Grovyle stole the Time Gears ! The next two stages are skipped.
+- New town encounters at stage 0: Azurill, Bidoof, Loudred
 
 # UI
 

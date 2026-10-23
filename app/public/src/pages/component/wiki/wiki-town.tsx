@@ -6,13 +6,19 @@ import {
 import { PkmIndex } from "../../../../../types/enum/Pokemon"
 import {
   type TownEncounter,
-  TownEncounters
+  TownEncountersList
 } from "../../../../../types/enum/TownEncounter"
 import { addIconsToDescription } from "../../utils/descriptions"
 import PokemonPortrait from "../pokemon-portrait"
 
 export default function WikiTown() {
   const { t } = useTranslation()
+  const stagesOf = (encounter: TownEncounter) =>
+    Object.keys(TownEncountersByStage).filter(
+      (s) => encounter in TownEncountersByStage[s]
+    )
+  const minStageOf = (encounter: TownEncounter) =>
+    Math.min(...stagesOf(encounter).map(Number))
   return (
     <div id="wiki-town">
       <div className="my-box" style={{ marginBottom: "0.5em" }}>
@@ -20,7 +26,11 @@ export default function WikiTown() {
         <p>{t("wiki.town.town_encounters_hint2")}</p>
       </div>
       <ul>
-        {Object.values(TownEncounters).map((encounter: TownEncounter) => (
+        {TownEncountersList.sort((a, b) =>
+          minStageOf(a) === minStageOf(b)
+            ? stagesOf(a).length - stagesOf(b).length
+            : minStageOf(a) - minStageOf(b)
+        ).map((encounter: TownEncounter) => (
           <li key={encounter} className="my-box">
             <header>
               <h2>

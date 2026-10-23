@@ -1,3 +1,4 @@
+import { keys } from "../../utils/object";
 import { Pkm } from "./Pokemon"
 
 export const TownEncounters = {
@@ -34,3 +35,4 @@ export const TownEncounters = {
 } as const
 
 export type TownEncounter = (typeof TownEncounters)[keyof typeof TownEncounters]
+export const TownEncountersList = keys(TownEncounters)

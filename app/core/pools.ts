@@ -7,7 +7,6 @@ import {
   PkmAltFormsByPkm,
   UniquePool
 } from "../config"
-import { STARTER_RARITY_WEIGHTS } from "../config/game/game"
 import { NB_LEGENDARY_PROPOSITIONS } from "../config/game/pokemons"
 import { LegendaryPool } from "../config/game/pools"
 import type Player from "../models/colyseus-models/player"
@@ -28,13 +27,9 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
+import { TownEncounters } from "../types/enum/TownEncounter"
 import { removeFromArray } from "../utils/array"
-import {
-  chance,
-  pickNRandomIn,
-  pickRandomIn,
-  randomWeighted
-} from "../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
 import { getAltFormForPlayer } from "./alt-form-logic"
 import { pickFirstPartners } from "./scribbles"
 
@@ -94,7 +89,12 @@ export function assignStarters(
   state: GameState,
   portalSynergies: Synergy[]
 ) {
-  const starterRarity = randomWeighted(STARTER_RARITY_WEIGHTS) ?? Rarity.COMMON
+  let starterRarity = Rarity.COMMON
+  if (state.townEncounter === TownEncounters.BIDOOF) {
+    starterRarity = Rarity.UNCOMMON
+  } else if (state.townEncounter === TownEncounters.LOUDRED) {
+    starterRarity = Rarity.RARE
+  }
   const starterPool = state.shop.getPool(starterRarity) ?? state.shop.commonPool
   let allCandidates: PkmProposition[] = [...starterPool]
   //TODO: pick uncommon and rare sometimes

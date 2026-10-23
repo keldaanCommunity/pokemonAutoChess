@@ -1,7 +1,8 @@
 import type { MapSchema } from "@colyseus/schema"
 import { t } from "i18next"
 import Phaser from "phaser"
-import { TownEncounterSellPrice } from "../../../../config"
+import { NpcsConfig, TownEncounterSellPrice } from "../../../../config"
+import type { NPC } from "../../../../config/game/town-encounters"
 import type { FloatingItem } from "../../../../models/colyseus-models/floating-item"
 import type { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
 import type {
@@ -10,7 +11,6 @@ import type {
 } from "../../../../models/colyseus-models/portal"
 import type GameState from "../../../../rooms/states/game-state"
 import {
-  Emotion,
   type IFloatingItem,
   type IPokemonAvatar,
   type IPortal,
@@ -23,7 +23,8 @@ import { Pkm } from "../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import {
   type TownEncounter,
-  TownEncounters
+  TownEncounters,
+  TownEncountersList
 } from "../../../../types/enum/TownEncounter"
 import type { ILeaderboardInfo } from "../../../../types/interfaces/LeaderboardInfo"
 import type { NpcDialog } from "../../../../types/strings/NpcDialog"
@@ -387,368 +388,59 @@ export default class MinigameManager {
   addVillagers(encounter: TownEncounter | null, podium: ILeaderboardInfo[]) {
     const cx = 980,
       cy = 404
-    const kecleon = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? cx - 24 : 34 * 48,
-      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
-      name: Pkm.KECLEON
-    })
-    const kecleonShiny = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.KECLEON ? cx + 24 : 35 * 48,
-      y: encounter === TownEncounters.KECLEON ? cy : 5 * 48 + 4,
-      name: Pkm.KECLEON,
-      shiny: true
-    })
 
-    const electivire = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.ELECTIVIRE ? cx : 6.5 * 48,
-      y: encounter === TownEncounters.ELECTIVIRE ? cy : 7.5 * 48,
-      name: Pkm.ELECTIVIRE
-    })
+    let npcs: NPC[]
 
-    const chansey = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.CHANSEY ? cx : 2.5 * 48,
-      y: encounter === TownEncounters.CHANSEY ? cy : 12 * 48,
-      name: Pkm.CHANSEY
-    })
-
-    const kangaskhan = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.KANGASKHAN ? cx : 41 * 48,
-      y: encounter === TownEncounters.KANGASKHAN ? cy : 6 * 48,
-      name: Pkm.KANGASKHAN
-    })
-
-    const xatu = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.XATU ? cx : 6 * 48,
-      y: encounter === TownEncounters.XATU ? cy : 21 * 48,
-      name: Pkm.XATU
-    })
-
-    const duskull = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.DUSKULL ? cx : 18 * 48,
-      y: encounter === TownEncounters.DUSKULL ? cy : 21.5 * 48,
-      name: Pkm.DUSKULL
-    })
-
-    const meowth = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.MEOWTH ? cx : 35 * 48,
-      y: encounter === TownEncounters.MEOWTH ? cy : 10 * 48,
-      name: Pkm.MEOWTH
-    })
-
-    const regirock = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.REGIROCK ? cx : 24 * 48,
-      y: encounter === TownEncounters.REGIROCK ? cy : 22 * 48,
-      name: Pkm.REGIROCK,
-      dialog: t("thanks_for_playing"),
-      dialogTitle: "Keldaan",
-      emotion: Emotion.HAPPY
-    })
-
-    const marowak = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.MAROWAK ? cx : 41 * 48,
-      y: encounter === TownEncounters.MAROWAK ? cy : 12 * 48,
-      name: Pkm.MAROWAK
-    })
-
-    const celebi = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.CELEBI ? cx : 33 * 48,
-      y: encounter === TownEncounters.CELEBI ? cy : 23 * 48,
-      name: Pkm.CELEBI,
-      shiny: true,
-      orientation: Orientation.DOWNLEFT
-    })
-
-    const wobbuffet = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.WOBBUFFET ? cx + 24 : 44.5 * 48,
-      y: encounter === TownEncounters.WOBBUFFET ? cy : 18 * 48,
-      name: Pkm.WOBBUFFET
-    })
-
-    const wynaut = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.WOBBUFFET ? cx - 24 : 43.5 * 48,
-      y: encounter === TownEncounters.WOBBUFFET ? cy : 18 * 48,
-      name: Pkm.WYNAUT
-    })
-
-    const spinda = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.SPINDA ? cx : 38 * 48,
-      y: encounter === TownEncounters.SPINDA ? cy : 18 * 48,
-      name: Pkm.SPINDA
-    })
-
-    const sableye = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.SABLEYE ? cx : 37.25 * 48,
-      y: encounter === TownEncounters.SABLEYE ? cy : 5 * 48,
-      orientation: Orientation.DOWNLEFT,
-      name: Pkm.SABLEYE
-    })
-
-    const mareep = new PokemonNPC({
-      scene: this.scene,
-      x: 46 * 48,
-      y: 2.5 * 48,
-      name: Pkm.MAREEP,
-      orientation: Orientation.DOWNLEFT,
-      animation: PokemonActionState.EAT,
-      dialog: t("thanks_for_playing"),
-      dialogTitle: "Curry",
-      emotion: Emotion.HAPPY
-    })
-
-    const munchlax = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.MUNCHLAX ? cx : 34 * 48,
-      y: encounter === TownEncounters.MUNCHLAX ? cy : 17 * 48,
-      name: Pkm.MUNCHLAX,
-      orientation: Orientation.DOWNLEFT,
-      animation:
-        encounter === TownEncounters.MUNCHLAX
-          ? PokemonActionState.EAT
-          : PokemonActionState.SLEEP
-    })
-
-    const makuhita = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.MAKUHITA ? cx : 36 * 48,
-      y: encounter === TownEncounters.MAKUHITA ? cy : 8.25 * 48,
-      name: Pkm.MAKUHITA
-    })
-
-    const croagunk = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.CROAGUNK ? cx : 11.5 * 48,
-      y: encounter === TownEncounters.CROAGUNK ? cy : 21.25 * 48,
-      name: Pkm.CROAGUNK
-    })
-
-    const wigglytuff = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.WIGGLYTUFF ? cx : 2 * 48,
-      y: encounter === TownEncounters.WIGGLYTUFF ? cy : 9 * 48,
-      name: Pkm.WIGGLYTUFF
-    })
-
-    const cincinno = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.CINCCINO ? cx : 18 * 48,
-      y: encounter === TownEncounters.CINCCINO ? cy : 23 * 48,
-      orientation:
-        encounter === TownEncounters.CINCCINO
-          ? Orientation.DOWN
-          : Orientation.UP,
-      name: Pkm.CINCCINO
-    })
-
-    const ludicolo = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.LUDICOLO ? cx : 13.5 * 48,
-      y: encounter === TownEncounters.LUDICOLO ? cy : 25.5 * 48,
-      orientation: Orientation.DOWN,
-      name: Pkm.LUDICOLO,
-      animation: PokemonActionState.ABILITY
-    })
-
-    const magnezone = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.MAGNEZONE ? cx : 41 * 48,
-      y: encounter === TownEncounters.MAGNEZONE ? cy : 15 * 48,
-      name: Pkm.MAGNEZONE
-    })
-
-    const kingambit = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.KINGAMBIT ? cx : 47.5 * 48,
-      y: encounter === TownEncounters.KINGAMBIT ? cy : 10.5 * 48,
-      name: Pkm.KINGAMBIT,
-      orientation:
-        encounter === TownEncounters.KINGAMBIT
-          ? Orientation.DOWN
-          : Orientation.RIGHT,
-      animation:
-        encounter === TownEncounters.KINGAMBIT
-          ? PokemonActionState.IDLE
-          : PokemonActionState.ATTACK
-    })
-
-    const lapras = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.LAPRAS ? cx : 0 * 48,
-      y: encounter === TownEncounters.LAPRAS ? cy : 3.75 * 48,
-      name: Pkm.LAPRAS,
-      animation:
-        encounter === TownEncounters.LAPRAS
-          ? PokemonActionState.IDLE
-          : PokemonActionState.WALK,
-      orientation:
-        encounter === TownEncounters.LAPRAS
-          ? Orientation.DOWN
-          : Orientation.RIGHT
-    })
-
-    const chimecho = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.CHIMECHO ? cx : 44.5 * 48,
-      y: encounter === TownEncounters.CHIMECHO ? cy : 7 * 48,
-      name: Pkm.CHIMECHO
-    })
-
-    const grovyle = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.GROVYLE ? cx : 48 * 48,
-      y: encounter === TownEncounters.GROVYLE ? cy : 25 * 48,
-      name: Pkm.GROVYLE,
-      orientation:
-        encounter === TownEncounters.GROVYLE
-          ? Orientation.DOWN
-          : Orientation.UPLEFT
-    })
-
-    const dusknoir = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.DUSKNOIR ? cx : 21 * 48,
-      y: encounter === TownEncounters.DUSKNOIR ? cy : 23 * 48,
-      name: Pkm.DUSKNOIR,
-      orientation:
-        encounter === TownEncounters.DUSKNOIR
-          ? Orientation.DOWN
-          : Orientation.DOWNRIGHT
-    })
-
-    const loudred = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.LOUDRED ? cx : 1 * 48,
-      y: encounter === TownEncounters.LOUDRED ? cy : 16 * 48,
-      name: Pkm.LOUDRED,
-      orientation:
-        encounter === TownEncounters.LOUDRED
-          ? Orientation.DOWN
-          : Orientation.DOWNRIGHT
-    })
-
-    const bidoof = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.BIDOOF ? cx : 1.5 * 48,
-      y: encounter === TownEncounters.BIDOOF ? cy : 17 * 48,
-      name: Pkm.BIDOOF,
-      orientation:
-        encounter === TownEncounters.BIDOOF ? Orientation.DOWN : Orientation.UP
-    })
-
-    const azurill = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.AZURILL ? cx - 24 : 37 * 48,
-      y: encounter === TownEncounters.AZURILL ? cy : 13 * 48,
-      name: Pkm.AZURILL,
-      orientation:
-        encounter === TownEncounters.AZURILL
-          ? Orientation.DOWN
-          : Orientation.RIGHT
-    })
-
-    const marill = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.AZURILL ? cx + 24 : 38 * 48,
-      y: encounter === TownEncounters.AZURILL ? cy : 13 * 48,
-      name: Pkm.MARILL,
-      orientation:
-        encounter === TownEncounters.AZURILL
-          ? Orientation.DOWN
-          : Orientation.DOWNLEFT
-    })
-
-    const ampharos = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.AMPHAROS ? cx : 2.5 * 48,
-      y: encounter === TownEncounters.AMPHAROS ? cy : 30.5 * 48,
-      name: Pkm.AMPHAROS,
-      orientation: Orientation.DOWN
-    })
-
-    const omanyte = new PokemonNPC({
-      scene: this.scene,
-      x: encounter === TownEncounters.OMANYTE ? cx : 40.5 * 48,
-      y: encounter === TownEncounters.OMANYTE ? cy : 26 * 48,
-      name: Pkm.OMANYTE,
-      orientation:
-        encounter === TownEncounters.OMANYTE
-          ? Orientation.DOWN
-          : Orientation.DOWNLEFT
-    })
-
-    if (encounter !== TownEncounters.LAPRAS) {
-      lapras.moveManager.setSpeed(15)
-      lapras.moveManager.moveTo(8 * 48, 4 * 48)
+    if (encounter === TownEncounters.AMPHAROS) {
+      npcs = [TownEncounters.AMPHAROS]
+    } else if (encounter === TownEncounters.DUSKNOIR) {
+      npcs = [TownEncounters.DUSKNOIR]
+    } else {
+      npcs = [...TownEncountersList, "mareep"]
+      const podiumPokemons = podium.map((p, rank) => {
+        const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
+        const champion = new PokemonNPC({
+          scene: this.scene,
+          x: 6.5 * 48 + [0, -64, +64][rank],
+          y: 12.5 * 48,
+          name,
+          shiny,
+          orientation: Orientation.DOWN,
+          animation: PokemonActionState.IDLE,
+          dialog: p.name,
+          dialogTitle: getRankLabel(rank + 1)
+        })
+        champion.sprite.setDepth(DEPTH.POKEMON + (2 - rank)) //ensure top 1 is on top
+        return champion
+      })
+      this.villagers.push(...podiumPokemons)
     }
 
-    const podiumPokemons = podium.map((p, rank) => {
-      const { name, shiny } = getPokemonCustomFromAvatar(p.avatar)
-      const champion = new PokemonNPC({
-        scene: this.scene,
-        x: 6.5 * 48 + [0, -64, +64][rank],
-        y: 12.5 * 48,
-        name,
-        shiny,
-        orientation: Orientation.DOWN,
-        animation: PokemonActionState.IDLE,
-        dialog: p.name,
-        dialogTitle: getRankLabel(rank + 1)
+    npcs.forEach((npc) => {
+      const isEncounter = encounter === npc
+      const npcsConfig = Array.isArray(NpcsConfig[npc])
+        ? NpcsConfig[npc]
+        : [NpcsConfig[npc]]
+      npcsConfig.forEach((config, i) => {
+        const npc = new PokemonNPC({
+          scene: this.scene,
+          x: isEncounter
+            ? cx + 48 * (i - (npcsConfig.length - 1) / 2)
+            : config.x,
+          y: isEncounter ? cy : config.y,
+          name: config.name,
+          orientation: isEncounter ? Orientation.DOWN : config.orientation,
+          animation:
+            typeof config.animation === "function"
+              ? config.animation(isEncounter)
+              : (config.animation ?? PokemonActionState.IDLE)
+        })
+        this.villagers.push(npc)
+        if (config.action && !isEncounter) {
+          config.action(npc)
+        }
       })
-      champion.sprite.setDepth(DEPTH.POKEMON + (2 - rank)) //ensure top 1 is on top
-      return champion
     })
-
-    this.villagers.push(
-      kecleon,
-      kecleonShiny,
-      electivire,
-      chansey,
-      kangaskhan,
-      xatu,
-      duskull,
-      regirock,
-      marowak,
-      celebi,
-      mareep,
-      wobbuffet,
-      wynaut,
-      spinda,
-      sableye,
-      munchlax,
-      meowth,
-      makuhita,
-      croagunk,
-      wigglytuff,
-      cincinno,
-      ludicolo,
-      magnezone,
-      kingambit,
-      lapras,
-      chimecho,
-      grovyle,
-      dusknoir,
-      loudred,
-      bidoof,
-      azurill,
-      marill,
-      ampharos,
-      omanyte,
-      ...podiumPokemons
-    )
 
     const specialGameRule = this.scene.room?.state?.specialGameRule
     if (encounter) {

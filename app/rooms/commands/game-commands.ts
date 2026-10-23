@@ -1329,7 +1329,9 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
-    if (this.state.phase == GamePhaseState.TOWN) {
+    if (this.state.phase === null) {
+      this.initializeTownPhase()
+    } else if (this.state.phase == GamePhaseState.TOWN) {
       this.stopTownPhase()
       /* Normally Stage level is bumped after a fighting phase, but since magikarp is round 1, we need to increase stage level from 0 -> 1 to avoid a PVP round 1. There is probably a better solution*/
       if (this.state.stageLevel === 0) {
@@ -1391,9 +1393,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       return true
     }
 
-    if(playersAlive.length <= 2){
-      playersAlive.forEach(player => {
-        if(player.items.includes(Item.MISSION_ORDER_BLACK)){
+    if (playersAlive.length <= 2) {
+      playersAlive.forEach((player) => {
+        if (player.items.includes(Item.MISSION_ORDER_BLACK)) {
           player.completeMissionOrder(Item.MISSION_ORDER_BLACK)
         }
       })

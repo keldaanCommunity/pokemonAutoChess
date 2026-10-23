@@ -10,7 +10,7 @@ import type { Synergy } from "../../types/enum/Synergy"
 import type Player from "./player"
 
 export default class AtlasManager extends Schema implements IAtlasManager {
-  @type("uint8") emera = 20 //TEMP 0
+  @type("uint8") emera = 0
   @type({ set: "string" }) unlockedNodes = new SetSchema<AtlasNodeId>(["root"])
   @type(["string"]) legendaries = new ArraySchema<PkmProposition>()
   @type(["string"]) symbols = new ArraySchema<Synergy>()

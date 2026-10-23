@@ -671,7 +671,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.rarity === Rarity.COMMON) ||
           (player?.atlasManager.unlockedNodes.has("bidoof") &&
             pokemon.rarity === Rarity.UNCOMMON) ||
-          (player?.atlasManager.unlockedNodes.has("chatot") &&
+          (player?.atlasManager.unlockedNodes.has("loudred") &&
             pokemon.rarity === Rarity.RARE)
         ) {
           pokemon.addMaxHP(30 * pokemon.stars, pokemon, 0, false)

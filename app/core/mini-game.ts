@@ -920,7 +920,6 @@ export class MiniGame {
           assignUniquePropositions(player, portalSynergies)
         } else {
           assignStarters(player, state, portalSynergies)
-          player.atlasManager.assignLegendaries(player, portalSynergies) // TEMP
         }
       }
 
