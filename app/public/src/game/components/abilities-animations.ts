@@ -1697,7 +1697,10 @@ export const AbilitiesAnimations: {
         scale: 4
       }
     ),
-  [Ability.PETAL_BLIZZARD]: onCasterScale3,
+  [Ability.PETAL_BLIZZARD]: onCaster({
+    scale: 3,
+    ability: Ability.AROMATHERAPY
+  }),
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
