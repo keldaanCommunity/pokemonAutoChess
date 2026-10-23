@@ -2212,6 +2212,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2
     })(args),
   [Ability.DRAGON_DARTS]: projectile({
+    ability: Ability.VENOSHOCK,
     scale: 1,
     oriented: true,
     positionOffset: [0, -30],
