@@ -23,6 +23,7 @@ export const SOUNDS = {
   FINISH8: "finish8.ogg",
   JOIN_ROOM: "joinroom.ogg",
   LEAVE_ROOM: "leaveroom.ogg",
+  LEGENDARY_REVEAL: "legendary_reveal.ogg",
   REFRESH: "refresh.ogg",
   SET_READY: "setready.ogg",
   START_GAME: "startgame.ogg"

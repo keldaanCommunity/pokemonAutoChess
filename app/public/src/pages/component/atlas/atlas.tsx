@@ -68,6 +68,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
       atlasVisible
     ) {
       setIsRevealed(true)
+      playSound(SOUNDS.LEGENDARY_REVEAL, 0.7)
     }
   }, [symbols, legendaries, isLegendariesRevealed, atlasVisible])
 

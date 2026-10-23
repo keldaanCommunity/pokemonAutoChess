@@ -148,7 +148,7 @@
 }
 
 #atlas-reveal {
-  --reveal-orbit-duration: 2000ms;
+  --reveal-orbit-duration: 2500ms;
   --reveal-orbit-spin: 180deg;
   pointer-events: none;
 }
@@ -171,7 +171,7 @@
 }
 
 .atlas-reveal-fly {
-  animation: atlas-reveal-fly 2000ms ease-in-out forwards;
+  animation: atlas-reveal-fly var(--reveal-orbit-duration) ease-in-out forwards;
 }
 
 .atlas-reveal-icon {
@@ -182,7 +182,7 @@
   transform-origin: center;
   animation:
     atlas-reveal-counter var(--reveal-orbit-duration) linear forwards,
-    atlas-reveal-icon 2000ms ease-in-out forwards;
+    atlas-reveal-icon var(--reveal-orbit-duration) ease-in-out forwards;
 }
 
 @keyframes atlas-reveal-counter {
@@ -238,7 +238,7 @@
 #atlas-container.has-legendaries.revealing
   .atlas-node.legendary
   .atlas-legendary-pokemon {
-  animation: atlas-legendary-appear 400ms 1900ms both;
+  animation: atlas-legendary-appear 400ms 2400ms both;
 }
 
 @keyframes atlas-legendary-appear {
