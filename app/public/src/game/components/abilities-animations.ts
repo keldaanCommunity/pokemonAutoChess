@@ -1147,7 +1147,7 @@ export const AbilitiesAnimations: {
   [Ability.SOAK]: onTargetScale2,
   [Ability.IRON_TAIL]: onTargetScale2,
   [Ability.ICICLE_CRASH]: onTargetScale2,
-  [Ability.DRAIN_PUNCH]: onTargetScale2,
+  [Ability.DRAIN_PUNCH]: onTarget({ ability: Ability.FOCUS_PUNCH, scale: 2 }),
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
@@ -1891,7 +1891,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
   [Ability.WONDER_ROOM]: onTargetScale4,
-  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.DRAIN_PUNCH }),
+  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.FOCUS_PUNCH }),
   [Ability.FOCUS_PUNCH]: onTargetScale2,
   ["FOCUS_PUNCH_CHARGE"]: onCaster({
     ability: "HYPER_BEAM_CHARGE",
