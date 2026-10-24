@@ -1,6 +1,7 @@
 import { SetSchema } from "@colyseus/schema"
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
+import type { AtlasNodeId } from "../../../config/game/atlas"
 import type Simulation from "../../../core/simulation"
 import AtlasManager from "../../../models/colyseus-models/atlas-manager"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
@@ -141,7 +142,7 @@ const gameSlice = createSlice({
 
       if (action.payload.board) clone.board = action.payload.board
       if (action.payload.atlasManager.unlockedNodes) {
-        clone.atlasManager.unlockedNodes = new SetSchema<string>(
+        clone.atlasManager.unlockedNodes = new SetSchema<AtlasNodeId>(
           schemaValues(clone.atlasManager.unlockedNodes)
         )
       }

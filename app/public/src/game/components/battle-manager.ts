@@ -4,7 +4,7 @@ import {
   BOARD_WIDTH,
   MaxTroopersPerPkm
 } from "../../../../config"
-import { getAttackTimings } from "../../../../core/attacking-state"
+import { getAttackTimings } from "../../../../core/attack-timings"
 import { getMoveSpeed } from "../../../../core/move-speed"
 import type Simulation from "../../../../core/simulation"
 import type Count from "../../../../models/colyseus-models/count"
