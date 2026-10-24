@@ -1057,11 +1057,9 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
       } else {
-        const repeatBallHolders = schemaValues(player.board).filter((p) =>
-          p.items.has(Item.REPEAT_BALL)
-        )
-        if (repeatBallHolders.length > 0)
-          player.shopFreeRolls += repeatBallHolders.length
+        const repeatBalls = schemaValues(player.items).filter((i) => i === Item.REPEAT_BALL)
+        if (repeatBalls.length > 0)
+          player.shopFreeRolls += repeatBalls.length
       }
       this.state.shop.assignShop(player, true, this.state)
     }

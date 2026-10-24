@@ -33,6 +33,7 @@ This special synergy is only given through special items and Pokémon. Its effec
 - There are now 10 different sorts of fossil stones. They all work the same as an item component, but now have a unique interaction with Ditto.
 - Exp Share is no longer a tool, but a special item given on shiny Stage 15 PvE encounter
 - Red Scale rework: no longer gives money, now holdable, gives +100 max HP, 10 ATK, 50 AP, 10 DEF and 10 SPE_DEF (previous stats of Eviolite)
+- Repeat Ball is now unholdable and no longer gives SHIELD and SPEED. Unique Pokémon are more frequent in shops and can be found even after Legendaries are found.
 
 # Gameplay
 

@@ -1015,27 +1015,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.REPEAT_BALL]: [
-    new OnItemGainedEffect((pokemon) => {
-      const repeatBallValue = Math.floor(
-        ((pokemon.player?.gameStats.rerollCount ?? 0) +
-          pokemon.simulation.stageLevel) /
-          2
-      )
-      pokemon.addShield(repeatBallValue * 2, pokemon, 0, false)
-      pokemon.addSpeed(repeatBallValue, pokemon, 0, false)
-    }),
-    new OnItemLostInCombatEffect((pokemon) => {
-      const repeatBallValue = Math.floor(
-        ((pokemon.player?.gameStats.rerollCount ?? 0) +
-          pokemon.simulation.stageLevel) /
-          2
-      )
-      pokemon.addShield(-repeatBallValue * 2, pokemon, 0, false)
-      pokemon.addSpeed(-repeatBallValue, pokemon, 0, false)
-    })
-  ],
-
   [Item.UPGRADE]: [
     new OnAttackEffect(({ pokemon, target, board }) => {
       pokemon.addSpeed(5, pokemon, 0, false)

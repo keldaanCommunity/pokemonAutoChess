@@ -33,6 +33,7 @@ import {
   UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
+import { REPEAT_BALL_LEGENDARY_INTERVAL } from "../config/game/shop"
 import { getAltFormForPlayer } from "../core/alt-form-logic"
 import { getWildChance } from "../core/synergies"
 import type GameState from "../rooms/states/game-state"
@@ -560,20 +561,20 @@ export default class Shop {
       return Pkm.MAGIKARP
     }
 
-    const repeatBallHolders = schemaValues(player.board).filter((p) =>
-      p.items.has(Item.REPEAT_BALL)
+    const repeatBalls = schemaValues(player.items).filter(
+      (i) => i === Item.REPEAT_BALL
     )
     const totalRerolls = player.gameStats.rerollCount + state.stageLevel
 
     if (
-      repeatBallHolders.length > 0 &&
+      repeatBalls.length > 0 &&
       shopIndex >= 0 &&
-      shopIndex < repeatBallHolders.length &&
+      shopIndex < repeatBalls.length &&
       !noSpecial
     ) {
       if (
         totalRerolls >= REPEAT_BALL_LEGENDARY_CAP &&
-        totalRerolls % REPEAT_BALL_UNIQUE_INTERVAL === 0
+        totalRerolls % REPEAT_BALL_LEGENDARY_INTERVAL === 0
       ) {
         return this.pickSpecialPokemon(Rarity.LEGENDARY)
       } else if (

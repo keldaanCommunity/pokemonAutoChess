@@ -3079,7 +3079,7 @@
 		"DYNAMAX_BAND": "Au début du combat, augmente les HP max du porteur de 200%.",
 		"SHINY_STONE": "Le porteur gagne le type LIGHT. Un second spot de lumière est projeté sur la case du porteur au début du combat.",
 		"RARE_CANDY": "Fait évoluer immédiatement un Pokémon. Ne peut être donné qu'à un Pokémon pouvant encore évoluer, et ramène son prix de vente au tier précédent.",
-		"REPEAT_BALL": "Toutes les 2 relances du magasin, gagne +1 SPEED et 2 SHIELD. De plus, chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
+		"REPEAT_BALL": "Chaque fois que vous dépensez de l'or pour une relance, vous gagnez 1 relance gratuite. Après de nombreuses relances, vous pourrez rencontrer des Pokémon puissants dans votre magasin.",
 		"GOLD_BOW": "Le porteur ne compte pas dans la taille de l'équipe.",
 		"DAMP_ROCK": "Compte pour 3 pour RAIN. Sous la RAIN, votre équipe gagne +2 PP par seconde.",
 		"ICY_ROCK": "Compte pour 3 pour SNOW. Sous la SNOW, votre équipe est FREEZE 20% moins longtemps et a [5,LK]% de chance en plus d'infliger FREEZE à leurs ennemis avec leurs attaques.",

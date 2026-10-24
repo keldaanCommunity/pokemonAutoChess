@@ -3079,7 +3079,7 @@
 		"ROTOM_CATALOG": "Um catálogo de dispositivos que o Rotom gosta. Use o catálogo para que o Rotom entre e saia dos vários dispositivos listados nele.",
 		"MYSTERY_BOX": "Uma caixa antiga misteriosa. Quando estiver no seu inventário, todos os $t(pkm.DITTO) encontrados nas lojas serão substituídos por $t(pkm.MELTAN).",
 		"RARE_CANDY": "Faz um Pokémon evoluir imediatamente. Só pode ser dado a Pokémons que podem evoluir, e reduz seu preço de venda para o tier anterior.",
-		"REPEAT_BALL": "Cada vez que você gastar GOLD em uma atualização de loja, receba 1 atualização gratuita. A cada 2 novas atualizações na loja, receba +1 SPEED e +2 SHIELD. Após muitas atualizações, você poderá encontrar Pokémons poderosos na sua loja.",
+		"REPEAT_BALL": "Cada vez que você gastar GOLD em uma atualização de loja, receba 1 atualização gratuita. Após muitas atualizações, você poderá encontrar Pokémons poderosos na sua loja.",
 		"GOLD_BOW": "O portador não é contabilizado no limite de tamanho da equipe.",
 		"DAMP_ROCK": "Conta como 3 para RAIN. Sob o efeito de RAIN, sua equipe recebe +2 PP por segundo.",
 		"ICY_ROCK": "Conta como 3 para SNOW. Sob o efeito de SNOW, sua equipe se recupera de FREEZE 20% mais rápido e tem [5,LK]% de chance adicional de causar FREEZE em seus oponentes com seus ataques.",

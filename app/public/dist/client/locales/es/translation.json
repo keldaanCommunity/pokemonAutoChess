@@ -3040,8 +3040,8 @@
 		"SUPER_ROD": "Después de cada ronda JcJ, pesca un Pokémon que luego se agrega a un espacio libre en tu banco. Puede atrapar Pokémon épicos de WATER y a Wishiwashi.",
 		"DYNAMAX_BAND": "Al comienzo de la pelea, aumenta el HP máximo en un 200%.",
 		"SHINY_STONE": "Otorga sinergia LIGHT y genera un segundo punto de luz en la celda del pokémon.",
-		"RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon. Solamente puede llevarlo un Pokémon que evolucione. El titular ahora se vende por el precio de su nivel anterior.",		
-		"REPEAT_BALL": "Por cada 2 rerolls en la tienda, obtienes 1 de SPEED y 2 SHIELD. Además, cada vez que gastes oro en un reroll, obtienes 1 reroll gratis. Después de muchos rerolls, puedes encontrarte con Pokémon poderosos en tu tienda.",
+		"RARE_CANDY": "Hace evolucionar inmediatamente a un Pokémon. Solamente puede llevarlo un Pokémon que evolucione. El titular ahora se vende por el precio de su nivel anterior.",
+		"REPEAT_BALL": "Cada vez que gastes oro en un reroll, obtienes 1 reroll gratis. Después de muchos rerolls, puedes encontrarte con Pokémon poderosos en tu tienda.",
 		"GOLD_BOW": "El portador no cuenta para el límite de tamaño del equipo.",
 		"DAMP_ROCK": "Cuenta por 3 para RAIN. Bajo RAIN, tu equipo obtiene +2 PP por segundo.",
 		"ICY_ROCK": "Cuenta por 3 para SNOW. Bajo SNOW, tu equipo se recupera de estar FREEZE un 20% más rápido y tiene un [5,LK]% adicional de FREEZE a sus oponentes con sus ataques.",
@@ -4102,7 +4102,7 @@
 	"lvl": "Nivel",
 	"hud": {
 		"life_info": {
-			"hint":  "Pierdes el juego cuando no tienes más puntos de salud."
+			"hint": "Pierdes el juego cuando no tienes más puntos de salud."
 		}
 	},
 	"unlock": "Desbloquear",
@@ -4701,7 +4701,7 @@
 		},
 		"items": {
 			"item_recipes": "Recetas de Objetos",
-			"craftable_items_description": "¡Combina dos componentes para crear objetos poderosos!",			
+			"craftable_items_description": "¡Combina dos componentes para crear objetos poderosos!",
 			"special_items_description": "Estos objetos son exclusivos para algunos Pokémon y no se pueden obtener por otros medios.",
 			"tools_description": "La sinergia ARTIFICIAL te da objetos exclusivos tras ser activada. Tres de ellos se eligen aleatoriamente para cada jugador al principio de la partida. Estos objetos pueden desequiparse de una unidad poniéndola en la banca.",
 			"gems": "Gemas",
