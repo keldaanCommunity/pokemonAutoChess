@@ -2979,6 +2979,29 @@ export const AbilitiesAnimations: {
 
   ["TIDAL_WAVE"]: tidalWaveAnimation,
 
+  ["BOARD_BURN"]: (args) => {
+    for (let x = 0; x < BOARD_WIDTH; x++) {
+      for (let y = 0; y <= BOARD_HEIGHT; y++) {
+        if (y === 0 || x === 0 || x === BOARD_WIDTH - 1 || y === BOARD_HEIGHT) {
+          const [px, py] = transformEntityCoordinates(x, y, false)
+          staticAnimation({
+            x: px,
+            y: py,
+            ability: Ability.MAGMA_STORM,
+            scale: 1
+          })(args)
+          staticAnimation({
+            x: px,
+            y: py,
+            delay: 100,
+            ability: "BOARD_BURN",
+            animOptions: { repeat: -1 }
+          })(args)
+        }
+      }
+    }
+  },
+
   [Ability.COLUMN_CRUSH]: (args) => {
     const distance = min(1)(
       distanceE(args.positionX, args.positionY, args.targetX, args.targetY)

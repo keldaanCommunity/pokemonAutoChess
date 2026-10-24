@@ -109,6 +109,7 @@ export default class Simulation extends Schema implements ISimulation {
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
+  boardBurnTimer = 0
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
@@ -191,6 +192,12 @@ export default class Simulation extends Schema implements ISimulation {
       )
     ) {
       this.tidalWaveTimer = 7000
+    }
+    if (
+      this.blueEffects.has(EffectEnum.DESOLATE_LAND) ||
+      this.redEffects.has(EffectEnum.DESOLATE_LAND)
+    ) {
+      this.boardBurnTimer = 10000
     }
 
     this.bluePlayer.board.forEach((pokemon) => {
@@ -1437,6 +1444,13 @@ export default class Simulation extends Schema implements ISimulation {
         }
       }
     }
+
+    if (this.boardBurnTimer > 0) {
+      this.boardBurnTimer -= dt
+      if (this.boardBurnTimer <= 0) {
+        this.burnEntireBoard()
+      }
+    }
   }
 
   stop() {
@@ -1764,7 +1778,7 @@ export default class Simulation extends Schema implements ISimulation {
   ) {
     const isRed = team === Team.RED_TEAM
     const orientation = isRed ? Orientation.DOWN : Orientation.UP
-    this.room.broadcast(Transfer.ABILITY, {
+    this.broadcastToSpectators(Transfer.ABILITY, {
       id: this.id,
       skill: "TIDAL_WAVE",
       positionX: 0,
@@ -1773,7 +1787,7 @@ export default class Simulation extends Schema implements ISimulation {
       targetY: tidalWaveLevel - 1,
       orientation
     })
-    this.room.broadcast(Transfer.CLEAR_BOARD, {
+    this.broadcastToSpectators(Transfer.CLEAR_BOARD, {
       simulationId: this.id
     })
 
@@ -1845,6 +1859,21 @@ export default class Simulation extends Schema implements ISimulation {
           }
         }
       }
+    }
+  }
+
+  burnEntireBoard() {
+    this.broadcastToSpectators(Transfer.ABILITY, {
+      id: this.id,
+      skill: "BOARD_BURN"
+    })
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
+        pokemon.status.triggerBurn(45000, pokemon, null)
+        if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
+          pokemon.addSpeed(15, "environment", 0, false)
+        }
+      })
     }
   }
 }

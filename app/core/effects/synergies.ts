@@ -943,17 +943,6 @@ export const cloneBugs = ({
     }
   }
 }
-
-const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
-  if (
-    getSynergyTier(player.synergies, Synergy.FIRE) === 4 &&
-    player.items.includes(Item.FIRE_SHARD) === false &&
-    player.life > 2
-  ) {
-    player.items.push(Item.FIRE_SHARD)
-  }
-})
-
 const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
   const nbTrees = getSynergyTier(player.synergies, Synergy.GRASS)
   for (let i = 0; i < nbTrees; i++) {
@@ -1092,7 +1081,6 @@ export const SynergyEffects: Partial<
   Record<EffectEnum, (Effect | (() => Effect))[]>
 > = {
   [EffectEnum.HEART_OF_THE_SWARM]: [bugSwarmSpawnEffect],
-  [EffectEnum.DESOLATE_LAND]: [giveFireShardEffect],
   [EffectEnum.INGRAIN]: [growBerryTreesEffect],
   [EffectEnum.GROWTH]: [growBerryTreesEffect],
   [EffectEnum.SPORE]: [growBerryTreesEffect],

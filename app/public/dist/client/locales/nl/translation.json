@@ -1196,7 +1196,7 @@
 		"SPORE": "Herstel 25 HP elke 2 seconden. Koop een derde bessenboom.",
 		"FLAME_BODY": "[30,LK]% kans om te BURN",
 		"BLAZE": "+2 ATK na elke treffer",
-		"DESOLATE_LAND": "+3 ATK na elke treffer. Koop een FIRE_SHARD.",
+		"DESOLATE_LAND": "+3 ATK na elke treffer.",
 		"RAIN_DANCE": "+4 PP per seconde. Vis een pokemon na elk PvP-gevecht.",
 		"DRIZZLE": "+8 PP per seconde. Zeldzame pokemons kunnen worden gevist.",
 		"PRIMORDIAL_SEA": "+12 PP per seconde. Er kan op epische pokemons worden gevist.",

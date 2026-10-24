@@ -12,6 +12,10 @@ We introduce what will be the final 32th synergy to Pokémon Auto Chess: STELLAR
 
 This special synergy is only given through special items and Pokémon. Its effect is to increase by 1 the synergy level of all active synergies, and Stellar Pokémon benefit from the effects of all active synergies. Stellar cannot be a symbol on portals. A STELLAR_GEM exists but cannot be sold by Sableye town encounter.
 
+# Changes to Synergies
+
+- Fire 8 rework: no longer gives Fire Shard. After 10 seconds, the whole board is set on fire and BURN all Pokémon, allies and enemies, and your FIRE Pokémon gain 15 SPEED.
+
 # Changes to Pokemon & Abilities
 
 - 32 new Z-Move abilities have been added to the game, one for each synergy.

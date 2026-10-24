@@ -55,7 +55,6 @@ export default function WikiItems() {
       ...FishingRods,
       ...Mulches,
       Item.CHEF_HAT,
-      Item.FIRE_SHARD,
       Item.CELL_BATTERY
     ]
     return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
@@ -365,14 +364,6 @@ export default function WikiItems() {
         <p>{addIconsToDescription(t("wiki.items.cell_battery_description"))}</p>
         <ul>
           <ItemList items={[Item.CELL_BATTERY]} />
-        </ul>
-
-        <h3>
-          <SynergyIcon type={Synergy.FIRE} /> {t("item.FIRE_SHARD")}
-        </h3>
-        <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
-        <ul>
-          <ItemList items={[Item.FIRE_SHARD]} />
         </ul>
 
         <h3>

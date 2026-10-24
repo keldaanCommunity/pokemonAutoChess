@@ -2355,7 +2355,7 @@
 		"FLAME_BODY": "[30,LK]% di possibilità di infliggere BURN.",
 		"WILDFIRE": "+1 all'ATK dopo ogni colpo.",
 		"BLAZE": "+2 all'ATK dopo ogni colpo.",
-		"DESOLATE_LAND": "+3 all'ATK dopo ogni colpo. Ottieni un FIRE_SHARD.",
+		"DESOLATE_LAND": "+3 all'ATK dopo ogni colpo.",
 		"RAIN_DANCE": "+4 PP ogni secondo. Ottieni un Amo Vecchio.",
 		"DRIZZLE": "+8 PP ogni secondo. Ottieni un Amo Buono.",
 		"PRIMORDIAL_SEA": "+12 PP ogni secondo. Ottieni un Super Amo.",
@@ -2908,7 +2908,6 @@
 		"WILD_GEM": "+ 1 alla sinergia WILD",
 		"AMORPHOUS_GEM": "+ 1 alla sinergia AMORPHOUS",
 		"GOURMET_GEM": "+ 1 alla sinergia GOURMET",
-		"FIRE_SHARD": "Sacrifica 3 HP del giocatore per dare permanentemente 3 di ATK e 3 di SPEED ad un Pokèmon FIRE. L'oggetto viene consumato quando equipaggiato.",
 		"CELL_BATTERY": "Ogni pila nella tua riserva dà 2 SPEED a tutti i tuoi Pokémon ELECTRIC.\\nUsala su un Pokémon ELECTRIC per supercaricarlo per il prossimo combattimento, dandogli 20 SPEED, 30 di SHIELD e ELECTRIC_FIELD.",
 		"TEAL_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 100 di SHIELD e permetti ad Ogerpon di avere la sinergia FLORA durante il combattimento.",
 		"WELLSPRING_MASK": "Questa maschera scolpita nel legno è adornata da cristalli, ottieni 100 di SHIELD e permetti ad Ogerpon di avere la sinergia AQUATIC durante il combattimento.",
@@ -4376,7 +4375,7 @@
 		},
 		"items": {
 			"item_recipes": "Ricetta degli Oggetti",
-			"craftable_items_description": "Combina due componenti per creare oggetti molto potenti!",			
+			"craftable_items_description": "Combina due componenti per creare oggetti molto potenti!",
 			"town_items": "Strumenti di Paese",
 			"town_items_description": "Questi strumenti possono essere ottenuti dai mercanti che incontri in paese:",
 			"special_items_description": "Questi oggetti sono esclusivi ad alcuni Pokèmon, e non possono essere ottenuti in altro modo.",
@@ -4397,8 +4396,7 @@
 			"fishing_rods_description": "Gli ami da pesca ti permettono di pescare Pokémon WATER dopo un combattimento contro un altro giocatore.",
 			"mulch": "Concime",
 			"mulch_description": "Ogni volta che un tuo mon FLORA è messo KO, esso contribuisce alla produzione di concime. Usalo per far evolvere le tue piante in vaso.",
-			"cell_battery_description": "Dopo aver raggiunto lo stadio massimo della sinergia ELECTRIC, i tuoi Pokémon caricano una CELL_BATTERY con i loro attacchi. Puoi consumare una batteria per supercaricare un Pokémon ELECTRIC per il prossimo combattimento.",
-			"fire_shard_description": "Dopo aver raggiunto lo stadio massimo della sinergia FIRE, puoi usare un FIRE_SHARD per sacrificare un po' dei tuoi HP giocatore e potenziare un Pokémon FIRE."
+			"cell_battery_description": "Dopo aver raggiunto lo stadio massimo della sinergia ELECTRIC, i tuoi Pokémon caricano una CELL_BATTERY con i loro attacchi. Puoi consumare una batteria per supercaricare un Pokémon ELECTRIC per il prossimo combattimento."
 		},
 		"statistics": {
 			"stat_description": {

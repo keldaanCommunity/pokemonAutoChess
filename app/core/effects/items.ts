@@ -1538,26 +1538,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.CORNERSTONE_MASK]: [ogerponMaskEffect],
   [Item.HEARTHFLAME_MASK]: [ogerponMaskEffect],
 
-  [Item.FIRE_SHARD]: [
-    new OnItemDroppedEffect(({ pokemon, player, item, room }) => {
-      const lifeLost = player.doubleUpPartnerId ? 1 : 3
-      if (pokemon.hasSynergy(Synergy.FIRE) && player.life > lifeLost) {
-        pokemon.atk += 3
-        pokemon.speed += 3
-        player.life = min(1)(player.life - lifeLost)
-        removeFromArray(player.items, item)
-        if (player.doubleUpPartnerId) {
-          const partner = room.state.players.get(player.doubleUpPartnerId)
-          if (partner) {
-            partner.life = min(1)(partner.life - lifeLost)
-          }
-        }
-      }
-
-      return false // prevent item from being equipped
-    })
-  ],
-
   [Item.CELL_BATTERY]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.hasSynergy(Synergy.ELECTRIC) && !pokemon.supercharged) {
