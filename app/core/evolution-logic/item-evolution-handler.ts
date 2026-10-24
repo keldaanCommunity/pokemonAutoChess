@@ -14,7 +14,6 @@ export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, itemGiven: Item): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     const itemsAndDishes = schemaValues(pokemon.items).concat(
       schemaValues(pokemon.dishes)
     )

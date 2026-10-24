@@ -16,7 +16,7 @@ import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
   AbsorbedItems,
-  Emotion,
+  type Emotion,
   type IPokemon,
   type IPokemonEntity,
   Title,
@@ -801,12 +801,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       return // cannot hold a synergy stone of a type already obtained - prevents a noob trap
     }
 
-    if (
-      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
-        !this.refToBoardPokemon.hasEvolution) ||
-      (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
-    ) {
-      return // handle cases where eviolite and rare candy cannot be given
+    if (item === Item.RARE_CANDY && !this.refToBoardPokemon.hasEvolution) {
+      return // handle cases where rare candy cannot be given
     }
 
     if (this.items.has(item) == false) {
@@ -1508,67 +1504,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count.upgradeCount = 0
     this.count.soundCryCount = 0
 
-    if (this.items.has(Item.SACRED_ASH)) {
-      const team =
-        this.team === Team.BLUE_TEAM
-          ? this.simulation.blueTeam
-          : this.simulation.redTeam
-      if (!team) return
-      const alliesAlive: PokemonEntity[] = schemaValues(team).filter(
-        (e) => e.hp > 0 || e.status.resurrecting
-      )
-      let koAllies: Pokemon[] = []
-      if (this.player) {
-        koAllies = schemaValues(this.player.board).filter(
-          (p) =>
-            p.id !== this.refToBoardPokemon.id &&
-            !isOnBench(p) &&
-            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id) &&
-            !(
-              p.name === Pkm.COMFEY &&
-              alliesAlive.some((ally) => ally.items.has(Item.COMFEY))
-            ) // don't respawn comfey if an ally has it
-        )
-      } else if (this.name === Pkm.HO_OH) {
-        // HoOh marowak pve round
-        koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
-          ? []
-          : [
-              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                shiny: this.shiny,
-                emotion: Emotion.ANGRY
-              })
-            ]
-      }
-
-      const spawns = pickNRandomIn(koAllies, 3)
-      spawns.forEach((spawn) => {
-        const coord = this.simulation.getClosestFreeCellToPokemonEntity(this)
-        if (!coord) return
-        const mon = PokemonFactory.createPokemonFromName(spawn.name, {
-          emotion: spawn.emotion,
-          shiny: spawn.shiny
-        })
-        const spawnedEntity = this.simulation.addPokemon(
-          mon,
-          coord.x,
-          coord.y,
-          this.team,
-          true
-        )
-        spawnedEntity.shield = 0 // remove existing shield
-        spawnedEntity
-          .getEffects(FlyingProtectionEffect)
-          .forEach((effect: FlyingProtectionEffect) => {
-            effect.flyingProtection = 0 // prevent flying effects twice
-          })
-        SynergyTiers[Synergy.FOSSIL].forEach((e) =>
-          spawnedEntity.effects.delete(e)
-        )
-      })
-    }
-
-    const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
+    const removedItems = [Item.DYNAMAX_BAND, Item.MAX_REVIVE]
 
     removedItems.forEach((item) => {
       if (this.items.has(item)) {

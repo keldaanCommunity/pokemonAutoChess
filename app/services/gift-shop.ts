@@ -199,8 +199,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   toPlayer.board.forEach((pkm: Pokemon) => {
     if (
       pkm.evolutionRule.type === EvolutionRuleType.COUNT &&
-      pkm.hasEvolution &&
-      !pkm.items.has(Item.EVIOLITE)
+      pkm.hasEvolution
     ) {
       pokemonThatCanEvolve.push(pkm)
     } else if (!isOnBench(pkm)) {

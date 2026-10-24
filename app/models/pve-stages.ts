@@ -121,7 +121,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     marowakItems: [[Item.METAL_COAT], [Item.DEEP_SEA_TOOTH]],
     shinyChance: 1 / 100,
-    rewards: ItemComponentsNoFossilOrScarf,
+    rewards: [...ItemComponentsNoFossilOrScarf, Item.EXP_SHARE],
     getRewards(player: Player, shinyEncounter: boolean) {
       const rewards: Item[] = []
       if (
@@ -169,7 +169,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Stat.DEF]: 5,
       [Stat.SPE_DEF]: 5
     },
-    marowakItems: [[Item.STAR_PIECE], [Item.SACRED_ASH]],
+    marowakItems: [[Item.STAR_PIECE], [Item.STAR_PIECE]],
     rewards: ItemComponentsNoFossilOrScarf,
     getRewards(player: Player) {
       const componentsWeights = ItemComponentsNoFossilOrScarf.reduce((o, i) => {
@@ -349,9 +349,9 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.DYNAMAX_BAND],
       [Item.DYNAMAX_BAND]
     ],
-    rewards: [Item.RARE_CANDY, Item.SACRED_ASH, Item.GOLD_BOW],
+    rewards: [Item.RARE_CANDY, Item.STAR_PIECE, Item.GOLD_BOW],
     getRewards(player: Player) {
-      return [Item.RARE_CANDY, Item.SACRED_ASH, Item.GOLD_BOW]
+      return [Item.RARE_CANDY, Item.STAR_PIECE, Item.GOLD_BOW]
     }
   }
 }

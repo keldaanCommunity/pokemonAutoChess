@@ -25,7 +25,6 @@ export class PlacementEvolutionHandler extends EvolutionHandler<
     player: Player,
     board: MapSchema<Pokemon>
   ): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
     return this.condition(pokemon, player, board)
   }

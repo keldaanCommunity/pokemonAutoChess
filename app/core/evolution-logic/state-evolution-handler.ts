@@ -19,7 +19,6 @@ export class StateEvolutionHandler extends EvolutionHandler<[GameState]> {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, state: GameState): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
     return this.condition(pokemon, player, state)
   }

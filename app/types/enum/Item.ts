@@ -113,12 +113,8 @@ export enum Item {
   GOOD_ROD = "GOOD_ROD",
   SUPER_ROD = "SUPER_ROD",
   RARE_CANDY = "RARE_CANDY",
-  EVIOLITE = "EVIOLITE",
   RED_SCALE = "RED_SCALE",
   GOLD_MASK = "GOLD_MASK",
-  GOLD_BOTTLE_CAP = "GOLD_BOTTLE_CAP",
-  ABSORB_BULB = "ABSORB_BULB",
-  SACRED_ASH = "SACRED_ASH",
   STAR_PIECE = "STAR_PIECE",
   LOOPLET = "LOOPLET",
   Z_RING = "Z_RING",
@@ -842,11 +838,7 @@ export const AtlasItems = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
   Item.RARE_CANDY,
-  Item.EVIOLITE,
   Item.GOLD_MASK,
-  Item.GOLD_BOTTLE_CAP,
-  Item.ABSORB_BULB,
-  Item.SACRED_ASH,
   Item.STAR_PIECE,
   Item.REPEAT_BALL,
   Item.GOLD_BOW,
@@ -1467,7 +1459,7 @@ export const UnholdableItems = [
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT,
-  Item.RED_SCALE
+  Item.REPEAT_BALL
 ] satisfies Item[]
 
 export type UnholdableItem = (typeof UnholdableItems)[number]

@@ -1448,9 +1448,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           schemaValues(player.board).filter((pokemon) =>
             pokemon.items.has(Item.AMULET_COIN)
           ).length
-        const nbRedScales = player.items.filter(
-          (item) => item === Item.RED_SCALE
-        ).length
         player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(
@@ -1462,7 +1459,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           income += max(5)(player.streak)
         }
         income += 5
-        income += nbRedScales * 5
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(

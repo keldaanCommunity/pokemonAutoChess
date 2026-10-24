@@ -9,7 +9,6 @@ import { getHatchTime } from "./hatch-time"
 
 export class HatchEvolutionHandler extends EvolutionHandler {
   canEvolve(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (!player.board.has(pokemon.id)) return false // egg has been sold in the meantime
     pokemon.stacksRequired = getHatchTime(pokemon, player)
     return pokemon.stacks >= pokemon.stacksRequired

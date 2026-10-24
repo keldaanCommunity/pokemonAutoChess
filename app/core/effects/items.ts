@@ -1015,34 +1015,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.GOLD_BOTTLE_CAP]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.addCritPower(pokemon.player?.money ?? 0, pokemon, 0, false)
-    }),
-    new OnItemLostInCombatEffect((pokemon) => {
-      pokemon.addCritPower(-(pokemon.player?.money ?? 0), pokemon, 0, false)
-    }),
-    new OnKillEffect(({ attacker, target, board }) => {
-      if (attacker.player) {
-        const isLastEnemy =
-          target.team !== attacker.team &&
-          board.cells.some(
-            (p) =>
-              p &&
-              p.team !== attacker.team &&
-              (p.hp > 0 || p.status.resurrecting)
-          ) === false
-        attacker.count.bottleCapCount++
-        const moneyGained = isLastEnemy ? attacker.count.bottleCapCount + 1 : 1
-        attacker.player.addMoney(moneyGained, true, attacker)
-        attacker.count.moneyCount += moneyGained
-        if (isLastEnemy && attacker.count.bottleCapCount >= 10) {
-          attacker.player.titles.add(Title.LUCKY)
-        }
-      }
-    })
-  ],
-
   [Item.REPEAT_BALL]: [
     new OnItemGainedEffect((pokemon) => {
       const repeatBallValue = Math.floor(
@@ -1061,15 +1033,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       )
       pokemon.addShield(-repeatBallValue * 2, pokemon, 0, false)
       pokemon.addSpeed(-repeatBallValue, pokemon, 0, false)
-    })
-  ],
-
-  [Item.SACRED_ASH]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.status.addResurrection(pokemon)
-    }),
-    new OnItemLostInCombatEffect((pokemon) => {
-      pokemon.status.resurrection = false
     })
   ],
 
@@ -1169,6 +1132,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         attacker.player.addMoney(1, true, attacker)
         attacker.count.moneyCount += 1
         attacker.count.amuletCoinCount += 1
+        if (attacker.count.amuletCoinCount >= 5) {
+          attacker.player.titles.add(Title.LUCKY)
+        }
       }
     })
   ],
@@ -1398,31 +1364,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.ABSORB_BULB]: [
-    new OnDamageReceivedEffect(({ pokemon, board }) => {
-      if (pokemon.hp < 0.5 * pokemon.maxHP) {
-        const damage =
-          pokemon.physicalDamageReduced + pokemon.specialDamageReduced
-        pokemon.broadcastAbility({ skill: Ability.EXPLOSION })
-        board
-          .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-          .forEach((cell) => {
-            if (cell.value && cell.value.team !== pokemon.team) {
-              cell.value.handleSpecialDamage(
-                damage,
-                board,
-                AttackType.SPECIAL,
-                pokemon,
-                false,
-                false
-              )
-            }
-          })
-        pokemon.removeItem(Item.ABSORB_BULB)
-      }
-    })
-  ],
-
   [Item.METEORITE]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
       const DeoxysForms = [
@@ -1599,13 +1540,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     cancelCookWhenHatUnequippedEffect
   ],
 
-  [Item.EVIOLITE]: [
-    new OnItemDroppedEffect(({ pokemon, player, item }) => {
-      const canEquip = pokemon.hasEvolution
-      return canEquip
-    })
-  ],
-
   [Item.PICNIC_SET]: [
     new OnItemDroppedEffect(({ pokemon, player, item }) => {
       if (pokemon.canEat) {
@@ -1738,12 +1672,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       const evolution = EvolutionManager.getEvolution(pokemon, player)
-      if (
-        !evolution ||
-        evolution === Pkm.DEFAULT ||
-        pokemon.items.has(Item.EVIOLITE) ||
-        pokemon.items.size >= 3
-      ) {
+      if (!evolution || evolution === Pkm.DEFAULT || pokemon.items.size >= 3) {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)

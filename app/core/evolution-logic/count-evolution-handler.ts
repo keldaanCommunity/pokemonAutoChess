@@ -37,7 +37,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length >= this.numberRequired
   }
@@ -56,7 +56,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length === this.numberRequired - 1
   }
@@ -74,7 +74,6 @@ export class CountEvolutionHandler extends EvolutionHandler {
     player.board.forEach((pkm, id) => {
       if (
         pkm.name === pokemon.name &&
-        !pkm.items.has(Item.EVIOLITE) &&
         pokemonsBeforeEvolution.length < this.numberRequired
       ) {
         // logger.debug(pkm.name, pokemon.name)

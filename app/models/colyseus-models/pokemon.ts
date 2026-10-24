@@ -15044,7 +15044,7 @@ export const burmyDivergentEvolutionRule = (
   type: EvolutionRuleType.STATE,
   condition: (pokemon: IPokemon, player: IPlayer, state: GameState) => {
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     if (copies.length >= 3) return true
     return (
@@ -15055,7 +15055,7 @@ export const burmyDivergentEvolutionRule = (
   },
   divergentEvolution: (pokemon: IPokemon, player: IPlayer) => {
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     if (copies.length >= 3) return wormadam
     return Pkm.MOTHIM

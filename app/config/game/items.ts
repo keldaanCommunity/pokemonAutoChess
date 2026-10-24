@@ -81,21 +81,16 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.LUCK]: 30 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
   [Item.RUNNING_SHOES]: { [Stat.SPEED]: 15 },
-  [Item.EVIOLITE]: {
+  [Item.RED_SCALE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
     [Stat.AP]: 50,
     [Stat.DEF]: 10,
     [Stat.SPE_DEF]: 10
   },
-  [Item.GOLD_BOTTLE_CAP]: {
-    [Stat.LUCK]: 50,
-    [Stat.CRIT_CHANCE]: 30
-  },
   [Item.STAR_PIECE]: {},
   [Item.LOOPLET]: { [Stat.SHIELD]: 50 },
   [Item.SHINY_STONE]: { [Stat.AP]: 50 },
-  [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
   [Item.TERA_ORB]: {},
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },

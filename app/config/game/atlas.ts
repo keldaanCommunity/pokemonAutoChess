@@ -220,7 +220,7 @@ const nodes = {
   },
   atlas_item5: {
     type: "item",
-    item: Item.EVIOLITE,
+    item: Item.REPEAT_BALL,
     position: rotToXY(120, 45 * D)
   },
 

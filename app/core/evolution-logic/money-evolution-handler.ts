@@ -12,7 +12,6 @@ export class MoneyEvolutionHandler extends EvolutionHandler<[number]> {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, money: number): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
     return money >= this.moneyRequired
   }

@@ -299,13 +299,8 @@ export const GoldenEggItems = [
   Item.DYNAMAX_BAND,
   Item.SHINY_STONE,
   Item.RARE_CANDY,
-  Item.EVIOLITE,
   Item.GOLD_MASK,
-  Item.GOLD_BOTTLE_CAP,
-  Item.ABSORB_BULB,
-  Item.SACRED_ASH,
   Item.STAR_PIECE,
-  Item.REPEAT_BALL,
   Item.GOLD_BOW
 ] satisfies AtlasItem[]
 
