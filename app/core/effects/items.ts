@@ -1,5 +1,6 @@
 import { SetSchema } from "@colyseus/schema"
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
+import { STAGE_ATLAS_UNLOCKED } from "../../config/game/atlas"
 import { DishByPkm } from "../../config/game/dishes"
 import {
   GOURMET_COOK_DEFAULT_DURATION,
@@ -73,7 +74,7 @@ import {
   randomBetween,
   randomWeighted
 } from "../../utils/random"
-import { schemaValues } from "../../utils/schemas"
+import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
@@ -1685,10 +1686,18 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         behavior: WandererBehavior.SPECTATE,
         data: newMap
       })
+
+      if (room.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
+        resetArraySchema(player.atlasManager.legendaries)
+      }
+
       setTimeout(() => {
         player.map = newMap
         player.regions.push(newMap)
         player.updateRegionalPool(room.state, true, previousMap)
+        if (room.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
+          player.atlasManager.assignLegendaries(player, chosenSynergies)
+        }
       }, 10000)
 
       removeFromArray(player.items, item)

@@ -69,6 +69,8 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
     ) {
       setIsRevealed(true)
       playSound(SOUNDS.LEGENDARY_REVEAL, 0.7)
+    } else if (isLegendariesRevealed && legendaries.length === 0) {
+      setIsRevealed(false)
     }
   }, [symbols, legendaries, isLegendariesRevealed, atlasVisible])
 
@@ -482,7 +484,7 @@ function AtlasNodeDetail({
     const index = Number(nodeId.at(-1)) - 1
     const pokemon = legendaries[index]
 
-    if (isPkmDuo(pokemon)) {
+    if (pokemon && isPkmDuo(pokemon)) {
       const duo: Pkm[] = PkmDuos[pokemon]
       return (
         <>
@@ -496,10 +498,11 @@ function AtlasNodeDetail({
           ></GamePokemonDetail>
         </>
       )
+    } else if (pokemon != null) {
+      return (
+        <GamePokemonDetail origin="atlas" pokemon={pokemon}></GamePokemonDetail>
+      )
     }
-    return (
-      <GamePokemonDetail origin="atlas" pokemon={pokemon}></GamePokemonDetail>
-    )
   }
 
   let portrait,

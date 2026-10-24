@@ -72,7 +72,7 @@ export const TownEncountersByStage: {
   },
   22: {
     [TownEncounters.DUSKNOIR]: 1 / 10,
-    [TownEncounters.CELEBI]: 1 //TEMP 1 / 10
+    [TownEncounters.CELEBI]: 1 / 10
   }
 }
 
