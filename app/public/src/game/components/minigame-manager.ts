@@ -433,7 +433,9 @@ export default class MinigameManager {
           animation:
             typeof config.animation === "function"
               ? config.animation(isEncounter)
-              : (config.animation ?? PokemonActionState.IDLE)
+              : (config.animation ?? PokemonActionState.IDLE),
+          dialog: config.dialog,
+          dialogTitle: config.dialogTitle
         })
         this.villagers.push(npc)
         if (config.action && !isEncounter) {

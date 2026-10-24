@@ -27,6 +27,11 @@ This special synergy is only given through special items and Pokémon. Its effec
 # Town
 
 - New town encounters at stage 0: Azurill, Bidoof, Loudred
+- New town encounter at stage 17: Grovyle
+- New town encounters at stage 20: Ampharos
+- New town encounter at stage 22: Dusknoir
+- Celebi town encounter has a new effect and is now at stage 22
+- Existing town encounters after stage 20 have been relocated to previous stages
 
 # UI
 

@@ -34,9 +34,10 @@ export const TownEncountersByStage: {
     [TownEncounters.CINCCINO]: 1 / 20,
     [TownEncounters.MAROWAK]: 1 / 20,
     [TownEncounters.MAKUHITA]: 1 / 20,
-    [TownEncounters.MAGNEZONE]: 1 / 40,
+    [TownEncounters.MAGNEZONE]: 1 / 20,
     [TownEncounters.LAPRAS]: 1 / 20,
-    [TownEncounters.LUDICOLO]: 1 / 20
+    [TownEncounters.LUDICOLO]: 1 / 20,
+    [TownEncounters.SPINDA]: 1 / 20
   },
   12: {
     [TownEncounters.KANGASKHAN]: 1 / 20,
@@ -44,12 +45,13 @@ export const TownEncountersByStage: {
     [TownEncounters.KECLEON]: 1 / 20,
     [TownEncounters.ELECTIVIRE]: 1 / 20,
     [TownEncounters.XATU]: 1 / 20,
+    [TownEncounters.LAPRAS]: 1 / 20,
     [TownEncounters.CINCCINO]: 1 / 20,
     [TownEncounters.MAROWAK]: 1 / 20,
     [TownEncounters.SABLEYE]: 1 / 20,
     [TownEncounters.MAKUHITA]: 1 / 20,
     [TownEncounters.OMANYTE]: 1 / 20,
-    [TownEncounters.CELEBI]: 1 / 40
+    [TownEncounters.SPINDA]: 1 / 20
   },
   17: {
     [TownEncounters.WOBBUFFET]: 1 / 20,
@@ -58,40 +60,19 @@ export const TownEncountersByStage: {
     [TownEncounters.MAROWAK]: 1 / 20,
     [TownEncounters.SABLEYE]: 1 / 20,
     [TownEncounters.MAKUHITA]: 1 / 20,
-    [TownEncounters.LAPRAS]: 1 / 20,
     [TownEncounters.CHIMECHO]: 1 / 20,
     [TownEncounters.GROVYLE]: 1 / 20,
-    [TownEncounters.DUSKNOIR]: 1 / 20
+    [TownEncounters.KECLEON]: 1 / 20,
+    [TownEncounters.REGIROCK]: 1 / 20,
+    [TownEncounters.MUNCHLAX]: 1 / 20,
+    [TownEncounters.KINGAMBIT]: 1 / 20
   },
   20: {
-    [TownEncounters.AMPHAROS]: 0.9,
-    [TownEncounters.DUSKNOIR]: 0.1
+    [TownEncounters.AMPHAROS]: 1
   },
   22: {
-    [TownEncounters.KECLEON]: 1 / 20,
-    [TownEncounters.ELECTIVIRE]: 1 / 20,
-    [TownEncounters.MAROWAK]: 1 / 20,
-    [TownEncounters.SPINDA]: 1 / 20,
-    [TownEncounters.REGIROCK]: 1 / 20,
-    [TownEncounters.MUNCHLAX]: 1 / 20,
-    [TownEncounters.WOBBUFFET]: 1 / 20,
-    [TownEncounters.KINGAMBIT]: 1 / 20,
-    [TownEncounters.CHIMECHO]: 1 / 20
-  },
-  27: {
-    [TownEncounters.ELECTIVIRE]: 1 / 20,
-    [TownEncounters.MAROWAK]: 1 / 20,
-    [TownEncounters.SPINDA]: 1 / 20,
-    [TownEncounters.REGIROCK]: 1 / 20,
-    [TownEncounters.MUNCHLAX]: 1 / 20,
-    [TownEncounters.WOBBUFFET]: 1 / 20
-  },
-  34: {
-    [TownEncounters.ELECTIVIRE]: 1 / 20,
-    [TownEncounters.MAROWAK]: 1 / 20,
-    [TownEncounters.SPINDA]: 1 / 20,
-    [TownEncounters.REGIROCK]: 1 / 20,
-    [TownEncounters.MUNCHLAX]: 1 / 20
+    [TownEncounters.DUSKNOIR]: 1 / 10,
+    [TownEncounters.CELEBI]: 1 //TEMP 1 / 10
   }
 }
 

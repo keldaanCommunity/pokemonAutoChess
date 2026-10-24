@@ -176,6 +176,18 @@ export default class BoardManager {
         ]
         this.openChest(this.pveChestGroup, this.pveChest, rewards)
       }
+      this.npcs.forEach((npc) => {
+        setTimeout(
+          () => {
+            this.animationManager.animatePokemon(
+              npc,
+              PokemonActionState.HOP,
+              false
+            )
+          },
+          randomBetween(0, 250)
+        )
+      })
     } else if (winnerId === this.opponentAvatar?.playerId) {
       this.animationManager.animatePokemon(
         this.opponentAvatar,
@@ -188,6 +200,18 @@ export default class BoardManager {
           PokemonActionState.HURT,
           false
         )
+      this.npcs.forEach((npc) => {
+        setTimeout(
+          () => {
+            this.animationManager.animatePokemon(
+              npc,
+              PokemonActionState.HURT,
+              false
+            )
+          },
+          randomBetween(0, 250)
+        )
+      })
     } else {
       this.playerAvatar &&
         this.animationManager.animatePokemon(
@@ -771,12 +795,14 @@ export default class BoardManager {
 
   updateNpcs() {
     this.removeNPCs()
-    this.player.atlasManager.unlockedNodes.forEach((nodeId) => {
-      const node = AtlasTree.nodes[nodeId]
-      if (node.type === "encounter") {
-        this.addAtlasEncounter(node.encounter)
-      }
-    })
+    if (this.mode !== BoardMode.TOWN) {
+      this.player.atlasManager.unlockedNodes.forEach((nodeId) => {
+        const node = AtlasTree.nodes[nodeId]
+        if (node.type === "encounter") {
+          this.addAtlasEncounter(node.encounter)
+        }
+      })
+    }
   }
 
   updateAvatarLife(playerId: string, value: number) {

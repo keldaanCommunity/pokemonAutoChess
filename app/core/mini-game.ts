@@ -554,6 +554,11 @@ export class MiniGame {
       maxCopiesPerItem = 99
     }
 
+    if (encounter === TownEncounters.CELEBI) {
+      itemsSet = [Item.EMERA]
+      maxCopiesPerItem = 99
+    }
+
     if (encounter === TownEncounters.DUSKULL) {
       items.push(
         Item.GIMMIGHOUL_COIN,
@@ -869,6 +874,8 @@ export class MiniGame {
         if (item && player && !player.isBot) {
           if (item.name === Item.EGG_FOR_SELL) {
             giveRandomEgg(player, false)
+          } else if (item.name === Item.EMERA) {
+            player.atlasManager.emera += 1
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
             player.addMoney(5, true, null)

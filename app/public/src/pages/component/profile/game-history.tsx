@@ -182,7 +182,7 @@ function GameHistoryRow({
         </div>
         <div className="actions">
           <button
-            className="bubbly dark xs"
+            className="bubbly dark xs icon-only"
             title={t("save")}
             onClick={() => saveFile(r)}
           >

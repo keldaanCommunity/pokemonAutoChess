@@ -1922,8 +1922,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
 
-          if (this.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
-            player.atlasManager.emera += 1
+          if (this.state.stageLevel > STAGE_ATLAS_UNLOCKED && !isPVE) {
+            if (this.state.townEncounter !== TownEncounters.DUSKNOIR) {
+              player.atlasManager.emera += 1
+            }
             if (player.atlasManager.unlockedNodes.has("grovyle")) {
               const lastResult = player.history.at(-1)?.result
               if (
@@ -1977,6 +1979,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.botManager.updateBots()
     }
   }
+
   applyDoubleUpRoundDamage() {
     this.state.simulations.forEach((sim) => {
       if (sim.isGhostBattle) return
@@ -2023,6 +2026,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.miniGame.stop(this.room.state)
     this.state.players.forEach((player: Player) => {
       player.wanderers.clear()
+      if (this.state.stageLevel === STAGE_ATLAS_UNLOCKED) {
+        player.atlasManager.emera += 1 // only for the stage 20, gives the first emera when town phase ends and not fighting phase
+      }
     })
   }
 
