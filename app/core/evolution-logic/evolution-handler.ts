@@ -116,7 +116,6 @@ export function carryOverTeraShards(
   pokemonEvolved: Pokemon,
   pokemonsBeforeEvolution: Pokemon[]
 ) {
-  const baseTypes = getPokemonData(pokemonEvolved.name).types
   const typesGivenByItems = pokemonsBeforeEvolution.map((p) =>
     schemaValues(p.items)
       .filter((item) => isIn(SynergyItems, item))
@@ -124,9 +123,10 @@ export function carryOverTeraShards(
   )
   const teraTypes = pokemonsBeforeEvolution
     .map((p, i) =>
-      schemaValues(p.types).filter(
-        (type) => !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
-      )
+      schemaValues(p.types).filter((type) => {
+        const baseTypes = getPokemonData(p.name).types
+        return !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
+      })
     )
     .flat()
   for (const type of teraTypes.flat()) {

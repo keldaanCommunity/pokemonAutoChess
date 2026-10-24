@@ -438,8 +438,33 @@ export enum Item {
   GRIP_CLAW = "GRIP_CLAW",
   LUCKY_PUNCH = "LUCKY_PUNCH",
   PROGRESS_DEVICE = "PROGRESS_DEVICE",
-  UTILITY_UMBRELLA = "UTILITY_UMBRELLA"
+  UTILITY_UMBRELLA = "UTILITY_UMBRELLA",
+  ARMOR_FOSSIL = "ARMOR_FOSSIL",
+  CLAW_FOSSIL = "CLAW_FOSSIL",
+  COVER_FOSSIL = "COVER_FOSSIL",
+  DOME_FOSSIL = "DOME_FOSSIL",
+  HELIX_FOSSIL = "HELIX_FOSSIL",
+  JAW_FOSSIL = "JAW_FOSSIL",
+  PLUME_FOSSIL = "PLUME_FOSSIL",
+  ROOT_FOSSIL = "ROOT_FOSSIL",
+  SAIL_FOSSIL = "SAIL_FOSSIL",
+  SKULL_FOSSIL = "SKULL_FOSSIL"
 }
+
+export const FossilStones = [
+  Item.ARMOR_FOSSIL,
+  Item.CLAW_FOSSIL,
+  //Item.COVER_FOSSIL,
+  Item.DOME_FOSSIL,
+  Item.HELIX_FOSSIL,
+  Item.JAW_FOSSIL,
+  Item.PLUME_FOSSIL,
+  Item.ROOT_FOSSIL,
+  Item.SAIL_FOSSIL,
+  Item.SKULL_FOSSIL
+] satisfies Item[]
+
+export type FossilStone = (typeof FossilStones)[number]
 
 export const MemoryDiscs = [
   Item.FIRE_MEMORY,
@@ -551,7 +576,8 @@ export const TownItems = [
   Item.WANTED_NOTICE,
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT,
-  Item.SOOTHE_BELL
+  Item.SOOTHE_BELL,
+  ...FossilStones
 ] satisfies Item[]
 
 export const FishingRods = [
@@ -578,9 +604,15 @@ export const ItemComponentsNoScarf: Item[] = [
   Item.FOSSIL_STONE
 ]
 
+export const ItemComponentsSingleFossil: Item[] = [
+  ...ItemComponentsNoFossilOrScarf,
+  Item.SILK_SCARF,
+  Item.FOSSIL_STONE
+]
+
 export const ItemComponents: Item[] = [
   ...ItemComponentsNoFossilOrScarf,
-  Item.FOSSIL_STONE,
+  ...FossilStones,
   Item.SILK_SCARF
 ]
 

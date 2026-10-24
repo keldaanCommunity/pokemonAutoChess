@@ -10,9 +10,11 @@ import {
   AbsorbedItems,
   AtlasItems,
   ConsumableItems,
+  FossilStones,
   Gifts,
   Item,
   ItemComponents,
+  ItemComponentsSingleFossil,
   ItemRecipe,
   RemovableItems,
   UnholdableItems
@@ -30,18 +32,17 @@ export function ItemDetailTooltipContent({
   showItemCombinationsTooltip?: boolean
 }) {
   const { t } = useTranslation()
-  const recipes = useMemo(
-    () =>
-      ItemComponents.map((c) =>
-        entries(ItemRecipe).find(
-          ([, recipe]) =>
-            recipe != null &&
-            ((recipe[0] === item && recipe[1] === c) ||
-              (recipe[1] === item && recipe[0] === c))
-        )
-      ).filter<[Item, Item[]]>((r): r is [Item, Item[]] => r != null),
-    [item]
-  )
+  const recipes = useMemo(() => {
+    const _item = isIn(FossilStones, item) ? Item.FOSSIL_STONE : item
+    return ItemComponentsSingleFossil.map((c) =>
+      entries(ItemRecipe).find(
+        ([, recipe]) =>
+          recipe != null &&
+          ((recipe[0] === _item && recipe[1] === c) ||
+            (recipe[1] === _item && recipe[0] === c))
+      )
+    ).filter<[Item, Item[]]>((r): r is [Item, Item[]] => r != null)
+  }, [item])
 
   const formatStat = (stat: Stat, value: number) => {
     let output = value.toString()
@@ -111,7 +112,8 @@ export function ItemDetailTooltipContent({
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">
           {recipes.map(([result, recipe]) => {
-            const otherComponent = recipe[0] === item ? recipe[1] : recipe[0]
+            const _item = isIn(FossilStones, item) ? Item.FOSSIL_STONE : item
+            const otherComponent = recipe[0] === _item ? recipe[1] : recipe[0]
             return (
               <div className="game-item-detail-combination" key={result}>
                 <p>+</p>

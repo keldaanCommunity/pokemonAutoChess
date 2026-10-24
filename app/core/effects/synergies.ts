@@ -26,14 +26,20 @@ import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory, {
   getPokemonBaseline
 } from "../../models/pokemon-factory"
-import { type FlowerPot, type IPokemon, Title, Transfer } from "../../types"
+import {
+  type FlowerPot,
+  FossilStones,
+  type IPokemon,
+  Title,
+  Transfer
+} from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Item,
-  ItemComponents,
+  ItemComponentsSingleFossil,
   Scarves,
   SynergyGems,
   SynergyGivenByGem,
@@ -46,7 +52,7 @@ import { isIn } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance, pickNRandomIn } from "../../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { type Board, effectInLine } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
@@ -1009,7 +1015,15 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
               } else if (buriedItem === Item.BIG_NUGGET) {
                 player.addMoney(10, true, null)
               } else if (buriedItem === Item.TREASURE_BOX) {
-                player.items.push(...pickNRandomIn(ItemComponents, 2))
+                player.items.push(
+                  ...pickNRandomIn(ItemComponentsSingleFossil, 2).map(
+                    (item) => {
+                      return item === Item.FOSSIL_STONE
+                        ? pickRandomIn(FossilStones)
+                        : item
+                    }
+                  )
+                )
               } else if (isIn(SynergyGems, buriedItem)) {
                 const type = SynergyGivenByGem[buriedItem]
                 player.bonusSynergies.set(

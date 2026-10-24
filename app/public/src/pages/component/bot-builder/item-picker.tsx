@@ -9,7 +9,7 @@ import {
   DubiousGadgets,
   Gifts,
   Item,
-  ItemComponents,
+  ItemComponentsSingleFossil,
   MemoryDiscs,
   TMs,
   Tools,
@@ -40,7 +40,7 @@ export default function ItemPicker(props: {
     items: readonly (Item | TierListSymbol)[]
     hidden?: boolean
   }[] = [
-    { label: t("components"), key: "components", items: ItemComponents },
+    { label: t("components"), key: "components", items: ItemComponentsSingleFossil },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     {
       label: t("food"),

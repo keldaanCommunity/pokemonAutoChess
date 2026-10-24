@@ -1,6 +1,6 @@
-import { Item, SynergyGemsBuried, ToolsBuried } from "../types";
-import { BuriedTrash } from "../types/enum/Item";
-import { chance, pickRandomIn, shuffleArray } from "../utils/random";
+import { FossilStones, Item, SynergyGemsBuried, ToolsBuried } from "../types"
+import { BuriedTrash } from "../types/enum/Item"
+import { chance, pickRandomIn, shuffleArray } from "../utils/random"
 
 export function initBuriedItems() {
   const buriedItems: (Item | null)[] = new Array(24).fill(null)
@@ -12,7 +12,9 @@ export function initBuriedItems() {
 
   // 4 trash (Trash, Leftovers, Coin, Nugget, Fossil Stone)
   for (let i = 3; i < 7; i++) {
-    buriedItems[i] = pickRandomIn(BuriedTrash)
+    let trash = pickRandomIn(BuriedTrash)
+    if (trash === Item.FOSSIL_STONE) trash = pickRandomIn(FossilStones)
+    buriedItems[i] = trash
   }
 
   // 1 precious (tool, treasure box, big nugget)

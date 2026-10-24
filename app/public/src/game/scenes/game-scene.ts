@@ -13,6 +13,7 @@ import type Player from "../../../../models/colyseus-models/player"
 import { PokemonClasses } from "../../../../models/colyseus-models/pokemon"
 import type GameState from "../../../../rooms/states/game-state"
 import {
+  FossilStones,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
   type IDragDropMessage,
@@ -20,12 +21,7 @@ import {
 } from "../../../../types"
 import { DungeonMusic, type DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { GamePhaseState } from "../../../../types/enum/Game"
-import {
-  Gifts,
-  type Item,
-  ItemRecipe,
-  Mulches
-} from "../../../../types/enum/Item"
+import { Gifts, Item, ItemRecipe, Mulches } from "../../../../types/enum/Item"
 import type { Pkm } from "../../../../types/enum/Pokemon"
 import { isIn } from "../../../../utils/array"
 import { throttle } from "../../../../utils/function"
@@ -777,9 +773,15 @@ export default class GameScene extends Scene {
         ) {
           // item dragged above another item: find the resulting item
           for (const [key, value] of Object.entries(ItemRecipe)) {
+            const itemA = isIn(FossilStones, gameObject.name)
+              ? Item.FOSSIL_STONE
+              : gameObject.name
+            const itemB = isIn(FossilStones, dropZone.name)
+              ? Item.FOSSIL_STONE
+              : dropZone.name
             if (
-              (value[0] == gameObject.name && value[1] == dropZone.name) ||
-              (value[0] == dropZone.name && value[1] == gameObject.name)
+              (value[0] === itemA && value[1] === itemB) ||
+              (value[0] === itemB && value[1] === itemA)
             ) {
               this.itemsContainer?.sendToBack(dropZone)
               gameObject.showTempDetail(key as Item)

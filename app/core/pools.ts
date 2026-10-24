@@ -14,7 +14,11 @@ import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonClasses } from "../models/colyseus-models/pokemon"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import type GameState from "../rooms/states/game-state"
-import { Item, ItemComponentsNoFossilOrScarf } from "../types"
+import {
+  FossilStones,
+  type Item,
+  ItemComponentsNoFossilOrScarf
+} from "../types"
 import type { DungeonPMDO } from "../types/enum/Dungeon"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -151,7 +155,7 @@ export function assignStarters(
       state.specialGameRule !== SpecialGameRule.UNIQUE_STARTER
     ) {
       selected = Pkm.EEVEE
-      itemsProposed[i] = Item.FOSSIL_STONE
+      itemsProposed[i] = pickRandomIn(FossilStones)
     }
 
     removeFromArray(allCandidates, selected)

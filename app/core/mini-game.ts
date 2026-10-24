@@ -22,7 +22,7 @@ import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
-import { SynergyGivenByItem, Transfer } from "../types"
+import { FossilStones, SynergyGivenByItem, Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -603,6 +603,10 @@ export class MiniGame {
       items.push(...pickNRandomIn(SynergyGems, 4))
     }
 
+    if (encounter === TownEncounters.OMANYTE) {
+      items.push(...pickNRandomIn(FossilStones, 4))
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
       let item,
         count,
@@ -622,8 +626,8 @@ export class MiniGame {
         items[index] = pickRandomIn(CraftableNoStonesOrScarves)
       }
     } else if (itemsSet === ItemComponentsNoFossilOrScarf && chance(0.8)) {
-      // max 1 random fossil stone, added with 40% chance
-      items.push(Item.FOSSIL_STONE)
+      // max 1 random fossil stone, added with 80% chance
+      items.push(pickRandomIn(FossilStones))
     }
 
     return shuffleArray(items)

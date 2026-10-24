@@ -1,4 +1,5 @@
 import { BOARD_WIDTH } from "../../config"
+import { FossilPkmByStone } from "../../config/game/items"
 import { SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
@@ -7,7 +8,7 @@ import {
 } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
-import { RemovableItems, Transfer } from "../../types"
+import { FossilStones, RemovableItems, Transfer } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Emotion } from "../../types/enum/Emotion"
@@ -1912,6 +1913,16 @@ export const PassiveEffects: Partial<
           }
         }
       }
+    })
+  ],
+
+  [Passive.DITTO]: [
+    new OnItemDroppedEffect(({ item, pokemon, player }) => {
+      if (isIn(FossilStones, item)) {
+        player.transformPokemon(pokemon, FossilPkmByStone[item])
+        return false // prevent item from being equipped
+      }
+      return true
     })
   ]
 }

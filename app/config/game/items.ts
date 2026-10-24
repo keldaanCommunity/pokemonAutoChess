@@ -1,5 +1,10 @@
 import { Stat } from "../../types/enum/Game"
-import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import {
+  type FossilStone,
+  Item,
+  type ItemsSoldAtTown
+} from "../../types/enum/Item"
+import { Pkm } from "../../types/enum/Pokemon"
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
@@ -127,3 +132,16 @@ export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
 }
 
 export const ZMOVE_MAX_PP = 200
+
+export const FossilPkmByStone: { [stone in FossilStone]: Pkm } = {
+  [Item.ARMOR_FOSSIL]: Pkm.SHIELDON,
+  [Item.CLAW_FOSSIL]: Pkm.ANORITH,
+  //[	Item.COVER_FOSSIL]: Pkm.TIRTOUGA,
+  [Item.DOME_FOSSIL]: Pkm.KABUTO,
+  [Item.HELIX_FOSSIL]: Pkm.OMANYTE,
+  [Item.JAW_FOSSIL]: Pkm.TYRUNT,
+  [Item.PLUME_FOSSIL]: Pkm.ARCHEN,
+  [Item.ROOT_FOSSIL]: Pkm.LILEEP,
+  [Item.SAIL_FOSSIL]: Pkm.AMAURA,
+  [Item.SKULL_FOSSIL]: Pkm.CRANIDOS
+}

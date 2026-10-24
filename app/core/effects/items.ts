@@ -17,6 +17,8 @@ import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-dat
 import { PVEStages } from "../../models/pve-stages"
 import type GameRoom from "../../rooms/game-room"
 import {
+  FossilStones,
+  ItemComponentsNoScarf,
   MemoryDiscsBySynergy,
   SynergyByTeraShards,
   TeraShards,
@@ -2166,7 +2168,9 @@ export function openTreasureChest(
       break
     case "componentsAndTickets":
       rewards = [
-        ...pickNRandomIn(ItemComponents, 2),
+        ...pickNRandomIn(ItemComponentsNoScarf, 2).map((item) =>
+          item === Item.FOSSIL_STONE ? pickRandomIn(FossilStones) : item
+        ),
         Item.RECYCLE_TICKET,
         Item.EXCHANGE_TICKET
       ]

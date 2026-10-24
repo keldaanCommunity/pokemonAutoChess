@@ -5,10 +5,10 @@ import { getBaseAltForm } from "../../../../config"
 import { EvolutionManager } from "../../../../core/evolution-logic/evolution-manager"
 import { getUnitScore } from "../../../../core/unit-score"
 import { getAvailableEmotions } from "../../../../models/precomputed/precomputed-emotions"
-import type { IPlayer } from "../../../../types"
+import { type IPlayer, ItemComponentsNoScarf } from "../../../../types"
 import { AvatarEmotions, Emotion } from "../../../../types/enum/Emotion"
 import { GameMode } from "../../../../types/enum/Game"
-import { Item, ItemComponents } from "../../../../types/enum/Item"
+import type { Item } from "../../../../types/enum/Item"
 import {
   type PlayerDialog,
   PlayerDialogs
@@ -93,16 +93,14 @@ export function EmoteMenuComponent(props: {
           </ul>
 
           <ul className="item-emotes">
-            {ItemComponents.filter((item) => item !== Item.SILK_SCARF).map(
-              (item) => (
-                <li
-                  key={`item-emote-${item}`}
-                  onClick={() => props.sendEmote(item)}
-                >
-                  <img src={`assets/item/${item}.png`} title={item} />
-                </li>
-              )
-            )}
+            {ItemComponentsNoScarf.map((item) => (
+              <li
+                key={`item-emote-${item}`}
+                onClick={() => props.sendEmote(item)}
+              >
+                <img src={`assets/item/${item}.png`} title={item} />
+              </li>
+            ))}
           </ul>
 
           <ul className="text-emotes">

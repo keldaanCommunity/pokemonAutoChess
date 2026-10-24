@@ -3,14 +3,14 @@ import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
-import type { IPokemon } from "../../types"
+import { FossilStones, type IPokemon } from "../../types"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType, Rarity } from "../../types/enum/Game"
 import {
   Berries,
   Dishes,
   Item,
-  ItemComponents,
+  ItemComponentsSingleFossil,
   Sweets
 } from "../../types/enum/Item"
 import { Pkm, Unowns } from "../../types/enum/Pokemon"
@@ -165,7 +165,9 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
-      unown.player.items.push(pickRandomIn(ItemComponents))
+      let component = pickRandomIn(ItemComponentsSingleFossil)
+      if(component === Item.FOSSIL_STONE) component = pickRandomIn(FossilStones)
+      unown.player.items.push(component)
     }
   }
 }

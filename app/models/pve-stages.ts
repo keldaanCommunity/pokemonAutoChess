@@ -1,4 +1,4 @@
-import { Emotion } from "../types"
+import { Emotion, FossilStones } from "../types"
 import { Stat } from "../types/enum/Game"
 import {
   AtlasItems,
@@ -149,7 +149,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
         return pickNRandomIn(AtlasItems, 3)
       } else {
         return pickNRandomIn(
-          [...ItemComponentsNoFossilOrScarf, Item.FOSSIL_STONE],
+          [...ItemComponentsNoFossilOrScarf, pickRandomIn(FossilStones)],
           3
         )
       }

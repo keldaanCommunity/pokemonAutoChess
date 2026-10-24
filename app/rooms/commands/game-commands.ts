@@ -70,6 +70,7 @@ import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
   FlowerPot,
+  FossilStones,
   type IClient,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
@@ -617,7 +618,10 @@ export class OnDragDropCombineCommand extends Command<
 
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
-      if (ItemComponentsNoScarf.includes(exchangedItem)) {
+      if (
+        ItemComponentsNoFossilOrScarf.includes(exchangedItem) ||
+        FossilStones.includes(exchangedItem)
+      ) {
         result = pickRandomIn(
           ItemComponentsNoFossilOrScarf.filter((i) => i !== exchangedItem)
         )
@@ -649,11 +653,13 @@ export class OnDragDropCombineCommand extends Command<
       return
     } else {
       // find recipe result
+      const _itemA = isIn(FossilStones, itemA) ? Item.FOSSIL_STONE : itemA
+      const _itemB = isIn(FossilStones, itemB) ? Item.FOSSIL_STONE : itemB
       const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
       for (const [key, value] of recipes) {
         if (
-          (value[0] == itemA && value[1] == itemB) ||
-          (value[0] == itemB && value[1] == itemA)
+          (value[0] == _itemA && value[1] == _itemB) ||
+          (value[0] == _itemB && value[1] == _itemA)
         ) {
           result = key
           break
@@ -883,10 +889,14 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (isBasicItem && existingBasicItemToCombine) {
+      const itemA = isIn(FossilStones, item) ? Item.FOSSIL_STONE : item
+      const itemB = isIn(FossilStones, existingBasicItemToCombine)
+        ? Item.FOSSIL_STONE
+        : existingBasicItemToCombine
       const recipe = Object.entries(ItemRecipe).find(
         ([_result, recipe]) =>
-          (recipe[0] === existingBasicItemToCombine && recipe[1] === item) ||
-          (recipe[0] === item && recipe[1] === existingBasicItemToCombine)
+          (recipe[0] === itemA && recipe[1] === itemB) ||
+          (recipe[0] === itemB && recipe[1] === itemA)
       )
 
       if (!recipe) {
@@ -1533,7 +1543,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
-          const items = pickNRandomIn(ItemComponentsNoScarf, 3)
+          const items = pickNRandomIn(ItemComponentsNoScarf, 3).map((item) =>
+            item === Item.FOSSIL_STONE ? pickRandomIn(FossilStones) : item
+          )
           const pokemons: Pkm[] = []
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
