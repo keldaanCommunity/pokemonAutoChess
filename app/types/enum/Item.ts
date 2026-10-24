@@ -810,7 +810,6 @@ export const Tools = [
   Item.MAGMARIZER,
   Item.POKERUS_VIAL,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
 ] satisfies Item[]
 
@@ -826,7 +825,6 @@ export const ArtificialItems = [
   Item.POKERUS_VIAL,
   Item.COOKING_POT,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE,
   Item.TERRAIN_EXTENDER
 ] satisfies Tool[]
 
@@ -980,7 +978,6 @@ export const ToolsBuried: Tool[] = [
   Item.ELECTIRIZER,
   Item.MAGMARIZER,
   Item.MAX_ELIXIR,
-  Item.EXP_SHARE,
   Item.DRAGON_SCALE
 ]
 
@@ -1547,7 +1544,8 @@ export const SpecialItems: Item[] = [
   Item.BALL,
   ...Flavors,
   ...Nectars,
-  Item.RED_SCALE
+  Item.RED_SCALE,
+  Item.EXP_SHARE
 ] satisfies Item[]
 
 export const AbsorbedItems = [

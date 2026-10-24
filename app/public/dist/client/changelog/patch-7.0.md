@@ -29,6 +29,7 @@ This special synergy is only given through special items and Pokémon. Its effec
 - New Atlas Item: Looplet - Up to 5 EMERA can be sealed in the looplet, each granting additional stats and effects to the holder. Gain 1 EMERA when acquired.
 - Removed Shiny Items: Red Scale (moved to Special), Shiny stone (moved to Light 7 synergy effect), Eviolite, Gold Bottle Cap, Gold Mask, Absorb Bulb
 - There are now 10 different sorts of fossil stones. They all work the same as an item component, but now have a unique interaction with Ditto.
+- Exp Share is no longer a tool, but a special item given on shiny Stage 15 PvE encounter
 
 # Gameplay
 

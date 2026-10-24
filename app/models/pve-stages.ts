@@ -122,7 +122,7 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     marowakItems: [[Item.METAL_COAT], [Item.DEEP_SEA_TOOTH]],
     shinyChance: 1 / 100,
     rewards: ItemComponentsNoFossilOrScarf,
-    getRewards(player: Player) {
+    getRewards(player: Player, shinyEncounter: boolean) {
       const rewards: Item[] = []
       if (
         schemaValues(player.board).some((p) => p.name === Pkm.CHARCADET) ||
@@ -142,17 +142,17 @@ export const PVEStages: { [turn: number]: PVEStage } = {
                 : Item.MALICIOUS_ARMOR
         rewards.push(armorReceived)
       }
+
+      if (shinyEncounter) {
+        rewards.push(Item.EXP_SHARE)
+      }
       return rewards
     },
-    getRewardsPropositions(_player: Player, shinyEncounter: boolean) {
-      if (shinyEncounter) {
-        return pickNRandomIn(AtlasItems, 3)
-      } else {
-        return pickNRandomIn(
-          [...ItemComponentsNoFossilOrScarf, pickRandomIn(FossilStones)],
-          3
-        )
-      }
+    getRewardsPropositions(_player: Player) {
+      return pickNRandomIn(
+        [...ItemComponentsNoFossilOrScarf, pickRandomIn(FossilStones)],
+        3
+      )
     }
   },
 
