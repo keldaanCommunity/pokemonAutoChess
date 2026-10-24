@@ -18,7 +18,8 @@ export class JudgementStrategy extends AbilityStrategy {
         synergyLevelsCount += synergies.get(type) ?? 0
       })
     }
-    const damage = ([10, 10, 10, 20][pokemon.stars - 1] ?? 20) * synergyLevelsCount
+    const damage =
+      ([10, 10, 10, 20][pokemon.stars - 1] ?? 20) * synergyLevelsCount
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

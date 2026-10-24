@@ -1,4 +1,4 @@
-import { keys } from "../../utils/object";
+import { keys } from "../../utils/object"
 import { Pkm } from "./Pokemon"
 
 export const TownEncounters = {

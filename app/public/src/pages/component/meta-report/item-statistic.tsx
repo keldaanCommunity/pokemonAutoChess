@@ -59,7 +59,11 @@ export default function ItemStatistic(props: { item: IItemV2; rank: number }) {
             color="#e8a838"
             invertY={true}
           />
-          <HistoryChart entries={countHistory} label={t("meta_report.count")} color="#76c893" />
+          <HistoryChart
+            entries={countHistory}
+            label={t("meta_report.count")}
+            color="#76c893"
+          />
         </div>
       )}
     </div>

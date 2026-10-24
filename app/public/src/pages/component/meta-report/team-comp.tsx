@@ -119,7 +119,9 @@ export default function TeamComp(props: { team: IMetaV2; rank: number }) {
               </span>
             </div>
           </div>
-          <div className="popular-pokemons-header">{t("meta_report.popular_pokemons")}</div>
+          <div className="popular-pokemons-header">
+            {t("meta_report.popular_pokemons")}
+          </div>
           <div className="player-team-pokemons">
             {sortedPokemons.map((pokemon) => {
               const pokemonData = props.team.mean_team.pokemons[pokemon]

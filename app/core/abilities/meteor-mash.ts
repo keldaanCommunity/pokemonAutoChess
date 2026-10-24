@@ -12,7 +12,9 @@ export class MeteorMashStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const nbHits = 3 + (pokemon.status.psychicField ? 1 : 0)
-    const damage = Math.round(pokemon.atk * ([100, 120, 140, 200][pokemon.stars - 1] ?? 200) / 100)
+    const damage = Math.round(
+      (pokemon.atk * ([100, 120, 140, 200][pokemon.stars - 1] ?? 200)) / 100
+    )
     for (let n = 0; n < nbHits; n++) {
       target.handleSpecialDamage(
         damage,

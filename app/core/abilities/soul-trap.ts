@@ -14,7 +14,9 @@ export class SoulTrapStrategy extends AbilityStrategy {
     const shieldAmount = [25, 50, 108, 108][pokemon.stars - 1] ?? 108
     const ppLoss = [10, 10, 10, 50][pokemon.stars - 1] ?? 50
     const fatigueDuration = Math.round(
-      ([2000, 2000, 2000, 5000][pokemon.stars - 1] ?? 5000) * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      ([2000, 2000, 2000, 5000][pokemon.stars - 1] ?? 5000) *
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
     )
     pokemon.addShield(shieldAmount, pokemon, 0, false)
     const enemies = board

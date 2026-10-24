@@ -17,7 +17,9 @@ export class CallOfTheWildStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
     const nbSpawns = 2
-    const nbCatchs = Math.round(3 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1))
+    const nbCatchs = Math.round(
+      3 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    )
 
     const candidates: IPokemonData[] = PRECOMPUTED_POKEMONS_PER_TYPE[
       Synergy.WILD

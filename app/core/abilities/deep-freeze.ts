@@ -16,7 +16,7 @@ export class DeepFreezeStrategy extends AbilityStrategy {
     // Ability constants
     const damage = 10 // Damage per ice bolt
     const armorReduction = -1 // Special defense reduction per hit
-    const totalBolts = [5,7,9,20][pokemon.stars - 1] ?? 20 // Total number of ice bolts to fire
+    const totalBolts = [5, 7, 9, 20][pokemon.stars - 1] ?? 20 // Total number of ice bolts to fire
     const boltDelay = 333 // Delay between bolts in milliseconds
 
     // Tracking variables

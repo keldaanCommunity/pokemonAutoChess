@@ -19,7 +19,8 @@ export class MultiAttackStrategy extends AbilityStrategy {
       })
     }
 
-    const damage = ([7, 10, 13, 20][pokemon.stars - 1] ?? 20) * synergyLevelsCount
+    const damage =
+      ([7, 10, 13, 20][pokemon.stars - 1] ?? 20) * synergyLevelsCount
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)

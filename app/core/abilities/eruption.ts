@@ -11,7 +11,7 @@ export class EruptionStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const damage = [30, 50, 70, 90][pokemon.stars - 1] ?? 90
-    const numberOfProjectiles = [20,30,45,60][pokemon.stars - 1] ?? 60
+    const numberOfProjectiles = [20, 30, 45, 60][pokemon.stars - 1] ?? 60
 
     for (let i = 0; i < numberOfProjectiles; i++) {
       pokemon.commands.push(

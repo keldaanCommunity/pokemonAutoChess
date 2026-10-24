@@ -12,7 +12,8 @@ export class StrengthStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const dmgMultiplier = [2, 2, 2, 4][pokemon.stars - 1] ?? 4
-    const damage = dmgMultiplier * (pokemon.atk + pokemon.def + pokemon.speDef) + pokemon.ap
+    const damage =
+      dmgMultiplier * (pokemon.atk + pokemon.def + pokemon.speDef) + pokemon.ap
     target.handleSpecialDamage(
       damage,
       board,

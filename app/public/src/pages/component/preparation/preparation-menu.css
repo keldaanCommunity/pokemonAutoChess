@@ -81,6 +81,6 @@
 
 .double-up-pair.unpaired::after {
   content: "";
-  border: 2px dashed rgba(255,255,255,0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
   border-radius: 8px;
 }

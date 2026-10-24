@@ -12,7 +12,7 @@ export class FieryWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [30,40,50,80][pokemon.stars - 1]
+    const damage = [30, 40, 50, 80][pokemon.stars - 1]
 
     board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 4, false)

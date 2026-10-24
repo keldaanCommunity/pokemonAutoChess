@@ -11,8 +11,7 @@ export class MoonDreamStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const duration =
-      ([3000, 6000, 9000, 18000][pokemon.stars - 1] ?? 18000)
+    const duration = [3000, 6000, 9000, 18000][pokemon.stars - 1] ?? 18000
 
     const shield = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
     const count = 3

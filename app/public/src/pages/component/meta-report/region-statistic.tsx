@@ -37,7 +37,8 @@ export default function RegionStatistic(props: {
           <label>{t("meta_report.count")}:</label> {props.region.count}
         </span>
         <span>
-          <label>{t("meta_report.average_place")}:</label> {props.region.rank.toFixed(2)}
+          <label>{t("meta_report.average_place")}:</label>{" "}
+          {props.region.rank.toFixed(2)}
         </span>
       </div>
       <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>

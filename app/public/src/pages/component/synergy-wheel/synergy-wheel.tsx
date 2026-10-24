@@ -133,7 +133,8 @@ export default function SynergyWheelModal(props: {
                   )) ||
                   // Fallback for when sequences aren't ready yet
                   [...Array(20)].map((_, symbolIndex) => {
-                    const synergy = SynergyArray[symbolIndex % SynergyArray.length]
+                    const synergy =
+                      SynergyArray[symbolIndex % SynergyArray.length]
                     return (
                       <div key={`${synergy}-${symbolIndex}`} className="symbol">
                         <SynergyIcon type={synergy} size="60px" />

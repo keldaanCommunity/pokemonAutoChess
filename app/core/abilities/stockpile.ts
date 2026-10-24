@@ -15,7 +15,9 @@ export class StockpileStrategy extends AbilityStrategy {
 
     if (pokemon.count.ult % 4 === 0) {
       // If over 3 stacks, spit up, propelling the user to the backline and dealing 50% of max HP as SPECIAL to the target
-      const damage = Math.ceil(([0.5, 0.5, 0.5, 1.0][pokemon.stars - 1] ?? 1.0) * pokemon.maxHP)
+      const damage = Math.ceil(
+        ([0.5, 0.5, 0.5, 1.0][pokemon.stars - 1] ?? 1.0) * pokemon.maxHP
+      )
       target.handleSpecialDamage(
         damage,
         board,
@@ -42,7 +44,12 @@ export class StockpileStrategy extends AbilityStrategy {
       pokemon.hp = Math.min(pokemon.hp, pokemon.maxHP)
       pokemon.addSpeed(30, pokemon, 0, false)
     } else {
-      pokemon.addMaxHP([30, 40, 50, 100][pokemon.stars - 1] ?? 100, pokemon, 1, crit)
+      pokemon.addMaxHP(
+        [30, 40, 50, 100][pokemon.stars - 1] ?? 100,
+        pokemon,
+        1,
+        crit
+      )
       pokemon.addSpeed(-10, pokemon, 0, false)
     }
   }

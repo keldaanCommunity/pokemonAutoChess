@@ -16,8 +16,8 @@ export type Keybindings = {
   emote: string
   prev_player: string
   next_player: string
-  prev_player_by_rank: string;
-  next_player_by_rank: string;
+  prev_player_by_rank: string
+  next_player_by_rank: string
   board_return: string
   wiki: string
   team_planner: string

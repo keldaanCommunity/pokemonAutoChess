@@ -11,7 +11,7 @@ export class DragonEnergyStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damageMultiplier = [1,1,1,1.5][pokemon.stars - 1] ?? 1.5
+    const damageMultiplier = [1, 1, 1, 1.5][pokemon.stars - 1] ?? 1.5
     target.handleSpecialDamage(
       pokemon.hp * damageMultiplier,
       board,

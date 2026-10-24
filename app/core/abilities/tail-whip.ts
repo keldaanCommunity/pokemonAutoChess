@@ -10,7 +10,8 @@ export class TailWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const defLoss = -([20, 30, 40, 50][pokemon.stars - 1] ?? 50) / 100 * target.def
+    const defLoss =
+      (-([20, 30, 40, 50][pokemon.stars - 1] ?? 50) / 100) * target.def
     target.addDefense(defLoss, pokemon, 1, crit)
   }
 }

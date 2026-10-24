@@ -1,16 +1,15 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import {
-  RarityColor,
-  RarityProbabilityPerLevel
-} from "../../../../../config"
+import { RarityColor, RarityProbabilityPerLevel } from "../../../../../config"
 import { Rarity } from "../../../../../types/enum/Game"
 import { useAppSelector } from "../../../hooks"
 
 export default function GameRarityPercentage() {
   const { t } = useTranslation()
   const level = useAppSelector((state) => state.game.experienceManager.level)
-  const maxLevel = useAppSelector((state) => state.game.experienceManager.maxLevel)
+  const maxLevel = useAppSelector(
+    (state) => state.game.experienceManager.maxLevel
+  )
   const RarityTiers = [
     Rarity.COMMON,
     Rarity.UNCOMMON,

@@ -166,7 +166,8 @@ export class HiddenPowerIStrategy extends HiddenPowerStrategy {
     super.process(unown, board, target, crit)
     if (unown.player && !unown.isGhostOpponent) {
       let component = pickRandomIn(ItemComponentsSingleFossil)
-      if(component === Item.FOSSIL_STONE) component = pickRandomIn(FossilStones)
+      if (component === Item.FOSSIL_STONE)
+        component = pickRandomIn(FossilStones)
       unown.player.items.push(component)
     }
   }

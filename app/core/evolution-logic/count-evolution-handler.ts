@@ -8,7 +8,12 @@ import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
 import { shuffleArray } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { carryOverChangedAbilities, carryOverPermanentStats, carryOverTeraShards, EvolutionHandler } from "./evolution-handler"
+import {
+  carryOverChangedAbilities,
+  carryOverPermanentStats,
+  carryOverTeraShards,
+  EvolutionHandler
+} from "./evolution-handler"
 
 export class CountEvolutionHandler extends EvolutionHandler {
   numberRequired: number

@@ -19,12 +19,8 @@ export class ShockwaveStrategy extends AbilityStrategy {
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, range, false)
       .forEach((cell) => {
         if (cell.value && cell.value.team != pokemon.team) {
-          const distance = distanceC(
-            pokemon.positionX,
-            pokemon.positionY,
-            cell.x,
-            cell.y
-          ) - 1
+          const distance =
+            distanceC(pokemon.positionX, pokemon.positionY, cell.x, cell.y) - 1
           const damageMultiplier = 1 - damageReductionPerTile * distance
           cell.value.handleSpecialDamage(
             Math.round(damage * damageMultiplier),

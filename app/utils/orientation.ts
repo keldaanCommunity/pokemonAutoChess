@@ -38,7 +38,7 @@ export function getOrientation(x1: number, y1: number, x2: number, y2: number) {
   return getOrientationFromAngle(angle)
 }
 
-export function getOrientationFromAngle(angle: number){
+export function getOrientationFromAngle(angle: number) {
   if (angle < 0) {
     angle += 2 * Math.PI
   }

@@ -14,7 +14,9 @@ export class GlaciateStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const iceSynergyLevel = pokemon.player?.synergies.get(Synergy.ICE) ?? 0
-    const damage = ([30, 40, 50, 100][pokemon.stars - 1] ?? 100) + iceSynergyLevel * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
+    const damage =
+      ([30, 40, 50, 100][pokemon.stars - 1] ?? 100) +
+      iceSynergyLevel * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
     pokemon.commands.push(
       new DelayedCommand(() => {
         const cells = board.getAdjacentCells(

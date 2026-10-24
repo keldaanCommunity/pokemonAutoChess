@@ -14,7 +14,9 @@ export default function GamePlayerHpsMeter({
   const sortedHps = useMemo(
     () =>
       dpsMeter
-        .filter((d) => !isIn(EnvironmentalEffects, d.id) || d.heal + d.shield > 0)
+        .filter(
+          (d) => !isIn(EnvironmentalEffects, d.id) || d.heal + d.shield > 0
+        )
         .sort((a, b) => {
           return b.shield + b.heal - (a.shield + a.heal)
         }),

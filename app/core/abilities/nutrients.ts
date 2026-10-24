@@ -16,8 +16,18 @@ export class NutrientsStrategy extends AbilityStrategy {
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
-      lowestHealthAlly.addDefense([1, 2, 3, 6][pokemon.stars - 1] ?? 6, pokemon, 1, crit)
-      lowestHealthAlly.addSpecialDefense([1, 2, 3, 6][pokemon.stars - 1] ?? 6, pokemon, 1, crit)
+      lowestHealthAlly.addDefense(
+        [1, 2, 3, 6][pokemon.stars - 1] ?? 6,
+        pokemon,
+        1,
+        crit
+      )
+      lowestHealthAlly.addSpecialDefense(
+        [1, 2, 3, 6][pokemon.stars - 1] ?? 6,
+        pokemon,
+        1,
+        crit
+      )
       pokemon.broadcastAbility({
         positionX: pokemon.positionX,
         positionY: pokemon.positionY,

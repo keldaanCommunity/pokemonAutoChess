@@ -3763,7 +3763,8 @@ export const PkmDuos: Record<PkmDuo, Pkm[]> = {
 
 export const isPkmDuo = (p: PkmProposition): p is PkmDuo => p in PkmDuos
 
-export const pkmsFromProposition = (p: PkmProposition): Pkm[] => isPkmDuo(p) ? PkmDuos[p] : [p]
+export const pkmsFromProposition = (p: PkmProposition): Pkm[] =>
+  isPkmDuo(p) ? PkmDuos[p] : [p]
 
 export const Unowns: Pkm[] = [
   Pkm.UNOWN_A,

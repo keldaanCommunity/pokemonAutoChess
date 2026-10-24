@@ -11,7 +11,7 @@ export class DigStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [10,20,40,80][pokemon.stars - 1] ?? 80
+    const damage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
 
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)

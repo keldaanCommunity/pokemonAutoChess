@@ -13,8 +13,10 @@ export default function GamePlayers(props: { click: (id: string) => void }) {
   const teamColorMap = new Map<string, string>()
 
   if (isDoubleUp) {
-    const teams = [...new Set(players.map(p => p.doubleUpTeamId))]
-    teams.forEach((team, i) => teamColorMap.set(team, `var(--color-team${i+1})`))
+    const teams = [...new Set(players.map((p) => p.doubleUpTeamId))]
+    teams.forEach((team, i) =>
+      teamColorMap.set(team, `var(--color-team${i + 1})`)
+    )
   }
 
   const sortedPlayers = sortPlayersByRankAndTeam(players, gameMode)

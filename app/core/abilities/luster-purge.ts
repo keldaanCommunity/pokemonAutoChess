@@ -35,7 +35,12 @@ export class LusterPurgeStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addSpecialDefense(-([5, 5, 5, 10][pokemon.stars - 1] ?? 10), pokemon, 0, false)
+        cell.value.addSpecialDefense(
+          -([5, 5, 5, 10][pokemon.stars - 1] ?? 10),
+          pokemon,
+          0,
+          false
+        )
       }
     })
 
@@ -50,7 +55,12 @@ export class LusterPurgeStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.addSpecialDefense(-([5, 5, 5, 10][pokemon.stars - 1] ?? 10), pokemon, 0, false)
+            cell.value.addSpecialDefense(
+              -([5, 5, 5, 10][pokemon.stars - 1] ?? 10),
+              pokemon,
+              0,
+              false
+            )
           }
         })
       }, 1000)

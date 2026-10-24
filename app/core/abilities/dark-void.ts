@@ -12,7 +12,7 @@ export class DarkVoidStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [10,20,30,60][pokemon.stars - 1] ?? 60
+    const damage = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
     board
       .getCellsInRadius(target.positionX, target.positionY, 4, true)
       .forEach((cell) => {

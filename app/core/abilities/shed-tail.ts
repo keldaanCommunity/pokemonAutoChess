@@ -17,7 +17,12 @@ export class ShedTailStrategy extends AbilityStrategy {
     ).sort((a, b) => a.hp / a.maxHP - b.hp / b.maxHP)[0]
 
     if (lowestHealthAlly) {
-      lowestHealthAlly.addShield([40, 60, 80, 160][pokemon.stars - 1] ?? 160, pokemon, 1, crit)
+      lowestHealthAlly.addShield(
+        [40, 60, 80, 160][pokemon.stars - 1] ?? 160,
+        pokemon,
+        1,
+        crit
+      )
       const coord =
         pokemon.simulation.getClosestFreeCellToPokemonEntity(lowestHealthAlly)
       if (coord) {

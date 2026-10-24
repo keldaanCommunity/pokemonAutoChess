@@ -10,7 +10,7 @@ export class GrassWhistleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    let n = [1,2,4,8][pokemon.stars - 1] ?? 8
+    let n = [1, 2, 4, 8][pokemon.stars - 1] ?? 8
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team && n > 0) {
         tg.status.triggerSleep(2000, tg)

@@ -9,7 +9,9 @@ export type {
 } from "../../../types/models/pokemons-statistic-v2"
 
 export async function fetchMetaPokemons(): Promise<IPokemonsStatisticV2[]> {
-  return fetch(`/meta/pokemons?t=${new Date().getUTCDate()}`).then((res) => res.json())
+  return fetch(`/meta/pokemons?t=${new Date().getUTCDate()}`).then((res) =>
+    res.json()
+  )
 }
 
 export async function fetchMetaTypes(): Promise<ITypeStatistics> {

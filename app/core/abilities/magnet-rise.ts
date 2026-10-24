@@ -23,7 +23,12 @@ export class MagnetRiseStrategy extends AbilityStrategy {
     alliesBuffed.push(pokemon)
     alliesBuffed.forEach((ally) => {
       ally.status.triggerProtect(2000)
-      ally.addDodgeChance([0.1, 0.1, 0.1, 0.2][pokemon.stars - 1] ?? 0.2, pokemon, 1, crit)
+      ally.addDodgeChance(
+        [0.1, 0.1, 0.1, 0.2][pokemon.stars - 1] ?? 0.2,
+        pokemon,
+        1,
+        crit
+      )
       pokemon.broadcastAbility({
         positionX: ally.positionX,
         positionY: ally.positionY

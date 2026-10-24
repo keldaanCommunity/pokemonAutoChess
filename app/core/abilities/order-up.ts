@@ -1,9 +1,9 @@
-import { getBaseAltForm } from "../../config";
+import { getBaseAltForm } from "../../config"
 import { Item } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
-import { schemaValues } from "../../utils/schemas";
+import { schemaValues } from "../../utils/schemas"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"

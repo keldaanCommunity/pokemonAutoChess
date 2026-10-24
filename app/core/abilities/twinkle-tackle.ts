@@ -14,7 +14,7 @@ export class TwinkleTackleStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [100,200,300,400,800][pokemon.stars - 1] ?? 800
+    const damage = [100, 200, 300, 400, 800][pokemon.stars - 1] ?? 800
     const duration = 2000
     const ejectChance = 0.3
 

@@ -86,4 +86,5 @@ export type TAtlasTree = {
   connections: AtlasNodeConnection[]
 }
 
-export const isLegendaryNode = (node: AtlasNode): node is LegendaryNode => node.type === "legendary"
+export const isLegendaryNode = (node: AtlasNode): node is LegendaryNode =>
+  node.type === "legendary"

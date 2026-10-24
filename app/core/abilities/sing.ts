@@ -8,7 +8,9 @@ export class SingStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const timer = Math.round(
-      ([2000, 2000, 2000, 4000][pokemon.stars - 1] ?? 4000) * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      ([2000, 2000, 2000, 4000][pokemon.stars - 1] ?? 4000) *
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
     )
     const count = [1, 2, 3, 5][pokemon.stars - 1] ?? 5
     const rank = new Array<PokemonEntity>()

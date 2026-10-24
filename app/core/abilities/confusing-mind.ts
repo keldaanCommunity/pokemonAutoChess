@@ -27,7 +27,7 @@ export class ConfusingMindStrategy extends AbilityStrategy {
     })
 
     const duration = 3000
-    const count = [1,2,3,5][pokemon.stars - 1] ?? 5
+    const count = [1, 2, 3, 5][pokemon.stars - 1] ?? 5
     for (let i = 0; i < count; i++) {
       const targetConfused = rank[i]
       if (targetConfused) {
