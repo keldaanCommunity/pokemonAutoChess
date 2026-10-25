@@ -2557,7 +2557,7 @@
 		"GOOGLE_SPECS": "Recebe +10% ATK base, AP e HP máximo como SHIELD por item equipado. Recebe outra $t(tool).",
 		"HATCHER": "Cada BABY tem [10,LK]% de chance de encontrar um EGG_FOR_SELL.",
 		"BREEDER": "Recebe ao menos um EGG_FOR_SELL após cada derrota contra um jogador. Ovos chocam 1 estágio mais cedo.",
-		"GOLDEN_EGGS": "Cada BABY tem [5,LK]% de chance de encontrar um Ovo Dourado (máx. 1 no banco). Ovos dourados podem ser vendidos por 10 GOLD ou dar um item brilhante quando chocados.",
+		"GOLDEN_EGGS": "Cada BABY tem [5,LK]% de chance de encontrar um Ovo Dourado. Ovos dourados podem ser vendidos por 10 GOLD ou dar um EMERA quando chocados.",
 		"GRASSY_TERRAIN": "Aumenta o dano causado em 20% (somente Grama)",
 		"PSYCHIC_TERRAIN": "Aumente o dano causado em 20% (somente Psíquico)",
 		"ELECTRIC_TERRAIN": "Aumente o dano causado em 20% (somente Elétrico)",

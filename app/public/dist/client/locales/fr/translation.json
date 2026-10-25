@@ -2578,7 +2578,7 @@
 		"GOOGLE_SPECS": "Gagne +10% d'ATK de base, de AP et de HP max en SHIELD par objet détenu. Obtenez un autre outil",
 		"HATCHER": "Chaque BABY a [10,LK]% de chance de vous rapporter un EGG_FOR_SELL",
 		"BREEDER": "Récupérez au moins un EGG_FOR_SELL garanti après chaque défaite contre un joueur. Les Œufs éclosent 1 tour plus tôt",
-		"GOLDEN_EGGS": "Chaque BABY a [5,LK]% de chance de vous rapporter un Œuf d'Or, (1 Œuf d'Or max sur le banc). Les Œufs d'Or peuvent être vendus pour 10 GOLD ou rapporter un Objet Shiny à l'éclosion",
+		"GOLDEN_EGGS": "Chaque BABY a [5,LK]% de chance de vous rapporter un Œuf d'Or. Les Œufs d'Or peuvent être vendus pour 10 GOLD ou rapporter une EMERA à l'éclosion",
 		"GRASSY_TERRAIN": "Augmente les dégâts infligés de 20% (GRASS uniquement)",
 		"PSYCHIC_TERRAIN": "Augmente les dégâts infligés de 20% (PSYCHIC uniquement)",
 		"ELECTRIC_TERRAIN": "Augmente les dégâts infligés de 20% (ELECTRIC uniquement)",

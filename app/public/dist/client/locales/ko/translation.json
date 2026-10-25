@@ -2574,7 +2574,7 @@
 		"GOOGLE_SPECS": "지닌물건의 개수마다 BASE  ATK, AP 10% 증가 및 최대 HP의 10%에 해당하는 SHIELD 획득. 세번째 인조 도구 획득",
 		"HATCHER": "각각의 BABY 포켓몬들은 [10,LK]% 확률로 알을 찾을 수 있음",
 		"BREEDER": "플레이어 배틀에서 패배하면 EGG_FOR_SELL 획득, 알이 1스테이지 더 빨리 부화함",
-		"GOLDEN_EGGS": "각각의 BABY 포켓몬들은 [5,LK]% 확률로 황금 알을 찾을 수 있음(최대 1개 소지), 황금알은 10 GOLD 에 판매하거나 부화 시 빛나는 도구 획득",
+		"GOLDEN_EGGS": "각각의 BABY 포켓몬들은 [5,LK]% 확률로 황금 알을 찾을 수 있음, 황금알은 10 GOLD 에 판매하거나, 부화시켜 에메라EMERA를 얻을 수 있습니다.",
 		"GRASSY_TERRAIN": "데미지가 20% 증가한다. (GRASS 한정) ",
 		"PSYCHIC_TERRAIN": "데미지가 20% 증가한다. (PSYCHIC 한정)",
 		"ELECTRIC_TERRAIN": "데미지가 20% 증가한다. (ELECTRIC  한정)",

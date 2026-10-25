@@ -15,6 +15,7 @@ This special synergy is only given through special items and Pokémon. Its effec
 # Changes to Synergies
 
 - Fire 8 rework: no longer gives Fire Shard. After 10 seconds, the whole board is set on fire and BURN all Pokémon, allies and enemies, and your FIRE Pokémon gain 15 SPEED.
+- Baby 7: Golden eggs now give an EMERA when hatched. Removed the limit of max 1 golden egg on bench.
 
 # Changes to Pokemon & Abilities
 

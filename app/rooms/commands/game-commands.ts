@@ -2324,10 +2324,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.effects.has(EffectEnum.GOLDEN_EGGS)
     const hasLostLastBattle =
       player.history.at(-1)?.result === BattleResult.DEFEAT
-    const eggsOnBench = schemaValues(player.board).filter(
-      (p) => p.name === Pkm.EGG
-    )
-    const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
     let nbEggsFound = 0
     let goldenEggFound = false
 
@@ -2343,7 +2339,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       for (const baby of babies) {
         if (
           player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-          nbOfGoldenEggsOnBench === 0 &&
           chance(GOLDEN_EGG_CHANCE, baby)
         ) {
           nbEggsFound++
@@ -2377,7 +2372,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (
         goldenEggFound === false &&
         player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-        nbOfGoldenEggsOnBench === 0 &&
         chance(playerGoldenEggChanceStacked)
       ) {
         goldenEggFound = true
@@ -2397,8 +2391,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     for (let i = 0; i < nbEggsFound; i++) {
       if (getFreeSpaceOnBench(player.board) === 0) continue
-      const isGoldenEgg =
-        goldenEggFound && i === 0 && nbOfGoldenEggsOnBench === 0
+      const isGoldenEgg = goldenEggFound && i === 0
       giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(EffectEnum.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance

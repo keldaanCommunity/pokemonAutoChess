@@ -1,7 +1,5 @@
-import { GoldenEggItems } from "../../config"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Item } from "../../types"
 import { Pkm } from "../../types/enum/Pokemon"
 import { pickRandomIn } from "../../utils/random"
 import { EvolutionHandler } from "./evolution-handler"
@@ -23,7 +21,7 @@ export class HatchEvolutionHandler extends EvolutionHandler {
     )
 
     if (pokemonEvolved != null && pokemon.name === Pkm.EGG && pokemon.shiny) {
-      player.items.push(pickRandomIn(GoldenEggItems))
+      player.atlasManager.emera += 1
     }
 
     return pokemonEvolved

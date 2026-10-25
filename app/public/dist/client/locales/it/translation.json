@@ -2433,7 +2433,7 @@
 		"GOOGLE_SPECS": "Guadagna +10% di ATK base, AP e HP massimi come SHIELD per ogni oggetto equipaggiato. Ottieni un altro $t(tool).",
 		"HATCHER": "Ogni BABY ha [10,LK]% di possibilità di trovare un Uovo.",
 		"BREEDER": "Ottieni un uovo dopo ogni sconfitta contro un giocatore",
-		"GOLDEN_EGGS": "Ogni BABY ha [5,LK]% di possibilità di trovare un Uovo d'Oro, col massimo 1 uovo d'oro in panchina. Le uova d'oro possono essere vendute per 10 GOLD o ottenere un oggetto Shiny quando si schiudono.",
+		"GOLDEN_EGGS": "Ogni BABY ha [5,LK]% di possibilità di trovare un Uovo d'Oro. Le uova d'oro possono essere vendute per 10 GOLD o ottenere un EMERA quando si schiudono.",
 		"GRASSY_TERRAIN": "Aumenta i danni inflitti del 20% dei Pokèmon erba.",
 		"PSYCHIC_TERRAIN": "Aumenta i danni inflitti del 20% dei Pokèmon psico.",
 		"ELECTRIC_TERRAIN": "Aumenta i danni inflitti del 20% dei Pokèmon elettro.",

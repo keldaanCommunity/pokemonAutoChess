@@ -295,14 +295,6 @@ export const GOLDEN_BERRY_TREE_TYPES = [
   Item.GOLDEN_PINAP_BERRY
 ]
 
-export const GoldenEggItems = [
-  Item.DYNAMAX_BAND,
-  Item.RARE_CANDY,
-  Item.GOLD_MASK,
-  Item.STAR_PIECE,
-  Item.GOLD_BOW
-] satisfies AtlasItem[]
-
 // Synergy color mapping extracted from SVG fill colors
 export const SYNERGY_COLORS: Record<Synergy, `#${string}`> = {
   NORMAL: "#FEFEFE",

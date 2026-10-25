@@ -2649,7 +2649,7 @@
 		"GOOGLE_SPECS": "Gain +10% BASE ATK, AP and max HP as SHIELD per held item. Get another tool.",
 		"HATCHER": "Each BABY has a [10,LK]% chance to find an EGG_FOR_SELL.",
 		"BREEDER": "Get at least one EGG_FOR_SELL after each defeat against a player. Eggs hatch 1 stage earlier.",
-		"GOLDEN_EGGS": "Each BABY has a [5,LK]% chance to find a Golden Egg (max 1 on bench). Golden eggs can be sold for 10 GOLD or give a shiny item when hatched.",
+		"GOLDEN_EGGS": "Each BABY has a [5,LK]% chance to find a Golden Egg. Golden eggs can be sold for 10 GOLD or give an EMERA when hatched.",
 		"GRASSY_TERRAIN": "Increase damage dealt by 20% (Grass only)",
 		"PSYCHIC_TERRAIN": "Increase damage dealt by 20% (Psychic only)",
 		"ELECTRIC_TERRAIN": "Increase damage dealt by 20% (Electric only)",
