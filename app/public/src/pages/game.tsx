@@ -50,6 +50,7 @@ import {
   useAppDispatch,
   useAppSelector
 } from "../hooks"
+
 import { authenticateUser, client, joinGame, rooms } from "../network"
 import { usePreference } from "../preferences"
 import store from "../stores"
@@ -101,6 +102,7 @@ import GameStageInfo from "./component/game/game-stage-info"
 import GameSynergies from "./component/game/game-synergies"
 import GameToasts from "./component/game/game-toasts"
 import { MainSidebar } from "./component/main-sidebar/main-sidebar"
+import { Modal } from "./component/modal/modal"
 import { ConnectionStatusNotification } from "./component/system/connection-status-notification"
 import { playMusic, preloadMusic } from "./utils/audio"
 import { LocalStoreKeys, localStore } from "./utils/store"
@@ -205,6 +207,7 @@ export default function Game() {
     (state) => state.game.playerIdSpectated
   )
   const connectedPlayer = useAppSelector(selectConnectedPlayer)
+  const players = useAppSelector((state) => state.game.players)
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const spectate = spectatedPlayerId !== uid || !spectatedPlayer?.alive
 
@@ -213,7 +216,9 @@ export default function Game() {
   const connected = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [connectError, setConnectError] = useState<string>("")
+  const [showSurrenderConfirm, setShowSurrenderConfirm] = useState(false)
   const [finalRank, setFinalRank] = useState<number>(0)
+
   enum FinalRankVisibility {
     HIDDEN,
     VISIBLE,
@@ -272,111 +277,138 @@ export default function Game() {
     [client, dispatch]
   )
 
-  const leave = useCallback(async () => {
-    if (gameContainer && gameContainer.game) {
-      gameContainer.game.destroy(true)
-    }
+  const leave = useCallback(
+    async (hasSurrendered: boolean) => {
+      if (gameContainer && gameContainer.game) {
+        gameContainer.game.destroy(true)
+      }
 
-    if (isReplayRoom(room)) {
-      gameContainer.gameScene?.music?.destroy()
+      if (isReplayRoom(room)) {
+        gameContainer.gameScene?.music?.destroy()
+        navigate("/lobby")
+        return
+      }
+      const afterPlayers = new Array<IAfterGamePlayer>()
+
+      const token = await firebase.auth().currentUser?.getIdToken()
+
+      const nbPlayers = room?.state.players.size ?? 0
+      const hasLeftBeforeEnd =
+        connectedPlayer?.alive === true && room?.state?.gameFinished === false
+
+      if (nbPlayers > 0) {
+        room?.state.players.forEach((p) => {
+          const afterPlayer: IAfterGamePlayer = {
+            elo: p.elo,
+            games: p.games,
+            name: p.name,
+            id: p.id,
+            rank: p.rank,
+            avatar: p.avatar,
+            title: p.title,
+            role: p.role,
+            pokemons: new Array<IPokemonRecord>(),
+            synergies: new Array<{ name: Synergy; value: number }>(),
+            gameStats: p.gameStats
+          }
+
+          const allSynergies = new Array<{ name: Synergy; value: number }>()
+          p.synergies.forEach((v, k) => {
+            allSynergies.push({ name: k as Synergy, value: v })
+          })
+
+          allSynergies.sort((a, b) => b.value - a.value)
+          afterPlayer.synergies = allSynergies.slice(0, 5)
+
+          if (p.board && p.board.size > 0) {
+            p.board.forEach((pokemon) => {
+              if (
+                pokemon.positionY != 0 &&
+                pokemon.passive !== Passive.INANIMATE
+              ) {
+                afterPlayer.pokemons.push({
+                  avatar: getAvatarString(
+                    pokemon.index,
+                    pokemon.shiny,
+                    pokemon.emotion
+                  ),
+                  items: pokemon.items.toArray(),
+                  name: pokemon.name
+                })
+              }
+            })
+          }
+
+          afterPlayers.push(afterPlayer)
+        })
+      }
+
+      const eligibleToXP =
+        nbPlayers >= 2 &&
+        (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
+      const eligibleToELO =
+        nbPlayers >= 2 &&
+        ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount ||
+          hasLeftBeforeEnd) &&
+        !room?.state.noElo &&
+        afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
+      const gameMode = room?.state.gameMode
+
+      const r = await client.create<AfterGameState>("after-game", {
+        players: afterPlayers,
+        idToken: token,
+        eligibleToXP,
+        eligibleToELO,
+        gameMode
+      })
+      localStore.set(
+        LocalStoreKeys.RECONNECTION_AFTER_GAME,
+        { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
+        30
+      )
+      if (r.connection.isOpen) {
+        await r.leave(false)
+      }
+      dispatch(leaveGame())
+      navigate("/after")
+      if (rooms.game?.connection.isOpen) {
+        // can't use "room" variable in scope here because the back button's popstate listener keeps the leave() of the first render, where `room` is still undefined
+        rooms.game.leave()
+      }
+    },
+    [client, dispatch, room]
+  )
+
+  const onClickLeave = useCallback(() => {
+    if (isReplayRoom(rooms.game)) {
+      // a replay exits straight to the lobby (the live leave() would hit the /after flow)
+      rooms.game.pause()
+      getGameScene()?.music?.destroy()
       navigate("/lobby")
       return
+    } else if (
+      connectedPlayer &&
+      connectedPlayer.life > 0 &&
+      players.filter((p) => p.life > 0).length > 1
+    ) {
+      setShowSurrenderConfirm(true)
+    } else {
+      leave(false) // leaving as player eliminated or spectator
     }
-    const afterPlayers = new Array<IAfterGamePlayer>()
+  }, [connectedPlayer, players, rooms.game])
 
-    const token = await firebase.auth().currentUser?.getIdToken()
-
-    const nbPlayers = room?.state.players.size ?? 0
-    const hasLeftBeforeEnd =
-      connectedPlayer?.alive === true && room?.state?.gameFinished === false
-
-    if (nbPlayers > 0) {
-      room?.state.players.forEach((p) => {
-        const afterPlayer: IAfterGamePlayer = {
-          elo: p.elo,
-          games: p.games,
-          name: p.name,
-          id: p.id,
-          rank: p.rank,
-          avatar: p.avatar,
-          title: p.title,
-          role: p.role,
-          pokemons: new Array<IPokemonRecord>(),
-          synergies: new Array<{ name: Synergy; value: number }>(),
-          gameStats: p.gameStats
-        }
-
-        const allSynergies = new Array<{ name: Synergy; value: number }>()
-        p.synergies.forEach((v, k) => {
-          allSynergies.push({ name: k as Synergy, value: v })
-        })
-
-        allSynergies.sort((a, b) => b.value - a.value)
-        afterPlayer.synergies = allSynergies.slice(0, 5)
-
-        if (p.board && p.board.size > 0) {
-          p.board.forEach((pokemon) => {
-            if (
-              pokemon.positionY != 0 &&
-              pokemon.passive !== Passive.INANIMATE
-            ) {
-              afterPlayer.pokemons.push({
-                avatar: getAvatarString(
-                  pokemon.index,
-                  pokemon.shiny,
-                  pokemon.emotion
-                ),
-                items: pokemon.items.toArray(),
-                name: pokemon.name
-              })
-            }
-          })
-        }
-
-        afterPlayers.push(afterPlayer)
-      })
-    }
-
-    const eligibleToXP =
-      nbPlayers >= 2 && (room?.state.stageLevel ?? 0) >= MinStageForGameToCount
-    const eligibleToELO =
-      nbPlayers >= 2 &&
-      ((room?.state.stageLevel ?? 0) >= MinStageForGameToCount ||
-        hasLeftBeforeEnd) &&
-      !room?.state.noElo &&
-      afterPlayers.filter((p) => p.role !== Role.BOT).length >= 2
-    const gameMode = room?.state.gameMode
-
-    const r = await client.create<AfterGameState>("after-game", {
-      players: afterPlayers,
-      idToken: token,
-      eligibleToXP,
-      eligibleToELO,
-      gameMode
-    })
-    localStore.set(
-      LocalStoreKeys.RECONNECTION_AFTER_GAME,
-      { reconnectionToken: r.reconnectionToken, roomId: r.roomId },
-      30
-    )
-    if (r.connection.isOpen) {
-      await r.leave(false)
-    }
-    // the back button's popstate listener keeps the leave() of the first render, where `room` is still undefined
+  const surrender = useCallback(() => {
     const game = rooms.game
     if (game?.connection.isOpen && !isReplayRoom(game)) {
       // without this request the server waits 5 minutes for a reconnection instead of surrendering
-      await game
+      game
         .request("surrender", undefined, { timeout: 3000 })
+        .then((serverSaidOK) => {
+          if (serverSaidOK) leave(true)
+        })
         .catch(() => {})
     }
-    dispatch(leaveGame())
-    navigate("/after")
-    if (rooms.game?.connection.isOpen) {
-      // can't use "room" variable in scope here because the back button's popstate listener keeps the leave() of the first render, where `room` is still undefined
-      rooms.game.leave()
-    }
-  }, [client, dispatch, room])
+  }, [rooms.game])
 
   const spectateTillTheEnd = () => {
     setFinalRankVisibility(FinalRankVisibility.CLOSED)
@@ -396,7 +428,7 @@ export default function Game() {
     window.history.pushState(null, "", window.location.href)
     const confirmLeaveOnURLChange = () => {
       if (confirm(t("confirm_leave_game"))) {
-        leave()
+        leave(false)
       } else {
         // push again another entry to prevent back button from switching page, effectively canceling the back action
         window.history.pushState(null, "", window.location.href)
@@ -663,7 +695,7 @@ export default function Game() {
         room.onMessage(Transfer.GAME_END, () => {
           // replay: GAME_END is a recorded frame, skip the live leave flow
           if (isReplayRoom(room)) return
-          leave()
+          leave(false)
         })
 
         room.onMessage(
@@ -1140,11 +1172,17 @@ export default function Game() {
       <div id="game" ref={container}></div>
       {loaded ? (
         <>
-          <MainSidebar page="game" leave={leave} leaveLabel={t("leave_game")} />
+          <MainSidebar
+            page="game"
+            onClickLeave={onClickLeave}
+            leaveLabel={
+              isReplayRoom(room) ? t("replay.leave_replay") : t("leave_game")
+            }
+          />
           <GameFinalRank
             rank={finalRank}
             hide={spectateTillTheEnd}
-            leave={leave}
+            onClickLeave={() => leave(false)}
             visible={finalRankVisibility === FinalRankVisibility.VISIBLE}
           />
           {spectate ? <GameSpectatePlayerInfo /> : <GameShop />}
@@ -1162,6 +1200,27 @@ export default function Game() {
         <GameLoadingScreen connectError={connectError} />
       )}
       <ConnectionStatusNotification />
+      <Modal
+        show={showSurrenderConfirm}
+        header={t("game-surrender-modal-title")}
+        body={t("game-surrender-modal-body")}
+        onClose={() => setShowSurrenderConfirm(false)}
+        footer={
+          <>
+            <button className="bubbly green" onClick={() => surrender()}>
+              {t("yes")}
+            </button>
+            <button
+              className="bubbly red"
+              onClick={() => {
+                setShowSurrenderConfirm(false)
+              }}
+            >
+              {t("no")}
+            </button>
+          </>
+        }
+      ></Modal>
     </main>
   )
 }

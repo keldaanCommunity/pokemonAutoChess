@@ -256,7 +256,7 @@ export default function TranslationsPage() {
       <div className="translations-page">
         <MainSidebar
           page="main_lobby"
-          leave={() => navigate("/lobby")}
+          onClickLeave={() => navigate("/lobby")}
           leaveLabel="Back to lobby"
         />
         <div className="translations-container">

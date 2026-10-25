@@ -6,7 +6,7 @@ export default function GameFinalRank(props: {
   rank: number
   visible: boolean
   hide: () => void
-  leave: () => void
+  onClickLeave: () => void
 }) {
   const { t } = useTranslation()
   return props.visible ? (
@@ -22,7 +22,7 @@ export default function GameFinalRank(props: {
               <button className="bubbly blue" onClick={props.hide}>
                 {t("stay_till_the_end")}
               </button>
-              <button className="bubbly red" onClick={props.leave}>
+              <button className="bubbly red" onClick={props.onClickLeave}>
                 {t("leave_game")}
               </button>
             </div>
