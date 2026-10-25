@@ -962,13 +962,6 @@ export default class BoardManager {
       if (pkm) {
         pkm.itemsContainer.render(pokemon.items)
       }
-      if (item === Item.SHINY_STONE) {
-        if (removed) {
-          pkm?.removeLight()
-        } else {
-          pkm?.addLight()
-        }
-      }
       if (item === Item.BERSERK_GENE || item === Item.DIRE_HIT) {
         if (removed) {
           pkm?.removeSkinColorChange()

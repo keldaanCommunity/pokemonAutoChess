@@ -1057,9 +1057,10 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
       } else {
-        const repeatBalls = schemaValues(player.items).filter((i) => i === Item.REPEAT_BALL)
-        if (repeatBalls.length > 0)
-          player.shopFreeRolls += repeatBalls.length
+        const repeatBalls = schemaValues(player.items).filter(
+          (i) => i === Item.REPEAT_BALL
+        )
+        if (repeatBalls.length > 0) player.shopFreeRolls += repeatBalls.length
       }
       this.state.shop.assignShop(player, true, this.state)
     }
@@ -2491,9 +2492,7 @@ export function onPokemonChangePosition({
   if (pokemon.passive !== Passive.NONE) {
     const hasLight = player.synergies.hasSynergyActive(Synergy.LIGHT)
     const inSpotlight =
-      hasLight &&
-      ((newX === player.lightX && newY === player.lightY) ||
-        pokemon.items.has(Item.SHINY_STONE))
+      hasLight && newX === player.lightX && newY === player.lightY
 
     PassiveEffects[pokemon.passive]?.forEach((effect) => {
       if (effect instanceof OnChangePositionEffect) {

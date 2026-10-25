@@ -3037,7 +3037,7 @@
 		"GOOD_ROD": "Após cada rodada PvP, pesque um Pokémon que será adicionado a um espaço livre em seu banco. Pode capturar WATER Pokémons raros, e também $t(pkm.FEEBAS).",
 		"SUPER_ROD": "Após cada rodada PvP, pesque um Pokémon que será adicionado a um espaço livre em seu banco. Pode capturar WATER Pokémons épicos, e também $t(pkm.WISHIWASHI).",
 		"DYNAMAX_BAND": "No início da luta, aumente o HP máximo em 200%.",
-		"SHINY_STONE": "Recebe o tipo LIGHT. Um segundo ponto de luz é projetado no espaço do portador no começo do combate.",
+		"SHINY_STONE": "Recebe o tipo LIGHT.",
 		"AMULET_COIN": "+1 de ouro cada vez que o titular derrubar um oponente",
 		"HEAVY_DUTY_BOOTS": "O portador se torna imune a qualquer BOARD_EFFECT, deslocamento forçado e LOCKED.",
 		"AQUA_EGG": "O portador recupera 20% do PP máximo após usar sua habilidade, + 2 PP para cada uso realizado no combate.",

@@ -90,7 +90,6 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   },
   [Item.STAR_PIECE]: {},
   [Item.LOOPLET]: { [Stat.SHIELD]: 50 },
-  [Item.SHINY_STONE]: { [Stat.AP]: 50 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
   [Item.TERA_ORB]: {},
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },

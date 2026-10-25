@@ -297,7 +297,6 @@ export const GOLDEN_BERRY_TREE_TYPES = [
 
 export const GoldenEggItems = [
   Item.DYNAMAX_BAND,
-  Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.GOLD_MASK,
   Item.STAR_PIECE,

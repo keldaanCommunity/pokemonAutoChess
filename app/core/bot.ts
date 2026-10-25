@@ -89,9 +89,8 @@ export default class Bot {
           )
           const inSpotlight =
             hasLightActive &&
-            ((pkm.positionX === this.player.lightX &&
-              pkm.positionY === this.player.lightY) ||
-              pkm.items.has(Item.SHINY_STONE))
+            pkm.positionX === this.player.lightX &&
+            pkm.positionY === this.player.lightY
 
           PassiveEffects[pkm.passive]?.forEach((effect) => {
             if (effect instanceof OnChangePositionEffect) {

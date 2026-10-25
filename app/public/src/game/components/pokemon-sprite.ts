@@ -240,10 +240,6 @@ export default class PokemonSprite extends DraggableObject {
 
     if (isEntity(pokemon)) {
       this.addStatusEffectsSprites(pokemon)
-    } else {
-      if (pokemon.items.has(Item.SHINY_STONE)) {
-        this.addLight()
-      }
     }
     if (pokemon.items.has(Item.BERSERK_GENE)) {
       this.changeSkinColor(Item.BERSERK_GENE)

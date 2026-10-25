@@ -46,7 +46,6 @@ import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count, isIn } from "../utils/array"
-import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
 import { clamp, max, min, roundToNDigits } from "../utils/number"
@@ -307,7 +306,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const { positionX, positionY } = this.refToBoardPokemon
     return (
       (positionX === lightX && positionY === lightY) ||
-      this.items.has(Item.SHINY_STONE) ||
       (this.passive === Passive.CONVERSION &&
         this.hasSynergy(Synergy.LIGHT) &&
         !this.items.has(Item.LIGHT_BALL))

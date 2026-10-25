@@ -1007,9 +1007,8 @@ export default class Player extends Schema implements IPlayer {
     this.board.forEach((pokemon) => {
       const inSpotlight =
         hasLightActive &&
-        ((pokemon.positionX === this.lightX &&
-          pokemon.positionY === this.lightY) ||
-          pokemon.items.has(Item.SHINY_STONE))
+        pokemon.positionX === this.lightX &&
+        pokemon.positionY === this.lightY
 
       PassiveEffects[pokemon.passive]?.forEach((effect) => {
         if (effect instanceof OnSpotlightChangeEffect) {

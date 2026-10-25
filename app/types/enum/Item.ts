@@ -573,6 +573,7 @@ export const TownItems = [
   Item.LEADERS_CREST,
   Item.LAPRAS_PASSPORT,
   Item.SOOTHE_BELL,
+  Item.SHINY_STONE,
   ...FossilStones
 ] satisfies Item[]
 
@@ -836,7 +837,6 @@ export const DubiousGadgets = [
 
 export const AtlasItems = [
   Item.DYNAMAX_BAND,
-  Item.SHINY_STONE,
   Item.RARE_CANDY,
   Item.GOLD_MASK,
   Item.STAR_PIECE,
@@ -897,7 +897,8 @@ export const SynergyStones = [
   Item.MOON_STONE,
   Item.DUSK_STONE,
   Item.LEAF_STONE,
-  Item.ICE_STONE
+  Item.ICE_STONE,
+  Item.SHINY_STONE
 ] satisfies Item[]
 
 export const SynergyGems = [
@@ -1007,13 +1008,13 @@ export const SynergyItemsNoSpecial = [
   Item.BERSERK_GENE,
   Item.SURFBOARD,
   Item.INCENSE,
-  Item.FRIEND_BOW
+  Item.FRIEND_BOW,
+  Item.SHINY_STONE
 ] satisfies Item[]
 
 export const SynergyItems = [
   ...SynergyItemsNoSpecial,
   ...MemoryDiscs,
-  Item.SHINY_STONE,
   Item.TERA_ORB
 ] satisfies Item[]
 

@@ -1727,19 +1727,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     })
   ],
 
-  [Item.SHINY_STONE]: [
-    new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon.passive === Passive.PRISM) {
-        const transform = player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
-        transform.items.add(Item.SHINY_STONE)
-      } else if (pokemon.passive === Passive.BLOSSOM) {
-        const transform = player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
-        transform.items.add(Item.SHINY_STONE)
-      }
-      return true
-    })
-  ],
-
   [Item.BRONZE_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(1)],
   [Item.SILVER_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(2)],
   [Item.GOLD_DOJO_TICKET]: [new DojoTicketOnItemDroppedEffect(3)],
