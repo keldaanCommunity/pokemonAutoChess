@@ -4162,6 +4162,7 @@
 			"build": "This replay was recorded on a different build of {{version}} ({{recorded}} vs {{running}}). Some of it may not play back correctly."
 		}
 	},
+	"confirm_leave_game": "Do you want to leave the game ?",
 	"player": "Player",
 	"stats": "Stats",
 	"team": "Team",

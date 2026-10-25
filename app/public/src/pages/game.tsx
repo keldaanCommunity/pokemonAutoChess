@@ -372,8 +372,9 @@ export default function Game() {
     }
     dispatch(leaveGame())
     navigate("/after")
-    if (game?.connection.isOpen) {
-      game.leave()
+    if (rooms.game?.connection.isOpen) {
+      // can't use "room" variable in scope here because the back button's popstate listener keeps the leave() of the first render, where `room` is still undefined
+      rooms.game.leave()
     }
   }, [client, dispatch, room])
 
@@ -393,8 +394,8 @@ export default function Game() {
   useEffect(() => {
     // create a history entry to prevent back button switching page immediately, and leave game properly instead
     window.history.pushState(null, "", window.location.href)
-    const confirmLeave = () => {
-      if (confirm("Do you want to leave game ?")) {
+    const confirmLeaveOnURLChange = () => {
+      if (confirm(t("confirm_leave_game"))) {
         leave()
       } else {
         // push again another entry to prevent back button from switching page, effectively canceling the back action
@@ -402,7 +403,7 @@ export default function Game() {
       }
     }
     // when pressing back button, properly leave game
-    window.addEventListener("popstate", confirmLeave)
+    window.addEventListener("popstate", confirmLeaveOnURLChange)
 
     // pause video background for performance
     const videoBg = document.getElementById(
@@ -418,7 +419,7 @@ export default function Game() {
         videoBg.play()
         videoBg.style.display = "block"
       }
-      window.removeEventListener("popstate", confirmLeave)
+      window.removeEventListener("popstate", confirmLeaveOnURLChange)
     }
   }, [])
 

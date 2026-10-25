@@ -152,7 +152,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     surrender: (client: Client) => {
       const player = this.state.players.get(client.auth?.uid)
       if (!player || !this.isPlaying(player)) return false
-      this.playerLeft(player, false)
+      this.eliminatePlayer(player, "SURRENDER")
       return true
     }
   }
@@ -799,7 +799,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   async waitForReconnection(client: Client): Promise<boolean> {
     setPendingGame(this.presence, client.auth.uid, this.roomId)
     // no prompt while loading: every client drops once at game start, to reconnect from the game page
-    if (this.state.gameLoaded && !this.hasOtherClient(client)) {
+    if (this.state.gameLoaded && !this.hasOtherClientConnected(client)) {
       this.publishPendingGame(client.auth.uid, this.roomId)
     }
     try {
@@ -818,7 +818,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     this.presence.publish("pending-game-changed", { userId, gameId })
   }
 
-  hasOtherClient(client: Client) {
+  hasOtherClientConnected(client: Client) {
     return this.clients.some((c) => c.auth?.uid === client.auth.uid)
   }
 
@@ -834,57 +834,60 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   async onLeave(client: Client, code: number) {
-    if (
+    if (!client || !client.auth || !client.auth.displayName) return
+    const isSpectator =
       client?.auth &&
       this.state.spectators.has(client.auth.uid) &&
       !this.state.players.has(client.auth.uid)
-    ) {
-      // a spectator (not one of the players) left the game
+    if (isSpectator) {
+      // a spectator (not one of the players) left the game, nothing to do in particular
       this.state.spectators.delete(client.auth.uid)
       return
     }
 
-    if (client && client.auth && client.auth.displayName) {
-      let player = this.state.players.get(client.auth.uid)
+    let player = this.state.players.get(client.auth.uid)
+    if (!player || player.hasLeftGame) return
+    // a session closing while another session of this player is still connected is not them leaving
+    if (this.hasOtherClientConnected(client)) return
+    // a reconnection that failed halfway is not the player leaving either: onReconnect already cleared their pending game
+    if (code === CloseCode.FAILED_TO_RECONNECT) return
+
+    let reconnectionTimedOut = code !== CloseCode.CONSENTED
+    if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
+      // only a surrender request surrenders: a consented leave gets the same 5 minutes as a disconnect
+      client.leave(code) // colyseus only closes the socket once onLeave resolves, so close it before waiting
+      if (await this.waitForReconnection(client)) return
+      reconnectionTimedOut = true
+      player = this.state.players.get(client.auth.uid)
       if (!player || player.hasLeftGame) return
-      // a session closing while another session of this player is still connected is not them leaving
-      if (this.hasOtherClient(client)) return
-      // a reconnection that failed halfway is not the player leaving either: onReconnect already cleared their pending game
-      if (code === CloseCode.FAILED_TO_RECONNECT) return
-
-      let reconnectionTimedOut = code !== CloseCode.CONSENTED
-      if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
-        // only a surrender request surrenders: a consented leave gets the same 5 minutes as a disconnect
-        client.leave(code) // colyseus only closes the socket once onLeave resolves, so close it before waiting
-        if (await this.waitForReconnection(client)) return
-        reconnectionTimedOut = true
-        player = this.state.players.get(client.auth.uid)
-        if (!player || player.hasLeftGame) return
-        if (this.hasOtherClient(client)) return
-      }
-
-      const pendingGame = await getPendingGame(this.presence, client.auth.uid)
-      if (
-        pendingGame &&
-        isValidDate(pendingGame.reconnectionDeadline) &&
-        pendingGame.reconnectionDeadline.getTime() > Date.now()
-      ) {
-        // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
-        // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
-        return
-      }
-      this.playerLeft(player, reconnectionTimedOut)
+      if (this.hasOtherClientConnected(client)) return // user has reconnected through another window/browser
     }
+
+    const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+    if (
+      pendingGame &&
+      isValidDate(pendingGame.reconnectionDeadline) &&
+      pendingGame.reconnectionDeadline.getTime() > Date.now()
+    ) {
+      // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+      // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+      return
+    }
+
+    this.eliminatePlayer(player, "RECONNECTION_TIMEOUT")
+
     if (
       !this.state.gameLoaded &&
       schemaValues(this.state.players).every((p) => p.loadingProgress === 100)
     ) {
+      // player left while others were waiting to load, in that case we don't wait for reconnect and start game
       this.broadcast(Transfer.LOADING_COMPLETE)
       this.startGame()
     }
   }
 
-  playerLeft(player: Player, reconnectionTimedOut: boolean) {
+  eliminatePlayer(player: Player, cause: "RECONNECTION_TIMEOUT" | "SURRENDER") {
+    // player has either surrendered or failed to reconnect after timeout
     clearPendingGame(this.presence, player.id)
     this.publishPendingGame(player.id, null)
 
@@ -903,7 +906,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     if (
-      reconnectionTimedOut &&
+      cause === "RECONNECTION_TIMEOUT" &&
       hasLeftBeforeEnd &&
       this.state.stageLevel <= 5
     ) {

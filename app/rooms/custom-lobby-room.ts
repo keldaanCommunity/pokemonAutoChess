@@ -403,6 +403,12 @@ export default class CustomLobbyRoom extends Room {
       ({ userId, gameId }: { userId: string; gameId: string | null }) => {
         this.clients.forEach((c) => {
           if (c.auth?.uid === userId) {
+            /*
+            If a user connected to the lobby has left a game without surrendering,
+            the pending game is stored by pending-game-manager and the user gets
+            a reconnection prompt modal
+            If gameId is null, that prompt is removed
+            */
             c.send(Transfer.RECONNECT_PROMPT, gameId)
           }
         })
