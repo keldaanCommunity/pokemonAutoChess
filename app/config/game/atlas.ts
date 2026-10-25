@@ -165,7 +165,7 @@ const nodes = {
     encounter: TownEncounters.REGIROCK,
     position: rotToXY(30, 36 * D)
   },
-  atlas_item2: {
+  awakening: {
     type: "keystone",
     emera: "awakening",
     position: rotToXY(30, 45 * D)
@@ -360,7 +360,7 @@ const connections = [
 
   { from: "spinda", to: "azurill" },
   { from: "azurill", to: "regirock" },
-  { from: "regirock", to: "atlas_item2" },
+  { from: "regirock", to: "awakening" },
 
   { from: "azurill", to: "branch3" },
   { from: "chansey", to: "branch3" },

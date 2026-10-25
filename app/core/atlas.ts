@@ -12,7 +12,8 @@ import {
   Item,
   Scarves,
   SynergyGems,
-  SynergyStones
+  SynergyStones,
+  Transfer
 } from "../types"
 import { Rarity } from "../types/enum/Game"
 import { Dishes } from "../types/enum/Item"
@@ -22,6 +23,7 @@ import { entries } from "../utils/object"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { openTreasureChest } from "./effects/items"
+import { EvolutionManager } from "./evolution-logic/evolution-manager"
 
 export function activateAtlasNode(
   nodeId: AtlasNodeId,
@@ -95,16 +97,18 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     )
   },
 
-  duskull: (player) => {
-    player.addMoney(
-      Math.floor(player.gameStats.totalMoneyEarned / 10),
-      true,
-      null
-    )
+  duskull: (player, room) => {
+    const moneyGained = Math.floor(player.gameStats.totalMoneyEarned / 10)
+    player.addMoney(moneyGained, true, null)
+    const client = room.clients.find((cli) => cli.auth.uid === player.id)
+    client?.send(Transfer.PLAYER_INCOME, moneyGained)
   },
 
-  meowth: (player) => {
-    player.addMoney(10, true, null)
+  meowth: (player, room) => {
+    const moneyGained = 10
+    player.addMoney(moneyGained, true, null)
+    const client = room.clients.find((cli) => cli.auth.uid === player.id)
+    client?.send(Transfer.PLAYER_INCOME, moneyGained)
   },
 
   marowak() {
@@ -124,7 +128,9 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
       )
       .map(([nodeId]) => nodeId)
     if (availableEncounterNodes.length === 0) return
-    activateAtlasNode(pickRandomIn(availableEncounterNodes), player, room)
+    const randomEncounter = pickRandomIn(availableEncounterNodes)
+    player.atlasManager.unlockedNodes.add(randomEncounter)
+    activateAtlasNode(randomEncounter, player, room)
   },
 
   regirock: (player) => {
@@ -184,12 +190,15 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     const maxHP = Math.max(
       ...schemaValues(room.state.players).map((p) => p.life)
     )
+    let moneyGained = 5
     if (player.life === maxHP) {
-      player.addMoney(15, true, null)
+      moneyGained = 15
       player.items.push(Item.LEADERS_CREST)
-    } else {
-      player.addMoney(5, true, null)
     }
+
+    player.addMoney(moneyGained, true, null)
+    const client = room.clients.find((cli) => cli.auth.uid === player.id)
+    client?.send(Transfer.PLAYER_INCOME, moneyGained)
   },
 
   lapras: (player) => {
@@ -238,5 +247,19 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     if (playersAlive.length <= 2) {
       player.completeMissionOrder(Item.MISSION_ORDER_BLACK)
     }
+  },
+
+  awakening: (player) => {
+    player.experienceManager.maxLevel = 10
+    const pokemonsOnBoard = schemaValues(player.board)
+    pokemonsOnBoard.forEach((pokemon) => {
+      if (
+        (pokemon.rarity === Rarity.COMMON ||
+          pokemon.rarity === Rarity.UNCOMMON) &&
+        pokemon.hasEvolution
+      ) {
+        EvolutionManager.evolve(pokemon, player)
+      }
+    })
   }
 }
