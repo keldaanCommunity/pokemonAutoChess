@@ -74,6 +74,7 @@ export default function ItemPicker(props: {
       label: t("special_items"),
       key: "special_items",
       items: [
+        Item.TRASH,
         Item.RUSTED_SWORD,
         Item.TEAL_MASK,
         Item.WELLSPRING_MASK,
