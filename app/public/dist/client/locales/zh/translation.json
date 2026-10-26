@@ -2608,7 +2608,7 @@
 		"SANDSTORM": "在SANDSTORM期间，所有宝可梦每秒受到{{damagePerSecond}}点SPECIAL（GROUND宝可梦免疫此伤害）",
 		"STICKY_WEB": "使位于此位置的宝可梦陷入PARALYSIS {{durationSeconds}}秒。",
 		"CURSE": "CURSE的倒计时结束后将直接击倒宝可梦。",
-		"COTTON_BALL": "使第一个走到此处的宝可梦陷入SLEEP {{durationSeconds}}秒，随后此效果消失。",
+		"COTTON_BALL": "使位于此位置的宝可梦陷入SLEEP {{durationSeconds}}秒。",
 		"STRANGE_STEAM": "使位于此位置的宝可梦受到和造成的SPECIAL均提升{{damageBonusPercent}}%。",
 		"SMOKE": "使位于此位置的宝可梦陷入BLINDED。",
 		"SHINING_RAY": "提升20点AP和20%的BASE ATK。",

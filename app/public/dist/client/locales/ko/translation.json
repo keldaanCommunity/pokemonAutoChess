@@ -2622,7 +2622,7 @@
 		"SANDSTORM": "SANDSTORM이 일어나는 동안 모든 포켓몬이 초당 {{damagePerSecond}} SPECIAL를 입는다. (GROUND 포켓몬에게는 통하지 않음)",
 		"STICKY_WEB": "이 칸 위에 있으면 {{durationSeconds}}초 동안 PARALYSIS 상태가 된다.",
 		"CURSE": "CURSE에 걸린 포켓몬은 시간이 지나면 처형된다.",
-		"COTTON_BALL": "이 칸 위에 있으면 {{durationSeconds}}초 동안 SLEEP 상태가 되며, 효과가 발동한 다음 사라진다.",
+		"COTTON_BALL": "이 칸 위에 있으면 {{durationSeconds}}초 동안 SLEEP 상태가 된다.",
 		"STRANGE_STEAM": "이 칸 위에 있으면 SPECIAL를 {{damageBonusPercent}}% 더 주고 받는다.",
 		"SMOKE": "이 칸 위에 있으면 BLINDED 상태가 된다."
 	},

@@ -2018,7 +2018,7 @@
 		"DETECT": "Causa PROTECT agli alleati adiacenti per [0.5,0.6,0.8,1,SP,ND=1] secondi, moltiplicati per il numero di avversari rilevati in un raggio di 2 celle.",
 		"SPACIAL_REND": "Inverti la posizione della squadra nemica, ed infliggi a tutti i nemici nella riga di fronte all'utilizzatore [20,60,100,200,SP] SPECIAL.",
 		"MULTI_ATTACK": "Infliggi [7,10,13,20,SP] SPECIAL a tutti i nemici adiacenti, moltiplicato per la somma dei livelli di sinergia di $t(pkm.SILVALLY)",
-		"STICKY_WEB": "Infliggi [20,35,70,140,SP] SPECIAL e proietta una ragnatela attorno al bersaglio. I Pokèmon che ci camminano sopra sono sotto PARALYSIS per {{durationSeconds}} secondi.",
+		"STICKY_WEB": "Infliggi [20,35,70,140,SP] SPECIAL e proietta una ragnatela attorno al bersaglio. I Pokèmon che ci camminano sopra sono sotto PARALYSIS per {{durationSeconds}} s.",
 		"ACCELEROCK": "Salta verso il nemico più lontano ed attaccalo immediatamente, infliggendogli [100,125,250,SP]% dell'ATK come SPECIAL. Riduce la DEF dell'utente di 2 e aumenta la sua SPEED del 5 fino a [5,SP] volte.",
 		"PETAL_BLIZZARD": "Infliggi [10,20,30,50,SP] SPECIAL ai nemici adiacenti e guadagna 10 AP",
 		"SUNSTEEL_STRIKE": "Piomba nel mezzo della squadra nemica col il potere di un meteorite, infliggendo [40,60,80,150,SP] SPECIAL ai nemici adiacenti",

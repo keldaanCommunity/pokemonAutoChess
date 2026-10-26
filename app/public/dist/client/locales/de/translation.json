@@ -2084,7 +2084,7 @@
 		"DETECT": "PROTECT benachbarte Verbündete für [0.5,0.6,0.8,1,SP,ND=1] Sekunden, multipliziert mit der Anzahl der in einem Radius von 2 Zellen erkannten Gegner",
 		"SPACIAL_REND": "Dreht die Position des gegnerischen Teams um und fügt dann allen Gegnern in einer Reihe [100,SP] SPECIAL zu.",
 		"MULTI_ATTACK": "Fügt umstehenden Feinden [7,10,13,20,SP] SPECIAL zu, multipliziert mit der Summe der Synergiestufen von $t(pkm.SILVALLY)",
-		"STICKY_WEB": "Fügt dem Ziel [20,35,70,140,SP] SPECIAL zu und projiziert ein Netz um es herum. Pokémon, die auf dem Netz laufen, sind {{durationSeconds}} Sekunden lang PARALYSIS.",
+		"STICKY_WEB": "Fügt dem Ziel [20,35,70,140,SP] SPECIAL zu und projiziert ein Netz um es herum. Pokémon, die auf dem Netz laufen, sind {{durationSeconds}} Sek. lang PARALYSIS.",
 		"ACCELEROCK": "Springt neben den am weitesten entfernten Gegner und greift ihn sofort an, wobei er [100,125,250,SP]% der ATK als SPECIAL verursacht. Reduziert die DEF des Benutzers um 2 und erhöht seine SPEED um 5 bis zum [5,SP]-fachen.",
 		"PETAL_BLIZZARD": "Verursacht [10,20,30,50,SP] SPECIAL an umstehenden Feinden und erhält 10 AP",
 		"SUNSTEEL_STRIKE": "Springt und landet mit der Kraft eines Meteors in der Mitte des gegnerischen Teams und fügt benachbarten Feinden [40,60,80,150,SP] SPECIAL",
