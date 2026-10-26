@@ -405,8 +405,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
       }
       if (
-        this.effects.has(EffectEnum.STRANGE_STEAM) ||
-        (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))
+        (this.effects.has(EffectEnum.STRANGE_STEAM) ||
+          (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
+        attackType === AttackType.SPECIAL
       ) {
         specialDamage *= 1.2
       }
