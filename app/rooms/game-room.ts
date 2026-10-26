@@ -824,7 +824,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   hasOtherClientConnected(client: Client) {
-    return this.clients.some((c) => c.auth?.uid === client.auth.uid && c !== client)
+    return this.clients.some(
+      (c) => c.auth?.uid === client.auth.uid && c !== client
+    )
   }
 
   isPlaying(player: Player) {
@@ -860,12 +862,13 @@ export default class GameRoom extends Room<{ state: GameState }> {
       return
     }
 
-    let reconnectionTimedOut = code !== CloseCode.CONSENTED
+    // CONSENTED = connection lost due to a user action, like navigating to a new page or closing tab
+    // This is not considered an explicit surrender request, because this can happen by mistake
+    // thereforewe still allow the same 5 minutes reconnection time before eliminating the player
     if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
-      // only a surrender request surrenders: a consented leave gets the same 5 minutes as a disconnect
       client.leave(code) // colyseus only closes the socket once onLeave resolves, so close it before waiting
-      if (await this.waitForReconnection(client)) return
-      reconnectionTimedOut = true
+      const hasReconnected = await this.waitForReconnection(client) // wait for up to 5 minutes
+      if (hasReconnected) return
       player = this.state.players.get(client.auth.uid)
       if (!player || player.hasLeftGame) return
       if (this.hasOtherClientConnected(client)) return // user has reconnected through another window/browser
@@ -878,10 +881,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
       pendingGame.reconnectionDeadline.getTime() > Date.now()
     ) {
       // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
-      // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
+      // so we have a new allowed reconnection time.
+      // In this scenario, we are ignoring this leave() call and relying on the onLeave() call of the new session
       return
     }
 
+    // at this stage, we know for sure that player did not reconnect in time and needs to be eliminated
     this.eliminatePlayer(player, "RECONNECTION_TIMEOUT")
 
     if (
