@@ -797,11 +797,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   // allow a client that left to reconnect into this room until 5 minutes
   async waitForReconnection(client: Client): Promise<boolean> {
-    setPendingGame(this.presence, client.auth.uid, this.roomId)
-    // no prompt while loading: every client drops once at game start, to reconnect from the game page
-    if (this.state.gameLoaded && !this.hasOtherClientConnected(client)) {
-      this.publishPendingGame(client.auth.uid, this.roomId)
-    }
+    this.storePendingGame(client)
     try {
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
       return true
@@ -810,6 +806,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
         logger.info(`${client.auth.displayName} left game room`)
       }*/
       return false
+    }
+  }
+
+  // the lobby offers to reconnect to a stored pending game
+  storePendingGame(client: Client) {
+    setPendingGame(this.presence, client.auth.uid, this.roomId)
+    // no prompt while loading: every client drops once at game start, to reconnect from the game page
+    if (this.state.gameLoaded && !this.hasOtherClientConnected(client)) {
+      this.publishPendingGame(client.auth.uid, this.roomId)
     }
   }
 
@@ -849,8 +854,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (!player || player.hasLeftGame) return
     // a session closing while another session of this player is still connected is not them leaving
     if (this.hasOtherClientConnected(client)) return
-    // a reconnection that failed halfway is not the player leaving either: onReconnect already cleared their pending game
-    if (code === CloseCode.FAILED_TO_RECONNECT) return
+    // a failed reconnect is not the player leaving either: store again the pending game onReconnect cleared
+    if (code === CloseCode.FAILED_TO_RECONNECT) {
+      if (this.isPlaying(player)) this.storePendingGame(client)
+      return
+    }
 
     let reconnectionTimedOut = code !== CloseCode.CONSENTED
     if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
