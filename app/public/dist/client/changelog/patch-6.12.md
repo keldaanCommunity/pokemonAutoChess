@@ -45,7 +45,7 @@
 - Buff Alcremie Ruby passive: 30 → 40 SPEED to the decorated ally
 - Change Alcremie Lemon passive: 40% CRIT_CHANCE → 30% CRIT_CHANCE and 30% CRIT_POWER to the decorated ally. DARK allies now give the Lemon flavor
 - Change Alcremie Caramel passive: 80% CRIT_POWER → 80 AP to the decorated ally. SOUND allies now give the Caramel flavor
-- New ability for Tentacruel: Sends 3 poisonous waves in a CONE. Each enemy hit receives one effect based on its current status: if it isn't POISONED, inflicts POISONED for [3,SP] seconds. If it is POISONED, inflicts ARMOR_BREAK for [3,SP] seconds. If it already has ARMOR_BREAK, inflicts FATIGUE for [3,SP] seconds. If it already has FATIGUE, inflicts SILENCE for [3,SP] seconds.
+- New ability for Tentacruel: Stings with 3 waves of toxins in a CONE, dealing [1,2,3,4,SP] SPECIAL each. Each enemy hit receives one effect based on its current status:\n if it isn't POISONED, inflicts POISONED for [1.5,SP] seconds.\n If it is already POISONED, inflicts PARALYSIS for [1.5,SP] seconds.\n If it already has PARALYSIS, inflicts ARMOR_BREAK for [1.5,SP] seconds.\n If it already has ARMOR_BREAK, inflicts FATIGUE for [1.5,SP] seconds.
 
 # Changes to Synergies
 

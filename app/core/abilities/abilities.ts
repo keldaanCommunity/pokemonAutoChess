@@ -1304,5 +1304,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
   [Ability.STAR_SHIELD]: new StarShieldStrategy(),
-  [Ability.JELLYFISH_POISON]: new JellyfishPoisonStrategy()
+  [Ability.STINGING_TOXINS]: new JellyfishPoisonStrategy()
 }

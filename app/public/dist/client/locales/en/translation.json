@@ -1795,7 +1795,7 @@
 		"AQUA_SWIRL": "Aqua Swirl",
 		"MAGNETIC_ABSORPTION": "Magnetic Absorption",
 		"STAR_SHIELD": "Star Shield",
-		"JELLYFISH_POISON": "Jellyfish Poison"
+		"STINGING_TOXINS": "Stinging Toxins"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2368,7 +2368,7 @@
 		"AQUA_SWIRL": "Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.",
 		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally.",
 		"STAR_SHIELD": "Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds.",
-		"JELLYFISH_POISON": "Sends 3 poisonous waves in a CONE. Each enemy hit receives one effect based on its current status: if it isn't POISONED, inflicts POISONED for [3,SP] seconds. If it is POISONED, inflicts ARMOR_BREAK for [3,SP] seconds. If it already has ARMOR_BREAK, inflicts FATIGUE for [3,SP] seconds. If it already has FATIGUE, inflicts SILENCE for [3,SP] seconds."
+		"STINGING_TOXINS": "Stings with 3 waves of toxins in a CONE, dealing [1,2,3,4,SP] SPECIAL each. Each enemy hit receives one effect based on its current status:\n if it isn't POISONED, inflicts POISONED for [1.5,SP] seconds.\n If it is already POISONED, inflicts PARALYSIS for [1.5,SP] seconds.\n If it already has PARALYSIS, inflicts ARMOR_BREAK for [1.5,SP] seconds.\n If it already has ARMOR_BREAK, inflicts FATIGUE for [1.5,SP] seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
