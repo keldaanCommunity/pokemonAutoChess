@@ -11,6 +11,7 @@ import {
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
 import "./game-regional-pokemons.css"
+import { Box } from "../box/box"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -49,16 +50,18 @@ export function GameRegionalPokemons() {
 
   if (!regionalPokemons || regionalPokemons.length === 0) {
     return (
-      <div className="wrapper">
-        <p className="help">{t("regional_pokemon_hint")}</p>
-      </div>
+      <Box>
+        <Box.Header title={t("shop.regional_pokemons")}>
+          <p className="help">{t("shop.regional_pokemon_hint")}</p>
+        </Box.Header>
+      </Box>
     )
   } else {
     return (
-      <div className="wrapper">
-        <header>
+      <Box>
+        <Box.Header>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span>{t("regional_pokemons")}</span>
+            <span>{t("shop.regional_pokemons")}</span>
             <div className="spacer"></div>
             {spectatedPlayer?.map && (
               <span className="map-information">
@@ -69,10 +72,10 @@ export function GameRegionalPokemons() {
               </span>
             )}
           </div>
-          <p className="help">{t("regional_pokemon_hint")}</p>
-        </header>
+          <p className="help">{t("shop.regional_pokemon_hint")}</p>
+        </Box.Header>
 
-        <div className="grid">
+        <Box.Content className="grid">
           {regionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
             const rarityColor = RarityColor[pokemon.rarity]
@@ -99,8 +102,8 @@ export function GameRegionalPokemons() {
               </div>
             )
           })}
-        </div>
-      </div>
+        </Box.Content>
+      </Box>
     )
   }
 }

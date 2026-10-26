@@ -1,6 +1,7 @@
 # New Pokemons:
 
 - Bombirdier
+- Sandy Shocks
 
 # Changes to Pokemon & Abilities
 
@@ -39,7 +40,11 @@
 - Revert Cosmog and Cosmoem buffs from 6.7.5 and 6.8 HP : 100 → 140 ; Cosmoem HP: 200 → 220 ; evolutiion stacks required: 8 → 10 ; this is due to the increase of selling prices of evolved Pokémon.
 - New ability for Paras: Scatters 3 spores around the nearest non POISONED enemy. After 2 seconds, it explodes on nearby ADJACENT enemies dealing [10,20,40,80,SP] SPECIAL, inflicting POISONED for 3s.
 - New ability for Milotic: Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.
-
+- New ability for Jirachi: Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds.
+- Nerf Alcremie Rainbow Swirl passive: 50 → 30 PP to the decorated ally
+- Buff Alcremie Ruby passive: 30 → 40 SPEED to the decorated ally
+- Change Alcremie Lemon passive: 40% CRIT_CHANCE → 30% CRIT_CHANCE and 30% CRIT_POWER to the decorated ally. DARK allies now give the Lemon flavor
+- Change Alcremie Caramel passive: 80% CRIT_POWER → 80 AP to the decorated ally. SOUND allies now give the Caramel flavor
 
 # Changes to Synergies
 
@@ -51,8 +56,6 @@
 
 # Changes to Items
 
-- Smoke Ball now activates even if the holder is KO without having had the chance to trigger it
-- Regular item carousels before stage 20 now have ~~40~~ → 80% chance to contain an additional fossil stone
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
 - Rework Black Sludge: POISONED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONED for 5 seconds ON_HIT. The first attack always inflicts POISONED.**
@@ -60,12 +63,7 @@
 
 # Gameplay
 
-> A Lucky Ultra at level 7 with 2 dittos on bench had an excessive impact on the game, so we are removing Ultra odds at level 7.
-
-- Change level 7 rarity odds in shop: 16%/33%/35%/15%/1% → 15%/35%/35%/15%/0%
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
-- The chance to find a Ditto in the shop has been increased: 0.5% → 0.5% + 0.01% per reroll since last Ditto found.
-- Unit selling prices have been increased, especially for third stage of evolution Pokémon. Previous formula: RarityCost * stars → New formula: RarityCost * 3^(stars-1) * 0.75, rounded up.
 
 # UI
 
@@ -78,11 +76,15 @@
 - Added board effects descriptions in Wiki > Statuses
 - Added Gift Shop stage description in Wiki > Stages
 - Wiki now opens at the last tab you were on when you closed it
+- Special, Unique and Legendary Pokémon in the shop now have the shimmer animation to be more noticeable
 
 # Bugfix
 
 - Grookey line now works properly with Electric triple attack effects
 - Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
+- Cherubi pool size has been corrected to match the pool size of Pokémon with 2 stages of evolution
+- Fixed AIR_BALLOON not giving immunity to several board effects
+- Fixed Pokémon not losing their immunity to board effects if they lose their HEAVY_DUTY_BOOTS or AIR_BALLOON
 
 # Misc
 
@@ -94,3 +96,4 @@
 - New title: Bestie. Finish first on Poképals leaderboard with your pal at the end of the event.
 - Synergy meta report is now public
 - Add FPS limiter option to settings
+- Added Turkish translation (thanks to badblli)

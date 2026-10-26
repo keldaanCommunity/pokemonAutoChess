@@ -24,10 +24,9 @@ export function GameTeamInfo() {
           place="top"
         >
           <p className="help">
-            {t("place_up_to")} <output>{maxTeamSize}</output>{" "}
-            {t("pokemons_on_your_board")}
+            {t("shop.place_up_to_pokemons_on_your_board", { maxTeamSize })}
           </p>
-          <p className="help">{t("team_size_hint")}</p>
+          <p className="help">{t("shop.team_size_hint")}</p>
         </Tooltip>
         <span>
           {spectatedPlayer.boardSize}/{maxTeamSize}

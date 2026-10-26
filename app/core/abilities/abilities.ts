@@ -304,6 +304,7 @@ import { MagmaStormStrategy } from "./magma-storm"
 import { MagnetBombStrategy } from "./magnet-bomb"
 import { MagnetPullStrategy } from "./magnet-pull"
 import { MagnetRiseStrategy } from "./magnet-rise"
+import { MagneticAbsorptionStrategy } from "./magnetic-absorption"
 import { MakeItRainStrategy } from "./make-it-rain"
 import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
@@ -407,7 +408,7 @@ import { RockSlideStrategy } from "./rock-slide"
 import { RockSmashStrategy } from "./rock-smash"
 import { RockTombStrategy } from "./rock-tomb"
 import { RockWreckerStrategy } from "./rock-wrecker"
-import { RockyPayloadStrategy } from "./rocky-payload";
+import { RockyPayloadStrategy } from "./rocky-payload"
 import { RolloutStrategy } from "./rollout"
 import { RoostStrategy } from "./roost"
 import { SacredSwordCavernStrategy } from "./sacred-sword-cavern"
@@ -476,6 +477,7 @@ import { SpiritShackleStrategy } from "./spirit-shackle"
 import { SpiteStrategy } from "./spite"
 import { SplashStrategy } from "./splash"
 import { SpringtideStormStrategy } from "./springtide-storm"
+import { StarShieldStrategy } from "./star-shield"
 import { StaticShockStrategy } from "./static-shock"
 import { StealthRocksStrategy } from "./stealth-rocks"
 import { SteamEruptionStrategy } from "./steam-eruption"
@@ -1027,6 +1029,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MAGNET_BOMB]: new MagnetBombStrategy(),
   [Ability.MAGNET_PULL]: new MagnetPullStrategy(),
   [Ability.MAGNET_RISE]: new MagnetRiseStrategy(),
+  [Ability.MAGNETIC_ABSORPTION]: new MagneticAbsorptionStrategy(),
   [Ability.MAKE_IT_RAIN]: new MakeItRainStrategy(),
   [Ability.MALIGNANT_CHAIN]: new MalignantChainStrategy(),
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
@@ -1298,5 +1301,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.YAWN]: new YawnStrategy(),
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
-  [Ability.AQUA_SWIRL]: new AquaSwirlStrategy()
+  [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
+  [Ability.STAR_SHIELD]: new StarShieldStrategy()
 }

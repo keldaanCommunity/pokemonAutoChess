@@ -858,6 +858,11 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.HEAVY_DUTY_BOOTS]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effects.add(EffectEnum.IMMUNITY_LOCKED)
+      pokemon.effects.add(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+    }),
+    new OnItemLostInCombatEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_LOCKED)
+      pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     })
   ],
 
