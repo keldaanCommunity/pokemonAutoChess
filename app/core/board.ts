@@ -73,12 +73,26 @@ export class Board {
     this.setEntityOnCell(x0, y0, entity1)
     if (entity0) {
       entity0.getEffects(OnMoveEffect).forEach((effect) => {
-        effect.apply({ pokemon: entity0, board: this, oldX: x0, oldY: y0, newX: x1, newY: y1 })
+        effect.apply({
+          pokemon: entity0,
+          board: this,
+          oldX: x0,
+          oldY: y0,
+          newX: x1,
+          newY: y1
+        })
       })
     }
     if (entity1) {
       entity1.getEffects(OnMoveEffect).forEach((effect) => {
-        effect.apply({ pokemon: entity1, board: this, oldX: x1, oldY: y1, newX: x0, newY: y0 })
+        effect.apply({
+          pokemon: entity1,
+          board: this,
+          oldX: x1,
+          oldY: y1,
+          newX: x0,
+          newY: y0
+        })
       })
     }
   }
@@ -645,7 +659,7 @@ export class Board {
     const entityOnCell = this.getEntityOnCell(x, y)
     if (
       entityOnCell &&
-      entityOnCell.items.has(Item.HEAVY_DUTY_BOOTS) === false
+      entityOnCell.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) === false
     ) {
       entityOnCell.effects.add(effect)
     }

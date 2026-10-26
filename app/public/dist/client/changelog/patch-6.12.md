@@ -83,6 +83,8 @@
 - Grookey line now works properly with Electric triple attack effects
 - Skill Swap now keeps the max PP of the target Pokémon on the next rounds after skill swap, as expected
 - Cherubi pool size has been corrected to match the pool size of Pokémon with 2 stages of evolution
+- Fixed AIR_BALLOON not giving immunity to several board effects
+- Fixed Pokémon not losing their immunity to board effects if they lose their HEAVY_DUTY_BOOTS or AIR_BALLOON
 
 # Misc
 

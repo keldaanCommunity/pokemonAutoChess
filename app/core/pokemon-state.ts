@@ -1031,7 +1031,7 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
       !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -1048,7 +1048,7 @@ export default abstract class PokemonState {
       pokemon.effects.has(EffectEnum.SPIKES) &&
       !pokemon.types.has(Synergy.FLYING) &&
       !pokemon.types.has(Synergy.STEEL) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -1064,7 +1064,7 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
       !pokemon.types.has(Synergy.POISON) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       pokemon.status.triggerPoison(1000, pokemon, undefined)
     }
@@ -1072,7 +1072,7 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
       !pokemon.types.has(Synergy.ICE) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       pokemon.handleDamage({
         damage: 10,
@@ -1089,7 +1089,7 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
       !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       pokemon.handleDamage({
         damage: 10,

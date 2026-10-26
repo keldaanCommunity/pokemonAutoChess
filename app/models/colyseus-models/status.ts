@@ -199,7 +199,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
-      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) &&
       pokemon.types.has(Synergy.POISON) === false
     ) {
       this.triggerPoison(1500, pokemon, undefined)
@@ -208,7 +208,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.SMOKE) &&
       !this.blinded &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       this.triggerBlinded(1000, pokemon, null)
     }
@@ -216,7 +216,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.STICKY_WEB) &&
       !this.paralysis &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       this.triggerParalysis(2000, pokemon, null)
     }
@@ -224,7 +224,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.COTTON_BALL) &&
       !this.sleep &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       this.triggerSleep(1000, pokemon)
       pokemon.effects.delete(EffectEnum.COTTON_BALL)
@@ -679,7 +679,7 @@ export default class Status extends Schema implements IStatus {
 
       if (
         pkm.effects.has(EffectEnum.POISON_GAS) &&
-        pkm.items.has(Item.HEAVY_DUTY_BOOTS) === false
+        !pkm.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
       ) {
         // reapply poison stack on every poison tick if in poison gas
         this.triggerPoison(1500, pkm, undefined)
