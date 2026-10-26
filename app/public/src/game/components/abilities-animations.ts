@@ -2317,6 +2317,10 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
+  [Ability.JELLYFISH_POISON]: projectile({
+    duration: 700,
+    scale: 0.5
+  }),
   [Ability.TOXIC_SPORE]: [
     parabolicProjectile({
       duration: 400,

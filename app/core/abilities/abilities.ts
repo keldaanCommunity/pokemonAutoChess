@@ -275,6 +275,7 @@ import { IronHeadStrategy } from "./iron-head"
 import { IronTailStrategy } from "./iron-tail"
 import { IvyCudgelStrategy } from "./ivy-cudgel"
 import { JawLockStrategy } from "./jaw-lock"
+import { JellyfishPoisonStrategy } from "./jellyfish-poison"
 import { JetPunchStrategy } from "./jet-punch"
 import { JudgementStrategy } from "./judgement"
 import { KingShieldStrategy } from "./king-shield"
@@ -1302,5 +1303,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
-  [Ability.STAR_SHIELD]: new StarShieldStrategy()
+  [Ability.STAR_SHIELD]: new StarShieldStrategy(),
+  [Ability.JELLYFISH_POISON]: new JellyfishPoisonStrategy()
 }

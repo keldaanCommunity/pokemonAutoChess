@@ -10046,7 +10046,7 @@ export class Tentacool extends Pokemon {
   speDef = 8
   maxPP = 85
   range = 1
-  skill = Ability.TOXIC
+  skill = Ability.JELLYFISH_POISON
   additional = true
 }
 
@@ -10065,7 +10065,7 @@ export class Tentacruel extends Pokemon {
   speDef = 14
   maxPP = 85
   range = 1
-  skill = Ability.TOXIC
+  skill = Ability.JELLYFISH_POISON
   additional = true
 }
 
