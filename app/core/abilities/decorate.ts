@@ -23,23 +23,24 @@ export class DecorateStrategy extends AbilityStrategy {
       if (pokemon.name === Pkm.ALCREMIE_VANILLA) {
         strongestNearestAlly.addShield(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY) {
-        strongestNearestAlly.addSpeed(30, pokemon, 1, crit)
+        strongestNearestAlly.addSpeed(40, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MATCHA) {
         strongestNearestAlly.addMaxHP(60, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_MINT) {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
         strongestNearestAlly.addSpecialDefense(15, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_LEMON) {
-        strongestNearestAlly.addCritChance(40, pokemon, 1, crit)
+        strongestNearestAlly.addCritChance(30, pokemon, 1, crit)
+        strongestNearestAlly.addCritPower(30, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_SALTED) {
         strongestNearestAlly.handleHeal(40, pokemon, 1, crit)
         strongestNearestAlly.addDefense(15, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RUBY_SWIRL) {
         strongestNearestAlly.addAttack(10, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_CARAMEL_SWIRL) {
-        strongestNearestAlly.addCritPower(80, pokemon, 1, crit)
+        strongestNearestAlly.addAbilityPower(80, pokemon, 1, crit)
       } else if (pokemon.name === Pkm.ALCREMIE_RAINBOW_SWIRL) {
-        strongestNearestAlly.addPP(50, pokemon, 1, crit)
+        strongestNearestAlly.addPP(30, pokemon, 1, crit)
       }
     }
   }

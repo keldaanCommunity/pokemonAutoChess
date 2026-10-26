@@ -1793,7 +1793,8 @@
 		"PURSUIT": "Pursuit",
 		"ROCKY_PAYLOAD": "Rocky Payload",
 		"AQUA_SWIRL": "Aqua Swirl",
-		"MAGNETIC_ABSORPTION": "Magnetic Absorption"
+		"MAGNETIC_ABSORPTION": "Magnetic Absorption",
+		"STAR_SHIELD": "Star Shield"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2364,7 +2365,8 @@
 		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.",
 		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL ",
 		"AQUA_SWIRL": "Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.",
-		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally."
+		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally.",
+		"STAR_SHIELD": "Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -3484,14 +3486,14 @@
 		"CONVERSION": "Conversion: Get the highest synergy of your opponent and its effects at the start of the fight.",
 		"CREAM": "$t(pkm.MILCERY) is looking for a delicious flavor...",
 		"VANILLA_CREAM": "Upon casting, the VANILLA_FLAVOR adds [80,SP] SHIELD to the decorated ally",
-		"RUBY_CREAM": "Upon casting, the RUBY_FLAVOR adds [30,SP] SPEED to the decorated ally",
+		"RUBY_CREAM": "Upon casting, the RUBY_FLAVOR adds [40,SP] SPEED to the decorated ally",
 		"MATCHA_CREAM": "Upon casting, the MATCHA_FLAVOR adds [60,SP] maximum HP to the decorated ally",
 		"MINT_CREAM": "Upon casting, the MINT_FLAVOR heals [40,SP] HP and adds [15,SP] SPE_DEF to the decorated ally",
-		"LEMON_CREAM": "Upon casting, the LEMON_FLAVOR adds [40,SP] % CRIT_CHANCE to the decorated ally",
+		"LEMON_CREAM": "Upon casting, the LEMON_FLAVOR adds [30,SP] % CRIT_CHANCE and [30,SP] % CRIT_POWER to the decorated ally",
 		"SALTED_CREAM": "Upon casting, the SALTED_FLAVOR heals [40,SP] HP and adds [15,SP] DEF to the decorated ally",
 		"RUBY_SWIRL_CREAM": "Upon casting, the RUBY_SWIRL_FLAVOR adds [10,SP] ATK to the decorated ally",
-		"CARAMEL_SWIRL_CREAM": "Upon casting, the CARAMEL_SWIRL_FLAVOR adds [80,SP] % CRIT_POWER to the decorated ally",
-		"RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [50,SP] PP to the decorated ally",
+		"CARAMEL_SWIRL_CREAM": "Upon casting, the CARAMEL_SWIRL_FLAVOR adds [80,SP] AP to the decorated ally",
+		"RAINBOW_SWIRL_CREAM": "Upon casting, the RAINBOW_SWIRL_FLAVOR adds [30,SP] PP to the decorated ally",
 		"DURALUDON": "Duraludon is looking for a ARTIFICIAL tool",
 		"CHARCADET": "Defeating the Mew duo will grant Charchadet with an AUSPICIOUS_ARMOR or a MALICIOUS_ARMOR based on your dominant synergy between PSYCHIC or GHOST",
 		"ZACIAN": "Zacian seeks an epic battle with the legendary birds to reclaim its RUSTED_SWORD",
