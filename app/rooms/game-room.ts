@@ -906,7 +906,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (
       hasLeftBeforeEnd &&
       otherHumans.length >= 1 &&
-      player.role !== Role.ADMIN
+      player.role !== Role.ADMIN &&
+      cause !== "SURRENDER"
     ) {
       /* if a user leaves a game before the end, 
         they cannot join another in the next 5 minutes */
