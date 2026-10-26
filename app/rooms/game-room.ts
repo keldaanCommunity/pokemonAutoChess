@@ -824,7 +824,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   }
 
   hasOtherClientConnected(client: Client) {
-    return this.clients.some((c) => c.auth?.uid === client.auth.uid)
+    return this.clients.some((c) => c.auth?.uid === client.auth.uid && c !== client)
   }
 
   isPlaying(player: Player) {
