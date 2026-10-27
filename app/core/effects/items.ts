@@ -835,7 +835,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     }),
     new OnItemLostInCombatEffect((pokemon) => {
       pokemon.addDodgeChance(-0.1, pokemon, 0, false)
-      pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+      if (!pokemon.items.has(Item.HEAVY_DUTY_BOOTS)) {
+        pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+      }
     })
   ],
 
@@ -858,6 +860,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.HEAVY_DUTY_BOOTS]: [
     new OnItemGainedEffect((pokemon) => {
       pokemon.effects.add(EffectEnum.IMMUNITY_LOCKED)
+      pokemon.effects.add(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+    }),
+    new OnItemLostInCombatEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_LOCKED)
+      if (!pokemon.items.has(Item.AIR_BALLOON)) {
+        pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+      }
     })
   ],
 

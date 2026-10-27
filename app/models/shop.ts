@@ -248,7 +248,8 @@ export default class Shop {
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
     if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
     state.additionalPokemons.push(pkm)
-    const { rarity, stages } = getPokemonData(pkm)
+    let { rarity, stages } = getPokemonData(pkm)
+    if(pkm === Pkm.CHERUBI) stages = 2; // special case for Cherubi that has 3 stages but should have the pool size of a 2 stage
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)
     if (pool) {

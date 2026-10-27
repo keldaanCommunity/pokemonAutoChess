@@ -2,25 +2,7 @@
   & .react-tooltip-content-wrapper {
     margin: -5px;
     overflow: hidden;
-  }
-
-  & .wrapper {
-    padding: 0;
-    color: var(--color-fg-primary);
-    background-color: var(--color-bg-primary);
-    overflow: hidden;
-  }
-
-  & header {
-    background-color: var(--color-bg-secondary);
-    padding: 0.8em 1em 0.4em 1em;
-    margin: -0.5em -0.5em 0.5em -0.5em;
-    overflow: visible;
-
-    & span {
-      font-size: 140%;
-    }
-  }
+  }  
 
   & p.help {
     margin: 0 auto;

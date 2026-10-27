@@ -849,6 +849,25 @@ const poppingIcon: AbilityAnimationMaker<
     tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
   })(args)
 
+const starShieldAnimation: AbilityAnimation = (args) => {
+  for (const direction of Object.values(Orientation)) {
+    const directionVector = OrientationVector[direction]
+    const burstArgs = {
+      ...args,
+      positionX: args.targetX,
+      positionY: args.targetY,
+      targetX: args.targetX + directionVector[0],
+      targetY: args.targetY + directionVector[1]
+    }
+
+    parabolicProjectile({
+      duration: 500,
+      scale: 2,
+      peakHeight: 48
+    })(burstArgs)
+  }
+}
+
 const aquaSwirlAnimation: AbilityAnimation = ({
   scene,
   ability,
@@ -994,10 +1013,10 @@ export const AbilitiesAnimations: {
         const circle = new Phaser.Geom.Circle(x, y, 48)
         for (let i = 0; i < petalCount; i++) {
           const petalSprite = scene.add
-            .sprite(0, 0, "abilities", `PETAL_DANCE_PROJECTILE/000.png`)
+            .sprite(0, 0, "abilities", `FLOWER_TRICK/000.png`)
             ?.setScale(2 * (1 + ap / 200))
           petalSprite.anims.play({
-            key: "PETAL_DANCE_PROJECTILE",
+            key: "FLOWER_TRICK",
             frameRate: 8
           })
           petalGroup.add(petalSprite)
@@ -1027,6 +1046,7 @@ export const AbilitiesAnimations: {
     }
   ],
   ["PETAL_DANCE_PROJECTILE"]: projectile({
+    ability: "FLOWER_TRICK",
     projectileSpeed: 10,
     hitAnim: onTarget({ ability: "PUFF_GREEN", scale: 1 })
   }),
@@ -1127,7 +1147,7 @@ export const AbilitiesAnimations: {
   [Ability.SOAK]: onTargetScale2,
   [Ability.IRON_TAIL]: onTargetScale2,
   [Ability.ICICLE_CRASH]: onTargetScale2,
-  [Ability.DRAIN_PUNCH]: onTargetScale2,
+  [Ability.DRAIN_PUNCH]: onTarget({ ability: Ability.FOCUS_PUNCH, scale: 2 }),
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
@@ -1595,7 +1615,10 @@ export const AbilitiesAnimations: {
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),
   [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
-  [Ability.SONG_OF_DESIRE]: onTarget({ positionOffset: [0, -60] }),
+  [Ability.SONG_OF_DESIRE]: onTarget({
+    positionOffset: [0, -60],
+    ability: Ability.ATTRACT
+  }),
   [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.FIRE_LASH]: onCaster({
@@ -1677,7 +1700,10 @@ export const AbilitiesAnimations: {
         scale: 4
       }
     ),
-  [Ability.PETAL_BLIZZARD]: onCasterScale3,
+  [Ability.PETAL_BLIZZARD]: onCaster({
+    scale: 3,
+    ability: Ability.AROMATHERAPY
+  }),
   [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
@@ -1865,7 +1891,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
   [Ability.WONDER_ROOM]: onTargetScale4,
-  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.DRAIN_PUNCH }),
+  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.FOCUS_PUNCH }),
   [Ability.FOCUS_PUNCH]: onTargetScale2,
   ["FOCUS_PUNCH_CHARGE"]: onCaster({
     ability: "HYPER_BEAM_CHARGE",
@@ -2186,6 +2212,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2
     })(args),
   [Ability.DRAGON_DARTS]: projectile({
+    ability: Ability.VENOSHOCK,
     scale: 1,
     oriented: true,
     positionOffset: [0, -30],
@@ -2290,6 +2317,11 @@ export const AbilitiesAnimations: {
     oriented: true,
     rotation: -Math.PI / 2
   }),
+  [Ability.STINGING_TOXINS]: projectile({
+    duration: 700,
+    scale: 0.1,
+    tweenProps: { scale: 0.5 }
+  }),
   [Ability.TOXIC_SPORE]: [
     parabolicProjectile({
       duration: 400,
@@ -2372,6 +2404,11 @@ export const AbilitiesAnimations: {
     endPositionOffset: [0, -80]
   }),
   [Ability.MAGNET_BOMB]: projectile({ duration: 400 }),
+  [Ability.MAGNETIC_ABSORPTION]: onCaster({
+    ability: Ability.MAGNET_BOMB,
+    depth: DEPTH.ABILITY_BELOW_POKEMON,
+    animOptions: { repeat: 2 }
+  }),
   ["ELECTRO_SHOT_CHARGE"]: onCaster({
     ability: Ability.MAGNET_BOMB,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -2383,12 +2420,20 @@ export const AbilitiesAnimations: {
     oriented: true,
     animOptions: { repeat: 3 }
   }),
+  [Ability.STAR_SHIELD]: (args) =>
+    projectile({
+      startCoords: [args.targetX - 12, 12, false],
+      endCoords: [args.targetX, args.targetY, args.flip],
+      scale: 3,
+      hitAnim: starShieldAnimation,
+      duration: 1500
+    })(args),
   [Ability.GUNK_SHOT]: projectile({
     duration: 700,
     ease: "Power2",
     hitAnim: onTarget({
       ability: Ability.DIVE,
-      scale: 1.5,
+      scale: 2,
       tint: 0xf060a0,
       depth: DEPTH.ABILITY_GROUND_LEVEL
     })
@@ -2553,7 +2598,11 @@ export const AbilitiesAnimations: {
   [Ability.HIDDEN_POWER_QM]: hiddenPowerAnimation,
   [Ability.HIDDEN_POWER_EM]: hiddenPowerAnimation,
   [Ability.ICY_WIND]: projectile({ duration: 2000, distance: 12 }),
-  [Ability.POWDER_SNOW]: projectile({ duration: 1600, distance: 12 }),
+  [Ability.POWDER_SNOW]: projectile({
+    ability: Ability.SHEER_COLD,
+    duration: 1600,
+    distance: 12
+  }),
   [Ability.EERIE_SPELL]: projectile({
     duration: 400,
     ability: Ability.FISSURE,

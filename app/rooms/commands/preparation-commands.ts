@@ -842,12 +842,10 @@ export class InitializeBotsCommand extends Command<
       if (user) {
         const difficulty = { $gt: user.elo - 100, $lt: user.elo + 100 }
 
-        const bots = await BotV2.find({ elo: difficulty }, [
-          "avatar",
-          "elo",
-          "name",
-          "id"
-        ]).limit(7)
+        const bots = await BotV2.find(
+          { elo: difficulty },
+          "avatar elo name id"
+        ).limit(7)
 
         if (bots) {
           bots.forEach((bot) => {
@@ -911,7 +909,7 @@ export class OnAddBotCommand extends Command<PreparationRoom, OnAddBotPayload> {
 
         const bots = await BotV2.find(
           { id: { $nin: existingBots }, elo, approved: true },
-          ["avatar", "elo", "name", "id"]
+          "avatar elo name id"
         )
 
         if (bots.length <= 0) {

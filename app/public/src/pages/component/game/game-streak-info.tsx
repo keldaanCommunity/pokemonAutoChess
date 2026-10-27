@@ -17,9 +17,9 @@ export function GameStreakInfo(props: { variant?: "shop" | "inline" }) {
   const lastBattleResult = lastPlayerBattle ? lastPlayerBattle.result : null
   let streakLabel = "Draw"
   if (lastBattleResult === BattleResult.WIN) {
-    streakLabel = t("victory_count", { count: streak + 1 })
+    streakLabel = t("shop.victory_count", { count: streak + 1 })
   } else if (lastBattleResult === BattleResult.DEFEAT) {
-    streakLabel = t("defeat_count", { count: streak + 1 })
+    streakLabel = t("shop.defeat_count", { count: streak + 1 })
   }
 
   if (!lastBattleResult) return null
@@ -49,7 +49,7 @@ export function GameStreakInfo(props: { variant?: "shop" | "inline" }) {
             className="custom-theme-tooltip"
             place="top"
           >
-            <p className="help">{`${t("streak")}: ${streakLabel}`}</p>
+            <p className="help">{`${t("shop.streak")}: ${streakLabel}`}</p>
           </Tooltip>
           <span className="streak-count">{streak + 1}</span>
           <img className="icon-streak" src={streakIcon} alt={streakAlt} />
@@ -61,7 +61,7 @@ export function GameStreakInfo(props: { variant?: "shop" | "inline" }) {
   return (
     <span data-tooltip-id="detail-streak" className="streak-inline">
       <Tooltip id="detail-streak" className="custom-theme-tooltip" place="top">
-        <p className="help">{`${t("streak")}: ${streakLabel}`}</p>
+        <p className="help">{`${t("shop.streak")}: ${streakLabel}`}</p>
       </Tooltip>
       <span className="streak-count">{streak + 1}</span>
       <img className="icon-streak" src={streakIcon} alt={streakAlt} />

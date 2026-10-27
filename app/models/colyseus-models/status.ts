@@ -201,7 +201,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
-      pokemon.items.has(Item.HEAVY_DUTY_BOOTS) === false &&
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) &&
       pokemon.types.has(Synergy.POISON) === false
     ) {
       const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000
@@ -211,7 +211,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.SMOKE) &&
       !this.blinded &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const duration = EffectConfigs.SMOKE.durationSeconds * 1000
       this.triggerBlinded(duration, pokemon, null)
@@ -220,7 +220,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.STICKY_WEB) &&
       !this.paralysis &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const duration = EffectConfigs.STICKY_WEB.durationSeconds * 1000
       this.triggerParalysis(duration, pokemon, null)
@@ -229,7 +229,7 @@ export default class Status extends Schema implements IStatus {
     if (
       pokemon.effects.has(EffectEnum.COTTON_BALL) &&
       !this.sleep &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const duration = EffectConfigs.COTTON_BALL.durationSeconds * 1000
       this.triggerSleep(duration, pokemon)
@@ -393,9 +393,7 @@ export default class Status extends Schema implements IStatus {
       this.enrageDelay - dt <= 0 &&
       !pokemon.simulation.finished
     ) {
-      this.enraged = true
-      this.protect = false
-      pokemon.addSpeed(speedBonus, pokemon, 0, false)
+      this.triggerRage(0, pokemon)
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
@@ -691,7 +689,7 @@ export default class Status extends Schema implements IStatus {
 
       if (
         pkm.effects.has(EffectEnum.POISON_GAS) &&
-        pkm.items.has(Item.HEAVY_DUTY_BOOTS) === false
+        !pkm.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
       ) {
         // reapply poison stack on every poison tick if in poison gas
         const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000

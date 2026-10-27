@@ -73,7 +73,7 @@ export default function BotAvatar(props: {
         </p>
       ) : (
         <p>
-          {props.bot.name} {props.bot.author && "by " + props.bot.author}
+          {t(`pkm.${props.bot.name}`)} {props.bot.author && "by " + props.bot.author}
         </p>
       )}
       <p>

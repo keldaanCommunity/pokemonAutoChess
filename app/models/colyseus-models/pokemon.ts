@@ -7222,9 +7222,9 @@ export class Jirachi extends Pokemon {
   speed = 57
   def = 10
   speDef = 10
-  maxPP = 80
+  maxPP = 110
   range = 3
-  skill = Ability.DOOM_DESIRE
+  skill = Ability.STAR_SHIELD
   passive = Passive.GOOD_LUCK
   beforeSimulationStart({ teamEffects }: { teamEffects: Set<EffectEnum> }) {
     teamEffects.add(EffectEnum.GOOD_LUCK)
@@ -10044,9 +10044,9 @@ export class Tentacool extends Pokemon {
   speed = 57
   def = 4
   speDef = 8
-  maxPP = 85
+  maxPP = 100
   range = 1
-  skill = Ability.TOXIC
+  skill = Ability.STINGING_TOXINS
   additional = true
 }
 
@@ -10063,9 +10063,9 @@ export class Tentacruel extends Pokemon {
   speed = 57
   def = 6
   speDef = 14
-  maxPP = 85
+  maxPP = 100
   range = 1
-  skill = Ability.TOXIC
+  skill = Ability.STINGING_TOXINS
   additional = true
 }
 
@@ -20912,6 +20912,24 @@ export class OricorioSensu extends Pokemon {
   }
 }
 
+export class SandyShocks extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.ELECTRIC,
+    Synergy.STEEL,
+    Synergy.GROUND
+  ])
+  rarity = Rarity.UNIQUE
+  stars = 3
+  hp = 200
+  atk = 15
+  speed = 57
+  def = 5
+  speDef = 5
+  maxPP = 100
+  range = 2
+  skill = Ability.MAGNETIC_ABSORPTION
+}
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -22118,7 +22136,8 @@ export const PokemonClasses: Record<
   [Pkm.ORICORIO_PA_U]: OricorioPaU,
   [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
   [Pkm.ORICORIO_SENSU]: OricorioSensu,
-  [Pkm.BOMBIRDIER]: Bombirdier
+  [Pkm.BOMBIRDIER]: Bombirdier,
+  [Pkm.SANDY_SHOCKS]: SandyShocks
 }
 
 // declare all the classes in colyseus schema TypeRegistry
