@@ -1129,7 +1129,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(EffectEnum.SHINING_RAY)
-          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(pokemon.baseAtk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
         }
         break
@@ -1138,7 +1138,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(EffectEnum.LIGHT_PULSE)
-          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(pokemon.baseAtk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
         }
         break
@@ -1147,7 +1147,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(EffectEnum.ETERNAL_LIGHT)
-          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(pokemon.baseAtk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
           pokemon.status.triggerRuneProtect(8000, pokemon, pokemon)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
@@ -1159,7 +1159,7 @@ export default class Simulation extends Schema implements ISimulation {
         if (pokemon.inSpotlight) {
           pokemon.status.light = true
           pokemon.effects.add(EffectEnum.MAX_ILLUMINATION)
-          pokemon.addAttack(Math.ceil(pokemon.atk * 0.2), pokemon, 0, false)
+          pokemon.addAttack(Math.ceil(pokemon.baseAtk * 0.2), pokemon, 0, false)
           pokemon.addAbilityPower(20, pokemon, 0, false)
           pokemon.status.triggerRuneProtect(8000, pokemon, pokemon)
           pokemon.addDefense(0.5 * pokemon.baseDef, pokemon, 0, false)
