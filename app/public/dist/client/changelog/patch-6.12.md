@@ -85,6 +85,7 @@
 - Cherubi pool size has been corrected to match the pool size of Pokémon with 2 stages of evolution
 - Fixed AIR_BALLOON not giving immunity to several board effects
 - Fixed Pokémon not losing their immunity to board effects if they lose their HEAVY_DUTY_BOOTS or AIR_BALLOON
+- Fixed Fossil synergy effect shield based on current max HP instead of base max HP
 
 # Misc
 
