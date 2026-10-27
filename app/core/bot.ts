@@ -31,7 +31,7 @@ export default class Bot {
 
   async initialize() {
     try {
-      const data = await BotV2.findOne({ id: this.player.id }, ["steps"])
+      const data = await BotV2.findOne({ id: this.player.id }, "steps")
       if (data) {
         this.scenario = data
         //TODO: allow to choose your wands in bot builder

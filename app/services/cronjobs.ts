@@ -184,7 +184,7 @@ async function eloDecay() {
   logger.info("[CRON] Computing elo decay...")
   const users = await UserMetadata.find(
     { elo: { $gt: CRON_ELO_DECAY_MINIMUM_ELO } },
-    ["uid", "elo", "displayName"]
+    "uid elo displayName"
   )
   if (users && users.length > 0) {
     logger.info(`Checking activity of ${users.length} users`)
@@ -197,7 +197,7 @@ async function eloDecay() {
             ? { gameMode: GameMode.RANKED }
             : {})
         },
-        ["time"],
+        "time",
         {
           limit: 3,
           sort: { time: -1 }

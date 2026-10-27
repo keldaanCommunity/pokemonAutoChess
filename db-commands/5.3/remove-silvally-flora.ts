@@ -56,7 +56,7 @@ async function removePokemonFromGame(
     console.log(
       `Replacing ${pokemonNameToRemove} by ${pokemonNameToReplace} in game detailled statistics`
     )
-    const stats = await DetailledStatistic.find({}, ["pokemons"])
+    const stats = await DetailledStatistic.find({}, "pokemons")
     for (let i = 0; i < stats.length; i++) {
       const record = stats[i]
       let modified = false
@@ -82,7 +82,7 @@ async function removePokemonFromGame(
     // Meta
     console.log(`Removing ${pokemonNameToRemove} from meta report`)
 
-    const meta = await Meta.find({}, ["pokemons", "teams"])
+    const meta = await Meta.find({}, "pokemons teams")
     for (let i = 0; i < meta.length; i++) {
       const metarecord = meta[i]
       let modified = false

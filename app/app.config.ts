@@ -594,7 +594,7 @@ export const server = defineServer({
 
       const stats = await DetailledStatistic.find(
         params,
-        ["pokemons", "time", "rank", "elo", "gameMode", "unholdableItems"],
+        "pokemons time rank elo gameMode unholdableItems",
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
@@ -651,14 +651,7 @@ export const server = defineServer({
             displayName: { $regex: `^${escapedTerm}` }, // ^ makes it a prefix match, enabling index use
             ...(showBanned ? {} : { banned: false })
           },
-          [
-            "uid",
-            "elo",
-            "displayName",
-            "level",
-            "avatar",
-            ...(showBanned ? ["banned"] : [])
-          ],
+          `uid elo displayName level avatar${showBanned ? " banned" : ""}`,
           {
             limit: 100,
             sort: { level: -1 },
