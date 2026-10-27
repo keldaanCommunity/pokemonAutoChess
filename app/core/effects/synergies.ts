@@ -58,6 +58,7 @@ import {
   BeforeTakingDamageEffect,
   type BeforeTakingDamageEffectArgs,
   type Effect,
+  type EffectOrigin,
   OnAbilityCastEffect,
   OnAttackEffect,
   OnAttackReceivedEffect,
@@ -104,14 +105,13 @@ export class MonsterKillEffect extends OnKillEffect {
   }
 }
 
-export const monsterFlinchOnAttackEffect = new OnAttackEffect(
-  ({ target, pokemon }) => {
+export const monsterFlinchOnAttackEffect = (origin: EffectOrigin) =>
+  new OnAttackEffect(({ target, pokemon }) => {
     const flinchChance = 0.3
     if (target && chance(flinchChance, pokemon)) {
       target.status.triggerFlinch(3000, target, this)
     }
-  }
-)
+  }, origin)
 
 export class GroundHoleEffect extends OnSpawnEffect {
   constructor(effect: SynergyTier<Synergy.GROUND>) {
@@ -543,19 +543,17 @@ export const normalShieldEffect = new OnSimulationStartEffect(
   }
 )
 
-export const bugSwarmSpawnEffect = new OnStageStartEffect(
-  ({ player, room }) => {
-    if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
-      const bugsNotFinal = [...player.board.values()]
-        .filter((p) => p.types.has(Synergy.BUG) && !p.final)
-        .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-      if (bugsNotFinal.length > 0) {
-        const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
-        room.spawnOnBench(player, spawn, "nest")
-      }
+const bugSwarmSpawnEffect = new OnStageStartEffect(({ player, room }) => {
+  if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
+    const bugsNotFinal = [...player.board.values()]
+      .filter((p) => p.types.has(Synergy.BUG) && !p.final)
+      .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+    if (bugsNotFinal.length > 0) {
+      const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
+      room.spawnOnBench(player, spawn, "nest")
     }
   }
-)
+}, EffectEnum.HEART_OF_THE_SWARM)
 
 export function applyWandEffects(
   pokemon: PokemonEntity,
@@ -1071,19 +1069,19 @@ export const SynergyEffects: Partial<
   [EffectEnum.DRILLER]: [groundDigEffect],
   [EffectEnum.DEEP_MINER]: [groundDigEffect],
   [EffectEnum.PURSUIT]: [
-    monsterFlinchOnAttackEffect,
+    monsterFlinchOnAttackEffect(EffectEnum.PURSUIT),
     () => new MonsterKillEffect(EffectEnum.PURSUIT)
   ],
   [EffectEnum.BRUTAL_SWING]: [
-    monsterFlinchOnAttackEffect,
+    monsterFlinchOnAttackEffect(EffectEnum.BRUTAL_SWING),
     () => new MonsterKillEffect(EffectEnum.BRUTAL_SWING)
   ],
   [EffectEnum.POWER_TRIP]: [
-    monsterFlinchOnAttackEffect,
+    monsterFlinchOnAttackEffect(EffectEnum.POWER_TRIP),
     () => new MonsterKillEffect(EffectEnum.POWER_TRIP)
   ],
   [EffectEnum.MERCILESS]: [
-    monsterFlinchOnAttackEffect,
+    monsterFlinchOnAttackEffect(EffectEnum.MERCILESS),
     () => new MonsterKillEffect(EffectEnum.MERCILESS)
   ]
 }

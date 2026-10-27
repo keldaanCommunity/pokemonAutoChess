@@ -12,7 +12,7 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import type Simulation from "../simulation"
 
-type EffectOrigin = EffectEnum | Item | Passive | Ability
+export type EffectOrigin = EffectEnum | Item | Passive | Ability
 
 export abstract class Effect {
   priority: number = 0
