@@ -70,12 +70,12 @@ import {
   fightingTrainingEffect,
   GroundHoleEffect,
   humanHealEffect,
-  MonsterKillEffect,
   normalShieldEffect,
   OnFieldDeathEffect,
   onFlowerMonDeath,
   pounceWandEffect,
   SoundCryEffect,
+  SynergyEffects,
   wildBerserkEffect
 } from "./effects/synergies"
 import { PokemonEntity } from "./pokemon-entity"
@@ -185,7 +185,10 @@ export default class Simulation extends Schema implements ISimulation {
     this.finished = false
     this.winnerId = ""
     const { initialDelayMinMs, initialDelayMaxMs } = WeatherConfigs.STORM
-    this.stormLightningTimer = randomBetween(initialDelayMinMs, initialDelayMaxMs)
+    this.stormLightningTimer = randomBetween(
+      initialDelayMinMs,
+      initialDelayMaxMs
+    )
     if (
       SynergyTiers[Synergy.AQUATIC].some(
         (e) => this.blueEffects.has(e) || this.redEffects.has(e)
@@ -883,7 +886,6 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MERCILESS:
         if (types.has(Synergy.MONSTER)) {
           pokemon.effects.add(effect)
-          pokemon.effectsSet.add(new MonsterKillEffect(effect))
         }
         break
 
@@ -1243,8 +1245,15 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         const { flyingSpeedBonus, speedBonus } = WeatherConfigs.WINDY
-        const speedBuff = pokemon.types.has(Synergy.FLYING) ? flyingSpeedBonus : speedBonus
-        pokemon.addSpeed(speedBuff + nbFloatStones * 10, "environment", 0, false)
+        const speedBuff = pokemon.types.has(Synergy.FLYING)
+          ? flyingSpeedBonus
+          : speedBonus
+        pokemon.addSpeed(
+          speedBuff + nbFloatStones * 10,
+          "environment",
+          0,
+          false
+        )
         break
       }
 
@@ -1310,6 +1319,16 @@ export default class Simulation extends Schema implements ISimulation {
       default:
         break
     }
+
+    if (effect in SynergyEffects) {
+      SynergyEffects[effect]!.forEach((effectOrEffectFn) => {
+        if (typeof effectOrEffectFn === "function") {
+          pokemon.effectsSet.add(effectOrEffectFn(effect))
+        } else {
+          pokemon.effectsSet.add(effectOrEffectFn)
+        }
+      })
+    }
   }
 
   update(dt: number) {
@@ -1355,7 +1374,8 @@ export default class Simulation extends Schema implements ISimulation {
     })
 
     if (this.weather === Weather.STORM) {
-      const { intervalMinMs, intervalMaxMs, lightningDamage } = WeatherConfigs.STORM
+      const { intervalMinMs, intervalMaxMs, lightningDamage } =
+        WeatherConfigs.STORM
       this.stormLightningTimer -= dt
       if (this.stormLightningTimer <= 0 && !this.finished) {
         this.stormLightningTimer = randomBetween(intervalMinMs, intervalMaxMs)
@@ -1732,7 +1752,8 @@ export default class Simulation extends Schema implements ISimulation {
     tidalWaveLevel: number,
     healAll: boolean = false
   ) {
-    const { healingPercentPerLevel, damagePercentPerLevel } = EffectConfigs.TIDAL_WAVE
+    const { healingPercentPerLevel, damagePercentPerLevel } =
+      EffectConfigs.TIDAL_WAVE
     const isRed = team === Team.RED_TEAM
     const orientation = isRed ? Orientation.DOWN : Orientation.UP
     this.room.broadcast(Transfer.ABILITY, {
@@ -1761,7 +1782,9 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
-                tidalWaveLevel * (healingPercentPerLevel / 100) * pokemonHit.maxHP,
+                tidalWaveLevel *
+                  (healingPercentPerLevel / 100) *
+                  pokemonHit.maxHP,
                 EffectEnum.TIDAL_WAVE,
                 0,
                 false
@@ -1769,7 +1792,10 @@ export default class Simulation extends Schema implements ISimulation {
             }
           } else {
             pokemonHit.handleDamage({
-              damage: tidalWaveLevel * (damagePercentPerLevel / 100) * pokemonHit.maxHP,
+              damage:
+                tidalWaveLevel *
+                (damagePercentPerLevel / 100) *
+                pokemonHit.maxHP,
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
