@@ -7,6 +7,7 @@ import {
   MAX_SPEED,
   ON_ATTACK_MANA
 } from "../config"
+import { EffectConfigs } from "../config/game/effects"
 import { StatusConfigs } from "../config/game/statuses"
 import { SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
@@ -410,7 +411,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
         attackType === AttackType.SPECIAL
       ) {
-        specialDamage *= 1.2
+        specialDamage *= 1 + EffectConfigs.STRANGE_STEAM.damageBonusPercent / 100
       }
       if (crit && attacker) {
         let critReductionFactor = 1.0

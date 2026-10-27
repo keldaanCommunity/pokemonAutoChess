@@ -1,3 +1,4 @@
+import { AbilityConfigs } from "../../../../config/game/abilities"
 import { EffectConfigs } from "../../../../config/game/effects"
 import { ItemConfigs } from "../../../../config/game/items"
 import { PassiveConfigs } from "../../../../config/game/passives"
@@ -5,6 +6,8 @@ import { getStatusConfig } from "../../../../config/game/statuses"
 import { getWeatherConfig } from "../../../../config/game/weathers"
 import { Status } from "../../../../types/enum/Status"
 import { Weather } from "../../../../types/enum/Weather"
+import { isIn } from "../../../../utils/array"
+import { keys } from "../../../../utils/object"
 
 export const placeholderRegExp = /\{\{[^{}]*\}\}/g
 
@@ -16,6 +19,9 @@ export function getDescriptionConfig(path: string) {
   }
   if (category === "weather_description" && Object.hasOwn(Weather, key)) {
     return getWeatherConfig(key as Weather)
+  }
+  if (category === "ability_description" && isIn(keys(AbilityConfigs), key)) {
+    return AbilityConfigs[key]
   }
   if (category === "effect_description" && Object.hasOwn(EffectConfigs, key)) {
     return EffectConfigs[key as keyof typeof EffectConfigs]

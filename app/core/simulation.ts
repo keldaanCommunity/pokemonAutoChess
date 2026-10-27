@@ -1,5 +1,6 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
+import { EffectConfigs } from "../config/game/effects"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -532,10 +533,11 @@ export default class Simulation extends Schema implements ISimulation {
       }
     }
     if (pokemon.refToBoardPokemon.supercharged) {
+      const { speedBonus, shield } = EffectConfigs[EffectEnum.SUPERCHARGE]
       pokemon.refToBoardPokemon.supercharged = false
       pokemon.status.addElectricField(pokemon)
-      pokemon.addSpeed(20, pokemon, 0, false)
-      pokemon.addShield(30, pokemon, 0, false)
+      pokemon.addSpeed(speedBonus, pokemon, 0, false)
+      pokemon.addShield(shield, pokemon, 0, false)
     }
   }
 
@@ -1375,9 +1377,10 @@ export default class Simulation extends Schema implements ISimulation {
             )
           }
           if (pokemonOnCell.types.has(Synergy.ELECTRIC)) {
+            const { speedBonus, shield } = EffectConfigs[EffectEnum.SUPERCHARGE]
             pokemonOnCell.status.addElectricField(pokemonOnCell)
-            pokemonOnCell.addSpeed(20, pokemonOnCell, 0, false)
-            pokemonOnCell.addShield(30, pokemonOnCell, 0, false)
+            pokemonOnCell.addSpeed(speedBonus, pokemonOnCell, 0, false)
+            pokemonOnCell.addShield(shield, pokemonOnCell, 0, false)
           } else {
             pokemonOnCell.handleDamage({
               damage: lightningDamage,
@@ -1729,6 +1732,7 @@ export default class Simulation extends Schema implements ISimulation {
     tidalWaveLevel: number,
     healAll: boolean = false
   ) {
+    const { healingPercentPerLevel, damagePercentPerLevel } = EffectConfigs.TIDAL_WAVE
     const isRed = team === Team.RED_TEAM
     const orientation = isRed ? Orientation.DOWN : Orientation.UP
     this.room.broadcast(Transfer.ABILITY, {
@@ -1757,7 +1761,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
-                tidalWaveLevel * 0.1 * pokemonHit.maxHP,
+                tidalWaveLevel * (healingPercentPerLevel / 100) * pokemonHit.maxHP,
                 EffectEnum.TIDAL_WAVE,
                 0,
                 false
@@ -1765,7 +1769,7 @@ export default class Simulation extends Schema implements ISimulation {
             }
           } else {
             pokemonHit.handleDamage({
-              damage: tidalWaveLevel * 0.05 * pokemonHit.maxHP,
+              damage: tidalWaveLevel * (damagePercentPerLevel / 100) * pokemonHit.maxHP,
               board: this.board,
               attackType: AttackType.TRUE,
               attacker: null,
@@ -1791,7 +1795,7 @@ export default class Simulation extends Schema implements ISimulation {
             }
             if (newY !== y) {
               pokemonHit.moveTo(x, newY, this.board, true) // push enemies away
-              pokemonHit.cooldown = 500
+              pokemonHit.cooldown = EffectConfigs.TIDAL_WAVE.knockbackDelayMs
             }
           }
 

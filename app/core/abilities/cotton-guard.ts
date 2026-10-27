@@ -1,3 +1,4 @@
+import { EffectConfigs } from "../../config/game/effects"
 import { EffectEnum } from "../../types/enum/Effect"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -23,7 +24,8 @@ export class CottonGuardStrategy extends AbilityStrategy {
         pokemon.simulation
       )
       if (cell.value && cell.value.team !== pokemon.team) {
-        cell.value.status.triggerSleep(1000, cell.value)
+        const duration = EffectConfigs.COTTON_BALL.durationSeconds * 1000
+        cell.value.status.triggerSleep(duration, cell.value)
       }
     })
   }

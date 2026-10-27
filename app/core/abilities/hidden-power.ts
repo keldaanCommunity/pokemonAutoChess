@@ -1,5 +1,6 @@
 import { SetSchema } from "@colyseus/schema"
 import { getUnownsPoolPerStage, RarityCost } from "../../config"
+import { AbilityConfigs } from "../../config/game/abilities"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
@@ -365,7 +366,8 @@ export class HiddenPowerRStrategy extends HiddenPowerStrategy {
 export class HiddenPowerSStrategy extends HiddenPowerStrategy {
   process(unown: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(unown, board, target, crit)
-    unown.simulation.triggerTidalWave(unown.team, 2, true)
+    const { tidalWaveLevel } = AbilityConfigs.HIDDEN_POWER_S
+    unown.simulation.triggerTidalWave(unown.team, tidalWaveLevel, true)
   }
 }
 

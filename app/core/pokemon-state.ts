@@ -1,4 +1,5 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
+import { EffectConfigs } from "../config/game/effects"
 import { StatusConfigs } from "../config/game/statuses"
 import { SynergyTiers } from "../config/game/synergies"
 import { WeatherConfigs } from "../config/game/weathers"
@@ -1037,15 +1038,16 @@ export default abstract class PokemonState {
       !pokemon.types.has(Synergy.ROCK) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.STEALTH_ROCKS
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.PHYSICAL,
         attacker: null,
         effect: EffectEnum.STEALTH_ROCKS,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerWound(1000, pokemon, undefined)
+      pokemon.status.triggerWound(durationSeconds * 1000, pokemon, undefined)
     }
 
     if (
@@ -1054,15 +1056,16 @@ export default abstract class PokemonState {
       !pokemon.types.has(Synergy.STEEL) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.SPIKES
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.TRUE,
         attacker: null,
         effect: EffectEnum.SPIKES,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerArmorReduction(1000, pokemon)
+      pokemon.status.triggerArmorReduction(durationSeconds * 1000, pokemon)
     }
 
     if (
@@ -1070,7 +1073,8 @@ export default abstract class PokemonState {
       !pokemon.types.has(Synergy.POISON) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
-      pokemon.status.triggerPoison(1000, pokemon, undefined)
+      const duration = EffectConfigs.TOXIC_SPIKES.durationSeconds * 1000
+      pokemon.status.triggerPoison(duration, pokemon, undefined)
     }
 
     if (
@@ -1078,15 +1082,16 @@ export default abstract class PokemonState {
       !pokemon.types.has(Synergy.ICE) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damage, durationSeconds } = EffectConfigs.HAIL
       pokemon.handleDamage({
-        damage: 10,
+        damage,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
         effect: EffectEnum.HAIL,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon, undefined)
+      pokemon.status.triggerFreeze(durationSeconds * 1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 
@@ -1095,15 +1100,16 @@ export default abstract class PokemonState {
       !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.EMBER
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
         effect: EffectEnum.EMBER,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerBurn(2200, pokemon, null)
+      pokemon.status.triggerBurn(durationSeconds * 1000, pokemon, null)
     }
   }
 
