@@ -1336,7 +1336,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
     }
 
-    if (effect in SynergyEffects) {
+    if (effect in SynergyEffects && pokemon.effects.has(effect)) {
       SynergyEffects[effect]!.forEach((effectOrEffectFn) => {
         if (typeof effectOrEffectFn === "function") {
           pokemon.effectsSet.add(effectOrEffectFn(effect))
