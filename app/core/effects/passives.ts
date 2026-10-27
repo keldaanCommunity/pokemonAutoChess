@@ -1,7 +1,7 @@
 import { BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
 import { StatusConfigs } from "../../config/game/statuses"
-import { SynergyTiers } from "../../config/game/synergies"
+import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
 import {
   BasculinWhite,
   type Pokemon,
@@ -658,7 +658,7 @@ class ZygardeCellsEffect extends PeriodicEffect {
         const delay = 1800
 
         for (let i = 0; i < 24; i++)
-          if (pokemon.player.groundHoles[i] === 5) fullyDugHolesIndexes.push(i)
+          if (pokemon.player.groundHoles[i] === SynergyConfigs.GROUND.maxDepth) fullyDugHolesIndexes.push(i)
 
         for (const index of fullyDugHolesIndexes) {
           if (this.cellsCount < 95) {
@@ -929,11 +929,13 @@ const conversionEffect = new OnSimulationStartEffect(
         effect === EffectEnum.DRAGON_SCALES ||
         effect === EffectEnum.DRAGON_DANCE
       ) {
-        entity.addShield(dragonLevel * 5, entity, 0, false)
+        const shield = dragonLevel * EffectConfigs.DRAGON_SCALES.shieldPerStar
+        entity.addShield(shield, entity, 0, false)
       }
       if (effect === EffectEnum.DRAGON_DANCE) {
-        entity.addAbilityPower(dragonLevel, entity, 0, false)
-        entity.addSpeed(dragonLevel, entity, 0, false)
+        const { abilityPowerPerStar, speedPerStar } = EffectConfigs.DRAGON_DANCE
+        entity.addAbilityPower(dragonLevel * abilityPowerPerStar, entity, 0, false)
+        entity.addSpeed(dragonLevel * speedPerStar, entity, 0, false)
       }
     }
 
@@ -944,7 +946,7 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to ground, fully dig a hole at their position
     if (synergyCopied === Synergy.GROUND) {
-      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = 5
+      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = SynergyConfigs.GROUND.maxDepth
     }
 
     // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
@@ -1839,7 +1841,7 @@ export const PassiveEffects: Partial<
   [Passive.STOUTLAND_SEARCH]: [
     new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
       const index = (newY - 1) * BOARD_WIDTH + newX
-      if (room && player.buriedItems[index] && player.groundHoles[index] < 5) {
+      if (room && player.buriedItems[index] && player.groundHoles[index] < SynergyConfigs.GROUND.maxDepth) {
         // BARK
         room.broadcast(Transfer.SHOW_EMOTE, {
           id: pokemon.id,

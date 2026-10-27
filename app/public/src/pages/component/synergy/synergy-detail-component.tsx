@@ -24,6 +24,7 @@ import { isOnBench } from "../../../../../utils/board"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { getCachedPortrait } from "../game/game-pokemon-portrait"
@@ -156,7 +157,8 @@ export default function SynergyDetailComponent(props: {
       </div>
       <p style={{ whiteSpace: "pre-wrap" }}>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo })
+          t(`synergy_description.${props.type}`, { additionalInfo }),
+          { config: getDescriptionConfig(`synergy_description.${props.type}`) }
         )}
       </p>
 

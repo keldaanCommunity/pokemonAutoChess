@@ -35,11 +35,9 @@ import {
   SKY_MELODICA_CHANCE,
   SynergyTiersThresholds,
   TERRA_CYMBAL_CHANCE,
-  UNOWN_PSY3_NB_SHOPS_INTERVAL,
-  UNOWN_PSY5_NB_SHOPS_INTERVAL,
-  UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
+import { EffectConfigs } from "../config/game/effects"
 import { getAltFormForPlayer } from "../core/alt-form-logic";
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
@@ -355,7 +353,7 @@ export default class Shop {
       hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
+          player.shopsSinceLastUnownShop === EffectConfigs.TRANSCENDENCE.rerollInterval))
 
     if (shouldBeUnownShop) {
       // Unown shop
@@ -630,9 +628,9 @@ export default class Shop {
       const totalRerolls = player.gameStats.rerollCount + state.stageLevel
       if (
         (player.effects.has(EffectEnum.PRECOGNITION) &&
-          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+          totalRerolls % EffectConfigs.PRECOGNITION.shopInterval === 0) ||
         (player.effects.has(EffectEnum.AURA) &&
-          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+          totalRerolls % EffectConfigs.AURA.shopInterval === 0)
       ) {
         const unowns = getUnownsPoolPerStage(state.stageLevel)
         return pickRandomIn(unowns)
