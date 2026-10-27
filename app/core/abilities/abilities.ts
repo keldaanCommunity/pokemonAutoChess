@@ -484,6 +484,7 @@ import { SteamEruptionStrategy } from "./steam-eruption"
 import { SteamrollerStrategy } from "./steamroller"
 import { SteelWingStrategy } from "./steel-wing"
 import { StickyWebStrategy } from "./sticky-web"
+import { StingingToxinsStrategy } from "./stinging-toxins"
 import { StockpileStrategy } from "./stockpile"
 import { StompStrategy } from "./stomp"
 import { StoneAxeStrategy } from "./stone-axe"
@@ -1302,5 +1303,6 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZAP_CANNON]: new ZapCannonStrategy(),
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
-  [Ability.STAR_SHIELD]: new StarShieldStrategy()
+  [Ability.STAR_SHIELD]: new StarShieldStrategy(),
+  [Ability.STINGING_TOXINS]: new StingingToxinsStrategy()
 }

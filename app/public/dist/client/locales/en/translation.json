@@ -1794,7 +1794,8 @@
 		"ROCKY_PAYLOAD": "Rocky Payload",
 		"AQUA_SWIRL": "Aqua Swirl",
 		"MAGNETIC_ABSORPTION": "Magnetic Absorption",
-		"STAR_SHIELD": "Star Shield"
+		"STAR_SHIELD": "Star Shield",
+		"STINGING_TOXINS": "Stinging Toxins"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2366,7 +2367,8 @@
 		"ROCKY_PAYLOAD": "FLY_AWAY and drops a boulder on the nearest enemy in the path, dealing [10,20,30,60,SP] + [100,SP]% of DEF as SPECIAL ",
 		"AQUA_SWIRL": "Creates an oceanic swirl around the largest 3x3 group of Pokémon. For 3 seconds, it heals allies in the area for [5,10,15,20,SP] HP and deals [3,6,9,12,SP] SPECIAL to enemies every 0.5 seconds. At the end of the duration, the swirl dissipates, leaving enemies in the area with CHARM for 1 second.",
 		"MAGNETIC_ABSORPTION": "Pulls the target towards the user, dealing [30,60,100,200,SP] SPECIAL and stealing [20,SP] SPEED from it, then redistributes the SPEED stolen to ADJACENT allies equally.",
-		"STAR_SHIELD": "Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds."
+		"STAR_SHIELD": "Calls down 3 stars in succession, each targeting the ally with the lowest HP%. Each star takes 1.5 seconds to reach its target, and the next star appears as the previous one lands. On impact, grants [10,15,20,25,SP] SHIELD to ADJACENT allies, and applies BURN to ADJACENT enemies for 2 seconds.",
+		"STINGING_TOXINS": "Stings with 3 waves of toxins in a CONE, dealing [1,2,3,4,SP] SPECIAL each. Each enemy hit receives one effect based on its current status:\n- If not POISONED, inflicts POISONED for [2,SP] seconds.\n- If afflicted with POISONED, inflicts PARALYSIS for [2,SP] seconds.\n- If afflicted with PARALYSIS, inflicts ARMOR_BREAK for [2,SP] seconds.\n- If afflicted with ARMOR_BREAK, inflicts FATIGUE for [2,SP] seconds."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
