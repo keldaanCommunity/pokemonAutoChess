@@ -105,6 +105,16 @@ export class MonsterKillEffect extends OnKillEffect {
     }
   }
 }
+
+export const monsterFlinchOnAttackEffect = new OnAttackEffect(
+  ({ target, pokemon }) => {
+    const flinchChance = 0.3
+    if (target && chance(flinchChance, pokemon)) {
+      target.status.triggerFlinch(3000, target, this)
+    }
+  }
+)
+
 export class GroundHoleEffect extends OnSpawnEffect {
   constructor(effect: SynergyTier<Synergy.GROUND>) {
     const synergyTier = SynergyTiers[Synergy.GROUND].indexOf(effect) + 1
@@ -977,7 +987,7 @@ const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
 })
 
 const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
-  const nbTrees = getSynergyTier(player.synergies, Synergy.GRASS)
+  const nbTrees = max(3)(getSynergyTier(player.synergies, Synergy.GRASS))
   for (let i = 0; i < nbTrees; i++) {
     player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
   }
@@ -1059,7 +1069,7 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
 })
 
 export const SynergyEffects: Partial<
-  Record<EffectEnum, (Effect | (() => Effect))[]>
+  Record<EffectEnum, (Effect | ((effect: EffectEnum) => Effect))[]>
 > = {
   [EffectEnum.HEART_OF_THE_SWARM]: [bugSwarmSpawnEffect],
   [EffectEnum.DESOLATE_LAND]: [giveFireShardEffect],
@@ -1070,5 +1080,21 @@ export const SynergyEffects: Partial<
   [EffectEnum.TILLER]: [groundDigEffect],
   [EffectEnum.DIGGER]: [groundDigEffect],
   [EffectEnum.DRILLER]: [groundDigEffect],
-  [EffectEnum.DEEP_MINER]: [groundDigEffect]
+  [EffectEnum.DEEP_MINER]: [groundDigEffect],
+  [EffectEnum.PURSUIT]: [
+    monsterFlinchOnAttackEffect,
+    () => new MonsterKillEffect(EffectEnum.PURSUIT)
+  ],
+  [EffectEnum.BRUTAL_SWING]: [
+    monsterFlinchOnAttackEffect,
+    () => new MonsterKillEffect(EffectEnum.BRUTAL_SWING)
+  ],
+  [EffectEnum.POWER_TRIP]: [
+    monsterFlinchOnAttackEffect,
+    () => new MonsterKillEffect(EffectEnum.POWER_TRIP)
+  ],
+  [EffectEnum.MERCILESS]: [
+    monsterFlinchOnAttackEffect,
+    () => new MonsterKillEffect(EffectEnum.MERCILESS)
+  ]
 }

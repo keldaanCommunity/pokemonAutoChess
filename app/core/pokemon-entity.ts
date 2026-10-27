@@ -1065,14 +1065,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (this.hasSynergyEffect(Synergy.MONSTER)) {
-      const flinchChance = EffectConfigs.PURSUIT.flinchChance.valuePerTier[0] / 100
-      const { flinchDurationSeconds } = SynergyConfigs.MONSTER
-      if (chance(flinchChance, this)) {
-        target.status.triggerFlinch(flinchDurationSeconds * 1000, target, this)
-      }
-    }
-
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       const { effectChance, silenceDurationSeconds } = SynergyConfigs.GHOST
       if (chance(effectChance.valuePerTier[0] / 100, this)) {

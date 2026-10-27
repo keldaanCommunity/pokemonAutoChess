@@ -658,7 +658,7 @@ export default abstract class PokemonState {
         pokemon.hp - residualDamage <= (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) * pokemon.maxHP
       ) {
         const shield = Math.round(
-          pokemon.maxHP *
+          pokemon.baseHP *
             (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
               ? EffectConfigs.FORGOTTEN_POWER.shieldPercent / 100
               : pokemon.effects.has(EffectEnum.ELDER_POWER)

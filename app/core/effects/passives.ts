@@ -939,11 +939,6 @@ const conversionEffect = new OnSimulationStartEffect(
       }
     }
 
-    // when converting to ghost, get Dodge chance
-    if (synergyCopied === Synergy.GHOST) {
-      entity.addDodgeChance(SynergyConfigs.GHOST.effectChance.valuePerTier[0] / 100, entity, 0, false)
-    }
-
     // when converting to gourmet, get a Chef hat. Useless but funny
     if (synergyCopied === Synergy.GOURMET && entity.items.size < 3) {
       entity.addItem(Item.CHEF_HAT)
