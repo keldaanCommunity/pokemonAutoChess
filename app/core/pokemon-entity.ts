@@ -1052,7 +1052,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      const chanceToFreeze = freezeChance.valuePerTier[0] / 100 + nbIcyRocks * 0.05
+      const chanceToFreeze = freezeChance.value / 100 + nbIcyRocks * 0.05
       if (chance(chanceToFreeze, this)) {
         target.status.triggerFreeze(freezeDurationSeconds * 1000, target, this)
       }
@@ -1060,14 +1060,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.FIRE)) {
       const { burnChance, burnDurationSeconds } = EffectConfigs.FLAME_BODY
-      if (chance(burnChance.valuePerTier[0] / 100, this)) {
+      if (chance(burnChance.value / 100, this)) {
         target.status.triggerBurn(burnDurationSeconds * 1000, target, this)
       }
     }
 
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       const { effectChance, silenceDurationSeconds } = SynergyConfigs.GHOST
-      if (chance(effectChance.valuePerTier[0] / 100, this)) {
+      if (chance(effectChance.value / 100, this)) {
         target.status.triggerSilence(silenceDurationSeconds * 1000, target, this)
       }
     }
@@ -1075,13 +1075,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.POISON)) {
       let poisonChance = 0
       if (this.effects.has(EffectEnum.POISONOUS)) {
-        poisonChance = EffectConfigs.POISONOUS.poisonChance.valuePerTier[0] / 100
+        poisonChance = EffectConfigs.POISONOUS.poisonChance.value / 100
       }
       if (this.effects.has(EffectEnum.VENOMOUS)) {
-        poisonChance = EffectConfigs.VENOMOUS.poisonChance.valuePerTier[0] / 100
+        poisonChance = EffectConfigs.VENOMOUS.poisonChance.value / 100
       }
       if (this.effects.has(EffectEnum.TOXIC)) {
-        poisonChance = EffectConfigs.TOXIC.poisonChance.valuePerTier[0] / 100
+        poisonChance = EffectConfigs.TOXIC.poisonChance.value / 100
       }
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
@@ -1094,7 +1094,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.hasSynergyEffect(Synergy.WILD)) {
       const { woundChance, woundDurationSeconds } = SynergyConfigs.WILD
-      if (chance(woundChance.valuePerTier[0] / 100, this)) {
+      if (chance(woundChance.value / 100, this)) {
         target.status.triggerWound(woundDurationSeconds * 1000, target, this)
       }
     }

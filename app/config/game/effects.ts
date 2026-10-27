@@ -1,5 +1,5 @@
+import type { EffectConfig } from "../../types/EffectConfig"
 import { EffectEnum } from "../../types/enum/Effect"
-import type { BalanceConfig } from "./balance"
 import { SellPrices } from "./shop"
 import { StatusConfigs } from "./statuses"
 import {
@@ -33,7 +33,7 @@ export const EffectConfigs = {
   [EffectEnum.GROWTH]: { heal: 15, intervalSeconds: SynergyConfigs.GRASS.healIntervalSeconds },
   [EffectEnum.SPORE]: { heal: 25, intervalSeconds: SynergyConfigs.GRASS.healIntervalSeconds },
   [EffectEnum.OVERGROW]: { abilityPower: 50 },
-  [EffectEnum.FLAME_BODY]: { burnChance: { valuePerTier: [30], luckScaling: true }, burnDurationSeconds: 3 },
+  [EffectEnum.FLAME_BODY]: { burnChance: { value: 30, luckScaling: true }, burnDurationSeconds: 3 },
   [EffectEnum.WILDFIRE]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[2] },
   [EffectEnum.BLAZE]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[3] },
   [EffectEnum.DESOLATE_LAND]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[4], maxFireShards: 1 },
@@ -73,16 +73,16 @@ export const EffectConfigs = {
     attackAtMaxDepth: GROUND_ATK_BUFF_PER_SYNERGY_TIER[3]
   },
   [EffectEnum.DEEP_MINER]: { defensePerFullRow: 5, attackAtFullBoard: 8 },
-  [EffectEnum.POISONOUS]: { poisonChance: { valuePerTier: [30], luckScaling: true } },
-  [EffectEnum.VENOMOUS]: { poisonChance: { valuePerTier: [60], luckScaling: true }, maxStacksBonus: 1 },
-  [EffectEnum.TOXIC]: { poisonChance: { valuePerTier: [100], luckScaling: true }, maxStacksBonus: 2 },
+  [EffectEnum.POISONOUS]: { poisonChance: { value: 30, luckScaling: true } },
+  [EffectEnum.VENOMOUS]: { poisonChance: { value: 60, luckScaling: true }, maxStacksBonus: 1 },
+  [EffectEnum.TOXIC]: { poisonChance: { value: 100, luckScaling: true }, maxStacksBonus: 2 },
   [EffectEnum.DRAGON_SCALES]: { shieldPerStar: 5 },
   [EffectEnum.DRAGON_DANCE]: { speedPerStar: 1, abilityPowerPerStar: 1 },
   [EffectEnum.BULK_UP]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[1], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[1] },
   [EffectEnum.RAGE]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[2], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[2] },
   [EffectEnum.ANGER_POINT]: { heal: FIELD_HEAL_PER_SYNERGY_TIER[3], speed: FIELD_SPEED_BUFF_PER_SYNERGY_TIER[3] },
   [EffectEnum.PURSUIT]: {
-    flinchChance: { valuePerTier: [30], luckScaling: true },
+    flinchChance: { value: 30, luckScaling: true },
     attackPerKo: MONSTER_ATTACK_BUFF_PER_SYNERGY_TIER[1],
     abilityPowerPerKo: MONSTER_AP_BUFF_PER_SYNERGY_TIER[1],
     maxHpPerKoPercent: MONSTER_MAX_HP_BUFF_FACTOR_PER_SYNERGY_TIER[1] * 100
@@ -151,10 +151,10 @@ export const EffectConfigs = {
   },
   [EffectEnum.LINK_CABLE]: { itemBonusPercent: 5 },
   [EffectEnum.GOOGLE_SPECS]: { itemBonusPercent: 10 },
-  [EffectEnum.HATCHER]: { eggChance: { valuePerTier: [10], luckScaling: true } },
+  [EffectEnum.HATCHER]: { eggChance: { value: 10, luckScaling: true } },
   [EffectEnum.BREEDER]: { hatchStagesEarlier: 1 },
   [EffectEnum.GOLDEN_EGGS]: {
-    goldenEggChance: { valuePerTier: [5], luckScaling: true },
+    goldenEggChance: { value: 5, luckScaling: true },
     maxGoldenEggs: 1, sellGold: SellPrices.SHINY_EGG
   },
   [EffectEnum.APPETIZER]: { chefHats: NB_HATS_PER_GOURMET_SYNERGY[1], dishesCooked: NB_DISHES_PER_GOURMET_SYNERGY[1] },
@@ -189,4 +189,4 @@ export const EffectConfigs = {
   [EffectEnum.SUPERCHARGE]: { speedBonus: 20, shield: 30 },
   [EffectEnum.TIDAL_WAVE]: tidalWave,
   [EffectEnum.TOXIC_SPIKES]: { durationSeconds: 1 }
-} satisfies Partial<Record<EffectEnum, BalanceConfig>>
+} satisfies Partial<Record<EffectEnum, EffectConfig>>

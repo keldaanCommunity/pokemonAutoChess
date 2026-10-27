@@ -2341,8 +2341,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     let goldenEggFound = false
 
     if (hasLostLastBattle && hasBabyActive) {
-      const EGG_CHANCE = EffectConfigs.HATCHER.eggChance.valuePerTier[0] / 100
-      const GOLDEN_EGG_CHANCE = EffectConfigs.GOLDEN_EGGS.goldenEggChance.valuePerTier[0] / 100
+      const EGG_CHANCE = EffectConfigs.HATCHER.eggChance.value / 100
+      const GOLDEN_EGG_CHANCE = EffectConfigs.GOLDEN_EGGS.goldenEggChance.value / 100
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = schemaValues(player.board).filter(

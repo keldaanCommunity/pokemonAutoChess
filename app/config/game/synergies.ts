@@ -1,8 +1,8 @@
+import type { EffectConfig } from "../../types/EffectConfig"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Rarity } from "../../types/enum/Game"
 import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
-import type { BalanceConfig } from "./balance"
 
 export const SynergyConfigs = {
   [Synergy.GRASS]: { overhealConversionPercent: 40, healIntervalSeconds: 2 },
@@ -13,20 +13,20 @@ export const SynergyConfigs = {
   [Synergy.MONSTER]: { flinchDurationSeconds: 3 },
   [Synergy.AQUATIC]: { firstWaveDelaySeconds: 7, waveIntervalSeconds: 7 },
   [Synergy.GHOST]: {
-    effectChance: { valuePerTier: [15], luckScaling: true },
+    effectChance: { value: 15, luckScaling: true },
     silenceDurationSeconds: 2
   },
   [Synergy.ICE]: {
-    freezeChance: { valuePerTier: [20], luckScaling: true },
+    freezeChance: { value: 20, luckScaling: true },
     freezeDurationSeconds: 2
   },
   [Synergy.FOSSIL]: { activationThresholdPercent: 30 },
   [Synergy.WILD]: {
     pveEncounterChancePercent: 6,
-    woundChance: { valuePerTier: [25], luckScaling: true },
+    woundChance: { value: 25, luckScaling: true },
     woundDurationSeconds: 3
   }
-} satisfies Partial<Record<Synergy, BalanceConfig>>
+} satisfies Partial<Record<Synergy, EffectConfig>>
 
 export const SynergyTiers = {
   [Synergy.NORMAL]: [

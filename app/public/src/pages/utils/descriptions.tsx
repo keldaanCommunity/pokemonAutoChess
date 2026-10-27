@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
-import type { BalanceConfig } from "../../../../config/game/balance"
 import { getWeatherConfig } from "../../../../config/game/weathers"
+import type { EffectConfig } from "../../../../types/EffectConfig"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -57,7 +57,7 @@ export function addIconsToDescription(
     stars?: number
     stages?: number
     showAbilityTiers?: boolean
-    config?: BalanceConfig
+    config?: EffectConfig
   }
 ) {
   const pattern = params?.config ? descriptionRegExp : iconRegExp
@@ -67,7 +67,7 @@ export function addIconsToDescription(
   const capitalize = (str) => str[0].toUpperCase() + str.substring(1)
   return descriptionParts.map((part, i) => {
     const token = matchIcon![i - 1]
-    let icon: ReactNode = null
+    let replacement: ReactNode = null
     const isAtStartOfSentence =
       i === 0 ||
       descriptionParts[i - 1].trim().endsWith(".") ||
@@ -79,18 +79,20 @@ export function addIconsToDescription(
         const config = params?.config
         const value = config && Object.hasOwn(config, key) ? config[key] : undefined
         if (typeof value === "number") {
-          icon = value
+          replacement = value
         } else if (value) {
-          const values: (number | string)[] = [...value.valuePerTier]
+          const values: (number | string)[] = value.valuePerTier
+            ? [...value.valuePerTier]
+            : [value.value]
           if (value.apScaling !== undefined) values.push(`SP=${value.apScaling}`)
           else if (value.luckScaling) values.push("LK")
           if (value.nbDecimals !== undefined) values.push(`ND=${value.nbDecimals}`)
-          icon = addIconsToDescription(`[${values.join(",")}]`, params)
+          replacement = addIconsToDescription(`[${values.join(",")}]`, params)
         } else {
-          icon = token
+          replacement = token
         }
       } else if (token === "GOLD") {
-        icon = (
+        replacement = (
           <img
             className="description-icon icon-money"
             src="/assets/icons/money.svg"
@@ -98,7 +100,7 @@ export function addIconsToDescription(
           />
         )
       } else if (token === "STAR") {
-        icon = (
+        replacement = (
           <img
             className="description-icon icon-star"
             src="/assets/ui/star.svg"
@@ -106,14 +108,14 @@ export function addIconsToDescription(
           />
         )
       } else if (token === "XP") {
-        icon = (
+        replacement = (
           <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
           </span>
         )
       } else if (isIn(DamageTypes, token)) {
-        icon = (
+        replacement = (
           <span
             className={
               token === Damage.PHYSICAL
@@ -127,7 +129,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Stats, token)) {
-        icon = (
+        replacement = (
           <span className="description-icon stat">
             <img src={`assets/icons/${token}.png`} />
             <span className="stat-label">{t(`stat.${token}`)}</span>
@@ -135,7 +137,7 @@ export function addIconsToDescription(
         )
       } else if (isIn(DocumentedStatuses, token)) {
         const path = `status_description.${token}` as const
-        icon = (
+        replacement = (
           <span
             className="description-icon status"
             title={t(path, getDescriptionConfig(path))}
@@ -153,7 +155,7 @@ export function addIconsToDescription(
       } else if (isIn(BoardEffects, token)) {
         const path = `effect_description.${token}` as const
         const title = t(path, getDescriptionConfig(path))
-        icon = (
+        replacement = (
           <span
             className="description-icon board-effect"
             title={title}
@@ -163,7 +165,7 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Weathers, token)) {
-        icon = (
+        replacement = (
           <span
             className="description-icon weather"
             title={t(`weather_description.${token}`, getWeatherConfig(token))}
@@ -174,7 +176,7 @@ export function addIconsToDescription(
         )
       } else if (isIn(Items, token)) {
         const path = `item_description.${token}` as const
-        icon = (
+        replacement = (
           <span
             className="description-icon item"
             title={t(path, getDescriptionConfig(path))}
@@ -184,14 +186,14 @@ export function addIconsToDescription(
           </span>
         )
       } else if (isIn(Synergies, token)) {
-        icon = (
+        replacement = (
           <span className="description-icon synergy">
             <SynergyIcon type={token as Synergy} size="1.5em" />
             <span className="synergy-label">{t(`synergy.${token}`)}</span>
           </span>
         )
       } else if (isIn(TechnicalTerms, token)) {
-        icon = (
+        replacement = (
           <span
             className="description-icon technical-term"
             title={t(`technical_terms_definitions.${token}`)}
@@ -229,7 +231,7 @@ export function addIconsToDescription(
             ? [array[params.stars - 1]] // only show relevant tier
             : array.slice(0, maxTier) // show tier scaling
 
-        icon = (
+        replacement = (
           <span
             className={cc("description-icon", {
               "scales-ap": scaleType === "AP",
@@ -304,7 +306,7 @@ export function addIconsToDescription(
 
     return (
       <React.Fragment key={i}>
-        {icon}
+        {replacement}
         {content}
       </React.Fragment>
     )
