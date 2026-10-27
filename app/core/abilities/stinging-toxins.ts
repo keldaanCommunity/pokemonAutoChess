@@ -4,7 +4,7 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 
-export class JellyfishPoisonStrategy extends AbilityStrategy {
+export class StingingToxinsStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,

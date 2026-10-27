@@ -275,7 +275,6 @@ import { IronHeadStrategy } from "./iron-head"
 import { IronTailStrategy } from "./iron-tail"
 import { IvyCudgelStrategy } from "./ivy-cudgel"
 import { JawLockStrategy } from "./jaw-lock"
-import { JellyfishPoisonStrategy } from "./jellyfish-poison"
 import { JetPunchStrategy } from "./jet-punch"
 import { JudgementStrategy } from "./judgement"
 import { KingShieldStrategy } from "./king-shield"
@@ -485,6 +484,7 @@ import { SteamEruptionStrategy } from "./steam-eruption"
 import { SteamrollerStrategy } from "./steamroller"
 import { SteelWingStrategy } from "./steel-wing"
 import { StickyWebStrategy } from "./sticky-web"
+import { StingingToxinsStrategy } from "./stinging-toxins"
 import { StockpileStrategy } from "./stockpile"
 import { StompStrategy } from "./stomp"
 import { StoneAxeStrategy } from "./stone-axe"
@@ -1304,5 +1304,5 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.ZING_ZAP]: new ZingZapStrategy(),
   [Ability.AQUA_SWIRL]: new AquaSwirlStrategy(),
   [Ability.STAR_SHIELD]: new StarShieldStrategy(),
-  [Ability.STINGING_TOXINS]: new JellyfishPoisonStrategy()
+  [Ability.STINGING_TOXINS]: new StingingToxinsStrategy()
 }
