@@ -1451,7 +1451,7 @@
 		"POISONED": "Brengt elke {{intervalSeconds}} s {{maxHpDamagePercent}}% van de maximale HP per stapel toe als TRUE. Kan standaard tot {{maxStacks}} keer stapelen.",
 		"FREEZE": "Voorkomt bewegen of aanvallen",
 		"PROTECT": "Beschermt tegen elke vorm van schade, maar voorkomt PP-winst",
-		"SLEEP": "Voorkomt bewegen of aanvallen. Het ontvangen van aanvallen vermindert de duur van het effect.",
+		"SLEEP": "Voorkomt bewegen of aanvallen. Het ontvangen van schade vermindert de duur van het effect.",
 		"CONFUSION": "Dwing om de hele tijd van doelwit te veranderen en breng zichzelf soms schade toe",
 		"WOUND": "Voorkomt genezing van welke bron dan ook",
 		"RESURRECTION": "Voorkomt KO eenmaal, herstelt naar max HP",

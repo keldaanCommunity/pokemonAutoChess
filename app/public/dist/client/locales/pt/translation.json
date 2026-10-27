@@ -3586,7 +3586,7 @@
 		"POISONED": "Inflige {{maxHpDamagePercent}}% do HP máximo por carga como TRUE a cada {{intervalSeconds}} s. Pode acumular até {{maxStacks}} cargas por padrão.",
 		"FREEZE": "Impede o movimento, esquiva e ataque",
 		"PROTECT": "Protege contra qualquer fonte de dano, mas impede a cura e ganho de PP. Os inimigos evitarão atacar uma unidade protegida.",
-		"SLEEP": "Impede movimento, esquiva e ataque. Receber ataques reduz a duração do efeito.",
+		"SLEEP": "Impede movimento, esquiva e ataque. Receber dano reduz a duração do efeito.",
 		"CONFUSION": "Força mudar de alvo o tempo todo e às vezes causa dano a si mesmo",
 		"WOUND": "Impede a cura de qualquer fonte",
 		"RESURRECTION": "Previne ser nocauteado uma vez, restaurando o HP máximo. Os bônus de sinergia, cargas de itens e status são redefinidos ao ressuscitar.",

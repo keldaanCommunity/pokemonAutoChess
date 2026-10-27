@@ -3603,7 +3603,7 @@
 		"FATIGUE": "모든 PP 회복량이 {{ppGainReductionPercent}}% 감소한다.",
 		"FREEZE": "이동, 회피, 공격을 할 수 없다.",
 		"PROTECT": "어떠한 데미지도 받지 않지만 HP와 PP도 회복되지 않는다.",
-		"SLEEP": "이동, 회피, 공격을 할 수 없다. 공격 당하면 지속 시간이 감소한다.",
+		"SLEEP": "이동, 회피, 공격을 할 수 없다. 피해를 받으면 지속 시간이 감소한다.",
 		"CONFUSION": "공격 대상이 강제로 바뀌며 [가끔,LK] 같은 편이나 자신을 공격한다.",
 		"WOUND": "어떠한 방식으로도 HP를 회복할 수 없다.",
 		"RAGE": "데미지가 {{damageMultiplier}}배가 되며 SPEED가 {{speedBonus}} 오른다. HP 회복량과 획득하는 SHIELD, FREEZE와 SLEEP 지속시간이 {{reductionPercent}}% 감소하며 PROTECT 상태가 해제된다. 배틀이 시작하고 {{automaticDelaySeconds}}초 후 모든 포켓몬은 RAGE 상태가 된다.",

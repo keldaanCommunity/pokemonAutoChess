@@ -12,7 +12,10 @@ export class SteelWingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit, true)
-    const damage = ([10, 20, 40, 80][pokemon.stars - 1] ?? 80) + 2 * pokemon.def
+    const baseDamage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = Math.round(
+      baseDamage * (1 + pokemon.ap / 100) + 2 * pokemon.def
+    )
     const farthestCoordinate =
       board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     const targetsHit: Set<PokemonEntity> = new Set()
@@ -45,7 +48,8 @@ export class SteelWingStrategy extends AbilityStrategy {
         board,
         AttackType.SPECIAL,
         pokemon,
-        crit
+        crit,
+        false
       )
     })
   }

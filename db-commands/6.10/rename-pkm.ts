@@ -48,7 +48,7 @@ async function replacePokemonInGame(
     console.log(`[bots] total documents: ${totalBots}`)
     let processedBots = 0
     let botCount = 0
-    const botCursor = BotV2.find({}, ["name", "steps"]).cursor({
+    const botCursor = BotV2.find({}, "name steps").cursor({
       batchSize: 100
     })
     for await (const bot of botCursor) {
@@ -84,7 +84,7 @@ async function replacePokemonInGame(
     console.log(`[detailled-statistics] total documents: ${totalStats}`)
     let processedStats = 0
     let statCount = 0
-    const statCursor = DetailledStatistic.find({}, ["pokemons"]).cursor({
+    const statCursor = DetailledStatistic.find({}, "pokemons").cursor({
       batchSize: 250
     })
     for await (const record of statCursor) {
@@ -121,7 +121,7 @@ async function replacePokemonInGame(
     console.log(`[meta] total documents: ${totalMeta}`)
     let processedMeta = 0
     let metaCount = 0
-    const metaCursor = Meta.find({}, ["pokemons", "teams"]).cursor({
+    const metaCursor = Meta.find({}, "pokemons teams").cursor({
       batchSize: 250
     })
     for await (const metarecord of metaCursor) {
