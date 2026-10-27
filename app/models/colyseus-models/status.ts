@@ -1,5 +1,6 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
+import { StatusConfigs } from "../../config/game/statuses"
 import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
@@ -64,11 +65,11 @@ export default class Status extends Schema implements IStatus {
   charmOrigin: PokemonEntity | null = null
   possessedOrigin: PokemonEntity | null = null
   burnCooldown = 0
-  burnDamageCooldown = 1000
+  burnDamageCooldown = StatusConfigs.BURN.intervalSeconds * 1000
   silenceCooldown = 0
   fatigueCooldown = 0
   poisonCooldown = 0
-  poisonDamageCooldown = 1000
+  poisonDamageCooldown = StatusConfigs.POISONED.intervalSeconds * 1000
   freezeCooldown = 0
   protectCooldown = 0
   sleepCooldown = 0
@@ -85,11 +86,11 @@ export default class Status extends Schema implements IStatus {
   reflectCooldown = 0
   resurrectingCooldown = 0
   curseCooldown = 0
-  pokerusCooldown = 3000
+  pokerusCooldown = StatusConfigs.POKERUS.intervalSeconds * 1000
   possessedCooldown = 0
   lockedCooldown = 0
   blindCooldown = 0
-  enrageDelay = 35000
+  enrageDelay = StatusConfigs.RAGE.automaticDelaySeconds * 1000
   ccCooldown = 0
   untargettable = false
 
@@ -134,7 +135,7 @@ export default class Status extends Schema implements IStatus {
     this.flinchCooldown = 0
     this.armorReductionCooldown = 0
     if (this.curse && this.curseCooldown > 0) {
-      this.curseCooldown += 2000 // do not clear curseCooldown on purpose
+      this.curseCooldown += StatusConfigs.CURSE.cleanseDelayMs // do not clear curseCooldown on purpose
     }
     this.curse = false
     if (this.possessed && origin && origin.team === entity.team) {
@@ -369,31 +370,32 @@ export default class Status extends Schema implements IStatus {
     if (!this.enraged) {
       this.enraged = true
       this.protect = false
-      pokemon.addSpeed(80, pokemon, 0, false)
+      const { speedBonus, reductionPercent } = StatusConfigs.RAGE
+      pokemon.addSpeed(speedBonus, pokemon, 0, false)
       this.enrageCooldown = duration
-      this.sleepCooldown = Math.floor(this.sleepCooldown * 0.5) // Rage reduces sleep duration by half
-      this.freezeCooldown = Math.floor(this.freezeCooldown * 0.5) // Rage reduces freeze duration by half
+      const durationFactor = 1 - reductionPercent / 100
+      this.sleepCooldown = Math.floor(this.sleepCooldown * durationFactor)
+      this.freezeCooldown = Math.floor(this.freezeCooldown * durationFactor)
     } else if (duration > this.enrageCooldown) {
       this.enrageCooldown = duration
     }
   }
 
   updateRage(dt: number, pokemon: PokemonEntity) {
+    const { speedBonus } = StatusConfigs.RAGE
     if (
       !this.enraged &&
       this.enrageDelay - dt <= 0 &&
       !pokemon.simulation.finished
     ) {
-      this.enraged = true
-      this.protect = false
-      pokemon.addSpeed(80, pokemon, 0, false)
+      this.triggerRage(0, pokemon)
     } else if (
       this.enraged &&
       this.enrageCooldown - dt <= 0 &&
       this.enrageDelay - dt > 0
     ) {
       this.enraged = false
-      pokemon.addSpeed(-80, pokemon, 0, false)
+      pokemon.addSpeed(-1 * speedBonus, pokemon, 0, false)
     }
 
     this.enrageDelay -= dt
@@ -443,7 +445,8 @@ export default class Status extends Schema implements IStatus {
 
   updateBurn(dt: number, pkm: PokemonEntity, board: Board) {
     if (this.burnDamageCooldown - dt <= 0) {
-      let burnDamage = pkm.maxHP * 0.05
+      const { maxHpDamagePercent, intervalSeconds } = StatusConfigs.BURN
+      let burnDamage = pkm.maxHP * (maxHpDamagePercent / 100)
       if (pkm.simulation.weather === Weather.DROUGHT) {
         burnDamage *= 1 + WeatherConfigs.DROUGHT.burnDamageBonusPercent / 100
         const nbHeatRocks = pkm.player
@@ -496,7 +499,7 @@ export default class Status extends Schema implements IStatus {
           shouldTargetGainMana: true
         })
       }
-      this.burnDamageCooldown = 1000
+      this.burnDamageCooldown = intervalSeconds * 1000
     } else {
       this.burnDamageCooldown -= dt
     }
@@ -512,7 +515,7 @@ export default class Status extends Schema implements IStatus {
     if (!this.burn) return
     this.burn = false
     this.burnOrigin = null
-    this.burnDamageCooldown = 1000
+    this.burnDamageCooldown = StatusConfigs.BURN.intervalSeconds * 1000
     if (pkm.passive === Passive.GUTS && this.poisonStacks === 0) {
       pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
       pkm.addAttack(-5, pkm, 0, false)
@@ -583,7 +586,7 @@ export default class Status extends Schema implements IStatus {
     origin: PokemonEntity | undefined
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
-      let maxStacks = 3
+      let maxStacks = StatusConfigs.POISONED.maxStacks
       this.poisonOrigin = origin ?? null
       if (origin) {
         if (origin.effects.has(EffectEnum.VENOMOUS)) {
@@ -627,11 +630,13 @@ export default class Status extends Schema implements IStatus {
   }
 
   updatePoison(dt: number, pkm: PokemonEntity, board: Board) {
+    const { maxHpDamagePercent, intervalSeconds } = StatusConfigs.POISONED
     if (this.poisonDamageCooldown - dt <= 0) {
-      let poisonDamage = pkm.maxHP * 0.05 * this.poisonStacks
+      const damageFactor = maxHpDamagePercent / 100
+      let poisonDamage = pkm.maxHP * damageFactor * this.poisonStacks
 
       if (pkm.passive === Passive.GLISCOR) {
-        poisonDamage = pkm.maxHP * 0.05 * (this.poisonStacks - 2)
+        poisonDamage = pkm.maxHP * damageFactor * (this.poisonStacks - 2)
       }
 
       if (pkm.simulation.weather === Weather.RAIN) {
@@ -685,7 +690,7 @@ export default class Status extends Schema implements IStatus {
         this.triggerPoison(1500, pkm, undefined)
       }
 
-      this.poisonDamageCooldown = 1000
+      this.poisonDamageCooldown = intervalSeconds * 1000
     } else {
       this.poisonDamageCooldown -= dt
     }
@@ -693,7 +698,7 @@ export default class Status extends Schema implements IStatus {
     if (this.poisonCooldown - dt <= 0) {
       this.poisonStacks = 0
       this.poisonOrigin = null
-      this.poisonDamageCooldown = 1000
+      this.poisonDamageCooldown = intervalSeconds * 1000
       if (pkm.passive === Passive.GUTS && !this.burn) {
         pkm.effects.delete(EffectEnum.GUTS_PASSIVE)
         pkm.addAttack(-5, pkm, 0, false)
@@ -732,7 +737,7 @@ export default class Status extends Schema implements IStatus {
           1 - WeatherConfigs.DROUGHT.freezeDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
-        duration = duration / 2
+        duration *= 1 - StatusConfigs.RAGE.reductionPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -758,7 +763,8 @@ export default class Status extends Schema implements IStatus {
       this.freeze = false
       this.ccCooldown = Math.max(this.ccCooldown, CC_COOLDOWN)
     } else {
-      this.freezeCooldown -= dt * (this.burn ? 2 : 1) // burn makes freeze wear off faster
+      const burnFactor = 1 / (1 - StatusConfigs.BURN.reductionPercent / 100)
+      this.freezeCooldown -= dt * (this.burn ? burnFactor : 1) // burn makes freeze wear off faster
     }
   }
 
@@ -794,7 +800,7 @@ export default class Status extends Schema implements IStatus {
           1 - WeatherConfigs.ZENITH.sleepDurationReductionPercent / 100
       }
       if (pkm.status.enraged) {
-        duration = duration / 2
+        duration *= 1 - StatusConfigs.RAGE.reductionPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
@@ -1070,7 +1076,7 @@ export default class Status extends Schema implements IStatus {
   triggerResurrection(pokemon: PokemonEntity, board: Board) {
     this.resurrection = false
     this.resurrecting = true
-    this.resurrectingCooldown = 2000
+    this.resurrectingCooldown = StatusConfigs.RESURRECTING.delayMs
     this.untargettable = true
     pokemon.status.clearNegativeStatus(pokemon)
   }
@@ -1140,8 +1146,9 @@ export default class Status extends Schema implements IStatus {
 
   updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (this.pokerusCooldown - dt <= 0) {
-      pokemon.addAttack(1, pokemon, 0, false)
-      pokemon.addAbilityPower(10, pokemon, 0, false)
+      const { attackGain, abilityPowerGain, adjacentAllies, intervalSeconds } = StatusConfigs.POKERUS
+      pokemon.addAttack(attackGain, pokemon, 0, false)
+      pokemon.addAbilityPower(abilityPowerGain, pokemon, 0, false)
       let infectCount = 0
       const cells = board.getAdjacentCells(
         pokemon.positionX,
@@ -1149,7 +1156,7 @@ export default class Status extends Schema implements IStatus {
         false
       )
       cells.forEach((cell) => {
-        if (infectCount < 2 && cell.value !== undefined) {
+        if (infectCount < adjacentAllies && cell.value !== undefined) {
           if (
             cell.value.team === pokemon.team &&
             cell.value.status.pokerus === false
@@ -1159,7 +1166,7 @@ export default class Status extends Schema implements IStatus {
           }
         }
       })
-      this.pokerusCooldown = 3000
+      this.pokerusCooldown = intervalSeconds * 1000
     } else {
       this.pokerusCooldown -= dt
     }
@@ -1174,17 +1181,18 @@ export default class Status extends Schema implements IStatus {
       this.ccCooldown <= 0
     ) {
       if (pkm.status.enraged) {
-        duration = duration / 2
+        duration *= 1 - StatusConfigs.RAGE.reductionPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)
 
       this.locked = true
       this.lockedCooldown = Math.round(duration)
-      if (pkm.range != 1) {
-        pkm.toMovingState() // force retargetting if the current range is not 1
+      const { range } = StatusConfigs.LOCKED
+      if (pkm.range != range) {
+        pkm.toMovingState() // force retargetting if the current range is different
       }
-      pkm.range = 1
+      pkm.range = range
     }
   }
 
@@ -1288,7 +1296,7 @@ export default class Status extends Schema implements IStatus {
       duration = apBoost && origin ? duration * (1 + origin.ap / 100) : duration
 
       if (pkm.status.enraged) {
-        duration = duration / 2
+        duration *= 1 - StatusConfigs.RAGE.reductionPercent / 100
       }
 
       duration = this.applyStatusDurationReductions(duration, pkm)

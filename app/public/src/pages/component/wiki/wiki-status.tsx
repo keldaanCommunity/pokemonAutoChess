@@ -16,7 +16,9 @@ export default function WikiStatus() {
             <img src={`assets/status/demo/${status}.gif`} alt={status} />
             <h2>{addIconsToDescription(status)}</h2>
             <p className="description">
-              {addIconsToDescription(t(`status_description.${status}`))}
+              {addIconsToDescription(t(`status_description.${status}`), {
+                config: getDescriptionConfig(`status_description.${status}`)
+              })}
             </p>
           </li>
         ))}

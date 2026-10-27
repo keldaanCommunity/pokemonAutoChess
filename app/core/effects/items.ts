@@ -1,5 +1,6 @@
 import { ARMOR_FACTOR, RegionDetails } from "../../config"
 import { DishByPkm } from "../../config/game/dishes"
+import { StatusConfigs } from "../../config/game/statuses"
 import {
   GOURMET_COOK_DEFAULT_DURATION,
   NB_DISHES_PER_GOURMET_SYNERGY
@@ -236,8 +237,9 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
             secondHitTarget.items.has(Item.POWER_LENS) &&
             !pokemon.items.has(Item.PROTECTIVE_PADS)
           ) {
+            const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
             const speDef = secondHitTarget.status.armorReduction
-              ? Math.round(secondHitTarget.speDef / 2)
+              ? Math.round(secondHitTarget.speDef * armorFactor)
               : secondHitTarget.speDef
             const damageAfterReduction =
               secondHitSpecialDamage / (1 + ARMOR_FACTOR * speDef)
