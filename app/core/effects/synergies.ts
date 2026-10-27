@@ -108,9 +108,10 @@ export class MonsterKillEffect extends OnKillEffect {
 
 export const monsterFlinchOnAttackEffect = new OnAttackEffect(
   ({ target, pokemon }) => {
-    const flinchChance = 0.3
+    const flinchChance = EffectConfigs.PURSUIT.flinchChance.value / 100
+    const { flinchDurationSeconds } = SynergyConfigs.MONSTER
     if (target && chance(flinchChance, pokemon)) {
-      target.status.triggerFlinch(3000, target, this)
+      target.status.triggerFlinch(flinchDurationSeconds * 1000, target, pokemon)
     }
   }
 )
