@@ -977,7 +977,7 @@ const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
 })
 
 const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
-  const nbTrees = getSynergyTier(player.synergies, Synergy.GRASS)
+  const nbTrees = max(3)(getSynergyTier(player.synergies, Synergy.GRASS))
   for (let i = 0; i < nbTrees; i++) {
     player.berryTreesStages[i] = max(3)(player.berryTreesStages[i] + 1)
   }
