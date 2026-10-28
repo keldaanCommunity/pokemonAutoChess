@@ -54,4 +54,4 @@ This special synergy is only given through special items and Pokémon. Its effec
 
 # Misc
 
-- New title: Terastal
+- New titles: Terastal, Awakened, Mad Titan

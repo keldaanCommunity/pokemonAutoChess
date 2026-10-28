@@ -219,6 +219,18 @@ export function updatePlayerTitlesAfterGame(
   if (player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
   }
+  if (player.experienceManager.level >= 10) {
+    player.titles.add(Title.AWAKENED)
+  }
+  if (
+    player.atlasManager.unlockedNodes.has("looplet_blue_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_gold_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_green_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_pink_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_red_buff")
+  ) {
+    player.titles.add(Title.MAD_TITAN)
+  }
 }
 
 /**
