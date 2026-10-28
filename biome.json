@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
   "files": {
     "includes": [
       "**",
@@ -36,6 +36,7 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "recommended": false,
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
@@ -72,8 +73,8 @@
         "noInvalidBuiltinInstantiation": "error",
         "useValidTypeof": "error"
       },
-      "style": {
-        "noNamespace": "error",
+      "style": { 
+        "noNamespace": "error", 
         "useAsConstAssertion": "error",
         "useImportType": "error"
       },
