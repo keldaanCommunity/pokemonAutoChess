@@ -1,4 +1,5 @@
 import { getBaseAltForm, PkmAltFormsByPkm } from "../config"
+import { MAX_PLAYERS_PER_GAME } from "../config/server/network"
 import type GameState from "../rooms/states/game-state"
 import { type IPlayer, Scarves, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -158,7 +159,9 @@ export function updatePlayerTitlesAfterFight(
 export function updatePlayerTitlesAfterGame(
   player: IPlayer,
   usr: IUserMetadataMongo,
-  rank: number
+  rank: number,
+  humans: IPlayer[],
+  bots: IPlayer[]
 ) {
   player.titles.add(Title.NOVICE)
   if (usr.level >= 10) {
@@ -194,6 +197,13 @@ export function updatePlayerTitlesAfterGame(
   }
   if (player.life === 1 && rank === 1) {
     player.titles.add(Title.SURVIVOR)
+  }
+  if (
+    humans.length === 1 &&
+    bots.length >= MAX_PLAYERS_PER_GAME - 1 &&
+    rank === 1
+  ) {
+    player.titles.add(Title.LONE_WOLF)
   }
 
   if (player.gameStats.rerollCount > 60) {

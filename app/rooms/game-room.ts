@@ -142,9 +142,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.additionalUncommonPool = new Array<Pkm>()
-    this.additionalRarePool = new Array<Pkm>()
-    this.additionalEpicPool = new Array<Pkm>()
+    this.additionalUncommonPool = [] as Pkm[]
+    this.additionalRarePool = [] as Pkm[]
+    this.additionalEpicPool = [] as Pkm[]
     this.miniGame = new MiniGame(this)
   }
 
@@ -1172,7 +1172,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
     }
 
-    updatePlayerTitlesAfterGame(player, usr, rank)
+    updatePlayerTitlesAfterGame(player, usr, rank, humans, bots)
 
     if (usr.titles === undefined) {
       usr.titles = []
@@ -1228,12 +1228,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: new Array<{
+      pokemons: [] as {
         name: Pkm
         avatar: string
         items: Item[]
         inventory: Item[]
-      }>(),
+      }[],
       elo: player.elo,
       games: player.games,
       synergies: [],
@@ -1255,8 +1255,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
         const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,
-          items: new Array<Item>(),
-          inventory: new Array<Item>()
+          items: [] as Item[],
+          inventory: [] as Item[]
         }
         pokemon.items.forEach((i) => {
           s.items.push(i)
@@ -1513,7 +1513,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (this.state.gameMode === GameMode.DOUBLE_UP) {
       return this.rankPlayersDoubleUp()
     }
-    const rankArray = new Array<{ id: string; life: number; level: number }>()
+    const rankArray: { id: string; life: number; level: number }[] = []
     this.state.players.forEach((player) => {
       if (!player.alive) {
         return

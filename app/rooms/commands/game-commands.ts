@@ -612,7 +612,7 @@ export class OnDragDropCombineCommand extends Command<
       }
     }
 
-    let result: Item | undefined = undefined
+    let result: Item | undefined
 
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
@@ -1132,12 +1132,6 @@ export class OnJoinCommand extends Command<GameRoom, { client: Client }> {
           `${client.auth.displayName} (${client.sessionId}) joined game room ${this.room.roomId}`
         )*/
         client.view.add(connectedPlayer)
-        if (this.state.players.size >= MAX_PLAYERS_PER_GAME) {
-          const humanPlayers = players.filter((p) => !p.isBot)
-          if (humanPlayers.length === 1) {
-            humanPlayers[0].titles.add(Title.LONE_WOLF)
-          }
-        }
       } else {
         this.state.spectators.add(client.auth.uid)
       }
@@ -1613,7 +1607,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
     }
 
-    const commands = new Array<Command>()
+    const commands: Command[] = []
 
     this.state.players.forEach((p) => this.updatePlayerBetweenStages(p))
 
@@ -1643,7 +1637,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       removeInArray(player.items, Item.TREASURE_BOX)
 
       let rewards: Item[] = []
-      let rewardsIcons: Item[] | undefined = undefined
+      let rewardsIcons: Item[] | undefined
       switch (this.state.treasureBoxRewardGiven) {
         case "sweets":
           rewardsIcons = [Item.SWEETS]
@@ -1927,7 +1921,10 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (!isGameFinished) {
       this.state.stageLevel += 1
-      this.room.setMetadata({ ...this.room.metadata, stageLevel: this.state.stageLevel })
+      this.room.setMetadata({
+        ...this.room.metadata,
+        stageLevel: this.state.stageLevel
+      })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
         player.wanderers.clear()
@@ -1966,9 +1963,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
 
             if (pokemon.action === PokemonActionState.TRAINING) {
-              const { trainingAttack, trainingMaxHpPercent } = EffectConfigs.COACHING
+              const { trainingAttack, trainingMaxHpPercent } =
+                EffectConfigs.COACHING
               pokemon.addAttack(trainingAttack)
-              pokemon.addMaxHP(Math.ceil((trainingMaxHpPercent / 100) * getPokemonData(pokemon.name).hp))
+              pokemon.addMaxHP(
+                Math.ceil(
+                  (trainingMaxHpPercent / 100) * getPokemonData(pokemon.name).hp
+                )
+              )
               pokemon.action = PokemonActionState.IDLE
               if (pokemon.atk >= pokemon.baseAtk + 40) {
                 player.titles.add(Title.BODYBUILDER)
@@ -2342,7 +2344,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     if (hasLostLastBattle && hasBabyActive) {
       const EGG_CHANCE = EffectConfigs.HATCHER.eggChance.value / 100
-      const GOLDEN_EGG_CHANCE = EffectConfigs.GOLDEN_EGGS.goldenEggChance.value / 100
+      const GOLDEN_EGG_CHANCE =
+        EffectConfigs.GOLDEN_EGGS.goldenEggChance.value / 100
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = schemaValues(player.board).filter(
@@ -2362,15 +2365,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
         if (player.effects.has(EffectEnum.GOLDEN_EGGS) && !goldenEggFound) {
           player.goldenEggChance += max(0.1)(
-            Math.pow(GOLDEN_EGG_CHANCE, 1 - baby.luck / 200)
+            GOLDEN_EGG_CHANCE ** (1 - baby.luck / 200)
           )
         } else if (
           player.effects.has(EffectEnum.HATCHER) &&
           nbEggsFound === 0
         ) {
-          player.eggChance += max(0.2)(
-            Math.pow(EGG_CHANCE, 1 - baby.luck / 100)
-          )
+          player.eggChance += max(0.2)(EGG_CHANCE ** (1 - baby.luck / 100))
         }
       }
 
@@ -2407,7 +2408,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     for (let i = 0; i < nbEggsFound; i++) {
       if (getFreeSpaceOnBench(player.board) === 0) continue
       const isGoldenEgg =
-        goldenEggFound && i === 0 && nbOfGoldenEggsOnBench < EffectConfigs.GOLDEN_EGGS.maxGoldenEggs
+        goldenEggFound &&
+        i === 0 &&
+        nbOfGoldenEggsOnBench < EffectConfigs.GOLDEN_EGGS.maxGoldenEggs
       giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(EffectEnum.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
