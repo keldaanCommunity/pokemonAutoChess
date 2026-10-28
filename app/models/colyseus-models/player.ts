@@ -181,10 +181,22 @@ export default class Player extends Schema implements IPlayer {
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)
   fairyWandsOptions = [
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[0], EffectConfigs.AROMATIC_MIST.wandChoices),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[1], EffectConfigs.FAIRY_AURA.wandChoices),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2], EffectConfigs.PIXILATE.wandChoices),
-    pickNRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3], EffectConfigs.MOON_FORCE.wandChoices)
+    pickNRandomIn(
+      FAIRY_WANDS_BY_SYNERGY_LEVEL[0],
+      EffectConfigs.AROMATIC_MIST.wandChoices
+    ),
+    pickNRandomIn(
+      FAIRY_WANDS_BY_SYNERGY_LEVEL[1],
+      EffectConfigs.FAIRY_AURA.wandChoices
+    ),
+    pickNRandomIn(
+      FAIRY_WANDS_BY_SYNERGY_LEVEL[2],
+      EffectConfigs.PIXILATE.wandChoices
+    ),
+    pickNRandomIn(
+      FAIRY_WANDS_BY_SYNERGY_LEVEL[3],
+      EffectConfigs.MOON_FORCE.wandChoices
+    )
   ]
   buriedItems: (Item | null)[] = initBuriedItems()
   tms: Item[] = [
@@ -596,7 +608,10 @@ export default class Player extends Schema implements IPlayer {
   }
 
   updateWeatherRocks() {
-    const tier = SynergyTiers[Synergy.ROCK][getSynergyTier(this.synergies, Synergy.ROCK) - 1]
+    const tier =
+      SynergyTiers[Synergy.ROCK][
+        getSynergyTier(this.synergies, Synergy.ROCK) - 1
+      ]
     const nbWeatherRocks = tier ? EffectConfigs[tier].maxWeatherRocks : 0
 
     let weatherRockInInventory
@@ -630,9 +645,9 @@ export default class Player extends Schema implements IPlayer {
       const lostTMs = this.tms.slice(newNbTMs, previousNbTMs)
       lostTMs.forEach((tm) => {
         removeInArray(this.items, tm)
-        const pokemonWithThisTm = schemaValues(this.board).find(
-          (p) => p.tm === AbilityPerTM[tm]
-        )
+        const pokemonWithThisTm = schemaValues(this.board)
+          .concat(this.pokemonsTrainingInDojo.map((p) => p.pokemon))
+          .find((p) => p.tm === AbilityPerTM[tm])
         if (pokemonWithThisTm) {
           pokemonWithThisTm.tm = Ability.DEFAULT
           pokemonWithThisTm.skill = pokemonWithThisTm.baseSkill
