@@ -1463,6 +1463,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.simulation
     )
     this.simulation.applySynergyEffects(cloneReference)
+    // Get the items from the actual Pokemon entity to avoid Wonder Box rerolls after resurrecting
+    cloneReference.items = this.items
     this.simulation.applyItemsEffects(cloneReference)
     cloneReference.getEffects(OnSpawnEffect).forEach((effect) => {
       effect.apply(cloneReference, this.player, this.isSpawn)
