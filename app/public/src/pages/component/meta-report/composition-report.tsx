@@ -37,7 +37,9 @@ export function CompositionReport() {
       )
     })
 
-    return [...pokemonPopularity.keys()].sort((a, b) => a.localeCompare(b))
+    return [...pokemonPopularity.keys()].sort((a, b) =>
+      t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
+    )
   }, [meta])
 
   const sortedMeta = useMemo(() => {
