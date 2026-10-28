@@ -1636,6 +1636,7 @@ export const PassiveEffects: Partial<
         transformed = true
         entity.index = PkmIndex[Pkm.PALAFIN_HERO]
         entity.name = Pkm.PALAFIN_HERO
+        entity.stars++
         entity.addAttack(18, entity, 0, false)
         entity.addSpeed(16, entity, 0, false)
         entity.addDefense(5, entity, 0, false)

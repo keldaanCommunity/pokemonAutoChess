@@ -89,6 +89,7 @@
 - Fixed Light synergy effect attack buff based on current ATK instead of base ATK
 - Fixed Porygon conversion passive on GHOST giving 2x more dodge chance than expected
 - Fixed Monster flinch chance being ON_HIT instead of ON_ATTACK
+- Fixed Palafin Hero not gaining a fourth STAR when transforming
 
 # Misc
 
