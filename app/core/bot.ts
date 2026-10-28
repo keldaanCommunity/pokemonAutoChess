@@ -2,6 +2,7 @@ import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
 import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
+import type GameRoom from "../rooms/game-room"
 import { AbilityPerTM, Emotion, Item, TMs } from "../types"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
@@ -12,8 +13,10 @@ import { logger } from "../utils/logger"
 import { pickRandomIn } from "../utils/random"
 import {
   OnChangePositionEffect,
+  OnItemDroppedEffect,
   OnSpotlightChangeEffect
 } from "./effects/effect"
+import { ItemEffects } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
 
 export default class Bot {
@@ -22,14 +25,14 @@ export default class Bot {
   progress: number
   scenario: IBot | undefined
 
-  constructor(player: Player) {
+  constructor(player: Player, room: GameRoom) {
     this.player = player
     this.step = 0
     this.progress = 0
-    this.initialize()
+    this.initialize(room)
   }
 
-  async initialize() {
+  async initialize(room: GameRoom) {
     try {
       const data = await BotV2.findOne({ id: this.player.id }, "steps")
       if (data) {
@@ -41,14 +44,14 @@ export default class Bot {
           pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[2]),
           pickRandomIn(FAIRY_WANDS_BY_SYNERGY_LEVEL[3])
         )
-        this.updatePlayerTeam()
+        this.updatePlayerTeam(room)
       }
     } catch (error) {
       logger.error(error)
     }
   }
 
-  updateProgress() {
+  updateProgress(room: GameRoom) {
     this.progress += 1
 
     if (
@@ -58,12 +61,12 @@ export default class Bot {
     ) {
       this.step += 1
       this.progress -= this.scenario.steps[this.step].roundsRequired
-      this.updatePlayerTeam()
+      this.updatePlayerTeam(room)
       this.updateFlowerPots()
     }
   }
 
-  updatePlayerTeam() {
+  updatePlayerTeam(room: GameRoom) {
     this.player.board.forEach((pokemon, key) => {
       this.player.board.delete(key)
     })
@@ -83,6 +86,45 @@ export default class Bot {
         pkm.positionX = stepTeam.board[i].x
         pkm.positionY = stepTeam.board[i].y
 
+        if (stepTeam.board[i].items) {
+          stepTeam.board[i].items.forEach((item) => {
+            if (isIn(TMs, item)) {
+              const ability = AbilityPerTM[item]
+              if (!ability || pkm.types.has(Synergy.HUMAN) === false)
+                return false // prevent equipping TMs on non-human pokemon
+              pkm.tm = ability
+              pkm.skill = ability
+              pkm.maxPP = 100
+            } else if (!pkm.items.has(item)) {
+              pkm.items.add(item)
+
+              const onItemDroppedEffects: OnItemDroppedEffect[] = [
+                ...(ItemEffects[item]?.filter(
+                  (effect) => effect instanceof OnItemDroppedEffect
+                ) ?? []),
+                ...(PassiveEffects[pkm.passive]?.filter(
+                  (effect) => effect instanceof OnItemDroppedEffect
+                ) ?? [])
+              ]
+
+              for (const onItemDroppedEffect of onItemDroppedEffects) {
+                onItemDroppedEffect.apply({
+                  pokemon: pkm,
+                  player: this.player,
+                  item,
+                  room
+                })
+              }
+            }
+          })
+        }
+        this.player.board.set(pkm.id, pkm)
+      }
+
+      this.player.updateSynergies()
+
+      // apply passives once the whole board is set
+      this.player.board.forEach((pkm) => {
         if (pkm.passive !== Passive.NONE) {
           const hasLightActive = this.player.synergies.hasSynergyActive(
             Synergy.LIGHT
@@ -114,25 +156,7 @@ export default class Bot {
             }
           })
         }
-
-        if (stepTeam.board[i].items) {
-          stepTeam.board[i].items.forEach((item) => {
-            if (isIn(TMs, item)) {
-              const ability = AbilityPerTM[item]
-              if (!ability || pkm.types.has(Synergy.HUMAN) === false)
-                return false // prevent equipping TMs on non-human pokemon
-              pkm.tm = ability
-              pkm.skill = ability
-              pkm.maxPP = 100
-            } else if (!pkm.items.has(item)) {
-              pkm.items.add(item)
-            }
-          })
-        }
-        this.player.board.set(pkm.id, pkm)
-      }
-
-      this.player.updateSynergies()
+      })
     }
   }
 

@@ -313,7 +313,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
             this.state
           )
           this.state.players.set(user.uid, player)
-          this.state.botManager.addBot(player)
+          this.state.botManager.addBot(player, this)
           player.doubleUpPartnerId = user.doubleUpPartnerId ?? ""
           player.doubleUpTeamId = user.doubleUpTeamId ?? ""
         } else {
@@ -725,7 +725,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     })
-    this.state.botManager.updateBots()
+    this.state.botManager.updateBots(this)
     this.miniGame.initialize(this.state, this)
   }
 

@@ -11,7 +11,6 @@ import {
   ITEM_CAROUSEL_BASE_DURATION,
   ItemCarouselStages,
   ItemSellPricesAtTown,
-  MAX_PLAYERS_PER_GAME,
   OUTLAW_GOLD_REWARD,
   PkmsWithAltForms,
   PORTAL_CAROUSEL_BASE_DURATION,
@@ -1999,7 +1998,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         }
       })
       // Update Bots after unown deletion so unown in bot boards are not deleted
-      this.state.botManager.updateBots()
+      this.state.botManager.updateBots(this.room)
     }
   }
   applyDoubleUpRoundDamage() {
