@@ -237,7 +237,8 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
             secondHitTarget.items.has(Item.POWER_LENS) &&
             !pokemon.items.has(Item.PROTECTIVE_PADS)
           ) {
-            const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
+            const armorFactor =
+              1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
             const speDef = secondHitTarget.status.armorReduction
               ? Math.round(secondHitTarget.speDef * armorFactor)
               : secondHitTarget.speDef
@@ -1581,7 +1582,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.SURFBOARD]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      if (pokemon.name === Pkm.PIKACHU) {
+      if (pokemon.name === Pkm.PIKACHU && pokemon.items.size < 3) {
         const transform = player.transformPokemon(pokemon, Pkm.PIKACHU_SURFER)
         transform.items.add(Item.SURFBOARD)
       }
