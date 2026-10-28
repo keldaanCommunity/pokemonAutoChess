@@ -78,13 +78,13 @@ export default function SynergyDetailComponent(props: {
     )
   ).map((p) => getPokemonData(p as Pkm))
 
-  const uniques = keepFirstOfFamily(
-    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].uniquePokemons
-  ).map((p) => getPokemonData(p as Pkm))
+  const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].uniquePokemons.map((p) => getPokemonData(p as Pkm))
 
-  const legendaries = keepFirstOfFamily(
-    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].legendaryPokemons
-  ).map((p) => getPokemonData(p as Pkm))
+  const legendaries = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].legendaryPokemons.map((p) => getPokemonData(p as Pkm))
 
   const specials = keepFirstOfFamily(
     PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].specialPokemons
