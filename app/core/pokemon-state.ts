@@ -59,7 +59,11 @@ export default abstract class PokemonState {
         )
         critChance += 0.01 * distance
       }
+      if (target.effects.has(EffectEnum.IMMUNITY_CRIT_ATTACKS)) {
+        critChance == 0
+      }
       const crit = chance(critChance, pokemon)
+
       let critReductionFactor = 1.0
 
       const nbBlackAugurite = target.player

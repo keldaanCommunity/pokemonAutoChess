@@ -5785,7 +5785,7 @@
 		},
 		"buff": {
 			"looplet": "Additional effect for the LOOPLET:\n",
-			"pink": "$t(atlas.buff.looplet)Get 20 LUCK. Prevents the holder from taking critical hits.",
+			"pink": "$t(atlas.buff.looplet)Get 20 LUCK. Prevents the holder from receiving critical attacks.",
 			"red": "$t(atlas.buff.looplet)Get 20% base ATK. Attacks inflict BURN for 3 seconds ON_HIT.",
 			"yellow": "$t(atlas.buff.looplet)Get 20 SPEED. +1 GOLD each time holder knocks out an opponent.",
 			"green": "$t(atlas.buff.looplet)Gain 20% base max HP. Holder heals for 20% of all damage inflicted.",

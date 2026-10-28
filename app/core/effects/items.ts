@@ -92,6 +92,7 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   type OnDeathEffectArgs,
+  OnHitEffect,
   OnItemDroppedEffect,
   OnItemGainedEffect,
   OnItemLostInCombatEffect,
@@ -323,6 +324,28 @@ export const pokemonomiconOnDamageEffect = new OnDamageDealtEffect(
     }
   }
 )
+
+const redBuffOnHitEffect = new OnHitEffect(({ target, attacker }) =>
+  target.status.triggerBurn(3000, target, attacker)
+)
+
+const goldBuffOnKillEffect = new OnKillEffect(({ attacker }) => {
+  if (attacker.player) {
+    attacker.player.addMoney(1, true, attacker)
+    attacker.count.moneyCount += 1
+  }
+})
+
+const greenBuffHealEffect = new OnDamageDealtEffect(
+  ({ pokemon, damage, target }) => {
+    if (target.id === pokemon.id) return // prevent healing from self-inflicted damage (e.g. Flame Orb)
+    pokemon.handleHeal(Math.ceil(0.2 * damage), pokemon, 0, false)
+  }
+)
+
+const blueBuffOnAttackEffect = new OnAttackEffect(({ pokemon }) => {
+  pokemon.addPP(5, pokemon, 0, false)
+})
 
 export class SoulDewEffect extends PeriodicEffect {
   constructor() {
@@ -2030,6 +2053,89 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           pokemon,
           false
         )
+      }
+    })
+  ],
+
+  [Item.LOOPLET]: [
+    new OnItemGainedEffect((pokemon) => {
+      if (pokemon.player) {
+        const pinkBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_pink_buff")
+        const redBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_red_buff")
+        const goldBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_gold_buff")
+        const greenBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_green_buff")
+        const blueBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_blue_buff")
+
+        if (pinkBuff) {
+          pokemon.addLuck(20, pokemon, 0, false)
+          pokemon.effects.add(EffectEnum.IMMUNITY_CRIT_ATTACKS)
+        }
+        if (redBuff) {
+          pokemon.addAttack(
+            Math.round(pokemon.baseAtk * 0.2),
+            pokemon,
+            0,
+            false
+          )
+          pokemon.effectsSet.add(redBuffOnHitEffect)
+        }
+        if (goldBuff) {
+          pokemon.addSpeed(20, pokemon, 0, false)
+          pokemon.effectsSet.add(goldBuffOnKillEffect)
+        }
+        if (greenBuff) {
+          pokemon.addMaxHP(Math.round(0.2 * pokemon.baseHP), pokemon, 0, false)
+          pokemon.effectsSet.add(greenBuffHealEffect)
+        }
+        if (blueBuff) {
+          pokemon.addPP(20, pokemon, 0, false)
+          pokemon.effectsSet.add(blueBuffOnAttackEffect)
+        }
+      }
+    }),
+    new OnItemLostInCombatEffect((pokemon) => {
+      if (pokemon.player) {
+        const pinkBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_pink_buff")
+        const redBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_red_buff")
+        const goldBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_gold_buff")
+        const greenBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_green_buff")
+        const blueBuff =
+          pokemon.player.atlasManager.unlockedNodes.has("looplet_blue_buff")
+
+        if (pinkBuff) {
+          pokemon.addLuck(-20, pokemon, 0, false)
+          pokemon.effects.delete(EffectEnum.IMMUNITY_CRIT_ATTACKS)
+        }
+        if (redBuff) {
+          pokemon.addAttack(
+            -Math.round(pokemon.baseAtk * 0.2),
+            pokemon,
+            0,
+            false
+          )
+          pokemon.effectsSet.delete(redBuffOnHitEffect)
+        }
+        if (goldBuff) {
+          pokemon.addSpeed(-20, pokemon, 0, false)
+          pokemon.effectsSet.delete(goldBuffOnKillEffect)
+        }
+        if (greenBuff) {
+          pokemon.addMaxHP(Math.round(-0.2 * pokemon.baseHP), pokemon, 0, false)
+          pokemon.effectsSet.delete(greenBuffHealEffect)
+        }
+        if (blueBuff) {
+          pokemon.addPP(-20, pokemon, 0, false)
+          pokemon.effectsSet.delete(blueBuffOnAttackEffect)
+        }
       }
     })
   ]
