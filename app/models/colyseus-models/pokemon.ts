@@ -12895,7 +12895,6 @@ export class Barboach extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.FISSURE
-  passive = Passive.AQUA_VEIL
   additional = true
 }
 
@@ -12911,7 +12910,6 @@ export class Whiscash extends Pokemon {
   maxPP = 90
   range = 1
   skill = Ability.FISSURE
-  passive = Passive.AQUA_VEIL
   additional = true
 }
 
