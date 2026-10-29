@@ -12892,7 +12892,7 @@ export class Barboach extends Pokemon {
   speed = 44
   def = 6
   speDef = 8
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.FISSURE
   additional = true
@@ -12907,7 +12907,7 @@ export class Whiscash extends Pokemon {
   speed = 44
   def = 8
   speDef = 10
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.FISSURE
   additional = true
