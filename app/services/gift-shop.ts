@@ -1,4 +1,5 @@
 import { EvolutionTime, getBaseAltForm, PkmsWithAltForms } from "../config"
+import { ItemConfigs, SYNERGY_GEM_BONUS } from "../config/game/items"
 import { LegendaryPool, UniquePool } from "../config/game/pools"
 import { giveRandomEgg } from "../core/eggs"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
@@ -51,7 +52,7 @@ const giftAmountOfItem =
         if (type) {
           toPlayer.bonusSynergies.set(
             type,
-            (toPlayer.bonusSynergies.get(type) ?? 0) + 1
+            (toPlayer.bonusSynergies.get(type) ?? 0) + SYNERGY_GEM_BONUS
           )
         }
       })
@@ -77,12 +78,13 @@ const giftAmountOfPokemon =
   }
 
 const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
-  if (chance(0.05)) {
+  const { goldenEggChancePercent, hatchStars, maxHp, attack, abilityPower } =
+    ItemConfigs.HATCH_BUNDLE
+  if (chance(goldenEggChancePercent / 100)) {
     giveRandomEgg(toPlayer, true)
   } else {
-    // 5% chance of getting a golden egg
     const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
-      (p) => getPokemonData(p).stars === 1
+      (p) => getPokemonData(p).stars === hatchStars
     )
 
     const randomHatches = pickNRandomIn(hatchList, amount)
@@ -98,9 +100,9 @@ const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
       replacement.stacksRequired = EvolutionTime.EVOLVE_HATCH
       replacement.positionX = freeCellX
       replacement.positionY = 0
-      replacement.addMaxHP(50)
-      replacement.addAttack(5)
-      replacement.addAbilityPower(15)
+      replacement.addMaxHP(maxHp)
+      replacement.addAttack(attack)
+      replacement.addAbilityPower(abilityPower)
       toPlayer.board.set(replacement.id, replacement)
       replacement.onAcquired(toPlayer)
     })
@@ -108,31 +110,19 @@ const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
 }
 
 const giftRandomPokemonByRarity =
-  (rarity: Rarity) =>
+  (rarity: Rarity, config: { stars: number; topSynergies: number }) =>
   (toPlayer: Player, fromPlayer: Player, room: GameRoom) => {
-    let wantedStars: number
+    const { stars: wantedStars, topSynergies: nbOfSynergies } = config
     let shouldBeRegionalOrAdditional = false
 
     switch (rarity) {
-      case Rarity.COMMON:
-      case Rarity.UNIQUE:
-      case Rarity.LEGENDARY:
-        wantedStars = 3
-        break
       case Rarity.UNCOMMON:
       case Rarity.RARE:
       case Rarity.EPIC:
-        wantedStars = 2
         shouldBeRegionalOrAdditional = true
-        break
-      case Rarity.ULTRA:
-      default:
-        wantedStars = 1
         break
     }
 
-    const nbOfSynergies =
-      rarity === Rarity.ULTRA || rarity === Rarity.LEGENDARY ? 2 : 1
     let wantedSynergies = toPlayer.synergies
       .getTopSynergies(nbOfSynergies)
       .filter((type) => toPlayer.synergies.hasSynergyActive(type)) // only consider active types
@@ -188,8 +178,9 @@ const giftRandomPokemonByRarity =
   }
 
 const giftPotion = (toPlayer: Player, fromPlayer: Player) => {
-  toPlayer.life = max(100)(toPlayer.life + 10)
-  fromPlayer.life = max(100)(fromPlayer.life + 10)
+  const { heal, maxPlayerHp } = ItemConfigs.POTION
+  toPlayer.life = max(maxPlayerHp)(toPlayer.life + heal)
+  fromPlayer.life = max(maxPlayerHp)(fromPlayer.life + heal)
 }
 
 const evolveRandomPokemonInBoard = (toPlayer: Player) => {
@@ -213,12 +204,14 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   } else {
     if (otherPokemon.length === 0) return
     const randomPkm2 = pickRandomIn(otherPokemon)
-    randomPkm2.addMaxHP(200)
-    randomPkm2.addAttack(10)
-    randomPkm2.addAbilityPower(50)
-    randomPkm2.addDefense(5)
-    randomPkm2.addSpecialDefense(5)
-    randomPkm2.addSpeed(20)
+    const { maxHp, attack, abilityPower, defense, specialDefense, speed } =
+      ItemConfigs.STAR_GIFT
+    randomPkm2.addMaxHP(maxHp)
+    randomPkm2.addAttack(attack)
+    randomPkm2.addAbilityPower(abilityPower)
+    randomPkm2.addDefense(defense)
+    randomPkm2.addSpecialDefense(specialDefense)
+    randomPkm2.addSpeed(speed)
   }
 }
 
@@ -233,9 +226,9 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
       } else if (randomDish === Item.MUSHROOMS) {
         randomDish =
           randomWeighted({
-            [Item.TINY_MUSHROOM]: 77,
-            [Item.BIG_MUSHROOM]: 20,
-            [Item.BALM_MUSHROOM]: 3
+            [Item.TINY_MUSHROOM]: ItemConfigs.MUSHROOMS.tinyMushroomWeight,
+            [Item.BIG_MUSHROOM]: ItemConfigs.MUSHROOMS.bigMushroomWeight,
+            [Item.BALM_MUSHROOM]: ItemConfigs.MUSHROOMS.balmMushroomWeight
           }) ?? Item.TINY_MUSHROOM
       }
 
@@ -261,43 +254,89 @@ type GiftEffect = (toPlayer: Player, fromPlayer: Player, room: GameRoom) => void
 export const GiftEffects: {
   [key in Gift]: GiftEffect | GiftEffect[]
 } = {
-  [Item.BERRIES_GIFT]: giftAmountOfItem(7, Berries),
-  [Item.SWEETS_GIFT]: giftAmountOfItem(7, Sweets),
-  [Item.DITTO_GIFT]: giftAmountOfPokemon(1, Pkm.DITTO),
+  [Item.BERRIES_GIFT]: giftAmountOfItem(
+    ItemConfigs.BERRIES_GIFT.amount,
+    Berries
+  ),
+  [Item.SWEETS_GIFT]: giftAmountOfItem(ItemConfigs.SWEETS_GIFT.amount, Sweets),
+  [Item.DITTO_GIFT]: giftAmountOfPokemon(
+    ItemConfigs.DITTO_GIFT.amount,
+    Pkm.DITTO
+  ),
   [Item.TICKET_BUNDLE]: (toPlayer: Player, fromPlayer: Player) => {
     toPlayer.items.push(Item.EXCHANGE_TICKET)
     toPlayer.items.push(Item.RECYCLE_TICKET)
     toPlayer.items.push(Item.BRONZE_DOJO_TICKET)
   },
-  [Item.HATCH_BUNDLE]: giftHatchPokemon(2),
+  [Item.HATCH_BUNDLE]: giftHatchPokemon(ItemConfigs.HATCH_BUNDLE.amount),
   [Item.REGIONAL_TOUR]: (toPlayer: Player, fromPlayer: Player) => {
     toPlayer.items.push(Item.LAPRAS_PASSPORT)
-    toPlayer.shopFreeRolls += 10
+    toPlayer.shopFreeRolls += ItemConfigs.REGIONAL_TOUR.freeRerolls
   },
   [Item.BANQUET]: giftFoodAndPicnic,
   [Item.STAR_GIFT]: evolveRandomPokemonInBoard,
-  [Item.GEMS_BUNDLE]: giftAmountOfItem(3, SynergyGems),
+  [Item.GEMS_BUNDLE]: giftAmountOfItem(
+    ItemConfigs.GEMS_BUNDLE.amount,
+    SynergyGems
+  ),
   [Item.POTION]: giftPotion,
-  [Item.FORAGE_BAG]: giftAmountOfItem(3, ItemComponentsNoFossilOrScarf),
+  [Item.FORAGE_BAG]: giftAmountOfItem(
+    ItemConfigs.FORAGE_BAG.amount,
+    ItemComponentsNoFossilOrScarf
+  ),
   [Item.COLLECTION_BOX]: [
-    giftAmountOfItem(1, [Item.SWEET_APPLE, Item.TART_APPLE, Item.SIRUPY_APPLE]),
-    giftAmountOfItem(1, [Item.SILK_SCARF]),
-    giftAmountOfItem(1, CraftableItemsNoScarves),
-    giftAmountOfItem(1, Tools),
-    giftAmountOfItem(2, NonSpecialBerries)
+    giftAmountOfItem(ItemConfigs.COLLECTION_BOX.apples, [
+      Item.SWEET_APPLE,
+      Item.TART_APPLE,
+      Item.SIRUPY_APPLE
+    ]),
+    giftAmountOfItem(ItemConfigs.COLLECTION_BOX.scarves, [Item.SILK_SCARF]),
+    giftAmountOfItem(
+      ItemConfigs.COLLECTION_BOX.completedItems,
+      CraftableItemsNoScarves
+    ),
+    giftAmountOfItem(ItemConfigs.COLLECTION_BOX.tools, Tools),
+    giftAmountOfItem(ItemConfigs.COLLECTION_BOX.berries, NonSpecialBerries)
   ],
-  [Item.PRETTY_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
-  [Item.DELUXE_BOX]: giftAmountOfItem(1, ShinyItems),
-  [Item.TOOLBOX]: giftAmountOfItem(3, Tools),
-  [Item.COMMON_GIFT]: giftRandomPokemonByRarity(Rarity.COMMON),
-  [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
-  [Item.RARE_GIFT]: giftRandomPokemonByRarity(Rarity.RARE),
-  [Item.EPIC_GIFT]: giftRandomPokemonByRarity(Rarity.EPIC),
-  [Item.ULTRA_GIFT]: giftRandomPokemonByRarity(Rarity.ULTRA),
-  [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
-  [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
-  [Item.SMALL_EXP_GIFT]: giftXP(8),
-  [Item.LARGE_EXP_GIFT]: giftXP(24)
+  [Item.PRETTY_BOX]: giftAmountOfItem(
+    ItemConfigs.PRETTY_BOX.amount,
+    CraftableItemsNoScarves
+  ),
+  [Item.DELUXE_BOX]: giftAmountOfItem(
+    ItemConfigs.DELUXE_BOX.amount,
+    ShinyItems
+  ),
+  [Item.TOOLBOX]: giftAmountOfItem(ItemConfigs.TOOLBOX.amount, Tools),
+  [Item.COMMON_GIFT]: giftRandomPokemonByRarity(
+    Rarity.COMMON,
+    ItemConfigs.COMMON_GIFT
+  ),
+  [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(
+    Rarity.UNCOMMON,
+    ItemConfigs.UNCOMMON_GIFT
+  ),
+  [Item.RARE_GIFT]: giftRandomPokemonByRarity(
+    Rarity.RARE,
+    ItemConfigs.RARE_GIFT
+  ),
+  [Item.EPIC_GIFT]: giftRandomPokemonByRarity(
+    Rarity.EPIC,
+    ItemConfigs.EPIC_GIFT
+  ),
+  [Item.ULTRA_GIFT]: giftRandomPokemonByRarity(
+    Rarity.ULTRA,
+    ItemConfigs.ULTRA_GIFT
+  ),
+  [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(
+    Rarity.UNIQUE,
+    ItemConfigs.UNIQUE_GIFT
+  ),
+  [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(
+    Rarity.LEGENDARY,
+    ItemConfigs.LEGENDARY_GIFT
+  ),
+  [Item.SMALL_EXP_GIFT]: giftXP(ItemConfigs.SMALL_EXP_GIFT.experience),
+  [Item.LARGE_EXP_GIFT]: giftXP(ItemConfigs.LARGE_EXP_GIFT.experience)
 }
 
 export const openGift = (

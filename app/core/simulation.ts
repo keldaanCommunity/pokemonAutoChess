@@ -1,6 +1,7 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
 import { EffectConfigs } from "../config/game/effects"
+import { GoldMaskSpawns, ItemConfigs } from "../config/game/items"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
   AMORPHOUS_SPEED_BUFF_PER_SYNERGY_TIER,
@@ -29,7 +30,7 @@ import {
   GameMode,
   Orientation,
   PokemonActionState,
-  Rarity,
+  type Rarity,
   Team
 } from "../types/enum/Game"
 import {
@@ -478,7 +479,7 @@ export default class Simulation extends Schema implements ISimulation {
       pokemon.items.delete(Item.WONDER_BOX)
 
       const wonderboxItems: Item[] = []
-      for (let n = 0; n < 2; n++) {
+      for (let n = 0; n < ItemConfigs.WONDER_BOX.itemCount; n++) {
         const eligibleItems = CraftableItemsNoScarves.filter(
           (i) =>
             !isIn(SynergyStones, i) &&
@@ -533,7 +534,12 @@ export default class Simulation extends Schema implements ISimulation {
         (item) => item === Item.CELL_BATTERY
       ).length
       if (nbCellBatteries > 0) {
-        pokemon.addSpeed(2 * nbCellBatteries, pokemon, 0, false)
+        pokemon.addSpeed(
+          ItemConfigs.CELL_BATTERY.benchSpeedBonus * nbCellBatteries,
+          pokemon,
+          0,
+          false
+        )
       }
     }
     if (pokemon.refToBoardPokemon.supercharged) {
@@ -617,39 +623,11 @@ export default class Simulation extends Schema implements ISimulation {
             }
           }
 
-          if (this.stageLevel <= 5) {
-            pickSpawn(Rarity.COMMON, 1)
-            pickSpawn(Rarity.COMMON, 1)
-            pickSpawn(Rarity.COMMON, 1)
-          } else if (this.stageLevel <= 10) {
-            pickSpawn(Rarity.COMMON, 1)
-            pickSpawn(Rarity.COMMON, 1)
-            pickSpawn(Rarity.UNCOMMON, 1)
-          } else if (this.stageLevel <= 15) {
-            pickSpawn(Rarity.UNCOMMON, 1)
-            pickSpawn(Rarity.UNCOMMON, 1)
-            pickSpawn(Rarity.RARE, 1)
-          } else if (this.stageLevel <= 20) {
-            pickSpawn(Rarity.UNCOMMON, 1)
-            pickSpawn(Rarity.RARE, 1)
-            pickSpawn(Rarity.EPIC, 1)
-          } else if (this.stageLevel <= 25) {
-            pickSpawn(Rarity.UNCOMMON, 2)
-            pickSpawn(Rarity.RARE, 1)
-            pickSpawn(Rarity.EPIC, 1)
-          } else if (this.stageLevel <= 30) {
-            pickSpawn(Rarity.RARE, 2)
-            pickSpawn(Rarity.EPIC, 1)
-            pickSpawn(Rarity.EPIC, 1)
-          } else if (this.stageLevel <= 35) {
-            pickSpawn(Rarity.RARE, 2)
-            pickSpawn(Rarity.EPIC, 2)
-            pickSpawn(Rarity.UNIQUE, 3)
-          } else {
-            pickSpawn(Rarity.EPIC, 2)
-            pickSpawn(Rarity.UNIQUE, 3)
-            pickSpawn(Rarity.ULTRA, 2)
-          }
+          const stage =
+            GoldMaskSpawns.find(
+              ({ maxStage }) => this.stageLevel <= maxStage
+            ) ?? GoldMaskSpawns.at(-1)!
+          stage.spawns.forEach(([rarity, tier]) => pickSpawn(rarity, tier))
 
           spawns.forEach((spawn) => {
             const coord = this.getClosestFreeCellToPokemon(pokemon, teamIndex)
@@ -671,9 +649,16 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (ally && ally.team === pokemon.team) {
-              ally.addShield(Math.ceil(0.2 * ally.maxHP), ally, 0, false)
+              ally.addShield(
+                Math.ceil(
+                  (ItemConfigs.ABILITY_SHIELD.shieldPercent / 100) * ally.maxHP
+                ),
+                ally,
+                0,
+                false
+              )
               ally.status.triggerRuneProtect(
-                5000,
+                ItemConfigs.ABILITY_SHIELD.safeguardDurationSeconds * 1000,
                 ally,
                 pokemon as PokemonEntity
               )
@@ -688,7 +673,12 @@ export default class Simulation extends Schema implements ISimulation {
               pokemon.positionY
             )
             if (value) {
-              value.addSpeed(20, pokemon, 0, false)
+              value.addSpeed(
+                ItemConfigs.GRACIDEA_FLOWER.speed,
+                pokemon,
+                0,
+                false
+              )
             }
           })
         }
@@ -981,7 +971,7 @@ export default class Simulation extends Schema implements ISimulation {
             pokemon.player?.items.includes(Item.LONG_WAND) &&
             pokemon.range > 1
           ) {
-            pokemon.range += 1
+            pokemon.range += ItemConfigs.LONG_WAND.range
           }
           if (pokemon.player?.items.includes(Item.POUNCE_WAND)) {
             pokemon.effectsSet.add(pounceWandEffect)
@@ -1265,7 +1255,7 @@ export default class Simulation extends Schema implements ISimulation {
           ? flyingSpeedBonus
           : speedBonus
         pokemon.addSpeed(
-          speedBuff + nbFloatStones * 10,
+          speedBuff + nbFloatStones * ItemConfigs.FLOAT_STONE.speed,
           "environment",
           0,
           false
@@ -1289,7 +1279,7 @@ export default class Simulation extends Schema implements ISimulation {
           : 0
         const dodge =
           WeatherConfigs.SMOG.accuracyReductionPercent / 100 -
-          0.05 * nbSmellyClays
+          (ItemConfigs.SMELLY_CLAY.accuracyBonusPercent / 100) * nbSmellyClays
         pokemon.addDodgeChance(dodge, "environment", 0, false)
         break
       }
@@ -1300,7 +1290,8 @@ export default class Simulation extends Schema implements ISimulation {
           : 0
 
         const critChance =
-          WeatherConfigs.NIGHT.critChanceBonusPercent + 5 * nbBlackAugurite
+          WeatherConfigs.NIGHT.critChanceBonusPercent +
+          ItemConfigs.BLACK_AUGURITE.critChance * nbBlackAugurite
         pokemon.addCritChance(critChance, "environment", 0, false)
         break
       }
@@ -1308,7 +1299,12 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.DROUGHT: {
         const nbHeatStones = player ? count(player.items, Item.HEAT_ROCK) : 0
 
-        pokemon.addAttack(3 * nbHeatStones, "environment", 0, false)
+        pokemon.addAttack(
+          ItemConfigs.HEAT_ROCK.attack * nbHeatStones,
+          "environment",
+          0,
+          false
+        )
         break
       }
 
@@ -1318,7 +1314,8 @@ export default class Simulation extends Schema implements ISimulation {
         const reduction = pokemon.types.has(Synergy.GHOST)
           ? 0
           : WeatherConfigs.MURKY.luckReduction
-        const luckDebuff = 10 * nbOddStones - reduction
+        const luckDebuff =
+          ItemConfigs.ODD_KEYSTONE.luck * nbOddStones - reduction
         pokemon.addLuck(luckDebuff, "environment", 0, false)
         break
       }
@@ -1327,7 +1324,12 @@ export default class Simulation extends Schema implements ISimulation {
         const player = pokemon.player
         const nbMistStones = player ? count(player.items, Item.MIST_STONE) : 0
         if (nbMistStones > 0) {
-          pokemon.addSpecialDefense(3 * nbMistStones, "environment", 0, false)
+          pokemon.addSpecialDefense(
+            ItemConfigs.MIST_STONE.specialDefense * nbMistStones,
+            "environment",
+            0,
+            false
+          )
         }
         break
       }
@@ -1406,7 +1408,7 @@ export default class Simulation extends Schema implements ISimulation {
             : 0
           if (nbElectricQuartz > 0) {
             pokemonOnCell.addShield(
-              50 * nbElectricQuartz,
+              ItemConfigs.ELECTRIC_QUARTZ.shield * nbElectricQuartz,
               pokemonOnCell,
               0,
               false
@@ -1596,7 +1598,9 @@ export default class Simulation extends Schema implements ISimulation {
           // no extra gold from PvE wins
           const hasLeadersCrest =
             opponentPlayer?.items.includes(Item.LEADERS_CREST) ?? false
-          const moneyGain = hasLeadersCrest ? 5 : 1
+          const moneyGain = hasLeadersCrest
+            ? 1 + ItemConfigs.LEADERS_CREST.rewardGold
+            : 1
           player.addMoney(moneyGain, true, null)
           client?.send(Transfer.PLAYER_INCOME, moneyGain)
           if (hasLeadersCrest && opponentPlayer) {
@@ -1624,7 +1628,8 @@ export default class Simulation extends Schema implements ISimulation {
           opponentPlayer.gameStats.totalPlayerDamageDealt += playerDamage
           if (
             opponentPlayer.items.includes(Item.MISSION_ORDER_RED) &&
-            opponentPlayer.gameStats.totalPlayerDamageDealt >= 100
+            opponentPlayer.gameStats.totalPlayerDamageDealt >=
+              ItemConfigs.MISSION_ORDER_RED.playerDamage
           ) {
             opponentPlayer.completeMissionOrder(Item.MISSION_ORDER_RED)
           }

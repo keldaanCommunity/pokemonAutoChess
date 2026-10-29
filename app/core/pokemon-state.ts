@@ -1,5 +1,6 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { EffectConfigs } from "../config/game/effects"
+import { ItemConfigs } from "../config/game/items"
 import { StatusConfigs } from "../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
 import { WeatherConfigs } from "../config/game/weathers"
@@ -61,7 +62,8 @@ export default abstract class PokemonState {
           target.positionX,
           target.positionY
         )
-        critChance += 0.01 * distance
+        critChance +=
+          (ItemConfigs.LONG_WAND.critChancePerDistance.value / 100) * distance
       }
       const crit = chance(critChance, pokemon)
       let critReductionFactor = 1.0
@@ -81,7 +83,9 @@ export default abstract class PokemonState {
         } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
           critReductionFactor -= EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
         }
-        critReductionFactor -= 0.1 * nbBlackAugurite
+        critReductionFactor -=
+          (ItemConfigs.BLACK_AUGURITE.critDamageReductionPercent / 100) *
+          nbBlackAugurite
         critReductionFactor = min(0)(critReductionFactor)
 
         if (!hasCritNegation) {
@@ -156,7 +160,7 @@ export default abstract class PokemonState {
         trueDamagePart += EffectConfigs.MAX_MELTDOWN.trueDamagePercent / 100
       }
       if (pokemon.items.has(Item.RED_ORB)) {
-        trueDamagePart += 0.25
+        trueDamagePart += ItemConfigs.RED_ORB.trueDamagePercent / 100
       }
       if (pokemon.effects.has(EffectEnum.STEELY_SPIRIT_BONUS)) {
         trueDamagePart += 0.1
@@ -190,7 +194,9 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
-        physicalDamage += 0.08 * target.maxHP
+        physicalDamage +=
+          (ItemConfigs.PUNCHING_GLOVE.targetHpDamagePercent / 100) *
+          target.maxHP
       }
 
       // rounding damage after all computations done
@@ -200,7 +206,10 @@ export default abstract class PokemonState {
       const totalDamage = physicalDamage + specialDamage + trueDamage
 
       if (isAttackSuccessful && pokemon.items.has(Item.RAZOR_FANG)) {
-        target.status.triggerArmorReduction(2000, target)
+        target.status.triggerArmorReduction(
+          ItemConfigs.RAZOR_FANG.armorBreakDurationSeconds * 1000,
+          target
+        )
       }
 
       if (physicalDamage > 0) {
@@ -284,7 +293,11 @@ export default abstract class PokemonState {
         const nbBloodStones = count(pokemon.player.items, Item.BLOOD_STONE)
         if (nbBloodStones > 0) {
           pokemon.addShield(
-            Math.round(0.3 * nbBloodStones * heal),
+            Math.round(
+              (ItemConfigs.BLOOD_STONE.woundHealToShieldPercent / 100) *
+                nbBloodStones *
+                heal
+            ),
             pokemon,
             apBoost,
             crit
@@ -303,7 +316,7 @@ export default abstract class PokemonState {
         heal *= caster.critPower
       }
       if (pokemon.effects.has(EffectEnum.BUFF_HEAL_RECEIVED)) {
-        heal *= 1.3
+        heal *= 1 + ItemConfigs.SITRUS_BERRY.healBonusPercent / 100
       }
       if (pokemon.status.burn) {
         heal *= 1 - StatusConfigs.BURN.reductionPercent / 100
@@ -543,7 +556,8 @@ export default abstract class PokemonState {
       if (attackType !== AttackType.TRUE) {
         // damage reduction
         if (pokemon.items.has(Item.POKE_DOLL)) {
-          reducedDamage *= 0.7
+          reducedDamage *=
+            (100 - ItemConfigs.POKE_DOLL.damageReductionPercent) / 100
         }
 
         if (
@@ -607,7 +621,7 @@ export default abstract class PokemonState {
           attacker.items.has(Item.PROTECTIVE_PADS) &&
           pokemon.id !== attacker.id
         ) {
-          damageOnShield *= 2 // double damage on shield
+          damageOnShield *= ItemConfigs.PROTECTIVE_PADS.shieldDamageMultiplier
         }
         if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
@@ -643,13 +657,16 @@ export default abstract class PokemonState {
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
-        pokemon.hp - residualDamage < 0.3 * pokemon.maxHP
+        pokemon.hp - residualDamage <
+          (ItemConfigs.SHINY_CHARM.hpThresholdPercent / 100) * pokemon.maxHP
       ) {
         death = false
         takenDamage = 0
         residualDamage = 0
-        pokemon.addPP(50, pokemon, 0, false)
-        pokemon.status.triggerProtect(1500)
+        pokemon.addPP(ItemConfigs.SHINY_CHARM.pp, pokemon, 0, false)
+        pokemon.status.triggerProtect(
+          ItemConfigs.SHINY_CHARM.protectDurationSeconds * 1000
+        )
         pokemon.removeItem(Item.SHINY_CHARM)
       }
 
@@ -935,8 +952,16 @@ export default abstract class PokemonState {
         let sandstormDamage = WeatherConfigs.SANDSTORM.damagePerSecond
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
-          sandstormDamage -= sandstormDamage * (20 / 100) * nbSmoothRocks
-          pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
+          sandstormDamage -=
+            sandstormDamage *
+            (ItemConfigs.SMOOTH_ROCK.damageReductionPercent / 100) *
+            nbSmoothRocks
+          pokemon.addSpeed(
+            ItemConfigs.SMOOTH_ROCK.speedPerSecond * nbSmoothRocks,
+            pokemon,
+            0,
+            false
+          )
         }
         if (
           pokemon.types.has(Synergy.GROUND) === false &&
@@ -970,7 +995,11 @@ export default abstract class PokemonState {
       !pokemon.status.burn &&
       !pokemon.simulation.finished
     ) {
-      pokemon.status.triggerBurn(60000, pokemon, pokemon)
+      pokemon.status.triggerBurn(
+        ItemConfigs.FLAME_ORB.burnRefreshDurationSeconds * 1000,
+        pokemon,
+        pokemon
+      )
     }
   }
 
@@ -998,19 +1027,31 @@ export default abstract class PokemonState {
         ? count(pokemon.player.items, Item.DAMP_ROCK)
         : 0
       if (nbDampRocks > 0) {
-        pokemon.addPP(2 * nbDampRocks, pokemon, 0, false)
+        pokemon.addPP(
+          ItemConfigs.DAMP_ROCK.ppPerSecond * nbDampRocks,
+          pokemon,
+          0,
+          false
+        )
       }
     }
 
     if (
       pokemon.simulation.weather === Weather.ZENITH &&
-      Math.floor(pokemon.simulation.room.state.time / 1000) % 2 === 0
+      Math.floor(pokemon.simulation.room.state.time / 1000) %
+        ItemConfigs.SUN_STONE.intervalSeconds ===
+        0
     ) {
       const nbSunStones = pokemon.player
         ? count(pokemon.player.items, Item.SUN_STONE)
         : 0
       if (nbSunStones > 0) {
-        pokemon.handleHeal(5 * nbSunStones, pokemon, 0, false)
+        pokemon.handleHeal(
+          ItemConfigs.SUN_STONE.heal * nbSunStones,
+          pokemon,
+          0,
+          false
+        )
       }
     }
 
@@ -1031,7 +1072,7 @@ export default abstract class PokemonState {
     }
 
     if (pokemon.items.has(Item.METRONOME)) {
-      pokemon.addPP(5, pokemon, 0, false)
+      pokemon.addPP(ItemConfigs.METRONOME.ppPerSecond, pokemon, 0, false)
     }
 
     if (

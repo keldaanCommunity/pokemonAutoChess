@@ -10,6 +10,7 @@ import {
   RarityCost
 } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { ItemConfigs, SYNERGY_GEM_BONUS } from "../../config/game/items"
 import {
   FIRE_ATK_BUFF_PER_SYNERGY_TIER,
   GROUND_ATK_BUFF_PER_SYNERGY_TIER,
@@ -102,7 +103,11 @@ export class MonsterKillEffect extends OnKillEffect {
     this.hpBoosted += lifeBoost
     this.count += 1
     if (attacker.items.has(Item.BERSERK_GENE)) {
-      attacker.status.triggerConfusion(1000, attacker, attacker)
+      attacker.status.triggerConfusion(
+        ItemConfigs.BERSERK_GENE.confusionDurationSeconds * 1000,
+        attacker,
+        attacker
+      )
     }
   }
 }
@@ -580,52 +585,71 @@ export function applyWandEffects(
   let specialDamageFactor = 0
 
   for (const wand of wands) {
-    specialDamageFactor += 0.2
+    specialDamageFactor += ItemConfigs[wand].attackDamagePercent / 100
     switch (wand) {
       case Item.CONFUSE_WAND: {
-        if (chance(0.05, pokemon)) {
-          target.status.triggerConfusion(2000, target, pokemon)
-          target.addSpecialDefense(-3, pokemon, 0, false)
+        const { effectChance, durationSeconds, specialDefenseReduction } =
+          ItemConfigs.CONFUSE_WAND
+        if (chance(effectChance.value / 100, pokemon)) {
+          target.status.triggerConfusion(
+            durationSeconds * 1000,
+            target,
+            pokemon
+          )
+          target.addSpecialDefense(-specialDefenseReduction, pokemon, 0, false)
         }
         break
       }
       case Item.PETRIFY_WAND: {
-        if (chance(0.05, pokemon)) {
-          target.status.triggerLocked(2000, target)
-          target.addDefense(-3, pokemon, 0, false)
+        const { effectChance, durationSeconds, defenseReduction } =
+          ItemConfigs.PETRIFY_WAND
+        if (chance(effectChance.value / 100, pokemon)) {
+          target.status.triggerLocked(durationSeconds * 1000, target)
+          target.addDefense(-defenseReduction, pokemon, 0, false)
         }
         break
       }
       case Item.SLOW_WAND: {
-        if (chance(0.05, pokemon)) {
-          target.status.triggerParalysis(2000, target, pokemon)
-          target.addSpeed(-10, pokemon, 0, false)
+        const { effectChance, durationSeconds, speedReduction } =
+          ItemConfigs.SLOW_WAND
+        if (chance(effectChance.value / 100, pokemon)) {
+          target.status.triggerParalysis(
+            durationSeconds * 1000,
+            target,
+            pokemon
+          )
+          target.addSpeed(-speedReduction, pokemon, 0, false)
         }
         break
       }
       case Item.SLUMBER_WAND: {
-        if (chance(0.05, pokemon)) {
-          target.status.triggerSleep(2000, target)
-          target.addAttack(-3, pokemon, 0, false)
+        const { effectChance, durationSeconds, attackReduction } =
+          ItemConfigs.SLUMBER_WAND
+        if (chance(effectChance.value / 100, pokemon)) {
+          target.status.triggerSleep(durationSeconds * 1000, target)
+          target.addAttack(-attackReduction, pokemon, 0, false)
         }
         break
       }
       case Item.BLAST_WAND: {
         if (crit) {
-          specialDamageFactor += 0.3
+          specialDamageFactor += ItemConfigs.BLAST_WAND.critBonusPercent / 100
           pokemon.broadcastAbility({ skill: "PUFF_PINK" })
         }
         break
       }
       case Item.SPIRIT_WAND: {
-        specialDamageFactor += pokemon.count.ult * 0.05
-        if (chance(0.2, pokemon)) {
-          pokemon.addPP(5, pokemon, 0, false)
+        const { damagePerCastPercent, ppChance, pp } = ItemConfigs.SPIRIT_WAND
+        specialDamageFactor += pokemon.count.ult * (damagePerCastPercent / 100)
+        if (chance(ppChance.value / 100, pokemon)) {
+          pokemon.addPP(pp, pokemon, 0, false)
         }
         break
       }
       case Item.GUIDING_WAND: {
-        if (chance(0.5, pokemon)) {
+        if (
+          chance(ItemConfigs.GUIDING_WAND.effectChance.value / 100, pokemon)
+        ) {
           const lowestHpAdjacentEnemy = board
             .getAdjacentCells(target.positionX, target.positionY)
             .filter((cell) => cell.value && cell.value.team !== pokemon.team)
@@ -652,11 +676,14 @@ export function applyWandEffects(
         const adjacentEnemies = board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
           .filter((cell) => cell.value && cell.value.team !== pokemon.team)
-        specialDamageFactor += 0.05 * adjacentEnemies.length
+        specialDamageFactor +=
+          (ItemConfigs.SURROUND_WAND.damagePerEnemyPercent / 100) *
+          adjacentEnemies.length
         break
       }
       case Item.TWO_EDGED_WAND: {
-        specialDamageFactor += 0.3
+        specialDamageFactor +=
+          ItemConfigs.TWO_EDGED_WAND.bonusDamagePercent / 100
         break
       }
     }
@@ -676,7 +703,9 @@ export function applyWandEffects(
   for (const wand of wands) {
     switch (wand) {
       case Item.HP_SWAP_WAND: {
-        if (chance(0.2, pokemon)) {
+        if (
+          chance(ItemConfigs.HP_SWAP_WAND.effectChance.value / 100, pokemon)
+        ) {
           target.addMaxHP(-Math.floor(takenDamage), pokemon, 0, false)
           if (target.items.has(Item.TWIST_BAND) === false) {
             pokemon.addMaxHP(Math.floor(takenDamage), pokemon, 0, false)
@@ -685,7 +714,9 @@ export function applyWandEffects(
         break
       }
       case Item.SURROUND_WAND: {
-        if (chance(0.1, pokemon)) {
+        if (
+          chance(ItemConfigs.SURROUND_WAND.effectChance.value / 100, pokemon)
+        ) {
           const adjacentEnemies = board
             .getAdjacentCells(pokemon.positionX, pokemon.positionY)
             .filter(
@@ -716,7 +747,10 @@ export function applyWandEffects(
       }
       case Item.TWO_EDGED_WAND: {
         if (
-          !chance(0.8, pokemon) &&
+          !chance(
+            ItemConfigs.TWO_EDGED_WAND.preventRecoilChance.value / 100,
+            pokemon
+          ) &&
           pokemon.items.has(Item.PROTECTIVE_PADS) === false
         ) {
           // self-inflict the same damage
@@ -733,7 +767,10 @@ export function applyWandEffects(
         break
       }
       case Item.WARP_WAND: {
-        if (chance(0.05, pokemon) && target.hp > 0) {
+        if (
+          chance(ItemConfigs.WARP_WAND.effectChance.value / 100, pokemon) &&
+          target.hp > 0
+        ) {
           const teleportationCell = board.getTeleportationCell(
             target.positionX,
             target.positionY,
@@ -756,7 +793,10 @@ export function applyWandEffects(
         break
       }
       case Item.SWITCHER_WAND: {
-        if (chance(0.05, pokemon) && target.hp > 0) {
+        if (
+          chance(ItemConfigs.SWITCHER_WAND.effectChance.value / 100, pokemon) &&
+          target.hp > 0
+        ) {
           const farthestTarget = pokemon.state.getFarthestTarget(pokemon, board)
           if (farthestTarget) {
             pokemon.broadcastAbility({
@@ -780,7 +820,9 @@ export function applyWandEffects(
         break
       }
       case Item.WHIRLWIND_WAND: {
-        if (chance(0.05, pokemon)) {
+        if (
+          chance(ItemConfigs.WHIRLWIND_WAND.effectChance.value / 100, pokemon)
+        ) {
           pokemon.broadcastAbility({ skill: "WHIRLWIND_WAND" })
           effectInLine(board, pokemon, target, (cell) => {
             if (cell.value && cell.value.team !== pokemon.team) {
@@ -788,7 +830,7 @@ export function applyWandEffects(
                 cell.value.positionX,
                 cell.value.positionY,
                 cell.value.team,
-                2
+                ItemConfigs.WHIRLWIND_WAND.throwDistance
               )
               if (freeCellInTheBack) {
                 cell.value.moveTo(
@@ -804,7 +846,7 @@ export function applyWandEffects(
         break
       }
       case Item.TUNNEL_WAND: {
-        if (chance(0.05, pokemon)) {
+        if (chance(ItemConfigs.TUNNEL_WAND.effectChance.value / 100, pokemon)) {
           pokemon.broadcastAbility({ skill: "FAIRY_TUNNEL" })
           effectInLine(board, pokemon, target, (cell) => {
             if (
@@ -846,12 +888,17 @@ export const pounceWandEffect = new OnAttackReceivedEffect(
     if (
       pokemon.fairySplashCooldown === 0 &&
       attacker &&
-      (crit || chance(0.1, pokemon))
+      (crit ||
+        chance(ItemConfigs.POUNCE_WAND.effectChance.value / 100, pokemon))
     ) {
-      const shockDamageFactor = 0.3
-      const shockDamage = min(1)(Math.round(shockDamageFactor * totalDamage))
+      const { retaliationPercent, minimumDamage, cooldownMs } =
+        ItemConfigs.POUNCE_WAND
+      const shockDamageFactor = retaliationPercent / 100
+      const shockDamage = min(minimumDamage)(
+        Math.round(shockDamageFactor * totalDamage)
+      )
       pokemon.count.fairyCritCount++
-      pokemon.fairySplashCooldown = 250
+      pokemon.fairySplashCooldown = cooldownMs
 
       const distance = distanceC(
         pokemon.positionX,
@@ -961,14 +1008,21 @@ export const cloneBugs = ({
           )
           if (clonedEntity) {
             clonedEntity.addMaxHP(
-              -0.5 * pokemonCloned.maxHP,
+              -(ItemConfigs.SHED_SHELL.cloneMaxHpReductionPercent / 100) *
+                pokemonCloned.maxHP,
               clonedEntity,
               0,
               false
             )
           }
 
-          cloneEntity.addMaxHP(-0.5 * clone.maxHP, cloneEntity, 0, false)
+          cloneEntity.addMaxHP(
+            -(ItemConfigs.SHED_SHELL.cloneMaxHpReductionPercent / 100) *
+              clone.maxHP,
+            cloneEntity,
+            0,
+            false
+          )
         }
       }
     }
@@ -1007,9 +1061,16 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
             isReachingMaxDepth &&
             !buriedItem
           ) {
-            if (chance(0.1, pokemon)) {
+            if (
+              chance(
+                ItemConfigs.EXPLORER_KIT.bigNuggetChance.value / 100,
+                pokemon
+              )
+            ) {
               buriedItem = Item.BIG_NUGGET
-            } else if (chance(0.5, pokemon)) {
+            } else if (
+              chance(ItemConfigs.EXPLORER_KIT.nuggetChance.value / 100, pokemon)
+            ) {
               buriedItem = Item.NUGGET
             } else {
               buriedItem = Item.COIN
@@ -1041,18 +1102,23 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
           if (buriedItem) {
             room.clock.setTimeout(() => {
               if (buriedItem === Item.COIN) {
-                player.addMoney(1, true, null)
+                player.addMoney(ItemConfigs.COIN.gold, true, null)
               } else if (buriedItem === Item.NUGGET) {
-                player.addMoney(3, true, null)
+                player.addMoney(ItemConfigs.NUGGET.gold, true, null)
               } else if (buriedItem === Item.BIG_NUGGET) {
-                player.addMoney(10, true, null)
+                player.addMoney(ItemConfigs.BIG_NUGGET.gold, true, null)
               } else if (buriedItem === Item.TREASURE_BOX) {
-                player.items.push(...pickNRandomIn(ItemComponents, 2))
+                player.items.push(
+                  ...pickNRandomIn(
+                    ItemComponents,
+                    ItemConfigs.TREASURE_BOX.itemCount
+                  )
+                )
               } else if (isIn(SynergyGems, buriedItem)) {
                 const type = SynergyGivenByGem[buriedItem]
                 player.bonusSynergies.set(
                   type,
-                  (player.bonusSynergies.get(type) ?? 0) + 1
+                  (player.bonusSynergies.get(type) ?? 0) + SYNERGY_GEM_BONUS
                 )
                 player.items.push(buriedItem)
                 player.updateSynergies()

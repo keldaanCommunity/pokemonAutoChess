@@ -15,6 +15,7 @@ import {
   TownEncounterSellPrice,
   TownEncountersByStage
 } from "../config"
+import { ItemConfigs, SYNERGY_GEM_BONUS } from "../config/game/items"
 import { FloatingItem } from "../models/colyseus-models/floating-item"
 import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
@@ -876,12 +877,12 @@ export class MiniGame {
             giveRandomEgg(player, false)
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
-            player.addMoney(5, true, null)
+            player.addMoney(ItemConfigs.GIMMIGHOUL_COIN.gold, true, null)
           } else if (isIn(SynergyGems, item.name)) {
             const type = SynergyGivenByGem[item.name]
             player.bonusSynergies.set(
               type,
-              (player.bonusSynergies.get(type) ?? 0) + 1
+              (player.bonusSynergies.get(type) ?? 0) + SYNERGY_GEM_BONUS
             )
             player.items.push(item.name)
             player.updateSynergies()

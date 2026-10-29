@@ -9,6 +9,7 @@ import {
   getRegionTint,
   ItemStats
 } from "../../../../config"
+import { ItemConfigs } from "../../../../config/game/items"
 import {
   FLOWER_POTS_POSITIONS_BLUE,
   FLOWER_POTS_POSITIONS_RED,
@@ -855,11 +856,15 @@ export default class PokemonSprite extends DraggableObject {
               itemSprite.destroy()
               shinyEffect.destroy()
               if (buriedItem === Item.COIN) {
-                g.displayMoneyGain(this.x, this.y - 70, 1)
+                g.displayMoneyGain(this.x, this.y - 70, ItemConfigs.COIN.gold)
               } else if (buriedItem === Item.NUGGET) {
-                g.displayMoneyGain(this.x, this.y - 70, 3)
+                g.displayMoneyGain(this.x, this.y - 70, ItemConfigs.NUGGET.gold)
               } else if (buriedItem === Item.BIG_NUGGET) {
-                g.displayMoneyGain(this.x, this.y - 70, 10)
+                g.displayMoneyGain(
+                  this.x,
+                  this.y - 70,
+                  ItemConfigs.BIG_NUGGET.gold
+                )
               }
             }, 1000)
           }

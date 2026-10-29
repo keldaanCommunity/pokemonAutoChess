@@ -23,6 +23,8 @@ import {
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { ItemConfigs } from "../../config/game/items"
+import { INTEREST_GOLD_INTERVAL } from "../../config/game/shop"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import { getAltFormForPlayer } from "../../core/alt-form-logic"
@@ -1049,7 +1051,8 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
           p.items.has(Item.REPEAT_BALL)
         )
         if (repeatBallHolders.length > 0)
-          player.shopFreeRolls += repeatBallHolders.length
+          player.shopFreeRolls +=
+            ItemConfigs.REPEAT_BALL.freeRerolls * repeatBallHolders.length
       }
       this.state.shop.assignShop(player, true, this.state)
     }
@@ -1423,10 +1426,13 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         const nbRedScales = player.items.filter(
           (item) => item === Item.RED_SCALE
         ).length
-        player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
+        player.maxInterest =
+          5 +
+          nbGimmighoulCoins * ItemConfigs.GIMMIGHOUL_COIN.maxInterestBonus -
+          nbAmuletCoins * ItemConfigs.AMULET_COIN.maxInterestReduction
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(
-            Math.floor(player.money / 10)
+            Math.floor(player.money / INTEREST_GOLD_INTERVAL)
           )
           income += player.interest
         }
@@ -1434,7 +1440,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           income += max(5)(player.streak)
         }
         income += 5
-        income += nbRedScales * 5
+        income += nbRedScales * ItemConfigs.RED_SCALE.income
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1741,10 +1747,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         if (p.pokemon.name === Pkm.PIKACHU) {
           p.pokemon = player.transformPokemon(p.pokemon, Pkm.PIKACHU_LIBRE)
         }
-        p.pokemon.hp += [50, 100, 150][p.ticketLevel - 1] ?? 0
-        p.pokemon.maxHP += [50, 100, 150][p.ticketLevel - 1] ?? 0
-        p.pokemon.atk += [5, 10, 15][p.ticketLevel - 1] ?? 0
-        p.pokemon.ap += [15, 30, 45][p.ticketLevel - 1] ?? 0
+        const tickets = [
+          ItemConfigs.BRONZE_DOJO_TICKET,
+          ItemConfigs.SILVER_DOJO_TICKET,
+          ItemConfigs.GOLD_DOJO_TICKET
+        ]
+        const rewards = tickets[p.ticketLevel - 1]
+        p.pokemon.hp += rewards?.maxHp ?? 0
+        p.pokemon.maxHP += rewards?.maxHp ?? 0
+        p.pokemon.atk += rewards?.attack ?? 0
+        p.pokemon.ap += rewards?.abilityPower ?? 0
         p.pokemon.positionX = substitute.positionX
         p.pokemon.positionY = substitute.positionY
         player.board.delete(substitute.id)

@@ -1,5 +1,6 @@
 import type { MapSchema } from "@colyseus/schema"
 import { WeatherThreshold } from "../config"
+import { WEATHER_ROCK_SCORE } from "../config/game/items"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import { WeatherByWeatherRocks } from "../types/enum/Item"
@@ -44,7 +45,7 @@ export function getWeather(
         const weatherBoosted = WeatherByWeatherRocks.get(item)!
         boardWeatherScore.set(
           weatherBoosted,
-          (boardWeatherScore.get(weatherBoosted) ?? 0) + 3
+          (boardWeatherScore.get(weatherBoosted) ?? 0) + WEATHER_ROCK_SCORE
         )
       }
     })

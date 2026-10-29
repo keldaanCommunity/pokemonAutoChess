@@ -1,4 +1,5 @@
 import { FAIRY_WANDS_BY_SYNERGY_LEVEL } from "../config"
+import { TM_MAX_PP } from "../config/game/items"
 import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
@@ -94,7 +95,7 @@ export default class Bot {
                 return false // prevent equipping TMs on non-human pokemon
               pkm.tm = ability
               pkm.skill = ability
-              pkm.maxPP = 100
+              pkm.maxPP = TM_MAX_PP
             } else if (!pkm.items.has(item)) {
               pkm.items.add(item)
 
