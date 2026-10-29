@@ -1,3 +1,4 @@
+import { TM_MAX_PP } from "../../config/game/items"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -88,6 +89,6 @@ export function carryOverPermanentStats(
     } else {
       pokemonEvolved.skill = pokemonEvolved.tm
     }
-    pokemonEvolved.maxPP = 100
+    pokemonEvolved.maxPP = TM_MAX_PP
   }
 }

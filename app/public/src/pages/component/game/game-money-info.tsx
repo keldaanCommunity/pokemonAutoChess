@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
+import { INTEREST_GOLD_INTERVAL } from "../../../../../config/game/shop"
 import { BattleResult } from "../../../../../types/enum/Game"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { max } from "../../../../../utils/number"
@@ -24,7 +25,8 @@ export function GameMoneyInfo() {
         <Money
           value={spectatedPlayer.money}
           className={cc({
-            "is-max": spectatedPlayer.money >= maxInterest * 10
+            "is-max":
+              spectatedPlayer.money >= maxInterest * INTEREST_GOLD_INTERVAL
           })}
         />
       </div>
@@ -65,7 +67,8 @@ export function GameMoneyDetail() {
             {addIconsToDescription(
               t("shop.additional_income_hint", {
                 maxInterest,
-                maxInterestGolds: maxInterest * 10
+                maxInterestGolds: maxInterest * INTEREST_GOLD_INTERVAL,
+                interestGoldInterval: INTEREST_GOLD_INTERVAL
               })
             )}
           </p>

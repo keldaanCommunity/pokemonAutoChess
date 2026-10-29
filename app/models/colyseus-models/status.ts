@@ -1,6 +1,7 @@
 import { Schema, type } from "@colyseus/schema"
 import { CC_COOLDOWN, FIGHTING_PHASE_DURATION, ItemStats } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { ItemConfigs } from "../../config/game/items"
 import { StatusConfigs } from "../../config/game/statuses"
 import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
@@ -439,7 +440,7 @@ export default class Status extends Schema implements IStatus {
         pkm.addDefense(20, pkm, 0, false)
       }
       if (pkm.items.has(Item.MAGMARIZER) && !alreadyBurning) {
-        pkm.addSpeed(30, pkm, 0, false)
+        pkm.addSpeed(ItemConfigs.MAGMARIZER.burnSpeed, pkm, 0, false)
       }
 
       if (pkm.items.has(Item.RAWST_BERRY)) {
@@ -458,14 +459,18 @@ export default class Status extends Schema implements IStatus {
           ? count(pkm.player.items, Item.HEAT_ROCK)
           : 0
         if (nbHeatRocks > 0) {
-          burnDamage *= 1 - 0.2 * nbHeatRocks
+          burnDamage *=
+            1 -
+            (ItemConfigs.HEAT_ROCK.burnDamageReductionPercent / 100) *
+              nbHeatRocks
         }
       } else if (pkm.simulation.weather === Weather.RAIN) {
         burnDamage *= 1 - WeatherConfigs.RAIN.damageReductionPercent / 100
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
-        burnDamage *= 0.5
+        burnDamage *=
+          (100 - ItemConfigs.ASSAULT_VEST.damageReductionPercent) / 100
       }
 
       if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
@@ -487,7 +492,7 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.items.has(Item.COOKING_POT)) {
-        pkm.addSpeed(10, pkm, 0, false)
+        pkm.addSpeed(ItemConfigs.COOKING_POT.speedPerBurnTick, pkm, 0, false)
       }
 
       burnDamage = Math.round(burnDamage)
@@ -529,7 +534,7 @@ export default class Status extends Schema implements IStatus {
       pkm.addDefense(-20, pkm, 0, false)
     }
     if (pkm.items.has(Item.MAGMARIZER)) {
-      pkm.addSpeed(-30, pkm, 0, false)
+      pkm.addSpeed(-ItemConfigs.MAGMARIZER.burnSpeed, pkm, 0, false)
     }
   }
 
@@ -649,7 +654,8 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.items.has(Item.ASSAULT_VEST)) {
-        poisonDamage *= 0.5
+        poisonDamage *=
+          (100 - ItemConfigs.ASSAULT_VEST.damageReductionPercent) / 100
       }
       if (pkm.passive === Passive.TOXIC_BOOST) {
         poisonDamage *= 0.5
@@ -736,7 +742,8 @@ export default class Status extends Schema implements IStatus {
           ? count(pkm.player.items, Item.ICY_ROCK)
           : 0
         if (nbIcyRocks > 0) {
-          duration *= 1 - 0.2 * nbIcyRocks
+          duration *=
+            1 - (ItemConfigs.ICY_ROCK.freezeReductionPercent / 100) * nbIcyRocks
         }
       } else if (pkm.simulation.weather === Weather.DROUGHT) {
         duration *=
@@ -958,7 +965,10 @@ export default class Status extends Schema implements IStatus {
           ? count(pkm.player.items, Item.ELECTRIC_QUARTZ)
           : 0
         if (nbElectricQuartz > 0) {
-          duration *= 1 - 0.2 * nbElectricQuartz
+          duration *=
+            1 -
+            (ItemConfigs.ELECTRIC_QUARTZ.paralysisReductionPercent / 100) *
+              nbElectricQuartz
         }
       }
 
@@ -1112,7 +1122,8 @@ export default class Status extends Schema implements IStatus {
           const nbOddStones = pokemon.player
             ? count(pokemon.player.items, Item.ODD_KEYSTONE)
             : 0
-          timer += nbOddStones * 1000
+          timer +=
+            nbOddStones * ItemConfigs.ODD_KEYSTONE.curseDelaySeconds * 1000
         }
 
         this.curseCooldown = timer
@@ -1215,7 +1226,7 @@ export default class Status extends Schema implements IStatus {
         pokemon.types.has(Synergy.FAIRY) &&
         pokemon.baseRange > 1
       ) {
-        range += 1
+        range += ItemConfigs.LONG_WAND.range
       }
       pokemon.range = range
 
@@ -1339,7 +1350,12 @@ export default class Status extends Schema implements IStatus {
       ? count(pkm.player.items, Item.ODD_KEYSTONE)
       : 0
     if (nbOddStones > 0) {
-      duration = Math.round(duration * (1 - 0.1 * nbOddStones))
+      duration = Math.round(
+        duration *
+          (1 -
+            (ItemConfigs.ODD_KEYSTONE.statusReductionPercent / 100) *
+              nbOddStones)
+      )
     }
 
     return duration

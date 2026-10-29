@@ -8,6 +8,7 @@ import {
   ON_ATTACK_MANA
 } from "../config"
 import { EffectConfigs } from "../config/game/effects"
+import { ItemConfigs } from "../config/game/items"
 import { StatusConfigs } from "../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
 import Count from "../models/colyseus-models/count"
@@ -428,7 +429,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           const nbBlackAugurite = this.player
             ? count(this.player.items, Item.BLACK_AUGURITE)
             : 0
-          critReductionFactor -= 0.1 * nbBlackAugurite
+          critReductionFactor -=
+            (ItemConfigs.BLACK_AUGURITE.critDamageReductionPercent / 100) *
+            nbBlackAugurite
         }
 
         critReductionFactor = min(0)(critReductionFactor)
@@ -633,7 +636,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     permanent = false
   ) {
     if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addAttack(Math.round(0.2 * value), caster, 0, false) // AP is gained as Attack instead
+      this.addAttack(
+        Math.round(
+          (1 / ItemConfigs.NULLIFY_BANDANNA.abilityPowerPerAttack) * value
+        ),
+        caster,
+        0,
+        false
+      ) // AP is gained as Attack instead
       return
     }
 
@@ -1052,7 +1062,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           ? count(this.player.items, Item.ICY_ROCK)
           : 0
 
-      const chanceToFreeze = freezeChance.value / 100 + nbIcyRocks * 0.05
+      const chanceToFreeze =
+        freezeChance.value / 100 +
+        nbIcyRocks * (ItemConfigs.ICY_ROCK.freezeChance.value / 100)
       if (chance(chanceToFreeze, this)) {
         target.status.triggerFreeze(freezeDurationSeconds * 1000, target, this)
       }
@@ -1085,7 +1097,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
       if (target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
-        poisonChance -= nbSmellyClays * 0.15
+        poisonChance -=
+          nbSmellyClays *
+          (ItemConfigs.SMELLY_CLAY.poisonChanceReductionPercent / 100)
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
         target.status.triggerPoison(SynergyConfigs.POISON.poisonDurationSeconds * 1000, target, this)
@@ -1101,9 +1115,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.simulation.weather === Weather.ZENITH && this.player) {
       const nbSunStones = count(this.player.items, Item.SUN_STONE)
-      const burnChance = nbSunStones * 0.05
+      const burnChance =
+        nbSunStones * (ItemConfigs.SUN_STONE.burnChancePercent.value / 100)
       if (chance(burnChance, this)) {
-        target.status.triggerBurn(3000, target, this)
+        target.status.triggerBurn(
+          ItemConfigs.SUN_STONE.burnDurationSeconds * 1000,
+          target,
+          this
+        )
       }
     }
 
@@ -1191,7 +1210,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const nbBloodStones = count(this.player.items, Item.BLOOD_STONE)
       if (nbBloodStones > 0) {
-        this.handleHeal(Math.ceil(0.2 * nbBloodStones * damage), this, 0, false)
+        this.handleHeal(
+          Math.ceil(
+            (ItemConfigs.BLOOD_STONE.woundLifestealPercent / 100) *
+              nbBloodStones *
+              damage
+          ),
+          this,
+          0,
+          false
+        )
       }
     }
   }
@@ -1218,7 +1246,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const berry = schemaValues(this.items).find((item) =>
       Berries.includes(item)
     )
-    if (berry && this.hp > 0 && this.hp < 0.5 * this.maxHP) {
+    if (
+      berry &&
+      this.hp > 0 &&
+      this.hp < (ItemConfigs[berry].hpThresholdPercent / 100) * this.maxHP
+    ) {
       this.eatBerry(berry)
     }
 
@@ -1522,7 +1554,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
             ]
       }
 
-      const spawns = pickNRandomIn(koAllies, 3)
+      const spawns = pickNRandomIn(koAllies, ItemConfigs.SACRED_ASH.allyCount)
       spawns.forEach((spawn) => {
         const coord = this.simulation.getClosestFreeCellToPokemonEntity(this)
         if (!coord) return
@@ -1602,63 +1634,87 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     switch (berry) {
       case Item.AGUAV_BERRY:
-        heal(min(50)(0.5 * this.maxHP))
-        this.status.triggerConfusion(3000, this, this)
+        heal(
+          min(ItemConfigs.AGUAV_BERRY.minimumHeal)(
+            (ItemConfigs.AGUAV_BERRY.healPercent / 100) * this.maxHP
+          )
+        )
+        this.status.triggerConfusion(
+          ItemConfigs.AGUAV_BERRY.durationSeconds * 1000,
+          this,
+          this
+        )
         break
       case Item.APICOT_BERRY:
-        heal(50)
-        this.addSpecialDefense(20, this, 0, false)
+        heal(ItemConfigs.APICOT_BERRY.heal)
+        this.addSpecialDefense(
+          ItemConfigs.APICOT_BERRY.specialDefense,
+          this,
+          0,
+          false
+        )
         break
       case Item.ASPEAR_BERRY:
         this.status.freeze = false
         this.status.freezeCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_FREEZE)
-        heal(50)
-        this.addSpeed(15, this, 0, false)
+        heal(ItemConfigs.ASPEAR_BERRY.heal)
+        this.addSpeed(ItemConfigs.ASPEAR_BERRY.speed, this, 0, false)
         break
       case Item.CHERI_BERRY:
         this.status.healParalysis(this)
         this.effects.add(EffectEnum.IMMUNITY_PARALYSIS)
-        heal(50)
-        this.addAttack(10, this, 0, false)
+        heal(ItemConfigs.CHERI_BERRY.heal)
+        this.addAttack(ItemConfigs.CHERI_BERRY.attack, this, 0, false)
         break
       case Item.CHESTO_BERRY:
         this.status.sleepCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_SLEEP)
-        heal(50)
-        this.addAbilityPower(50, this, 0, false)
+        heal(ItemConfigs.CHESTO_BERRY.heal)
+        this.addAbilityPower(
+          ItemConfigs.CHESTO_BERRY.abilityPower,
+          this,
+          0,
+          false
+        )
         break
       case Item.GANLON_BERRY:
-        heal(50)
-        this.addDefense(20, this, 0, false)
+        heal(ItemConfigs.GANLON_BERRY.heal)
+        this.addDefense(ItemConfigs.GANLON_BERRY.defense, this, 0, false)
         break
       case Item.JABOCA_BERRY:
-        heal(50)
-        this.status.triggerSpikeArmor(10000)
+        heal(ItemConfigs.JABOCA_BERRY.heal)
+        this.status.triggerSpikeArmor(
+          ItemConfigs.JABOCA_BERRY.durationSeconds * 1000
+        )
         break
       case Item.LANSAT_BERRY:
-        heal(50)
-        this.addCritChance(50, this, 0, false)
+        heal(ItemConfigs.LANSAT_BERRY.heal)
+        this.addCritChance(ItemConfigs.LANSAT_BERRY.critChance, this, 0, false)
         break
       case Item.LEPPA_BERRY:
-        heal(50)
-        this.addPP(50, this, 0, false)
+        heal(ItemConfigs.LEPPA_BERRY.heal)
+        this.addPP(ItemConfigs.LEPPA_BERRY.pp, this, 0, false)
         break
       case Item.LIECHI_BERRY:
-        heal(50)
-        this.addAttack(15, this, 0, false)
+        heal(ItemConfigs.LIECHI_BERRY.heal)
+        this.addAttack(ItemConfigs.LIECHI_BERRY.attack, this, 0, false)
         break
       case Item.LUM_BERRY:
-        heal(50)
+        heal(ItemConfigs.LUM_BERRY.heal)
         this.status.clearNegativeStatus(this, this)
-        this.status.triggerRuneProtect(5000, this, this)
+        this.status.triggerRuneProtect(
+          ItemConfigs.LUM_BERRY.durationSeconds * 1000,
+          this,
+          this
+        )
         break
       case Item.ORAN_BERRY:
-        heal(50)
-        this.addShield(80, this, 0, false)
+        heal(ItemConfigs.ORAN_BERRY.heal)
+        this.addShield(ItemConfigs.ORAN_BERRY.shield, this, 0, false)
         break
       case Item.PECHA_BERRY:
-        heal(100)
+        heal(ItemConfigs.PECHA_BERRY.heal)
         this.status.poisonOrigin = null
         this.status.poisonStacks = 0
         this.status.poisonDamageCooldown = 0
@@ -1668,61 +1724,89 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         this.status.confusion = false
         this.status.confusionCooldown = 0
         this.effects.add(EffectEnum.IMMUNITY_CONFUSION)
-        heal(50)
-        this.addSpecialDefense(10, this, 0, false)
+        heal(ItemConfigs.PERSIM_BERRY.heal)
+        this.addSpecialDefense(
+          ItemConfigs.PERSIM_BERRY.specialDefense,
+          this,
+          0,
+          false
+        )
         break
       case Item.PETAYA_BERRY:
-        heal(50)
-        this.addAbilityPower(80, this, 0, false)
+        heal(ItemConfigs.PETAYA_BERRY.heal)
+        this.addAbilityPower(
+          ItemConfigs.PETAYA_BERRY.abilityPower,
+          this,
+          0,
+          false
+        )
         break
       case Item.ROWAP_BERRY:
-        heal(50)
-        this.status.triggerMagicBounce(10000)
+        heal(ItemConfigs.ROWAP_BERRY.heal)
+        this.status.triggerMagicBounce(
+          ItemConfigs.ROWAP_BERRY.durationSeconds * 1000
+        )
         break
       case Item.RAWST_BERRY:
         this.status.healBurn(this)
         this.effects.add(EffectEnum.IMMUNITY_BURN)
-        heal(50)
-        this.addDefense(10, this, 0, false)
+        heal(ItemConfigs.RAWST_BERRY.heal)
+        this.addDefense(ItemConfigs.RAWST_BERRY.defense, this, 0, false)
         break
       case Item.SALAC_BERRY:
-        heal(50)
-        this.addSpeed(50, this, 0, false)
+        heal(ItemConfigs.SALAC_BERRY.heal)
+        this.addSpeed(ItemConfigs.SALAC_BERRY.speed, this, 0, false)
         break
       case Item.SITRUS_BERRY:
         this.effects.add(EffectEnum.BUFF_HEAL_RECEIVED)
-        heal(100)
+        heal(ItemConfigs.SITRUS_BERRY.heal)
         break
       case Item.BERRY_JUICE:
         heal(this.maxHP - this.hp)
         break
       case Item.BABIRI_BERRY:
-        heal(50)
-        this.status.triggerProtect(2000)
+        heal(ItemConfigs.BABIRI_BERRY.heal)
+        this.status.triggerProtect(
+          ItemConfigs.BABIRI_BERRY.durationSeconds * 1000
+        )
         break
       case Item.NANAB_BERRY:
-        heal(50)
+        heal(ItemConfigs.NANAB_BERRY.heal)
         if (this.player && !this.simulation.isGhostBattle) {
-          this.player.addMoney(1, true, this)
-          this.count.moneyCount += 1
+          this.player.addMoney(ItemConfigs.NANAB_BERRY.gold, true, this)
+          this.count.moneyCount += ItemConfigs.NANAB_BERRY.gold
         }
         break
       case Item.GOLDEN_NANAB_BERRY:
-        heal(min(50)(0.5 * this.maxHP))
+        heal(
+          min(ItemConfigs.GOLDEN_NANAB_BERRY.minimumHeal)(
+            (ItemConfigs.GOLDEN_NANAB_BERRY.healPercent / 100) * this.maxHP
+          )
+        )
         if (this.player && !this.simulation.isGhostBattle) {
-          this.player.addMoney(5, true, this)
-          this.count.moneyCount += 5
+          this.player.addMoney(ItemConfigs.GOLDEN_NANAB_BERRY.gold, true, this)
+          this.count.moneyCount += ItemConfigs.GOLDEN_NANAB_BERRY.gold
         }
         break
       case Item.GOLDEN_RAZZ_BERRY:
-        heal(min(50)(0.5 * this.maxHP))
+        heal(
+          min(ItemConfigs.GOLDEN_RAZZ_BERRY.minimumHeal)(
+            (ItemConfigs.GOLDEN_RAZZ_BERRY.healPercent / 100) * this.maxHP
+          )
+        )
         if (this.player && !this.simulation.isGhostBattle)
-          this.player.shopFreeRolls += 6
+          this.player.shopFreeRolls += ItemConfigs.GOLDEN_RAZZ_BERRY.freeRerolls
         break
       case Item.GOLDEN_PINAP_BERRY:
-        heal(min(50)(0.5 * this.maxHP))
+        heal(
+          min(ItemConfigs.GOLDEN_PINAP_BERRY.minimumHeal)(
+            (ItemConfigs.GOLDEN_PINAP_BERRY.healPercent / 100) * this.maxHP
+          )
+        )
         if (this.player && !this.simulation.isGhostBattle)
-          this.player.items.push(...pickNRandomIn(Sweets, 3))
+          this.player.items.push(
+            ...pickNRandomIn(Sweets, ItemConfigs.GOLDEN_PINAP_BERRY.sweets)
+          )
         break
     }
 
@@ -1740,7 +1824,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     }
 
     if (this.effects.has(EffectEnum.BERRY_JUICE)) {
-      this.addShield(100, this, 0, false)
+      this.addShield(ItemConfigs.BERRY_JUICE.shield, this, 0, false)
     }
 
     if (this.effects.has(EffectEnum.OVERGROW)) {
@@ -1874,7 +1958,11 @@ function applyBigEaterBeltStatBuff(
     value > 0 ||
     (value < 0 && caster !== "environment" && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
-    value = roundToNDigits(value * 1.25, nbDigits, "down")
+    value = roundToNDigits(
+      value * (1 + ItemConfigs.BIG_EATER_BELT.statBonusPercent / 100),
+      nbDigits,
+      "down"
+    )
   }
   return value
 }

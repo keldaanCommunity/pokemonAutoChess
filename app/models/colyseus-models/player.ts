@@ -8,6 +8,7 @@ import {
   SynergyTiersThresholds
 } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { ItemConfigs, MISSION_ORDER_REWARD_GOLD } from "../../config/game/items"
 import {
   NB_DISHES_PER_GOURMET_SYNERGY,
   NB_HATS_PER_GOURMET_SYNERGY,
@@ -297,7 +298,7 @@ export default class Player extends Schema implements IPlayer {
   addExperience(value: number): number {
     const xpActuallyGained = this.experienceManager.addExperience(value)
     if (
-      this.experienceManager.level >= 9 &&
+      this.experienceManager.level >= ItemConfigs.MISSION_ORDER_BLUE.level &&
       this.items.includes(Item.MISSION_ORDER_BLUE)
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_BLUE)
@@ -321,7 +322,8 @@ export default class Player extends Schema implements IPlayer {
       }
     })
     if (
-      this.gameStats.totalMoneyEarned >= 200 &&
+      this.gameStats.totalMoneyEarned >=
+        ItemConfigs.MISSION_ORDER_GOLD.earnedGold &&
       this.items.includes(Item.MISSION_ORDER_GOLD)
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GOLD)
@@ -475,14 +477,17 @@ export default class Player extends Schema implements IPlayer {
 
     if (
       this.items.includes(Item.MISSION_ORDER_GREEN) &&
-      this.synergies.countActiveSynergies() >= 8
+      this.synergies.countActiveSynergies() >=
+        ItemConfigs.MISSION_ORDER_GREEN.activeSynergies
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_GREEN)
     }
 
     if (
       this.items.includes(Item.MISSION_ORDER_PINK) &&
-      schemaValues(this.board).filter((p) => p.stars >= 3).length >= 4
+      schemaValues(this.board).filter(
+        (p) => p.stars >= ItemConfigs.MISSION_ORDER_PINK.stars
+      ).length >= ItemConfigs.MISSION_ORDER_PINK.count
     ) {
       this.completeMissionOrder(Item.MISSION_ORDER_PINK)
     }
@@ -1053,7 +1058,11 @@ export default class Player extends Schema implements IPlayer {
         this.items.filter((i) => i === Item.RICH_MULCH).length +
         this.flowerPots.reduce((acc, pot) => acc + pot.stars, 0) -
         8
-      this.items.push(mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH)
+      this.items.push(
+        mulchCollected >= ItemConfigs.AMAZE_MULCH.richMulchRequired
+          ? Item.AMAZE_MULCH
+          : Item.RICH_MULCH
+      )
     }
   }
 
@@ -1086,15 +1095,15 @@ export default class Player extends Schema implements IPlayer {
       behavior: WandererBehavior.SPECTATE
     })
     setTimeout(() => {
-      this.addMoney(30, true, null)
+      this.addMoney(MISSION_ORDER_REWARD_GOLD, true, null)
     }, 7000)
   }
 
   chargeCellBattery(amount: number) {
     this.cellBattery += amount
-    if (this.cellBattery >= 100) {
+    if (this.cellBattery >= ItemConfigs.CELL_BATTERY.chargeRequired) {
       this.items.push(Item.CELL_BATTERY)
-      this.cellBattery %= 100
+      this.cellBattery %= ItemConfigs.CELL_BATTERY.chargeRequired
     }
   }
 

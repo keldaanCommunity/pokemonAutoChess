@@ -1,6 +1,7 @@
 import { SetSchema } from "@colyseus/schema"
 import { getUnownsPoolPerStage, RarityCost } from "../../config"
 import { AbilityConfigs } from "../../config/game/abilities"
+import { ItemConfigs } from "../../config/game/items"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../models/precomputed/precomputed-types-and-categories"
@@ -287,9 +288,9 @@ export class HiddenPowerOStrategy extends HiddenPowerStrategy {
           } else if (randomDish === Item.MUSHROOMS) {
             randomDish =
               randomWeighted({
-                [Item.TINY_MUSHROOM]: 77,
-                [Item.BIG_MUSHROOM]: 20,
-                [Item.BALM_MUSHROOM]: 3
+                [Item.TINY_MUSHROOM]: ItemConfigs.MUSHROOMS.tinyMushroomWeight,
+                [Item.BIG_MUSHROOM]: ItemConfigs.MUSHROOMS.bigMushroomWeight,
+                [Item.BALM_MUSHROOM]: ItemConfigs.MUSHROOMS.balmMushroomWeight
               }) ?? Item.TINY_MUSHROOM
           }
 

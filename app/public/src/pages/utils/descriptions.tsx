@@ -1,7 +1,7 @@
 import { t } from "i18next"
 import React, { type ReactNode } from "react"
 import { getWeatherConfig } from "../../../../config/game/weathers"
-import type { EffectConfig } from "../../../../types/EffectConfig"
+import type { EffectConfig, EffectValue } from "../../../../types/EffectConfig"
 import { BoardEffects } from "../../../../types/enum/Effect"
 import { Damage, Stat } from "../../../../types/enum/Game"
 import { Item } from "../../../../types/enum/Item"
@@ -49,6 +49,30 @@ export const iconRegExp = new RegExp(
 const descriptionPattern = `${placeholderRegExp.source}|${iconRegExp.source}`
 const descriptionRegExp = new RegExp(descriptionPattern, "g")
 
+function formatDescriptionValue(value: EffectValue) {
+  if (typeof value === "number") return value
+  const values: (number | string)[] = value.valuePerTier
+    ? [...value.valuePerTier]
+    : [value.value]
+  if (value.apScaling !== undefined) values.push(`SP=${value.apScaling}`)
+  else if (value.luckScaling) values.push("LK")
+  if (value.nbDecimals !== undefined) values.push(`ND=${value.nbDecimals}`)
+  return `[${values.join(",")}]`
+}
+
+function getDescriptionTitle(path: `item_description.${Item}`) {
+  const config = getDescriptionConfig(path)
+  const values =
+    config &&
+    Object.fromEntries(
+      Object.entries(config).map(([key, value]) => [
+        key,
+        formatDescriptionValue(value)
+      ])
+    )
+  return t(path, values)
+}
+
 export function addIconsToDescription(
   description: string,
   params?: {
@@ -77,17 +101,15 @@ export function addIconsToDescription(
       if (token.startsWith("{{")) {
         const key = token.slice(2, -2).trim()
         const config = params?.config
-        const value = config && Object.hasOwn(config, key) ? config[key] : undefined
+        const value =
+          config && Object.hasOwn(config, key) ? config[key] : undefined
         if (typeof value === "number") {
           replacement = value
         } else if (value) {
-          const values: (number | string)[] = value.valuePerTier
-            ? [...value.valuePerTier]
-            : [value.value]
-          if (value.apScaling !== undefined) values.push(`SP=${value.apScaling}`)
-          else if (value.luckScaling) values.push("LK")
-          if (value.nbDecimals !== undefined) values.push(`ND=${value.nbDecimals}`)
-          replacement = addIconsToDescription(`[${values.join(",")}]`, params)
+          replacement = addIconsToDescription(
+            `${formatDescriptionValue(value)}`,
+            params
+          )
         } else {
           replacement = token
         }
@@ -156,10 +178,7 @@ export function addIconsToDescription(
         const path = `effect_description.${token}` as const
         const title = t(path, getDescriptionConfig(path))
         replacement = (
-          <span
-            className="description-icon board-effect"
-            title={title}
-          >
+          <span className="description-icon board-effect" title={title}>
             <img src={`assets/icons/effects/${token}.svg`} />
             <span className="board-effect-label">{t(`effect.${token}`)}</span>
           </span>
@@ -179,7 +198,7 @@ export function addIconsToDescription(
         replacement = (
           <span
             className="description-icon item"
-            title={t(path, getDescriptionConfig(path))}
+            title={getDescriptionTitle(path)}
           >
             <img src={`assets/item/${token}.png`} />
             <span className="item-label">{t(`item.${token}`)}</span>
@@ -382,7 +401,7 @@ export function addIconsToHtml(
           </span>`
         } else if (isIn(Items, token)) {
           const path = `item_description.${token}` as const
-          iconHTML = `<span class="description-icon item" title="${t(path, getDescriptionConfig(path))}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
+          iconHTML = `<span class="description-icon item" title="${getDescriptionTitle(path)}" data-tooltip-id="item-detail-tooltip" data-tooltip-content="${token}">
             <img src="assets/item/${token}.png" />
             <span class="item-label">${t(`item.${token}`)}</span>
           </span>`
