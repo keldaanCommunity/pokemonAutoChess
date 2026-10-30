@@ -1,4 +1,4 @@
-import { type IPokemonEntity, Item, Transfer } from "../types"
+import { type IPokemonEntity, Transfer } from "../types"
 import { type BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
 import { distanceC, distanceM } from "../utils/distance"

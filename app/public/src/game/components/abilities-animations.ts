@@ -2140,17 +2140,32 @@ export const AbilitiesAnimations: {
   [Ability.PARABOLIC_CHARGE]: projectile({ duration: 750 }),
   [Ability.ARMOR_CANNON]: (args) =>
     projectile({ duration: 400, scale: 2 - (args.delay ?? 0) * 0.5 })(args),
-  [Ability.FISSURE]: [
-    projectile({
-      scale: 1,
-      tweenProps: { scale: 3, yoyo: true },
-      startCoords: "target",
-      endCoords: "target",
-      duration: 800,
-      ease: Phaser.Math.Easing.Sine.InOut,
-      depth: DEPTH.ABILITY_GROUND_LEVEL
+  ["FISSURE_HIT"]: onTarget({
+    ability: "SMOKE_BROWN",
+    scale: 3
+  }),
+  [Ability.FISSURE]: (args) => {
+    const [x, y] = transformEntityCoordinates(
+      args.targetX,
+      args.targetY,
+      args.flip
+    )
+    const sprite = addAbilitySprite(
+      args.scene,
+      Ability.FISSURE,
+      args.ap,
+      [x, y],
+      { scale: 3, destroyOnComplete: false }
+    )
+    sprite?.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      args.scene.time.delayedCall(1000, () => sprite.destroy())
     })
-  ],
+  },
+  ["FISSURE_PROJECTILE"]: projectile({
+    ability: "UNDERGROUND",
+    duration: 800,
+    scale: 1
+  }),
   [Ability.ERUPTION]: projectile({
     startCoords: "target",
     startPositionOffset: [72, 72]
@@ -2605,7 +2620,6 @@ export const AbilitiesAnimations: {
   }),
   [Ability.EERIE_SPELL]: projectile({
     duration: 400,
-    ability: Ability.FISSURE,
     tint: 0xff00bf
   }),
   [Ability.HURRICANE]: projectile({ duration: 1000, distance: 5 }),
@@ -3072,7 +3086,7 @@ export const AbilitiesAnimations: {
 
   [Ability.SHELL_SIDE_ARM]: projectile({
     duration: 400,
-    ability: Ability.FISSURE,
+    ability: Ability.EERIE_SPELL,
     tint: 0xff00bf
   }),
 
