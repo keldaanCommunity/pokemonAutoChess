@@ -31,7 +31,7 @@
     "dev-server": "tsx watch ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
     "lint": "npx @biomejs/biome lint app/",
-    "i18n:check": "x18n check",
+    "i18n:check": "node --max-old-space-size=8192 node_modules/@x18n/cli/bin.mjs check",
     "format": "npx @biomejs/biome format app/ --write",
     "check": "npx @biomejs/biome check app/ --write",
     "check:unsafe": "npx @biomejs/biome check app/ --write --unsafe",
