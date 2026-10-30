@@ -60,20 +60,19 @@ export const RarityProbabilityPerLevel: { [key: number]: number[] } = {
   4: [0.5, 0.4, 0.1, 0, 0],
   5: [0.36, 0.42, 0.2, 0.02, 0],
   6: [0.25, 0.4, 0.3, 0.05, 0],
-  7: [0.16, 0.33, 0.35, 0.15, 0.01],
+  7: [0.15, 0.35, 0.35, 0.15, 0],
   8: [0.11, 0.27, 0.35, 0.22, 0.05],
-  9: [0.05, 0.2, 0.35, 0.3, 0.1]
+  9: [0.05, 0.2, 0.35, 0.3, 0.1],
+  10: [0, 0.05, 0.3, 0.4, 0.25]
 }
 
 /* Special Pokemon rates */
-export const DITTO_RATE = 0.005
+export const DITTO_BASE_RATE = 0.005
+export const DITTO_RATE_PER_REROLL = 0.0001
 export const MIN_STAGE_FOR_DITTO = 6
 export const EEVEE_RATE = 1 / 20
 export const KECLEON_RATE = 1 / 400
 export const ARCEUS_RATE = 1 / 400
-export const UNOWN_PSY3_NB_SHOPS_INTERVAL = 5
-export const UNOWN_PSY5_NB_SHOPS_INTERVAL = 3
-export const UNOWN_PSY7_NB_SHOPS_INTERVAL = 10
 export const FALINKS_TROOPER_RATE = 4 / 100
 export const REMORAID_RATE = 1 / 3
 
@@ -111,6 +110,7 @@ export const SellPrices = {
   WISHIWASHI_SCHOOL: 10,
   REMORAID: 2,
   OCTILLERY: 7,
+  PIKACHU: 3,
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,

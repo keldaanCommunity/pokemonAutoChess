@@ -15,5 +15,6 @@ export const ExpTable: { [key: number]: number } = Object.freeze({
   6: 34,
   7: 52,
   8: 72,
-  9: 255
+  9: 72,
+  10: 255
 })

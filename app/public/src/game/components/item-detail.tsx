@@ -7,7 +7,9 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
 import {
+    AbsorbedItems,
   ConsumableItems,
+  Gifts,
   Item,
   ItemComponents,
   ItemRecipe,
@@ -16,9 +18,10 @@ import {
   UnholdableItems
 } from "../../../../types/enum/Item"
 import { isIn } from "../../../../utils/array"
+import { entries } from "../../../../utils/object"
+import { getDescriptionConfig } from "../../pages/utils/description-config"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
 import "./item-detail.css"
-import { entries } from "../../../../utils/object"
 
 export function ItemDetailTooltipContent({
   item,
@@ -53,15 +56,20 @@ export function ItemDetailTooltipContent({
   }
 
   const itemCategoryLabel = useMemo(() => {
+    if (isIn(Gifts, item)) return t("gift")
     if (ConsumableItems.includes(item)) return t("consumable_item")
     if (isIn(UnholdableItems, item)) return t("unholdable_item")
     if (isIn(RemovableItems, item)) return t("removable_item")
+    if (isIn(AbsorbedItems, item)) return t("absorbed_item")
     if (isIn(ItemComponents, item)) return t("item_component")
     if (isIn(ShinyItems, item)) return t("shiny")
     return null
   }, [item, t])
 
   if (isIn(Object.values(Item), item) === false) return null
+
+  const descriptionPath = `item_description.${item}` as const
+  const config = getDescriptionConfig(descriptionPath)
 
   return (
     <div className="game-item-detail">
@@ -102,7 +110,7 @@ export function ItemDetailTooltipContent({
         ))}
       </div>
       <p className="game-item-detail-description">
-        {addIconsToDescription(t(`item_description.${item}`))}
+        {addIconsToDescription(t(descriptionPath), { config })}
       </p>
       {recipes.length > 0 && showItemCombinationsTooltip && (
         <div className="game-item-detail-combinations">
@@ -130,16 +138,18 @@ export function ItemDetailTooltipContent({
           })}
         </div>
       )}
-      <Tooltip
-        id="item-detail-recipes-tooltip"
-        className="custom-theme-tooltip item-detail-tooltip"
-        render={({ content }) => (
-          <ItemDetailTooltipContent
-            item={content as Item}
-            showItemCombinationsTooltip={false}
-          />
-        )}
-      />
+      {showItemCombinationsTooltip && (
+        <Tooltip
+          id="item-detail-recipes-tooltip"
+          className="custom-theme-tooltip item-detail-tooltip"
+          render={({ content }) => (
+            <ItemDetailTooltipContent
+              item={content as Item}
+              showItemCombinationsTooltip={false}
+            />
+          )}
+        />
+      )}
     </div>
   )
 }

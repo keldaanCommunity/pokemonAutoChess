@@ -162,3 +162,9 @@
   color: var(--color-fg-secondary);
   font-size: 10px;
 }
+
+@media (max-width: 799px) {
+  .cluster-map-info-panel {
+    display: none;
+  }
+}

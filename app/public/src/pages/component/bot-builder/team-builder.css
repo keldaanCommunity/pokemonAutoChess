@@ -2,7 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-areas: "synergies actions selected" "synergies board selected" "pokemons pokemons items";
-  grid-template-columns: 250px 1fr 350px;
+  grid-template-columns: 250px 1fr 480px;
   grid-template-rows: min-content 1fr 420px;
   min-width: 1400px;
   gap: 5px;
@@ -117,7 +117,8 @@
   padding: 4px 8px;
 }
 
-#item-picker img.item {
+#item-picker img.item,
+#item-picker img.symbol {
   width: 40px;
   height: 40px;
   image-rendering: pixelated;
@@ -176,13 +177,6 @@
   margin-left: 1em;
 }
 
-#rarity-grid {
-  display: grid;
-  grid-template: auto / 8ch 2fr 8ch 1fr;
-  margin: 0;
-  gap: 0 0.5em;
-}
-
 #bot-info {
   position: absolute;
   top: 4px;
@@ -229,10 +223,6 @@
 
   #pokemon-picker {
     padding: 2px;
-  }
-
-  #rarity-grid {
-    grid-template: auto / auto;
   }
 
   #bot-info {

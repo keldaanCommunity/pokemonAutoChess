@@ -1,5 +1,13 @@
+import { EffectEnum } from "../../types/enum/Effect"
 import { Stat } from "../../types/enum/Game"
 import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import { EffectConfigs } from "./effects"
+import { StatusConfigs } from "./statuses"
+
+export const ItemConfigs = {
+  [Item.CELL_BATTERY]: EffectConfigs[EffectEnum.SUPERCHARGE],
+  [Item.POKERUS_VIAL]: StatusConfigs.POKERUS
+} satisfies Partial<Record<Item, Readonly<Record<string, number>>>>
 
 export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.TWISTED_SPOON]: { [Stat.AP]: 10 },
@@ -38,9 +46,9 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.RAZOR_FANG]: {
     [Stat.SPEED]: 10,
     [Stat.CRIT_CHANCE]: 10,
-    [Stat.CRIT_POWER]: 100
+    [Stat.CRIT_POWER]: 50
   },
-  [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 30 },
+  [Item.LOADED_DICE]: { [Stat.SPEED]: 10, [Stat.SPE_DEF]: 3, [Stat.LUCK]: 20 },
   [Item.PUNCHING_GLOVE]: { [Stat.SPEED]: 10, [Stat.ATK]: 3 },
   [Item.MUSCLE_BAND]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
   [Item.STICKY_BARB]: { [Stat.DEF]: 6, [Stat.HP]: 15 },
@@ -87,7 +95,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
     [Stat.LUCK]: 50,
     [Stat.CRIT_CHANCE]: 30
   },
-  [Item.COMET_SHARD]: { [Stat.ATK]: 15 },
+  [Item.STAR_PIECE]: {},
   [Item.SHINY_STONE]: { [Stat.AP]: 50 },
   [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
@@ -97,18 +105,18 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.HEARTHFLAME_MASK]: { [Stat.SHIELD]: 100, [Stat.ATK]: 10 },
   [Item.SILK_SCARF]: { [Stat.SHIELD]: 15 },
   [Item.FRIEND_BOW]: { [Stat.SHIELD]: 30 },
-  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 20 },
+  [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 30 },
   [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 },
-  [Item.LUCKY_RIBBON]: { [Stat.SHIELD]: 15, [Stat.AP]: 50, [Stat.LUCK]: 30 },
+  [Item.LUCKY_RIBBON]: { [Stat.SHIELD]: 15, [Stat.AP]: 50, [Stat.LUCK]: 20 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
   [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
   [Item.BIG_EATER_BELT]: { [Stat.HP]: 50, [Stat.SHIELD]: 15 },
   [Item.MACH_RIBBON]: { [Stat.SHIELD]: 15, [Stat.SPEED]: 10 },
   [Item.COVER_BAND]: { [Stat.DEF]: 12, [Stat.SHIELD]: 50 },
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
-  [Item.TATSUGIRI_CURLY]: { [Stat.ATK]: 8 },
-  [Item.TATSUGIRI_DROOPY]: { [Stat.DEF]: 8 },
-  [Item.TATSUGIRI_STRETCHY]: { [Stat.SPEED]: 25 }
+  [Item.TATSUGIRI_CURLY]: { [Stat.HP]: 50, [Stat.ATK]: 8 },
+  [Item.TATSUGIRI_DROOPY]: { [Stat.HP]: 50, [Stat.DEF]: 8 },
+  [Item.TATSUGIRI_STRETCHY]: { [Stat.HP]: 50, [Stat.SPEED]: 25 }
 }
 
 export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {

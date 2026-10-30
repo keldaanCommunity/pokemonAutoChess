@@ -1,4 +1,5 @@
 import { getBaseAltForm, PkmAltFormsByPkm } from "../config"
+import { MAX_PLAYERS_PER_GAME } from "../config/server/network"
 import type GameState from "../rooms/states/game-state"
 import { type IPlayer, Scarves, Title } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
@@ -158,7 +159,9 @@ export function updatePlayerTitlesAfterFight(
 export function updatePlayerTitlesAfterGame(
   player: IPlayer,
   usr: IUserMetadataMongo,
-  rank: number
+  rank: number,
+  humans: IPlayer[],
+  bots: IPlayer[]
 ) {
   player.titles.add(Title.NOVICE)
   if (usr.level >= 10) {
@@ -195,35 +198,18 @@ export function updatePlayerTitlesAfterGame(
   if (player.life === 1 && rank === 1) {
     player.titles.add(Title.SURVIVOR)
   }
+  if (
+    humans.length === 1 &&
+    bots.length >= MAX_PLAYERS_PER_GAME - 1 &&
+    rank === 1
+  ) {
+    player.titles.add(Title.LONE_WOLF)
+  }
 
   if (player.gameStats.rerollCount > 60) {
     player.titles.add(Title.GAMBLER)
   } else if (player.gameStats.rerollCount < 20 && rank === 1) {
     player.titles.add(Title.NATURAL)
-  }
-
-  if (
-    player.titles.has(Title.COLLECTOR) === false &&
-    Object.values(Pkm)
-      .filter((p) => NonPkm.includes(p) === false)
-      .every((pkm) => {
-        const baseForm = getBaseAltForm(pkm)
-        const accepted: Pkm[] =
-          baseForm in PkmAltFormsByPkm
-            ? [
-                baseForm,
-                ...PkmAltFormsByPkm[baseForm as keyof typeof PkmAltFormsByPkm]
-              ]
-            : [baseForm]
-        return accepted.some((form) => {
-          const pokemonCollectionItem = usr.pokemonCollection.get(
-            PkmIndex[form]
-          )
-          return pokemonCollectionItem && pokemonCollectionItem.played > 0
-        })
-      })
-  ) {
-    player.titles.add(Title.COLLECTOR)
   }
 
   if (usr.elo >= 1100) {
@@ -238,5 +224,34 @@ export function updatePlayerTitlesAfterGame(
 
   if (player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
+  }
+}
+
+/**
+ * COLLECTOR requires having played every pokemon, which makes it the only title that
+ * depends on the collection's played counters. It is therefore checked on its own.
+ */
+export function updatePlayerCollectorTitle(
+  player: IPlayer,
+  playedIndexes: Set<string>
+) {
+  if (player.titles.has(Title.COLLECTOR)) return
+
+  const hasPlayedEveryPkm = Object.values(Pkm)
+    .filter((p) => NonPkm.includes(p) === false)
+    .every((pkm) => {
+      const baseForm = getBaseAltForm(pkm)
+      const accepted: Pkm[] =
+        baseForm in PkmAltFormsByPkm
+          ? [
+              baseForm,
+              ...PkmAltFormsByPkm[baseForm as keyof typeof PkmAltFormsByPkm]
+            ]
+          : [baseForm]
+      return accepted.some((form) => playedIndexes.has(PkmIndex[form]))
+    })
+
+  if (hasPlayedEveryPkm) {
+    player.titles.add(Title.COLLECTOR)
   }
 }

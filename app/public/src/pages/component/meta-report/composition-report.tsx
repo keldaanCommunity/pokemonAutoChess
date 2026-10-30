@@ -37,7 +37,9 @@ export function CompositionReport() {
       )
     })
 
-    return [...pokemonPopularity.keys()].sort((a, b) => a.localeCompare(b))
+    return [...pokemonPopularity.keys()].sort((a, b) =>
+      t(`pkm.${a}`).localeCompare(t(`pkm.${b}`))
+    )
   }, [meta])
 
   const sortedMeta = useMemo(() => {
@@ -63,20 +65,20 @@ export function CompositionReport() {
   return (
     <div id="meta-report-compo">
       <header>
-        <h2>{t("best_team_compositions")}</h2>
+        <h2>{t("meta_report.best_team_compositions")}</h2>
         <div className="filters">
           <select
             value={rankingBy}
             onChange={(e) => setRanking(e.target.value)}
           >
             <option value="count">
-              {t("rank")} {t("by_popularity")}
+              {t("rank")} {t("meta_report.by_popularity")}
             </option>
             <option value="mean_rank">
-              {t("rank")} {t("by_average_place")}
+              {t("rank")} {t("meta_report.by_average_place")}
             </option>
             <option value="winrate">
-              {t("rank")} {t("by_winrate")}
+              {t("rank")} {t("meta_report.by_winrate")}
             </option>
           </select>
         </div>

@@ -49,6 +49,44 @@
   filter: contrast(0.8) brightness(0.8);
 }
 
+.game-pokemon-portrait .game-pokemon-portrait-pool-indicator {
+  top: 0;
+  position: absolute;
+  left: 0px;
+  width: 1.4vw;
+  height: 1.4vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.game-pokemon-portrait.regional .game-pokemon-portrait-pool-indicator {
+  background-image: url("assets/ui/pinpoint.svg");
+}
+
+.game-pokemon-portrait:not(.regional).additional
+  .game-pokemon-portrait-pool-indicator {
+  background-image: url("assets/ui/plus.svg");
+  top: 4px;
+  left: 4px;
+  width: 1vw;
+  height: 1vw;
+}
+
+.game-pokemon-portrait.additional.regional
+  .game-pokemon-portrait-pool-indicator::after {
+  content: "";
+  top: 4px;
+  position: absolute;
+  left: 1.5vw;
+  width: 1vw;
+  height: 1vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("assets/ui/plus.svg");
+}
+
 .game-pokemon-portrait-cost {
   position: absolute;
   left: 5px;
@@ -90,7 +128,7 @@
 .game-pokemon-portrait-planned-icon {
   position: absolute;
   top: 4px;
-  left: 4px;
+  right: calc(100% - var(--portrait-size) - 4px);
 }
 
 .game-pokemon-portrait-evolution-icon {
@@ -111,8 +149,8 @@
 }
 
 .game-pokemon-portrait-planned-icon {
-  width: 1.4vw;
-  height: 1.4vw;
+  width: 1vw;
+  height: 1vw;
   animation: rotateY 1s linear infinite;
 }
 

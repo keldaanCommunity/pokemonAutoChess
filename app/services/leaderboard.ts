@@ -24,7 +24,7 @@ export function fetchLeaderboards() {
 export async function fetchUserLeaderboard() {
   const users = await UserMetadata.find(
     {},
-    ["displayName", "avatar", "elo", "uid", "twitchLogin", "twitchDisplayName"],
+    "displayName avatar elo uid twitchLogin twitchDisplayName",
     { limit: 100, sort: { elo: -1 } }
   ).lean()
 
@@ -45,14 +45,7 @@ export async function fetchUserLeaderboard() {
 export async function fetchLevelLeaderboard() {
   const levelUsers = await UserMetadata.find(
     {},
-    [
-      "displayName",
-      "avatar",
-      "level",
-      "uid",
-      "twitchLogin",
-      "twitchDisplayName"
-    ],
+    "displayName avatar level uid twitchLogin twitchDisplayName",
     { limit: 100, sort: { level: -1 } }
   ).lean()
 
@@ -91,15 +84,7 @@ export async function fetchBotsLeaderboard() {
 export async function fetchEventLeaderboard() {
   const users = await UserMetadata.find(
     { eventPoints: { $gt: 0 } },
-    [
-      "displayName",
-      "avatar",
-      "eventPoints",
-      "eventFinishTime",
-      "uid",
-      "twitchLogin",
-      "twitchDisplayName"
-    ],
+    "displayName avatar eventPoints eventFinishTime eventData uid twitchLogin twitchDisplayName",
     { limit: 100, sort: { eventPoints: -1, eventFinishTime: 1 } }
   ).lean()
 
@@ -110,6 +95,7 @@ export async function fetchEventLeaderboard() {
       avatar: user.avatar,
       value: user.eventPoints,
       eventFinishTime: user.eventFinishTime,
+      eventData: user.eventData,
       id: user.uid,
       twitchLogin: user.twitchLogin,
       twitchDisplayName: user.twitchDisplayName

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react"
+import { getDescriptionConfig, getDescriptionError } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./translation-row.css"
 
@@ -25,6 +26,8 @@ export const TranslationRow = React.memo(function TranslationRow({
   const [previewBelow, setPreviewBelow] = useState(false)
   const enWrapRef = useRef<HTMLDivElement>(null)
   const targetWrapRef = useRef<HTMLDivElement>(null)
+  const config = getDescriptionConfig(path)
+  const error = getDescriptionError(path, targetValue, enValue)
 
   function handleFocus(field: "en" | "target") {
     const ref = field === "en" ? enWrapRef : targetWrapRef
@@ -47,7 +50,7 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "en" && enValue && (
           <div className="translation-preview">
-            {addIconsToDescription(enValue)}
+            {addIconsToDescription(enValue, { config })}
           </div>
         )}
         <textarea
@@ -67,7 +70,7 @@ export const TranslationRow = React.memo(function TranslationRow({
       >
         {focused === "target" && targetValue && (
           <div className="translation-preview">
-            {addIconsToDescription(targetValue)}
+            {addIconsToDescription(targetValue, { config })}
           </div>
         )}
         <textarea
@@ -77,7 +80,10 @@ export const TranslationRow = React.memo(function TranslationRow({
           onChange={(e) => onEdit(path, e.currentTarget.value)}
           onFocus={() => handleFocus("target")}
           onBlur={() => setFocused(null)}
+          aria-invalid={!!error}
+          title={error}
         />
+        {error && <small className="translation-error">{error}</small>}
       </div>
 
       <button

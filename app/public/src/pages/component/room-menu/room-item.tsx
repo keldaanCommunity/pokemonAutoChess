@@ -65,8 +65,7 @@ export default function RoomItem(props: {
     disabledReason = t("room_menu.max_rank_not_reached")
   } else if (
     props.room.metadata?.gameMode === GameMode.RANKED &&
-    user?.level != null &&
-    user.level < GADGETS.certificate.levelRequired
+    (!user || user.level < GADGETS.certificate.levelRequired)
   ) {
     canJoin = false
     disabledReason = t("room_menu.ranked_mode_locked", {

@@ -34,14 +34,14 @@ export default function RegionStatistic(props: {
       </div>
       <div>
         <span>
-          <label>{t("count")}:</label> {props.region.count}
+          <label>{t("meta_report.count")}:</label> {props.region.count}
         </span>
         <span>
-          <label>{t("average_place")}:</label> {props.region.rank.toFixed(2)}
+          <label>{t("meta_report.average_place")}:</label> {props.region.rank.toFixed(2)}
         </span>
       </div>
       <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
-        <label>{t("popular_pokemons")}:</label>
+        <label>{t("meta_report.popular_pokemons")}:</label>
         {(props.region.pokemons as Pkm[]).map((pokemon) => (
           <PokemonPortrait portrait={PkmIndex[pokemon]} key={pokemon} />
         ))}

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { RarityColor, RarityCost } from "../../../../../config"
+import { RarityColor, RarityCost, RegionDetails } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import type { Pkm } from "../../../../../types/enum/Pokemon"
 import {
@@ -10,6 +10,8 @@ import {
 } from "../../../hooks"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
+import "./game-regional-pokemons.css"
+import { Box } from "../box/box"
 
 export function GameRegionalPokemonsIcon() {
   return (
@@ -48,16 +50,32 @@ export function GameRegionalPokemons() {
 
   if (!regionalPokemons || regionalPokemons.length === 0) {
     return (
-      <div className="game-regional-pokemons">
-        <p className="help">{t("regional_pokemon_hint")}</p>
-      </div>
+      <Box>
+        <Box.Header title={t("shop.regional_pokemons")}>
+          <p className="help">{t("shop.regional_pokemon_hint")}</p>
+        </Box.Header>
+      </Box>
     )
   } else {
     return (
-      <div className="game-regional-pokemons">
-        <h2>{t("regional_pokemons")}</h2>
-        <p className="help">{t("regional_pokemon_hint")}</p>
-        <div className="grid">
+      <Box>
+        <Box.Header>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <span>{t("shop.regional_pokemons")}</span>
+            <div className="spacer"></div>
+            {spectatedPlayer?.map && (
+              <span className="map-information">
+                {t(`map.${spectatedPlayer.map}`)}
+                {RegionDetails[spectatedPlayer.map].synergies.map((synergy) => (
+                  <SynergyIcon type={synergy} key={"map_type_" + synergy} />
+                ))}
+              </span>
+            )}
+          </div>
+          <p className="help">{t("shop.regional_pokemon_hint")}</p>
+        </Box.Header>
+
+        <Box.Content className="grid">
           {regionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
             const rarityColor = RarityColor[pokemon.rarity]
@@ -84,8 +102,8 @@ export function GameRegionalPokemons() {
               </div>
             )
           })}
-        </div>
-      </div>
+        </Box.Content>
+      </Box>
     )
   }
 }

@@ -1,7 +1,5 @@
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { Role } from "../../../../../types"
-import { useAppSelector } from "../../../hooks"
 import { ActivityReport } from "./activity-report"
 import { ClusterMap } from "./cluster-map"
 import { CompositionReport } from "./composition-report"
@@ -16,27 +14,24 @@ import "./meta-report.css"
 
 export default function MetaReport() {
   const { t } = useTranslation()
-  const isAdmin = useAppSelector(
-    (state) => state.network.profile?.role === Role.ADMIN
-  )
 
   return (
     <div id="meta-report">
       <Tabs>
         <TabList>
-          <Tab key="team-comps">{t("meta_report")}</Tab>
-          <Tab key="cluster-map">{t("cluster_map.title")}</Tab>
-          <Tab key="dendrogram">{t("dendrogram.title")}</Tab>
-          <Tab key="pokemons">{t("pokemon_report")}</Tab>
-          <Tab key="items">{t("item_report")}</Tab>
-          <Tab key="regions">{t("region_report")}</Tab>
+          <Tab key="team-comps">{t("meta_report.best_team_compositions")}</Tab>
+          <Tab key="cluster-map">{t("meta_report.cluster_map.title")}</Tab>
+          <Tab key="dendrogram">{t("meta_report.dendrogram.title")}</Tab>
+          <Tab key="pokemons">{t("meta_report.pokemon_report")}</Tab>
+          <Tab key="items">{t("meta_report.item_report")}</Tab>
+          <Tab key="types">{t("meta_report.synergy_report")}</Tab>
+          <Tab key="regions">{t("meta_report.region_report")}</Tab>
           <Tab key="player-report">
-            {t("player_report", { defaultValue: "Player Report" })}
+            {t("meta_report.player_report", { defaultValue: "Player Report" })}
           </Tab>
           <Tab key="activity-report">
-            {t("game_activity", { defaultValue: "Game Activity" })}
+            {t("meta_report.game_activity", { defaultValue: "Game Activity" })}
           </Tab>
-          {isAdmin && <Tab key="types">{t("synergies")}</Tab>}
         </TabList>
 
         <TabPanel key="team-comps-panel">
@@ -55,6 +50,9 @@ export default function MetaReport() {
           <ItemReport />
         </TabPanel>
         <TabPanel>
+          <SynergyReport />
+        </TabPanel>
+        <TabPanel>
           <RegionReport />
         </TabPanel>
         <TabPanel>
@@ -63,11 +61,6 @@ export default function MetaReport() {
         <TabPanel>
           <ActivityReport />
         </TabPanel>
-        {isAdmin && (
-          <TabPanel>
-            <SynergyReport />
-          </TabPanel>
-        )}
         <MetadataReport />
       </Tabs>
     </div>

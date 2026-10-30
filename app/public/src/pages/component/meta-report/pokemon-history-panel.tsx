@@ -288,7 +288,7 @@ export function PokemonHistoryPanel({
     return [Math.max(0, min - padding), max + padding]
   }, [data])
 
-  const yLabel = metric === "count" ? t("count") : t("average_place")
+  const yLabel = metric === "count" ? t("meta_report.count") : t("meta_report.average_place")
   const invertY = metric === "rank"
   const showPortraits = pokemonNames.length <= 15
 

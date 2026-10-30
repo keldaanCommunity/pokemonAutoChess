@@ -1,27 +1,29 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
-import { SynergyEffects } from "../config/game/synergies"
+import { EffectConfigs } from "../config/game/effects"
+import { StatusConfigs } from "../config/game/statuses"
+import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
+import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
-import { EffectEnum } from "../types/enum/Effect"
 import {
-  AttackType,
-  HealType,
-  PokemonActionState,
-  Team
-} from "../types/enum/Game"
+  EffectEnum,
+  type EnvironmentalEffect,
+  EnvironmentalEffects
+} from "../types/enum/Effect"
+import { AttackType, HealType, Team } from "../types/enum/Game"
 import { Item } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
-import { count } from "../utils/array"
+import { count, isIn } from "../utils/array"
 import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
-import { clamp, max, min } from "../utils/number"
+import { capUint16, max, min } from "../utils/number"
 import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
-  BeforeAttackEffect,
-  OnResurrectEffect,
+  BeforeTakingDamageEffect,
+  OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
 } from "./effects/effect"
@@ -50,7 +52,8 @@ export default abstract class PokemonState {
       let critChance = pokemon.critChance / 100
       if (
         pokemon.player?.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY)
+        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.range > 1
       ) {
         const distance = distanceM(
           pokemon.positionX,
@@ -61,30 +64,27 @@ export default abstract class PokemonState {
         critChance += 0.01 * distance
       }
       const crit = chance(critChance, pokemon)
+      let critReductionFactor = 1.0
+
+      const nbBlackAugurite = target.player
+        ? count(target.player.items, Item.BLACK_AUGURITE)
+        : 0
 
       if (crit) {
-        if (target.items.has(Item.ROCKY_HELMET) === false) {
-          let reductionFactor = 1.0
-          if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-            reductionFactor -= 0.3
-          } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-            reductionFactor -= 0.5
-          } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-            reductionFactor -= 0.7
-          }
-          const nbBlackAugurite = target.player
-            ? count(target.player.items, Item.BLACK_AUGURITE)
-            : 0
-          reductionFactor -= 0.1 * nbBlackAugurite
-          const damageWithoutCrit = damage
-          const damageAfterCrit = damage * pokemon.critPower
-          const critPartOfTheDamage = damageAfterCrit - damageWithoutCrit
+        const hasCritNegation = target.items.has(Item.ROCKY_HELMET) === true
+        if (hasCritNegation) {
+          critReductionFactor = 0
+        } else if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
+          critReductionFactor -= EffectConfigs.BATTLE_ARMOR.critDamageReductionPercent / 100
+        } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
+          critReductionFactor -= EffectConfigs.MOUTAIN_RESISTANCE.critDamageReductionPercent / 100
+        } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
+          critReductionFactor -= EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
+        }
+        critReductionFactor -= 0.1 * nbBlackAugurite
+        critReductionFactor = min(0)(critReductionFactor)
 
-          damage = min(0)(
-            Math.round(
-              damageWithoutCrit + critPartOfTheDamage * reductionFactor
-            )
-          )
+        if (!hasCritNegation) {
           target.count.crit++
         }
       }
@@ -101,7 +101,7 @@ export default abstract class PokemonState {
       let hasAttackKilled = false
       let dodgeChance = target.dodge
       if (pokemon.status.blinded) {
-        dodgeChance += 0.5
+        dodgeChance += StatusConfigs.BLINDED.accuracyReductionPercent / 100
       }
 
       if (
@@ -123,24 +123,21 @@ export default abstract class PokemonState {
         damage = 0
       }
 
-      if (pokemon.types.has(Synergy.FAIRY)) {
-        const { takenDamage, death } = applyWandEffects(
-          pokemon,
-          target,
-          damage,
-          crit
-        )
+      if (isAttackSuccessful && pokemon.types.has(Synergy.FAIRY)) {
+        const { takenDamage, death } = applyWandEffects(pokemon, target, crit)
         totalTakenDamage += takenDamage
         if (death) hasAttackKilled = true
       }
 
       if (pokemon.effects.has(EffectEnum.CHARGE)) {
-        const chargeDamage = damage * pokemon.count.ult * (1 + pokemon.ap / 100)
+        const tierFactor = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
+        const chargeDamage =
+          damage * tierFactor * pokemon.count.ult * (1 + pokemon.ap / 100)
         specialDamage += Math.ceil(chargeDamage)
       }
 
       if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
-        specialDamage += clamp(pokemon.pp, 0, pokemon.maxPP)
+        specialDamage += pokemon.pp
         pokemon.pp = 0
       }
 
@@ -150,46 +147,35 @@ export default abstract class PokemonState {
 
       let trueDamagePart = 0
       if (pokemon.effects.has(EffectEnum.STEEL_SURGE)) {
-        trueDamagePart += 0.33
+        trueDamagePart += EffectConfigs.STEEL_SURGE.trueDamagePercent / 100
       } else if (pokemon.effects.has(EffectEnum.STEEL_SPIKE)) {
-        trueDamagePart += 0.66
+        trueDamagePart += EffectConfigs.STEEL_SPIKE.trueDamagePercent / 100
       } else if (pokemon.effects.has(EffectEnum.CORKSCREW_CRASH)) {
-        trueDamagePart += 1.0
+        trueDamagePart += EffectConfigs.CORKSCREW_CRASH.trueDamagePercent / 100
       } else if (pokemon.effects.has(EffectEnum.MAX_MELTDOWN)) {
-        trueDamagePart += 1.25
+        trueDamagePart += EffectConfigs.MAX_MELTDOWN.trueDamagePercent / 100
       }
       if (pokemon.items.has(Item.RED_ORB)) {
         trueDamagePart += 0.25
       }
+      if (pokemon.effects.has(EffectEnum.STEELY_SPIRIT_BONUS)) {
+        trueDamagePart += 0.1
+      }
       if (pokemon.effects.has(EffectEnum.LOCK_ON)) {
-        trueDamagePart += 2.0 * (1 + pokemon.ap / 100)
+        trueDamagePart +=
+          ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
-      }
-
-      if (pokemon.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)) {
-        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        specialDamage += Math.ceil(
-          [15, 30, 60, 120][pokemon.stars - 1] *
-            (1 + pokemon.ap / 100) *
-            (abilityCrit ? pokemon.critPower : 1)
-        )
-        pokemon.effects.delete(EffectEnum.TELEPORT_NEXT_ATTACK)
-      }
-
-      if (pokemon.effects.has(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)) {
-        const abilityCrit = pokemon.effects.has(EffectEnum.ABILITY_CRIT) && crit
-        specialDamage += Math.ceil(
-          [30, 60, 120][pokemon.stars - 1] *
-            (1 + pokemon.ap / 100) *
-            (abilityCrit ? pokemon.critPower : 1)
-        )
-        pokemon.effects.delete(EffectEnum.SHADOW_PUNCH_NEXT_ATTACK)
       }
 
       if (trueDamagePart > 0) {
         // Apply true damage part
-        trueDamage = Math.ceil(damage * trueDamagePart)
+        trueDamage = damage * trueDamagePart * (crit ? pokemon.critPower : 1)
         damage = min(0)(damage * (1 - trueDamagePart))
+      }
+
+      if (crit) {
+        // apply crit reduction AFTER true damage has been applied
+        damage *= 1 + (pokemon.critPower - 1) * critReductionFactor
       }
 
       if (attackType === AttackType.SPECIAL) {
@@ -199,25 +185,23 @@ export default abstract class PokemonState {
       }
 
       if (pokemon.effects.has(EffectEnum.STONE_EDGE)) {
-        physicalDamage += Math.round(pokemon.def * (1 + pokemon.ap / 100))
+        const stoneEdgeMult = [1, 1, 2, 4][pokemon.stars - 1] ?? 4
+        physicalDamage += pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
       }
 
+      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
+        physicalDamage += 0.08 * target.maxHP
+      }
+
+      // rounding damage after all computations done
+      physicalDamage = Math.round(physicalDamage)
+      specialDamage = Math.round(specialDamage)
+      trueDamage = Math.round(trueDamage)
       const totalDamage = physicalDamage + specialDamage + trueDamage
 
-      pokemon.getEffects(BeforeAttackEffect).forEach((effect) => {
-        effect.apply({
-          pokemon,
-          target,
-          board,
-          physicalDamage,
-          specialDamage,
-          trueDamage,
-          totalDamage,
-          isTripleAttack,
-          hasAttackKilled,
-          crit
-        })
-      })
+      if (isAttackSuccessful && pokemon.items.has(Item.RAZOR_FANG)) {
+        target.status.triggerArmorReduction(2000, target)
+      }
 
       if (physicalDamage > 0) {
         // Apply attack physical damage
@@ -266,6 +250,7 @@ export default abstract class PokemonState {
         specialDamage,
         trueDamage,
         totalDamage,
+        totalTakenDamage,
         isTripleAttack,
         hasAttackKilled,
         crit
@@ -286,7 +271,7 @@ export default abstract class PokemonState {
   handleHeal(
     pokemon: PokemonEntity,
     heal: number,
-    caster: PokemonEntity,
+    origin: PokemonEntity | EnvironmentalEffect,
     apBoost: number,
     crit: boolean
   ): { healReceived: number; overheal: number } {
@@ -309,23 +294,25 @@ export default abstract class PokemonState {
       return { healReceived: 0, overheal: 0 }
     }
     if (pokemon.hp > 0 && !pokemon.status.protect) {
-      if (apBoost > 0) {
+      const caster =
+        origin && !isIn(EnvironmentalEffects, origin) ? origin : null
+      if (apBoost > 0 && caster) {
         heal *= 1 + (apBoost * caster.ap) / 100
       }
-      if (crit) {
+      if (crit && caster) {
         heal *= caster.critPower
       }
       if (pokemon.effects.has(EffectEnum.BUFF_HEAL_RECEIVED)) {
         heal *= 1.3
       }
       if (pokemon.status.burn) {
-        heal *= 0.5
+        heal *= 1 - StatusConfigs.BURN.reductionPercent / 100
       }
       if (pokemon.status.enraged) {
-        heal *= 0.5
+        heal *= 1 - StatusConfigs.RAGE.reductionPercent / 100
       }
       if (pokemon.simulation.weather === Weather.ZENITH) {
-        heal *= 1.2
+        heal *= 1 + WeatherConfigs.ZENITH.healingBonusPercent / 100
       }
 
       heal = Math.round(heal)
@@ -334,10 +321,10 @@ export default abstract class PokemonState {
       const overheal = min(0)(heal - missingHP)
       pokemon.hp += healReceived
 
-      if (caster && healReceived > 0) {
+      if (origin && healReceived > 0) {
         if (pokemon.simulation.room.state.time < FIGHTING_PHASE_DURATION) {
           pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_HEAL, {
-            index: caster.index,
+            index: caster?.index ?? origin,
             type: HealType.HEAL,
             amount: Math.round(healReceived),
             x: pokemon.positionX,
@@ -345,11 +332,17 @@ export default abstract class PokemonState {
             id: pokemon.simulation.id
           })
         }
-        caster.healDone += healReceived
+        if (caster) {
+          caster.healDone += healReceived
+        } else if (isIn(EnvironmentalEffects, origin)) {
+          const dps = pokemon.simulation.getEffectDps(pokemon.team, origin)
+          dps.heal = capUint16(dps.heal + healReceived)
+        }
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
-        pokemon.addMaxHP(0.4 * overheal, pokemon, 0, false, false)
+        const overhealFactor = SynergyConfigs.GRASS.overhealConversionPercent / 100
+        pokemon.addMaxHP(overhealFactor * overheal, pokemon, 0, false, false)
       }
 
       return { healReceived, overheal }
@@ -367,7 +360,8 @@ export default abstract class PokemonState {
     if (pokemon.hp > 0) {
       if (apBoost > 0) shield *= 1 + (caster.ap * apBoost) / 100
       if (crit) shield *= caster.critPower
-      if (pokemon.status.enraged && shield > 0) shield *= 0.5
+      const shieldFactor = 1 - StatusConfigs.RAGE.reductionPercent / 100
+      if (pokemon.status.enraged && shield > 0) shield *= shieldFactor
 
       shield = Math.round(shield)
       pokemon.shield = min(0)(pokemon.shield + shield)
@@ -403,6 +397,7 @@ export default abstract class PokemonState {
     board,
     attackType,
     attacker,
+    effect,
     shouldTargetGainMana,
     isRetaliation = false
   }: {
@@ -411,6 +406,7 @@ export default abstract class PokemonState {
     board: Board
     attackType: AttackType
     attacker: PokemonEntity | null
+    effect?: EffectEnum
     shouldTargetGainMana: boolean
     isRetaliation?: boolean
   }): { death: boolean; takenDamage: number } {
@@ -431,7 +427,7 @@ export default abstract class PokemonState {
     }
 
     if (attacker && attacker.status.enraged) {
-      damage *= 2
+      damage *= StatusConfigs.RAGE.damageMultiplier
     }
 
     if (pokemon.status.protect || pokemon.status.skydiving) {
@@ -439,19 +435,19 @@ export default abstract class PokemonState {
       takenDamage = 0
     } else {
       if (attacker && attacker.status.electricField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs.ELECTRIC_FIELD.damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.psychicField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs.PSYCHIC_FIELD.damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.grassField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs.GRASS_FIELD.damageBonusPercent / 100
       }
 
       if (attacker && attacker.status.fairyField) {
-        damage *= 1.2
+        damage *= 1 + StatusConfigs.FAIRY_FIELD.damageBonusPercent / 100
       }
 
       if (
@@ -466,14 +462,14 @@ export default abstract class PokemonState {
         pokemon.simulation.weather === Weather.MISTY &&
         attackType === AttackType.SPECIAL
       ) {
-        damage *= 1.2
+        damage *= 1 + WeatherConfigs.MISTY.specialDamageBonusPercent / 100
       }
 
       if (
         pokemon.simulation.weather === Weather.BLOODMOON &&
         attackType === AttackType.PHYSICAL
       ) {
-        damage *= 1.2
+        damage *= 1 + WeatherConfigs.BLOODMOON.physicalDamageBonusPercent / 100
       }
 
       if (
@@ -481,14 +477,15 @@ export default abstract class PokemonState {
         attacker &&
         attacker.effects.has(EffectEnum.SHEER_COLD)
       ) {
-        damage *= 1.3
+        damage *= 1 + EffectConfigs.SHEER_COLD.frozenDamageBonusPercent / 100
       }
 
+      const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
       let def = pokemon.status.armorReduction
-        ? Math.round(pokemon.def / 2)
+        ? Math.round(pokemon.def * armorFactor)
         : pokemon.def
       let speDef = pokemon.status.armorReduction
-        ? Math.round(pokemon.speDef / 2)
+        ? Math.round(pokemon.speDef * armorFactor)
         : pokemon.speDef
 
       if (pokemon.effects.has(EffectEnum.WONDER_ROOM)) {
@@ -506,8 +503,9 @@ export default abstract class PokemonState {
           const reflectCrit =
             pokemon.effects.has(EffectEnum.ABILITY_CRIT) &&
             chance(pokemon.critChance / 100, pokemon)
+          const reflectFactor = [0.5, 0.75, 1, 1.5][pokemon.stars - 1] ?? 1.5
           const reflectDamage = Math.round(
-            0.5 *
+            reflectFactor *
               damage *
               (1 + pokemon.ap / 100) *
               (reflectCrit ? pokemon.critPower : 1)
@@ -555,12 +553,12 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.COACHING)
         ) {
           const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
-            ? 12
+            ? EffectConfigs.COACHING.damageBlocked
             : pokemon.effects.has(EffectEnum.DEFIANT)
-              ? 9
+              ? EffectConfigs.DEFIANT.damageBlocked
               : pokemon.effects.has(EffectEnum.STURDY)
-                ? 6
-                : 3
+                ? EffectConfigs.STURDY.damageBlocked
+                : EffectConfigs.GUTS.damageBlocked
           reducedDamage = reducedDamage - damageBlocked
           pokemon.count.fightingBlockCount++
         }
@@ -577,10 +575,6 @@ export default abstract class PokemonState {
         pokemon.physicalDamageReduced += min(0)(damage - reducedDamage)
       } else if (attackType === AttackType.SPECIAL) {
         pokemon.specialDamageReduced += min(0)(damage - reducedDamage)
-
-        if (attacker && attacker.items.has(Item.POKEMONOMICON)) {
-          pokemon.status.triggerBurn(3000, pokemon, attacker)
-        }
       }
 
       if (isNaN(reducedDamage)) {
@@ -601,16 +595,21 @@ export default abstract class PokemonState {
       if (pokemon.shield > 0) {
         let damageOnShield
         if (pokemon.status.flinch) {
-          damageOnShield = Math.ceil(reducedDamage * 0.5)
-          residualDamage = Math.ceil(reducedDamage * 0.5)
+          const bypassFactor = StatusConfigs.FLINCH.shieldBypassPercent / 100
+          damageOnShield = Math.ceil(reducedDamage * (1 - bypassFactor))
+          residualDamage = Math.ceil(reducedDamage * bypassFactor)
         } else {
           damageOnShield = reducedDamage
           residualDamage = 0
         }
-        if (attacker && attacker.items.has(Item.PROTECTIVE_PADS)) {
+        if (
+          attacker &&
+          attacker.items.has(Item.PROTECTIVE_PADS) &&
+          pokemon.id !== attacker.id
+        ) {
           damageOnShield *= 2 // double damage on shield
         }
-        if (damageOnShield > pokemon.shield) {
+        if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
           damageOnShield = pokemon.shield
           pokemon.getEffects(OnShieldDepletedEffect).forEach((effect) => {
@@ -624,6 +623,23 @@ export default abstract class PokemonState {
       }
 
       takenDamage += Math.min(residualDamage, pokemon.hp)
+
+      pokemon.getEffects(BeforeTakingDamageEffect).forEach((effect) => {
+        const { newDeath, newTakenDamage, newResidualDamage } =
+          effect.apply({
+            pokemon,
+            attacker,
+            board,
+            residualDamage,
+            takenDamage,
+            damageBeforeReduction: damage,
+            attackType,
+            isRetaliation
+          }) ?? {}
+        if (newDeath !== undefined) death = newDeath
+        if (newTakenDamage !== undefined) takenDamage = newTakenDamage
+        if (newResidualDamage !== undefined) residualDamage = newResidualDamage
+      })
 
       if (
         pokemon.items.has(Item.SHINY_CHARM) &&
@@ -639,21 +655,21 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= 0.3 * pokemon.maxHP
+        pokemon.hp - residualDamage <= (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) * pokemon.maxHP
       ) {
         const shield = Math.round(
-          pokemon.maxHP *
+          pokemon.baseHP *
             (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-              ? 1
+              ? EffectConfigs.FORGOTTEN_POWER.shieldPercent / 100
               : pokemon.effects.has(EffectEnum.ELDER_POWER)
-                ? 0.7
-                : 0.4)
+                ? EffectConfigs.ELDER_POWER.shieldPercent / 100
+                : EffectConfigs.ANCIENT_POWER.shieldPercent / 100)
         )
         const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-          ? 1
+          ? EffectConfigs.FORGOTTEN_POWER.attackPercent / 100
           : pokemon.effects.has(EffectEnum.ELDER_POWER)
-            ? 0.7
-            : 0.4
+            ? EffectConfigs.ELDER_POWER.attackPercent / 100
+            : EffectConfigs.ANCIENT_POWER.attackPercent / 100
         pokemon.addShield(shield, pokemon, 0, false)
 
         //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
@@ -667,10 +683,12 @@ export default abstract class PokemonState {
         pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
         pokemon.resetCooldown(500)
         pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
-        SynergyEffects[Synergy.FOSSIL].forEach((e) => {
+        SynergyTiers[Synergy.FOSSIL].forEach((e) => {
           pokemon.effects.delete(e)
         })
-      } else if (
+      }
+
+      if (
         pokemon.hp - residualDamage <= 0 &&
         pokemon.items.has(Item.COVER_BAND) === false
       ) {
@@ -726,26 +744,36 @@ export default abstract class PokemonState {
           })
           if (pokemon !== attacker) {
             // do not count self damage
-            switch (attackType) {
-              case AttackType.PHYSICAL:
-                attacker.physicalDamage += takenDamage
-                break
-
-              case AttackType.SPECIAL:
-                attacker.specialDamage += takenDamage
-                break
-
-              case AttackType.TRUE:
-                attacker.trueDamage += takenDamage
-                break
-
-              default:
-                break
+            if (attackType === AttackType.PHYSICAL) {
+              attacker.physicalDamage = capUint16(
+                attacker.physicalDamage + takenDamage
+              )
+            } else if (attackType === AttackType.SPECIAL) {
+              attacker.specialDamage = capUint16(
+                attacker.specialDamage + takenDamage
+              )
+            } else if (attackType === AttackType.TRUE) {
+              attacker.trueDamage = capUint16(attacker.trueDamage + takenDamage)
             }
           }
+        } else if (isIn(EnvironmentalEffects, effect)) {
+          // board effect damage has no attacker, so nothing else records it.
+          // credit it to the team opposing the victim, and update dps directly
+          const team =
+            pokemon.team === Team.BLUE_TEAM ? Team.RED_TEAM : Team.BLUE_TEAM
+          const dps = pokemon.simulation.getEffectDps(team, effect)
+          if (attackType === AttackType.PHYSICAL) {
+            dps.physicalDamage = capUint16(dps.physicalDamage + takenDamage)
+          } else if (attackType === AttackType.SPECIAL) {
+            dps.specialDamage = capUint16(dps.specialDamage + takenDamage)
+          } else if (attackType === AttackType.TRUE) {
+            dps.trueDamage = capUint16(dps.trueDamage + takenDamage)
+          }
+        }
 
+        if (attacker || effect) {
           pokemon.simulation.broadcastToSpectators(Transfer.POKEMON_DAMAGE, {
-            index: attacker.index,
+            index: attacker ? attacker.index : effect!,
             type: attackType,
             amount: Math.round(takenDamage),
             x: pokemon.positionX,
@@ -759,7 +787,7 @@ export default abstract class PokemonState {
         if (pokemon.status.resurrection) {
           pokemon.status.triggerResurrection(pokemon, board)
           pokemon
-            .getEffects(OnResurrectEffect)
+            .getEffects(OnResurrectingEffect)
             .forEach((effect) => effect.apply({ pokemon, board, attacker }))
           board.forEach((x, y, entity: PokemonEntity | undefined) => {
             if (entity && entity.targetEntityId === pokemon.id) {
@@ -788,12 +816,8 @@ export default abstract class PokemonState {
     board: Board,
     attackType: AttackType
   ) {
-    const originalTeam = pokemon.status.possessed
-      ? pokemon.team === Team.BLUE_TEAM
-        ? Team.RED_TEAM
-        : Team.BLUE_TEAM
-      : pokemon.team
-    pokemon.team = originalTeam
+    pokemon.hp = 0 // prevent in-flight damage from killing the unit a second time
+    pokemon.team = pokemon.baseTeam
     pokemon.onDeath({ board, attacker })
     board.setEntityOnCell(pokemon.positionX, pokemon.positionY, undefined)
     if (attacker && pokemon !== attacker) {
@@ -832,7 +856,7 @@ export default abstract class PokemonState {
       effectsRemovedList.push(EffectEnum.MISTY_TERRAIN)
     }
 
-    if (originalTeam == Team.BLUE_TEAM) {
+    if (pokemon.baseTeam == Team.BLUE_TEAM) {
       effectsRemovedList.forEach((x) =>
         pokemon.simulation.blueEffects.delete(x)
       )
@@ -892,12 +916,12 @@ export default abstract class PokemonState {
         const heal =
           pokemon.effects.has(EffectEnum.SPORE) ||
           pokemon.effects.has(EffectEnum.OVERGROW)
-            ? 25
+            ? EffectConfigs.SPORE.heal
             : pokemon.effects.has(EffectEnum.GROWTH)
-              ? 15
-              : 5
+              ? EffectConfigs.GROWTH.heal
+              : EffectConfigs.INGRAIN.heal
         pokemon.handleHeal(heal, pokemon, 0, false)
-        pokemon.grassHealCooldown = 2000
+        pokemon.grassHealCooldown = SynergyConfigs.GRASS.healIntervalSeconds * 1000
         pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt
@@ -908,10 +932,10 @@ export default abstract class PokemonState {
       pokemon.sandstormDamageTimer -= dt
       if (pokemon.sandstormDamageTimer <= 0 && !pokemon.simulation.finished) {
         pokemon.sandstormDamageTimer = 1000
-        let sandstormDamage = 5
+        let sandstormDamage = WeatherConfigs.SANDSTORM.damagePerSecond
         const nbSmoothRocks = player ? count(player.items, Item.SMOOTH_ROCK) : 0
         if (nbSmoothRocks > 0) {
-          sandstormDamage -= nbSmoothRocks
+          sandstormDamage -= sandstormDamage * (20 / 100) * nbSmoothRocks
           pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (
@@ -923,6 +947,7 @@ export default abstract class PokemonState {
             board,
             attackType: AttackType.SPECIAL,
             attacker: null,
+            effect: EffectEnum.SANDSTORM,
             shouldTargetGainMana: false
           })
         }
@@ -943,26 +968,32 @@ export default abstract class PokemonState {
     if (
       pokemon.items.has(Item.FLAME_ORB) &&
       !pokemon.status.burn &&
-      pokemon.action !== PokemonActionState.HOP
+      !pokemon.simulation.finished
     ) {
       pokemon.status.triggerBurn(60000, pokemon, pokemon)
     }
   }
 
   updateEachSecond(pokemon: PokemonEntity, board: Board) {
-    pokemon.addPP(10, pokemon, 0, false)
+    let passivePPGain = 10
+    if (pokemon.simulation.weather === Weather.RAIN) {
+      passivePPGain += WeatherConfigs.RAIN.ppPerSecond
+    } else if (pokemon.simulation.weather === Weather.DROUGHT) {
+      passivePPGain -= WeatherConfigs.DROUGHT.ppPerSecond
+    }
+
+    pokemon.addPP(passivePPGain, pokemon, 0, false)
     if (pokemon.effects.has(EffectEnum.RAIN_DANCE)) {
-      pokemon.addPP(4, pokemon, 0, false)
+      pokemon.addPP(EffectConfigs.RAIN_DANCE.ppPerSecond, pokemon, 0, false)
     }
     if (pokemon.effects.has(EffectEnum.DRIZZLE)) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.addPP(EffectConfigs.DRIZZLE.ppPerSecond, pokemon, 0, false)
     }
     if (pokemon.effects.has(EffectEnum.PRIMORDIAL_SEA)) {
-      pokemon.addPP(12, pokemon, 0, false)
+      pokemon.addPP(EffectConfigs.PRIMORDIAL_SEA.ppPerSecond, pokemon, 0, false)
     }
 
     if (pokemon.simulation.weather === Weather.RAIN) {
-      pokemon.addPP(3, pokemon, 0, false)
       const nbDampRocks = pokemon.player
         ? count(pokemon.player.items, Item.DAMP_ROCK)
         : 0
@@ -996,7 +1027,7 @@ export default abstract class PokemonState {
       pokemon.effects.has(EffectEnum.ETERNAL_LIGHT) ||
       pokemon.effects.has(EffectEnum.MAX_ILLUMINATION)
     ) {
-      pokemon.addPP(8, pokemon, 0, false)
+      pokemon.addPP(EffectConfigs.LIGHT_PULSE.ppPerSecond, pokemon, 0, false)
     }
 
     if (pokemon.items.has(Item.METRONOME)) {
@@ -1006,71 +1037,80 @@ export default abstract class PokemonState {
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
       !pokemon.types.has(Synergy.ROCK) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.STEALTH_ROCKS
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.PHYSICAL,
         attacker: null,
+        effect: EffectEnum.STEALTH_ROCKS,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerWound(1000, pokemon, undefined)
+      pokemon.status.triggerWound(durationSeconds * 1000, pokemon, undefined)
     }
 
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
       !pokemon.types.has(Synergy.FLYING) &&
       !pokemon.types.has(Synergy.STEEL) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.SPIKES
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.TRUE,
         attacker: null,
+        effect: EffectEnum.SPIKES,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerArmorReduction(1000, pokemon)
+      pokemon.status.triggerArmorReduction(durationSeconds * 1000, pokemon)
     }
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
       !pokemon.types.has(Synergy.POISON) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
-      pokemon.status.triggerPoison(1000, pokemon, undefined)
+      const duration = EffectConfigs.TOXIC_SPIKES.durationSeconds * 1000
+      pokemon.status.triggerPoison(duration, pokemon, undefined)
     }
 
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
       !pokemon.types.has(Synergy.ICE) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damage, durationSeconds } = EffectConfigs.HAIL
       pokemon.handleDamage({
-        damage: 10,
+        damage,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
+        effect: EffectEnum.HAIL,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerFreeze(1000, pokemon, undefined)
+      pokemon.status.triggerFreeze(durationSeconds * 1000, pokemon, undefined)
       pokemon.effects.delete(EffectEnum.HAIL)
     }
 
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
       !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
-      !pokemon.items.has(Item.HEAVY_DUTY_BOOTS)
+      !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
+      const { damagePerSecond, durationSeconds } = EffectConfigs.EMBER
       pokemon.handleDamage({
-        damage: 10,
+        damage: damagePerSecond,
         board,
         attackType: AttackType.SPECIAL,
         attacker: null,
+        effect: EffectEnum.EMBER,
         shouldTargetGainMana: true
       })
-      pokemon.status.triggerBurn(1100, pokemon, undefined)
+      pokemon.status.triggerBurn(durationSeconds * 1000, pokemon, null)
     }
   }
 
@@ -1213,7 +1253,7 @@ export default abstract class PokemonState {
   }
 
   getMostSurroundedCoordinateAvailablePlace(
-    team: Team,
+    team: Team | undefined,
     board: Board
   ): { x: number; y: number } | undefined {
     let x: number | undefined = undefined
@@ -1224,7 +1264,7 @@ export default abstract class PokemonState {
         const cells = board.getAdjacentCells(x, y)
         let n = 0
         cells.forEach((cell) => {
-          if (cell.value && cell.value.team === team) {
+          if (cell.value && (team === undefined || cell.value.team === team)) {
             n++
           }
         })
@@ -1280,11 +1320,14 @@ export default abstract class PokemonState {
     let distance = pokemon.range + 1
     let candidates: PokemonEntity[] = []
 
+    const { bypassChancePercent } = StatusConfigs.CONFUSION
+    const chanceToBypassConfusion = chance(bypassChancePercent / 100, pokemon)
+    const shouldAlsoTargetAllies = !chanceToBypassConfusion
     board.forEach((x: number, y: number, pkm: PokemonEntity | undefined) => {
       if (
         pkm &&
         pkm.id !== pokemon.id &&
-        pkm.isTargettableBy(pokemon, true, true)
+        pkm.isTargettableBy(pokemon, true, shouldAlsoTargetAllies)
       ) {
         const candidateDistance = distanceM(
           pokemon.positionX,
@@ -1301,7 +1344,9 @@ export default abstract class PokemonState {
       }
     })
 
-    candidates.push(pokemon) // sometimes attack itself when confused
+    if (shouldAlsoTargetAllies) {
+      candidates.push(pokemon) // sometimes attack itself when confused
+    }
 
     if (candidates.length > 0) {
       return pickRandomIn(candidates)

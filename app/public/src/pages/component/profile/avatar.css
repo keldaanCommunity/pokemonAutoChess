@@ -25,6 +25,10 @@
   text-overflow: ellipsis;
 }
 
+.player-author {
+  color: var(--color-fg-secondary);
+}
+
 .player-title-role {
   display: flex;
   align-content: center;

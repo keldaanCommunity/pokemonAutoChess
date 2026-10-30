@@ -11,7 +11,7 @@ export function GameLifeInfo() {
     <div id="game-life-info" className="my-container life information">
       <div data-tooltip-id="detail-life">
         <Tooltip id="detail-life" className="custom-theme-tooltip" place="top">
-          <p className="help">{t("lose_game_hint")}</p>
+          <p className="help">{t("shop.lose_game_hint")}</p>
         </Tooltip>
         <Life value={spectatedPlayer.life} />
       </div>

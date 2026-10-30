@@ -14,7 +14,13 @@
   font-weight: bold;
 }
 
-.game-spectate-player-info span {
+.game-spectate-player-stats {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.game-spectate-player-stats span {
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -22,7 +28,8 @@
 }
 
 .game-spectate-player-info .icon-life,
-.game-spectate-player-info .icon-money {
+.game-spectate-player-info .icon-money,
+.game-spectate-player-info .icon-streak {
   width: 1.5em;
   height: 1.5em;
 }
