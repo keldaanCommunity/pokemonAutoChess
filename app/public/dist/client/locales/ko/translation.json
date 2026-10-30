@@ -592,7 +592,8 @@
 		"ROCKY_PAYLOAD": "바위나르기",
 		"AQUA_SWIRL": "아쿠아스월",
 		"MAGNETIC_ABSORPTION": "자력흡수",
-		"STAR_SHIELD": "스타실드"
+		"STAR_SHIELD": "스타실드",
+		"STINGING_TOXINS": "독침난발"
 	},
 	"pkm": {
 		"DEFAULT": "미싱노",
@@ -2049,6 +2050,7 @@
 		"CAVERNOUS_CHOMP": "상대에게 [40,80,160,320,SP]의 SPECIAL를 입힌다. 이 기술로 상대를 기절시켰다면 자신은 [1,2,3]초 동안 RAGE 상태가 된다.",
 		"POISON_GAS": "BOARD_EFFECT\nADJACENT 모든 상대의 면전에 POISON_GAS를 뿌려대며 [15,30,60,120,SP]의 SPECIAL를 입힌다. ",
 		"ASSIST": "INIMITABLE가 아닌 같은 편 포켓몬의 기술 중 하나를 따라한다.",
+		"FISSURE": "[2,3,4,6]번 땅을 갈라낸다. 갈라진 땅 위에서는 [25,50,75,100,SP]의 SPECIAL를 입는다.",
 		"ASSURANCE": "상대에게 [25,50,100,200,SP]의 SPECIAL를 입힌다. 자신의 현재 HP가 50% 미만이면 데미지는 두 배가 된다.",
 		"BRAVE_BIRD": "대상과 함께 FLY_AWAY치며 [30,60,90,180,SP]의 SPECIAL를 입힌다.",
 		"MAGICAL_LEAF": "가장 멀리 있는 상대를 노리는 잎사귀를 날려 경로에 있는 모든 상대에게  [10,20,40,80,SP]의 SPECIAL를 입히고 3초 동안 ARMOR_BREAK 상태로 만든다.",
@@ -2365,7 +2367,8 @@
 		"ROCKY_PAYLOAD": "FLY_AWAY친 경로 근처에 있는 상대를 향해 바위를 떨궈 [10,20,30,60,SP] + DEF의 [100,SP]%에 해당하는 SPECIAL를 입힌다. ",
 		"AQUA_SWIRL": "3X3으로 가장 크게 뭉쳐진 포켓몬을 향해 바다회오리를 날린다. 3초 동안 회오리 안의 같은 편은 HP를 [5,10,15,20,SP] 회복하고, 상대는 0.5초 마다 [3,6,9,12,SP]의 SPECIAL를 입는다. 지속시간이 끝나 회오리가 사라지면 안에 있던 상대는 1초 동안 CHARM 상태가 된다.",
 		"MAGNETIC_ABSORPTION": "상대를 사용자에게 끌어당겨 [30,60,100,200,SP]의 SPECIAL를 입히고 SPEED를 [20,SP] 훔쳐간다. 훔쳐온 SPEED는 ADJACENT 같은 편이 균등하게 나눠가진다. ",
-		"STAR_SHIELD": "가장 HP의 비율이 낮은 같은 편을 향해 3개의 별이 떨어진다. 별이 목표를 향해 떨어지기까지 1.5초의 시간이 걸리며, 완전히 떨어지면 다음 별이 떨어진다. 별이 떨어지면 ADJACENT 같은 편에게 [10,15,20,25,SP]의 SHIELD를 부여하며 ADJACENT 상대는 2초 동안 BURN 상태가 된다."
+		"STAR_SHIELD": "가장 HP의 비율이 낮은 같은 편을 향해 3개의 별이 떨어진다. 별이 목표를 향해 떨어지기까지 1.5초의 시간이 걸리며, 완전히 떨어지면 다음 별이 떨어진다. 별이 떨어지면 ADJACENT 같은 편에게 [10,15,20,25,SP]의 SHIELD를 부여하며 ADJACENT 상대는 2초 동안 BURN 상태가 된다.",
+		"STINGING_TOXINS": "CONE 범위로 세 개의 독침을 쏘아 각각 [1,2,3,4,SP]의 SPECIAL를 입힌다.\n적중한 상대의 상태에 따라 다음과 같은 추가 효과가 발생한다.\nPOISONED 상태가 아닐 때 [2,SP]초 동안 POISONED 상태로 만든다.\nPOISONED 상태일 때 [2,SP]초 동안 PARALYSIS 상태로 만든다.\nPARALYSIS 상태일 때 [2,SP]초 동안 ARMOR_BREAK 상태로 만든다.\nARMOR_BREAK 상태일 때 [2,SP]초 동안 FATIGUE 상태로 만든다."
 	},
 	"effect": {
 		"STAMINA": "지구력",
@@ -3404,6 +3407,7 @@
 		"SPOT_PANDA": "자신은 CONFUSION 상태의 영향을 받지 않으며, 상대가 CONFUSION 상태라면 [100,SP]%의 SPECIAL를 추가로 입힐 수 있다.",
 		"GUTS": "BURN이나 POISONED 상태일 때 ATK이 5 오른다.",
 		"STENCH": "BOARD_EFFECT\n들이마시면 POISONED 상태로 만드는 악취 섞인 POISON_GAS를 뿌려댄다.",
+		"AQUA_VEIL": "RAIN가 내리면 SAFEGUARD 상태가 된다.",
 		"MOXIE": "상대 포켓몬을 기절 시킬 때마다 별의 개수만큼 ATK이 오른다.",
 		"ILLUMISE_VOLBEAT": "네오비트와 볼비트는 서로 보드 위에 살아 있다면 각각 PP를 5 회복한다.",
 		"PRISM": "네크로즈마는 스포트라이트 위에서 울트라폼으로 변신한다.",
