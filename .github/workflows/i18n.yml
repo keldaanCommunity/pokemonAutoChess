@@ -20,7 +20,10 @@ jobs:
           node-version: 24.x
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npm run i18n:check -- --reporter sarif --output x18n.sarif --reporter github --reporter pretty
+      - run: npm run i18n:check -- --reporter github --reporter pretty
+      # Second run reuses the warm x18n cache. Only errors go to Code Scanning to avoid PR comments for every warning.
+      - run: npm run i18n:check -- --only missing-key,placeholder-mismatch --reporter sarif --output x18n.sarif
+        if: always()
       - uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
