@@ -316,7 +316,7 @@ export default function Preparation() {
       <MainSidebar
         page="preparation"
         leaveLabel={t("leave_room")}
-        leave={leavePreparationRoom}
+        onClickLeave={leavePreparationRoom}
       />
       <main>
         <PreparationMenu />
