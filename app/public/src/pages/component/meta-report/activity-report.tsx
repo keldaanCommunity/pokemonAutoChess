@@ -119,7 +119,7 @@ export function ActivityReport() {
               <Area
                 type="monotone"
                 dataKey="gameCount"
-                name={t("game_count", { defaultValue: "Games" })}
+                name={t("meta_report.game_count")}
                 stroke="#6ba3ff"
                 fill="rgba(107,163,255,0.35)"
                 strokeWidth={3}

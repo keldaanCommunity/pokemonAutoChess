@@ -120,7 +120,7 @@ function CustomTooltip({
     <div className="player-report-tooltip">
       <h3>{bucket.bucketLabel}</h3>
       <p>
-        {t("count", { defaultValue: "Count" })}: {bucket.count}
+        {t("meta_report.count")}: {bucket.count}
       </p>
       <p>
         {t("rank_share", { defaultValue: "Share" })}:{" "}
