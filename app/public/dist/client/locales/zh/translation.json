@@ -3656,7 +3656,7 @@
 		"GOURMET": "美食家"
 	},
 	"synergy_description": {
-		"NORMAL": "NORMAL宝可梦和他们的ADJACENT我方宝可梦在战斗开始时能获得SHIELD，且能合成各样的围巾。",
+		"NORMAL": "NORMAL宝可梦和他们的ADJACENT我方宝可梦在战斗开始时能获得SHIELD，且能合成各样的围巾。{{additionalInfo}}",
 		"NORMAL_SCARVES": "\n你当前持有的来自此共鸣的围巾是：{{scarves}}",
 		"GRASS": "GRASS宝可梦能收获树果，且具有一定的自愈能力。溢出治疗量的{{overhealConversionPercent}}%转化为最大HP。",
 		"FIRE": "FIRE宝可梦每次攻击都能提升ATK，还能在ON_HIT使对手陷入BURN。",
