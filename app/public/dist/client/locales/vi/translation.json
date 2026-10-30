@@ -1469,7 +1469,6 @@
 		"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos"
 	},
 	"tier": "Bậc",
-	"rate": "Tỉ lệ",
 	"additional_picks": "Chọn thêm",
 	"unique_picks": "Chọn Pokemon độc nhất",
 	"stages": "Giai đoạn",
@@ -1491,8 +1490,6 @@
 	},
 	"game-reconnect-modal-title": "Kết nối lại",
 	"game-reconnect-modal-body": "Bạn vừa thoát trận. Bạn có muốn quay trở lại trận đấu vừa nãy?",
-	"key": "Chìa khoá",
-	"action": "Hành động",
 	"gadgets": "Dụng cụ",
 	"gadget": {
 		"trainer_card": "Thẻ người chơi",

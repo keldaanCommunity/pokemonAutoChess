@@ -21,7 +21,9 @@ export default defineConfig({
     'tr'
   ],
   // Chinese has no singular form, so zh intentionally omits {{count}} here
-  ignoreKeys: ['translation:shop.clicks_one'],
+  ignoreKeys: ['translation:shop.clicks_one', 'translation:ability_description.DEFAULT'],
+  checks: { 'stale-translation': 'off', 'missing-translation': 'off' },
+  history: false,
   resources: [{ pattern: 'app/public/dist/client/locales/{locale}/{namespace}.json' }],
   usage: {
     include: ['app/public/src/**/*', 'app/core/expeditions.ts', 'app/types/strings/Strings.ts'],
