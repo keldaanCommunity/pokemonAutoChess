@@ -1,7 +1,6 @@
 import { Emotion, FossilStones } from "../types"
 import { Stat } from "../types/enum/Game"
 import {
-  AtlasItems,
   CraftableItemsNoScarves,
   CraftableNoStonesOrScarves,
   Item,
