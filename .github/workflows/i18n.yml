@@ -1,0 +1,27 @@
+name: i18n
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0   # stale-translation reads git history
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run i18n:check -- --reporter github --reporter pretty --reporter sarif --output x18n.sarif
+      - uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: x18n.sarif
