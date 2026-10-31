@@ -1137,6 +1137,18 @@ export const AbilitiesAnimations: {
   [Ability.HEX]: onTargetScale2,
   [Ability.PLASMA_FIST]: onTargetScale2,
   [Ability.LEECH_SEED]: onTargetScale2,
+  ["LEECH_SEED_PROJECTILE"]: parabolicProjectile({
+    ability: "SMOKE_GREEN",
+    duration: 600,
+    scale: 2,
+    peakHeight: 100
+  }),
+  ["LEECH_SEED_HEAL"]: parabolicProjectile({
+    ability: "LEECH_SEED_HEAL",
+    duration: 1000,
+    scale: 0.3,
+    peakHeight: 100
+  }),
   [Ability.TRIPLE_DIVE]: onTarget({ ability: Ability.WATERFALL, scale: 2 }),
   [Ability.LOCK_ON]: onTargetScale2,
   [Ability.DISABLE]: onTargetScale2,

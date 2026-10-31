@@ -2209,13 +2209,13 @@ export const PokemonAnimations: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_MELEE
+    attackSprite: AttackSprite.ROCK_RANGE
   },
   [Pkm.CRADILY]: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_MELEE
+    attackSprite: AttackSprite.ROCK_RANGE
   },
   [Pkm.CRANIDOS]: {
     attack: AnimationType.Attack,

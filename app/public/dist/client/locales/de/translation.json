@@ -1872,7 +1872,6 @@
 		"MYSTICAL_FIRE": "Verursacht [20,40,80,160,SP] SPECIAL und senkt die AP des Ziels um [15,20,25,50,SP]",
 		"FLAME_CHARGE": "Stürme in die gegnerische Hinterlinie und verursache [30,60,120,240,SP] SPECIAL",
 		"PASTEL_VEIL": "Sprinte zum am weitesten entfernten Verbündeten. Der Benutzer und alle Verbündeten auf dem Weg erhalten [20,40,80,160,SP] SHIELD und negativer Status wird gelöscht.",
-		"LEECH_SEED": "Fügt dem Ziel POISONED für [3,6,12,24] Sekunden zu und Heilt die HP des Nutzers um [20,40,80,160,SP]",
 		"LOCK_ON": "Erfasst das Ziel. Der nächste Angriff verursacht zusätzlich [200,200,200,500,SP]% TRUE und kann nicht verfehlen.",
 		"DISABLE": "Füge dem Ziel und allen benachbarten Gegnern [12,25,50,100,SP] SPECIAL zu und SILENCE für [2,3,4,8] Sekunden.",
 		"RAZOR_WIND": "Fügt dem Ziel [20,40,80,160,SP] SPECIAL",

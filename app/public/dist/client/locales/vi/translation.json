@@ -1280,7 +1280,6 @@
 		"DYNAMIC_PUNCH": "Gây [40,80,160,320,SP] SPECIAL lên mục tiêu và khiến chúng CONFUSION trong [2,4,6,8] giây",
 		"ELECTRO_WEB": "Đánh cắp [15,30,60,120,SP] SPEED từ các Pokémon đối thủ ở gần và gây [15,30,60,120,SP] SPECIAL",
 		"FLAME_CHARGE": "Tốc biến đến hậu tuyến đối thủ, gây [30,60,120,240,SP] SPECIAL tới toàn bộ Pokémon đối thủ trúng phải",
-		"LEECH_SEED": "POISONED mục tiêu trong [3,6,12,24] giây và hồi [20,40,80,160,SP] HP cho bản thân",
 		"LOCK_ON": "Khóa mục tiêu. Đòn tấn công tiếp theo không thể trượt và gây thêm [200,200,200,500,SP]% TRUE",
 		"DISABLE": "Gây [12,25,50,100,SP] SPECIAL lên mục tiêu, sau đó khiến chúng SILENCE và và tất cả Pokémon đối thủ ở gần trong [2,3,4,8] giây",
 		"RAZOR_WIND": "Gây [20,40,80,160,SP] SPECIAL lên mục tiêu",

@@ -1895,7 +1895,6 @@
 		"MYSTICAL_FIRE": "Hedefe [20,40,80,160,SP] SPECIAL verir ve AP değerini [15,20,25,50,SP] azaltır.",
 		"FLAME_CHARGE": "Düşman takımın arka sırasına DASH yapar ve yolundaki tüm düşman Pokémonlara [30,60,120,240,SP] SPECIAL verir.",
 		"PASTEL_VEIL": "En uzaktaki müttefike DASH yapar. Kullanana ve yol üstündeki tüm müttefik Pokémonlara [20,40,80,160,SP] SHIELD verir ve olumsuz durumlarını temizler.",
-		"LEECH_SEED": "Hedefi [3,6,12,24] saniyeliğine POISONED yapar ve kullananı [20,40,80,160,SP] HP iyileştirir.",
 		"LOCK_ON": "Hedefe kilitlenir. Bir sonraki saldırı ıskalamaz ve [200,200,200,500,SP]% ek TRUE verir.",
 		"DISABLE": "Hedefe ve tüm ADJACENT düşman Pokémonlara [12,25,50,100,SP] SPECIAL verir ve onları [2,3,4,8] saniyeliğine SILENCE yapar.",
 		"RAZOR_WIND": "Hedefe [20,40,80,160,SP] SPECIAL verir. Varsayılan olarak kritik vurabilir.",

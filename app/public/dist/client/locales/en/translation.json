@@ -1898,7 +1898,7 @@
 		"MYSTICAL_FIRE": "Deal [20,40,80,160,SP] SPECIAL to the target and reduce their AP by [15,20,25,50,SP].",
 		"FLAME_CHARGE": "DASH into the enemy team's back line and deal [30,60,120,240,SP] SPECIAL to all enemy Pokémon in the path.",
 		"PASTEL_VEIL": "DASH to the farthest ally. Grant [20,40,80,160,SP] SHIELD to the user and all allied Pokémon on the way and cure their negative status conditions.",
-		"LEECH_SEED": "POISONED the target for [3,6,12,24] seconds and heal the user for [20,40,80,160,SP] HP.",
+		"LEECH_SEED": "Plants a seed on the target, dealing [4,8,12,16,SP=0.5]% of its max HP as SPECIAL damage each second for 5 seconds. Each time it deals damage, heals the ally with the lowest missing HP for the amount dealt.",
 		"LOCK_ON": "Lock on the target. The next attack cannot miss and deals [200,200,200,500,SP]% additional TRUE.",
 		"DISABLE": "Deal [12,25,50,100,SP] SPECIAL to the target and all ADJACENT enemy Pokémon and SILENCE them for [2,3,4,8] seconds.",
 		"RAZOR_WIND": "Deal [20,40,80,160,SP] SPECIAL to the target. Can crit by default.",

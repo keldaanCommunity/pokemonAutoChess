@@ -992,7 +992,6 @@
 		"DYNAMIC_PUNCH": "Brengt [40,80,160,320,SP] SPECIAL toe aan het doelwit en pas de CONFUSION status op hun toe voor [2,4,6,8] seconden",
 		"ELECTRO_WEB": "Steel [15,30,60,120,SP] SPEED van alle aangrenzende vijandelijke Pokémon en breng [15,30,60,120,SP]",
 		"FLAME_CHARGE": "Ren naar de achterkant van het vijandelijke team en breng [30,60,120,240,SP] SPECIAL toe aan alle geraakte vijandelijke Pokémon",
-		"LEECH_SEED": "Pas de POISONED status toe op het doelwit voor [3,6,12,24] seconden, en herstel de gebruiker's HP met [20,40,80,160,SP]",
 		"LOCK_ON": "Vergrendel het doel. De volgende aanval mag niet missen en deel [200,200,200,500,SP]% TRUE",
 		"RAZOR_WIND": "Breng [20,40,80,160,SP] SPECIAL toe aan het doelwit",
 		"WONDER_GUARD": "Breng [30,60,120,240,SP] SPECIAL toe aan alle aangrenzende vijandelijke Pokémon en pas de PARALYSIS status toe aan hen voor 3 seconden",

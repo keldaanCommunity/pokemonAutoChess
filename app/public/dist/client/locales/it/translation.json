@@ -1801,7 +1801,6 @@
 		"MYSTICAL_FIRE": "Infliggi [20,40,80,160,SP] SPECIAL e riduci gli AP del bersaglio di [15,20,25,50,SP].",
 		"FLAME_CHARGE": "Scatta nelle retrovie nemiche, infliggendo [30,60,120,240,SP] SPECIAL a tutti i Pokèmon nemici colpiti nel tragitto.",
 		"PASTEL_VEIL": "Scatta verso l'alleato più lontano. L'utilizzatore e tutti gli alleati nella traiettoria ottengono [20,40,80,160,SP] SHIELD e vengono curati degli status alterati.",
-		"LEECH_SEED": "Infliggi POISONED al bersaglio per [3,6,12,24] secondi, curando l'utilizzatore di [20,40,80,160,SP] HP.",
 		"LOCK_ON": "Localizza il bersaglio. Il prossimo attacco non può mancare e infligge [200,200,200,500,SP]% TRUE in più.",
 		"DISABLE": "Infliggi [12,25,50,100,SP] SPECIAL al bersaglio e ai Pokémon nemici ADJACENT, e infliggi loro SILENCE per [2,3,4,8] secondi.",
 		"RAZOR_WIND": "Infliggi [20,40,80,160,SP] SPECIAL.",
