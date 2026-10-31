@@ -1868,7 +1868,6 @@
 		"DYNAMIC_PUNCH": "Distribui [40,80,160,320,SP] SPECIAL e deixa o alvo CONFUSION por [2,4,6,8] segundos",
 		"ELECTRO_WEB": "Rouba [15,30,60,120,SP] dos inimigos adjacentes SPEED e inflige [15,30,60,120,SP] SPECIAL",
 		"FLAME_CHARGE": "Corra para a retaguarda inimiga, causando [30,60,120,240,SP] SPECIAL",
-		"LEECH_SEED": "POISONED o alvo por [3,6,12,24] segundos, curando [20,40,80,160,SP] HP",
 		"LOCK_ON": "Bloqueie o alvo. O próximo ataque não pode errar e aplique [200,200,200,500,SP]% TRUE.",
 		"RAZOR_WIND": "Inflige [20,40,80,160,SP] SPECIAL",
 		"WONDER_GUARD": "Inflige [30,60,120,240,SP] SPECIAL e deixa todos os inimigos adjacentes PARALYSIS por 3 segundos",

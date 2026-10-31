@@ -1885,7 +1885,6 @@
 		"MYSTICAL_FIRE": "Inflige [20,40,80,160,SP] de SPECIAL y baja el AP del objetivo en [15,20,25,50,SP]",
 		"FLAME_CHARGE": "Se cuela en la retaguardia enemiga e inflige [30,60,120,240,SP] de SPECIAL a todos los Pokémon enemigos que golpee",
 		"PASTEL_VEIL": "Va hacia el aliado mas lejano. El usuario y todos los aliados en el camino obtienen [20,40,80,160,SP] de SHIELD y son curados de sus estados negativos",
-		"LEECH_SEED": "Deja POISONED al objetivo durante [3,6,12,24] segundos y recupera [20,40,80,160,SP] de HP",
 		"LOCK_ON": "Fija el objetivo. El siguiente ataque no puede fallar e inflige [200,200,200,500,SP]% de TRUE adicional",
 		"DISABLE": "Inflige [12,25,50,100,SP] de SPECIAL al objetivo y a todos los enemigos ADJACENT y SILENCE durante [2,3,4,8] segundos",
 		"RAZOR_WIND": "Inflige [20,40,80,160,SP] de SPECIAL al objetivo",
