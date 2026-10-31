@@ -3497,7 +3497,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Twirl,
-    attackSprite: AttackSprite.FAIRY_MELEE,
+    attackSprite: AttackSprite.FAIRY_RANGE,
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.CHATOT]: {

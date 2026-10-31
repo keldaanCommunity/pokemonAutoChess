@@ -482,6 +482,8 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
         args.positionY,
         args.flip
       )
+      coordinates[0] += options?.positionOffset?.[0] ?? 0
+      coordinates[1] += options?.positionOffset?.[1] ?? 0
       const coordinatesTarget = transformEntityCoordinates(
         args.targetX,
         args.targetY,
@@ -1289,6 +1291,30 @@ export const AbilitiesAnimations: {
     tint: 0xffffa0
   }),
   ["HYPER_BEAM_CHARGE"]: onCasterScale2,
+  [Ability.POWER_GEM]: (args) => {
+    const nbGems = args.data.nbGems
+    for (let i = 0; i < nbGems; i++) {
+      const angle = (Math.PI * 2) / nbGems
+      const dx = Math.cos(angle * i) * 50
+      const dy = Math.sin(angle * i) * 30 - 20
+      onCaster({
+        ability: Ability.POWER_GEM,
+        positionOffset: [dx, dy],
+        animOptions: { repeat: 3 },
+        scale: 2
+      })(args)
+      onCaster({
+        ability: Ability.PSYBEAM,
+        oriented: true,
+        rotation: -Math.PI / 2,
+        origin: [0.5, 0],
+        delay: 300 + i * 50,
+        positionOffset: [dx, dy],
+        scale: [0.25, 1],
+        tint: 0xffa0ff
+      })(args)
+    }
+  },
   [Ability.THUNDER_SHOCK]: onTarget({
     ability: Ability.THUNDER,
     scale: 2,

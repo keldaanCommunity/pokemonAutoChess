@@ -15,7 +15,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
+    const damage = [10, 20, 30, 60, 120][pokemon.stars - 1] ?? 120
 
     effectInLine(board, pokemon, target, (cell) => {
       if (
@@ -36,7 +36,7 @@ export class LusterPurgeStrategy extends AbilityStrategy {
           crit
         )
         cell.value.addSpecialDefense(
-          -([5, 5, 5, 10][pokemon.stars - 1] ?? 10),
+          -([5, 5, 5, 10, 15][pokemon.stars - 1] ?? 15),
           pokemon,
           0,
           false
