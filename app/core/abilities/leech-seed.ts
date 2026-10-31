@@ -16,6 +16,7 @@ class LeechSeedCommand extends SimulationCommand {
   }
 
   refresh(onTick: () => void) {
+    // Retarget the existing seed and reset its duration without adding another damage stream.
     this.onTick = onTick
     this.durationRemaining = 5000
   }
@@ -64,6 +65,7 @@ export class LeechSeedStrategy extends AbilityStrategy {
         targetY: target.positionY
       })
 
+      // Apply half AP here instead of the default full AP boost in handleSpecialDamage.
       const result = target.handleSpecialDamage(
         ((damagePercent * target.maxHP) / 100) * (1 + pokemon.ap / 200),
         board,
