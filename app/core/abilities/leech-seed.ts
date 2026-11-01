@@ -65,15 +65,14 @@ export class LeechSeedStrategy extends AbilityStrategy {
         targetY: target.positionY
       })
 
-      // Apply half AP here instead of the default full AP boost in handleSpecialDamage.
       const result = target.handleSpecialDamage(
-        ((damagePercent * target.maxHP) / 100) * (1 + pokemon.ap / 200),
+        damagePercent,
         board,
         AttackType.SPECIAL,
         pokemon,
-        crit,
-        false
+        crit
       )
+
       if (result.takenDamage) {
         const lowestHealthAllies = board.cells
           .filter(
