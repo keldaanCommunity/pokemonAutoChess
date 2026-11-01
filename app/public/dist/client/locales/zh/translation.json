@@ -1794,7 +1794,8 @@
 		"ROCKY_PAYLOAD": "搬岩",
 		"AQUA_SWIRL": "水之漩涡",
 		"MAGNETIC_ABSORPTION": "磁力吸收",
-		"STAR_SHIELD": "星之护盾"
+		"STAR_SHIELD": "星之护盾",
+		"STINGING_TOXINS": "蛰刺毒素"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -1897,6 +1898,7 @@
 		"MYSTICAL_FIRE": "对目标造成[20,40,80,160,SP]点SPECIAL，并降低其[15,20,25,50,SP]点AP。",
 		"FLAME_CHARGE": "DASH至敌方队伍的后排，对经过的所有敌方宝可梦造成[30,60,120,240,SP]点SPECIAL。",
 		"PASTEL_VEIL": "DASH至最远我方宝可梦的位置。所有经过的我方宝可梦和使用者自身均获得[20,40,80,160,SP]点SHIELD，并移除异常状态。",
+		"LEECH_SEED": "在目标身上植入寄生种子，在5秒内每秒对其造成SPECIAL，数值相当于其最大HP的[4,8,12,16,SP=0.5]%。此伤害每次触发时，还会为HP百分比最低的我方宝可梦恢复等量HP。",
 		"LOCK_ON": "锁定目标。下一次攻击必定命中，且额外造成[200,200,200,500,SP]%的TRUE。",
 		"DISABLE": "对目标及其ADJACENT敌方宝可梦造成[12,25,50,100,SP]点SPECIAL，并使他们陷入SILENCE [2,3,4,8]秒。",
 		"RAZOR_WIND": "对目标造成[20,40,80,160,SP]点SPECIAL。该招式可以暴击。",
@@ -2044,7 +2046,7 @@
 		"PRESENT": "根据LUCK，随机造成[20,40,80,160,SP]，[50,100,150,300,SP]，[100,200,300,600,SP]点SPECIAL或为目标恢复50点HP。",
 		"LEAF_BLADE": "像用剑一般操纵叶片切斩目标，造成TRUE，数值相当于[100,125,150,250,SP]%的ATK。该招式必定暴击。",
 		"ANCHOR_SHOT": "抓取最远的宝可梦，对其造成[20,40,80,160,SP]点SPECIAL。",
-		"MAGNET_RISE": "使使用者和[2,4,6,8]只生命值最低的ADJACENT我方宝可梦获得PROTECT 2秒，并提升[10,10,10,20,SP]%的闪避率。",
+		"MAGNET_RISE": "使使用者和[2,4,6,8]只HP最低的ADJACENT我方宝可梦获得PROTECT 2秒，并提升[10,10,10,20,SP]%的闪避率。",
 		"ATTRACT": "使[1,2,3,5]只随机选择的敌方宝可梦陷入CHARM [1,SP]秒。",
 		"WATER_PULSE": "对目标和ADJACENT敌方宝可梦造成[70,140,280,500,SP]点SPECIAL，并有[30,LK]%的概率使他们陷入CONFUSION 2秒。",
 		"PLAY_ROUGH": "对目标造成[30,60,120,240,SP]点SPECIAL，并使其陷入CHARM 2.5秒。",
@@ -2057,6 +2059,7 @@
 		"CAVERNOUS_CHOMP": "对目标造成[40,80,160,320,SP]点SPECIAL。若此招式能够击倒目标，使用者陷入RAGE [1,2,3]秒。",
 		"POISON_GAS": "BOARD_EFFECT：用一团POISON_GAS袭击所有ADJACENT敌方宝可梦，对他们造成[15,30,60,120,SP]点SPECIAL。",
 		"ASSIST": "随机选择一个我方宝可梦的招式（除非其INIMITABLE），复制并使用之。",
+		"FISSURE": "对2格半径内PP最高的敌方宝可梦造成[30,60,120,240,SP]点SPECIAL。若目标所在位置的GROUND坑洞深度已达最大，造成的伤害翻倍。将RANGE为1的敌方宝可梦击退，RANGE至少为2的敌方宝可梦拉向使用者，并使所有受到影响的敌方宝可梦陷入LOCKED 2秒。",
 		"ASSURANCE": "对目标造成[25,50,100,200,SP]点SPECIAL。若使用者的HP低于50%，造成的伤害翻倍。",
 		"BRAVE_BIRD": "与目标一同FLY_AWAY，造成[30,60,90,180,SP]点SPECIAL。",
 		"MAGICAL_LEAF": "放出追逐最远目标的神奇叶片，对经过的所有目标造成[10,20,40,80,SP]点SPECIAL，并使他们陷入ARMOR_BREAK 3秒。",
@@ -2288,7 +2291,7 @@
 		"TACKLE": "对目标造成[20,40,60,120,SP]点SPECIAL。",
 		"STATIC_SHOCK": "对目标造成[30,50,70,100,SP]点SPECIAL。每有一只ADJACENT的ELECTRIC宝可梦，便获得[10,20,30,60,SP]点SHIELD；每有一只ADJACENT的FAIRY宝可梦，便恢复[10,20,30,60,SP]点HP。",
 		"SAND_SPIT": "对前方的3只敌方宝可梦吐出沙子，造成[30,60,120,240,SP]点SPECIAL并使他们陷入BLINDED 2秒。",
-		"HYPER_DRILL": "对目标造成[10,20,40,50,100,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的坑洞深度已达最大，造成的伤害翻倍。",
+		"HYPER_DRILL": "对目标造成[10,20,40,50,100,SP]点TRUE，并使其失去PROTECT。此外，将目标所在位置的坑洞挖深1级，若挖到道具则将其摧毁。若目标所在位置的GROUND坑洞深度已达最大，造成的伤害翻倍。",
 		"TERRAIN_PULSE": "若自身未处于场地类状态下，先获得GRASS_FIELD，再执行以下内容。\n处于场地类状态下的我方宝可梦将自身具有的场地传播至ADJACENT我方宝可梦，随后为处于场地类状态下的我方宝可梦根据各自的场地分别——\nGRASS_FIELD：恢复[5,7,10,15,SP]%的最大HP\nELECTRIC_FIELD:提升[10,12,15,20,SP]点SPEED\nPSYCHIC_FIELD：恢复[10,12,15,20,SP]点PP\nFAIRY_FIELD：获得SHIELD，数值相当于[5,7,10,15,SP]%的最大HP",
 		"AXE_KICK": "DASH至PP最高的敌方宝可梦身边，然后对其造成[25,50,100,200,SP]点SPECIAL，并移除其[15,15,30,60,SP]点PP，且有[30,LK]%使其陷入CONFUSION 3秒。",
 		"EXPANDING_FORCE": "获得PSYCHIC_FIELD，若已处于此场地下则改为使最近的不处于此场地的我方宝可梦获得之。随后所有处于PSYCHIC_FIELD的我方宝可梦对与之ADJACENT的敌方宝可梦造成[10,20,40,80,SP]点SPECIAL。",
@@ -2322,7 +2325,7 @@
 		"HIGH_HORSEPOWER": "DASH穿过目标，随后对所有ADJACENT敌方宝可梦造成[15,30,60,120,SP]点SPECIAL。若只击中了一只敌方宝可梦，造成的SPECIAL翻倍。",
 		"CITY_SHUTTLE": "DASH至最近我方宝可梦的位置，将其驮在背后，随后与其一同DASH至最远的可触及敌方宝可梦的邻位，对所有经过的敌方宝可梦造成SPECIAL，数值相当于[10,20,40,80,SP]加被驮运的我方宝可梦[100,SP]%的ATK。使用者与被驮运的我方宝可梦各获得[20,40,80,160,SP]点SHIELD。",
 		"BULLET_PUNCH": "对目标造成[20,30,40,80,SP]点TRUE，随后提升[20,30,40,80,SP]点SPEED，持续2秒。",
-		"EAR_DIG": "对目标造成SPECIAL，数值相当于[30,60,120,240,SP]加目标所处位置的坑洞深度等级乘以[5,10,20,40,SP]。若目标并不处于坑洞之中，还会在目标所在的位置挖洞。",
+		"EAR_DIG": "对目标造成SPECIAL，数值相当于[30,60,120,240,SP]加目标所处位置的GROUND坑洞深度等级乘以[5,10,20,40,SP]。若目标并不处于坑洞之中，还会在目标所在的位置挖洞。",
 		"POWDER_SNOW": "将冰冷的细雪吹向目标，对一条直线上的所有敌方宝可梦造成[20,40,80,160,SP]点SPECIAL，并有[15,30,50,100,LK]%的概率使他们陷入FREEZE 2秒。",
 		"POWDER": "朝RANGE之内的SPEED最高的敌方宝可梦发射一团粉尘云。接触粉尘云的敌方宝可梦受到[10,20,30,50,SP]点SPECIAL并降低30点SPEED 5秒。",
 		"LINGERING_AROMA": "在接下来的5秒内，使用者受到近战攻击时使攻击者受到[10,20,30,60,SP]点SPECIAL，并失去5点PP。",
@@ -2364,7 +2367,8 @@
 		"ROCKY_PAYLOAD": "FLY_AWAY，对路径上最近的敌方宝可梦砸下岩石，造成SPECIAL，数值相当于[10,20,30,60,SP]加[100,SP]%的DEF。",
 		"AQUA_SWIRL": "在敌方宝可梦最密集的位置产生一个3×3的海潮漩涡。漩涡每0.5秒为范围内的我方宝可梦恢复[5,10,15,20,SP]点HP，对敌方宝可梦造成[3,6,9,12,SP]点SPECIAL，持续3秒。持续时间结束后，漩涡消散，使范围内的敌方宝可梦陷入CHARM 1秒。",
 		"MAGNETIC_ABSORPTION": "将目标拉向使用者，对其造成[30,60,100,200,SP]点SPECIAL，并偷取其[20,SP]点SPEED。随后，将偷取的SPEED平均分配给ADJACENT宝可梦。",
-		"STAR_SHIELD": "连续召唤3枚流星。每枚流星在上一枚着陆后出发，用1.5秒的时间飞向HP百分比最低的我方宝可梦。流星着陆时，使ADJACENT我方宝可梦获得[10,15,20,25,SP]点SHIELD，并使ADJACENT敌方宝可梦陷入BURN 2秒。"
+		"STAR_SHIELD": "连续召唤3枚流星。每枚流星在上一枚着陆后出发，用1.5秒的时间飞向HP百分比最低的我方宝可梦。流星着陆时，使ADJACENT我方宝可梦获得[10,15,20,25,SP]点SHIELD，并使ADJACENT敌方宝可梦陷入BURN 2秒。",
+		"STINGING_TOXINS": "对一个CONE内的敌方宝可梦释放3轮毒素，每轮对他们造成[1,2,3,4,SP]点SPECIAL。根据被命中敌方宝可梦所处于的异常状态，使其获得对应的异常状态：\n若其未处于POISONED，其陷入POISONED [2,SP]秒；\n若其处于POISONED，其陷入PARALYSIS [2,SP]秒；\n若其处于PARALYSIS，其陷入ARMOR_BREAK [2,SP]秒；\n若其处于ARMOR_BREAK，其陷入FATIGUE [2,SP]秒。"
 	},
 	"effect": {
 		"STAMINA": "持久力",
@@ -2622,7 +2626,7 @@
 		"ETHEREAL": "每有一种不同的激活共鸣，所有我方宝可梦提升{{speedPerSynergy}}点SPEED和{{hpPerSynergy}}点HP。",
 		"APPETIZER": "获得{{chefHats}}顶CHEF_HAT。厨师会在每轮结束后制作{{dishesCooked}}份专属料理，并喂给STRONGEST ADJACENT我方宝可梦。",
 		"LUNCH_BREAK": "厨师能制作{{dishesCooked}}份料理，并会投喂{{dishesCooked}}个STRONGEST ADJACENT我方宝可梦。",
-		"BANQUET": "拥有{{chefHats}}顶CHEF_HAT。"
+		"BANQUET": "获得{{chefHats}}顶CHEF_HAT。"
 	},
 	"item": {
 		"FOSSIL_STONE": "化石岩块",
@@ -3472,7 +3476,7 @@
 		"BAD_LUCK": "降低所有敌方宝可梦20点LUCK。",
 		"GOOD_LUCK": "提升所有我方宝可梦20点LUCK。",
 		"PRIMEAPE": "火爆猴每次被击倒都会变得更愤怒，永久提升1点ATK。被击倒10次后进化为弃世猴。",
-		"ZYGARDE": "每个最大深度的坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
+		"ZYGARDE": "每个最大深度的GROUND坑洞中每秒都会涌出一个供基格尔德吸收的基格尔德细胞，使其提升1点最大HP。吸收总计95个细胞后，基格尔德会变形为完全体形态。",
 		"GLIMMORA": "BOARD_EFFECT：HP首次低于最大值的50%时，此宝可梦会向前方2×3的矩形投放TOXIC_SPIKES，造成20点SPECIAL。",
 		"PILLAR": "建造[1,1,2]根能够阻挡敌方宝可梦的立柱。立柱可以被移动，并会根据此宝可梦的STAR数量而具有对应的HP，DEF和SPE_DEF。",
 		"INANIMATE": "非生物单位无法被复制或出售、无法主动移动、发起攻击或携带道具，并免疫异常状态。",
@@ -3994,6 +3998,11 @@
 	"meta": "环境",
 	"back_to_lobby": "返回大厅",
 	"boosters": "补充包",
+	"last_updated": "最后更新",
+	"rank_share": "分享",
+	"top_percent": "前%",
+	"player_rank_distribution": "玩家段位分布",
+	"total_players": "玩家总数",
 	"rank_labels": {
 		"first_place": "冠军",
 		"second_place": "亚军",
@@ -5119,6 +5128,7 @@
 		"pokemon_report": "宝可梦报告",
 		"region_report": "地区报告",
 		"synergy_report": "共鸣报告",
+		"player_report": "玩家报告",
 		"synergy_report_note": "注：此报告是所有拥有此共鸣的宝可梦的平均名次，并非以此共鸣为主要共鸣的队伍的平均名次。",
 		"game_activity": "活跃程度",
 		"game_count": "游戏局数",
