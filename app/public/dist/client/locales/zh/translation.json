@@ -4252,9 +4252,6 @@
 	"pokedex": "图鉴",
 	"alt_forms": "其他形态",
 	"unlocked": "已解锁",
-	"show_evolutions": "显示进化型",
-	"show_alt_forms": "显示不同形态",
-	"show_only_available_picks": "隐藏不可用的附加或地区限定宝可梦",
 	"close": "关闭",
 	"additional_pokemon_hint": "每个玩家所选的附加宝可梦在本局中能被所有玩家在商店中刷出。",
 	"regional_pokemon_hint": "进入新的地区后，能够遭遇新地区限定的宝可梦。",
@@ -4355,7 +4352,13 @@
 		"music_credits": "创作者"
 	},
 	"toggle_fullscreen": "全屏",
-	"filters": "筛选",
+	"filters": {
+		"title": "筛选",
+		"show_mega_evolutions": "显示超级进化",
+		"show_evolutions": "显示进化型",
+		"show_alt_forms": "显示不同形态",
+		"show_only_available_picks": "隐藏不可用的附加或地区限定宝可梦"
+	},
 	"save": "保存",
 	"reset": "重置",
 	"snapshot": "快照",

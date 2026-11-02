@@ -3970,7 +3970,6 @@
 		"add_to_favorites": "즐겨찾기에 추가",
 		"remove_from_favorites": "즐겨찾기에서 제거"
 	},
-	"show_evolutions": "진화형태만 보기",
 	"meta": "메타",
 	"back_to_lobby": "대기실로 돌아가기",
 	"boosters": "부스터팩",
@@ -4110,7 +4109,6 @@
 	"type_here": "이곳에 입력하세요...",
 	"send_message": "메시지 전송",
 	"shiny_hunter": "이로치만 보기",
-	"show_only_available_picks": "유효한 추가/지역 포켓몬만 보기",
 	"close": "닫기",
 	"additional_pokemon_hint": "스테이지 중 플레이어가 고른 추가 포켓몬들은 모두 상점에 등장합니다.",
 	"regional_pokemon_hint": "새로운 지역을 돌아다니다 보면, 새로운 지역 포켓몬을 만날 수 있습니다.",
@@ -5013,7 +5011,6 @@
 	"pokedex": "포켓몬 도감",
 	"alt_forms": "다른 모습",
 	"unlocked": "미해금 된",
-	"show_alt_forms": "다른 모습만 보기",
 	"max_interest": "{{maxInterest}}GOLD 이상이면 최대 이자",
 	"caught": "잡았다!",
 	"fully_grown": "성장 완료",
@@ -5084,7 +5081,13 @@
 		"zengarden": "정원",
 		"origin": "오리진"
 	},
-	"filters": "필터",
+	"filters": {
+		"title": "필터",
+		"show_mega_evolutions": "메가 진화 표시",
+		"show_evolutions": "진화형태만 보기",
+		"show_alt_forms": "다른 모습만 보기",
+		"show_only_available_picks": "유효한 추가/지역 포켓몬만 보기"
+	},
 	"next_level": "다음 레벨",
 	"history": "기록",
 	"no_results_found": "결과가 없습니다",

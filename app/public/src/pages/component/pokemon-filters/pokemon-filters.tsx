@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { PkmAltForms } from "../../../../../config"
+import { isMegaPokemon } from "../../../../../core/evolution-logic/mega-evolution"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -39,7 +40,7 @@ export function PokemonFilters() {
 
   return (
     <details className="pokemon-filters" onToggle={closeSiblingDetails}>
-      <summary>{t("filters")}</summary>
+      <summary>{t("filters.title")}</summary>
       <div>
         {pools.map((pool) => (
           <Checkbox
@@ -58,7 +59,7 @@ export function PokemonFilters() {
           onToggle={(checked) => {
             setPreferences({ showEvolutions: checked })
           }}
-          label={t("show_evolutions")}
+          label={t("filters.show_evolutions")}
           isDark
         />
         <Checkbox
@@ -66,7 +67,15 @@ export function PokemonFilters() {
           onToggle={(checked) => {
             setPreferences({ showAltForms: checked })
           }}
-          label={t("show_alt_forms")}
+          label={t("filters.show_alt_forms")}
+          isDark
+        />
+        <Checkbox
+          checked={preferences.showMegaEvolutions}
+          onToggle={(checked) => {
+            setPreferences({ showMegaEvolutions: checked })
+          }}
+          label={t("filters.show_mega_evolutions")}
           isDark
         />
       </div>
@@ -97,6 +106,7 @@ export function filterPokemonsAccordingToPreferences(
       return false
 
     if (PkmAltForms.includes(p) && !preferences.showAltForms) return false
+    if (isMegaPokemon(p) && !preferences.showMegaEvolutions) return false
     if (!preferences.showEvolutions) {
       const prevolution = data.find((p2) => {
         return (

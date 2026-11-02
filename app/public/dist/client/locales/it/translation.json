@@ -3626,8 +3626,6 @@
 		"add_to_favorites": "Aggiungi ai preferiti",
 		"remove_from_favorites": "Rimuovi dai preferiti"
 	},
-	"show_evolutions": "Mostra evoluzioni",
-	"show_alt_forms": "Mostra forme alternative",
 	"meta": "Meta",
 	"meta_report": {
 		"generation_info": "Generato a{{report_date}} da {{time_limit}} - Dati ottenuti analizzando {{count}} partite",
@@ -3770,7 +3768,6 @@
 	"shiny_hunter": "Cacciatore di Shiny",
 	"pokedex": "Pokédex",
 	"alt_forms": "Forme Alternative",
-	"show_only_available_picks": "Mostra solo gli addizionali/regionali disponibili",
 	"close": "Chiudi",
 	"additional_pokemon_hint": "Ogni giocatore ha scelto Pokèmon aggiuntivi da rendere disponibili nel negozio di tutti i giocatori per questa partita.",
 	"regional_pokemon_hint": "Dopo aver viaggiato verso una nuova regione, incontrerai nuove specie regionali di Pokèmon.",
@@ -3847,7 +3844,13 @@
 		"random_music": "Traccia casuale"
 	},
 	"toggle_fullscreen": "Attiva schermo intero",
-	"filters": "Filtri",
+	"filters": {
+		"title": "Filtri",
+		"show_mega_evolutions": "Mostra Megaevoluzioni",
+		"show_evolutions": "Mostra evoluzioni",
+		"show_alt_forms": "Mostra forme alternative",
+		"show_only_available_picks": "Mostra solo gli addizionali/regionali disponibili"
+	},
 	"save": "Salva",
 	"reset": "Reset",
 	"snapshot": "Snapshot",

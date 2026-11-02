@@ -35,6 +35,7 @@ export interface IPreferencesState {
   showDamageNumbers: boolean
   showEvolutions: boolean
   showAltForms: boolean
+  showMegaEvolutions: boolean
   showRegularPool: boolean
   showAdditionalPool: boolean
   showRegionalPool: boolean
@@ -67,6 +68,7 @@ const defaultPreferences: IPreferencesState = {
   showDamageNumbers: true,
   showEvolutions: true,
   showAltForms: true,
+  showMegaEvolutions: true,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,

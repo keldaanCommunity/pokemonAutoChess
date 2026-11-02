@@ -123,7 +123,8 @@ export function WikiPokemon(props: {
       preferences.showRegionalPool,
       preferences.showRegularPool,
       preferences.showEvolutions,
-      preferences.showAltForms
+      preferences.showAltForms,
+      preferences.showMegaEvolutions
     ]
   ) as Pkm[]
 

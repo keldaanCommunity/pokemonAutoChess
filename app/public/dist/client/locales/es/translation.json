@@ -3925,7 +3925,6 @@
 		"chosen_as_avatar": "✓ Elegido como avatar",
 		"remove_from_favorites": "Remover de favoritos"
 	},
-	"show_evolutions": "Mostrar evoluciones",
 	"meta": "Meta",
 	"meta_report": {
 		"generation_info": "Generado el {{report_date}} desde el {{time_limit}} - Datos de {{count}} partidas",
@@ -4094,7 +4093,6 @@
 	"send_message": "Enviar mensaje",
 	"shiny_hunter": "Cazador Variocolor",
 	"pokedex": "Pokédex",
-	"show_only_available_picks": "Mostrar únicamente los Pokémon adicionales/regionales actualmente disponibles",
 	"close": "Cerrar",
 	"additional_pokemon_hint": "Cada jugador eligió Pokémon adicionales para que estén disponibles en todas las tiendas de jugadores para este juego.",
 	"regional_pokemon_hint": "Después de viajar a una nueva región, encontrarás nuevas especies regionales de Pokémon.",
@@ -4971,10 +4969,15 @@
 		"tournament_finished_message": "Has sido eliminado del torneo.\nTu posición final: {{place}}"
 	},
 	"bench": "Banco",
-	"filters": "Filtros",
+	"filters": {
+		"title": "Filtros",
+		"show_mega_evolutions": "Mostrar Mega Evoluciones",
+		"show_evolutions": "Mostrar evoluciones",
+		"show_alt_forms": "Mostrar formas alternativas",
+		"show_only_available_picks": "Mostrar únicamente los Pokémon adicionales/regionales actualmente disponibles"
+	},
 	"terms_of_service": "Términos del servicio",
 	"unlocked": "Desbloqueados",
-	"show_alt_forms": "Mostrar formas alternativas",
 	"alt_forms": "Formas Alternativas",
 	"popularity_over_time": "Popularidad a lo largo del tiempo",
 	"placement_over_time": "Posicionamiento a lo largo del tiempo",

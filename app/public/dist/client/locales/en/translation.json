@@ -4546,9 +4546,6 @@
 	"pokedex": "Pokédex",
 	"alt_forms": "Alternative Forms",
 	"unlocked": "Unlocked",
-	"show_evolutions": "Show evolutions",
-	"show_alt_forms": "Show alternative forms",
-	"show_only_available_picks": "Show only available add picks / regionals",
 	"close": "Close",
 	"hud": {
 		"life_info": {
@@ -4652,7 +4649,13 @@
 		"music_credits": "Music credits"
 	},
 	"toggle_fullscreen": "Toggle fullscreen",
-	"filters": "Filters",
+	"filters": {
+		"title": "Filters",
+		"show_mega_evolutions": "Show Mega Evolutions",
+		"show_evolutions": "Show evolutions",
+		"show_alt_forms": "Show alternative forms",
+		"show_only_available_picks": "Show only available add picks / regionals"
+	},
 	"save": "Save",
 	"reset": "Reset",
 	"snapshot": "Snapshot",
