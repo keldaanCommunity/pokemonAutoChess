@@ -1,7 +1,14 @@
 import type React from "react"
 import { useEffect, useState } from "react"
+import { isMegaPokemon } from "../../../../core/evolution-logic/mega-evolution"
+import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import type { Emotion } from "../../../../types"
-import { getAvatarSrc, getPortraitSrc } from "../../../../utils/avatar"
+import { type Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
+import {
+  getAvatarSrc,
+  getPokemonCustomFromAvatar,
+  getPortraitSrc
+} from "../../../../utils/avatar"
 import { cc } from "../utils/jsx"
 
 export interface PortraitOptions {
@@ -11,23 +18,26 @@ export interface PortraitOptions {
 }
 
 type Props = ({ avatar: string } | { portrait: string | PortraitOptions }) &
-  React.ImgHTMLAttributes<HTMLImageElement>
+  React.ImgHTMLAttributes<HTMLImageElement> & { withPoolIcons?: boolean }
 
 export default function PokemonPortrait(props: Props) {
-  let src
+  let src: string, pkm: Pkm
   if ("avatar" in props) {
     src = getAvatarSrc(props.avatar)
+    pkm = getPokemonCustomFromAvatar(props.avatar).name
+  } else if (typeof props.portrait === "object") {
+    src = getPortraitSrc(
+      props.portrait.index,
+      props.portrait.shiny,
+      props.portrait.emotion
+    )
+    pkm = PkmByIndex[props.portrait.index]
   } else {
-    src =
-      typeof props.portrait === "object"
-        ? getPortraitSrc(
-            props.portrait.index,
-            props.portrait.shiny,
-            props.portrait.emotion
-          )
-        : getPortraitSrc(props.portrait)
+    src = getPortraitSrc(props.portrait)
+    pkm = PkmByIndex[props.portrait]
   }
-  const { className, ...rest } = props
+
+  const { className, withPoolIcons, ...rest } = props
 
   const [imgSrc, setImgSrc] = useState(src)
 
@@ -42,13 +52,21 @@ export default function PokemonPortrait(props: Props) {
     }
   }
 
+  const poolIconsClasses: {
+    additional?: boolean
+    regional?: boolean
+    mega?: boolean
+  } = {}
+  if (withPoolIcons) {
+    const pokemonData = getPokemonData(pkm)
+    poolIconsClasses.additional = pokemonData.additional
+    poolIconsClasses.regional = pokemonData.regional
+    poolIconsClasses.mega = isMegaPokemon(pkm)
+  }
+
   return (
-    <img
-      src={imgSrc}
-      loading="lazy"
-      className={cc("pokemon-portrait", className || "")}
-      onError={handleError}
-      {...rest}
-    />
+    <div className={cc("pokemon-portrait", className || "", poolIconsClasses)}>
+      <img src={imgSrc} loading="lazy" onError={handleError} {...rest} />
+    </div>
   )
 }

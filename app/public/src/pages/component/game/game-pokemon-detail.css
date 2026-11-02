@@ -35,7 +35,7 @@
   font-size: 90%;
 }
 
-.game-pokemon-detail-portrait {
+.game-pokemon-detail-portrait > img {
   width: 80px;
   height: 80px;
   border-style: solid;

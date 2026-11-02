@@ -261,14 +261,28 @@ summary,
 }
 
 .pokemon-portrait {
-  border: 1px solid #000000;
-  border-radius: 4px;
-  box-shadow: 2px 2px 0 #00000060;
-  image-rendering: pixelated;
   position: relative;
+
+  & > img {
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 #00000060;
+    image-rendering: pixelated;
+  }
 }
 
-.pokemon-portrait.additional:not(.regional)::after {
+.pokemon-portrait.mega::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  height: 12px;
+  width: 12px;
+  background-image: url("assets/ui/mega.png");
+  background-size: cover;
+}
+
+.pokemon-portrait.additional:not(.regional, .mega)::after {
   content: "";
   position: absolute;
   top: 2px;
@@ -277,11 +291,10 @@ summary,
   width: 12px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABISURBVChTjZABCgAgCAO1///ZWqlpRXggQptNZMqIduBa0+6IRN/iMr2ACaNWEX9H7kg49Q0zz+WSAwMQfuBXi3FKixfuRNQBW78Y/CRSBzwAAAAASUVORK5CYII=);
   background-size: cover;
-  image-rendering: pixelated;
   filter: invert(1);
 }
 
-.pokemon-portrait.regional::after {
+.pokemon-portrait.regional:not(.mega)::after {
   content: "";
   position: absolute;
   top: 0px;

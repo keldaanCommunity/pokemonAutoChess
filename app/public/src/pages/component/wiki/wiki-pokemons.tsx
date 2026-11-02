@@ -26,9 +26,10 @@ import PokemonPortrait from "../pokemon-portrait"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import WikiPokemonDetail from "./wiki-pokemon-detail"
 
+const tabs = Object.values(Rarity) as Rarity[]
+
 export default function WikiPokemons() {
   const { t } = useTranslation()
-  const tabs = Object.values(Rarity) as Rarity[]
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [tabIndex, setTabIndex] = useState(0)
   const [preferences, setPreferences] = usePreferences()
@@ -49,7 +50,7 @@ export default function WikiPokemons() {
         setTabIndex(tabs.indexOf(getPokemonData(selectedPkm).rarity))
       }
     }
-  }, [selectedPkm, tabs])
+  }, [selectedPkm])
 
   return (
     <Tabs
@@ -146,7 +147,7 @@ export function WikiPokemon(props: {
         {pokemons.map((pkm) => {
           return (
             <Tab key={"title-" + pkm} className="react-tabs__tab icon-tab">
-              <PokemonPortrait portrait={PkmIndex[pkm]} />
+              <PokemonPortrait portrait={PkmIndex[pkm]} withPoolIcons={true} />
             </Tab>
           )
         })}

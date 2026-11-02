@@ -22,9 +22,16 @@
   text-transform: uppercase;
 }
 
-#wiki-page li[role="tab"] > img.pokemon-portrait {
+#wiki-page li[role="tab"] > .pokemon-portrait {
   display: block;
   margin: -6px -12px;
+  width: 42px;
+  height: 42px;
+
+  & > img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 #wiki-page .wiki-types li[role="tab"] {
