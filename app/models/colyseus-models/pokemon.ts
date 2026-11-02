@@ -30,6 +30,7 @@ import {
   EvolutionRuleType,
   type HatchEvolutionRule,
   type ItemEvolutionRule,
+  type MegaEvolutionRule,
   type MoneyEvolutionRule,
   type PlacementEvolutionRule,
   type StackEvolutionRule,
@@ -439,9 +440,8 @@ export class Manectric extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_MANECTRIC
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 160
   atk = 14
   speed = 70
@@ -489,9 +489,8 @@ export class Banette extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_BANETTE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 180
   atk = 20
   speed = 46
@@ -543,9 +542,8 @@ export class Lucario extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_LUCARIO
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 170
   atk = 18
   speed = 54
@@ -696,9 +694,8 @@ export class Altaria extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_ALTARIA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 170
   atk = 15
   speed = 51
@@ -862,9 +859,8 @@ export class Lopunny extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_LOPUNNY
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 125
   atk = 15
   speed = 59
@@ -913,9 +909,8 @@ export class Steelix extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_STEELIX
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 13
   speed = 35
@@ -964,9 +959,8 @@ export class Camerupt extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_CAMERUPT
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 210
   atk = 15
   speed = 38
@@ -1023,9 +1017,8 @@ export class Medicham extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_MEDICHAM
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 160
   atk = 16
   speed = 51
@@ -1440,9 +1433,8 @@ export class Gardevoir extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_GARDEVOIR
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 230
   atk = 26
   speed = 51
@@ -1481,9 +1473,8 @@ export class Gallade extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_GALLADE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 260
   atk = 38
   speed = 51
@@ -1844,9 +1835,8 @@ export class Tyranitar extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_TYRANITAR
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 210
   atk = 28
   speed = 39
@@ -1978,9 +1968,8 @@ export class Gengar extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_GENGAR
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 350
   atk = 35
   speed = 60
@@ -2045,9 +2034,8 @@ export class Alakazam extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_ALAKAZAM
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 230
   atk = 19
   speed = 63
@@ -3145,9 +3133,8 @@ export class Abomasnow extends Pokemon {
   stars = 2
   /*evolution = Pkm.MEGA_ABOMASNOW
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule*/
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule*/
   hp = 180
   atk = 20
   speed = 44
@@ -3195,6 +3182,7 @@ export class Glalie extends Pokemon {
   rarity = Rarity.EPIC
   stars = 2
   evolution = Pkm.FROSLASS
+  evolutions = [Pkm.FROSLASS, Pkm.MEGA_GLALIE]
   hp = 170
   atk = 17
   speed = 60
@@ -3751,9 +3739,8 @@ export class Meganium extends Pokemon {
   stars = 3
   /*evolution = Pkm.MEGA_MEGANIUM
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule*/
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule*/
   hp = 220
   atk = 22
   speed = 51
@@ -4423,9 +4410,8 @@ export class Slowbro extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_SLOWBRO
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 160
   atk = 12
   speed = 35
@@ -4819,9 +4805,8 @@ export class Feraligatr extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_FERALIGATR
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 240
   atk = 27
   speed = 50
@@ -5405,13 +5390,12 @@ export class Charizard extends Pokemon {
   stars = 3
   evolutions = [Pkm.MEGA_CHARIZARD_X, Pkm.MEGA_CHARIZARD_Y]
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE],
+    type: EvolutionRuleType.MEGA,
     divergentEvolution() {
       //TODO
       return pickRandomIn([Pkm.MEGA_CHARIZARD_X, Pkm.MEGA_CHARIZARD_Y])
     }
-  } satisfies ItemEvolutionRule
+  } satisfies MegaEvolutionRule
   hp = 220
   atk = 18
   speed = 57
@@ -5773,9 +5757,8 @@ export class Zeraora extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_ZERAORA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 16
   speed = 71
@@ -6555,9 +6538,8 @@ export class Darkrai extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_DARKRAI
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 250
   atk = 22
   speed = 65
@@ -6974,9 +6956,8 @@ export class Mawile extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_MAWILE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 180
   atk = 18
   speed = 47
@@ -7264,9 +7245,8 @@ export class Absol extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_ABSOL
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 19
   speed = 49
@@ -7343,9 +7323,8 @@ export class Latias extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_LATIAS
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 120
   atk = 9
   speed = 60
@@ -7363,9 +7342,8 @@ export class Latios extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_LATIOS
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 120
   atk = 9
   speed = 60
@@ -7475,9 +7453,8 @@ export class Mewtwo extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_MEWTWO_Y
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 25
   speed = 67
@@ -7914,9 +7891,8 @@ export class Drampa extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_DRAMPA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 250
   atk = 12
   speed = 37
@@ -8115,9 +8091,8 @@ export class Diancie extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_DIANCIE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 300
   atk = 10
   speed = 41
@@ -8746,9 +8721,8 @@ export class Aerodactyl extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_AERODACTYL
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 14
   speed = 67
@@ -8871,9 +8845,8 @@ export class Delphox extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_DELPHOX
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 200
   atk = 16
   speed = 58
@@ -9230,9 +9203,8 @@ export class Houndoom extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_HOUNDOOM
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 175
   atk = 24
   speed = 55
@@ -12349,9 +12321,8 @@ export class Sharpedo extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_HAWLUCHA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 170
   atk = 26
   speed = 55
@@ -12976,9 +12947,8 @@ export class Sableye extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.GHOST])
   evolution = Pkm.MEGA_SABLEYE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   rarity = Rarity.UNIQUE
   stars = 3
   hp = 200
@@ -13457,9 +13427,8 @@ export class Scrafty extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_HAWLUCHA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 140
   atk = 18
   speed = 44
@@ -13478,9 +13447,8 @@ export class MegaScrafty extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_HAWLUCHA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 280
   atk = 36
   speed = 54
@@ -16335,9 +16303,8 @@ export class Hawlucha extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_HAWLUCHA
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 180
   atk = 17
   speed = 63
@@ -16900,9 +16867,8 @@ export class Skarmory extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_SKARMORY
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 190
   atk = 18
   speed = 47
@@ -17427,9 +17393,8 @@ export class Zygarde10 extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_ZYGARDE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 250
   atk = 26
   speed = 62
@@ -17452,9 +17417,8 @@ export class Zygarde50 extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_ZYGARDE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 220
   atk = 23
   speed = 55
@@ -17927,9 +17891,8 @@ export class Dragalge extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_DRAGALGE
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 130
   atk = 15
   speed = 39
@@ -18643,9 +18606,8 @@ export class Eelektross extends Pokemon {
   stars = 3
   evolution = Pkm.MEGA_EELEKTROSS
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 250
   atk = 24
   speed = 41
@@ -19426,9 +19388,8 @@ export class Excadrill extends Pokemon {
   stars = 2
   evolution = Pkm.MEGA_EXCADRILL
   evolutionRule = {
-    type: EvolutionRuleType.ITEM,
-    itemsTriggeringEvolution: [Item.MEGA_STONE]
-  } satisfies ItemEvolutionRule
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 180
   atk = 19
   speed = 56

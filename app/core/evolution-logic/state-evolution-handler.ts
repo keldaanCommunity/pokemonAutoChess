@@ -1,7 +1,6 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameState from "../../rooms/states/game-state"
-import { Item } from "../../types"
 import type { StateEvolutionRule } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 

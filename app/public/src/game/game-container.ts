@@ -61,6 +61,10 @@ import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
+import {
+  hasMegaEvolutionAnimation,
+  playMegaEvolutionAnimation
+} from "./components/mega-evolution-animation"
 import { DEPTH } from "./depths"
 import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
@@ -267,7 +271,6 @@ class GameContainer {
       "manaBurnCount",
       "moneyCount",
       "amuletCoinCount",
-      "bottleCapCount",
       "attackCount",
       "tripleAttackCount",
       "upgradeCount",
@@ -786,6 +789,9 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemon.action === PokemonActionState.NEST) {
         pokemonUI.nestAnimation(false)
+      } else if (hasMegaEvolutionAnimation(pokemon.name)) {
+        playMegaEvolutionAnimation(pokemonUI)
+        playSound(SOUNDS.MEGA_EVOLUTION)
       } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(
