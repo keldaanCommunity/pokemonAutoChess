@@ -55,8 +55,16 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
+}
+
+.game-pokemon-detail-mega-icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 24px;
+  height: 24px;
 }
 
 .game-pokemon-detail-portrait-hint {

@@ -7,6 +7,10 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
 import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { DishByPkm } from "../../../../../config/game/dishes"
+import {
+  hasMegaEvolution,
+  isMegaPokemon
+} from "../../../../../core/evolution-logic/mega-evolution"
 import { hasSynergy } from "../../../../../core/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -259,6 +263,9 @@ export function GamePokemonDetail(props: {
   const stars =
     pokemon.stars + (pokemon.items.has(Item.STAR_PIECE) && !isInFight ? 1 : 0)
 
+  const { stages, regional } = getPokemonData(pokemon.name)
+  const mega = isMegaPokemon(pokemon.name)
+
   return (
     <div className="game-pokemon-detail">
       <div className="game-pokemon-detail-portrait-wrap">
@@ -271,7 +278,14 @@ export function GamePokemonDetail(props: {
             emotion: props.emotion ?? pokemon.emotion
           }}
         />
-        {getPokemonData(pokemon.name).regional && (
+        {mega && (
+          <img
+            src="assets/ui/mega.png"
+            alt=""
+            className="game-pokemon-detail-mega-icon"
+          />
+        )}
+        {regional && (
           <img
             src="assets/ui/pinpoint.svg"
             alt=""
@@ -305,12 +319,23 @@ export function GamePokemonDetail(props: {
           {Array.from({ length: stars }, (_, index) => (
             <img key={index} src="assets/ui/star.svg" height="16"></img>
           ))}
-          {Array.from(
-            { length: getPokemonData(pokemon.name).stages - stars },
-            (_, index) => (
+          {Array.from({ length: stages - stars }, (_, index) => {
+            if (
+              index === stages - stars - 1 &&
+              hasMegaEvolution(pokemon.name)
+            ) {
+              return (
+                <img
+                  key={index}
+                  src={`assets/ui/mega-star-${stages - stars === 1 ? "on" : "off"}.png`}
+                  height="16"
+                ></img>
+              )
+            }
+            return (
               <img key={index} src="assets/ui/star_empty.svg" height="16"></img>
             )
-          )}
+          })}
         </p>
       </div>
       <div className="game-pokemon-detail-types">
@@ -378,7 +403,7 @@ export function GamePokemonDetail(props: {
                 ap: pokemon.ap,
                 luck: pokemon.luck,
                 stars,
-                stages: getPokemonData(pokemon.name).stages,
+                stages,
                 showAbilityTiers: props.origin === "wiki"
               }
             )}
@@ -411,7 +436,7 @@ export function GamePokemonDetail(props: {
                 ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
-                stages: getPokemonData(pokemon.name).stages,
+                stages,
                 showAbilityTiers:
                   props.origin === "wiki" ||
                   props.origin === "planner" ||

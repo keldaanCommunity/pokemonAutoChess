@@ -5424,7 +5424,7 @@ export class Charizard extends Pokemon {
 
 export class MegaCharizardX extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.COMMON
   stars = 4
   hp = 360
   atk = 33
@@ -5438,7 +5438,7 @@ export class MegaCharizardX extends Pokemon {
 
 export class MegaCharizardY extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DRAGON, Synergy.FIRE, Synergy.FLYING])
-  rarity = Rarity.UNCOMMON
+  rarity = Rarity.COMMON
   stars = 4
   hp = 360
   atk = 33

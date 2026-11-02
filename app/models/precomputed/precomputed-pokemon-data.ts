@@ -12,7 +12,48 @@ console.time("precompute-pokemon-data")
 
 const data = new Map<Pkm, Omit<IPokemonData, "name" | "index">>()
 
+function canEvolveInto(pkm: Pkm, targetEvolution: Pkm): boolean {
+  const pokemon = precomputedPokemons.find((p) => p.name === pkm)
+  if (!pokemon) return false
+  if (pokemon.evolution === Pkm.DEFAULT && pokemon.evolutions.length === 0)
+    return false
+  if (pokemon.evolution === targetEvolution) return true
+  if (pokemon.evolutions.includes(targetEvolution)) return true
+  if (
+    pokemon.evolution !== Pkm.DEFAULT &&
+    pokemon.evolution != null &&
+    pokemon.evolution !== pkm
+  ) {
+    return canEvolveInto(pokemon.evolution, targetEvolution)
+  }
+  if (pokemon.evolutions.length > 0) {
+    for (const evolution of pokemon.evolutions) {
+      if (canEvolveInto(evolution, targetEvolution)) return true
+    }
+  }
+  return false
+}
+
 precomputedPokemons.forEach((pokemon) => {
+  const familyMembers = [...precomputedPokemons].filter(
+    (p) =>
+      PkmFamily[p.name] === PkmFamily[pokemon.name] &&
+      p.skill !== Ability.DEFAULT
+  )
+
+  const stages = Math.max(
+    ...familyMembers
+      .filter((p) => {
+        /*console.log(
+          `Checking if ${pokemon.name} can evolve into ${p.name}`,
+          canEvolveInto(pokemon.name, p.name)
+        )*/
+        return canEvolveInto(pokemon.name, p.name)
+      })
+      .map((p) => p.stars),
+    pokemon.stars
+  )
+
   data.set(pokemon.name, {
     skill: pokemon.skill,
     passive: pokemon.passive,
@@ -26,15 +67,7 @@ precomputedPokemons.forEach((pokemon) => {
     types: schemaValues(pokemon.types) as Synergy[],
     evolution: pokemon.evolution === Pkm.DEFAULT ? null : pokemon.evolution,
     evolutions: pokemon.evolutions,
-    stages: Math.max(
-      ...precomputedPokemons
-        .filter(
-          (p) =>
-            PkmFamily[p.name] === PkmFamily[pokemon.name] &&
-            p.skill !== Ability.DEFAULT
-        )
-        .map((p) => p.stars)
-    )
+    stages
   })
 })
 
