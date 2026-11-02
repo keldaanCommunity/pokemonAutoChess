@@ -31,9 +31,18 @@ export default function WikiPokemons() {
   const tabs = Object.values(Rarity) as Rarity[]
   const [selectedPkm, setSelectedPkm] = useState<Pkm | "">("")
   const [tabIndex, setTabIndex] = useState(0)
+  const [preferences, setPreferences] = usePreferences()
 
   useEffect(() => {
     if (selectedPkm) {
+      setPreferences({
+        showEvolutions: true,
+        showAltForms: true,
+        showMegaEvolutions: true,
+        showRegularPool: true,
+        showAdditionalPool: true,
+        showRegionalPool: true
+      })
       if (NonPkm.includes(selectedPkm)) {
         setTabIndex(tabs.length)
       } else {
