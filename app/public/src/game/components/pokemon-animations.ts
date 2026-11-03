@@ -7184,8 +7184,8 @@ export const PokemonAnimations: {
   },
   [Pkm.FEZANDIPITI]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
+    ability: AnimationType.Attack,
+    emote: AnimationType.Attack,
     attackSprite: AttackSprite.FLYING_MELEE,
     hitSprite: HitSprite.POISON_HIT
   },
