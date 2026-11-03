@@ -6,8 +6,7 @@ import {
   type Delayed,
   Room
 } from "colyseus"
-import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/auth"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import { MAX_PLAYERS_PER_GAME } from "../config"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import { type IPreparationMetadata, Role, Transfer } from "../types"
@@ -366,8 +365,8 @@ export default class PreparationRoom extends Room<{ state: PreparationState }> {
 
   async onAuth(client: Client, options, context) {
     try {
-      const token = await admin.auth().verifyIdToken(options.idToken)
-      const user = await admin.auth().getUser(token.uid)
+      const token = await getAuth().verifyIdToken(options.idToken)
+      const user = await getAuth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
         .select({ role: 1, banned: 1 })
         .lean()
