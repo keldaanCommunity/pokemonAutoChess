@@ -5391,9 +5391,13 @@ export class Charizard extends Pokemon {
   evolutions = [Pkm.MEGA_CHARIZARD_X, Pkm.MEGA_CHARIZARD_Y]
   evolutionRule = {
     type: EvolutionRuleType.MEGA,
-    divergentEvolution() {
-      //TODO
-      return pickRandomIn([Pkm.MEGA_CHARIZARD_X, Pkm.MEGA_CHARIZARD_Y])
+    divergentEvolution(pokemon, player: Player) {
+       return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.FLYING,
+        Synergy.FIRE
+      ]) === Synergy.FIRE
+        ? Pkm.MEGA_CHARIZARD_X
+        : Pkm.MEGA_CHARIZARD_Y
     }
   } satisfies MegaEvolutionRule
   hp = 220
@@ -5404,6 +5408,7 @@ export class Charizard extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.BLAST_BURN
+  passive = Passive.CHARIZARD
 }
 
 export class MegaCharizardX extends Pokemon {
