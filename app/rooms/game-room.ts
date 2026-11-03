@@ -1,7 +1,7 @@
 import { Dispatcher } from "@colyseus/command"
 import type { MapSchema } from "@colyseus/schema"
 import { type Client, CloseCode, Room } from "colyseus"
-import admin from "firebase-admin"
+import { getAuth } from "firebase-admin/auth"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
   BOARD_WIDTH,
@@ -741,8 +741,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
   async onAuth(client: Client, options, context) {
     try {
       super.onAuth(client, options, context)
-      const token = await admin.auth().verifyIdToken(options.idToken)
-      const user = await admin.auth().getUser(token.uid)
+      const token = await getAuth().verifyIdToken(options.idToken)
+      const user = await getAuth().getUser(token.uid)
 
       if (!user.displayName) {
         logger.error("No display name for this account", user.uid)

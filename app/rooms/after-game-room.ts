@@ -1,6 +1,6 @@
 import { Dispatcher } from "@colyseus/command"
 import { type Client, Room } from "colyseus"
-import admin from "firebase-admin"
+import { getAuth } from "firebase-admin/auth"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
 import type { IAfterGamePlayer } from "../types"
@@ -53,8 +53,8 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
   async onAuth(client: Client, options, context) {
     try {
       super.onAuth(client, options, context)
-      const token = await admin.auth().verifyIdToken(options.idToken)
-      const user = await admin.auth().getUser(token.uid)
+      const token = await getAuth().verifyIdToken(options.idToken)
+      const user = await getAuth().getUser(token.uid)
       const userProfile = await UserMetadata.findOne({ uid: user.uid })
         .select({ banned: 1 })
         .lean()

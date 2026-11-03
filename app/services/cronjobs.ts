@@ -1,8 +1,7 @@
 import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
-import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/auth"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
@@ -142,7 +141,7 @@ async function deleteOldAnonymousAccounts() {
 
   async function listAllUsers(nextPageToken?: string) {
     // List batch of users, 1000 at a time.
-    const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
+    const listUsersResult = await getAuth().listUsers(1000, nextPageToken)
     //logger.debug(nextPageToken)
     listUsersResult.users.forEach((userRecord) => {
       const lastSignInDate = dayjs(userRecord.metadata.lastSignInTime)
@@ -171,7 +170,7 @@ async function deleteOldAnonymousAccounts() {
       const account = anonymousAccounts.pop()
       account && batchDeletion.push(account.uid)
     }
-    const firebaseDeletion = await admin.auth().deleteUsers(batchDeletion)
+    const firebaseDeletion = await getAuth().deleteUsers(batchDeletion)
     logger.info("firebase deletion result ", firebaseDeletion)
     const pacDeletion = await UserMetadata.deleteMany({
       uid: { $in: batchDeletion }
