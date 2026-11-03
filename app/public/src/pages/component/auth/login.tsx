@@ -1,3 +1,14 @@
+import { initializeUI, requireDisplayName } from "@firebase-oss/ui-core"
+import {
+  FirebaseUIProvider,
+  GoogleSignInButton,
+  OAuthScreen,
+  SignInAuthScreen,
+  SignUpAuthScreen,
+  TwitterSignInButton,
+  useUI
+} from "@firebase-oss/ui-react"
+import { getApp } from "firebase/app"
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import { useEffect, useState } from "react"
@@ -8,11 +19,52 @@ import { throttle } from "../../../../../utils/function"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
-//import AnonymousButton from "./anonymous-button"
-import { StyledFirebaseAuth } from "./styled-firebase-auth"
 
-import "firebaseui/dist/firebaseui.css"
+import "@firebase-oss/ui-styles/dist.min.css"
 import "./login.css"
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(FIREBASE_CONFIG)
+}
+
+const EmailSignInButton = ({ onClick }: { onClick: () => void }) => {
+  const { t } = useTranslation()
+  const { state } = useUI()
+  return (
+    <div>
+      <button
+        className="fui-button fui-button--secondary fui-provider__button"
+        type="button"
+        data-provider="password"
+        disabled={state !== "idle"}
+        onClick={onClick}
+      >
+        <MailIcon />
+        <span>{t("auth.sign_in_with_email")}</span>
+      </button>
+    </div>
+  )
+}
+
+const MailIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="fui-provider__icon"
+  >
+    <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z" />
+  </svg>
+)
+
+// Compat and modular SDKs share the same underlying default app and Auth instance
+const firebaseUI = initializeUI({
+  app: getApp(),
+  behaviors: [requireDisplayName()]
+})
 
 export default function Login() {
   const { t } = useTranslation()
@@ -23,6 +75,9 @@ export default function Login() {
   const email = useAppSelector((state) => state.network.email)
   const [prejoining, setPrejoining] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
+  const [emailView, setEmailView] = useState<"providers" | "signin" | "signup">(
+    "providers"
+  )
 
   const preJoinLobby = throttle(async function prejoin() {
     setPrejoining(true)
@@ -31,29 +86,15 @@ export default function Login() {
       .catch(() => setPrejoining(false))
   }, 1000)
 
-  const uiConfig = {
-    // Popup signin flow rather than Navigate flow.
-    signInFlow: "popup",
-    // We will display Google and Facebook as auth providers.
-    signInSuccessUrl: window.location.href + "lobby",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      {
-        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        requireDisplayName: true
-      },
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-      // Avoid Navigates after sign-in.
-      signInSuccessWithAuthResult: () => true
-    }
-  }
-
-  // Initialize Firebase
-  if (!firebase.apps.length) {
-    firebase.initializeApp(FIREBASE_CONFIG)
-  }
+  const backButton = (
+    <button
+      className="fui-button fui-button--secondary fui-provider__button"
+      type="button"
+      onClick={() => setEmailView("providers")}
+    >
+      {t("auth.back")}
+    </button>
+  )
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((u) => {
@@ -66,11 +107,25 @@ export default function Login() {
   if (!uid) {
     return (
       <div id="play-panel">
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-        {/* <AnonymousButton /> */}
+        <FirebaseUIProvider ui={firebaseUI}>
+          {emailView === "signin" && (
+            <SignInAuthScreen onSignUpClick={() => setEmailView("signup")}>
+              {backButton}
+            </SignInAuthScreen>
+          )}
+          {emailView === "signup" && (
+            <SignUpAuthScreen onSignInClick={() => setEmailView("signin")}>
+              {backButton}
+            </SignUpAuthScreen>
+          )}
+          {emailView === "providers" && (
+            <OAuthScreen>
+              <GoogleSignInButton />
+              <EmailSignInButton onClick={() => setEmailView("signin")} />
+              <TwitterSignInButton />
+            </OAuthScreen>
+          )}
+        </FirebaseUIProvider>
       </div>
     )
   } else {

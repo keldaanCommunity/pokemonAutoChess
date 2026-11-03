@@ -1,38 +1,99 @@
-.firebaseui-idp-button {
-  border: solid !important;
-  padding: 5px 30px !important;
-  border-radius: 12px !important;
-  border-color: black !important;
-  border-width: 4px !important;
-  font-family: Jost !important;
-  max-width: 360px !important;
-  cursor: var(--cursor-hover) !important;
+#play-panel .fui-screen {
+  align-items: flex-start;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
-.firebaseui-idp-text {
-  font-size: 150% !important;
+#play-panel .fui-card {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  max-width: 360px;
 }
 
-.firebaseui-container {
-  margin-left: 0px !important;
+#play-panel .fui-card__header {
+  display: none;
 }
 
-.firebaseui-card-content {
-  padding: 0px !important;
+#play-panel .fui-button {
+  justify-content: flex-start;
+  border: 4px solid black;
+  border-radius: 12px;
+  font-family: Jost;
+  font-size: 120%;
+  color: white;
+  cursor: var(--cursor-hover);
 }
 
-.firebaseui-idp-google {
-  box-shadow: inset -6px -6px 0px 0px #adafbc !important;
+#play-panel .fui-form .fui-button {
+  background: #db4437;
+  box-shadow: inset -6px -6px 0px 0px #a33329;
 }
 
-.firebaseui-idp-password {
-  box-shadow: inset -6px -6px 0px 0px #a33329 !important;
+#play-panel .fui-provider__button[data-provider="google.com"] {
+  background: white;
+  color: #757575;
+  box-shadow: inset -6px -6px 0px 0px #adafbc;
 }
 
-.firebaseui-idp-facebook {
-  box-shadow: inset -6px -6px 0px 0px #293e6b !important;
+#play-panel .fui-provider__button[data-provider="password"] {
+  background: #db4437;
+  box-shadow: inset -6px -6px 0px 0px #a33329;
 }
 
-.firebaseui-idp-twitter {
-  box-shadow: inset -6px -6px 0px 0px #4181b3 !important;
+#play-panel .fui-provider__button[data-provider="twitter.com"] {
+  background: #55acee;
+  box-shadow: inset -6px -6px 0px 0px #4181b3;
+}
+
+#play-panel .fui-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+#play-panel .fui-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#play-panel .fui-form label {
+  color: var(--color-fg-primary);
+  text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+#play-panel .fui-form label div[data-input-label] {
+  font-size: 110%;
+}
+
+#play-panel .fui-form input {
+  background: white;
+  color: #333;
+  border: 4px solid black;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-family: Jost;
+  font-size: 110%;
+  box-shadow: inset 3px 3px 0px 0px #adafbc;
+}
+
+#play-panel .fui-form .fui-form__action {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  font-family: Jost;
+  font-size: 100%;
+  color: white;
+  text-decoration: underline;
+  cursor: var(--cursor-hover);
+}
+
+#play-panel .fui-divider {
+  margin: 0.75em 0;
 }

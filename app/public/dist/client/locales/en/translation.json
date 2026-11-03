@@ -3971,6 +3971,8 @@
 		"connecting": "Connecting...",
 		"join_lobby": "Join Lobby",
 		"sign_out": "Sign out",
+		"sign_in_with_email": "Sign in with email",
+		"back": "Back",
 		"signing_out": "Signing out..."
 	},
 	"collection": {
