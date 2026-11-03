@@ -213,7 +213,7 @@ export default class Player extends Schema implements IPlayer {
   lightY: number
   ghost: boolean = false
   firstPartner: Pkm | undefined
-  hasLeftGame: boolean = false
+  hasLeftGame: boolean = false // has surrendered or has been eliminated after reconnection timeout
   bonusSynergies: Map<Synergy, number> = new Map<Synergy, number>()
   pokemonsPlayed: Set<Pkm> = new Set<Pkm>()
   pokemonsTrainingInDojo: {
