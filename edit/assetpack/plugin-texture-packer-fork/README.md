@@ -19,14 +19,12 @@ import { texturePacker } from "@assetpack/plugin-texture-packer";
 
 export default {
   ...
-  plugins: {
-    ...
-    texturePacker: texturePacker(),
-  },
+  pipes: [texturePacker()],
 };
 ```
 
-This plugin requires the `{tps}` tag to be placed on a folder:
+This plugin supports AssetPack 1.7's `pipes` API and the legacy 0.8 `plugins` API.
+It requires the `{tps}` tag to be placed on a folder:
 
 ```bash
 raw-assets
@@ -58,6 +56,9 @@ raw-assets
   - `tps`: The tag used to denote a folder that should be processed by Texture Packer.
   - `fix`: The tag used to denote that the spritesheet should be fixed to a specific resolution.
   - `jpg`: The tag used to denote the spritesheet should be saved as a jpg.
+
+The fork retains the Phaser 3 exporter and its atlas JSON format.
+With Core 1.7, atlas files are emitted at the output path of the tagged folder's parent; Core 0.8 emitted them in the tagged folder's output path.
 
 ## Pixi Specific
 

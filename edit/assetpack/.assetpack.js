@@ -1,7 +1,6 @@
 import { path as upath } from "@assetpack/core"
-import { compressJpg, compressPng } from "@assetpack/plugin-compress"
-//import { audio } from "@assetpack/plugin-ffmpeg"
-import { json } from "@assetpack/plugin-json"
+import { compress } from "@assetpack/core/image"
+import { json } from "@assetpack/core/json"
 import fs from "fs-extra"
 import { texturePacker } from "./plugin-texture-packer-fork/dist/es/index.js"
 
@@ -11,34 +10,10 @@ export default {
   entry: "../../app/public/src/assets",
   output: "../../app/public/dist/client/assets",
   cache: true,
-  plugins: {
-    compressPng: compressPng(),
-    compressJpg: compressJpg(),
-    /*audio: audio({
-      inputs: [".mp3", ".wav", ".ogg"],
-      outputs: [
-        {
-          formats: [".mp3"],
-          recompress: false,
-          options: {
-            audioBitrate: 96,
-            audioChannels: 1,
-            audioFrequency: 48000
-          }
-        },
-        {
-          formats: [".ogg"],
-          recompress: false,
-          options: {
-            audioBitrate: 32,
-            audioChannels: 1,
-            audioFrequency: 22050
-          }
-        }
-      ]
-    }),*/
-    json: json(),
-    texturePacker: texturePacker({
+  cacheLocation: ".assetpack/core-1.7",
+  strict: true,
+  pipes: [
+    texturePacker({
       texturePacker: {
         exporter: "Phaser3",
         allowRotation: false // i spotted some bugs when activated
@@ -48,21 +23,24 @@ export default {
         template: ``
       }
     }),
-    texturePackIndexer: texturePackAtlas(),
-    compressedAtlas: compressedAtlas({
+    compress({ png: true, jpg: true, webp: false }),
+    json(),
+    texturePackAtlas(),
+    compressedAtlas({
       path: "../../app/public/src/assets/pokemons",
       include: /\d+-?\d+/,
       outputPath: "../../app/public/dist/client/assets/pokemons"
     })
-  }
+  ]
 }
 
 function texturePackAtlas() {
   return {
     folder: true,
     name: "texture-pack-indexer",
-    finish(tree, processor) {
-      const atlasPath = upath.joinSafe(processor.config.entry, "atlas.json")
+    defaultOptions: {},
+    async finish(tree, _options, pipeSystem) {
+      const atlasPath = upath.joinSafe(pipeSystem.entryPath, "atlas.json")
 
       const existingAtlas = fs.existsSync(atlasPath)
         ? fs.readJSONSync(atlasPath)
@@ -86,13 +64,14 @@ function texturePackAtlas() {
       }
 
       function walk(node) {
-        if (node.isFolder && node.files) {
-          for (let f in node.files) walk(node.files[f])
+        if (node.state === "deleted") return
+        if (node.isFolder) {
+          for (const child of node.children) walk(child)
         } else if (
-          node.pathTags["tps"] === true &&
+          node.allMetaData.tps === true &&
           node.path.endsWith(".png")
         ) {
-          let [packPath, animName] = node.parent.split("{tps}")
+          let [packPath, animName] = node.directory.split("{tps}")
           packPath = packPath.replace(tree.path + "/", "")
           let packName = packPath.split("/").pop()
 
@@ -110,7 +89,7 @@ function texturePackAtlas() {
 
             if (animName === "") {
               // case where the pack contains a single anim (no sub folder)
-              animName = node.parent.split("/").pop().replace("{tps}", "")
+              animName = node.directory.split("/").pop().replace("{tps}", "")
             } else {
               // case where the pack contains several anims, we remove trailing slash
               animName = animName.replace(/^\//, "")
@@ -130,6 +109,7 @@ function texturePackAtlas() {
 
       //fs.writeJSONSync("tree.json", tree)
       fs.writeJSONSync(atlasPath, atlas)
+      fs.writeJSONSync(upath.joinSafe(pipeSystem.outputPath, "atlas.json"), atlas)
 
       const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
       fs.writeFileSync(
@@ -153,7 +133,8 @@ function texturePackAtlas() {
 function compressedAtlas({ path, include, outputPath }) {
   return {
     name: "compressed-atlas",
-    finish() {
+    defaultOptions: {},
+    async finish() {
       const files = fs.readdirSync(path)
       const jsonFiles = files.filter(
         (file) => file.endsWith(".json") && include.test(file)

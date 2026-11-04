@@ -1,16 +1,18 @@
 {
   "type": "module",
   "devDependencies": {
-    "@assetpack/cli": "file:./assetpack-cli-fork",
-    "@assetpack/core": "^0.8.0",
-    "@assetpack/plugin-compress": "^0.8.0",
-    "@assetpack/plugin-ffmpeg": "^0.8.0",
-    "@assetpack/plugin-json": "^0.8.0",
+    "@assetpack/core": "1.7.0",
     "@assetpack/plugin-texture-packer": "file:./plugin-texture-packer-fork",
-    "patch-package": "^8.0.1"
+    "fs-extra": "^11.3.0",
+    "sharp": "0.34.5"
+  },
+  "overrides": {
+    "free-tex-packer-core": {
+      "sharp": "0.34.5"
+    }
   },
   "scripts": {
     "assetpack": "assetpack -c .assetpack.js",
-    "postinstall": "patch-package"
+    "test": "node --test assetpack.test.js"
   }
 }
