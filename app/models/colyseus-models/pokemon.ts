@@ -1490,7 +1490,7 @@ export class MegaGallade extends Pokemon {
     Synergy.FIGHTING,
     Synergy.HUMAN
   ])
-  rarity = Rarity.COMMON
+  rarity = Rarity.EPIC
   stars = 4
   hp = 350
   atk = 50
@@ -8110,7 +8110,7 @@ export class Diancie extends Pokemon {
 
 export class MegaDiancie extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.FOSSIL, Synergy.ROCK, Synergy.FAIRY])
-  rarity = Rarity.LEGENDARY
+  rarity = Rarity.EPIC
   stars = 4
   hp = 300
   atk = 34
@@ -12323,7 +12323,7 @@ export class Sharpedo extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.WATER, Synergy.DARK])
   rarity = Rarity.RARE
   stars = 2
-  evolution = Pkm.MEGA_HAWLUCHA
+  evolution = Pkm.MEGA_SHARPEDO
   evolutionRule = {
     type: EvolutionRuleType.MEGA
   } satisfies MegaEvolutionRule
@@ -13429,7 +13429,7 @@ export class Scrafty extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
   stars = 2
-  evolution = Pkm.MEGA_HAWLUCHA
+  evolution = Pkm.MEGA_SCRAFTY
   evolutionRule = {
     type: EvolutionRuleType.MEGA
   } satisfies MegaEvolutionRule
@@ -13448,11 +13448,7 @@ export class Scrafty extends Pokemon {
 export class MegaScrafty extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
-  stars = 3
-  evolution = Pkm.MEGA_HAWLUCHA
-  evolutionRule = {
-    type: EvolutionRuleType.MEGA
-  } satisfies MegaEvolutionRule
+  stars = 3  
   hp = 280
   atk = 36
   speed = 54
