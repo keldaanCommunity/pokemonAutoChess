@@ -13,7 +13,7 @@ export function getRemainingPlayers(
     if (!player.eliminated)
       remainingPlayers.push({
         id: playerId,
-        ...player
+        ...player.toJSON()
       })
   })
   return remainingPlayers
