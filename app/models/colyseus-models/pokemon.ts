@@ -67,7 +67,6 @@ import { isIn, removeFromArray } from "../../utils/array"
 import { getFirstAvailablePositionInBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { clamp, min } from "../../utils/number"
-import { pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import type Player from "./player"
 import { getPkmWithCustom } from "./pokemon-customs"
@@ -5392,7 +5391,7 @@ export class Charizard extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.MEGA,
     divergentEvolution(pokemon, player: Player) {
-       return getDominantSynergy(player.synergies.toMap(), [
+      return getDominantSynergy(player.synergies.toMap(), [
         Synergy.FLYING,
         Synergy.FIRE
       ]) === Synergy.FIRE

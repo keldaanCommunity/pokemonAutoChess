@@ -2,6 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { MegaPkm, type Pkm } from "../../types/enum/Pokemon"
+import type { IPokemonData } from "../../types/interfaces/PokemonData"
 import { isIn } from "../../utils/array"
 import { EvolutionHandler } from "./evolution-handler"
 
@@ -20,9 +21,9 @@ export const hasMegaEvolution = (pkm: Pkm) => {
   )
 }
 
-export const canMegaEvolve = (pokemon: Pokemon) => {
+export const canMegaEvolve = (pokemon: Pokemon | IPokemonData) => {
   return (
-    isMegaPokemon(pokemon.evolution) ||
+    (pokemon.evolution && isMegaPokemon(pokemon.evolution)) ||
     pokemon.evolutions.some((e) => isMegaPokemon(e))
   )
 }
@@ -36,7 +37,8 @@ export class MegaEvolutionHandler extends EvolutionHandler {
   evolve(pokemon: Pokemon, player: Player): Pokemon {
     const megaEvolution =
       pokemon.evolutions.length > 1
-        ? pokemon.evolutions.find((evo) => isMegaPokemon(evo)) ?? pokemon.evolution
+        ? (pokemon.evolutions.find((evo) => isMegaPokemon(evo)) ??
+          pokemon.evolution)
         : pokemon.evolution
     const pokemonEvolved = player.transformPokemon(pokemon, megaEvolution)
     return pokemonEvolved
