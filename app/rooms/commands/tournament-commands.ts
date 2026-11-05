@@ -426,7 +426,7 @@ export class EndTournamentCommand extends Command<
         if (player.ranks.length === nbMatchsPlayed) {
           finalists.push({
             id: playerId,
-            ...player
+            ...player.toJSON()
           })
         }
       })
