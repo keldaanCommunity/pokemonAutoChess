@@ -3538,7 +3538,7 @@
 		"EISCUE_NOICE": "배틀이 시작할 때 SNOW이 내리면 아이스페이스가 되어 SHIELD를 100 획득한다. FREEZE 상태에 걸리거나 되는 도중에 아이스페이스가 되어 SHIELD를 50 획득한다",
 		"EISCUE_ICE_FACE": "기술을 ON_CAST일 때, 남아있는 SHIELD의 양에 따라 추가 SPECIAL를 입힌다. SHIELD가 파괴되거나 기술을 ON_CAST인 상태가 끝나면 나이스페이스로 돌아간다.",
 		"COMATOSE": "항상 SLEEP 상태라서 BURN, POISONED, FREEZE과 PARALYSIS 상태가 되지 않는다. SOUND가 자말라를 깨우려 하면 더 깊이 잠에 빠져 AP을 5 얻는다.",
-		"WALL_OF_STONE": "배틀이 시작할 때 차곡차곡과 같은 가로줄의 같은 편 ROCK 포켓몬들은 50 SHIELD를 얻고, SHIELD가 사라질 때 까지 LOCKED 상태가 된다.",
+		"WALL_OF_STONE": "배틀이 시작할 때 차곡차곡과 같은 가로줄의 같은 편 ROCK 포켓몬들은 50 SHIELD를 얻고, 3초 동안 LOCKED됩니다.",
 		"VESPIQUEN": "비퀸은 시작하는 위치에 따라 RANGE와 기술이 바뀐다.\nBUG 시너지의 영향을 받아 복제를 하는 대상이 된다면 대신 세꿀버리 두 마리를 내보낸다.",
 		"ILLUSION": "왼쪽에 있는 같은 편의 모습으로 바꾼다.",
 		"STOUTLAND_SEARCH": "바랜드는 뭔가가 파묻혀 있는 땅 위에 서 있으면 짖는다.",

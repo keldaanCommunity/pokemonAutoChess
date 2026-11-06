@@ -3518,7 +3518,7 @@
 		"AVALUGG": "Peut porter jusqu'à 4 $t(pkm.BERGMITE) sur son dos, récupérés depuis votre banc au début du combat.",
 		"EISCUE_NOICE": "Lorsqu'il démarre un combat sous la SNOW, il gagne sa forme Tête de Gel et 100 SHIELD. Lorsqu'il subit ou inflige FREEZE, il regagne sa forme Tête de Gel et gagne 50 SHIELD.",
 		"EISCUE_ICE_FACE": "Lorsqu'il déclenche sa capacité, son SHIELD actuel est converti en SPECIAL supplémentaires. Lorsque le SHIELD est brisé ou après avoir lancé sa capacité, il retrouve sa forme Tête Dégel.",
-		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED jusqu'à ce que leur SHIELD soit brisé.",
+		"WALL_OF_STONE": "Au début du combat, Ama-Ama et tous les alliés ROCK sur la même ligne gagnent 50 SHIELD et sont LOCKED pendant 3 secondes.",
 		"COMATOSE": "Subit toujours l'altération SLEEP. Est immunisé à la BURN, l'altération POISONED, FREEZE ou PARALYSIS. Quand un Pokémon partageant la synergie SOUND essaie de le réveiller par ses cris, $t(pkm.KOMALA) plonge encore plus profondément dans ses rêves, et gagne 5 AP.",
 		"VESPIQUEN": "La portée d' $t(pkm.VESPIQUEEN) et sa capacité diffèrent en fonction de la rangée sur la laquelle est le Pokémon. La synergie BUG ne copie plus $t(pkm.VESPIQUEEN), mais 2 $t(pkm.COMBEE) à la place.",
 		"UXIE": "XP gagnée: {{stacks}}",

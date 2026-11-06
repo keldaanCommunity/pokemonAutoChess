@@ -3540,7 +3540,7 @@
 		"EISCUE_NOICE": "在SNOW中，开始战斗时变为结冻头，并获得100点SHIELD。陷入或使其他宝可梦陷入FREEZE时，变为结冻头并获得50点SHIELD。",
 		"EISCUE_ICE_FACE": "ON_CAST将当前SHIELD量转化为本次招式额外造成的SPECIAL。失去所有SHIELD或ON_CAST变为解冻头。",
 		"COMATOSE": "始终处于SLEEP。免疫BURN，POISONED，FREEZE或是PARALYSIS。SOUND宝可梦的叫声无法唤醒此宝可梦，反而会使之陷入更深的梦境，提升5点AP。",
-		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，并陷入LOCKED直到失去所有SHIELD。",
+		"WALL_OF_STONE": "战斗开始时，垒磊石和同一横排上的所有我方ROCK宝可梦获得50点SHIELD，处于 LOCKED 状态，持续 3 秒。",
 		"VESPIQUEN": "蜂女王会根据对战开始时自身所处的横排改变RANGE和使用的招式。\n若蜂女王将被BUG共鸣复制，改为生成2只三蜜蜂。",
 		"ILLUSION": "此宝可梦会伪装为其左侧的我方宝可梦。",
 		"STOUTLAND_SEARCH": "长毛狗站在埋有隐藏道具的格子上时，会发出吠叫声。",

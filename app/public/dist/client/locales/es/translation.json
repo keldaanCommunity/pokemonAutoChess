@@ -3479,7 +3479,7 @@
 		"FINIZEN": "Se transforma en Palafin Héroe después de que 5 aliados sean derrotados (sin contar invocados), o si este Pokémon es el último en pie. Recupera todos sus HP cuando esto pasa.",
 		"COMMANDER": "Tatsugiri no puede llevar objetos. Al comienzo de la pelea, un Dondozo ADJACENT con un espacio libre para un objeto se traga a Tatsugiri. Tatsugiri provee estadísticas basado en su forma:\nForma Curvada: +8 ATK\nForma Lánguida: +8 DEF\nForma Recta: +25 SPEED",
 		"AVALUGG": "Puede llevar consigo hasta 4 $t(pkm.BERGMITE) en su espalda, tomados del banco al comienzo de la pelea.",
-		"WALL_OF_STONE": "Al comienzo de la pelea, Stakataka y todos sus alliados de ROCK en la misma fila ganan 50 SHIELD y son LOCKED hasta que su SHIELD se acabe.",
+		"WALL_OF_STONE": "Al comienzo de la pelea, Stakataka y todos sus alliados de ROCK en la misma fila ganan 50 SHIELD y son LOCKED durante 3 segundos.",
 		"VESPIQUEN": "El RANGE y la habilidad de Vespiquen difiere basado en la fila en la que empieza. La sinergia BUG no invoca otra combia de Vespiquen, sino que dos Combee.",
 		"STOUTLAND_SEARCH": "Stoutland lada cuando está parado arriba de una casilla con un objeto enterrado.",
 		"SUBSTITUTE": "Un disfraz creado para parecerse a un Pokémon",

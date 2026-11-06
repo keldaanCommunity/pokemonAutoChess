@@ -3179,7 +3179,7 @@
 		"DUNSPARCE": "Dummisel entwickelt sich, nachdem es 20 mal gegraben hat. ",
 		"PACHIRISU": "Hat eine [30,LK]% Chance eine vergrabene SITRUS_BERRY, nach jedem Kampf zu finden. ",
 		"ILLUSION": "Imitiert das Aussehen des Partners zu seiner Linken. ",
-		"WALL_OF_STONE": "Zu Kampfbeginn erhält Muramura, sowie alle ROCK Partner in der selben Reihe, 50 SHIELD und sind LOCKED bis der SHIELD verbraucht ist.",
+		"WALL_OF_STONE": "Zu Kampfbeginn erhält Muramura, sowie alle ROCK Partner in der selben Reihe, 50 SHIELD und sind LOCKED für 3 Sekunden.",
 		"VESPIQUEN": "Honweisels RANGE und Fähigkeit passt sich der Reihe an, in der es platziert wird. \nBUG Synergy erschafft keine Honweisel-Klone, stattdessen erscheinen 2 Wadribie.",
 		"EMERGENCY_EXIT": "Erhält zu Kampfbeginn volle PP",
 		"BEADS_OF_RUIN": "Der Neid der sich in seinen Perlen sammelt, strahlt einen Fluch aus. Jeder Treffer reduziert die SPE_DEF des Zieles um 1. ",

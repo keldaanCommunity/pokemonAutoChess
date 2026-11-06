@@ -3533,7 +3533,7 @@
 		"EISCUE_NOICE": "Savaşa SNOW altında başlarsa Buz Yüz formuna geçer ve 100 SHIELD kazanır. FREEZE uyguladığında ya da FREEZE olduğunda Buz Yüz formuna döner ve 50 SHIELD kazanır.",
 		"EISCUE_ICE_FACE": "ON_CAST, mevcut SHIELD değeri ek SPECIAL hasara dönüşür. SHIELD bitince ya da ON_CAST, Eiscue kırılır ve Buzsuz formuna geçer.",
 		"COMATOSE": "Her zaman SLEEP durumundadır. BURN, POISONED, FREEZE ve PARALYSIS etkilerine bağışıktır. Bir SOUND bu Pokémon'u uyandırmaya çalıştığında rüyasına daha da dalar ve 5 AP kazanır.",
-		"WALL_OF_STONE": "Savaş başlayınca Stakataka ve aynı sıradaki tüm ROCK müttefikler 50 SHIELD alır ve SHIELD bitene kadar LOCKED olur.",
+		"WALL_OF_STONE": "Savaş başlayınca Stakataka ve aynı sıradaki tüm ROCK müttefikler 50 SHIELD alır 3 saniyeliğine LOCKED durumundadır.",
 		"VESPIQUEN": "Vespiquen'in RANGE değeri ve yeteneği başladığı sıraya göre değişir.\nBUG sinerji efekti Vespiquen'in kopyasını değil, bunun yerine 2 Combee çağırır.",
 		"ILLUSION": "Solundaki müttefikin görünüşünü kopyalar.",
 		"STOUTLAND_SEARCH": "Stoutland, toprağa gömülü gizli bir item olan karede durduğunda havlar.",
