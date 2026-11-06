@@ -20,6 +20,7 @@ export class BarbBarrageStrategy extends AbilityStrategy {
         board
       )
 
+    let enemiesHit: PokemonEntity[] = []
     if (mostSurroundedCoordinate) {
       pokemon.moveTo(
         mostSurroundedCoordinate.x,
@@ -27,36 +28,29 @@ export class BarbBarrageStrategy extends AbilityStrategy {
         board,
         false
       )
-      board
-        .getAdjacentCells(target.positionX, target.positionY)
+
+      enemiesHit = board
+        .getAdjacentCells(
+          mostSurroundedCoordinate.x,
+          mostSurroundedCoordinate.y
+        )
         .map((v) => v.value)
-        .filter((v) => v?.team === target.team)
-        .concat(target)
-        .forEach((v) => {
-          if (v) {
-            v.status.triggerPoison(3000, v, pokemon)
-            v.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-            pokemon.broadcastAbility({
-              targetX: v.positionX,
-              targetY: v.positionY,
-              orientation: v.orientation
-            })
-          }
-        })
-    } else {
-      target.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
+        .filter(
+          (e): e is PokemonEntity => e != null && e?.team !== pokemon.team
+        )
     }
+
+    if (enemiesHit.length === 0) {
+      enemiesHit.push(target) // ensure to at least hit current target
+    }
+    enemiesHit.forEach((v) => {
+      v.status.triggerPoison(3000, v, pokemon)
+      v.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+      pokemon.broadcastAbility({
+        targetX: v.positionX,
+        targetY: v.positionY,
+        orientation: v.orientation
+      })
+    })
   }
 }
