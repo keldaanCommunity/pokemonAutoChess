@@ -79,7 +79,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") rarity: Rarity = Rarity.SPECIAL
   @type("string") index: string
   @type("string") evolution: Pkm = Pkm.DEFAULT
-  @type(["string"])evolutions: Pkm[] = []
+  @type(["string"]) evolutions: Pkm[] = []
   @type("int8") positionX = -1
   @type("int8") positionY = -1
   @type("uint8") speed = DEFAULT_SPEED
@@ -110,7 +110,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") supercharged: boolean = false
   dodge: number = 0
   deathCount: number = 0
-  killCount: number = 0  
+  killCount: number = 0
   evolutionRule: EvolutionRule = {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3
@@ -2712,8 +2712,8 @@ export class MegaDragonite extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 4
-  hp = 500
-  atk = 50
+  hp = 460
+  atk = 20
   speed = 51
   def = 30
   speDef = 30
@@ -13470,7 +13470,7 @@ export class Scrafty extends Pokemon {
 export class MegaScrafty extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FIGHTING])
   rarity = Rarity.UNCOMMON
-  stars = 3  
+  stars = 3
   hp = 280
   atk = 36
   speed = 54
