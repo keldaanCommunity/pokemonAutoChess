@@ -24,6 +24,7 @@ export const SOUNDS = {
   JOIN_ROOM: "joinroom.ogg",
   LEAVE_ROOM: "leaveroom.ogg",
   LEGENDARY_REVEAL: "legendary_reveal.ogg",
+  MEGA_EVOLUTION: "mega_evolution.ogg",
   REFRESH: "refresh.ogg",
   SET_READY: "setready.ogg",
   START_GAME: "startgame.ogg"

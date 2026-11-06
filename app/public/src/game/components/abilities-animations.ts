@@ -482,6 +482,8 @@ const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
         args.positionY,
         args.flip
       )
+      coordinates[0] += options?.positionOffset?.[0] ?? 0
+      coordinates[1] += options?.positionOffset?.[1] ?? 0
       const coordinatesTarget = transformEntityCoordinates(
         args.targetX,
         args.targetY,
@@ -1289,6 +1291,30 @@ export const AbilitiesAnimations: {
     tint: 0xffffa0
   }),
   ["HYPER_BEAM_CHARGE"]: onCasterScale2,
+  [Ability.POWER_GEM]: (args) => {
+    const nbGems = args.data.nbGems
+    for (let i = 0; i < nbGems; i++) {
+      const angle = (Math.PI * 2) / nbGems
+      const dx = Math.cos(angle * i) * 50
+      const dy = Math.sin(angle * i) * 30 - 20
+      onCaster({
+        ability: Ability.POWER_GEM,
+        positionOffset: [dx, dy],
+        animOptions: { repeat: 3 },
+        scale: 2
+      })(args)
+      onCaster({
+        ability: Ability.PSYBEAM,
+        oriented: true,
+        rotation: -Math.PI / 2,
+        origin: [0.5, 0],
+        delay: 300 + i * 50,
+        positionOffset: [dx, dy],
+        scale: [0.25, 1],
+        tint: 0xffa0ff
+      })(args)
+    }
+  },
   [Ability.THUNDER_SHOCK]: onTarget({
     ability: Ability.THUNDER,
     scale: 2,
@@ -2833,40 +2859,47 @@ export const AbilitiesAnimations: {
     })
   },
 
-  [Ability.TWISTER]: ({ scene, positionX, positionY, flip, ap }) => {
+  [Ability.TWISTER]: ({ scene, positionX, positionY, flip, ap, data }) => {
     let [x, y] = transformEntityCoordinates(positionX, positionY, flip)
     y -= 30 // adjust y to make the tornado appear more centered on the target
 
-    const tornadoSprite = scene.add
-      .sprite(0, 0, "abilities", `${Ability.TWISTER}/000.png`)
-      ?.setScale(2 * (1 + ap / 200))
-      ?.setTint(0xc0fff0)
-    tornadoSprite.anims.play({
-      key: Ability.TWISTER,
-      frameRate: 15
-    })
-    scene.abilitiesVfxGroup?.add(tornadoSprite)
+    const nbTornadoes = data.radius ?? 1
+    for (let i = 0; i < nbTornadoes; i++) {
+      const tornadoSprite = scene.add
+        .sprite(0, 0, "abilities", `${Ability.TWISTER}/000.png`)
+        ?.setScale(2 * (1 + ap / 200))
+        ?.setTint(0xc0fff0)
+      tornadoSprite.anims.play({
+        key: Ability.TWISTER,
+        frameRate: 15
+      })
+      scene.abilitiesVfxGroup?.add(tornadoSprite)
 
-    const circle = new Phaser.Geom.Circle(x, y, 48)
-    Phaser.Actions.PlaceOnCircle([tornadoSprite], circle, Math.PI)
+      const circle = new Phaser.Geom.Circle(x, y, 48 * (i + 1))
+      Phaser.Actions.PlaceOnCircle(
+        [tornadoSprite],
+        circle,
+        Math.PI + (i * Math.PI) / 2
+      )
 
-    scene.tweens.add({
-      targets: circle,
-      radius: 96,
-      ease: Phaser.Math.Easing.Quartic.Out,
-      duration: 1000,
-      onUpdate: function (tween) {
-        Phaser.Actions.RotateAroundDistance(
-          [tornadoSprite],
-          { x, y },
-          0.05,
-          circle.radius
-        )
-      },
-      onComplete: function () {
-        tornadoSprite.destroy(true)
-      }
-    })
+      scene.tweens.add({
+        targets: circle,
+        radius: 48 * (i + 2),
+        ease: Phaser.Math.Easing.Quartic.Out,
+        duration: 1000,
+        onUpdate: function (tween) {
+          Phaser.Actions.RotateAroundDistance(
+            [tornadoSprite],
+            { x, y },
+            0.05 * (i % 2 ? -1 : 1),
+            circle.radius
+          )
+        },
+        onComplete: function () {
+          tornadoSprite.destroy(true)
+        }
+      })
+    }
   },
 
   [Ability.TRIMMING_MOWER]: ({ scene, positionX, positionY, flip, ap }) => {

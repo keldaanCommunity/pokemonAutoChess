@@ -13,7 +13,8 @@ export enum EvolutionRuleType {
   MONEY = "money",
   PLACEMENT = "placement",
   HATCH = "hatch",
-  STACK = "stack"
+  STACK = "stack",
+  MEGA = "mega"
 }
 
 interface EvolutionRuleCommon {
@@ -65,6 +66,10 @@ export type StackEvolutionRule = EvolutionRuleCommon & {
   type: EvolutionRuleType.STACK
 }
 
+export type MegaEvolutionRule = EvolutionRuleCommon & {
+  type: EvolutionRuleType.MEGA
+}
+
 export type EvolutionRule =
   | CountEvolutionRule
   | ItemEvolutionRule
@@ -73,3 +78,4 @@ export type EvolutionRule =
   | MoneyEvolutionRule
   | HatchEvolutionRule
   | StackEvolutionRule
+  | MegaEvolutionRule

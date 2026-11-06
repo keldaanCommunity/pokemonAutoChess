@@ -33,6 +33,7 @@ import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
 import {
   AttackType,
+  GamePhaseState,
   Orientation,
   PokemonActionState,
   Team
@@ -78,6 +79,7 @@ import { resetArraySchema, schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
+import { MegaEvolutionHandler } from "../evolution-logic/mega-evolution"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -2054,6 +2056,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           false
         )
       }
+    })
+  ],
+
+  [Item.MEGA_STONE]: [
+    new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
+      const megaEvoHandler = new MegaEvolutionHandler(pokemon.evolutionRule)
+      if (
+        room.state.phase === GamePhaseState.PICK &&
+        megaEvoHandler.canEvolve(pokemon, player)
+      ) {
+        removeFromArray(player.items, item)
+        megaEvoHandler.evolve(pokemon, player)
+      }
+      return false
     })
   ],
 

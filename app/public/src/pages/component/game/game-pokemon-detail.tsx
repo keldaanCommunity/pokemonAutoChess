@@ -7,9 +7,15 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats, RarityColor } from "../../../../../config"
 import { InimitableAbilities } from "../../../../../config/game/abilities"
 import { DishByPkm } from "../../../../../config/game/dishes"
+import {
+  canMegaEvolve,
+  hasMegaEvolution,
+  isMegaPokemon
+} from "../../../../../core/evolution-logic/mega-evolution"
 import { hasSynergy } from "../../../../../core/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
+import { precomputedPokemons } from "../../../../../models/precomputed/precomputed-pokemons"
 import type { Emotion, IPokemon, IPokemonEntity } from "../../../../../types"
 import { Ability } from "../../../../../types/enum/Ability"
 import { Stat } from "../../../../../types/enum/Game"
@@ -20,7 +26,7 @@ import {
   TMsGold
 } from "../../../../../types/enum/Item"
 import { Passive } from "../../../../../types/enum/Passive"
-import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { Pkm, PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
 import { Synergy } from "../../../../../types/enum/Synergy"
 import { ZMoves } from "../../../../../types/enum/ZMoves"
 import { isIn } from "../../../../../utils/array"
@@ -259,6 +265,10 @@ export function GamePokemonDetail(props: {
   const stars =
     pokemon.stars + (pokemon.items.has(Item.STAR_PIECE) && !isInFight ? 1 : 0)
 
+  const pokemonData = getPokemonData(pokemon.name)
+  const { stages, regional } = pokemonData
+  const mega = isMegaPokemon(pokemon.name)
+
   return (
     <div className="game-pokemon-detail">
       <div className="game-pokemon-detail-portrait-wrap">
@@ -271,7 +281,14 @@ export function GamePokemonDetail(props: {
             emotion: props.emotion ?? pokemon.emotion
           }}
         />
-        {getPokemonData(pokemon.name).regional && (
+        {mega && (
+          <img
+            src="assets/ui/mega.png"
+            alt=""
+            className="game-pokemon-detail-mega-icon"
+          />
+        )}
+        {regional && (
           <img
             src="assets/ui/pinpoint.svg"
             alt=""
@@ -302,21 +319,20 @@ export function GamePokemonDetail(props: {
           {t(`rarity.${pokemon.rarity}`)}
         </p>
         <p className="game-pokemon-detail-entry-tier">
-          {Array.from({ length: stars }, (_, index) => (
-            <img key={index} src="assets/ui/star.svg" height="16"></img>
-          ))}
-          {Array.from(
-            { length: getPokemonData(pokemon.name).stages - stars },
-            (_, index) => (
-              <img key={index} src="assets/ui/star_empty.svg" height="16"></img>
-            )
-          )}
+          <PokemonStars stars={stars} stages={stages} pokemon={pokemon.name} />
         </p>
       </div>
-      <div className="game-pokemon-detail-types">
-        {Array.from(pokemon.types.values()).map((type) => (
-          <SynergyIcon type={type} key={type} />
-        ))}
+      <div className="game-pokemon-detail-icons">
+        <div className="game-pokemon-detail-types">
+          {Array.from(pokemon.types.values()).map((type) => (
+            <SynergyIcon type={type} key={type} />
+          ))}
+        </div>
+        {canMegaEvolve(pokemonData) && (
+          <div className="game-pokemon-detail-mega-evolution">
+            <img src="/assets/item/MEGA_STONE.png" alt="MEGA" height="24" />
+          </div>
+        )}
       </div>
       <div className="game-pokemon-detail-bars">
         <GameTooltipBar
@@ -378,7 +394,7 @@ export function GamePokemonDetail(props: {
                 ap: pokemon.ap,
                 luck: pokemon.luck,
                 stars,
-                stages: getPokemonData(pokemon.name).stages,
+                stages,
                 showAbilityTiers: props.origin === "wiki"
               }
             )}
@@ -411,7 +427,7 @@ export function GamePokemonDetail(props: {
                 ap: getStatWithItemBonus(Stat.AP) ?? pokemon.ap,
                 luck: getStatWithItemBonus(Stat.LUCK) ?? pokemon.luck,
                 stars,
-                stages: getPokemonData(pokemon.name).stages,
+                stages,
                 showAbilityTiers:
                   props.origin === "wiki" ||
                   props.origin === "planner" ||
@@ -501,5 +517,50 @@ export function GamePokemonDetailTooltip(props: {
       float
       isOpen={props.isOpen}
     />
+  )
+}
+
+export function PokemonStars(props: {
+  stars: number
+  stages: number
+  pokemon: Pkm
+}) {
+  const { stars, stages, pokemon } = props
+  const emptyStars = stages - stars
+
+  const hasMega = hasMegaEvolution(pokemon)
+  const familyMembers = [...precomputedPokemons].filter(
+    (p) =>
+      PkmFamily[p.name] === PkmFamily[pokemon] && p.skill !== Ability.DEFAULT
+  )
+  const finalEvolutions = familyMembers.filter((p) => p.stars === stages)
+  const hasNonMegaFinalEvolution = finalEvolutions.some(
+    (p) => !isMegaPokemon(p.name)
+  )
+
+  return (
+    <>
+      {Array.from({ length: stars }, (_, index) => (
+        <img key={"star-" + index} src="assets/ui/star.svg" height="16"></img>
+      ))}
+      {Array.from({ length: emptyStars }, (_, index) => (
+        <>
+          {(index < emptyStars - 1 || hasNonMegaFinalEvolution) && (
+            <img
+              key={"star-empty-" + index}
+              src="assets/ui/star_empty.svg"
+              height="16"
+            ></img>
+          )}
+          {index === emptyStars - 1 && hasMega && (
+            <img
+              key="mega-star"
+              src={`assets/ui/mega-star.png`}
+              height="16"
+            ></img>
+          )}
+        </>
+      ))}
+    </>
   )
 }

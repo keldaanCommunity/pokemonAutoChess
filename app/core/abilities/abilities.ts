@@ -391,6 +391,7 @@ import { PoltergeistStrategy } from "./poltergeist"
 import { PopulationBombStrategy } from "./population-bomb"
 import { PowderStrategy } from "./powder"
 import { PowderSnowStrategy } from "./powder-snow"
+import { PowerGemStrategy } from "./power-gem";
 import { PowerHugStrategy } from "./power-hug"
 import { PowerWashStrategy } from "./power-wash"
 import { PowerWhipStrategy } from "./power-whip"
@@ -1222,6 +1223,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.POPULATION_BOMB]: new PopulationBombStrategy(),
   [Ability.POWDER]: new PowderStrategy(),
   [Ability.POWDER_SNOW]: new PowderSnowStrategy(),
+  [Ability.POWER_GEM]: new PowerGemStrategy(),
   [Ability.POWER_HUG]: new PowerHugStrategy(),
   [Ability.POWER_WASH]: new PowerWashStrategy(),
   [Ability.POWER_WHIP]: new PowerWhipStrategy(),

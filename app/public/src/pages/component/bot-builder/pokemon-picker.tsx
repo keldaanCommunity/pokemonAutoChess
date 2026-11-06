@@ -189,6 +189,7 @@ function PokemonPickerTab(props: {
       preferences.showRegularPool,
       preferences.showEvolutions,
       preferences.showAltForms,
+      preferences.showMegaEvolutions,
       preferences.filterAvailableAddsAndRegionals,
       additionalPokemons,
       regionalPokemons,
@@ -230,7 +231,7 @@ function PokemonPickerTab(props: {
             onToggle={(checked) => {
               setPreferences({ filterAvailableAddsAndRegionals: checked })
             }}
-            label={t("show_only_available_picks")}
+            label={t("filters.show_only_available_picks")}
             isDark
           />
         )}

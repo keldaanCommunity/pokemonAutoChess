@@ -25,7 +25,8 @@ export class FlyingPressStrategy extends AbilityStrategy {
       pokemon.commands.push(
         new DelayedCommand(() => {
           if (destination.target && destination.target.hp > 0) {
-            const damageMultiplier = [0.5, 0.5, 0.5, 1][pokemon.stars - 1] ?? 1
+            const damageMultiplier =
+              [0.5, 0.5, 0.5, 0.7, 1][pokemon.stars - 1] ?? 1
             const damage = damageMultiplier * pokemon.maxHP
             destination.target.handleSpecialDamage(
               damage,

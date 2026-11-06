@@ -14,6 +14,7 @@ import {
   type AtlasNodeId,
   AtlasTree
 } from "../../../../../config/game/atlas"
+import { canMegaEvolve } from "../../../../../core/evolution-logic/mega-evolution"
 import {
   type AtlasNode,
   type Emera,
@@ -27,9 +28,11 @@ import {
 } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { entries } from "../../../../../utils/object"
+import { schemaValues } from "../../../../../utils/schemas"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
-import { useAppSelector } from "../../../hooks"
+import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { pickAtlasNode } from "../../../network"
+import store from "../../../stores"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
@@ -450,14 +453,22 @@ function Node({
       )}
 
       {/* Locked Icon */}
-      {node.type === "condition" && (
-        <image
-          href="/assets/atlas/locked.png"
-          height="32"
-          width="32"
-          transform="translate(-16 -16)"
-        />
-      )}
+      {node.type === "condition" &&
+        (isUnlocked ? (
+          <image
+            href={EmeraIcons["blank"]}
+            height="30"
+            width="30"
+            transform="translate(-15 -15)"
+          />
+        ) : testAtlasNodeConditionClientSide(node.condition) === false ? (
+          <image
+            href="/assets/atlas/locked.png"
+            height="32"
+            width="32"
+            transform="translate(-16 -16)"
+          />
+        ) : null)}
     </g>
   )
 }
@@ -573,12 +584,28 @@ function isConnectedAndUnlockable(
   unlockedNodes: Set<AtlasNodeId> | SetSchema<AtlasNodeId>
 ) {
   // Logic to check if adjacent node is unlocked
+  const node = AtlasTree.nodes[nodeId]
   return (
     unlockedNodes.has(nodeId) === false &&
+    node != null &&
+    (node.type !== "condition" ||
+      testAtlasNodeConditionClientSide(node.condition) === true) &&
     AtlasTree.connections.some(
       (conn) =>
         (conn.from === nodeId && unlockedNodes.has(conn.to)) ||
         (conn.to === nodeId && unlockedNodes.has(conn.from))
     )
   )
+}
+
+function testAtlasNodeConditionClientSide(
+  condition: "mega" | "gigantamax"
+): boolean {
+  switch (condition) {
+    case "mega":
+    default: {
+      const player = selectConnectedPlayer(store.getState())
+      return player != null && schemaValues(player.board).some(canMegaEvolve)
+    }
+  }
 }

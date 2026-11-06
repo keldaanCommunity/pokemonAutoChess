@@ -6,6 +6,7 @@ import {
   type EvolutionRule,
   EvolutionRuleType,
   type HatchEvolutionRule,
+  type MegaEvolutionRule,
   type MoneyEvolutionRule,
   type PlacementEvolutionRule,
   type StackEvolutionRule,
@@ -20,6 +21,7 @@ import { triggerOnEvolutionHooks } from "./evolution-hooks"
 import { HatchEvolutionHandler } from "./hatch-evolution-handler"
 import { getHatchTime } from "./hatch-time"
 import { ItemEvolutionHandler } from "./item-evolution-handler"
+import { MegaEvolutionHandler } from "./mega-evolution"
 import { MoneyEvolutionHandler } from "./money-evolution-handler"
 import { PlacementEvolutionHandler } from "./placement-evolution-handler"
 import { StackEvolutionHandler } from "./stack-evolution-handler"
@@ -42,6 +44,8 @@ export const EvolutionManager = {
         return new HatchEvolutionHandler(evolutionRule as HatchEvolutionRule)
       case EvolutionRuleType.STACK:
         return new StackEvolutionHandler(evolutionRule as StackEvolutionRule)
+      case EvolutionRuleType.MEGA:
+        return new MegaEvolutionHandler(evolutionRule as MegaEvolutionRule)
       case EvolutionRuleType.COUNT:
       default:
         return new CountEvolutionHandler(evolutionRule as CountEvolutionRule)

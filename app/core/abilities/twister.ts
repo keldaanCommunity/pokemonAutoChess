@@ -13,10 +13,20 @@ export class TwisterStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
-    const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
-    const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
-    const flyRange = [1, 2, 3, 6][pokemon.stars - 1] ?? 6
+    super.process(pokemon, board, target, crit, true)
+    const damage = [25, 50, 100, 150, 250][pokemon.stars - 1] ?? 250
+    const radius = [1, 1, 2, 3, 4][pokemon.stars - 1] ?? 4
+    pokemon.broadcastAbility({ data: { radius } })
+    const cells =
+      radius === 1
+        ? board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+        : board.getCellsInRadius(
+            pokemon.positionX,
+            pokemon.positionY,
+            radius,
+            false
+          )
+    const flyRange = [1, 2, 3, 4, 5][pokemon.stars - 1] ?? 6
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
         cell.value.handleSpecialDamage(

@@ -12,11 +12,11 @@ export class SludgeWaveStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const duration = Math.round(
-      ([2000, 3000, 4000, 8000][pokemon.stars - 1] ?? 8000) *
+      ([2000, 3000, 4000, 8000, 15000][pokemon.stars - 1] ?? 15000) *
         (1 + pokemon.ap / 100) *
         (crit ? pokemon.critPower : 1)
     )
-    const damage = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
+    const damage = [10, 20, 40, 80, 150][pokemon.stars - 1] ?? 150
     board
       .getAdjacentCells(target.positionX, target.positionY, true)
       .forEach((cell) => {

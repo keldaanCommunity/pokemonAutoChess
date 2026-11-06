@@ -357,7 +357,7 @@ export default function SpriteTracker() {
 
       <div className="filter-container">
         <details>
-          <summary>{t("filters")}</summary>
+          <summary>{t("filters.title")}</summary>
           <div>
             <Checkbox
               label={t("sprite_tracker.filter_mega", {

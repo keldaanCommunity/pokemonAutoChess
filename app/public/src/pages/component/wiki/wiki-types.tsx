@@ -10,16 +10,15 @@ import { Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { Synergy, SynergyArray } from "../../../../../types/enum/Synergy"
 import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
-import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
 import { addIconsToDescription } from "../../utils/descriptions"
-import { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
 import SynergyIcon from "../icons/synergy-icon"
 import {
   filterPokemonsAccordingToPreferences,
   PokemonFilters
 } from "../pokemon-filters/pokemon-filters"
+import PokemonPortrait from "../pokemon-portrait"
 import { SynergyTierDescription } from "../synergy/synergy-tier-description"
 import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
@@ -136,19 +135,13 @@ export function WikiType(props: { type: Synergy }) {
                 <td>
                   {(pokemonsPerRarity[rarity] ?? []).map((p) => {
                     return (
-                      <div
+                      <PokemonPortrait
+                        portrait={p.index}
+                        withPoolIcons
                         key={p.name}
-                        className={cc("pokemon-portrait", {
-                          additional: p.additional,
-                          regional: p.regional
-                        })}
-                      >
-                        <img
-                          src={getPortraitSrc(p.index)}
-                          data-tooltip-id="game-pokemon-detail-tooltip"
-                          data-tooltip-content={p.name}
-                        />
-                      </div>
+                        data-tooltip-id="game-pokemon-detail-tooltip"
+                        data-tooltip-content={p.name}
+                      />
                     )
                   })}
                 </td>
@@ -227,16 +220,10 @@ export function WikiAllTypes() {
                   return (
                     <li
                       key={p.name}
-                      className={cc("pokemon-portrait", {
-                        additional: p.additional,
-                        regional: p.regional
-                      })}
+                      data-tooltip-id="game-pokemon-detail-tooltip"
+                      data-tooltip-content={p.name}
                     >
-                      <img
-                        src={getPortraitSrc(p.index)}
-                        data-tooltip-id="game-pokemon-detail-tooltip"
-                        data-tooltip-content={p.name}
-                      />
+                      <PokemonPortrait portrait={p.index} withPoolIcons />
                     </li>
                   )
                 })}

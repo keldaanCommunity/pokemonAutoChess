@@ -1,4 +1,7 @@
 {
+	"filters": {
+		"show_mega_evolutions": "Pokaż Mega Ewolucje"
+	},
 	"rarity": {
 		"COMMON": "Zwykły",
 		"UNCOMMON": "Niezwykły",
