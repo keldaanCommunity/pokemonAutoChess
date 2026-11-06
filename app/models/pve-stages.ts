@@ -205,12 +205,16 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     rewards: CraftableItemsNoScarves,
     getRewards(player: Player) {
+      const rewards: Item[] = []
       for (const p of schemaValues(player.board)) {
         if (p.name === Pkm.ZACIAN) {
-          return [Item.RUSTED_SWORD]
+          rewards.push(Item.RUSTED_SWORD)
         }
       }
-      return []
+      if (player.atlasManager.unlockedNodes.has("marowak")) {
+        rewards.push(pickRandomIn(CraftableNoStonesOrScarves))
+      }
+      return rewards
     },
     getRewardsPropositions(player: Player) {
       const rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
@@ -247,6 +251,13 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.DEEP_SEA_TOOTH, Item.CHOICE_SPECS]
     ],
     rewards: CraftableItemsNoScarves,
+    getRewards(player: Player) {
+      const rewards: Item[] = []
+      if (player.atlasManager.unlockedNodes.has("marowak")) {
+        rewards.push(pickRandomIn(CraftableNoStonesOrScarves))
+      }
+      return rewards
+    },
     getRewardsPropositions(player: Player) {
       const rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
       rewards.push(
@@ -279,6 +290,13 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       [Item.RED_ORB, Item.FLAME_ORB, Item.PROTECTIVE_PADS]
     ],
     rewards: CraftableItemsNoScarves,
+    getRewards(player: Player) {
+      const rewards: Item[] = []
+      if (player.atlasManager.unlockedNodes.has("marowak")) {
+        rewards.push(pickRandomIn(CraftableNoStonesOrScarves))
+      }
+      return rewards
+    },
     getRewardsPropositions(player: Player) {
       const rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
       rewards.push(
@@ -314,6 +332,13 @@ export const PVEStages: { [turn: number]: PVEStage } = {
       []
     ],
     rewards: CraftableItemsNoScarves,
+    getRewards(player: Player) {
+      const rewards: Item[] = []
+      if (player.atlasManager.unlockedNodes.has("marowak")) {
+        rewards.push(pickRandomIn(CraftableNoStonesOrScarves))
+      }
+      return rewards
+    },
     getRewardsPropositions(player: Player) {
       const rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
       rewards.push(
@@ -350,7 +375,11 @@ export const PVEStages: { [turn: number]: PVEStage } = {
     ],
     rewards: [Item.RARE_CANDY, Item.STAR_PIECE, Item.GOLD_BOW],
     getRewards(player: Player) {
-      return [Item.RARE_CANDY, Item.STAR_PIECE, Item.GOLD_BOW]
+      const rewards: Item[] = [Item.RARE_CANDY, Item.STAR_PIECE, Item.GOLD_BOW]
+      if (player.atlasManager.unlockedNodes.has("marowak")) {
+        rewards.push(Item.Z_RING, Item.TERA_ORB, Item.LOOPLET)
+      }
+      return rewards
     }
   }
 }
