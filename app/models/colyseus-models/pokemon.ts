@@ -79,6 +79,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("string") rarity: Rarity = Rarity.SPECIAL
   @type("string") index: string
   @type("string") evolution: Pkm = Pkm.DEFAULT
+  @type(["string"])evolutions: Pkm[] = []
   @type("int8") positionX = -1
   @type("int8") positionY = -1
   @type("uint8") speed = DEFAULT_SPEED
@@ -109,8 +110,7 @@ export class Pokemon extends Schema implements IPokemon {
   @type("boolean") supercharged: boolean = false
   dodge: number = 0
   deathCount: number = 0
-  killCount: number = 0
-  evolutions: Pkm[] = []
+  killCount: number = 0  
   evolutionRule: EvolutionRule = {
     type: EvolutionRuleType.COUNT,
     numberRequired: 3

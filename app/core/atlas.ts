@@ -24,6 +24,7 @@ import { pickNRandomIn, pickRandomIn } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import { openTreasureChest } from "./effects/items"
 import { EvolutionManager } from "./evolution-logic/evolution-manager"
+import { canMegaEvolve } from "./evolution-logic/mega-evolution"
 
 export function activateAtlasNode(
   nodeId: AtlasNodeId,
@@ -50,6 +51,18 @@ export function activateAtlasNode(
       )
       const sellIfNoSpace = false //TODO: replace with player.pendingPokemonstoAdd
       room.givePokemons(pokemonsObtained, player, sellIfNoSpace)
+    }
+  }
+}
+
+export function testAtlasNodeCondition(
+  condition: "mega" | "gigantamax",
+  player: Player
+): boolean {
+  switch (condition) {
+    case "mega":
+    default: {
+      return schemaValues(player.board).some(canMegaEvolve)
     }
   }
 }

@@ -1,7 +1,7 @@
 import { ArraySchema, Schema, SetSchema, type } from "@colyseus/schema"
 import { NB_LEGENDARY_PROPOSITIONS, RegionDetails } from "../../config"
 import { type AtlasNodeId, AtlasTree } from "../../config/game/atlas"
-import { activateAtlasNode } from "../../core/atlas"
+import { activateAtlasNode, testAtlasNodeCondition } from "../../core/atlas"
 import { assignLegendaries } from "../../core/pools"
 import type GameRoom from "../../rooms/game-room"
 import type { IAtlasManager } from "../../types"
@@ -16,21 +16,25 @@ export default class AtlasManager extends Schema implements IAtlasManager {
   @type(["string"]) symbols = new ArraySchema<Synergy>()
 
   unlockNode(nodeId: AtlasNodeId, player: Player, room: GameRoom) {
-    if (this.canUnlockNode(nodeId)) {
+    if (this.canUnlockNode(nodeId, player)) {
       this.emera--
       this.unlockedNodes.add(nodeId)
       activateAtlasNode(nodeId, player, room)
     }
   }
 
-  canUnlockNode(nodeId: AtlasNodeId): boolean {
-    return this.emera > 0 && this.isConnectedAndUnlockable(nodeId)
+  canUnlockNode(nodeId: AtlasNodeId, player: Player): boolean {
+    return this.emera > 0 && this.isConnectedAndUnlockable(nodeId, player)
   }
 
-  isConnectedAndUnlockable(nodeId: AtlasNodeId) {
+  isConnectedAndUnlockable(nodeId: AtlasNodeId, player: Player) {
     // Logic to check if adjacent node is unlocked
+    const node = AtlasTree.nodes[nodeId]
     return (
       this.unlockedNodes.has(nodeId) === false &&
+      node != null &&
+      (node.type !== "condition" ||
+        testAtlasNodeCondition(node.condition, player) === true) &&
       AtlasTree.connections.some(
         (conn) =>
           (conn.from === nodeId && this.unlockedNodes.has(conn.to)) ||
