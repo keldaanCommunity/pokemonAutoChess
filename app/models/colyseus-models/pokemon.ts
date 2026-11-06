@@ -2690,11 +2690,33 @@ export class Dragonite extends Pokemon {
   ])
   rarity = Rarity.EPIC
   stars = 3
+  evolution = Pkm.MEGA_DRAGONITE
+  evolutionRule = {
+    type: EvolutionRuleType.MEGA
+  } satisfies MegaEvolutionRule
   hp = 290
   atk = 28
   speed = 51
   def = 20
   speDef = 20
+  maxPP = 100
+  range = 1
+  skill = Ability.TWISTER
+}
+
+export class MegaDragonite extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.DRAGON,
+    Synergy.FLYING,
+    Synergy.AQUATIC
+  ])
+  rarity = Rarity.EPIC
+  stars = 4
+  hp = 500
+  atk = 50
+  speed = 51
+  def = 30
+  speDef = 30
   maxPP = 100
   range = 1
   skill = Ability.TWISTER
@@ -21699,6 +21721,7 @@ export const PokemonClasses: Record<
   [Pkm.DRATINI]: Dratini,
   [Pkm.DRAGONAIR]: Dragonair,
   [Pkm.DRAGONITE]: Dragonite,
+  [Pkm.MEGA_DRAGONITE]: MegaDragonite,
   [Pkm.LARVITAR]: Larvitar,
   [Pkm.PUPITAR]: Pupitar,
   [Pkm.TYRANITAR]: Tyranitar,

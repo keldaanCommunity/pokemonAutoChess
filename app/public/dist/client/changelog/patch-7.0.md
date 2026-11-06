@@ -12,6 +12,7 @@
 - Mega Delphox
 - Mega Diancie
 - Mega Dragalge
+- Mega Dragonite
 - Mega Drampa
 - Mega Eelektross
 - Mega Excadrill

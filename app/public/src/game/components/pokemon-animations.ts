@@ -958,6 +958,13 @@ export const PokemonAnimations: {
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.DRAGON_MELEE
   },
+  [Pkm.MEGA_DRAGONITE]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Emit,
+    emote: AnimationType.Shoot,
+    attackSprite: AttackSprite.DRAGON_MELEE,
+    shinyUnavailable: true
+  },
   [Pkm.LARVITAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
