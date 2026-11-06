@@ -1,5 +1,43 @@
 # New Pokemons:
 
+- Mega Absol
+- Mega Aerodactyl
+- Mega Alakazam
+- Mega Altaria
+- Mega Banette
+- Mega Camerupt
+- Mega Charizard X
+- Mega Charizard Y
+- Mega Darkrai
+- Mega Delphox
+- Mega Diancie
+- Mega Dragalge
+- Mega Drampa
+- Mega Eelektross
+- Mega Excadrill
+- Mega Feraligatr
+- Mega Gallade
+- Mega Gardevoir
+- Mega Gengar
+- Mega Glalie
+- Mega Hawlucha
+- Mega Houndoom
+- Mega Latias
+- Mega Latios
+- Mega Lucario
+- Mega Lopunny
+- Mega Manectric
+- Mega Mawile
+- Mega Medicham
+- Mega Mewtwo Y
+- Mega Scrafty
+- Mega Sharpedo
+- Mega Slowbro
+- Mega Steelix
+- Mega Tyranitar
+- Mega Zeraora
+- Mega Zygarde
+
 # Atlas
 
 The late game (post stage 20) has received a complete overhaul. At stage 20, you now receive the Connection Orb. The Connection Orb allows you to browse the Atlas, a new tree-based progression system that let you explore different paths to unlock the many new late-game mechanics we added this patch, and reconnect with the residents of Treasure Town.
