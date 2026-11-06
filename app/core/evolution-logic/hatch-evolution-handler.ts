@@ -1,7 +1,6 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { Pkm } from "../../types/enum/Pokemon"
-import { pickRandomIn } from "../../utils/random"
 import { EvolutionHandler } from "./evolution-handler"
 import { getHatchTime } from "./hatch-time"
 

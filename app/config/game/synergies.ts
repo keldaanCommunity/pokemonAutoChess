@@ -1,6 +1,6 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { Rarity } from "../../types/enum/Game"
-import { type AtlasItem, type FishingRod, Item } from "../../types/enum/Item"
+import { type FishingRod, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 
 export const SynergyTiers = {

@@ -1,6 +1,5 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Item } from "../../types"
 import type { MoneyEvolutionRule } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
