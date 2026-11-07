@@ -103,6 +103,7 @@ import {
   OnMoveEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
+  OnShieldGainedEffect,
   OnSimulationStartEffect,
   OnStageStartEffect,
   PeriodicEffect
@@ -1633,6 +1634,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       ]
     ])
   ),
+
+  [Item.ENERGY_ROOT]: [
+    new OnItemGainedEffect((pokemon) => {
+      // convert pre-existing shield
+      const amountConverted = Math.round(pokemon.shield / 2)
+      pokemon.shield = min(0)(pokemon.shield - amountConverted)
+      pokemon.addMaxHP(amountConverted, pokemon, 0, false)
+    }),
+    new OnShieldGainedEffect(({ pokemon, shieldAmountGained }) => {
+      const amountConverted = Math.round(shieldAmountGained / 2)
+      pokemon.shield = min(0)(pokemon.shield - amountConverted)
+      pokemon.addMaxHP(amountConverted, pokemon, 0, false)
+    })
+  ],
 
   [Item.SURFBOARD]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {

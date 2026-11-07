@@ -273,6 +273,21 @@ export class OnResurrectionEffect extends Effect {
   }
 }
 
+export interface OnShieldGainedEffectArgs {
+  pokemon: PokemonEntity
+  shieldAmountGained: number
+}
+
+export class OnShieldGainedEffect extends Effect {
+  apply(args: OnShieldGainedEffectArgs) {}
+  constructor(
+    effect?: (args: OnShieldGainedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
 export class PeriodicEffect extends Effect {
   intervalMs: number
   timer: number

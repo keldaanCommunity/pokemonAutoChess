@@ -21,6 +21,7 @@ import {
   BeforeTakingDamageEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
+  OnShieldGainedEffect,
   PeriodicEffect
 } from "./effects/effect"
 import { applyWandEffects, humanHealEffect } from "./effects/synergies"
@@ -385,6 +386,10 @@ export default abstract class PokemonState {
             damage: -shield
           })
         })
+      }
+
+      if(shield > 0){
+        pokemon.getEffects(OnShieldGainedEffect).forEach(effect => effect.apply({ pokemon, shieldAmountGained: shield }))
       }
     }
   }

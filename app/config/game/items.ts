@@ -79,6 +79,7 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.ELECTIRIZER]: { [Stat.SPEED]: 10 },
   [Item.TERRAIN_EXTENDER]: { [Stat.SHIELD]: 50, [Stat.PP]: 20 },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.LUCK]: 30 },
+  [Item.ENERGY_ROOT]: { [Stat.SHIELD]: 50 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
   [Item.RUNNING_SHOES]: { [Stat.SPEED]: 15 },
   [Item.RED_SCALE]: {
