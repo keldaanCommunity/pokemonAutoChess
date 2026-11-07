@@ -3,6 +3,11 @@ import { EloRank } from "../../types/enum/EloRank"
 // games that finish before level 10 are not counted for XP and ELO gains to avoid potential abuse
 export const MinStageForGameToCount = 10
 
+// ELO deflation correction: gains are adjusted so the average elo of recent players
+// converges towards this target, within the bounds defined below.
+export const TARGETED_ELO_AVERAGE = 1000
+export const MAX_ELO_CORRECTION = 0.1 // ±10%
+
 export const EloRankThreshold: { [key in EloRank]: number } = {
   [EloRank.LEVEL_BALL]: 0,
   [EloRank.NET_BALL]: 1050,

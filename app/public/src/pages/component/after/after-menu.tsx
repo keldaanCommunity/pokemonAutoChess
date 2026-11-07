@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
 import { ExpPlace, SynergyTiersThresholds } from "../../../../../config"
-import { computeElo } from "../../../../../core/elo"
-import { type IAfterGamePlayer, Role } from "../../../../../types"
+import type { IAfterGamePlayer } from "../../../../../types"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { useAppSelector } from "../../../hooks"
@@ -28,18 +27,8 @@ export default function AfterMenu() {
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
-  const humans = players.filter((p) => p.role !== Role.BOT)
-  const newElo = currentPlayer
-    ? computeElo(
-        currentPlayer,
-        currentPlayer.rank,
-        currentPlayer.elo,
-        humans,
-        gameMode,
-        false
-      )
-    : null
-  const shouldShowElo = eligibleToELO && currentPlayer && newElo
+  const newElo = currentPlayer?.newElo
+  const shouldShowElo = eligibleToELO && currentPlayer && newElo != null
 
   return (
     <div className="after-menu">

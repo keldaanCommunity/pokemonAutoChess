@@ -1,9 +1,11 @@
 import { Dispatcher } from "@colyseus/command"
 import { type Client, Room } from "colyseus"
 import { getAuth } from "firebase-admin/auth"
+import { computeElo } from "../core/elo"
 import AfterGamePlayer from "../models/colyseus-models/after-game-player"
 import UserMetadata from "../models/mongo-models/user-metadata"
-import type { IAfterGamePlayer } from "../types"
+import { getAverageElo } from "../services/elo-average"
+import { type IAfterGamePlayer, Role } from "../types"
 import type { GameMode } from "../types/enum/Game"
 import { logger } from "../utils/logger"
 import AfterGameState from "./states/after-game-state"
@@ -15,7 +17,7 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
     this.dispatcher = new Dispatcher(this)
   }
 
-  onCreate(options: {
+  async onCreate(options: {
     players: IAfterGamePlayer[]
     idToken: string
     eligibleToXP: boolean
@@ -25,9 +27,20 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
     logger.info("Create AfterGame ", this.roomId)
 
     this.state = new AfterGameState(options)
+
     // logger.debug('before', this.state.players);
     if (options.players) {
-      options.players.forEach((plyr: IAfterGamePlayer) => {
+      const humans = options.players.filter((p) => p.role !== Role.BOT)
+      options.players.forEach(async (plyr: IAfterGamePlayer) => {
+        let newElo = plyr.elo
+        if (
+          options.eligibleToELO &&
+          plyr.role !== Role.BOT &&
+          humans.length >= 2
+        ) {
+          newElo = await computeElo(plyr, plyr.rank, plyr.elo, humans, false)
+        }
+
         const player = new AfterGamePlayer(
           plyr.id,
           plyr.name,
@@ -38,6 +51,7 @@ export default class AfterGameRoom extends Room<{ state: AfterGameState }> {
           plyr.role,
           plyr.synergies,
           plyr.elo,
+          newElo,
           plyr.games,
           plyr.gameStats
         )
