@@ -20,8 +20,14 @@ export default defineConfig({
     'zh',
     'tr'
   ],
-  // Chinese has no singular form, so zh intentionally omits {{count}} here
-  ignoreKeys: ['translation:shop.clicks_one', 'translation:ability_description.DEFAULT'],
+  ignoreKeys: [
+    // Pokemon names are often identical across languages
+    'translation:pkm.*',
+    // Chinese has no singular form, so zh intentionally omits {{count}} here
+    'translation:shop.clicks_one',
+    // An intentionally empty placeholder
+    'translation:ability_description.DEFAULT'
+  ],
   checks: { 'stale-translation': 'off', 'missing-translation': 'off' },
   history: false,
   resources: [{ pattern: 'app/public/dist/client/locales/{locale}/{namespace}.json' }],
