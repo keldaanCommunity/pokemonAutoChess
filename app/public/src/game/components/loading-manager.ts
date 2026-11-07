@@ -103,11 +103,14 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
+      const parent = pack.includes("/")
+        ? `${pack.slice(0, pack.lastIndexOf("/"))}/`
+        : ""
       loadMultiAtlas(
         scene,
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
-        `/assets/${pack}/`
+        `/assets/${parent}${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
+        `/assets/${parent}`
       )
     }
 

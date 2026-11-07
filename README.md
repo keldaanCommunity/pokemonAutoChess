@@ -134,6 +134,7 @@ You might want to have full access rights on your local version. To do so, you c
 # Development
 
 - Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
+- AssetPack 1.7 emits packed atlases next to the output path of their `{tps}` directory. Run `npm test --prefix edit/assetpack` to check the Phaser atlas and index pipeline.
 - The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
 - We recommend VSCode and the extension Biome for formatting and linting
 

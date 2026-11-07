@@ -1,8 +1,7 @@
-import { hasTag, path, SavableAssetCache } from "@assetpack/core"
 import { packAsync } from "free-tex-packer-core"
 import { readFileSync } from "fs"
-import fs from "fs-extra"
 import { glob } from "glob"
+import path from "node:path"
 
 function texturePacker(options) {
   const defaultOptions = {
@@ -29,108 +28,188 @@ function texturePacker(options) {
   return {
     folder: true,
     name: "texture-packer",
-    test(tree, _p, opts) {
-      const opt = { ...defaultOptions.tags, ...opts.tags }
-      return hasTag(tree, "file", opt.tps)
-    },
-    async transform(tree, processor, optionOverrides) {
-      const tags = { ...defaultOptions.tags, ...optionOverrides.tags }
-      const resolutionOptions = {
-        ...defaultOptions.resolutionOptions,
-        ...optionOverrides.resolutionOptions
-      }
-      const transformOptions = {
-        tags,
-        resolutionOptions,
-        texturePacker: {
-          textureName: path.basename(processor.inputToOutput(tree.path)),
-          textureFormat: hasTag(tree, "file", tags.jpg) ? "jpg" : "png",
-          ...defaultOptions.texturePacker,
-          ...{
-            width: resolutionOptions?.maximumTextureSize,
-            height: resolutionOptions?.maximumTextureSize
-          },
-          ...optionOverrides.texturePacker
-        }
-      }
-      const largestResolution = Math.max(
-        ...Object.values(transformOptions.resolutionOptions.resolutions)
+    defaultOptions,
+    tags: defaultOptions.tags,
+    test(asset, processorOrOptions, legacyOptions) {
+      const isLegacy = isLegacyProcessor(processorOrOptions)
+      const resolvedOptions = resolveOptions(
+        defaultOptions,
+        isLegacy ? legacyOptions : processorOrOptions
       )
-      const resolutionHash = hasTag(tree, "path", transformOptions.tags.fix)
-        ? {
-            default:
-              transformOptions.resolutionOptions.resolutions[
-                transformOptions.resolutionOptions.fixedResolution
-              ]
-          }
-        : transformOptions.resolutionOptions.resolutions
-      const globPath = `${tree.path}/**/*.{jpg,png,gif}`
-      const files = await glob(globPath)
-      const imagesToPack = files.map((f) => ({
-        path: f,
-        contents: readFileSync(f)
-      }))
-      if (imagesToPack.length === 0) {
-        return
-      }
-      const cacheMap = new Map()
-      const front = transformOptions.resolutionOptions.template.split("%%")[0]
-      // loop through each resolution and pack the images
-      for (const resolution of Object.values(resolutionHash)) {
-        const scale = resolution / largestResolution
-        const origScale = largestResolution
-        const template = transformOptions.resolutionOptions.template.replace(
-          "%%",
-          resolution.toString()
+
+      if (isLegacy) {
+        return asset.isFolder && hasLegacyTag(
+          asset,
+          "file",
+          resolvedOptions.tags.tps
         )
-        const res = await packAsync(imagesToPack, {
-          ...transformOptions.texturePacker,
-          scale
-        })
-        const out = await processTPSFiles(res, {
-          inputDir: tree.path,
-          outputDir: processor.inputToOutput(tree.path),
-          template,
-          scale,
-          originalScale: origScale,
-          processor,
-          exporter: transformOptions.texturePacker.exporter
-        })
-        out.forEach((o) => {
-          const oo = o.split(front)[0]
-          if (o.endsWith(".json")) {
-            !cacheMap.get(oo) &&
-              cacheMap.set(oo, {
-                paths: [],
-                name: processor.trimOutputPath(`${oo}.json`)
-              })
-            const d = cacheMap.get(oo)
-            d.paths.push(processor.trimOutputPath(o))
-            cacheMap.set(oo, d)
-          }
-          processor.addToTree({
-            tree,
-            outputOptions: {
-              outputPathOverride: o
-            },
-            transformId: "tps",
-            transformData: {
-              prefix: template
-            }
-          })
-        })
       }
-      SavableAssetCache.set(tree.path, {
-        tree,
-        transformData: {
-          type: this.name,
-          prefix: transformOptions.resolutionOptions.template,
-          resolutions: Object.values(resolutionHash),
-          files: [...cacheMap.values()]
-        }
-      })
+
+      return (
+        asset.isFolder &&
+        Boolean(asset.allMetaData?.[resolvedOptions.tags.tps])
+      )
+    },
+    async transform(asset, processorOrOptions, legacyOptionsOrPipeSystem) {
+      if (isLegacyProcessor(processorOrOptions)) {
+        return transformLegacy(
+          asset,
+          processorOrOptions,
+          resolveOptions(defaultOptions, legacyOptionsOrPipeSystem)
+        )
+      }
+
+      return transformAsset(
+        asset,
+        resolveOptions(defaultOptions, processorOrOptions)
+      )
     }
   }
+}
+
+function hasLegacyTag(tree, type, tag) {
+  if (type === "file") return Boolean(tree.fileTags?.[tag])
+  return Boolean(tree.fileTags?.[tag] || tree.pathTags?.[tag])
+}
+
+function isLegacyProcessor(value) {
+  return typeof value?.inputToOutput === "function"
+}
+
+function resolveOptions(defaultOptions, overrides = {}) {
+  return {
+    tags: { ...defaultOptions.tags, ...overrides.tags },
+    resolutionOptions: {
+      ...defaultOptions.resolutionOptions,
+      ...overrides.resolutionOptions
+    },
+    texturePacker: {
+      ...defaultOptions.texturePacker,
+      ...overrides.texturePacker
+    }
+  }
+}
+
+async function transformLegacy(tree, processor, options) {
+  const outputDir = processor.inputToOutput(tree.path)
+  const { outputs } = await packAssets(
+    tree,
+    path.basename(outputDir),
+    options,
+    hasLegacyTag(tree, "path", options.tags.fix),
+    hasLegacyTag(tree, "file", options.tags.jpg)
+  )
+
+  if (outputs.length === 0) return
+
+  for (const output of outputs) {
+    const outputPath = path.posix.join(
+      outputDir.replace(/\\/g, "/"),
+      output.name
+    )
+    processor.saveToOutput({
+      tree: undefined,
+      outputOptions: {
+        outputPathOverride: outputPath,
+        outputData: output.buffer
+      }
+    })
+    processor.addToTree({
+      tree,
+      outputOptions: {
+        outputPathOverride: outputPath
+      },
+      transformId: "tps",
+      transformData: {
+        prefix: output.template
+      }
+    })
+  }
+}
+
+async function transformAsset(asset, options) {
+  asset.skipChildren()
+  const outputDirName = stripTags(asset.filename)
+  const { outputs } = await packAssets(
+    asset,
+    outputDirName,
+    options,
+    Boolean(asset.allMetaData?.[options.tags.fix]),
+    Boolean(asset.allMetaData?.[options.tags.jpg])
+  )
+  const { createNewAssetAt } = await import("@assetpack/core")
+
+  return outputs.map((output) => {
+    const outputAsset = createNewAssetAt(asset, output.name)
+    outputAsset.buffer = output.buffer
+    outputAsset.transformData.prefix = output.template
+    if (path.extname(output.name) !== ".json") {
+      outputAsset.metaData.mIgnore = true
+    }
+    return outputAsset
+  })
+}
+
+function stripTags(name) {
+  let result = ""
+  let position = 0
+  while (position < name.length) {
+    const start = name.indexOf("{", position)
+    if (start === -1) break
+    const end = name.indexOf("}", start + 1)
+    if (end === -1) break
+    result += name.slice(position, start)
+    position = end + 1
+  }
+  return result + name.slice(position)
+}
+
+async function packAssets(asset, outputDirName, options, isFixed, isJpg) {
+  const { resolutionOptions } = options
+  const largestResolution = Math.max(
+    ...Object.values(resolutionOptions.resolutions)
+  )
+  const resolutionHash = isFixed
+    ? {
+        default:
+          resolutionOptions.resolutions[resolutionOptions.fixedResolution]
+      }
+    : resolutionOptions.resolutions
+  const files = await glob(`${asset.path}/**/*.{jpg,png,gif}`)
+  const imagesToPack = files.map((file) => ({
+    path: file,
+    contents: readFileSync(file)
+  }))
+
+  if (imagesToPack.length === 0) {
+    return { outputs: [] }
+  }
+
+  const outputs = []
+  for (const resolution of Object.values(resolutionHash)) {
+    const template = resolutionOptions.template.replace(
+      "%%",
+      resolution.toString()
+    )
+    const packed = await packAsync(imagesToPack, {
+      textureName: outputDirName,
+      textureFormat: isJpg ? "jpg" : "png",
+      width: resolutionOptions.maximumTextureSize,
+      height: resolutionOptions.maximumTextureSize,
+      ...options.texturePacker,
+      scale: resolution / largestResolution
+    })
+    outputs.push(
+      ...(await processTPSFiles(packed, {
+        inputDir: asset.path,
+        template,
+        originalScale: largestResolution,
+        exporter: options.texturePacker.exporter
+      }))
+    )
+  }
+
+  return { outputs }
 }
 
 function pixiTexturePacker(options) {
@@ -144,24 +223,14 @@ function pixiTexturePacker(options) {
 }
 
 async function processTPSFiles(files, options) {
-  const outputFilePaths = []
+  const outputs = []
   for (const item of files) {
-    // create a name that injects a template eg _mip
     const templateName = item.name.replace(
       /(\.[\w\d_-]+)$/i,
       `${options.template}$1`
     )
-    const outputDir = options.outputDir
-    // make sure the folder we save to exists
-    fs.ensureDirSync(outputDir)
-    // this is where we save the files
-    const outputFile = path.joinSafe(outputDir, templateName)
-    // so one thing FREE texture packer does different is that it either puts the full paths in
-    // or the image name.
-    // we rely on the folder names being preserved in the frame data.
-    // we need to modify the frame names before we save so they are the same
-    // eg raw-assets/image/icons{tps}/cool/image.png -> cool/image.png
-    if (outputFile.split(".").pop() === "json") {
+    let outputBuffer = item.buffer
+    if (path.extname(templateName) === ".json") {
       const json = JSON.parse(item.buffer.toString("utf8"))
       const normalizedDir = options.inputDir.replace(/\\/g, "/")
 
@@ -188,25 +257,15 @@ async function processTPSFiles(files, options) {
         json.meta.scale *= options.originalScale
       }
 
-      options.processor.saveToOutput({
-        tree: undefined,
-        outputOptions: {
-          outputPathOverride: outputFile,
-          outputData: JSON.stringify(json)
-        }
-      })
-    } else {
-      options.processor.saveToOutput({
-        tree: undefined,
-        outputOptions: {
-          outputPathOverride: outputFile,
-          outputData: item.buffer
-        }
-      })
+      outputBuffer = Buffer.from(JSON.stringify(json))
     }
-    outputFilePaths.push(outputFile)
+    outputs.push({
+      name: templateName,
+      buffer: outputBuffer,
+      template: options.template
+    })
   }
-  return outputFilePaths
+  return outputs
 }
 
 export { pixiTexturePacker, texturePacker }
