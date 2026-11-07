@@ -46,7 +46,7 @@ export default function AfterMenu() {
       <div className="my-container is-centered">
         {playerRank && (
           <>
-            <div className="player-rank after-header-reveal">
+            <div className="player-rank">
               {playerRank <= 3 && (
                 <img src={`/assets/ui/rank${playerRank}.png`} alt="" />
               )}
@@ -56,7 +56,7 @@ export default function AfterMenu() {
               <GameModeIcon gameMode={gameMode} />
               {t(`game_modes.${gameMode}`)}
             </p>
-            <div className="player-gains after-header-reveal">
+            <div className="player-gains">
               {shouldShowElo && (
                 <p className="player-elo">
                   ELO {newElo} (
@@ -85,16 +85,7 @@ export default function AfterMenu() {
           <tbody>
             {players.map((player, index) => {
               return (
-                <tr
-                  key={player.id}
-                  className="after-row"
-                  style={
-                    {
-                      "--i": players.length - 1 - index,
-                      "--stagger": `${2.4 / players.length}s`
-                    } as React.CSSProperties
-                  }
-                >
+                <tr key={player.id}>
                   <td>{player.rank}</td>
                   <td>
                     <Avatar
