@@ -49,6 +49,7 @@
 - New ability for Wiscash: Targets the enemy with the most PP within a 2-tile radius, dealing [30,60,120,240,SP] SPECIAL. Damage is doubled if the target stands on a fully dug GROUND hole. Knocks 1 RANGE enemies away, or pulls 2+ RANGE enemies toward the user, and inflicts LOCKED for 2 seconds
 - New ability for Cradily: Plants a seed on the target, dealing [4,8,12,16]% of its max HP as SPECIAL damage each second for 5 seconds. Each time it deals damage, heals the ally with the lowest missing HP for the amount dealt.
 - Change Stakataka passive Wall of Stone: now locks for 3 seconds instead of until the SHIELD is depleted.
+- Wurmple now has NORMAL type
 
 # Changes to Synergies
 

@@ -12190,7 +12190,7 @@ export class Emboar extends Pokemon {
 }
 
 export class Wurmple extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 1
   hp = 110
