@@ -20,7 +20,7 @@ export class DisarmingVoiceStrategy extends AbilityStrategy {
     const charmDuration = [1000, 1000, 1000, 2000][pokemon.stars - 1] ?? 2000
     cells.forEach((cell) => {
       if (cell.value && pokemon.team != cell.value.team) {
-        cell.value.status.triggerCharm(charmDuration, target, pokemon, true)
+        cell.value.status.triggerCharm(charmDuration, cell.value, pokemon, true)
       }
     })
   }
