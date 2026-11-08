@@ -13,7 +13,7 @@ export class VenoshockStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     let damage = [30, 60, 120, 240][pokemon.stars - 1] ?? 240
 
-    if (pokemon.status.poisonStacks > 0) {
+    if (target.status.poisonStacks > 0) {
       damage = damage * 2
     }
 
