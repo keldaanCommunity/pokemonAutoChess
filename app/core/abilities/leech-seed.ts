@@ -66,7 +66,7 @@ export class LeechSeedStrategy extends AbilityStrategy {
       })
 
       const result = target.handleSpecialDamage(
-        damagePercent,
+        (damagePercent * target.maxHP) / 100,
         board,
         AttackType.SPECIAL,
         pokemon,
