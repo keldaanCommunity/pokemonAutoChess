@@ -5585,6 +5585,22 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OBLIVION_WING
+  passive = Passive.DESTRUCTION
+}
+
+export class YveltalCocoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 22
+  speed = 57
+  def = 12
+  speDef = 12
+  maxPP = 10
+  range = 1
+  skill = Ability.DARK_AURA
+  passive = Passive.COCOON_OF_DESTRUCTION
 }
 
 export class Moltres extends Pokemon {
@@ -21543,6 +21559,7 @@ export const PokemonClasses: Record<
   [Pkm.ZERAORA]: Zeraora,
   [Pkm.XERNEAS]: Xerneas,
   [Pkm.YVELTAL]: Yveltal,
+  [Pkm.YVELTAL_COCOON]: YveltalCocoon,
   [Pkm.MARSHADOW]: Marshadow,
   [Pkm.HOOTHOOT]: Hoothoot,
   [Pkm.NOCTOWL]: Noctowl,

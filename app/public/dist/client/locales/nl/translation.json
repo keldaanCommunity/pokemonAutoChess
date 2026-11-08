@@ -1030,7 +1030,6 @@
 		"PLASMA_FIST": "Deals [60,90,120,240,SP] SPECIAL met 30% lifesteal",
 		"SPECTRAL_THIEF": "Verdwijnt en verschijnt weer bij het delen van [30,40,50,100,SP] SPECIAL, waarbij alle statistische boost van het doelwit wordt gestolen",
 		"GEOMANCY": "Krijg [15,15,15,30,SP] ATK, [10,10,10,20,SP] SPE_DEF en 15 SPEED",
-		"OBLIVION_WING": "Doet SPECIAL [90,120,150,300,SP] en geneest 75% van de schade die het doelwit heeft opgelopen",
 		"SLACK_OFF": "Wis alle negatieve status, genees [30,30,30,60,SP] % van max HP en zet de caster SLEEP gedurende 3 seconden",
 		"DARK_VOID": "Biedt [10,20,30,60,SP] SPECIAL aan alle vijanden. Als een van de getroffen doelen SILENCE was, worden ze 2 seconden in SLEEP gezet",
 		"OVERHEAT": "Geeft [12,25,50,100,SP] SPECIAL aan alle vijandelijke Pokémon in een straal van 4 tegels rond de gebruiker, +30% als ze last hebben van BURN. Ontgrendel alle FREEZE Pokémon.",

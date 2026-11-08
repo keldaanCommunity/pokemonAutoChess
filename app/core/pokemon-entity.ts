@@ -65,6 +65,7 @@ import {
   OnDamageReceivedEffect,
   OnDeathEffect,
   OnHitEffect,
+  OnHealReceivedEffect,
   OnItemGainedEffect,
   OnItemLostInCombatEffect,
   OnKillEffect,
@@ -152,7 +153,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
-
   constructor(
     pokemon: IPokemon,
     positionX: number,
@@ -267,7 +267,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canBeCopied(): boolean {
-    return this.passive !== Passive.INANIMATE
+    return (
+      this.passive !== Passive.INANIMATE &&
+      this.passive !== Passive.DESTRUCTION &&
+      this.passive !== Passive.COCOON_OF_DESTRUCTION
+    )
   }
 
   get isGhostOpponent(): boolean {
@@ -593,6 +597,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    const previousHP = this.hp
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
@@ -613,6 +618,16 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (permanent && !this.isGhostOpponent) {
       const boardPokemon = this.refToBoardPokemon as Pokemon
       boardPokemon.addMaxHP(value)
+    }
+    if (this.hp > previousHP) {
+      const healReceived = this.hp - previousHP
+      this.getEffects(OnHealReceivedEffect).forEach((effect) => {
+        effect.apply({
+          pokemon: this,
+          healReceived,
+          origin: caster
+        })
+      })
     }
   }
 

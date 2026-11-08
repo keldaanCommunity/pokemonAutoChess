@@ -97,6 +97,7 @@ import { CrushClawStrategy } from "./crush-claw"
 import { CrushGripStrategy } from "./crush-grip"
 import { CurseStrategy } from "./curse"
 import { CutStrategy } from "./cut"
+import { DarkAuraStrategy } from "./dark-aura"
 import { DarkHarvestStrategy } from "./dark-harvest"
 import { DarkVoidStrategy } from "./dark-void"
 import { DarkestLariatStrategy } from "./darkest-lariat"
@@ -825,6 +826,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.DARKEST_LARIAT]: new DarkestLariatStrategy(),
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
+  [Ability.DARK_AURA]: new DarkAuraStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DEEP_FREEZE]: new DeepFreezeStrategy(),
   [Ability.DEFAULT]: new AbilityStrategy(),

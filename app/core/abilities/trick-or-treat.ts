@@ -1,5 +1,6 @@
 import { Ability } from "../../types/enum/Ability"
 import { AbsorbedItems } from "../../types/enum/Item"
+import { Passive } from "../../types/enum/Passive"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import { isIn } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
@@ -24,7 +25,11 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       )
       const removed = target.removeItem(item)
       if (removed) pokemon.addItem(item)
-    } else if (pokemon.index === PkmIndex[pokemon.name]) {
+    } else if (
+      pokemon.index === PkmIndex[pokemon.name] &&
+      target.passive !== Passive.DESTRUCTION &&
+      target.passive !== Passive.COCOON_OF_DESTRUCTION
+    ) {
       // transforms the unit into magikarp for X seconds, replacing its ability with splash
       const originalAbility = target.skill
       const originalAttack = target.atk

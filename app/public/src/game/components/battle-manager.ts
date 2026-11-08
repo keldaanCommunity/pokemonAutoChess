@@ -679,11 +679,11 @@ export default class BattleManager {
           if (previousValue !== value) {
             // transformation or evolution mid-fight
             // unload previous index animations
-            pkmSprite.unloadAnimations(
-              this.scene,
-              previousValue as IPokemonEntity["index"],
-              pkmSprite.pokemon.shiny ? PokemonTint.SHINY : PokemonTint.NORMAL // previous tint is still used here, this is the one we need to unload
-            )
+            const previousIndex = previousValue as IPokemonEntity["index"]
+            const tint = pkmSprite.pokemon.shiny
+              ? PokemonTint.SHINY
+              : PokemonTint.NORMAL
+            pkmSprite.unloadAnimations(this.scene, previousIndex, tint)
             pkmSprite.attackSprite =
               PokemonAnimations[PkmByIndex[value as string]]?.attackSprite ??
               pkmSprite.attackSprite

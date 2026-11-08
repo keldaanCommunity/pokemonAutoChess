@@ -1,10 +1,11 @@
 import type { MapSchema } from "@colyseus/schema"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
+import type { IPokemonEntity } from "../../types"
 import type GameRoom from "../../rooms/game-room"
 import type GameState from "../../rooms/states/game-state"
 import type { Ability } from "../../types/enum/Ability"
-import type { EffectEnum } from "../../types/enum/Effect"
+import type { EffectEnum, EnvironmentalEffect } from "../../types/enum/Effect"
 import type { AttackType } from "../../types/enum/Game"
 import type { Item } from "../../types/enum/Item"
 import type { Passive } from "../../types/enum/Passive"
@@ -411,6 +412,22 @@ export class OnDamageReceivedEffect extends Effect {
   apply(args: OnDamageReceivedEffectArgs) {}
   constructor(
     effect?: (args: OnDamageReceivedEffectArgs) => void,
+    origin?: EffectOrigin
+  ) {
+    super(effect, origin)
+  }
+}
+
+export interface OnHealReceivedEffectArgs {
+  pokemon: PokemonEntity
+  healReceived: number
+  origin: IPokemonEntity | EnvironmentalEffect
+}
+
+export class OnHealReceivedEffect extends Effect {
+  apply(args: OnHealReceivedEffectArgs) {}
+  constructor(
+    effect?: (args: OnHealReceivedEffectArgs) => void,
     origin?: EffectOrigin
   ) {
     super(effect, origin)
