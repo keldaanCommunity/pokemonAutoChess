@@ -33,6 +33,7 @@
 - Rework Unown-D (DUPE): Transform into a copy of your STRONGEST ally without its items and permanent buffs. PP 100 → 50
 - Nerf Unown J (JAWS): Sharpedos no longer held a RAZOR_CLAW
 - Change Unown-N (NUKE): No longer consume PP and trigger on-cast effects. Fixed SHIELD amount given not increasing with CRIT_POWER on crit. Clarified description. PP 100 → 80
+- Buff Unown-S (SURF): PP 100 → 90
 - Change Unown-V (VOLT): No longer consume PP and trigger on-cast effects for each thunder shock. Clarified description. PP 90 → 60
 - Change Unown-Y (YOGA): No longer consume PP and trigger on-cast effects. Clarified description.
 - Nerf Attack Order (Vespiqueen): base damage [20,40,60,120] → [10,20,30,60] SPECIAL
