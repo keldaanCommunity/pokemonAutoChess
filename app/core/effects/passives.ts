@@ -483,7 +483,7 @@ class GalarianDarmanitanBurnEffect extends PeriodicEffect {
                   pokemon,
                   crit
                 )
-                cell.value.status.triggerBurn(2000, pokemon, cell.value)
+                cell.value.status.triggerBurn(2000, cell.value, pokemon)
               }
             })
         }
