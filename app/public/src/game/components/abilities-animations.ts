@@ -1148,6 +1148,23 @@ export const AbilitiesAnimations: {
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
   [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.MEGA_DRAIN]: [
+    (args) =>
+      OrientationArray.map((o, i) =>
+        projectile({
+          startCoords: [
+            args.positionX + OrientationVector[o][0],
+            args.positionY + OrientationVector[o][1]
+          ],
+          endCoords: "caster",
+          scale: 2,
+          duration: 400,
+          tint: 0xc0ffff,
+          rotation: OrientationAngle[o]
+        })(args)
+      ),
+    onCaster({ ability: "GRASS_HEAL", delay: 300 })
+  ],
   [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({

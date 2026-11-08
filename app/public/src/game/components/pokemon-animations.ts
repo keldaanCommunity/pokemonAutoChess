@@ -49,23 +49,23 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.NORMAL_MELEE
   },
   [Pkm.BULBASAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.IVYSAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.VENUSAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
@@ -6141,7 +6141,7 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.SOUND_HIT
   },
   [Pkm.PETILIL]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Twirl,
     emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_MELEE,
