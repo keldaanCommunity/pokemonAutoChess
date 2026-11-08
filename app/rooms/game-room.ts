@@ -76,7 +76,7 @@ import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
 import {
   type Gift,
   Gifts,
-  type Item,
+  Item,
   RemovableItems,
   UnholdableItemsToSaveForStats,
   Wands
@@ -1688,42 +1688,40 @@ export default class GameRoom extends Room<{ state: GameState }> {
   tradePokemonWithPartner(playerA: Player, playerB: Player) {
     if (!playerA.alive || !playerB.alive) return
 
-    const pokemonToTradeA = schemaValues(playerA.board).find(
+    const pokemonA = schemaValues(playerA.board).find(
       (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
     )
-    const pokemonToTradeB = schemaValues(playerB.board).find(
+    const pokemonB = schemaValues(playerB.board).find(
       (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
     )
     if (
-      !pokemonToTradeA ||
-      !pokemonToTradeB ||
-      !canBeTraded(pokemonToTradeA) ||
-      !canBeTraded(pokemonToTradeB)
+      !pokemonA ||
+      !pokemonB ||
+      !canBeTraded(pokemonA) ||
+      !canBeTraded(pokemonB)
     )
       return
 
     // Remove removable items
-    const itemsToRemoveA = schemaValues(pokemonToTradeA.items).filter((item) =>
-      isIn(RemovableItems, item)
-    )
-    playerA.items.push(...itemsToRemoveA)
-    unequipItems(pokemonToTradeA, itemsToRemoveA, playerA)
+    const isRemovedOnTrade = (item) =>
+      isIn(RemovableItems, item) || item === Item.SILK_SCARF
 
-    const itemsToRemoveB = schemaValues(pokemonToTradeB.items).filter((item) =>
-      isIn(RemovableItems, item)
-    )
+    const itemsRemovedA = schemaValues(pokemonA.items).filter(isRemovedOnTrade)
+    playerA.items.push(...itemsRemovedA)
+    unequipItems(pokemonA, itemsRemovedA, playerA)
+
+    const itemsToRemoveB = schemaValues(pokemonB.items).filter(isRemovedOnTrade)
     playerB.items.push(...itemsToRemoveB)
-    unequipItems(pokemonToTradeB, itemsToRemoveB, playerB)
+    unequipItems(pokemonB, itemsToRemoveB, playerB)
 
     // Switch Pokémon
+    playerA.board.delete(pokemonA.id)
+    playerA.board.set(pokemonB.id, pokemonB)
+    pokemonB.onAcquired(playerA)
 
-    playerA.board.delete(pokemonToTradeA.id)
-    playerA.board.set(pokemonToTradeB.id, pokemonToTradeB)
-    pokemonToTradeB.onAcquired(playerA)
-
-    playerB.board.delete(pokemonToTradeB.id)
-    playerB.board.set(pokemonToTradeA.id, pokemonToTradeA)
-    pokemonToTradeA.onAcquired(playerB)
+    playerB.board.delete(pokemonB.id)
+    playerB.board.set(pokemonA.id, pokemonA)
+    pokemonA.onAcquired(playerB)
 
     this.checkEvolutionsAfterPokemonAcquired(playerA.id)
     this.checkEvolutionsAfterPokemonAcquired(playerB.id)
@@ -1732,7 +1730,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
     // Update trading platform cooldown based on nb of items traded & pokemon rarity
 
-    const cooldown = computeTradeCooldown(pokemonToTradeA, pokemonToTradeB)
+    const cooldown = computeTradeCooldown(pokemonA, pokemonB)
     playerA.tradeCooldown = cooldown
     playerB.tradeCooldown = cooldown
   }
