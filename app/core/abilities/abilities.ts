@@ -391,7 +391,7 @@ import { PoltergeistStrategy } from "./poltergeist"
 import { PopulationBombStrategy } from "./population-bomb"
 import { PowderStrategy } from "./powder"
 import { PowderSnowStrategy } from "./powder-snow"
-import { PowerGemStrategy } from "./power-gem";
+import { PowerGemStrategy } from "./power-gem"
 import { PowerHugStrategy } from "./power-hug"
 import { PowerWashStrategy } from "./power-wash"
 import { PowerWhipStrategy } from "./power-whip"

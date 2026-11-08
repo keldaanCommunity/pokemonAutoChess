@@ -714,11 +714,7 @@ function createLatticeCells(random: () => number): Vector3[] {
       1 - ((i + 0.5) / NB_LATTICE_CELLS) * 2 + (random() - 0.5) * 0.15
     const ringRadius = Math.sqrt(Math.max(0, 1 - height * height))
     const angle = i * 2.39996 + (random() - 0.5) * 0.5
-    return [
-      Math.cos(angle) * ringRadius,
-      height,
-      Math.sin(angle) * ringRadius
-    ]
+    return [Math.cos(angle) * ringRadius, height, Math.sin(angle) * ringRadius]
   })
 }
 
@@ -1015,9 +1011,7 @@ function drawSphere(
   time: number,
   scenery: MegaScenery
 ) {
-  const form = easeInOut(
-    clamp01((time - SPHERE_START) / SPHERE_FORM_DURATION)
-  )
+  const form = easeInOut(clamp01((time - SPHERE_START) / SPHERE_FORM_DURATION))
   if (form <= 0) return
   const r = SPHERE_RADIUS
   const dark = easeInOut(clamp01((time - DARKEN_START) / DARKEN_DURATION))
@@ -1097,10 +1091,8 @@ function unprojectFromGlobe(x: number, y: number, spin: number): Vector3 {
   const z = Math.sqrt(1 - x * x - y * y)
   const unrolledX = x * Math.cos(GLOBE_ROLL) + y * Math.sin(GLOBE_ROLL)
   const unrolledY = -x * Math.sin(GLOBE_ROLL) + y * Math.cos(GLOBE_ROLL)
-  const globeY =
-    unrolledY * Math.cos(GLOBE_PITCH) + z * Math.sin(GLOBE_PITCH)
-  const globeZ =
-    -unrolledY * Math.sin(GLOBE_PITCH) + z * Math.cos(GLOBE_PITCH)
+  const globeY = unrolledY * Math.cos(GLOBE_PITCH) + z * Math.sin(GLOBE_PITCH)
+  const globeZ = -unrolledY * Math.sin(GLOBE_PITCH) + z * Math.cos(GLOBE_PITCH)
   return [
     unrolledX * Math.cos(spin) - globeZ * Math.sin(spin),
     globeY,
@@ -1190,8 +1182,7 @@ function drawLatticeShell(
   const spin = (time / 1000) * GLOBE_SPIN_PER_SECOND
   const glow = clamp01((time - DARKEN_START - 100) / 300)
   const crack = clamp01((time - CRACK_START) / CRACK_DURATION)
-  const glowWidth =
-    SEAM_GLOW_WIDTH * glow * (1 - clamp01((crack - 0.3) / 0.5))
+  const glowWidth = SEAM_GLOW_WIDTH * glow * (1 - clamp01((crack - 0.3) / 0.5))
   const crackWidth = 0.022 + Math.pow(clamp01((crack - 0.7) / 0.3), 2) * 0.35
   const flickerFrame = Math.floor(time / BOLT_FLICKER_MS)
   const half = size / 2

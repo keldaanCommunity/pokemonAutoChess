@@ -388,8 +388,12 @@ export default abstract class PokemonState {
         })
       }
 
-      if(shield > 0){
-        pokemon.getEffects(OnShieldGainedEffect).forEach(effect => effect.apply({ pokemon, shieldAmountGained: shield }))
+      if (shield > 0) {
+        pokemon
+          .getEffects(OnShieldGainedEffect)
+          .forEach((effect) =>
+            effect.apply({ pokemon, shieldAmountGained: shield })
+          )
       }
     }
   }

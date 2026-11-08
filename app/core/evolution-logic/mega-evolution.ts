@@ -24,7 +24,7 @@ export const hasMegaEvolution = (pkm: Pkm) => {
 export const canMegaEvolve = (pokemon: Pokemon | IPokemonData) => {
   return (
     (pokemon.evolution && isMegaPokemon(pokemon.evolution)) ||
-    (pokemon.evolutions && pokemon.evolutions.some((e) => isMegaPokemon(e))) 
+    (pokemon.evolutions && pokemon.evolutions.some((e) => isMegaPokemon(e)))
   )
 }
 

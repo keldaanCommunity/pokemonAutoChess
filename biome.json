@@ -1,8 +1,9 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.5/schema.json",
   "files": {
     "includes": [
       "**",
+      "!**/*.md",
       "!**/node_modules/**/*",
       "!**/src/assets/**/*",
       "!**/app/public/dist/server/**/*",
@@ -36,7 +37,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "preset": "none",
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
@@ -73,8 +74,8 @@
         "noInvalidBuiltinInstantiation": "error",
         "useValidTypeof": "error"
       },
-      "style": { 
-        "noNamespace": "error", 
+      "style": {
+        "noNamespace": "error",
         "useAsConstAssertion": "error",
         "useImportType": "error"
       },

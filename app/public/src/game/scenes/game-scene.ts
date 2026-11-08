@@ -377,7 +377,10 @@ export default class GameScene extends Scene {
     this.room?.send(Transfer.SWITCH_BENCH_AND_BOARD, pokemon.id)
   }
 
-  updatePhase(newPhase: GamePhaseState | null, previousPhase: GamePhaseState | null) {
+  updatePhase(
+    newPhase: GamePhaseState | null,
+    previousPhase: GamePhaseState | null
+  ) {
     this.weatherManager?.clearWeather()
     clearAbilityAnimations(this)
     this.resetDragState()
