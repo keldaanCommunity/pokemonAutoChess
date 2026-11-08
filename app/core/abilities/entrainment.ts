@@ -12,20 +12,23 @@ export class EntrainmentStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const ppGained = [10,10,10,30][pokemon.stars - 1] ?? 30
+    const ppGained = [10, 10, 10, 30][pokemon.stars - 1] ?? 30
     pokemon.addPP(ppGained, pokemon, 1, crit)
     if (target.skill !== Ability.ENTRAINMENT) {
       target.skill = Ability.ENTRAINMENT
     } else {
       const potentialTargets: { x: number; y: number; value: PokemonEntity }[] =
         []
-      board.forEach(
-        (x: number, y: number, entity?: PokemonEntity) => {
-          if (entity && entity.team !== pokemon.team && entity.hp > 0 && entity.skill !== Ability.ENTRAINMENT) {
-            potentialTargets.push({ x, y, value: entity })
-          }
+      board.forEach((x: number, y: number, entity?: PokemonEntity) => {
+        if (
+          entity &&
+          entity.team !== pokemon.team &&
+          entity.hp > 0 &&
+          entity.skill !== Ability.ENTRAINMENT
+        ) {
+          potentialTargets.push({ x, y, value: entity })
         }
-      )
+      })
       potentialTargets.sort(
         (a, b) =>
           distanceC(pokemon.positionX, pokemon.positionY, a.x, a.y) -

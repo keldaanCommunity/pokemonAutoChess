@@ -23,11 +23,29 @@ export class PresentStrategy extends AbilityStrategy {
     if (chance < 0.1) {
       target.handleHeal(50, pokemon, 0, false)
     } else if (chance < 0.5) {
-      target.handleSpecialDamage(dmg80, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(
+        dmg80,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     } else if (chance < 0.8) {
-      target.handleSpecialDamage(dmg150, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(
+        dmg150,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     } else {
-      target.handleSpecialDamage(dmg300, board, AttackType.SPECIAL, pokemon, crit)
+      target.handleSpecialDamage(
+        dmg300,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
     }
   }
 }

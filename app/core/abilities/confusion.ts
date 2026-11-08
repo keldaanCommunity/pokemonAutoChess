@@ -11,7 +11,8 @@ export class ConfusionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const confusionDuration = [3000, 5000, 7000, 10000][pokemon.stars - 1] ?? 10000
+    const confusionDuration =
+      [3000, 5000, 7000, 10000][pokemon.stars - 1] ?? 10000
     const damage = [75, 150, 300, 500][pokemon.stars - 1] ?? 500
 
     if (target.status.confusion) {

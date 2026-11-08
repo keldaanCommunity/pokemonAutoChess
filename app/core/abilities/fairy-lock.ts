@@ -17,7 +17,7 @@ export class FairyLockStrategy extends AbilityStrategy {
       .getAdjacentCells(target.positionX, target.positionY, true)
       .filter((cell) => cell && cell.value && cell.value.team !== pokemon.team)
 
-    const damage = [50,70,90,180][pokemon.stars - 1] ?? 180
+    const damage = [50, 70, 90, 180][pokemon.stars - 1] ?? 180
 
     cells.forEach((cell) => {
       pokemon.broadcastAbility({ targetX: cell.x, targetY: cell.y })

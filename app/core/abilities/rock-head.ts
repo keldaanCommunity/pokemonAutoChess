@@ -11,7 +11,9 @@ export class RockHeadStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = Math.round(([1.2, 1.2, 1.5, 3][pokemon.stars - 1] ?? 3) * (pokemon.atk + pokemon.def))
+    const damage = Math.round(
+      ([1.2, 1.2, 1.5, 3][pokemon.stars - 1] ?? 3) * (pokemon.atk + pokemon.def)
+    )
 
     target.handleSpecialDamage(
       damage,

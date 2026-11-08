@@ -453,7 +453,8 @@ export default class BoardManager {
         const index = col + row * BOARD_WIDTH
         while (
           col + trenchWidth < BOARD_WIDTH &&
-          this.player.groundHoles[index + trenchWidth] === SynergyConfigs.GROUND.maxDepth
+          this.player.groundHoles[index + trenchWidth] ===
+            SynergyConfigs.GROUND.maxDepth
         ) {
           trenchWidth++
         }
@@ -1001,7 +1002,7 @@ export default class BoardManager {
               this.animateTrainingBag() // make training bag swing when a pokemon is training on it
             }
           } else if (action === PokemonActionState.COOK) {
-            pokemonSprite.orientation = Orientation.DOWN           
+            pokemonSprite.orientation = Orientation.DOWN
             pokemonSprite.addLifeBar({
               scene: this.scene,
               showHP: false,

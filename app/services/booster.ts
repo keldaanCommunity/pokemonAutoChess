@@ -95,7 +95,7 @@ export async function openBoosterForUser(
         updateOperations[`pokemonCollection.${index}`] = newCollectionItem
       }
     } else {
-      // A thin entry - created for a pokemon that was playedbut never owned 
+      // A thin entry - created for a pokemon that was playedbut never owned
       // has no mask to update, so start from a fresh one.
       const mask = existingItem.unlocked ?? Buffer.alloc(5, 0)
       const hasUnlocked = CollectionUtils.hasUnlocked(

@@ -7,8 +7,18 @@ export class QuiverDanceStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     pokemon.addAttack([3, 4, 5, 10][pokemon.stars - 1] ?? 10, pokemon, 1, crit)
-    pokemon.addSpecialDefense([3, 4, 5, 10][pokemon.stars - 1] ?? 10, pokemon, 1, crit)
-    pokemon.addSpeed([10, 10, 10, 15][pokemon.stars - 1] ?? 15, pokemon, 1, crit)
+    pokemon.addSpecialDefense(
+      [3, 4, 5, 10][pokemon.stars - 1] ?? 10,
+      pokemon,
+      1,
+      crit
+    )
+    pokemon.addSpeed(
+      [10, 10, 10, 15][pokemon.stars - 1] ?? 15,
+      pokemon,
+      1,
+      crit
+    )
     pokemon.addAbilityPower(20, pokemon, 0, false)
   }
 }

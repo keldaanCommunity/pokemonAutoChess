@@ -469,14 +469,17 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        burnDamage *= (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
+        burnDamage *=
+          (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        burnDamage *= (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
+        burnDamage *=
+          (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
       } else if (
         pkm.effects.has(EffectEnum.WATER_VEIL) ||
         pkm.effects.has(EffectEnum.SURGE_SURFER)
       ) {
-        burnDamage *= (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
+        burnDamage *=
+          (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
       }
 
       if (
@@ -598,7 +601,9 @@ export default class Status extends Schema implements IStatus {
           maxStacks += EffectConfigs.VENOMOUS.maxStacksBonus
         }
         if (origin.effects.has(EffectEnum.TOXIC)) {
-          maxStacks = StatusConfigs.POISONED.maxStacks + EffectConfigs.TOXIC.maxStacksBonus
+          maxStacks =
+            StatusConfigs.POISONED.maxStacks +
+            EffectConfigs.TOXIC.maxStacksBonus
         }
       }
       this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
@@ -656,14 +661,17 @@ export default class Status extends Schema implements IStatus {
       }
 
       if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-        poisonDamage *= (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
+        poisonDamage *=
+          (100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100
       } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-        poisonDamage *= (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
+        poisonDamage *=
+          (100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100
       } else if (
         pkm.effects.has(EffectEnum.WATER_VEIL) ||
         pkm.effects.has(EffectEnum.SURGE_SURFER)
       ) {
-        poisonDamage *= (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
+        poisonDamage *=
+          (100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100
       }
       poisonDamage = Math.round(poisonDamage)
 
@@ -1152,7 +1160,8 @@ export default class Status extends Schema implements IStatus {
 
   updatePokerus(dt: number, pokemon: PokemonEntity, board: Board) {
     if (this.pokerusCooldown - dt <= 0) {
-      const { attackGain, abilityPowerGain, adjacentAllies, intervalSeconds } = StatusConfigs.POKERUS
+      const { attackGain, abilityPowerGain, adjacentAllies, intervalSeconds } =
+        StatusConfigs.POKERUS
       pokemon.addAttack(attackGain, pokemon, 0, false)
       pokemon.addAbilityPower(abilityPowerGain, pokemon, 0, false)
       let infectCount = 0
@@ -1325,14 +1334,23 @@ export default class Status extends Schema implements IStatus {
     pkm: IPokemonEntity
   ): number {
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * ((100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100))
+      duration = Math.round(
+        duration *
+          ((100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100)
+      )
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * ((100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100))
+      duration = Math.round(
+        duration *
+          ((100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100)
+      )
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * ((100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100))
+      duration = Math.round(
+        duration *
+          ((100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100)
+      )
     }
 
     const nbOddStones = pkm.player

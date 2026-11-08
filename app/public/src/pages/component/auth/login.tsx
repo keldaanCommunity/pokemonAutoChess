@@ -59,7 +59,7 @@ const MailIcon = () => (
     <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4-8 5-8-5V6l8 5 8-5z" />
   </svg>
 )
-
+
 // Compat and modular SDKs share the same underlying default app and Auth instance
 const firebaseUI = initializeUI({
   app: getApp(),

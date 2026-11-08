@@ -11,7 +11,9 @@ export class MalignantChainStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const duration = Math.round(
-      ([3000, 3000, 3000, 6000][pokemon.stars - 1] ?? 6000) * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      ([3000, 3000, 3000, 6000][pokemon.stars - 1] ?? 6000) *
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
     )
     target.status.triggerPossessed(duration, target, pokemon)
     const nbStacks = [3, 3, 3, 6][pokemon.stars - 1] ?? 6

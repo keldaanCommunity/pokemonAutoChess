@@ -15,7 +15,7 @@ export class NuzzleStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
 
     const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
-    const duration = [3000,3000,3000,6000][pokemon.stars - 1] ?? 6000
+    const duration = [3000, 3000, 3000, 6000][pokemon.stars - 1] ?? 6000
 
     if (destination) {
       pokemon.setTarget(destination.target)

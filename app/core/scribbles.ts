@@ -2,7 +2,10 @@ import { PkmsWithAltForms } from "../config"
 import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import PokemonFactory from "../models/pokemon-factory"
-import { getPokemonData, getRegularsTier1 } from "../models/precomputed/precomputed-pokemon-data"
+import {
+  getPokemonData,
+  getRegularsTier1
+} from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import type GameState from "../rooms/states/game-state"
 import { Rarity } from "../types/enum/Game"
@@ -11,7 +14,7 @@ import { getPokemonCustomFromAvatar } from "../utils/avatar"
 import { getFirstAvailablePositionInBench } from "../utils/board"
 import { min } from "../utils/number"
 import { pickRandomIn, simpleHashSeededCoinFlip } from "../utils/random"
-import { getAltFormForPlayer } from "./alt-form-logic";
+import { getAltFormForPlayer } from "./alt-form-logic"
 import { getUnitPowerScore } from "./bot-logic"
 import { createRandomEgg } from "./eggs"
 

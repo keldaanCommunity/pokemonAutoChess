@@ -186,7 +186,9 @@ export default function GameChoice() {
                       />
                       <p>
                         {addIconsToDescription(t(`item_description.${item}`), {
-                          config: getDescriptionConfig(`item_description.${item}`)
+                          config: getDescriptionConfig(
+                            `item_description.${item}`
+                          )
                         })}
                       </p>
                     </div>

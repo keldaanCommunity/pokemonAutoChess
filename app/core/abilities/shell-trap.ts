@@ -13,7 +13,8 @@ export class ShellTrapStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     if (pokemon.shield > 0) {
-      const damage = ([50, 50, 50, 100][pokemon.stars - 1] ?? 100) + pokemon.shield
+      const damage =
+        ([50, 50, 50, 100][pokemon.stars - 1] ?? 100) + pokemon.shield
       board
         .getAdjacentCells(pokemon.positionX, pokemon.positionY, true)
         .forEach((cell) => {

@@ -411,7 +411,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
         attackType === AttackType.SPECIAL
       ) {
-        specialDamage *= 1 + EffectConfigs.STRANGE_STEAM.damageBonusPercent / 100
+        specialDamage *=
+          1 + EffectConfigs.STRANGE_STEAM.damageBonusPercent / 100
       }
       if (crit && attacker) {
         let critReductionFactor = 1.0
@@ -452,7 +453,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
-        const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
+        const armorFactor =
+          1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
         const speDef = this.status.armorReduction
           ? Math.round(this.speDef * armorFactor)
           : this.speDef
@@ -517,7 +519,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     const { ppGainReductionPercent } = StatusConfigs.FATIGUE
-    const fatigueFactor = this.status.fatigue && baseValue > 0 ? 1 - ppGainReductionPercent / 100 : 1
+    const fatigueFactor =
+      this.status.fatigue && baseValue > 0
+        ? 1 - ppGainReductionPercent / 100
+        : 1
     let value = Math.round(
       baseValue *
         (1 + (apBoost * caster.ap) / 100) *
@@ -1068,7 +1073,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       const { effectChance, silenceDurationSeconds } = SynergyConfigs.GHOST
       if (chance(effectChance.value / 100, this)) {
-        target.status.triggerSilence(silenceDurationSeconds * 1000, target, this)
+        target.status.triggerSilence(
+          silenceDurationSeconds * 1000,
+          target,
+          this
+        )
       }
     }
 
@@ -1088,7 +1097,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         poisonChance -= nbSmellyClays * 0.15
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
-        target.status.triggerPoison(SynergyConfigs.POISON.poisonDurationSeconds * 1000, target, this)
+        target.status.triggerPoison(
+          SynergyConfigs.POISON.poisonDurationSeconds * 1000,
+          target,
+          this
+        )
       }
     }
 

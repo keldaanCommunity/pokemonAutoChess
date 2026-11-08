@@ -12,7 +12,9 @@ export class SludgeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const nbStacks = [2, 3, 4, 8][pokemon.stars - 1] ?? 8
     const duration = Math.round(
-      ([3000, 3000, 3000, 10000][pokemon.stars - 1] ?? 10000) * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+      ([3000, 3000, 3000, 10000][pokemon.stars - 1] ?? 10000) *
+        (1 + pokemon.ap / 100) *
+        (crit ? pokemon.critPower : 1)
     )
     const cells = board.getCellsInFront(pokemon, target)
 

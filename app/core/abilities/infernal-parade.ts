@@ -41,7 +41,13 @@ export class InfernalParadeStrategy extends AbilityStrategy {
         enemy.status.triggerBurn(3000, enemy, pokemon)
       }
 
-      enemy.handleSpecialDamage([30, 30, 30, 60][pokemon.stars - 1] ?? 60, board, AttackType.SPECIAL, pokemon, crit)
+      enemy.handleSpecialDamage(
+        [30, 30, 30, 60][pokemon.stars - 1] ?? 60,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
       enemy.commands.push(
         new DelayedCommand(() => {
           enemy.handleSpecialDamage(

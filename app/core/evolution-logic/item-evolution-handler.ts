@@ -22,18 +22,15 @@ export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
       this.itemsTriggeringEvolution.includes(item)
     )
 
-    const pokemonEvolutionName = this.getEvolution(
-      pokemon,
-      player,
-      itemGiven
-    )
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, itemGiven)
     return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
   evolve(pokemon: Pokemon, player: Player, itemGiven: Item): Pokemon {
-    const itemEvolution = schemaValues(pokemon.items).find((item) =>
-      this.itemsTriggeringEvolution.includes(item)
-    ) ?? itemGiven
+    const itemEvolution =
+      schemaValues(pokemon.items).find((item) =>
+        this.itemsTriggeringEvolution.includes(item)
+      ) ?? itemGiven
     const pokemonEvolutionName = this.getEvolution(
       pokemon,
       player,

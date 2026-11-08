@@ -25,7 +25,12 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             crit
           )
         } else if (cell.value.id !== pokemon.id) {
-          cell.value.addShield([60, 80, 100, 200][pokemon.stars - 1] ?? 200, pokemon, 1, crit)
+          cell.value.addShield(
+            [60, 80, 100, 200][pokemon.stars - 1] ?? 200,
+            pokemon,
+            1,
+            crit
+          )
         }
       }
     })

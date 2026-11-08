@@ -32,7 +32,7 @@ export class FlyStrategy extends AbilityStrategy {
       pokemon.commands.push(
         new DelayedCommand(() => {
           if (destination.target && destination.target.hp > 0) {
-            const damageMultiplier = [4,4,4,8][pokemon.stars - 1] ?? 8
+            const damageMultiplier = [4, 4, 4, 8][pokemon.stars - 1] ?? 8
             const damage = damageMultiplier * pokemon.atk
             destination.target.handleSpecialDamage(
               damage,

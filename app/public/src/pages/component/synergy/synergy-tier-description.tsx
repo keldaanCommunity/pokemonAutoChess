@@ -8,6 +8,8 @@ export function SynergyTierDescription(props: { tier: SynergyTier }) {
   const description = t(`effect_description.${props.tier}`)
   const config = getDescriptionConfig(`effect_description.${props.tier}`)
   return (
-    <p className="synergy-description">{addIconsToDescription(description, { config })}</p>
+    <p className="synergy-description">
+      {addIconsToDescription(description, { config })}
+    </p>
   )
 }

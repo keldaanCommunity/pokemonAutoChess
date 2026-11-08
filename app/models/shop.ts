@@ -38,7 +38,7 @@ import {
   UniquePool
 } from "../config"
 import { EffectConfigs } from "../config/game/effects"
-import { getAltFormForPlayer } from "../core/alt-form-logic";
+import { getAltFormForPlayer } from "../core/alt-form-logic"
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
 import type { IPokemon, IPokemonEntity } from "../types"
@@ -249,7 +249,7 @@ export default class Shop {
     if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
     state.additionalPokemons.push(pkm)
     let { rarity, stages } = getPokemonData(pkm)
-    if(pkm === Pkm.CHERUBI) stages = 2; // special case for Cherubi that has 3 stages but should have the pool size of a 2 stage
+    if (pkm === Pkm.CHERUBI) stages = 2 // special case for Cherubi that has 3 stages but should have the pool size of a 2 stage
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)
     if (pool) {
@@ -353,7 +353,8 @@ export default class Shop {
       hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop === EffectConfigs.TRANSCENDENCE.rerollInterval))
+          player.shopsSinceLastUnownShop ===
+            EffectConfigs.TRANSCENDENCE.rerollInterval))
 
     if (shouldBeUnownShop) {
       // Unown shop

@@ -17,7 +17,7 @@ export class ThiefStrategy extends AbilityStrategy {
     if (target.id !== pokemon.id) {
       target.items.forEach((item) => {
         const removed = target.removeItem(item)
-        if(removed) pokemon.addItem(item)
+        if (removed) pokemon.addItem(item)
       })
     }
 

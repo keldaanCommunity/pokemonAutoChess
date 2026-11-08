@@ -75,11 +75,14 @@ export default abstract class PokemonState {
         if (hasCritNegation) {
           critReductionFactor = 0
         } else if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-          critReductionFactor -= EffectConfigs.BATTLE_ARMOR.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.BATTLE_ARMOR.critDamageReductionPercent / 100
         } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-          critReductionFactor -= EffectConfigs.MOUTAIN_RESISTANCE.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.MOUTAIN_RESISTANCE.critDamageReductionPercent / 100
         } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-          critReductionFactor -= EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
         }
         critReductionFactor -= 0.1 * nbBlackAugurite
         critReductionFactor = min(0)(critReductionFactor)
@@ -341,7 +344,8 @@ export default abstract class PokemonState {
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
-        const overhealFactor = SynergyConfigs.GRASS.overhealConversionPercent / 100
+        const overhealFactor =
+          SynergyConfigs.GRASS.overhealConversionPercent / 100
         pokemon.addMaxHP(overhealFactor * overheal, pokemon, 0, false, false)
       }
 
@@ -480,7 +484,8 @@ export default abstract class PokemonState {
         damage *= 1 + EffectConfigs.SHEER_COLD.frozenDamageBonusPercent / 100
       }
 
-      const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
+      const armorFactor =
+        1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
       let def = pokemon.status.armorReduction
         ? Math.round(pokemon.def * armorFactor)
         : pokemon.def
@@ -655,7 +660,9 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) * pokemon.maxHP
+        pokemon.hp - residualDamage <=
+          (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) *
+            pokemon.maxHP
       ) {
         const shield = Math.round(
           pokemon.baseHP *
@@ -921,7 +928,8 @@ export default abstract class PokemonState {
               ? EffectConfigs.GROWTH.heal
               : EffectConfigs.INGRAIN.heal
         pokemon.handleHeal(heal, pokemon, 0, false)
-        pokemon.grassHealCooldown = SynergyConfigs.GRASS.healIntervalSeconds * 1000
+        pokemon.grassHealCooldown =
+          SynergyConfigs.GRASS.healIntervalSeconds * 1000
         pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt

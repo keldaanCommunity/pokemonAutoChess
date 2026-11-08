@@ -35,7 +35,12 @@ export class MistBallStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.addAbilityPower(-([30, 30, 30, 60][pokemon.stars - 1] ?? 60), pokemon, 0, false)
+        cell.value.addAbilityPower(
+          -([30, 30, 30, 60][pokemon.stars - 1] ?? 60),
+          pokemon,
+          0,
+          false
+        )
       }
     })
 
@@ -50,7 +55,12 @@ export class MistBallStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.addAbilityPower(-([30, 30, 30, 60][pokemon.stars - 1] ?? 60), pokemon, 0, false)
+            cell.value.addAbilityPower(
+              -([30, 30, 30, 60][pokemon.stars - 1] ?? 60),
+              pokemon,
+              0,
+              false
+            )
           }
         })
       }, 1000)

@@ -13,7 +13,9 @@ export class MindBlownStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const FIREWORK_COLORS = ["pink", "blue", "yellow", "white"]
-    const nbFireworks = Math.floor([3, 4, 5, 8][pokemon.stars - 1] ?? 8 * (1 + pokemon.ap / 100))
+    const nbFireworks = Math.floor(
+      [3, 4, 5, 8][pokemon.stars - 1] ?? 8 * (1 + pokemon.ap / 100)
+    )
     // Throws its head in the air, which then explodes into 5 fireworks.
     for (let i = 0; i < nbFireworks; i++) {
       const color = pickRandomIn(FIREWORK_COLORS)

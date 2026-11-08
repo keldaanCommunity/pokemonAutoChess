@@ -11,7 +11,7 @@ export class DrainPunchStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damageMultiplier = [2,2,3,4][pokemon.stars - 1] ?? 4
+    const damageMultiplier = [2, 2, 3, 4][pokemon.stars - 1] ?? 4
     const healMultiplier = 2
     const result = target.handleSpecialDamage(
       pokemon.atk * damageMultiplier,

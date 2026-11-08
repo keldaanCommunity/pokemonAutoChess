@@ -33,11 +33,26 @@ export class DarkestLariatStrategy extends AbilityStrategy {
                 crit
               )
               if (pokemon.effects.has(EffectEnum.WILDFIRE)) {
-                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[2], pokemon, 0, false)
+                pokemon.addAttack(
+                  FIRE_ATK_BUFF_PER_SYNERGY_TIER[2],
+                  pokemon,
+                  0,
+                  false
+                )
               } else if (pokemon.effects.has(EffectEnum.BLAZE)) {
-                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[3], pokemon, 0, false)
+                pokemon.addAttack(
+                  FIRE_ATK_BUFF_PER_SYNERGY_TIER[3],
+                  pokemon,
+                  0,
+                  false
+                )
               } else if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
-                pokemon.addAttack(FIRE_ATK_BUFF_PER_SYNERGY_TIER[4], pokemon, 0, false)
+                pokemon.addAttack(
+                  FIRE_ATK_BUFF_PER_SYNERGY_TIER[4],
+                  pokemon,
+                  0,
+                  false
+                )
               }
             }
           },

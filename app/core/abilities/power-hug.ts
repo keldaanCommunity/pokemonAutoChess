@@ -12,8 +12,15 @@ export class PowerHugStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const damage = [40, 80, 160, 320][pokemon.stars - 1] ?? 320
-    target.status.triggerLocked([3000, 3000, 6000, 10000][pokemon.stars - 1] ?? 10000, target)
-    target.status.triggerParalysis([3000, 3000, 6000, 10000][pokemon.stars - 1] ?? 10000, target, pokemon)
+    target.status.triggerLocked(
+      [3000, 3000, 6000, 10000][pokemon.stars - 1] ?? 10000,
+      target
+    )
+    target.status.triggerParalysis(
+      [3000, 3000, 6000, 10000][pokemon.stars - 1] ?? 10000,
+      target,
+      pokemon
+    )
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

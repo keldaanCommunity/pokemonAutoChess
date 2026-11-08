@@ -18,7 +18,7 @@ export class PickupStrategy extends AbilityStrategy {
       const item = target.items.values().next().value
       if (item) {
         const removed = target.removeItem(item)
-        if(removed) pokemon.addItem(item)
+        if (removed) pokemon.addItem(item)
       }
     } else {
       if (target.player) {

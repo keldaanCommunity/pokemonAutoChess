@@ -16,7 +16,8 @@ export class RageStrategy extends AbilityStrategy {
     //gain 1 attack for each 10% of max HP missing
     const missingHp = pokemon.maxHP - pokemon.hp
     const atkBoost =
-      pokemon.baseAtk * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20) / 100 * Math.floor(missingHp / (pokemon.maxHP / 10))
+      ((pokemon.baseAtk * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)) / 100) *
+      Math.floor(missingHp / (pokemon.maxHP / 10))
     pokemon.addAttack(atkBoost, pokemon, 1, crit)
     pokemon.resetCooldown(1000)
   }

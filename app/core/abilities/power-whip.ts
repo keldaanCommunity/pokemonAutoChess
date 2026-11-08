@@ -11,7 +11,8 @@ export class PowerWhipStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = ([15, 30, 60, 120][pokemon.stars - 1] ?? 120) + 0.3 * pokemon.hp
+    const damage =
+      ([15, 30, 60, 120][pokemon.stars - 1] ?? 120) + 0.3 * pokemon.hp
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

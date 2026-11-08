@@ -30,7 +30,10 @@ export function getDescriptionConfig(path: string) {
   if (category === "effect_description" && Object.hasOwn(EffectConfigs, key)) {
     return EffectConfigs[key as keyof typeof EffectConfigs]
   }
-  if (category === "passive_description" && Object.hasOwn(PassiveConfigs, key)) {
+  if (
+    category === "passive_description" &&
+    Object.hasOwn(PassiveConfigs, key)
+  ) {
     return PassiveConfigs[key as keyof typeof PassiveConfigs]
   }
   if (category === "item_description" && Object.hasOwn(ItemConfigs, key)) {

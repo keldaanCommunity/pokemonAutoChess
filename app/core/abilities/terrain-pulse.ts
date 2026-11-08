@@ -92,7 +92,8 @@ export class TerrainPulseStrategy extends AbilityStrategy {
           break
         }
         case "fairyField": {
-          const shieldPercent = [0.05, 0.07, 0.1, 0.15][pokemon.stars - 1] ?? 0.15
+          const shieldPercent =
+            [0.05, 0.07, 0.1, 0.15][pokemon.stars - 1] ?? 0.15
           pkm.addShield(shieldPercent * pkm.maxHP, pokemon, 1, crit)
           break
         }

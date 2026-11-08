@@ -16,7 +16,8 @@ export class NaturalGiftStrategy extends AbilityStrategy {
 
     if (lowestHealthAlly) {
       lowestHealthAlly.handleHeal(heal, pokemon, 1, crit)
-      const runeProtectDuration = [1000,2000,3000,6000][pokemon.stars - 1] ?? 6000
+      const runeProtectDuration =
+        [1000, 2000, 3000, 6000][pokemon.stars - 1] ?? 6000
       lowestHealthAlly.status.triggerRuneProtect(
         runeProtectDuration,
         lowestHealthAlly,

@@ -129,7 +129,9 @@ export class GroundHoleEffect extends OnSpawnEffect {
       const holeLevel = player?.groundHoles[index] ?? 0
       let defBuff = holeLevel * GROUND_DEF_BUFF_PER_SYNERGY_TIER[synergyTier]
       let atkBuff =
-        holeLevel === maxDepth ? GROUND_ATK_BUFF_PER_SYNERGY_TIER[synergyTier] : 0
+        holeLevel === maxDepth
+          ? GROUND_ATK_BUFF_PER_SYNERGY_TIER[synergyTier]
+          : 0
       if (synergyTier === 4) {
         const nbFullyDugRows = [0, 8, 16].reduce((count, startIdx) => {
           const row = player?.groundHoles.slice(startIdx, startIdx + 8) ?? []
@@ -173,11 +175,18 @@ export const electricTripleAttackEffect = new OnAttackEffect(
     let shouldTriggerTripleAttack = false,
       isSupercharged = false
     if (pokemon.effects.has(EffectEnum.RISING_VOLTAGE)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % EffectConfigs.RISING_VOLTAGE.attackInterval === 0
+      shouldTriggerTripleAttack =
+        pokemon.count.attackCount %
+          EffectConfigs.RISING_VOLTAGE.attackInterval ===
+        0
     } else if (pokemon.effects.has(EffectEnum.POWER_SURGE)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % EffectConfigs.POWER_SURGE.attackInterval === 0
+      shouldTriggerTripleAttack =
+        pokemon.count.attackCount % EffectConfigs.POWER_SURGE.attackInterval ===
+        0
     } else if (pokemon.effects.has(EffectEnum.SUPERCHARGED)) {
-      shouldTriggerTripleAttack = pokemon.count.attackCount % EffectConfigs.POWER_SURGE.attackInterval === 0
+      shouldTriggerTripleAttack =
+        pokemon.count.attackCount % EffectConfigs.POWER_SURGE.attackInterval ===
+        0
       isSupercharged = true
     }
     if (shouldTriggerTripleAttack) {
@@ -211,7 +220,9 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.addPP(-EffectConfigs.SUPERCHARGED.ppBurn, pokemon, 0, false)
         target.count.manaBurnCount++
         if (pokemon.player && !pokemon.isGhostOpponent) {
-          pokemon.player.chargeCellBattery(EffectConfigs.SUPERCHARGED.batteryChargePercent)
+          pokemon.player.chargeCellBattery(
+            EffectConfigs.SUPERCHARGED.batteryChargePercent
+          )
         }
       }
     }
@@ -336,11 +347,14 @@ export class FlyingProtectionEffect extends BeforeTakingDamageEffect {
       const lastHpThreshold = shouldProcAt50
         ? EffectConfigs.MAX_AIRSTREAM.secondHpThresholdPercent / 100
         : EffectConfigs.TAILWIND.hpThresholdPercent / 100
-      const firstHpThreshold = EffectConfigs.MAX_AIRSTREAM.firstHpThresholdPercent / 100
+      const firstHpThreshold =
+        EffectConfigs.MAX_AIRSTREAM.firstHpThresholdPercent / 100
 
       if (
         (this.flyingProtection === 1 && pcHp < lastHpThreshold) ||
-        (shouldProcAt50 && this.flyingProtection === 2 && pcHp < firstHpThreshold)
+        (shouldProcAt50 &&
+          this.flyingProtection === 2 &&
+          pcHp < firstHpThreshold)
       ) {
         this.flyingProtection--
         pokemon.flyAway(board)
@@ -374,7 +388,9 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     if (
       pokemon.passive === Passive.PIKACHU_LIBRE &&
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount % SynergyConfigs.FIGHTING.knockbackHitCount === 0
+      pokemon.count.fightingBlockCount %
+        SynergyConfigs.FIGHTING.knockbackHitCount ===
+        0
     ) {
       pokemon.status.triggerRage(2000, pokemon)
     }
@@ -382,7 +398,9 @@ export class FightingKnockbackEffect extends OnDamageReceivedEffect {
     // Fighting knockback
     if (
       pokemon.count.fightingBlockCount > 0 &&
-      pokemon.count.fightingBlockCount % SynergyConfigs.FIGHTING.knockbackHitCount === 0 &&
+      pokemon.count.fightingBlockCount %
+        SynergyConfigs.FIGHTING.knockbackHitCount ===
+        0 &&
       !isRetaliation &&
       distanceC(
         pokemon.positionX,
@@ -493,11 +511,20 @@ export const onFlowerMonDeath = new OnDeathEffect(({ pokemon, board }) => {
 
 export const wildBerserkEffect = new OnDamageReceivedEffect(
   ({ pokemon }: OnDamageReceivedEffectArgs) => {
-    const { hpThresholdPercent, shield, durationSeconds } = EffectConfigs.BERSERK
+    const { hpThresholdPercent, shield, durationSeconds } =
+      EffectConfigs.BERSERK
     const { speed, baseAttackBonusPercent } = EffectConfigs.HUSTLE
-    if (pokemon.hp > 0 && pokemon.hp < (hpThresholdPercent / 100) * pokemon.maxHP) {
+    if (
+      pokemon.hp > 0 &&
+      pokemon.hp < (hpThresholdPercent / 100) * pokemon.maxHP
+    ) {
       pokemon.addSpeed(speed, pokemon, 0, false)
-      pokemon.addAttack(Math.ceil((baseAttackBonusPercent / 100) * pokemon.baseAtk), pokemon, 0, false)
+      pokemon.addAttack(
+        Math.ceil((baseAttackBonusPercent / 100) * pokemon.baseAtk),
+        pokemon,
+        0,
+        false
+      )
       pokemon.addShield(shield, pokemon, 0, false)
       // Remove the effect to avoid multiple triggers
       pokemon.effectsSet.delete(wildBerserkEffect)
@@ -533,8 +560,14 @@ export const normalShieldEffect = new OnSimulationStartEffect(
       shieldBonus += EffectConfigs.PURE_POWER.shield
       if (schemaValues(entity.items).some((item) => Scarves.includes(item))) {
         // All Silk Scarf-made item holders gain 30% base Attack and 30 Ability Power.
-        const { baseAttackBonusPercent, abilityPower } = EffectConfigs.PURE_POWER
-        entity.addAttack(Math.round((baseAttackBonusPercent / 100) * entity.baseAtk), entity, 0, false)
+        const { baseAttackBonusPercent, abilityPower } =
+          EffectConfigs.PURE_POWER
+        entity.addAttack(
+          Math.round((baseAttackBonusPercent / 100) * entity.baseAtk),
+          entity,
+          0,
+          false
+        )
         entity.addAbilityPower(abilityPower, entity, 0, false)
       }
     }
@@ -978,7 +1011,8 @@ export const cloneBugs = ({
 const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
   if (
     getSynergyTier(player.synergies, Synergy.FIRE) === 4 &&
-    count(player.items, Item.FIRE_SHARD) < EffectConfigs.DESOLATE_LAND.maxFireShards &&
+    count(player.items, Item.FIRE_SHARD) <
+      EffectConfigs.DESOLATE_LAND.maxFireShards &&
     player.life > 2
   ) {
     player.items.push(Item.FIRE_SHARD)
@@ -1020,7 +1054,9 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
             buriedItem
           })
           room.clock.setTimeout(() => {
-            player.groundHoles[index] = max(maxDepth)(player.groundHoles[index] + 1)
+            player.groundHoles[index] = max(maxDepth)(
+              player.groundHoles[index] + 1
+            )
             PassiveEffects[pokemon.passive]?.forEach((effect) => {
               if (effect instanceof OnGroundDiggingEffect) {
                 effect.apply({ pokemon, player })

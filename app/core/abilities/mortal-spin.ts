@@ -39,7 +39,11 @@ export class MortalSpinStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
-          abilityTarget.status.triggerPoison(poisonDuration, abilityTarget, pokemon)
+          abilityTarget.status.triggerPoison(
+            poisonDuration,
+            abilityTarget,
+            pokemon
+          )
 
           // Push targets back 1 tile
           let newY = -1

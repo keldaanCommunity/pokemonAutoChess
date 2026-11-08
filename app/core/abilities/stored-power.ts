@@ -24,7 +24,8 @@ export class StoredPowerStrategy extends AbilityStrategy {
     const boostAP = min(0)(pokemon.ap / 100 - 1)
 
     const damage = Math.round(
-      ([10, 15, 20, 40][pokemon.stars - 1] ?? 40) * (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP)
+      ([10, 15, 20, 40][pokemon.stars - 1] ?? 40) *
+        (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP)
     )
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
