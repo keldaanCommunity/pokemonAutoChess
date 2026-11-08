@@ -58,10 +58,7 @@ export class MortalSpinStrategy extends AbilityStrategy {
 
           if (
             newY !== -1 &&
-            board.getEntityOnCell(
-              abilityTarget.positionX,
-              abilityTarget.positionY + 1
-            ) === undefined
+            board.getEntityOnCell(abilityTarget.positionX, newY) === undefined
           ) {
             abilityTarget.moveTo(abilityTarget.positionX, newY, board, true)
             abilityTarget.cooldown = 500
