@@ -31,6 +31,7 @@
 - Change ability of Larvitar line to Pursuit instead of Bite. Pursuit: Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.
 - Buff Bounsweet line: PP 120 → 90
 - Rework Unown-D (DUPE): Transform into a copy of your STRONGEST ally without its items and permanent buffs. PP 100 → 50
+- Nerf Unown J (JAWS): Sharpedos no longer held a RAZOR_CLAW
 - Change Unown-N (NUKE): No longer consume PP and trigger on-cast effects. Fixed SHIELD amount given not increasing with CRIT_POWER on crit. Clarified description. PP 100 → 80
 - Change Unown-V (VOLT): No longer consume PP and trigger on-cast effects for each thunder shock. Clarified description. PP 90 → 60
 - Change Unown-Y (YOGA): No longer consume PP and trigger on-cast effects. Clarified description.

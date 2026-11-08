@@ -178,14 +178,13 @@ export class HiddenPowerJStrategy extends HiddenPowerStrategy {
     for (let i = 0; i < numberToSpawn; i++) {
       const coord = unown.simulation.getClosestFreeCellToPokemonEntity(unown)
       if (coord) {
-        const sharpedo = unown.simulation.addPokemon(
+        unown.simulation.addPokemon(
           PokemonFactory.createPokemonFromName(Pkm.SHARPEDO, unown.player),
           coord.x,
           coord.y,
           unown.team,
           true
         )
-        sharpedo.addItem(Item.RAZOR_CLAW)
       }
     }
   }
