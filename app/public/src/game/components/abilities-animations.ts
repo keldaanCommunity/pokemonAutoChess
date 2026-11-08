@@ -1156,6 +1156,7 @@ export const AbilitiesAnimations: {
             args.positionX + OrientationVector[o][0],
             args.positionY + OrientationVector[o][1]
           ],
+          ability: Ability.SUCTION_HEAL,
           endCoords: "caster",
           scale: 2,
           duration: 400,
