@@ -1004,7 +1004,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemLostInCombatEffect((pokemon) => {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof MachRibbonEffect) {
-          pokemon.addSpeed(-15 * effect.count, pokemon, 0, false)
+          pokemon.addSpeed(-20 * effect.count, pokemon, 0, false)
           pokemon.effectsSet.delete(effect)
           pokemon.count.machRibbonCount = 0
           break
