@@ -1116,7 +1116,7 @@ export default class Status extends Schema implements IStatus {
         if (this.curseCooldown > 0) {
           // if status has been cleared, take the remaining time
           timer = Math.min(this.curseCooldown, timer)
-        } else {
+        } else if (pokemon.simulation.weather === Weather.MURKY) {
           const nbOddStones = pokemon.player
             ? count(pokemon.player.items, Item.ODD_KEYSTONE)
             : 0
@@ -1353,9 +1353,10 @@ export default class Status extends Schema implements IStatus {
       )
     }
 
-    const nbOddStones = pkm.player
-      ? count(pkm.player.items, Item.ODD_KEYSTONE)
-      : 0
+    const nbOddStones =
+      pkm.player && pkm.simulation.weather === Weather.MURKY
+        ? count(pkm.player.items, Item.ODD_KEYSTONE)
+        : 0
     if (nbOddStones > 0) {
       duration = Math.round(duration * (1 - 0.1 * nbOddStones))
     }
