@@ -983,6 +983,10 @@ export class OnSellPokemonCommand extends Command<
     pokemon.items.forEach((it) => {
       player.items.push(it)
     })
+    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+      // give back the TM, as when moving the pokemon to the bench
+      player.items.push(TMPerAbility.get(pokemon.tm)!)
+    }
 
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
