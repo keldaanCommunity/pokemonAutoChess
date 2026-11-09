@@ -546,7 +546,7 @@ export default class Player extends Schema implements IPlayer {
     const scarves: Item[] = []
     while (n > 0) {
       const scarf = this.scarvesItems[i] ?? Item.SILK_SCARF
-      n -= scarf === Item.NULLIFY_BANDANNA ? 2 : 1
+      n -= 1
       if (n >= 0) {
         scarves.push(scarf)
         i++

@@ -69,6 +69,10 @@
 - METEORITE and ROTOM_CATALOG now open a choice menu to directly choose the form instead of cycling through the forms.
 - Protective pads bonus damage on SHIELD is now capped at 50% of the target SHIELD value
 
+> Nullify Bandanna, when combined with the extra scarves provided by Cinccino and Wooloo, has been the source of several persistent item duplication bugs. After many attempts, we realized that an item crafted with 2 SILK_SCARF was incompatible with the design of the NORMAL synergy, so we have decided to remove this recipe and the item entirely.
+
+- Removed Nullify Bandanna
+
 # Gameplay
 
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)

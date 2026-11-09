@@ -252,9 +252,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   get canCast(): boolean {
     return (
-      !this.status.silence &&
-      !this.items.has(Item.NULLIFY_BANDANNA) &&
-      !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
+      !this.status.silence && !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
     )
   }
 
@@ -637,11 +635,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addAttack(Math.round(0.2 * value), caster, 0, false) // AP is gained as Attack instead
-      return
-    }
-
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )

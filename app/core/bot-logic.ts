@@ -218,8 +218,7 @@ export function getNbComponentsOnBoard(board: IDetailledPokemon[]): number {
     .flatMap((pkm) => pkm.items)
     .reduce((total: number, item: Item) => {
       let nbComponents = 0
-      if (Scarves.includes(item))
-        nbComponents = item === Item.NULLIFY_BANDANNA ? 0 : 1
+      if (Scarves.includes(item)) nbComponents = 1
       else if (CraftableItems.includes(item)) nbComponents = 2
       else if (ItemComponentsNoScarf.includes(item)) nbComponents = 1
       return total + nbComponents
@@ -230,11 +229,9 @@ export function getNbScarvesOnBoard(board: IDetailledPokemon[]): number {
   return board
     .flatMap((pkm) => pkm.items)
     .reduce((total: number, item: Item) => {
-      let nbScarves = 0
-      if (Scarves.includes(item))
-        nbScarves = item === Item.NULLIFY_BANDANNA ? 2 : 1
-      else if (item === Item.SILK_SCARF) nbScarves = 1
-      return total + nbScarves
+      return (
+        total + (item === Item.SILK_SCARF || Scarves.includes(item) ? 1 : 0)
+      )
     }, 0)
 }
 

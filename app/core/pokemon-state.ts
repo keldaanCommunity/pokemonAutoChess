@@ -139,11 +139,6 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(chargeDamage)
       }
 
-      if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
-        specialDamage += pokemon.pp
-        pokemon.pp = 0
-      }
-
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
         specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
