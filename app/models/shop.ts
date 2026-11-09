@@ -102,7 +102,11 @@ export function getSellPrice(
   const duo = Object.entries(PkmDuos).find(([key, duo]) => duo.includes(name))
 
   let price = 1
-  let stars = pokemon.stars
+  // Cherrim Sunlight is Cherrim in another form (3 copies), so it sells like Cherrim
+  let stars =
+    name === Pkm.CHERRIM_SUNLIGHT
+      ? getPokemonData(Pkm.CHERRIM).stars
+      : pokemon.stars
   const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
 
   if (hasRareCandy && !ignoreRareCandy) {
@@ -290,7 +294,11 @@ export default class Shop {
   }
 
   releasePokemon(pkm: Pkm, player: Player, state: GameState) {
-    const { stars, rarity, regional } = getPokemonData(pkm)
+    const { rarity, regional } = getPokemonData(pkm)
+    // Cherrim Sunlight is Cherrim in another form, so it gives back 3 Cherubi, not 9
+    const { stars } = getPokemonData(
+      pkm === Pkm.CHERRIM_SUNLIGHT ? Pkm.CHERRIM : pkm
+    )
     const baseline = getPokemonBaseline(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
     const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
