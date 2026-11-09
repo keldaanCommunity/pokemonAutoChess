@@ -60,6 +60,7 @@
 - GOURMET cooking mechanic has been revisited. The cooking process now takes up to 8 seconds to complete, giving you time to move your chef around to properly distribute the dishes to your allies. If the battle is about to start, the cooking time will be reduced and even be instant on the last seconds of the preparation phase. Your chefs now cook immediately when receiving the CHEF_HAT. Dishes made this stage are now removed if the chef loses their hat by deactivating GOURMET synergy or benching the chef. This allows you to freely switch dishes between rounds without having to think one stage ahead.
 - A GOURMET GROUND Pokémon can now dig and cook in the same stage. The cooking will be delayed until the Pokémon is done digging.
 - Buff FLYING: now dodges the damage that would have dropped them below the HP threshold. Flying 8 Skydive damage: 150 → 200% of ATK
+- Buff Monster 8. New effect: When knocking out the last enemy on the board, permanently gain 3 ATK, 10 AP and 10 max HP. (thanks to tegberen)
 
 # Changes to Items
 

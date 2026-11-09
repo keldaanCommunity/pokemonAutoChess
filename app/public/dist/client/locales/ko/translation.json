@@ -2545,7 +2545,7 @@
 		"PURSUIT": "{{flinchChance}}% 확률로 FLINCH 상태로 만듦. 상대를 기절시키면 ATK {{attackPerKo}}, AP {{abilityPowerPerKo}}, 최대 HP {{maxHpPerKoPercent}}% 증가",
 		"BRUTAL_SWING": "상대를 기절시키면 ATK {{attackPerKo}}, AP {{abilityPowerPerKo}}, 최대 HP {{maxHpPerKoPercent}}% 증가",
 		"POWER_TRIP": "상대를 기절시키면 ATK {{attackPerKo}}, AP {{abilityPowerPerKo}}, 최대 HP {{maxHpPerKoPercent}}% 증가",
-		"MERCILESS": "MONSTER는 항상 체력이 가장 낮은 포켓몬을 노리며 HP가 {{allyHpThreshold}} 이하인 같은 편을 기절시킬 수도 있음",
+		"MERCILESS": "MONSTER는 항상 체력이 가장 낮은 포켓몬을 노리며 HP가 {{allyHpThreshold}} 이하인 같은 편을 기절시킬 수도 있음. 보드에서 마지막 적을 기절시키면 영구적으로 ATK 3, AP 10, 최대 HP 10을 얻습니다.",
 		"MEDITATE": "대미지의 {{lifestealPercent}}%만큼 회복, 브론즈 기술머신 획득",
 		"FOCUS_ENERGY": "대미지의 {{lifestealPercent}}%만큼 회복, 실버 기술머신 획득",
 		"CALM_MIND": "대미지의 {{lifestealPercent}}%만큼 회복, 골드 기술머신 획득",

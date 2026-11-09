@@ -2548,7 +2548,7 @@
 		"PURSUIT": "{{flinchChance}}%的概率使目标陷入FLINCH。击倒目标时，提升{{attackPerKo}}点ATK，{{abilityPowerPerKo}}点AP以及其最大HP的{{maxHpPerKoPercent}}%。",
 		"BRUTAL_SWING": "击倒目标时，提升{{attackPerKo}}点ATK，{{abilityPowerPerKo}}点AP以及其最大HP的{{maxHpPerKoPercent}}%。",
 		"POWER_TRIP": "击倒目标时，提升{{attackPerKo}}点ATK，{{abilityPowerPerKo}}点AP以及其最大HP的{{maxHpPerKoPercent}}%。",
-		"MERCILESS": "MONSTER宝可梦总会优先攻击HP最低的目标，且可以将HP不超过{{allyHpThreshold}}的我方宝可梦取为攻击对象。",
+		"MERCILESS": "MONSTER宝可梦总会优先攻击HP最低的目标，且可以将HP不超过{{allyHpThreshold}}的我方宝可梦取为攻击对象。击倒场上最后一个敌人时，永久获得3 ATK、10 AP和10最大HP。",
 		"MEDITATE": "恢复所造成伤害值{{lifestealPercent}}%的HP。获得一个随机青铜招式学习器。",
 		"FOCUS_ENERGY": "恢复所造成伤害值{{lifestealPercent}}%的HP。获得一个随机白银招式学习器。",
 		"CALM_MIND": "恢复所造成伤害值{{lifestealPercent}}%的HP。获得一个随机黄金招式学习器。",

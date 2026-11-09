@@ -104,6 +104,18 @@ export class MonsterKillEffect extends OnKillEffect {
     if (attacker.items.has(Item.BERSERK_GENE)) {
       attacker.status.triggerConfusion(1000, attacker, attacker)
     }
+    if (
+      !attacker.isGhostOpponent &&
+      this.synergyTier === SynergyEffects[Synergy.MONSTER].indexOf(EffectEnum.MERCILESS) &&
+      attacker.simulation.board.cells.every(
+        (p) => !p || p.team === attacker.team || (!p.hp && !p.status?.resurrecting)
+      )
+    ) {
+      attacker.addAttack(3, attacker, 0, false, true)
+      attacker.addAbilityPower(10, attacker, 0, false, true)
+      attacker.addMaxHP(10, attacker, 0, false, true)
+      attacker.handleHeal(10, attacker, 0, false)
+    }
   }
 }
 

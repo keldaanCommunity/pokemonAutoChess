@@ -2405,7 +2405,7 @@
 		"PURSUIT": "{{flinchChance}}% Chance auf FLINCH. Wenn du dein Ziel niederschlägst, erhältst du {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP und {{maxHpPerKoPercent}}% seiner maximalen HP.",
 		"BRUTAL_SWING": "Wenn du sein Ziel niederschlägst, erhältst du {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP und {{maxHpPerKoPercent}} % ihrer maximalen HP",
 		"POWER_TRIP": "Wenn du sein Ziel niederschlägst, erhältst du {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP und {{maxHpPerKoPercent}} % ihrer maximalen HP",
-		"MERCILESS": "MONSTER können Verbündete mit {{allyHpThreshold}} HP oder weniger anvisieren.",
+		"MERCILESS": "MONSTER können Verbündete mit {{allyHpThreshold}} HP oder weniger anvisieren. Wenn der letzte Gegner auf dem Spielfeld besiegt wird, erhältst du dauerhaft 3 ATK, 10 AP und 10 max. HP.",
 		"MEDITATE": "Heile dich um {{lifestealPercent}} % HP des Schadens",
 		"FOCUS_ENERGY": "Heile dich um {{lifestealPercent}} % HP des Schadens",
 		"CALM_MIND": "Heile dich um {{lifestealPercent}} % HP des Schadens",

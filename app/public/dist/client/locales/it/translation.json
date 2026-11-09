@@ -2389,7 +2389,7 @@
 		"PURSUIT": "{{flinchChance}}% di possibilità di causare FLINCH. Quando tentenni il bersaglio, guadagna {{attackPerKo}} di ATK, {{abilityPowerPerKo}} AP e {{maxHpPerKoPercent}}% dei loro HP massimi.",
 		"BRUTAL_SWING": "Quando tentenni il bersaglio, guadagna {{attackPerKo}} di ATK, {{abilityPowerPerKo}} AP e {{maxHpPerKoPercent}}% dei loro HP massimi",
 		"POWER_TRIP": "Quando tentenni il bersaglio, guadagna {{attackPerKo}} di ATK, {{abilityPowerPerKo}} AP e {{maxHpPerKoPercent}}% dei loro HP massimi",
-		"MERCILESS": "I MONSTER possono bersagliare gli alleati con {{allyHpThreshold}} HP o meno.",
+		"MERCILESS": "I MONSTER possono bersagliare gli alleati con {{allyHpThreshold}} HP o meno. Quando metti KO l'ultimo nemico sul campo, ottieni permanentemente 3 ATK, 10 AP e 10 HP massimi.",
 		"MEDITATE": "Cura HP pari al {{lifestealPercent}}% del danno inflitto.",
 		"FOCUS_ENERGY": "Cura HP pari al {{lifestealPercent}}% del danno inflitto.",
 		"CALM_MIND": "Cura HP pari al {{lifestealPercent}}% del danno inflitto.",

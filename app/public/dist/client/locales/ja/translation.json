@@ -2063,6 +2063,7 @@
 		"PURSUIT": "モンスターは攻撃時に {{flinchChance}}% の確率で FLINCH します。ターゲットをノックダウンすると、ATK が {{attackPerKo}}、AP が {{abilityPowerPerKo}}、最大 HP の {{maxHpPerKoPercent}}% を獲得します。",
 		"BRUTAL_SWING": "ターゲットをノックダウンすると、攻撃力が {{attackPerKo}} 倍、AP が {{abilityPowerPerKo}}、最大 HP の {{maxHpPerKoPercent}}% を獲得します。",
 		"POWER_TRIP": "ターゲットをノックダウンすると、攻撃力が {{attackPerKo}} 倍、AP が {{abilityPowerPerKo}}、最大 HP の {{maxHpPerKoPercent}}% を獲得します。",
+		"MERCILESS": "MONSTERは常に最もHPが低いユニットを狙い、HPが{{allyHpThreshold}}以下の味方も対象にできる。盤上の最後の敵をノックアウトすると、永続的にATK 3、AP 10、最大HP 10を獲得する。",
 		"MEDITATE": "ダメージの{{lifestealPercent}}%のHPを回復",
 		"FOCUS_ENERGY": "ダメージの{{lifestealPercent}}%のHPを回復",
 		"CALM_MIND": "ダメージの{{lifestealPercent}}%のHPを回復",

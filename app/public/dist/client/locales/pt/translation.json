@@ -2569,7 +2569,7 @@
 		"DIGGER": "Ganhe de +{{defensePerDepth}} a +{{maxDefense}} em DEF e SPE_DEF e +{{attackAtMaxDepth}} em ATK na profundidade máxima.",
 		"DRILLER": "Ganhe de +{{defensePerDepth}} a +{{maxDefense}} em DEF e SPE_DEF e +{{attackAtMaxDepth}} em ATK na profundidade máxima.",
 		"DEEP_MINER": "Ganhe {{defensePerFullRow}} pontos extras de DEF e SPE_DEF para cada linha totalmente escavada e +{{attackAtFullBoard}} de ATK quando metade do seu tabuleiro estiver totalmente escavado.",
-		"MERCILESS": "Pokémons MONSTER sempre atacam a unidade com a menor quantidade de vida e podem atacar aliados com {{allyHpThreshold}} HP ou menos.",
+		"MERCILESS": "Pokémons MONSTER sempre atacam a unidade com a menor quantidade de vida e podem atacar aliados com {{allyHpThreshold}} HP ou menos. Ao nocautear o último inimigo no tabuleiro, você ganha permanentemente 3 ATK, 10 AP e 10 HP máximo.",
 		"SURGE_SURFER": "Ondas atingem a cada {{waveIntervalSeconds}} s pelo resto do combate. Após a primeira onda, um Pikachu Surfista se junta a você no combate.",
 		"COTTONWEED": "Adquira um Vaso de Flores do Hoppip",
 		"FLYCATCHER": "Adquira um Vaso de Flores da Bellsprout",

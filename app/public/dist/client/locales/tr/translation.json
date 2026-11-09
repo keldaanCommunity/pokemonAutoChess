@@ -2541,7 +2541,7 @@
 		"PURSUIT": "{{flinchChance}}% ihtimalle FLINCH. Bir hedefi KO edince {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP ve onun maks HP değerinin %{{maxHpPerKoPercent}} kadarını kazan.",
 		"BRUTAL_SWING": "Bir hedefi KO edince {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP ve onun maks HP değerinin %{{maxHpPerKoPercent}} kadarını kazan",
 		"POWER_TRIP": "Bir hedefi KO edince {{attackPerKo}} ATK, {{abilityPowerPerKo}} AP ve onun maks HP değerinin %{{maxHpPerKoPercent}} kadarını kazan",
-		"MERCILESS": "MONSTER her zaman canı en düşük birimi hedef alır ve HP değeri {{allyHpThreshold}} veya daha az olan müttefikleri de hedef alabilir",
+		"MERCILESS": "MONSTER her zaman canı en düşük birimi hedef alır ve HP değeri {{allyHpThreshold}} veya daha az olan müttefikleri de hedef alabilir. Tahtadaki son düşmanı nakavt ettiğinde kalıcı olarak 3 ATK, 10 AP ve 10 maks. HP kazanır.",
 		"MEDITATE": "Hasarın %{{lifestealPercent}} oranı kadar HP iyileş. Rastgele bir bronz TM al.",
 		"FOCUS_ENERGY": "Hasarın %{{lifestealPercent}} oranı kadar HP iyileş. Rastgele bir gümüş TM al.",
 		"CALM_MIND": "Hasarın %{{lifestealPercent}} oranı kadar HP iyileş. Rastgele bir altın TM al.",
