@@ -1483,7 +1483,9 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
       this.refToBoardPokemon.positionX,
-      this.refToBoardPokemon.positionY - 1,
+      this.team === Team.BLUE_TEAM
+        ? this.refToBoardPokemon.positionY - 1
+        : 5 - (this.refToBoardPokemon.positionY - 1),
       this.team,
       this.simulation
     )
