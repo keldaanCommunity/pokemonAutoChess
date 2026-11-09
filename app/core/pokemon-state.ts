@@ -612,7 +612,7 @@ export default abstract class PokemonState {
           attacker.items.has(Item.PROTECTIVE_PADS) &&
           pokemon.id !== attacker.id
         ) {
-          damageOnShield *= 2 // double damage on shield
+          damageOnShield += max(Math.round(pokemon.shield / 2))(damageOnShield) // double damage on shield, bonus damage capped at 50% of the shield value
         }
         if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield

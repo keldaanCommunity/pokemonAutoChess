@@ -67,6 +67,7 @@
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
 - Rework Black Sludge: POISONED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONED for 5 seconds ON_HIT. The first attack always inflicts POISONED.**
 - METEORITE and ROTOM_CATALOG now open a choice menu to directly choose the form instead of cycling through the forms.
+- Protective pads bonus damage on SHIELD is now capped at 50% of the target SHIELD value
 
 # Gameplay
 
