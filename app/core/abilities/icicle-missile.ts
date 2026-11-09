@@ -42,7 +42,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
               entityHit.hp > 0 &&
               entityHit.team !== pokemon.team
             ) {
-              entityHit.status.triggerFreeze(2000, tg, pokemon)
+              entityHit.status.triggerFreeze(2000, entityHit, pokemon)
               entityHit.handleSpecialDamage(
                 damage,
                 board,
