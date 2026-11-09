@@ -41,7 +41,7 @@ import { EffectConfigs } from "../config/game/effects"
 import { getAltFormForPlayer } from "../core/alt-form-logic"
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
-import type { IPokemon, IPokemonEntity } from "../types"
+import type { IPokemonEntity } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -90,9 +90,8 @@ export function getPoolSize(rarity: Rarity, maxStars: number): number {
 }
 
 export function getSellPrice(
-  pokemon: IPokemon | IPokemonEntity,
-  specialGameRule?: SpecialGameRule | null,
-  ignoreRareCandy = false
+  pokemon: Pokemon,
+  specialGameRule?: SpecialGameRule | null
 ): number {
   const name = pokemon.name
 
@@ -103,10 +102,14 @@ export function getSellPrice(
 
   let price = 1
   let stars = pokemon.stars
-  const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
 
-  if (hasRareCandy && !ignoreRareCandy) {
+  const hasRareCandy = pokemon.items.has(Item.RARE_CANDY)
+  if (hasRareCandy) {
     stars = min(1)(stars - 1)
+  }
+
+  if (name === Pkm.CHERRIM_SUNLIGHT || name === Pkm.MOTHIM) {
+    stars -= 1
   }
 
   if (name === Pkm.EGG) {
@@ -145,10 +148,10 @@ export function getSellPrice(
     price = duo ? SellPrices.LEGENDARY_DUO : SellPrices.LEGENDARY
   } else if (getPokemonBaseline(name) === Pkm.EEVEE) {
     price = SellPrices.EEVEE
+  } else if (name == Pkm.ANNIHILAPE) {
+    price = SellPrices.ANNIHILAPE
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
-  } else if (name === Pkm.MOTHIM) {
-    price = RarityCost[pokemon.rarity] * 1
   } else if (stars === 1) {
     price = RarityCost[pokemon.rarity]
   } else {
@@ -293,6 +296,14 @@ export default class Shop {
     const { stars, rarity, regional } = getPokemonData(pkm)
     const baseline = getPokemonBaseline(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
+
+    if (pkm === Pkm.CHERRIM_SUNLIGHT || pkm === Pkm.ANNIHILAPE) {
+      entityNumber = 3
+    }
+    if (pkm === Pkm.MOTHIM) {
+      entityNumber = 1
+    }
+
     const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both

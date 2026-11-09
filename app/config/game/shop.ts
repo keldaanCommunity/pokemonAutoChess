@@ -111,6 +111,7 @@ export const SellPrices = {
   REMORAID: 2,
   OCTILLERY: 7,
   PIKACHU: 3,
+  ANNIHILAPE: 20,
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,

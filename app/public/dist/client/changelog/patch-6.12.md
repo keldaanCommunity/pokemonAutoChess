@@ -103,6 +103,7 @@
 - Fixed Monster flinch chance being ON_HIT instead of ON_ATTACK
 - Fixed Palafin Hero not gaining a fourth STAR when transforming
 - Fix Barb barrage ability targeting
+- Fix selling price and pool refill fir Cherrim Sunlight, Annihilape and Mothim
 
 # Misc
 
