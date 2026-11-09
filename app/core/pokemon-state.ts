@@ -167,6 +167,9 @@ export default abstract class PokemonState {
           ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
+      if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_STEEL)) {
+        trueDamagePart += 0.1
+      }
 
       if (trueDamagePart > 0) {
         // Apply true damage part
@@ -558,13 +561,16 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.DEFIANT) ||
           pokemon.effects.has(EffectEnum.COACHING)
         ) {
-          const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
+          let damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
             ? 12
             : pokemon.effects.has(EffectEnum.DEFIANT)
               ? 9
               : pokemon.effects.has(EffectEnum.STURDY)
                 ? 6
                 : 3
+          if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_FIGHTING)) {
+            damageBlocked += 1
+          }
           reducedDamage = reducedDamage - damageBlocked
           pokemon.count.fightingBlockCount++
         }

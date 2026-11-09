@@ -184,6 +184,10 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.status.triggerWound(4000, target, pokemon)
       }
 
+      if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_ELECTRIC)) {
+        pokemon.addSpeed(5, pokemon, 0, false)
+      }
+
       if (
         pokemon.passive === Passive.DRUMMER &&
         board.cells.some(
@@ -266,6 +270,9 @@ export const humanHealEffect = new OnDamageDealtEffect(
       lifesteal = 0.35
     } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
       lifesteal = 0.5
+    }
+    if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_HUMAN)) {
+      lifesteal += 0.05
     }
     pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
   },
@@ -869,7 +876,10 @@ export const cloneBugs = ({
 }) => {
   const bugTeam = new Array<IPokemon>()
   board.forEach((pkm) => {
-    if (pkm.hasSynergy(Synergy.BUG) && pkm.positionY != 0) {
+    if (
+      (pkm.hasSynergy(Synergy.BUG) || pkm.dishes.has(Item.RAINBOW_BEAN)) &&
+      pkm.positionY != 0
+    ) {
       bugTeam.push(pkm)
     }
   })

@@ -1230,7 +1230,10 @@
 		"MEGA_SLOWBRO": "Mega Slowbro",
 		"MEGA_TYRANITAR": "Mega Tyranitar",
 		"MEGA_ZERAORA": "Mega Zeraora",
-		"MEGA_ZYGARDE": "Mega Zygarde"
+		"MEGA_ZYGARDE": "Mega Zygarde",
+		"TERAPAGOS": "Terapagos",
+		"TERAPAGOS_TERASTAL": "Terapagos (Terastal Form)",
+		"TERAPAGOS_STELLAR": "Terapagos (Stellar Form)"
 	},
 	"rarity": {
 		"COMMON": "Common",
@@ -1853,8 +1856,10 @@
 		"PURPLE_RAIN": "Purple Rain",
 		"PALAEO_COLLAPSE": "Palaeo Collapse",
 		"KNOWLEDGE_IS_POWER": "Knowledge is Power",
+		"PURSUIT": "Pursuit",
 		"TERA_BLAST": "Tera Blast",
-		"PURSUIT": "Pursuit"
+		"TERA_SHIFT": "Tera Shift",
+		"TERA_STARSTORM": "Tera Starstorm"
 	},
 	"ability_description": {
 		"DEFAULT": "",
@@ -2455,7 +2460,9 @@
 		"PALAEO_COLLAPSE": "A meteorite slams into the board, targeting the biggest cluster of enemies. It deals [100,200,300,400,800,SP] SPECIAL to all enemies in a 3-tile radius with 20% DAMAGE_REDUCTION_OVER_DISTANCE. All FOSSIL allies in the impact zone trigger their FOSSIL primordial power immediately if not already triggered.",
 		"KNOWLEDGE_IS_POWER": "Changes its Z-Crystal to a random type and casts the Z-Move of that type. The new Z-Crystal persists between fights and can be reset by benching the user. Gain 4 XP every time the Z-Crystal is changed.",
 		"TERA_BLAST": "Projects a TERA_SHARD in each of the 8 directions. Each shard has a type taken randomly from user's active synergies and traverse enemies and allies, dealing [40,80,120,200,300,SP] SPECIAL to enemies hit and giving permanently their associated synergy to allies hit.",
-		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately."
+		"PURSUIT": "Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.",
+		"TERA_SHIFT": "Permanently transforms into Stellar Form",
+		"TERA_STARSTORM": "A rain of [10,20,30,50,100] Tera Shards fall on random tiles of the board. Each shard has a type taken randomly from user's active synergies and deals [40,60,80,120,150,SP] SPECIAL to enemies hit and giving permanently their associated synergy to allies hit."
 	},
 	"effect": {
 		"STAMINA": "Stamina",
@@ -2936,6 +2943,7 @@
 		"PICNIC_SET": "Picnic Set",
 		"SANDWICH": "Sandwich",
 		"HEARTY_STEW": "Hearty Stew",
+		"RAINBOW_BEAN": "Rainbow Bean",
 		"RAGE_CANDY_BAR": "Rage Candy Bar",
 		"TEA": "Tea",
 		"CURRY": "Curry",
@@ -3392,6 +3400,7 @@
 		"PICNIC_SET": "Immediately consumed when given. Give a SANDWICH to the holder and all ADJACENT allies. SANDWICH gives stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"SANDWICH": "Gives various stat boosts for the next fight based on the types of the Pokémon eating it.",
 		"HEARTY_STEW": "At the start of next fight, raise max HP by 30%. If fed to a Pokémon holding COOKING_POT, the Pokémon is BURN for 5 seconds.",
+		"RAINBOW_BEAN": "Has a specific effect for each active synergy, and all these effects stack.",
 		"RAGE_CANDY_BAR": "Gain 10 ATK at the start of the next fight.",
 		"TEA": "Gain 60 PP at the start of the next fight.",
 		"CURRY": "Start the next fight RAGE for 3 seconds.",

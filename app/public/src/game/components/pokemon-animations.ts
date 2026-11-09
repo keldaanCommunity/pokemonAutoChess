@@ -8378,5 +8378,20 @@ export const PokemonAnimations: {
     ability: AnimationType.Charge,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.STEEL_MELEE
-  }
+  },
+  [Pkm.TERAPAGOS]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Charge,
+    emote: AnimationType.Sleep
+  },
+  [Pkm.TERAPAGOS_TERASTAL]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },
+  /*[Pkm.TERAPAGOS_STELLAR]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot
+  },*/
 }

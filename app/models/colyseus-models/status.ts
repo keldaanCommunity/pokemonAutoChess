@@ -1299,23 +1299,30 @@ export default class Status extends Schema implements IStatus {
     duration: number,
     pkm: PokemonEntity
   ): number {
+    let reductionFactor = 0
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(duration * 0.7)
+      reductionFactor += 0.3
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(duration * 0.5)
+      reductionFactor += 0.5
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(duration * 0.3)
+      reductionFactor += 0.7
+    }
+
+    if (pkm.effects.has(EffectEnum.RAINBOW_BEAN_AQUATIC)) {
+      reductionFactor += 0.1
     }
 
     const nbOddStones = pkm.player
       ? count(pkm.player.items, Item.ODD_KEYSTONE)
       : 0
     if (nbOddStones > 0) {
-      duration = Math.round(duration * (1 - 0.1 * nbOddStones))
+      reductionFactor += 0.1 * nbOddStones
     }
+
+    duration = Math.round(duration * (1 - max(1)(reductionFactor)))
 
     return duration
   }

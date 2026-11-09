@@ -548,6 +548,8 @@ import { TectonicRageStrategy } from "./tectonic-rage"
 import { TeeterDanceStrategy } from "./teeter-dance"
 import { TeleportStrategy } from "./teleport"
 import { TeraBlastStrategy } from "./tera-blast"
+import { TeraShiftStrategy } from "./tera-shift"
+import { TeraStarstormStrategy } from "./tera-starstorm"
 import { TerrainPulseStrategy } from "./terrain-pulse"
 import { ThiefStrategy } from "./thief"
 import { ThousandArrowsStrategy } from "./thousand-arrows"
@@ -1381,6 +1383,8 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.TEETER_DANCE]: new TeeterDanceStrategy(),
   [Ability.TELEPORT]: new TeleportStrategy(),
   [Ability.TERA_BLAST]: new TeraBlastStrategy(),
+  [Ability.TERA_SHIFT]: new TeraShiftStrategy(),
+  [Ability.TERA_STARSTORM]: new TeraStarstormStrategy(),
   [Ability.TERRAIN_PULSE]: new TerrainPulseStrategy(),
   [Ability.THIEF]: new ThiefStrategy(),
   [Ability.THOUSAND_ARROWS]: new ThousandArrowsStrategy(),

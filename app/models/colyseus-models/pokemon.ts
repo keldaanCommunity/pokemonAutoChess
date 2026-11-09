@@ -21575,6 +21575,59 @@ export class OricorioSensu extends Pokemon {
   }
 }
 
+export class Terapagos extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.NORMAL])
+  rarity = Rarity.LEGENDARY
+  stars = 2
+  evolution = Pkm.TERAPAGOS_TERASTAL
+  evolutionRule = {
+    type: EvolutionRuleType.STATE,
+    condition: (pokemon, player, state) => false // waits for ability cast
+  } satisfies StateEvolutionRule
+  hp = 200
+  atk = 15
+  speed = 60
+  def = 5
+  speDef = 5
+  maxPP = 200
+  range = 1
+  skill = Ability.TERA_SHIFT
+}
+
+export class TerapagosTerastal extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STELLAR])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  /*evolution = Pkm.TERAPAGOS_STELLAR
+  evolutionRule = {
+    type: EvolutionRuleType.ITEM,
+    itemsTriggeringEvolution: [Item.TERA_ORB]
+  } satisfies ItemEvolutionRule*/
+  hp = 300
+  atk = 20
+  speed = 60
+  def = 10
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.TERA_STARSTORM
+}
+/*
+export class TerapagosStellar extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.STELLAR])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 500
+  atk = 30
+  speed = 60
+  def = 20
+  speDef = 20
+  maxPP = 100
+  range = 1
+  skill = Ability.TERA_STARSTORM
+}
+*/
+
 export const PokemonClasses: Record<
   Pkm,
   new (
@@ -22813,7 +22866,10 @@ export const PokemonClasses: Record<
   [Pkm.ORICORIO_BAILE]: OricorioBaile,
   [Pkm.ORICORIO_PA_U]: OricorioPaU,
   [Pkm.ORICORIO_POMPOM]: OricorioPomPom,
-  [Pkm.ORICORIO_SENSU]: OricorioSensu
+  [Pkm.ORICORIO_SENSU]: OricorioSensu,
+  [Pkm.TERAPAGOS]: Terapagos,
+  [Pkm.TERAPAGOS_TERASTAL]: TerapagosTerastal
+  //[Pkm.TERAPAGOS_STELLAR]: TerapagosStellar
 }
 
 // declare all the classes in colyseus schema TypeRegistry

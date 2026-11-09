@@ -28,10 +28,10 @@ export const canMegaEvolve = (pokemon: Pokemon | IPokemonData) => {
   )
 }
 
-export class MegaEvolutionHandler extends EvolutionHandler {
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+export class MegaEvolutionHandler extends EvolutionHandler<[boolean]> {
+  canEvolve(pokemon: Pokemon, player: Player, megaStoneUsed: boolean): boolean {
     if (player.board.has(pokemon.id) === false) return false
-    return canMegaEvolve(pokemon)
+    return canMegaEvolve(pokemon) && megaStoneUsed
   }
 
   evolve(pokemon: Pokemon, player: Player): Pokemon {

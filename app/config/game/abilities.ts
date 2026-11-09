@@ -45,5 +45,6 @@ export const InimitableAbilities: Ability[] = [
   Ability.SWARM,
   Ability.TRANSE,
   Ability.UNBOUND,
+  Ability.TERA_SHIFT,
   ...ZMoves
 ]

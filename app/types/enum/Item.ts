@@ -218,6 +218,7 @@ export enum Item {
   PICNIC_SET = "PICNIC_SET",
   SANDWICH = "SANDWICH",
   HEARTY_STEW = "HEARTY_STEW",
+  RAINBOW_BEAN = "RAINBOW_BEAN",
   RAGE_CANDY_BAR = "RAGE_CANDY_BAR",
   TEA = "TEA",
   CURRY = "CURRY",
@@ -1308,7 +1309,8 @@ export const Dishes = [
   Item.BIG_MUSHROOM,
   Item.BALM_MUSHROOM,
   Item.RICE,
-  Item.BERRIES
+  Item.RAINBOW_BEAN,
+  Item.BERRIES,
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]

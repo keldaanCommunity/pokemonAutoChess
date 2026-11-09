@@ -598,6 +598,8 @@ const cookDish = ({
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
+  } else if(chef.types.has(Synergy.STELLAR)){
+    dish = Item.RAINBOW_BEAN
   } else if (
     chef.name.startsWith("ARCEUS") ||
     chef.name === Pkm.KECLEON ||
@@ -2079,7 +2081,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       const megaEvoHandler = new MegaEvolutionHandler(pokemon.evolutionRule)
       if (
         room.state.phase === GamePhaseState.PICK &&
-        megaEvoHandler.canEvolve(pokemon, player)
+        megaEvoHandler.canEvolve(pokemon, player, true)
       ) {
         removeFromArray(player.items, item)
         megaEvoHandler.evolve(pokemon, player)

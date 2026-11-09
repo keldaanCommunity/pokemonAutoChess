@@ -1,5 +1,7 @@
 # New Pokemons:
 
+- Terapagos
+- Terapagos (Stellar Form)
 - Mega Absol
 - Mega Aerodactyl
 - Mega Alakazam
@@ -45,7 +47,7 @@ The late game (post stage 20) has received a complete overhaul. At stage 20, you
 
 The Atlas is inspired by the Connection Orb mechanic from Pokémon Super Mystery Dungeon. The number of paths you can follow is enormous. Our goal is to make every game even more unique. The same team composition will have a different outcome depending on the Atlas path you choose. All the team caps have been raised, and the game can be turned around at any stage with much more comeback options available to everyone.
 
-# Stellar synergy
+# Stellar
 
 We introduce what will be the final 32th synergy to Pokémon Auto Chess: STELLAR
 

@@ -16,7 +16,6 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
   AbsorbedItems,
   type Emotion,
-  type IPokemon,
   type IPokemonEntity,
   Title,
   Transfer
@@ -145,13 +144,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
   isSpawn = false
-  refToBoardPokemon: IPokemon
+  refToBoardPokemon: Pokemon
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
 
   constructor(
-    pokemon: IPokemon,
+    pokemon: Pokemon,
     positionX: number,
     positionY: number,
     team: number,

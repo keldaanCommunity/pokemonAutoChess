@@ -6,7 +6,7 @@ import {
   CELL_WIDTH
 } from "../../../../config"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { Dishes, type IPokemonEntity, type Item } from "../../../../types"
+import { Dishes, type IPokemonEntity, Item } from "../../../../types"
 import {
   type AbilityAnimation,
   type AbilityAnimationArgs,
@@ -2207,10 +2207,24 @@ export const AbilitiesAnimations: {
 
   [Ability.THOUSAND_ARROWS]: (args) =>
     projectile({
-      startCoords: [args.targetX, BOARD_HEIGHT - 1, false],
+      startCoords: [args.targetX, args.targetY + BOARD_HEIGHT - 1, false],
+      endCoords: [args.targetX, args.targetY, false],
       scale: 4,
       duration: 300
     })(args),
+  [Ability.TERA_STARSTORM]: (args) => {
+    projectile({
+      startCoords: [args.targetX + 4, args.targetY + 4, false],
+      endCoords: [args.targetX, args.targetY, false],
+      scale: 0.5,
+      ability: undefined,
+      textureKey: "item",
+      frame: `${args.data.shard ?? Item.NORMAL_SHARD}.png`,
+      duration: 400,
+      hitAnim: onTarget({ ability: Ability.SHIELDS_DOWN, scale: 1 })
+    })({ ...args, ability: "" })
+  },
+
   [Ability.TRI_ATTACK]: projectile({}),
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
   [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),

@@ -1,6 +1,6 @@
 import type Phaser from "phaser"
 import { GameObjects } from "phaser"
-import { useMemo } from "react"
+import React, { useMemo } from "react"
 import ReactDOM from "react-dom/client"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
@@ -157,6 +157,8 @@ export function GamePokemonDetail(props: {
   if (pokemon && !dish && hasSynergy(pokemon, Synergy.GOURMET)) {
     if (pokemon.items.has(Item.COOKING_POT)) {
       dish = Item.HEARTY_STEW
+    } else if (pokemon.types.has(Synergy.STELLAR)) {
+      dish = Item.RAINBOW_BEAN
     } else if (dish !== null) {
       dish = Item.SANDWICH
     }
@@ -544,7 +546,7 @@ export function PokemonStars(props: {
         <img key={"star-" + index} src="assets/ui/star.svg" height="16"></img>
       ))}
       {Array.from({ length: emptyStars }, (_, index) => (
-        <>
+        <React.Fragment key={index}>
           {(index < emptyStars - 1 || hasNonMegaFinalEvolution) && (
             <img
               key={"star-empty-" + index}
@@ -559,7 +561,7 @@ export function PokemonStars(props: {
               height="16"
             ></img>
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   )

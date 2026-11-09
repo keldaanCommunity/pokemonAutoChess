@@ -16,7 +16,7 @@ export class TeraBlastStrategy extends AbilityStrategy {
     )
     const damage = [40, 80, 120, 200, 300][pokemon.stars - 1] ?? 300
     const shards = OrientationArray.map((orientation) => {
-      const type = pickRandomIn(activeSynergies)
+      const type = pickRandomIn(activeSynergies) ?? Synergy.NORMAL
       const shard = TeraShardsBySynergy[type]
       effectInOrientation(board, pokemon, orientation, (cell) => {
         if (cell.value) {

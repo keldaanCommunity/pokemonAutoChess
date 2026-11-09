@@ -1,19 +1,21 @@
 import { FIGHTING_PHASE_DURATION, getBaseAltForm } from "../../config"
-import { Title } from "../../types"
+import { Sweets, Title } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Berries, type Dishes, Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { chance } from "../../utils/random"
+import { chance, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "./../abilities/abilities"
 import {
   type Effect,
+  OnAbilityCastEffect,
   OnDishConsumedEffect,
   OnHitEffect,
   OnSpawnEffect,
   PeriodicEffect
 } from "./../effects/effect"
+import { FlyingProtectionEffect } from "./synergies"
 
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.BERRY_JUICE]: [
@@ -400,6 +402,125 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
         entity?.addDefense(8, entity, 0, false)
       } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_STRETCHY) {
         entity?.addSpeed(25, entity, 0, false)
+      }
+    })
+  ],
+  [Item.RAINBOW_BEAN]: [
+    new OnSpawnEffect((entity, player) => {
+      const activeSynergies = player
+        ? player.synergies.getActiveSynergies()
+        : schemaValues(entity.types)
+      for (const synergy of activeSynergies) {
+        switch (synergy) {
+          case Synergy.AMORPHOUS:
+            entity.addMaxHP(1 * activeSynergies.length, entity, 0, false)
+            break
+          case Synergy.ARTIFICIAL:
+            entity.addShield(10 * entity.items.size, entity, 0, false)
+            break
+          case Synergy.BABY:
+            if (player) {
+              player.goldenEggChance += 0.1
+            }
+            break
+          case Synergy.AQUATIC:
+            entity.effects.add(EffectEnum.RAINBOW_BEAN_AQUATIC)
+            break
+          case Synergy.BUG:
+            // handled in cloneBugs
+            break
+          case Synergy.DARK:
+            entity.addCritChance(10, entity, 0, false)
+            break
+          case Synergy.DRAGON:
+            entity.addShield(10 * entity.stars, entity, 0, false)
+            break
+          case Synergy.ELECTRIC:
+            entity.effects.add(EffectEnum.RAINBOW_BEAN_ELECTRIC)
+            break
+          case Synergy.FAIRY:
+            entity.addLuck(10, entity, 0, false)
+            break
+          case Synergy.FIELD:
+            entity.addSpeed(10, entity, 0, false)
+            break
+          case Synergy.FIGHTING:
+            entity.effects.add(EffectEnum.RAINBOW_BEAN_FIGHTING)
+            break
+          case Synergy.FIRE:
+            entity.addAttack(5, entity, 0, false)
+            break
+          case Synergy.FLORA:
+            player?.collectMulch(1)
+            break
+          case Synergy.FLYING:
+            entity.getEffects(FlyingProtectionEffect).forEach((ef) => {
+              ef.flyingProtection += 1
+            })
+            break
+          case Synergy.FOSSIL:
+            entity.status.addResurrection(entity)
+            break
+          case Synergy.GHOST:
+            entity.addDodgeChance(0.05, entity, 0, false)
+            break
+          case Synergy.GOURMET:
+            if (player) {
+              player.items.push(pickRandomIn(Sweets))
+            }
+            break
+          case Synergy.GRASS:
+            entity.addMaxHP(0.05 * entity.maxHP, entity, 0, false)
+            break
+          case Synergy.GROUND:
+            entity.addAttack(1, entity, 0, false)
+            entity.addDefense(1, entity, 0, false)
+            entity.addSpecialDefense(1, entity, 0, false)
+            break
+          case Synergy.HUMAN:
+            entity.effects.add(EffectEnum.RAINBOW_BEAN_HUMAN)
+            break
+          case Synergy.ICE:
+            entity.addSpecialDefense(5, entity, 0, false)
+            break
+          case Synergy.LIGHT:
+            if (entity.inSpotlight) {
+              entity.addAbilityPower(10, entity, 0, false)
+              entity.addAttack(0.1 * entity.baseAtk, entity, 0, false)
+            }
+            break
+          case Synergy.MONSTER:
+            entity.addMaxHP(0.05 * entity.maxHP, entity, 0, false)
+            break
+          case Synergy.NORMAL:
+            entity.addShield(0.05 * entity.maxHP, entity, 0, false)
+            break
+          case Synergy.POISON:
+            entity.effects.add(EffectEnum.IMMUNITY_POISON)
+            break
+          case Synergy.PSYCHIC:
+            entity.addAbilityPower(15, entity, 0, false)
+            break
+          case Synergy.ROCK:
+            entity.addDefense(5, entity, 0, false)
+            break
+          case Synergy.SOUND:
+            entity.effectsSet.add(
+              new OnAbilityCastEffect((e) => {
+                e.addAbilityPower(5, e, 0, false)
+              })
+            )
+            break
+          case Synergy.STEEL:
+            entity.effects.add(EffectEnum.RAINBOW_BEAN_STEEL)
+            break
+          case Synergy.WATER:
+            entity.addPP(15, entity, 0, false)
+            break
+          case Synergy.WILD:
+            entity.status.triggerRage(1500, entity)
+            break
+        }
       }
     })
   ]
