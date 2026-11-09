@@ -15,8 +15,10 @@ export class StoredPowerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const PkmClass = PokemonClasses[PkmByIndex[target.index]]
-    const baseSpeed = PkmClass ? new PkmClass(target.name).speed : DEFAULT_SPEED
+    const PkmClass = PokemonClasses[PkmByIndex[pokemon.index]]
+    const baseSpeed = PkmClass
+      ? new PkmClass(pokemon.name).speed
+      : DEFAULT_SPEED
     const boostSpeed = min(0)(pokemon.speed / baseSpeed - 1)
     const boostAtk = min(0)(pokemon.atk / pokemon.baseAtk - 1)
     const boostDef = min(0)(pokemon.def / pokemon.baseDef - 1)
