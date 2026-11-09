@@ -1880,7 +1880,10 @@ function applyBigEaterBeltStatBuff(
     value > 0 ||
     (value < 0 && caster !== "environment" && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
-    value = roundToNDigits(value * 1.25, nbDigits, "down")
+    // round the size of the change down, so a buff and its removal stay equal
+    value =
+      Math.sign(value) *
+      roundToNDigits(Math.abs(value) * 1.25, nbDigits, "down")
   }
   return value
 }
