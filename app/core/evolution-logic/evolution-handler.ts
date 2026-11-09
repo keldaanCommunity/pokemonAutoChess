@@ -8,6 +8,7 @@ import type {
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
+import { TMPerAbility } from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
@@ -44,7 +45,8 @@ export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
 
 export function carryOverPermanentStats(
   pokemonEvolved: Pokemon,
-  pokemonsBeforeEvolution: Pokemon[]
+  pokemonsBeforeEvolution: Pokemon[],
+  player?: Player
 ) {
   // carry over the permanent stat buffs
   const permanentBuffStats = [
@@ -80,6 +82,12 @@ export function carryOverPermanentStats(
     .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
   if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
+    // only one TM can be kept, give back the other ones
+    existingTms.splice(existingTms.indexOf(pokemonEvolved.tm), 1)
+    existingTms.forEach((tm) => {
+      const item = TMPerAbility.get(tm)
+      if (item && player) player.items.push(item)
+    })
     if (pokemonEvolved.tm === Ability.SKILL_SWAP) {
       // keep the ability learnt with skill swap if there is one
       pokemonEvolved.skill =

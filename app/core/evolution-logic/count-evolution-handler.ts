@@ -112,7 +112,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
       player
     )
 
-    carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
+    carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution, player)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
     shuffleArray(itemsCompleteOnBench)
