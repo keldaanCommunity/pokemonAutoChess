@@ -106,9 +106,11 @@ export class MonsterKillEffect extends OnKillEffect {
     }
     if (
       !attacker.isGhostOpponent &&
-      this.synergyTier === SynergyEffects[Synergy.MONSTER].indexOf(EffectEnum.MERCILESS) &&
+      this.synergyTier ===
+        SynergyTiers[Synergy.MONSTER].indexOf(EffectEnum.MERCILESS) &&
       attacker.simulation.board.cells.every(
-        (p) => !p || p.team === attacker.team || (!p.hp && !p.status?.resurrecting)
+        (p) =>
+          !p || p.team === attacker.team || (!p.hp && !p.status?.resurrecting)
       )
     ) {
       attacker.addAttack(3, attacker, 0, false, true)
