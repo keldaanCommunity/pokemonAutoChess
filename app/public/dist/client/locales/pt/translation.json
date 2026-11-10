@@ -3308,7 +3308,7 @@
 		"SWEETS_GIFT": "Dá de presente 7 $t(item.SWEETS) aleatórios ao seu parceiro.",
 		"HATCH_BUNDLE": "Dá de presente 2 Pokémon Chocados aleatórios ao seu parceiro. 5% de chance de receber um Ovo Dourado em vez disso.",
 		"TICKET_BUNDLE": "Dá de presente um pacote contendo um $t(item.EXCHANGE_TICKET), um $t(item.RECYCLE_TICKET) e um $t(item.BRONZE_DOJO_TICKET) ao seu parceiro.",
-		"DITTO_GIFT": "Dá de presente um Ditto ao seu parceiro. Seu parceiro precisa ter pelo menos um espaço livre no banco.",
+		"DITTO_GIFT": "Dá de presente um Ditto ao seu parceiro.",
 		"GEMS_BUNDLE": "Dá de presente 3 gemas de sinergia aleatórias ao seu parceiro.",
 		"COMMON_GIFT": "Dá de presente um Pokémon Comum aleatório de 3 STAR ao seu parceiro. Ele corresponderá à sinergia ativa mais alta do seu parceiro.",
 		"UNCOMMON_GIFT": "Dá de presente um Pokémon Incomum Adicional ou Regional aleatório de 2 STAR ao seu parceiro. Ele corresponderá à sinergia ativa mais alta do seu parceiro.",

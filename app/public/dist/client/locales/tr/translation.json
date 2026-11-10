@@ -3321,7 +3321,7 @@
 		"SWEETS_GIFT": "Partnerine rastgele 7 $t(item.SWEETS) hediye et.",
 		"HATCH_BUNDLE": "Partnerine rastgele 2 Yumurta Pokémon'u hediye et. %5 ihtimalle bunun yerine bir Altın Yumurta gelir.",
 		"TICKET_BUNDLE": "Partnerine bir $t(item.EXCHANGE_TICKET), bir $t(item.RECYCLE_TICKET) ve bir $t(item.BRONZE_DOJO_TICKET) içeren bir paket hediye et.",
-		"DITTO_GIFT": "Partnerine bir Ditto hediye et. Partnerinin yedeğinde en az bir boş yer olmalı.",
+		"DITTO_GIFT": "Partnerine bir Ditto hediye et.",
 		"GEMS_BUNDLE": "Partnerine rastgele 3 sinerji taşı hediye et.",
 		"COMMON_GIFT": "Partnerine rastgele bir 3 STAR Yaygın Pokémon hediye et. Partnerinin en yüksek aktif sinerjisine uyar.",
 		"UNCOMMON_GIFT": "Partnerine rastgele bir 2 STAR Ek ya da Bölgesel Az Yaygın Pokémon hediye et. Partnerinin en yüksek aktif sinerjisine uyar.",

@@ -3308,7 +3308,7 @@
 		"SWEETS_GIFT": "Offre 7 bonbons aléatoires à votre partenaire.",
 		"HATCH_BUNDLE": "Offre 2 Pokémon éclos aléatoires à votre partenaire. 5% de chance de recevoir un Oeuf Doré à la place.",
 		"TICKET_BUNDLE": "Offre un lot contenant un EXCHANGE_TICKET, un RECYCLE_TICKET et un BRONZE_DOJO_TICKET à votre partenaire.",
-		"DITTO_GIFT": "Offre un Métamorph à votre partenaire. Ce dernier doit avoir au moins un emplacement libre sur son banc.",
+		"DITTO_GIFT": "Offre un Métamorph à votre partenaire.",
 		"GEMS_BUNDLE": "Offre 3 gemmes aléatoires à votre partenaire.",
 		"COMMON_GIFT": "Offre un Pokémon commun STAR STAR STAR aléatoire à votre partenaire. Son type correspondra à la plus haute synergie active de votre partenaire.",
 		"UNCOMMON_GIFT": "Offre un Pokémon Peu Commun additionnel ou régional STAR STAR aléatoire à votre partenaire. Son type correspondra à la plus haute synergie active de votre partenaire.",

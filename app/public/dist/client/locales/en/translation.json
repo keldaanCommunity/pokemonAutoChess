@@ -3328,7 +3328,7 @@
 		"SWEETS_GIFT": "Gift 7 random $t(item.SWEETS) to your partner.",
 		"HATCH_BUNDLE": "Gift 2 random Hatch Pokémon to your partner. 5% chance to receive a Golden Egg instead.",
 		"TICKET_BUNDLE": "Gift a bundle containing a $t(item.EXCHANGE_TICKET), a $t(item.RECYCLE_TICKET) and a $t(item.BRONZE_DOJO_TICKET) to your partner.",
-		"DITTO_GIFT": "Gift a Ditto to your partner. Your partner needs to have at least one free space on the bench.",
+		"DITTO_GIFT": "Gift a Ditto to your partner.",
 		"GEMS_BUNDLE": "Gift 3 random synergy gems to your partner.",
 		"COMMON_GIFT": "Gift a random 3 STAR Common Pokémon to your partner. It will match your partner's highest active synergy.",
 		"UNCOMMON_GIFT": "Gift a random 2 STAR Additional or Regional Uncommon Pokémon to your partner. It will match your partner's highest active synergy.",

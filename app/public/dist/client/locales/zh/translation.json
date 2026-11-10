@@ -3328,7 +3328,7 @@
 		"SWEETS_GIFT": "向你的搭档赠送7枚随机的$t(item.SWEETS)。",
 		"HATCH_BUNDLE": "向你的搭档赠送2只随机孵化宝可梦。有5%的概率改为获得一枚金蛋。",
 		"TICKET_BUNDLE": "向你的搭档赠送一套包含1张$t(item.EXCHANGE_TICKET)，1张$t(item.RECYCLE_TICKET)和1张$t(item.BRONZE_DOJO_TICKET)的礼包。",
-		"DITTO_GIFT": "向你的搭档赠送一只百变怪。你的搭档的备战区上需要有至少一个空位才能接收。",
+		"DITTO_GIFT": "向你的搭档赠送一只百变怪。",
 		"GEMS_BUNDLE": "向你的搭档赠送3枚随机共鸣宝石。",
 		"COMMON_GIFT": "向你的搭档赠送一只随机的STAR STAR STAR常见宝可梦。其至少一项共鸣为你搭档最高等级的激活共鸣。",
 		"UNCOMMON_GIFT": "向你的搭档赠送一只随机的STAR STAR罕见附加或地区限定宝可梦。其至少一项共鸣为你搭档最高等级的激活共鸣。",

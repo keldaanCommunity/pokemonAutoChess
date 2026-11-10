@@ -3303,7 +3303,7 @@
 		"RED_NECTAR": "춤추새에게 사용하면 이글이글 스타일로 폼체인지를 한다.",
 		"HATCH_BUNDLE": "부화 포켓몬 두 마리를 파트너에게 선물한다. 5%의 확률로 황금알을 선물할 수도 있다.",
 		"TICKET_BUNDLE": "$t(item.EXCHANGE_TICKET), $t(item.RECYCLE_TICKET) $t(item.BRONZE_DOJO_TICKET) 세트를 파트너에게 선물한다.",
-		"DITTO_GIFT": "메타몽을 파트너에게 선물한다. 대기석에 여유 공간이 있어야 선물 받을 수 있다.",
+		"DITTO_GIFT": "메타몽을 파트너에게 선물한다.",
 		"GEMS_BUNDLE": "시너지 주얼 3개를 파트너에게 선물한다.",
 		"COMMON_GIFT": "STAR STAR STAR 커먼 포켓몬 하나를 파트너에게 선물한다. 포켓몬은 파트너의 가장 높은 시너지에 따라 결정된다.",
 		"UNCOMMON_GIFT": "추가되거나 특정 지역에서 볼 수 있는 STAR STAR 언커먼 포켓몬 하나를 파트너에게 선물한다. 포켓몬은 파트너의 가장 높은 시너지에 따라 결정된다.",
