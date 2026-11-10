@@ -48,7 +48,6 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { getSellPrice } from "../models/shop"
 import {
   updatePlayerCollectorTitle,
   updatePlayerTitlesAfterGame
@@ -139,6 +138,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
   miniGame: MiniGame
+  private pendingGivingInProgress = new Set<string>()
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
@@ -1378,6 +1378,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     player.boardSize = this.getTeamSize(player.board)
+    this.givePendingPokemons(player)
     return hasEvolved
   }
 
@@ -1402,21 +1403,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
   }
 
-  givePokemons(
-    pokemonsObtained: Pokemon[],
-    player: Player,
-    sellIfNoSpace = false
-  ): boolean {
-    return pokemonsObtained.every((pokemon) => {
-      const freeSpace = getFreeSpaceOnBench(player.board)
+  givePokemons(pokemonsObtained: Pokemon[], player: Player): void {
+    pokemonsObtained.forEach((pokemon) => {
+      this.givePendingPokemons(player)
+
       const freeCellX = getFirstAvailablePositionInBench(player.board)
       const isEvolution =
         pokemon.evolutionRule &&
         pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
         EvolutionManager.canEvolveIfGettingOne(pokemon, player)
-
-      if (freeSpace < pokemonsObtained.length && !sellIfNoSpace && !isEvolution)
-        return false // prevent if not enough space on bench
 
       if (isEvolution) {
         pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
@@ -1430,13 +1425,37 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
       } else {
-        // sell picked pokemon if no more space on bench
-        const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-        player.addMoney(sellPrice, true, null)
+        player.pendingPokemonsToGive.push(pokemon)
       }
-
-      return true
     })
+  }
+
+  givePendingPokemons(player: Player): void {
+    if (player.pendingPokemonsToGive.length === 0) return
+    if (this.pendingGivingInProgress.has(player.id)) return // prevent recursion between givePendingPokemons and checkEvolutionsAfterPokemonAcquired
+    if (getFreeSpaceOnBench(player.board) === 0) return
+
+    this.pendingGivingInProgress.add(player.id)
+    try {
+      while (player.pendingPokemonsToGive.length > 0) {
+        const freeCellX = getFirstAvailablePositionInBench(player.board)
+        if (freeCellX === null) break
+
+        const pokemon = player.pendingPokemonsToGive.shift()
+        if (!pokemon) break
+
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      }
+    } finally {
+      this.pendingGivingInProgress.delete(player.id)
+    }
+
+    player.updateSynergies()
+    player.boardSize = this.getTeamSize(player.board)
   }
 
   getNumberOfPlayersAlive(players: MapSchema<Player>) {
@@ -1461,12 +1480,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  pickChoice(
-    playerId: string,
-    choiceId: string,
-    choiceIndex: number,
-    sellIfNoSpace = false
-  ) {
+  pickChoice(playerId: string, choiceId: string, choiceIndex: number) {
     const player = this.state.players.get(playerId)
     if (!player) return
     const choice = player.choices.find((c) => c.id === choiceId)
@@ -1540,7 +1554,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.firstPartner = pokemonsObtained[0].name
       }
 
-      this.givePokemons(pokemonsObtained, player, sellIfNoSpace)
+      this.givePokemons(pokemonsObtained, player)
     }
 
     if (choice.items.length > 0) {

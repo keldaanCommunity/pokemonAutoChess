@@ -184,7 +184,7 @@ const giftRandomPokemonByRarity =
         : [selectedProposition]
     ).map((p) => PokemonFactory.createPokemonFromName(p, toPlayer))
 
-    room.givePokemons(pokemonsObtained, toPlayer, true)
+    room.givePokemons(pokemonsObtained, toPlayer)
   }
 
 const giftPotion = (toPlayer: Player, fromPlayer: Player) => {
