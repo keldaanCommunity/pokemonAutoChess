@@ -28,7 +28,7 @@ export class SearingShotStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBurn(burnDuration, target, pokemon)
+        cell.value.status.triggerBurn(burnDuration, cell.value, pokemon)
       }
     })
   }
