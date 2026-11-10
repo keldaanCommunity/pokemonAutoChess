@@ -10,6 +10,10 @@
   - Cocoon ability Dark Aura: deals [10,SP] + [50,SP]% of ATK as SPECIAL to enemies within 2 tiles and heals for 15 HP plus 75% of damage dealt.
   - Oblivion Wing now fires a beam that hits the most enemies, dealing [30,50,70,100,SP] SPECIAL to each and healing for 50% of damage dealt.
   - On returning from the cocoon, Yveltal always regains Oblivion Wing and 100 max PP, even if its ability or max PP had been changed.
+- Snivy is now in Rare pool. PP 70 → 100. Adjusted stats.
+- Turtwig is now in Hatch pool. Adjusted stats.
+- Bulbasaur line is now 1-range. Adjusted stats. New ability Mega Drain: Drain all ADJACENT enemies for [10,20,40,80,150,SP] SPECIAL, healing for 50% of the damage dealt.
+- Petilil and Liligant are now 2-range. Adjusted stats. Hisui Lilligant remains 1-range.
 - New passive to Duosion and Reuniclus: Mitosis. Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.
 - Pirouette Meloetta no longer transforms to Aria Meloetta when put on bench
 - Nerf Magic Bounce (Xatu): user gets SILENCE during the effect. Duration: 5 → 4 seconds
