@@ -5585,6 +5585,22 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OBLIVION_WING
+  passive = Passive.DESTRUCTION
+}
+
+export class YveltalCocoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 22
+  speed = 57
+  def = 12
+  speDef = 12
+  maxPP = 10
+  range = 1
+  skill = Ability.DARK_AURA
+  passive = Passive.COCOON_OF_DESTRUCTION
 }
 
 export class Moltres extends Pokemon {
@@ -8503,20 +8519,22 @@ export class Ninjask extends Pokemon {
   skill = Ability.AERIAL_ACE
   additional = true
   onAcquired(player: Player) {
-    // also gain sheninja if free space on bench
+    // also gain Shedinja
+    const pkmWithCustom = getPkmWithCustom(
+      PkmIndex[Pkm.SHEDINJA],
+      player.pokemonCustoms
+    )
+    const shiny = pkmWithCustom.shiny ?? false
+    const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
+    const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
+    pokemon.postConstructor()
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
-      const pkmWithCustom = getPkmWithCustom(
-        PkmIndex[Pkm.SHEDINJA],
-        player.pokemonCustoms
-      )
-      const shiny = pkmWithCustom.shiny ?? false
-      const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
-      const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
-      pokemon.postConstructor()
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
+    } else {
+      player.pendingPokemonsToGive.push(pokemon)
     }
   }
 }
@@ -21543,6 +21561,7 @@ export const PokemonClasses: Record<
   [Pkm.ZERAORA]: Zeraora,
   [Pkm.XERNEAS]: Xerneas,
   [Pkm.YVELTAL]: Yveltal,
+  [Pkm.YVELTAL_COCOON]: YveltalCocoon,
   [Pkm.MARSHADOW]: Marshadow,
   [Pkm.HOOTHOOT]: Hoothoot,
   [Pkm.NOCTOWL]: Noctowl,

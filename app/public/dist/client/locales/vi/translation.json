@@ -1322,7 +1322,6 @@
 		"X_SCISSOR": "Gây [10,20,40,60,SP] TRUE 2 lần",
 		"MANTIS_BLADES": "Phóng ra ba lưỡi kiếm vào mục tiêu, mỗi lưỡi kiếm gây ra [10,20,40,80,SP] một loại sát thương riêng biệt: PHYSICAL, SPECIAL and TRUE",
 		"GEOMANCY": "Tăng [15,15,15,30,SP] ATK, [10,10,10,20,SP] SPE_DEF và 15 SPEED",
-		"OBLIVION_WING": "Gây [90,120,150,300,SP] SPECIAL và hồi phục một lượng bằng 75% lượng sát thương lên mục tiêu",
 		"SLACK_OFF": "Giải trừ toàn bộ hiệu ứng xấu, hồi phục [30,30,30,60,SP] % tương đương với chỉ số HP cao nhất và khiến Pokémon thi triển SLEEP trong 3 giây",
 		"DARK_VOID": "Gây [10,20,30,60,SP] SPECIAL cho tất cả Pokémon địch trong bán kính 4 ô, với [80,LK]% cơ hội gây SLEEP trong 2 giây.",
 		"OVERHEAT": "Gây [12,25,50,100,SP] SPECIAL cho tất cả Pokémon địch trong bán kính 4 ô xung quanh người dùng, +30% nếu chúng bị BURN. Giải phóng tất cả Pokémon FREEZE.",
@@ -1464,8 +1463,7 @@
 	"leave_room": "Rời khỏi phòng",
 	"save": "Lưu",
 	"player_choices": {
-		"choose_add_pick": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
-		"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos"
+		"choose_add_pick": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người."
 	},
 	"tier": "Bậc",
 	"additional_picks": "Chọn thêm",

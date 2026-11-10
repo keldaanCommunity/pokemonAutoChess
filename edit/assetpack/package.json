@@ -7,7 +7,11 @@
     "@assetpack/plugin-ffmpeg": "^0.8.0",
     "@assetpack/plugin-json": "^0.8.0",
     "@assetpack/plugin-texture-packer": "file:./plugin-texture-packer-fork",
-    "patch-package": "^8.0.1"
+    "patch-package": "^8.0.1",
+    "sharp": "0.35.5"
+  },
+  "overrides": {
+    "sharp": "0.35.5"
   },
   "scripts": {
     "assetpack": "assetpack -c .assetpack.js",

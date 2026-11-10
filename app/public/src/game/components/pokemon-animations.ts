@@ -4250,6 +4250,21 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.DARK_MELEE,
     hitSprite: HitSprite.DARK_HIT
   },
+  [Pkm.YVELTAL_COCOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    walk: AnimationType.Idle,
+    hurt: AnimationType.Idle,
+    sleep: AnimationType.Idle,
+    eat: AnimationType.Idle,
+    animationsOriented: {
+      [AnimationType.Idle]: false,
+      [AnimationType.Attack]: false,
+      [AnimationType.Shoot]: false
+    }
+  },
   [Pkm.MARSHADOW]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,

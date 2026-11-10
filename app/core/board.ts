@@ -365,6 +365,54 @@ export class Board {
     return cells
   }
 
+  /**
+   * Finds the line from (x, y) to an outward-facing board edge that contains
+   * the most cells satisfying `matches`. The origin is included in each line.
+   *
+   * If lines have the same number of matches, one containing a matching cell
+   * satisfying `preferred` wins; remaining ties follow board iteration order.
+   * Returns all cells on the chosen line, or an empty array if none match.
+   *
+   * @param x - Origin column.
+   * @param y - Origin row.
+   * @param matches - Predicate used to score each cell.
+   * @param preferred - Optional tie-breaker, applied only to matching cells.
+   *
+   * @example
+   * board.getBestLine(
+   *   pokemon.positionX,
+   *   pokemon.positionY,
+   *   (cell) => !!cell.value && cell.value.team !== pokemon.team && cell.value.hp > 0,
+   *   (cell) => cell.value === target
+   * )
+   */
+  getBestLine(
+    x: number,
+    y: number,
+    matches: (cell: Cell) => boolean,
+    preferred?: (cell: Cell) => boolean
+  ): Cell[] {
+    let best = { line: [] as Cell[], count: 0, hasPreferred: false }
+    this.forEach((endX, endY) => {
+      const isOutwardEdge =
+        (endX === 0 && endX < x) ||
+        (endX === this.columns - 1 && endX > x) ||
+        (endY === 0 && endY < y) ||
+        (endY === this.rows - 1 && endY > y)
+      if (!isOutwardEdge) return
+      const line = this.getCellsBetween(x, y, endX, endY)
+      const matchingCells = line.filter(matches)
+      const hasPreferred = preferred ? matchingCells.some(preferred) : false
+      if (
+        matchingCells.length > best.count ||
+        (matchingCells.length === best.count && hasPreferred && !best.hasPreferred)
+      ) {
+        best = { line, count: matchingCells.length, hasPreferred }
+      }
+    })
+    return best.line
+  }
+
   getTeleportationCell(x: number, y: number, boardSide: Team) {
     const candidates = new Array<Cell>()
     const blueCorners = [

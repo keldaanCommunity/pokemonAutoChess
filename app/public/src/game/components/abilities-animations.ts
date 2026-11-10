@@ -932,6 +932,194 @@ const aquaSwirlAnimation: AbilityAnimation = ({
   }
 }
 
+const darkAuraAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  flip
+}) => {
+  const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+  const radius = 2 * CELL_WIDTH
+  const perspective = 0.6
+  const halo = scene.add
+    .ellipse(x, y, 88, 88 * perspective, 0xc21b36, 0.45)
+    .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+  scene.abilitiesVfxGroup?.add(halo)
+  scene.tweens.add({
+    targets: halo,
+    scale: 0.5,
+    alpha: 0,
+    duration: 400,
+    ease: Phaser.Math.Easing.Quadratic.In,
+    onComplete: () => halo.destroy()
+  })
+
+  ;[
+    { color: 0xc21b36, width: 6, alpha: 0.6, delay: 150, duration: 500 },
+    { color: 0xffc2b9, width: 3, alpha: 0.45, delay: 230, duration: 500 }
+  ].forEach(({ color, width, alpha, delay, duration }) => {
+    const ring = scene.add.graphics({ x, y }).setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+    scene.abilitiesVfxGroup?.add(ring)
+    ring.lineStyle(width, color, 0.85)
+    ring.beginPath()
+    for (let i = 0; i <= 16; i++) {
+      const angle = (i * Math.PI * 2) / 16
+      const px = Math.cos(angle) * radius
+      const py = Math.sin(angle) * radius * perspective
+      if (i === 0) ring.moveTo(px, py)
+      else ring.lineTo(px, py)
+    }
+    ring.strokePath()
+    ring.setScale(0.08).setAlpha(0)
+    scene.tweens.add({
+      targets: ring,
+      scale: 1,
+      alpha: { from: alpha, to: 0 },
+      delay,
+      duration,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => ring.destroy()
+    })
+  })
+
+  for (let i = 0; i < 22; i++) {
+    const angle = (i * Math.PI * 2) / 22 + (Math.random() - 0.5) * 0.3
+    const distance = (0.7 + Math.random() * 0.3) * radius
+    const particle = scene.add
+      .rectangle(
+        x + Math.cos(angle) * distance,
+        y + Math.sin(angle) * distance * perspective,
+        randomBetween(8, 11),
+        randomBetween(8, 11),
+        i % 3 === 0 ? 0xffc2b9 : 0xc21b36
+      )
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(particle)
+    scene.tweens.add({
+      targets: particle,
+      x,
+      y,
+      scale: 0.3,
+      alpha: { from: 0.65, to: 0 },
+      delay: 250 + i * 10,
+      duration: 450,
+      ease: Phaser.Math.Easing.Quadratic.In,
+      onComplete: () => particle.destroy()
+    })
+  }
+}
+
+const oblivionWingAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  targetX,
+  targetY,
+  flip
+}) => {
+  const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+  const [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
+  const dx = endX - x
+  const dy = endY - y
+  const length = Math.hypot(dx, dy)
+  if (length === 0 || targetX < 0 || targetY < 0) return
+
+  const angle = Math.atan2(dy, dx)
+  const beam = scene.add.container(x, y).setDepth(DEPTH.PROJECTILE)
+  scene.abilitiesVfxGroup?.add(beam)
+  beam.setRotation(angle).setScale(0, 1)
+
+  const beamLayers = scene.add.graphics()
+  const layers = [
+    { width: 60, color: 0x7d082b, alpha: 0.3 },
+    { width: 34, color: 0x31000c, alpha: 0.9 },
+    { width: 20, color: 0xc21b36, alpha: 0.9 },
+    { width: 8, color: 0xffc2b9, alpha: 0.95 }
+  ]
+  layers.forEach(({ width, color, alpha }) => {
+    beamLayers.fillStyle(color, alpha)
+    beamLayers.fillRoundedRect(0, -width / 2, length, width, Math.min(width, length) / 2)
+  })
+  beam.add(beamLayers)
+
+  scene.tweens.chain({
+    targets: beam,
+    tweens: [
+      { scaleX: 1, duration: 180, ease: Phaser.Math.Easing.Quadratic.Out },
+      { alpha: 0, scaleY: 0.5, delay: 120, duration: 350 }
+    ],
+    onComplete: () => beam.destroy()
+  })
+
+  const deathCircle = scene.add
+    .container(x, y)
+    .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    .setRotation(angle)
+    .setScale(0.55)
+  scene.abilitiesVfxGroup?.add(deathCircle)
+  const circleGlow = scene.add.ellipse(0, 0, 80, 152, 0x850d30, 0.25)
+  const circle = scene.add.graphics()
+  circle.lineStyle(12, 0x5b061d, 0.5)
+  circle.strokeEllipse(0, 0, 68, 136)
+  circle.lineStyle(5, 0x27000b, 1)
+  circle.strokeEllipse(0, 0, 62, 130)
+  circle.lineStyle(2, 0xf13b50, 0.9)
+  circle.strokeEllipse(0, 0, 62, 130)
+
+  for (let i = 0; i < 24; i++) {
+    const theta = (i * Math.PI * 2) / 24
+    const next = theta + Math.PI / 24
+    const radius = i % 3 === 0 ? 1.4 : 1.2
+    circle.fillStyle(i % 2 === 0 ? 0x250009 : 0x7d082b, 0.95)
+    circle.fillTriangle(
+      Math.cos(theta) * 31,
+      Math.sin(theta) * 65,
+      Math.cos(next) * 31 * radius,
+      Math.sin(next) * 65 * radius,
+      Math.cos(theta + Math.PI / 12) * 31,
+      Math.sin(theta + Math.PI / 12) * 65
+    )
+  }
+  deathCircle.add([circleGlow, circle])
+  scene.tweens.chain({
+    targets: deathCircle,
+    tweens: [
+      { scale: 1, duration: 180, ease: Phaser.Math.Easing.Quadratic.Out },
+      { alpha: 0, scale: 1.1, delay: 120, duration: 350 }
+    ],
+    onComplete: () => deathCircle.destroy()
+  })
+
+  for (let i = 0; i < 16; i++) {
+    const along = length * (0.15 + Math.random() * 0.8)
+    const offset = randomBetween(-16, 16)
+    const particle = scene.add
+      .rectangle(
+        x + Math.cos(angle) * along - Math.sin(angle) * offset,
+        y + Math.sin(angle) * along + Math.cos(angle) * offset,
+        randomBetween(4, 8),
+        randomBetween(4, 8),
+        i % 2 === 0 ? 0xe43948 : 0x590824
+      )
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(particle)
+    const spread = randomBetween(20, 45) * (offset < 0 ? -1 : 1)
+    scene.tweens.add({
+      targets: particle,
+      x: particle.x - Math.sin(angle) * spread,
+      y: particle.y + Math.cos(angle) * spread,
+      alpha: { from: 0.9, to: 0 },
+      scale: 0.3,
+      delay: 100 + i * 10,
+      duration: 400,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => particle.destroy()
+    })
+  }
+}
+
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
@@ -939,6 +1127,7 @@ export const AbilitiesAnimations: {
   ["PUFF_PINK"]: onTargetScale2,
   ["PUFF_GREEN"]: onTargetScale2,
   ["PUFF_BROWN"]: onTargetScale2,
+  [Ability.DARK_AURA]: darkAuraAnimation,
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
@@ -1646,7 +1835,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   [Ability.X_SCISSOR]: onTargetScale2,
-  [Ability.OBLIVION_WING]: onTargetScale2,
+  [Ability.OBLIVION_WING]: oblivionWingAnimation,
   [Ability.GEOMANCY]: onCaster({
     positionOffset: [0, -50],
     depth: DEPTH.ABILITY_GROUND_LEVEL
