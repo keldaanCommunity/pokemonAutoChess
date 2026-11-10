@@ -7,8 +7,6 @@ import { SynergyConfigs } from "../../../../config/game/synergies"
 import { getWeatherConfig } from "../../../../config/game/weathers"
 import { Status } from "../../../../types/enum/Status"
 import { Weather } from "../../../../types/enum/Weather"
-import { isIn } from "../../../../utils/array"
-import { keys } from "../../../../utils/object"
 
 export const placeholderRegExp = /\{\{[^{}]*\}\}/g
 
@@ -21,10 +19,10 @@ export function getDescriptionConfig(path: string) {
   if (category === "weather_description" && Object.hasOwn(Weather, key)) {
     return getWeatherConfig(key as Weather)
   }
-  if (category === "ability_description" && isIn(keys(AbilityConfigs), key)) {
+  if (category === "ability_description" && key in AbilityConfigs) {
     return AbilityConfigs[key]
   }
-  if (category === "synergy_description" && isIn(keys(SynergyConfigs), key)) {
+  if (category === "synergy_description" && key in SynergyConfigs) {
     return SynergyConfigs[key]
   }
   if (category === "effect_description" && Object.hasOwn(EffectConfigs, key)) {

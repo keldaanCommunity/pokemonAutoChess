@@ -1,6 +1,4 @@
 import { Status } from "../../types/enum/Status"
-import { isIn } from "../../utils/array"
-import { keys } from "../../utils/object"
 
 type StatusConfig = Readonly<Record<string, number>>
 
@@ -45,5 +43,5 @@ export const StatusConfigs = {
 } satisfies Partial<Record<Status, StatusConfig>>
 
 export function getStatusConfig(status: Status): StatusConfig {
-  return isIn(keys(StatusConfigs), status) ? StatusConfigs[status] : {}
+  return status in StatusConfigs ? StatusConfigs[status] : {}
 }

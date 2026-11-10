@@ -1,6 +1,4 @@
 import { Weather } from "../../types/enum/Weather"
-import { isIn } from "../../utils/array"
-import { keys } from "../../utils/object"
 
 type WeatherConfig = Readonly<Record<string, number>>
 
@@ -61,5 +59,5 @@ export const WeatherConfigs = {
 } satisfies Partial<Record<Weather, WeatherConfig>>
 
 export function getWeatherConfig(weather: Weather): WeatherConfig {
-  return isIn(keys(WeatherConfigs), weather) ? WeatherConfigs[weather] : {}
+  return weather in WeatherConfigs ? WeatherConfigs[weather] : {}
 }
