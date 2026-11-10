@@ -77,6 +77,7 @@
 # Gameplay
 
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
+- Pokemons given through a choice pick (additional picks, unique...) and Pokemons obtained with gifts or special effects (like Shedinja) no longer require you to have a free space on bench. Instead, they are stored and will appear as soon as you will make space on the bench by selling some Pokémon for example. Note that this does not work for synergy effects like Water fishing rods or Bug nest.
 
 # UI
 

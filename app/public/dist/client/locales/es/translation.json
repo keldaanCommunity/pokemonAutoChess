@@ -3284,7 +3284,7 @@
 		"SWEETS_GIFT": "Regala 7 random $t(item.SWEETS) a tu compañero.",
 		"HATCH_BUNDLE": "Regala dos Pokémon Eclosionados a tu compañero. 5% de probabilidad de recibir un Huevo Dorado en vez de eso.",
 		"TICKET_BUNDLE": "Regala un paquete que contiene un $t(item.EXCHANGE_TICKET), un $t(item.RECYCLE_TICKET) y un $t(item.BRONZE_DOJO_TICKET) a tu compañero ",
-		"DITTO_GIFT": "Regala un Ditto a tu compañero. Tu compañero necesita tener por lo menos un espacio libre en su banco.",
+		"DITTO_GIFT": "Regala un Ditto a tu compañero.",
 		"GEMS_BUNDLE": "Regala 3 gemas de sinergia aleatorias a tu compañero.",
 		"COMMON_GIFT": "Regala 3 Pokémon comunes de 3 STAR a tu compañero. Compartiran la sinergia más alta activa de tu compañero.",
 		"UNCOMMON_GIFT": "Regala un Pokémon Adicional o Regional Poco Común de dos STAR a tu compañero. Compartirá la sinergia más alta activa de tu compañero."
@@ -3352,7 +3352,7 @@
 		"PRISM": "$t(pkm.NECROZMA) cambia entre su forma Ultra y Normal dependiendo de su exposición a la LIGHT",
 		"BLOSSOM": "$t(pkm.CHERRIM) cambia entre su forma soleada y su forma encapotada dependiendo de su exposición a la LIGHT",
 		"SPECIAL_ATTACK": "Los ataques básicos infligen SPECIAL y escalan con AP",
-		"NINCADA": "Después de evolucionar, obtén también a Shedinja si tienes un espacio libre en tu banco",
+		"NINCADA": "Después de evolucionar, obtén también a Shedinja",
 		"FAMILY": "El pokémon crece con el tiempo (turno 15 y turno 20)",
 		"SAND_STREAM": "Este pokémon cuenta como 3 para activar SANDSTORM",
 		"DRIZZLE": "Este pokémon cuenta como 3 para activar RAIN",
@@ -4178,7 +4178,6 @@
 	"player_choices": {
 		"choose_add_pick": "Elige un Pokémon adicional. Estará disponible para todos.",
 		"choose_first_partner": "Elige tu inicial. Tendrás una copia de este en cada etapa hasta la número 10",
-		"free_slot_hint": "Debe tener un espacio libre en el banquillo, o dos para Duos",
 		"choose_mission_order": "Elige tu misión",
 		"choose_unique": "Elige un pokémon Único. Sólo puedes elegir una vez, haz que cuente!",
 		"choose_legendary": "Elige un Legendario para tu equipo. Sólo puedes elegir una vez, haz que cuente!",

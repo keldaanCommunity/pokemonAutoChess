@@ -3105,7 +3105,7 @@
 		"PRISM": "Necrozma passa tra la sua forma Ultra e Normale a seconda della sua esposizione alla LIGHT",
 		"BLOSSOM": "Cherrim passa tra la sua forma Splendore e Normale a seconda della sua esposizione alla LIGHT",
 		"SPECIAL_ATTACK": "Gli attacchi base fanno SPECIAL e scalano su AP",
-		"NINCADA": "Dopo evolversi, ottieni un Shedinja se hai spazio nella panchina.",
+		"NINCADA": "Dopo evolversi, ottieni anche un Shedinja.",
 		"FAMILY": "Il Pokèmon cresce col tempo (turno 15 e turno 20)",
 		"SAND_STREAM": "Questo Pokèmon conta per 3 verso SANDSTORM",
 		"DRIZZLE": "Questo Pokèmon conta per 3 verso RAIN",
@@ -3857,8 +3857,7 @@
 		"choose_first_partner": "Scegli il tuo primo partner. Otterrai una copia di esso ogni livello fino al livello 10.",
 		"choose_mission_order": "Scegli la tua missione",
 		"choose_unique": "Scegli un Pokèmon Unico per la tua squadra. Puoi sceglierne solo uno, fai attenzione!",
-		"choose_legendary": "Scegli un Pokèmon Leggendario per la tua squadra. Puoi sceglierne solo uno, fai attenzione!",
-		"free_slot_hint": "Devi avere uno slot libero in panchina o due per Duo"
+		"choose_legendary": "Scegli un Pokèmon Leggendario per la tua squadra. Puoi sceglierne solo uno, fai attenzione!"
 	},
 	"hide": "Nascondi",
 	"show": "Mostra",

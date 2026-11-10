@@ -112,7 +112,7 @@ export default class Player extends Schema implements IPlayer {
   @type("number") team: Team = Team.BLUE_TEAM
   @type("string") name: string
   @type("string") avatar: string
-  @type({ map: Pokemon }) board = new MapSchema<Pokemon>()
+  @type({ map: Pokemon }) board = new MapSchema<Pokemon>()  
   @view() @type(["string"]) shop = new ArraySchema<Pkm>()
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type({ map: "uint8" }) synergies = new Synergies()
@@ -177,6 +177,7 @@ export default class Player extends Schema implements IPlayer {
   rareRegionalPool: Pkm[] = new Array<Pkm>()
   epicRegionalPool: Pkm[] = new Array<Pkm>()
   ultraRegionalPool: Pkm[] = new Array<Pkm>()
+  pendingPokemonsToGive: Pokemon[] = []
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
   artificialItems: Item[] = pickNRandomIn(ArtificialItems, 3)

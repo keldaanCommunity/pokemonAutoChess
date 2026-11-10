@@ -35,12 +35,14 @@ export function createRandomEgg(player: Player, shiny: boolean): Egg {
 export function giveRandomEgg(player: Player, shiny = false): Egg | undefined {
   const egg = createRandomEgg(player, shiny)
 
-  const x = getFirstAvailablePositionInBench(player.board)
-  if (x !== null) {
-    egg.positionX = x
+  const freeCellX = getFirstAvailablePositionInBench(player.board)
+  if (freeCellX === null) {
+    player.pendingPokemonsToGive.push(egg)
+  } else {
+    egg.positionX = freeCellX
     egg.positionY = 0
     player.board.set(egg.id, egg)
     player.pokemonsPlayed.add(Pkm.EGG)
-    return egg
   }
+  return egg
 }

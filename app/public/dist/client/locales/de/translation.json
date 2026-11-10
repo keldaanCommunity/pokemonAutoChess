@@ -3073,7 +3073,7 @@
 		"PRISM": "Necrozma nimmt die Ultra-Form an, wenn es im Rampenlicht steht.",
 		"BLOSSOM": "Kinoso öffnet seine Blütenblätter und wechselt in die Sonnenform, wenn es im Rampenlicht steht.",
 		"SPECIAL_ATTACK": "Die Standardangriffe von Voltriant verursachen SPECIAL und skalieren mit der AP.",
-		"NINCADA": "Wenn du einen freien Platz auf der Bank hast, erhältst du zusätzlich ein Ninjatom bei der Entwicklung.",
+		"NINCADA": "Bei der Entwicklung erhältst du zusätzlich ein Ninjatom.",
 		"FAMILY": "Dieses Pokémon wächst mit der Zeit (Ebene 15 & 20).",
 		"SAND_STREAM": "Dieses Pokémon zählt als 3 für SANDSTORM",
 		"DRIZZLE": "Dieses Pokémon zählt als 3 für RAIN",
@@ -3812,8 +3812,7 @@
 	"snapshot": "Schnappschuss",
 	"player_choices": {
 		"choose_add_pick": "Wähle ein zusätzliches Pokémon. Es wird für alle verfügbar sein.",
-		"choose_first_partner": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten.",
-		"free_slot_hint": "Du musst einen freien Platz auf der Bank haben, oder zwei für Duos"
+		"choose_first_partner": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten."
 	},
 	"hide": "Verstecken",
 	"show": "Zeigen",

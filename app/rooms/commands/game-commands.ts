@@ -447,6 +447,7 @@ export class OnDragDropPokemonCommand extends Command<
       }
 
       if (success) {
+        this.room.givePendingPokemons(player)
         player.updateSynergies()
         player.boardSize = this.room.getTeamSize(player.board)
       }
@@ -563,6 +564,7 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       }
     }
 
+    this.room.givePendingPokemons(player)
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
   }
@@ -985,6 +987,7 @@ export class OnSellPokemonCommand extends Command<
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
     pokemon.afterSell(player)
+    this.room.givePendingPokemons(player)
 
     if (
       player.doubleUpPartnerId &&
@@ -1873,7 +1876,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               ? choice.pokemons.length - 1
               : choice.items.length - 1
           )
-          this.room.pickChoice(player.id, choice.id, randomPick, true)
+          this.room.pickChoice(player.id, choice.id, randomPick)
         })
 
       player.board.forEach((pokemon) => {
