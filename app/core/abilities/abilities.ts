@@ -311,6 +311,7 @@ import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
 import { MawashiGeriStrategy } from "./mawashi-geri"
 import { MeditateStrategy } from "./meditate"
+import { MegaDrainStrategy } from "./mega-drain";
 import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"
@@ -1038,6 +1039,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.MEDITATE]: new MeditateStrategy(),
+  [Ability.MEGA_DRAIN]: new MegaDrainStrategy(),
   [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),
