@@ -4426,13 +4426,13 @@
 			"carousel_description": "Round di carosello oggetti dove puoi scegliere oggetti per la tua squadra. Gli oggetti vengono selezionati casualmente dal pool di oggetti disponibili.",
 			"item_pool": "Pool oggetti",
 			"town_encounters": "Incontri in città",
-			"portal_description_1": "Prendi un portale per viaggiare verso una nuova regione. Poi dovrai scegliere un Pokémon Starter, Unico o Leggendario.",
-			"portal_description_2": "Ogni portale ha simboli di sinergia presi casualmente dalle sinergie dominanti di tutti i giocatori. I simboli influenzano sia la regione verso cui viaggerai che i Pokémon che verranno proposti.",
+			"portal_description_1": "Prendi un portale per viaggiare verso una nuova regione. Ogni portale ha simboli di sinergia presi casualmente dalle sinergie dominanti di tutti i giocatori.",
+			"portal_description_2": "L'Atlante è ora sbloccato e vengono rivelati sei Pokémon Leggendari. I simboli influenzano sia la regione verso cui viaggerai che i Pokémon Leggendari nell'Atlante.",
 			"portal_description_3": "Se decidi di non prendere nessun portale, rimarrai nella tua regione attuale e i Pokémon proposti saranno totalmente casuali.",
 			"additional_description": "Scegli una scelta aggiuntiva e un componente oggetto tra 3 proposte. Le scelte aggiuntive sono Pokémon di evoluzione a 2 stadi che possono essere trovati in tutti i negozi dei giocatori dopo essere stati scelti.",
 			"battle_description": "Stage di battaglia regolare dove combatti contro altri giocatori o bot.",
 			"starter_pick": "Scelta dello Starter",
-			"legendary_pick": "Scelta del Leggendario"
+			"atlas_open": "Apertura dell'Atlante"
 		},
 		"town": {
 			"town_encounters_hint": "Puoi incontrare la gente del paese nei caroselli del Paese del Tesoro. Possono vendere strumenti speciali o renderti partecipe di eventi speciali.",

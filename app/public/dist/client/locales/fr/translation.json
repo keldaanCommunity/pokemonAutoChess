@@ -4854,13 +4854,13 @@
 			"carousel_description": "Les manches de carrousel d'objets où vous pouvez choisir des objets pour votre équipe. Les objets sont sélectionnés aléatoirement dans le pool d'objets disponibles.",
 			"item_pool": "Objets proposés",
 			"town_encounters": "Rencontres en ville",
-			"portal_description_1": "Prenez un portail pour voyager vers une nouvelle région. Ensuite, vous devrez choisir un Pokémon Starter, Unique ou Légendaire.",
-			"portal_description_2": "Chaque portail a des symboles de synergie pris aléatoirement parmi les synergies dominantes de tous les joueurs. Les symboles influencent à la fois la région vers laquelle vous voyagerez et les Pokémon qui seront proposés.",
+			"portal_description_1": "Prenez un portail pour voyager vers une nouvelle région. Chaque portail a des symboles de synergie pris aléatoirement parmi les synergies dominantes de tous les joueurs.",
+			"portal_description_2": "L'Atlas est maintenant débloqué, et six Pokémon Légendaires sont révélés. Les symboles influencent à la fois la région vers laquelle vous voyagerez et les Pokémon Légendaires de l'Atlas.",
 			"portal_description_3": "Si vous décidez de ne prendre aucun portail, vous resterez dans votre région actuelle, et les Pokémon proposés seront totalement aléatoires.",
 			"additional_description": "Sélectionnez un choix additionnel et un composant d'objet parmi 3 propositions. Les choix additionnels sont des Pokémon avec deux stades d'évolution qui peuvent être trouvés dans tous les magasins des joueurs après avoir été choisis.",
 			"battle_description": "Manche de combat régulier où vous combattez contre d'autres joueurs ou des bots.",
 			"starter_pick": "Choix du Starter",
-			"legendary_pick": "Choix du Légendaire"
+			"atlas_open": "Ouverture de l'Atlas"
 		},
 		"town": {
 			"town_encounters_hint": "Vous pouvez rencontrer des résidents lors des manches carrousel à Bourg-Trésor. Ils peuvent vendre des objets spéciaux ou déclencher des événements spéciaux.",

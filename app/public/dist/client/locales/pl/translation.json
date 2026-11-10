@@ -860,11 +860,12 @@
 			"carousel_description": "Runda karuzeli przedmiotów gdzie możesz wybrać przedmioty dla swojej drużyny. Przedmioty są losowo wybierane z dostępnej puli przedmiotów.",
 			"item_pool": "Pula Przedmiotów",
 			"town_encounters": "Miejskie Spotkania",
-			"portal_description_1": "Weź portal aby podróżować do nowego regionu. Następnie będziesz musiał wybrać Startowego, Unikalnego lub Legendarnego Pokémona.",
-			"portal_description_2": "Każdy portal ma symbole synergii losowo wybrane z dominujących synergii wszystkich graczy. Symbole wpływają zarówno na region do którego podróżujesz jak i na proponowanych Pokémonów.",
+			"portal_description_1": "Weź portal aby podróżować do nowego regionu. Każdy portal ma symbole synergii losowo wybrane z dominujących synergii wszystkich graczy.",
+			"portal_description_2": "Atlas jest teraz odblokowany i odsłania sześć Legendarnych Pokémonów. Symbole wpływają zarówno na region, do którego podróżujesz, jak i na Legendarne Pokémony w Atlasie.",
 			"portal_description_3": "Jeśli zdecydujesz się nie brać żadnego portalu, zostaniesz w swoim obecnym regionie, a proponowani Pokémoni będą całkowicie losowi.",
 			"additional_description": "Wybierz dodatkowy wybór i komponent przedmiotu spośród 3 propozycji. Dodatkowe wybory to 2-stopniowe ewolucyjne Pokémony które można znaleźć we wszystkich sklepach graczy po wybraniu.",
-			"battle_description": "Regularny etap walki gdzie walczysz przeciwko innym graczom lub botom."
+			"battle_description": "Regularny etap walki gdzie walczysz przeciwko innym graczom lub botom.",
+			"atlas_open": "Otwarcie Atlasu"
 		},
 		"town": {},
 		"regions": {},

@@ -75,7 +75,7 @@ export default function WikiStages() {
               : level === 10
                 ? t("unique_pick")
                 : level === 20
-                  ? t("wiki.stages.legendary_pick")
+                  ? t("wiki.stages.atlas_open")
                   : undefined,
           type: "portal"
         })

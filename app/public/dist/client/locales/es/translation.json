@@ -4757,14 +4757,14 @@
 			"carousel_description": "Ronda de carrusel de objetos donde puedes elegir objetos para tu equipo. Los objetos se seleccionan aleatoriamente del pool de objetos disponibles.",
 			"item_pool": "Pool de objetos",
 			"town_encounters": "Encuentros en la ciudad",
-			"portal_description_1": "Toma un portal para viajar a una nueva región. Luego tendrás que elegir un Pokémon Inicial, Único o Legendario.",
-			"portal_description_2": "Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon que serán propuestos.",
+			"portal_description_1": "Toma un portal para viajar a una nueva región. Cada portal tiene símbolos de sinergia tomados aleatoriamente de las sinergias dominantes de todos los jugadores.",
+			"portal_description_2": "El Atlas ahora está desbloqueado, y se revelan seis Pokémon Legendarios. Los símbolos influyen tanto en la región a la que viajarás como en los Pokémon Legendarios del Atlas.",
 			"portal_description_3": "Si decides no tomar ningún portal, permanecerás en tu región actual, y los Pokémon propuestos serán totalmente aleatorios.",
 			"additional_description": "Elige una selección adicional y un componente de objeto entre 3 propuestas. Las selecciones adicionales son Pokémon de evolución de 2 etapas que se pueden encontrar en todas las tiendas de los jugadores después de ser elegidos.",
 			"battle_description": "Etapa de combate regular donde luchas contra otros jugadores o bots.",
 			"shiny_gyarados_description": "Gyarados Shiny da una RED_SCALE cuando es derrotado.",
 			"starter_pick": "Elección de Inicial",
-			"legendary_pick": "Elección de Legendario"
+			"atlas_open": "Apertura del Atlas"
 		},
 		"town": {
 			"town_encounters_hint": "Puedes encontrarte a los residentes de la Aldea Tesoro en las rondas de carrusel. Pueden vender objetos especiales o provocar eventos especiales.",

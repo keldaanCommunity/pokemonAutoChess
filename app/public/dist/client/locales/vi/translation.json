@@ -1702,11 +1702,12 @@
 			"carousel_description": "Vòng băng chuyền vật phẩm nơi bạn có thể chọn vật phẩm cho đội của mình. Vật phẩm được chọn ngẫu nhiên từ kho vật phẩm có sẵn.",
 			"item_pool": "Kho Vật Phẩm",
 			"town_encounters": "Cuộc Gặp Trong Thành Phố",
-			"portal_description_1": "Sử dụng cổng để đi đến một vùng mới. Sau đó bạn sẽ phải chọn một Pokémon Khởi Đầu, Độc Nhất hoặc Huyền Thoại.",
-			"portal_description_2": "Mỗi cổng có các biểu tượng synergy được lấy ngẫu nhiên từ các synergy thống trị của tất cả người chơi. Biểu tượng ảnh hưởng đến cả vùng bạn sẽ đến và Pokémon được đề xuất.",
+			"portal_description_1": "Sử dụng cổng để đi đến một vùng mới. Mỗi cổng có các biểu tượng synergy được lấy ngẫu nhiên từ các synergy thống trị của tất cả người chơi.",
+			"portal_description_2": "Atlas hiện đã được mở khóa và sáu Pokémon Huyền Thoại được tiết lộ. Biểu tượng ảnh hưởng đến cả vùng bạn sẽ đến và các Pokémon Huyền Thoại trong Atlas.",
 			"portal_description_3": "Nếu bạn quyết định không sử dụng cổng nào, bạn sẽ ở lại vùng hiện tại và Pokémon được đề xuất sẽ hoàn toàn ngẫu nhiên.",
 			"additional_description": "Chọn một lựa chọn thêm và một thành phần vật phẩm từ 3 đề xuất. Lựa chọn thêm là Pokémon tiến hóa 2 giai đoạn có thể tìm thấy trong tất cả cửa hàng của người chơi sau khi được chọn.",
-			"battle_description": "Giai đoạn chiến đấu thông thường nơi bạn chiến đấu với người chơi khác hoặc bot."
+			"battle_description": "Giai đoạn chiến đấu thông thường nơi bạn chiến đấu với người chơi khác hoặc bot.",
+			"atlas_open": "Mở khóa Atlas"
 		},
 		"town": {},
 		"regions": {},

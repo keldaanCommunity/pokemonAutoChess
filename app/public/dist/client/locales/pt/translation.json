@@ -4796,13 +4796,13 @@
 			"carousel_description": "Rodada de carrossel de itens onde você pode escolher itens para sua equipe. Os itens são selecionados aleatoriamente do pool de itens disponíveis.",
 			"item_pool": "Pool de itens",
 			"town_encounters": "Encontros na cidade",
-			"portal_description_1": "Pegue um portal para viajar para uma nova região. Então você terá que escolher um Pokémon Inicial, Único ou Lendário.",
-			"portal_description_2": "Cada portal tem símbolos de sinergia retirados aleatoriamente das sinergias dominantes de todos os jogadores. Os símbolos influenciam tanto a região para onde você viajará quanto os Pokémon que serão propostos.",
+			"portal_description_1": "Pegue um portal para viajar para uma nova região. Cada portal tem símbolos de sinergia retirados aleatoriamente das sinergias dominantes de todos os jogadores.",
+			"portal_description_2": "O Atlas agora está desbloqueado, e seis Pokémon Lendários são revelados. Os símbolos influenciam tanto a região para onde você viajará quanto os Pokémon Lendários no Atlas.",
 			"portal_description_3": "Se você decidir não pegar nenhum portal, permanecerá em sua região atual, e os Pokémon propostos serão totalmente aleatórios.",
 			"additional_description": "Escolha uma escolha adicional e um componente de item entre 3 propostas. Escolhas adicionais são Pokémon de evolução de 2 estágios que podem ser encontrados em todas as lojas dos jogadores após serem escolhidos.",
 			"battle_description": "Estágio de batalha regular onde você luta contra outros jogadores ou bots.",
 			"starter_pick": "Escolha do Inicial",
-			"legendary_pick": "Escolha do Lendário"
+			"atlas_open": "Abertura do Atlas"
 		},
 		"town": {
 			"town_encounters_hint": "Você pode encontrar moradores da cidade nos estágios de carrossel na Cidade do Tesouro. Eles podem vender itens especiais ou ativar eventos especiais.",
