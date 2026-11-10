@@ -3352,7 +3352,7 @@
 		"PRISM": "$t(pkm.NECROZMA) cambia entre su forma Ultra y Normal dependiendo de su exposición a la LIGHT",
 		"BLOSSOM": "$t(pkm.CHERRIM) cambia entre su forma soleada y su forma encapotada dependiendo de su exposición a la LIGHT",
 		"SPECIAL_ATTACK": "Los ataques básicos infligen SPECIAL y escalan con AP",
-		"NINCADA": "Después de evolucionar, obtén también a Shedinja si tienes un espacio libre en tu banco",
+		"NINCADA": "Después de evolucionar, obtén también a Shedinja",
 		"FAMILY": "El pokémon crece con el tiempo (turno 15 y turno 20)",
 		"SAND_STREAM": "Este pokémon cuenta como 3 para activar SANDSTORM",
 		"DRIZZLE": "Este pokémon cuenta como 3 para activar RAIN",

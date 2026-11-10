@@ -8503,20 +8503,22 @@ export class Ninjask extends Pokemon {
   skill = Ability.AERIAL_ACE
   additional = true
   onAcquired(player: Player) {
-    // also gain sheninja if free space on bench
+    // also gain Shedinja
+    const pkmWithCustom = getPkmWithCustom(
+      PkmIndex[Pkm.SHEDINJA],
+      player.pokemonCustoms
+    )
+    const shiny = pkmWithCustom.shiny ?? false
+    const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
+    const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
+    pokemon.postConstructor()
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
-      const pkmWithCustom = getPkmWithCustom(
-        PkmIndex[Pkm.SHEDINJA],
-        player.pokemonCustoms
-      )
-      const shiny = pkmWithCustom.shiny ?? false
-      const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
-      const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
-      pokemon.postConstructor()
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
+    } else {
+      player.pendingPokemonsToGive.push(pokemon)
     }
   }
 }
