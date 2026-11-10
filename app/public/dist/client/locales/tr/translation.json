@@ -1958,7 +1958,6 @@
 		"PLASMA_FIST": "Hedefe [60,90,120,240,SP] SPECIAL verir ve verilen hasarın %30'u kadar iyileşir.",
 		"SPECTRAL_THIEF": "Kaybolup yeniden belirir, [30,40,50,100,SP] SPECIAL verir ve hedefin tüm stat artışlarını çalar.",
 		"GEOMANCY": "[15,15,15,30,SP] ATK, [10,10,10,20,SP] SPE_DEF ve 15 SPEED kazanır.",
-		"OBLIVION_WING": "[90,120,150,300,SP] SPECIAL verir ve verilen hasarın %75'i kadar iyileşir.",
 		"SLACK_OFF": "Tüm olumsuz durumları temizler, maks HP değerinin [30,30,30,60,SP]% kadar iyileşir ve kullananı 3 saniyeliğine SLEEP durumuna sokar.",
 		"DARK_VOID": "Hedefin etrafındaki 4 kare yarıçapındaki tüm düşman Pokémonlara [10,20,30,60,SP] SPECIAL verir, [80,LK]% ihtimalle 2 saniyelik SLEEP uygular.",
 		"OVERHEAT": "Kullananın etrafındaki 4 kare yarıçapındaki tüm düşman Pokémonlara [12,25,50,100,SP] SPECIAL verir, BURN durumundaysalar +%30. O alandaki tüm FREEZE Pokémonları çözer.",

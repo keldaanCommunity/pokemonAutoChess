@@ -59,6 +59,7 @@ import {
   type OnDeathEffectArgs,
   OnEvolutionEffect,
   OnGroundDiggingEffect,
+  OnHealReceivedEffect,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -75,6 +76,7 @@ import {
 import { unequipItems } from "./items"
 import { AccelerationEffect } from "./passives/acceleration"
 import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
+import { restoreYveltal } from "./passives/destruction"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
@@ -1332,6 +1334,16 @@ export const PassiveEffects: Partial<
   ],
   [Passive.MIMIKYU]: MimikuBustedTransformEffects,
   [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
+  [Passive.COCOON_OF_DESTRUCTION]: [
+    new OnHealReceivedEffect(({ pokemon }) => {
+      if (pokemon.hp >= 0.5 * pokemon.maxHP) {
+        restoreYveltal(pokemon)
+      }
+    }, Passive.COCOON_OF_DESTRUCTION),
+    new OnResurrectionEffect(({ pokemon }) => {
+      restoreYveltal(pokemon)
+    }, Passive.COCOON_OF_DESTRUCTION)
+  ],
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
   [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
   [Passive.GALARIAN_DARMANITAN_ZEN]: [

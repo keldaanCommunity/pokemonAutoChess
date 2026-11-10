@@ -1914,7 +1914,6 @@
 		"PLASMA_FIST": "Causa [60,90,120,240,SP] de SPECIAL com 30% de roubo de vida",
 		"SPECTRAL_THIEF": "Desaparece e reaparece distribuindo [30,40,50,100,SP] SPECIAL, roubando todo o boost estatístico do alvo",
 		"GEOMANCY": "O usuário recebe [15,15,15,30,SP] de ATK, [10,10,10,20,SP] de SPE_DEF e 15 SPEED",
-		"OBLIVION_WING": "Causa [90,120,150,300,SP] de SPECIAL e cura 75% do dano sofrido pelo alvo",
 		"SLACK_OFF": "Limpa todos os status negativos, cura [30,30,30,60,SP]% do HP máximo e infringe  SLEEP ao usuário por 3 segundos",
 		"DARK_VOID": "Causa [10,20,30,60,SP]de SPECIAL a todos os Pokémon inimigos em um raio de 4 blocos, com [80,LK]% de chance de infringir SLEEP por 2 segundos.",
 		"OVERHEAT": "Causa [12,25,50,100,SP] de SPECIAL à todos os Pokémon inimigos em um raio de 4 espaços ao redor do usuário, +30% de dano caso o alvo já sofra de BURN. descongela todos os Pokémon afetados por FREEZE na área.",

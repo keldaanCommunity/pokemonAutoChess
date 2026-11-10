@@ -1,4 +1,5 @@
 import { Ability } from "../../types/enum/Ability"
+import { Passive } from "../../types/enum/Passive"
 import { distanceC } from "../../utils/distance"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -14,6 +15,10 @@ export class EntrainmentStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const ppGained = [10, 10, 10, 30][pokemon.stars - 1] ?? 30
     pokemon.addPP(ppGained, pokemon, 1, crit)
+    if (
+      target.passive === Passive.DESTRUCTION ||
+      target.passive === Passive.COCOON_OF_DESTRUCTION
+    ) return
     if (target.skill !== Ability.ENTRAINMENT) {
       target.skill = Ability.ENTRAINMENT
     } else {
@@ -24,6 +29,8 @@ export class EntrainmentStrategy extends AbilityStrategy {
           entity &&
           entity.team !== pokemon.team &&
           entity.hp > 0 &&
+          entity.passive !== Passive.DESTRUCTION &&
+          entity.passive !== Passive.COCOON_OF_DESTRUCTION &&
           entity.skill !== Ability.ENTRAINMENT
         ) {
           potentialTargets.push({ x, y, value: entity })

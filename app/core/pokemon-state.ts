@@ -23,10 +23,12 @@ import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
   BeforeTakingDamageEffect,
+  OnHealReceivedEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
 } from "./effects/effect"
+import { transformToCocoon } from "./effects/passives/destruction"
 import { applyWandEffects, humanHealEffect } from "./effects/synergies"
 import type { PokemonEntity } from "./pokemon-entity"
 
@@ -342,6 +344,12 @@ export default abstract class PokemonState {
         const overhealFactor =
           SynergyConfigs.GRASS.overhealConversionPercent / 100
         pokemon.addMaxHP(overhealFactor * overheal, pokemon, 0, false, false)
+      }
+
+      if (healReceived > 0) {
+        pokemon.getEffects(OnHealReceivedEffect).forEach((effect) => {
+          effect.apply({ pokemon, healReceived, origin })
+        })
       }
 
       return { healReceived, overheal }
@@ -719,6 +727,14 @@ export default abstract class PokemonState {
       }
 
       pokemon.hp = Math.max(0, pokemon.hp - residualDamage)
+      if (
+        pokemon.passive === Passive.DESTRUCTION &&
+        residualDamage > 0 &&
+        pokemon.hp > 0 &&
+        pokemon.hp < 0.2 * pokemon.maxHP
+      ) {
+        transformToCocoon(pokemon)
+      }
 
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.hp} life shield ${pokemon.shield}`);
 
