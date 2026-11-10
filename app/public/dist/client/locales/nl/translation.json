@@ -1801,8 +1801,7 @@
 	},
 	"save": "Redden",
 	"player_choices": {
-		"choose_add_pick": "Kies een extra Pokemon. Het zal voor iedereen beschikbaar zijn.",
-		"free_slot_hint": "Je moet één vrije plek op de bank hebben, of twee voor Duo's"
+		"choose_add_pick": "Kies een extra Pokemon. Het zal voor iedereen beschikbaar zijn."
 	},
 	"hide": "Verbergen",
 	"show": "Show",

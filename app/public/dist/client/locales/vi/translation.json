@@ -1464,8 +1464,7 @@
 	"leave_room": "Rời khỏi phòng",
 	"save": "Lưu",
 	"player_choices": {
-		"choose_add_pick": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người.",
-		"free_slot_hint": "Bạn cần có 1 ô trống trên hàng chờ của bạn, hoặc 2 cho Duos"
+		"choose_add_pick": "Chọn thêm 1 Pokemon. Pokemon đó sẽ sẵn sàng được sử dụng cho tất cả mọi người."
 	},
 	"tier": "Bậc",
 	"additional_picks": "Chọn thêm",

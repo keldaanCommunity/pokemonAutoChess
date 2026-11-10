@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
-import type { PlayerChoice } from "../../../../../models/colyseus-models/player-choice"
+import { ItemStats } from "../../../../../config"
+import { Stat } from "../../../../../types/enum/Game"
 import { type Item, ShinyItems } from "../../../../../types/enum/Item"
 import {
   type Pkm,
-  PkmDuo,
+  type PkmDuo,
   PkmDuos,
   PkmFamily
 } from "../../../../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import type { IDetailledPokemon } from "../../../../../types/interfaces/IDetailledPokemon"
 import { isIn } from "../../../../../utils/array"
+import { entries } from "../../../../../utils/object"
 import { DEPTH } from "../../../game/depths"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
 import { pickChoice } from "../../../network"
-import { getGameScene } from "../../game"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -22,13 +23,6 @@ import { LocalStoreKeys, localStore } from "../../utils/store"
 import GamePokemonDuoPortrait from "./game-pokemon-duo-portrait"
 import GamePokemonPortrait from "./game-pokemon-portrait"
 import "./game-choice.css"
-import { ItemStats } from "../../../../../config"
-import { Stat } from "../../../../../types/enum/Game"
-import { entries } from "../../../../../utils/object"
-
-function isPokemonChoice(choice: PlayerChoice): boolean {
-  return choice.pokemons.length > 0
-}
 
 export default function GameChoice() {
   const { t } = useTranslation()
@@ -37,14 +31,6 @@ export default function GameChoice() {
 
   const life = connectedPlayer?.life ?? 0
   const choices = connectedPlayer?.choices ?? []
-
-  const board = getGameScene()?.board
-  const hasPokemonChoice = choices.some(isPokemonChoice)
-  const containsDuo = choices.some((choice) =>
-    choice.pokemons.some((pokemon) => pokemon in PkmDuo)
-  )
-  const isBenchFull =
-    board && hasPokemonChoice && board.getBenchSize() >= (containsDuo ? 7 : 8)
 
   const [teamPlanner, setTeamPlanner] = useState<IDetailledPokemon[]>(
     localStore.get(LocalStoreKeys.TEAM_PLANNER)
@@ -249,10 +235,6 @@ export default function GameChoice() {
               </div>
             ))}
           </div>
-        )}
-
-        {isBenchFull && choice.pokemons.length > 0 && (
-          <p>{t("player_choices.free_slot_hint")}</p>
         )}
       </div>
 

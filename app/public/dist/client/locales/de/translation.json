@@ -3812,8 +3812,7 @@
 	"snapshot": "Schnappschuss",
 	"player_choices": {
 		"choose_add_pick": "Wähle ein zusätzliches Pokémon. Es wird für alle verfügbar sein.",
-		"choose_first_partner": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten.",
-		"free_slot_hint": "Du musst einen freien Platz auf der Bank haben, oder zwei für Duos"
+		"choose_first_partner": "Wähle deinen Starter. Du wirst eine Kopie von ihm für jede Runde bis Runde 10 erhalten."
 	},
 	"hide": "Verstecken",
 	"show": "Zeigen",

@@ -4372,7 +4372,6 @@
 		"choose_wand": "Choose one Wand to give additional effects to your Fairy Pokémon attacks",
 		"choose_gift": "Choose one gift to send to your partner",
 		"choose_form": "Choose the desired form for your Pokémon.",
-		"free_slot_hint": "You must have one free slot on the bench, or two for Duos",
 		"more_choices": "{{count}} more choice(s) after this one!",
 		"cost_amount": "Cost: {{cost}} GOLD"
 	},
@@ -4518,7 +4517,7 @@
 	"caught": "CAUGHT !",
 	"bark": "WOOF !",
 	"drop_here_to_sell": "Drop here to sell",
-	"drop_here_to_open": "Drop here to open your gift. Make sure you have a free bench slot !",
+	"drop_here_to_open": "Drop here to open your gift",
 	"for_price_gold": "for {{price}} gold",
 	"shop": {
 		"additional_pokemon_hint": "Each player picked additional Pokémon to be available in all players shop for this game.",

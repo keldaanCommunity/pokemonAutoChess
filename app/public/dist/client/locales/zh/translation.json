@@ -4369,7 +4369,6 @@
 		"choose_wand": "选择一根魔杖，为我方FAIRY宝可梦的攻击附加额外效果",
 		"choose_gift": "选择一份礼物赠予你的搭档",
 		"choose_form": "选择你想要转化的形态",
-		"free_slot_hint": "需要至少有一个空余的备战区位置才能选择并获取宝可梦。若选择了一对，需要两个空位。",
 		"more_choices": "还可选择{{count}}次！",
 		"cost_amount": "价格：{{cost}} GOLD"
 	},

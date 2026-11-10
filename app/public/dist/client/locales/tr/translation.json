@@ -4357,7 +4357,6 @@
 		"choose_wand": "Peri Pokémonlarının saldırılarına ek efekt vermek için bir Asa seç",
 		"choose_gift": "Partnerine göndermek için bir hediye seç",
 		"choose_form": "Pokémon'un için istediğin formu seç.",
-		"free_slot_hint": "Yedekte bir boş yerin olmalı, ikili modda iki",
 		"more_choices": "Bundan sonra {{count}} seçim daha var!",
 		"cost_amount": "Bedel: {{cost}} GOLD"
 	},

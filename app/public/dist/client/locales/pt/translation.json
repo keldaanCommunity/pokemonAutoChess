@@ -4152,7 +4152,6 @@
 	"save": "Salvar",
 	"player_choices": {
 		"choose_add_pick": "Escolha um Pokémon adicional. Ele estará disponível para todos.",
-		"free_slot_hint": "Você deve ter um espaço livre no banco, ou dois para Duplas",
 		"choose_first_partner": "Escolha seu Pokémon inicial. Você receberá uma cópia dele a cada estágio até o estágio 10.",
 		"choose_item": "Escolha um item entre os seguintes",
 		"choose_starter": "Escolha seu Pokémon inicial",

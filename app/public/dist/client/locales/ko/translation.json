@@ -4228,7 +4228,6 @@
 	"player_choices": {
 		"choose_add_pick": "추가되는 포켓몬을 고릅니다. 다른 플레이어에게도 활성화됩니다.",
 		"choose_first_partner": "스타팅 포켓몬을 선택합니다. 10스테이지까지 매 스테이지마다 획득합니다.",
-		"free_slot_hint": "대기석에 한 자리(두마리 세트의 경우 두 자리)가 비어있어야 합니다.",
 		"choose_starter": "스타팅 포켓몬을 선택하세요",
 		"choose_item": "아래 지닌물건 중 하나를 선택하세요",
 		"choose_mission_order": "임무를 선택하세요",
