@@ -207,6 +207,7 @@ export interface ISimplePlayer {
 
 export interface IAfterGamePlayer extends ISimplePlayer {
   gameStats: GameStats
+  newElo?: number
 }
 
 export interface IGameHistorySimplePlayer extends ISimplePlayer {

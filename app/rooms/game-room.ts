@@ -999,12 +999,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
             const botPlayer = bots[i]
             const bot = await BotV2.findOne({ id: botPlayer.id })
             if (bot) {
-              bot.elo = computeElo(
+              bot.elo = await computeElo(
                 this.transformToSimplePlayer(botPlayer),
                 botPlayer.rank,
                 bot.elo,
                 players,
-                this.state.gameMode,
                 true
               )
               bot.save()
@@ -1109,12 +1108,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     if (usr.elo != null && eligibleToELO) {
-      let elo = computeElo(
+      let elo = await computeElo(
         this.transformToSimplePlayer(player),
         rank,
         usr.elo,
         humans.map((p) => this.transformToSimplePlayer(p)),
-        this.state.gameMode,
         false
       )
 
