@@ -26,7 +26,7 @@ export class TrickOrTreatStrategy extends AbilityStrategy {
       const removed = target.removeItem(item)
       if (removed) pokemon.addItem(item)
     } else if (
-      pokemon.index === PkmIndex[pokemon.name] &&
+      target.index !== PkmIndex[Pkm.MAGIKARP] &&
       target.passive !== Passive.DESTRUCTION &&
       target.passive !== Passive.COCOON_OF_DESTRUCTION
     ) {
