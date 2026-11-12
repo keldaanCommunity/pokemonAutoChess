@@ -39,8 +39,8 @@ export class BurningJealousyStrategy extends AbilityStrategy {
 
       // Only enemies with ATK buffs lose them and get burned
       if (enemy.atk > enemy.baseAtk) {
-        // Remove ATK buffs (subtract the buff amount)
-        enemy.addAttack(-(enemy.atk - enemy.baseAtk), enemy, 0, false)
+        // Remove ATK buffs
+        enemy.atk = enemy.baseAtk
 
         // Inflict BURN for 5 seconds
         enemy.status.triggerBurn(burnDuration, enemy, pokemon)
