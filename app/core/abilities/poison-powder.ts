@@ -37,7 +37,7 @@ export class PoisonPowderStrategy extends AbilityStrategy {
     targetsHit.forEach((enemy) => {
       enemy.status.triggerPoison(
         [3000, 3000, 3000, 6000][pokemon.stars - 1] ?? 6000,
-        target,
+        enemy,
         pokemon
       )
       enemy.handleSpecialDamage(
