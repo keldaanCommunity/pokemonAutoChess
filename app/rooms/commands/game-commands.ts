@@ -459,26 +459,25 @@ export class OnDragDropPokemonCommand extends Command<
 
   swapPokemonPositions(player: Player, pokemon: Pokemon, x: number, y: number) {
     const pokemonToSwap = player.getPokemonAt(x, y)
+    const oldX = pokemon.positionX
+    const oldY = pokemon.positionY
+    // move both units before any hook runs: a hook can evolve a Mantyke, which needs the final cells
+    pokemon.positionX = x
+    pokemon.positionY = y
     if (pokemonToSwap) {
-      const oldX = pokemonToSwap.positionX
-      const oldY = pokemonToSwap.positionY
-      pokemonToSwap.positionX = pokemon.positionX
-      pokemonToSwap.positionY = pokemon.positionY
+      pokemonToSwap.positionX = oldX
+      pokemonToSwap.positionY = oldY
       onPokemonChangePosition({
         pokemon: pokemonToSwap,
-        newX: pokemon.positionX,
-        newY: pokemon.positionY,
-        oldX,
-        oldY,
+        newX: oldX,
+        newY: oldY,
+        oldX: x,
+        oldY: y,
         player,
         state: this.state,
         room: this.room
       })
     }
-    const oldX = pokemon.positionX
-    const oldY = pokemon.positionY
-    pokemon.positionX = x
-    pokemon.positionY = y
     onPokemonChangePosition({
       pokemon,
       newX: x,
