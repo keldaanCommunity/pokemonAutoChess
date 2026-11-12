@@ -40,7 +40,7 @@ export class IvyCudgelStrategy extends AbilityStrategy {
               pokemon,
               crit
             )
-            cell.value.status.triggerBurn(5000, pokemon, cell.value)
+            cell.value.status.triggerBurn(5000, cell.value, pokemon)
           }
         })
     } else if (pokemon.passive === Passive.OGERPON_CORNERSTONE) {
