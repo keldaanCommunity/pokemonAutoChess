@@ -27,6 +27,6 @@ export class DoubleIronBashStrategy extends AbilityStrategy {
       pokemon,
       crit
     )
-    target.status.triggerFlinch(3000, pokemon)
+    target.status.triggerFlinch(3000, target, pokemon)
   }
 }

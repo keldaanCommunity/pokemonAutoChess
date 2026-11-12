@@ -38,7 +38,7 @@ export class MountainGaleStrategy extends AbilityStrategy {
       const t = pickRandomIn(targets)
       pokemon.commands.push(
         new DelayedCommand(() => {
-          t.status.triggerFlinch(3000, pokemon)
+          t.status.triggerFlinch(3000, t, pokemon)
           t.handleSpecialDamage(
             damage,
             board,
