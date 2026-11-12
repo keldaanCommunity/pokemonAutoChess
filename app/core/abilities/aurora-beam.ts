@@ -24,7 +24,7 @@ export class AuroraBeamStrategy extends AbilityStrategy {
         )
         const freezeChance = 0.5
         if (chance(freezeChance, pokemon)) {
-          cell.value.status.triggerFreeze(2000, target, pokemon)
+          cell.value.status.triggerFreeze(2000, cell.value, pokemon)
         }
       }
     })
