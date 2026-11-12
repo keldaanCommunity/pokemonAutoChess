@@ -39,6 +39,7 @@
     "build-server": "tsc",
     "build-server-prod": "tsc --version && tsc -p tsconfig.prod.json --noCheck",
     "typecheck": "tsc --noEmit",
+    "test": "tsx --test \"app/**/*.test.ts\"",
     "prebuild-server": "npm run clean-dist",
     "prebuild-server-prod": "npm run clean-dist",
     "clean-dist": "rimraf ./app/public/dist/server",
