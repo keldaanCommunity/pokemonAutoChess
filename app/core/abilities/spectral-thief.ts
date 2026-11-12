@@ -44,7 +44,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         const boostAP = target.ap
         const boostHP = min(0)(target.maxHP - base.hp)
         const boostCritChance = min(0)(target.critChance - base.critChance)
-        const boostCritPower = min(0)(target.critPower - base.critPower)
+        const boostCritPower = min(0)(target.critPower - base.critPower) * 100
         const boostLuck = min(0)(target.luck - base.luck)
 
         target.addAttack(-boostAtk, pokemon, 0, false)
