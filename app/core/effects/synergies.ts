@@ -263,7 +263,10 @@ export class SoundCryEffect extends OnAbilityCastEffect {
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((cell) => cell.value)
       .filter<PokemonEntity>((value): value is PokemonEntity => !!value)
-      .find((entity) => entity.passive === Passive.CHIMECHO)
+      .find(
+        (entity) =>
+          entity.passive === Passive.CHIMECHO && entity.team === pokemon.team
+      )
 
     if (chimecho) {
       chimecho.addPP(3, pokemon, 0, false)
