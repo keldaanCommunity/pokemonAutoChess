@@ -8,7 +8,12 @@ test("getBestLine selects the line with the most matching cells", () => {
   const line = board.getBestLine(1, 0, ({ x, y }) => matching.has(`${x},${y}`))
   assert.deepEqual(
     line.map(({ x, y }) => [x, y]),
-    [[1, 0], [2, 1], [3, 2], [4, 3]]
+    [
+      [1, 0],
+      [2, 1],
+      [3, 2],
+      [4, 3]
+    ]
   )
 })
 
@@ -27,5 +32,8 @@ test("getBestLine uses the preferred matching cell to break ties", () => {
 
 test("getBestLine returns no line when no cells match", () => {
   const board = new Board(5, 5)
-  assert.deepEqual(board.getBestLine(2, 2, () => false), [])
+  assert.deepEqual(
+    board.getBestLine(2, 2, () => false),
+    []
+  )
 })

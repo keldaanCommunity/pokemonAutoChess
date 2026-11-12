@@ -18,7 +18,8 @@ export class EntrainmentStrategy extends AbilityStrategy {
     if (
       target.passive === Passive.DESTRUCTION ||
       target.passive === Passive.COCOON_OF_DESTRUCTION
-    ) return
+    )
+      return
     if (target.skill !== Ability.ENTRAINMENT) {
       target.skill = Ability.ENTRAINMENT
     } else {

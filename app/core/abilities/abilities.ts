@@ -311,7 +311,7 @@ import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
 import { MawashiGeriStrategy } from "./mawashi-geri"
 import { MeditateStrategy } from "./meditate"
-import { MegaDrainStrategy } from "./mega-drain";
+import { MegaDrainStrategy } from "./mega-drain"
 import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"

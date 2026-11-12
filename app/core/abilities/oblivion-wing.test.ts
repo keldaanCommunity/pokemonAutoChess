@@ -13,7 +13,10 @@ import { OblivionWingStrategy } from "./oblivion-wing"
 
 function setup() {
   const board = new Board(8, 8)
-  const broadcasts: Array<{ type: Transfer; data: { targetX?: number; targetY?: number; ap?: number } }> = []
+  const broadcasts: Array<{
+    type: Transfer
+    data: { targetX?: number; targetY?: number; ap?: number }
+  }> = []
   const simulation = {
     board,
     weather: Weather.NEUTRAL,
@@ -24,7 +27,10 @@ function setup() {
     redTeam: new Map(),
     blueEffects: new Set(),
     redEffects: new Set(),
-    broadcastToSpectators(type: Transfer, data: { targetX?: number; targetY?: number; ap?: number }) {
+    broadcastToSpectators(
+      type: Transfer,
+      data: { targetX?: number; targetY?: number; ap?: number }
+    ) {
       broadcasts.push({ type, data })
     }
   } as unknown as Simulation
@@ -59,7 +65,10 @@ test("Oblivion Wing selects the line with the most enemies and heals from actual
   const targetHP = selectedTarget.hp
   new OblivionWingStrategy().process(caster, board, selectedTarget, false)
 
-  assert.deepEqual(enemies.map((enemy) => enemy.hp), [0, 0, 0])
+  assert.deepEqual(
+    enemies.map((enemy) => enemy.hp),
+    [0, 0, 0]
+  )
   assert.equal(ally.hp, allyHP)
   assert.equal(selectedTarget.hp, targetHP)
   assert.equal(caster.hp, 130)

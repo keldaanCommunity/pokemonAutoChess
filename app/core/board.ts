@@ -405,7 +405,9 @@ export class Board {
       const hasPreferred = preferred ? matchingCells.some(preferred) : false
       if (
         matchingCells.length > best.count ||
-        (matchingCells.length === best.count && hasPreferred && !best.hasPreferred)
+        (matchingCells.length === best.count &&
+          hasPreferred &&
+          !best.hasPreferred)
       ) {
         best = { line, count: matchingCells.length, hasPreferred }
       }
