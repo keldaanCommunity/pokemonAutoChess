@@ -116,6 +116,25 @@
 - Fix Barb barrage ability targeting
 - Fix Mind Blown AP scaling
 - Fix selling price and pool refill fir Cherrim Sunlight, Annihilape and Mothim
+- Fixed Mach Ribbon removal taking away the wrong amount of SPEED
+- Fixed Venoshock checking if the caster was POISONED instead of the target
+- Fixed Big Eater Belt taking back 1 more ATK than its buff gave
+- Fixed Stored Power using the target's base SPEED instead of the user's
+- Fixed Fire Spin and Searing Shot checking every BURN against the main target, so one Rawst Berry blocked the burn for everyone hit
+- Fixed Galarian Darmanitan Zen BURN reading immunity and berries from the wrong unit
+- Fixed selling a Human from the board losing its TM
+- Fixed TMs being lost when copies holding different TMs evolve
+- Fixed Leech Seed dealing flat damage instead of a percent of the target's max HP
+- Fixed Smog weather turning dodge chance into an invalid value, so nobody could dodge in Smog
+- Fixed Spectral Thief only stealing 1% of the target's CRIT_POWER boost
+- Fixed a second Trick or Treat leaving the target as a 1 ATK Magikarp for the rest of the fight
+- Fixed Mortal Spin on the red side never pushing back the enemy in front
+- Fixed Ogerpon Hearthflame BURN reading immunity and berries from Ogerpon instead of the target
+- Fixed Poison Powder checking every POISON against the main target, so one Pecha Berry blocked it for everyone hit
+- Fixed Aurora Beam checking every FREEZE against the main target, so one Aspear Berry blocked it for everyone hit
+- Fixed Ogerpon Cornerstone FLINCH duration using Ogerpon's team reductions instead of the target's
+- Fixed Burning Jealousy taking more ATK than the buff gave from a Big Eater Belt holder
+- Fixed swapping a Mantyke copying its items and stacking two units on one cell
 
 # Misc
 
