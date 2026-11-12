@@ -135,7 +135,7 @@ export class GroundHoleEffect extends OnSpawnEffect {
     const synergyTier = SynergyTiers[Synergy.GROUND].indexOf(effect) + 1
     super((pokemon, player) => {
       const y =
-        player?.team === Team.RED_TEAM
+        pokemon.team === Team.RED_TEAM
           ? BOARD_HEIGHT - 1 - pokemon.positionY
           : pokemon.positionY
       const index = y * BOARD_WIDTH + pokemon.positionX
