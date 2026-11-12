@@ -9,8 +9,8 @@ const deploymentDefaults = {
   repo: "https://github.com/keldaanCommunity/pokemonAutoChess.git",
   path: "/home/deploy",
   "post-deploy":
-    "source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm run build-prod" 
-    //"source ~/.nvm/nvm.sh && nvm install 24.19.0 && nvm use 24.19.0 && npm ci --include=dev && npm run assetpack && npm run build-prod"
+    "source ~/.nvm/nvm.sh && nvm install 26.13.1 && nvm use 26.13.1 && npm run build-prod"
+  //"source ~/.nvm/nvm.sh && nvm install 26.13.1 && nvm use 26.13.1 && npm ci --include=dev && npm run assetpack && npm run build-prod"
 }
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
       env_production: {
         NODE_ENV: "production"
       },
-      interpreter: "node@24.19.0"
+      interpreter: "node@26.13.1"
     }
   ],
   deploy: Object.fromEntries(
