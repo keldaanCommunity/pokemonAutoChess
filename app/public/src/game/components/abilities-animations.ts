@@ -2201,7 +2201,6 @@ export const AbilitiesAnimations: {
   [Ability.HYDRO_PUMP]: hydroPumpAnimation,
   ["HYDRO_PUMP_SPLASH"]: hydroPumpSplashAnimation,
   [Ability.SWALLOW]: onCaster({
-    ability: Ability.HYDRO_PUMP,
     oriented: true,
     rotation: +Math.PI / 2,
     origin: [0.5, 1],
