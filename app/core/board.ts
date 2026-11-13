@@ -1009,4 +1009,5 @@ export function effectInLine(
   board
     .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)
     .forEach(effect)
+  return { finalX, finalY }
 }
