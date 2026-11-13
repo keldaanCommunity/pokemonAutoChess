@@ -61,6 +61,7 @@
 - New ability for Cradily: Plants a seed on the target, dealing [4,8,12,16]% of its max HP as SPECIAL damage each second for 5 seconds. Each time it deals damage, heals the ally with the lowest missing HP for the amount dealt.
 - Change Stakataka passive Wall of Stone: now locks for 3 seconds instead of until the SHIELD is depleted.
 - Wurmple now has NORMAL type
+- Ogerpon now has HUMAN type in all its forms
 
 # Changes to Synergies
 
