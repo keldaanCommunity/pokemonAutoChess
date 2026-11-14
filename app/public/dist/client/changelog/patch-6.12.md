@@ -136,6 +136,30 @@
 - Fixed Ogerpon Cornerstone FLINCH duration using Ogerpon's team reductions instead of the target's
 - Fixed Burning Jealousy taking more ATK than the buff gave from a Big Eater Belt holder
 - Fixed swapping a Mantyke copying its items and stacking two units on one cell
+- Fixed red side Ground units losing their whole hole bonus when they resurrect
+- Fixed ghost Ground units getting no hole bonus in about half of ghost rounds
+- Fixed seven abilities (Raging Bull, Glaive Rush, Thunderous Kick, Snore, Rock Wrecker, Mountain Gale, Double Iron Bash) reading FLINCH and ARMOR_BREAK duration reductions from the caster's team instead of the target's
+- Fixed Disarming Voice checking every CHARM against the main target
+- Fixed Chimecho gaining PP from enemy SOUND casts, and an enemy Chimecho taking PP meant for yours
+- Fixed Spectral Thief wiping a target's lowered AP and giving Marshadow negative AP
+- Fixed Odd Keystone's status reduction and CURSE delay working outside MURKY weather
+- Fixed Spike Armor and Shell Trap crits rolling with the attacker's LUCK instead of the defender's
+- Fixed Hyper Voice following a target that flies to another row and skipping the row it aimed at
+- Fixed Feather Dance scaling each feather with the AP of the unit it lands on instead of the caster's
+- Fixed Swallow resetting the cast count that Aqua Egg and Spirit Wand read, so a Swalot lost its PP bonus every third cast
+- Fixed Icicle Missile checking FREEZE against the unit it aimed at instead of the unit it hit, so a unit that stepped away ate its Aspear Berry and the unit hit could not use its own
+- Fixed Psyduck and Golduck rolling their CONFUSION chance with the attacker's LUCK instead of their own
+- Fixed a carousel leftover going to two idle players, so a ring item could be handed out more times than it had copies
+- Fixed units pulled by Magnet Pull or spawned by Gotta catch'em all never going back to the shared pool when nobody catches them
+- Fixed Zygarde 100% going back to its 10% or 50% stats after a revive
+- Fixed Busted Mimikyu, Darmanitan Zen and Galarian Darmanitan Zen standing up from a revive with their base form's stats
+- Fixed a KO'd Finizen still turning into Palafin, and spawns counting toward the 5 KO'd allies Finizen needs
+- Fixed an item choice left to the timer always giving the first item instead of a random one
+- Fixed Conversion on a red side Porygon digging the wrong cell when it copies Ground, so the hole under it stayed undug
+- Fixed Punching Glove's 8% max HP damage still landing when the attack is dodged
+- Fixed Stone Edge and Vise Grip taking back a different amount than they gave when AP or Crit Power changed during the buff
+- Fixed Stone Edge taking its CRIT_CHANCE back after Spectral Thief had already stolen it, leaving the unit below 0
+- Fixed Spectral Thief's stolen item boosts being taken a second time when the target later loses that item
 
 # Misc
 
