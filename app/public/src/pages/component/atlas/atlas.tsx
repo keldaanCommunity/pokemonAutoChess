@@ -30,8 +30,9 @@ import { getPortraitSrc } from "../../../../../utils/avatar"
 import { entries } from "../../../../../utils/object"
 import { schemaValues } from "../../../../../utils/schemas"
 import { ItemDetailTooltipContent } from "../../../game/components/item-detail"
+import { isReplayRoom } from "../../../game/replay-room-id"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
-import { pickAtlasNode } from "../../../network"
+import { pickAtlasNode, rooms } from "../../../network"
 import store from "../../../stores"
 import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
@@ -80,6 +81,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
   const canRemoveNodes = origin === "wiki"
 
   const handleNodeClick = (nodeId: AtlasNodeId) => {
+    if (origin === "game" && isReplayRoom(rooms.game)) return
     if (unlockedNodes.has(nodeId)) {
       if (canRemoveNodes && nodeId !== "root") {
         setDemoUnlockedNodes((prev) => {
