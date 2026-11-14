@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react"
 import { DEPTH } from "../../../game/depths"
-import { useAppSelector } from "../../../hooks"
+import {
+  selectConnectedPlayer,
+  selectConnectionOrbAvailable,
+  useAppSelector
+} from "../../../hooks"
+import store from "../../../stores"
+import { setAtlasVisible } from "../../../stores/GameStore"
 import { Atlas } from "../atlas/atlas"
 
 function updateAtlasPosition() {
@@ -14,8 +20,17 @@ function updateAtlasPosition() {
 
 export default function GameAtlas() {
   const atlasVisible = useAppSelector((state) => state.game.atlasVisible)
+  const orbAvailable = useAppSelector(selectConnectionOrbAvailable)
+  // alive, not life: game.tsx hides the orb when alive is false, so close with it
+  const alive = useAppSelector((state) => selectConnectedPlayer(state)?.alive)
   const containerRef = useRef<HTMLDivElement>(null)
   const wasVisible = useRef(false)
+
+  useEffect(() => {
+    if (atlasVisible && (!orbAvailable || alive === false)) {
+      store.dispatch(setAtlasVisible(false))
+    }
+  }, [atlasVisible, orbAvailable, alive])
 
   useEffect(() => {
     if (wasVisible.current === atlasVisible) return
