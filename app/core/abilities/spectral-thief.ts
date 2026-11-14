@@ -66,6 +66,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         pokemon.addCritChance(boostCritChance, pokemon, 0, false)
         pokemon.addCritPower(boostCritPower, pokemon, 0, false)
         pokemon.addLuck(boostLuck, pokemon, 0, false)
+        target.items.forEach((item) => target.itemStatsStolen.add(item))
       }
     }
   }
