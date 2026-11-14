@@ -367,13 +367,21 @@ const MimikuBustedTransformEffects = [
       transformToBustedMimikyu(pokemon)
       pokemon.status.triggerProtect(1500)
     }
-  }, Passive.MIMIKYU),
-  new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.name === Pkm.MIMIKYU_BUSTED) {
-      transformToBustedMimikyu(pokemon) // reapply busted mimikyu buffs on resurrect
-    }
   }, Passive.MIMIKYU)
 ]
+
+const MimikyuBustedResurrectionEffect = new OnResurrectionEffect(
+  ({ pokemon }) => {
+    // a unit that starts in this form already gets these stats from resurrect()
+    if (
+      pokemon.name === Pkm.MIMIKYU_BUSTED &&
+      pokemon.refToBoardPokemon.name !== Pkm.MIMIKYU_BUSTED
+    ) {
+      transformToBustedMimikyu(pokemon) // reapply busted mimikyu buffs on resurrect
+    }
+  },
+  Passive.MIMIKYU_BUSTED
+)
 
 const transformToDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.DARMANITAN_ZEN
@@ -409,13 +417,20 @@ const DarmanitanZenTransformEffects = [
 
       transformToDarmanitanZen(pokemon)
     }
-  }, Passive.DARMANITAN),
-  new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.name === Pkm.DARMANITAN_ZEN) {
-      transformToDarmanitanZen(pokemon)
-    }
   }, Passive.DARMANITAN)
 ]
+
+const DarmanitanZenResurrectionEffect = new OnResurrectionEffect(
+  ({ pokemon }) => {
+    if (
+      pokemon.name === Pkm.DARMANITAN_ZEN &&
+      pokemon.refToBoardPokemon.name !== Pkm.DARMANITAN_ZEN
+    ) {
+      transformToDarmanitanZen(pokemon)
+    }
+  },
+  Passive.DARMANITAN_ZEN
+)
 
 const transformToGalarianDarmanitanZen = (pokemon: PokemonEntity) => {
   pokemon.name = Pkm.GALARIAN_DARMANITAN_ZEN
@@ -447,13 +462,20 @@ const GalarianDarmanitanZenTransformEffects = [
     ) {
       transformToGalarianDarmanitanZen(pokemon)
     }
-  }, Passive.GALARIAN_DARMANITAN),
-  new OnResurrectionEffect(({ pokemon }) => {
-    if (pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN) {
-      transformToGalarianDarmanitanZen(pokemon)
-    }
   }, Passive.GALARIAN_DARMANITAN)
 ]
+
+const GalarianDarmanitanZenResurrectionEffect = new OnResurrectionEffect(
+  ({ pokemon }) => {
+    if (
+      pokemon.name === Pkm.GALARIAN_DARMANITAN_ZEN &&
+      pokemon.refToBoardPokemon.name !== Pkm.GALARIAN_DARMANITAN_ZEN
+    ) {
+      transformToGalarianDarmanitanZen(pokemon)
+    }
+  },
+  Passive.GALARIAN_DARMANITAN_ZEN
+)
 
 const DarmanitanZenOnHitEffect = new OnHitEffect(
   ({ attacker, totalTakenDamage }) => {
@@ -1333,6 +1355,7 @@ export const PassiveEffects: Partial<
     () => new AccelerationEffect() // needs new instance of effect for each pokemon due to internal stack counter
   ],
   [Passive.MIMIKYU]: MimikuBustedTransformEffects,
+  [Passive.MIMIKYU_BUSTED]: [MimikyuBustedResurrectionEffect],
   [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
   [Passive.COCOON_OF_DESTRUCTION]: [
     new OnHealReceivedEffect(({ pokemon }) => {
@@ -1344,11 +1367,15 @@ export const PassiveEffects: Partial<
       restoreYveltal(pokemon)
     }, Passive.COCOON_OF_DESTRUCTION)
   ],
-  [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
+  [Passive.DARMANITAN_ZEN]: [
+    DarmanitanZenOnHitEffect,
+    DarmanitanZenResurrectionEffect
+  ],
   [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
   [Passive.GALARIAN_DARMANITAN_ZEN]: [
     () => new GalarianDarmanitanBurnEffect(), // needs new instance of effect for each pokemon due to internal timer
-    treeEffect
+    treeEffect,
+    GalarianDarmanitanZenResurrectionEffect
   ],
   [Passive.GLIMMORA]: [ToxicSpikesEffect],
   [Passive.FUR_COAT]: [FurCoatEffect],
