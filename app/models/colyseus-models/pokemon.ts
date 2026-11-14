@@ -8768,7 +8768,7 @@ export class MegaAerodactyl extends Pokemon {
   speed = 67
   def = 6
   speDef = 6
-  maxPP = 100
+  maxPP = 80
   range = 1
   skill = Ability.ROCK_SLIDE
 }
