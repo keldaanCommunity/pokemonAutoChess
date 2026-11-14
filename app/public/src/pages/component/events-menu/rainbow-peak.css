@@ -141,10 +141,10 @@
 
 .rainbow-peak-step.final::after {
   background-image: conic-gradient(
-    in hsl longer hue,
+    at top center in hsl longer hue,
     hsl(var(--start-hue) 50% 50%) 0 100%
   );
-  animation: color-wheel-spin 20s linear infinite;
+  animation: color-wheel-spin 15s linear infinite;
   clip-path: polygon(
     50% 4px,
     calc(100% - 4px) calc(50% + 2px),
