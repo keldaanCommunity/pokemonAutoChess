@@ -55,6 +55,10 @@
   text-overflow: ellipsis;
 }
 
+.tournament-item .player-box .player-name {
+  flex-grow: 1;
+}
+
 .tournament-item .player-ranks {
   display: block;
   min-width: 2ch;
