@@ -152,6 +152,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   refToBoardPokemon: IPokemon
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
+  boostsStolen = 0 // times Spectral Thief took this unit's stat boosts
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
   constructor(
     pokemon: IPokemon,

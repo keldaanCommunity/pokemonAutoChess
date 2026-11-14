@@ -14,11 +14,16 @@ export class StoneEdgeStrategy extends AbilityStrategy {
 
     pokemon.status.triggerSilence(duration, pokemon, pokemon)
     pokemon.effects.add(EffectEnum.STONE_EDGE)
-    pokemon.addCritChance(20, pokemon, 1, false)
+    const critGain = 20 * (1 + pokemon.ap / 100)
+    pokemon.addCritChance(critGain, pokemon, 0, false)
+    const boostsStolen = pokemon.boostsStolen
     pokemon.range += 2
     pokemon.commands.push(
       new DelayedCommand(() => {
-        pokemon.addCritChance(-20, pokemon, 1, false)
+        // a Spectral Thief during the buff has already taken this crit chance
+        if (pokemon.boostsStolen === boostsStolen) {
+          pokemon.addCritChance(-critGain, pokemon, 0, false)
+        }
         pokemon.range = min(pokemon.baseRange)(pokemon.range - 2)
         pokemon.effects.delete(EffectEnum.STONE_EDGE)
       }, duration)
