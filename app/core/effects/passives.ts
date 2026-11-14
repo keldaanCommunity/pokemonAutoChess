@@ -650,8 +650,26 @@ class ClearWingEffect extends PeriodicEffect {
   }
 }
 
+const applyZygarde100Stats = (pokemon: PokemonEntity, previousForm: Pkm) => {
+  if (previousForm === Pkm.ZYGARDE_10) {
+    pokemon.addDefense(2, pokemon, 0, false)
+    pokemon.addSpecialDefense(2, pokemon, 0, false)
+    pokemon.addMaxHP(5, pokemon, 0, false)
+    pokemon.addSpeed(-12, pokemon, 0, false)
+    pokemon.range = min(1)(pokemon.range + 1)
+  } else if (previousForm === Pkm.ZYGARDE_50) {
+    pokemon.addAttack(5, pokemon, 0, false)
+    pokemon.addDefense(5, pokemon, 0, false)
+    pokemon.addSpecialDefense(5, pokemon, 0, false)
+    pokemon.addMaxHP(35, pokemon, 0, false)
+    pokemon.addSpeed(-5, pokemon, 0, false)
+    pokemon.range = min(1)(pokemon.range - 1)
+  }
+}
+
 class ZygardeCellsEffect extends PeriodicEffect {
   cellsCount = 0
+  maxHPFromCells = 0
   constructor() {
     super(
       (pokemon) => {
@@ -685,22 +703,18 @@ class ZygardeCellsEffect extends PeriodicEffect {
           new DelayedCommand(() => {
             if (pokemon.name === Pkm.ZYGARDE_100) return
             pokemon.addMaxHP(cellsSpawned, pokemon, 0, false)
+            this.maxHPFromCells += cellsSpawned
             if (this.cellsCount >= 95) {
               pokemon.handleHeal(0.2 * pokemon.maxHP, pokemon, 0, false)
-              if (pokemon.name === Pkm.ZYGARDE_10) {
-                pokemon.addDefense(2, pokemon, 0, false)
-                pokemon.addSpecialDefense(2, pokemon, 0, false)
-                pokemon.addMaxHP(5, pokemon, 0, false)
-                pokemon.addSpeed(-12, pokemon, 0, false)
-                pokemon.range = min(1)(pokemon.range + 1)
-              } else if (pokemon.name === Pkm.ZYGARDE_50) {
-                pokemon.addAttack(5, pokemon, 0, false)
-                pokemon.addDefense(5, pokemon, 0, false)
-                pokemon.addSpecialDefense(5, pokemon, 0, false)
-                pokemon.addMaxHP(35, pokemon, 0, false)
-                pokemon.addSpeed(-5, pokemon, 0, false)
-                pokemon.range = min(1)(pokemon.range - 1)
-              }
+              const previousForm = pokemon.name
+              const maxHPFromCells = this.maxHPFromCells
+              applyZygarde100Stats(pokemon, previousForm)
+              pokemon.effectsSet.add(
+                new OnResurrectionEffect(({ pokemon }) => {
+                  pokemon.addMaxHP(maxHPFromCells, pokemon, 0, false)
+                  applyZygarde100Stats(pokemon, previousForm)
+                }, Passive.ZYGARDE)
+              )
 
               pokemon.index = PkmIndex[Pkm.ZYGARDE_100]
               pokemon.name = Pkm.ZYGARDE_100
