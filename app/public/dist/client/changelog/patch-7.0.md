@@ -78,6 +78,8 @@ This special synergy is only given through special items and Pokémon. Its effec
 - Repeat Ball is now unholdable and no longer gives SHIELD and SPEED. Unique Pokémon are more frequent in shops and can be found even after Legendaries are found.
 - Shiny stone is now considered a synergy stone, given by Kecleon town encounter, on item carousels or by exchanging another synergy stone. Removed base stats and removed its effect of adding a second spotlight on the holder cell.
 - New tool: Energy Root: 50 SHIELD ; 50% of all SHIELD received is converted to max HP
+- Hatch Bundle Double Up Gift: 5 → 10% chance to get a GOLDEN_EGG
+- New Double Up Gifts: EMERA and GOLDEN_EMERA
 
 # Gameplay
 

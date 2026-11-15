@@ -3304,7 +3304,7 @@
 		"TOOLBOX": "向你的搭档赠送3件随机的工具类道具。",
 		"BERRIES_GIFT": "向你的搭档赠送7枚随机的$t(item.BERRIES)。",
 		"SWEETS_GIFT": "向你的搭档赠送7枚随机的$t(item.SWEETS)。",
-		"HATCH_BUNDLE": "向你的搭档赠送2只随机孵化宝可梦。有5%的概率改为获得一枚金蛋。",
+		"HATCH_BUNDLE": "向你的搭档赠送2只随机孵化宝可梦。有10%的概率改为获得一枚金蛋。",
 		"TICKET_BUNDLE": "向你的搭档赠送一套包含1张$t(item.EXCHANGE_TICKET)，1张$t(item.RECYCLE_TICKET)和1张$t(item.BRONZE_DOJO_TICKET)的礼包。",
 		"DITTO_GIFT": "向你的搭档赠送一只百变怪。你的搭档的备战区上需要有至少一个空位才能接收。",
 		"GEMS_BUNDLE": "向你的搭档赠送3枚随机共鸣宝石。",

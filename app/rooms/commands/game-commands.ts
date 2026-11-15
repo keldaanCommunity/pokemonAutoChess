@@ -1611,13 +1611,28 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       givers.forEach((p) => {
         const giftChoices: [Gift, Gift, Gift] = [
           pickRandomIn(
-            GiftsTier1.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier1.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.EMERA ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           ),
           pickRandomIn(
-            GiftsTier2.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier2.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.GOLDEN_EMERA ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           ),
           pickRandomIn(
-            GiftsTier3.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier3.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.DELUXE_BOX ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           )
         ]
 

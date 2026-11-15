@@ -275,6 +275,7 @@ export enum Item {
   RAINBOW_SWIRL_FLAVOR = "RAINBOW_SWIRL_FLAVOR",
   EGG_FOR_SELL = "EGG_FOR_SELL",
   EMERA = "EMERA",
+  GOLDEN_EMERA = "GOLDEN_EMERA",
   COIN = "COIN",
   NUGGET = "NUGGET",
   BIG_NUGGET = "BIG_NUGGET",
@@ -1310,7 +1311,7 @@ export const Dishes = [
   Item.BALM_MUSHROOM,
   Item.RICE,
   Item.RAINBOW_BEAN,
-  Item.BERRIES,
+  Item.BERRIES
 ] satisfies Item[]
 
 export type Dish = (typeof Dishes)[number]
@@ -1419,6 +1420,8 @@ export const Gifts = [
   Item.PRETTY_BOX,
   Item.COLLECTION_BOX,
   Item.LARGE_EXP_GIFT,
+  Item.EMERA,
+  Item.GOLDEN_EMERA,
   Item.UNCOMMON_GIFT,
   Item.RARE_GIFT,
   Item.COMMON_GIFT,

@@ -81,10 +81,10 @@ const giftAmountOfPokemon =
   }
 
 const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
-  if (chance(0.05)) {
+  if (chance(0.1)) {
     giveRandomEgg(toPlayer, true)
   } else {
-    // 5% chance of getting a golden egg
+    // 10% chance of getting a golden egg
     const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
       (p) => getPokemonData(p).stars === 1
     )
@@ -256,6 +256,10 @@ const giftXP = (amount: number) => (toPlayer: Player) => {
   }
 }
 
+const giftEmera = (amount: number) => (toPlayer: Player) => {
+  toPlayer.atlasManager.emera += amount
+}
+
 type GiftEffect = (toPlayer: Player, fromPlayer: Player, room: GameRoom) => void
 
 export const GiftEffects: {
@@ -297,7 +301,9 @@ export const GiftEffects: {
   [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
   [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
   [Item.SMALL_EXP_GIFT]: giftXP(8),
-  [Item.LARGE_EXP_GIFT]: giftXP(24)
+  [Item.LARGE_EXP_GIFT]: giftXP(24),
+  [Item.EMERA]: giftEmera(1),
+  [Item.GOLDEN_EMERA]: giftEmera(3)
 }
 
 export const openGift = (
