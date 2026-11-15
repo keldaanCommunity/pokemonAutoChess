@@ -1024,7 +1024,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (target.passive === Passive.PSYDUCK && chance(0.1, this)) {
+    if (target.passive === Passive.PSYDUCK && chance(0.1, target)) {
       target.status.triggerConfusion(3000, target, target)
     }
 
