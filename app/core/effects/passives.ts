@@ -1,4 +1,4 @@
-import { BOARD_WIDTH } from "../../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
 import { StatusConfigs } from "../../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
@@ -956,7 +956,11 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to ground, fully dig a hole at their position
     if (synergyCopied === Synergy.GROUND) {
-      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] =
+      const y =
+        entity.team === Team.RED_TEAM
+          ? BOARD_HEIGHT - 1 - entity.positionY
+          : entity.positionY
+      player.groundHoles[y * BOARD_WIDTH + entity.positionX] =
         SynergyConfigs.GROUND.maxDepth
     }
 
