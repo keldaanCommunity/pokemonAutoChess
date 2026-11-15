@@ -3775,7 +3775,9 @@
 		"PAL": "우리는 모두 친구",
 		"BODYBUILDER": "보디빌더",
 		"GUILD_HERO": "길드의 영웅",
-		"BESTIE": "베스트프렌드"
+		"BESTIE": "베스트프렌드",
+		"ASCENDANT": "승천자",
+		"RADIANT": "광휘"
 	},
 	"title_description": {
 		"NOVICE": "첫 게임을 플레이하기",
@@ -3876,7 +3878,9 @@
 		"PAL": "파트너와 함께 포켓단즈 이벤트에 참여하기",
 		"BODYBUILDER": "FIGHTING 포켓몬을 대기석에서 수련시켜 ATK을 40 올리기",
 		"GUILD_HERO": "탐험 리더보드를 1위로 마무리하기",
-		"BESTIE": "파트너와 함께 포켓단즈 리더보드에서 1위로 마무리하기"
+		"BESTIE": "파트너와 함께 포켓단즈 리더보드에서 1위로 마무리하기",
+		"ASCENDANT": "무지개 봉우리 이벤트를 완료하기",
+		"RADIANT": "무지개 봉우리 이벤트를 가장 먼저 완료하기"
 	},
 	"weather": {
 		"NEUTRAL": "평범한 날씨",
@@ -4774,7 +4778,7 @@
 		},
 		"items": {
 			"item_recipes": "지닌물건 조합법",
-			"craftable_items_description": "두 재료를 조합해서 강력한 지닌물건을 만드세요!",			
+			"craftable_items_description": "두 재료를 조합해서 강력한 지닌물건을 만드세요!",
 			"special_items_description": "이 도구들은 특정 포켓몬만 사용 가능합니다.",
 			"tools_description": "ARTIFICIAL 시너지를 활성화하면 인조 도구를 얻을 수 있습니다. 세 가지 도구가 랜덤하게 결정되며, 포켓몬을 대기석에 두면 해제할 수 있습니다.",
 			"weather_rocks": "날씨 돌",
@@ -4997,6 +5001,18 @@
 		"help1": "랭크 게임을 플레이한 이후, 성적에 따라 포인트가 지급됩니다.",
 		"help2": "500 포인트를 향해 1등을 노리고, 완주해서 칭호를 얻으세요!",
 		"runners": "참가자",
+		"finishers": "완주자"
+	},
+	"rainbow_peak": {
+		"title": "무지개 봉우리",
+		"points": "{{points}} 포인트",
+		"your_points": "내 포인트: {{points}}",
+		"current_synergy": "현재 시너지: {{synergy}}",
+		"instructions": "한 번에 하나의 시너지로 무지개 봉우리를 정복하세요!",
+		"help1": "현재 강조된 시너지가 최고 단계인 상태에서 클래식 게임에서 1위로 완료하면 포인트를 얻고 다음 시너지로 이동합니다.",
+		"help2": "BABY는 특별합니다: 팀에 Hatch 포켓몬을 3마리 이상 포함하고 승리해야 합니다.",
+		"help3": "STELLAR가 마지막 단계입니다! STELLAR를 활성화한 상태로 승리하여 이벤트를 완료하세요!",
+		"runners": "등반자",
 		"finishers": "완주자"
 	},
 	"events_reset_info": "점수는 UTC 기준 한 달의 첫 날 자정마다 초기화되며, 현재 {{resetCountdown}} 남았습니다. 이벤트 리더보드는 10분마다 갱신됩니다.",

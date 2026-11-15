@@ -3442,7 +3442,9 @@
 		"AQUARIOPHILE": "Acquariofilo",
 		"POFFIN_MASTER": "Maestro dei Poffin",
 		"TOP_GUN": "Top Gun",
-		"SCOUT": "Scout"
+		"SCOUT": "Scout",
+		"ASCENDANT": "Ascendente",
+		"RADIANT": "Raggiante"
 	},
 	"title_description": {
 		"NOVICE": "Gioca la tua prima partita",
@@ -3533,7 +3535,9 @@
 		"AQUARIOPHILE": "Usa nello stesso team $t(pkm.BASCULIN_RED), $t(pkm.BASCULIN_BLUE) e $t(pkm.BASCULIN_WHITE)",
 		"POFFIN_MASTER": "Sforna un poffin con 3 bacche dorate diverse al suo interno",
 		"TOP_GUN": "Arriva a Mach 10 con un MACH_RIBBON",
-		"SCOUT": "Dai al tuo team almeno 5 strumenti ottenuti partendo dalla SILK_SCARF"
+		"SCOUT": "Dai al tuo team almeno 5 strumenti ottenuti partendo dalla SILK_SCARF",
+		"ASCENDANT": "Completa l'evento Picchi Arcobaleno",
+		"RADIANT": "Completa l'evento Picchi Arcobaleno per primo"
 	},
 	"weather": {
 		"NEUTRAL": "Tempo calmo",
@@ -4531,6 +4535,18 @@
 		"help2": "Sii il primo a raggiungere 500 punti per vincere la corsa e ottenere un titolo esclusivo !",
 		"runners": "Corridori",
 		"finishers": "Arrivati"
+	},
+	"rainbow_peak": {
+		"title": "Picchi Arcobaleno",
+		"points": "{{points}} punti",
+		"your_points": "I tuoi punti: {{points}}",
+		"current_synergy": "Sinergia attuale: {{synergy}}",
+		"instructions": "Scala i Picchi Arcobaleno, una sinergia alla volta!",
+		"help1": "Termina al 1° posto in una partita Classica mentre la sinergia attualmente evidenziata è al suo livello massimo per guadagnare un punto e passare alla sinergia successiva.",
+		"help2": "BABY è speciale: devi vincere con almeno 3 Pokémon Hatch nella tua squadra.",
+		"help3": "STELLAR sarà il tuo passo finale! Vinci con STELLAR attiva per completare l'evento!",
+		"runners": "Scalatori",
+		"finishers": "Finisher"
 	},
 	"events_reset_info": "Tutti i punteggi vengono resettati a mezzanote UTC del primo giorno di ogni mese, ossia tra {{resetCountdown}}. La classifica dell'evento si aggiorna ogni 10 minuti.",
 	"stage_type": {

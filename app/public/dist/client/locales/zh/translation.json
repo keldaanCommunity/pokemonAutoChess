@@ -3775,7 +3775,9 @@
 		"BESTIE": "挚友",
 		"LEGIONNAIRE": "军团长",
 		"FIVE_STARS": "★★★★★",
-		"BODYBUILDER": "健美者"
+		"BODYBUILDER": "健美者",
+		"ASCENDANT": "登顶者",
+		"RADIANT": "光辉者"
 	},
 	"title_description": {
 		"NOVICE": "玩一局游戏",
@@ -3876,7 +3878,9 @@
 		"BESTIE": "在口袋之友活动结束时和你的搭档位于排行榜第一名",
 		"LEGIONNAIRE": "以至少8只列阵兵跟班组成阵型",
 		"FIVE_STARS": "派出一只五星宝可梦出战",
-		"BODYBUILDER": "使一只FIGHTING宝可梦在一次备战区训练后ATK增幅额度达到40。"
+		"BODYBUILDER": "使一只FIGHTING宝可梦在一次备战区训练后ATK增幅额度达到40。",
+		"ASCENDANT": "完成彩虹之巅活动",
+		"RADIANT": "第一个完成彩虹之巅活动"
 	},
 	"weather": {
 		"NEUTRAL": "无天气",
@@ -5284,6 +5288,18 @@
 		"not_confirmed": "你的搭档也需要输入你的用户名以确定队伍。",
 		"enter_pal_name": "输入搭档用户名",
 		"change_pal": "更换搭档"
+	},
+	"rainbow_peak": {
+		"title": "彩虹之巅",
+		"points": "{{points}} 分",
+		"your_points": "你的分数：{{points}}",
+		"current_synergy": "当前协同：{{synergy}}",
+		"instructions": "一次一个协同，攀登彩虹之巅！",
+		"help1": "在经典模式中以第1名完赛，同时当前高亮的协同达到最高层级，即可获得1分并进入下一个协同。",
+		"help2": "BABY 很特别：你需要队伍中至少有3只 Hatch 宝可梦并获胜。",
+		"help3": "STELLAR 将是你的最后一步！在 STELLAR 激活的情况下获胜即可完成活动！",
+		"runners": "攀登者",
+		"finishers": "登顶者"
 	},
 	"events_reset_info": "每月第一天的午夜12点（UTC）重置所有分数，当前距离重置还有{{resetCountdown}}。活动排行榜每10分钟刷新一次。",
 	"stage_type": {

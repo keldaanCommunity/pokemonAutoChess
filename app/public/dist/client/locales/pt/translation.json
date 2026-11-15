@@ -3768,7 +3768,9 @@
 		"MOLE": "Toupeira",
 		"PAL": "Parceiro",
 		"LEGIONNAIRE": "Legionário",
-		"FIVE_STARS": "★★★★★"
+		"FIVE_STARS": "★★★★★",
+		"ASCENDANT": "Ascendente",
+		"RADIANT": "Radiante"
 	},
 	"title_description": {
 		"NOVICE": "Jogue seu primeiro jogo",
@@ -3867,7 +3869,9 @@
 		"LUCKY": "Obtenha um prêmio de 5 GOLD ou mais com uma AMULET_COIN",
 		"PAL": "Jogue em Dobles com seu parceiro durante o evento Poképals",
 		"LEGIONNAIRE": "Forme um Falinks com 8 ou mais soldados",
-		"FIVE_STARS": "Jogue com um Pokémon de cinco estrelas em sua equipe"
+		"FIVE_STARS": "Jogue com um Pokémon de cinco estrelas em sua equipe",
+		"ASCENDANT": "Conclua o evento Picos Arco-Íris",
+		"RADIANT": "Conclua o evento Picos Arco-Íris em primeiro lugar"
 	},
 	"weather": {
 		"NEUTRAL": "Tempo calmo",
@@ -4927,6 +4931,18 @@
 		"help2": "Seja o primeiro a atingir 500 pontos para vencer a corrida e ganhar um título exclusivo!",
 		"runners": "Corredores",
 		"finishers": "Finalistas"
+	},
+	"rainbow_peak": {
+		"title": "Picos Arco-Íris",
+		"points": "{{points}} pontos",
+		"your_points": "Seus pontos: {{points}}",
+		"current_synergy": "Sinergia atual: {{synergy}}",
+		"instructions": "Escalone os Picos Arco-Íris, uma sinergia de cada vez!",
+		"help1": "Termine em 1º lugar em uma partida Clássica enquanto sua sinergia atualmente destacada estiver no nível máximo para ganhar um ponto e avançar para a próxima sinergia.",
+		"help2": "BABY é especial: você precisa vencer com pelo menos 3 Pokémon Hatch no seu time.",
+		"help3": "STELLAR será seu passo final! Vença com STELLAR ativa para completar o evento!",
+		"runners": "Escaladores",
+		"finishers": "Finalizadores"
 	},
 	"events_reset_info": "Todas as pontuações serão zeradas à meia-noite UTC do primeiro dia de cada mês, que será em {{resetCountdown}}. A classificação do evento é atualizada a cada 10 minutos.",
 	"stage_type": {

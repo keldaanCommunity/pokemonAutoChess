@@ -1,8 +1,9 @@
-import { getBaseAltForm } from "../config"
-import { ExpPerExpeditionRank } from "../config/game/expeditions"
-import { getExpeditionData, getPlayerExpeditions } from "../core/expeditions"
-import { notificationsService } from "../services/notifications"
-import { Title } from "../types"
+import { getBaseAltForm } from "../../config"
+import { ExpPerExpeditionRank } from "../../config/game/expeditions"
+import type Player from "../../models/colyseus-models/player"
+import { giveUserExp } from "../../models/mongo-models/user-metadata"
+import { notificationsService } from "../../services/notifications"
+import { Title } from "../../types"
 import {
   type BattleMissionData,
   type DeliveryMissionData,
@@ -11,11 +12,10 @@ import {
   ExpeditionType,
   type ExplorationMissionData,
   type RescueMissionData
-} from "../types/enum/Expedition"
-import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
-import { schemaValues } from "../utils/schemas"
-import type Player from "./colyseus-models/player"
-import { giveUserExp } from "./mongo-models/user-metadata"
+} from "../../types/enum/Expedition"
+import type { IUserMetadataMongo } from "../../types/interfaces/UserMetadata"
+import { schemaValues } from "../../utils/schemas"
+import { getExpeditionData, getPlayerExpeditions } from "../expeditions"
 
 export function updatePlayerExpeditionsAfterGame(
   player: Player,

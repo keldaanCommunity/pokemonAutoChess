@@ -1579,7 +1579,9 @@
 		"ARCHEOLOGIST": "Archeoloog",
 		"ALCHEMIST": "Alchimist",
 		"DENTIST": "Tandarts",
-		"FISHERMAN": "Visser"
+		"FISHERMAN": "Visser",
+		"ASCENDANT": "Opkomend",
+		"RADIANT": "Stralend"
 	},
 	"title_description": {
 		"NOVICE": "Speel je eerste spel",
@@ -1636,7 +1638,9 @@
 		"SHINY_SEEKER": "Heb meer dan 30 glimmende Pokemon-avatars",
 		"ARCHEOLOGIST": "Ontcijfer de geheime boodschap van de Unowns",
 		"DENTIST": "Bezit de boze Arbok",
-		"FISHERMAN": "Neem een Gyarados"
+		"FISHERMAN": "Neem een Gyarados",
+		"ASCENDANT": "Voltooi het Regenboogtoppen-evenement",
+		"RADIANT": "Voltooi het Regenboogtoppen-evenement als eerste"
 	},
 	"weather": {
 		"NEUTRAL": "Rustig weer",
@@ -2033,5 +2037,17 @@
 		"town": {},
 		"regions": {},
 		"data": {}
+	},
+	"rainbow_peak": {
+		"title": "Regenboogtoppen",
+		"points": "{{points}} punten",
+		"your_points": "Jouw punten: {{points}}",
+		"current_synergy": "Huidige synergie: {{synergy}}",
+		"instructions": "Beklim de Regenboogtoppen, één synergie tegelijk!",
+		"help1": "Eindig op plek 1 in een Klassiek potje terwijl je momenteel gemarkeerde synergie op zijn hoogste niveau staat om een punt te verdienen en naar de volgende synergie te gaan.",
+		"help2": "BABY is speciaal: je moet winnen met minstens 3 Hatch-Pokémon in je team.",
+		"help3": "STELLAR is je laatste stap! Win met STELLAR actief om het evenement te voltooien!",
+		"runners": "Klimmers",
+		"finishers": "Finishers"
 	}
 }

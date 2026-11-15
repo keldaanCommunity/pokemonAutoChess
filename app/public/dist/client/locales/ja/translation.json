@@ -2543,7 +2543,9 @@
 		"ARCHEOLOGIST": "考古学者",
 		"ALCHEMIST": "錬金術師",
 		"DENTIST": "歯医者",
-		"FISHERMAN": "漁師"
+		"FISHERMAN": "漁師",
+		"ASCENDANT": "昇天者",
+		"RADIANT": "輝く者"
 	},
 	"title_description": {
 		"NOVICE": "初めてのゲームをプレイする",
@@ -2600,7 +2602,9 @@
 		"SHINY_SEEKER": "30 個以上の光るポケモンのアバターを持っています",
 		"ARCHEOLOGIST": "アンノーンの秘密メッセージを解読する",
 		"DENTIST": "怒っているアーボックを所有する",
-		"FISHERMAN": "ギャラドスをゲット"
+		"FISHERMAN": "ギャラドスをゲット",
+		"ASCENDANT": "レインボーピークスのイベントを完了する",
+		"RADIANT": "レインボーピークスのイベントを最初に完了する"
 	},
 	"weather": {
 		"NEUTRAL": "穏やかな天気",
@@ -3135,5 +3139,17 @@
 		"town": {},
 		"regions": {},
 		"data": {}
+	},
+	"rainbow_peak": {
+		"title": "レインボーピークス",
+		"points": "{{points}}ポイント",
+		"your_points": "あなたのポイント: {{points}}",
+		"current_synergy": "現在のシナジー: {{synergy}}",
+		"instructions": "シナジーを1つずつ制覇してレインボーピークスを登りましょう！",
+		"help1": "現在ハイライトされているシナジーを最大ティアにした状態で、クラシックゲームで1位になるとポイントを獲得し、次のシナジーへ進みます。",
+		"help2": "BABYは特別です：チームにHatchのポケモンを3匹以上入れて勝利する必要があります。",
+		"help3": "STELLARが最後のステップです！STELLARを発動した状態で勝利してイベントを完了しましょう！",
+		"runners": "登山者",
+		"finishers": "完走者"
 	}
 }

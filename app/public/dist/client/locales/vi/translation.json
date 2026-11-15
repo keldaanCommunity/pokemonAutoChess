@@ -1672,7 +1672,7 @@
 			"passive": "Bị động"
 		},
 		"items": {
-			"craftable_items_description": "Kết hợp 2 items để hợp thành items mạnh hơn",			
+			"craftable_items_description": "Kết hợp 2 items để hợp thành items mạnh hơn",
 			"special_items_description": "Những vật phẩm này là độc quyền cho một số Pokémon và không thể thu được bằng cách khác.",
 			"tools_description": "bộ ARTIFICIAL sẽ cho bạn exclusive items  khi được kích hoạt. Ba trong số các items đó sẽ được họn ngẫu nhiên cho các Player vào đầu game",
 			"weather_rocks_description": "Các Weather rock có thể tìm thấy sau khi chiến đấu dưới một loại thời tiết nhất định với bộ ROCK đang được kích hoạt, và cung cấp các hiệu ứng tăng cường cho đội của bạn khi loại thời tiết này đang hoạt động. Các hiệu ứng của chúng có thể được cộng dồn.",
@@ -1734,5 +1734,25 @@
 			"avatar_emotes": "Chuyển đổi menu biểu cảm",
 			"avatar_show_emote": "Kích hoạt biểu cảm "
 		}
+	},
+	"rainbow_peak": {
+		"title": "Đỉnh Cầu Vồng",
+		"points": "{{points}} điểm",
+		"your_points": "Điểm của bạn: {{points}}",
+		"current_synergy": "Synergy hiện tại: {{synergy}}",
+		"instructions": "Chinh phục Đỉnh Cầu Vồng, từng synergy một!",
+		"help1": "Kết thúc ở vị trí số 1 trong một trận Classic khi synergy đang được làm nổi bật của bạn đạt bậc tối đa để nhận 1 điểm và chuyển sang synergy tiếp theo.",
+		"help2": "BABY rất đặc biệt: bạn cần thắng với ít nhất 3 Pokémon Hatch trong đội.",
+		"help3": "STELLAR sẽ là bước cuối cùng của bạn! Thắng với STELLAR được kích hoạt để hoàn thành sự kiện!",
+		"runners": "Người leo núi",
+		"finishers": "Người chinh phục"
+	},
+	"title": {
+		"ASCENDANT": "Thăng Thiên",
+		"RADIANT": "Rực Rỡ"
+	},
+	"title_description": {
+		"ASCENDANT": "Hoàn thành sự kiện Đỉnh Cầu Vồng",
+		"RADIANT": "Hoàn thành sự kiện Đỉnh Cầu Vồng đầu tiên"
 	}
 }

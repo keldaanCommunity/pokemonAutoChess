@@ -3406,7 +3406,9 @@
 		"FINISHER": "Finisher",
 		"VICTORIOUS": "Siegreich",
 		"MOLE": "Maulwurf",
-		"GUILDMASTER": "Gildenmeister"
+		"GUILDMASTER": "Gildenmeister",
+		"ASCENDANT": "Aufsteigend",
+		"RADIANT": "Strahlend"
 	},
 	"title_description": {
 		"NOVICE": "Spielen Sie Ihr erstes Spiel",
@@ -3493,7 +3495,9 @@
 		"FINISHER": "Schließe eine Siegesstraßen Rennen ab",
 		"VICTORIOUS": "Schließe ein Siegesstraßen Rennen als Erster ab",
 		"MOLE": "Grabe dein gesamtes Feld komplett aus.",
-		"POFFIN_MASTER": "Koche eine POFFIN aus drei verschiedenen goldenen Beeren"
+		"POFFIN_MASTER": "Koche eine POFFIN aus drei verschiedenen goldenen Beeren",
+		"ASCENDANT": "Schließe das Regenbogen-Gipfel-Ereignis ab",
+		"RADIANT": "Schließe das Regenbogen-Gipfel-Ereignis als Erster ab"
 	},
 	"weather": {
 		"NEUTRAL": "Bewölkt",
@@ -4433,6 +4437,18 @@
 		"help1": "Ranglistenspiele gewährt dir Punkte basierend auf deiner Platzierung.",
 		"help2": "Sei der Erste der 500 Punkte erreicht um das Rennen zu gewinnen und einen exclusiven Titel zu erhalten!",
 		"runners": "Teilnehmer",
+		"finishers": "Finisher"
+	},
+	"rainbow_peak": {
+		"title": "Regenbogen-Gipfel",
+		"points": "{{points}} Punkte",
+		"your_points": "Deine Punkte: {{points}}",
+		"current_synergy": "Aktuelle Synergie: {{synergy}}",
+		"instructions": "Erklimme die Regenbogen-Gipfel, eine Synergie nach der anderen!",
+		"help1": "Beende ein Klassik-Spiel auf Platz 1, während deine aktuell hervorgehobene Synergie ihre höchste Stufe erreicht, um einen Punkt zu verdienen und zur nächsten Synergie zu wechseln.",
+		"help2": "BABY ist besonders: Du musst mit mindestens 3 Hatch-Pokémon in deinem Team gewinnen.",
+		"help3": "STELLAR ist dein letzter Schritt! Gewinne mit aktivem STELLAR, um das Event abzuschließen!",
+		"runners": "Kletterer",
 		"finishers": "Finisher"
 	},
 	"events_reset_info": "Alle Punkte werden am ersten Tag des Monats um Mitternacht zurückgesetzt, das ist in {{resetCountdown}}. Die Ereignis-Rangliste wird alle 10 Minuten aktualisiert.",

@@ -3731,7 +3731,9 @@
 		"GUILDMASTER": "Maestro del Gremio",
 		"FIVE_STARS": "★★★★★",
 		"PAL": "Compañero",
-		"BODYBUILDER": "Físicoculturista"
+		"BODYBUILDER": "Físicoculturista",
+		"ASCENDANT": "Ascendente",
+		"RADIANT": "Radiante"
 	},
 	"title_description": {
 		"NOVICE": "Juega tu primera partida",
@@ -3831,7 +3833,9 @@
 		"LEGIONNAIRE": "Haz una formación de Falinks con 8 soldados o más",
 		"FIVE_STARS": "Juega con un Pokémon de cinco estrellas en tu equipo",
 		"PAL": "Juega en Dobles con tu compañero durante el evento Poképals",
-		"BODYBUILDER": "Consigue un Pokémon FIGHTING a +40 de ATK después de entrenar en la banca."
+		"BODYBUILDER": "Consigue un Pokémon FIGHTING a +40 de ATK después de entrenar en la banca.",
+		"ASCENDANT": "Completa el evento Picos Arcoíris",
+		"RADIANT": "Completa el evento Picos Arcoíris en primer lugar"
 	},
 	"weather": {
 		"NEUTRAL": "Clima tranquilo",
@@ -4883,6 +4887,18 @@
 		"help2": "¡Sé el primero en llegar a 500 puntos para ganar la carrera y obtener un título exclusivo!",
 		"runners": "Participantes",
 		"finishers": "Campeones"
+	},
+	"rainbow_peak": {
+		"title": "Picos Arcoíris",
+		"points": "{{points}} puntos",
+		"your_points": "Tus puntos: {{points}}",
+		"current_synergy": "Sinergia actual: {{synergy}}",
+		"instructions": "¡Escala los Picos Arcoíris, una sinergia a la vez!",
+		"help1": "Termina en 1.er lugar en una partida Clásica mientras tu sinergia resaltada actualmente está en su nivel máximo para ganar un punto y pasar a la siguiente sinergia.",
+		"help2": "BABY es especial: debes ganar con al menos 3 Pokémon Hatch en tu equipo.",
+		"help3": "¡STELLAR será tu paso final! Gana con STELLAR activa para completar el evento.",
+		"runners": "Escaladores",
+		"finishers": "Finalizadores"
 	},
 	"events_reset_info": "Todos los puntos se actualizarán las 00:00 UTC el primer día de cada mes, faltan {{resetCountdown}}. El marcador se actualiza cada 10 minutos.",
 	"stage_type": {

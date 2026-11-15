@@ -1,6 +1,9 @@
-import { type GameEvent, GameEvents } from "../../types/events"
+import { SynergyArray } from "../../types/enum/Synergy"
+import { GameEvent, GameEvents } from "../../types/events"
 
 export const VICTORY_ROAD_MAX_EVENT_POINTS = 500
+
+export const RAINBOW_PEAK_MAX_EVENT_POINTS = SynergyArray.length
 
 export const VictoryRoadPointsPerRank = [
   +15, // 1st

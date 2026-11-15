@@ -332,6 +332,12 @@ async function resetEventScores() {
           "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
         )
         break
+      case GameEvent.RAINBOW_PEAK:
+        matchMaker.presence.publish(
+          "announcement",
+          "Rainbow Peak has started! Win Classic games with every synergy at its max tier to reach the summit!"
+        )
+        break
     }
   } catch (e) {
     logger.error("Error during event reset scores:", e)

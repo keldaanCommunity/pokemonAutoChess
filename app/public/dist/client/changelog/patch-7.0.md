@@ -53,6 +53,12 @@ We introduce what will be the final 32th synergy to Pokémon Auto Chess: STELLAR
 
 This special synergy is only given through special items and Pokémon. Its effect is to increase by 1 the synergy level of all active synergies, and Stellar Pokémon benefit from the effects of all active synergies. Stellar cannot be a symbol on portals. A STELLAR_GEM exists but cannot be sold by Sableye town encounter.
 
+# New monthly event: Rainbow Peak
+
+> Thanks to bigweff for this community challenge idea
+
+Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game while your currently highlighted synergy is at its max tier to earn a point and move to the next synergy. Do it with every synergy and finish with a win with STELLAR active to complete the event!
+
 # Changes to Synergies
 
 - Fire 8 rework: no longer gives Fire Shard. After 10 seconds, the whole board is set on fire and BURN all Pokémon, allies and enemies, and your FIRE Pokémon gain 15 SPEED.
@@ -98,4 +104,4 @@ This special synergy is only given through special items and Pokémon. Its effec
 
 # Misc
 
-- New titles: Terastal, Awakened, Mad Titan
+- New titles: Terastal, Awakened, Mad Titan, Ascendant, Radiant

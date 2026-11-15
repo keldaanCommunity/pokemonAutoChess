@@ -816,7 +816,7 @@
 	"rank": "Ranga",
 	"player": "Gracz",
 	"team": "Zespół",
-	"welcome": "Witaj",	
+	"welcome": "Witaj",
 	"join": "Dołącz",
 	"tournament": {
 		"starts_at": "Zaczyna się o"
@@ -918,5 +918,25 @@
 		"move_row_up": "Przesuń wiersz w góre",
 		"move_row_down": "Przesuń wiersz w dół",
 		"delete_row": "Usuń wiersz"
+	},
+	"rainbow_peak": {
+		"title": "Tęczowe Szczyty",
+		"points": "{{points}} punktów",
+		"your_points": "Twoje punkty: {{points}}",
+		"current_synergy": "Aktualna synergia: {{synergy}}",
+		"instructions": "Zdobywaj Tęczowe Szczyty, jedną synergię na raz!",
+		"help1": "Ukończ grę Klasyczną na 1. miejscu, gdy aktualnie podświetlona synergia jest na maksymalnym poziomie, aby zdobyć punkt i przejść do następnej synergii.",
+		"help2": "BABY jest wyjątkowe: musisz wygrać z co najmniej 3 Pokémonami Hatch w drużynie.",
+		"help3": "STELLAR będzie Twoim ostatnim krokiem! Wygraj z aktywną STELLAR, aby ukończyć wydarzenie!",
+		"runners": "Wspinacze",
+		"finishers": "Finaliści"
+	},
+	"title": {
+		"ASCENDANT": "Wstępujący",
+		"RADIANT": "Promienny"
+	},
+	"title_description": {
+		"ASCENDANT": "Ukończ wydarzenie Tęczowe Szczyty",
+		"RADIANT": "Ukończ wydarzenie Tęczowe Szczyty jako pierwszy"
 	}
 }

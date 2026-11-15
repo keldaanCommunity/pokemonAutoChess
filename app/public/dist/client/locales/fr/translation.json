@@ -3771,7 +3771,9 @@
 		"GUILDMASTER": "Maître de Guilde",
 		"LEGIONNAIRE": "Légionnaire",
 		"PAL": "Équipier",
-		"FIVE_STARS": "★★★★★"
+		"FIVE_STARS": "★★★★★",
+		"ASCENDANT": "Ascendant",
+		"RADIANT": "Radieux"
 	},
 	"title_description": {
 		"NOVICE": "Jouez votre première partie",
@@ -3871,7 +3873,9 @@
 		"GUILDMASTER": "Compléter une expédition de rang S",
 		"LEGIONNAIRE": "Réaliser une formation composée d'un Hexadron et de 8 troupes ou plus.",
 		"PAL": "Jouez une Partie de Double Up avec votre Équipier durant un évènement Pokéquipiers.",
-		"FIVE_STARS": "Jouez avec un Pokémon ayant 5 étoiles dans votre équipe."
+		"FIVE_STARS": "Jouez avec un Pokémon ayant 5 étoiles dans votre équipe.",
+		"ASCENDANT": "Terminez l'évènement Cime Arc-en-Ciel",
+		"RADIANT": "Terminez premier à l'évènement Cime Arc-en-Ciel"
 	},
 	"weather": {
 		"NEUTRAL": "Temps calme",
@@ -5084,6 +5088,18 @@
 		"BATTLE_WIN_STREAK_DESCRIPTION": "Enchaînez {{amount}} manches victorieuses ou plus",
 		"DELIVERY_DESCRIPTION": "Ayez {{quantity}} {{item}} dans votre inventaire ou équippé sur un de vos Pokémon à la fin de la partie.",
 		"reward": "Récompense: {{points}} XP"
+	},
+	"rainbow_peak": {
+		"title": "Cime Arc-en-Ciel",
+		"points": "{{points}} points",
+		"your_points": "Vos points : {{points}}",
+		"current_synergy": "Synergie actuelle : {{synergy}}",
+		"instructions": "Escaladez la Cime Arc-en-Ciel, une synergie à la fois !",
+		"help1": "Terminez à la 1re place d'une partie Classique alors que votre synergie actuellement mise en évidence est à son niveau maximal pour gagner un point et passer à la synergie suivante.",
+		"help2": "BABY est spécial : vous devez gagner avec au moins 3 Pokémon Hatch dans votre équipe.",
+		"help3": "STELLAR sera votre dernière étape ! Gagnez avec STELLAR activée pour atteindre les étoiles et terminer l'événement !",
+		"runners": "Grimpeurs",
+		"finishers": "Finisseurs"
 	},
 	"events_reset_info": "Tous les scores seront réinitialisés à minuit UTC au premier jour de chaque mois, c'est à dire dans {{resetCountdown}}. Le classement d'événement est actualisé toutes les dix minutes.",
 	"notification": {

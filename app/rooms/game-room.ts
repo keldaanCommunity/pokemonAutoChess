@@ -11,6 +11,7 @@ import {
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
   PokepalsPointsPerRank,
+  RAINBOW_PEAK_MAX_EVENT_POINTS,
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
   VICTORY_ROAD_MAX_EVENT_POINTS,
@@ -20,6 +21,11 @@ import { type AtlasNodeId, STAGE_ATLAS_UNLOCKED } from "../config/game/atlas"
 import { GADGETS } from "../config/game/gadgets"
 import { unequipItems } from "../core/effects/items"
 import { computeElo } from "../core/elo"
+import { updatePlayerExpeditionsAfterGame } from "../core/events/expeditions"
+import {
+  getRainbowPeakTargetSynergy,
+  isRainbowPeakObjectiveComplete
+} from "../core/events/rainbow-peak"
 import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
 import {
@@ -34,7 +40,6 @@ import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
-import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
@@ -1136,6 +1141,49 @@ export default class GameRoom extends Room<{ state: GameState }> {
         } catch (error) {
           logger.error("Error updating event points", error)
         }
+      }
+    }
+
+    if (
+      usr.eventFinishTime == null &&
+      getCurrentGameEvent() === GameEvent.RAINBOW_PEAK &&
+      this.state.gameMode === GameMode.CLASSIC &&
+      rank === 1
+    ) {
+      try {
+        const targetSynergy = getRainbowPeakTargetSynergy(
+          player.id,
+          usr.eventPoints
+        )
+        if (
+          targetSynergy &&
+          isRainbowPeakObjectiveComplete(player, targetSynergy)
+        ) {
+          usr.eventPoints = Math.min(
+            usr.eventPoints + 1,
+            RAINBOW_PEAK_MAX_EVENT_POINTS
+          )
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          if (usr.eventPoints >= RAINBOW_PEAK_MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+            usr.markModified("eventFinishTime")
+
+            const nbFinishers = await UserMetadata.countDocuments({
+              eventFinishTime: { $exists: true, $ne: null }
+            })
+            if (nbFinishers === 0) {
+              player.titles.add(Title.RADIANT)
+              this.presence.publish(
+                "announcement",
+                `${player.name} reached the summit of Rainbow Peak first!`
+              )
+            }
+            player.titles.add(Title.ASCENDANT)
+          }
+          shouldRefetchEventLeaderboard = true
+        }
+      } catch (error) {
+        logger.error("Error updating Rainbow Peak event points", error)
       }
     }
 
