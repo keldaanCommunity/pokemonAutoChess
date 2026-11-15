@@ -189,14 +189,9 @@ export default abstract class PokemonState {
         physicalDamage += pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
       }
 
-      const physicalDamageBeforeGlove = physicalDamage
-      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
-        physicalDamage += 0.08 * target.maxHP
-      }
-
       // Punching Glove is ON_HIT, so it needs the attack to land
-      if (!isAttackSuccessful) {
-        physicalDamage = physicalDamageBeforeGlove
+      if (isAttackSuccessful && pokemon.items.has(Item.PUNCHING_GLOVE)) {
+        physicalDamage += 0.08 * target.maxHP
       }
 
       // rounding damage after all computations done
