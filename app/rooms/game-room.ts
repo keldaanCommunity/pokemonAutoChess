@@ -1368,7 +1368,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         pokemon.hasEvolution &&
         pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player)
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player, this.state)
         if (pokemonEvolved) {
           hasEvolved = true
         }

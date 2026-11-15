@@ -136,6 +136,7 @@
 - Fixed Ogerpon Cornerstone FLINCH duration using Ogerpon's team reductions instead of the target's
 - Fixed Burning Jealousy taking more ATK than the buff gave from a Big Eater Belt holder
 - Fixed swapping a Mantyke copying its items and stacking two units on one cell
+- Fixed a case of dish duplication on count-based evolutions during a fight
 
 # Misc
 
