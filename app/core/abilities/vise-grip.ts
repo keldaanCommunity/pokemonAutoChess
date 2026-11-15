@@ -16,14 +16,15 @@ export class ViseGripStrategy extends AbilityStrategy {
     target.status.triggerLocked(4000, target)
     pokemon.status.triggerLocked(4000, pokemon)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
-    const defGain = target.def * 1
-    const spedefGain = target.speDef * 1
-    pokemon.addDefense(defGain, pokemon, 1, crit)
-    pokemon.addSpecialDefense(spedefGain, pokemon, 1, crit)
+    const boost = (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
+    const defGain = Math.round(target.def * boost)
+    const spedefGain = Math.round(target.speDef * boost)
+    pokemon.addDefense(defGain, pokemon, 0, false)
+    pokemon.addSpecialDefense(spedefGain, pokemon, 0, false)
     pokemon.commands.push(
       new DelayedCommand(() => {
-        pokemon.addDefense(-defGain, pokemon, 1, crit)
-        pokemon.addSpecialDefense(-spedefGain, pokemon, 1, crit)
+        pokemon.addDefense(-defGain, pokemon, 0, false)
+        pokemon.addSpecialDefense(-spedefGain, pokemon, 0, false)
       }, 4000)
     )
   }
