@@ -4417,6 +4417,8 @@
 				"wanderer": "A wandering {{pkm}} enters the scene",
 				"pick": "Picked {{chosen}}",
 				"pick_over": "Picked {{chosen}} over {{alternatives}}",
+				"pick_zmove": "Picked {{chosen}} for {{unit}}",
+				"pick_zmove_over": "Picked {{chosen}} for {{unit}} over {{alternatives}}",
 				"town": "Town encounter: {{npc}}",
 				"rule": "Special rule: {{rule}}",
 				"weather": "Weather changed to {{weather}}",

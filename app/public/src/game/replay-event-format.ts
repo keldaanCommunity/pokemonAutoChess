@@ -301,6 +301,16 @@ function formatReplayEventRow(
       const alts = options
         .filter((_, i) => i !== idx)
         .map((o) => pickOption(t, o))
+      if (a.zmove) {
+        const unit = pkmName(t, String(a.unit))
+        return alts.length
+          ? t(`${ROW_KEY}.pick_zmove_over`, {
+              chosen,
+              unit,
+              alternatives: alts.join(", ")
+            })
+          : t(`${ROW_KEY}.pick_zmove`, { chosen, unit })
+      }
       return alts.length
         ? t(`${ROW_KEY}.pick_over`, { chosen, alternatives: alts.join(", ") })
         : t(`${ROW_KEY}.pick`, { chosen })

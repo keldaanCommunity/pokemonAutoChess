@@ -15,10 +15,16 @@ import {
   Orientation,
   PokemonActionState
 } from "../../../types/enum/Game"
-import { FossilStones, Item, ItemRecipe } from "../../../types/enum/Item"
+import {
+  FossilStones,
+  Item,
+  ItemRecipe,
+  type ZCrystal
+} from "../../../types/enum/Item"
 import { Pkm, PkmDuos } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
+import { ZMovesByCrystal } from "../../../types/enum/ZMoves"
 import { isIn } from "../../../utils/array"
 import {
   type CombatFrameState,
@@ -321,6 +327,7 @@ interface PlayerSnapshot {
   items: string[] // bench items (multiset)
   unitItems: Map<string, string[]> // unit id to pokemon.items
   unitPos: Map<string, { x: number; y: number }> // unit id to (positionX, positionY)
+  unitSkill: Map<string, string> // unit id to skill (a z-move pick sets it)
   synSteps: Map<string, number> // synergy to active tier step
   berryStages: number[]
   berryTypes: string[] // filtered species list (for the repopulate diff)
@@ -361,8 +368,10 @@ function derivePlayerStateEvents(
   const board = new Map<string, string>()
   const unitItems = new Map<string, string[]>()
   const unitPos = new Map<string, { x: number; y: number }>()
+  const unitSkill = new Map<string, string>()
   p.board?.forEach((u, id) => {
     board.set(id, u.name)
+    unitSkill.set(id, u.skill)
     unitItems.set(id, u.items ? [...(u.items as Iterable<string>)] : [])
     unitPos.set(id, { x: u.positionX ?? 0, y: u.positionY ?? 0 })
   })
@@ -567,6 +576,30 @@ function derivePlayerStateEvents(
       }
     }
 
+    // z-move choice: pickZMove sets the z-ring holder's skill; the crystal never enters player.items
+    const zUnits = new Set<string>()
+    for (const slate of resolved) {
+      if (slate.type !== "zmoves") continue
+      for (const [id, skill] of unitSkill) {
+        const was = prev.unitSkill.get(id)
+        if (was === undefined || was === skill || zUnits.has(id)) continue
+        const c = slate.items.find(
+          (x) => ZMovesByCrystal[x as ZCrystal] === skill
+        )
+        if (!c) continue
+        zUnits.add(id)
+        push("pick", {
+          options: [c, ...slate.items.filter((x) => x !== c)].map((it) => ({
+            item: it
+          })),
+          chosenIdx: 0,
+          unit: board.get(id) ?? "",
+          zmove: true
+        })
+        break
+      }
+    }
+
     // item events: classify the player.items diff against per-unit pokemon.items moves (equip / craft / unequip / sell-return / gain)
     {
       const { added: pAdded, removed: pRemoved } = multisetDiff(
@@ -614,7 +647,9 @@ function derivePlayerStateEvents(
         isIn(FossilStones, it) ? Item.FOSSIL_STONE : it
 
       // 0) item proposition pick: a resolved item-slate choice whose chosen item entered player.items; log as a pick and consume it so it isn't re-read as craft/gain
-      const itemSlate = resolved.find((s) => s.items.length > 0)
+      const itemSlate = resolved.find(
+        (s) => s.type !== "zmoves" && s.items.length > 0
+      )
       if (itemSlate) {
         if (itemSlate.pokemons.length > 0) {
           const chosen =
@@ -782,6 +817,7 @@ function derivePlayerStateEvents(
     items,
     unitItems,
     unitPos,
+    unitSkill,
     synSteps,
     berryStages,
     berryTypes: species,
