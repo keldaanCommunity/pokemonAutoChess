@@ -55,7 +55,7 @@ To begin with, Great Ball tier (ELO > 1100) ranked matches will start every 4 ho
 - Buff Wobbuffet line, Def/SpeDef: ~~1/2~~ 2/4
 - Buff Claydol HP ~~150~~ 180
 - Buff Combee:  Attack ~~8~~ 9
-- Buff Vespiqueen: HP ~~210~~ 280
+- Buff Vespiquen: HP ~~210~~ 280
 - Buff Mismagius: Attack ~~18~~ 26
 -
 

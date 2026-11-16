@@ -20,9 +20,10 @@ German Community for Pokemon Auto Chess
 
 # John Auto Chess
 
-- url: https://www.john-auto-chess.com/
+- url: https://www.john-auto-chess.com
 - logo: /assets/community-servers/john-auto-chess.png
 - creator: tegberen
+- discord: https://discord.gg/rujUfyB6aq
 - location: Germany
 
 It runs the official version as base with some light changes on the meta. Near the end of each patch, it switches to pre-release mode for playtesting.
@@ -36,6 +37,26 @@ It runs the official version as base with some light changes on the meta. Near t
 
 China Community Server for Pokemon Auto Chess
 
+# Pokemon Auto Spire
+
+- url: https://pokemon-auto-spire.com
+- logo: /assets/community-servers/AutoSpire.png
+- creator: Fish
+- discord: https://discord.gg/cfytB2kA
+- location: Australia
+
+Pokemon Auto Spire is a Slay the Spire inspired mod of PAC - its a single player game!
+
+# Pokemon Auto Legacy
+
+- url: https://www.pokemon-auto-legacy.com
+- logo: /assets/community-servers/pal-log.png
+- creator: Vimby
+- discord: https://discord.gg/G7Yhtezj
+- location: North America
+
+Server for experiencing older patches of Pokemon Auto Chess, completely faithful to how they were at the time they were live. Swaps to different patches about monthly.
+  
 # Eternara PAC
 
 - url: https://eternara.site

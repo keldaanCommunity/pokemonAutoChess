@@ -1,0 +1,8 @@
+#game-players {
+  position: absolute;
+  height: 100%;
+  width: 70px;
+  right: 0.5%;
+  top: 4px;
+  z-index: var(--z-game-players);
+}

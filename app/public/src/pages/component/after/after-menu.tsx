@@ -2,9 +2,8 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
 import { getRankLabel } from "../../../../../../app/types/strings/Strings"
-import { ExpPlace, SynergyTriggers } from "../../../../../config"
-import { computeElo } from "../../../../../core/elo"
-import { type IAfterGamePlayer, Role } from "../../../../../types"
+import { ExpPlace, SynergyTiersThresholds } from "../../../../../config"
+import type { IAfterGamePlayer } from "../../../../../types"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
 import { useAppSelector } from "../../../hooks"
@@ -28,18 +27,8 @@ export default function AfterMenu() {
   const currentPlayerId: string = useAppSelector((state) => state.network.uid)
   const currentPlayer = players.find((p) => p.id === currentPlayerId)
   const playerRank = currentPlayer ? currentPlayer.rank : null
-  const humans = players.filter((p) => p.role !== Role.BOT)
-  const newElo = currentPlayer
-    ? computeElo(
-        currentPlayer,
-        currentPlayer.rank,
-        currentPlayer.elo,
-        humans,
-        gameMode,
-        false
-      )
-    : null
-  const shouldShowElo = eligibleToELO && currentPlayer && newElo
+  const newElo = currentPlayer?.newElo
+  const shouldShowElo = eligibleToELO && currentPlayer && newElo != null
 
   return (
     <div className="after-menu">
@@ -83,7 +72,7 @@ export default function AfterMenu() {
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => {
+            {players.map((player, index) => {
               return (
                 <tr key={player.id}>
                   <td>{player.rank}</td>
@@ -121,20 +110,13 @@ export default function AfterMenu() {
                       />{" "}
                       {player.gameStats.rerollCount}
                     </p>
-                    <Tooltip
-                      id={`stats-tooltip-${player.id}`}
-                      className="custom-theme-tooltip"
-                      place="right"
-                    >
-                      <PlayerStatsTooltip player={player} />
-                    </Tooltip>
                   </td>
                   <td>
                     <Team team={player.pokemons} />
                   </td>
                   <td>
                     <ul className="player-team-synergies">
-                      {player.synergies.filter(isNotIncomplete).map((s) => (
+                      {player.synergies.filter(isActive).map((s) => (
                         <React.Fragment key={s.name}>
                           <SynergyIcon type={s.name} />
                           <span>{s.value}</span>
@@ -150,12 +132,22 @@ export default function AfterMenu() {
       </div>
       <GamePokemonDetailTooltip origin="after" />
       <ItemDetailTooltip />
+      {players.map((player) => (
+        <Tooltip
+          id={`stats-tooltip-${player.id}`}
+          className="custom-theme-tooltip"
+          place="right"
+          key={"tooltip" + player.id}
+        >
+          <PlayerStatsTooltip player={player} />
+        </Tooltip>
+      ))}
     </div>
   )
 }
 
-function isNotIncomplete(s: { name: Synergy; value: number }) {
-  return s.value >= SynergyTriggers[s.name][0]
+function isActive(s: { name: Synergy; value: number }) {
+  return s.value >= SynergyTiersThresholds[s.name][0]
 }
 
 function PlayerStatsTooltip({ player }: { player: IAfterGamePlayer }) {

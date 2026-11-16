@@ -58,6 +58,12 @@
   max-height: 100%;
 }
 
+@media (max-width: 799px) {
+  .dendrogram-info-panel {
+    display: none;
+  }
+}
+
 .dendrogram-info-panel h3 {
   margin: 0;
   color: var(--color-fg-primary);

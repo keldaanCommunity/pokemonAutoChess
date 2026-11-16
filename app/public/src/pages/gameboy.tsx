@@ -20,7 +20,7 @@ export function Gameboy() {
     <div style={{ width: "100%", height: "100%" }}>
       <MainSidebar
         page="main_lobby"
-        leave={() => navigate("/lobby")}
+        onClickLeave={() => navigate("/lobby")}
         leaveLabel={t("back_to_lobby")}
       />
       <div

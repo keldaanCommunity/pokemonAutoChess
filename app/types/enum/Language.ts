@@ -12,5 +12,6 @@ export enum Language {
   pl = "pl",
   vi = "vi",
   th = "th",
-  zh = "zh"
+  zh = "zh",
+  tr = "tr"
 }

@@ -4,20 +4,20 @@ import { EloRankThreshold, RarityColor } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import { Rarity } from "../../../../../types/enum/Game"
 import type { Pkm } from "../../../../../types/enum/Pokemon"
+import type { PoolType } from "../../../../../types/enum/PoolType"
 import { Synergy } from "../../../../../types/enum/Synergy"
+import { keys } from "../../../../../utils/object"
 import {
   fetchMetaPokemons,
   type IPokemonStatV2,
   type IPokemonsStatisticV2
 } from "../../../models/pokemons-statistic-v2"
+import { cc } from "../../utils/jsx"
 import { PokemonTypeahead } from "../typeahead/pokemon-typeahead"
 import { PokemonDistribution } from "./pokemon-distribution"
 import { PokemonHistoryPanel } from "./pokemon-history-panel"
 import PokemonStatistic from "./pokemon-statistic"
 import "./pokemon-report.css"
-import type { PoolType } from "../../../../../types/enum/PoolType"
-import { keys } from "../../../../../utils/object"
-import { cc } from "../../utils/jsx"
 
 type ViewMode = "distribution" | "count-history" | "rank-history"
 
@@ -58,20 +58,20 @@ export function PokemonReport() {
   return (
     <div id="pokemon-report">
       <header>
-        <h2>{t("best_pokemons")}</h2>
+        <h2>{t("meta_report.best_pokemons")}</h2>
         <div className="filters">
           <select
             value={pokemonRankingBy}
             onChange={(e) => setPokemonRanking(e.target.value)}
           >
             <option value="count">
-              {t("rank")} {t("by_popularity")}
+              {t("rank")} {t("meta_report.by_popularity")}
             </option>
             <option value="rank">
-              {t("rank")} {t("by_average_place")}
+              {t("rank")} {t("meta_report.by_average_place")}
             </option>
             <option value="item_count">
-              {t("rank")} {t("by_average_held_items")}
+              {t("rank")} {t("meta_report.by_average_held_items")}
             </option>
           </select>
           <select

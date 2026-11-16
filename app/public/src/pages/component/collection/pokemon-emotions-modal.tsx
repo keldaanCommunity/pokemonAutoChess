@@ -38,7 +38,9 @@ export default function PokemonEmotionsModal(props: {
   const onError = useCallback(
     (error: unknown) => {
       const message =
-        error instanceof Error ? error.message : t("errors.UNKNOWN_ERROR")
+        error instanceof Error
+          ? error.message
+          : t("errors.UNKNOWN_ERROR", { error: String(error) })
       setRequestError(message)
     },
     [t]

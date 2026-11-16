@@ -475,7 +475,7 @@ export async function completeTwitchAccountVerification(
   /** Enforce one Twitch account linked to at most one PAC account. */
   const linkedUser = await UserMetadata.findOne(
     { twitchUserId: twitchUser.id },
-    ["uid"]
+    "uid"
   )
   if (linkedUser && linkedUser.uid !== parsedState.uid) {
     throw new Error("Twitch account already linked to another user")
@@ -535,9 +535,10 @@ export async function unlinkTwitchAccount(uid: string) {
 /** Refreshes the in-memory set of blacklisted streamer logins from MongoDB. */
 export async function refreshTwitchBlacklist() {
   try {
-    const entries = await TwitchBlacklistedStreamer.find({}, [
+    const entries = await TwitchBlacklistedStreamer.find(
+      {},
       "streamerLogin"
-    ]).lean()
+    ).lean()
     blacklistedLogins = new Set(
       entries
         .map((entry) => normalizeStreamerLogin(entry.streamerLogin))
@@ -552,13 +553,10 @@ export async function refreshTwitchBlacklist() {
 export async function listTwitchBlacklist(): Promise<
   ITwitchBlacklistedStreamer[]
 > {
-  return TwitchBlacklistedStreamer.find({}, [
-    "streamerLogin",
-    "reason",
-    "createdBy",
-    "createdAt",
-    "updatedAt"
-  ])
+  return TwitchBlacklistedStreamer.find(
+    {},
+    "streamerLogin reason createdBy createdAt updatedAt"
+  )
     .sort({ createdAt: -1 })
     .lean()
 }

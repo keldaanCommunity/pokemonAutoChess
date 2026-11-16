@@ -18,3 +18,32 @@
 .clickable > .my-box {
   box-shadow: var(--shadow-clickable);
 }
+
+.box-wrapper {
+  padding: 5px;
+  margin: -5px;
+  border-radius: 12px;
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-primary);
+  overflow: hidden;
+
+  &:not(.in-tooltip) {
+    border: var(--border-thick);
+  }
+}
+
+.box-header {
+  background-color: var(--color-bg-secondary);
+  padding: 0.8em 1em 0.4em 1em;
+  margin: -0.5em -0.5em 0.5em -0.5em;
+  overflow: visible;
+
+  & h2 {
+    font-size: 140%;
+    margin: 0;
+  }
+}
+
+.box-content {
+  margin: 5px;
+}

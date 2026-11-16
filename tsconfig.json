@@ -23,7 +23,7 @@
   "include": [
     "./app/**/*",
     "./scheduled/**/*",
-    "./edit/**/*",
+    "./edit/*",
     "./db-commands/**/*"
   ],
   "exclude": ["node_modules", "app/public/dist/**/*"]

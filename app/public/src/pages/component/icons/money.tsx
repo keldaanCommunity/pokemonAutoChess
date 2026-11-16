@@ -5,13 +5,18 @@ export function Money(props: { value?: number | string; className?: string }) {
     <>
       {props.value != null && (
         <span
-          style={{ verticalAlign: "middle", flex: "1", fontWeight: "600" }}
+          style={{ verticalAlign: "middle", fontWeight: "600" }}
           className={props.className}
         >
           {props.value}
         </span>
       )}
-      <img className="icon-money" src="/assets/icons/money.svg" alt="$" />
+      <img
+        className="icon-money"
+        src="/assets/icons/money.svg"
+        alt="$"
+        style={{ marginLeft: "4px" }}
+      />
     </>
   )
 }

@@ -49,7 +49,6 @@ export function EloTab() {
       const data: IGameRecord[] = await response.json()
       if (user?.uid !== uid) return // ignore response if uid changed in the meantime
 
-      console.log("Loaded game history page", page, data)
       setGameHistory(data)
     } catch (error) {
       console.error("Failed to load history:", error)

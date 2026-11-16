@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import { RarityColor, SynergyTriggers } from "../../../../../config"
-import { SynergyEffects } from "../../../../../config/game/synergies"
+import { RarityColor, SynergyTiersThresholds } from "../../../../../config"
+import { SynergyTiers } from "../../../../../config/game/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE } from "../../../../../models/precomputed/precomputed-types"
 import { Rarity } from "../../../../../types/enum/Game"
@@ -12,6 +12,7 @@ import type { IPokemonData } from "../../../../../types/interfaces/PokemonData"
 import { groupBy } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { usePreferences } from "../../../preferences"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetailTooltip } from "../game/game-pokemon-detail"
@@ -20,7 +21,7 @@ import {
   filterPokemonsAccordingToPreferences,
   PokemonFilters
 } from "../pokemon-filters/pokemon-filters"
-import { EffectDescriptionComponent } from "../synergy/effect-description"
+import { SynergyTierDescription } from "../synergy/synergy-tier-description"
 import { SynergyOverlaps } from "../synergy-overlaps/synergy-overlaps"
 
 export default function WikiTypes() {
@@ -56,7 +57,7 @@ export function WikiType(props: { type: Synergy }) {
   const { t } = useTranslation()
   const [preferences] = usePreferences()
   const [overlap, setOverlap] = useState<Synergy | null>(null)
-  const effects = SynergyEffects[props.type]
+  const synergyTiers = SynergyTiers[props.type]
 
   const pokemons = filterPokemonsAccordingToPreferences(
     PRECOMPUTED_POKEMONS_PER_TYPE[props.type],
@@ -97,20 +98,21 @@ export function WikiType(props: { type: Synergy }) {
       </h2>
       <p>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo: "" })
+          t(`synergy_description.${props.type}`, { additionalInfo: "" }),
+          { config: getDescriptionConfig(`synergy_description.${props.type}`) }
         )}
       </p>
-      {effects.map((effect: (typeof effects)[number], i) => {
+      {synergyTiers.map((tier: (typeof synergyTiers)[number], i) => {
         return (
           <div
-            key={t(`effect.${effect}`)}
+            key={t(`effect.${tier}`)}
             style={{ display: "flex", alignItems: "flex-start" }}
           >
             <span style={{ whiteSpace: "nowrap" }}>
-              ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
+              ({SynergyTiersThresholds[props.type][i]}) {t(`effect.${tier}`)}
               :&nbsp;
             </span>
-            <EffectDescriptionComponent effect={effect} />
+            <SynergyTierDescription tier={tier} />
           </div>
         )
       })}

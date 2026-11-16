@@ -11,8 +11,8 @@ import {
 import cors from "cors"
 import express, { type ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/auth"
+import { cert, initializeApp } from "firebase-admin/app"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
 import { marked } from "marked"
 import { connect } from "mongoose"
@@ -20,10 +20,9 @@ import path from "path"
 import pkg from "../package.json"
 import {
   MAX_CONCURRENT_PLAYERS_ON_SERVER,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   USERNAME_REGEXP
 } from "./config"
-import { migrateShardsOfAltForms } from "./core/collection"
 import { initTilemap } from "./core/design"
 import { GameRecord } from "./models/colyseus-models/game-record"
 import chatV2 from "./models/mongo-models/chat-v2"
@@ -47,7 +46,8 @@ import {
 } from "./services/bots"
 import {
   buyEmotionForUser,
-  changeSelectedEmotionForUser
+  changeSelectedEmotionForUser,
+  migrateShardsOfAltForms
 } from "./services/collection"
 import { getLeaderboard } from "./services/leaderboard"
 import {
@@ -74,8 +74,9 @@ import {
 import { type ISuggestionUser, Role } from "./types"
 import { DungeonPMDO } from "./types/enum/Dungeon"
 import { Emotion } from "./types/enum/Emotion"
-import { Item } from "./types/enum/Item"
+import { Item, UnholdableItemsToSaveForStats } from "./types/enum/Item"
 import { Pkm, PkmIndex } from "./types/enum/Pokemon"
+import type { IUserMetadataLean } from "./types/interfaces/UserMetadata"
 import { logger } from "./utils/logger"
 
 const clientSrc = __dirname.includes("server")
@@ -246,7 +247,9 @@ export const server = defineServer({
               "https://uruwhy.online",
               "https://koala-pac.com",
               "https://pokev9.52kx.net",
-              "https://www.john-auto-chess.com/"
+              "https://www.john-auto-chess.com",
+              "https://pokemon-auto-spire.com",
+              "https://www.pokemon-auto-legacy.com"
             ],
             scriptSrc: [
               "'self'",
@@ -275,6 +278,13 @@ export const server = defineServer({
 
     app.use(cors())
     app.use(express.json())
+    // portraits use the browser's http cache instead of the service worker
+    app.use(
+      "/assets/portraits",
+      express.static(path.join(clientSrc, "assets", "portraits"), {
+        maxAge: isDevelopment ? 0 : "31d"
+      })
+    )
     app.use(express.static(clientSrc))
 
     app.get("/", (req, res) => {
@@ -294,6 +304,10 @@ export const server = defineServer({
     })
 
     app.get("/game", (req, res) => {
+      res.sendFile(viewsSrc)
+    })
+
+    app.get("/replay", (req, res) => {
       res.sendFile(viewsSrc)
     })
 
@@ -367,8 +381,12 @@ export const server = defineServer({
       res.send(Item)
     })
 
+    app.get("/unholdable-items", (req, res) => {
+      res.send(UnholdableItemsToSaveForStats)
+    })
+
     app.get("/types-trigger", (req, res) => {
-      res.send(SynergyTriggers)
+      res.send(SynergyTiersThresholds)
     })
 
     app.get("/titles", async (req, res) => {
@@ -576,7 +594,7 @@ export const server = defineServer({
 
       const stats = await DetailledStatistic.find(
         params,
-        ["pokemons", "time", "rank", "elo", "gameMode"],
+        "pokemons time rank elo gameMode unholdableItems",
         { limit: limit, skip: skip, sort: { time: -1 } }
       )
       if (stats) {
@@ -587,7 +605,8 @@ export const server = defineServer({
               record.rank,
               record.elo,
               record.pokemons,
-              record.gameMode
+              record.gameMode,
+              record.unholdableItems
             )
         )
 
@@ -632,14 +651,7 @@ export const server = defineServer({
             displayName: { $regex: `^${escapedTerm}` }, // ^ makes it a prefix match, enabling index use
             ...(showBanned ? {} : { banned: false })
           },
-          [
-            "uid",
-            "elo",
-            "displayName",
-            "level",
-            "avatar",
-            ...(showBanned ? ["banned"] : [])
-          ],
+          `uid elo displayName level avatar${showBanned ? " banned" : ""}`,
           {
             limit: 100,
             sort: { level: -1 },
@@ -666,6 +678,17 @@ export const server = defineServer({
       }
     })
 
+    app.get(
+      "/players/:playerUid",
+      async (req, res): Promise<IUserMetadataLean> => {
+        const { playerUid } = req.params
+        const user = await UserMetadata.findOne({ uid: playerUid })
+        if (user === null) return res.status(404).text("Player not found")
+        const { pokemonCollection, ...userLean } = user.toObject()
+        return res.status(200).json(userLean)
+      }
+    )
+
     app.get("/bots", async (req, res) => {
       const approved =
         req.query.approved === "true"
@@ -690,8 +713,8 @@ export const server = defineServer({
         const token = authHeader.split(" ")[1]
         if (!token) throw new Error("Unauthorized")
         // get user from firebase
-        const decodedToken = await admin.auth().verifyIdToken(token)
-        user = await admin.auth().getUser(decodedToken.uid)
+        const decodedToken = await getAuth().verifyIdToken(token)
+        user = await getAuth().getUser(decodedToken.uid)
         if (!user || !user.displayName) throw new Error("Unauthorized")
         return user
       } catch (error) {
@@ -1114,8 +1137,8 @@ export const server = defineServer({
     connect(process.env.MONGO_URI!, {
       socketTimeoutMS: 45000
     })
-    admin.initializeApp({
-      credential: admin.credential.cert({
+    initializeApp({
+      credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID!,
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
         privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")

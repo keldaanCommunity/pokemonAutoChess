@@ -10,11 +10,63 @@
 }
 
 .game-shop-actions {
-  display: grid;
-  grid-template: 1fr 1fr / 3vw 1fr;
+  display: flex;
+  flex-direction: column;
   padding: 5px;
   gap: 0.5em;
+  align-items: stretch;
+}
+
+.game-shop-actions button {
+  font-size: 1em;
+  white-space: nowrap;
+  padding: 0.25em 0.5em;
+  min-height: 2.5em;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  width: 200px;
+}
+
+.game-shop-actions button > img:first-child {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.game-shop-actions button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-additional-pools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 5px;
+}
+
+.game-pokemons-store {
+  display: flex;
+  flex: 1;
+  list-style: none;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.game-experience {
+  width: 12vw;
+  display: grid;
+  grid-template: 32px 1fr 1fr / 3vw 1fr;
+  gap: 0.25em 0.5em;
+  align-items: center;
+  text-align: center;
+}
+
+.game-experience > span {
+  color: var(--color-fg-primary);
 }
 
 .game-rarity-percentage.my-box {
@@ -40,124 +92,6 @@
 
 .game-rarity-percentage > div:last-of-type {
   border-radius: 0 8px 8px 0;
-}
-
-.game-shop-actions .refresh-button {
-  font-size: 1em;
-  white-space: nowrap;
-  padding: 0.25em 0.5em;
-  min-height: 2.5em;
-  position: relative;
-}
-
-.game-shop-actions .refresh-button > img:first-child {
-  vertical-align: middle;
-  width: 1.25em;
-  height: 1.25em;
-}
-
-.game-shop-actions .lock-icon {
-  padding: 0;
-  display: grid;
-  place-content: center;
-  height: 2.5em;
-  font-size: 1em;
-}
-
-.game-shop-actions .lock-icon > img:only-child {
-  width: 1.5em;
-  height: 1.5em;
-  margin: 0.25em;
-}
-
-.game-additional-pokemons,
-.game-regional-pokemons {
-  padding: 0 !important;
-  color: var(--color-fg-primary);
-  background-color: var(--color-bg-primary);
-  overflow: hidden;
-}
-
-.game-additional-pokemons h2,
-.game-regional-pokemons h2 {
-  margin: 0.25em auto 0 auto;
-  text-align: center;
-}
-
-.game-additional-pokemons p.help,
-.game-regional-pokemons p.help {
-  margin: 0 auto 0.5em auto;
-}
-
-.game-additional-pokemons .grid {
-  display: grid;
-  grid-template: repeat(4, 1fr) / repeat(6, 1fr);
-  grid-auto-flow: column;
-  gap: 2px;
-  width: 682px;
-  height: 360px;
-}
-
-.game-regional-pokemons .grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2px;
-  width: 682px;
-}
-
-.game-additional-pokemons .game-pokemon-portrait,
-.game-regional-pokemons .game-pokemon-portrait {
-  width: 112px;
-  height: 90px;
-  min-height: 0;
-  min-width: 0;
-  border: 2px solid #333;
-}
-
-.game-additional-pokemons .game-pokemon-portrait .synergy-icon,
-.game-regional-pokemons .game-pokemon-portrait .synergy-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.game-additional-pokemons .grid > p,
-.game-regional-pokemons .grid > p {
-  grid-row: 1 / 5;
-  grid-column: 1 / 7;
-  display: grid;
-  place-content: center;
-  padding: 1em;
-}
-
-.game-additional-pools {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  padding: 5px;
-}
-
-.game-pokemons-store {
-  display: flex;
-  flex: 1;
-  list-style: none;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-}
-
-.game-experience {
-  width: 12vw;
-  display: grid;
-  grid-template: 1fr 1fr / 3vw 1fr;
-  padding: 5px;
-  gap: 0.5em;
-  align-items: center;
-  text-align: center;
-}
-
-.game-experience > span {
-  color: var(--color-fg-primary);
 }
 
 .buy-xp-button.bubbly {
@@ -266,27 +200,6 @@
   height: 1em;
 }
 
-#game-streak-info > div {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  place-content: center;
-  text-shadow: 1px 1px 1px black;
-  pointer-events: initial;
-}
-
-#game-streak-info .streak-win {
-  background-image: url("assets/ui/streak_win.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-#game-streak-info .streak-defeat {
-  background-image: url("assets/ui/streak_defeat.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 @media (aspect-ratio < 4 / 3) {
   .game-shop.my-container {
     flex-wrap: wrap;
@@ -342,9 +255,13 @@
 
 @media (aspect-ratio > 4 / 3) and (width <= 1280px) {
   #game-wrapper .game-shop {
-    transform: scale(0.8);
-    transform-origin: bottom left;
-    right: 0;
+    font-size: 75%;
+    right: 8px;
+  }
+
+  #game-streak-info > div {
+    width: 20px;
+    height: 20px;
   }
 }
 

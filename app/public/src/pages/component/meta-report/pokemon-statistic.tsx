@@ -191,21 +191,21 @@ function PokemonFamilyCard(props: {
               </div>
               <div className="pokemon-family-stats">
                 <span className="pokemon-stat-item">
-                  <div>{t("average_place")}</div>
+                  <div>{t("meta_report.average_place")}</div>
                   <span className="pokemon-stat-value">
                     {family.averageRank ? family.averageRank.toFixed(1) : "???"}
                   </span>
                   <HistoryDelta entries={familyRankHistory} invertY={true} />
                 </span>
                 <span className="pokemon-stat-item">
-                  <div>{t("count")}</div>
+                  <div>{t("meta_report.count")}</div>
                   <span className="pokemon-stat-value">
                     {family.totalCount}
                   </span>
                   <HistoryDelta entries={familyCountHistory} />
                 </span>
                 <span className="pokemon-stat-item">
-                  <div>{t("held_items")}</div>
+                  <div>{t("meta_report.held_items")}</div>
                   <span className="pokemon-stat-value">
                     {family.averageItemHeld?.toFixed(2)}
                   </span>
@@ -229,10 +229,11 @@ function PokemonFamilyCard(props: {
                     </strong>
                   </span>
                   <span className="pokemon-stat-container">
-                    <label>{t("count")}:</label> {pokemon.count}
+                    <label>{t("meta_report.count")}:</label> {pokemon.count}
                   </span>
                   <span className="pokemon-stat-container">
-                    <label>{t("held_items")}:</label> {pokemon.item_count}
+                    <label>{t("meta_report.held_items")}:</label>{" "}
+                    {pokemon.item_count}
                   </span>
                   <div className="pokemon-items-row">
                     {pokemon.items.map((item) => (
@@ -264,14 +265,14 @@ function PokemonFamilyCard(props: {
               <div className="pokemon-member-charts-row">
                 <HistoryChart
                   entries={pokemon.rank_history ?? []}
-                  label="average_place"
+                  label={t("meta_report.average_place")}
                   color="#e8a838"
                   invertY={true}
                   portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
                 />
                 <HistoryChart
                   entries={pokemon.count_history ?? []}
-                  label="count"
+                  label={t("meta_report.count")}
                   color="#76c893"
                   portraitSrc={getPortraitSrc(PkmIndex[pokemon.name])}
                 />

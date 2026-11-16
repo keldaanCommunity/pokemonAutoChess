@@ -23,6 +23,20 @@
   flex: 0 1 50em;
 }
 
+.preparation-menu .team-name {
+  display: flex;
+  align-items: center;
+}
+
+.preparation-menu .team-color-indicator {
+  border: var(--border-thin);
+  border-radius: 8px;
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+}
+
 .preparation-page .chat-container {
   flex: 0 1 30em;
   display: flex;

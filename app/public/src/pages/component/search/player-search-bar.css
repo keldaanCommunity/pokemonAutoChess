@@ -1,0 +1,55 @@
+.player-search-bar {
+  position: relative;
+}
+
+.player-search-bar .player-search-results {
+  display: none;
+  position: absolute;
+  top: 2.5em;
+  left: 0;
+  max-width: 100%;
+  border: var(--border-thick);
+  border-radius: 12px;
+  background: white;
+  color: black;
+  max-height: 60vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.player-search-bar .search-bar:focus-within + .player-search-results,
+.player-search-bar:focus-within .player-search-results {
+  display: block;
+}
+
+.player-search-bar .player-search-results p {
+  padding: 8px 16px;
+  min-width: 50%;
+}
+
+.player-search-bar .search-suggestions {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.player-search-bar .search-suggestions li {
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.player-search-bar .search-suggestions li:hover,
+.player-search-bar .search-suggestions li:focus {
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-accent);
+}
+
+.player-search-bar .search-suggestions .banned {
+  color: red;
+}
+
+.player-search-bar .search-suggestions img {
+  width: 40px;
+  height: 40px;
+}

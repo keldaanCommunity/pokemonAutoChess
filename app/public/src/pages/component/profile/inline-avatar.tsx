@@ -7,6 +7,7 @@ import { RoleBadge } from "./role-badge"
 export function InlineAvatar(props: {
   avatar: string
   name: string
+  author?: string
   title?: Title | ""
   role?: Role
   twitchLogin?: string
@@ -23,7 +24,8 @@ export function InlineAvatar(props: {
         display: "flex",
         alignItems: "center",
         justifyContent: "start",
-        gap: "0.25em"
+        gap: "0.25em",
+        flexWrap: "nowrap"
       }}
     >
       <PokemonPortrait
@@ -35,6 +37,12 @@ export function InlineAvatar(props: {
       )}
       <span className="player-name">
         {props.role === Role.BOT ? t(`pkm.${props.name as Pkm}`) : props.name}
+        {props.author && (
+          <span className="player-author">
+            {" "}
+            {t("by")} {props.author}
+          </span>
+        )}
       </span>
       {props.role && <RoleBadge role={props.role} />}
       {twitchUrl && (

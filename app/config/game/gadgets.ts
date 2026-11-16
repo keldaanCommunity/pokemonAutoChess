@@ -5,8 +5,9 @@ export const GADGETS_NAMES = [
   "bag",
   "team_planner",
   "jukebox",
-  "certificate",
   "palette",
+  "certificate",
+  "recorder",
   "synergy_wheel",
   "gameboy",
   "pokeguesser",
@@ -48,11 +49,16 @@ export const GADGETS: Record<GadgetName, Gadget> = {
   palette: {
     name: "palette",
     icon: "palette",
-    levelRequired: 5
+    levelRequired: 4
   },
   certificate: {
     name: "certificate",
     icon: "certificate",
+    levelRequired: 5
+  },
+  recorder: {
+    name: "recorder",
+    icon: "recorder",
     levelRequired: 10
   },
   synergy_wheel: {
@@ -65,6 +71,11 @@ export const GADGETS: Record<GadgetName, Gadget> = {
     icon: "gameboy",
     levelRequired: 20
   },
+  tier_list_maker: {
+    name: "tier_list_maker",
+    icon: "tier-list",
+    levelRequired: 25
+  },
   pokeguesser: {
     name: "pokeguesser",
     icon: "pokeguesser",
@@ -76,15 +87,10 @@ export const GADGETS: Record<GadgetName, Gadget> = {
     levelRequired: 40,
     disabled: !BOTS_ENABLED
   },
-  tier_list_maker: {
-    name: "tier_list_maker",
-    icon: "tier-list",
-    levelRequired: 50
-  },
   sprite_tracker: {
     name: "sprite_tracker",
     icon: "pokemon-sprite",
-    levelRequired: 60
+    levelRequired: 50
   }
 } as const
 
