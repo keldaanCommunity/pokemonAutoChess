@@ -1647,6 +1647,7 @@ export const PassiveEffects: Partial<
     new OnSimulationStartEffect(({ simulation, entity }) => {
       if (entity.name === Pkm.PALAFIN_HERO) return
       let nbAlliesKo = 0
+      let nbNonSpawnAlliesKo = 0
       let nbAllies = 0
       let transformed = false
 
@@ -1675,9 +1676,14 @@ export const PassiveEffects: Partial<
         }
       }
 
-      const transformToHeroOnDeathEffect = new OnDeathEffect(() => {
+      const transformToHeroOnDeathEffect = new OnDeathEffect(({ pokemon }) => {
         nbAlliesKo++
-        if (!transformed && (nbAlliesKo >= 5 || nbAlliesKo >= nbAllies)) {
+        if (!pokemon.isSpawn) nbNonSpawnAlliesKo++
+        if (
+          !transformed &&
+          (entity.hp > 0 || entity.status.resurrecting) &&
+          (nbNonSpawnAlliesKo >= 5 || nbAlliesKo >= nbAllies)
+        ) {
           transformToHero(true)
         }
       })
