@@ -116,9 +116,9 @@ export const SellPrices = {
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,
-  UNIQUE_DUO: 6,
-  LEGENDARY: 20,
-  LEGENDARY_DUO: 10
+  UNIQUE_DUO: 5,
+  LEGENDARY: 10,
+  LEGENDARY_DUO: 5
 }
 
 export const BuyPrices = {
