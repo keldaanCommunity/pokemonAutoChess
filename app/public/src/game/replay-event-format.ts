@@ -245,6 +245,13 @@ function formatReplayEventRow(
       const c0 = itemName(t, String(a.c0))
       const c1 = itemName(t, String(a.c1))
       const result = itemName(t, String(a.result))
+      if (a.pop)
+        return t(`${ROW_KEY}.craft_pop`, {
+          c0,
+          c1,
+          result,
+          unit: pkmName(t, String(a.unit))
+        })
       return a.unit != null
         ? t(`${ROW_KEY}.craft_on`, {
             c0,

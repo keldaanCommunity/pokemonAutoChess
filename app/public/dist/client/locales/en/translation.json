@@ -4406,6 +4406,7 @@
 				"unequip": "Unequipped {{item}} from {{unit}}",
 				"craft": "Combined {{c0}} and {{c1}} into {{result}}",
 				"craft_on": "Combined {{c0}} and {{c1}} into {{result}} on {{unit}}",
+				"craft_pop": "Combined {{c0}} with {{c1}} from {{unit}} into {{result}}, sent to the bench",
 				"move": "{{pkm}} moved to ({{x}},{{y}})",
 				"combatmove": "{{unit}} moved from ({{fromX}},{{fromY}}) to ({{x}},{{y}})",
 				"level": "Reached level {{level}}",

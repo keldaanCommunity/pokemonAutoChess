@@ -15,10 +15,11 @@ import {
   Orientation,
   PokemonActionState
 } from "../../../types/enum/Game"
-import { ItemRecipe } from "../../../types/enum/Item"
+import { FossilStones, Item, ItemRecipe } from "../../../types/enum/Item"
 import { Pkm, PkmDuos } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
+import { isIn } from "../../../utils/array"
 import {
   type CombatFrameState,
   type EntitySnap,
@@ -608,6 +609,9 @@ function derivePlayerStateEvents(
         const k = arr.findIndex(pred)
         return k < 0 ? undefined : arr.splice(k, 1)[0]
       }
+      // recipes list FOSSIL_STONE for any fossil, as OnDragDropCombineCommand maps it
+      const asComponent = (it: string): string =>
+        isIn(FossilStones, it) ? Item.FOSSIL_STONE : it
 
       // 0) item proposition pick: a resolved item-slate choice whose chosen item entered player.items; log as a pick and consume it so it isn't re-read as craft/gain
       const itemSlate = resolved.find((s) => s.items.length > 0)
@@ -639,19 +643,20 @@ function derivePlayerStateEvents(
         const lostD = uLost.find(
           (u) =>
             u.id === uGained[g].id &&
-            (u.item === recipe[0] || u.item === recipe[1])
+            (asComponent(u.item) === recipe[0] ||
+              asComponent(u.item) === recipe[1])
         )
         if (!lostD) continue
-        const C = lostD.item === recipe[0] ? recipe[1] : recipe[0]
-        if (!pRemoved.includes(C)) continue
-        takeStr(pRemoved, C)
+        const C = asComponent(lostD.item) === recipe[0] ? recipe[1] : recipe[0]
+        const realC = pRemoved.find((x) => asComponent(x) === C)
+        if (realC === undefined) continue
+        takeStr(pRemoved, realC)
         takeUnit(uLost, (u) => u === lostD)
-        push("craft", {
-          c0: recipe[0],
-          c1: recipe[1],
-          result: R,
-          unit: uGained[g].name
-        })
+        const [c0, c1] =
+          asComponent(realC) === recipe[0]
+            ? [realC, lostD.item]
+            : [lostD.item, realC]
+        push("craft", { c0, c1, result: R, unit: uGained[g].name })
         uGained.splice(g, 1)
       }
 
@@ -659,14 +664,42 @@ function derivePlayerStateEvents(
       for (let a = pAdded.length - 1; a >= 0; a--) {
         const recipe = ItemRecipe[pAdded[a] as keyof typeof ItemRecipe]
         if (!recipe || recipe.length !== 2) continue
-        const i0 = pRemoved.indexOf(recipe[0])
-        if (i0 < 0) continue
+        const c0 = pRemoved.find((x) => asComponent(x) === recipe[0])
+        if (c0 === undefined) continue
         const rest = [...pRemoved]
-        rest.splice(i0, 1)
-        if (rest.indexOf(recipe[1]) < 0) continue
-        pRemoved.splice(pRemoved.indexOf(recipe[0]), 1)
-        pRemoved.splice(pRemoved.indexOf(recipe[1]), 1)
-        push("craft", { c0: recipe[0], c1: recipe[1], result: pAdded[a] })
+        rest.splice(rest.indexOf(c0), 1)
+        const c1 = rest.find((x) => asComponent(x) === recipe[1])
+        if (c1 === undefined) continue
+        takeStr(pRemoved, c0)
+        takeStr(pRemoved, c1)
+        push("craft", { c0, c1, result: pAdded[a] })
+        pAdded.splice(a, 1)
+      }
+
+      // 2b) on-unit craft sent to the bench: a unit lost D, player.items lost C, gained R
+      for (let a = pAdded.length - 1; a >= 0; a--) {
+        const R = pAdded[a]
+        const recipe = ItemRecipe[R as keyof typeof ItemRecipe]
+        if (!recipe || recipe.length !== 2) continue
+        const lostD = uLost.find(
+          (u) =>
+            u.present &&
+            (asComponent(u.item) === recipe[0] ||
+              asComponent(u.item) === recipe[1])
+        )
+        if (!lostD) continue
+        const C = asComponent(lostD.item) === recipe[0] ? recipe[1] : recipe[0]
+        const realC = pRemoved.find((x) => asComponent(x) === C)
+        if (realC === undefined) continue
+        takeStr(pRemoved, realC)
+        takeUnit(uLost, (u) => u === lostD)
+        push("craft", {
+          c0: realC,
+          c1: lostD.item,
+          unit: lostD.name,
+          result: R,
+          pop: true
+        })
         pAdded.splice(a, 1)
       }
 
