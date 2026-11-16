@@ -1,5 +1,6 @@
 import { createHash } from "crypto"
-import { readdirSync, readFileSync } from "fs"
+import { readdirSync } from "fs"
+import { Jimp } from "jimp"
 import { join, relative, resolve } from "path"
 
 const ROOT = resolve(
@@ -16,28 +17,38 @@ function* walk(dir: string): Generator<string> {
   }
 }
 
-const byHash = new Map<string, string[]>()
-let total = 0
-for (const file of walk(ROOT)) {
-  total++
-  const hash = createHash("sha1").update(readFileSync(file)).digest("hex")
-  const rel = relative(ROOT, file).split("\\").join("/")
-  const list = byHash.get(hash)
-  if (list) list.push(rel)
-  else byHash.set(hash, [rel])
-}
+async function main() {
+  const byHash = new Map<string, string[]>()
+  let total = 0
+  for (const file of walk(ROOT)) {
+    total++
+    const { bitmap } = await Jimp.read(file)
+    for (let i = 0; i < bitmap.data.length; i += 4) {
+      if (bitmap.data[i + 3] === 0) bitmap.data.fill(0, i, i + 3)
+    }
+    const hash = createHash("sha1")
+      .update(`${bitmap.width}x${bitmap.height}:`)
+      .update(bitmap.data)
+      .digest("hex")
+    const rel = relative(ROOT, file).split("\\").join("/")
+    const list = byHash.get(hash)
+    if (list) list.push(rel)
+    else byHash.set(hash, [rel])
+  }
 
-const groupOf = (file: string) => file.split("/")[0]
-const duplicates = [...byHash.values()].filter((files) => files.length > 1)
-const crossGroup = duplicates.filter(
-  (files) => new Set(files.map(groupOf)).size > 1
-)
+  const groupOf = (file: string) => file.split("/")[0]
+  const duplicates = [...byHash.values()].filter((files) => files.length > 1)
+  const crossGroup = duplicates.filter(
+    (files) => new Set(files.map(groupOf)).size > 1
+  )
 
-console.log(`Scanned ${total} PNG files in ${ROOT}`)
+  console.log(`Scanned ${total} PNG files in ${ROOT}`)
 
-if (crossGroup.length === 0) {
-  console.log("No shared PNGs found across ability folders.")
-} else {
+  if (crossGroup.length === 0) {
+    console.log("No shared PNGs found across ability folders.")
+    return
+  }
+
   const groupsByFolders = new Map<string, string[][]>()
   for (const files of crossGroup) {
     const key = [...new Set(files.map(groupOf))].sort().join(" <-> ")
@@ -74,3 +85,8 @@ if (crossGroup.length === 0) {
     }
   }
 }
+
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
