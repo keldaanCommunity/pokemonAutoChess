@@ -2286,7 +2286,10 @@ export const AbilitiesAnimations: {
   [Ability.ICE_FANG]: onTargetScale2,
   [Ability.FIRE_FANG]: onTargetScale2,
   [Ability.POPULATION_BOMB]: onTargetScale2,
-  [Ability.SCREECH]: onTargetScale2,
+  [Ability.SCREECH]: onTarget({
+    ability: "PUFF_RED",
+    scale: 2
+  }),
   [Ability.SAND_TOMB]: onTargetScale2,
   [Ability.FIRST_IMPRESSION]: onTarget({ ability: "PUFF_BROWN", scale: 3 }),
   [Ability.PLAY_ROUGH]: onTargetScale2,

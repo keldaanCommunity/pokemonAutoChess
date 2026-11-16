@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-16.3",
+  "version": "6.12.0.2026-11-16.5",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -898,9 +898,6 @@
         "SCHOOLING": {
           "frames": 4,
           "repeat": 2
-        },
-        "SCREECH": {
-          "frames": 7
         },
         "SEARING_SHOT": {
           "frames": 11
