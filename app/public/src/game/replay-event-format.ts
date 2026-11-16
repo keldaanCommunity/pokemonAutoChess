@@ -2,7 +2,9 @@
 // ({ type, a, key }) of raw game-data values (enum names) + numbers, localized here. word order + plurals live in
 // the replay.eventlog.row.* templates; game-data nouns route through the game's own locale keys, so a bump needs no new strings for them
 import { exists, type TFunction } from "i18next"
+import { AtlasTree } from "../../../config/game/atlas"
 import { Transfer } from "../../../types"
+import type { TAtlasTree } from "../../../types/atlas"
 import { EnvironmentalEffects } from "../../../types/enum/Effect"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
@@ -315,6 +317,34 @@ function formatReplayEventRow(
         ? t(`${ROW_KEY}.pick_over`, { chosen, alternatives: alts.join(", ") })
         : t(`${ROW_KEY}.pick`, { chosen })
     }
+    case "atlas": {
+      const node = (AtlasTree.nodes as TAtlasTree["nodes"])[String(a.node)]
+      if (node?.type === "condition")
+        return t(`${ROW_KEY}.atlas_condition`, {
+          condition: prettyName(node.condition)
+        })
+      if (node?.type === "buff")
+        return t(`${ROW_KEY}.atlas_buff`, { color: prettyName(node.buff) })
+      // named as the atlas panel titles these nodes
+      const legendary = (a.legendary as string[] | undefined) ?? []
+      const name =
+        node?.type === "encounter"
+          ? pkmName(t, node.encounter)
+          : node?.type === "item"
+            ? itemName(t, node.item)
+            : node?.type === "keystone"
+              ? typedT(t)(`atlas.keystone.${node.emera}`)
+              : node?.type === "legendary"
+                ? legendary.length
+                  ? legendary.map((p) => pkmName(t, p)).join(" + ")
+                  : t("atlas.keystone.legendary")
+                : prettyName(String(a.node))
+      return a.spinda
+        ? t(`${ROW_KEY}.atlas_spinda`, { node: name })
+        : t(`${ROW_KEY}.atlas_node`, { node: name })
+    }
+    case "emera":
+      return t(`${ROW_KEY}.emera`, { count: Number(a.count) })
     case "town":
       return t(`${ROW_KEY}.town`, { npc: prettyName(String(a.npc)) })
     case "rule":

@@ -1,5 +1,6 @@
 import type { Iterator } from "@colyseus/schema"
 import { SchemaSerializer } from "@colyseus/sdk"
+import { AtlasTree } from "../../../config/game/atlas"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config/game/board"
 import { PortalCarouselStages } from "../../../config/game/stages"
 import { SynergyTiersThresholds } from "../../../config/game/synergies"
@@ -9,6 +10,7 @@ import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-
 import { PVEStages } from "../../../models/pve-stages"
 import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
+import type { TAtlasTree } from "../../../types/atlas"
 import {
   BattleResult,
   GamePhaseState,
@@ -99,6 +101,8 @@ export type ReplayEventType =
   | "level"
   | "xp" // bought experience (level-up gold for 4 XP); OnLevelUpCommand
   | "pick"
+  | "atlas" // the pov activated an atlas node
+  | "emera" // the pov gained emera
 
 // added/removed diff of two string multisets; duplicates matter (two of the same component)
 function multisetDiff(
@@ -868,6 +872,10 @@ export function buildReplayIndex(
 
   // a PLAYER_INCOME message awaiting its breakdown, resolved on the next PICK-phase frame (once this round's interest/streak have patched in)
   let pendingIncome: { idx: number; total: number } | null = null
+  // a PLAYER_INCOME is node gold, with no split, if the next frame adds pov atlas nodes
+  let unclassedIncome: { idx: number; total: number } | null = null
+  // the pov's atlas as of the last frame that had one
+  let atlasPrev: { nodes: Set<string>; emera: number } | null = null
   // per-player previous-frame snapshot keyed by uid; the diff baseline for derivePlayerStateEvents, undefined until a player's first state frame
   const prevByPlayer = new Map<string, PlayerSnapshot>()
   const prevWeatherBySim = new Map<string, string>() // simId to its last non-NEUTRAL weather (all boards)
@@ -980,7 +988,7 @@ export function buildReplayIndex(
           typeof f.payload === "number"
             ? f.payload
             : (f.payload as { value?: number })?.value
-        if (typeof total === "number") pendingIncome = { idx: i, total }
+        if (typeof total === "number") unclassedIncome = { idx: i, total }
       }
       continue
     }
@@ -1043,6 +1051,15 @@ export function buildReplayIndex(
 
     // pov-only income breakdown: resolve PLAYER_INCOME's base/interest/streak split now that this PICK frame's interest/streak have landed
     const pov = viewerUid ? state.players?.get(viewerUid) : undefined
+    const atlas = pov?.atlasManager
+    if (unclassedIncome) {
+      const nodeIncome =
+        atlas &&
+        atlasPrev &&
+        [...atlas.unlockedNodes].some((n) => !atlasPrev?.nodes.has(n))
+      if (!nodeIncome) pendingIncome = unclassedIncome
+      unclassedIncome = null
+    }
     if (pov && pendingIncome && ph === GamePhaseState.PICK) {
       // base = total - interest - streak; the PICK-phase gate rejects combat/kill gold (same message, during FIGHT).
       // real base is always a positive multiple of 5, so show the breakdown only when it works out to that (also rejects a not-yet-patched loss-streak reset, base 2-4)
@@ -1094,6 +1111,38 @@ export function buildReplayIndex(
       f.t,
       actions
     )
+
+    // the pov's atlas: a row per node it activates, one per rise in its emera
+    if (atlas) {
+      const nodes = [...atlas.unlockedNodes]
+      if (atlasPrev) {
+        const fresh = nodes.filter((n) => !atlasPrev?.nodes.has(n))
+        for (const node of fresh) {
+          const a: ReplayEventArgs = { node }
+          const type = (AtlasTree.nodes as TAtlasTree["nodes"])[node]?.type
+          if (type === "legendary") {
+            const pkm = atlas.legendaries[Number(node.at(-1)) - 1]
+            if (pkm) a.legendary = propositionConstituents(pkm)
+          }
+          // spinda activates another encounter in the same frame
+          if (
+            fresh.includes("spinda") &&
+            node !== "spinda" &&
+            type === "encounter"
+          )
+            a.spinda = true
+          actions.push({ t: f.t, type: "atlas", a, uid: viewerUid })
+        }
+        if (atlas.emera > atlasPrev.emera)
+          actions.push({
+            t: f.t,
+            type: "emera",
+            a: { count: atlas.emera - atlasPrev.emera },
+            uid: viewerUid
+          })
+      }
+      atlasPrev = { nodes: new Set(nodes), emera: atlas.emera }
+    }
 
     // per-player state-diff events, run for every player and tagged with uid; shop-only signals (reroll/"remove"/buy-vs-gained) fire for the pov alone
     const deriveCtx: DeriveCtx = {
