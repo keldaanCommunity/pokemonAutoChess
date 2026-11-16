@@ -1046,10 +1046,17 @@ export function buildReplayIndex(
 
   // collapse everything before game start (a phantom loading-screen TOWN/stage-0) into one carousel segment at gameStartMs so "seek to start" lands on the carousel (mirrors ReplayRoom.gameStartMs)
   const origin = gameStartMs ?? segments[0]?.t ?? 0
-  const opener = segments.filter((s) => s.t <= origin).at(-1)
+  let opener = segments.filter((s) => s.t <= origin).at(-1)
+  // phase starts null, so the stage 0 carousel can begin just after gameStartMs
+  if (
+    !opener &&
+    segments[0]?.stage === 0 &&
+    segments[0].phase === GamePhaseState.TOWN
+  )
+    opener = segments[0]
   const indexedSegments: ReplaySegment[] = [
     ...(opener ? [{ ...opener, t: origin }] : []),
-    ...segments.filter((s) => s.t > origin)
+    ...segments.filter((s) => s.t > origin && s !== opener)
   ]
 
   const stages: ReplayStageMark[] = []
