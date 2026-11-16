@@ -129,7 +129,12 @@ function texturePackAtlas() {
       walk(tree)
 
       //fs.writeJSONSync("tree.json", tree)
-      fs.writeJSONSync(atlasPath, atlas)
+      fs.writeJSONSync(atlasPath, atlas, { spaces: 2 })
+      fs.writeJSONSync(
+        upath.joinSafe(processor.config.output, "atlas.json"),
+        atlas,
+        { finalEOL: false }
+      )
 
       const sw = fs.readFileSync("../../app/public/dist/client/sw.js", "utf8")
       fs.writeFileSync(

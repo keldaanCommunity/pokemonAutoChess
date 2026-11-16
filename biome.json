@@ -6,6 +6,7 @@
       "!**/*.md",
       "!**/node_modules/**/*",
       "!**/src/assets/**/*",
+      "**/app/public/src/assets/atlas.json",
       "!**/app/public/dist/server/**/*",
       "!**/app/public/dist/client/index*.js",
       "!**/app/public/dist/client/pokechess",
