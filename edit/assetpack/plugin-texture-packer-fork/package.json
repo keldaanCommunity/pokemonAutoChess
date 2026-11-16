@@ -31,7 +31,7 @@
   "dependencies": {
     "free-tex-packer-core": "0.3.5",
     "fs-extra": "^11.1.0",
-    "glob": "^13.0.0",
+    "glob": "^14.0.6",
     "sharp": "^0.34.0"
   },
   "devDependencies": {
