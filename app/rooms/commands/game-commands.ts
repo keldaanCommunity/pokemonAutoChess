@@ -287,6 +287,8 @@ export class OnPokemonCatchCommand extends Command<
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+      } else {
+        this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
       }
     } else if (wanderer.type === WandererType.OUTLAW) {
       player.addMoney(OUTLAW_GOLD_REWARD, true, null)
@@ -1926,6 +1928,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
+        // catchables were drawn from the pool when they spawned
+        player.wanderers.forEach((wanderer) => {
+          if (wanderer.type === WandererType.CATCHABLE) {
+            this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
+          }
+        })
         player.wanderers.clear()
         if (player.alive) {
           // Fake bots XP bar

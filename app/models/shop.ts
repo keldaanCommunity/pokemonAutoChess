@@ -842,7 +842,7 @@ export default class Shop {
     return Pkm.MAGIKARP
   }
 
-  magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
+  magnetPull(meltan: IPokemonEntity, player: Player, state: GameState): Pkm {
     const finals = player.getFinalizedLines()
 
     const rarityProbabilies =
@@ -870,6 +870,8 @@ export default class Shop {
       ])
       if (getPokemonData(steelPkm).types.includes(Synergy.STEEL))
         return steelPkm
+      // no STEEL unit left: the draw took another unit, put it back
+      this.releasePokemon(steelPkm, player, state)
     }
 
     return Pkm.MELTAN
