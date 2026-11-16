@@ -1871,7 +1871,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         .forEach((choice) => {
           const randomPick = randomBetween(
             0,
-            choice.pokemons
+            choice.pokemons.length > 0
               ? choice.pokemons.length - 1
               : choice.items.length - 1
           )
