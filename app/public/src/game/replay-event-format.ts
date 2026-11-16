@@ -1,7 +1,7 @@
 // render-time localization of event-log row content. the index + combat scan emit structured descriptors
 // ({ type, a, key }) of raw game-data values (enum names) + numbers, localized here. word order + plurals live in
 // the replay.eventlog.row.* templates; game-data nouns route through the game's own locale keys, so a bump needs no new strings for them
-import type { TFunction } from "i18next"
+import { exists, type TFunction } from "i18next"
 import { Transfer } from "../../../types"
 import { EnvironmentalEffects } from "../../../types/enum/Effect"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
@@ -35,8 +35,13 @@ const typedT = (t: TFunction): TD => t as unknown as TD
 
 export const pkmName = (t: TFunction, v: string): string =>
   typedT(t)(`pkm.${v}`)
+// effect-only casts (GREEN_ORB, GROUND_GROW) have no ability string, and some are items
 const abilityName = (t: TFunction, v: string): string =>
-  typedT(t)(`ability.${v}`)
+  exists(`ability.${v}`)
+    ? typedT(t)(`ability.${v}`)
+    : exists(`item.${v}`)
+      ? typedT(t)(`item.${v}`)
+      : prettyName(v)
 export const itemName = (t: TFunction, v: string): string =>
   typedT(t)(`item.${v}`)
 export const mapName = (t: TFunction, v: string): string =>
