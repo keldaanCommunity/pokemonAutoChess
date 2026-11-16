@@ -153,6 +153,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
+  itemStatsStolen = new Set<Item>() // held items whose stats Spectral Thief took
   constructor(
     pokemon: IPokemon,
     positionX: number,
@@ -880,9 +881,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   removeItemEffect(item: Item) {
-    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+    const stolen = this.itemStatsStolen.delete(item)
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+      // Spectral Thief already took these stats from the unit
+      if (stolen && StatsStolenBySpectralThief.includes(stat as Stat)) return
       this.applyStat(stat as Stat, -value)
-    )
+    })
 
     const type = SynergyGivenByItem[item]
     const default_types = getPokemonData(this.name).types
@@ -1479,6 +1483,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
+    this.itemStatsStolen.clear()
     // Recalculate stats as it was at the start of the battle
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
@@ -1890,6 +1895,19 @@ export function canSell(
 
   return new PokemonClasses[pkm](pkm).canBeSold
 }
+
+// the stats Spectral Thief takes, see spectral-thief.ts
+const StatsStolenBySpectralThief = [
+  Stat.ATK,
+  Stat.SPEED,
+  Stat.DEF,
+  Stat.SPE_DEF,
+  Stat.AP,
+  Stat.HP,
+  Stat.CRIT_CHANCE,
+  Stat.CRIT_POWER,
+  Stat.LUCK
+]
 
 function applyBigEaterBeltStatBuff(
   pokemon: PokemonEntity,
