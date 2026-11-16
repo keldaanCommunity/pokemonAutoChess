@@ -64,19 +64,25 @@ export default function WikiStages() {
         })
       }
 
-      // Check for portal carousel stages
-      if (PortalCarouselStages.includes(level)) {
+      if (level === 0) {
+        stages.push({
+          level,
+          icon: "/assets/ui/starter.svg",
+          title: t("wiki.stages.starter_pick"),
+          type: "portal"
+        })
+      } else if (level === 10) {
         stages.push({
           level,
           icon: "/assets/ui/mythical.svg",
-          title:
-            level === 0
-              ? t("wiki.stages.starter_pick")
-              : level === 10
-                ? t("unique_pick")
-                : level === 20
-                  ? t("wiki.stages.atlas_open")
-                  : undefined,
+          title: t("unique_pick"),
+          type: "portal"
+        })
+      } else if (level === 20) {
+        stages.push({
+          level,
+          icon: "/assets/ui/atlas.svg",
+          title: t("wiki.stages.atlas_open"),
           type: "portal"
         })
       } else if (AdditionalPicksStages.includes(level)) {
