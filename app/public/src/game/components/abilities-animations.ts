@@ -2386,7 +2386,7 @@ export const AbilitiesAnimations: {
   [Ability.STOCKPILE]: onCaster({
     oriented: true,
     rotation: -Math.PI / 2,
-    ability: Ability.AQUA_JET
+    ability: Ability.SWALLOW
   }),
   [Ability.EXTREME_SPEED]: [onCaster({}), onTarget({})],
   [Ability.SALT_CURE]: onCaster({
