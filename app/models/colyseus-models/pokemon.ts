@@ -16428,7 +16428,11 @@ export class OgerponTealMask extends Pokemon {
 }
 
 export class OgerponWellspring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.GRASS,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16450,7 +16454,11 @@ export class OgerponWellspring extends Pokemon {
 }
 
 export class OgerponWellspringMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.GRASS,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
