@@ -854,7 +854,9 @@ export class MiniGame {
           ([_itemId, item]) => item.avatarId === ""
         )
         if (remainingItems.length > 0) {
-          avatar.itemId = pickRandomIn(remainingItems)[0]
+          const [itemId, item] = pickRandomIn(remainingItems)
+          avatar.itemId = itemId
+          item.avatarId = avatar.id
         }
       }
 
