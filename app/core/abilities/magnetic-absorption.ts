@@ -1,7 +1,6 @@
 import { AttackType } from "../../types/enum/Game"
 import { distanceM } from "../../utils/distance"
 import { min } from "../../utils/number"
-import { shuffleArray } from "../../utils/random"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
