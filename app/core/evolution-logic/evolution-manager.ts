@@ -12,7 +12,6 @@ import {
   type StateEvolutionRule
 } from "../../types/EvolutionRules"
 import { PokemonActionState } from "../../types/enum/Game"
-import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
