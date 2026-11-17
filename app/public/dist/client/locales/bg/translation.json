@@ -1861,7 +1861,7 @@
 		"POWER_LENS": "Количеството SPECIAL, намалено с SPE_DEF, се връща обратно на нападателя",
 		"SHELL_BELL": "Притежателят лекува {{healingPercent}}% от всички нанесени щети",
 		"BLUE_ORB": "Всяка {{attackInterval}} атака от притежателя отприщва верижна светкавица, която отскача към {{targetCount}}-те затварящи се врага, нанасяйки {{damage}} SPECIAL и изгаряйки {{ppBurn}} PP",
-		"SCOPE_LENS": "Критичните атаки крадат {{ppSteal}} PP от целта ON_ATTACK.",
+		"SCOPE_LENS": "Критичните атаки крадат {{ppSteal}} PP от целта ON_HIT.",
 		"STAR_DUST": "След способност за замятане, спечелете {{shieldPerMaxPpPercent}}% от максималната PP като SHIELD",
 		"GREEN_ORB": "Притежателят и ADJACENT съюзниците възстановяват {{healingPercent}}% от максималните си HP на всеки {{intervalSeconds}} сек. {{overhealToPpPercent}}% от излишното лечение се превръща в PP.",
 		"DEEP_SEA_TOOTH": "Притежателят възстановява {{ppPerAttack}} допълнителни PP ON_ATTACK. Ако атаката повали целта, възстановява още {{ppPerKo}} PP.",

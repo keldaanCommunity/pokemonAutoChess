@@ -73,7 +73,7 @@ import {
   OnResurrectionEffect,
   OnSpawnEffect
 } from "./effects/effect"
-import { ItemEffects } from "./effects/items"
+import { ItemEffects, RunningShoesOnMoveEffect } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
 import {
   FireHitEffect,
@@ -893,7 +893,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     const type = SynergyGivenByItem[item]
     const default_types = getPokemonData(this.name).types
-    if (type && !default_types.includes(type)) {
+    if (
+      type &&
+      !default_types.includes(type) &&
+      !schemaValues(this.items).some(
+        (heldItem) => SynergyGivenByItem[heldItem] === type
+      )
+    ) {
       this.types.delete(type)
       SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
@@ -928,6 +934,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
   }
 
+  markItemStatsStolen(speedLost: number, attackLost: number) {
+    this.items.forEach((item) => this.itemStatsStolen.add(item))
+    this.getEffects(RunningShoesOnMoveEffect).forEach((effect) =>
+      effect.removeStolenBonuses(speedLost, attackLost)
+    )
+  }
+
   moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
     if (forcedDisplacement && !this.canBeMoved) return
     const target = board.getEntityOnCell(x, y)
@@ -957,6 +970,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     totalTakenDamage,
+    isAttackSuccessful,
     isTripleAttack,
     hasAttackKilled,
     crit
@@ -968,6 +982,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
     totalTakenDamage: number
+    isAttackSuccessful: boolean
     isTripleAttack: boolean
     hasAttackKilled: boolean
     crit: boolean
@@ -988,6 +1003,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         totalTakenDamage,
+        isAttackSuccessful,
         isTripleAttack,
         hasAttackKilled,
         crit
@@ -1113,7 +1129,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(EffectEnum.TOXIC)) {
         poisonChance = EffectConfigs.TOXIC.poisonChance.value / 100
       }
-      if (target.player) {
+      if (this.simulation.weather === Weather.SMOG && target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -=
           nbSmellyClays *
@@ -1622,6 +1638,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         effect.count = 0
       } else if (effect instanceof FlyingProtectionEffect) {
         effect.flyingProtection = 0 // prevent flying effects twice
+      } else if (effect instanceof RunningShoesOnMoveEffect) {
+        effect.resetBonuses()
       }
     })
 

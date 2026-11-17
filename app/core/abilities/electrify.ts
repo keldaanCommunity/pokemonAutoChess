@@ -1,7 +1,4 @@
-import { ItemConfigs } from "../../config/game/items"
-import { Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
-import { schemaValues } from "../../utils/schemas"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { getStrongestUnit } from "../unit-score"
@@ -28,19 +25,6 @@ export class ElectrifyStrategy extends AbilityStrategy {
     if (buffedUnit.types.has(Synergy.ELECTRIC) === false) {
       buffedUnit.types.add(Synergy.ELECTRIC)
       pokemon.simulation.applySynergyEffects(buffedUnit, Synergy.ELECTRIC)
-      if (pokemon.player) {
-        const nbCellBatteries = schemaValues(pokemon.player.items).filter(
-          (item) => item === Item.CELL_BATTERY
-        ).length
-        if (nbCellBatteries > 0) {
-          buffedUnit.addSpeed(
-            ItemConfigs.CELL_BATTERY.benchSpeedBonus * nbCellBatteries,
-            pokemon,
-            0,
-            false
-          )
-        }
-      }
     }
   }
 }

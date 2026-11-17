@@ -742,6 +742,7 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect &&
       !this.skydiving &&
       !pkm.effects.has(EffectEnum.IMMUNITY_FREEZE) &&
+      !pkm.items.has(Item.FLAME_ORB) &&
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.SNOW) {
@@ -812,6 +813,7 @@ export default class Status extends Schema implements IStatus {
       !this.runeProtect &&
       !this.skydiving &&
       !pkm.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+      !pkm.items.has(Item.XRAY_VISION) &&
       this.ccCooldown <= 0
     ) {
       if (pkm.simulation.weather === Weather.NIGHT) {

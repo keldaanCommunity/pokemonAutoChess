@@ -335,7 +335,7 @@ export const ItemConfigs = {
   },
   [Item.BALL]: {
     shield: 50,
-    speedDamagePercent: 30,
+    speedDamagePercent: { value: 30, apScaling: 1 },
     projectileSpeed: 4,
     allyTransferDelayMs: 500
   },
@@ -399,7 +399,7 @@ export const ItemConfigs = {
   },
   [Item.SIRUPY_APPLE]: {
     effectChance: { value: 30, luckScaling: true },
-    durationSeconds: 1
+    durationSeconds: 3
   },
   [Item.SWEET_APPLE]: { specialDefenseReduction: 2 },
   [Item.TART_APPLE]: { defenseReduction: 2 },

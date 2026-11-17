@@ -395,18 +395,36 @@ export class GreenOrbEffect extends PeriodicEffect {
 }
 
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
-  stacks = 0
+  private speedGained = 0
+  private attackGained = 0
 
   constructor() {
     super(({ pokemon }) => {
+      const { speed, atk } = pokemon
       pokemon.addSpeed(
         ItemConfigs.RUNNING_SHOES.speedPerMove,
         pokemon,
         0,
         false
       )
-      this.stacks += 1
+      this.speedGained += pokemon.speed - speed
+      this.attackGained += pokemon.atk - atk
     })
+  }
+
+  removeBonuses(pokemon: PokemonEntity) {
+    pokemon.speed = min(0)(pokemon.speed - this.speedGained)
+    pokemon.atk = min(1)(pokemon.atk - this.attackGained)
+  }
+
+  removeStolenBonuses(speedLost: number, attackLost: number) {
+    this.speedGained = min(0)(this.speedGained - speedLost)
+    this.attackGained = min(0)(this.attackGained - attackLost)
+  }
+
+  resetBonuses() {
+    this.speedGained = 0
+    this.attackGained = 0
   }
 }
 
@@ -934,7 +952,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
-      pokemon.effects.add(EffectEnum.IMMUNITY_FREEZE)
       pokemon.addAttack(
         pokemon.baseAtk * (ItemConfigs.FLAME_ORB.baseAttackBonusPercent / 100),
         pokemon,
@@ -968,12 +985,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       if (!pokemon.items.has(Item.AIR_BALLOON)) {
         pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
       }
-    })
-  ],
-
-  [Item.XRAY_VISION]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.effects.add(EffectEnum.IMMUNITY_SLEEP)
     })
   ],
 
@@ -1266,9 +1277,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.ELECTIRIZER]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
+    new OnAttackEffect(({ pokemon, target, isAttackSuccessful }) => {
       const { attackInterval, durationSeconds } = ItemConfigs.ELECTIRIZER
-      if (target && pokemon.count.attackCount % attackInterval === 0) {
+      if (
+        target &&
+        isAttackSuccessful &&
+        pokemon.count.attackCount % attackInterval === 0
+      ) {
         target.status.triggerParalysis(durationSeconds * 1000, target, pokemon)
       }
     })
@@ -1337,18 +1352,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.RUNNING_SHOES]: [
-    () => new RunningShoesOnMoveEffect(), // needs new instance of effect for each pokemon due to internal stack counter
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effectsSet.add(new RunningShoesOnMoveEffect())
+    }),
     new OnItemLostInCombatEffect((pokemon) => {
-      const stacks =
-        Object.values(pokemon.effectsSet).find(
-          (effect) => effect instanceof RunningShoesOnMoveEffect
-        )?.stacks ?? 0
-      pokemon.addSpeed(
-        -ItemConfigs.RUNNING_SHOES.speedPerMove * stacks,
-        pokemon,
-        0,
-        false
-      )
+      for (const effect of pokemon.effectsSet) {
+        if (effect instanceof RunningShoesOnMoveEffect) {
+          effect.removeBonuses(pokemon)
+          pokemon.effectsSet.delete(effect)
+          break
+        }
+      }
     })
   ],
 
@@ -1433,8 +1447,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.SCOPE_LENS]: [
-    new OnAttackEffect(({ pokemon, target, crit }) => {
-      if (crit && target) {
+    new OnAttackEffect(({ pokemon, target, crit, isAttackSuccessful }) => {
+      if (crit && target && isAttackSuccessful) {
         const ppStolen = max(target.pp)(ItemConfigs.SCOPE_LENS.ppSteal)
         pokemon.addPP(ppStolen, pokemon, 0, false)
         target.addPP(-ppStolen, pokemon, 0, false)
@@ -2112,8 +2126,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
 
         if (furthestEnemy) {
+          const { value, apScaling } = ItemConfigs.BALL.speedDamagePercent
           const damage = Math.round(
-            (ItemConfigs.BALL.speedDamagePercent / 100) * pokemon.speed
+            (value / 100) * pokemon.speed * (1 + (pokemon.ap * apScaling) / 100)
           )
           const travelTime = Math.round(
             (maxDistance * 1000) /

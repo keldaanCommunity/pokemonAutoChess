@@ -1,4 +1,9 @@
-import { EvolutionTime, getBaseAltForm, PkmsWithAltForms } from "../config"
+import {
+  EvolutionTime,
+  ExpTable,
+  getBaseAltForm,
+  PkmsWithAltForms
+} from "../config"
 import { ItemConfigs, SYNERGY_GEM_BONUS } from "../config/game/items"
 import { LegendaryPool, UniquePool } from "../config/game/pools"
 import { giveRandomEgg } from "../core/eggs"
@@ -249,9 +254,16 @@ const giftFoodAndPicnic = (toPlayer: Player) => {
 }
 
 const giftXP = (amount: number) => (toPlayer: Player) => {
-  const xpActuallyGained = toPlayer.addExperience(amount)
-  if (xpActuallyGained < amount) {
-    toPlayer.addMoney(amount - xpActuallyGained, true, null)
+  const { level, maxLevel, experience } = toPlayer.experienceManager
+  let xpUntilCap = -experience
+  for (let currentLevel = level; currentLevel < maxLevel; currentLevel++) {
+    xpUntilCap += ExpTable[currentLevel]
+  }
+  toPlayer.addExperience(amount)
+
+  const overflow = amount - Math.max(0, xpUntilCap)
+  if (overflow > 0) {
+    toPlayer.addMoney(overflow, true, null)
   }
 }
 

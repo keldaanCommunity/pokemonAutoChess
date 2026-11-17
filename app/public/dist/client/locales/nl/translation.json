@@ -1345,7 +1345,7 @@
 		"POWER_LENS": "De hoeveelheid SPECIAL die met SPE_DEF is verminderd, wordt teruggegeven aan de aanvaller",
 		"SHELL_BELL": "Holder geneest voor {{healingPercent}}% van alle toegebrachte schade",
 		"BLUE_ORB": "Elke {{attackInterval}} aanvallen van de houder ontketent een kettingbliksem die terugkaatst naar de {{targetCount}} sluitende vijanden, wat {{damage}} SPECIAL oplevert en {{ppBurn}} PP verbrandt",
-		"SCOPE_LENS": "Kritieke aanvallen stelen {{ppSteal}} PP van het doelwit ON_ATTACK.",
+		"SCOPE_LENS": "Kritieke aanvallen stelen {{ppSteal}} PP van het doelwit ON_HIT.",
 		"STAR_DUST": "Krijg na het casten {{shieldPerMaxPpPercent}}% van de maximale PP als SHIELD",
 		"GREEN_ORB": "De houder en ADJACENT bondgenoten herstellen elke {{intervalSeconds}} sec. {{healingPercent}}% van hun maximale HP. {{overhealToPpPercent}}% van de overtollige genezing wordt omgezet in PP.",
 		"DEEP_SEA_TOOTH": "De houder herstelt {{ppPerAttack}} extra PP ON_ATTACK. Als de aanval het doelwit uitschakelt, herstelt hij nog {{ppPerKo}} PP.",
