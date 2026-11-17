@@ -1450,7 +1450,7 @@
 		"FREEZE": "Voorkomt bewegen of aanvallen",
 		"PROTECT": "Beschermt tegen elke vorm van schade, maar voorkomt PP-winst",
 		"SLEEP": "Voorkomt bewegen of aanvallen. Het ontvangen van schade vermindert de duur van het effect.",
-		"CONFUSION": "Dwing om de hele tijd van doelwit te veranderen en breng zichzelf soms schade toe",
+		"CONFUSION": "De Pokémon wisselt voortdurend van doelwit en valt [soms,LK] een bondgenoot of zichzelf aan.",
 		"WOUND": "Voorkomt genezing van welke bron dan ook",
 		"RESURRECTION": "Voorkomt KO eenmaal, herstelt naar max HP",
 		"PARALYSIS": "Vermindert de effectiviteit van SPEED met {{speedReductionPercent}}% en voorkomt het ontwijken van aanvallen.",

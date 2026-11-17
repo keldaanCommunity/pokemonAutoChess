@@ -67,7 +67,9 @@ function getDescriptionTitle(path: `item_description.${Item}`) {
     Object.fromEntries(
       Object.entries(config).map(([key, value]) => [
         key,
-        formatDescriptionValue(value)
+        typeof value === "number"
+          ? value
+          : (value.valuePerTier?.join("/") ?? value.value)
       ])
     )
   return t(path, values)

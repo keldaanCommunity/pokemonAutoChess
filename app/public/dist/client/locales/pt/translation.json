@@ -3581,7 +3581,7 @@
 		"FREEZE": "Impede o movimento, esquiva e ataque",
 		"PROTECT": "Protege contra qualquer fonte de dano, mas impede a cura e ganho de PP. Os inimigos evitarão atacar uma unidade protegida.",
 		"SLEEP": "Impede movimento, esquiva e ataque. Receber dano reduz a duração do efeito.",
-		"CONFUSION": "Força mudar de alvo o tempo todo e às vezes causa dano a si mesmo",
+		"CONFUSION": "O Pokémon muda de alvo constantemente e [às vezes,LK] ataca um aliado ou a si mesmo.",
 		"WOUND": "Impede a cura de qualquer fonte",
 		"RESURRECTION": "Previne ser nocauteado uma vez, restaurando o HP máximo. Os bônus de sinergia, cargas de itens e status são redefinidos ao ressuscitar.",
 		"PARALYSIS": "Reduz {{speedReductionPercent}}% da SPEED e impede a esquiva de ataques",
@@ -3669,7 +3669,7 @@
 		"WILD_ADDITIONAL": "Chance atual de encontrar um Pokémon WILD: {{wildChance}}%",
 		"AMORPHOUS": "Pokémons AMORPHOUS são extremamente flexíveis e não possuem forma própria. Sua equipe recebe HP e SPEED ao ativar uma ampla variedade de sinergias.",
 		"GOURMET": "Pokémons GOURMET podem ser equipados com um CHEF_HAT. Os chefs preparam seu Prato de Assinatura entre as batalhas e alimentam os aliados ADJACENT, fornecendo diversos bônus e efeitos.",
-		"NORMAL_SCARVES": "Lenços feitos: {{scarves}}",
+		"NORMAL_SCARVES": "\nLenços feitos: {{scarves}}",
 		"FAIRY": "Pokémon FAIRY usam varinhas para causar SPECIAL adicional e diversos efeitos com seus ataques.{{additionalInfo}}",
 		"FAIRY_WANDS": "\nVarinhas equipadas: {{wands}}"
 	},

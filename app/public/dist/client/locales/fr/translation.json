@@ -2505,7 +2505,7 @@
 		"GUTS": "Bloque {{damageBlocked}} dégâts",
 		"STURDY": "Bloque {{damageBlocked}} dégâts",
 		"DEFIANT": "Bloque {{damageBlocked}} dégâts",
-		"COACHING": "Bloque {{damageBlocked}} dégâts. Gagnez un Pillier en Bois. Chaque tour, les Pokémon de type FIGHTING sur votre banc avec un pillier à leur gauche s'entraîneront et gagneront {{trainingAttack}} ATK et {{trainingMaxHpPercent}}% de HP max de base de manière permanente.",
+		"COACHING": "Bloque {{damageBlocked}} dégâts. Un sac de frappe apparaît à gauche de votre banc. À chaque manche, les Pokémon FIGHTING sur votre banc s'entraînent si un sac de frappe ou un pilier se trouve juste à leur gauche. Ils gagnent définitivement {{trainingAttack}} ATK et {{trainingMaxHpPercent}}% de leurs HP max de base.",
 		"PRECOGNITION": "+{{abilityPower}} AP. Un Zarbi apparaît toutes les {{shopInterval}} relances du magasin.",
 		"AURA": "+{{abilityPower}} AP. Un Zarbi apparaît toutes les {{shopInterval}} relances du magasin",
 		"TRANSCENDENCE": "+{{abilityPower}} AP. Obtenez un magasin Zarbi et une relance gratuite du magasin après chaque combat et toutes les {{rerollInterval}} relances du magasin.",
@@ -3585,7 +3585,7 @@
 		"FREEZE": "Empêche de bouger, d'esquiver ou d'attaquer",
 		"PROTECT": "Protège de toute source de dégâts, mais empêche le gain de PP ou de HP. Les ennemis éviteront de cibler une unité protégée.",
 		"SLEEP": "Empêche de bouger, d'esquiver ou d'attaquer. Subir des dégâts réduit la durée de l'effet.",
-		"CONFUSION": "Force à changer de cible tout le temps et parfois à s'auto-infliger des dégâts",
+		"CONFUSION": "Le Pokémon change constamment de cible et attaque [parfois,LK] un allié ou lui-même.",
 		"WOUND": "Empêche d'être soigné, toutes sources confondues",
 		"RAGE": "Multiplie tous les dégâts par {{damageMultiplier}}, gagne +{{speedBonus}} de SPEED. Réduit les soins, le SHIELD reçu et la durée du FREEZE et du SLEEP de {{reductionPercent}}%, et retire PROTECT. Toutes les unités deviennent RAGE après {{automaticDelaySeconds}} secondes de combat.",
 		"RESURRECTION": "Empêche de tomber KO une fois, restaurant les HP max de base. Les bonus de synergie, les effets d'objets cumulés et les statuts sont réinitialisés lors de la résurrection.",
@@ -3673,8 +3673,8 @@
 		"WILD_ADDITIONAL": "\nChances actuelles de trouver des Pokémon WILD: {{wildChance}}%.",
 		"AMORPHOUS": "Les Pokémon AMORPHOUS peuvent prendre de nombreuses formes. Votre équipe gagne des HP et de la SPEED en activant un grand nombre de synergies différentes.",
 		"GOURMET": "Les Pokémon GOURMET peuvent être équipés d'une CHEF_HAT. Les Chefs concocteront leur Plat Signature entre les combats et nourriront les alliés ADJACENT, leur conférant divers bonus et effets.",
-		"NORMAL_SCARVES": "\\nFoulards choisis: {{scarves}}",
-		"FAIRY_WANDS": "Branches obtenues: {{wands}}"
+		"NORMAL_SCARVES": "\nFoulards choisis: {{scarves}}",
+		"FAIRY_WANDS": "\nBranches obtenues: {{wands}}"
 	},
 	"title": {
 		"no_title": "Aucun Titre",

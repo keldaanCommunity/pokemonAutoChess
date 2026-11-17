@@ -1,3 +1,4 @@
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../config/game/board"
 import { type IPokemonEntity, Transfer } from "../types"
 import { type BoardEffect, EffectEnum } from "../types/enum/Effect"
 import { Orientation, OrientationKnockback, Team } from "../types/enum/Game"
@@ -878,6 +879,19 @@ export class Board {
           distanceC(b.positionX, b.positionY, positionX, positionY)
       )
   }
+}
+
+export function getGroundHoleAt(simulation: Simulation, x: number, y: number) {
+  const { bluePlayer, redPlayer } = simulation
+  const blueIndex = y * BOARD_WIDTH + x
+  const redIndex = (BOARD_HEIGHT - 1 - y) * BOARD_WIDTH + x
+  const blueDepth = bluePlayer?.groundHoles[blueIndex] ?? 0
+  const redDepth = redPlayer?.groundHoles[redIndex] ?? 0
+
+  // Prefer the deepest existing hole. Keep Blue for ties and new holes.
+  return redDepth > blueDepth
+    ? { player: redPlayer, index: redIndex, depth: redDepth }
+    : { player: bluePlayer, index: blueIndex, depth: blueDepth }
 }
 
 export function effectInOrientation(
