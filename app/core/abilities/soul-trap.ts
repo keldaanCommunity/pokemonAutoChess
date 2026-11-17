@@ -9,7 +9,14 @@ export class SoulTrapStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const cast = {
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: pokemon.orientation,
+      skill: pokemon.skill,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    }
     // Gain [25,50,108,108] SHIELD, then enemies within a 2-tile radius lose [10,10,10,50,SP] PP and get FATIGUE for [2,2,2,5,SP,ND=1] seconds and choose the user as the target.
     const shieldAmount = [25, 50, 108, 108][pokemon.stars - 1] ?? 108
     const ppLoss = [10, 10, 10, 50][pokemon.stars - 1] ?? 50
@@ -22,6 +29,10 @@ export class SoulTrapStrategy extends AbilityStrategy {
     const enemies = board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 2, false)
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+    pokemon.broadcastAbility({
+      ...cast,
+      data: { targets: enemies.map(({ x, y }) => ({ x, y })) }
+    })
     enemies.forEach((cell) => {
       const enemy = cell.value!
       enemy.addPP(-ppLoss, pokemon, 1, crit)

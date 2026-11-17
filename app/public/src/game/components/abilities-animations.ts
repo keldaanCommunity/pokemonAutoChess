@@ -51,6 +51,7 @@ import {
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   oblivionWingAnimation,
+  soulTrapAnimation,
   starShieldAnimation,
   tidalWaveAnimation
 } from "./animations"
@@ -429,6 +430,7 @@ export const AbilitiesAnimations: {
     scale: 3
   }),
   [Ability.DARK_VOID]: onTarget({
+    ability: Ability.SHADOW_BALL,
     scale: 6,
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
@@ -2535,11 +2537,7 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON,
     ability: Ability.DISCHARGE
   }),
-  [Ability.SOUL_TRAP]: onCaster({
-    depth: DEPTH.ABILITY_BELOW_POKEMON,
-    ability: Ability.DARK_VOID,
-    scale: 2
-  }),
+  [Ability.SOUL_TRAP]: soulTrapAnimation,
   [Ability.REVELATION_DANCE]: onSprite(({ casterSprite, ...args }) => {
     let color = 0xffffff
     switch (casterSprite?.pokemon?.name) {
