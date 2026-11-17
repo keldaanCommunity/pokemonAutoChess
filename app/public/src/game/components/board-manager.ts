@@ -9,6 +9,7 @@ import {
   PortalCarouselStages,
   RegionDetails
 } from "../../../../config"
+import { ItemConfigs } from "../../../../config/game/items"
 import { getMusicAlt } from "../../../../config/game/music"
 import { SynergyConfigs } from "../../../../config/game/synergies"
 import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
@@ -420,7 +421,7 @@ export default class BoardManager {
         332,
         636,
         "item",
-        `${mulchCollected >= 8 ? Item.AMAZE_MULCH : Item.RICH_MULCH}.png`
+        `${mulchCollected >= ItemConfigs.AMAZE_MULCH.richMulchRequired ? Item.AMAZE_MULCH : Item.RICH_MULCH}.png`
       )
       this.mulchIcon.setScale(0.25).setDepth(DEPTH.TEXT)
     }

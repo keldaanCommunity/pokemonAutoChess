@@ -1,5 +1,6 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { INTEREST_GOLD_INTERVAL } from "../../config/game/shop"
 import { StatusConfigs } from "../../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
 import {
@@ -118,7 +119,8 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
       trueDamage: 0,
       totalDamage: 0,
       totalTakenDamage: 0,
-      crit: false
+      crit: false,
+      isAttackSuccessful: false
     })
   })
 }
@@ -1494,7 +1496,8 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((entity) => {
       if (
         entity.player &&
-        entity.player.money >= entity.player.maxInterest * 10
+        entity.player.money >=
+          entity.player.maxInterest * INTEREST_GOLD_INTERVAL
       ) {
         entity.status.triggerRuneProtect(60000, entity, entity)
       }

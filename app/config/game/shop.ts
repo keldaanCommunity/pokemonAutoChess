@@ -94,6 +94,8 @@ export const TERRA_CYMBAL_CHANCE = 5 / 100
 
 export const HIGH_ROLLER_CHANCE = 2 / 100
 
+export const INTEREST_GOLD_INTERVAL = 10
+
 /* sell prices */
 export const SellPrices = {
   EGG: 2,

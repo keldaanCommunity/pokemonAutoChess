@@ -1,7 +1,8 @@
 import { getBaseAltForm } from "../../config"
+import { ItemStats } from "../../config/game/items"
 import { Item } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Stat } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { schemaValues } from "../../utils/schemas"
 import type { Board } from "../board"
@@ -28,19 +29,22 @@ export class OrderUpStrategy extends AbilityStrategy {
     pokemonsEating.add(pokemon)
 
     if (pokemon.items.has(Item.TATSUGIRI_CURLY)) {
+      const stats = ItemStats[Item.TATSUGIRI_CURLY]
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
-        p.addAttack(8, p, 0, false)
+        p.addMaxHP(stats[Stat.HP], p, 0, false)
+        p.addAttack(stats[Stat.ATK], p, 0, false)
       })
     } else if (pokemon.items.has(Item.TATSUGIRI_DROOPY)) {
+      const stats = ItemStats[Item.TATSUGIRI_DROOPY]
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
-        p.addDefense(8, p, 0, false)
+        p.addMaxHP(stats[Stat.HP], p, 0, false)
+        p.addDefense(stats[Stat.DEF], p, 0, false)
       })
     } else if (pokemon.items.has(Item.TATSUGIRI_STRETCHY)) {
+      const stats = ItemStats[Item.TATSUGIRI_STRETCHY]
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
-        p.addSpeed(25, p, 0, false)
+        p.addMaxHP(stats[Stat.HP], p, 0, false)
+        p.addSpeed(stats[Stat.SPEED], p, 0, false)
       })
     } else if (pokemon.player) {
       const tatsugiriOnBoard = schemaValues(pokemon.player.board).find(

@@ -1,6 +1,8 @@
 import { FIGHTING_PHASE_DURATION, getBaseAltForm } from "../../config"
+import { ItemConfigs, ItemStats } from "../../config/game/items"
 import { Title } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
+import { Stat } from "../../types/enum/Game"
 import { Berries, type Dishes, Item } from "../../types/enum/Item"
 import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
@@ -18,27 +20,43 @@ import {
 export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.BERRY_JUICE]: [
     new OnSpawnEffect((entity) => {
-      entity.addShield(100, entity, 0, false)
+      entity.addShield(ItemConfigs.BERRY_JUICE.shield, entity, 0, false)
       entity.effects.add(EffectEnum.BERRY_JUICE)
     })
   ],
   [Item.BIG_MUSHROOM]: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+      entity.addMaxHP(
+        (ItemConfigs.BIG_MUSHROOM.maxHpBonusPercent / 100) * entity.baseHP,
+        entity,
+        0,
+        false
+      )
     })
   ],
   [Item.BALM_MUSHROOM]: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(30000, entity, entity)
-      entity.addSpeed(30, entity, 0, false)
+      const { safeguardDurationSeconds, speed, healPercent, intervalSeconds } =
+        ItemConfigs.BALM_MUSHROOM
+      entity.status.triggerRuneProtect(
+        safeguardDurationSeconds * 1000,
+        entity,
+        entity
+      )
+      entity.addSpeed(speed, entity, 0, false)
       entity.effects.add(EffectEnum.BALM_MUSHROOM)
       entity.effectsSet.add(
         new PeriodicEffect(
           (entity) => {
-            entity.handleHeal(0.1 * entity.maxHP, entity, 0, false)
+            entity.handleHeal(
+              (healPercent / 100) * entity.maxHP,
+              entity,
+              0,
+              false
+            )
           },
           Item.BALM_MUSHROOM,
-          1000
+          intervalSeconds * 1000
         )
       )
     })
@@ -50,34 +68,53 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     }),
     new OnHitEffect(({ attacker, target }) => {
       if (attacker.effects.has(EffectEnum.BINDING_MOCHI)) {
-        target.status.triggerPossessed(5000, target, attacker)
+        target.status.triggerPossessed(
+          ItemConfigs.BINDING_MOCHI.durationSeconds * 1000,
+          target,
+          attacker
+        )
         attacker.effects.delete(EffectEnum.BINDING_MOCHI)
       }
     })
   ],
   [Item.BLACK_SLUDGE]: [
     new OnSpawnEffect((entity) => {
+      const { healPercent, intervalSeconds, selfPoisonDurationSeconds } =
+        ItemConfigs.BLACK_SLUDGE
       entity.effects.add(EffectEnum.BLACK_SLUDGE)
       if (entity.types.has(Synergy.POISON)) {
         entity.effectsSet.add(
           new PeriodicEffect(
             (entity) => {
-              entity.handleHeal(0.05 * entity.maxHP, entity, 0, false)
+              entity.handleHeal(
+                (healPercent / 100) * entity.maxHP,
+                entity,
+                0,
+                false
+              )
             },
             Item.BLACK_SLUDGE,
-            2000
+            intervalSeconds * 1000
           )
         )
       } else {
-        entity.status.triggerPoison(30000, entity, entity)
+        entity.status.triggerPoison(
+          selfPoisonDurationSeconds * 1000,
+          entity,
+          entity
+        )
       }
     }),
     new OnHitEffect(({ attacker, target }) => {
       if (
         attacker.effects.has(EffectEnum.BLACK_SLUDGE) ||
-        chance(0.3, attacker)
+        chance(ItemConfigs.BLACK_SLUDGE.effectChance.value / 100, attacker)
       ) {
-        target.status.triggerPoison(5000, target, attacker)
+        target.status.triggerPoison(
+          ItemConfigs.BLACK_SLUDGE.durationSeconds * 1000,
+          target,
+          attacker
+        )
         attacker.effects.delete(EffectEnum.BLACK_SLUDGE)
       }
     })
@@ -89,34 +126,48 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnHitEffect(({ attacker, target }) => {
       if (
         attacker.effects.has(EffectEnum.CASTELIACONE) ||
-        chance(0.3, attacker)
+        chance(ItemConfigs.CASTELIACONE.effectChance.value / 100, attacker)
       ) {
-        target.status.triggerFreeze(2000, target, attacker)
+        target.status.triggerFreeze(
+          ItemConfigs.CASTELIACONE.durationSeconds * 1000,
+          target,
+          attacker
+        )
         attacker.effects.delete(EffectEnum.CASTELIACONE)
       }
     })
   ],
   [Item.CURRY]: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRage(3000, entity)
+      entity.status.triggerRage(
+        ItemConfigs.CURRY.durationSeconds * 1000,
+        entity
+      )
     })
   ],
   [Item.FRUIT_JUICE]: [
     new OnSpawnEffect((entity) => {
-      entity.addSpeed(50, entity, 0, false)
+      entity.addSpeed(ItemConfigs.FRUIT_JUICE.speed, entity, 0, false)
     })
   ],
   [Item.LUCKY_EGG]: [
     new OnSpawnEffect((entity) => {
-      entity.addLuck(30, entity, 0, false)
-      entity.addAbilityPower(30, entity, 0, false)
+      const { luck, abilityPower } = ItemConfigs.LUCKY_EGG
+      entity.addLuck(luck, entity, 0, false)
+      entity.addAbilityPower(abilityPower, entity, 0, false)
     })
   ],
   [Item.HEARTY_STEW]: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(0.3 * entity.baseHP, entity, 0, false)
+      const { maxHpBonusPercent, burnDurationSeconds } = ItemConfigs.HEARTY_STEW
+      entity.addMaxHP(
+        (maxHpBonusPercent / 100) * entity.baseHP,
+        entity,
+        0,
+        false
+      )
       if (entity.items.has(Item.COOKING_POT)) {
-        entity.status.triggerBurn(5000, entity, entity)
+        entity.status.triggerBurn(burnDurationSeconds * 1000, entity, entity)
       }
     })
   ],
@@ -150,44 +201,51 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.LARGE_LEEK]: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritPower(100, entity, 0, false)
+      const { critPower, abilityCritPower } = ItemConfigs.LARGE_LEEK
+      entity.addCritPower(critPower, entity, 0, false)
       if (AbilityStrategies[entity.skill].canCritByDefault) {
-        entity.addCritPower(50, entity, 0, false)
+        entity.addCritPower(abilityCritPower, entity, 0, false)
       }
     })
   ],
   [Item.LEEK]: [
     new OnSpawnEffect((entity) => {
       entity.effects.add(EffectEnum.ABILITY_CRIT)
-      entity.addCritChance(50, entity, 0, false)
+      const { critChance, abilityCritPower } = ItemConfigs.LEEK
+      entity.addCritChance(critChance, entity, 0, false)
       if (AbilityStrategies[entity.skill].canCritByDefault) {
-        entity.addCritPower(50, entity, 0, false)
+        entity.addCritPower(abilityCritPower, entity, 0, false)
       }
     })
   ],
   [Item.LEFTOVERS]: [],
   [Item.MOOMOO_MILK]: [
     new OnDishConsumedEffect(({ entity }) => {
-      entity?.addMaxHP(15, entity, 0, false, true)
+      entity?.addMaxHP(ItemConfigs.MOOMOO_MILK.maxHp, entity, 0, false, true)
     })
   ],
   [Item.MUSHROOMS]: [],
   [Item.NUTRITIOUS_EGG]: [
     new OnSpawnEffect((entity) => {
-      // Start the next fight with +50% base ATK, DEF, SPE_DEF and AP
-      entity.addAttack(0.5 * entity.baseAtk, entity, 0, false)
-      entity.addDefense(0.5 * entity.baseDef, entity, 0, false)
-      entity.addSpecialDefense(0.5 * entity.baseSpeDef, entity, 0, false)
+      const factor = ItemConfigs.NUTRITIOUS_EGG.baseStatBonusPercent / 100
+      entity.addAttack(factor * entity.baseAtk, entity, 0, false)
+      entity.addDefense(factor * entity.baseDef, entity, 0, false)
+      entity.addSpecialDefense(factor * entity.baseSpeDef, entity, 0, false)
     })
   ],
   [Item.OLIVE_OIL]: [
     new OnSpawnEffect((entity) => {
-      entity.addDodgeChance(0.2, entity, 0, false)
+      entity.addDodgeChance(
+        ItemConfigs.OLIVE_OIL.dodgeChancePercent.value / 100,
+        entity,
+        0,
+        false
+      )
     })
   ],
   [Item.POFFIN]: [
     new OnSpawnEffect((entity) => {
-      entity.addShield(100, entity, 0, false)
+      entity.addShield(ItemConfigs.POFFIN.shield, entity, 0, false)
 
       if (
         entity.player &&
@@ -207,13 +265,18 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   [Item.RAGE_CANDY_BAR]: [
     new OnSpawnEffect((entity) => {
-      entity.addAttack(10, entity, 0, false)
+      entity.addAttack(ItemConfigs.RAGE_CANDY_BAR.attack, entity, 0, false)
     })
   ],
   [Item.ROCK_SALT]: [
     new OnSpawnEffect((entity) => {
-      entity.status.triggerRuneProtect(10000, entity, entity)
-      entity.addShield(0.15 * entity.maxHP, entity, 0, false)
+      const { safeguardDurationSeconds, shieldPercent } = ItemConfigs.ROCK_SALT
+      entity.status.triggerRuneProtect(
+        safeguardDurationSeconds * 1000,
+        entity,
+        entity
+      )
+      entity.addShield((shieldPercent / 100) * entity.maxHP, entity, 0, false)
     })
   ],
   [Item.SANDWICH]: [
@@ -225,51 +288,76 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
           case Synergy.GOURMET:
           case Synergy.BUG:
           case Synergy.AMORPHOUS:
-            entity.addMaxHP(20, entity, 0, false)
+            entity.addMaxHP(ItemConfigs.SANDWICH.maxHp, entity, 0, false)
             break
           case Synergy.NORMAL:
           case Synergy.ARTIFICIAL:
           case Synergy.DRAGON:
           case Synergy.BABY:
-            entity.addShield(30, entity, 0, false)
+            entity.addShield(ItemConfigs.SANDWICH.shield, entity, 0, false)
             break
           case Synergy.FIRE:
           case Synergy.STEEL:
           case Synergy.FOSSIL:
-            entity.addAttack(5, entity, 0, false)
+            entity.addAttack(ItemConfigs.SANDWICH.attack, entity, 0, false)
             break
           case Synergy.FLYING:
           case Synergy.GHOST:
-            entity.addDodgeChance(0.05, entity, 0, false)
+            entity.addDodgeChance(
+              ItemConfigs.SANDWICH.dodgeChancePercent / 100,
+              entity,
+              0,
+              false
+            )
             break
           case Synergy.ELECTRIC:
           case Synergy.FIELD:
           case Synergy.WILD:
-            entity.addSpeed(10, entity, 0, false)
+            entity.addSpeed(ItemConfigs.SANDWICH.speed, entity, 0, false)
             break
           case Synergy.ICE:
           case Synergy.AQUATIC:
           case Synergy.FLORA:
-            entity.addSpecialDefense(5, entity, 0, false)
+            entity.addSpecialDefense(
+              ItemConfigs.SANDWICH.specialDefense,
+              entity,
+              0,
+              false
+            )
             break
           case Synergy.GROUND:
           case Synergy.FIGHTING:
           case Synergy.ROCK:
-            entity.addDefense(5, entity, 0, false)
+            entity.addDefense(ItemConfigs.SANDWICH.defense, entity, 0, false)
             break
           case Synergy.PSYCHIC:
           case Synergy.HUMAN:
           case Synergy.LIGHT:
-            entity.addAbilityPower(20, entity, 0, false)
+            entity.addAbilityPower(
+              ItemConfigs.SANDWICH.abilityPower,
+              entity,
+              0,
+              false
+            )
             break
           case Synergy.FAIRY:
           case Synergy.DARK:
-            entity.addCritChance(5, entity, 0, false)
-            entity.addCritPower(10, entity, 0, false)
+            entity.addCritChance(
+              ItemConfigs.SANDWICH.critChance,
+              entity,
+              0,
+              false
+            )
+            entity.addCritPower(
+              ItemConfigs.SANDWICH.critPower,
+              entity,
+              0,
+              false
+            )
             break
           case Synergy.WATER:
           case Synergy.SOUND:
-            entity.addPP(20, entity, 0, false)
+            entity.addPP(ItemConfigs.SANDWICH.pp, entity, 0, false)
             break
         }
       })
@@ -278,62 +366,88 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.SMOKED_FILET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
       if (entity) {
-        entity.addMaxHP(-5, entity, 0, false, true)
-        entity.addAttack(3, entity, 0, false, true)
-        entity.addAbilityPower(10, entity, 0, false, true)
+        const { maxHpCost, attack, abilityPower } = ItemConfigs.SMOKED_FILET
+        entity.addMaxHP(-maxHpCost, entity, 0, false, true)
+        entity.addAttack(attack, entity, 0, false, true)
+        entity.addAbilityPower(abilityPower, entity, 0, false, true)
       }
     })
   ],
   [Item.SPINDA_COCKTAIL]: [
     new OnSpawnEffect((entity) => {
-      if (chance(0.8, entity)) {
-        entity.addAttack(10, entity, 0, false)
+      const {
+        positiveChance,
+        attack,
+        speed,
+        abilityPower,
+        shield,
+        durationSeconds
+      } = ItemConfigs.SPINDA_COCKTAIL
+      if (chance(positiveChance.value / 100, entity)) {
+        entity.addAttack(attack, entity, 0, false)
       }
-      if (chance(0.8, entity)) {
-        entity.addSpeed(50, entity, 0, false)
+      if (chance(positiveChance.value / 100, entity)) {
+        entity.addSpeed(speed, entity, 0, false)
       }
-      if (chance(0.8, entity)) {
-        entity.addAbilityPower(50, entity, 0, false)
+      if (chance(positiveChance.value / 100, entity)) {
+        entity.addAbilityPower(abilityPower, entity, 0, false)
       }
-      if (chance(0.8, entity)) {
-        entity.addShield(100, entity, 0, false)
+      if (chance(positiveChance.value / 100, entity)) {
+        entity.addShield(shield, entity, 0, false)
       }
 
-      if (!chance(0.8, entity)) {
-        entity.status.triggerConfusion(5000, entity, entity)
-      } else if (!chance(0.8, entity)) {
-        entity.status.triggerBlinded(5000, entity, entity)
-      } else if (!chance(0.8, entity)) {
-        entity.status.triggerSleep(5000, entity)
+      if (!chance(positiveChance.value / 100, entity)) {
+        entity.status.triggerConfusion(durationSeconds * 1000, entity, entity)
+      } else if (!chance(positiveChance.value / 100, entity)) {
+        entity.status.triggerBlinded(durationSeconds * 1000, entity, entity)
+      } else if (!chance(positiveChance.value / 100, entity)) {
+        entity.status.triggerSleep(durationSeconds * 1000, entity)
       }
     })
   ],
   [Item.SIRUPY_APPLE]: [
     new OnHitEffect(({ attacker, target }) => {
-      if (chance(0.3, attacker)) {
-        target.status.triggerParalysis(3000, target, attacker)
+      const { effectChance, durationSeconds } = ItemConfigs.SIRUPY_APPLE
+      if (chance(effectChance.value / 100, attacker)) {
+        target.status.triggerParalysis(durationSeconds * 1000, target, attacker)
       }
     })
   ],
   [Item.SWEET_APPLE]: [
     new OnHitEffect(({ attacker, target }) => {
-      target.addSpecialDefense(-2, attacker, 0, false)
+      target.addSpecialDefense(
+        -ItemConfigs.SWEET_APPLE.specialDefenseReduction,
+        attacker,
+        0,
+        false
+      )
     })
   ],
   [Item.TART_APPLE]: [
     new OnHitEffect(({ attacker, target }) => {
-      target.addDefense(-2, attacker, 0, false)
+      target.addDefense(
+        -ItemConfigs.TART_APPLE.defenseReduction,
+        attacker,
+        0,
+        false
+      )
     })
   ],
   [Item.TEA]: [
     new OnSpawnEffect((entity) => {
-      entity.addPP(60, entity, 0, false)
+      entity.addPP(ItemConfigs.TEA.pp, entity, 0, false)
     })
   ],
   [Item.TINY_MUSHROOM]: [
     new OnSpawnEffect((entity) => {
-      entity.addMaxHP(-0.3 * entity.baseHP, entity, 0, false)
-      entity.addSpeed(30, entity, 0, false)
+      const { maxHpReductionPercent, speed } = ItemConfigs.TINY_MUSHROOM
+      entity.addMaxHP(
+        -(maxHpReductionPercent / 100) * entity.baseHP,
+        entity,
+        0,
+        false
+      )
+      entity.addSpeed(speed, entity, 0, false)
     })
   ],
   [Item.WHIPPED_DREAM]: [
@@ -343,9 +457,13 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
     new OnHitEffect(({ attacker, target }) => {
       if (
         attacker.effects.has(EffectEnum.WHIPPED_DREAM) ||
-        chance(0.3, attacker)
+        chance(ItemConfigs.WHIPPED_DREAM.effectChance.value / 100, attacker)
       ) {
-        target.status.triggerCharm(2000, target, attacker)
+        target.status.triggerCharm(
+          ItemConfigs.WHIPPED_DREAM.durationSeconds * 1000,
+          target,
+          attacker
+        )
         attacker.effects.delete(EffectEnum.WHIPPED_DREAM)
       }
     })
@@ -353,53 +471,81 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   [Item.SWEETS]: [],
   [Item.STRAWBERRY_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addAttack(3, entity, 0, false, true)
+      entity?.addAttack(
+        ItemConfigs.STRAWBERRY_SWEET.attack,
+        entity,
+        0,
+        false,
+        true
+      )
     })
   ],
   [Item.LOVE_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addDefense(3, entity, 0, false, true)
+      entity?.addDefense(ItemConfigs.LOVE_SWEET.defense, entity, 0, false, true)
     })
   ],
   [Item.BERRY_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addMaxHP(15, entity, 0, false, true)
+      entity?.addMaxHP(ItemConfigs.BERRY_SWEET.maxHp, entity, 0, false, true)
     })
   ],
   [Item.CLOVER_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addLuck(10, entity, 0, false, true)
+      entity?.addLuck(ItemConfigs.CLOVER_SWEET.luck, entity, 0, false, true)
     })
   ],
   [Item.FLOWER_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addSpeed(10, entity, 0, false, true)
+      entity?.addSpeed(ItemConfigs.FLOWER_SWEET.speed, entity, 0, false, true)
     })
   ],
   [Item.STAR_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addAbilityPower(10, entity, 0, false, true)
+      entity?.addAbilityPower(
+        ItemConfigs.STAR_SWEET.abilityPower,
+        entity,
+        0,
+        false,
+        true
+      )
     })
   ],
   [Item.RIBBON_SWEET]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addSpecialDefense(3, entity, 0, false, true)
+      entity?.addSpecialDefense(
+        ItemConfigs.RIBBON_SWEET.specialDefense,
+        entity,
+        0,
+        false,
+        true
+      )
     })
   ],
   [Item.RICE]: [
     new OnDishConsumedEffect(({ pokemon, entity, player }) => {
-      entity?.addMaxHP(50, entity, 0, false)
+      entity?.addMaxHP(ItemConfigs.RICE.maxHp, entity, 0, false)
       entity?.effects.add(EffectEnum.RICE)
       if (!player) return
       const tatsugiriOnBoard = schemaValues(player.board).find(
         (e) => e && getBaseAltForm(e.name) === Pkm.TATSUGIRI_CURLY
       )
       if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_CURLY) {
-        entity?.addAttack(8, entity, 0, false)
+        entity?.addAttack(ItemStats.TATSUGIRI_CURLY[Stat.ATK], entity, 0, false)
       } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_DROOPY) {
-        entity?.addDefense(8, entity, 0, false)
+        entity?.addDefense(
+          ItemStats.TATSUGIRI_DROOPY[Stat.DEF],
+          entity,
+          0,
+          false
+        )
       } else if (tatsugiriOnBoard?.name === Pkm.TATSUGIRI_STRETCHY) {
-        entity?.addSpeed(25, entity, 0, false)
+        entity?.addSpeed(
+          ItemStats.TATSUGIRI_STRETCHY[Stat.SPEED],
+          entity,
+          0,
+          false
+        )
       }
     })
   ]

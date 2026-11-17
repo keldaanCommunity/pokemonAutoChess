@@ -12,6 +12,7 @@ import {
   RegionDetails
 } from "../../config"
 import { InimitableAbilities } from "../../config/game/abilities"
+import { ItemConfigs } from "../../config/game/items"
 import { SynergyTiers } from "../../config/game/synergies"
 import { getAltFormForPlayer } from "../../core/alt-form-logic"
 import type Simulation from "../../core/simulation"
@@ -168,7 +169,8 @@ export class Pokemon extends Schema implements IPokemon {
       this.passive !== Passive.INANIMATE &&
       ![...Unowns, ...Tatsugiris].includes(this.name) &&
       (this.dishes.size === 0 ||
-        (this.items.has(Item.BIG_EATER_BELT) && this.dishes.size === 1))
+        (this.items.has(Item.BIG_EATER_BELT) &&
+          this.dishes.size < ItemConfigs.BIG_EATER_BELT.dishesPerRound))
     )
   }
 
