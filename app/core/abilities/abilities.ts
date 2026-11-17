@@ -97,6 +97,7 @@ import { CrushClawStrategy } from "./crush-claw"
 import { CrushGripStrategy } from "./crush-grip"
 import { CurseStrategy } from "./curse"
 import { CutStrategy } from "./cut"
+import { DarkAuraStrategy } from "./dark-aura"
 import { DarkHarvestStrategy } from "./dark-harvest"
 import { DarkVoidStrategy } from "./dark-void"
 import { DarkestLariatStrategy } from "./darkest-lariat"
@@ -310,6 +311,7 @@ import { MalignantChainStrategy } from "./malignant-chain"
 import { MantisBladesStrategy } from "./mantis-blades"
 import { MawashiGeriStrategy } from "./mawashi-geri"
 import { MeditateStrategy } from "./meditate"
+import { MegaDrainStrategy } from "./mega-drain"
 import { MegaPunchStrategy } from "./mega-punch"
 import { MetalBurstStrategy } from "./metal-burst"
 import { MetalClawStrategy } from "./metal-claw"
@@ -825,6 +827,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.DARK_HARVEST]: new DarkHarvestStrategy(),
   [Ability.DARKEST_LARIAT]: new DarkestLariatStrategy(),
   [Ability.DARK_VOID]: new DarkVoidStrategy(),
+  [Ability.DARK_AURA]: new DarkAuraStrategy(),
   [Ability.DECORATE]: new DecorateStrategy(),
   [Ability.DEEP_FREEZE]: new DeepFreezeStrategy(),
   [Ability.DEFAULT]: new AbilityStrategy(),
@@ -1036,6 +1039,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.MANTIS_BLADES]: new MantisBladesStrategy(),
   [Ability.MAWASHI_GERI]: new MawashiGeriStrategy(),
   [Ability.MEDITATE]: new MeditateStrategy(),
+  [Ability.MEGA_DRAIN]: new MegaDrainStrategy(),
   [Ability.MEGA_PUNCH]: new MegaPunchStrategy(),
   [Ability.METAL_BURST]: new MetalBurstStrategy(),
   [Ability.METAL_CLAW]: new MetalClawStrategy(),

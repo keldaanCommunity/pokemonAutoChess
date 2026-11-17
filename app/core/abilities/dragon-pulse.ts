@@ -12,7 +12,7 @@ export class DragonPulseStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [10,15,20,40][pokemon.stars - 1] ?? 40
+    const damage = [10, 15, 20, 40][pokemon.stars - 1] ?? 40
 
     pokemon.commands.push(
       new DelayedCommand(() => {

@@ -1,8 +1,10 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
+import type GameState from "../../rooms/states/game-state"
 import { Item, ItemComponents } from "../../types"
 import type { CountEvolutionRule } from "../../types/EvolutionRules"
+import { GamePhaseState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
@@ -10,7 +12,7 @@ import { shuffleArray } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { carryOverPermanentStats, EvolutionHandler } from "./evolution-handler"
 
-export class CountEvolutionHandler extends EvolutionHandler {
+export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
   numberRequired: number
 
   constructor(evolutionRule: CountEvolutionRule) {
@@ -56,8 +58,8 @@ export class CountEvolutionHandler extends EvolutionHandler {
     return copies.length === this.numberRequired - 1
   }
 
-  evolve(pokemon: Pokemon, player: Player): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player)
+  evolve(pokemon: Pokemon, player: Player, state: GameState): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, state)
     let coord: { x: number; y: number } | undefined
     const itemsComponentsOnBench: Item[] = []
     const itemsCompleteOnBench: Item[] = []
@@ -112,7 +114,7 @@ export class CountEvolutionHandler extends EvolutionHandler {
       player
     )
 
-    carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution)
+    carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution, player)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
     shuffleArray(itemsCompleteOnBench)
@@ -153,7 +155,10 @@ export class CountEvolutionHandler extends EvolutionHandler {
       }
     }
 
-    if (pokemonsBeforeEvolution.some((p) => p.dishes.size > 0)) {
+    if (
+      pokemonsBeforeEvolution.some((p) => p.dishes.size > 0) &&
+      state.phase !== GamePhaseState.FIGHT
+    ) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)
         .flatMap((p) => schemaValues(p.dishes))

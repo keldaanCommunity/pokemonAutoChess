@@ -17,7 +17,13 @@ export class SpikyShieldStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, !shouldTriggerSpikeAnimation)
     const defMultiplier = [0.6, 0.8, 1, 2][pokemon.stars - 1] ?? 2
     const defDamage = Math.round(defMultiplier * pokemon.def)
-    target.handleSpecialDamage(defDamage, board, AttackType.SPECIAL, pokemon, crit)
+    target.handleSpecialDamage(
+      defDamage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
     if (pokemon.status.spikeArmor) {
       const damage = [30, 30, 30, 60][pokemon.stars - 1] ?? 60
       OrientationArray.forEach((orientation) => {

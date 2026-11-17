@@ -24,10 +24,12 @@ import { chance, pickRandomIn } from "../utils/random"
 import type { Board, Cell } from "./board"
 import {
   BeforeTakingDamageEffect,
+  OnHealReceivedEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
   PeriodicEffect
 } from "./effects/effect"
+import { transformToCocoon } from "./effects/passives/destruction"
 import { applyWandEffects, humanHealEffect } from "./effects/synergies"
 import type { PokemonEntity } from "./pokemon-entity"
 
@@ -77,11 +79,14 @@ export default abstract class PokemonState {
         if (hasCritNegation) {
           critReductionFactor = 0
         } else if (target.effects.has(EffectEnum.BATTLE_ARMOR)) {
-          critReductionFactor -= EffectConfigs.BATTLE_ARMOR.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.BATTLE_ARMOR.critDamageReductionPercent / 100
         } else if (target.effects.has(EffectEnum.MOUTAIN_RESISTANCE)) {
-          critReductionFactor -= EffectConfigs.MOUTAIN_RESISTANCE.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.MOUTAIN_RESISTANCE.critDamageReductionPercent / 100
         } else if (target.effects.has(EffectEnum.DIAMOND_STORM)) {
-          critReductionFactor -= EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
+          critReductionFactor -=
+            EffectConfigs.DIAMOND_STORM.critDamageReductionPercent / 100
         }
         critReductionFactor -=
           (ItemConfigs.BLACK_AUGURITE.critDamageReductionPercent / 100) *
@@ -140,11 +145,6 @@ export default abstract class PokemonState {
         specialDamage += Math.ceil(chargeDamage)
       }
 
-      if (pokemon.items.has(Item.NULLIFY_BANDANNA)) {
-        specialDamage += pokemon.pp
-        pokemon.pp = 0
-      }
-
       if (pokemon.passive === Passive.SPOT_PANDA && target.status.confusion) {
         specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
@@ -193,7 +193,8 @@ export default abstract class PokemonState {
         physicalDamage += pokemon.def * (stoneEdgeMult + pokemon.ap / 100)
       }
 
-      if (pokemon.items.has(Item.PUNCHING_GLOVE)) {
+      // Punching Glove is ON_HIT, so it needs the attack to land
+      if (isAttackSuccessful && pokemon.items.has(Item.PUNCHING_GLOVE)) {
         physicalDamage +=
           (ItemConfigs.PUNCHING_GLOVE.targetHpDamagePercent / 100) *
           target.maxHP
@@ -354,8 +355,15 @@ export default abstract class PokemonState {
       }
 
       if (overheal > 0 && pokemon.hasSynergyEffect(Synergy.GRASS)) {
-        const overhealFactor = SynergyConfigs.GRASS.overhealConversionPercent / 100
+        const overhealFactor =
+          SynergyConfigs.GRASS.overhealConversionPercent / 100
         pokemon.addMaxHP(overhealFactor * overheal, pokemon, 0, false, false)
+      }
+
+      if (healReceived > 0) {
+        pokemon.getEffects(OnHealReceivedEffect).forEach((effect) => {
+          effect.apply({ pokemon, healReceived, origin })
+        })
       }
 
       return { healReceived, overheal }
@@ -493,7 +501,8 @@ export default abstract class PokemonState {
         damage *= 1 + EffectConfigs.SHEER_COLD.frozenDamageBonusPercent / 100
       }
 
-      const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
+      const armorFactor =
+        1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
       let def = pokemon.status.armorReduction
         ? Math.round(pokemon.def * armorFactor)
         : pokemon.def
@@ -621,7 +630,12 @@ export default abstract class PokemonState {
           attacker.items.has(Item.PROTECTIVE_PADS) &&
           pokemon.id !== attacker.id
         ) {
-          damageOnShield *= ItemConfigs.PROTECTIVE_PADS.shieldDamageMultiplier
+          const { shieldDamageMultiplier, shieldBonusCapPercent } =
+            ItemConfigs.PROTECTIVE_PADS
+          const cap = Math.round(pokemon.shield * (shieldBonusCapPercent / 100))
+          damageOnShield += max(cap)(
+            damageOnShield * (shieldDamageMultiplier - 1)
+          )
         }
         if (damageOnShield >= pokemon.shield) {
           residualDamage += damageOnShield - pokemon.shield
@@ -672,7 +686,9 @@ export default abstract class PokemonState {
 
       if (
         pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <= (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) * pokemon.maxHP
+        pokemon.hp - residualDamage <=
+          (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) *
+            pokemon.maxHP
       ) {
         const shield = Math.round(
           pokemon.baseHP *
@@ -734,6 +750,14 @@ export default abstract class PokemonState {
       }
 
       pokemon.hp = Math.max(0, pokemon.hp - residualDamage)
+      if (
+        pokemon.passive === Passive.DESTRUCTION &&
+        residualDamage > 0 &&
+        pokemon.hp > 0 &&
+        pokemon.hp < 0.2 * pokemon.maxHP
+      ) {
+        transformToCocoon(pokemon)
+      }
 
       // logger.debug(`${pokemon.name} took ${damage} and has now ${pokemon.hp} life shield ${pokemon.shield}`);
 
@@ -938,7 +962,8 @@ export default abstract class PokemonState {
               ? EffectConfigs.GROWTH.heal
               : EffectConfigs.INGRAIN.heal
         pokemon.handleHeal(heal, pokemon, 0, false)
-        pokemon.grassHealCooldown = SynergyConfigs.GRASS.healIntervalSeconds * 1000
+        pokemon.grassHealCooldown =
+          SynergyConfigs.GRASS.healIntervalSeconds * 1000
         pokemon.broadcastAbility({ skill: "GRASS_HEAL" })
       } else {
         pokemon.grassHealCooldown = pokemon.grassHealCooldown - dt

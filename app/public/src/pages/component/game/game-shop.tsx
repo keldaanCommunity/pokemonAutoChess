@@ -26,7 +26,7 @@ export default function GameShop() {
           <div className="spacer"></div>
           <GameTeamInfo />
         </div>
-        <div className="game-shop-actions">          
+        <div className="game-shop-actions">
           <GameLock />
           <GameRefresh />
         </div>

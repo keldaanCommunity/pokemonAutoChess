@@ -11,8 +11,8 @@ import {
 import cors from "cors"
 import express, { type ErrorRequestHandler } from "express"
 import basicAuth from "express-basic-auth"
-import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/auth"
+import { cert, initializeApp } from "firebase-admin/app"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import helmet from "helmet"
 import { marked } from "marked"
 import { connect } from "mongoose"
@@ -713,8 +713,8 @@ export const server = defineServer({
         const token = authHeader.split(" ")[1]
         if (!token) throw new Error("Unauthorized")
         // get user from firebase
-        const decodedToken = await admin.auth().verifyIdToken(token)
-        user = await admin.auth().getUser(decodedToken.uid)
+        const decodedToken = await getAuth().verifyIdToken(token)
+        user = await getAuth().getUser(decodedToken.uid)
         if (!user || !user.displayName) throw new Error("Unauthorized")
         return user
       } catch (error) {
@@ -1137,8 +1137,8 @@ export const server = defineServer({
     connect(process.env.MONGO_URI!, {
       socketTimeoutMS: 45000
     })
-    admin.initializeApp({
-      credential: admin.credential.cert({
+    initializeApp({
+      credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID!,
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
         privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")

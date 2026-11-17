@@ -6,14 +6,14 @@
   margin-top: 0.5em;
 
   & div {
-    background-color: rgba(0,0,0,0.25);
+    background-color: rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     padding: 0.25em 0.5em;
     text-align: center;
   }
 
   & .total {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: var(--color-fg-gold);
     font-size: 110%;
   }

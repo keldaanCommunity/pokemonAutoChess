@@ -10,7 +10,7 @@ export class FishiousRendStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     // Deals [20,40,80,160] SPECIAL. Double damage if attacker got more atk speed than target.
     const damage =
       ([20, 40, 80, 160][pokemon.stars - 1] ?? 160) *

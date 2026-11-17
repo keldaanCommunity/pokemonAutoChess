@@ -12,7 +12,7 @@ export class RagingBullStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     //Destroy barriers like PROTECT, REFLECT, MAGIC_BOUNCE while inflicting ARMOR_BREAK for 3 seconds, then deal [20,40,80,SP] SPECIAL to the target
-    target.status.triggerArmorReduction(3000, pokemon)
+    target.status.triggerArmorReduction(3000, target)
     target.status.reflectCooldown = 0
     target.status.reflect = false
     target.status.protectCooldown = 0

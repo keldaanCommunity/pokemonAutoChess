@@ -33,7 +33,9 @@ export function ClusterMap() {
   return (
     <div className="cluster-map-container">
       {loading ? (
-        <div className="cluster-map-loading">{t("meta_report.cluster_map.loading")}</div>
+        <div className="cluster-map-loading">
+          {t("meta_report.cluster_map.loading")}
+        </div>
       ) : (
         <>
           <div className="cluster-map-chart-wrapper">
@@ -66,7 +68,8 @@ export function ClusterMap() {
                   {hoveredCluster
                     ? t("meta_report.cluster_map.hovered_cluster")
                     : t("meta_report.cluster_map.selected_cluster")}{" "}
-                  {t("meta_report.cluster_map.cluster")} #{displayedCluster.cluster_id}
+                  {t("meta_report.cluster_map.cluster")} #
+                  {displayedCluster.cluster_id}
                 </h4>
                 {displayedCluster.synergies && (
                   <div className="synergies-container">

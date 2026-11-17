@@ -26,7 +26,7 @@ export class FireSpinStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        cell.value.status.triggerBurn(3000, target, pokemon)
+        cell.value.status.triggerBurn(3000, cell.value, pokemon)
       }
     })
   }

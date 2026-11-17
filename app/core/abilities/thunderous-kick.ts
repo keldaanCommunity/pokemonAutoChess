@@ -72,7 +72,7 @@ export class ThunderousKickStrategy extends AbilityStrategy {
     }
 
     enemiesHit.forEach((enemy) => {
-      enemy.status.triggerFlinch(4000, pokemon)
+      enemy.status.triggerFlinch(4000, enemy, pokemon)
       enemy.addDefense(-defenseDebuff, pokemon, 1, crit)
       enemy.handleSpecialDamage(
         damage,

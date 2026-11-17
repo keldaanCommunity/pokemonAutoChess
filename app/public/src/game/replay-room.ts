@@ -212,7 +212,7 @@ export class ReplayRoom {
     if (this.paused || this.ended) return
     const next = this.queue[this.idx]
     if (!next) {
-      this.finish()
+      this.finishPlayback()
       return
     }
     // reconnect boundary: a queued handshake is a 2nd one, don't apply it; ask the page to re-attach past it, collapsing the outage gap. no handler wired (unit test) falls through and applies
@@ -223,13 +223,13 @@ export class ReplayRoom {
     const dt = Math.max(0, (next.t - this.currentMs) / this.baseSpeed)
     this.timer = setTimeout(() => {
       if (this.paused || this.ended) return
-      if (!this.applyNext()) this.finish()
+      if (!this.applyNext()) this.finishPlayback()
       else this.scheduleNext()
     }, dt)
   }
 
   // graceful end: stop and notify; don't fire onLeave (would trigger the client's "connection failed" disconnect UI)
-  private finish() {
+  private finishPlayback() {
     if (this.ended) return
     this.ended = true
     this.paused = true

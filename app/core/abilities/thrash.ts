@@ -7,7 +7,12 @@ export class ThrashStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     const atkBuff = [100, 100, 120, 150][pokemon.stars - 1] ?? 150
-    pokemon.addAttack(Math.floor(atkBuff / 100 * pokemon.baseAtk), pokemon, 1, crit)
+    pokemon.addAttack(
+      Math.floor((atkBuff / 100) * pokemon.baseAtk),
+      pokemon,
+      1,
+      crit
+    )
     pokemon.status.triggerConfusion(3000, pokemon, pokemon)
   }
 }

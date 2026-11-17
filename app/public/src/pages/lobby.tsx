@@ -3,9 +3,12 @@ import firebase from "firebase/compat/app"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { MAX_LOADING_TIME } from "../../../config"
 import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
+import {
+  type CloseCodes,
+  CloseCodesMessages
+} from "../../../types/enum/CloseCodes"
 import { throttle } from "../../../utils/function"
 import { joinLobbyRoom } from "../game/lobby-logic"
 import { resetActiveGameRoom } from "../game/recorder"
@@ -26,7 +29,6 @@ import { Modal } from "./component/modal/modal"
 import { NotificationModal } from "./component/notifications/notification-modal"
 import RoomMenu from "./component/room-menu/room-menu"
 import { cc } from "./utils/jsx"
-import { LocalStoreKeys, localStore } from "./utils/store"
 import "./lobby.css"
 
 export default function Lobby() {
@@ -44,6 +46,7 @@ export default function Lobby() {
   const { t } = useTranslation()
 
   const lobbyJoined = useRef<boolean>(false)
+  const reconnecting = useRef<boolean>(false)
   useEffect(() => {
     if (!lobbyJoined.current) {
       joinLobbyRoom(dispatch, navigate)
@@ -74,19 +77,29 @@ export default function Lobby() {
 
   const reconnectToGame = throttle(async function reconnectToGame() {
     const idToken = await firebase.auth().currentUser?.getIdToken()
-    if (idToken && pendingGameId) {
-      const game = await client.joinById<GameState>(pendingGameId, {
-        idToken
-      })
-      localStore.set(
-        LocalStoreKeys.RECONNECTION_GAME,
-        { reconnectionToken: game.reconnectionToken, roomId: game.roomId },
-        30
-      )
-      joinGame(game, MAX_LOADING_TIME / 1000)
-      dispatch(resetLobby())
-      dispatch(resetBoosters())
-      navigate("/game")
+    if (!idToken) {
+      navigate("/auth")
+    } else if (pendingGameId && !reconnecting.current) {
+      reconnecting.current = true // throttle() alone does not hold: its timer is re-created on every render
+      try {
+        const game = await client.joinById<GameState>(pendingGameId, {
+          idToken
+        })
+        joinGame(game, 60 * 60) // back in game, so the token is valid for 1 hour
+        dispatch(setPendingGameId(null)) // or the prompt returns after they leave this game
+        dispatch(resetLobby())
+        dispatch(resetBoosters())
+        navigate("/game")
+      } catch (error: any) {
+        reconnecting.current = false // let them try again
+        const message =
+          CloseCodesMessages[error?.code as CloseCodes] ?? "UNKNOWN_ERROR"
+        dispatch(
+          setErrorAlertMessage(
+            t(`errors.${message}`, { error: error?.message })
+          )
+        )
+      }
     }
   }, 1000)
 
@@ -94,7 +107,7 @@ export default function Lobby() {
     <main className="lobby">
       <MainSidebar
         page="main_lobby"
-        leave={signOut}
+        onClickLeave={signOut}
         leaveLabel={t("auth.sign_out")}
       />
       <div className="lobby-container">

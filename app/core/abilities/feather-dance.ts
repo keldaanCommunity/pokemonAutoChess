@@ -62,7 +62,7 @@ export class FeatherDanceStrategy extends AbilityStrategy {
               const sign = featherTarget.team === pokemon.team ? 1 : -1
               if (feather === "HEALTH_FEATHER") {
                 if (sign === 1) {
-                  featherTarget.handleHeal(sign * 20, featherTarget, 1, crit)
+                  featherTarget.handleHeal(sign * 20, pokemon, 1, crit)
                 } else {
                   featherTarget.handleSpecialDamage(
                     20,
@@ -73,22 +73,17 @@ export class FeatherDanceStrategy extends AbilityStrategy {
                   )
                 }
               } else if (feather === "MUSCLE_FEATHER") {
-                featherTarget.addAttack(sign * 4, featherTarget, 1, crit)
+                featherTarget.addAttack(sign * 4, pokemon, 1, crit)
               } else if (feather === "RESIST_FEATHER") {
-                featherTarget.addDefense(sign * 4, featherTarget, 1, crit)
+                featherTarget.addDefense(sign * 4, pokemon, 1, crit)
               } else if (feather === "GENIUS_FEATHER") {
-                featherTarget.addAbilityPower(sign * 10, featherTarget, 1, crit)
+                featherTarget.addAbilityPower(sign * 10, pokemon, 1, crit)
               } else if (feather === "CLEVER_FEATHER") {
-                featherTarget.addSpecialDefense(
-                  sign * 4,
-                  featherTarget,
-                  1,
-                  crit
-                )
+                featherTarget.addSpecialDefense(sign * 4, pokemon, 1, crit)
               } else if (feather === "SWIFT_FEATHER") {
-                featherTarget.addSpeed(sign * 10, featherTarget, 1, crit)
+                featherTarget.addSpeed(sign * 10, pokemon, 1, crit)
               } else if (feather === "PRETTY_FEATHER") {
-                featherTarget.addLuck(sign * 10, featherTarget, 1, crit)
+                featherTarget.addLuck(sign * 10, pokemon, 1, crit)
               }
             }, 1000)
           )

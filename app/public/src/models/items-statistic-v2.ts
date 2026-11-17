@@ -7,5 +7,7 @@ export type {
 } from "../../../types/models/items-statistic-v2"
 
 export async function fetchMetaItems(): Promise<IItemsStatisticV2[]> {
-  return fetch(`/meta/items?t=${new Date().getUTCDate()}`).then((res) => res.json())
+  return fetch(`/meta/items?t=${new Date().getUTCDate()}`).then((res) =>
+    res.json()
+  )
 }

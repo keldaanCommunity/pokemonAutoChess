@@ -1,6 +1,6 @@
-import { Item, SynergyGemsBuried, ToolsBuried } from "../types";
-import { BuriedTrash } from "../types/enum/Item";
-import { chance, pickRandomIn, shuffleArray } from "../utils/random";
+import { Item, SynergyGemsBuried, ToolsBuried } from "../types"
+import { BuriedTrash } from "../types/enum/Item"
+import { chance, pickRandomIn, shuffleArray } from "../utils/random"
 
 export function initBuriedItems() {
   const buriedItems: (Item | null)[] = new Array(24).fill(null)

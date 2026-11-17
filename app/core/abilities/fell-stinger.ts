@@ -11,7 +11,7 @@ export class FellStingerStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damageMultiplier = [4,4,4,8][pokemon.stars - 1] ?? 9
+    const damageMultiplier = [4, 4, 4, 8][pokemon.stars - 1] ?? 9
     const damage = damageMultiplier * pokemon.baseAtk
     const { death } = target.handleSpecialDamage(
       damage,

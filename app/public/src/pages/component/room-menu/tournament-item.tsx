@@ -216,9 +216,7 @@ export function TournamentPlayer(props: {
     >
       {props.showScore && <span className="player-rank">{props.rank}</span>}
       <PokemonPortrait avatar={props.player.avatar} />
-      <p>
-        <span className="player-name">{props.player.name}</span>
-      </p>
+      <span className="player-name">{props.player.name}</span>
       {props.showScore ? (
         <span className="player-ranks">
           {props.player.ranks.length > 0 ? props.player.ranks.join(", ") : "-"}

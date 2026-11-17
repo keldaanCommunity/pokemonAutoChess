@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react"
-import { getDescriptionConfig, getDescriptionError } from "../../utils/description-config"
+import {
+  getDescriptionConfig,
+  getDescriptionError
+} from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./translation-row.css"
 

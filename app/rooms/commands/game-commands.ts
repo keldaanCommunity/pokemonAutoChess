@@ -289,6 +289,8 @@ export class OnPokemonCatchCommand extends Command<
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
+      } else {
+        this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
       }
     } else if (wanderer.type === WandererType.OUTLAW) {
       player.addMoney(OUTLAW_GOLD_REWARD, true, null)
@@ -449,6 +451,7 @@ export class OnDragDropPokemonCommand extends Command<
       }
 
       if (success) {
+        this.room.givePendingPokemons(player)
         player.updateSynergies()
         player.boardSize = this.room.getTeamSize(player.board)
       }
@@ -460,26 +463,25 @@ export class OnDragDropPokemonCommand extends Command<
 
   swapPokemonPositions(player: Player, pokemon: Pokemon, x: number, y: number) {
     const pokemonToSwap = player.getPokemonAt(x, y)
+    const oldX = pokemon.positionX
+    const oldY = pokemon.positionY
+    // move both units before any hook runs: a hook can evolve a Mantyke, which needs the final cells
+    pokemon.positionX = x
+    pokemon.positionY = y
     if (pokemonToSwap) {
-      const oldX = pokemonToSwap.positionX
-      const oldY = pokemonToSwap.positionY
-      pokemonToSwap.positionX = pokemon.positionX
-      pokemonToSwap.positionY = pokemon.positionY
+      pokemonToSwap.positionX = oldX
+      pokemonToSwap.positionY = oldY
       onPokemonChangePosition({
         pokemon: pokemonToSwap,
-        newX: pokemon.positionX,
-        newY: pokemon.positionY,
-        oldX,
-        oldY,
+        newX: oldX,
+        newY: oldY,
+        oldX: x,
+        oldY: y,
         player,
         state: this.state,
         room: this.room
       })
     }
-    const oldX = pokemon.positionX
-    const oldY = pokemon.positionY
-    pokemon.positionX = x
-    pokemon.positionY = y
     onPokemonChangePosition({
       pokemon,
       newX: x,
@@ -565,6 +567,7 @@ export class OnSwitchBenchAndBoardCommand extends Command<
       }
     }
 
+    this.room.givePendingPokemons(player)
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
   }
@@ -897,13 +900,7 @@ export class OnDragDropItemCommand extends Command<
       const itemCombined = recipe[0] as Item
 
       if (recipe[1].includes(Item.SILK_SCARF)) {
-        const nbScarvesBasedOnNormalSynergy = getSynergyTier(
-          player.synergies,
-          Synergy.NORMAL
-        )
-        if (player.scarvesItems.length < nbScarvesBasedOnNormalSynergy) {
-          player.scarvesItems.push(itemCombined)
-        }
+        player.scarvesItems.push(itemCombined)
       }
 
       pokemon.items.delete(existingBasicItemToCombine)
@@ -985,10 +982,15 @@ export class OnSellPokemonCommand extends Command<
     pokemon.items.forEach((it) => {
       player.items.push(it)
     })
+    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+      // give back the TM, as when moving the pokemon to the bench
+      player.items.push(TMPerAbility.get(pokemon.tm)!)
+    }
 
     player.updateSynergies()
     player.boardSize = this.room.getTeamSize(player.board)
     pokemon.afterSell(player)
+    this.room.givePendingPokemons(player)
 
     if (
       player.doubleUpPartnerId &&
@@ -1883,11 +1885,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         .forEach((choice) => {
           const randomPick = randomBetween(
             0,
-            choice.pokemons
+            choice.pokemons.length > 0
               ? choice.pokemons.length - 1
               : choice.items.length - 1
           )
-          this.room.pickChoice(player.id, choice.id, randomPick, true)
+          this.room.pickChoice(player.id, choice.id, randomPick)
         })
 
       player.board.forEach((pokemon) => {
@@ -1938,6 +1940,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
+        // catchables were drawn from the pool when they spawned
+        player.wanderers.forEach((wanderer) => {
+          if (wanderer.type === WandererType.CATCHABLE) {
+            this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
+          }
+        })
         player.wanderers.clear()
         if (player.alive) {
           // Fake bots XP bar

@@ -61,7 +61,9 @@ export function GameMoneyDetail() {
         <p className="help">
           {addIconsToDescription(t("shop.passive_income_hint"))}
         </p>
-        <p className="help">{addIconsToDescription(t("shop.streak_income_hint"))}</p>
+        <p className="help">
+          {addIconsToDescription(t("shop.streak_income_hint"))}
+        </p>
         {specialGameRule !== SpecialGameRule.BLOOD_MONEY && (
           <p className="help">
             {addIconsToDescription(

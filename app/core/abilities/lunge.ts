@@ -25,7 +25,12 @@ export class LungeStrategy extends AbilityStrategy {
     if (cellToGo) {
       pokemon.moveTo(cellToGo.x, cellToGo.y, board, false)
       if (enemy) {
-        enemy.addAttack(-([3, 4, 5, 10][pokemon.stars - 1] ?? 10), pokemon, 1, crit)
+        enemy.addAttack(
+          -([3, 4, 5, 10][pokemon.stars - 1] ?? 10),
+          pokemon,
+          1,
+          crit
+        )
         enemy.handleSpecialDamage(
           [30, 40, 50, 100][pokemon.stars - 1] ?? 100,
           board,

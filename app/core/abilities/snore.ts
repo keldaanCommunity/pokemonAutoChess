@@ -19,7 +19,7 @@ export class SnoreStrategy extends AbilityStrategy {
 
     for (const cell of targets) {
       if (cell.value) {
-        cell.value.status.triggerFlinch(3000, pokemon)
+        cell.value.status.triggerFlinch(3000, cell.value, pokemon)
         cell.value.handleSpecialDamage(
           damage,
           board,

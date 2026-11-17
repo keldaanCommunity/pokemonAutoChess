@@ -7,7 +7,7 @@ import {
   subscribeLobby
 } from "colyseus"
 import { CronJob } from "cron"
-import admin from "firebase-admin"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import {
   INACTIVITY_TIMEOUT,
   MAX_CONCURRENT_PLAYERS_ON_LOBBY,
@@ -399,6 +399,23 @@ export default class CustomLobbyRoom extends Room {
     )
 
     this.presence.subscribe(
+      "pending-game-changed",
+      ({ userId, gameId }: { userId: string; gameId: string | null }) => {
+        this.clients.forEach((c) => {
+          if (c.auth?.uid === userId) {
+            /*
+            If a user connected to the lobby has left a game without surrendering,
+            the pending game is stored by pending-game-manager and the user gets
+            a reconnection prompt modal
+            If gameId is null, that prompt is removed
+            */
+            c.send(Transfer.RECONNECT_PROMPT, gameId)
+          }
+        })
+      }
+    )
+
+    this.presence.subscribe(
       "maintenance",
       ({ userId, order }: { userId: string; order: MaintenanceOrder }) => {
         const client = this.clients.find((c) => c.auth && c.auth.uid === userId)
@@ -426,15 +443,11 @@ export default class CustomLobbyRoom extends Room {
     this.fetchTournaments()
   }
 
-  async onAuth(
-    client: Client,
-    options,
-    context
-  ): Promise<admin.auth.UserRecord> {
+  async onAuth(client: Client, options, context): Promise<UserRecord> {
     try {
       super.onAuth(client, options, context)
-      const token = await admin.auth().verifyIdToken(options.idToken)
-      const user = await admin.auth().getUser(token.uid)
+      const token = await getAuth().verifyIdToken(options.idToken)
+      const user = await getAuth().getUser(token.uid)
 
       if (!user.displayName) {
         logger.error("No display name for this account", user.uid)

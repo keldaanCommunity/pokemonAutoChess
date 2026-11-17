@@ -1,4 +1,4 @@
-import { BOARD_WIDTH } from "../../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
 import { INTEREST_GOLD_INTERVAL } from "../../config/game/shop"
 import { StatusConfigs } from "../../config/game/statuses"
@@ -60,6 +60,7 @@ import {
   type OnDeathEffectArgs,
   OnEvolutionEffect,
   OnGroundDiggingEffect,
+  OnHealReceivedEffect,
   OnHitEffect,
   OnItemDroppedEffect,
   OnKillEffect,
@@ -76,11 +77,14 @@ import {
 import { unequipItems } from "./items"
 import { AccelerationEffect } from "./passives/acceleration"
 import { BergmiteOnBackEffect } from "./passives/bergmite-on-back"
+import { restoreYveltal } from "./passives/destruction"
 import { FalinksFormationEffect } from "./passives/falinks-formation"
 
 export function drumBeat(pokemon: PokemonEntity, board: Board) {
   const speedFactor = 1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
-  const speed = pokemon.status.paralysis ? pokemon.speed * speedFactor : pokemon.speed
+  const speed = pokemon.status.paralysis
+    ? pokemon.speed * speedFactor
+    : pokemon.speed
   pokemon.resetCooldown(1000, speed) // use attack state cooldown
   if (pokemon.pp >= pokemon.maxPP && pokemon.canCast) {
     // CAST ABILITY
@@ -482,7 +486,7 @@ class GalarianDarmanitanBurnEffect extends PeriodicEffect {
                   pokemon,
                   crit
                 )
-                cell.value.status.triggerBurn(2000, pokemon, cell.value)
+                cell.value.status.triggerBurn(2000, cell.value, pokemon)
               }
             })
         }
@@ -659,7 +663,8 @@ class ZygardeCellsEffect extends PeriodicEffect {
         const delay = 1800
 
         for (let i = 0; i < 24; i++)
-          if (pokemon.player.groundHoles[i] === SynergyConfigs.GROUND.maxDepth) fullyDugHolesIndexes.push(i)
+          if (pokemon.player.groundHoles[i] === SynergyConfigs.GROUND.maxDepth)
+            fullyDugHolesIndexes.push(i)
 
         for (const index of fullyDugHolesIndexes) {
           if (this.cellsCount < 95) {
@@ -935,7 +940,12 @@ const conversionEffect = new OnSimulationStartEffect(
       }
       if (effect === EffectEnum.DRAGON_DANCE) {
         const { abilityPowerPerStar, speedPerStar } = EffectConfigs.DRAGON_DANCE
-        entity.addAbilityPower(dragonLevel * abilityPowerPerStar, entity, 0, false)
+        entity.addAbilityPower(
+          dragonLevel * abilityPowerPerStar,
+          entity,
+          0,
+          false
+        )
         entity.addSpeed(dragonLevel * speedPerStar, entity, 0, false)
       }
     }
@@ -947,7 +957,12 @@ const conversionEffect = new OnSimulationStartEffect(
 
     // when converting to ground, fully dig a hole at their position
     if (synergyCopied === Synergy.GROUND) {
-      player.groundHoles[entity.positionY * BOARD_WIDTH + entity.positionX] = SynergyConfigs.GROUND.maxDepth
+      const y =
+        entity.team === Team.RED_TEAM
+          ? BOARD_HEIGHT - 1 - entity.positionY
+          : entity.positionY
+      player.groundHoles[y * BOARD_WIDTH + entity.positionX] =
+        SynergyConfigs.GROUND.maxDepth
     }
 
     // when converting to flora, when Porygon is KO, a special flora spawns: Jumpluff at flora 3, Victreebel at flora 4, Meganium at flora 5, Vileplume at flora 6
@@ -1324,6 +1339,16 @@ export const PassiveEffects: Partial<
   ],
   [Passive.MIMIKYU]: MimikuBustedTransformEffects,
   [Passive.DARMANITAN]: DarmanitanZenTransformEffects,
+  [Passive.COCOON_OF_DESTRUCTION]: [
+    new OnHealReceivedEffect(({ pokemon }) => {
+      if (pokemon.hp >= 0.5 * pokemon.maxHP) {
+        restoreYveltal(pokemon)
+      }
+    }, Passive.COCOON_OF_DESTRUCTION),
+    new OnResurrectionEffect(({ pokemon }) => {
+      restoreYveltal(pokemon)
+    }, Passive.COCOON_OF_DESTRUCTION)
+  ],
   [Passive.DARMANITAN_ZEN]: [DarmanitanZenOnHitEffect],
   [Passive.GALARIAN_DARMANITAN]: GalarianDarmanitanZenTransformEffects,
   [Passive.GALARIAN_DARMANITAN_ZEN]: [
@@ -1459,13 +1484,6 @@ export const PassiveEffects: Partial<
     new OnSpawnEffect((entity) => {
       entity.status.confusion = false
       entity.effects.add(EffectEnum.IMMUNITY_CONFUSION)
-    })
-  ],
-  [Passive.AQUA_VEIL]: [
-    new OnSpawnEffect((entity) => {
-      if (entity.simulation.weather === Weather.RAIN) {
-        entity.status.triggerRuneProtect(60000, entity, entity)
-      }
     })
   ],
   [Passive.SPECIAL_ATTACK]: [
@@ -1631,6 +1649,7 @@ export const PassiveEffects: Partial<
     new OnSimulationStartEffect(({ simulation, entity }) => {
       if (entity.name === Pkm.PALAFIN_HERO) return
       let nbAlliesKo = 0
+      let nbNonSpawnAlliesKo = 0
       let nbAllies = 0
       let transformed = false
 
@@ -1659,9 +1678,14 @@ export const PassiveEffects: Partial<
         }
       }
 
-      const transformToHeroOnDeathEffect = new OnDeathEffect(() => {
+      const transformToHeroOnDeathEffect = new OnDeathEffect(({ pokemon }) => {
         nbAlliesKo++
-        if (!transformed && (nbAlliesKo >= 5 || nbAlliesKo >= nbAllies)) {
+        if (!pokemon.isSpawn) nbNonSpawnAlliesKo++
+        if (
+          !transformed &&
+          (entity.hp > 0 || entity.status.resurrecting) &&
+          (nbNonSpawnAlliesKo >= 5 || nbAlliesKo >= nbAllies)
+        ) {
           transformToHero(true)
         }
       })
@@ -1701,7 +1725,7 @@ export const PassiveEffects: Partial<
   ],
   [Passive.WALL_OF_STONE]: [
     new OnSimulationStartEffect(({ simulation, entity }) => {
-      // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked until their shield is depleted
+      // At the start of the fight, user and all Rock allies on the same row get 50 Shield and are Locked for 3 seconds
       simulation.board.forEach((x, y, ally) => {
         if (
           ally &&
@@ -1710,13 +1734,7 @@ export const PassiveEffects: Partial<
           ally.types.has(Synergy.ROCK)
         ) {
           ally.addShield(50, entity, 0, false)
-          ally.status.triggerLocked(60000, ally)
-          ally.effectsSet.add(
-            new OnShieldDepletedEffect(({ pokemon }) => {
-              pokemon.status.lockedCooldown = 0
-              pokemon.status.updateLocked(0, pokemon)
-            })
-          )
+          ally.status.triggerLocked(3000, ally)
         }
       })
     })
@@ -1844,7 +1862,11 @@ export const PassiveEffects: Partial<
   [Passive.STOUTLAND_SEARCH]: [
     new OnChangePositionEffect(({ newX, newY, pokemon, player, room }) => {
       const index = (newY - 1) * BOARD_WIDTH + newX
-      if (room && player.buriedItems[index] && player.groundHoles[index] < SynergyConfigs.GROUND.maxDepth) {
+      if (
+        room &&
+        player.buriedItems[index] &&
+        player.groundHoles[index] < SynergyConfigs.GROUND.maxDepth
+      ) {
         // BARK
         room.broadcast(Transfer.SHOW_EMOTE, {
           id: pokemon.id,

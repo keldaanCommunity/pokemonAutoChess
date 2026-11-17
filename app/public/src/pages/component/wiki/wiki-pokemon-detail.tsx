@@ -178,7 +178,9 @@ export default function WikiPokemonDetail(props: {
             <dt>{t("wiki.pokemons.passive")}</dt>
             <dd>
               <p>
-                {addIconsToDescription(t(passivePath), { config: passiveConfig })}
+                {addIconsToDescription(t(passivePath), {
+                  config: passiveConfig
+                })}
               </p>
             </dd>
           </>

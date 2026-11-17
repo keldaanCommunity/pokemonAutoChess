@@ -16,6 +16,7 @@ export const AbilityConfigs = {
 export const InimitableAbilities: Ability[] = [
   Ability.ASSIST,
   Ability.AURA_WHEEL,
+  Ability.DARK_AURA,
   Ability.ENCORE,
   Ability.HIDDEN_POWER_A,
   Ability.HIDDEN_POWER_B,

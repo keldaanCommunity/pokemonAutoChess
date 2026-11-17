@@ -5,6 +5,15 @@
 
 # Changes to Pokemon & Abilities
 
+- Rework Yveltal:
+  - New passive Destruction: when surviving damage below 20% max HP, Yveltal transforms into a Cocoon of Destruction. The cocoon cannot move or attack and transforms back into Yveltal when healed to 50% max HP.
+  - Cocoon ability Dark Aura: deals [10,SP] + [50,SP]% of ATK as SPECIAL to enemies within 2 tiles and heals for 15 HP plus 75% of damage dealt.
+  - Oblivion Wing now fires a beam that hits the most enemies, dealing [30,50,70,100,SP] SPECIAL to each and healing for 50% of damage dealt.
+  - On returning from the cocoon, Yveltal always regains Oblivion Wing and 100 max PP, even if its ability or max PP had been changed.
+- Snivy is now in Rare pool. PP 70 → 100. Adjusted stats.
+- Turtwig is now in Hatch pool. Adjusted stats.
+- Bulbasaur line is now 1-range. Adjusted stats. New ability Mega Drain: Drain all ADJACENT enemies for [10,20,40,80,150,SP] SPECIAL, healing for 50% of the damage dealt.
+- Petilil and Liligant are now 2-range. Adjusted stats. Hisui Lilligant remains 1-range.
 - New passive to Duosion and Reuniclus: Mitosis. Upon KO, the Pokémon will split into 2 copies of its previous stage of evolution with no items and half its current PP.
 - Pirouette Meloetta no longer transforms to Aria Meloetta when put on bench
 - Nerf Magic Bounce (Xatu): user gets SILENCE during the effect. Duration: 5 → 4 seconds
@@ -31,7 +40,9 @@
 - Change ability of Larvitar line to Pursuit instead of Bite. Pursuit: Deal [35,70,140,280,SP] SPECIAL to the target and marks it. If the target subsequently jumps, teleports or FLY_AWAY, jump next to it and cast again immediately.
 - Buff Bounsweet line: PP 120 → 90
 - Rework Unown-D (DUPE): Transform into a copy of your STRONGEST ally without its items and permanent buffs. PP 100 → 50
+- Nerf Unown J (JAWS): Sharpedos no longer held a RAZOR_CLAW
 - Change Unown-N (NUKE): No longer consume PP and trigger on-cast effects. Fixed SHIELD amount given not increasing with CRIT_POWER on crit. Clarified description. PP 100 → 80
+- Buff Unown-S (SURF): PP 100 → 90
 - Change Unown-V (VOLT): No longer consume PP and trigger on-cast effects for each thunder shock. Clarified description. PP 90 → 60
 - Change Unown-Y (YOGA): No longer consume PP and trigger on-cast effects. Clarified description.
 - Nerf Attack Order (Vespiqueen): base damage [20,40,60,120] → [10,20,30,60] SPECIAL
@@ -46,6 +57,12 @@
 - Change Alcremie Lemon passive: 40% CRIT_CHANCE → 30% CRIT_CHANCE and 30% CRIT_POWER to the decorated ally. DARK allies now give the Lemon flavor
 - Change Alcremie Caramel passive: 80% CRIT_POWER → 80 AP to the decorated ally. SOUND allies now give the Caramel flavor
 - New ability for Tentacruel: Stings with 3 waves of toxins in a CONE, dealing [1,2,3,4,SP] SPECIAL each. Each enemy hit receives one effect based on its current status:\n- If not POISONED, inflicts POISONED for [2,SP] seconds.\n- If afflicted with POISONED, inflicts PARALYSIS for [2,SP] seconds.\n- If afflicted with PARALYSIS, inflicts ARMOR_BREAK for [2,SP] seconds.\n- If afflicted with ARMOR_BREAK, inflicts FATIGUE for [2,SP] seconds.
+- New ability for Wiscash: Targets the enemy with the most PP within a 2-tile radius, dealing [30,60,120,240,SP] SPECIAL. Damage is doubled if the target stands on a fully dug GROUND hole. Knocks 1 RANGE enemies away, or pulls 2+ RANGE enemies toward the user, and inflicts LOCKED for 2 seconds
+- New ability for Cradily: Plants a seed on the target, dealing [4,8,12,16]% of its max HP as SPECIAL damage each second for 5 seconds. Each time it deals damage, heals the ally with the lowest missing HP for the amount dealt.
+- Change Stakataka passive Wall of Stone: now locks for 3 seconds instead of until the SHIELD is depleted.
+- Wurmple now has NORMAL type
+- Ogerpon now has HUMAN type in all its forms
+
 # Changes to Synergies
 
 - Synergies now have a more consistent order accross all places where they are displayed (synergy menu, game history, post-game screen, etc.). The order is based on the synergy level, then in case of tie on the synergy tier, then in case of tie on the amount of Pokémon representing that synergy. This order is also used to clarify the determination of some divergent evolutions (e.g. Meowstic, Gallade/Gardevoir) and some passives (Arceus, Kecleon).
@@ -53,6 +70,7 @@
 - GOURMET cooking mechanic has been revisited. The cooking process now takes up to 8 seconds to complete, giving you time to move your chef around to properly distribute the dishes to your allies. If the battle is about to start, the cooking time will be reduced and even be instant on the last seconds of the preparation phase. Your chefs now cook immediately when receiving the CHEF_HAT. Dishes made this stage are now removed if the chef loses their hat by deactivating GOURMET synergy or benching the chef. This allows you to freely switch dishes between rounds without having to think one stage ahead.
 - A GOURMET GROUND Pokémon can now dig and cook in the same stage. The cooking will be delayed until the Pokémon is done digging.
 - Buff FLYING: now dodges the damage that would have dropped them below the HP threshold. Flying 8 Skydive damage: 150 → 200% of ATK
+- Buff Monster 8. New effect: When knocking out the last enemy on the board, permanently gain 3 ATK, 10 AP and 10 max HP. (thanks to tegberen)
 
 # Changes to Items
 
@@ -60,10 +78,16 @@
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
 - Rework Black Sludge: POISONED the Pokémon that eats it. If it has POISON type, restore 5% of max HP every 2 seconds instead. **In the next fight, get [30,LK]% chance to inflict POISONED for 5 seconds ON_HIT. The first attack always inflicts POISONED.**
 - METEORITE and ROTOM_CATALOG now open a choice menu to directly choose the form instead of cycling through the forms.
+- Protective pads bonus damage on SHIELD is now capped at 50% of the target SHIELD value
+
+> Nullify Bandanna, when combined with the extra scarves provided by Cinccino and Wooloo, has been the source of several persistent item duplication bugs. After many attempts, we realized that an item crafted with 2 SILK_SCARF was incompatible with the design of the NORMAL synergy, so we have decided to remove this recipe and the item entirely.
+
+- Removed Nullify Bandanna
 
 # Gameplay
 
 - Environmental effects (board effects, tidal wave, ghost curse...) are now displayed in DPS report with their own icon (thanks to tegberen)
+- Pokemons given through a choice pick (additional picks, unique...) and Pokemons obtained with gifts or special effects (like Shedinja) no longer require you to have a free space on bench. Instead, they are stored and will appear as soon as you will make space on the bench by selling some Pokémon for example. Note that this does not work for synergy effects like Water fishing rods or Bug nest.
 
 # UI
 
@@ -90,6 +114,29 @@
 - Fixed Porygon conversion passive on GHOST giving 2x more dodge chance than expected
 - Fixed Monster flinch chance being ON_HIT instead of ON_ATTACK
 - Fixed Palafin Hero not gaining a fourth STAR when transforming
+- Fix Barb barrage ability targeting
+- Fix Mind Blown AP scaling
+- Fix selling price and pool refill fir Cherrim Sunlight, Annihilape and Mothim
+- Fixed Mach Ribbon removal taking away the wrong amount of SPEED
+- Fixed Venoshock checking if the caster was POISONED instead of the target
+- Fixed Big Eater Belt taking back 1 more ATK than its buff gave
+- Fixed Stored Power using the target's base SPEED instead of the user's
+- Fixed Fire Spin and Searing Shot checking every BURN against the main target, so one Rawst Berry blocked the burn for everyone hit
+- Fixed Galarian Darmanitan Zen BURN reading immunity and berries from the wrong unit
+- Fixed selling a Human from the board losing its TM
+- Fixed TMs being lost when copies holding different TMs evolve
+- Fixed Leech Seed dealing flat damage instead of a percent of the target's max HP
+- Fixed Smog weather turning dodge chance into an invalid value, so nobody could dodge in Smog
+- Fixed Spectral Thief only stealing 1% of the target's CRIT_POWER boost
+- Fixed a second Trick or Treat leaving the target as a 1 ATK Magikarp for the rest of the fight
+- Fixed Mortal Spin on the red side never pushing back the enemy in front
+- Fixed Ogerpon Hearthflame BURN reading immunity and berries from Ogerpon instead of the target
+- Fixed Poison Powder checking every POISON against the main target, so one Pecha Berry blocked it for everyone hit
+- Fixed Aurora Beam checking every FREEZE against the main target, so one Aspear Berry blocked it for everyone hit
+- Fixed Ogerpon Cornerstone FLINCH duration using Ogerpon's team reductions instead of the target's
+- Fixed Burning Jealousy taking more ATK than the buff gave from a Big Eater Belt holder
+- Fixed swapping a Mantyke copying its items and stacking two units on one cell
+- Fixed a case of dish duplication on count-based evolutions during a fight
 
 # Misc
 

@@ -121,7 +121,6 @@ const itemStats = {
   [Item.SILK_SCARF]: { [Stat.SHIELD]: 15 },
   [Item.FRIEND_BOW]: { [Stat.SHIELD]: 30 },
   [Item.BLACK_BELT]: { [Stat.SHIELD]: 15, [Stat.CRIT_CHANCE]: 30 },
-  [Item.NULLIFY_BANDANNA]: { [Stat.SHIELD]: 30 },
   [Item.LUCKY_RIBBON]: { [Stat.SHIELD]: 15, [Stat.AP]: 50, [Stat.LUCK]: 20 },
   [Item.EXPLOSIVE_BAND]: { [Stat.SHIELD]: 50, [Stat.ATK]: 3 },
   [Item.TWIST_BAND]: { [Stat.SPE_DEF]: 20, [Stat.SHIELD]: 50 },
@@ -252,7 +251,6 @@ export const ItemConfigs = {
   [Item.SOUL_DEW]: { abilityPower: 5, pp: 5, intervalSeconds: 1 },
   [Item.MACH_RIBBON]: {
     speedPerTick: 20,
-    removalSpeedPerTick: 15,
     intervalSeconds: 3
   },
   [Item.GREEN_ORB]: {
@@ -475,7 +473,10 @@ export const ItemConfigs = {
     pp: 50,
     protectDurationSeconds: 1.5
   },
-  [Item.PROTECTIVE_PADS]: { shieldDamageMultiplier: 2 },
+  [Item.PROTECTIVE_PADS]: {
+    shieldDamageMultiplier: 2,
+    shieldBonusCapPercent: 50
+  },
   [Item.PUNCHING_GLOVE]: { targetHpDamagePercent: 8 },
   [Item.WONDER_BOX]: { itemCount: 2 },
   [Item.ABILITY_SHIELD]: { shieldPercent: 20, safeguardDurationSeconds: 5 },
@@ -675,7 +676,6 @@ export const ItemConfigs = {
     earnedGold: 200
   },
   [Item.LEADERS_CREST]: { rewardGold: 4 },
-  [Item.NULLIFY_BANDANNA]: { abilityPowerPerAttack: 5 },
   [Item.BIG_EATER_BELT]: { statBonusPercent: 25, dishesPerRound: 2 },
   [Item.GIMMIGHOUL_COIN]: {
     gold: 5,

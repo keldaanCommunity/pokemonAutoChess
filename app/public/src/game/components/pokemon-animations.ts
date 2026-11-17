@@ -49,23 +49,23 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.NORMAL_MELEE
   },
   [Pkm.BULBASAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.IVYSAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.VENUSAUR]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.Rotate,
-    emote: AnimationType.Shoot,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shake,
     attackSprite: AttackSprite.GRASS_RANGE,
     hitSprite: HitSprite.GRASS_HIT
   },
@@ -2209,13 +2209,13 @@ export const PokemonAnimations: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_MELEE
+    attackSprite: AttackSprite.ROCK_RANGE
   },
   [Pkm.CRADILY]: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_MELEE
+    attackSprite: AttackSprite.ROCK_RANGE
   },
   [Pkm.CRANIDOS]: {
     attack: AnimationType.Attack,
@@ -4250,6 +4250,21 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.DARK_MELEE,
     hitSprite: HitSprite.DARK_HIT
   },
+  [Pkm.YVELTAL_COCOON]: {
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Idle,
+    hop: AnimationType.Idle,
+    walk: AnimationType.Idle,
+    hurt: AnimationType.Idle,
+    sleep: AnimationType.Idle,
+    eat: AnimationType.Idle,
+    animationsOriented: {
+      [AnimationType.Idle]: false,
+      [AnimationType.Attack]: false,
+      [AnimationType.Shoot]: false
+    }
+  },
   [Pkm.MARSHADOW]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
@@ -6126,7 +6141,7 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.SOUND_HIT
   },
   [Pkm.PETILIL]: {
-    attack: AnimationType.Attack,
+    attack: AnimationType.Shoot,
     ability: AnimationType.Twirl,
     emote: AnimationType.Pose,
     attackSprite: AttackSprite.GRASS_MELEE,
@@ -7184,8 +7199,8 @@ export const PokemonAnimations: {
   },
   [Pkm.FEZANDIPITI]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.Shoot,
-    emote: AnimationType.FlapAround,
+    ability: AnimationType.Twirl,
+    emote: AnimationType.Pose,
     attackSprite: AttackSprite.FLYING_MELEE,
     hitSprite: HitSprite.POISON_HIT
   },

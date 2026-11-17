@@ -23,7 +23,7 @@ export class DragonDartsStrategy extends AbilityStrategy {
       )
     }
     if (target.hp <= 0) {
-      const ppRegained = [40,40,40,80][pokemon.stars - 1] ?? 80
+      const ppRegained = [40, 40, 40, 80][pokemon.stars - 1] ?? 80
       pokemon.addPP(ppRegained, pokemon, 0, false)
     }
   }

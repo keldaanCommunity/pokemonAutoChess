@@ -13,7 +13,7 @@ export class SchoolingStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const pctDmg = [0.15, 0.15, 0.15, 0.30][pokemon.stars - 1] ?? 0.30
+    const pctDmg = [0.15, 0.15, 0.15, 0.3][pokemon.stars - 1] ?? 0.3
     const damage = pctDmg * pokemon.maxHP
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)

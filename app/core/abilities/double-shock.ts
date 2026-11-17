@@ -12,7 +12,7 @@ export class DoubleShockStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     pokemon.status.triggerParalysis(3000, pokemon, pokemon)
-    const damage = [50,100,200,400][pokemon.stars - 1] ?? 400
+    const damage = [50, 100, 200, 400][pokemon.stars - 1] ?? 400
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
   }
 }

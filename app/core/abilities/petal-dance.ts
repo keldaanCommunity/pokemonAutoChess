@@ -32,17 +32,20 @@ export class PetalDanceStrategy extends AbilityStrategy {
     for (let i = 0; i < count; i++) {
       const { entity: enemy, distance } = enemies[i % enemies.length]
       pokemon.commands.push(
-        new DelayedCommand(() => {
-          if (enemy && enemy.hp > 0) {
-            enemy.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-          }
-        }, i * 100 + (distance * 1000 / projectileSpeed))
+        new DelayedCommand(
+          () => {
+            if (enemy && enemy.hp > 0) {
+              enemy.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          },
+          i * 100 + (distance * 1000) / projectileSpeed
+        )
       )
 
       pokemon.broadcastAbility({

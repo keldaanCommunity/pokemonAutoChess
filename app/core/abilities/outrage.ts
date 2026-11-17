@@ -12,7 +12,9 @@ export class OutrageStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     pokemon.status.triggerConfusion(2000, pokemon, pokemon)
-    const damage = Math.round(pokemon.atk * ([3, 3, 3, 6][pokemon.stars - 1] ?? 6))
+    const damage = Math.round(
+      pokemon.atk * ([3, 3, 3, 6][pokemon.stars - 1] ?? 6)
+    )
     board
       .getAdjacentCells(pokemon.positionX, pokemon.positionY)
       .map((v) => v.value)

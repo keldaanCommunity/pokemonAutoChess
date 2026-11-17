@@ -1167,7 +1167,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       for (const effect of pokemon.effectsSet) {
         if (effect instanceof MachRibbonEffect) {
           pokemon.addSpeed(
-            -ItemConfigs.MACH_RIBBON.removalSpeedPerTick * effect.count,
+            -ItemConfigs.MACH_RIBBON.speedPerTick * effect.count,
             pokemon,
             0,
             false

@@ -8,9 +8,11 @@ export class MagnetPullStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
     if (pokemon.player) {
-      const randomSteelPkm = pokemon.simulation.room.state.shop.magnetPull(
+      const { state } = pokemon.simulation.room
+      const randomSteelPkm = state.shop.magnetPull(
         pokemon,
-        pokemon.player
+        pokemon.player,
+        state
       )
       pokemon.player.spawnWanderingPokemon({
         pkm: randomSteelPkm,

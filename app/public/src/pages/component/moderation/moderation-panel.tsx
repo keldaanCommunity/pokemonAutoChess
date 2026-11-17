@@ -12,9 +12,7 @@ import {
 } from "../../../network"
 import { RemoveButton } from "../buttons/remove-button"
 import ChatHistory from "../chat/chat-history"
-import {
-  PlayerSearchBar
-} from "../search/player-search-bar"
+import { PlayerSearchBar } from "../search/player-search-bar"
 import "./moderation-panel.css"
 
 export default function ModerationPanel() {

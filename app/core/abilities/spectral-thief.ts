@@ -41,10 +41,10 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         const boostSpeed = min(0)(target.speed - base.speed)
         const boostDef = min(0)(target.def - target.baseDef)
         const boostSpeDef = min(0)(target.speDef - target.baseSpeDef)
-        const boostAP = target.ap
+        const boostAP = min(0)(target.ap)
         const boostHP = min(0)(target.maxHP - base.hp)
         const boostCritChance = min(0)(target.critChance - base.critChance)
-        const boostCritPower = min(0)(target.critPower - base.critPower)
+        const boostCritPower = min(0)(target.critPower - base.critPower) * 100
         const boostLuck = min(0)(target.luck - base.luck)
 
         target.addAttack(-boostAtk, pokemon, 0, false)
@@ -66,6 +66,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         pokemon.addCritChance(boostCritChance, pokemon, 0, false)
         pokemon.addCritPower(boostCritPower, pokemon, 0, false)
         pokemon.addLuck(boostLuck, pokemon, 0, false)
+        target.items.forEach((item) => target.itemStatsStolen.add(item))
       }
     }
   }

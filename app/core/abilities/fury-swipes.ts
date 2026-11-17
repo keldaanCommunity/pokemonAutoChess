@@ -13,7 +13,9 @@ export class FurySwipesStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const scale = 1 + pokemon.ap / 100
-    const nbAttacks = Math.round(([5,5,5,10][pokemon.stars - 1] ?? 10) * scale)
+    const nbAttacks = Math.round(
+      ([5, 5, 5, 10][pokemon.stars - 1] ?? 10) * scale
+    )
     const hitPerSecond = Math.round(1000 / nbAttacks)
 
     for (let n = 0; n < nbAttacks; n++) {

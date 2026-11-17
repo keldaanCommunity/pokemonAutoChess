@@ -2,7 +2,10 @@ import type { Iterator } from "@colyseus/schema"
 import { SchemaSerializer } from "@colyseus/sdk"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config/game/board"
 import { PortalCarouselStages } from "../../../config/game/stages"
-import { SynergyConfigs, SynergyTiersThresholds } from "../../../config/game/synergies"
+import {
+  SynergyConfigs,
+  SynergyTiersThresholds
+} from "../../../config/game/synergies"
 import { getLevelUpCost } from "../../../models/colyseus-models/experience-manager"
 import type Player from "../../../models/colyseus-models/player"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"

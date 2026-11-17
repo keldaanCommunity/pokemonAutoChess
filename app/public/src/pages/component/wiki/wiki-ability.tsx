@@ -183,8 +183,9 @@ function AbilityRow({
                 </p>
               )}
               <p>
-                {addIconsToDescription(t(`ability_description.${ability}`),
-                  { config: getDescriptionConfig(`ability_description.${ability}`) })}
+                {addIconsToDescription(t(`ability_description.${ability}`), {
+                  config: getDescriptionConfig(`ability_description.${ability}`)
+                })}
               </p>
             </div>
             <div>

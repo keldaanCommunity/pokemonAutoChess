@@ -65,6 +65,7 @@ import {
   OnDamageDealtEffect,
   OnDamageReceivedEffect,
   OnDeathEffect,
+  OnHealReceivedEffect,
   OnHitEffect,
   OnItemGainedEffect,
   OnItemLostInCombatEffect,
@@ -153,7 +154,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   commands = new Array<SimulationCommand>()
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
-
+  itemStatsStolen = new Set<Item>() // held items whose stats Spectral Thief took
   constructor(
     pokemon: IPokemon,
     positionX: number,
@@ -253,9 +254,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   get canCast(): boolean {
     return (
-      !this.status.silence &&
-      !this.items.has(Item.NULLIFY_BANDANNA) &&
-      !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
+      !this.status.silence && !this.effects.has(EffectEnum.TELEPORT_NEXT_ATTACK)
     )
   }
 
@@ -268,7 +267,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get canBeCopied(): boolean {
-    return this.passive !== Passive.INANIMATE
+    return (
+      this.passive !== Passive.INANIMATE &&
+      this.passive !== Passive.DESTRUCTION &&
+      this.passive !== Passive.COCOON_OF_DESTRUCTION
+    )
   }
 
   get isGhostOpponent(): boolean {
@@ -412,7 +415,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
         attackType === AttackType.SPECIAL
       ) {
-        specialDamage *= 1 + EffectConfigs.STRANGE_STEAM.damageBonusPercent / 100
+        specialDamage *=
+          1 + EffectConfigs.STRANGE_STEAM.damageBonusPercent / 100
       }
       if (crit && attacker) {
         let critReductionFactor = 1.0
@@ -455,7 +459,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         !attacker.items.has(Item.PROTECTIVE_PADS) &&
         attackType === AttackType.SPECIAL
       ) {
-        const armorFactor = 1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
+        const armorFactor =
+          1 - StatusConfigs.ARMOR_BREAK.effectivenessReductionPercent / 100
         const speDef = this.status.armorReduction
           ? Math.round(this.speDef * armorFactor)
           : this.speDef
@@ -520,7 +525,10 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean
   ) {
     const { ppGainReductionPercent } = StatusConfigs.FATIGUE
-    const fatigueFactor = this.status.fatigue && baseValue > 0 ? 1 - ppGainReductionPercent / 100 : 1
+    const fatigueFactor =
+      this.status.fatigue && baseValue > 0
+        ? 1 - ppGainReductionPercent / 100
+        : 1
     let value = Math.round(
       baseValue *
         (1 + (apBoost * caster.ap) / 100) *
@@ -591,6 +599,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
+    const previousHP = this.hp
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
@@ -612,16 +621,30 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const boardPokemon = this.refToBoardPokemon as Pokemon
       boardPokemon.addMaxHP(value)
     }
+    if (this.hp > previousHP) {
+      const healReceived = this.hp - previousHP
+      this.getEffects(OnHealReceivedEffect).forEach((effect) => {
+        effect.apply({
+          pokemon: this,
+          healReceived,
+          origin: caster
+        })
+      })
+    }
   }
 
   addDodgeChance(
     value: number,
-    caster: IPokemonEntity,
+    caster: IPokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
-    value =
-      value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
+    if (caster !== "environment") {
+      value =
+        value *
+        (1 + (apBoost * caster.ap) / 100) *
+        (crit ? caster.critPower : 1)
+    }
     value = applyBigEaterBeltStatBuff(this, value, caster, 3)
     value = applyTwistBandBuff(this, value, caster)
 
@@ -635,18 +658,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     crit: boolean,
     permanent = false
   ) {
-    if (this.items.has(Item.NULLIFY_BANDANNA)) {
-      this.addAttack(
-        Math.round(
-          (1 / ItemConfigs.NULLIFY_BANDANNA.abilityPowerPerAttack) * value
-        ),
-        caster,
-        0,
-        false
-      ) // AP is gained as Attack instead
-      return
-    }
-
     value = Math.round(
       value * (1 + (apBoost * caster.ap) / 100) * (crit ? caster.critPower : 1)
     )
@@ -873,9 +884,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   removeItemEffect(item: Item) {
-    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) =>
+    const stolen = this.itemStatsStolen.delete(item)
+    Object.entries(ItemStats[item] ?? {}).forEach(([stat, value]) => {
+      // Spectral Thief already took these stats from the unit
+      if (stolen && StatsStolenBySpectralThief.includes(stat as Stat)) return
       this.applyStat(stat as Stat, -value)
-    )
+    })
 
     const type = SynergyGivenByItem[item]
     const default_types = getPokemonData(this.name).types
@@ -1017,7 +1031,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       }
     }
 
-    if (target.passive === Passive.PSYDUCK && chance(0.1, this)) {
+    if (target.passive === Passive.PSYDUCK && chance(0.1, target)) {
       target.status.triggerConfusion(3000, target, target)
     }
 
@@ -1080,7 +1094,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     if (this.hasSynergyEffect(Synergy.GHOST)) {
       const { effectChance, silenceDurationSeconds } = SynergyConfigs.GHOST
       if (chance(effectChance.value / 100, this)) {
-        target.status.triggerSilence(silenceDurationSeconds * 1000, target, this)
+        target.status.triggerSilence(
+          silenceDurationSeconds * 1000,
+          target,
+          this
+        )
       }
     }
 
@@ -1102,7 +1120,11 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           (ItemConfigs.SMELLY_CLAY.poisonChanceReductionPercent / 100)
       }
       if (poisonChance > 0 && chance(poisonChance, this)) {
-        target.status.triggerPoison(SynergyConfigs.POISON.poisonDurationSeconds * 1000, target, this)
+        target.status.triggerPoison(
+          SynergyConfigs.POISON.poisonDurationSeconds * 1000,
+          target,
+          this
+        )
       }
     }
 
@@ -1139,7 +1161,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ) {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance / 100, this)
+        chance(target.critChance / 100, target)
       const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
       const damage = Math.round(
         target.def *
@@ -1162,7 +1184,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
-        chance(target.critChance / 100, this)
+        chance(target.critChance / 100, target)
       target.effects.delete(EffectEnum.SHELL_TRAP)
       target.broadcastAbility({ skill: "SHELL_TRAP_trigger" })
       cells.forEach((cell) => {
@@ -1486,15 +1508,20 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   resurrect() {
+    this.itemStatsStolen.clear()
     // Recalculate stats as it was at the start of the battle
     const cloneReference = new PokemonEntity(
       this.refToBoardPokemon,
       this.refToBoardPokemon.positionX,
-      this.refToBoardPokemon.positionY - 1,
+      this.team === Team.BLUE_TEAM
+        ? this.refToBoardPokemon.positionY - 1
+        : 5 - (this.refToBoardPokemon.positionY - 1),
       this.team,
       this.simulation
     )
     this.simulation.applySynergyEffects(cloneReference)
+    // Get the items from the actual Pokemon entity to avoid Wonder Box rerolls after resurrecting
+    cloneReference.items = this.items
     this.simulation.applyItemsEffects(cloneReference)
     cloneReference.getEffects(OnSpawnEffect).forEach((effect) => {
       effect.apply(cloneReference, this.player, this.isSpawn)
@@ -1946,6 +1973,19 @@ export function canSell(
   return new PokemonClasses[pkm](pkm).canBeSold
 }
 
+// the stats Spectral Thief takes, see spectral-thief.ts
+const StatsStolenBySpectralThief = [
+  Stat.ATK,
+  Stat.SPEED,
+  Stat.DEF,
+  Stat.SPE_DEF,
+  Stat.AP,
+  Stat.HP,
+  Stat.CRIT_CHANCE,
+  Stat.CRIT_POWER,
+  Stat.LUCK
+]
+
 function applyBigEaterBeltStatBuff(
   pokemon: PokemonEntity,
   value: number,
@@ -1956,11 +1996,11 @@ function applyBigEaterBeltStatBuff(
     value > 0 ||
     (value < 0 && caster !== "environment" && caster.team === pokemon.team)
   if (isBuffOrBuffLost && pokemon.items.has(Item.BIG_EATER_BELT)) {
-    value = roundToNDigits(
-      value * (1 + ItemConfigs.BIG_EATER_BELT.statBonusPercent / 100),
-      nbDigits,
-      "down"
-    )
+    const multiplier = 1 + ItemConfigs.BIG_EATER_BELT.statBonusPercent / 100
+    // round the size of the change down, so a buff and its removal stay equal
+    value =
+      Math.sign(value) *
+      roundToNDigits(Math.abs(value) * multiplier, nbDigits, "down")
   }
   return value
 }

@@ -69,11 +69,14 @@ const giftAmountOfPokemon =
       )
       const freeCellX = getFirstAvailablePositionInBench(toPlayer.board)
 
-      if (freeCellX === null) return
-      replacement.positionX = freeCellX
-      replacement.positionY = 0
-      toPlayer.board.set(replacement.id, replacement)
-      replacement.onAcquired(toPlayer)
+      if (freeCellX === null) {
+        toPlayer.pendingPokemonsToGive.push(replacement)
+      } else {
+        replacement.positionX = freeCellX
+        replacement.positionY = 0
+        toPlayer.board.set(replacement.id, replacement)
+        replacement.onAcquired(toPlayer)
+      }
     }
   }
 
@@ -96,15 +99,18 @@ const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
       )
       const freeCellX = getFirstAvailablePositionInBench(toPlayer.board)
 
-      if (freeCellX === null) return
-      replacement.stacksRequired = EvolutionTime.EVOLVE_HATCH
-      replacement.positionX = freeCellX
-      replacement.positionY = 0
-      replacement.addMaxHP(maxHp)
-      replacement.addAttack(attack)
-      replacement.addAbilityPower(abilityPower)
-      toPlayer.board.set(replacement.id, replacement)
-      replacement.onAcquired(toPlayer)
+      if (freeCellX === null) {
+        toPlayer.pendingPokemonsToGive.push(replacement)
+      } else {
+        replacement.stacksRequired = EvolutionTime.EVOLVE_HATCH
+        replacement.positionX = freeCellX
+        replacement.positionY = 0
+        replacement.addMaxHP(maxHp)
+        replacement.addAttack(attack)
+        replacement.addAbilityPower(abilityPower)
+        toPlayer.board.set(replacement.id, replacement)
+        replacement.onAcquired(toPlayer)
+      }
     })
   }
 }
@@ -174,7 +180,7 @@ const giftRandomPokemonByRarity =
         : [selectedProposition]
     ).map((p) => PokemonFactory.createPokemonFromName(p, toPlayer))
 
-    room.givePokemons(pokemonsObtained, toPlayer, true)
+    room.givePokemons(pokemonsObtained, toPlayer)
   }
 
 const giftPotion = (toPlayer: Player, fromPlayer: Player) => {
@@ -348,7 +354,6 @@ export const openGift = (
   const benchSpace = getFreeSpaceOnBench(toPlayer.board)
   if (
     [
-      Item.DITTO_GIFT,
       Item.COMMON_GIFT,
       Item.UNCOMMON_GIFT,
       Item.RARE_GIFT,

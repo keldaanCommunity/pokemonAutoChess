@@ -10,6 +10,8 @@ export class TeeterDanceStrategy extends AbilityStrategy {
     const confusionDuration = ([3, 3, 3, 6][pokemon.stars - 1] ?? 6) * 1000
     board.cells
       .filter((v) => v !== undefined)
-      .forEach((v) => v && v.status.triggerConfusion(confusionDuration, v, pokemon))
+      .forEach(
+        (v) => v && v.status.triggerConfusion(confusionDuration, v, pokemon)
+      )
   }
 }

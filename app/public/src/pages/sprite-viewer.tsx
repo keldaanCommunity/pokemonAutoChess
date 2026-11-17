@@ -24,7 +24,7 @@ export function SpriteDebug() {
     <div className="sprite-viewer-root">
       <MainSidebar
         page="main_lobby"
-        leave={() => navigate("/lobby")}
+        onClickLeave={() => navigate("/lobby")}
         leaveLabel={t("back_to_lobby")}
       />
       <div className="sprite-viewer-container">

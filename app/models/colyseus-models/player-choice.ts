@@ -25,7 +25,7 @@ export class PlayerChoice extends Schema {
     type: PlayerChoiceType
     items?: Item[]
     pokemons?: PkmProposition[]
-    costs?: number[],
+    costs?: number[]
     onChoice?: (choiceIndex: number) => void
   }) {
     super()

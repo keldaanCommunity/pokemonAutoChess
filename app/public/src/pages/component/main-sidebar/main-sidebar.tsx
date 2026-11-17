@@ -1,4 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Menu, MenuItem, type MenuItemProps, Sidebar } from "react-pro-sidebar"
@@ -6,13 +5,7 @@ import { useNavigate } from "react-router"
 import pkg from "../../../../../../package.json"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { Role } from "../../../../../types"
-import { isReplayRoom } from "../../../game/replay-room-id"
-import {
-  selectConnectedPlayer,
-  useAppDispatch,
-  useAppSelector
-} from "../../../hooks"
-import { rooms } from "../../../network"
+import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { usePreferences } from "../../../preferences"
 import { setSearchedUser } from "../../../stores/LobbyStore"
 import { toggleFullScreen } from "../../utils/fullscreen"
@@ -37,22 +30,20 @@ import TierListMakerModal from "../tier-list/tier-list-maker-modal"
 import Wiki from "../wiki/wiki"
 
 import "./main-sidebar.css"
-import { getGameScene } from "../../game"
 
 export type Page = "main_lobby" | "preparation" | "game"
 
 interface MainSidebarProps {
   page: Page
-  leave: () => void
+  onClickLeave: () => void
   leaveLabel: string
 }
 
 export function MainSidebar(props: MainSidebarProps) {
-  const { page, leave, leaveLabel } = props
+  const { page, onClickLeave, leaveLabel } = props
   const [collapsed, setCollapsed] = useState(true)
   const navigate = useNavigate()
   const [modal, setModal] = useState<Modals>()
-  const [showSurrenderConfirm, setShowSurrenderConfirm] = useState(false)
   const changeModal = useCallback(
     (nextModal: Modals) => setModal(nextModal),
     []
@@ -126,29 +117,6 @@ export function MainSidebar(props: MainSidebarProps) {
       window.removeEventListener("keydown", handleKeydown)
     }
   }, [preferences.keybindings, profileLevel])
-
-  const player = useAppSelector(selectConnectedPlayer)
-  const playersAlive = useAppSelector(
-    createSelector([(state) => state.game.players], (players) =>
-      players.filter((p) => p.life > 0)
-    )
-  )
-  function onClickLeave() {
-    if (player && player.life > 0 && playersAlive.length > 1) {
-      setShowSurrenderConfirm(true)
-    } else {
-      leave()
-    }
-  }
-
-  function onClickLeaveReplay() {
-    // a replay exits straight to the lobby (the live leave() would hit the /after flow)
-    if (isReplayRoom(rooms.game)) {
-      rooms.game.pause()
-    }
-    getGameScene()?.music?.destroy()
-    navigate("/lobby")
-  }
 
   return (
     <Sidebar
@@ -397,47 +365,12 @@ export function MainSidebar(props: MainSidebarProps) {
           </NavLink>
         )}
 
-        {isReplayRoom(rooms.game) ? (
-          <NavLink
-            svg="exit-door"
-            className="red logout"
-            onClick={onClickLeaveReplay}
-          >
-            {t("replay.leave_replay")}
-          </NavLink>
-        ) : (
-          <NavLink
-            svg="exit-door"
-            className="red logout"
-            onClick={onClickLeave}
-          >
-            {leaveLabel}
-          </NavLink>
-        )}
+        <NavLink svg="exit-door" className="red logout" onClick={onClickLeave}>
+          {leaveLabel}
+        </NavLink>
       </Menu>
 
       <Modals modal={modal} setModal={setModal} page={page} />
-      <Modal
-        show={showSurrenderConfirm}
-        header={t("game-surrender-modal-title")}
-        body={t("game-surrender-modal-body")}
-        onClose={() => setShowSurrenderConfirm(false)}
-        footer={
-          <>
-            <button className="bubbly green" onClick={leave}>
-              {t("yes")}
-            </button>
-            <button
-              className="bubbly red"
-              onClick={() => {
-                setShowSurrenderConfirm(false)
-              }}
-            >
-              {t("no")}
-            </button>
-          </>
-        }
-      ></Modal>
     </Sidebar>
   )
 }

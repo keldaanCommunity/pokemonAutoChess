@@ -2050,7 +2050,7 @@ export class Turtwig extends Pokemon {
     Synergy.GROUND,
     Synergy.MONSTER
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.HATCH
   stars = 1
   evolution = Pkm.GROTLE
   hp = 80
@@ -2069,7 +2069,7 @@ export class Grotle extends Pokemon {
     Synergy.GROUND,
     Synergy.MONSTER
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.HATCH
   stars = 2
   evolution = Pkm.TORTERRA
   hp = 150
@@ -2088,13 +2088,13 @@ export class Torterra extends Pokemon {
     Synergy.GROUND,
     Synergy.MONSTER
   ])
-  rarity = Rarity.RARE
+  rarity = Rarity.HATCH
   stars = 3
-  hp = 280
-  atk = 21
+  hp = 250
+  atk = 17
   speed = 43
-  def = 16
-  speDef = 8
+  def = 15
+  speDef = 7
   maxPP = 100
   range = 1
   skill = Ability.BULLDOZE
@@ -3238,14 +3238,14 @@ export class Bulbasaur extends Pokemon {
   rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.IVYSAUR
-  hp = 80
+  hp = 85
   atk = 5
   speed = 51
   def = 4
-  speDef = 4
-  maxPP = 70
-  range = 2
-  skill = Ability.MAGICAL_LEAF
+  speDef = 5
+  maxPP = 100
+  range = 1
+  skill = Ability.MEGA_DRAIN
 }
 
 export class Ivysaur extends Pokemon {
@@ -3253,28 +3253,28 @@ export class Ivysaur extends Pokemon {
   rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.VENUSAUR
-  hp = 130
+  hp = 140
   atk = 9
   speed = 51
   def = 8
-  speDef = 8
-  maxPP = 70
-  range = 2
-  skill = Ability.MAGICAL_LEAF
+  speDef = 10
+  maxPP = 100
+  range = 1
+  skill = Ability.MEGA_DRAIN
 }
 
 export class Venusaur extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.POISON, Synergy.FLORA])
   rarity = Rarity.RARE
   stars = 3
-  hp = 240
+  hp = 250
   atk = 17
   speed = 51
   def = 12
-  speDef = 12
-  maxPP = 70
-  range = 2
-  skill = Ability.MAGICAL_LEAF
+  speDef = 16
+  maxPP = 100
+  range = 1
+  skill = Ability.MEGA_DRAIN
 }
 
 export class Igglybuff extends Pokemon {
@@ -5587,6 +5587,22 @@ export class Yveltal extends Pokemon {
   maxPP = 100
   range = 1
   skill = Ability.OBLIVION_WING
+  passive = Passive.DESTRUCTION
+}
+
+export class YveltalCocoon extends Pokemon {
+  types = new SetSchema<Synergy>([Synergy.DARK, Synergy.FLYING])
+  rarity = Rarity.LEGENDARY
+  stars = 3
+  hp = 300
+  atk = 22
+  speed = 57
+  def = 12
+  speDef = 12
+  maxPP = 10
+  range = 1
+  skill = Ability.DARK_AURA
+  passive = Passive.COCOON_OF_DESTRUCTION
 }
 
 export class Moltres extends Pokemon {
@@ -8505,20 +8521,22 @@ export class Ninjask extends Pokemon {
   skill = Ability.AERIAL_ACE
   additional = true
   onAcquired(player: Player) {
-    // also gain sheninja if free space on bench
+    // also gain Shedinja
+    const pkmWithCustom = getPkmWithCustom(
+      PkmIndex[Pkm.SHEDINJA],
+      player.pokemonCustoms
+    )
+    const shiny = pkmWithCustom.shiny ?? false
+    const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
+    const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
+    pokemon.postConstructor()
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
-      const pkmWithCustom = getPkmWithCustom(
-        PkmIndex[Pkm.SHEDINJA],
-        player.pokemonCustoms
-      )
-      const shiny = pkmWithCustom.shiny ?? false
-      const emotion = pkmWithCustom.emotion ?? Emotion.NORMAL
-      const pokemon = new Shedinja(Pkm.SHEDINJA, shiny, emotion)
-      pokemon.postConstructor()
       pokemon.positionX = x
       pokemon.positionY = 0
       player.board.set(pokemon.id, pokemon)
+    } else {
+      player.pendingPokemonsToGive.push(pokemon)
     }
   }
 }
@@ -10544,16 +10562,16 @@ export class Dragapult extends Pokemon {
 
 export class Snivy extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 1
   evolution = Pkm.SERVINE
   evolutionRule = { type: EvolutionRuleType.HATCH } satisfies HatchEvolutionRule
-  hp = 90
-  atk = 4
+  hp = 75
+  atk = 6
   speed = 61
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
@@ -10561,16 +10579,16 @@ export class Snivy extends Pokemon {
 
 export class Servine extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 2
   evolution = Pkm.SERPERIOR
   evolutionRule = { type: EvolutionRuleType.HATCH } satisfies HatchEvolutionRule
-  hp = 160
-  atk = 11
+  hp = 150
+  atk = 12
   speed = 61
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 3
   skill = Ability.MAGICAL_LEAF
   passive = Passive.HATCH
@@ -10578,14 +10596,14 @@ export class Servine extends Pokemon {
 
 export class Serperior extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIELD])
-  rarity = Rarity.HATCH
+  rarity = Rarity.RARE
   stars = 3
   hp = 240
-  atk = 21
+  atk = 27
   speed = 61
   def = 2
   speDef = 2
-  maxPP = 70
+  maxPP = 100
   range = 3
   skill = Ability.MAGICAL_LEAF
 }
@@ -11314,7 +11332,7 @@ export class UnownS extends Pokemon {
   speed = 40
   def = 2
   speDef = 2
-  maxPP = 100
+  maxPP = 90
   range = 9
   skill = Ability.HIDDEN_POWER_S
   passive = Passive.UNOWN
@@ -12192,7 +12210,7 @@ export class Emboar extends Pokemon {
 }
 
 export class Wurmple extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.BUG])
+  types = new SetSchema<Synergy>([Synergy.BUG, Synergy.NORMAL])
   rarity = Rarity.EPIC
   stars = 1
   hp = 110
@@ -12894,10 +12912,9 @@ export class Barboach extends Pokemon {
   speed = 44
   def = 6
   speDef = 8
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.FISSURE
-  passive = Passive.AQUA_VEIL
   additional = true
 }
 
@@ -12910,10 +12927,9 @@ export class Whiscash extends Pokemon {
   speed = 44
   def = 8
   speDef = 10
-  maxPP = 90
+  maxPP = 70
   range = 1
   skill = Ability.FISSURE
-  passive = Passive.AQUA_VEIL
   additional = true
 }
 
@@ -16037,13 +16053,13 @@ export class Petilil extends Pokemon {
     }
   } satisfies CountEvolutionRule
   stars = 1
-  hp = 85
+  hp = 70
   atk = 5
   speed = 54
-  def = 4
-  speDef = 4
+  def = 2
+  speDef = 2
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.AROMATHERAPY
   additional = true
 }
@@ -16052,13 +16068,13 @@ export class Lilligant extends Pokemon {
   types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA, Synergy.HUMAN])
   rarity = Rarity.UNCOMMON
   stars = 2
-  hp = 180
+  hp = 160
   atk = 10
   speed = 54
-  def = 8
-  speDef = 8
+  def = 4
+  speDef = 4
   maxPP = 100
-  range = 1
+  range = 2
   skill = Ability.AROMATHERAPY
   additional = true
 }
@@ -16369,7 +16385,7 @@ function ogerponOnSell(player: Player) {
 }
 
 export class OgerponTeal extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16391,7 +16407,7 @@ export class OgerponTeal extends Pokemon {
 }
 
 export class OgerponTealMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FLORA])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.FLORA])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16414,7 +16430,11 @@ export class OgerponTealMask extends Pokemon {
 }
 
 export class OgerponWellspring extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.GRASS,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16436,7 +16456,11 @@ export class OgerponWellspring extends Pokemon {
 }
 
 export class OgerponWellspringMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.AQUATIC])
+  types = new SetSchema<Synergy>([
+    Synergy.HUMAN,
+    Synergy.GRASS,
+    Synergy.AQUATIC
+  ])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16460,7 +16484,7 @@ export class OgerponWellspringMask extends Pokemon {
 }
 
 export class OgerponHearthflame extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.FIRE])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16482,7 +16506,7 @@ export class OgerponHearthflame extends Pokemon {
 }
 
 export class OgerponHearthflameMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.FIRE])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.FIRE])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16506,7 +16530,7 @@ export class OgerponHearthflameMask extends Pokemon {
 }
 
 export class OgerponCornerstone extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.ROCK])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -16528,7 +16552,7 @@ export class OgerponCornerstone extends Pokemon {
 }
 
 export class OgerponCornerstoneMask extends Pokemon {
-  types = new SetSchema<Synergy>([Synergy.GRASS, Synergy.ROCK])
+  types = new SetSchema<Synergy>([Synergy.HUMAN, Synergy.GRASS, Synergy.ROCK])
   rarity = Rarity.LEGENDARY
   stars = 3
   hp = 200
@@ -21547,6 +21571,7 @@ export const PokemonClasses: Record<
   [Pkm.ZERAORA]: Zeraora,
   [Pkm.XERNEAS]: Xerneas,
   [Pkm.YVELTAL]: Yveltal,
+  [Pkm.YVELTAL_COCOON]: YveltalCocoon,
   [Pkm.MARSHADOW]: Marshadow,
   [Pkm.HOOTHOOT]: Hoothoot,
   [Pkm.NOCTOWL]: Noctowl,

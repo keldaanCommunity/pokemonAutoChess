@@ -15,7 +15,7 @@ class DragonRageEffect extends PeriodicEffect {
   constructor(pokemon: PokemonEntity, crit: boolean, initialShield: number) {
     super(
       (pokemon: PokemonEntity, board: Board) => {
-        this.ticksRemaining--        
+        this.ticksRemaining--
         if (this.ticksRemaining < 0) {
           pokemon.effectsSet.delete(this)
           pokemon.effects.delete(EffectEnum.DRAGON_RAGE)

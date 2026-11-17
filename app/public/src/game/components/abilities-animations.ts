@@ -932,6 +932,1153 @@ const aquaSwirlAnimation: AbilityAnimation = ({
   }
 }
 
+const darkAuraAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  flip
+}) => {
+  const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+  const radius = 2 * CELL_WIDTH
+  const perspective = 0.6
+  const halo = scene.add
+    .ellipse(x, y, 88, 88 * perspective, 0xc21b36, 0.45)
+    .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+  scene.abilitiesVfxGroup?.add(halo)
+  scene.tweens.add({
+    targets: halo,
+    scale: 0.5,
+    alpha: 0,
+    duration: 400,
+    ease: Phaser.Math.Easing.Quadratic.In,
+    onComplete: () => halo.destroy()
+  })
+
+  ;[
+    { color: 0xc21b36, width: 6, alpha: 0.6, delay: 150, duration: 500 },
+    { color: 0xffc2b9, width: 3, alpha: 0.45, delay: 230, duration: 500 }
+  ].forEach(({ color, width, alpha, delay, duration }) => {
+    const ring = scene.add
+      .graphics({ x, y })
+      .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+    scene.abilitiesVfxGroup?.add(ring)
+    ring.lineStyle(width, color, 0.85)
+    ring.beginPath()
+    for (let i = 0; i <= 16; i++) {
+      const angle = (i * Math.PI * 2) / 16
+      const px = Math.cos(angle) * radius
+      const py = Math.sin(angle) * radius * perspective
+      if (i === 0) ring.moveTo(px, py)
+      else ring.lineTo(px, py)
+    }
+    ring.strokePath()
+    ring.setScale(0.08).setAlpha(0)
+    scene.tweens.add({
+      targets: ring,
+      scale: 1,
+      alpha: { from: alpha, to: 0 },
+      delay,
+      duration,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => ring.destroy()
+    })
+  })
+
+  for (let i = 0; i < 22; i++) {
+    const angle = (i * Math.PI * 2) / 22 + (Math.random() - 0.5) * 0.3
+    const distance = (0.7 + Math.random() * 0.3) * radius
+    const particle = scene.add
+      .rectangle(
+        x + Math.cos(angle) * distance,
+        y + Math.sin(angle) * distance * perspective,
+        randomBetween(8, 11),
+        randomBetween(8, 11),
+        i % 3 === 0 ? 0xffc2b9 : 0xc21b36
+      )
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(particle)
+    scene.tweens.add({
+      targets: particle,
+      x,
+      y,
+      scale: 0.3,
+      alpha: { from: 0.65, to: 0 },
+      delay: 250 + i * 10,
+      duration: 450,
+      ease: Phaser.Math.Easing.Quadratic.In,
+      onComplete: () => particle.destroy()
+    })
+  }
+}
+
+const HydroPumpTravelDuration = 250
+
+function hydroPumpLine(
+  { positionX, positionY, targetX, targetY, flip }: AbilityAnimationArgs,
+  extendToBoardEdge = false
+) {
+  if (
+    !Number.isFinite(targetX) ||
+    !Number.isFinite(targetY) ||
+    (targetX === -1 && targetY === -1)
+  )
+    return null
+  const [casterX, casterY] = transformEntityCoordinates(
+    positionX,
+    positionY,
+    flip
+  )
+  const [targetScreenX, targetScreenY] = transformEntityCoordinates(
+    targetX,
+    targetY,
+    flip
+  )
+  const dx = targetScreenX - casterX
+  const dy = targetScreenY - casterY
+  const length = Math.hypot(dx, dy)
+  if (length === 0) return null
+
+  const angle = Math.atan2(dy, dx)
+  const directionX = dx / length
+  const directionY = dy / length
+  let visibleLength = extendToBoardEdge ? Infinity : length
+  const [left, firstRow] = transformEntityCoordinates(0, 0, flip)
+  const [right, lastRow] = transformEntityCoordinates(
+    BOARD_WIDTH - 1,
+    BOARD_HEIGHT - 1,
+    flip
+  )
+  const minX = left - CELL_WIDTH / 2
+  const maxX = right + CELL_WIDTH / 2
+  const minY = Math.min(firstRow, lastRow) - CELL_HEIGHT / 2
+  const maxY = Math.max(firstRow, lastRow) + CELL_HEIGHT / 2
+  if (directionX > 0)
+    visibleLength = Math.min(visibleLength, (maxX - casterX) / directionX)
+  if (directionX < 0)
+    visibleLength = Math.min(visibleLength, (minX - casterX) / directionX)
+  if (directionY > 0)
+    visibleLength = Math.min(visibleLength, (maxY - casterY) / directionY)
+  if (directionY < 0)
+    visibleLength = Math.min(visibleLength, (minY - casterY) / directionY)
+  if (visibleLength <= 0) return null
+  return {
+    casterX,
+    casterY,
+    targetScreenX,
+    targetScreenY,
+    angle,
+    directionX,
+    directionY,
+    visibleLength,
+    hasProjectedEnd:
+      targetX < 0 ||
+      targetX >= BOARD_WIDTH ||
+      targetY < 0 ||
+      targetY >= BOARD_HEIGHT
+  }
+}
+
+const hydroPumpAnimation: AbilityAnimation = (args) => {
+  const { scene, delay } = args
+  const line = hydroPumpLine(args)
+  if (!line) return
+  const { casterX, casterY, angle, directionX, directionY, visibleLength } =
+    line
+  const startX = casterX + directionX * 12
+  const startY = casterY - 20 + directionY * 12
+  const beamLength = Math.max(0, visibleLength - 12)
+  const animationDelay = Math.max(0, delay ?? 0)
+  const firingDelay = animationDelay + 75
+  const holdDuration = 75
+  const fadeDuration = 190
+  const streamDuration = HydroPumpTravelDuration + holdDuration + fadeDuration
+  const flowCycleDuration = 107.5
+
+  const muzzle = scene.add
+    .ellipse(startX, startY, 28, 20, 0x25cfff, 0.7)
+    .setDepth(DEPTH.ABILITY)
+    .setScale(0.35, 0.35)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(muzzle)
+  scene.tweens.chain({
+    targets: muzzle,
+    tweens: [
+      {
+        alpha: 0.8,
+        scaleX: 1,
+        scaleY: 1,
+        duration: 65,
+        delay: animationDelay,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
+      { alpha: 0, scaleX: 1.4, scaleY: 0.6, duration: 90 }
+    ],
+    onComplete: () => muzzle.destroy()
+  })
+
+  const beam = scene.add
+    .container(startX, startY)
+    .setDepth(DEPTH.PROJECTILE)
+    .setRotation(angle)
+    .setScale(0, 1)
+  scene.abilitiesVfxGroup?.add(beam)
+
+  const stream = scene.add.graphics()
+  const lobeCount = Math.max(2, Math.ceil(beamLength / 19))
+  const spacing = beamLength / lobeCount
+  const noise = (i: number) => {
+    const value = Math.sin(i * 12.9898) * 43758.5453
+    return value - Math.floor(value)
+  }
+  const drawStream = (flow: number) => {
+    stream.clear()
+    const layers = [
+      { color: 0x78ddea, alpha: 0.18, width: 42, height: 52 },
+      { color: 0x9debf3, alpha: 0.55, width: 37, height: 35 },
+      { color: 0xf4ffff, alpha: 0.82, width: 33, height: 21 }
+    ]
+    for (const layer of layers) {
+      stream.fillStyle(layer.color, layer.alpha)
+      for (let i = -1; i <= lobeCount; i++) {
+        const x = Math.min(beamLength, Math.max(0, (i + (flow % 1)) * spacing))
+        const phase = i * 2.3 - flow * 3
+        const swell = 0.75 + noise(i + 8) * 0.35 + 0.1 * Math.sin(phase)
+        const spread = Math.min(1, 0.6 + x / 120)
+        stream.fillEllipse(
+          x,
+          (noise(i + 31) - 0.5) * 8 + Math.sin(phase * 0.8) * 3,
+          layer.width * swell,
+          layer.height * swell * spread
+        )
+      }
+    }
+
+    stream.fillStyle(0xe9ffff, 0.6)
+    for (let i = 0; i < lobeCount * 5; i++) {
+      const x =
+        (noise(i + 100) * beamLength + flow * spacing * 2) % (beamLength || 1)
+      const spread = Math.min(1, 0.6 + x / 120)
+      const y = (noise(i + 300) - 0.5) * 65 * spread
+      const size = 1.5 + noise(i + 500) * 4
+      stream.fillEllipse(x, y, size * 1.4, size)
+    }
+  }
+  drawStream(0)
+  beam.add(stream)
+
+  scene.tweens.addCounter({
+    from: 0,
+    to: streamDuration / flowCycleDuration,
+    duration: streamDuration,
+    delay: firingDelay,
+    onUpdate: (tween) => {
+      if (beam.active && stream.active) drawStream(tween.getValue() ?? 0)
+    }
+  })
+
+  scene.tweens.chain({
+    targets: beam,
+    tweens: [
+      {
+        scaleX: 1,
+        duration: HydroPumpTravelDuration,
+        delay: firingDelay,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
+      {
+        alpha: 0,
+        scaleY: 0.55,
+        delay: holdDuration,
+        duration: fadeDuration,
+        ease: Phaser.Math.Easing.Quadratic.In
+      }
+    ],
+    onComplete: () => beam.destroy()
+  })
+
+  if (!line.hasProjectedEnd) hydroPumpSplashAnimation(args)
+}
+
+const hydroPumpSplashAnimation: AbilityAnimation = (args) => {
+  const { scene, delay } = args
+  if (args.targetX < 0 || args.targetY < 0) return
+  const line = hydroPumpLine(args, args.ability === "HYDRO_PUMP_SPLASH")
+  if (!line) return
+  const {
+    casterX,
+    casterY,
+    targetScreenX,
+    targetScreenY,
+    directionX,
+    directionY,
+    visibleLength
+  } = line
+  const impactX = targetScreenX - directionX * 10
+  const impactY = targetScreenY - 20 - directionY * 10
+  const impact = scene.add
+    .container(impactX, impactY)
+    .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+    .setScale(0.35)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(impact)
+
+  const splash = scene.add.graphics()
+  splash.fillStyle(0x05bfff, 0.48)
+  splash.fillEllipse(0, 0, 48, 34)
+  splash.fillStyle(0xc9faff, 0.9)
+  splash.fillEllipse(0, 0, 24, 18)
+  splash.lineStyle(3, 0x70eaff, 0.8)
+  splash.strokeEllipse(0, 0, 55, 37)
+  for (let i = 0; i < 9; i++) {
+    const direction = (i * Math.PI * 2) / 9
+    const innerRadius = 11
+    const outerRadius = 25 + (i % 3) * 6
+    const halfWidth = 3 + (i % 2) * 2
+    const perpendicularX = -Math.sin(direction) * halfWidth
+    const perpendicularY = Math.cos(direction) * halfWidth
+    splash.fillStyle(i % 2 === 0 ? 0x9af5ff : 0x19caff, 0.9)
+    splash.fillTriangle(
+      Math.cos(direction) * innerRadius + perpendicularX,
+      Math.sin(direction) * innerRadius + perpendicularY,
+      Math.cos(direction) * outerRadius,
+      Math.sin(direction) * outerRadius,
+      Math.cos(direction) * innerRadius - perpendicularX,
+      Math.sin(direction) * innerRadius - perpendicularY
+    )
+  }
+  impact.add(splash)
+
+  const targetDistance = Math.hypot(
+    targetScreenX - casterX,
+    targetScreenY - casterY
+  )
+  const impactProgress = Math.min(1, targetDistance / visibleLength)
+  const impactDelay =
+    Math.max(0, delay ?? 0) +
+    75 +
+    HydroPumpTravelDuration * (1 - Math.sqrt(1 - impactProgress))
+  scene.tweens.chain({
+    targets: impact,
+    tweens: [
+      {
+        alpha: 0.95,
+        scale: 1,
+        duration: 100,
+        delay: impactDelay,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
+      {
+        alpha: 0,
+        scale: 1.4,
+        delay: 35,
+        duration: 190,
+        ease: Phaser.Math.Easing.Quadratic.In
+      }
+    ],
+    onComplete: () => impact.destroy()
+  })
+
+  for (let i = 0; i < 8; i++) {
+    const direction = (i * Math.PI * 2) / 8 + (Math.random() - 0.5) * 0.3
+    const distance = randomBetween(28, 58)
+    const droplet = scene.add
+      .ellipse(
+        impactX,
+        impactY,
+        randomBetween(7, 12),
+        randomBetween(11, 18),
+        i % 2 === 0 ? 0x8af2ff : 0x12bfff,
+        0.9
+      )
+      .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+      .setRotation(direction + Math.PI / 2)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(droplet)
+    scene.tweens.chain({
+      targets: droplet,
+      tweens: [
+        {
+          alpha: 0.95,
+          duration: 35,
+          delay: impactDelay + randomBetween(0, 35)
+        },
+        {
+          x: impactX + Math.cos(direction) * distance,
+          y: impactY + Math.sin(direction) * distance,
+          alpha: 0,
+          scale: 0.45,
+          duration: 240,
+          ease: Phaser.Math.Easing.Quadratic.Out
+        }
+      ],
+      onComplete: () => droplet.destroy()
+    })
+  }
+}
+
+function followDashMovement(
+  args: AbilityAnimationArgs,
+  spawnTrail: (x: number, y: number, angle: number) => void
+) {
+  const { scene, positionX, positionY, targetX, targetY, flip } = args
+  if (targetX < 0 || targetY < 0) return
+
+  const [startX, startY] = transformEntityCoordinates(
+    positionX,
+    positionY,
+    flip
+  )
+  const [targetScreenX, targetScreenY] = transformEntityCoordinates(
+    targetX,
+    targetY,
+    flip
+  )
+  const casterSprite =
+    args.pokemonsOnBoard.find(
+      (pokemon) =>
+        pokemon.positionX === positionX && pokemon.positionY === positionY
+    ) ??
+    args.pokemonsOnBoard.reduce<PokemonSprite | undefined>(
+      (closest, pokemon) => {
+        if (!closest) return pokemon
+        return Math.hypot(pokemon.x - startX, pokemon.y - startY) <
+          Math.hypot(closest.x - startX, closest.y - startY)
+          ? pokemon
+          : closest
+      },
+      undefined
+    )
+  if (!casterSprite) return
+
+  const initialPosition = [casterSprite.x, casterSprite.y] as const
+  const initialDistance = Math.hypot(
+    initialPosition[0] - startX,
+    initialPosition[1] - startY
+  )
+  if (initialDistance > CELL_WIDTH * 4) return
+
+  const direction = Math.atan2(targetScreenY - startY, targetScreenX - startX)
+
+  let finished = false
+  let movementStarted = casterSprite.moveManager.isRunning
+  let lastTrailTime = scene.time.now - 50
+  let previousX = casterSprite.x
+  let previousY = casterSprite.y
+  const startedAt = scene.time.now
+  const cleanup = () => {
+    if (finished) return
+    finished = true
+    scene.events.off(Phaser.Scenes.Events.UPDATE, onSceneUpdate)
+    scene.events.off(Phaser.Scenes.Events.SHUTDOWN, onSceneShutdown)
+  }
+  const onSceneShutdown = () => {
+    cleanup()
+  }
+  const onSceneUpdate = (time: number) => {
+    if (!casterSprite.active) {
+      cleanup()
+      return
+    }
+
+    if (casterSprite.moveManager.isRunning) {
+      movementStarted = true
+      if (time - lastTrailTime >= 40) {
+        const dx = casterSprite.x - previousX
+        const dy = casterSprite.y - previousY
+        const trailAngle =
+          Math.hypot(dx, dy) > 1 ? Math.atan2(dy, dx) : direction
+        spawnTrail(casterSprite.x, casterSprite.y, trailAngle)
+        previousX = casterSprite.x
+        previousY = casterSprite.y
+        lastTrailTime = time
+      }
+    } else if (
+      movementStarted ||
+      casterSprite.positionX !== positionX ||
+      casterSprite.positionY !== positionY ||
+      time - startedAt >= 180
+    ) {
+      cleanup()
+    }
+  }
+
+  scene.events.once(Phaser.Scenes.Events.SHUTDOWN, onSceneShutdown)
+  scene.events.on(Phaser.Scenes.Events.UPDATE, onSceneUpdate)
+}
+
+const accelerockAnimation: AbilityAnimation = (args) => {
+  const { scene } = args
+  const fillFan = (
+    graphics: GameObjects.Graphics,
+    color: number,
+    alpha: number,
+    edgePoints: [number, number][]
+  ) => {
+    graphics.fillStyle(color, alpha)
+    for (let i = 0; i < edgePoints.length; i++) {
+      const current = edgePoints[i]
+      const next = edgePoints[(i + 1) % edgePoints.length]
+      if (!current || !next) continue
+      graphics.fillTriangle(12, 0, current[0], current[1], next[0], next[1])
+    }
+  }
+
+  const spawnTrail = (x: number, y: number, angle: number) => {
+    const wake = scene.add
+      .graphics()
+      .setPosition(x, y + 5)
+      .setRotation(angle)
+      .setDepth(DEPTH.HIT_FX_BELOW_POKEMON)
+      .setAlpha(0.95)
+    fillFan(wake, 0x725234, 0.86, [
+      [3, -9],
+      [-12, -14],
+      [-25, -22],
+      [-39, -13],
+      [-56, -20],
+      [-50, -5],
+      [-67, 3],
+      [-49, 11],
+      [-37, 21],
+      [-24, 12],
+      [-8, 15],
+      [4, 7]
+    ])
+    fillFan(wake, 0xc69b69, 0.96, [
+      [4, -5],
+      [-10, -9],
+      [-21, -15],
+      [-34, -9],
+      [-48, -12],
+      [-40, -2],
+      [-53, 4],
+      [-38, 9],
+      [-27, 15],
+      [-17, 8],
+      [-5, 9],
+      [5, 4]
+    ])
+    wake.fillStyle(0xf0d4a3, 0.9)
+    wake.fillTriangle(-8, -4, -28, -12, -19, -4)
+    wake.fillTriangle(-25, 7, -47, 3, -34, 11)
+    scene.abilitiesVfxGroup?.add(wake)
+    scene.tweens.add({
+      targets: wake,
+      alpha: 0,
+      scaleX: 1.15,
+      scaleY: 1.2,
+      duration: 320,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => wake.destroy()
+    })
+
+    for (let i = 0; i < 3; i++) {
+      const chip = scene.add
+        .graphics()
+        .setPosition(
+          x - Math.cos(angle) * randomBetween(8, 20),
+          y + randomBetween(-12, 12)
+        )
+        .setDepth(DEPTH.PROJECTILE)
+        .setRotation(angle + randomBetween(-0.7, 0.7))
+      chip.fillStyle(i === 0 ? 0x49301e : 0x795332, 1)
+      chip.fillTriangle(0, -11, -13, -5, -6, 6)
+      chip.fillStyle(0xe0b874, 1)
+      chip.fillTriangle(-6, 6, -13, -5, -20, 7)
+      scene.abilitiesVfxGroup?.add(chip)
+      scene.tweens.add({
+        targets: chip,
+        x: chip.x - Math.cos(angle) * randomBetween(14, 26),
+        y: chip.y + randomBetween(-14, 14),
+        rotation: chip.rotation + randomBetween(-0.8, 0.8),
+        alpha: 0,
+        scale: 0.5,
+        duration: randomBetween(220, 320),
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        onComplete: () => chip.destroy()
+      })
+    }
+  }
+
+  followDashMovement(args, spawnTrail)
+}
+
+const aquaJetAnimation: AbilityAnimation = (args) => {
+  const { scene } = args
+  const fillFan = (
+    graphics: GameObjects.Graphics,
+    color: number,
+    alpha: number,
+    edgePoints: [number, number][]
+  ) => {
+    graphics.fillStyle(color, alpha)
+    for (let i = 0; i < edgePoints.length; i++) {
+      const current = edgePoints[i]
+      const next = edgePoints[(i + 1) % edgePoints.length]
+      if (!current || !next) continue
+      graphics.fillTriangle(12, 0, current[0], current[1], next[0], next[1])
+    }
+  }
+
+  const spawnTrail = (x: number, y: number, angle: number) => {
+    const wake = scene.add
+      .graphics()
+      .setPosition(x, y + 5)
+      .setRotation(angle)
+      .setDepth(DEPTH.HIT_FX_BELOW_POKEMON)
+      .setAlpha(0.95)
+    fillFan(wake, 0x087dc4, 0.62, [
+      [3, -8],
+      [-9, -15],
+      [-20, -12],
+      [-31, -22],
+      [-39, -10],
+      [-54, -15],
+      [-47, -3],
+      [-62, 4],
+      [-45, 10],
+      [-35, 20],
+      [-23, 12],
+      [-12, 17],
+      [5, 7]
+    ])
+    fillFan(wake, 0x22c9ed, 0.82, [
+      [5, -4],
+      [-8, -9],
+      [-19, -8],
+      [-29, -15],
+      [-37, -6],
+      [-47, -9],
+      [-41, -1],
+      [-53, 4],
+      [-40, 7],
+      [-31, 14],
+      [-20, 8],
+      [-10, 11],
+      [5, 4]
+    ])
+    wake.fillStyle(0xd8ffff, 0.92)
+    wake.fillTriangle(-7, -5, -26, -13, -19, -4)
+    wake.fillTriangle(-24, 7, -44, 2, -33, 11)
+    scene.abilitiesVfxGroup?.add(wake)
+    scene.tweens.add({
+      targets: wake,
+      alpha: 0,
+      scaleX: 1.15,
+      scaleY: 1.2,
+      duration: 260,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => wake.destroy()
+    })
+
+    for (let i = 0; i < 3; i++) {
+      const spray = scene.add
+        .ellipse(
+          x - Math.cos(angle) * randomBetween(8, 24),
+          y + randomBetween(-15, 15),
+          randomBetween(5, 9),
+          randomBetween(8, 14),
+          i === 0 ? 0xe7ffff : 0x63eaff,
+          0.88
+        )
+        .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+        .setRotation(angle + randomBetween(-0.9, 0.9))
+      scene.abilitiesVfxGroup?.add(spray)
+      scene.tweens.add({
+        targets: spray,
+        x: spray.x + randomBetween(-15, 15),
+        y: spray.y + randomBetween(-20, 20),
+        alpha: 0,
+        scale: 0.35,
+        duration: randomBetween(180, 260),
+        ease: Phaser.Math.Easing.Quadratic.Out,
+        onComplete: () => spray.destroy()
+      })
+    }
+  }
+
+  followDashMovement(args, spawnTrail)
+}
+
+const fishiousRendAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  targetX,
+  targetY,
+  flip
+}) => {
+  if (targetX < 0 || targetY < 0) return
+
+  const [startX, startY] = transformEntityCoordinates(
+    positionX,
+    positionY,
+    flip
+  )
+  const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
+  const angle = Math.atan2(y - startY, x - startX)
+
+  const surge = scene.add
+    .container(startX, startY - 18)
+    .setDepth(DEPTH.PROJECTILE)
+    .setRotation(angle)
+  scene.abilitiesVfxGroup?.add(surge)
+  const surgeShape = scene.add.graphics()
+  surgeShape.fillStyle(0x087dc4, 0.35)
+  surgeShape.fillTriangle(-70, -18, 8, 0, -70, 18)
+  surgeShape.fillStyle(0x25d9fa, 0.7)
+  surgeShape.fillTriangle(-56, -10, 14, 0, -56, 10)
+  surgeShape.fillStyle(0xe4ffff, 0.95)
+  surgeShape.fillTriangle(-42, -3, 18, 0, -42, 3)
+  surge.add(surgeShape)
+  scene.tweens.add({
+    targets: surge,
+    x,
+    y: y - 18,
+    duration: 170,
+    ease: Phaser.Math.Easing.Quadratic.In,
+    onComplete: () => surge.destroy()
+  })
+
+  const swipeAngle = angle + Math.PI / 2
+  const swipe = scene.add
+    .graphics({
+      x: x - Math.cos(swipeAngle) * 95,
+      y: y - 10 - Math.sin(swipeAngle) * 95
+    })
+    .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+    .setRotation(swipeAngle)
+    .setScale(0.05, 1)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(swipe)
+  ;[
+    { width: 20, color: 0x008fe8, alpha: 0.35 },
+    { width: 12, color: 0x00d7ff, alpha: 0.85 },
+    { width: 4, color: 0xe7ffff, alpha: 0.95 }
+  ].forEach(({ width, color, alpha }) => {
+    swipe.fillStyle(color, alpha)
+    swipe.beginPath()
+    for (let i = 0; i <= 24; i++) {
+      const t = i / 24
+      const curve = 28 * (2 * t - 1) ** 2 - 15
+      const edge = Math.sin(Math.PI * t) * width
+      if (i === 0) swipe.moveTo(t * 190, curve - edge)
+      else swipe.lineTo(t * 190, curve - edge)
+    }
+    for (let i = 24; i >= 0; i--) {
+      const t = i / 24
+      const curve = 28 * (2 * t - 1) ** 2 - 15
+      const edge = Math.sin(Math.PI * t) * width
+      swipe.lineTo(t * 190, curve + edge)
+    }
+    swipe.closePath()
+    swipe.fillPath()
+  })
+  scene.tweens.chain({
+    targets: swipe,
+    tweens: [
+      {
+        alpha: 1,
+        scaleX: 1,
+        delay: 170,
+        duration: 130,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
+      { alpha: 0, duration: 210 }
+    ],
+    onComplete: () => swipe.destroy()
+  })
+
+  const impact = scene.add
+    .container(x, y - 18)
+    .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+    .setScale(0.35)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(impact)
+  const burst = scene.add.graphics()
+  for (let i = 0; i < 10; i++) {
+    const rayAngle = (i * Math.PI * 2) / 10
+    const length = i % 2 === 0 ? 72 : 48
+    burst.fillStyle(i % 2 === 0 ? 0x75eeff : 0xffffff, 0.9)
+    burst.fillTriangle(
+      Math.cos(rayAngle - 0.18) * 12,
+      Math.sin(rayAngle - 0.18) * 12,
+      Math.cos(rayAngle) * length,
+      Math.sin(rayAngle) * length,
+      Math.cos(rayAngle + 0.18) * 12,
+      Math.sin(rayAngle + 0.18) * 12
+    )
+  }
+  const flash = scene.add.circle(0, 0, 22, 0xe9ffff, 0.8)
+  impact.add([burst, flash])
+  scene.tweens.chain({
+    targets: impact,
+    tweens: [
+      { alpha: 1, scale: 1, delay: 280, duration: 70 },
+      { alpha: 0, scale: 1.35, duration: 180 }
+    ],
+    onComplete: () => impact.destroy()
+  })
+
+  const ripple = scene.add
+    .graphics({ x, y: y + 16 })
+    .setDepth(DEPTH.ABILITY_GROUND_LEVEL)
+    .setScale(0.3)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(ripple)
+  ripple.lineStyle(5, 0x36d5f4, 0.7)
+  ripple.strokeEllipse(0, 0, 100, 42)
+  ripple.lineStyle(2, 0xe5ffff, 0.9)
+  ripple.strokeEllipse(0, 0, 84, 34)
+  scene.tweens.chain({
+    targets: ripple,
+    tweens: [
+      { alpha: 1, delay: 280, duration: 50 },
+      { alpha: 0, scale: 1.45, duration: 300 }
+    ],
+    onComplete: () => ripple.destroy()
+  })
+
+  for (let i = 0; i < 14; i++) {
+    const direction = (i * Math.PI * 2) / 14
+    const distance = randomBetween(38, 72)
+    const droplet = scene.add
+      .ellipse(x, y - 18, i % 3 === 0 ? 8 : 5, i % 3 === 0 ? 14 : 9, 0xb9faff)
+      .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
+      .setRotation(direction - Math.PI / 2)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(droplet)
+    scene.tweens.chain({
+      targets: droplet,
+      tweens: [
+        { alpha: 1, delay: 280, duration: 30 },
+        {
+          x: x + Math.cos(direction) * distance,
+          y: y - 18 + Math.sin(direction) * distance * 0.7,
+          alpha: 0,
+          scale: 0.4,
+          duration: 280,
+          ease: Phaser.Math.Easing.Quadratic.Out
+        }
+      ],
+      onComplete: () => droplet.destroy()
+    })
+  }
+}
+
+const oblivionWingAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  targetX,
+  targetY,
+  flip
+}) => {
+  const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+  const [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
+  const dx = endX - x
+  const dy = endY - y
+  const length = Math.hypot(dx, dy)
+  if (length === 0 || targetX < 0 || targetY < 0) return
+
+  const angle = Math.atan2(dy, dx)
+  const beam = scene.add.container(x, y).setDepth(DEPTH.PROJECTILE)
+  scene.abilitiesVfxGroup?.add(beam)
+  beam.setRotation(angle).setScale(0, 1)
+
+  const beamLayers = scene.add.graphics()
+  const layers = [
+    { width: 60, color: 0x7d082b, alpha: 0.3 },
+    { width: 34, color: 0x31000c, alpha: 0.9 },
+    { width: 20, color: 0xc21b36, alpha: 0.9 },
+    { width: 8, color: 0xffc2b9, alpha: 0.95 }
+  ]
+  layers.forEach(({ width, color, alpha }) => {
+    beamLayers.fillStyle(color, alpha)
+    beamLayers.fillRoundedRect(
+      0,
+      -width / 2,
+      length,
+      width,
+      Math.min(width, length) / 2
+    )
+  })
+  beam.add(beamLayers)
+
+  scene.tweens.chain({
+    targets: beam,
+    tweens: [
+      { scaleX: 1, duration: 180, ease: Phaser.Math.Easing.Quadratic.Out },
+      { alpha: 0, scaleY: 0.5, delay: 120, duration: 350 }
+    ],
+    onComplete: () => beam.destroy()
+  })
+
+  const deathCircle = scene.add
+    .container(x, y)
+    .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    .setRotation(angle)
+    .setScale(0.55)
+  scene.abilitiesVfxGroup?.add(deathCircle)
+  const circleGlow = scene.add.ellipse(0, 0, 80, 152, 0x850d30, 0.25)
+  const circle = scene.add.graphics()
+  circle.lineStyle(12, 0x5b061d, 0.5)
+  circle.strokeEllipse(0, 0, 68, 136)
+  circle.lineStyle(5, 0x27000b, 1)
+  circle.strokeEllipse(0, 0, 62, 130)
+  circle.lineStyle(2, 0xf13b50, 0.9)
+  circle.strokeEllipse(0, 0, 62, 130)
+
+  for (let i = 0; i < 24; i++) {
+    const theta = (i * Math.PI * 2) / 24
+    const next = theta + Math.PI / 24
+    const radius = i % 3 === 0 ? 1.4 : 1.2
+    circle.fillStyle(i % 2 === 0 ? 0x250009 : 0x7d082b, 0.95)
+    circle.fillTriangle(
+      Math.cos(theta) * 31,
+      Math.sin(theta) * 65,
+      Math.cos(next) * 31 * radius,
+      Math.sin(next) * 65 * radius,
+      Math.cos(theta + Math.PI / 12) * 31,
+      Math.sin(theta + Math.PI / 12) * 65
+    )
+  }
+  deathCircle.add([circleGlow, circle])
+  scene.tweens.chain({
+    targets: deathCircle,
+    tweens: [
+      { scale: 1, duration: 180, ease: Phaser.Math.Easing.Quadratic.Out },
+      { alpha: 0, scale: 1.1, delay: 120, duration: 350 }
+    ],
+    onComplete: () => deathCircle.destroy()
+  })
+
+  for (let i = 0; i < 16; i++) {
+    const along = length * (0.15 + Math.random() * 0.8)
+    const offset = randomBetween(-16, 16)
+    const particle = scene.add
+      .rectangle(
+        x + Math.cos(angle) * along - Math.sin(angle) * offset,
+        y + Math.sin(angle) * along + Math.cos(angle) * offset,
+        randomBetween(4, 8),
+        randomBetween(4, 8),
+        i % 2 === 0 ? 0xe43948 : 0x590824
+      )
+      .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+      .setAlpha(0)
+    scene.abilitiesVfxGroup?.add(particle)
+    const spread = randomBetween(20, 45) * (offset < 0 ? -1 : 1)
+    scene.tweens.add({
+      targets: particle,
+      x: particle.x - Math.sin(angle) * spread,
+      y: particle.y + Math.cos(angle) * spread,
+      alpha: { from: 0.9, to: 0 },
+      scale: 0.3,
+      delay: 100 + i * 10,
+      duration: 400,
+      ease: Phaser.Math.Easing.Quadratic.Out,
+      onComplete: () => particle.destroy()
+    })
+  }
+}
+
+const futureSightCastAnimation: AbilityAnimation = ({
+  scene,
+  positionX,
+  positionY,
+  flip
+}) => {
+  const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
+  const vision = scene.add
+    .container(x, y - 20)
+    .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    .setScale(0.65)
+    .setAlpha(0)
+  scene.abilitiesVfxGroup?.add(vision)
+
+  const glow = scene.add.ellipse(0, 0, 100, 100, 0x9c5aff, 0.18)
+  const halo = scene.add.graphics()
+  halo.lineStyle(3, 0xd9a5ff, 0.8)
+  halo.strokeCircle(0, 0, 35)
+  halo.lineStyle(1, 0xffffff, 0.8)
+  halo.strokeCircle(0, 0, 39)
+  const orbit = scene.add.graphics()
+  orbit.lineStyle(3, 0x8feaff, 0.85)
+  orbit.strokeEllipse(0, 0, 106, 34)
+  orbit.lineStyle(2, 0xf5c1ff, 0.8)
+  orbit.strokeEllipse(0, 0, 94, 58)
+  vision.add([glow, halo, orbit])
+
+  for (let i = 0; i < 8; i++) {
+    const angle = (i * Math.PI * 2) / 8
+    const light = scene.add
+      .star(Math.cos(angle) * 55, Math.sin(angle) * 42, 4, 1, 4, 0xe7d2ff)
+      .setAlpha(0.9)
+    vision.add(light)
+    scene.tweens.add({
+      targets: light,
+      x: Math.cos(angle) * 18,
+      y: Math.sin(angle) * 15,
+      alpha: 0,
+      scale: 0.3,
+      duration: 650,
+      ease: Phaser.Math.Easing.Quadratic.In
+    })
+  }
+
+  scene.tweens.add({
+    targets: orbit,
+    angle: 115,
+    duration: 800,
+    ease: Phaser.Math.Easing.Sine.InOut
+  })
+  scene.tweens.chain({
+    targets: vision,
+    tweens: [
+      {
+        scale: 1,
+        alpha: 1,
+        duration: 180,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
+      {
+        scale: 0.75,
+        alpha: 0,
+        delay: 300,
+        duration: 320,
+        ease: Phaser.Math.Easing.Quadratic.In
+      }
+    ],
+    onComplete: () => vision.destroy()
+  })
+}
+
+const futureSightHitAnimation: AbilityAnimation = ({
+  scene,
+  targetX,
+  targetY,
+  flip
+}) => {
+  if (targetX < 0 || targetY < 0) return
+  const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
+  const impact = scene.add
+    .container(x, y - 18)
+    .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    .setScale(0.25)
+  scene.abilitiesVfxGroup?.add(impact)
+
+  const groundGlow = scene.add.ellipse(0, 18, 140, 62, 0x9e55f5, 0.25)
+  const outerGlow = scene.add.circle(0, 0, 52, 0xb269ff, 0.16)
+  const sphere = scene.add.circle(0, 0, 40, 0xbb70ef, 0.65)
+  const innerGlow = scene.add.circle(0, -3, 32, 0xefb3ff, 0.45)
+  const outline = scene.add.graphics()
+  outline.lineStyle(2, 0xf7cfff, 0.9)
+  outline.strokeCircle(0, 0, 40)
+
+  const rays = scene.add.graphics()
+  for (let i = 0; i < 7; i++) {
+    const angle = (i * Math.PI * 2) / 7 - Math.PI / 2
+    const tip = i % 2 === 0 ? 65 : 54
+    const side = 0.12
+    rays.fillStyle(i % 2 === 0 ? 0x9bf4ff : 0xf5d5ff, 0.9)
+    rays.fillTriangle(
+      Math.cos(angle - side) * 35,
+      Math.sin(angle - side) * 35,
+      Math.cos(angle) * tip,
+      Math.sin(angle) * tip,
+      Math.cos(angle + side) * 35,
+      Math.sin(angle + side) * 35
+    )
+  }
+
+  const bands = scene.add.graphics()
+  bands.lineStyle(6, 0xffffff, 0.9)
+  bands.strokeEllipse(0, -10, 65, 20)
+  bands.strokeEllipse(0, 8, 78, 24)
+  bands.lineStyle(3, 0xffc7fa, 0.95)
+  bands.strokeEllipse(0, 19, 62, 16)
+  bands.setRotation(-0.2)
+  impact.add([groundGlow, outerGlow, sphere, innerGlow, outline, rays, bands])
+
+  scene.tweens.add({
+    targets: bands,
+    angle: 25,
+    duration: 500,
+    ease: Phaser.Math.Easing.Sine.InOut
+  })
+  scene.tweens.chain({
+    targets: impact,
+    tweens: [
+      { scale: 1, duration: 140, ease: Phaser.Math.Easing.Back.Out },
+      { scale: 1.08, duration: 140, ease: Phaser.Math.Easing.Sine.Out },
+      {
+        scale: 1.3,
+        alpha: 0,
+        duration: 300,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      }
+    ],
+    onComplete: () => impact.destroy()
+  })
+}
+
+const futureSightSplashAnimation: AbilityAnimation = ({
+  scene,
+  targetX,
+  targetY,
+  flip
+}) => {
+  if (targetX < 0 || targetY < 0) return
+  const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
+  const splash = scene.add
+    .container(x, y - 16)
+    .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
+    .setScale(0.625)
+  scene.abilitiesVfxGroup?.add(splash)
+
+  const glow = scene.add.ellipse(0, 0, 46, 38, 0xbb70ef, 0.35)
+  const ring = scene.add.graphics()
+  ring.lineStyle(3, 0xe7b8ff, 0.85)
+  ring.strokeEllipse(0, 0, 42, 30)
+  splash.add([glow, ring])
+
+  for (let i = 0; i < 6; i++) {
+    const angle = (i * Math.PI * 2) / 6
+    const spark = scene.add.star(
+      Math.cos(angle) * 12,
+      Math.sin(angle) * 9,
+      4,
+      1,
+      4,
+      i % 2 === 0 ? 0x9bf4ff : 0xf5d5ff
+    )
+    splash.add(spark)
+    scene.tweens.add({
+      targets: spark,
+      x: Math.cos(angle) * 30,
+      y: Math.sin(angle) * 23,
+      alpha: 0,
+      duration: 350,
+      ease: Phaser.Math.Easing.Quadratic.Out
+    })
+  }
+
+  scene.tweens.chain({
+    targets: splash,
+    tweens: [
+      { scale: 1.25, duration: 120, ease: Phaser.Math.Easing.Quadratic.Out },
+      {
+        scale: 1.5,
+        alpha: 0,
+        duration: 300,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      }
+    ],
+    onComplete: () => splash.destroy()
+  })
+}
+
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
 } = {
@@ -939,6 +2086,7 @@ export const AbilitiesAnimations: {
   ["PUFF_PINK"]: onTargetScale2,
   ["PUFF_GREEN"]: onTargetScale2,
   ["PUFF_BROWN"]: onTargetScale2,
+  [Ability.DARK_AURA]: darkAuraAnimation,
   [Ability.DIAMOND_STORM]: onCasterScale2,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
@@ -959,6 +2107,24 @@ export const AbilitiesAnimations: {
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
   [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.MEGA_DRAIN]: [
+    (args) =>
+      OrientationArray.map((o, i) =>
+        projectile({
+          startCoords: [
+            args.positionX + OrientationVector[o][0],
+            args.positionY + OrientationVector[o][1]
+          ],
+          ability: Ability.SUCTION_HEAL,
+          endCoords: "caster",
+          scale: 2,
+          duration: 400,
+          tint: 0xc0ffff,
+          rotation: OrientationAngle[o]
+        })(args)
+      ),
+    onCaster({ ability: "GRASS_HEAL", delay: 300 })
+  ],
   [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({
@@ -983,15 +2149,9 @@ export const AbilitiesAnimations: {
   [Ability.SOFT_BOILED]: onCasterScale2,
   [Ability.FAKE_TEARS]: onCasterScale2,
   [Ability.TEA_TIME]: onCasterScale2,
-  [Ability.FUTURE_SIGHT]: onTarget({
-    depth: DEPTH.ABILITY_BELOW_POKEMON,
-    animOptions: { repeat: 2 }
-  }),
-  ["FUTURE_SIGHT_HIT"]: onTarget({
-    scale: 2,
-    depth: DEPTH.ABILITY_BELOW_POKEMON,
-    tint: 0xbb90ff
-  }),
+  [Ability.FUTURE_SIGHT]: futureSightCastAnimation,
+  ["FUTURE_SIGHT_HIT"]: futureSightHitAnimation,
+  ["FUTURE_SIGHT_SPLASH"]: futureSightSplashAnimation,
   [Ability.DOOM_DESIRE]: onTarget({
     depth: DEPTH.ABILITY_MAJOR,
     scale: 1,
@@ -1126,7 +2286,10 @@ export const AbilitiesAnimations: {
   [Ability.ICE_FANG]: onTargetScale2,
   [Ability.FIRE_FANG]: onTargetScale2,
   [Ability.POPULATION_BOMB]: onTargetScale2,
-  [Ability.SCREECH]: onTargetScale2,
+  [Ability.SCREECH]: onTarget({
+    ability: "PUFF_RED",
+    scale: 2
+  }),
   [Ability.SAND_TOMB]: onTargetScale2,
   [Ability.FIRST_IMPRESSION]: onTarget({ ability: "PUFF_BROWN", scale: 3 }),
   [Ability.PLAY_ROUGH]: onTargetScale2,
@@ -1137,6 +2300,18 @@ export const AbilitiesAnimations: {
   [Ability.HEX]: onTargetScale2,
   [Ability.PLASMA_FIST]: onTargetScale2,
   [Ability.LEECH_SEED]: onTargetScale2,
+  ["LEECH_SEED_PROJECTILE"]: parabolicProjectile({
+    ability: "SMOKE_GREEN",
+    duration: 600,
+    scale: 2,
+    peakHeight: 100
+  }),
+  ["LEECH_SEED_HEAL"]: parabolicProjectile({
+    ability: "LEECH_SEED_HEAL",
+    duration: 1000,
+    scale: 0.3,
+    peakHeight: 100
+  }),
   [Ability.TRIPLE_DIVE]: onTarget({ ability: Ability.WATERFALL, scale: 2 }),
   [Ability.LOCK_ON]: onTargetScale2,
   [Ability.DISABLE]: onTargetScale2,
@@ -1210,11 +2385,11 @@ export const AbilitiesAnimations: {
     origin: [1, 1],
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
-  [Ability.AQUA_JET]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.AQUA_JET]: aquaJetAnimation,
   [Ability.STOCKPILE]: onCaster({
     oriented: true,
     rotation: -Math.PI / 2,
-    ability: Ability.AQUA_JET
+    ability: Ability.SWALLOW
   }),
   [Ability.EXTREME_SPEED]: [onCaster({}), onTarget({})],
   [Ability.SALT_CURE]: onCaster({
@@ -1310,13 +2485,9 @@ export const AbilitiesAnimations: {
     scale: 2,
     origin: [0.5, 1]
   }),
-  [Ability.HYDRO_PUMP]: onCaster({
-    oriented: true,
-    rotation: Math.PI / 2,
-    origin: [0.5, 1]
-  }),
+  [Ability.HYDRO_PUMP]: hydroPumpAnimation,
+  ["HYDRO_PUMP_SPLASH"]: hydroPumpSplashAnimation,
   [Ability.SWALLOW]: onCaster({
-    ability: Ability.HYDRO_PUMP,
     oriented: true,
     rotation: +Math.PI / 2,
     origin: [0.5, 1],
@@ -1401,7 +2572,8 @@ export const AbilitiesAnimations: {
   [Ability.NASTY_PLOT]: onCaster({ positionOffset: [0, -50] }),
   [Ability.ROCK_TOMB]: onTarget({ origin: [0.5, 0.9], scale: 1 }),
   [Ability.SLACK_OFF]: onCaster({ ability: Ability.CAMOUFLAGE, scale: 1 }),
-  [Ability.FISHIOUS_REND]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
+  [Ability.ACCELEROCK]: accelerockAnimation,
+  [Ability.FISHIOUS_REND]: fishiousRendAnimation,
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
   [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
   [Ability.CUT]: [
@@ -1634,7 +2806,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   [Ability.X_SCISSOR]: onTargetScale2,
-  [Ability.OBLIVION_WING]: onTargetScale2,
+  [Ability.OBLIVION_WING]: oblivionWingAnimation,
   [Ability.GEOMANCY]: onCaster({
     positionOffset: [0, -50],
     depth: DEPTH.ABILITY_GROUND_LEVEL
@@ -2140,17 +3312,32 @@ export const AbilitiesAnimations: {
   [Ability.PARABOLIC_CHARGE]: projectile({ duration: 750 }),
   [Ability.ARMOR_CANNON]: (args) =>
     projectile({ duration: 400, scale: 2 - (args.delay ?? 0) * 0.5 })(args),
-  [Ability.FISSURE]: [
-    projectile({
-      scale: 1,
-      tweenProps: { scale: 3, yoyo: true },
-      startCoords: "target",
-      endCoords: "target",
-      duration: 800,
-      ease: Phaser.Math.Easing.Sine.InOut,
-      depth: DEPTH.ABILITY_GROUND_LEVEL
+  ["FISSURE_HIT"]: onTarget({
+    ability: "SMOKE_BROWN",
+    scale: 3
+  }),
+  [Ability.FISSURE]: (args) => {
+    const [x, y] = transformEntityCoordinates(
+      args.targetX,
+      args.targetY,
+      args.flip
+    )
+    const sprite = addAbilitySprite(
+      args.scene,
+      Ability.FISSURE,
+      args.ap,
+      [x, y],
+      { scale: 3, destroyOnComplete: false }
+    )
+    sprite?.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      args.scene.time.delayedCall(1000, () => sprite.destroy())
     })
-  ],
+  },
+  ["FISSURE_PROJECTILE"]: projectile({
+    ability: "UNDERGROUND",
+    duration: 800,
+    scale: 1
+  }),
   [Ability.ERUPTION]: projectile({
     startCoords: "target",
     startPositionOffset: [72, 72]
@@ -2605,7 +3792,6 @@ export const AbilitiesAnimations: {
   }),
   [Ability.EERIE_SPELL]: projectile({
     duration: 400,
-    ability: Ability.FISSURE,
     tint: 0xff00bf
   }),
   [Ability.HURRICANE]: projectile({ duration: 1000, distance: 5 }),
@@ -3072,7 +4258,7 @@ export const AbilitiesAnimations: {
 
   [Ability.SHELL_SIDE_ARM]: projectile({
     duration: 400,
-    ability: Ability.FISSURE,
+    ability: Ability.EERIE_SPELL,
     tint: 0xff00bf
   }),
 

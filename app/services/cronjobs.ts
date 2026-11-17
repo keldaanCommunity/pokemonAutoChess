@@ -1,8 +1,7 @@
 import { matchMaker } from "colyseus"
 import { CronJob } from "cron"
 import dayjs from "dayjs"
-import admin from "firebase-admin"
-import type { UserRecord } from "firebase-admin/auth"
+import { getAuth, type UserRecord } from "firebase-admin/auth"
 import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
@@ -23,6 +22,7 @@ import { wait } from "../utils/function"
 import { logger } from "../utils/logger"
 import { min } from "../utils/number"
 import { logPreviousDayBoosterCreationStats } from "./booster-monitor"
+import { computeAndStoreAverageElo } from "./elo-average"
 import { fetchMetaReports } from "./meta"
 import { notificationsService } from "./notifications"
 import { refreshSpriteGapData } from "./sprite-gap-scanner"
@@ -50,6 +50,17 @@ export function initCronJobs(isMainThread: boolean) {
     // These cron jobs should only be trigged once no matter the amount of processes the server runs on,
     // because they update the same database used by all processes
 
+    // compute the average elo on startup so it is available to all threads via presence
+    computeAndStoreAverageElo()
+
+    CronJob.from({
+      cronTime: "0 9 * * *", // every day at 9am
+      timeZone: "Europe/Paris",
+      onTick: async () => {
+        await computeAndStoreAverageElo()
+      },
+      start: true
+    })
     // CronJob.from({
     //   cronTime: "0 8 * * *", // every day at 8am
     //   timeZone: "Europe/Paris",
@@ -142,7 +153,7 @@ async function deleteOldAnonymousAccounts() {
 
   async function listAllUsers(nextPageToken?: string) {
     // List batch of users, 1000 at a time.
-    const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
+    const listUsersResult = await getAuth().listUsers(1000, nextPageToken)
     //logger.debug(nextPageToken)
     listUsersResult.users.forEach((userRecord) => {
       const lastSignInDate = dayjs(userRecord.metadata.lastSignInTime)
@@ -171,7 +182,7 @@ async function deleteOldAnonymousAccounts() {
       const account = anonymousAccounts.pop()
       account && batchDeletion.push(account.uid)
     }
-    const firebaseDeletion = await admin.auth().deleteUsers(batchDeletion)
+    const firebaseDeletion = await getAuth().deleteUsers(batchDeletion)
     logger.info("firebase deletion result ", firebaseDeletion)
     const pacDeletion = await UserMetadata.deleteMany({
       uid: { $in: batchDeletion }

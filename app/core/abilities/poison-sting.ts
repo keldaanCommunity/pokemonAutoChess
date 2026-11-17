@@ -19,7 +19,8 @@ export class PoisonStingStrategy extends AbilityStrategy {
       maxStacks += EffectConfigs.VENOMOUS.maxStacksBonus
     }
     if (pokemon.effects.has(EffectEnum.TOXIC)) {
-      maxStacks = StatusConfigs.POISONED.maxStacks + EffectConfigs.TOXIC.maxStacksBonus
+      maxStacks =
+        StatusConfigs.POISONED.maxStacks + EffectConfigs.TOXIC.maxStacksBonus
     }
 
     const nbStacksToApply = [2, 3, 4, 5][pokemon.stars - 1] ?? 5

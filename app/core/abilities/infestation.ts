@@ -21,7 +21,8 @@ export class InfestationStrategy extends AbilityStrategy {
       (entity) =>
         entity && entity.team === pokemon.team && entity.types.has(Synergy.BUG)
     ).length
-    const damage = numberOfBugAllies * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
+    const damage =
+      numberOfBugAllies * ([10, 10, 10, 20][pokemon.stars - 1] ?? 20)
     target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
 
     if (pokemon.player && pokemon.count.ult === 1) {

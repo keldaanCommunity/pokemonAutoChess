@@ -7,7 +7,7 @@ import { Tooltip } from "react-tooltip"
 import { ItemStats } from "../../../../config"
 import { Stat } from "../../../../types/enum/Game"
 import {
-    AbsorbedItems,
+  AbsorbedItems,
   ConsumableItems,
   Gifts,
   Item,

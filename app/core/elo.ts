@@ -1,16 +1,17 @@
+import { MAX_ELO_CORRECTION, TARGETED_ELO_AVERAGE } from "../config/game/elo"
+import { getAverageElo } from "../services/elo-average"
 import type { ISimplePlayer } from "../types"
-import type { GameMode } from "../types/enum/Game"
-import { average, min } from "../utils/number"
+import { average, clamp, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"
 
-export function computeElo(
+export async function computeElo(
   player: ISimplePlayer,
   rank: number,
   previousElo: number,
   players: ISimplePlayer[],
-  gameMode: GameMode,
   isBot: boolean = false
 ) {
+  const averageElo = await getAverageElo()
   const eloEngine = new EloEngine()
   const eloGains = new Array<number>()
   //logger.debug("computing elo for", player.name, "rank", rank, "elo", previousElo)
@@ -48,6 +49,18 @@ export function computeElo(
     */
     const loss = previousElo - newElo
     newElo = previousElo - Math.ceil(loss / 2)
+  }
+
+  // Compensate ELO deflation by boosting gains when the average elo of recent
+  // players is below the target. Losses are never modified.
+  const gain = newElo - previousElo
+  if (!isBot && gain > 0) {
+    const correction = clamp(
+      (TARGETED_ELO_AVERAGE - averageElo) / TARGETED_ELO_AVERAGE,
+      -MAX_ELO_CORRECTION,
+      MAX_ELO_CORRECTION
+    )
+    newElo = previousElo + Math.round(gain * (1 + correction))
   }
 
   // logger.info(

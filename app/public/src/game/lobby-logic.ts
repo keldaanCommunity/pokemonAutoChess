@@ -263,9 +263,12 @@ export async function joinLobbyRoom(
             dispatch(setProfile(user))
           })
 
-          room.onMessage(Transfer.RECONNECT_PROMPT, (pendingGameId: string) => {
-            dispatch(setPendingGameId(pendingGameId))
-          })
+          room.onMessage(
+            Transfer.RECONNECT_PROMPT,
+            (pendingGameId: string | null) => {
+              dispatch(setPendingGameId(pendingGameId))
+            }
+          )
 
           room.onMessage(Transfer.USER, (user: IUserMetadataClient) =>
             dispatch(setSearchedUser(user))

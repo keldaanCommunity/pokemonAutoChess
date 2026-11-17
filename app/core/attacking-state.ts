@@ -21,8 +21,11 @@ export default class AttackingState extends PokemonState {
     super.update(pokemon, dt, board, player)
 
     if (pokemon.cooldown <= 0) {
-      const speedFactor = 1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
-      const speed = pokemon.status.paralysis ? pokemon.speed * speedFactor : pokemon.speed
+      const speedFactor =
+        1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
+      const speed = pokemon.status.paralysis
+        ? pokemon.speed * speedFactor
+        : pokemon.speed
       pokemon.resetCooldown(1000, speed)
 
       // first, try to hit the same target than previous attack
@@ -130,7 +133,9 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   attackDuration: number
 } {
   const speedFactor = 1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
-  const speed = pokemon.status.paralysis ? pokemon.speed * speedFactor : pokemon.speed
+  const speed = pokemon.status.paralysis
+    ? pokemon.speed * speedFactor
+    : pokemon.speed
   const attackDuration = 1000 / (0.4 + speed * 0.007)
   const d = delays[pokemon.index]?.d || 18 // number of frames before hit
   const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation

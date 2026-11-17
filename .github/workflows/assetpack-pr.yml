@@ -1,0 +1,30 @@
+name: Assetpack on Pull Request
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "edit/assetpack/**"
+      - ".github/workflows/assetpack-pr.yml"
+
+jobs:
+  assetpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run assetpack
+        run: npm run assetpack
