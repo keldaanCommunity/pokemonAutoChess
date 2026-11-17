@@ -10,7 +10,7 @@ export class PsystrikeXStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     const damage = 4 * pokemon.atk
 
     const { death } = target.handleSpecialDamage(
