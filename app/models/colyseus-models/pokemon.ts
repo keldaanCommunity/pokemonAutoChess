@@ -7477,9 +7477,17 @@ export class Mewtwo extends Pokemon {
   ])
   rarity = Rarity.LEGENDARY
   stars = 3
-  evolution = Pkm.MEGA_MEWTWO_Y
+  evolutions = [Pkm.MEGA_MEWTWO_X, Pkm.MEGA_MEWTWO_Y]
   evolutionRule = {
-    type: EvolutionRuleType.MEGA
+    type: EvolutionRuleType.MEGA,
+    divergentEvolution(pokemon, player: Player) {
+      return getDominantSynergy(player.synergies.toMap(), [
+        Synergy.PSYCHIC,
+        Synergy.MONSTER
+      ]) === Synergy.MONSTER
+        ? Pkm.MEGA_MEWTWO_X
+        : Pkm.MEGA_MEWTWO_Y
+    }
   } satisfies MegaEvolutionRule
   hp = 200
   atk = 25
@@ -7489,6 +7497,25 @@ export class Mewtwo extends Pokemon {
   maxPP = 110
   range = 3
   skill = Ability.PSYSTRIKE
+  passive = Passive.MEWTWO
+}
+
+export class MegaMewtwoX extends Pokemon {
+  types = new SetSchema<Synergy>([
+    Synergy.PSYCHIC,
+    Synergy.MONSTER,
+    Synergy.ARTIFICIAL
+  ])
+  rarity = Rarity.LEGENDARY
+  stars = 4
+  hp = 300
+  atk = 45
+  speed = 67
+  def = 14
+  speDef = 14
+  maxPP = 100
+  range = 1
+  skill = Ability.PSYSTRIKE_X
 }
 
 export class MegaMewtwoY extends Pokemon {
@@ -7500,10 +7527,10 @@ export class MegaMewtwoY extends Pokemon {
   rarity = Rarity.LEGENDARY
   stars = 4
   hp = 300
-  atk = 38
+  atk = 35
   speed = 67
-  def = 10
-  speDef = 10
+  def = 6
+  speDef = 16
   maxPP = 100
   range = 3
   skill = Ability.PSYSTRIKE
@@ -21907,6 +21934,7 @@ export const PokemonClasses: Record<
   [Pkm.UXIE]: Uxie,
   [Pkm.MEWTWO]: Mewtwo,
   [Pkm.SHADOW_MEWTWO]: ShadowMewtwo,
+  [Pkm.MEGA_MEWTWO_X]: MegaMewtwoX,
   [Pkm.MEGA_MEWTWO_Y]: MegaMewtwoY,
   [Pkm.KYUREM]: Kyurem,
   [Pkm.RESHIRAM]: Reshiram,

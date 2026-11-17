@@ -1949,6 +1949,14 @@ export const PokemonAnimations: {
     hitSprite: HitSprite.PSYCHIC_HIT,
     shinyUnavailable: true
   },
+  [Pkm.MEGA_MEWTWO_X]: {
+    attack: AnimationType.Punch,
+    ability: AnimationType.SpAttack,
+    emote: AnimationType.Punch,
+    attackSprite: AttackSprite.PSYCHIC_MELEE,
+    hitSprite: HitSprite.PSYCHIC_HIT,
+    shinyUnavailable: true
+  },
   [Pkm.MEGA_MEWTWO_Y]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
@@ -8388,7 +8396,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot
-  },
+  }
   /*[Pkm.TERAPAGOS_STELLAR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,

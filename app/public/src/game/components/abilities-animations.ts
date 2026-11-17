@@ -2145,6 +2145,10 @@ export const AbilitiesAnimations: {
     duration: 1000
   }),
   [Ability.PSYSTRIKE]: projectile({ duration: 1000 }),
+  [Ability.PSYSTRIKE_X]: onTarget({
+    ability: Ability.PSYSTRIKE,
+    scale: 2
+  }),
   [Ability.EGG_BOMB]: parabolicProjectile({
     duration: 800,
     animOptions: { repeat: -1 },

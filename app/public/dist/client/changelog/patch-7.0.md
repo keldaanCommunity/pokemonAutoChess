@@ -32,6 +32,7 @@
 - Mega Manectric
 - Mega Mawile
 - Mega Medicham
+- Mega Mewtwo X
 - Mega Mewtwo Y
 - Mega Scrafty
 - Mega Sharpedo

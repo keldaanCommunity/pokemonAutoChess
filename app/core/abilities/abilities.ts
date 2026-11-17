@@ -409,6 +409,7 @@ import { PsychoCutStrategy } from "./psycho-cut"
 import { PsychoShiftStrategy } from "./psycho-shift"
 import { PsyshieldBashStrategy } from "./psyshield-bash"
 import { PsystrikeStrategy } from "./psystrike"
+import { PsystrikeXStrategy } from "./psystrike-x"
 import { PummelingPaybackStrategy } from "./pummeling-payback"
 import { PurifyStrategy } from "./purify"
 import { PurpleRainStrategy } from "./purple-rain"
@@ -1243,6 +1244,7 @@ export const AbilityStrategies: { [key in Ability]: AbilityStrategy } = {
   [Ability.PSYSHIELD_BASH]: new PsyshieldBashStrategy(),
   [Ability.PSYSHOCK]: new PsyShockStrategy(),
   [Ability.PSYSTRIKE]: new PsystrikeStrategy(),
+  [Ability.PSYSTRIKE_X]: new PsystrikeXStrategy(),
   [Ability.PUMMELING_PAYBACK]: new PummelingPaybackStrategy(),
   [Ability.PURIFY]: new PurifyStrategy(),
   [Ability.PURPLE_RAIN]: new PurpleRainStrategy(),
