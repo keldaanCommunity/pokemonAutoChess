@@ -62,6 +62,7 @@
 - Change Stakataka passive Wall of Stone: now locks for 3 seconds instead of until the SHIELD is depleted.
 - Wurmple now has NORMAL type
 - Ogerpon now has HUMAN type in all its forms
+- Buff Roggenrola line: 110 → 100PP
 
 # Changes to Synergies
 

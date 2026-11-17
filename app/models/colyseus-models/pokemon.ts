@@ -1120,7 +1120,7 @@ export class Roggenrola extends Pokemon {
   speed = 37
   def = 8
   speDef = 6
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.ROCK_ARTILLERY
 }
@@ -1135,7 +1135,7 @@ export class Boldore extends Pokemon {
   speed = 37
   def = 12
   speDef = 10
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.ROCK_ARTILLERY
 }
@@ -1149,7 +1149,7 @@ export class Gigalith extends Pokemon {
   speed = 37
   def = 16
   speDef = 14
-  maxPP = 110
+  maxPP = 100
   range = 2
   skill = Ability.ROCK_ARTILLERY
 }
