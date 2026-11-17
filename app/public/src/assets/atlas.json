@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-16.5",
+  "version": "6.12.0.2026-11-17.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -92,9 +92,6 @@
         "BLEAKWIND_STORM": {
           "frames": 4,
           "repeat": -1
-        },
-        "BLIZZARD": {
-          "frames": 31
         },
         "BLUE_FLARE": {
           "frames": 15,
