@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-17.0",
+  "version": "6.12.0.2026-11-17.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -202,9 +202,6 @@
         },
         "DARK_HARVEST": {
           "frames": 9
-        },
-        "DARK_VOID": {
-          "frames": 22
         },
         "DEFENSE_CURL": {
           "frames": 18

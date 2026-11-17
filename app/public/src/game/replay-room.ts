@@ -1,5 +1,5 @@
-import { SchemaSerializer } from "@colyseus/sdk"
 import type { Iterator } from "@colyseus/schema"
+import { SchemaSerializer } from "@colyseus/sdk"
 import type GameState from "../../../rooms/states/game-state"
 import { excludeReplaySerializer } from "./recorder"
 import type { ReplayFrame, ReplayManifest } from "./replay-format"

@@ -1,13 +1,13 @@
 import {
-  ReplayFileWriter,
   type ReplayFileHandle,
+  ReplayFileWriter,
   type ReplayWriterMeta
 } from "./opfs-replay-writer"
 import {
-  readReplayHeader,
-  readReplayTrailer,
   type ReplayFrame,
-  type ReplaySummary
+  type ReplaySummary,
+  readReplayHeader,
+  readReplayTrailer
 } from "./replay-format"
 
 // pure logic of the recorder worker, browser api injected via WorkerDeps
