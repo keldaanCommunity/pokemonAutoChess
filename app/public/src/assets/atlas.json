@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-17.2",
+  "version": "6.12.0.2026-11-18.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -914,10 +914,6 @@
         },
         "SHELL_TRAP": {
           "frames": 8
-        },
-        "SHIELDS_DOWN": {
-          "frames": 11,
-          "fps": 15
         },
         "SHIELDS_UP": {
           "frames": 43,

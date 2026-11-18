@@ -292,7 +292,10 @@ export const AbilitiesAnimations: {
   [Ability.SHADOW_SNEAK]: onTargetScale2,
   [Ability.IVY_CUDGEL]: onTargetScale2,
   [Ability.FACADE]: onTargetScale2,
-  [Ability.SHIELDS_DOWN]: onTargetScale2,
+  [Ability.SHIELDS_DOWN]: onTarget({
+    ability: Ability.RAPID_SPIN,
+    scale: 2
+  }),
   [Ability.BRAVE_BIRD]: onTargetScale2,
   [Ability.DYNAMIC_PUNCH]: onTargetScale2,
   [Ability.ELECTRO_WEB]: onTargetScale2,
