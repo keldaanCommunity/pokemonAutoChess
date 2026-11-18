@@ -1797,7 +1797,6 @@
 	},
 	"ability_description": {
 		"SOFT_BOILED": "Tüm durum bozukluklarını iyileştirir ve tüm müttefik Pokémonlara [20,40,80,160,SP] SHIELD verir.",
-		"PRECIPICE_BLADES": "Kullananla aynı sırada ya da sütunda bulunan tüm düşman Pokémonlara [25,50,100,120,200,SP] SPECIAL verir.",
 		"SONG_OF_DESIRE": "Arka sıradaki [1,1,2,3] hedefe 3 saniyelik CHARM uygular ve ATK değerlerini [3,SP] azaltır.",
 		"CONFUSING_MIND": "Arka sıradaki [1,2,3,5] rakibe [3,SP] saniyelik CONFUSION uygular.",
 		"KNOWLEDGE_THIEF": "INIMITABLE değilse hedefin yeteneğini kullanır. Müttefik oyuncu [1,1,1,2,3] XP kazanır.",
