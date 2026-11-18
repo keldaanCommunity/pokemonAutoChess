@@ -58,12 +58,35 @@ export const precipiceBladesAnimation: AbilityAnimation = ({
     Math.max(minX, Math.min(maxX, px)),
     Math.max(minY, Math.min(maxY, py))
   ]
-  for (const [dx, dy] of [
-    [minX, 0],
-    [maxX, 0],
-    [0, minY],
-    [0, maxY]
-  ]) {
+  const diagonal = data?.diagonal === true
+  const arms: [number, number][] = []
+  if (diagonal) {
+    for (const [sx, sy] of [
+      [1, 1],
+      [1, -1],
+      [-1, 1],
+      [-1, -1]
+    ]) {
+      let steps = 0
+      while (
+        positionX + sx * (steps + 1) >= 0 &&
+        positionX + sx * (steps + 1) < BOARD_WIDTH &&
+        positionY + sy * (steps + 1) >= 0 &&
+        positionY + sy * (steps + 1) < BOARD_HEIGHT
+      )
+        steps++
+      if (steps === 0) continue
+      const [ex, ey] = transformEntityCoordinates(
+        positionX + sx * steps,
+        positionY + sy * steps,
+        flip
+      )
+      arms.push([ex - x, ey - y])
+    }
+  } else {
+    arms.push([minX, 0], [maxX, 0], [0, minY], [0, maxY])
+  }
+  for (const [dx, dy] of arms) {
     const length = Math.hypot(dx, dy)
     if (length === 0) continue
     const nx = -dy / length
@@ -229,7 +252,9 @@ export const precipiceBladesAnimation: AbilityAnimation = ({
       target.y < 0 ||
       target.y >= BOARD_HEIGHT ||
       (target.x === positionX && target.y === positionY) ||
-      (target.x !== positionX && target.y !== positionY)
+      (diagonal
+        ? Math.abs(target.x - positionX) !== Math.abs(target.y - positionY)
+        : target.x !== positionX && target.y !== positionY)
     )
       continue
 

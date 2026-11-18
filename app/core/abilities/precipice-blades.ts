@@ -1,5 +1,5 @@
 import { Ability } from "../../types/enum/Ability"
-import { AttackType } from "../../types/enum/Game"
+import { AttackType, Orientation } from "../../types/enum/Game"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -18,11 +18,20 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
     const orientation = pokemon.orientation
     const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
     const targets: { x: number; y: number }[] = []
+    const diagonal = [
+      Orientation.UPLEFT,
+      Orientation.UPRIGHT,
+      Orientation.DOWNLEFT,
+      Orientation.DOWNRIGHT
+    ].includes(orientation)
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
-      if (
-        (tg && pokemon.team !== tg.team && pokemon.positionY === y) ||
-        (tg && pokemon.team !== tg.team && pokemon.positionX === x)
-      ) {
+      if (!tg || pokemon.team === tg.team) return
+      const dx = x - positionX
+      const dy = y - positionY
+      const inCross = diagonal
+        ? Math.abs(dx) === Math.abs(dy)
+        : dx === 0 || dy === 0
+      if (inCross) {
         tg.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
         targets.push({ x, y })
       }
@@ -33,7 +42,7 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
       positionY,
       orientation,
       ap,
-      data: { targets }
+      data: { targets, diagonal }
     })
   }
 }
