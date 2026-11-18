@@ -17,8 +17,6 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
     const positionY = pokemon.positionY
     const orientation = pokemon.orientation
     const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
-    const targetX = target ? target.positionX : -1
-    const targetY = target ? target.positionY : -1
     const targets: { x: number; y: number }[] = []
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (
@@ -35,8 +33,6 @@ export class PrecipiceBladesStrategy extends AbilityStrategy {
       positionY,
       orientation,
       ap,
-      targetX,
-      targetY,
       data: { targets }
     })
   }
