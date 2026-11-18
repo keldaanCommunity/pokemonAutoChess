@@ -52,6 +52,7 @@ import {
   hydroPumpSplashAnimation,
   oblivionWingAnimation,
   precipiceBladesAnimation,
+  shoreUpAnimation,
   soulTrapAnimation,
   starShieldAnimation,
   tidalWaveAnimation
@@ -1120,7 +1121,7 @@ export const AbilitiesAnimations: {
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
   [Ability.BIDE]: onCaster({ ability: Ability.COUNTER, scale: 3 }),
-  [Ability.SHORE_UP]: onCaster({ ability: Ability.FISSURE }),
+  [Ability.SHORE_UP]: shoreUpAnimation,
   [Ability.DRUM_BEATING]: onCaster({ positionOffset: [-20, -40], angle: -45 }),
   [Ability.TAUNT]: onCaster({ positionOffset: [0, -30] }),
   ["TAUNT_HIT"]: onTarget({ positionOffset: [0, -30] }),
