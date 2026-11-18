@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-18.0",
+  "version": "6.12.0.2026-11-18.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -606,9 +606,6 @@
         },
         "LOCK_ON": {
           "frames": 26
-        },
-        "LUNAR_BLESSING": {
-          "frames": 21
         },
         "LUSTER_PURGE": {
           "frames": 3,
