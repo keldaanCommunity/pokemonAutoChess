@@ -17,7 +17,6 @@ export function getPortraitSrc(
   shiny?: boolean,
   emotion?: Emotion
 ) {
-  if (index in PORTRAITS_FALLBACKS) index = PORTRAITS_FALLBACKS[index]
   return getAvatarSrc(getAvatarString(index, shiny, emotion))
 }
 
@@ -29,7 +28,17 @@ export function getPkmFromPortraitSrc(src: string): PkmWithCustom | null {
 }
 
 export function getAvatarSrc(avatar: string) {
-  return `/assets/portraits/${avatar.replace(/(\d+)\-/g, "$1/")}.png`
+  avatar = avatar.replace(/(\d+)\-/g, "$1/")
+  const { name } = getPokemonCustomFromAvatar(avatar)
+  const index = PkmIndex[name]
+  if (index in PORTRAITS_FALLBACKS) {
+    avatar = avatar.replace(
+      index.replace(/(\d+)\-/g, "$1/"),
+      PORTRAITS_FALLBACKS[index]
+    )
+  }
+
+  return `/assets/portraits/${avatar}.png`
 }
 
 export function getAvatarString(
