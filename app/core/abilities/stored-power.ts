@@ -5,7 +5,13 @@ import { PkmByIndex } from "../../types/enum/Pokemon"
 import { min } from "../../utils/number"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
+
+const STORED_POWER_TIMING = {
+  target: 850,
+  impact: 1050
+} as const
 
 export class StoredPowerStrategy extends AbilityStrategy {
   process(
@@ -29,6 +35,33 @@ export class StoredPowerStrategy extends AbilityStrategy {
       ([10, 15, 20, 40][pokemon.stars - 1] ?? 40) *
         (1 + boostAtk + boostDef + boostSpeDef + boostSpeed + boostAP)
     )
-    target.handleSpecialDamage(damage, board, AttackType.SPECIAL, pokemon, crit)
+    const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    pokemon.commands.push(
+      new DelayedCommand(() => {
+        if (target.hp <= 0) return
+        pokemon.broadcastAbility({
+          skill: "STORED_POWER_TARGET",
+          targetX: target.positionX,
+          targetY: target.positionY,
+          ap
+        })
+      }, STORED_POWER_TIMING.target),
+      new DelayedCommand(() => {
+        if (target.hp <= 0) return
+        pokemon.broadcastAbility({
+          skill: "STORED_POWER_HIT",
+          targetX: target.positionX,
+          targetY: target.positionY,
+          ap
+        })
+        target.handleSpecialDamage(
+          damage,
+          board,
+          AttackType.SPECIAL,
+          pokemon,
+          crit
+        )
+      }, STORED_POWER_TIMING.impact)
+    )
   }
 }

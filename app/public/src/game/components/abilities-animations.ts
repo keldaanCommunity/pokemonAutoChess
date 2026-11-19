@@ -56,11 +56,15 @@ import {
   nightDazeAnimation,
   oblivionWingAnimation,
   paydayAnimation,
+  powerWhipAnimation,
   precipiceBladesAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
   starShieldAnimation,
+  storedPowerAnimation,
+  storedPowerHitAnimation,
+  storedPowerTargetAnimation,
   tidalWaveAnimation
 } from "./animations"
 import {
@@ -156,19 +160,10 @@ export const AbilitiesAnimations: {
     onCaster({ ability: "GRASS_HEAL", delay: 300 })
   ],
   [Ability.BITTER_MALICE]: onTarget({ ability: Ability.HEX, scale: 2 }),
-  [Ability.POWER_WHIP]: [
-    onCaster({
-      oriented: true,
-      scale: 4,
-      origin: [0.5, 1],
-      rotation: Math.PI / 2
-    }),
-    onTarget({ ability: "POWER_WHIP/hit", scale: 2, delay: 100 })
-  ],
-  [Ability.STORED_POWER]: onCaster({
-    ability: Ability.POWER_WHIP,
-    tint: 0xff80ff
-  }),
+  [Ability.POWER_WHIP]: powerWhipAnimation,
+  [Ability.STORED_POWER]: storedPowerAnimation,
+  ["STORED_POWER_TARGET"]: storedPowerTargetAnimation,
+  ["STORED_POWER_HIT"]: storedPowerHitAnimation,
   [Ability.YAWN]: onCasterScale2,
   [Ability.WISE_YAWN]: projectile({
     scale: 2,

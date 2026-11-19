@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-19.5",
+  "version": "6.12.0.2026-11-19.9",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -747,9 +747,6 @@
           "frames": 7
         },
         "POWER_WHIP": {
-          "frames": 6
-        },
-        "POWER_WHIP/hit": {
           "frames": 8
         },
         "PRESENT": {
