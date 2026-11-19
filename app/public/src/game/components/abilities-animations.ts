@@ -52,7 +52,9 @@ import {
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
   makeItRainAnimation,
+  nightDazeAnimation,
   oblivionWingAnimation,
+  paydayAnimation,
   precipiceBladesAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
@@ -132,7 +134,7 @@ export const AbilitiesAnimations: {
   [Ability.LUNAR_BLESSING]: lunarBlessingAnimation,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
-  [Ability.NIGHT_DAZE]: onCasterScale2,
+  [Ability.NIGHT_DAZE]: nightDazeAnimation,
   [Ability.MEGA_DRAIN]: [
     (args) =>
       OrientationArray.map((o, i) =>
@@ -151,7 +153,7 @@ export const AbilitiesAnimations: {
       ),
     onCaster({ ability: "GRASS_HEAL", delay: 300 })
   ],
-  [Ability.BITTER_MALICE]: onTarget({ ability: Ability.NIGHT_DAZE, scale: 2 }),
+  [Ability.BITTER_MALICE]: onTarget({ ability: Ability.HEX, scale: 2 }),
   [Ability.POWER_WHIP]: [
     onCaster({
       oriented: true,
@@ -614,10 +616,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2
     })
   ],
-  [Ability.PAYDAY]: [
-    onTargetScale2,
-    onTarget({ ability: Ability.FACADE, scale: 1 })
-  ],
+  [Ability.PAYDAY]: paydayAnimation,
   [Ability.VOLT_SWITCH]: onTarget({
     origin: [0.5, 0],
     oriented: true,

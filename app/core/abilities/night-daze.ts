@@ -11,7 +11,7 @@ export class NightDazeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     // Deal [25,50,100,200,SP] SPECIAL to the target and inflict BLINDED for [3,SP] seconds.
     // If the user is disguised as an ally, this ability also affects enemies ADJACENT to the target, and the user's disguise is broken.
     const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
@@ -28,6 +28,18 @@ export class NightDazeStrategy extends AbilityStrategy {
               entity != null && pokemon.team != entity.team
           )
       : [target]
+
+    pokemon.broadcastAbility({
+      targetX: target.positionX,
+      targetY: target.positionY,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: {
+        targets: targets.map((enemy) => ({
+          x: enemy.positionX,
+          y: enemy.positionY
+        }))
+      }
+    })
 
     targets.forEach((enemy) => {
       enemy.handleSpecialDamage(
