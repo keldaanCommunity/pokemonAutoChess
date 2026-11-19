@@ -1,11 +1,14 @@
 import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import type { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import type { Status } from "../../../../../types/enum/Status"
+import { Weather } from "../../../../../types/enum/Weather"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import { preference } from "../../../preferences"
+import type { AbilityPreviewOptions } from "./ability-preview"
 import "./debug-scene.css"
 
 export default function DebugSceneContainer({
@@ -14,6 +17,10 @@ export default function DebugSceneContainer({
   animationType = "Idle",
   shiny,
   status,
+  preview,
+  replay,
+  map,
+  weather,
   height = 100,
   width = 100
 }: {
@@ -22,72 +29,133 @@ export default function DebugSceneContainer({
   animationType?: string
   shiny: boolean
   status: Status | ""
+  preview: AbilityPreviewOptions
+  replay: number
+  map: DungeonPMDO | "plain"
+  weather: Weather
   height?: number
   width?: number
 }) {
-  const gameRef = useRef<Phaser.Game>(null)
   const debugScene = useRef<DebugScene>(null)
 
-  const initialized = useRef<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
+  const [mapLoading, setMapLoading] = useState(false)
+  const [mapError, setMapError] = useState("")
+  const [mapRevision, setMapRevision] = useState(0)
+  const mapQueue = useRef<Promise<void>>(Promise.resolve())
 
   const [statusMessage, setStatusMessage] = useState<string>("")
 
-  const onProgress = () =>
-    setStatusMessage(debugScene?.current?.loadingManager?.statusMessage ?? "")
-
-  const onComplete = useCallback(() => {
-    setLoaded(true)
-    debugScene.current?.updateSprite(
-      pkm,
-      orientation,
-      animationType,
-      status,
-      shiny
+  useEffect(() => {
+    let active = true
+    const scene = new DebugScene(
+      height,
+      width,
+      () => {
+        if (active) setStatusMessage(scene.loadingManager?.statusMessage ?? "")
+      },
+      () => {
+        if (active) setLoaded(true)
+      }
     )
-  }, [animationType, orientation, pkm, status, shiny])
-
-  useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true
-      debugScene.current = new DebugScene(height, width, onProgress, onComplete)
-
-      gameRef.current = new Phaser.Game({
-        type: +(preference("renderer") ?? Phaser.AUTO),
-        parent: "debug-scene",
-        pixelArt: true,
-        width,
-        height,
-        scene: [debugScene.current],
-        backgroundColor: "#61738a",
-        plugins: {
-          global: [
-            {
-              key: "rexMoveTo",
-              plugin: MoveToPlugin,
-              start: true
-            }
-          ]
-        }
-      })
+    debugScene.current = scene
+    const game = new Phaser.Game({
+      type: +(preference("renderer") ?? Phaser.AUTO),
+      parent: "debug-scene",
+      pixelArt: true,
+      width,
+      height,
+      scene: [scene],
+      backgroundColor: "#61738a",
+      input: { mouse: { preventDefaultWheel: false } },
+      plugins: {
+        global: [
+          {
+            key: "rexMoveTo",
+            plugin: MoveToPlugin,
+            start: true
+          }
+        ]
+      }
+    })
+    return () => {
+      active = false
+      clearInterval(scene.attackAnimInterval)
+      scene.weatherManager?.clearWeather()
+      game.destroy(true)
+      debugScene.current = null
     }
-  }, [height, initialized, onComplete, width])
+  }, [height, width])
 
   useEffect(() => {
-    if (initialized.current === true && loaded === true) {
+    if (loaded) {
       debugScene.current?.updateSprite(
         pkm,
         orientation,
         animationType,
         status,
-        shiny
+        shiny,
+        preview
       )
     }
-  }, [pkm, orientation, animationType, status, loaded, shiny])
+  }, [
+    pkm,
+    orientation,
+    animationType,
+    status,
+    loaded,
+    shiny,
+    preview,
+    mapRevision
+  ])
+
+  useEffect(() => {
+    if (loaded && replay > 0 && animationType === "Ability") {
+      debugScene.current?.replayAbility()
+    }
+  }, [replay, loaded, animationType])
+
+  useEffect(() => {
+    if (!loaded) return
+    let active = true
+    setMapLoading(true)
+    setMapError("")
+    mapQueue.current = mapQueue.current.then(async () => {
+      if (!active || !debugScene.current) return
+      const scene = debugScene.current
+      try {
+        scene.setWeather(Weather.NEUTRAL)
+        if (map === "plain") scene.clearPreviewMap()
+        else await scene.updateMap(map, true)
+        if (active) setMapRevision((revision) => revision + 1)
+      } catch (error) {
+        if (active) {
+          scene.clearPreviewMap()
+          setMapRevision((revision) => revision + 1)
+          setMapError(error instanceof Error ? error.message : String(error))
+        }
+      } finally {
+        if (active) setMapLoading(false)
+      }
+    })
+    return () => {
+      active = false
+    }
+  }, [loaded, map])
+
+  useEffect(() => {
+    if (loaded && !mapLoading) debugScene.current?.setWeather(weather)
+  }, [loaded, mapLoading, mapRevision, weather])
 
   return (
     <div id="debug-scene">
       {!loaded && <p id="status-message">{statusMessage}</p>}
+      {mapLoading && <p id="status-message">Loading preview background...</p>}
+      {mapError && (
+        <p role="alert" id="status-message">
+          Background error: {mapError}
+        </p>
+      )}
     </div>
   )
 }
