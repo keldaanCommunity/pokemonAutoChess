@@ -6,13 +6,15 @@ import { AbilityStrategy } from "./ability-strategy"
 export class ForecastStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const allies: { x: number; y: number }[] = []
     board.forEach((x: number, y: number, p: PokemonEntity | undefined) => {
       const shield = [10, 10, 10, 20][pokemon.stars - 1] ?? 20
       const attack = [4, 4, 4, 8][pokemon.stars - 1] ?? 8
       const pp = [8, 8, 8, 16][pokemon.stars - 1] ?? 16
       const def = [2, 2, 2, 4][pokemon.stars - 1] ?? 4
       if (p && pokemon.team === p.team) {
+        if (p !== pokemon) allies.push({ x, y })
         p.addShield(shield, pokemon, 1, crit)
         if (pokemon.name === Pkm.CASTFORM_SUN) {
           p.addAttack(attack, pokemon, 1, crit)
@@ -25,6 +27,10 @@ export class ForecastStrategy extends AbilityStrategy {
           p.addSpecialDefense(def, pokemon, 1, crit)
         }
       }
+    })
+    pokemon.broadcastAbility({
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { allies, form: pokemon.name }
     })
   }
 }

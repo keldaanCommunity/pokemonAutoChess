@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-19.4",
+  "version": "6.12.0.2026-11-19.5",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -395,10 +395,6 @@
         "FOLLOW_ME": {
           "frames": 1,
           "repeat": -1
-        },
-        "FORECAST": {
-          "frames": 52,
-          "fps": 40
         },
         "FOSSIL_RESURRECT": {
           "frames": 11
