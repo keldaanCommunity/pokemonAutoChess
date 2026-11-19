@@ -1,6 +1,7 @@
 export { accelerockAnimation } from "./accelerock"
 export { aquaJetAnimation } from "./aqua-jet"
 export { aquaSwirlAnimation } from "./aqua-swirl"
+export { auroraVeilAnimation } from "./aurora-veil"
 export { blizzardAnimation } from "./blizzard"
 export { darkAuraAnimation } from "./dark-aura"
 export { featherAnimation } from "./feather"
