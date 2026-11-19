@@ -62,6 +62,9 @@ import {
   soulTrapAnimation,
   spiritBreakAnimation,
   starShieldAnimation,
+  storedPowerAnimation,
+  storedPowerHitAnimation,
+  storedPowerTargetAnimation,
   tidalWaveAnimation
 } from "./animations"
 import {
@@ -158,10 +161,9 @@ export const AbilitiesAnimations: {
   ],
   [Ability.BITTER_MALICE]: onTarget({ ability: Ability.HEX, scale: 2 }),
   [Ability.POWER_WHIP]: powerWhipAnimation,
-  [Ability.STORED_POWER]: onCaster({
-    ability: Ability.POWER_WHIP,
-    tint: 0xff80ff
-  }),
+  [Ability.STORED_POWER]: storedPowerAnimation,
+  ["STORED_POWER_TARGET"]: storedPowerTargetAnimation,
+  ["STORED_POWER_HIT"]: storedPowerHitAnimation,
   [Ability.YAWN]: onCasterScale2,
   [Ability.WISE_YAWN]: projectile({
     scale: 2,

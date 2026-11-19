@@ -295,7 +295,7 @@ export const powerWhipAnimation: AbilityAnimation = ({
       if (!impactPlayed && time >= contact) {
         impactPlayed = true
         const hit = wavePoint(approachLength + turnLength / 2)
-        addAbilitySprite(scene, "POWER_WHIP/hit", ap, [hit.x, hit.y], {
+        addAbilitySprite(scene, "POWER_WHIP", ap, [hit.x, hit.y], {
           scale: 2,
           depth: DEPTH.HIT_FX_ABOVE_POKEMON,
           animOptions: { duration: 230 }

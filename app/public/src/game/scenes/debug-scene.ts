@@ -6,8 +6,12 @@ import {
 } from "../../../../config"
 import type { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AnimationType } from "../../../../types/Animation"
+import {
+  type AbilityAnimationArgs,
+  AnimationType
+} from "../../../../types/Animation"
 import delays from "../../../../types/delays.json"
+import { Ability } from "../../../../types/enum/Ability"
 import type { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
@@ -29,6 +33,7 @@ import {
   displayAbility,
   displayHit
 } from "../components/abilities-animations"
+import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
@@ -589,7 +594,7 @@ export class DebugScene extends Phaser.Scene {
     const showAbilityAnim = () => {
       const caster = this.pokemonSprite
       if (!caster) return
-      displayAbility({
+      const args: AbilityAnimationArgs = {
         scene: this,
         pokemonsOnBoard: [
           caster,
@@ -605,7 +610,20 @@ export class DebugScene extends Phaser.Scene {
         flip: caster.flip,
         ap: 0,
         data: this.abilityPreview?.data ?? {}
-      })
+      }
+      displayAbility(args)
+      if (caster.pokemon.skill === Ability.STORED_POWER) {
+        displayAbility({
+          ...args,
+          ability: "STORED_POWER_TARGET",
+          delay: STORED_POWER_TIMING.target
+        })
+        displayAbility({
+          ...args,
+          ability: "STORED_POWER_HIT",
+          delay: STORED_POWER_TIMING.impact
+        })
+      }
     }
     showAbilityAnim()
     this.attackAnimInterval = setInterval(showAbilityAnim, 2000)

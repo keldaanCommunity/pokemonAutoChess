@@ -22,4 +22,9 @@ export { shoreUpAnimation } from "./shore-up"
 export { soulTrapAnimation } from "./soul-trap"
 export { spiritBreakAnimation } from "./spirit-break"
 export { starShieldAnimation } from "./star-shield"
+export {
+  storedPowerAnimation,
+  storedPowerHitAnimation,
+  storedPowerTargetAnimation
+} from "./stored-power"
 export { tidalWaveAnimation } from "./tidal-wave"
