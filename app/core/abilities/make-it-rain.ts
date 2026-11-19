@@ -10,7 +10,7 @@ export class MakeItRainStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
     const base = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
     const goldMultiplier = [100, 100, 100, 300][pokemon.stars - 1] ?? 300

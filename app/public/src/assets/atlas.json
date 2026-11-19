@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-18.1",
+  "version": "6.12.0.2026-11-19.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -438,9 +438,6 @@
         },
         "GLAIVE_RUSH": {
           "frames": 8
-        },
-        "GOLD_RUSH": {
-          "frames": 12
         },
         "GRASS_HEAL": {
           "frames": 5
