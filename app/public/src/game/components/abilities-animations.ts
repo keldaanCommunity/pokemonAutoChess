@@ -44,6 +44,7 @@ import {
   darkAuraAnimation,
   featherAnimation,
   fishiousRendAnimation,
+  forecastAnimation,
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
@@ -544,7 +545,7 @@ export const AbilitiesAnimations: {
     tint: 0xffffd0,
     origin: [0.5, 1]
   }),
-  [Ability.FORECAST]: onCaster({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.FORECAST]: forecastAnimation,
   [Ability.CHATTER]: onCasterScale2,
   [Ability.BOOMBURST]: onCaster({ ability: Ability.CHATTER, scale: 3 }),
   [Ability.BLAST_BURN]: onCasterScale3,
