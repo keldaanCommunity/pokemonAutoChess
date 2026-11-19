@@ -58,6 +58,7 @@ import {
   precipiceBladesAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
+  spiritBreakAnimation,
   starShieldAnimation,
   tidalWaveAnimation
 } from "./animations"
@@ -357,7 +358,7 @@ export const AbilitiesAnimations: {
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
-  [Ability.SPIRIT_BREAK]: onTargetScale2,
+  [Ability.SPIRIT_BREAK]: spiritBreakAnimation,
   [Ability.PSYSHOCK]: onTargetScale2,
   [Ability.SHEER_COLD]: onTargetScale2,
   [Ability.COTTON_SPORE]: onTargetScale2,
