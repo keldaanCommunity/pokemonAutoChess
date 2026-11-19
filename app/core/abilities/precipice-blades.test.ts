@@ -45,7 +45,12 @@ const run = (orientation: Orientation) => {
       for (const e of entities) cb(e.positionX, e.positionY, e)
     }
   }
-  new PrecipiceBladesStrategy().process(caster, board as any, entities[0], false)
+  new PrecipiceBladesStrategy().process(
+    caster,
+    board as any,
+    entities[0],
+    false
+  )
   return { hit, broadcast }
 }
 
