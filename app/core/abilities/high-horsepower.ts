@@ -72,5 +72,6 @@ export class HighHorsepowerStrategy extends AbilityStrategy {
         }
       }, 300)
     )
+    pokemon.cooldown = 300
   }
 }

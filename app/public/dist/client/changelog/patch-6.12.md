@@ -64,6 +64,7 @@
 - Ogerpon now has HUMAN type in all its forms
 - Buff Roggenrola line: 110 → 100PP
 - Change Precipice Blades to: Deal [25,50,100,120,200,SP] SPECIAL to all enemy Pokémon in the same row and column as the user. If the user is facing diagonally, hit both diagonals instead.
+- Nerf High horsepower (Mudbray): ability cooldown 100ms → 300ms
 
 # Changes to Synergies
 
