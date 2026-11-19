@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-19.2",
+  "version": "6.12.0.2026-11-19.3",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -693,9 +693,6 @@
         },
         "NIGHTMARE": {
           "frames": 15
-        },
-        "NIGHT_DAZE": {
-          "frames": 18
         },
         "NIGHT_SHADE": {
           "frames": 34
