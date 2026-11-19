@@ -1940,11 +1940,13 @@ export default class Simulation extends Schema implements ISimulation {
       ? [...Array(this.board.rows).keys()]
       : [...Array(this.board.rows).keys()].reverse()
 
+    const targetsHit = new Set<PokemonEntity>() // a unit can move to a cell not visited yet
     for (const y of rowRange) {
       for (let x = 0; x < this.board.columns; x++) {
         const pokemonHit = this.board.getEntityOnCell(x, y)
         this.board.clearBoardEffect(x, y, this) // clear all effects
-        if (pokemonHit) {
+        if (pokemonHit && !targetsHit.has(pokemonHit)) {
+          targetsHit.add(pokemonHit)
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
             if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
