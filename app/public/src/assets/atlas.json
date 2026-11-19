@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-19.3",
+  "version": "6.12.0.2026-11-19.4",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -1000,10 +1000,6 @@
         "SPIN_OUT": {
           "frames": 5,
           "fps": 10
-        },
-        "SPIRIT_BREAK": {
-          "frames": 35,
-          "fps": 30
         },
         "SPIRIT_SHACKLE": {
           "frames": 4,
