@@ -51,6 +51,7 @@ import {
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
+  makeItRainAnimation,
   oblivionWingAnimation,
   precipiceBladesAnimation,
   shoreUpAnimation,
@@ -1210,12 +1211,8 @@ export const AbilitiesAnimations: {
     duration: 2000,
     scale: 3
   }),
-  [Ability.GOLD_RUSH]: projectile({ duration: 1000 }),
-  [Ability.MAKE_IT_RAIN]: projectile({
-    ability: Ability.GOLD_RUSH,
-    duration: 1000,
-    scale: 3
-  }),
+  [Ability.GOLD_RUSH]: makeItRainAnimation,
+  [Ability.MAKE_IT_RAIN]: makeItRainAnimation,
   [Ability.MUD_SHOT]: projectile({ scale: 4, duration: 350 }),
   [Ability.MOONBLAST]: (args) =>
     projectile({

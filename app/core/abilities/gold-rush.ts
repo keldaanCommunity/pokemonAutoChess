@@ -10,7 +10,7 @@ export class GoldRushStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit, true)
+    super.process(pokemon, board, target, crit)
     const goldDamage = pokemon.player?.money ? pokemon.player?.money : 0
     const damage =
       ([20, 20, 20, 50][pokemon.stars - 1] ?? 50) +
