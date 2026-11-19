@@ -53,6 +53,7 @@ import {
   lunarBlessingAnimation,
   makeItRainAnimation,
   oblivionWingAnimation,
+  paydayAnimation,
   precipiceBladesAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
@@ -614,10 +615,7 @@ export const AbilitiesAnimations: {
       rotation: -Math.PI / 2
     })
   ],
-  [Ability.PAYDAY]: [
-    onTargetScale2,
-    onTarget({ ability: Ability.FACADE, scale: 1 })
-  ],
+  [Ability.PAYDAY]: paydayAnimation,
   [Ability.VOLT_SWITCH]: onTarget({
     origin: [0.5, 0],
     oriented: true,

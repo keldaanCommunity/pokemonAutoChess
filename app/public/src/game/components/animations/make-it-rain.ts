@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { drawGoldCoin } from "./helpers"
 
 export const makeItRainAnimation: AbilityAnimation = ({
   scene,
@@ -182,12 +183,7 @@ export const makeItRainAnimation: AbilityAnimation = ({
       .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
       .setRotation((i % 2 === 0 ? 1 : -1) * 0.35)
       .setAlpha(0)
-    coin.fillStyle(0xffc629, 0.98)
-    coin.fillEllipse(0, 0, 10, 14)
-    coin.lineStyle(1.5, 0xffffae, 0.95)
-    coin.strokeEllipse(0, 0, 10, 14)
-    coin.lineStyle(1, 0xf18a12, 0.9)
-    coin.strokeEllipse(0, 0, 5, 9)
+    drawGoldCoin(coin)
     scene.abilitiesVfxGroup?.add(coin)
 
     scene.tweens.chain({

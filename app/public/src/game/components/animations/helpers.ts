@@ -27,6 +27,15 @@ export type AbilityCoordinates =
   | "target"
   | "caster"
 
+export function drawGoldCoin(graphics: GameObjects.Graphics) {
+  graphics.fillStyle(0xffc629, 0.98)
+  graphics.fillEllipse(0, 0, 10, 14)
+  graphics.lineStyle(1.5, 0xffffae, 0.95)
+  graphics.strokeEllipse(0, 0, 10, 14)
+  graphics.lineStyle(1, 0xf18a12, 0.9)
+  graphics.strokeEllipse(0, 0, 5, 9)
+}
+
 export type TweenAnimationMakerOptions = {
   duration?: number
   ease?: string | ((v: number) => number)
