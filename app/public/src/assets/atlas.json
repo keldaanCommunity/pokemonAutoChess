@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-20.3",
+  "version": "6.12.0.2026-11-20.5",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -115,9 +115,6 @@
         },
         "BRICK_BREAK": {
           "frames": 14
-        },
-        "BUG_BUZZ": {
-          "frames": 29
         },
         "BULK_UP": {
           "frames": 9
@@ -1212,8 +1209,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "FICKLE_BEAM": {
-          "frames": 20
+        "BUG_BUZZ": {
+          "frames": 29
         }
       }
     },
