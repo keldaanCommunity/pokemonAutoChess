@@ -48,6 +48,7 @@ import {
   fairyLockAnimation,
   fairyWindAnimation,
   featherAnimation,
+  fickleBeamAnimation,
   fishiousRendAnimation,
   forecastAnimation,
   futureSightCastAnimation,
@@ -1278,7 +1279,7 @@ export const AbilitiesAnimations: {
     duration: 400,
     hitAnim: onTarget({ ability: "PUFF_RED" })
   }),
-  [Ability.FICKLE_BEAM]: projectile({ duration: 400 }),
+  [Ability.FICKLE_BEAM]: fickleBeamAnimation,
   [Ability.POLLEN_PUFF]: projectile({
     ability: Ability.HEAL_ORDER,
     duration: 1000

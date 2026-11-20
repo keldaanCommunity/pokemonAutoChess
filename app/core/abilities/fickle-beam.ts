@@ -25,6 +25,9 @@ export class FickleBeamStrategy extends AbilityStrategy {
       chance(0.5, pokemon) && numberOfBeam++
     }
 
+    const beams: { x: number; y: number }[] = []
+    const positionX = pokemon.positionX
+    const positionY = pokemon.positionY
     for (let i = 0; i < numberOfBeam; i++) {
       const enemy = highestSpeedEnemies[i % highestSpeedEnemies.length]
       if (enemy) {
@@ -36,13 +39,11 @@ export class FickleBeamStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        pokemon.broadcastAbility({
-          positionX: pokemon.positionX,
-          positionY: pokemon.positionY,
-          targetX: enemy.positionX,
-          targetY: enemy.positionY
-        })
+        beams.push({ x: enemy.positionX, y: enemy.positionY })
       }
+    }
+    if (beams.length > 0) {
+      pokemon.broadcastAbility({ positionX, positionY, data: { beams } })
     }
   }
 }
