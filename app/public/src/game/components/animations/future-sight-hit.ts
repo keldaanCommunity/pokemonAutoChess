@@ -7,14 +7,17 @@ export const futureSightHitAnimation: AbilityAnimation = ({
   scene,
   targetX,
   targetY,
-  flip
+  flip,
+  delay = 0
 }) => {
   if (targetX < 0 || targetY < 0) return
+  const animationDelay = Math.max(0, delay)
   const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
   const impact = scene.add
     .container(x, y - 18)
     .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
     .setScale(0.25)
+    .setAlpha(animationDelay > 0 ? 0 : 1)
   scene.abilitiesVfxGroup?.add(impact)
 
   const groundGlow = scene.add.ellipse(0, 18, 140, 62, 0x9e55f5, 0.25)
@@ -54,12 +57,19 @@ export const futureSightHitAnimation: AbilityAnimation = ({
     targets: bands,
     angle: 25,
     duration: 500,
+    delay: animationDelay,
     ease: Phaser.Math.Easing.Sine.InOut
   })
   scene.tweens.chain({
     targets: impact,
+    delay: animationDelay,
     tweens: [
-      { scale: 1, duration: 140, ease: Phaser.Math.Easing.Back.Out },
+      {
+        scale: 1,
+        alpha: 1,
+        duration: 140,
+        ease: Phaser.Math.Easing.Back.Out
+      },
       { scale: 1.08, duration: 140, ease: Phaser.Math.Easing.Sine.Out },
       {
         scale: 1.3,

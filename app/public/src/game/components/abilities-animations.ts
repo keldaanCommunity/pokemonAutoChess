@@ -43,6 +43,7 @@ import {
   auroraVeilAnimation,
   blizzardAnimation,
   darkAuraAnimation,
+  fairyLockAnimation,
   featherAnimation,
   fishiousRendAnimation,
   forecastAnimation,
@@ -630,7 +631,7 @@ export const AbilitiesAnimations: {
     tint: 0xffc0ff
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
-  [Ability.FAIRY_LOCK]: onTargetScale1,
+  [Ability.FAIRY_LOCK]: fairyLockAnimation,
   [Ability.STEAM_ERUPTION]: onTargetScale2,
   [Ability.SEARING_SHOT]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,

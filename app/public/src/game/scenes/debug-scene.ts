@@ -33,6 +33,7 @@ import {
   displayAbility,
   displayHit
 } from "../components/abilities-animations"
+import { FUTURE_SIGHT_TIMING } from "../components/animations/future-sight-cast"
 import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
 import {
@@ -624,9 +625,55 @@ export class DebugScene extends Phaser.Scene {
           delay: STORED_POWER_TIMING.impact
         })
       }
+      if (caster.pokemon.skill === Ability.FUTURE_SIGHT) {
+        displayAbility({
+          ...args,
+          ability: "FUTURE_SIGHT_HIT",
+          delay: FUTURE_SIGHT_TIMING.hit
+        })
+
+        const hasTarget = isPreviewCell({
+          x: args.targetX,
+          y: args.targetY
+        })
+        const splashTargets =
+          hasTarget && Array.isArray(args.data.targets)
+            ? args.data.targets
+                .filter(isPreviewCell)
+                .filter(
+                  (cell) =>
+                    (cell.x !== args.targetX || cell.y !== args.targetY) &&
+                    (cell.x !== args.positionX || cell.y !== args.positionY) &&
+                    Math.abs(cell.x - args.targetX) <= 1 &&
+                    Math.abs(cell.y - args.targetY) <= 1
+                )
+                .filter(
+                  (cell, index, cells) =>
+                    cells.findIndex(
+                      (other) => other.x === cell.x && other.y === cell.y
+                    ) === index
+                )
+            : []
+
+        splashTargets.forEach((cell, index) => {
+          displayAbility({
+            ...args,
+            ability: "FUTURE_SIGHT_SPLASH",
+            targetX: cell.x,
+            targetY: cell.y,
+            delay:
+              FUTURE_SIGHT_TIMING.hit +
+              FUTURE_SIGHT_TIMING.splashStagger * index
+          })
+        })
+      }
     }
     showAbilityAnim()
-    this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
+    const replayDelay =
+      this.pokemonSprite.pokemon.skill === Ability.FUTURE_SIGHT
+        ? FUTURE_SIGHT_TIMING.replay
+        : 2000
+    this.attackAnimInterval = setInterval(showAbilityAnim, replayDelay)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {

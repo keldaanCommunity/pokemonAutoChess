@@ -3,6 +3,12 @@ import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
 
+export const FUTURE_SIGHT_TIMING = {
+  hit: 2000,
+  splashStagger: 50,
+  replay: 3000
+} as const
+
 export const futureSightCastAnimation: AbilityAnimation = ({
   scene,
   positionX,
