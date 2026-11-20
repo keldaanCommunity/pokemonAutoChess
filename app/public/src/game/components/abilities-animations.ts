@@ -68,6 +68,7 @@ import {
   storedPowerAnimation,
   storedPowerHitAnimation,
   storedPowerTargetAnimation,
+  takeHeartAnimation,
   tidalWaveAnimation
 } from "./animations"
 import {
@@ -767,10 +768,7 @@ export const AbilitiesAnimations: {
   [Ability.CLANGOROUS_SOUL]: onCasterScale2,
   [Ability.GROWL]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
   [Ability.FAIRY_WIND]: fairyWindAnimation,
-  [Ability.TAKE_HEART]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xc0c0ff
-  }),
+  [Ability.TAKE_HEART]: takeHeartAnimation,
   [Ability.HEART_SWAP]: [
     onCaster({
       ability: Ability.FAIRY_WIND,
