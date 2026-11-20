@@ -51,6 +51,7 @@ import {
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
+  grassySurgeAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
   hydroPumpAnimation,
@@ -771,10 +772,7 @@ export const AbilitiesAnimations: {
   [Ability.FAIRY_WIND]: fairyWindAnimation,
   [Ability.TAKE_HEART]: takeHeartAnimation,
   [Ability.HEART_SWAP]: heartSwapAnimation,
-  [Ability.GRASSY_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0x80ff80
-  }),
+  [Ability.GRASSY_SURGE]: grassySurgeAnimation,
   [Ability.ELECTRIC_SURGE]: onCaster({
     ability: Ability.FAIRY_WIND,
     tint: 0xffff80
