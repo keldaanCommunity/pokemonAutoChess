@@ -43,6 +43,7 @@ import {
   auroraVeilAnimation,
   blizzardAnimation,
   darkAuraAnimation,
+  electricSurgeAnimation,
   fairyLockAnimation,
   fairyWindAnimation,
   featherAnimation,
@@ -773,10 +774,7 @@ export const AbilitiesAnimations: {
   [Ability.TAKE_HEART]: takeHeartAnimation,
   [Ability.HEART_SWAP]: heartSwapAnimation,
   [Ability.GRASSY_SURGE]: grassySurgeAnimation,
-  [Ability.ELECTRIC_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xffff80
-  }),
+  [Ability.ELECTRIC_SURGE]: electricSurgeAnimation,
   [Ability.PSYCHIC_SURGE]: onCaster({
     ability: Ability.FAIRY_WIND,
     tint: 0xc050ff

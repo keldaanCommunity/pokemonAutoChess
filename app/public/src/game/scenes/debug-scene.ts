@@ -159,6 +159,7 @@ export class DebugScene extends Phaser.Scene {
       animationName = anims.ability
       this.showTarget()
       this.showPreviewTargets()
+      this.sortAbilityPreviewSprites(this.pokemonSprite)
       this.addAbilityAnim()
     }
     if (animationType === "Emote") {
@@ -541,6 +542,16 @@ export class DebugScene extends Phaser.Scene {
         seen.add(key)
         this.previewTargets.push(this.createPreviewTarget(cell.x, cell.y))
       }
+    }
+  }
+
+  private sortAbilityPreviewSprites(caster: PokemonSprite) {
+    const sprites = [caster, ...this.previewTargets]
+    if (this.target) sprites.push(this.target)
+
+    sprites.sort((a, b) => a.y - b.y)
+    for (let i = 1; i < sprites.length; i++) {
+      this.children.moveAbove(sprites[i], sprites[i - 1])
     }
   }
 

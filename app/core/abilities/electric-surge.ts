@@ -6,8 +6,9 @@ import { AbilityStrategy } from "./ability-strategy"
 export class ElectricSurgeStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     const buff = [10, 10, 10, 20][pokemon.stars - 1] ?? 20
+    const allies: { x: number; y: number }[] = []
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -15,8 +16,13 @@ export class ElectricSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.ELECTRIC)
       ) {
+        allies.push({ x, y })
         ally.addSpeed(buff, pokemon, 1, crit)
       }
+    })
+    pokemon.broadcastAbility({
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { allies }
     })
   }
 }
