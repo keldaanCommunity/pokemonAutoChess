@@ -10,10 +10,19 @@ export class DiamondStormStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     const damageFactor = [1, 1, 1.5, 3][pokemon.stars - 1] ?? 3
     const damage = pokemon.def * damageFactor
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
+    const targets = cells
+      .filter((cell) => cell.value && cell.value.team !== pokemon.team)
+      .map(({ x, y }) => ({ x, y }))
+    pokemon.broadcastAbility({
+      targetX: target ? target.positionX : -1,
+      targetY: target ? target.positionY : -1,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { targets }
+    })
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
