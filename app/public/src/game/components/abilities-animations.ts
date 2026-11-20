@@ -45,6 +45,7 @@ import {
   bugBuzzAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  dynamicPunchAnimation,
   electricSurgeAnimation,
   fairyLockAnimation,
   fairyWindAnimation,
@@ -313,7 +314,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   [Ability.BRAVE_BIRD]: onTargetScale2,
-  [Ability.DYNAMIC_PUNCH]: onTargetScale2,
+  [Ability.DYNAMIC_PUNCH]: dynamicPunchAnimation,
   [Ability.ELECTRO_WEB]: onTargetScale2,
   [Ability.PSYSHIELD_BASH]: onTargetScale2,
   [Ability.LIQUIDATION]: onTargetScale2,

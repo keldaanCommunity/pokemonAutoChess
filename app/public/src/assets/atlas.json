@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-20.5",
+  "version": "6.12.0.2026-11-20.6",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -259,9 +259,6 @@
         },
         "DYNAMAX_CANNON": {
           "frames": 39
-        },
-        "DYNAMIC_PUNCH": {
-          "frames": 13
         },
         "ECHO": {
           "frames": 23
@@ -1209,8 +1206,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "BUG_BUZZ": {
-          "frames": 29
+        "DYNAMIC_PUNCH": {
+          "frames": 13
         }
       }
     },
