@@ -44,6 +44,7 @@ import {
   blizzardAnimation,
   darkAuraAnimation,
   fairyLockAnimation,
+  fairyWindAnimation,
   featherAnimation,
   fishiousRendAnimation,
   forecastAnimation,
@@ -765,7 +766,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.CLANGOROUS_SOUL]: onCasterScale2,
   [Ability.GROWL]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
-  [Ability.FAIRY_WIND]: onCasterScale2,
+  [Ability.FAIRY_WIND]: fairyWindAnimation,
   [Ability.TAKE_HEART]: onCaster({
     ability: Ability.FAIRY_WIND,
     tint: 0xc0c0ff
