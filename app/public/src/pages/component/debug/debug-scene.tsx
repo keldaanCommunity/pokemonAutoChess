@@ -12,6 +12,10 @@ import type { AbilityPreviewOptions } from "./ability-preview"
 import type { PreviewStatus } from "./preview-scenario"
 import "./debug-scene.css"
 
+const MIN_PREVIEW_ZOOM = 0.5
+const MAX_PREVIEW_ZOOM = 3
+const PREVIEW_ZOOM_STEP = 0.25
+
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
   orientation = Orientation.DOWNLEFT,
@@ -38,8 +42,10 @@ export default function DebugSceneContainer({
   width?: number
 }) {
   const debugScene = useRef<DebugScene>(null)
+  const previewStage = useRef<HTMLDivElement>(null)
   const pendingDestruction = useRef<Promise<void>>(Promise.resolve())
 
+  const [zoom, setZoom] = useState(1)
   const [loadedScene, setLoadedScene] = useState<DebugScene | null>(null)
   const loaded = loadedScene !== null && loadedScene === debugScene.current
   const [settledMap, setSettledMap] = useState<{
@@ -220,6 +226,39 @@ export default function DebugSceneContainer({
     setElapsed(loadedScene.seekPreviewTime(time))
   }
 
+  const adjustZoom = (amount: number) => {
+    setZoom((current) =>
+      Phaser.Math.Clamp(current + amount, MIN_PREVIEW_ZOOM, MAX_PREVIEW_ZOOM)
+    )
+  }
+
+  useEffect(() => {
+    const stage = previewStage.current
+    if (!stage || zoom <= 1) return
+    stage.scrollLeft = (stage.scrollWidth - stage.clientWidth) / 2
+    stage.scrollTop = (stage.scrollHeight - stage.clientHeight) / 2
+  }, [zoom])
+
+  useEffect(() => {
+    const stage = previewStage.current
+    if (!stage) return
+
+    const handleWheel = (event: WheelEvent) => {
+      if (!event.ctrlKey && !event.metaKey) return
+      event.preventDefault()
+      setZoom((current) =>
+        Phaser.Math.Clamp(
+          current + (event.deltaY < 0 ? PREVIEW_ZOOM_STEP : -PREVIEW_ZOOM_STEP),
+          MIN_PREVIEW_ZOOM,
+          MAX_PREVIEW_ZOOM
+        )
+      )
+    }
+
+    stage.addEventListener("wheel", handleWheel, { passive: false })
+    return () => stage.removeEventListener("wheel", handleWheel)
+  }, [])
+
   return (
     <div className="sprite-viewer-preview">
       <div className="sprite-viewer-playback my-box">
@@ -272,6 +311,42 @@ export default function DebugSceneContainer({
         >
           {elapsed === null ? "-" : `${Math.round(elapsed)} ms`}
         </output>
+        <div className="sprite-viewer-zoom-controls" aria-label="Canvas zoom">
+          <button
+            type="button"
+            id="preview-zoom-out"
+            aria-label="Zoom out"
+            title="Zoom out"
+            disabled={zoom <= MIN_PREVIEW_ZOOM}
+            onClick={() => adjustZoom(-PREVIEW_ZOOM_STEP)}
+          >
+            -
+          </button>
+          <output id="preview-zoom-level" aria-label="Zoom level">
+            {Math.round(zoom * 100)}%
+          </output>
+          <button
+            type="button"
+            id="preview-zoom-in"
+            aria-label="Zoom in"
+            title="Zoom in"
+            disabled={zoom >= MAX_PREVIEW_ZOOM}
+            onClick={() => adjustZoom(PREVIEW_ZOOM_STEP)}
+          >
+            +
+          </button>
+          <button
+            type="button"
+            id="preview-zoom-reset"
+            aria-label="Reset zoom"
+            title="Reset zoom to 100%"
+            disabled={zoom === 1}
+            onClick={() => setZoom(1)}
+          >
+            100%
+          </button>
+          <span className="sprite-viewer-zoom-hint">Ctrl/Cmd + wheel</span>
+        </div>
         <span id="preview-ready" role="status" data-ready={ready}>
           {ready
             ? mapError
@@ -307,9 +382,17 @@ export default function DebugSceneContainer({
       </div>
       {mapError && <p role="alert">Background error: {mapError}</p>}
       <div
-        className={`sprite-viewer-stage${fitBoard ? " fit-board" : ""}`}
+        className={`sprite-viewer-stage${fitBoard ? " fit-board" : ""}${zoom > 1 ? " zoomed" : ""}`}
         id="preview-stage"
-        style={{ "--preview-aspect": width / height } as CSSProperties}
+        ref={previewStage}
+        style={
+          {
+            "--preview-aspect": width / height,
+            "--preview-height": `${height * zoom}px`,
+            "--preview-width": `${width * zoom}px`,
+            "--preview-zoom": zoom
+          } as CSSProperties
+        }
       >
         <div id="debug-scene" style={{ aspectRatio: `${width} / ${height}` }} />
       </div>
