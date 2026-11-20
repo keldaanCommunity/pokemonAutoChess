@@ -19,6 +19,7 @@
 .sprite-viewer-timeline {
   display: flex;
   flex: 1 0 100%;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   min-width: 0;
@@ -50,6 +51,16 @@
   min-width: 5em;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+.sprite-viewer-timeline-seek {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#preview-seek-ms {
+  width: 5em;
 }
 
 #preview-elapsed {

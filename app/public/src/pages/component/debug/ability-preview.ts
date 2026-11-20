@@ -2,7 +2,12 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 
 export type PreviewCell = { x: number; y: number }
 export type AbilityPreviewData = Record<string, unknown>
-export type AbilityPreviewPreset = "target" | "adjacent" | "allies" | "none"
+export type AbilityPreviewPreset =
+  | "target"
+  | "adjacent"
+  | "enemies"
+  | "allies"
+  | "none"
 
 export type AbilityPreviewOptions = {
   caster: PreviewCell
@@ -32,7 +37,7 @@ export function createAbilityPreviewPreset(
   target: PreviewCell | null
 ): AbilityPreviewData {
   if (preset === "none") return { targets: [], allies: [] }
-  const center = preset === "allies" ? caster : target
+  const center = preset === "allies" || preset === "enemies" ? caster : target
   if (!center) return preset === "allies" ? { allies: [] } : { targets: [] }
   if (preset === "target") return { targets: [center] }
 
@@ -41,8 +46,7 @@ export function createAbilityPreviewPreset(
     for (let x = center.x - 1; x <= center.x + 1; x++) {
       const cell = { x, y }
       if (!isPreviewCell(cell)) continue
-      if (preset === "allies" && x === caster.x && y === caster.y) continue
-      if (preset === "adjacent" && x === caster.x && y === caster.y) continue
+      if (x === caster.x && y === caster.y) continue
       cells.push(cell)
     }
   }

@@ -85,6 +85,7 @@ export default function DebugSceneContainer({
   const [paused, setPaused] = useState(false)
   const [loop, setLoop] = useState(false)
   const [elapsed, setElapsed] = useState<number | null>(null)
+  const [seekTime, setSeekTime] = useState("")
   const ready = loaded && readySprites === spriteRequest && !mapLoading
   const isAbility = animationType === "Ability"
   const previewDuration = loadedScene?.previewDuration ?? 2000
@@ -378,6 +379,30 @@ export default function DebugSceneContainer({
           <output id="preview-timeline-time" aria-live="off">
             {Math.round(elapsed ?? 0)} ms
           </output>
+          <form
+            className="sprite-viewer-timeline-seek"
+            onSubmit={(event) => {
+              event.preventDefault()
+              seekTo(Number(seekTime))
+              setSeekTime("")
+            }}
+          >
+            <label htmlFor="preview-seek-ms">Jump to (ms)</label>
+            <input
+              id="preview-seek-ms"
+              type="number"
+              min={0}
+              max={Math.round(previewTimelineMax)}
+              step={1}
+              required
+              value={seekTime}
+              disabled={!ready || !isAbility}
+              onChange={(event) => setSeekTime(event.currentTarget.value)}
+            />
+            <button type="submit" disabled={!ready || !isAbility}>
+              Go
+            </button>
+          </form>
         </div>
       </div>
       {mapError && <p role="alert">Background error: {mapError}</p>}
