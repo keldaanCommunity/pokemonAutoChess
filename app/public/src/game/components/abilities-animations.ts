@@ -64,6 +64,7 @@ import {
   paydayAnimation,
   powerWhipAnimation,
   precipiceBladesAnimation,
+  psychicSurgeAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
@@ -775,10 +776,7 @@ export const AbilitiesAnimations: {
   [Ability.HEART_SWAP]: heartSwapAnimation,
   [Ability.GRASSY_SURGE]: grassySurgeAnimation,
   [Ability.ELECTRIC_SURGE]: electricSurgeAnimation,
-  [Ability.PSYCHIC_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xc050ff
-  }),
+  [Ability.PSYCHIC_SURGE]: psychicSurgeAnimation,
   [Ability.MISTY_SURGE]: onCaster({
     ability: Ability.FAIRY_WIND,
     tint: 0xffa0ff
