@@ -27,6 +27,18 @@ export type AbilityCoordinates =
   | "target"
   | "caster"
 
+function scheduleAbilityStart(
+  scene: AbilityAnimationArgs["scene"],
+  delay: number,
+  start: () => void
+) {
+  if ("stepPreviewFrame" in scene) {
+    scene.time.delayedCall(delay, start)
+  } else {
+    setTimeout(start, delay)
+  }
+}
+
 export function drawGoldCoin(graphics: GameObjects.Graphics) {
   graphics.fillStyle(0xffc629, 0.98)
   graphics.fillEllipse(0, 0, 10, 14)
@@ -181,7 +193,7 @@ export const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
     }
 
     const delay = options.delay ?? args.delay ?? 0
-    setTimeout(() => {
+    scheduleAbilityStart(args.scene, delay, () => {
       addAbilitySprite(
         args.scene,
         options.ability ?? args.ability,
@@ -192,7 +204,7 @@ export const staticAnimation: AbilityAnimationMaker<{ x: number; y: number }> =
         ],
         { ...options, rotation }
       )
-    }, delay)
+    })
   }
 
 export const onCaster: AbilityAnimationMaker = (options) => (args) => {
@@ -265,7 +277,7 @@ export const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
       args
     )
     const delay = options.delay ?? args.delay ?? 0
-    setTimeout(() => {
+    scheduleAbilityStart(scene, delay, () => {
       const startPosition =
         options.startPosition ||
         transformEntityCoordinates(startRow, startCol, startFlip ?? flip).map(
@@ -311,8 +323,11 @@ export const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         ...(options.tweenProps ?? {})
       }
 
-      scene.tweens.add(tweenConfig)
-    }, delay)
+      const tween = scene.tweens.add(tweenConfig)
+      if ("stepPreviewFrame" in scene) {
+        sprite.once(Phaser.GameObjects.Events.DESTROY, () => tween.stop())
+      }
+    })
   }
 
 export const projectile: AbilityAnimationMaker<

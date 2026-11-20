@@ -1,6 +1,10 @@
 import Phaser from "phaser"
 import {
   BASE_PROJECTILE_SPEED,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  CELL_HEIGHT,
+  CELL_WIDTH,
   getRegionTint,
   RegionDetails
 } from "../../../../config"
@@ -24,6 +28,7 @@ import {
   type AbilityPreviewOptions,
   isPreviewCell
 } from "../../pages/component/debug/ability-preview"
+import type { PreviewStatus } from "../../pages/component/debug/preview-scenario"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -43,14 +48,6 @@ import {
 import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-
-type Boost =
-  | "BOOST/ATK"
-  | "BOOST/AP"
-  | "BOOST/DEF"
-  | "BOOST/SPE_DEF"
-  | "BOOST/SHIELD"
-  | "BOOST/SPEED"
 
 export class DebugScene extends Phaser.Scene {
   height: number
@@ -73,6 +70,12 @@ export class DebugScene extends Phaser.Scene {
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
   abilitiesVfxGroup: Phaser.GameObjects.Group | undefined
   landscape: Phaser.GameObjects.Sprite[] = []
+  abilityElapsed: number | null = null
+  loopAbility = false
+  private frameDelta = 0
+
+  static readonly VIEW_WIDTH = (BOARD_WIDTH + 1) * CELL_WIDTH
+  static readonly VIEW_HEIGHT = (BOARD_HEIGHT + 3.5) * CELL_HEIGHT
 
   constructor(
     height: number,
@@ -102,23 +105,62 @@ export class DebugScene extends Phaser.Scene {
   create() {
     this.abilitiesVfxGroup = this.add.group()
     this.weatherManager = new WeatherManager(this)
+    if (this.width === DebugScene.VIEW_WIDTH) {
+      const [left, near] = transformEntityCoordinates(0, 0, false)
+      const [right, far] = transformEntityCoordinates(BOARD_WIDTH - 1, 0, true)
+      this.cameras.main.centerOn(
+        (left + right) / 2,
+        (near + far) / 2 - CELL_HEIGHT / 2
+      )
+    }
+    // Keep tweens on the same clock as sprite animations and Phaser timers.
+    this.events.on(Phaser.Scenes.Events.PRE_UPDATE, (_time, delta: number) => {
+      this.frameDelta = delta
+    })
+    this.tweens.getDelta = () => this.frameDelta
     this.onComplete()
+  }
+
+  update(_time: number, delta: number) {
+    if (this.abilityElapsed === null || !this.pokemonSprite) return
+    this.abilityElapsed += delta
+    const interval =
+      this.pokemonSprite.pokemon.skill === Ability.FUTURE_SIGHT
+        ? FUTURE_SIGHT_TIMING.replay
+        : 2000
+    if (this.loopAbility && this.abilityElapsed >= interval) {
+      this.replayAbility()
+    }
+  }
+
+  setPreviewPaused(paused: boolean) {
+    if (paused && !this.sys.isPaused()) this.sys.pause()
+    if (!paused && this.sys.isPaused()) this.sys.resume()
+  }
+
+  stepPreviewFrame() {
+    if (!this.sys.isPaused()) return
+    const frame = 1000 / 60
+    this.sys.step(this.time.now + frame, frame)
   }
 
   updateSprite(
     pkm: Pkm,
     orientation: Orientation,
     animationType: string,
-    status: Status | "",
+    status: PreviewStatus,
     shiny: boolean,
-    preview?: AbilityPreviewOptions
+    preview?: AbilityPreviewOptions,
+    onPreviewReady?: () => void
   ) {
     this.abilityPreview = preview
     if (this.pokemonSprite) {
       this.pokemonSprite.destroy()
     }
     clearAbilityAnimations(this)
+    this.time.clearPendingEvents().removeAllEvents()
     clearInterval(this.attackAnimInterval)
+    this.abilityElapsed = null
     if (this.target) {
       this.target.destroy()
       this.target = undefined
@@ -160,7 +202,6 @@ export class DebugScene extends Phaser.Scene {
       this.showTarget()
       this.showPreviewTargets()
       this.sortAbilityPreviewSprites(this.pokemonSprite)
-      this.addAbilityAnim()
     }
     if (animationType === "Emote") {
       animationName = anims.emote
@@ -192,6 +233,21 @@ export class DebugScene extends Phaser.Scene {
       }
       this.applyStatusAnimation(status)
     })
+    if (onPreviewReady) {
+      const casterSprite = this.pokemonSprite
+      const sprites = [casterSprite, ...this.previewTargets]
+      if (this.target) sprites.push(this.target)
+      let remaining = sprites.length
+      for (const sprite of sprites) {
+        sprite.once("loaded", () => {
+          if (--remaining === 0 && this.pokemonSprite === casterSprite) {
+            onPreviewReady()
+          }
+        })
+      }
+    } else if (animationType === "Ability") {
+      this.replayAbility()
+    }
   }
 
   updateMap(mapName: DungeonPMDO | "town", preview = false): Promise<void> {
@@ -340,9 +396,7 @@ export class DebugScene extends Phaser.Scene {
     this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
   }
 
-  applyStatusAnimation(
-    status: Status | Boost | "BALM_MUSHROOM" | "POISONED_BADLY" | ""
-  ) {
+  applyStatusAnimation(status: PreviewStatus) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
@@ -595,14 +649,12 @@ export class DebugScene extends Phaser.Scene {
     this.attackAnimInterval = setInterval(attack, 2000)
   }
 
-  addAbilityAnim() {
-    this.replayAbility()
-  }
-
   replayAbility() {
     if (!this.pokemonSprite) return
     clearInterval(this.attackAnimInterval)
     clearAbilityAnimations(this)
+    this.time.clearPendingEvents().removeAllEvents()
+    this.abilityElapsed = 0
     const showAbilityAnim = () => {
       const caster = this.pokemonSprite
       if (!caster) return
@@ -680,11 +732,6 @@ export class DebugScene extends Phaser.Scene {
       }
     }
     showAbilityAnim()
-    const replayDelay =
-      this.pokemonSprite.pokemon.skill === Ability.FUTURE_SIGHT
-        ? FUTURE_SIGHT_TIMING.replay
-        : 2000
-    this.attackAnimInterval = setInterval(showAbilityAnim, replayDelay)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
