@@ -18,8 +18,6 @@ export class DiamondStormStrategy extends AbilityStrategy {
       .filter((cell) => cell.value && cell.value.team !== pokemon.team)
       .map(({ x, y }) => ({ x, y }))
     pokemon.broadcastAbility({
-      targetX: target ? target.positionX : -1,
-      targetY: target ? target.positionY : -1,
       ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
       data: { targets }
     })
