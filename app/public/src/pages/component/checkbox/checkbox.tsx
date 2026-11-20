@@ -11,6 +11,7 @@ interface CheckboxProps {
   isDark?: boolean
   disabled?: boolean
   title?: string
+  id?: string
 }
 
 export function Checkbox({
@@ -19,7 +20,8 @@ export function Checkbox({
   label,
   isDark = false,
   disabled,
-  title
+  title,
+  id
 }: CheckboxProps) {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +35,7 @@ export function Checkbox({
     <label className="checkbox-container" title={title}>
       <input
         type="checkbox"
+        id={id}
         className={cc("my-checkbox", { "is-dark": isDark })}
         checked={checked}
         onChange={handleChange}

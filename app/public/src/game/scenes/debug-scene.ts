@@ -73,6 +73,7 @@ export class DebugScene extends Phaser.Scene {
   abilityElapsed: number | null = null
   loopAbility = false
   private frameDelta = 0
+  private hasSeekBaseline = false
 
   static readonly VIEW_WIDTH = (BOARD_WIDTH + 1) * CELL_WIDTH
   static readonly VIEW_HEIGHT = (BOARD_HEIGHT + 3.5) * CELL_HEIGHT
@@ -124,24 +125,66 @@ export class DebugScene extends Phaser.Scene {
   update(_time: number, delta: number) {
     if (this.abilityElapsed === null || !this.pokemonSprite) return
     this.abilityElapsed += delta
-    const interval =
-      this.pokemonSprite.pokemon.skill === Ability.FUTURE_SIGHT
-        ? FUTURE_SIGHT_TIMING.replay
-        : 2000
-    if (this.loopAbility && this.abilityElapsed >= interval) {
+    if (this.loopAbility && this.abilityElapsed >= this.previewDuration) {
       this.replayAbility()
     }
   }
 
+  get previewDuration() {
+    return this.pokemonSprite?.pokemon.skill === Ability.FUTURE_SIGHT
+      ? FUTURE_SIGHT_TIMING.replay
+      : 2000
+  }
+
   setPreviewPaused(paused: boolean) {
     if (paused && !this.sys.isPaused()) this.sys.pause()
-    if (!paused && this.sys.isPaused()) this.sys.resume()
+    if (!paused && this.sys.isPaused()) {
+      this.hasSeekBaseline = false
+      this.sys.resume()
+    }
   }
 
   stepPreviewFrame() {
     if (!this.sys.isPaused()) return
     const frame = 1000 / 60
     this.sys.step(this.time.now + frame, frame)
+  }
+
+  seekPreviewTime(milliseconds: number) {
+    if (
+      !this.sys.isPaused() ||
+      !this.pokemonSprite ||
+      !Number.isFinite(milliseconds)
+    ) {
+      return this.abilityElapsed ?? 0
+    }
+
+    const target = Phaser.Math.Clamp(milliseconds, 0, this.previewDuration)
+    const frameDuration = 1000 / 60
+    const targetFrame = Math.round(target / frameDuration)
+    let currentFrame = Math.round((this.abilityElapsed ?? 0) / frameDuration)
+    const shouldLoop = this.loopAbility
+    this.loopAbility = false
+    try {
+      // Rewind from a common sprite and cast origin; forward seeks reuse it.
+      if (!this.hasSeekBaseline || targetFrame < currentFrame) {
+        const sprites = [this.pokemonSprite, ...this.previewTargets]
+        if (this.target) sprites.push(this.target)
+        for (const { sprite, shadow } of sprites) {
+          sprite.anims.restart(false, true)
+          shadow?.anims.restart(false, true)
+        }
+        this.replayAbility()
+        this.hasSeekBaseline = true
+        currentFrame = 0
+      }
+      for (let frame = currentFrame; frame < targetFrame; frame++) {
+        this.stepPreviewFrame()
+      }
+    } finally {
+      this.loopAbility = shouldLoop
+    }
+    return this.abilityElapsed ?? 0
   }
 
   updateSprite(
@@ -161,6 +204,7 @@ export class DebugScene extends Phaser.Scene {
     this.time.clearPendingEvents().removeAllEvents()
     clearInterval(this.attackAnimInterval)
     this.abilityElapsed = null
+    this.hasSeekBaseline = false
     if (this.target) {
       this.target.destroy()
       this.target = undefined
@@ -651,6 +695,7 @@ export class DebugScene extends Phaser.Scene {
 
   replayAbility() {
     if (!this.pokemonSprite) return
+    this.hasSeekBaseline = false
     clearInterval(this.attackAnimInterval)
     clearAbilityAnimations(this)
     this.time.clearPendingEvents().removeAllEvents()

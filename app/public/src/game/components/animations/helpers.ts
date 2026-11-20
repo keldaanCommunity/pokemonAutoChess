@@ -1,5 +1,5 @@
 import Phaser, { type GameObjects } from "phaser"
-import { CELL_WIDTH } from "../../../../../config"
+import { BOARD_HEIGHT, BOARD_WIDTH, CELL_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs,
@@ -26,6 +26,43 @@ export type AbilityCoordinates =
   | [number, number, boolean?]
   | "target"
   | "caster"
+
+export function getSurgeAllies(
+  data: AbilityAnimationArgs["data"],
+  casterX: number,
+  casterY: number
+) {
+  const cells: unknown = data.allies
+  if (!Array.isArray(cells)) return []
+
+  const seen = new Set<number>()
+  const allies: { x: number; y: number }[] = []
+  for (const cell of cells.slice(0, BOARD_WIDTH * BOARD_HEIGHT)) {
+    if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell)) {
+      continue
+    }
+    const { x, y } = cell
+    if (
+      typeof x !== "number" ||
+      !Number.isInteger(x) ||
+      typeof y !== "number" ||
+      !Number.isInteger(y) ||
+      x < 0 ||
+      x >= BOARD_WIDTH ||
+      y < 0 ||
+      y >= BOARD_HEIGHT ||
+      (x === casterX && y === casterY)
+    ) {
+      continue
+    }
+    const key = y * BOARD_WIDTH + x
+    if (seen.has(key)) continue
+    seen.add(key)
+    allies.push({ x, y })
+    if (allies.length >= 48) break
+  }
+  return allies
+}
 
 function scheduleAbilityStart(
   scene: AbilityAnimationArgs["scene"],

@@ -59,6 +59,7 @@ import {
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
   makeItRainAnimation,
+  mistySurgeAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
   paydayAnimation,
@@ -777,10 +778,7 @@ export const AbilitiesAnimations: {
   [Ability.GRASSY_SURGE]: grassySurgeAnimation,
   [Ability.ELECTRIC_SURGE]: electricSurgeAnimation,
   [Ability.PSYCHIC_SURGE]: psychicSurgeAnimation,
-  [Ability.MISTY_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xffa0ff
-  }),
+  [Ability.MISTY_SURGE]: mistySurgeAnimation,
   [Ability.RELIC_SONG]: onCasterScale2,
   [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),

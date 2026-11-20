@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
@@ -55,10 +55,24 @@ export function SpriteDebug() {
   )
   const [payload, setPayload] = useState<AbilityPreviewData>(scenario.data)
   const [payloadError, setPayloadError] = useState("")
+  const [payloadOpen, setPayloadOpen] = useState(
+    scenario.animation === "Ability"
+  )
   const [map, setMap] = useState(scenario.map)
   const [weather, setWeather] = useState(scenario.weather)
   const [fitBoard, setFitBoard] = useState(true)
   const [shareOpen, setShareOpen] = useState(false)
+  const shareLinkInput = useRef<HTMLInputElement>(null)
+  const [shareStatus, setShareStatus] = useState("")
+  const [loadedClientSrc] = useState(
+    () =>
+      document.querySelector<HTMLScriptElement>('script[src*="index-"]')?.src ??
+      ""
+  )
+  const [checkingClient, setCheckingClient] = useState(false)
+  const [clientUpdateAvailable, setClientUpdateAvailable] = useState(false)
+  const [clientCheckStatus, setClientCheckStatus] = useState("")
+  const [clientCheckError, setClientCheckError] = useState("")
 
   const target = useMemo(() => {
     if (targetMode === "none") return null
@@ -74,10 +88,52 @@ export function SpriteDebug() {
     () => ({ caster, target, flip, data: payload }),
     [caster, target, flip, payload]
   )
+  const payloadDirty = payloadText !== JSON.stringify(payload, null, 2)
+  const shareUrl = useMemo(
+    () =>
+      previewScenarioUrl(location.href, {
+        pokemon: pkm,
+        orientation,
+        animation: animationType,
+        shiny,
+        status,
+        caster,
+        targetMode,
+        customTarget,
+        flip,
+        map,
+        weather,
+        data: payload
+      }),
+    [
+      animationType,
+      caster,
+      customTarget,
+      flip,
+      map,
+      orientation,
+      payload,
+      pkm,
+      shiny,
+      status,
+      targetMode,
+      weather
+    ]
+  )
+
+  useEffect(() => {
+    if (animationType === "Ability") setPayloadOpen(true)
+  }, [animationType])
+
+  useEffect(() => {
+    setShareStatus("")
+  }, [shareUrl])
 
   const applyPayload = () => {
     try {
-      setPayload(parseAbilityPreviewData(payloadText))
+      const data = parseAbilityPreviewData(payloadText)
+      setPayload(data)
+      setPayloadText(JSON.stringify(data, null, 2))
       setPayloadError("")
     } catch (error) {
       setPayloadError(error instanceof Error ? error.message : String(error))
@@ -89,6 +145,69 @@ export function SpriteDebug() {
     setPayloadText(JSON.stringify(data, null, 2))
     setPayload(data)
     setPayloadError("")
+  }
+
+  const copyPreviewLink = async () => {
+    const input = shareLinkInput.current
+    if (!input) return
+    if (payloadDirty) {
+      setShareStatus("Apply the edited ability data before copying this link.")
+      return
+    }
+
+    const link = input.value
+    const url = new URL(link)
+    navigate(`${url.pathname}${url.search}${url.hash}`, { replace: true })
+    try {
+      await navigator.clipboard.writeText(link)
+      setShareStatus("Preview link copied.")
+    } catch {
+      input.focus()
+      input.select()
+      setShareStatus(
+        "Clipboard unavailable. The link is selected for manual copy."
+      )
+    }
+  }
+
+  const checkClientUpdate = async () => {
+    setCheckingClient(true)
+    setClientCheckStatus("")
+    setClientCheckError("")
+    setClientUpdateAvailable(false)
+    try {
+      if (!loadedClientSrc) {
+        throw new Error("Could not identify the loaded client bundle.")
+      }
+      const response = await fetch(location.href, { cache: "no-store" })
+      if (!response.ok) {
+        throw new Error(`Preview page returned HTTP ${response.status}.`)
+      }
+      const html = await response.text()
+      const latestSrc = new DOMParser()
+        .parseFromString(html, "text/html")
+        .querySelector<HTMLScriptElement>('script[src*="index-"]')
+        ?.getAttribute("src")
+      if (!latestSrc) {
+        throw new Error("Could not find a client bundle in the preview page.")
+      }
+
+      const latestUrl = new URL(latestSrc, response.url).href
+      const loadedUrl = new URL(loadedClientSrc, location.href).href
+      const updateAvailable = latestUrl !== loadedUrl
+      setClientUpdateAvailable(updateAvailable)
+      setClientCheckStatus(
+        updateAvailable
+          ? "A newer client bundle is available."
+          : "The loaded client bundle is current."
+      )
+    } catch (error) {
+      setClientCheckError(
+        error instanceof Error ? error.message : String(error)
+      )
+    } finally {
+      setCheckingClient(false)
+    }
   }
 
   return (
@@ -340,32 +459,71 @@ export function SpriteDebug() {
               >
                 Share preview
               </button>
+              <button
+                id="preview-check-client"
+                type="button"
+                disabled={checkingClient}
+                onClick={checkClientUpdate}
+              >
+                {checkingClient ? "Checking client..." : "Check for updates"}
+              </button>
             </div>
+            {(clientCheckStatus || clientCheckError) && (
+              <div className="sprite-viewer-client-status">
+                {clientCheckStatus && (
+                  <span id="preview-client-status" role="status">
+                    {clientCheckStatus}
+                  </span>
+                )}
+                {clientCheckError && (
+                  <span role="alert">
+                    Client update check failed: {clientCheckError}
+                  </span>
+                )}
+                {clientUpdateAvailable && (
+                  <button
+                    id="preview-reload-client"
+                    type="button"
+                    onClick={() => location.reload()}
+                  >
+                    Reload preview
+                  </button>
+                )}
+              </div>
+            )}
             {shareOpen && (
-              <label className="sprite-viewer-share">
-                Preview link
+              <div className="sprite-viewer-share">
+                <label htmlFor="preview-share-url">Preview link</label>
                 <input
                   id="preview-share-url"
                   readOnly
+                  ref={shareLinkInput}
                   onFocus={(event) => event.currentTarget.select()}
-                  value={previewScenarioUrl(location.href, {
-                    pokemon: pkm,
-                    orientation,
-                    animation: animationType,
-                    shiny,
-                    status,
-                    caster,
-                    targetMode,
-                    customTarget,
-                    flip,
-                    map,
-                    weather,
-                    data: payload
-                  })}
+                  value={shareUrl}
                 />
-              </label>
+                <button
+                  id="preview-copy-link"
+                  type="button"
+                  disabled={payloadDirty}
+                  onClick={copyPreviewLink}
+                >
+                  Copy link
+                </button>
+                <span id="preview-share-status" role="status">
+                  {shareStatus}
+                </span>
+                {payloadDirty && (
+                  <span role="status">
+                    Apply the edited ability data before sharing it.
+                  </span>
+                )}
+              </div>
             )}
-            <details className="sprite-viewer-payload-details">
+            <details
+              className="sprite-viewer-payload-details"
+              open={payloadOpen}
+              onToggle={(event) => setPayloadOpen(event.currentTarget.open)}
+            >
               <summary>Ability data (JSON)</summary>
               <small>
                 Presets use the current board positions; reapply after moving
@@ -379,7 +537,11 @@ export function SpriteDebug() {
                 <textarea
                   id="preview-payload"
                   value={payloadText}
-                  onChange={(e) => setPayloadText(e.currentTarget.value)}
+                  aria-invalid={Boolean(payloadError || payloadDirty)}
+                  onChange={(e) => {
+                    setPayloadText(e.currentTarget.value)
+                    setPayloadError("")
+                  }}
                   spellCheck={false}
                   rows={4}
                 />
@@ -401,6 +563,12 @@ export function SpriteDebug() {
                 {JSON.stringify(payload, null, 2)}
               </pre>
             </details>
+            {payloadDirty && (
+              <p id="preview-payload-dirty" role="status">
+                Ability data has unapplied edits. Preview and share link still
+                use the applied data.
+              </p>
+            )}
           </div>
         </div>
         <div className="sprite-viewer-sprite">

@@ -7,6 +7,7 @@ import { Pkm } from "../../../../../types/enum/Pokemon"
 import { Weather } from "../../../../../types/enum/Weather"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import { preference } from "../../../preferences"
+import { Checkbox } from "../checkbox/checkbox"
 import type { AbilityPreviewOptions } from "./ability-preview"
 import type { PreviewStatus } from "./preview-scenario"
 import "./debug-scene.css"
@@ -80,6 +81,11 @@ export default function DebugSceneContainer({
   const [elapsed, setElapsed] = useState<number | null>(null)
   const ready = loaded && readySprites === spriteRequest && !mapLoading
   const isAbility = animationType === "Ability"
+  const previewDuration = loadedScene?.previewDuration ?? 2000
+  const previewFrameDuration = 1000 / 60
+  const previewTimelineMax =
+    Math.floor((previewDuration + 1e-8) / previewFrameDuration) *
+    previewFrameDuration
 
   useEffect(() => {
     let active = true
@@ -207,6 +213,13 @@ export default function DebugSceneContainer({
     if (loaded && !mapLoading) debugScene.current?.setWeather(weather)
   }, [loaded, mapLoading, mapRevision, weather])
 
+  const seekTo = (time: number) => {
+    if (!loadedScene || !ready || !isAbility) return
+    setPaused(true)
+    loadedScene.setPreviewPaused(true)
+    setElapsed(loadedScene.seekPreviewTime(time))
+  }
+
   return (
     <div className="sprite-viewer-preview">
       <div className="sprite-viewer-playback my-box">
@@ -244,16 +257,14 @@ export default function DebugSceneContainer({
         >
           Next frame
         </button>
-        <label>
-          <input
-            type="checkbox"
-            id="preview-loop"
-            disabled={!isAbility}
-            checked={loop}
-            onChange={(event) => setLoop(event.currentTarget.checked)}
-          />
-          Loop
-        </label>
+        <Checkbox
+          id="preview-loop"
+          checked={loop}
+          onToggle={setLoop}
+          label="Loop ability"
+          isDark
+          disabled={!isAbility}
+        />
         <output
           id="preview-elapsed"
           aria-label="Cast elapsed time"
@@ -272,6 +283,27 @@ export default function DebugSceneContainer({
                 ? "Loading sprites..."
                 : statusMessage || "Loading preview..."}
         </span>
+        <div className="sprite-viewer-timeline">
+          <label htmlFor="preview-timeline">Timeline</label>
+          <input
+            type="range"
+            id="preview-timeline"
+            aria-label="Ability timeline"
+            min={0}
+            max={previewTimelineMax}
+            step={previewFrameDuration}
+            value={Math.min(
+              Math.round((elapsed ?? 0) / previewFrameDuration) *
+                previewFrameDuration,
+              previewTimelineMax
+            )}
+            disabled={!ready || !isAbility}
+            onChange={(event) => seekTo(+event.currentTarget.value)}
+          />
+          <output id="preview-timeline-time" aria-live="off">
+            {Math.round(elapsed ?? 0)} ms
+          </output>
+        </div>
       </div>
       {mapError && <p role="alert">Background error: {mapError}</p>}
       <div

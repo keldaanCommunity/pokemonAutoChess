@@ -125,6 +125,30 @@
   box-sizing: border-box;
 }
 
+.sprite-viewer-client-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.sprite-viewer-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.sprite-viewer-share label,
+.sprite-viewer-share input {
+  flex-basis: 100%;
+}
+
+#preview-payload-dirty {
+  margin: 0;
+  color: #ffd27f;
+}
+
 #preview-applied-data {
   max-height: 12em;
   overflow: auto;

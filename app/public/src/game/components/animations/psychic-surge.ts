@@ -1,5 +1,4 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
@@ -7,53 +6,13 @@ import type {
 import { distanceE } from "../../../../../utils/distance"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getSurgeAllies } from "./helpers"
 
 const CASTER_DURATION = 900
 const ALLY_DURATION = 780
-const MAX_ALLIES = 48
 const ORB_COLORS = [0x55e9f4, 0xffe34d, 0xf45be6]
 
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
-
-function isBoardCell(cell: unknown): cell is { x: number; y: number } {
-  if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell)) {
-    return false
-  }
-  const { x, y } = cell
-  return (
-    typeof x === "number" &&
-    Number.isInteger(x) &&
-    typeof y === "number" &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
-
-function getAllies(
-  data: AbilityAnimationArgs["data"],
-  casterX: number,
-  casterY: number
-) {
-  const cells: unknown = data.allies
-  if (!Array.isArray(cells)) return []
-
-  const seen = new Set<number>()
-  const allies: { x: number; y: number }[] = []
-  for (const cell of cells.slice(0, BOARD_WIDTH * BOARD_HEIGHT)) {
-    if (!isBoardCell(cell) || (cell.x === casterX && cell.y === casterY)) {
-      continue
-    }
-    const key = cell.y * BOARD_WIDTH + cell.x
-    if (seen.has(key)) continue
-    seen.add(key)
-    allies.push({ x: cell.x, y: cell.y })
-    if (allies.length >= MAX_ALLIES) break
-  }
-  return allies
-}
 
 function drawOrb(
   graphics: Phaser.GameObjects.Graphics,
@@ -235,7 +194,7 @@ export const psychicSurgeAnimation: AbilityAnimation = ({
     0
   )
 
-  getAllies(data, positionX, positionY).forEach((ally, index) => {
+  getSurgeAllies(data, positionX, positionY).forEach((ally, index) => {
     const [allyX, allyY] = transformEntityCoordinates(ally.x, ally.y, flip)
     const wave = Math.min(
       160,
