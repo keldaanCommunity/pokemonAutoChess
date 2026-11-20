@@ -1,24 +1,17 @@
 import { useTranslation } from "react-i18next"
 import { Tooltip } from "react-tooltip"
-import { STAGE_ATLAS_UNLOCKED } from "../../../../../config/game/atlas"
-import { GamePhaseState } from "../../../../../types/enum/Game"
-import { useAppSelector } from "../../../hooks"
+import { selectConnectionOrbAvailable, useAppSelector } from "../../../hooks"
 import store from "../../../stores"
 import { setAtlasVisible } from "../../../stores/GameStore"
 import { cc } from "../../utils/jsx"
 
 export function GameConnectionOrb() {
   const { t } = useTranslation()
-  const stageLevel = useAppSelector((state) => state.game.stageLevel)
-  const currentPhase = useAppSelector((state) => state.game.phase)
+  const orbAvailable = useAppSelector(selectConnectionOrbAvailable)
   const atlasVisible = useAppSelector((state) => state.game.atlasVisible)
   const emera = useAppSelector((state) => state.game.atlasManager.emera)
 
-  if (
-    stageLevel < STAGE_ATLAS_UNLOCKED ||
-    (stageLevel === STAGE_ATLAS_UNLOCKED &&
-      currentPhase === GamePhaseState.TOWN)
-  ) {
+  if (!orbAvailable) {
     return null
   }
 

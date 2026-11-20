@@ -5,6 +5,8 @@ import {
   useSelector
 } from "react-redux"
 import { getGameEventResetDate } from "../../config"
+import { STAGE_ATLAS_UNLOCKED } from "../../config/game/atlas"
+import { GamePhaseState } from "../../types/enum/Game"
 import type { AppDispatch, RootState } from "./stores"
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
@@ -18,6 +20,14 @@ export const selectSpectatedPlayer = (state: RootState) =>
 // the player that is linked to current user session (undefined when spectating another lobby)
 export const selectConnectedPlayer = (state: RootState) =>
   state.game.players.find((p) => p.id === state.network.uid)
+
+// the connection orb shows from the atlas stage, except during that stage's town
+export const selectConnectionOrbAvailable = (state: RootState) =>
+  !(
+    state.game.stageLevel < STAGE_ATLAS_UNLOCKED ||
+    (state.game.stageLevel === STAGE_ATLAS_UNLOCKED &&
+      state.game.phase === GamePhaseState.TOWN)
+  )
 
 export const useGameEventResetCountdown = () => {
   const now = new Date()
