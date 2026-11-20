@@ -29,17 +29,17 @@ export class OrderUpStrategy extends AbilityStrategy {
 
     if (pokemon.items.has(Item.TATSUGIRI_CURLY)) {
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
+        p.addMaxHP(50, p, 0, false)
         p.addAttack(8, p, 0, false)
       })
     } else if (pokemon.items.has(Item.TATSUGIRI_DROOPY)) {
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
+        p.addMaxHP(50, p, 0, false)
         p.addDefense(8, p, 0, false)
       })
     } else if (pokemon.items.has(Item.TATSUGIRI_STRETCHY)) {
       pokemonsEating.forEach((p) => {
-        p.addMaxHP(80, p, 0, false)
+        p.addMaxHP(50, p, 0, false)
         p.addSpeed(25, p, 0, false)
       })
     } else if (pokemon.player) {
