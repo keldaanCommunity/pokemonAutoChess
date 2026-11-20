@@ -95,13 +95,13 @@ export class DebugScene extends Phaser.Scene {
     })
     this.load.once("complete", () => {
       this.animationManager = new AnimationManager(this)
-      this.onComplete()
     })
   }
 
   create() {
     this.abilitiesVfxGroup = this.add.group()
     this.weatherManager = new WeatherManager(this)
+    this.onComplete()
   }
 
   updateSprite(

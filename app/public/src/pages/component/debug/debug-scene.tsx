@@ -37,8 +37,10 @@ export default function DebugSceneContainer({
   width?: number
 }) {
   const debugScene = useRef<DebugScene>(null)
+  const pendingDestruction = useRef<Promise<void>>(Promise.resolve())
 
-  const [loaded, setLoaded] = useState<boolean>(false)
+  const [loadedScene, setLoadedScene] = useState<DebugScene | null>(null)
+  const loaded = loadedScene !== null && loadedScene === debugScene.current
   const [mapLoading, setMapLoading] = useState(false)
   const [mapError, setMapError] = useState("")
   const [mapRevision, setMapRevision] = useState(0)
@@ -48,41 +50,58 @@ export default function DebugSceneContainer({
 
   useEffect(() => {
     let active = true
-    const scene = new DebugScene(
-      height,
-      width,
-      () => {
-        if (active) setStatusMessage(scene.loadingManager?.statusMessage ?? "")
-      },
-      () => {
-        if (active) setLoaded(true)
-      }
-    )
-    debugScene.current = scene
-    const game = new Phaser.Game({
-      type: +(preference("renderer") ?? Phaser.AUTO),
-      parent: "debug-scene",
-      pixelArt: true,
-      width,
-      height,
-      scene: [scene],
-      backgroundColor: "#61738a",
-      input: { mouse: { preventDefaultWheel: false } },
-      plugins: {
-        global: [
-          {
-            key: "rexMoveTo",
-            plugin: MoveToPlugin,
-            start: true
-          }
-        ]
-      }
+    let game: Phaser.Game | undefined
+    let scene: DebugScene | undefined
+    setLoadedScene(null)
+    // Phaser destroys games on the next frame; wait before sharing its plugin cache.
+    pendingDestruction.current.then(() => {
+      if (!active) return
+      const nextScene = new DebugScene(
+        height,
+        width,
+        () => {
+          if (active)
+            setStatusMessage(nextScene.loadingManager?.statusMessage ?? "")
+        },
+        () => {
+          if (active) setLoadedScene(nextScene)
+        }
+      )
+      scene = nextScene
+      debugScene.current = nextScene
+      game = new Phaser.Game({
+        type: +(preference("renderer") ?? Phaser.AUTO),
+        parent: "debug-scene",
+        pixelArt: true,
+        width,
+        height,
+        scene: [nextScene],
+        backgroundColor: "#61738a",
+        input: { mouse: { preventDefaultWheel: false } },
+        plugins: {
+          global: [
+            {
+              key: "rexMoveTo",
+              plugin: MoveToPlugin,
+              start: true
+            }
+          ]
+        }
+      })
     })
     return () => {
       active = false
-      clearInterval(scene.attackAnimInterval)
-      scene.weatherManager?.clearWeather()
-      game.destroy(true)
+      if (scene) {
+        clearInterval(scene.attackAnimInterval)
+        scene.weatherManager?.clearWeather()
+      }
+      if (game) {
+        const previousGame = game
+        pendingDestruction.current = new Promise<void>((resolve) => {
+          previousGame.events.once(Phaser.Core.Events.DESTROY, resolve)
+          previousGame.destroy(true)
+        })
+      }
       debugScene.current = null
     }
   }, [height, width])

@@ -1,5 +1,5 @@
 import { t } from "i18next"
-import type Phaser from "phaser"
+import Phaser from "phaser"
 import type { GameObjects } from "phaser"
 import pkg from "../../../../../package.json"
 import { MusicByTownEncounter, RegionDetails } from "../../../../config"
@@ -34,8 +34,21 @@ export default class LoadingManager {
       this.statusMessage = t("loading_complete")
     })
 
+    let active = true
+    let postloadTimeout: ReturnType<typeof setTimeout> | undefined
+    const cancelPostload = () => {
+      active = false
+      clearTimeout(postloadTimeout)
+      scene.events.off(Phaser.Scenes.Events.SHUTDOWN, cancelPostload)
+      scene.events.off(Phaser.Scenes.Events.DESTROY, cancelPostload)
+    }
+    scene.events.once(Phaser.Scenes.Events.SHUTDOWN, cancelPostload)
+    scene.events.once(Phaser.Scenes.Events.DESTROY, cancelPostload)
+
     this.preloadingPromise = this.preload()
-    this.preloadingPromise.then(() => setTimeout(() => this.postload(), 5000))
+    this.preloadingPromise.then(() => {
+      if (active) postloadTimeout = setTimeout(() => this.postload(), 5000)
+    })
   }
 
   async preload() {
