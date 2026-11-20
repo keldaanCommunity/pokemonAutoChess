@@ -2,18 +2,67 @@
   position: relative;
 }
 
-.sprite-viewer-sprite #debug-scene {
-  width: 800px;
-  height: 800px;
-  overflow: hidden;
+.sprite-viewer-preview {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 4px;
+  height: 100%;
+}
+
+.sprite-viewer-playback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.sprite-viewer-timeline {
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+#preview-timeline {
+  flex: 1;
+  min-width: 80px;
+}
+
+#preview-timeline-time {
+  min-width: 5em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#preview-elapsed {
+  min-width: 5em;
+  font-variant-numeric: tabular-nums;
+}
+
+.sprite-viewer-stage {
+  grid-row: 3;
+  overflow: auto;
+  container-type: size;
+  background-color: #61738a;
   border: var(--border-thick);
   border-radius: 4px;
 }
 
-.sprite-viewer-sprite #debug-scene canvas {
-  position: relative;
-  left: -580px;
-  top: 0;
+.sprite-viewer-stage.fit-board {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.sprite-viewer-stage.fit-board #debug-scene {
+  width: min(100cqw, calc(100cqh * var(--preview-aspect)));
+}
+
+.sprite-viewer-stage.fit-board canvas {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 #debug-scene #status-message {

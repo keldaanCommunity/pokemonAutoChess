@@ -6,7 +6,8 @@ import { AbilityStrategy } from "./ability-strategy"
 export class PsychicSurgeStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const allies: { x: number; y: number }[] = []
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -14,6 +15,7 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.PSYCHIC)
       ) {
+        allies.push({ x, y })
         ally.addShield(
           [20, 25, 30, 60][pokemon.stars - 1] ?? 60,
           pokemon,
@@ -21,6 +23,10 @@ export class PsychicSurgeStrategy extends AbilityStrategy {
           crit
         )
       }
+    })
+    pokemon.broadcastAbility({
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { allies }
     })
   }
 }

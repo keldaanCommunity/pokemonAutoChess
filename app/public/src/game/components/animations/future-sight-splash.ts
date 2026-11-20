@@ -7,14 +7,17 @@ export const futureSightSplashAnimation: AbilityAnimation = ({
   scene,
   targetX,
   targetY,
-  flip
+  flip,
+  delay = 0
 }) => {
   if (targetX < 0 || targetY < 0) return
+  const animationDelay = Math.max(0, delay)
   const [x, y] = transformEntityCoordinates(targetX, targetY, flip)
   const splash = scene.add
     .container(x, y - 16)
     .setDepth(DEPTH.ABILITY_BELOW_POKEMON)
     .setScale(0.625)
+    .setAlpha(animationDelay > 0 ? 0 : 1)
   scene.abilitiesVfxGroup?.add(splash)
 
   const glow = scene.add.ellipse(0, 0, 46, 38, 0xbb70ef, 0.35)
@@ -40,14 +43,21 @@ export const futureSightSplashAnimation: AbilityAnimation = ({
       y: Math.sin(angle) * 23,
       alpha: 0,
       duration: 350,
+      delay: animationDelay,
       ease: Phaser.Math.Easing.Quadratic.Out
     })
   }
 
   scene.tweens.chain({
     targets: splash,
+    delay: animationDelay,
     tweens: [
-      { scale: 1.25, duration: 120, ease: Phaser.Math.Easing.Quadratic.Out },
+      {
+        scale: 1.25,
+        alpha: 1,
+        duration: 120,
+        ease: Phaser.Math.Easing.Quadratic.Out
+      },
       {
         scale: 1.5,
         alpha: 0,

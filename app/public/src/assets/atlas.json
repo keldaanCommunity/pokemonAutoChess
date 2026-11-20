@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-19.9",
+  "version": "6.12.0.2026-11-20.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -308,13 +308,6 @@
         },
         "FAIRY_CRIT": {
           "frames": 16
-        },
-        "FAIRY_LOCK": {
-          "frames": 41,
-          "fps": 30
-        },
-        "FAIRY_WIND": {
-          "frames": 39
         },
         "FAKE_TEARS": {
           "frames": 18
@@ -1225,6 +1218,9 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
+        },
+        "FAIRY_WIND": {
+          "frames": 39
         }
       }
     },

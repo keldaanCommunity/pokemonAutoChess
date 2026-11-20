@@ -1,14 +1,15 @@
 import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
-import { useEffect, useRef, useState } from "react"
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react"
 import type { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
-import type { Status } from "../../../../../types/enum/Status"
 import { Weather } from "../../../../../types/enum/Weather"
 import { DebugScene } from "../../../game/scenes/debug-scene"
 import { preference } from "../../../preferences"
+import { Checkbox } from "../checkbox/checkbox"
 import type { AbilityPreviewOptions } from "./ability-preview"
+import type { PreviewStatus } from "./preview-scenario"
 import "./debug-scene.css"
 
 export default function DebugSceneContainer({
@@ -18,9 +19,9 @@ export default function DebugSceneContainer({
   shiny,
   status,
   preview,
-  replay,
   map,
   weather,
+  fitBoard,
   height = 100,
   width = 100
 }: {
@@ -28,11 +29,11 @@ export default function DebugSceneContainer({
   orientation?: Orientation
   animationType?: string
   shiny: boolean
-  status: Status | ""
+  status: PreviewStatus
   preview: AbilityPreviewOptions
-  replay: number
   map: DungeonPMDO | "plain"
   weather: Weather
+  fitBoard: boolean
   height?: number
   width?: number
 }) {
@@ -41,12 +42,50 @@ export default function DebugSceneContainer({
 
   const [loadedScene, setLoadedScene] = useState<DebugScene | null>(null)
   const loaded = loadedScene !== null && loadedScene === debugScene.current
-  const [mapLoading, setMapLoading] = useState(false)
+  const [settledMap, setSettledMap] = useState<{
+    scene: DebugScene
+    map: DungeonPMDO | "plain"
+  }>()
+  const mapLoading =
+    loaded && (settledMap?.scene !== loadedScene || settledMap.map !== map)
   const [mapError, setMapError] = useState("")
   const [mapRevision, setMapRevision] = useState(0)
   const mapQueue = useRef<Promise<void>>(Promise.resolve())
 
   const [statusMessage, setStatusMessage] = useState<string>("")
+  const spriteRequest = useMemo(
+    () => ({
+      pkm,
+      orientation,
+      animationType,
+      status,
+      shiny,
+      preview,
+      mapRevision,
+      loadedScene
+    }),
+    [
+      pkm,
+      orientation,
+      animationType,
+      status,
+      shiny,
+      preview,
+      mapRevision,
+      loadedScene
+    ]
+  )
+  const [readySprites, setReadySprites] = useState<typeof spriteRequest>()
+  const [paused, setPaused] = useState(false)
+  const [loop, setLoop] = useState(false)
+  const [elapsed, setElapsed] = useState<number | null>(null)
+  const ready = loaded && readySprites === spriteRequest && !mapLoading
+  const isAbility = animationType === "Ability"
+  const previewDuration = loadedScene?.previewDuration ?? 2000
+  const previewFrameDuration = 1000 / 60
+  const previewTimelineMax =
+    Math.floor((previewDuration + 1e-8) / previewFrameDuration) *
+    previewFrameDuration
 
   useEffect(() => {
     let active = true
@@ -108,36 +147,44 @@ export default function DebugSceneContainer({
 
   useEffect(() => {
     if (loaded) {
+      setElapsed(null)
+      const { pkm, orientation, animationType, status, shiny, preview } =
+        spriteRequest
       debugScene.current?.updateSprite(
         pkm,
         orientation,
         animationType,
         status,
         shiny,
-        preview
+        preview,
+        () => setReadySprites(spriteRequest)
       )
     }
-  }, [
-    pkm,
-    orientation,
-    animationType,
-    status,
-    loaded,
-    shiny,
-    preview,
-    mapRevision
-  ])
+  }, [loaded, spriteRequest])
 
   useEffect(() => {
-    if (loaded && replay > 0 && animationType === "Ability") {
-      debugScene.current?.replayAbility()
-    }
-  }, [replay, loaded, animationType])
+    if (loadedScene) loadedScene.setPreviewPaused(isAbility && paused && ready)
+  }, [loadedScene, isAbility, paused, ready])
+
+  useEffect(() => {
+    if (loadedScene) loadedScene.loopAbility = loop
+  }, [loadedScene, loop])
+
+  useEffect(() => {
+    if (!ready || !loadedScene || !isAbility) return
+    loadedScene.replayAbility()
+    setElapsed(0)
+  }, [ready, loadedScene, isAbility])
+
+  useEffect(() => {
+    if (!ready || !loadedScene || !isAbility || paused) return
+    const timer = setInterval(() => setElapsed(loadedScene.abilityElapsed), 50)
+    return () => clearInterval(timer)
+  }, [ready, loadedScene, isAbility, paused])
 
   useEffect(() => {
     if (!loaded) return
     let active = true
-    setMapLoading(true)
     setMapError("")
     mapQueue.current = mapQueue.current.then(async () => {
       if (!active || !debugScene.current) return
@@ -154,7 +201,7 @@ export default function DebugSceneContainer({
           setMapError(error instanceof Error ? error.message : String(error))
         }
       } finally {
-        if (active) setMapLoading(false)
+        if (active) setSettledMap({ scene, map })
       }
     })
     return () => {
@@ -166,15 +213,106 @@ export default function DebugSceneContainer({
     if (loaded && !mapLoading) debugScene.current?.setWeather(weather)
   }, [loaded, mapLoading, mapRevision, weather])
 
+  const seekTo = (time: number) => {
+    if (!loadedScene || !ready || !isAbility) return
+    setPaused(true)
+    loadedScene.setPreviewPaused(true)
+    setElapsed(loadedScene.seekPreviewTime(time))
+  }
+
   return (
-    <div id="debug-scene">
-      {!loaded && <p id="status-message">{statusMessage}</p>}
-      {mapLoading && <p id="status-message">Loading preview background...</p>}
-      {mapError && (
-        <p role="alert" id="status-message">
-          Background error: {mapError}
-        </p>
-      )}
+    <div className="sprite-viewer-preview">
+      <div className="sprite-viewer-playback my-box">
+        <button
+          type="button"
+          id="preview-replay"
+          disabled={!ready || !isAbility}
+          onClick={() => {
+            loadedScene?.replayAbility()
+            setElapsed(0)
+          }}
+        >
+          Replay ability
+        </button>
+        <button
+          type="button"
+          id="preview-pause"
+          disabled={!ready || !isAbility}
+          onClick={() => {
+            if (loadedScene) setElapsed(loadedScene.abilityElapsed)
+            setPaused(!paused)
+          }}
+        >
+          {paused ? "Resume" : "Pause"}
+        </button>
+        <button
+          type="button"
+          id="preview-step"
+          disabled={!ready || !isAbility || !paused}
+          onClick={() => {
+            if (!loadedScene) return
+            loadedScene.stepPreviewFrame()
+            setElapsed(loadedScene.abilityElapsed)
+          }}
+        >
+          Next frame
+        </button>
+        <Checkbox
+          id="preview-loop"
+          checked={loop}
+          onToggle={setLoop}
+          label="Loop ability"
+          isDark
+          disabled={!isAbility}
+        />
+        <output
+          id="preview-elapsed"
+          aria-label="Cast elapsed time"
+          aria-live="off"
+        >
+          {elapsed === null ? "-" : `${Math.round(elapsed)} ms`}
+        </output>
+        <span id="preview-ready" role="status" data-ready={ready}>
+          {ready
+            ? mapError
+              ? "Ready (plain background)"
+              : "Ready"
+            : mapLoading
+              ? "Loading preview background..."
+              : loaded
+                ? "Loading sprites..."
+                : statusMessage || "Loading preview..."}
+        </span>
+        <div className="sprite-viewer-timeline">
+          <label htmlFor="preview-timeline">Timeline</label>
+          <input
+            type="range"
+            id="preview-timeline"
+            aria-label="Ability timeline"
+            min={0}
+            max={previewTimelineMax}
+            step={previewFrameDuration}
+            value={Math.min(
+              Math.round((elapsed ?? 0) / previewFrameDuration) *
+                previewFrameDuration,
+              previewTimelineMax
+            )}
+            disabled={!ready || !isAbility}
+            onChange={(event) => seekTo(+event.currentTarget.value)}
+          />
+          <output id="preview-timeline-time" aria-live="off">
+            {Math.round(elapsed ?? 0)} ms
+          </output>
+        </div>
+      </div>
+      {mapError && <p role="alert">Background error: {mapError}</p>}
+      <div
+        className={`sprite-viewer-stage${fitBoard ? " fit-board" : ""}`}
+        id="preview-stage"
+        style={{ "--preview-aspect": width / height } as CSSProperties}
+      >
+        <div id="debug-scene" style={{ aspectRatio: `${width} / ${height}` }} />
+      </div>
     </div>
   )
 }

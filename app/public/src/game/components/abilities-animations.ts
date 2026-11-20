@@ -43,22 +43,29 @@ import {
   auroraVeilAnimation,
   blizzardAnimation,
   darkAuraAnimation,
+  electricSurgeAnimation,
+  fairyLockAnimation,
+  fairyWindAnimation,
   featherAnimation,
   fishiousRendAnimation,
   forecastAnimation,
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
+  grassySurgeAnimation,
+  heartSwapAnimation,
   hiddenPowerAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
   makeItRainAnimation,
+  mistySurgeAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
   paydayAnimation,
   powerWhipAnimation,
   precipiceBladesAnimation,
+  psychicSurgeAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
@@ -66,6 +73,7 @@ import {
   storedPowerAnimation,
   storedPowerHitAnimation,
   storedPowerTargetAnimation,
+  takeHeartAnimation,
   tidalWaveAnimation
 } from "./animations"
 import {
@@ -630,7 +638,7 @@ export const AbilitiesAnimations: {
     tint: 0xffc0ff
   }),
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
-  [Ability.FAIRY_LOCK]: onTargetScale1,
+  [Ability.FAIRY_LOCK]: fairyLockAnimation,
   [Ability.STEAM_ERUPTION]: onTargetScale2,
   [Ability.SEARING_SHOT]: onCaster({
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -764,37 +772,13 @@ export const AbilitiesAnimations: {
   ],
   [Ability.CLANGOROUS_SOUL]: onCasterScale2,
   [Ability.GROWL]: onCaster({ oriented: true, rotation: -Math.PI / 2 }),
-  [Ability.FAIRY_WIND]: onCasterScale2,
-  [Ability.TAKE_HEART]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xc0c0ff
-  }),
-  [Ability.HEART_SWAP]: [
-    onCaster({
-      ability: Ability.FAIRY_WIND,
-      tint: 0xc0c0ff
-    }),
-    onTarget({
-      ability: Ability.FAIRY_WIND,
-      tint: 0xc0c0ff
-    })
-  ],
-  [Ability.GRASSY_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0x80ff80
-  }),
-  [Ability.ELECTRIC_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xffff80
-  }),
-  [Ability.PSYCHIC_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xc050ff
-  }),
-  [Ability.MISTY_SURGE]: onCaster({
-    ability: Ability.FAIRY_WIND,
-    tint: 0xffa0ff
-  }),
+  [Ability.FAIRY_WIND]: fairyWindAnimation,
+  [Ability.TAKE_HEART]: takeHeartAnimation,
+  [Ability.HEART_SWAP]: heartSwapAnimation,
+  [Ability.GRASSY_SURGE]: grassySurgeAnimation,
+  [Ability.ELECTRIC_SURGE]: electricSurgeAnimation,
+  [Ability.PSYCHIC_SURGE]: psychicSurgeAnimation,
+  [Ability.MISTY_SURGE]: mistySurgeAnimation,
   [Ability.RELIC_SONG]: onCasterScale2,
   [Ability.SING]: poppingIcon({ ability: Ability.RELIC_SONG, maxScale: 2 }),
   [Ability.DISARMING_VOICE]: onCaster({ ability: Ability.RELIC_SONG }),

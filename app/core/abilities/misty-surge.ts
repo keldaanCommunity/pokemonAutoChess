@@ -9,6 +9,7 @@ export class MistySurgeStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const ppGain = [25, 25, 25, 50][pokemon.stars - 1] ?? 50
     const hpGain = [25, 25, 25, 50][pokemon.stars - 1] ?? 50
+    const allies: { x: number; y: number }[] = []
     board.forEach((x: number, y: number, ally: PokemonEntity | undefined) => {
       if (
         ally &&
@@ -16,9 +17,14 @@ export class MistySurgeStrategy extends AbilityStrategy {
         pokemon.team === ally.team &&
         ally.types.has(Synergy.FAIRY)
       ) {
+        allies.push({ x, y })
         ally.addPP(ppGain, pokemon, 1, crit)
         ally.handleHeal(hpGain, pokemon, 1, crit)
       }
+    })
+    pokemon.broadcastAbility({
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { allies }
     })
   }
 }
