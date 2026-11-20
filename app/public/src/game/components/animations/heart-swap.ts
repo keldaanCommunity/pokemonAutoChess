@@ -10,7 +10,9 @@ import { DEPTH } from "../../depths"
 const OUTBOUND_DURATION = 360
 const IMPACT_DURATION = 160
 const RETURN_DURATION = 360
-const DURATION = OUTBOUND_DURATION + IMPACT_DURATION + RETURN_DURATION
+const RECEIVE_DURATION = 180
+const RETURN_END = OUTBOUND_DURATION + IMPACT_DURATION + RETURN_DURATION
+const DURATION = RETURN_END + RECEIVE_DURATION
 const ORB_COLORS = [0xff77c8, 0xffc56a, 0xf8f36e, 0x79f0bb, 0x73caff, 0xc98bff]
 const WHITE = 0xfffaff
 
@@ -34,12 +36,6 @@ function drawOrb(
 ) {
   const radius = (12 + Math.sin(time * 0.018) * 1.2) * 1.5
   const rotation = time * 0.0015
-  graphics.fillStyle(0xc493ff, alpha * 0.055)
-  graphics.fillCircle(x, y, radius * 2.8)
-  graphics.fillStyle(0x8deaff, alpha * 0.1)
-  graphics.fillCircle(x, y, radius * 2)
-  graphics.fillStyle(0x9b85ff, alpha * 0.16)
-  graphics.fillCircle(x, y, radius * 1.28)
   graphics.fillStyle(0x71dcff, alpha * 0.48)
   graphics.fillCircle(x, y, radius * 0.94)
 
@@ -75,6 +71,9 @@ function drawOrb(
     }
     graphics.strokePath()
   }
+
+  graphics.lineStyle(1, 0xc8fbff, alpha * 0.5)
+  graphics.strokeCircle(x, y, radius * 0.94)
 }
 
 function drawWindTrail(
@@ -169,6 +168,31 @@ function drawImpact(
   }
 }
 
+function drawReceiveHalo(
+  graphics: GameObjects.Graphics,
+  x: number,
+  y: number,
+  progress: number,
+  time: number
+) {
+  const fade = 1 - progress
+  const pulse = Math.sin(progress * Math.PI)
+  graphics.fillStyle(0xd9b7ff, fade * 0.1)
+  graphics.fillEllipse(x, y, 42 + pulse * 10, 54 + pulse * 12)
+  graphics.lineStyle(2, 0xffc4ec, fade * 0.82)
+  graphics.strokeEllipse(x, y, 36 + progress * 30, 48 + progress * 24)
+  graphics.lineStyle(1.5, 0x9feeff, fade * 0.72)
+  graphics.strokeEllipse(x, y, 28 + progress * 22, 40 + progress * 18)
+
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2 - time * 0.003
+    const sparkleX = x + Math.cos(angle) * (22 + progress * 13)
+    const sparkleY = y + Math.sin(angle) * (28 + progress * 12)
+    graphics.fillStyle(i % 2 ? 0xffc4ec : WHITE, fade * 0.9)
+    graphics.fillCircle(sparkleX, sparkleY, 2.2 * fade)
+  }
+}
+
 export const heartSwapAnimation: AbilityAnimation = ({
   scene,
   positionX,
@@ -227,6 +251,7 @@ export const heartSwapAnimation: AbilityAnimation = ({
       let travelProgress: number
       let returning = false
       let orbAlpha = 1
+      let receiveProgress = 0
       if (time < OUTBOUND_DURATION) {
         travelProgress = Phaser.Math.Easing.Cubic.InOut(
           time / OUTBOUND_DURATION
@@ -243,16 +268,19 @@ export const heartSwapAnimation: AbilityAnimation = ({
           1,
           time
         )
-      } else {
+      } else if (time < RETURN_END) {
         returning = true
         travelProgress = Phaser.Math.Easing.Cubic.InOut(
           (time - OUTBOUND_DURATION - IMPACT_DURATION) / RETURN_DURATION
         )
         ;[orbX, orbY] = pathAt(1 - travelProgress)
-      }
-
-      if (time > DURATION - 120) {
-        orbAlpha = 1 - (time - (DURATION - 120)) / 120
+      } else {
+        travelProgress = 1
+        receiveProgress = (time - RETURN_END) / RECEIVE_DURATION
+        orbAlpha = 1 - Phaser.Math.Easing.Cubic.Out(receiveProgress)
+        orbX = casterX
+        orbY = casterY
+        drawReceiveHalo(graphics, casterX, casterY, receiveProgress, time)
       }
 
       if (time < OUTBOUND_DURATION) {
@@ -266,12 +294,6 @@ export const heartSwapAnimation: AbilityAnimation = ({
         )
       }
       drawOrb(graphics, orbX, orbY, time, orbAlpha)
-
-      if (returning && travelProgress > 0.88) {
-        const arrival = (travelProgress - 0.88) / 0.12
-        graphics.lineStyle(1.5, 0xffc4ec, (1 - arrival) * 0.75)
-        graphics.strokeCircle(casterX, casterY, 10 + arrival * 18)
-      }
     },
     onComplete: () => graphics.destroy()
   })
