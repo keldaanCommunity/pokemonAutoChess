@@ -124,10 +124,14 @@ export class DebugScene extends Phaser.Scene {
 
   update(_time: number, delta: number) {
     if (this.abilityElapsed === null || !this.pokemonSprite) return
-    this.abilityElapsed += delta
-    if (this.loopAbility && this.abilityElapsed >= this.previewDuration) {
+
+    const elapsed = this.abilityElapsed + delta
+    if (this.loopAbility && elapsed >= this.previewDuration) {
       this.replayAbility()
+      return
     }
+
+    this.abilityElapsed = Math.min(elapsed, this.previewDuration)
   }
 
   get previewDuration() {

@@ -428,6 +428,13 @@ export function SpriteDebug() {
                 Target + adjacent
               </button>
               <button
+                id="preview-preset-enemies"
+                type="button"
+                onClick={() => applyPreset("enemies")}
+              >
+                Adjacent enemies
+              </button>
+              <button
                 id="preview-preset-allies"
                 type="button"
                 onClick={() => applyPreset("allies")}
@@ -527,8 +534,8 @@ export function SpriteDebug() {
               <summary>Ability data (JSON)</summary>
               <small>
                 Presets use the current board positions; reapply after moving
-                units. No affected targets keeps the selected target as an aim
-                point.
+                units. Adjacent enemies is centered on the caster. The selected
+                target remains visible independently of the affected targets.
               </small>
               <label htmlFor="preview-payload">
                 Ability data (JSON object)

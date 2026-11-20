@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-20.1",
+  "version": "6.12.0.2026-11-20.6",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -116,9 +116,6 @@
         "BRICK_BREAK": {
           "frames": 14
         },
-        "BUG_BUZZ": {
-          "frames": 29
-        },
         "BULK_UP": {
           "frames": 9
         },
@@ -209,9 +206,6 @@
         "DEFENSE_ORDER": {
           "frames": 32
         },
-        "DIAMOND_STORM": {
-          "frames": 17
-        },
         "DIG": {
           "frames": 28
         },
@@ -266,9 +260,6 @@
         "DYNAMAX_CANNON": {
           "frames": 39
         },
-        "DYNAMIC_PUNCH": {
-          "frames": 13
-        },
         "ECHO": {
           "frames": 23
         },
@@ -311,10 +302,6 @@
         },
         "FAKE_TEARS": {
           "frames": 18
-        },
-        "FICKLE_BEAM": {
-          "frames": 20,
-          "fps": 40
         },
         "FIELD_DEATH": {
           "frames": 9
@@ -1219,8 +1206,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "FAIRY_WIND": {
-          "frames": 39
+        "DYNAMIC_PUNCH": {
+          "frames": 13
         }
       }
     },

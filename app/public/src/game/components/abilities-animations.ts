@@ -42,11 +42,15 @@ import {
   aquaSwirlAnimation,
   auroraVeilAnimation,
   blizzardAnimation,
+  bugBuzzAnimation,
   darkAuraAnimation,
+  diamondStormAnimation,
+  dynamicPunchAnimation,
   electricSurgeAnimation,
   fairyLockAnimation,
   fairyWindAnimation,
   featherAnimation,
+  fickleBeamAnimation,
   fishiousRendAnimation,
   forecastAnimation,
   futureSightCastAnimation,
@@ -66,6 +70,7 @@ import {
   powerWhipAnimation,
   precipiceBladesAnimation,
   psychicSurgeAnimation,
+  pummelingPaybackAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
@@ -130,7 +135,7 @@ export const AbilitiesAnimations: {
   ["PUFF_GREEN"]: onTargetScale2,
   ["PUFF_BROWN"]: onTargetScale2,
   [Ability.DARK_AURA]: darkAuraAnimation,
-  [Ability.DIAMOND_STORM]: onCasterScale2,
+  [Ability.DIAMOND_STORM]: diamondStormAnimation,
   [Ability.THRASH]: onCasterScale2,
   [Ability.HELPING_HAND]: onCasterScale2,
   [Ability.ENCORE]: onCaster({ ability: Ability.HELPING_HAND }),
@@ -280,7 +285,7 @@ export const AbilitiesAnimations: {
   ["DEFEND_ORDER"]: onCasterScale2,
   ["FOSSIL_RESURRECT"]: onCasterScale2,
   ["LANDS_WRATH/hit"]: onCasterScale2,
-  [Ability.BUG_BUZZ]: onTargetScale2,
+  [Ability.BUG_BUZZ]: bugBuzzAnimation,
   [Ability.VENOSHOCK]: onTarget({ scale: 2, origin: [0.5, 1] }),
   [Ability.LEECH_LIFE]: onTargetScale2,
   [Ability.THIEF]: onTargetScale2,
@@ -309,7 +314,7 @@ export const AbilitiesAnimations: {
     scale: 2
   }),
   [Ability.BRAVE_BIRD]: onTargetScale2,
-  [Ability.DYNAMIC_PUNCH]: onTargetScale2,
+  [Ability.DYNAMIC_PUNCH]: dynamicPunchAnimation,
   [Ability.ELECTRO_WEB]: onTargetScale2,
   [Ability.PSYSHIELD_BASH]: onTargetScale2,
   [Ability.LIQUIDATION]: onTargetScale2,
@@ -575,11 +580,7 @@ export const AbilitiesAnimations: {
     tint: 0xa0c020
   }),
   [Ability.CRUNCH]: onTarget({ ability: Ability.BITE, scale: 3 }),
-  [Ability.PUMMELING_PAYBACK]: onTarget({
-    ability: Ability.BITE,
-    scale: 3,
-    tint: 0xc89d7c
-  }),
+  [Ability.PUMMELING_PAYBACK]: pummelingPaybackAnimation,
   [Ability.CAVERNOUS_CHOMP]: onTarget({
     ability: Ability.BITE,
     scale: 2,
@@ -1280,7 +1281,7 @@ export const AbilitiesAnimations: {
     duration: 400,
     hitAnim: onTarget({ ability: "PUFF_RED" })
   }),
-  [Ability.FICKLE_BEAM]: projectile({ duration: 400 }),
+  [Ability.FICKLE_BEAM]: fickleBeamAnimation,
   [Ability.POLLEN_PUFF]: projectile({
     ability: Ability.HEAL_ORDER,
     duration: 1000

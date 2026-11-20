@@ -19,9 +19,27 @@
 .sprite-viewer-timeline {
   display: flex;
   flex: 1 0 100%;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   min-width: 0;
+}
+
+.sprite-viewer-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sprite-viewer-zoom-controls output {
+  min-width: 4em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sprite-viewer-zoom-hint {
+  color: var(--color-fg-secondary);
+  font-size: 0.85em;
 }
 
 #preview-timeline {
@@ -33,6 +51,16 @@
   min-width: 5em;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+.sprite-viewer-timeline-seek {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#preview-seek-ms {
+  width: 5em;
 }
 
 #preview-elapsed {
@@ -52,17 +80,29 @@
 .sprite-viewer-stage.fit-board {
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow: auto;
+}
+
+.sprite-viewer-stage.fit-board.zoomed {
+  place-items: start;
 }
 
 .sprite-viewer-stage.fit-board #debug-scene {
-  width: min(100cqw, calc(100cqh * var(--preview-aspect)));
+  width: min(
+    calc(100cqw * var(--preview-zoom)),
+    calc(100cqh * var(--preview-aspect) * var(--preview-zoom))
+  );
 }
 
-.sprite-viewer-stage.fit-board canvas {
+.sprite-viewer-stage:not(.fit-board) #debug-scene {
+  width: var(--preview-width);
+  height: var(--preview-height);
+}
+
+.sprite-viewer-stage canvas {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 #debug-scene #status-message {
