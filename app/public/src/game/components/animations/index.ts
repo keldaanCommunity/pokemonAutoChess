@@ -6,6 +6,10 @@ export { blizzardAnimation } from "./blizzard"
 export { bugBuzzAnimation } from "./bug-buzz"
 export { darkAuraAnimation } from "./dark-aura"
 export { diamondStormAnimation } from "./diamond-storm"
+export {
+  dynamaxCannonAnimation,
+  dynamaxCannonChargeAnimation
+} from "./dynamax-cannon"
 export { dynamicPunchAnimation } from "./dynamic-punch"
 export { electricSurgeAnimation } from "./electric-surge"
 export { fairyLockAnimation } from "./fairy-lock"

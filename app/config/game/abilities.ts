@@ -5,6 +5,11 @@ const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
 
 export const AbilityConfigs = {
+  [Ability.DYNAMAX_CANNON]: {
+    chargeDuration: 600,
+    beamDuration: 350,
+    fadeDuration: 200
+  },
   [Ability.HIDDEN_POWER_S]: {
     tidalWaveLevel: unownSTidalWaveLevel,
     healingPercent: unownSTidalWaveLevel * tidalWave.healingPercentPerLevel,

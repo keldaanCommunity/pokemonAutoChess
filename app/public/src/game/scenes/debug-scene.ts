@@ -8,6 +8,7 @@ import {
   getRegionTint,
   RegionDetails
 } from "../../../../config"
+import { AbilityConfigs } from "../../../../config/game/abilities"
 import type { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import {
@@ -724,7 +725,15 @@ export class DebugScene extends Phaser.Scene {
         ap: 0,
         data: this.abilityPreview?.data ?? {}
       }
-      displayAbility(args)
+      if (caster.pokemon.skill === Ability.DYNAMAX_CANNON) {
+        displayAbility({ ...args, ability: "DYNAMAX_CANNON_CHARGE" })
+        displayAbility({
+          ...args,
+          delay: AbilityConfigs[Ability.DYNAMAX_CANNON].chargeDuration
+        })
+      } else {
+        displayAbility(args)
+      }
       if (caster.pokemon.skill === Ability.STORED_POWER) {
         displayAbility({
           ...args,

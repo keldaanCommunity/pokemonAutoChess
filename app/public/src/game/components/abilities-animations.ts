@@ -45,6 +45,8 @@ import {
   bugBuzzAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  dynamaxCannonAnimation,
+  dynamaxCannonChargeAnimation,
   dynamicPunchAnimation,
   electricSurgeAnimation,
   fairyLockAnimation,
@@ -399,11 +401,8 @@ export const AbilitiesAnimations: {
       hitAnim: onTarget({ ability: "SMOKE_BALL", scale: 2 })
     })(args)
   ),
-  [Ability.DYNAMAX_CANNON]: onCaster({
-    origin: [0.5, 0],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.DYNAMAX_CANNON]: dynamaxCannonAnimation,
+  ["DYNAMAX_CANNON_CHARGE"]: dynamaxCannonChargeAnimation,
   [Ability.MOONGEIST_BEAM]: onCaster({
     origin: [0.5, 0],
     oriented: true,

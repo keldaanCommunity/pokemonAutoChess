@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-20.6",
+  "version": "6.12.0.2026-11-21.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -256,9 +256,6 @@
         },
         "DRUM_BEATING": {
           "frames": 12
-        },
-        "DYNAMAX_CANNON": {
-          "frames": 39
         },
         "ECHO": {
           "frames": 23
@@ -1206,8 +1203,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "DYNAMIC_PUNCH": {
-          "frames": 13
+        "DYNAMAX_CANNON": {
+          "frames": 39
         }
       }
     },
