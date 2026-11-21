@@ -804,7 +804,10 @@ export const AbilitiesAnimations: {
     positionOffset: [0, -60],
     ability: Ability.ATTRACT
   }),
-  [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
+  [Ability.CONFUSING_MIND]: [
+    onTarget({ scale: 2, ability: Ability.METRONOME }),
+    onCaster({ scale: 2, ability: Ability.METRONOME })
+  ],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.FIRE_LASH]: onCaster({
     ability: Ability.FISHIOUS_REND,

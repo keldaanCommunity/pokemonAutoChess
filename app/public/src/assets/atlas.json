@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-21.1",
+  "version": "6.12.0.2026-11-21.2",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -143,9 +143,6 @@
         },
         "CLOSE_COMBAT": {
           "frames": 7
-        },
-        "CONFUSING_MIND": {
-          "frames": 37
         },
         "CORE_ENFORCER": {
           "frames": 7
@@ -1200,8 +1197,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "HIGH_JUMP_KICK": {
-          "frames": 21
+        "CONFUSING_MIND": {
+          "frames": 37
         }
       }
     },
