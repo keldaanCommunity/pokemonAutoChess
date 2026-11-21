@@ -5,6 +5,7 @@ export { auroraVeilAnimation } from "./aurora-veil"
 export { behemothBladeAnimation } from "./behemoth-blade"
 export { blizzardAnimation } from "./blizzard"
 export { bugBuzzAnimation } from "./bug-buzz"
+export { closeCombatAnimation } from "./close-combat"
 export { darkAuraAnimation } from "./dark-aura"
 export { diamondStormAnimation } from "./diamond-storm"
 export {

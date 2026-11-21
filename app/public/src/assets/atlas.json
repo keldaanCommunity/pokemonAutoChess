@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-21.3",
+  "version": "6.12.0.2026-11-21.4",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -140,9 +140,6 @@
         },
         "CLANGOROUS_SOUL": {
           "frames": 18
-        },
-        "CLOSE_COMBAT": {
-          "frames": 7
         },
         "CORE_ENFORCER": {
           "frames": 7
@@ -1193,8 +1190,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "MOONGEIST_BEAM": {
-          "frames": 6
+        "CLOSE_COMBAT": {
+          "frames": 7
         }
       }
     },
