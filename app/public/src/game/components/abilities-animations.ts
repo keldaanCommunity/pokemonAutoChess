@@ -61,6 +61,7 @@ import {
   grassySurgeAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
+  highJumpKickAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
@@ -794,7 +795,7 @@ export const AbilitiesAnimations: {
     maxScale: 3,
     startPositionOffset: [0, -50]
   }),
-  [Ability.HIGH_JUMP_KICK]: onTargetScale2,
+  [Ability.HIGH_JUMP_KICK]: highJumpKickAnimation,
   [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),

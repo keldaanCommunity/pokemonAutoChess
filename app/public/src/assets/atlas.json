@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-21.0",
+  "version": "6.12.0.2026-11-21.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -458,9 +458,6 @@
         },
         "HEX": {
           "frames": 37
-        },
-        "HIGH_JUMP_KICK": {
-          "frames": 21
         },
         "HURRICANE": {
           "frames": 52,
@@ -1203,8 +1200,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "DYNAMAX_CANNON": {
-          "frames": 39
+        "HIGH_JUMP_KICK": {
+          "frames": 21
         }
       }
     },
