@@ -74,6 +74,7 @@ import {
   precipiceBladesAnimation,
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
+  shellSmashAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
@@ -796,10 +797,10 @@ export const AbilitiesAnimations: {
     startPositionOffset: [0, -50]
   }),
   [Ability.HIGH_JUMP_KICK]: highJumpKickAnimation,
-  [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
+  [Ability.LUNGE]: onTarget({ ability: Ability.CEASELESS_EDGE }),
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),
-  [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
+  [Ability.SHELL_SMASH]: shellSmashAnimation,
   [Ability.SONG_OF_DESIRE]: onTarget({
     positionOffset: [0, -60],
     ability: Ability.ATTRACT
