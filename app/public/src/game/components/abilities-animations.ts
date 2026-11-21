@@ -41,6 +41,7 @@ import {
   aquaJetAnimation,
   aquaSwirlAnimation,
   auroraVeilAnimation,
+  behemothBladeAnimation,
   blizzardAnimation,
   bugBuzzAnimation,
   darkAuraAnimation,
@@ -632,13 +633,7 @@ export const AbilitiesAnimations: {
     rotation: -Math.PI / 2,
     scale: 2
   }),
-  [Ability.BEHEMOTH_BLADE]: onCaster({
-    ability: Ability.VOLT_SWITCH,
-    origin: [0.5, 0],
-    oriented: true,
-    rotation: -Math.PI / 2,
-    tint: 0xffc0ff
-  }),
+  [Ability.BEHEMOTH_BLADE]: behemothBladeAnimation,
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: fairyLockAnimation,
   [Ability.STEAM_ERUPTION]: onTargetScale2,
