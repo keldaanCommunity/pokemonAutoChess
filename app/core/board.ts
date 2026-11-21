@@ -321,6 +321,16 @@ export class Board {
     return pokemonCoordinates
   }
 
+  /** Projects a ray toward the target; the endpoint can lie outside the board. */
+  getLineEnd(x0: number, y0: number, x1: number, y1: number) {
+    const angleToTarget = Math.atan2(y1 - y0, x1 - x0)
+    const distance = 12 // sufficiently large to cover the whole board in diagonal
+    return {
+      finalX: Math.round(x0 + distance * Math.cos(angleToTarget)),
+      finalY: Math.round(y0 + distance * Math.sin(angleToTarget))
+    }
+  }
+
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
     const cells: Cell[] = []
@@ -995,16 +1005,11 @@ export function effectInLine(
   target: PokemonEntity,
   effect: (cell: Cell) => void
 ) {
-  const angleToTarget = Math.atan2(
-    target.positionY - pokemon.positionY,
-    target.positionX - pokemon.positionX
-  )
-  const distance = 12 // sufficiently large to cover the whole board in diagonal
-  const finalX = Math.round(
-    pokemon.positionX + distance * Math.cos(angleToTarget)
-  )
-  const finalY = Math.round(
-    pokemon.positionY + distance * Math.sin(angleToTarget)
+  const { finalX, finalY } = board.getLineEnd(
+    pokemon.positionX,
+    pokemon.positionY,
+    target.positionX,
+    target.positionY
   )
   board
     .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)

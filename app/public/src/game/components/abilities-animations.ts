@@ -45,6 +45,8 @@ import {
   bugBuzzAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  dynamaxCannonAnimation,
+  dynamaxCannonChargeAnimation,
   dynamicPunchAnimation,
   electricSurgeAnimation,
   fairyLockAnimation,
@@ -59,6 +61,7 @@ import {
   grassySurgeAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
+  highJumpKickAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   lunarBlessingAnimation,
@@ -71,6 +74,7 @@ import {
   precipiceBladesAnimation,
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
+  shellSmashAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
@@ -399,11 +403,8 @@ export const AbilitiesAnimations: {
       hitAnim: onTarget({ ability: "SMOKE_BALL", scale: 2 })
     })(args)
   ),
-  [Ability.DYNAMAX_CANNON]: onCaster({
-    origin: [0.5, 0],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.DYNAMAX_CANNON]: dynamaxCannonAnimation,
+  ["DYNAMAX_CANNON_CHARGE"]: dynamaxCannonChargeAnimation,
   [Ability.MOONGEIST_BEAM]: onCaster({
     origin: [0.5, 0],
     oriented: true,
@@ -795,16 +796,19 @@ export const AbilitiesAnimations: {
     maxScale: 3,
     startPositionOffset: [0, -50]
   }),
-  [Ability.HIGH_JUMP_KICK]: onTargetScale2,
-  [Ability.LUNGE]: onTarget({ ability: Ability.HIGH_JUMP_KICK }),
+  [Ability.HIGH_JUMP_KICK]: highJumpKickAnimation,
+  [Ability.LUNGE]: onTarget({ ability: Ability.CEASELESS_EDGE }),
   [Ability.TROP_KICK]: onTargetScale2,
   [Ability.SHELL_TRAP]: onCaster({ ability: Ability.COUNTER }),
-  [Ability.SHELL_SMASH]: onCaster({ ability: Ability.COUNTER }),
+  [Ability.SHELL_SMASH]: shellSmashAnimation,
   [Ability.SONG_OF_DESIRE]: onTarget({
     positionOffset: [0, -60],
     ability: Ability.ATTRACT
   }),
-  [Ability.CONFUSING_MIND]: [onTargetScale2, onCasterScale2],
+  [Ability.CONFUSING_MIND]: [
+    onTarget({ scale: 2, ability: Ability.METRONOME }),
+    onCaster({ scale: 2, ability: Ability.METRONOME })
+  ],
   [Ability.DOUBLE_SHOCK]: [onTargetScale1, onCasterScale1],
   [Ability.FIRE_LASH]: onCaster({
     ability: Ability.FISHIOUS_REND,

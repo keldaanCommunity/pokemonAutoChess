@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-20.6",
+  "version": "6.12.0.2026-11-21.2",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -144,9 +144,6 @@
         "CLOSE_COMBAT": {
           "frames": 7
         },
-        "CONFUSING_MIND": {
-          "frames": 37
-        },
         "CORE_ENFORCER": {
           "frames": 7
         },
@@ -256,9 +253,6 @@
         },
         "DRUM_BEATING": {
           "frames": 12
-        },
-        "DYNAMAX_CANNON": {
-          "frames": 39
         },
         "ECHO": {
           "frames": 23
@@ -461,9 +455,6 @@
         },
         "HEX": {
           "frames": 37
-        },
-        "HIGH_JUMP_KICK": {
-          "frames": 21
         },
         "HURRICANE": {
           "frames": 52,
@@ -1206,8 +1197,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "DYNAMIC_PUNCH": {
-          "frames": 13
+        "CONFUSING_MIND": {
+          "frames": 37
         }
       }
     },
