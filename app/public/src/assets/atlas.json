@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-21.2",
+  "version": "6.12.0.2026-11-21.3",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -625,10 +625,6 @@
         "MOONBLAST": {
           "frames": 11
         },
-        "MOONGEIST_BEAM": {
-          "frames": 6,
-          "repeat": 3
-        },
         "MOON_DREAM": {
           "frames": 5,
           "fps": 8
@@ -1197,8 +1193,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "CONFUSING_MIND": {
-          "frames": 37
+        "MOONGEIST_BEAM": {
+          "frames": 6
         }
       }
     },

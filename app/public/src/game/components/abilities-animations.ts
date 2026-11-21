@@ -69,6 +69,7 @@ import {
   lunarBlessingAnimation,
   makeItRainAnimation,
   mistySurgeAnimation,
+  moongeistBeamAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
   paydayAnimation,
@@ -408,11 +409,7 @@ export const AbilitiesAnimations: {
   ),
   [Ability.DYNAMAX_CANNON]: dynamaxCannonAnimation,
   ["DYNAMAX_CANNON_CHARGE"]: dynamaxCannonChargeAnimation,
-  [Ability.MOONGEIST_BEAM]: onCaster({
-    origin: [0.5, 0],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.MOONGEIST_BEAM]: moongeistBeamAnimation,
   [Ability.FREEZING_GLARE]: onCaster({
     origin: [0.5, 0.98],
     positionOffset: [0, -50],
