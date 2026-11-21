@@ -746,6 +746,14 @@ export class DebugScene extends Phaser.Scene {
           delay: STORED_POWER_TIMING.impact
         })
       }
+      if (caster.pokemon.skill === Ability.FIERY_DANCE) {
+        const timing = AbilityConfigs[Ability.FIERY_DANCE]
+        displayAbility({
+          ...args,
+          ability: "FIERY_DANCE_HIT",
+          delay: timing.chargeDuration + timing.flightDuration
+        })
+      }
       if (caster.pokemon.skill === Ability.FUTURE_SIGHT) {
         displayAbility({
           ...args,

@@ -53,6 +53,8 @@ import {
   fairyWindAnimation,
   featherAnimation,
   fickleBeamAnimation,
+  fieryDanceAnimation,
+  fieryDanceHitAnimation,
   fishiousRendAnimation,
   forecastAnimation,
   futureSightCastAnimation,
@@ -388,7 +390,8 @@ export const AbilitiesAnimations: {
   [Ability.STOMP]: onTargetScale3,
   [Ability.GUILLOTINE]: onTargetScale3,
   [Ability.CROSS_POISON]: onTargetScale3,
-  [Ability.FIERY_DANCE]: onTarget({ ability: Ability.FIRE_BLAST, scale: 2 }),
+  [Ability.FIERY_DANCE]: fieryDanceAnimation,
+  ["FIERY_DANCE_HIT"]: fieryDanceHitAnimation,
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
   [Ability.DRAGON_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
   [Ability.GRUDGE_DIVE]: projectile({
