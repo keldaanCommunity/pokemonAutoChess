@@ -11,7 +11,7 @@ export const StageDuration: Record<number | "DEFAULT", number> = {
   15: 40,
   19: 40,
   20: 50,
-  21: 50,
+  21: 40,
   22: 40,
   23: 40,
   24: 40,
