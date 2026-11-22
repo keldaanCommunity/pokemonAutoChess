@@ -168,9 +168,6 @@
         "CLANGOROUS_SOUL": {
           "frames": 18
         },
-        "CLOSE_COMBAT": {
-          "frames": 7
-        },
         "CONTINENTAL_CRUSH": {
           "frames": 1
         },
@@ -710,10 +707,6 @@
         },
         "MOONBLAST": {
           "frames": 11
-        },
-        "MOONGEIST_BEAM": {
-          "frames": 6,
-          "repeat": 3
         },
         "MOON_DREAM": {
           "frames": 5,
@@ -1341,103 +1334,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "AQUA_JET": {
-          "frames": 20
-        },
-        "BLIZZARD": {
-          "frames": 31
-        },
-        "BUG_BUZZ": {
-          "frames": 29
-        },
-        "CONFUSING_MIND": {
-          "frames": 37
-        },
-        "DARK_VOID": {
-          "frames": 22
-        },
-        "DIAMOND_STORM": {
-          "frames": 17
-        },
-        "DRAGON_DARTS": {
-          "frames": 1
-        },
-        "DRAIN_PUNCH": {
-          "frames": 29
-        },
-        "DYNAMAX_CANNON": {
-          "frames": 39
-        },
-        "DYNAMIC_PUNCH": {
-          "frames": 13
-        },
-        "FAIRY_LOCK": {
-          "frames": 41,
-          "fps": 30
-        },
-        "FAIRY_WIND": {
-          "frames": 39
-        },
-        "FICKLE_BEAM": {
-          "frames": 20,
-          "fps": 40
-        },
-        "FORECAST": {
-          "frames": 52,
-          "fps": 40
-        },
-        "FUTURE_SIGHT": {
-          "frames": 11
-        },
-        "FUTURE_SIGHT_HIT": {
-          "frames": 16
-        },
-        "GOLD_RUSH": {
-          "frames": 12
-        },
-        "HIGH_JUMP_KICK": {
-          "frames": 21
-        },
-        "HYDRO_PUMP": {
-          "frames": 20
-        },
-        "LUNAR_BLESSING": {
-          "frames": 21
-        },
-        "NIGHT_DAZE": {
-          "frames": 18
-        },
-        "OBLIVION_WING": {
-          "frames": 15
-        },
-        "PAYDAY": {
-          "frames": 81
-        },
-        "PETAL_BLIZZARD": {
-          "frames": 19
-        },
-        "PETAL_DANCE_PROJECTILE": {
-          "frames": 8
-        },
-        "POWDER_SNOW": {
-          "frames": 20
-        },
-        "PRECIPICE_BLADES": {
-          "frames": 11
-        },
-        "SCREECH": {
+        "CLOSE_COMBAT": {
           "frames": 7
-        },
-        "SHIELDS_DOWN": {
-          "frames": 11,
-          "fps": 15
-        },
-        "SONG_OF_DESIRE": {
-          "frames": 42
-        },
-        "SPIRIT_BREAK": {
-          "frames": 35,
-          "fps": 30
         }
       }
     },

@@ -12,7 +12,12 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    const targetX = target.positionX
+    const targetY = target.positionY
+    const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    const targets: { x: number; y: number }[] = []
+
+    super.process(pokemon, board, target, crit, true)
     effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null) {
         if (cell.value.team !== pokemon.team) {
@@ -24,6 +29,7 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             pokemon,
             crit
           )
+          targets.push({ x: cell.x, y: cell.y })
         } else if (cell.value.id !== pokemon.id) {
           cell.value.addShield(
             [60, 80, 100, 200][pokemon.stars - 1] ?? 200,
@@ -31,8 +37,15 @@ export class MoongeistBeamStrategy extends AbilityStrategy {
             1,
             crit
           )
+          targets.push({ x: cell.x, y: cell.y })
         }
       }
+    })
+    pokemon.broadcastAbility({
+      targetX,
+      targetY,
+      ap,
+      data: { targets }
     })
   }
 }
