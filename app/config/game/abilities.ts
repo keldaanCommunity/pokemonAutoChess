@@ -5,6 +5,9 @@ const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
 
 export const AbilityConfigs = {
+  [Ability.MIST_BALL]: {
+    returnDelay: 1000
+  },
   [Ability.FIERY_DANCE]: {
     chargeDuration: 600,
     flightDuration: 300

@@ -74,6 +74,8 @@ import {
   hyperBeamChargeAnimation,
   lunarBlessingAnimation,
   makeItRainAnimation,
+  mistBallAnimation,
+  mistBallHitAnimation,
   mistySurgeAnimation,
   moongeistBeamAnimation,
   nightDazeAnimation,
@@ -1868,13 +1870,8 @@ export const AbilitiesAnimations: {
       tweenProps: { delay: i * 100 }
     })
   ),
-  [Ability.MIST_BALL]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
+  [Ability.MIST_BALL]: mistBallAnimation,
+  ["MIST_BALL_HIT"]: mistBallHitAnimation,
   [Ability.LUSTER_PURGE]: projectile({
     distance: 4,
     duration: 1000,

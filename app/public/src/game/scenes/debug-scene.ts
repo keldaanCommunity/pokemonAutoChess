@@ -40,6 +40,7 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import { FUTURE_SIGHT_TIMING } from "../components/animations/future-sight-cast"
+import { MIST_BALL_RETURN_IMPACT_DURATION } from "../components/animations/mist-ball"
 import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
 import {
@@ -136,9 +137,16 @@ export class DebugScene extends Phaser.Scene {
   }
 
   get previewDuration() {
-    return this.pokemonSprite?.pokemon.skill === Ability.FUTURE_SIGHT
-      ? FUTURE_SIGHT_TIMING.replay
-      : 2000
+    const ability =
+      this.abilityPreview?.ability ?? this.pokemonSprite?.pokemon.skill
+    if (ability === Ability.FUTURE_SIGHT) return FUTURE_SIGHT_TIMING.replay
+    if (ability === Ability.MIST_BALL)
+      return (
+        AbilityConfigs[Ability.MIST_BALL].returnDelay * 2 +
+        MIST_BALL_RETURN_IMPACT_DURATION +
+        100
+      )
+    return 2000
   }
 
   setPreviewPaused(paused: boolean) {
@@ -636,7 +644,11 @@ export class DebugScene extends Phaser.Scene {
     const { caster, target, data } = this.abilityPreview
     const seen = new Set([`${caster.x},${caster.y}`])
     if (target) seen.add(`${target.x},${target.y}`)
-    for (const list of [data.targets, data.allies]) {
+    const ability =
+      this.abilityPreview.ability ?? this.pokemonSprite?.pokemon.skill
+    const lists = [data.targets, data.allies]
+    if (ability === Ability.MIST_BALL) lists.push(data.returnTargets)
+    for (const list of lists) {
       if (!Array.isArray(list)) continue
       for (const cell of list.slice(0, 48)) {
         if (!isPreviewCell(cell)) continue
@@ -737,8 +749,32 @@ export class DebugScene extends Phaser.Scene {
           ...args,
           delay: AbilityConfigs[Ability.DYNAMAX_CANNON].chargeDuration
         })
+      } else if (args.ability === Ability.MIST_BALL) {
+        displayAbility({ ...args, data: {} })
       } else {
         displayAbility(args)
+      }
+      if (args.ability === Ability.MIST_BALL) {
+        displayAbility({
+          ...args,
+          ability: "MIST_BALL_HIT",
+          data: { phase: "outbound", targets: args.data.targets }
+        })
+        displayAbility({
+          ...args,
+          ability: "MIST_BALL_HIT",
+          delay: AbilityConfigs[Ability.MIST_BALL].returnDelay,
+          data: {
+            phase: "return",
+            targets: args.data.returnTargets ?? args.data.targets,
+            travel: {
+              positionX: args.positionX,
+              positionY: args.positionY,
+              targetX: args.targetX,
+              targetY: args.targetY
+            }
+          }
+        })
       }
       if (args.ability === Ability.STORED_POWER) {
         displayAbility({
