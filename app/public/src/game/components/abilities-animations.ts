@@ -85,6 +85,7 @@ import {
   moongeistBeamAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
+  overheatAnimation,
   paydayAnimation,
   powerWhipAnimation,
   precipiceBladesAnimation,
@@ -818,11 +819,7 @@ export const AbilitiesAnimations: {
   [Ability.OBLIVION_WING]: oblivionWingAnimation,
   [Ability.GEOMANCY]: geomancyAnimation,
   [Ability.BLIZZARD]: blizzardAnimation,
-  [Ability.OVERHEAT]: onCaster({
-    ability: Ability.FIRE_BLAST,
-    scale: 4,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
-  }),
+  [Ability.OVERHEAT]: overheatAnimation,
   [Ability.FIERY_WRATH]: onCaster({
     ability: Ability.FIRE_BLAST,
     scale: 4,
