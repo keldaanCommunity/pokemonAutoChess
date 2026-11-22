@@ -65,6 +65,7 @@ import {
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
+  geomancyAnimation,
   grassySurgeAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
@@ -815,10 +816,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: oblivionWingAnimation,
-  [Ability.GEOMANCY]: onCaster({
-    positionOffset: [0, -50],
-    depth: DEPTH.ABILITY_GROUND_LEVEL
-  }),
+  [Ability.GEOMANCY]: geomancyAnimation,
   [Ability.BLIZZARD]: blizzardAnimation,
   [Ability.OVERHEAT]: onCaster({
     ability: Ability.FIRE_BLAST,

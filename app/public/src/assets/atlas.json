@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-22.0",
+  "version": "6.12.0.2026-11-22.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -388,9 +388,6 @@
           "frames": 2,
           "fps": 30,
           "repeat": -1
-        },
-        "GEOMANCY": {
-          "frames": 12
         },
         "GIGATON_HAMMER": {
           "frames": 4,
@@ -1182,11 +1179,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "LUSTER_PURGE": {
-          "frames": 3
-        },
-        "MIST_BALL": {
-          "frames": 3
+        "GEOMANCY": {
+          "frames": 12
         }
       }
     },

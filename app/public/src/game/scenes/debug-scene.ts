@@ -40,6 +40,7 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import { FUTURE_SIGHT_TIMING } from "../components/animations/future-sight-cast"
+import { GEOMANCY_DURATION } from "../components/animations/geomancy"
 import { MIST_BALL_RETURN_IMPACT_DURATION } from "../components/animations/mist-ball"
 import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
@@ -140,6 +141,7 @@ export class DebugScene extends Phaser.Scene {
     const ability =
       this.abilityPreview?.ability ?? this.pokemonSprite?.pokemon.skill
     if (ability === Ability.FUTURE_SIGHT) return FUTURE_SIGHT_TIMING.replay
+    if (ability === Ability.GEOMANCY) return GEOMANCY_DURATION + 100
     if (ability === Ability.MIST_BALL || ability === Ability.LUSTER_PURGE)
       return (
         AbilityConfigs[ability].returnDelay * 2 +
