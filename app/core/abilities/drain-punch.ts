@@ -10,7 +10,16 @@ export class DrainPunchStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    const animation = {
+      skill: pokemon.skill,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: pokemon.orientation,
+      targetX: target.positionX,
+      targetY: target.positionY
+    }
+    super.process(pokemon, board, target, crit, true)
     const damageMultiplier = [2, 2, 3, 4][pokemon.stars - 1] ?? 4
     const healMultiplier = 2
     const result = target.handleSpecialDamage(
@@ -21,6 +30,15 @@ export class DrainPunchStrategy extends AbilityStrategy {
       crit,
       true
     )
-    pokemon.handleHeal(result.takenDamage * healMultiplier, pokemon, 0, false)
+    const { healReceived } = pokemon.handleHeal(
+      result.takenDamage * healMultiplier,
+      pokemon,
+      0,
+      false
+    )
+    pokemon.broadcastAbility({
+      ...animation,
+      data: { healReceived }
+    })
   }
 }
