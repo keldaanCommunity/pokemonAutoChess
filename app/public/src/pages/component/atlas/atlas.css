@@ -45,6 +45,11 @@
   animation: atlas-close 400ms ease-in-out both;
 }
 
+.atlas-node-detail-portrait {
+  width: 40px;
+  height: 40px;
+}
+
 @keyframes atlas-open {
   from {
     --atlas-mask-opening-t: 0;

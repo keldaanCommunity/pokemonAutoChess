@@ -9,6 +9,7 @@ import type GameRoom from "../rooms/game-room"
 import {
   CraftableItemsNoScarves,
   DubiousGadgets,
+  FossilStones,
   Item,
   Scarves,
   SynergyGems,
@@ -17,7 +18,7 @@ import {
 } from "../types"
 import { Rarity } from "../types/enum/Game"
 import { Dishes } from "../types/enum/Item"
-import { pkmsFromProposition } from "../types/enum/Pokemon"
+import { Pkm, pkmsFromProposition } from "../types/enum/Pokemon"
 import { max } from "../utils/number"
 import { entries } from "../utils/object"
 import { pickNRandomIn, pickRandomIn } from "../utils/random"
@@ -215,7 +216,6 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
 
   lapras: (player) => {
     player.items.push(Item.LAPRAS_PASSPORT)
-    // TODO: reroll legendaries
   },
 
   ludicolo: (player) => {
@@ -249,8 +249,15 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     // handled in simulation applyPostEffects
   },
 
-  omanyte: (player) => {
-    //TODO
+  omanyte: (player, room) => {
+    const ditto = PokemonFactory.createPokemonFromName(Pkm.DITTO, player)
+    room.givePokemons([ditto], player)
+    player.choices.push(
+      new PlayerChoice({
+        type: "item",
+        items: pickNRandomIn(FossilStones, 3)
+      })
+    )
   },
 
   wigglytuff: (player, room) => {
@@ -275,4 +282,3 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     })
   }
 }
-
