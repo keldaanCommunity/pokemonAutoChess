@@ -6,6 +6,10 @@ const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
 
 export const AbilityConfigs = {
+  [Ability.FIERY_DANCE]: {
+    chargeDuration: 600,
+    flightDuration: 300
+  },
   [Ability.DYNAMAX_CANNON]: {
     chargeDuration: 600,
     beamDuration: 350,
