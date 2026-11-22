@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-21.4",
+  "version": "6.12.0.2026-11-22.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -389,9 +389,6 @@
           "fps": 30,
           "repeat": -1
         },
-        "GEOMANCY": {
-          "frames": 12
-        },
         "GIGATON_HAMMER": {
           "frames": 4,
           "repeat": 4
@@ -568,10 +565,6 @@
         "LOCK_ON": {
           "frames": 26
         },
-        "LUSTER_PURGE": {
-          "frames": 3,
-          "repeat": -1
-        },
         "MAGICAL_LEAF": {
           "frames": 9
         },
@@ -614,10 +607,6 @@
           "frames": 2,
           "repeat": -1,
           "fps": 5
-        },
-        "MIST_BALL": {
-          "frames": 3,
-          "repeat": -1
         },
         "MOONBLAST": {
           "frames": 11
@@ -1190,8 +1179,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "CLOSE_COMBAT": {
-          "frames": 7
+        "GEOMANCY": {
+          "frames": 12
         }
       }
     },

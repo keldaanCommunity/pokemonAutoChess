@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../../../types/enum/Ability"
 import { DungeonPMDO } from "../../../types/enum/Dungeon"
 import { Orientation } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
@@ -43,6 +44,9 @@ export function SpriteDebug() {
   const [shiny, setShiny] = useState(scenario.shiny)
   const [orientation, setOrientation] = useState(scenario.orientation)
   const [animationType, setAnimType] = useState(scenario.animation)
+  const [hyperBeam, setHyperBeam] = useState(
+    scenario.ability === Ability.HYPER_BEAM
+  )
   const [status, setStatus] = useState(scenario.status ?? "")
   const [caster, setCaster] = useState(scenario.caster)
   const [targetMode, setTargetMode] = useState<"auto" | "custom" | "none">(
@@ -85,8 +89,14 @@ export function SpriteDebug() {
     }
   }, [caster, customTarget, orientation, pkm, targetMode])
   const preview = useMemo(
-    () => ({ caster, target, flip, data: payload }),
-    [caster, target, flip, payload]
+    () => ({
+      caster,
+      target,
+      flip,
+      data: payload,
+      ability: hyperBeam ? Ability.HYPER_BEAM : undefined
+    }),
+    [caster, target, flip, payload, hyperBeam]
   )
   const payloadDirty = payloadText !== JSON.stringify(payload, null, 2)
   const shareUrl = useMemo(
@@ -103,13 +113,15 @@ export function SpriteDebug() {
         flip,
         map,
         weather,
-        data: payload
+        data: payload,
+        ability: hyperBeam ? Ability.HYPER_BEAM : undefined
       }),
     [
       animationType,
       caster,
       customTarget,
       flip,
+      hyperBeam,
       map,
       orientation,
       payload,
@@ -269,6 +281,14 @@ export function SpriteDebug() {
                 </option>
               ))}
             </select>
+
+            <Checkbox
+              id="preview-hyper-beam"
+              checked={hyperBeam}
+              onToggle={setHyperBeam}
+              label="Preview Hyper Beam (TM)"
+              isDark
+            />
 
             <label htmlFor="sprite-viewer-status">Status</label>
             <select

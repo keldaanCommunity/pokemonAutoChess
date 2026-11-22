@@ -32,7 +32,8 @@ export class TwinBeamStrategy extends AbilityStrategy {
       pokemon.broadcastAbility({
         skill: Ability.TWIN_BEAM,
         targetX: farthestTarget.positionX,
-        targetY: farthestTarget.positionY
+        targetY: farthestTarget.positionY,
+        data: { beamIndex: 0 }
       })
 
       const oppositeFarthestTarget = pokemon.state.getFarthestTarget(
@@ -55,7 +56,8 @@ export class TwinBeamStrategy extends AbilityStrategy {
         pokemon.broadcastAbility({
           skill: Ability.TWIN_BEAM,
           targetX: oppositeFarthestTarget.positionX,
-          targetY: oppositeFarthestTarget.positionY
+          targetY: oppositeFarthestTarget.positionY,
+          data: { beamIndex: 1 }
         })
       }
     }

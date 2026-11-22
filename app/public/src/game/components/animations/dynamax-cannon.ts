@@ -13,6 +13,7 @@ import type {
 import { Ability } from "../../../../../types/enum/Ability"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { drawBeamImpactArcs, drawBoardEdgeMask } from "./helpers"
 
 const timing = AbilityConfigs[Ability.DYNAMAX_CANNON]
 const TAU = Math.PI * 2
@@ -196,49 +197,7 @@ export const dynamaxCannonAnimation: AbilityAnimation = (args) => {
   beam.add(ray)
   scene.abilitiesVfxGroup?.add(beam)
   const maskShape = scene.add.graphics().setVisible(false)
-  const feather = 24
-  const { left, right, top, bottom } = line.bounds
-  // Feather outgoing edges only; diagonal corner exits soften on both axes.
-  const xs = [
-    left,
-    left + (line.dx < -0.000001 ? feather : 0),
-    right - (line.dx > 0.000001 ? feather : 0),
-    right
-  ]
-  const ys = [
-    top,
-    top + (line.dy < -0.000001 ? feather : 0),
-    bottom - (line.dy > 0.000001 ? feather : 0),
-    bottom
-  ]
-  const maskAlpha = (x: number, y: number) =>
-    Math.min(
-      line.dx < -0.000001 ? (x - left) / feather : 1,
-      line.dx > 0.000001 ? (right - x) / feather : 1,
-      line.dy < -0.000001 ? (y - top) / feather : 1,
-      line.dy > 0.000001 ? (bottom - y) / feather : 1,
-      1
-    )
-  for (let row = 0; row < 3; row++) {
-    for (let column = 0; column < 3; column++) {
-      const x = xs[column]
-      const y = ys[row]
-      const width = xs[column + 1] - x
-      const height = ys[row + 1] - y
-      if (width === 0 || height === 0) continue
-      maskShape.fillGradientStyle(
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        0xffffff,
-        maskAlpha(x, y),
-        maskAlpha(x + width, y),
-        maskAlpha(x, y + height),
-        maskAlpha(x + width, y + height)
-      )
-      maskShape.fillRect(x, y, width, height)
-    }
-  }
+  drawBoardEdgeMask(maskShape, line.bounds, line.dx, line.dy)
   const canvasMask =
     scene.renderer.type === Phaser.CANVAS
       ? maskShape.createGeometryMask()
@@ -256,6 +215,7 @@ export const dynamaxCannonAnimation: AbilityAnimation = (args) => {
     const impact = scene.add
       .graphics()
       .setPosition(x, y - 20)
+      .setRotation(line.angle)
       .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
     scene.abilitiesVfxGroup?.add(impact)
     return impact
@@ -329,49 +289,18 @@ export const dynamaxCannonAnimation: AbilityAnimation = (args) => {
       )
     }
     const hitFade = Math.max(0, 1 - elapsed / 300)
-    impacts.forEach((impact, index) => {
+    impacts.forEach((impact) => {
       if (!impact.active) return
       impact.clear()
       if (hitFade <= 0) return
       const expansion = Math.min(1, elapsed / 85)
-      impact.fillStyle(palette.dark, 0.85 * hitFade)
-      impact.fillCircle(0, 0, 21 + expansion * 7)
-      for (let i = 0; i < 10; i++) {
-        const angle = (i * TAU) / 10 + index * 0.7
-        const inner = 9 + expansion * 7
-        const outer = 24 + (i % 3) * 6 + expansion * 15
-        const px = -Math.sin(angle) * 4 * hitFade
-        const py = Math.cos(angle) * 4 * hitFade
-        impact.fillStyle(i % 2 ? palette.pink : palette.core, hitFade)
-        impact.fillTriangle(
-          Math.cos(angle) * inner + px,
-          Math.sin(angle) * inner + py,
-          Math.cos(angle) * outer,
-          Math.sin(angle) * outer,
-          Math.cos(angle) * inner - px,
-          Math.sin(angle) * inner - py
-        )
-        if (i % 2 === 0) {
-          impact.lineStyle(2, palette.violet, hitFade)
-          impact.strokePoints(
-            [
-              new Phaser.Math.Vector2(
-                Math.cos(angle) * 12,
-                Math.sin(angle) * 12
-              ),
-              new Phaser.Math.Vector2(
-                Math.cos(angle + 0.15) * 27,
-                Math.sin(angle + 0.15) * 27
-              ),
-              new Phaser.Math.Vector2(
-                Math.cos(angle - 0.1) * outer,
-                Math.sin(angle - 0.1) * outer
-              )
-            ],
-            false
-          )
-        }
-      }
+      drawBeamImpactArcs(
+        impact,
+        elapsed,
+        1 + expansion * 0.5,
+        hitFade,
+        palette.dark
+      )
       impact.fillStyle(palette.light, hitFade)
       impact.fillCircle(0, 0, 14 * hitFade)
       impact.fillStyle(palette.core, hitFade)

@@ -1,13 +1,16 @@
 export { accelerockAnimation } from "./accelerock"
 export { aquaJetAnimation } from "./aqua-jet"
 export { aquaSwirlAnimation } from "./aqua-swirl"
+export { auroraBeamAnimation } from "./aurora-beam"
 export { auroraVeilAnimation } from "./aurora-veil"
 export { behemothBladeAnimation } from "./behemoth-blade"
 export { blizzardAnimation } from "./blizzard"
 export { bugBuzzAnimation } from "./bug-buzz"
+export { bulldozeAnimation } from "./bulldoze"
 export { closeCombatAnimation } from "./close-combat"
 export { darkAuraAnimation } from "./dark-aura"
 export { diamondStormAnimation } from "./diamond-storm"
+export { drainPunchAnimation } from "./drain-punch"
 export {
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation
@@ -24,17 +27,27 @@ export { forecastAnimation } from "./forecast"
 export { futureSightCastAnimation } from "./future-sight-cast"
 export { futureSightHitAnimation } from "./future-sight-hit"
 export { futureSightSplashAnimation } from "./future-sight-splash"
+export { geomancyAnimation } from "./geomancy"
 export { grassySurgeAnimation } from "./grassy-surge"
 export { heartSwapAnimation } from "./heart-swap"
 export { hiddenPowerAnimation } from "./hidden-power"
 export { highJumpKickAnimation } from "./high-jump-kick"
+export { hornDrillAnimation } from "./horn-drill"
 export { hydroPumpAnimation, hydroPumpSplashAnimation } from "./hydro-pump"
+export { hyperBeamAnimation, hyperBeamChargeAnimation } from "./hyper-beam"
 export { lunarBlessingAnimation } from "./lunar-blessing"
 export { makeItRainAnimation } from "./make-it-rain"
+export {
+  lusterPurgeAnimation,
+  lusterPurgeHitAnimation,
+  mistBallAnimation,
+  mistBallHitAnimation
+} from "./mist-ball"
 export { mistySurgeAnimation } from "./misty-surge"
 export { moongeistBeamAnimation } from "./moongeist-beam"
 export { nightDazeAnimation } from "./night-daze"
 export { oblivionWingAnimation } from "./oblivion-wing"
+export { overheatAnimation } from "./overheat"
 export { paydayAnimation } from "./payday"
 export { powerWhipAnimation } from "./power-whip"
 export { precipiceBladesAnimation } from "./precipice-blades"
@@ -52,3 +65,4 @@ export {
 } from "./stored-power"
 export { takeHeartAnimation } from "./take-heart"
 export { tidalWaveAnimation } from "./tidal-wave"
+export { twinBeamAnimation } from "./twin-beam"

@@ -40,13 +40,16 @@ import {
   accelerockAnimation,
   aquaJetAnimation,
   aquaSwirlAnimation,
+  auroraBeamAnimation,
   auroraVeilAnimation,
   behemothBladeAnimation,
   blizzardAnimation,
   bugBuzzAnimation,
+  bulldozeAnimation,
   closeCombatAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  drainPunchAnimation,
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation,
   dynamicPunchAnimation,
@@ -62,18 +65,27 @@ import {
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
+  geomancyAnimation,
   grassySurgeAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
   highJumpKickAnimation,
+  hornDrillAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
+  hyperBeamAnimation,
+  hyperBeamChargeAnimation,
   lunarBlessingAnimation,
+  lusterPurgeAnimation,
+  lusterPurgeHitAnimation,
   makeItRainAnimation,
+  mistBallAnimation,
+  mistBallHitAnimation,
   mistySurgeAnimation,
   moongeistBeamAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
+  overheatAnimation,
   paydayAnimation,
   powerWhipAnimation,
   precipiceBladesAnimation,
@@ -88,7 +100,8 @@ import {
   storedPowerHitAnimation,
   storedPowerTargetAnimation,
   takeHeartAnimation,
-  tidalWaveAnimation
+  tidalWaveAnimation,
+  twinBeamAnimation
 } from "./animations"
 import {
   addAbilitySprite,
@@ -374,7 +387,7 @@ export const AbilitiesAnimations: {
   [Ability.SOAK]: onTargetScale2,
   [Ability.IRON_TAIL]: onTargetScale2,
   [Ability.ICICLE_CRASH]: onTargetScale2,
-  [Ability.DRAIN_PUNCH]: onTarget({ ability: Ability.FOCUS_PUNCH, scale: 2 }),
+  [Ability.DRAIN_PUNCH]: drainPunchAnimation,
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
@@ -511,22 +524,9 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     scale: [1, 2]
   }),
-  [Ability.TWIN_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [1, 2]
-  }),
-  [Ability.HYPER_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [2, 2],
-    tint: 0xffffa0
-  }),
-  ["HYPER_BEAM_CHARGE"]: onCasterScale2,
+  [Ability.TWIN_BEAM]: twinBeamAnimation,
+  [Ability.HYPER_BEAM]: hyperBeamAnimation,
+  ["HYPER_BEAM_CHARGE"]: hyperBeamChargeAnimation,
   [Ability.THUNDER_SHOCK]: onTarget({
     ability: Ability.THUNDER,
     scale: 2,
@@ -618,7 +618,7 @@ export const AbilitiesAnimations: {
   [Ability.ACCELEROCK]: accelerockAnimation,
   [Ability.FISHIOUS_REND]: fishiousRendAnimation,
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
-  [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
+  [Ability.HORN_DRILL]: hornDrillAnimation,
   [Ability.CUT]: [
     onTargetScale3,
     onCaster({
@@ -655,10 +655,7 @@ export const AbilitiesAnimations: {
     tint: 0xa0ff90
   }),
   [Ability.BODY_SLAM]: shakeCamera({}),
-  [Ability.BULLDOZE]: [
-    onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
-    shakeCamera({})
-  ],
+  [Ability.BULLDOZE]: bulldozeAnimation,
   [Ability.EAR_DIG]: [
     onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 }),
     (args) => {
@@ -820,16 +817,9 @@ export const AbilitiesAnimations: {
   }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: oblivionWingAnimation,
-  [Ability.GEOMANCY]: onCaster({
-    positionOffset: [0, -50],
-    depth: DEPTH.ABILITY_GROUND_LEVEL
-  }),
+  [Ability.GEOMANCY]: geomancyAnimation,
   [Ability.BLIZZARD]: blizzardAnimation,
-  [Ability.OVERHEAT]: onCaster({
-    ability: Ability.FIRE_BLAST,
-    scale: 4,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
-  }),
+  [Ability.OVERHEAT]: overheatAnimation,
   [Ability.FIERY_WRATH]: onCaster({
     ability: Ability.FIRE_BLAST,
     scale: 4,
@@ -1854,13 +1844,7 @@ export const AbilitiesAnimations: {
     duration: 1000,
     tint: 0x301030
   }),
-  [Ability.AURORA_BEAM]: onCaster({
-    ability: Ability.MOONGEIST_BEAM,
-    origin: [0.5, 0],
-    scale: [1, 2],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.AURORA_BEAM]: auroraBeamAnimation,
   [Ability.SPIRIT_SHACKLE]: projectile({
     distance: 8,
     scale: 1,
@@ -1877,20 +1861,10 @@ export const AbilitiesAnimations: {
       tweenProps: { delay: i * 100 }
     })
   ),
-  [Ability.MIST_BALL]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
-  [Ability.LUSTER_PURGE]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
+  [Ability.MIST_BALL]: mistBallAnimation,
+  ["MIST_BALL_HIT"]: mistBallHitAnimation,
+  [Ability.LUSTER_PURGE]: lusterPurgeAnimation,
+  ["LUSTER_PURGE_HIT"]: lusterPurgeHitAnimation,
   [Ability.STEALTH_ROCKS]: projectile({
     distance: 1,
     scale: 2,

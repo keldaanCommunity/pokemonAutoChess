@@ -40,6 +40,8 @@ import {
   displayHit
 } from "../components/abilities-animations"
 import { FUTURE_SIGHT_TIMING } from "../components/animations/future-sight-cast"
+import { GEOMANCY_DURATION } from "../components/animations/geomancy"
+import { MIST_BALL_RETURN_IMPACT_DURATION } from "../components/animations/mist-ball"
 import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
 import {
@@ -136,9 +138,17 @@ export class DebugScene extends Phaser.Scene {
   }
 
   get previewDuration() {
-    return this.pokemonSprite?.pokemon.skill === Ability.FUTURE_SIGHT
-      ? FUTURE_SIGHT_TIMING.replay
-      : 2000
+    const ability =
+      this.abilityPreview?.ability ?? this.pokemonSprite?.pokemon.skill
+    if (ability === Ability.FUTURE_SIGHT) return FUTURE_SIGHT_TIMING.replay
+    if (ability === Ability.GEOMANCY) return GEOMANCY_DURATION + 100
+    if (ability === Ability.MIST_BALL || ability === Ability.LUSTER_PURGE)
+      return (
+        AbilityConfigs[ability].returnDelay * 2 +
+        MIST_BALL_RETURN_IMPACT_DURATION +
+        100
+      )
+    return 2000
   }
 
   setPreviewPaused(paused: boolean) {
@@ -636,7 +646,12 @@ export class DebugScene extends Phaser.Scene {
     const { caster, target, data } = this.abilityPreview
     const seen = new Set([`${caster.x},${caster.y}`])
     if (target) seen.add(`${target.x},${target.y}`)
-    for (const list of [data.targets, data.allies]) {
+    const ability =
+      this.abilityPreview.ability ?? this.pokemonSprite?.pokemon.skill
+    const lists = [data.targets, data.allies]
+    if (ability === Ability.MIST_BALL || ability === Ability.LUSTER_PURGE)
+      lists.push(data.returnTargets)
+    for (const list of lists) {
       if (!Array.isArray(list)) continue
       for (const cell of list.slice(0, 48)) {
         if (!isPreviewCell(cell)) continue
@@ -715,7 +730,7 @@ export class DebugScene extends Phaser.Scene {
           ...(this.target ? [this.target] : []),
           ...this.previewTargets
         ],
-        ability: caster.pokemon.skill,
+        ability: this.abilityPreview?.ability ?? caster.pokemon.skill,
         orientation: caster.orientation,
         positionX: caster.positionX,
         positionY: caster.positionY,
@@ -725,16 +740,56 @@ export class DebugScene extends Phaser.Scene {
         ap: 0,
         data: this.abilityPreview?.data ?? {}
       }
-      if (caster.pokemon.skill === Ability.DYNAMAX_CANNON) {
+      if (args.ability === Ability.HYPER_BEAM) {
+        displayAbility({ ...args, ability: "HYPER_BEAM_CHARGE" })
+        displayAbility({
+          ...args,
+          delay: AbilityConfigs[Ability.HYPER_BEAM].chargeDuration
+        })
+      } else if (args.ability === Ability.DYNAMAX_CANNON) {
         displayAbility({ ...args, ability: "DYNAMAX_CANNON_CHARGE" })
         displayAbility({
           ...args,
           delay: AbilityConfigs[Ability.DYNAMAX_CANNON].chargeDuration
         })
+      } else if (
+        args.ability === Ability.MIST_BALL ||
+        args.ability === Ability.LUSTER_PURGE
+      ) {
+        displayAbility({ ...args, data: {} })
       } else {
         displayAbility(args)
       }
-      if (caster.pokemon.skill === Ability.STORED_POWER) {
+      if (
+        args.ability === Ability.MIST_BALL ||
+        args.ability === Ability.LUSTER_PURGE
+      ) {
+        const hitAbility =
+          args.ability === Ability.MIST_BALL
+            ? "MIST_BALL_HIT"
+            : "LUSTER_PURGE_HIT"
+        displayAbility({
+          ...args,
+          ability: hitAbility,
+          data: { phase: "outbound", targets: args.data.targets }
+        })
+        displayAbility({
+          ...args,
+          ability: hitAbility,
+          delay: AbilityConfigs[args.ability].returnDelay,
+          data: {
+            phase: "return",
+            targets: args.data.returnTargets ?? args.data.targets,
+            travel: {
+              positionX: args.positionX,
+              positionY: args.positionY,
+              targetX: args.targetX,
+              targetY: args.targetY
+            }
+          }
+        })
+      }
+      if (args.ability === Ability.STORED_POWER) {
         displayAbility({
           ...args,
           ability: "STORED_POWER_TARGET",
@@ -746,7 +801,7 @@ export class DebugScene extends Phaser.Scene {
           delay: STORED_POWER_TIMING.impact
         })
       }
-      if (caster.pokemon.skill === Ability.FIERY_DANCE) {
+      if (args.ability === Ability.FIERY_DANCE) {
         const timing = AbilityConfigs[Ability.FIERY_DANCE]
         displayAbility({
           ...args,
@@ -754,7 +809,7 @@ export class DebugScene extends Phaser.Scene {
           delay: timing.chargeDuration + timing.flightDuration
         })
       }
-      if (caster.pokemon.skill === Ability.FUTURE_SIGHT) {
+      if (args.ability === Ability.FUTURE_SIGHT) {
         displayAbility({
           ...args,
           ability: "FUTURE_SIGHT_HIT",

@@ -5,6 +5,12 @@ const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
 
 export const AbilityConfigs = {
+  [Ability.MIST_BALL]: {
+    returnDelay: 1000
+  },
+  [Ability.LUSTER_PURGE]: {
+    returnDelay: 1000
+  },
   [Ability.FIERY_DANCE]: {
     chargeDuration: 600,
     flightDuration: 300
@@ -13,6 +19,9 @@ export const AbilityConfigs = {
     chargeDuration: 600,
     beamDuration: 350,
     fadeDuration: 200
+  },
+  [Ability.HYPER_BEAM]: {
+    chargeDuration: 1000
   },
   [Ability.HIDDEN_POWER_S]: {
     tidalWaveLevel: unownSTidalWaveLevel,

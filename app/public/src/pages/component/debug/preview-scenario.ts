@@ -1,3 +1,4 @@
+import { Ability } from "../../../../../types/enum/Ability"
 import { DungeonPMDO } from "../../../../../types/enum/Dungeon"
 import { Orientation } from "../../../../../types/enum/Game"
 import { Pkm } from "../../../../../types/enum/Pokemon"
@@ -35,6 +36,7 @@ export type PreviewScenario = {
   map: DungeonPMDO | "plain"
   weather: Weather
   data: AbilityPreviewData
+  ability?: Ability.HYPER_BEAM
 }
 
 export const DEFAULT_SCENARIO: PreviewScenario = {
@@ -84,6 +86,8 @@ function isScenario(value: unknown): value is PreviewScenario {
     typeof scenario.animation === "string" &&
     PREVIEW_ANIMATIONS.includes(scenario.animation) &&
     typeof scenario.shiny === "boolean" &&
+    (scenario.ability === undefined ||
+      scenario.ability === Ability.HYPER_BEAM) &&
     (scenario.status === undefined || isPreviewStatus(scenario.status)) &&
     isPreviewCell(scenario.caster) &&
     (scenario.targetMode === "auto" ||
