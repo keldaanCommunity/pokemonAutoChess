@@ -45,6 +45,7 @@ import {
   behemothBladeAnimation,
   blizzardAnimation,
   bugBuzzAnimation,
+  bulldozeAnimation,
   closeCombatAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
@@ -652,10 +653,7 @@ export const AbilitiesAnimations: {
     tint: 0xa0ff90
   }),
   [Ability.BODY_SLAM]: shakeCamera({}),
-  [Ability.BULLDOZE]: [
-    onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
-    shakeCamera({})
-  ],
+  [Ability.BULLDOZE]: bulldozeAnimation,
   [Ability.EAR_DIG]: [
     onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 }),
     (args) => {
