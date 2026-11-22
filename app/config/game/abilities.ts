@@ -8,6 +8,9 @@ export const AbilityConfigs = {
   [Ability.MIST_BALL]: {
     returnDelay: 1000
   },
+  [Ability.LUSTER_PURGE]: {
+    returnDelay: 1000
+  },
   [Ability.FIERY_DANCE]: {
     chargeDuration: 600,
     flightDuration: 300

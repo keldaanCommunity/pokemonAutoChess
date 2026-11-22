@@ -73,6 +73,8 @@ import {
   hyperBeamAnimation,
   hyperBeamChargeAnimation,
   lunarBlessingAnimation,
+  lusterPurgeAnimation,
+  lusterPurgeHitAnimation,
   makeItRainAnimation,
   mistBallAnimation,
   mistBallHitAnimation,
@@ -1872,13 +1874,8 @@ export const AbilitiesAnimations: {
   ),
   [Ability.MIST_BALL]: mistBallAnimation,
   ["MIST_BALL_HIT"]: mistBallHitAnimation,
-  [Ability.LUSTER_PURGE]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
+  [Ability.LUSTER_PURGE]: lusterPurgeAnimation,
+  ["LUSTER_PURGE_HIT"]: lusterPurgeHitAnimation,
   [Ability.STEALTH_ROCKS]: projectile({
     distance: 1,
     scale: 2,

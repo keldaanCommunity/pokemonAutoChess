@@ -34,7 +34,12 @@ export { hydroPumpAnimation, hydroPumpSplashAnimation } from "./hydro-pump"
 export { hyperBeamAnimation, hyperBeamChargeAnimation } from "./hyper-beam"
 export { lunarBlessingAnimation } from "./lunar-blessing"
 export { makeItRainAnimation } from "./make-it-rain"
-export { mistBallAnimation, mistBallHitAnimation } from "./mist-ball"
+export {
+  lusterPurgeAnimation,
+  lusterPurgeHitAnimation,
+  mistBallAnimation,
+  mistBallHitAnimation
+} from "./mist-ball"
 export { mistySurgeAnimation } from "./misty-surge"
 export { moongeistBeamAnimation } from "./moongeist-beam"
 export { nightDazeAnimation } from "./night-daze"

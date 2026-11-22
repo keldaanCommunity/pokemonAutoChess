@@ -140,9 +140,9 @@ export class DebugScene extends Phaser.Scene {
     const ability =
       this.abilityPreview?.ability ?? this.pokemonSprite?.pokemon.skill
     if (ability === Ability.FUTURE_SIGHT) return FUTURE_SIGHT_TIMING.replay
-    if (ability === Ability.MIST_BALL)
+    if (ability === Ability.MIST_BALL || ability === Ability.LUSTER_PURGE)
       return (
-        AbilityConfigs[Ability.MIST_BALL].returnDelay * 2 +
+        AbilityConfigs[ability].returnDelay * 2 +
         MIST_BALL_RETURN_IMPACT_DURATION +
         100
       )
@@ -647,7 +647,8 @@ export class DebugScene extends Phaser.Scene {
     const ability =
       this.abilityPreview.ability ?? this.pokemonSprite?.pokemon.skill
     const lists = [data.targets, data.allies]
-    if (ability === Ability.MIST_BALL) lists.push(data.returnTargets)
+    if (ability === Ability.MIST_BALL || ability === Ability.LUSTER_PURGE)
+      lists.push(data.returnTargets)
     for (const list of lists) {
       if (!Array.isArray(list)) continue
       for (const cell of list.slice(0, 48)) {
@@ -749,21 +750,31 @@ export class DebugScene extends Phaser.Scene {
           ...args,
           delay: AbilityConfigs[Ability.DYNAMAX_CANNON].chargeDuration
         })
-      } else if (args.ability === Ability.MIST_BALL) {
+      } else if (
+        args.ability === Ability.MIST_BALL ||
+        args.ability === Ability.LUSTER_PURGE
+      ) {
         displayAbility({ ...args, data: {} })
       } else {
         displayAbility(args)
       }
-      if (args.ability === Ability.MIST_BALL) {
+      if (
+        args.ability === Ability.MIST_BALL ||
+        args.ability === Ability.LUSTER_PURGE
+      ) {
+        const hitAbility =
+          args.ability === Ability.MIST_BALL
+            ? "MIST_BALL_HIT"
+            : "LUSTER_PURGE_HIT"
         displayAbility({
           ...args,
-          ability: "MIST_BALL_HIT",
+          ability: hitAbility,
           data: { phase: "outbound", targets: args.data.targets }
         })
         displayAbility({
           ...args,
-          ability: "MIST_BALL_HIT",
-          delay: AbilityConfigs[Ability.MIST_BALL].returnDelay,
+          ability: hitAbility,
+          delay: AbilityConfigs[args.ability].returnDelay,
           data: {
             phase: "return",
             targets: args.data.returnTargets ?? args.data.targets,
