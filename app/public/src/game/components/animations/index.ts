@@ -62,3 +62,4 @@ export {
 } from "./stored-power"
 export { takeHeartAnimation } from "./take-heart"
 export { tidalWaveAnimation } from "./tidal-wave"
+export { twinBeamAnimation } from "./twin-beam"

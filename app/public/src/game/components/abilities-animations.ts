@@ -97,7 +97,8 @@ import {
   storedPowerHitAnimation,
   storedPowerTargetAnimation,
   takeHeartAnimation,
-  tidalWaveAnimation
+  tidalWaveAnimation,
+  twinBeamAnimation
 } from "./animations"
 import {
   addAbilitySprite,
@@ -520,13 +521,7 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     scale: [1, 2]
   }),
-  [Ability.TWIN_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [1, 2]
-  }),
+  [Ability.TWIN_BEAM]: twinBeamAnimation,
   [Ability.HYPER_BEAM]: hyperBeamAnimation,
   ["HYPER_BEAM_CHARGE"]: hyperBeamChargeAnimation,
   [Ability.THUNDER_SHOCK]: onTarget({
