@@ -14,6 +14,9 @@ export const AbilityConfigs = {
     beamDuration: 350,
     fadeDuration: 200
   },
+  [Ability.HYPER_BEAM]: {
+    chargeDuration: 1000
+  },
   [Ability.HIDDEN_POWER_S]: {
     tidalWaveLevel: unownSTidalWaveLevel,
     healingPercent: unownSTidalWaveLevel * tidalWave.healingPercentPerLevel,

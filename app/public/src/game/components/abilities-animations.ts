@@ -69,6 +69,8 @@ import {
   highJumpKickAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
+  hyperBeamAnimation,
+  hyperBeamChargeAnimation,
   lunarBlessingAnimation,
   makeItRainAnimation,
   mistySurgeAnimation,
@@ -519,15 +521,8 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     scale: [1, 2]
   }),
-  [Ability.HYPER_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [2, 2],
-    tint: 0xffffa0
-  }),
-  ["HYPER_BEAM_CHARGE"]: onCasterScale2,
+  [Ability.HYPER_BEAM]: hyperBeamAnimation,
+  ["HYPER_BEAM_CHARGE"]: hyperBeamChargeAnimation,
   [Ability.THUNDER_SHOCK]: onTarget({
     ability: Ability.THUNDER,
     scale: 2,

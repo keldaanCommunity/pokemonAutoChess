@@ -1,4 +1,5 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
+import type { Ability } from "../../../../../types/enum/Ability"
 
 export type PreviewCell = { x: number; y: number }
 export type AbilityPreviewData = Record<string, unknown>
@@ -14,6 +15,7 @@ export type AbilityPreviewOptions = {
   target: PreviewCell | null
   flip: boolean
   data: AbilityPreviewData
+  ability?: Ability
 }
 
 export function isPreviewCell(value: unknown): value is PreviewCell {

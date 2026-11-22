@@ -11,6 +11,7 @@ import type {
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { drawBeamImpactArcs, getImpactCells } from "./helpers"
 
 const TAU = Math.PI * 2
 const BEAM_TRAVEL_DURATION = 190
@@ -70,20 +71,6 @@ function moonbeamLine(args: AbilityAnimationArgs) {
     dy,
     length: Math.max(0, length)
   }
-}
-
-function drawStar(
-  graphics: Phaser.GameObjects.Graphics,
-  x: number,
-  y: number,
-  size: number,
-  alpha: number
-) {
-  graphics.lineStyle(1.5, palette.white, alpha)
-  graphics.lineBetween(x - size, y, x + size, y)
-  graphics.lineBetween(x, y - size, x, y + size)
-  graphics.fillStyle(palette.white, alpha)
-  graphics.fillCircle(x, y, Math.max(1.5, size * 0.18))
 }
 
 function drawShell(
@@ -223,74 +210,17 @@ function drawImpact(
   if (alpha <= 0) return
 
   const expansion = 1 + progress * 0.8
-  graphics.fillStyle(palette.violet, alpha * 0.28)
-  graphics.fillCircle(0, 0, 31 * expansion)
-  graphics.fillStyle(palette.cyan, alpha * 0.62)
-  graphics.fillCircle(0, 0, 22 * expansion)
-  graphics.lineStyle(2.5, palette.cyan, alpha * 0.95)
-  graphics.strokeCircle(0, 0, 21 * expansion)
-
-  const burstPoints = Array.from({ length: 16 }, (_, i) => {
-    const angle = (i / 16) * TAU + elapsed * 0.0007
-    const radius = (i % 2 === 0 ? (i % 4 === 0 ? 34 : 26) : 10) * expansion
-    return new Phaser.Math.Vector2(
-      Math.cos(angle) * radius,
-      Math.sin(angle) * radius
-    )
-  })
-  graphics.fillStyle(palette.cyan, alpha * 0.9)
-  graphics.fillPoints(burstPoints, true)
-
-  for (let i = 0; i < 10; i++) {
-    const angle = (i / 10) * TAU + 0.17
-    const inner = 8 + progress * 3
-    const outer = (29 + (i % 3) * 8) * expansion
-    const halfWidth = 4.5 * (1 - progress * 0.25)
-    graphics.fillStyle(i % 3 === 0 ? palette.pink : palette.cyan, alpha)
-    graphics.fillTriangle(
-      Math.cos(angle) * inner - Math.sin(angle) * halfWidth,
-      Math.sin(angle) * inner + Math.cos(angle) * halfWidth,
-      Math.cos(angle) * outer,
-      Math.sin(angle) * outer,
-      Math.cos(angle) * inner + Math.sin(angle) * halfWidth,
-      Math.sin(angle) * inner - Math.cos(angle) * halfWidth
-    )
-  }
-
+  drawBeamImpactArcs(
+    graphics,
+    elapsed - arrival,
+    expansion,
+    alpha,
+    palette.shadow
+  )
   graphics.fillStyle(palette.silver, alpha)
   graphics.fillCircle(0, 0, 13 * (1 - progress * 0.2))
   graphics.fillStyle(palette.white, alpha)
   graphics.fillCircle(0, 0, 9)
-  drawStar(graphics, 0, 0, 26 * expansion, alpha * 0.9)
-}
-
-function getImpactCells(data: AbilityAnimationArgs["data"]) {
-  const targets: unknown = data?.targets
-  if (!Array.isArray(targets)) return []
-  const seen = new Set<number>()
-  return targets
-    .slice(0, BOARD_WIDTH * BOARD_HEIGHT)
-    .filter((cell): cell is { x: number; y: number } => {
-      if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell))
-        return false
-      const { x, y } = cell
-      if (
-        typeof x !== "number" ||
-        typeof y !== "number" ||
-        !Number.isInteger(x) ||
-        !Number.isInteger(y) ||
-        x < 0 ||
-        x >= BOARD_WIDTH ||
-        y < 0 ||
-        y >= BOARD_HEIGHT
-      ) {
-        return false
-      }
-      const key = y * BOARD_WIDTH + x
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    })
 }
 
 export const moongeistBeamAnimation: AbilityAnimation = (args) => {
@@ -314,6 +244,7 @@ export const moongeistBeamAnimation: AbilityAnimation = (args) => {
     const impactY = y - 20
     const graphics = scene.add
       .graphics({ x, y: impactY })
+      .setRotation(beamAngle)
       .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
     const distance = Math.max(
       0,

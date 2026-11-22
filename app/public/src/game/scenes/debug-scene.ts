@@ -715,7 +715,7 @@ export class DebugScene extends Phaser.Scene {
           ...(this.target ? [this.target] : []),
           ...this.previewTargets
         ],
-        ability: caster.pokemon.skill,
+        ability: this.abilityPreview?.ability ?? caster.pokemon.skill,
         orientation: caster.orientation,
         positionX: caster.positionX,
         positionY: caster.positionY,
@@ -725,7 +725,13 @@ export class DebugScene extends Phaser.Scene {
         ap: 0,
         data: this.abilityPreview?.data ?? {}
       }
-      if (caster.pokemon.skill === Ability.DYNAMAX_CANNON) {
+      if (args.ability === Ability.HYPER_BEAM) {
+        displayAbility({ ...args, ability: "HYPER_BEAM_CHARGE" })
+        displayAbility({
+          ...args,
+          delay: AbilityConfigs[Ability.HYPER_BEAM].chargeDuration
+        })
+      } else if (args.ability === Ability.DYNAMAX_CANNON) {
         displayAbility({ ...args, ability: "DYNAMAX_CANNON_CHARGE" })
         displayAbility({
           ...args,
@@ -734,7 +740,7 @@ export class DebugScene extends Phaser.Scene {
       } else {
         displayAbility(args)
       }
-      if (caster.pokemon.skill === Ability.STORED_POWER) {
+      if (args.ability === Ability.STORED_POWER) {
         displayAbility({
           ...args,
           ability: "STORED_POWER_TARGET",
@@ -746,7 +752,7 @@ export class DebugScene extends Phaser.Scene {
           delay: STORED_POWER_TIMING.impact
         })
       }
-      if (caster.pokemon.skill === Ability.FIERY_DANCE) {
+      if (args.ability === Ability.FIERY_DANCE) {
         const timing = AbilityConfigs[Ability.FIERY_DANCE]
         displayAbility({
           ...args,
@@ -754,7 +760,7 @@ export class DebugScene extends Phaser.Scene {
           delay: timing.chargeDuration + timing.flightDuration
         })
       }
-      if (caster.pokemon.skill === Ability.FUTURE_SIGHT) {
+      if (args.ability === Ability.FUTURE_SIGHT) {
         displayAbility({
           ...args,
           ability: "FUTURE_SIGHT_HIT",
