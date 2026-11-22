@@ -1,4 +1,5 @@
 export const NotificationTypes = [
+  "info",
   "level_up",
   "new_title",
   "new_theme",

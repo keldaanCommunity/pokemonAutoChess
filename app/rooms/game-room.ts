@@ -1,22 +1,25 @@
 import { Dispatcher } from "@colyseus/command"
 import type { MapSchema } from "@colyseus/schema"
 import { type Client, CloseCode, Room } from "colyseus"
-import admin from "firebase-admin"
+import { getAuth } from "firebase-admin/auth"
 import {
   ALLOWED_GAME_RECONNECTION_TIME,
+  BOARD_WIDTH,
   ExpPlace,
   getCurrentGameEvent,
   MAX_LOADING_TIME,
   MAX_SIMULATION_DELTA_TIME,
   MinStageForGameToCount,
+  PokepalsPointsPerRank,
   THEME_BY_TITLE,
   TITLES_UNLOCKING_THEMES,
   VICTORY_ROAD_MAX_EVENT_POINTS,
   VictoryRoadPointsPerRank
 } from "../config"
 import { GADGETS } from "../config/game/gadgets"
+import { unequipItems } from "../core/effects/items"
 import { computeElo } from "../core/elo"
-import { CountEvolutionRule, ItemEvolutionRule } from "../core/evolution-rules"
+import { EvolutionManager } from "../core/evolution-logic/evolution-manager"
 import { MiniGame } from "../core/mini-game"
 import {
   clearPendingGame,
@@ -25,6 +28,8 @@ import {
   givePlayerTimeout,
   setPendingGame
 } from "../core/pending-game-manager"
+import type { PokemonEntity } from "../core/pokemon-entity"
+import { canBeTraded, computeTradeCooldown } from "../core/trade-logic"
 import type { IGameUser } from "../models/colyseus-models/game-user"
 import Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
@@ -32,8 +37,9 @@ import { updatePlayerExpeditionsAfterGame } from "../models/expeditions"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import DetailledStatistic from "../models/mongo-models/detailled-statistic-v2"
 import UserMetadata, {
+  getPlayedPokemonIndexes,
   giveUserExp,
-  toLeanUserMetadata
+  toPlayerCollection
 } from "../models/mongo-models/user-metadata"
 import PokemonFactory from "../models/pokemon-factory"
 import {
@@ -42,8 +48,11 @@ import {
   PRECOMPUTED_REGIONAL_MONS
 } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
-import { getSellPrice } from "../models/shop"
-import { updatePlayerTitlesAfterGame } from "../models/titles"
+import {
+  updatePlayerCollectorTitle,
+  updatePlayerTitlesAfterGame
+} from "../models/titles"
+import { openGift } from "../services/gift-shop"
 import { fetchEventLeaderboard } from "../services/leaderboard"
 import { notificationsService } from "../services/notifications"
 import {
@@ -54,16 +63,23 @@ import {
   type IGameHistorySimplePlayer,
   type IGameMetadata,
   type IPokemon,
-  type IPokemonEntity,
   type ISimplePlayer,
   Role,
   Title,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
-import { type Item, Wands } from "../types/enum/Item"
+import {
+  type Gift,
+  Gifts,
+  Item,
+  RemovableItems,
+  UnholdableItemsToSaveForStats,
+  Wands
+} from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
   Pkm,
@@ -73,9 +89,14 @@ import {
 } from "../types/enum/Pokemon"
 import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import type { Synergy } from "../types/enum/Synergy"
+import { TradeStatus } from "../types/enum/TradeStatus"
+import { WandererBehavior, WandererType } from "../types/enum/Wanderer"
 import { GameEvent } from "../types/events"
-import type { IPokemonCollectionItemMongo } from "../types/interfaces/UserMetadata"
-import type { IDetailledPokemon } from "../types/models/bot-v2"
+import type { IDetailledPokemon } from "../types/interfaces/IDetailledPokemon"
+import type {
+  IPokemonCollectionItemForPlayer,
+  IUserMetadataForPlayer
+} from "../types/interfaces/UserMetadata"
 import { isIn, removeInArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import {
@@ -85,11 +106,13 @@ import {
 import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
-import { clamp } from "../utils/number"
+import { clamp, min } from "../utils/number"
 import { shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
+  OnCancelTradeOfferCommand,
+  OnDevCommand,
   OnDragDropCombineCommand,
   OnDragDropItemCommand,
   OnDragDropPokemonCommand,
@@ -104,7 +127,8 @@ import {
   OnShopRerollCommand,
   OnSpectateCommand,
   OnSwitchBenchAndBoardCommand,
-  OnUpdateCommand
+  OnUpdateCommand,
+  OnUseItemCommand
 } from "./commands/game-commands"
 import GameState from "./states/game-state"
 
@@ -114,13 +138,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
   additionalRarePool: Array<Pkm>
   additionalEpicPool: Array<Pkm>
   miniGame: MiniGame
+  private pendingGivingInProgress = new Set<string>()
   constructor() {
     super()
     this.dispatcher = new Dispatcher(this)
-    this.additionalUncommonPool = new Array<Pkm>()
-    this.additionalRarePool = new Array<Pkm>()
-    this.additionalEpicPool = new Array<Pkm>()
+    this.additionalUncommonPool = [] as Pkm[]
+    this.additionalRarePool = [] as Pkm[]
+    this.additionalEpicPool = [] as Pkm[]
     this.miniGame = new MiniGame(this)
+  }
+
+  messages = {
+    surrender: (client: Client) => {
+      const player = this.state.players.get(client.auth?.uid)
+      if (!player || !this.isPlaying(player)) return false
+      this.eliminatePlayer(player, "SURRENDER")
+      return true
+    }
   }
 
   // When room is initialized
@@ -164,7 +198,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
       this.autoDispose = false // prevent a tournament game to be removed before registering the brackets results
     }
 
+    if (gameMode === GameMode.DOUBLE_UP) {
+      noElo = true
+    }
+
     this.setMetadata(<IGameMetadata>{
+      ...this.metadata,
       name,
       ownerName,
       gameMode,
@@ -177,6 +216,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       tournamentId,
       bracketId
     })
+
     // logger.debug(options);
     this.state = new GameState(
       preparationId,
@@ -264,8 +304,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
 
     await Promise.all(
-      Object.keys(users).map(async (id) => {
-        const user = users[id]
+      Object.keys(users).map(async (uid) => {
+        const user = users[uid]
         //logger.debug(`init player`, user)
         if (user.isBot) {
           const player = new Player(
@@ -276,16 +316,31 @@ export default class GameRoom extends Room<{ state: GameState }> {
             user.avatar,
             true,
             this.state.players.size + 1,
-            new Map<string, IPokemonCollectionItemMongo>(),
+            new Map<string, IPokemonCollectionItemForPlayer>(),
             "",
             Role.BOT,
             this.state
           )
           this.state.players.set(user.uid, player)
-          this.state.botManager.addBot(player)
+          this.state.botManager.addBot(player, this)
+          player.doubleUpPartnerId = user.doubleUpPartnerId ?? ""
+          player.doubleUpTeamId = user.doubleUpTeamId ?? ""
         } else {
-          const leanUser = await UserMetadata.findOne({ uid: id }).lean()
-          const user = leanUser ? toLeanUserMetadata(leanUser) : null
+          const leanUser = await UserMetadata.findOne({ uid })
+            .select({
+              // Player only needs each entry's selectedEmotion/selectedShiny and the
+              // avatar entry's unlocked mask, so drop the rest of the collection
+              "pokemonCollection.dust": 0,
+              "pokemonCollection.id": 0,
+              "pokemonCollection.played": 0,
+              "pokemonCollection._id": 0,
+              eventData: 0,
+              titles: 0
+            })
+            .lean<IUserMetadataForPlayer>()
+          const user = leanUser
+            ? { ...leanUser, pokemonCollection: toPlayerCollection(leanUser) }
+            : null
           if (user) {
             // init player
             const player = new Player(
@@ -304,6 +359,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
             this.state.players.set(user.uid, player)
             this.state.shop.assignShop(player, false, this.state)
+            player.doubleUpPartnerId = users[uid].doubleUpPartnerId ?? ""
+            player.doubleUpTeamId = users[uid].doubleUpTeamId ?? ""
 
             if (
               this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE
@@ -459,6 +516,19 @@ export default class GameRoom extends Room<{ state: GameState }> {
       }
     })
 
+    this.onMessage(Transfer.USE_ITEM, (client, item: Item) => {
+      if (!this.state.gameFinished && client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnUseItemCommand(), {
+            client,
+            item
+          })
+        } catch (error) {
+          logger.error("use item drop error", item)
+        }
+      }
+    })
+
     this.onMessage(Transfer.REFRESH, (client, message) => {
       if (!this.state.gameFinished && client.auth) {
         try {
@@ -545,6 +615,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     )
+    this.onMessage(Transfer.CANCEL_TRADE_OFFER, (client) => {
+      if (client.auth) {
+        try {
+          this.dispatcher.dispatch(new OnCancelTradeOfferCommand(), {
+            playerId: client.auth.uid
+          })
+        } catch (e) {
+          logger.error("cancel trade offer error", e)
+        }
+      }
+    })
 
     this.onMessage(Transfer.PICK_BERRY, async (client, index) => {
       if (!this.state.gameFinished && client.auth) {
@@ -607,12 +688,41 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     )
+
+    this.onMessage(Transfer.DEV, (client, message) => {
+      if (process.env.MODE === "dev") {
+        try {
+          this.dispatcher.dispatch(new OnDevCommand(), message)
+        } catch (error) {
+          logger.error("dev command error", message)
+        }
+      }
+    })
+
+    this.onMessage(Transfer.TRADE_ACCEPT, (client, message: boolean) => {
+      if (!client.auth) return
+      const player = this.state.players.get(client.auth.uid)
+      if (player) {
+        const partner = this.state.players.get(player.doubleUpPartnerId)
+        player.tradeStatus =
+          message === true ? TradeStatus.ACCEPTED : TradeStatus.REFUSED
+        if (
+          player.tradeStatus === TradeStatus.ACCEPTED &&
+          partner?.tradeStatus === TradeStatus.ACCEPTED
+        ) {
+          if (player.tradeCooldown > 0 || partner.tradeCooldown > 0) return
+          this.tradePokemonWithPartner(player, partner)
+          player.tradeStatus = TradeStatus.PENDING
+          partner.tradeStatus = TradeStatus.PENDING
+        }
+      }
+    })
   }
 
   startGame() {
     if (this.state.gameLoaded) return // already started
     this.state.gameLoaded = true
-    this.setSimulationInterval((deltaTime: number) => {
+    this.setTimestep((deltaTime: number) => {
       /* in case of lag spikes, the game should feel slower, 
       but this max simulation dt helps preserving the correctness of simulation result */
       deltaTime = Math.min(MAX_SIMULATION_DELTA_TIME, deltaTime)
@@ -624,15 +734,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       }
     })
-    this.state.botManager.updateBots()
+    this.state.botManager.updateBots(this)
     this.miniGame.initialize(this.state, this)
   }
 
   async onAuth(client: Client, options, context) {
     try {
       super.onAuth(client, options, context)
-      const token = await admin.auth().verifyIdToken(options.idToken)
-      const user = await admin.auth().getUser(token.uid)
+      const token = await getAuth().verifyIdToken(options.idToken)
+      const user = await getAuth().getUser(token.uid)
 
       if (!user.displayName) {
         logger.error("No display name for this account", user.uid)
@@ -649,6 +759,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   async onJoin(client: Client) {
     const userProfile = await UserMetadata.findOne({ uid: client.auth.uid })
+      .select({ banned: 1 })
+      .lean()
     if (userProfile?.banned) {
       throw "Account banned"
     }
@@ -657,6 +769,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     if (pendingGame?.gameId === this.roomId) {
       // user reconnected without reconnection token (new browser/machine/session)
       clearPendingGame(this.presence, client.auth.uid)
+      this.publishPendingGame(client.auth.uid, null)
     } else if (pendingGame != null && !pendingGame.isExpired) {
       client.leave(CloseCodes.USER_IN_ANOTHER_GAME)
     }
@@ -666,92 +779,172 @@ export default class GameRoom extends Room<{ state: GameState }> {
     /*if (client && client.auth && client.auth.displayName) {
       logger.info(`${client.auth.displayName} has been disconnected`)
     }*/
+    if (
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    ) {
+      // a spectator disconnected: they have no game to reconnect to, so remove
+      // them from the spectators set immediately instead of holding a 5-minute
+      // reconnection window (which would keep the spectator count stale)
+      this.state.spectators.delete(client.auth.uid)
+      return
+    }
+    const player = this.state.players.get(client.auth?.uid)
+    if (!player || player.hasLeftGame) return // nothing left to reconnect to
+    await this.waitForReconnection(client)
+  }
+
+  // allow a client that left to reconnect into this room until 5 minutes
+  async waitForReconnection(client: Client): Promise<boolean> {
+    this.storePendingGame(client)
     try {
-      // allow disconnected client to reconnect into this room until 5 minutes
-      setPendingGame(this.presence, client.auth.uid, this.roomId)
       await this.allowReconnection(client, ALLOWED_GAME_RECONNECTION_TIME)
+      return true
     } catch (e) {
       /*if (client && client.auth && client.auth.displayName) {
         logger.info(`${client.auth.displayName} left game room`)
       }*/
+      return false
     }
+  }
+
+  // the lobby offers to reconnect to a stored pending game
+  storePendingGame(client: Client) {
+    setPendingGame(this.presence, client.auth.uid, this.roomId)
+    // no prompt while loading: every client drops once at game start, to reconnect from the game page
+    if (this.state.gameLoaded && !this.hasOtherClientConnected(client)) {
+      this.publishPendingGame(client.auth.uid, this.roomId)
+    }
+  }
+
+  // tells the lobby room to show (or with null, withdraw) this user's reconnect prompt
+  publishPendingGame(userId: string, gameId: string | null) {
+    this.presence.publish("pending-game-changed", { userId, gameId })
+  }
+
+  hasOtherClientConnected(client: Client) {
+    return this.clients.some(
+      (c) => c.auth?.uid === client.auth.uid && c !== client
+    )
+  }
+
+  isPlaying(player: Player) {
+    return !player.hasLeftGame && player.life > 0 && !this.state.gameFinished
   }
 
   async onReconnect(client: Client) {
     // if the user reconnects, we clear the pending game and recall the OnJoinCommand
     clearPendingGame(this.presence, client.auth.uid)
+    this.publishPendingGame(client.auth.uid, null)
     this.dispatcher.dispatch(new OnJoinCommand(), { client })
   }
 
   async onLeave(client: Client, code: number) {
-    const consented = code === CloseCode.CONSENTED
-
-    if (client && client.auth && client.auth.displayName) {
-      const pendingGame = await getPendingGame(this.presence, client.auth.uid)
-      if (!pendingGame && !consented)
-        return // user has reconnected through other ways (new browser/machine/session)
-      else if (
-        pendingGame &&
-        isValidDate(pendingGame.reconnectionDeadline) &&
-        pendingGame.reconnectionDeadline.getTime() > Date.now()
-      ) {
-        // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
-        // so we have a new allowed reconnection time. Ignoring this leave and relying on the onLeave call that followed
-        return
-      }
-      clearPendingGame(this.presence, client.auth.uid)
-
-      //logger.info(`${client.auth.displayName} left game`)
-      const player = this.state.players.get(client.auth.uid)
-      const hasLeftGameBeforeTheEnd =
-        player && player.life > 0 && !this.state.gameFinished
-      const otherHumans = schemaValues(this.state.players).filter(
-        (p) => !p.isBot && p.id !== client.auth.uid
-      )
-      if (
-        hasLeftGameBeforeTheEnd &&
-        otherHumans.length >= 1 &&
-        player.role !== Role.ADMIN
-      ) {
-        /* if a user leaves a game before the end, 
-        they cannot join another in the next 5 minutes */
-        givePlayerTimeout(this.presence, client.auth.uid)
-      }
-
-      if (player && this.state.stageLevel <= 5 && !consented) {
-        /* 
-        if player left game during the loading screen or before stage 6,
-        we consider they didn't play the game and presume a technical issue
-        we remove it from the players and don't give them any rewards
-        */
-        this.state.players.delete(client.auth.uid)
-        this.setMetadata({
-          playerIds: removeInArray(this.metadata.playerIds, client.auth.uid)
-        })
-
-        /*logger.info(
-          `${client.auth.displayName} has been removed from players list`
-        )*/
-      } else if (player && !player.hasLeftGame) {
-        player.hasLeftGame = true
-        player.spectatedPlayerId = player.id
-
-        const hasLeftBeforeEnd = player.life > 0 && !this.state.gameFinished
-        if (hasLeftBeforeEnd) {
-          // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
-          player.life = -99
-          this.rankPlayers()
-        }
-
-        this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
-      }
+    if (!client || !client.auth || !client.auth.displayName) return
+    const isSpectator =
+      client?.auth &&
+      this.state.spectators.has(client.auth.uid) &&
+      !this.state.players.has(client.auth.uid)
+    if (isSpectator) {
+      // a spectator (not one of the players) left the game, nothing to do in particular
+      this.state.spectators.delete(client.auth.uid)
+      return
     }
+
+    let player = this.state.players.get(client.auth.uid)
+    if (!player || player.hasLeftGame) return
+    // a session closing while another session of this player is still connected is not them leaving
+    if (this.hasOtherClientConnected(client)) return
+    // a failed reconnect is not the player leaving either: store again the pending game onReconnect cleared
+    if (code === CloseCode.FAILED_TO_RECONNECT) {
+      if (this.isPlaying(player)) this.storePendingGame(client)
+      return
+    }
+
+    // CONSENTED = connection lost due to a user action, like navigating to a new page or closing tab
+    // This is not considered an explicit surrender request, because this can happen by mistake
+    // thereforewe still allow the same 5 minutes reconnection time before eliminating the player
+    if (code === CloseCode.CONSENTED && this.isPlaying(player)) {
+      client.leave(code) // colyseus only closes the socket once onLeave resolves, so close it before waiting
+      const hasReconnected = await this.waitForReconnection(client) // wait for up to 5 minutes
+      if (hasReconnected) return
+      player = this.state.players.get(client.auth.uid)
+      if (!player || player.hasLeftGame) return
+      if (this.hasOtherClientConnected(client)) return // user has reconnected through another window/browser
+    }
+
+    const pendingGame = await getPendingGame(this.presence, client.auth.uid)
+    if (
+      pendingGame &&
+      isValidDate(pendingGame.reconnectionDeadline) &&
+      pendingGame.reconnectionDeadline.getTime() > Date.now()
+    ) {
+      // user has reconnected through other ways (new browser/machine/session) but has left or lost connection again
+      // so we have a new allowed reconnection time.
+      // In this scenario, we are ignoring this leave() call and relying on the onLeave() call of the new session
+      return
+    }
+
+    // at this stage, we know for sure that player did not reconnect in time and needs to be eliminated
+    this.eliminatePlayer(player, "RECONNECTION_TIMEOUT")
+
     if (
       !this.state.gameLoaded &&
       schemaValues(this.state.players).every((p) => p.loadingProgress === 100)
     ) {
+      // player left while others were waiting to load, in that case we don't wait for reconnect and start game
       this.broadcast(Transfer.LOADING_COMPLETE)
       this.startGame()
+    }
+  }
+
+  eliminatePlayer(player: Player, cause: "RECONNECTION_TIMEOUT" | "SURRENDER") {
+    // player has either surrendered or failed to reconnect after timeout
+    clearPendingGame(this.presence, player.id)
+    this.publishPendingGame(player.id, null)
+
+    const hasLeftBeforeEnd = this.isPlaying(player)
+    const otherHumans = schemaValues(this.state.players).filter(
+      (p) => !p.isBot && p.id !== player.id
+    )
+    if (
+      hasLeftBeforeEnd &&
+      otherHumans.length >= 1 &&
+      player.role !== Role.ADMIN &&
+      cause !== "SURRENDER"
+    ) {
+      /* if a user leaves a game before the end, 
+        they cannot join another in the next 5 minutes */
+      givePlayerTimeout(this.presence, player.id)
+    }
+
+    if (
+      cause === "RECONNECTION_TIMEOUT" &&
+      hasLeftBeforeEnd &&
+      this.state.stageLevel <= 5
+    ) {
+      /* 
+        if player left game during the loading screen or before stage 6,
+        we consider they didn't play the game and presume a technical issue
+        we remove it from the players and don't give them any rewards
+        */
+      this.state.players.delete(player.id)
+      this.setMetadata({
+        ...this.metadata,
+        playerIds: removeInArray(this.metadata.playerIds, player.id)
+      })
+    } else if (!player.hasLeftGame) {
+      player.hasLeftGame = true
+      player.spectatedPlayerId = player.id
+
+      if (hasLeftBeforeEnd) {
+        // player left before being eliminated, in that case we consider this a surrender and give them the worst possible rank
+        player.life = -99
+        this.rankPlayers()
+      }
+
+      this.updatePlayerAfterGame(player, hasLeftBeforeEnd)
     }
   }
 
@@ -768,7 +961,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     // we skip elo compute/game history if game is not finished
     // that is at least two players including one human are still alive
     if (playersAlive.length >= 2 && humansAlive.length >= 1) {
-      if (humansAlive.length > 1) {
+      const humansAliveLimit =
+        this.state.gameMode === GameMode.DOUBLE_UP ? 2 : 1
+      if (humansAlive.length > humansAliveLimit) {
         // this can happen if all players disconnect before the end
         // or if there's another technical issue
         // adding a log just in case
@@ -804,12 +999,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
             const botPlayer = bots[i]
             const bot = await BotV2.findOne({ id: botPlayer.id })
             if (bot) {
-              bot.elo = computeElo(
+              bot.elo = await computeElo(
                 this.transformToSimplePlayer(botPlayer),
                 botPlayer.rank,
                 bot.elo,
                 players,
-                this.state.gameMode,
                 true
               )
               bot.save()
@@ -867,200 +1061,230 @@ export default class GameRoom extends Room<{ state: GameState }> {
     const rank = player.rank
     const exp = ExpPlace[rank - 1]
 
-    const usr = await UserMetadata.findOne({ uid: player.id })
-    if (usr) {
-      // Track previous values for notifications
-      const previousElo = usr.elo
-      const previousRank = getRank(previousElo)
-
-      if (eligibleToXP) {
-        giveUserExp(usr, exp)
-      }
-
-      usr.games += 1
-      if (rank === 1) {
-        usr.wins += 1
-        if (this.state.gameMode === GameMode.RANKED) {
-          player.titles.add(Title.VANQUISHER)
-          const minElo = Math.min(
-            ...schemaValues(this.state.players).map((p) => p.elo)
-          )
-          if (usr.elo === minElo && humans.length >= 8) {
-            player.titles.add(Title.OUTSIDER)
-          }
-        }
-      }
-
-      if (usr.elo != null && eligibleToELO) {
-        let elo = computeElo(
-          this.transformToSimplePlayer(player),
-          rank,
-          usr.elo,
-          humans.map((p) => this.transformToSimplePlayer(p)),
-          this.state.gameMode,
-          false
-        )
-
-        if (!elo || isNaN(elo)) {
-          logger.error(
-            `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
-          )
-          elo = usr.elo
-        }
-
-        usr.elo = elo
-        usr.maxElo = Math.max(usr.maxElo, elo)
-
-        // Check if elo rank changed
-        const newRank = getRank(elo)
-        if (newRank !== previousRank) {
-          notificationsService.addNotification(
-            player.id,
-            "elo_rank_change",
-            newRank
-          )
-        }
-
-        const dbrecord = this.transformToSimplePlayer(player)
-        const synergiesMap = new Map<Synergy, number>()
-        player.synergies.forEach((v, k) => {
-          v > 0 && synergiesMap.set(k, v)
-        })
-        DetailledStatistic.create({
-          time: Date.now(),
-          name: dbrecord.name,
-          pokemons: dbrecord.pokemons.map((pokemon) => ({
-            ...pokemon,
-            items: Array.from(pokemon.items ?? []).map((item) =>
-              item.toString()
-            )
-          })),
-          rank: dbrecord.rank,
-          nbplayers: humans.length + bots.length,
-          avatar: dbrecord.avatar,
-          playerId: dbrecord.id,
-          elo: elo,
-          synergies: synergiesMap,
-          gameMode: this.state.gameMode,
-          regions: player.regions
-        })
-
-        if (
-          usr.eventFinishTime == null &&
-          getCurrentGameEvent() === GameEvent.VICTORY_ROAD
-        ) {
-          try {
-            const eventPointsGained =
-              VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
-            usr.eventPoints = clamp(
-              usr.eventPoints + eventPointsGained,
-              0,
-              VICTORY_ROAD_MAX_EVENT_POINTS
-            )
-            usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
-            if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
-              usr.eventFinishTime = new Date()
-              usr.markModified("eventFinishTime")
-
-              const nbFinishers = await UserMetadata.countDocuments({
-                eventFinishTime: { $exists: true, $ne: null }
-              })
-              if (nbFinishers === 0) {
-                player.titles.add(Title.VICTORIOUS)
-                this.presence.publish(
-                  "announcement",
-                  `${player.name} won the Victory Road race !`
-                )
-              }
-              player.titles.add(Title.FINISHER)
-              notificationsService.addNotification(
-                player.id,
-                "victory_road_finished",
-                `${nbFinishers + 1}`
-              )
-              shouldRefetchEventLeaderboard = true
-            }
-
-            if (usr.maxEventPoints >= 100) {
-              player.titles.add(Title.RUNNER)
-            }
-          } catch (error) {
-            logger.error("Error updating event points", error)
-          }
-        }
-      }
-
-      // update all pokemons played count
-      player.pokemonsPlayed.forEach((pkm) => {
+    // update pokemons played counter in user collection before checking for collector title
+    if (player.pokemonsPlayed.size > 0) {
+      const inc: Record<string, number> = {}
+      for (const pkm of player.pokemonsPlayed) {
         const index = PkmIndex[pkm]
-        const pokemonCollectionItem = usr.pokemonCollection.get(index)
-        if (pokemonCollectionItem) {
-          pokemonCollectionItem.played = pokemonCollectionItem.played + 1
-          usr.markModified(`pokemonCollection.${index}.played`)
-        } else {
-          const newConfig: IPokemonCollectionItemMongo = {
-            dust: 0,
-            id: index,
-            unlocked: Buffer.alloc(5, 0),
-            selectedEmotion: null,
-            selectedShiny: false,
-            played: 1
-          }
-          usr.pokemonCollection.set(index, newConfig)
+        inc[`pokemonCollection.${index}.played`] = 1
+      }
+
+      // will create a { played: 1 } blank entry for any pokemon that the user has never played before
+      await UserMetadata.updateOne({ uid: player.id }, { $inc: inc })
+    }
+
+    // The collection is excluded entirely: nothing here mutates it, and COLLECTOR - the
+    // only thing that needs it - is resolved with its own query below.
+    const usr = await UserMetadata.findOne({ uid: player.id }).select({
+      pokemonCollection: 0
+    })
+    if (!usr) {
+      logger.warn(
+        `UserMetadata not found for player ${player.name} (${player.id})`
+      )
+      return
+    }
+
+    // Track previous values for notifications
+    const previousElo = usr.elo
+    const previousRank = getRank(previousElo)
+
+    if (eligibleToXP) {
+      giveUserExp(usr, exp)
+    }
+
+    usr.games += 1
+    if (rank === 1) {
+      usr.wins += 1
+      if (this.state.gameMode === GameMode.RANKED) {
+        player.titles.add(Title.VANQUISHER)
+        const minElo = Math.min(
+          ...schemaValues(this.state.players).map((p) => p.elo)
+        )
+        if (usr.elo === minElo && humans.length >= 8) {
+          player.titles.add(Title.OUTSIDER)
         }
-      })
+      }
+    }
+
+    if (usr.elo != null && eligibleToELO) {
+      let elo = await computeElo(
+        this.transformToSimplePlayer(player),
+        rank,
+        usr.elo,
+        humans.map((p) => this.transformToSimplePlayer(p)),
+        false
+      )
+
+      if (!elo || isNaN(elo)) {
+        logger.error(
+          `Elo compute failed for player ${player.name} (${player.id}) ; value: ${elo}`
+        )
+        elo = usr.elo
+      }
+
+      usr.elo = elo
+      usr.maxElo = Math.max(usr.maxElo, elo)
+
+      // Check if elo rank changed
+      const newRank = getRank(elo)
+      if (newRank !== previousRank) {
+        notificationsService.addNotification(
+          player.id,
+          "elo_rank_change",
+          newRank
+        )
+      }
 
       if (
-        getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
-        eligibleToXP &&
-        this.state.gameMode !== GameMode.CUSTOM_LOBBY
+        usr.eventFinishTime == null &&
+        getCurrentGameEvent() === GameEvent.VICTORY_ROAD
       ) {
-        const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
-          player,
-          usr
-        )
-        if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
-      }
+        try {
+          const eventPointsGained =
+            VictoryRoadPointsPerRank[clamp(rank - 1, 0, 7)]
+          usr.eventPoints = clamp(
+            usr.eventPoints + eventPointsGained,
+            0,
+            VICTORY_ROAD_MAX_EVENT_POINTS
+          )
+          usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+          if (usr.maxEventPoints >= VICTORY_ROAD_MAX_EVENT_POINTS) {
+            usr.eventFinishTime = new Date()
+            usr.markModified("eventFinishTime")
 
-      updatePlayerTitlesAfterGame(player, usr, rank)
-
-      if (usr.titles === undefined) {
-        usr.titles = []
-      }
-
-      const newTitlesEarned: Title[] = []
-      player.titles.forEach((t) => {
-        if (!usr.titles.includes(t)) {
-          //logger.info("title added ", t)
-          usr.titles.push(t)
-          newTitlesEarned.push(t)
-        }
-      })
-
-      // Add notification for new titles
-      if (newTitlesEarned.length > 0) {
-        newTitlesEarned.forEach((title) => {
-          notificationsService.addNotification(player.id, "new_title", title)
-          if (
-            isIn(TITLES_UNLOCKING_THEMES, title) &&
-            usr.level >= GADGETS.palette.levelRequired
-          ) {
+            const nbFinishers = await UserMetadata.countDocuments({
+              eventFinishTime: { $exists: true, $ne: null }
+            })
+            if (nbFinishers === 0) {
+              player.titles.add(Title.VICTORIOUS)
+              this.presence.publish(
+                "announcement",
+                `${player.name} won the Victory Road race !`
+              )
+            }
+            player.titles.add(Title.FINISHER)
             notificationsService.addNotification(
               player.id,
-              "new_theme",
-              THEME_BY_TITLE[title]!
+              "victory_road_finished",
+              `${nbFinishers + 1}`
             )
+            shouldRefetchEventLeaderboard = true
           }
-        })
-      }
 
-      //logger.debug(usr);
-      //usr.markModified('metadata');
-      await usr.save()
-      if (shouldRefetchEventLeaderboard) {
-        await fetchEventLeaderboard()
-        //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
+          if (usr.maxEventPoints >= 100) {
+            player.titles.add(Title.RUNNER)
+          }
+        } catch (error) {
+          logger.error("Error updating event points", error)
+        }
       }
+    }
+
+    if (
+      this.state.gameMode === GameMode.DOUBLE_UP &&
+      getCurrentGameEvent() === GameEvent.POKEPALS &&
+      usr.eventData?.pal &&
+      this.state.players.has(usr.eventData?.pal) &&
+      usr.eventData?.pal === player.doubleUpPartnerId
+    ) {
+      try {
+        const eventPointsGained = PokepalsPointsPerRank[clamp(rank - 1, 0, 7)]
+        usr.eventPoints = min(0)(usr.eventPoints + eventPointsGained)
+        usr.maxEventPoints = Math.max(usr.maxEventPoints, usr.eventPoints)
+        player.titles.add(Title.PAL)
+      } catch (error) {
+        logger.error("Error updating event points", error)
+      }
+    }
+
+    // add game to player game history
+    const dbrecord = this.transformToSimplePlayer(player)
+    const synergiesMap = new Map<Synergy, number>()
+    player.synergies.forEach((v, k) => {
+      v > 0 && synergiesMap.set(k, v)
+    })
+    DetailledStatistic.create({
+      time: Date.now(),
+      name: dbrecord.name,
+      pokemons: dbrecord.pokemons.map((pokemon) => ({
+        ...pokemon,
+        items: Array.from(pokemon.items ?? []).map(
+          (item) => item.toString() as Item
+        )
+      })),
+      rank: dbrecord.rank,
+      nbplayers: humans.length + bots.length,
+      avatar: dbrecord.avatar,
+      playerId: dbrecord.id,
+      elo: usr.elo,
+      synergies: synergiesMap,
+      gameMode: this.state.gameMode,
+      regions: player.regions,
+      unholdableItems: schemaValues(player.items).filter((item) =>
+        isIn(UnholdableItemsToSaveForStats, item)
+      )
+    })
+
+    if (
+      getCurrentGameEvent() === GameEvent.EXPEDITIONS &&
+      eligibleToXP &&
+      this.state.gameMode !== GameMode.CUSTOM_LOBBY
+    ) {
+      const hasCompletedExpeditions = updatePlayerExpeditionsAfterGame(
+        player,
+        usr
+      )
+      if (hasCompletedExpeditions) shouldRefetchEventLeaderboard = true
+    }
+
+    updatePlayerTitlesAfterGame(player, usr, rank, humans, bots)
+
+    if (usr.titles === undefined) {
+      usr.titles = []
+    }
+
+    // COLLECTOR is the only title that depends on the collection, which is excluded from
+    // the read above, so it is resolved with its own query. Done before the save below so
+    // the title rides along in that single write.
+    if (!usr.titles.includes(Title.COLLECTOR)) {
+      const playedPokemonIndexes = await getPlayedPokemonIndexes(player.id)
+      updatePlayerCollectorTitle(player, playedPokemonIndexes)
+    }
+
+    const newTitlesEarned: Title[] = []
+    player.titles.forEach((t) => {
+      if (!usr.titles.includes(t)) {
+        //logger.info("title added ", t)
+        usr.titles.push(t)
+        newTitlesEarned.push(t)
+      }
+    })
+
+    // Add notification for new titles
+    if (newTitlesEarned.length > 0) {
+      newTitlesEarned.forEach((title) => {
+        notificationsService.addNotification(player.id, "new_title", title)
+        if (
+          isIn(TITLES_UNLOCKING_THEMES, title) &&
+          usr.level >= GADGETS.palette.levelRequired
+        ) {
+          notificationsService.addNotification(
+            player.id,
+            "new_theme",
+            THEME_BY_TITLE[title]!
+          )
+        }
+      })
+    }
+
+    //logger.debug(usr);
+    //usr.markModified('metadata');
+    await usr.save()
+
+    if (shouldRefetchEventLeaderboard) {
+      await fetchEventLeaderboard()
+      //client.send(Transfer.USER_PROFILE, toUserMetadataJSON(usr))
     }
   }
 
@@ -1070,12 +1294,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
       id: player.id,
       rank: player.rank,
       avatar: player.avatar,
-      pokemons: new Array<{
+      pokemons: [] as {
         name: Pkm
         avatar: string
         items: Item[]
         inventory: Item[]
-      }>(),
+      }[],
       elo: player.elo,
       games: player.games,
       synergies: [],
@@ -1097,8 +1321,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
         const s: IGameHistoryPokemonRecord = {
           name: pokemon.name,
           avatar: avatar,
-          items: new Array<Item>(),
-          inventory: new Array<Item>()
+          items: [] as Item[],
+          inventory: [] as Item[]
         }
         pokemon.items.forEach((i) => {
           s.items.push(i)
@@ -1110,7 +1334,11 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return simplePlayer
   }
 
-  spawnOnBench(player: Player, pkm: Pkm, anim: "fishing" | "spawn" = "spawn") {
+  spawnOnBench(
+    player: Player,
+    pkm: Pkm,
+    anim: "fishing" | "nest" | "spawn" = "spawn"
+  ) {
     const pokemon = PokemonFactory.createPokemonFromName(pkm, player)
     const x = getFirstAvailablePositionInBench(player.board)
     if (x !== null) {
@@ -1118,6 +1346,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
       pokemon.positionY = 0
       if (anim === "fishing") {
         pokemon.action = PokemonActionState.FISH
+      } else if (anim === "nest") {
+        pokemon.action = PokemonActionState.NEST
       }
 
       player.board.set(pokemon.id, pokemon)
@@ -1136,12 +1366,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
     player.board.forEach((pokemon) => {
       if (
         pokemon.hasEvolution &&
-        pokemon.evolutionRule instanceof CountEvolutionRule
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+        const pokemonEvolved = EvolutionManager.tryEvolve(
           pokemon,
           player,
-          this.state.stageLevel
+          this.state
         )
         if (pokemonEvolved) {
           hasEvolved = true
@@ -1150,27 +1380,84 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     player.boardSize = this.getTeamSize(player.board)
+    this.givePendingPokemons(player)
     return hasEvolved
   }
 
   checkEvolutionsAfterItemAcquired(
     playerId: string,
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    itemAcquired: Item
   ): Pokemon | void {
     const player = this.state.players.get(playerId)
     if (!player) return
 
     if (
       pokemon.evolutionRule &&
-      pokemon.evolutionRule instanceof ItemEvolutionRule
+      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
     ) {
-      const pokemonEvolved = pokemon.evolutionRule.tryEvolve(
+      const pokemonEvolved = EvolutionManager.tryEvolve(
         pokemon,
         player,
-        this.state.stageLevel
+        itemAcquired
       )
       return pokemonEvolved
     }
+  }
+
+  givePokemons(pokemonsObtained: Pokemon[], player: Player): void {
+    pokemonsObtained.forEach((pokemon) => {
+      this.givePendingPokemons(player)
+
+      const freeCellX = getFirstAvailablePositionInBench(player.board)
+      const isEvolution =
+        pokemon.evolutionRule &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        EvolutionManager.canEvolveIfGettingOne(pokemon, player)
+
+      if (isEvolution) {
+        pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      } else if (freeCellX !== null) {
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+      } else {
+        player.pendingPokemonsToGive.push(pokemon)
+      }
+    })
+  }
+
+  givePendingPokemons(player: Player): void {
+    if (player.pendingPokemonsToGive.length === 0) return
+    if (this.pendingGivingInProgress.has(player.id)) return // prevent recursion between givePendingPokemons and checkEvolutionsAfterPokemonAcquired
+    if (getFreeSpaceOnBench(player.board) === 0) return
+
+    this.pendingGivingInProgress.add(player.id)
+    try {
+      while (player.pendingPokemonsToGive.length > 0) {
+        const freeCellX = getFirstAvailablePositionInBench(player.board)
+        if (freeCellX === null) break
+
+        const pokemon = player.pendingPokemonsToGive.shift()
+        if (!pokemon) break
+
+        pokemon.positionX = freeCellX
+        pokemon.positionY = 0
+        player.board.set(pokemon.id, pokemon)
+        pokemon.onAcquired(player)
+        this.checkEvolutionsAfterPokemonAcquired(player.id)
+      }
+    } finally {
+      this.pendingGivingInProgress.delete(player.id)
+    }
+
+    player.updateSynergies()
+    player.boardSize = this.getTeamSize(player.board)
   }
 
   getNumberOfPlayersAlive(players: MapSchema<Player>) {
@@ -1195,12 +1482,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     return size
   }
 
-  pickChoice(
-    playerId: string,
-    choiceId: string,
-    choiceIndex: number,
-    bypassLackOfSpace = false
-  ) {
+  pickChoice(playerId: string, choiceId: string, choiceIndex: number) {
     const player = this.state.players.get(playerId)
     if (!player) return
     const choice = player.choices.find((c) => c.id === choiceId)
@@ -1211,26 +1493,23 @@ export default class GameRoom extends Room<{ state: GameState }> {
     )
       return
 
-    if (choice.pokemons.length > 0) {
+    let cost = 0
+    if (choice.costs.length > 0) {
+      cost = choice.costs[choiceIndex] ?? 0
+      if (cost && player.money < cost) {
+        return // not enough gold to pick that choice
+      }
+    }
+
+    if (choice.onChoice) {
+      choice.onChoice(choiceIndex)
+    }
+
+    if (choice.pokemons.length > 0 && choice.type !== "form_change") {
       const pkm = choice.pokemons[choiceIndex]
       let pokemonsObtained: Pokemon[] = (
         pkm in PkmDuos ? PkmDuos[pkm] : [pkm]
       ).map((p) => PokemonFactory.createPokemonFromName(p, player))
-
-      const pokemon = pokemonsObtained[0]
-      const isEvolution =
-        pokemon.evolutionRule &&
-        pokemon.evolutionRule instanceof CountEvolutionRule &&
-        pokemon.evolutionRule.canEvolveIfGettingOne(pokemon, player)
-
-      const freeSpace = getFreeSpaceOnBench(player.board)
-
-      if (
-        freeSpace < pokemonsObtained.length &&
-        !bypassLackOfSpace &&
-        !isEvolution
-      )
-        return false // prevent picking if not enough space on bench
 
       if (choice.type === "addPick") {
         if (pokemonsObtained[0]?.regional) {
@@ -1247,7 +1526,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
-              ? pkm.evolutionRule.getEvolution(
+              ? EvolutionManager.getEvolution(
                   pkm,
                   player,
                   this.state.stageLevel
@@ -1277,40 +1556,27 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.firstPartner = pokemonsObtained[0].name
       }
 
-      pokemonsObtained.forEach((pokemon) => {
-        const freeCellX = getFirstAvailablePositionInBench(player.board)
-        if (isEvolution) {
-          pokemon.positionX = freeCellX ?? -1 // temporary position off the board just to handle evolution
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-          this.checkEvolutionsAfterPokemonAcquired(playerId)
-        } else if (freeCellX !== null) {
-          pokemon.positionX = freeCellX
-          pokemon.positionY = 0
-          player.board.set(pokemon.id, pokemon)
-          pokemon.onAcquired(player)
-        } else {
-          // sell picked pokemon if no more space on bench and bypassLackOfSpace is true
-          const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
-          player.addMoney(sellPrice, true, null)
-        }
-      })
+      this.givePokemons(pokemonsObtained, player)
     }
 
     if (choice.items.length > 0) {
       const item = choice.items[choiceIndex]
-      player.items.push(item)
-      if (isIn(Wands, item)) {
+      if (isIn(Gifts, item)) {
+        this.pickGift(item, player)
+      } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
+        player.updateFairyWands()
+      } else {
+        player.items.push(item)
       }
     }
 
+    player.money -= cost
     removeInArray(player.choices, choice)
   }
 
   computeRoundDamage(
-    opponentTeam: MapSchema<IPokemonEntity>,
+    opponentTeam: MapSchema<PokemonEntity>,
     stageLevel: number
   ) {
     let damage = Math.ceil(stageLevel / 2)
@@ -1321,11 +1587,17 @@ export default class GameRoom extends Room<{ state: GameState }> {
         }
       })
     }
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      damage = Math.ceil(stageLevel / 2)
+    }
     return damage
   }
 
   rankPlayers() {
-    const rankArray = new Array<{ id: string; life: number; level: number }>()
+    if (this.state.gameMode === GameMode.DOUBLE_UP) {
+      return this.rankPlayersDoubleUp()
+    }
+    const rankArray: { id: string; life: number; level: number }[] = []
     this.state.players.forEach((player) => {
       if (!player.alive) {
         return
@@ -1357,6 +1629,126 @@ export default class GameRoom extends Room<{ state: GameState }> {
         player.rank = index + 1
       }
     })
+  }
+
+  rankPlayersDoubleUp() {
+    const teamMap = new Map<
+      string,
+      {
+        life: number
+        level: number
+        ids: string[]
+        alive: boolean
+        eliminationRound: number
+      }
+    >()
+    this.state.players.forEach((player) => {
+      if (!teamMap.has(player.doubleUpTeamId)) {
+        teamMap.set(player.doubleUpTeamId, {
+          life: Infinity,
+          level: 0,
+          ids: [],
+          alive: false,
+          eliminationRound: 999
+        })
+      }
+      const entry = teamMap.get(player.doubleUpTeamId)!
+      entry.eliminationRound = Math.min(
+        entry.eliminationRound,
+        player.doubleUpEliminationRound
+      )
+      entry.life = Math.min(
+        entry.life === 0 && entry.ids.length === 0 ? Infinity : entry.life,
+        player.life
+      )
+      entry.level += player.experienceManager.level
+      entry.ids.push(player.id)
+      entry.alive = entry.alive || player.alive
+    })
+    const teamArray = [...teamMap.values()]
+    teamArray.sort((a, b) => {
+      if (a.alive !== b.alive) return a.alive ? -1 : 1
+      if (!a.alive && !b.alive) {
+        if (a.eliminationRound !== b.eliminationRound) {
+          return b.eliminationRound - a.eliminationRound // later death = better rank?
+        }
+      }
+      return b.life - a.life || b.level - a.level
+    })
+
+    teamArray.forEach((team, i) => {
+      team.ids.forEach((id) => {
+        const player = this.state.players.get(id)
+        if (player) player.rank = i + 1
+      })
+    })
+  }
+
+  pickGift(gift: Gift, player: Player) {
+    const partner = this.state.players.get(player.doubleUpPartnerId)
+    if (!partner || !partner.alive) return
+    player.giftsGiven.push(gift)
+
+    partner.spawnWanderingPokemon({
+      pkm: Pkm.KECLEON_PURPLE,
+      shiny: false,
+      type: WandererType.DIALOG,
+      behavior: WandererBehavior.SPECTATE,
+      data: gift,
+      delay: 3000
+    })
+
+    setTimeout(() => openGift(gift, partner, player, this), 10000)
+  }
+
+  tradePokemonWithPartner(playerA: Player, playerB: Player) {
+    if (!playerA.alive || !playerB.alive) return
+
+    const pokemonA = schemaValues(playerA.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    const pokemonB = schemaValues(playerB.board).find(
+      (p) => p.positionX === BOARD_WIDTH - 1 && p.positionY === 0
+    )
+    if (
+      !pokemonA ||
+      !pokemonB ||
+      !canBeTraded(pokemonA) ||
+      !canBeTraded(pokemonB)
+    )
+      return
+
+    // Remove removable items
+    const isRemovedOnTrade = (item) =>
+      isIn(RemovableItems, item) || item === Item.SILK_SCARF
+
+    const itemsRemovedA = schemaValues(pokemonA.items).filter(isRemovedOnTrade)
+    playerA.items.push(...itemsRemovedA)
+    unequipItems(pokemonA, itemsRemovedA, playerA)
+
+    const itemsToRemoveB = schemaValues(pokemonB.items).filter(isRemovedOnTrade)
+    playerB.items.push(...itemsToRemoveB)
+    unequipItems(pokemonB, itemsToRemoveB, playerB)
+
+    // Switch Pokémon
+    playerA.board.delete(pokemonA.id)
+    playerA.board.set(pokemonB.id, pokemonB)
+    pokemonB.onAcquired(playerA)
+
+    playerB.board.delete(pokemonB.id)
+    playerB.board.set(pokemonA.id, pokemonA)
+    pokemonA.onAcquired(playerB)
+
+    this.checkEvolutionsAfterPokemonAcquired(playerA.id)
+    this.checkEvolutionsAfterPokemonAcquired(playerB.id)
+
+    this.broadcast(Transfer.TRADE_ACCEPT, [playerA.id, playerB.id])
+
+    // Update trading platform cooldown based on nb of items traded & pokemon rarity
+
+    const cooldown = computeTradeCooldown(pokemonA, pokemonB)
+    playerA.tradeCooldown = cooldown
+    playerB.tradeCooldown = cooldown
   }
 
   onRoomDeleted(roomId) {

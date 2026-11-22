@@ -40,7 +40,7 @@ If you are using MongoDB Cloud, you may need to create an admin user under Datab
 - A cloud uri will look like smth `mongodb+srv://admin:<password>@<cluster>.mongodb.net/dev?retryWrites=true&w=majority`.
 - The local uri will look smth like `mongodb://localhost:27017/dev`.
 
-In order to play against bots, you will need to load bots data into your newly created database. In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botV2` empty collection.
+In order to play against bots, you will need to load bots data into your newly created database. In MongoDB Compass, import bots data (`./db-commmands/botv2.json`) in the `botv2` empty collection.
 
 In the `.env` file at the root folder, add the mongoDB URI:
 
@@ -134,6 +134,7 @@ You might want to have full access rights on your local version. To do so, you c
 # Development
 
 - Assets are automatically packed from `public/src/assets` to `public/dist/client/assets` with assetpack: `npm run assetpack` ; You will need to run assetpack everytime you change the assets
+- The source `app/public/src/assets/atlas.json` is formatted and checked by Biome; Assetpack writes a minified copy to the client assets in `dist`.
 - The game use precomputed data stored in `app/models/precomputed` folder ; You will need to run `npm run precompute` everytime you change pokemon or synergy data
 - We recommend VSCode and the extension Biome for formatting and linting
 

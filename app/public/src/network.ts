@@ -10,15 +10,17 @@ import type PreparationState from "../../rooms/states/preparation-state"
 import { type Emotion, type Role, type Title, Transfer } from "../../types"
 import type { Booster } from "../../types/Booster"
 import { CloseCodes } from "../../types/enum/CloseCodes"
-import type { EloRank } from "../../types/enum/EloRank.js"
-import type { BotDifficulty } from "../../types/enum/Game.js"
-import type { SpecialGameRule } from "../../types/enum/SpecialGameRule.js"
+import type { EloRank } from "../../types/enum/EloRank"
+import type { BotDifficulty } from "../../types/enum/Game"
+import type { MaintenanceOrder } from "../../types/enum/MaintenanceOrder"
+import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
 import type { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
 import { setBoosterContent } from "./stores/BoostersStore"
+import { setSearchedUser } from "./stores/LobbyStore.js"
 import { logIn, setProfile } from "./stores/NetworkStore"
 
 const endpoint = `${window.location.protocol.replace("http", "ws")}//${
@@ -98,10 +100,10 @@ export async function unlinkTwitchVerification(): Promise<void> {
 }
 
 export const rooms: {
-  lobby: Room<{ state: LobbyState }> | undefined
-  preparation: Room<PreparationState> | undefined
-  game: Room<GameState> | undefined
-  after: Room<AfterGameState> | undefined
+  lobby: Room<any, LobbyState> | undefined
+  preparation: Room<any, PreparationState> | undefined
+  game: Room<any, GameState> | undefined
+  after: Room<any, AfterGameState> | undefined
 } = {
   lobby: undefined,
   preparation: undefined,
@@ -109,15 +111,12 @@ export const rooms: {
   after: undefined
 }
 
-export async function leaveRoom(
-  roomName: keyof typeof rooms,
-  allowReconnect = false
-): Promise<number> {
+export async function leaveRoom(roomName: keyof typeof rooms): Promise<number> {
   const room = rooms[roomName]
   if (room) {
     rooms[roomName] = undefined
     if (room.connection.isOpen) {
-      return await room.leave(!allowReconnect)
+      return await room.leave()
     }
   }
   return Promise.resolve(-1)
@@ -132,7 +131,7 @@ export async function leaveAllRooms() {
   ])
 }
 
-export function joinLobby(room: Room<{ state: LobbyState }>) {
+export function joinLobby(room: Room<any, LobbyState>) {
   leaveAllRooms()
   rooms.lobby = room
 }
@@ -172,7 +171,7 @@ export function joinGame(
 export function joinAfter(room: Room<AfterGameState>) {
   leaveRoom("lobby")
   leaveRoom("preparation")
-  leaveRoom("game", true)
+  leaveRoom("game")
   leaveRoom("after")
   rooms.after = room
 }
@@ -232,7 +231,9 @@ export function gameStartRequest(token: string) {
 }
 
 export function changeRoomName(name: string) {
-  rooms.preparation?.send(Transfer.CHANGE_ROOM_NAME, name)
+  if (name.trim().length > 0) {
+    rooms.preparation?.send(Transfer.CHANGE_ROOM_NAME, name)
+  }
 }
 
 export function changeRoomPassword(password: string | null) {
@@ -356,8 +357,9 @@ export function showEmote(emote?: string) {
   rooms.game?.send(Transfer.SHOW_EMOTE, emote)
 }
 
-export function searchById(id: string) {
-  rooms.lobby?.send(Transfer.SEARCH_BY_ID, id)
+export async function searchById(uid: string) {
+  const user = await rooms.lobby?.request("search-by-id", uid)
+  if (user) store.dispatch(setSearchedUser(user))
 }
 
 export function deleteTournament(params: { id: string }) {
@@ -382,8 +384,8 @@ export function giveBooster(params: { uid: string; numberOfBoosters: number }) {
   rooms.lobby?.send(Transfer.GIVE_BOOSTER, params)
 }
 
-export function heapSnapshot() {
-  rooms.lobby?.send(Transfer.HEAP_SNAPSHOT)
+export function sendMaintenanceOrder(order: MaintenanceOrder) {
+  rooms.lobby?.send(Transfer.MAINTENANCE, order)
 }
 
 export function deleteAccount() {
@@ -500,4 +502,8 @@ export function unban(params: { uid: string; reason: string }) {
 
 export function createTournament(params: { name: string; startDate: string }) {
   rooms.lobby?.send(Transfer.NEW_TOURNAMENT, params)
+}
+
+export function selectPartner(partnerId: string) {
+  rooms.preparation?.send(Transfer.SELECT_PARTNER, partnerId)
 }

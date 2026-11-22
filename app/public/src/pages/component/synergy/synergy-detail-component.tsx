@@ -1,8 +1,12 @@
 import { useTranslation } from "react-i18next"
-import { RarityColor, RarityCost, SynergyTriggers } from "../../../../../config"
 import {
-  type SynergyEffect,
-  SynergyEffects
+  RarityColor,
+  RarityCost,
+  SynergyTiersThresholds
+} from "../../../../../config"
+import {
+  type SynergyTier,
+  SynergyTiers
 } from "../../../../../config/game/synergies"
 import { getWildChance } from "../../../../../models/colyseus-models/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
@@ -20,11 +24,12 @@ import { isOnBench } from "../../../../../utils/board"
 import { roundToNDigits } from "../../../../../utils/number"
 import { schemaValues } from "../../../../../utils/schemas"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { getCachedPortrait } from "../game/game-pokemon-portrait"
 import SynergyIcon from "../icons/synergy-icon"
-import { EffectDescriptionComponent } from "./effect-description"
+import { SynergyTierDescription } from "./synergy-tier-description"
 
 const keepFirstOfFamily = (arr: Pkm[]): Pkm[] => {
   const seenFamilies = new Set<Pkm>()
@@ -53,7 +58,7 @@ export default function SynergyDetailComponent(props: {
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const specialGameRule = useAppSelector((state) => state.game.specialGameRule)
 
-  const levelReached = SynergyTriggers[props.type]
+  const thresholdReached = SynergyTiersThresholds[props.type]
     .filter((n) => n <= props.value)
     .at(-1)
 
@@ -73,13 +78,13 @@ export default function SynergyDetailComponent(props: {
     )
   ).map((p) => getPokemonData(p as Pkm))
 
-  const uniques = keepFirstOfFamily(
-    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].uniquePokemons
-  ).map((p) => getPokemonData(p as Pkm))
+  const uniques = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].uniquePokemons.map((p) => getPokemonData(p as Pkm))
 
-  const legendaries = keepFirstOfFamily(
-    PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].legendaryPokemons
-  ).map((p) => getPokemonData(p as Pkm))
+  const legendaries = PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[
+    props.type
+  ].legendaryPokemons.map((p) => getPokemonData(p as Pkm))
 
   const specials = keepFirstOfFamily(
     PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY[props.type].specialPokemons
@@ -99,7 +104,7 @@ export default function SynergyDetailComponent(props: {
       case Synergy.BABY: {
         additionalInfo = t("synergy_description.BABY_CHANCE_STACKED", {
           eggChance: roundToNDigits(
-            (levelReached === 7
+            (thresholdReached === 7
               ? spectatedPlayer.goldenEggChance
               : spectatedPlayer.eggChance) * 100,
             1
@@ -152,35 +157,33 @@ export default function SynergyDetailComponent(props: {
       </div>
       <p style={{ whiteSpace: "pre-wrap" }}>
         {addIconsToDescription(
-          t(`synergy_description.${props.type}`, { additionalInfo })
+          t(`synergy_description.${props.type}`, { additionalInfo }),
+          { config: getDescriptionConfig(`synergy_description.${props.type}`) }
         )}
       </p>
 
-      {SynergyEffects[props.type].map((effect: SynergyEffect, i: number) => {
+      {SynergyTiers[props.type].map((tier: SynergyTier, i: number) => {
+        const isCurrentTier =
+          thresholdReached === SynergyTiersThresholds[props.type][i]
         return (
           <div
-            key={effect}
+            key={tier}
             style={{
-              color:
-                levelReached === SynergyTriggers[props.type][i]
-                  ? "var(--color-fg-primary)"
-                  : "var(--color-fg-secondary)",
-              backgroundColor:
-                levelReached === SynergyTriggers[props.type][i]
-                  ? "var(--color-bg-secondary)"
-                  : "transparent",
-              border:
-                levelReached === SynergyTriggers[props.type][i]
-                  ? "var(--border-thick)"
-                  : "none",
+              color: isCurrentTier
+                ? "var(--color-fg-primary)"
+                : "var(--color-fg-secondary)",
+              backgroundColor: isCurrentTier
+                ? "var(--color-bg-secondary)"
+                : "transparent",
+              border: isCurrentTier ? "var(--border-thick)" : "none",
               borderRadius: "12px",
               padding: "5px"
             }}
           >
             <h4 style={{ fontSize: "1.2em", marginBottom: 0 }}>
-              ({SynergyTriggers[props.type][i]}) {t(`effect.${effect}`)}
+              ({SynergyTiersThresholds[props.type][i]}) {t(`effect.${tier}`)}
             </h4>
-            <EffectDescriptionComponent effect={effect} />
+            <SynergyTierDescription tier={tier} />
           </div>
         )
       })}

@@ -1,8 +1,22 @@
 import Phaser from "phaser"
-import { getRegionTint, RegionDetails } from "../../../../config"
+import {
+  BASE_PROJECTILE_SPEED,
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  CELL_HEIGHT,
+  CELL_WIDTH,
+  getRegionTint,
+  RegionDetails
+} from "../../../../config"
+import { AbilityConfigs } from "../../../../config/game/abilities"
 import type { DesignTiled } from "../../../../core/design"
 import PokemonFactory from "../../../../models/pokemon-factory"
-import { AnimationType } from "../../../../types/Animation"
+import {
+  type AbilityAnimationArgs,
+  AnimationType
+} from "../../../../types/Animation"
+import delays from "../../../../types/delays.json"
+import { Ability } from "../../../../types/enum/Ability"
 import type { DungeonPMDO } from "../../../../types/enum/Dungeon"
 import { Orientation, Stat } from "../../../../types/enum/Game"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
@@ -11,6 +25,11 @@ import { Weather } from "../../../../types/enum/Weather"
 import { logger } from "../../../../utils/logger"
 import { max } from "../../../../utils/number"
 import { OrientationVector } from "../../../../utils/orientation"
+import {
+  type AbilityPreviewOptions,
+  isPreviewCell
+} from "../../pages/component/debug/ability-preview"
+import type { PreviewStatus } from "../../pages/component/debug/preview-scenario"
 import { playMusic, preloadMusic } from "../../pages/utils/audio"
 import { transformEntityCoordinates } from "../../pages/utils/utils"
 import { preference } from "../../preferences"
@@ -20,22 +39,16 @@ import {
   displayAbility,
   displayHit
 } from "../components/abilities-animations"
+import { FUTURE_SIGHT_TIMING } from "../components/animations/future-sight-cast"
+import { STORED_POWER_TIMING } from "../components/animations/stored-power"
 import LoadingManager from "../components/loading-manager"
-import PokemonSprite, { resetSpriteCounts } from "../components/pokemon"
 import {
   DEFAULT_POKEMON_ANIMATION_CONFIG,
   PokemonAnimations
 } from "../components/pokemon-animations"
+import PokemonSprite, { resetSpriteCounts } from "../components/pokemon-sprite"
 import WeatherManager from "../components/weather-manager"
 import { DEPTH } from "../depths"
-
-type Boost =
-  | "BOOST/ATK"
-  | "BOOST/AP"
-  | "BOOST/DEF"
-  | "BOOST/SPE_DEF"
-  | "BOOST/SHIELD"
-  | "BOOST/SPEED"
 
 export class DebugScene extends Phaser.Scene {
   height: number
@@ -47,6 +60,8 @@ export class DebugScene extends Phaser.Scene {
   onComplete: () => void
   pokemonSprite?: PokemonSprite
   target?: PokemonSprite
+  previewTargets: PokemonSprite[] = []
+  abilityPreview?: AbilityPreviewOptions
   uid = "debug"
   mapName: DungeonPMDO | "town" = "town"
   tilemap: DesignTiled | undefined
@@ -56,6 +71,13 @@ export class DebugScene extends Phaser.Scene {
   attackAnimInterval: ReturnType<typeof setInterval> | undefined
   abilitiesVfxGroup: Phaser.GameObjects.Group | undefined
   landscape: Phaser.GameObjects.Sprite[] = []
+  abilityElapsed: number | null = null
+  loopAbility = false
+  private frameDelta = 0
+  private hasSeekBaseline = false
+
+  static readonly VIEW_WIDTH = (BOARD_WIDTH + 1) * CELL_WIDTH
+  static readonly VIEW_HEIGHT = (BOARD_HEIGHT + 3.5) * CELL_HEIGHT
 
   constructor(
     height: number,
@@ -79,31 +101,124 @@ export class DebugScene extends Phaser.Scene {
     })
     this.load.once("complete", () => {
       this.animationManager = new AnimationManager(this)
-      this.onComplete()
     })
   }
 
   create() {
     this.abilitiesVfxGroup = this.add.group()
     this.weatherManager = new WeatherManager(this)
+    if (this.width === DebugScene.VIEW_WIDTH) {
+      const [left, near] = transformEntityCoordinates(0, 0, false)
+      const [right, far] = transformEntityCoordinates(BOARD_WIDTH - 1, 0, true)
+      this.cameras.main.centerOn(
+        (left + right) / 2,
+        (near + far) / 2 - CELL_HEIGHT / 2
+      )
+    }
+    // Keep tweens on the same clock as sprite animations and Phaser timers.
+    this.events.on(Phaser.Scenes.Events.PRE_UPDATE, (_time, delta: number) => {
+      this.frameDelta = delta
+    })
+    this.tweens.getDelta = () => this.frameDelta
+    this.onComplete()
+  }
+
+  update(_time: number, delta: number) {
+    if (this.abilityElapsed === null || !this.pokemonSprite) return
+
+    const elapsed = this.abilityElapsed + delta
+    if (this.loopAbility && elapsed >= this.previewDuration) {
+      this.replayAbility()
+      return
+    }
+
+    this.abilityElapsed = Math.min(elapsed, this.previewDuration)
+  }
+
+  get previewDuration() {
+    return this.pokemonSprite?.pokemon.skill === Ability.FUTURE_SIGHT
+      ? FUTURE_SIGHT_TIMING.replay
+      : 2000
+  }
+
+  setPreviewPaused(paused: boolean) {
+    if (paused && !this.sys.isPaused()) this.sys.pause()
+    if (!paused && this.sys.isPaused()) {
+      this.hasSeekBaseline = false
+      this.sys.resume()
+    }
+  }
+
+  stepPreviewFrame() {
+    if (!this.sys.isPaused()) return
+    const frame = 1000 / 60
+    this.sys.step(this.time.now + frame, frame)
+  }
+
+  seekPreviewTime(milliseconds: number) {
+    if (
+      !this.sys.isPaused() ||
+      !this.pokemonSprite ||
+      !Number.isFinite(milliseconds)
+    ) {
+      return this.abilityElapsed ?? 0
+    }
+
+    const target = Phaser.Math.Clamp(milliseconds, 0, this.previewDuration)
+    const frameDuration = 1000 / 60
+    const targetFrame = Math.round(target / frameDuration)
+    let currentFrame = Math.round((this.abilityElapsed ?? 0) / frameDuration)
+    const shouldLoop = this.loopAbility
+    this.loopAbility = false
+    try {
+      // Rewind from a common sprite and cast origin; forward seeks reuse it.
+      if (!this.hasSeekBaseline || targetFrame < currentFrame) {
+        const sprites = [this.pokemonSprite, ...this.previewTargets]
+        if (this.target) sprites.push(this.target)
+        for (const { sprite, shadow } of sprites) {
+          sprite.anims.restart(false, true)
+          shadow?.anims.restart(false, true)
+        }
+        this.replayAbility()
+        this.hasSeekBaseline = true
+        currentFrame = 0
+      }
+      for (let frame = currentFrame; frame < targetFrame; frame++) {
+        this.stepPreviewFrame()
+      }
+    } finally {
+      this.loopAbility = shouldLoop
+    }
+    return this.abilityElapsed ?? 0
   }
 
   updateSprite(
     pkm: Pkm,
     orientation: Orientation,
     animationType: string,
-    status: Status | "",
-    shiny: boolean
+    status: PreviewStatus,
+    shiny: boolean,
+    preview?: AbilityPreviewOptions,
+    onPreviewReady?: () => void
   ) {
+    this.abilityPreview = preview
     if (this.pokemonSprite) {
       this.pokemonSprite.destroy()
     }
     clearAbilityAnimations(this)
+    this.time.clearPendingEvents().removeAllEvents()
+    clearInterval(this.attackAnimInterval)
+    this.abilityElapsed = null
+    this.hasSeekBaseline = false
     if (this.target) {
       this.target.destroy()
-      clearInterval(this.attackAnimInterval)
+      this.target = undefined
     }
-    const [px, py] = transformEntityCoordinates(3, 3, false)
+    this.previewTargets.forEach((sprite) => sprite.destroy())
+    this.previewTargets = []
+    const caster = preview?.caster ?? { x: 3, y: 3 }
+    const flip = preview?.flip ?? false
+    const [px, py] = transformEntityCoordinates(caster.x, caster.y, flip)
     this.pokemonSprite = new PokemonSprite(
       this,
       px,
@@ -111,11 +226,11 @@ export class DebugScene extends Phaser.Scene {
       PokemonFactory.createPokemonFromName(pkm, { shiny }),
       "debug",
       false,
-      false
+      flip
     )
     this.pokemonSprite.orientation = orientation
-    this.pokemonSprite.pokemon.positionX = 3
-    this.pokemonSprite.pokemon.positionY = 3
+    this.pokemonSprite.pokemon.positionX = caster.x
+    this.pokemonSprite.pokemon.positionY = caster.y
 
     this.pokemonSprite.sprite.setTint(
       getRegionTint(this.mapName, preference("colorblindMode"))
@@ -134,7 +249,8 @@ export class DebugScene extends Phaser.Scene {
     if (animationType === "Ability") {
       animationName = anims.ability
       this.showTarget()
-      this.addAbilityAnim()
+      this.showPreviewTargets()
+      this.sortAbilityPreviewSprites(this.pokemonSprite)
     }
     if (animationType === "Emote") {
       animationName = anims.emote
@@ -155,6 +271,7 @@ export class DebugScene extends Phaser.Scene {
     this.pokemonSprite.once("loaded", () => {
       try {
         this.animationManager?.play(this.pokemonSprite!, animationName, {
+          flip,
           repeat: -1
         })
       } catch (err) {
@@ -165,9 +282,24 @@ export class DebugScene extends Phaser.Scene {
       }
       this.applyStatusAnimation(status)
     })
+    if (onPreviewReady) {
+      const casterSprite = this.pokemonSprite
+      const sprites = [casterSprite, ...this.previewTargets]
+      if (this.target) sprites.push(this.target)
+      let remaining = sprites.length
+      for (const sprite of sprites) {
+        sprite.once("loaded", () => {
+          if (--remaining === 0 && this.pokemonSprite === casterSprite) {
+            onPreviewReady()
+          }
+        })
+      }
+    } else if (animationType === "Ability") {
+      this.replayAbility()
+    }
   }
 
-  updateMap(mapName: DungeonPMDO | "town"): Promise<void> {
+  updateMap(mapName: DungeonPMDO | "town", preview = false): Promise<void> {
     if (this.map) this.map.destroy()
 
     this.mapName = mapName
@@ -181,21 +313,30 @@ export class DebugScene extends Phaser.Scene {
         this.map.createLayer("layer0", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer1", tileset, 0, 0)?.setScale(2, 2)
         this.map.createLayer("layer2", tileset, 0, 0)?.setScale(2, 2)
-        const sys = this.sys as any
-        if (sys.animatedTiles) {
-          sys.animatedTiles.pause()
-        }
-        playMusic(this as any, RegionDetails[mapName].music)
+        if (!preview) playMusic(this as any, RegionDetails[mapName].music)
         resolve()
       })
     }
 
     return fetch(`/tilemap/${mapName}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok)
+          throw new Error(`Failed to load map ${mapName}: ${res.status}`)
+        return res.json()
+      })
       .then((tilemap: DesignTiled) => {
         this.tilemap = tilemap
-        return new Promise((resolve) => {
-          this.load.reset()
+        return new Promise<void>((resolve, reject) => {
+          if (!preview) this.load.reset()
+          let failedFile: string | undefined
+          const onLoadError = (file: Phaser.Loader.File) => {
+            if (file.key === mapName || file.key.startsWith(`${mapName}/`)) {
+              failedFile = file.key
+            }
+          }
+          if (preview) {
+            this.load.on(Phaser.Loader.Events.FILE_LOAD_ERROR, onLoadError)
+          }
           tilemap.tilesets.forEach((t) => {
             //logger.debug(`loading tileset ${t.image}`)
             this.load.image(
@@ -204,8 +345,15 @@ export class DebugScene extends Phaser.Scene {
             )
           })
           this.load.tilemapTiledJSON(mapName, tilemap)
-          preloadMusic(this, RegionDetails[mapName].music)
-          this.load.once("complete", resolve)
+          if (!preview) preloadMusic(this, RegionDetails[mapName].music)
+          this.load.once("complete", () => {
+            this.load.off(Phaser.Loader.Events.FILE_LOAD_ERROR, onLoadError)
+            if (failedFile) {
+              reject(new Error(`Failed to load map asset: ${failedFile}`))
+            } else {
+              resolve()
+            }
+          })
           this.load.start()
         })
       })
@@ -219,13 +367,26 @@ export class DebugScene extends Phaser.Scene {
           )!
           map.createLayer(layer.name, tileset, 0, 0)?.setScale(2, 2)
         })
-        ;(this.sys as any).animatedTiles.init(map)
-        playMusic(this as any, RegionDetails[mapName].music)
+        if (!preview) playMusic(this as any, RegionDetails[mapName].music)
       })
       .then(() => {
-        this.updateSprite(Pkm.SMEARGLE, Orientation.DOWNLEFT, "Idle", "", false)
-        this.updateLandscape()
+        if (!preview) {
+          this.updateSprite(
+            Pkm.SMEARGLE,
+            Orientation.DOWNLEFT,
+            "Idle",
+            "",
+            false
+          )
+          this.updateLandscape()
+        }
       })
+  }
+
+  clearPreviewMap() {
+    this.map?.destroy()
+    this.map = undefined
+    this.mapName = "town"
   }
 
   updateColorFilter({
@@ -284,9 +445,7 @@ export class DebugScene extends Phaser.Scene {
     this.landscape.forEach((sprite) => sprite.setScale(2).setTint(tint))
   }
 
-  applyStatusAnimation(
-    status: Status | Boost | "BALM_MUSHROOM" | "POISONNED_BADLY" | ""
-  ) {
+  applyStatusAnimation(status: PreviewStatus) {
     if (this.pokemonSprite) {
       this.pokemonSprite.sprite.setTint(
         getRegionTint(this.mapName, preference("colorblindMode"))
@@ -317,10 +476,10 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removeGrassField()
       this.pokemonSprite.removeFairyField()
 
-      if (status === Status.POISONNED) {
+      if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
       }
-      if (status === "POISONNED_BADLY") {
+      if (status === "POISONED_BADLY") {
         this.pokemonSprite.addPoison(3)
       }
       if (status === Status.SLEEP) {
@@ -371,7 +530,7 @@ export class DebugScene extends Phaser.Scene {
       if (status === Status.CURSE) {
         this.pokemonSprite.addCurse()
       }
-      if (status == Status.RUNE_PROTECT) {
+      if (status == Status.SAFEGUARD) {
         this.pokemonSprite.addRuneProtect()
       }
       if (status == Status.RAGE) {
@@ -434,39 +593,95 @@ export class DebugScene extends Phaser.Scene {
   showTarget() {
     const or = this.pokemonSprite!.orientation
     const range = max(2)(this.pokemonSprite!.pokemon.range)
-    const tx = this.pokemonSprite!.positionX + OrientationVector[or][0] * range
-    const ty = this.pokemonSprite!.positionY + OrientationVector[or][1] * range
+    const target = this.abilityPreview
+      ? this.abilityPreview.target
+      : {
+          x: this.pokemonSprite!.positionX + OrientationVector[or][0] * range,
+          y: this.pokemonSprite!.positionY + OrientationVector[or][1] * range
+        }
+    if (!target) {
+      this.pokemonSprite!.targetX = -1
+      this.pokemonSprite!.targetY = -1
+      return
+    }
+    const { x: tx, y: ty } = target
     this.pokemonSprite!.targetX = tx
     this.pokemonSprite!.targetY = ty
-    const [rtx, rty] = transformEntityCoordinates(tx, ty, false)
-    this.target = new PokemonSprite(
+    this.target = this.createPreviewTarget(tx, ty)
+  }
+
+  createPreviewTarget(x: number, y: number) {
+    const flip = this.abilityPreview?.flip ?? false
+    const [screenX, screenY] = transformEntityCoordinates(x, y, flip)
+    const sprite = new PokemonSprite(
       this,
-      rtx,
-      rty,
+      screenX,
+      screenY,
       PokemonFactory.createPokemonFromName(Pkm.SUBSTITUTE),
       "debug",
       false,
-      false
+      flip
     )
-    this.target.pokemon.positionX = tx
-    this.target.pokemon.positionY = ty
-    this.animationManager?.play(this.target, AnimationType.Idle, { repeat: -1 })
+    sprite.pokemon.positionX = x
+    sprite.pokemon.positionY = y
+    this.animationManager?.play(sprite, AnimationType.Idle, {
+      flip,
+      repeat: -1
+    })
+    return sprite
+  }
+
+  showPreviewTargets() {
+    if (!this.abilityPreview) return
+    const { caster, target, data } = this.abilityPreview
+    const seen = new Set([`${caster.x},${caster.y}`])
+    if (target) seen.add(`${target.x},${target.y}`)
+    for (const list of [data.targets, data.allies]) {
+      if (!Array.isArray(list)) continue
+      for (const cell of list.slice(0, 48)) {
+        if (!isPreviewCell(cell)) continue
+        const key = `${cell.x},${cell.y}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        this.previewTargets.push(this.createPreviewTarget(cell.x, cell.y))
+      }
+    }
+  }
+
+  private sortAbilityPreviewSprites(caster: PokemonSprite) {
+    const sprites = [caster, ...this.previewTargets]
+    if (this.target) sprites.push(this.target)
+
+    sprites.sort((a, b) => a.y - b.y)
+    for (let i = 1; i < sprites.length; i++) {
+      this.children.moveAbove(sprites[i], sprites[i - 1])
+    }
   }
 
   addAttackAnim() {
     const attack = () => {
-      if (!this.pokemonSprite) return
+      if (!this.pokemonSprite || !this.target) return
+      const speed = this.pokemonSprite.pokemon.speed
+      const attackDuration = 1000 / (0.4 + speed * 0.007)
+      const d = delays[this.pokemonSprite.pokemon.index]?.d || 18 // number of frames before hit
+      const t = delays[this.pokemonSprite.pokemon.index]?.t || 36 // total number of frames in the animation
+
+      const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)
+      const distance = this.pokemonSprite.pokemon.range
+      const travelTime =
+        (distance * 1000) / (BASE_PROJECTILE_SPEED * (1 + speed / 100))
+
       this.pokemonSprite.attackAnimation(
         this.pokemonSprite.targetX || 0,
         this.pokemonSprite.targetY || 0,
-        0,
-        1000,
+        delayBeforeShoot,
+        travelTime,
         () => {
           if (!this.pokemonSprite) return
           const [x, y] = transformEntityCoordinates(
             this.pokemonSprite.targetX || 0,
             this.pokemonSprite.targetY || 0,
-            false
+            this.pokemonSprite.flip
           )
           displayHit(
             this,
@@ -474,7 +689,7 @@ export class DebugScene extends Phaser.Scene {
               ?.hitSprite ?? DEFAULT_POKEMON_ANIMATION_CONFIG.hitSprite,
             x,
             y,
-            false
+            this.pokemonSprite.flip
           )
         }
       )
@@ -483,23 +698,106 @@ export class DebugScene extends Phaser.Scene {
     this.attackAnimInterval = setInterval(attack, 2000)
   }
 
-  addAbilityAnim() {
+  replayAbility() {
+    if (!this.pokemonSprite) return
+    this.hasSeekBaseline = false
+    clearInterval(this.attackAnimInterval)
+    clearAbilityAnimations(this)
+    this.time.clearPendingEvents().removeAllEvents()
+    this.abilityElapsed = 0
     const showAbilityAnim = () => {
-      displayAbility({
+      const caster = this.pokemonSprite
+      if (!caster) return
+      const args: AbilityAnimationArgs = {
         scene: this,
-        pokemonsOnBoard: [this.target!],
-        ability: this.pokemonSprite!.pokemon.skill,
-        orientation: this.pokemonSprite!.orientation,
-        positionX: this.pokemonSprite!.positionX,
-        positionY: this.pokemonSprite!.positionY,
-        targetX: this.pokemonSprite!.targetX ?? -1,
-        targetY: this.pokemonSprite!.targetY ?? -1,
-        flip: this.pokemonSprite!.flip,
-        ap: 0
-      })
+        pokemonsOnBoard: [
+          caster,
+          ...(this.target ? [this.target] : []),
+          ...this.previewTargets
+        ],
+        ability: caster.pokemon.skill,
+        orientation: caster.orientation,
+        positionX: caster.positionX,
+        positionY: caster.positionY,
+        targetX: caster.targetX ?? -1,
+        targetY: caster.targetY ?? -1,
+        flip: caster.flip,
+        ap: 0,
+        data: this.abilityPreview?.data ?? {}
+      }
+      if (caster.pokemon.skill === Ability.DYNAMAX_CANNON) {
+        displayAbility({ ...args, ability: "DYNAMAX_CANNON_CHARGE" })
+        displayAbility({
+          ...args,
+          delay: AbilityConfigs[Ability.DYNAMAX_CANNON].chargeDuration
+        })
+      } else {
+        displayAbility(args)
+      }
+      if (caster.pokemon.skill === Ability.STORED_POWER) {
+        displayAbility({
+          ...args,
+          ability: "STORED_POWER_TARGET",
+          delay: STORED_POWER_TIMING.target
+        })
+        displayAbility({
+          ...args,
+          ability: "STORED_POWER_HIT",
+          delay: STORED_POWER_TIMING.impact
+        })
+      }
+      if (caster.pokemon.skill === Ability.FIERY_DANCE) {
+        const timing = AbilityConfigs[Ability.FIERY_DANCE]
+        displayAbility({
+          ...args,
+          ability: "FIERY_DANCE_HIT",
+          delay: timing.chargeDuration + timing.flightDuration
+        })
+      }
+      if (caster.pokemon.skill === Ability.FUTURE_SIGHT) {
+        displayAbility({
+          ...args,
+          ability: "FUTURE_SIGHT_HIT",
+          delay: FUTURE_SIGHT_TIMING.hit
+        })
+
+        const hasTarget = isPreviewCell({
+          x: args.targetX,
+          y: args.targetY
+        })
+        const splashTargets =
+          hasTarget && Array.isArray(args.data.targets)
+            ? args.data.targets
+                .filter(isPreviewCell)
+                .filter(
+                  (cell) =>
+                    (cell.x !== args.targetX || cell.y !== args.targetY) &&
+                    (cell.x !== args.positionX || cell.y !== args.positionY) &&
+                    Math.abs(cell.x - args.targetX) <= 1 &&
+                    Math.abs(cell.y - args.targetY) <= 1
+                )
+                .filter(
+                  (cell, index, cells) =>
+                    cells.findIndex(
+                      (other) => other.x === cell.x && other.y === cell.y
+                    ) === index
+                )
+            : []
+
+        splashTargets.forEach((cell, index) => {
+          displayAbility({
+            ...args,
+            ability: "FUTURE_SIGHT_SPLASH",
+            targetX: cell.x,
+            targetY: cell.y,
+            delay:
+              FUTURE_SIGHT_TIMING.hit +
+              FUTURE_SIGHT_TIMING.splashStagger * index
+          })
+        })
+      }
     }
     showAbilityAnim()
-    this.attackAnimInterval = setInterval(showAbilityAnim, 2000)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {

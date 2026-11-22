@@ -60,12 +60,5 @@ export function convertSchemaToRawObject(schema: any): any {
 
   if (schema instanceof Schema === false) return schema
 
-  const raw = {}
-  Object.getOwnPropertyNames(schema).forEach((prop) => {
-    if (prop.startsWith("_") === false && prop.startsWith("$") === false) {
-      raw[prop] = convertSchemaToRawObject(schema[prop])
-    }
-  })
-
-  return raw
+  return schema.toJSON()
 }

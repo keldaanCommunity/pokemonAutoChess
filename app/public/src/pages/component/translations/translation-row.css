@@ -175,3 +175,11 @@
   cursor: default;
   opacity: 0 !important;
 }
+
+.translation-error {
+  color: var(--color-fg-red);
+}
+
+.translation-target[aria-invalid="true"] {
+  border-color: var(--color-fg-red);
+}

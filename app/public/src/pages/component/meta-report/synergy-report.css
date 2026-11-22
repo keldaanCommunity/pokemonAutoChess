@@ -14,6 +14,33 @@
   overflow-y: auto;
 }
 
+#synergy-report .synergy-report-content {
+  flex: 1;
+  display: flex;
+  gap: 1em;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#synergy-report .synergy-statistics-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#synergy-report .synergy-distribution-chart {
+  flex: 1;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 799px) {
+  #synergy-report .synergy-distribution-chart {
+    display: none;
+  }
+}
+
 .synergy-statistics {
   padding: 1rem;
 }

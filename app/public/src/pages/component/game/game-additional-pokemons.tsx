@@ -4,8 +4,10 @@ import { RarityColor } from "../../../../../config"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { SpecialGameRule } from "../../../../../types/enum/SpecialGameRule"
 import { selectConnectedPlayer, useAppSelector } from "../../../hooks"
+import { Box } from "../box/box"
 import SynergyIcon from "../icons/synergy-icon"
 import { getCachedPortrait } from "./game-pokemon-portrait"
+import "./game-additional-pokemons.css"
 
 export function GameAdditionalPokemonsIcon() {
   return (
@@ -38,22 +40,25 @@ export function GameAdditionalPokemons() {
 
   if (specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
     return (
-      <div className="game-additional-pokemons">
-        <p>{t("scribble.EVERYONE_IS_HERE")}</p>
-      </div>
+      <Box>
+        <Box.Header title={t("scribble.EVERYONE_IS_HERE")} />
+      </Box>
     )
   } else if (!additionalPokemons || additionalPokemons.length === 0) {
     return (
-      <div className="game-additional-pokemons">
-        <p className="help">{t("additional_pokemon_hint")}</p>
-      </div>
+      <Box>
+        <Box.Header title={t("additional_picks")}>
+          <p className="help">{t("shop.additional_pokemon_hint")}</p>
+        </Box.Header>
+      </Box>
     )
   } else {
     return (
-      <div className="game-additional-pokemons">
-        <h2>{t("additional_picks")}</h2>
-        <p className="help">{t("additional_pokemon_hint")}</p>
-        <div className="grid">
+      <Box>
+        <Box.Header title={t("additional_picks")}>
+          <p className="help">{t("shop.additional_pokemon_hint")}</p>
+        </Box.Header>
+        <Box.Content className="grid">
           {additionalPokemons.map((p, index) => {
             const pokemon = getPokemonData(p)
             const rarityColor = RarityColor[pokemon.rarity]
@@ -79,8 +84,8 @@ export function GameAdditionalPokemons() {
               </div>
             )
           })}
-        </div>
-      </div>
+        </Box.Content>
+      </Box>
     )
   }
 }

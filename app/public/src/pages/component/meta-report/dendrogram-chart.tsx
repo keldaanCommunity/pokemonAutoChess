@@ -339,9 +339,13 @@ export function DendrogramChart() {
   return (
     <div className="dendrogram-container" ref={containerRef}>
       {loading ? (
-        <div className="dendrogram-loading">{t("dendrogram.loading")}</div>
+        <div className="dendrogram-loading">
+          {t("meta_report.dendrogram.loading")}
+        </div>
       ) : !dendrogram ? (
-        <div className="dendrogram-no-data">{t("dendrogram.no_data")}</div>
+        <div className="dendrogram-no-data">
+          {t("meta_report.dendrogram.no_data")}
+        </div>
       ) : (
         <>
           <div className="dendrogram-chart-wrapper">
@@ -352,25 +356,25 @@ export function DendrogramChart() {
             />
           </div>
           <div className="dendrogram-info-panel">
-            <h3>{t("dendrogram.title")}</h3>
+            <h3>{t("meta_report.best_items")}</h3>
             <p className="dendrogram-info-text">
-              {t("dendrogram.description")}
+              {t("meta_report.dendrogram.description")}
             </p>
             <div className="dendrogram-stats">
               <div className="stat-item">
-                <label>{t("dendrogram.total_clusters")}:</label>
+                <label>{t("meta_report.dendrogram.total_clusters")}:</label>
                 <span>{dendrogram.n_clusters}</span>
               </div>
               <div className="stat-item">
-                <label>{t("dendrogram.total_matches")}:</label>
+                <label>{t("meta_report.dendrogram.total_matches")}:</label>
                 <span>{dendrogram.n_samples}</span>
               </div>
               <div className="stat-item">
-                <label>{t("dendrogram.linkage_method")}:</label>
+                <label>{t("meta_report.dendrogram.linkage_method")}:</label>
                 <span>{dendrogram.linkage_method}</span>
               </div>
               <div className="stat-item">
-                <label>{t("dendrogram.branches")}:</label>
+                <label>{t("meta_report.dendrogram.branches")}:</label>
                 <span>{dendrogram.icoord.length}</span>
               </div>
             </div>
@@ -378,15 +382,20 @@ export function DendrogramChart() {
             {hoveredBranch && (
               <div className="branch-detail-panel">
                 <h4>
-                  {t("dendrogram.branch")} #{hoveredBranch.branch_index + 1}
+                  {t("meta_report.dendrogram.branch")} #
+                  {hoveredBranch.branch_index + 1}
                 </h4>
                 <div className="branch-stats">
                   <div className="stat-item">
-                    <label>{t("dendrogram.branch_total_matches")}:</label>
+                    <label>
+                      {t("meta_report.dendrogram.branch_total_matches")}:
+                    </label>
                     <span>{hoveredBranch.total_size}</span>
                   </div>
                   <div className="stat-item">
-                    <label>{t("dendrogram.branch_contains_clusters")}:</label>
+                    <label>
+                      {t("meta_report.dendrogram.branch_contains_clusters")}:
+                    </label>
                     <span>{hoveredBranch.leaf_cluster_ids.length}</span>
                   </div>
                 </div>
@@ -429,14 +438,16 @@ export function DendrogramChart() {
               <div className="cluster-detail-panel">
                 <h4>
                   {hoveredCluster
-                    ? t("dendrogram.hovered_cluster")
-                    : t("dendrogram.selected_cluster")}{" "}
-                  {t("dendrogram.cluster")} #{displayedCluster.cluster_id}
+                    ? t("meta_report.dendrogram.hovered_cluster")
+                    : t("meta_report.dendrogram.selected_cluster")}{" "}
+                  {t("meta_report.dendrogram.cluster")} #
+                  {displayedCluster.cluster_id}
                 </h4>
                 <div className="cluster-size">
-                  <label>{t("dendrogram.cluster_size")}:</label>
+                  <label>{t("meta_report.dendrogram.cluster_size")}:</label>
                   <span>
-                    {displayedCluster.size} {t("dendrogram.matches")}
+                    {displayedCluster.size}{" "}
+                    {t("meta_report.dendrogram.matches")}
                   </span>
                 </div>
                 {displayedCluster.synergies &&

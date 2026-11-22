@@ -1,17 +1,25 @@
 import { useTranslation } from "react-i18next"
 import type { Ability } from "../../../../../types/enum/Ability"
+import { getDescriptionConfig } from "../../utils/description-config"
 import { addIconsToDescription } from "../../utils/descriptions"
 import "./ability-tooltip.css"
 
 export function AbilityTooltip(props: {
   ability: Ability
-  stats?: { stars: number; stages: number; ap: number; luck: number }
+  stats?: {
+    stars: number
+    stages: number
+    ap: number
+    luck: number
+    showAbilityTiers?: boolean
+  }
 }) {
   const { t } = useTranslation()
   const description = t(`ability_description.${props.ability}`)
+  const config = getDescriptionConfig(`ability_description.${props.ability}`)
   return (
     <p className="ability-description">
-      {addIconsToDescription(description, props.stats)}
+      {addIconsToDescription(description, { ...props.stats, config })}
     </p>
   )
 }

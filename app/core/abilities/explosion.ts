@@ -4,7 +4,7 @@ import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
-class ExplosionStrategy extends AbilityStrategy {
+export class ExplosionStrategy extends AbilityStrategy {
   process(
     pokemon: PokemonEntity,
     board: Board,
@@ -12,7 +12,7 @@ class ExplosionStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [50, 100, 200][pokemon.stars - 1] ?? 200
+    const damage = [50, 100, 200, 400][pokemon.stars - 1] ?? 400
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
 
     cells.forEach((cell) => {
@@ -38,5 +38,3 @@ class ExplosionStrategy extends AbilityStrategy {
     }
   }
 }
-
-export const explosionStrategy = new ExplosionStrategy()

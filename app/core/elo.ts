@@ -1,16 +1,17 @@
+import { MAX_ELO_CORRECTION, TARGETED_ELO_AVERAGE } from "../config/game/elo"
+import { getAverageElo } from "../services/elo-average"
 import type { ISimplePlayer } from "../types"
-import { GameMode } from "../types/enum/Game"
-import { average, min } from "../utils/number"
+import { average, clamp, min } from "../utils/number"
 import { EloEngine } from "./elo-engine"
 
-export function computeElo(
+export async function computeElo(
   player: ISimplePlayer,
   rank: number,
   previousElo: number,
   players: ISimplePlayer[],
-  gameMode: GameMode,
   isBot: boolean = false
 ) {
+  const averageElo = await getAverageElo()
   const eloEngine = new EloEngine()
   const eloGains = new Array<number>()
   //logger.debug("computing elo for", player.name, "rank", rank, "elo", previousElo)
@@ -33,15 +34,8 @@ export function computeElo(
 
   let newElo = min(0)(Math.floor(average(...eloGains)))
   //logger.debug("mean gain", meanGain)
-  if (
-    rank <= Math.floor(players.length / 2) &&
-    newElo < previousElo &&
-    !isBot
-  ) {
-    newElo = previousElo // ensure to not lose ELO if you're on the upper part of the ranking
-  }
-  if (rank === 1 && gameMode === GameMode.RANKED) {
-    newElo = min(previousElo + 1)(newElo) // ensure you get minimum +1 if finishing first
+  if (rank <= Math.floor(players.length / 2) && !isBot) {
+    newElo = min(previousElo + 1)(newElo) // ensure you get minimum +1 if you're on the upper part of the ranking
   }
 
   if (
@@ -55,6 +49,18 @@ export function computeElo(
     */
     const loss = previousElo - newElo
     newElo = previousElo - Math.ceil(loss / 2)
+  }
+
+  // Compensate ELO deflation by boosting gains when the average elo of recent
+  // players is below the target. Losses are never modified.
+  const gain = newElo - previousElo
+  if (!isBot && gain > 0) {
+    const correction = clamp(
+      (TARGETED_ELO_AVERAGE - averageElo) / TARGETED_ELO_AVERAGE,
+      -MAX_ELO_CORRECTION,
+      MAX_ELO_CORRECTION
+    )
+    newElo = previousElo + Math.round(gain * (1 + correction))
   }
 
   // logger.info(

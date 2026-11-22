@@ -67,3 +67,6 @@ export const repeat = (n: number) => (cb: (i: number) => void) => {
 
 export const isPlainFunction = (fn: any): fn is () => any =>
   Object.getPrototypeOf(fn) === Function.prototype
+
+export const wait = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))

@@ -1,6 +1,9 @@
 import type Player from "../models/colyseus-models/player"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
+import { AbilityStrategies } from "./abilities/abilities"
+import { castAbility } from "./abilities/cast"
+import { DarkAuraCooldownCommand } from "./abilities/dark-aura-cooldown"
 import type { Board } from "./board"
 import type { PokemonEntity } from "./pokemon-entity"
 import PokemonState from "./pokemon-state"
@@ -12,11 +15,32 @@ export class IdleState extends PokemonState {
     super.update(pokemon, dt, board, player)
 
     if (
+      pokemon.passive === Passive.COCOON_OF_DESTRUCTION &&
+      pokemon.pp >= pokemon.maxPP
+    ) {
+      if (
+        !pokemon.commands.some(
+          (command) => command instanceof DarkAuraCooldownCommand
+        ) &&
+        !pokemon.status.freeze &&
+        !pokemon.status.sleep &&
+        !pokemon.status.resurrecting
+      ) {
+        castAbility(AbilityStrategies[pokemon.skill], pokemon, board, null)
+      }
+    } else if (
       pokemon.status.tree &&
       pokemon.maxPP > 0 &&
       pokemon.pp >= pokemon.maxPP
     ) {
       pokemon.status.tree = false
+    } else if (
+      pokemon.passive === Passive.INANIMATE &&
+      pokemon.maxPP > 0 &&
+      pokemon.pp >= pokemon.maxPP
+    ) {
+      // CAST ABILITY FOR INANIMATE ENTITIES THAT HAVE A PP BAR
+      castAbility(AbilityStrategies[pokemon.skill], pokemon, board, null)
     }
 
     if (pokemon.canMove) {

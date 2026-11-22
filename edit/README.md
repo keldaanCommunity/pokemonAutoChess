@@ -30,7 +30,7 @@ The script performs these 5 steps in order:
 
 ### Software Dependencies:
 
-- Node.js (>=20.16.0)
+- Node.js (24.19.0 LTS)
 - TexturePacker (command-line version)
 - ts-node (for TypeScript execution)
 

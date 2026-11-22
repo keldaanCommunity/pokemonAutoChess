@@ -5,6 +5,7 @@ import { distanceC, distanceM } from "../utils/distance"
 import { logger } from "../utils/logger"
 import { OrientationArray, OrientationVector } from "../utils/orientation"
 import { pickRandomIn } from "../utils/random"
+import { OnMoveEffect } from "./effects/effect"
 import type { PokemonEntity } from "./pokemon-entity"
 import type Simulation from "./simulation"
 
@@ -70,6 +71,30 @@ export class Board {
     const entity1 = this.getEntityOnCell(x1, y1)
     this.setEntityOnCell(x1, y1, entity0)
     this.setEntityOnCell(x0, y0, entity1)
+    if (entity0) {
+      entity0.getEffects(OnMoveEffect).forEach((effect) => {
+        effect.apply({
+          pokemon: entity0,
+          board: this,
+          oldX: x0,
+          oldY: y0,
+          newX: x1,
+          newY: y1
+        })
+      })
+    }
+    if (entity1) {
+      entity1.getEffects(OnMoveEffect).forEach((effect) => {
+        effect.apply({
+          pokemon: entity1,
+          board: this,
+          oldX: x1,
+          oldY: y1,
+          newX: x0,
+          newY: y0
+        })
+      })
+    }
   }
 
   forEach(
@@ -101,8 +126,7 @@ export class Board {
     y0: number,
     x1: number,
     y1: number,
-    pokemon: IPokemonEntity,
-    target: IPokemonEntity | undefined
+    pokemon: IPokemonEntity
   ) {
     const dx = x1 - x0
     const dy = y1 - y0
@@ -126,10 +150,7 @@ export class Board {
           y1,
           pokemon: pokemon.name,
           pokemonPosX: pokemon.positionX,
-          pokemonPosY: pokemon.positionY,
-          target: target?.name,
-          targetPosX: target?.positionX,
-          targetPosY: target?.positionY
+          pokemonPosY: pokemon.positionY
         })
         logger.trace("orientation error")
         return Orientation.DOWNRIGHT
@@ -197,8 +218,7 @@ export class Board {
       pokemon.positionY,
       target.positionX,
       target.positionY,
-      pokemon,
-      target
+      pokemon
     )
 
     const orientations = [
@@ -301,6 +321,16 @@ export class Board {
     return pokemonCoordinates
   }
 
+  /** Projects a ray toward the target; the endpoint can lie outside the board. */
+  getLineEnd(x0: number, y0: number, x1: number, y1: number) {
+    const angleToTarget = Math.atan2(y1 - y0, x1 - x0)
+    const distance = 12 // sufficiently large to cover the whole board in diagonal
+    return {
+      finalX: Math.round(x0 + distance * Math.cos(angleToTarget)),
+      finalY: Math.round(y0 + distance * Math.sin(angleToTarget))
+    }
+  }
+
   getCellsBetween(x0: number, y0: number, x1: number, y1: number) {
     /* Supercover line algorithm from https://www.redblobgames.com/grids/line-drawing.html */
     const cells: Cell[] = []
@@ -343,6 +373,56 @@ export class Board {
     }
 
     return cells
+  }
+
+  /**
+   * Finds the line from (x, y) to an outward-facing board edge that contains
+   * the most cells satisfying `matches`. The origin is included in each line.
+   *
+   * If lines have the same number of matches, one containing a matching cell
+   * satisfying `preferred` wins; remaining ties follow board iteration order.
+   * Returns all cells on the chosen line, or an empty array if none match.
+   *
+   * @param x - Origin column.
+   * @param y - Origin row.
+   * @param matches - Predicate used to score each cell.
+   * @param preferred - Optional tie-breaker, applied only to matching cells.
+   *
+   * @example
+   * board.getBestLine(
+   *   pokemon.positionX,
+   *   pokemon.positionY,
+   *   (cell) => !!cell.value && cell.value.team !== pokemon.team && cell.value.hp > 0,
+   *   (cell) => cell.value === target
+   * )
+   */
+  getBestLine(
+    x: number,
+    y: number,
+    matches: (cell: Cell) => boolean,
+    preferred?: (cell: Cell) => boolean
+  ): Cell[] {
+    let best = { line: [] as Cell[], count: 0, hasPreferred: false }
+    this.forEach((endX, endY) => {
+      const isOutwardEdge =
+        (endX === 0 && endX < x) ||
+        (endX === this.columns - 1 && endX > x) ||
+        (endY === 0 && endY < y) ||
+        (endY === this.rows - 1 && endY > y)
+      if (!isOutwardEdge) return
+      const line = this.getCellsBetween(x, y, endX, endY)
+      const matchingCells = line.filter(matches)
+      const hasPreferred = preferred ? matchingCells.some(preferred) : false
+      if (
+        matchingCells.length > best.count ||
+        (matchingCells.length === best.count &&
+          hasPreferred &&
+          !best.hasPreferred)
+      ) {
+        best = { line, count: matchingCells.length, hasPreferred }
+      }
+    })
+    return best.line
   }
 
   getTeleportationCell(x: number, y: number, boardSide: Team) {
@@ -637,7 +717,10 @@ export class Board {
   ) {
     const previousEffects = this.boardEffects[y * this.columns + x]
     const entityOnCell = this.getEntityOnCell(x, y)
-    if (entityOnCell) {
+    if (
+      entityOnCell &&
+      entityOnCell.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) === false
+    ) {
       entityOnCell.effects.add(effect)
     }
 
@@ -678,10 +761,10 @@ export class Board {
       })
     } else {
       // Clear all effects
-      existingEffects.clear()
       if (entityOnCell) {
         existingEffects.forEach((effect) => entityOnCell.effects.delete(effect))
       }
+      existingEffects.clear()
       simulation.room.broadcast(Transfer.CLEAR_BOARD_EVENT, {
         simulationId: simulation.id,
         effect: null,
@@ -822,8 +905,7 @@ export function effectInOrientation(
           pokemon.positionY,
           target.positionX,
           target.positionY,
-          pokemon,
-          target
+          pokemon
         )
 
   const targetsHit = new Set()
@@ -860,7 +942,7 @@ export function effectInOrientation(
       break
 
     case Orientation.RIGHT:
-      for (let x = pokemon.positionX + 1; x < board.rows; x++) {
+      for (let x = pokemon.positionX + 1; x < board.columns; x++) {
         applyEffect(x, pokemon.positionY)
       }
       break
@@ -923,18 +1005,14 @@ export function effectInLine(
   target: PokemonEntity,
   effect: (cell: Cell) => void
 ) {
-  const angleToTarget = Math.atan2(
-    target.positionY - pokemon.positionY,
-    target.positionX - pokemon.positionX
-  )
-  const distance = 12 // sufficiently large to cover the whole board in diagonal
-  const finalX = Math.round(
-    pokemon.positionX + distance * Math.cos(angleToTarget)
-  )
-  const finalY = Math.round(
-    pokemon.positionY + distance * Math.sin(angleToTarget)
+  const { finalX, finalY } = board.getLineEnd(
+    pokemon.positionX,
+    pokemon.positionY,
+    target.positionX,
+    target.positionY
   )
   board
     .getCellsBetween(pokemon.positionX, pokemon.positionY, finalX, finalY)
     .forEach(effect)
+  return { finalX, finalY }
 }

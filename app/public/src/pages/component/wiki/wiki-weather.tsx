@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import { WeatherThreshold } from "../../../../../config"
+import { getWeatherConfig } from "../../../../../config/game/weathers"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import {
@@ -38,7 +39,9 @@ export default function WikiWeather() {
               </span>
             </header>
             <p className="description">
-              {addIconsToDescription(t(`weather_description.${weather}`))}
+              {addIconsToDescription(t(`weather_description.${weather}`), {
+                config: getWeatherConfig(weather)
+              })}
             </p>
             <ul>
               {(pokemonsInfluencingWeather.get(weather) ?? [])
@@ -68,7 +71,7 @@ export default function WikiWeather() {
 }
 
 const pokemonsInfluencingWeather = new Map([
-  [Weather.ZENITH, [Pkm.SHAYMIN_SKY, Pkm.CASTFORM_SUN]],
+  [Weather.ZENITH, [Pkm.SHAYMIN_SKY, Pkm.CASTFORM_SUN, Pkm.SOLROCK]],
   [
     Weather.DROUGHT,
     [Pkm.PRIMAL_GROUDON, Pkm.MOLTRES, Pkm.SOLROCK, Pkm.CASTFORM_SUN]

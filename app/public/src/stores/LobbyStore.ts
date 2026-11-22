@@ -50,7 +50,7 @@ const initialState: IUserLobbyState = {
   ccu: 0
 }
 
-export const lobbySlice = createSlice({
+const lobbySlice = createSlice({
   name: "lobby",
   initialState: initialState,
   reducers: {
@@ -118,7 +118,7 @@ export const lobbySlice = createSlice({
     ) => {
       state.searchedUser = action.payload
     },
-    resetLobby: () => initialState,
+    resetLobby: (state) => initialState,
     addTournament: (state, action: PayloadAction<TournamentSchema>) => {
       // remove previous potential duplicate
       state.tournaments = state.tournaments.filter(

@@ -4,13 +4,32 @@
 }
 
 .sprite-viewer-container {
+  display: grid;
+  grid-template-rows: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-left: calc(var(--sidebar-width) + 10px);
+}
+
+.sprite-viewer-settings {
+  min-width: 0;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 16px;
+  gap: 8px;
+}
 
-  padding: 40px;
-  padding-left: calc(var(--sidebar-width) + 10px);
+.sprite-viewer-settings > * {
+  flex-shrink: 0;
+}
+
+@media (min-width: 850px) {
+  .sprite-viewer-container {
+    grid-template-columns: minmax(310px, 360px) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
 }
 
 .sprite-viewer-toolbar.my-box {
@@ -20,6 +39,7 @@
   align-items: baseline;
   justify-content: center;
   gap: 8px;
+  flex-wrap: wrap;
   margin: 0 auto;
   background-color: var(--color-bg-primary);
 }
@@ -33,7 +53,103 @@
 }
 
 .sprite-viewer-sprite {
-  display: flex;
-  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.sprite-viewer-controls.my-box {
   width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sprite-viewer-control-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sprite-viewer-payload {
+  display: flex;
+  align-items: start;
+  gap: 8px;
+}
+
+.sprite-viewer-controls button,
+.sprite-viewer-playback button {
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-primary);
+  border: var(--border-thin);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.sprite-viewer-controls button:not(:disabled):hover,
+.sprite-viewer-playback button:not(:disabled):hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.sprite-viewer-controls button:disabled,
+.sprite-viewer-playback button:disabled {
+  opacity: 0.5;
+}
+
+.sprite-viewer-payload-details summary {
+  cursor: pointer;
+}
+
+.sprite-viewer-payload-details small,
+.sprite-viewer-payload-details label {
+  display: block;
+  margin: 4px 0;
+}
+
+.sprite-viewer-payload textarea {
+  flex: 1;
+  min-width: 0;
+  font-family: monospace;
+}
+
+.sprite-viewer-error {
+  margin: 0;
+  color: #ff9a9a;
+}
+
+.sprite-viewer-share input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sprite-viewer-client-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.sprite-viewer-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.sprite-viewer-share label,
+.sprite-viewer-share input {
+  flex-basis: 100%;
+}
+
+#preview-payload-dirty {
+  margin: 0;
+  color: #ffd27f;
+}
+
+#preview-applied-data {
+  max-height: 12em;
+  overflow: auto;
 }

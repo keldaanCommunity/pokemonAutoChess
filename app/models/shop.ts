@@ -2,13 +2,13 @@ import {
   AQUA_MONICA_CHANCE,
   ARCEUS_RATE,
   BuyPrices,
-  DITTO_RATE,
+  DITTO_BASE_RATE,
+  DITTO_RATE_PER_REROLL,
   EEVEE_RATE,
   FALINKS_TROOPER_RATE,
   FIERY_DRUM_CHANCE,
   FishRarityProbability,
   GRASS_CORNET_CHANCE,
-  getAltFormForPlayer,
   getUnownsPoolPerStage,
   HIGH_ROLLER_CHANCE,
   HONEY_CHANCE,
@@ -33,16 +33,15 @@ import {
   SellPrices,
   SHOP_SIZE,
   SKY_MELODICA_CHANCE,
-  SynergyTriggers,
+  SynergyTiersThresholds,
   TERRA_CYMBAL_CHANCE,
-  UNOWN_PSY3_NB_SHOPS_INTERVAL,
-  UNOWN_PSY5_NB_SHOPS_INTERVAL,
-  UNOWN_PSY7_NB_SHOPS_INTERVAL,
   UniquePool
 } from "../config"
+import { EffectConfigs } from "../config/game/effects"
+import { getAltFormForPlayer } from "../core/alt-form-logic"
 import { pickFirstPartners } from "../core/scribbles"
 import type GameState from "../rooms/states/game-state"
-import type { IPokemon, IPokemonEntity } from "../types"
+import type { IPokemonEntity } from "../types"
 import { EffectEnum } from "../types/enum/Effect"
 import { Rarity } from "../types/enum/Game"
 import {
@@ -91,9 +90,8 @@ export function getPoolSize(rarity: Rarity, maxStars: number): number {
 }
 
 export function getSellPrice(
-  pokemon: IPokemon | IPokemonEntity,
-  specialGameRule?: SpecialGameRule | null,
-  ignoreRareCandy = false
+  pokemon: Pokemon,
+  specialGameRule?: SpecialGameRule | null
 ): number {
   const name = pokemon.name
 
@@ -104,10 +102,14 @@ export function getSellPrice(
 
   let price = 1
   let stars = pokemon.stars
-  const hasRareCandy = pokemon.items && pokemon.items.has(Item.RARE_CANDY)
 
-  if (hasRareCandy && !ignoreRareCandy) {
+  const hasRareCandy = pokemon.items.has(Item.RARE_CANDY)
+  if (hasRareCandy) {
     stars = min(1)(stars - 1)
+  }
+
+  if (name === Pkm.CHERRIM_SUNLIGHT || name === Pkm.MOTHIM) {
+    stars -= 1
   }
 
   if (name === Pkm.EGG) {
@@ -118,6 +120,8 @@ export function getSellPrice(
     price = SellPrices.FALINKS_TROOPER
   } else if (name == Pkm.MELTAN) {
     price = SellPrices.MELTAN
+  } else if (name === Pkm.PIKACHU_LIBRE || name === Pkm.PIKACHU_SURFER) {
+    price = SellPrices.PIKACHU
   } else if (name === Pkm.MAGIKARP) {
     price = SellPrices.MAGIKARP
   } else if (name === Pkm.FEEBAS) {
@@ -144,12 +148,16 @@ export function getSellPrice(
     price = duo ? SellPrices.LEGENDARY_DUO : SellPrices.LEGENDARY
   } else if (getPokemonBaseline(name) === Pkm.EEVEE) {
     price = SellPrices.EEVEE
+  } else if (name == Pkm.ANNIHILAPE) {
+    price = SellPrices.ANNIHILAPE
   } else if (duo) {
     price = Math.ceil((RarityCost[pokemon.rarity] * stars) / 2)
-  } else if (name === Pkm.MOTHIM) {
-    price = RarityCost[pokemon.rarity] * 1
+  } else if (stars === 1) {
+    price = RarityCost[pokemon.rarity]
   } else {
-    price = RarityCost[pokemon.rarity] * stars
+    price = Math.ceil(
+      RarityCost[pokemon.rarity] * Math.pow(3, stars - 1) * 0.75
+    )
   }
 
   return price
@@ -243,7 +251,8 @@ export default class Shop {
       pkmProposition in PkmDuos ? PkmDuos[pkmProposition][0] : pkmProposition
     if (state.additionalPokemons.includes(pkm)) return // already added, like in Everyone is here scribble
     state.additionalPokemons.push(pkm)
-    const { rarity, stages } = getPokemonData(pkm)
+    let { rarity, stages } = getPokemonData(pkm)
+    if (pkm === Pkm.CHERUBI) stages = 2 // special case for Cherubi that has 3 stages but should have the pool size of a 2 stage
     const pool = this.getPool(rarity)
     const entityNumber = getPoolSize(rarity, stages)
     if (pool) {
@@ -287,6 +296,14 @@ export default class Shop {
     const { stars, rarity, regional } = getPokemonData(pkm)
     const baseline = getPokemonBaseline(pkm)
     let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
+
+    if (pkm === Pkm.CHERRIM_SUNLIGHT || pkm === Pkm.ANNIHILAPE) {
+      entityNumber = 3
+    }
+    if (pkm === Pkm.MOTHIM) {
+      entityNumber = 1
+    }
+
     const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
     if (duo) {
       // duos increase the number in pool by one if selling both
@@ -312,11 +329,17 @@ export default class Shop {
     }
   }
 
-  refillShop(player: Player, state: GameState) {
+  refillShop(player: Player, state: GameState, specificTypes?: Synergy[]) {
     // No need to release pokemons since they won't be changed
     player.shop.forEach((pokemon, i) => {
       if (pokemon === Pkm.MAGIKARP || pokemon === Pkm.DEFAULT) {
-        player.shop[i] = this.pickPokemon(player, state, i)
+        player.shop[i] = this.pickPokemon(
+          player,
+          state,
+          i,
+          false,
+          specificTypes
+        )
       }
     })
   }
@@ -332,7 +355,8 @@ export default class Shop {
       player.unownReminiscences = 0
     }
 
-    const hasTranscendence = psychicLevel >= SynergyTriggers[Synergy.PSYCHIC][2]
+    const hasTranscendence =
+      psychicLevel >= SynergyTiersThresholds[Synergy.PSYCHIC][2]
     if (hasTranscendence) {
       player.shopsSinceLastUnownShop += 1
     }
@@ -340,7 +364,8 @@ export default class Shop {
       hasTranscendence &&
       ((!manualRefresh && !player.shopLocked) ||
         (manualRefresh &&
-          player.shopsSinceLastUnownShop === UNOWN_PSY7_NB_SHOPS_INTERVAL))
+          player.shopsSinceLastUnownShop ===
+            EffectConfigs.TRANSCENDENCE.rerollInterval))
 
     if (shouldBeUnownShop) {
       // Unown shop
@@ -359,6 +384,17 @@ export default class Shop {
       for (let i = 0; i < SHOP_SIZE; i++) {
         player.shop[i] = this.pickPokemon(player, state, i)
       }
+    }
+  }
+
+  assignSootheBellShop(
+    player: Player,
+    state: GameState,
+    specificTypes: Synergy[]
+  ) {
+    player.shop.forEach((pkm) => this.releasePokemon(pkm, player, state))
+    for (let i = 0; i < SHOP_SIZE; i++) {
+      player.shop[i] = this.pickPokemon(player, state, i, true, specificTypes)
     }
   }
 
@@ -584,14 +620,19 @@ export default class Shop {
     player: Player,
     state: GameState,
     shopIndex: number = -1,
-    noSpecial = false
+    noSpecial = false,
+    specificTypes?: Synergy[]
   ): Pkm {
+    const dittoRate =
+      DITTO_BASE_RATE +
+      DITTO_RATE_PER_REROLL * player.gameStats.rerollCountSinceLastDitto
     if (
       state.specialGameRule !== SpecialGameRule.DITTO_PARTY &&
-      chance(DITTO_RATE) &&
+      chance(dittoRate) &&
       state.stageLevel >= MIN_STAGE_FOR_DITTO &&
       !noSpecial
     ) {
+      player.gameStats.rerollCountSinceLastDitto = 0
       return player.items.includes(Item.MYSTERY_BOX) ? Pkm.MELTAN : Pkm.DITTO
     }
 
@@ -599,9 +640,9 @@ export default class Shop {
       const totalRerolls = player.gameStats.rerollCount + state.stageLevel
       if (
         (player.effects.has(EffectEnum.PRECOGNITION) &&
-          totalRerolls % UNOWN_PSY3_NB_SHOPS_INTERVAL === 0) ||
+          totalRerolls % EffectConfigs.PRECOGNITION.shopInterval === 0) ||
         (player.effects.has(EffectEnum.AURA) &&
-          totalRerolls % UNOWN_PSY5_NB_SHOPS_INTERVAL === 0)
+          totalRerolls % EffectConfigs.AURA.shopInterval === 0)
       ) {
         const unowns = getUnownsPoolPerStage(state.stageLevel)
         return pickRandomIn(unowns)
@@ -628,7 +669,9 @@ export default class Shop {
       if (p.dishes.has(Item.HONEY) && chance(HONEY_CHANCE, p)) attractor = p
     }
 
-    if (attractor) {
+    if (specificTypes) {
+      specificTypesWanted = specificTypes
+    } else if (attractor) {
       specificTypesWanted = schemaValues(attractor.types)
     } else if (wildChance > 0 && chance(wildChance)) {
       specificTypesWanted = [Synergy.WILD]
@@ -799,7 +842,7 @@ export default class Shop {
     return Pkm.MAGIKARP
   }
 
-  magnetPull(meltan: IPokemonEntity, player: Player): Pkm {
+  magnetPull(meltan: IPokemonEntity, player: Player, state: GameState): Pkm {
     const finals = player.getFinalizedLines()
 
     const rarityProbabilies =
@@ -827,6 +870,8 @@ export default class Shop {
       ])
       if (getPokemonData(steelPkm).types.includes(Synergy.STEEL))
         return steelPkm
+      // no STEEL unit left: the draw took another unit, put it back
+      this.releasePokemon(steelPkm, player, state)
     }
 
     return Pkm.MELTAN

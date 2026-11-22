@@ -13,16 +13,16 @@ export default function GameRefresh() {
       className={cc("bubbly blue refresh-button", {
         shimmer: shopFreeRolls > 0
       })}
-      title={t("refresh_gold_hint")}
+      title={t("shop.refresh_gold_hint")}
       onClick={() => {
         getGameScene()?.refreshShop()
       }}
     >
       <img src={`/assets/ui/refresh.svg`} />
       {cost === 0 ? (
-        `${t("refresh")} (${shopFreeRolls})`
+        `${t("shop.refresh")} (${shopFreeRolls})`
       ) : (
-        <Money value={`${t("refresh")} ${cost}`} />
+        <Money value={`${t("shop.refresh")} ${cost}`} />
       )}
     </button>
   )
