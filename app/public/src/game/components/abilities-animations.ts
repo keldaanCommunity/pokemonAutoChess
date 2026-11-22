@@ -40,6 +40,7 @@ import {
   accelerockAnimation,
   aquaJetAnimation,
   aquaSwirlAnimation,
+  auroraBeamAnimation,
   auroraVeilAnimation,
   behemothBladeAnimation,
   blizzardAnimation,
@@ -1850,13 +1851,7 @@ export const AbilitiesAnimations: {
     duration: 1000,
     tint: 0x301030
   }),
-  [Ability.AURORA_BEAM]: onCaster({
-    ability: Ability.MOONGEIST_BEAM,
-    origin: [0.5, 0],
-    scale: [1, 2],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.AURORA_BEAM]: auroraBeamAnimation,
   [Ability.SPIRIT_SHACKLE]: projectile({
     distance: 8,
     scale: 1,
