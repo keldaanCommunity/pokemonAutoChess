@@ -10,7 +10,12 @@ import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
 import { shuffleArray } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { carryOverPermanentStats, EvolutionHandler } from "./evolution-handler"
+import {
+  carryOverChangedAbilities,
+  carryOverPermanentStats,
+  carryOverTeraShards,
+  EvolutionHandler
+} from "./evolution-handler"
 
 export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
   numberRequired: number
@@ -34,7 +39,7 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length >= this.numberRequired
   }
@@ -53,7 +58,7 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length === this.numberRequired - 1
   }
@@ -71,7 +76,6 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     player.board.forEach((pkm, id) => {
       if (
         pkm.name === pokemon.name &&
-        !pkm.items.has(Item.EVIOLITE) &&
         pokemonsBeforeEvolution.length < this.numberRequired
       ) {
         // logger.debug(pkm.name, pokemon.name)
@@ -115,6 +119,8 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution, player)
+    carryOverChangedAbilities(pokemonEvolved, pokemonsBeforeEvolution, player)
+    carryOverTeraShards(pokemonEvolved, pokemonsBeforeEvolution)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
     shuffleArray(itemsCompleteOnBench)

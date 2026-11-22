@@ -12,6 +12,7 @@ import {
 export const EXTRA_PREVIEW_STATUSES = {
   POISONED_BADLY: "Badly poisoned",
   BALM_MUSHROOM: "Balm Mushroom",
+  STELLAR: "Stellar",
   "BOOST/ATK": "Boost Attack",
   "BOOST/DEF": "Boost Defense",
   "BOOST/SPE_DEF": "Boost Special Defense",

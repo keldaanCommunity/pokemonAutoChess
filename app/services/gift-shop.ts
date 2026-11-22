@@ -9,6 +9,7 @@ import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_RARITY } from "../models/precomputed/precomputed-rarity"
 import type GameRoom from "../rooms/game-room"
 import {
+  AtlasItems,
   Berries,
   CraftableItemsNoScarves,
   Dishes,
@@ -17,7 +18,6 @@ import {
   Item,
   ItemComponentsNoFossilOrScarf,
   NonSpecialBerries,
-  ShinyItems,
   Sweets,
   SynergyGems,
   SynergyGivenByGem,
@@ -25,7 +25,11 @@ import {
 } from "../types"
 import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
-import { Pkm, PkmDuos, type PkmProposition } from "../types/enum/Pokemon"
+import {
+  Pkm,
+  type PkmProposition,
+  pkmsFromProposition
+} from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { isIn } from "../utils/array"
 import {
@@ -80,10 +84,10 @@ const giftAmountOfPokemon =
   }
 
 const giftHatchPokemon = (amount: number) => (toPlayer: Player) => {
-  if (chance(0.05)) {
+  if (chance(0.1)) {
     giveRandomEgg(toPlayer, true)
   } else {
-    // 5% chance of getting a golden egg
+    // 10% chance of getting a golden egg
     const hatchList = PRECOMPUTED_POKEMONS_PER_RARITY.HATCH.filter(
       (p) => getPokemonData(p).stars === 1
     )
@@ -155,8 +159,7 @@ const giftRandomPokemonByRarity =
           : PRECOMPUTED_POKEMONS_PER_RARITY[rarity]
 
     const poolWithWantedSyns = pool.filter((proposition) => {
-      const p: Pkm =
-        proposition in PkmDuos ? PkmDuos[proposition][0] : proposition
+      const p = pkmsFromProposition(proposition)[0]
       const pkmData = getPokemonData(p)
       if (PkmsWithAltForms.includes(p) && getBaseAltForm(p) !== p) return false
       if (pkmData.stars !== wantedStars) return false
@@ -184,11 +187,9 @@ const giftRandomPokemonByRarity =
       poolWithWantedSyns.length === 0 ? pool : poolWithWantedSyns //Fallback if no Pokémon satisfy the filter
     const selectedProposition = pickRandomIn(candidates) ?? Pkm.DITTO
 
-    const pokemonsObtained: Pokemon[] = (
-      selectedProposition in PkmDuos
-        ? PkmDuos[selectedProposition]
-        : [selectedProposition]
-    ).map((p) => PokemonFactory.createPokemonFromName(p, toPlayer))
+    const pokemonsObtained = pkmsFromProposition(selectedProposition).map((p) =>
+      PokemonFactory.createPokemonFromName(p, toPlayer)
+    )
 
     room.givePokemons(pokemonsObtained, toPlayer)
   }
@@ -204,8 +205,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   toPlayer.board.forEach((pkm: Pokemon) => {
     if (
       pkm.evolutionRule.type === EvolutionRuleType.COUNT &&
-      pkm.hasEvolution &&
-      !pkm.items.has(Item.EVIOLITE)
+      pkm.hasEvolution
     ) {
       pokemonThatCanEvolve.push(pkm)
     } else if (!isOnBench(pkm)) {
@@ -262,6 +262,10 @@ const giftXP = (amount: number) => (toPlayer: Player) => {
   }
 }
 
+const giftEmera = (amount: number) => (toPlayer: Player) => {
+  toPlayer.atlasManager.emera += amount
+}
+
 type GiftEffect = (toPlayer: Player, fromPlayer: Player, room: GameRoom) => void
 
 export const GiftEffects: {
@@ -293,7 +297,7 @@ export const GiftEffects: {
     giftAmountOfItem(2, NonSpecialBerries)
   ],
   [Item.PRETTY_BOX]: giftAmountOfItem(2, CraftableItemsNoScarves),
-  [Item.DELUXE_BOX]: giftAmountOfItem(1, ShinyItems),
+  [Item.DELUXE_BOX]: giftAmountOfItem(1, AtlasItems),
   [Item.TOOLBOX]: giftAmountOfItem(3, Tools),
   [Item.COMMON_GIFT]: giftRandomPokemonByRarity(Rarity.COMMON),
   [Item.UNCOMMON_GIFT]: giftRandomPokemonByRarity(Rarity.UNCOMMON),
@@ -303,7 +307,9 @@ export const GiftEffects: {
   [Item.UNIQUE_GIFT]: giftRandomPokemonByRarity(Rarity.UNIQUE),
   [Item.LEGENDARY_GIFT]: giftRandomPokemonByRarity(Rarity.LEGENDARY),
   [Item.SMALL_EXP_GIFT]: giftXP(8),
-  [Item.LARGE_EXP_GIFT]: giftXP(24)
+  [Item.LARGE_EXP_GIFT]: giftXP(24),
+  [Item.EMERA]: giftEmera(1),
+  [Item.GOLDEN_EMERA]: giftEmera(3)
 }
 
 export const openGift = (

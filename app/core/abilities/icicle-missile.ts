@@ -34,7 +34,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
           delay: i
         })
 
-        pokemon.commands.push(
+        pokemon.simulation.commands.push(
           new DelayedCommand(() => {
             const entityHit = board.getEntityOnCell(targetX, targetY)
             if (

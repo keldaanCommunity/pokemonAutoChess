@@ -1,10 +1,10 @@
 import type Phaser from "phaser"
 import { GameObjects } from "phaser"
 import {
+  AtlasItems,
   Berries,
   Dishes,
   type Item,
-  ShinyItems,
   SpecialItems,
   TMs,
   Tools,
@@ -73,7 +73,7 @@ export default class ItemContainer extends DraggableObject {
   }
 
   get cellIndex() {
-    if (isIn(ShinyItems, this.name)) return 1
+    if (isIn(AtlasItems, this.name)) return 1
     if (isIn(Berries, this.name)) return 2
     if (isIn(Tools, this.name)) return 3
     if (isIn(WeatherRocks, this.name)) return 4

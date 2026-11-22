@@ -1,17 +1,19 @@
-import type Player from "../../models/colyseus-models/player"
+﻿import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import type { IPlayer } from "../../types"
+import type { IPokemon } from "../../types"
 import {
   type CountEvolutionRule,
   type EvolutionRule,
   EvolutionRuleType,
   type HatchEvolutionRule,
+  type MegaEvolutionRule,
   type MoneyEvolutionRule,
   type PlacementEvolutionRule,
   type StackEvolutionRule,
   type StateEvolutionRule
 } from "../../types/EvolutionRules"
 import { PokemonActionState } from "../../types/enum/Game"
+import { Passive } from "../../types/enum/Passive"
 import { Pkm } from "../../types/enum/Pokemon"
 import { CountEvolutionHandler } from "./count-evolution-handler"
 import type { EvolutionHandler } from "./evolution-handler"
@@ -19,6 +21,7 @@ import { triggerOnEvolutionHooks } from "./evolution-hooks"
 import { HatchEvolutionHandler } from "./hatch-evolution-handler"
 import { getHatchTime } from "./hatch-time"
 import { ItemEvolutionHandler } from "./item-evolution-handler"
+import { MegaEvolutionHandler } from "./mega-evolution"
 import { MoneyEvolutionHandler } from "./money-evolution-handler"
 import { PlacementEvolutionHandler } from "./placement-evolution-handler"
 import { StackEvolutionHandler } from "./stack-evolution-handler"
@@ -41,6 +44,8 @@ export const EvolutionManager = {
         return new HatchEvolutionHandler(evolutionRule as HatchEvolutionRule)
       case EvolutionRuleType.STACK:
         return new StackEvolutionHandler(evolutionRule as StackEvolutionRule)
+      case EvolutionRuleType.MEGA:
+        return new MegaEvolutionHandler(evolutionRule as MegaEvolutionRule)
       case EvolutionRuleType.COUNT:
       default:
         return new CountEvolutionHandler(evolutionRule as CountEvolutionRule)
@@ -87,7 +92,7 @@ export const EvolutionManager = {
 
   getEvolution(
     pokemon: Pokemon,
-    player: IPlayer,
+    player: Player,
     ...additionalArgs: unknown[]
   ): Pkm {
     const handler = this.getHandler(pokemon.evolutionRule)
@@ -130,5 +135,18 @@ export const EvolutionManager = {
         pokemon.action = PokemonActionState.IDLE
       }
     }
+  },
+
+  isFinal(pokemon: IPokemon): boolean {
+    /* true if should be excluded from shops when obtained */
+    if (
+      pokemon.passive === Passive.CORSOLA ||
+      pokemon.passive === Passive.AVALUGG
+    )
+      return false
+    return (
+      !pokemon.hasEvolution ||
+      pokemon.evolutionRule.type !== EvolutionRuleType.COUNT
+    )
   }
 }

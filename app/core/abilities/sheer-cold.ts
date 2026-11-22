@@ -17,7 +17,7 @@ export class SheerColdStrategy extends AbilityStrategy {
     let executeChance =
       ([0.1, 0.2, 0.3, 0.6][pokemon.stars - 1] ?? 0.6) *
       (1 + min(0)((pokemon.hp - target.hp) / target.hp))
-    if (target.types.has(Synergy.ICE)) executeChance = 0
+    if (target.hasSynergy(Synergy.ICE)) executeChance = 0
     else if (target.status.freeze) executeChance = 1
 
     let damage = [50, 100, 200, 400][pokemon.stars - 1] ?? 400

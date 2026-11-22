@@ -7,8 +7,9 @@ export class NightmareStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const duration = [2000, 4000, 6000, 10000][pokemon.stars - 1] ?? 10000
-    const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
+    const duration =
+      [2000, 4000, 6000, 10000, 30000][pokemon.stars - 1] ?? 30000
+    const damage = [25, 50, 100, 200, 300][pokemon.stars - 1] ?? 300
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
       if (enemy && pokemon.team != enemy.team) {

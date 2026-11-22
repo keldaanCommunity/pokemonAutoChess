@@ -31,7 +31,7 @@ export class HyperspaceFuryStrategy extends AbilityStrategy {
     pokemon.broadcastAbility({
       targetX: target.positionX,
       targetY: target.positionY,
-      orientation: nbHits // use orientation field for the number of hits
+      data: { nbHits }
     })
   }
 }

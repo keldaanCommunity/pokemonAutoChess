@@ -475,6 +475,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removePsychicField()
       this.pokemonSprite.removeGrassField()
       this.pokemonSprite.removeFairyField()
+      this.pokemonSprite.removeStellarEffect()
 
       if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
@@ -568,6 +569,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status === "BALM_MUSHROOM") {
         this.pokemonSprite.addBalmMushroomEffect()
+      }
+      if (status === "STELLAR") {
+        this.pokemonSprite.addStellarEffect()
       }
       if (status === "BOOST/ATK") {
         this.pokemonSprite.displayBoost(Stat.ATK, true)
@@ -705,6 +709,7 @@ export class DebugScene extends Phaser.Scene {
     clearAbilityAnimations(this)
     this.time.clearPendingEvents().removeAllEvents()
     this.abilityElapsed = 0
+
     const showAbilityAnim = () => {
       const caster = this.pokemonSprite
       if (!caster) return
@@ -725,6 +730,7 @@ export class DebugScene extends Phaser.Scene {
         ap: 0,
         data: this.abilityPreview?.data ?? {}
       }
+
       if (caster.pokemon.skill === Ability.DYNAMAX_CANNON) {
         displayAbility({ ...args, ability: "DYNAMAX_CANNON_CHARGE" })
         displayAbility({
@@ -790,6 +796,7 @@ export class DebugScene extends Phaser.Scene {
       }
     }
     showAbilityAnim()
+    this.attackAnimInterval = setInterval(showAbilityAnim, 3000)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {

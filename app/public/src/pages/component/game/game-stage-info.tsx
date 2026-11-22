@@ -98,8 +98,8 @@ export default function GameStageInfo() {
                 {t("stages")} {AdditionalPicksStages.join(t("and"))}
               </p>
               <p>
-                <span className="help">{t("unique_picks")}:</span> {t("stages")}{" "}
-                {PortalCarouselStages.join(t("and"))}
+                <span className="help">{t("portal_stages")}:</span>{" "}
+                {t("stages")} {PortalCarouselStages.join(t("and"))}
               </p>
             </Tooltip>,
             document.body
@@ -209,7 +209,7 @@ export function StagePath() {
   const phase = useAppSelector((state) => state.game.phase)
   const stageLevel = useAppSelector((state) => state.game.stageLevel)
   const gameMode = useAppSelector((state) => state.game.gameMode)
-  const startStage = min(1)(stageLevel - 3)
+  const startStage = min(0)(stageLevel - 3)
   let level = startStage
   let path: PathStep[] = []
   let currentLevelPathIndex
@@ -233,11 +233,29 @@ export function StagePath() {
         currentLevelPathIndex = path.length - 1
       }
     }
-    if (PortalCarouselStages.includes(level)) {
+    if (level === 0) {
+      path.push({
+        level,
+        icon: "/assets/ui/starter.svg",
+        title: t("wiki.stages.starter_pick")
+      })
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
+      }
+    } else if (level === 10) {
       path.push({
         level,
         icon: "/assets/ui/mythical.svg",
         title: t("unique_pick")
+      })
+      if (level === stageLevel && phase === GamePhaseState.PICK) {
+        currentLevelPathIndex = path.length - 1
+      }
+    } else if (level === 20) {
+      path.push({
+        level,
+        icon: "/assets/ui/atlas.svg",
+        title: t("wiki.stages.atlas_open")
       })
       if (level === stageLevel && phase === GamePhaseState.PICK) {
         currentLevelPathIndex = path.length - 1
@@ -275,7 +293,7 @@ export function StagePath() {
       if (level === stageLevel && currentLevelPathIndex === undefined) {
         currentLevelPathIndex = path.length - 1
       }
-    } else {
+    } else if (level > 0) {
       path.push({
         level,
         icon: record?.avatar

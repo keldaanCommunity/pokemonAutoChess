@@ -1,7 +1,7 @@
 import type { EffectConfig } from "../../types/EffectConfig"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Rarity } from "../../types/enum/Game"
-import { type FishingRod, Item, type ShinyItem } from "../../types/enum/Item"
+import { type FishingRod, Item } from "../../types/enum/Item"
 import { Synergy } from "../../types/enum/Synergy"
 
 export const SynergyConfigs = {
@@ -195,6 +195,11 @@ export const SynergyTiers = {
     EffectEnum.APPETIZER,
     EffectEnum.LUNCH_BREAK,
     EffectEnum.BANQUET
+  ],
+  [Synergy.STELLAR]: [
+    EffectEnum.TERASTAL,
+    EffectEnum.TERA_RAID,
+    EffectEnum.TERASTAL_FESTIVAL
   ]
 } satisfies { [key in Synergy]: readonly EffectEnum[] }
 
@@ -232,7 +237,8 @@ export const SynergyTiersThresholds: { [key in Synergy]: number[] } = {
   [Synergy.LIGHT]: [2, 3, 4, 5],
   [Synergy.WILD]: [2, 4, 6, 9],
   [Synergy.AMORPHOUS]: [3, 5, 7],
-  [Synergy.GOURMET]: [3, 4, 5]
+  [Synergy.GOURMET]: [3, 4, 5],
+  [Synergy.STELLAR]: [1, 2, 3]
 }
 
 export const FishRarityProbability: {
@@ -284,6 +290,9 @@ export const SOUND_ATK_BUFF_PER_SYNERGY_TIER = [0, 2, 1, 1]
 export const SOUND_SPEED_BUFF_PER_SYNERGY_TIER = [0, 0, 5, 5]
 export const SOUND_PP_GAIN_PER_SYNERGY_TIER = [0, 0, 0, 3]
 
+export const FOSSIL_SHIELD_PER_SYNERGY_TIER = [0.4, 0.7, 1]
+export const FOSSIL_ATK_BUFF_PER_SYNERGY_TIER = [0.4, 0.7, 1]
+
 export const FAIRY_WANDS_BY_SYNERGY_LEVEL = [
   [Item.LONG_WAND, Item.SPIRIT_WAND, Item.HP_SWAP_WAND, Item.BLAST_WAND],
   [Item.SLUMBER_WAND, Item.SLOW_WAND, Item.PETRIFY_WAND, Item.CONFUSE_WAND],
@@ -310,20 +319,6 @@ export const GOLDEN_BERRY_TREE_TYPES = [
   Item.GOLDEN_NANAB_BERRY,
   Item.GOLDEN_PINAP_BERRY
 ]
-
-export const GoldenEggItems = [
-  Item.DYNAMAX_BAND,
-  Item.SHINY_STONE,
-  Item.RARE_CANDY,
-  Item.EVIOLITE,
-  Item.GOLD_MASK,
-  Item.GOLD_BOTTLE_CAP,
-  Item.ABSORB_BULB,
-  Item.SACRED_ASH,
-  Item.STAR_PIECE,
-  Item.REPEAT_BALL,
-  Item.GOLD_BOW
-] satisfies ShinyItem[]
 
 // Synergy color mapping extracted from SVG fill colors
 export const SYNERGY_COLORS: Record<Synergy, `#${string}`> = {
@@ -357,5 +352,6 @@ export const SYNERGY_COLORS: Record<Synergy, `#${string}`> = {
   LIGHT: "#FFF896",
   GOURMET: "#FF8473",
   FOSSIL: "#D2D35B",
-  ARTIFICIAL: "#EDEDED"
+  ARTIFICIAL: "#EDEDED",
+  STELLAR: "#00FFFF"
 }

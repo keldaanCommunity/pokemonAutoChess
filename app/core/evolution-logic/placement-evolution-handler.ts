@@ -1,7 +1,6 @@
 import type { MapSchema } from "@colyseus/schema"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Item } from "../../types"
 import type { PlacementEvolutionRule } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
@@ -25,7 +24,6 @@ export class PlacementEvolutionHandler extends EvolutionHandler<
     player: Player,
     board: MapSchema<Pokemon>
   ): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
     return this.condition(pokemon, player, board)
   }

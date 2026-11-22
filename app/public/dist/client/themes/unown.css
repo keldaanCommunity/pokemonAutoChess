@@ -3,10 +3,11 @@
   --color-bg-secondary: #2f2f2f;
   --color-bg-tertiary: #4b4b4b;
   --color-bg-accent: #808080;
+  --color-border: #333;
 
-  --border-thick: 3px solid #333;
-  --border-thin: 2px solid #333;
-  --border-extra-thin: 1px solid #333;
+  --border-thick: 3px solid var(--color-border);
+  --border-thin: 2px solid var(--color-border);
+  --border-extra-thin: 1px solid var(--color-border);
 }
 
 body {

@@ -4,6 +4,7 @@ import { BotV2 } from "../models/mongo-models/bot-v2"
 import type { Pkm } from "../types/enum/Pokemon"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import type { IBot, IStep } from "../types/models/bot-v2"
+import { wait } from "../utils/function"
 import { discordService } from "./discord"
 
 export type IBotListItem = Omit<IBot, "steps">
@@ -15,8 +16,6 @@ export async function fetchBotsList(
   const pageSize = 100
   const maxPages = 20 // Fail-safe: prevent infinite loops (max 2000 bots)
   const allBots: IBotListItem[] = []
-
-  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
   let page = 0
   let hasMoreData = true

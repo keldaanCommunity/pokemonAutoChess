@@ -1,15 +1,11 @@
-import { GoldenEggItems } from "../../config"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Item } from "../../types"
 import { Pkm } from "../../types/enum/Pokemon"
-import { pickRandomIn } from "../../utils/random"
 import { EvolutionHandler } from "./evolution-handler"
 import { getHatchTime } from "./hatch-time"
 
 export class HatchEvolutionHandler extends EvolutionHandler {
   canEvolve(pokemon: Pokemon, player: Player): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (!player.board.has(pokemon.id)) return false // egg has been sold in the meantime
     pokemon.stacksRequired = getHatchTime(pokemon, player)
     return pokemon.stacks >= pokemon.stacksRequired
@@ -24,7 +20,7 @@ export class HatchEvolutionHandler extends EvolutionHandler {
     )
 
     if (pokemonEvolved != null && pokemon.name === Pkm.EGG && pokemon.shiny) {
-      player.items.push(pickRandomIn(GoldenEggItems))
+      player.atlasManager.emera += 1
     }
 
     return pokemonEvolved

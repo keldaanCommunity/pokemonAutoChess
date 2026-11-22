@@ -1,5 +1,6 @@
 import type { Iterator } from "@colyseus/schema"
 import { SchemaSerializer } from "@colyseus/sdk"
+import { AtlasTree } from "../../../config/game/atlas"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config/game/board"
 import { PortalCarouselStages } from "../../../config/game/stages"
 import {
@@ -12,16 +13,24 @@ import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-
 import { PVEStages } from "../../../models/pve-stages"
 import type GameState from "../../../rooms/states/game-state"
 import { Transfer } from "../../../types"
+import type { TAtlasTree } from "../../../types/atlas"
 import {
   BattleResult,
   GamePhaseState,
   Orientation,
   PokemonActionState
 } from "../../../types/enum/Game"
-import { ItemRecipe } from "../../../types/enum/Item"
+import {
+  FossilStones,
+  Item,
+  ItemRecipe,
+  type ZCrystal
+} from "../../../types/enum/Item"
 import { Pkm, PkmDuos } from "../../../types/enum/Pokemon"
 import { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
+import { ZMovesByCrystal } from "../../../types/enum/ZMoves"
+import { isIn } from "../../../utils/array"
 import {
   type CombatFrameState,
   type EntitySnap,
@@ -95,6 +104,8 @@ export type ReplayEventType =
   | "level"
   | "xp" // bought experience (level-up gold for 4 XP); OnLevelUpCommand
   | "pick"
+  | "atlas" // the pov activated an atlas node
+  | "emera" // the pov gained emera
 
 // added/removed diff of two string multisets; duplicates matter (two of the same component)
 function multisetDiff(
@@ -323,6 +334,7 @@ interface PlayerSnapshot {
   items: string[] // bench items (multiset)
   unitItems: Map<string, string[]> // unit id to pokemon.items
   unitPos: Map<string, { x: number; y: number }> // unit id to (positionX, positionY)
+  unitSkill: Map<string, string> // unit id to skill (a z-move pick sets it)
   synSteps: Map<string, number> // synergy to active tier step
   berryStages: number[]
   berryTypes: string[] // filtered species list (for the repopulate diff)
@@ -363,8 +375,10 @@ function derivePlayerStateEvents(
   const board = new Map<string, string>()
   const unitItems = new Map<string, string[]>()
   const unitPos = new Map<string, { x: number; y: number }>()
+  const unitSkill = new Map<string, string>()
   p.board?.forEach((u, id) => {
     board.set(id, u.name)
+    unitSkill.set(id, u.skill)
     unitItems.set(id, u.items ? [...(u.items as Iterable<string>)] : [])
     unitPos.set(id, { x: u.positionX ?? 0, y: u.positionY ?? 0 })
   })
@@ -569,6 +583,30 @@ function derivePlayerStateEvents(
       }
     }
 
+    // z-move choice: pickZMove sets the z-ring holder's skill; the crystal never enters player.items
+    const zUnits = new Set<string>()
+    for (const slate of resolved) {
+      if (slate.type !== "zmoves") continue
+      for (const [id, skill] of unitSkill) {
+        const was = prev.unitSkill.get(id)
+        if (was === undefined || was === skill || zUnits.has(id)) continue
+        const c = slate.items.find(
+          (x) => ZMovesByCrystal[x as ZCrystal] === skill
+        )
+        if (!c) continue
+        zUnits.add(id)
+        push("pick", {
+          options: [c, ...slate.items.filter((x) => x !== c)].map((it) => ({
+            item: it
+          })),
+          chosenIdx: 0,
+          unit: board.get(id) ?? "",
+          zmove: true
+        })
+        break
+      }
+    }
+
     // item events: classify the player.items diff against per-unit pokemon.items moves (equip / craft / unequip / sell-return / gain)
     {
       const { added: pAdded, removed: pRemoved } = multisetDiff(
@@ -611,9 +649,14 @@ function derivePlayerStateEvents(
         const k = arr.findIndex(pred)
         return k < 0 ? undefined : arr.splice(k, 1)[0]
       }
+      // recipes list FOSSIL_STONE for any fossil, as OnDragDropCombineCommand maps it
+      const asComponent = (it: string): string =>
+        isIn(FossilStones, it) ? Item.FOSSIL_STONE : it
 
       // 0) item proposition pick: a resolved item-slate choice whose chosen item entered player.items; log as a pick and consume it so it isn't re-read as craft/gain
-      const itemSlate = resolved.find((s) => s.items.length > 0)
+      const itemSlate = resolved.find(
+        (s) => s.type !== "zmoves" && s.items.length > 0
+      )
       if (itemSlate) {
         if (itemSlate.pokemons.length > 0) {
           const chosen =
@@ -642,19 +685,20 @@ function derivePlayerStateEvents(
         const lostD = uLost.find(
           (u) =>
             u.id === uGained[g].id &&
-            (u.item === recipe[0] || u.item === recipe[1])
+            (asComponent(u.item) === recipe[0] ||
+              asComponent(u.item) === recipe[1])
         )
         if (!lostD) continue
-        const C = lostD.item === recipe[0] ? recipe[1] : recipe[0]
-        if (!pRemoved.includes(C)) continue
-        takeStr(pRemoved, C)
+        const C = asComponent(lostD.item) === recipe[0] ? recipe[1] : recipe[0]
+        const realC = pRemoved.find((x) => asComponent(x) === C)
+        if (realC === undefined) continue
+        takeStr(pRemoved, realC)
         takeUnit(uLost, (u) => u === lostD)
-        push("craft", {
-          c0: recipe[0],
-          c1: recipe[1],
-          result: R,
-          unit: uGained[g].name
-        })
+        const [c0, c1] =
+          asComponent(realC) === recipe[0]
+            ? [realC, lostD.item]
+            : [lostD.item, realC]
+        push("craft", { c0, c1, result: R, unit: uGained[g].name })
         uGained.splice(g, 1)
       }
 
@@ -662,14 +706,42 @@ function derivePlayerStateEvents(
       for (let a = pAdded.length - 1; a >= 0; a--) {
         const recipe = ItemRecipe[pAdded[a] as keyof typeof ItemRecipe]
         if (!recipe || recipe.length !== 2) continue
-        const i0 = pRemoved.indexOf(recipe[0])
-        if (i0 < 0) continue
+        const c0 = pRemoved.find((x) => asComponent(x) === recipe[0])
+        if (c0 === undefined) continue
         const rest = [...pRemoved]
-        rest.splice(i0, 1)
-        if (rest.indexOf(recipe[1]) < 0) continue
-        pRemoved.splice(pRemoved.indexOf(recipe[0]), 1)
-        pRemoved.splice(pRemoved.indexOf(recipe[1]), 1)
-        push("craft", { c0: recipe[0], c1: recipe[1], result: pAdded[a] })
+        rest.splice(rest.indexOf(c0), 1)
+        const c1 = rest.find((x) => asComponent(x) === recipe[1])
+        if (c1 === undefined) continue
+        takeStr(pRemoved, c0)
+        takeStr(pRemoved, c1)
+        push("craft", { c0, c1, result: pAdded[a] })
+        pAdded.splice(a, 1)
+      }
+
+      // 2b) on-unit craft sent to the bench: a unit lost D, player.items lost C, gained R
+      for (let a = pAdded.length - 1; a >= 0; a--) {
+        const R = pAdded[a]
+        const recipe = ItemRecipe[R as keyof typeof ItemRecipe]
+        if (!recipe || recipe.length !== 2) continue
+        const lostD = uLost.find(
+          (u) =>
+            u.present &&
+            (asComponent(u.item) === recipe[0] ||
+              asComponent(u.item) === recipe[1])
+        )
+        if (!lostD) continue
+        const C = asComponent(lostD.item) === recipe[0] ? recipe[1] : recipe[0]
+        const realC = pRemoved.find((x) => asComponent(x) === C)
+        if (realC === undefined) continue
+        takeStr(pRemoved, realC)
+        takeUnit(uLost, (u) => u === lostD)
+        push("craft", {
+          c0: realC,
+          c1: lostD.item,
+          unit: lostD.name,
+          result: R,
+          pop: true
+        })
         pAdded.splice(a, 1)
       }
 
@@ -752,6 +824,7 @@ function derivePlayerStateEvents(
     items,
     unitItems,
     unitPos,
+    unitSkill,
     synSteps,
     berryStages,
     berryTypes: species,
@@ -802,6 +875,10 @@ export function buildReplayIndex(
 
   // a PLAYER_INCOME message awaiting its breakdown, resolved on the next PICK-phase frame (once this round's interest/streak have patched in)
   let pendingIncome: { idx: number; total: number } | null = null
+  // a PLAYER_INCOME is node gold, with no split, if the next frame adds pov atlas nodes
+  let unclassedIncome: { idx: number; total: number } | null = null
+  // the pov's atlas as of the last frame that had one
+  let atlasPrev: { nodes: Set<string>; emera: number } | null = null
   // per-player previous-frame snapshot keyed by uid; the diff baseline for derivePlayerStateEvents, undefined until a player's first state frame
   const prevByPlayer = new Map<string, PlayerSnapshot>()
   const prevWeatherBySim = new Map<string, string>() // simId to its last non-NEUTRAL weather (all boards)
@@ -914,7 +991,7 @@ export function buildReplayIndex(
           typeof f.payload === "number"
             ? f.payload
             : (f.payload as { value?: number })?.value
-        if (typeof total === "number") pendingIncome = { idx: i, total }
+        if (typeof total === "number") unclassedIncome = { idx: i, total }
       }
       continue
     }
@@ -977,6 +1054,15 @@ export function buildReplayIndex(
 
     // pov-only income breakdown: resolve PLAYER_INCOME's base/interest/streak split now that this PICK frame's interest/streak have landed
     const pov = viewerUid ? state.players?.get(viewerUid) : undefined
+    const atlas = pov?.atlasManager
+    if (unclassedIncome) {
+      const nodeIncome =
+        atlas &&
+        atlasPrev &&
+        [...atlas.unlockedNodes].some((n) => !atlasPrev?.nodes.has(n))
+      if (!nodeIncome) pendingIncome = unclassedIncome
+      unclassedIncome = null
+    }
     if (pov && pendingIncome && ph === GamePhaseState.PICK) {
       // base = total - interest - streak; the PICK-phase gate rejects combat/kill gold (same message, during FIGHT).
       // real base is always a positive multiple of 5, so show the breakdown only when it works out to that (also rejects a not-yet-patched loss-streak reset, base 2-4)
@@ -1029,6 +1115,38 @@ export function buildReplayIndex(
       actions
     )
 
+    // the pov's atlas: a row per node it activates, one per rise in its emera
+    if (atlas) {
+      const nodes = [...atlas.unlockedNodes]
+      if (atlasPrev) {
+        const fresh = nodes.filter((n) => !atlasPrev?.nodes.has(n))
+        for (const node of fresh) {
+          const a: ReplayEventArgs = { node }
+          const type = (AtlasTree.nodes as TAtlasTree["nodes"])[node]?.type
+          if (type === "legendary") {
+            const pkm = atlas.legendaries[Number(node.at(-1)) - 1]
+            if (pkm) a.legendary = propositionConstituents(pkm)
+          }
+          // spinda activates another encounter in the same frame
+          if (
+            fresh.includes("spinda") &&
+            node !== "spinda" &&
+            type === "encounter"
+          )
+            a.spinda = true
+          actions.push({ t: f.t, type: "atlas", a, uid: viewerUid })
+        }
+        if (atlas.emera > atlasPrev.emera)
+          actions.push({
+            t: f.t,
+            type: "emera",
+            a: { count: atlas.emera - atlasPrev.emera },
+            uid: viewerUid
+          })
+      }
+      atlasPrev = { nodes: new Set(nodes), emera: atlas.emera }
+    }
+
     // per-player state-diff events, run for every player and tagged with uid; shop-only signals (reroll/"remove"/buy-vs-gained) fire for the pov alone
     const deriveCtx: DeriveCtx = {
       t: f.t,
@@ -1049,10 +1167,17 @@ export function buildReplayIndex(
 
   // collapse everything before game start (a phantom loading-screen TOWN/stage-0) into one carousel segment at gameStartMs so "seek to start" lands on the carousel (mirrors ReplayRoom.gameStartMs)
   const origin = gameStartMs ?? segments[0]?.t ?? 0
-  const opener = segments.filter((s) => s.t <= origin).at(-1)
+  let opener = segments.filter((s) => s.t <= origin).at(-1)
+  // phase starts null, so the stage 0 carousel can begin just after gameStartMs
+  if (
+    !opener &&
+    segments[0]?.stage === 0 &&
+    segments[0].phase === GamePhaseState.TOWN
+  )
+    opener = segments[0]
   const indexedSegments: ReplaySegment[] = [
     ...(opener ? [{ ...opener, t: origin }] : []),
-    ...segments.filter((s) => s.t > origin)
+    ...segments.filter((s) => s.t > origin && s !== opener)
   ]
 
   const stages: ReplayStageMark[] = []

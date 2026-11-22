@@ -23,18 +23,23 @@ import {
 } from "../../config/game/synergies"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory, {
   getPokemonBaseline
 } from "../../models/pokemon-factory"
-import { type FlowerPot, type IPokemon, Title, Transfer } from "../../types"
+import {
+  type FlowerPot,
+  FossilStones,
+  type IPokemon,
+  Title,
+  Transfer
+} from "../../types"
 import { EvolutionRuleType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
 import {
   Item,
-  ItemComponents,
+  ItemComponentsSingleFossil,
   Scarves,
   SynergyGems,
   SynergyGivenByGem,
@@ -43,11 +48,11 @@ import {
 import { Passive } from "../../types/enum/Passive"
 import { Pillars, Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
-import { count, isIn } from "../../utils/array"
+import { isIn } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
 import { max, min } from "../../utils/number"
-import { chance, pickNRandomIn } from "../../utils/random"
+import { chance, pickNRandomIn, pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 import { type Board, effectInLine } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
@@ -55,6 +60,7 @@ import { FlowerMonByPot, getFlowerPotsUnlocked } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import type Simulation from "../simulation"
 import { DelayedCommand } from "../simulation-command"
+import { getSynergyTier } from "../synergies"
 import { getUnitScore } from "../unit-score"
 import {
   BeforeTakingDamageEffect,
@@ -214,6 +220,10 @@ export const electricTripleAttackEffect = new OnAttackEffect(
         target.status.triggerWound(4000, target, pokemon)
       }
 
+      if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_ELECTRIC)) {
+        pokemon.addSpeed(5, pokemon, 0, false)
+      }
+
       if (
         pokemon.passive === Passive.DRUMMER &&
         board.cells.some(
@@ -302,6 +312,9 @@ export const humanHealEffect = new OnDamageDealtEffect(
     } else if (pokemon.effects.has(EffectEnum.CALM_MIND)) {
       lifesteal = EffectConfigs.CALM_MIND.lifestealPercent / 100
     }
+    if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_HUMAN)) {
+      lifesteal += 0.05
+    }
     pokemon.handleHeal(Math.ceil(lifesteal * damage), pokemon, 0, false)
   },
   EffectEnum.MEDITATE
@@ -318,7 +331,7 @@ export class OnFieldDeathEffect extends OnDeathEffect {
           if (
             value &&
             value.team === pokemon.team &&
-            value.types.has(Synergy.FIELD)
+            value.hasSynergy(Synergy.FIELD)
           ) {
             value.count.fieldCount++
             value.handleHeal(heal, pokemon, 0, false)
@@ -604,17 +617,22 @@ export const normalShieldEffect = new OnSimulationStartEffect(
   }
 )
 
-const bugSwarmSpawnEffect = new OnStageStartEffect(({ player, room }) => {
-  if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
-    const bugsNotFinal = [...player.board.values()]
-      .filter((p) => p.types.has(Synergy.BUG) && !p.final)
-      .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
-    if (bugsNotFinal.length > 0) {
-      const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
-      room.spawnOnBench(player, spawn, "nest")
+export const bugSwarmSpawnEffect = new OnStageStartEffect(
+  ({ player, room }) => {
+    if (getFreeSpaceOnBench(player.board) > 0 && !player.isBot) {
+      const bugsNotFinal = [...player.board.values()]
+        .filter(
+          (p) => p.hasSynergy(Synergy.BUG) && !EvolutionManager.isFinal(p)
+        )
+        .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
+      if (bugsNotFinal.length > 0) {
+        const spawn = getPokemonBaseline(bugsNotFinal[0]!.name)
+        room.spawnOnBench(player, spawn, "nest")
+      }
     }
-  }
-}, EffectEnum.HEART_OF_THE_SWARM)
+  },
+  EffectEnum.HEART_OF_THE_SWARM
+)
 
 export function applyWandEffects(
   pokemon: PokemonEntity,
@@ -950,7 +968,10 @@ export const cloneBugs = ({
 }) => {
   const bugTeam = new Array<IPokemon>()
   board.forEach((pkm) => {
-    if (pkm.types.has(Synergy.BUG) && pkm.positionY != 0) {
+    if (
+      (pkm.hasSynergy(Synergy.BUG) || pkm.dishes.has(Item.RAINBOW_BEAN)) &&
+      pkm.positionY != 0
+    ) {
       bugTeam.push(pkm)
     }
   })
@@ -1025,17 +1046,6 @@ export const cloneBugs = ({
   }
 }
 
-const giveFireShardEffect = new OnStageStartEffect(({ player }) => {
-  if (
-    getSynergyTier(player.synergies, Synergy.FIRE) === 4 &&
-    count(player.items, Item.FIRE_SHARD) <
-      EffectConfigs.DESOLATE_LAND.maxFireShards &&
-    player.life > 2
-  ) {
-    player.items.push(Item.FIRE_SHARD)
-  }
-})
-
 const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
   const nbTrees = max(3)(getSynergyTier(player.synergies, Synergy.GRASS))
   for (let i = 0; i < nbTrees; i++) {
@@ -1046,7 +1056,7 @@ const growBerryTreesEffect = new OnStageStartEffect(({ player }) => {
 const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   if (getSynergyTier(player.synergies, Synergy.GROUND) > 0) {
     player.board.forEach((pokemon, pokemonId) => {
-      if (pokemon.types.has(Synergy.GROUND) && !isOnBench(pokemon)) {
+      if (pokemon.hasSynergy(Synergy.GROUND) && !isOnBench(pokemon)) {
         const index = (pokemon.positionY - 1) * BOARD_WIDTH + pokemon.positionX
         const maxDepth = SynergyConfigs.GROUND.maxDepth
         const hasAlreadyReachedMaxDepth = player.groundHoles[index] === maxDepth
@@ -1100,7 +1110,15 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
               } else if (buriedItem === Item.BIG_NUGGET) {
                 player.addMoney(10, true, null)
               } else if (buriedItem === Item.TREASURE_BOX) {
-                player.items.push(...pickNRandomIn(ItemComponents, 2))
+                player.items.push(
+                  ...pickNRandomIn(ItemComponentsSingleFossil, 2).map(
+                    (item) => {
+                      return item === Item.FOSSIL_STONE
+                        ? pickRandomIn(FossilStones)
+                        : item
+                    }
+                  )
+                )
               } else if (isIn(SynergyGems, buriedItem)) {
                 const type = SynergyGivenByGem[buriedItem]
                 player.bonusSynergies.set(
@@ -1120,11 +1138,63 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
   }
 })
 
+export class FossilPowerEffect extends BeforeTakingDamageEffect {
+  synergyTier: number
+  constructor(effect: SynergyTier<Synergy.FOSSIL>) {
+    super(undefined, effect)
+    this.synergyTier = SynergyTiers[Synergy.FOSSIL].indexOf(effect) + 1
+  }
+
+  apply({ pokemon, residualDamage, takenDamage }) {
+    if (
+      pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
+      pokemon.hp - residualDamage <=
+        (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) * pokemon.maxHP
+    ) {
+      const shield = Math.round(
+        pokemon.baseHP *
+          (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
+            ? EffectConfigs.FORGOTTEN_POWER.shieldPercent / 100
+            : pokemon.effects.has(EffectEnum.ELDER_POWER)
+              ? EffectConfigs.ELDER_POWER.shieldPercent / 100
+              : EffectConfigs.ANCIENT_POWER.shieldPercent / 100)
+      )
+      const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
+        ? EffectConfigs.FORGOTTEN_POWER.attackPercent / 100
+        : pokemon.effects.has(EffectEnum.ELDER_POWER)
+          ? EffectConfigs.ELDER_POWER.attackPercent / 100
+          : EffectConfigs.ANCIENT_POWER.attackPercent / 100
+      pokemon.addShield(shield, pokemon, 0, false)
+
+      //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
+      const damageOnShield = max(0.5 * shield)(residualDamage)
+
+      pokemon.shieldDamageTaken += damageOnShield
+      takenDamage += damageOnShield
+      pokemon.shield -= damageOnShield
+      residualDamage = 0
+
+      pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
+      pokemon.resetCooldown(500)
+      pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
+      SynergyTiers[Synergy.FOSSIL].forEach((e) => {
+        pokemon.effects.delete(e)
+      })
+      pokemon.effectsSet.delete(this)
+
+      return {
+        newResidualDamage: residualDamage,
+        newTakenDamage: takenDamage
+      }
+    }
+  }
+}
+
+//TODO: move more synergy effects from applyEffect to here
 export const SynergyEffects: Partial<
   Record<EffectEnum, (Effect | ((effect: EffectEnum) => Effect))[]>
 > = {
   [EffectEnum.HEART_OF_THE_SWARM]: [bugSwarmSpawnEffect],
-  [EffectEnum.DESOLATE_LAND]: [giveFireShardEffect],
   [EffectEnum.INGRAIN]: [growBerryTreesEffect],
   [EffectEnum.GROWTH]: [growBerryTreesEffect],
   [EffectEnum.SPORE]: [growBerryTreesEffect],

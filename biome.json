@@ -38,7 +38,6 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "none",
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
@@ -109,7 +108,10 @@
         "noWith": "error"
       }
     },
-    "includes": ["**", "!**/app/public/dist/**/*.js"]
+    "includes": [
+      "**",
+      "!**/app/public/dist/**/*.js"
+    ]
   },
   "javascript": {
     "formatter": {
@@ -126,7 +128,12 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
       "linter": {
         "rules": {
           "correctness": {

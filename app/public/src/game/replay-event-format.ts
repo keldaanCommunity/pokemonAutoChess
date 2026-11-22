@@ -1,8 +1,10 @@
 // render-time localization of event-log row content. the index + combat scan emit structured descriptors
 // ({ type, a, key }) of raw game-data values (enum names) + numbers, localized here. word order + plurals live in
 // the replay.eventlog.row.* templates; game-data nouns route through the game's own locale keys, so a bump needs no new strings for them
-import type { TFunction } from "i18next"
+import { exists, type TFunction } from "i18next"
+import { AtlasTree } from "../../../config/game/atlas"
 import { Transfer } from "../../../types"
+import type { TAtlasTree } from "../../../types/atlas"
 import { EnvironmentalEffects } from "../../../types/enum/Effect"
 import { AttackType, HealType, Stat } from "../../../types/enum/Game"
 import { PkmByIndex } from "../../../types/enum/Pokemon"
@@ -35,8 +37,13 @@ const typedT = (t: TFunction): TD => t as unknown as TD
 
 export const pkmName = (t: TFunction, v: string): string =>
   typedT(t)(`pkm.${v}`)
+// effect-only casts (GREEN_ORB, GROUND_GROW) have no ability string, and some are items
 const abilityName = (t: TFunction, v: string): string =>
-  typedT(t)(`ability.${v}`)
+  exists(`ability.${v}`)
+    ? typedT(t)(`ability.${v}`)
+    : exists(`item.${v}`)
+      ? typedT(t)(`item.${v}`)
+      : prettyName(v)
 export const itemName = (t: TFunction, v: string): string =>
   typedT(t)(`item.${v}`)
 export const mapName = (t: TFunction, v: string): string =>
@@ -240,6 +247,13 @@ function formatReplayEventRow(
       const c0 = itemName(t, String(a.c0))
       const c1 = itemName(t, String(a.c1))
       const result = itemName(t, String(a.result))
+      if (a.pop)
+        return t(`${ROW_KEY}.craft_pop`, {
+          c0,
+          c1,
+          result,
+          unit: pkmName(t, String(a.unit))
+        })
       return a.unit != null
         ? t(`${ROW_KEY}.craft_on`, {
             c0,
@@ -289,10 +303,48 @@ function formatReplayEventRow(
       const alts = options
         .filter((_, i) => i !== idx)
         .map((o) => pickOption(t, o))
+      if (a.zmove) {
+        const unit = pkmName(t, String(a.unit))
+        return alts.length
+          ? t(`${ROW_KEY}.pick_zmove_over`, {
+              chosen,
+              unit,
+              alternatives: alts.join(", ")
+            })
+          : t(`${ROW_KEY}.pick_zmove`, { chosen, unit })
+      }
       return alts.length
         ? t(`${ROW_KEY}.pick_over`, { chosen, alternatives: alts.join(", ") })
         : t(`${ROW_KEY}.pick`, { chosen })
     }
+    case "atlas": {
+      const node = (AtlasTree.nodes as TAtlasTree["nodes"])[String(a.node)]
+      if (node?.type === "condition")
+        return t(`${ROW_KEY}.atlas_condition`, {
+          condition: prettyName(node.condition)
+        })
+      if (node?.type === "buff")
+        return t(`${ROW_KEY}.atlas_buff`, { color: prettyName(node.buff) })
+      // named as the atlas panel titles these nodes
+      const legendary = (a.legendary as string[] | undefined) ?? []
+      const name =
+        node?.type === "encounter"
+          ? pkmName(t, node.encounter)
+          : node?.type === "item"
+            ? itemName(t, node.item)
+            : node?.type === "keystone"
+              ? typedT(t)(`atlas.keystone.${node.emera}`)
+              : node?.type === "legendary"
+                ? legendary.length
+                  ? legendary.map((p) => pkmName(t, p)).join(" + ")
+                  : t("atlas.keystone.legendary")
+                : prettyName(String(a.node))
+      return a.spinda
+        ? t(`${ROW_KEY}.atlas_spinda`, { node: name })
+        : t(`${ROW_KEY}.atlas_node`, { node: name })
+    }
+    case "emera":
+      return t(`${ROW_KEY}.emera`, { count: Number(a.count) })
     case "town":
       return t(`${ROW_KEY}.town`, { npc: prettyName(String(a.npc)) })
     case "rule":

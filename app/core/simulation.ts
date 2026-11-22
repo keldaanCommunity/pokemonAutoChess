@@ -1,5 +1,6 @@
 import { MapSchema, Schema, type } from "@colyseus/schema"
 import { BOARD_HEIGHT, BOARD_SIDE_HEIGHT, BOARD_WIDTH } from "../config"
+import { AtlasTree } from "../config/game/atlas"
 import { EffectConfigs } from "../config/game/effects"
 import {
   AMORPHOUS_HP_BUFF_PER_SYNERGY_TIER,
@@ -44,7 +45,7 @@ import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather, WeatherEffects } from "../types/enum/Weather"
 import type { IPokemonData } from "../types/interfaces/PokemonData"
-import { count, deduplicateArray, isIn, removeInArray } from "../utils/array"
+import { count, deduplicateArray, isIn, removeFromArray } from "../utils/array"
 import { getAvatarString } from "../utils/avatar"
 import { isOnBench } from "../utils/board"
 import { logger } from "../utils/logger"
@@ -68,6 +69,7 @@ import {
   FightingKnockbackEffect,
   FireHitEffect,
   FlyingProtectionEffect,
+  FossilPowerEffect,
   fightingTrainingEffect,
   GroundHoleEffect,
   humanHealEffect,
@@ -84,17 +86,17 @@ import type { SimulationCommand } from "./simulation-command"
 import { getStrongestUnit } from "./unit-score"
 
 export default class Simulation extends Schema implements ISimulation {
-  @type("string") weather: Weather = Weather.NEUTRAL
-  @type("string") winnerId = ""
-  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
-  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
-  @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
-  @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("string") id: string
   @type("string") bluePlayerId: string
   @type("string") redPlayerId: string
   @type("boolean") isGhostBattle: boolean
+  @type({ map: PokemonEntity }) blueTeam = new MapSchema<PokemonEntity>()
+  @type({ map: PokemonEntity }) redTeam = new MapSchema<PokemonEntity>()
+  @type({ map: Dps }) blueDpsMeter = new MapSchema<Dps>()
+  @type({ map: Dps }) redDpsMeter = new MapSchema<Dps>()
   @type("boolean") started: boolean
+  @type("string") weather: Weather = Weather.NEUTRAL
+  @type("string") winnerId = ""
   room: GameRoom
   blueEffects = new Set<EffectEnum>()
   redEffects = new Set<EffectEnum>()
@@ -110,6 +112,7 @@ export default class Simulation extends Schema implements ISimulation {
   stormLightningTimer = 0
   tidalWaveTimer = 0
   tidalWaveCounter = 0
+  boardBurnTimer = 0
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
@@ -164,7 +167,7 @@ export default class Simulation extends Schema implements ISimulation {
             // OnBenchedDuringFightEffect should be applied here
             if (
               teamEffects.has(EffectEnum.COACHING) &&
-              pokemon.types.has(Synergy.FIGHTING)
+              pokemon.hasSynergy(Synergy.FIGHTING)
             ) {
               fightingTrainingEffect.apply({
                 pokemon,
@@ -196,6 +199,12 @@ export default class Simulation extends Schema implements ISimulation {
       )
     ) {
       this.tidalWaveTimer = SynergyConfigs.AQUATIC.firstWaveDelaySeconds * 1000
+    }
+    if (
+      this.blueEffects.has(EffectEnum.DESOLATE_LAND) ||
+      this.redEffects.has(EffectEnum.DESOLATE_LAND)
+    ) {
+      this.boardBurnTimer = 10000
     }
 
     this.bluePlayer.board.forEach((pokemon) => {
@@ -461,7 +470,7 @@ export default class Simulation extends Schema implements ISimulation {
   }
 
   getClosestFreeCellToPokemonEntity(
-    pokemon: IPokemonEntity,
+    pokemon: PokemonEntity,
     team: Team = pokemon.team
   ): { x: number; y: number } | null {
     return this.getClosestFreeCellTo(pokemon.positionX, pokemon.positionY, team)
@@ -521,14 +530,14 @@ export default class Simulation extends Schema implements ISimulation {
 
     if (
       (singleType === Synergy.SOUND ||
-        (!singleType && pokemon.types.has(Synergy.SOUND))) &&
+        (!singleType && pokemon.hasSynergy(Synergy.SOUND))) &&
       !SynergyTiers[Synergy.SOUND].some((e) => allyEffects.has(e))
     ) {
       // allow sound pokemon to always wake up allies without searching through the board twice
       pokemon.effectsSet.add(new SoundCryEffect())
     }
 
-    if (pokemon.types.has(Synergy.ELECTRIC) && pokemon.player) {
+    if (pokemon.hasSynergy(Synergy.ELECTRIC) && pokemon.player) {
       const nbCellBatteries = schemaValues(pokemon.player.items).filter(
         (item) => item === Item.CELL_BATTERY
       ).length
@@ -577,6 +586,7 @@ export default class Simulation extends Schema implements ISimulation {
     /*
     in order:
     - spawns (bug, rotom, white flute, etc)
+    - atlas effects
     - support items effects (exp share, gracidea etc)
     - target selection effects (ghost curse, comet shard etc)
     */
@@ -613,7 +623,7 @@ export default class Simulation extends Schema implements ISimulation {
             if (randomSpawn) {
               spawns.push(randomSpawn)
             } else {
-              logger.info("no pokemon found for white flute call", rarity, tier)
+              logger.info("no pokemon found for gold mask", rarity, tier)
             }
           }
 
@@ -657,6 +667,31 @@ export default class Simulation extends Schema implements ISimulation {
             const mon = PokemonFactory.createPokemonFromName(spawn.name)
             this.addPokemon(mon, coord.x, coord.y, teamIndex, true)
           })
+        }
+      })
+    }
+
+    // ATLAS EFFECTS
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
+        const player = team === this.blueTeam ? this.bluePlayer : this.redPlayer
+        if (player?.atlasManager.unlockedNodes.has("ampharos")) {
+          const encountersUnlocked = schemaValues(
+            player.atlasManager.unlockedNodes
+          ).filter((nodeId) => AtlasTree.nodes[nodeId].type === "encounter")
+          pokemon.addShield(10 * encountersUnlocked.length, pokemon, 0, false)
+        }
+        if (
+          (player?.atlasManager.unlockedNodes.has("azurill") &&
+            pokemon.rarity === Rarity.COMMON) ||
+          (player?.atlasManager.unlockedNodes.has("bidoof") &&
+            pokemon.rarity === Rarity.UNCOMMON) ||
+          (player?.atlasManager.unlockedNodes.has("loudred") &&
+            pokemon.rarity === Rarity.RARE)
+        ) {
+          pokemon.addMaxHP(30 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAttack(3 * pokemon.stars, pokemon, 0, false)
+          pokemon.addAbilityPower(10 * pokemon.stars, pokemon, 0, false)
         }
       })
     }
@@ -770,12 +805,11 @@ export default class Simulation extends Schema implements ISimulation {
     }
   }
 
-  applyEffect(pokemon: IPokemonEntity, effect: EffectEnum) {
+  applyEffect(pokemon: PokemonEntity, effect: EffectEnum) {
     const player = pokemon.player
-    const types = pokemon.types
     switch (effect) {
       case EffectEnum.HONE_CLAWS:
-        if (types.has(Synergy.DARK)) {
+        if (pokemon.hasSynergy(Synergy.DARK)) {
           const { critChancePercent, critPowerPercent } =
             EffectConfigs.HONE_CLAWS
           pokemon.addCritChance(critChancePercent, pokemon, 0, false)
@@ -785,7 +819,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.ASSURANCE:
-        if (types.has(Synergy.DARK)) {
+        if (pokemon.hasSynergy(Synergy.DARK)) {
           const { critChancePercent, critPowerPercent } =
             EffectConfigs.ASSURANCE
           pokemon.addCritChance(critChancePercent, pokemon, 0, false)
@@ -795,7 +829,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.BEAT_UP:
-        if (types.has(Synergy.DARK)) {
+        if (pokemon.hasSynergy(Synergy.DARK)) {
           const { critChancePercent, critPowerPercent } = EffectConfigs.BEAT_UP
           pokemon.addCritChance(critChancePercent, pokemon, 0, false)
           pokemon.addCritPower(critPowerPercent, pokemon, 0, false)
@@ -806,8 +840,9 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.ANCIENT_POWER:
       case EffectEnum.ELDER_POWER:
       case EffectEnum.FORGOTTEN_POWER:
-        if (types.has(Synergy.FOSSIL)) {
+        if (pokemon.hasSynergy(Synergy.FOSSIL)) {
           pokemon.effects.add(effect)
+          pokemon.effectsSet.add(new FossilPowerEffect(effect))
         }
         break
 
@@ -815,7 +850,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WILDFIRE:
       case EffectEnum.BLAZE:
       case EffectEnum.DESOLATE_LAND:
-        if (types.has(Synergy.FIRE)) {
+        if (pokemon.hasSynergy(Synergy.FIRE)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new FireHitEffect(effect))
         }
@@ -825,7 +860,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.GROWTH:
       case EffectEnum.SPORE:
       case EffectEnum.OVERGROW:
-        if (types.has(Synergy.GRASS)) {
+        if (pokemon.hasSynergy(Synergy.GRASS)) {
           pokemon.effects.add(effect)
         }
         break
@@ -833,7 +868,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.RAIN_DANCE:
       case EffectEnum.DRIZZLE:
       case EffectEnum.PRIMORDIAL_SEA:
-        if (types.has(Synergy.WATER)) {
+        if (pokemon.hasSynergy(Synergy.WATER)) {
           pokemon.effects.add(effect)
         }
         break
@@ -842,7 +877,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.STRENGTH:
       case EffectEnum.ENDURE:
       case EffectEnum.PURE_POWER:
-        if (types.has(Synergy.NORMAL)) {
+        if (pokemon.hasSynergy(Synergy.NORMAL)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(normalShieldEffect)
         }
@@ -851,7 +886,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.RISING_VOLTAGE:
       case EffectEnum.POWER_SURGE:
       case EffectEnum.SUPERCHARGED:
-        if (types.has(Synergy.ELECTRIC)) {
+        if (pokemon.hasSynergy(Synergy.ELECTRIC)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(electricTripleAttackEffect)
         }
@@ -861,7 +896,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.STURDY:
       case EffectEnum.DEFIANT:
       case EffectEnum.COACHING:
-        if (types.has(Synergy.FIGHTING)) {
+        if (pokemon.hasSynergy(Synergy.FIGHTING)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new FightingKnockbackEffect(effect))
         }
@@ -872,7 +907,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.CORKSCREW_CRASH:
       case EffectEnum.MAX_MELTDOWN:
         pokemon.addDefense(SynergyConfigs.STEEL.teamDefense, pokemon, 0, false)
-        if (types.has(Synergy.STEEL)) {
+        if (pokemon.hasSynergy(Synergy.STEEL)) {
           pokemon.effects.add(effect)
         }
         break
@@ -880,7 +915,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.BULK_UP:
       case EffectEnum.RAGE:
       case EffectEnum.ANGER_POINT:
-        if (types.has(Synergy.FIELD)) {
+        if (pokemon.hasSynergy(Synergy.FIELD)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new OnFieldDeathEffect(effect))
         }
@@ -890,13 +925,13 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.BRUTAL_SWING:
       case EffectEnum.POWER_TRIP:
       case EffectEnum.MERCILESS:
-        if (types.has(Synergy.MONSTER)) {
+        if (pokemon.hasSynergy(Synergy.MONSTER)) {
           pokemon.effects.add(effect)
         }
         break
 
       case EffectEnum.PRECOGNITION:
-        if (types.has(Synergy.PSYCHIC)) {
+        if (pokemon.hasSynergy(Synergy.PSYCHIC)) {
           pokemon.effects.add(EffectEnum.PRECOGNITION)
           pokemon.addAbilityPower(
             EffectConfigs.PRECOGNITION.abilityPower,
@@ -908,7 +943,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.AURA:
-        if (types.has(Synergy.PSYCHIC)) {
+        if (pokemon.hasSynergy(Synergy.PSYCHIC)) {
           pokemon.effects.add(EffectEnum.AURA)
           pokemon.addAbilityPower(
             EffectConfigs.AURA.abilityPower,
@@ -920,7 +955,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.TRANSCENDENCE:
-        if (types.has(Synergy.PSYCHIC)) {
+        if (pokemon.hasSynergy(Synergy.PSYCHIC)) {
           pokemon.effects.add(EffectEnum.TRANSCENDENCE)
           pokemon.addAbilityPower(
             EffectConfigs.TRANSCENDENCE.abilityPower,
@@ -934,7 +969,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MEDITATE:
       case EffectEnum.FOCUS_ENERGY:
       case EffectEnum.CALM_MIND:
-        if (types.has(Synergy.HUMAN)) {
+        if (pokemon.hasSynergy(Synergy.HUMAN)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(humanHealEffect)
         }
@@ -944,7 +979,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FEATHER_DANCE:
       case EffectEnum.MAX_AIRSTREAM:
       case EffectEnum.SKYDIVE:
-        if (types.has(Synergy.FLYING)) {
+        if (pokemon.hasSynergy(Synergy.FLYING)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new FlyingProtectionEffect(effect))
         }
@@ -961,14 +996,14 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FLYCATCHER:
       case EffectEnum.FRAGRANT:
       case EffectEnum.FLOWER_POWER:
-        if (types.has(Synergy.FLORA)) {
+        if (pokemon.hasSynergy(Synergy.FLORA)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(onFlowerMonDeath)
         }
         break
 
       case EffectEnum.BATTLE_ARMOR:
-        if (types.has(Synergy.ROCK)) {
+        if (pokemon.hasSynergy(Synergy.ROCK)) {
           pokemon.addDefense(
             EffectConfigs.BATTLE_ARMOR.defense,
             pokemon,
@@ -980,7 +1015,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.MOUTAIN_RESISTANCE:
-        if (types.has(Synergy.ROCK)) {
+        if (pokemon.hasSynergy(Synergy.ROCK)) {
           pokemon.addDefense(
             EffectConfigs.MOUTAIN_RESISTANCE.defense,
             pokemon,
@@ -992,7 +1027,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.DIAMOND_STORM:
-        if (types.has(Synergy.ROCK)) {
+        if (pokemon.hasSynergy(Synergy.ROCK)) {
           pokemon.addDefense(
             EffectConfigs.DIAMOND_STORM.defense,
             pokemon,
@@ -1007,7 +1042,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.FAIRY_AURA:
       case EffectEnum.PIXILATE:
       case EffectEnum.MOON_FORCE:
-        if (types.has(Synergy.FAIRY)) {
+        if (pokemon.hasSynergy(Synergy.FAIRY)) {
           pokemon.effects.add(effect)
           if (
             pokemon.player?.items.includes(Item.LONG_WAND) &&
@@ -1027,13 +1062,13 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.DRAGON_ENERGY:
       case EffectEnum.DRAGON_SCALES:
       case EffectEnum.DRAGON_DANCE:
-        if (types.has(Synergy.DRAGON)) {
+        if (pokemon.hasSynergy(Synergy.DRAGON)) {
           pokemon.effects.add(effect)
           if (player) {
             const dragonLevel = schemaValues(player.board).reduce(
               (acc, p) =>
                 acc +
-                (p.types.has(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
+                (p.hasSynergy(Synergy.DRAGON) && !isOnBench(p) ? p.stars : 0),
               0
             )
             if (
@@ -1102,7 +1137,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.POISONOUS:
       case EffectEnum.VENOMOUS:
       case EffectEnum.TOXIC:
-        if (types.has(Synergy.POISON)) {
+        if (pokemon.hasSynergy(Synergy.POISON)) {
           pokemon.effects.add(effect)
         }
         break
@@ -1110,7 +1145,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.LARGO:
       case EffectEnum.ALLEGRO:
       case EffectEnum.PRESTO:
-        if (types.has(Synergy.SOUND)) {
+        if (pokemon.hasSynergy(Synergy.SOUND)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new SoundCryEffect(effect))
         }
@@ -1120,7 +1155,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.INFESTATION:
       case EffectEnum.HORDE:
       case EffectEnum.HEART_OF_THE_SWARM:
-        if (types.has(Synergy.BUG)) {
+        if (pokemon.hasSynergy(Synergy.BUG)) {
           pokemon.effects.add(effect)
         }
         break
@@ -1129,7 +1164,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.DIGGER:
       case EffectEnum.DRILLER:
       case EffectEnum.DEEP_MINER:
-        if (types.has(Synergy.GROUND)) {
+        if (pokemon.hasSynergy(Synergy.GROUND)) {
           pokemon.effects.add(effect)
           pokemon.effectsSet.add(new GroundHoleEffect(effect))
         }
@@ -1138,7 +1173,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.DUBIOUS_DISC:
       case EffectEnum.LINK_CABLE:
       case EffectEnum.GOOGLE_SPECS:
-        if (types.has(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
+        if (pokemon.hasSynergy(Synergy.ARTIFICIAL) && pokemon.items.size > 0) {
           const nbItems = max(3)(
             pokemon.items.size + (pokemon.items.has(Item.WONDER_BOX) ? 1 : 0)
           )
@@ -1168,28 +1203,28 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.GRASSY_TERRAIN:
-        if (types.has(Synergy.GRASS)) {
+        if (pokemon.hasSynergy(Synergy.GRASS)) {
           pokemon.status.grassField = true
           pokemon.effects.add(EffectEnum.GRASSY_TERRAIN)
         }
         break
 
       case EffectEnum.PSYCHIC_TERRAIN:
-        if (types.has(Synergy.PSYCHIC)) {
+        if (pokemon.hasSynergy(Synergy.PSYCHIC)) {
           pokemon.status.addPsychicField(pokemon)
           pokemon.effects.add(EffectEnum.PSYCHIC_TERRAIN)
         }
         break
 
       case EffectEnum.ELECTRIC_TERRAIN:
-        if (types.has(Synergy.ELECTRIC)) {
+        if (pokemon.hasSynergy(Synergy.ELECTRIC)) {
           pokemon.status.addElectricField(pokemon)
           pokemon.effects.add(EffectEnum.ELECTRIC_TERRAIN)
         }
         break
 
       case EffectEnum.MISTY_TERRAIN:
-        if (types.has(Synergy.FAIRY)) {
+        if (pokemon.hasSynergy(Synergy.FAIRY)) {
           pokemon.status.fairyField = true
           pokemon.effects.add(EffectEnum.MISTY_TERRAIN)
         }
@@ -1305,21 +1340,21 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.QUICK_FEET:
-        if (types.has(Synergy.WILD)) {
+        if (pokemon.hasSynergy(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.QUICK_FEET)
           pokemon.addSpeed(EffectConfigs.QUICK_FEET.speed, pokemon, 0, false)
         }
         break
 
       case EffectEnum.RUN_AWAY:
-        if (types.has(Synergy.WILD)) {
+        if (pokemon.hasSynergy(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.RUN_AWAY)
           pokemon.addSpeed(EffectConfigs.RUN_AWAY.speed, pokemon, 0, false)
         }
         break
 
       case EffectEnum.HUSTLE:
-        if (types.has(Synergy.WILD)) {
+        if (pokemon.hasSynergy(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.HUSTLE)
           const { baseAttackBonusPercent, speed } = EffectConfigs.HUSTLE
           pokemon.addAttack(
@@ -1333,7 +1368,7 @@ export default class Simulation extends Schema implements ISimulation {
         break
 
       case EffectEnum.BERSERK:
-        if (types.has(Synergy.WILD)) {
+        if (pokemon.hasSynergy(Synergy.WILD)) {
           pokemon.effects.add(EffectEnum.BERSERK)
           pokemon.effectsSet.add(wildBerserkEffect)
           const { baseAttackBonusPercent, speed } = EffectConfigs.HUSTLE
@@ -1364,7 +1399,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.CURSE_OF_WEAKNESS:
       case EffectEnum.CURSE_OF_TORMENT:
       case EffectEnum.CURSE_OF_FATE:
-        if (pokemon.types.has(Synergy.GHOST)) {
+        if (pokemon.hasSynergy(Synergy.GHOST)) {
           pokemon.effects.add(effect)
           pokemon.addDodgeChance(
             SynergyConfigs.GHOST.effectChance.value / 100,
@@ -1395,7 +1430,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.WINDY: {
         const nbFloatStones = player ? count(player.items, Item.FLOAT_STONE) : 0
         const { flyingSpeedBonus, speedBonus } = WeatherConfigs.WINDY
-        const speedBuff = pokemon.types.has(Synergy.FLYING)
+        const speedBuff = pokemon.hasSynergy(Synergy.FLYING)
           ? flyingSpeedBonus
           : speedBonus
         pokemon.addSpeed(
@@ -1408,7 +1443,7 @@ export default class Simulation extends Schema implements ISimulation {
       }
 
       case EffectEnum.SNOW: {
-        if (pokemon.types.has(Synergy.ICE) === false) {
+        if (pokemon.hasSynergy(Synergy.ICE) === false) {
           const speedDebuff = WeatherConfigs.SNOW.speedReduction
           pokemon.addSpeed(-1 * speedDebuff, "environment", 0, false)
         }
@@ -1449,7 +1484,7 @@ export default class Simulation extends Schema implements ISimulation {
       case EffectEnum.MURKY: {
         const player = pokemon.player
         const nbOddStones = player ? count(player.items, Item.ODD_KEYSTONE) : 0
-        const reduction = pokemon.types.has(Synergy.GHOST)
+        const reduction = pokemon.hasSynergy(Synergy.GHOST)
           ? 0
           : WeatherConfigs.MURKY.luckReduction
         const luckDebuff = 10 * nbOddStones - reduction
@@ -1546,7 +1581,8 @@ export default class Simulation extends Schema implements ISimulation {
               false
             )
           }
-          if (pokemonOnCell.types.has(Synergy.ELECTRIC)) {
+
+          if (pokemonOnCell.hasSynergy(Synergy.ELECTRIC)) {
             const { speedBonus, shield } = EffectConfigs[EffectEnum.SUPERCHARGE]
             pokemonOnCell.status.addElectricField(pokemonOnCell)
             pokemonOnCell.addSpeed(speedBonus, pokemonOnCell, 0, false)
@@ -1585,6 +1621,13 @@ export default class Simulation extends Schema implements ISimulation {
           this.tidalWaveTimer =
             SynergyConfigs.AQUATIC.waveIntervalSeconds * 1000
         }
+      }
+    }
+
+    if (this.boardBurnTimer > 0) {
+      this.boardBurnTimer -= dt
+      if (this.boardBurnTimer <= 0) {
+        this.burnEntireBoard()
       }
     }
   }
@@ -1735,16 +1778,25 @@ export default class Simulation extends Schema implements ISimulation {
           player.addMoney(moneyGain, true, null)
           client?.send(Transfer.PLAYER_INCOME, moneyGain)
           if (hasLeadersCrest && opponentPlayer) {
-            removeInArray(opponentPlayer.items, Item.LEADERS_CREST)
-            player.items.push(Item.LEADERS_CREST)
+            removeFromArray(opponentPlayer.items, Item.LEADERS_CREST)
+            if (player.items.includes(Item.LEADERS_CREST) === false) {
+              player.items.push(Item.LEADERS_CREST)
+            }
           }
         }
       } else {
         // LOSE
-        const playerDamage = this.room.computeRoundDamage(
+        let playerDamage = this.room.computeRoundDamage(
           opponentTeam,
           this.stageLevel
         )
+
+        if (
+          opponentPlayer &&
+          opponentPlayer.atlasManager.unlockedNodes.has("magnezone")
+        ) {
+          playerDamage += 3
+        }
 
         if (
           !isGhostPlayer &&
@@ -1795,7 +1847,7 @@ export default class Simulation extends Schema implements ISimulation {
     const opponentsCursable = shuffleArray([...opponentTeam.values()]).filter(
       (p) => p.hp > 0
     ) as PokemonEntity[]
-    const curser = schemaValues(team).find((e) => e.types.has(Synergy.GHOST))
+    const curser = schemaValues(team).find((e) => e.hasSynergy(Synergy.GHOST))
     // the curser is not important, we just need a reference to an opponent for stat debuffs
     if (!curser) return
 
@@ -1923,7 +1975,7 @@ export default class Simulation extends Schema implements ISimulation {
       EffectConfigs.TIDAL_WAVE
     const isRed = team === Team.RED_TEAM
     const orientation = isRed ? Orientation.DOWN : Orientation.UP
-    this.room.broadcast(Transfer.ABILITY, {
+    this.broadcastToSpectators(Transfer.ABILITY, {
       id: this.id,
       skill: "TIDAL_WAVE",
       positionX: 0,
@@ -1932,7 +1984,7 @@ export default class Simulation extends Schema implements ISimulation {
       targetY: tidalWaveLevel - 1,
       orientation
     })
-    this.room.broadcast(Transfer.CLEAR_BOARD, {
+    this.broadcastToSpectators(Transfer.CLEAR_BOARD, {
       simulationId: this.id
     })
 
@@ -1949,7 +2001,7 @@ export default class Simulation extends Schema implements ISimulation {
           targetsHit.add(pokemonHit)
           if (pokemonHit.team === team) {
             pokemonHit.status.clearNegativeStatus(pokemonHit)
-            if (pokemonHit.types.has(Synergy.AQUATIC) || healAll) {
+            if (pokemonHit.hasSynergy(Synergy.AQUATIC) || healAll) {
               pokemonHit.handleHeal(
                 tidalWaveLevel *
                   (healingPercentPerLevel / 100) *
@@ -2011,6 +2063,22 @@ export default class Simulation extends Schema implements ISimulation {
           }
         }
       }
+    }
+  }
+
+  burnEntireBoard() {
+    this.broadcastToSpectators(Transfer.ABILITY, {
+      id: this.id,
+      skill: "BOARD_BURN"
+    })
+    const { speedBuff } = EffectConfigs[EffectEnum.DESOLATE_LAND]
+    for (const team of [this.blueTeam, this.redTeam]) {
+      team.forEach((pokemon) => {
+        pokemon.status.triggerBurn(45000, pokemon, null)
+        if (pokemon.effects.has(EffectEnum.DESOLATE_LAND)) {
+          pokemon.addSpeed(speedBuff, "environment", 0, false)
+        }
+      })
     }
   }
 }

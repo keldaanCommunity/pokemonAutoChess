@@ -1,8 +1,6 @@
 import { Rarity } from "../../types/enum/Game"
 
 export const SHOP_SIZE = 6
-export const NB_STARTERS = 3
-export const NB_UNIQUE_PROPOSITIONS = 6
 
 export const RarityHpCost: { [key in Rarity]: number } = Object.freeze({
   [Rarity.COMMON]: 1,
@@ -82,7 +80,8 @@ export const INCENSE_CHANCE = 5 / 100
 export const HONEY_CHANCE = 5 / 100
 export const REPEAT_BALL_LEGENDARY_CAP = 120
 export const REPEAT_BALL_UNIQUE_CAP = 80
-export const REPEAT_BALL_UNIQUE_INTERVAL = 10
+export const REPEAT_BALL_UNIQUE_INTERVAL = 5
+export const REPEAT_BALL_LEGENDARY_INTERVAL = 10
 
 export const AQUA_MONICA_CHANCE = 5 / 100
 export const FIERY_DRUM_CHANCE = 5 / 100
@@ -115,9 +114,9 @@ export const SellPrices = {
   UNOWN: 1,
   HATCH: [3, 4, 5],
   UNIQUE: 10,
-  UNIQUE_DUO: 6,
-  LEGENDARY: 20,
-  LEGENDARY_DUO: 10
+  UNIQUE_DUO: 5,
+  LEGENDARY: 10,
+  LEGENDARY_DUO: 5
 }
 
 export const BuyPrices = {

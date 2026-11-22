@@ -220,10 +220,10 @@ export function getWeather(
 
         if (pkm.passive === Passive.DROUGHT_OR_ZENITH) {
           const nbLight = schemaValues(board).filter((p) =>
-            p.types.has(Synergy.LIGHT)
+            p.hasSynergy(Synergy.LIGHT)
           )
           const nbFire = schemaValues(board).filter((p) =>
-            p.types.has(Synergy.FIRE)
+            p.hasSynergy(Synergy.FIRE)
           )
           const dominant = nbLight >= nbFire ? Weather.ZENITH : Weather.DROUGHT
           boardWeatherScore.set(

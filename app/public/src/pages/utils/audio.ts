@@ -8,6 +8,9 @@ export const SOUNDS = {
   BUTTON_CLICK: "buttonclick.ogg",
   BUTTON_HOVER: "buttonhover.ogg",
   CAROUSEL_UNLOCK: "carouselunlock.ogg",
+  EMERA: "emera.ogg",
+  EMERA_ERROR: "emera_error.ogg",
+  EMERA_KEYSTONE: "emera_major.ogg",
   EVOLUTION_T2: "evolutiont2.ogg",
   EVOLUTION_T3: "evolutiont3.ogg",
   FINISH1: "finish1.ogg",
@@ -20,6 +23,8 @@ export const SOUNDS = {
   FINISH8: "finish8.ogg",
   JOIN_ROOM: "joinroom.ogg",
   LEAVE_ROOM: "leaveroom.ogg",
+  LEGENDARY_REVEAL: "legendary_reveal.ogg",
+  MEGA_EVOLUTION: "mega_evolution.ogg",
   REFRESH: "refresh.ogg",
   SET_READY: "setready.ogg",
   START_GAME: "startgame.ogg"

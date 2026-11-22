@@ -84,24 +84,26 @@ export function AvatarTab() {
           <SelectedPokemonAvatars pokemon={selectedPkm} />
         ) : (
           <>
-            <p>❤️&nbsp;{t("favorites")}</p>
             {favoritesUnlocked.length > 0 && (
-              <div className="avatar-grid">
-                {favoritesUnlocked.map((item) => {
-                  return (
-                    <PokemonPortrait
-                      key={`${item.id}`}
-                      className="clickable"
-                      onClick={() => {
-                        setSelectedPkm(PkmByIndex[item.id])
-                      }}
-                      portrait={{ index: item.id }}
-                    />
-                  )
-                })}
-              </div>
+              <>
+                <p>❤️&nbsp;{t("favorites")}</p>
+                <div className="avatar-grid">
+                  {favoritesUnlocked.map((item) => {
+                    return (
+                      <PokemonPortrait
+                        key={`${item.id}`}
+                        className="clickable"
+                        onClick={() => {
+                          setSelectedPkm(PkmByIndex[item.id])
+                        }}
+                        portrait={{ index: item.id }}
+                      />
+                    )
+                  })}
+                </div>
+                <hr />
+              </>
             )}
-            <hr />
             <div className="avatar-grid">
               {unlocked.map((item) => {
                 return (

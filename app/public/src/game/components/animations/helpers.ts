@@ -88,7 +88,7 @@ export function drawGoldCoin(graphics: GameObjects.Graphics) {
 export type TweenAnimationMakerOptions = {
   duration?: number
   ease?: string | ((v: number) => number)
-  hitAnim?: AbilityAnimation
+  hitAnim?: AbilityAnimation | AbilityAnimation[]
   tweenProps?: Record<string, any>
   startCoords?: AbilityCoordinates
   endCoords?: AbilityCoordinates
@@ -187,11 +187,12 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
+  const apScaling = options.apScaling !== false ? 1 + ap / 200 : 1
   const scaleX = max(10)(
-    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * apScaling
   )
   const scaleY = max(10)(
-    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * apScaling
   )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
@@ -355,7 +356,11 @@ export const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         ease: options.ease || "linear",
         onComplete: () => {
           if (options.destroyOnTweenComplete !== false) sprite?.destroy()
-          if (options.hitAnim) options.hitAnim(args)
+          if (options.hitAnim) {
+            if (Array.isArray(options.hitAnim)) {
+              options.hitAnim.forEach((anim) => anim(args))
+            } else options.hitAnim(args)
+          }
         },
         ...(options.tweenProps ?? {})
       }
@@ -481,40 +486,39 @@ export const parabolicProjectile: AbilityAnimationMaker<
 > =
   (options = {}) =>
   async (args) => {
-    const { onProjectileLand, ...projectileOptions } = options
     const { scene, ap, positionX, positionY, targetX, targetY, flip } = args
-    const delay = projectileOptions.delay ?? args.delay ?? 0
+    const delay = options.delay ?? args.delay ?? 0
     if (delay) await wait(delay)
     let [startX, startY] = transformEntityCoordinates(
       positionX,
       positionY,
       flip
     )
-    startX += projectileOptions.startPositionOffset?.[0] ?? 0
-    startY += projectileOptions.startPositionOffset?.[1] ?? 0
+    startX += options.startPositionOffset?.[0] ?? 0
+    startY += options.startPositionOffset?.[1] ?? 0
 
     let [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
-    endX += projectileOptions.endPositionOffset?.[0] ?? 0
-    endY += projectileOptions.endPositionOffset?.[1] ?? 0
+    endX += options.endPositionOffset?.[0] ?? 0
+    endY += options.endPositionOffset?.[1] ?? 0
 
     const projectile = addAbilitySprite(
       scene,
-      projectileOptions.ability ?? args.ability,
+      options.ability ?? args.ability,
       ap,
       [startX, startY],
       {
         destroyOnComplete: false,
-        ...projectileOptions
+        ...options
       }
     )
     if (!projectile) return null
 
-    const peakHeight = projectileOptions.peakHeight ?? 150
+    const peakHeight = options.peakHeight ?? 150
     scene.tweens.addCounter({
       from: 0,
       to: 1,
-      duration: projectileOptions.duration || 1000,
-      ease: projectileOptions.ease || "linear",
+      duration: options.duration || 1000,
+      ease: options.ease || "linear",
       onUpdate: (tween) => {
         const t = tween.getValue()! // Progress from 0 to 1
 
@@ -527,25 +531,25 @@ export const parabolicProjectile: AbilityAnimationMaker<
         projectile.y =
           Phaser.Math.Interpolation.Linear([startY, endY], t) - heightOffset
 
-        if (projectileOptions.tweenProps?.rotation) {
+        if (options.tweenProps?.rotation) {
           projectile.rotation = Phaser.Math.Interpolation.Linear(
-            [0, projectileOptions.tweenProps.rotation],
+            [0, options.tweenProps.rotation],
             t
           )
         }
       },
       onComplete: () => {
-        if (projectileOptions.destroyOnTweenComplete !== false) {
+        if (options.destroyOnTweenComplete !== false) {
           projectile.destroy()
         }
-        onProjectileLand?.(projectile, args)
-        if (projectileOptions.hitAnim) {
-          if (Array.isArray(projectileOptions.hitAnim)) {
-            projectileOptions.hitAnim.forEach((anim) => anim(args))
-          } else projectileOptions.hitAnim(args)
+        options.onProjectileLand?.(projectile, args)
+        if (options.hitAnim) {
+          if (Array.isArray(options.hitAnim)) {
+            options.hitAnim.forEach((anim) => anim(args))
+          } else options.hitAnim(args)
         }
       },
-      ...(projectileOptions.tweenProps ?? {})
+      ...(options.tweenProps ?? {})
     })
     return projectile
   }

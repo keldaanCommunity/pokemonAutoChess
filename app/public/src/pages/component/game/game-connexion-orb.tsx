@@ -1,0 +1,43 @@
+﻿import { useTranslation } from "react-i18next"
+import { Tooltip } from "react-tooltip"
+import { selectConnectionOrbAvailable, useAppSelector } from "../../../hooks"
+import store from "../../../stores"
+import { setAtlasVisible } from "../../../stores/GameStore"
+import { cc } from "../../utils/jsx"
+
+export function GameConnectionOrb() {
+  const { t } = useTranslation()
+  const orbAvailable = useAppSelector(selectConnectionOrbAvailable)
+  const atlasVisible = useAppSelector((state) => state.game.atlasVisible)
+  const emera = useAppSelector((state) => state.game.atlasManager.emera)
+
+  if (!orbAvailable) {
+    return null
+  }
+
+  return (
+    <div id="game-connection-orb" className="my-container information">
+      <div data-tooltip-id="detail-connection-orb">
+        <Tooltip
+          id="detail-connection-orb"
+          className="custom-theme-tooltip"
+          place="top"
+        >
+          <p className="help">{t("shop.connection_orb_hint")}</p>
+        </Tooltip>
+        <img
+          id="game-connection-orb-icon"
+          onClick={() => store.dispatch(setAtlasVisible(!atlasVisible))}
+          src="/assets/ui/connection_orb.png"
+          className={cc({ active: atlasVisible, usable: emera > 0 })}
+        />
+        <span>{emera}</span>
+        <img
+          className="icon"
+          src="/assets/ui/emera.png"
+          alt={t("atlas.emera")}
+        />
+      </div>
+    </div>
+  )
+}

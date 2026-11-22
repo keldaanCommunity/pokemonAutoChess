@@ -5,6 +5,10 @@
   --color-bg-accent: #c8a2c8;
 }
 
+body {
+  background-image: url("/assets/theme/lilac/checkerboard.svg");
+}
+
 .custom-bg {
   background-image: url("/assets/theme/lilac/custombg.jpg");
 }

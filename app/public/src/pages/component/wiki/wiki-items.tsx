@@ -2,10 +2,12 @@ import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import {
   ArtificialItems,
+  AtlasItems,
   Berries,
   BuriedTrash,
   BuriedTreasures,
   Dishes,
+  DubiousGadgets,
   FishingRods,
   Gifts,
   Item,
@@ -13,10 +15,10 @@ import {
   ItemRecipe,
   MemoryDiscs,
   Mulches,
-  ShinyItems,
   SpecialItems,
   SynergyGems,
   SynergyGemsBuried,
+  TeraShards,
   TMsBronze,
   TMsGold,
   TMsSilver,
@@ -53,7 +55,6 @@ export default function WikiItems() {
       ...FishingRods,
       ...Mulches,
       Item.CHEF_HAT,
-      Item.FIRE_SHARD,
       Item.CELL_BATTERY
     ]
     return SpecialItems.filter((i) => !specialItemsToExclude.includes(i))
@@ -140,10 +141,10 @@ export default function WikiItems() {
         </table>
       </article>
       <article>
-        <h2>{t("shiny_items")}</h2>
-        <p>{addIconsToDescription(t("wiki.items.shiny_items_description"))}</p>
+        <h2>{t("atlas_items")}</h2>
+        <p>{addIconsToDescription(t("wiki.items.atlas_items_description"))}</p>
         <ul className="shiny">
-          <ItemList items={ShinyItems} />
+          <ItemList items={AtlasItems} />
         </ul>
 
         <h2>{t("wiki.items.town_items")}</h2>
@@ -245,6 +246,12 @@ export default function WikiItems() {
           <ItemList
             items={Tools.filter((i) => isIn(ArtificialItems, i) === false)}
           />
+        </ul>
+        <p>
+          {addIconsToDescription(t("wiki.items.dubious_gadgets_description"))}
+        </p>
+        <ul>
+          <ItemList items={DubiousGadgets} />
         </ul>
 
         <h3>
@@ -360,11 +367,11 @@ export default function WikiItems() {
         </ul>
 
         <h3>
-          <SynergyIcon type={Synergy.FIRE} /> {t("item.FIRE_SHARD")}
+          <SynergyIcon type={Synergy.STELLAR} /> {t("wiki.items.tera_shards")}
         </h3>
-        <p>{addIconsToDescription(t("wiki.items.fire_shard_description"))}</p>
+        <p>{addIconsToDescription(t("wiki.items.tera_shards_description"))}</p>
         <ul>
-          <ItemList items={[Item.FIRE_SHARD]} />
+          <ItemList items={TeraShards} />
         </ul>
       </article>
 

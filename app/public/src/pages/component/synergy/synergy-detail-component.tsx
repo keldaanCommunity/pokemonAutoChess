@@ -8,7 +8,7 @@ import {
   type SynergyTier,
   SynergyTiers
 } from "../../../../../config/game/synergies"
-import { getWildChance } from "../../../../../models/colyseus-models/synergies"
+import { getWildChance } from "../../../../../core/synergies"
 import { getPokemonData } from "../../../../../models/precomputed/precomputed-pokemon-data"
 import { PRECOMPUTED_POKEMONS_PER_TYPE_AND_CATEGORY } from "../../../../../models/precomputed/precomputed-types-and-categories"
 import type { IPlayer } from "../../../../../types"
@@ -116,7 +116,9 @@ export default function SynergyDetailComponent(props: {
         const totalDragonStars = schemaValues(spectatedPlayer.board).reduce(
           (acc, pokemon) =>
             acc +
-            (pokemon.types.has(Synergy.DRAGON) && !isOnBench(pokemon)
+            ((pokemon.types.has(Synergy.DRAGON) ||
+              pokemon.types.has(Synergy.STELLAR)) &&
+            !isOnBench(pokemon)
               ? pokemon.stars
               : 0),
           0
@@ -230,8 +232,8 @@ function PokemonPortraitList(props: {
     props.player == null
       ? []
       : schemaValues(props.player.board)
-          .filter((x) => x.types.has(props.type))
-          .map((x) => PkmFamily[x.name])
+          .filter((p) => p.types.has(props.type))
+          .map((p) => PkmFamily[p.name])
   )
 
   return (

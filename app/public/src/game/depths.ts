@@ -57,8 +57,9 @@ export const DEPTH = {
   // 70: Tooltips / HUD
 
   PHASER_DOM_CONTAINER: 70,
-  MODAL: 71,
-  SELL_ZONE: 72,
+  ATLAS: 71,
+  MODAL: 72,
+  SELL_ZONE: 73,
   TOOLTIP_BACK: 74,
   TOOLTIP: 75,
   TOOLTIP_FRONT: 76,

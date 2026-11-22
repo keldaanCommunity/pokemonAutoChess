@@ -1,6 +1,6 @@
 import { Weather } from "../../types/enum/Weather"
 
-export const ON_ATTACK_MANA = 5
+export const PP_ON_ATTACK = 5
 
 export const ARMOR_FACTOR = 0.05
 

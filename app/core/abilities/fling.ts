@@ -29,7 +29,7 @@ export class FlingStrategy extends AbilityStrategy {
           p.team === pokemon.team &&
           p.items.size < 3 &&
           p.items.has(Item.BALL) === false &&
-          p.types.has(Synergy.FIELD)
+          p.hasSynergy(Synergy.FIELD)
       )
 
       let furthestFieldAlly: PokemonEntity | null = null

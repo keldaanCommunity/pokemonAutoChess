@@ -17,6 +17,7 @@ import type AfterGameState from "../../../rooms/states/after-game-state"
 import type GameState from "../../../rooms/states/game-state"
 import {
   type IAfterGamePlayer,
+  type IAtlasManager,
   type IBoardEvent,
   type IDps,
   type IDragDropCombineMessage,
@@ -83,12 +84,14 @@ import {
   setStreak,
   setSynergies,
   setWeather,
+  updateAtlasManager,
   updateExperienceManager
 } from "../stores/GameStore"
 import {
   setConnectionStatus,
   setErrorAlertMessage
 } from "../stores/NetworkStore"
+import GameAtlas from "./component/game/game-atlas"
 import GameChoice from "./component/game/game-choice"
 import GameDpsMeter from "./component/game/game-dps-meter"
 import GameExpeditions from "./component/game/game-expeditions"
@@ -803,7 +806,9 @@ export default function Game() {
               g.updatePhase(newPhase, previousPhase)
             }
           }
-          dispatch(setPhase(newPhase))
+          if (newPhase != null) {
+            dispatch(setPhase(newPhase))
+          }
         })
 
         $state.listen("stageLevel", (value) => {
@@ -987,6 +992,50 @@ export default function Game() {
             })
           })
 
+          $player.listen("atlasManager", (atlasManager) => {
+            const $atlasManager = $(atlasManager)
+            if (player.id === uid) {
+              dispatch(updateAtlasManager(atlasManager))
+              const fields = [
+                "emera",
+                "unlockedNodes",
+                "legendaries",
+                "symbols"
+              ] satisfies NonFunctionPropNames<IAtlasManager>[]
+              fields.forEach((field) => {
+                $atlasManager.listen(field, (value) => {
+                  dispatch(
+                    updateAtlasManager({
+                      ...atlasManager,
+                      [field]: value
+                    } as IAtlasManager)
+                  )
+                })
+              })
+              $atlasManager.unlockedNodes.onChange(() => {
+                gameContainer.gameScene?.board?.updateNpcs()
+              })
+
+              $atlasManager.listen("emera", (value, previousValue) => {
+                if (value > 0 && value > previousValue) {
+                  toast(
+                    <div className="toast-emera">
+                      <span style={{ verticalAlign: "middle" }}>
+                        {value - previousValue}
+                      </span>
+                      <img
+                        className="icon-life"
+                        src="/assets/ui/emera.png"
+                        alt="💎"
+                      />
+                    </div>,
+                    { containerId: "toast-emera" }
+                  )
+                }
+              })
+            }
+          })
+
           $player.listen("loadingProgress", (value) => {
             dispatch(setLoadingProgress({ id: player.id, value: value }))
           })
@@ -1113,6 +1162,17 @@ export default function Game() {
               }
             }
           })
+          $player.wanderers.onRemove((wanderer: Wanderer) => {
+            if (
+              gameContainer.game &&
+              player.id === store.getState().network.uid
+            ) {
+              const g = getGameScene()
+              if (g && g.wandererManager) {
+                g.wandererManager.removeWanderer(wanderer)
+              }
+            }
+          })
         })
 
         $state.players.onRemove((player) => {
@@ -1191,6 +1251,7 @@ export default function Game() {
           <GameSynergies />
           <GameChoice />
           <GameDpsMeter />
+          <GameAtlas />
           <GameToasts />
           {currentGameEvent === GameEvent.EXPEDITIONS && !spectate && (
             <GameExpeditions />

@@ -1,7 +1,6 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameState from "../../rooms/states/game-state"
-import { Item } from "../../types"
 import type { StateEvolutionRule } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
@@ -19,7 +18,6 @@ export class StateEvolutionHandler extends EvolutionHandler<[GameState]> {
   }
 
   canEvolve(pokemon: Pokemon, player: Player, state: GameState): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
     if (player.board.has(pokemon.id) === false) return false
     return this.condition(pokemon, player, state)
   }

@@ -1,0 +1,20 @@
+.game-dialog {
+  color: var(--color-fg-primary);
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.game-dialog .game-dialog-title {
+  background-color: var(--color-bg-secondary);
+  text-transform: capitalize;
+  padding: 0.25em 0.5em;
+  margin: -0.25em -0.5em 4px -0.5em;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.game-dialog.town-encounter-description {
+  max-width: 600px;
+  width: 600px;
+  text-align: center;
+}

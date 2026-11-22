@@ -159,7 +159,7 @@ export default class Design {
     this.terrain[8][31] = TerrainType.GROUND
 
     // partner trade tile slot
-    this.drawGroundRect(31, 16, 2, 2, false)
+    this.drawGroundRect(30, 16, 10, 3, false)
   }
 
   drawGroundRect(

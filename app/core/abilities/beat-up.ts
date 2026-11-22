@@ -9,7 +9,7 @@ export class BeatUpStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
-    const nbSpawns = [1, 2, 3, 5][pokemon.stars - 1] ?? 5
+    const nbSpawns = [1, 2, 3, 5, 7][pokemon.stars - 1] ?? 7
     for (let i = 0; i < nbSpawns; i++) {
       const houndour = PokemonFactory.createPokemonFromName(
         Pkm.HOUNDOUR,

@@ -3,7 +3,7 @@ import type Player from "../models/colyseus-models/player"
 import { BotV2 } from "../models/mongo-models/bot-v2"
 import PokemonFactory from "../models/pokemon-factory"
 import type GameRoom from "../rooms/game-room"
-import { AbilityPerTM, Emotion, Item, TMs } from "../types"
+import { AbilityPerTM, Emotion, TMs } from "../types"
 import { PokemonActionState } from "../types/enum/Game"
 import { Passive } from "../types/enum/Passive"
 import { Synergy } from "../types/enum/Synergy"
@@ -131,9 +131,8 @@ export default class Bot {
           )
           const inSpotlight =
             hasLightActive &&
-            ((pkm.positionX === this.player.lightX &&
-              pkm.positionY === this.player.lightY) ||
-              pkm.items.has(Item.SHINY_STONE))
+            pkm.positionX === this.player.lightX &&
+            pkm.positionY === this.player.lightY
 
           PassiveEffects[pkm.passive]?.forEach((effect) => {
             if (effect instanceof OnChangePositionEffect) {

@@ -1,0 +1,259 @@
+#game-atlas {
+  position: absolute;
+  bottom: 10vw;
+  right: 4vw;
+}
+
+#atlas-container {
+  --atlas-size: 30vw;
+  width: var(--atlas-size);
+  height: var(--atlas-size);
+  margin: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+}
+
+@property --atlas-mask-opening-t {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.atlas-mask {
+  width: var(--atlas-size);
+  height: var(--atlas-size);
+  overflow: hidden;
+  mask-image: radial-gradient(
+    rgba(0, 0, 0, var(--atlas-mask-opening-t))
+      calc(60% * var(--atlas-mask-opening-t)),
+    transparent 70%
+  );
+}
+
+#game-atlas .atlas-mask {
+  --atlas-mask-opening-t: 0;
+  pointer-events: none;
+}
+
+#game-atlas .atlas-mask.opening {
+  pointer-events: auto;
+  animation: atlas-open 400ms ease-in-out both;
+}
+
+#game-atlas .atlas-mask.closing {
+  animation: atlas-close 400ms ease-in-out both;
+}
+
+@keyframes atlas-open {
+  from {
+    --atlas-mask-opening-t: 0;
+  }
+
+  to {
+    --atlas-mask-opening-t: 1;
+  }
+}
+
+@keyframes atlas-close {
+  from {
+    --atlas-mask-opening-t: 1;
+  }
+
+  to {
+    --atlas-mask-opening-t: 0;
+  }
+}
+
+.atlas-node {
+  & .atlas-node-bg {
+    fill: var(--color-bg-primary);
+  }
+
+  & .atlas-node-border {
+    fill: #a5c0e5;
+    stroke: var(--color-border);
+  }
+}
+
+.atlas-node.unlockable {
+  &.affordable {
+    cursor: var(--cursor-hover);
+  }
+  &:not(.affordable) {
+    filter: contrast(0.75);
+  }
+
+  & .atlas-node-bg {
+    fill: var(--color-bg-secondary);
+  }
+
+  &:hover .atlas-node-bg {
+    fill: var(--color-bg-accent);
+  }
+
+  & .atlas-node-border {
+    fill: black;
+  }
+
+  &.affordable:hover .atlas-node-border {
+    fill: #fff;
+  }
+}
+
+.atlas-node.unlocked {
+  & .atlas-node-bg {
+    fill: var(--color-bg-accent);
+  }
+
+  & .atlas-node-border {
+    fill: #ffffff;
+    stroke: transparent;
+  }
+}
+
+.atlas-node.keystone .atlas-node-bg,
+.atlas-node.item .atlas-node-bg {
+  fill: #8b8356;
+}
+
+.atlas-node.keystone.unlocked .atlas-node-bg,
+.atlas-node.item.unlocked .atlas-node-bg,
+.atlas-node.keystone.unlockable:hover .atlas-node-bg,
+.atlas-node.item.unlockable:hover .atlas-node-bg {
+  fill: var(--color-bg-gold);
+}
+
+.atlas-node.condition:not(.unlocked, .unlockable) .atlas-node-bg {
+  fill: #a56060;
+}
+
+.atlas-node-detail {
+  color: var(--color-fg-primary);
+  font-size: 1rem;
+  max-width: 300px;
+}
+
+.atlas-node-detail .atlas-node-detail-title {
+  background-color: var(--color-bg-secondary);
+  text-transform: capitalize;
+  padding: 0.25em 0.5em;
+  margin: -0.25em -0.25em 4px -0.25em;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -1px 2px rgb(0 0 0 / 50%);
+}
+
+.atlas-node-detail .atlas-node-detail-description {
+  white-space: pre-line;
+}
+
+#atlas-reveal {
+  --reveal-orbit-duration: 2500ms;
+  --reveal-orbit-spin: 180deg;
+  pointer-events: none;
+}
+
+/* The view-box reference box is a 2000x2000 box whose top-left is at the
+   user-space origin (0,0), so a length in px maps directly to user units.
+   Anchor the rotation on the root node position set in --origin vars */
+.atlas-reveal-symbol,
+.atlas-reveal-orbit {
+  transform-box: view-box;
+  transform-origin: var(--origin-x) var(--origin-y);
+}
+
+.atlas-reveal-symbol {
+  transform: rotate(var(--angle));
+}
+
+.atlas-reveal-orbit {
+  animation: atlas-reveal-orbit var(--reveal-orbit-duration) linear forwards;
+}
+
+.atlas-reveal-fly {
+  animation: atlas-reveal-fly var(--reveal-orbit-duration) ease-in-out forwards;
+}
+
+.atlas-reveal-icon {
+  /* keep the symbol upright: rotate about its own centre and counter the
+     static --angle plus the orbit spin applied by the ancestors, so the
+     icon itself never appears to rotate */
+  transform-box: fill-box;
+  transform-origin: center;
+  animation:
+    atlas-reveal-counter var(--reveal-orbit-duration) linear forwards,
+    atlas-reveal-icon var(--reveal-orbit-duration) ease-in-out forwards;
+}
+
+@keyframes atlas-reveal-counter {
+  from {
+    transform: translate(-32px, -32px) rotate(calc(-1 * var(--angle) + 180deg));
+  }
+
+  to {
+    transform: translate(-32px, -32px)
+      rotate(calc(-1 * var(--angle) - var(--reveal-orbit-spin) + 180deg));
+  }
+}
+
+@keyframes atlas-reveal-orbit {
+  from {
+    transform: rotate(calc(-1 * var(--reveal-orbit-spin)));
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes atlas-reveal-fly {
+  0%,
+  75% {
+    transform: translateX(var(--orbit-radius));
+  }
+
+  100% {
+    transform: translateX(var(--target-radius));
+  }
+}
+
+@keyframes atlas-reveal-icon {
+  0%,
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Pokemon is revealed once its symbol has reached the legendary node */
+#atlas-container.has-legendaries
+  .atlas-node.legendary
+  .atlas-legendary-pokemon {
+  opacity: 0;
+}
+
+#atlas-container.has-legendaries.revealing
+  .atlas-node.legendary
+  .atlas-legendary-pokemon {
+  animation: atlas-legendary-appear 400ms 2400ms both;
+}
+
+@keyframes atlas-legendary-appear {
+  0% {
+    filter: brightness(1);
+    opacity: 0;
+  }
+
+  50% {
+    filter: brightness(2);
+    opacity: 1;
+  }
+
+  100% {
+    filter: brightness(1);
+    opacity: 1;
+  }
+}

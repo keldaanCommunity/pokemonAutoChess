@@ -1,4 +1,5 @@
 import type { MapSchema } from "@colyseus/schema"
+import type Player from "../models/colyseus-models/player"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import type GameState from "../rooms/states/game-state"
 import type { IPlayer, IPokemon } from "."
@@ -12,7 +13,8 @@ export enum EvolutionRuleType {
   MONEY = "money",
   PLACEMENT = "placement",
   HATCH = "hatch",
-  STACK = "stack"
+  STACK = "stack",
+  MEGA = "mega"
 }
 
 interface EvolutionRuleCommon {
@@ -22,7 +24,7 @@ interface EvolutionRuleCommon {
 
 export type DivergentEvolution<AdditionalArgs extends any[] = any[]> = (
   pokemon: IPokemon,
-  player: IPlayer,
+  player: Player,
   ...additionalArgs: AdditionalArgs
 ) => Pkm
 
@@ -64,6 +66,10 @@ export type StackEvolutionRule = EvolutionRuleCommon & {
   type: EvolutionRuleType.STACK
 }
 
+export type MegaEvolutionRule = EvolutionRuleCommon & {
+  type: EvolutionRuleType.MEGA
+}
+
 export type EvolutionRule =
   | CountEvolutionRule
   | ItemEvolutionRule
@@ -72,3 +78,4 @@ export type EvolutionRule =
   | MoneyEvolutionRule
   | HatchEvolutionRule
   | StackEvolutionRule
+  | MegaEvolutionRule
