@@ -180,7 +180,7 @@ export default function WikiItems() {
               >
                 +
               </td>
-              {[...components, Item.SILK_SCARF].map((i) => {
+              {components.map((i) => {
                 return (
                   <th
                     key={i}
@@ -205,7 +205,7 @@ export default function WikiItems() {
                   className="item"
                 ></img>
               </td>
-              {[...components, Item.SILK_SCARF].map((j) => {
+              {components.map((j) => {
                 let tier2Item
                 Object.keys(ItemRecipe).forEach((recipeName) => {
                   if (
@@ -219,7 +219,7 @@ export default function WikiItems() {
                 })
                 return (
                   <td
-                    key={"td-" + Item.SILK_SCARF + "-" + j}
+                    key={`td-${Item.SILK_SCARF}-${j}`}
                     data-tooltip-id="item-detail-tooltip"
                     data-tooltip-content={tier2Item}
                   >
