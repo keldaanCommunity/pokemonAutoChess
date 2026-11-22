@@ -48,13 +48,13 @@
 }
 
 .after-menu table td {
-  padding: 8px;
+  padding: 4px 8px;
 }
 
 .after-menu table td:first-child {
   font-size: 2rem;
   color: var(--color-fg-primary);
-  text-shadow: 4px 4px 0 black;
+  text-shadow: 2px 2px 2px black;
   width: 80px;
 }
 
