@@ -68,6 +68,7 @@ import {
   heartSwapAnimation,
   hiddenPowerAnimation,
   highJumpKickAnimation,
+  hornDrillAnimation,
   hydroPumpAnimation,
   hydroPumpSplashAnimation,
   hyperBeamAnimation,
@@ -619,7 +620,7 @@ export const AbilitiesAnimations: {
   [Ability.ACCELEROCK]: accelerockAnimation,
   [Ability.FISHIOUS_REND]: fishiousRendAnimation,
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
-  [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
+  [Ability.HORN_DRILL]: hornDrillAnimation,
   [Ability.CUT]: [
     onTargetScale3,
     onCaster({
