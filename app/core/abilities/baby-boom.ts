@@ -42,14 +42,14 @@ export class BabyBoomStrategy extends AbilityStrategy {
             () => {
               board.getAdjacentCells(targetX, targetY, true).forEach((cell) => {
                 if (cell.value && cell.value.team !== pokemon.team) {
-                  const kill = cell.value.handleSpecialDamage(
-                    damage,
+                  const { death } = cell.value.handleSpecialDamage(
+                    damage * (golden ? 2 : 1),
                     board,
                     AttackType.SPECIAL,
                     pokemon,
                     crit
                   )
-                  if (kill && golden && pokemon.player) {
+                  if (death && golden && pokemon.player) {
                     pokemon.player.addMoney(1, true, pokemon)
                     pokemon.count.moneyCount += pokemon.stars
                   }
