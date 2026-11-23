@@ -11,6 +11,7 @@ export { closeCombatAnimation } from "./close-combat"
 export { darkAuraAnimation } from "./dark-aura"
 export { diamondStormAnimation } from "./diamond-storm"
 export { dizzyPunchAnimation } from "./dizzy-punch"
+export { doubleIronBashAnimation } from "./double-iron-bash"
 export { drainPunchAnimation } from "./drain-punch"
 export {
   dynamaxCannonAnimation,

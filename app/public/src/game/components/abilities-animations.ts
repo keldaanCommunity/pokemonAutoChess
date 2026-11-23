@@ -50,6 +50,7 @@ import {
   darkAuraAnimation,
   diamondStormAnimation,
   dizzyPunchAnimation,
+  doubleIronBashAnimation,
   drainPunchAnimation,
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation,
@@ -1061,7 +1062,7 @@ export const AbilitiesAnimations: {
   ],
   [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
   [Ability.WONDER_ROOM]: onTargetScale4,
-  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.FOCUS_PUNCH }),
+  [Ability.DOUBLE_IRON_BASH]: doubleIronBashAnimation,
   [Ability.FOCUS_PUNCH]: onTargetScale2,
   ["FOCUS_PUNCH_CHARGE"]: onCaster({
     ability: "HYPER_BEAM_CHARGE",
