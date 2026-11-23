@@ -183,11 +183,11 @@ export default class Player extends Schema implements IPlayer {
     ...initialGameStats
   })
   @type("boolean") isBot: boolean
-  commonRegionalPool: Pkm[] = new Array<Pkm>()
-  uncommonRegionalPool: Pkm[] = new Array<Pkm>()
-  rareRegionalPool: Pkm[] = new Array<Pkm>()
-  epicRegionalPool: Pkm[] = new Array<Pkm>()
-  ultraRegionalPool: Pkm[] = new Array<Pkm>()
+  commonRegionalPool: Pkm[] = [] as Pkm[]
+  uncommonRegionalPool: Pkm[] = [] as Pkm[]
+  rareRegionalPool: Pkm[] = [] as Pkm[]
+  epicRegionalPool: Pkm[] = [] as Pkm[]
+  ultraRegionalPool: Pkm[] = [] as Pkm[]
   pendingPokemonsToGive: Pokemon[] = []
   opponents: Map<string, number> = new Map<string, number>()
   titles: Set<Title> = new Set<Title>()
@@ -1217,6 +1217,7 @@ export default class Player extends Schema implements IPlayer {
     if (pokemonWithZRing) {
       if (pokemonWithZRing.tm !== Ability.DEFAULT) {
         this.items.push(TMPerAbility[pokemonWithZRing.tm])
+        pokemonWithZRing.tm = Ability.DEFAULT
       }
       pokemonWithZRing.skill = zMove
       pokemonWithZRing.maxPP = ZMOVE_MAX_PP
