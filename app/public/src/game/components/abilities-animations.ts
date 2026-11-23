@@ -91,6 +91,7 @@ import {
   precipiceBladesAnimation,
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
+  seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
   soulTrapAnimation,
@@ -471,7 +472,7 @@ export const AbilitiesAnimations: {
     scale: 6,
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
-  [Ability.SEED_FLARE]: onCasterScale3,
+  [Ability.SEED_FLARE]: seedFlareAnimation,
   [Ability.MULTI_ATTACK]: onCasterScale4,
   [Ability.ROCK_SLIDE]: onTarget({ scale: 2, origin: [0.5, 0.9] }),
   [Ability.FLAMETHROWER]: onCaster({

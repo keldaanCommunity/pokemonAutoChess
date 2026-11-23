@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-22.1",
+  "version": "6.12.0.2026-11-23.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -827,9 +827,6 @@
         "SEARING_SHOT": {
           "frames": 11
         },
-        "SEED_FLARE": {
-          "frames": 31
-        },
         "SEISMIC_TOSS": {
           "frames": 13
         },
@@ -1179,8 +1176,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "GEOMANCY": {
-          "frames": 12
+        "SEED_FLARE": {
+          "frames": 31
         }
       }
     },
