@@ -18,3 +18,10 @@
   width: 600px;
   text-align: center;
 }
+
+.game-dialog-portrait .pokemon-portrait {
+  width: 40px;
+  height: 40px;
+  margin-top: -25px;
+  margin-bottom: 5px;
+}
