@@ -1,5 +1,9 @@
 import type { MapSchema, SetSchema } from "@colyseus/schema"
-import { SynergyTiersThresholds } from "../config/game/synergies"
+import { EffectConfigs } from "../config/game/effects"
+import {
+  SynergyConfigs,
+  SynergyTiersThresholds
+} from "../config/game/synergies"
 import { PVEStages } from "../models/pve-stages"
 import type { IPlayer } from "../types"
 import { Synergy } from "../types/enum/Synergy"
@@ -19,12 +23,16 @@ export function getWildChance(player: IPlayer, stageLevel: number): number {
   const isPVE = stageLevel === 0 || stageLevel in PVEStages
   const wildLevel = getSynergyTier(player.synergies, Synergy.WILD)
   // 6% base chance in PvE stage or if Wild is active
-  const baseChance = isPVE || wildLevel > 0 ? 6 : 0
+  const baseChance =
+    isPVE || wildLevel > 0 ? SynergyConfigs.WILD.pveEncounterChancePercent : 0
   // each star of a pokemon with wild synergy gives 0.5% wild chance
   const nbWildStars = schemaValues(player.board)
-    .filter((p) => hasSynergy(p, Synergy.WILD) && isOnBench(p) === false)
+    .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
     .reduce((total, p) => total + p.stars, 0)
-  const bonusChance = wildLevel > 0 ? nbWildStars * 0.5 : 0
+  const bonusChance =
+    wildLevel > 0
+      ? nbWildStars * EffectConfigs.QUICK_FEET.shopChancePerStarPercent
+      : 0
   return (baseChance + bonusChance) / 100
 }
 
