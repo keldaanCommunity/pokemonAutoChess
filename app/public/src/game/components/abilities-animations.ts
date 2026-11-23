@@ -75,6 +75,7 @@ import {
   hydroPumpAnimation,
   hyperBeamAnimation,
   hyperBeamChargeAnimation,
+  ironHeadAnimation,
   lunarBlessingAnimation,
   lusterPurgeAnimation,
   lusterPurgeHitAnimation,
@@ -931,10 +932,7 @@ export const AbilitiesAnimations: {
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   [Ability.DIZZY_PUNCH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   [Ability.HEAD_SMASH]: headSmashAnimation,
-  [Ability.IRON_HEAD]: onTarget({
-    ability: "FIGHTING_KNOCKBACK",
-    tint: 0x8090a0
-  }),
+  [Ability.IRON_HEAD]: ironHeadAnimation,
   [Ability.DOUBLE_EDGE]: onTarget({
     ability: "FIGHTING_KNOCKBACK",
     scale: 2,

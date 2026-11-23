@@ -36,6 +36,7 @@ export { highJumpKickAnimation } from "./high-jump-kick"
 export { hornDrillAnimation } from "./horn-drill"
 export { hydroPumpAnimation } from "./hydro-pump"
 export { hyperBeamAnimation, hyperBeamChargeAnimation } from "./hyper-beam"
+export { ironHeadAnimation } from "./iron-head"
 export { lunarBlessingAnimation } from "./lunar-blessing"
 export { makeItRainAnimation } from "./make-it-rain"
 export {
