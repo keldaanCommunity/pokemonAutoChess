@@ -18,7 +18,11 @@ export class TeraShiftStrategy extends AbilityStrategy {
     pokemon.skill = Ability.TERA_STARSTORM
     pokemon.toMovingState()
 
-    if (pokemon.refToBoardPokemon && pokemon.player) {
+    if (
+      pokemon.refToBoardPokemon &&
+      pokemon.player &&
+      !pokemon.isGhostOpponent
+    ) {
       EvolutionManager.evolve(
         pokemon.refToBoardPokemon as Pokemon,
         pokemon.player

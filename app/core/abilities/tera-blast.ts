@@ -26,7 +26,9 @@ export class TeraBlastStrategy extends AbilityStrategy {
               cell.value.refToBoardPokemon.types.has(type) === false
             ) {
               cell.value.types.add(type)
-              cell.value.refToBoardPokemon.types.add(type)
+              if(!cell.value.isGhostOpponent){
+                cell.value.refToBoardPokemon.types.add(type)
+              }
               cell.value.broadcastAbility({ skill: "TERASTALIZE" })
             }
           } else {

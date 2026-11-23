@@ -37,7 +37,9 @@ export class TeraStarstormStrategy extends AbilityStrategy {
                   value.refToBoardPokemon.types.has(type) === false
                 ) {
                   value.types.add(type)
-                  value.refToBoardPokemon.types.add(type)
+                  if (!value.isGhostOpponent) {
+                    value.refToBoardPokemon.types.add(type)
+                  }
                   value.broadcastAbility({ skill: "TERASTALIZE" })
                 }
               } else {
