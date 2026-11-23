@@ -85,6 +85,7 @@ import {
   moongeistBeamAnimation,
   nightDazeAnimation,
   oblivionWingAnimation,
+  originPulseAnimation,
   overheatAnimation,
   paydayAnimation,
   powerWhipAnimation,
@@ -1159,13 +1160,7 @@ export const AbilitiesAnimations: {
     ability: "PUFF_PINK",
     scale: 3
   }),
-  [Ability.ORIGIN_PULSE]: (args) =>
-    projectile({
-      startCoords: [0, args.targetY],
-      endCoords: [8, args.targetY],
-      scale: 3,
-      duration: 1000
-    })(args),
+  [Ability.ORIGIN_PULSE]: originPulseAnimation,
   ["SCALE_SHOT_CHARGE"]: (args) =>
     projectile({
       ability: Ability.SCALE_SHOT,
