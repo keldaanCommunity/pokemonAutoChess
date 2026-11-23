@@ -49,6 +49,7 @@ import {
   closeCombatAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  dizzyPunchAnimation,
   drainPunchAnimation,
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation,
@@ -930,7 +931,7 @@ export const AbilitiesAnimations: {
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
-  [Ability.DIZZY_PUNCH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
+  [Ability.DIZZY_PUNCH]: dizzyPunchAnimation,
   [Ability.HEAD_SMASH]: headSmashAnimation,
   [Ability.IRON_HEAD]: ironHeadAnimation,
   [Ability.DOUBLE_EDGE]: onTarget({
