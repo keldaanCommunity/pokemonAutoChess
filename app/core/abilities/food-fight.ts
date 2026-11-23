@@ -34,6 +34,7 @@ export class FoodFightStrategy extends AbilityStrategy {
                 entity != null && entity.id !== pokemon.id
             )
           )
+          if (!randomTarget) return
           pokemon.broadcastAbility({
             targetX: randomTarget.positionX,
             targetY: randomTarget.positionY,
@@ -42,7 +43,7 @@ export class FoodFightStrategy extends AbilityStrategy {
 
           pokemon.simulation.commands.push(
             new DelayedCommand(() => {
-              if (randomTarget.hp <= 0) return
+              if (!randomTarget || randomTarget.hp <= 0) return
               if (randomTarget.team === pokemon.team) {
                 randomTarget.simulation.applyDishEffects(
                   dish,

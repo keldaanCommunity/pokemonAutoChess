@@ -38,7 +38,7 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
       const enemiesAtMinDistance = [...remainingTargets].filter(
         (_, i) => distances[i] === minDistance
       )
-      let nextEnemy: PokemonEntity
+      let nextEnemy: PokemonEntity | undefined
 
       if (enemiesAtMinDistance.length > 0) {
         // search again the closest while taking the current orientation into account
@@ -56,6 +56,8 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
       } else {
         nextEnemy = enemiesAtMinDistance[0]
       }
+
+      if (!nextEnemy) break
 
       remainingTargets.delete(nextEnemy)
       orientation = getOrientation(
@@ -91,6 +93,7 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
     let finalX = BOARD_WIDTH / 2,
       finalY = BOARD_HEIGHT / 2
     pokemon.simulation.room.clock.setTimeout(() => {
+      if (enemies.length === 0) return
       const highestHpEnemy = [...enemies].reduce((prev, curr) =>
         prev.hp > curr.hp ? prev : curr
       )
@@ -112,6 +115,7 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
       })
 
       pokemon.simulation.room.clock.setTimeout(() => {
+        if (pokemon.simulation.finished) return
         pokemon.status.skydiving = false
         const closestAvailableCell = board.getClosestAvailablePlace(
           finalX,
