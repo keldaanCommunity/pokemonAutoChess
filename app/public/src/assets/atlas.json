@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-23.0",
+  "version": "6.12.0.2026-11-23.1",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -820,10 +820,6 @@
           "frames": 8,
           "repeat": -1
         },
-        "SCHOOLING": {
-          "frames": 4,
-          "repeat": 2
-        },
         "SEARING_SHOT": {
           "frames": 11
         },
@@ -1176,8 +1172,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "SEED_FLARE": {
-          "frames": 31
+        "SCHOOLING": {
+          "frames": 4
         }
       }
     },

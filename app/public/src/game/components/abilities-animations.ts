@@ -91,6 +91,7 @@ import {
   precipiceBladesAnimation,
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
+  schoolingAnimation,
   seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
@@ -907,10 +908,7 @@ export const AbilitiesAnimations: {
   [Ability.ENTRAINMENT]: onSprite(({ targetSprite }) =>
     targetSprite?.emoteAnimation()
   ),
-  [Ability.SCHOOLING]: onCaster({
-    scale: 4,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
-  }),
+  [Ability.SCHOOLING]: schoolingAnimation,
   [Ability.STONE_AXE]: onTargetScale2,
   [Ability.CRUSH_CLAW]: onTargetScale2,
   [Ability.ICE_SPINNER]: onTarget({ scale: 1 }),

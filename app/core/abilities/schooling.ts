@@ -1,3 +1,4 @@
+import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { isOnBench } from "../../utils/board"
@@ -12,13 +13,22 @@ export class SchoolingStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const cast = {
+      skill: Ability.SCHOOLING,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: pokemon.orientation,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    }
+    const targets: { x: number; y: number }[] = []
     const pctDmg = [0.15, 0.15, 0.15, 0.3][pokemon.stars - 1] ?? 0.3
     const damage = pctDmg * pokemon.maxHP
 
     const cells = board.getAdjacentCells(pokemon.positionX, pokemon.positionY)
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
+        targets.push({ x: cell.x, y: cell.y })
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -28,6 +38,8 @@ export class SchoolingStrategy extends AbilityStrategy {
         )
       }
     })
+
+    pokemon.broadcastAbility({ ...cast, data: { targets } })
 
     if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.board.forEach((ally, id) => {
