@@ -22,8 +22,8 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
-import { EffectConfigs } from "../../config/game/effects"
 import { STAGE_ATLAS_UNLOCKED } from "../../config/game/atlas"
+import { EffectConfigs } from "../../config/game/effects"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
 import { getAltFormForPlayer } from "../../core/alt-form-logic"
@@ -2020,12 +2020,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (!loserIsBlue && !loserIsRed) return // draw
 
       const losingPlayer = loserIsBlue ? sim.bluePlayer : sim.redPlayer
+      const winningPlayer = loserIsBlue ? sim.redPlayer : sim.bluePlayer
       const winningTeam = loserIsBlue ? sim.redTeam : sim.blueTeam
-      if (!losingPlayer || !losingPlayer.alive) return
+      if (!losingPlayer?.alive) return
 
       const damage = this.room.computeRoundDamage(
         winningTeam,
-        this.state.stageLevel
+        this.state.stageLevel,
+        winningPlayer
       )
       losingPlayer.life -= damage
       if (damage > 0) {

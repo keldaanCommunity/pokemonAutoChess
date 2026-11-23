@@ -1662,7 +1662,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
   computeRoundDamage(
     opponentTeam: MapSchema<PokemonEntity>,
-    stageLevel: number
+    stageLevel: number,
+    opponentPlayer?: Player,
   ) {
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {
@@ -1674,6 +1675,9 @@ export default class GameRoom extends Room<{ state: GameState }> {
     }
     if (this.state.gameMode === GameMode.DOUBLE_UP) {
       damage = Math.ceil(stageLevel / 2)
+    }
+    if (opponentPlayer?.atlasManager.unlockedNodes.has("magnezone")) {
+      damage += 3
     }
     return damage
   }

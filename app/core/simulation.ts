@@ -116,7 +116,7 @@ export default class Simulation extends Schema implements ISimulation {
   entities: IPokemonEntity[] = []
   finishedAt: number = 0
   reinforcementsSent: boolean = false
-  commands = new Array<SimulationCommand>()
+  commands = [] as SimulationCommand[]
 
   constructor(
     id: string,
@@ -1635,14 +1635,14 @@ export default class Simulation extends Schema implements ISimulation {
   stop() {
     this.blueTeam.forEach((pokemon, key) => {
       // logger.debug('deleting ' + pokemon.name);
-      // @ts-ignore: entity shouldnt be used after simulation stop, so we can safely delete it
+      // @ts-expect-error: entity shouldnt be used after simulation stop, so we can safely delete it
       delete pokemon.simulation // remove circular reference to help garbage collection
       this.blueTeam.delete(key)
     })
 
     this.redTeam.forEach((pokemon, key) => {
       // logger.debug('deleting ' + pokemon.name);
-      // @ts-ignore: entity shouldnt be used after simulation stop, so we can safely delete it
+      // @ts-expect-error: entity shouldnt be used after simulation stop, so we can safely delete it
       delete pokemon.simulation // remove circular reference to help garbage collection
       this.redTeam.delete(key)
     })
@@ -1650,7 +1650,7 @@ export default class Simulation extends Schema implements ISimulation {
     this.weather = Weather.NEUTRAL
     this.winnerId = ""
     this.room.broadcast(Transfer.SIMULATION_STOP)
-    // @ts-ignore: room shouldnt be used after simulation stop, so we can safely delete it
+    // @ts-expect-error: room shouldnt be used after simulation stop, so we can safely delete it
     delete this.room // remove circular reference to help garbage collection
   }
 
@@ -1786,17 +1786,11 @@ export default class Simulation extends Schema implements ISimulation {
         }
       } else {
         // LOSE
-        let playerDamage = this.room.computeRoundDamage(
+        const playerDamage = this.room.computeRoundDamage(
           opponentTeam,
-          this.stageLevel
+          this.stageLevel,
+          opponentPlayer
         )
-
-        if (
-          opponentPlayer &&
-          opponentPlayer.atlasManager.unlockedNodes.has("magnezone")
-        ) {
-          playerDamage += 3
-        }
 
         if (
           !isGhostPlayer &&
