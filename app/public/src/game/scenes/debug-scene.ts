@@ -257,7 +257,7 @@ export class DebugScene extends Phaser.Scene {
       this.addAttackAnim()
     }
     if (animationType === "Ability") {
-      animationName = anims.ability
+      animationName = anims.idle
       this.showTarget()
       this.showPreviewTargets()
       this.sortAbilityPreviewSprites(this.pokemonSprite)
@@ -291,6 +291,7 @@ export class DebugScene extends Phaser.Scene {
         )
       }
       this.applyStatusAnimation(status)
+      if (!onPreviewReady && animationType === "Ability") this.replayAbility()
     })
     if (onPreviewReady) {
       const casterSprite = this.pokemonSprite
@@ -304,8 +305,6 @@ export class DebugScene extends Phaser.Scene {
           }
         })
       }
-    } else if (animationType === "Ability") {
-      this.replayAbility()
     }
   }
 
@@ -720,6 +719,16 @@ export class DebugScene extends Phaser.Scene {
     clearAbilityAnimations(this)
     this.time.clearPendingEvents().removeAllEvents()
     this.abilityElapsed = 0
+    const caster = this.pokemonSprite
+    const animation =
+      PokemonAnimations[caster.name]?.ability ??
+      DEFAULT_POKEMON_ANIMATION_CONFIG.ability
+    caster.animationLocked = false
+    this.animationManager?.play(caster, animation, {
+      flip: caster.flip,
+      lock: true,
+      repeat: 0
+    })
     const showAbilityAnim = () => {
       const caster = this.pokemonSprite
       if (!caster) return

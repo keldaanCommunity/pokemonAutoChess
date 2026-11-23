@@ -4,15 +4,23 @@ import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class DragonEnergyStrategy extends AbilityStrategy {
+  requiresTarget = false
+
   process(
     pokemon: PokemonEntity,
     board: Board,
-    target: PokemonEntity,
+    target: PokemonEntity | null,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    const closestTarget = pokemon.state.getNearestTargetAtSight(
+      pokemon,
+      board
+    )?.target
+    if (!closestTarget) return
+
+    super.process(pokemon, board, closestTarget, crit)
     const damageMultiplier = [1, 1, 1, 1.5][pokemon.stars - 1] ?? 1.5
-    target.handleSpecialDamage(
+    closestTarget.handleSpecialDamage(
       pokemon.hp * damageMultiplier,
       board,
       AttackType.SPECIAL,

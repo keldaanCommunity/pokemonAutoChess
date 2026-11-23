@@ -5,7 +5,7 @@ import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../types/enum/Ability"
 import { DungeonPMDO } from "../../../types/enum/Dungeon"
-import { Orientation } from "../../../types/enum/Game"
+import { Orientation, OrientationFlip } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 import { Weather } from "../../../types/enum/Weather"
@@ -263,7 +263,7 @@ export function SpriteDebug() {
               }
             >
               {Object.entries(Orientation).map(([k, v]) => (
-                <option value={v} key={v}>
+                <option value={flip ? OrientationFlip[v] : v} key={v}>
                   {k}
                 </option>
               ))}

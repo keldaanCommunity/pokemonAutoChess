@@ -10,23 +10,34 @@ export class SeedFlareStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    const targetX = target.positionX
+    const targetY = target.positionY
+    const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    super.process(pokemon, board, target, crit, true)
     const damage = [20, 25, 30, 35, 70][pokemon.stars - 1] ?? 70
     const spDefDebuff = [-3, -3, -3, -3, -6][pokemon.stars - 1] ?? -6
-
-    board
+    const targets = board
       .getCellsInRadius(pokemon.positionX, pokemon.positionY, 5, false)
-      .forEach((cell) => {
-        if (cell.value && pokemon.team !== cell.value.team) {
-          cell.value.addSpecialDefense(spDefDebuff, pokemon, 0, false)
-          cell.value.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-        }
-      })
+      .filter((cell) => cell.value && pokemon.team !== cell.value.team)
+
+    pokemon.broadcastAbility({
+      targetX,
+      targetY,
+      ap,
+      data: { targets: targets.map(({ x, y }) => ({ x, y })) }
+    })
+
+    targets.forEach((cell) => {
+      const enemy = cell.value
+      if (!enemy) return
+      enemy.addSpecialDefense(spDefDebuff, pokemon, 0, false)
+      enemy.handleSpecialDamage(
+        damage,
+        board,
+        AttackType.SPECIAL,
+        pokemon,
+        crit
+      )
+    })
   }
 }
