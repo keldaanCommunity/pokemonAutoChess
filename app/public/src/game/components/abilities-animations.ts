@@ -72,7 +72,6 @@ import {
   highJumpKickAnimation,
   hornDrillAnimation,
   hydroPumpAnimation,
-  hydroPumpSplashAnimation,
   hyperBeamAnimation,
   hyperBeamChargeAnimation,
   lunarBlessingAnimation,
@@ -535,7 +534,6 @@ export const AbilitiesAnimations: {
     origin: [0.5, 1]
   }),
   [Ability.HYDRO_PUMP]: hydroPumpAnimation,
-  ["HYDRO_PUMP_SPLASH"]: hydroPumpSplashAnimation,
   [Ability.SWALLOW]: onCaster({
     oriented: true,
     rotation: +Math.PI / 2,

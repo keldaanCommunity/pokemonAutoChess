@@ -17,16 +17,10 @@ export class HydroPumpStrategy extends AbilityStrategy {
     const damage = [20, 40, 80, 160][pokemon.stars - 1] ?? 160
     const { positionX, positionY, orientation } = pokemon
     const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    const targets: { x: number; y: number }[] = []
     const { finalX, finalY } = effectInLine(board, pokemon, target, (cell) => {
       if (cell.value != null && cell.value.team !== pokemon.team) {
-        pokemon.broadcastAbility({
-          skill: "HYDRO_PUMP_SPLASH",
-          positionX,
-          positionY,
-          orientation,
-          targetX: cell.x,
-          targetY: cell.y
-        })
+        targets.push({ x: cell.x, y: cell.y })
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -43,7 +37,8 @@ export class HydroPumpStrategy extends AbilityStrategy {
       orientation,
       targetX: finalX,
       targetY: finalY,
-      ap
+      ap,
+      data: { targets }
     })
   }
 }
