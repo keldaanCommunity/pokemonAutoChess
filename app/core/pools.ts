@@ -34,6 +34,7 @@ import type { Synergy } from "../types/enum/Synergy"
 import { TownEncounters } from "../types/enum/TownEncounter"
 import { removeFromArray } from "../utils/array"
 import { chance, pickNRandomIn, pickRandomIn } from "../utils/random"
+import { schemaValues } from "../utils/schemas"
 import { getAltFormForPlayer } from "./alt-form-logic"
 import { pickFirstPartners } from "./scribbles"
 
@@ -41,9 +42,13 @@ function filterCandidates(
   proposition: PkmProposition,
   synergyWanted: Synergy | undefined,
   map: DungeonPMDO | "town",
-  pokemonsProposed: PkmProposition[]
+  pokemonsProposed: PkmProposition[],
+  excluding: Pkm[] = []
 ): boolean {
   const pkm: Pkm = pkmsFromProposition(proposition)[0]
+
+  if (excluding.includes(pkm)) return false
+
   const { types, regional } = getPokemonData(pkm)
 
   const hasSynergyWanted =
@@ -133,7 +138,7 @@ export function assignStarters(
     let selected = pickRandomIn(candidates)
 
     if (selected in PkmRegionalVariants) {
-      const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+      const regionalVariants = PkmRegionalVariants[selected].filter((p) =>
         new PokemonClasses[p](p).isInRegion(player.map)
       )
       if (regionalVariants.length > 0) selected = pickRandomIn(regionalVariants)
@@ -238,19 +243,35 @@ export function assignLegendaries(
   for (let i = 0; i < NB_LEGENDARY_PROPOSITIONS; i++) {
     const synergyWanted: Synergy | undefined = synergiesWanted[i]
 
+    const legendariesAlreadyObtained = schemaValues(player.board)
+      .filter((p) => p.rarity === Rarity.LEGENDARY)
+      .map((p) => p.name)
+
     let candidates = allCandidates.filter((proposition) =>
-      filterCandidates(proposition, synergyWanted, player.map, pokemonsProposed)
+      filterCandidates(
+        proposition,
+        synergyWanted,
+        player.map,
+        pokemonsProposed,
+        legendariesAlreadyObtained
+      )
     )
     const initialCandidatesEmpty = candidates.length === 0
     if (initialCandidatesEmpty) {
       candidates = allCandidates.filter((proposition) =>
-        filterCandidates(proposition, undefined, player.map, pokemonsProposed)
+        filterCandidates(
+          proposition,
+          undefined,
+          player.map,
+          pokemonsProposed,
+          legendariesAlreadyObtained
+        )
       )
     }
     let selected = pickRandomIn(candidates)
 
     if (selected in PkmRegionalVariants) {
-      const regionalVariants = PkmRegionalVariants[selected]!.filter((p) =>
+      const regionalVariants = PkmRegionalVariants[selected].filter((p) =>
         new PokemonClasses[p](p).isInRegion(player.map)
       )
       if (regionalVariants.length > 0) selected = pickRandomIn(regionalVariants)

@@ -301,15 +301,15 @@ export default class GameRoom extends Room<{ state: GameState }> {
     shuffleArray(this.additionalEpicPool)
 
     if (this.state.specialGameRule === SpecialGameRule.EVERYONE_IS_HERE) {
-      this.additionalUncommonPool.forEach((p) =>
+      this.additionalUncommonPool.forEach((p) => {
         this.state.shop.addAdditionalPokemon(p, this.state)
-      )
-      this.additionalRarePool.forEach((p) =>
+      })
+      this.additionalRarePool.forEach((p) => {
         this.state.shop.addAdditionalPokemon(p, this.state)
-      )
-      this.additionalEpicPool.forEach((p) =>
+      })
+      this.additionalEpicPool.forEach((p) => {
         this.state.shop.addAdditionalPokemon(p, this.state)
-      )
+      })
     }
 
     await Promise.all(
@@ -1547,7 +1547,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     let size = 0
 
     board.forEach((pokemon, key) => {
-      if (pokemon.positionY != 0 && pokemon.doesCountForTeamSize) {
+      if (pokemon.positionY !== 0 && pokemon.doesCountForTeamSize) {
         size++
       }
     })

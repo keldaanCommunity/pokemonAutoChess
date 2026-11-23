@@ -293,7 +293,7 @@ export class MiniGame {
       state.townEncounter = null
     }
 
-    this.alivePlayers = new Array<Player>()
+    this.alivePlayers = [] as Player[]
     players.forEach((p) => {
       if (p.alive) {
         this.alivePlayers.push(p)
@@ -608,8 +608,8 @@ export class MiniGame {
     }
 
     for (let j = 0; j < nbItemsToPick; j++) {
-      let item,
-        count,
+      let item: Item,
+        count: number,
         tries = 0
       do {
         item = pickRandomIn(itemsSet)

@@ -27,19 +27,27 @@ export default class AtlasManager extends Schema implements IAtlasManager {
     return this.emera > 0 && this.isConnectedAndUnlockable(nodeId, player)
   }
 
-  isConnectedAndUnlockable(nodeId: AtlasNodeId, player: Player) {
+  isConnectedAndUnlockable(nodeId: AtlasNodeId, player: Player): boolean {
     // Logic to check if adjacent node is unlocked
     const node = AtlasTree.nodes[nodeId]
-    return (
-      this.unlockedNodes.has(nodeId) === false &&
-      node != null &&
-      (node.type !== "condition" ||
-        testAtlasNodeCondition(node.condition, player) === true) &&
-      AtlasTree.connections.some(
+    if (node == null) return false
+    if (this.unlockedNodes.has(nodeId)) return false // already unlocked
+    if (
+      node.type === "condition" &&
+      testAtlasNodeCondition(node.condition, player) !== true
+    ) {
+      return false // condition not reached
+    }
+    if (node.type === "legendary") {
+      const index = Number(nodeId.at(-1)) - 1
+      const pkm = player.atlasManager.legendaries[index]
+      if (!pkm) return false // no legendary assigned yet, waiting for the rollout
+    }
+
+    return AtlasTree.connections.some(
         (conn) =>
           (conn.from === nodeId && this.unlockedNodes.has(conn.to)) ||
           (conn.to === nodeId && this.unlockedNodes.has(conn.from))
-      )
     )
   }
 
