@@ -67,6 +67,7 @@ import {
   futureSightSplashAnimation,
   geomancyAnimation,
   grassySurgeAnimation,
+  headSmashAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
   highJumpKickAnimation,
@@ -929,10 +930,7 @@ export const AbilitiesAnimations: {
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
   [Ability.DIZZY_PUNCH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
-  [Ability.HEAD_SMASH]: onTarget({
-    ability: "FIGHTING_KNOCKBACK",
-    tint: 0xffffa0
-  }),
+  [Ability.HEAD_SMASH]: headSmashAnimation,
   [Ability.IRON_HEAD]: onTarget({
     ability: "FIGHTING_KNOCKBACK",
     tint: 0x8090a0
