@@ -85,6 +85,7 @@ import {
   lusterPurgeAnimation,
   lusterPurgeHitAnimation,
   makeItRainAnimation,
+  meteorMashAnimation,
   mistBallAnimation,
   mistBallHitAnimation,
   mistySurgeAnimation,
@@ -289,7 +290,7 @@ export const AbilitiesAnimations: {
   [Ability.RETURN]: onTarget({ ability: Ability.BRICK_BREAK, scale: 2 }),
   [Ability.BULK_UP]: onCasterScale2,
   [Ability.FLASH]: onCasterScale2,
-  [Ability.METEOR_MASH]: onTarget({ ability: Ability.FLASH }),
+  [Ability.METEOR_MASH]: meteorMashAnimation,
   [Ability.STEEL_WING]: onCasterScale2,
   [Ability.HYPNOSIS]: projectile({
     oriented: true,

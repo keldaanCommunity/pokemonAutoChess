@@ -44,6 +44,7 @@ export { hyperBeamAnimation, hyperBeamChargeAnimation } from "./hyper-beam"
 export { ironHeadAnimation } from "./iron-head"
 export { lunarBlessingAnimation } from "./lunar-blessing"
 export { makeItRainAnimation } from "./make-it-rain"
+export { meteorMashAnimation } from "./meteor-mash"
 export {
   lusterPurgeAnimation,
   lusterPurgeHitAnimation,
