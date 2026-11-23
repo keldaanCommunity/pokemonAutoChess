@@ -1343,7 +1343,8 @@ export default class Status extends Schema implements IStatus {
     }
 
     if (pkm.effects.has(EffectEnum.RAINBOW_BEAN_AQUATIC)) {
-      reductionPercentage += EffectConfigs.RAINBOW_BEAN_AQUATIC.statusReductionPercent
+      reductionPercentage +=
+        EffectConfigs.RAINBOW_BEAN_AQUATIC.statusReductionPercent
     }
 
     const nbOddStones =
@@ -1351,7 +1352,7 @@ export default class Status extends Schema implements IStatus {
         ? count(pkm.player.items, Item.ODD_KEYSTONE)
         : 0
     if (nbOddStones > 0) {
-      reductionPercentage += 0.1 * nbOddStones
+      reductionPercentage += 10 * nbOddStones
     }
 
     duration = Math.round(duration * (1 - max(1)(reductionPercentage / 100)))
