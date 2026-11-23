@@ -1073,7 +1073,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
-      pokemon.hasSynergy(Synergy.POISON) &&
+      !pokemon.hasSynergy(Synergy.POISON) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const duration = EffectConfigs.TOXIC_SPIKES.durationSeconds * 1000
@@ -1191,11 +1191,11 @@ export default abstract class PokemonState {
     board: Board
   ): { x: number; y: number; target: PokemonEntity } | null {
     let distance = 999
-    let candidatesCoordinates = new Array<{
+    let candidatesCoordinates: {
       x: number
       y: number
       target: PokemonEntity
-    }>()
+    }[] = []
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && value.isTargettableBy(pokemon)) {
@@ -1226,7 +1226,7 @@ export default abstract class PokemonState {
     board: Board,
     targettableBy: PokemonEntity = pokemon
   ): PokemonEntity | undefined {
-    let farthestTarget: PokemonEntity | undefined = undefined
+    let farthestTarget: PokemonEntity | undefined
     let maxDistance = 0
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
@@ -1267,9 +1267,9 @@ export default abstract class PokemonState {
     team: Team | undefined,
     board: Board
   ): { x: number; y: number } | undefined {
-    let x: number | undefined = undefined
-    let y: number | undefined = undefined
-    const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
+    let x: number | undefined
+    let y: number | undefined
+    const emptyPlaces: { x: number; y: number; neighbour: number }[] = []
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
         const cells = board.getAdjacentCells(x, y)
