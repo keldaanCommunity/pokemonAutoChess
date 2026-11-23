@@ -64,6 +64,7 @@ import {
   fieryDanceHitAnimation,
   fishiousRendAnimation,
   forecastAnimation,
+  foulPlayAnimation,
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
@@ -1060,7 +1061,7 @@ export const AbilitiesAnimations: {
     onTarget({ ability: Ability.SMOG, scale: 1 }),
     onCaster({ ability: Ability.MUD_BUBBLE, scale: 1 })
   ],
-  [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
+  [Ability.FOUL_PLAY]: foulPlayAnimation,
   [Ability.WONDER_ROOM]: onTargetScale4,
   [Ability.DOUBLE_IRON_BASH]: doubleIronBashAnimation,
   [Ability.FOCUS_PUNCH]: onTargetScale2,
