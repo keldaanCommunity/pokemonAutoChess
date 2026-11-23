@@ -110,6 +110,7 @@ import {
   storedPowerTargetAnimation,
   takeHeartAnimation,
   tidalWaveAnimation,
+  timeTravelAnimation,
   twinBeamAnimation
 } from "./animations"
 import {
@@ -184,6 +185,7 @@ export const AbilitiesAnimations: {
   [Ability.METRONOME]: onCasterScale2,
   [Ability.AURORA_VEIL]: auroraVeilAnimation,
   [Ability.LUNAR_BLESSING]: lunarBlessingAnimation,
+  [Ability.TIME_TRAVEL]: timeTravelAnimation,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
   [Ability.NIGHT_DAZE]: nightDazeAnimation,
