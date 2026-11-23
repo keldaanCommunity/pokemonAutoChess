@@ -7,12 +7,15 @@ import type GameRoom from "../../rooms/game-room"
 import type { IAtlasManager } from "../../types"
 import type { PkmProposition } from "../../types/enum/Pokemon"
 import type { Synergy } from "../../types/enum/Synergy"
+import { resetArraySchema } from "../../utils/schemas"
 import type Player from "./player"
 
 export default class AtlasManager extends Schema implements IAtlasManager {
   @type("uint8") emera = 0
   @type({ set: "string" }) unlockedNodes = new SetSchema<AtlasNodeId>(["root"])
-  @type(["string"]) legendaries = new ArraySchema<PkmProposition>()
+  @type(["string"]) legendaries = new ArraySchema<PkmProposition | "">(
+    ...Array.from({ length: NB_LEGENDARY_PROPOSITIONS }, () => "")
+  )
   @type(["string"]) symbols = new ArraySchema<Synergy>()
 
   unlockNode(nodeId: AtlasNodeId, player: Player, room: GameRoom) {
@@ -45,9 +48,19 @@ export default class AtlasManager extends Schema implements IAtlasManager {
     }
 
     return AtlasTree.connections.some(
-        (conn) =>
-          (conn.from === nodeId && this.unlockedNodes.has(conn.to)) ||
-          (conn.to === nodeId && this.unlockedNodes.has(conn.from))
+      (conn) =>
+        (conn.from === nodeId && this.unlockedNodes.has(conn.to)) ||
+        (conn.to === nodeId && this.unlockedNodes.has(conn.from))
+    )
+  }
+
+  resetLegendaries() {
+    resetArraySchema(
+      this.legendaries,
+      this.legendaries.map((l, i) => {
+        const n = (i + 1) as 1 | 2 | 3 | 4 | 5 | 6
+        return this.unlockedNodes.has(`legendary${n}`) ? l : ""
+      })
     )
   }
 
@@ -62,7 +75,12 @@ export default class AtlasManager extends Schema implements IAtlasManager {
 
     this.symbols = new ArraySchema(...symbols)
 
-    const legendaries: PkmProposition[] = assignLegendaries(player, symbols)
-    this.legendaries = new ArraySchema(...legendaries)
+    const newLegendaries: PkmProposition[] = assignLegendaries(player, symbols)
+    this.legendaries = new ArraySchema(
+      ...newLegendaries.map((l, i) => {
+        const n = (i + 1) as 1 | 2 | 3 | 4 | 5 | 6
+        return this.unlockedNodes.has(`legendary${n}`) ? this.legendaries[i] : l
+      })
+    )
   }
 }

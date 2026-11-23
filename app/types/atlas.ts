@@ -43,7 +43,7 @@ export type KeystoneNode = Node & {
 
 export type LegendaryNode = Node & {
   type: "legendary"
-  pokemon?: PkmProposition
+  pokemon: PkmProposition | ""
 }
 
 export type EncounterNode = Node & {

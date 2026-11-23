@@ -67,13 +67,13 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
   useEffect(() => {
     if (
       !isLegendariesRevealed &&
-      legendaries.length > 0 &&
+      legendaries.some((l) => l !== "") &&
       symbols.length > 0 &&
       atlasVisible
     ) {
       setIsRevealed(true)
       playSound(SOUNDS.LEGENDARY_REVEAL, 0.7)
-    } else if (isLegendariesRevealed && legendaries.length === 0) {
+    } else if (isLegendariesRevealed && legendaries.every((l) => l === "")) {
       setIsRevealed(false)
     }
   }, [symbols, legendaries, isLegendariesRevealed, atlasVisible])

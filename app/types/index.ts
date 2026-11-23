@@ -369,7 +369,7 @@ export interface IExperienceManager {
 export interface IAtlasManager {
   emera: number
   unlockedNodes: SetSchema<AtlasNodeId>
-  legendaries: ArraySchema<PkmProposition>
+  legendaries: ArraySchema<PkmProposition | "">
   symbols: ArraySchema<Synergy>
 }
 
@@ -573,4 +573,4 @@ export interface IAttackEvent {
   delay: number
 }
 
-export { AttackSprite }
+export type { AttackSprite }

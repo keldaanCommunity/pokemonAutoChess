@@ -1621,10 +1621,10 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       })
 
       if (room.state.stageLevel >= STAGE_ATLAS_UNLOCKED) {
-        resetArraySchema(player.atlasManager.legendaries)
+        player.atlasManager.resetLegendaries()
       }
 
-      setTimeout(() => {
+      room.clock.setTimeout(() => {
         player.map = newMap
         player.regions.push(newMap)
         player.updateRegionalPool(room.state, true, previousMap)
