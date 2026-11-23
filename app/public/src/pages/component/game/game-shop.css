@@ -317,6 +317,11 @@
     width: auto;
     grid-template: 1fr / 200px min-content min-content;
     order: 2;
+    flex-direction: row;
+
+    & button {
+      width: auto;
+    }
   }
 
   .game-rarity-percentage.my-box {
@@ -335,7 +340,7 @@
   .game-experience {
     min-width: 240px;
     width: auto;
-    grid-template: 1fr / auto 120px min-content;
+    grid-template: 1fr / 1fr / auto 120px min-content auto;
     order: 4;
   }
 

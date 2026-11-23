@@ -10,7 +10,6 @@ import { Dishes, type IPokemonEntity, Item } from "../../../../types"
 import {
   type AbilityAnimation,
   type AbilityAnimationArgs,
-  type AbilityAnimationMaker,
   AnimationType,
   AttackSprite
 } from "../../../../types/Animation"
@@ -109,109 +108,17 @@ import {
   onTargetScale3,
   onTargetScale4,
   parabolicProjectile,
+  pathAnimation,
+  poppingIcon,
   projectile,
+  shakeCamera,
   skyfall,
   staticAnimation,
-  type TweenAnimationMakerOptions,
   tweenAnimation
 } from "./animations/helpers"
 import PokemonSprite, { isEntity } from "./pokemon-sprite"
 
 export { addAbilitySprite, displayHit } from "./animations/helpers"
-
-type PathAnimationMakerOptions = {
-  duration?: number
-  ease?: string | ((v: number) => number)
-  sprite?: GameObjects.Sprite
-  finishAnim?: AbilityAnimation | AbilityAnimation[]
-  tweenProps?: Record<string, any>
-  path: Phaser.Curves.Curve
-  destroyOnTweenComplete?: boolean
-  initSprite?: (sprite: GameObjects.Sprite) => void
-}
-
-const pathAnimation: AbilityAnimationMaker<PathAnimationMakerOptions> =
-  (options) => (args) => {
-    const { scene } = args
-    let { rotation } = options
-    const delay = options.delay ?? args.delay ?? 0
-    setTimeout(() => {
-      const follower = { t: 0, vec: new Phaser.Math.Vector2() }
-      const { x: startX, y: startY } = options.path.getStartPoint()
-      let lastX = startX,
-        lastY = startY
-
-      const sprite =
-        options.sprite ??
-        addAbilitySprite(
-          scene,
-          options.ability ?? args.ability,
-          args.ap,
-          [startX, startY],
-          {
-            destroyOnComplete: false,
-            ...options,
-            rotation
-          }
-        )
-      if (!sprite) return null
-      if (options.initSprite) options.initSprite(sprite)
-
-      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
-        targets: follower,
-        duration: options.duration || 500,
-        ease: options.ease || "linear",
-        t: 1,
-        onUpdate: () => {
-          options.path.getPointAt(follower.t, follower.vec)
-          sprite.setPosition(follower.vec.x, follower.vec.y)
-          if (options?.oriented) {
-            rotation =
-              angleBetween([lastX, lastY], [follower.vec.x, follower.vec.y]) +
-              (options.rotation ?? 0)
-            sprite.setRotation(rotation)
-          }
-          lastX = follower.vec.x
-          lastY = follower.vec.y
-        },
-        onComplete: () => {
-          if (options.destroyOnTweenComplete !== false) sprite?.destroy()
-          if (options.finishAnim) {
-            if (Array.isArray(options.finishAnim)) {
-              options.finishAnim.forEach((anim) => anim(args))
-            } else {
-              options.finishAnim(args)
-            }
-          }
-        },
-        ...(options.tweenProps ?? {})
-      }
-
-      scene.tweens.add(tweenConfig)
-    }, delay)
-  }
-
-const shakeCamera: AbilityAnimationMaker<{
-  duration?: number
-  intensity?: number
-}> =
-  (options) =>
-  ({ scene }) =>
-    setTimeout(() => scene.shakeCamera(options), options.delay ?? 0)
-
-const poppingIcon: AbilityAnimationMaker<
-  TweenAnimationMakerOptions & { maxScale: number }
-> = (options) => (args) =>
-  tweenAnimation({
-    ...options,
-    startCoords:
-      options.startCoords === "target"
-        ? [args.targetX, args.targetY]
-        : [args.positionX, args.positionY],
-    ease: Phaser.Math.Easing.Cubic.Out,
-    scale: options.scale ?? 0.25,
-    tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
-  })(args)
 
 export const AbilitiesAnimations: {
   [animKey: string]: AbilityAnimation | AbilityAnimation[]
@@ -244,7 +151,7 @@ export const AbilitiesAnimations: {
   [Ability.NIGHT_DAZE]: nightDazeAnimation,
   [Ability.MEGA_DRAIN]: [
     (args) =>
-      OrientationArray.map((o, i) =>
+      OrientationArray.map((o) =>
         projectile({
           startCoords: [
             args.positionX + OrientationVector[o][0],
@@ -316,7 +223,7 @@ export const AbilitiesAnimations: {
           radius: r,
           ease: Phaser.Math.Easing.Quartic.Out,
           duration: 1200,
-          onUpdate: function (tween) {
+          onUpdate: (_tween) => {
             Phaser.Actions.RotateAroundDistance(
               petalGroup.getChildren(),
               { x, y },
@@ -324,7 +231,7 @@ export const AbilitiesAnimations: {
               circle.radius
             )
           },
-          onComplete: function () {
+          onComplete: () => {
             petalGroup.destroy(true, true)
           }
         })
@@ -2134,7 +2041,7 @@ export const AbilitiesAnimations: {
 
   [Ability.HYPERSPACE_FURY]: (args) => {
     let nbHits = args.data.nbHits
-    if (isNaN(nbHits) || nbHits < 1 || nbHits > 12) {
+    if (Number.isNaN(nbHits) || nbHits < 1 || nbHits > 12) {
       nbHits = 4 // default to 4 hits if not a valid number
     }
     for (let i = 0; i < nbHits; i++) {
@@ -2256,7 +2163,7 @@ export const AbilitiesAnimations: {
       radius: 96,
       ease: Phaser.Math.Easing.Quartic.Out,
       duration: 1000,
-      onUpdate: function (tween) {
+      onUpdate: (_tween) => {
         Phaser.Actions.RotateAroundDistance(
           darkHarvestGroup.getChildren(),
           { x, y },
@@ -2264,7 +2171,7 @@ export const AbilitiesAnimations: {
           circle.radius
         )
       },
-      onComplete: function () {
+      onComplete: () => {
         darkHarvestGroup.destroy(true, true)
       }
     })
@@ -2298,7 +2205,7 @@ export const AbilitiesAnimations: {
         radius: 48 * (i + 2),
         ease: Phaser.Math.Easing.Quartic.Out,
         duration: 1000,
-        onUpdate: function (tween) {
+        onUpdate: (_tween) => {
           Phaser.Actions.RotateAroundDistance(
             [tornadoSprite],
             { x, y },
@@ -2306,7 +2213,7 @@ export const AbilitiesAnimations: {
             circle.radius
           )
         },
-        onComplete: function () {
+        onComplete: () => {
           tornadoSprite.destroy(true)
         }
       })
@@ -2338,7 +2245,7 @@ export const AbilitiesAnimations: {
       radius: 96,
       ease: Phaser.Math.Easing.Quartic.Out,
       duration: 1000,
-      onUpdate: function (tween) {
+      onUpdate: (_tween) => {
         Phaser.Actions.RotateAroundDistance(
           group.getChildren(),
           { x, y },
@@ -2346,7 +2253,7 @@ export const AbilitiesAnimations: {
           circle.radius
         )
       },
-      onComplete: function () {
+      onComplete: () => {
         group.destroy(true, true)
       }
     })
@@ -2388,7 +2295,7 @@ export const AbilitiesAnimations: {
       radius: 60,
       ease: Phaser.Math.Easing.Quartic.Out,
       duration: 1000,
-      onUpdate: function (tween) {
+      onUpdate: (_tween) => {
         Phaser.Actions.RotateAroundDistance(
           decorateGroup.getChildren(),
           { x, y },
@@ -2396,7 +2303,7 @@ export const AbilitiesAnimations: {
           circle.radius
         )
       },
-      onComplete: function () {
+      onComplete: () => {
         decorateGroup.destroy(true, true)
       }
     })
@@ -3645,12 +3552,8 @@ export const AbilitiesAnimations: {
         args.scene.add.tween({
           targets: (reflectImage as any).faces,
           alpha: 0,
-          localOffsetY: function () {
-            return -30 + Math.random() * 60
-          },
-          localOffsetX: function () {
-            return -30 + Math.random() * 60
-          },
+          localOffsetY: () => -30 + Math.random() * 60,
+          localOffsetX: () => -30 + Math.random() * 60,
           ease: "Cubic",
           duration: 1000,
           delay: 500 + i * 500,
@@ -3890,7 +3793,9 @@ export const AbilitiesAnimations: {
 export function displayAbility(args: AbilityAnimationArgs) {
   const anims = AbilitiesAnimations[args.ability]
   if (Array.isArray(anims)) {
-    anims.forEach((anim) => anim(args))
+    anims.forEach((anim) => {
+      anim(args)
+    })
   } else if (anims) {
     anims(args)
   }

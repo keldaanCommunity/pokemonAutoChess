@@ -625,7 +625,9 @@
           "frames": 11
         },
         "LEECH_SEED_HEAL": {
-          "frames": 13
+          "frames": 13,
+          "fps": 26,
+          "repeat": 2
         },
         "LICK": {
           "frames": 5,
@@ -1077,7 +1079,8 @@
           "frames": 19
         },
         "STAR_SHIELD": {
-          "frames": 32
+          "frames": 32,
+          "fps": 24
         },
         "STEALTH_ROCKS": {
           "frames": 14

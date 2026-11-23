@@ -2,7 +2,6 @@ import { Ability } from "./Ability"
 import { Item, type ZCrystal } from "./Item"
 
 export const ZMoves = [
-  Ability.DEFAULT, // TODO: remove when all z-moves are implemented
   Ability.ACID_DOWNPOUR,
   Ability.ALL_OUT_PUMMELING,
   Ability.BABY_BOOM,

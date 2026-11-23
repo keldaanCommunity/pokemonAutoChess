@@ -437,3 +437,7 @@
   width: 22px;
   height: 22px;
 }
+
+#wiki-atlas #atlas-container {
+  --atlas-size: min(85vw, 1600px, calc(90vh - 300px));
+}

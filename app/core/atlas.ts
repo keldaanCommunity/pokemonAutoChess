@@ -16,6 +16,7 @@ import {
   SynergyStones,
   Transfer
 } from "../types"
+import { EvolutionRuleType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
 import { Dishes } from "../types/enum/Item"
 import { Pkm, pkmsFromProposition } from "../types/enum/Pokemon"
@@ -268,16 +269,17 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     }
   },
 
-  awakening: (player) => {
+  awakening: (player, room) => {
     player.experienceManager.maxLevel = 10
     const pokemonsOnBoard = schemaValues(player.board)
     pokemonsOnBoard.forEach((pokemon) => {
       if (
         (pokemon.rarity === Rarity.COMMON ||
           pokemon.rarity === Rarity.UNCOMMON) &&
-        pokemon.hasEvolution
+        pokemon.hasEvolution &&
+        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        EvolutionManager.evolve(pokemon, player)
+        EvolutionManager.evolve(pokemon, player, room.state)
       }
     })
   }

@@ -103,7 +103,7 @@ export function displayHit(
   hitSpriteTypes: HitSprite | HitSprite[],
   x: number,
   y: number,
-  flip: boolean
+  _flip: boolean
 ) {
   const hitSpriteType = Array.isArray(hitSpriteTypes)
     ? pickRandomIn(hitSpriteTypes)
@@ -358,7 +358,9 @@ export const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
           if (options.destroyOnTweenComplete !== false) sprite?.destroy()
           if (options.hitAnim) {
             if (Array.isArray(options.hitAnim)) {
-              options.hitAnim.forEach((anim) => anim(args))
+              options.hitAnim.forEach((anim) => {
+                anim(args)
+              })
             } else options.hitAnim(args)
           }
         },
@@ -520,7 +522,8 @@ export const parabolicProjectile: AbilityAnimationMaker<
       duration: options.duration || 1000,
       ease: options.ease || "linear",
       onUpdate: (tween) => {
-        const t = tween.getValue()! // Progress from 0 to 1
+        const t = tween.getValue() // Progress from 0 to 1
+        if (t === null) return
 
         // Linear interpolation for X
         projectile.x = startX + (endX - startX) * t
@@ -545,7 +548,9 @@ export const parabolicProjectile: AbilityAnimationMaker<
         options.onProjectileLand?.(projectile, args)
         if (options.hitAnim) {
           if (Array.isArray(options.hitAnim)) {
-            options.hitAnim.forEach((anim) => anim(args))
+            options.hitAnim.forEach((anim) => {
+              anim(args)
+            })
           } else options.hitAnim(args)
         }
       },
@@ -643,3 +648,99 @@ export function followDashMovement(
   scene.events.once(Phaser.Scenes.Events.SHUTDOWN, onSceneShutdown)
   scene.events.on(Phaser.Scenes.Events.UPDATE, onSceneUpdate)
 }
+
+type PathAnimationMakerOptions = {
+  duration?: number
+  ease?: string | ((v: number) => number)
+  sprite?: GameObjects.Sprite
+  finishAnim?: AbilityAnimation | AbilityAnimation[]
+  tweenProps?: Record<string, any>
+  path: Phaser.Curves.Curve
+  destroyOnTweenComplete?: boolean
+  initSprite?: (sprite: GameObjects.Sprite) => void
+}
+
+export const pathAnimation: AbilityAnimationMaker<PathAnimationMakerOptions> =
+  (options) => (args) => {
+    const { scene } = args
+    let { rotation } = options
+    const delay = options.delay ?? args.delay ?? 0
+    setTimeout(() => {
+      const follower = { t: 0, vec: new Phaser.Math.Vector2() }
+      const { x: startX, y: startY } = options.path.getStartPoint()
+      let lastX = startX,
+        lastY = startY
+
+      const sprite =
+        options.sprite ??
+        addAbilitySprite(
+          scene,
+          options.ability ?? args.ability,
+          args.ap,
+          [startX, startY],
+          {
+            destroyOnComplete: false,
+            ...options,
+            rotation
+          }
+        )
+      if (!sprite) return null
+      if (options.initSprite) options.initSprite(sprite)
+
+      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
+        targets: follower,
+        duration: options.duration || 500,
+        ease: options.ease || "linear",
+        t: 1,
+        onUpdate: () => {
+          options.path.getPointAt(follower.t, follower.vec)
+          sprite.setPosition(follower.vec.x, follower.vec.y)
+          if (options?.oriented) {
+            rotation =
+              angleBetween([lastX, lastY], [follower.vec.x, follower.vec.y]) +
+              (options.rotation ?? 0)
+            sprite.setRotation(rotation)
+          }
+          lastX = follower.vec.x
+          lastY = follower.vec.y
+        },
+        onComplete: () => {
+          if (options.destroyOnTweenComplete !== false) sprite?.destroy()
+          if (options.finishAnim) {
+            if (Array.isArray(options.finishAnim)) {
+              options.finishAnim.forEach((anim) => {
+                anim(args)
+              })
+            } else {
+              options.finishAnim(args)
+            }
+          }
+        },
+        ...(options.tweenProps ?? {})
+      }
+
+      scene.tweens.add(tweenConfig)
+    }, delay)
+  }
+
+export const shakeCamera: AbilityAnimationMaker<{
+  duration?: number
+  intensity?: number
+}> =
+  (options) =>
+  ({ scene }) =>
+    setTimeout(() => scene.shakeCamera(options), options.delay ?? 0)
+
+export const poppingIcon: AbilityAnimationMaker<
+  TweenAnimationMakerOptions & { maxScale: number }
+> = (options) => (args) =>
+  tweenAnimation({
+    ...options,
+    startCoords:
+      options.startCoords === "target"
+        ? [args.targetX, args.targetY]
+        : [args.positionX, args.positionY],
+    ease: Phaser.Math.Easing.Cubic.Out,
+    scale: options.scale ?? 0.25,
+    tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
+  })(args)

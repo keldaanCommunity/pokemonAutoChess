@@ -232,7 +232,7 @@ export const loadedDiceOnAttackEffect = new OnAttackEffect(
     if (totalDamage > 0 && target && chance(0.5, pokemon)) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const candidateTargets = cells
-        .filter((cell) => cell.value && pokemon.team != cell.value.team)
+        .filter((cell) => cell.value && pokemon.team !== cell.value.team)
         .map((cell) => cell.value!)
       candidateTargets.sort((a, b) => a.hp - b.hp) // target lowest life first
 
@@ -601,7 +601,7 @@ const cookDish = ({
   let dish = DishByPkm[chef.name]
   if (chef.items.has(Item.COOKING_POT)) {
     dish = Item.HEARTY_STEW
-  } else if(chef.types.has(Synergy.STELLAR)){
+  } else if (chef.types.has(Synergy.STELLAR)) {
     dish = Item.RAINBOW_BEAN
   } else if (
     chef.name.startsWith("ARCEUS") ||
@@ -2012,6 +2012,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
       const canBeMoved = farthestEmptyCell != null && target.canBeMoved
       const willEject =
+        chance(0.05, pokemon) &&
         canBeMoved &&
         !blocked &&
         !target.status.resurrection &&
@@ -2192,7 +2193,7 @@ export function openTreasureChest(
   reward: TreasureBoxReward
 ) {
   let rewards: Item[] = []
-  let rewardsIcons: Item[] | undefined = undefined
+  let rewardsIcons: Item[] | undefined
   switch (reward) {
     case "sweets":
       rewardsIcons = [Item.SWEETS]
