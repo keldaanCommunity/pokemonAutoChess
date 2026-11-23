@@ -51,6 +51,7 @@ import {
   diamondStormAnimation,
   dizzyPunchAnimation,
   doubleIronBashAnimation,
+  dragonEnergyAnimation,
   drainPunchAnimation,
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation,
@@ -416,7 +417,7 @@ export const AbilitiesAnimations: {
   [Ability.FIERY_DANCE]: fieryDanceAnimation,
   ["FIERY_DANCE_HIT"]: fieryDanceHitAnimation,
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
-  [Ability.DRAGON_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DRAGON_ENERGY]: dragonEnergyAnimation,
   [Ability.GRUDGE_DIVE]: projectile({
     ability: Ability.DRAGON_ENERGY,
     tint: 0xcbc3e3
