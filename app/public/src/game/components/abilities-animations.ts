@@ -44,6 +44,7 @@ import {
   auroraVeilAnimation,
   behemothBladeAnimation,
   blizzardAnimation,
+  boomburstAnimation,
   bugBuzzAnimation,
   bulldozeAnimation,
   closeCombatAnimation,
@@ -567,7 +568,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.FORECAST]: forecastAnimation,
   [Ability.CHATTER]: onCasterScale2,
-  [Ability.BOOMBURST]: onCaster({ ability: Ability.CHATTER, scale: 3 }),
+  [Ability.BOOMBURST]: boomburstAnimation,
   [Ability.BLAST_BURN]: onCasterScale3,
   [Ability.CHARGE]: onCaster({
     scale: 4,

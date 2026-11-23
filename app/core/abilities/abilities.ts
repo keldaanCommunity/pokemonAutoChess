@@ -596,7 +596,7 @@ export class AssistStrategy extends AbilityStrategy {
         .map((v) => v?.skill)
     )
     if (skill) {
-      pokemon.broadcastAbility({ skill })
+      if (skill !== Ability.BOOMBURST) pokemon.broadcastAbility({ skill })
       AbilityStrategies[skill].process(pokemon, board, target, crit)
     } else super.process(pokemon, board, target, crit)
   }
@@ -682,7 +682,7 @@ export class MetronomeStrategy extends AbilityStrategy {
       skillOptions.filter((s) => InimitableAbilities.includes(s) === false)
     )
 
-    pokemon.broadcastAbility({ skill })
+    if (skill !== Ability.BOOMBURST) pokemon.broadcastAbility({ skill })
     AbilityStrategies[skill].process(pokemon, board, target, crit)
 
     pokemon.simulation.broadcastToSpectators(Transfer.DISPLAY_TEXT, {
