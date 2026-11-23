@@ -229,6 +229,7 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Fixed Burning Jealousy taking more ATK than the buff gave from a Big Eater Belt holder
 - Fixed swapping a Mantyke copying its items and stacking two units on one cell
 - Fixed a case of dish duplication on count-based evolutions during a fight
+- Fixed Spiky Shield dealing damage to target on cast by mistake
 
 # Misc
 
