@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-24.0",
+  "version": "6.12.0.2026-11-24.2",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -1065,9 +1065,6 @@
         "TRICK_OR_TREAT": {
           "frames": 18
         },
-        "TRI_ATTACK": {
-          "frames": 11
-        },
         "TROP_KICK": {
           "frames": 7
         },
@@ -1169,8 +1166,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "NIGHTMARE": {
-          "frames": 15
+        "TRI_ATTACK": {
+          "frames": 11
         }
       }
     },

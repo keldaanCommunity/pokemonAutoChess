@@ -113,6 +113,7 @@ import {
   takeHeartAnimation,
   tidalWaveAnimation,
   timeTravelAnimation,
+  triAttackAnimation,
   twinBeamAnimation
 } from "./animations"
 import {
@@ -1345,7 +1346,7 @@ export const AbilitiesAnimations: {
       scale: 4,
       duration: 300
     })(args),
-  [Ability.TRI_ATTACK]: projectile({}),
+  [Ability.TRI_ATTACK]: triAttackAnimation,
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
   [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),
   [Ability.PYRO_BALL]: projectile({

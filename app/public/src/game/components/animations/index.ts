@@ -78,4 +78,5 @@ export {
 export { takeHeartAnimation } from "./take-heart"
 export { tidalWaveAnimation } from "./tidal-wave"
 export { timeTravelAnimation } from "./time-travel"
+export { triAttackAnimation } from "./tri-attack"
 export { twinBeamAnimation } from "./twin-beam"
