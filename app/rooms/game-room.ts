@@ -89,6 +89,7 @@ import {
 } from "../types/enum/Item"
 import { Passive } from "../types/enum/Passive"
 import {
+  Eeveelutions,
   Pkm,
   PkmIndex,
   PkmRegionalVariants,
@@ -115,7 +116,7 @@ import { isValidDate } from "../utils/date"
 import { formatMinMaxRanks, getRank } from "../utils/elo"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
-import { shuffleArray } from "../utils/random"
+import { pickRandomIn, shuffleArray } from "../utils/random"
 import { schemaValues } from "../utils/schemas"
 import {
   OnBuyPokemonCommand,
@@ -1627,14 +1628,14 @@ export default class GameRoom extends Room<{ state: GameState }> {
 
       if (choice.type === "starter") {
         player.firstPartner = pokemonsObtained[0].name
-        if (
-          this.state.townEncounter === TownEncounters.AZURILL &&
-          pokemonsObtained[0].evolution
-        ) {
-          const evolution = PokemonFactory.createPokemonFromName(
-            pokemonsObtained[0].evolution,
-            player
-          )
+        if (this.state.townEncounter === TownEncounters.AZURILL) {
+          const starter = pokemonsObtained[0]
+          const evoPkm =
+            starter.name === Pkm.EEVEE
+              ? pickRandomIn(Eeveelutions)
+              : starter.evolution
+
+          const evolution = PokemonFactory.createPokemonFromName(evoPkm, player)
           this.givePokemons([evolution], player)
         }
       }

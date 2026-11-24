@@ -3949,6 +3949,17 @@ export const Pillars = [
   Pkm.PILLAR_CONCRETE
 ] satisfies readonly Pkm[]
 
+export const Eeveelutions = [
+  Pkm.VAPOREON,
+  Pkm.JOLTEON,
+  Pkm.FLAREON,
+  Pkm.ESPEON,
+  Pkm.UMBREON,
+  Pkm.LEAFEON,
+  Pkm.SYLVEON,
+  Pkm.GLACEON
+] satisfies readonly Pkm[]
+
 export const NonPkm: Pkm[] = [
   Pkm.SUBSTITUTE,
   Pkm.EGG,

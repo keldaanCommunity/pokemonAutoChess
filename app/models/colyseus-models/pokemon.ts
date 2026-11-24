@@ -55,6 +55,7 @@ import {
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
+  Eeveelutions,
   Pkm,
   PkmFamily,
   PkmIndex,
@@ -6428,16 +6429,7 @@ export class Eevee extends Pokemon {
   range = 1
   skill = Ability.HAPPY_HOUR
   passive = Passive.EEVEE
-  evolutions = [
-    Pkm.VAPOREON,
-    Pkm.JOLTEON,
-    Pkm.FLAREON,
-    Pkm.ESPEON,
-    Pkm.UMBREON,
-    Pkm.LEAFEON,
-    Pkm.SYLVEON,
-    Pkm.GLACEON
-  ]
+  evolutions = Eeveelutions
   evolutionRule = {
     type: EvolutionType.ITEM,
     itemsTriggeringEvolution: [
