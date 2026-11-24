@@ -1,11 +1,15 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type { Item } from "../../types"
-import type { ItemEvolutionRule } from "../../types/EvolutionRules"
+import type {
+  EvolutionRuleType,
+  ItemEvolutionContext,
+  ItemEvolutionRule
+} from "../../types/EvolutionRules"
 import { schemaValues } from "../../utils/schemas"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
+export class ItemEvolutionHandler extends EvolutionHandler<EvolutionRuleType.ITEM> {
   itemsTriggeringEvolution: Item[]
 
   constructor(evolutionRule: ItemEvolutionRule) {
@@ -13,7 +17,11 @@ export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
     this.itemsTriggeringEvolution = evolutionRule.itemsTriggeringEvolution
   }
 
-  canEvolve(pokemon: Pokemon, player: Player, itemGiven: Item): boolean {
+  canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: ItemEvolutionContext
+  ): boolean {
     const itemsAndDishes = schemaValues(pokemon.items).concat(
       schemaValues(pokemon.dishes)
     )
@@ -21,20 +29,23 @@ export class ItemEvolutionHandler extends EvolutionHandler<[Item]> {
       this.itemsTriggeringEvolution.includes(item)
     )
 
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, itemGiven)
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, context)
     return itemEvolution != null && pokemonEvolutionName !== pokemon.name
   }
 
-  evolve(pokemon: Pokemon, player: Player, itemGiven: Item): Pokemon {
-    const itemEvolution =
+  evolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: ItemEvolutionContext
+  ): Pokemon {
+    const item =
       schemaValues(pokemon.items).find((item) =>
         this.itemsTriggeringEvolution.includes(item)
-      ) ?? itemGiven
-    const pokemonEvolutionName = this.getEvolution(
-      pokemon,
-      player,
-      itemEvolution
-    )
+      ) ?? context.item
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, {
+      ...context,
+      item
+    })
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

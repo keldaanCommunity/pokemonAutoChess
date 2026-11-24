@@ -2,44 +2,55 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
-import { SynergyGivenByItem, SynergyItems, TMPerAbility } from "../../types/enum/Item"
 import type {
   DivergentEvolution,
-  EvolutionRule
+  EvolutionContextMap,
+  EvolutionRule,
+  EvolutionRuleType
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
+import {
+  SynergyGivenByItem,
+  SynergyItems,
+  TMPerAbility
+} from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { ZMoves } from "../../types/enum/ZMoves"
 import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 
-export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
+export abstract class EvolutionHandler<T extends EvolutionRuleType> {
+  protected divergentEvolution?: DivergentEvolution<T>
+
+  constructor(
+    evolutionRule: Extract<EvolutionRule, { type: T }> & {
+      divergentEvolution?: DivergentEvolution<T>
+    }
+  ) {
+    this.divergentEvolution = evolutionRule.divergentEvolution
+  }
+
   abstract canEvolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: AdditionalArgs
+    context: EvolutionContextMap[T]
   ): boolean
+
   abstract evolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: AdditionalArgs
+    context: EvolutionContextMap[T]
   ): Pokemon
-  divergentEvolution?: DivergentEvolution<AdditionalArgs>
-
-  constructor(evolutionRule: EvolutionRule) {
-    if (evolutionRule.divergentEvolution)
-      this.divergentEvolution = evolutionRule.divergentEvolution
-  }
 
   getEvolution(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: AdditionalArgs
+    context: EvolutionContextMap[T]
   ): Pkm {
     if (this.divergentEvolution) {
-      return this.divergentEvolution(pokemon, player, ...additionalArgs)
+      return this.divergentEvolution(pokemon, player, context)
     }
     return pokemon.evolution
   }
@@ -127,14 +138,12 @@ export function carryOverTeraShards(
       .filter((item) => isIn(SynergyItems, item))
       .map((item) => SynergyGivenByItem[item])
   )
-  const teraTypes = pokemonsBeforeEvolution
-    .map((p, i) =>
-      schemaValues(p.types).filter((type) => {
-        const baseTypes = getPokemonData(p.name).types
-        return !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
-      })
-    )
-    .flat()
+  const teraTypes = pokemonsBeforeEvolution.flatMap((p, i) =>
+    schemaValues(p.types).filter((type) => {
+      const baseTypes = getPokemonData(p.name).types
+      return !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
+    })
+  )
   for (const type of teraTypes.flat()) {
     pokemonEvolved.types.add(type)
   }

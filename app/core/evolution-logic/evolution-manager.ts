@@ -2,15 +2,9 @@
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type { IPokemon } from "../../types"
 import {
-  type CountEvolutionRule,
+  type EvolutionContext,
   type EvolutionRule,
-  EvolutionRuleType,
-  type HatchEvolutionRule,
-  type MegaEvolutionRule,
-  type MoneyEvolutionRule,
-  type PlacementEvolutionRule,
-  type StackEvolutionRule,
-  type StateEvolutionRule
+  EvolutionRuleType
 } from "../../types/EvolutionRules"
 import { PokemonActionState } from "../../types/enum/Game"
 import { Passive } from "../../types/enum/Passive"
@@ -28,50 +22,62 @@ import { StackEvolutionHandler } from "./stack-evolution-handler"
 import { StateEvolutionHandler } from "./state-evolution-handler"
 
 export const EvolutionManager = {
-  getHandler(evolutionRule: EvolutionRule): EvolutionHandler<any[]> {
+  getHandler(
+    evolutionRule: EvolutionRule
+  ): EvolutionHandler<EvolutionRuleType> {
     switch (evolutionRule.type) {
       case EvolutionRuleType.ITEM:
-        return new ItemEvolutionHandler(evolutionRule)
+        return new ItemEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.STATE:
-        return new StateEvolutionHandler(evolutionRule as StateEvolutionRule)
+        return new StateEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.MONEY:
-        return new MoneyEvolutionHandler(evolutionRule as MoneyEvolutionRule)
+        return new MoneyEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.PLACEMENT:
         return new PlacementEvolutionHandler(
-          evolutionRule as PlacementEvolutionRule
-        )
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.HATCH:
-        return new HatchEvolutionHandler(evolutionRule as HatchEvolutionRule)
+        return new HatchEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.STACK:
-        return new StackEvolutionHandler(evolutionRule as StackEvolutionRule)
+        return new StackEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.MEGA:
-        return new MegaEvolutionHandler(evolutionRule as MegaEvolutionRule)
+        return new MegaEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       case EvolutionRuleType.COUNT:
+        return new CountEvolutionHandler(
+          evolutionRule
+        ) as EvolutionHandler<EvolutionRuleType>
       default:
-        return new CountEvolutionHandler(evolutionRule as CountEvolutionRule)
+        throw new TypeError("Unknown evolution rule type")
     }
   },
 
   tryEvolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: unknown[]
-  ): void | Pokemon {
-    const handler = this.getHandler(pokemon.evolutionRule)
-    if (handler.canEvolve(pokemon, player, ...additionalArgs)) {
-      const pokemonEvolved = this.evolve(pokemon, player, ...additionalArgs)
-      return pokemonEvolved
+    context: EvolutionContext
+  ): Pokemon | null {
+    if (this.canEvolve(pokemon, player, context)) {
+      return this.evolve(pokemon, player, context)
     }
+    return null
   },
 
-  evolve(
-    pokemon: Pokemon,
-    player: Player,
-    ...additionalArgs: unknown[]
-  ): Pokemon {
+  evolve(pokemon: Pokemon, player: Player, context: EvolutionContext): Pokemon {
     const handler = this.getHandler(pokemon.evolutionRule)
-    const pokemonEvolved = handler.evolve(pokemon, player, ...additionalArgs)
-    this.afterEvolve(pokemonEvolved, pokemon, player, ...additionalArgs)
+    const pokemonEvolved = handler.evolve(pokemon, player, context)
+    this.afterEvolve(pokemonEvolved, pokemon, player, context)
     return pokemonEvolved
   },
 
@@ -79,7 +85,7 @@ export const EvolutionManager = {
     pokemonEvolved: Pokemon,
     pokemonBeforeEvolution: Pokemon,
     player: Player,
-    ...additionalArgs: unknown[]
+    context: EvolutionContext
   ) {
     player.updateSynergies()
     if (pokemonBeforeEvolution.supercharged) pokemonEvolved.supercharged = true // preserve supercharged state on evolution
@@ -87,43 +93,43 @@ export const EvolutionManager = {
     triggerOnEvolutionHooks(pokemonEvolved, player)
 
     // check evolutions again if it can evolve twice in a row
-    this.tryEvolve(pokemonEvolved, player, ...additionalArgs)
+    this.tryEvolve(pokemonEvolved, player, context)
   },
 
   getEvolution(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: unknown[]
+    context: EvolutionContext
   ): Pkm {
     const handler = this.getHandler(pokemon.evolutionRule)
-    return handler.getEvolution(pokemon, player, ...additionalArgs)
+    return handler.getEvolution(pokemon, player, context)
   },
 
   canEvolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: unknown[]
+    context: EvolutionContext
   ): boolean {
     const handler = this.getHandler(pokemon.evolutionRule)
-    return handler.canEvolve(pokemon, player, ...additionalArgs)
+    return handler.canEvolve(pokemon, player, context)
   },
 
   canEvolveIfGettingOne(pokemon: Pokemon, player: Player): boolean {
     if (pokemon.evolutionRule.type !== EvolutionRuleType.COUNT) return false
-    const handler = this.getHandler(
-      pokemon.evolutionRule
-    ) as CountEvolutionHandler
+    const handler = new CountEvolutionHandler(pokemon.evolutionRule)
     return handler.canEvolveIfGettingOne(pokemon, player)
   },
 
   updateHatch(pokemon: Pokemon, player: Player) {
     if (pokemon.evolutionRule.type !== EvolutionRuleType.HATCH) return
     pokemon.stacks++
-    const willHatch = this.canEvolve(pokemon, player)
+    const willHatch = this.canEvolve(pokemon, player, {
+      type: EvolutionRuleType.HATCH
+    })
     if (willHatch) {
       pokemon.action = PokemonActionState.HOP
       setTimeout(() => {
-        this.tryEvolve(pokemon, player)
+        this.tryEvolve(pokemon, player, { type: EvolutionRuleType.HATCH })
       }, 2000)
     } else if (pokemon.name === Pkm.EGG) {
       const hatchTime = getHatchTime(pokemon, player)

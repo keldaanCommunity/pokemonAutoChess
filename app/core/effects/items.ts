@@ -28,7 +28,11 @@ import {
   TMPerAbility,
   Transfer
 } from "../../types"
-import { EvolutionRuleType } from "../../types/EvolutionRules"
+import {
+  type EvolutionContext,
+  EvolutionRuleType,
+  type MegaEvolutionRule
+} from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -76,7 +80,7 @@ import {
   randomBetween,
   randomWeighted
 } from "../../utils/random"
-import { resetArraySchema, schemaValues } from "../../utils/schemas"
+import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
@@ -1704,37 +1708,29 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const evolution = EvolutionManager.getEvolution(pokemon, player)
+      const evolutionContext: EvolutionContext = {
+        item,
+        board: player.board,
+        money: player.money,
+        stageLevel: room.state.stageLevel,
+        state: room.state,
+        type: pokemon.evolutionRule.type,
+        megaStoneUsed: false
+      }
+      const evolution = EvolutionManager.getEvolution(
+        pokemon,
+        player,
+        evolutionContext
+      )
       if (!evolution || evolution === Pkm.DEFAULT || pokemon.items.size >= 3) {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      const additionalArgs: any[] = []
-      if (pokemonEvolved.evolutionRule.type === EvolutionRuleType.ITEM) {
-        additionalArgs.push(item)
-      } else if (
-        pokemonEvolved.evolutionRule.type === EvolutionRuleType.MONEY
-      ) {
-        additionalArgs.push(player.money)
-      } else if (
-        pokemonEvolved.evolutionRule.type === EvolutionRuleType.PLACEMENT
-      ) {
-        additionalArgs.push(player.board)
-      } else if (
-        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STACK
-      ) {
-        additionalArgs.push(pokemonEvolved.stacks)
-      } else if (
-        pokemonEvolved.evolutionRule.type === EvolutionRuleType.STATE
-      ) {
-        additionalArgs.push(room.state)
-      }
-
       EvolutionManager.afterEvolve(
         pokemonEvolved,
         pokemon,
         player,
-        ...additionalArgs
+        evolutionContext
       )
 
       pokemonEvolved.items.add(item)
@@ -2091,13 +2087,24 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.MEGA_STONE]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
-      const megaEvoHandler = new MegaEvolutionHandler(pokemon.evolutionRule)
+      let evolutionRule = pokemon.evolutionRule
+      const evolutionContext: EvolutionContext = {
+        type: EvolutionRuleType.MEGA,
+        megaStoneUsed: true
+      }
+      // Glalie is an exception because it has a divergent evo rule that is both a MegaEvolutionRule and a CountBasedEvolutionRule
+      if (pokemon.name === Pkm.GLALIE) {
+        evolutionRule = evolutionRule as MegaEvolutionRule //TOFIX: find a less wacky way to handle multiple evo rules without refactoring the whole system
+      } else if (evolutionRule.type !== EvolutionRuleType.MEGA) {
+        return false
+      }
+      const megaEvoHandler = new MegaEvolutionHandler(evolutionRule)
       if (
         room.state.phase === GamePhaseState.PICK &&
-        megaEvoHandler.canEvolve(pokemon, player, true)
+        megaEvoHandler.canEvolve(pokemon, player, evolutionContext)
       ) {
         removeFromArray(player.items, item)
-        megaEvoHandler.evolve(pokemon, player)
+        megaEvoHandler.evolve(pokemon, player, evolutionContext)
       }
       return false
     })

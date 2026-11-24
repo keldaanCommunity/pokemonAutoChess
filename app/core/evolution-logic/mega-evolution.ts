@@ -1,6 +1,10 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import type {
+  EvolutionRuleType,
+  MegaEvolutionContext
+} from "../../types/EvolutionRules"
 import { MegaPkm, type Pkm } from "../../types/enum/Pokemon"
 import type { IPokemonData } from "../../types/interfaces/PokemonData"
 import { isIn } from "../../utils/array"
@@ -24,17 +28,25 @@ export const hasMegaEvolution = (pkm: Pkm) => {
 export const canMegaEvolve = (pokemon: Pokemon | IPokemonData) => {
   return (
     (pokemon.evolution && isMegaPokemon(pokemon.evolution)) ||
-    (pokemon.evolutions && pokemon.evolutions.some((e) => isMegaPokemon(e)))
+    pokemon.evolutions?.some((e) => isMegaPokemon(e))
   )
 }
 
-export class MegaEvolutionHandler extends EvolutionHandler<[boolean]> {
-  canEvolve(pokemon: Pokemon, player: Player, megaStoneUsed: boolean): boolean {
+export class MegaEvolutionHandler extends EvolutionHandler<EvolutionRuleType.MEGA> {
+  canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: MegaEvolutionContext
+  ): boolean {
     if (player.board.has(pokemon.id) === false) return false
-    return canMegaEvolve(pokemon) && megaStoneUsed
+    return canMegaEvolve(pokemon) && context.megaStoneUsed === true
   }
 
-  evolve(pokemon: Pokemon, player: Player): Pokemon {
+  evolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: MegaEvolutionContext
+  ): Pokemon {
     const megaEvolution =
       pokemon.evolutions.length > 1
         ? (pokemon.evolutions.find((evo) => isMegaPokemon(evo)) ??

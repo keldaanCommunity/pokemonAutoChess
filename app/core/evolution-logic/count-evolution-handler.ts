@@ -1,9 +1,12 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
-import type GameState from "../../rooms/states/game-state"
 import { Item, ItemComponents } from "../../types"
-import type { CountEvolutionRule } from "../../types/EvolutionRules"
+import type {
+  CountEvolutionContext,
+  CountEvolutionRule,
+  EvolutionRuleType
+} from "../../types/EvolutionRules"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { isOnBench } from "../../utils/board"
@@ -17,7 +20,7 @@ import {
   EvolutionHandler
 } from "./evolution-handler"
 
-export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
+export class CountEvolutionHandler extends EvolutionHandler<EvolutionRuleType.COUNT> {
   numberRequired: number
 
   constructor(evolutionRule: CountEvolutionRule) {
@@ -25,7 +28,11 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     this.numberRequired = evolutionRule.numberRequired
   }
 
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+  canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: CountEvolutionContext
+  ): boolean {
     if (!pokemon.hasEvolution) return false
 
     // special case for Avalugg passive, didnt find a better way to do it
@@ -63,8 +70,12 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     return copies.length === this.numberRequired - 1
   }
 
-  evolve(pokemon: Pokemon, player: Player, state: GameState): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, state)
+  evolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: CountEvolutionContext
+  ): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, context)
     let coord: { x: number; y: number } | undefined
     const itemsComponentsOnBench: Item[] = []
     const itemsCompleteOnBench: Item[] = []
@@ -163,7 +174,7 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
 
     if (
       pokemonsBeforeEvolution.some((p) => p.dishes.size > 0) &&
-      state.phase !== GamePhaseState.FIGHT
+      context.state.phase !== GamePhaseState.FIGHT
     ) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)

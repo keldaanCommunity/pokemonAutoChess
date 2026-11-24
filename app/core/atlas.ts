@@ -279,7 +279,10 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
         pokemon.hasEvolution &&
         pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        EvolutionManager.evolve(pokemon, player, room.state)
+        EvolutionManager.evolve(pokemon, player, {
+          type: EvolutionRuleType.COUNT,
+          state: room.state
+        })
       }
     })
   }

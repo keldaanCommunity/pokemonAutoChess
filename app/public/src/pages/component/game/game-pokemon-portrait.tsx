@@ -169,11 +169,10 @@ export default function GamePokemonPortrait(props: {
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = spectatedPlayer
-      ? EvolutionManager.getEvolution(
-          pokemonEvolution,
-          spectatedPlayer,
+      ? EvolutionManager.getEvolution(pokemonEvolution, spectatedPlayer, {
+          type: EvolutionRuleType.COUNT,
           stageLevel
-        )
+        })
       : (pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution)
     pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName2)
   }

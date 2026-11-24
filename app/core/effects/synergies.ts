@@ -1092,11 +1092,16 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
             player.board.forEach((pokemon) => {
               // Condition based evolutions on ground hole dig
               if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
-                EvolutionManager.tryEvolve(pokemon, player, room.state)
+                EvolutionManager.tryEvolve(pokemon, player, {
+                  type: EvolutionRuleType.STATE,
+                  state: room.state
+                })
               } else if (
                 pokemon.evolutionRule.type === EvolutionRuleType.STACK
               ) {
-                EvolutionManager.tryEvolve(pokemon, player)
+                EvolutionManager.tryEvolve(pokemon, player, {
+                  type: EvolutionRuleType.STACK
+                })
               }
             })
           }, 1000)

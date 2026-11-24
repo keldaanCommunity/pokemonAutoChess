@@ -330,7 +330,10 @@ export default class Player extends Schema implements IPlayer {
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
       if (pokemon.evolutionRule.type === EvolutionRuleType.MONEY) {
-        EvolutionManager.tryEvolve(pokemon, this, this.money)
+        EvolutionManager.tryEvolve(pokemon, this, {
+          type: EvolutionRuleType.MONEY,
+          money: this.money
+        })
       }
     })
     if (

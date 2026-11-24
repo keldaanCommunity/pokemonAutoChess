@@ -1441,11 +1441,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
         pokemon.hasEvolution &&
         pokemon.evolutionRule.type === EvolutionRuleType.COUNT
       ) {
-        const pokemonEvolved = EvolutionManager.tryEvolve(
-          pokemon,
-          player,
-          this.state
-        )
+        const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionRuleType.COUNT,
+          state: this.state
+        })
         if (pokemonEvolved) {
           hasEvolved = true
         }
@@ -1469,11 +1468,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
       pokemon.evolutionRule &&
       pokemon.evolutionRule.type === EvolutionRuleType.ITEM
     ) {
-      const pokemonEvolved = EvolutionManager.tryEvolve(
-        pokemon,
-        player,
-        itemAcquired
-      )
+      const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player, {
+        type: EvolutionRuleType.ITEM,
+        item: itemAcquired
+      })
       return pokemonEvolved
     }
   }
@@ -1599,11 +1597,10 @@ export default class GameRoom extends Room<{ state: GameState }> {
         if (this.state.specialGameRule === SpecialGameRule.CHOSEN_ONES) {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
-              ? EvolutionManager.getEvolution(
-                  pkm,
-                  player,
-                  this.state.stageLevel
-                )
+              ? EvolutionManager.getEvolution(pkm, player, {
+                  type: EvolutionRuleType.COUNT,
+                  stageLevel: this.state.stageLevel
+                })
               : pkm.name
             const rank = [Rarity.UNCOMMON, Rarity.RARE, Rarity.EPIC].indexOf(
               pkm.rarity
@@ -1663,7 +1660,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
   computeRoundDamage(
     opponentTeam: MapSchema<PokemonEntity>,
     stageLevel: number,
-    opponentPlayer?: Player,
+    opponentPlayer?: Player
   ) {
     let damage = Math.ceil(stageLevel / 2)
     if (opponentTeam.size > 0) {

@@ -25,11 +25,13 @@ import {
   Title
 } from "../../types"
 import {
+  type CountEvolutionContext,
   type CountEvolutionRule,
   type EvolutionRule,
   EvolutionRuleType,
   type HatchEvolutionRule,
   type ItemEvolutionRule,
+  type MegaEvolutionContext,
   type MegaEvolutionRule,
   type MoneyEvolutionRule,
   type PlacementEvolutionRule,
@@ -3204,6 +3206,19 @@ export class Glalie extends Pokemon {
   stars = 2
   evolution = Pkm.FROSLASS
   evolutions = [Pkm.FROSLASS, Pkm.MEGA_GLALIE]
+  evolutionRule = {
+    type: EvolutionRuleType.COUNT,
+    numberRequired: 3,
+    divergentEvolution: (
+      pokemon: IPokemon,
+      player: IPlayer,
+      context: CountEvolutionContext | MegaEvolutionContext
+    ) => {
+      if ("megaStoneUsed" in context && context.megaStoneUsed === true)
+        return Pkm.MEGA_GLALIE
+      else return Pkm.FROSLASS
+    }
+  } satisfies CountEvolutionRule | MegaEvolutionRule
   hp = 170
   atk = 17
   speed = 60
@@ -6435,7 +6450,7 @@ export class Eevee extends Pokemon {
       Item.DAWN_STONE,
       Item.ICE_STONE
     ],
-    divergentEvolution: (pokemon, player, item) => {
+    divergentEvolution: (pokemon, player, { item }) => {
       switch (item) {
         case Item.WATER_STONE:
           return Pkm.VAPOREON
@@ -10665,7 +10680,7 @@ export class TypeNull extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.ITEM,
     itemsTriggeringEvolution: [...SynergyItems],
-    divergentEvolution: (pokemon, player, item: Item) => {
+    divergentEvolution: (pokemon, player, { item }) => {
       switch (SynergyGivenByItem[item]) {
         case Synergy.BUG:
           return Pkm.SILVALLY_BUG
@@ -10758,7 +10773,7 @@ export class Applin extends Pokemon {
       Item.TART_APPLE,
       Item.SIRUPY_APPLE
     ],
-    divergentEvolution: (pokemon, player, item: Item) => {
+    divergentEvolution: (pokemon, player, { item }) => {
       if (item === Item.SWEET_APPLE) {
         return Pkm.APPLETUN
       }
@@ -12537,13 +12552,12 @@ export class Tyrogue extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.ITEM,
     itemsTriggeringEvolution: [...CraftableItems, ...ItemComponents],
-    divergentEvolution: (pokemon, player, item_) => {
-      const item = item_ as Item
+    divergentEvolution: (pokemon, player, { item }) => {
       if (
         item === Item.CHARCOAL ||
         item === Item.MAGNET ||
-        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.CHARCOAL)) ||
-        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.MAGNET))
+        ItemRecipe[item]?.includes(Item.CHARCOAL) ||
+        ItemRecipe[item]?.includes(Item.MAGNET)
       ) {
         return Pkm.HITMONLEE
       }
@@ -12551,8 +12565,8 @@ export class Tyrogue extends Pokemon {
       if (
         item === Item.HEART_SCALE ||
         item === Item.NEVER_MELT_ICE ||
-        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.HEART_SCALE)) ||
-        (item in ItemRecipe && ItemRecipe[item]!.includes(Item.NEVER_MELT_ICE))
+        ItemRecipe[item]?.includes(Item.HEART_SCALE) ||
+        ItemRecipe[item]?.includes(Item.NEVER_MELT_ICE)
       ) {
         return Pkm.HITMONCHAN
       }
@@ -15311,7 +15325,7 @@ export class Rockruff extends Pokemon {
 }
 
 function updateLycanroc(pokemon: Pokemon, weather: Weather, player: Player) {
-  let weatherForm
+  let weatherForm: Pkm | null = null
   if (weather === Weather.NIGHT || weather === Weather.BLOODMOON) {
     weatherForm = Pkm.LYCANROC_NIGHT
   } else if (weather === Weather.ZENITH) {
@@ -18262,7 +18276,7 @@ export class Milcery extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.ITEM,
     itemsTriggeringEvolution: [...Flavors],
-    divergentEvolution: (pokemon, player, item: Item) => alcremieByFlavor[item]
+    divergentEvolution: (pokemon, player, { item }) => alcremieByFlavor[item]
   } satisfies ItemEvolutionRule
   hp = 150
   atk = 10
@@ -18584,8 +18598,7 @@ export class Charcadet extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.ITEM,
     itemsTriggeringEvolution: [Item.AUSPICIOUS_ARMOR, Item.MALICIOUS_ARMOR],
-    divergentEvolution: (pokemon, player, item_) => {
-      const item = item_ as Item
+    divergentEvolution: (pokemon, player, { item }) => {
       if (item === Item.AUSPICIOUS_ARMOR) {
         return Pkm.ARMAROUGE
       }
@@ -18889,7 +18902,7 @@ export class Kubfu extends Pokemon {
   evolutionRule = {
     type: EvolutionRuleType.ITEM,
     itemsTriggeringEvolution: [Item.SCROLL_OF_WATERS, Item.SCROLL_OF_DARKNESS],
-    divergentEvolution: (pokemon, player, item: Item) => {
+    divergentEvolution: (pokemon, player, { item }) => {
       return item === Item.SCROLL_OF_WATERS
         ? Pkm.URSHIFU_RAPID
         : Pkm.URSHIFU_SINGLE
@@ -22963,4 +22976,4 @@ export const PokemonClasses: Record<
 // declare all the classes in colyseus schema TypeRegistry
 // required if schema class doesnt have a @type decorator
 // see https://discord.com/channels/525739117951320081/1341559052299407412/1342631038152868072
-Object.values(PokemonClasses).forEach((pokemonClass) => entity(pokemonClass))
+Object.values(PokemonClasses).forEach((pokemonClass) => { entity(pokemonClass) })

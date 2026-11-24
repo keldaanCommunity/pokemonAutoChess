@@ -43,7 +43,8 @@
         "noExtraBooleanCast": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
-        "noAdjacentSpacesInRegex": "error"
+        "noAdjacentSpacesInRegex": "error",
+        "noUselessSwitchCase": "off"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -65,6 +66,7 @@
         "noUnsafeOptionalChaining": "error",
         "noUnusedLabels": "error",
         "noUnusedImports": "error",
+        "noUnusedFunctionParameters": "off",
         "noUnusedVariables": "off",
         "useExhaustiveDependencies": "off",
         "useHookAtTopLevel": "error",

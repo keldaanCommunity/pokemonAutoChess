@@ -1777,11 +1777,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (
-        pokemon.evolutionRule.type === EvolutionRuleType.STATE ||
-        pokemon.evolutionRule.type === EvolutionRuleType.STACK
-      ) {
-        EvolutionManager.tryEvolve(pokemon, player, this.state)
+      if (pokemon.evolutionRule.type === EvolutionRuleType.STACK) {
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionRuleType.STACK
+        })
+      }
+      if (pokemon.evolutionRule.type === EvolutionRuleType.STACK) {
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionRuleType.STATE,
+          state: this.state
+        })
       }
     })
 
@@ -2539,7 +2544,10 @@ export function onPokemonChangePosition({
     // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
     for (const pokemon of player.board.values()) {
       if (pokemon.name === Pkm.MANTYKE) {
-        EvolutionManager.tryEvolve(pokemon, player, player.board)
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionRuleType.PLACEMENT,
+          board: player.board
+        })
       }
     }
   }
