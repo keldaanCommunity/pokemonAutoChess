@@ -52,6 +52,7 @@ import {
   diamondStormAnimation,
   dizzyPunchAnimation,
   doubleIronBashAnimation,
+  dragonDartsAnimation,
   dragonEnergyAnimation,
   drainPunchAnimation,
   dynamaxCannonAnimation,
@@ -85,11 +86,13 @@ import {
   lusterPurgeAnimation,
   lusterPurgeHitAnimation,
   makeItRainAnimation,
+  meteorMashAnimation,
   mistBallAnimation,
   mistBallHitAnimation,
   mistySurgeAnimation,
   moongeistBeamAnimation,
   nightDazeAnimation,
+  nightmareAnimation,
   oblivionWingAnimation,
   originPulseAnimation,
   overheatAnimation,
@@ -102,6 +105,7 @@ import {
   seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
+  snipeShotAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
   starShieldAnimation,
@@ -111,6 +115,7 @@ import {
   takeHeartAnimation,
   tidalWaveAnimation,
   timeTravelAnimation,
+  triAttackAnimation,
   twinBeamAnimation
 } from "./animations"
 import {
@@ -289,7 +294,7 @@ export const AbilitiesAnimations: {
   [Ability.RETURN]: onTarget({ ability: Ability.BRICK_BREAK, scale: 2 }),
   [Ability.BULK_UP]: onCasterScale2,
   [Ability.FLASH]: onCasterScale2,
-  [Ability.METEOR_MASH]: onTarget({ ability: Ability.FLASH }),
+  [Ability.METEOR_MASH]: meteorMashAnimation,
   [Ability.STEEL_WING]: onCasterScale2,
   [Ability.HYPNOSIS]: projectile({
     oriented: true,
@@ -889,7 +894,7 @@ export const AbilitiesAnimations: {
     scale: 3,
     ability: Ability.AROMATHERAPY
   }),
-  [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
+  [Ability.NIGHTMARE]: nightmareAnimation,
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
     tint: 0x80eeff,
@@ -1343,7 +1348,7 @@ export const AbilitiesAnimations: {
       scale: 4,
       duration: 300
     })(args),
-  [Ability.TRI_ATTACK]: projectile({}),
+  [Ability.TRI_ATTACK]: triAttackAnimation,
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
   [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),
   [Ability.PYRO_BALL]: projectile({
@@ -1392,15 +1397,7 @@ export const AbilitiesAnimations: {
       oriented: true,
       rotation: -Math.PI / 2
     })(args),
-  [Ability.DRAGON_DARTS]: projectile({
-    ability: Ability.VENOSHOCK,
-    scale: 1,
-    oriented: true,
-    positionOffset: [0, -30],
-    duration: 400,
-    rotation: -Math.PI / 2,
-    hitAnim: onTarget({ ability: "PUFF_PINK", scale: 1 })
-  }),
+  [Ability.DRAGON_DARTS]: dragonDartsAnimation,
   [Ability.ASTRAL_BARRAGE]: (args) => {
     const pokemonSprite = args.pokemonsOnBoard.find(
       (p) => p.positionX === args.positionX && p.positionY === args.positionY
@@ -1971,38 +1968,7 @@ export const AbilitiesAnimations: {
     })
   },
 
-  [Ability.SNIPE_SHOT]: (args) => {
-    const targetAngle = angleBetween(
-      [args.positionX, args.positionY],
-      [args.targetX, args.targetY]
-    )
-    const orientationAngle = OrientationAngle[args.orientation] ?? 0
-    const coordinates = transformEntityCoordinates(
-      args.positionX,
-      args.positionY,
-      args.flip
-    )
-    projectile({
-      ability: "SNIPE_SHOT/projectile",
-      scale: 3,
-      duration: 1000,
-      rotation: args.flip ? targetAngle : -targetAngle,
-      endCoords: [
-        args.positionX + Math.round(Math.cos(targetAngle) * 10),
-        args.positionY + Math.round(Math.sin(targetAngle) * 10),
-        args.flip
-      ]
-    })(args)
-    staticAnimation({
-      ability: "SNIPE_SHOT/shoot",
-      x: coordinates[0] + Math.round(Math.cos(orientationAngle) * 30),
-      y: coordinates[1] - Math.round(Math.sin(orientationAngle) * 50) - 10,
-      scale: 1,
-      oriented: true,
-      rotation: Math.PI / 2,
-      origin: [0.5, 1]
-    })(args)
-  },
+  [Ability.SNIPE_SHOT]: snipeShotAnimation,
 
   [Ability.GLACIAL_LANCE]: (args) => {
     const targetAngle = angleBetween(

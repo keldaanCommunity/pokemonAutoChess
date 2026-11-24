@@ -1,3 +1,4 @@
+import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -13,7 +14,7 @@ export class SnipeShotStrategy extends AbilityStrategy {
     const damage = [40, 80, 160, 320][pokemon.stars - 1] ?? 320
     const farthestTarget =
       pokemon.state.getFarthestTarget(pokemon, board) ?? target
-    super.process(pokemon, board, farthestTarget, crit)
+    super.process(pokemon, board, farthestTarget, crit, true)
     const targetsHit: Set<PokemonEntity> = new Set()
 
     if (farthestTarget) {
@@ -31,6 +32,18 @@ export class SnipeShotStrategy extends AbilityStrategy {
     }
 
     if (targetsHit.size === 0) targetsHit.add(target) // guarantee at least the target is hit
+    pokemon.broadcastAbility({
+      skill: Ability.SNIPE_SHOT,
+      targetX: farthestTarget.positionX,
+      targetY: farthestTarget.positionY,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: {
+        targets: [...targetsHit].map((enemy) => ({
+          x: enemy.positionX,
+          y: enemy.positionY
+        }))
+      }
+    })
     targetsHit.forEach((enemy) => {
       enemy.handleSpecialDamage(
         damage,
