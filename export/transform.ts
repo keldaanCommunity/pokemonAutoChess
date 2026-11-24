@@ -1,24 +1,30 @@
+import { existsSync, statSync } from "fs"
 import { readdir } from "fs/promises"
 import { mkdir, writeFile } from "fs-extra"
-import { intToRGBA, Jimp, JimpInstance } from "jimp"
+import { intToRGBA, Jimp, type JimpInstance } from "jimp"
+import { resolve } from "path"
+import { createInterface } from "readline"
 import {
-  AnimatedFrame,
+  type AnimatedFrame,
   DTEF_HEIGHT,
   DTEF_TILESET_HEIGHT,
   DTEF_TILESET_TILE_WIDTH,
   DTEF_TILESET_WIDTH,
   DTEF_WIDTH,
-  DtefTileset,
+  type DtefTileset,
   Mask,
   MaskCoordinate,
-  MaskDefinition,
+  type MaskDefinition,
   TerrainType,
-  TilesetExchangeFile
+  type TilesetExchangeFile
 } from "../app/config"
-import { AnimationTiled, FrameTiled, TilesetTiled } from "../app/core/tileset"
+import type {
+  AnimationTiled,
+  FrameTiled,
+  TilesetTiled
+} from "../app/core/tileset"
 import { DungeonPMDO } from "../app/types/enum/Dungeon"
 
-const PMDO_EXPORT_DIRECTORY = "C:/Users/arnau/Desktop/RawAsset/TileDtef"
 let gid = 1
 
 /* jimp has some issus with the type definition as of 1.6.0 */
@@ -35,14 +41,33 @@ async function getTilesets(source: string, filter?: string) {
     .filter((file) => file.isFile() && file.name.includes("frame"))
     .filter((file) => (filter ? file.name.includes(filter) : true))
     .map((dirent) => dirent.name)
+    .sort((a, b) => getFrameIndex(a) - getFrameIndex(b))
+}
+
+function getFrameIndex(filename: string) {
+  const match = filename.match(/_(\d+)\.\d+\.png$/)
+  if (!match) {
+    throw new Error(`Invalid tileset frame filename: ${filename}`)
+  }
+  return Number(match[1])
+}
+
+function prompt(question: string): Promise<string> {
+  const rl = createInterface({ input: process.stdin, output: process.stdout })
+  return new Promise((resolvePrompt) =>
+    rl.question(question, (answer) => {
+      rl.close()
+      resolvePrompt(answer)
+    })
+  )
 }
 
 /**
  * Used to create dungeon enum
  */
-async function createDungeonsEnum() {
-  const directories = await getDirectories(PMDO_EXPORT_DIRECTORY)
-  const dungeons = {}
+async function createDungeonsEnum(pmdoExportDirectory: string) {
+  const directories = await getDirectories(pmdoExportDirectory)
+  const dungeons: Record<string, string> = {}
   directories.forEach((v) => {
     if (
       !v.includes("Secondary") &&
@@ -56,18 +81,32 @@ async function createDungeonsEnum() {
 }
 
 async function main() {
-  await createDungeonsEnum()
+  const input = (await prompt("PMDO export directory: "))
+    .trim()
+    .replace(/^["']|["']$/g, "")
+  if (!input) {
+    throw new Error("PMDO export directory is required")
+  }
+  const pmdoExportDirectory = resolve(input)
+  if (
+    !existsSync(pmdoExportDirectory) ||
+    !statSync(pmdoExportDirectory).isDirectory()
+  ) {
+    throw new Error(`Invalid PMDO export directory: ${pmdoExportDirectory}`)
+  }
+
+  await createDungeonsEnum(pmdoExportDirectory)
   for (let i = 0; i < Object.values(DungeonPMDO).length; i++) {
     gid = 1
     const dungeon = Object.values(DungeonPMDO)[i]
-    await createTilesheets(dungeon)
+    await createTilesheets(dungeon, pmdoExportDirectory)
   }
   // await createTilesheets("AmpPlains")
 }
 
-async function createTilesheets(dungeon: string) {
+async function createTilesheets(dungeon: string, pmdoExportDirectory: string) {
   console.log(`Creating mega tileset ${dungeon} ...`)
-  const src = `${PMDO_EXPORT_DIRECTORY}/${dungeon}`
+  const src = resolve(pmdoExportDirectory, dungeon)
   const newSrc = `tilesets/${dungeon}`
 
   await mkdir(newSrc, { recursive: true })
@@ -79,11 +118,12 @@ async function createTilesheets(dungeon: string) {
   }
 
   // for each tileset, detect the number of frames
-  for (let i = 0; i < 3; i++) {
+  const tilesetNames = ["tileset_0", "tileset_1", "tileset_2"] as const
+  for (const [i, tilesetName] of tilesetNames.entries()) {
     const staticTileset = await Jimp.read(`${src}/tileset_${i}.png`)
     await staticTileset.write(`${newSrc}/tileset_${i}.png`)
 
-    tilesetExchangeFile[`tileset_${i}`] = {
+    tilesetExchangeFile[tilesetName] = {
       static: {
         name: `tileset_${i}`,
         maskDefinition: getMaskDefinition(staticTileset),
