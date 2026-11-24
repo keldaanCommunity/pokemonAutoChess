@@ -24,7 +24,8 @@ import {
   isPkmDuo,
   type Pkm,
   PkmDuos,
-  PkmIndex
+  PkmIndex,
+  type PkmProposition
 } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { entries } from "../../../../../utils/object"
@@ -38,7 +39,7 @@ import { playSound, SOUNDS } from "../../utils/audio"
 import { addIconsToDescription } from "../../utils/descriptions"
 import { cc } from "../../utils/jsx"
 import { GamePokemonDetail } from "../game/game-pokemon-detail"
-import PokemonPortrait from "../pokemon-portrait"
+import PokemonPortrait, { type PortraitOptions } from "../pokemon-portrait"
 import "./atlas.css"
 
 const ROOT_POSITION = AtlasTree.nodes.root.position
@@ -201,6 +202,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
               <g id="nodes">
                 {entries(AtlasTree.nodes).map(
                   ([nodeId, node]: [AtlasNodeId, AtlasNode]) => {
+                    let pokemon: PkmProposition | "" = ""
                     const isUnlocked = unlockedNodes.has(nodeId)
                     const isUnlockable = isConnectedAndUnlockable(
                       nodeId,
@@ -209,7 +211,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
                     const isAffordable = emera > 0 || origin === "wiki"
                     if (node.type === "legendary" && legendaries.length > 0) {
                       const index = Number(nodeId.at(-1)) - 1
-                      node = { ...node, pokemon: legendaries[index] }
+                      pokemon = legendaries[index]
                     }
 
                     return (
@@ -217,6 +219,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
                         key={nodeId}
                         node={node}
                         nodeId={nodeId}
+                        pokemon={pokemon}
                         isUnlocked={isUnlocked}
                         isUnlockable={isUnlockable}
                         isAffordable={isAffordable}
@@ -283,6 +286,7 @@ export function Atlas({ origin = "game" }: { origin?: "game" | "wiki" }) {
 function Node({
   node,
   nodeId,
+  pokemon,
   isUnlocked,
   isUnlockable,
   isAffordable,
@@ -290,6 +294,7 @@ function Node({
 }: {
   node: AtlasNode
   nodeId: AtlasNodeId
+  pokemon: PkmProposition | ""
   isUnlocked: boolean
   isUnlockable: boolean
   isAffordable: boolean
@@ -298,14 +303,6 @@ function Node({
   const size = NodeSizes[node.type] || 12
   const shouldShowTooltip = node.type !== "step"
   const { zoomToElement } = useControls()
-
-  const legendaries = useAppSelector(
-    (state) => state.game.atlasManager.legendaries
-  )
-  if (node.type === "legendary" && legendaries.length > 0) {
-    const index = Number(nodeId.at(-1)) - 1
-    node = { ...node, pokemon: legendaries[index] }
-  }
 
   function handleClick(e: React.MouseEvent<SVGGElement, MouseEvent>) {
     e.preventDefault()
@@ -357,11 +354,11 @@ function Node({
 
       {/* Node for Legendary */}
       {node.type === "legendary" &&
-        (node.pokemon && isPkmDuo(node.pokemon) ? (
+        (pokemon && isPkmDuo(pokemon) ? (
           <>
             <image
               className="atlas-legendary-pokemon"
-              href={getPortraitSrc(PkmIndex[PkmDuos[node.pokemon][0]])}
+              href={getPortraitSrc(PkmIndex[PkmDuos[pokemon][0]])}
               height="80"
               width="80"
               transform="translate(-40 -40)"
@@ -372,7 +369,7 @@ function Node({
             />
             <image
               className="atlas-legendary-pokemon"
-              href={getPortraitSrc(PkmIndex[PkmDuos[node.pokemon][1]])}
+              href={getPortraitSrc(PkmIndex[PkmDuos[pokemon][1]])}
               height="80"
               width="80"
               transform="translate(-40 -40)"
@@ -382,10 +379,10 @@ function Node({
               }}
             />
           </>
-        ) : node.pokemon ? (
+        ) : pokemon ? (
           <image
             className="atlas-legendary-pokemon"
-            href={getPortraitSrc(PkmIndex[node.pokemon])}
+            href={getPortraitSrc(PkmIndex[pokemon])}
             height="80"
             width="80"
             transform="translate(-40 -40)"
@@ -393,7 +390,7 @@ function Node({
           />
         ) : (
           <image
-            href={EmeraIcons["legendary"]}
+            href={EmeraIcons.legendary}
             height="60"
             width="60"
             transform="translate(-30 -30)"
@@ -426,7 +423,7 @@ function Node({
       {/* Node Step Icon */}
       {node.type === "step" && isUnlocked && (
         <image
-          href={EmeraIcons["blank"]}
+          href={EmeraIcons.blank}
           height="30"
           width="30"
           transform="translate(-15 -15)"
@@ -458,7 +455,7 @@ function Node({
       {node.type === "condition" &&
         (isUnlocked ? (
           <image
-            href={EmeraIcons["blank"]}
+            href={EmeraIcons.blank}
             height="30"
             width="30"
             transform="translate(-15 -15)"
@@ -511,15 +508,15 @@ function AtlasNodeDetail({
           ></GamePokemonDetail>
         </>
       )
-    } else if (pokemon != null) {
+    } else if (pokemon) {
       return (
         <GamePokemonDetail origin="atlas" pokemon={pokemon}></GamePokemonDetail>
       )
     }
   }
 
-  let portrait,
-    title,
+  let portrait: PortraitOptions | null = null,
+    title: string | null = null,
     description: string = node.type
   if (node.type === "encounter") {
     portrait = { index: PkmIndex[node.encounter] }

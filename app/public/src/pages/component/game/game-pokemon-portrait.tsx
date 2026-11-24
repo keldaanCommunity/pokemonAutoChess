@@ -11,7 +11,8 @@ import {
 } from "../../../../../models/colyseus-models/pokemon-customs"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { getBuyPrice } from "../../../../../models/shop"
-import { EvolutionRuleType } from "../../../../../types/EvolutionRules"
+import { EvolutionType } from "../../../../../types/EvolutionRules"
+import { Rarity } from "../../../../../types/enum/Game"
 import { type Pkm, PkmFamily } from "../../../../../types/enum/Pokemon"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { schemaValues } from "../../../../../utils/schemas"
@@ -26,7 +27,6 @@ import { Money } from "../icons/money"
 import SynergyIcon from "../icons/synergy-icon"
 import { GamePokemonDetail } from "./game-pokemon-detail"
 import "./game-pokemon-portrait.css"
-import { Rarity } from "../../../../../types/enum/Game"
 
 // getBase64() is an expensive canvas readback and every portrait re-runs it on each state change, so cache
 // by index. customs bake into the texture, which the TextureManager drops when its game is destroyed, so
@@ -104,12 +104,10 @@ export default function GamePokemonPortrait(props: {
     let _count = 0
     let _countEvol = 0
     if (
-      board &&
-      board.forEach &&
+      board?.forEach &&
       !isOnAnotherBoard &&
       props.pokemon &&
-      pokemon &&
-      pokemon.hasEvolution
+      pokemon?.hasEvolution
     ) {
       board.forEach((p) => {
         if (p.name === pokemon.name) {
@@ -143,34 +141,38 @@ export default function GamePokemonPortrait(props: {
     [Rarity.LEGENDARY]: ""
   }
 
+  const evolutionRule = pokemon.evolutionRule
   const evolutionName = spectatedPlayer
-    ? EvolutionManager.getEvolution(pokemon, spectatedPlayer)
+    ? EvolutionManager.getEvolution(pokemon, spectatedPlayer, {
+        type: EvolutionType.COUNT,
+        stageLevel
+      })
     : (pokemon.evolutions[0] ?? pokemon.evolution)
   let pokemonEvolution = PokemonFactory.createPokemonFromName(evolutionName)
 
   const willEvolve =
-    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
-    count === pokemon.evolutionRule.numberRequired - 1
+    evolutionRule.type === EvolutionType.COUNT &&
+    count === evolutionRule.numberRequired - 1
 
   const isSpecial =
     props.origin === "shop" &&
     [Rarity.SPECIAL, Rarity.UNIQUE, Rarity.LEGENDARY].includes(pokemon.rarity)
   const usableForCountEvol =
-    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+    evolutionRule.type === EvolutionType.COUNT &&
     ((count > 0 && pokemon.hasEvolution) ||
       (countEvol > 0 && pokemonEvolution.hasEvolution))
 
   const shouldShimmer = usableForCountEvol || isSpecial
 
   if (
-    pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
-    count === pokemon.evolutionRule.numberRequired - 1 &&
-    countEvol === pokemon.evolutionRule.numberRequired - 1 &&
+    evolutionRule.type === EvolutionType.COUNT &&
+    count === evolutionRule.numberRequired - 1 &&
+    countEvol === evolutionRule.numberRequired - 1 &&
     pokemonEvolution.hasEvolution
   ) {
     const evolutionName2 = spectatedPlayer
       ? EvolutionManager.getEvolution(pokemonEvolution, spectatedPlayer, {
-          type: EvolutionRuleType.COUNT,
+          type: EvolutionType.COUNT,
           stageLevel
         })
       : (pokemonEvolution.evolutions[0] ?? pokemonEvolution.evolution)

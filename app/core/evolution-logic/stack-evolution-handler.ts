@@ -1,12 +1,12 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type {
-  EvolutionRuleType,
+  EvolutionType,
   StackEvolutionContext
 } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class StackEvolutionHandler extends EvolutionHandler<EvolutionRuleType.STACK> {
+export class StackEvolutionHandler extends EvolutionHandler<EvolutionType.STACK> {
   canEvolve(
     pokemon: Pokemon,
     player: Player,

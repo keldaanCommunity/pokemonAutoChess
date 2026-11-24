@@ -2,7 +2,7 @@ import type { MapSchema } from "@colyseus/schema"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type {
-  EvolutionRuleType,
+  EvolutionType,
   PlacementEvolutionContext,
   PlacementEvolutionRule
 } from "../../types/EvolutionRules"
@@ -14,7 +14,7 @@ type PlacementCondition = (
   board: MapSchema<Pokemon>
 ) => boolean
 
-export class PlacementEvolutionHandler extends EvolutionHandler<EvolutionRuleType.PLACEMENT> {
+export class PlacementEvolutionHandler extends EvolutionHandler<EvolutionType.PLACEMENT> {
   condition: PlacementCondition
   constructor(evolutionRule: PlacementEvolutionRule) {
     super(evolutionRule)

@@ -22,7 +22,7 @@ import {
   Title,
   Transfer
 } from "../types"
-import { EvolutionRuleType } from "../types/EvolutionRules"
+import { EvolutionType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
@@ -148,7 +148,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   fairySplashCooldown = 0
   isSpawn = false
   refToBoardPokemon: Pokemon
-  commands = new Array<SimulationCommand>()
+  commands = [] as SimulationCommand[]
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
   itemStatsStolen = new Set<Item>() // held items whose stats Spectral Thief took
@@ -1818,13 +1818,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
     if (
-      this.refToBoardPokemon.evolutionRule.type === EvolutionRuleType.STACK &&
+      this.refToBoardPokemon.evolutionRule.type === EvolutionType.STACK &&
       this.stacksRequired > 0 &&
       this.stacks === this.stacksRequired
     ) {
       const pokemonEvolved = EvolutionManager.tryEvolve(
         this.refToBoardPokemon as Pokemon,
-        this.player
+        this.player,
+        { type: EvolutionType.STACK }
       )
       if (pokemonEvolved) {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight

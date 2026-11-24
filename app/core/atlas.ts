@@ -16,7 +16,7 @@ import {
   SynergyStones,
   Transfer
 } from "../types"
-import { EvolutionRuleType } from "../types/EvolutionRules"
+import { EvolutionType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
 import { Dishes } from "../types/enum/Item"
 import { Pkm, pkmsFromProposition } from "../types/enum/Pokemon"
@@ -277,11 +277,10 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
         (pokemon.rarity === Rarity.COMMON ||
           pokemon.rarity === Rarity.UNCOMMON) &&
         pokemon.hasEvolution &&
-        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
+        pokemon.evolutionRule.type === EvolutionType.COUNT
       ) {
         EvolutionManager.evolve(pokemon, player, {
-          type: EvolutionRuleType.COUNT,
-          state: room.state
+          type: EvolutionType.ONE_TIME_EFFECT
         })
       }
     })

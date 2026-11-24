@@ -6,125 +6,55 @@ import type { IPlayer, IPokemon } from "."
 import type { Item } from "./enum/Item"
 import type { Pkm } from "./enum/Pokemon"
 
-export enum EvolutionRuleType {
-  COUNT = "count",
-  ITEM = "item",
-  STATE = "state",
-  MONEY = "money",
-  PLACEMENT = "placement",
-  HATCH = "hatch",
-  STACK = "stack",
-  MEGA = "mega"
+export enum EvolutionType {
+  COUNT = "count", // evolves when having multiple copies of the unit
+  ITEM = "item", // evolves when given an item
+  STATE = "state", // evolves based on a condition of the game state
+  MONEY = "money", // evolves when gaining money
+  PLACEMENT = "placement", // evolves based on a condition on the board placement
+  HATCH = "hatch", // evolves naturally with hatch condition
+  STACK = "stack", // evolves based on a number of stacks reachedd
+  MEGA = "mega", // mega evolution with mega key stone
+  ONE_TIME_EFFECT = "effect" // various game effects where we specifically want the evolution to always occure but only once
 }
 
-export type CountEvolutionContext = {
-  type: EvolutionRuleType.COUNT
-  state: GameState
-  stageLevel: number
-}
-
-export type ItemEvolutionContext = {
-  type: EvolutionRuleType.ITEM
-  item: Item
-}
-
-export type StateEvolutionContext = {
-  type: EvolutionRuleType.STATE
-  state: GameState
-}
-
-export type MoneyEvolutionContext = {
-  type: EvolutionRuleType.MONEY
-  money: number
-}
-
-export type PlacementEvolutionContext = {
-  type: EvolutionRuleType.PLACEMENT
-  board: MapSchema<Pokemon>
-}
-
-export type HatchEvolutionContext = {
-  type: EvolutionRuleType.HATCH
-}
-
-export type StackEvolutionContext = {
-  type: EvolutionRuleType.STACK
-}
-
-export type MegaEvolutionContext = {
-  type: EvolutionRuleType.MEGA
-  megaStoneUsed: boolean
-}
-
-export type EvolutionContextMap = {
-  [EvolutionRuleType.COUNT]: CountEvolutionContext
-  [EvolutionRuleType.ITEM]: ItemEvolutionContext
-  [EvolutionRuleType.STATE]: StateEvolutionContext
-  [EvolutionRuleType.MONEY]: MoneyEvolutionContext
-  [EvolutionRuleType.PLACEMENT]: PlacementEvolutionContext
-  [EvolutionRuleType.HATCH]: HatchEvolutionContext
-  [EvolutionRuleType.STACK]: StackEvolutionContext
-  [EvolutionRuleType.MEGA]: MegaEvolutionContext
-}
-
-export type EvolutionContext = EvolutionContextMap[EvolutionRuleType]
-
-export type DivergentEvolution<K extends EvolutionRuleType> = (
+export type DivergentEvolution<K extends EvolutionType> = (
   pokemon: IPokemon,
   player: Player,
   context: EvolutionContextMap[K]
 ) => Pkm
 
-interface EvolutionRuleCommon<K extends EvolutionRuleType> {
+export interface IEvolutionRule<K extends EvolutionType> {
   type: K
   divergentEvolution?: DivergentEvolution<K>
 }
 
-export type CountEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.COUNT> & {
-    type: EvolutionRuleType.COUNT
-    numberRequired: number
-  }
+export type CountEvolutionRule = IEvolutionRule<EvolutionType.COUNT> & {
+  numberRequired: number
+}
 
-export type ItemEvolutionRule = EvolutionRuleCommon<EvolutionRuleType.ITEM> & {
-  type: EvolutionRuleType.ITEM
+export type ItemEvolutionRule = IEvolutionRule<EvolutionType.ITEM> & {
   itemsTriggeringEvolution: Item[]
 }
-export type StateEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.STATE> & {
-    type: EvolutionRuleType.STATE
-    condition: (pokemon: IPokemon, player: IPlayer, state: GameState) => boolean
-  }
-
-export type PlacementEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.PLACEMENT> & {
-    type: EvolutionRuleType.PLACEMENT
-    condition: (
-      pokemon: Pokemon,
-      player: IPlayer,
-      board: MapSchema<Pokemon>
-    ) => boolean
-  }
-
-export type MoneyEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.MONEY> & {
-    type: EvolutionRuleType.MONEY
-    moneyRequired: number
-  }
-
-export type HatchEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.HATCH> & {
-    type: EvolutionRuleType.HATCH
-  }
-
-export type StackEvolutionRule =
-  EvolutionRuleCommon<EvolutionRuleType.STACK> & {
-    type: EvolutionRuleType.STACK
-  }
-
-export type MegaEvolutionRule = EvolutionRuleCommon<EvolutionRuleType.MEGA> & {
-  type: EvolutionRuleType.MEGA
+export type StateEvolutionRule = IEvolutionRule<EvolutionType.STATE> & {
+  condition: (pokemon: IPokemon, player: IPlayer, state: GameState) => boolean
 }
+
+export type PlacementEvolutionRule = IEvolutionRule<EvolutionType.PLACEMENT> & {
+  condition: (
+    pokemon: Pokemon,
+    player: IPlayer,
+    board: MapSchema<Pokemon>
+  ) => boolean
+}
+
+export type MoneyEvolutionRule = IEvolutionRule<EvolutionType.MONEY> & {
+  moneyRequired: number
+}
+
+export type HatchEvolutionRule = IEvolutionRule<EvolutionType.HATCH>
+export type StackEvolutionRule = IEvolutionRule<EvolutionType.STACK>
+export type MegaEvolutionRule = IEvolutionRule<EvolutionType.MEGA>
 
 export type EvolutionRule =
   | CountEvolutionRule
@@ -135,3 +65,65 @@ export type EvolutionRule =
   | HatchEvolutionRule
   | StackEvolutionRule
   | MegaEvolutionRule
+
+export type EvolutionRuleMap = {
+  [EvolutionType.COUNT]: CountEvolutionRule
+  [EvolutionType.ITEM]: ItemEvolutionRule
+  [EvolutionType.STATE]: StateEvolutionRule
+  [EvolutionType.MONEY]: MoneyEvolutionRule
+  [EvolutionType.PLACEMENT]: PlacementEvolutionRule
+  [EvolutionType.HATCH]: HatchEvolutionRule
+  [EvolutionType.STACK]: StackEvolutionRule
+  [EvolutionType.MEGA]: MegaEvolutionRule
+  [EvolutionType.ONE_TIME_EFFECT]: IEvolutionRule<EvolutionType.ONE_TIME_EFFECT>
+}
+
+interface IEvolutionContext<T extends EvolutionType> {
+  type: T
+  afterEvolveCheck?: boolean /* true when the evolution is considered immediately after another evolution, for state-based evo rules for example */
+}
+
+export type CountEvolutionContext = IEvolutionContext<EvolutionType.COUNT> & {
+  /*
+  some count-based evolutions have divergent evo rules using state
+  but state cannot be passed client side
+  and count evolutions are considered client side for portraits for example
+  that's why the sate is optional in CountEvolutionContext
+  */
+  state?: GameState 
+  stageLevel: number;
+}
+export type ItemEvolutionContext = IEvolutionContext<EvolutionType.ITEM> & {
+  item: Item
+}
+export type StateEvolutionContext = IEvolutionContext<EvolutionType.STATE> & {
+  state: GameState
+}
+export type MoneyEvolutionContext = IEvolutionContext<EvolutionType.MONEY> & {
+  money: number
+}
+export type PlacementEvolutionContext =
+  IEvolutionContext<EvolutionType.PLACEMENT> & {
+    board: MapSchema<Pokemon>
+  }
+export type HatchEvolutionContext = IEvolutionContext<EvolutionType.HATCH>
+export type StackEvolutionContext = IEvolutionContext<EvolutionType.STACK>
+export type MegaEvolutionContext = IEvolutionContext<EvolutionType.MEGA> & {
+  megaStoneUsed: boolean
+}
+export type OneTimeEffectEvolutionContext =
+  IEvolutionContext<EvolutionType.ONE_TIME_EFFECT>
+
+export type EvolutionContextMap = {
+  [EvolutionType.COUNT]: CountEvolutionContext
+  [EvolutionType.ITEM]: ItemEvolutionContext
+  [EvolutionType.STATE]: StateEvolutionContext
+  [EvolutionType.MONEY]: MoneyEvolutionContext
+  [EvolutionType.PLACEMENT]: PlacementEvolutionContext
+  [EvolutionType.HATCH]: HatchEvolutionContext
+  [EvolutionType.STACK]: StackEvolutionContext
+  [EvolutionType.MEGA]: MegaEvolutionContext
+  [EvolutionType.ONE_TIME_EFFECT]: OneTimeEffectEvolutionContext
+}
+
+export type EvolutionContext = EvolutionContextMap[EvolutionType]

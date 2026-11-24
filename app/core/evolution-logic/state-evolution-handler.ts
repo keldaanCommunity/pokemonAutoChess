@@ -2,7 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type GameState from "../../rooms/states/game-state"
 import type {
-  EvolutionRuleType,
+  EvolutionType,
   StateEvolutionContext,
   StateEvolutionRule
 } from "../../types/EvolutionRules"
@@ -14,7 +14,7 @@ type EvolutionCondition = (
   state: GameState
 ) => boolean
 
-export class StateEvolutionHandler extends EvolutionHandler<EvolutionRuleType.STATE> {
+export class StateEvolutionHandler extends EvolutionHandler<EvolutionType.STATE> {
   condition: EvolutionCondition
   constructor(evolutionRule: StateEvolutionRule) {
     super(evolutionRule)

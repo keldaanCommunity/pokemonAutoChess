@@ -1,13 +1,13 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type {
-  EvolutionRuleType,
+  EvolutionType,
   MoneyEvolutionContext,
   MoneyEvolutionRule
 } from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class MoneyEvolutionHandler extends EvolutionHandler<EvolutionRuleType.MONEY> {
+export class MoneyEvolutionHandler extends EvolutionHandler<EvolutionType.MONEY> {
   moneyRequired: number
   constructor(evolutionRule: MoneyEvolutionRule) {
     super(evolutionRule)

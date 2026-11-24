@@ -37,7 +37,7 @@ import {
   Title,
   TMPerAbility
 } from "../../types"
-import { EvolutionRuleType } from "../../types/EvolutionRules"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import type { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EnvironmentalEffects } from "../../types/enum/Effect"
@@ -127,7 +127,7 @@ export default class Player extends Schema implements IPlayer {
   @type(ExperienceManager) experienceManager = new ExperienceManager()
   @type(AtlasManager) atlasManager = new AtlasManager()
   @type({ map: "uint8" }) synergies = new Synergies()
-  @type("uint16") money = process.env.MODE == "dev" ? 999 : 5
+  @type("uint16") money = process.env.MODE === "dev" ? 999 : 5
   @type("int16") life = 100
   @view() @type("boolean") shopLocked: boolean = false
   @view() @type("uint8") shopFreeRolls: number = 0
@@ -329,9 +329,9 @@ export default class Player extends Schema implements IPlayer {
     this.money += value
     if (countTotalEarned && value > 0) this.gameStats.totalMoneyEarned += value
     this.board.forEach((pokemon) => {
-      if (pokemon.evolutionRule.type === EvolutionRuleType.MONEY) {
+      if (pokemon.evolutionRule.type === EvolutionType.MONEY) {
         EvolutionManager.tryEvolve(pokemon, this, {
-          type: EvolutionRuleType.MONEY,
+          type: EvolutionType.MONEY,
           money: this.money
         })
       }
@@ -978,7 +978,9 @@ export default class Player extends Schema implements IPlayer {
         ) {
           const burmyEvolving = burmys[0]
           burmyEvolving.evolutionRule.divergentEvolution = () => Pkm.MOTHIM
-          EvolutionManager.evolve(burmyEvolving, this)
+          EvolutionManager.evolve(burmyEvolving, this, {
+            type: EvolutionType.ONE_TIME_EFFECT
+          })
         }
       }
     }

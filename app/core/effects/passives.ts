@@ -1,8 +1,8 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { FossilPkmByStone } from "../../config/game/items"
 import { StatusConfigs } from "../../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
-import { FossilPkmByStone } from "../../config/game/items"
 import {
   BasculinWhite,
   type Pokemon,
@@ -11,6 +11,7 @@ import {
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import { FossilStones, RemovableItems, Transfer } from "../../types"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Emotion } from "../../types/enum/Emotion"
@@ -208,7 +209,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
     ) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const targets = cells
-        .filter((cell) => cell.value && pokemon.team != cell.value.team)
+        .filter((cell) => cell.value && pokemon.team !== cell.value.team)
         .map((cell) => cell.value!)
         .concat(target)
       const multiplier = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
@@ -535,7 +536,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   ) {
     pokemon.changePassive(Passive.NONE)
 
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
 
     let startY = 1
     let endY = 3
@@ -818,7 +819,7 @@ const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
     )
     const damage = Math.round(0.5 * pokemon.maxHP)
     adjcells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
+      if (cell.value && pokemon.team !== cell.value.team) {
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -2023,7 +2024,7 @@ registerOnEvolutionHook((pokemonEvolved, player) => {
     ) {
       pokemon.addMaxHP(10)
       pokemon.stacks++
-      EvolutionManager.tryEvolve(pokemon, player)
+      EvolutionManager.tryEvolve(pokemon, player, { type: EvolutionType.STACK })
     }
   })
 })

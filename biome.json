@@ -38,6 +38,7 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "a11y": "off",
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
@@ -107,7 +108,8 @@
         "noUnsafeDeclarationMerging": "error",
         "noUnsafeNegation": "error",
         "useGetterReturn": "error",
-        "noWith": "error"
+        "noWith": "error",
+        "useIterableCallbackReturn": "off"
       }
     },
     "includes": [

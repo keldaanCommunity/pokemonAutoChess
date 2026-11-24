@@ -1,4 +1,5 @@
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Pkm, PkmIndex } from "../../types/enum/Pokemon"
 import type { Board } from "../board"
@@ -25,7 +26,8 @@ export class TeraShiftStrategy extends AbilityStrategy {
     ) {
       EvolutionManager.evolve(
         pokemon.refToBoardPokemon as Pokemon,
-        pokemon.player
+        pokemon.player,
+        { type: EvolutionType.ONE_TIME_EFFECT }
       )
       pokemon.player.pokemonsPlayed.add(Pkm.TERAPAGOS_TERASTAL)
     }

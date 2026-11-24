@@ -81,7 +81,7 @@ import {
   TMPerAbility,
   Transfer
 } from "../../types"
-import { EvolutionRuleType } from "../../types/EvolutionRules"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -175,12 +175,12 @@ export class OnBuyPokemonCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     const name = player?.shop[index]
-    if (!player || !player.alive || !name || name === Pkm.DEFAULT) return
+    if (!player?.alive || !name || name === Pkm.DEFAULT) return
 
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
       pokemon.evolutionRule &&
-      pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+      pokemon.evolutionRule.type === EvolutionType.COUNT &&
       EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
@@ -280,7 +280,7 @@ export class OnPokemonCatchCommand extends Command<
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
         (pokemon.evolutionRule &&
-          pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+          pokemon.evolutionRule.type === EvolutionType.COUNT &&
           EvolutionManager.canEvolveIfGettingOne(pokemon, player))
 
       if (hasSpaceOnBench) {
@@ -1777,14 +1777,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (pokemon.evolutionRule.type === EvolutionRuleType.STACK) {
+      if (pokemon.evolutionRule.type === EvolutionType.STACK) {
         EvolutionManager.tryEvolve(pokemon, player, {
-          type: EvolutionRuleType.STACK
+          type: EvolutionType.STACK
         })
       }
-      if (pokemon.evolutionRule.type === EvolutionRuleType.STACK) {
+      if (pokemon.evolutionRule.type === EvolutionType.STACK) {
         EvolutionManager.tryEvolve(pokemon, player, {
-          type: EvolutionRuleType.STATE,
+          type: EvolutionType.STATE,
           state: this.state
         })
       }
@@ -1970,7 +1970,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
           // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
-            if (pokemon.evolutionRule?.type === EvolutionRuleType.HATCH) {
+            if (pokemon.evolutionRule?.type === EvolutionType.HATCH) {
               EvolutionManager.updateHatch(pokemon, player)
             }
 
@@ -2545,7 +2545,7 @@ export function onPokemonChangePosition({
     for (const pokemon of player.board.values()) {
       if (pokemon.name === Pkm.MANTYKE) {
         EvolutionManager.tryEvolve(pokemon, player, {
-          type: EvolutionRuleType.PLACEMENT,
+          type: EvolutionType.PLACEMENT,
           board: player.board
         })
       }

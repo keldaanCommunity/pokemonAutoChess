@@ -1,18 +1,18 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import type {
-  EvolutionRuleType,
-  EvolutionContextMap
+  EvolutionContextMap,
+  EvolutionType
 } from "../../types/EvolutionRules"
 import { Pkm } from "../../types/enum/Pokemon"
 import { EvolutionHandler } from "./evolution-handler"
 import { getHatchTime } from "./hatch-time"
 
-export class HatchEvolutionHandler extends EvolutionHandler<EvolutionRuleType.HATCH> {
+export class HatchEvolutionHandler extends EvolutionHandler<EvolutionType.HATCH> {
   canEvolve(
     pokemon: Pokemon,
     player: Player,
-    _context: EvolutionContextMap[EvolutionRuleType.HATCH]
+    context: EvolutionContextMap[EvolutionType.HATCH]
   ): boolean {
     if (!player.board.has(pokemon.id)) return false // egg has been sold in the meantime
     pokemon.stacksRequired = getHatchTime(pokemon, player)
@@ -22,7 +22,7 @@ export class HatchEvolutionHandler extends EvolutionHandler<EvolutionRuleType.HA
   evolve(
     pokemon: Pokemon,
     player: Player,
-    context: EvolutionContextMap[EvolutionRuleType.HATCH]
+    context: EvolutionContextMap[EvolutionType.HATCH]
   ): Pokemon {
     pokemon.stacks = 0 // prevent trying to evolve twice in a row
     const pokemonEvolutionName = this.getEvolution(pokemon, player, context)

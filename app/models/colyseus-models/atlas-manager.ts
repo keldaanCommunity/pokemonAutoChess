@@ -14,7 +14,7 @@ export default class AtlasManager extends Schema implements IAtlasManager {
   @type("uint8") emera = 0
   @type({ set: "string" }) unlockedNodes = new SetSchema<AtlasNodeId>(["root"])
   @type(["string"]) legendaries = new ArraySchema<PkmProposition | "">(
-    ...Array.from({ length: NB_LEGENDARY_PROPOSITIONS }, () => "")
+    ...Array.from({ length: NB_LEGENDARY_PROPOSITIONS }, () => "" as const)
   )
   @type(["string"]) symbols = new ArraySchema<Synergy>()
 

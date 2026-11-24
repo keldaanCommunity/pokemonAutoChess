@@ -74,7 +74,7 @@ import {
   Title,
   Transfer
 } from "../types"
-import { EvolutionRuleType } from "../types/EvolutionRules"
+import { EvolutionType } from "../types/EvolutionRules"
 import { CloseCodes } from "../types/enum/CloseCodes"
 import type { EloRank } from "../types/enum/EloRank"
 import { GameMode, PokemonActionState, Rarity } from "../types/enum/Game"
@@ -1385,7 +1385,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
     })
 
     player.board.forEach((pokemon: IPokemon) => {
-      if (pokemon.positionY != 0 && pokemon.passive !== Passive.INANIMATE) {
+      if (pokemon.positionY !== 0 && pokemon.passive !== Passive.INANIMATE) {
         const avatar = getAvatarString(
           pokemon.index,
           pokemon.shiny,
@@ -1439,11 +1439,12 @@ export default class GameRoom extends Room<{ state: GameState }> {
     player.board.forEach((pokemon) => {
       if (
         pokemon.hasEvolution &&
-        pokemon.evolutionRule.type === EvolutionRuleType.COUNT
+        pokemon.evolutionRule.type === EvolutionType.COUNT
       ) {
         const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player, {
-          type: EvolutionRuleType.COUNT,
-          state: this.state
+          type: EvolutionType.COUNT,
+          state: this.state,
+          stageLevel: this.state.stageLevel
         })
         if (pokemonEvolved) {
           hasEvolved = true
@@ -1460,20 +1461,21 @@ export default class GameRoom extends Room<{ state: GameState }> {
     playerId: string,
     pokemon: Pokemon,
     itemAcquired: Item
-  ): Pokemon | void {
+  ): Pokemon | null {
     const player = this.state.players.get(playerId)
-    if (!player) return
+    if (!player) return null
 
     if (
       pokemon.evolutionRule &&
-      pokemon.evolutionRule.type === EvolutionRuleType.ITEM
+      pokemon.evolutionRule.type === EvolutionType.ITEM
     ) {
       const pokemonEvolved = EvolutionManager.tryEvolve(pokemon, player, {
-        type: EvolutionRuleType.ITEM,
+        type: EvolutionType.ITEM,
         item: itemAcquired
       })
       return pokemonEvolved
     }
+    return null
   }
 
   givePokemons(pokemonsObtained: Pokemon[], player: Player): void {
@@ -1483,7 +1485,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       const freeCellX = getFirstAvailablePositionInBench(player.board)
       const isEvolution =
         pokemon.evolutionRule &&
-        pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+        pokemon.evolutionRule.type === EvolutionType.COUNT &&
         EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
       if (isEvolution) {
@@ -1598,7 +1600,8 @@ export default class GameRoom extends Room<{ state: GameState }> {
           pokemonsObtained = pokemonsObtained.map((pkm) => {
             const evolution = pkm.hasEvolution
               ? EvolutionManager.getEvolution(pkm, player, {
-                  type: EvolutionRuleType.COUNT,
+                  type: EvolutionType.COUNT,
+                  state: this.state,
                   stageLevel: this.state.stageLevel
                 })
               : pkm.name
@@ -1701,7 +1704,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       b: { id: string; life: number; level: number }
     ) => {
       let diff = b.life - a.life
-      if (diff == 0) {
+      if (diff === 0) {
         diff = b.level - a.level
       }
       return diff

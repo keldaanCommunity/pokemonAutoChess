@@ -30,7 +30,7 @@ import {
 } from "../../types"
 import {
   type EvolutionContext,
-  EvolutionRuleType,
+  EvolutionType,
   type MegaEvolutionRule
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
@@ -567,7 +567,7 @@ export class DojoTicketOnItemDroppedEffect extends OnItemDroppedEffect {
       substitute.id = pokemonLeaving.id
       substitute.evolution = pokemonLeaving.name
       substitute.evolutionRule = {
-        type: EvolutionRuleType.STATE,
+        type: EvolutionType.STATE,
         condition: () => false
       } // used only to store the original pokemon
       substitute.positionX = pokemonLeaving.positionX
@@ -2089,13 +2089,16 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       let evolutionRule = pokemon.evolutionRule
       const evolutionContext: EvolutionContext = {
-        type: EvolutionRuleType.MEGA,
+        type: EvolutionType.MEGA,
         megaStoneUsed: true
       }
       // Glalie is an exception because it has a divergent evo rule that is both a MegaEvolutionRule and a CountBasedEvolutionRule
       if (pokemon.name === Pkm.GLALIE) {
-        evolutionRule = evolutionRule as MegaEvolutionRule //TOFIX: find a less wacky way to handle multiple evo rules without refactoring the whole system
-      } else if (evolutionRule.type !== EvolutionRuleType.MEGA) {
+        evolutionRule = {
+          ...evolutionRule,
+          type: EvolutionType.MEGA
+        } as MegaEvolutionRule
+      } else if (evolutionRule.type !== EvolutionType.MEGA) {
         return false
       }
       const megaEvoHandler = new MegaEvolutionHandler(evolutionRule)

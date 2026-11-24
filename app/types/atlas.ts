@@ -1,5 +1,4 @@
 import type { Item } from "./enum/Item"
-import type { PkmProposition } from "./enum/Pokemon"
 import type { TownEncounter } from "./enum/TownEncounter"
 
 export type AtlasNodeType =
@@ -43,7 +42,6 @@ export type KeystoneNode = Node & {
 
 export type LegendaryNode = Node & {
   type: "legendary"
-  pokemon: PkmProposition | ""
 }
 
 export type EncounterNode = Node & {

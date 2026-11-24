@@ -33,7 +33,7 @@ import {
   Title,
   Transfer
 } from "../../types"
-import { EvolutionRuleType } from "../../types/EvolutionRules"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, PokemonActionState, Team } from "../../types/enum/Game"
@@ -966,11 +966,11 @@ export const cloneBugs = ({
   effects: Set<EffectEnum>
   simulation: Simulation
 }) => {
-  const bugTeam = new Array<IPokemon>()
+  const bugTeam: IPokemon[] = []
   board.forEach((pkm) => {
     if (
       (pkm.hasSynergy(Synergy.BUG) || pkm.dishes.has(Item.RAINBOW_BEAN)) &&
-      pkm.positionY != 0
+      pkm.positionY !== 0
     ) {
       bugTeam.push(pkm)
     }
@@ -1091,16 +1091,14 @@ const groundDigEffect = new OnStageStartEffect(({ player, room }) => {
             })
             player.board.forEach((pokemon) => {
               // Condition based evolutions on ground hole dig
-              if (pokemon.evolutionRule.type === EvolutionRuleType.STATE) {
+              if (pokemon.evolutionRule.type === EvolutionType.STATE) {
                 EvolutionManager.tryEvolve(pokemon, player, {
-                  type: EvolutionRuleType.STATE,
+                  type: EvolutionType.STATE,
                   state: room.state
                 })
-              } else if (
-                pokemon.evolutionRule.type === EvolutionRuleType.STACK
-              ) {
+              } else if (pokemon.evolutionRule.type === EvolutionType.STACK) {
                 EvolutionManager.tryEvolve(pokemon, player, {
-                  type: EvolutionRuleType.STACK
+                  type: EvolutionType.STACK
                 })
               }
             })

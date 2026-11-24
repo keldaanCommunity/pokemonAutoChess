@@ -23,7 +23,7 @@ import {
   SynergyGivenByGem,
   Tools
 } from "../types"
-import { EvolutionRuleType } from "../types/EvolutionRules"
+import { EvolutionType } from "../types/EvolutionRules"
 import { Rarity } from "../types/enum/Game"
 import {
   Pkm,
@@ -203,10 +203,7 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
   const pokemonThatCanEvolve: Pokemon[] = []
   const otherPokemon: Pokemon[] = []
   toPlayer.board.forEach((pkm: Pokemon) => {
-    if (
-      pkm.evolutionRule.type === EvolutionRuleType.COUNT &&
-      pkm.hasEvolution
-    ) {
+    if (pkm.evolutionRule.type === EvolutionType.COUNT && pkm.hasEvolution) {
       pokemonThatCanEvolve.push(pkm)
     } else if (!isOnBench(pkm)) {
       otherPokemon.push(pkm)
@@ -215,7 +212,9 @@ const evolveRandomPokemonInBoard = (toPlayer: Player) => {
 
   if (pokemonThatCanEvolve.length > 0) {
     const randomPkm = pickRandomIn(pokemonThatCanEvolve)
-    EvolutionManager.evolve(randomPkm, toPlayer)
+    EvolutionManager.evolve(randomPkm, toPlayer, {
+      type: EvolutionType.ONE_TIME_EFFECT
+    })
   } else {
     if (otherPokemon.length === 0) return
     const randomPkm2 = pickRandomIn(otherPokemon)

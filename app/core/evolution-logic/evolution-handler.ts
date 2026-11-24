@@ -6,7 +6,7 @@ import type {
   DivergentEvolution,
   EvolutionContextMap,
   EvolutionRule,
-  EvolutionRuleType
+  EvolutionType
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
@@ -21,7 +21,7 @@ import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
 
-export abstract class EvolutionHandler<T extends EvolutionRuleType> {
+export abstract class EvolutionHandler<T extends EvolutionType> {
   protected divergentEvolution?: DivergentEvolution<T>
 
   constructor(

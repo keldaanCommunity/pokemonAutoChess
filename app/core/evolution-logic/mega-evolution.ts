@@ -2,7 +2,7 @@ import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import type {
-  EvolutionRuleType,
+  EvolutionType,
   MegaEvolutionContext
 } from "../../types/EvolutionRules"
 import { MegaPkm, type Pkm } from "../../types/enum/Pokemon"
@@ -32,7 +32,7 @@ export const canMegaEvolve = (pokemon: Pokemon | IPokemonData) => {
   )
 }
 
-export class MegaEvolutionHandler extends EvolutionHandler<EvolutionRuleType.MEGA> {
+export class MegaEvolutionHandler extends EvolutionHandler<EvolutionType.MEGA> {
   canEvolve(
     pokemon: Pokemon,
     player: Player,

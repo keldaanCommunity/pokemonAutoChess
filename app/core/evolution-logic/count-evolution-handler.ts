@@ -5,7 +5,7 @@ import { Item, ItemComponents } from "../../types"
 import type {
   CountEvolutionContext,
   CountEvolutionRule,
-  EvolutionRuleType
+  EvolutionType
 } from "../../types/EvolutionRules"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
@@ -20,7 +20,7 @@ import {
   EvolutionHandler
 } from "./evolution-handler"
 
-export class CountEvolutionHandler extends EvolutionHandler<EvolutionRuleType.COUNT> {
+export class CountEvolutionHandler extends EvolutionHandler<EvolutionType.COUNT> {
   numberRequired: number
 
   constructor(evolutionRule: CountEvolutionRule) {
@@ -174,7 +174,7 @@ export class CountEvolutionHandler extends EvolutionHandler<EvolutionRuleType.CO
 
     if (
       pokemonsBeforeEvolution.some((p) => p.dishes.size > 0) &&
-      context.state.phase !== GamePhaseState.FIGHT
+      context.state?.phase !== GamePhaseState.FIGHT
     ) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)
