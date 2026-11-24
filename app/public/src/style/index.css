@@ -264,11 +264,14 @@ summary,
   position: relative;
 
   & > img {
+    image-rendering: pixelated;
+    width: 100%;
+  }
+
+  &:not(.no-border) > img {
     border: 1px solid #000000;
     border-radius: 4px;
     box-shadow: 2px 2px 0 #00000060;
-    image-rendering: pixelated;
-    width: 100%;
   }
 }
 
