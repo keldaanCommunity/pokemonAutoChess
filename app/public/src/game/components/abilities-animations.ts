@@ -116,7 +116,8 @@ import {
   tidalWaveAnimation,
   timeTravelAnimation,
   triAttackAnimation,
-  twinBeamAnimation
+  twinBeamAnimation,
+  wishAnimation
 } from "./animations"
 import {
   addAbilitySprite,
@@ -556,7 +557,7 @@ export const AbilitiesAnimations: {
     tint: 0x60ff60
   }),
   [Ability.DRACO_METEOR]: onTarget({ origin: [0.5, 0.9] }),
-  [Ability.WISH]: onCasterScale3,
+  [Ability.WISH]: wishAnimation,
   [Ability.GRAVITY]: onCaster({
     ability: Ability.MEDITATE,
     scale: 3,
