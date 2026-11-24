@@ -47,11 +47,7 @@ export class MegaEvolutionHandler extends EvolutionHandler<EvolutionType.MEGA> {
     player: Player,
     context: MegaEvolutionContext
   ): Pokemon {
-    const megaEvolution =
-      pokemon.evolutions.length > 1
-        ? (pokemon.evolutions.find((evo) => isMegaPokemon(evo)) ??
-          pokemon.evolution)
-        : pokemon.evolution
+    const megaEvolution = this.getEvolution(pokemon, player, context)
     const pokemonEvolved = player.transformPokemon(pokemon, megaEvolution)
     return pokemonEvolved
   }
