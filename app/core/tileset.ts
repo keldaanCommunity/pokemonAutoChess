@@ -92,17 +92,21 @@ export default class Tileset {
     mask: Mask
   ): TileMapping[] {
     const mappedAnimations = new Array<TileMapping>()
-    if (Object.keys(this.metadata).includes(layerId)) {
-      ;(this.metadata[layerId] as DtefTileset).animation.forEach(
-        (animatedFrame) => {
-          if (animatedFrame.maskDefinition[terrain].includes(mask)) {
-            mappedAnimations.push({
-              id: getTileId(terrain, mask, animatedFrame.firstgid),
-              layerId: animatedFrame.name
-            })
-          }
+    const tileset = [
+      this.metadata.tileset_0,
+      this.metadata.tileset_1,
+      this.metadata.tileset_2
+    ].find((candidate) => candidate?.static.name === layerId)
+
+    if (tileset) {
+      tileset.animation.forEach((animatedFrame) => {
+        if (animatedFrame.maskDefinition[terrain].includes(mask)) {
+          mappedAnimations.push({
+            id: getTileId(terrain, mask, animatedFrame.firstgid),
+            layerId: animatedFrame.name
+          })
         }
-      )
+      })
     } else {
       logger.warn("error with layer id", layerId)
     }
@@ -144,8 +148,12 @@ export default class Tileset {
 
   exportToTiled() {
     const tilesets = new Array<TilesetTiled>()
-    for (let i = 0; i < 3; i++) {
-      const t = this.metadata[`tileset_${i}`] as DtefTileset
+    for (const t of [
+      this.metadata.tileset_0,
+      this.metadata.tileset_1,
+      this.metadata.tileset_2
+    ]) {
+      if (!t) continue
       tilesets.push(readJsonSync(`${src}/${this.id}/${t.static.name}.json`))
       t.animation.forEach((animatedFrame) => {
         tilesets.push(

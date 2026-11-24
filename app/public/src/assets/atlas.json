@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-24.2",
+  "version": "6.12.0.2026-11-24.3",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -1165,9 +1165,6 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
-        },
-        "TRI_ATTACK": {
-          "frames": 11
         }
       }
     },
