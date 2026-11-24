@@ -105,6 +105,7 @@ import {
   seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
+  snipeShotAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
   starShieldAnimation,
@@ -1967,38 +1968,7 @@ export const AbilitiesAnimations: {
     })
   },
 
-  [Ability.SNIPE_SHOT]: (args) => {
-    const targetAngle = angleBetween(
-      [args.positionX, args.positionY],
-      [args.targetX, args.targetY]
-    )
-    const orientationAngle = OrientationAngle[args.orientation] ?? 0
-    const coordinates = transformEntityCoordinates(
-      args.positionX,
-      args.positionY,
-      args.flip
-    )
-    projectile({
-      ability: "SNIPE_SHOT/projectile",
-      scale: 3,
-      duration: 1000,
-      rotation: args.flip ? targetAngle : -targetAngle,
-      endCoords: [
-        args.positionX + Math.round(Math.cos(targetAngle) * 10),
-        args.positionY + Math.round(Math.sin(targetAngle) * 10),
-        args.flip
-      ]
-    })(args)
-    staticAnimation({
-      ability: "SNIPE_SHOT/shoot",
-      x: coordinates[0] + Math.round(Math.cos(orientationAngle) * 30),
-      y: coordinates[1] - Math.round(Math.sin(orientationAngle) * 50) - 10,
-      scale: 1,
-      oriented: true,
-      rotation: Math.PI / 2,
-      origin: [0.5, 1]
-    })(args)
-  },
+  [Ability.SNIPE_SHOT]: snipeShotAnimation,
 
   [Ability.GLACIAL_LANCE]: (args) => {
     const targetAngle = angleBetween(
