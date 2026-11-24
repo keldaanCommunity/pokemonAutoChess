@@ -173,6 +173,7 @@ function SelectedPokemonAvatars(props: { pokemon: Pkm }) {
                   shiny: type === "shiny",
                   emotion
                 }}
+                className="no-border"
               />
               <p>{t(`emotion.${emotion}`)}</p>
             </div>

@@ -126,12 +126,16 @@ export default function PlayerBox(props: {
           <p> {t("favorites")}:</p>
           <p>
             {favoriteSynergies.map((type) => (
-              <SynergyIcon type={type} key={"fav_" + type} />
+              <SynergyIcon type={type} key={`fav_${type}`} />
             ))}
           </p>
           <p>
             {favoritePokemons.map((name) => (
-              <PokemonPortrait key={name} avatar={PkmIndex[name] + "/Normal"} />
+              <PokemonPortrait
+                key={name}
+                avatar={`${PkmIndex[name]}/Normal`}
+                className="inline"
+              />
             ))}
           </p>
         </div>
