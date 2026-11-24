@@ -17,7 +17,7 @@ export class PowerGemStrategy extends AbilityStrategy {
       4 * (1 + pokemon.ap / 100) * (crit ? pokemon.critPower : 1)
     )
     pokemon.broadcastAbility({ data: { nbGems } })
-    const damage = atkPercentage * pokemon.atk
+    const damage = Math.round(atkPercentage / 100 * pokemon.atk)
     pokemon.commands.push(
       new DelayedCommand(() => {
         for (let i = 0; i < nbGems; i++) {
