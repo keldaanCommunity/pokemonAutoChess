@@ -54,6 +54,7 @@ export {
 export { mistySurgeAnimation } from "./misty-surge"
 export { moongeistBeamAnimation } from "./moongeist-beam"
 export { nightDazeAnimation } from "./night-daze"
+export { nightmareAnimation } from "./nightmare"
 export { oblivionWingAnimation } from "./oblivion-wing"
 export { originPulseAnimation } from "./origin-pulse"
 export { overheatAnimation } from "./overheat"

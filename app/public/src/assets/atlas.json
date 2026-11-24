@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-23.1",
+  "version": "6.12.0.2026-11-24.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -640,9 +640,6 @@
         "NATURAL_GIFT": {
           "frames": 45
         },
-        "NIGHTMARE": {
-          "frames": 15
-        },
         "NIGHT_SHADE": {
           "frames": 34
         },
@@ -1172,8 +1169,8 @@
         "ZYGARDE_CELL/7": {
           "frames": 3
         },
-        "SCHOOLING": {
-          "frames": 4
+        "NIGHTMARE": {
+          "frames": 15
         }
       }
     },

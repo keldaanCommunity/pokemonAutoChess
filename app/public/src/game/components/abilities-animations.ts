@@ -91,6 +91,7 @@ import {
   mistySurgeAnimation,
   moongeistBeamAnimation,
   nightDazeAnimation,
+  nightmareAnimation,
   oblivionWingAnimation,
   originPulseAnimation,
   overheatAnimation,
@@ -890,7 +891,7 @@ export const AbilitiesAnimations: {
     scale: 3,
     ability: Ability.AROMATHERAPY
   }),
-  [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
+  [Ability.NIGHTMARE]: nightmareAnimation,
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
     tint: 0x80eeff,
