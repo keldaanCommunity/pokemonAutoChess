@@ -52,6 +52,7 @@ import {
   diamondStormAnimation,
   dizzyPunchAnimation,
   doubleIronBashAnimation,
+  dragonDartsAnimation,
   dragonEnergyAnimation,
   drainPunchAnimation,
   dynamaxCannonAnimation,
@@ -1395,15 +1396,7 @@ export const AbilitiesAnimations: {
       oriented: true,
       rotation: -Math.PI / 2
     })(args),
-  [Ability.DRAGON_DARTS]: projectile({
-    ability: Ability.VENOSHOCK,
-    scale: 1,
-    oriented: true,
-    positionOffset: [0, -30],
-    duration: 400,
-    rotation: -Math.PI / 2,
-    hitAnim: onTarget({ ability: "PUFF_PINK", scale: 1 })
-  }),
+  [Ability.DRAGON_DARTS]: dragonDartsAnimation,
   [Ability.ASTRAL_BARRAGE]: (args) => {
     const pokemonSprite = args.pokemonsOnBoard.find(
       (p) => p.positionX === args.positionX && p.positionY === args.positionY

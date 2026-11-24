@@ -13,6 +13,7 @@ export { darkAuraAnimation } from "./dark-aura"
 export { diamondStormAnimation } from "./diamond-storm"
 export { dizzyPunchAnimation } from "./dizzy-punch"
 export { doubleIronBashAnimation } from "./double-iron-bash"
+export { dragonDartsAnimation } from "./dragon-darts"
 export { dragonEnergyAnimation } from "./dragon-energy"
 export { drainPunchAnimation } from "./drain-punch"
 export {
