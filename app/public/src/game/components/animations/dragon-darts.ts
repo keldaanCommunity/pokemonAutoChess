@@ -1,11 +1,11 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const SHOT_COUNT = 3
 const SHOT_INTERVAL = 150
@@ -25,18 +25,8 @@ type DartPath = {
 function getDartPath(args: AbilityAnimationArgs): DartPath | null {
   const { positionX, positionY, targetX, targetY, flip } = args
   if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    !Number.isInteger(targetX) ||
-    !Number.isInteger(targetY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT ||
-    targetX < 0 ||
-    targetX >= BOARD_WIDTH ||
-    targetY < 0 ||
-    targetY >= BOARD_HEIGHT ||
+    !isBoardCell(positionX, positionY) ||
+    !isBoardCell(targetX, targetY) ||
     (positionX === targetX && positionY === targetY)
   ) {
     return null

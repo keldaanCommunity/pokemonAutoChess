@@ -1,11 +1,11 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const OUTBOUND_DURATION = 360
 const IMPACT_DURATION = 160
@@ -15,17 +15,6 @@ const RETURN_END = OUTBOUND_DURATION + IMPACT_DURATION + RETURN_DURATION
 const DURATION = RETURN_END + RECEIVE_DURATION
 const ORB_COLORS = [0xff77c8, 0xffc56a, 0xf8f36e, 0x79f0bb, 0x73caff, 0xc98bff]
 const WHITE = 0xfffaff
-
-function isCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawOrb(
   graphics: GameObjects.Graphics,
@@ -202,7 +191,7 @@ export const heartSwapAnimation: AbilityAnimation = ({
   flip,
   delay
 }: AbilityAnimationArgs) => {
-  if (!isCell(targetX, targetY)) return
+  if (!isBoardCell(targetX, targetY)) return
 
   const [casterX, casterWorldY] = transformEntityCoordinates(
     positionX,

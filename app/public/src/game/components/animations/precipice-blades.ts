@@ -1,12 +1,8 @@
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getBoardBounds, isBoardCell } from "./helpers"
 
 export const precipiceBladesAnimation: AbilityAnimation = ({
   scene,
@@ -16,15 +12,7 @@ export const precipiceBladesAnimation: AbilityAnimation = ({
   delay,
   data
 }) => {
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT
-  )
-    return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
   const startDelay = Math.max(0, delay ?? 0)
@@ -43,17 +31,14 @@ export const precipiceBladesAnimation: AbilityAnimation = ({
     onComplete: () => glow.destroy()
   })
 
-  const [left] = transformEntityCoordinates(0, positionY, flip)
-  const [right] = transformEntityCoordinates(BOARD_WIDTH - 1, positionY, flip)
-  const [, first] = transformEntityCoordinates(positionX, 0, flip)
-  const [, last] = transformEntityCoordinates(positionX, BOARD_HEIGHT - 1, flip)
+  const bounds = getBoardBounds(flip, 4)
   const ruptureDuration = 600
   const fadeDuration = 165
   const effectDuration = ruptureDuration + 35 + fadeDuration
-  const minX = left - CELL_WIDTH / 2 - x + 4
-  const maxX = right + CELL_WIDTH / 2 - x - 4
-  const minY = Math.min(first, last) - CELL_HEIGHT / 2 - y + 4
-  const maxY = Math.max(first, last) + CELL_HEIGHT / 2 - y - 4
+  const minX = bounds.left - x
+  const maxX = bounds.right - x
+  const minY = bounds.top - y
+  const maxY = bounds.bottom - y
   const point = (px: number, py: number): [number, number] => [
     Math.max(minX, Math.min(maxX, px)),
     Math.max(minY, Math.min(maxY, py))
@@ -245,12 +230,7 @@ export const precipiceBladesAnimation: AbilityAnimation = ({
     if (
       !target ||
       typeof target !== "object" ||
-      !Number.isInteger(target.x) ||
-      !Number.isInteger(target.y) ||
-      target.x < 0 ||
-      target.x >= BOARD_WIDTH ||
-      target.y < 0 ||
-      target.y >= BOARD_HEIGHT ||
+      !isBoardCell(target.x, target.y) ||
       (target.x === positionX && target.y === positionY) ||
       (diagonal
         ? Math.abs(target.x - positionX) !== Math.abs(target.y - positionY)

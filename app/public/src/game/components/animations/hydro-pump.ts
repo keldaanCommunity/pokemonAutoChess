@@ -1,10 +1,4 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
@@ -12,7 +6,7 @@ import type {
 import { randomBetween } from "../../../../../utils/random"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getBoardBounds, getImpactCells, getShadowLocalCenter } from "./helpers"
 
 const HydroPumpTravelDuration = 300
 
@@ -65,16 +59,12 @@ function hydroPumpLine({
   const directionX = dx / length
   const directionY = dy / length
   let visibleLength = Infinity
-  const [left, firstRow] = transformEntityCoordinates(0, 0, flip)
-  const [right, lastRow] = transformEntityCoordinates(
-    BOARD_WIDTH - 1,
-    BOARD_HEIGHT - 1,
-    flip
-  )
-  const minX = left - CELL_WIDTH / 2
-  const maxX = right + CELL_WIDTH / 2
-  const minY = Math.min(firstRow, lastRow) - CELL_HEIGHT / 2
-  const maxY = Math.max(firstRow, lastRow) + CELL_HEIGHT / 2
+  const {
+    left: minX,
+    right: maxX,
+    top: minY,
+    bottom: maxY
+  } = getBoardBounds(flip)
   if (directionX > 0)
     visibleLength = Math.min(visibleLength, (maxX - casterX) / directionX)
   if (directionX < 0)
@@ -192,17 +182,8 @@ function hydroPumpSplashAnimation(
   const alignPuddle = () => {
     const shadow = targetSprite?.shadow
     if (!shadow || !puddle.active) return
-    const frame = shadow.frame
-    puddle.setPosition(
-      shadow.x +
-        (frame.x + frame.width / 2 - shadow.displayOriginX) *
-          shadow.scaleX *
-          (shadow.flipX ? -1 : 1),
-      shadow.y +
-        (frame.y + frame.height / 2 - shadow.displayOriginY) *
-          shadow.scaleY *
-          (shadow.flipY ? -1 : 1)
-    )
+    const center = getShadowLocalCenter(shadow)
+    puddle.setPosition(center.x, center.y)
   }
   alignPuddle()
 

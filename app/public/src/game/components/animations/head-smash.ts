@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const CHARGE_DURATION = 180
 const IMPACT_DURATION = 420
@@ -29,17 +29,6 @@ type ImpactRock = {
   spin: number
   delay: number
   color: number
-}
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 function drawCharge(

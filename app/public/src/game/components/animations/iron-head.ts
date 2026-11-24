@@ -1,25 +1,14 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const DURATION = 650
 const TIME_SCALE = 1.25
 const VISIBILITY = 1.3
 const CLAMP = Phaser.Math.Clamp
 const brighten = (alpha: number) => CLAMP(alpha * VISIBILITY, 0, 1)
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawSparkle(
   graphics: GameObjects.Graphics,

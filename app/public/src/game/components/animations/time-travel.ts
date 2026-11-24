@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
+import { BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
@@ -7,6 +7,7 @@ import type {
 import { distanceE } from "../../../../../utils/distance"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const DURATION = 1200
 const clamp = (value: number) => Math.max(0, Math.min(1, value))
@@ -177,12 +178,7 @@ export const timeTravelAnimation: AbilityAnimation = ({
   const seen = new Set<number>()
   for (const cell of data.allies) {
     if (
-      !Number.isInteger(cell?.x) ||
-      !Number.isInteger(cell?.y) ||
-      cell.x < 0 ||
-      cell.x >= BOARD_WIDTH ||
-      cell.y < 0 ||
-      cell.y >= BOARD_HEIGHT ||
+      !isBoardCell(cell?.x, cell?.y) ||
       (cell.x === positionX && cell.y === positionY)
     ) {
       continue

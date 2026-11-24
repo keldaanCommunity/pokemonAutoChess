@@ -1,5 +1,4 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import { AbilityConfigs } from "../../../../../config/game/abilities"
 import type {
   AbilityAnimation,
@@ -8,6 +7,7 @@ import type {
 import { Ability } from "../../../../../types/enum/Ability"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const { Clamp, Linear } = Phaser.Math
 const { chargeDuration, flightDuration } = AbilityConfigs[Ability.FIERY_DANCE]
@@ -16,17 +16,6 @@ const contact = chargeDuration + flightDuration
 function strandFade(u: number) {
   const t = Clamp(Math.min(u, 1 - u) / 0.2, 0, 1)
   return t * t * (3 - 2 * t)
-}
-
-function isCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 function findSprite(args: AbilityAnimationArgs, role: "caster" | "target") {
@@ -73,7 +62,7 @@ function flame(
 }
 
 export const fieryDanceAnimation: AbilityAnimation = (args) => {
-  if (!isCell(args.positionX, args.positionY)) return
+  if (!isBoardCell(args.positionX, args.positionY)) return
   const { scene, flip } = args
   const caster = findSprite(args, "caster")
   const target = findSprite(args, "target")
@@ -82,7 +71,7 @@ export const fieryDanceAnimation: AbilityAnimation = (args) => {
     args.positionY,
     flip
   )
-  const hasTarget = isCell(args.targetX, args.targetY)
+  const hasTarget = isBoardCell(args.targetX, args.targetY)
   const [targetX, targetY] = hasTarget
     ? transformEntityCoordinates(args.targetX, args.targetY, flip)
     : [casterX, casterY]
@@ -212,7 +201,7 @@ export const fieryDanceAnimation: AbilityAnimation = (args) => {
 }
 
 export const fieryDanceHitAnimation: AbilityAnimation = (args) => {
-  if (!isCell(args.targetX, args.targetY)) return
+  if (!isBoardCell(args.targetX, args.targetY)) return
   const { scene } = args
   const target = findSprite(args, "target")
   const [x, y] = transformEntityCoordinates(

@@ -1,15 +1,10 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { CELL_HEIGHT, CELL_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getBoardBounds, getImpactCells, isBoardCell } from "./helpers"
 
 const DURATION = 750
 const IMPACT = 150
@@ -24,27 +19,10 @@ export const bulldozeAnimation: AbilityAnimation = ({
   delay = 0,
   data
 }) => {
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT
-  )
-    return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
-  const [firstX, firstY] = transformEntityCoordinates(0, 0, flip)
-  const [lastX, lastY] = transformEntityCoordinates(
-    BOARD_WIDTH - 1,
-    BOARD_HEIGHT - 1,
-    flip
-  )
-  const left = Math.min(firstX, lastX) - CELL_WIDTH / 2 + 3
-  const right = Math.max(firstX, lastX) + CELL_WIDTH / 2 - 3
-  const top = Math.min(firstY, lastY) - CELL_HEIGHT / 2 + 3
-  const bottom = Math.max(firstY, lastY) + CELL_HEIGHT / 2 - 3
+  const { left, right, top, bottom } = getBoardBounds(flip, 3)
   const caster = pokemonsOnBoard.find(
     (pokemon) =>
       pokemon.active &&

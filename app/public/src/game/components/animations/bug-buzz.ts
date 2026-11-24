@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const LEAD_IN = 65
 const PULSE_COUNT = 3
@@ -13,17 +13,6 @@ const LIME = 0x9cff36
 const MINT = 0x50ffd4
 const PALE = 0xffffb3
 const { Clamp, Linear } = Phaser.Math
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawPulse(
   fx: GameObjects.Graphics,

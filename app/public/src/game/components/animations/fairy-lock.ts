@@ -1,8 +1,8 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 type Point = { x: number; y: number }
 type ChainLink = Point & { angle: number }
@@ -18,17 +18,6 @@ type ImpactPath = {
 type ImpactCurve = Pick<ImpactPath, "start" | "control" | "end">
 
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function isTargetCell(value: unknown): value is TargetCell {
   if (!value || typeof value !== "object" || !("x" in value) || !("y" in value))

@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const LEAD_IN = 100
 const FLIGHT = 210
@@ -10,17 +10,6 @@ const IMPACT = LEAD_IN + FLIGHT
 const DURATION = 850
 const EFFECT_SCALE = 1.3
 const { Clamp, Linear } = Phaser.Math
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawBurst(
   g: GameObjects.Graphics,

@@ -1,25 +1,14 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const TRAVEL = 300
 const RETURN_START = 520
 const RETURN_END = 880
 const DURATION = 1320
 const { Clamp, Linear } = Phaser.Math
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawAntler(graphics: GameObjects.Graphics, side: number) {
   const points = new Phaser.Curves.Path(-38, 6 * side)

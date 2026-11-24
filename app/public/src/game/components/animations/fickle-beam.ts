@@ -1,27 +1,14 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const CHARGE = 480
 const STAGGER = 160
 const TRAVEL = 160
 const IMPACT = 260
 const { Clamp } = Phaser.Math
-
-function isCell(x: unknown, y: unknown): x is number {
-  return (
-    typeof x === "number" &&
-    typeof y === "number" &&
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function chargeOrb(
   g: GameObjects.Graphics,
@@ -49,7 +36,7 @@ export const fickleBeamAnimation: AbilityAnimation = ({
   delay = 0,
   data
 }) => {
-  if (!isCell(positionX, positionY)) return
+  if (!isBoardCell(positionX, positionY)) return
   const payload: unknown = data?.beams
   if (!Array.isArray(payload)) return
 
@@ -65,7 +52,7 @@ export const fickleBeamAnimation: AbilityAnimation = ({
       typeof cell !== "object" ||
       !("x" in cell && "y" in cell) ||
       typeof cell.y !== "number" ||
-      !isCell(cell.x, cell.y)
+      !isBoardCell(cell.x, cell.y)
     )
       continue
     const [x, y] = transformEntityCoordinates(cell.x, cell.y, flip)

@@ -1,5 +1,5 @@
 {
-  "version": "7.0.0-beta.2026-11-27.0",
+  "version": "7.0.0-beta.2026-11-28.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -1259,9 +1259,6 @@
           "frames": 4,
           "repeat": -1
         },
-        "WISH": {
-          "frames": 15
-        },
         "WISP": {
           "frames": 4,
           "fps": 10,
@@ -1309,6 +1306,9 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
+        },
+        "WISH": {
+          "frames": 15
         }
       }
     },

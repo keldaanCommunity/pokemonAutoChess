@@ -1,19 +1,8 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
+import { getShadowWorldCenter, isBoardCell } from "./helpers"
 
 type Point = { x: number; y: number }
 
@@ -76,14 +65,7 @@ export const pummelingPaybackAnimation: AbilityAnimation = ({
   )
   const shadow = casterSprite?.shadow
   const shadowCenter = shadow
-    ? shadow
-        .getWorldTransformMatrix()
-        .transformPoint(
-          (shadow.frame.x + shadow.frame.width / 2 - shadow.displayOriginX) *
-            (shadow.flipX ? -1 : 1),
-          (shadow.frame.y + shadow.frame.height / 2 - shadow.displayOriginY) *
-            (shadow.flipY ? -1 : 1)
-        )
+    ? getShadowWorldCenter(shadow)
     : {
         x: casterSprite?.x ?? casterX,
         y: (casterSprite?.y ?? casterY) + 5

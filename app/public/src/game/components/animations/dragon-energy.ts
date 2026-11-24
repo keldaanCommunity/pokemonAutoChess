@@ -1,11 +1,11 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const TAU = Math.PI * 2
 const CHARGE_DURATION = 260
@@ -27,20 +27,7 @@ type BeamLine = {
 
 function getBeamLine(args: AbilityAnimationArgs): BeamLine | null {
   const { positionX, positionY, targetX, targetY, flip } = args
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT ||
-    !Number.isInteger(targetX) ||
-    !Number.isInteger(targetY) ||
-    targetX < 0 ||
-    targetX >= BOARD_WIDTH ||
-    targetY < 0 ||
-    targetY >= BOARD_HEIGHT
-  ) {
+  if (!isBoardCell(positionX, positionY) || !isBoardCell(targetX, targetY)) {
     return null
   }
 

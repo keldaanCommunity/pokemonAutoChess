@@ -5,7 +5,7 @@ import { AbilityStrategy } from "./ability-strategy"
 export class WishStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     //  Grant 30/60/120 shield and 1 second Protect to the lowest % HP ally.
     const lowestHealthAlly = (
       board.cells.filter(
@@ -17,5 +17,10 @@ export class WishStrategy extends AbilityStrategy {
       lowestHealthAlly.addShield(shield, pokemon, 1, crit)
       lowestHealthAlly.status.triggerProtect(1500)
     }
+    pokemon.broadcastAbility({
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      targetX: lowestHealthAlly?.positionX ?? -1,
+      targetY: lowestHealthAlly?.positionY ?? -1
+    })
   }
 }

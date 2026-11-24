@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { drawEllipseArc, isBoardCell } from "./helpers"
 
 const SPIN_DURATION = 650
 const FIRST_STRIKE_START = 150
@@ -135,41 +135,6 @@ function createIronFist(scene: Phaser.Scene, parent: GameObjects.Container) {
   graphics.lineStyle(1.5, 0x5d5c5d, 0.9)
   graphics.lineBetween(1, 8, 15, 8)
   return graphics
-}
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
-
-function drawEllipseArc(
-  graphics: GameObjects.Graphics,
-  x: number,
-  y: number,
-  radiusX: number,
-  radiusY: number,
-  startAngle: number,
-  endAngle: number,
-  color: number,
-  alpha: number,
-  width: number
-) {
-  graphics.lineStyle(width, color, alpha)
-  graphics.beginPath()
-  for (let step = 0; step <= 20; step++) {
-    const angle = startAngle + ((endAngle - startAngle) * step) / 20
-    const pointX = x + Math.cos(angle) * radiusX
-    const pointY = y + Math.sin(angle) * radiusY
-    if (step === 0) graphics.moveTo(pointX, pointY)
-    else graphics.lineTo(pointX, pointY)
-  }
-  graphics.strokePath()
 }
 
 function drawSpin(

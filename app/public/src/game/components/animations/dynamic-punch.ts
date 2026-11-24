@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { drawEllipseArc, isBoardCell } from "./helpers"
 
 const PUNCHES = [0, 1, 2, 3, 4, 5] as const
 const PUNCH_STAGGER = 85
@@ -10,17 +10,6 @@ const PUNCH_TRAVEL = 155
 const IMPACT_DURATION = 150
 const DURATION = 820
 const CLAMP = Phaser.Math.Clamp
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawImpact(
   graphics: GameObjects.Graphics,
@@ -63,27 +52,6 @@ function drawImpact(
   graphics.strokeCircle(x, y, 5 + progress * 7)
 }
 
-function drawEllipseArc(
-  graphics: GameObjects.Graphics,
-  radiusX: number,
-  radiusY: number,
-  startAngle: number,
-  endAngle: number,
-  color: number,
-  alpha: number
-) {
-  graphics.lineStyle(2.5, color, alpha)
-  graphics.beginPath()
-  for (let step = 0; step <= 16; step++) {
-    const angle = startAngle + ((endAngle - startAngle) * step) / 16
-    const x = Math.cos(angle) * radiusX
-    const y = Math.sin(angle) * radiusY
-    if (step === 0) graphics.moveTo(x, y)
-    else graphics.lineTo(x, y)
-  }
-  graphics.strokePath()
-}
-
 function drawHalo(
   behind: GameObjects.Graphics,
   front: GameObjects.Graphics,
@@ -101,8 +69,32 @@ function drawHalo(
   front.setRotation(time * 0.0014).setScale(pulse)
   behind.fillStyle(0xffad2f, energy * 0.07)
   behind.fillEllipse(0, 0, 48, 25)
-  drawEllipseArc(behind, 28, 15, Math.PI, Math.PI * 2, 0xffb83f, energy * 0.78)
-  drawEllipseArc(front, 28, 15, 0, Math.PI, 0xffe58b, energy * 0.58)
+  drawEllipseArc(
+    behind,
+    0,
+    0,
+    28,
+    15,
+    Math.PI,
+    Math.PI * 2,
+    0xffb83f,
+    energy * 0.78,
+    2.5,
+    16
+  )
+  drawEllipseArc(
+    front,
+    0,
+    0,
+    28,
+    15,
+    0,
+    Math.PI,
+    0xffe58b,
+    energy * 0.58,
+    2.5,
+    16
+  )
 }
 
 export const dynamicPunchAnimation: AbilityAnimation = ({
