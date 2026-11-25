@@ -1955,14 +1955,16 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.Z_RING]: [
     new OnItemDroppedEffect(({ pokemon, player }) => {
-      player.choices.push(
-        new PlayerChoice({
-          type: "zmoves",
-          items: schemaValues(pokemon.types).map(
-            (type) => ZCrystalsBySynergy[type]
-          )
-        })
-      )
+      if (pokemon.canHoldItems && pokemon.items.size < 3) {
+        player.choices.push(
+          new PlayerChoice({
+            type: "zmoves",
+            items: schemaValues(pokemon.types).map(
+              (type) => ZCrystalsBySynergy[type]
+            )
+          })
+        )
+      }
       return true
     }),
     new OnItemUnequippedEffect(({ pokemon }) => {
