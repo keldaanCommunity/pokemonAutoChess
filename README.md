@@ -12,6 +12,36 @@ Source: [https://github.com/keldaanCommunity/pokemonAutoChess](https://github.co
 
 ## Getting started
 
+### Docker (recommended for onboarding)
+
+Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop/),
+then clone or download this repository. On Windows, double-click `start-local.bat`.
+On any platform, run:
+
+```
+docker compose up --build --watch
+```
+
+Once the application is ready, open [http://localhost:9000](http://localhost:9000/)
+and create a local account with an email and password. Docker supplies Node.js,
+MongoDB and a Firebase Auth emulator; no Firebase account, credentials or local
+Node.js installation is needed. The first build downloads dependencies and music
+and packs the game assets, so it may take a while.
+
+The local database is initially populated with the bundled bots. MongoDB data and
+emulated accounts persist between normal stops and restarts. Stop the services
+with Ctrl+C; do not use real credentials in the local emulator. The emulator and
+game ports are exposed only on the local machine. This setup is for development,
+not deployment.
+
+Docker runs `npm run dev` inside the application container. Source changes under
+`app/` are synchronized automatically, except assets and files under
+`app/public/dist/`. Refresh the browser after client changes; rebuild the image
+to apply asset changes. See the
+[Docker guide](docker/README.md) for details and troubleshooting.
+
+### Manual setup
+
 Install [Node LTS](https://nodejs.org/en). (It's recommended to use [nvm](https://github.com/nvm-sh/nvm) to install Node with the proper version)
 
 Install project dependencies:

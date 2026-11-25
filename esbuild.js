@@ -50,6 +50,9 @@ context({
     "process.env.FIREBASE_STORAGE_BUCKET": `"${process.env.FIREBASE_STORAGE_BUCKET}"`,
     "process.env.FIREBASE_MESSAGING_SENDER_ID": `"${process.env.FIREBASE_MESSAGING_SENDER_ID}"`,
     "process.env.FIREBASE_APP_ID": `"${process.env.FIREBASE_APP_ID}"`,
+    "process.env.FIREBASE_AUTH_EMULATOR_URL": JSON.stringify(
+      process.env.FIREBASE_AUTH_EMULATOR_URL || ""
+    ),
     "process.env.DISCORD_SERVER": `"${process.env.DISCORD_SERVER}"`,
     "process.env.MIN_HUMAN_PLAYERS": `"${process.env.MIN_HUMAN_PLAYERS}"`
   }
