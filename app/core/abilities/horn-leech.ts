@@ -11,7 +11,16 @@ export class HornLeechStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    const animation = {
+      skill: pokemon.skill,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: pokemon.orientation,
+      targetX: target.positionX,
+      targetY: target.positionY
+    }
+    super.process(pokemon, board, target, crit, true)
     const damage = ([2, 2, 3, 5][pokemon.stars - 1] ?? 5) * pokemon.atk
     const { takenDamage } = target.handleSpecialDamage(
       damage,
@@ -23,9 +32,17 @@ export class HornLeechStrategy extends AbilityStrategy {
     // heal for 50% of the damage dealt
     const heal = Math.round(takenDamage * 0.5)
     const overheal = min(0)(heal - (pokemon.maxHP - pokemon.hp))
-    pokemon.handleHeal(heal, pokemon, 0, false)
+    const shieldBefore = pokemon.shield
+    const { healReceived } = pokemon.handleHeal(heal, pokemon, 0, false)
     if (overheal > 0) {
       pokemon.addShield(Math.round(overheal * 0.5), pokemon, 0, false)
     }
+    pokemon.broadcastAbility({
+      ...animation,
+      data: {
+        healReceived,
+        shieldReceived: Math.max(0, pokemon.shield - shieldBefore)
+      }
+    })
   }
 }
