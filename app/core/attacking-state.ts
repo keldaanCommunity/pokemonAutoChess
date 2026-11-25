@@ -137,7 +137,11 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
     ? pokemon.speed * speedFactor
     : pokemon.speed
   const attackDuration = 1000 / (0.4 + speed * 0.007)
-  const d = delays[pokemon.index]?.d || 18 // number of frames before hit
+  const configuredDelay = delays[pokemon.index]?.d
+  const d =
+    typeof configuredDelay === "number" && Number.isFinite(configuredDelay)
+      ? configuredDelay
+      : 18 // number of frames before hit
   const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation
 
   const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)
