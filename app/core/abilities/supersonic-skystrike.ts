@@ -1,5 +1,6 @@
 import { AttackType, Team } from "../../types/enum/Game"
 import { distanceC } from "../../utils/distance"
+import { min } from "../../utils/number"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -55,7 +56,7 @@ export class SupersonicSkystrikeStrategy extends AbilityStrategy {
                   mostSurroundedCoordinate.x,
                   mostSurroundedCoordinate.y
                 ) - 1
-              const damage = Math.round(baseDamage - distance * 0.2)
+              const damage = Math.round(baseDamage * min(0)(1 - distance * 0.2))
               cell.value.handleSpecialDamage(
                 damage,
                 board,
