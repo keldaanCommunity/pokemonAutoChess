@@ -1997,6 +1997,7 @@ export const PassiveEffects: Partial<
     new OnItemDroppedEffect(({ item, pokemon, player }) => {
       if (isIn(FossilStones, item)) {
         player.transformPokemon(pokemon, FossilPkmByStone[item])
+        removeFromArray(player.items, item)
         return false // prevent item from being equipped
       }
       return true
@@ -2005,8 +2006,9 @@ export const PassiveEffects: Partial<
 }
 
 registerOnEvolutionHook((pokemonEvolved, player) => {
-  if (pokemonEvolved.passive in PassiveEffects) {
-    PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
+  const passiveEffects = PassiveEffects[pokemonEvolved.passive]
+  if (Array.isArray(passiveEffects)) {
+    passiveEffects.forEach((effect) => {
       if (effect instanceof OnEvolutionEffect) {
         effect.apply({ pokemonEvolved, player })
       }
