@@ -133,7 +133,7 @@ export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
   [Item.BALM_MUSHROOM]: 5
 }
 
-export const ZMOVE_MAX_PP = 200
+export const ZMOVE_MAX_PP = 160
 
 export const FossilPkmByStone: { [stone in FossilStone]: Pkm } = {
   [Item.ARMOR_FOSSIL]: Pkm.SHIELDON,
