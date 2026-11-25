@@ -102,6 +102,7 @@ import {
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
   schoolingAnimation,
+  searingShotAnimation,
   seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
@@ -653,10 +654,7 @@ export const AbilitiesAnimations: {
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: fairyLockAnimation,
   [Ability.STEAM_ERUPTION]: onTargetScale2,
-  [Ability.SEARING_SHOT]: onCaster({
-    depth: DEPTH.ABILITY_BELOW_POKEMON,
-    scale: 3
-  }),
+  [Ability.SEARING_SHOT]: searingShotAnimation,
   [Ability.VOLT_SURGE]: onCaster({
     ability: Ability.PARABOLIC_CHARGE,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -1224,12 +1222,6 @@ export const AbilitiesAnimations: {
     onTarget({ ability: Ability.HEAVY_SLAM, scale: 1, delay: 300 })
   ],
   [Ability.SUNSTEEL_STRIKE]: skyfall({ hitAnim: shakeCamera({}), scale: 1 }),
-  ["COMET_CRASH"]: skyfall({
-    ability: Ability.SUNSTEEL_STRIKE,
-    scale: 0.5,
-    duration: 500,
-    tint: 0x2020ff
-  }),
   [Ability.ACROBATICS]: (args) =>
     projectile({
       startCoords: [args.targetX + 1, args.targetY + 1],
