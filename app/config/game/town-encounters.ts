@@ -121,7 +121,7 @@ type NpcConfig = {
   orientation: Orientation
   name: Pkm
   shiny?: boolean
-  dialog?: string
+  dialog?: string | (() => string)
   dialogTitle?: string
   emotion?: Emotion
   animation?:
@@ -195,7 +195,7 @@ export const NpcsConfig: {
     y: 22 * 48,
     name: Pkm.REGIROCK,
     orientation: Orientation.DOWN,
-    dialog: t("thanks_for_playing"),
+    dialog: () => t("thanks_for_playing"),
     dialogTitle: "Keldaan",
     emotion: Emotion.HAPPY
   },
@@ -206,7 +206,7 @@ export const NpcsConfig: {
     name: Pkm.MAREEP,
     orientation: Orientation.DOWNLEFT,
     animation: PokemonActionState.EAT,
-    dialog: t("thanks_for_playing"),
+    dialog: () => t("thanks_for_playing"),
     dialogTitle: "Curry",
     emotion: Emotion.HAPPY
   },
