@@ -90,12 +90,12 @@ export class PalaeoCollapseStrategy extends AbilityStrategy {
                 (effect) => ally.effects.has(effect)
               )
               const shield = Math.round(
-                ally.maxHP * (FOSSIL_SHIELD_PER_SYNERGY_TIER[synergyTier] ?? 1)
+                ally.baseHP * (FOSSIL_SHIELD_PER_SYNERGY_TIER[synergyTier] ?? 1)
               )
               const attackBonus =
                 FOSSIL_ATK_BUFF_PER_SYNERGY_TIER[synergyTier] ?? 1
               ally.addShield(shield, ally, 0, false)
-              ally.addAttack(pokemon.baseAtk * attackBonus, ally, 0, false)
+              ally.addAttack(ally.baseAtk * attackBonus, ally, 0, false)
               ally.resetCooldown(500)
               ally.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
               SynergyTiers[Synergy.FOSSIL].forEach((e) => {
