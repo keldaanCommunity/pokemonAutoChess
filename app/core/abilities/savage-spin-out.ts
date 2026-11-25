@@ -100,16 +100,6 @@ export class SavageSpinOutStrategy extends AbilityStrategy {
           }
         } else {
           // push as far as possible
-          const damageMultiplier = [5, 5, 5, 10][pokemon.stars - 1] ?? 10
-          const damage = damageMultiplier * pokemon.atk
-          target.handleSpecialDamage(
-            damage,
-            board,
-            AttackType.SPECIAL,
-            pokemon,
-            crit
-          )
-
           if (canBeMoved && farthestEmptyCell) {
             const { x, y } = farthestEmptyCell as Cell
             const initialTargetX = target.positionX
