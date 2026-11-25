@@ -49,7 +49,12 @@ export class BabyBoomStrategy extends AbilityStrategy {
                     pokemon,
                     crit
                   )
-                  if (death && golden && pokemon.player) {
+                  if (
+                    death &&
+                    golden &&
+                    pokemon.player &&
+                    !pokemon.isGhostOpponent
+                  ) {
                     pokemon.player.addMoney(1, true, pokemon)
                     pokemon.count.moneyCount += pokemon.stars
                   }
@@ -64,7 +69,7 @@ export class BabyBoomStrategy extends AbilityStrategy {
 
     for (let i = 0; i < nbEggsOnBench; i++) {
       const golden = chance(goldenEggChance, pokemon)
-      if (pokemon.player) {
+      if (pokemon.player && !pokemon.isGhostOpponent) {
         const egg = giveRandomEgg(pokemon.player, golden)
         if (egg) {
           egg.stacks = getHatchTime(egg, pokemon.player) - 1

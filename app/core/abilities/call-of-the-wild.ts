@@ -44,7 +44,7 @@ export class CallOfTheWildStrategy extends AbilityStrategy {
       pokemon.simulation.addPokemon(mon, coord.x, coord.y, pokemon.team, false)
     })
 
-    if (pokemon.player) {
+    if (pokemon.player && !pokemon.isGhostOpponent) {
       const catchableCandidates: IPokemonData[] = PRECOMPUTED_POKEMONS_PER_TYPE[
         Synergy.WILD
       ]

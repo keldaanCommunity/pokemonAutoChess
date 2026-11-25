@@ -687,7 +687,7 @@ export class MetronomeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    const threshold = Math.pow(Math.random(), 1 + pokemon.luck / 100)
+    const threshold = Math.random() ** (1 + pokemon.luck / 100)
     let rarity = Rarity.COMMON
     if (threshold < 1 / 8) {
       rarity = Rarity.ULTRA
@@ -788,11 +788,11 @@ export class KnowledgeIsPowerStrategy extends AbilityStrategy {
     // use TM field to store the information about the random Z-Move ; it can't logically have both a TM and Knowledge Is Power ability at the same time
     pokemon.skill = randomZMove
     pokemon.tm = randomZMove
-    if (pokemon.refToBoardPokemon) {
+    if (pokemon.refToBoardPokemon && !pokemon.isGhostOpponent) {
       pokemon.refToBoardPokemon.tm = randomZMove
       pokemon.refToBoardPokemon.skill = randomZMove
     }
-    if (pokemon.player) {
+    if (pokemon.player && !pokemon.isGhostOpponent) {
       pokemon.player.experienceManager.addExperience(4)
     }
     AbilityStrategies[randomZMove].process(pokemon, board, target, crit)
