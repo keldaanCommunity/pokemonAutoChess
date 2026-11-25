@@ -1,28 +1,66 @@
 services:
-
   mongo:
     image: mongo:8.2.6-noble
-    restart: always
+    volumes:
+      - mongo-data:/data/db
+      - ./docker/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
+      - ./db-commands/botv2.json:/seed/botv2.json:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --host mongo --eval 'quit(db.adminCommand({ ping: 1 }).ok === 1 ? 0 : 1)'"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+
+  firebase:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.firebase
+    volumes:
+      - firebase-data:/firebase-data
     ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      - "127.0.0.1:9099:9099"
+    healthcheck:
+      test: ["CMD", "node", "-e", "const s = require('net').connect(9099, '127.0.0.1'); s.on('connect', () => { s.destroy(); process.exit(0) }); s.on('error', () => process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+    stop_grace_period: 30s
 
   app:
     build:
       context: .
-      dockerfile: ./Dockerfile
-    restart: always
+      dockerfile: docker/Dockerfile.dev
+    depends_on:
+      mongo:
+        condition: service_healthy
+      firebase:
+        condition: service_healthy
     ports:
-      - 9000:9000
+      - "127.0.0.1:9000:9000"
     environment:
-      FIREBASE_API_KEY: ${FIREBASE_API_KEY}
-      FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
-      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
-      FIREBASE_STORAGE_BUCKET: ${FIREBASE_STORAGE_BUCKET}
-      FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}
-      FIREBASE_APP_ID: ${FIREBASE_APP_ID}
-      FIREBASE_CLIENT_EMAIL: ${FIREBASE_CLIENT_EMAIL}
-      FIREBASE_PRIVATE_KEY: ${FIREBASE_PRIVATE_KEY}
-      MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/dev?authSource=admin"
+      MODE: dev
+      MONGO_URI: mongodb://mongo:27017/dev
+      FIREBASE_API_KEY: local-demo-api-key
+      FIREBASE_AUTH_DOMAIN: localhost
+      FIREBASE_PROJECT_ID: demo-pokemon-auto-chess
+      FIREBASE_APP_ID: local-demo-app
+      FIREBASE_AUTH_EMULATOR_HOST: firebase:9099
+      FIREBASE_AUTH_EMULATOR_URL: http://127.0.0.1:9099
+    develop:
+      watch:
+        - action: sync
+          path: ./app
+          target: /usr/src/app/app
+          ignore:
+            - public/dist/
+            - public/src/assets/
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./package-lock.json
+        - action: rebuild
+          path: ./esbuild.js
+
+volumes:
+  mongo-data:
+  firebase-data:

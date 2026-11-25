@@ -14,8 +14,8 @@ import "firebase/compat/auth"
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router"
-import { FIREBASE_CONFIG } from "../../../../../config"
 import { throttle } from "../../../../../utils/function"
+import { authEmulatorUrl, initializeFirebase } from "../../../firebase"
 import { joinLobbyRoom } from "../../../game/lobby-logic"
 import { useAppDispatch, useAppSelector } from "../../../hooks"
 import { logIn, logOut } from "../../../stores/NetworkStore"
@@ -24,9 +24,7 @@ import "@firebase-oss/ui-styles/dist.min.css"
 import "./login.css"
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(FIREBASE_CONFIG)
-}
+initializeFirebase()
 
 const EmailSignInButton = ({ onClick }: { onClick: () => void }) => {
   const { t } = useTranslation()
@@ -120,9 +118,9 @@ export default function Login() {
           )}
           {emailView === "providers" && (
             <OAuthScreen>
-              <GoogleSignInButton />
+              {!authEmulatorUrl && <GoogleSignInButton />}
               <EmailSignInButton onClick={() => setEmailView("signin")} />
-              <TwitterSignInButton />
+              {!authEmulatorUrl && <TwitterSignInButton />}
             </OAuthScreen>
           )}
         </FirebaseUIProvider>

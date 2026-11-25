@@ -2,7 +2,6 @@ import { Client, type Room } from "@colyseus/sdk"
 import type { User } from "@firebase/auth-types"
 import firebase from "firebase/compat/app"
 import type { server } from "../../app.config.ts"
-import { FIREBASE_CONFIG } from "../../config"
 import type AfterGameState from "../../rooms/states/after-game-state"
 import type GameState from "../../rooms/states/game-state"
 import type LobbyState from "../../rooms/states/lobby-state"
@@ -16,6 +15,7 @@ import type { MaintenanceOrder } from "../../types/enum/MaintenanceOrder"
 import type { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import type { IUserMetadataJSON } from "../../types/interfaces/UserMetadata"
 import { logger } from "../../utils/logger"
+import { initializeFirebase } from "./firebase"
 import type { IBot } from "./models/bot-v2"
 import { LocalStoreKeys, localStore } from "./pages/utils/store.js"
 import store from "./stores"
@@ -31,9 +31,7 @@ logger.info(`Colyseus endpoint: ${endpoint}`)
 export const client = new Client<typeof server>(endpoint)
 
 export function authenticateUser() {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(FIREBASE_CONFIG)
-  }
+  initializeFirebase()
 
   return new Promise<User>((resolve, reject) => {
     firebase.auth().onAuthStateChanged(async (user) => {

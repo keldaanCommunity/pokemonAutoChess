@@ -249,7 +249,12 @@ export const server = defineServer({
               "https://pokev9.52kx.net",
               "https://www.john-auto-chess.com",
               "https://pokemon-auto-spire.com",
-              "https://www.pokemon-auto-legacy.com"
+              "https://www.pokemon-auto-legacy.com",
+              ...(isDevelopment &&
+              process.env.FIREBASE_AUTH_EMULATOR_HOST &&
+              process.env.FIREBASE_AUTH_EMULATOR_URL
+                ? [new URL(process.env.FIREBASE_AUTH_EMULATOR_URL).origin]
+                : [])
             ],
             scriptSrc: [
               "'self'",
@@ -1137,12 +1142,22 @@ export const server = defineServer({
     connect(process.env.MONGO_URI!, {
       socketTimeoutMS: 45000
     })
-    initializeApp({
-      credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID!,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
+    if (process.env.FIREBASE_AUTH_EMULATOR_HOST) {
+      const projectId = process.env.FIREBASE_PROJECT_ID
+      if (process.env.MODE !== "dev" || !projectId?.startsWith("demo-")) {
+        throw new Error(
+          "The Firebase Auth emulator requires MODE=dev and a demo- project ID"
+        )
+      }
+      initializeApp({ projectId })
+    } else {
+      initializeApp({
+        credential: cert({
+          projectId: process.env.FIREBASE_PROJECT_ID!,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, "\n")
+        })
       })
-    })
+    }
   }
 })

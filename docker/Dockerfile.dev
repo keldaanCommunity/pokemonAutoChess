@@ -1,0 +1,14 @@
+FROM node:24.19.0-bookworm-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+COPY edit/assetpack/ ./edit/assetpack/
+RUN npm ci
+COPY app/ ./app/
+COPY gen/check-duplicate-sprites.ts ./gen/check-duplicate-sprites.ts
+COPY esbuild.js tsconfig.json policy.md terms-of-service.md ./
+RUN npm run download-music && npm run assetpack
+EXPOSE 9000
+CMD ["npm", "run", "dev"]

@@ -1,0 +1,8 @@
+FROM node:24.19.0-bookworm-slim
+
+RUN npm install --global firebase-tools@15.37.0
+WORKDIR /firebase
+COPY docker/firebase.json /firebase/firebase.json
+COPY docker/firebase-start.sh /firebase/firebase-start.sh
+EXPOSE 9099
+CMD ["sh", "/firebase/firebase-start.sh"]
