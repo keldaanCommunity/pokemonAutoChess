@@ -2,6 +2,7 @@ import { t } from "i18next"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config"
+import PokemonFactory from "../../../models/pokemon-factory"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
 import { Ability } from "../../../types/enum/Ability"
 import { DungeonPMDO } from "../../../types/enum/Dungeon"
@@ -41,6 +42,11 @@ export function SpriteDebug() {
     }
   })
   const [pkm, setPkm] = useState(scenario.pokemon)
+  const [speed, setSpeed] = useState<number | undefined>(scenario.speed)
+  const defaultSpeed = useMemo(
+    () => PokemonFactory.createPokemonFromName(pkm).speed,
+    [pkm]
+  )
   const [shiny, setShiny] = useState(scenario.shiny)
   const [orientation, setOrientation] = useState(scenario.orientation)
   const [animationType, setAnimType] = useState(scenario.animation)
@@ -106,6 +112,7 @@ export function SpriteDebug() {
         orientation,
         animation: animationType,
         shiny,
+        speed,
         status,
         caster,
         targetMode,
@@ -126,6 +133,7 @@ export function SpriteDebug() {
       orientation,
       payload,
       pkm,
+      speed,
       shiny,
       status,
       targetMode,
@@ -244,6 +252,28 @@ export function SpriteDebug() {
               onChange={(pkm) => {
                 if (pkm) {
                   setPkm(pkm)
+                  setSpeed(undefined)
+                }
+              }}
+            />
+            <label htmlFor="preview-speed">Speed</label>
+            <input
+              id="preview-speed"
+              type="number"
+              min={0}
+              max={300}
+              step={1}
+              value={speed ?? defaultSpeed}
+              aria-label="Speed override"
+              onChange={(event) => {
+                const rawValue = event.currentTarget.value
+                if (rawValue === "") {
+                  setSpeed(undefined)
+                  return
+                }
+                const value = Number(rawValue)
+                if (Number.isFinite(value)) {
+                  setSpeed(Math.max(0, Math.min(300, value)))
                 }
               }}
             />
@@ -601,6 +631,7 @@ export function SpriteDebug() {
         <div className="sprite-viewer-sprite">
           <DebugScene
             pkm={pkm}
+            speed={speed}
             orientation={orientation}
             animationType={animationType}
             shiny={shiny}
