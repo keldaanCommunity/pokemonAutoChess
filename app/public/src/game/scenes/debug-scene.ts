@@ -1005,7 +1005,6 @@ export class DebugScene extends Phaser.Scene {
       }
     }
     showAbilityAnim()
-    this.attackAnimInterval = setInterval(showAbilityAnim, 3000)
   }
 
   shakeCamera(options?: { intensity?: number; duration?: number }) {
