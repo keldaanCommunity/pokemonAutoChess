@@ -906,6 +906,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
           }
           pokemon.types.add(shardType)
           removeFromArray(player.items, item)
+          player.updateSynergies()
           return false
         })
       ]
