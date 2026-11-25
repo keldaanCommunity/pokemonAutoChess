@@ -656,10 +656,6 @@
         "LOCK_ON": {
           "frames": 26
         },
-        "LUSTER_PURGE": {
-          "frames": 3,
-          "repeat": -1
-        },
         "MAGICAL_LEAF": {
           "frames": 9
         },
@@ -702,10 +698,6 @@
           "frames": 2,
           "repeat": -1,
           "fps": 5
-        },
-        "MIST_BALL": {
-          "frames": 3,
-          "repeat": -1
         },
         "MOONBLAST": {
           "frames": 11
@@ -937,15 +929,8 @@
           "frames": 8,
           "repeat": -1
         },
-        "SCHOOLING": {
-          "frames": 4,
-          "repeat": 2
-        },
         "SEARING_SHOT": {
           "frames": 11
-        },
-        "SEED_FLARE": {
-          "frames": 31
         },
         "SEISMIC_TOSS": {
           "frames": 13
@@ -1222,9 +1207,6 @@
         "TRICK_OR_TREAT": {
           "frames": 18
         },
-        "TRI_ATTACK": {
-          "frames": 11
-        },
         "TROP_KICK": {
           "frames": 7
         },
@@ -1336,9 +1318,6 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
-        },
-        "CLOSE_COMBAT": {
-          "frames": 7
         }
       }
     },

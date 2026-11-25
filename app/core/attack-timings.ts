@@ -1,5 +1,5 @@
 import { BASE_PROJECTILE_SPEED } from "../config"
-import { StatusConfigs } from "../config/game/statuses";
+import { StatusConfigs } from "../config/game/statuses"
 import type { IPokemonEntity } from "../types"
 import delays from "../types/delays.json"
 import { distanceC } from "../utils/distance"
@@ -10,12 +10,17 @@ export function getAttackTimings(pokemon: IPokemonEntity): {
   travelTime: number
   attackDuration: number
 } {
-  const speedReductionParalysis = 1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
+  const speedReductionParalysis =
+    1 - StatusConfigs.PARALYSIS.speedReductionPercent / 100
   const speed = pokemon.status.paralysis
     ? pokemon.speed * speedReductionParalysis
     : pokemon.speed
   const attackDuration = 1000 / (0.4 + speed * 0.007)
-  const d = delays[pokemon.index]?.d || 18 // number of frames before hit
+  const configuredDelay = delays[pokemon.index]?.d
+  const d =
+    typeof configuredDelay === "number" && Number.isFinite(configuredDelay)
+      ? configuredDelay
+      : 18 // number of frames before hit
   const t = delays[pokemon.index]?.t || 36 // total number of frames in the animation
 
   const delayBeforeShoot = max(attackDuration / 2)((attackDuration * d) / t)

@@ -1849,7 +1849,6 @@
 		"IRON_DEFENSE": "Kullananla aynı sıradaki tüm müttefik Pokémonlara [20,40,80,160,SP] SHIELD verir.",
 		"METRONOME": "Gücü LUCK değerine bağlı rastgele bir yetenek kullanır. INIMITABLE yetenekler hariçtir.",
 		"SOAK": "Hedefe [20,40,80,160,SP] SPECIAL verir ve tüm müttefik Pokémonlara 10 PP yeniler.",
-		"ORIGIN_PULSE": "Savaş alanında yatay olarak ilerleyen bir dalga, yolundaki tüm düşman Pokémonlara [50,75,100,120,150,SP] SPECIAL verir.",
 		"SEED_FLARE": "Bir şok dalgası yayar, 5 kare yarıçapındaki tüm düşman Pokémonlara [20,25,30,35,70,SP] SPECIAL verir ve SPE_DEF değerlerini [3,3,3,3,6] azaltır.",
 		"IRON_TAIL": "Devasa kuyruğunu savurur, öndeki 3 düşman Pokémon'a vurup geri iter ve kullananın DEF değerinin [100,100,100,200,SP]% kadar SPECIAL verir",
 		"BLAST_BURN": "Tüm ADJACENT düşman Pokémonlara [30,60,120,240,SP] SPECIAL verir.",

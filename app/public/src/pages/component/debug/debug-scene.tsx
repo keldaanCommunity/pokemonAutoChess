@@ -18,6 +18,7 @@ const PREVIEW_ZOOM_STEP = 0.25
 
 export default function DebugSceneContainer({
   pkm = Pkm.RATTATA,
+  speed,
   orientation = Orientation.DOWNLEFT,
   animationType = "Idle",
   shiny,
@@ -30,6 +31,7 @@ export default function DebugSceneContainer({
   width = 100
 }: {
   pkm?: Pkm
+  speed?: number
   orientation?: Orientation
   animationType?: string
   shiny: boolean
@@ -62,6 +64,7 @@ export default function DebugSceneContainer({
   const spriteRequest = useMemo(
     () => ({
       pkm,
+      speed,
       orientation,
       animationType,
       status,
@@ -72,6 +75,7 @@ export default function DebugSceneContainer({
     }),
     [
       pkm,
+      speed,
       orientation,
       animationType,
       status,
@@ -138,7 +142,6 @@ export default function DebugSceneContainer({
     return () => {
       active = false
       if (scene) {
-        clearInterval(scene.attackAnimInterval)
         scene.weatherManager?.clearWeather()
       }
       if (game) {
@@ -155,7 +158,7 @@ export default function DebugSceneContainer({
   useEffect(() => {
     if (loaded) {
       setElapsed(null)
-      const { pkm, orientation, animationType, status, shiny, preview } =
+      const { pkm, speed, orientation, animationType, status, shiny, preview } =
         spriteRequest
       debugScene.current?.updateSprite(
         pkm,
@@ -164,30 +167,37 @@ export default function DebugSceneContainer({
         status,
         shiny,
         preview,
-        () => setReadySprites(spriteRequest)
+        () => setReadySprites(spriteRequest),
+        speed
       )
     }
   }, [loaded, spriteRequest])
 
-  useEffect(() => {
-    if (loadedScene) loadedScene.setPreviewPaused(isAbility && paused && ready)
-  }, [loadedScene, isAbility, paused, ready])
+  const isAttack = animationType === "Attack"
+  const isTimelinePreview = isAbility || isAttack
+  const canControlTimeline =
+    ready && (isAbility || (isAttack && preview.target !== null))
 
   useEffect(() => {
-    if (loadedScene) loadedScene.loopAbility = loop
+    if (loadedScene)
+      loadedScene.setPreviewPaused(isTimelinePreview && paused && ready)
+  }, [loadedScene, isTimelinePreview, paused, ready])
+
+  useEffect(() => {
+    if (loadedScene) loadedScene.loopPreview = loop
   }, [loadedScene, loop])
 
   useEffect(() => {
-    if (!ready || !loadedScene || !isAbility) return
-    loadedScene.replayAbility()
+    if (!ready || !loadedScene || !isTimelinePreview) return
+    loadedScene.replayPreview()
     setElapsed(0)
-  }, [ready, loadedScene, isAbility])
+  }, [ready, loadedScene, isTimelinePreview])
 
   useEffect(() => {
-    if (!ready || !loadedScene || !isAbility || paused) return
-    const timer = setInterval(() => setElapsed(loadedScene.abilityElapsed), 50)
+    if (!ready || !loadedScene || !isTimelinePreview || paused) return
+    const timer = setInterval(() => setElapsed(loadedScene.previewElapsed), 50)
     return () => clearInterval(timer)
-  }, [ready, loadedScene, isAbility, paused])
+  }, [ready, loadedScene, isTimelinePreview, paused])
 
   useEffect(() => {
     if (!loaded) return
@@ -221,7 +231,7 @@ export default function DebugSceneContainer({
   }, [loaded, mapLoading, mapRevision, weather])
 
   const seekTo = (time: number) => {
-    if (!loadedScene || !ready || !isAbility) return
+    if (!loadedScene || !canControlTimeline) return
     setPaused(true)
     loadedScene.setPreviewPaused(true)
     setElapsed(loadedScene.seekPreviewTime(time))
@@ -266,20 +276,20 @@ export default function DebugSceneContainer({
         <button
           type="button"
           id="preview-replay"
-          disabled={!ready || !isAbility}
+          disabled={!canControlTimeline}
           onClick={() => {
-            loadedScene?.replayAbility()
+            loadedScene?.replayPreview()
             setElapsed(0)
           }}
         >
-          Replay ability
+          Replay {isAbility ? "ability" : "attack"}
         </button>
         <button
           type="button"
           id="preview-pause"
-          disabled={!ready || !isAbility}
+          disabled={!canControlTimeline}
           onClick={() => {
-            if (loadedScene) setElapsed(loadedScene.abilityElapsed)
+            if (loadedScene) setElapsed(loadedScene.previewElapsed)
             setPaused(!paused)
           }}
         >
@@ -288,11 +298,11 @@ export default function DebugSceneContainer({
         <button
           type="button"
           id="preview-step"
-          disabled={!ready || !isAbility || !paused}
+          disabled={!canControlTimeline || !paused}
           onClick={() => {
             if (!loadedScene) return
             loadedScene.stepPreviewFrame()
-            setElapsed(loadedScene.abilityElapsed)
+            setElapsed(loadedScene.previewElapsed)
           }}
         >
           Next frame
@@ -301,13 +311,13 @@ export default function DebugSceneContainer({
           id="preview-loop"
           checked={loop}
           onToggle={setLoop}
-          label="Loop ability"
+          label="Loop preview"
           isDark
-          disabled={!isAbility}
+          disabled={!canControlTimeline}
         />
         <output
           id="preview-elapsed"
-          aria-label="Cast elapsed time"
+          aria-label="Preview elapsed time"
           aria-live="off"
         >
           {elapsed === null ? "-" : `${Math.round(elapsed)} ms`}
@@ -364,7 +374,7 @@ export default function DebugSceneContainer({
           <input
             type="range"
             id="preview-timeline"
-            aria-label="Ability timeline"
+            aria-label="Preview timeline"
             min={0}
             max={previewTimelineMax}
             step={previewFrameDuration}
@@ -373,7 +383,7 @@ export default function DebugSceneContainer({
                 previewFrameDuration,
               previewTimelineMax
             )}
-            disabled={!ready || !isAbility}
+            disabled={!canControlTimeline}
             onChange={(event) => seekTo(+event.currentTarget.value)}
           />
           <output id="preview-timeline-time" aria-live="off">
@@ -396,10 +406,10 @@ export default function DebugSceneContainer({
               step={1}
               required
               value={seekTime}
-              disabled={!ready || !isAbility}
+              disabled={!canControlTimeline}
               onChange={(event) => setSeekTime(event.currentTarget.value)}
             />
-            <button type="submit" disabled={!ready || !isAbility}>
+            <button type="submit" disabled={!canControlTimeline}>
               Go
             </button>
           </form>

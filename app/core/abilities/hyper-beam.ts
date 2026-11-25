@@ -1,3 +1,4 @@
+import { AbilityConfigs } from "../../config/game/abilities"
 import { Ability } from "../../types/enum/Ability"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
@@ -19,30 +20,46 @@ export class HyperBeamStrategy extends AbilityStrategy {
     pokemon.broadcastAbility({
       skill: "HYPER_BEAM_CHARGE",
       positionX: pokemon.positionX,
-      positionY: pokemon.positionY
+      positionY: pokemon.positionY,
+      targetX: target.positionX,
+      targetY: target.positionY
     })
 
     pokemon.commands.push(
       new DelayedCommand(() => {
         const damage = [65, 130, 250, 500][pokemon.stars - 1] ?? 500
+        const { positionX, positionY, orientation } = pokemon
+        const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+        const targets: { x: number; y: number }[] = []
+        const { finalX, finalY } = effectInLine(
+          board,
+          pokemon,
+          target,
+          (cell) => {
+            if (cell.value != null && cell.value.team !== pokemon.team) {
+              targets.push({ x: cell.x, y: cell.y })
+              cell.value.handleSpecialDamage(
+                damage,
+                board,
+                AttackType.SPECIAL,
+                pokemon,
+                crit
+              )
+            }
+          }
+        )
         pokemon.broadcastAbility({
           skill: Ability.HYPER_BEAM,
-          targetX: target.positionX,
-          targetY: target.positionY
-        })
-        effectInLine(board, pokemon, target, (cell) => {
-          if (cell.value != null && cell.value.team !== pokemon.team) {
-            cell.value.handleSpecialDamage(
-              damage,
-              board,
-              AttackType.SPECIAL,
-              pokemon,
-              crit
-            )
-          }
+          positionX,
+          positionY,
+          orientation,
+          targetX: finalX,
+          targetY: finalY,
+          ap,
+          data: { targets }
         })
         pokemon.status.triggerFatigue(5000, pokemon, pokemon)
-      }, 1000)
+      }, AbilityConfigs[Ability.HYPER_BEAM].chargeDuration)
     )
   }
 }

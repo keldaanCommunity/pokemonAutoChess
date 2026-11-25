@@ -7,13 +7,29 @@ import { AbilityStrategy } from "./ability-strategy"
 export class TimeTravelStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const cast = {
+      skill: pokemon.skill,
+      positionX: pokemon.positionX,
+      positionY: pokemon.positionY,
+      orientation: pokemon.orientation,
+      targetX: -1,
+      targetY: -1,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    }
     const heal = [25, 25, 25, 50][pokemon.stars - 1] ?? 50
+    const allies: { x: number; y: number }[] = []
     board.forEach((x, y, ally) => {
       if (ally && pokemon.team == ally.team) {
+        if (ally !== pokemon) allies.push({ x, y })
         ally.handleHeal(heal, pokemon, 1, crit)
         ally.status.clearNegativeStatus(ally, pokemon)
       }
+    })
+
+    pokemon.broadcastAbility({
+      ...cast,
+      data: { allies }
     })
 
     if (

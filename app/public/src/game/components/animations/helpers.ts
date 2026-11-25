@@ -27,6 +27,119 @@ export type AbilityCoordinates =
   | "target"
   | "caster"
 
+export function drawBeamImpactArcs(
+  graphics: GameObjects.Graphics,
+  elapsed: number,
+  expansion: number,
+  alpha: number,
+  color: number
+) {
+  for (let ring = 0; ring < 3; ring++) {
+    const radius = (23 + ring * 7) * expansion
+    const center = 4 + ring * 4
+    for (let segment = 0; segment < 3; segment++) {
+      const angle = (segment * Math.PI * 2) / 3 + elapsed / 500 + ring * 0.3
+      const halfArc = 0.76 - ring * 0.04
+      const points: Phaser.Math.Vector2[] = []
+      for (const side of [-1, 1]) {
+        for (let step = 0; step <= 16; step++) {
+          const progress = side === -1 ? step / 16 : 1 - step / 16
+          const theta = angle + halfArc * (progress * 2 - 1)
+          const thickness = ((7 - ring) / 2) * Math.sin(Math.PI * progress)
+          const r = radius + side * thickness
+          points.push(
+            new Phaser.Math.Vector2(
+              center + Math.cos(theta) * r * 0.64,
+              Math.sin(theta) * r
+            )
+          )
+        }
+      }
+      graphics.fillStyle(color, alpha)
+      graphics.fillPoints(points, true)
+    }
+  }
+}
+
+export function drawBoardEdgeMask(
+  mask: GameObjects.Graphics,
+  bounds: Phaser.Geom.Rectangle,
+  dx: number,
+  dy: number
+) {
+  const { left, right, top, bottom } = bounds
+  const feather = 24
+  const xs = [
+    left,
+    left + (dx < -0.000001 ? feather : 0),
+    right - (dx > 0.000001 ? feather : 0),
+    right
+  ]
+  const ys = [
+    top,
+    top + (dy < -0.000001 ? feather : 0),
+    bottom - (dy > 0.000001 ? feather : 0),
+    bottom
+  ]
+  const alpha = (x: number, y: number) =>
+    Math.min(
+      dx < -0.000001 ? (x - left) / feather : 1,
+      dx > 0.000001 ? (right - x) / feather : 1,
+      dy < -0.000001 ? (y - top) / feather : 1,
+      dy > 0.000001 ? (bottom - y) / feather : 1,
+      1
+    )
+  for (let row = 0; row < 3; row++) {
+    for (let column = 0; column < 3; column++) {
+      const x = xs[column]
+      const y = ys[row]
+      const width = xs[column + 1] - x
+      const height = ys[row + 1] - y
+      if (width === 0 || height === 0) continue
+      mask.fillGradientStyle(
+        0xffffff,
+        0xffffff,
+        0xffffff,
+        0xffffff,
+        alpha(x, y),
+        alpha(x + width, y),
+        alpha(x, y + height),
+        alpha(x + width, y + height)
+      )
+      mask.fillRect(x, y, width, height)
+    }
+  }
+}
+
+export function getImpactCells(data: AbilityAnimationArgs["data"]) {
+  const targets: unknown = data.targets
+  if (!Array.isArray(targets)) return []
+  const seen = new Set<number>()
+  return targets
+    .slice(0, BOARD_WIDTH * BOARD_HEIGHT)
+    .filter((cell): cell is { x: number; y: number } => {
+      if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell))
+        return false
+      const { x, y } = cell
+      if (
+        typeof x !== "number" ||
+        typeof y !== "number" ||
+        !Number.isInteger(x) ||
+        !Number.isInteger(y) ||
+        x < 0 ||
+        x >= BOARD_WIDTH ||
+        y < 0 ||
+        y >= BOARD_HEIGHT
+      ) {
+        return false
+      }
+      const key = y * BOARD_WIDTH + x
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+}
+
 export function getSurgeAllies(
   data: AbilityAnimationArgs["data"],
   casterX: number,

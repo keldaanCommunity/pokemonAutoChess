@@ -455,8 +455,10 @@ export default class AnimationManager {
     const shadowKey = `${textureIndex}/${tint}/${animation}/${SpriteType.SHADOW}/${orientation}`
 
     if (
+      pkmSprite.sprite.anims.isPlaying &&
       pkmSprite.sprite.anims.currentAnim?.key === animKey &&
-      pkmSprite.sprite.anims.currentAnim?.repeat === -1
+      pkmSprite.sprite.anims.repeat === -1 &&
+      (config.repeat ?? pkmSprite.sprite.anims.currentAnim.repeat) === -1
     )
       return
 

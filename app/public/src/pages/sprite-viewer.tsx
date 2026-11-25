@@ -2,9 +2,11 @@ import { t } from "i18next"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router"
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../config"
+import PokemonFactory from "../../../models/pokemon-factory"
 import { getPokemonData } from "../../../models/precomputed/precomputed-pokemon-data"
+import { Ability } from "../../../types/enum/Ability"
 import { DungeonPMDO } from "../../../types/enum/Dungeon"
-import { Orientation } from "../../../types/enum/Game"
+import { Orientation, OrientationFlip } from "../../../types/enum/Game"
 import { Pkm } from "../../../types/enum/Pokemon"
 import { Status } from "../../../types/enum/Status"
 import { Weather } from "../../../types/enum/Weather"
@@ -40,9 +42,17 @@ export function SpriteDebug() {
     }
   })
   const [pkm, setPkm] = useState(scenario.pokemon)
+  const [speed, setSpeed] = useState<number | undefined>(scenario.speed)
+  const defaultSpeed = useMemo(
+    () => PokemonFactory.createPokemonFromName(pkm).speed,
+    [pkm]
+  )
   const [shiny, setShiny] = useState(scenario.shiny)
   const [orientation, setOrientation] = useState(scenario.orientation)
   const [animationType, setAnimType] = useState(scenario.animation)
+  const [hyperBeam, setHyperBeam] = useState(
+    scenario.ability === Ability.HYPER_BEAM
+  )
   const [status, setStatus] = useState(scenario.status ?? "")
   const [caster, setCaster] = useState(scenario.caster)
   const [targetMode, setTargetMode] = useState<"auto" | "custom" | "none">(
@@ -85,8 +95,14 @@ export function SpriteDebug() {
     }
   }, [caster, customTarget, orientation, pkm, targetMode])
   const preview = useMemo(
-    () => ({ caster, target, flip, data: payload }),
-    [caster, target, flip, payload]
+    () => ({
+      caster,
+      target,
+      flip,
+      data: payload,
+      ability: hyperBeam ? Ability.HYPER_BEAM : undefined
+    }),
+    [caster, target, flip, payload, hyperBeam]
   )
   const payloadDirty = payloadText !== JSON.stringify(payload, null, 2)
   const shareUrl = useMemo(
@@ -96,6 +112,7 @@ export function SpriteDebug() {
         orientation,
         animation: animationType,
         shiny,
+        speed,
         status,
         caster,
         targetMode,
@@ -103,17 +120,20 @@ export function SpriteDebug() {
         flip,
         map,
         weather,
-        data: payload
+        data: payload,
+        ability: hyperBeam ? Ability.HYPER_BEAM : undefined
       }),
     [
       animationType,
       caster,
       customTarget,
       flip,
+      hyperBeam,
       map,
       orientation,
       payload,
       pkm,
+      speed,
       shiny,
       status,
       targetMode,
@@ -232,6 +252,28 @@ export function SpriteDebug() {
               onChange={(pkm) => {
                 if (pkm) {
                   setPkm(pkm)
+                  setSpeed(undefined)
+                }
+              }}
+            />
+            <label htmlFor="preview-speed">Speed</label>
+            <input
+              id="preview-speed"
+              type="number"
+              min={0}
+              max={300}
+              step={1}
+              value={speed ?? defaultSpeed}
+              aria-label="Speed override"
+              onChange={(event) => {
+                const rawValue = event.currentTarget.value
+                if (rawValue === "") {
+                  setSpeed(undefined)
+                  return
+                }
+                const value = Number(rawValue)
+                if (Number.isFinite(value)) {
+                  setSpeed(Math.max(0, Math.min(300, value)))
                 }
               }}
             />
@@ -251,7 +293,7 @@ export function SpriteDebug() {
               }
             >
               {Object.entries(Orientation).map(([k, v]) => (
-                <option value={v} key={v}>
+                <option value={flip ? OrientationFlip[v] : v} key={v}>
                   {k}
                 </option>
               ))}
@@ -269,6 +311,14 @@ export function SpriteDebug() {
                 </option>
               ))}
             </select>
+
+            <Checkbox
+              id="preview-hyper-beam"
+              checked={hyperBeam}
+              onToggle={setHyperBeam}
+              label="Preview Hyper Beam (TM)"
+              isDark
+            />
 
             <label htmlFor="sprite-viewer-status">Status</label>
             <select
@@ -581,6 +631,7 @@ export function SpriteDebug() {
         <div className="sprite-viewer-sprite">
           <DebugScene
             pkm={pkm}
+            speed={speed}
             orientation={orientation}
             animationType={animationType}
             shiny={shiny}

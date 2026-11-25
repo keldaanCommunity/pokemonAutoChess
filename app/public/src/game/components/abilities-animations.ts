@@ -44,13 +44,21 @@ import {
   accelerockAnimation,
   aquaJetAnimation,
   aquaSwirlAnimation,
+  auroraBeamAnimation,
   auroraVeilAnimation,
   behemothBladeAnimation,
   blizzardAnimation,
+  boomburstAnimation,
   bugBuzzAnimation,
+  bulldozeAnimation,
   closeCombatAnimation,
   darkAuraAnimation,
   diamondStormAnimation,
+  dizzyPunchAnimation,
+  doubleIronBashAnimation,
+  dragonDartsAnimation,
+  dragonEnergyAnimation,
+  drainPunchAnimation,
   dynamaxCannonAnimation,
   dynamaxCannonChargeAnimation,
   dynamicPunchAnimation,
@@ -63,28 +71,47 @@ import {
   fieryDanceHitAnimation,
   fishiousRendAnimation,
   forecastAnimation,
+  foulPlayAnimation,
   futureSightCastAnimation,
   futureSightHitAnimation,
   futureSightSplashAnimation,
+  geomancyAnimation,
   grassySurgeAnimation,
+  headSmashAnimation,
   heartSwapAnimation,
   hiddenPowerAnimation,
   highJumpKickAnimation,
+  hornDrillAnimation,
+  hornLeechAnimation,
   hydroPumpAnimation,
-  hydroPumpSplashAnimation,
+  hyperBeamAnimation,
+  hyperBeamChargeAnimation,
+  ironHeadAnimation,
   lunarBlessingAnimation,
+  lusterPurgeAnimation,
+  lusterPurgeHitAnimation,
   makeItRainAnimation,
+  meteorMashAnimation,
+  mistBallAnimation,
+  mistBallHitAnimation,
   mistySurgeAnimation,
   moongeistBeamAnimation,
   nightDazeAnimation,
+  nightmareAnimation,
   oblivionWingAnimation,
+  originPulseAnimation,
+  overheatAnimation,
   paydayAnimation,
   powerWhipAnimation,
   precipiceBladesAnimation,
   psychicSurgeAnimation,
   pummelingPaybackAnimation,
+  schoolingAnimation,
+  searingShotAnimation,
+  seedFlareAnimation,
   shellSmashAnimation,
   shoreUpAnimation,
+  snipeShotAnimation,
   soulTrapAnimation,
   spiritBreakAnimation,
   starShieldAnimation,
@@ -92,7 +119,10 @@ import {
   storedPowerHitAnimation,
   storedPowerTargetAnimation,
   takeHeartAnimation,
-  tidalWaveAnimation
+  tidalWaveAnimation,
+  timeTravelAnimation,
+  triAttackAnimation,
+  twinBeamAnimation
 } from "./animations"
 import {
   addAbilitySprite,
@@ -146,6 +176,7 @@ export const AbilitiesAnimations: {
   [Ability.METRONOME]: onCasterScale2,
   [Ability.AURORA_VEIL]: auroraVeilAnimation,
   [Ability.LUNAR_BLESSING]: lunarBlessingAnimation,
+  [Ability.TIME_TRAVEL]: timeTravelAnimation,
   [Ability.MAGIC_POWDER]: onCasterScale2,
   [Ability.LANDS_WRATH]: onCasterScale2,
   [Ability.NIGHT_DAZE]: nightDazeAnimation,
@@ -249,7 +280,7 @@ export const AbilitiesAnimations: {
   [Ability.RETURN]: onTarget({ ability: Ability.BRICK_BREAK, scale: 2 }),
   [Ability.BULK_UP]: onCasterScale2,
   [Ability.FLASH]: onCasterScale2,
-  [Ability.METEOR_MASH]: onTarget({ ability: Ability.FLASH }),
+  [Ability.METEOR_MASH]: meteorMashAnimation,
   [Ability.STEEL_WING]: onCasterScale2,
   [Ability.HYPNOSIS]: projectile({
     oriented: true,
@@ -362,7 +393,7 @@ export const AbilitiesAnimations: {
   [Ability.SOAK]: onTargetScale2,
   [Ability.IRON_TAIL]: onTargetScale2,
   [Ability.ICICLE_CRASH]: onTargetScale2,
-  [Ability.DRAIN_PUNCH]: onTarget({ ability: Ability.FOCUS_PUNCH, scale: 2 }),
+  [Ability.DRAIN_PUNCH]: drainPunchAnimation,
   [Ability.LICK]: onTargetScale2,
   [Ability.OCTOLOCK]: onTargetScale2,
   [Ability.SPITE]: onTarget({ ability: Ability.ACID_SPRAY, scale: 2 }),
@@ -384,7 +415,7 @@ export const AbilitiesAnimations: {
   [Ability.FIERY_DANCE]: fieryDanceAnimation,
   ["FIERY_DANCE_HIT"]: fieryDanceHitAnimation,
   [Ability.FIRE_SPIN]: onTarget({ ability: Ability.MAGMA_STORM, scale: 2 }),
-  [Ability.DRAGON_ENERGY]: onTarget({ depth: DEPTH.ABILITY_BELOW_POKEMON }),
+  [Ability.DRAGON_ENERGY]: dragonEnergyAnimation,
   [Ability.GRUDGE_DIVE]: projectile({
     ability: Ability.DRAGON_ENERGY,
     tint: 0xcbc3e3
@@ -446,7 +477,7 @@ export const AbilitiesAnimations: {
     scale: 6,
     depth: DEPTH.ABILITY_BELOW_POKEMON
   }),
-  [Ability.SEED_FLARE]: onCasterScale3,
+  [Ability.SEED_FLARE]: seedFlareAnimation,
   [Ability.MULTI_ATTACK]: onCasterScale4,
   [Ability.ROCK_SLIDE]: onTarget({ scale: 2, origin: [0.5, 0.9] }),
   [Ability.FLAMETHROWER]: onCaster({
@@ -499,22 +530,9 @@ export const AbilitiesAnimations: {
     origin: [0.5, 0],
     scale: [1, 2]
   }),
-  [Ability.TWIN_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [1, 2]
-  }),
-  [Ability.HYPER_BEAM]: onCaster({
-    ability: Ability.PSYBEAM,
-    oriented: true,
-    rotation: -Math.PI / 2,
-    origin: [0.5, 0],
-    scale: [2, 2],
-    tint: 0xffffa0
-  }),
-  ["HYPER_BEAM_CHARGE"]: onCasterScale2,
+  [Ability.TWIN_BEAM]: twinBeamAnimation,
+  [Ability.HYPER_BEAM]: hyperBeamAnimation,
+  ["HYPER_BEAM_CHARGE"]: hyperBeamChargeAnimation,
   [Ability.POWER_GEM]: (args) => {
     const nbGems = args.data.nbGems
     for (let i = 0; i < nbGems; i++) {
@@ -545,7 +563,6 @@ export const AbilitiesAnimations: {
     origin: [0.5, 1]
   }),
   [Ability.HYDRO_PUMP]: hydroPumpAnimation,
-  ["HYDRO_PUMP_SPLASH"]: hydroPumpSplashAnimation,
   [Ability.SWALLOW]: onCaster({
     oriented: true,
     rotation: +Math.PI / 2,
@@ -572,7 +589,7 @@ export const AbilitiesAnimations: {
   }),
   [Ability.FORECAST]: forecastAnimation,
   [Ability.CHATTER]: onCasterScale2,
-  [Ability.BOOMBURST]: onCaster({ ability: Ability.CHATTER, scale: 3 }),
+  [Ability.BOOMBURST]: boomburstAnimation,
   [Ability.BLAST_BURN]: onCasterScale3,
   [Ability.CHARGE]: onCaster({
     scale: 4,
@@ -630,7 +647,7 @@ export const AbilitiesAnimations: {
   [Ability.ACCELEROCK]: accelerockAnimation,
   [Ability.FISHIOUS_REND]: fishiousRendAnimation,
   [Ability.HORN_ATTACK]: onTarget({ ability: Ability.CUT, scale: 3 }),
-  [Ability.HORN_DRILL]: onTarget({ ability: Ability.CUT, scale: 4 }),
+  [Ability.HORN_DRILL]: hornDrillAnimation,
   [Ability.CUT]: [
     onTargetScale3,
     onCaster({
@@ -650,10 +667,7 @@ export const AbilitiesAnimations: {
   [Ability.MUDDY_WATER]: onTarget({ origin: [0.5, 1] }),
   [Ability.FAIRY_LOCK]: fairyLockAnimation,
   [Ability.STEAM_ERUPTION]: onTargetScale2,
-  [Ability.SEARING_SHOT]: onCaster({
-    depth: DEPTH.ABILITY_BELOW_POKEMON,
-    scale: 3
-  }),
+  [Ability.SEARING_SHOT]: searingShotAnimation,
   [Ability.VOLT_SURGE]: onCaster({
     ability: Ability.PARABOLIC_CHARGE,
     depth: DEPTH.ABILITY_BELOW_POKEMON,
@@ -667,10 +681,7 @@ export const AbilitiesAnimations: {
     tint: 0xa0ff90
   }),
   [Ability.BODY_SLAM]: shakeCamera({}),
-  [Ability.BULLDOZE]: [
-    onCaster({ ability: Ability.HEAVY_SLAM, scale: 1.5 }),
-    shakeCamera({})
-  ],
+  [Ability.BULLDOZE]: bulldozeAnimation,
   [Ability.EAR_DIG]: [
     onTarget({ ability: Ability.HEAVY_SLAM, scale: 1 }),
     (args) => {
@@ -832,16 +843,9 @@ export const AbilitiesAnimations: {
   }),
   [Ability.X_SCISSOR]: onTargetScale2,
   [Ability.OBLIVION_WING]: oblivionWingAnimation,
-  [Ability.GEOMANCY]: onCaster({
-    positionOffset: [0, -50],
-    depth: DEPTH.ABILITY_GROUND_LEVEL
-  }),
+  [Ability.GEOMANCY]: geomancyAnimation,
   [Ability.BLIZZARD]: blizzardAnimation,
-  [Ability.OVERHEAT]: onCaster({
-    ability: Ability.FIRE_BLAST,
-    scale: 4,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
-  }),
+  [Ability.OVERHEAT]: overheatAnimation,
   [Ability.FIERY_WRATH]: onCaster({
     ability: Ability.FIRE_BLAST,
     scale: 4,
@@ -901,7 +905,7 @@ export const AbilitiesAnimations: {
     scale: 3,
     ability: Ability.AROMATHERAPY
   }),
-  [Ability.NIGHTMARE]: onCaster({ origin: [0.5, 1] }),
+  [Ability.NIGHTMARE]: nightmareAnimation,
   [Ability.AQUA_TAIL]: projectile({
     ability: Ability.SPIN_OUT,
     tint: 0x80eeff,
@@ -929,10 +933,7 @@ export const AbilitiesAnimations: {
   [Ability.ENTRAINMENT]: onSprite(({ targetSprite }) =>
     targetSprite?.emoteAnimation()
   ),
-  [Ability.SCHOOLING]: onCaster({
-    scale: 4,
-    depth: DEPTH.ABILITY_BELOW_POKEMON
-  }),
+  [Ability.SCHOOLING]: schoolingAnimation,
   [Ability.STONE_AXE]: onTargetScale2,
   [Ability.CRUSH_CLAW]: onTargetScale2,
   [Ability.ICE_SPINNER]: onTarget({ scale: 1 }),
@@ -952,15 +953,9 @@ export const AbilitiesAnimations: {
   [Ability.WOOD_HAMMER]: onTarget({ scale: 1, origin: [0.5, 1] }),
   [Ability.TRICK_OR_TREAT]: onTarget({ origin: [0.5, 1] }),
   [Ability.HEADBUTT]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
-  [Ability.DIZZY_PUNCH]: onTarget({ ability: "FIGHTING_KNOCKBACK" }),
-  [Ability.HEAD_SMASH]: onTarget({
-    ability: "FIGHTING_KNOCKBACK",
-    tint: 0xffffa0
-  }),
-  [Ability.IRON_HEAD]: onTarget({
-    ability: "FIGHTING_KNOCKBACK",
-    tint: 0x8090a0
-  }),
+  [Ability.DIZZY_PUNCH]: dizzyPunchAnimation,
+  [Ability.HEAD_SMASH]: headSmashAnimation,
+  [Ability.IRON_HEAD]: ironHeadAnimation,
   [Ability.DOUBLE_EDGE]: onTarget({
     ability: "FIGHTING_KNOCKBACK",
     scale: 2,
@@ -1086,9 +1081,9 @@ export const AbilitiesAnimations: {
     onTarget({ ability: Ability.SMOG, scale: 1 }),
     onCaster({ ability: Ability.MUD_BUBBLE, scale: 1 })
   ],
-  [Ability.FOUL_PLAY]: onTarget({ ability: Ability.NIGHT_SLASH }),
+  [Ability.FOUL_PLAY]: foulPlayAnimation,
   [Ability.WONDER_ROOM]: onTargetScale4,
-  [Ability.DOUBLE_IRON_BASH]: onTarget({ ability: Ability.FOCUS_PUNCH }),
+  [Ability.DOUBLE_IRON_BASH]: doubleIronBashAnimation,
   [Ability.FOCUS_PUNCH]: onTargetScale2,
   ["FOCUS_PUNCH_CHARGE"]: onCaster({
     ability: "HYPER_BEAM_CHARGE",
@@ -1198,13 +1193,7 @@ export const AbilitiesAnimations: {
     ability: "PUFF_PINK",
     scale: 3
   }),
-  [Ability.ORIGIN_PULSE]: (args) =>
-    projectile({
-      startCoords: [0, args.targetY],
-      endCoords: [8, args.targetY],
-      scale: 3,
-      duration: 1000
-    })(args),
+  [Ability.ORIGIN_PULSE]: originPulseAnimation,
   ["SCALE_SHOT_CHARGE"]: (args) =>
     projectile({
       ability: Ability.SCALE_SHOT,
@@ -1281,12 +1270,6 @@ export const AbilitiesAnimations: {
       })
     ]
   }),
-  ["COMET_CRASH"]: skyfall({
-    ability: Ability.SUNSTEEL_STRIKE,
-    scale: 0.5,
-    duration: 500,
-    tint: 0x2020ff
-  }),
   [Ability.ACROBATICS]: (args) =>
     projectile({
       startCoords: [args.targetX + 1, args.targetY + 1],
@@ -1355,16 +1338,7 @@ export const AbilitiesAnimations: {
     startCoords: "target",
     endCoords: "caster"
   }),
-  [Ability.HORN_LEECH]: [
-    projectile({
-      ability: Ability.SUCTION_HEAL,
-      tint: 0x80ff90,
-      scale: 3,
-      startCoords: "target",
-      endCoords: "caster"
-    }),
-    onTarget({ ability: "FIGHTING_KNOCKBACK", scale: 2, tint: 0x80ff90 })
-  ],
+  [Ability.HORN_LEECH]: hornLeechAnimation,
   [Ability.ANCIENT_POWER]: projectile({ duration: 1000 }),
   [Ability.MOON_DREAM]: projectile({
     startPositionOffset: [0, -100],
@@ -1432,8 +1406,7 @@ export const AbilitiesAnimations: {
       hitAnim: onTarget({ ability: Ability.SHIELDS_DOWN, scale: 1 })
     })({ ...args, ability: "" })
   },
-
-  [Ability.TRI_ATTACK]: projectile({}),
+  [Ability.TRI_ATTACK]: triAttackAnimation,
   [Ability.AURA_WHEEL]: projectile({ scale: 1 }),
   [Ability.PSYCHIC]: projectile({ duration: 1000, scale: 2 }),
   [Ability.PYRO_BALL]: projectile({
@@ -1482,15 +1455,7 @@ export const AbilitiesAnimations: {
       oriented: true,
       rotation: -Math.PI / 2
     })(args),
-  [Ability.DRAGON_DARTS]: projectile({
-    ability: Ability.VENOSHOCK,
-    scale: 1,
-    oriented: true,
-    positionOffset: [0, -30],
-    duration: 400,
-    rotation: -Math.PI / 2,
-    hitAnim: onTarget({ ability: "PUFF_PINK", scale: 1 })
-  }),
+  [Ability.DRAGON_DARTS]: dragonDartsAnimation,
   [Ability.ASTRAL_BARRAGE]: (args) => {
     const pokemonSprite = args.pokemonsOnBoard.find(
       (p) => p.positionX === args.positionX && p.positionY === args.positionY
@@ -1929,13 +1894,7 @@ export const AbilitiesAnimations: {
     duration: 1000,
     tint: 0x301030
   }),
-  [Ability.AURORA_BEAM]: onCaster({
-    ability: Ability.MOONGEIST_BEAM,
-    origin: [0.5, 0],
-    scale: [1, 2],
-    oriented: true,
-    rotation: -Math.PI / 2
-  }),
+  [Ability.AURORA_BEAM]: auroraBeamAnimation,
   [Ability.SPIRIT_SHACKLE]: projectile({
     distance: 8,
     scale: 1,
@@ -1952,20 +1911,10 @@ export const AbilitiesAnimations: {
       tweenProps: { delay: i * 100 }
     })
   ),
-  [Ability.MIST_BALL]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
-  [Ability.LUSTER_PURGE]: projectile({
-    distance: 4,
-    duration: 1000,
-    scale: 1,
-    ease: "Power2",
-    tweenProps: { yoyo: true }
-  }),
+  [Ability.MIST_BALL]: mistBallAnimation,
+  ["MIST_BALL_HIT"]: mistBallHitAnimation,
+  [Ability.LUSTER_PURGE]: lusterPurgeAnimation,
+  ["LUSTER_PURGE_HIT"]: lusterPurgeHitAnimation,
   [Ability.STEALTH_ROCKS]: projectile({
     distance: 1,
     scale: 2,
@@ -2077,38 +2026,7 @@ export const AbilitiesAnimations: {
     })
   },
 
-  [Ability.SNIPE_SHOT]: (args) => {
-    const targetAngle = angleBetween(
-      [args.positionX, args.positionY],
-      [args.targetX, args.targetY]
-    )
-    const orientationAngle = OrientationAngle[args.orientation] ?? 0
-    const coordinates = transformEntityCoordinates(
-      args.positionX,
-      args.positionY,
-      args.flip
-    )
-    projectile({
-      ability: "SNIPE_SHOT/projectile",
-      scale: 3,
-      duration: 1000,
-      rotation: args.flip ? targetAngle : -targetAngle,
-      endCoords: [
-        args.positionX + Math.round(Math.cos(targetAngle) * 10),
-        args.positionY + Math.round(Math.sin(targetAngle) * 10),
-        args.flip
-      ]
-    })(args)
-    staticAnimation({
-      ability: "SNIPE_SHOT/shoot",
-      x: coordinates[0] + Math.round(Math.cos(orientationAngle) * 30),
-      y: coordinates[1] - Math.round(Math.sin(orientationAngle) * 50) - 10,
-      scale: 1,
-      oriented: true,
-      rotation: Math.PI / 2,
-      origin: [0.5, 1]
-    })(args)
-  },
+  [Ability.SNIPE_SHOT]: snipeShotAnimation,
 
   [Ability.GLACIAL_LANCE]: (args) => {
     const targetAngle = angleBetween(

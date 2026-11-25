@@ -10,7 +10,15 @@ export class BulldozeStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
+    const positionX = pokemon.positionX
+    const positionY = pokemon.positionY
+    const orientation = pokemon.orientation
+    const skill = pokemon.skill
+    const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
+    const targetX = target ? target.positionX : -1
+    const targetY = target ? target.positionY : -1
+    const targets: { x: number; y: number }[] = []
     const damage = [25, 45, 85, 160][pokemon.stars - 1] ?? 160
     const speedReduction = 10
     const adjacentsCells = board.getAdjacentCells(
@@ -21,6 +29,7 @@ export class BulldozeStrategy extends AbilityStrategy {
 
     for (const cell of adjacentsCells) {
       if (cell.value && cell.value.team !== pokemon.team) {
+        targets.push({ x: cell.x, y: cell.y })
         const orientation = board.orientation(
           pokemon.positionX,
           pokemon.positionY,
@@ -50,5 +59,15 @@ export class BulldozeStrategy extends AbilityStrategy {
         )
       }
     }
+    pokemon.broadcastAbility({
+      skill,
+      positionX,
+      positionY,
+      orientation,
+      targetX,
+      targetY,
+      ap,
+      data: { targets }
+    })
   }
 }

@@ -553,51 +553,51 @@
     {
       "animation": [
         {
-          "tileid": 83,
+          "tileid": 81,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 227,
+          "tileid": 225,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 371,
+          "tileid": 369,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 515,
+          "tileid": 513,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 659,
+          "tileid": 657,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 803,
+          "tileid": 801,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 947,
+          "tileid": 945,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1091,
+          "tileid": 1089,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1235,
+          "tileid": 1233,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1379,
+          "tileid": 1377,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1523,
+          "tileid": 1521,
           "duration": 216.66666666666666
         }
       ],
-      "id": 83
+      "id": 81
     },
     {
       "animation": [
@@ -651,51 +651,51 @@
     {
       "animation": [
         {
-          "tileid": 81,
+          "tileid": 83,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 225,
+          "tileid": 227,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 369,
+          "tileid": 371,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 513,
+          "tileid": 515,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 657,
+          "tileid": 659,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 801,
+          "tileid": 803,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 945,
+          "tileid": 947,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1089,
+          "tileid": 1091,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1233,
+          "tileid": 1235,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1377,
+          "tileid": 1379,
           "duration": 216.66666666666666
         },
         {
-          "tileid": 1521,
+          "tileid": 1523,
           "duration": 216.66666666666666
         }
       ],
-      "id": 81
+      "id": 83
     },
     {
       "animation": [

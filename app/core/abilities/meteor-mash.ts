@@ -10,8 +10,14 @@ export class MeteorMashStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
-    super.process(pokemon, board, target, crit)
+    super.process(pokemon, board, target, crit, true)
     const nbHits = 3 + (pokemon.status.psychicField ? 1 : 0)
+    pokemon.broadcastAbility({
+      targetX: target.positionX,
+      targetY: target.positionY,
+      ap: Math.round(pokemon.ap * (crit ? pokemon.critPower : 1)),
+      data: { hits: nbHits }
+    })
     const damage = Math.round(
       (pokemon.atk * ([100, 120, 140, 200][pokemon.stars - 1] ?? 200)) / 100
     )
