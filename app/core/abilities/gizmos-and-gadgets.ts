@@ -33,7 +33,7 @@ export class GizmosAndGadgetsStrategy extends AbilityStrategy {
       }
 
       allyToGive.addItem(item)
-      allyToGive.addShield(50, pokemon, 1, true)
+      allyToGive.addShield(50, pokemon, 1, crit)
       pokemon.broadcastAbility({
         targetX: allyToGive.positionX,
         targetY: allyToGive.positionY,

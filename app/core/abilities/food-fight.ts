@@ -45,6 +45,7 @@ export class FoodFightStrategy extends AbilityStrategy {
             new DelayedCommand(() => {
               if (!randomTarget || randomTarget.hp <= 0) return
               if (randomTarget.team === pokemon.team) {
+                randomTarget.handleHeal(50, pokemon, 0, false)
                 randomTarget.simulation.applyDishEffects(
                   dish,
                   randomTarget.refToBoardPokemon as Pokemon,

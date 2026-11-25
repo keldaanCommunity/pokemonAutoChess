@@ -11,7 +11,7 @@ export class OceanicOperettaStrategy extends AbilityStrategy {
     //For the next 5 seconds, each second a wave of water and music hits in a 3-tile radius. All enemies hit are pushed back and receive [10,20,30,60,100,SP] SPECIAL. All allies in the area are cured of BURN and other SOUND allies receive [10,SP] PP.
     super.process(pokemon, board, target, crit, true)
     const nbWaves = 5
-    const nbPP = [10, 20, 30, 60, 100][pokemon.stars - 1] ?? 100
+    const nbPP = 10
     const radius = 3
     const damage = [10, 20, 40, 60, 100][pokemon.stars - 1] ?? 100
 
@@ -52,7 +52,7 @@ export class OceanicOperettaStrategy extends AbilityStrategy {
           )
         } else {
           p.status.healBurn(p)
-          if (p.types.has(Synergy.SOUND)) {
+          if (p.hasSynergy(Synergy.SOUND)) {
             p.addPP(nbPP, pokemon, 1, crit)
           }
         }

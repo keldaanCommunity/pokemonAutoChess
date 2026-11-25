@@ -469,7 +469,7 @@ const smokeBallEffect = ({ pokemon, board }) => {
 }
 
 const ejectButtonEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
-  if (pokemon.hp > 0 && pokemon.hp < 0.4 * pokemon.maxHP) {
+  if (pokemon.hp > 0 && pokemon.hp < 0.3 * pokemon.maxHP) {
     const destination = board.getFarthestTargetCoordinateAvailablePlace(pokemon)
     if (destination) {
       pokemon.broadcastAbility({
