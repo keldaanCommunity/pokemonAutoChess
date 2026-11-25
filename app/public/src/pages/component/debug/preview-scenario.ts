@@ -28,6 +28,7 @@ export type PreviewScenario = {
   orientation: Orientation
   animation: string
   shiny: boolean
+  speed?: number
   status?: PreviewStatus
   caster: PreviewCell
   targetMode: "auto" | "custom" | "none"
@@ -86,6 +87,11 @@ function isScenario(value: unknown): value is PreviewScenario {
     typeof scenario.animation === "string" &&
     PREVIEW_ANIMATIONS.includes(scenario.animation) &&
     typeof scenario.shiny === "boolean" &&
+    (scenario.speed === undefined ||
+      (typeof scenario.speed === "number" &&
+        Number.isFinite(scenario.speed) &&
+        scenario.speed >= 0 &&
+        scenario.speed <= 300)) &&
     (scenario.ability === undefined ||
       scenario.ability === Ability.HYPER_BEAM) &&
     (scenario.status === undefined || isPreviewStatus(scenario.status)) &&
