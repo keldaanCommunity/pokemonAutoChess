@@ -1221,7 +1221,10 @@ export default class Player extends Schema implements IPlayer {
     )
     if (pokemonWithZRing) {
       if (pokemonWithZRing.tm !== Ability.DEFAULT) {
-        this.items.push(TMPerAbility[pokemonWithZRing.tm])
+        const tm = TMPerAbility.get(pokemonWithZRing.tm)
+        if (tm !== undefined) {
+          this.items.push(tm)
+        }
         pokemonWithZRing.tm = Ability.DEFAULT
       }
       pokemonWithZRing.skill = zMove

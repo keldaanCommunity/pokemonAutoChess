@@ -107,7 +107,12 @@ export function carryOverChangedAbilities(
     if (existingTms.length > 0) {
       // give back TM if taking the Z-Move
       pokemonEvolved.tm = Ability.DEFAULT
-      player.items.push(...existingTms.map((tm) => TMPerAbility[tm]))
+      for (const tmAbility of existingTms) {
+        const tm = TMPerAbility.get(tmAbility)
+        if (tm !== undefined) {
+          player.items.push(tm)
+        }
+      }
     }
   } else if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
