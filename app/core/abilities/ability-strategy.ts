@@ -12,7 +12,7 @@ export class AbilityStrategy {
     target: PokemonEntity | null,
     crit: boolean,
     preventDefaultAnim?: boolean
-  ) {
+  ): void | false {
     pokemon.pp = min(0)(pokemon.pp - pokemon.maxPP)
     pokemon.count.ult += 1
 
