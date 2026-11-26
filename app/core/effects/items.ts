@@ -1713,13 +1713,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       const evolutionContext: EvolutionContext = {
-        item,
-        board: player.board,
-        money: player.money,
-        stageLevel: room.state.stageLevel,
-        state: room.state,
-        type: pokemon.evolutionRule.type,
-        megaStoneUsed: false
+        type: EvolutionType.ONE_TIME_EFFECT
       }
       const evolution = EvolutionManager.getEvolution(
         pokemon,
@@ -1734,22 +1728,17 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       ) {
         return false // prevent item from being equipped
       }
-      const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      EvolutionManager.afterEvolve(
-        pokemonEvolved,
+      const pokemonEvolved = EvolutionManager.evolve(
         pokemon,
         player,
         evolutionContext
       )
-
       pokemonEvolved.items.add(item)
       removeFromArray(player.items, item)
       if (pokemonEvolved.items.has(Item.SHINY_CHARM)) {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
-      player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
     })
   ],
