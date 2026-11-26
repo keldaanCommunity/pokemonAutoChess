@@ -900,7 +900,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       type &&
       !nativeTypes.includes(type) &&
       !schemaValues(this.items).some(
-        (heldItem) => SynergyGivenByItem[heldItem] === type
+        (heldItem) => SynergyGivenByItem[heldItem] === type && heldItem !== item
       )
     ) {
       this.types.delete(type)
