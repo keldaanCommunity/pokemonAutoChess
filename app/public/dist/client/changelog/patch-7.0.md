@@ -231,6 +231,11 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Fixed swapping a Mantyke copying its items and stacking two units on one cell
 - Fixed a case of dish duplication on count-based evolutions during a fight
 - Fixed Spiky Shield dealing damage to target on cast by mistake
+- Fixed Metal Burst's block bonus scaling with its base damage
+- Fixed AP scaling on BALL damage when thrown
+- Fixed SMOKE_BALL and ROCK_SALT SHIELD values
+- SCOPE_LENS and ELECTIRIZER effects now work ON_HIT and require that the attack successfully lands as intended
+- Fixed some cases where immunity to board effects wasn't working
 
 # Misc
 
