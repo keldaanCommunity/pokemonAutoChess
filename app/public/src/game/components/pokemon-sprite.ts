@@ -535,7 +535,6 @@ export default class PokemonSprite extends DraggableObject {
         )
         onComplete?.()
       } else {
-        projectile.anims.play({ key: attackSprite })
         const coordinatesTarget = transformEntityCoordinates(
           targetX,
           targetY,
@@ -557,7 +556,10 @@ export default class PokemonSprite extends DraggableObject {
             onComplete?.()
           },
           onStop: () => projectile.destroy(),
-          onStart: () => projectile.setVisible(true)
+          onStart: () => {
+            projectile.setVisible(true)
+            projectile.anims.play({ key: attackSprite })
+          }
         })
       }
     }
