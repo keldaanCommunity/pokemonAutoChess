@@ -1342,7 +1342,7 @@
 		"POWER_LENS": "De hoeveelheid SPECIAL die met SPE_DEF is verminderd, wordt teruggegeven aan de aanvaller",
 		"SHELL_BELL": "Holder geneest voor 33% van alle toegebrachte schade",
 		"BLUE_ORB": "Elke 3 aanvallen van de houder ontketent een kettingbliksem die terugkaatst naar de 2 sluitende vijanden, wat 10 SPECIAL oplevert en 15 PP verbrandt",
-		"SCOPE_LENS": "Critical hits stelen 10 PP van het doelwit.",
+		"SCOPE_LENS": "Critical hits stelen 10 PP van het doelwit ON_HIT.",
 		"STAR_DUST": "Krijg na het casten 50% van de maximale PP als SHIELD",
 		"GREEN_ORB": "Houder en aangrenzende bondgenoten krijgen elke 2 seconden 5% van hun maximale HP terug",
 		"DEEP_SEA_TOOTH": "De aanvallen van de houder herstellen 5 extra PP",

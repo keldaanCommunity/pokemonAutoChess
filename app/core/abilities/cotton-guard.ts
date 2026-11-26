@@ -23,7 +23,11 @@ export class CottonGuardStrategy extends AbilityStrategy {
         EffectEnum.COTTON_BALL,
         pokemon.simulation
       )
-      if (cell.value && cell.value.team !== pokemon.team) {
+      if (
+        cell.value &&
+        cell.value.team !== pokemon.team &&
+        !cell.value.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+      ) {
         const duration = EffectConfigs.COTTON_BALL.durationSeconds * 1000
         cell.value.status.triggerSleep(duration, cell.value)
       }

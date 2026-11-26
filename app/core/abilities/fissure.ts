@@ -1,4 +1,5 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
+import { SynergyConfigs } from "../../config/game/synergies"
 import { AttackType } from "../../types/enum/Game"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -60,9 +61,11 @@ export class FissureStrategy extends AbilityStrategy {
         const blueHoleIndex = enemy.positionY * BOARD_WIDTH + enemy.positionX
         const redHoleIndex =
           (BOARD_HEIGHT - 1 - enemy.positionY) * BOARD_WIDTH + enemy.positionX
+        const { maxDepth } = SynergyConfigs.GROUND
         const hasFullyDugHole =
-          pokemon.simulation.bluePlayer?.groundHoles[blueHoleIndex] === 5 ||
-          pokemon.simulation.redPlayer?.groundHoles[redHoleIndex] === 5
+          pokemon.simulation.bluePlayer?.groundHoles[blueHoleIndex] ===
+            maxDepth ||
+          pokemon.simulation.redPlayer?.groundHoles[redHoleIndex] === maxDepth
 
         pokemon.broadcastAbility({
           targetX: enemy.positionX,

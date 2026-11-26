@@ -694,7 +694,8 @@ export default class Status extends Schema implements IStatus {
 
       if (
         pkm.effects.has(EffectEnum.POISON_GAS) &&
-        !pkm.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
+        !pkm.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) &&
+        pkm.hasSynergy(Synergy.POISON) === false
       ) {
         // reapply poison stack on every poison tick if in poison gas
         const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000

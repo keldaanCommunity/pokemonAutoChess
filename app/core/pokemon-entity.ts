@@ -892,7 +892,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     const type = SynergyGivenByItem[item]
     const nativeTypes = getPokemonData(this.name).types
-    if (type && !nativeTypes.includes(type)) {
+    if (
+      type &&
+      !nativeTypes.includes(type) &&
+      !schemaValues(this.items).some(
+        (heldItem) => SynergyGivenByItem[heldItem] === type && heldItem !== item
+      )
+    ) {
       this.types.delete(type)
       SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
@@ -962,6 +968,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     totalTakenDamage,
+    isAttackSuccessful,
     isTripleAttack,
     hasAttackKilled,
     crit
@@ -973,6 +980,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
     totalTakenDamage: number
+    isAttackSuccessful: boolean
     isTripleAttack: boolean
     hasAttackKilled: boolean
     crit: boolean
@@ -993,6 +1001,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         totalTakenDamage,
+        isAttackSuccessful,
         isTripleAttack,
         hasAttackKilled,
         crit
@@ -1116,7 +1125,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(EffectEnum.TOXIC)) {
         poisonChance = EffectConfigs.TOXIC.poisonChance.value / 100
       }
-      if (target.player) {
+      if (this.simulation.weather === Weather.SMOG && target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -= nbSmellyClays * 0.15
       }
