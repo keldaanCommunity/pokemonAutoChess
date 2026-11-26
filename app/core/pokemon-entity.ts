@@ -406,10 +406,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     } else {
       let specialDamage =
         damage + (damage * (attacker && apBoost ? attacker.ap : 0)) / 100
-      if (attacker && attacker.effects.has(EffectEnum.DOUBLE_DAMAGE)) {
-        specialDamage *= 2
-        attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
-      }
       if (
         (this.effects.has(EffectEnum.STRANGE_STEAM) ||
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&

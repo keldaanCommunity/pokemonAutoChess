@@ -22,8 +22,8 @@ export class DragonClawStrategy extends AbilityStrategy {
     let lowestHpTarget: PokemonEntity | undefined
     for (const cell of cells) {
       if (cell.value && cell.value.team !== pokemon.team) {
-        if (cell.value.maxHP < lowestHp) {
-          lowestHp = cell.value.maxHP
+        if (cell.value.hp < lowestHp) {
+          lowestHp = cell.value.hp
           lowestHpTarget = cell.value
         }
       }

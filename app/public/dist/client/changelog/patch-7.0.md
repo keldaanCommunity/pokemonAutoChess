@@ -137,7 +137,8 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Change Precipice Blades to: Deal [25,50,100,120,200,SP] SPECIAL to all enemy Pokémon in the same row and column as the user. If the user is facing diagonally, hit both diagonals instead.
 - Nerf High horsepower (Mudbray): ability cooldown 100ms → 300ms
 - Change Regidraco to be able to cast while not in melee range
-
+- Helping Hand now doubles all damage for 2 seconds instead of the damage of the next ability.
+- Drampa AP gain is now part of Dragon Pulse instead of a passive.
 
 # Changes to Items
 
@@ -231,6 +232,27 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Fixed swapping a Mantyke copying its items and stacking two units on one cell
 - Fixed a case of dish duplication on count-based evolutions during a fight
 - Fixed Spiky Shield dealing damage to target on cast by mistake
+- Fixed Lunar Blessing not curing negative status on full-health allies.
+- Corrected Iron Tail description damage tiers.
+- Fixed Lock On converting all damage to TRUE instead of adding extra TRUE.
+- Fixed Lands Wrath not scaling both damage parts with AP.
+- Fixed Thunderclap Press hitting allies on its path.
+- Corrected Twineedle poison chance description.
+- Fixed Dragon Claw targeting the enemy with the highest max HP instead of the lowest current HP.
+- Corrected Torch Song AP gain description.
+- Fixed Chloroblast recoil scaling with AP and crit.
+- Fixed Grudge Dive recoil scaling with AP and crit.
+- Fixed Acid Armor stacks being reduced by ranged attacks.
+- Fixed Axe Kick damage and PP burn tiers.
+- Corrected City Shuttle damage description.
+- Fixed Plasma Fist damage at tier 4.
+- Fixed Anchor Shot not doing damage when there is no free cell around to drag the target.
+- Fixed Soul Trap not forcing the target to attack the user.
+- Fixed Spark bouncing up to 10 times instead of 4.
+- Fixed Dragon Rage shield scaling with AP and repeated casts before the end of the effect not converting the whole SHIELD and not granting a new fresh shield.
+- Fixed Firestarter path being computed after knockback.
+- Corrected Cotton Guard DEF gain description.
+- Corrected Plasma Flash description to start at 5 flashes.
 
 # Misc
 

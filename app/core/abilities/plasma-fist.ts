@@ -11,7 +11,7 @@ export class PlasmaFistStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const damage = [60, 90, 120, 160, 320][pokemon.stars - 1] ?? 320
+    const damage = [60, 90, 120, 180, 360][pokemon.stars - 1] ?? 360
     const { takenDamage } = target.handleSpecialDamage(
       damage,
       board,

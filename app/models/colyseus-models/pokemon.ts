@@ -7992,7 +7992,6 @@ export class Drampa extends Pokemon {
   maxPP = 80
   range = 3
   skill = Ability.DRAGON_PULSE
-  passive = Passive.DRAMPA
 }
 
 export class MegaDrampa extends Pokemon {

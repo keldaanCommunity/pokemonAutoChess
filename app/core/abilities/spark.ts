@@ -46,7 +46,7 @@ export class SparkStrategy extends AbilityStrategy {
               crit,
               true
             )
-            if (nbBounce < 10) {
+            if (nbBounce < 4) {
               // safety to avoid infinite loops
               propagate(newTarget, nbBounce + 1)
             }
