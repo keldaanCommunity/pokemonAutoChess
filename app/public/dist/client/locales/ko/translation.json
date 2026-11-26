@@ -2371,7 +2371,8 @@
 		"LEECH_SEED": "상대에게 씨앗을 심어 5초 동안 초 당 최대 HP의 [4,8,12,16,SP]%만큼의 SPECIAL를 입힌다. 입힌 데미지만큼 가장 HP 비율이 낮은 같은 편이 회복한다. ",
 		"MEGA_DRAIN": "ADJACENT 상대에게 입힌 [10,20,40,80,150,SP]의 SPECIAL의 절반을 흡수한다.",
 		"OBLIVION_WING": "가장 많은 상대를 적중시키도록 빔을 발사해 각각 [30,50,70,100,SP]의 SPECIAL를 입힌다. 입힌 데미지의 절반을 흡수한다.",
-		"DARK_AURA": "2칸 반경의 상대에게 [10,SP] + ATK의 [50,SP]%만큼 SPECIAL 를 입힌다. 15 HP + 데미지의 75%를 흡수한다."
+		"DARK_AURA": "2칸 반경의 상대에게 [10,SP] + ATK의 [50,SP]%만큼 SPECIAL 를 입힌다. 15 HP + 데미지의 75%를 흡수한다.",
+		"PRECIPICE_BLADES": "자신과 같은 가로줄과 세로줄에 위치한 모든 상대에게 [25,50,100,120,200,SP]의 SPECIAL를 입힌다. 상대와 대각선으로 바라보고 있다면 기술이 대각선으로 발동한다."
 	},
 	"effect": {
 		"STAMINA": "지구력",
@@ -2535,7 +2536,7 @@
 		"TILLER": "깊이에 따라 DEF와 SPE_DEF를 +{{defensePerDepth}}에서 +{{maxDefense}}까지, 최대 깊이에서 ATK +{{attackAtMaxDepth}}",
 		"DIGGER": "깊이에 따라 DEF와 SPE_DEF를 +{{defensePerDepth}}에서 +{{maxDefense}}까지, 최대 깊이에서 ATK +{{attackAtMaxDepth}}",
 		"DRILLER": "깊이에 따라 DEF와 SPE_DEF를 +{{defensePerDepth}}에서 +{{maxDefense}}까지, 최대 깊이에서 ATK +{{attackAtMaxDepth}}",
-		"DEEP_MINER": "완전히 판 각 행마다 DEF와 SPE_DEF를 {{defensePerFullRow}} 추가 획득하고, 보드의 자기 진영을 모두 팠을 때 ATK +{{attackAtFullBoard}}",
+		"DEEP_MINER": "완전히 판 각 가로줄의 갯수만큼 DEF와 SPE_DEF를 {{defensePerFullRow}} 추가 획득하고, 보드의 자기 진영을 절반 정도 완전히 파냈다면 ATK +{{attackAtFullBoard}}",
 		"POISONOUS": "{{poisonChance}}% 확률로 POISONED 상태로 만듦",
 		"VENOMOUS": "{{poisonChance}}% 확률로 POISONED 상태로 만듦, POISONED 상태의 최대 스택 +{{maxStacksBonus}}",
 		"TOXIC": "{{poisonChance}}% 확률로 POISONED 상태로 만듦, POISONED 상태의 최대 스택 +{{maxStacksBonus}}",
