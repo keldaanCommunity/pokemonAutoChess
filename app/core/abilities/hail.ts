@@ -33,9 +33,11 @@ export class HailStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        enemyHit.effects.add(EffectEnum.HAIL)
-        const duration = EffectConfigs.HAIL.durationSeconds * 1000
-        enemyHit.status.triggerFreeze(duration, enemyHit, pokemon)
+        if (!enemyHit.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)) {
+          enemyHit.effects.add(EffectEnum.HAIL)
+          const duration = EffectConfigs.HAIL.durationSeconds * 1000
+          enemyHit.status.triggerFreeze(duration, enemyHit, pokemon)
+        }
       }
       pokemon.broadcastAbility({
         skill: "HAIL_PROJECTILE",
