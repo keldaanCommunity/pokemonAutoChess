@@ -86,6 +86,7 @@ export class DebugScene extends Phaser.Scene {
     sprite: Phaser.GameObjects.Sprite
     animation: AttackSprite
     ranged: boolean
+    animationFrameRate: number
     shootTime: number
     travelTime: number
     startX: number
@@ -94,6 +95,8 @@ export class DebugScene extends Phaser.Scene {
     targetY: number
     launched: boolean
     hit: boolean
+    impactShown: boolean
+    animationCompletionObservedAt?: number
   }
 
   static readonly VIEW_WIDTH = (BOARD_WIDTH + 1) * CELL_WIDTH
@@ -786,6 +789,16 @@ export class DebugScene extends Phaser.Scene {
       scale = [1.5, 1.5]
       tint = 0x80ff60
     }
+    const visualTravelTime = ranged ? Math.max(250, travelTime) : 0
+    let animationFrameRate = 0
+    if (ranged) {
+      const animation = this.anims.get(attackSprite)
+      if (!animation) {
+        throw new Error(`Missing attack animation: ${attackSprite}`)
+      }
+      animationFrameRate =
+        animation.getTotalFrames() / (visualTravelTime / 1000)
+    }
     const [startX, startY] = transformEntityCoordinates(
       ranged ? sprite.positionX : targetX,
       ranged ? sprite.positionY : targetY,
@@ -812,14 +825,16 @@ export class DebugScene extends Phaser.Scene {
       sprite: effect,
       animation: attackSprite,
       ranged,
+      animationFrameRate,
       shootTime: Math.max(0, delayBeforeShoot - 20),
-      travelTime: ranged ? Math.max(250, travelTime) : 0,
+      travelTime: visualTravelTime,
       startX,
       startY: startY - 10,
       targetX: endX,
       targetY: endY,
       launched: false,
-      hit: false
+      hit: false,
+      impactShown: false
     }
   }
 
@@ -830,7 +845,15 @@ export class DebugScene extends Phaser.Scene {
     if (!effect.launched) {
       effect.launched = true
       effect.sprite.setVisible(true)
-      effect.sprite.anims.play(effect.animation)
+      effect.sprite.anims.play(
+        effect.ranged
+          ? {
+              key: effect.animation,
+              frameRate: effect.animationFrameRate,
+              repeat: 0
+            }
+          : effect.animation
+      )
     }
     const progress =
       effect.travelTime === 0
@@ -844,7 +867,18 @@ export class DebugScene extends Phaser.Scene {
     }
     if (progress >= 1 && !effect.hit) {
       effect.hit = true
-      if (effect.ranged) effect.sprite.setVisible(false)
+    }
+    if (
+      effect.ranged &&
+      effect.hit &&
+      !effect.sprite.anims.isPlaying &&
+      effect.animationCompletionObservedAt === undefined
+    ) {
+      effect.animationCompletionObservedAt = elapsed
+    }
+    const showImpact = () => {
+      if (effect.impactShown) return
+      effect.impactShown = true
       displayHit(
         this,
         PokemonAnimations[PkmByIndex[caster.pokemon.index]]?.hitSprite ??
@@ -853,6 +887,17 @@ export class DebugScene extends Phaser.Scene {
         effect.targetY,
         caster.flip
       )
+    }
+    if (!effect.ranged && effect.hit) {
+      showImpact()
+    }
+    if (
+      effect.ranged &&
+      effect.animationCompletionObservedAt !== undefined &&
+      elapsed > effect.animationCompletionObservedAt
+    ) {
+      effect.sprite.setVisible(false)
+      showImpact()
     }
   }
 
