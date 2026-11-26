@@ -69,7 +69,7 @@ import {
   OnResurrectionEffect,
   OnSpawnEffect
 } from "./effects/effect"
-import { ItemEffects } from "./effects/items"
+import { ItemEffects, RunningShoesOnMoveEffect } from "./effects/items"
 import { PassiveEffects } from "./effects/passives"
 import {
   FireHitEffect,
@@ -943,6 +943,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
   }
 
+  markItemStatsStolen(speedLost: number, attackLost: number) {
+    this.items.forEach((item) => this.itemStatsStolen.add(item))
+    this.getEffects(RunningShoesOnMoveEffect).forEach((effect) =>
+      effect.removeStolenBonuses(speedLost, attackLost)
+    )
+  }
+
   moveTo(x: number, y: number, board: Board, forcedDisplacement: boolean) {
     if (forcedDisplacement && !this.canBeMoved) return
     const target = board.getEntityOnCell(x, y)
@@ -1558,6 +1565,8 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         effect.count = 0
       } else if (effect instanceof FlyingProtectionEffect) {
         effect.flyingProtection = 0 // prevent flying effects twice
+      } else if (effect instanceof RunningShoesOnMoveEffect) {
+        effect.resetBonuses()
       }
     })
 
