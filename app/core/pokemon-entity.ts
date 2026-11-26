@@ -896,7 +896,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     const type = SynergyGivenByItem[item]
     const nativeTypes = getPokemonData(this.name).types
-    if (type && !nativeTypes.includes(type)) {
+    if (
+      type &&
+      !nativeTypes.includes(type) &&
+      !schemaValues(this.items).some(
+        (heldItem) => SynergyGivenByItem[heldItem] === type
+      )
+    ) {
       this.types.delete(type)
       SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
