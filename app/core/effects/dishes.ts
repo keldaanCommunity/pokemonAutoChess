@@ -192,6 +192,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
       entity.addShield(100, entity, 0, false)
 
       if (
+        !entity.isGhostOpponent &&
         entity.player &&
         entity.items.has(Item.GOLDEN_NANAB_BERRY) &&
         entity.items.has(Item.GOLDEN_PINAP_BERRY) &&
@@ -407,6 +408,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
   ],
   [Item.RAINBOW_BEAN]: [
     new OnSpawnEffect((entity, player) => {
+      const rewardPlayer = entity.isGhostOpponent ? undefined : player
       const activeSynergies = player
         ? player.synergies.getActiveSynergies()
         : schemaValues(entity.types)
@@ -419,8 +421,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             entity.addShield(10 * entity.items.size, entity, 0, false)
             break
           case Synergy.BABY:
-            if (player) {
-              player.goldenEggChance += 0.1
+            if (rewardPlayer) {
+              rewardPlayer.goldenEggChance += 0.1
             }
             break
           case Synergy.AQUATIC:
@@ -451,7 +453,7 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             entity.addAttack(5, entity, 0, false)
             break
           case Synergy.FLORA:
-            player?.collectMulch(1)
+            rewardPlayer?.collectMulch(1)
             break
           case Synergy.FLYING:
             entity.getEffects(FlyingProtectionEffect).forEach((ef) => {
@@ -465,8 +467,8 @@ export const DishEffects: Record<(typeof Dishes)[number], Effect[]> = {
             entity.addDodgeChance(0.05, entity, 0, false)
             break
           case Synergy.GOURMET:
-            if (player) {
-              player.items.push(pickRandomIn(Sweets))
+            if (rewardPlayer) {
+              rewardPlayer.items.push(pickRandomIn(Sweets))
             }
             break
           case Synergy.GRASS:

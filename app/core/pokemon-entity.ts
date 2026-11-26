@@ -272,7 +272,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get isGhostOpponent(): boolean {
-    return this.simulation.isGhostBattle && this.team === Team.RED_TEAM
+    return this.simulation.isGhostBattle && this.baseTeam === Team.RED_TEAM
   }
 
   isTargettableBy(
@@ -1718,7 +1718,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.GLUTTON) {
       this.applyStat(Stat.HP, 10, true)
-      if (this.refToBoardPokemon.hp > 750) {
+      if (!this.isGhostOpponent && this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
     }
