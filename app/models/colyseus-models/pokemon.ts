@@ -127,6 +127,8 @@ export class Pokemon extends Schema implements IPokemon {
   baseMaxPP: number = 100
   baseAtk: number = 1
   cook?: Cook
+  // Only set for units containing copies that did not come from the shop pool.
+  shopPoolCopies?: number
 
   constructor(name: Pkm, shiny = false, emotion = Emotion.NORMAL) {
     super()

@@ -62,7 +62,7 @@ import {
 import { schemaValues } from "../utils/schemas"
 import type Player from "./colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "./colyseus-models/pokemon"
-import { getPokemonBaseline } from "./pokemon-factory"
+import { getPokemonBaseline, getPokemonPoolCopies } from "./pokemon-factory"
 import {
   getPokemonData,
   getRegularsTier1
@@ -273,24 +273,13 @@ export default class Shop {
     )
   }
 
-  releasePokemon(pkm: Pkm, player: Player, state: GameState) {
+  releasePokemon(pokemon: Pkm | Pokemon, player: Player, state: GameState) {
+    const pkm = typeof pokemon === "string" ? pokemon : pokemon.name
     const { stars, rarity, regional } = getPokemonData(pkm)
     const baseline = getPokemonBaseline(pkm)
-    let entityNumber = stars >= 3 ? 9 : stars === 2 ? 3 : 1
-
-    if (pkm === Pkm.CHERRIM_SUNLIGHT || pkm === Pkm.ANNIHILAPE) {
-      entityNumber = 3
-    }
-    if (pkm === Pkm.MOTHIM) {
-      entityNumber = 1
-    }
-
-    const duo = Object.entries(PkmDuos).find(([_key, duo]) => duo.includes(pkm))
-    if (duo) {
-      // duos increase the number in pool by one if selling both
-      // but it is negligible and cannot be abused
-      entityNumber = Math.ceil(entityNumber / 2)
-    }
+    const entityNumber =
+      (typeof pokemon === "string" ? undefined : pokemon.shopPoolCopies) ??
+      getPokemonPoolCopies(pkm, stars)
 
     if (
       regional &&

@@ -1,7 +1,7 @@
 import { MapSchema } from "@colyseus/schema"
 import { Emotion, type IPlayer, type PkmCustom } from "../types"
 import type { Stat } from "../types/enum/Game"
-import { Pkm, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
+import { Pkm, PkmDuos, PkmFamily, PkmIndex } from "../types/enum/Pokemon"
 
 import { logger } from "../utils/logger"
 import type Player from "./colyseus-models/player"
@@ -106,4 +106,14 @@ export function getPokemonBaseline(name: Pkm) {
 
 export function isSameFamily(pkm1: Pkm, pkm2: Pkm): boolean {
   return getPokemonBaseline(pkm1) === getPokemonBaseline(pkm2)
+}
+
+export function getPokemonPoolCopies(pkm: Pkm, stars: number): number {
+  let copies = stars >= 3 ? 9 : stars === 2 ? 3 : 1
+  if (pkm === Pkm.CHERRIM_SUNLIGHT || pkm === Pkm.ANNIHILAPE) copies = 3
+  if (pkm === Pkm.MOTHIM) copies = 1
+
+  // A duo occupies one pool entry, split across its two Pokémon.
+  const duo = Object.values(PkmDuos).some((members) => members.includes(pkm))
+  return duo ? Math.ceil(copies / 2) : copies
 }

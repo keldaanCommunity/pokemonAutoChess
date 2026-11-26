@@ -9,6 +9,7 @@ export class Wanderer extends Schema {
   @type("string") type: WandererType
   @type("string") behavior: WandererBehavior
   @type("string") data: string = ""
+  fromShopPool: boolean
 
   constructor({
     id,
@@ -16,7 +17,8 @@ export class Wanderer extends Schema {
     shiny,
     type,
     behavior,
-    data
+    data,
+    fromShopPool = true
   }: {
     id: string
     pkm: Pkm
@@ -24,6 +26,7 @@ export class Wanderer extends Schema {
     type: WandererType
     behavior: WandererBehavior
     data?: string
+    fromShopPool?: boolean
   }) {
     super()
     this.id = id
@@ -32,5 +35,6 @@ export class Wanderer extends Schema {
     this.type = type
     this.behavior = behavior
     this.data = data ?? ""
+    this.fromShopPool = fromShopPool
   }
 }

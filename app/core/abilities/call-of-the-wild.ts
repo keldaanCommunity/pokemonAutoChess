@@ -64,7 +64,8 @@ export class CallOfTheWildStrategy extends AbilityStrategy {
           pokemon.player.spawnWanderingPokemon({
             pkm: spawn.name,
             behavior: WandererBehavior.SPECTATE,
-            type: WandererType.CATCHABLE
+            type: WandererType.CATCHABLE,
+            fromShopPool: false
           })
         }
       }

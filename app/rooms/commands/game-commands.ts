@@ -276,6 +276,7 @@ export class OnPokemonCatchCommand extends Command<
       }
     } else if (wanderer.type === WandererType.CATCHABLE) {
       const pokemon = PokemonFactory.createPokemonFromName(wanderer.pkm, player)
+      if (!wanderer.fromShopPool) pokemon.shopPoolCopies = 0
       const freeSpaceOnBench = getFreeSpaceOnBench(player.board)
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
@@ -290,7 +291,7 @@ export class OnPokemonCatchCommand extends Command<
         player.board.set(pokemon.id, pokemon)
         pokemon.onAcquired(player)
         this.room.checkEvolutionsAfterPokemonAcquired(playerId)
-      } else {
+      } else if (wanderer.fromShopPool) {
         this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
       }
     } else if (wanderer.type === WandererType.OUTLAW) {
@@ -994,7 +995,7 @@ export class OnSellPokemonCommand extends Command<
 
     player.takeZMoveChoice(pokemonId)
     player.board.delete(pokemonId)
-    this.state.shop.releasePokemon(pokemon.name, player, this.state)
+    this.state.shop.releasePokemon(pokemon, player, this.state)
 
     const sellPrice = getSellPrice(pokemon, this.state.specialGameRule)
     player.addMoney(sellPrice, false, null)
@@ -1486,7 +1487,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             this.state.shop.releasePokemon(pkm, player, this.state)
           })
           player.board.forEach((pokemon) => {
-            this.state.shop.releasePokemon(pokemon.name, player, this.state)
+            this.state.shop.releasePokemon(pokemon, player, this.state)
           })
         }
         player.alive = false
@@ -1927,9 +1928,11 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       })
       this.computeIncome(isPVE, this.state.specialGameRule)
       this.state.players.forEach((player: Player) => {
-        // catchables were drawn from the pool when they spawned
         player.wanderers.forEach((wanderer) => {
-          if (wanderer.type === WandererType.CATCHABLE) {
+          if (
+            wanderer.type === WandererType.CATCHABLE &&
+            wanderer.fromShopPool
+          ) {
             this.state.shop.releasePokemon(wanderer.pkm, player, this.state)
           }
         })
