@@ -1997,7 +1997,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LUCKY_PUNCH]: [
     // ON_ATTACK, holder has [5,LK]% chance to trigger a super attack that can kick the target out of the board.
     new OnAttackEffect(({ pokemon, target, board }) => {
-      if (!target) return
+      if (!target || !chance(0.05, pokemon)) return
       let farthestEmptyCell: Cell | null = null
       let blocked = false
       effectInOrientation(board, pokemon, target, (cell) => {
@@ -2011,7 +2011,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
       const canBeMoved = farthestEmptyCell != null && target.canBeMoved
       const willEject =
-        chance(0.05, pokemon) &&
         canBeMoved &&
         !blocked &&
         !target.status.resurrection &&
