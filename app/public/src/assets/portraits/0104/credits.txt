@@ -1,4 +1,4 @@
 2023-01-23 08:38:10.181997	CHUNSOFT	CUR	Unspecified	Normal,Sad,Happy,Crying,Inspired,Pain,Shouting,Surprised,Angry,Teary-Eyed,Worried
-2023-09-30 01:11:07.345894	FELIS_LICHT	CUR	PMDCollab_2	Sigh,Stunned,Dizzy,Determined
+2023-09-30 01:11:07.345894	<@!273594331577974785>	CUR	PMDCollab_2	Sigh,Stunned,Dizzy,Determined
 2023-09-30 03:21:45.124378	<@!593113130213572610>	OLD	PMDCollab_2	Joyous
 2023-10-10 04:45:19.754504	<@!356635814668664832>	CUR	PMDCollab_2	Joyous,Sigh,Shouting,Stunned,Dizzy,Determined

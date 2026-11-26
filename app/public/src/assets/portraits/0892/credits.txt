@@ -1,2 +1,4 @@
 2021-01-12 23:47:25.601346	EZERART	OLD	PMDCollab_1	Normal
 2023-06-19 04:09:05.752094	<@!356635814668664832>	CUR	PMDCollab_2	Normal,Determined
+2026-11-17 02:20:04.497875	<@!276369635304275968>	CUR	CC_BY-NC_4	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried
+2026-11-17 19:27:42.853690	<@!276369635304275968>	CUR	CC_BY-NC_4	Sad,Inspired,Sigh,Stunned,Dizzy,Worried

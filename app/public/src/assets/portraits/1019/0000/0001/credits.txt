@@ -1,2 +1,4 @@
 2023-12-30 04:38:22.736511	<@!356635814668664832>	CUR	PMDCollab_2	Normal,Normal^
 2025-04-29 19:45:22.559693	<@!356635814668664832>	CUR	CC_BY-NC_4	Sad,Special1,Sad^,Special1^,Pain,Shouting,Pain^,Shouting^,Angry,Special2,Angry^,Special2^,Special0,Special0^
+2026-05-31 22:29:08.901522	<@!356635814668664832>	CUR	CC_BY-NC_4	Sad,Joyous,Special1,Sad^,Joyous^,Special1^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Surprised,Stunned,Pain^,Surprised^,Stunned^,Angry,Teary-Eyed,Dizzy,Special2,Angry^,Teary-Eyed^,Dizzy^,Special2^,Worried,Determined,Special0,Worried^,Determined^,Special0^
+2026-06-26 23:45:36.702393	<@!356635814668664832>	CUR	CC_BY-NC_4	Sigh

@@ -1,1 +1,2 @@
 2022-03-04 13:08:02.233229	<@!217899432652308480>	CUR	PMDCollab_1	Normal,Happy,Pain,Angry,Worried,Sad,Crying,Shouting,Teary-Eyed,Determined,Joyous,Inspired,Surprised,Dizzy,Special0,Special1,Sigh,Stunned,Special2,Special3
+2025-12-31 06:02:53.005565	<@!331183966508023808>	CUR	CC_BY-NC_4	Joyous
