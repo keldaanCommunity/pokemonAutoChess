@@ -87,13 +87,10 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
     }
 
     // final attack
-    // using room timeout instead of DelayedCommand so that pokemon
-    // go back to the board even if battle is finished
-    // TODO: check if it's okay to apply this logic after simulation ended
+    // Use the room clock so the landing can clear skydiving even if combat ends.
     let finalX = BOARD_WIDTH / 2,
       finalY = BOARD_HEIGHT / 2
-    pokemon.simulation.room.clock.setTimeout(() => {
-      if (enemies.length === 0) return
+    pokemon.simulation.room.clock.setTimeout(() => {      
       const highestHpEnemy = [...enemies].reduce((prev, curr) =>
         prev.hp > curr.hp ? prev : curr
       )
@@ -115,7 +112,7 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
       })
 
       pokemon.simulation.room.clock.setTimeout(() => {
-        if (pokemon.simulation.finished) return
+        if (pokemon.simulation.finished || pokemon.hp <= 0) return
         pokemon.status.skydiving = false
         const closestAvailableCell = board.getClosestAvailablePlace(
           finalX,

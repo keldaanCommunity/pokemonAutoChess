@@ -84,7 +84,10 @@ import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
-import { MegaEvolutionHandler } from "../evolution-logic/mega-evolution"
+import {
+  isMegaPokemon,
+  MegaEvolutionHandler
+} from "../evolution-logic/mega-evolution"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -1710,38 +1713,32 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.RARE_CANDY]: [
     new OnItemDroppedEffect(({ pokemon, player, room, item }) => {
       const evolutionContext: EvolutionContext = {
-        item,
-        board: player.board,
-        money: player.money,
-        stageLevel: room.state.stageLevel,
-        state: room.state,
-        type: pokemon.evolutionRule.type,
-        megaStoneUsed: false
+        type: EvolutionType.ONE_TIME_EFFECT
       }
       const evolution = EvolutionManager.getEvolution(
         pokemon,
         player,
         evolutionContext
       )
-      if (!evolution || evolution === Pkm.DEFAULT || pokemon.items.size >= 3) {
+      if (
+        !evolution ||
+        evolution === Pkm.DEFAULT ||
+        isMegaPokemon(evolution) ||
+        pokemon.items.size >= 3
+      ) {
         return false // prevent item from being equipped
       }
-      const pokemonEvolved = player.transformPokemon(pokemon, evolution)
-      EvolutionManager.afterEvolve(
-        pokemonEvolved,
+      const pokemonEvolved = EvolutionManager.evolve(
         pokemon,
         player,
         evolutionContext
       )
-
       pokemonEvolved.items.add(item)
       removeFromArray(player.items, item)
       if (pokemonEvolved.items.has(Item.SHINY_CHARM)) {
         pokemonEvolved.shiny = true
       }
 
-      room.checkEvolutionsAfterItemAcquired(player.id, pokemon, item)
-      player.updateSynergies()
       return false // prevent default logic after item equipped due to pokemon having evolved
     })
   ],
@@ -1997,7 +1994,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   [Item.LUCKY_PUNCH]: [
     // ON_ATTACK, holder has [5,LK]% chance to trigger a super attack that can kick the target out of the board.
     new OnAttackEffect(({ pokemon, target, board }) => {
-      if (!target) return
+      if (!target || !chance(0.05, pokemon)) return
       let farthestEmptyCell: Cell | null = null
       let blocked = false
       effectInOrientation(board, pokemon, target, (cell) => {
@@ -2011,7 +2008,6 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
       const canBeMoved = farthestEmptyCell != null && target.canBeMoved
       const willEject =
-        chance(0.05, pokemon) &&
         canBeMoved &&
         !blocked &&
         !target.status.resurrection &&
