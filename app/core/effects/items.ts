@@ -1917,7 +1917,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         pokemon.removeItem(Item.BALL)
       } else {
         // If no FIELD ally with a free item slot at sight, throws the ball to the furthest enemy instead,
-        // dealing [30,SP]% of user's SPEEED as PHYSICAL
+        // dealing [30,SP]% of user's SPEED as PHYSICAL
 
         const enemies = board.cells.filter<PokemonEntity>(
           (p): p is PokemonEntity => p != null && p.team !== pokemon.team
@@ -1938,7 +1938,9 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         }
 
         if (furthestEnemy) {
-          const damage = Math.round(0.3 * pokemon.speed)
+          const damage = Math.round(
+            0.3 * pokemon.speed * (1 + pokemon.ap / 100)
+          )
           const travelTime = Math.round(
             (maxDistance * 1000) / (4 * (1 + pokemon.speed / 100))
           )
