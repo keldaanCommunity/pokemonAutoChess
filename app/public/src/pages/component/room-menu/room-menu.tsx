@@ -30,7 +30,7 @@ export default function RoomMenu() {
   const [showRoomSelectionMenu, setShowRoomSelectionMenu] =
     useState<boolean>(false)
 
-  const requestRoom = throttle(async function (gameMode: GameMode) {
+  const requestRoom = throttle(async (gameMode: GameMode) => {
     if (rooms.lobby) {
       rooms.lobby.send(Transfer.REQUEST_ROOM, gameMode)
       setShowRoomSelectionMenu(false)

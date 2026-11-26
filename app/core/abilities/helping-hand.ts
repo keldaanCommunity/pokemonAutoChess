@@ -10,7 +10,7 @@ export class HelpingHandStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const nbAlliesBuffed = 2
     const shield = [30, 60, 100, 200][pokemon.stars - 1] ?? 200
-    const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
+    const allies: ({ pkm: PokemonEntity; distance: number })[] = []
     board.forEach((x, y, cell) => {
       if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
         allies.push({

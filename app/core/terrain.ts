@@ -112,7 +112,7 @@ export default class Terrain {
 
   createPermutationTable(seed: number) {
     const rng = this.newRandom(seed)
-    const p = new Array<number>()
+    const p: number[] = []
     let i: number
     let j: number
     let k: number

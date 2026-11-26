@@ -1700,7 +1700,7 @@ export default class PokemonSprite extends DraggableObject {
       radius: 50,
       ease: Phaser.Math.Easing.Quartic.Out,
       duration: 3000,
-      onUpdate: function (tween) {
+      onUpdate: (tween) => {
         Phaser.Actions.RotateAroundDistance(
           flowerTrick.getAll(),
           { x: 0, y: 0 },
@@ -1708,7 +1708,7 @@ export default class PokemonSprite extends DraggableObject {
           circle.radius
         )
       },
-      onComplete: function () {
+      onComplete: () => {
         flowerTrick.destroy(true)
       }
     })
@@ -1843,7 +1843,7 @@ export function loadCompressedAtlas(
           delete lazyLoadingRequests[index]
           resolve(index)
         })
-        // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+        // @ts-expect-error: there is an error in phaser types, the second parameter can be an object
         scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
       }
     )

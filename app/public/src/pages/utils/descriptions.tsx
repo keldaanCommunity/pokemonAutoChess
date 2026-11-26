@@ -274,7 +274,7 @@ export function addIconsToDescription(
               } else if (scaleType === "LUCK") {
                 value = roundToNDigits(
                   max(100)(
-                    Math.pow(Number(v) / 100, 1 - (params?.luck ?? 0) / 100) *
+                    (Number(v) / 100) ** (1 - (params?.luck ?? 0) / 100) *
                       100
                   ),
                   nbDigits
@@ -455,7 +455,7 @@ export function addIconsToHtml(
             } else if (scaleType === "LUCK") {
               value = roundToNDigits(
                 max(100)(
-                  Math.pow(Number(v) / 100, 1 - (stats?.luck ?? 0) / 100) * 100
+                  (Number(v) / 100) ** (1 - (stats?.luck ?? 0) / 100) * 100
                 ),
                 nbDigits
               )

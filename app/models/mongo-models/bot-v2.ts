@@ -77,7 +77,7 @@ const bot = new Schema(
   },
   {
     toJSON: {
-      transform: function (doc, ret: any) {
+      transform: (doc, ret: any) => {
         delete ret._id
         delete ret.__v
         if (ret.steps)

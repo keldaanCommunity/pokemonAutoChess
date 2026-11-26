@@ -10,7 +10,7 @@ export class IcicleMissileStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit, true)
     const damage = 50
     const count = [1, 2, 3, 5][pokemon.stars - 1] ?? 5
-    const rank = new Array<PokemonEntity>()
+    const rank: PokemonEntity[] = []
     board.forEach((x: number, y: number, tg: PokemonEntity | undefined) => {
       if (tg && pokemon.team != tg.team) {
         rank.push(tg)

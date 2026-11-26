@@ -33,7 +33,7 @@ export class ArmorCannonStrategy extends AbilityStrategy {
           pokemon,
           crit
         )
-        const possibleTargets = new Array<PokemonEntity>()
+        const possibleTargets: PokemonEntity[] = []
         board.forEach((x, y, entity) => {
           if (entity && entity.team !== pokemon.team && entity !== target) {
             possibleTargets.push(entity)

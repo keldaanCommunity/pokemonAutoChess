@@ -167,10 +167,10 @@ if (process.env.NODE_APP_INSTANCE) {
     presence: new RedisPresence(process.env.REDIS_URI),
     driver: new RedisDriver(process.env.REDIS_URI),
     publicAddress: `${port}.${process.env.SERVER_NAME}`,
-    selectProcessIdToCreateRoom: async function (
+    selectProcessIdToCreateRoom: async (
       roomName: string,
       clientOptions: any
-    ) {
+    ) => {
       if (roomName === "lobby") {
         const lobbies = await matchMaker.query({ name: "lobby" })
         if (lobbies.length !== 0) {

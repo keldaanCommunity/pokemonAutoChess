@@ -940,7 +940,7 @@ function getPatchRuns(
       run = null
       continue
     }
-    const taper = Math.pow(Math.sin(Math.PI * progress), 0.35)
+    const taper = Math.sin(Math.PI * progress) ** 0.35
     const tearStrength = (0.3 + (1 - taper) * 0.9) * 0.6
     const tearTop = (patch.noise[k % PATCH_NOISE_SAMPLES] - 0.5) * tearStrength
     const tearBottom =
@@ -1183,7 +1183,7 @@ function drawLatticeShell(
   const glow = clamp01((time - DARKEN_START - 100) / 300)
   const crack = clamp01((time - CRACK_START) / CRACK_DURATION)
   const glowWidth = SEAM_GLOW_WIDTH * glow * (1 - clamp01((crack - 0.3) / 0.5))
-  const crackWidth = 0.022 + Math.pow(clamp01((crack - 0.7) / 0.3), 2) * 0.35
+  const crackWidth = 0.022 + clamp01((crack - 0.7) / 0.3) ** 2 * 0.35
   const flickerFrame = Math.floor(time / BOLT_FLICKER_MS)
   const half = size / 2
   for (let row = 0; row < size; row++) {
