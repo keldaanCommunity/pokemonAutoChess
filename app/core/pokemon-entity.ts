@@ -1162,7 +1162,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(target.critChance / 100, target)
-      const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
+      const defFactor = [0.6, 0.8, 1, 2][target.stars - 1] ?? 2
       const damage = Math.round(
         target.def *
           defFactor *
