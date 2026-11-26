@@ -1782,7 +1782,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           type: EvolutionType.STACK
         })
       }
-      if (pokemon.evolutionRule.type === EvolutionType.STACK) {
+      if (pokemon.evolutionRule.type === EvolutionType.STATE) {
         EvolutionManager.tryEvolve(pokemon, player, {
           type: EvolutionType.STATE,
           state: this.state
