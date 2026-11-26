@@ -143,3 +143,7 @@
   margin: 0 0.25em;
   line-height: 40px;
 }
+
+#detail-weather .description-icon img {
+  vertical-align: -8px;
+}

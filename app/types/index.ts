@@ -1,5 +1,5 @@
 import type { ArraySchema, MapSchema, SetSchema } from "@colyseus/schema"
-import type { Board } from "../core/board"
+import type { AtlasNodeId } from "../config/game/atlas"
 import type Dps from "../core/dps"
 import type { Effect as EffectClass } from "../core/effects/effect"
 import type { PokemonEntity } from "../core/pokemon-entity"
@@ -7,14 +7,12 @@ import type Count from "../models/colyseus-models/count"
 import type ExperienceManager from "../models/colyseus-models/experience-manager"
 import type { IPokemonRecord } from "../models/colyseus-models/game-record"
 import type HistoryItem from "../models/colyseus-models/history-item"
-import type Player from "../models/colyseus-models/player"
 import type { PlayerChoice } from "../models/colyseus-models/player-choice"
 import type { Pokemon } from "../models/colyseus-models/pokemon"
 import type { PokemonCustoms } from "../models/colyseus-models/pokemon-customs"
 import type Status from "../models/colyseus-models/status"
 import type Synergies from "../models/colyseus-models/synergies"
 import type { Effects } from "../models/effects"
-import type GameRoom from "../rooms/game-room"
 import type { AttackSprite } from "./Animation"
 import type { EvolutionRule } from "./EvolutionRules"
 import type { Ability } from "./enum/Ability"
@@ -28,12 +26,11 @@ import type {
   Orientation,
   PokemonActionState,
   Rarity,
-  Stat,
   Team
 } from "./enum/Game"
 import type { Item } from "./enum/Item"
 import type { Passive } from "./enum/Passive"
-import type { Pkm } from "./enum/Pokemon"
+import type { Pkm, PkmProposition } from "./enum/Pokemon"
 import type { Synergy } from "./enum/Synergy"
 import type { Title } from "./enum/Title"
 import type { TradeStatus } from "./enum/TradeStatus"
@@ -105,6 +102,7 @@ export enum Transfer {
   SET_ROLE = "SET_ROLE",
   GIVE_TITLE = "GIVE_TITLE",
   CHOICE = "CHOICE",
+  ATLAS_NODE = "ATLAS_NODE",
   KICK = "KICK",
   DELETE_ROOM = "DELETE_ROOM",
   BAN = "BAN",
@@ -368,22 +366,24 @@ export interface IExperienceManager {
   maxLevel: number
 }
 
+export interface IAtlasManager {
+  emera: number
+  unlockedNodes: SetSchema<AtlasNodeId>
+  legendaries: ArraySchema<PkmProposition | "">
+  symbols: ArraySchema<Synergy>
+}
+
 export interface ISimulation {
-  room: GameRoom
-  board: Board
   id: string
-  weather: Weather
-  bluePlayer: IPlayer | undefined
-  redPlayer: IPlayer | undefined
-  blueEffects: Set<EffectEnum>
-  redEffects: Set<EffectEnum>
+  bluePlayerId: string
+  redPlayerId: string
   blueTeam: MapSchema<PokemonEntity>
   redTeam: MapSchema<PokemonEntity>
   blueDpsMeter: MapSchema<Dps>
   redDpsMeter: MapSchema<Dps>
-  bluePlayerId: string
-  redPlayerId: string
-  broadcastToSpectators(transfer: Transfer, data: any): void
+  started: boolean
+  weather: Weather
+  winnerId: string
 }
 
 export interface ISimulationCommand {
@@ -419,100 +419,6 @@ export interface IDps {
 export interface IPokemonEntity {
   simulation: ISimulation
   refToBoardPokemon: IPokemon
-  get player(): IPlayer | undefined
-  broadcastAbility(options: any): void
-  applyStat(stat: Stat, value: number): void
-  addAbilityPower(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addLuck(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addPP(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ): void
-  addAttack(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addSpeed(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addMaxHP(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addShield(
-    value: number,
-    caster: IPokemonEntity,
-    apBoost: number,
-    crit: boolean
-  ): void
-  addDefense(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addSpecialDefense(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean,
-    permanent?: boolean
-  ): void
-  addCritChance(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean
-  ): void
-  addCritPower(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean
-  ): void
-  addDodgeChance(
-    value: number,
-    caster: IPokemonEntity | "environment",
-    apBoost: number,
-    crit: boolean
-  ): void
-  addItem(item: Item, permanent?: boolean): void
-  removeItem(item: Item, permanent?: boolean): void
-  update(dt: number, board: Board, player: Player | undefined): void
-  skydiveTo(x: number, y: number, board: Board): void
-  toIdleState(): void
-  toMovingState(): void
-  isTargettableBy(
-    attacker: IPokemonEntity,
-    targetEnemies?: boolean,
-    targetAllies?: boolean
-  ): boolean
-  setTarget(target: IPokemonEntity | null): void
   physicalDamage: number
   specialDamage: number
   trueDamage: number
@@ -667,4 +573,4 @@ export interface IAttackEvent {
   delay: number
 }
 
-export { AttackSprite }
+export type { AttackSprite }

@@ -21,19 +21,19 @@ export function getPortraitSrc(
 }
 
 export function getPkmFromPortraitSrc(src: string): PkmWithCustom | null {
-  const regex = /\/assets\/portraits\/([\w\/]+)\.png$/
+  const regex = /\/assets\/portraits\/([\w/]+)\.png$/
   const match = src.match(regex)
   if (!match) return null
   return getPokemonCustomFromAvatar(match[1])
 }
 
 export function getAvatarSrc(avatar: string) {
-  avatar = avatar.replace(/(\d+)\-/g, "$1/")
+  avatar = avatar.replace(/(\d+)-/g, "$1/")
   const { name } = getPokemonCustomFromAvatar(avatar)
   const index = PkmIndex[name]
   if (index in PORTRAITS_FALLBACKS) {
     avatar = avatar.replace(
-      index.replace(/(\d+)\-/g, "$1/"),
+      index.replace(/(\d+)-/g, "$1/"),
       PORTRAITS_FALLBACKS[index]
     )
   }

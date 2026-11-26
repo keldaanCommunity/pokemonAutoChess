@@ -2,6 +2,7 @@ import { EffectEnum } from "../../types/enum/Effect"
 import { distanceM } from "../../utils/distance"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
+import { DelayedCommand } from "../simulation-command"
 import { AbilityStrategy } from "./ability-strategy"
 
 export class HelpingHandStrategy extends AbilityStrategy {
@@ -10,7 +11,7 @@ export class HelpingHandStrategy extends AbilityStrategy {
     super.process(pokemon, board, target, crit)
     const nbAlliesBuffed = 2
     const shield = [30, 60, 100, 200][pokemon.stars - 1] ?? 200
-    const allies = new Array<{ pkm: PokemonEntity; distance: number }>()
+    const allies: { pkm: PokemonEntity; distance: number }[] = []
     board.forEach((x, y, cell) => {
       if (cell && cell.team === pokemon.team && pokemon.id !== cell.id) {
         allies.push({
@@ -29,6 +30,11 @@ export class HelpingHandStrategy extends AbilityStrategy {
       const ally = allies[i]?.pkm
       if (ally) {
         ally.effects.add(EffectEnum.DOUBLE_DAMAGE)
+        ally.commands.push(
+          new DelayedCommand(() => {
+            ally.effects.delete(EffectEnum.DOUBLE_DAMAGE)
+          }, 2000)
+        )
         ally.addShield(shield, pokemon, 1, crit)
         pokemon.broadcastAbility({
           positionX: ally.positionX,

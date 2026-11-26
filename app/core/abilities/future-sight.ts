@@ -8,8 +8,8 @@ export class FutureSightStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit, true)
-    const damage = [20, 30, 50, 80][pokemon.stars - 1] ?? 80
-    const count = [3, 4, 5, 6][pokemon.stars - 1] ?? 6
+    const damage = [20, 30, 50, 80, 150][pokemon.stars - 1] ?? 150
+    const count = [3, 4, 5, 6, 7][pokemon.stars - 1] ?? 7
     const enemies = board.getClosestEnemies(
       pokemon.positionX,
       pokemon.positionY,

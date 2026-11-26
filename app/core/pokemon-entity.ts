@@ -5,7 +5,7 @@ import {
   DEFAULT_CRIT_POWER,
   ItemStats,
   MAX_SPEED,
-  ON_ATTACK_MANA
+  PP_ON_ATTACK
 } from "../config"
 import { EffectConfigs } from "../config/game/effects"
 import { StatusConfigs } from "../config/game/statuses"
@@ -14,17 +14,15 @@ import Count from "../models/colyseus-models/count"
 import Player from "../models/colyseus-models/player"
 import { type Pokemon, PokemonClasses } from "../models/colyseus-models/pokemon"
 import Status from "../models/colyseus-models/status"
-import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import {
   AbsorbedItems,
-  Emotion,
-  type IPokemon,
+  type Emotion,
   type IPokemonEntity,
   Title,
   Transfer
 } from "../types"
-import { EvolutionRuleType } from "../types/EvolutionRules"
+import { EvolutionType } from "../types/EvolutionRules"
 import { Ability } from "../types/enum/Ability"
 import { EffectEnum, type EnvironmentalEffect } from "../types/enum/Effect"
 import {
@@ -48,7 +46,6 @@ import { SpecialGameRule } from "../types/enum/SpecialGameRule"
 import { Synergy } from "../types/enum/Synergy"
 import { Weather } from "../types/enum/Weather"
 import { count, isIn } from "../utils/array"
-import { isOnBench } from "../utils/board"
 import { distanceC, distanceM } from "../utils/distance"
 import { isPlainFunction } from "../utils/function"
 import { clamp, max, min, roundToNDigits } from "../utils/number"
@@ -85,6 +82,7 @@ import MovingState from "./moving-state"
 import type PokemonState from "./pokemon-state"
 import type Simulation from "./simulation"
 import { DelayedCommand, type SimulationCommand } from "./simulation-command"
+import { hasSynergy } from "./synergies"
 
 export class PokemonEntity extends Schema implements IPokemonEntity {
   @type("boolean") shiny: boolean
@@ -149,13 +147,13 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   sandstormDamageTimer = 0
   fairySplashCooldown = 0
   isSpawn = false
-  refToBoardPokemon: IPokemon
-  commands = new Array<SimulationCommand>()
+  refToBoardPokemon: Pokemon
+  commands = [] as SimulationCommand[]
   effectsSet = new Set<EffectClass>()
   sourcePlayer: Player | undefined = undefined // used to distinguish entities from double up partners joining the board
   itemStatsStolen = new Set<Item>() // held items whose stats Spectral Thief took
   constructor(
-    pokemon: IPokemon,
+    pokemon: Pokemon,
     positionX: number,
     positionY: number,
     team: number,
@@ -217,7 +215,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.types.add(type)
     })
 
-    if (this.types.has(Synergy.DARK) && this.range === 1) {
+    if (this.hasSynergy(Synergy.DARK) && this.range === 1) {
       this.cooldown = 300 // ensure dark assassins move first
     } else {
       this.resetCooldown(500)
@@ -274,7 +272,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get isGhostOpponent(): boolean {
-    return this.simulation.isGhostBattle && this.team === Team.RED_TEAM
+    return this.simulation.isGhostBattle && this.baseTeam === Team.RED_TEAM
   }
 
   isTargettableBy(
@@ -311,11 +309,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     const { positionX, positionY } = this.refToBoardPokemon
     return (
       (positionX === lightX && positionY === lightY) ||
-      this.items.has(Item.SHINY_STONE) ||
       (this.passive === Passive.CONVERSION &&
-        this.types.has(Synergy.LIGHT) &&
+        this.hasSynergy(Synergy.LIGHT) &&
         !this.items.has(Item.LIGHT_BALL))
     )
+  }
+
+  hasSynergy(synergy: Synergy): boolean {
+    return hasSynergy(this, synergy)
   }
 
   hasSynergyEffect(synergy: Synergy): boolean {
@@ -326,7 +327,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.cooldown = Math.round(baseDuration / (0.4 + speed * 0.007))
   }
 
-  setTarget(target: IPokemonEntity | null) {
+  setTarget(target: PokemonEntity | null) {
     if (target) {
       this.targetEntityId = target.id
       this.targetX = target.positionX
@@ -405,10 +406,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     } else {
       let specialDamage =
         damage + (damage * (attacker && apBoost ? attacker.ap : 0)) / 100
-      if (attacker && attacker.effects.has(EffectEnum.DOUBLE_DAMAGE)) {
-        specialDamage *= 2
-        attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
-      }
       if (
         (this.effects.has(EffectEnum.STRANGE_STEAM) ||
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
@@ -507,7 +504,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addShield(
     value: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ) {
@@ -517,7 +514,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addPP(
     baseValue: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ) {
@@ -548,7 +545,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addCritChance(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
@@ -573,7 +570,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addCritPower(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
@@ -591,7 +588,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addMaxHP(
     value: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -632,25 +629,25 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addDodgeChance(
     value: number,
-    caster: IPokemonEntity | "environment",
+    origin: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean
   ) {
-    if (caster !== "environment") {
+    if (origin !== "environment") {
       value =
         value *
-        (1 + (apBoost * caster.ap) / 100) *
-        (crit ? caster.critPower : 1)
+        (1 + (apBoost * origin.ap) / 100) *
+        (crit ? origin.critPower : 1)
     }
-    value = applyBigEaterBeltStatBuff(this, value, caster, 3)
-    value = applyTwistBandBuff(this, value, caster)
+    value = applyBigEaterBeltStatBuff(this, value, origin, 3)
+    value = applyTwistBandBuff(this, value, origin)
 
     this.dodge = max(0.9)(this.dodge + value)
   }
 
   addAbilityPower(
     value: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -673,7 +670,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addLuck(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -698,7 +695,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addDefense(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -724,7 +721,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addSpecialDefense(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -750,7 +747,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addAttack(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -776,7 +773,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
   addSpeed(
     value: number,
-    caster: IPokemonEntity | "environment",
+    caster: PokemonEntity | "environment",
     apBoost: number,
     crit: boolean,
     permanent = false
@@ -812,16 +809,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       return // cannot hold more than 3 items
     }
 
-    if (isIn(SynergyStones, item) && this.types.has(type)) {
+    if (isIn(SynergyStones, item) && this.hasSynergy(type)) {
       return // cannot hold a synergy stone of a type already obtained - prevents a noob trap
     }
 
-    if (
-      ((item === Item.EVIOLITE || item === Item.RARE_CANDY) &&
-        !this.refToBoardPokemon.hasEvolution) ||
-      (item === Item.RARE_CANDY && this.items.has(Item.EVIOLITE))
-    ) {
-      return // handle cases where eviolite and rare candy cannot be given
+    if (item === Item.RARE_CANDY && !this.refToBoardPokemon.hasEvolution) {
+      return // handle cases where rare candy cannot be given
     }
 
     if (this.items.has(item) == false) {
@@ -837,9 +830,18 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       this.refToBoardPokemon.items.add(item)
     }
 
-    if (type && !this.types.has(type)) {
+    if (type && !this.hasSynergy(type)) {
       if (type === Synergy.DRAGON) {
         this.types = new SetSchema<Synergy>([type, ...this.types]) // dragon always go first synergy
+      } else if (type === Synergy.STELLAR) {
+        // remove native types
+        this.types.clear()
+        this.items.forEach((item) => {
+          const synergyGiven = SynergyGivenByItem[item]
+          if (synergyGiven) {
+            this.types.add(synergyGiven)
+          }
+        })
       } else {
         this.types.add(type)
       }
@@ -889,8 +891,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     })
 
     const type = SynergyGivenByItem[item]
-    const default_types = getPokemonData(this.name).types
-    if (type && !default_types.includes(type)) {
+    const nativeTypes = getPokemonData(this.name).types
+    if (
+      type &&
+      !nativeTypes.includes(type) &&
+      !schemaValues(this.items).some(
+        (heldItem) => SynergyGivenByItem[heldItem] === type && heldItem !== item
+      )
+    ) {
       this.types.delete(type)
       SynergyTiers[type].forEach((effectName) => {
         this.effects.delete(effectName)
@@ -898,6 +906,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
           if (effect.origin === effectName) this.effectsSet.delete(effect)
         })
       })
+      if (type === Synergy.STELLAR) {
+        this.types = new SetSchema([
+          ...nativeTypes,
+          ...schemaValues(this.types)
+        ])
+      }
     }
 
     ItemEffects[item]?.forEach((effectOrEffectFn) => {
@@ -954,6 +968,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     totalTakenDamage,
+    isAttackSuccessful,
     isTripleAttack,
     hasAttackKilled,
     crit
@@ -965,11 +980,12 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
     totalTakenDamage: number
+    isAttackSuccessful: boolean
     isTripleAttack: boolean
     hasAttackKilled: boolean
     crit: boolean
   }) {
-    this.addPP(ON_ATTACK_MANA, this, 0, false)
+    this.addPP(PP_ON_ATTACK, this, 0, false)
 
     if (target.effects.has(EffectEnum.OBSTRUCT)) {
       this.addDefense(-2, target, 0, false)
@@ -985,6 +1001,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         totalTakenDamage,
+        isAttackSuccessful,
         isTripleAttack,
         hasAttackKilled,
         crit
@@ -1066,7 +1083,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       })
     })
 
-    if (this.hasSynergyEffect(Synergy.ICE) && this.types.has(Synergy.ICE)) {
+    if (this.hasSynergyEffect(Synergy.ICE) && this.hasSynergy(Synergy.ICE)) {
       const { freezeChance, freezeDurationSeconds } = SynergyConfigs.ICE
       const nbIcyRocks =
         this.player && this.simulation.weather === Weather.SNOW
@@ -1108,7 +1125,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(EffectEnum.TOXIC)) {
         poisonChance = EffectConfigs.TOXIC.poisonChance.value / 100
       }
-      if (target.player) {
+      if (this.simulation.weather === Weather.SMOG && target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -= nbSmellyClays * 0.15
       }
@@ -1150,7 +1167,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       const crit =
         target.effects.has(EffectEnum.ABILITY_CRIT) &&
         chance(target.critChance / 100, target)
-      const defFactor = [0.6, 0.8, 1][target.stars - 1] ?? 1
+      const defFactor = [0.6, 0.8, 1, 2][target.stars - 1] ?? 2
       const damage = Math.round(
         target.def *
           defFactor *
@@ -1521,67 +1538,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.count.upgradeCount = 0
     this.count.soundCryCount = 0
 
-    if (this.items.has(Item.SACRED_ASH)) {
-      const team =
-        this.team === Team.BLUE_TEAM
-          ? this.simulation.blueTeam
-          : this.simulation.redTeam
-      if (!team) return
-      const alliesAlive: IPokemonEntity[] = schemaValues(team).filter(
-        (e) => e.hp > 0 || e.status.resurrecting
-      )
-      let koAllies: Pokemon[] = []
-      if (this.player) {
-        koAllies = schemaValues(this.player.board).filter(
-          (p) =>
-            p.id !== this.refToBoardPokemon.id &&
-            !isOnBench(p) &&
-            !alliesAlive.some((ally) => ally.refToBoardPokemon.id === p.id) &&
-            !(
-              p.name === Pkm.COMFEY &&
-              alliesAlive.some((ally) => ally.items.has(Item.COMFEY))
-            ) // don't respawn comfey if an ally has it
-        )
-      } else if (this.name === Pkm.HO_OH) {
-        // HoOh marowak pve round
-        koAllies = alliesAlive.some((p) => p.name === Pkm.LUGIA)
-          ? []
-          : [
-              PokemonFactory.createPokemonFromName(Pkm.LUGIA, {
-                shiny: this.shiny,
-                emotion: Emotion.ANGRY
-              })
-            ]
-      }
-
-      const spawns = pickNRandomIn(koAllies, 3)
-      spawns.forEach((spawn) => {
-        const coord = this.simulation.getClosestFreeCellToPokemonEntity(this)
-        if (!coord) return
-        const mon = PokemonFactory.createPokemonFromName(spawn.name, {
-          emotion: spawn.emotion,
-          shiny: spawn.shiny
-        })
-        const spawnedEntity = this.simulation.addPokemon(
-          mon,
-          coord.x,
-          coord.y,
-          this.team,
-          true
-        )
-        spawnedEntity.shield = 0 // remove existing shield
-        spawnedEntity
-          .getEffects(FlyingProtectionEffect)
-          .forEach((effect: FlyingProtectionEffect) => {
-            effect.flyingProtection = 0 // prevent flying effects twice
-          })
-        SynergyTiers[Synergy.FOSSIL].forEach((e) =>
-          spawnedEntity.effects.delete(e)
-        )
-      })
-    }
-
-    const removedItems = [Item.DYNAMAX_BAND, Item.SACRED_ASH, Item.MAX_REVIVE]
+    const removedItems = [Item.DYNAMAX_BAND, Item.MAX_REVIVE]
 
     removedItems.forEach((item) => {
       if (this.items.has(item)) {
@@ -1766,7 +1723,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.GLUTTON) {
       this.applyStat(Stat.HP, 10, true)
-      if (this.refToBoardPokemon.hp > 750) {
+      if (!this.isGhostOpponent && this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
     }
@@ -1795,7 +1752,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     ap?: number
     positionX?: number
     positionY?: number
-    orientation?: Orientation | number
+    orientation?: Orientation
     targetX?: number
     targetY?: number
     delay?: number
@@ -1866,13 +1823,14 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     this.stacks = this.refToBoardPokemon.stacks
     //logger.debug(`${this.name} gained a stack (${this.stacks}/${this.stacksRequired})`)
     if (
-      this.refToBoardPokemon.evolutionRule.type === EvolutionRuleType.STACK &&
+      this.refToBoardPokemon.evolutionRule.type === EvolutionType.STACK &&
       this.stacksRequired > 0 &&
       this.stacks === this.stacksRequired
     ) {
       const pokemonEvolved = EvolutionManager.tryEvolve(
         this.refToBoardPokemon as Pokemon,
-        this.player
+        this.player,
+        { type: EvolutionType.STACK }
       )
       if (pokemonEvolved) {
         // evolve mid-fight ; does not gain immediately the new stats, this will be done at the end of the fight
@@ -1912,7 +1870,7 @@ const StatsStolenBySpectralThief = [
 function applyBigEaterBeltStatBuff(
   pokemon: PokemonEntity,
   value: number,
-  caster: IPokemonEntity | "environment",
+  caster: PokemonEntity | "environment",
   nbDigits: number = 0
 ) {
   const isBuffOrBuffLost =
@@ -1930,7 +1888,7 @@ function applyBigEaterBeltStatBuff(
 function applyTwistBandBuff(
   pokemon: PokemonEntity,
   value: number,
-  caster: IPokemonEntity | "environment"
+  caster: PokemonEntity | "environment"
 ) {
   if (
     value < 0 &&

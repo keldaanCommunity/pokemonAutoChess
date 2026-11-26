@@ -1,5 +1,6 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../config"
 import { EffectConfigs } from "../../config/game/effects"
+import { FossilPkmByStone } from "../../config/game/items"
 import { StatusConfigs } from "../../config/game/statuses"
 import { SynergyConfigs, SynergyTiers } from "../../config/game/synergies"
 import {
@@ -7,10 +8,10 @@ import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import PokemonFactory from "../../models/pokemon-factory"
 import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
-import { RemovableItems, Transfer } from "../../types"
+import { FossilStones, RemovableItems, Transfer } from "../../types"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { EffectEnum } from "../../types/enum/Effect"
 import { Emotion } from "../../types/enum/Emotion"
@@ -33,7 +34,7 @@ import { Pkm, PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
 import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { Weather } from "../../types/enum/Weather"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import { isOnBench } from "../../utils/board"
 import { distanceC } from "../../utils/distance"
@@ -48,6 +49,7 @@ import { registerOnEvolutionHook } from "../evolution-logic/evolution-hooks"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
+import { getSynergyTier } from "../synergies"
 import { getStrongestUnit } from "../unit-score"
 import {
   type Effect,
@@ -118,7 +120,8 @@ export function drumBeat(pokemon: PokemonEntity, board: Board) {
       trueDamage: 0,
       totalDamage: 0,
       totalTakenDamage: 0,
-      crit: false
+      crit: false,
+      isAttackSuccessful: false
     })
   })
 }
@@ -182,7 +185,7 @@ const DurantBugBuffEffect = new OnAttackEffect(({ pokemon, target, board }) => {
         (entity) =>
           entity &&
           entity.team === pokemon.team &&
-          entity.types.has(Synergy.BUG)
+          entity.hasSynergy(Synergy.BUG)
       ).length - 1
     if (bugAllies > 0) {
       target.handleDamage({
@@ -207,7 +210,7 @@ const MiniorKernelOnAttackEffect = new OnAttackEffect(
     ) {
       const cells = board.getAdjacentCells(target.positionX, target.positionY)
       const targets = cells
-        .filter((cell) => cell.value && pokemon.team != cell.value.team)
+        .filter((cell) => cell.value && pokemon.team !== cell.value.team)
         .map((cell) => cell.value!)
         .concat(target)
       const multiplier = [1, 1, 1, 2][pokemon.stars - 1] ?? 2
@@ -534,7 +537,7 @@ const ToxicSpikesEffect = new OnDamageReceivedEffect(({ pokemon, board }) => {
   ) {
     pokemon.changePassive(Passive.NONE)
 
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
 
     let startY = 1
     let endY = 3
@@ -637,7 +640,7 @@ const MilceryFlavorEffect = new OnStageStartEffect(({ player, pokemon }) => {
   })
   const flavor = SynergyFlavors[maxSynergy]
   Flavors.forEach((f) => {
-    removeInArray(player.items, f)
+    removeFromArray(player.items, f)
   })
   player.items.push(flavor)
 }, Passive.CREAM)
@@ -817,7 +820,7 @@ const PyukumukuExplodeOnDeathEffect = new OnDeathEffect(
     )
     const damage = Math.round(0.5 * pokemon.maxHP)
     adjcells.forEach((cell) => {
-      if (cell.value && pokemon.team != cell.value.team) {
+      if (cell.value && pokemon.team !== cell.value.team) {
         cell.value.handleSpecialDamage(
           damage,
           board,
@@ -938,7 +941,7 @@ const conversionEffect = new OnSimulationStartEffect(
         : simulation.bluePlayer
     if (!opponent) return
     const synergyCopied = pickRandomIn(opponent.synergies.getTopSynergies(1))
-    if (entity.types.has(synergyCopied)) return // does not copy if already has the synergy
+    if (entity.hasSynergy(synergyCopied)) return // does not copy if already has the synergy
     entity.types.add(synergyCopied)
     const effect =
       SynergyTiers[synergyCopied].find((effect) =>
@@ -963,7 +966,7 @@ const conversionEffect = new OnSimulationStartEffect(
     if (synergyCopied === Synergy.DRAGON) {
       const opponentTeam = simulation.getOpponentTeam(player.id)!
       const dragonLevel = schemaValues(opponentTeam).reduce(
-        (acc, p) => acc + (p.types.has(Synergy.DRAGON) ? p.stars : 0),
+        (acc, p) => acc + (p.hasSynergy(Synergy.DRAGON) ? p.stars : 0),
         0
       )
       if (
@@ -1592,7 +1595,7 @@ export const PassiveEffects: Partial<
     new OnItemDroppedEffect(({ pokemon, item, player }) => {
       if (Berries.includes(item)) {
         pokemon.addMaxHP(SpecialBerries.includes(item) ? 45 : 15)
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         return false
       } else if (ConsumableItems.includes(item)) {
         pokemon.addMaxHP(30)
@@ -1602,7 +1605,7 @@ export const PassiveEffects: Partial<
         if (isIn(TMs, item)) {
           player.tms.splice(player.tms.indexOf(item), 1, Item.TRASH)
         }
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         return false
       }
       return true
@@ -1770,7 +1773,7 @@ export const PassiveEffects: Partial<
           ally &&
           ally.team === entity.team &&
           y === entity.positionY &&
-          ally.types.has(Synergy.ROCK)
+          ally.hasSynergy(Synergy.ROCK)
         ) {
           ally.addShield(50, entity, 0, false)
           ally.status.triggerLocked(3000, ally)
@@ -1806,9 +1809,6 @@ export const PassiveEffects: Partial<
   ],
   [Passive.PRISM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
-      if (pokemon.items.has(Item.SHINY_STONE)) {
-        inSpotlight = true
-      }
       if (pokemon.name === Pkm.NECROZMA && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.ULTRA_NECROZMA)
       } else if (pokemon.name === Pkm.ULTRA_NECROZMA && !inSpotlight) {
@@ -1819,9 +1819,6 @@ export const PassiveEffects: Partial<
 
   [Passive.BLOSSOM]: [
     new OnSpotlightChangeEffect(({ pokemon, player, inSpotlight }) => {
-      if (pokemon.items.has(Item.SHINY_STONE)) {
-        inSpotlight = true
-      }
       if (pokemon.name === Pkm.CHERRIM && inSpotlight) {
         player.transformPokemon(pokemon, Pkm.CHERRIM_SUNLIGHT)
       } else if (pokemon.name === Pkm.CHERRIM_SUNLIGHT && !inSpotlight) {
@@ -1996,12 +1993,23 @@ export const PassiveEffects: Partial<
         })
       }
     })
+  ],
+  [Passive.DITTO]: [
+    new OnItemDroppedEffect(({ item, pokemon, player }) => {
+      if (isIn(FossilStones, item)) {
+        player.transformPokemon(pokemon, FossilPkmByStone[item])
+        removeFromArray(player.items, item)
+        return false // prevent item from being equipped
+      }
+      return true
+    })
   ]
 }
 
 registerOnEvolutionHook((pokemonEvolved, player) => {
-  if (pokemonEvolved.passive in PassiveEffects) {
-    PassiveEffects[pokemonEvolved.passive]!.forEach((effect) => {
+  const passiveEffects = PassiveEffects[pokemonEvolved.passive]
+  if (Array.isArray(passiveEffects)) {
+    passiveEffects.forEach((effect) => {
       if (effect instanceof OnEvolutionEffect) {
         effect.apply({ pokemonEvolved, player })
       }
@@ -2019,7 +2027,7 @@ registerOnEvolutionHook((pokemonEvolved, player) => {
     ) {
       pokemon.addMaxHP(10)
       pokemon.stacks++
-      EvolutionManager.tryEvolve(pokemon, player)
+      EvolutionManager.tryEvolve(pokemon, player, { type: EvolutionType.STACK })
     }
   })
 })

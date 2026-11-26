@@ -4,6 +4,7 @@
   cursor: var(--cursor-hover);
   padding: 0;
   background-color: var(--color-bg-secondary);
+  overflow: hidden;
 }
 
 .pokemon-emotion > img {

@@ -3,10 +3,10 @@ import { GameObjects } from "phaser"
 import type Player from "../../../../models/colyseus-models/player"
 import {
   AbsorbedItems,
+  AtlasItems,
   Berries,
   Dishes,
   type Item,
-  ShinyItems,
   SpecialItems,
   TMs,
   Tools,
@@ -92,7 +92,7 @@ export default class ItemsContainer extends GameObjects.Container {
     if (isIn(WeatherRocks, item)) return 3
     if (isIn(TMs, item)) return 5
     if (isIn(Wands, item)) return 4
-    if (isIn(ShinyItems, item)) return 2
+    if (isIn(AtlasItems, item)) return 2
     if (isIn(Tools, item)) return 1
     if (isIn(Dishes, item)) return -1
     if (isIn(Berries, item)) return -2

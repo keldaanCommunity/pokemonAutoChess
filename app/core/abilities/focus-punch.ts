@@ -47,7 +47,7 @@ export class FocusPunchStrategy extends AbilityStrategy {
 
         if (willEject) {
           // eject from the board
-          pokemon.broadcastAbility({ skill: "FOCUS_PUNCH_EJECT" })
+          pokemon.broadcastAbility({ skill: "BOARD_EJECT_ORIENTED" })
           target.cooldown = 9999
           const { death } = target.handleSpecialDamage(
             9999,

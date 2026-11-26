@@ -15,10 +15,8 @@ import {
   rewriteBotRoundsRequiredto1,
   validateBoard
 } from "../../../../../core/bot-logic"
-import {
-  computeSynergies,
-  getSynergyTier
-} from "../../../../../models/colyseus-models/synergies"
+import { getSynergyTier } from "../../../../../core/synergies"
+import { computeSynergies } from "../../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../../models/pokemon-factory"
 import { type PkmWithCustom, Role } from "../../../../../types"
 import { Pkm, PkmIndex } from "../../../../../types/enum/Pokemon"

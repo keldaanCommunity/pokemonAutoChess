@@ -1,8 +1,5 @@
 import { AdditionalPicksStages, PortalCarouselStages } from "../config"
-import {
-  computeSynergies,
-  getSynergyTier
-} from "../models/colyseus-models/synergies"
+import { computeSynergies } from "../models/colyseus-models/synergies"
 import PokemonFactory from "../models/pokemon-factory"
 import { getPokemonData } from "../models/precomputed/precomputed-pokemon-data"
 import { Rarity } from "../types/enum/Game"
@@ -27,6 +24,7 @@ import type { IBot, IStep } from "../types/models/bot-v2"
 import { isIn } from "../utils/array"
 import { logger } from "../utils/logger"
 import { clamp, min } from "../utils/number"
+import { getSynergyTier } from "./synergies"
 
 export const MAX_BOTS_STAGE = 30
 
@@ -61,6 +59,7 @@ export const POWER_SCORE_BY_CATEGORY = {
   "RARE 2S T3": 7,
   "RARE 3S T2": 3,
   "RARE 3S T3": 6,
+  "RARE 3S T4": 8,
   "HATCH T1": 1.5,
   "HATCH 3S T2": 3,
   "HATCH 3S T3": 5,
@@ -69,10 +68,12 @@ export const POWER_SCORE_BY_CATEGORY = {
   "EPIC 2S T3": 7,
   "EPIC 3S T2": 4,
   "EPIC 3S T3": 8,
+  "EPIC 3S T4": 10,
   "EPIC 2S T2 DUO": 4,
   "ULTRA T1": 3,
   "ULTRA 3S T2": 6,
   "ULTRA 3S T3": 10,
+  "ULTRA 3S T4": 15,
   "UNIQUE T1": 2,
   "UNIQUE T2": 3,
   "UNIQUE T3": 4,

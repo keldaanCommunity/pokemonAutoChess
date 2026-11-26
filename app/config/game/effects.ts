@@ -58,7 +58,7 @@ export const EffectConfigs = {
   [EffectEnum.BLAZE]: { attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[3] },
   [EffectEnum.DESOLATE_LAND]: {
     attackPerHit: FIRE_ATK_BUFF_PER_SYNERGY_TIER[4],
-    maxFireShards: 1
+    speedBuff: 15
   },
   [EffectEnum.RAIN_DANCE]: { ppPerSecond: 4 },
   [EffectEnum.DRIZZLE]: { ppPerSecond: 8 },
@@ -223,8 +223,7 @@ export const EffectConfigs = {
   [EffectEnum.HATCHER]: { eggChance: { value: 10, luckScaling: true } },
   [EffectEnum.BREEDER]: { hatchStagesEarlier: 1 },
   [EffectEnum.GOLDEN_EGGS]: {
-    goldenEggChance: { value: 5, luckScaling: true },
-    maxGoldenEggs: 1,
+    goldenEggChance: { value: 10, luckScaling: true },
     sellGold: SellPrices.SHINY_EGG
   },
   [EffectEnum.APPETIZER]: {
@@ -281,5 +280,8 @@ export const EffectConfigs = {
   [EffectEnum.STRANGE_STEAM]: { damageBonusPercent: 20 },
   [EffectEnum.SUPERCHARGE]: { speedBonus: 20, shield: 30 },
   [EffectEnum.TIDAL_WAVE]: tidalWave,
-  [EffectEnum.TOXIC_SPIKES]: { durationSeconds: 1 }
+  [EffectEnum.TOXIC_SPIKES]: { durationSeconds: 1 },
+  [EffectEnum.RAINBOW_BEAN_AQUATIC]: {
+    statusReductionPercent: 10
+  }
 } satisfies Partial<Record<EffectEnum, EffectConfig>>

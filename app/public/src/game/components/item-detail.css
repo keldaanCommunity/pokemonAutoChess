@@ -47,7 +47,8 @@
 .game-item-detail-stats {
   grid-area: stats;
   display: flex;
-  gap: 1em;
+  flex-wrap: wrap;
+  gap: 0.25em 1em;
   font-size: 80%;
   margin: 0 0 0.5em 0;
   align-items: center;

@@ -4,6 +4,7 @@ import { t } from "i18next"
 import Phaser from "phaser"
 import MoveToPlugin from "phaser4-rex-plugins/plugins/moveto-plugin"
 import OutlinePlugin from "phaser4-rex-plugins/plugins/outlinefilter-plugin"
+import ShatterPlugin from "phaser4-rex-plugins/plugins/shatterimage-plugin"
 import React from "react"
 import { toast } from "react-toastify"
 import { ItemStats } from "../../../config"
@@ -25,7 +26,6 @@ import {
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
   type IDragDropMessage,
-  type IPlayer,
   type IPokemon,
   type IPokemonEntity,
   Transfer
@@ -61,6 +61,10 @@ import store from "../stores"
 import { changePlayer, setPlayer, setSimulation } from "../stores/GameStore"
 import { clearAbilityAnimations } from "./components/abilities-animations"
 import { BoardMode } from "./components/board-manager"
+import {
+  hasMegaEvolutionAnimation,
+  playMegaEvolutionAnimation
+} from "./components/mega-evolution-animation"
 import { DEPTH } from "./depths"
 import { isReplayRoom } from "./replay-room-id"
 import GameScene from "./scenes/game-scene"
@@ -267,7 +271,6 @@ class GameContainer {
       "manaBurnCount",
       "moneyCount",
       "amuletCoinCount",
-      "bottleCapCount",
       "attackCount",
       "tripleAttackCount",
       "upgradeCount",
@@ -327,6 +330,7 @@ class GameContainer {
     this.game.scale.on("resize", this.resize, this)
     if (this.game.renderer.type === Phaser.WEBGL) {
       this.game.plugins.install("rexOutline", OutlinePlugin, true)
+      this.game.plugins.install("rexShatter", ShatterPlugin, true)
     }
     const unsubscribeToPreferences = subscribeToPreferences(
       ({ antialiasing, fpsLimit }) => {
@@ -772,7 +776,7 @@ class GameContainer {
 
   /* Board pokemons */
 
-  handleBoardPokemonAdd(player: IPlayer, pokemon: IPokemon) {
+  handleBoardPokemonAdd(player: Player, pokemon: Pokemon) {
     const board = this.gameScene?.board
     if (
       board &&
@@ -785,6 +789,9 @@ class GameContainer {
         pokemonUI.fishingAnimation()
       } else if (pokemon.action === PokemonActionState.NEST) {
         pokemonUI.nestAnimation(false)
+      } else if (hasMegaEvolutionAnimation(pokemon.name)) {
+        playMegaEvolutionAnimation(pokemonUI)
+        playSound(SOUNDS.MEGA_EVOLUTION)
       } else if (pokemon.stars > 1) {
         pokemonUI.evolutionAnimation()
         playSound(

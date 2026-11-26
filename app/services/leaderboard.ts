@@ -6,10 +6,10 @@ import type {
 import { logger } from "../utils/logger"
 import { fetchBotsList } from "./bots"
 
-let leaderboard = new Array<ILeaderboardInfo>()
-let levelLeaderboard = new Array<ILeaderboardInfo>()
-let botLeaderboard = new Array<ILeaderboardBotInfo>()
-let eventLeaderboard = new Array<ILeaderboardInfo>()
+let leaderboard: ILeaderboardInfo[] = []
+let levelLeaderboard: ILeaderboardInfo[] = []
+let botLeaderboard: ILeaderboardBotInfo[] = []
+let eventLeaderboard: ILeaderboardInfo[] = []
 
 export function fetchLeaderboards() {
   logger.info("Refreshing leaderboards...")

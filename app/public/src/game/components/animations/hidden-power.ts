@@ -166,7 +166,7 @@ export function hiddenPowerAnimation(args: AbilityAnimationArgs) {
     radius: 500,
     ease: Phaser.Math.Easing.Quartic.Out,
     duration: 2500,
-    onUpdate: function (tween) {
+    onUpdate: (tween) => {
       Phaser.Actions.RotateAroundDistance(
         unownsGroup.getChildren(),
         { x, y },

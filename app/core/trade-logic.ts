@@ -1,4 +1,4 @@
-import { type IPokemon, ItemComponents, ShinyItems } from "../types"
+import { AtlasItems, type IPokemon, ItemComponents } from "../types"
 import { Rarity } from "../types/enum/Game"
 import { NonPkm, Pkm } from "../types/enum/Pokemon"
 import { isIn } from "../utils/array"
@@ -19,7 +19,7 @@ export function computeTradeCooldown(
     ...schemaValues(pokemonB.items)
   ].reduce((total, item) => {
     if (isIn(ItemComponents, item)) return total + 1
-    if (isIn(ShinyItems, item)) return total + 6
+    if (isIn(AtlasItems, item)) return total + 6
     return total + 2
   }, 0)
 

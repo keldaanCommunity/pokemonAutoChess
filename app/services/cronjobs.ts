@@ -148,7 +148,7 @@ async function deleteOldAnonymousAccounts() {
   logger.info("[CRON] Deleting old anonymous accounts...")
   const currentDate = dayjs() // Get the current date and time
   const oneMonthLimit = currentDate.subtract(1, "month")
-  const anonymousAccounts = new Array<UserRecord>()
+  const anonymousAccounts: UserRecord[] = []
   await listAllUsers()
 
   async function listAllUsers(nextPageToken?: string) {
@@ -177,7 +177,7 @@ async function deleteOldAnonymousAccounts() {
   )
 
   while (anonymousAccounts.length > 0) {
-    const batchDeletion = new Array<string>()
+    const batchDeletion: string[] = []
     for (let i = 0; i < 999; i++) {
       const account = anonymousAccounts.pop()
       account && batchDeletion.push(account.uid)
@@ -341,6 +341,12 @@ async function resetEventScores() {
         matchMaker.presence.publish(
           "announcement",
           "Poképals contest has started! Team up with your pal and win in Double up mode against other teams!"
+        )
+        break
+      case GameEvent.RAINBOW_PEAK:
+        matchMaker.presence.publish(
+          "announcement",
+          "Rainbow Peak has started! Win Classic games with every synergy at its max tier to reach the summit!"
         )
         break
     }

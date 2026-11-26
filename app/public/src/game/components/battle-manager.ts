@@ -4,7 +4,7 @@ import {
   BOARD_WIDTH,
   MaxTroopersPerPkm
 } from "../../../../config"
-import { getAttackTimings } from "../../../../core/attacking-state"
+import { getAttackTimings } from "../../../../core/attack-timings"
 import { getMoveSpeed } from "../../../../core/move-speed"
 import type Simulation from "../../../../core/simulation"
 import type Count from "../../../../models/colyseus-models/count"
@@ -408,7 +408,7 @@ export default class BattleManager {
         if (pokemon.status.enraged) {
           pkm.addRageEffect()
         } else if (previousValue === true) {
-          pkm.removeRageEffect(pokemon.items.has(Item.BERSERK_GENE))
+          pkm.removeRageEffect()
         }
       }
     }
@@ -473,10 +473,6 @@ export default class BattleManager {
       } else if (field === "amuletCoinCount") {
         if (value > 0) {
           pkm.itemsContainer.updateCount(Item.AMULET_COIN, value)
-        }
-      } else if (field === "bottleCapCount") {
-        if (value > 0) {
-          pkm.itemsContainer.updateCount(Item.GOLD_BOTTLE_CAP, value)
         }
       } else if (field === "attackCount") {
         if (value !== 0) {

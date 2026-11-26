@@ -12,7 +12,9 @@ export class MetalBurstStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit)
     const base = [10, 20, 30, 50][pokemon.stars - 1] ?? 50
-    const damage = Math.floor(base + 3 * pokemon.count.fightingBlockCount)
+    const damage = Math.floor(
+      base + (base / 10) * pokemon.count.fightingBlockCount
+    )
     target.handleSpecialDamage(damage, board, AttackType.TRUE, pokemon, crit)
   }
 }

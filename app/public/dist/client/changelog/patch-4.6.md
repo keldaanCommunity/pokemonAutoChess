@@ -73,7 +73,7 @@ Added artificial items, obtained through Artificial synergy:
 - Exp Share: Get the best values of Attack, Defense and Special Defense from adjacent allies in the same row
 - Macho Brace: +15 Attack, -25% attack speed; gives Fighting synergy
 - Light Ball: +75 AP, gives Light synergy
-- Toxic Orb: +100% Attack, gives Poison synergy, holder is poisonned for the whole fight
+- Toxic Orb: +100% Attack, gives Poison synergy, holder is poisoned for the whole fight
 - Metronome: Gives SOUND synergy. Every second, the holder gains 5 PP
 - Metal Coat: Gives STEEL synergy. Reduce incoming damage by 20%
 - Swift Wing: Gives FLYING synergy. Gain 10% chance to dodge attacks

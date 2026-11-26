@@ -225,7 +225,7 @@ button {
   margin-right: 0.25em;
 }
 
-.bubbly > img:first-child:last-child {
+.bubbly.icon-only > img {
   margin-right: 0;
 }
 

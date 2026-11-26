@@ -201,7 +201,7 @@ export function drawGoldCoin(graphics: GameObjects.Graphics) {
 export type TweenAnimationMakerOptions = {
   duration?: number
   ease?: string | ((v: number) => number)
-  hitAnim?: AbilityAnimation
+  hitAnim?: AbilityAnimation | AbilityAnimation[]
   tweenProps?: Record<string, any>
   startCoords?: AbilityCoordinates
   endCoords?: AbilityCoordinates
@@ -216,7 +216,7 @@ export function displayHit(
   hitSpriteTypes: HitSprite | HitSprite[],
   x: number,
   y: number,
-  flip: boolean
+  _flip: boolean
 ) {
   const hitSpriteType = Array.isArray(hitSpriteTypes)
     ? pickRandomIn(hitSpriteTypes)
@@ -300,11 +300,12 @@ export function addAbilitySprite(
         ? [origin]
         : [0.5, 0.5])
   )
+  const apScaling = options.apScaling !== false ? 1 + ap / 200 : 1
   const scaleX = max(10)(
-    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[0] : (scale ?? 2)) * apScaling
   )
   const scaleY = max(10)(
-    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * (1 + ap / 200)
+    (Array.isArray(scale) ? scale[1] : (scale ?? 2)) * apScaling
   )
   sprite.setScale(scaleX, scaleY)
   sprite.setDepth(depth ?? DEPTH.ABILITY)
@@ -468,7 +469,13 @@ export const tweenAnimation: AbilityAnimationMaker<TweenAnimationMakerOptions> =
         ease: options.ease || "linear",
         onComplete: () => {
           if (options.destroyOnTweenComplete !== false) sprite?.destroy()
-          if (options.hitAnim) options.hitAnim(args)
+          if (options.hitAnim) {
+            if (Array.isArray(options.hitAnim)) {
+              options.hitAnim.forEach((anim) => {
+                anim(args)
+              })
+            } else options.hitAnim(args)
+          }
         },
         ...(options.tweenProps ?? {})
       }
@@ -594,42 +601,42 @@ export const parabolicProjectile: AbilityAnimationMaker<
 > =
   (options = {}) =>
   async (args) => {
-    const { onProjectileLand, ...projectileOptions } = options
     const { scene, ap, positionX, positionY, targetX, targetY, flip } = args
-    const delay = projectileOptions.delay ?? args.delay ?? 0
+    const delay = options.delay ?? args.delay ?? 0
     if (delay) await wait(delay)
     let [startX, startY] = transformEntityCoordinates(
       positionX,
       positionY,
       flip
     )
-    startX += projectileOptions.startPositionOffset?.[0] ?? 0
-    startY += projectileOptions.startPositionOffset?.[1] ?? 0
+    startX += options.startPositionOffset?.[0] ?? 0
+    startY += options.startPositionOffset?.[1] ?? 0
 
     let [endX, endY] = transformEntityCoordinates(targetX, targetY, flip)
-    endX += projectileOptions.endPositionOffset?.[0] ?? 0
-    endY += projectileOptions.endPositionOffset?.[1] ?? 0
+    endX += options.endPositionOffset?.[0] ?? 0
+    endY += options.endPositionOffset?.[1] ?? 0
 
     const projectile = addAbilitySprite(
       scene,
-      projectileOptions.ability ?? args.ability,
+      options.ability ?? args.ability,
       ap,
       [startX, startY],
       {
         destroyOnComplete: false,
-        ...projectileOptions
+        ...options
       }
     )
     if (!projectile) return null
 
-    const peakHeight = projectileOptions.peakHeight ?? 150
+    const peakHeight = options.peakHeight ?? 150
     scene.tweens.addCounter({
       from: 0,
       to: 1,
-      duration: projectileOptions.duration || 1000,
-      ease: projectileOptions.ease || "linear",
+      duration: options.duration || 1000,
+      ease: options.ease || "linear",
       onUpdate: (tween) => {
-        const t = tween.getValue()! // Progress from 0 to 1
+        const t = tween.getValue() // Progress from 0 to 1
+        if (t === null) return
 
         // Linear interpolation for X
         projectile.x = startX + (endX - startX) * t
@@ -640,25 +647,27 @@ export const parabolicProjectile: AbilityAnimationMaker<
         projectile.y =
           Phaser.Math.Interpolation.Linear([startY, endY], t) - heightOffset
 
-        if (projectileOptions.tweenProps?.rotation) {
+        if (options.tweenProps?.rotation) {
           projectile.rotation = Phaser.Math.Interpolation.Linear(
-            [0, projectileOptions.tweenProps.rotation],
+            [0, options.tweenProps.rotation],
             t
           )
         }
       },
       onComplete: () => {
-        if (projectileOptions.destroyOnTweenComplete !== false) {
+        if (options.destroyOnTweenComplete !== false) {
           projectile.destroy()
         }
-        onProjectileLand?.(projectile, args)
-        if (projectileOptions.hitAnim) {
-          if (Array.isArray(projectileOptions.hitAnim)) {
-            projectileOptions.hitAnim.forEach((anim) => anim(args))
-          } else projectileOptions.hitAnim(args)
+        options.onProjectileLand?.(projectile, args)
+        if (options.hitAnim) {
+          if (Array.isArray(options.hitAnim)) {
+            options.hitAnim.forEach((anim) => {
+              anim(args)
+            })
+          } else options.hitAnim(args)
         }
       },
-      ...(projectileOptions.tweenProps ?? {})
+      ...(options.tweenProps ?? {})
     })
     return projectile
   }
@@ -752,3 +761,99 @@ export function followDashMovement(
   scene.events.once(Phaser.Scenes.Events.SHUTDOWN, onSceneShutdown)
   scene.events.on(Phaser.Scenes.Events.UPDATE, onSceneUpdate)
 }
+
+type PathAnimationMakerOptions = {
+  duration?: number
+  ease?: string | ((v: number) => number)
+  sprite?: GameObjects.Sprite
+  finishAnim?: AbilityAnimation | AbilityAnimation[]
+  tweenProps?: Record<string, any>
+  path: Phaser.Curves.Curve
+  destroyOnTweenComplete?: boolean
+  initSprite?: (sprite: GameObjects.Sprite) => void
+}
+
+export const pathAnimation: AbilityAnimationMaker<PathAnimationMakerOptions> =
+  (options) => (args) => {
+    const { scene } = args
+    let { rotation } = options
+    const delay = options.delay ?? args.delay ?? 0
+    setTimeout(() => {
+      const follower = { t: 0, vec: new Phaser.Math.Vector2() }
+      const { x: startX, y: startY } = options.path.getStartPoint()
+      let lastX = startX,
+        lastY = startY
+
+      const sprite =
+        options.sprite ??
+        addAbilitySprite(
+          scene,
+          options.ability ?? args.ability,
+          args.ap,
+          [startX, startY],
+          {
+            destroyOnComplete: false,
+            ...options,
+            rotation
+          }
+        )
+      if (!sprite) return null
+      if (options.initSprite) options.initSprite(sprite)
+
+      const tweenConfig: Phaser.Types.Tweens.TweenBuilderConfig = {
+        targets: follower,
+        duration: options.duration || 500,
+        ease: options.ease || "linear",
+        t: 1,
+        onUpdate: () => {
+          options.path.getPointAt(follower.t, follower.vec)
+          sprite.setPosition(follower.vec.x, follower.vec.y)
+          if (options?.oriented) {
+            rotation =
+              angleBetween([lastX, lastY], [follower.vec.x, follower.vec.y]) +
+              (options.rotation ?? 0)
+            sprite.setRotation(rotation)
+          }
+          lastX = follower.vec.x
+          lastY = follower.vec.y
+        },
+        onComplete: () => {
+          if (options.destroyOnTweenComplete !== false) sprite?.destroy()
+          if (options.finishAnim) {
+            if (Array.isArray(options.finishAnim)) {
+              options.finishAnim.forEach((anim) => {
+                anim(args)
+              })
+            } else {
+              options.finishAnim(args)
+            }
+          }
+        },
+        ...(options.tweenProps ?? {})
+      }
+
+      scene.tweens.add(tweenConfig)
+    }, delay)
+  }
+
+export const shakeCamera: AbilityAnimationMaker<{
+  duration?: number
+  intensity?: number
+}> =
+  (options) =>
+  ({ scene }) =>
+    setTimeout(() => scene.shakeCamera(options), options.delay ?? 0)
+
+export const poppingIcon: AbilityAnimationMaker<
+  TweenAnimationMakerOptions & { maxScale: number }
+> = (options) => (args) =>
+  tweenAnimation({
+    ...options,
+    startCoords:
+      options.startCoords === "target"
+        ? [args.targetX, args.targetY]
+        : [args.positionX, args.positionY],
+    ease: Phaser.Math.Easing.Cubic.Out,
+    scale: options.scale ?? 0.25,
+    tweenProps: { scale: options?.maxScale ?? 3, ...(options.tweenProps ?? {}) }
+  })(args)

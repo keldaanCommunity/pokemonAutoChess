@@ -2,6 +2,10 @@ import { Pkm } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { isIn } from "../../utils/array"
 
+export const NB_STARTERS = 3
+export const NB_UNIQUE_PROPOSITIONS = 6
+export const NB_LEGENDARY_PROPOSITIONS = 6
+
 export const EvolutionTime = {
   EGG_HATCH: 5,
   EVOLVE_HATCH: 5
@@ -416,6 +420,7 @@ export const ArceusFormPerSynergy = {
   [Synergy.AMORPHOUS]: Pkm.ARCEUS_FAIRY,
   [Synergy.HUMAN]: Pkm.ARCEUS,
   [Synergy.LIGHT]: Pkm.ARCEUS,
+  [Synergy.STELLAR]: Pkm.ARCEUS,
   [Synergy.BABY]: Pkm.ARCEUS,
   [Synergy.NORMAL]: Pkm.ARCEUS
 } satisfies { [key in Synergy]: Pkm }

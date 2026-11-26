@@ -1,6 +1,6 @@
 import { t } from "i18next"
-import Phaser from "phaser"
 import type { GameObjects } from "phaser"
+import Phaser from "phaser"
 import pkg from "../../../../../package.json"
 import { MusicByTownEncounter, RegionDetails } from "../../../../config"
 import { getMusicAlt } from "../../../../config/game/music"

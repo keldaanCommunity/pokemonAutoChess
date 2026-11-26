@@ -8,6 +8,7 @@ import { useAppSelector } from "../../../hooks"
 import { Announcements } from "./announcements"
 import { Expeditions } from "./expeditions"
 import { Pokepals } from "./pokepals"
+import { RainbowPeak } from "./rainbow-peak"
 import { TournamentsList } from "./tournaments-list"
 import { TwitchStreams } from "./twitch-streams"
 import { VictoryRoad } from "./victory-road"
@@ -94,6 +95,11 @@ export function EventsMenu() {
             <span>{t("pokepals.title")}</span>
           </Tab>
         )}
+        {currentGameEvent === GameEvent.RAINBOW_PEAK && (
+          <Tab>
+            <span>{t("rainbow_peak.title")}</span>
+          </Tab>
+        )}
       </TabList>
       {showTwitchTab && (
         <TabPanel>
@@ -121,6 +127,11 @@ export function EventsMenu() {
       {currentGameEvent === GameEvent.POKEPALS && (
         <TabPanel>
           <Pokepals />
+        </TabPanel>
+      )}
+      {currentGameEvent === GameEvent.RAINBOW_PEAK && (
+        <TabPanel>
+          <RainbowPeak />
         </TabPanel>
       )}
       {!user && <p className="subtitle">{t("loading")}</p>}

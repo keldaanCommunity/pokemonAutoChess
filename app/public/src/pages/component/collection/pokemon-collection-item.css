@@ -4,6 +4,7 @@
   background-color: var(--color-bg-secondary);
   width: 80px;
   box-sizing: content-box;
+  overflow: hidden;
 }
 
 .pokemon-collection-item > img {

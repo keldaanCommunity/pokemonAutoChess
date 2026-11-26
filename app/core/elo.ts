@@ -13,7 +13,7 @@ export async function computeElo(
 ) {
   const averageElo = await getAverageElo()
   const eloEngine = new EloEngine()
-  const eloGains = new Array<number>()
+  const eloGains: number[] = []
   //logger.debug("computing elo for", player.name, "rank", rank, "elo", previousElo)
   players.forEach((plyr) => {
     if (player.id !== plyr.id) {

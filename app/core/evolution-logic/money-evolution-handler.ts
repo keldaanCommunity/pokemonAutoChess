@@ -1,24 +1,34 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import { Item } from "../../types"
-import type { MoneyEvolutionRule } from "../../types/EvolutionRules"
+import type {
+  EvolutionType,
+  MoneyEvolutionContext,
+  MoneyEvolutionRule
+} from "../../types/EvolutionRules"
 import { EvolutionHandler } from "./evolution-handler"
 
-export class MoneyEvolutionHandler extends EvolutionHandler<[number]> {
+export class MoneyEvolutionHandler extends EvolutionHandler<EvolutionType.MONEY> {
   moneyRequired: number
   constructor(evolutionRule: MoneyEvolutionRule) {
     super(evolutionRule)
     this.moneyRequired = evolutionRule.moneyRequired
   }
 
-  canEvolve(pokemon: Pokemon, player: Player, money: number): boolean {
-    if (pokemon.items.has(Item.EVIOLITE)) return false
+  canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: MoneyEvolutionContext
+  ): boolean {
     if (player.board.has(pokemon.id) === false) return false
-    return money >= this.moneyRequired
+    return context.money !== undefined && context.money >= this.moneyRequired
   }
 
-  evolve(pokemon: Pokemon, player: Player, money: number): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, money)
+  evolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: MoneyEvolutionContext
+  ): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, context)
     const pokemonEvolved = player.transformPokemon(
       pokemon,
       pokemonEvolutionName

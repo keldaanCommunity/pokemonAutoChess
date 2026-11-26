@@ -1,6 +1,7 @@
 import { ToastContainer } from "react-toastify"
 import { DEPTH } from "../../../game/depths"
 import { GameAdditionalPokemonsIcon } from "./game-additional-pokemons"
+import { GameConnectionOrb } from "./game-connexion-orb"
 import GameExperience from "./game-experience"
 import { GameLifeInfo } from "./game-life-info"
 import GameLock from "./game-lock"
@@ -24,6 +25,7 @@ export default function GameShop() {
           <GameMoneyInfo />
           <GameStreakInfo variant="shop" />
           <div className="spacer"></div>
+          <GameConnectionOrb />
           <GameTeamInfo />
         </div>
         <div className="game-shop-actions">
@@ -62,6 +64,19 @@ export default function GameShop() {
         limit={1}
         closeButton={false}
         style={{ left: `calc(var(--sidebar-width) + 11.5vw)`, bottom: `9vw` }}
+      />
+      <ToastContainer
+        className="toast"
+        toastClassName="toast-shop"
+        containerId="toast-emera"
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        limit={1}
+        closeButton={false}
+        style={{ left: `calc(var(--sidebar-width) + 80vw)`, bottom: `9vw` }}
       />
     </>
   )

@@ -16,13 +16,15 @@ export class FirestarterStrategy extends AbilityStrategy {
     const damage = [20, 40, 80, 160][pokemon.stars - 1] ?? 160
     const speedBuff = [10, 20, 40, 80][pokemon.stars - 1] ?? 80
 
+    const startX = pokemon.positionX
+    const startY = pokemon.positionY
     const flyAwayCell = pokemon.flyAway(board, false)
     const targetsHit: Set<PokemonEntity> = new Set()
 
     if (flyAwayCell) {
       const cells = board.getCellsBetween(
-        pokemon.positionX,
-        pokemon.positionY,
+        startX,
+        startY,
         flyAwayCell.x,
         flyAwayCell.y
       )

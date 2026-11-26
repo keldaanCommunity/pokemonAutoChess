@@ -25,13 +25,15 @@ export default class ExperienceManager
   }
 
   addExperience(quantity: number): number {
+    if (!this.canLevelUp()) return 0
+
     let expToAdd = quantity
     while (this.canLevelUpWithXP(expToAdd)) {
       expToAdd -= ExpTable[this.level]
       this.level += 1
       this.expNeeded = ExpTable[this.level] ?? 255
     }
-    if (this.level < this.maxLevel) {
+    if (this.canLevelUp()) {
       this.experience += expToAdd
       expToAdd = 0
     }

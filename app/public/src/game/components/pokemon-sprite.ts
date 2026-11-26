@@ -36,6 +36,7 @@ import {
 import { Item } from "../../../../types/enum/Item"
 import { Passive } from "../../../../types/enum/Passive"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
+import { Synergy } from "../../../../types/enum/Synergy"
 import { min } from "../../../../utils/number"
 import {
   OrientationArray,
@@ -120,6 +121,7 @@ export default class PokemonSprite extends DraggableObject {
   psychicField: GameObjects.Sprite | undefined
   grassField: GameObjects.Sprite | undefined
   fairyField: GameObjects.Sprite | undefined
+  stellarField: GameObjects.Sprite | undefined
   curseVulnerability: GameObjects.Sprite | undefined
   curseWeakness: GameObjects.Sprite | undefined
   curseTorment: GameObjects.Sprite | undefined
@@ -238,16 +240,17 @@ export default class PokemonSprite extends DraggableObject {
 
     if (isEntity(pokemon)) {
       this.addStatusEffectsSprites(pokemon)
-    } else {
-      if (pokemon.items.has(Item.SHINY_STONE)) {
-        this.addLight()
-      }
     }
     if (pokemon.items.has(Item.BERSERK_GENE)) {
-      this.addBerserkEffect()
+      this.changeSkinColor(Item.BERSERK_GENE)
+    } else if (pokemon.items.has(Item.DIRE_HIT)) {
+      this.changeSkinColor(Item.DIRE_HIT)
     }
     if (pokemon.items.has(Item.AIR_BALLOON)) {
       this.addFloatingAnimation()
+    }
+    if (pokemon.types.has(Synergy.STELLAR)) {
+      this.addStellarEffect()
     }
     this.add(this.itemsContainer)
 
@@ -532,12 +535,40 @@ export default class PokemonSprite extends DraggableObject {
         )
         onComplete?.()
       } else {
-        projectile.anims.play({ key: attackSprite })
+        const projectileDuration = min(250)(travelTime)
+        const projectileAnimation = this.scene.anims.get(attackSprite)
+        if (!projectileAnimation) {
+          throw new Error(`Missing attack animation: ${attackSprite}`)
+        }
+        const projectileFrameRate =
+          projectileAnimation.getTotalFrames() / (projectileDuration / 1000)
         const coordinatesTarget = transformEntityCoordinates(
           targetX,
           targetY,
           this.flip
         )
+        let projectileArrived = false
+        let animationCompleted = false
+        let completionTimer: Phaser.Time.TimerEvent | undefined
+        const completeIfReady = () => {
+          if (!projectileArrived || !animationCompleted || completionTimer) {
+            return
+          }
+
+          completionTimer = this.scene.time.delayedCall(1000 / 60, () => {
+            if (!projectile.active) {
+              return
+            }
+
+            projectile.destroy()
+            onComplete?.()
+          })
+        }
+
+        projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+          animationCompleted = true
+          completeIfReady()
+        })
 
         /*logger.debug(
           `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
@@ -547,14 +578,24 @@ export default class PokemonSprite extends DraggableObject {
           x: coordinatesTarget[0] + randomBetween(-5, 5),
           y: coordinatesTarget[1] + randomBetween(-5, 5),
           ease: "Linear",
-          duration: min(250)(travelTime),
+          duration: projectileDuration,
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
           onComplete: () => {
-            projectile.destroy()
-            onComplete?.()
+            projectileArrived = true
+            completeIfReady()
           },
-          onStop: () => projectile.destroy(),
-          onStart: () => projectile.setVisible(true)
+          onStop: () => {
+            completionTimer?.remove()
+            projectile.destroy()
+          },
+          onStart: () => {
+            projectile.setVisible(true)
+            projectile.anims.play({
+              key: attackSprite,
+              frameRate: projectileFrameRate,
+              repeat: 0
+            })
+          }
         })
       }
     }
@@ -643,7 +684,7 @@ export default class PokemonSprite extends DraggableObject {
       targetY: this.targetY ?? -1,
       flip: this.flip,
       ap: this.pokemon.ap,
-      data: {},
+      data: args.data ?? {},
       ...args
     })
   }
@@ -1597,19 +1638,61 @@ export default class PokemonSprite extends DraggableObject {
     })
   }
 
-  removeRageEffect(hasBerserkGene: boolean = false) {
-    if (hasBerserkGene) {
-      this.addBerserkEffect()
-    } else {
-      this.sprite.clearTint()
+  addStellarEffect() {
+    let i = 0
+    const hsv = Phaser.Display.Color.HSVColorWheel(0.3, 1)
+    const updateStellarEffect = () => {
+      const top = hsv[i].color
+      const bottom = hsv[359 - i].color
+      this.sprite.setTint(top, top, bottom, bottom)
+      i = (i + 1) % 360
+    }
+    this.scene.events.on("update", updateStellarEffect)
+    this.sprite.once("destroy", () => {
+      this.scene.events.off("update", updateStellarEffect)
+    })
+    this.sprite.once("remove-stellar", () => {
+      this.scene.events.off("update", updateStellarEffect)
+    })
+    this.sprite.enableFilters()
+    this.sprite.filters?.internal.addGlow(0xffffff, 2, 0, 0.4)
+    if (!this.stellarField) {
+      this.stellarField = this.scene.add
+        .sprite(0, -5, "status", "STELLAR/000.png")
+        .setDepth(DEPTH.BOARD_EFFECT_AIR_LEVEL)
+        .setScale(1)
+      this.stellarField.anims.play("STELLAR")
+      this.add(this.stellarField)
     }
   }
 
-  addBerserkEffect() {
-    this.sprite.setTint(0x00ff00)
+  removeStellarEffect() {
+    this.sprite.emit("remove-stellar")
+    if (this.stellarField) {
+      this.remove(this.stellarField, true)
+      this.stellarField = undefined
+    }
   }
 
-  removeBerserkEffect() {
+  removeRageEffect() {
+    if (this.pokemon.items.has(Item.BERSERK_GENE)) {
+      this.changeSkinColor(Item.BERSERK_GENE)
+    } else if (this.pokemon.items.has(Item.DIRE_HIT)) {
+      this.changeSkinColor(Item.DIRE_HIT)
+    } else {
+      this.removeSkinColorChange()
+    }
+  }
+
+  changeSkinColor(item: Item) {
+    if (item === Item.BERSERK_GENE) this.sprite.setTint(0x00ff00)
+    else if (item === Item.DIRE_HIT) {
+      const randomColor = Phaser.Display.Color.RandomRGB(128, 255).color
+      this.sprite.setTint(randomColor)
+    }
+  }
+
+  removeSkinColorChange() {
     this.sprite.clearTint()
   }
 
@@ -1655,7 +1738,7 @@ export default class PokemonSprite extends DraggableObject {
       radius: 50,
       ease: Phaser.Math.Easing.Quartic.Out,
       duration: 3000,
-      onUpdate: function (tween) {
+      onUpdate: (tween) => {
         Phaser.Actions.RotateAroundDistance(
           flowerTrick.getAll(),
           { x: 0, y: 0 },
@@ -1663,7 +1746,7 @@ export default class PokemonSprite extends DraggableObject {
           circle.radius
         )
       },
-      onComplete: function () {
+      onComplete: () => {
         flowerTrick.destroy(true)
       }
     })
@@ -1798,7 +1881,7 @@ export function loadCompressedAtlas(
           delete lazyLoadingRequests[index]
           resolve(index)
         })
-        // @ts-ignore: there is an error in phaser types, the second parameter can be an object
+        // @ts-expect-error: there is an error in phaser types, the second parameter can be an object
         scene.load.multiatlas(index, multiatlas, "/assets/pokemons").start()
       }
     )

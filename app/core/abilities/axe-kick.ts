@@ -29,7 +29,7 @@ export class AxeKickStrategy extends AbilityStrategy {
 
     if (highestPPEnemy && freeSpot) {
       pokemon.moveTo(freeSpot.x, freeSpot.y, board, false)
-      const damage = [25, 50, 100][pokemon.stars - 1] ?? 100
+      const damage = [25, 50, 100, 200][pokemon.stars - 1] ?? 200
       highestPPEnemy.handleSpecialDamage(
         damage,
         board,
@@ -37,7 +37,8 @@ export class AxeKickStrategy extends AbilityStrategy {
         pokemon,
         crit
       )
-      highestPPEnemy.addPP(-15, pokemon, 1, crit)
+      const ppBurn = [15, 15, 30, 60][pokemon.stars - 1] ?? 60
+      highestPPEnemy.addPP(-ppBurn, pokemon, 1, crit)
       if (chance(0.3, pokemon)) {
         highestPPEnemy.status.triggerConfusion(3000, highestPPEnemy, pokemon)
       }

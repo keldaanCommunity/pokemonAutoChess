@@ -66,7 +66,7 @@ export default class Tileset {
   }
 
   getTilemapId(terrain: TerrainType, mask: Mask): TileMapping[] {
-    const mappedTile = new Array<TileMapping>()
+    const mappedTile: TileMapping[] = []
     const possibleStaticVariations = this.getPossibleStaticVariations(
       terrain,
       mask
@@ -91,7 +91,7 @@ export default class Tileset {
     terrain: TerrainType,
     mask: Mask
   ): TileMapping[] {
-    const mappedAnimations = new Array<TileMapping>()
+    const mappedAnimations: TileMapping[] = []
     const tileset = [
       this.metadata.tileset_0,
       this.metadata.tileset_1,
@@ -115,7 +115,7 @@ export default class Tileset {
   }
 
   getPossibleStaticVariations(terrain: TerrainType, mask: Mask) {
-    const possibleStaticVariations = new Array<TileMapping>()
+    const possibleStaticVariations: TileMapping[] = []
     ;[
       this.metadata.tileset_0,
       this.metadata.tileset_1,
@@ -147,7 +147,7 @@ export default class Tileset {
   }
 
   exportToTiled() {
-    const tilesets = new Array<TilesetTiled>()
+    const tilesets: TilesetTiled[] = []
     for (const t of [
       this.metadata.tileset_0,
       this.metadata.tileset_1,

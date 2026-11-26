@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 export const useKeyPress = (targetKey: string): boolean => {
   const [pressed, setPressed] = useState(false)
   const onKeydown = (event: KeyboardEvent) => {
-    console.log("onKeydown", event.key)
     if (event.key === targetKey || (event.ctrlKey && targetKey === "Ctrl"))
       setPressed(true)
   }

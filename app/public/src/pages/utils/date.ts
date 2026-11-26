@@ -23,9 +23,9 @@ export function formatDuration(seconds: number) {
   seconds -= hours * 3600
   const minutes = Math.floor(seconds / 60)
   seconds -= minutes * 60
-  //@ts-ignore: https://github.com/microsoft/TypeScript/issues/60608
+  //@ts-expect-error: https://github.com/microsoft/TypeScript/issues/60608
   if (Intl && Intl.DurationFormat) {
-    //@ts-ignore: https://github.com/microsoft/TypeScript/issues/60608
+    //@ts-expect-error: https://github.com/microsoft/TypeScript/issues/60608
     return new Intl.DurationFormat(i18n.language, { style: "long" }).format({
       days,
       hours,

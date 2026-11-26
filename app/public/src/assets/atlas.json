@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0.2026-11-24.3",
+  "version": "7.0.0.2026-11-26.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -9,6 +9,12 @@
           "fps": 5
         },
         "ACID_ARMOR": {
+          "frames": 8
+        },
+        "ACID_DOWNPOUR": {
+          "frames": 12
+        },
+        "ACID_DOWNPOUR_DROP": {
           "frames": 8
         },
         "ACID_SPRAY": {
@@ -27,6 +33,18 @@
         },
         "AIR_SLASH": {
           "frames": 8
+        },
+        "ALL_OUT_PUMMELING_KICK": {
+          "frames": 13
+        },
+        "ALL_OUT_PUMMELING_KICK2": {
+          "frames": 13
+        },
+        "ALL_OUT_PUMMELING_PUNCH": {
+          "frames": 14
+        },
+        "ALL_OUT_PUMMELING_PUNCH2": {
+          "frames": 13
         },
         "ANCHOR_SHOT": {
           "frames": 35
@@ -83,6 +101,9 @@
           "frames": 4,
           "repeat": 2
         },
+        "BLACK_HOLE_ECLIPSE": {
+          "frames": 60
+        },
         "BLAST_BURN": {
           "frames": 15
         },
@@ -96,6 +117,9 @@
         "BLUE_FLARE": {
           "frames": 15,
           "fps": 15
+        },
+        "BOARD_BURN": {
+          "frames": 4
         },
         "BOLT_BEAK": {
           "frames": 9
@@ -111,6 +135,9 @@
           "frames": 5
         },
         "BRAVE_BIRD": {
+          "frames": 7
+        },
+        "BREAKNECK_BLITZ_HIT": {
           "frames": 7
         },
         "BRICK_BREAK": {
@@ -140,6 +167,12 @@
         },
         "CLANGOROUS_SOUL": {
           "frames": 18
+        },
+        "CONTINENTAL_CRUSH": {
+          "frames": 1
+        },
+        "CONTINENTAL_CRUSH_EXPLOSION": {
+          "frames": 15
         },
         "CORE_ENFORCER": {
           "frames": 7
@@ -200,6 +233,14 @@
         "DEFENSE_ORDER": {
           "frames": 32
         },
+        "DEVASTATING_DRAKE": {
+          "frames": 4,
+          "fps": 10,
+          "repeat": -1
+        },
+        "DEVASTATING_DRAKE_HIT": {
+          "frames": 7
+        },
         "DIG": {
           "frames": 28
         },
@@ -255,10 +296,17 @@
           "frames": 23
         },
         "EERIE_SPELL": {
-          "frames": 4,
-          "fps": 8
+          "frames": 4
         },
         "EGG_BOMB": {
+          "frames": 1,
+          "repeat": -1
+        },
+        "EGG_BOMB_GOLDEN": {
+          "frames": 1,
+          "repeat": -1
+        },
+        "EGG_BOMB_HIT": {
           "frames": 16
         },
         "ELECTRO_SHOT": {
@@ -325,7 +373,8 @@
           "frames": 4
         },
         "FISSURE": {
-          "frames": 11
+          "frames": 11,
+          "repeat": 7
         },
         "FLAMETHROWER": {
           "frames": 50
@@ -381,6 +430,9 @@
           "fps": 15,
           "repeat": 3
         },
+        "FURIOUS_STAMPEDE_SMOKE": {
+          "frames": 5
+        },
         "FUSION_BOLT": {
           "frames": 13
         },
@@ -389,9 +441,30 @@
           "fps": 30,
           "repeat": -1
         },
+        "GIANT_RAFFLESIA": {
+          "frames": 31,
+          "fps": 10
+        },
+        "GIANT_RAFFLESIA_DIG": {
+          "frames": 6
+        },
+        "GIANT_RAFFLESIA_PROJECTILE": {
+          "frames": 4
+        },
+        "GIANT_RAFFLESIA_PROJECTILE_HIT": {
+          "frames": 4
+        },
         "GIGATON_HAMMER": {
           "frames": 4,
           "repeat": 4
+        },
+        "GIGAVOLT_HAVOC": {
+          "frames": 9
+        },
+        "GIGAVOLT_HAVOC_ZONE": {
+          "frames": 4,
+          "fps": 20,
+          "repeat": 10
         },
         "GLACIAL_LANCE": {
           "frames": 6
@@ -453,6 +526,9 @@
         "HURRICANE": {
           "frames": 52,
           "fps": 40
+        },
+        "HYDRO_VORTEX": {
+          "frames": 9
         },
         "HYPERSPACE_FURY": {
           "frames": 7
@@ -518,6 +594,12 @@
         "JUDGEMENT": {
           "frames": 31
         },
+        "KAIJU_ATTACK_EXPLOSION": {
+          "frames": 14
+        },
+        "KAIJU_ATTACK_PROJECTILE": {
+          "frames": 1
+        },
         "KNOCK_OFF": {
           "frames": 10
         },
@@ -552,6 +634,12 @@
           "frames": 10,
           "repeat": -1,
           "fps": 10
+        },
+        "LIGHT_THAT_BURNS_THE_SKY": {
+          "frames": 8
+        },
+        "LIGHT_THAT_BURNS_THE_SKY_CHARGE": {
+          "frames": 12
         },
         "LINK_CABLE": {
           "frames": 6
@@ -640,6 +728,12 @@
         "NATURAL_GIFT": {
           "frames": 45
         },
+        "NEVER_ENDING_NIGHTMARE": {
+          "frames": 8
+        },
+        "NEVER_ENDING_NIGHTMARE_ARM": {
+          "frames": 12
+        },
         "NIGHT_SHADE": {
           "frames": 34
         },
@@ -665,6 +759,9 @@
         },
         "OVERDRIVE": {
           "frames": 22
+        },
+        "PALAEO_COLLAPSE": {
+          "frames": 15
         },
         "PARABOLIC_CHARGE": {
           "frames": 13
@@ -692,6 +789,9 @@
         },
         "POPULATION_BOMB": {
           "frames": 11
+        },
+        "POWER_GEM": {
+          "frames": 4
         },
         "POWER_LENS": {
           "frames": 7
@@ -813,6 +913,9 @@
         "SAND_TOMB": {
           "frames": 14
         },
+        "SAVAGE_SPIN_OUT": {
+          "frames": 1
+        },
         "SCALE_SHOT": {
           "frames": 8,
           "repeat": -1
@@ -832,6 +935,9 @@
         },
         "SHADOW_SNEAK": {
           "frames": 32
+        },
+        "SHATTERED_PSYCHE": {
+          "frames": 15
         },
         "SHEER_COLD": {
           "frames": 32
@@ -969,6 +1075,9 @@
         "STINGING_TOXINS": {
           "frames": 14
         },
+        "STOKED_SPARKSURFER": {
+          "frames": 2
+        },
         "STOMP": {
           "frames": 10
         },
@@ -984,6 +1093,15 @@
         "STUN_SPORE": {
           "frames": 22
         },
+        "SUBZERO_SLAMMER": {
+          "frames": 6
+        },
+        "SUBZERO_SLAMMER_EXPLOSION": {
+          "frames": 10
+        },
+        "SUBZERO_SLAMMER_LASER": {
+          "frames": 4
+        },
         "SUCTION_HEAL": {
           "frames": 9
         },
@@ -991,6 +1109,12 @@
           "frames": 6,
           "fps": 30,
           "repeat": -1
+        },
+        "SUPERSONIC_SKYSTRIKE": {
+          "frames": 12
+        },
+        "SUPERSONIC_SKYSTRIKE_LANDING": {
+          "frames": 12
         },
         "SUPER_FANG": {
           "frames": 4
@@ -1019,11 +1143,20 @@
         "TEA_TIME": {
           "frames": 21
         },
+        "TECTONIC_RAGE": {
+          "frames": 11
+        },
+        "TECTONIC_RAGE_FINAL": {
+          "frames": 12
+        },
         "TEETER_DANCE": {
           "frames": 42
         },
         "TELEPORT": {
           "frames": 7
+        },
+        "TERASTALIZE": {
+          "frames": 41
         },
         "THIEF": {
           "frames": 8
@@ -1067,6 +1200,17 @@
         },
         "TROP_KICK": {
           "frames": 7
+        },
+        "TWINKLE_EXPLOSION": {
+          "frames": 14
+        },
+        "TWINKLE_STAR": {
+          "frames": 10,
+          "fps": 30,
+          "repeat": -1
+        },
+        "TWINKLE_TACKLE": {
+          "frames": 31
         },
         "TWISTER": {
           "frames": 15
@@ -1165,6 +1309,33 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
+        },
+        "CLOSE_COMBAT": {
+          "frames": 7
+        },
+        "GEOMANCY": {
+          "frames": 12
+        },
+        "LUSTER_PURGE": {
+          "frames": 3
+        },
+        "MIST_BALL": {
+          "frames": 3
+        },
+        "MOONGEIST_BEAM": {
+          "frames": 6
+        },
+        "NIGHTMARE": {
+          "frames": 15
+        },
+        "SCHOOLING": {
+          "frames": 4
+        },
+        "SEED_FLARE": {
+          "frames": 31
+        },
+        "TRI_ATTACK": {
+          "frames": 11
         }
       }
     },
@@ -1517,6 +1688,9 @@
           "frames": 10,
           "repeat": -1,
           "fps": 10
+        },
+        "STELLAR": {
+          "frames": 10
         },
         "VOID_BOOST": {
           "frames": 8,

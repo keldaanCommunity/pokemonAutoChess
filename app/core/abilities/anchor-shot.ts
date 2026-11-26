@@ -21,21 +21,21 @@ export class AnchorShotStrategy extends AbilityStrategy {
         .filter((v) => v.value === undefined)
         .map((v) => ({ x: v.x, y: v.y }))
     )
+    pokemon.broadcastAbility({
+      targetX: farthestTarget.positionX,
+      targetY: farthestTarget.positionY
+    })
     if (emptyCellsAround.length > 0) {
       const destination = emptyCellsAround[0]
-      pokemon.broadcastAbility({
-        targetX: farthestTarget.positionX,
-        targetY: farthestTarget.positionY
-      })
       farthestTarget.moveTo(destination.x, destination.y, board, true)
-      farthestTarget.handleSpecialDamage(
-        damage,
-        board,
-        AttackType.SPECIAL,
-        pokemon,
-        crit
-      )
-      farthestTarget.cooldown = min(750)(farthestTarget.cooldown)
     }
+    farthestTarget.handleSpecialDamage(
+      damage,
+      board,
+      AttackType.SPECIAL,
+      pokemon,
+      crit
+    )
+    farthestTarget.cooldown = min(750)(farthestTarget.cooldown)
   }
 }

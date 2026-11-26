@@ -4,6 +4,7 @@ import PokemonPortrait, {
   type PortraitOptions
 } from "../../pages/component/pokemon-portrait"
 import { addIconsToDescription } from "../../pages/utils/descriptions"
+import "./game-dialog.css"
 
 export class GameDialog extends GameObjects.DOMElement {
   dom: HTMLDivElement

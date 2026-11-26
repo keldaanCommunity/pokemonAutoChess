@@ -1,43 +1,56 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
-import type { IPlayer } from "../../types"
+import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
 import type {
   DivergentEvolution,
-  EvolutionRule
+  EvolutionContextMap,
+  EvolutionRule,
+  EvolutionType
 } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { Stat } from "../../types/enum/Game"
-import { TMPerAbility } from "../../types/enum/Item"
+import {
+  SynergyGivenByItem,
+  SynergyItems,
+  TMPerAbility
+} from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
-import { sum } from "../../utils/array"
+import { ZMoves } from "../../types/enum/ZMoves"
+import { isIn, sum } from "../../utils/array"
 import { pickRandomIn } from "../../utils/random"
+import { schemaValues } from "../../utils/schemas"
 
-export abstract class EvolutionHandler<AdditionalArgs extends any[] = []> {
+export abstract class EvolutionHandler<T extends EvolutionType> {
+  protected divergentEvolution?: DivergentEvolution<T>
+
+  constructor(
+    evolutionRule: Extract<EvolutionRule, { type: T }> & {
+      divergentEvolution?: DivergentEvolution<T>
+    }
+  ) {
+    this.divergentEvolution = evolutionRule.divergentEvolution
+  }
+
   abstract canEvolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: AdditionalArgs
+    context: EvolutionContextMap[T]
   ): boolean
+
   abstract evolve(
     pokemon: Pokemon,
     player: Player,
-    ...additionalArgs: AdditionalArgs
+    context: EvolutionContextMap[T]
   ): Pokemon
-  divergentEvolution?: DivergentEvolution<AdditionalArgs>
-
-  constructor(evolutionRule: EvolutionRule) {
-    if (evolutionRule.divergentEvolution)
-      this.divergentEvolution = evolutionRule.divergentEvolution
-  }
 
   getEvolution(
     pokemon: Pokemon,
-    player: IPlayer,
-    ...additionalArgs: AdditionalArgs
+    player: Player,
+    context: EvolutionContextMap[T]
   ): Pkm {
     if (this.divergentEvolution) {
-      return this.divergentEvolution(pokemon, player, ...additionalArgs)
+      return this.divergentEvolution(pokemon, player, context)
     }
     return pokemon.evolution
   }
@@ -75,12 +88,33 @@ export function carryOverPermanentStats(
     }
     pokemonEvolved.applyStat(statMapping[stat], sumOfPermaStatsModifier) // can be negative or positive
   }
+}
 
-  // carry over TM
+export function carryOverChangedAbilities(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[],
+  player: Player
+) {
+  // carry over TM and Z-Moves
   const existingTms = pokemonsBeforeEvolution
     .map((p) => p.tm)
     .filter<Ability>((tm): tm is Ability => tm !== Ability.DEFAULT)
-  if (existingTms.length > 0) {
+  const existingZMoves = pokemonsBeforeEvolution
+    .map((p) => p.skill)
+    .filter((skill) => isIn(ZMoves, skill))
+  if (existingZMoves.length > 0) {
+    pokemonEvolved.skill = pickRandomIn(existingZMoves)
+    if (existingTms.length > 0) {
+      // give back TM if taking the Z-Move
+      pokemonEvolved.tm = Ability.DEFAULT
+      for (const tmAbility of existingTms) {
+        const tm = TMPerAbility.get(tmAbility)
+        if (tm !== undefined) {
+          player.items.push(tm)
+        }
+      }
+    }
+  } else if (existingTms.length > 0) {
     pokemonEvolved.tm = pickRandomIn(existingTms)
     // only one TM can be kept, give back the other ones
     existingTms.splice(existingTms.indexOf(pokemonEvolved.tm), 1)
@@ -97,5 +131,25 @@ export function carryOverPermanentStats(
       pokemonEvolved.skill = pokemonEvolved.tm
     }
     pokemonEvolved.maxPP = 100
+  }
+}
+
+export function carryOverTeraShards(
+  pokemonEvolved: Pokemon,
+  pokemonsBeforeEvolution: Pokemon[]
+) {
+  const typesGivenByItems = pokemonsBeforeEvolution.map((p) =>
+    schemaValues(p.items)
+      .filter((item) => isIn(SynergyItems, item))
+      .map((item) => SynergyGivenByItem[item])
+  )
+  const teraTypes = pokemonsBeforeEvolution.flatMap((p, i) =>
+    schemaValues(p.types).filter((type) => {
+      const baseTypes = getPokemonData(p.name).types
+      return !baseTypes.includes(type) && !isIn(typesGivenByItems[i], type)
+    })
+  )
+  for (const type of teraTypes.flat()) {
+    pokemonEvolved.types.add(type)
   }
 }

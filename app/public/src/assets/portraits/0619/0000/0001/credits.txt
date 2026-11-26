@@ -1,3 +1,1 @@
-2021-02-27 22:34:40.096514	<@!702275233125630042>	CUR	PMDCollab_1	Normal,Happy,Pain,Angry,Worried,Sad,Crying,Shouting,Teary-Eyed,Determined,Joyous,Inspired,Surprised,Dizzy,Sigh,Stunned
-2023-10-23 16:12:01.850878	<@!350050109741858829>	CUR	PMDCollab_2	Normal,Joyous,Sigh,Pain,Surprised,Angry,Dizzy
-2024-11-13 03:08:13.897602	<@!350050109741858829>	CUR	CC_BY-NC_4	Normal,Joyous,Determined
+2026-09-01 20:21:35.375866	<@!488809643838144543>	CUR	CC_BY-NC_4	Normal,Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined

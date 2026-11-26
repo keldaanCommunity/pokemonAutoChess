@@ -46,7 +46,8 @@ export class GrudgeDiveStrategy extends AbilityStrategy {
         board,
         AttackType.PHYSICAL,
         pokemon,
-        crit
+        false,
+        false
       )
     }
   }

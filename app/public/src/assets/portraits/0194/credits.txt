@@ -1,5 +1,5 @@
 2020-10-07 17:58:43.869977	CHUNSOFT	CUR	Unspecified	Happy,Normal,Surprised,Worried
-2020-11-05 20:42:54.514628	FELIS_LICHT	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special0,Stunned,Surprised,Teary-Eyed,Worried
+2020-11-05 20:42:54.514628	<@!273594331577974785>	CUR	PMDCollab_1	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Special0,Stunned,Surprised,Teary-Eyed,Worried
 2023-01-24 02:08:38.058646	<@!356635814668664832>	CUR	PMDCollab_1	Sad,Joyous,Crying,Inspired,Sigh,Pain,Shouting,Stunned,Angry,Teary-Eyed,Dizzy,Determined,Special0
 2023-01-24 02:09:43.209694	<@!576876006636519434>	CUR	PMDCollab_1	"
 2023-01-25 21:50:10.402591	<@!356635814668664832>	CUR	PMDCollab_1	Sigh

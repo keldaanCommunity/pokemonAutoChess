@@ -2,3 +2,5 @@
 2022-06-01 18:26:39.177162	<@!215638650434617345>	OLD	PMDCollab_1	Teary-Eyed
 2022-11-18 22:20:33.862348	<@!356635814668664832>	CUR	PMDCollab_1	Normal,Teary-Eyed
 2023-05-19 07:05:26.785568	<@!356635814668664832>	CUR	PMDCollab_2	Normal,Normal^,Teary-Eyed,Teary-Eyed^
+2026-03-03 03:33:33.673140	<@!1042498956082544640>	CUR	CC_BY-NC_4	Sad,Joyous,Sad^,Joyous^,Happy,Crying,Inspired,Sigh,Happy^,Crying^,Inspired^,Sigh^,Pain,Shouting,Surprised,Stunned,Pain^,Shouting^,Surprised^,Stunned^,Angry,Dizzy,Angry^,Dizzy^,Worried,Determined,Worried^,Determined^
+2026-03-04 19:31:09.233454	<@!356635814668664832>	CUR	CC_BY-NC_4	Joyous,Joyous^,Crying,Crying^,Shouting,Surprised,Shouting^,Surprised^,Dizzy,Dizzy^,Worried,Worried^

@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 import { useCallback, useEffect, useState } from "react"
-import { removeInArray } from "../../utils/array"
+import { removeFromArray } from "../../utils/array"
 import { LocalStoreKeys, localStore } from "./pages/utils/store"
 
 // To allow a smooth transition to "uncapped", we save the FPS cap as this value + 1, despite Phaser definining uncapped as 0
@@ -35,6 +35,7 @@ export interface IPreferencesState {
   showDamageNumbers: boolean
   showEvolutions: boolean
   showAltForms: boolean
+  showMegaEvolutions: boolean
   showRegularPool: boolean
   showAdditionalPool: boolean
   showRegionalPool: boolean
@@ -67,6 +68,7 @@ const defaultPreferences: IPreferencesState = {
   showDamageNumbers: true,
   showEvolutions: true,
   showAltForms: true,
+  showMegaEvolutions: true,
   showRegularPool: true,
   showAdditionalPool: true,
   showRegionalPool: true,
@@ -186,7 +188,7 @@ export function subscribeToPreference<T extends keyof IPreferencesState>(
 }
 
 export function unsubscribeToPreferences(fn: Subscription) {
-  removeInArray(subscriptions, fn)
+  removeFromArray(subscriptions, fn)
 }
 
 export function preference<T extends keyof IPreferencesState>(

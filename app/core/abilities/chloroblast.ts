@@ -33,7 +33,8 @@ export class ChloroblastStrategy extends AbilityStrategy {
         board,
         AttackType.TRUE,
         pokemon,
-        crit
+        false,
+        false
       )
     }
   }

@@ -37,6 +37,7 @@ export class SoulTrapStrategy extends AbilityStrategy {
       const enemy = cell.value!
       enemy.addPP(-ppLoss, pokemon, 1, crit)
       enemy.status.triggerFatigue(fatigueDuration, enemy, pokemon)
+      enemy.setTarget(pokemon)
     })
   }
 }

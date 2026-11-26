@@ -27,7 +27,7 @@ export function getTournamentStage(tournament: ITournament): string {
   if (remainingPlayers.length <= 32) return "Quarter-Finals"
   else {
     const n = Math.floor(Math.log(remainingPlayers.length) / Math.log(2))
-    return `Round of ${Math.pow(2, n)}`
+    return `Round of ${2 ** n}`
   }
 }
 

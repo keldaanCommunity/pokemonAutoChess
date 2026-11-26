@@ -16,6 +16,7 @@ export class MistBallStrategy extends AbilityStrategy {
     target: PokemonEntity,
     crit: boolean
   ) {
+    super.process(pokemon, board, target, crit, true)
     const positionX = pokemon.positionX
     const positionY = pokemon.positionY
     const orientation = pokemon.orientation
@@ -23,8 +24,7 @@ export class MistBallStrategy extends AbilityStrategy {
     const targetY = target.positionY
     const ap = Math.round(pokemon.ap * (crit ? pokemon.critPower : 1))
     const targets: { x: number; y: number }[] = []
-    super.process(pokemon, board, target, crit, true)
-    const damage = [10, 20, 30, 60][pokemon.stars - 1] ?? 60
+    const damage = [10, 20, 30, 60, 120][pokemon.stars - 1] ?? 120
 
     effectInLine(board, pokemon, target, (cell) => {
       if (

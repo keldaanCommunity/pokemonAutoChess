@@ -305,7 +305,7 @@ export function DendrogramChart() {
               .attr("y", height + 8 - leafIconSize / 2)
             setHoveredCluster(null)
           })
-          .on("click", function () {
+          .on("click", () => {
             if (profile) setSelectedCluster(profile)
           })
       } else {
@@ -327,7 +327,7 @@ export function DendrogramChart() {
             d3.select(this).attr("r", 6).attr("stroke-width", 1.5)
             setHoveredCluster(null)
           })
-          .on("click", function () {
+          .on("click", () => {
             if (profile) setSelectedCluster(profile)
           })
       }

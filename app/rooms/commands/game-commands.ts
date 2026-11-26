@@ -22,6 +22,7 @@ import {
   TREASURE_BOX_LIFE_THRESHOLD,
   UNOWN_ENCOUNTER_CHANCE
 } from "../../config"
+import { STAGE_ATLAS_UNLOCKED } from "../../config/game/atlas"
 import { EffectConfigs } from "../../config/game/effects"
 import { AbilityStrategies } from "../../core/abilities/abilities"
 import { castAbility } from "../../core/abilities/cast"
@@ -36,6 +37,7 @@ import {
   equipItem,
   equipItems,
   ItemEffects,
+  openTreasureChest,
   unequipItems
 } from "../../core/effects/items"
 import { PassiveEffects } from "../../core/effects/passives"
@@ -46,6 +48,7 @@ import { getFlowerPotsUnlocked } from "../../core/flower-pots"
 import { selectDoubleUpMatchups, selectMatchups } from "../../core/matchmaking"
 import { canSell, PokemonEntity } from "../../core/pokemon-entity"
 import Simulation from "../../core/simulation"
+import { getSynergyTier } from "../../core/synergies"
 import { getLevelUpCost } from "../../models/colyseus-models/experience-manager"
 import type Player from "../../models/colyseus-models/player"
 import {
@@ -56,7 +59,6 @@ import {
   type Pokemon,
   PokemonClasses
 } from "../../models/colyseus-models/pokemon"
-import { getSynergyTier } from "../../models/colyseus-models/synergies"
 import UserMetadata from "../../models/mongo-models/user-metadata"
 import PokemonFactory, {
   getPokemonBaseline
@@ -68,6 +70,7 @@ import { updatePlayerTitlesAfterFight } from "../../models/titles"
 import { openGift } from "../../services/gift-shop"
 import {
   FlowerPot,
+  FossilStones,
   type IClient,
   type IDragDropCombineMessage,
   type IDragDropItemMessage,
@@ -78,7 +81,7 @@ import {
   TMPerAbility,
   Transfer
 } from "../../types"
-import { EvolutionRuleType } from "../../types/EvolutionRules"
+import { EvolutionType } from "../../types/EvolutionRules"
 import { Ability } from "../../types/enum/Ability"
 import { DungeonPMDO } from "../../types/enum/Dungeon"
 import { EffectEnum } from "../../types/enum/Effect"
@@ -111,7 +114,6 @@ import {
   ItemsSoldAtTown,
   Mulches,
   Scarves,
-  Sweets,
   SynergyGivenByItem,
   SynergyStones,
   Tools,
@@ -130,9 +132,10 @@ import { Synergy } from "../../types/enum/Synergy"
 import { TownEncounters } from "../../types/enum/TownEncounter"
 import { TradeStatus } from "../../types/enum/TradeStatus"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
+import { ZMoves } from "../../types/enum/ZMoves"
 import type { IDetailledPokemon } from "../../types/interfaces/IDetailledPokemon"
 import type { DisplayText } from "../../types/strings/DisplayText"
-import { isIn, removeInArray } from "../../utils/array"
+import { isIn, removeFromArray } from "../../utils/array"
 import { getAvatarString } from "../../utils/avatar"
 import {
   getFirstAvailablePositionInBench,
@@ -172,12 +175,12 @@ export class OnBuyPokemonCommand extends Command<
       return
     const player = this.state.players.get(playerId)
     const name = player?.shop[index]
-    if (!player || !player.alive || !name || name === Pkm.DEFAULT) return
+    if (!player?.alive || !name || name === Pkm.DEFAULT) return
 
     const pokemon = PokemonFactory.createPokemonFromName(name, player)
     const isEvolution =
       pokemon.evolutionRule &&
-      pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+      pokemon.evolutionRule.type === EvolutionType.COUNT &&
       EvolutionManager.canEvolveIfGettingOne(pokemon, player)
 
     const cost = getBuyPrice(name, this.state.specialGameRule)
@@ -277,7 +280,7 @@ export class OnPokemonCatchCommand extends Command<
       const hasSpaceOnBench =
         freeSpaceOnBench > 0 ||
         (pokemon.evolutionRule &&
-          pokemon.evolutionRule.type === EvolutionRuleType.COUNT &&
+          pokemon.evolutionRule.type === EvolutionType.COUNT &&
           EvolutionManager.canEvolveIfGettingOne(pokemon, player))
 
       if (hasSpaceOnBench) {
@@ -292,7 +295,7 @@ export class OnPokemonCatchCommand extends Command<
       }
     } else if (wanderer.type === WandererType.OUTLAW) {
       player.addMoney(OUTLAW_GOLD_REWARD, true, null)
-      removeInArray(player.items, Item.WANTED_NOTICE)
+      removeFromArray(player.items, Item.WANTED_NOTICE)
     }
   }
 }
@@ -618,7 +621,10 @@ export class OnDragDropCombineCommand extends Command<
 
     if (itemA === Item.EXCHANGE_TICKET || itemB === Item.EXCHANGE_TICKET) {
       const exchangedItem = itemA === Item.EXCHANGE_TICKET ? itemB : itemA
-      if (ItemComponentsNoScarf.includes(exchangedItem)) {
+      if (
+        ItemComponentsNoFossilOrScarf.includes(exchangedItem) ||
+        FossilStones.includes(exchangedItem)
+      ) {
         result = pickRandomIn(
           ItemComponentsNoFossilOrScarf.filter((i) => i !== exchangedItem)
         )
@@ -640,21 +646,23 @@ export class OnDragDropCombineCommand extends Command<
         return
       }
       if (Scarves.includes(recycledItem)) {
-        removeInArray(player.scarvesItems, recycledItem)
+        removeFromArray(player.scarvesItems, recycledItem)
       }
-      removeInArray(player.items, itemA)
-      removeInArray(player.items, itemB)
+      removeFromArray(player.items, itemA)
+      removeFromArray(player.items, itemB)
       player.items.push(recipe[0])
       player.items.push(recipe[1])
       player.updateSynergies()
       return
     } else {
       // find recipe result
+      const _itemA = isIn(FossilStones, itemA) ? Item.FOSSIL_STONE : itemA
+      const _itemB = isIn(FossilStones, itemB) ? Item.FOSSIL_STONE : itemB
       const recipes = Object.entries(ItemRecipe) as [Item, Item[]][]
       for (const [key, value] of recipes) {
         if (
-          (value[0] == itemA && value[1] == itemB) ||
-          (value[0] == itemB && value[1] == itemA)
+          (value[0] == _itemA && value[1] == _itemB) ||
+          (value[0] == _itemB && value[1] == _itemA)
         ) {
           result = key
           break
@@ -671,8 +679,8 @@ export class OnDragDropCombineCommand extends Command<
       }
 
       player.items.push(result)
-      removeInArray(player.items, itemA)
-      removeInArray(player.items, itemB)
+      removeFromArray(player.items, itemA)
+      removeFromArray(player.items, itemB)
     }
 
     player.updateSynergies()
@@ -739,7 +747,7 @@ export class OnDragDropItemCommand extends Command<
         )
         potEvolution.action = PokemonActionState.SLEEP
         player.flowerPots[index] = potEvolution
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
 
         if (potEvolution.evolution === Pkm.DEFAULT) {
@@ -765,7 +773,7 @@ export class OnDragDropItemCommand extends Command<
 
       if (item === Item.RICH_MULCH && index < nbTrees) {
         player.berryTreesStages[index] = 3
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       } else if (item === Item.AMAZE_MULCH && index < nbTrees) {
         player.berryTreesType[index] = pickRandomIn(
           GOLDEN_BERRY_TREE_TYPES.filter(
@@ -773,7 +781,7 @@ export class OnDragDropItemCommand extends Command<
           )
         )
         player.berryTreesStages[index] = 3
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
       }
       client.send(Transfer.DRAG_DROP_CANCEL, message)
       return
@@ -817,7 +825,7 @@ export class OnDragDropItemCommand extends Command<
       if (pokemon.canEat && !pokemon.dishes.has(item)) {
         pokemon.dishes.add(item)
         pokemon.action = PokemonActionState.EAT
-        removeInArray(player.items, item)
+        removeFromArray(player.items, item)
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         pokemon.items.add(item) // add the item just in time for the evolution
         const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
@@ -884,10 +892,14 @@ export class OnDragDropItemCommand extends Command<
     }
 
     if (isBasicItem && existingBasicItemToCombine) {
+      const itemA = isIn(FossilStones, item) ? Item.FOSSIL_STONE : item
+      const itemB = isIn(FossilStones, existingBasicItemToCombine)
+        ? Item.FOSSIL_STONE
+        : existingBasicItemToCombine
       const recipe = Object.entries(ItemRecipe).find(
         ([_result, recipe]) =>
-          (recipe[0] === existingBasicItemToCombine && recipe[1] === item) ||
-          (recipe[0] === item && recipe[1] === existingBasicItemToCombine)
+          (recipe[0] === itemA && recipe[1] === itemB) ||
+          (recipe[0] === itemB && recipe[1] === itemA)
       )
 
       if (!recipe) {
@@ -902,7 +914,7 @@ export class OnDragDropItemCommand extends Command<
       }
 
       pokemon.items.delete(existingBasicItemToCombine)
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
 
       if (pokemon.items.has(itemCombined)) {
         // pokemon already has the combined item so the second one pops off and go to player inventory
@@ -910,7 +922,7 @@ export class OnDragDropItemCommand extends Command<
       } else if (
         (isIn(SynergyStones, itemCombined) ||
           itemCombined === Item.FRIEND_BOW) &&
-        pokemon.types.has(SynergyGivenByItem[itemCombined])
+        pokemon.hasSynergy(SynergyGivenByItem[itemCombined])
       ) {
         // combining into a synergy stone on a pokemon that already has this synergy makes the stone pops off and go to player inventory
         player.items.push(itemCombined)
@@ -920,14 +932,14 @@ export class OnDragDropItemCommand extends Command<
     } else {
       if (
         isIn(SynergyStones, item) &&
-        pokemon.types.has(SynergyGivenByItem[item])
+        pokemon.hasSynergy(SynergyGivenByItem[item])
       ) {
         // prevent combining into a synergy stone on a pokemon that already has this synergy
         client.send(Transfer.DRAG_DROP_CANCEL, message)
         return
       }
       equipItem(pokemon, item, player)
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
     }
 
     if (pokemon.items.has(Item.SHINY_CHARM)) {
@@ -1028,7 +1040,7 @@ export class OnUseItemCommand extends Command<
     }
 
     if (used) {
-      removeInArray(player.items, item)
+      removeFromArray(player.items, item)
     }
   }
 }
@@ -1047,11 +1059,10 @@ export class OnShopRerollCommand extends Command<GameRoom, string> {
       if (player.shopFreeRolls > 0) {
         player.shopFreeRolls--
       } else {
-        const repeatBallHolders = schemaValues(player.board).filter((p) =>
-          p.items.has(Item.REPEAT_BALL)
+        const repeatBalls = schemaValues(player.items).filter(
+          (i) => i === Item.REPEAT_BALL
         )
-        if (repeatBallHolders.length > 0)
-          player.shopFreeRolls += repeatBallHolders.length
+        if (repeatBalls.length > 0) player.shopFreeRolls += repeatBalls.length
       }
       this.state.shop.assignShop(player, true, this.state)
     }
@@ -1323,7 +1334,9 @@ export class OnUpdateCommand extends Command<
 export class OnUpdatePhaseCommand extends Command<GameRoom> {
   execute() {
     this.state.updatePhaseNeeded = false
-    if (this.state.phase == GamePhaseState.TOWN) {
+    if (this.state.phase === null) {
+      this.initializeTownPhase()
+    } else if (this.state.phase == GamePhaseState.TOWN) {
       this.stopTownPhase()
       /* Normally Stage level is bumped after a fighting phase, but since magikarp is round 1, we need to increase stage level from 0 -> 1 to avoid a PVP round 1. There is probably a better solution*/
       if (this.state.stageLevel === 0) {
@@ -1385,6 +1398,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       return true
     }
 
+    if (playersAlive.length <= 2) {
+      playersAlive.forEach((player) => {
+        if (player.items.includes(Item.MISSION_ORDER_BLACK)) {
+          player.completeMissionOrder(Item.MISSION_ORDER_BLACK)
+        }
+      })
+    }
+
     return false
   }
 
@@ -1422,9 +1443,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           schemaValues(player.board).filter((pokemon) =>
             pokemon.items.has(Item.AMULET_COIN)
           ).length
-        const nbRedScales = player.items.filter(
-          (item) => item === Item.RED_SCALE
-        ).length
         player.maxInterest = 5 + nbGimmighoulCoins - nbAmuletCoins
         if (specialGameRule !== SpecialGameRule.BLOOD_MONEY) {
           player.interest = max(player.maxInterest)(
@@ -1436,7 +1454,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           income += max(5)(player.streak)
         }
         income += 5
-        income += nbRedScales * 5
         player.addMoney(income, true, null)
         if (income > 0) {
           const client = this.room.clients.find(
@@ -1517,7 +1534,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       let remainingAddPicks = 8
       this.state.players.forEach((player: Player) => {
         if (!player.isBot) {
-          const items = pickNRandomIn(ItemComponentsNoScarf, 3)
+          const items = pickNRandomIn(ItemComponentsNoScarf, 3).map((item) =>
+            item === Item.FOSSIL_STONE ? pickRandomIn(FossilStones) : item
+          )
           const pokemons: Pkm[] = []
           for (let i = 0; i < 3; i++) {
             const p = pool.pop()
@@ -1588,13 +1607,28 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       givers.forEach((p) => {
         const giftChoices: [Gift, Gift, Gift] = [
           pickRandomIn(
-            GiftsTier1.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier1.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.EMERA ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           ),
           pickRandomIn(
-            GiftsTier2.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier2.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.GOLDEN_EMERA ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           ),
           pickRandomIn(
-            GiftsTier3.filter((gift) => !p.giftsGiven.includes(gift))
+            GiftsTier3.filter(
+              (gift) =>
+                !p.giftsGiven.includes(gift) &&
+                (gift !== Item.DELUXE_BOX ||
+                  this.state.stageLevel > STAGE_ATLAS_UNLOCKED)
+            )
           )
         ]
 
@@ -1628,6 +1662,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
   }
 
   updatePlayerBetweenStages(player: Player) {
+    player.lifeByStage[this.room.state.stageLevel] = player.life
     const board = schemaValues(player.board)
 
     // Encounter effects
@@ -1635,62 +1670,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.items.includes(Item.TREASURE_BOX) &&
       player.life <= TREASURE_BOX_LIFE_THRESHOLD
     ) {
-      removeInArray(player.items, Item.TREASURE_BOX)
-
-      let rewards: Item[] = []
-      let rewardsIcons: Item[] | undefined
-      switch (this.state.treasureBoxRewardGiven) {
-        case "sweets":
-          rewardsIcons = [Item.SWEETS]
-          rewards = pickNRandomIn(Sweets, 5)
-          break
-        case "itemComponents":
-          rewards = pickNRandomIn(ItemComponents, 4)
-          break
-        case "componentsAndTickets":
-          rewards = [
-            ...pickNRandomIn(ItemComponents, 2),
-            Item.RECYCLE_TICKET,
-            Item.EXCHANGE_TICKET
-          ]
-          break
-        case "craftableItems":
-          rewards = pickNRandomIn(CraftableNoStonesOrScarves, 2)
-          break
-        case "mushrooms":
-          rewardsIcons = [Item.MUSHROOMS]
-          rewards = [Item.TINY_MUSHROOM, Item.BIG_MUSHROOM, Item.BALM_MUSHROOM]
-          break
-        case "goldBow":
-          rewards = [Item.GOLD_BOW]
-          break
-        case "gold":
-        default:
-          rewards = [Item.BIG_NUGGET]
-          break
-      }
-
-      player.spawnWanderingPokemon({
-        pkm: Pkm.XATU,
-        shiny: false,
-        type: WandererType.DIALOG,
-        behavior: WandererBehavior.SPECTATE,
-        data: (rewardsIcons ?? rewards).join(";"),
-        delay: 3000
-      })
-
-      setTimeout(() => {
-        if (rewards[0] === Item.BIG_NUGGET) {
-          const moneyGained = 10
-          player.addMoney(moneyGained, true, null)
-          const client = this.room.clients.find(
-            (cli) => cli.auth.uid === player.id
-          )
-          client?.send(Transfer.PLAYER_INCOME, moneyGained)
-        } else {
-          player.items.push(...rewards)
-        }
-      }, 10000)
+      removeFromArray(player.items, Item.TREASURE_BOX)
+      openTreasureChest(
+        player,
+        this.room,
+        this.room.state.treasureBoxRewardGiven
+      )
     }
 
     const rottingItems: Map<Item, Item> = new Map([
@@ -1792,11 +1777,16 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       )
 
       // Condition based evolutions on stage start
-      if (
-        pokemon.evolutionRule.type === EvolutionRuleType.STATE ||
-        pokemon.evolutionRule.type === EvolutionRuleType.STACK
-      ) {
-        EvolutionManager.tryEvolve(pokemon, player, this.state)
+      if (pokemon.evolutionRule.type === EvolutionType.STACK) {
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionType.STACK
+        })
+      }
+      if (pokemon.evolutionRule.type === EvolutionType.STATE) {
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionType.STATE,
+          state: this.state
+        })
       }
     })
 
@@ -1827,7 +1817,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           if (pokemon) {
             const coordinates = getFirstAvailablePositionOnBoard(
               player.board,
-              pokemon.types.has(Synergy.DARK) && pokemon.range === 1
+              pokemon.hasSynergy(Synergy.DARK) && pokemon.range === 1
                 ? 3
                 : pokemon.range
             )
@@ -1961,11 +1951,26 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
             }
           }
 
+          if (this.state.stageLevel > STAGE_ATLAS_UNLOCKED && !isPVE) {
+            if (this.state.townEncounter !== TownEncounters.DUSKNOIR) {
+              player.atlasManager.emera += 1
+            }
+            if (player.atlasManager.unlockedNodes.has("grovyle")) {
+              const lastResult = player.history.at(-1)?.result
+              if (
+                lastResult === BattleResult.DEFEAT ||
+                lastResult === BattleResult.DRAW
+              ) {
+                player.atlasManager.emera += 1
+              }
+            }
+          }
+
           this.spawnBabyEggs(player, isPVE)
 
           // Update Pokémon that have special effects between stages
           player.board.forEach((pokemon, key) => {
-            if (pokemon.evolutionRule?.type === EvolutionRuleType.HATCH) {
+            if (pokemon.evolutionRule?.type === EvolutionType.HATCH) {
               EvolutionManager.updateHatch(pokemon, player)
             }
 
@@ -2009,6 +2014,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       this.state.botManager.updateBots(this.room)
     }
   }
+
   applyDoubleUpRoundDamage() {
     this.state.simulations.forEach((sim) => {
       if (sim.isGhostBattle) return
@@ -2019,12 +2025,14 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (!loserIsBlue && !loserIsRed) return // draw
 
       const losingPlayer = loserIsBlue ? sim.bluePlayer : sim.redPlayer
+      const winningPlayer = loserIsBlue ? sim.redPlayer : sim.bluePlayer
       const winningTeam = loserIsBlue ? sim.redTeam : sim.blueTeam
-      if (!losingPlayer || !losingPlayer.alive) return
+      if (!losingPlayer?.alive) return
 
       const damage = this.room.computeRoundDamage(
         winningTeam,
-        this.state.stageLevel
+        this.state.stageLevel,
+        winningPlayer
       )
       losingPlayer.life -= damage
       if (damage > 0) {
@@ -2055,6 +2063,9 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
     this.room.miniGame.stop(this.room.state)
     this.state.players.forEach((player: Player) => {
       player.wanderers.clear()
+      if (this.state.stageLevel === STAGE_ATLAS_UNLOCKED) {
+        player.atlasManager.emera += 1 // only for the stage 20, gives the first emera when town phase ends and not fighting phase
+      }
     })
   }
 
@@ -2086,7 +2097,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
         itemsToSell.forEach((item) => {
           player.money += ItemSellPricesAtTown[item] ?? 0
           totalMoneyGained += ItemSellPricesAtTown[item] ?? 0
-          removeInArray<Item>(player.items, item)
+          removeFromArray<Item>(player.items, item)
         })
         if (totalMoneyGained > 0) {
           const client = this.room.clients.find(
@@ -2141,7 +2152,8 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
           const pveBoard = PokemonFactory.makePveBoard(
             pveStage,
             this.state.shinyEncounter,
-            this.state.townEncounter
+            this.state.townEncounter === TownEncounters.MAROWAK ||
+              player.atlasManager.unlockedNodes.has("marowak")
           )
           const weather = getWeather(player, null, pveBoard)
           const simulation = new Simulation(
@@ -2307,7 +2319,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
               }
             }
           } else if (this.state.stageLevel > this.state.outlawStage) {
-            removeInArray(player.items, Item.WANTED_NOTICE)
+            removeFromArray(player.items, Item.WANTED_NOTICE)
           }
         }
 
@@ -2342,10 +2354,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       player.effects.has(EffectEnum.GOLDEN_EGGS)
     const hasLostLastBattle =
       player.history.at(-1)?.result === BattleResult.DEFEAT
-    const eggsOnBench = schemaValues(player.board).filter(
-      (p) => p.name === Pkm.EGG
-    )
-    const nbOfGoldenEggsOnBench = eggsOnBench.filter((p) => p.shiny).length
     let nbEggsFound = 0
     let goldenEggFound = false
 
@@ -2356,13 +2364,12 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       const playerEggChanceStacked = player.eggChance
       const playerGoldenEggChanceStacked = player.goldenEggChance
       const babies = schemaValues(player.board).filter(
-        (p) => !isOnBench(p) && p.types.has(Synergy.BABY)
+        (p) => !isOnBench(p) && p.hasSynergy(Synergy.BABY)
       )
 
       for (const baby of babies) {
         if (
           player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-          nbOfGoldenEggsOnBench < EffectConfigs.GOLDEN_EGGS.maxGoldenEggs &&
           chance(GOLDEN_EGG_CHANCE, baby)
         ) {
           nbEggsFound++
@@ -2394,7 +2401,6 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
       if (
         goldenEggFound === false &&
         player.effects.has(EffectEnum.GOLDEN_EGGS) &&
-        nbOfGoldenEggsOnBench < EffectConfigs.GOLDEN_EGGS.maxGoldenEggs &&
         chance(playerGoldenEggChanceStacked)
       ) {
         goldenEggFound = true
@@ -2414,10 +2420,7 @@ export class OnUpdatePhaseCommand extends Command<GameRoom> {
 
     for (let i = 0; i < nbEggsFound; i++) {
       if (getFreeSpaceOnBench(player.board) === 0) continue
-      const isGoldenEgg =
-        goldenEggFound &&
-        i === 0 &&
-        nbOfGoldenEggsOnBench < EffectConfigs.GOLDEN_EGGS.maxGoldenEggs
+      const isGoldenEgg = goldenEggFound && i === 0
       giveRandomEgg(player, isGoldenEgg)
       if (player.effects.has(EffectEnum.HATCHER)) {
         player.eggChance = 0 // getting an egg resets the stacked egg chance
@@ -2495,7 +2498,12 @@ export function onPokemonChangePosition({
     player.items.push(...itemsToRemove)
     unequipItems(pokemon, itemsToRemove, player)
 
-    if (pokemon.tm && TMPerAbility.has(pokemon.tm)) {
+    if (pokemon.items.has(Item.Z_RING) && isIn(ZMoves, pokemon.tm)) {
+      // Knowledge is power, remove TM
+      pokemon.tm = Ability.DEFAULT
+    }
+
+    if (pokemon.tm !== Ability.DEFAULT && TMPerAbility.has(pokemon.tm)) {
       player.items.push(TMPerAbility.get(pokemon.tm)!)
       pokemon.tm = Ability.DEFAULT
       pokemon.skill = pokemon.baseSkill
@@ -2506,9 +2514,7 @@ export function onPokemonChangePosition({
   if (pokemon.passive !== Passive.NONE) {
     const hasLight = player.synergies.hasSynergyActive(Synergy.LIGHT)
     const inSpotlight =
-      hasLight &&
-      ((newX === player.lightX && newY === player.lightY) ||
-        pokemon.items.has(Item.SHINY_STONE))
+      hasLight && newX === player.lightX && newY === player.lightY
 
     PassiveEffects[pokemon.passive]?.forEach((effect) => {
       if (effect instanceof OnChangePositionEffect) {
@@ -2538,7 +2544,10 @@ export function onPokemonChangePosition({
     // can't be done as an OnChangePositionEffect because of circular dependency with evolution manager, so we do it here manually
     for (const pokemon of player.board.values()) {
       if (pokemon.name === Pkm.MANTYKE) {
-        EvolutionManager.tryEvolve(pokemon, player, player.board)
+        EvolutionManager.tryEvolve(pokemon, player, {
+          type: EvolutionType.PLACEMENT,
+          board: player.board
+        })
       }
     }
   }

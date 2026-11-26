@@ -1,7 +1,7 @@
 import { EffectEnum } from "../../types/enum/Effect"
-import { AttackType, Orientation } from "../../types/enum/Game"
+import { AttackType } from "../../types/enum/Game"
 import { max } from "../../utils/number"
-import { OrientationVector } from "../../utils/orientation"
+import { OrientationArray, OrientationVector } from "../../utils/orientation"
 import type { Board } from "../board"
 import { PeriodicEffect } from "../effects/effect"
 import type { PokemonEntity } from "../pokemon-entity"
@@ -12,7 +12,7 @@ class DragonRageEffect extends PeriodicEffect {
   ticksRemaining = 6
   // tracks only the shield granted by this ability, so unrelated shield sources aren't converted to heal
   shieldGiven = 0
-  constructor(pokemon: PokemonEntity, crit: boolean, initialShield: number) {
+  constructor(pokemon: PokemonEntity, crit: boolean) {
     super(
       (pokemon: PokemonEntity, board: Board) => {
         this.ticksRemaining--
@@ -24,10 +24,9 @@ class DragonRageEffect extends PeriodicEffect {
         }
         const shield = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
         const damage = [5, 10, 15, 20][pokemon.stars - 1] ?? 20
-        pokemon.addShield(shield, pokemon, 1, crit)
-        this.shieldGiven += shield
+        this.grantShield(pokemon, shield, crit)
 
-        Object.values(Orientation).forEach((orientation, index) => {
+        OrientationArray.forEach((orientation, index) => {
           pokemon.commands.push(
             new DelayedCommand(() => {
               pokemon.broadcastAbility({
@@ -42,7 +41,7 @@ class DragonRageEffect extends PeriodicEffect {
 
         board
           .getAdjacentCells(pokemon.positionX, pokemon.positionY)
-          .forEach((cell, index) => {
+          .forEach((cell) => {
             if (cell.value && cell.value.team !== pokemon.team) {
               cell.value.handleSpecialDamage(
                 damage,
@@ -57,8 +56,13 @@ class DragonRageEffect extends PeriodicEffect {
       EffectEnum.DRAGON_RAGE,
       1000
     )
-    this.shieldGiven = initialShield
     pokemon.effects.add(EffectEnum.DRAGON_RAGE)
+  }
+
+  grantShield(pokemon: PokemonEntity, amount: number, crit: boolean) {
+    const shieldBefore = pokemon.shield
+    pokemon.addShield(amount, pokemon, 1, crit)
+    this.shieldGiven += pokemon.shield - shieldBefore
   }
 
   consumeShield(pokemon: PokemonEntity) {
@@ -81,10 +85,12 @@ export class DragonRageStrategy extends AbilityStrategy {
       if (dragonRageEffect) {
         dragonRageEffect.consumeShield(pokemon)
         dragonRageEffect.ticksRemaining = 6
+        dragonRageEffect.grantShield(pokemon, initialShield, crit)
       }
     } else {
-      pokemon.addShield(initialShield, pokemon, 1, crit)
-      pokemon.effectsSet.add(new DragonRageEffect(pokemon, crit, initialShield))
+      const dragonRageEffect = new DragonRageEffect(pokemon, crit)
+      pokemon.effectsSet.add(dragonRageEffect)
+      dragonRageEffect.grantShield(pokemon, initialShield, crit)
     }
   }
 }

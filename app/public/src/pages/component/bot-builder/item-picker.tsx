@@ -3,13 +3,14 @@ import type React from "react"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { Dishes, type PkmWithCustom } from "../../../../../types"
 import {
+  AtlasItems,
   Berries,
   CraftableItems,
+  DubiousGadgets,
   Gifts,
   Item,
-  ItemComponents,
+  ItemComponentsSingleFossil,
   MemoryDiscs,
-  ShinyItems,
   TMs,
   Tools,
   UnholdableItems,
@@ -39,7 +40,11 @@ export default function ItemPicker(props: {
     items: readonly (Item | TierListSymbol)[]
     hidden?: boolean
   }[] = [
-    { label: t("components"), key: "components", items: ItemComponents },
+    {
+      label: t("components"),
+      key: "components",
+      items: ItemComponentsSingleFossil
+    },
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     {
       label: t("food"),
@@ -47,11 +52,11 @@ export default function ItemPicker(props: {
       items: [Item.CHEF_HAT, ...Berries, ...Dishes]
     },
 
-    { label: t("tools"), key: "tools", items: Tools },
+    { label: t("tools"), key: "tools", items: [...Tools, ...DubiousGadgets] },
     {
-      label: t("shiny_items"),
-      key: "shiny_items",
-      items: ShinyItems
+      label: t("atlas_items"),
+      key: "atlas_items",
+      items: AtlasItems
     },
     {
       label: t("tm_short"),

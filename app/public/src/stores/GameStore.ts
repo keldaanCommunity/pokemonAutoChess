@@ -1,10 +1,16 @@
+import { SetSchema } from "@colyseus/schema"
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { StageDuration } from "../../../config"
+import type { AtlasNodeId } from "../../../config/game/atlas"
 import type Simulation from "../../../core/simulation"
+import AtlasManager from "../../../models/colyseus-models/atlas-manager"
 import ExperienceManager from "../../../models/colyseus-models/experience-manager"
+import type Player from "../../../models/colyseus-models/player"
+import { PokemonCustoms } from "../../../models/colyseus-models/pokemon-customs"
 import Synergies from "../../../models/colyseus-models/synergies"
 import type {
   Emotion,
+  IAtlasManager,
   IDps,
   IExperienceManager,
   IPlayer,
@@ -17,7 +23,7 @@ import type { SpecialGameRule } from "../../../types/enum/SpecialGameRule"
 import type { Synergy } from "../../../types/enum/Synergy"
 import { Weather } from "../../../types/enum/Weather"
 import type { ILeaderboardInfo } from "../../../types/interfaces/LeaderboardInfo"
-import { schemaEntries } from "../../../utils/schemas"
+import { schemaEntries, schemaValues } from "../../../utils/schemas"
 import { getGameScene } from "../pages/game"
 
 export interface GameStateStore {
@@ -26,7 +32,7 @@ export interface GameStateStore {
   phaseDuration: number
   roundTime: number
   phase: GamePhaseState
-  players: IPlayer[]
+  players: Player[]
   simulations: ISimulation[]
   stageLevel: number
   noElo: boolean
@@ -42,6 +48,7 @@ export interface GameStateStore {
   shopFreeRolls: number
   shopLocked: boolean
   experienceManager: IExperienceManager
+  atlasManager: IAtlasManager
   shop: Pkm[]
   itemsProposition: Item[]
   pokemonsProposition: PkmProposition[]
@@ -52,6 +59,7 @@ export interface GameStateStore {
   additionalPokemons: Pkm[]
   podium: ILeaderboardInfo[]
   spectatorCount: number
+  atlasVisible: boolean
 }
 
 const initialState: GameStateStore = {
@@ -60,15 +68,15 @@ const initialState: GameStateStore = {
   phaseDuration: StageDuration[1],
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
-  players: new Array<IPlayer>(),
-  simulations: new Array<ISimulation>(),
+  players: [] as Player[],
+  simulations: [] as Simulation[],
   stageLevel: 0,
   weather: Weather.NEUTRAL,
   noElo: false,
   playerIdSpectated: "",
   simulationIdSpectated: "",
   teamSpectated: Team.BLUE_TEAM,
-  synergiesSpectated: new Array<[Synergy, number]>(),
+  synergiesSpectated: [] as [Synergy, number][],
   money: 5,
   interest: 0,
   maxInterest: 5,
@@ -76,16 +84,18 @@ const initialState: GameStateStore = {
   shopFreeRolls: 0,
   shopLocked: false,
   experienceManager: new ExperienceManager(),
-  shop: new Array<Pkm>(),
-  itemsProposition: new Array<Item>(),
-  pokemonsProposition: new Array<Pkm>(),
-  blueDpsMeter: new Array<IDps>(),
-  redDpsMeter: new Array<IDps>(),
+  atlasManager: new AtlasManager(),
+  shop: [] as Pkm[],
+  itemsProposition: [] as Item[],
+  pokemonsProposition: [] as Pkm[],
+  blueDpsMeter: [] as IDps[],
+  redDpsMeter: [] as IDps[],
   emotesUnlocked: [],
-  additionalPokemons: new Array<Pkm>(),
+  additionalPokemons: [] as Pkm[],
   specialGameRule: null,
-  podium: new Array<ILeaderboardInfo>(),
-  spectatorCount: 0
+  podium: [] as ILeaderboardInfo[],
+  spectatorCount: 0,
+  atlasVisible: false
 }
 
 const gameSlice = createSlice({
@@ -114,17 +124,31 @@ const gameSlice = createSlice({
     ) => {
       state.specialGameRule = action.payload
     },
-    addPlayer: (state, action: PayloadAction<IPlayer>) => {
-      const clone = JSON.parse(JSON.stringify(action.payload)) as IPlayer
-      // the json-clone drops Synergies' MapSchema methods; rebuild it so GamePlayerDetail's .entries() works on hover before the next setSynergies
+    addPlayer: (state, action: PayloadAction<Player>) => {
+      // There are reactivity issues when using directly the Colyseus Schema classes within React
+      // the json-clone calls toJSON() on the schemas, which converts some SetSchemas to arrays and MapSchemas to plain objects
+      // This is not ideal but at least reactivity works. This needs to be further investigated.
+      const clone = JSON.parse(JSON.stringify(action.payload)) as Player
+
+      // rebuild custom classes to have access to the methods
+      clone.pokemonCustoms = new PokemonCustoms(
+        new Map(
+          Object.entries(clone.pokemonCustoms ?? {}) as [string, number][]
+        )
+      )
       clone.synergies = new Synergies(
         new Map(Object.entries(clone.synergies ?? {}) as [Synergy, number][])
       )
-      // the json-clone flattens the board MapSchema to a plain object
+
       if (action.payload.board) clone.board = action.payload.board
       // the json-clone also flattens PokemonCustoms' MapSchema
       if (action.payload.pokemonCustoms) {
         clone.pokemonCustoms = action.payload.pokemonCustoms
+      }
+      if (action.payload.atlasManager.unlockedNodes) {
+        clone.atlasManager.unlockedNodes = new SetSchema<AtlasNodeId>(
+          schemaValues(clone.atlasManager.unlockedNodes)
+        )
       }
 
       const index = state.players.findIndex((p) => p.id === clone.id)
@@ -166,6 +190,15 @@ const gameSlice = createSlice({
         expNeeded: action.payload.expNeeded,
         level: action.payload.level,
         maxLevel: action.payload.maxLevel
+      }
+    },
+    updateAtlasManager: (state, action: PayloadAction<IAtlasManager>) => {
+      state.atlasManager = {
+        ...state.atlasManager,
+        emera: action.payload.emera,
+        unlockedNodes: action.payload.unlockedNodes,
+        legendaries: action.payload.legendaries,
+        symbols: action.payload.symbols
       }
     },
     changePlayer: (
@@ -254,8 +287,8 @@ const gameSlice = createSlice({
             ? Team.BLUE_TEAM
             : Team.RED_TEAM
         state.weather = action.payload.weather
-        state.blueDpsMeter = new Array<IDps>()
-        state.redDpsMeter = new Array<IDps>()
+        state.blueDpsMeter = [] as IDps[]
+        state.redDpsMeter = [] as IDps[]
         action.payload.blueDpsMeter.forEach((dps) => {
           state.blueDpsMeter.push(structuredClone(dps))
         })
@@ -264,7 +297,7 @@ const gameSlice = createSlice({
         })
       }
     },
-    setPlayer: (state, action: PayloadAction<IPlayer>) => {
+    setPlayer: (state, action: PayloadAction<Player>) => {
       state.playerIdSpectated = action.payload.id
       state.simulationIdSpectated = action.payload.simulationId
       state.teamSpectated = action.payload.team
@@ -331,6 +364,10 @@ const gameSlice = createSlice({
       state.spectatorCount = action.payload
     },
 
+    setAtlasVisible: (state, action: PayloadAction<boolean>) => {
+      state.atlasVisible = action.payload
+    },
+
     leaveGame: () => initialState
   }
 })
@@ -359,6 +396,7 @@ export const {
   addPlayer,
   removePlayer,
   updateExperienceManager,
+  updateAtlasManager,
   setStreak,
   setInterest,
   setMaxInterest,
@@ -370,7 +408,8 @@ export const {
   refreshShopUI,
   setItemsProposition,
   setPodium,
-  setSpectatorCount
+  setSpectatorCount,
+  setAtlasVisible
 } = gameSlice.actions
 
 export default gameSlice.reducer

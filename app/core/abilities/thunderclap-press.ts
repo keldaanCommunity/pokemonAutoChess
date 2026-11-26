@@ -21,7 +21,7 @@ export class ThunderclapPressStrategy extends AbilityStrategy {
     effectInOrientation(board, pokemon, target, (cell) => {
       if (!cell.value) {
         farthestEmptyCell = cell
-      } else {
+      } else if (cell.value.team !== pokemon.team) {
         targetsHit.add(cell.value)
       }
     })

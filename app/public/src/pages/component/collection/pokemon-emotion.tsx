@@ -45,7 +45,7 @@ export default function PokemonEmotion(props: {
       })}
       onClick={props.onClick}
     >
-      <PokemonPortrait portrait={props} />
+      <PokemonPortrait portrait={props} className="no-border" />
       {AvatarEmotions.includes(props.emotion) && (
         <span className="shortcut">
           Ctrl+{AvatarEmotions.indexOf(props.emotion) + 1}

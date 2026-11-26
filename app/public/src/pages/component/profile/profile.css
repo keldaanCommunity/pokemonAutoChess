@@ -100,6 +100,11 @@
 
 .profile-actions .emotions-grid {
   gap: 0.5em;
+
+  & .pokemon-portrait {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .profile-modal article {

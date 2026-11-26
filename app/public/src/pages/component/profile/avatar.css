@@ -17,6 +17,7 @@
   width: 60px;
   height: 60px;
   border-radius: 10px 0 0 10px;
+  flex: 0 0 60px;
 }
 
 .player-name {

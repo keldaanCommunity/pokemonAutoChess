@@ -4,7 +4,7 @@ export class EloEngine {
   K = 32
 
   getExpected(a: number, b: number) {
-    return 1 / (1 + Math.pow(10, (b - a) / 400))
+    return 1 / (1 + 10 ** ((b - a) / 400))
   }
   updateRating(
     expected: number,

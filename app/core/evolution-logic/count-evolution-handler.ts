@@ -1,18 +1,26 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
-import type GameState from "../../rooms/states/game-state"
 import { Item, ItemComponents } from "../../types"
-import type { CountEvolutionRule } from "../../types/EvolutionRules"
+import type {
+  CountEvolutionContext,
+  CountEvolutionRule,
+  EvolutionType
+} from "../../types/EvolutionRules"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
 import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
 import { shuffleArray } from "../../utils/random"
 import { schemaValues } from "../../utils/schemas"
-import { carryOverPermanentStats, EvolutionHandler } from "./evolution-handler"
+import {
+  carryOverChangedAbilities,
+  carryOverPermanentStats,
+  carryOverTeraShards,
+  EvolutionHandler
+} from "./evolution-handler"
 
-export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
+export class CountEvolutionHandler extends EvolutionHandler<EvolutionType.COUNT> {
   numberRequired: number
 
   constructor(evolutionRule: CountEvolutionRule) {
@@ -20,7 +28,11 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     this.numberRequired = evolutionRule.numberRequired
   }
 
-  canEvolve(pokemon: Pokemon, player: Player): boolean {
+  canEvolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: CountEvolutionContext
+  ): boolean {
     if (!pokemon.hasEvolution) return false
 
     // special case for Avalugg passive, didnt find a better way to do it
@@ -34,7 +46,7 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length >= this.numberRequired
   }
@@ -53,13 +65,17 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     }
 
     const copies = schemaValues(player.board).filter(
-      (p) => p.name === pokemon.name && !p.items.has(Item.EVIOLITE)
+      (p) => p.name === pokemon.name
     )
     return copies.length === this.numberRequired - 1
   }
 
-  evolve(pokemon: Pokemon, player: Player, state: GameState): Pokemon {
-    const pokemonEvolutionName = this.getEvolution(pokemon, player, state)
+  evolve(
+    pokemon: Pokemon,
+    player: Player,
+    context: CountEvolutionContext
+  ): Pokemon {
+    const pokemonEvolutionName = this.getEvolution(pokemon, player, context)
     let coord: { x: number; y: number } | undefined
     const itemsComponentsOnBench: Item[] = []
     const itemsCompleteOnBench: Item[] = []
@@ -71,7 +87,6 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     player.board.forEach((pkm, id) => {
       if (
         pkm.name === pokemon.name &&
-        !pkm.items.has(Item.EVIOLITE) &&
         pokemonsBeforeEvolution.length < this.numberRequired
       ) {
         // logger.debug(pkm.name, pokemon.name)
@@ -115,6 +130,8 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
     )
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution, player)
+    carryOverChangedAbilities(pokemonEvolved, pokemonsBeforeEvolution, player)
+    carryOverTeraShards(pokemonEvolved, pokemonsBeforeEvolution)
     pokemonEvolved.stacks = pokemon.stacks // carry over the stacks (since they're not supposed to be linked to the evolution rule)
 
     shuffleArray(itemsCompleteOnBench)
@@ -157,7 +174,7 @@ export class CountEvolutionHandler extends EvolutionHandler<[GameState]> {
 
     if (
       pokemonsBeforeEvolution.some((p) => p.dishes.size > 0) &&
-      state.phase !== GamePhaseState.FIGHT
+      context.state?.phase !== GamePhaseState.FIGHT
     ) {
       const dishes = pokemonsBeforeEvolution
         .filter((p) => p.dishes.size > 0)

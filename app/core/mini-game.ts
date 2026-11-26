@@ -20,15 +20,9 @@ import type Player from "../models/colyseus-models/player"
 import { PlayerChoice } from "../models/colyseus-models/player-choice"
 import { PokemonAvatarModel } from "../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../models/colyseus-models/portal"
-import { getSynergyTier } from "../models/colyseus-models/synergies"
 import type GameRoom from "../rooms/game-room"
 import type GameState from "../rooms/states/game-state"
-import {
-  MemoryDiscs,
-  SynergyGivenByItem,
-  SynergyItems,
-  Transfer
-} from "../types"
+import { FossilStones, SynergyGivenByItem, Transfer } from "../types"
 import { DungeonPMDO } from "../types/enum/Dungeon"
 import { PokemonActionState } from "../types/enum/Game"
 import {
@@ -40,6 +34,7 @@ import {
   NonSpecialBerries,
   SynergyGems,
   SynergyGivenByGem,
+  SynergyItemsNoSpecial,
   SynergyStones,
   Tools
 } from "../types/enum/Item"
@@ -60,7 +55,9 @@ import {
 } from "../utils/random"
 import { schemaKeys, schemaValues } from "../utils/schemas"
 import { giveRandomEgg } from "./eggs"
+import { assignStarters, assignUniquePropositions } from "./pools"
 import { spawnDIAYAvatar } from "./scribbles"
+import { getSynergyTier } from "./synergies"
 
 const PLAYER_VELOCITY = 2
 const ITEM_ROTATION_SPEED = 0.0004
@@ -296,7 +293,7 @@ export class MiniGame {
       state.townEncounter = null
     }
 
-    this.alivePlayers = new Array<Player>()
+    this.alivePlayers = [] as Player[]
     players.forEach((p) => {
       if (p.alive) {
         this.alivePlayers.push(p)
@@ -535,11 +532,8 @@ export class MiniGame {
       const topSynergies = schemaValues(state.players).flatMap((p) =>
         p.synergies.getTopSynergies(3)
       )
-      itemsSet = SynergyItems.filter(
-        (i) =>
-          !isIn(MemoryDiscs, i) &&
-          i !== Item.SHINY_STONE &&
-          isIn(topSynergies, SynergyGivenByItem[i])
+      itemsSet = SynergyItemsNoSpecial.filter((i) =>
+        isIn(topSynergies, SynergyGivenByItem[i])
       )
       maxCopiesPerItem = 2
     }
@@ -557,6 +551,11 @@ export class MiniGame {
     if (encounter === TownEncounters.CHANSEY) {
       itemsSet = [Item.EGG_FOR_SELL]
       nbItemsToPick = this.alivePlayers.length
+      maxCopiesPerItem = 99
+    }
+
+    if (encounter === TownEncounters.CELEBI) {
+      itemsSet = [Item.EMERA]
       maxCopiesPerItem = 99
     }
 
@@ -604,9 +603,13 @@ export class MiniGame {
       items.push(...pickNRandomIn(SynergyGems, 4))
     }
 
+    if (encounter === TownEncounters.OMANYTE) {
+      items.push(...pickNRandomIn(FossilStones, 4))
+    }
+
     for (let j = 0; j < nbItemsToPick; j++) {
-      let item,
-        count,
+      let item: Item,
+        count: number,
         tries = 0
       do {
         item = pickRandomIn(itemsSet)
@@ -617,14 +620,14 @@ export class MiniGame {
     }
 
     if (itemsSet === CraftableItemsNoScarves) {
-      while (items.filter((i) => isIn(SynergyStones, i)).length > 4) {
-        // ensure that there are at most 4 synergy stones in the carousel
+      while (items.filter((i) => isIn(SynergyStones, i)).length > 3) {
+        // ensure that there are at most 3 synergy stones in the carousel
         const index = items.findIndex((i) => isIn(SynergyStones, i))
         items[index] = pickRandomIn(CraftableNoStonesOrScarves)
       }
     } else if (itemsSet === ItemComponentsNoFossilOrScarf && chance(0.8)) {
-      // max 1 random fossil stone, added with 40% chance
-      items.push(Item.FOSSIL_STONE)
+      // max 1 random fossil stone, added with 80% chance
+      items.push(pickRandomIn(FossilStones))
     }
 
     return shuffleArray(items)
@@ -633,7 +636,7 @@ export class MiniGame {
   pickRandomSynergySymbols(stageLevel: number, room: GameRoom) {
     if (stageLevel === 0) {
       const symbols = pickNRandomIn(
-        SynergyArray,
+        SynergyArray.filter((s) => s !== Synergy.STELLAR),
         3 * ((this.avatars?.size ?? 8) + 1)
       )
       //logger.debug(`symbols chosen for player ${player.name}`, symbols)
@@ -644,7 +647,8 @@ export class MiniGame {
     } else {
       this.avatars?.forEach((avatar) => {
         const player = this.alivePlayers.find((p) => p.id === avatar.id)!
-        const synergiesUsable = Object.values(Synergy).filter((type) => {
+        const synergiesUsable = SynergyArray.filter((type) => {
+          if (type === Synergy.STELLAR) return false // Stellar symbols cannot appear on portals
           if (type === Synergy.BABY && stageLevel === 20) return false // no baby legendaries
           return true
         })
@@ -876,6 +880,8 @@ export class MiniGame {
         if (item && player && !player.isBot) {
           if (item.name === Item.EGG_FOR_SELL) {
             giveRandomEgg(player, false)
+          } else if (item.name === Item.EMERA) {
+            player.atlasManager.emera += 1
           } else if (item.name === Item.GIMMIGHOUL_COIN) {
             player.items.push(item.name)
             player.addMoney(5, true, null)
@@ -921,8 +927,12 @@ export class MiniGame {
           const avatar = spawnDIAYAvatar(player)
           player.board.set(avatar.id, avatar)
           avatar.onAcquired(player)
+        } else if (state.stageLevel === PortalCarouselStages[2]) {
+          player.atlasManager.assignLegendaries(player, portalSynergies)
+        } else if (state.stageLevel === PortalCarouselStages[1]) {
+          assignUniquePropositions(player, portalSynergies)
         } else {
-          state.shop.assignUniquePropositions(player, state, portalSynergies)
+          assignStarters(player, state, portalSynergies)
         }
       }
 
@@ -948,8 +958,10 @@ export class MiniGame {
     }
 
     if (state.townEncounter === TownEncounters.WIGGLYTUFF) {
-      const candidateMissions = MissionOrders.filter((m) =>
-        state.shinyEncounter ? m !== Item.MISSION_ORDER_GOLD : true
+      const candidateMissions = MissionOrders.filter(
+        (m) =>
+          m !== Item.MISSION_ORDER_BLACK &&
+          (!state.shinyEncounter || m !== Item.MISSION_ORDER_GOLD)
       )
       this.alivePlayers.forEach((player) => {
         player.choices.push(
@@ -959,6 +971,13 @@ export class MiniGame {
           })
         )
       })
+    }
+
+    if (
+      state.stageLevel === 17 &&
+      state.townEncounter === TownEncounters.GROVYLE
+    ) {
+      state.stageLevel += 2
     }
   }
 }

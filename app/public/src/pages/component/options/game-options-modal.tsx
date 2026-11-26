@@ -106,6 +106,7 @@ export default function GameOptionsModal(props: {
                 <a
                   href="https://discord.com/channels/737230355039387749/1488242758232834282"
                   target="_blank"
+                  rel="noopener"
                 >
                   Discord
                 </a>

@@ -47,7 +47,7 @@ export function Modal(props: ModalProps) {
   useEffect(() => {
     if (show) {
       const dialog = ref.current!
-      dialog.addEventListener("mousedown", function (event) {
+      dialog.addEventListener("mousedown", (event) => {
         const rect = dialog.getBoundingClientRect()
         const isInDialog =
           (rect.top <= event.clientY &&

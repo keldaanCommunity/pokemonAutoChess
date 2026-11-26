@@ -7,9 +7,9 @@ import { List, useDynamicRowHeight } from "react-window"
 import { EloRankThreshold } from "../../../../../config"
 import { EloRank } from "../../../../../types/enum/EloRank"
 import {
+  AtlasItems,
   CraftableItems,
   type Item,
-  ShinyItems,
   Tools,
   UnholdableItems,
   UnholdableItemsToSaveForStats
@@ -57,9 +57,9 @@ export function ItemReport() {
     { label: t("craftable_items"), key: "craftable", items: CraftableItems },
     { label: t("tools"), key: "tools", items: Tools },
     {
-      label: t("shiny_items"),
-      key: "shiny_items",
-      items: ShinyItems.filter((i) => !isIn(UnholdableItems, i))
+      label: t("atlas_items"),
+      key: "atlas_items",
+      items: AtlasItems.filter((i) => !isIn(UnholdableItems, i))
     },
     {
       label: t("unholdable_item"),
