@@ -41,6 +41,7 @@ export default defineConfig({
     include: [
       "app/public/src/**/*",
       "app/core/expeditions.ts",
+      "app/config/game/town-encounters.ts",
       "app/types/strings/Strings.ts"
     ],
     // Keys built at runtime, which the scanner cannot see
