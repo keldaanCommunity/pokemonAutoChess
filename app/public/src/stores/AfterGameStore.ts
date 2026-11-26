@@ -10,7 +10,7 @@ export interface IUserAfterState {
 }
 
 const initialState: IUserAfterState = {
-  players: new Array<IAfterGamePlayer>(),
+  players: [] as IAfterGamePlayer[],
   eligibleToXP: false,
   eligibleToELO: false,
   gameMode: GameMode.CUSTOM_LOBBY

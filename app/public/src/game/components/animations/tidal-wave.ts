@@ -29,7 +29,7 @@ export function tidalWaveAnimation(args: AbilityAnimationArgs) {
     onComplete: () => {
       wave.destroy()
     },
-    onUpdate: function (tween) {
+    onUpdate: (tween) => {
       if (tween.progress < 0.2) {
         wave.setAlpha(tween.progress * 5)
       } else if (tween.progress > 0.8) {

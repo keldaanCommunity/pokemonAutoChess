@@ -48,11 +48,11 @@ export async function fetchMetaReports() {
   return data
 }
 
-let metadata = new Array<IReportMetadata>()
-let metaItems = new Array<IItemsStatisticV2>()
-let metaPokemons = new Array<IPokemonsStatisticV2>()
-let metaRegions = new Array<IRegionStatistic>()
-let metaV2 = new Array<IMetaV2>()
+let metadata: IReportMetadata[] = []
+let metaItems: IItemsStatisticV2[] = []
+let metaPokemons: IPokemonsStatisticV2[] = []
+let metaRegions: IRegionStatistic[] = []
+let metaV2: IMetaV2[] = []
 let dendrogram: IDendrogram | null = null
 let gameActivity: IGameActivity = {
   updatedAt: new Date(0).toISOString(),

@@ -8,7 +8,7 @@ export class SongOfDesireStrategy extends AbilityStrategy {
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
     super.process(pokemon, board, target, crit)
 
-    const rank = new Array<PokemonEntity>()
+    const rank: PokemonEntity[] = []
     board.forEach((x, y, tg) => {
       if (tg && pokemon.team != tg.team) {
         rank.push(tg)

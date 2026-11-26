@@ -4595,8 +4595,6 @@
 	"close": "Close",
 	"total": "Total",
 	"lvl": "Lvl",
-	"clicks_one": "{{count}} click",
-	"clicks_other": "{{count}} clicks",
 	"new": "NEW !",
 	"leave_game": "Leave game",
 	"leave_room": "Leave room",
@@ -5877,8 +5875,6 @@
 			"blue": "$t(atlas.buff.looplet)Gain 20 PP. Holder restores 5 additional PP ON_ATTACK."
 		},
 		"connection_orb": "Connection Orb",
-		"connection_orb_description": "The start of your journey. You can only activate nodes connected to already activated nodes.",
-		"pokemon_that_can_mega_evolve": "Pokémon that can mega evolve have the MEGA_STONE symbol on their portrait.",
-		"pokemon_that_can_gigantamax": "Pokémon that can gigantamax have the DYNAMAX_BAND symbol on their portrait."
+		"connection_orb_description": "The start of your journey. You can only activate nodes connected to already activated nodes."
 	}
 }

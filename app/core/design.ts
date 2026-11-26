@@ -185,7 +185,7 @@ export default class Design {
   generateMask() {
     const masker = new Masker()
     for (let i = 0; i < this.height; i++) {
-      const row = new Array<Mask>()
+      const row: Mask[] = []
       for (let j = 0; j < this.width; j++) {
         row.push(masker.mask8bits(this.terrain, i, j))
       }
@@ -235,7 +235,7 @@ export default class Design {
   }
 
   getLayerNames() {
-    const names = new Array<string>()
+    const names: string[] = []
     this.layers.forEach((layer) =>
       layer.forEach((tileMapping) => {
         if (!names.includes(tileMapping.layerId)) {

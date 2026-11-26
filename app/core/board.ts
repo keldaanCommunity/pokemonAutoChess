@@ -171,7 +171,7 @@ export class Board {
   }
 
   getAdjacentCells(cellX: number, cellY: number, includesCenter = false) {
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
     for (let y = cellY - 1; y < cellY + 2; y++) {
       for (let x = cellX - 1; x < cellX + 2; x++) {
         if (x == cellX && y == cellY && !includesCenter) continue
@@ -189,7 +189,7 @@ export class Board {
     range = 1,
     includesCenter = false
   ) {
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
 
     // Loop through all cells in the range
     for (let y = cellY - range; y <= cellY + range; y++) {
@@ -231,7 +231,7 @@ export class Board {
       [pokemon.positionX, pokemon.positionY]
     ]
     for (let r = 1; r <= range; r++) {
-      const nextCells = new Array<[number, number]>()
+      const nextCells: [number, number][] = []
       orientations.forEach((orientation) => {
         prevCells.forEach((cell) => {
           const x = cell[0] + OrientationVector[orientation][0]
@@ -260,7 +260,7 @@ export class Board {
     range: number,
     includesCenter: boolean
   ) {
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
     range = Math.floor(Math.abs(range))
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.columns; x++) {
@@ -275,7 +275,7 @@ export class Board {
   }
 
   getCellsInRow(y: number) {
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
     for (let x = 0; x < this.columns; x++) {
       if (this.isOnBoard(x, y)) {
         cells.push({ x, y, value: this.cells[this.columns * y + x] })
@@ -291,7 +291,7 @@ export class Board {
     includesCenter: boolean
   ) {
     // see https://i.imgur.com/jPzf35e.png
-    const cells = new Array<Cell>()
+    const cells: Cell[] = []
     radius = Math.floor(Math.abs(radius)) + 0.5
     const radiusSquared = radius * radius
     for (let y = 0; y < this.rows; y++) {
@@ -426,7 +426,7 @@ export class Board {
   }
 
   getTeleportationCell(x: number, y: number, boardSide: Team) {
-    const candidates = new Array<Cell>()
+    const candidates: Cell[] = []
     const blueCorners = [
       { x: 0, y: 0 },
       { x: this.columns - 1, y: 0 }
@@ -583,11 +583,11 @@ export class Board {
     specificSide: Team | null = null,
     maxDistance?: number
   ): { x: number; y: number; distance: number } | null {
-    let candidateCells = new Array<{
+    let candidateCells: {
       distance: number
       x: number
       y: number
-    }>()
+    }[] = []
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
         if (specificSide === null) {
@@ -626,11 +626,11 @@ export class Board {
     targetY: number,
     excludingCells: { x: number; y: number }[] = []
   ): { x: number; y: number; distance: number } | null {
-    const candidateCells = new Array<{
+    const candidateCells: {
       distance: number
       x: number
       y: number
-    }>()
+    }[] = []
 
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (

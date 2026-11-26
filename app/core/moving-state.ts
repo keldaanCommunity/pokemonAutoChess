@@ -76,8 +76,8 @@ export default class MovingState extends PokemonState {
   ) {
     //logger.debug('move attempt');
 
-    let x: number | undefined = undefined
-    let y: number | undefined = undefined
+    let x: number | undefined
+    let y: number | undefined
 
     if (
       pokemon.hasSynergy(Synergy.DARK) &&

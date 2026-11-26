@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.6.7/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.8/schema.json",
   "files": {
     "includes": [
       "**",
@@ -9,6 +9,7 @@
       "**/app/public/src/assets/atlas.json",
       "!**/app/public/dist/server/**/*",
       "!**/app/public/dist/client/index*.js",
+      "!**/app/public/dist/client/index*.css",
       "!**/app/public/dist/client/pokechess",
       "!**/app/public/dist/client/assets",
       "!**/app/public/dist/client/locales/**/translation.json",
@@ -38,6 +39,7 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "preset": "none",
       "a11y": "off",
       "complexity": {
         "noBannedTypes": "error",

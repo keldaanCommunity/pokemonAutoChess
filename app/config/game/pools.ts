@@ -13,7 +13,7 @@ export const PoolSize: { [key in Rarity]: [number, number, number] } = {
   [Rarity.HATCH]: [0, 0, 0]
 }
 
-export const UniquePool = new Array<PkmProposition>(
+export const UniquePool: PkmProposition[] = [
   Pkm.AERODACTYL,
   Pkm.CASTFORM,
   Pkm.UXIE,
@@ -130,9 +130,9 @@ export const UniquePool = new Array<PkmProposition>(
   Pkm.PASSIMIAN,
   Pkm.BOMBIRDIER,
   Pkm.SANDY_SHOCKS
-)
+]
 
-export const LegendaryPool = new Array<PkmProposition>(
+export const LegendaryPool: PkmProposition[] = [
   Pkm.KYUREM,
   Pkm.RESHIRAM,
   Pkm.ZEKROM,
@@ -212,4 +212,4 @@ export const LegendaryPool = new Array<PkmProposition>(
   Pkm.TYPE_NULL,
   Pkm.BLACEPHALON,
   Pkm.TERAPAGOS
-)
+]

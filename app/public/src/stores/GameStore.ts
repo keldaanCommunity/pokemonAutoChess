@@ -68,15 +68,15 @@ const initialState: GameStateStore = {
   phaseDuration: StageDuration[1],
   roundTime: StageDuration[1],
   phase: GamePhaseState.PICK,
-  players: new Array<Player>(),
-  simulations: new Array<Simulation>(),
+  players: [] as Player[],
+  simulations: [] as Simulation[],
   stageLevel: 0,
   weather: Weather.NEUTRAL,
   noElo: false,
   playerIdSpectated: "",
   simulationIdSpectated: "",
   teamSpectated: Team.BLUE_TEAM,
-  synergiesSpectated: new Array<[Synergy, number]>(),
+  synergiesSpectated: [] as [Synergy, number][],
   money: 5,
   interest: 0,
   maxInterest: 5,
@@ -85,15 +85,15 @@ const initialState: GameStateStore = {
   shopLocked: false,
   experienceManager: new ExperienceManager(),
   atlasManager: new AtlasManager(),
-  shop: new Array<Pkm>(),
-  itemsProposition: new Array<Item>(),
-  pokemonsProposition: new Array<Pkm>(),
-  blueDpsMeter: new Array<IDps>(),
-  redDpsMeter: new Array<IDps>(),
+  shop: [] as Pkm[],
+  itemsProposition: [] as Item[],
+  pokemonsProposition: [] as Pkm[],
+  blueDpsMeter: [] as IDps[],
+  redDpsMeter: [] as IDps[],
   emotesUnlocked: [],
-  additionalPokemons: new Array<Pkm>(),
+  additionalPokemons: [] as Pkm[],
   specialGameRule: null,
-  podium: new Array<ILeaderboardInfo>(),
+  podium: [] as ILeaderboardInfo[],
   spectatorCount: 0,
   atlasVisible: false
 }
@@ -287,8 +287,8 @@ const gameSlice = createSlice({
             ? Team.BLUE_TEAM
             : Team.RED_TEAM
         state.weather = action.payload.weather
-        state.blueDpsMeter = new Array<IDps>()
-        state.redDpsMeter = new Array<IDps>()
+        state.blueDpsMeter = [] as IDps[]
+        state.redDpsMeter = [] as IDps[]
         action.payload.blueDpsMeter.forEach((dps) => {
           state.blueDpsMeter.push(structuredClone(dps))
         })

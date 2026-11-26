@@ -80,23 +80,43 @@ export default function WikiTutorials() {
       </ul>
       <p>
         {t("wiki.tutorials.thanks_to")}&nbsp;
-        <a href="https://www.youtube.com/@PokePlagued" target="_blank">
+        <a
+          href="https://www.youtube.com/@PokePlagued"
+          target="_blank"
+          rel="noopener"
+        >
           Plagued
         </a>
         {", "}
-        <a href="https://www.youtube.com/@batotsu2751" target="_blank">
+        <a
+          href="https://www.youtube.com/@batotsu2751"
+          target="_blank"
+          rel="noopener"
+        >
           Batotsu
         </a>
         {", "}
-        <a href="https://www.youtube.com/@demonhornstv" target="_blank">
+        <a
+          href="https://www.youtube.com/@demonhornstv"
+          target="_blank"
+          rel="noopener"
+        >
           DemonhornsTV
         </a>
         {", "}
-        <a href="https://www.youtube.com/@Azmo_PAC" target="_blank">
+        <a
+          href="https://www.youtube.com/@Azmo_PAC"
+          target="_blank"
+          rel="noopener"
+        >
           Azmo
         </a>{" "}
         {", "}
-        <a href="https://www.youtube.com/@biggerweff" target="_blank">
+        <a
+          href="https://www.youtube.com/@biggerweff"
+          target="_blank"
+          rel="noopener"
+        >
           Bigweff
         </a>{" "}
         {t("wiki.tutorials.tutorial_work")}

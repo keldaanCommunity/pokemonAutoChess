@@ -12,7 +12,7 @@ export class AcidSprayStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     let tg: PokemonEntity | undefined = target
-    const affectedTargetsIds = new Array<string>()
+    const affectedTargetsIds: string[] = []
     const damage = [11, 22, 33, 66][pokemon.stars - 1] ?? 66
     for (let i = 0; i < 5; i++) {
       if (tg) {

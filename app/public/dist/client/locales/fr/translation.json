@@ -4163,8 +4163,6 @@
 	},
 	"total": "Total",
 	"lvl": "Niv",
-	"clicks_one": "{{count}} clic",
-	"clicks_other": "{{count}} clics",
 	"new": "NOUVEAU !",
 	"leave_game": "Quitter la partie",
 	"leave_room": "Quitter ce salon",

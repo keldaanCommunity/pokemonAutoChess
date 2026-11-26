@@ -27,13 +27,11 @@ export function throttle<T extends (...args: any) => any>(
   let lastResult: ReturnType<T>
 
   return async function (this: any, ...args: any[]): Promise<ReturnType<T>> {
-    const context = this
-
     if (!inThrottle) {
       inThrottle = true
       // the function could be async and could take longer than the delay to execute
-      const mightBePromise: ReturnType<T> = fn.apply(context, args)
-      setTimeout(async function () {
+      const mightBePromise: ReturnType<T> = fn.apply(this, args)
+      setTimeout(async () => {
         await mightBePromise
         inThrottle = false
       }, delayInMs)

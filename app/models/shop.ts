@@ -139,9 +139,7 @@ export function getSellPrice(
   } else if (stars === 1) {
     price = RarityCost[pokemon.rarity]
   } else {
-    price = Math.ceil(
-      RarityCost[pokemon.rarity] * Math.pow(3, stars - 1) * 0.75
-    )
+    price = Math.ceil(RarityCost[pokemon.rarity] * 3 ** (stars - 1) * 0.75)
   }
 
   return price
@@ -177,11 +175,11 @@ const EpicShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.EPIC)
 const UltraShop = getRegularsTier1(PRECOMPUTED_POKEMONS_PER_RARITY.ULTRA)
 
 export default class Shop {
-  commonPool: Pkm[] = new Array<Pkm>()
-  uncommonPool: Pkm[] = new Array<Pkm>()
-  rarePool: Pkm[] = new Array<Pkm>()
-  epicPool: Pkm[] = new Array<Pkm>()
-  ultraPool: Pkm[] = new Array<Pkm>()
+  commonPool: Pkm[] = [] as Pkm[]
+  uncommonPool: Pkm[] = [] as Pkm[]
+  rarePool: Pkm[] = [] as Pkm[]
+  epicPool: Pkm[] = [] as Pkm[]
+  ultraPool: Pkm[] = [] as Pkm[]
   constructor() {
     this.commonPool = CommonShop.flatMap((pkm) =>
       Array(getPoolSize(Rarity.COMMON, 3)).fill(pkm)
@@ -485,7 +483,7 @@ export default class Shop {
 
     const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
-    let specificTypesWanted: Synergy[] | undefined = undefined
+    let specificTypesWanted: Synergy[] | undefined
 
     const attractors = schemaValues(player.board).filter(
       (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)

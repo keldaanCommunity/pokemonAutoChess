@@ -3783,8 +3783,6 @@
 	},
 	"total": "Totale",
 	"lvl": "Liv",
-	"clicks_one": "{{count}} click",
-	"clicks_other": "{{count}} click",
 	"new": "NUOVO !",
 	"leave_game": "Lascia la partita",
 	"leave_room": "Lascia la stanza",

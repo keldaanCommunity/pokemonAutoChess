@@ -291,7 +291,7 @@ export default function Game() {
         navigate("/lobby")
         return
       }
-      const afterPlayers = new Array<IAfterGamePlayer>()
+      const afterPlayers: IAfterGamePlayer[] = []
 
       const token = await firebase.auth().currentUser?.getIdToken()
 
@@ -310,12 +310,12 @@ export default function Game() {
             avatar: p.avatar,
             title: p.title,
             role: p.role,
-            pokemons: new Array<IPokemonRecord>(),
-            synergies: new Array<{ name: Synergy; value: number }>(),
+            pokemons: [] as IPokemonRecord[],
+            synergies: [] as { name: Synergy; value: number }[],
             gameStats: p.gameStats
           }
 
-          const allSynergies = new Array<{ name: Synergy; value: number }>()
+          const allSynergies: { name: Synergy; value: number }[] = []
           p.synergies.forEach((v, k) => {
             allSynergies.push({ name: k as Synergy, value: v })
           })

@@ -11,7 +11,7 @@ export class PresentStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
-    const chance = Math.pow(Math.random(), 1 - pokemon.luck / 100)
+    const chance = Math.random() ** (1 - pokemon.luck / 100)
     /* 80 damage: 40%
        150 damage: 30%
        300 damage: 20%

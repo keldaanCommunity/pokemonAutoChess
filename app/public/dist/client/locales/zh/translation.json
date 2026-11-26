@@ -4274,8 +4274,6 @@
 	"close": "关闭",
 	"total": "总额",
 	"lvl": "等级",
-	"clicks_one": "还需点击一次",
-	"clicks_other": "还需点击{{count}}次",
 	"new": "新！",
 	"leave_game": "离开游戏",
 	"leave_room": "离开房间",
