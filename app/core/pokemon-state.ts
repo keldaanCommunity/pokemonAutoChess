@@ -150,7 +150,8 @@ export default abstract class PokemonState {
         specialDamage += 1 * damage * (1 + pokemon.ap / 100)
       }
 
-      let trueDamagePart = 0
+      let trueDamagePart = 0,
+        additionalTrueDamage = 0
       if (pokemon.effects.has(EffectEnum.STEEL_SURGE)) {
         trueDamagePart += EffectConfigs.STEEL_SURGE.trueDamagePercent / 100
       } else if (pokemon.effects.has(EffectEnum.STEEL_SPIKE)) {
@@ -167,8 +168,10 @@ export default abstract class PokemonState {
         trueDamagePart += 0.1
       }
       if (pokemon.effects.has(EffectEnum.LOCK_ON)) {
-        trueDamagePart +=
-          ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
+        additionalTrueDamage +=
+          pokemon.atk *
+          ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) *
+          (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
       }
       if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_STEEL)) {
@@ -180,6 +183,7 @@ export default abstract class PokemonState {
         trueDamage = damage * trueDamagePart * (crit ? pokemon.critPower : 1)
         damage = min(0)(damage * (1 - trueDamagePart))
       }
+      trueDamage += additionalTrueDamage * (crit ? pokemon.critPower : 1)
 
       if (crit) {
         // apply crit reduction AFTER true damage has been applied
@@ -453,6 +457,10 @@ export default abstract class PokemonState {
 
     if (attacker && attacker.status.enraged) {
       damage *= StatusConfigs.RAGE.damageMultiplier
+    }
+
+    if (attacker && attacker.effects.has(EffectEnum.DOUBLE_DAMAGE)) {
+      damage *= 2
     }
 
     if (pokemon.status.protect || pokemon.status.skydiving) {

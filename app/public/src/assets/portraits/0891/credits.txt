@@ -1,1 +1,4 @@
-2021-01-12 23:47:23.937924	EZERART	CUR	PMDCollab_1	Normal
+2026-06-10 23:20:44.786575	<@!1377429093997477928>	CUR	CC_BY-NC_4	Normal,Normal^
+2026-07-26 20:58:21.063361	<@!1377429093997477928>	CUR	CC_BY-NC_4	Sad,Joyous,Happy,Crying,Inspired,Sigh,Pain,Shouting,Surprised,Stunned,Angry,Teary-Eyed,Dizzy,Worried,Determined
+2026-08-09 22:31:27.404291	<@!1377429093997477928>	CUR	CC_BY-NC_4	Sad^,Joyous^,Happy^,Crying^,Inspired^,Sigh^,Pain^,Shouting^,Surprised^,Stunned^,Angry^,Teary-Eyed^,Dizzy^,Worried^,Determined^
+2026-08-09 22:39:43.684062	<@!1377429093997477928>	CUR	CC_BY-NC_4	Sad^,Joyous^,Happy^,Crying^,Inspired^,Sigh^,Pain^,Shouting^,Surprised^,Stunned^,Angry^,Teary-Eyed^,Dizzy^,Worried^,Determined^

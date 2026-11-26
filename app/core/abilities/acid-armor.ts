@@ -1,6 +1,6 @@
 import { distanceC } from "../../utils/distance"
 import type { Board } from "../board"
-import { OnDamageReceivedEffect } from "../effects/effect"
+import { OnAttackReceivedEffect } from "../effects/effect"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
 
@@ -15,7 +15,7 @@ export class AcidArmorStrategy extends AbilityStrategy {
     const defGain = [3, 6, 12, 25][pokemon.stars - 1] ?? 25
     pokemon.addDefense(defGain, pokemon, 1, crit)
     let count = 4
-    const acidHitEffect = new OnDamageReceivedEffect(
+    const acidHitEffect = new OnAttackReceivedEffect(
       ({ pokemon, attacker }) => {
         if (
           attacker &&
@@ -27,10 +27,10 @@ export class AcidArmorStrategy extends AbilityStrategy {
           ) === 1
         ) {
           attacker.addDefense(-1, pokemon, 0, false)
-        }
-        count--
-        if (count <= 0) {
-          pokemon.effectsSet.delete(acidHitEffect)
+          count--
+          if (count <= 0) {
+            pokemon.effectsSet.delete(acidHitEffect)
+          }
         }
       }
     )

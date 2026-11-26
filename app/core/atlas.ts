@@ -269,11 +269,12 @@ export const AtlasNodeEffects: { [nodeId in AtlasNodeId]?: AtlasNodeEffect } = {
     }
   },
 
-  awakening: (player, room) => {
+  awakening: (player) => {
     player.experienceManager.maxLevel = 10
     const pokemonsOnBoard = schemaValues(player.board)
     pokemonsOnBoard.forEach((pokemon) => {
       if (
+        player.board.has(pokemon.id) &&
         (pokemon.rarity === Rarity.COMMON ||
           pokemon.rarity === Rarity.UNCOMMON) &&
         pokemon.hasEvolution &&

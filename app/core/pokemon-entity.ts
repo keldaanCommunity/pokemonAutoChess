@@ -272,7 +272,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
   }
 
   get isGhostOpponent(): boolean {
-    return this.simulation.isGhostBattle && this.team === Team.RED_TEAM
+    return this.simulation.isGhostBattle && this.baseTeam === Team.RED_TEAM
   }
 
   isTargettableBy(
@@ -406,10 +406,6 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     } else {
       let specialDamage =
         damage + (damage * (attacker && apBoost ? attacker.ap : 0)) / 100
-      if (attacker && attacker.effects.has(EffectEnum.DOUBLE_DAMAGE)) {
-        specialDamage *= 2
-        attacker.effects.delete(EffectEnum.DOUBLE_DAMAGE)
-      }
       if (
         (this.effects.has(EffectEnum.STRANGE_STEAM) ||
           (attacker && attacker.effects.has(EffectEnum.STRANGE_STEAM))) &&
@@ -1727,7 +1723,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
 
     if (this.passive === Passive.GLUTTON) {
       this.applyStat(Stat.HP, 10, true)
-      if (this.refToBoardPokemon.hp > 750) {
+      if (!this.isGhostOpponent && this.refToBoardPokemon.hp > 750) {
         this.player?.titles.add(Title.GLUTTON)
       }
     }

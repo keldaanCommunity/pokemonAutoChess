@@ -11,9 +11,9 @@ export class LandsWrathStrategy extends AbilityStrategy {
     crit: boolean
   ) {
     super.process(pokemon, board, target, crit)
+    const baseDamage = [20, 30, 40, 80][pokemon.stars - 1] ?? 80
     const atkDamage = Math.round(
-      ((pokemon.atk * ([100, 100, 100, 200][pokemon.stars - 1] ?? 200)) / 100) *
-        (1 + pokemon.ap / 100)
+      (pokemon.atk * ([100, 100, 100, 200][pokemon.stars - 1] ?? 200)) / 100
     )
     const cells = board.getAdjacentCells(
       target.positionX,
@@ -24,12 +24,11 @@ export class LandsWrathStrategy extends AbilityStrategy {
     cells.forEach((cell) => {
       if (cell.value && cell.value.team !== pokemon.team) {
         cell.value.handleSpecialDamage(
-          ([20, 30, 40, 80][pokemon.stars - 1] ?? 80) + atkDamage,
+          baseDamage + atkDamage,
           board,
           AttackType.SPECIAL,
           pokemon,
-          crit,
-          false
+          crit
         )
         cell.value.addDefense(
           -([5, 5, 5, 10][pokemon.stars - 1] ?? 10),

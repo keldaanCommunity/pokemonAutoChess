@@ -1943,7 +1943,7 @@ export const PokemonAnimations: {
   },
   [Pkm.SHADOW_MEWTWO]: {
     attack: AnimationType.Shoot,
-    ability: AnimationType.Punch,
+    ability: AnimationType.Shoot,
     emote: AnimationType.Pose,
     attackSprite: AttackSprite.PSYCHIC_RANGE,
     hitSprite: HitSprite.PSYCHIC_HIT,
@@ -2322,7 +2322,7 @@ export const PokemonAnimations: {
   },
   [Pkm.ARCHEN]: {
     attack: AnimationType.Attack,
-    ability: AnimationType.FlapAround,
+    ability: AnimationType.RearUp,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
@@ -6953,7 +6953,6 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Rotate,
     emote: AnimationType.Attack,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
@@ -7469,9 +7468,9 @@ export const PokemonAnimations: {
     attackSprite: AttackSprite.GRASS_MELEE
   },
   [Pkm.ELDEGOSS]: {
-    attack: AnimationType.Shoot,
-    ability: AnimationType.SpAttack,
-    emote: AnimationType.SpAttack,
+    attack: AnimationType.Attack,
+    ability: AnimationType.Shoot,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.GRASS_MELEE
   },
   [Pkm.FURFROU]: {
@@ -7715,7 +7714,7 @@ export const PokemonAnimations: {
   [Pkm.PACHIRISU]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Appeal,
-    emote: AnimationType.Pose,
+    emote: AnimationType.Shoot,
     attackSprite: AttackSprite.ELECTRIC_MELEE,
     hitSprite: HitSprite.ELECTRIC_HIT
   },
@@ -8331,7 +8330,8 @@ export const PokemonAnimations: {
     ability: AnimationType.Attack,
     emote: AnimationType.Attack,
     attackSprite: AttackSprite.BUG_RANGE,
-    hitSprite: HitSprite.BUG_HIT
+    hitSprite: HitSprite.BUG_HIT,
+    hop: AnimationType.Rotate
   },
   [Pkm.SPIDOPS]: {
     attack: AnimationType.Attack,
@@ -8365,8 +8365,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FLORA_RANGE,
-    hitSprite: HitSprite.PSYCHIC_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.PSYCHIC_HIT
   },
   [Pkm.ORICORIO_POMPOM]: {
     attack: AnimationType.Attack,
@@ -8380,8 +8379,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FLORA_RANGE,
-    hitSprite: HitSprite.GHOST_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.GHOST_HIT
   },
   [Pkm.GALAR_MEOWTH]: {
     attack: AnimationType.Attack,
