@@ -4776,8 +4776,7 @@
 			"gifts_description": "Presentes podem ser dados ao seu parceiro no modo de jogo Dobles",
 			"buried_items": "Itens enterrados",
 			"buried_items_description": "Pokémon do tipo GROUND podem encontrar alguns itens cavando no solo",
-			"buried_treasures_description": "1 tesouro entre:",
-			"buried_trash_description": ""
+			"buried_treasures_description": "1 tesouro entre:"
 		},
 		"statistics": {
 			"stat_description": {
