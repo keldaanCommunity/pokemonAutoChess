@@ -994,6 +994,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
 
   [Item.FLAME_ORB]: [
     new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_FREEZE)
       pokemon.addAttack(pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.triggerBurn(
         300000,
@@ -1002,6 +1003,7 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       )
     }),
     new OnItemLostInCombatEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_FREEZE)
       pokemon.addAttack(-pokemon.baseAtk, pokemon, 0, false)
       pokemon.status.burnCooldown = 0
     })
@@ -1017,6 +1019,15 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
       if (!pokemon.items.has(Item.AIR_BALLOON)) {
         pokemon.effects.delete(EffectEnum.IMMUNITY_BOARD_EFFECTS)
       }
+    })
+  ],
+
+  [Item.XRAY_VISION]: [
+    new OnItemGainedEffect((pokemon) => {
+      pokemon.effects.add(EffectEnum.IMMUNITY_SLEEP)
+    }),
+    new OnItemLostInCombatEffect((pokemon) => {
+      pokemon.effects.delete(EffectEnum.IMMUNITY_SLEEP)
     })
   ],
 
