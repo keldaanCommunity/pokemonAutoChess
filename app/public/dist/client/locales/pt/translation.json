@@ -2346,7 +2346,22 @@
 		"FLING": "Ao lançar a BALL, todos os inimigos entre o usuário e o receptor recebem [30,30,30,100,SP]% da SPEED do usuário como SPECIAL. Se não estiver com uma BALL equipada, salta para um canto do tabuleiro e recebe uma nova BALL",
 		"REVELATION_DANCE": "Realiza uma dança que projeta penas em espaços ADJACENT. Os inimigos atingidos recebem [15,30,50,80,SP] de SPECIAL e os aliados ganham um bônus dependendo do estilo:\n- Estilo Apaixonado: [3,6,10,15,SP] SPEED\n- Estilo Animado: [2,4,6,10,SP] ATK\n- Estilo Tranquilo: [2,4,6,10,SP] SPE_DEF\n- Estilo Refinado: [15,30,50,80,SP] SHIELD",
 		"THUNDERCLAP_PRESS": "O alvo é atingido por um golpe elétrico de corpo e empurrado para trás. Ele e o inimigo atingido no caminho recebem PARALYSIS por 4 segundos e sofrem [20,40,80,160,SP] de SPECIAL.",
-		"DRAGON_RAGE": "O usuário recebe [15,30,45,60,SP] de SHIELD a cada segundo; pelos próximos 6 segundos recebe [5,10,15,20] de SHIELD e causa [5,10,15,20,SP] de SPECIAL para inimigos ADJACENT . Quando a habilidade acaba, consome o escudo remanescente e cura 40% do seu valor"
+		"DRAGON_RAGE": "O usuário recebe [15,30,45,60,SP] de SHIELD a cada segundo; pelos próximos 6 segundos recebe [5,10,15,20] de SHIELD e causa [5,10,15,20,SP] de SPECIAL para inimigos ADJACENT . Quando a habilidade acaba, consome o escudo remanescente e cura 40% do seu valor",
+		"PRECIPICE_BLADES": "Causa [25, 50, 100, 120, 200,SP] SPECIAL em todos os inimigos na mesma linha e coluna do usuário. Caso o usuário estiver virado na diagonal, o ataque sai em ambas as diagonais.",
+		"ORIGIN_PULSE": "O usuário conjura BLUE_ORB que dispara raios na linha do alvo, causando [50, 75, 100, 120, 150,SP] SPECIAL em todos os Pokémon inimigos naquela linha.",
+		"LEECH_SEED": "Planta uma semente no alvo, causando [4, 8, 12, 16,SP] % de seu HP como SPECIAL a cada segundo por 5s. Cada vez que o dano for aplicado, cura o aliado com o menor HP pela quantidade de dano causado.",
+		"MEGA_DRAIN": "Drena a vida de todos os inimigos ADJACENT causando [10, 20, 40, 80, 150,SP] SPECIAL, curando 50% do dano causado.",
+		"OBLIVION_WING": "Dispara um raio que atinge vários inimigos, causando [30, 50, 70, 100,SP] SPECIAL em cada. Cura 50% HP do dano causado.",
+		"DARK_AURA": "Causa [10,SP] + [50,SP]% do ATK como SPECIAL a inimigos dentro de 2 células. Cura 15 HP + 75% do dano causado.",
+		"TOXIC_SPORE": "Espalha 3 esporos ao redor do inimigo mais próximo que não estiver POISONED. Depois de 2s, o esporo explode nos inimigos ADJACENT causando [10, 20, 40, 80,SP] SPECIAL, infligindo POISONED por 3s.",
+		"HIDDEN_POWER_D": "Transforme-se em uma copia do seu aliado STRONGEST sem os itens e buffs permanentes",
+		"FISSURE": "Acerta o inimigo com o maior PP dentro de um raio de 2 células, causando [30, 60, 120, 240,SP] SPECIAL. O dano é dobrado se o alvo estiver sobre um buraco de GROUND de profundidade máxima. Inimigos dentro de 1 RANGE são empurrados para trás e inimigos a 2+ RANGE são puxados para o usurário, causando LOCKED por 2s.",
+		"PURSUIT": "Causa [35, 70, 140, 280,SP] SPECIAL ao alvo e marca ele. Se o alvo marcado pular, teletransportar ou FLY_AWAY, o usuário pulo próximo a ele e conjura a habilidade novamente.",
+		"ROCKY_PAYLOAD": "FLY_AWAY e lança uma pedra no inimigo mais próximo pelo caminho, causando [10, 20, 30, 60,SP] + [100,SP]% da DEF como SPECIAL",
+		"AQUA_SWIRL": "Cria um redemoinho oceânico ao redor do maior grupo de Pokémon 3x3. Por 3s cura aliados dentro da área por [5, 10, 15, 20,SP] HP e causa [3, 6, 9, 12,SP] SPECIAL a inimigos a cada 0,5s. No fim da duração, o redemoinho se dissipa, deixando os inimigos na área com CHARM por 1s",
+		"MAGNETIC_ABSORPTION": "Puxa o alvo para o usuário, causando [30, 60, 100, 200,SP] SPECIAL e roubando [20,SP] SPEED dele, então distribuindo a SPEED roubada para os aliados ADJACENT igualmente.",
+		"STAR_SHIELD": "Chama 3 estrelas em sucessão, cada uma mirando no aliado com o menor HP%. Cada estrela leva 1,5s para chegar ao alvo e a próxima estrela aparece logo após o impacto da anterior. O impacto provê [10, 15, 20, 25,SP] SHIELD a aliados ADJACENT, e aplica BURN a inimigos ADJACENT por 2s.",
+		"STINGING_TOXINS": "Lança 3 ondas de picadas em um CONE, causando [1, 2, 3, 4,SP] SPECIAL cada. Cada inimigo acertado recebe um efeito baseado no seu status atual:\n-Se não estiver POISONED, inflige POISONED por [2,SP] segundos.\n-Se afetado por POISONED, inflige PARALYSIS por [2,SP] segundos.\n-Se afetado por PARALYSIS, inflige ARMOR_BREAK por [2,SP] segundos.\n-Se afetado por ARMOR_BREAK, inflige FATIGUE por [2,SP] segundos."
 	},
 	"effect": {
 		"STAMINA": "Vigor",
@@ -3513,7 +3528,11 @@
 		"LYCANROC_DUSK": "$t(pkm.LYCANROC_DUSK) se transforma para a forma noturna durante a NIGHT e BLOODMOON ou forma diurna durante ZENITH",
 		"LYCANROC_NIGHT": "$t(pkm.LYCANROC_NIGHT) se transforma na forma crepuscular durante DROUGHT ou forma diurna durante ZENITH",
 		"LYCANROC_DAY": "$t(pkm.LYCANROC_DAY se transforma na forma crepuscular durante DROUGHT ou  para a forma noturna durante a NIGHT e BLOODMOON",
-		"MITOSIS": "Quando KO, o Pokémon se divide em duas cópias da sua forma evolutiva prévia, sem itens e com a metade do PP atual "
+		"MITOSIS": "Quando KO, o Pokémon se divide em duas cópias da sua forma evolutiva prévia, sem itens e com a metade do PP atual ",
+		"DESTRUCTION": "Ao receber dano, e sobreviver, abaixo de 20% do HP máximo, se transforma em um Casulo da Destruição.",
+		"COCOON_OF_DESTRUCTION": "Não pode se mover ou atacar. Ao atingir 50% do HP máximo, ,se transforma de volta em Yveltal com Asa do Esquecimento e 100 PP máximo.",
+		"WURMPLE": "Wurmple evolui em um Cascoon se sinergia POISON estiver ativa. Caso contrario evolui para SILCOON.",
+		"BOMBIRDIER": "Larga uma pedra toda vez que DASH ou FLY_AWAY, replicando a habilidade sem acionar efeitos ON_CAST."
 	},
 	"stat": {
 		"ATK": "Ataque",
@@ -3759,6 +3778,9 @@
 		"PAL": "Parceiro",
 		"LEGIONNAIRE": "Legionário",
 		"FIVE_STARS": "★★★★★",
+		"BESTIE": "Melhor amigo",
+		"GUILD_HERO": "Herói da Guilda",
+		"BODYBUILDER": "Fisiculturista"
 		"ASCENDANT": "Ascendente",
 		"RADIANT": "Radiante"
 	},
@@ -3931,7 +3953,8 @@
 		"sign_out": "Sair",
 		"signing_out": "Saindo...",
 		"authenticated_as": "Autenticado como",
-		"hover_to_reveal": "Passe o cursor para revelar"
+		"hover_to_reveal": "Passe o cursor para revelar",
+		"back": "Voltar"
 	},
 	"collection": {
 		"title": "Coleção",
@@ -4739,7 +4762,10 @@
 			"wands": "Varinhas",
 			"wands_description": "Varinhas concedem efeitos adicionais aos ataques de Pokémon FAIRY.",
 			"gifts": "Presentes",
-			"gifts_description": "Presentes podem ser dados ao seu parceiro no modo de jogo Dobles"
+			"gifts_description": "Presentes podem ser dados ao seu parceiro no modo de jogo Dobles",
+			"buried_items": "Itens enterrados",
+			"buried_items_description": "Pokémon do tipo GROUND podem encontrar alguns itens cavando no solo",
+			"buried_treasures_description": "1 tesouro entre:"
 		},
 		"statistics": {
 			"stat_description": {
@@ -5372,5 +5398,11 @@
 		"enter_pal_name": "Digite o nome do seu parceiro",
 		"change_pal": "Trocar parceiro"
 	},
-	"absorbed_item": "Absorto"
+	"absorbed_item": "Absorto",
+	"rank_share": "Compartilhar",
+	"top_percent": "Top %",
+	"last_updated": "Atualizado por último",
+	"player_rank_distribution": "Distribuição de Rank de Jogadores",
+	"total_players": "Total de jogadores",
+	"confirm_leave_game": "Deseja sair do jogo?"
 }
