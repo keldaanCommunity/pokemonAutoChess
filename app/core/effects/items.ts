@@ -481,7 +481,7 @@ const smokeBallEffect = ({ pokemon, board }) => {
   pokemon.broadcastAbility({ skill: "SMOKE_BALL" })
   pokemon.removeItem(Item.SMOKE_BALL)
   if (pokemon.hp > 0) {
-    pokemon.addShield(50, pokemon, 0, false)
+    pokemon.addShield(70, pokemon, 0, false)
     pokemon.flyAway(board, false, false)
   }
 }
