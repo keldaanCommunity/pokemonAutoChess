@@ -29,7 +29,8 @@ export enum Synergy {
   LIGHT = "LIGHT",
   GOURMET = "GOURMET",
   FOSSIL = "FOSSIL",
-  ARTIFICIAL = "ARTIFICIAL"
+  ARTIFICIAL = "ARTIFICIAL",
+  STELLAR = "STELLAR"
 }
 
 export const SynergyArray = Object.values(Synergy)

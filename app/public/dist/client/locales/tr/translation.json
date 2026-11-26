@@ -2501,7 +2501,6 @@
 		"FLAME_BODY": "Saldırıların {{burnChance}}% ihtimalle {{burnDurationSeconds}} sn. BURN uygular",
 		"WILDFIRE": "ON_ATTACK +{{attackPerHit}} ATK",
 		"BLAZE": "ON_ATTACK +{{attackPerHit}} ATK",
-		"DESOLATE_LAND": "ON_ATTACK +{{attackPerHit}} ATK. Her turdan sonra bir FIRE_SHARD al (en fazla {{maxFireShards}})",
 		"RAIN_DANCE": "Saniyede +{{ppPerSecond}} PP. Bir Eski Olta al.",
 		"DRIZZLE": "Saniyede +{{ppPerSecond}} PP. Bir İyi Olta al.",
 		"PRIMORDIAL_SEA": "Saniyede +{{ppPerSecond}} PP. Bir Süper Olta al.",
@@ -2584,7 +2583,7 @@
 		"GOOGLE_SPECS": "Taşınan her item için +%{{itemBonusPercent}} BASE ATK, +{{itemBonusPercent}} AP ve maks HP'nin %{{itemBonusPercent}} değeri kadar SHIELD kazan. Bir alet daha al.",
 		"HATCHER": "Her BABY {{eggChance}}% ihtimalle bir EGG_FOR_SELL bulur.",
 		"BREEDER": "Bir oyuncuya karşı her yenilgiden sonra en az bir EGG_FOR_SELL al. Yumurtalar {{hatchStagesEarlier}} aşama erken çatlar.",
-		"GOLDEN_EGGS": "Her BABY {{goldenEggChance}}% ihtimalle bir Altın Yumurta bulur (yedekte en fazla {{maxGoldenEggs}}). Altın yumurtalar {{sellGold}} GOLD karşılığında satılabilir ya da çatladığında parlak bir item verir.",
+		"GOLDEN_EGGS": "Her BABY {{goldenEggChance}}% ihtimalle bir Altın Yumurta bulur. Altın yumurtalar {{sellGold}} GOLD karşılığında satılabilir ya da çatladığında parlak bir item verir.",
 		"GRASSY_TERRAIN": "Verilen hasarı %{{damageBonusPercent}} artırır (sadece Çimen)",
 		"PSYCHIC_TERRAIN": "Verilen hasarı %{{damageBonusPercent}} artırır (sadece Psişik)",
 		"ELECTRIC_TERRAIN": "Verilen hasarı %{{damageBonusPercent}} artırır (sadece Elektrik)",
@@ -4339,7 +4338,9 @@
 		"music_credits": "Müzik emeği"
 	},
 	"toggle_fullscreen": "Tam ekran",
-	"filters": "Filtreler",
+	"filters": {
+		"title": "Filtreler"
+	},
 	"save": "Kaydet",
 	"reset": "Sıfırla",
 	"snapshot": "Anlık Görüntü",
@@ -4365,7 +4366,6 @@
 	"pve_stages": "PvE Aşamaları",
 	"carousel_stages": "Ortak Seçim Aşamaları",
 	"additional_picks": "Ek seçimler",
-	"unique_picks": "Eşsiz seçimler",
 	"stages": "Aşamalar",
 	"waiting_final_rank": "Diğer savaşların sonucu bekleniyor...",
 	"stay_till_the_end": "Sonuna kadar kal",
@@ -4440,7 +4440,6 @@
 	"special_items": "Özel Itemler",
 	"wands": "Asalar",
 	"gifts": "Hediyeler",
-	"shiny_items": "Shiny Itemler",
 	"inimitable": "Taklit Edilemez",
 	"full_patch_notes": "Tüm Yama Notları",
 	"patch_notes": "Yama Notları",
@@ -4974,7 +4973,6 @@
 		"items": {
 			"item_recipes": "Item Tarifleri",
 			"craftable_items_description": "Güçlü itemler oluşturmak için iki parçayı birleştir!",
-			"shiny_items_description": "PvE turlarında parlak bir takımla savaşacak ya da altın bir yumurta bulacak kadar şanslıysan ödül olarak parlak bir item alırsın.",
 			"town_items": "Kasaba Itemleri",
 			"town_items_description": "Bu itemler kasabada karşılaşılan tüccarlardan alınabilir:",
 			"special_items_description": "Bu itemler bazı Pokémonlara özeldir:",
@@ -5002,7 +5000,6 @@
 			"wands": "Asalar",
 			"wands_description": "Asalar FAIRY Pokémonların saldırılarına ek efektler verir.",
 			"cell_battery_description": "ELECTRIC sinerjisinde maks seviyeye ulaşınca Pokémonların saldırılarıyla CELL_BATTERY şarj eder; bunu bir ELECTRIC Pokémon'u sonraki savaş için aşırı yüklemekte kullanabilirsin.",
-			"fire_shard_description": "FIRE sinerjisinde maks seviyeye ulaşınca her tur oyuncu HP puanını feda edip bir FIRE Pokémon'u güçlendirmek için FIRE_SHARD kullanabilirsin.",
 			"gifts": "Hediyeler",
 			"gifts_description": "Hediyeler Double Up oyun modunda partnerine verilebilir"
 		},
@@ -5045,8 +5042,7 @@
 			"additional_description": "3 seçenek arasından bir ek seçim ve bir item parçası seç. Ek seçimler, seçildikten sonra tüm oyuncuların dükkanlarında çıkabilen 2 aşamalı evrime sahip Pokémonlardır.",
 			"battle_description": "Diğer oyunculara ya da botlara karşı savaştığın normal savaş aşaması.",
 			"gift_shop_description": "Double Up modunda partnerine hediye alabildiğin hediye dükkanı aşaması. En ucuzdan en pahalıya üç kademe hediye vardır:",
-			"starter_pick": "Başlangıç seçimi",
-			"legendary_pick": "Efsanevi seçimi"
+			"starter_pick": "Başlangıç seçimi"
 		},
 		"town": {
 			"town_encounters_hint": "Treasure Town'daki Ortak Seçim aşamalarında kasaba sakinleriyle karşılaşabilirsin. Özel itemler satabilir ya da özel olaylar başlatabilirler.",

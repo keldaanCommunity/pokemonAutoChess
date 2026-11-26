@@ -17,7 +17,9 @@
   --color-fg-invert: #000000;
   --color-fg-positive: #a9f5ad;
   --color-fg-negative: #f5a9a9;
+
   --color-shadow: #2d334b;
+  --color-border: black;
 
   --color-physical: #e76e55;
   --color-special: #80b5ff;

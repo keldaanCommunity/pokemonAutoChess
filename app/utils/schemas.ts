@@ -30,7 +30,7 @@ export function schemaEntries<V, K extends string>(
 
 export function resetArraySchema<T>(
   schema: ArraySchema<T>,
-  newArray: T[] | ArraySchema<T>
+  newArray: T[] | ArraySchema<T> = []
 ) {
   schema.clear()
   newArray.forEach((value: T) => schema.push(value))

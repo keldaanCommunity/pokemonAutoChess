@@ -24,6 +24,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5em 0;
+  max-width: 1620px;
 }
 
 #wiki-stages .wiki-stage-path-item {

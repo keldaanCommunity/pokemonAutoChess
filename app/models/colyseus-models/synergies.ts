@@ -1,21 +1,19 @@
 import { MapSchema, SetSchema } from "@colyseus/schema"
-import { EffectConfigs } from "../../config/game/effects"
 import { ArceusFormPerSynergy } from "../../config/game/pokemons"
 import {
-  SynergyConfigs,
   SynergyTiers,
   SynergyTiersThresholds
 } from "../../config/game/synergies"
-import type { IPlayer, IPokemon } from "../../types"
+import type { IPokemon } from "../../types"
+import { Item } from "../../types"
 import type { EffectEnum } from "../../types/enum/Effect"
 import { SynergyGivenByItem } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { PkmFamily, PkmIndex } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
-import { Synergy } from "../../types/enum/Synergy"
-import { isOnBench } from "../../utils/board"
+import { Synergy, SynergyArray } from "../../types/enum/Synergy"
 import { schemaValues } from "../../utils/schemas"
-import { PVEStages } from "../pve-stages"
+import type { Pokemon } from "./pokemon"
 
 export default class Synergies extends MapSchema<number, Synergy> {
   constructor(synergies?: Map<Synergy, number>) {
@@ -69,7 +67,7 @@ export default class Synergies extends MapSchema<number, Synergy> {
   getTopSynergies(amount?: number): Synergy[] {
     const synergiesSortedByLevel: [Synergy, number][] = sortSynergies(
       this.toMap()
-    )
+    ).filter(([s, v]) => s !== Synergy.STELLAR)
     if (amount) {
       return synergiesSortedByLevel.slice(0, amount).map(([s, v]) => s)
     }
@@ -90,18 +88,18 @@ export default class Synergies extends MapSchema<number, Synergy> {
 }
 
 export function computeSynergies(
-  board: IPokemon[],
+  board: Pokemon[],
   bonusSynergies?: Map<Synergy, number>,
   specialGameRule?: SpecialGameRule | null
 ): Map<Synergy, number> {
   const synergies = new Map<Synergy, number>()
-  Object.keys(Synergy).forEach((key) => {
-    synergies.set(key as Synergy, bonusSynergies?.get(key as Synergy) ?? 0)
+  SynergyArray.forEach((synergy) => {
+    synergies.set(synergy, bonusSynergies?.get(synergy) ?? 0)
   })
 
   const typesPerFamily = new Map<string, Set<Synergy>>()
 
-  board.forEach((pkm: IPokemon, index) => {
+  board.forEach((pkm: Pokemon, index) => {
     // reset dynamic synergies
     if (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3) {
       pkm.types.clear()
@@ -127,10 +125,10 @@ export function computeSynergies(
 
   function applyDragonDoubleTypes() {
     const dragonDoubleTypes = new Map<string, Set<Synergy>>()
-    board.forEach((pkm: IPokemon, index) => {
+    board.forEach((pkm: Pokemon, index) => {
       if (
         pkm.positionY != 0 &&
-        pkm.types.has(Synergy.DRAGON) &&
+        pkm.hasSynergy(Synergy.DRAGON) &&
         pkm.types.size > 1
       ) {
         const family =
@@ -157,7 +155,7 @@ export function computeSynergies(
   }
 
   // add dynamic synergies (Arceus & Kecleon)
-  board.forEach((pkm: IPokemon) => {
+  board.forEach((pkm: Pokemon) => {
     if (
       pkm.positionY !== 0 &&
       (pkm.passive === Passive.PROTEAN2 || pkm.passive === Passive.PROTEAN3)
@@ -179,7 +177,7 @@ export function computeSynergies(
       let shouldComputeDragonDoubleTypeAgain = false
       for (let i = 0; i < nbDynamicSynergies; i++) {
         const type = synergiesSorted[i]
-        if (type && !pkm.types.has(type) && synergies.get(type)! > 0) {
+        if (type && !pkm.hasSynergy(type) && synergies.get(type)! > 0) {
           pkm.types.add(type)
           synergies.set(type, (synergies.get(type) ?? 0) + 1)
           //apply dragon double synergies just for Arceus & Kecleon if Dragon
@@ -212,6 +210,34 @@ export function computeSynergies(
       }
     }
   })
+
+  // compute stellar
+  const stellarLevel = synergies.get(Synergy.STELLAR)
+  if (stellarLevel) {
+    if (stellarLevel >= 3) {
+      // gives all synergies their max
+      SynergyArray.filter((synergy) => synergy !== Synergy.STELLAR).forEach(
+        (synergy) => {
+          synergies.set(
+            synergy,
+            Math.max(
+              synergies.get(synergy) ?? 0,
+              SynergyTiersThresholds[synergy].at(-1) ?? 0
+            )
+          )
+        }
+      )
+    } else {
+      synergies.forEach((level, synergy) => {
+        if (
+          synergy !== Synergy.STELLAR &&
+          level >= (SynergyTiersThresholds[synergy][0] ?? 0)
+        ) {
+          synergies.set(synergy, (synergies.get(synergy) ?? 0) + stellarLevel)
+        }
+      })
+    }
+  }
 
   return synergies
 }
@@ -255,35 +281,22 @@ export function addSynergiesGivenByItems(pkm: IPokemon) {
     if (synergy) {
       if (synergy === Synergy.DRAGON) {
         pkm.types = new SetSchema<Synergy>([synergy, ...pkm.types])
+      } else if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {
+        // remove native types if stellar
+        const types = schemaValues(pkm.types)
+        const nativeTypes = types.filter(
+          (type) =>
+            !schemaValues(pkm.items).some(
+              (item) => SynergyGivenByItem[item] === type
+            )
+        )
+        pkm.types = new SetSchema<Synergy>([
+          synergy,
+          ...types.filter((type) => !nativeTypes.includes(type))
+        ])
       } else {
         pkm.types.add(synergy)
       }
     }
   })
-}
-
-export function getSynergyTier(
-  synergies: Map<Synergy, number> | MapSchema<number, Synergy>,
-  type: Synergy
-): number {
-  return SynergyTiersThresholds[type].filter(
-    (n) => (synergies.get(type) ?? 0) >= n
-  ).length
-}
-
-export function getWildChance(player: IPlayer, stageLevel: number): number {
-  const isPVE = stageLevel === 0 || stageLevel in PVEStages
-  const wildLevel = getSynergyTier(player.synergies, Synergy.WILD)
-  // 6% base chance in PvE stage or if Wild is active
-  const baseChance =
-    isPVE || wildLevel > 0 ? SynergyConfigs.WILD.pveEncounterChancePercent : 0
-  // each star of a pokemon with wild synergy gives 0.5% wild chance
-  const nbWildStars = schemaValues(player.board)
-    .filter((p) => p.types.has(Synergy.WILD) && isOnBench(p) === false)
-    .reduce((total, p) => total + p.stars, 0)
-  const bonusChance =
-    wildLevel > 0
-      ? nbWildStars * EffectConfigs.QUICK_FEET.shopChancePerStarPercent
-      : 0
-  return (baseChance + bonusChance) / 100
 }

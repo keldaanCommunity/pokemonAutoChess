@@ -1,10 +1,11 @@
 import { getBaseAltForm, VivillonFormPerSynergy } from "../config"
+import type Player from "../models/colyseus-models/player"
 import { sortSynergies } from "../models/colyseus-models/synergies"
-import { FlowerPot, type IPlayer } from "../types"
+import { FlowerPot } from "../types"
 import { Pkm } from "../types/enum/Pokemon"
 import { Synergy } from "../types/enum/Synergy"
 
-export function getAltFormForPlayer(pkm: Pkm, player: IPlayer): Pkm {
+export function getAltFormForPlayer(pkm: Pkm, player: Player): Pkm {
   const basePkm = getBaseAltForm(pkm)
   switch (basePkm) {
     case Pkm.FLABEBE: {

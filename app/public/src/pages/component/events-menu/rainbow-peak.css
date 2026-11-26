@@ -1,0 +1,292 @@
+.rainbow-peak.my-container {
+  flex: 1;
+  padding: 0;
+  position: relative;
+  background-size: cover;
+}
+
+.rainbow-peak header {
+  position: sticky;
+  top: -12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em;
+  z-index: 5;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.rainbow-peak .button {
+  padding: 8px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 50%;
+  cursor: var(--cursor-hover);
+  border: 2px solid black;
+}
+
+.rainbow-peak .button:hover {
+  background-color: var(--color-bg-accent);
+  border-color: var(--color-fg-primary);
+}
+
+.rainbow-peak .button img {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.rainbow-peak h2 {
+  flex: 1;
+  text-align: center;
+  text-shadow:
+    -1px 1px 2px black,
+    1px -1px 2px black,
+    1px 1px 2px black,
+    -1px -1px 2px black;
+}
+
+.rainbow-peak h2 .current-target {
+  font-size: 0.7em;
+}
+
+.rainbow-peak-track {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1em 0.5em 3em;
+}
+
+.rainbow-peak-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  width: min(90%, 520px);
+  min-height: 56px;
+  padding: 0.5em 1em;
+  border: 2px solid black;
+  border-radius: 0.75em;
+  background-color: var(--step-color);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.5));
+  color: white;
+  text-shadow:
+    -1px 1px 2px black,
+    1px -1px 2px black,
+    1px 1px 2px black,
+    -1px -1px 2px black;
+  box-shadow:
+    inset -1px -1px 2px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.rainbow-peak-step .step-number {
+  min-width: 1.75em;
+  font-weight: bold;
+  text-align: left;
+  opacity: 0.85;
+}
+
+.rainbow-peak-step .step-name {
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@property --start-hue {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.rainbow-peak-finishers-players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25em;
+  width: min(96%, 600px);
+  padding: 1em 1em 0;
+  margin: 0 auto;
+}
+
+.rainbow-peak-step.final {
+  width: min(96%, 600px);
+  min-height: 120px;
+  padding: 2em 1.5em 1em;
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 50%, 96% 100%, 4% 100%, 0% 50%);
+}
+
+.rainbow-peak-step.final::before,
+.rainbow-peak-step.final::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.rainbow-peak-step.final::before {
+  background-color: black;
+}
+
+.rainbow-peak-step.final::after {
+  background-image: conic-gradient(
+    at top center in hsl longer hue,
+    hsl(var(--start-hue) 50% 50%) 0 100%
+  );
+  animation: color-wheel-spin 15s linear infinite;
+  clip-path: polygon(
+    50% 4px,
+    calc(100% - 4px) calc(50% + 2px),
+    calc(96% - 2px) calc(100% - 2px),
+    calc(4% + 2px) calc(100% - 2px),
+    4px calc(50% + 2px)
+  );
+}
+
+.rainbow-peak-step.final .step-number,
+.rainbow-peak-step.final .step-name {
+  font-size: 1.2em;
+}
+
+@keyframes color-wheel-spin {
+  from {
+    --start-hue: 0deg;
+  }
+  to {
+    --start-hue: 360deg;
+  }
+}
+
+.rainbow-peak-step-players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.25em;
+  max-width: 55%;
+  margin-left: auto;
+}
+
+.rainbow-peak-player-icon {
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: var(--color-bg-secondary);
+  box-shadow:
+    inset -1px -1px 2px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.rainbow-peak-player-icon:hover {
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.rainbow-peak-player-icon.me {
+  border-color: var(--color-bg-accent);
+  box-shadow:
+    0 0 0 2px var(--color-bg-accent),
+    0 0 10px var(--color-bg-accent);
+}
+
+.rainbow-peak-player-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.rainbow-peak-player-icon img.pokemon-portrait {
+  border: none;
+  box-shadow: none;
+}
+
+.rainbow-peak-player-detail img {
+  margin-right: 0.25em;
+}
+
+.rainbow-peak-leaderboard-container,
+.rainbow-peak-help-container {
+  margin: 1em;
+  background-color: var(--color-bg-primary);
+  max-height: calc(100vh - 320px);
+  overflow-y: auto;
+  position: sticky;
+  top: 135px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+.rainbow-peak-leaderboard-container h3,
+.rainbow-peak-help-container h3 {
+  margin: 0 0 1em 0;
+  text-align: center;
+}
+
+.rainbow-peak .leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.rainbow-peak .leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.rainbow-peak .leaderboard-item.me {
+  background-color: var(--color-bg-accent);
+  box-shadow:
+    -10px 0 var(--color-bg-accent),
+    +10px 0 var(--color-bg-accent);
+}
+
+.rainbow-peak .leaderboard-item .finish-time {
+  font-size: 0.75em;
+  letter-spacing: -2px;
+}
+
+.rainbow-peak .leaderboard-item .rank {
+  font-weight: bold;
+  min-width: 2.5em;
+  text-align: left;
+}
+
+.rainbow-peak .leaderboard-item .player-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rainbow-peak .leaderboard-item .event-points {
+  font-weight: bold;
+  min-width: 5em;
+  text-align: right;
+}
+
+.rainbow-peak .no-data {
+  text-align: center;
+  padding: 2em;
+  color: #aaa;
+  font-style: italic;
+}
+
+.rainbow-peak .help-content p {
+  margin-bottom: 1em;
+}

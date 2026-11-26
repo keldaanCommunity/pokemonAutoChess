@@ -1,5 +1,6 @@
 import { Ability } from "../../types/enum/Ability"
 import { EffectConfigs } from "./effects"
+import { ZMoves } from "../../types/enum/ZMoves"
 
 const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
@@ -75,5 +76,7 @@ export const InimitableAbilities: Ability[] = [
   Ability.SKILL_SWAP,
   Ability.SWARM,
   Ability.TRANSE,
-  Ability.UNBOUND
+  Ability.UNBOUND,
+  Ability.TERA_SHIFT,
+  ...ZMoves
 ]

@@ -1,6 +1,11 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { Stat } from "../../types/enum/Game"
-import { Item, type ItemsSoldAtTown } from "../../types/enum/Item"
+import {
+  type FossilStone,
+  Item,
+  type ItemsSoldAtTown
+} from "../../types/enum/Item"
+import { Pkm } from "../../types/enum/Pokemon"
 import { EffectConfigs } from "./effects"
 import { StatusConfigs } from "./statuses"
 
@@ -82,23 +87,20 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.ELECTIRIZER]: { [Stat.SPEED]: 10 },
   [Item.TERRAIN_EXTENDER]: { [Stat.SHIELD]: 50, [Stat.PP]: 20 },
   [Item.INCENSE]: { [Stat.SPE_DEF]: 10, [Stat.LUCK]: 30 },
+  [Item.ENERGY_ROOT]: { [Stat.SHIELD]: 50 },
   [Item.COOKING_POT]: { [Stat.DEF]: 10 },
   [Item.RUNNING_SHOES]: { [Stat.SPEED]: 15 },
-  [Item.EVIOLITE]: {
+  [Item.RED_SCALE]: {
     [Stat.HP]: 100,
     [Stat.ATK]: 10,
     [Stat.AP]: 50,
     [Stat.DEF]: 10,
     [Stat.SPE_DEF]: 10
   },
-  [Item.GOLD_BOTTLE_CAP]: {
-    [Stat.LUCK]: 50,
-    [Stat.CRIT_CHANCE]: 30
-  },
   [Item.STAR_PIECE]: {},
-  [Item.SHINY_STONE]: { [Stat.AP]: 50 },
-  [Item.ABSORB_BULB]: { [Stat.DEF]: 20, [Stat.SPE_DEF]: 20 },
+  [Item.LOOPLET]: { [Stat.SHIELD]: 50 },
   [Item.GOLD_BOW]: { [Stat.SHIELD]: 50 },
+  [Item.TERA_ORB]: {},
   [Item.TEAL_MASK]: { [Stat.SHIELD]: 100, [Stat.SPEED]: 30 },
   [Item.WELLSPRING_MASK]: { [Stat.SHIELD]: 100, [Stat.SPE_DEF]: 10 },
   [Item.CORNERSTONE_MASK]: { [Stat.SHIELD]: 100, [Stat.DEF]: 10 },
@@ -115,11 +117,33 @@ export const ItemStats: { [item in Item]?: { [stat in Stat]?: number } } = {
   [Item.EFFICIENT_BANDANNA]: { [Stat.SHIELD]: 15, [Stat.PP]: 15 },
   [Item.TATSUGIRI_CURLY]: { [Stat.HP]: 50, [Stat.ATK]: 8 },
   [Item.TATSUGIRI_DROOPY]: { [Stat.HP]: 50, [Stat.DEF]: 8 },
-  [Item.TATSUGIRI_STRETCHY]: { [Stat.HP]: 50, [Stat.SPEED]: 25 }
+  [Item.TATSUGIRI_STRETCHY]: { [Stat.HP]: 50, [Stat.SPEED]: 25 },
+  [Item.DIRE_HIT]: { [Stat.ATK]: 10, [Stat.CRIT_CHANCE]: 30 },
+  [Item.DUBIOUS_DISC]: {},
+  [Item.EJECT_BUTTON]: { [Stat.SPEED]: 10, [Stat.DEF]: 3 },
+  [Item.GRIP_CLAW]: { [Stat.ATK]: 10, [Stat.DEF]: 10 },
+  [Item.LUCKY_PUNCH]: { [Stat.ATK]: 5, [Stat.CRIT_CHANCE]: 30 },
+  [Item.PROGRESS_DEVICE]: { [Stat.HP]: 50 },
+  [Item.UTILITY_UMBRELLA]: { [Stat.SPE_DEF]: 30 }
 }
 
 export const ItemSellPricesAtTown: { [item in ItemsSoldAtTown]?: number } = {
   [Item.TINY_MUSHROOM]: 1,
   [Item.BIG_MUSHROOM]: 2,
   [Item.BALM_MUSHROOM]: 5
+}
+
+export const ZMOVE_MAX_PP = 160
+
+export const FossilPkmByStone: { [stone in FossilStone]: Pkm } = {
+  [Item.ARMOR_FOSSIL]: Pkm.SHIELDON,
+  [Item.CLAW_FOSSIL]: Pkm.ANORITH,
+  //[	Item.COVER_FOSSIL]: Pkm.TIRTOUGA,
+  [Item.DOME_FOSSIL]: Pkm.KABUTO,
+  [Item.HELIX_FOSSIL]: Pkm.OMANYTE,
+  [Item.JAW_FOSSIL]: Pkm.TYRUNT,
+  [Item.PLUME_FOSSIL]: Pkm.ARCHEN,
+  [Item.ROOT_FOSSIL]: Pkm.LILEEP,
+  [Item.SAIL_FOSSIL]: Pkm.AMAURA,
+  [Item.SKULL_FOSSIL]: Pkm.CRANIDOS
 }

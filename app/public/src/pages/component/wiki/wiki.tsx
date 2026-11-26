@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import { LocalStoreKeys, localStore } from "../../utils/store"
 import WikiAbility from "./wiki-ability"
+import WikiAtlas from "./wiki-atlas"
 import WikiData from "./wiki-data"
 import WikiFaq from "./wiki-faq"
 import WikiGlossary from "./wiki-glossary"
@@ -63,6 +64,11 @@ export default function Wiki({ inGame = false }: { inGame: boolean }) {
       key: "dungeon",
       label: t("wiki.nav.dungeon_label"),
       content: <WikiRegions />
+    },
+    {
+      key: "atlas",
+      label: t("wiki.nav.atlas_label"),
+      content: <WikiAtlas />
     },
     {
       key: "glossary",

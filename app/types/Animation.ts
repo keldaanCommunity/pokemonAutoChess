@@ -407,6 +407,7 @@ export interface AbilityAnimationOptions {
   delay?: number
   flipX?: boolean
   flipY?: boolean
+  apScaling?: boolean
 }
 
 export type AbilityAnimationArgs = {

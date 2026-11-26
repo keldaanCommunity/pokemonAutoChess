@@ -20,7 +20,7 @@ import { PokemonAvatarModel } from "../../models/colyseus-models/pokemon-avatar"
 import { Portal, SynergySymbol } from "../../models/colyseus-models/portal"
 import Shop from "../../models/shop"
 import type { EloRank } from "../../types/enum/EloRank"
-import { GameMode, GamePhaseState } from "../../types/enum/Game"
+import { GameMode, type GamePhaseState } from "../../types/enum/Game"
 import type { Item } from "../../types/enum/Item"
 import type { Pkm } from "../../types/enum/Pokemon"
 import { SpecialGameRule } from "../../types/enum/SpecialGameRule"
@@ -31,7 +31,7 @@ import { pickRandomIn, randomBetween } from "../../utils/random"
 export default class GameState extends Schema {
   @type("string") afterGameId = ""
   @type("uint8") roundTime = StageDuration[0]
-  @type("uint8") phase = GamePhaseState.TOWN
+  @type("uint8") phase: GamePhaseState | null = null
   @type({ map: Player }) players = new MapSchema<Player>()
   @type({ map: PokemonAvatarModel }) avatars =
     new MapSchema<PokemonAvatarModel>()

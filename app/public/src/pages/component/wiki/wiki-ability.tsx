@@ -14,6 +14,7 @@ import {
   TMsSilver
 } from "../../../../../types/enum/Item"
 import { PkmFamily, PkmIndex } from "../../../../../types/enum/Pokemon"
+import { ZMoves } from "../../../../../types/enum/ZMoves"
 import { isIn } from "../../../../../utils/array"
 import { getPortraitSrc } from "../../../../../utils/avatar"
 import { ItemDetailTooltip } from "../../../game/components/item-detail"
@@ -173,21 +174,43 @@ function AbilityRow({
           <div
             key={ability}
             className="my-box"
-            style={{ display: "flex", flexDirection: "column", gap: 5 }}
+            style={{ display: "flex", flexDirection: "column", gap: "0.25em" }}
           >
-            <div>
-              <h2>{t(`ability.${ability}`)}</h2>
-              {InimitableAbilities.includes(ability) && (
-                <p style={{ marginBottom: "0.5em" }}>
-                  {addIconsToDescription("INIMITABLE")}
-                </p>
-              )}
-              <p>
-                {addIconsToDescription(t(`ability_description.${ability}`), {
-                  config: getDescriptionConfig(`ability_description.${ability}`)
-                })}
-              </p>
-            </div>
+            <h2>{t(`ability.${ability}`)}</h2>
+            {(isIn(ZMoves, ability) || isIn(InimitableAbilities, ability)) && (
+              <div
+                style={{
+                  fontSize: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5em"
+                }}
+              >
+                {isIn(ZMoves, ability) && (
+                  <span
+                    className="description-icon"
+                    title={t(`wiki.abilities.zmove_description`)}
+                  >
+                    <img
+                      src={`assets/item/Z_RING.png`}
+                      width={40}
+                      height={40}
+                    />
+                    <span className="item-label">
+                      {t(`wiki.abilities.zmove`)}
+                    </span>
+                  </span>
+                )}
+                {InimitableAbilities.includes(ability) && (
+                  <span>{addIconsToDescription("INIMITABLE")}</span>
+                )}
+              </div>
+            )}
+            <p>
+              {addIconsToDescription(t(`ability_description.${ability}`), {
+                config: getDescriptionConfig(`ability_description.${ability}`)
+              })}
+            </p>
             <div>
               <ul>
                 {(pokemonsPerAbility[ability] ?? []).map((p) => (
@@ -210,7 +233,7 @@ function AbilityRow({
                     data-tooltip-content={tmPerAbility[ability]}
                   >
                     <img
-                      src={`assets/item/${isIn(TMsBronze, tmPerAbility[ability]!) ? "TM_BRONZE" : isIn(TMsSilver, tmPerAbility[ability]!) ? "TM" : "TM_GOLD"}.png`}
+                      src={`assets/item/${isIn(TMsBronze, tmPerAbility[ability]) ? "TM_BRONZE" : isIn(TMsSilver, tmPerAbility[ability]) ? "TM" : "TM_GOLD"}.png`}
                       className="item"
                     />
                   </li>

@@ -8,7 +8,8 @@ export const GiftsTier1 = [
   Item.HATCH_BUNDLE,
   Item.REGIONAL_TOUR,
   Item.BANQUET,
-  Item.SMALL_EXP_GIFT
+  Item.SMALL_EXP_GIFT,
+  Item.EMERA
 ] satisfies Gift[]
 
 export const GiftsTier2 = [
@@ -19,7 +20,8 @@ export const GiftsTier2 = [
   Item.COLLECTION_BOX,
   Item.LARGE_EXP_GIFT,
   Item.UNCOMMON_GIFT,
-  Item.RARE_GIFT
+  Item.RARE_GIFT,
+  Item.GOLDEN_EMERA
 ] satisfies Gift[]
 
 export const GiftsTier3 = [
@@ -42,10 +44,12 @@ export const GiftShopPrices: { [key in Gift]: number } = {
   [Item.REGIONAL_TOUR]: 0,
   [Item.BANQUET]: 0,
   [Item.SMALL_EXP_GIFT]: 0,
+  [Item.EMERA]: 0,
 
   [Item.POTION]: 5,
   [Item.GEMS_BUNDLE]: 5,
   [Item.LARGE_EXP_GIFT]: 10,
+  [Item.GOLDEN_EMERA]: 10,
   [Item.FORAGE_BAG]: 15,
   [Item.STAR_GIFT]: 15,
   [Item.PRETTY_BOX]: 15,

@@ -1,7 +1,7 @@
 import { ARMOR_FACTOR, FIGHTING_PHASE_DURATION } from "../config"
 import { EffectConfigs } from "../config/game/effects"
 import { StatusConfigs } from "../config/game/statuses"
-import { SynergyConfigs, SynergyTiers } from "../config/game/synergies"
+import { SynergyConfigs } from "../config/game/synergies"
 import { WeatherConfigs } from "../config/game/weathers"
 import type Player from "../models/colyseus-models/player"
 import { type IPokemonEntity, Transfer } from "../types"
@@ -26,6 +26,7 @@ import {
   OnHealReceivedEffect,
   OnResurrectingEffect,
   OnShieldDepletedEffect,
+  OnShieldGainedEffect,
   PeriodicEffect
 } from "./effects/effect"
 import { transformToCocoon } from "./effects/passives/destruction"
@@ -54,7 +55,7 @@ export default abstract class PokemonState {
       let critChance = pokemon.critChance / 100
       if (
         pokemon.player?.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.hasSynergy(Synergy.FAIRY) &&
         pokemon.range > 1
       ) {
         const distance = distanceM(
@@ -65,7 +66,11 @@ export default abstract class PokemonState {
         )
         critChance += 0.01 * distance
       }
+      if (target.effects.has(EffectEnum.IMMUNITY_CRIT_ATTACKS)) {
+        critChance = 0
+      }
       const crit = chance(critChance, pokemon)
+
       let critReductionFactor = 1.0
 
       const nbBlackAugurite = target.player
@@ -128,7 +133,7 @@ export default abstract class PokemonState {
         damage = 0
       }
 
-      if (isAttackSuccessful && pokemon.types.has(Synergy.FAIRY)) {
+      if (isAttackSuccessful && pokemon.hasSynergy(Synergy.FAIRY)) {
         const { takenDamage, death } = applyWandEffects(pokemon, target, crit)
         totalTakenDamage += takenDamage
         if (death) hasAttackKilled = true
@@ -165,6 +170,9 @@ export default abstract class PokemonState {
         trueDamagePart +=
           ([2, 2, 2, 5][pokemon.stars - 1] ?? 5) * (1 + pokemon.ap / 100)
         pokemon.effects.delete(EffectEnum.LOCK_ON)
+      }
+      if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_STEEL)) {
+        trueDamagePart += 0.1
       }
 
       if (trueDamagePart > 0) {
@@ -359,9 +367,9 @@ export default abstract class PokemonState {
   }
 
   addShield(
-    pokemon: IPokemonEntity,
+    pokemon: PokemonEntity,
     shield: number,
-    caster: IPokemonEntity,
+    caster: PokemonEntity,
     apBoost: number,
     crit: boolean
   ) {
@@ -395,6 +403,14 @@ export default abstract class PokemonState {
             damage: -shield
           })
         })
+      }
+
+      if (shield > 0) {
+        pokemon
+          .getEffects(OnShieldGainedEffect)
+          .forEach((effect) =>
+            effect.apply({ pokemon, shieldAmountGained: shield })
+          )
       }
     }
   }
@@ -561,13 +577,16 @@ export default abstract class PokemonState {
           pokemon.effects.has(EffectEnum.DEFIANT) ||
           pokemon.effects.has(EffectEnum.COACHING)
         ) {
-          const damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
+          let damageBlocked = pokemon.effects.has(EffectEnum.COACHING)
             ? EffectConfigs.COACHING.damageBlocked
             : pokemon.effects.has(EffectEnum.DEFIANT)
               ? EffectConfigs.DEFIANT.damageBlocked
               : pokemon.effects.has(EffectEnum.STURDY)
                 ? EffectConfigs.STURDY.damageBlocked
                 : EffectConfigs.GUTS.damageBlocked
+          if (pokemon.effects.has(EffectEnum.RAINBOW_BEAN_FIGHTING)) {
+            damageBlocked += 1
+          }
           reducedDamage = reducedDamage - damageBlocked
           pokemon.count.fightingBlockCount++
         }
@@ -660,43 +679,6 @@ export default abstract class PokemonState {
         pokemon.addPP(50, pokemon, 0, false)
         pokemon.status.triggerProtect(1500)
         pokemon.removeItem(Item.SHINY_CHARM)
-      }
-
-      if (
-        pokemon.hasSynergyEffect(Synergy.FOSSIL) &&
-        pokemon.hp - residualDamage <=
-          (SynergyConfigs.FOSSIL.activationThresholdPercent / 100) *
-            pokemon.maxHP
-      ) {
-        const shield = Math.round(
-          pokemon.baseHP *
-            (pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-              ? EffectConfigs.FORGOTTEN_POWER.shieldPercent / 100
-              : pokemon.effects.has(EffectEnum.ELDER_POWER)
-                ? EffectConfigs.ELDER_POWER.shieldPercent / 100
-                : EffectConfigs.ANCIENT_POWER.shieldPercent / 100)
-        )
-        const attackBonus = pokemon.effects.has(EffectEnum.FORGOTTEN_POWER)
-          ? EffectConfigs.FORGOTTEN_POWER.attackPercent / 100
-          : pokemon.effects.has(EffectEnum.ELDER_POWER)
-            ? EffectConfigs.ELDER_POWER.attackPercent / 100
-            : EffectConfigs.ANCIENT_POWER.attackPercent / 100
-        pokemon.addShield(shield, pokemon, 0, false)
-
-        //  When the Fossil Synergy effect is triggered, the received shield takes a maximum initial damage equal to 50% of the shield amount
-        const damageOnShield = max(0.5 * shield)(residualDamage)
-
-        pokemon.shieldDamageTaken += damageOnShield
-        takenDamage += damageOnShield
-        pokemon.shield -= damageOnShield
-        residualDamage = 0
-
-        pokemon.addAttack(pokemon.baseAtk * attackBonus, pokemon, 0, false)
-        pokemon.resetCooldown(500)
-        pokemon.broadcastAbility({ skill: "FOSSIL_RESURRECT" })
-        SynergyTiers[Synergy.FOSSIL].forEach((e) => {
-          pokemon.effects.delete(e)
-        })
       }
 
       if (
@@ -959,8 +941,8 @@ export default abstract class PokemonState {
           pokemon.addSpeed(nbSmoothRocks, pokemon, 0, false)
         }
         if (
-          pokemon.types.has(Synergy.GROUND) === false &&
-          pokemon.items.has(Item.SAFETY_GOGGLES) === false
+          pokemon.hasSynergy(Synergy.GROUND) === false &&
+          pokemon.effects.has(EffectEnum.IMMUNITY_WEATHER) === false
         ) {
           pokemon.handleDamage({
             damage: sandstormDamage,
@@ -1056,7 +1038,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.STEALTH_ROCKS) &&
-      !pokemon.types.has(Synergy.ROCK) &&
+      !pokemon.hasSynergy(Synergy.ROCK) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const { damagePerSecond, durationSeconds } = EffectConfigs.STEALTH_ROCKS
@@ -1073,8 +1055,8 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.SPIKES) &&
-      !pokemon.types.has(Synergy.FLYING) &&
-      !pokemon.types.has(Synergy.STEEL) &&
+      !pokemon.hasSynergy(Synergy.FLYING) &&
+      !pokemon.hasSynergy(Synergy.STEEL) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const { damagePerSecond, durationSeconds } = EffectConfigs.SPIKES
@@ -1091,7 +1073,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.TOXIC_SPIKES) &&
-      !pokemon.types.has(Synergy.POISON) &&
+      !pokemon.hasSynergy(Synergy.POISON) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const duration = EffectConfigs.TOXIC_SPIKES.durationSeconds * 1000
@@ -1100,7 +1082,7 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.HAIL) &&
-      !pokemon.types.has(Synergy.ICE) &&
+      !pokemon.hasSynergy(Synergy.ICE) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const { damage, durationSeconds } = EffectConfigs.HAIL
@@ -1118,7 +1100,9 @@ export default abstract class PokemonState {
 
     if (
       pokemon.effects.has(EffectEnum.EMBER) &&
-      !(pokemon.types.has(Synergy.FIRE) || pokemon.types.has(Synergy.FLYING)) &&
+      !(
+        pokemon.hasSynergy(Synergy.FIRE) || pokemon.hasSynergy(Synergy.FLYING)
+      ) &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS)
     ) {
       const { damagePerSecond, durationSeconds } = EffectConfigs.EMBER
@@ -1131,6 +1115,13 @@ export default abstract class PokemonState {
         shouldTargetGainMana: true
       })
       pokemon.status.triggerBurn(durationSeconds * 1000, pokemon, null)
+    }
+
+    if (
+      pokemon.player &&
+      pokemon.player.atlasManager.unlockedNodes.has("ludicolo")
+    ) {
+      pokemon.addSpeed(1, pokemon, 0, false)
     }
   }
 
@@ -1200,11 +1191,11 @@ export default abstract class PokemonState {
     board: Board
   ): { x: number; y: number; target: PokemonEntity } | null {
     let distance = 999
-    let candidatesCoordinates = new Array<{
+    let candidatesCoordinates: {
       x: number
       y: number
       target: PokemonEntity
-    }>()
+    }[] = []
 
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value && value.isTargettableBy(pokemon)) {
@@ -1235,11 +1226,11 @@ export default abstract class PokemonState {
     board: Board,
     targettableBy: PokemonEntity = pokemon
   ): PokemonEntity | undefined {
-    let farthestTarget: PokemonEntity | undefined = undefined
+    let farthestTarget: PokemonEntity | undefined
     let maxDistance = 0
 
     board.forEach((x: number, y: number, enemy: PokemonEntity | undefined) => {
-      if (enemy && enemy.isTargettableBy(targettableBy)) {
+      if (enemy && enemy.isTargettableBy(targettableBy as IPokemonEntity)) {
         const distance = distanceM(pokemon.positionX, pokemon.positionY, x, y)
         if (distance > maxDistance) {
           farthestTarget = enemy
@@ -1276,9 +1267,9 @@ export default abstract class PokemonState {
     team: Team | undefined,
     board: Board
   ): { x: number; y: number } | undefined {
-    let x: number | undefined = undefined
-    let y: number | undefined = undefined
-    const emptyPlaces = new Array<{ x: number; y: number; neighbour: number }>()
+    let x: number | undefined
+    let y: number | undefined
+    const emptyPlaces: { x: number; y: number; neighbour: number }[] = []
     board.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
         const cells = board.getAdjacentCells(x, y)

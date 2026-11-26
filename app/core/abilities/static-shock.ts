@@ -23,7 +23,7 @@ export class StaticShockStrategy extends AbilityStrategy {
       pokemon.positionY
     )
     const fairyCount = adjacentCells.filter(
-      (cell) => cell.value && cell.value.types.has(Synergy.FAIRY)
+      (cell) => cell.value && cell.value.hasSynergy(Synergy.FAIRY)
     ).length
 
     if (fairyCount > 0) {
@@ -31,7 +31,7 @@ export class StaticShockStrategy extends AbilityStrategy {
     }
 
     const electricCount = adjacentCells.filter(
-      (cell) => cell.value && cell.value.types.has(Synergy.ELECTRIC)
+      (cell) => cell.value && cell.value.hasSynergy(Synergy.ELECTRIC)
     ).length
 
     if (electricCount > 0) {

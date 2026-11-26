@@ -532,6 +532,7 @@ export class DebugScene extends Phaser.Scene {
       this.pokemonSprite.removePsychicField()
       this.pokemonSprite.removeGrassField()
       this.pokemonSprite.removeFairyField()
+      this.pokemonSprite.removeStellarEffect()
 
       if (status === Status.POISONED) {
         this.pokemonSprite.addPoison(1)
@@ -625,6 +626,9 @@ export class DebugScene extends Phaser.Scene {
       }
       if (status === "BALM_MUSHROOM") {
         this.pokemonSprite.addBalmMushroomEffect()
+      }
+      if (status === "STELLAR") {
+        this.pokemonSprite.addStellarEffect()
       }
       if (status === "BOOST/ATK") {
         this.pokemonSprite.displayBoost(Stat.ATK, true)

@@ -126,7 +126,7 @@ export class Board {
     y0: number,
     x1: number,
     y1: number,
-    pokemon: IPokemonEntity
+    pokemon: { positionX: number; positionY: number } | IPokemonEntity
   ) {
     const dx = x1 - x0
     const dy = y1 - y0
@@ -140,7 +140,7 @@ export class Board {
       }
     } else if (dx == 0) {
       if (dy == 0) {
-        if (pokemon.status.confusion) {
+        if ("status" in pokemon && pokemon.status.confusion) {
           return pickRandomIn(Orientation)
         }
         logger.error("failed to get pokemon orientation", {
@@ -148,7 +148,7 @@ export class Board {
           y0,
           x1,
           y1,
-          pokemon: pokemon.name,
+          pokemon: "name" in pokemon ? pokemon.name : "unknown",
           pokemonPosX: pokemon.positionX,
           pokemonPosY: pokemon.positionY
         })
@@ -623,7 +623,8 @@ export class Board {
 
   getClosestAvailablePlace(
     targetX: number,
-    targetY: number
+    targetY: number,
+    excludingCells: { x: number; y: number }[] = []
   ): { x: number; y: number; distance: number } | null {
     const candidateCells = new Array<{
       distance: number
@@ -632,7 +633,10 @@ export class Board {
     }>()
 
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
-      if (value === undefined) {
+      if (
+        value === undefined &&
+        !excludingCells.some((cell) => cell.x === x && cell.y === y)
+      ) {
         candidateCells.push({
           x,
           y,
@@ -824,7 +828,10 @@ export class Board {
     const closestEnemy = this.cells
       .filter(
         (entity): entity is PokemonEntity =>
-          entity != null && entity.team === enemyTeam && entity.hp > 0
+          entity != null &&
+          entity.team === enemyTeam &&
+          entity.hp > 0 &&
+          !entity.status.resurrecting
       )
       .sort(
         (a, b) =>
@@ -892,7 +899,7 @@ export class Board {
 
 export function effectInOrientation(
   board: Board,
-  pokemon: PokemonEntity,
+  pokemon: { positionX: number; positionY: number; team: Team },
   target: PokemonEntity | Orientation,
   effect: (cell: Cell) => void,
   maxRange?: number

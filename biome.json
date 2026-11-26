@@ -38,13 +38,14 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "none",
+      "a11y": "off",
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
-        "noAdjacentSpacesInRegex": "error"
+        "noAdjacentSpacesInRegex": "error",
+        "noUselessSwitchCase": "off"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -66,6 +67,7 @@
         "noUnsafeOptionalChaining": "error",
         "noUnusedLabels": "error",
         "noUnusedImports": "error",
+        "noUnusedFunctionParameters": "off",
         "noUnusedVariables": "off",
         "useExhaustiveDependencies": "off",
         "useHookAtTopLevel": "error",
@@ -106,10 +108,14 @@
         "noUnsafeDeclarationMerging": "error",
         "noUnsafeNegation": "error",
         "useGetterReturn": "error",
-        "noWith": "error"
+        "noWith": "error",
+        "useIterableCallbackReturn": "off"
       }
     },
-    "includes": ["**", "!**/app/public/dist/**/*.js"]
+    "includes": [
+      "**",
+      "!**/app/public/dist/**/*.js"
+    ]
   },
   "javascript": {
     "formatter": {
@@ -126,7 +132,12 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": [
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.mts",
+        "**/*.cts"
+      ],
       "linter": {
         "rules": {
           "correctness": {

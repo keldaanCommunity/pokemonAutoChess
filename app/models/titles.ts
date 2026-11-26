@@ -7,6 +7,7 @@ import { NonPkm, Pkm, PkmIndex } from "../types/enum/Pokemon"
 import type { IUserMetadataMongo } from "../types/interfaces/UserMetadata"
 import { isIn } from "../utils/array"
 import { schemaValues } from "../utils/schemas"
+import type Player from "./colyseus-models/player"
 
 export function updatePlayerTitlesAfterFight(
   player: IPlayer,
@@ -63,6 +64,9 @@ export function updatePlayerTitlesAfterFight(
           break
         case EffectEnum.CALM_MIND:
           player.titles.add(Title.RIVAL)
+          break
+        case EffectEnum.TERASTAL_FESTIVAL:
+          player.titles.add(Title.TERASTAL)
           break
         case EffectEnum.SURGE_SURFER:
           player.titles.add(Title.SURFER)
@@ -157,7 +161,7 @@ export function updatePlayerTitlesAfterFight(
 }
 
 export function updatePlayerTitlesAfterGame(
-  player: IPlayer,
+  player: Player,
   usr: IUserMetadataMongo,
   rank: number,
   humans: IPlayer[],
@@ -225,6 +229,18 @@ export function updatePlayerTitlesAfterGame(
   if (player.gameStats.maxHP >= 1500) {
     player.titles.add(Title.GIANT)
   }
+  if (player.experienceManager.level >= 10) {
+    player.titles.add(Title.AWAKENED)
+  }
+  if (
+    player.atlasManager.unlockedNodes.has("looplet_blue_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_gold_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_green_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_pink_buff") &&
+    player.atlasManager.unlockedNodes.has("looplet_red_buff")
+  ) {
+    player.titles.add(Title.MAD_TITAN)
+  }
 }
 
 /**
@@ -232,7 +248,7 @@ export function updatePlayerTitlesAfterGame(
  * depends on the collection's played counters. It is therefore checked on its own.
  */
 export function updatePlayerCollectorTitle(
-  player: IPlayer,
+  player: Player,
   playedIndexes: Set<string>
 ) {
   if (player.titles.has(Title.COLLECTOR)) return

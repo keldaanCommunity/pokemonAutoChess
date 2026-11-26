@@ -40,7 +40,7 @@ export const fpsToDuration =
   (targetFramesPerSecond: number) => (nbFrames: number) =>
     Math.round(nbFrames * (1000 / targetFramesPerSecond))
 
-export function calcAngleDegrees(x: number, y: number) {
+export function calcAngleDegrees(x: number, y: number): number {
   return (Math.atan2(y, x) * 180) / Math.PI
 }
 

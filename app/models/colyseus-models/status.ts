@@ -6,12 +6,8 @@ import { WeatherConfigs } from "../../config/game/weathers"
 import type { Board } from "../../core/board"
 import { transformToIceFace } from "../../core/effects/passives"
 import type { PokemonEntity } from "../../core/pokemon-entity"
-import {
-  type IPokemonEntity,
-  type ISimulation,
-  type IStatus,
-  Transfer
-} from "../../types"
+import type Simulation from "../../core/simulation"
+import { type IPokemonEntity, type IStatus, Transfer } from "../../types"
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType, Stat, Team } from "../../types/enum/Game"
 import { Item } from "../../types/enum/Item"
@@ -95,7 +91,7 @@ export default class Status extends Schema implements IStatus {
   ccCooldown = 0
   untargettable = false
 
-  constructor(simulation: ISimulation) {
+  constructor(simulation: Simulation) {
     super()
     const elapsedTime = FIGHTING_PHASE_DURATION - simulation.room.state.time
     this.enrageDelay = this.enrageDelay - elapsedTime
@@ -122,7 +118,7 @@ export default class Status extends Schema implements IStatus {
     this.removeFairyField(entity)
   }
 
-  clearNegativeStatus(entity: IPokemonEntity, origin?: IPokemonEntity) {
+  clearNegativeStatus(entity: PokemonEntity, origin?: PokemonEntity) {
     this.burnCooldown = 0
     this.silenceCooldown = 0
     this.fatigueCooldown = 0
@@ -202,7 +198,7 @@ export default class Status extends Schema implements IStatus {
       pokemon.effects.has(EffectEnum.POISON_GAS) &&
       this.poisonStacks === 0 &&
       !pokemon.effects.has(EffectEnum.IMMUNITY_BOARD_EFFECTS) &&
-      pokemon.types.has(Synergy.POISON) === false
+      pokemon.hasSynergy(Synergy.POISON) === false
     ) {
       const duration = EffectConfigs.POISON_GAS.durationSeconds * 1000
       this.triggerPoison(duration, pokemon, undefined)
@@ -591,7 +587,8 @@ export default class Status extends Schema implements IStatus {
   triggerPoison(
     duration: number,
     pkm: PokemonEntity,
-    origin: PokemonEntity | undefined
+    origin: PokemonEntity | undefined,
+    nbStacks = 1
   ) {
     if (!pkm.effects.has(EffectEnum.IMMUNITY_POISON) && !this.runeProtect) {
       let maxStacks = StatusConfigs.POISONED.maxStacks
@@ -606,7 +603,7 @@ export default class Status extends Schema implements IStatus {
             EffectConfigs.TOXIC.maxStacksBonus
         }
       }
-      this.poisonStacks = max(maxStacks)(this.poisonStacks + 1)
+      this.poisonStacks = max(maxStacks)(this.poisonStacks + nbStacks)
 
       if (pkm.simulation.weather === Weather.SMOG) {
         duration *= 1 + WeatherConfigs.SMOG.poisonDurationBonusPercent / 100
@@ -889,7 +886,7 @@ export default class Status extends Schema implements IStatus {
 
   triggerCharm(
     duration: number,
-    pkm: IPokemonEntity,
+    pkm: PokemonEntity,
     origin: PokemonEntity,
     apBoost = false
   ) {
@@ -999,8 +996,8 @@ export default class Status extends Schema implements IStatus {
 
   triggerRuneProtect(
     timer: number,
-    pokemon: IPokemonEntity,
-    origin: IPokemonEntity
+    pokemon: PokemonEntity,
+    origin: PokemonEntity
   ) {
     this.runeProtect = true
     this.clearNegativeStatus(pokemon, origin)
@@ -1221,7 +1218,7 @@ export default class Status extends Schema implements IStatus {
       if (
         pokemon.player &&
         pokemon.player.items.includes(Item.LONG_WAND) &&
-        pokemon.types.has(Synergy.FAIRY) &&
+        pokemon.hasSynergy(Synergy.FAIRY) &&
         pokemon.baseRange > 1
       ) {
         range += 1
@@ -1331,26 +1328,23 @@ export default class Status extends Schema implements IStatus {
 
   private applyStatusDurationReductions(
     duration: number,
-    pkm: IPokemonEntity
+    pkm: PokemonEntity
   ): number {
+    let reductionPercentage = 0
     if (pkm.effects.has(EffectEnum.SWIFT_SWIM)) {
-      duration = Math.round(
-        duration *
-          ((100 - EffectConfigs.SWIFT_SWIM.statusReductionPercent) / 100)
-      )
+      reductionPercentage += EffectConfigs.SWIFT_SWIM.statusReductionPercent
     } else if (pkm.effects.has(EffectEnum.HYDRATION)) {
-      duration = Math.round(
-        duration *
-          ((100 - EffectConfigs.HYDRATION.statusReductionPercent) / 100)
-      )
+      reductionPercentage += EffectConfigs.HYDRATION.statusReductionPercent
     } else if (
       pkm.effects.has(EffectEnum.WATER_VEIL) ||
       pkm.effects.has(EffectEnum.SURGE_SURFER)
     ) {
-      duration = Math.round(
-        duration *
-          ((100 - EffectConfigs.WATER_VEIL.statusReductionPercent) / 100)
-      )
+      reductionPercentage += EffectConfigs.WATER_VEIL.statusReductionPercent
+    }
+
+    if (pkm.effects.has(EffectEnum.RAINBOW_BEAN_AQUATIC)) {
+      reductionPercentage +=
+        EffectConfigs.RAINBOW_BEAN_AQUATIC.statusReductionPercent
     }
 
     const nbOddStones =
@@ -1358,13 +1352,14 @@ export default class Status extends Schema implements IStatus {
         ? count(pkm.player.items, Item.ODD_KEYSTONE)
         : 0
     if (nbOddStones > 0) {
-      duration = Math.round(duration * (1 - 0.1 * nbOddStones))
+      reductionPercentage += 10 * nbOddStones
     }
 
+    duration = Math.round(duration * (1 - max(1)(reductionPercentage / 100)))
     return duration
   }
 
-  addPsychicField(entity: IPokemonEntity) {
+  addPsychicField(entity: PokemonEntity) {
     if (this.psychicField) return
     this.psychicField = true
     if (entity.passive === Passive.SURGE_SURFER) {
@@ -1372,7 +1367,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  removePsychicField(entity: IPokemonEntity) {
+  removePsychicField(entity: PokemonEntity) {
     if (!this.psychicField) return
     this.psychicField = false
     if (entity.passive === Passive.SURGE_SURFER) {
@@ -1380,7 +1375,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  addElectricField(entity: IPokemonEntity) {
+  addElectricField(entity: PokemonEntity) {
     if (this.electricField) return
     this.electricField = true
     if (entity.passive === Passive.SURGE_SURFER) {
@@ -1388,7 +1383,7 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  removeElectricField(entity: IPokemonEntity) {
+  removeElectricField(entity: PokemonEntity) {
     if (!this.electricField) return
     this.electricField = false
     if (entity.passive === Passive.SURGE_SURFER) {
@@ -1396,19 +1391,19 @@ export default class Status extends Schema implements IStatus {
     }
   }
 
-  addFairyField(entity: IPokemonEntity) {
+  addFairyField(entity: PokemonEntity) {
     this.fairyField = true
   }
 
-  removeFairyField(entity: IPokemonEntity) {
+  removeFairyField(entity: PokemonEntity) {
     this.fairyField = false
   }
 
-  addGrassField(entity: IPokemonEntity) {
+  addGrassField(entity: PokemonEntity) {
     this.grassField = true
   }
 
-  removeGrassField(entity: IPokemonEntity) {
+  removeGrassField(entity: PokemonEntity) {
     this.grassField = false
   }
 }

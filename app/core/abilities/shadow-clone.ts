@@ -43,7 +43,7 @@ export class ShadowCloneStrategy extends AbilityStrategy {
         pokemon.team,
         true
       )
-      const hpPct = [0.5, 0.5, 0.9, 1.0][pokemon.stars - 1] ?? 1.0
+      const hpPct = [0.5, 0.5, 0.9, 1.2][pokemon.stars - 1] ?? 1.2
       clone.maxHP = min(1)(
         Math.ceil(
           hpPct *

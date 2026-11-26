@@ -6,9 +6,9 @@ import {
 } from "../config"
 import { precomputedPokemons } from "../models/precomputed/precomputed-pokemons"
 import {
+  AtlasItems,
   CraftableItemsNoScarves,
   Item,
-  ShinyItems,
   SynergyItemsNoSpecial,
   SynergyStones
 } from "../types"
@@ -327,7 +327,7 @@ export function getExpeditionData(
           Item.SUN_STONE
         ],
         [ExpeditionRank.A]: SynergyStones,
-        [ExpeditionRank.S]: ShinyItems
+        [ExpeditionRank.S]: AtlasItems
       }
       const quantityPerRank: Record<ExpeditionRank, number> = {
         [ExpeditionRank.E]: 1,

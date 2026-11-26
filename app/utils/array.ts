@@ -24,7 +24,7 @@ export function deduplicateArray<T>(arr: T[]): T[] {
   return arr.filter((item, index, array) => array.indexOf(item) === index)
 }
 
-export function removeInArray<T>(
+export function removeFromArray<T>(
   arr: T[] | ArraySchema<T>,
   el: T
 ): T[] | ArraySchema<T> {

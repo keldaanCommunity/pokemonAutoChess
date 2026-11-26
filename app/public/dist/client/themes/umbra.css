@@ -3,10 +3,11 @@
   --color-bg-secondary: #313244;
   --color-bg-tertiary: #36345b;
   --color-bg-accent: #8350ad;
+  --color-border: #2f3044;
 
-  --border-thick: 2px solid #2f3044;
-  --border-thin: 1px solid #2f3044;
-  --border-extra-thin: 1px solid #2f3044;
+  --border-thick: 2px solid var(--color-border);
+  --border-thin: 1px solid var(--color-border);
+  --border-extra-thin: 1px solid var(--color-border);
 }
 
 #root .ps-sidebar-root {

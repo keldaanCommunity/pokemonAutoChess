@@ -21,7 +21,7 @@ export class SwarmStrategy extends AbilityStrategy {
     if (!nest) return
 
     const bugs = units
-      .filter((p) => p.types.has(Synergy.BUG))
+      .filter((p) => p.hasSynergy(Synergy.BUG))
       .sort((a, b) => RarityCost[a.rarity] - RarityCost[b.rarity])
     const bugToSpawn =
       bugs[max(bugs.length - 1)(pokemon.count.ult - 1)] ?? bugs.at(-1)

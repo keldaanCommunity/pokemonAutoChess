@@ -9,6 +9,7 @@ import {
   PortalCarouselStages,
   RegionDetails
 } from "../../../../config"
+import { AtlasTree } from "../../../../config/game/atlas"
 import { getMusicAlt } from "../../../../config/game/music"
 import { SynergyConfigs } from "../../../../config/game/synergies"
 import { MusicByTownEncounter } from "../../../../config/game/town-encounters"
@@ -16,16 +17,16 @@ import {
   FLOWER_POTS_POSITIONS_BLUE,
   FlowerPotMons
 } from "../../../../core/flower-pots"
+import { getSynergyTier } from "../../../../core/synergies"
 import type Player from "../../../../models/colyseus-models/player"
+import type { Pokemon } from "../../../../models/colyseus-models/pokemon"
 import { PokemonAvatarModel } from "../../../../models/colyseus-models/pokemon-avatar"
-import { getSynergyTier } from "../../../../models/colyseus-models/synergies"
 import PokemonFactory from "../../../../models/pokemon-factory"
 import { getPokemonData } from "../../../../models/precomputed/precomputed-pokemon-data"
 import { type PVEStage, PVEStages } from "../../../../models/pve-stages"
 import type GameState from "../../../../rooms/states/game-state"
 import {
   FlowerPots,
-  type IPlayer,
   type IPokemon,
   type IPokemonEntity
 } from "../../../../types"
@@ -44,7 +45,10 @@ import type { PlayerDialog } from "../../../../types/enum/PlayerDialog"
 import { Pkm, PkmByIndex } from "../../../../types/enum/Pokemon"
 import type { SpecialGameRule } from "../../../../types/enum/SpecialGameRule"
 import { Synergy } from "../../../../types/enum/Synergy"
-import { TownEncounters } from "../../../../types/enum/TownEncounter"
+import {
+  type TownEncounter,
+  TownEncounters
+} from "../../../../types/enum/TownEncounter"
 import { Weather } from "../../../../types/enum/Weather"
 import type { NonFunctionPropNames } from "../../../../types/HelperTypes"
 import { isOnBench } from "../../../../utils/board"
@@ -68,7 +72,7 @@ import type GameScene from "../scenes/game-scene"
 import { displayBoost } from "./abilities-animations"
 import { BerryTree } from "./berry-tree"
 import PokemonAvatar from "./pokemon-avatar"
-import PokemonSpecial from "./pokemon-special"
+import PokemonNPC from "./pokemon-npc"
 import PokemonSprite from "./pokemon-sprite"
 import { Portal } from "./portal"
 import { TradingPlatform } from "./trading-platform"
@@ -106,6 +110,7 @@ export default class BoardManager {
   trainingRack: Phaser.GameObjects.Sprite | null = null
   portal: Portal | undefined
   smeargle: PokemonSprite | null = null
+  npcs: PokemonSprite[] = []
   specialGameRule: SpecialGameRule | null = null
   tradingPlatform: TradingPlatform | null = null
 
@@ -172,6 +177,18 @@ export default class BoardManager {
         ]
         this.openChest(this.pveChestGroup, this.pveChest, rewards)
       }
+      this.npcs.forEach((npc) => {
+        setTimeout(
+          () => {
+            this.animationManager.animatePokemon(
+              npc,
+              PokemonActionState.HOP,
+              false
+            )
+          },
+          randomBetween(0, 250)
+        )
+      })
     } else if (winnerId === this.opponentAvatar?.playerId) {
       this.animationManager.animatePokemon(
         this.opponentAvatar,
@@ -184,6 +201,18 @@ export default class BoardManager {
           PokemonActionState.HURT,
           false
         )
+      this.npcs.forEach((npc) => {
+        setTimeout(
+          () => {
+            this.animationManager.animatePokemon(
+              npc,
+              PokemonActionState.HURT,
+              false
+            )
+          },
+          randomBetween(0, 250)
+        )
+      })
     } else {
       this.playerAvatar &&
         this.animationManager.animatePokemon(
@@ -272,6 +301,11 @@ export default class BoardManager {
         this.smeargle = null
       }
       this.addSmeargle(this.specialGameRule)
+    }
+
+    if (this.gameMode !== GameMode.DOUBLE_UP) {
+      // we take the npc space for the trading platform in double up
+      this.updateNpcs()
     }
 
     if (this.state.stageLevel in PVEStages && this.mode === BoardMode.PICK) {
@@ -544,6 +578,11 @@ export default class BoardManager {
     this.tradingPlatform = null
   }
 
+  removeNPCs() {
+    this.npcs.forEach((npc) => npc.destroy())
+    this.npcs = []
+  }
+
   displayText(x: number, y: number, label: string, tweenOut: boolean = false) {
     const textStyle = {
       fontSize: "24px",
@@ -756,6 +795,18 @@ export default class BoardManager {
     })
   }
 
+  updateNpcs() {
+    this.removeNPCs()
+    if (this.mode !== BoardMode.TOWN) {
+      this.player.atlasManager.unlockedNodes.forEach((nodeId) => {
+        const node = AtlasTree.nodes[nodeId]
+        if (node.type === "encounter") {
+          this.addAtlasEncounter(node.encounter)
+        }
+      })
+    }
+  }
+
   updateAvatarLife(playerId: string, value: number) {
     if (
       this.playerAvatar &&
@@ -837,6 +888,7 @@ export default class BoardManager {
     this.updatePlayerAvatar()
     this.updateOpponentAvatar(null, null)
     this.updateScoutingAvatars(true)
+    this.updateNpcs()
   }
 
   minigameMode() {
@@ -866,6 +918,7 @@ export default class BoardManager {
     this.hideGroundHoles()
     this.hideTrainingBag()
     this.hideTradingPlatform()
+    this.removeNPCs()
     this.removePokemonsOnBoard()
     this.scene.board?.pokemons.forEach((p) => p.setAlpha(1))
     this.scene.closeTooltips()
@@ -911,18 +964,18 @@ export default class BoardManager {
       if (pkm) {
         pkm.itemsContainer.render(pokemon.items)
       }
-      if (item === Item.SHINY_STONE) {
+      if (item === Item.BERSERK_GENE || item === Item.DIRE_HIT) {
         if (removed) {
-          pkm?.removeLight()
+          pkm?.removeSkinColorChange()
         } else {
-          pkm?.addLight()
+          pkm?.changeSkinColor(item)
         }
       }
-      if (item === Item.BERSERK_GENE) {
+      if (item === Item.TERA_ORB || item === Item.STELLAR_MEMORY) {
         if (removed) {
-          pkm?.removeBerserkEffect()
+          pkm?.removeStellarEffect()
         } else {
-          pkm?.addBerserkEffect()
+          pkm?.addStellarEffect()
         }
       }
       if (item === Item.AIR_BALLOON) {
@@ -945,8 +998,8 @@ export default class BoardManager {
   }
 
   changePokemon<F extends NonFunctionPropNames<IPokemon>>(
-    pokemon: IPokemon,
-    player: IPlayer,
+    pokemon: Pokemon,
+    player: Player,
     field: F,
     value: IPokemon[F],
     previousValue?: IPokemon[F]
@@ -1204,7 +1257,7 @@ export default class BoardManager {
   }
 
   addSmeargle(specialGameRule: SpecialGameRule) {
-    this.smeargle = new PokemonSpecial({
+    this.smeargle = new PokemonNPC({
       scene: this.scene,
       x: 1512,
       y: 396,
@@ -1213,6 +1266,21 @@ export default class BoardManager {
       dialog: t(`scribble_description.${specialGameRule}`),
       dialogTitle: t(`scribble.${specialGameRule}`)
     })
+  }
+
+  addAtlasEncounter(encounter: TownEncounter) {
+    const x = 30 + Math.floor(this.npcs.length / 3)
+    const y = 16 + (this.npcs.length % 3)
+    this.npcs.push(
+      new PokemonNPC({
+        scene: this.scene,
+        x: x * 48,
+        y: y * 48,
+        name: encounter,
+        orientation: Orientation.UPLEFT,
+        dialog: t(`atlas.encounter_dialog.${encounter}`)
+      })
+    )
   }
 
   addPvePokemons(pveStage: PVEStage, immediately: boolean) {
@@ -1227,7 +1295,8 @@ export default class BoardManager {
         pokemon.applyStat(stat as Stat, pveStage.statBoosts[stat])
       }
       if (
-        this.state.townEncounter === TownEncounters.MAROWAK &&
+        (this.state.townEncounter === TownEncounters.MAROWAK ||
+          this.player.atlasManager.unlockedNodes.has("marowak")) &&
         pveStage.marowakItems &&
         i in pveStage.marowakItems
       ) {

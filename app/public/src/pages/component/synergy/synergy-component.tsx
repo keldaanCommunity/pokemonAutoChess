@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { SynergyTiersThresholds } from "../../../../../config"
+import { hasSynergy } from "../../../../../core/synergies"
 import type { Synergy } from "../../../../../types/enum/Synergy"
 import { selectSpectatedPlayer, useAppSelector } from "../../../hooks"
 import { getGameScene } from "../../game"
@@ -24,7 +25,7 @@ export default function SynergyComponent(props: {
     if (!scene) return
     if (!spectatedPlayer?.board?.forEach) return
     spectatedPlayer.board.forEach((p) => {
-      if (p.types.has(type)) {
+      if (hasSynergy(p, type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.setHovered(sprite, 4)
@@ -38,7 +39,7 @@ export default function SynergyComponent(props: {
     if (!scene) return
     if (!spectatedPlayer?.board?.forEach) return
     spectatedPlayer?.board.forEach((p) => {
-      if (p.types.has(type)) {
+      if (hasSynergy(p, type)) {
         const sprite = scene.board?.pokemons.get(p.id)?.sprite
         if (sprite) {
           scene.clearHovered(sprite)
