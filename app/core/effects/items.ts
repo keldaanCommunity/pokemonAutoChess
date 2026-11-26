@@ -84,7 +84,10 @@ import { schemaValues } from "../../utils/schemas"
 import { AbilityStrategies } from "../abilities/abilities"
 import { type Cell, effectInOrientation } from "../board"
 import { EvolutionManager } from "../evolution-logic/evolution-manager"
-import { MegaEvolutionHandler } from "../evolution-logic/mega-evolution"
+import {
+  isMegaPokemon,
+  MegaEvolutionHandler
+} from "../evolution-logic/mega-evolution"
 import { FlowerPotMons } from "../flower-pots"
 import type { PokemonEntity } from "../pokemon-entity"
 import { DelayedCommand } from "../simulation-command"
@@ -1723,7 +1726,12 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
         player,
         evolutionContext
       )
-      if (!evolution || evolution === Pkm.DEFAULT || pokemon.items.size >= 3) {
+      if (
+        !evolution ||
+        evolution === Pkm.DEFAULT ||
+        isMegaPokemon(evolution) ||
+        pokemon.items.size >= 3
+      ) {
         return false // prevent item from being equipped
       }
       const pokemonEvolved = player.transformPokemon(pokemon, evolution)
