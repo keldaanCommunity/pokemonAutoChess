@@ -6953,7 +6953,6 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Rotate,
     emote: AnimationType.Attack,
-    shinyUnavailable: true,
     attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
@@ -8366,8 +8365,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FLORA_RANGE,
-    hitSprite: HitSprite.PSYCHIC_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.PSYCHIC_HIT
   },
   [Pkm.ORICORIO_POMPOM]: {
     attack: AnimationType.Attack,
@@ -8381,8 +8379,7 @@ export const PokemonAnimations: {
     ability: AnimationType.Twirl,
     emote: AnimationType.Shoot,
     attackSprite: AttackSprite.FLORA_RANGE,
-    hitSprite: HitSprite.GHOST_HIT,
-    shinyUnavailable: true
+    hitSprite: HitSprite.GHOST_HIT
   },
   [Pkm.GALAR_MEOWTH]: {
     attack: AnimationType.Attack,
