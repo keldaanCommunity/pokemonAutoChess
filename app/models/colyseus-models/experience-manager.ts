@@ -25,6 +25,8 @@ export default class ExperienceManager
   }
 
   addExperience(quantity: number): number {
+    if (!this.canLevelUp()) return 0
+
     let expToAdd = quantity
     while (this.canLevelUpWithXP(expToAdd)) {
       expToAdd -= ExpTable[this.level]
@@ -33,10 +35,11 @@ export default class ExperienceManager
     }
     if (this.level < this.maxLevel) {
       this.experience += expToAdd
-      expToAdd = 0
+      return quantity
     }
 
-    return quantity - expToAdd // return xp actually gained
+    // The XP already held also counted toward reaching the level cap.
+    return quantity - expToAdd - this.experience
   }
 
   canLevelUpWithXP(quantity: number): boolean {
