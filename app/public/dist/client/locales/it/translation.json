@@ -2861,7 +2861,7 @@
 		"FLOAT_STONE": "Conta per 3 verso WINDY. Sotto WINDY, la tua squadra ottiene 10 SPEED.",
 		"MIST_STONE": "Conta per 3 verso MISTY. Sotto la MISTY, la tua squadra ottiene 3 SPE_DEF.",
 		"BLOOD_STONE": "Conta per 3 verso BLOODMOON. Sotto la BLOODMOON, la tua squadra ottiene il 30% delle cure ricevute come SHIELD quando infligge WOUND e cura il 20% dei danni inflitti se il bersaglio ha lo status WOUND.",
-		"SMELLY_CLAY": "Vale per 3 verso SMOG. Sotto SMOG, la tua squadra ottiene il 5% in più di precisione e ha il 15% in meno di subire POISONED.",
+		"SMELLY_CLAY": "Vale per 3 verso SMOG. Sotto SMOG, la tua squadra ottiene il 5% in più di precisione e ha il 15% di probabilità in meno di subire POISONED dagli attacchi.",
 		"ODD_KEYSTONE": "Conta per 3 ai fini del meteo MURKY. Sotto il meteo MURKY il tuo team ottiene 10 LUCK e -10% della durata degli status negativi, oltre che la possibilità di resistere alla CURSE per 1 secondo extra.",
 		"NORMAL_GEM": "+ 1 alla sinergia NORMAL",
 		"GRASS_GEM": "+ 1 alla sinergia GRASS",

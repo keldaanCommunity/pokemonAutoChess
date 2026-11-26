@@ -3084,7 +3084,7 @@
 		"FLOAT_STONE": "Conta como 3 para WINDY. Sob o efeito de WINDY, sua equipe recebe +10 SPEED.",
 		"MIST_STONE": "Conta como 3 para MISTY. Sob o efeito de MISTY, sua equipe recebe +3 SPE_DEF.",
 		"BLOOD_STONE": "Conta como 3 para BLOODMOON. Sob o efeito de BLOODMOON, sua equipe recebe 30% da cura recebida como SHIELD quando estiver com WOUND e cura 20% do dano causado se o alvo estiver com WOUND.",
-		"SMELLY_CLAY": "Conta como 3 para SMOG. Sob o efeito da SMOG, sua equipe ganha 5% de precisão e tem 15% menos chance de receber POISONED.",
+		"SMELLY_CLAY": "Conta como 3 para SMOG. Sob o efeito da SMOG, sua equipe ganha 5% de precisão e tem 15% menos chance de receber POISONED por ataques.",
 		"ODD_KEYSTONE": "Conta como 3 para MURKY. Sob o efeito de MURKY, sua equipe recebe +10 LUCK e -10% de duração de status negativos, além de resistir a CURSE por 1 segundo a mais.",
 		"NORMAL_GEM": "+1 para sinergia NORMAL",
 		"GRASS_GEM": "+1 para sinergia GRASS",

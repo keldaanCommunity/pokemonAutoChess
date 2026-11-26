@@ -2910,7 +2910,7 @@
 		"FLOAT_STONE": "Zält +3 für WINDY. Unter WINDY erhält dein Team +10 SPEED.",
 		"MIST_STONE": "Zählt +3 für MISTY. Unter MISTY erhält dein Team +3 SPE_DEF.",
 		"BLOOD_STONE": "Zählt +3 für BLOODMOON. Unter BLOODMOON erhält dein Team 30% der eingehenden Heilung als SHIELD, wenn es WOUND hat und heilt sich um 20% des ausgeteilten Schadens, wenn ein Ziel WOUND hat.",
-		"SMELLY_CLAY": "Zählt +3 für SMOG. Unter SMOG erhält dein Team +5% Genauigkeit und hat eine 15% verringerte Chance, POISONED zu erhalten.",
+		"SMELLY_CLAY": "Zählt +3 für SMOG. Unter SMOG erhält dein Team +5% Genauigkeit und hat eine um 15% verringerte Chance, durch Angriffe POISONED zu erhalten.",
 		"NORMAL_GEM": "+1 zu NORMAL Synergie",
 		"FIRE_GEM": "+1 zu FIRE Synergie",
 		"WATER_GEM": "+1 zu WATER Synergie",

@@ -3109,7 +3109,7 @@
 		"FLOAT_STONE": "计为3只生成WINDY所需的宝可梦。在WINDY中，我方所有宝可梦提升10点SPEED。",
 		"MIST_STONE": "计为3只生成MISTY所需的宝可梦。在MISTY中，我方所有宝可梦提升3点SPE_DEF。",
 		"BLOOD_STONE": "计为3只生成BLOODMOON所需的宝可梦。在BLOODMOON中，我方所有宝可梦在WOUND下本应受到的治疗的30%会转化为SHIELD，且攻击处于WOUND的敌方宝可梦时恢复所造成伤害额的20%。",
-		"SMELLY_CLAY": "计为3只生成SMOG所需的宝可梦。在SMOG中，我方所有宝可梦提升5%的命中率且陷入POISONED的概率降低15%。",
+		"SMELLY_CLAY": "计为3只生成SMOG所需的宝可梦。在SMOG中，我方所有宝可梦提升5%的命中率，且因攻击陷入POISONED的概率降低15%。",
 		"ODD_KEYSTONE": "计为3只生成MURKY所需的宝可梦。在MURKY中，我方所有宝可梦提升10点LUCK，陷入异常状态的时间减少10%，且CURSE延迟1秒生效。",
 		"NORMAL_GEM": "计为1只NORMAL宝可梦",
 		"GRASS_GEM": "计为1只GRASS宝可梦",

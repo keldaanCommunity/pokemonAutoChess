@@ -3089,7 +3089,7 @@
 		"FLOAT_STONE": "Compte pour 3 pour WINDY. Sous WINDY, votre équipe gagne 10 de SPEED.",
 		"MIST_STONE": "Compte pour 3 pour MISTY. Sous MISTY, votre équipe gagne 3 SPE_DEF.",
 		"BLOOD_STONE": "Compte pour 3 pour BLOODMOON. Pendant la BLOODMOON, votre équipe convertit 30% des soins reçus en SHIELD si elle subit WOUND, et se soigne de 20% des dégâts infligés si la cible subit WOUND.",
-		"SMELLY_CLAY": "Compte pour 3 pour SMOG. Sous le SMOG, votre équipe gagne 5% de précision et a 15% moins de chance d'être POISONED.",
+		"SMELLY_CLAY": "Compte pour 3 pour SMOG. Sous le SMOG, votre équipe gagne 5% de précision et a 15% moins de chances d'être POISONED par les attaques.",
 		"ODD_KEYSTONE": "Compte pour 3 pour MURKY. Sous MURKY, votre équipe gagne 10 LUCK et -10% de durée des statuts négatifs, et résiste à la CURSE 1 seconde de plus.",
 		"NORMAL_GEM": "+1 à la synergie NORMAL",
 		"GRASS_GEM": "+1 à la synergie GRASS",

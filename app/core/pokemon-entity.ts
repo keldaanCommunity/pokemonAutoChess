@@ -1120,7 +1120,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
       if (this.effects.has(EffectEnum.TOXIC)) {
         poisonChance = EffectConfigs.TOXIC.poisonChance.value / 100
       }
-      if (target.player) {
+      if (this.simulation.weather === Weather.SMOG && target.player) {
         const nbSmellyClays = count(target.player.items, Item.SMELLY_CLAY)
         poisonChance -= nbSmellyClays * 0.15
       }

@@ -3104,7 +3104,7 @@
 		"FLOAT_STONE": "WINDY 날씨 영향력 +3. WINDY이 불어올 때 같은 편의 SPEED가 10 오른다.",
 		"MIST_STONE": "MISTY 날씨 영향력 +3. MISTY가 짙을 때 같은 편의 SPE_DEF가 3 오른다.",
 		"BLOOD_STONE": "BLOODMOON 날씨 영향력 +3. BLOODMOON이 떠오를 때, WOUND 상태인 같은 편은 체력 회복량의 30%를 SHIELD로 대신 얻으며 WOUND 상태인 상대에게 입히는 데미지의 20%를 회복한다.",
-		"SMELLY_CLAY": "SMOG 날씨 영향력 +3. SMOG가 짙을 때, 같은 편은 명중률이 5% 증가하고 POISONED 상태가 될 확률이 15% 감소한다.",
+		"SMELLY_CLAY": "SMOG 날씨 영향력 +3. SMOG가 짙을 때, 같은 편은 명중률이 5% 증가하고 공격으로 POISONED 상태가 될 확률이 15% 감소한다.",
 		"ODD_KEYSTONE": "MURKY에 3을 기여. MURKY 안에서 같은 편은 LUCK을 10 얻으며 부정적인 상태이상의 지속 시간이 10% 감소하며, CURSE에 1초 더 버틴다.",
 		"NORMAL_GEM": "NORMAL 시너지 + 1",
 		"GRASS_GEM": "GRASS 시너지 + 1",

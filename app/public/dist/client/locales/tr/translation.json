@@ -3106,7 +3106,7 @@
 		"FLOAT_STONE": "WINDY için 3 sayılır. WINDY altında takımın 10 SPEED kazanır.",
 		"MIST_STONE": "MISTY için 3 sayılır. MISTY altında takımın 3 SPE_DEF kazanır.",
 		"BLOOD_STONE": "BLOODMOON için 3 sayılır. BLOODMOON altında takımın WOUND durumundayken gelen iyileşmenin %30'unu SHIELD olarak alır ve hedef WOUND durumundaysa verdiği hasarın %20'si kadar iyileşir.",
-		"SMELLY_CLAY": "SMOG için 3 sayılır. SMOG altında takımın %5 isabet kazanır ve POISONED olma ihtimali %15 azalır.",
+		"SMELLY_CLAY": "SMOG için 3 sayılır. SMOG altında takımın %5 isabet kazanır ve saldırılardan dolayı POISONED olma ihtimali %15 azalır.",
 		"ODD_KEYSTONE": "MURKY için 3 sayılır. MURKY altında takımın 10 LUCK kazanır, olumsuz durum süresi -%10 olur ve CURSE etkisine 1 saniye daha uzun dayanır.",
 		"NORMAL_GEM": "NORMAL sinerjisine +1",
 		"GRASS_GEM": "GRASS sinerjisine +1",
