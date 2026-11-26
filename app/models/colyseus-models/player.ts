@@ -63,8 +63,7 @@ import {
   TMsSilver,
   Wands,
   WeatherRocks,
-  type ZCrystal,
-  ZCrystalsBySynergy
+  type ZCrystal
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import {
@@ -386,7 +385,6 @@ export default class Player extends Schema implements IPlayer {
         newPokemon.shiny = true
       }
     })
-    this.carryOverZMoveChoice(newPokemon, [pokemon])
     newPokemon.onAcquired(this)
     this.updateSynergies()
     this.pokemonsPlayed.add(newPokemon.name)
@@ -1215,72 +1213,23 @@ export default class Player extends Schema implements IPlayer {
     return wanderer
   }
 
-  offerZMove(pokemon: Pokemon) {
-    if (
-      !this.board.has(pokemon.id) ||
-      !pokemon.items.has(Item.Z_RING) ||
-      isIn(ZMoves, pokemon.skill)
-    ) {
-      return
-    }
-    if (this.choices.some((choice) => choice.zMoveHolderId === pokemon.id)) {
-      return
-    }
-    const crystals = schemaValues(pokemon.types).map(
-      (synergy) => ZCrystalsBySynergy[synergy]
-    )
-    if (crystals.length === 0) return
-    this.choices.push(
-      new PlayerChoice({
-        type: "zmoves",
-        items: crystals,
-        zMoveHolderId: pokemon.id
-      })
-    )
-  }
-
-  takeZMoveChoice(pokemonId: string): PlayerChoice | undefined {
-    const choice = this.choices.find((c) => c.zMoveHolderId === pokemonId)
-    if (choice) removeFromArray(this.choices, choice)
-    return choice
-  }
-
-  carryOverZMoveChoice(pokemon: Pokemon, previousPokemon: Pokemon[]) {
-    const oldChoices = this.choices.filter((choice) =>
-      previousPokemon.some((previous) => choice.zMoveHolderId === previous.id)
-    )
-    const keepChoice =
-      this.board.has(pokemon.id) &&
-      pokemon.items.has(Item.Z_RING) &&
-      !isIn(ZMoves, pokemon.skill)
-    for (const [i, choice] of oldChoices.entries()) {
-      if (i === 0 && keepChoice) {
-        choice.zMoveHolderId = pokemon.id
-      } else {
-        removeFromArray(this.choices, choice)
-      }
-    }
-  }
-
-  pickZMove(crystal: ZCrystal, pokemonId: string | undefined) {
+  pickZMove(crystal: ZCrystal) {
     const zMove = ZMovesByCrystal[crystal]
-    const pokemon = pokemonId ? this.board.get(pokemonId) : undefined
-    if (
-      !zMove ||
-      !pokemon?.items.has(Item.Z_RING) ||
-      isIn(ZMoves, pokemon.skill)
-    ) {
-      return
-    }
-    if (pokemon.tm !== Ability.DEFAULT) {
-      const tm = TMPerAbility.get(pokemon.tm)
-      if (tm !== undefined) {
-        this.items.push(tm)
+    if (!zMove) return null
+    const pokemonWithZRing = schemaValues(this.board).find(
+      (p) => p.items.has(Item.Z_RING) && !isIn(ZMoves, p.skill)
+    )
+    if (pokemonWithZRing) {
+      if (pokemonWithZRing.tm !== Ability.DEFAULT) {
+        const tm = TMPerAbility.get(pokemonWithZRing.tm)
+        if (tm !== undefined) {
+          this.items.push(tm)
+        }
+        pokemonWithZRing.tm = Ability.DEFAULT
       }
-      pokemon.tm = Ability.DEFAULT
+      pokemonWithZRing.skill = zMove
+      pokemonWithZRing.maxPP = ZMOVE_MAX_PP
     }
-    pokemon.skill = zMove
-    pokemon.maxPP = ZMOVE_MAX_PP
   }
 }
 

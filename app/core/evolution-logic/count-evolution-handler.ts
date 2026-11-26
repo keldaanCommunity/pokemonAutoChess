@@ -200,7 +200,6 @@ export class CountEvolutionHandler extends EvolutionHandler<EvolutionType.COUNT>
       logger.error("no coordinate found for new evolution")
     }
 
-    player.carryOverZMoveChoice(pokemonEvolved, pokemonsBeforeEvolution)
     pokemonEvolved.onAcquired(player)
     return pokemonEvolved
   }

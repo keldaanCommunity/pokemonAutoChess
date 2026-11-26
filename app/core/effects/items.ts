@@ -62,13 +62,13 @@ import {
   SynergyGivenByItem,
   SynergyStones,
   type TeraShard,
-  TMs
+  TMs,
+  ZCrystalsBySynergy
 } from "../../types/enum/Item"
 import { Passive } from "../../types/enum/Passive"
 import { NonPkm, Pkm, PkmFamily } from "../../types/enum/Pokemon"
 import { Synergy } from "../../types/enum/Synergy"
 import { WandererBehavior, WandererType } from "../../types/enum/Wanderer"
-import { ZMoves } from "../../types/enum/ZMoves"
 import { isIn, removeFromArray } from "../../utils/array"
 import { getFreeSpaceOnBench, isOnBench } from "../../utils/board"
 import { distanceC, distanceM } from "../../utils/distance"
@@ -1952,9 +1952,20 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.Z_RING]: [
-    new OnItemUnequippedEffect(({ pokemon, player }) => {
-      player.takeZMoveChoice(pokemon.id)
-      if (!isIn(ZMoves, pokemon.skill)) return
+    new OnItemDroppedEffect(({ pokemon, player }) => {
+      if (pokemon.canHoldItems && pokemon.items.size < 3) {
+        player.choices.push(
+          new PlayerChoice({
+            type: "zmoves",
+            items: schemaValues(pokemon.types).map(
+              (type) => ZCrystalsBySynergy[type]
+            )
+          })
+        )
+      }
+      return true
+    }),
+    new OnItemUnequippedEffect(({ pokemon }) => {
       const baseData = getPokemonData(pokemon.name)
       pokemon.skill = baseData.skill
       pokemon.maxPP = baseData.pp

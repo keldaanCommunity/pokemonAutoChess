@@ -21,7 +21,6 @@ export class PlayerChoice extends Schema {
   @type(["string"]) pokemons: PkmProposition[] = []
   @type(["number"]) costs: number[] = []
   onChoice?: (choiceIndex: number) => void
-  zMoveHolderId?: string
 
   constructor(args: {
     type: PlayerChoiceType
@@ -29,13 +28,11 @@ export class PlayerChoice extends Schema {
     pokemons?: PkmProposition[]
     costs?: number[]
     onChoice?: (choiceIndex: number) => void
-    zMoveHolderId?: string
   }) {
     super()
     this.id = crypto.randomUUID()
     this.type = args.type
     this.onChoice = args.onChoice
-    this.zMoveHolderId = args.zMoveHolderId
     if (args.items) this.items = args.items
     if (args.pokemons) this.pokemons = args.pokemons
     if (args.costs) this.costs = args.costs
