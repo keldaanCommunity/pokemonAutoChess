@@ -2953,7 +2953,7 @@
 		"BERRY_JUICE": "Erhalte 100 SHIELD am Start des nächsten Kampfes und jedes Mal wenn eine Beere konsumiert wurde.",
 		"TART_APPLE": "Im nächsten Kampf wird jede Attacke dieses Pokémon 2 DEF vom Ziel entfernen. Verwandelt sich nach einer Runde in SWEET_APPLE.",
 		"SWEET_APPLE": "Im nächsten Kampf wird jede Attacke dieses Pokemon 2 SPE_DEF vom Ziel entfernen. Verwandelt sich nach einer Runde in SIRUPY_APPLE.",
-		"SIRUPY_APPLE": "Im nächsten Kampf hat jede Attacke dieses Pokemon eine Chance von [30,LK]% 1 Sekunde PARALYSIS zu verursachen. Verwandelt sich nach einer Runde in LEFTOVERS.",
+		"SIRUPY_APPLE": "Im nächsten Kampf hat jede Attacke dieses Pokemon eine Chance von [30,LK]%, für 3 Sekunden PARALYSIS zu verursachen. Verwandelt sich nach einer Runde in LEFTOVERS.",
 		"HERBA_MYSTICA": "Erhalte einen benutzerdefinierten Feldeffekt basierend auf seinem Geschmack.",
 		"MOOMOO_MILK": "Erhalte 15 permanente max HP.",
 		"POFFIN": "Erhalte 100 SHIELD. Alle gehaltenen Beeren werden zum Knursp hinzugefügt. Ihre Effekte werden direkt angewandt, wobei heilenden HP in SHIELD verwandelt werden.",

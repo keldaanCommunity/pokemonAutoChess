@@ -3090,7 +3090,7 @@
 		"BERRY_JUICE": "Gana 100 de SHIELD al comienzo de la siguiente batalla y siempre que consumas una baya durante el transcurso de ésta.",
 		"TART_APPLE": "Durante la siguiente batalla, cada ataque de este Pokémon disminuirá en 2 puntos la DEF del objetivo. Se transforma en una SWEET_APPLE tras una ronda.",
 		"SWEET_APPLE": "Durante la siguiente batalla, cada ataque de este Pokémon disminuirá en 2 puntos la SPE_DEF del objetivo. Se transforma en una SIRUPY_APPLE tras una ronda.",
-		"SIRUPY_APPLE": "Durante la siguiente batalla, cada ataque de este Pokémon tiene un [30,LK]% de posibilidades de causar PARALYSIS durante 1 segundo. Se convertirá en LEFTOVERS tras una ronda.",
+		"SIRUPY_APPLE": "Durante la siguiente batalla, cada ataque de este Pokémon tiene un [30,LK]% de posibilidades de causar PARALYSIS durante 3 segundos. Se convertirá en LEFTOVERS tras una ronda.",
 		"HERBA_MYSTICA": "Gana un efecto de campo dependiendo de sus sabor. El sabor dependerá del tipo del Pokémon que se la esté comiendo:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nOtros: HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "Gana GRASS_FIELD durante la siguiente batalla",
 		"HERBA_MYSTICA_SALTY": "Gana SAFEGUARD durante la siguiente batalla",

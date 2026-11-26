@@ -3172,7 +3172,7 @@
 		"LUCKY_EGG": "30 LUCK ve 30 AP kazan",
 		"TART_APPLE": "Sonraki savaşta bu Pokémon'un her saldırısı hedeften 2 DEF eksiltir. Bir tur sonra SWEET_APPLE olur.",
 		"SWEET_APPLE": "Sonraki savaşta bu Pokémon'un her saldırısı hedeften 2 SPE_DEF eksiltir. Bir tur sonra SIRUPY_APPLE olur.",
-		"SIRUPY_APPLE": "Sonraki savaşta bu Pokémon'un her saldırısı [30,LK]% ihtimalle 1 saniyelik PARALYSIS uygular. Bir tur sonra LEFTOVERS olur.",
+		"SIRUPY_APPLE": "Sonraki savaşta bu Pokémon'un her saldırısı [30,LK]% ihtimalle 3 saniyelik PARALYSIS uygular. Bir tur sonra LEFTOVERS olur.",
 		"HERBA_MYSTICA": "Tadına göre bir alan efekti kazan. Tat, yiyen Pokémon'un tipine göre belirlenir:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nDiğerleri: HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "Sonraki savaşta GRASS_FIELD al",
 		"HERBA_MYSTICA_SALTY": "Sonraki savaşta SAFEGUARD al",

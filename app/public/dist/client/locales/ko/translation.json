@@ -3167,7 +3167,7 @@
 		"BERRY_JUICE": "다음 배틀에서 시작할 때, 그리고 나무열매를 먹을 때마다 SHIELD를 100 획득한다.",
 		"TART_APPLE": "다음 배틀에서 이 포켓몬이 공격할 때마다 상대의 DEF가 2 하락한다. 스테이지가 지나면 SWEET_APPLE가 된다.",
 		"SWEET_APPLE": "다음 배틀에서 이 포켓몬이 공격할 때마다 상대의 SPE_DEF가 2 하락한다. 스테이지가 지나면 SIRUPY_APPLE가 된다.",
-		"SIRUPY_APPLE": "다음 배틀에서 이 포켓몬이 공격할 때마다 [30,LK]% 확률로 1초 동안 PARALYSIS 상태로 만들 수 있다. 스테이지가 지나면 LEFTOVERS이 된다.",
+		"SIRUPY_APPLE": "다음 배틀에서 이 포켓몬이 공격할 때마다 [30,LK]% 확률로 3초 동안 PARALYSIS 상태로 만들 수 있다. 스테이지가 지나면 LEFTOVERS이 된다.",
 		"HERBA_MYSTICA": "맛에 따라 필드 효과를 얻는다. 맛은 이것을 먹는 포켓몬의 타입에 따라 결정한다.\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\n그 외: HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "다음 배틀에서 GRASS_FIELD 위에 선다.",
 		"HERBA_MYSTICA_SALTY": "다음 배틀에서 SAFEGUARD 상태가 된다.",

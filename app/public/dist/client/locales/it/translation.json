@@ -2924,7 +2924,7 @@
 		"BERRY_JUICE": "Ottieni 100 di SHIELD all'inizio del prossimo combattimento e ogniqualvolta consumi una bacca.",
 		"TART_APPLE": "Nel prossimo combattimento, ogni attacco effettuato da questo Pokémon rimuoverà 2 DEF dal bersaglio. Il pomo si trasformerà in un SWEET_APPLE dopo un round.",
 		"SWEET_APPLE": "Nel prossimo combattimento, ogni attacco effettuato da questo Pokémon rimuoverà 2 SPE_DEF dal bersaglio. Il pomo si trasformerà in un SYRUPY_APPLE dopo un round.",
-		"SIRUPY_APPLE": "Nel prossimo combattimento, ogni attacco effettuato da questo Pokémon ha un [30,LK]% di chance di infliggere PARALYSIS per 1 secondo. Il pomo si trasformerà in un LEFTOVERS dopo un round.",
+		"SIRUPY_APPLE": "Nel prossimo combattimento, ogni attacco effettuato da questo Pokémon ha un [30,LK]% di chance di infliggere PARALYSIS per 3 secondi. Il pomo si trasformerà in un LEFTOVERS dopo un round.",
 		"HERBA_MYSTICA": "Guadagna l'effetto di un campo in base al sapore della spezia. Il sapore è determinato dal tipo del Pokémon che la mangia:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nAltro: HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "Ottieni GRASS_FIELD all'inizio del prossimo combattimento.",
 		"HERBA_MYSTICA_SALTY": "Ottieni SAFEGUARD all'inizio del prossimo combattimento.",

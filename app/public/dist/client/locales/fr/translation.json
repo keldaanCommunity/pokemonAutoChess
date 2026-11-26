@@ -3153,7 +3153,7 @@
 		"BERRY_JUICE": "Gagne 100 SHIELD au début du prochain combat et à chaque fois qu'une baie est consommée.",
 		"TART_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon réduira de 2 points la DEF de sa cible. Se change en SWEET_APPLE après un tour sur le banc.",
 		"SWEET_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon réduira de 2 points la SPE_DEF de sa cible. Se change en SIRUPY_APPLE après un tour sur le banc.",
-		"SIRUPY_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon a [30,LK]% de chance d'infliger PARALYSIS pendant 1 seconde. Se change en LEFTOVERS après un tour sur le banc.",
+		"SIRUPY_APPLE": "Lors du prochain combat, chaque attaque de ce Pokémon a [30,LK]% de chance d'infliger PARALYSIS pendant 3 secondes. Se change en LEFTOVERS après un tour sur le banc.",
 		"HERBA_MYSTICA": "Gagne un champ actif au début du prochain combat. Le type du champ dépend de la saveur, qui est déterminée par les synergies du Pokémon qui la mange :\nFAIRY : HERBA_MYSTICA_SWEET\nGRASS : HERBA_MYSTICA_BITTER\nELECTRIC : HERBA_MYSTICA_SOUR\nFIRE : HERBA_MYSTICA_SPICY\nWATER : HERBA_MYSTICA_SOUR\nPSYCHIC : HERBA_MYSTICA_SPICY\nAutres : HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "Octroie GRASS_FIELD pendant tout le prochain combat.",
 		"HERBA_MYSTICA_SALTY": "Octroie SAFEGUARD pendant tout le prochain combat.",

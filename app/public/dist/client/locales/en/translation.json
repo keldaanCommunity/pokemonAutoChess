@@ -3433,7 +3433,7 @@
 		"LUCKY_EGG": "Gain 30 LUCK and 30 AP",
 		"TART_APPLE": "In the next fight, each attack by this Pokémon will remove 2 DEF from the target. Will turn into a SWEET_APPLE after one round.",
 		"SWEET_APPLE": "In the next fight, each attack by this Pokémon will remove 2 SPE_DEF from the target. Will turn into a SIRUPY_APPLE after one round.",
-		"SIRUPY_APPLE": "In the next fight, each attack by this Pokémon has [30,LK]% chance to inflict PARALYSIS for 1 second. Will turn into LEFTOVERS after one round.",
+		"SIRUPY_APPLE": "In the next fight, each attack by this Pokémon has [30,LK]% chance to inflict PARALYSIS for 3 seconds. Will turn into LEFTOVERS after one round.",
 		"HERBA_MYSTICA": "Gain a field effect based on its flavor. The flavor will be determined by the type of the Pokémon eating it:\nFAIRY: HERBA_MYSTICA_SWEET\nGRASS: HERBA_MYSTICA_BITTER\nELECTRIC: HERBA_MYSTICA_SOUR\nPSYCHIC: HERBA_MYSTICA_SPICY\nOthers: HERBA_MYSTICA_SALTY",
 		"HERBA_MYSTICA_BITTER": "Get GRASS_FIELD during the next fight",
 		"HERBA_MYSTICA_SALTY": "Get SAFEGUARD during the next fight",
