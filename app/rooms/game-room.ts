@@ -1648,7 +1648,7 @@ export default class GameRoom extends Room<{ state: GameState }> {
       if (isIn(Gifts, item)) {
         this.pickGift(item, player)
       } else if (isIn(ZCrystals, item)) {
-        player.pickZMove(item)
+        player.pickZMove(item, choice.zMoveHolderId)
       } else if (isIn(Wands, item)) {
         player.fairyWands.push(item)
         player.updateFairyWands()
@@ -1820,13 +1820,18 @@ export default class GameRoom extends Room<{ state: GameState }> {
     playerB.items.push(...itemsToRemoveB)
     unequipItems(pokemonB, itemsToRemoveB, playerB)
 
+    const choiceA = playerA.takeZMoveChoice(pokemonA.id)
+    const choiceB = playerB.takeZMoveChoice(pokemonB.id)
+
     // Switch Pokémon
     playerA.board.delete(pokemonA.id)
     playerA.board.set(pokemonB.id, pokemonB)
+    if (choiceB) playerA.choices.push(choiceB)
     pokemonB.onAcquired(playerA)
 
     playerB.board.delete(pokemonB.id)
     playerB.board.set(pokemonA.id, pokemonA)
+    if (choiceA) playerB.choices.push(choiceA)
     pokemonA.onAcquired(playerB)
 
     this.checkEvolutionsAfterPokemonAcquired(playerA.id)

@@ -1,3 +1,4 @@
+import { ZMOVE_MAX_PP } from "../../config/game/items"
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
 import PokemonFactory from "../../models/pokemon-factory"
@@ -104,6 +105,7 @@ export function carryOverChangedAbilities(
     .filter((skill) => isIn(ZMoves, skill))
   if (existingZMoves.length > 0) {
     pokemonEvolved.skill = pickRandomIn(existingZMoves)
+    pokemonEvolved.maxPP = ZMOVE_MAX_PP
     if (existingTms.length > 0) {
       // give back TM if taking the Z-Move
       pokemonEvolved.tm = Ability.DEFAULT

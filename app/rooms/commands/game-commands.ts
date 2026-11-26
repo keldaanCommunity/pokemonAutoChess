@@ -946,7 +946,15 @@ export class OnDragDropItemCommand extends Command<
       pokemon.shiny = true
     }
 
-    this.room.checkEvolutionsAfterItemAcquired(playerId, pokemon, item)
+    const pokemonEvolved = this.room.checkEvolutionsAfterItemAcquired(
+      playerId,
+      pokemon,
+      item
+    )
+
+    if (item === Item.Z_RING) {
+      player.offerZMove(pokemonEvolved ?? pokemon)
+    }
 
     if (pokemon.items.has(item) && isIn(UnholdableItems, item)) {
       // if the item is not holdable, we immediately remove it from the pokemon items
@@ -984,6 +992,7 @@ export class OnSellPokemonCommand extends Command<
       return
     }
 
+    player.takeZMoveChoice(pokemonId)
     player.board.delete(pokemonId)
     this.state.shop.releasePokemon(pokemon.name, player, this.state)
 
