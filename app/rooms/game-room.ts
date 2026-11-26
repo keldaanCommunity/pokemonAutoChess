@@ -1635,8 +1635,13 @@ export default class GameRoom extends Room<{ state: GameState }> {
               ? pickRandomIn(Eeveelutions)
               : starter.evolution
 
-          const evolution = PokemonFactory.createPokemonFromName(evoPkm, player)
-          this.givePokemons([evolution], player)
+          if (evoPkm !== Pkm.DEFAULT) {
+            const evolution = PokemonFactory.createPokemonFromName(
+              evoPkm,
+              player
+            )
+            this.givePokemons([evolution], player)
+          }
         }
       }
 
