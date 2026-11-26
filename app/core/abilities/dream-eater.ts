@@ -1,5 +1,6 @@
 import { EffectEnum } from "../../types/enum/Effect"
 import { AttackType } from "../../types/enum/Game"
+import { Item } from "../../types/enum/Item"
 import type { Board } from "../board"
 import type { PokemonEntity } from "../pokemon-entity"
 import { AbilityStrategy } from "./ability-strategy"
@@ -50,6 +51,7 @@ export class DreamEaterStrategy extends AbilityStrategy {
           !e.status.runeProtect &&
           !e.status.skydiving &&
           !e.effects.has(EffectEnum.IMMUNITY_SLEEP) &&
+          !e.items.has(Item.XRAY_VISION) &&
           e.status.ccCooldown <= 0
       )
 
