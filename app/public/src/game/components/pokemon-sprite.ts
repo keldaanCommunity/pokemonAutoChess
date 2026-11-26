@@ -535,11 +535,40 @@ export default class PokemonSprite extends DraggableObject {
         )
         onComplete?.()
       } else {
+        const projectileDuration = min(250)(travelTime)
+        const projectileAnimation = this.scene.anims.get(attackSprite)
+        if (!projectileAnimation) {
+          throw new Error(`Missing attack animation: ${attackSprite}`)
+        }
+        const projectileFrameRate =
+          projectileAnimation.getTotalFrames() / (projectileDuration / 1000)
         const coordinatesTarget = transformEntityCoordinates(
           targetX,
           targetY,
           this.flip
         )
+        let projectileArrived = false
+        let animationCompleted = false
+        let completionTimer: Phaser.Time.TimerEvent | undefined
+        const completeIfReady = () => {
+          if (!projectileArrived || !animationCompleted || completionTimer) {
+            return
+          }
+
+          completionTimer = this.scene.time.delayedCall(1000 / 60, () => {
+            if (!projectile.active) {
+              return
+            }
+
+            projectile.destroy()
+            onComplete?.()
+          })
+        }
+
+        projectile.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+          animationCompleted = true
+          completeIfReady()
+        })
 
         /*logger.debug(
           `Shooting a projectile to (${this.targetX},${this.targetY}) travel time ${travelTime}ms delay ${delayBeforeShoot}ms`
@@ -549,16 +578,23 @@ export default class PokemonSprite extends DraggableObject {
           x: coordinatesTarget[0] + randomBetween(-5, 5),
           y: coordinatesTarget[1] + randomBetween(-5, 5),
           ease: "Linear",
-          duration: min(250)(travelTime),
+          duration: projectileDuration,
           delay: delayBeforeShoot - LATENCY_COMPENSATION,
           onComplete: () => {
-            projectile.destroy()
-            onComplete?.()
+            projectileArrived = true
+            completeIfReady()
           },
-          onStop: () => projectile.destroy(),
+          onStop: () => {
+            completionTimer?.remove()
+            projectile.destroy()
+          },
           onStart: () => {
             projectile.setVisible(true)
-            projectile.anims.play({ key: attackSprite })
+            projectile.anims.play({
+              key: attackSprite,
+              frameRate: projectileFrameRate,
+              repeat: 0
+            })
           }
         })
       }
