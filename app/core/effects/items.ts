@@ -1201,8 +1201,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.ELECTIRIZER]: [
-    new OnAttackEffect(({ pokemon, target, board }) => {
-      if (target && pokemon.count.attackCount % 3 === 0) {
+    new OnAttackEffect(({ pokemon, target, isAttackSuccessful }) => {
+      if (target && isAttackSuccessful && pokemon.count.attackCount % 3 === 0) {
         target.status.triggerParalysis(2000, target, pokemon)
       }
     })
@@ -1337,8 +1337,8 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.SCOPE_LENS]: [
-    new OnAttackEffect(({ pokemon, target, crit }) => {
-      if (crit && target) {
+    new OnAttackEffect(({ pokemon, target, crit, isAttackSuccessful }) => {
+      if (crit && target && isAttackSuccessful) {
         const ppStolen = max(target.pp)(10)
         pokemon.addPP(ppStolen, pokemon, 0, false)
         target.addPP(-ppStolen, pokemon, 0, false)

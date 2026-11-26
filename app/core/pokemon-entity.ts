@@ -972,6 +972,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage,
     totalDamage,
     totalTakenDamage,
+    isAttackSuccessful,
     isTripleAttack,
     hasAttackKilled,
     crit
@@ -983,6 +984,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
     trueDamage: number
     totalDamage: number
     totalTakenDamage: number
+    isAttackSuccessful: boolean
     isTripleAttack: boolean
     hasAttackKilled: boolean
     crit: boolean
@@ -1003,6 +1005,7 @@ export class PokemonEntity extends Schema implements IPokemonEntity {
         trueDamage,
         totalDamage,
         totalTakenDamage,
+        isAttackSuccessful,
         isTripleAttack,
         hasAttackKilled,
         crit

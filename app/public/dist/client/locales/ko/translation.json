@@ -3061,7 +3061,7 @@
 		"SALAC_BERRY": "HP가 절반 이하로 떨어지면 먹는다. HP를 50 회복하고 SPEED가 50 오른다. ",
 		"SITRUS_BERRY": "HP가 절반 이하로 떨어지면 먹는다. HP를 100 회복하고 모든 HP 회복량이 30% 증가한다.",
 		"COMFEY": "$t(pkm.COMFEY)이 올라타 기술과 최대 HP, ATK, DEF와 SPE_DEF를 추가해준다.",
-		"ELECTIRIZER": "ELECTRIC 시너지가 추가된다. 3번째 공격은 2초마다 PARALYSIS 상태로 만든다.",
+		"ELECTIRIZER": "ELECTRIC 시너지가 추가된다. 매 3번째 공격은 ON_HIT 대상을 2초 동안 PARALYSIS 상태로 만든다.",
 		"MAGMARIZER": "FIRE 시너지가 추가된다. BURN 상태일 때 데미지를 입지 않고 SPEED가 30 오른다.",
 		"MACHO_BRACE": "FIGHTING 시너지가 추가된다.",
 		"LIGHT_BALL": "LIGHT 시너지가 추가된다.",
