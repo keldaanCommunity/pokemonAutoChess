@@ -1,9 +1,6 @@
 import type Player from "../../models/colyseus-models/player"
 import type { Pokemon } from "../../models/colyseus-models/pokemon"
-import PokemonFactory, {
-  getPokemonPoolCopies
-} from "../../models/pokemon-factory"
-import { getPokemonData } from "../../models/precomputed/precomputed-pokemon-data"
+import PokemonFactory from "../../models/pokemon-factory"
 import { Item, ItemComponents } from "../../types"
 import type {
   CountEvolutionContext,
@@ -12,7 +9,6 @@ import type {
 } from "../../types/EvolutionRules"
 import { GamePhaseState } from "../../types/enum/Game"
 import { Pkm } from "../../types/enum/Pokemon"
-import { sum } from "../../utils/array"
 import { isOnBench } from "../../utils/board"
 import { logger } from "../../utils/logger"
 import { shuffleArray } from "../../utils/random"
@@ -132,16 +128,6 @@ export class CountEvolutionHandler extends EvolutionHandler<EvolutionType.COUNT>
       pokemonEvolutionName,
       player
     )
-
-    if (pokemonsBeforeEvolution.some((p) => p.shopPoolCopies !== undefined)) {
-      pokemonEvolved.shopPoolCopies = sum(
-        pokemonsBeforeEvolution.map(
-          (p) =>
-            p.shopPoolCopies ??
-            getPokemonPoolCopies(p.name, getPokemonData(p.name).stars)
-        )
-      )
-    }
 
     carryOverPermanentStats(pokemonEvolved, pokemonsBeforeEvolution, player)
     carryOverChangedAbilities(pokemonEvolved, pokemonsBeforeEvolution, player)

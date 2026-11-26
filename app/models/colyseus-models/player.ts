@@ -371,7 +371,6 @@ export default class Player extends Schema implements IPlayer {
 
   transformPokemon(pokemon: Pokemon, newEntry: Pkm): Pokemon {
     const newPokemon = PokemonFactory.createPokemonFromName(newEntry, this)
-    newPokemon.shopPoolCopies = pokemon.shopPoolCopies
     carryOverPermanentStats(newPokemon, [pokemon])
     carryOverChangedAbilities(newPokemon, [pokemon], this)
     carryOverTeraShards(newPokemon, [pokemon])
@@ -1192,7 +1191,6 @@ export default class Player extends Schema implements IPlayer {
     behavior,
     data,
     delay = 0,
-    fromShopPool,
     shiny = chance(0.01)
   }: {
     pkm: Pkm
@@ -1200,7 +1198,6 @@ export default class Player extends Schema implements IPlayer {
     behavior: WandererBehavior
     data?: string
     delay?: number
-    fromShopPool?: boolean
     shiny?: boolean
   }): Wanderer {
     const id = crypto.randomUUID()
@@ -1210,7 +1207,6 @@ export default class Player extends Schema implements IPlayer {
       type,
       behavior,
       data,
-      fromShopPool,
       shiny
     })
     setTimeout(() => {
