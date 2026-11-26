@@ -37,7 +37,6 @@ export class SpectralThiefStrategy extends AbilityStrategy {
 
       if (target.items.has(Item.TWIST_BAND) === false) {
         const base = new PkmClass(target.name)
-        const { speed, atk } = target
         const boostAtk = min(0)(target.atk - target.baseAtk)
         const boostSpeed = min(0)(target.speed - base.speed)
         const boostDef = min(0)(target.def - target.baseDef)
@@ -67,10 +66,7 @@ export class SpectralThiefStrategy extends AbilityStrategy {
         pokemon.addCritChance(boostCritChance, pokemon, 0, false)
         pokemon.addCritPower(boostCritPower, pokemon, 0, false)
         pokemon.addLuck(boostLuck, pokemon, 0, false)
-        target.markItemStatsStolen(
-          min(0)(speed - target.speed),
-          min(0)(atk - target.atk)
-        )
+        target.items.forEach((item) => target.itemStatsStolen.add(item))
       }
     }
   }

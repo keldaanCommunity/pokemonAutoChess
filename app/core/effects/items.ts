@@ -442,31 +442,13 @@ export class ProgressDeviceEffect extends PeriodicEffect {
 }
 
 export class RunningShoesOnMoveEffect extends OnMoveEffect {
-  private speedGained = 0
-  private attackGained = 0
+  stacks = 0
 
   constructor() {
     super(({ pokemon }) => {
-      const { speed, atk } = pokemon
       pokemon.addSpeed(5, pokemon, 0, false)
-      this.speedGained += pokemon.speed - speed
-      this.attackGained += pokemon.atk - atk
-    }, Item.RUNNING_SHOES)
-  }
-
-  removeBonuses(pokemon: PokemonEntity) {
-    pokemon.speed = min(0)(pokemon.speed - this.speedGained)
-    pokemon.atk = min(1)(pokemon.atk - this.attackGained)
-  }
-
-  removeStolenBonuses(speedLost: number, attackLost: number) {
-    this.speedGained = min(0)(this.speedGained - speedLost)
-    this.attackGained = min(0)(this.attackGained - attackLost)
-  }
-
-  resetBonuses() {
-    this.speedGained = 0
-    this.attackGained = 0
+      this.stacks += 1
+    })
   }
 }
 
@@ -1289,15 +1271,13 @@ export const ItemEffects: { [i in Item]?: (Effect | (() => Effect))[] } = {
   ],
 
   [Item.RUNNING_SHOES]: [
-    new OnItemGainedEffect((pokemon) => {
-      pokemon.effectsSet.add(new RunningShoesOnMoveEffect())
-    }),
+    () => new RunningShoesOnMoveEffect(), // needs new instance of effect for each pokemon due to internal stack counter
     new OnItemLostInCombatEffect((pokemon) => {
-      const effect = pokemon.getEffects(RunningShoesOnMoveEffect)[0]
-      if (effect) {
-        effect.removeBonuses(pokemon)
-        pokemon.effectsSet.delete(effect)
-      }
+      const stacks =
+        Object.values(pokemon.effectsSet).find(
+          (effect) => effect instanceof RunningShoesOnMoveEffect
+        )?.stacks ?? 0
+      pokemon.addSpeed(-5 * stacks, pokemon, 0, false)
     })
   ],
 
