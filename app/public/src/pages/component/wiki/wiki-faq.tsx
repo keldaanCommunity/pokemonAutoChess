@@ -99,7 +99,8 @@ export default function WikiFaq() {
           {t("wiki.faq.code_answer")},&nbsp;
           <a
             href="https://github.com/keldaanCommunity/pokemonAutoChess"
-            target="_blank" rel="noopener"
+            target="_blank"
+            rel="noopener"
           >
             {t("wiki.faq.pull_requests")}
           </a>{" "}

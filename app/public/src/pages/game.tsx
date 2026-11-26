@@ -311,11 +311,11 @@ export default function Game() {
             title: p.title,
             role: p.role,
             pokemons: [] as IPokemonRecord[],
-            synergies: [] as ({ name: Synergy; value: number })[],
+            synergies: [] as { name: Synergy; value: number }[],
             gameStats: p.gameStats
           }
 
-          const allSynergies: ({ name: Synergy; value: number })[] = []
+          const allSynergies: { name: Synergy; value: number }[] = []
           p.synergies.forEach((v, k) => {
             allSynergies.push({ name: k as Synergy, value: v })
           })

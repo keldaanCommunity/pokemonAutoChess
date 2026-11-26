@@ -231,7 +231,7 @@ export class Board {
       [pokemon.positionX, pokemon.positionY]
     ]
     for (let r = 1; r <= range; r++) {
-      const nextCells: ([number, number])[] = []
+      const nextCells: [number, number][] = []
       orientations.forEach((orientation) => {
         prevCells.forEach((cell) => {
           const x = cell[0] + OrientationVector[orientation][0]
@@ -583,11 +583,11 @@ export class Board {
     specificSide: Team | null = null,
     maxDistance?: number
   ): { x: number; y: number; distance: number } | null {
-    let candidateCells: ({
+    let candidateCells: {
       distance: number
       x: number
       y: number
-    })[] = []
+    }[] = []
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (value === undefined) {
         if (specificSide === null) {
@@ -626,11 +626,11 @@ export class Board {
     targetY: number,
     excludingCells: { x: number; y: number }[] = []
   ): { x: number; y: number; distance: number } | null {
-    const candidateCells: ({
+    const candidateCells: {
       distance: number
       x: number
       y: number
-    })[] = []
+    }[] = []
 
     this.forEach((x: number, y: number, value: PokemonEntity | undefined) => {
       if (

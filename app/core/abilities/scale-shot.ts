@@ -13,7 +13,7 @@ export class ScaleShotStrategy extends AbilityStrategy {
   ) {
     super.process(pokemon, board, target, crit, true)
     pokemon.status.triggerArmorReduction(2000, pokemon)
-    const scalePositions: ({ x: number; y: number; delay: number })[] = []
+    const scalePositions: { x: number; y: number; delay: number }[] = []
 
     const adjacentCells = [
       [pokemon.positionX, pokemon.positionY - 1],

@@ -38,7 +38,7 @@ export function GameRegionalPokemons() {
   const connectedPlayer = useAppSelector(selectConnectedPlayer)
   const spectatedPlayer = useAppSelector(selectSpectatedPlayer)
   const regionalPokemons: Pkm[] = (
-    spectatedPlayer?.regionalPokemons ?? [] as Pkm[]
+    spectatedPlayer?.regionalPokemons ?? ([] as Pkm[])
   )
     .slice()
     .sort((a, b) => {

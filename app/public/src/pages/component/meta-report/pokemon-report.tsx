@@ -155,7 +155,7 @@ export function PokemonReport() {
             <PokemonStatistic
               pokemons={
                 sortedMetaPokemons?.find((p) => p.tier === eloThreshold)
-                  ?.pokemons || [] as IPokemonStatV2[]
+                  ?.pokemons || ([] as IPokemonStatV2[])
               }
               rankingBy={pokemonRankingBy}
               synergy={synergy}

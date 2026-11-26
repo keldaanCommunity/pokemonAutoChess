@@ -90,8 +90,8 @@ export type CountEvolutionContext = IEvolutionContext<EvolutionType.COUNT> & {
   and count evolutions are considered client side for portraits for example
   that's why the sate is optional in CountEvolutionContext
   */
-  state?: GameState 
-  stageLevel: number;
+  state?: GameState
+  stageLevel: number
 }
 export type ItemEvolutionContext = IEvolutionContext<EvolutionType.ITEM> & {
   item: Item

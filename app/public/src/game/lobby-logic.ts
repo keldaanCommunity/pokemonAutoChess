@@ -69,7 +69,7 @@ export async function joinLobbyRoom(
 
       authenticateUser().then(async (user) => {
         try {
-          let room: Room<any, LobbyState> | undefined 
+          let room: Room<any, LobbyState> | undefined
 
           const reconnectToken: string = localStore.get(
             LocalStoreKeys.RECONNECTION_LOBBY

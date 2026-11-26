@@ -76,7 +76,7 @@ const initialState: GameStateStore = {
   playerIdSpectated: "",
   simulationIdSpectated: "",
   teamSpectated: Team.BLUE_TEAM,
-  synergiesSpectated: [] as ([Synergy, number])[],
+  synergiesSpectated: [] as [Synergy, number][],
   money: 5,
   interest: 0,
   maxInterest: 5,

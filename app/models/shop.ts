@@ -139,9 +139,7 @@ export function getSellPrice(
   } else if (stars === 1) {
     price = RarityCost[pokemon.rarity]
   } else {
-    price = Math.ceil(
-      RarityCost[pokemon.rarity] * 3 ** (stars - 1) * 0.75
-    )
+    price = Math.ceil(RarityCost[pokemon.rarity] * 3 ** (stars - 1) * 0.75)
   }
 
   return price
@@ -485,7 +483,7 @@ export default class Shop {
 
     const wildChance = getWildChance(player, state.stageLevel)
     const finals = player.getFinalizedLines()
-    let specificTypesWanted: Synergy[] | undefined 
+    let specificTypesWanted: Synergy[] | undefined
 
     const attractors = schemaValues(player.board).filter(
       (p) => p.items.has(Item.INCENSE) || p.dishes.has(Item.HONEY)

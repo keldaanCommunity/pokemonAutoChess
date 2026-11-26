@@ -48,12 +48,12 @@ export default function TeamComp(props: { team: IMetaV2; rank: number }) {
     ? (Object.keys(props.team.synergies) as Synergy[]).sort((a, b) => {
         return rankType(a, b, props.team.synergies)
       })
-    : [] as Synergy[]
+    : ([] as Synergy[])
   const sortedPokemons = props.team.mean_team.pokemons
     ? (Object.keys(props.team.mean_team.pokemons) as Pkm[]).sort((a, b) => {
         return rankPokemon(a, b, props.team.mean_team.pokemons)
       })
-    : [] as Pkm[]
+    : ([] as Pkm[])
 
   // Calculate carousel items (base components) from mean items
   const getCarouselItems = () => {

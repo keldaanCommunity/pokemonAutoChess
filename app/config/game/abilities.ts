@@ -1,6 +1,6 @@
 import { Ability } from "../../types/enum/Ability"
-import { EffectConfigs } from "./effects"
 import { ZMoves } from "../../types/enum/ZMoves"
+import { EffectConfigs } from "./effects"
 
 const unownSTidalWaveLevel = 2
 const tidalWave = EffectConfigs.TIDAL_WAVE
