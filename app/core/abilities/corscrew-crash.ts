@@ -11,11 +11,6 @@ import { AbilityStrategy } from "./ability-strategy"
 export class CorkscrewCrashStrategy extends AbilityStrategy {
   requiresTarget = false
   process(pokemon: PokemonEntity, board: Board, target: null, crit: boolean) {
-    const enemies = board.cells.filter<PokemonEntity>(
-      (p): p is PokemonEntity => p != null && p.team !== pokemon.team
-    )
-    if (enemies.length === 0) return false
-
     super.process(pokemon, board, target, crit)
 
     const MAX_NB_ENEMIES_HIT = 6
@@ -26,8 +21,10 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
     let lastX = pokemon.targetX,
       lastY = pokemon.targetY
 
-    const simulation = pokemon.simulation
-    const clock = simulation.room.clock
+    const enemies = board.cells.filter<PokemonEntity>(
+      (p): p is PokemonEntity => p != null && p.team !== pokemon.team
+    )
+
     const remainingTargets = new Set(enemies)
     let n = 0
 
@@ -70,7 +67,7 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
         nextEnemy.positionY
       )
 
-      simulation.commands.push(
+      pokemon.simulation.commands.push(
         new DelayedCommand(() => {
           if (nextEnemy.hp > 0) {
             nextEnemy.handleSpecialDamage(
@@ -93,12 +90,11 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
     // Use the room clock so the landing can clear skydiving even if combat ends.
     let finalX = BOARD_WIDTH / 2,
       finalY = BOARD_HEIGHT / 2
-    clock.setTimeout(() => {
-      if (pokemon.simulation !== simulation || !simulation.room) return
-      const highestHpEnemy = enemies.reduce((prev, curr) =>
+    pokemon.simulation.room.clock.setTimeout(() => {      
+      const highestHpEnemy = [...enemies].reduce((prev, curr) =>
         prev.hp > curr.hp ? prev : curr
       )
-      if (!simulation.finished && pokemon.hp > 0 && highestHpEnemy.hp > 0) {
+      if (highestHpEnemy.hp > 0) {
         highestHpEnemy.handleSpecialDamage(
           damageFinal,
           board,
@@ -115,10 +111,9 @@ export class CorkscrewCrashStrategy extends AbilityStrategy {
         targetY: finalY
       })
 
-      clock.setTimeout(() => {
-        if (pokemon.simulation !== simulation || !simulation.room) return
+      pokemon.simulation.room.clock.setTimeout(() => {
+        if (pokemon.simulation.finished || pokemon.hp <= 0) return
         pokemon.status.skydiving = false
-        if (simulation.finished || pokemon.hp <= 0) return
         const closestAvailableCell = board.getClosestAvailablePlace(
           finalX,
           finalY

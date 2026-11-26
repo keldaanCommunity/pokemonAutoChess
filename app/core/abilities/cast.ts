@@ -23,14 +23,7 @@ export function castAbility(
   ) {
     crit = chance(pokemon.critChance / 100, pokemon)
   }
-  const result = abilityStrategy.process(
-    pokemon,
-    board,
-    target,
-    crit,
-    preventDefaultAnim
-  )
-  if (result === false) return
+  abilityStrategy.process(pokemon, board, target, crit, preventDefaultAnim)
 
   pokemon.getEffects(OnAbilityCastEffect).forEach((effect) => {
     effect.apply(pokemon, board, target, crit)
