@@ -473,6 +473,11 @@ export const server = defineServer({
           return res.status(400).send({ error: "Invalid map parameter" })
         }
         const tilemap = initTilemap(req.params.map as DungeonPMDO)
+        // not pkg.assetsVersion: the tilesets on disk can change without a server restart
+        const { version } = JSON.parse(
+          await readFile(path.join(clientSrc, "assets", "atlas.json"), "utf8")
+        )
+        for (const t of tilemap.tilesets) t.image += `?v=${version}`
         res.send(tilemap)
       } catch (error) {
         logger.error("Error generating tilemap", { error, map: req.params.map })

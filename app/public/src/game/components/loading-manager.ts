@@ -55,8 +55,14 @@ export default class LoadingManager {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
 
-    scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
-    scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
+    scene.load.image(
+      "town_tileset",
+      `/assets/tilesets/Town/tileset.png?v=${pkg.assetsVersion}`
+    )
+    scene.load.tilemapTiledJSON(
+      "town",
+      `/assets/tilesets/Town/town.json?v=${pkg.assetsVersion}`
+    )
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
@@ -116,12 +122,14 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      loadMultiAtlas(
-        scene,
-        atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
-        `/assets/${pack}/`
-      )
+      const name = atlas.packs[pack].name
+      if (!scene.textures.exists(name)) {
+        scene.load.atlas(
+          name,
+          `/assets/${pack}/${name}.png?v=${pkg.assetsVersion}`,
+          `/assets/${pack}/${name}.json?v=${pkg.assetsVersion}`
+        )
+      }
     }
 
     loadEnvironmentMultiAtlas(this.scene)
