@@ -411,7 +411,7 @@ export default class GameScene extends Scene {
               //logger.debug(`loading tileset ${mapName + "/" + t.name}`)
               this.load.image(
                 mapName + "/" + t.name,
-                "/assets/tilesets/" + mapName + "/" + t.image
+                `/assets/tilesets/${mapName}/${t.image}?v=${pkg.assetsVersion}`
               )
             })
             this.load.tilemapTiledJSON("map_" + mapName, tilemap)

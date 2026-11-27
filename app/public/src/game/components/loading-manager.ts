@@ -122,14 +122,12 @@ export default class LoadingManager {
     })
 
     for (const pack in atlas.packs) {
-      const name = atlas.packs[pack].name
-      if (!scene.textures.exists(name)) {
-        scene.load.atlas(
-          name,
-          `/assets/${pack}/${name}.png?v=${pkg.assetsVersion}`,
-          `/assets/${pack}/${name}.json?v=${pkg.assetsVersion}`
-        )
-      }
+      loadMultiAtlas(
+        scene,
+        atlas.packs[pack].name,
+        `/assets/${pack}/${atlas.packs[pack].name}.json`,
+        `/assets/${pack}/`
+      )
     }
 
     loadEnvironmentMultiAtlas(this.scene)
@@ -176,7 +174,19 @@ function loadMultiAtlas(
   url: string,
   path: string
 ) {
-  if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+  if (scene.textures.exists(key)) return
+  // the texture urls come from inside the json, so the version is added to them here
+  scene.load.once(
+    `filecomplete-json-multiatlas-${key}`,
+    (_key, _type, data) => {
+      for (const texture of data.textures) {
+        texture.image += `?v=${pkg.assetsVersion}`
+      }
+      scene.cache.json.remove(`multiatlas-${key}`)
+      scene.load.multiatlas(key, data, path)
+    }
+  )
+  scene.load.json(`multiatlas-${key}`, `${url}?v=${pkg.assetsVersion}`)
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {
