@@ -52,21 +52,21 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Pose,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.IVYSAUR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shake,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.VENUSAUR]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shake,
-    attackSprite: AttackSprite.GRASS_RANGE,
+    attackSprite: AttackSprite.GRASS_MELEE,
     hitSprite: HitSprite.GRASS_HIT
   },
   [Pkm.CHARMANDER]: {
@@ -1377,7 +1377,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Scratch,
     ability: AnimationType.RearUp,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.FIRE_RANGE
+    attackSprite: AttackSprite.DRAGON_MELEE
   },
   [Pkm.PALKIA]: {
     attack: AnimationType.Attack,
@@ -1603,7 +1603,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.RearUp,
-    attackSprite: AttackSprite.WATER_MELEE,
+    attackSprite: AttackSprite.WATER_RANGE,
     hitSprite: HitSprite.WATER_HIT
   },
   [Pkm.MEGA_SLOWBRO]: {
@@ -1673,7 +1673,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Bite,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ICE_RANGE,
+    attackSprite: AttackSprite.ICE_MELEE,
     hitSprite: HitSprite.ICE_HIT
   },
   [Pkm.FROSLASS]: {
@@ -1818,7 +1818,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    attackSprite: AttackSprite.ELECTRIC_MELEE,
     hitSprite: HitSprite.ELECTRIC_HIT
   },
   [Pkm.ROTOM_WASH]: {
@@ -1846,7 +1846,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Emit,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ELECTRIC_RANGE,
+    attackSprite: AttackSprite.ELECTRIC_MELEE,
     hitSprite: HitSprite.ELECTRIC_HIT
   },
   [Pkm.ROTOM_DRONE]: {
@@ -1861,7 +1861,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Shoot,
     ability: AnimationType.Charge,
     emote: AnimationType.Withdraw,
-    attackSprite: AttackSprite.DARK_RANGE,
+    attackSprite: AttackSprite.DARK_MELEE,
     hitSprite: HitSprite.GHOST_HIT
   },
   [Pkm.ABSOL]: {
@@ -2146,14 +2146,14 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Attack,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_RANGE,
+    attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.MEGA_AERODACTYL]: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.ROCK_RANGE,
+    attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.PRIMAL_KYOGRE]: {
@@ -3608,7 +3608,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Shoot,
     emote: AnimationType.Shake,
-    attackSprite: AttackSprite.GRASS_MELEE
+    attackSprite: AttackSprite.GRASS_RANGE
   },
   [Pkm.HYDRAPPLE]: {
     attack: AnimationType.Attack,
@@ -4308,7 +4308,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.Charge,
     emote: AnimationType.Hop,
-    attackSprite: AttackSprite.PSYCHIC_RANGE,
+    attackSprite: AttackSprite.PSYCHIC_MELEE,
     hitSprite: HitSprite.DARK_HIT
   },
   [Pkm.HOOPA_UNBOUND]: {
@@ -4510,7 +4510,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.SpAttack,
     emote: AnimationType.Shoot,
-    attackSprite: AttackSprite.BUG_MELEE,
+    attackSprite: AttackSprite.BUG_RANGE,
     hitSprite: HitSprite.BUG_HIT
   },
   [Pkm.SHUCKLE]: {
@@ -5088,7 +5088,7 @@ export const PokemonAnimations: {
     attack: AnimationType.Shoot,
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.PSYCHIC_MELEE,
+    attackSprite: AttackSprite.PSYCHIC_RANGE,
     hitSprite: HitSprite.PSYCHIC_HIT
   },
   [Pkm.CHERUBI]: {
@@ -5427,7 +5427,8 @@ export const PokemonAnimations: {
   [Pkm.SMEARGLE]: {
     attack: AnimationType.SpAttack,
     ability: AnimationType.Shoot,
-    emote: AnimationType.Pose
+    emote: AnimationType.Pose,
+    attackSprite: AttackSprite.BALL_RANGE
   },
   [Pkm.TOXEL]: {
     attack: AnimationType.Attack,
@@ -6429,14 +6430,14 @@ export const PokemonAnimations: {
     attack: AnimationType.Attack,
     ability: AnimationType.RearUp,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.ROCK_RANGE,
+    attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.BARBARACLE]: {
     attack: AnimationType.Strike,
     ability: AnimationType.Shoot,
     emote: AnimationType.Charge,
-    attackSprite: AttackSprite.ROCK_RANGE,
+    attackSprite: AttackSprite.ROCK_MELEE,
     hitSprite: HitSprite.ROCK_HIT
   },
   [Pkm.SKARMORY]: {
@@ -6641,7 +6642,7 @@ export const PokemonAnimations: {
     eat: AnimationType.Idle,
     shinyUnavailable: true,
     noShadow: true,
-    attackSprite: AttackSprite.FIRE_RANGE,
+    attackSprite: AttackSprite.FIRE_MELEE,
     animationsOriented: {
       [AnimationType.Idle]: false,
       [AnimationType.Hurt]: false
