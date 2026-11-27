@@ -351,8 +351,7 @@ export function addIconsToHtml(
           iconHTML =
             '<img class="description-icon icon-star" src="/assets/ui/star.svg" alt="⭐" />'
         } else if (token === "EMERA") {
-          iconHTML =
-            '<span class="description-icon icon-emera"><img src="/assets/atlas/BLANK_EMERA.png" alt="💎" /><span class="item-label">{t(`atlas.emera`)}</span></span>'
+          iconHTML = `<span class="description-icon icon-emera"><img src="/assets/atlas/BLANK_EMERA.png" alt="💎" /><span class="item-label">${t(`atlas.emera`)}</span></span>`
         } else if (token === "XP") {
           iconHTML = `<span className="description-icon stat">
             <img src={${`assets/icons/${token}.png`}} />
