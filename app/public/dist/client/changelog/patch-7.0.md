@@ -54,7 +54,7 @@ The Atlas is inspired by the Connection Orb mechanic from Pokémon Super Mystery
 
 We introduce what will be the final 32th synergy to Pokémon Auto Chess: STELLAR
 
-This special synergy is only given through special items and Pokémon. Its effect is to increase by 1 the synergy level of all active synergies, and Stellar Pokémon benefit from the effects of all active synergies. Stellar cannot be a symbol on portals. A STELLAR_GEM exists but cannot be sold by Sableye town encounter.
+This special synergy is only given through special items and Pokémon. Its effect is to increase by 1 the synergy level of all active synergies, and Stellar Pokémon benefit from the effects of all active synergies. Stellar cannot be a symbol on portals.
 
 # New monthly event: Rainbow Peak
 
@@ -155,7 +155,7 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Repeat Ball is now unholdable and no longer gives SHIELD and SPEED. Unique Pokémon are more frequent in shops and can be found even after Legendaries are found.
 - Shiny stone is now considered a synergy stone, given by Kecleon town encounter, on item carousels or by exchanging another synergy stone. Removed base stats and removed its effect of adding a second spotlight on the holder cell.
 - New tool: Energy Root: 50 SHIELD ; 50% of all SHIELD received is converted to max HP
-- Hatch Bundle Double Up Gift: 5 → 10% chance to get a GOLDEN_EGG
+- Hatch Bundle Double Up Gift: 5 → 10% chance to get a Golden Egg
 - New Double Up Gifts: EMERA and GOLDEN_EMERA
 - Rework Casteliacone dish: In the next fight, get [30,LK]% chance to inflict FREEZE for 2 seconds ON_HIT. The first attack always FREEZE.
 - Rework Whipped Dream dish: In the next fight, get [30,LK]% chance to inflict CHARM for 2 seconds ON_HIT. The first attack always CHARM.
@@ -257,17 +257,16 @@ Climb Rainbow Peak, one synergy at a time! Finish at 1st place in a Classic game
 - Fixed Dragon Rage shield scaling with AP and repeated casts before the end of the effect not converting the whole SHIELD and not granting a new fresh shield.
 - Fixed Firestarter path being computed after knockback.
 - Corrected Cotton Guard DEF gain description.
-- Corrected Plasma Flash description to start at 5 flashes.
+- Corrected Plasma Flash description.
 
 # Misc
 
-- New titles: Terastal, Awakened, Mad Titan, Ascendant, Radiant
 - The post game screen has new victory jingles made by John Rei
-- Removed Bench is Lava scribble
-- Add "Base" to the glossary of technical terms
+- New title: Terastal -  Awakened, Mad Titan, Ascendant, Radiant
 - New title: Bodybuilder. Get a FIGHTING Pokémon to +40 ATK after training on the bench.
-- New title: Guild Hero. Finish first on the Expeditions leaderboard at the end of the event.
-- New title: Bestie. Finish first on Poképals leaderboard with your pal at the end of the event.
+- New title: Guild Hero - Finish first on the Expeditions leaderboard at the end of the event.
+- New title: Bestie-  Finish first on Poképals leaderboard with your pal at the end of the event.
 - Synergy meta report is now public
 - Add FPS limiter option to settings
+- Add "Base" to the glossary of technical terms
 - Added Turkish translation (thanks to badblli)

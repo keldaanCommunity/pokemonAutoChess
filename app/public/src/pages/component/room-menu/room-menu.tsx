@@ -14,6 +14,7 @@ import { IngameRoomsList } from "./game-rooms-menu"
 import RoomItem from "./room-item"
 import { RoomSelectionMenu } from "./room-selection-menu"
 import "./room-menu.css"
+import { RANKED_ENABLED } from "../../../../../config"
 
 export default function RoomMenu() {
   const dispatch = useAppDispatch()
@@ -95,10 +96,12 @@ export default function RoomMenu() {
           <GameModeIcon gameMode={GameMode.CLASSIC} />
           <span>{t(`game_modes.${GameMode.CLASSIC}`)}</span>
         </Tab>
-        <Tab>
-          <GameModeIcon gameMode={GameMode.RANKED} />
-          <span>{t(`game_modes.${GameMode.RANKED}`)}</span>
-        </Tab>
+        {RANKED_ENABLED && (
+          <Tab>
+            <GameModeIcon gameMode={GameMode.RANKED} />
+            <span>{t(`game_modes.${GameMode.RANKED}`)}</span>
+          </Tab>
+        )}
         <Tab>
           <GameModeIcon gameMode={GameMode.SCRIBBLE} />
           <span>{t(`game_modes.${GameMode.SCRIBBLE}`)}</span>
@@ -129,9 +132,11 @@ export default function RoomMenu() {
       <TabPanel>
         <IngameRoomsList gameMode={GameMode.CLASSIC} />
       </TabPanel>
-      <TabPanel>
-        <IngameRoomsList gameMode={GameMode.RANKED} />
-      </TabPanel>
+      {RANKED_ENABLED && (
+        <TabPanel>
+          <IngameRoomsList gameMode={GameMode.RANKED} />
+        </TabPanel>
+      )}
       <TabPanel>
         <IngameRoomsList gameMode={GameMode.SCRIBBLE} />
       </TabPanel>

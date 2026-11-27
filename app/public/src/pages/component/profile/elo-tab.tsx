@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import {
   CRON_ELO_DECAY_DELAY,
+  ELO_DECAY_ENABLED,
   ELO_DECAY_LOST_PER_DAY,
   ELO_DECAY_NB_GAMES_REQUIRED,
   EloRankThreshold
@@ -92,7 +93,9 @@ export function EloTab() {
         })}
       </p>
       <p style={{ whiteSpace: "pre-line" }}>
-        {isDecaying
+        {ELO_DECAY_ENABLED === false ?
+        t("profile.elo_tab.elo_decay_disabled")
+        : isDecaying
           ? t("profile.elo_tab.elo_decay_active")
           : t("profile.elo_tab.elo_decay_inactive", {
               time: new Date(

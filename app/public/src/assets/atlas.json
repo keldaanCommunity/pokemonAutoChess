@@ -1,5 +1,5 @@
 {
-  "version": "7.0.0.2026-11-26.0",
+  "version": "7.0.0-beta.2026-11-27.0",
   "packs": {
     "abilities": {
       "name": "abilities",
@@ -1309,33 +1309,6 @@
         },
         "ZYGARDE_CELL/7": {
           "frames": 3
-        },
-        "CLOSE_COMBAT": {
-          "frames": 7
-        },
-        "GEOMANCY": {
-          "frames": 12
-        },
-        "LUSTER_PURGE": {
-          "frames": 3
-        },
-        "MIST_BALL": {
-          "frames": 3
-        },
-        "MOONGEIST_BEAM": {
-          "frames": 6
-        },
-        "NIGHTMARE": {
-          "frames": 15
-        },
-        "SCHOOLING": {
-          "frames": 4
-        },
-        "SEED_FLARE": {
-          "frames": 31
-        },
-        "TRI_ATTACK": {
-          "frames": 11
         }
       }
     },

@@ -4,6 +4,7 @@ import { randomBytes } from "crypto"
 import {
   EloRankThreshold,
   MAX_PLAYERS_PER_GAME,
+  RANKED_ENABLED,
   USERNAME_REGEXP
 } from "../../config"
 import { GADGETS } from "../../config/game/gadgets"
@@ -561,6 +562,13 @@ export class JoinOrOpenRoomCommand extends Command<
       }
 
       case GameMode.RANKED: {
+        if (!RANKED_ENABLED) {
+          client.send(
+            Transfer.ALERT,
+            `Ranked mode is currently disabled on the server.`
+          )
+          return
+        }
         if (user.level < GADGETS.certificate.levelRequired) {
           client.send(
             Transfer.ALERT,

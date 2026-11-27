@@ -4,6 +4,7 @@ export interface PatchInfo {
 }
 
 export const PATCHES: PatchInfo[] = [
+  { v: "7.0" },
   { v: "6.11", midpatches: ["6.11.1", "6.11.2"] },
   { v: "6.10", midpatches: ["6.10.1", "6.10.2"] },
   { v: "6.9", midpatches: ["6.9.1", "6.9.2"] },

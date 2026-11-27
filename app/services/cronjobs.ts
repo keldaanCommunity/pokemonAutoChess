@@ -6,6 +6,7 @@ import {
   CRON_ELO_DECAY_DELAY,
   CRON_ELO_DECAY_MINIMUM_ELO,
   CRON_HISTORY_CLEANUP_DELAY,
+  ELO_DECAY_ENABLED,
   ELO_DECAY_LOST_PER_DAY,
   ELO_DECAY_NB_GAMES_REQUIRED,
   EloRankThreshold,
@@ -192,6 +193,7 @@ async function deleteOldAnonymousAccounts() {
 }
 
 async function eloDecay() {
+  if (!ELO_DECAY_ENABLED) return
   logger.info("[CRON] Computing elo decay...")
   const users = await UserMetadata.find(
     { elo: { $gt: CRON_ELO_DECAY_MINIMUM_ELO } },

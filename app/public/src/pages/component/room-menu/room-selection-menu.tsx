@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { RANKED_ENABLED } from "../../../../../config"
 import { GADGETS } from "../../../../../config/game/gadgets"
 import { Role } from "../../../../../types"
 import { GameMode } from "../../../../../types/enum/Game"
@@ -36,20 +37,21 @@ export function RoomSelectionMenu(props: {
             <p>{t(`game_modes_descriptions.${GameMode.CLASSIC}`)}</p>
           </li>
           {(profileLevel >= GADGETS.certificate.levelRequired ||
-            profile?.role === Role.ADMIN) && (
-            <li
-              className="my-box"
-              onClick={() => props.onSelectMode(GameMode.RANKED)}
-            >
-              <img
-                src="assets/ui/game_modes/ranked.png"
-                alt={t(`game_modes.${GameMode.RANKED}`)}
-                draggable="false"
-              />
-              <h2>{t(`game_modes.${GameMode.RANKED}`)}</h2>
-              <p>{t(`game_modes_descriptions.${GameMode.RANKED}`)}</p>
-            </li>
-          )}
+            profile?.role === Role.ADMIN) &&
+            RANKED_ENABLED && (
+              <li
+                className="my-box"
+                onClick={() => props.onSelectMode(GameMode.RANKED)}
+              >
+                <img
+                  src="assets/ui/game_modes/ranked.png"
+                  alt={t(`game_modes.${GameMode.RANKED}`)}
+                  draggable="false"
+                />
+                <h2>{t(`game_modes.${GameMode.RANKED}`)}</h2>
+                <p>{t(`game_modes_descriptions.${GameMode.RANKED}`)}</p>
+              </li>
+            )}
           <li
             className="my-box"
             onClick={() => props.onSelectMode(GameMode.SCRIBBLE)}
