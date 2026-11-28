@@ -55,8 +55,14 @@ export default class LoadingManager {
     const scene = this.scene
     scene.load.xhr.timeout = 5000 // help avoiding failed loading of assets when server is overloaded
 
-    scene.load.image("town_tileset", "/assets/tilesets/Town/tileset.png")
-    scene.load.tilemapTiledJSON("town", "/assets/tilesets/Town/town.json")
+    scene.load.image(
+      "town_tileset",
+      `/assets/tilesets/Town/tileset.png?v=${pkg.assetsVersion}`
+    )
+    scene.load.tilemapTiledJSON(
+      "town",
+      `/assets/tilesets/Town/town.json?v=${pkg.assetsVersion}`
+    )
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_0))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_10))
     preloadMusic(scene, getMusicAlt(DungeonMusic.TREASURE_TOWN_STAGE_20))
@@ -119,7 +125,7 @@ export default class LoadingManager {
       loadMultiAtlas(
         scene,
         atlas.packs[pack].name,
-        `/assets/${pack}/${atlas.packs[pack].name}.json?v=${pkg.assetsVersion}`,
+        `/assets/${pack}/${atlas.packs[pack].name}.json`,
         `/assets/${pack}/`
       )
     }
@@ -168,7 +174,19 @@ function loadMultiAtlas(
   url: string,
   path: string
 ) {
-  if (!scene.textures.exists(key)) scene.load.multiatlas(key, url, path)
+  if (scene.textures.exists(key)) return
+  // the texture urls come from inside the json, so the version is added to them here
+  scene.load.once(
+    `filecomplete-json-multiatlas-${key}`,
+    (_key, _type, data) => {
+      for (const texture of data.textures) {
+        texture.image += `?v=${pkg.assetsVersion}`
+      }
+      scene.cache.json.remove(`multiatlas-${key}`)
+      scene.load.multiatlas(key, data, path)
+    }
+  )
+  scene.load.json(`multiatlas-${key}`, `${url}?v=${pkg.assetsVersion}`)
 }
 
 export function loadEnvironmentMultiAtlas(scene: Phaser.Scene) {

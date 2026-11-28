@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import pkg from "../../../../../package.json"
 import {
   BOARD_HEIGHT,
   BOARD_WIDTH,
@@ -378,7 +379,7 @@ export class DebugScene extends Phaser.Scene {
       })
     }
 
-    return fetch(`/tilemap/${mapName}`)
+    return fetch(`/tilemap/${mapName}?v=${pkg.assetsVersion}`)
       .then((res) => {
         if (!res.ok)
           throw new Error(`Failed to load map ${mapName}: ${res.status}`)
@@ -401,7 +402,7 @@ export class DebugScene extends Phaser.Scene {
             //logger.debug(`loading tileset ${t.image}`)
             this.load.image(
               mapName + "/" + t.name,
-              "/assets/tilesets/" + mapName + "/" + t.image
+              `/assets/tilesets/${mapName}/${t.image}?v=${pkg.assetsVersion}`
             )
           })
           this.load.tilemapTiledJSON(mapName, tilemap)

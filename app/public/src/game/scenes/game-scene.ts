@@ -1,5 +1,6 @@
 import type { Room } from "@colyseus/sdk"
 import Phaser, { GameObjects, Scene } from "phaser"
+import pkg from "../../../../../package.json"
 import {
   BERRY_TREE_POSITIONS,
   BOARD_WIDTH,
@@ -402,7 +403,7 @@ export default class GameScene extends Scene {
   preloadMaps(mapNames: DungeonPMDO[]) {
     return Promise.all(
       mapNames.map((mapName: DungeonPMDO) =>
-        fetch(`/tilemap/${mapName}`)
+        fetch(`/tilemap/${mapName}?v=${pkg.assetsVersion}`)
           .then((res) => res.json())
           .then((tilemap: DesignTiled) => {
             this.tilemaps.set(mapName, tilemap)
@@ -410,7 +411,7 @@ export default class GameScene extends Scene {
               //logger.debug(`loading tileset ${mapName + "/" + t.name}`)
               this.load.image(
                 mapName + "/" + t.name,
-                "/assets/tilesets/" + mapName + "/" + t.image
+                `/assets/tilesets/${mapName}/${t.image}?v=${pkg.assetsVersion}`
               )
             })
             this.load.tilemapTiledJSON("map_" + mapName, tilemap)
