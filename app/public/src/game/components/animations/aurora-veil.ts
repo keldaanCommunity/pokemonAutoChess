@@ -9,6 +9,7 @@ import type { AbilityAnimation } from "../../../../../types/Animation"
 import { OrientationVector } from "../../../../../utils/orientation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCellObject } from "./helpers"
 
 const DURATION = 850
 const CYAN = 0x8febf8
@@ -56,23 +57,6 @@ function drawRibbon(
     }
     fx.strokePath()
   }
-}
-
-function isBoardCell(cell: unknown): cell is { x: number; y: number } {
-  if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell)) {
-    return false
-  }
-  const { x, y } = cell
-  return (
-    typeof x === "number" &&
-    typeof y === "number" &&
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 function drawCrystal(
@@ -283,7 +267,7 @@ export const auroraVeilAnimation: AbilityAnimation = ({
   if (Array.isArray(cells)) {
     const seen = new Set([positionX + positionY * BOARD_WIDTH])
     for (const cell of cells.slice(0, BOARD_WIDTH * BOARD_HEIGHT)) {
-      if (!isBoardCell(cell)) continue
+      if (!isBoardCellObject(cell)) continue
       const key = cell.x + cell.y * BOARD_WIDTH
       if (seen.has(key)) continue
       seen.add(key)

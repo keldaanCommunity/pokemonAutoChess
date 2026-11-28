@@ -1,10 +1,5 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
@@ -12,6 +7,7 @@ import type {
 import { distanceE } from "../../../../../utils/distance"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getBoardBounds, isBoardCellObject } from "./helpers"
 
 const GATHER_DURATION = 180
 const MAX_STAGGER = 250
@@ -31,28 +27,6 @@ type WindPath = {
 }
 
 const clamp = (value: number) => Math.max(0, Math.min(1, value))
-
-function isBoardCell(value: unknown): value is { x: number; y: number } {
-  if (
-    !value ||
-    typeof value !== "object" ||
-    !("x" in value) ||
-    !("y" in value)
-  ) {
-    return false
-  }
-  const { x, y } = value as { x: unknown; y: unknown }
-  return (
-    typeof x === "number" &&
-    Number.isInteger(x) &&
-    typeof y === "number" &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawStar(
   graphics: Phaser.GameObjects.Graphics,
@@ -93,14 +67,7 @@ export const fairyWindAnimation: AbilityAnimation = ({
     positionY,
     flip
   )
-  const [leftCenter] = transformEntityCoordinates(0, 0, flip)
-  const [rightCenter] = transformEntityCoordinates(BOARD_WIDTH - 1, 0, flip)
-  const [, firstRowY] = transformEntityCoordinates(0, 0, flip)
-  const [, lastRowY] = transformEntityCoordinates(0, BOARD_HEIGHT - 1, flip)
-  const left = Math.min(leftCenter, rightCenter) - CELL_WIDTH * 0.5 + 8
-  const right = Math.max(leftCenter, rightCenter) + CELL_WIDTH * 0.5 - 8
-  const top = Math.min(firstRowY, lastRowY) - CELL_HEIGHT * 0.5 + 8
-  const bottom = Math.max(firstRowY, lastRowY) + CELL_HEIGHT * 0.5 - 8
+  const { left, right, top, bottom } = getBoardBounds(flip, 8)
   const startX = Phaser.Math.Clamp(casterX, left, right)
   const startY = Phaser.Math.Clamp(casterY - 18, top, bottom)
   const paths: WindPath[] = []
@@ -109,7 +76,7 @@ export const fairyWindAnimation: AbilityAnimation = ({
 
   if (Array.isArray(cells)) {
     for (const cell of cells.slice(0, BOARD_WIDTH * BOARD_HEIGHT)) {
-      if (!isBoardCell(cell)) continue
+      if (!isBoardCellObject(cell)) continue
       const key = cell.x + cell.y * BOARD_WIDTH
       if (seen.has(key)) continue
       seen.add(key)

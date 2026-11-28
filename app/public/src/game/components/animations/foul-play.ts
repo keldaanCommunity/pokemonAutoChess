@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const CHARGE_DURATION = 150
 const FLIGHT_DURATION = 270
@@ -17,17 +17,6 @@ const impactDebris = [
   { angle: 1.83, delay: 0.14, travel: 0.64, size: 6.8, color: 0xff8ce6 },
   { angle: 2.92, delay: 0.01, travel: 0.78, size: 5.4, color: 0x9a3cff }
 ]
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawCharge(
   graphics: GameObjects.Graphics,

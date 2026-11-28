@@ -1,10 +1,11 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
+import { BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { Pkm } from "../../../../../types/enum/Pokemon"
 import { distanceE } from "../../../../../utils/distance"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const CASTER_DURATION = 900
 const ALLY_DURATION = 780
@@ -110,12 +111,7 @@ function getAllies(
   const allies: { x: number; y: number }[] = []
   for (const cell of data.allies) {
     if (
-      !Number.isInteger(cell?.x) ||
-      !Number.isInteger(cell?.y) ||
-      cell.x < 0 ||
-      cell.x >= BOARD_WIDTH ||
-      cell.y < 0 ||
-      cell.y >= BOARD_HEIGHT ||
+      !isBoardCell(cell?.x, cell?.y) ||
       (cell.x === casterX && cell.y === casterY)
     ) {
       continue

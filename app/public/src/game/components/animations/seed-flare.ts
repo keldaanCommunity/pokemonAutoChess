@@ -1,17 +1,12 @@
 import Phaser, { type GameObjects } from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { CELL_HEIGHT, CELL_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, isBoardCell } from "./helpers"
 
 const DURATION = 1420
 const DOME_BURST = 260
@@ -28,17 +23,6 @@ const CYAN = 0x60ffe0
 const PALE_GREEN = 0xe7ffad
 
 const { Clamp } = Phaser.Math
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawArc(
   graphics: GameObjects.Graphics,

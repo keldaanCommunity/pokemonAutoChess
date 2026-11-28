@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getShadowWorldCenter, isBoardCell } from "./helpers"
 
 const LEAD_IN = 65
 const TRAVEL_DURATION = 165
@@ -13,17 +13,6 @@ const DUCK_ANGLES = [-2.9, -2.55, -2.2, -1.85, -1.5, -1.15, -0.8, -0.45]
 const DUCK_SCALES = [0.78, 0.9, 0.72, 0.85, 0.75, 0.88, 0.74, 0.82]
 const DUCK_DURATION = DUCK_FLIGHT_DURATION + DUCK_DELAYS[DUCK_DELAYS.length - 1]
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function quadraticPoint(
   startX: number,
@@ -435,15 +424,7 @@ export const dizzyPunchAnimation: AbilityAnimation = ({
   const getImpactCenter = () => {
     const shadow = targetSprite?.shadow
     if (shadow?.active) {
-      const frame = shadow.frame
-      return shadow
-        .getWorldTransformMatrix()
-        .transformPoint(
-          (frame.x + frame.width / 2 - shadow.displayOriginX) *
-            (shadow.flipX ? -1 : 1),
-          (frame.y + frame.height / 2 - shadow.displayOriginY) *
-            (shadow.flipY ? -1 : 1)
-        )
+      return getShadowWorldCenter(shadow)
     }
 
     return targetSprite?.active

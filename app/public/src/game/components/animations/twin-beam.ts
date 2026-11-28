@@ -1,11 +1,11 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const TRAVEL_DURATION = 190
 const EFFECT_DURATION = 500
@@ -14,12 +14,7 @@ const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
 function getBeamLine(args: AbilityAnimationArgs) {
   const { positionX, positionY, targetX, targetY, flip } = args
   if (
-    !Number.isInteger(targetX) ||
-    !Number.isInteger(targetY) ||
-    targetX < 0 ||
-    targetX >= BOARD_WIDTH ||
-    targetY < 0 ||
-    targetY >= BOARD_HEIGHT ||
+    !isBoardCell(targetX, targetY) ||
     (targetX === positionX && targetY === positionY)
   ) {
     return null

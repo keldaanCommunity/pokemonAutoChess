@@ -1,13 +1,9 @@
 import Phaser, { type GameObjects } from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { CELL_HEIGHT, CELL_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const DURATION = 680
 const SHELL_HOLD = 240
@@ -18,17 +14,6 @@ const SHELL_HIGHLIGHT = 0xcfa7f7
 const SHELL_OUTLINE = 0x000000
 const HALO_GOLD = 0xe7c56e
 const CLAMP = Phaser.Math.Clamp
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawShellSurface(graphics: GameObjects.Graphics) {
   const width = CELL_WIDTH * 0.94

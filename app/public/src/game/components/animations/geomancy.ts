@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 export const GEOMANCY_DURATION = 2100
 const COLORS = [
@@ -103,15 +103,7 @@ export const geomancyAnimation: AbilityAnimation = ({
   flip,
   delay
 }) => {
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT
-  )
-    return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
   const back = scene.add

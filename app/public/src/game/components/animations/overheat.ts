@@ -1,14 +1,9 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { CELL_HEIGHT, CELL_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, isBoardCell } from "./helpers"
 
 const EXPANSION_DURATION = 650
 const DURATION = 1100
@@ -24,15 +19,7 @@ export const overheatAnimation: AbilityAnimation = ({
   delay = 0,
   data
 }) => {
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT
-  )
-    return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
   const effect = scene.add.container(0, 0).setDepth(DEPTH.ABILITY_BELOW_POKEMON)

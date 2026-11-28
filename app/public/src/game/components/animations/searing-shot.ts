@@ -8,7 +8,7 @@ import {
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, isBoardCell } from "./helpers"
 
 const DURATION = 1640
 const TARGET_START = 250
@@ -58,17 +58,6 @@ type IncandescentChunk = {
     size: number
     color: number
   }[]
-}
-
-function isCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 function getRainAreaCells(centerX: number, centerY: number) {
@@ -234,7 +223,7 @@ export const searingShotAnimation: AbilityAnimation = ({
   delay = 0,
   data
 }) => {
-  if (!isCell(positionX, positionY)) return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [casterX, casterY] = transformEntityCoordinates(
     positionX,

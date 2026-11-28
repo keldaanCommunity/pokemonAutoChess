@@ -1,5 +1,10 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH, CELL_WIDTH } from "../../../../../config"
+import {
+  BOARD_HEIGHT,
+  BOARD_WIDTH,
+  CELL_HEIGHT,
+  CELL_WIDTH
+} from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs,
@@ -27,6 +32,177 @@ export type AbilityCoordinates =
   | "target"
   | "caster"
 
+/** True for integer coordinates inside the combat board. */
+export function isBoardCell(x: unknown, y: unknown): x is number {
+  return (
+    typeof x === "number" &&
+    typeof y === "number" &&
+    Number.isInteger(x) &&
+    Number.isInteger(y) &&
+    x >= 0 &&
+    x < BOARD_WIDTH &&
+    y >= 0 &&
+    y < BOARD_HEIGHT
+  )
+}
+
+/** Validates an unknown payload cell and narrows both coordinates. */
+export function isBoardCellObject(
+  value: unknown
+): value is { x: number; y: number } {
+  return (
+    !!value &&
+    typeof value === "object" &&
+    "x" in value &&
+    "y" in value &&
+    typeof value.y === "number" &&
+    isBoardCell(value.x, value.y)
+  )
+}
+
+/** Interpolates packed RGB colors, rounding each channel to the nearest integer. */
+export function interpolateColor(from: number, to: number, t: number) {
+  const a = Phaser.Display.Color.IntegerToColor(from)
+  const b = Phaser.Display.Color.IntegerToColor(to)
+  return Phaser.Display.Color.GetColor(
+    Math.round(Phaser.Math.Linear(a.red, b.red, t)),
+    Math.round(Phaser.Math.Linear(a.green, b.green, t)),
+    Math.round(Phaser.Math.Linear(a.blue, b.blue, t))
+  )
+}
+
+/** World-space anchors along the sprite origin's vertical axis within its trimmed frame. */
+export function getSpriteVerticalAnchors(
+  sprite: GameObjects.Sprite | undefined
+) {
+  if (!sprite?.active || !sprite.frame) return undefined
+  const top = sprite.frame.y - sprite.displayOriginY
+  const bottom = top + sprite.frame.height
+  const matrix = sprite.getWorldTransformMatrix()
+  const a = matrix.transformPoint(0, sprite.flipY ? -top : top)
+  const b = matrix.transformPoint(0, sprite.flipY ? -bottom : bottom)
+  return {
+    x: (a.x + b.x) / 2,
+    top: Math.min(a.y, b.y),
+    center: (a.y + b.y) / 2
+  }
+}
+
+function getShadowFrameCenter(shadow: GameObjects.Sprite) {
+  const { frame } = shadow
+  return {
+    x:
+      (frame.x + frame.width / 2 - shadow.displayOriginX) *
+      (shadow.flipX ? -1 : 1),
+    y:
+      (frame.y + frame.height / 2 - shadow.displayOriginY) *
+      (shadow.flipY ? -1 : 1)
+  }
+}
+
+/** Center of the trimmed shadow frame in its parent container's coordinates. */
+export function getShadowLocalCenter(shadow: GameObjects.Sprite) {
+  const center = getShadowFrameCenter(shadow)
+  return {
+    x: shadow.x + center.x * shadow.scaleX,
+    y: shadow.y + center.y * shadow.scaleY
+  }
+}
+
+/** Center of the trimmed shadow frame in world coordinates. */
+export function getShadowWorldCenter(shadow: GameObjects.Sprite) {
+  const center = getShadowFrameCenter(shadow)
+  return shadow.getWorldTransformMatrix().transformPoint(center.x, center.y)
+}
+
+/** Combat board bounds in world coordinates; positive padding insets every edge. */
+export function getBoardBounds(flip: boolean, padding = 0) {
+  const [left, rowA] = transformEntityCoordinates(0, 0, flip)
+  const [right, rowB] = transformEntityCoordinates(
+    BOARD_WIDTH - 1,
+    BOARD_HEIGHT - 1,
+    flip
+  )
+  return new Phaser.Geom.Rectangle(
+    left - CELL_WIDTH / 2 + padding,
+    Math.min(rowA, rowB) - CELL_HEIGHT / 2 + padding,
+    right - left + CELL_WIDTH - padding * 2,
+    Math.abs(rowB - rowA) + CELL_HEIGHT - padding * 2
+  )
+}
+
+/** Projects the standard elevated beam origin to the board edge, allowing off-board endpoints. */
+export function getBoardBeamLine(
+  args: Pick<
+    AbilityAnimationArgs,
+    "positionX" | "positionY" | "targetX" | "targetY" | "flip"
+  >
+) {
+  const { positionX, positionY, targetX, targetY, flip } = args
+  if (
+    !Number.isFinite(targetX) ||
+    !Number.isFinite(targetY) ||
+    (targetX === -1 && targetY === -1)
+  )
+    return null
+
+  const [x, anchorY] = transformEntityCoordinates(positionX, positionY, flip)
+  const [tx, ty] = transformEntityCoordinates(targetX, targetY, flip)
+  if (tx === x && ty === anchorY) return null
+  const angle = Math.atan2(ty - anchorY, tx - x)
+  const dx = Math.cos(angle)
+  const dy = Math.sin(angle)
+  const bounds = getBoardBounds(flip)
+  const y = anchorY - 20
+  let length = Infinity
+  if (dx > 0) length = Math.min(length, (bounds.right - x) / dx)
+  if (dx < 0) length = Math.min(length, (bounds.left - x) / dx)
+  if (dy > 0) length = Math.min(length, (bounds.bottom - y) / dy)
+  if (dy < 0) length = Math.min(length, (bounds.top - y) / dy)
+  return { x, y, angle, dx, dy, length: Math.max(0, length), bounds }
+}
+
+/** Arrival time at a world-space point projected onto a beam with a unit direction. */
+export function getBeamImpactArrival(
+  line: { x: number; y: number; dx: number; dy: number; length: number },
+  x: number,
+  y: number,
+  travelDuration: number
+) {
+  const distance = Math.max(0, (x - line.x) * line.dx + (y - line.y) * line.dy)
+  return (
+    travelDuration *
+    Phaser.Math.Clamp(distance / Math.max(1, line.length), 0, 1)
+  )
+}
+
+/** Strokes a segmented elliptical arc in the graphics object's coordinates. */
+export function drawEllipseArc(
+  graphics: GameObjects.Graphics,
+  x: number,
+  y: number,
+  radiusX: number,
+  radiusY: number,
+  startAngle: number,
+  endAngle: number,
+  color: number,
+  alpha: number,
+  width: number,
+  segments = 20
+) {
+  graphics.lineStyle(width, color, alpha)
+  graphics.beginPath()
+  for (let step = 0; step <= segments; step++) {
+    const angle = startAngle + ((endAngle - startAngle) * step) / segments
+    const pointX = x + Math.cos(angle) * radiusX
+    const pointY = y + Math.sin(angle) * radiusY
+    if (step === 0) graphics.moveTo(pointX, pointY)
+    else graphics.lineTo(pointX, pointY)
+  }
+  graphics.strokePath()
+}
+
+/** Draws local-space arcs around a beam contact; rotate the graphics with the beam. */
 export function drawBeamImpactArcs(
   graphics: GameObjects.Graphics,
   elapsed: number,
@@ -61,6 +237,7 @@ export function drawBeamImpactArcs(
   }
 }
 
+/** Draws a WebGL alpha mask feathered at the board edges the beam exits. */
 export function drawBoardEdgeMask(
   mask: GameObjects.Graphics,
   bounds: Phaser.Geom.Rectangle,
@@ -111,6 +288,7 @@ export function drawBoardEdgeMask(
   }
 }
 
+/** Returns unique valid target cells in payload order, considering at most one board's worth. */
 export function getImpactCells(data: AbilityAnimationArgs["data"]) {
   const targets: unknown = data.targets
   if (!Array.isArray(targets)) return []
@@ -118,21 +296,8 @@ export function getImpactCells(data: AbilityAnimationArgs["data"]) {
   return targets
     .slice(0, BOARD_WIDTH * BOARD_HEIGHT)
     .filter((cell): cell is { x: number; y: number } => {
-      if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell))
-        return false
+      if (!isBoardCellObject(cell)) return false
       const { x, y } = cell
-      if (
-        typeof x !== "number" ||
-        typeof y !== "number" ||
-        !Number.isInteger(x) ||
-        !Number.isInteger(y) ||
-        x < 0 ||
-        x >= BOARD_WIDTH ||
-        y < 0 ||
-        y >= BOARD_HEIGHT
-      ) {
-        return false
-      }
       const key = y * BOARD_WIDTH + x
       if (seen.has(key)) return false
       seen.add(key)
@@ -140,6 +305,7 @@ export function getImpactCells(data: AbilityAnimationArgs["data"]) {
     })
 }
 
+/** Returns unique valid ally cells in payload order, excluding the caster. */
 export function getSurgeAllies(
   data: AbilityAnimationArgs["data"],
   casterX: number,
@@ -151,23 +317,9 @@ export function getSurgeAllies(
   const seen = new Set<number>()
   const allies: { x: number; y: number }[] = []
   for (const cell of cells.slice(0, BOARD_WIDTH * BOARD_HEIGHT)) {
-    if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell)) {
-      continue
-    }
+    if (!isBoardCellObject(cell)) continue
     const { x, y } = cell
-    if (
-      typeof x !== "number" ||
-      !Number.isInteger(x) ||
-      typeof y !== "number" ||
-      !Number.isInteger(y) ||
-      x < 0 ||
-      x >= BOARD_WIDTH ||
-      y < 0 ||
-      y >= BOARD_HEIGHT ||
-      (x === casterX && y === casterY)
-    ) {
-      continue
-    }
+    if (x === casterX && y === casterY) continue
     const key = y * BOARD_WIDTH + x
     if (seen.has(key)) continue
     seen.add(key)
@@ -189,6 +341,7 @@ function scheduleAbilityStart(
   }
 }
 
+/** Draws the small coin motif at the graphics object's local origin. */
 export function drawGoldCoin(graphics: GameObjects.Graphics) {
   graphics.fillStyle(0xffc629, 0.98)
   graphics.fillEllipse(0, 0, 10, 14)

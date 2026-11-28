@@ -1,22 +1,10 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { addAbilitySprite } from "./helpers"
+import { addAbilitySprite, isBoardCell } from "./helpers"
 
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawLeaf(
   graphics: GameObjects.Graphics,

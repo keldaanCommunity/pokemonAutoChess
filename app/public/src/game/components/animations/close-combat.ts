@@ -1,8 +1,8 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getShadowLocalCenter, isBoardCell } from "./helpers"
 
 const DURATION = 920
 const TRAVEL = 150
@@ -49,17 +49,6 @@ function drawSlash(
   }
   graphics.fillStyle(color, alpha)
   graphics.fillPoints(points, true)
-}
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 export const closeCombatAnimation: AbilityAnimation = ({
@@ -143,17 +132,8 @@ export const closeCombatAnimation: AbilityAnimation = ({
       if (halo > 0) {
         const shadow = casterSprite?.shadow
         if (shadow) {
-          const frame = shadow.frame
-          ground.setPosition(
-            shadow.x +
-              (frame.x + frame.width / 2 - shadow.displayOriginX) *
-                shadow.scaleX *
-                (shadow.flipX ? -1 : 1),
-            shadow.y +
-              (frame.y + frame.height / 2 - shadow.displayOriginY) *
-                shadow.scaleY *
-                (shadow.flipY ? -1 : 1)
-          )
+          const center = getShadowLocalCenter(shadow)
+          ground.setPosition(center.x, center.y)
         }
         const growth = Math.min(time, 140)
         const width = 64 + growth * 0.1

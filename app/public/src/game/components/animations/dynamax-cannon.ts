@@ -1,19 +1,15 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
 import { AbilityConfigs } from "../../../../../config/game/abilities"
-import type {
-  AbilityAnimation,
-  AbilityAnimationArgs
-} from "../../../../../types/Animation"
+import type { AbilityAnimation } from "../../../../../types/Animation"
 import { Ability } from "../../../../../types/enum/Ability"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { drawBeamImpactArcs, drawBoardEdgeMask } from "./helpers"
+import {
+  drawBeamImpactArcs,
+  drawBoardEdgeMask,
+  getBoardBeamLine,
+  getImpactCells
+} from "./helpers"
 
 const timing = AbilityConfigs[Ability.DYNAMAX_CANNON]
 const TAU = Math.PI * 2
@@ -26,44 +22,8 @@ const palette = {
   core: 0xfff5ff
 }
 
-function cannonLine(args: AbilityAnimationArgs) {
-  const { positionX, positionY, targetX, targetY, flip } = args
-  // Projected line endpoints may be negative, unlike a missing target.
-  if (
-    !Number.isFinite(targetX) ||
-    !Number.isFinite(targetY) ||
-    (targetX === -1 && targetY === -1)
-  )
-    return null
-  const [x, anchorY] = transformEntityCoordinates(positionX, positionY, flip)
-  const [tx, ty] = transformEntityCoordinates(targetX, targetY, flip)
-  const angle = Math.atan2(ty - anchorY, tx - x)
-  if (tx === x && ty === anchorY) return null
-  const [left, rowA] = transformEntityCoordinates(0, 0, flip)
-  const [right, rowB] = transformEntityCoordinates(
-    BOARD_WIDTH - 1,
-    BOARD_HEIGHT - 1,
-    flip
-  )
-  const bounds = new Phaser.Geom.Rectangle(
-    left - CELL_WIDTH / 2,
-    Math.min(rowA, rowB) - CELL_HEIGHT / 2,
-    right - left + CELL_WIDTH,
-    Math.abs(rowB - rowA) + CELL_HEIGHT
-  )
-  const y = anchorY - 20
-  const dx = Math.cos(angle)
-  const dy = Math.sin(angle)
-  let length = Infinity
-  if (dx > 0) length = Math.min(length, (bounds.right - x) / dx)
-  if (dx < 0) length = Math.min(length, (bounds.left - x) / dx)
-  if (dy > 0) length = Math.min(length, (bounds.bottom - y) / dy)
-  if (dy < 0) length = Math.min(length, (bounds.top - y) / dy)
-  return { x, y, angle, dx, dy, length: Math.max(0, length), bounds }
-}
-
 export const dynamaxCannonChargeAnimation: AbilityAnimation = (args) => {
-  const line = cannonLine(args)
+  const line = getBoardBeamLine(args)
   if (!line) return
   const { scene } = args
   const charge = scene.add
@@ -157,36 +117,8 @@ export const dynamaxCannonChargeAnimation: AbilityAnimation = (args) => {
   charge.once(Phaser.GameObjects.Events.DESTROY, () => tween.stop())
 }
 
-function hitCells(data: AbilityAnimationArgs["data"]) {
-  const targets: unknown = data.targets
-  if (!Array.isArray(targets)) return []
-  const seen = new Set<number>()
-  return targets
-    .slice(0, BOARD_WIDTH * BOARD_HEIGHT)
-    .filter((cell): cell is { x: number; y: number } => {
-      if (!cell || typeof cell !== "object" || !("x" in cell && "y" in cell))
-        return false
-      const { x, y } = cell
-      if (
-        typeof x !== "number" ||
-        typeof y !== "number" ||
-        !Number.isInteger(x) ||
-        !Number.isInteger(y) ||
-        x < 0 ||
-        x >= BOARD_WIDTH ||
-        y < 0 ||
-        y >= BOARD_HEIGHT
-      )
-        return false
-      const key = y * BOARD_WIDTH + x
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    })
-}
-
 export const dynamaxCannonAnimation: AbilityAnimation = (args) => {
-  const line = cannonLine(args)
+  const line = getBoardBeamLine(args)
   if (!line) return
   const { scene } = args
   const beam = scene.add
@@ -210,7 +142,7 @@ export const dynamaxCannonAnimation: AbilityAnimation = (args) => {
   }
   scene.abilitiesVfxGroup?.add(maskShape)
 
-  const impacts = hitCells(args.data).map((cell) => {
+  const impacts = getImpactCells(args.data).map((cell) => {
     const [x, y] = transformEntityCoordinates(cell.x, cell.y, args.flip)
     const impact = scene.add
       .graphics()

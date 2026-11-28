@@ -1,13 +1,9 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
+import { CELL_HEIGHT, CELL_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const clamp01 = (value: number) => Math.max(0, Math.min(1, value))
 
@@ -105,13 +101,7 @@ export const spiritBreakAnimation: AbilityAnimation = ({
     positionY,
     flip
   )
-  const hasTarget =
-    Number.isInteger(targetX) &&
-    Number.isInteger(targetY) &&
-    targetX >= 0 &&
-    targetX < BOARD_WIDTH &&
-    targetY >= 0 &&
-    targetY < BOARD_HEIGHT
+  const hasTarget = isBoardCell(targetX, targetY)
   const [targetScreenX, targetScreenY] = hasTarget
     ? transformEntityCoordinates(targetX, targetY, flip)
     : [0, 0]

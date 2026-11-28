@@ -1,8 +1,8 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const TRAVEL = 280
 const STAGGER = 170
@@ -88,12 +88,7 @@ export const meteorMashAnimation: AbilityAnimation = ({
 }) => {
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
   const validTarget =
-    Number.isInteger(targetX) &&
-    Number.isInteger(targetY) &&
-    targetX >= 0 &&
-    targetX < BOARD_WIDTH &&
-    targetY >= 0 &&
-    targetY < BOARD_HEIGHT &&
+    isBoardCell(targetX, targetY) &&
     (targetX !== positionX || targetY !== positionY)
   const [tx, ty] = validTarget
     ? transformEntityCoordinates(targetX, targetY, flip)

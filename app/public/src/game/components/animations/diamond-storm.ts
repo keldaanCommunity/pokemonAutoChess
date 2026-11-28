@@ -1,29 +1,11 @@
 import Phaser, { type GameObjects } from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getBoardBounds, isBoardCell } from "./helpers"
 
 const DURATION = 1350
 const { Clamp, Linear } = Phaser.Math
-
-function isBoardCell(x: unknown, y: unknown): x is number {
-  return (
-    typeof x === "number" &&
-    typeof y === "number" &&
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function diamond(
   g: GameObjects.Graphics,
@@ -145,16 +127,7 @@ export const diamondStormAnimation: AbilityAnimation = ({
   if (!isBoardCell(positionX, positionY)) return
 
   const [x, y] = transformEntityCoordinates(positionX, positionY, flip)
-  const [firstX, firstY] = transformEntityCoordinates(0, 0, flip)
-  const [lastX, lastY] = transformEntityCoordinates(
-    BOARD_WIDTH - 1,
-    BOARD_HEIGHT - 1,
-    flip
-  )
-  const left = firstX - CELL_WIDTH / 2
-  const right = lastX + CELL_WIDTH / 2
-  const top = Math.min(firstY, lastY) - CELL_HEIGHT / 2
-  const bottom = Math.max(firstY, lastY) + CELL_HEIGHT / 2
+  const { left, right, top, bottom } = getBoardBounds(flip)
   const targets = new Set<string>()
   const payload: unknown = data?.targets
   if (Array.isArray(payload)) {

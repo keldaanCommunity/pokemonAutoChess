@@ -3,7 +3,7 @@ import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
 import type PokemonSprite from "../pokemon-sprite"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, getShadowWorldCenter } from "./helpers"
 
 type Point = { x: number; y: number }
 type PhantomFlight = {
@@ -216,15 +216,7 @@ function getShadowCenter(
   const shadow = sprite?.shadow
   if (!shadow?.active) return fallback
 
-  const frame = shadow.frame
-  return shadow
-    .getWorldTransformMatrix()
-    .transformPoint(
-      (frame.x + frame.width / 2 - shadow.displayOriginX) *
-        (shadow.flipX ? -1 : 1),
-      (frame.y + frame.height / 2 - shadow.displayOriginY) *
-        (shadow.flipY ? -1 : 1)
-    )
+  return getShadowWorldCenter(shadow)
 }
 
 export const nightmareAnimation: AbilityAnimation = ({

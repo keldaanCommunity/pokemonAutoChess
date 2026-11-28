@@ -1,8 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimationArgs } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const ORB_REVEAL = 220
 const FLIGHT = 250
@@ -25,17 +25,6 @@ const ELEMENT_COLORS: Record<
     core: 0xffffff
   },
   ice: { glow: 0x54dfff, body: 0x73e7ff, light: 0xc3f7ff, core: 0xffffff }
-}
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
 }
 
 function isElement(value: unknown): value is Element {

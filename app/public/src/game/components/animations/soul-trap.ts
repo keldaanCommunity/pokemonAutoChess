@@ -1,25 +1,9 @@
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { getShadowLocalCenter, isBoardCellObject } from "./helpers"
 
 type SoulTarget = { x: number; y: number }
-
-function isSoulTarget(value: unknown): value is SoulTarget {
-  if (!value || typeof value !== "object" || !("x" in value) || !("y" in value))
-    return false
-  const { x, y } = value
-  return (
-    typeof x === "number" &&
-    typeof y === "number" &&
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 export const soulTrapAnimation: AbilityAnimation = ({
   scene,
@@ -40,7 +24,7 @@ export const soulTrapAnimation: AbilityAnimation = ({
       pokemon.positionX === positionX && pokemon.positionY === positionY
   )
   const targets: SoulTarget[] = Array.isArray(data.targets)
-    ? data.targets.filter(isSoulTarget)
+    ? data.targets.filter(isBoardCellObject)
     : []
   const souls = targets.flatMap(({ x, y }) => {
     const [startX, startY] = transformEntityCoordinates(x, y, flip)
@@ -83,17 +67,8 @@ export const soulTrapAnimation: AbilityAnimation = ({
       const fade = Math.min(1, progress / 0.16, (1 - progress) / 0.24)
       const shadow = casterSprite?.shadow
       if (shadow) {
-        const frame = shadow.frame
-        seal.setPosition(
-          shadow.x +
-            (frame.x + frame.width / 2 - shadow.displayOriginX) *
-              shadow.scaleX *
-              (shadow.flipX ? -1 : 1),
-          shadow.y +
-            (frame.y + frame.height / 2 - shadow.displayOriginY) *
-              shadow.scaleY *
-              (shadow.flipY ? -1 : 1)
-        )
+        const center = getShadowLocalCenter(shadow)
+        seal.setPosition(center.x, center.y)
       }
       seal.setAlpha(fade * 0.85).setScale(2 * (0.75 + progress * 0.25))
       wisps.clear()

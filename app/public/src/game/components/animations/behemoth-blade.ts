@@ -1,22 +1,12 @@
 import Phaser from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH, CELL_WIDTH } from "../../../../../config"
+import { CELL_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
 const impactRayAngles = [-2.8, -2.2, -1.55, -0.85, -0.25, 0.35, 1, 1.7, 2.4]
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawSlashBand(
   graphics: Phaser.GameObjects.Graphics,

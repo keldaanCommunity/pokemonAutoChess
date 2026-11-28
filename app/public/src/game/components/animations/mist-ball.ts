@@ -1,10 +1,6 @@
 import Phaser from "phaser"
 import { AbilityConfigs } from "../../../../../config/game/abilities"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_WIDTH
-} from "../../../../../config/game/board"
+import { CELL_WIDTH } from "../../../../../config/game/board"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
@@ -12,7 +8,7 @@ import type {
 import { Ability } from "../../../../../types/enum/Ability"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, isBoardCell } from "./helpers"
 
 const IMPACT_DURATION = 260
 export const MIST_BALL_RETURN_IMPACT_DURATION = 650
@@ -65,22 +61,10 @@ function isTravelCoordinates(value: unknown): value is TravelCoordinates {
     return false
   const { positionX, positionY, targetX, targetY } = value
   return (
-    typeof positionX === "number" &&
-    Number.isInteger(positionX) &&
-    positionX >= 0 &&
-    positionX < BOARD_WIDTH &&
     typeof positionY === "number" &&
-    Number.isInteger(positionY) &&
-    positionY >= 0 &&
-    positionY < BOARD_HEIGHT &&
-    typeof targetX === "number" &&
-    Number.isInteger(targetX) &&
-    targetX >= 0 &&
-    targetX < BOARD_WIDTH &&
     typeof targetY === "number" &&
-    Number.isInteger(targetY) &&
-    targetY >= 0 &&
-    targetY < BOARD_HEIGHT
+    isBoardCell(positionX, positionY) &&
+    isBoardCell(targetX, targetY)
   )
 }
 

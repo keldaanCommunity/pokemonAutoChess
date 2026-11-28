@@ -1,9 +1,8 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { drawGoldCoin } from "./helpers"
+import { drawGoldCoin, isBoardCell } from "./helpers"
 
 const LEAD_IN = 85
 const FLIGHT = 300
@@ -11,17 +10,6 @@ const CONTACT = LEAD_IN + FLIGHT
 const SCATTER = 450
 const TAU = Math.PI * 2
 const { Clamp, Linear } = Phaser.Math
-
-function isBoardCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function drawGlint(graphics: GameObjects.Graphics, size: number) {
   graphics.fillStyle(0xffca38, 0.25)

@@ -1,17 +1,13 @@
 import Phaser from "phaser"
-import {
-  BOARD_HEIGHT,
-  BOARD_WIDTH,
-  CELL_HEIGHT,
-  CELL_WIDTH
-} from "../../../../../config"
-import type {
-  AbilityAnimation,
-  AbilityAnimationArgs
-} from "../../../../../types/Animation"
+import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { drawBeamImpactArcs, getImpactCells } from "./helpers"
+import {
+  drawBeamImpactArcs,
+  getBeamImpactArrival,
+  getBoardBeamLine,
+  getImpactCells
+} from "./helpers"
 
 const TAU = Math.PI * 2
 const BEAM_TRAVEL_DURATION = 190
@@ -26,52 +22,6 @@ const palette = {
 }
 
 const clamp = (value: number) => Phaser.Math.Clamp(value, 0, 1)
-
-function moonbeamLine(args: AbilityAnimationArgs) {
-  const { positionX, positionY, targetX, targetY, flip } = args
-  if (
-    !Number.isFinite(targetX) ||
-    !Number.isFinite(targetY) ||
-    (targetX === -1 && targetY === -1)
-  ) {
-    return null
-  }
-
-  const [x, anchorY] = transformEntityCoordinates(positionX, positionY, flip)
-  const [tx, ty] = transformEntityCoordinates(targetX, targetY, flip)
-  if (tx === x && ty === anchorY) return null
-
-  const angle = Math.atan2(ty - anchorY, tx - x)
-  const [left, rowA] = transformEntityCoordinates(0, 0, flip)
-  const [right, rowB] = transformEntityCoordinates(
-    BOARD_WIDTH - 1,
-    BOARD_HEIGHT - 1,
-    flip
-  )
-  const bounds = new Phaser.Geom.Rectangle(
-    left - CELL_WIDTH / 2,
-    Math.min(rowA, rowB) - CELL_HEIGHT / 2,
-    right - left + CELL_WIDTH,
-    Math.abs(rowB - rowA) + CELL_HEIGHT
-  )
-  const y = anchorY - 20
-  const dx = Math.cos(angle)
-  const dy = Math.sin(angle)
-  let length = Infinity
-  if (dx > 0) length = Math.min(length, (bounds.right - x) / dx)
-  if (dx < 0) length = Math.min(length, (bounds.left - x) / dx)
-  if (dy > 0) length = Math.min(length, (bounds.bottom - y) / dy)
-  if (dy < 0) length = Math.min(length, (bounds.top - y) / dy)
-
-  return {
-    x,
-    y,
-    angle,
-    dx,
-    dy,
-    length: Math.max(0, length)
-  }
-}
 
 function drawShell(
   back: Phaser.GameObjects.Graphics,
@@ -224,7 +174,7 @@ function drawImpact(
 }
 
 export const moongeistBeamAnimation: AbilityAnimation = (args) => {
-  const line = moonbeamLine(args)
+  const line = getBoardBeamLine(args)
   if (!line) return
   const { scene } = args
   const [casterX, casterY] = transformEntityCoordinates(
@@ -246,13 +196,9 @@ export const moongeistBeamAnimation: AbilityAnimation = (args) => {
       .graphics({ x, y: impactY })
       .setRotation(beamAngle)
       .setDepth(DEPTH.HIT_FX_ABOVE_POKEMON)
-    const distance = Math.max(
-      0,
-      (x - line.x) * line.dx + (impactY - line.y) * line.dy
-    )
     return {
       graphics,
-      arrival: BEAM_TRAVEL_DURATION * clamp(distance / Math.max(1, line.length))
+      arrival: getBeamImpactArrival(line, x, impactY, BEAM_TRAVEL_DURATION)
     }
   })
   const visuals = [

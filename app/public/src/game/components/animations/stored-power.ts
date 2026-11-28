@@ -1,11 +1,11 @@
 import Phaser, { type GameObjects } from "phaser"
-import { BOARD_HEIGHT, BOARD_WIDTH } from "../../../../../config"
 import type {
   AbilityAnimation,
   AbilityAnimationArgs
 } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
+import { isBoardCell } from "./helpers"
 
 export const STORED_POWER_TIMING = {
   target: 850,
@@ -18,17 +18,6 @@ const PINK = 0xf34cff
 const VIOLET = 0x8c40ed
 const WHITE = 0xffefff
 const CYAN = 0xa2f8ff
-
-function isCell(x: number, y: number) {
-  return (
-    Number.isInteger(x) &&
-    Number.isInteger(y) &&
-    x >= 0 &&
-    x < BOARD_WIDTH &&
-    y >= 0 &&
-    y < BOARD_HEIGHT
-  )
-}
 
 function layer(
   args: AbilityAnimationArgs,
@@ -80,7 +69,7 @@ function spike(
 }
 
 export const storedPowerAnimation: AbilityAnimation = (args) => {
-  if (!isCell(args.positionX, args.positionY)) return
+  if (!isBoardCell(args.positionX, args.positionY)) return
   const [x, y] = transformEntityCoordinates(
     args.positionX,
     args.positionY,
@@ -142,7 +131,7 @@ export const storedPowerAnimation: AbilityAnimation = (args) => {
 }
 
 export const storedPowerTargetAnimation: AbilityAnimation = (args) => {
-  if (!isCell(args.targetX, args.targetY)) return
+  if (!isBoardCell(args.targetX, args.targetY)) return
   const [x, y] = transformEntityCoordinates(
     args.targetX,
     args.targetY,
@@ -158,7 +147,7 @@ export const storedPowerTargetAnimation: AbilityAnimation = (args) => {
 }
 
 export const storedPowerHitAnimation: AbilityAnimation = (args) => {
-  if (!isCell(args.targetX, args.targetY)) return
+  if (!isBoardCell(args.targetX, args.targetY)) return
   const [x, y] = transformEntityCoordinates(
     args.targetX,
     args.targetY,

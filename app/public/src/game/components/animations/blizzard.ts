@@ -8,7 +8,7 @@ import {
 import type { AbilityAnimation } from "../../../../../types/Animation"
 import { transformEntityCoordinates } from "../../../pages/utils/utils"
 import { DEPTH } from "../../depths"
-import { getImpactCells } from "./helpers"
+import { getImpactCells, isBoardCell } from "./helpers"
 
 const CHARGE = 300
 const WAVE_START = 340
@@ -189,15 +189,7 @@ function impact(g: GameObjects.Graphics, x: number, y: number, age: number) {
 
 export const blizzardAnimation: AbilityAnimation = (args) => {
   const { scene, positionX, positionY, flip, delay = 0 } = args
-  if (
-    !Number.isInteger(positionX) ||
-    !Number.isInteger(positionY) ||
-    positionX < 0 ||
-    positionX >= BOARD_WIDTH ||
-    positionY < 0 ||
-    positionY >= BOARD_HEIGHT
-  )
-    return
+  if (!isBoardCell(positionX, positionY)) return
 
   const [casterX, casterY] = transformEntityCoordinates(
     positionX,
